@@ -1,6 +1,6 @@
 ## Mobilizator
 
-Mobilize crowds eficiently. Allow anyone to create a collaborative group. No admins involved in the process. Manage communication, decision making, membership, files and events.
+Mobilize crowds efficiently. Allow anyone to create a collaborative group. No admins involved in the process. Manage communication, decision making, membership, files and events.
 
 Facebook for the paranoid inside any of us.
 
