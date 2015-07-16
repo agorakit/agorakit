@@ -6,7 +6,7 @@ Facebook for the paranoid inside any of us.
 
 ## Official Documentation
 
-Not yet
+Not yet, but have a look in the documentation folder :-)
 
 ## Contributing
 
