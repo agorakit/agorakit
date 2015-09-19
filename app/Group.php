@@ -11,7 +11,7 @@ class Group extends Model
 
     public function users()
     {
-      return $this->belongsToMany('App\user');
+      return $this->belongsToMany('App\user')->withTimestamps();
     }
 
 }
