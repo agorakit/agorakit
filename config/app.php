@@ -110,6 +110,11 @@ return [
 
     'providers' => [
 
+
+        // seems like it must be declared first
+        Barryvdh\Debugbar\ServiceProvider::class,
+
+
         /*
          * Laravel Framework Service Providers...
          */
@@ -145,6 +150,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        // additional providers
+        Illuminate\Html\HtmlServiceProvider::class,
+        Potsky\LaravelLocalizationHelpers\LaravelLocalizationHelpersServiceProviderLaravel5::class,
     ],
 
     /*
@@ -193,6 +201,9 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Form'	    => Illuminate\Html\FormFacade::class,
+        'Html'      => Illuminate\Html\HtmlFacade::class,
 
     ],
 
