@@ -11,6 +11,23 @@
 |
 */
 
+/*
 Route::get('/', function () {
     return view('welcome');
 });
+*/
+
+Route::get('/', 'GroupController@index');
+Route::get('home', 'GroupController@index');
+
+
+Route::controllers([
+	'auth' => 'Auth\AuthController',
+	'password' => 'Auth\PasswordController',
+]);
+
+
+Route::get('groups', 'GroupController@index');
+Route::get('groups/create', 'GroupController@create');
+Route::get('groups/{id}', 'GroupController@show');
+Route::post('groups', 'GroupController@store');
