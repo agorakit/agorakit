@@ -1,8 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-use App\Group;
-
-class GroupController extends Controller {
+class FileController extends Controller {
 
   /**
    * Display a listing of the resource.
@@ -11,9 +9,7 @@ class GroupController extends Controller {
    */
   public function index()
   {
-
-      $groups = Group::all();
-      return view('groups.index')->with('groups', $groups);
+    
   }
 
   /**
@@ -23,7 +19,7 @@ class GroupController extends Controller {
    */
   public function create()
   {
-
+    
   }
 
   /**
@@ -33,7 +29,7 @@ class GroupController extends Controller {
    */
   public function store()
   {
-
+    
   }
 
   /**
@@ -44,7 +40,7 @@ class GroupController extends Controller {
    */
   public function show($id)
   {
-
+    
   }
 
   /**
@@ -55,7 +51,7 @@ class GroupController extends Controller {
    */
   public function edit($id)
   {
-
+    
   }
 
   /**
@@ -66,7 +62,7 @@ class GroupController extends Controller {
    */
   public function update($id)
   {
-
+    
   }
 
   /**
@@ -77,9 +73,9 @@ class GroupController extends Controller {
    */
   public function destroy($id)
   {
-
+    
   }
-
+  
 }
 
 ?>

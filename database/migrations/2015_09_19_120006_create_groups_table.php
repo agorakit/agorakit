@@ -16,17 +16,10 @@ class CreateGroupsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->timestamps();
+            $table->softDeletes();
         });
 
-        Schema::create('group_user', function (Blueprint $table) {
-          $table->integer('user_id')->unsigned()->index();
-          $table->foreign('user_id')->references('id')->on('users');
 
-          $table->integer('group_id')->unsigned()->index();
-          $table->foreign('group_id')->references('id')->on('groups');
-
-          $table->timestamps();
-        });
     }
 
     /**
@@ -37,6 +30,6 @@ class CreateGroupsTable extends Migration
     public function down()
     {
         Schema::drop('groups');
-        Schema::drop('group_user');
+
     }
 }

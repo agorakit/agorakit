@@ -31,3 +31,14 @@ Route::get('groups', 'GroupController@index');
 Route::get('groups/create', 'GroupController@create');
 Route::get('groups/{id}', 'GroupController@show');
 Route::post('groups', 'GroupController@store');
+
+
+
+Route::resource('user', 'UserController');
+Route::resource('group', 'GroupController');
+Route::resource('groupuser', 'GroupUserController');
+Route::resource('action', 'ActionController');
+Route::resource('discussion', 'DiscussionController');
+Route::resource('vote', 'VoteController');
+Route::resource('file', 'FileController');
+Route::resource('document', 'DocumentController');
