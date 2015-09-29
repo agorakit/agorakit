@@ -12,7 +12,7 @@ class CreateDiscussionsTable extends Migration {
 			$table->timestamps();
 			$table->softDeletes();
 			$table->integer('group_id')->unsigned();
-			$table->string('title');
+			$table->string('name');
 			$table->text('body');
 			$table->integer('parent_id')->unsigned();
 		});

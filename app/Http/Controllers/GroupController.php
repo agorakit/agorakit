@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Group;
+use Auth;
 
 class GroupController extends Controller {
 
@@ -12,8 +13,7 @@ class GroupController extends Controller {
   public function index()
   {
 
-      $groups = Group::all();
-      return view('groups.index')->with('groups', $groups);
+
   }
 
   /**
@@ -44,6 +44,8 @@ class GroupController extends Controller {
    */
   public function show($id)
   {
+    $group = Group::findOrFail($id);
+    return view ('groups.show')->with('group', $group);
 
   }
 

@@ -37,12 +37,19 @@ CanResetPasswordContract
   */
   protected $hidden = ['password', 'remember_token'];
 
-
+/**
+ * The groups this user is part of
+ *
+ */
   public function groups()
   {
     return $this->belongsToMany('App\Group')->withTimestamps();
   }
 
+  /**
+   * Discussions by this user
+   * 
+   */
   public function discussions()
 	{
 		return $this->hasMany('Discussion');

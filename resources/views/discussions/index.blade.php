@@ -3,12 +3,12 @@
 @section('content')
 
 <div class="container">
-    <h2>All the groups on this server</h2>
+    <h2>All the discussions in this group</h2>
         <ul>
-            @foreach( $groups as $group )
+            @foreach( $discussions as $discussion )
 
             <li>
-            <a href="{{ url('group', $group->id) }}">{{ $group->name }}</a>
+            <a href="{{ url('discussion', $discussion->id) }}">{{ $discussion->name }}</a>
             @if($group->replied)
             <span class="glyphicon glyphicon-ok" title="Vous avez répondu à cette question"></span>
             @endif

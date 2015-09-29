@@ -35,12 +35,12 @@ class DatabaseSeeder extends Seeder
         for ($i = 1; $i <= 10; $i++)
          {
            $group = App\Group::create([
-            "name" => $faker->city . ' user group',
+            "name" => $faker->city . '\'s user group',
+            "body" => $faker->text
         ]);
         // attach one random member to each group
         $group->users()->attach(App\User::orderByRaw("RAND()")->first());
         }
-
 
 
 

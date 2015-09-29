@@ -11,7 +11,7 @@ class CreateDocumentsTable extends Migration {
 			$table->increments('id');
 			$table->timestamps();
 			$table->softDeletes();
-			$table->string('title');
+			$table->string('name');
 			$table->text('body');
 			$table->integer('user_id')->unsigned();
 			$table->integer('group_id')->unsigned();

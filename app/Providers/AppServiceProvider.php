@@ -22,10 +22,7 @@ class AppServiceProvider extends ServiceProvider
 
           if (Auth::check() )
           {
-            //dd (Auth::user());
             $view->with('user', compact(Auth::user()->name) );
-            $view->with('user_is_admin', Auth::user()->isAdmin() );
-
           }
         });
 

@@ -1,4 +1,8 @@
-<?php namespace App\Http\Controllers;
+<?php
+
+namespace App\Http\Controllers;
+use App\Group;
+use Auth;
 
 class DiscussionController extends Controller {
 
@@ -7,9 +11,10 @@ class DiscussionController extends Controller {
    *
    * @return Response
    */
-  public function index()
+  public function index($id)
   {
-    
+    $discussions = Group::findOrFail($id)->discussions();
+    return view ('discussions.index')->with('discussions', $discussions);
   }
 
   /**
@@ -19,7 +24,7 @@ class DiscussionController extends Controller {
    */
   public function create()
   {
-    
+
   }
 
   /**
@@ -29,7 +34,7 @@ class DiscussionController extends Controller {
    */
   public function store()
   {
-    
+
   }
 
   /**
@@ -40,7 +45,8 @@ class DiscussionController extends Controller {
    */
   public function show($id)
   {
-    
+    $discussion = Discussion::findOrFail($id);
+    return view ('discussions.show')->with('discussion', $discussion);
   }
 
   /**
@@ -51,7 +57,7 @@ class DiscussionController extends Controller {
    */
   public function edit($id)
   {
-    
+
   }
 
   /**
@@ -62,7 +68,7 @@ class DiscussionController extends Controller {
    */
   public function update($id)
   {
-    
+
   }
 
   /**
@@ -73,9 +79,9 @@ class DiscussionController extends Controller {
    */
   public function destroy($id)
   {
-    
+
   }
-  
+
 }
 
 ?>

@@ -11,14 +11,7 @@
 |
 */
 
-/*
-Route::get('/', function () {
-    return view('welcome');
-});
-*/
-
-Route::get('/', 'GroupController@index');
-Route::get('home', 'GroupController@index');
+Route::get('/', 'HomepageController@index');
 
 
 Route::controllers([
@@ -26,12 +19,7 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
-
-Route::get('groups', 'GroupController@index');
-Route::get('groups/create', 'GroupController@create');
-Route::get('groups/{id}', 'GroupController@show');
-Route::post('groups', 'GroupController@store');
-
+Route::get('group/{id}/discussions', 'DiscussionController@index');
 
 
 Route::resource('user', 'UserController');

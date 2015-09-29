@@ -17,6 +17,7 @@ class CreateActionsTable extends Migration {
 			$table->text('body');
 			$table->datetime('start');
 			$table->datetime('stop');
+			$table->text('location');
 		});
 	}
 

@@ -45,12 +45,8 @@ class CreateForeignKeys extends Migration {
 
 	public function down()
 	{
-		Schema::table('group_user', function(Blueprint $table) {
-			$table->dropForeign('group_user_user_id_foreign');
-		});
-		Schema::table('group_user', function(Blueprint $table) {
-			$table->dropForeign('group_user_group_id_foreign');
-		});
+
+/*
 		Schema::table('actions', function(Blueprint $table) {
 			$table->dropForeign('actions_group_id_foreign');
 		});
@@ -75,5 +71,6 @@ class CreateForeignKeys extends Migration {
 		Schema::table('documents', function(Blueprint $table) {
 			$table->dropForeign('documents_group_id_foreign');
 		});
+		*/
 	}
 }
