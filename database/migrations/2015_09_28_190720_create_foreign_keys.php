@@ -8,55 +8,38 @@ class CreateForeignKeys extends Migration {
 
 	public function up()
 	{
-		Schema::table('group_user', function(Blueprint $table) {
-			$table->foreign('user_id')->references('id')->on('users')
-						->onDelete('restrict')
-						->onUpdate('restrict');
-		});
-		Schema::table('group_user', function(Blueprint $table) {
-			$table->foreign('group_id')->references('id')->on('groups')
-						->onDelete('restrict')
-						->onUpdate('restrict');
-		});
+
+/*
+		->onDelete('restrict')
+		->onUpdate('restrict');
+	*/
+
 		Schema::table('actions', function(Blueprint $table) {
-			$table->foreign('group_id')->references('id')->on('users')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+			$table->foreign('user_id')->references('id')->on('users');
+
 		});
 		Schema::table('discussions', function(Blueprint $table) {
-			$table->foreign('group_id')->references('id')->on('groups')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+			$table->foreign('group_id')->references('id')->on('groups');
+
 		});
 		Schema::table('discussions', function(Blueprint $table) {
-			$table->foreign('parent_id')->references('id')->on('discussions')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+			$table->foreign('parent_id')->references('id')->on('discussions');
 		});
 		Schema::table('votes', function(Blueprint $table) {
-			$table->foreign('user_id')->references('id')->on('users')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+			$table->foreign('user_id')->references('id')->on('users');
 		});
 		Schema::table('files', function(Blueprint $table) {
-			$table->foreign('user_id')->references('id')->on('users')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+			$table->foreign('user_id')->references('id')->on('users');
 		});
 		Schema::table('files', function(Blueprint $table) {
-			$table->foreign('group_id')->references('id')->on('groups')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+			$table->foreign('group_id')->references('id')->on('groups');
 		});
 		Schema::table('documents', function(Blueprint $table) {
-			$table->foreign('user_id')->references('id')->on('users')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+			$table->foreign('user_id')->references('id')->on('users');
+
 		});
 		Schema::table('documents', function(Blueprint $table) {
-			$table->foreign('group_id')->references('id')->on('groups')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+			$table->foreign('group_id')->references('id')->on('groups');
 		});
 	}
 

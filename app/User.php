@@ -43,5 +43,10 @@ CanResetPasswordContract
     return $this->belongsToMany('App\Group')->withTimestamps();
   }
 
+  public function discussions()
+	{
+		return $this->hasMany('Discussion');
+	}
+
 
 }
