@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Discussion extends Model {
 
 	protected $table = 'discussions';
+	protected $fillable = ['name', 'body', 'group_id', 'parent_id'];
+
+
 	public $timestamps = true;
 
 	use SoftDeletes;
@@ -16,17 +19,23 @@ class Discussion extends Model {
 
 	public function group()
 	{
-		return $this->belongsTo('Group');
+		return $this->belongsTo('App\Group');
+	}
+
+
+	public function user()
+	{
+		return $this->belongsTo('App\User');
 	}
 
 	public function parent()
 	{
-		return $this->hasOne('Discussion', 'parent_id');
+		return $this->hasOne('App\Discussion', 'parent_id');
 	}
 
 	public function votes()
 	{
-		return $this->morphMany('Vote', 'votable');
+		return $this->morphMany('App\Vote', 'votable');
 	}
 
 }

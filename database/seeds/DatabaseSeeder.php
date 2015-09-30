@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
            App\User::create([
             "email" => $faker->email,
             "password" => bcrypt('secret'),
-            "username" => $faker->name
+            "username" => $faker->name,
+            "name" => $faker->name
         ]);
         }
 
@@ -40,6 +41,25 @@ class DatabaseSeeder extends Seeder
         ]);
         // attach one random member to each group
         $group->users()->attach(App\User::orderByRaw("RAND()")->first());
+        }
+
+
+        // discussions
+        DB::table('discussions')->delete();
+        for ($i = 1; $i <= 10; $i++)
+         {
+           $discussion = App\Discussion::create([
+            "name" => $faker->city,
+            "body" => $faker->text
+        ]);
+        // attach one random author & group to each discussion
+        $discussion->user_id =  App\User::orderByRaw("RAND()")->first()->id;
+        $discussion->group_id = App\Group::orderByRaw("RAND()")->first()->id;
+
+
+
+        $discussion->save();
+
         }
 
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Group;
 use Auth;
+use App\Discussion;
+
 
 class DiscussionController extends Controller {
 
@@ -11,9 +13,17 @@ class DiscussionController extends Controller {
    *
    * @return Response
    */
-  public function index($id)
+  public function index()
   {
-    $discussions = Group::findOrFail($id)->discussions();
+
+  }
+
+  /**
+   * Lists all the discussions of this particular group
+   */
+  public function groupIndex($groupid)
+  {
+    $discussions = Group::findOrFail($groupid)->discussions();
     return view ('discussions.index')->with('discussions', $discussions);
   }
 
