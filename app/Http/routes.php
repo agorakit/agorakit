@@ -19,6 +19,48 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
+
+/*
+
+TODO : move to docs
+
+
+So we will basically have this scheme :
+
+group/{id}
+discussion/{id}
+file/{id}
+user/{id}
+document/{id}
+action/{id}
+
+
+Then
+group/discussions
+group/files
+group/users
+group/documents
+group/actions
+
+-> I don't want slugs
+
+-> I don't want group/{id}/discussion/{id}
+
+Because a discussion could be moved or be part of several group or wathever.
+And because urls this way are easy to construct.
+Views need to be smart enough to build up context from an item id, but its the controller job to do that.
+Imho
+
+
+
+Each page (view) would need to know
+
+- in which group we curently are (if any) and build a group navigation and related breadcrumb like : Home -> Groupname -> Discussions -> Discussion Title
+- a list of groups of the current user and list it in a dropdown nav
+
+*/
+
+
 Route::get('group/{id}/discussions', 'DiscussionController@index');
 
 
