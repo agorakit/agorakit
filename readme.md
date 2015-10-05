@@ -12,11 +12,11 @@ In short :
 
 - clone this repository
 - copy .env.example to .env and put your db credentials there
-$ composer install
-$ php artisan key:generate
-$ php artisan migrate
-$ php artisan db:seed (if you want the db filled with fake infos)
-$ php artisan serve
+    $ composer install
+    $ php artisan key:generate
+    $ php artisan migrate
+    $ php artisan db:seed (if you want the db filled with fake infos)
+    $ php artisan serve
 
 The install will be available to localhost:8000
 
