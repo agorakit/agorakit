@@ -8,7 +8,7 @@
             @foreach( $groups as $group )
 
             <li>
-            <a href="{{ url('group', $group->id) }}">{{ $group->name }}</a>
+            <a href="{{ route('group.show', $group->id) }}">{{ $group->name }}</a>
             @if($group->replied)
             <span class="glyphicon glyphicon-ok" title="Vous avez répondu à cette question"></span>
             @endif
@@ -23,7 +23,7 @@
         <ul>
             @foreach( $mygroups as $group )
             <li>
-            <a href="{{ url('group', $group->id) }}">{{ $group->name }}</a>
+            <a href="{{ route('group.show', $group->id) }}">{{ $group->name }}</a>
             </li>
             @endforeach
         </ul>

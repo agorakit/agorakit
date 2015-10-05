@@ -45,7 +45,16 @@ class GroupController extends Controller {
   public function show($id)
   {
     $group = Group::findOrFail($id);
-    return view ('groups.show')->with('group', $group);
+
+    $discussions = $group->discussions()->orderBy('updated_at', 'desc')->limit(10)->get();
+    $files = $group->files()->orderBy('updated_at', 'desc')->limit(10)->get();
+
+
+    return view ('groups.show')
+    ->with('group', $group)
+    ->with('discussions', $discussions)
+    ->with('files', $files)
+    ;
 
   }
 

@@ -11,9 +11,18 @@
 |
 */
 
+
+/**
+ * Basic homepage for all users, either logged in or not.
+ * The idea is to provide a group listing (most active first) and a list of groups subscribed to by the current user.
+ */
 Route::get('/', 'HomepageController@index');
 
 
+/**
+ * Authentification routes
+ * TODO : add socila logins
+ */
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
@@ -21,8 +30,6 @@ Route::controllers([
 
 
 /*
-
-TODO : move to docs
 
 
 So we will basically have this scheme :
@@ -58,10 +65,19 @@ Each page (view) would need to know
 - in which group we curently are (if any) and build a group navigation and related breadcrumb like : Home -> Groupname -> Discussions -> Discussion Title
 - a list of groups of the current user and list it in a dropdown nav
 
+
+As for actions, like creating a discussion, we need to provide a group id to each action.
+
+It means something like :
+
+discussion/create?group_id=5
+
+
 */
 
 
 Route::get('group/{id}/discussions', 'DiscussionController@index');
+
 
 
 Route::resource('user', 'UserController');

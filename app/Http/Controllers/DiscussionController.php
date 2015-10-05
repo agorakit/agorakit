@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Group;
 use Auth;
 use App\Discussion;
+use Illuminate\Http\Request;
 
 
 class DiscussionController extends Controller {
@@ -32,8 +33,17 @@ class DiscussionController extends Controller {
    *
    * @return Response
    */
-  public function create()
+  public function create(Request $request)
   {
+    if ($request->has('group_id'))
+    {
+        return view ('discussions.create')->with('group_id', $request->input('group_id'));
+    }
+    else
+    {
+        abort(404, 'You need to provide a group_id in the request');
+    }
+
 
   }
 
@@ -42,8 +52,25 @@ class DiscussionController extends Controller {
    *
    * @return Response
    */
-  public function store()
+  public function store(Request $request)
   {
+    if ($request->has('group_id'))
+    {
+        $discussion = new Discussion;
+        $discussion->name = $request->input('name');
+        $discussion->body = $request->input('body');
+
+
+        $group = Group::findOrFail($request->input('group_id'));
+        $group->discussions()->save($discussion);
+
+
+        return redirect('group/' . $group->id);
+    }
+    else
+    {
+        abort(404, 'You need to provide a group_id in the request');
+    }
 
   }
 

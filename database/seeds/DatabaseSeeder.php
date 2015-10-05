@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
 
         // discussions
         DB::table('discussions')->delete();
-        for ($i = 1; $i <= 10; $i++)
+        for ($i = 1; $i <= 100; $i++)
          {
            $discussion = App\Discussion::create([
             "name" => $faker->city,

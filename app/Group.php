@@ -28,5 +28,10 @@ class Group extends Model
       return $this->hasMany('App\Discussion');
     }
 
+    public function files()
+    {
+      return $this->hasMany('App\File');
+    }
+
 
 }
