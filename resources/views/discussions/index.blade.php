@@ -7,14 +7,34 @@
 
 <div class="container">
     <h2>All the discussions in this group</h2>
-        <ul>
+
+        <table class="table table-hover">
             @foreach( $discussions as $discussion )
 
-            <li>
+            <tr>
+
+              <td>
             <a href="{{ action('DiscussionController@show', [$group->id, $discussion->id]) }}">{{ $discussion->name }}</a>
-            </li>
+          </td>
+
+          <td>
+            @if ( !$discussion->user()->get()->isEmpty() )
+
+
+        <a href="{{ action('UserController@show', $discussion->user()->first()->id) }}">{{ $discussion->user()->first()->name }}</a>
+        @endif
+
+      </td>
+
+          <td>
+        <a href="{{ action('DiscussionController@show', [$group->id, $discussion->id]) }}">{{ $discussion->created_at->diffForHumans() }}</a>
+      </td>
+
+          </tr>
             @endforeach
-        </ul>
+        </table>
+
+{!! $discussions->render() !!}
 
 
 <a class="btn btn-primary" href="{{ action('DiscussionController@create', $group->id ) }}">New discussion</a>

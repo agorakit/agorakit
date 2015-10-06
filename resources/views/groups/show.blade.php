@@ -14,7 +14,7 @@
 <h2>Latest discussions in this group</h2>
 @foreach ($discussions as $discussion)
 
-<li>{{ $discussion->name }}</li>
+<li><a href="{{ action('DiscussionController@show', [$group->id, $discussion->id]) }}">{{ $discussion->name }} </a></li>
 
 @endforeach
 

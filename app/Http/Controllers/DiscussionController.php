@@ -19,7 +19,7 @@ class DiscussionController extends Controller {
     if ($id)
     {
     $group = Group::findOrFail($id);
-    $discussions = $group->discussions()->get();
+    $discussions = $group->discussions()->orderBy('updated_at', 'desc')->paginate(10);
     return view ('discussions.index')
       ->with('discussions', $discussions)
       ->with('group', $group)
@@ -58,12 +58,19 @@ class DiscussionController extends Controller {
         $discussion->name = $request->input('name');
         $discussion->body = $request->input('body');
 
+        if (Auth::check())
+        {
+          $discussion->user()->associate(Auth::user());
+        }
+        else {
+          abort(401, 'user not logged in TODO');
+        }
 
         $group = Group::findOrFail($group_id);
         $group->discussions()->save($discussion);
 
 
-        return redirect()->action('GroupController@show', [$group_id]);
+        return redirect()->action('DiscussionController@index', [$group->id]);
 
 
   }

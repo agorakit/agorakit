@@ -17,11 +17,12 @@
  * The idea is to provide a group listing (most active first) and a list of groups subscribed to by the current user.
  */
 Route::get('/', 'HomepageController@index');
+Route::get('home', 'HomepageController@index');
 
 
 /**
  * Authentification routes
- * TODO : add socila logins
+ * TODO : add social logins
  */
 Route::controllers([
 	'auth' => 'Auth\AuthController',
@@ -71,6 +72,9 @@ Route::post('groups/{group}/discussions/create', 'DiscussionController@store');
 Route::get('groups/{group}/discussions/{discussion}', 'DiscussionController@show');
 
 
+
+// users
+Route::get('users/{id}', 'UserController@show');
 
 
 // no magic like this :
