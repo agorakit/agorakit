@@ -18,7 +18,7 @@
 
 @endforeach
 
-<a class="btn btn-primary" href="{{ route('discussion.create', ['group_id' => $group->id] ) }}">New discussion</a>
+<a class="btn btn-primary" href="{{ action('DiscussionController@create', $group->id ) }}">New discussion</a>
 
 
 

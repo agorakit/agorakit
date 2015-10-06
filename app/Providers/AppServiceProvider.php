@@ -24,6 +24,10 @@ class AppServiceProvider extends ServiceProvider
           {
             $view->with('user', compact(Auth::user()->name) );
           }
+
+
+          
+
         });
 
     }

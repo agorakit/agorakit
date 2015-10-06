@@ -4,7 +4,7 @@
 <h1>Create a discussion</h1>
 
 
-{!! Form::open(array('route' => 'discussion.store')) !!}
+{!! Form::open(array('action' => ['DiscussionController@store', $group->id])) !!}
 
 @include('discussions.form')
 

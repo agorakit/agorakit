@@ -1,7 +1,5 @@
 
 
-	{!! Form::hidden('group_id', $group_id, ['class' => 'form-control']) !!}
-
 
 	<div class="form-group">
 			{!! Form::label('name', 'Name:') !!}

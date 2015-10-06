@@ -15,7 +15,7 @@ This discussion is part of a group called
 
 <div class="alert alert-success">
 
-This discussion has been started by <strong>{{ $discussion->user()->first()->name}}</strong>
+This discussion has been started by <strong>{{ $author->name}}</strong>
 </div>
 
 

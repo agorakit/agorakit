@@ -14,36 +14,33 @@ class DiscussionController extends Controller {
    *
    * @return Response
    */
-  public function index()
+  public function index($id)
   {
+    if ($id)
+    {
+    $group = Group::findOrFail($id);
+    $discussions = $group->discussions()->get();
+    return view ('discussions.index')
+      ->with('discussions', $discussions)
+      ->with('group', $group);
+    }
 
   }
 
-  /**
-   * Lists all the discussions of this particular group
-   */
-  public function groupIndex($groupid)
-  {
-    $discussions = Group::findOrFail($groupid)->discussions();
-    return view ('discussions.index')->with('discussions', $discussions);
-  }
+
 
   /**
    * Show the form for creating a new resource.
    *
    * @return Response
    */
-  public function create(Request $request)
+  public function create(Request $request, $group_id)
   {
-    if ($request->has('group_id'))
-    {
-        return view ('discussions.create')->with('group_id', $request->input('group_id'));
-    }
-    else
-    {
-        abort(404, 'You need to provide a group_id in the request');
-    }
 
+      $group = Group::findOrFail($group_id);
+      return view ('discussions.create')
+        ->with('group_id', $group_id)
+        ->with('group', $group);
 
   }
 
@@ -52,25 +49,20 @@ class DiscussionController extends Controller {
    *
    * @return Response
    */
-  public function store(Request $request)
+  public function store(Request $request, $group_id)
   {
-    if ($request->has('group_id'))
-    {
+
         $discussion = new Discussion;
         $discussion->name = $request->input('name');
         $discussion->body = $request->input('body');
 
 
-        $group = Group::findOrFail($request->input('group_id'));
+        $group = Group::findOrFail($group_id);
         $group->discussions()->save($discussion);
 
 
-        return redirect('group/' . $group->id);
-    }
-    else
-    {
-        abort(404, 'You need to provide a group_id in the request');
-    }
+        return redirect()->action('GroupController@show', [$group_id]);
+
 
   }
 
@@ -80,10 +72,16 @@ class DiscussionController extends Controller {
    * @param  int  $id
    * @return Response
    */
-  public function show($id)
+  public function show($group_id, $discussion_id)
   {
-    $discussion = Discussion::findOrFail($id);
-    return view ('discussions.show')->with('discussion', $discussion);
+    $discussion = Discussion::findOrFail($discussion_id);
+    $group = Group::findOrFail($group_id);
+    //$group = $discussion->group()->first();
+    $author = $discussion->user()->first();
+    return view ('discussions.show')
+      ->with('discussion', $discussion)
+      ->with('group', $group)
+      ->with('author', $author);
   }
 
   /**

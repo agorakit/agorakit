@@ -31,33 +31,20 @@ Route::controllers([
 
 /*
 
-
 So we will basically have this scheme :
 
-group/{id}
-discussion/{id}
-file/{id}
-user/{id}
-document/{id}
-action/{id}
+groups
+groups/{group}
+groups/{group}/discussions
+groups/{group}/discussions/{id}
+groups/{group}/discussions/{id}/create
 
-
-Then
-group/discussions
-group/files
-group/users
-group/documents
-group/actions
+groups/{group}/files/{id}
+groups/{group}/users/{id}
+groups/{group}/documents/{id}
+groups/{group}/actions/{id}
 
 -> I don't want slugs
-
--> I don't want group/{id}/discussion/{id}
-
-Because a discussion could be moved or be part of several group or wathever.
-And because urls this way are easy to construct.
-Views need to be smart enough to build up context from an item id, but its the controller job to do that.
-Imho
-
 
 
 Each page (view) would need to know
@@ -65,26 +52,34 @@ Each page (view) would need to know
 - in which group we curently are (if any) and build a group navigation and related breadcrumb like : Home -> Groupname -> Discussions -> Discussion Title
 - a list of groups of the current user and list it in a dropdown nav
 
-
-As for actions, like creating a discussion, we need to provide a group id to each action.
-
-It means something like :
-
-discussion/create?group_id=5
-
-
 */
 
+/*
+I will apply here the recomandtion "routes as documentation" from https://philsturgeon.uk/php/2013/07/23/beware-the-route-to-evil/
+*/
 
-Route::get('group/{id}/discussions', 'DiscussionController@index');
+// application homepage, lists all groups on the server
+Route::get('groups', 'GroupController@index');
+
+// specific group homepage
+Route::get('groups/{group}', 'GroupController@show');
+
+// Discussions
+Route::get('groups/{group}/discussions', 'DiscussionController@index');
+Route::get('groups/{group}/discussions/create', 'DiscussionController@create');
+Route::post('groups/{group}/discussions/create', 'DiscussionController@store');
+Route::get('groups/{group}/discussions/{discussion}', 'DiscussionController@show');
 
 
 
+
+// no magic like this :
+/*
 Route::resource('user', 'UserController');
 Route::resource('group', 'GroupController');
 Route::resource('groupuser', 'GroupUserController');
 Route::resource('action', 'ActionController');
-Route::resource('discussion', 'DiscussionController');
 Route::resource('vote', 'VoteController');
 Route::resource('file', 'FileController');
 Route::resource('document', 'DocumentController');
+*/
