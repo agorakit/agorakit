@@ -54,7 +54,8 @@ class GroupController extends Controller {
     ->with('group', $group)
     ->with('discussions', $discussions)
     ->with('files', $files)
-    ;
+    ->with('tab', 'home');
+
 
   }
 

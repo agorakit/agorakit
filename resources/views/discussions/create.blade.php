@@ -1,6 +1,9 @@
 @extends('app')
 
 @section('content')
+
+@include('partials.group')
+
 <h1>Create a discussion</h1>
 
 

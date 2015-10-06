@@ -1,6 +1,9 @@
 @extends('app')
 
 @section('content')
+
+@include('partials.group')
+
     <h2>{{ $discussion->name }}</h2>
 
 <p>

@@ -9,9 +9,7 @@
 
             <li>
             <a href="{{ action('GroupController@show', $group->id) }}">{{ $group->name }}</a>
-            @if($group->replied)
-            <span class="glyphicon glyphicon-ok" title="Vous avez répondu à cette question"></span>
-            @endif
+            
             </li>
             @endforeach
         </ul>

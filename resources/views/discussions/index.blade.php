@@ -2,6 +2,9 @@
 
 @section('content')
 
+@include('partials.group')
+
+
 <div class="container">
     <h2>All the discussions in this group</h2>
         <ul>
@@ -12,6 +15,10 @@
             </li>
             @endforeach
         </ul>
+
+
+<a class="btn btn-primary" href="{{ action('DiscussionController@create', $group->id ) }}">New discussion</a>
+
 </div>
 
 

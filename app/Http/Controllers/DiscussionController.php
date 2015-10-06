@@ -22,7 +22,8 @@ class DiscussionController extends Controller {
     $discussions = $group->discussions()->get();
     return view ('discussions.index')
       ->with('discussions', $discussions)
-      ->with('group', $group);
+      ->with('group', $group)
+      ->with('tab', 'discussion');
     }
 
   }
@@ -40,7 +41,8 @@ class DiscussionController extends Controller {
       $group = Group::findOrFail($group_id);
       return view ('discussions.create')
         ->with('group_id', $group_id)
-        ->with('group', $group);
+        ->with('group', $group)
+        ->with('tab', 'discussion');
 
   }
 
@@ -81,7 +83,8 @@ class DiscussionController extends Controller {
     return view ('discussions.show')
       ->with('discussion', $discussion)
       ->with('group', $group)
-      ->with('author', $author);
+      ->with('author', $author)
+      ->with('tab', 'discussion');
   }
 
   /**
