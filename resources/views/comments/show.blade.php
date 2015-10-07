@@ -4,18 +4,14 @@
 
 @include('partials.group')
 
-    <h2>{{ $discussion->name }}</h2>
+    <h2>{{ $comment->user }}</h2>
 
 <p>
-            {{ $discussion->body }}
+            {{ $comment->body }}
 </p>
 
 
-@foreach ($discussion->comments as $comment)
-<li> {{$comment->body}} by {{$comment->user->name}} </li>
-@endforeach
-
-<a class="btn btn-primary" href="{{ action('CommentController@create', ['discussion', $discussion->id] ) }}">Reply</a>
+<a class="btn btn-primary" href="{{ action('CommentController@create', [$group->id, $discussion->id] ) }}">Reply</a>
 
 
 <div class="alert alert-success">

@@ -10,13 +10,13 @@ return array (
   // Defined in file C:\\lamp\\www\\Mobilizator/resources/views\\auth\\reset.blade.php
   'confirm_password' => 'Confirm password',
   // Defined in file C:\\lamp\\www\\Mobilizator/resources/views\\auth\\register.blade.php
-  'email' => 'email',
+  'email' => 'Email',
   // Defined in file C:\\lamp\\www\\Mobilizator/resources/views\\auth\\login.blade.php
   'forgotten_password' => 'Forgotten password',
   // Defined in file C:\\lamp\\www\\Mobilizator/resources/views\\partials\\errors.blade.php
   'howdy' => 'Whoops!',
   // Defined in file C:\\lamp\\www\\Mobilizator/resources/views\\auth\\reset.blade.php
-  'mail' => 'email',
+  'mail' => 'Email',
   // Defined in file C:\\lamp\\www\\Mobilizator/resources/views\\auth\\register.blade.php
   'name' => 'Name',
   // Defined in file C:\\lamp\\www\\Mobilizator/resources/views\\auth\\reset.blade.php

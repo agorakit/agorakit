@@ -40,7 +40,6 @@ class DiscussionController extends Controller {
 
       $group = Group::findOrFail($group_id);
       return view ('discussions.create')
-        ->with('group_id', $group_id)
         ->with('group', $group)
         ->with('tab', 'discussion');
 

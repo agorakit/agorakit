@@ -38,4 +38,9 @@ class Discussion extends Model {
 		return $this->morphMany('App\Vote', 'votable');
 	}
 
+	public function comments()
+	{
+	return $this->morphMany('App\Comment', 'commentable');
+	}
+
 }

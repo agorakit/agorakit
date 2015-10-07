@@ -13,8 +13,8 @@ class CreateDocumentsTable extends Migration {
 			$table->softDeletes();
 			$table->string('name');
 			$table->text('body');
-			$table->integer('user_id')->unsigned();
-			$table->integer('group_id')->unsigned();
+			$table->integer('user_id')->unsigned()->references('id')->on('users');
+			$table->integer('group_id')->unsigned()->references('id')->on('groups');
 		});
 	}
 

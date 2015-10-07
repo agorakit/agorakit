@@ -71,9 +71,14 @@ Route::get('groups/{group}/discussions/create', 'DiscussionController@create');
 Route::post('groups/{group}/discussions/create', 'DiscussionController@store');
 Route::get('groups/{group}/discussions/{discussion}', 'DiscussionController@show');
 
+// Comments
+// type can be curently 'discussion'
+// so to reply to discussion with id 5, hit comment/discussion/5
+Route::get('/comment/{type}/{id}', 'CommentController@create');
+Route::post('/comment/{type}/{id}', 'CommentController@store');
 
 
-// users
+// Users
 Route::get('users/{id}', 'UserController@show');
 
 

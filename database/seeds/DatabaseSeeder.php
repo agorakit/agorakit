@@ -29,6 +29,8 @@ class DatabaseSeeder extends Seeder
         }
 
 
+
+
         // create 10 groups
         DB::table('groups')->delete();
         DB::table('group_user')->delete();

@@ -11,8 +11,8 @@ class CreateActionsTable extends Migration {
 			$table->increments('id');
 			$table->timestamps();
 			$table->softDeletes();
-			$table->integer('group_id')->unsigned();
-			$table->integer('user_id')->unsigned();
+			$table->integer('group_id')->unsigned()->references('id')->on('groups');
+			$table->integer('user_id')->unsigned()->references('id')->on('users');
 			$table->string('title');
 			$table->text('body');
 			$table->datetime('start');

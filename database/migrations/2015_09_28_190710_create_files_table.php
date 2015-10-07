@@ -12,8 +12,8 @@ class CreateFilesTable extends Migration {
 			$table->timestamps();
 			$table->softDeletes();
 			$table->text('path');
-			$table->integer('user_id')->unsigned();
-			$table->integer('group_id')->unsigned()->index();
+			$table->integer('user_id')->unsigned()->references('id')->on('users');
+			$table->integer('group_id')->unsigned()->index()->references('id')->on('groups');
 		});
 	}
 
