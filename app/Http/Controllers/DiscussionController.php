@@ -1,11 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
-use App\Group;
-use Auth;
-use App\Discussion;
-use Illuminate\Http\Request;
 
+use Auth;
+use Illuminate\Http\Request;
+use App\Discussion;
+use App\Group;
 
 class DiscussionController extends Controller {
 
@@ -86,10 +85,12 @@ class DiscussionController extends Controller {
     $group = Group::findOrFail($group_id);
     //$group = $discussion->group()->first();
     $author = $discussion->user()->first();
+    //$comments = $discussion->comments->with('user')->get();
     return view ('discussions.show')
       ->with('discussion', $discussion)
       ->with('group', $group)
       ->with('author', $author)
+      //->with('comments', $comments)
       ->with('tab', 'discussion');
   }
 

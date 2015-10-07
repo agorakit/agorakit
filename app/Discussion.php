@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Comment;
 
 class Discussion extends Model {
 
@@ -28,10 +29,6 @@ class Discussion extends Model {
 		return $this->belongsTo('App\User');
 	}
 
-	public function parent()
-	{
-		return $this->hasOne('App\Discussion', 'parent_id');
-	}
 
 	public function votes()
 	{

@@ -10,6 +10,8 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
+use App\Group;
+
 class User extends Model implements AuthenticatableContract,
 AuthorizableContract,
 CanResetPasswordContract
@@ -48,11 +50,11 @@ CanResetPasswordContract
 
   /**
    * Discussions by this user
-   * 
+   *
    */
   public function discussions()
 	{
-		return $this->hasMany('Discussion');
+		return $this->hasMany('App\Discussion');
 	}
 
 
