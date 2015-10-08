@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
         $faker = Faker::create();
 
         // create 10 users
-        DB::table('users')->delete();
+        //DB::table('users')->delete();
 
         for ($i = 1; $i <= 10; $i++)
          {
@@ -58,11 +58,28 @@ class DatabaseSeeder extends Seeder
         $discussion->user_id =  App\User::orderByRaw("RAND()")->first()->id;
         $discussion->group_id = App\Group::orderByRaw("RAND()")->first()->id;
 
-
-
         $discussion->save();
 
         }
+
+
+        // comments
+        DB::table('comments')->delete();
+        for ($i = 1; $i <= 500; $i++)
+         {
+             $comment = new \App\Comment();
+             $comment->body = $faker->text;
+
+
+        $comment->user_id =  App\User::orderByRaw("RAND()")->first()->id;
+
+        App\Discussion::orderByRaw("RAND()")->first()->comments()->save($comment);
+      }
+
+
+
+
+
 
 
 

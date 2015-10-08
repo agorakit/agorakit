@@ -4,13 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Comment;
+//use Comment;
 
 class Discussion extends Model {
 
 	protected $table = 'discussions';
 	protected $fillable = ['name', 'body', 'group_id', 'parent_id'];
 
+
+	// that was tricky to figure out : http://stackoverflow.com/questions/26727088/laravel-eager-loading-polymorphic-relations-related-models
+	// we eager load the user with every discussion
+	protected $with = ['user'];
 
 	public $timestamps = true;
 

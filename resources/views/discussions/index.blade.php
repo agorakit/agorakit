@@ -18,11 +18,9 @@
           </td>
 
           <td>
-            @if ( !$discussion->user()->get()->isEmpty() )
-
-
-        <a href="{{ action('UserController@show', $discussion->user()->first()->id) }}">{{ $discussion->user()->first()->name }}</a>
-        @endif
+            @unless (is_null ($discussion->user))
+        <a href="{{ action('UserController@show', $discussion->user->id) }}">{{ $discussion->user->name }}</a>
+          @endunless
 
       </td>
 
