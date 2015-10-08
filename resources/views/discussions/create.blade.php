@@ -2,7 +2,7 @@
 
 @section('content')
 
-@include('partials.group')
+@include('partials.grouptab')
 
 <h1>Create a discussion</h1>
 

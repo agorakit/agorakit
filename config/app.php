@@ -153,6 +153,8 @@ return [
         // additional providers
         Illuminate\Html\HtmlServiceProvider::class,
         Potsky\LaravelLocalizationHelpers\LaravelLocalizationHelpersServiceProviderLaravel5::class,
+
+        Intervention\Image\ImageServiceProvider::class
     ],
 
     /*
@@ -203,7 +205,8 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Form'	    => Illuminate\Html\FormFacade::class,
-        'Html'      => Illuminate\Html\HtmlFacade::class,
+        'HTML'      => Illuminate\Html\HtmlFacade::class,
+        'Image' => Intervention\Image\Facades\Image::class
 
     ],
 

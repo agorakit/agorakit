@@ -78,6 +78,13 @@ Route::get('/comment/{type}/{id}', 'CommentController@create');
 Route::post('/comment/{type}/{id}', 'CommentController@store');
 
 
+// Files
+Route::get('groups/{group}/files', 'FileController@index');
+Route::get('groups/{group}/files/create', 'FileController@create');
+Route::post('groups/{group}/files/create', 'FileController@store');
+Route::get('groups/{group}/files/{file}', 'FileController@show');
+
+
 // Users
 Route::get('users/{id}', 'UserController@show');
 

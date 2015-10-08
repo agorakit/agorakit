@@ -16,12 +16,12 @@ class File extends Model {
 
 	public function user()
 	{
-		return $this->belongsTo('User');
+		return $this->belongsTo('App\User');
 	}
 
 	public function group()
 	{
-		return $this->belongsTo('Group');
+		return $this->belongsTo('App\Group');
 	}
 
 }

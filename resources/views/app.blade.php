@@ -21,13 +21,15 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-        <!--Mooc specific styles & scripts -->
-        <link rel="stylesheet" href="{{ asset('css/all.css') }}">
-        <script src="{{ asset('js/mooc.js') }}"></script>
+        <!-- mobilizator specific css-->
+        {!! HTML::style('/css/all.css') !!}
+
+
 
         <!-- CKeditor -->
         <script src="//cdn.ckeditor.com/4.5.3/standard/ckeditor.js"></script>
 
+        @yield('head')
 
     </head>
 

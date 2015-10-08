@@ -2,7 +2,7 @@
 
 @section('content')
 
-@include('partials.group')
+@include('partials.grouptab')
 
     <h2>{{ $comment->user }}</h2>
 

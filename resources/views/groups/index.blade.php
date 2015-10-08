@@ -4,15 +4,18 @@
 
 <div class="container">
     <h2>All the groups on this server</h2>
-        <ul>
+
+        <table class="table table-hover">
             @foreach( $groups as $group )
 
-            <li>
-            <a href="{{ action('GroupController@show', $group->id) }}">{{ $group->name }}</a>
-            
-            </li>
+            <tr>
+
+              <td><a href="{{ action('GroupController@show', $group->id) }}">{{ $group->name }}</a></td>
+              <td><a href="{{ action('GroupController@show', $group->id) }}">{{ $group->body }}</a></td>
+
+            </tr>
             @endforeach
-        </ul>
+        </table>
 </div>
 
 <div class="container">

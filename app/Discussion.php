@@ -14,7 +14,8 @@ class Discussion extends Model {
 
 	// that was tricky to figure out : http://stackoverflow.com/questions/26727088/laravel-eager-loading-polymorphic-relations-related-models
 	// we eager load the user with every discussion
-	protected $with = ['user'];
+	// TODO is it really a good idea?
+	protected $with = ['user', 'comments'];
 
 	public $timestamps = true;
 

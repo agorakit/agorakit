@@ -2,7 +2,7 @@
 
 @section('content')
 
-@include('partials.group')
+@include('partials.grouptab')
 
     <h2>{{ $discussion->name }}</h2>
 
@@ -10,22 +10,11 @@
             {{ $discussion->body }}
 </p>
 
-<table class="table table-hover">
+
 @foreach ($discussion->comments as $comment)
-<tr>
- <td>
-   {{$comment->body}}
- </td>
 
-<td>
-   by {{$comment->user->name}}
- </td>
+  @include('comments._show')
 
- <td>
-    {{$comment->created_at->diffForHumans()}}
-  </td>
-
- </tr>
 @endforeach
 </table>
 

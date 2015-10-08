@@ -19,15 +19,11 @@ class DiscussionController extends Controller {
     {
     $group = Group::findOrFail($id);
     $discussions = $group->discussions()->orderBy('updated_at', 'desc')->paginate(10);
-
-
-
     return view ('discussions.index')
       ->with('discussions', $discussions)
       ->with('group', $group)
       ->with('tab', 'discussion');
     }
-
   }
 
 
@@ -84,18 +80,14 @@ class DiscussionController extends Controller {
    */
   public function show($group_id, $discussion_id)
   {
-
-
     $discussion = Discussion::findOrFail($discussion_id);
     $group = Group::findOrFail($group_id);
-    //$group = $discussion->group()->first();
     $author = $discussion->user;
     $comments = $discussion->comments;
     return view ('discussions.show')
       ->with('discussion', $discussion)
       ->with('group', $group)
       ->with('author', $author)
-      //->with('comments', $comments)
       ->with('tab', 'discussion');
   }
 

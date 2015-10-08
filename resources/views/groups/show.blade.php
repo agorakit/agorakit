@@ -3,7 +3,7 @@
 @section('content')
 
 
-@include('partials.group')
+@include('partials.grouptab')
 
     <h2>{{ $group->name }}</h2>
 
@@ -12,11 +12,33 @@
 </p>
 
 <h2>Latest discussions in this group</h2>
-@foreach ($discussions as $discussion)
 
-<li><a href="{{ action('DiscussionController@show', [$group->id, $discussion->id]) }}">{{ $discussion->name }} </a></li>
+    <table class="table table-hover">
+      @foreach( $discussions as $discussion )
+      <tr>
+        <td>
+          <a href="{{ action('DiscussionController@show', [$group->id, $discussion->id]) }}">{{ $discussion->name }}</a>
+        </td>
 
-@endforeach
+        <td>
+          @unless (is_null ($discussion->user))
+          <a href="{{ action('UserController@show', $discussion->user->id) }}">{{ $discussion->user->name }}</a>
+          @endunless
+        </td>
+
+        <td>
+          <a href="{{ action('DiscussionController@show', [$group->id, $discussion->id]) }}">{{ $discussion->created_at->diffForHumans() }}</a>
+        </td>
+
+        <td>
+          <a href="{{ action('DiscussionController@show', [$group->id, $discussion->id]) }}">{{ $discussion->comments->count() }} replies</a>
+        </td>
+
+      </tr>
+      @endforeach
+    </table>
+
+
 
 <a class="btn btn-primary" href="{{ action('DiscussionController@create', $group->id ) }}">New discussion</a>
 
