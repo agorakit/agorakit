@@ -23,7 +23,7 @@
       @foreach( $files as $file )
       <tr>
         <td>
-          <a href="{{ action('FileController@show', [$group->id, $file->id]) }}">{{ $file->path }}</a>
+          <a href="{{ action('FileController@show', [$group->id, $file->id]) }}">{{ $file->original_filename }}</a>
         </td>
 
         <td>
