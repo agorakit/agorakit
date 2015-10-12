@@ -5,10 +5,17 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
 use App\Discussion;
+use Watson\Validating\ValidatingTrait;
 
 
 class Group extends Model
 {
+  use ValidatingTrait;
+
+  protected $rules = [
+     'name' => 'required',
+     'body' => 'required'
+ ];
 
     protected $fillable = ['name', 'body', 'cover'];
 

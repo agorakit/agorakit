@@ -4,10 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Watson\Validating\ValidatingTrait;
 
 class Comment extends Model {
 
-	protected $fillable = ['body', 'discussion_id', 'parent_id'];
+	use ValidatingTrait;
+
+	protected $rules = [
+		 'body' => 'required',
+		 'user_id' => 'required'
+ ];
+
+	protected $fillable = ['body'];
 
 
 	public $timestamps = true;

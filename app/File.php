@@ -4,48 +4,56 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Watson\Validating\ValidatingTrait;
 use Storage;
 use Response;
 
 class File extends Model
 {
-    protected $table = 'files';
-    public $timestamps = true;
+  use ValidatingTrait;
 
-    use SoftDeletes;
+  protected $rules = [
+    'path' => 'required',
+    'user_id' => 'required',
+  ];
 
-    protected $dates = ['deleted_at'];
+  protected $table = 'files';
+  public $timestamps = true;
 
-    // TODO performance ?
-    protected $with = ['user'];
+  use SoftDeletes;
 
-    public function user()
-    {
-        return $this->belongsTo('App\User');
-    }
+  protected $dates = ['deleted_at'];
 
-    public function group()
-    {
-        return $this->belongsTo('App\Group');
-    }
+  // TODO performance ?
+  protected $with = ['user'];
 
-    public function setFileContent($file_content, $filename, $extension, $mime)
-    {
-        // path would be in the form storage/app/group/{group_id}/{file_id}.jpg for a jpeg file
-        $path = 'groups/'.$this->group_id.'/'.$this->id.'.'.$extension;
+  public function user()
+  {
+    return $this->belongsTo('App\User');
+  }
 
-        $this->path = $path;
-        $this->original_filename = $filename; // we never know it might be useful
-        $this->original_extension = $extension;  // we never know it might be useful
-        $this->mime = $mime;
+  public function group()
+  {
+    return $this->belongsTo('App\Group');
+  }
 
-        return (Storage::put($path,  $file_content));
-    }
+  public function setFileContent($file_content, $filename, $extension, $mime)
+  {
+    // path would be in the form storage/app/group/{group_id}/{file_id}.jpg for a jpeg file
+    $path = 'groups/'.$this->group_id.'/'.$this->id.'.'.$extension;
 
-    public function getFileContent()
-    {
-        $file = Storage::disk('local')->get($this->path);
+    $this->path = $path;
+    $this->original_filename = $filename; // we never know it might be useful
+    $this->original_extension = $extension;  // we never know it might be useful
+    $this->mime = $mime;
 
-        return (new Response($file, 200, ['Content-Type', $entry->mime]));
-    }
+    return (Storage::put($path,  $file_content));
+  }
+
+  public function getFileContent()
+  {
+    $file = Storage::disk('local')->get($this->path);
+
+    return (new Response($file, 200, ['Content-Type', $entry->mime]));
+  }
 }
