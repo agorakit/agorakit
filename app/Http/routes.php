@@ -83,6 +83,7 @@ Route::get('groups/{group}/files', 'FileController@index');
 Route::get('groups/{group}/files/create', 'FileController@create');
 Route::post('groups/{group}/files/create', 'FileController@store');
 Route::get('groups/{group}/files/{file}', 'FileController@show');
+Route::get('groups/{group}/files/{file}/thumbnail', 'FileController@thumbnail');
 
 
 // Users

@@ -22,6 +22,11 @@
     <table class="table table-hover">
       @foreach( $files as $file )
       <tr>
+
+        <td>
+          <a href="{{ action('FileController@show', [$group->id, $file->id]) }}"><img src="{{ action('FileController@thumbnail', [$group->id, $file->id]) }}"/></a>
+        </td>
+
         <td>
           <a href="{{ action('FileController@show', [$group->id, $file->id]) }}">{{ $file->name }}</a>
         </td>

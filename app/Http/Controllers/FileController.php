@@ -3,9 +3,11 @@
 use \App\Group;
 
 use Input;
-use Response;
 
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
+
+use Image;
 
 use File;
 use Auth;
@@ -30,14 +32,6 @@ class FileController extends Controller {
       ->with('tab', 'files');
     }
 
-  }
-
-  /**
-  * Returns the file to the user as a download
-  */
-  public function download($id)
-  {
-    dd( File::findOrFail($id));
   }
 
 
@@ -99,12 +93,16 @@ class FileController extends Controller {
       // save it again
       $file->save();
 
+
+
+
       if ($request->ajax())
       {
       return Response::json('success', 200);
     }
     else
       {
+        $request->session()->flash('message', 'File was uploaded successfuly');
         return redirect()->back();
       }
 
@@ -139,8 +137,15 @@ public function show($group_id, $file_id)
   if (Storage::exists($entry->path))
   {
   // solution 2 : the file is served by laravel. More overhead but more flexibility...
+
+  /*
   header('Content-type: ' . $entry->mime);
   die(Storage::get($entry->path));
+  */
+
+  return (new Response(Storage::get($entry->path), 200))
+          ->header('Content-Type', $entry->mime);
+
 }
 else
 {
@@ -150,6 +155,21 @@ else
 
 
 }
+
+public function thumbnail($group_id, $file_id)
+  {
+    $entry = \App\File::findOrFail($file_id);
+
+    if ($entry->mime == 'image/jpeg')
+    {
+    $img = Image::make(storage_path(). '/app/' . $entry->path)->fit(24, 24);
+    return $img->response('jpg');
+    }
+    else
+    {
+        abort(404);
+    }
+  }
 
 /**
 * Show the form for editing the specified resource.
