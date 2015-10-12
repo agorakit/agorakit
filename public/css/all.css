@@ -1,3 +1,44 @@
+/****************************** GROUP HOMEPAGE ********************************/
+.groupbox {
+    position: relative;
+ border: 1px solid #ddd;
+border-radius: 4px;
+-webkit-transition: all .2s ease-in-out;
+/*max-width: 50%;*/
+margin: 10px;
+}
+
+.groupbox img
+{
+  max-width: 100%;
+  height: auto;
+}
+
+.groupbox  .caption {
+	padding:10px;
+	background-color:rgba(0,0,0,0.7);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    max-height: 40%;
+    overflow: hidden;
+  	font-size: 11px;
+  color: #FFF;
+
+}
+
+.groupbox  .btn-block {
+margin-top: 5px;
+}
+
+.groupbox .caption h5 a
+{
+  color: white;
+}
+
+
+/***************************** COMMENTS ***************************************/
+
 .comment
 {
   border-bottom: 1px solid #aaa;
@@ -27,6 +68,8 @@
   font-weight: bold;
 }
 
+
+/************************** DISCUSSIONS ***************************************/
 
 .discussion .user
 {
