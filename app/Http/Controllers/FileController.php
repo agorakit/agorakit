@@ -5,7 +5,8 @@ use \App\Group;
 use Input;
 use Response;
 
-use Request;
+use Illuminate\Http\Request;
+
 use File;
 use Auth;
 use Storage;
@@ -60,8 +61,11 @@ class FileController extends Controller {
     try
     {
       $file = new \App\File;
-      // we save it first to get an ID
+
+
+      // we save it first to get an ID from the database, it will later be used to generate a unique filename.
       $file->save();
+
 
       // add group
       $file->group()->associate(Group::findOrFail($id));
@@ -71,23 +75,39 @@ class FileController extends Controller {
       {
         $file->user()->associate(Auth::user());
       }
-      else {
+      else
+      {
         abort(401, 'user not logged in TODO');
       }
 
-      // now the content of the file itself, for storage
-      $uploaded_file = Request::file('file');
-      //$extension = $uploaded_file->getClientOriginalExtension();
-      $extension = $uploaded_file->guessExtension(); // I guess this is better
-      $filename = $uploaded_file->getClientOriginalName();
-      $file_content = File::get($uploaded_file);
-      $mime = $uploaded_file->getMimeType();
+      // generate filenames and path
+      $filepath = '/groups/' . $file->group->id . '/';
+      $filename = $file->id . '.' . strtolower($request->file('file')->getClientOriginalExtension());
 
-      if ($file->setFileContent($file_content, $filename, $extension, $mime))
+
+      // store the file
+      Storage::disk('local')->put($filepath. $filename,  File::get($request->file('file')));
+
+      // add path and other infos to the file record on DB
+      $file->path = $filepath . $filename;
+      $file->name = $request->file('file')->getClientOriginalName();
+      $file->original_filename = $request->file('file')->getClientOriginalName();
+      $file->mime = $request->file('file')->getClientMimeType();
+
+
+
+      // save it again
+      $file->save();
+
+      if ($request->ajax())
       {
-        $file->save();
-        return Response::json('success', 200);
+      return Response::json('success', 200);
+    }
+    else
+      {
+        return redirect()->back();
       }
+
 
     }
     catch (Exception $e)
@@ -95,41 +115,11 @@ class FileController extends Controller {
       return Response::json($e->getMessage(), 400);
     }
 
-
-
-    // TODO this should be part of the file model logic in a more abstracted way, it does (partially) not belong to a controller.
-    // something like $file->addUpload($file_object) etc...
-
-    /*
-
-    $uploaded_file = Request::file('file');
-    $extension = $uploaded_file->getClientOriginalExtension();
-    if (Storage::put('groups/' . $uploaded_file->getFilename().'.'.$extension,  File::get($uploaded_file)))
-    {
-    $file = new \App\File;
-    $file->path = $uploaded_file->getFilename();
-
-
-    if (Auth::check())
-    {
-    $file->user()->associate(Auth::user());
-  }
-  else {
-  abort(401, 'user not logged in TODO');
 }
 
-$group = Group::findOrFail($id);
-$group->files()->save($file);
 
-return Response::json('success', 200);
-}
-else
-{
-return Response::json('error', 400);
-}
-*/
 
-}
+
 
 /**
 * Display the specified resource.
@@ -137,14 +127,27 @@ return Response::json('error', 400);
 * @param  int  $id
 * @return Response
 */
-public function show($id)
+public function show($group_id, $file_id)
 {
-  $entry = \App\File::findOrFail($id);
-  $file = Storage::disk('local')->get($entry->path);
+  $entry = \App\File::findOrFail($file_id);
 
-  dd($entry);
-  return response($file, 200)
-              ->header('Content-Type', $entry->mime);
+  // solution 1 : redirect so the file is served directly by the server
+  // explained here : https://laracasts.com/discuss/channels/general-discussion/serving-static-files-like-user-uploads/?page=2
+  //return redirect(url($entry->path));
+
+
+  if (Storage::exists($entry->path))
+  {
+  // solution 2 : the file is served by laravel. More overhead but more flexibility...
+  header('Content-type: ' . $entry->mime);
+  die(Storage::get($entry->path));
+}
+else
+{
+    abort(404, 'File not found in storage at ' . $entry->path);
+}
+
+
 
 }
 

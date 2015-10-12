@@ -6,7 +6,7 @@
 
 @section('footer')
     {!! HTML::script('/packages/dropzone/dropzone.js') !!}
-    <!--{!! HTML::script('/js/dropzone-config.js') !!}-->
+    {!! HTML::script('/js/dropzone-config.js') !!}
 @stop
 
 
@@ -23,11 +23,11 @@
       @foreach( $files as $file )
       <tr>
         <td>
-          <a href="{{ action('FileController@show', [$group->id, $file->id]) }}">{{ $file->original_filename }}</a>
+          <a href="{{ action('FileController@show', [$group->id, $file->id]) }}">{{ $file->name }}</a>
         </td>
 
         <td>
-          <a href="{{ action('FileController@show', [$group->id, $file->id]) }}">Download {{ $file->path }}</a>
+          <a href="{{ action('FileController@show', [$group->id, $file->id]) }}">Download</a>
         </td>
 
         <td>
@@ -63,9 +63,6 @@
 </div>
 
 
-<div class="tools">
-  <a class="btn btn-primary" href="{{ action('FileController@create', $group->id ) }}">New file</a>
-</div>
 
 
 

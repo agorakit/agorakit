@@ -16,6 +16,10 @@ class File extends Model {
 
 	protected $dates = ['deleted_at'];
 
+	// TODO performance ?
+	protected $with = ['user'];
+
+
 	public function user()
 	{
 		return $this->belongsTo('App\User');
@@ -36,7 +40,7 @@ class File extends Model {
 		$this->original_extension = $extension;  // we never know it might be useful
 		$this->mime = $mime;
 
-		
+
 
 		return (Storage::put($path,  $file_content));
 
