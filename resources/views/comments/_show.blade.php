@@ -1,7 +1,9 @@
 
 <div class="comment">
 
-<div class="user">by {{$comment->user->name}}</div>
+<div class="avatar"><img src="{{$comment->user->avatar()}}"/></div>
+
+<div class="user">{{$comment->user->name}}</div>
 
 <div class="body">{{$comment->body}}</div>
 

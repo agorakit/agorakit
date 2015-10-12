@@ -5,13 +5,13 @@
 
 @include('partials.grouptab')
 
-    <h2>{{ $group->name }}</h2>
+    <h1>{{ $group->name }}</h1>
 
 <p>
             {{ $group->body }}
 </p>
 
-<h2>Latest discussions in this group</h2>
+<h2>Latest <a href="{{ action('DiscussionController@index', [$group->id]) }}">discussions</a> in this group</h2>
 
     <table class="table table-hover">
       @foreach( $discussions as $discussion )
@@ -40,17 +40,38 @@
 
 
 
-<a class="btn btn-primary" href="{{ action('DiscussionController@create', $group->id ) }}">New discussion</a>
 
-
-
-<h2>Latest files in this group</h2>
+<h2>Latest <a href="{{ action('FileController@index', [$group->id]) }}">files</a> in this group</h2>
+<table class="table table-hover">
 @foreach ($files as $file)
+<tr>
+  <td>
+    <a href="{{ action('FileController@show', [$group->id, $file->id]) }}"><img src="{{ action('FileController@thumbnail', [$group->id, $file->id]) }}"/></a>
+  </td>
 
-<li>{{ $file->name }}</li>
+  <td>
+    <a href="{{ action('FileController@show', [$group->id, $file->id]) }}">{{ $file->name }}</a>
+  </td>
+
+  <td>
+    <a href="{{ action('FileController@show', [$group->id, $file->id]) }}">Download</a>
+  </td>
+
+  <td>
+    @unless (is_null ($file->user))
+    <a href="{{ action('UserController@show', $file->user->id) }}">{{ $file->user->name }}</a>
+    @endunless
+  </td>
+
+  <td>
+    {{ $file->created_at->diffForHumans() }}
+  </td>
+
+</tr>
+
 
 @endforeach
-
+</table>
 
 
 @endsection

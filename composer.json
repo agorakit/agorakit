@@ -10,7 +10,8 @@
 		"potsky/laravel-localization-helpers" : "~1.1",
 		"illuminate/html": "^5.0",
         "barryvdh/laravel-debugbar": "^2.0",
-        "intervention/image": "^2.3"
+        "intervention/image": "^2.3",
+        "venturecraft/revisionable": "1.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

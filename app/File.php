@@ -7,53 +7,45 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Storage;
 use Response;
 
-class File extends Model {
+class File extends Model
+{
+    protected $table = 'files';
+    public $timestamps = true;
 
-	protected $table = 'files';
-	public $timestamps = true;
+    use SoftDeletes;
 
-	use SoftDeletes;
+    protected $dates = ['deleted_at'];
 
-	protected $dates = ['deleted_at'];
+    // TODO performance ?
+    protected $with = ['user'];
 
-	// TODO performance ?
-	protected $with = ['user'];
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 
+    public function group()
+    {
+        return $this->belongsTo('App\Group');
+    }
 
-	public function user()
-	{
-		return $this->belongsTo('App\User');
-	}
+    public function setFileContent($file_content, $filename, $extension, $mime)
+    {
+        // path would be in the form storage/app/group/{group_id}/{file_id}.jpg for a jpeg file
+        $path = 'groups/'.$this->group_id.'/'.$this->id.'.'.$extension;
 
-	public function group()
-	{
-		return $this->belongsTo('App\Group');
-	}
+        $this->path = $path;
+        $this->original_filename = $filename; // we never know it might be useful
+        $this->original_extension = $extension;  // we never know it might be useful
+        $this->mime = $mime;
 
-	public function setFileContent($file_content, $filename, $extension, $mime)
-	{
-		// path would be in the form storage/app/group/{group_id}/{file_id}.jpg for a jpeg file
-		$path = 'groups/' . $this->group_id . '/' . $this->id . '.' . $extension;
+        return (Storage::put($path,  $file_content));
+    }
 
-		$this->path = $path;
-		$this->original_filename = $filename; // we never know it might be useful
-		$this->original_extension = $extension;  // we never know it might be useful
-		$this->mime = $mime;
+    public function getFileContent()
+    {
+        $file = Storage::disk('local')->get($this->path);
 
-
-
-		return (Storage::put($path,  $file_content));
-
-	}
-
-	public function getFileContent()
-	{
-
-		$file = Storage::disk('local')->get($this->path);
-
-		return (new Response($file, 200, ['Content-Type', $entry->mime]));
-	}
-
-
-
+        return (new Response($file, 200, ['Content-Type', $entry->mime]));
+    }
 }

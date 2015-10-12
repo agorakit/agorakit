@@ -1,6 +1,40 @@
 .comment
 {
-  border: 1px solid gray;
-  padding: 10px;
-  margin: 10px;
+  border-bottom: 1px solid #aaa;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.comment .avatar img
+{
+  width: 24px;
+  height: 24px;
+  float: left;
+}
+
+.comment .user, .comment .body, .comment .created
+{
+  margin-left: 30px;
+}
+
+.comment .created
+{
+  font-size: 0.5em;
+}
+
+.comment .user
+{
+  font-weight: bold;
+}
+
+
+.discussion .user
+{
+  font-weight: bold;
+}
+
+.discussion .body
+{
+  margin-top: 1em;
+  margin-bottom: 2em;
 }

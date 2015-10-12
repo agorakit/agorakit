@@ -70,6 +70,8 @@ Route::get('groups/{group}/discussions', 'DiscussionController@index');
 Route::get('groups/{group}/discussions/create', 'DiscussionController@create');
 Route::post('groups/{group}/discussions/create', 'DiscussionController@store');
 Route::get('groups/{group}/discussions/{discussion}', 'DiscussionController@show');
+Route::get('groups/{group}/discussions/{discussion}/edit', 'DiscussionController@edit');
+Route::post('groups/{group}/discussions/{discussion}', 'DiscussionController@update');
 
 // Comments
 // type can be curently 'discussion'

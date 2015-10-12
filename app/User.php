@@ -58,4 +58,9 @@ CanResetPasswordContract
 	}
 
 
+  public function avatar()
+  {
+    return url('/images/avatar.jpg');
+  }
+
 }

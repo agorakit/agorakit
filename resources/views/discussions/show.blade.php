@@ -4,33 +4,32 @@
 
 @include('partials.grouptab')
 
-    <h2>{{ $discussion->name }}</h2>
+<div class="discussion">
 
-<p>
+    <h2 class="name">{{ $discussion->name }} <a href="{{ action('DiscussionController@edit', [$group->id, $discussion->id]) }}" class="btn btn-primary">Edit</a></h2>
+
+<div class="meta">Started by <span class="user">{{ $discussion->user->name}}</span>, in {{ $discussion->group->name}} {{ $discussion->created_at->diffForHumans()}} </div>
+<div class="body">
             {{ $discussion->body }}
-</p>
+</div>
+
+</div>
 
 
+<div class="comments">
 @foreach ($discussion->comments as $comment)
 
   @include('comments._show')
 
 @endforeach
-</table>
 
-<a class="btn btn-primary" href="{{ action('CommentController@create', ['discussion', $discussion->id] ) }}">Reply</a>
-
-<!--
-<div class="alert alert-success">
-This discussion is part of a group called
-<strong>{{ $discussion->group()->first()->name}}</strong>
 </div>
 
-<div class="alert alert-success">
 
-This discussion has been started by <strong>{{ $author->name}}</strong>
-</div>
--->
+
+@include ('comments.form')
+
+
 
 
 @endsection
