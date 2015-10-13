@@ -65,6 +65,13 @@ Route::get('groups', 'GroupController@index');
 // specific group homepage
 Route::get('groups/{group}', 'GroupController@show');
 
+// memberships
+Route::get('groups/{group}/join', 'GroupUserController@join');
+Route::get('groups/{group}/leave', 'GroupUserController@leave');
+Route::get('groups/{group}/subscribe', 'GroupUserController@subscribe');
+Route::get('groups/{group}/unsubscribe', 'GroupUserController@unsubscribe');
+
+
 // Discussions
 Route::get('groups/{group}/discussions', 'DiscussionController@index');
 Route::get('groups/{group}/discussions/create', 'DiscussionController@create');

@@ -22,7 +22,7 @@ CanResetPasswordContract
 
   protected $rules = [
 		 'name' => 'required',
-		 'email' => 'required|email|unique',
+		 'email' => 'required|email|unique:users',
      'password' => 'required'
  ];
 

@@ -12,6 +12,7 @@
 
       <td><a href="{{ action('GroupController@show', $group->id) }}">{{ $group->name }}</a></td>
       <td><a href="{{ action('GroupController@show', $group->id) }}">{{ $group->body }}</a></td>
+      <td><a href="{{ action('GroupUserController@join', $group->id) }}">Join</a></td>
 
     </tr>
     @endforeach

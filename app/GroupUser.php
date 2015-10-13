@@ -10,6 +10,8 @@ class GroupUser extends Model {
 	protected $table = 'group_user';
 	public $timestamps = true;
 
+	protected $fillable = ['group_id', 'user_id'];
+
 	use SoftDeletes;
 
 	protected $dates = ['deleted_at'];
@@ -18,5 +20,8 @@ class GroupUser extends Model {
 	{
 		return $this->morphedByMany('Vote', 'votable');
 	}
+
+
+
 
 }
