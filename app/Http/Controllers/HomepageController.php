@@ -19,19 +19,6 @@ class HomepageController extends Controller
      */
     public function index()
     {
-      $groups = Group::all();
-
-      if (Auth::user())
-      {
-           $mygroups = Auth::user()->groups();
-      }
-      else
-      {
-        $mygroups = false;
-      }
-
-      return view('groups.index')->with('groups', $groups)->with('mygroups', $mygroups);
-    }
-
+    
 
 }

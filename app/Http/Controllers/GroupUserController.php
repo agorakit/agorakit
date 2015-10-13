@@ -18,26 +18,6 @@ class GroupUserController extends Controller {
     $membership->save();
     return redirect()->back();
 
-    /*
-    // load membership for this group and user combination (if it exists)
-    // solution 1 :
-    $membership = \App\GroupUser::where('user_id',  $request->user()->id)->where('group_id', $group_id)->first();
-
-    if (!is_null ($membership))
-    {
-      // user has already some membership with this group, let's update it.
-      $membership->membership = 2;
-      $membership->save();
-      return redirect()->back();
-    }
-    else
-    {
-        $group->users()->attach($request->user());
-        return redirect()->back();
-    }
-    */
-
-
   }
 
 

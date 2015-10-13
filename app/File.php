@@ -12,6 +12,7 @@ class File extends Model
 {
   use ValidatingTrait;
 
+  
   protected $rules = [
     'path' => 'required',
     'user_id' => 'required',

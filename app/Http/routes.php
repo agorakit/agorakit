@@ -16,8 +16,8 @@
  * Basic homepage for all users, either logged in or not.
  * The idea is to provide a group listing (most active first) and a list of groups subscribed to by the current user.
  */
-Route::get('/', 'HomepageController@index');
-Route::get('home', 'HomepageController@index');
+Route::get('/', 'GroupController@index');
+Route::get('home', 'GroupController@index');
 
 
 /**
