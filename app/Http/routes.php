@@ -61,6 +61,10 @@ I will apply here the recomandtion "routes as documentation" from https://philst
 
 // application homepage, lists all groups on the server
 Route::get('groups', 'GroupController@index');
+Route::get('groups/create', 'GroupController@create');
+
+
+
 
 // specific group homepage
 Route::get('groups/{group}', 'GroupController@show');

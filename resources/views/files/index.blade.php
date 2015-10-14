@@ -15,10 +15,7 @@
 @include('partials.grouptab')
 
 <div class="container">
-  <h2>All the files in this group</h2>
-
-
-
+  
     <table class="table table-hover">
       @foreach( $files as $file )
       <tr>
