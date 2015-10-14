@@ -26,7 +26,7 @@ class GroupController extends Controller {
     }
 
     return view('groups.index')->with('groups', $groups)->with('mygroups', $mygroups);
-  
+
 
 
   }
@@ -38,7 +38,7 @@ class GroupController extends Controller {
    */
   public function create()
   {
-
+    return 'not yet'; // TODO
   }
 
   /**
@@ -61,8 +61,8 @@ class GroupController extends Controller {
   {
     $group = Group::findOrFail($id);
 
-    $discussions = $group->discussions()->orderBy('updated_at', 'desc')->limit(20)->get();
-    $files = $group->files()->orderBy('updated_at', 'desc')->limit(20)->get();
+    $discussions = $group->discussions()->orderBy('updated_at', 'desc')->limit(5)->get();
+    $files = $group->files()->orderBy('updated_at', 'desc')->limit(5)->get();
 
 
     return view ('groups.show')

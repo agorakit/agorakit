@@ -5,11 +5,7 @@
 @include('partials.grouptab')
 
 <div class="container">
-  <h2>All the discussions in this group</h2>
-
-  <div class="tools">
-    <a class="btn btn-primary" href="{{ action('DiscussionController@create', $group->id ) }}">New discussion</a>
-  </div>
+  <h2>All the discussions in this group <a class="btn btn-primary btn-xs" href="{{ action('DiscussionController@create', $group->id ) }}">New discussion</a></h2>
 
     <table class="table table-hover">
       @foreach( $discussions as $discussion )

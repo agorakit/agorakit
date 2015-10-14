@@ -101,7 +101,7 @@ Route::get('groups/{group}/files/{file}/thumbnail', 'FileController@thumbnail');
 
 // Users
 Route::get('users/{id}', 'UserController@show');
-
+Route::get('groups/{group}/users', 'UserController@index');
 
 // no magic like this :
 /*

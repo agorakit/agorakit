@@ -35,6 +35,11 @@
 
 /************************** DISCUSSIONS ***************************************/
 
+.discussion, .comments
+{
+  max-width: 65em;
+}
+
 .discussion .user
 {
   font-weight: bold;
@@ -50,5 +55,5 @@
 /*********************** TABS and GROUP HEADERS ************************************/
 .nav-tabs
 {
-margin-bottom: 2em;
+margin-bottom: 1em;
 }

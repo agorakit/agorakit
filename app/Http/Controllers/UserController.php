@@ -7,9 +7,15 @@ class UserController extends Controller {
    *
    * @return Response
    */
-  public function index()
+  public function index($group_id)
   {
+        $group = \App\Group::findOrFail($group_id);
+        $users = $group->users()->orderBy('updated_at', 'desc')->paginate(10);
 
+        return view('users.index')
+    ->with('users', $users)
+    ->with('group', $group)
+    ->with('tab', 'users');
   }
 
   /**
@@ -40,7 +46,7 @@ class UserController extends Controller {
    */
   public function show($id)
   {
-
+    return 'not yet'; // TODO
   }
 
   /**
