@@ -12,6 +12,8 @@
 */
 
 
+
+
 /**
  * Basic homepage for all users, either logged in or not.
  * The idea is to provide a group listing (most active first) and a list of groups subscribed to by the current user.
@@ -87,8 +89,9 @@ Route::post('groups/{group}/discussions/{discussion}', 'DiscussionController@upd
 // Comments
 // type can be curently 'discussion'
 // so to reply to discussion with id 5, hit comment/discussion/5
-Route::get('/comment/{type}/{id}', 'CommentController@create');
-Route::post('/comment/{type}/{id}', 'CommentController@store');
+Route::post('groups/{group}/discussions/{discussion}/reply', 'CommentController@reply');
+//Route::get('/comment/{type}/{id}', 'CommentController@create');
+//Route::post('/comment/{type}/{id}', 'CommentController@store');
 
 
 // Files

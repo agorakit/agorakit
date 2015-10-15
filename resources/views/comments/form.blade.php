@@ -1,4 +1,4 @@
-{!! Form::open(array('action' => ['CommentController@store', 'discussion', $discussion->id])) !!}
+{!! Form::open(array('action' => ['CommentController@reply', $group->id, $discussion->id])) !!}
 
 <div class="form-group">
 			{!! Form::textarea('body', null, ['class' => 'form-control']) !!}

@@ -6,6 +6,13 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('group.member', ['only' => ['reply', 'create', 'store', 'edit', 'update', 'destroy']]);
+    }
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +32,6 @@ class CommentController extends Controller
     {
         if ($type == 'discussion') {
             $discussion = \App\Discussion::findOrFail($id);
-            //$group = \App\Group::findOrFail($group_id);
             $group = $discussion->group;
 
             return view('comments.create')
@@ -33,7 +39,7 @@ class CommentController extends Controller
         ->with('group', $group)
         ->with('tab', 'discussion');
         } else {
-            abort(401, 'only discussions can be commented for now');
+            abort(401, 'Only discussions can be commented for now');
         }
     }
 
@@ -50,11 +56,7 @@ class CommentController extends Controller
             $comment = new \App\Comment();
             $comment->body = $request->input('body');
 
-            if (\Auth::check()) {
-                $comment->user()->associate(\Auth::user());
-            } else {
-                abort(401, 'user not logged in TODO');
-            }
+            $comment->user()->associate(\Auth::user());
 
             $discussion = \App\Discussion::findOrFail($id);
             $discussion->comments()->save($comment);
@@ -63,8 +65,27 @@ class CommentController extends Controller
 
             return redirect()->action('DiscussionController@show', [$group->id, $discussion->id]);
         } else {
-            abort(401, 'only discussions can be commented for now');
+            abort(401, 'Only discussions can be commented for now');
         }
+    }
+
+
+
+    public function reply(Request $request, $group_id, $discussion_id)
+    {
+
+            $comment = new \App\Comment();
+            $comment->body = $request->input('body');
+
+            $comment->user()->associate(\Auth::user());
+
+            $discussion = \App\Discussion::findOrFail($discussion_id);
+            $discussion->comments()->save($comment);
+
+            $group = $discussion->group;
+
+            return redirect()->action('DiscussionController@show', [$group->id, $discussion->id]);
+
     }
 
     /**

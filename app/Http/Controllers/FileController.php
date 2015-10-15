@@ -12,6 +12,12 @@ use Storage;
 
 class FileController extends Controller
 {
+
+  public function __construct()
+  {
+    $this->middleware('group.member', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
+  }
+
   /**
   * Display a listing of the resource.
   *
@@ -55,16 +61,10 @@ class FileController extends Controller
       // add group
       $file->group()->associate(Group::findOrFail($id));
 
-      // add user
-      if (Auth::check()) {
-        $file->user()->associate(Auth::user());
-      } else {
-        abort(401, 'user not logged in TODO');
-      }
+      $file->user()->associate(Auth::user());
 
       // generate filenames and path
       $filepath = '/groups/'.$file->group->id.'/';
-
 
 
       $filename = $file->id . '.' . strtolower($request->file('file')->getClientOriginalExtension());
@@ -89,9 +89,7 @@ class FileController extends Controller
       if ($request->ajax()) {
         return response()->json('success', 200);
       } else {
-        $request->session()->flash('message', 'File was uploaded successfuly');
-
-        return redirect()->back();
+        return redirect()->back()->with('message', 'File was uploaded successfuly');
       }
     } catch (Exception $e) {
 
