@@ -13,9 +13,7 @@ class CreateVotesTable extends Migration {
 			$table->softDeletes();
 			$table->integer('user_id')->unsigned()->references('id')->on('users');
 			$table->tinyInteger('vote')->default('0');
-			$table->string('votable_type');
-			$table->integer('votable_id')->unsigned();
-			$table->boolean('is_spam')->default(false);
+			$table->integer('comment_id')->unsigned();
 		});
 	}
 

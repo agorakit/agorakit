@@ -10,6 +10,7 @@ class GroupController extends Controller {
   public function __construct()
   {
     $this->middleware('auth', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
+    $this->middleware('group.member', ['only' => ['store', 'edit', 'update', 'destroy']]);
   }
 
   /**

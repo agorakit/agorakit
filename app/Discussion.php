@@ -33,6 +33,12 @@ class Discussion extends Model
 
     protected $dates = ['deleted_at'];
 
+
+    public function unReadCount()
+    {
+      //return
+    }
+
     public function group()
     {
         return $this->belongsTo('App\Group');
@@ -45,11 +51,11 @@ class Discussion extends Model
 
     public function votes()
     {
-        return $this->morphMany('App\Vote', 'votable');
+        return $this->hasMany('App\Vote');
     }
 
     public function comments()
     {
-        return $this->morphMany('App\Comment', 'commentable');
+        return $this->hasMany('App\Comment');
     }
 }

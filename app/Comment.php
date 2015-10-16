@@ -34,13 +34,13 @@ class Comment extends Model {
 
 	public function votes()
 	{
-		return $this->morphMany('App\Vote', 'votable');
+		return $this->hasMany('App\Vote');
 	}
 
 
-  public function commentable()
+  public function discussion()
     {
-        return $this->morphTo();
+        return $this->belongsTo('App\Discussion');
     }
 
 }

@@ -6,6 +6,7 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Discussion;
 use App\Group;
+use Carbon\Carbon;
 
 class DiscussionController extends Controller
 {
@@ -23,6 +24,18 @@ class DiscussionController extends Controller
     */
     public function index($id)
     {
+        /*
+        At some point something like that might be usefull to return all the unread topics : 
+
+        SELECT COUNT(comments.id) AS count
+                      FROM comments
+                      INNER JOIN discussions ON comments.commentable_id = 90
+                      LEFT JOIN user_read_discussion h ON comments.commentable_id = h.discussion_id AND h.user_id = 11
+                      WHERE (comments.created_at > h.read_at OR h.read_at IS NULL)
+
+        */
+
+
         if ($id) {
             $group = Group::findOrFail($id);
             $discussions = $group->discussions()->orderBy('updated_at', 'desc')->paginate(10);
@@ -80,6 +93,18 @@ class DiscussionController extends Controller
     {
         $discussion = Discussion::findOrFail($discussion_id);
         $group = Group::findOrFail($group_id);
+
+        // According to https://www.reddit.com/r/laravel/comments/2l2ndq/unread_forum_posts/
+        // When a user visits the topic, if they've never done so before,
+        // create a new record in the table with the time they've read the topic.
+
+        if (Auth::user())
+        {
+            $UserReadDiscussion = \App\UserReadDiscussion::firstOrNew(['discussion_id' => $discussion->id, 'user_id' => Auth::user()->id]);
+            $UserReadDiscussion->read_at = Carbon::now();
+            $UserReadDiscussion->save();
+        }
+
         //$comments = $discussion->comments;
         return view('discussions.show')
         ->with('discussion', $discussion)

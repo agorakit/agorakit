@@ -28,7 +28,13 @@ class DatabaseSeeder extends Seeder
         ]);
         }
 
-
+// TODO mandatory remove this :
+        App\User::create([
+         "email" => 'test@test.com',
+         "password" => bcrypt('123456'),
+         "username" => 'tester',
+         "name" => 'Mister tester'
+     ]);
 
 
         // create 10 groups

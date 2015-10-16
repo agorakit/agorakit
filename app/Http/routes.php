@@ -93,6 +93,10 @@ Route::post('groups/{group}/discussions/{discussion}/reply', 'CommentController@
 //Route::get('/comment/{type}/{id}', 'CommentController@create');
 //Route::post('/comment/{type}/{id}', 'CommentController@store');
 
+Route::get('groups/{group}/discussions/{discussion}/comment/{comment}/up', 'VoteController@up');
+Route::get('groups/{group}/discussions/{discussion}/comment/{comment}/down', 'VoteController@down');
+Route::get('groups/{group}/discussions/{discussion}/comment/{comment}/cancel', 'VoteController@cancel');
+
 
 // Files
 Route::get('groups/{group}/files', 'FileController@index');
@@ -105,6 +109,10 @@ Route::get('groups/{group}/files/{file}/thumbnail', 'FileController@thumbnail');
 // Users
 Route::get('users/{id}', 'UserController@show');
 Route::get('groups/{group}/users', 'UserController@index');
+
+
+
+
 
 // no magic like this :
 /*
