@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Discussion;
 use App\Group;
 use Carbon\Carbon;
+use DB;
 
 class DiscussionController extends Controller
 {
@@ -17,6 +18,36 @@ class DiscussionController extends Controller
         $this->middleware('group.member', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
     }
 
+
+    public function indexUnRead($id)
+    {
+
+      if ($id) {
+          $group = Group::findOrFail($id);
+          $discussions = $group->discussions()
+          ->select('discussions.*')
+          ->leftJoin('user_read_discussion', function($join)
+          {
+            $join->on('user_read_discussion.discussion_id', '=', 'discussions.id')
+            ->where('user_read_discussion.user_id', '=', \Auth::user()->id)
+            ->on('user_read_discussion.read_at', '>=', 'discussions.created_at');
+          })
+          ->whereNull('user_read_discussion.id')
+
+          ->orderBy('discussions.updated_at', 'desc')->paginate(10);
+
+          //$discussions->load('comments');
+
+          return view('discussions.index')
+          ->with('discussions', $discussions)
+          ->with('group', $group)
+          ->with('tab', 'discussion');
+      }
+
+
+}
+
+
     /**
     * Display a listing of the resource.
     *
@@ -25,7 +56,7 @@ class DiscussionController extends Controller
     public function index($id)
     {
         /*
-        At some point something like that might be usefull to return all the unread topics : 
+        At some point something like that might be usefull to return all the unread topics :
 
         SELECT COUNT(comments.id) AS count
                       FROM comments
@@ -39,6 +70,7 @@ class DiscussionController extends Controller
         if ($id) {
             $group = Group::findOrFail($id);
             $discussions = $group->discussions()->orderBy('updated_at', 'desc')->paginate(10);
+
 
             return view('discussions.index')
             ->with('discussions', $discussions)

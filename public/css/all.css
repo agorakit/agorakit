@@ -1,3 +1,9 @@
+/***************************** COMMON STUFF ***********************************/
+body
+{
+  padding-top: 40px;
+}
+
 /****************************** GROUP HOMEPAGE ********************************/
 
 
@@ -8,6 +14,7 @@
   border-bottom: 1px solid #aaa;
   padding-bottom: 20px;
   margin-bottom: 20px;
+
 }
 
 .comment .avatar img
@@ -20,6 +27,7 @@
 .comment .user, .comment .body, .comment .created
 {
   margin-left: 30px;
+
 }
 
 .comment .created
@@ -31,6 +39,15 @@
 {
   font-weight: bold;
 }
+
+.comment .vote
+{
+  width: 24px;
+  text-align: center;
+  float: right;
+}
+
+
 
 
 /************************** DISCUSSIONS ***************************************/

@@ -31,6 +31,7 @@ class RedirectIfNotGroupMember
     {
 
         // if current user is not a member of the passed in group
+        // TODO don't just count, check the membership status
 
         if ($this->auth->guest()) {
             return redirect()->back()->with('message', 'You need to be logged so I can check if you are a member of this group');

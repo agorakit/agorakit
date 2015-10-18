@@ -26,6 +26,8 @@ class Comment extends Model {
 
 	protected $with = ['user'];
 
+	protected $touches = ['discussion'];
+
 	public function user()
 	{
 		return $this->belongsTo('App\User');

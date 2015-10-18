@@ -18,7 +18,7 @@ class Group extends Model
      'body' => 'required'
  ];
 
-    //protected $with = ['group_user'];
+    //protected $with = ['membership'];
 
     protected $fillable = ['name', 'body', 'cover'];
 
@@ -29,7 +29,7 @@ class Group extends Model
      */
     public function users()
     {
-      return $this->belongsToMany('App\User')->withTimestamps();
+      return $this->belongsToMany('App\User', 'membership')->withTimestamps();
     }
 
     /**
@@ -51,7 +51,7 @@ class Group extends Model
     * Default to curently logged user if not provided
     * Returns false if no membership found
     */
-    public function membership(User $user = null)
+    public function isMember(User $user = null)
     {
       if (is_null ($user))
       {
@@ -62,10 +62,11 @@ class Group extends Model
 
       if ($user)
       {
-        $membership = \App\GroupUser::where('user_id', $user->id)->where('group_id', $this->id)->first();
-        if ($membership)
+        $membership = \App\Membership::where('user_id', $user->id)->where('group_id', $this->id)->first();
+        
+        if ($membership && $membership->membership > 1)
         {
-          return $membership->membership;
+          return true;
         }
       }
 

@@ -22,6 +22,10 @@ class CreateUsersReadTopicsTable extends Migration
             $table->dateTime('read_at');
 
             $table->unique(['user_id', 'discussion_id']);
+
+            $table->index('user_id');
+            $table->index('discussion_id');
+            $table->index('read_at');
         });
     }
 

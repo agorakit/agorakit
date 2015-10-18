@@ -3,14 +3,13 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateGroupUserTable extends Migration {
+class CreateMembershipTable extends Migration {
 
 	public function up()
 	{
-		Schema::create('group_user', function(Blueprint $table) {
+		Schema::create('membership', function(Blueprint $table) {
 			$table->increments('id');
 			$table->timestamps();
-			$table->softDeletes();
 			$table->integer('user_id')->unsigned()->references('id')->on('users');
 			$table->integer('group_id')->unsigned()->references('id')->on('groups');
 			$table->unique(['user_id', 'group_id']);
@@ -31,7 +30,7 @@ class CreateGroupUserTable extends Migration {
 			/*
 			Membership type
 			------------------------------
-			1 : not confirmed (the user has been invited but didn't reply yet - maybe we need an invitation token)
+			1 : invited but not confirmed (the user has been invited but didn't reply yet - maybe we need an invitation token)
 			2 : subscribed : the user receives emails and notificaions from the group
 			3 : the user is an active member of the group
 
@@ -41,7 +40,9 @@ class CreateGroupUserTable extends Migration {
 			4 : the user has some superpower (but I want to avoid this)
 
 			*/
-			$table->integer('membership')->default(1);
+			$table->integer('membership')->default(0);
+
+			$table->integer('notifications');
 
 
 
@@ -52,6 +53,6 @@ class CreateGroupUserTable extends Migration {
 
 	public function down()
 	{
-		Schema::drop('group_user');
+		Schema::drop('membership');
 	}
 }

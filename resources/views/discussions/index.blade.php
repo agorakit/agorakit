@@ -21,11 +21,20 @@
         </td>
 
         <td>
-          <a href="{{ action('DiscussionController@show', [$group->id, $discussion->id]) }}">{{ $discussion->created_at->diffForHumans() }}</a>
+          <a href="{{ action('DiscussionController@show', [$group->id, $discussion->id]) }}">{{ $discussion->updated_at->diffForHumans() }}</a>
         </td>
 
+
+
         <td>
-          <a href="{{ action('DiscussionController@show', [$group->id, $discussion->id]) }}">{{ $discussion->comments->count() }} replies</a>
+          @if ($discussion->unReadCount() > 0)
+
+          <i class="fa fa-comment"></i>
+          <span class="badge">{{ $discussion->unReadCount() }}</span>
+
+
+
+          @endif
         </td>
 
       </tr>

@@ -71,20 +71,29 @@ Route::get('groups/create', 'GroupController@create');
 // specific group homepage
 Route::get('groups/{group}', 'GroupController@show');
 
-// memberships
-Route::get('groups/{group}/join', 'GroupUserController@join');
-Route::get('groups/{group}/leave', 'GroupUserController@leave');
-Route::get('groups/{group}/subscribe', 'GroupUserController@subscribe');
-Route::get('groups/{group}/unsubscribe', 'GroupUserController@unsubscribe');
+// memberships & settings
+Route::get('groups/{group}/join', 'MembershipController@join');
+Route::post('groups/{group}/join', 'MembershipController@store');
+
+Route::get('groups/{group}/settings', 'MembershipController@settings');
+Route::post('groups/{group}/settings', 'MembershipController@store');
+
+Route::get('groups/{group}/leave', 'MembershipController@leave');
+Route::post('groups/{group}/leave', 'MembershipController@destroy');
 
 
 // Discussions
 Route::get('groups/{group}/discussions', 'DiscussionController@index');
 Route::get('groups/{group}/discussions/create', 'DiscussionController@create');
 Route::post('groups/{group}/discussions/create', 'DiscussionController@store');
+
+Route::get('groups/{group}/discussions/unread', 'DiscussionController@indexUnRead');
+
 Route::get('groups/{group}/discussions/{discussion}', 'DiscussionController@show');
 Route::get('groups/{group}/discussions/{discussion}/edit', 'DiscussionController@edit');
 Route::post('groups/{group}/discussions/{discussion}', 'DiscussionController@update');
+
+
 
 // Comments
 // type can be curently 'discussion'
@@ -111,14 +120,14 @@ Route::get('users/{id}', 'UserController@show');
 Route::get('groups/{group}/users', 'UserController@index');
 
 
-
+Route::get('unread', 'CommentController@unRead');
 
 
 // no magic like this :
 /*
 Route::resource('user', 'UserController');
 Route::resource('group', 'GroupController');
-Route::resource('groupuser', 'GroupUserController');
+Route::resource('Membership', 'MembershipController');
 Route::resource('action', 'ActionController');
 Route::resource('vote', 'VoteController');
 Route::resource('file', 'FileController');
