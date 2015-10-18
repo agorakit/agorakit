@@ -29,10 +29,16 @@ class FileController extends Controller
       $group = Group::findOrFail($id);
       $files = $group->files()->orderBy('updated_at', 'desc')->paginate(20);
 
+
+
+
+      $upload_allowed = $group->isMember();
+
       return view('files.index')
       ->with('files', $files)
       ->with('group', $group)
-      ->with('tab', 'files');
+      ->with('tab', 'files')
+      ->with('upload_allowed', $upload_allowed);
     }
   }
 

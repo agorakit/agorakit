@@ -13,7 +13,7 @@ class CreateActionsTable extends Migration {
 			$table->softDeletes();
 			$table->integer('group_id')->unsigned()->references('id')->on('groups');
 			$table->integer('user_id')->unsigned()->references('id')->on('users');
-			$table->string('title');
+			$table->string('name');
 			$table->text('body');
 			$table->datetime('start');
 			$table->datetime('stop');

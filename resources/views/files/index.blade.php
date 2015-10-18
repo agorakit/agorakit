@@ -18,7 +18,7 @@
 
 <div class="container">
 
-
+@if ($upload_allowed)
   {!! Form::open(['url' => action('FileController@create', $group->id), 'class' => 'dropzone', 'files'=>true, 'id'=>'real-dropzone']) !!}
 
   <div class="fallback">
@@ -27,11 +27,11 @@
   </div>
 
   {!! Form::close() !!}
-
+@endif
 
 
   <table class="table table-hover">
-    @foreach( $files as $file )
+    @forelse( $files as $file )
     <tr>
 
       <td>
@@ -56,7 +56,10 @@
         {{ $file->created_at->diffForHumans() }}
       </td>
     </tr>
-    @endforeach
+    @empty
+    No files yet
+
+    @endforelse
   </table>
 
   {!! $files->render() !!}

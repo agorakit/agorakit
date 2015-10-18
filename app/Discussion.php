@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
+use Auth;
 
 //use Comment;
 
@@ -45,6 +46,13 @@ class Discussion extends Model
       // The discussion list should load a count of unread replies instead, in a single query.
       // because else we do a query for eavery discussion to know the count. It smells
       // and we cannot order by unread discussions first...
+
+
+
+      if (\Auth::guest())
+      {
+        return 0;
+      }
       if (is_null($this->unreadcounter))
       {
 

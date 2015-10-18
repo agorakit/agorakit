@@ -16,7 +16,7 @@
       <div class="col-sm-4 col-md-3">
         <div class="thumbnail">
           <a href="{{ action('GroupController@show', $group->id) }}">
-          <img src="http://lorempixel.com/242/150/cats/{{ $group->id }}"/>
+          <img src="http://lorempixel.com/242/150/?id={{$group->id}}"/>
         </a>
           <div class="caption">
             <h4><a href="{{ action('GroupController@show', $group->id) }}">{{ $group->name }}</a></h4>

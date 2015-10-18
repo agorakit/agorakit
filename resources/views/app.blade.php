@@ -20,7 +20,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
         <!-- mobilizator specific css-->
-        {!! HTML::style('/css/all.css') !!}
+        {!! Html::style('/css/all.css') !!}
 
 
 

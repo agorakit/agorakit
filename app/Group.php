@@ -41,6 +41,17 @@ class Group extends Model
       return $this->hasMany('App\Discussion');
     }
 
+
+    /**
+     * Returns all the actions belonging to this group
+     *
+     */
+    public function actions()
+    {
+      return $this->hasMany('App\Action');
+    }
+
+
     public function files()
     {
       return $this->hasMany('App\File');
@@ -53,6 +64,8 @@ class Group extends Model
     */
     public function isMember(User $user = null)
     {
+
+
       if (is_null ($user))
       {
         $user = $user = Auth::user();
@@ -63,7 +76,7 @@ class Group extends Model
       if ($user)
       {
         $membership = \App\Membership::where('user_id', $user->id)->where('group_id', $this->id)->first();
-        
+
         if ($membership && $membership->membership > 1)
         {
           return true;

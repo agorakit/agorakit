@@ -1,3 +1,4 @@
+
 <?php
 
 /*
@@ -105,6 +106,15 @@ Route::post('groups/{group}/discussions/{discussion}/reply', 'CommentController@
 Route::get('groups/{group}/discussions/{discussion}/comment/{comment}/up', 'VoteController@up');
 Route::get('groups/{group}/discussions/{discussion}/comment/{comment}/down', 'VoteController@down');
 Route::get('groups/{group}/discussions/{discussion}/comment/{comment}/cancel', 'VoteController@cancel');
+
+
+// Actions
+Route::get('groups/{group}/actions', 'ActionController@index');
+Route::get('groups/{group}/actions/create', 'ActionController@create');
+Route::post('groups/{group}/actions/create', 'ActionController@store');
+Route::get('groups/{group}/actions/{action}', 'ActionController@show');
+Route::get('groups/{group}/actions/{action}/edit', 'ActionController@edit');
+Route::post('groups/{group}/actions/{action}', 'ActionController@update');
 
 
 // Files

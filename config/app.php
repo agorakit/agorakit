@@ -151,10 +151,10 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         // additional providers
-        Illuminate\Html\HtmlServiceProvider::class,
         Potsky\LaravelLocalizationHelpers\LaravelLocalizationHelpersServiceProviderLaravel5::class,
-
-        Intervention\Image\ImageServiceProvider::class
+        Intervention\Image\ImageServiceProvider::class,
+        MaddHatter\LaravelFullcalendar\ServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
     ],
 
     /*
@@ -203,10 +203,14 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
-        'Form'	    => Illuminate\Html\FormFacade::class,
-        'HTML'      => Illuminate\Html\HtmlFacade::class,
-        'Image' => Intervention\Image\Facades\Image::class
+        'Form' => Collective\Html\FormFacade::class,
+        'HTML' => Collective\Html\HtmlFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+        'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class
+
 
     ],
 
