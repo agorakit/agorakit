@@ -5,14 +5,14 @@
 @include('partials.grouptab')
 
 <div class="container">
-  <h2>Members of this group</h2>
+  <h2>{{ trans('messages.members_of_this_group') }}</h2>
 
 
 
     <table class="table table-hover">
       <tr>
-        <th>Name</th>
-        <th>Registration</th>
+        <th>{{ trans('messages.name') }}</th>
+        <th>{{ trans('messages.registration_time') }}</th>
       </tr>
 
       @foreach( $users as $user )

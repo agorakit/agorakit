@@ -2,7 +2,7 @@
         <div class="container-fluid">
           <div class="navbar-header">
             <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
-              <span class="sr-only">Toggle navigation</span>
+              <span class="sr-only">{{ trans('messages.toggle_navigation') }}</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
@@ -12,7 +12,7 @@
           <div class="navbar-collapse collapse" id="navbar">
             <ul class="nav navbar-nav">
               <li><a href="{{ url('/') }}">{{ trans('messages.home') }}</a></li>
-              <li><a href="{{ url('/') }}">Your groups</a></li>
+              <li><a href="{{ url('/') }}">{{ trans('messages.your_groups') }}</a></li>
 
 
 

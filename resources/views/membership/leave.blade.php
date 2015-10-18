@@ -4,19 +4,19 @@
 
 @include('partials.grouptab')
 
-<h1>Leaving {{$group->name}} group</h1>
+<h1>{{ trans('messages.leaving_the_group_called') }} {{$group->name}}</h1>
 
 <p>
-  We are sad to see you go... confirm that you want to leave this group. You won't receive notifications anymore.
+{{ trans('messages.leaving_help_message') }}
 </p>
 
 
 {!! Form::open(array('action' => ['MembershipController@destroy', $group->id])) !!}
 
 <div class="form-group">
-{!! Form::submit('Leave this group', ['class' => 'btn btn-primary form-control']) !!}
+{!! Form::submit(trans('messages.leave_this_group'), ['class' => 'btn btn-primary form-control']) !!}
 </div>
-<a href="{{url('/')}}">I changed my mind, I don't want to leave this group</a>
+<a href="{{url('/')}}">{{ trans('messages.i_changed_my_mind') }}</a>
 
 {!! Form::close() !!}
 

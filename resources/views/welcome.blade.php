@@ -2,10 +2,6 @@
 
 @section('content')
 
-
-
-
-
 @if ($user_logged)
 Dashboard here
 @else
@@ -15,6 +11,5 @@ Dashboard here
 
 <a class="btn btn-primary" href="{{ url('auth/login') }}" role="button"><span class="glyphicon glyphicon-off"></span> {{ trans('messages.login') }}</a>
 @endif
-
 
 @endsection
