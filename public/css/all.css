@@ -17,6 +17,18 @@ body
   width: 100%;
 }
 
+.group .summary
+{
+  height: 6em;
+  overflow: hidden;
+}
+
+.group h4
+{
+  height: 2.5em;
+  overflow: hidden;
+}
+
 /***************************** COMMENTS ***************************************/
 
 .comment
