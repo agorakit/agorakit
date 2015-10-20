@@ -8,7 +8,7 @@
   <h2>All the discussions in this group <a class="btn btn-primary btn-xs" href="{{ action('DiscussionController@create', $group->id ) }}">New discussion</a></h2>
 
     <table class="table table-hover">
-      @foreach( $discussions as $discussion )
+      @forelse( $discussions as $discussion )
       <tr>
         <td>
           <a href="{{ action('DiscussionController@show', [$group->id, $discussion->id]) }}">{{ $discussion->name }}</a>
@@ -38,7 +38,9 @@
         </td>
 
       </tr>
-      @endforeach
+      @empty
+        {{trans('messages.nothing_yet')}}
+      @endforelse
     </table>
 
     {!! $discussions->render() !!}

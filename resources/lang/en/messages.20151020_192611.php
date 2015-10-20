@@ -1,24 +1,21 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/10/20 19:26:09
+ Generated via "php artisan localization:missing" at 2015/10/20 19:23:24
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/index.blade.php
-  'all_the_groups_welcome' => 'Here are all the groups on this server.',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/index.blade.php
-  'create' => 'Create',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/index.blade.php
-  'groups' => 'Groups',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/show.blade.php
+  'nothing_yet' => 'There is nothing here...yet!',
   //==================================== Translations ====================================//
-  'actions' => 'Actions',
+  'actions' => 'actions',
   'change_my_password' => 'Change my password',
   'confirm_password' => 'Confirm password',
   'discussions' => 'discussions',
   'email' => 'Email',
   'files' => 'files',
   'forgotten_password' => 'Forgotten password',
+  'group' => 'group',
   'hello' => 'Hello',
   'home' => 'Home',
   'howdy' => 'Whoops!',
@@ -31,7 +28,6 @@ return array (
   'mail' => 'Email',
   'members_of_this_group' => 'members_of_this_group',
   'name' => 'Name',
-  'nothing_yet' => 'There is nothing here...yet!',
   'or' => 'or',
   'password' => 'Password',
   'password_reset' => 'Password reset',
@@ -43,6 +39,4 @@ return array (
   'toggle_navigation' => 'toggle_navigation',
   'users' => 'users',
   'your_groups' => 'your_groups',
-  //================================== Obsolete strings ==================================//
-  'group' => 'group',
 );

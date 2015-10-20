@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Group;
 use Auth;
+use Illuminate\Http\Request;
 
 class GroupController extends Controller {
 
   public function __construct()
   {
     $this->middleware('auth', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
-    $this->middleware('group.member', ['only' => ['store', 'edit', 'update', 'destroy']]);
+    $this->middleware('group.member', ['only' => ['edit', 'update', 'destroy']]);
   }
 
   /**
@@ -20,7 +21,7 @@ class GroupController extends Controller {
   */
   public function index()
   {
-    $groups = Group::paginate(12);
+    $groups = Group::orderBy('updated_at', 'desc')->paginate(12);
 
     return view('groups.index')
     ->with('groups', $groups);
@@ -33,7 +34,7 @@ class GroupController extends Controller {
   */
   public function create()
   {
-    return 'not yet'; // TODO
+    return view('groups.create');
   }
 
   /**
@@ -41,9 +42,32 @@ class GroupController extends Controller {
   *
   * @return Response
   */
-  public function store()
+  public function store(Request $request)
   {
+    $group = new group();
 
+
+   $group->name = $request->input('name');
+   $group->body = $request->input('body');
+
+
+
+   if ( $group->isInvalid())
+   {
+  // Oops.
+    return redirect()->action('groupController@create')
+      ->withErrors($group->getErrors())
+      ->withInput();
+   }
+
+   $group->save();
+
+   // make the current user a member of the group
+   $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
+   $membership->membership = 2;
+   $membership->save();
+
+   return redirect()->action('GroupController@show', [$group->id]);
   }
 
   /**

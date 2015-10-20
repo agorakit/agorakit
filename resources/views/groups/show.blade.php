@@ -13,7 +13,7 @@
 <h2>Latest <a href="{{ action('DiscussionController@index', [$group->id]) }}">discussions</a> in this group</h2>
 
 <table class="table table-hover">
-  @foreach( $discussions as $discussion )
+  @forelse( $discussions as $discussion )
   <tr>
     <td>
       <a href="{{ action('DiscussionController@show', [$group->id, $discussion->id]) }}">{{ $discussion->name }}</a>
@@ -28,7 +28,7 @@
     <td>
       <a href="{{ action('DiscussionController@show', [$group->id, $discussion->id]) }}">{{ $discussion->updated_at->diffForHumans() }}</a>
     </td>
-    
+
     <td>
       @if ($discussion->unReadCount() > 0)
       <i class="fa fa-comment"></i>
@@ -37,7 +37,9 @@
     </td>
 
   </tr>
-  @endforeach
+  @empty
+  {{trans('messages.nothing_yet')}}
+  @endforelse
 </table>
 
 
@@ -45,7 +47,7 @@
 
 <h2>Latest <a href="{{ action('FileController@index', [$group->id]) }}">files</a> in this group</h2>
 <table class="table table-hover">
-  @foreach ($files as $file)
+  @forelse ($files as $file)
   <tr>
     <td>
       <a href="{{ action('FileController@show', [$group->id, $file->id]) }}"><img src="{{ action('FileController@thumbnail', [$group->id, $file->id]) }}"/></a>
@@ -70,9 +72,10 @@
     </td>
 
   </tr>
+  @empty
+  {{trans('messages.nothing_yet')}}
 
-
-  @endforeach
+  @endforelse
 </table>
 
 

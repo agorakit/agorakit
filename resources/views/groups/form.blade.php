@@ -1,11 +1,9 @@
-{!! Form::open(array('route' => 'route.name', 'method' => 'POST')) !!}
-	<ul>
-		<li>
-			{!! Form::label('name', 'Name:') !!}
-			{!! Form::text('name') !!}
-		</li>
-		<li>
-			{!! Form::submit() !!}
-		</li>
-	</ul>
-{!! Form::close() !!}
+<div class="form-group">
+		{!! Form::label('name', trans('group.name')) !!}
+		{!! Form::text('name', null, ['class' => 'form-control']) !!}
+		</div>
+
+<div class="form-group">
+		{!! Form::label('body', trans('group.description')) !!}
+		{!! Form::textarea('body', null, ['class' => 'form-control']) !!}
+</div>

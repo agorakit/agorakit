@@ -11,8 +11,11 @@
           </div>
           <div class="navbar-collapse collapse" id="navbar">
             <ul class="nav navbar-nav">
+
+              <!--
               <li><a href="{{ url('/') }}">{{ trans('messages.home') }}</a></li>
               <li><a href="{{ url('/') }}">{{ trans('messages.your_groups') }}</a></li>
+            -->
 
 
 

@@ -1,9 +1,9 @@
 <div class="container">
 
 
-
-<h1><a href="{{ action('GroupController@index') }}">{{ trans('messages.group') }}</a> / {{ $group->name }}</h1>
-
+<div class="page-header">
+<h1><a href="{{ action('GroupController@index') }}">{{ trans('messages.groups') }}</a> / {{ $group->name }}</h1>
+</div>
 
 
 

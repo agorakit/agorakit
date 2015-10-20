@@ -57,7 +57,7 @@
       </td>
     </tr>
     @empty
-    No files yet
+    {{trans('messages.nothing_yet')}}
 
     @endforelse
   </table>
