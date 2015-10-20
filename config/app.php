@@ -155,6 +155,8 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         MaddHatter\LaravelFullcalendar\ServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+
+        Jenssegers\Date\DateServiceProvider::class,
     ],
 
     /*
@@ -209,7 +211,8 @@ return [
         'HTML' => Collective\Html\HtmlFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class
+        'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
+        'Date' => Jenssegers\Date\Date::class
 
 
     ],

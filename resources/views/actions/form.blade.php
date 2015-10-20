@@ -13,13 +13,13 @@
 
 
 <div class="form-group">
-		{!! Form::label('start', 'Start') !!}
-		{!! Form::input('date', 'start', \Carbon\Carbon::now(), ['class' => 'form-control']) !!}
+		{!! Form::label('start', 'Start') !!}<br/>
+		{!! Form::text('start', \Carbon\Carbon::now()->format('Y-m-d H:i') , ['class' => 'form-control', 'id' => 'start']) !!}
 
 		</div>
 
 
 		<div class="form-group">
-				{!! Form::label('stop', 'Stop') !!}
-				{!! Form::input('date', 'stop', \Carbon\Carbon::now(), ['class' => 'form-control']) !!}
+				{!! Form::label('stop', 'Stop') !!}<br/>
+				{!! Form::text('stop', null, ['class' => 'form-control' , 'id' => 'stop']) !!}
 				</div>

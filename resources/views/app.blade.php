@@ -43,7 +43,13 @@
   </div>
     @endif
 
+
+
+
             <div class="container">
+
+@include('partials.errors')
+
             @yield('content')
         </div>
 

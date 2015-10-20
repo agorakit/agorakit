@@ -5,9 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Action;
 use App\Group;
+use Carbon\Carbon;
 
 class ActionController extends Controller
 {
+
+  public function __construct()
+  {
+      $this->middleware('group.member', ['only' => ['post', 'create', 'store', 'edit', 'update', 'destroy']]);
+  }
+
     /**
    * Display a listing of the resource.
    *
@@ -48,17 +55,24 @@ class ActionController extends Controller
  public function store(Request $request, $group_id)
  {
 
+     $action = new Action();
 
 
-     $action = new Action(Request::all());
-
-     /*
      $action->name = $request->input('name');
      $action->body = $request->input('body');
-     */
+     $action->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start'));
+     $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop'));
 
-     $action->user()->associate(Auth::user());
 
+     $action->user()->associate($request->user());
+
+     if ( $action->isInvalid())
+     {
+    // Oops.
+      return redirect()->action('ActionController@create', $group_id)
+        ->withErrors($action->getErrors())
+        ->withInput();
+     }
 
      $group = Group::findOrFail($group_id);
      $group->actions()->save($action);

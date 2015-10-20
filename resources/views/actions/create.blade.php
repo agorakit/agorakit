@@ -6,36 +6,66 @@
 
 @section('footer')
 {!! HTML::script('/packages/datetimepicker/jquery.datetimepicker.full.min.js') !!}
+
 <script>
+$.datetimepicker.setLocale('{{App::getLocale()}}');
 
 /*
-TODO locale :
-*/
-$.datetimepicker.setLocale('fr');
+jQuery(function(){
+  jQuery('#start').datetimepicker({
+    format:'Y-m-d H:i',
+    step: 30,
+    dayOfWeekStart: 1,
+    onShow:function( ct ){
+      this.setOptions({
+        maxDate:jQuery('#stop').val()?jQuery('#stop').val():false
+      })
+    }
 
-jQuery('input[name=start]').datetimepicker({
-  format:'Y-d-m H:i',
-  lang: 'fr',
-  step: 30
+  });
+  jQuery('#stop').datetimepicker({
+    format:'Y-m-d H:i',
+    step: 30,
+    dayOfWeekStart: 1,
+    onShow:function( ct ){
+      this.setOptions({
+        minDate:jQuery('#start').val()?jQuery('#start').val():false
+      })
+    }
 
-
+  });
 });
+*/
 
-jQuery('input[name=stop]').datetimepicker({
-  format:'Y-d-m H:i',
-  step: 30
+jQuery(function(){
+  jQuery('#start').datetimepicker({
+    format:'Y-m-d H:i',
+    step: 30,
+    dayOfWeekStart: 1
+  });
 
-}).setLocale('fr');
+  jQuery('#stop').datetimepicker({
+    format:'Y-m-d H:i',
+    step: 30,
+    dayOfWeekStart: 1,
+    onShow:function( ct ){
+      this.setOptions({
+        minDate:jQuery('#start').val()
+      })
+    }
+
+  });
+});
 
 
 </script>
+
+
+
 @stop
 
 
-
 @section('content')
-
-<input id="datetimepicker" type="text" >
 
 
 
@@ -53,9 +83,10 @@ jQuery('input[name=stop]').datetimepicker({
 </div>
 
 
+
 {!! Form::close() !!}
 
-@include('partials.errors')
+
 
 
 
