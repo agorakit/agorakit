@@ -1,11 +1,11 @@
 @extends('app')
 
 @section('head')
-{!! HTML::style('/packages/datetimepicker/jquery.datetimepicker.css') !!}
+{!! Html::style('/packages/datetimepicker/jquery.datetimepicker.css') !!}
 @stop
 
 @section('footer')
-{!! HTML::script('/packages/datetimepicker/jquery.datetimepicker.full.min.js') !!}
+{!! Html::script('/packages/datetimepicker/jquery.datetimepicker.full.min.js') !!}
 
 <script>
 $.datetimepicker.setLocale('{{App::getLocale()}}');

@@ -1,18 +1,18 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/10/20 20:11:41
+ Generated via "php artisan localization:missing" at 2015/10/20 19:26:09
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
   // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/index.blade.php
-  'create_a_group_button' => 'Créer un groupe',
+  'join' => 'Join',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/index.blade.php
+  'leave' => 'Leave',
   //==================================== Translations ====================================//
-  'create_button' => 'Créer le groupe',
-  'create_group_title' => 'Créer un groupe',
-  'description' => 'Description du groupe',
-  'join' => 'Rejoindre',
-  'leave' => 'Quitter',
-  'name' => 'Nom du groupe',
-  'no_group_yet' => 'Il n\'y a pas encore de groupe sur ce serveur. Allez-y !',
+  'create_button' => 'Create the group',
+  'create_group_title' => 'Create a new group',
+  'description' => 'Group description',
+  'name' => 'Group name',
+  'no_group_yet' => 'no_group_yet',
 );

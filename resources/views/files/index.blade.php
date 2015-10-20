@@ -1,12 +1,12 @@
 @extends('app')
 
 @section('head')
-{!! HTML::style('/packages/dropzone/dropzone.css') !!}
+{!! Html::style('/packages/dropzone/dropzone.css') !!}
 @stop
 
 @section('footer')
-{!! HTML::script('/packages/dropzone/dropzone.js') !!}
-{!! HTML::script('/js/dropzone-config.js') !!}
+{!! Html::script('/packages/dropzone/dropzone.js') !!}
+{!! Html::script('/js/dropzone-config.js') !!}
 @stop
 
 

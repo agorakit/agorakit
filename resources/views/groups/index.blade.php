@@ -8,8 +8,8 @@
 <div class="container">
 
   <div class="page-header">
-    <h1>{{ trans('messages.groups') }} <a href="{{ action('GroupController@create') }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i>
-      {{ trans('messages.create') }}</a></h1>
+    <h1>{{ trans('messages.groups') }} <a href="{{ action('GroupController@create') }}" class="btn btn-primary"><i class="fa fa-bolt"></i>
+      {{ trans('group.create_a_group_button') }}</a></h1>
     </div>
 
     <p>{{ trans('messages.all_the_groups_welcome') }}</p>
@@ -27,7 +27,7 @@
               <p class="summary">{{ str_limit($group->body, 100) }}</p>
               <p>
                 @if ($group->isMember())
-                <td><a class="btn btn-default" href="{{ action('MembershipController@leave', $group->id) }}">{{ trans('group.leave') }}</a></td>
+                <td><a class="btn btn-default" href="{{ action('MembershipController@leave', $group->id) }}"><i class="fa fa-sign-out"></i>{{ trans('group.leave') }}</a></td>
                 @else
                 <td><a class="btn btn-primary" href="{{ action('MembershipController@join', $group->id) }}"><i class="fa fa-sign-in"></i>
                   {{ trans('group.join') }}</a></td>
@@ -48,7 +48,7 @@
 
     </div>
 
-    {!! HTML::script('/packages/jscroll/jquery.jscroll.min.js') !!}
+    {!! Html::script('/packages/jscroll/jquery.jscroll.min.js') !!}
 
     <script>
     $(document).ready(function(){

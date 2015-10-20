@@ -5,7 +5,9 @@
 @include('partials.grouptab')
 
 <div class="container">
-  <h2>All the discussions in this group <a class="btn btn-primary btn-xs" href="{{ action('DiscussionController@create', $group->id ) }}">New discussion</a></h2>
+  <h2>{{trans('discussion.all_in_this_group')}} <a class="btn btn-primary btn-xs" href="{{ action('DiscussionController@create', $group->id ) }}">
+    <i class="fa fa-plus"></i>
+{{trans('discussion.create_one_button')}}</a></h2>
 
     <table class="table table-hover">
       @forelse( $discussions as $discussion )

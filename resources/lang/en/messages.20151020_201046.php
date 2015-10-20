@@ -1,19 +1,24 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/10/20 20:16:23 
+ Generated via "php artisan localization:missing" at 2015/10/20 19:26:09
 *************************************************************************/
 
 return array (
+  //============================== New strings to translate ==============================//
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/index.blade.php
+  'all_the_groups_welcome' => 'Here are all the groups on this server.',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/index.blade.php
+  'create' => 'Create',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/index.blade.php
+  'groups' => 'Groups',
   //==================================== Translations ====================================//
   'actions' => 'Actions',
-  'all_the_groups_welcome' => 'Here are all the groups on this server.',
   'change_my_password' => 'Change my password',
   'confirm_password' => 'Confirm password',
   'discussions' => 'discussions',
   'email' => 'Email',
   'files' => 'files',
   'forgotten_password' => 'Forgotten password',
-  'groups' => 'Groups',
   'hello' => 'Hello',
   'home' => 'Home',
   'howdy' => 'Whoops!',
@@ -39,6 +44,5 @@ return array (
   'users' => 'users',
   'your_groups' => 'your_groups',
   //================================== Obsolete strings ==================================//
-  'create' => 'Create',
-  'group' => 'Group',
+  'group' => 'group',
 );

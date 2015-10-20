@@ -69,7 +69,7 @@ class DiscussionController extends Controller
 
         if ($id) {
             $group = Group::findOrFail($id);
-            $discussions = $group->discussions()->orderBy('updated_at', 'desc')->paginate(10);
+            $discussions = $group->discussions()->orderBy('updated_at', 'desc')->paginate(50);
 
 
             return view('discussions.index')

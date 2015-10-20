@@ -6,7 +6,7 @@ use App\Group;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Image;
-use File;
+use App\File;
 use Auth;
 use Storage;
 
