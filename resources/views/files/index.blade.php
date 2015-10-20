@@ -5,7 +5,7 @@
 @stop
 
 @section('footer')
-{!! Html::script('/packages/dropzone/dropzone.js') !!}
+{!! Html::script('/packages/dropzone/dropzones.js') !!}
 {!! Html::script('/js/dropzone-config.js') !!}
 @stop
 
