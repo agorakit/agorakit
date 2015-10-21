@@ -47,6 +47,9 @@
       </div>
 
     </div>
+    @endsection
+
+    @section('footer')
 
     {!! Html::script('/packages/jscroll/jquery.jscroll.min.js') !!}
 
@@ -73,10 +76,4 @@
       });
     });
     </script>
-
-
-
-
-
-
     @endsection

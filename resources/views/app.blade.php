@@ -3,9 +3,9 @@
 
     <head>
         <meta charset="UTF-8"/>
+        <meta name=viewport content="width=device-width, initial-scale=1">
         <title>Mobilizator</title>
         <!-- Bootstrap -->
-
         <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/yeti/bootstrap.min.css">
         <!-- other candidates include simplex and united -->
@@ -14,11 +14,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
 
-        <!-- Jquery -->
-        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 
 
@@ -26,10 +22,6 @@
         <!-- mobilizator specific css-->
         {!! Html::style('/css/all.css') !!}
 
-
-
-        <!-- CKeditor -->
-        <script src="//cdn.ckeditor.com/4.5.3/standard/ckeditor.js"></script>
 
         @yield('head')
 
@@ -57,7 +49,20 @@
             @yield('content')
         </div>
 
+
+        <!-- Jquery -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
+
+        <!-- CKeditor -->
+        <!--<script src="//cdn.ckeditor.com/4.5.3/standard/ckeditor.js"></script>-->
+
         @yield('footer')
+
 
     </body>
 
