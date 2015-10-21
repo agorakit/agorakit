@@ -5,6 +5,10 @@ use Illuminate\Http\Request;
 class MembershipController extends Controller {
 
 
+  public function __construct()
+  {
+    $this->middleware('auth', ['only' => ['join', 'leave', 'settings', 'store', 'edit', 'update', 'destroy']]);
+  }
 
   /**
   * Show a settings screen for a specific group. Allows a user to join, leave, set subscribe settings
@@ -85,6 +89,34 @@ class MembershipController extends Controller {
     $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group_id]);
 
     $membership->membership = 2;
+
+    //dd($request->all());
+
+    switch ($request->get('notifications'))
+    {
+    case "hourly":
+      $membership->notifications = 60;
+      break;
+      case "daily":
+        $membership->notifications = 60*24;
+        break;
+      case "weekly":
+        $membership->notifications = 60*24*7;
+        break;
+      case "biweekly":
+        $membership->notifications = 60*24*14;
+        break;
+      case "monthly":
+        $membership->notifications = 60*24*30;
+        break;
+      case "never":
+        $membership->notifications = -1;
+        break;
+    }
+
+
+
+
     $membership->save();
     return redirect()->action('GroupController@show', [$group->id])->with('message', 'Welcome to this group');
 
