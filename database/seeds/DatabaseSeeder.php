@@ -36,9 +36,10 @@ class DatabaseSeeder extends Seeder
         DB::table('groups')->delete();
       DB::table('membership')->delete();
 
-      for ($i = 1; $i <= 10; ++$i) {
+      for ($i = 1; $i <= 3; ++$i) {
           $group = App\Group::create([
-            'name' => $faker->city.'\'s user group',
+            //'name' => $faker->city.'\'s user group',
+            'name' => 'Group nr ' . $i,
             'body' => $faker->text,
             ]);
             // attach one random member to each group
@@ -47,7 +48,7 @@ class DatabaseSeeder extends Seeder
 
           // discussions
           DB::table('discussions')->delete();
-      for ($i = 1; $i <= 100; ++$i) {
+      for ($i = 1; $i <= 1000; ++$i) {
           $discussion = App\Discussion::create([
               'name' => $faker->city,
               'body' => $faker->text,
@@ -60,7 +61,7 @@ class DatabaseSeeder extends Seeder
 
             // comments
             DB::table('comments')->delete();
-      for ($i = 1; $i <= 500; ++$i) {
+      for ($i = 1; $i <= 5000; ++$i) {
           $comment = new \App\Comment();
           $comment->body = $faker->text;
           $comment->user_id = App\User::orderByRaw('RAND()')->first()->id;

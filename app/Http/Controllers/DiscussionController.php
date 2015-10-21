@@ -13,94 +13,128 @@ class DiscussionController extends Controller
 {
 
 
-    public function __construct()
-    {
-        $this->middleware('group.member', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
-        $this->middleware('cacheforanonymous', ['only' => ['index', 'show']]);
+  public function __construct()
+  {
+    $this->middleware('auth', ['only' => ['indexUnRead']]);
+    $this->middleware('group.member', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
+    $this->middleware('cacheforanonymous', ['only' => ['index', 'show']]);
+  }
+
+
+  public function indexUnRead($id = null)
+  {
+
+    if ($id) {
+      $group = Group::findOrFail($id);
+      $discussions = $group->discussions()
+      ->select('discussions.*')
+      ->leftJoin('user_read_discussion', function($join)
+      {
+        $join->on('user_read_discussion.discussion_id', '=', 'discussions.id')
+        ->where('user_read_discussion.user_id', '=', \Auth::user()->id)
+        ->on('user_read_discussion.read_at', '>=', 'discussions.created_at');
+      })
+      ->whereNull('user_read_discussion.id')
+
+      ->orderBy('discussions.updated_at', 'desc')->paginate(10);
+
+      //$discussions->load('comments');
+
+      return view('discussions.index')
+      ->with('discussions', $discussions)
+      ->with('group', $group)
+      ->with('tab', 'discussion');
     }
-
-
-    public function indexUnRead($id)
+    else
     {
 
-      if ($id) {
-          $group = Group::findOrFail($id);
-          $discussions = $group->discussions()
-          ->select('discussions.*')
-          ->leftJoin('user_read_discussion', function($join)
-          {
-            $join->on('user_read_discussion.discussion_id', '=', 'discussions.id')
-            ->where('user_read_discussion.user_id', '=', \Auth::user()->id)
-            ->on('user_read_discussion.read_at', '>=', 'discussions.created_at');
-          })
-          ->whereNull('user_read_discussion.id')
+      // this is so far the hardest (and ugliest) part :
 
-          ->orderBy('discussions.updated_at', 'desc')->paginate(10);
+      $discussions =   \App\Discussion::hydrateRaw('SELECT *
+        FROM discussions
+        WHERE group_id
+        in (
+          SELECT membership.group_id
+          FROM membership
+          WHERE membership.user_id = :user_id_one
+        ) and discussions.id
+        in (
+          select comments.discussion_id from comments
+          left join `user_read_discussion`
+          on `user_read_discussion`.`discussion_id` = `comments`.`discussion_id`
+          and `user_read_discussion`.`user_id` = :user_id_two
+          and `user_read_discussion`.`read_at` >= `comments`.`created_at`
+          where `comments`.`deleted_at` is null and `comments`.`discussion_id` = discussions.id
+          and `comments`.`discussion_id` is not null and `user_read_discussion`.`id`
+          is null)', ['user_id_one' => Auth::user()->id, 'user_id_two' => Auth::user()->id]);
 
-          //$discussions->load('comments');
 
-          return view('discussions.index')
-          ->with('discussions', $discussions)
-          ->with('group', $group)
-          ->with('tab', 'discussion');
+
+
+          return view('discussions.general_index')
+          ->with('discussions', $discussions);
+        }
+
+
+
+
+
+
       }
 
 
-}
-
-
-    /**
-    * Display a listing of the resource.
-    *
-    * @return Response
-    */
-    public function index($id)
-    {
+      /**
+      * Display a listing of the resource.
+      *
+      * @return Response
+      */
+      public function index($id)
+      {
         /*
         At some point something like that might be usefull to return all the unread topics :
 
         SELECT COUNT(comments.id) AS count
-                      FROM comments
-                      INNER JOIN discussions ON comments.commentable_id = 90
-                      LEFT JOIN user_read_discussion h ON comments.commentable_id = h.discussion_id AND h.user_id = 11
-                      WHERE (comments.created_at > h.read_at OR h.read_at IS NULL)
+        FROM comments
+        INNER JOIN discussions ON comments.commentable_id = 90
+        LEFT JOIN user_read_discussion h ON comments.commentable_id = h.discussion_id AND h.user_id = 11
+        WHERE (comments.created_at > h.read_at OR h.read_at IS NULL)
 
         */
 
 
         if ($id) {
-            $group = Group::findOrFail($id);
-            $discussions = $group->discussions()->orderBy('updated_at', 'desc')->paginate(50);
+          $group = Group::findOrFail($id);
+          $discussions = $group->discussions()->orderBy('updated_at', 'desc')->paginate(50);
 
 
-            return view('discussions.index')
-            ->with('discussions', $discussions)
-            ->with('group', $group)
-            ->with('tab', 'discussion');
+          return view('discussions.index')
+          ->with('discussions', $discussions)
+          ->with('group', $group)
+          ->with('tab', 'discussion');
         }
-    }
+      }
 
-    /**
-    * Show the form for creating a new resource.
-    *
-    * @return Response
-    */
-    public function create(Request $request, $group_id)
-    {
+      /**
+      * Show the form for creating a new resource.
+      *
+      * @return Response
+      */
+      public function create(Request $request, $group_id)
+      {
         $group = Group::findOrFail($group_id);
 
         return view('discussions.create')
         ->with('group', $group)
         ->with('tab', 'discussion');
-    }
+      }
 
-    /**
-    * Store a newly created resource in storage.
-    *
-    * @return Response
-    */
-    public function store(Request $request, $group_id)
-    {
+      /**
+      * Store a newly created resource in storage.
+      *
+      * @return Response
+      */
+      public function store(Request $request, $group_id)
+      {
         $discussion = new Discussion();
         $discussion->name = $request->input('name');
         $discussion->body = $request->input('body');
@@ -113,17 +147,17 @@ class DiscussionController extends Controller
         $group->discussions()->save($discussion);
 
         return redirect()->action('DiscussionController@index', [$group->id]);
-    }
+      }
 
-    /**
-    * Display the specified resource.
-    *
-    * @param  int  $id
-    *
-    * @return Response
-    */
-    public function show($group_id, $discussion_id)
-    {
+      /**
+      * Display the specified resource.
+      *
+      * @param  int  $id
+      *
+      * @return Response
+      */
+      public function show($group_id, $discussion_id)
+      {
         $discussion = Discussion::findOrFail($discussion_id);
         $group = Group::findOrFail($group_id);
 
@@ -133,9 +167,9 @@ class DiscussionController extends Controller
 
         if (Auth::user())
         {
-            $UserReadDiscussion = \App\UserReadDiscussion::firstOrNew(['discussion_id' => $discussion->id, 'user_id' => Auth::user()->id]);
-            $UserReadDiscussion->read_at = Carbon::now();
-            $UserReadDiscussion->save();
+          $UserReadDiscussion = \App\UserReadDiscussion::firstOrNew(['discussion_id' => $discussion->id, 'user_id' => Auth::user()->id]);
+          $UserReadDiscussion->read_at = Carbon::now();
+          $UserReadDiscussion->save();
         }
 
         //$comments = $discussion->comments;
@@ -143,17 +177,17 @@ class DiscussionController extends Controller
         ->with('discussion', $discussion)
         ->with('group', $group)
         ->with('tab', 'discussion');
-    }
+      }
 
-    /**
-    * Show the form for editing the specified resource.
-    *
-    * @param  int  $id
-    *
-    * @return Response
-    */
-    public function edit(Request $request, $group_id, $discussion_id)
-    {
+      /**
+      * Show the form for editing the specified resource.
+      *
+      * @param  int  $id
+      *
+      * @return Response
+      */
+      public function edit(Request $request, $group_id, $discussion_id)
+      {
         $discussion = Discussion::findOrFail($discussion_id);
         $group = $discussion->group;
 
@@ -162,17 +196,17 @@ class DiscussionController extends Controller
         ->with('group', $group)
         ->with('tab', 'discussion');
 
-    }
+      }
 
-    /**
-    * Update the specified resource in storage.
-    *
-    * @param  int  $id
-    *
-    * @return Response
-    */
-    public function update(Request $request, $group_id, $discussion_id)
-    {
+      /**
+      * Update the specified resource in storage.
+      *
+      * @param  int  $id
+      *
+      * @return Response
+      */
+      public function update(Request $request, $group_id, $discussion_id)
+      {
         $discussion = Discussion::findOrFail($discussion_id);
         $discussion->name = $request->input('name');
         $discussion->body = $request->input('body');
@@ -182,16 +216,16 @@ class DiscussionController extends Controller
         $discussion->save();
 
         return redirect()->action('DiscussionController@show', [$discussion->group->id]);
-    }
+      }
 
-    /**
-    * Remove the specified resource from storage.
-    *
-    * @param  int  $id
-    *
-    * @return Response
-    */
-    public function destroy($id)
-    {
+      /**
+      * Remove the specified resource from storage.
+      *
+      * @param  int  $id
+      *
+      * @return Response
+      */
+      public function destroy($id)
+      {
+      }
     }
-}

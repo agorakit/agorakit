@@ -20,8 +20,10 @@ class CacheForAnonymous
 
          if (Auth::guest())
          {
-         $response->header('Cache-Control', 'no-transform,public,max-age=300,s-maxage=900');
-         //$response->header('another header', 'another value');
+
+           // early optimization is the root of all evil. turning off this for now
+         //$response->header('Cache-Control', 'no-transform,public,max-age=300,s-maxage=900');
+
          }
          return $response;
      }

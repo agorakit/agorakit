@@ -114,9 +114,6 @@ class MembershipController extends Controller {
         break;
     }
 
-
-
-
     $membership->save();
     return redirect()->action('GroupController@show', [$group->id])->with('message', 'Welcome to this group');
 
@@ -173,7 +170,7 @@ class MembershipController extends Controller {
   {
 
     // load or create membership for this group and user combination
-    $membership = \App\Membership::findOrFail(['user_id' => $request->user()->id, 'group_id' => $group_id]);
+    $membership = \App\Membership::where(['user_id' => $request->user()->id, 'group_id' => $group_id])->firstOrFail();
     $membership->membership = -1;
     $membership->save();
     return redirect()->action('GroupController@index');

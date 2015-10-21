@@ -1,0 +1,72 @@
+
+Attempts at understanding queries...
+
+
+
+
+This one works :
+---------------
+Get all the unread discussions of a user only for the groups he is a member of...
+
+SELECT *
+FROM discussions
+WHERE group_id
+in (
+SELECT membership.group_id
+FROM membership
+WHERE membership.user_id = 235
+) and discussions.id
+in (
+select comments.discussion_id from comments
+left join `user_read_discussion`
+on `user_read_discussion`.`discussion_id` = `comments`.`discussion_id`
+and `user_read_discussion`.`user_id` = '235'
+and `user_read_discussion`.`read_at` >= `comments`.`created_at`
+where `comments`.`deleted_at` is null and `comments`.`discussion_id` = discussions.id
+and `comments`.`discussion_id` is not null and `user_read_discussion`.`id`
+is null)
+
+
+/* Selectionnner tous les commentaires auxquels quelqu'un est abonné */
+SELECT *
+from comments
+where discussion_id
+in
+(
+select discussion_id FROM discussions
+WHERE group_id
+in (
+SELECT membership.group_id
+FROM membership
+WHERE membership.user_id =235
+)
+)
+
+
+/* Selectionnner toutes les discussions auxquelles quelqu'un est abonné */
+SELECT *
+FROM discussions
+WHERE group_id
+in (
+SELECT membership.group_id
+FROM membership
+WHERE membership.user_id =235
+)
+
+
+
+
+
+// get all discussions unread by a user ? : does't work
+$discussions = \App\Discussion::with('group')->select('discussions.*')
+->leftJoin('user_read_discussion', function($join)
+{
+  $join->on('user_read_discussion.discussion_id', '=', 'discussions.id')
+  ->where('user_read_discussion.user_id', '=', \Auth::user()->id)
+  ->on('user_read_discussion.read_at', '>=', 'discussions.created_at');
+})
+->whereNull('user_read_discussion.id')
+
+->orderBy('discussions.updated_at', 'desc')->paginate(50);
+return view('discussions.general_index')
+->with('discussions', $discussions);

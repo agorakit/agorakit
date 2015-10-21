@@ -95,6 +95,9 @@ Route::get('groups/{group}/discussions/{discussion}/edit', 'DiscussionController
 Route::post('groups/{group}/discussions/{discussion}', 'DiscussionController@update');
 
 
+// general unread stuff summary
+Route::get('unread', 'DiscussionController@indexUnRead');
+
 
 // Comments
 // type can be curently 'discussion'
@@ -130,7 +133,7 @@ Route::get('users/{id}', 'UserController@show');
 Route::get('groups/{group}/users', 'UserController@index');
 
 
-Route::get('unread', 'CommentController@unRead');
+//Route::get('unread', 'CommentController@unRead');
 
 
 // no magic like this :
