@@ -16,6 +16,7 @@ class FileController extends Controller
   public function __construct()
   {
     $this->middleware('group.member', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
+    $this->middleware('cacheforanonymous', ['only' => ['index', 'show']]);
   }
 
   /**

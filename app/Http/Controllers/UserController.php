@@ -2,6 +2,12 @@
 
 class UserController extends Controller {
 
+
+  public function __construct()
+  {
+    $this->middleware('cacheforanonymous', ['only' => ['index', 'show']]);
+  }
+
   /**
    * Display a listing of the resource.
    *
