@@ -106,8 +106,16 @@ class DiscussionController extends Controller
         if ($id) {
           $group = Group::findOrFail($id);
           //$discussions = $group->discussions()->with('userReadDiscussion')->orderBy('updated_at', 'desc')->paginate(50);
-          $discussions = $group->discussions()->orderBy('updated_at', 'desc')->paginate(50);
 
+          //$discussions = $group->discussions()->orderBy('updated_at', 'desc')->paginate(50);
+
+
+          $discussions = $group->discussions()->with(['userReadDiscussion' => function($query)
+          {
+            $query->where('user_id', '=', Auth::user()->id);
+          }])->paginate(50);
+
+          //dd($discussions);
 
           return view('discussions.index')
           ->with('discussions', $discussions)

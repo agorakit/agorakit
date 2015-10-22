@@ -47,7 +47,18 @@ class Discussion extends Model
     }
 
         if (is_null($this->unreadcounter)) {
-            $counter = $this->userReadDiscussion()->where('user_id', '=', Auth::user()->id)->first();
+
+            if ($this->relationLoaded('userReadDiscussion'))
+            {
+              $counter = $this->userReaddiscussion->first();
+            }
+            else
+            {
+              dd('prout');
+              $counter = $this->userReadDiscussion()->where('user_id', '=', Auth::user()->id)->first();
+            }
+
+
 
 
             /*$counter = \App\UserReadDiscussion::where('user_id', '=', Auth::user()->id)
