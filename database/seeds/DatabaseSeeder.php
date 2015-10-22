@@ -5,18 +5,18 @@ use Faker\Factory as Faker;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-   * Run the database seeds.
-   */
+  /**
+  * Run the database seeds.
+  */
   public function run()
   {
-      $faker = Faker::create();
+    $faker = Faker::create();
 
     // create 10 users
     DB::table('users')->delete();
 
-      for ($i = 1; $i <= 10; ++$i) {
-          App\User::create([
+    for ($i = 1; $i <= 1; ++$i) {
+      App\User::create([
         'email' => $faker->email,
         'password' => bcrypt('secret'),
         'username' => $faker->name,
@@ -34,9 +34,9 @@ class DatabaseSeeder extends Seeder
 
         // create 10 groups
         DB::table('groups')->delete();
-      DB::table('membership')->delete();
+        DB::table('membership')->delete();
 
-      for ($i = 1; $i <= 3; ++$i) {
+        for ($i = 1; $i <= 3; ++$i) {
           $group = App\Group::create([
             //'name' => $faker->city.'\'s user group',
             'name' => 'Group nr ' . $i,
@@ -44,28 +44,34 @@ class DatabaseSeeder extends Seeder
             ]);
             // attach one random member to each group
             $group->users()->attach(App\User::orderByRaw('RAND()')->first());
-      }
+          }
 
-          // discussions
+          // discussions & comments
           DB::table('discussions')->delete();
-      for ($i = 1; $i <= 1000; ++$i) {
-          $discussion = App\Discussion::create([
+          DB::table('comments')->delete();
+
+          for ($i = 1; $i <= 10; ++$i) {
+            $discussion = App\Discussion::create([
               'name' => $faker->city,
               'body' => $faker->text,
               ]);
               // attach one random author & group to each discussion
               $discussion->user_id = App\User::orderByRaw('RAND()')->first()->id;
-          $discussion->group_id = App\Group::orderByRaw('RAND()')->first()->id;
-          $discussion->save();
-      }
+              $discussion->group_id = App\Group::orderByRaw('RAND()')->first()->id;
+              $discussion->save();
 
-            // comments
-            DB::table('comments')->delete();
-      for ($i = 1; $i <= 5000; ++$i) {
-          $comment = new \App\Comment();
-          $comment->body = $faker->text;
-          $comment->user_id = App\User::orderByRaw('RAND()')->first()->id;
-          App\Discussion::orderByRaw('RAND()')->first()->comments()->save($comment);
-      }
-  }
-}
+              // Add 10 comments to each discussion
+
+              for ($j = 1; $j <= 10; ++$j) {
+                $comment = new \App\Comment();
+                $comment->body = $faker->text;
+                $comment->user_id = App\User::orderByRaw('RAND()')->first()->id;
+                $discussion->reply($comment);
+              }
+
+
+            }
+
+
+          }
+        }

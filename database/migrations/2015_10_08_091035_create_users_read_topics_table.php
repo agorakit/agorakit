@@ -19,13 +19,14 @@ class CreateUsersReadTopicsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned()->references('id')->on('users');
             $table->integer('discussion_id')->unsigned()->references('id')->on('discussions');
-            $table->dateTime('read_at');
+            $table->integer('read_comments')->unsigned();
+            $table->dateTime('read_at'); // candidate for suppression
 
             $table->unique(['user_id', 'discussion_id']);
-
             $table->index('user_id');
             $table->index('discussion_id');
-            $table->index('read_at');
+            $table->index('read_at'); // candidate for suppression
+            $table->index('read_comments');
         });
     }
 

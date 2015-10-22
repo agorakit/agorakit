@@ -141,6 +141,10 @@ class CommentController extends Controller
           $discussion = \App\Discussion::findOrFail($id);
           $discussion->comments()->save($comment);
 
+          $discussion->total_comments ++;
+          $discussion->save();
+
+
           $group = $discussion->group;
 
           return redirect()->action('DiscussionController@show', [$group->id, $discussion->id]);
@@ -157,7 +161,8 @@ class CommentController extends Controller
         $comment->user()->associate(\Auth::user());
 
         $discussion = \App\Discussion::findOrFail($discussion_id);
-        $discussion->comments()->save($comment);
+
+        $discussion->reply($comment);
 
         $group = $discussion->group;
 

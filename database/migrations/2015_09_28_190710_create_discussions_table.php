@@ -15,6 +15,7 @@ class CreateDiscussionsTable extends Migration {
 			$table->text('body');
 			$table->integer('group_id')->unsigned();
 			$table->integer('user_id')->unsigned();
+			$table->integer('total_comments')->unsigned();
 		});
 	}
 

@@ -50,23 +50,24 @@ class DiscussionController extends Controller
 
       // this is so far the hardest (and ugliest) part :
 
-      $discussions =   \App\Discussion::hydrateRaw('SELECT *
+      $discussions =   \App\Discussion::hydrateRaw('
+        SELECT *,
+        (
+          select user_read_discussion.read_comments
+          from user_read_discussion
+          where user_read_discussion.user_id = :user_id_one
+          and user_read_discussion.discussion_id = discussions.id
+        ) as read_comments
+
         FROM discussions
         WHERE group_id
         in (
           SELECT membership.group_id
           FROM membership
-          WHERE membership.user_id = :user_id_one
-        ) and discussions.id
-        in (
-          select comments.discussion_id from comments
-          left join `user_read_discussion`
-          on `user_read_discussion`.`discussion_id` = `comments`.`discussion_id`
-          and `user_read_discussion`.`user_id` = :user_id_two
-          and `user_read_discussion`.`read_at` >= `comments`.`created_at`
-          where `comments`.`deleted_at` is null and `comments`.`discussion_id` = discussions.id
-          and `comments`.`discussion_id` is not null and `user_read_discussion`.`id`
-          is null)', ['user_id_one' => Auth::user()->id, 'user_id_two' => Auth::user()->id]);
+          WHERE membership.user_id = :user_id_two
+          and membership.membership > 0
+        )'
+        , ['user_id_one' => Auth::user()->id, 'user_id_two' => Auth::user()->id]);
 
 
 
@@ -104,6 +105,7 @@ class DiscussionController extends Controller
 
         if ($id) {
           $group = Group::findOrFail($id);
+          //$discussions = $group->discussions()->with('userReadDiscussion')->orderBy('updated_at', 'desc')->paginate(50);
           $discussions = $group->discussions()->orderBy('updated_at', 'desc')->paginate(50);
 
 
@@ -168,7 +170,8 @@ class DiscussionController extends Controller
         if (Auth::user())
         {
           $UserReadDiscussion = \App\UserReadDiscussion::firstOrNew(['discussion_id' => $discussion->id, 'user_id' => Auth::user()->id]);
-          $UserReadDiscussion->read_at = Carbon::now();
+          //$UserReadDiscussion->read_at = Carbon::now();
+          $UserReadDiscussion->read_comments = $discussion->total_comments;
           $UserReadDiscussion->save();
         }
 
