@@ -108,8 +108,8 @@ class MembershipController extends Controller
   */
   public function invite(Request $request, $group_id)
   {
-
-    // TODO : only confirmed users
+    // TODO : only confirmed users should be able to mass invite
+    // Explain that on the form
     $group = \App\Group::findOrFail($group_id);
     return view('membership.invite')
     ->with('group', $group);
@@ -124,9 +124,22 @@ class MembershipController extends Controller
   */
   public function sendInvites(Request $request, $group_id)
   {
+
+    return 'not yet';
+    // don't send anything if it's dev.
+
     // extract emails
 
+    // If it's a mass invite, only confirmed people can do that
+
+    // for each invite email,
+    // - check that the user has not been invited yet
+    // - create an invite token and store in membership table
+    // - send invitation email
+    // - add row to membership table
+    // - queue or wathever if more than 50 mails for instance
     //
+    // show success screen
   }
 
 

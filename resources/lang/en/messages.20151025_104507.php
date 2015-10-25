@@ -1,13 +1,21 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/10/25 10:45:04 
+ Generated via "php artisan localization:missing" at 2015/10/25 10:20:00
 *************************************************************************/
 
 return array (
+  //============================== New strings to translate ==============================//
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/membership/invite.blade.php
+  'cancel' => 'I changed my mind, cancel',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/partials/grouptab.blade.php
+  'members' => 'Members',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/discussions/general_index.blade.php
+  'unread_discussions' => 'Unread discussions',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/partials/nav.blade.php
+
   //==================================== Translations ====================================//
   'actions' => 'Actions',
   'all_the_groups_welcome' => 'Here are all the groups on this server.',
-  'cancel' => 'I changed my mind, cancel',
   'change_my_password' => 'Change my password',
   'confirm_password' => 'Confirm password',
   'discussions' => 'discussions',
@@ -25,7 +33,6 @@ return array (
   'login' => 'Login',
   'logout' => 'Logout',
   'mail' => 'Email',
-  'members' => 'Members',
   'members_of_this_group' => 'members_of_this_group',
   'name' => 'Name',
   'nothing_yet' => 'There is nothing here...yet!',
@@ -38,7 +45,6 @@ return array (
   'send_my_recover_email' => 'Send my recover email',
   'something_wrong' => 'Something is wrong with your submission',
   'toggle_navigation' => 'toggle_navigation',
-  'unread_discussions' => 'Unread discussions',
   'your_groups' => 'your_groups',
   //================================== Obsolete strings ==================================//
   'create' => 'Create',
