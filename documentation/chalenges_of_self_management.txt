@@ -1,0 +1,14 @@
+How to cope with spam and bad behaving people in self managed groups ?
+
+Ideas for the system
+
+
+We already have multiple level in the membership :
+
+* null : people has never been seen in the system
+* 1 : people has been invited
+* 2 people joined and confirmed
+* -1 people don't want any news from us
+* -2 people is blacklisted (?) probably for spammers
+
+-> create a new membership level (level 3) for confirmed people. People are confirmed when a few members confirmed they are real.

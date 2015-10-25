@@ -23,10 +23,11 @@ class AppServiceProvider extends ServiceProvider
           if (Auth::check() )
           {
             $view->with('user', compact(Auth::user()->name) );
+            
           }
 
 
-          
+
 
         });
 

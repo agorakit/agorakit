@@ -10,7 +10,7 @@ class VoteController extends Controller {
   public function __construct()
   {
       $this->middleware('auth');
-      $this->middleware('group.member');
+      $this->middleware('member');
   }
 
   public function up($group_id, $discussion_id, $comment_id)

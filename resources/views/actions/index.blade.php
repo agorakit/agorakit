@@ -14,7 +14,7 @@
 @include('partials.grouptab')
 
 <div class="container">
-  <h2>Agenda and actions of this group <a class="btn btn-primary btn-xs" href="{{ action('ActionController@create', $group->id ) }}">New action</a></h2>
+  <h2>Agenda and actions of this group <a class="btn btn-primary btn-xs" href="{{ action('ActionController@create', $group->id ) }}"><i class="fa fa-plus"></i> {{trans('action.create_one_button')}}</a></h2>
 
 
 

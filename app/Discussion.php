@@ -39,11 +39,6 @@ class Discussion extends Model
 
 
 
-  public function getUnreadCountAttribute($value)
-  {
-
-    return $this->total_comments - $this->attributes['read_comments'];
-  }
 
   public function unReadCount()
   {
@@ -54,10 +49,10 @@ class Discussion extends Model
 
     if ($this->userReadDiscussion->count() > 0)
     {
-      return $this->userReadDiscussion->first()->read_comments;
+      return $this->total_comments - $this->userReadDiscussion->first()->read_comments;
     }
 
-    return 0;
+      return $this->total_comments;
 
 
 

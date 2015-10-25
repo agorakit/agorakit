@@ -8,7 +8,7 @@ class CommentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('group.member', ['only' => ['reply', 'create', 'store', 'edit', 'update', 'destroy']]);
+        $this->middleware('member', ['only' => ['reply', 'create', 'store', 'edit', 'update', 'destroy']]);
     }
 
   

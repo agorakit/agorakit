@@ -12,7 +12,7 @@ return array (
   // Defined in file /home/philippe/Sites/Mobilizator/resources/views/discussions/general_index.blade.php
   'unread_discussions' => 'Unread discussions',
   // Defined in file /home/philippe/Sites/Mobilizator/resources/views/partials/nav.blade.php
-
+  'unread_items' => 'Unread items',
   //==================================== Translations ====================================//
   'actions' => 'Actions',
   'all_the_groups_welcome' => 'Here are all the groups on this server.',

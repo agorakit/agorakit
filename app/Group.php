@@ -14,72 +14,82 @@ class Group extends Model
   use ValidatingTrait;
 
   protected $rules = [
-     'name' => 'required',
-     'body' => 'required'
- ];
-
-    
-
-    protected $fillable = ['name', 'body', 'cover'];
+    'name' => 'required',
+    'body' => 'required'
+  ];
 
 
-    /**
-     * Returns all the users of this group
-     *
-     */
-    public function users()
-    {
-      return $this->belongsToMany('App\User', 'membership')->withTimestamps();
-    }
 
-    /**
-    * return membership for the current user
-    */
-    public function membership()
+  protected $fillable = ['name', 'body', 'cover'];
+
+
+  /**
+  * Returns all the users of this group
+  *
+  */
+  public function users()
+  {
+    return $this->belongsToMany('App\User', 'membership')->withTimestamps();
+  }
+
+  /**
+  * return membership for the current user
+  */
+  public function membership()
+  {
+    if (\Auth::check())
     {
       return $this->belongsToMany('App\User', 'membership')
       ->where('user_id', "=", \Auth::user()->id)
       ->withPivot('membership');
     }
-
-    /**
-     * Returns all the discussions belonging to this group
-     *
-     */
-    public function discussions()
+    else
     {
-      return $this->hasMany('App\Discussion');
+      //return false;
     }
+  }
+
+  /**
+  * Returns all the discussions belonging to this group
+  *
+  */
+  public function discussions()
+  {
+    return $this->hasMany('App\Discussion');
+  }
 
 
-    /**
-     * Returns all the actions belonging to this group
-     *
-     */
-    public function actions()
-    {
-      return $this->hasMany('App\Action');
-    }
+  /**
+  * Returns all the actions belonging to this group
+  *
+  */
+  public function actions()
+  {
+    return $this->hasMany('App\Action');
+  }
 
 
-    public function files()
-    {
-      return $this->hasMany('App\File');
-    }
+  public function files()
+  {
+    return $this->hasMany('App\File');
+  }
 
-    /**
-    * Returns membership info for curently logged user
-    * Returns false if no membership found
-    */
-    public function isMember()
+  /**
+  * Returns membership info for curently logged user
+  * Returns false if no membership found
+  */
+  public function isMember()
+  {
+    if (\Auth::check())
     {
       $member = $this->membership->first();
       if ($member)
       {
         return $member->pivot->membership;
       }
-      return false;
     }
-
-
+    return false;
   }
+
+
+}

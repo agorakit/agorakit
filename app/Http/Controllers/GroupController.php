@@ -11,7 +11,7 @@ class GroupController extends Controller {
   public function __construct()
   {
     $this->middleware('auth', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
-    $this->middleware('group.member', ['only' => ['edit', 'update', 'destroy']]);
+    $this->middleware('member', ['only' => ['edit', 'update', 'destroy']]);
     $this->middleware('cacheforanonymous', ['only' => ['index', 'show']]);
   }
 
@@ -22,7 +22,14 @@ class GroupController extends Controller {
   */
   public function index()
   {
-    $groups = Group::with('membership')->orderBy('updated_at', 'desc')->paginate(12);
+    if (Auth::check())
+    {
+      $groups = Group::with('membership')->orderBy('updated_at', 'desc')->paginate(12);
+    }
+    else
+    {
+      $groups = Group::orderBy('updated_at', 'desc')->paginate(12);
+    }
 
     //dd($groups);
     return view('groups.index')
@@ -49,27 +56,27 @@ class GroupController extends Controller {
     $group = new group();
 
 
-   $group->name = $request->input('name');
-   $group->body = $request->input('body');
+    $group->name = $request->input('name');
+    $group->body = $request->input('body');
 
 
 
-   if ( $group->isInvalid())
-   {
-  // Oops.
-    return redirect()->action('groupController@create')
+    if ( $group->isInvalid())
+    {
+      // Oops.
+      return redirect()->action('GroupController@create')
       ->withErrors($group->getErrors())
       ->withInput();
-   }
+    }
 
-   $group->save();
+    $group->save();
 
-   // make the current user a member of the group
-   $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
-   $membership->membership = 2;
-   $membership->save();
+    // make the current user a member of the group
+    $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
+    $membership->membership = 2;
+    $membership->save();
 
-   return redirect()->action('GroupController@show', [$group->id]);
+    return redirect()->action('GroupController@show', [$group->id]);
   }
 
   /**

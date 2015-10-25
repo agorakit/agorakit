@@ -1,13 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/10/25 10:21:35 
+ Generated via "php artisan localization:missing" at 2015/10/20 20:16:23 
 *************************************************************************/
 
 return array (
   //==================================== Translations ====================================//
   'actions' => 'Actions',
   'all_the_groups_welcome' => 'Vous trouverez ici tous les groupes disponibles sur ce serveur',
-  'cancel' => 'J\'ai changé d\'avis, annuler',
   'change_my_password' => 'Changer mon mot de passe',
   'confirm_password' => 'Confirmer le mot de passe',
   'discussions' => 'Discussions',
@@ -25,7 +24,6 @@ return array (
   'login' => 'Connection',
   'logout' => 'Déconnection',
   'mail' => 'Email',
-  'members' => 'members',
   'members_of_this_group' => 'Membres de ce groupe',
   'name' => 'Nom',
   'nothing_yet' => 'Il n\'y a encore rien ici',
@@ -38,11 +36,9 @@ return array (
   'send_my_recover_email' => 'M\'envoyer un mail pour changer mon mot de passe',
   'something_wrong' => 'Il y a quelque chose qui ne fonctionne pas',
   'toggle_navigation' => 'Activer la navigation',
-  'unread_discussions' => 'unread_discussions',
+  'users' => 'Utilisateurs',
   'your_groups' => 'Mes groupes',
   //================================== Obsolete strings ==================================//
   'create' => 'Créer',
   'group' => 'Groupe',
-  'unread_items' => 'unread_items',
-  'users' => 'Utilisateurs',
 );

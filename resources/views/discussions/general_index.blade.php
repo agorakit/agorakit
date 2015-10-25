@@ -34,10 +34,11 @@
 
         <td>
 
+          <!--
           Total : {{$discussion->total_comments}}
           /
-          Unread : {{$discussion->unread_count}}
-
+          Unread : {{$discussion->unReadCount()}}
+        -->
 
 
           @if ($discussion->unReadCount() > 0)

@@ -6,6 +6,7 @@
 <h1>Joining {{$group->name}} group</h1>
 
 <p>
+  {{trans('membership.join_intro')}}
   Here you can choose if and how much email notifications you will receive from this group.
   We will never send you more that what you ask.
 </p>
@@ -16,8 +17,8 @@
 @include('membership.form')
 
 <div class="form-group">
-{!! Form::submit('Join this group', ['class' => 'btn btn-primary form-control']) !!}
-<a href="{{url('/')}}">I changed my mind, cancel</a>
+{!! Form::submit(trans('membership.join_button'), ['class' => 'btn btn-primary form-control']) !!}
+<a href="{{url('/')}}">{{trans('messages.cancel')}}</a>
 </div>
 
 

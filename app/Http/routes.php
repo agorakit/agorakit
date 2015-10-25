@@ -12,7 +12,6 @@
 */
 
 
-Route::get('test/{id}', 'DiscussionController@test');
 
 
 /**
@@ -70,7 +69,6 @@ Route::post('groups/create', 'GroupController@store');
 
 
 
-
 // specific group homepage
 Route::get('groups/{group}', 'GroupController@show');
 
@@ -83,6 +81,9 @@ Route::post('groups/{group}/settings', 'MembershipController@store');
 
 Route::get('groups/{group}/leave', 'MembershipController@leave');
 Route::post('groups/{group}/leave', 'MembershipController@destroy');
+
+Route::get('groups/{group}/invite', 'MembershipController@invite');
+Route::post('groups/{group}/invite', 'MembershipController@sendInvites');
 
 
 // Discussions
@@ -102,11 +103,8 @@ Route::get('unread', 'DiscussionController@indexUnRead');
 
 
 // Comments
-// type can be curently 'discussion'
-// so to reply to discussion with id 5, hit comment/discussion/5
 Route::post('groups/{group}/discussions/{discussion}/reply', 'CommentController@reply');
-//Route::get('/comment/{type}/{id}', 'CommentController@create');
-//Route::post('/comment/{type}/{id}', 'CommentController@store');
+
 
 Route::get('groups/{group}/discussions/{discussion}/comment/{comment}/up', 'VoteController@up');
 Route::get('groups/{group}/discussions/{discussion}/comment/{comment}/down', 'VoteController@down');
@@ -133,18 +131,3 @@ Route::get('groups/{group}/files/{file}/thumbnail', 'FileController@thumbnail');
 // Users
 Route::get('users/{id}', 'UserController@show');
 Route::get('groups/{group}/users', 'UserController@index');
-
-
-//Route::get('unread', 'CommentController@unRead');
-
-
-// no magic like this :
-/*
-Route::resource('user', 'UserController');
-Route::resource('group', 'GroupController');
-Route::resource('Membership', 'MembershipController');
-Route::resource('action', 'ActionController');
-Route::resource('vote', 'VoteController');
-Route::resource('file', 'FileController');
-Route::resource('document', 'DocumentController');
-*/

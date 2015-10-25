@@ -12,7 +12,7 @@ class ActionController extends Controller
 
   public function __construct()
   {
-      $this->middleware('group.member', ['only' => ['post', 'create', 'store', 'edit', 'update', 'destroy']]);
+      $this->middleware('member', ['only' => ['post', 'create', 'store', 'edit', 'update', 'destroy']]);
       $this->middleware('cacheforanonymous', ['only' => ['index', 'show']]);
   }
 
