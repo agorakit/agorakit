@@ -21,24 +21,35 @@ class DiscussionController extends Controller
   }
 
 
-  public function indexUnRead($id = null)
+
+  public function test($id = null)
+  {
+    $discussions = \App\Discussion::with('userReadDiscussion')->with('user')->findOrFail($id);
+    dd($discussions);
+  }
+
+  /**
+  * Generates a list of unread discussions.
+  * If a group id is provided only unread from this group is socket_shutdown
+  */
+  public function indexUnRead($group_id = null)
   {
 
-    if ($id) {
-      $group = Group::findOrFail($id);
+    if ($group_id) {
+      $group = Group::findOrFail($group_id);
       $discussions = $group->discussions()
       ->select('discussions.*')
       ->leftJoin('user_read_discussion', function($join)
       {
         $join->on('user_read_discussion.discussion_id', '=', 'discussions.id')
         ->where('user_read_discussion.user_id', '=', \Auth::user()->id)
-        ->on('user_read_discussion.read_at', '>=', 'discussions.created_at');
+        ->on('user_read_discussion.read_comments', '>=', 'discussions.total_comments');
       })
       ->whereNull('user_read_discussion.id')
 
       ->orderBy('discussions.updated_at', 'desc')->paginate(10);
 
-      //$discussions->load('comments');
+
 
       return view('discussions.index')
       ->with('discussions', $discussions)
@@ -48,29 +59,35 @@ class DiscussionController extends Controller
     else
     {
 
-      // this is so far the hardest (and ugliest) part :
+      // this is so far the hardest (and not so ugly anymore, but raw) part :
 
       $discussions =   \App\Discussion::hydrateRaw('
-        SELECT *,
-        (
-          select user_read_discussion.read_comments
-          from user_read_discussion
-          where user_read_discussion.user_id = :user_id_one
-          and user_read_discussion.discussion_id = discussions.id
-        ) as read_comments
 
-        FROM discussions
-        WHERE group_id
-        in (
-          SELECT membership.group_id
-          FROM membership
-          WHERE membership.user_id = :user_id_two
-          and membership.membership > 0
-        )'
-        , ['user_id_one' => Auth::user()->id, 'user_id_two' => Auth::user()->id]);
+          SELECT *,
+          (
+            SELECT user_read_discussion.read_comments
+            FROM user_read_discussion
+            WHERE user_read_discussion.user_id = :user_id_one
+            AND user_read_discussion.discussion_id = discussions.id
+          ) as read_comments
+
+          FROM discussions
+          WHERE group_id
+          in (
+            SELECT membership.group_id
+            FROM membership
+            WHERE membership.user_id = :user_id_two
+            and membership.membership > 0
+          )
 
 
+      '
+      , ['user_id_one' => Auth::user()->id, 'user_id_two' => Auth::user()->id]);
 
+      //WHERE  discussions.total_comments > read_comments
+
+
+        //dd ($discussions);
 
           return view('discussions.general_index')
           ->with('discussions', $discussions);
@@ -91,31 +108,21 @@ class DiscussionController extends Controller
       */
       public function index($id)
       {
-        /*
-        At some point something like that might be usefull to return all the unread topics :
-
-        SELECT COUNT(comments.id) AS count
-        FROM comments
-        INNER JOIN discussions ON comments.commentable_id = 90
-        LEFT JOIN user_read_discussion h ON comments.commentable_id = h.discussion_id AND h.user_id = 11
-        WHERE (comments.created_at > h.read_at OR h.read_at IS NULL)
-
-        */
-
 
         if ($id) {
           $group = Group::findOrFail($id);
-          //$discussions = $group->discussions()->with('userReadDiscussion')->orderBy('updated_at', 'desc')->paginate(50);
-
-          //$discussions = $group->discussions()->orderBy('updated_at', 'desc')->paginate(50);
 
 
-          $discussions = $group->discussions()->with(['userReadDiscussion' => function($query)
+          if (\Auth::check())
           {
-            $query->where('user_id', '=', Auth::user()->id);
-          }])->paginate(50);
+            $discussions = $group->discussions()->with('userReadDiscussion', 'user')->orderBy('updated_at', 'desc')->paginate(50);
+          }
+          else // don't load the unread relation, since we don't know who to look for.
+          {
+            $discussions = $group->discussions()->with('user')->orderBy('updated_at', 'desc')->paginate(50);
+          }
 
-          //dd($discussions);
+          //dd($discussions->first()->unReadCount());
 
           return view('discussions.index')
           ->with('discussions', $discussions)
@@ -168,22 +175,19 @@ class DiscussionController extends Controller
       */
       public function show($group_id, $discussion_id)
       {
+
         $discussion = Discussion::findOrFail($discussion_id);
         $group = Group::findOrFail($group_id);
 
-        // According to https://www.reddit.com/r/laravel/comments/2l2ndq/unread_forum_posts/
-        // When a user visits the topic, if they've never done so before,
-        // create a new record in the table with the time they've read the topic.
 
-        if (Auth::user())
+        // if user is logged in, we update the read count for this discussion.
+        if (Auth::check())
         {
           $UserReadDiscussion = \App\UserReadDiscussion::firstOrNew(['discussion_id' => $discussion->id, 'user_id' => Auth::user()->id]);
-          //$UserReadDiscussion->read_at = Carbon::now();
           $UserReadDiscussion->read_comments = $discussion->total_comments;
           $UserReadDiscussion->save();
         }
 
-        //$comments = $discussion->comments;
         return view('discussions.show')
         ->with('discussion', $discussion)
         ->with('group', $group)

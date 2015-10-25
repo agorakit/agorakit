@@ -22,8 +22,9 @@ class GroupController extends Controller {
   */
   public function index()
   {
-    $groups = Group::orderBy('updated_at', 'desc')->paginate(12);
+    $groups = Group::with('membership')->orderBy('updated_at', 'desc')->paginate(12);
 
+    //dd($groups);
     return view('groups.index')
     ->with('groups', $groups);
   }

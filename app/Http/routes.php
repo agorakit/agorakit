@@ -12,6 +12,7 @@
 */
 
 
+Route::get('test/{id}', 'DiscussionController@test');
 
 
 /**
@@ -20,6 +21,7 @@
  */
 Route::get('/', 'GroupController@index');
 Route::get('home', 'GroupController@index');
+
 
 
 /**

@@ -29,14 +29,12 @@
 
 
         <td>
-          @if ($discussion->unReadCount() > 0)
 
+          @if ($discussion->unReadCount() > 0)
           <i class="fa fa-comment"></i>
           <span class="badge">{{ $discussion->unReadCount() }}</span>
-
-
-
           @endif
+          
         </td>
 
       </tr>

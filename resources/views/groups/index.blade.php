@@ -26,6 +26,11 @@
               <h4><a href="{{ action('GroupController@show', $group->id) }}">{{ $group->name }}</a></h4>
               <p class="summary">{{ str_limit($group->body, 100) }}</p>
               <p>
+
+                @foreach ($group->membership as $membership)
+                {{$membership->pivot->membership}}
+                @endforeach
+
                 @if ($group->isMember())
                 <td><a class="btn btn-default" href="{{ action('MembershipController@leave', $group->id) }}"><i class="fa fa-sign-out"></i>{{ trans('group.leave') }}</a></td>
                 @else

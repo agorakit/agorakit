@@ -18,7 +18,7 @@ class Group extends Model
      'body' => 'required'
  ];
 
-    //protected $with = ['membership'];
+    
 
     protected $fillable = ['name', 'body', 'cover'];
 
@@ -30,6 +30,16 @@ class Group extends Model
     public function users()
     {
       return $this->belongsToMany('App\User', 'membership')->withTimestamps();
+    }
+
+    /**
+    * return membership for the current user
+    */
+    public function membership()
+    {
+      return $this->belongsToMany('App\User', 'membership')
+      ->where('user_id', "=", \Auth::user()->id)
+      ->withPivot('membership');
     }
 
     /**
@@ -58,31 +68,16 @@ class Group extends Model
     }
 
     /**
-    * Returns membership info for the given user
-    * Default to curently logged user if not provided
+    * Returns membership info for curently logged user
     * Returns false if no membership found
     */
-    public function isMember(User $user = null)
+    public function isMember()
     {
-
-
-      if (is_null ($user))
+      $member = $this->membership->first();
+      if ($member)
       {
-        $user = $user = Auth::user();
+        return $member->pivot->membership;
       }
-
-      // TODO eager loading, but HOW ?!?
-
-      if ($user)
-      {
-        $membership = \App\Membership::where('user_id', $user->id)->where('group_id', $this->id)->first();
-
-        if ($membership && $membership->membership > 1)
-        {
-          return true;
-        }
-      }
-
       return false;
     }
 

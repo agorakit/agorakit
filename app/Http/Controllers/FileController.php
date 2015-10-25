@@ -28,7 +28,7 @@ class FileController extends Controller
   {
     if ($id) {
       $group = Group::findOrFail($id);
-      $files = $group->files()->orderBy('updated_at', 'desc')->paginate(20);
+      $files = $group->files()->with('user')->orderBy('updated_at', 'desc')->paginate(20);
 
 
 
@@ -71,7 +71,7 @@ class FileController extends Controller
       $file->user()->associate(Auth::user());
 
       // generate filenames and path
-      $filepath = '/groups/'.$file->group->id.'/';
+      $filepath = '/groups/'.$file->group->id.'/files/';
 
 
       $filename = $file->id . '.' . strtolower($request->file('file')->getClientOriginalExtension());

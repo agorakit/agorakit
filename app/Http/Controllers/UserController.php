@@ -15,7 +15,7 @@ class UserController extends Controller {
    */
   public function index($group_id)
   {
-        $group = \App\Group::findOrFail($group_id);
+        $group = \App\Group::with('users')->findOrFail($group_id);
         $users = $group->users()->orderBy('updated_at', 'desc')->paginate(10);
 
         return view('users.index')

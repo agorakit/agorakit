@@ -11,4 +11,7 @@ class UserReadDiscussion extends Model
   protected $fillable = ['user_id', 'discussion_id'];
 
   public $timestamps = false;
+
+  
+
 }

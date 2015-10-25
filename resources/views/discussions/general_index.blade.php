@@ -33,6 +33,13 @@
 
 
         <td>
+
+          Total : {{$discussion->total_comments}}
+          /
+          Unread : {{$discussion->unread_count}}
+
+
+
           @if ($discussion->unReadCount() > 0)
 
           <i class="fa fa-comment"></i>
