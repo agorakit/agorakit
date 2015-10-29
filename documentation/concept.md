@@ -8,157 +8,157 @@ The mean is to remove the need for any admin or moderator in the process. The go
 Here follows the concept, in french.
 
 ##Principes de base
-* Pas de ìsingle point of failureî humain
-* Pas díadministrateur unique par groupe
-* Les membres sont cooptÈs par le groupe
-* La modÈration est faite par le groupe
-* Toute action importante est cogÈrÈe par le groupe
-* CentrÈ autour du groupe et pas líindividu
-* Utilise la machine pour faciliter le travail humain (notamment dans les calculs, clÙtures, auto modÈration, etc...). Chaque groupe a sa vitesse de fonctionnement, sa taille, la machine síadapte.
-* ExtrÍmement simple ‡ utiliser
-* Prise de position forte des dÈveloppeurs (pas de feature creep)
+* Pas de ¬ìsingle point of failure¬î humain
+* Pas d¬íadministrateur unique par groupe
+* Les membres sont coopt√©s par le groupe
+* La mod√©ration est faite par le groupe
+* Toute action importante est cog√©r√©e par le groupe
+* Centr√© autour du groupe et pas l¬íindividu
+* Utilise la machine pour faciliter le travail humain (notamment dans les calculs, cl√¥tures, auto mod√©ration, etc...). Chaque groupe a sa vitesse de fonctionnement, sa taille, la machine s¬íadapte.
+* Extr√™mement simple √† utiliser
+* Prise de position forte des d√©veloppeurs (pas de feature creep)
 * Open source
-* Auto hÈbergeable facilement (lamp) sur un compte partagÈ.
-* Ouvert ‡ líextÈrieur (api, import díune boite mail par pop, publication automatique de certains contenus par rss, ical, passerelle vers les rÈseaux sociaux)
+* Auto h√©bergeable facilement (lamp) sur un compte partag√©.
+* Ouvert √† l¬íext√©rieur (api, import d¬íune boite mail par pop, publication automatique de certains contenus par rss, ical, passerelle vers les r√©seaux sociaux)
 
 ##Inspiration
-* Meetup : gÈnial mais propriÈtaire et payant
-* Phabricator : gÈnial mais trop orientÈ dÈveloppeurs et trop compliquÈ ‡ utiliser
-* Loomio : trËs bien pour les discussions et la prise de dÈcision, mais manque certaines fonctionnalitÈs. Difficile ‡ hÈberger (pas lamp)
-* Slashdot : pour la modÈration des commentaires
+* Meetup : g√©nial mais propri√©taire et payant
+* Phabricator : g√©nial mais trop orient√© d√©veloppeurs et trop compliqu√© √† utiliser
+* Loomio : tr√®s bien pour les discussions et la prise de d√©cision, mais manque certaines fonctionnalit√©s. Difficile √† h√©berger (pas lamp)
+* Slashdot : pour la mod√©ration des commentaires
 * Github : pour le wiki simple
-* Les mailing listes : pour la difficultÈ de gestion et líavalanche de mails :-)
-* Basecamp : en faisant les premiers mockups de líinterface, je me suis rendu compte que Áa ressemble hyper fort.
+* Les mailing listes : pour la difficult√© de gestion et l¬íavalanche de mails :-)
+* Basecamp : en faisant les premiers mockups de l¬íinterface, je me suis rendu compte que √ßa ressemble hyper fort.
 
 ##Structure
-* Page díaccueil
-* DÈcrit le principe
+* Page d¬íaccueil
+* D√©crit le principe
 * Liste les groupes
-* Recherche de groupes, y compris par zone gÈographique, mot clÈ, etc.
-* Montre ‡ líutilisateur les groupes proches de chez lui (par code postal par ex.)
-* Propose díen rejoindre (= meetup)
-* CrÈer un nouveau groupe
+* Recherche de groupes, y compris par zone g√©ographique, mot cl√©, etc.
+* Montre √† l¬íutilisateur les groupes proches de chez lui (par code postal par ex.)
+* Propose d¬íen rejoindre (= meetup)
+* Cr√©er un nouveau groupe
 
-Groupe ou plutÙt cercle (comme chez podemos).
+Groupe ou plut√¥t cercle (comme chez podemos).
 
-Ensuite, pour chaque cercle, sous forme díonglets (ou autre systËme de menu) :
+Ensuite, pour chaque cercle, sous forme d¬íonglets (ou autre syst√®me de menu) :
 
 
 ##Onglet discussions
-(En gros comme Loomio, avec quelques amÈliorations)
-* Liste des derniers fils de discussion + nombre de rÈponses non lues pour chaque fil. Quand on clique, on arrive directement ‡ líendroit des non lus 
-* Historique des modifications díun fil et des rÈponses
-* PossibilitÈ de +1 -1 (anonyme) sur chaque rÈponse ainsi que ìJíapprÈcieî qui est nominatif
-* Quand une rÈponse est trop downvotÈe (algorithme ‡ dÈfinir), il est repliÈ (comme sur slashdot). Threshold automatique.
-* Fils de discussions classÈs par ìthÈmatiqueî. Par dÈfaut propose au moins ìGÈnÈralî et ìContact de líextÈrieurî. Pas de hiÈrarchie juste un niveau de classification.
-* Contact de líextÈrieur : arrive l‡ dedans les fils crÈÈs par des extÈrieurs au groupe, soit par líapi, soit par líimport depuis une boite mail en pop, soit par un formulaire de contact
-* PossibilitÈ de dÈplacer un fil dans un sujet
-* PossibilitÈ de dÈplacer une rÈponse dans un autre fil
-* Trace gardÈe des modifications
-* Pas de possibilitÈ díeffacement. On peut uniquement downvoter. Tout le monde possËde la mÍme ìforceî (un homme = une voix).
-* Líonglet affiche le nombre de discussion non lues
-* PossibilitÈ díimporter un xml simple reprenant les discussions díun systËme prÈcÈdent (standard ‡ dÈfinir)
+(En gros comme Loomio, avec quelques am√©liorations)
+* Liste des derniers fils de discussion + nombre de r√©ponses non lues pour chaque fil. Quand on clique, on arrive directement √† l¬íendroit des non lus
+* Historique des modifications d¬íun fil et des r√©ponses
+* Possibilit√© de +1 -1 (anonyme) sur chaque r√©ponse ainsi que ¬ìJ¬íappr√©cie¬î qui est nominatif
+* Quand une r√©ponse est trop downvot√©e (algorithme √† d√©finir), il est repli√© (comme sur slashdot). Threshold automatique.
+* Fils de discussions class√©s par ¬ìth√©matique¬î. Par d√©faut propose au moins ¬ìG√©n√©ral¬î et ¬ìContact de l¬íext√©rieur¬î. Pas de hi√©rarchie juste un niveau de classification.
+* Contact de l¬íext√©rieur : arrive l√† dedans les fils cr√©√©s par des ext√©rieurs au groupe, soit par l¬íapi, soit par l¬íimport depuis une boite mail en pop, soit par un formulaire de contact
+* Possibilit√© de d√©placer un fil dans un sujet
+* Possibilit√© de d√©placer une r√©ponse dans un autre fil
+* Trace gard√©e des modifications
+* Pas de possibilit√© d¬íeffacement. On peut uniquement downvoter. Tout le monde poss√®de la m√™me ¬ìforce¬î (un homme = une voix).
+* L¬íonglet affiche le nombre de discussion non lues
+* Possibilit√© d¬íimporter un xml simple reprenant les discussions d¬íun syst√®me pr√©c√©dent (standard √† d√©finir)
 
 
-##Onglet dÈcisions
-* PossibilitÈ de lancer une proposition (avec date de cloture automatique?)
-* Chacun vote comme sur loomio ìDíaccord, abstention, contre, bloqueî
-* Graphique reprenant les dÈcisions
-* Líonglet affiche le nombre de dÈcisions sur lesquelles le participant nía pas encore votÈ
-* Certaines actions crÈes des dÈcisions automatiquement (par exemple si on prÈvoit un systËme de newsletter, le fait díenvoyer la newsletter lance un processus de dÈcision rapide pour lequel une partie des membres doivent donner leur accord afin díenvoyer une newsletter qui correspond au groupe). Dans les fait chacun peut initier une newsletter, mais il faut un accord pour líenvoyer effectivement. Cela se retrouve dans líonglet dÈcisions.
+##Onglet d√©cisions
+* Possibilit√© de lancer une proposition (avec date de cloture automatique?)
+* Chacun vote comme sur loomio ¬ìD¬íaccord, abstention, contre, bloque¬î
+* Graphique reprenant les d√©cisions
+* L¬íonglet affiche le nombre de d√©cisions sur lesquelles le participant n¬ía pas encore vot√©
+* Certaines actions cr√©es des d√©cisions automatiquement (par exemple si on pr√©voit un syst√®me de newsletter, le fait d¬íenvoyer la newsletter lance un processus de d√©cision rapide pour lequel une partie des membres doivent donner leur accord afin d¬íenvoyer une newsletter qui correspond au groupe). Dans les fait chacun peut initier une newsletter, mais il faut un accord pour l¬íenvoyer effectivement. Cela se retrouve dans l¬íonglet d√©cisions.
 * En plus de voter, on peut ajouter un commentaire
-* Níimporte qui peut clÙturer et níimporte qui peut rouvrir une dÈcision?
+* N¬íimporte qui peut cl√¥turer et n¬íimporte qui peut rouvrir une d√©cision?
 
 ##Onglet Calendrier
-Calendrier collaboratif avec ÈvÈnements privÈs et publics. Les publics sont exportables  en ical et rss pour intÈgration ailleurs.
+Calendrier collaboratif avec √©v√©nements priv√©s et publics. Les publics sont exportables  en ical et rss pour int√©gration ailleurs.
 
 ##Onglet Membres
-* Liste des membres avec leur degrÈ díactivitÈ (derniËre interaction par exemple).
-* Contact perso díun membre
-* Un algorithme dÈtermine les membres actifs et les inactifs en fonction de la vitesse du groupe.
-* Bouton import liste de mails pour inviter les gens + abonnement ‡ une lettre automatique de mise ‡ jour.
+* Liste des membres avec leur degr√© d¬íactivit√© (derni√®re interaction par exemple).
+* Contact perso d¬íun membre
+* Un algorithme d√©termine les membres actifs et les inactifs en fonction de la vitesse du groupe.
+* Bouton import liste de mails pour inviter les gens + abonnement √† une lettre automatique de mise √† jour.
 * Export des membres
 
-Líonglet affiche le nombre de membres en attente de validation. Un algorithme dÈtermine combien de membres doivent donner leur accord pour quíun membre soit approuvÈ (ou alors cíest dans la config du groupe).
+L¬íonglet affiche le nombre de membres en attente de validation. Un algorithme d√©termine combien de membres doivent donner leur accord pour qu¬íun membre soit approuv√© (ou alors c¬íest dans la config du groupe).
 
-Les membres peuvent Ítre aussi de simples ìabonnÈsî qui reÁoivent des infos sur groupe par mail.
+Les membres peuvent √™tre aussi de simples ¬ìabonn√©s¬î qui re√ßoivent des infos sur groupe par mail.
 
 ##Onglet wiki ou documents
 Wiki hyper simple du type de celui de github. Remarkup comme Phabricator
 cfr. https://secure.phabricator.com/book/phabricator/article/remarkup/
 
-Si wysiwyg, ce serait bien un outil qui fait du inline editing avec juste quelques options (gras italique soulignÈ titre 1 2 3 et liens). https://github.com/yabwe/medium-editor 
+Si wysiwyg, ce serait bien un outil qui fait du inline editing avec juste quelques options (gras italique soulign√© titre 1 2 3 et liens). https://github.com/yabwe/medium-editor
 
-* Liste des documents, classement par date de mise ‡ jour
+* Liste des documents, classement par date de mise √† jour
 * Boite de recherche dans les titres avec affichage rapide
 
 
 ##Onglet fichiers
-Síinspirer de comment phabricator gËre Áa
-PossibilitÈ de dropper des fichiers l‡ + ajouter des tags avec interface de recherche hyper simple et rapide. 
+S¬íinspirer de comment phabricator g√®re √ßa
+Possibilit√© de dropper des fichiers l√† + ajouter des tags avec interface de recherche hyper simple et rapide.
 
-Evite les doublons si on reupload le mÍme fichier.
+Evite les doublons si on reupload le m√™me fichier.
 
 * Chaque document a un ID
-* On peut rÈfÈrencer chaque document par son ID dans níimporte quelle boite texte en mettant D123
-* Quand un fichier est droppÈ dans une boite texte, il est uploadÈ dans la partie document, et rÈfÈrencÈ dans la boite textes avec le D123
-* Impossible díeffacer un document
-* SystËme de tags ‡ ajouter aux documents
+* On peut r√©f√©rencer chaque document par son ID dans n¬íimporte quelle boite texte en mettant D123
+* Quand un fichier est dropp√© dans une boite texte, il est upload√© dans la partie document, et r√©f√©renc√© dans la boite textes avec le D123
+* Impossible d¬íeffacer un document
+* Syst√®me de tags √† ajouter aux documents
 
 
 
-##Onglet ìmon compteî
+##Onglet ¬ìmon compte¬î
 * Gestion du profil
-* Abonnement mail : 1 par mois ou 1 par semaine ou 1 par jour (pas de choix plus compliquÈ). Líoutil se charge de fabriquer et díenvoyer un mail rÈcap super nickel ‡ partir des infos du groupe.
+* Abonnement mail : 1 par mois ou 1 par semaine ou 1 par jour (pas de choix plus compliqu√©). L¬íoutil se charge de fabriquer et d¬íenvoyer un mail r√©cap super nickel √† partir des infos du groupe.
 * Plusieurs types de comptes
-* membre candidat (suite ‡ la demande díun utilisateur de devenir membre)
-* membre actif (interagit rÈguliËrement)
-* membre inactif (nía plus donnÈ signe de vie depuis longtemps) 
-* abonnÈ (reÁoit juste les infos par mail de temps en temps,)
+* membre candidat (suite √† la demande d¬íun utilisateur de devenir membre)
+* membre actif (interagit r√©guli√®rement)
+* membre inactif (n¬ía plus donn√© signe de vie depuis longtemps)
+* abonn√© (re√ßoit juste les infos par mail de temps en temps,)
 
 
 
 ##Recherche
-Recherche complËte disponible pour tout le groupe (plein texte dans les documents wiki, les conversations et les ÈvÈnements)
+Recherche compl√®te disponible pour tout le groupe (plein texte dans les documents wiki, les conversations et les √©v√©nements)
 
 
 
-Et cíest tout ! (mais cíest dÈj‡ beaucoup)
+Et c¬íest tout ! (mais c¬íest d√©j√† beaucoup)
 
-##Notes/idÈes/implantation
+##Notes/id√©es/implantation
 * Markup
 * HTML ? ou remarkup partout
 * https://secure.phabricator.com/book/phabricator/article/remarkup/
-* tout est rÈfÈrenÁable par un identifiant dans le remarkup
-    * E123 : lien vers ÈvÈnement
+* tout est r√©f√©ren√ßable par un identifiant dans le remarkup
+    * E123 : lien vers √©v√©nement
     * C534 : lien vers une conversation
-    * D123 : lien vers une dÈcision
+    * D123 : lien vers une d√©cision
     * F123 : lien vers un fichier
     * @membre : lien vers membre
     * [[wiki]]
 
-Finalement plutÙt wysiwyg simple partout. Avec ceci : https://github.com/yabwe/medium-editor 
+Finalement plut√¥t wysiwyg simple partout. Avec ceci : https://github.com/yabwe/medium-editor
 
 Tags partout
 Revision partout
-Pas possible díeffacer (corbeille partout + trace)
+Pas possible d¬íeffacer (corbeille partout + trace)
 
 ##Fichiers
-Pour líadministrateur du serveur, possibilitÈ de configurer un stockage externe. En utilisant laravel flysystem, il semble possible que cela soit transparent au niveau dÈv.
+Pour l¬íadministrateur du serveur, possibilit√© de configurer un stockage externe. En utilisant laravel flysystem, il semble possible que cela soit transparent au niveau d√©v.
 
-Sur le serveur de fichiers : 
-storage/[id du groupe]/[dossier par sous id]/[id du document] (avec dossiers pour Èviter la limite systËme de fichiers)
+Sur le serveur de fichiers :
+storage/[id du groupe]/[dossier par sous id]/[id du document] (avec dossiers pour √©viter la limite syst√®me de fichiers)
 
 Champs
-id 
+id
 groupe id
 
 ##Utilisateur
-SystËme auth de laravel
+Syst√®me auth de laravel
 Social login
-Pas de systËme de rÙle
-SystËme blindÈ qui vÈrifie quíune ressource est accessible ‡ un utilisateur (= líutilisateur est membre du groupe) chaque fois quíelle est accÈdÈe. (utilisateur logguÈ -> groupe(s) -> ressource)
-Un utilisateur est soit candidat ‡ un groupe soit membre effectif
-Proposer quelques champs en plus (genre numÈro de tÈlÈphone) en indiquant clairement que les membres des groupes dans lesquels on est pourront le consulter.
+Pas de syst√®me de r√¥le
+Syst√®me blind√© qui v√©rifie qu¬íune ressource est accessible √† un utilisateur (= l¬íutilisateur est membre du groupe) chaque fois qu¬íelle est acc√©d√©e. (utilisateur loggu√© -> groupe(s) -> ressource)
+Un utilisateur est soit candidat √† un groupe soit membre effectif
+Proposer quelques champs en plus (genre num√©ro de t√©l√©phone) en indiquant clairement que les membres des groupes dans lesquels on est pourront le consulter.
 Gestion du temps
 https://www.drupal.org/project/radioactivity

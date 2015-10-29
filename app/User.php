@@ -10,66 +10,68 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Watson\Validating\ValidatingTrait;
-
-use App\Group;
-
 class User extends Model implements AuthenticatableContract,
 AuthorizableContract,
 CanResetPasswordContract
 {
-  use Authenticatable, Authorizable, CanResetPassword, ValidatingTrait;
+    use Authenticatable, Authorizable, CanResetPassword, ValidatingTrait;
 
-
-  protected $rules = [
-		 'name' => 'required',
-		 'email' => 'required|email|unique:users',
-     'password' => 'required'
+    protected $rules = [
+         'name' => 'required',
+         'email' => 'required|email|unique:users',
+     'password' => 'required',
  ];
 
-
   /**
-  * The database table used by the model.
-  *
-  * @var string
-  */
+   * The database table used by the model.
+   *
+   * @var string
+   */
   protected $table = 'users';
 
   /**
-  * The attributes that are mass assignable.
-  *
-  * @var array
-  */
+   * The attributes that are mass assignable.
+   *
+   * @var array
+   */
   protected $fillable = ['name', 'email', 'password'];
 
   /**
-  * The attributes excluded from the model's JSON form.
-  *
-  * @var array
-  */
+   * The attributes excluded from the model's JSON form.
+   *
+   * @var array
+   */
   protected $hidden = ['password', 'remember_token'];
 
-/**
- * The groups this user is part of
- *
- */
+  /**
+   * The groups this user is part of.
+   */
   public function groups()
   {
-    return $this->belongsToMany('App\Group', 'membership')->withTimestamps();
+      return $this->belongsToMany('App\Group', 'membership')->withTimestamps();
+  }
+
+  public function memberships()
+  {
+      return $this->hasMany('App\Membership');
+  }
+
+
+  public function discussionsSubscribed()
+  {
+      return $this->hasManyThrough('App\Discussion', 'App\Group');
   }
 
   /**
-   * Discussions by this user
-   *
+   * Discussions by this user.
    */
   public function discussions()
-	{
-		return $this->hasMany('App\Discussion');
-	}
-
-
-  public function avatar()
   {
-    return url('/images/avatar.jpg');
+      return $this->hasMany('App\Discussion');
   }
 
+    public function avatar()
+    {
+        return url('/images/avatar.jpg');
+    }
 }

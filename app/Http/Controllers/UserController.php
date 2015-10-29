@@ -5,7 +5,7 @@ class UserController extends Controller {
 
   public function __construct()
   {
-    $this->middleware('cacheforanonymous', ['only' => ['index', 'show']]);
+    $this->middleware('cache', ['only' => ['index', 'show']]);
   }
 
   /**

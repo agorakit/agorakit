@@ -12,7 +12,7 @@ class GroupController extends Controller {
   {
     $this->middleware('auth', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
     $this->middleware('member', ['only' => ['edit', 'update', 'destroy']]);
-    $this->middleware('cacheforanonymous', ['only' => ['index', 'show']]);
+    $this->middleware('cache', ['only' => ['index', 'show']]);
   }
 
   /**

@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Auth;
 
-class CacheForAnonymous
+class Cache
 {
     /**
      * Handle an incoming request.

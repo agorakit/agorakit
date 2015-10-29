@@ -49,6 +49,13 @@ class Group extends Model
     }
   }
 
+
+  public function memberships()
+  {
+      return $this->hasMany('App\Membership');
+  }
+
+
   /**
   * Returns all the discussions belonging to this group
   *

@@ -15,12 +15,6 @@ class CreateMembershipTable extends Migration
   			$table->integer('group_id')->unsigned()->references('id')->on('groups');
   			$table->unique(['user_id', 'group_id']);
 
-  			/*
-  			Token contains a token generated and sent to users so they can accept an invitation
-  			Not yet in use
-  			*/
-  			$table->string('token');
-
 
   			/**
   			 * A json string that contains any additional info we'd need for memberships.

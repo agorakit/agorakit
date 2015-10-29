@@ -7,7 +7,7 @@
 <div class="container">
   <h2>
     {{ trans('messages.members_of_this_group') }}
-    <a class="btn btn-primary btn-xs" href="{{ action('MembershipController@invite', $group->id ) }}"><i class="fa fa-plus"></i> {{trans('membership.invite_button')}}</a>
+    <a class="btn btn-primary btn-xs" href="{{ action('MembershipController@invite', $group->id ) }}"><i class="fa fa-plus"></i> {{trans('membership.invite_one_button')}}</a>
   </h2>
 
 

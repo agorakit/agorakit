@@ -30,6 +30,6 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'member' => \App\Http\Middleware\RedirectIfNotGroupMember::class,
-        'cacheforanonymous' => \App\Http\Middleware\CacheForAnonymous::class
+        'cache' => \App\Http\Middleware\Cache::class
     ];
 }

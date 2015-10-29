@@ -16,7 +16,7 @@ class FileController extends Controller
   public function __construct()
   {
     $this->middleware('member', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
-    $this->middleware('cacheforanonymous', ['only' => ['index', 'show']]);
+    $this->middleware('cache', ['only' => ['index', 'show']]);
   }
 
   /**
@@ -29,9 +29,6 @@ class FileController extends Controller
     if ($id) {
       $group = Group::findOrFail($id);
       $files = $group->files()->with('user')->orderBy('updated_at', 'desc')->paginate(20);
-
-
-
 
       $upload_allowed = $group->isMember();
 

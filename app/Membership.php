@@ -3,22 +3,26 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Membership extends Model {
+class Membership extends Model
+{
+    protected $table = 'membership';
+    public $timestamps = true;
 
-	protected $table = 'membership';
-	public $timestamps = true;
+    protected $fillable = ['group_id', 'user_id', 'membership'];
 
-	protected $fillable = ['group_id', 'user_id', 'membership'];
+    public function votes()
+    {
+        return $this->morphedByMany('Vote', 'votable');
+    }
 
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 
-	public function votes()
-	{
-		return $this->morphedByMany('Vote', 'votable');
-	}
-
-
-
-
+    public function group()
+    {
+        return $this->belongsTo('App\Group');
+    }
 }

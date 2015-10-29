@@ -8,12 +8,16 @@
   <h1>{{ trans('messages.unread_discussions') }}</a></h1>
   </div>
 
+@foreach ($groups as $group)
+<h2>{{$group->name}}</h2>
 
     <table class="table table-hover">
-      @forelse( $discussions as $discussion )
+      @forelse( $group->discussions as $discussion )
+
+      @if ($discussion->unReadCount() > 0)
       <tr>
         <td>
-          <a href="{{ action('DiscussionController@show', [$discussion->group->id, $discussion->id]) }}">{{ $discussion->name }}</a>
+          <a href="{{ action('DiscussionController@show', [$group->id, $discussion->id]) }}">{{ $discussion->name }}</a>
         </td>
 
         <td>
@@ -22,9 +26,7 @@
           @endunless
         </td>
 
-        <td>
-          <a href="{{ action('DiscussionController@show', [$discussion->group->id, $discussion->id]) }}">Posted in {{ $discussion->group->name }}</a>
-        </td>
+
 
         <td>
           {{ $discussion->updated_at->diffForHumans() }}
@@ -33,23 +35,12 @@
 
 
         <td>
-
-          <!--
-          Total : {{$discussion->total_comments}}
-          /
-          Unread : {{$discussion->unReadCount()}}
-        -->
-
-
-          @if ($discussion->unReadCount() > 0)
-
           <i class="fa fa-comment"></i>
           <span class="badge">{{ $discussion->unReadCount() }}</span>
-
-
-
-          @endif
         </td>
+
+        @endif
+
 
       </tr>
       @empty
@@ -58,7 +49,7 @@
     </table>
 
 
-
+@endforeach
 
   </div>
 

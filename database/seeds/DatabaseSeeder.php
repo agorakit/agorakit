@@ -50,7 +50,7 @@ class DatabaseSeeder extends Seeder
           DB::table('discussions')->delete();
           DB::table('comments')->delete();
 
-          for ($i = 1; $i <= 10; ++$i) {
+          for ($i = 1; $i <= 20; ++$i) {
             $discussion = App\Discussion::create([
               'name' => $faker->city,
               'body' => $faker->text,

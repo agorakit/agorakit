@@ -17,7 +17,7 @@ class DiscussionController extends Controller
   {
     $this->middleware('auth', ['only' => ['indexUnRead']]);
     $this->middleware('member', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
-    $this->middleware('cacheforanonymous', ['only' => ['index', 'show']]);
+    $this->middleware('cache', ['only' => ['index', 'show']]);
   }
 
 
@@ -30,17 +30,53 @@ class DiscussionController extends Controller
 
     if ($group_id)
     {
-      $group = \App\Group::firstOrFail($group_id);
-      $discussions = $group->discussions()->with('userReadDiscussion', 'user', 'group')->orderBy('updated_at', 'desc')->paginate(50);
+      $groups = \App\Group::firstOrFail($group_id);
     }
     else
     {
-      $discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group')->orderBy('updated_at', 'desc')->paginate(50);
+      //$discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group')->orderBy('updated_at', 'desc')->paginate(50);
+
+      //$discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group.membership')->orderBy('updated_at', 'desc')->paginate(50);
+
+      $groups =  Auth::user()->groups;
+      $groups->load('discussions.userReadDiscussion', 'discussions.user');
+
+
+
+
+      //dd($groups);
+
+      //dd (\App\Discussion::with('userReadDiscussion', 'user', 'group.membership')->orderBy('updated_at', 'desc')->first());
+      //$discussions = \App\Discussion::with('userReadDiscussion', 'membership')->orderBy('updated_at', 'desc')->paginate(50);
+      //$discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group', 'subscriber')->orderBy('updated_at', 'desc')->paginate(50);
+
+      /*
+      foreach (Auth::user()->memberships as $membership)
+      {
+      $discussions = $membership->group->discussions()->with('userReadDiscussion', 'user', 'group')->orderBy('updated_at', 'desc')->get();
+      dump($discussions);
+      //dump($membership->group->discussions);
+    }
+    */
+
+
+      /*
+      $groups = Auth::user()->groups()->get();
+
+      foreach ($groups as $group)
+      {
+      $discussions = $group->discussions()->with('userReadDiscussion', 'user', 'group')->orderBy('updated_at', 'desc')->paginate(50);
+      }
+      */
     }
 
     return view('discussions.general_index')
-    ->with('discussions', $discussions);
+    ->with('groups', $groups);
   }
+
+
+
+
 
 
   /**
