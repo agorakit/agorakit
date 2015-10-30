@@ -69,7 +69,24 @@ body
   float: right;
 }
 
+/***************************** tables ***************************/
+table.special { table-layout: fixed }
 
+table.special td {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis
+}
+
+span.summary
+{
+  color: gray;
+}
+
+table.special .name
+{
+  font-weight: bold;
+}
 
 
 /************************** DISCUSSIONS ***************************************/

@@ -89,8 +89,8 @@ class GroupController extends Controller {
   {
     $group = Group::findOrFail($id);
 
-    $discussions = $group->discussions()->orderBy('updated_at', 'desc')->limit(5)->get();
-    $files = $group->files()->orderBy('updated_at', 'desc')->limit(5)->get();
+    $discussions = $group->discussions()->with('user', 'userReadDiscussion')->orderBy('updated_at', 'desc')->limit(5)->get();
+    $files = $group->files()->with('user')->orderBy('updated_at', 'desc')->limit(5)->get();
 
 
     return view ('groups.show')
