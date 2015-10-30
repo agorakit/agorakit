@@ -8,8 +8,6 @@
     <h1>{{ trans('messages.unread_discussions') }}</a></h1>
   </div>
 
-
-
   <table class="table table-hover special">
     <thead>
        <tr>
@@ -23,26 +21,20 @@
     @forelse( $discussions as $discussion )
     <tr>
       <td class="content">
-        <a class="name" href="{{ action('DiscussionController@show', [$discussion->group_id, $discussion->id]) }}">{{ $discussion->name }}</a>
+        <a href="{{ action('DiscussionController@show', [$discussion->group_id, $discussion->id]) }}">
+          <span class="name">{{ $discussion->name }}</span>
           <span class="summary">{{ str_limit($discussion->body, 200) }}</span>
+        </a>
       </td>
-
-
-
 
       <td>
         {{ $discussion->updated_at_human }}
       </td>
 
-
-
       <td>
         <i class="fa fa-comment"></i>
         <span class="badge">{{ $discussion->total_comments - $discussion->read_comments }}</span>
       </td>
-
-
-
 
     </tr>
     @empty

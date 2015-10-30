@@ -89,7 +89,14 @@ class GroupController extends Controller {
   {
     $group = Group::findOrFail($id);
 
+    if (Auth::check())
+    {
     $discussions = $group->discussions()->with('user', 'userReadDiscussion')->orderBy('updated_at', 'desc')->limit(5)->get();
+    }
+    else
+    {
+      $discussions = $group->discussions()->with('user')->orderBy('updated_at', 'desc')->limit(5)->get();
+    }
     $files = $group->files()->with('user')->orderBy('updated_at', 'desc')->limit(5)->get();
 
 
