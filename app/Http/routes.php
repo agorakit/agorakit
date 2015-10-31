@@ -73,17 +73,22 @@ Route::post('groups/create', 'GroupController@store');
 Route::get('groups/{group}', 'GroupController@show');
 
 // memberships & settings
-Route::get('groups/{group}/join', 'MembershipController@join');
-Route::post('groups/{group}/join', 'MembershipController@store');
+Route::get('groups/{group}/join', 'MembershipController@joinConfirm');
+Route::post('groups/{group}/join', 'MembershipController@join');
 
 Route::get('groups/{group}/settings', 'MembershipController@settings');
 Route::post('groups/{group}/settings', 'MembershipController@store');
 
-Route::get('groups/{group}/leave', 'MembershipController@leave');
-Route::post('groups/{group}/leave', 'MembershipController@destroy');
+Route::get('groups/{group}/leave', 'MembershipController@leaveConfirm');
+Route::post('groups/{group}/leave', 'MembershipController@leave');
 
-Route::get('groups/{group}/invite', 'MembershipController@invite');
-Route::post('groups/{group}/invite', 'MembershipController@sendInvites');
+
+// invites
+Route::get('groups/{group}/invite', 'InviteController@invite');
+Route::post('groups/{group}/invite', 'InviteController@sendInvites');
+Route::get('groups/{group}/invite/confirm/{token}', 'InviteController@inviteConfirm');
+
+
 
 
 // Discussions

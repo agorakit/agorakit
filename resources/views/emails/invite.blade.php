@@ -1,12 +1,26 @@
-{{trans('membership.invite_email_intro')}}
+@extends('emails.template')
+
+@section('content')
 
 
-{{trans('membership.invite_email_user')}} {{$invitating_user->name}}
 
-{{trans('membership.invite_email_wants_to_invite_you_to')}} {{$group->name}}
 
-{{trans('membership.invite_email_click_link_to_validate')}}
+<strong>Bonjour,</strong>
 
-{{$invite->token}}
+<p>
+  {{$invitating_user->name}} pense que vous pourriez être intéressé(e) de rejoindre le groupe "{{$group->name}}"
+</p>
 
-{{trans('membership.invite_email_outro')}}
+<p>Voici la description de ce groupe : "{{$group->body}}"</p>
+
+
+<div class="button">
+<a  href="{{action('InviteController@inviteConfirm', [$group->id, $invite->token]) }}">Accepter l'invitation &rarr;</a>
+</div>
+
+<p style="font-size: 0.8em">Si vous ne souhaitez pas rejoindre ce groupe, ne faites rien. Vous ne recevrez pas d'invitations suplémentaires à participer à ce groupe.</p>
+
+<p style="font-size: 0.8em">Si vous pensez que ce message est du spam, merci de nous contacter.</p>
+
+
+@endsection

@@ -11,7 +11,7 @@
 </p>
 
 
-{!! Form::open(array('action' => ['MembershipController@destroy', $group->id])) !!}
+{!! Form::open(array('action' => ['MembershipController@leave', $group->id])) !!}
 
 <div class="form-group">
 {!! Form::submit(trans('messages.leave_this_group'), ['class' => 'btn btn-primary form-control']) !!}

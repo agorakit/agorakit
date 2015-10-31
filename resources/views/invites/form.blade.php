@@ -11,7 +11,7 @@
 </p>
 
 
-{!! Form::open(array('action' => ['MembershipController@sendInvites', $group->id])) !!}
+{!! Form::open(array('action' => ['InviteController@sendInvites', $group->id])) !!}
 
 <div class="form-group">
     {!! Form::label('invitations', trans('membership.people_to_invite')) !!}

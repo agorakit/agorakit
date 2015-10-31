@@ -12,7 +12,7 @@
 </p>
 
 
-{!! Form::open(array('action' => ['MembershipController@store', $group->id])) !!}
+{!! Form::open(array('action' => ['MembershipController@join', $group->id])) !!}
 
 @include('membership.form')
 

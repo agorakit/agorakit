@@ -1,0 +1,4 @@
+Work in progress, put some style ideas here
+
+Color buttons :
+background-color: #e29d27;

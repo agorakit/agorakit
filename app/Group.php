@@ -82,16 +82,37 @@ class Group extends Model
   }
 
   /**
-  * Returns membership info for curently logged user
-  * Returns false if no membership found
+  *	Returns true if current user is a member of this group
   */
   public function isMember()
   {
     if (\Auth::check())
     {
       $member = $this->membership->first();
-      if ($member)
+      if ($member && $member->pivot->membership > 10)
       {
+      return true;
+      }
+    }
+
+    return false;
+  }
+
+
+  /**
+  * Returns membership info for curently logged user
+  * Returns false if no membership found
+  */
+  public function getMembership()
+  {
+    if (\Auth::check())
+    {
+      $member = $this->membership->first();
+
+
+      if ($member )
+      {
+
         return $member->pivot->membership;
       }
     }
