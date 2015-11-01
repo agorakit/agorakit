@@ -3,11 +3,12 @@
 @section('content')
 
 @include('partials.grouptab')
+<div class="tab_content">
 
-<div class="container">
+
   <h2>{{trans('discussion.all_in_this_group')}} <a class="btn btn-primary btn-xs" href="{{ action('DiscussionController@create', $group->id ) }}">
     <i class="fa fa-plus"></i>
-{{trans('discussion.create_one_button')}}</a></h2>
+    {{trans('discussion.create_one_button')}}</a></h2>
 
     <table class="table table-hover">
       @forelse( $discussions as $discussion )
@@ -34,12 +35,12 @@
           <i class="fa fa-comment"></i>
           <span class="badge">{{ $discussion->unReadCount() }}</span>
           @endif
-          
+
         </td>
 
       </tr>
       @empty
-        {{trans('messages.nothing_yet')}}
+      {{trans('messages.nothing_yet')}}
       @endforelse
     </table>
 
@@ -48,7 +49,7 @@
 
   </div>
 
-
+  
 
 
   @endsection

@@ -1,56 +1,60 @@
-  <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
-              <span class="sr-only">{{ trans('messages.toggle_navigation') }}</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a href="{{ url('/') }}" class="navbar-brand"><i class="fa fa-child"></i> Mobilizator</a>
-          </div>
-          <div class="navbar-collapse collapse" id="navbar">
-            <ul class="nav navbar-nav">
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+        <span class="sr-only">{{ trans('messages.toggle_navigation') }}</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="{{ url('/') }}" class="navbar-brand"><i class="fa fa-child"></i> {{Config::get('mobilizator.name')}}</a>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar">
 
-              @if ($user_logged)
-              <li>
-                <a href="{{ url('unread') }}">
-                  {{ trans('messages.unread_discussions') }}
-                  @if ($unread_discussions > 0) <span class="badge">{{$unread_discussions}}</span>@endif
-                </a>
-              </li>
+      <ul class="nav navbar-nav">
+        @if ($user_logged)
+        <li>
+          <a href="{{ url('unread') }}">
+            {{ trans('messages.unread_discussions') }}
+            @if ($unread_discussions > 0) <span class="badge">{{$unread_discussions}}</span>@endif
+          </a>
+        </li>
 
-              <li>
-                <a href="{{ url('/') }}">
-                  {{ trans('messages.your_groups') }}
-                </a>
-              </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            {{ trans('messages.your_groups') }} <span class="caret"></span>
+          </a>
 
-              @endif
-              <!--
-              <li><a href="{{ url('/') }}">{{ trans('messages.home') }}</a></li>
+          <ul class="dropdown-menu">
 
-            -->
+            @foreach ($user_groups as $user_group)
+            <li><a href="{{ action('GroupController@show', $user_group->id)}}">{{$user_group->name}}</a></li>
+            @endforeach
 
-
-
-            </ul>
-
-
-            <ul class="nav navbar-nav navbar-right">
-
-              @if ($user_logged)
-              <li><a>{{ trans('messages.hello') }}, {{{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}}</a></li>
-              <li><a href="{{ url('auth/logout') }}">{{ trans('messages.logout') }}</a></li>
-              @else
-              <li><a href="{{ url('auth/register') }}">{{ trans('messages.register') }}</a></li>
-              <li><a href="{{ url('auth/login') }}">{{ trans('messages.login') }}</a></li>
-              @endif
+            <li role="separator" class="divider"></li>
+            <li><a href="{{ action('GroupController@index', $user_group->id)}}">{{ trans('messages.groups_list') }}</a></li>
+          </ul>
+        </li>
 
 
+        @endif
+    </ul>
 
-            </ul>
 
-          </div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
-      </nav>
+    <ul class="nav navbar-nav navbar-right">
+
+      @if ($user_logged)
+      <li><a>{{ trans('messages.hello') }}, {{{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}}</a></li>
+      <li><a href="{{ url('auth/logout') }}">{{ trans('messages.logout') }}</a></li>
+      @else
+      <li><a href="{{ url('auth/register') }}">{{ trans('messages.register') }}</a></li>
+      <li><a href="{{ url('auth/login') }}">{{ trans('messages.login') }}</a></li>
+      @endif
+
+
+
+    </ul>
+
+  </div><!--/.nav-collapse -->
+</div><!--/.container-fluid -->
+</nav>

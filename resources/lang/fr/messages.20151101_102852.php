@@ -1,6 +1,6 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/11/01 10:34:03 
+ Generated via "php artisan localization:missing" at 2015/10/29 22:22:22 
 *************************************************************************/
 
 return array (
@@ -15,7 +15,6 @@ return array (
   'files' => 'Fichiers',
   'forgotten_password' => 'Mot de passe oublié',
   'groups' => 'Groupes',
-  'groups_list' => 'groups_list',
   'hello' => 'Bonjour',
   'home' => 'Accueil',
   'howdy' => 'Oupse',

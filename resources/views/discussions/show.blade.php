@@ -3,7 +3,7 @@
 @section('content')
 
 @include('partials.grouptab')
-
+<div class="tab_content">
 
 <div class="discussion">
   <h2 class="name">
@@ -36,6 +36,7 @@
 
 </div>
 
+</div>
 
 
 @endsection

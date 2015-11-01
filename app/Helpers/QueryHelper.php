@@ -53,7 +53,19 @@ class QueryHelper
     ', [Auth::user()->id, Auth::user()->id]);
 
 
-      return $discussions;
+    return $discussions;
+
+  }
+
+  public static function  getUserGroups()
+  {
+
+    $groups = DB::select('
+    select id, name from groups where groups.id in
+    (select group_id from membership where user_id = ? and membership.membership >= 10)
+    ', [Auth::user()->id] );
+
+    return $groups;
 
   }
 

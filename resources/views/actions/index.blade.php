@@ -7,14 +7,16 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
 {!! $calendar->script() !!}
 
-@stop
+@endsection
 
 @section('content')
 
 @include('partials.grouptab')
 
-<div class="container">
-  <h2>Agenda and actions of this group <a class="btn btn-primary btn-xs" href="{{ action('ActionController@create', $group->id ) }}"><i class="fa fa-plus"></i> {{trans('action.create_one_button')}}</a></h2>
+<div class="tab_content">
+
+
+  <h2>{{trans('action.agenda_of_this_group')}} <a class="btn btn-primary btn-xs" href="{{ action('ActionController@create', $group->id ) }}"><i class="fa fa-plus"></i> {{trans('action.create_one_button')}}</a></h2>
 
   <div class="spacer"></div>
 
@@ -65,10 +67,9 @@
     @endforeach
   </table>
 
-
-
-
 </div>
+
+
 
 
 

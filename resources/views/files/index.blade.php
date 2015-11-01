@@ -16,9 +16,14 @@
 
 @include('partials.grouptab')
 
-<div class="container">
 
-@if ($upload_allowed)
+<div class="tab_content">
+
+
+
+
+
+  @if ($upload_allowed)
   {!! Form::open(['url' => action('FileController@create', $group->id), 'class' => 'dropzone', 'files'=>true, 'id'=>'real-dropzone']) !!}
 
   <div class="fallback">
@@ -27,7 +32,7 @@
   </div>
 
   {!! Form::close() !!}
-@endif
+  @endif
 
 
   <table class="table table-hover">
@@ -65,8 +70,6 @@
   {!! $files->render() !!}
 
 </div>
-
-
 
 
 @endsection

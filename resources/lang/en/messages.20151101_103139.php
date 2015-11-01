@@ -1,9 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/11/01 10:34:03 
+ Generated via "php artisan localization:missing" at 2015/11/01 10:28:50 
 *************************************************************************/
 
 return array (
+  //============================== New strings to translate ==============================//
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/partials/nav.blade.php
+  'groups_list' => 'groups_list',
   //==================================== Translations ====================================//
   'actions' => 'Actions',
   'all_the_groups_welcome' => 'Here are all the groups on this server.',
@@ -15,7 +18,6 @@ return array (
   'files' => 'files',
   'forgotten_password' => 'Forgotten password',
   'groups' => 'Groups',
-  'groups_list' => 'groups_list',
   'hello' => 'Hello',
   'home' => 'Home',
   'howdy' => 'Whoops!',

@@ -138,7 +138,10 @@ table.special .name
 
 
 /*********************** TABS and GROUP HEADERS ************************************/
-.nav-tabs, .nav-pills
+
+.tab_content
 {
-margin-bottom: 2em;
+  background-color: white;
+  padding: 2%;
+  width: 100%;
 }
