@@ -8,8 +8,10 @@ class Membership extends Model
 {
     protected $table = 'membership';
     public $timestamps = true;
-
     protected $fillable = ['group_id', 'user_id', 'membership'];
+
+    protected $dates = ['notifed_at'];
+
 
     public function votes()
     {

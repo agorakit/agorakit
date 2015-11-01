@@ -12,6 +12,8 @@ class UserReadDiscussion extends Model
 
   public $timestamps = false;
 
-  
+  protected $dates = ['read_at'];
+
+
 
 }

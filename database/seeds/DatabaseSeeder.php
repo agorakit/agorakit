@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     // create 10 users
     DB::table('users')->delete();
 
-    for ($i = 1; $i <= 100; ++$i) {
+    for ($i = 1; $i <= 10; ++$i) {
       App\User::create([
         'email' => $faker->email,
         'password' => bcrypt('secret'),
@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
         DB::table('discussions')->delete();
         DB::table('comments')->delete();
 
-        for ($i = 1; $i <= 20; ++$i) {
+        for ($i = 1; $i <= 5; ++$i) {
           $group = App\Group::create([
             //'name' => $faker->city.'\'s user group',
             'name' => 'Group nr '.$i,

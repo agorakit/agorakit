@@ -39,10 +39,10 @@ class CreateMembershipTable extends Migration
 
         // number of minutes between notifications asked by the user
         // -1 to disable
-  			$table->integer('notifications');
+  			$table->integer('notification_interval');
 
-        // When was the last notification sent
-  			$table->timestamp('notified_on');
+        // When was the last notification sent ?
+  			$table->timestamp('notified_at');
 
 
 

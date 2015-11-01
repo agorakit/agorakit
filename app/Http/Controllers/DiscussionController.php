@@ -125,6 +125,7 @@ class DiscussionController extends Controller
     {
       $UserReadDiscussion = \App\UserReadDiscussion::firstOrNew(['discussion_id' => $discussion->id, 'user_id' => Auth::user()->id]);
       $UserReadDiscussion->read_comments = $discussion->total_comments;
+      $UserReadDiscussion->read_at = Carbon::now();
       $UserReadDiscussion->save();
     }
 

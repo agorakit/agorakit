@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App;
-
+use Carbon\Carbon;
 
 class MembershipController extends Controller
 {
@@ -45,28 +45,29 @@ class MembershipController extends Controller
 
     $membership->membership = 20;
 
-    //dd($request->all());
-
     switch ($request->get('notifications')) {
       case 'hourly':
-      $membership->notifications = 60;
+      $membership->notification_interval = 60;
       break;
       case 'daily':
-      $membership->notifications = 60 * 24;
+      $membership->notification_interval = 60 * 24;
       break;
       case 'weekly':
-      $membership->notifications = 60 * 24 * 7;
+      $membership->notification_interval = 60 * 24 * 7;
       break;
       case 'biweekly':
-      $membership->notifications = 60 * 24 * 14;
+      $membership->notification_interval = 60 * 24 * 14;
       break;
       case 'monthly':
-      $membership->notifications = 60 * 24 * 30;
+      $membership->notification_interval = 60 * 24 * 30;
       break;
       case 'never':
-      $membership->notifications = -1;
+      $membership->notification_interval = -1;
       break;
     }
+
+    // we prented the user has been already notified once, now. The first mail sent will be at the choosen interval from now on.
+    $membership->notified_at = Carbon::now();
 
     $membership->save();
 

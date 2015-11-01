@@ -89,8 +89,6 @@ Route::post('groups/{group}/invite', 'InviteController@sendInvites');
 Route::get('groups/{group}/invite/confirm/{token}', 'InviteController@inviteConfirm');
 
 
-
-
 // Discussions
 Route::get('groups/{group}/discussions', 'DiscussionController@index');
 Route::get('groups/{group}/discussions/create', 'DiscussionController@create');
@@ -106,6 +104,9 @@ Route::post('groups/{group}/discussions/{discussion}', 'DiscussionController@upd
 // general unread stuff summary
 Route::get('unread', 'DiscussionController@indexUnRead');
 
+
+// Notification email test
+Route::get('groups/{group}/notify', 'NotificationController@notify');
 
 // Comments
 Route::post('groups/{group}/discussions/{discussion}/reply', 'CommentController@reply');

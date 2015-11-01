@@ -33,7 +33,9 @@ class QueryHelper
     return $count;
   }
 
-
+  /**
+   * Returns a list of the 50 latest unread discussions for the current user
+   */
   public static function  getUnreadDiscussions()
   {
 
@@ -57,6 +59,32 @@ class QueryHelper
 
   }
 
+
+
+  public static function  getUnreadDiscussionsSince($user_id, $group_id, $since)
+  {
+
+    $discussions = DB::select('select * from
+    (
+    select *,
+    (select read_comments from user_read_discussion where discussion_id = discussions.id and user_id = :user_id) as read_comments
+    from discussions where discussions.group_id = :group_id) as discussions
+
+    where discussions.total_comments > read_comments or read_comments is null and discussions.updated_at > :since
+    order by updated_at desc
+    limit 0, 50
+
+    ', ['user_id' => $user_id, 'group_id' => $group_id, 'since' => $since]);
+
+
+    return $discussions;
+
+  }
+
+
+  /**
+  * Returns a list of groups the current user is subscribed to.
+  */
   public static function  getUserGroups()
   {
 
@@ -68,6 +96,21 @@ class QueryHelper
     //dd($groups);
 
     return $groups;
+
+  }
+
+
+  public static function getNotificationsToSend()
+  {
+    $notifications = DB::select('
+    select * from
+    (select *, date_add(notified_on, interval notification_interval minute) as notify from membership
+    where notifications > 0
+    and membership >= 10) as memberships
+    where notify < now() or notify is null
+    ');
+
+    return $notifications;
 
   }
 
