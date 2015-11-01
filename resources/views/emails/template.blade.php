@@ -6,14 +6,22 @@
 
   <style type="text/css">
 
+  body
+  {
+    background-color: #eee;
+  }
+
 
   div.body
   {
     margin: auto;
     max-width: 600px;
     padding: 3%;
-    border: 1px solid gray;
-    background-color: #eee;
+    /*border: 1px solid gray;*/
+    background-color: white;
+    border: 0;
+    border-bottom: 3px solid #DCDCDC;
+
   }
 
   .button
@@ -38,10 +46,12 @@
 
   </head>
 
-  <body>
+  <body style="background-color: #eee">
 
   <div class="body">
-  @yield('content')
+
+      @yield('content')
+
   </div>
 
 

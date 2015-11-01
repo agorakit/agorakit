@@ -2,8 +2,8 @@
 
 @section('content')
 
-
 @include('partials.grouptab')
+
 
 <h2>About this group</h2>
 <p>

@@ -16,6 +16,7 @@
 <div class="container">
   <h2>Agenda and actions of this group <a class="btn btn-primary btn-xs" href="{{ action('ActionController@create', $group->id ) }}"><i class="fa fa-plus"></i> {{trans('action.create_one_button')}}</a></h2>
 
+  <div class="spacer"></div>
 
 
   {!! $calendar->calendar() !!}

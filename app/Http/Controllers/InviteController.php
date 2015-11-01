@@ -7,6 +7,12 @@ use Mail;
 
 class InviteController extends Controller
 {
+
+  public function __construct()
+  {
+    $this->middleware('member', ['only' => ['invite', 'sendInvites']]);
+  }
+
   /**
   * Shows an invitation form for the specific group.
   *
@@ -68,9 +74,10 @@ class InviteController extends Controller
         // - send invitation email
 
 
-        Mail::send('emails.invite', ['invite' => $invite, 'group' => $group, 'invitating_user' => $request->user()], function ($message) use ($email) {
+        Mail::send('emails.invite', ['invite' => $invite, 'group' => $group, 'invitating_user' => $request->user()], function ($message) use ($email, $request, $group) {
           $message->from('noreply@example.com', 'Laravel');
           $message->to($email);
+          $message->subject($request->user()->name . ' vous invite à ' . $group->name);
         });
 
 

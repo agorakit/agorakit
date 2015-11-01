@@ -2,6 +2,32 @@
 body
 {
   padding-top: 40px;
+  color: rgb(20, 20, 20);
+  background-color: rgb(244, 240, 231);
+}
+
+/*
+.container
+{
+  background-color: rgb(242, 241, 239);
+}
+*/
+
+
+.spacer
+{
+  margin-bottom: 2em;
+}
+
+
+.group_header
+{
+    border-bottom: 3px solid #DCDCDC;
+    margin-top: 3em;
+    margin-bottom: 2em;
+    background-color: white;
+    padding: 0.5em 2em 1em 2em;
+
 }
 
 /****************************** GROUP HOMEPAGE ********************************/
@@ -15,6 +41,9 @@ body
 {
   display: inline-block;
   width: 100%;
+  border: 0;
+  border-bottom: 3px solid #DCDCDC;
+
 }
 
 .group .summary
@@ -109,7 +138,7 @@ table.special .name
 
 
 /*********************** TABS and GROUP HEADERS ************************************/
-.nav-tabs
+.nav-tabs, .nav-pills
 {
-margin-bottom: 1em;
+margin-bottom: 2em;
 }

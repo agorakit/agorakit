@@ -10,8 +10,7 @@ class MembershipController extends Controller
 {
   public function __construct()
   {
-    $this->middleware('auth', ['only' => ['join', 'leave', 'settings', 'store', 'edit', 'update', 'destroy']]);
-    $this->middleware('member', ['only' => ['invite', 'sendInvites']]);
+    $this->middleware('auth', ['only' => ['join', 'joinConfirm', 'leave', 'leaveConfirm', 'settings', 'settingsForm']]);
   }
 
   /**
