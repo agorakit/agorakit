@@ -138,8 +138,8 @@ class QueryHelper
   {
     $notifications = DB::select('
     select * from
-    (select *, date_add(notified_on, interval notification_interval minute) as notify from membership
-    where notifications > 0
+    (select *, date_add(notified_at, interval notification_interval minute) as notify from membership
+    where notification_interval > 0
     and membership >= 10) as memberships
     where notify < now() or notify is null
     ');
