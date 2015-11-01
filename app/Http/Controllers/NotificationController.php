@@ -11,7 +11,7 @@ use Auth;
 class NotificationController extends Controller
 {
   /**
-   * Testing how a notification email would work
+   * Testing how a notification email would work and preview
    *
    * @return \Illuminate\Http\Response
    */
@@ -24,19 +24,31 @@ class NotificationController extends Controller
       $membership = \App\Membership::where('user_id', '=', Auth::user()->id)
       ->where('group_id', "=", $group->id)->firstOrFail();
 
+      echo '<h2>Membership</h2>';
+      echo 'last notified at : ' . $membership->notified_at;
+
+      dump($membership);
+
       // find unread discussions since timestamp
       $discussions = QueryHelper::getUnreadDiscussionsSince(Auth::user()->id, $group->id, $membership->notified_at);
 
-      dd($discussions);
+      echo '<h2>discussions</h2>';
+      dump($discussions);
 
+      // find new files since timestamp
+      $files = \App\File::where('updated_at', '>', $membership->notified_at)
+      ->where('group_id', "=", $group->id)->get();
+      echo '<h2>Files</h2>';
+      dump($files);
+
+      // find new members since timestamp
+      echo '<h2>Users</h2>';
+      $users = QueryHelper::getNewMembersSince(Auth::user()->id, $group->id, $membership->notified_at);
+
+      dump($users);
 
       //TODO
 
-
-
-      // find unread discussions since timestamp
-      // find new files since timestamp
-      // find new members since timestamp
       // find future actions until next mail timestamp
 
 
