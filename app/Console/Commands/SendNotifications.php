@@ -86,9 +86,10 @@ class SendNotifications extends Command
     if (count($discussions) > 0 or count($files) > 0 or count($users) > 0 or count($actions) > 0)
     {
       Mail::send('emails.notification', ['user' => $user, 'group' => $group, 'membership' => $membership, 'discussions' => $discussions,
-      'files' => $files, 'users' => $users, 'actions' => $actions], function ($message) use($user) {
+      'files' => $files, 'users' => $users, 'actions' => $actions], function ($message) use($user, $group) {
         $message->from('us@example.com', 'TODO');
         $message->to($user->email);
+        $message->subject('Des nouvelles du groupe "' . $group->name . '"');
       });
     }
 

@@ -6,7 +6,7 @@
 <h2>Bonjour {{$user->name}},</h2>
 
 <p>
-  Voici les dernières nouvelles du groupe "{{$group->name}}"
+  Voici les dernières nouvelles du groupe "<a href="{{action('GroupController@show', $group->id)}}">{{$group->name}}</a>"
 </p>
 
 <h3>Dernières discussion et mises à jour</h3>
