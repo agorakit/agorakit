@@ -65,6 +65,8 @@ class QueryHelper
     (select group_id from membership where user_id = ? and membership.membership >= 10)
     ', [Auth::user()->id] );
 
+    //dd($groups);
+
     return $groups;
 
   }

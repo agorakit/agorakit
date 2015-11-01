@@ -2,7 +2,6 @@
 
 @section('content')
 
-@include('partials.grouptab')
 
 <h1>{{ trans('messages.leaving_the_group_called') }} {{$group->name}}</h1>
 

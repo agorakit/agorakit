@@ -27,12 +27,14 @@
 
           <ul class="dropdown-menu">
 
-            @foreach ($user_groups as $user_group)
+            @forelse ($user_groups as $user_group)
             <li><a href="{{ action('GroupController@show', $user_group->id)}}">{{$user_group->name}}</a></li>
-            @endforeach
+            @empty
+            <li><a href="{{ action('GroupController@index')}}">{{ trans('membership.not_subscribed_to_group_yet') }}</a></li>
+            @endforelse
 
             <li role="separator" class="divider"></li>
-            <li><a href="{{ action('GroupController@index', $user_group->id)}}">{{ trans('messages.groups_list') }}</a></li>
+            <li><a href="{{ action('GroupController@index')}}">{{ trans('messages.groups_list') }}</a></li>
           </ul>
         </li>
 
