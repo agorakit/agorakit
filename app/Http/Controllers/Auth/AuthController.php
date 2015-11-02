@@ -7,6 +7,8 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use App\Mailers\AppMailer;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -56,10 +58,35 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+
+        dd($data);
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+
+        $mailer = new AppMailer;
+        $mailer->sendEmailConfirmationTo($user);
+
+        // This is crappy. $data should instead be the full Request object!!! TODO
+        //Request::session()->flash('message', 'Please confirm your email address.');
+        return $user;
+
     }
+
+
+    /**
+    * Confirm a user's email address.
+    *
+    * @param  string $token
+    * @return mixed
+    */
+    public function confirmEmail(Request $request, $token)
+    {
+      User::whereToken($token)->firstOrFail()->confirmEmail();
+      $request->session()->flash('message', 'Task was successful!');
+      return redirect()->url('/');
+    }
+
 }

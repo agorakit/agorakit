@@ -7,7 +7,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">{{ trans('messages.password_reset') }}</div>
 				<div class="panel-body">
-					@include('partials.errors')
+		
 
 					<form class="form-horizontal" role="form" method="POST" action="{{ url('/password/reset') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">

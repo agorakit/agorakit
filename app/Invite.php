@@ -23,7 +23,7 @@ class Invite extends Model
 
   public function generatetoken()
   {
-    $this->token = bin2hex(openssl_random_pseudo_bytes(16));
+    $this->token = str_random(30);
   }
 
 

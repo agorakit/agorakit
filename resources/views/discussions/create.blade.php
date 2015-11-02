@@ -20,7 +20,6 @@
 
   {!! Form::close() !!}
 
-  @include('partials.errors')
 
 </div>
 

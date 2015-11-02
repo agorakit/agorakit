@@ -154,6 +154,7 @@ return [
         MaddHatter\LaravelFullcalendar\ServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
+    
     ],
 
     /*

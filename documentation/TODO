@@ -33,3 +33,10 @@ Indéterminé :
 - Upload de fichiers dans les discussions (ou discussions sur des fichiers?) -> possibilité de lier une discussion à un fichier / possibilité de lier une discussion à une action ?
 - Système d'écriture collaborative type wiki
 - Système de sondage / vote / prise de décision
+
+
+
+
+Antispam
+Implement akismet for the first 20 comments of each user then allow file upload or something
+https://github.com/nickurt/laravel-akismet

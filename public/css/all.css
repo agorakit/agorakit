@@ -145,3 +145,13 @@ table.special .name
   padding: 2%;
   width: 100%;
 }
+
+
+
+/************************ dialogs *************************/
+
+.alert
+{
+  margin-top: 2em;
+  font-size: 1.5em;
+}

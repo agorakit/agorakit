@@ -1,0 +1,9 @@
+Info for developers
+
+
+Notifications are made like this :
+$request->session()->flash('error', 'Task was unsuccessful!');
+$request->session()->flash('message', 'Task was successful!');
+
+They are shown on every view.
+Errors are also shown the same way using the standard error object.

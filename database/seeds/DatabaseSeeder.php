@@ -25,12 +25,14 @@ class DatabaseSeeder extends Seeder
       }
 
       // TODO mandatory remove this :
-      App\User::create([
+      $user = App\User::create([
         'email' => 'test@test.com',
         'password' => bcrypt('123456'),
         'username' => 'tester',
         'name' => 'Mister tester',
         ]);
+
+        $user->confirmEmail();
 
         // Groups, discussions and comments
         DB::table('groups')->delete();

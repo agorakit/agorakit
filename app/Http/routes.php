@@ -33,6 +33,8 @@ Route::controllers([
 ]);
 
 
+Route::get('register/confirm/{token}', 'Auth\AuthController@confirmEmail');
+
 /*
 
 So we will basically have this scheme :

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Group;
 use Auth;
 use Illuminate\Http\Request;
+use Flash;
 
 class GroupController extends Controller {
 
@@ -20,7 +21,7 @@ class GroupController extends Controller {
   *
   * @return Response
   */
-  public function index()
+  public function index(Request $request)
   {
     if (Auth::check())
     {
@@ -31,7 +32,6 @@ class GroupController extends Controller {
       $groups = Group::orderBy('updated_at', 'desc')->paginate(12);
     }
 
-    //dd($groups);
     return view('groups.index')
     ->with('groups', $groups);
   }

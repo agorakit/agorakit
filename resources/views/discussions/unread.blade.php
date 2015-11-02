@@ -2,22 +2,22 @@
 
 @section('content')
 
-<div class="container">
 
-  <div class="page-header">
-    <h1>{{ trans('messages.unread_discussions') }}</a></h1>
-  </div>
 
-  <table class="table table-hover special">
-    <thead>
-       <tr>
-           <th style="width: 75%">Titre</th>
-           <th>Date</th>
-           <th>A lire</th>
-       </tr>
-   </thead>
+<div class="page-header">
+  <h1>{{ trans('messages.unread_discussions') }}</a></h1>
+</div>
 
-   <tbody>
+<table class="table table-hover special">
+  <thead>
+    <tr>
+      <th style="width: 75%">Titre</th>
+      <th>Date</th>
+      <th>A lire</th>
+    </tr>
+  </thead>
+
+  <tbody>
     @forelse( $discussions as $discussion )
     <tr>
       <td class="content">
@@ -40,11 +40,11 @@
     @empty
     {{trans('messages.nothing_yet')}}
   </tbody>
-  </table>
+</table>
 
 
-  @endforelse
-</div>
+@endforelse
+
 
 
 

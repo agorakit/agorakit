@@ -35,6 +35,11 @@
 
             <li role="separator" class="divider"></li>
             <li><a href="{{ action('GroupController@index')}}">{{ trans('messages.groups_list') }}</a></li>
+            <li><a href="{{ action('GroupController@create') }}">
+              <i class="fa fa-bolt"></i>
+              {{ trans('group.create_a_group_button') }}</a> </li>
+
+
           </ul>
         </li>
 
