@@ -13,6 +13,8 @@ class Group extends Model
 {
   use ValidatingTrait;
 
+  use \Venturecraft\Revisionable\RevisionableTrait;
+
   protected $rules = [
     'name' => 'required',
     'body' => 'required'

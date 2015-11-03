@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Document extends Model {
 
+	use \Venturecraft\Revisionable\RevisionableTrait;
+
 	protected $table = 'documents';
 	public $timestamps = true;
 

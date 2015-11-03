@@ -51,7 +51,7 @@ class AppMailer
     $users = QueryHelper::getNewMembersSince($user->id, $group->id, $membership->notified_at);
 
     // find future actions until next 2 weeks, this is curently hardcoded...
-    $actions = \App\Action::where('start', '>', Carbon::now())->where('stop', '<', Carbon::now()->addWeek()->addWeek() );
+    $actions = \App\Action::where('start', '>', Carbon::now())->where('stop', '<', Carbon::now()->addWeek()->addWeek() )
     ->where('group_id', "=", $group->id)->get();
 
     // if we have anything, build the message and send

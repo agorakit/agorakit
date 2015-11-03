@@ -18,6 +18,9 @@ class Discussion extends Model
     'user_id' => 'required',
   ];
 
+  protected $dontKeepRevisionOf = ['total_comments'];
+);
+
     protected $table = 'discussions';
     protected $fillable = ['name', 'body', 'group_id'];
 
