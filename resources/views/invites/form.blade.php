@@ -26,6 +26,6 @@
 
 {!! Form::close() !!}
 
-@include('partials.errors')
+
 
 @endsection

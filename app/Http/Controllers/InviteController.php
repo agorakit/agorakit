@@ -39,8 +39,8 @@ class InviteController extends Controller
   */
   public function sendInvites(Request $request, $group_id)
   {
-    $status_messages = []; // this will store all the status info (who has been invited for example) returned tot he user
 
+    $status_message = null;
 
     // extract emails
     // from http://textsnippets.com/posts/show/179
@@ -60,7 +60,7 @@ class InviteController extends Controller
       ->count();
 
       if ($invitation_counter > 0) {
-        $status_messages[] = trans('membership.user_already_invited').' ('.$email.')';
+        $status_message .= trans('membership.user_already_invited').' : ' . $email .'<br/>';
       } else {
         // - create an invite token and store in invite table
         $invite = new \App\Invite();
@@ -81,20 +81,32 @@ class InviteController extends Controller
         });
 
 
-        $status_messages[] = $email . ' '. trans('membership.users_has_been_invited');
+        $status_message .= trans('membership.users_has_been_invited') .  ' : ' .  $email . '<br/>';
       }
     }
     // TODO queue or wathever if more than 50 mails for instance. But it's also a kind of spam prevention that it takes time to invite on the server
 
-    // show success screen
-    return $status_messages;
+
+    if ($status_message)
+    {
+      $request->session()->flash('message', $status_message );
+    }
+    return redirect()->back();
+
   }
 
 
   public function inviteConfirm(Request $request, $group_id, $token)
   {
+    // TODO invite confirm request handling
+
     // check if token is valid
+
+    // check if user exists
+    // if user exists :
     // add user to membership for the group taken from the invite table
+
+    // if user doesn't exists, we have the opportunity to create, login and validate email in one go (since we have the invite token)
 
   }
 

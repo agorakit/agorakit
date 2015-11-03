@@ -20,7 +20,7 @@ class QueryHelper
   /**
   * Returns a list of groups the current user is subscribed to. This one is run on every page
   */
-  public static function  getUserGroups()
+  public static function getUserGroups()
   {
 
     $groups = DB::select('

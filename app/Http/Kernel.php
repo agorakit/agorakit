@@ -42,11 +42,8 @@ class Kernel extends HttpKernel
   */
   protected function schedule(Schedule $schedule)
   {
-    /* TODO
-    $schedule->call(function () {
-      $notifications = QueryHelper::getNotificationsToSend();
-    })->hourly();
-    */
+
+    $schedule->command('notifications:send')->everyFiveMinutes()->withoutOverlapping();
   }
 
 

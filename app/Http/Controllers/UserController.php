@@ -52,7 +52,8 @@ class UserController extends Controller {
    */
   public function show($id)
   {
-    return 'not yet'; // TODO
+    $user = \App\User::findOrFail($id);
+    return view('users.show')->with('user', $user);
   }
 
   /**

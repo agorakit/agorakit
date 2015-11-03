@@ -131,7 +131,7 @@ class MembershipController extends Controller
    */
   public function settings(Request $request, $group_id)
   {
-    // TODO
+    // TODO Settings screen
   }
 
 

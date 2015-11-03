@@ -51,7 +51,7 @@
     <ul class="nav navbar-nav navbar-right">
 
       @if ($user_logged)
-      <li><a>{{ trans('messages.hello') }}, {{{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}}</a></li>
+      <li><a href="{{action('UserController@show', $user->id)}}">{{ trans('messages.hello') }}, {{{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}}</a></li>
       <li><a href="{{ url('auth/logout') }}">{{ trans('messages.logout') }}</a></li>
       @else
       <li><a href="{{ url('auth/register') }}">{{ trans('messages.register') }}</a></li>

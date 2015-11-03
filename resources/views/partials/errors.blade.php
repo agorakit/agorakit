@@ -16,7 +16,7 @@
     <span aria-hidden="true">&times;</span>
   </button>
   <i class="fa fa-info-circle"></i>
-    {{ Session::get('message') }}
+    {!! Session::get('message') !!}
   </div>
 @endif
 

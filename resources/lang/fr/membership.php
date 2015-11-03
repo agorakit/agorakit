@@ -8,7 +8,7 @@ return array (
   // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/InviteController.php
   'user_already_invited' => 'Utilisateur déjà invité',
   // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/InviteController.php
-  'users_has_been_invited' => 'Les utilisateurs ont été invités',
+  'users_has_been_invited' => 'Utilisateur invité',
   // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/MembershipController.php
   'welcome' => 'Bienvenue',
   //==================================== Translations ====================================//

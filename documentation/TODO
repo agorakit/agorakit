@@ -1,11 +1,16 @@
 Par ordre d'importance :
 
 Avant lancement :
-- Notifications par mail (nouvelles discussions / actions à venir / nouveaux membres / nouveaux fichiers)
-- Confirmation par mail des membres
-- Invitations par mail
+[à tester] Notifications par mail (nouvelles discussions / actions à venir / nouveaux membres / nouveaux fichiers)
+[presque ok] Confirmation par mail des membres
+[presque ok, logique à revoir] Invitations par mail
+
+- Avatars
 - Antispam pour les nouveaux
 - Page d'accueil plus attirante avec config du texte d'intro et du nom de l'install
+- Options d'abonnement pour chaque groupe (onglet settings)
+- Image de groupe
+
 
 Court terme :
 - Système de vote différent, par émotions/sentiments/spam report
@@ -13,6 +18,8 @@ Court terme :
 - Possibilté de suprimer son propre contenu (uniquement). Impossible de supprimer une discussion si elle a des commentaires
 - Modification de ses propres commentaires dans les 15 minutes de publication
 - Affichage de l'historique des discussions et des commentaires
+- Traductions complètes
+
 
 Moyen terme
 - Calendrier général
@@ -23,6 +30,7 @@ Moyen terme
 - Géolocalisation des groupes
 - Carte des groupes et actions dont on est membre / de tous les groupes
 - Wysiwyg sur certains contenus
+- Possibilité de dire "je participe" à une action
 
 Indéterminé :
 - Formulaire d'upload de fichiers séparé

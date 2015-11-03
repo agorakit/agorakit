@@ -10,37 +10,38 @@ use App\Helpers\QueryHelper;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap any application services.
-     */
-    public function boot()
-    {
+  /**
+  * Bootstrap any application services.
+  */
+  public function boot()
+  {
 
-      // adds user info to all views TODO : refactor
-      view()->composer('partials.nav', function ($view) {
-          $view->with('user_logged', Auth::check());
+    // adds user info to all views
+    // 
+    view()->composer('partials.nav', function ($view) {
+      $view->with('user_logged', Auth::check());
 
-          if (Auth::check()) {
-              $view->with('user', Auth::user());
+      if (Auth::check()) {
+        $view->with('user', Auth::user());
 
-              // count number of unread discussions.
-              $view->with('unread_discussions', QueryHelper::getUnreadDiscussionsCount() );
-              $view->with('user_groups', QueryHelper::getUserGroups() );
-
-
-          }
+        // count number of unread discussions.
+        $view->with('unread_discussions', QueryHelper::getUnreadDiscussionsCount() );
+        $view->with('user_groups', QueryHelper::getUserGroups() );
 
 
+      }
 
 
-        });
-    }
 
-    /**
-     * Register any application services.
-     */
-    public function register()
-    {
-        //
-    }
+
+    });
+  }
+
+  /**
+  * Register any application services.
+  */
+  public function register()
+  {
+    //
+  }
 }
