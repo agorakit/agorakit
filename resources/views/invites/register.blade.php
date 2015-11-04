@@ -10,11 +10,9 @@
 
 
 
-					@if (isset($invite_and_register))
-					<form class="form-horizontal" role="form" method="POST" action="{{ action('InviteController@inviteRegister') }}">
-					@else
-					<form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/register') }}">
-					@endif
+
+					<form class="form-horizontal" role="form" method="POST" action="{{ action('InviteController@inviteRegister', [$group->id, $token]) }}">
+
 
 
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">

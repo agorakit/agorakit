@@ -37,10 +37,9 @@ class RedirectIfNotGroupMember
             return redirect()->back()->with('message', trans('message', 'not_logged_in'));
         }
 
+        // we expect a url in the form /groups/{group_id}
         if ($request->segment(1) == 'groups') {
-
-            $group = \App\Group::findOrFail($request->segment(2));
-            $membership = \App\Membership::where('user_id', '=',  $request->user()->id)->where('group_id', $group->id)->first();
+            $membership = \App\Membership::where('user_id', '=',  $request->user()->id)->where('group_id', $request->segment(2))->first();
 
             if ($membership && $membership->membership > 10) {
                 return $next($request);

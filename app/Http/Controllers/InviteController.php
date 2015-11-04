@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Mail;
+use Auth;
+
 
 class InviteController extends Controller
 {
@@ -22,7 +24,6 @@ class InviteController extends Controller
   */
   public function invite(Request $request, $group_id)
   {
-    // TODO : only confirmed users should be able to mass invite
     // Explain that on the form
     $group = \App\Group::findOrFail($group_id);
 
@@ -84,7 +85,8 @@ class InviteController extends Controller
         $status_message .= trans('membership.users_has_been_invited') .  ' : ' .  $email . '<br/>';
       }
     }
-    // TODO queue or wathever if more than 50 mails for instance. But it's also a kind of spam prevention that it takes time to invite on the server
+    // NICETOHAVE We could queue or wathever if more than 50 mails for instance.
+    // But it's also a kind of spam prevention that it takes time to invite on the server
 
 
     if ($status_message)
@@ -96,6 +98,11 @@ class InviteController extends Controller
   }
 
 
+  /**
+   * Whenever a user wants to confirm an invite he received from an email link
+   * - if user exists we directly subscribe him/her to the group
+   * - if not we show an account creation screen
+   */
   public function inviteConfirm(Request $request, $group_id, $token)
   {
     // TODO invite confirm request handling
@@ -105,7 +112,7 @@ class InviteController extends Controller
 
     $user = \App\User::where('email', $invite->email)->first();
 
-
+    $group = \App\Group::findOrFail($invite->group_id);
 
     // check if user exists
     if ($user)
@@ -118,17 +125,58 @@ class InviteController extends Controller
       // remove invite we don't need it anymore, or do we for logging purposes?
       $invite->delete();
 
-      $request->session()->flash('message', 'You are now a member of this group' );
+      $request->session()->flash('message', 'Vous êtes maintenant membre de ce groupe' );
       return redirect()->action('GroupController@show', $group_id);
     }
     else
     {
       // if user doesn't exists, we have the opportunity to create, login and validate email in one go (since we have the invite token) TODO
-      return 'not yet';
+
+      // show view
+      $request->session()->flash('message', 'Vous n\'avez pas encore de compte sur ce site, merci de vous en créer un');
+
+      return view('invites.register')
+      ->with('email', $invite->email)
+      ->with('group', $group)
+      ->with('token', $token);
+    }
+  }
+
+
+  /**
+   * Process the account creation from the form of inviteConfirm()
+   */
+  public function inviteRegister(Request $request, $group_id, $token)
+  {
+    $this->validate($request, [
+      'name' => 'required|max:255',
+      'email' => 'required|email|max:255|unique:users',
+      'password' => 'required|confirmed|min:6',
+      ]);
+
+      $user = new \App\User;
+      $user->name = $request->get('name');
+      $user->email = $request->get('email');
+      $user->password = bcrypt($request->get('password'));
+      $user->verified = 1;
+
+      $user->save();
+
+      $invite = \App\Invite::whereToken($token)->firstOrFail();
+      $invite->delete();
+
+
+      $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $group_id]);
+      $membership->membership = 20;
+      $membership->save();
+
+      Auth::login($user);
+
+      $request->session()->flash('message', 'Vous êtes maintenant membre de ce groupe' );
+      return redirect()->action('GroupController@show', $group_id);
+
+
     }
 
 
-
   }
-
-}

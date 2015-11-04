@@ -91,6 +91,8 @@ Route::post('groups/{group}/leave', 'MembershipController@leave');
 Route::get('groups/{group}/invite', 'InviteController@invite');
 Route::post('groups/{group}/invite', 'InviteController@sendInvites');
 Route::get('groups/{group}/invite/confirm/{token}', 'InviteController@inviteConfirm');
+Route::post('groups/{group}/invite/confirm/{token}', 'InviteController@inviteRegister');
+
 
 
 // Discussions
