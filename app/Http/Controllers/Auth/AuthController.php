@@ -32,7 +32,7 @@ class AuthController extends Controller
   */
   public function __construct()
   {
-    $this->middleware('guest', ['except' => 'getLogout']);
+    $this->middleware('guest', ['except' => ['getLogout', 'confirmEmail']]);
   }
 
   /**
@@ -69,7 +69,10 @@ class AuthController extends Controller
         $mailer = new AppMailer;
         $mailer->sendEmailConfirmationTo($user);
 
-        \Session::flash('message', "Please confirm your email address." );
+        \Session::flash('message', "Please confirm your email address. TODO" );
+
+        unset ($this->redirectPath); // If I don't do that, we are redirected without flashed session from an obscure class
+
         return $user;
       }
 
@@ -83,8 +86,8 @@ class AuthController extends Controller
     public function confirmEmail(Request $request, $token)
     {
       User::whereToken($token)->firstOrFail()->confirmEmail();
-      $request->session()->flash('message', "Vous avez maintenant vérifié votre email" ); // TODO this is not shown and drives me crazy
-      return redirect()->back();
+      $request->session()->flash('message', "Vous avez maintenant vérifié votre email" );
+      return redirect('/');
     }
 
   }

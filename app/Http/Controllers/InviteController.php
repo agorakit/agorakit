@@ -101,12 +101,33 @@ class InviteController extends Controller
     // TODO invite confirm request handling
 
     // check if token is valid
+    $invite = \App\Invite::whereToken($token)->firstOrFail();
+
+    $user = \App\User::where('email', $invite->email)->first();
+
+
 
     // check if user exists
-    // if user exists :
-    // add user to membership for the group taken from the invite table
+    if ($user)
+    {
+      // add user to membership for the group taken from the invite table
+      $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $invite->group_id]);
+      $membership->membership = 20;
+      $membership->save();
 
-    // if user doesn't exists, we have the opportunity to create, login and validate email in one go (since we have the invite token)
+      // remove invite we don't need it anymore, or do we for logging purposes?
+      $invite->delete();
+
+      $request->session()->flash('message', 'You are now a member of this group' );
+      return redirect()->action('GroupController@show', $group_id);
+    }
+    else
+    {
+      // if user doesn't exists, we have the opportunity to create, login and validate email in one go (since we have the invite token) TODO
+      return 'not yet';
+    }
+
+
 
   }
 

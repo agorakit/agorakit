@@ -22,6 +22,7 @@ Route::get('/', 'GroupController@index');
 Route::get('home', 'GroupController@index');
 
 
+Route::get('register/confirm/{token}', 'Auth\AuthController@confirmEmail');
 
 /**
  * Authentification routes
@@ -33,7 +34,8 @@ Route::controllers([
 ]);
 
 
-Route::get('register/confirm/{token}', 'Auth\AuthController@confirmEmail');
+
+
 
 /*
 

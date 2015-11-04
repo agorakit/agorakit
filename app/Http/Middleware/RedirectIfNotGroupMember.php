@@ -31,22 +31,24 @@ class RedirectIfNotGroupMember
     {
 
         // if current user is not a member of the passed in group
-        // TODO don't just count, check the membership status
+        // curently it means the user must have membership level higher than 10
 
         if ($this->auth->guest()) {
-            return redirect()->back()->with('message', 'You need to be logged so I can check if you are a member of this group');
+            return redirect()->back()->with('message', trans('message', 'not_logged_in'));
         }
 
         if ($request->segment(1) == 'groups') {
-            $group = \App\Group::findOrFail($request->segment(2));
 
-            if ($group->users()->where('user_id', $request->user()->id)->count() == 1) {
+            $group = \App\Group::findOrFail($request->segment(2));
+            $membership = \App\Membership::where('user_id', '=',  $request->user()->id)->where('group_id', $group->id)->first();
+
+            if ($membership && $membership->membership > 10) {
                 return $next($request);
             } else {
-                return redirect()->back()->with('message', 'You are not a member of this group');
+                return redirect()->back()->with('message', trans('messages.not_a_member'));
             }
         } else {
-            return redirect()->back()->with('message', 'Are you in a group at all !? (url doesnt start with group/something');
+            return redirect()->back()->with('message', 'Are you in a group at all !? (url doesnt start with group/something). This is a bug');
         }
     }
 }

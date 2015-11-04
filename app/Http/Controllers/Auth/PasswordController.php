@@ -20,6 +20,8 @@ class PasswordController extends Controller
 
     use ResetsPasswords;
 
+    
+
     /**
      * Create a new password controller instance.
      *
@@ -28,5 +30,6 @@ class PasswordController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->subject = trans('message.your_password_reset_link');
     }
 }
