@@ -27,7 +27,14 @@ body
     margin-bottom: 2em;
     background-color: white;
     padding: 0.5em 2em 1em 2em;
+}
 
+
+/******************************** UI ******************************************/
+
+.btn-right
+{
+  float: right;
 }
 
 /****************************** GROUP HOMEPAGE ********************************/

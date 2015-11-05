@@ -15,8 +15,6 @@
   <div class="body">
     {{ $discussion->body }}
   </div>
-
-
 </div>
 
 

@@ -71,10 +71,12 @@ Route::get('groups', 'GroupController@index');
 Route::get('groups/create', 'GroupController@create');
 Route::post('groups/create', 'GroupController@store');
 
-
-
 // specific group homepage
 Route::get('groups/{group}', 'GroupController@show');
+
+// group edit
+Route::get('groups/{group}/edit', 'GroupController@edit');
+Route::post('groups/{group}/edit', 'GroupController@update');
 
 // memberships & settings
 Route::get('groups/{group}/join', 'MembershipController@joinConfirm');

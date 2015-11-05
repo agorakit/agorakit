@@ -73,7 +73,7 @@ class GroupController extends Controller {
 
     // make the current user a member of the group
     $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
-    $membership->membership = 2;
+    $membership->membership = 20;
     $membership->save();
 
     return redirect()->action('GroupController@show', [$group->id]);
@@ -115,8 +115,14 @@ class GroupController extends Controller {
   * @param  int  $id
   * @return Response
   */
-  public function edit($id)
+  public function edit(Request $request, $group_id)
   {
+    $group = Group::findOrFail($group_id);
+
+    return view('groups.edit')
+    ->with('group', $group)
+    ->with('group', $group)
+    ->with('tab', 'home');
 
   }
 
@@ -126,9 +132,19 @@ class GroupController extends Controller {
   * @param  int  $id
   * @return Response
   */
-  public function update($id)
+  public function update(Request $request, $group_id)
   {
+    $group = Group::findOrFail($group_id);
+    $group->name = $request->input('name');
+    $group->body = $request->input('body');
 
+    $group->user()->associate(Auth::user());
+
+    $group->save();
+
+    $request->session()->flash('message', trans('messages.ressource_updated_successfully'));
+
+    return redirect()->action('GroupController@show', [$group->id]);
   }
 
   /**

@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
   {
 
     // adds user info to all views
-    // 
+    //
     view()->composer('partials.nav', function ($view) {
       $view->with('user_logged', Auth::check());
 
@@ -27,8 +27,6 @@ class AppServiceProvider extends ServiceProvider
         // count number of unread discussions.
         $view->with('unread_discussions', QueryHelper::getUnreadDiscussionsCount() );
         $view->with('user_groups', QueryHelper::getUserGroups() );
-
-
       }
 
 

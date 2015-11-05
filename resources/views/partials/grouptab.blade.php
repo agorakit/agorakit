@@ -5,6 +5,9 @@
 <div class="group_header">
     <h1>{{ $group->name }}</h1>
     <p class="hidden-xs">{{ $group->body}}</p>
+    <a href="{{ action('GroupController@edit', [$group->id]) }}"><i class="fa fa-pencil"></i>
+      {{trans('message.edit')}}</a>
+
 </div>
 
   <ul class="nav nav-tabs">

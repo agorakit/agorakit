@@ -5,8 +5,8 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/index.blade.php
-  'agenda_of_this_group' => 'Agenda de ce groupe',
-  //==================================== Translations ====================================//
-  'create_one_button' => 'Créer une action',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/partials/grouptab.blade.php
+  'edit' => 'Modifier',
+  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/Auth/PasswordController.php
+  'your_password_reset_link' => 'Votre lien de changement de mot de passe',
 );

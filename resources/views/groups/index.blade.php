@@ -38,6 +38,10 @@
       </div>
       @empty
       {{trans('group.no_group_yet')}}
+      <a href="{{ action('GroupController@create') }}" class="btn btn-primary">
+        <i class="fa fa-bolt"></i>
+        {{ trans('group.create_a_group_button') }}
+      </a>
 
       @endforelse
     </div>

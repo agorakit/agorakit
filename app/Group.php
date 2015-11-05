@@ -35,6 +35,14 @@ class Group extends Model
   }
 
   /**
+   * The user who crreated or updated this group title and description
+   */
+  public function user()
+  {
+    return $this->belongsTo('App\User');
+  }
+
+  /**
   * return membership for the current user
   */
   public function membership()

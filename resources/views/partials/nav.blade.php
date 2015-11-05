@@ -40,28 +40,41 @@
               {{ trans('group.create_a_group_button') }}</a> </li>
 
 
-          </ul>
-        </li>
+            </ul>
+          </li>
 
 
-        @endif
-    </ul>
+          @endif
+        </ul>
 
 
-    <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right">
 
-      @if ($user_logged)
-      <li><a href="{{action('UserController@show', $user->id)}}">{{ trans('messages.hello') }}, {{{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}}</a></li>
-      <li><a href="{{ url('auth/logout') }}">{{ trans('messages.logout') }}</a></li>
-      @else
-      <li><a href="{{ url('auth/register') }}">{{ trans('messages.register') }}</a></li>
-      <li><a href="{{ url('auth/login') }}">{{ trans('messages.login') }}</a></li>
-      @endif
+          @if ($user_logged)
+          <li><a href="{{action('UserController@show', $user->id)}}">{{ trans('messages.hello') }}, {{{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}}</a></li>
+          <li><a href="{{ url('auth/logout') }}">{{ trans('messages.logout') }}</a></li>
+          @else
+          <li><a href="{{ url('auth/register') }}">{{ trans('messages.register') }}</a></li>
+          <li><a href="{{ url('auth/login') }}">{{ trans('messages.login') }}</a></li>
+          @endif
 
 
 
-    </ul>
+        </ul>
 
-  </div><!--/.nav-collapse -->
-</div><!--/.container-fluid -->
-</nav>
+      </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+  </nav>
+
+
+  @if (isset($user->verified) && ($user->verified == 0))
+  <div class="container">
+    <div class="alert alert-info alert-dismissible fade in" id="message">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <i class="fa fa-info-circle"></i>
+      Vous n'avez pas vérifié votre email. Merci de le faire depuis votre boite mail.
+    </div>
+  </div>
+  @endif

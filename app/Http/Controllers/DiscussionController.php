@@ -103,7 +103,9 @@ class DiscussionController extends Controller
     $group = Group::findOrFail($group_id);
     $group->discussions()->save($discussion);
 
-    return redirect()->action('DiscussionController@index', [$group->id]);
+    $request->session()->flash('message', trans('messages.ressource_created_successfully'));
+
+    return redirect()->action('DiscussionController@show', [$group->id, $discussion->id]);
   }
 
   /**
@@ -171,7 +173,9 @@ class DiscussionController extends Controller
 
     $discussion->save();
 
-    return redirect()->action('DiscussionController@show', [$discussion->group->id]);
+    $request->session()->flash('message', trans('messages.ressource_updated_successfully'));
+
+    return redirect()->action('DiscussionController@show', [$discussion->group->id, $discussion->id]);
   }
 
   /**

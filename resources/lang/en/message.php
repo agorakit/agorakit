@@ -5,8 +5,8 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/index.blade.php
-  'agenda_of_this_group' => 'agenda_of_this_group',
-  //==================================== Translations ====================================//
-  'create_one_button' => 'create_one_button',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/partials/grouptab.blade.php
+  'edit' => 'edit',
+  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/Auth/PasswordController.php
+  'your_password_reset_link' => 'your_password_reset_link',
 );

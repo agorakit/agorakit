@@ -1,16 +1,9 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/11/05 17:08:39 
+ Generated via "php artisan localization:missing" at 2015/11/01 10:34:03 
 *************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/Auth/AuthController.php
-  'please_confirm_your_email' => 'please_confirm_your_email',
-  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/DiscussionController.php
-  'ressource_created_successfully' => 'ressource_created_successfully',
-  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/GroupController.php
-  'ressource_updated_successfully' => 'ressource_updated_successfully',
   //==================================== Translations ====================================//
   'actions' => 'Actions',
   'all_the_groups_welcome' => 'Here are all the groups on this server.',

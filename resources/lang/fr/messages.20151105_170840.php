@@ -1,16 +1,9 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/11/05 17:08:39
+ Generated via "php artisan localization:missing" at 2015/11/01 10:34:03 
 *************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/Auth/AuthController.php
-  'please_confirm_your_email' => 'Veuillez vérifier votre adresse mail',
-  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/DiscussionController.php
-  'ressource_created_successfully' => 'Contenu créé avec succès',
-  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/GroupController.php
-  'ressource_updated_successfully' => 'Contenu mis à jour avec succès',
   //==================================== Translations ====================================//
   'actions' => 'Actions',
   'all_the_groups_welcome' => 'Vous trouverez ici tous les groupes disponibles sur ce serveur',
@@ -22,7 +15,7 @@ return array (
   'files' => 'Fichiers',
   'forgotten_password' => 'Mot de passe oublié',
   'groups' => 'Groupes',
-  'groups_list' => 'Liste des groupes',
+  'groups_list' => 'groups_list',
   'hello' => 'Bonjour',
   'home' => 'Accueil',
   'howdy' => 'Oupse',
@@ -48,7 +41,6 @@ return array (
   'toggle_navigation' => 'Activer la navigation',
   'unread_discussions' => 'Discussions non lues',
   'your_groups' => 'Mes groupes',
-  'not_a_member' => 'Vous ne faites pas partie de ce groupe',
   //================================== Obsolete strings ==================================//
   'create' => 'Créer',
   'group' => 'Groupe',

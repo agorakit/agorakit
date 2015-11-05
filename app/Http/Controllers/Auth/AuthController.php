@@ -59,7 +59,7 @@ class AuthController extends Controller
     protected function create(array $data)
     {
 
-      
+
       $user = User::create([
         'name' => $data['name'],
         'email' => $data['email'],
@@ -69,9 +69,8 @@ class AuthController extends Controller
         $mailer = new AppMailer;
         $mailer->sendEmailConfirmationTo($user);
 
-        \Session::flash('message', trans('messages.please_confirm_your_email') );
-
-        unset ($this->redirectPath); // If I don't do that, we are redirected without flashed session from an obscure class
+        // \Session::flash('message', trans('messages.please_confirm_your_email') );
+        //unset ($this->redirectPath); // If I don't do that, we are redirected without flashed session from an obscure class
 
         return $user;
       }
