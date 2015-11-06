@@ -4,7 +4,9 @@
 
 @include('partials.grouptab')
 
-<h1>Tour settings for the {{$group->name}} group</h1>
+<div class="tab_content">
+
+<h1>Your settings for the {{$group->name}} group</h1>
 
 <p>
   Here you can choose if and how much email notifications you will receive from this group.
@@ -12,7 +14,7 @@
 </p>
 
 
-{!! Form::model($membership, array('action' => ['MembershipController@store', $group->id])) !!}
+{!! Form::open(array('action' => ['MembershipController@settings', $group->id])) !!}
 
 @include('membership.form')
 
@@ -24,5 +26,7 @@
 {!! Form::close() !!}
 
 @include('partials.errors')
+
+</div>
 
 @endsection

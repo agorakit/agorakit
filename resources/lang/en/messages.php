@@ -1,16 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/11/05 17:08:39 
+ Generated via "php artisan localization:missing" at 2015/11/06 22:59:51 
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/Auth/AuthController.php
-  'please_confirm_your_email' => 'please_confirm_your_email',
-  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/DiscussionController.php
-  'ressource_created_successfully' => 'ressource_created_successfully',
-  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/GroupController.php
-  'ressource_updated_successfully' => 'ressource_updated_successfully',
+  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/Auth/PasswordController.php
+  'your_password_reset_link' => 'your_password_reset_link',
   //==================================== Translations ====================================//
   'actions' => 'Actions',
   'all_the_groups_welcome' => 'Here are all the groups on this server.',
@@ -18,11 +14,11 @@ return array (
   'change_my_password' => 'Change my password',
   'confirm_password' => 'Confirm password',
   'discussions' => 'discussions',
+  'edit' => 'edit',
   'email' => 'Email',
   'files' => 'files',
   'forgotten_password' => 'Forgotten password',
   'groups' => 'Groups',
-  'groups_list' => 'groups_list',
   'hello' => 'Hello',
   'home' => 'Home',
   'howdy' => 'Whoops!',
@@ -40,10 +36,14 @@ return array (
   'or' => 'or',
   'password' => 'Password',
   'password_reset' => 'Password reset',
+  'please_confirm_your_email' => 'please_confirm_your_email',
   'register' => 'Register',
   'registration_time' => 'registration_time',
   'remember_me' => 'Remember me',
+  'ressource_created_successfully' => 'ressource_created_successfully',
+  'ressource_updated_successfully' => 'ressource_updated_successfully',
   'send_my_recover_email' => 'Send my recover email',
+  'settings' => 'settings',
   'something_wrong' => 'Something is wrong with your submission',
   'toggle_navigation' => 'toggle_navigation',
   'unread_discussions' => 'Unread discussions',
@@ -51,5 +51,6 @@ return array (
   //================================== Obsolete strings ==================================//
   'create' => 'Create',
   'group' => 'Group',
+  'groups_list' => 'groups_list',
   'users' => 'users',
 );

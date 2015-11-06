@@ -79,13 +79,13 @@ Route::get('groups/{group}/edit', 'GroupController@edit');
 Route::post('groups/{group}/edit', 'GroupController@update');
 
 // memberships & settings
-Route::get('groups/{group}/join', 'MembershipController@joinConfirm');
+Route::get('groups/{group}/join', 'MembershipController@joinForm');
 Route::post('groups/{group}/join', 'MembershipController@join');
 
-Route::get('groups/{group}/settings', 'MembershipController@settings');
-Route::post('groups/{group}/settings', 'MembershipController@store');
+Route::get('groups/{group}/settings', 'MembershipController@settingsForm');
+Route::post('groups/{group}/settings', 'MembershipController@settings');
 
-Route::get('groups/{group}/leave', 'MembershipController@leaveConfirm');
+Route::get('groups/{group}/leave', 'MembershipController@leaveForm');
 Route::post('groups/{group}/leave', 'MembershipController@leave');
 
 

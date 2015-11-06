@@ -5,11 +5,12 @@ Avant lancement :
 [ok] Confirmation par mail des membres
 [ok] Invitations par mail
 
+- Options d'abonnement pour chaque groupe (onglet settings)
+- Calendrier cliquable
+- Limitation des actions des non confirmés par middleware
 - Avatars
 - Antispam pour les nouveaux
 - Page d'accueil plus attirante avec config du texte d'intro et du nom de l'install
-- Options d'abonnement pour chaque groupe (onglet settings)
-- Calendrier cliquable
 - Image de groupe
 
 
