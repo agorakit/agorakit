@@ -16,6 +16,7 @@ class FileController extends Controller
   public function __construct()
   {
     $this->middleware('member', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
+    $this->middleware('verified', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
     $this->middleware('cache', ['only' => ['index', 'show']]);
   }
 

@@ -13,6 +13,7 @@ class InviteController extends Controller
   public function __construct()
   {
     $this->middleware('member', ['only' => ['invite', 'sendInvites']]);
+    $this->middleware('verified', ['only' => ['invite', 'sendInvites']]);
   }
 
   /**
@@ -78,7 +79,7 @@ class InviteController extends Controller
         Mail::send('emails.invite', ['invite' => $invite, 'group' => $group, 'invitating_user' => $request->user()], function ($message) use ($email, $request, $group) {
           $message->from('noreply@example.com', 'Laravel');
           $message->to($email);
-          $message->subject($request->user()->name . ' vous invite à ' . $group->name);
+          $message->subject( '[' . env('APP_NAME') . '] Invitation à rejoindre le groupe "' . $group->name . '"');
         });
 
 
@@ -154,16 +155,29 @@ class InviteController extends Controller
       'password' => 'required|confirmed|min:6',
       ]);
 
+      $invite = \App\Invite::whereToken($token)->firstOrFail();
+
+
+
+
+      $invite->delete();
+
+
       $user = new \App\User;
       $user->name = $request->get('name');
       $user->email = $request->get('email');
       $user->password = bcrypt($request->get('password'));
-      $user->verified = 1;
+
+      // in the strange event the user changes the email on the registration form, we cannot consider it is verified using the invite.
+      if ($invite->email == $request->get('email'))
+      {
+        $user->verified = 1;
+      }
+
 
       $user->save();
 
-      $invite = \App\Invite::whereToken($token)->firstOrFail();
-      $invite->delete();
+
 
 
       $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $group_id]);

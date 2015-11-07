@@ -20,7 +20,5 @@
 
 <p style="font-size: 0.8em">Si vous ne souhaitez pas rejoindre ce groupe, ne faites rien. Vous ne recevrez pas d'invitations suplémentaires à participer à ce groupe.</p>
 
-<p style="font-size: 0.8em">Si vous pensez que ce message est du spam, merci de nous contacter.</p>
-
 
 @endsection

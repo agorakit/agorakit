@@ -1,9 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/11/07 09:29:56 
+ Generated via "php artisan localization:missing" at 2015/11/06 22:59:51 
 *************************************************************************/
 
 return array (
+  //============================== New strings to translate ==============================//
+  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/Auth/PasswordController.php
+  'your_password_reset_link' => 'your_password_reset_link',
   //==================================== Translations ====================================//
   'actions' => 'Actions',
   'all_the_groups_welcome' => 'Here are all the groups on this server.',
@@ -45,7 +48,6 @@ return array (
   'toggle_navigation' => 'toggle_navigation',
   'unread_discussions' => 'Unread discussions',
   'your_groups' => 'your_groups',
-  'your_password_reset_link' => 'your_password_reset_link',
   //================================== Obsolete strings ==================================//
   'create' => 'Create',
   'group' => 'Group',

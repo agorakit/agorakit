@@ -39,11 +39,13 @@
     </tr>
     @empty
     {{trans('messages.nothing_yet')}}
+    @endforelse
+
   </tbody>
 </table>
 
 
-@endforelse
+
 
 
 

@@ -11,7 +11,7 @@ class GroupController extends Controller {
 
   public function __construct()
   {
-    $this->middleware('auth', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
+    $this->middleware('verified', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
     $this->middleware('member', ['only' => ['edit', 'update', 'destroy']]);
     $this->middleware('cache', ['only' => ['index', 'show']]);
   }
@@ -76,7 +76,7 @@ class GroupController extends Controller {
     $membership->membership = 20;
     $membership->save();
 
-    return redirect()->action('GroupController@show', [$group->id]);
+    return redirect()->action('GroupController@settings', [$group->id]);
   }
 
   /**

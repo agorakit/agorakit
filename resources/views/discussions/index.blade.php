@@ -10,46 +10,55 @@
     <i class="fa fa-plus"></i>
     {{trans('discussion.create_one_button')}}</a></h2>
 
-    <table class="table table-hover">
-      @forelse( $discussions as $discussion )
-      <tr>
-        <td>
-          <a href="{{ action('DiscussionController@show', [$group->id, $discussion->id]) }}">{{ $discussion->name }}</a>
-        </td>
 
-        <td>
-          @unless (is_null ($discussion->user))
-          <a href="{{ action('UserController@show', $discussion->user->id) }}">{{ $discussion->user->name }}</a>
-          @endunless
-        </td>
+    <table class="table table-hover special">
+      <thead>
+        <tr>
 
-        <td>
-          <a href="{{ action('DiscussionController@show', [$group->id, $discussion->id]) }}">{{ $discussion->updated_at->diffForHumans() }}</a>
-        </td>
+          <th style="width: 75%">Titre</th>
+          <th>Date</th>
+          <th>A lire</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @forelse( $discussions as $discussion )
+        <tr>
 
 
 
-        <td>
+          <td class="content">
+            <a href="{{ action('DiscussionController@show', [$discussion->group_id, $discussion->id]) }}">
+              <span class="name">{{ $discussion->name }}</span>
+              <span class="summary">{{ str_limit($discussion->body, 200) }}</span>
+            </a>
+          </td>
 
-          @if ($discussion->unReadCount() > 0)
-          <i class="fa fa-comment"></i>
-          <span class="badge">{{ $discussion->unReadCount() }}</span>
-          @endif
+          <td>
+            {{ $discussion->updated_at->diffForHumans() }}
+          </td>
 
-        </td>
+          <td>
+            @if ($discussion->unReadCount() > 0)
+            <i class="fa fa-comment"></i>
+            <span class="badge">{{ $discussion->unReadCount() }}</span>
+            @endif
+          </td>
 
-      </tr>
-      @empty
-      {{trans('messages.nothing_yet')}}
-      @endforelse
+        </tr>
+        @empty
+        {{trans('messages.nothing_yet')}}
+        @endforelse
+      </tbody>
     </table>
+    
 
     {!! $discussions->render() !!}
 
 
   </div>
 
-  
+
 
 
   @endsection

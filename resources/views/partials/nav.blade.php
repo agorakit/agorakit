@@ -68,12 +68,12 @@
 
   @if (isset($user->verified) && ($user->verified == 0))
   <div class="container">
-    <div class="alert alert-info alert-dismissible fade in" id="message">
+    <div class="alert alert-warning alert-dismissible fade in" id="message">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
       <i class="fa fa-info-circle"></i>
-      Vous n'avez pas vérifié votre email. Merci de le faire depuis votre boite mail.
+      {{trans('messages.email_not_verified')}}
     </div>
   </div>
   @endif

@@ -20,8 +20,8 @@ class AppMailer
   {
     Mail::send('emails.confirm', ['user' => $user], function ($message) use ($user) {
       $message->to($user->email, $user->name)
-      ->subject('Confirm your email')
-      ->from(env('MAIL_FROM', "noreply@example.com"));
+      ->subject('[' . env('APP_NAME') . '] ' . trans('messages.confirm_your_email'))
+      ->from(env('MAIL_FROM', 'noreply@example.com'));
     });
 
   }
@@ -61,7 +61,7 @@ class AppMailer
       'files' => $files, 'users' => $users, 'actions' => $actions], function ($message) use($user, $group) {
         $message->from(env('MAIL_FROM', "noreply@example.com"));
         $message->to($user->email);
-        $message->subject('Des nouvelles du groupe "' . $group->name . '"');
+        $message->subject('[' . env('APP_NAME') . '] ' . 'Des nouvelles du groupe "' . $group->name . '"');
       });
     }
 
