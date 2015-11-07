@@ -12,7 +12,6 @@
     "intervention/image": "^2.3",
     "venturecraft/revisionable": "1.*",
     "watson/validating": "~1.0",
-    "maddhatter/laravel-fullcalendar": "^1.2",
     "laravelcollective/html": "5.1.*",
     "jenssegers/date": "^3.0"
   },

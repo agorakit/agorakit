@@ -1,11 +1,30 @@
 @extends('app')
 
-
 @section('footer')
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
-{!! $calendar->script() !!}
+
+
+<script>
+  $(document).ready(function() {
+    $('#calendar').fullCalendar({
+      events: '{{action('ActionController@indexJson', $group->id)}}',
+        header: {
+            left: '',
+            center: 'prev title next',
+            right: ''
+        },
+        eventClick:  function(event, jsEvent, view) {
+            $('#modalTitle').html(event.title);
+            $('#modalBody').html(event.description);
+            $('#eventUrl').attr('href',event.url);
+            $('#fullCalModal').modal();
+            return false;
+        }
+    });
+});
+</script>
 
 @endsection
 
@@ -21,57 +40,31 @@
   <div class="spacer"></div>
 
 
-  {!! $calendar->calendar() !!}
+
+  <div id="calendar"></div>
+
+  <div id="fullCalModal" class="modal fade">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+                  <h4 id="modalTitle" class="modal-title"></h4>
+              </div>
+              <div id="modalBody" class="modal-body"></div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button class="btn btn-primary"><a id="eventUrl" target="_blank">Event Page</a></button>
+              </div>
+          </div>
+      </div>
+  </div>
 
 
 
 
-  <table class="table table-hover">
-    <tr>
-      <th>Name</th>
-      <th>Starts</th>
-      <th>Stops</th>
-      <th>Location</th>
-      <th>Author</th>
-      <th>Posted</th>
-    </tr>
-    @foreach( $actions as $action )
-    <tr>
-      <td>
-        <a href="{{ action('ActionController@show', [$group->id, $action->id]) }}">{{ $action->name }}</a>
-      </td>
 
-      <td>
-        <a href="{{ action('ActionController@show', [$group->id, $action->id]) }}">{{ $action->start }}</a>
-      </td>
 
-      <td>
-        <a href="{{ action('ActionController@show', [$group->id, $action->id]) }}">{{ $action->stop }}</a>
-      </td>
-
-      <td>
-        <a href="{{ action('ActionController@show', [$group->id, $action->id]) }}">{{ $action->location }}</a>
-      </td>
-
-      <td>
-        @unless (is_null ($action->user))
-        <a href="{{ action('UserController@show', $action->user->id) }}">{{ $action->user->name }}</a>
-        @endunless
-      </td>
-
-      <td>
-        <a href="{{ action('ActionController@show', [$group->id, $action->id]) }}">{{ $action->updated_at->diffForHumans() }}</a>
-      </td>
-
-    </tr>
-    @endforeach
-  </table>
 
 </div>
-
-
-
-
-
 
 @endsection

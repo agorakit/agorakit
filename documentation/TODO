@@ -4,25 +4,28 @@ Avant lancement :
 [à tester] Notifications par mail (nouvelles discussions / actions à venir / nouveaux membres / nouveaux fichiers)
 [ok] Confirmation par mail des membres
 [ok] Invitations par mail
+[ok] Limitation des actions des non confirmés par middleware
+[ok] Options d'abonnement pour chaque groupe (onglet settings)
 
-- Options d'abonnement pour chaque groupe (onglet settings)
 - Calendrier cliquable
-- Limitation des actions des non confirmés par middleware
 - Avatars
+
+Court terme :
 - Antispam pour les nouveaux
 - Page d'accueil plus attirante avec config du texte d'intro et du nom de l'install
 - Image de groupe
-
-
-
-Court terme :
-- Système de vote différent, par émotions/sentiments/spam report
 - Repli des commentaires négatifs?
 - Possibilté de suprimer son propre contenu (uniquement). Impossible de supprimer une discussion si elle a des commentaires
 - Modification de ses propres commentaires dans les 15 minutes de publication
 - Affichage de l'historique des discussions et des commentaires
 - Traductions complètes
 - retirer les boutons des trucs qu'on ne peut pas faire (par exemple invitater quand on ne fait pas partie d'un groupe)
+
+
+Refactor ?
+- Utiliser le système de policy plutôt que des middleware, ça permet de faire des chouettes trucs dans les vues @can
+- Système de vote différent, par émotions/sentiments/spam report
+- Upload de fichiers dans les discussions (ou discussions sur des fichiers?) -> possibilité de lier une discussion à un fichier / possibilité de lier une discussion à une action ?
 
 
 Moyen terme
@@ -36,13 +39,12 @@ Moyen terme
 - Wysiwyg sur certains contenus
 - Possibilité de dire "je participe" à une action
 
-Indéterminé :
+Indéterminé / nice to have :
 - Formulaire d'upload de fichiers séparé
 - Affichage fichiers en album photo
 - Affichage des fichiers par types
 - Tags sur tout + recherche par tags + menu
 - Recherche
-- Upload de fichiers dans les discussions (ou discussions sur des fichiers?) -> possibilité de lier une discussion à un fichier / possibilité de lier une discussion à une action ?
 - Système d'écriture collaborative type wiki
 - Système de sondage / vote / prise de décision
 

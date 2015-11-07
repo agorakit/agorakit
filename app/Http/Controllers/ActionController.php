@@ -30,9 +30,32 @@ class ActionController extends Controller
 
       return view('actions.index')
       ->with('actions', $actions)
-      ->with('calendar', $calendar)
       ->with('group', $group)
       ->with('tab', 'action');
+  }
+
+
+
+  public function indexJson(REQUEST $request, $group_id)
+  {
+    $group = Group::findOrFail($group_id);
+    $actions = $group->actions()->orderBy('start', 'asc')->get();
+
+    $event = '';
+    $events = '';
+
+    foreach ($actions as $action)
+    {
+      $event['id'] = $action->id;
+      $event['title'] = $action->name;
+      $event['description'] = $action->body;
+      $event['start'] = $action->start->toIso8601String();
+      $event['end'] = $action->stop->toIso8601String();
+      $event['url'] = action('ActionController@show', $group->id, $action->id);
+
+      $events[] = $event;
+    }
+    return $events;
   }
 
 /**

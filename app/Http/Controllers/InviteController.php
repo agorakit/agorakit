@@ -29,6 +29,7 @@ class InviteController extends Controller
     $group = \App\Group::findOrFail($group_id);
 
     return view('invites.form')
+    ->with('tab', 'users')
     ->with('group', $group);
   }
 

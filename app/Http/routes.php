@@ -33,12 +33,7 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
-
-
-
-
 /*
-
 So we will basically have this scheme :
 
 groups
@@ -129,6 +124,8 @@ Route::get('groups/{group}/discussions/{discussion}/comment/{comment}/cancel', '
 Route::get('groups/{group}/actions', 'ActionController@index');
 Route::get('groups/{group}/actions/create', 'ActionController@create');
 Route::post('groups/{group}/actions/create', 'ActionController@store');
+Route::get('groups/{group}/actions/json', 'ActionController@indexJson');
+
 Route::get('groups/{group}/actions/{action}', 'ActionController@show');
 Route::get('groups/{group}/actions/{action}/edit', 'ActionController@edit');
 Route::post('groups/{group}/actions/{action}', 'ActionController@update');
