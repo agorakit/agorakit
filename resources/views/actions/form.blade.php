@@ -3,12 +3,12 @@
 
 <div class="form-group">
 	{!! Form::label('name', 'Title') !!}
-	{!! Form::text('name', null, ['class' => 'form-control']) !!}
+	{!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <div class="form-group">
 	{!! Form::label('body', 'Description') !!}
-	{!! Form::textarea('body', null, ['class' => 'form-control']) !!}
+	{!! Form::textarea('body', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <div class="form-group">
@@ -21,7 +21,7 @@
 	<div class="col-md-6">
 		<div class="form-group">
 			{!! Form::label('start', 'Début') !!}<br/>
-			{!! Form::text('start', \Carbon\Carbon::now()->format('Y-m-d H:i') , ['class' => 'form-control', 'id' => 'start']) !!}
+			{!! Form::text('start', \Carbon\Carbon::now()->format('Y-m-d H:i') , ['class' => 'form-control', 'id' => 'start', 'required']) !!}
 
 		</div>
 	</div>
@@ -29,7 +29,7 @@
 	<div class="col-md-6">
 		<div class="form-group">
 			{!! Form::label('stop', 'Fin') !!}<br/>
-			{!! Form::text('stop', null, ['class' => 'form-control' , 'id' => 'stop']) !!}
+			{!! Form::text('stop', null, ['class' => 'form-control' , 'id' => 'stop', 'required']) !!}
 		</div>
 	</div>
 </div>

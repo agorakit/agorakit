@@ -1,7 +1,7 @@
 {!! Form::open(array('action' => ['CommentController@reply', $group->id, $discussion->id])) !!}
 
 <div class="form-group">
-			{!! Form::textarea('body', null, ['class' => 'form-control']) !!}
+			{!! Form::textarea('body', null, ['class' => 'form-control' , 'required']) !!}
 </div>
 
 <div class="form-group">

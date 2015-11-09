@@ -18,7 +18,7 @@
 
   <div class="form-group">
     {!! Form::label('invitations', trans('membership.people_to_invite')) !!}
-    {!! Form::textarea('invitations', null, ['class' => 'form-control']) !!}
+    {!! Form::textarea('invitations', null, ['class' => 'form-control', 'required']) !!}
   </div>
 
   <div class="form-group">

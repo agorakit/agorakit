@@ -2,11 +2,11 @@
 
 
 	<div class="form-group">
-			{!! Form::label('name', 'Title:') !!}
-			{!! Form::text('name', null, ['class' => 'form-control']) !!}
+			{!! Form::label('name', 'Titre:') !!}
+			{!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
 			</div>
 
 	<div class="form-group">
 			{!! Form::label('body', 'Text:') !!}
-			{!! Form::textarea('body', null, ['class' => 'form-control']) !!}
+			{!! Form::textarea('body', null, ['class' => 'form-control', 'required']) !!}
 </div>

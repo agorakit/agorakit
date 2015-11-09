@@ -55,8 +55,8 @@
               </div>
               <div id="modalBody" class="modal-body"></div>
               <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  <button class="btn btn-primary"><a id="eventUrl" target="_blank">Event Page</a></button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                  <!--<button class="btn btn-primary"><a id="eventUrl" target="_blank">Event Page</a></button>-->
               </div>
           </div>
       </div>

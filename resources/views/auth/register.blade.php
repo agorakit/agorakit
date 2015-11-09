@@ -22,28 +22,28 @@
 						<div class="form-group">
 							<label class="col-md-4 control-label">{{ trans('messages.name') }}</label>
 							<div class="col-md-6">
-								<input type="text" class="form-control" name="name" value="{{ old('name') }}">
+								<input type="text" class="form-control" required="required"  name="name" value="{{ old('name') }}">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-md-4 control-label">{{ trans('messages.email') }}</label>
 							<div class="col-md-6">
-								<input type="email" class="form-control" name="email" value="@if (isset($email)) {{$email}}@else{{ old('email')}}@endif">
+								<input type="email" class="form-control" required="required" name="email" value="@if (isset($email)) {{$email}}@else{{ old('email')}}@endif">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-md-4 control-label">{{ trans('messages.password') }}</label>
 							<div class="col-md-6">
-								<input type="password" class="form-control" name="password">
+								<input type="password" class="form-control" required="required" name="password">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-md-4 control-label">{{ trans('messages.confirm_password') }}</label>
 							<div class="col-md-6">
-								<input type="password" class="form-control" name="password_confirmation">
+								<input type="password" class="form-control" required="required" name="password_confirmation">
 							</div>
 						</div>
 

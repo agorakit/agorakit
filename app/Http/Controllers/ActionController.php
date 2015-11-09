@@ -47,8 +47,8 @@ class ActionController extends Controller
     foreach ($actions as $action)
     {
       $event['id'] = $action->id;
-      $event['title'] = $action->name;
-      $event['description'] = $action->body;
+      $event['title'] = $action->name . ' (' . $group->name . ')';
+      $event['description'] = $action->body . ' <br/> ' . $action->location;
       $event['start'] = $action->start->toIso8601String();
       $event['end'] = $action->stop->toIso8601String();
       $event['url'] = action('ActionController@show', $group->id, $action->id);
@@ -84,6 +84,7 @@ class ActionController extends Controller
 
      $action->name = $request->input('name');
      $action->body = $request->input('body');
+     $action->location = $request->input('location');
      $action->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start'));
      $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop'));
 

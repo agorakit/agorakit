@@ -6,9 +6,7 @@ Avant lancement :
 [ok] Invitations par mail
 [ok] Limitation des actions des non confirmés par middleware
 [ok] Options d'abonnement pour chaque groupe (onglet settings)
-
-[presque ok] Calendrier cliquable
-- Avatars
+[ok] Calendrier cliquable
 
 
 Court terme :
@@ -21,7 +19,8 @@ Court terme :
 - Modification de ses propres commentaires dans les 15 minutes de publication
 - Affichage de l'historique des discussions et des commentaires
 - Traductions complètes
-- retirer les boutons des trucs qu'on ne peut pas faire (par exemple invitater quand on ne fait pas partie d'un groupe)
+- retirer les boutons des trucs qu'on ne peut pas faire (par exemple invitater quand on ne fait pas partie d'un groupe) -> utiliser les policy laravel  pour ça avec @can
+- Avatars
 
 
 Refactor ?
