@@ -73,6 +73,9 @@ Route::get('groups/{group}', 'GroupController@show');
 Route::get('groups/{group}/edit', 'GroupController@edit');
 Route::post('groups/{group}/edit', 'GroupController@update');
 
+// group history
+Route::get('groups/{group}/history', 'GroupController@history');
+
 // memberships & settings
 Route::get('groups/{group}/join', 'MembershipController@joinForm');
 Route::post('groups/{group}/join', 'MembershipController@join');

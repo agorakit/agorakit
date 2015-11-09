@@ -14,6 +14,12 @@
     {{ $group->body }}
   </p>
 
+  @if ($group->revisionHistory->count() > 0)
+  <p>
+    <a href="{{action('GroupController@history', $group->id)}}">Afficher l'historique des modifications</a>
+  </p>
+  @endif
+
   <h2>{{trans('group.latest_discussions')}}</h2>
 
   <table class="table table-hover">

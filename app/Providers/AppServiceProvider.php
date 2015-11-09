@@ -2,17 +2,16 @@
 
 namespace App\Providers;
 
-
 use Illuminate\Support\ServiceProvider;
 use Auth;
-
 use App\Helpers\QueryHelper;
+use Carbon\Carbon;
 
 class AppServiceProvider extends ServiceProvider
 {
-  /**
-  * Bootstrap any application services.
-  */
+    /**
+   * Bootstrap any application services.
+   */
   public function boot()
   {
 
@@ -22,24 +21,24 @@ class AppServiceProvider extends ServiceProvider
       $view->with('user_logged', Auth::check());
 
       if (Auth::check()) {
-        $view->with('user', Auth::user());
+          $view->with('user', Auth::user());
 
         // count number of unread discussions.
-        $view->with('unread_discussions', QueryHelper::getUnreadDiscussionsCount() );
-        $view->with('user_groups', QueryHelper::getUserGroups() );
+        $view->with('unread_discussions', QueryHelper::getUnreadDiscussionsCount());
+          $view->with('user_groups', QueryHelper::getUserGroups());
       }
-
-
-
-
     });
+
+    // set correct locale for Carbon
+    Carbon::setLocale(config('app.locale'));
+
   }
 
   /**
-  * Register any application services.
-  */
+   * Register any application services.
+   */
   public function register()
   {
-    //
+      //
   }
 }

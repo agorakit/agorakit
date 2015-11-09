@@ -1,18 +1,9 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/11/09 20:30:00 
+ Generated via "php artisan localization:missing" at 2015/11/07 09:29:56 
 *************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/history.blade.php
-  'changed' => 'changed',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/history.blade.php
-  'changed_from' => 'changed_from',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/history.blade.php
-  'changed_to' => 'changed_to',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/partials/nav.blade.php
-  'email_not_verified' => 'email_not_verified',
   //==================================== Translations ====================================//
   'actions' => 'Actions',
   'all_the_groups_welcome' => 'Here are all the groups on this server.',

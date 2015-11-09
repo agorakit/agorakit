@@ -29,6 +29,12 @@ body
   float: right;
 }
 
+.history
+{
+  padding: 15px;
+  background-color: rgb(206, 222, 131);
+}
+
 /****************************** GROUPS & THEIR HOMEPAGE ********************************/
 
 .thumbnail img
