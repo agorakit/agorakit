@@ -1,21 +1,19 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/11/09 20:30:00
+ Generated via "php artisan localization:missing" at 2015/11/09 20:58:07
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/history.blade.php
-  'changed' => 'a modifié',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/history.blade.php
-  'changed_from' => 'valeur initiale',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/history.blade.php
-  'changed_to' => 'changé en',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/membership/edit.blade.php
+  'save' => 'Enregistrer',
   //==================================== Translations ====================================//
   'actions' => 'Actions',
-  'all_the_groups_welcome' => 'Vous trouverez ici tous les groupes disponibles sur ce serveur',
   'cancel' => 'J\'ai changé d\'avis, annuler',
   'change_my_password' => 'Changer mon mot de passe',
+  'changed' => 'a modifié',
+  'changed_from' => 'valeur initiale',
+  'changed_to' => 'changé en',
   'confirm_password' => 'Confirmer le mot de passe',
   'discussions' => 'Discussions',
   'edit' => 'Modifier',
@@ -28,9 +26,10 @@ return array (
   'home' => 'Accueil',
   'howdy' => 'Oups',
   'i_changed_my_mind' => 'J\'ai changé d\'avis, je ne veux pas quitter ce groupe',
+  'join' => 'Rejoindre ce groupe',
   'leave_this_group' => 'Quitter ce groupe',
-  'leaving_help_message' => 'Nous sommes désolés de vous voir partir de ce groupe. Merci de confirmer que c\'est bien votre intention. Vous ne recevrez plus de notifications par mail de ce groupe.',
-  'leaving_the_group_called' => 'Quitter le groupe nommé',
+  'leaving_help_message' => 'Nous sommes désolés de vous voir partir de ce groupe. Merci de confirmer que c\'est bien votre intention. Vous ne recevrez plus de notifications par mail de ce groupe et vous n\'apparaîtrez plus dans la liste des participants.',
+  'leaving_the_group_called' => 'Quitter le groupe',
   'login' => 'Connection',
   'logout' => 'Déconnection',
   'mail' => 'Email',
@@ -55,6 +54,7 @@ return array (
   'your_groups' => 'Mes groupes',
   'your_password_reset_link' => 'Votre lien de changement de mot de passe',
   //================================== Obsolete strings ==================================//
+  'all_the_groups_welcome' => 'Vous trouverez ici tous les groupes disponibles sur ce serveur',
   'confirm_your_email' => 'Vérifiez votre adresse email',
   'create' => 'Créer',
   'group' => 'Groupe',

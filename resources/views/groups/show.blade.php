@@ -9,10 +9,13 @@
 
 
 
-  <h2>{{trans('group.about_this_group')}}</h2>
+  <h2>{{trans('group.about_this_group')}}   <a href="{{ action('GroupController@edit', [$group->id]) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>
+      {{trans('messages.edit')}}</a></h2>
   <p>
     {{ $group->body }}
   </p>
+
+
 
   @if ($group->revisionHistory->count() > 0)
   <p>

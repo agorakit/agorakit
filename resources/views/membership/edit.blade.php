@@ -6,26 +6,36 @@
 
 <div class="tab_content">
 
-<h1>Your settings for the {{$group->name}} group</h1>
+<h1>Vos préférences pour le groupe "{{$group->name}}"</h1>
 
-<p>
-  Here you can choose if and how much email notifications you will receive from this group.
-  We will never send you more that what you ask.
-</p>
+<div class="help">
+  <h4>Comment ça marche?</h4>
+  <p>
+    {{trans('membership.settings_intro')}}
+  </p>
 
+</div>
 
 {!! Form::open(array('action' => ['MembershipController@settings', $group->id])) !!}
 
 @include('membership.form')
 
 <div class="form-group">
-{!! Form::submit('Save my settings', ['class' => 'btn btn-primary form-control']) !!}
+{!! Form::submit(trans('messages.save'), ['class' => 'btn btn-primary form-control']) !!}
 </div>
 
 
 {!! Form::close() !!}
 
 @include('partials.errors')
+
+
+<div class="spacer">
+</div>
+
+
+<p>Si vous souhaitez quitter ce groupe, <a href="{{action('MembershipController@leaveForm', $group->id)}}">cliquez ici</a></p>
+
 
 </div>
 

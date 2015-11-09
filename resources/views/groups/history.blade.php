@@ -7,8 +7,6 @@
 <div class="tab_content">
 
 
-
-
   <h2>{{trans('group.history_of_this_group')}}</h2>
 
 

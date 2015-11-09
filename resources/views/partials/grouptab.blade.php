@@ -1,9 +1,5 @@
 <div class="group_header">
     <h1>{{ $group->name }}</h1>
-    <p class="hidden-xs">{{ $group->body}}</p>
-    <a href="{{ action('GroupController@edit', [$group->id]) }}"><i class="fa fa-pencil"></i>
-      {{trans('messages.edit')}}</a>
-
 </div>
 
   <ul class="nav nav-tabs">
@@ -37,11 +33,18 @@
       </a>
     </li>
 
-
+    @if ($group->isMember())
     <li role="presentation" @if (isset($tab) && ($tab == 'settings')) class="active" @endif>
       <a href="{{ action('MembershipController@settingsForm', $group->id) }}">
         <i class="fa fa-cog"></i> <span class="hidden-xs">{{ trans('messages.settings') }}</span>
       </a>
     </li>
+    @else
+    <li role="presentation" @if (isset($tab) && ($tab == 'settings')) class="active" @endif>
+      <a href="{{ action('MembershipController@joinForm', $group->id) }}">
+        <i class="fa fa-cog"></i> <span class="hidden-xs">{{ trans('messages.join') }}</span>
+      </a>
+    </li>
+    @endif
 
   </ul>

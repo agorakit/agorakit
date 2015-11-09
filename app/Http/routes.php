@@ -106,6 +106,9 @@ Route::get('groups/{group}/discussions/{discussion}', 'DiscussionController@show
 Route::get('groups/{group}/discussions/{discussion}/edit', 'DiscussionController@edit');
 Route::post('groups/{group}/discussions/{discussion}', 'DiscussionController@update');
 
+// group history
+Route::get('groups/{group}/discussions/{discussion}/history', 'DiscussionController@history'); // TODO discussions history
+
 
 // general unread stuff summary
 Route::get('unread', 'DiscussionController@indexUnRead');

@@ -1,12 +1,9 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/11/09 20:58:07 
+ Generated via "php artisan localization:missing" at 2015/11/09 20:56:54 
 *************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/membership/edit.blade.php
-  'save' => 'save',
   //==================================== Translations ====================================//
   'actions' => 'Actions',
   'cancel' => 'I changed my mind, cancel',

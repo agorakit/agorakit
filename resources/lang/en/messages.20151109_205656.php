@@ -1,12 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/11/09 20:58:07 
+ Generated via "php artisan localization:missing" at 2015/11/09 20:51:32 
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/membership/edit.blade.php
-  'save' => 'save',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/partials/grouptab.blade.php
+  'join' => 'join',
   //==================================== Translations ====================================//
   'actions' => 'Actions',
   'cancel' => 'I changed my mind, cancel',
@@ -26,7 +26,6 @@ return array (
   'home' => 'Home',
   'howdy' => 'Whoops!',
   'i_changed_my_mind' => 'I changed my mind, I don\'t want to leave this group',
-  'join' => 'join',
   'leave_this_group' => 'leave_this_group',
   'leaving_help_message' => 'We are sad to see you go... confirm that you want to leave this group. You won\'t receive notifications anymore.',
   'leaving_the_group_called' => 'leaving_the_group_called',

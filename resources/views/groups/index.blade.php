@@ -9,7 +9,6 @@
   <h1>{{ trans('messages.groups') }}</h1>
 </div>
 
-<p>{{ trans('messages.all_the_groups_welcome') }}</p>
 <div class="groups_scroller">
 
   <div class="row">

@@ -25,6 +25,7 @@ class MembershipController extends Controller
 
     return view('membership.join')
     ->with('group', $group)
+    ->with('tab', 'settings')
     ->with('membership', $membership)
     ->with('interval', 'weekly');
     ;
@@ -70,6 +71,7 @@ class MembershipController extends Controller
 
     return view('membership.leave')
     ->with('group', $group)
+    ->with('tab', 'settings')
     ->with('membership', $membership);
   }
 

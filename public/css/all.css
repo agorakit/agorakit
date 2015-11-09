@@ -1,6 +1,6 @@
 /***************************** COMMON STUFF ***********************************/
-body
-{
+
+body {
   padding-top: 40px;
   color: rgb(20, 20, 20);
   background-color: rgb(244, 240, 231);
@@ -9,171 +9,139 @@ body
 /*
 .container
 {
-  background-color: rgb(242, 241, 239);
+background-color: rgb(242, 241, 239);
 }
 */
 
-
-.spacer
-{
+.spacer {
   margin-bottom: 2em;
 }
 
-
-
-
 /******************************** UI ******************************************/
 
-.btn-right
-{
+.btn-right {
   float: right;
 }
-
-.history
-{
+.history {
   padding: 15px;
   background-color: rgb(206, 222, 131);
+}
+.help {
+  padding: 20px;
+  margin: 20px 0px;
+  border-width: 1px 1px 1px 5px;
+  border-style: solid;
+  border-color: #EEE;
+  border-image: none;
+  border-radius: 3px;
+  border-left-color: #1B809E;
+}
+.help h4 {
+  color: #1B809E;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  font-size: 18px;
 }
 
 /****************************** GROUPS & THEIR HOMEPAGE ********************************/
 
-.thumbnail img
-{
+.thumbnail img {
   width: 100%;
 }
-
-.thumbnail
-{
+.thumbnail {
   display: inline-block;
   width: 100%;
   border: 0;
   border-bottom: 3px solid #DCDCDC;
-
 }
-
-.group .summary
-{
+.group .summary {
   height: 6em;
   overflow: hidden;
 }
-
-.group h4
-{
+.group h4 {
   height: 2.5em;
   overflow: hidden;
 }
-
-
-.group_header
-{
-    border-bottom: 3px solid #DCDCDC;
-    margin-top: 2em;
-    margin-bottom: 1em;
-    background-color: white;
-    padding: 0.5em 2em 1em 2em;
+.group_header {
+  border-bottom: 3px solid #DCDCDC;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  background-color: white;
+  padding: 0.5em 2em 1em 2em;
 }
-
-.group_header h1
-{
+.group_header h1 {
   font-size: 2em;
   /*font-weight: bold;*/
 }
 
-
 /***************************** COMMENTS ***************************************/
 
-.comment
-{
+.comment {
   border-bottom: 1px solid #aaa;
   padding-bottom: 20px;
   margin-bottom: 20px;
-
 }
-
-.comment .avatar img
-{
+.comment .avatar img {
   width: 24px;
   height: 24px;
   float: left;
 }
-
-.comment .user, .comment .body, .comment .created
-{
+.comment .user, .comment .body, .comment .created {
   margin-left: 30px;
-
 }
-
-.comment .created
-{
+.comment .created {
   font-size: 0.5em;
 }
-
-.comment .user
-{
+.comment .user {
   font-weight: bold;
 }
-
-.comment .vote
-{
+.comment .vote {
   width: 24px;
   text-align: center;
   float: right;
 }
 
 /***************************** tables ***************************/
-table.special { table-layout: fixed }
 
-table.special td {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis
+table.special {
+  table-layout: fixed
 }
-
-span.summary
-{
+table.special td {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis
+}
+span.summary {
   color: gray;
 }
-
-table.special .name
-{
+table.special .name {
   font-weight: bold;
 }
-
 
 /************************** DISCUSSIONS ***************************************/
 
-.discussion, .comments
-{
+.discussion, .comments {
   max-width: 65em;
 }
-
-.discussion .user
-{
+.discussion .user {
   font-weight: bold;
 }
-
-.discussion .body
-{
+.discussion .body {
   margin-top: 1em;
   margin-bottom: 2em;
 }
 
-
 /*********************** TABS and GROUP HEADERS ************************************/
 
-.tab_content
-{
+.tab_content {
   background-color: white;
   padding: 2%;
   width: 100%;
 }
 
-
-
 /************************ dialogs *************************/
 
-.alert
-{
+.alert {
   margin-top: 2em;
   font-size: 1.5em;
 }

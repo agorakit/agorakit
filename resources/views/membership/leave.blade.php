@@ -6,11 +6,13 @@
 
 <div class="tab_content">
 
-<h1>{{ trans('messages.leaving_the_group_called') }} {{$group->name}}</h1>
+<h1>{{ trans('messages.leaving_the_group_called') }} "{{$group->name}}"</h1>
 
+<div class="help">
 <p>
 {{ trans('messages.leaving_help_message') }}
 </p>
+</div>
 
 
 {!! Form::open(array('action' => ['MembershipController@leave', $group->id])) !!}
