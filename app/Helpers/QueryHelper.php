@@ -55,6 +55,7 @@ class QueryHelper
       $count = 0; // it might happens, it's bad, but not too bad so we fail silently
     }
 
+
     return $count;
   }
 
@@ -101,7 +102,7 @@ class QueryHelper
 
     where (discussions.total_comments > read_comments or read_comments is null) and discussions.updated_at > :since
     order by updated_at desc
-    limit 0, 50
+    limit 0, 25
 
     ', ['user_id' => $user_id, 'group_id' => $group_id, 'since' => $since]);
 

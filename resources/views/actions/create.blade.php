@@ -10,33 +10,6 @@
 <script>
 $.datetimepicker.setLocale('{{App::getLocale()}}');
 
-/*
-jQuery(function(){
-jQuery('#start').datetimepicker({
-format:'Y-m-d H:i',
-step: 30,
-dayOfWeekStart: 1,
-onShow:function( ct ){
-this.setOptions({
-maxDate:jQuery('#stop').val()?jQuery('#stop').val():false
-})
-}
-
-});
-jQuery('#stop').datetimepicker({
-format:'Y-m-d H:i',
-step: 30,
-dayOfWeekStart: 1,
-onShow:function( ct ){
-this.setOptions({
-minDate:jQuery('#start').val()?jQuery('#start').val():false
-})
-}
-
-});
-});
-*/
-
 jQuery(function(){
   jQuery('#start').datetimepicker({
     format:'Y-m-d H:i',
@@ -74,7 +47,7 @@ jQuery(function(){
 
 
 
-  <h1>Create an action</h1>
+  <h1>Créer une action</h1>
 
 
   {!! Form::open(array('action' => ['ActionController@store', $group->id])) !!}
@@ -82,7 +55,7 @@ jQuery(function(){
   @include('actions.form')
 
   <div class="form-group">
-    {!! Form::submit('Create an action', ['class' => 'btn btn-primary form-control']) !!}
+    {!! Form::submit('Créer une action', ['class' => 'btn btn-primary form-control']) !!}
   </div>
 
 

@@ -2,6 +2,9 @@
 
 @section('content')
 
+@include('partials.grouptab')
+
+<div class="tab_content">
 
 <h1>{{ trans('messages.leaving_the_group_called') }} {{$group->name}}</h1>
 
@@ -20,5 +23,7 @@
 {!! Form::close() !!}
 
 @include('partials.errors')
+
+</div>
 
 @endsection

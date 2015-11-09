@@ -20,14 +20,6 @@ body
 }
 
 
-.group_header
-{
-    border-bottom: 3px solid #DCDCDC;
-    margin-top: 3em;
-    margin-bottom: 2em;
-    background-color: white;
-    padding: 0.5em 2em 1em 2em;
-}
 
 
 /******************************** UI ******************************************/
@@ -37,7 +29,7 @@ body
   float: right;
 }
 
-/****************************** GROUP HOMEPAGE ********************************/
+/****************************** GROUPS & THEIR HOMEPAGE ********************************/
 
 .thumbnail img
 {
@@ -64,6 +56,23 @@ body
   height: 2.5em;
   overflow: hidden;
 }
+
+
+.group_header
+{
+    border-bottom: 3px solid #DCDCDC;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    background-color: white;
+    padding: 0.5em 2em 1em 2em;
+}
+
+.group_header h1
+{
+  font-size: 2em;
+  /*font-weight: bold;*/
+}
+
 
 /***************************** COMMENTS ***************************************/
 

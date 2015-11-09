@@ -18,7 +18,7 @@ return array (
   'groups' => 'Groupes',
   'hello' => 'Bonjour',
   'home' => 'Accueil',
-  'howdy' => 'Oupse',
+  'howdy' => 'Oups',
   'i_changed_my_mind' => 'J\'ai changé d\'avis, je ne veux pas quitter ce groupe',
   'leave_this_group' => 'Quitter ce groupe',
   'leaving_help_message' => 'Nous sommes désolés de vous voir partir de ce groupe. Merci de confirmer que c\'est bien votre intention. Vous ne recevrez plus de notifications par mail de ce groupe.',

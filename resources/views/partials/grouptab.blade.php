@@ -1,7 +1,3 @@
-
-
-
-
 <div class="group_header">
     <h1>{{ $group->name }}</h1>
     <p class="hidden-xs">{{ $group->body}}</p>

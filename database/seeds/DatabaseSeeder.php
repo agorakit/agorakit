@@ -17,22 +17,12 @@ class DatabaseSeeder extends Seeder
 
     for ($i = 1; $i <= 10; ++$i) {
       App\User::create([
-        'email' => $faker->email,
+        'email' => $faker->safe_email,
         'password' => bcrypt('secret'),
         'username' => $faker->name,
         'name' => $faker->name,
         ]);
       }
-
-      // TODO mandatory remove this :
-      $user = App\User::create([
-        'email' => 'test@test.com',
-        'password' => bcrypt('123456'),
-        'username' => 'tester',
-        'name' => 'Mister tester',
-        ]);
-
-        $user->confirmEmail();
 
         // Groups, discussions and comments
         DB::table('groups')->delete();

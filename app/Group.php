@@ -16,7 +16,7 @@ class Group extends Model
   use \Venturecraft\Revisionable\RevisionableTrait;
 
   protected $rules = [
-    'name' => 'required',
+    'name' => 'required|unique:groups,name',
     'body' => 'required'
   ];
 

@@ -76,7 +76,7 @@ class GroupController extends Controller {
     $membership->membership = 20;
     $membership->save();
 
-    return redirect()->action('GroupController@settings', [$group->id]);
+    return redirect()->action('MembershipController@settings', [$group->id]);
   }
 
   /**
