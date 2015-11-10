@@ -1,7 +1,7 @@
 Par ordre d'importance :
 
 Avant lancement :
-[à tester] Notifications par mail (nouvelles discussions / actions à venir / nouveaux membres / nouveaux fichiers)
+[TODO à tester] Notifications par mail (nouvelles discussions / actions à venir / nouveaux membres / nouveaux fichiers)
 [ok] Confirmation par mail des membres
 [ok] Invitations par mail
 [ok] Limitation des actions des non confirmés par middleware
@@ -10,6 +10,7 @@ Avant lancement :
 
 
 Court terme :
+- lien vers la dernière discussion non lue dans une discussion
 - Mark all read + limite à 30 jours de unread pour les nouveaux par ex.
 - Antispam pour les nouveaux
 - Page d'accueil plus attirante avec config du texte d'intro et du nom de l'install + evénements à venir, style dashboard
@@ -39,12 +40,12 @@ Moyen terme
 - Carte des groupes et actions dont on est membre / de tous les groupes
 - Wysiwyg sur certains contenus
 - Possibilité de dire "je participe" à une action
+- Tags sur tout + recherche par tags + menu
 
 Indéterminé / nice to have :
 - Formulaire d'upload de fichiers séparé
 - Affichage fichiers en album photo
 - Affichage des fichiers par types
-- Tags sur tout + recherche par tags + menu
 - Recherche
 - Système d'écriture collaborative type wiki
 - Système de sondage / vote / prise de décision
