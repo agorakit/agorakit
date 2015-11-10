@@ -34,7 +34,7 @@ class Verified
     // curently it means the user must have membership level higher than 10
 
     if ($this->auth->guest()) {
-      return redirect()->back()->with('message', trans('messages', 'not_logged_in'));
+      return redirect()->back()->with('message', trans('messages.not_logged_in'));
     }
 
     // we expect a url in the form /groups/{group_id}
