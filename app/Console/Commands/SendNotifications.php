@@ -47,7 +47,7 @@ class SendNotifications extends Command
 
       foreach ($notifications as $notification)
       {
-        $this->info('Sending notification to user number ' . $notification->user_id . ' for group number ' . $notification->group_id );
+        $this->info('Sending notification to user:' . $notification->user_id . ' for group:' . $notification->group_id );
         $mailer = new AppMailer();
         $mailer->sendNotificationEmail($notification->group_id, $notification->user_id);
       }

@@ -32,42 +32,47 @@ class AppMailer
     $group = \App\Group::findOrFail($group_id);
     $user = \App\User::findOrFail($user_id);
 
-
-    // Establish timestamp for notifications from membership data (when was an email sent for the last time?)
-
-    $membership = \App\Membership::where('user_id', '=', $user->id)
-    ->where('group_id', "=", $group->id)->firstOrFail();
-
-    // find unread discussions since timestamp
-    $discussions = QueryHelper::getUnreadDiscussionsSince($user->id, $group->id, $membership->notified_at);
-
-
-    // find new files since timestamp
-    $files = \App\File::where('updated_at', '>', $membership->notified_at)
-    ->where('group_id', "=", $group->id)->get();
-
-
-    // find new members since timestamp
-    $users = QueryHelper::getNewMembersSince($user->id, $group->id, $membership->notified_at);
-
-    // find future actions until next 2 weeks, this is curently hardcoded...
-    $actions = \App\Action::where('start', '>', Carbon::now())->where('stop', '<', Carbon::now()->addWeek()->addWeek() )
-    ->where('group_id', "=", $group->id)->get();
-
-    // if we have anything, build the message and send
-    if (count($discussions) > 0 or count($files) > 0 or count($users) > 0 or count($actions) > 0)
+    if ($user->verified == 1)
     {
-      Mail::send('emails.notification', ['user' => $user, 'group' => $group, 'membership' => $membership, 'discussions' => $discussions,
-      'files' => $files, 'users' => $users, 'actions' => $actions], function ($message) use($user, $group) {
-        $message->from(env('MAIL_FROM', "noreply@example.com"));
-        $message->to($user->email);
-        $message->subject('[' . env('APP_NAME') . '] ' . 'Des nouvelles du groupe "' . $group->name . '"');
-      });
-    }
 
-    // in all cases update timestamp
-    $membership->notified_at = Carbon::now();
-    $membership->save();
+      // Establish timestamp for notifications from membership data (when was an email sent for the last time?)
+
+      $membership = \App\Membership::where('user_id', '=', $user->id)
+      ->where('group_id', "=", $group->id)->firstOrFail();
+
+      // find unread discussions since timestamp
+      $discussions = QueryHelper::getUnreadDiscussionsSince($user->id, $group->id, $membership->notified_at);
+
+
+      // find new files since timestamp
+      $files = \App\File::where('updated_at', '>', $membership->notified_at)
+      ->where('group_id', "=", $group->id)->get();
+
+
+      // find new members since timestamp
+      $users = QueryHelper::getNewMembersSince($user->id, $group->id, $membership->notified_at);
+
+      // find future actions until next 2 weeks, this is curently hardcoded... TODO use the mail sending interval to determine stop date
+      $actions = \App\Action::where('start', '>', Carbon::now())->where('stop', '<', Carbon::now()->addWeek()->addWeek() )
+      ->where('group_id', "=", $group->id)->get();
+
+      // if we have anything, build the message and send
+      if (count($discussions) > 0 or count($files) > 0 or count($users) > 0 or count($actions) > 0)
+      {
+        Mail::send('emails.notification', ['user' => $user, 'group' => $group, 'membership' => $membership, 'discussions' => $discussions,
+        'files' => $files, 'users' => $users, 'actions' => $actions], function ($message) use($user, $group) {
+          $message->from(env('MAIL_FROM', "noreply@example.com"));
+          $message->to($user->email);
+          $message->subject('[' . env('APP_NAME') . '] ' . 'Des nouvelles du groupe "' . $group->name . '"');
+        });
+      }
+
+
+      // in all cases update timestamp
+      $membership->notified_at = Carbon::now();
+      $membership->save();
+
+    }
 
 
   }

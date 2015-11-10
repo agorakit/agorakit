@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use Auth;
 use DB;
+use Carbon\Carbon;
 
 /**
 * Here we have various queries that might be used by different parts of the applications.
@@ -137,13 +138,16 @@ class QueryHelper
   */
   public static function getNotificationsToSend()
   {
+    // I use Carbon::now() instead of the now() provided by mysql to avoid different timezone settings in differents servers (php vs mysql config)
     $notifications = DB::select('
     select * from
     (select *, date_add(notified_at, interval notification_interval minute) as notify from membership
     where notification_interval > 0
     and membership >= 10) as memberships
-    where notify < now() or notify is null
-    ');
+    and membership >= 10) as memberships
+    where notify < :now or notify is null
+    ', ['now' => Carbon::now()] );
+
 
     return $notifications;
 

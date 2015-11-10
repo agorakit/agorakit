@@ -1,8 +1,44 @@
+@section('head')
+{!! Html::style('/packages/datetimepicker/jquery.datetimepicker.css') !!}
+@stop
+
+@section('footer')
+{!! Html::script('/packages/datetimepicker/jquery.datetimepicker.full.min.js') !!}
+
+<script>
+$.datetimepicker.setLocale('{{App::getLocale()}}');
+
+jQuery(function(){
+  jQuery('#start').datetimepicker({
+    format:'Y-m-d H:i',
+    step: 30,
+    dayOfWeekStart: 1
+  });
+
+  jQuery('#stop').datetimepicker({
+    format:'Y-m-d H:i',
+    step: 30,
+    dayOfWeekStart: 1,
+    onShow:function( ct ){
+      this.setOptions({
+        minDate:jQuery('#start').val()
+      })
+    }
+
+  });
+});
+
+
+</script>
+
+
+
+@stop
 
 
 
 <div class="form-group">
-	{!! Form::label('name', 'Title') !!}
+	{!! Form::label('name', 'Titre') !!}
 	{!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
@@ -21,7 +57,11 @@
 	<div class="col-md-6">
 		<div class="form-group">
 			{!! Form::label('start', 'Début') !!}<br/>
+			@if (isset($action->start))
+			{!! Form::text('start', $action->start->format('Y-m-d H:i') , ['class' => 'form-control', 'id' => 'start', 'required']) !!}
+			@else
 			{!! Form::text('start', \Carbon\Carbon::now()->format('Y-m-d H:i') , ['class' => 'form-control', 'id' => 'start', 'required']) !!}
+			@endif
 
 		</div>
 	</div>
@@ -29,7 +69,11 @@
 	<div class="col-md-6">
 		<div class="form-group">
 			{!! Form::label('stop', 'Fin') !!}<br/>
-			{!! Form::text('stop', null, ['class' => 'form-control' , 'id' => 'stop', 'required']) !!}
+			@if (isset($action->stop))
+			{!! Form::text('stop', $action->stop->format('Y-m-d H:i') , ['class' => 'form-control', 'id' => 'stop', 'required']) !!}
+			@else
+			{!! Form::text('stop', \Carbon\Carbon::now()->format('Y-m-d H:i') , ['class' => 'form-control', 'id' => 'stop', 'required']) !!}
+			@endif
 		</div>
 	</div>
 </div>

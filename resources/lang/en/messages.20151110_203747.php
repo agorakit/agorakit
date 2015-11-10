@@ -1,26 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/11/10 20:37:45 
+ Generated via "php artisan localization:missing" at 2015/11/09 20:58:07 
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/show.blade.php
-  'begins' => 'begins',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/show.blade.php
-  'ends' => 'ends',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/discussions/show.blade.php
-  'in' => 'in',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/comments/form.blade.php
-  'reply' => 'reply',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/show.blade.php
-  'started_by' => 'started_by',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/show.blade.php
-  'what' => 'what',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/show.blade.php
-  'when' => 'when',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/show.blade.php
-  'where' => 'where',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/membership/edit.blade.php
+  'save' => 'save',
   //==================================== Translations ====================================//
   'actions' => 'Actions',
   'cancel' => 'I changed my mind, cancel',
@@ -29,7 +15,6 @@ return array (
   'changed_from' => 'changed_from',
   'changed_to' => 'changed_to',
   'confirm_password' => 'Confirm password',
-  'create' => 'Create',
   'discussions' => 'discussions',
   'edit' => 'edit',
   'email' => 'Email',
@@ -61,7 +46,6 @@ return array (
   'remember_me' => 'Remember me',
   'ressource_created_successfully' => 'ressource_created_successfully',
   'ressource_updated_successfully' => 'ressource_updated_successfully',
-  'save' => 'save',
   'send_my_recover_email' => 'Send my recover email',
   'settings' => 'settings',
   'something_wrong' => 'Something is wrong with your submission',
@@ -71,6 +55,7 @@ return array (
   'your_password_reset_link' => 'your_password_reset_link',
   //================================== Obsolete strings ==================================//
   'all_the_groups_welcome' => 'Here are all the groups on this server.',
+  'create' => 'Create',
   'group' => 'Group',
   'groups_list' => 'groups_list',
   'users' => 'users',

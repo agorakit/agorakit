@@ -9,23 +9,38 @@
 
 
 <script>
-  $(document).ready(function() {
-    $('#calendar').fullCalendar({
-      lang: '{{App::getLocale()}}',
-      events: '{{action('ActionController@indexJson', $group->id)}}',
-        header: {
-            left: '',
-            center: 'prev title next',
-            right: ''
-        },
-        eventClick:  function(event, jsEvent, view) {
-            $('#modalTitle').html(event.title);
-            $('#modalBody').html(event.description);
-            $('#eventUrl').attr('href',event.url);
-            $('#fullCalModal').modal();
-            return false;
-        }
-    });
+$(document).ready(function() {
+  $('#calendar').fullCalendar({
+    lang: '{{App::getLocale()}}',
+    events: '{{action('ActionController@indexJson', $group->id)}}',
+    header: {
+      left: 'prev,next',
+      center: 'title',
+      right: 'month,agendaWeek,agendaDay'
+    },
+    /*
+    eventClick:  function(event, jsEvent, view) {
+    $('#modalTitle').html(event.title);
+    $('#modalBody').html(event.description);
+    $('#eventUrl').attr('href',event.url);
+    $('#fullCalModal').modal();
+    return false;
+  },
+  */
+  /*
+  eventClick: function(event) {
+    if (event.url) {
+      alert(event.url);
+      window.open(event.url);
+      return false;
+    }
+  },
+  */
+  eventRender: function(event, element)
+  {
+    $(element).tooltip({title: event.body});
+  }
+});
 });
 </script>
 
@@ -47,19 +62,19 @@
   <div id="calendar"></div>
 
   <div id="fullCalModal" class="modal fade">
-      <div class="modal-dialog">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                  <h4 id="modalTitle" class="modal-title"></h4>
-              </div>
-              <div id="modalBody" class="modal-body"></div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                  <!--<button class="btn btn-primary"><a id="eventUrl" target="_blank">Event Page</a></button>-->
-              </div>
-          </div>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+          <h4 id="modalTitle" class="modal-title"></h4>
+        </div>
+        <div id="modalBody" class="modal-body"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+          <!--<button class="btn btn-primary"><a id="eventUrl" target="_blank">Event Page</a></button>-->
+        </div>
       </div>
+    </div>
   </div>
 
 

@@ -1,26 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/11/10 20:37:45 
+ Generated via "php artisan localization:missing" at 2015/11/09 20:58:07
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/show.blade.php
-  'begins' => 'begins',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/show.blade.php
-  'ends' => 'ends',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/discussions/show.blade.php
-  'in' => 'in',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/comments/form.blade.php
-  'reply' => 'reply',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/show.blade.php
-  'started_by' => 'started_by',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/show.blade.php
-  'what' => 'what',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/show.blade.php
-  'when' => 'when',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/show.blade.php
-  'where' => 'where',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/membership/edit.blade.php
+  'save' => 'Enregistrer',
   //==================================== Translations ====================================//
   'actions' => 'Actions',
   'cancel' => 'J\'ai changé d\'avis, annuler',
@@ -29,7 +15,6 @@ return array (
   'changed_from' => 'valeur initiale',
   'changed_to' => 'changé en',
   'confirm_password' => 'Confirmer le mot de passe',
-  'create' => 'Créer',
   'discussions' => 'Discussions',
   'edit' => 'Modifier',
   'email' => 'Email',
@@ -61,7 +46,6 @@ return array (
   'remember_me' => 'Se souvenir de moi',
   'ressource_created_successfully' => 'Contenu créé avec succès',
   'ressource_updated_successfully' => 'Contenu mis à jour avec succès',
-  'save' => 'Enregistrer',
   'send_my_recover_email' => 'M\'envoyer un mail pour changer mon mot de passe',
   'settings' => 'Préférences',
   'something_wrong' => 'Il y a quelque chose qui ne fonctionne pas',
@@ -72,6 +56,7 @@ return array (
   //================================== Obsolete strings ==================================//
   'all_the_groups_welcome' => 'Vous trouverez ici tous les groupes disponibles sur ce serveur',
   'confirm_your_email' => 'Vérifiez votre adresse email',
+  'create' => 'Créer',
   'group' => 'Groupe',
   'groups_list' => 'Liste des groupes',
   'not_a_member' => 'Vous ne faites pas partie de ce groupe',

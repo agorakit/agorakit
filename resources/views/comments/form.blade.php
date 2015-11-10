@@ -5,7 +5,7 @@
 </div>
 
 <div class="form-group">
-{!! Form::submit('Reply', ['class' => 'btn btn-primary form-control']) !!}
+{!! Form::submit(trans('messages.reply'), ['class' => 'btn btn-primary form-control']) !!}
 </div>
 
 
