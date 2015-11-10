@@ -107,13 +107,10 @@ class InviteController extends Controller
    */
   public function inviteConfirm(Request $request, $group_id, $token)
   {
-    // TODO invite confirm request handling
-
     // check if token is valid
     $invite = \App\Invite::whereToken($token)->firstOrFail();
 
     $user = \App\User::where('email', $invite->email)->first();
-
     $group = \App\Group::findOrFail($invite->group_id);
 
     // check if user exists
@@ -132,9 +129,7 @@ class InviteController extends Controller
     }
     else
     {
-      // if user doesn't exists, we have the opportunity to create, login and validate email in one go (since we have the invite token) TODO
-
-      // show view
+      // if user doesn't exists, we have the opportunity to create, login and validate email in one go (since we have the invite token)
       $request->session()->flash('message', 'Vous n\'avez pas encore de compte sur ce site, merci de vous en créer un');
 
       return view('invites.register')
@@ -157,12 +152,7 @@ class InviteController extends Controller
       ]);
 
       $invite = \App\Invite::whereToken($token)->firstOrFail();
-
-
-
-
       $invite->delete();
-
 
       $user = new \App\User;
       $user->name = $request->get('name');
@@ -175,11 +165,7 @@ class InviteController extends Controller
         $user->verified = 1;
       }
 
-
       $user->save();
-
-
-
 
       $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $group_id]);
       $membership->membership = 20;
@@ -189,9 +175,5 @@ class InviteController extends Controller
 
       $request->session()->flash('message', 'Vous êtes maintenant membre de ce groupe' );
       return redirect()->action('GroupController@show', $group_id);
-
-
     }
-
-
   }

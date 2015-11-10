@@ -1,19 +1,28 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/11/10 21:03:12
+ Generated via "php artisan localization:missing" at 2015/11/10 20:37:45
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/discussions/history.blade.php
-  'back_to' => 'Retour à',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/discussions/history.blade.php
-  'history' => 'Historique des modifications',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/show.blade.php
-  'show_history' => 'Afficher l\'historique des modifications',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/show.blade.php
+  'begins' => 'Début',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/show.blade.php
+  'ends' => 'Fin',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/discussions/show.blade.php
+  'in' => 'dans',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/comments/form.blade.php
+  'reply' => 'Répondre',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/show.blade.php
+  'started_by' => 'Démarré par',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/show.blade.php
+  'what' => 'Quoi',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/show.blade.php
+  'when' => 'Quand',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/show.blade.php
+  'where' => 'Où',
   //==================================== Translations ====================================//
   'actions' => 'Actions',
-  'begins' => 'Début',
   'cancel' => 'J\'ai changé d\'avis, annuler',
   'change_my_password' => 'Changer mon mot de passe',
   'changed' => 'a modifié',
@@ -25,7 +34,6 @@ return array (
   'edit' => 'Modifier',
   'email' => 'Email',
   'email_not_verified' => 'Votre adresse mail n\'est pas vérifié, merci de la vérifier maintenant depuis votre boite email',
-  'ends' => 'Fin',
   'files' => 'Fichiers',
   'forgotten_password' => 'Mot de passe oublié',
   'groups' => 'Groupes',
@@ -33,7 +41,6 @@ return array (
   'home' => 'Accueil',
   'howdy' => 'Oups',
   'i_changed_my_mind' => 'J\'ai changé d\'avis, je ne veux pas quitter ce groupe',
-  'in' => 'dans',
   'join' => 'Rejoindre ce groupe',
   'leave_this_group' => 'Quitter ce groupe',
   'leaving_help_message' => 'Nous sommes désolés de vous voir partir de ce groupe. Merci de confirmer que c\'est bien votre intention. Vous ne recevrez plus de notifications par mail de ce groupe et vous n\'apparaîtrez plus dans la liste des participants.',
@@ -52,19 +59,14 @@ return array (
   'register' => 'S\'enregistrer',
   'registration_time' => 'Date d\'enregistrement',
   'remember_me' => 'Se souvenir de moi',
-  'reply' => 'Répondre',
   'ressource_created_successfully' => 'Contenu créé avec succès',
   'ressource_updated_successfully' => 'Contenu mis à jour avec succès',
   'save' => 'Enregistrer',
   'send_my_recover_email' => 'M\'envoyer un mail pour changer mon mot de passe',
   'settings' => 'Préférences',
   'something_wrong' => 'Il y a quelque chose qui ne fonctionne pas',
-  'started_by' => 'Démarré par',
   'toggle_navigation' => 'Activer la navigation',
   'unread_discussions' => 'Discussions non lues',
-  'what' => 'Quoi',
-  'when' => 'Quand',
-  'where' => 'Où',
   'your_groups' => 'Mes groupes',
   'your_password_reset_link' => 'Votre lien de changement de mot de passe',
   //================================== Obsolete strings ==================================//

@@ -26,7 +26,6 @@ Route::get('register/confirm/{token}', 'Auth\AuthController@confirmEmail');
 
 /**
  * Authentification routes
- * TODO : add social logins
  */
 Route::controllers([
 	'auth' => 'Auth\AuthController',

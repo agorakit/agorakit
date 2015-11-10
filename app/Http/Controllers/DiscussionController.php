@@ -195,4 +195,20 @@ class DiscussionController extends Controller
   public function destroy($id)
   {
   }
+
+
+  /**
+   * Show the revision history of the discussion
+   */
+  public function history($group_id, $discussion_id)
+  {
+    $discussion = Discussion::findOrFail($discussion_id);
+    $group = $discussion->group;
+
+    return view('discussions.history')
+    ->with('group', $group)
+    ->with('discussion', $discussion)
+    ->with('tab', 'discussion');
+  }
+
 }

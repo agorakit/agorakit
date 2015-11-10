@@ -150,8 +150,6 @@ class GroupController extends Controller
   {
     $group = Group::findOrFail($group_id);
 
-  //  dd($group->revisionHistory[0]);
-
     return view('groups.history')
     ->with('group', $group)
     ->with('tab', 'home');

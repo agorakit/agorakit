@@ -21,7 +21,7 @@
       {{trans('messages.edit')}}
     </a>
       @if ($group->revisionHistory->count() > 0)
-      |  <a href="{{action('GroupController@history', $group->id)}}">Afficher l'historique des modifications</a>
+      |  <a href="{{action('GroupController@history', $group->id)}}">{{trans('messages.show_history')}}</a>
       @endif
   </p>
 

@@ -1,19 +1,28 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/11/10 21:03:12 
+ Generated via "php artisan localization:missing" at 2015/11/10 20:37:45 
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/discussions/history.blade.php
-  'back_to' => 'back_to',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/discussions/history.blade.php
-  'history' => 'history',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/show.blade.php
-  'show_history' => 'show_history',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/show.blade.php
+  'begins' => 'begins',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/show.blade.php
+  'ends' => 'ends',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/discussions/show.blade.php
+  'in' => 'in',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/comments/form.blade.php
+  'reply' => 'reply',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/show.blade.php
+  'started_by' => 'started_by',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/show.blade.php
+  'what' => 'what',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/show.blade.php
+  'when' => 'when',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/show.blade.php
+  'where' => 'where',
   //==================================== Translations ====================================//
   'actions' => 'Actions',
-  'begins' => 'begins',
   'cancel' => 'I changed my mind, cancel',
   'change_my_password' => 'Change my password',
   'changed' => 'changed',
@@ -25,7 +34,6 @@ return array (
   'edit' => 'edit',
   'email' => 'Email',
   'email_not_verified' => 'email_not_verified',
-  'ends' => 'ends',
   'files' => 'files',
   'forgotten_password' => 'Forgotten password',
   'groups' => 'Groups',
@@ -33,7 +41,6 @@ return array (
   'home' => 'Home',
   'howdy' => 'Whoops!',
   'i_changed_my_mind' => 'I changed my mind, I don\'t want to leave this group',
-  'in' => 'in',
   'join' => 'join',
   'leave_this_group' => 'leave_this_group',
   'leaving_help_message' => 'We are sad to see you go... confirm that you want to leave this group. You won\'t receive notifications anymore.',
@@ -52,19 +59,14 @@ return array (
   'register' => 'Register',
   'registration_time' => 'registration_time',
   'remember_me' => 'Remember me',
-  'reply' => 'reply',
   'ressource_created_successfully' => 'ressource_created_successfully',
   'ressource_updated_successfully' => 'ressource_updated_successfully',
   'save' => 'save',
   'send_my_recover_email' => 'Send my recover email',
   'settings' => 'settings',
   'something_wrong' => 'Something is wrong with your submission',
-  'started_by' => 'started_by',
   'toggle_navigation' => 'toggle_navigation',
   'unread_discussions' => 'Unread discussions',
-  'what' => 'what',
-  'when' => 'when',
-  'where' => 'where',
   'your_groups' => 'your_groups',
   'your_password_reset_link' => 'your_password_reset_link',
   //================================== Obsolete strings ==================================//

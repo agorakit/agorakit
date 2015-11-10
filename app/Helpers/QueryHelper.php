@@ -11,7 +11,7 @@ use Carbon\Carbon;
 * I'm proud of the two firsts one already :-)
 * I hate joins as I don't understand it. But subqueries fit my logic.
 *
-* Potential TODO : return eloquent models anyway instead of simple arrays. But often the arrays contains additional info we need (like read counts)
+* Potential maybe : return eloquent models anyway instead of simple arrays. But often the arrays contains additional info we need (like read counts)
 *
 */
 class QueryHelper
@@ -143,7 +143,6 @@ class QueryHelper
     select * from
     (select *, date_add(notified_at, interval notification_interval minute) as notify from membership
     where notification_interval > 0
-    and membership >= 10) as memberships
     and membership >= 10) as memberships
     where notify < :now or notify is null
     ', ['now' => Carbon::now()] );
