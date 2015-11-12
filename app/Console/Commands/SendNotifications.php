@@ -52,7 +52,14 @@ class SendNotifications extends Command
 
         $this->info('Sending notification to user:' . $notification->user_id . ' (' . $user->email .  ')'  .  ' for group:' . $notification->group_id . ' (' . $group->name .  ')' );
         $mailer = new AppMailer();
-        $mailer->sendNotificationEmail($notification->group_id, $notification->user_id);
+        if ($mailer->sendNotificationEmail($notification->group_id, $notification->user_id))
+        {
+          $this->info('Message sent');
+        }
+        else
+        {
+          $this->info('Nothing sent');
+        }
       }
     }
 

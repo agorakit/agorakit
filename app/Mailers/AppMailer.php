@@ -56,21 +56,26 @@ class AppMailer
       $actions = \App\Action::where('start', '>', Carbon::now())->where('stop', '<', Carbon::now()->addWeek()->addWeek() )
       ->where('group_id', "=", $group->id)->get();
 
+
+      // in all cases update timestamp
+      $membership->notified_at = Carbon::now();
+      $membership->save();
+
       // if we have anything, build the message and send
       if (count($discussions) > 0 or count($files) > 0 or count($users) > 0 or count($actions) > 0)
       {
         Mail::send('emails.notification', ['user' => $user, 'group' => $group, 'membership' => $membership, 'discussions' => $discussions,
         'files' => $files, 'users' => $users, 'actions' => $actions], function ($message) use($user, $group) {
-          $message->from(env('MAIL_FROM', "noreply@example.com"));
+          $message->from(env('MAIL_FROM', 'noreply@example.com'));
           $message->to($user->email);
           $message->subject('[' . env('APP_NAME') . '] ' . 'Des nouvelles du groupe "' . $group->name . '"');
         });
+        return true;
+
       }
 
+      return false;
 
-      // in all cases update timestamp
-      $membership->notified_at = Carbon::now();
-      $membership->save();
 
     }
 
