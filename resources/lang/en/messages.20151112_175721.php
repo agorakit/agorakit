@@ -1,14 +1,9 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/11/12 17:57:18 
+ Generated via "php artisan localization:missing" at 2015/11/12 17:32:42 
 *************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/show.blade.php
-  'date' => 'date',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/show.blade.php
-  'title' => 'title',
   //==================================== Translations ====================================//
   'actions' => 'Actions',
   'agenda' => 'agenda',

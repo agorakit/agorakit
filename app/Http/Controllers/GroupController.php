@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Group;
 use Auth;
 use Illuminate\Http\Request;
-use Flash;
+use Carbon\Carbon;
 
 class GroupController extends Controller
 {
@@ -90,9 +90,12 @@ class GroupController extends Controller
       }
       $files = $group->files()->with('user')->orderBy('updated_at', 'desc')->limit(5)->get();
 
+      $actions = $group->actions()->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->limit(10)->get();
+
       return view('groups.show')
     ->with('group', $group)
     ->with('discussions', $discussions)
+    ->with('actions', $actions)
     ->with('files', $files)
     ->with('tab', 'home');
   }

@@ -21,7 +21,8 @@ Court terme :
 - Repli des commentaires négatifs?
 - Possibilté de suprimer son propre contenu (uniquement). Impossible de supprimer une discussion si elle a des commentaires
 - Modification de ses propres commentaires dans les 15 minutes de publication
-- Affichage de l'historique des discussions et des commentaires
+[ok] Affichage de l'historique des discussions
+- Affichage de l'historique des commentaires
 - Traductions complètes
 - retirer les boutons des trucs qu'on ne peut pas faire (par exemple invitater quand on ne fait pas partie d'un groupe) -> utiliser les policy laravel  pour ça avec @can
 - Avatars
