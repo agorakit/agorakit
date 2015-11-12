@@ -14,25 +14,43 @@
 
 
 
-/**
- * Basic homepage for all users, either logged in or not.
- * The idea is to provide a group listing (most active first) and a list of groups subscribed to by the current user.
- */
+/*
+Homepage
+========
+
+Basic homepage for all users, either logged in or not.
+The idea is to provide a group listing (most active first) and a list of groups subscribed to by the current user.
+*/
 Route::get('/', 'GroupController@index');
 Route::get('home', 'GroupController@index');
 
 
 Route::get('register/confirm/{token}', 'Auth\AuthController@confirmEmail');
 
-/**
- * Authentification routes
- */
+
+/*
+General unread stuff, summary and dashboard
+===========================================
+*/
+Route::get('unread', 'DashboardController@unreadDiscussions');
+Route::get('agenda', 'DashboardController@agenda');
+Route::get('agenda/json', 'DashboardController@agendaJson');
+
+
+/*
+Authentification routes
+=======================
+*/
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
 
 /*
+Group related routes
+====================
+
 So we will basically have this scheme :
 
 groups
@@ -109,8 +127,7 @@ Route::post('groups/{group}/discussions/{discussion}', 'DiscussionController@upd
 Route::get('groups/{group}/discussions/{discussion}/history', 'DiscussionController@history'); // TODO discussions history
 
 
-// general unread stuff summary
-Route::get('unread', 'DiscussionController@indexUnRead');
+
 
 
 // Notification email test

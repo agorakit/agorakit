@@ -1,9 +1,20 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/11/12 17:32:42 
+ Generated via "php artisan localization:missing" at 2015/11/12 17:04:31 
 *************************************************************************/
 
 return array (
+  //============================== New strings to translate ==============================//
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/index.blade.php
+  'close' => 'close',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/index.blade.php
+  'description' => 'description',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/index.blade.php
+  'details' => 'details',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/index.blade.php
+  'start' => 'start',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/actions/index.blade.php
+  'stop' => 'stop',
   //==================================== Translations ====================================//
   'actions' => 'Actions',
   'agenda' => 'agenda',
@@ -16,8 +27,6 @@ return array (
   'changed_to' => 'changed_to',
   'confirm_password' => 'Confirm password',
   'create' => 'Create',
-  'description' => 'description',
-  'details' => 'details',
   'discussions' => 'discussions',
   'edit' => 'edit',
   'email' => 'Email',
@@ -60,9 +69,7 @@ return array (
   'settings' => 'settings',
   'show_history' => 'show_history',
   'something_wrong' => 'Something is wrong with your submission',
-  'start' => 'start',
   'started_by' => 'started_by',
-  'stop' => 'stop',
   'toggle_navigation' => 'toggle_navigation',
   'unread_discussions' => 'Unread discussions',
   'what' => 'what',
@@ -72,7 +79,6 @@ return array (
   'your_password_reset_link' => 'your_password_reset_link',
   //================================== Obsolete strings ==================================//
   'all_the_groups_welcome' => 'Here are all the groups on this server.',
-  'close' => 'close',
   'group' => 'Group',
   'groups_list' => 'groups_list',
   'users' => 'users',

@@ -11,7 +11,7 @@ use Carbon\Carbon;
 * I'm proud of the two firsts one already :-)
 * I hate joins as I don't understand it. But subqueries fit my logic.
 *
-* Potential maybe : return eloquent models anyway instead of simple arrays. But often the arrays contains additional info we need (like read counts)
+* NICETOHAVE : return eloquent models anyway instead of simple arrays. But often the arrays contains additional info we need (like read counts)
 *
 */
 class QueryHelper

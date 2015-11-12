@@ -8,6 +8,8 @@
   <h1>{{ trans('messages.unread_discussions') }}</a></h1>
 </div>
 
+@if ($discussions)
+
 <table class="table table-hover special">
   <thead>
     <tr>
@@ -18,7 +20,7 @@
   </thead>
 
   <tbody>
-    @forelse( $discussions as $discussion )
+    @foreach( $discussions as $discussion )
     <tr>
       <td class="content">
         <a href="{{ action('DiscussionController@show', [$discussion->group_id, $discussion->id]) }}">
@@ -37,12 +39,14 @@
       </td>
 
     </tr>
-    @empty
-    {{trans('messages.nothing_yet')}}
-    @endforelse
+    @endforeach
 
   </tbody>
 </table>
+@else
+{{trans('messages.nothing_yet')}}
+@endif
+
 
 
 

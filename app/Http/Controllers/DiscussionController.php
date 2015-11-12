@@ -23,25 +23,6 @@ class DiscussionController extends Controller
 
 
   /**
-  * Generates a list of unread discussions.
-  */
-  public function indexUnRead()
-  {
-
-    $discussions = QueryHelper::getUnreadDiscussions();
-
-    foreach ($discussions as $discussion)
-    {
-      $discussion->updated_at_human = Carbon::parse($discussion->updated_at)->diffForHumans();
-    }
-
-    return view('discussions.unread')
-    ->with('discussions', $discussions);
-  }
-
-
-
-  /**
   * Display a listing of the resource.
   *
   * @return Response

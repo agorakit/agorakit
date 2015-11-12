@@ -12,6 +12,12 @@
     <div class="navbar-collapse collapse" id="navbar">
 
       <ul class="nav navbar-nav">
+        <li>
+          <a href="{{ url('agenda') }}">
+            {{trans('messages.agenda')}}
+          </a>
+        </li>
+
         @if ($user_logged)
         <li>
           <a href="{{ url('unread') }}">

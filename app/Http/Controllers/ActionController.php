@@ -39,6 +39,7 @@ class ActionController extends Controller
 
   public function indexJson(REQUEST $request, $group_id)
   {
+    // TODO ajax load of actions or similar trick, else the json will become larger and larger
     $group = Group::findOrFail($group_id);
     $actions = $group->actions()->orderBy('start', 'asc')->get();
 
@@ -181,7 +182,7 @@ class ActionController extends Controller
 
     $action->save();
 
-    
+
     return redirect()->action('ActionController@show', [$action->group->id, $action->id]);
   }
 

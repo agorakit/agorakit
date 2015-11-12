@@ -1,12 +1,18 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/11/12 17:32:42 
+ Generated via "php artisan localization:missing" at 2015/11/12 16:34:39 
 *************************************************************************/
 
 return array (
+  //============================== New strings to translate ==============================//
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/partials/nav.blade.php
+  'agenda' => 'agenda',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/dashboard/agenda.blade.php
+  'location' => 'location',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/discussions/edit.blade.php
+  'modify' => 'modify',
   //==================================== Translations ====================================//
   'actions' => 'Actions',
-  'agenda' => 'agenda',
   'back_to' => 'back_to',
   'begins' => 'begins',
   'cancel' => 'I changed my mind, cancel',
@@ -16,8 +22,6 @@ return array (
   'changed_to' => 'changed_to',
   'confirm_password' => 'Confirm password',
   'create' => 'Create',
-  'description' => 'description',
-  'details' => 'details',
   'discussions' => 'discussions',
   'edit' => 'edit',
   'email' => 'Email',
@@ -36,13 +40,11 @@ return array (
   'leave_this_group' => 'leave_this_group',
   'leaving_help_message' => 'We are sad to see you go... confirm that you want to leave this group. You won\'t receive notifications anymore.',
   'leaving_the_group_called' => 'leaving_the_group_called',
-  'location' => 'location',
   'login' => 'Login',
   'logout' => 'Logout',
   'mail' => 'Email',
   'members' => 'Members',
   'members_of_this_group' => 'members_of_this_group',
-  'modify' => 'modify',
   'name' => 'Name',
   'nothing_yet' => 'There is nothing here...yet!',
   'or' => 'or',
@@ -60,9 +62,7 @@ return array (
   'settings' => 'settings',
   'show_history' => 'show_history',
   'something_wrong' => 'Something is wrong with your submission',
-  'start' => 'start',
   'started_by' => 'started_by',
-  'stop' => 'stop',
   'toggle_navigation' => 'toggle_navigation',
   'unread_discussions' => 'Unread discussions',
   'what' => 'what',
@@ -72,7 +72,6 @@ return array (
   'your_password_reset_link' => 'your_password_reset_link',
   //================================== Obsolete strings ==================================//
   'all_the_groups_welcome' => 'Here are all the groups on this server.',
-  'close' => 'close',
   'group' => 'Group',
   'groups_list' => 'groups_list',
   'users' => 'users',

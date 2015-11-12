@@ -18,29 +18,23 @@ $(document).ready(function() {
       center: 'title',
       right: 'month,agendaWeek,agendaDay'
     },
-    /*
+
     eventClick:  function(event, jsEvent, view) {
-    $('#modalTitle').html(event.title);
-    $('#modalBody').html(event.description);
-    $('#eventUrl').attr('href',event.url);
-    $('#fullCalModal').modal();
-    return false;
-  },
-  */
-  /*
-  eventClick: function(event) {
-    if (event.url) {
-      alert(event.url);
-      window.open(event.url);
+      $('#modalTitle').html(event.title);
+      $('#modal-body').html(event.body);
+      $('#modal-location').html(String(event.location));
+      $('#modal-start').html(event.start.format('LLL'));
+      $('#modal-stop').html(event.end.format('LLL'));
+      $('#eventUrl').attr('href',String(event.url));
+      $('#fullCalModal').modal();
       return false;
+    },
+
+    eventRender: function(event, element)
+    {
+      $(element).tooltip({title: event.body});
     }
-  },
-  */
-  eventRender: function(event, element)
-  {
-    $(element).tooltip({title: event.body});
-  }
-});
+  });
 });
 </script>
 
@@ -68,11 +62,25 @@ $(document).ready(function() {
           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
           <h4 id="modalTitle" class="modal-title"></h4>
         </div>
-        <div id="modalBody" class="modal-body"></div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-          <!--<button class="btn btn-primary"><a id="eventUrl" target="_blank">Event Page</a></button>-->
+
+        <div class="modal-body">
+          <p>
+            <strong>{{trans('messages.description')}}</strong> : <span id="modal-body"></span>
+          </p>
+
+          <strong>{{trans('messages.location')}} : </strong><span id="modal-location"></span>
+          <br/>
+          <strong>{{trans('messages.start')}} : </strong><span id="modal-start"></span>
+          <br/>
+          <strong>{{trans('messages.stop')}} : </strong><span id="modal-stop"></span>
+          <br/>
+
         </div>
+
+        <div class="modal-footer">
+          <a class="btn btn-primary" id="eventUrl">{{trans('messages.details')}}</a>
+        </div>
+
       </div>
     </div>
   </div>
