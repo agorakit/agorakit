@@ -78,9 +78,9 @@ class InviteController extends Controller
 
 
         Mail::send('emails.invite', ['invite' => $invite, 'group' => $group, 'invitating_user' => $request->user()], function ($message) use ($email, $request, $group) {
-          $message->from('noreply@example.com', 'Laravel');
-          $message->to($email);
-          $message->subject( '[' . env('APP_NAME') . '] Invitation à rejoindre le groupe "' . $group->name . '"');
+          $message->from(env('MAIL_FROM', 'noreply@example.com'), env('APP_NAME', 'Laravel'))
+          ->to($email)
+          ->subject( '[' . env('APP_NAME') . '] Invitation à rejoindre le groupe "' . $group->name . '"');
         });
 
 

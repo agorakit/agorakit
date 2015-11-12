@@ -19,9 +19,9 @@ class AppMailer
   public function sendEmailConfirmationTo(User $user)
   {
     Mail::send('emails.confirm', ['user' => $user], function ($message) use ($user) {
-      $message->to($user->email, $user->name)
-      ->subject('[' . env('APP_NAME') . '] ' . trans('messages.confirm_your_email'))
-      ->from(env('MAIL_FROM', 'noreply@example.com'));
+      $message->from(env('MAIL_FROM', 'noreply@example.com'), env('APP_NAME', 'Laravel'))
+      ->to($user->email, $user->name)
+      ->subject('[' . env('APP_NAME') . '] ' . trans('messages.confirm_your_email'));
     });
 
   }
@@ -66,9 +66,9 @@ class AppMailer
       {
         Mail::send('emails.notification', ['user' => $user, 'group' => $group, 'membership' => $membership, 'discussions' => $discussions,
         'files' => $files, 'users' => $users, 'actions' => $actions], function ($message) use($user, $group) {
-          $message->from(env('MAIL_FROM', 'noreply@example.com'));
-          $message->to($user->email);
-          $message->subject('[' . env('APP_NAME') . '] ' . 'Des nouvelles du groupe "' . $group->name . '"');
+          $message->from(env('MAIL_FROM', 'noreply@example.com'), env('APP_NAME', 'Laravel'))
+          ->to($user->email)
+          ->subject('[' . env('APP_NAME') . '] ' . 'Des nouvelles du groupe "' . $group->name . '"');
         });
         return true;
 
