@@ -20,7 +20,7 @@
         </a>
         <div class="caption">
           <h4><a href="{{ action('GroupController@show', $group->id) }}">{{ $group->name }}</a></h4>
-          <p class="summary">{{ str_limit($group->body, 100) }}</p>
+          <p class="summary">{{ str_limit($group->body, 300) }}</p>
           <p>
 
 

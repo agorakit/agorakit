@@ -3,35 +3,57 @@
 @section('content')
 
 
-<h2>Bonjour {{$user->name}},</h2>
+<p>Bonjour {{$user->name}},</p>
 
 <p>
   Voici les dernières nouvelles du groupe "<a href="{{action('GroupController@show', $group->id)}}">{{$group->name}}</a>"
 </p>
 
-<h3>Dernières discussion et mises à jour</h3>
+
+@if ($actions->count() > 0)
+<h2>Prochaines actions</h2>
+@foreach($actions as $action)
+<strong><a href="{{action('ActionController@show', [$group->id, $action->id])}}">{{$action->name}}</a></strong>
+<p>{{ str_limit($action->body, 200) }}</p>
+<p>
+{{$action->start->format('d/m/Y H:i')}}
+</p>
+<p>
+{{trans('messages.location')}} : {{$action->location}}
+</p>
+<hr/>
+@endforeach
+@endif
+
+
+<h2>Dernières discussion et mises à jour</h2>
 @forelse($discussions as $discussion)
-<li><a href="{{action('DiscussionController@show', [$group->id, $discussion->id])}}">{{$discussion->name}} </a></li>
+<strong><a href="{{action('DiscussionController@show', [$group->id, $discussion->id])}}">{{$discussion->name}} </a></strong>
+<p>
+  {{ str_limit($discussion->body, 200) }}
+</p>
+<br/>
 @empty Rien de neuf depuis le dernier mail
 @endforelse
 
-<h3>Prochaines actions</h3>
-@forelse($actions as $action)
-<li><a href="{{action('ActionController@show', [$group->id, $action->id])}}">{{$action->name}}</a></li>
-@empty Rien de neuf depuis le dernier mail
-@endforelse
 
 
-<h3>Nouveaux membres</h3>
+
+
+
+
+<h2>Nouveaux membres</h2>
 @forelse($users as $user)
-<li><a href="{{action('UserController@show', $user->id)}}">{{$user->name}}</a></li>
+<a href="{{action('UserController@show', $user->id)}}">{{$user->name}}</a>
+<br/>
 @empty Personne depuis le dernier mail
 @endforelse
 
 
-<h3>Nouveaux fichiers</h3>
+<h2>Nouveaux fichiers</h2>
 @forelse($files as $file)
-<li><a href="{{action('FileController@show', [$group->id, $file->id])}}">{{$file->name}}</a></li>
+<a href="{{action('FileController@show', [$group->id, $file->id])}}">{{$file->name}}</a>
+<br/>
 @empty Rien de neuf depuis le dernier mail
 @endforelse
 
