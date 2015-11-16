@@ -41,6 +41,28 @@ class FileController extends Controller
     }
   }
 
+
+  public function gallery($id)
+  {
+    if ($id) {
+      $group = Group::findOrFail($id);
+      $files = $group->files()
+      ->with('user')
+      ->where('mime', 'like', 'image%') // TODO index on DB ? Failproof ?
+      ->orderBy('updated_at', 'desc')
+      ->paginate(100);
+
+      $upload_allowed = $group->isMember();
+
+      return view('files.gallery')
+      ->with('files', $files)
+      ->with('group', $group)
+      ->with('tab', 'files')
+      ->with('upload_allowed', $upload_allowed);
+    }
+  }
+
+
   /**
   * Show the form for creating a new resource.
   *
@@ -141,7 +163,28 @@ class FileController extends Controller
     $entry = \App\File::findOrFail($file_id);
 
     if ($entry->mime == 'image/jpeg') {
-      $img = Image::make(storage_path().'/app/'.$entry->path)->fit(64, 64); //TODO cache image thumbnails
+      $img = Image::make(storage_path().'/app/'.$entry->path)->fit(32, 32); //TODO cache image thumbnails
+      /*
+      // this somehow should do the trick but the cache system doesn't support setting headers for downloads. what's the point then ?
+      $img = Image::cache(function($image) use ($entry) {
+        return $image->make(storage_path().'/app/'.$entry->path)->fit(64, 64);
+      });
+      */
+      return $img->response('jpg');
+    } else {
+      //abort(404);
+      $img = Image::make(public_path().'/images/extensions/text-file.png')->fit(32, 32);
+      return $img->response('jpg');
+    }
+  }
+
+
+  public function preview($group_id, $file_id)
+  {
+    $entry = \App\File::findOrFail($file_id);
+
+    if ($entry->mime == 'image/jpeg') {
+      $img = Image::make(storage_path().'/app/'.$entry->path)->widen(250); //TODO cache image thumbnails
       /*
       // this somehow should do the trick but the cache system doesn't support setting headers for downloads. what's the point then ?
       $img = Image::cache(function($image) use ($entry) {
@@ -155,6 +198,7 @@ class FileController extends Controller
       return $img->response('jpg');
     }
   }
+
 
   /**
   * Show the form for editing the specified resource.

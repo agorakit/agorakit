@@ -17,6 +17,11 @@
 
 </h2>
 
+<p>
+  <a class="btn btn-default btn-xs" href="{{ action('FileController@gallery', $group->id ) }}">
+   <i class="fa fa-camera-retro "></i>
+   {{trans('messages.show_gallery')}}</a>
+</p>
 
   <table class="table table-hover">
     @forelse( $files as $file )

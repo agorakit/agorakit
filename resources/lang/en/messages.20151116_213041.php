@@ -1,12 +1,14 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/11/16 22:19:55 
+ Generated via "php artisan localization:missing" at 2015/11/12 17:57:18 
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/files/index.blade.php
-  'show_gallery' => 'show_gallery',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/show.blade.php
+  'date' => 'date',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/show.blade.php
+  'title' => 'title',
   //==================================== Translations ====================================//
   'actions' => 'Actions',
   'agenda' => 'agenda',
@@ -19,8 +21,6 @@ return array (
   'changed_to' => 'changed_to',
   'confirm_password' => 'Confirm password',
   'create' => 'Create',
-  'create_file_button' => 'create_file_button',
-  'date' => 'date',
   'description' => 'description',
   'details' => 'details',
   'discussions' => 'discussions',
@@ -29,7 +29,6 @@ return array (
   'email_not_verified' => 'email_not_verified',
   'ends' => 'ends',
   'files' => 'files',
-  'files_in_this_group' => 'files_in_this_group',
   'forgotten_password' => 'Forgotten password',
   'groups' => 'Groups',
   'hello' => 'Hello',
@@ -69,7 +68,6 @@ return array (
   'start' => 'start',
   'started_by' => 'started_by',
   'stop' => 'stop',
-  'title' => 'title',
   'toggle_navigation' => 'toggle_navigation',
   'unread_discussions' => 'Unread discussions',
   'what' => 'what',

@@ -155,10 +155,12 @@ Route::post('groups/{group}/actions/{action}', 'ActionController@update');
 
 // Files
 Route::get('groups/{group}/files', 'FileController@index');
+Route::get('groups/{group}/files/gallery', 'FileController@gallery');
 Route::get('groups/{group}/files/create', 'FileController@create');
 Route::post('groups/{group}/files/create', 'FileController@store');
 Route::get('groups/{group}/files/{file}', 'FileController@show');
 Route::get('groups/{group}/files/{file}/thumbnail', 'FileController@thumbnail');
+Route::get('groups/{group}/files/{file}/preview', 'FileController@preview');
 
 
 // Users

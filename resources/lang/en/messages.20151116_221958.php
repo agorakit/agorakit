@@ -1,12 +1,14 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/11/16 22:19:55 
+ Generated via "php artisan localization:missing" at 2015/11/16 21:30:39 
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
   // Defined in file /home/philippe/Sites/Mobilizator/resources/views/files/index.blade.php
-  'show_gallery' => 'show_gallery',
+  'create_file_button' => 'create_file_button',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/files/index.blade.php
+  'files_in_this_group' => 'files_in_this_group',
   //==================================== Translations ====================================//
   'actions' => 'Actions',
   'agenda' => 'agenda',
@@ -19,7 +21,6 @@ return array (
   'changed_to' => 'changed_to',
   'confirm_password' => 'Confirm password',
   'create' => 'Create',
-  'create_file_button' => 'create_file_button',
   'date' => 'date',
   'description' => 'description',
   'details' => 'details',
@@ -29,7 +30,6 @@ return array (
   'email_not_verified' => 'email_not_verified',
   'ends' => 'ends',
   'files' => 'files',
-  'files_in_this_group' => 'files_in_this_group',
   'forgotten_password' => 'Forgotten password',
   'groups' => 'Groups',
   'hello' => 'Hello',
