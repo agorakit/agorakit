@@ -10,3 +10,26 @@
 
 
 {!! Form::close() !!}
+
+
+@section('head')
+{!! Html::style('/packages/summernote/summernote.css') !!}
+@stop
+
+@section('footer')
+{!! Html::script('/packages/summernote/summernote.min.js') !!}
+
+<script>
+$(document).ready(function() {
+  $("textarea[name='body']").summernote({
+		toolbar: [
+    //[groupname, [button list]]
+
+    ['style', ['style', 'bold', 'italic', 'underline', 'clear']],
+    ['para', ['ul', 'ol']],
+  ]
+	});
+});
+</script>
+
+@stop
