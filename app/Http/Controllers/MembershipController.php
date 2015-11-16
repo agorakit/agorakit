@@ -27,7 +27,7 @@ class MembershipController extends Controller
     ->with('group', $group)
     ->with('tab', 'settings')
     ->with('membership', $membership)
-    ->with('interval', 'weekly');
+    ->with('interval', 'daily');
     ;
   }
 

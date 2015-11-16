@@ -14,7 +14,8 @@
     "watson/validating": "~1.0",
     "laravelcollective/html": "5.1.*",
     "jenssegers/date": "^3.0",
-    "mews/purifier": "~2.0"
+    "mews/purifier": "~2.0",
+    "intervention/imagecache": "^2.3"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

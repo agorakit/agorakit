@@ -5,7 +5,7 @@ Dropzone.options.realDropzone = {
         // Set up any event handlers
         this.on('complete', function () {
             if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
-                location.reload();
+                window.location.replace('./');
             }
         });
     }

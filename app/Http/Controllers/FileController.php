@@ -46,8 +46,18 @@ class FileController extends Controller
   *
   * @return Response
   */
-  public function create()
+  public function create($id)
   {
+    if ($id) {
+      $group = Group::findOrFail($id);
+
+      $upload_allowed = $group->isMember();
+
+      return view('files.create')
+      ->with('group', $group)
+      ->with('tab', 'files')
+      ->with('upload_allowed', $upload_allowed);
+    }
   }
 
   /**
@@ -131,11 +141,18 @@ class FileController extends Controller
     $entry = \App\File::findOrFail($file_id);
 
     if ($entry->mime == 'image/jpeg') {
-      $img = Image::make(storage_path().'/app/'.$entry->path)->fit(24, 24);
-
+      $img = Image::make(storage_path().'/app/'.$entry->path)->fit(64, 64); //TODO cache image thumbnails
+      /*
+      // this somehow should do the trick but the cache system doesn't support setting headers for downloads. what's the point then ?
+      $img = Image::cache(function($image) use ($entry) {
+        return $image->make(storage_path().'/app/'.$entry->path)->fit(64, 64);
+      });
+      */
       return $img->response('jpg');
     } else {
-      abort(404);
+      //abort(404);
+      $img = Image::make(public_path().'/images/extensions/text-file.png')->fit(64, 64);
+      return $img->response('jpg');
     }
   }
 
