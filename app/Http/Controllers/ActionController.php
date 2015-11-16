@@ -50,6 +50,7 @@ class ActionController extends Controller
       $event['title'] = $action->name . ' (' . $group->name . ')';
       $event['description'] = $action->body . ' <br/> ' . $action->location;
       $event['body'] = $action->body;
+      $event['summary'] = str_limit(strip_tags($action->body), 200);
       $event['location'] = $action->location;
       $event['start'] = $action->start->toIso8601String();
       $event['end'] = $action->stop->toIso8601String();

@@ -32,7 +32,7 @@ $(document).ready(function() {
 
     eventRender: function(event, element)
     {
-      $(element).tooltip({title: event.body});
+      $(element).tooltip({title: event.summary});
     }
   });
 });

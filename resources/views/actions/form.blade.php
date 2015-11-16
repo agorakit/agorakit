@@ -1,6 +1,8 @@
 @section('head')
 {!! Html::style('/packages/datetimepicker/jquery.datetimepicker.css') !!}
+{!! Html::style('/packages/summernote/summernote.css') !!}
 @stop
+
 
 @section('footer')
 {!! Html::script('/packages/datetimepicker/jquery.datetimepicker.full.min.js') !!}
@@ -27,12 +29,23 @@ jQuery(function(){
 
   });
 });
-
-
 </script>
 
 
+{!! Html::script('/packages/summernote/summernote.min.js') !!}
 
+<script>
+$(document).ready(function() {
+  $("textarea[name='body']").summernote({
+		styleTags: ['p', 'h1', 'h2', 'h3'],
+		toolbar: [
+    //[groupname, [button list]]
+    ['style', ['bold', 'italic', 'underline', 'clear']],
+    ['para', ['ul', 'ol']],
+  ]
+	});
+});
+</script>
 @stop
 
 
@@ -77,6 +90,3 @@ jQuery(function(){
     </div>
   </div>
 </div>
-
-
-@include('partials.wysiwyg')
