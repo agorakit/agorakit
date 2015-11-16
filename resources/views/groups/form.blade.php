@@ -7,3 +7,6 @@
 		{!! Form::label('body', trans('group.description')) !!}
 		{!! Form::textarea('body', null, ['class' => 'form-control', 'required']) !!}
 </div>
+
+
+@include('partials.wysiwyg')

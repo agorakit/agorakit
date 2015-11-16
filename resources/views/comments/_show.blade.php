@@ -11,7 +11,7 @@
 
   <div class="user">{{$comment->user->name}}</div>
 
-  <div class="body">{{$comment->body}}</div>
+  <div class="body">{!!$comment->body!!}</div>
 
   <div class="created">{{$comment->created_at->diffForHumans()}}</div>
 

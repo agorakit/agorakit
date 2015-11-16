@@ -77,3 +77,6 @@ jQuery(function(){
     </div>
   </div>
 </div>
+
+
+@include('partials.wysiwyg')

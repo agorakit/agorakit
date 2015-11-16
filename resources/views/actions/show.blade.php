@@ -16,7 +16,7 @@
     <h4>{{trans('messages.what')}} ?</h4>
 
     <p class="body">
-      {{ $action->body }}
+      {!! $action->body !!}
     </p>
 
     <h4>{{trans('messages.when')}} ?</h4>

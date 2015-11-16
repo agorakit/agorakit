@@ -53,7 +53,7 @@ class GroupController extends Controller
       $group = new group();
 
       $group->name = $request->input('name');
-      $group->body = $request->input('body');
+      $group->body = clean($request->input('body'));
 
       if ($group->isInvalid()) {
           // Oops.
@@ -128,7 +128,7 @@ class GroupController extends Controller
   {
       $group = Group::findOrFail($group_id);
       $group->name = $request->input('name');
-      $group->body = $request->input('body');
+      $group->body = clean($request->input('body'));
 
       $group->user()->associate(Auth::user());
 

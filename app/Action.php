@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 use Carbon\Carbon;
 
-class Action extends Model implements \MaddHatter\LaravelFullcalendar\Event
+class Action extends Model
 {
 
 

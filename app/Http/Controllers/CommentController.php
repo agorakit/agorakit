@@ -11,7 +11,7 @@ class CommentController extends Controller
         $this->middleware('member', ['only' => ['reply', 'create', 'store', 'edit', 'update', 'destroy']]);
     }
 
-  
+
   /**
    * Display a listing of the resource.
    *
@@ -53,7 +53,7 @@ class CommentController extends Controller
   {
       if ($type == 'discussion') {
           $comment = new \App\Comment();
-          $comment->body = $request->input('body');
+          $comment->body = clean($request->input('body'));
 
           $comment->user()->associate(\Auth::user());
 

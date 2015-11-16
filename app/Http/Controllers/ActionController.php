@@ -27,8 +27,6 @@ class ActionController extends Controller
     $group = Group::findOrFail($group_id);
     $actions = $group->actions()->orderBy('start', 'asc')->get();
 
-    $calendar = \Calendar::addEvents($actions);
-
     return view('actions.index')
     ->with('actions', $actions)
     ->with('group', $group)
@@ -87,7 +85,7 @@ class ActionController extends Controller
 
 
     $action->name = $request->input('name');
-    $action->body = $request->input('body');
+    $action->body = clean($request->input('body'));
     $action->location = $request->input('location');
     $action->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start'));
     $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop'));
@@ -164,7 +162,7 @@ class ActionController extends Controller
 
 
     $action->name = $request->input('name');
-    $action->body = $request->input('body');
+    $action->body = clean($request->input('body'));
     $action->location = $request->input('location');
     $action->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start'));
     $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop'));
