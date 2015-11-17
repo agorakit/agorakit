@@ -106,11 +106,21 @@ class FileController extends Controller
 
       $filename = $file->id . '.' . strtolower($request->file('file')->getClientOriginalExtension());
 
-      // resize big images TODO
-      // if(stristr($mime, 'image') === TRUE)
+      // resize big images
+      if (substr( $request->file('file')->getClientMimeType(), 0, 5) === 'image')
+      {
+        //File::exists($filepath) or File::makeDirectory($filepath);
+        Storage::disk('local')->makeDirectory($filepath);
+        Image::make($request->file('file'))->widen(1200)->save(storage_path().'/app/' . $filepath.$filename);
+      }
+      else
+      {
+        // store the file
+        Storage::disk('local')->put($filepath.$filename,  File::get($request->file('file')));
+      }
 
-      // store the file
-      Storage::disk('local')->put($filepath.$filename,  File::get($request->file('file')));
+
+
 
       // add path and other infos to the file record on DB
       $file->path = $filepath.$filename;
@@ -162,17 +172,16 @@ class FileController extends Controller
   {
     $entry = \App\File::findOrFail($file_id);
 
-    if ($entry->mime == 'image/jpeg') {
-      $img = Image::make(storage_path().'/app/'.$entry->path)->fit(32, 32); //TODO cache image thumbnails
-      /*
-      // this somehow should do the trick but the cache system doesn't support setting headers for downloads. what's the point then ?
-      $img = Image::cache(function($image) use ($entry) {
-        return $image->make(storage_path().'/app/'.$entry->path)->fit(64, 64);
-      });
-      */
-      return $img->response('jpg');
-    } else {
-      //abort(404);
+    if (substr( $entry->mime, 0, 5) === 'image')
+    {
+      $cachedImage = Image::cache(function($img) use ($entry) {
+        return $img->make(storage_path().'/app/'.$entry->path)->fit(32, 32);
+      }, 60000, true);
+
+      return $cachedImage->response();
+    }
+    else
+    {
       $img = Image::make(public_path().'/images/extensions/text-file.png')->fit(32, 32);
       return $img->response('jpg');
     }
@@ -183,17 +192,16 @@ class FileController extends Controller
   {
     $entry = \App\File::findOrFail($file_id);
 
-    if ($entry->mime == 'image/jpeg') {
-      $img = Image::make(storage_path().'/app/'.$entry->path)->widen(250); //TODO cache image thumbnails
-      /*
-      // this somehow should do the trick but the cache system doesn't support setting headers for downloads. what's the point then ?
-      $img = Image::cache(function($image) use ($entry) {
-        return $image->make(storage_path().'/app/'.$entry->path)->fit(64, 64);
-      });
-      */
-      return $img->response('jpg');
-    } else {
-      //abort(404);
+    if (substr( $entry->mime, 0, 5) === 'image')
+    {
+      $cachedImage = Image::cache(function($img) use ($entry) {
+        return $img->make(storage_path().'/app/'.$entry->path)->widen(250);
+      }, 60000, true);
+
+      return $cachedImage->response();
+    }
+    else
+    {
       $img = Image::make(public_path().'/images/extensions/text-file.png')->fit(64, 64);
       return $img->response('jpg');
     }

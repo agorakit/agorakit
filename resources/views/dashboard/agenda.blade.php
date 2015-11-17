@@ -48,7 +48,7 @@ $(document).ready(function() {
 
 
 
-<div class="group_header">
+<div class="page_header">
   <h1>{{ trans('messages.agenda') }}</a></h1>
   <p>Si vous souhaitez ajouter des événements, rendez vous dans l'agenda d'un groupe précis</p>
 </div>

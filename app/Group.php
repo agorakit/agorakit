@@ -25,6 +25,8 @@ class Group extends Model
   protected $fillable = ['name', 'body', 'cover'];
 
 
+
+
   /**
   * Returns all the users of this group
   *

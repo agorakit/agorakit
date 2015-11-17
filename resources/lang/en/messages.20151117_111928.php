@@ -1,9 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/11/17 11:19:16 
+ Generated via "php artisan localization:missing" at 2015/11/16 22:19:55 
 *************************************************************************/
 
 return array (
+  //============================== New strings to translate ==============================//
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/files/index.blade.php
+  'show_gallery' => 'show_gallery',
   //==================================== Translations ====================================//
   'actions' => 'Actions',
   'agenda' => 'agenda',
@@ -61,7 +64,6 @@ return array (
   'save' => 'save',
   'send_my_recover_email' => 'Send my recover email',
   'settings' => 'settings',
-  'show_gallery' => 'show_gallery',
   'show_history' => 'show_history',
   'something_wrong' => 'Something is wrong with your submission',
   'start' => 'start',

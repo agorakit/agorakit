@@ -7,7 +7,7 @@
   <h1>Modification du groupe</h1>
 
 
-  {!! Form::model($group, array('action' => ['GroupController@update', $group->id])) !!}
+  {!! Form::model($group, array('action' => ['GroupController@update', $group->id], 'files' => true)) !!}
 
   @include('groups.form')
 

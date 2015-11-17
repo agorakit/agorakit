@@ -4,7 +4,7 @@
 
 
 
-<div class="group_header">
+<div class="page_header">
   <h1>{{ trans('messages.unread_discussions') }}</a></h1>
 </div>
 

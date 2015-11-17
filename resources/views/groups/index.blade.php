@@ -5,7 +5,7 @@
 @section('content')
 
 
-<div class="page-header">
+<div class="page_header">
   <h1>{{ trans('messages.groups') }}</h1>
 </div>
 
@@ -16,7 +16,7 @@
     <div class="col-sm-4 col-md-3">
       <div class="thumbnail group">
         <a href="{{ action('GroupController@show', $group->id) }}">
-          <!--<img src="http://lorempixel.com/242/150/?id={{$group->id}}"/>-->
+          <img src="{{action('GroupController@cover', $group->id)}}"/>
         </a>
         <div class="caption">
           <h4><a href="{{ action('GroupController@show', $group->id) }}">{{ $group->name }}</a></h4>
@@ -25,12 +25,13 @@
 
 
 
-            @if ($group->isMember())
-            <td><a class="btn btn-default" href="{{ action('MembershipController@leave', $group->id) }}"><i class="fa fa-sign-out"></i>{{ trans('group.leave') }}</a></td>
-            @else
-            <td><a class="btn btn-primary" href="{{ action('MembershipController@join', $group->id) }}"><i class="fa fa-sign-in"></i>
-              {{ trans('group.join') }}</a></td>
-              @endif
+            @unless ($group->isMember())
+            <a class="btn btn-primary" href="{{ action('MembershipController@join', $group->id) }}"><i class="fa fa-sign-in"></i>
+              {{ trans('group.join') }}</a>
+            @endunless
+
+            <a class="btn btn-primary" href="{{ action('GroupController@show', $group->id) }}">{{ trans('group.visit') }}</a>
+
             </p>
           </div>
         </div>

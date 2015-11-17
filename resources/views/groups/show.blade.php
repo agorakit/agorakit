@@ -10,6 +10,8 @@
 
 
   <h2>{{trans('group.about_this_group')}}  </h2>
+
+  <img class="cover" src="{{action('GroupController@cover', $group->id)}}"/>
   <p>
     {!! $group->body !!}
   </p>

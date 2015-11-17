@@ -86,6 +86,10 @@ Route::post('groups/create', 'GroupController@store');
 // specific group homepage
 Route::get('groups/{group}', 'GroupController@show');
 
+// group cover
+Route::get('groups/{group}/cover', 'GroupController@cover');
+
+
 // group edit
 Route::get('groups/{group}/edit', 'GroupController@edit');
 Route::post('groups/{group}/edit', 'GroupController@update');

@@ -1,12 +1,9 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/11/16 22:19:55
+ Generated via "php artisan localization:missing" at 2015/11/17 11:19:16 
 *************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/files/index.blade.php
-  'show_gallery' => 'Afficher sous forme de gallerie photo',
   //==================================== Translations ====================================//
   'actions' => 'Actions',
   'agenda' => 'Agenda',
@@ -64,6 +61,7 @@ return array (
   'save' => 'Enregistrer',
   'send_my_recover_email' => 'M\'envoyer un mail pour changer mon mot de passe',
   'settings' => 'Préférences',
+  'show_gallery' => 'Afficher sous forme de gallerie photo',
   'show_history' => 'Afficher l\'historique des modifications',
   'something_wrong' => 'Il y a quelque chose qui ne fonctionne pas',
   'start' => 'Début',

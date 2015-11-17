@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300);
 
 /***************************** COMMON STUFF / BOOTSTRAP TWEAKS***********************************/
 
@@ -18,6 +18,7 @@ body, table
 h1, h2, h3, h4, h5, h6
 {
 font-family: "Roboto";
+font-weight: 300;
 }
 
 
@@ -32,14 +33,14 @@ border: 1px solid white;
 background-color: white;
 }
 
-.group_header h1, .group_header h2
+.page_header h1, .page_header h2
 {
   padding: 0;
   margin: 0;
 }
 
 /***************** SHADOWS *****************/
-.group_header, .tab_content, .alert
+.page_header, .tab_content, .alert, .row .group
 {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16);
 }
@@ -91,6 +92,12 @@ background-color: rgb(242, 241, 239);
 
 /****************************** GROUPS & THEIR HOMEPAGE ********************************/
 
+
+.cover{
+width: 25%;
+float: right;
+}
+
 .thumbnail img {
   width: 100%;
 }
@@ -98,17 +105,17 @@ background-color: rgb(242, 241, 239);
   display: inline-block;
   width: 100%;
   border: 0;
-  border-bottom: 3px solid #DCDCDC;
 }
 .group .summary {
   height: 6em;
+  font-size: 0.9em;
   overflow: hidden;
 }
 .group h4 {
   height: 2.5em;
   overflow: hidden;
 }
-.group_header {
+.page_header {
   /*order-bottom: 3px solid #DCDCDC;*/
   margin-top: 2em;
   margin-bottom: 1em;
@@ -116,7 +123,7 @@ background-color: rgb(242, 241, 239);
   /*padding: 0.5em 2em 1em 2em;*/
   padding: 2%;
 }
-.group_header h1 {
+.page_header h1 {
   font-size: 2em;
   /*font-weight: bold;*/
 }

@@ -1,4 +1,4 @@
-<div class="group_header">
+<div class="page_header">
     <h1>{{ $group->name }}</h1>
 </div>
 
