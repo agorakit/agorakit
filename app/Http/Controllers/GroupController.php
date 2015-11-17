@@ -177,7 +177,7 @@ class GroupController extends Controller
     if (File::exists($path))
     {
       $cachedImage = Image::cache(function($img) use ($path) {
-        return $img->make($path)->widen(250);
+        return $img->make($path)->fit(300, 200);
       }, 60000, true);
 
       return $cachedImage->response();
