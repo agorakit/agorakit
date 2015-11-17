@@ -1,9 +1,55 @@
-/***************************** COMMON STUFF ***********************************/
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+/***************************** COMMON STUFF / BOOTSTRAP TWEAKS***********************************/
 
 body {
   padding-top: 40px;
   color: rgb(20, 20, 20);
   background-color: rgb(244, 240, 231);
+  background-image: url("/images/seamless_paper_texture.png");
+  font-family: "Roboto";
+}
+
+body, table
+{
+  font-size: 15px;
+}
+
+h1, h2, h3, h4, h5, h6
+{
+font-family: "Roboto";
+}
+
+
+.nav-tabs > li.active > a
+{
+border: 1px solid white;
+}
+
+
+.page-header, .tab_content
+{
+background-color: white;
+}
+
+.group_header h1, .group_header h2
+{
+  padding: 0;
+  margin: 0;
+}
+
+/***************** SHADOWS *****************/
+.group_header, .tab_content, .alert
+{
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16);
+}
+
+
+.btn
+{
+  -webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
 }
 
 /*
@@ -63,11 +109,12 @@ background-color: rgb(242, 241, 239);
   overflow: hidden;
 }
 .group_header {
-  border-bottom: 3px solid #DCDCDC;
+  /*order-bottom: 3px solid #DCDCDC;*/
   margin-top: 2em;
   margin-bottom: 1em;
   background-color: white;
-  padding: 0.5em 2em 1em 2em;
+  /*padding: 0.5em 2em 1em 2em;*/
+  padding: 2%;
 }
 .group_header h1 {
   font-size: 2em;

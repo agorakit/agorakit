@@ -4,12 +4,13 @@
 
 
 
-<div class="page-header">
+<div class="group_header">
   <h1>{{ trans('messages.unread_discussions') }}</a></h1>
 </div>
 
-@if ($discussions)
 
+<div class="tab_content">
+@if ($discussions)
 <table class="table table-hover special">
   <thead>
     <tr>
@@ -46,6 +47,7 @@
 @else
 {{trans('messages.nothing_yet')}}
 @endif
+</div>
 
 
 

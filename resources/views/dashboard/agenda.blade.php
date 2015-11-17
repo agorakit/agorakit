@@ -48,12 +48,14 @@ $(document).ready(function() {
 
 
 
-<div class="page-header">
+<div class="group_header">
   <h1>{{ trans('messages.agenda') }}</a></h1>
+  <p>Si vous souhaitez ajouter des événements, rendez vous dans l'agenda d'un groupe précis</p>
 </div>
 
-
+<div class="tab_content">
 <div id="calendar"></div>
+</div>
 
 <div id="fullCalModal" class="modal fade">
   <div class="modal-dialog">
