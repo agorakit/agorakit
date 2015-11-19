@@ -185,6 +185,14 @@ table.special .name {
   margin-bottom: 2em;
 }
 
+/*********************** Gallery ************************************************/
+.gallery .item
+{
+  display: inline-block;
+  padding-bottom: 4px;
+}
+
+
 /*********************** TABS and GROUP HEADERS ************************************/
 
 .tab_content {

@@ -22,7 +22,8 @@ class Group extends Model
 
 
 
-  protected $fillable = ['name', 'body', 'cover'];
+
+  protected $fillable = ['id', 'name', 'body', 'cover'];
 
 
 

@@ -15,8 +15,11 @@ class File extends Model
 
   protected $rules = [
     'path' => 'required',
-    'user_id' => 'required',
+    'user_id' => 'required|exists:users,id',
+    'group_id' => 'required|exists:groups,id',
   ];
+
+
 
   protected $table = 'files';
   public $timestamps = true;
@@ -25,7 +28,7 @@ class File extends Model
 
   protected $dates = ['deleted_at'];
 
-  
+
   public function user()
   {
     return $this->belongsTo('App\User');

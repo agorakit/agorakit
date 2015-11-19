@@ -94,6 +94,10 @@ class ActionController extends Controller
 
     $action->user()->associate($request->user());
 
+    $group = Group::findOrFail($group_id);
+    
+    $action->group()->associate($group);
+
     if ( $action->isInvalid())
     {
       // Oops.
@@ -101,11 +105,11 @@ class ActionController extends Controller
       ->withErrors($action->getErrors())
       ->withInput();
     }
-
-    $group = Group::findOrFail($group_id);
-    $group->actions()->save($action);
-
-    return redirect()->action('ActionController@index', [$group->id]);
+    else
+    {
+      $action->save();
+      return redirect()->action('ActionController@index', [$group->id]);
+    }
   }
 
 

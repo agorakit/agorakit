@@ -17,9 +17,14 @@
 
     </h2>
 
+    <p>
+      <a class="btn btn-default btn-xs" href="{{ action('FileController@index', $group->id ) }}">
+       <i class="fa fa-list "></i>
+       {{trans('messages.show_list')}}</a>
+    </p>
+
+
     <div class="gallery">
-
-
 
       @forelse( $files as $file )
 
@@ -36,40 +41,5 @@
     {!! $files->render() !!}
 
   </div>
-
-  @endsection
-
-  @section('footer')
-
-  <style>
-  .item {
-    float: left;
-    width: 250px;
-  }
-
-  .item img
-  {
-    width: 100%;
-    height: auto;
-  }
-  </style>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/packery/1.4.3/packery.pkgd.js"></script>
-  <script>
-  var $container = $('.gallery');
-  // init
-  $container.packery({
-    itemSelector: '.item',
-    gutter: 10
-  });
-
-$(document).ready(function() {
-  $container.packery();
-});
-
-  </script>
-
-
 
   @endsection

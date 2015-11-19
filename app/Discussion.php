@@ -13,13 +13,15 @@ class Discussion extends Model
   use SoftDeletes;
 
   protected $rules = [
-    'name' => 'required',
-    'body' => 'required',
-    'user_id' => 'required',
+    'name' => 'required|min:5',
+    'body' => 'required|min:5',
+    'user_id' => 'required|exists:users,id',
+    'group_id' => 'required|exists:groups,id',
   ];
 
+
   protected $dontKeepRevisionOf = ['total_comments'];
-  
+
 
   protected $table = 'discussions';
   protected $fillable = ['name', 'body', 'group_id'];
@@ -45,13 +47,7 @@ class Discussion extends Model
     return $this->total_comments;
   }
 
-  // adds a reply to this discussion
-  public function reply(Comment $comment)
-  {
-    $this->comments()->save($comment);
-    ++$this->total_comments;
-    $this->save();
-  }
+
 
   public function group()
   {

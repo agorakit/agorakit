@@ -12,6 +12,13 @@ class Membership extends Model
 
     protected $dates = ['notifed_at'];
 
+    protected $rules = [
+    'user_id' => 'required|exists:users,id',
+    'group_id' => 'required|exists:groups,id',
+    ];
+
+  
+
 
     public function votes()
     {

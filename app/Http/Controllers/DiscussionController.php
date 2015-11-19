@@ -80,7 +80,12 @@ class DiscussionController extends Controller
     $discussion->total_comments = 1; // the discussion itself is already a comment
     $discussion->user()->associate(Auth::user());
 
-    if ( $discussion->isInvalid())
+    $group = Group::findOrFail($group_id);
+
+
+
+
+    if ( !$group->discussions()->save($discussion) )
     {
       // Oops.
       return redirect()->action('DiscussionController@create', $group_id)
@@ -88,8 +93,9 @@ class DiscussionController extends Controller
       ->withInput();
     }
 
-    $group = Group::findOrFail($group_id);
-    $group->discussions()->save($discussion);
+
+
+
 
     $request->session()->flash('message', trans('messages.ressource_created_successfully'));
 

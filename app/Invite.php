@@ -14,11 +14,12 @@ class Invite extends Model
 
 
   protected $rules = [
-  'group_id' => 'required',
   'token' => 'required',
-  'user_id' => 'required',
   'email' => 'required|email',
+  'user_id' => 'required|exists:users,id',
+  'group_id' => 'required|exists:groups,id',
 ];
+
 
 
   public function generatetoken()

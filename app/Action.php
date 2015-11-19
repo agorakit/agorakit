@@ -13,13 +13,18 @@ class Action extends Model
 
   use ValidatingTrait;
 
+  protected $fillable = ['id']; // neede for actions import
+
 
   protected $rules = [
     'name' => 'required|min:5',
-    'user_id' => 'required',
+    'user_id' => 'required|exists:users,id',
+    'group_id' => 'required|exists:groups,id',
     'start' => 'required',
     'stop' => 'required',
   ];
+
+
 
   protected $table = 'actions';
   public $timestamps = true;
@@ -28,58 +33,6 @@ class Action extends Model
 
   protected $dates = ['deleted_at', 'start', 'stop'];
 
-
-
-
-  /**
-  * Get the event's id number
-  *
-  * @return int
-  */
-  public function getId() {
-    return $this->id;
-  }
-
-  /**
-  * Get the event's title
-  *
-  * @return string
-  */
-  public function getTitle()
-  {
-    return $this->name;
-  }
-
-  /**
-  * Is it an all day event?
-  *
-  * @return bool
-  */
-  public function isAllDay()
-  {
-    return false;
-    //return (bool)$this->all_day;
-  }
-
-  /**
-  * Get the start time
-  *
-  * @return DateTime
-  */
-  public function getStart()
-  {
-    return $this->start;
-  }
-
-  /**
-  * Get the end time
-  *
-  * @return DateTime
-  */
-  public function getEnd()
-  {
-    return $this->stop;
-  }
 
 
   public function group()

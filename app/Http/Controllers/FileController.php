@@ -195,7 +195,7 @@ class FileController extends Controller
     if (substr( $entry->mime, 0, 5) === 'image')
     {
       $cachedImage = Image::cache(function($img) use ($entry) {
-        return $img->make(storage_path().'/app/'.$entry->path)->widen(250);
+        return $img->make(storage_path().'/app/'.$entry->path)->fit(250,250);
       }, 60000, true);
 
       return $cachedImage->response();

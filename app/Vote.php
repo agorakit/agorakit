@@ -13,6 +13,12 @@ class Vote extends Model {
 
 	protected $fillable = ['user_id', 'comment_id', 'vote'];
 
+	protected $rules = [
+	'user_id' => 'required|exists:users,id',
+	'comment_id' => 'required|exists:comments,id',
+	];
+
+
 
 	protected $table = 'votes';
 	public $timestamps = true;

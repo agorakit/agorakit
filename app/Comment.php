@@ -11,9 +11,10 @@ class Comment extends Model {
 	use ValidatingTrait;
 
 	protected $rules = [
-		 'body' => 'required',
-		 'user_id' => 'required'
+		 'body' => 'required|min:5',
+		 'user_id' => 'required|exists:users,id'
  ];
+
 
 	protected $fillable = ['body'];
 
