@@ -57,6 +57,7 @@ class DashboardController extends Controller
       $event['url'] = action('ActionController@show', [$action->group->id, $action->id]);
       $event['group_url'] = action('ActionController@index', [$action->group->id]);
       $event['group_name'] = $action->group->name;
+      $event['color'] = $action->group->color();
 
       $events[] = $event;
     }

@@ -55,6 +55,7 @@ class ActionController extends Controller
       $event['start'] = $action->start->toIso8601String();
       $event['end'] = $action->stop->toIso8601String();
       $event['url'] = action('ActionController@show', [$group->id, $action->id]);
+      $event['color'] = $group->color();
 
       $events[] = $event;
     }
