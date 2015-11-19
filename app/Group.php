@@ -26,7 +26,14 @@ class Group extends Model
   protected $fillable = ['id', 'name', 'body', 'cover'];
 
 
+  /**
+   * Returns a summary of this item of $length
+   */
+  public function summary($length = 200)
+  {
+    return str_limit(strip_tags($this->body), $length);
 
+  }
 
   /**
   * Returns all the users of this group

@@ -55,7 +55,7 @@
         <td>
           <a href="{{ action('ActionController@show', [$group->id, $action->id]) }}">
             <span class="name">{{ $action->name }}</span>
-            <span class="summary">{{ str_limit($action->body, 200) }}</span></a>
+            <span class="summary">{{ $action->summary() }}</span></a>
           </td>
 
           <td>

@@ -47,9 +47,10 @@ class DashboardController extends Controller
     foreach ($actions as $action)
     {
       $event['id'] = $action->id;
-      $event['title'] = $action->name . ' (' . $action->group->name . ')';
+      $event['title'] = $action->name;
       $event['description'] = $action->body . ' <br/> ' . $action->location;
       $event['body'] = $action->body;
+      $event['summary'] = $action->summary();
       $event['location'] = $action->location;
       $event['start'] = $action->start->toIso8601String();
       $event['end'] = $action->stop->toIso8601String();

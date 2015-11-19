@@ -58,26 +58,21 @@ class GroupController extends Controller
     $group->name = $request->input('name');
     $group->body = clean($request->input('body'));
 
-
     if ($group->isInvalid()) {
       // Oops.
       return redirect()->action('GroupController@create')
       ->withErrors($group->getErrors())
       ->withInput();
     }
-
     $group->save();
 
     // handle cover
     if ($request->hasFile('cover'))
     {
+      Storage::disk('local')->makeDirectory('groups/' . $group->id);
       Image::make($request->file('cover'))->widen(800)->save(storage_path() . '/app/groups/' . $group->id . '/cover.jpg');
       Image::make($request->file('cover'))->fit(300,200)->save(storage_path() . '/app/groups/' . $group->id . '/thumbnail.jpg');
     }
-
-
-
-
 
     // make the current user a member of the group
     $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
@@ -158,6 +153,7 @@ class GroupController extends Controller
     // handle cover
     if ($request->hasFile('cover'))
     {
+      Storage::disk('local')->makeDirectory('groups/' . $group->id);
       Image::make($request->file('cover'))->widen(800)->save(storage_path() . '/app/groups/' . $group->id . '/cover.jpg');
       Image::make($request->file('cover'))->fit(300,200)->save(storage_path() . '/app/groups/' . $group->id . '/thumbnail.jpg');
     }

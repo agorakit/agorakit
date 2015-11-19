@@ -30,7 +30,7 @@
           <td class="content">
             <a href="{{ action('DiscussionController@show', [$discussion->group_id, $discussion->id]) }}">
               <span class="name">{{ $discussion->name }}</span>
-              <span class="summary">{{ str_limit(strip_tags($discussion->body), 200) }}</span>
+              <span class="summary">{{$discussion->summary() }}</span>
             </a>
           </td>
 

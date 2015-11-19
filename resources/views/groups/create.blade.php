@@ -7,7 +7,7 @@
 <h1>{{trans('group.create_group_title')}}</h1>
 
 
-{!! Form::open(array('action' => ['GroupController@store']), null, 'files'=>true) !!}
+{!! Form::open(['action' => ['GroupController@store'], 'files' => true ], null) !!}
 
 @include('groups.form')
 

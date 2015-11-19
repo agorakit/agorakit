@@ -14,7 +14,7 @@
 <h2>Prochaines actions</h2>
 @foreach($actions as $action)
 <strong><a href="{{action('ActionController@show', [$group->id, $action->id])}}">{{$action->name}}</a></strong>
-<p>{{ str_limit($action->body, 200) }}</p>
+<p>{{ $action->summary() }}</p>
 <p>
 {{$action->start->format('d/m/Y H:i')}}
 </p>
@@ -30,7 +30,7 @@
 @forelse($discussions as $discussion)
 <strong><a href="{{action('DiscussionController@show', [$group->id, $discussion->id])}}">{{$discussion->name}} </a></strong>
 <p>
-  {{ str_limit($discussion->body, 200) }}
+  {{ $discussion->summary() }}
 </p>
 <br/>
 @empty Rien de neuf depuis le dernier mail
