@@ -19,27 +19,50 @@
 
     <p>
       <a class="btn btn-default btn-xs" href="{{ action('FileController@index', $group->id ) }}">
-       <i class="fa fa-list "></i>
-       {{trans('messages.show_list')}}</a>
-    </p>
+        <i class="fa fa-list "></i>
+        {{trans('messages.show_list')}}</a>
+      </p>
 
 
-    <div class="gallery">
+      <div id="gallery">
 
-      @forelse( $files as $file )
+        @forelse( $files as $file )
 
-      <div class="item">
-        <a href="{{ action('FileController@show', [$group->id, $file->id]) }}"><img src="{{ action('FileController@preview', [$group->id, $file->id]) }}"/></a>
+        <a href="{{ action('FileController@show', [$group->id, $file->id]) }}">
+          <img src="{{ action('FileController@preview', [$group->id, $file->id]) }}"/>
+        </a>
+
+
+        @empty
+        {{trans('messages.nothing_yet')}}
+
+        @endforelse
       </div>
 
-      @empty
-      {{trans('messages.nothing_yet')}}
+      {!! $files->render() !!}
 
-      @endforelse
     </div>
 
-    {!! $files->render() !!}
+    @endsection
 
-  </div>
 
-  @endsection
+    @section('head')
+    {!! Html::style('https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.2.6/css/lightgallery.css') !!}
+    @stop
+
+
+
+    @section('footer')
+    {!! Html::script('https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.2.6/js/lightgallery.min.js') !!}
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $("#gallery").lightGallery({
+        speed: 300
+      });
+    });
+    </script>
+
+
+
+    @stop

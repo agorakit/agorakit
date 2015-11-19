@@ -1,12 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/11/17 11:19:16
+ Generated via "php artisan localization:missing" at 2015/11/19 17:26:58
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
-  // Defined in file C:\\lamp\\www\\Mobilizator/resources/views\\groups\\index.blade.php
-  'visit' => 'Visiter',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/form.blade.php
+  'cover' => 'Image de présentation',
   //==================================== Translations ====================================//
   'about_this_group' => 'A propos de ce groupe',
   'create_a_group_button' => 'Créer un groupe',
@@ -20,6 +20,7 @@ return array (
   'latest_files' => 'Fichiers récents',
   'name' => 'Nom du groupe',
   'no_group_yet' => 'Il n\'y a pas encore de groupe sur ce serveur. Allez-y !',
+  'visit' => 'Visiter',
   //================================== Obsolete strings ==================================//
   'leave' => 'Quitter',
 );

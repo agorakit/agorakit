@@ -186,7 +186,7 @@ table.special .name {
 }
 
 /*********************** Gallery ************************************************/
-.gallery .item
+#gallery img
 {
   display: inline-block;
   padding-bottom: 4px;
