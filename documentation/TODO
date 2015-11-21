@@ -14,6 +14,20 @@ Avant lancement :
 
 Court terme :
 - [ok - basique] wysiwyg
+- menu mes groupes trop grand si plus de 10 groupe abonnés. En afficher 10 si moins de 10, sinon lien liste complète des groupes "Mes groupes" + lien rejoindre un groupe
+ -> ou, en page d'accueil : 2 onglet : [Mes groupes] [Tous les groupes]
+
+ Policies :
+Commentaires :
+ - chacun peut effacer ses commentaires
+ - modifiable pendant 1 heure
+
+ Actions :
+ - chacun peut effacer ses commentaires
+ - modificalbe tant qu'elle n'est pas passée
+ - limiter la durée d'une action à 2 jours
+
+
 
 - ical export
 - lien vers la dernière discussion non lue dans une discussion
