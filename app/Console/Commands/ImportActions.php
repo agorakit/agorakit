@@ -25,7 +25,7 @@ class ImportActions extends Command
   /*
   This is the offset used in ides to avoid collision with existing data. Time will tell if it's agood idea. Curently not used
   */
-  //public $id_offset = 1000;
+  public $id_offset = 10;
 
   /**
   * Create a new command instance.
@@ -76,7 +76,7 @@ class ImportActions extends Command
 
         $action->name = $action_data['name'];
         $action->body = $action_data['body'];
-        
+
         $action->start = \Carbon\Carbon::parse($action_data['start']);
         $action->stop = \Carbon\Carbon::parse($action_data['stop']);
 
@@ -86,7 +86,7 @@ class ImportActions extends Command
         // create the group if not existing yet and associate it.
         if (!empty($action_data['group_id']) && !empty($action_data['group']))
         {
-          $group = \App\Group::firstOrNew(['id' => $action_data['group_id'] ]);
+          $group = \App\Group::firstOrNew(['id' => $action_data['group_id'] + $this->id_offset ]);
           $group->name = $action_data['group'];
           $group->body = 'todo';
           $group->save();
