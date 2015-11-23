@@ -3,17 +3,19 @@ Search for TODO and NICETOHAVE on all code to have an in situ overview.
 Par ordre d'importance :
 
 Avant lancement :
-[TODO à tester] Notifications par mail (nouvelles discussions / actions à venir / nouveaux membres / nouveaux fichiers)
 [ok] Confirmation par mail des membres
 [ok] Invitations par mail
 [ok] Limitation des actions des non confirmés par middleware
 [ok] Options d'abonnement pour chaque groupe (onglet settings)
 [ok] Calendrier cliquable
+[ok] wysiwyg basique
 
+A tester :
+[ ] Notifications par mail (nouvelles discussions / actions à venir / nouveaux membres / nouveaux fichiers)
 
 
 Court terme :
-- [ok - basique] wysiwyg
+
 - menu mes groupes trop grand si plus de 10 groupe abonnés. En afficher 10 si moins de 10, sinon lien liste complète des groupes "Mes groupes" + lien rejoindre un groupe
  -> ou, en page d'accueil : 2 onglet : [Mes groupes] [Tous les groupes]
 
@@ -24,7 +26,7 @@ Commentaires :
 
  Actions :
  - chacun peut effacer ses commentaires
- - modificalbe tant qu'elle n'est pas passée
+ - modifiable tant qu'elle n'est pas passée
  - limiter la durée d'une action à 2 jours
 
 

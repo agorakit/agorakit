@@ -6,9 +6,15 @@
 <div class="tab_content">
 
 
-  <h2>{{trans('discussion.all_in_this_group')}} <a class="btn btn-primary btn-xs" href="{{ action('DiscussionController@create', $group->id ) }}">
-    <i class="fa fa-plus"></i>
-    {{trans('discussion.create_one_button')}}</a></h2>
+  <h2>{{trans('discussion.all_in_this_group')}}
+
+    @can('create-discussion', $group)
+    <a class="btn btn-primary btn-xs" href="{{ action('DiscussionController@create', $group->id ) }}">
+      <i class="fa fa-plus"></i> {{trans('discussion.create_one_button')}}
+    </a>
+    @endcan
+
+    </h2>
 
 
     <table class="table table-hover special">

@@ -15,7 +15,10 @@
 
   <div class="created">{{$comment->created_at->diffForHumans()}}</div>
 
-
+  @can('update', $comment)
+    <a href="{{ action('CommentController@edit', [$group->id, $discussion->id, $comment->id]) }}"><i class="fa fa-pencil"></i>
+    {{trans('messages.edit')}}</a>
+  @endcan
 
 
 

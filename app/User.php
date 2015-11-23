@@ -72,6 +72,22 @@ CanResetPasswordContract
     $this->save();
   }
 
+  /**
+  * Returns true if the user is member of $group
+  */
+  public function isMemberOf(Group $group)
+  {
+    $membership = \App\Membership::where('user_id', '=', $this->id)->where('group_id', '=', $group->id)->first();
+
+    if ($membership && $membership->membership > 10)
+    {
+      return true;
+    }
+
+    return false;
+
+  }
+
 
   /**
   * The groups this user is part of.

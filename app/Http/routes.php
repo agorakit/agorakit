@@ -131,15 +131,15 @@ Route::post('groups/{group}/discussions/{discussion}', 'DiscussionController@upd
 Route::get('groups/{group}/discussions/{discussion}/history', 'DiscussionController@history'); // TODO discussions history
 
 
-
-
-
 // Notification email test
-Route::get('groups/{group}/notify', 'NotificationController@notify');
+// Route::get('groups/{group}/notify', 'NotificationController@notify');
+
 
 // Comments
 Route::post('groups/{group}/discussions/{discussion}/reply', 'CommentController@reply');
 
+Route::get('groups/{group}/discussions/{discussion}/comment/{comment}/edit', 'CommentController@edit');
+Route::post('groups/{group}/discussions/{discussion}/comment/{comment}', 'CommentController@update');
 
 Route::get('groups/{group}/discussions/{discussion}/comment/{comment}/up', 'VoteController@up');
 Route::get('groups/{group}/discussions/{discussion}/comment/{comment}/down', 'VoteController@down');
