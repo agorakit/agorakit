@@ -47,7 +47,15 @@ $(document).ready(function() {
 <div class="tab_content">
 
 
-  <h2>{{trans('action.agenda_of_this_group')}} <a class="btn btn-primary btn-xs" href="{{ action('ActionController@create', $group->id ) }}"><i class="fa fa-plus"></i> {{trans('action.create_one_button')}}</a></h2>
+  <h2>{{trans('action.agenda_of_this_group')}}
+    @can('create-action', $group)
+    <a class="btn btn-primary btn-xs" href="{{ action('ActionController@create', $group->id ) }}">
+      <i class="fa fa-plus"></i> {{trans('action.create_one_button')}}
+    </a>
+    @endcan
+
+  </h2>
+
 
   <div class="spacer"></div>
 

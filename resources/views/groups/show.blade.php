@@ -18,13 +18,21 @@
 
 
   <p>
-    <a href="{{ action('GroupController@edit', [$group->id]) }}">
+    @can('update', $group)
+    <a class="btn btn-default btn-xs" href="{{ action('GroupController@edit', [$group->id]) }}">
       <i class="fa fa-pencil"></i>
       {{trans('messages.edit')}}
     </a>
+    @endcan
+
+
     @if ($group->revisionHistory->count() > 0)
-    |  <a href="{{action('GroupController@history', $group->id)}}">{{trans('messages.show_history')}}</a>
+    <a class="btn btn-default btn-xs" href="{{action('GroupController@history', $group->id)}}">
+      <i class="fa fa-history"></i>
+      {{trans('messages.show_history')}}
+    </a>
     @endif
+
   </p>
 
 

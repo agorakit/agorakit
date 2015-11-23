@@ -42,10 +42,10 @@
     @endforeach
 
 
-
-    @if ($group->isMember())
+    @can('create-comment', $group)
     @include ('comments.form')
-    @endif
+    @endcan
+
 
   </div>
 
