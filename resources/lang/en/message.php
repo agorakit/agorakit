@@ -1,11 +1,11 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/11/06 22:59:26 
+ Generated via "php artisan localization:missing" at 2015/11/06 22:59:26
 *************************************************************************/
 
 return array (
   //==================================== Translations ====================================//
-  'your_password_reset_link' => 'your_password_reset_link',
+  'your_password_reset_link' => 'Your password reset link',
   //================================== Obsolete strings ==================================//
-  'edit' => 'edit',
+  'edit' => 'Edit',
 );

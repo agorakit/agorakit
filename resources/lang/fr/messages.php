@@ -1,12 +1,9 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/11/19 17:26:58
+ Generated via "php artisan localization:missing" at 2015/11/24 22:26:06 
 *************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/files/gallery.blade.php
-  'show_list' => 'Afficher sous forme de liste',
   //==================================== Translations ====================================//
   'actions' => 'Actions',
   'agenda' => 'Agenda',
@@ -58,7 +55,6 @@ return array (
   'register' => 'S\'enregistrer',
   'registration_time' => 'Date d\'enregistrement',
   'remember_me' => 'Se souvenir de moi',
-  'reply' => 'Répondre',
   'ressource_created_successfully' => 'Contenu créé avec succès',
   'ressource_updated_successfully' => 'Contenu mis à jour avec succès',
   'save' => 'Enregistrer',
@@ -66,6 +62,7 @@ return array (
   'settings' => 'Préférences',
   'show_gallery' => 'Afficher sous forme de gallerie photo',
   'show_history' => 'Afficher l\'historique des modifications',
+  'show_list' => 'Afficher sous forme de liste',
   'something_wrong' => 'Il y a quelque chose qui ne fonctionne pas',
   'start' => 'Début',
   'started_by' => 'Démarré par',
@@ -86,6 +83,7 @@ return array (
   'groups_list' => 'Liste des groupes',
   'not_a_member' => 'Vous ne faites pas partie de ce groupe',
   'not_logged_in' => 'Vous n\'êtes pas connecté(e). Merci de vous connecter ou de vous créer un compte afin de poursuivre',
+  'reply' => 'Répondre',
   'unread_items' => 'Non lus',
   'users' => 'Utilisateurs',
 );
