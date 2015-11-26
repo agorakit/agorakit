@@ -1,10 +1,14 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/11/24 22:26:06 
+ Generated via "php artisan localization:missing" at 2015/11/26 17:58:06
 *************************************************************************/
 
 return array (
+  //============================== New strings to translate ==============================//
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/users/contact.blade.php
+  'send' => 'Envoyer',
   //==================================== Translations ====================================//
+  'a_message_for_you' => 'Un message pour vous',
   'actions' => 'Actions',
   'agenda' => 'Agenda',
   'back_to' => 'Retour à',
@@ -15,6 +19,8 @@ return array (
   'changed_from' => 'valeur initiale',
   'changed_to' => 'changé en',
   'confirm_password' => 'Confirmer le mot de passe',
+  'contact' => 'Contacter',
+  'contact_this_user' => 'Contacter cette personne',
   'create' => 'Créer',
   'create_file_button' => 'Ajouter des fichiers',
   'date' => 'Date',
@@ -45,7 +51,9 @@ return array (
   'mail' => 'Email',
   'members' => 'Participants',
   'members_of_this_group' => 'Membres de ce groupe',
-  'modify' => 'modify',
+  'message' => 'Message',
+  'message_sent' => 'Message envoyé',
+  'modify' => 'Modifier',
   'name' => 'Nom',
   'nothing_yet' => 'Il n\'y a encore rien ici',
   'or' => 'ou',

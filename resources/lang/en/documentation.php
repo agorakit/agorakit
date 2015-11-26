@@ -5,9 +5,6 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/users/contact.blade.php
-  'send' => 'send',
-  //================================== Obsolete strings ==================================//
-  'edit' => 'Edit',
-  'your_password_reset_link' => 'Your password reset link',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/index.blade.php
+  'intro' => 'intro',
 );
