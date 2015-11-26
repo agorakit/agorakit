@@ -7,6 +7,7 @@
 
 <div class="page_header">
   <h1>{{ trans('messages.groups') }}</h1>
+  <p>{{ trans('documentation.intro') }}</p>
 </div>
 
 <div class="groups_scroller">
@@ -20,7 +21,7 @@
         </a>
         <div class="caption">
           <h4><a href="{{ action('GroupController@show', $group->id) }}">{{ $group->name }}</a></h4>
-          <p class="summary">{{ $group->summary() }}</p>
+          <p class="summary">{{ $group->summary(150) }}</p>
           <p>
 
 
