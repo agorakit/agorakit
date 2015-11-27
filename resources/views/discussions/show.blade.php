@@ -36,14 +36,12 @@
 
   <div class="comments">
     @foreach ($discussion->comments as $comment)
-
     @include('comments._show')
-
     @endforeach
 
 
     @can('create-comment', $group)
-    @include ('comments.form')
+    @include ('comments.create')
     @endcan
 
 

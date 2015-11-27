@@ -1,19 +1,10 @@
 Search for TODO and NICETOHAVE on all code to have an in situ overview.
 
-Par ordre d'importance :
 
-Avant lancement :
-[ok] Confirmation par mail des membres
-[ok] Invitations par mail
-[ok] Limitation des actions des non confirmés par middleware
-[ok] Options d'abonnement pour chaque groupe (onglet settings)
-[ok] Calendrier cliquable
-[ok] wysiwyg basique
+We now use github issues tracker here : https://github.com/philippejadin/Mobilizator/issues
+Nous utilions maintenant le tracker de github : https://github.com/philippejadin/Mobilizator/issues
 
-A tester :
-[ ] Notifications par mail (nouvelles discussions / actions à venir / nouveaux membres / nouveaux fichiers)
-
-
+Brainstorming ci-dessous...
 
 Court terme :
 
@@ -32,24 +23,15 @@ Policies :
  - modificalbe tant qu'elle n'est pas passée
  - limiter la durée d'une action à 2 jours
 
-
-
-
-
-- ical export
 - lien vers la dernière discussion non lue dans une discussion
 - Mark all read + limite à 30 jours de unread pour les nouveaux par ex.
 - Antispam pour les nouveaux
 - Page d'accueil plus attirante avec config du texte d'intro et du nom de l'install + evénements à venir, style dashboard
-
-[ok] Image de groupe
 - Repli des commentaires négatifs?
 - Possibilté de suprimer son propre contenu (uniquement). Impossible de supprimer une discussion si elle a des commentaires
 - Modification de ses propres commentaires dans les 15 minutes de publication
-[ok] Affichage de l'historique des discussions
 - Affichage de l'historique des commentaires
 - Traductions complètes
-[ok] retirer les boutons des trucs qu'on ne peut pas faire (par exemple invitater quand on ne fait pas partie d'un groupe) -> utiliser les policy laravel  pour ça avec @can
 - Avatars
 
 
@@ -60,7 +42,6 @@ Refactor ?
 
 
 Moyen terme
-- Calendrier général
 - Calendrier des groupes dont on est membre
 - Localisation des actions
 - Localisation des groupes
@@ -72,8 +53,6 @@ Moyen terme
 - Tags sur tout + recherche par tags + menu
 
 Indéterminé / nice to have :
-- Formulaire d'upload de fichiers séparé
-- Affichage fichiers en album photo
 - Affichage des fichiers par types
 - Recherche
 - Système d'écriture collaborative type wiki
