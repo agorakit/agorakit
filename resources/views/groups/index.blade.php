@@ -21,7 +21,7 @@
         </a>
         <div class="caption">
           <h4><a href="{{ action('GroupController@show', $group->id) }}">{{ $group->name }}</a></h4>
-          <p class="summary">{{ $group->summary(150) }}</p>
+          <p class="summary">{{ summary($group->body, 150) }}</p>
           <p>
 
 

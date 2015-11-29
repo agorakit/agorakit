@@ -11,7 +11,8 @@
   {{$invitating_user->name}} pense que vous pourriez être intéressé(e) de rejoindre le groupe "{{$group->name}}"
 </p>
 
-<p>Voici la description de ce groupe : "{{$group->body}}"</p>
+<p>Voici la description de ce groupe : 
+<p>{!! $group->body !!}"</p>
 
 
 <div class="button">

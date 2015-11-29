@@ -63,7 +63,7 @@
         <td>
           <a href="{{ action('ActionController@show', [$group->id, $action->id]) }}">
             <span class="name">{{ $action->name }}</span>
-            <span class="summary">{{ $action->summary() }}</span></a>
+            <span class="summary">{{ summary($action->body) }}</span></a>
           </td>
 
           <td>

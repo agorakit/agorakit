@@ -36,7 +36,7 @@
           <td class="content">
             <a href="{{ action('DiscussionController@show', [$discussion->group_id, $discussion->id]) }}">
               <span class="name">{{ $discussion->name }}</span>
-              <span class="summary">{{$discussion->summary() }}</span>
+              <span class="summary">{{summary($discussion->body) }}</span>
             </a>
           </td>
 

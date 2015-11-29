@@ -33,14 +33,7 @@ class Action extends Model
 
   protected $dates = ['deleted_at', 'start', 'stop'];
 
-  /**
-   * Returns a summary of this item of $length
-   */
-  public function summary($length = 200)
-  {
-    return str_limit(strip_tags($this->body), $length);
 
-  }
 
   public function group()
   {

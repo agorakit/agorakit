@@ -20,19 +20,9 @@ class Group extends Model
     'body' => 'required'
   ];
 
-
-
-
   protected $fillable = ['id', 'name', 'body', 'cover'];
 
 
-  /**
-   * Returns a summary of this item of $length
-   */
-  public function summary($length = 200)
-  {
-    return str_limit(strip_tags($this->body), $length);
-  }
 
   /**
    * Returns the css color (yes) of this group. Curently random generated
