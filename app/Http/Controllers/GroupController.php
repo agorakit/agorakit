@@ -27,9 +27,9 @@ class GroupController extends Controller
   public function index(Request $request)
   {
     if (Auth::check()) {
-      $groups = Group::with('membership')->orderBy('updated_at', 'desc')->paginate(50);
+      $groups = Group::with('membership')->orderBy('name')->paginate(50);
     } else {
-      $groups = Group::orderBy('updated_at', 'desc')->paginate(50);
+      $groups = Group::orderBy('name')->paginate(50);
     }
 
     return view('groups.index')

@@ -26,7 +26,7 @@ class QueryHelper
 
     $groups = DB::select('
     select id, name from groups where groups.id in
-    (select group_id from membership where user_id = ? and membership.membership >= 10)
+    (select group_id from membership where user_id = ? and membership.membership >= 10) order by name
     ', [Auth::user()->id] );
 
     //dd($groups);
