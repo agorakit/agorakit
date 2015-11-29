@@ -14,7 +14,7 @@
 
     <div class="meta">{{trans('messages.started_by')}} <span class="user">{{ $discussion->user->name}}</span>, {{trans('messages.in')}} {{ $discussion->group->name}} {{ $discussion->created_at->diffForHumans()}} </div>
     <div class="body">
-      {!! $discussion->body !!}
+      {!! filter($discussion->body) !!}
 
       <p>
         @can('update', $discussion)

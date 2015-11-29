@@ -30,7 +30,7 @@
 @forelse($discussions as $discussion)
 <strong><a href="{{action('DiscussionController@show', [$group->id, $discussion->id])}}">{{$discussion->name}} </a></strong>
 <p>
-  {{ str_limit(strip_tags($discussion->body), 200) }}
+  {{ summary($discussion->body) }}
 </p>
 <br/>
 @empty Rien de neuf depuis le dernier mail

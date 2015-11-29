@@ -13,7 +13,7 @@
 
   <img class="cover" src="{{action('GroupController@cover', $group->id)}}"/>
   <p>
-    {!! $group->body !!}
+    {!! filter($group->body) !!}
   </p>
 
 
