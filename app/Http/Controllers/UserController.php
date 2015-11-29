@@ -49,20 +49,39 @@ class UserController extends Controller {
     $to_user = \App\User::findOrFail($user_id);
     $from_user = Auth::user();
 
-    if ($request->has('body'))
+
+    $requestsPerHour = 5;
+
+    // Rate limit by IP address
+    $key = 'contact_user_' . $to_user->id . '_from_user_' . $from_user->id;
+
+    // Add if doesn't exist
+    // Remember for 1 hour
+    \Cache::add($key, 0, 60);
+
+    // Add to count
+    $count = \Cache::increment($key);
+
+    if( $count > $requestsPerHour )
     {
-      $body = $request->input('body');
-
-      Mail::send('emails.contact', ['to_user' => $to_user, 'from_user' => $from_user, 'body' => $body ], function ($message) use ($to_user, $from_user) {
-        $message->from($from_user->email, $from_user->name)
-        ->to($to_user->email, $to_user->name)
-        ->subject('[' . env('APP_NAME') . '] ' . trans('messages.a_message_for_you'));
-      });
-
-      $request->session()->flash('message', trans('messages.message_sent'));
-
-      return redirect()->action('UserController@show', $to_user->id);
+      $request->session()->flash('message', trans('messages.message_not_sent_too_many_per_hour'));
     }
+    else
+    {
+      if ($request->has('body'))
+      {
+        $body = $request->input('body');
+
+        Mail::send('emails.contact', ['to_user' => $to_user, 'from_user' => $from_user, 'body' => $body ], function ($message) use ($to_user, $from_user) {
+          $message->from($from_user->email, $from_user->name)
+          ->to($to_user->email, $to_user->name)
+          ->subject('[' . env('APP_NAME') . '] ' . trans('messages.a_message_for_you'));
+        });
+
+        $request->session()->flash('message', trans('messages.message_sent'));
+      }
+    }
+    return redirect()->action('UserController@show', $to_user->id);
   }
 
   /**
