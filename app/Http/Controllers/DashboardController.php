@@ -49,7 +49,7 @@ class DashboardController extends Controller
       $event['id'] = $action->id;
       $event['title'] = $action->name;
       $event['description'] = $action->body . ' <br/> ' . $action->location;
-      $event['body'] = $action->body;
+      $event['body'] = filter($action->body);
       $event['summary'] = summary($action->body);
       $event['location'] = $action->location;
       $event['start'] = $action->start->toIso8601String();
