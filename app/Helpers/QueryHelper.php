@@ -29,8 +29,6 @@ class QueryHelper
     (select group_id from membership where user_id = ? and membership.membership >= 10) order by name
     ', [Auth::user()->id] );
 
-    //dd($groups);
-
     return $groups;
 
   }
@@ -55,8 +53,7 @@ class QueryHelper
     if ($count < 0) {
       $count = 0; // it might happens, it's bad, but not too bad so we fail silently
     }
-
-
+    
     return $count;
   }
 

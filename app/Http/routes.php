@@ -21,8 +21,8 @@ Homepage
 Basic homepage for all users, either logged in or not.
 The idea is to provide a group listing (most active first) and a list of groups subscribed to by the current user.
 */
-Route::get('/', 'GroupController@index');
-Route::get('home', 'GroupController@index');
+Route::get('/', 'DashboardController@index');
+Route::get('home', 'DashboardController@index');
 
 
 Route::get('register/confirm/{token}', 'Auth\AuthController@confirmEmail');

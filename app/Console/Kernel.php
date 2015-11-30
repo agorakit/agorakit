@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
     {
         //$schedule->command('inspire')->hourly();
         $schedule->command('notifications:send')
-        ->everyThirtyMinutes() // TODO higher frequency when everything works fine so no one is spammed with empty notifications
+        ->everyThirtyMinutes()
         ->sendOutputTo(storage_path() . "/logs/mail.recent")
         ->emailOutputTo(env('MAIL_ADMIN'));
     }

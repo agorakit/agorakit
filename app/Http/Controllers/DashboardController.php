@@ -11,6 +11,35 @@ use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
+
+
+  /**
+  * Display a listing of the resource.
+  *
+  * @return Response
+  */
+  public function index(Request $request)
+  {
+    if (Auth::check())
+    {
+      $groups = Group::with('membership')->orderBy('name')->paginate(50);
+
+
+      return view('groups.index')
+      ->with('groups', $groups);
+    }
+    else
+    {
+      $groups = Group::orderBy('name')->paginate(50);
+      return view('groups.index')
+      ->with('groups', $groups);
+    }
+
+
+  }
+
+
+
   /**
   * Generates a list of unread discussions.
   */
@@ -30,9 +59,7 @@ class DashboardController extends Controller
 
   public function agenda()
   {
-    //$actions = \App\Action::with('group')->where('start', '>=', Carbon::now())->get();
     $actions = \App\Action::with('group')->where('start', '>=', Carbon::now())->get();
-
     return view('dashboard.agenda')->with('actions', $actions);
   }
 

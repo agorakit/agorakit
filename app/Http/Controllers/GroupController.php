@@ -19,22 +19,6 @@ class GroupController extends Controller
     $this->middleware('cache', ['only' => ['index', 'show']]);
   }
 
-  /**
-  * Display a listing of the resource.
-  *
-  * @return Response
-  */
-  public function index(Request $request)
-  {
-    if (Auth::check()) {
-      $groups = Group::with('membership')->orderBy('name')->paginate(50);
-    } else {
-      $groups = Group::orderBy('name')->paginate(50);
-    }
-
-    return view('groups.index')
-    ->with('groups', $groups);
-  }
 
   /**
   * Show the form for creating a new resource.

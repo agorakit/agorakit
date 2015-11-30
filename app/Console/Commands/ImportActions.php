@@ -50,7 +50,7 @@ class ImportActions extends Command
     //get the first row, usually the CSV header
     $headers = $csv->fetchOne();
 
-    // validate headers TODO ?
+    // validate headers
 
     //get 25 rows starting from the 11th row
     $res = $csv->setOffset(1)->fetchAll();
@@ -88,7 +88,7 @@ class ImportActions extends Command
         {
           $group = \App\Group::firstOrNew(['id' => $action_data['group_id'] + $this->id_offset ]);
           $group->name = $action_data['group'];
-          $group->body = 'todo';
+          $group->body = 'No description';
           $group->save();
           $action->group()->associate($group);
           $this->info($group->name . ' GROUP has been created/updated in db');
