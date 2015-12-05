@@ -165,7 +165,7 @@ table.special td {
   white-space: nowrap;
   text-overflow: ellipsis
 }
-span.summary {
+span.summary, span.group {
   color: gray;
 }
 table.special .name {

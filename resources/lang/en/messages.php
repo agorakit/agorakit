@@ -1,12 +1,14 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/11/26 17:58:06 
+ Generated via "php artisan localization:missing" at 2015/12/05 17:20:19 
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/users/contact.blade.php
-  'send' => 'send',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/dashboard/homepage.blade.php
+  'all_discussions' => 'all_discussions',
+  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/UserController.php
+  'message_not_sent_too_many_per_hour' => 'message_not_sent_too_many_per_hour',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'a_message_for_you',
   'actions' => 'Actions',
@@ -63,9 +65,11 @@ return array (
   'register' => 'Register',
   'registration_time' => 'Registration time',
   'remember_me' => 'Remember me',
+  'reply' => 'Reply',
   'ressource_created_successfully' => 'Ressource created successfully',
   'ressource_updated_successfully' => 'Ressource updated successfully',
   'save' => 'Save',
+  'send' => 'send',
   'send_my_recover_email' => 'Send my recover email',
   'settings' => 'Settings',
   'show_gallery' => 'Show photo gallery',
@@ -88,6 +92,5 @@ return array (
   'close' => 'Close',
   'group' => 'Group',
   'groups_list' => 'Groups list',
-  'reply' => 'Reply',
   'users' => 'Users',
 );

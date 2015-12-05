@@ -1,12 +1,14 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/11/26 17:58:06
+ Generated via "php artisan localization:missing" at 2015/12/05 17:20:19
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/users/contact.blade.php
-  'send' => 'Envoyer',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/dashboard/homepage.blade.php
+  'all_discussions' => 'Toutes les discussions sur ce serveur',
+  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/UserController.php
+  'message_not_sent_too_many_per_hour' => 'Le message n\'a pas été envoyé car vous avez dépassé la limite pour cette période. Ceci est mis en place afin d\'éviter le spam',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'actions' => 'Actions',
@@ -63,9 +65,11 @@ return array (
   'register' => 'S\'enregistrer',
   'registration_time' => 'Date d\'enregistrement',
   'remember_me' => 'Se souvenir de moi',
+  'reply' => 'Répondre',
   'ressource_created_successfully' => 'Contenu créé avec succès',
   'ressource_updated_successfully' => 'Contenu mis à jour avec succès',
   'save' => 'Enregistrer',
+  'send' => 'Envoyer',
   'send_my_recover_email' => 'M\'envoyer un mail pour changer mon mot de passe',
   'settings' => 'Préférences',
   'show_gallery' => 'Afficher sous forme de gallerie photo',
@@ -91,7 +95,6 @@ return array (
   'groups_list' => 'Liste des groupes',
   'not_a_member' => 'Vous ne faites pas partie de ce groupe',
   'not_logged_in' => 'Vous n\'êtes pas connecté(e). Merci de vous connecter ou de vous créer un compte afin de poursuivre',
-  'reply' => 'Répondre',
   'unread_items' => 'Non lus',
   'users' => 'Utilisateurs',
 );

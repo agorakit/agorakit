@@ -8,13 +8,14 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Helpers\QueryHelper;
 use Carbon\Carbon;
+use Auth;
 
 class DashboardController extends Controller
 {
 
 
   /**
-  * Display a listing of the resource.
+  * Main HOMEPAGE
   *
   * @return Response
   */
@@ -22,16 +23,19 @@ class DashboardController extends Controller
   {
     if (Auth::check())
     {
-      $groups = Group::with('membership')->orderBy('name')->paginate(50);
+      $groups = \App\Group::with('membership')->orderBy('name')->paginate(50);
+      $all_discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group')->orderBy('updated_at', 'desc')->paginate(10);
 
+      //dd($all_discussions);
 
-      return view('groups.index')
-      ->with('groups', $groups);
+      return view('dashboard.homepage')
+      ->with('groups', $groups)
+      ->with('all_discussions', $all_discussions);
     }
     else
     {
-      $groups = Group::orderBy('name')->paginate(50);
-      return view('groups.index')
+      $groups = \App\Group::orderBy('name')->paginate(50);
+      return view('dashboard.homepage')
       ->with('groups', $groups);
     }
 

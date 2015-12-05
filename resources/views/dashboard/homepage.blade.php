@@ -5,6 +5,59 @@
 @section('content')
 
 
+@if (isset($all_discussions))
+<div class="page_header">
+  <h1>{{ trans('messages.all_discussions') }}</h1>
+
+
+
+<table class="table table-hover special">
+  <thead>
+    <tr>
+      <th style="width: 75%">Titre</th>
+      <th>Date</th>
+      <th>A lire</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @foreach( $all_discussions as $discussion )
+    <tr>
+
+
+      <td class="content">
+        <a href="{{ action('DiscussionController@show', [$discussion->group_id, $discussion->id]) }}">
+          <span class="name">{{ $discussion->name }}</span>
+          <span class="summary">{{ summary($discussion->body) }}</span>
+        </a>
+        <br/>
+        <span class="group">{{ $discussion->group->name }}</span>
+      </td>
+
+      <td>
+          {{ $discussion->updated_at->diffForHumans() }}
+      </td>
+
+      <td>
+        @if ($discussion->unReadCount() > 0)
+        <i class="fa fa-comment"></i>
+        <span class="badge">{{ $discussion->unReadCount() }}</span>
+        @endif
+      </td>
+
+    </tr>
+    @endforeach
+
+  </tbody>
+</table>
+</div>
+@endif
+
+
+
+
+
+
 <div class="page_header">
   <h1>{{ trans('messages.groups') }}</h1>
   <p>{{ trans('documentation.intro') }}</p>
@@ -14,7 +67,7 @@
 
   <div class="row">
     @forelse( $groups as $group )
-    <div class="col-sm-4 col-md-3">
+    <div class="col-xs-6 col-md-3">
       <div class="thumbnail group">
         <a href="{{ action('GroupController@show', $group->id) }}">
           <img src="{{action('GroupController@cover', $group->id)}}"/>
