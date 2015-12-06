@@ -24,12 +24,17 @@ class DashboardController extends Controller
     if (Auth::check())
     {
       $groups = \App\Group::with('membership')->orderBy('name')->paginate(50);
+      $my_groups = Auth::user()->groups()->orderBy('name')->paginate(50);
+
+
+
       $all_discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group')->orderBy('updated_at', 'desc')->paginate(10);
 
       //dd($all_discussions);
 
       return view('dashboard.homepage')
       ->with('groups', $groups)
+      ->with('my_groups', $my_groups)
       ->with('all_discussions', $all_discussions);
     }
     else

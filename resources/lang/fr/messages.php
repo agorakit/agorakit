@@ -1,12 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/12/06 19:59:00
+ Generated via "php artisan localization:missing" at 2015/12/06 20:14:09
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
   // Defined in file /home/philippe/Sites/Mobilizator/resources/views/dashboard/homepage.blade.php
-  'latest_discussions' => 'Discussions récentes',
+  'my_groups' => 'Mes groupes',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'actions' => 'Actions',
@@ -42,6 +42,7 @@ return array (
   'i_changed_my_mind' => 'J\'ai changé d\'avis, je ne veux pas quitter ce groupe',
   'in' => 'dans',
   'join' => 'Rejoindre ce groupe',
+  'latest_discussions' => 'Discussions récentes',
   'leave_this_group' => 'Quitter ce groupe',
   'leaving_help_message' => 'Nous sommes désolés de vous voir partir de ce groupe. Merci de confirmer que c\'est bien votre intention. Vous ne recevrez plus de notifications par mail de ce groupe et vous n\'apparaîtrez plus dans la liste des participants.',
   'leaving_the_group_called' => 'Quitter le groupe',

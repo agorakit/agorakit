@@ -94,7 +94,7 @@ CanResetPasswordContract
   */
   public function groups()
   {
-    return $this->belongsToMany('App\Group', 'membership')->withTimestamps();
+    return $this->belongsToMany('App\Group', 'membership')->where('membership.membership', '>', '10')->withTimestamps();
   }
 
   public function memberships()

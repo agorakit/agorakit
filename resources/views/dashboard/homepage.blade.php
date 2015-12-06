@@ -5,53 +5,75 @@
 @section('content')
 
 
-@if (isset($all_discussions))
+@if(Auth::check())
+
 <div class="page_header">
-  <h1>{{ trans('messages.latest_discussions') }}</h1>
 
+  <div class="row">
 
+    <div class="col-md-9">
+      <h1>{{ trans('messages.latest_discussions') }}</h1>
+      <table class="table table-hover special">
+        <thead>
+          <tr>
+            <th style="width: 75%">Titre</th>
+            <th>Date</th>
+            <th>A lire</th>
+          </tr>
+        </thead>
 
-<table class="table table-hover special">
-  <thead>
-    <tr>
-      <th style="width: 75%">Titre</th>
-      <th>Date</th>
-      <th>A lire</th>
-    </tr>
-  </thead>
+        <tbody>
+          @foreach( $all_discussions as $discussion )
+          <tr>
+            <td class="content">
+              <a href="{{ action('DiscussionController@show', [$discussion->group_id, $discussion->id]) }}">
+                <span class="name">{{ $discussion->name }}</span>
+                <span class="summary">{{ summary($discussion->body) }}</span>
+              </a>
+              <br/>
+              <span class="group-name">{{ $discussion->group->name }}</span>
+            </td>
 
-  <tbody>
-    @foreach( $all_discussions as $discussion )
-    <tr>
+            <td>
+              {{ $discussion->updated_at->diffForHumans() }}
+            </td>
 
+            <td>
+              @if ($discussion->unReadCount() > 0)
+              <i class="fa fa-comment"></i>
+              <span class="badge">{{ $discussion->unReadCount() }}</span>
+              @endif
+            </td>
 
-      <td class="content">
-        <a href="{{ action('DiscussionController@show', [$discussion->group_id, $discussion->id]) }}">
-          <span class="name">{{ $discussion->name }}</span>
-          <span class="summary">{{ summary($discussion->body) }}</span>
-        </a>
-        <br/>
-        <span class="group">{{ $discussion->group->name }}</span>
-      </td>
+          </tr>
+          @endforeach
 
-      <td>
-          {{ $discussion->updated_at->diffForHumans() }}
-      </td>
+        </tbody>
+      </table>
+    </div>
 
-      <td>
-        @if ($discussion->unReadCount() > 0)
-        <i class="fa fa-comment"></i>
-        <span class="badge">{{ $discussion->unReadCount() }}</span>
-        @endif
-      </td>
+    <div class="col-md-3">
 
-    </tr>
-    @endforeach
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{ trans('messages.my_groups') }}</h3>
+        </div>
+        <div class="panel-body">
+            @forelse( $my_groups as $group )
+            - <a href="{{ action('GroupController@show', $group->id) }}">{{ $group->name }}</a>
+            <br/>
+            @empty
+            {{trans('group.no_group_joined_yet_act_now')}}
+            @endforelse
+        </div>
+      </div>
 
-  </tbody>
-</table>
+    </div>
+  </div>
 </div>
 @endif
+
+
 
 
 
@@ -82,9 +104,9 @@
             @unless ($group->isMember())
             <a class="btn btn-primary" href="{{ action('MembershipController@join', $group->id) }}"><i class="fa fa-sign-in"></i>
               {{ trans('group.join') }}</a>
-            @endunless
+              @endunless
 
-            <a class="btn btn-primary" href="{{ action('GroupController@show', $group->id) }}">{{ trans('group.visit') }}</a>
+              <a class="btn btn-primary" href="{{ action('GroupController@show', $group->id) }}">{{ trans('group.visit') }}</a>
 
             </p>
           </div>

@@ -25,14 +25,12 @@ class CreateMembershipTable extends Migration
   			/*
   			Membership type
   			------------------------------
-  			1 : invited but not confirmed (the user has been invited but didn't reply yet - maybe we need an invitation token)
-  			2 : subscribed : the user receives emails and notificaions from the group
-  			3 : the user is an active member of the group
+  			20 : subscribed : the user receives emails and notificaions from the group
+  			30 : the user is an active member of the group
 
   			We could further add more codes like
-  			-1 : the user doesn't want to be invovled anymore in this group or
-  			-2 : the user is blacklisted for some reason
-  			4 : the user has some superpower (but I want to avoid this)
+  			-10 : the user doesn't want to be invovled anymore in this group or
+  			-20 : the user is blacklisted for some reason (not yet implemented)  			
 
   			*/
   			$table->tinyInteger('membership')->default(0);

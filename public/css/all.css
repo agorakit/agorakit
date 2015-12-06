@@ -165,9 +165,15 @@ table.special td {
   white-space: nowrap;
   text-overflow: ellipsis
 }
-span.summary, span.group {
+span.summary {
   color: gray;
 }
+
+span.group-name {
+  color: gray;
+  font-size: 0.8em;
+}
+
 table.special .name {
   font-weight: bold;
 }
@@ -190,6 +196,13 @@ table.special .name {
 {
   display: inline-block;
   padding-bottom: 4px;
+}
+
+
+/*********************** Calendar **********************************************/
+.fc-today
+{
+  background-color: rgb(255, 241, 144) !important;
 }
 
 
