@@ -1,14 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/12/05 17:20:19
+ Generated via "php artisan localization:missing" at 2015/12/06 19:59:00
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
   // Defined in file /home/philippe/Sites/Mobilizator/resources/views/dashboard/homepage.blade.php
-  'all_discussions' => 'Toutes les discussions sur ce serveur',
-  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/UserController.php
-  'message_not_sent_too_many_per_hour' => 'Le message n\'a pas été envoyé car vous avez dépassé la limite pour cette période. Ceci est mis en place afin d\'éviter le spam',
+  'latest_discussions' => 'Discussions récentes',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'actions' => 'Actions',
@@ -54,6 +52,7 @@ return array (
   'members' => 'Participants',
   'members_of_this_group' => 'Membres de ce groupe',
   'message' => 'Message',
+  'message_not_sent_too_many_per_hour' => 'Le message n\'a pas été envoyé car vous avez dépassé la limite pour cette période. Ceci est mis en place afin d\'éviter le spam',
   'message_sent' => 'Message envoyé',
   'modify' => 'Modifier',
   'name' => 'Nom',
@@ -88,6 +87,7 @@ return array (
   'your_groups' => 'Mes groupes',
   'your_password_reset_link' => 'Votre lien de changement de mot de passe',
   //================================== Obsolete strings ==================================//
+  'all_discussions' => 'Toutes les discussions sur ce serveurc',
   'all_the_groups_welcome' => 'Vous trouverez ici tous les groupes disponibles sur ce serveur',
   'close' => 'Fermer',
   'confirm_your_email' => 'Vérifiez votre adresse email',

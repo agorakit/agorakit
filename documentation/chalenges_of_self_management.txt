@@ -7,8 +7,8 @@ We already have multiple level in the membership :
 
 * null : people has never been seen in the system
 * 10 : people has been invited
-* 20 people joined and confirmed
+* 20 people joined and confirmed email
 * -10 people don't want any news from us
 * -20 people is blacklisted (?) probably for spam
 
--> create a new membership level (level 3) for confirmed people. People are confirmed when a few members confirmed they are real.
+-> create a new membership level (level 30) for confirmed people. People are confirmed when a few members confirmed they are real.

@@ -7,7 +7,7 @@
 
 @if (isset($all_discussions))
 <div class="page_header">
-  <h1>{{ trans('messages.all_discussions') }}</h1>
+  <h1>{{ trans('messages.latest_discussions') }}</h1>
 
 
 

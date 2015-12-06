@@ -1,14 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/12/05 17:20:19 
+ Generated via "php artisan localization:missing" at 2015/12/06 19:59:00 
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
   // Defined in file /home/philippe/Sites/Mobilizator/resources/views/dashboard/homepage.blade.php
-  'all_discussions' => 'all_discussions',
-  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/UserController.php
-  'message_not_sent_too_many_per_hour' => 'message_not_sent_too_many_per_hour',
+  'latest_discussions' => 'latest_discussions',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'a_message_for_you',
   'actions' => 'Actions',
@@ -54,6 +52,7 @@ return array (
   'members' => 'Members',
   'members_of_this_group' => 'Members of this group',
   'message' => 'message',
+  'message_not_sent_too_many_per_hour' => 'message_not_sent_too_many_per_hour',
   'message_sent' => 'message_sent',
   'modify' => 'Modify',
   'name' => 'Name',
@@ -88,6 +87,7 @@ return array (
   'your_groups' => 'Your groups',
   'your_password_reset_link' => 'Your password reset link',
   //================================== Obsolete strings ==================================//
+  'all_discussions' => 'all_discussions',
   'all_the_groups_welcome' => 'Here are all the groups on this server.',
   'close' => 'Close',
   'group' => 'Group',
