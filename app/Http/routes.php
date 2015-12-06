@@ -139,6 +139,7 @@ Route::get('groups/{group}/discussions/{discussion}/history', 'DiscussionControl
 Route::post('groups/{group}/discussions/{discussion}/reply', 'CommentController@reply');
 
 Route::get('groups/{group}/discussions/{discussion}/comment/{comment}/edit', 'CommentController@edit');
+Route::get('groups/{group}/discussions/{discussion}/comment/{comment}/history', 'CommentController@history');
 Route::post('groups/{group}/discussions/{discussion}/comment/{comment}', 'CommentController@update');
 
 Route::get('groups/{group}/discussions/{discussion}/comment/{comment}/up', 'VoteController@up');

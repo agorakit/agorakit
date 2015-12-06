@@ -20,7 +20,6 @@
     <table class="table table-hover special">
       <thead>
         <tr>
-
           <th style="width: 75%">Titre</th>
           <th>Date</th>
           <th>A lire</th>
@@ -30,9 +29,7 @@
       <tbody>
         @forelse( $discussions as $discussion )
         <tr>
-
-
-
+          
           <td class="content">
             <a href="{{ action('DiscussionController@show', [$discussion->group_id, $discussion->id]) }}">
               <span class="name">{{ $discussion->name }}</span>

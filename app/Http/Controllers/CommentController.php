@@ -117,4 +117,24 @@ class CommentController extends Controller
   {
     //
   }
+
+
+  /**
+   * Show the revision history of the comment
+   */
+  public function history($group_id, $discussion_id, $comment_id)
+  {
+    $comment = \App\Comment::findOrFail($comment_id);
+    $discussion = $comment->discussion;
+    $group = $discussion->group;
+
+    return view('comments.history')
+    ->with('group', $group)
+    ->with('discussion', $discussion)
+    ->with('comment', $comment)
+    ->with('tab', 'discussion');
+  }
+
+
+
 }

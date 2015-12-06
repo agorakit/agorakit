@@ -8,7 +8,10 @@ use Watson\Validating\ValidatingTrait;
 
 class Comment extends Model {
 
+	use \Venturecraft\Revisionable\RevisionableTrait;
 	use ValidatingTrait;
+	use SoftDeletes;
+
 
 	protected $rules = [
 		 'body' => 'required|min:5',
@@ -17,16 +20,9 @@ class Comment extends Model {
 
 
 	protected $fillable = ['body'];
-
-
 	public $timestamps = true;
-
-	use SoftDeletes;
-
 	protected $dates = ['deleted_at'];
-
-	protected $with = ['user'];
-
+	protected $with = ['user']; // always load users with comments
 	protected $touches = ['discussion'];
 
 	public function user()

@@ -17,20 +17,20 @@ body, table
 
 h1, h2, h3, h4, h5, h6
 {
-font-family: "Roboto";
-font-weight: 300;
+  font-family: "Roboto";
+  font-weight: 300;
 }
 
 
 .nav-tabs > li.active > a
 {
-border: 1px solid white;
+  border: 1px solid white;
 }
 
 
 .page-header, .tab_content
 {
-background-color: white;
+  background-color: white;
 }
 
 .page_header h1, .page_header h2
@@ -49,8 +49,8 @@ background-color: white;
 .btn
 {
   -webkit-border-radius: 3px;
--moz-border-radius: 3px;
-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
 }
 
 /*
@@ -94,8 +94,8 @@ background-color: rgb(242, 241, 239);
 
 
 .cover{
-width: 25%;
-float: right;
+  width: 25%;
+  float: right;
 }
 
 .thumbnail img {
@@ -140,11 +140,11 @@ float: right;
   height: 24px;
   float: left;
 }
-.comment .user, .comment .body, .comment .created {
+.comment .user, .comment .body, .comment .created, .comment .actions {
   margin-left: 30px;
 }
 .comment .created {
-  font-size: 0.5em;
+  font-size: 0.7em;
 }
 .comment .user {
   font-weight: bold;
@@ -155,19 +155,29 @@ float: right;
   float: right;
 }
 
+.comment .actions
+{
+  font-size: 0.8em;
+  float: right;
+}
+
 /***************************** tables ***************************/
 
 table.special {
   table-layout: fixed
 }
-table.special td {
+
+table.special td.content
+{
+  text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  text-overflow: ellipsis
 }
+
 span.summary {
   color: gray;
 }
+
 
 span.group-name {
   color: gray;
