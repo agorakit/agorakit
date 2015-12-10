@@ -1,12 +1,9 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/12/06 20:14:09 
+ Generated via "php artisan localization:missing" at 2015/12/10 16:12:26 
 *************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/dashboard/homepage.blade.php
-  'my_groups' => 'my_groups',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'a_message_for_you',
   'actions' => 'Actions',
@@ -56,6 +53,7 @@ return array (
   'message_not_sent_too_many_per_hour' => 'message_not_sent_too_many_per_hour',
   'message_sent' => 'message_sent',
   'modify' => 'Modify',
+  'my_groups' => 'my_groups',
   'name' => 'Name',
   'nothing_yet' => 'There is nothing here...yet!',
   'or' => 'or',

@@ -90,7 +90,7 @@ class MembershipController extends Controller
     $membership = \App\Membership::where(['user_id' => $request->user()->id, 'group_id' => $group_id])->firstOrFail();
     $membership->membership = -10;
     $membership->save();
-    return redirect()->action('GroupController@index');
+    return redirect()->action('DashboardController@index');
 
   }
 

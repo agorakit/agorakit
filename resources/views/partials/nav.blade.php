@@ -36,7 +36,7 @@
             @forelse ($user_groups as $user_group)
             <li><a href="{{ action('GroupController@show', $user_group->id)}}">{{$user_group->name}}</a></li>
             @empty
-            <li><a href="{{ action('GroupController@index')}}">{{ trans('membership.not_subscribed_to_group_yet') }}</a></li>
+            <li><a href="{{ action('DashboardController@index')}}">{{ trans('membership.not_subscribed_to_group_yet') }}</a></li>
             @endforelse
 
             <li role="separator" class="divider"></li>

@@ -1,12 +1,9 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/12/06 20:14:09
+ Generated via "php artisan localization:missing" at 2015/12/10 16:12:26
 *************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/dashboard/homepage.blade.php
-  'my_groups' => 'Mes groupes',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'actions' => 'Actions',
@@ -56,6 +53,7 @@ return array (
   'message_not_sent_too_many_per_hour' => 'Le message n\'a pas été envoyé car vous avez dépassé la limite pour cette période. Ceci est mis en place afin d\'éviter le spam',
   'message_sent' => 'Message envoyé',
   'modify' => 'Modifier',
+  'my_groups' => 'Mes groupes',
   'name' => 'Nom',
   'nothing_yet' => 'Il n\'y a encore rien ici',
   'or' => 'ou',
