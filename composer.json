@@ -16,7 +16,8 @@
     "jenssegers/date": "^3.0",
     "mews/purifier": "~2.0",
     "intervention/imagecache": "^2.3",
-    "league/csv": "^7.2"
+    "league/csv": "^7.2",
+    "eluceo/ical": "^0.9.0"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

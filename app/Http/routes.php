@@ -35,6 +35,7 @@ General unread stuff, summary and dashboard
 Route::get('unread', 'DashboardController@unreadDiscussions');
 Route::get('agenda', 'DashboardController@agenda');
 Route::get('agenda/json', 'DashboardController@agendaJson');
+Route::get('agenda/ical', 'IcalController@index');
 
 
 /*

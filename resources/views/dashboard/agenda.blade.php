@@ -55,6 +55,9 @@ $(document).ready(function() {
 
 <div class="tab_content">
 <div id="calendar"></div>
+
+<p><a href="{{action('IcalController@index')}}">Téléchargez le calendrier au format iCal</a></p>
+
 </div>
 
 <div id="fullCalModal" class="modal fade">
