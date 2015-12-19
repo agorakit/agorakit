@@ -21,7 +21,7 @@ class IcalController extends Controller
 
     // returns actions from the last 60 days
     $actions = \App\Action::with('group')->where('start', '>=', Carbon::now()->subDays(60))->get();
-    
+
 
     foreach ($actions as $action)
     {
@@ -33,6 +33,7 @@ class IcalController extends Controller
       $vEvent->setDescription(summary($action->body), 1000);
       $vEvent->setLocation($action->location);
       $vEvent->setUrl(action('ActionController@show', [$action->group->id, $action->id]));
+      $vEvent->setUseUtc(false); //TODO fixme
 
       $vCalendar->addComponent($vEvent);
     }
