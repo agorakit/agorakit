@@ -21,6 +21,12 @@
     {{trans('messages.edit')}}</a>
   @endcan
 
+  @can('delete', $comment)
+    <a href="{{ action('CommentController@destroyConfirm', [$group->id, $discussion->id, $comment->id]) }}"><i class="fa fa-trash"></i>
+    {{trans('messages.delete')}}</a>
+  @endcan
+
+
   @if ($comment->revisionHistory->count() > 0)
   <a href="{{action('CommentController@history', [$group->id, $discussion->id, $comment->id])}}"><i class="fa fa-history"></i> {{trans('messages.show_history')}}</a>
   @endif

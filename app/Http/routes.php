@@ -147,6 +147,9 @@ Route::get('groups/{group}/discussions/{discussion}/comment/{comment}/up', 'Vote
 Route::get('groups/{group}/discussions/{discussion}/comment/{comment}/down', 'VoteController@down');
 Route::get('groups/{group}/discussions/{discussion}/comment/{comment}/cancel', 'VoteController@cancel');
 
+Route::get('groups/{group}/discussions/{discussion}/comment/{comment}/delete', 'CommentController@destroyConfirm');
+Route::delete('groups/{group}/discussions/{discussion}/comment/{comment}/delete', 'CommentController@destroy');
+
 
 // Actions
 Route::get('groups/{group}/actions', 'ActionController@index');

@@ -1,9 +1,18 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2015/12/10 16:12:26 
+ Generated via "php artisan localization:missing" at 2016/01/11 22:53:09 
 *************************************************************************/
 
 return array (
+  //============================== New strings to translate ==============================//
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/comments/_show.blade.php
+  'delete' => 'delete',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/comments/delete.blade.php
+  'delete_confirm_button' => 'delete_confirm_button',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/comments/delete.blade.php
+  'delete_confirm_title' => 'delete_confirm_title',
+  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/CommentController.php
+  'ressource_deleted_successfully' => 'ressource_deleted_successfully',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'a_message_for_you',
   'actions' => 'Actions',

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Gate;
 
 class CommentController extends Controller
 {
@@ -71,12 +71,18 @@ class CommentController extends Controller
     $group = \App\Group::findOrFail($group_id);
     $discussion = \App\Discussion::findOrFail($discussion_id);
 
-
-    return view('comments.edit')
-    ->with('discussion', $discussion)
-    ->with('group', $group)
-    ->with('comment', $comment)
-    ->with('tab', 'discussion');
+    if (Gate::allows('update', $comment))
+    {
+      return view('comments.edit')
+      ->with('discussion', $discussion)
+      ->with('group', $group)
+      ->with('comment', $comment)
+      ->with('tab', 'discussion');
+    }
+    else
+    {
+      abort(403);
+    }
 
 
   }
@@ -106,6 +112,8 @@ class CommentController extends Controller
 
   }
 
+
+
   /**
   * Remove the specified resource from storage.
   *
@@ -113,15 +121,56 @@ class CommentController extends Controller
   *
   * @return \Illuminate\Http\Response
   */
-  public function destroy($id)
+  public function destroyConfirm(Request $request, $group_id, $discussion_id, $comment_id)
   {
-    //
+    $comment = \App\Comment::findOrFail($comment_id);
+    $group = \App\Group::findOrFail($group_id);
+    $discussion = \App\Discussion::findOrFail($discussion_id);
+
+    if (Gate::allows('delete', $comment))
+    {
+      return view('comments.delete')
+      ->with('discussion', $discussion)
+      ->with('group', $group)
+      ->with('comment', $comment)
+      ->with('tab', 'discussion');
+    }
+    else
+    {
+      abort(403);
+    }
+
+  }
+
+
+
+  /**
+  * Remove the specified resource from storage.
+  *
+  * @param int $id
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function destroy(Request $request, $group_id, $discussion_id, $comment_id)
+  {
+    $comment = \App\Comment::findOrFail($comment_id);
+
+    if (Gate::allows('delete', $comment))
+    {
+      $comment->delete();
+      $request->session()->flash('message', trans('messages.ressource_deleted_successfully'));
+      return redirect()->action('DiscussionController@show', [$group_id, $discussion_id]);
+    }
+    else
+    {
+      abort(403);
+    }
   }
 
 
   /**
-   * Show the revision history of the comment
-   */
+  * Show the revision history of the comment
+  */
   public function history($group_id, $discussion_id, $comment_id)
   {
     $comment = \App\Comment::findOrFail($comment_id);
