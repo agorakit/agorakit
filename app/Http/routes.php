@@ -170,6 +170,9 @@ Route::post('groups/{group}/files/create', 'FileController@store');
 Route::get('groups/{group}/files/{file}', 'FileController@show');
 Route::get('groups/{group}/files/{file}/thumbnail', 'FileController@thumbnail');
 Route::get('groups/{group}/files/{file}/preview', 'FileController@preview');
+Route::get('groups/{group}/files/{file}/delete', 'FileController@destroyConfirm');
+Route::delete('groups/{group}/files/{file}/delete', 'FileController@destroy');
+
 
 
 // Users

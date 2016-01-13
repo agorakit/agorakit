@@ -9,6 +9,7 @@ use Image;
 use File;
 use Auth;
 use Storage;
+use Gate;
 
 class FileController extends Controller
 {
@@ -230,14 +231,50 @@ class FileController extends Controller
   {
   }
 
+
+
+
+  public function destroyConfirm(Request $request, $group_id, $file_id)
+  {
+    $file = \App\File::findOrFail($file_id);
+    $group = \App\Group::findOrFail($group_id);
+
+    if (Gate::allows('delete', $file))
+    {
+      return view('files.delete')
+      ->with('group', $group)
+      ->with('file', $file)
+      ->with('tab', 'file');
+    }
+    else
+    {
+      abort(403);
+    }
+
+  }
+
+
+
   /**
   * Remove the specified resource from storage.
   *
   * @param int $id
   *
-  * @return Response
+  * @return \Illuminate\Http\Response
   */
-  public function destroy($id)
+  public function destroy(Request $request, $group_id, $file_id)
   {
+    $file = \App\File::findOrFail($file_id);
+
+    if (Gate::allows('delete', $file))
+    {
+      $file->delete();
+      $request->session()->flash('message', trans('messages.ressource_deleted_successfully'));
+      return redirect()->action('FileController@index', [$group_id]);
+    }
+    else
+    {
+      abort(403);
+    }
   }
 }

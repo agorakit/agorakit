@@ -37,7 +37,13 @@
         </td>
 
         <td>
-          <a href="{{ action('FileController@show', [$group->id, $file->id]) }}">Download</a>
+          <a class="btn btn-default btn-xs"href="{{ action('FileController@show', [$group->id, $file->id]) }}">Download</a>
+
+          @can('delete', $file)
+            <a class="btn btn-default btn-xs" href="{{ action('FileController@destroyConfirm', [$group->id, $file->id]) }}"><i class="fa fa-trash"></i>
+            {{trans('messages.delete')}}</a>
+          @endcan
+
         </td>
 
         <td>
