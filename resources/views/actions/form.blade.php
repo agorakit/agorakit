@@ -1,6 +1,7 @@
+
 @section('head')
 {!! Html::style('/packages/datetimepicker/jquery.datetimepicker.css') !!}
-{!! Html::style('/packages/summernote/summernote.css') !!}
+<script src="//cdn.ckeditor.com/4.5.6/standard/ckeditor.js"></script>
 @stop
 
 
@@ -31,21 +32,11 @@ jQuery(function(){
 });
 </script>
 
-
-{!! Html::script('/packages/summernote/summernote.min.js') !!}
-
 <script>
-$(document).ready(function() {
-  $("textarea[name='body']").summernote({
-		styleTags: ['p', 'h1', 'h2', 'h3'],
-		toolbar: [
-    //[groupname, [button list]]
-    ['style', ['bold', 'italic', 'underline', 'clear']],
-    ['para', ['ul', 'ol']],
-  ]
-	});
-});
+ CKEDITOR.replace( 'wysiwyg' );
 </script>
+
+
 @stop
 
 
@@ -57,7 +48,7 @@ $(document).ready(function() {
 
 <div class="form-group">
   {!! Form::label('body', 'Description') !!}
-  {!! Form::textarea('body', null, ['class' => 'form-control', 'required']) !!}
+  {!! Form::textarea('body', null, ['id' => 'wysiwyg', 'class' => 'form-control', 'required']) !!}
 </div>
 
 <div class="form-group">

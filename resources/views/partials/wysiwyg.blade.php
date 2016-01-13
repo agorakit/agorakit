@@ -1,22 +1,12 @@
 
 @section('head')
-{!! Html::style('/packages/summernote/summernote.css') !!}
+<script src="//cdn.ckeditor.com/4.5.6/standard/ckeditor.js"></script>
 @stop
 
 @section('footer')
-{!! Html::script('/packages/summernote/summernote.min.js') !!}
 
 <script>
-$(document).ready(function() {
-  $("textarea[name='body']").summernote({
-		styleTags: ['p', 'h1', 'h2', 'h3'],
-		toolbar: [
-    //[groupname, [button list]]
-    ['style', ['bold', 'italic', 'underline', 'clear']],
-    ['para', ['ul', 'ol']],
-  ]
-	});
-});
+ CKEDITOR.replace( 'wysiwyg' );
 </script>
 
 @stop
