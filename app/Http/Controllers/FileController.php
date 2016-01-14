@@ -49,7 +49,9 @@ class FileController extends Controller
       $group = Group::findOrFail($id);
       $files = $group->files()
       ->with('user')
-      ->where('mime', 'like', 'image%') // TODO index on DB ? Failproof ?
+      ->where('mime', 'like', 'image/jpeg') // TODO index on DB ? Failproof ?
+      ->orWhere('mime', 'like', 'image/png')
+      ->orWhere('mime', 'like', 'image/gif')
       ->orderBy('updated_at', 'desc')
       ->paginate(100);
 
@@ -107,12 +109,14 @@ class FileController extends Controller
 
       $filename = $file->id . '.' . strtolower($request->file('file')->getClientOriginalExtension());
 
-      // resize big images
-      if (substr( $request->file('file')->getClientMimeType(), 0, 5) === 'image')
+      // resize big images only if they are png, gif or jpeg
+      if (in_array ($request->file('file')->getClientMimeType(), ['image/jpeg', 'image/png', 'image/gif']))
       {
-        //File::exists($filepath) or File::makeDirectory($filepath);
         Storage::disk('local')->makeDirectory($filepath);
-        Image::make($request->file('file'))->widen(1200)->save(storage_path().'/app/' . $filepath.$filename);
+        Image::make($request->file('file'))->widen(1200, function ($constraint) {
+          $constraint->upsize();
+        })
+        ->save(storage_path().'/app/' . $filepath.$filename);
       }
       else
       {
@@ -173,7 +177,7 @@ class FileController extends Controller
   {
     $entry = \App\File::findOrFail($file_id);
 
-    if (substr( $entry->mime, 0, 5) === 'image')
+    if (in_array($entry->mime, ['image/jpeg', 'image/png', 'image/gif']))
     {
       $cachedImage = Image::cache(function($img) use ($entry) {
         return $img->make(storage_path().'/app/'.$entry->path)->fit(32, 32);
@@ -193,7 +197,7 @@ class FileController extends Controller
   {
     $entry = \App\File::findOrFail($file_id);
 
-    if (substr( $entry->mime, 0, 5) === 'image')
+    if (in_array($entry->mime, ['image/jpeg', 'image/png', 'image/gif']))
     {
       $cachedImage = Image::cache(function($img) use ($entry) {
         return $img->make(storage_path().'/app/'.$entry->path)->fit(250,250);
