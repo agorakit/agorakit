@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Auth;
 use Mail;
+use Gate;
 
 class UserController extends Controller {
 
@@ -124,7 +125,16 @@ class UserController extends Controller {
   */
   public function edit($id)
   {
-
+    $user = \App\User::findOrFail($id);
+    if (Gate::allows('update', $user))
+    {
+      return view('users.edit')
+      ->with('user', $user);
+    }
+    else
+    {
+      abort(403);
+    }
   }
 
   /**

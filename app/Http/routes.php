@@ -177,6 +177,7 @@ Route::delete('groups/{group}/files/{file}/delete', 'FileController@destroy');
 
 // Users
 Route::get('users/{id}', 'UserController@show');
+Route::get('users/{id}/edit', 'UserController@edit');
 Route::get('users/{id}/contact', 'UserController@contact');
 Route::post('users/{id}/contact', 'UserController@mail');
 Route::get('groups/{group}/users', 'UserController@index');

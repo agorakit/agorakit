@@ -15,6 +15,7 @@ class ActionController extends Controller
   {
     $this->middleware('member', ['only' => ['post', 'create', 'store', 'edit', 'update', 'destroy']]);
     $this->middleware('cache', ['only' => ['index', 'show']]);
+    $this->middleware('verified', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
   }
 
   /**

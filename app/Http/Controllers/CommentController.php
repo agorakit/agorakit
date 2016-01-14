@@ -10,6 +10,7 @@ class CommentController extends Controller
   public function __construct()
   {
     $this->middleware('member', ['only' => ['reply', 'create', 'store', 'edit', 'update', 'destroy']]);
+    $this->middleware('verified', ['only' => ['reply', 'create', 'store', 'edit', 'update', 'destroy']]);
   }
 
 
