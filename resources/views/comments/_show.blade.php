@@ -9,7 +9,7 @@
     <div class="down"><a href="{{ action('VoteController@down', [$group->id, $discussion->id, $comment->id]) }}"><span class="glyphicon glyphicon-arrow-down"</span></a></div>
   </div>
 
-  <div class="user">{{$comment->user->name}}</div>
+  <div class="user"><a href="{{ action('UserController@show', [$comment->user->id]) }}">{{$comment->user->name}}</a></div>
 
   <div class="body">{!! filter($comment->body) !!}</div>
 

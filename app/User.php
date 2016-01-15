@@ -18,7 +18,7 @@ CanResetPasswordContract
   use Authenticatable, Authorizable, CanResetPassword, ValidatingTrait;
 
   protected $rules = [
-    'name' => 'required',
+    'name' => 'required|unique:users',
     'email' => 'required|email|unique:users',
     'password' => 'required',
   ];
@@ -118,6 +118,13 @@ CanResetPasswordContract
 
   public function avatar()
   {
-    return url('/images/avatar.jpg');
+    return url('/users/' . $this->id . '/avatar');
   }
+
+
+  public function cover()
+  {
+    return url('/users/' . $this->id . '/cover');
+  }
+
 }

@@ -4,6 +4,10 @@ use Illuminate\Http\Request;
 use Auth;
 use Mail;
 use Gate;
+use Storage;
+use File;
+use Image;
+use App\Mailers\AppMailer;
 
 class UserController extends Controller {
 
@@ -53,7 +57,7 @@ class UserController extends Controller {
 
     $requestsPerHour = 5;
 
-    // Rate limit by IP address
+
     $key = 'contact_user_' . $to_user->id . '_from_user_' . $from_user->id;
 
     // Add if doesn't exist
@@ -143,8 +147,54 @@ class UserController extends Controller {
   * @param  int  $id
   * @return Response
   */
-  public function update($id)
+  public function update(Request $request, $id)
   {
+    $user = \App\User::findOrFail($id);
+
+    if (Gate::allows('update', $user))
+    {
+      $user->name = $request->input('name');
+
+      $previous_email = $user->email;
+      $user->email = $request->input('email');
+      $user->body = clean($request->input('body'));
+
+
+      // validation
+      if ($user->isInvalid()) {
+        // Oops.
+        return redirect()->action('UserController@edit', $user->id)
+        ->withErrors($user->getErrors())
+        ->withInput();
+      }
+
+      // handle cover
+      if ($request->hasFile('cover'))
+      {
+        Storage::disk('local')->makeDirectory('users/' . $user->id);
+        Image::make($request->file('cover'))->widen(500)->save(storage_path() . '/app/users/' . $user->id . '/cover.jpg');
+        Image::make($request->file('cover'))->fit(128,128)->save(storage_path() . '/app/users/' . $user->id . '/thumbnail.jpg');
+      }
+
+      // handle email change : if a user changes his email, we set him/her to unverified, and send a new verification email
+      if ($previous_email <> $user->email)
+      {
+        $user->verified = 0;
+        $user->token = str_random(30);
+        $mailer = new AppMailer;
+        $mailer->sendEmailConfirmationTo($user);
+      }
+
+      $user->save();
+
+      $request->session()->flash('message', trans('messages.ressource_updated_successfully'));
+
+      return redirect()->action('UserController@show', [$user->id]);
+    }
+    else
+    {
+      abort(403);
+    }
 
   }
 
@@ -159,6 +209,47 @@ class UserController extends Controller {
 
   }
 
-}
+  public function cover($id)
+  {
+    $path = storage_path() . '/app/users/' . $id . '/cover.jpg';
 
-?>
+    if (File::exists($path))
+    {
+      $cachedImage = Image::cache(function($img) use ($path) {
+        return $img->make($path)->fit(300, 200);
+      }, 60000, true);
+
+      return $cachedImage->response();
+
+    }
+    else
+    {
+      return Image::canvas(300,200)->fill('#cccccc')->response(); // TODO caching or default group image instead
+      abort(404);
+    }
+  }
+
+
+
+  public function avatar($id)
+  {
+    $path = storage_path() . '/app/users/' . $id . '/cover.jpg';
+
+    if (File::exists($path))
+    {
+      $cachedImage = Image::cache(function($img) use ($path) {
+        return $img->make($path)->fit(128, 128);
+      }, 60000, true);
+
+      return $cachedImage->response();
+
+    }
+    else
+    {
+      return Image::canvas(128,128)->fill('#cccccc')->response(); // TODO caching or default group image instead
+      abort(404);
+    }
+  }
+
+
+}
