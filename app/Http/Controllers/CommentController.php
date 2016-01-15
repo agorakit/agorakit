@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Group;
+use App\Discussion;
+use App\Comment;
 use Gate;
 
 class CommentController extends Controller
@@ -24,7 +27,7 @@ class CommentController extends Controller
     //
   }
 
-  public function reply(Request $request, $group_id, $discussion_id)
+  public function reply(Request $request, Group $group, Discussion $discussion)
   {
     $comment = new \App\Comment();
     $comment->body = clean($request->input('body'));
@@ -37,7 +40,6 @@ class CommentController extends Controller
       ->withInput();
     }
 
-    $discussion = \App\Discussion::findOrFail($discussion_id);
     $discussion->comments()->save($comment);
     ++$discussion->total_comments;
     $discussion->save();
@@ -66,12 +68,8 @@ class CommentController extends Controller
   *
   * @return \Illuminate\Http\Response
   */
-  public function edit(Request $request, $group_id, $discussion_id, $comment_id)
+  public function edit(Request $request, Group $group, Discussion $discussion, Comment $comment)
   {
-    $comment = \App\Comment::findOrFail($comment_id);
-    $group = \App\Group::findOrFail($group_id);
-    $discussion = \App\Discussion::findOrFail($discussion_id);
-
     if (Gate::allows('update', $comment))
     {
       return view('comments.edit')

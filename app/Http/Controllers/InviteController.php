@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Mail;
 use Auth;
+use App\Group;
 
 
 class InviteController extends Controller
@@ -23,11 +24,8 @@ class InviteController extends Controller
   *
   * @return [type]           [description]
   */
-  public function invite(Request $request, $group_id)
+  public function invite(Request $request, Group $group)
   {
-    // Explain that on the form
-    $group = \App\Group::findOrFail($group_id);
-
     return view('invites.form')
     ->with('tab', 'users')
     ->with('group', $group);
@@ -40,7 +38,7 @@ class InviteController extends Controller
   *
   * @return [type]           [description]
   */
-  public function sendInvites(Request $request, $group_id)
+  public function sendInvites(Request $request,  Group $group)
   {
 
     $status_message = null;
@@ -59,7 +57,7 @@ class InviteController extends Controller
       // - check that the user has not been invited yet for this group
       $invitation_counter = \App\Invite::where('email', '=', $email)
       ->where('claimed_at', '=', null)
-      ->where('group_id', '=', $group_id)
+      ->where('group_id', '=', $group->id)
       ->count();
 
       if ($invitation_counter > 0) {
@@ -70,13 +68,11 @@ class InviteController extends Controller
         $invite->generateToken();
         $invite->email = $email;
 
-        $group = \App\Group::findOrFail($group_id);
         $invite->group_id = $group->id;
         $invite->user_id = $request->user()->id;
         $invite->save();
+
         // - send invitation email
-
-
         Mail::send('emails.invite', ['invite' => $invite, 'group' => $group, 'invitating_user' => $request->user()], function ($message) use ($email, $request, $group) {
           $message->from(env('MAIL_FROM', 'noreply@example.com'), env('APP_NAME', 'Laravel'))
           ->to($email)

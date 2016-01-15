@@ -28,29 +28,22 @@ class DiscussionController extends Controller
   *
   * @return Response
   */
-  public function index($id)
+  public function index(Group $group)
   {
-
-    if ($id) {
-      $group = Group::findOrFail($id);
-
-
-      if (\Auth::check())
-      {
-        $discussions = $group->discussions()->with('userReadDiscussion', 'user')->orderBy('updated_at', 'desc')->paginate(50);
-      }
-      else // don't load the unread relation, since we don't know who to look for.
-      {
-        $discussions = $group->discussions()->with('user')->orderBy('updated_at', 'desc')->paginate(50);
-      }
-
-      //dd($discussions->first()->unReadCount());
-
-      return view('discussions.index')
-      ->with('discussions', $discussions)
-      ->with('group', $group)
-      ->with('tab', 'discussion');
+    if (\Auth::check())
+    {
+      $discussions = $group->discussions()->with('userReadDiscussion', 'user')->orderBy('updated_at', 'desc')->paginate(50);
     }
+    else // don't load the unread relation, since we don't know who to look for.
+    {
+      $discussions = $group->discussions()->with('user')->orderBy('updated_at', 'desc')->paginate(50);
+    }
+
+    return view('discussions.index')
+    ->with('discussions', $discussions)
+    ->with('group', $group)
+    ->with('tab', 'discussion');
+    
   }
 
   /**
@@ -58,10 +51,8 @@ class DiscussionController extends Controller
   *
   * @return Response
   */
-  public function create(Request $request, $group_id)
+  public function create(Request $request, Group $group)
   {
-    $group = Group::findOrFail($group_id);
-
     return view('discussions.create')
     ->with('group', $group)
     ->with('tab', 'discussion');
@@ -72,7 +63,7 @@ class DiscussionController extends Controller
   *
   * @return Response
   */
-  public function store(Request $request, $group_id)
+  public function store(Request $request, Group $group)
   {
     $discussion = new Discussion();
     $discussion->name = $request->input('name');
@@ -80,11 +71,6 @@ class DiscussionController extends Controller
 
     $discussion->total_comments = 1; // the discussion itself is already a comment
     $discussion->user()->associate(Auth::user());
-
-    $group = Group::findOrFail($group_id);
-
-
-
 
     if ( !$group->discussions()->save($discussion) )
     {
@@ -94,12 +80,7 @@ class DiscussionController extends Controller
       ->withInput();
     }
 
-
-
-
-
     $request->session()->flash('message', trans('messages.ressource_created_successfully'));
-
     return redirect()->action('DiscussionController@show', [$group->id, $discussion->id]);
   }
 
@@ -110,13 +91,8 @@ class DiscussionController extends Controller
   *
   * @return Response
   */
-  public function show($group_id, $discussion_id)
+  public function show(Group $group, Discussion $discussion)
   {
-
-    $discussion = Discussion::findOrFail($discussion_id);
-    $group = Group::findOrFail($group_id);
-
-
     // if user is logged in, we update the read count for this discussion.
     if (Auth::check())
     {
@@ -139,16 +115,12 @@ class DiscussionController extends Controller
   *
   * @return Response
   */
-  public function edit(Request $request, $group_id, $discussion_id)
+  public function edit(Request $request, Group $group, Discussion $discussion)
   {
-    $discussion = Discussion::findOrFail($discussion_id);
-    $group = $discussion->group;
-
     return view('discussions.edit')
     ->with('discussion', $discussion)
     ->with('group', $group)
     ->with('tab', 'discussion');
-
   }
 
   /**
@@ -158,18 +130,14 @@ class DiscussionController extends Controller
   *
   * @return Response
   */
-  public function update(Request $request, $group_id, $discussion_id)
+  public function update(Request $request, Group $group, Discussion $discussion)
   {
-    $discussion = Discussion::findOrFail($discussion_id);
     $discussion->name = $request->input('name');
     $discussion->body = clean($request->input('body'));
-
     $discussion->user()->associate(Auth::user());
-
     $discussion->save();
 
     $request->session()->flash('message', trans('messages.ressource_updated_successfully'));
-
     return redirect()->action('DiscussionController@show', [$discussion->group->id, $discussion->id]);
   }
 
@@ -186,13 +154,10 @@ class DiscussionController extends Controller
 
 
   /**
-   * Show the revision history of the discussion
-   */
-  public function history($group_id, $discussion_id)
+  * Show the revision history of the discussion
+  */
+  public function history(Group $group, Discussion $discussion)
   {
-    $discussion = Discussion::findOrFail($discussion_id);
-    $group = $discussion->group;
-
     return view('discussions.history')
     ->with('group', $group)
     ->with('discussion', $discussion)

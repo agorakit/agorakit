@@ -8,6 +8,7 @@ use Storage;
 use File;
 use Image;
 use App\Mailers\AppMailer;
+use App\Group;
 
 class UserController extends Controller {
 

@@ -23,11 +23,9 @@ class ActionController extends Controller
   *
   * @return Response
   */
-  public function index(REQUEST $request, $group_id)
+  public function index(Request $request, Group $group)
   {
-    $group = Group::findOrFail($group_id);
     $actions = $group->actions()->orderBy('start', 'asc')->get();
-
     return view('actions.index')
     ->with('actions', $actions)
     ->with('group', $group)
@@ -36,10 +34,9 @@ class ActionController extends Controller
 
 
 
-  public function indexJson(REQUEST $request, $group_id)
+  public function indexJson(Request $request, Group $group)
   {
     // TODO ajax load of actions or similar trick, else the json will become larger and larger
-    $group = Group::findOrFail($group_id);
     $actions = $group->actions()->orderBy('start', 'asc')->get();
 
     $event = '';
@@ -68,10 +65,8 @@ class ActionController extends Controller
   *
   * @return Response
   */
-  public function create(Request $request, $group_id)
+  public function create(Request $request, Group $group)
   {
-    $group = Group::findOrFail($group_id);
-
     return view('actions.create')
     ->with('group', $group)
     ->with('tab', 'action');
@@ -81,11 +76,9 @@ class ActionController extends Controller
   *
   * @return Response
   */
-  public function store(Request $request, $group_id)
+  public function store(Request $request, Group $group)
   {
-
     $action = new Action();
-
 
     $action->name = $request->input('name');
     $action->body = clean($request->input('body'));
@@ -95,8 +88,6 @@ class ActionController extends Controller
 
 
     $action->user()->associate($request->user());
-
-    $group = Group::findOrFail($group_id);
 
     $action->group()->associate($group);
 
@@ -123,14 +114,8 @@ class ActionController extends Controller
   *
   * @return Response
   */
-  public function show($group_id, $action_id)
+  public function show(Group $group, Action $action)
   {
-    $action = action::findOrFail($action_id);
-    $group = Group::findOrFail($group_id);
-
-
-
-    //$comments = $action->comments;
     return view('actions.show')
     ->with('action', $action)
     ->with('group', $group)
@@ -144,16 +129,12 @@ class ActionController extends Controller
   *
   * @return Response
   */
-  public function edit(Request $request, $group_id, $action_id)
+  public function edit(Request $request, Group $group, Action $action)
   {
-    $action = action::findOrFail($action_id);
-    $group = $action->group;
-
     return view('actions.edit')
     ->with('action', $action)
     ->with('group', $group)
     ->with('tab', 'action');
-
   }
 
   /**
@@ -163,11 +144,8 @@ class ActionController extends Controller
   *
   * @return Response
   */
-  public function update(Request $request, $group_id, $action_id)
+  public function update(Request $request, Group $group, Action $action)
   {
-    $action = action::findOrFail($action_id);
-
-
     $action->name = $request->input('name');
     $action->body = clean($request->input('body'));
     $action->location = $request->input('location');
@@ -186,8 +164,6 @@ class ActionController extends Controller
     }
 
     $action->save();
-
-
     return redirect()->action('ActionController@show', [$action->group->id, $action->id]);
   }
 
@@ -198,7 +174,7 @@ class ActionController extends Controller
   *
   * @return Response
   */
-  public function destroy($id)
+  public function destroy(Group $group, Action $action)
   {
   }
 }

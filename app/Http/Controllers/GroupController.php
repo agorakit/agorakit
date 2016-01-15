@@ -102,7 +102,7 @@ class GroupController extends Controller
   */
   public function edit(Request $request, Group $group)
   {
-    
+
 
     return view('groups.edit')
     ->with('group', $group)
@@ -117,9 +117,8 @@ class GroupController extends Controller
   *
   * @return Response
   */
-  public function update(Request $request, $group_id)
+  public function update(Request $request, Group $group)
   {
-    $group = Group::findOrFail($group_id);
     $group->name = $request->input('name');
     $group->body = clean($request->input('body'));
 
@@ -149,9 +148,9 @@ class GroupController extends Controller
   }
 
 
-  public function cover($group_id)
+  public function cover(Group $group)
   {
-    $path = storage_path() . '/app/groups/' . $group_id . '/cover.jpg';
+    $path = storage_path() . '/app/groups/' . $group->id . '/cover.jpg';
 
     if (File::exists($path))
     {
@@ -175,10 +174,8 @@ class GroupController extends Controller
   /**
   * Show the revision history of the group
   */
-  public function history($group_id)
+  public function history(Group $group)
   {
-    $group = Group::findOrFail($group_id);
-
     return view('groups.history')
     ->with('group', $group)
     ->with('tab', 'home');
@@ -191,7 +188,7 @@ class GroupController extends Controller
   *
   * @return Response
   */
-  public function destroy($id)
+  public function destroy(Group $group)
   {
   }
 }

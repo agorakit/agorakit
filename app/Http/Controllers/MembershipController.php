@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App;
 use Carbon\Carbon;
+use App\Group;
 
 class MembershipController extends Controller
 {
@@ -16,12 +17,10 @@ class MembershipController extends Controller
   /**
   * Show a settings screen for a specific group. Allows a user to join, leave, set subscribe settings.
   */
-  public function joinForm(Request $request, $group_id)
+  public function joinForm(Request $request,  Group $group)
   {
-    $group = \App\Group::findOrFail($group_id);
-
     // load or create membership for this group and user combination
-    $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group_id]);
+    $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
 
     return view('membership.join')
     ->with('group', $group)
@@ -39,20 +38,15 @@ class MembershipController extends Controller
   *
   * @return [type]            [description]
   */
-  public function join(Request $request, $group_id)
+  public function join(Request $request, Group $group)
   {
-    $group = \App\Group::findOrFail($group_id);
-
     // load or create membership for this group and user combination
-    $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group_id]);
-
+    $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
     $membership->membership = 20;
-
     $membership->notification_interval = $this->intervalToMinutes($request->get('notifications'));
 
     // we prented the user has been already notified once, now. The first mail sent will be at the choosen interval from now on.
     $membership->notified_at = Carbon::now();
-
     $membership->save();
 
     return redirect()->action('GroupController@show', [$group->id])->with('message', trans('membership.welcome'));
@@ -62,12 +56,10 @@ class MembershipController extends Controller
   /**
   * Show a settings screen for a specific group. Allows a user to join, leave, set subscribe settings.
   */
-  public function leaveForm(Request $request, $group_id)
+  public function leaveForm(Request $request, Group $group)
   {
-    $group = \App\Group::findOrFail($group_id);
-
     // load or create membership for this group and user combination
-    $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group_id]);
+    $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
 
     return view('membership.leave')
     ->with('group', $group)
@@ -83,11 +75,10 @@ class MembershipController extends Controller
   *
   * @return Response
   */
-  public function leave(Request $request, $group_id)
+  public function leave(Request $request, Group $group)
   {
-
     // load or create membership for this group and user combination
-    $membership = \App\Membership::where(['user_id' => $request->user()->id, 'group_id' => $group_id])->firstOrFail();
+    $membership = \App\Membership::where(['user_id' => $request->user()->id, 'group_id' => $group->id])->firstOrFail();
     $membership->membership = -10;
     $membership->save();
     return redirect()->action('DashboardController@index');
@@ -98,12 +89,10 @@ class MembershipController extends Controller
   /**
   * Show a settings screen for a specific group. Allows a user to join, leave, set subscribe settings.
   */
-  public function settingsForm(Request $request, $group_id)
+  public function settingsForm(Request $request, Group $group)
   {
-    $group = \App\Group::findOrFail($group_id);
-
     // load or create membership for this group and user combination
-    $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group_id]);
+    $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
 
     return view('membership.edit')
     ->with('tab', 'settings')
@@ -116,21 +105,15 @@ class MembershipController extends Controller
   /**
    * Store new settings from the settingsForm
    */
-  public function settings(Request $request, $group_id)
+  public function settings(Request $request, Group $group)
   {
-    $group = \App\Group::findOrFail($group_id);
-
     // load or create membership for this group and user combination
-    $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group_id]);
-
+    $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
     $membership->membership = 20;
-
     $membership->notification_interval = $this->intervalToMinutes($request->get('notifications'));
-
     $membership->save();
 
     return redirect()->action('GroupController@show', [$group->id])->with('message', trans('membership.settings_updated'));
-
   }
 
 
@@ -163,7 +146,6 @@ class MembershipController extends Controller
 
   function minutesToInterval($minutes)
   {
-
     $interval = 'never';
 
     switch ($minutes) {
@@ -188,7 +170,6 @@ class MembershipController extends Controller
     }
 
     return $interval;
-
   }
 
 

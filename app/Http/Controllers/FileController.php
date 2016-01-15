@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Group;
+use App\File;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Image;
-use File;
 use Auth;
 use Storage;
 use Gate;
@@ -26,43 +26,36 @@ class FileController extends Controller
   *
   * @return Response
   */
-  public function index($id)
+  public function index(Group $group)
   {
-    if ($id) {
-      $group = Group::findOrFail($id);
-      $files = $group->files()->with('user')->orderBy('updated_at', 'desc')->paginate(20);
+    $files = $group->files()->with('user')->orderBy('updated_at', 'desc')->paginate(20);
+    $upload_allowed = $group->isMember(); // TODO use policies for that and for others methods below
 
-      $upload_allowed = $group->isMember();
-
-      return view('files.index')
-      ->with('files', $files)
-      ->with('group', $group)
-      ->with('tab', 'files')
-      ->with('upload_allowed', $upload_allowed);
-    }
+    return view('files.index')
+    ->with('files', $files)
+    ->with('group', $group)
+    ->with('tab', 'files')
+    ->with('upload_allowed', $upload_allowed);
   }
 
 
-  public function gallery($id)
+  public function gallery(Group $group)
   {
-    if ($id) {
-      $group = Group::findOrFail($id);
-      $files = $group->files()
-      ->with('user')
-      ->where('mime', 'like', 'image/jpeg') // TODO index on DB ? Failproof ?
-      ->orWhere('mime', 'like', 'image/png')
-      ->orWhere('mime', 'like', 'image/gif')
-      ->orderBy('updated_at', 'desc')
-      ->paginate(100);
+    $files = $group->files()
+    ->with('user')
+    ->where('mime', 'like', 'image/jpeg') // TODO index on DB ? Failproof ?
+    ->orWhere('mime', 'like', 'image/png')
+    ->orWhere('mime', 'like', 'image/gif')
+    ->orderBy('updated_at', 'desc')
+    ->paginate(100);
 
-      $upload_allowed = $group->isMember();
+    $upload_allowed = $group->isMember();
 
-      return view('files.gallery')
-      ->with('files', $files)
-      ->with('group', $group)
-      ->with('tab', 'files')
-      ->with('upload_allowed', $upload_allowed);
-    }
+    return view('files.gallery')
+    ->with('files', $files)
+    ->with('group', $group)
+    ->with('tab', 'files')
+    ->with('upload_allowed', $upload_allowed);
   }
 
 
@@ -71,18 +64,14 @@ class FileController extends Controller
   *
   * @return Response
   */
-  public function create($id)
+  public function create(Group $group)
   {
-    if ($id) {
-      $group = Group::findOrFail($id);
+    $upload_allowed = $group->isMember();
 
-      $upload_allowed = $group->isMember();
-
-      return view('files.create')
-      ->with('group', $group)
-      ->with('tab', 'files')
-      ->with('upload_allowed', $upload_allowed);
-    }
+    return view('files.create')
+    ->with('group', $group)
+    ->with('tab', 'files')
+    ->with('upload_allowed', $upload_allowed);
   }
 
   /**
@@ -90,7 +79,7 @@ class FileController extends Controller
   *
   * @return Response
   */
-  public function store(Request $request, $id)
+  public function store(Request $request, Group $group)
   {
     try {
       $file = new \App\File();
@@ -99,7 +88,7 @@ class FileController extends Controller
       $file->forceSave(); // we bypass autovalidation, since we don't have a complete model yet, but we *need* an id
 
       // add group
-      $file->group()->associate(Group::findOrFail($id));
+      $file->group()->associate($group);
 
       $file->user()->associate(Auth::user());
 
@@ -121,11 +110,8 @@ class FileController extends Controller
       else
       {
         // store the file
-        Storage::disk('local')->put($filepath.$filename,  File::get($request->file('file')));
+        Storage::disk('local')->put($filepath.$filename,  file_get_contents($request->file('file')->getRealPath()) );
       }
-
-
-
 
       // add path and other infos to the file record on DB
       $file->path = $filepath.$filename;
@@ -135,8 +121,6 @@ class FileController extends Controller
 
       // save it again
       $file->save();
-
-
 
       if ($request->ajax()) {
         return response()->json('success', 200);
@@ -161,26 +145,24 @@ class FileController extends Controller
   *
   * @return Response
   */
-  public function show($group_id, $file_id)
+  public function show(Group $group, File $file)
   {
-    $entry = \App\File::findOrFail($file_id);
-
-    if (Storage::exists($entry->path)) {
-      return (new Response(Storage::get($entry->path), 200))
-      ->header('Content-Type', $entry->mime);
+    if (Storage::exists($file->path)) {
+      //return response()->download($file->path, $file->original_filename);
+      return (new Response(Storage::get($file->path), 200))
+      ->header('Content-Type', $file->mime); // TODO add filename header somehow
     } else {
-      abort(404, 'File not found in storage at '.$entry->path);
+      abort(404, 'File not found in storage at ' . $file->path);
     }
   }
 
-  public function thumbnail($group_id, $file_id)
+  public function thumbnail(Group $group, File $file)
   {
-    $entry = \App\File::findOrFail($file_id);
 
-    if (in_array($entry->mime, ['image/jpeg', 'image/png', 'image/gif']))
+    if (in_array($file->mime, ['image/jpeg', 'image/png', 'image/gif']))
     {
-      $cachedImage = Image::cache(function($img) use ($entry) {
-        return $img->make(storage_path().'/app/'.$entry->path)->fit(32, 32);
+      $cachedImage = Image::cache(function($img) use ($file) {
+        return $img->make(storage_path().'/app/'.$file->path)->fit(32, 32);
       }, 60000, true);
 
       return $cachedImage->response();
@@ -193,14 +175,13 @@ class FileController extends Controller
   }
 
 
-  public function preview($group_id, $file_id)
+  public function preview(Group $group, File $file)
   {
-    $entry = \App\File::findOrFail($file_id);
 
-    if (in_array($entry->mime, ['image/jpeg', 'image/png', 'image/gif']))
+    if (in_array($file->mime, ['image/jpeg', 'image/png', 'image/gif']))
     {
-      $cachedImage = Image::cache(function($img) use ($entry) {
-        return $img->make(storage_path().'/app/'.$entry->path)->fit(250,250);
+      $cachedImage = Image::cache(function($img) use ($file) {
+        return $img->make(storage_path().'/app/'.$file->path)->fit(250,250);
       }, 60000, true);
 
       return $cachedImage->response();
@@ -220,7 +201,7 @@ class FileController extends Controller
   *
   * @return Response
   */
-  public function edit($id)
+  public function edit(Group $group, File $file)
   {
   }
 
@@ -231,18 +212,15 @@ class FileController extends Controller
   *
   * @return Response
   */
-  public function update($id)
+  public function update(Group $group, File $file)
   {
   }
 
 
 
 
-  public function destroyConfirm(Request $request, $group_id, $file_id)
+  public function destroyConfirm(Request $request, Group $group, File $file)
   {
-    $file = \App\File::findOrFail($file_id);
-    $group = \App\Group::findOrFail($group_id);
-
     if (Gate::allows('delete', $file))
     {
       return view('files.delete')
@@ -254,7 +232,6 @@ class FileController extends Controller
     {
       abort(403);
     }
-
   }
 
 
@@ -266,10 +243,8 @@ class FileController extends Controller
   *
   * @return \Illuminate\Http\Response
   */
-  public function destroy(Request $request, $group_id, $file_id)
+  public function destroy(Request $request, Group $group, File $file)
   {
-    $file = \App\File::findOrFail($file_id);
-
     if (Gate::allows('delete', $file))
     {
       $file->delete();
