@@ -6,24 +6,27 @@
   "type": "project",
   "require": {
     "php": ">=5.5.9",
-    "laravel/framework": "5.1.*",
+    "laravel/framework": "5.2.*",
     "potsky/laravel-localization-helpers" : "~1.1",
     "barryvdh/laravel-debugbar": "^2.0",
     "intervention/image": "^2.3",
     "venturecraft/revisionable": "1.*",
-    "watson/validating": "~1.0",
-    "laravelcollective/html": "5.1.*",
+    "watson/validating": "^2.0",
+    "laravelcollective/html": "5.2.*",
     "jenssegers/date": "^3.0",
     "mews/purifier": "~2.0",
     "intervention/imagecache": "^2.3",
     "league/csv": "^7.2",
-    "eluceo/ical": "^0.9.0"
+    "eluceo/ical": "^0.9.0",
+    "davejamesmiller/laravel-breadcrumbs": "^3.0"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",
     "mockery/mockery": "0.9.*",
     "phpunit/phpunit": "~4.0",
-    "phpspec/phpspec": "~2.1"
+    "phpspec/phpspec": "~2.1",
+    "symfony/dom-crawler": "~3.0",
+    "symfony/css-selector": "~3.0"
   },
   "autoload": {
     "classmap": [

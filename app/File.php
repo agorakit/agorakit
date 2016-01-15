@@ -11,6 +11,7 @@ use Response;
 class File extends Model
 {
   use ValidatingTrait;
+  use SoftDeletes;
 
 
   protected $rules = [
@@ -20,14 +21,10 @@ class File extends Model
   ];
 
 
-
   protected $table = 'files';
   public $timestamps = true;
-
-  use SoftDeletes;
-
   protected $dates = ['deleted_at'];
-
+  protected $casts = [ 'user_id' => 'integer' ];
 
   public function user()
   {

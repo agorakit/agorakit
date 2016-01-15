@@ -33,6 +33,8 @@ class Action extends Model
 
   protected $dates = ['deleted_at', 'start', 'stop'];
 
+  protected $casts = [ 'user_id' => 'integer' ];
+
 
 
   public function group()

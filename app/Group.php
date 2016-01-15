@@ -12,7 +12,6 @@ use Auth;
 class Group extends Model
 {
   use ValidatingTrait;
-
   use \Venturecraft\Revisionable\RevisionableTrait;
 
   protected $rules = [
@@ -21,7 +20,7 @@ class Group extends Model
   ];
 
   protected $fillable = ['id', 'name', 'body', 'cover'];
-
+  protected $casts = [ 'user_id' => 'integer' ];
 
 
   /**

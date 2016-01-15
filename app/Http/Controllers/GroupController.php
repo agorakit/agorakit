@@ -73,9 +73,8 @@ class GroupController extends Controller
   *
   * @return Response
   */
-  public function show($id)
+  public function show(Group $group)
   {
-    $group = Group::findOrFail($id);
 
     if (Auth::check()) {
       $discussions = $group->discussions()->with('user', 'userReadDiscussion')->orderBy('updated_at', 'desc')->limit(5)->get();
@@ -101,9 +100,9 @@ class GroupController extends Controller
   *
   * @return Response
   */
-  public function edit(Request $request, $group_id)
+  public function edit(Request $request, Group $group)
   {
-    $group = Group::findOrFail($group_id);
+    
 
     return view('groups.edit')
     ->with('group', $group)

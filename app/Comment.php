@@ -25,6 +25,8 @@ class Comment extends Model {
 	protected $with = ['user']; // always load users with comments
 	protected $touches = ['discussion'];
 
+	protected $casts = [ 'user_id' => 'integer' ];
+
 	public function user()
 	{
 		return $this->belongsTo('App\User');

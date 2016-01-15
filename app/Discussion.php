@@ -34,7 +34,7 @@ class Discussion extends Model
 
   protected $dates = ['deleted_at'];
 
-
+  protected $casts = [ 'user_id' => 'integer' ];
 
 
 
