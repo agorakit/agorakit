@@ -155,6 +155,7 @@ return [
     Jenssegers\Date\DateServiceProvider::class,
     Mews\Purifier\PurifierServiceProvider::class,
     DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
+    Conner\Tagging\Providers\TaggingServiceProvider::class,
 
   ],
 

@@ -18,6 +18,7 @@
   <!-- mobilizator specific css-->
   {!! Html::style('/css/all.css') !!}
 
+
   @yield('head')
 
 </head>

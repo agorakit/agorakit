@@ -18,7 +18,8 @@
     "intervention/imagecache": "^2.3",
     "league/csv": "^7.2",
     "eluceo/ical": "^0.9.0",
-    "davejamesmiller/laravel-breadcrumbs": "^3.0"
+    "davejamesmiller/laravel-breadcrumbs": "^3.0",
+    "rtconner/laravel-tagging": "~2.0"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

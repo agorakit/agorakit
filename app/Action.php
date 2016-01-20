@@ -12,7 +12,7 @@ class Action extends Model
 
 
   use ValidatingTrait;
-
+  
   protected $fillable = ['id']; // neede for actions import
 
 
