@@ -11,7 +11,7 @@
 
   <h2>{{trans('group.about_this_group')}}  </h2>
 
-  <img class="cover" src="{{action('GroupController@cover', $group->id)}}"/>
+  <img class="cover" src="{{action('GroupController@cover', $group->id)}}" style="padding-left: 15px; padding-bottom: 15px"/>
   <p>
     {!! filter($group->body) !!}
   </p>
@@ -60,13 +60,13 @@
           {{$action->start->format('d/m/Y H:i')}}
         </td>
 
-        <td>
+        <td class="content">
           <a href="{{ action('ActionController@show', [$group->id, $action->id]) }}">
             <span class="name">{{ $action->name }}</span>
             <span class="summary">{{ summary($action->body) }}</span></a>
           </td>
 
-          <td>
+          <td class="content">
             {{$action->location}}
           </td>
 

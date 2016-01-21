@@ -31,7 +31,7 @@
                 <span class="summary">{{ summary($discussion->body) }}</span>
               </a>
               <br/>
-              <span class="group-name">{{ $discussion->group->name }}</span>
+              <span class="group-name"><a href="{{ action('GroupController@show', [$discussion->group_id]) }}">{{ $discussion->group->name }}</a></span>
             </td>
 
             <td>
@@ -50,6 +50,50 @@
 
         </tbody>
       </table>
+  
+
+
+
+
+      <h1>{{ trans('group.latest_actions') }}</h1>
+      <table class="table table-hover special">
+        <thead>
+          <tr>
+            <th style="width: 50%">Titre</th>
+            <th>Date</th>
+            <th>Où</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @foreach( $all_actions as $action )
+          <tr>
+
+
+
+            <td class="content">
+              <a href="{{ action('ActionController@show', [$action->group_id, $action->id]) }}">
+                <span class="name">{{ $action->name }}</span>
+                <span class="summary">{{ summary($action->body) }}</span>
+              </a>
+              <br/>
+              <span class="group-name"><a href="{{ action('GroupController@show', [$action->group_id]) }}">{{ $action->group->name }}</a></span>
+            </td>
+
+            <td>
+                {{$action->start->format('d/m/Y H:i')}}
+            </td>
+
+            <td class="content">
+              {{$action->location}}
+            </td>
+
+          </tr>
+          @endforeach
+
+        </tbody>
+      </table>
+
     </div>
 
     <div class="col-md-3">
@@ -122,38 +166,5 @@
       @endforelse
     </div>
 
-
-    {!!$groups->render()!!}
   </div>
-
-
-  @endsection
-
-  @section('footer')
-
-  {!! Html::script('/packages/jscroll/jquery.jscroll.min.js') !!}
-
-  <script>
-  $(document).ready(function(){
-
-    //hides the default paginator
-    $('ul.pagination:visible:first').hide();
-
-    //init jscroll and tell it a few key configuration details
-    //nextSelector - this will look for the automatically created
-    //contentSelector - this is the element wrapper which is cloned and appended with new paginated data
-    $('div.groups_scroller').jscroll({
-      debug: true,
-      autoTrigger: true,
-      nextSelector: '.pagination li.active + li a',
-      contentSelector: 'div.groups_scroller',
-      callback: function() {
-
-        //again hide the paginator from view
-        $('ul.pagination:visible:first').hide();
-
-      }
-    });
-  });
-  </script>
   @endsection
