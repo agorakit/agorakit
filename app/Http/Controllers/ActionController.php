@@ -81,7 +81,7 @@ class ActionController extends Controller
     $action = new Action();
 
     $action->name = $request->input('name');
-    $action->body = clean($request->input('body'));
+    $action->body = $request->input('body');
     $action->location = $request->input('location');
     $action->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start'));
     $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop'));
@@ -147,7 +147,7 @@ class ActionController extends Controller
   public function update(Request $request, Group $group, Action $action)
   {
     $action->name = $request->input('name');
-    $action->body = clean($request->input('body'));
+    $action->body = $request->input('body');
     $action->location = $request->input('location');
     $action->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start'));
     $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop'));

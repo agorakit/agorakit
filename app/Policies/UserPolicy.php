@@ -23,13 +23,13 @@ class UserPolicy
 
     public function update(User $user, User $user2)
     {
-        return $user->id === $user2->id;
+        return $user->id == $user2->id;
     }
 
 
     public function delete(User $user, User $user2)
     {
-        return $user->id === $user2->id;
+        return $user->id == $user2->id;
     }
 
 }

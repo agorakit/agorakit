@@ -67,7 +67,7 @@ class DiscussionController extends Controller
   {
     $discussion = new Discussion();
     $discussion->name = $request->input('name');
-    $discussion->body = clean($request->input('body'));
+    $discussion->body = $request->input('body');
 
     $discussion->total_comments = 1; // the discussion itself is already a comment
     $discussion->user()->associate(Auth::user());
@@ -133,7 +133,7 @@ class DiscussionController extends Controller
   public function update(Request $request, Group $group, Discussion $discussion)
   {
     $discussion->name = $request->input('name');
-    $discussion->body = clean($request->input('body'));
+    $discussion->body = $request->input('body');
     $discussion->user()->associate(Auth::user());
     $discussion->save();
 

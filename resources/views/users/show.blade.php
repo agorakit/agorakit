@@ -9,7 +9,7 @@ Inscription :  {{ $user->created_at->diffForHumans() }}
 
 <p>
   <img src="{{$user->cover()}}" />
-  {!! $user->body !!}
+  {!! filter($user->body) !!}
 </p>
 
 

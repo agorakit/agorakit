@@ -20,11 +20,11 @@ function filter($content)
 {
   $content = preg_replace('$(\s|^)(https?://[a-z0-9_./?=&-]+)(?![^<>]*>)$i', ' <a href="$2" target="_blank">$2</a> ', $content." ");
   $content = preg_replace('$(\s|^)(www\.[a-z0-9_./?=&-]+)(?![^<>]*>)$i', ' <a target="_blank" href="http://$2"  target="_blank">$2</a> ', $content." ");
-  return clean($content); // TODO CLEAN
+  return safe_html($content);
 }
 
 
-function clean($content)
+function safe_html($content)
 {
   return strip_tags($content, '<br><p><a><li><img><hr><em><strong><i><code><h1><h2><h3><h4><ul><ol>');
 }

@@ -158,7 +158,7 @@ class UserController extends Controller {
 
       $previous_email = $user->email;
       $user->email = $request->input('email');
-      $user->body = clean($request->input('body'));
+      $user->body = $request->input('body');
 
 
       // validation

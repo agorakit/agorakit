@@ -23,13 +23,13 @@ class FilePolicy
 
     public function update(User $user, File $file)
     {
-        return $user->id === $file->user_id;
+        return $user->id == $file->user_id;
     }
 
 
     public function delete(User $user, File $file)
     {
-        return $user->id === $file->user_id;
+        return $user->id == $file->user_id;
     }
 
 }

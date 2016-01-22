@@ -60,9 +60,6 @@ class GroupPolicy
    }
 
 
-
-
-
    public function invite(User $user, Group $group)
    {
       return $user->isMemberOf($group);

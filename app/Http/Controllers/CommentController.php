@@ -30,7 +30,7 @@ class CommentController extends Controller
   public function reply(Request $request, Group $group, Discussion $discussion)
   {
     $comment = new \App\Comment();
-    $comment->body = clean($request->input('body'));
+    $comment->body = $request->input('body');
     $comment->user()->associate(\Auth::user());
 
     if ($comment->isInvalid())
@@ -99,15 +99,27 @@ class CommentController extends Controller
     $comment = \App\Comment::findOrFail($comment_id);
     $discussion = \App\Discussion::findOrFail($discussion_id);
 
-    $this->authorize($comment);
 
-    $comment->body = clean($request->input('body'));
 
-    $comment->saveOrFail();
 
-    $request->session()->flash('message', trans('messages.ressource_updated_successfully'));
+    if (Gate::allows('update', $comment))
+    {
+      $comment->body = $request->input('body');
 
-    return redirect()->action('DiscussionController@show', [$discussion->group->id, $discussion->id]);
+      if ($comment->isInvalid())
+      {
+        return redirect()->back()
+        ->withErrors($comment->getErrors())
+        ->withInput();
+      }
+      $comment->save();
+      $request->session()->flash('message', trans('messages.ressource_updated_successfully'));
+      return redirect()->action('DiscussionController@show', [$discussion->group->id, $discussion->id]);
+    }
+    else
+    {
+      abort(403);
+    }
 
   }
 
