@@ -41,11 +41,13 @@ class Kernel extends HttpKernel
   * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
   * @return void
   */
+ /*
   protected function schedule(Schedule $schedule)
   {
 
     $schedule->command('notifications:send')->everyFiveMinutes()->withoutOverlapping();
   }
+  */
 
 
 

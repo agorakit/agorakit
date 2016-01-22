@@ -866,16 +866,16 @@
         },
         {
             "name": "laravelcollective/html",
-            "version": "v5.2",
+            "version": "v5.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/LaravelCollective/html.git",
-                "reference": "5a8f1380a0d5ef21cdef37e775d86566307f8358"
+                "reference": "7ec0ca55cab54cc6d331007d86ec068b61f46aad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/LaravelCollective/html/zipball/5a8f1380a0d5ef21cdef37e775d86566307f8358",
-                "reference": "5a8f1380a0d5ef21cdef37e775d86566307f8358",
+                "url": "https://api.github.com/repos/LaravelCollective/html/zipball/7ec0ca55cab54cc6d331007d86ec068b61f46aad",
+                "reference": "7ec0ca55cab54cc6d331007d86ec068b61f46aad",
                 "shasum": ""
             },
             "require": {
@@ -916,7 +916,7 @@
             ],
             "description": "HTML and Form Builders for the Laravel Framework",
             "homepage": "http://laravelcollective.com",
-            "time": "2015-12-23 07:46:46"
+            "time": "2016-01-20 18:28:21"
         },
         {
             "name": "league/csv",
@@ -1448,16 +1448,16 @@
         },
         {
             "name": "potsky/laravel-localization-helpers",
-            "version": "v1.3.2",
+            "version": "v1.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/potsky/laravel-localization-helpers.git",
-                "reference": "58fdb66f47fb8fdd2ba1050f19f19d42a34ea78d"
+                "reference": "4d7a749824a4e74aaf6cfb1165f91affaed680bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/potsky/laravel-localization-helpers/zipball/58fdb66f47fb8fdd2ba1050f19f19d42a34ea78d",
-                "reference": "58fdb66f47fb8fdd2ba1050f19f19d42a34ea78d",
+                "url": "https://api.github.com/repos/potsky/laravel-localization-helpers/zipball/4d7a749824a4e74aaf6cfb1165f91affaed680bf",
+                "reference": "4d7a749824a4e74aaf6cfb1165f91affaed680bf",
                 "shasum": ""
             },
             "require": {
@@ -1485,7 +1485,7 @@
                 }
             ],
             "description": "An artisan command package for easy translation management",
-            "time": "2015-12-25 12:35:08"
+            "time": "2016-01-19 16:36:04"
         },
         {
             "name": "psr/http-message",
