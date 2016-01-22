@@ -13,7 +13,7 @@
 					@if (isset($invite_and_register))
 					<form class="form-horizontal" role="form" method="POST" action="{{ action('InviteController@inviteRegister') }}">
 					@else
-					<form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/register') }}">
+					<form class="form-horizontal" role="form" method="POST" action="{{ url('register') }}">
 					@endif
 
 
