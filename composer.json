@@ -12,7 +12,8 @@
         "laravelcollective/html": "5.2.*",
         "barryvdh/laravel-debugbar": "^2.1",
         "potsky/laravel-localization-helpers" : "2.3.*",
-        "intervention/image": "^2.3"
+        "intervention/image": "^2.3",
+        "intervention/imagecache": "^2.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
