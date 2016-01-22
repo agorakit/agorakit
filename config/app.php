@@ -4,6 +4,19 @@ return [
 
   /*
   |--------------------------------------------------------------------------
+  | Application Environment
+  |--------------------------------------------------------------------------
+  |
+  | This value determines the "environment" your application is currently
+  | running in. This may determine how you prefer to configure various
+  | services your application utilizes. Set this in your ".env" file.
+  |
+  */
+
+  'env' => env('APP_ENV', 'production'),
+
+  /*
+  |--------------------------------------------------------------------------
   | Application Debug Mode
   |--------------------------------------------------------------------------
   |
@@ -12,8 +25,6 @@ return [
   | application. If disabled, a simple generic error page is shown.
   |
   */
-
-  'env' => env('APP_ENV', 'production'),
 
   'debug' => env('APP_DEBUG', false),
 
@@ -80,7 +91,7 @@ return [
   |
   */
 
-  'key' => env('APP_KEY', 'SomeRandomString'),
+  'key' => env('APP_KEY'),
 
   'cipher' => 'AES-256-CBC',
 
@@ -97,7 +108,7 @@ return [
   |
   */
 
-  'log' => 'daily',
+  'log' => env('APP_LOG', 'single'),
 
   /*
   |--------------------------------------------------------------------------
@@ -111,9 +122,6 @@ return [
   */
 
   'providers' => [
-
-    // seems like it must be declared first
-    Barryvdh\Debugbar\ServiceProvider::class,
 
     /*
     * Laravel Framework Service Providers...
@@ -139,6 +147,7 @@ return [
     Illuminate\Translation\TranslationServiceProvider::class,
     Illuminate\Validation\ValidationServiceProvider::class,
     Illuminate\View\ViewServiceProvider::class,
+
     /*
     * Application Service Providers...
     */
@@ -148,14 +157,18 @@ return [
     App\Providers\RouteServiceProvider::class,
 
 
-    // additional providers
-    Potsky\LaravelLocalizationHelpers\LaravelLocalizationHelpersServiceProviderLaravel5::class,
+    Barryvdh\Debugbar\ServiceProvider::class,
+
+
+    Potsky\LaravelLocalizationHelpers\LaravelLocalizationHelpersServiceProvider::class,
+
     Intervention\Image\ImageServiceProvider::class,
     Collective\Html\HtmlServiceProvider::class,
-    Jenssegers\Date\DateServiceProvider::class,
-    Mews\Purifier\PurifierServiceProvider::class,
-    DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
-    Conner\Tagging\Providers\TaggingServiceProvider::class,
+    //Jenssegers\Date\DateServiceProvider::class,
+    //Mews\Purifier\PurifierServiceProvider::class,
+    //DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
+    //Conner\Tagging\Providers\TaggingServiceProvider::class,
+
 
   ],
 
@@ -203,13 +216,14 @@ return [
     'Validator' => Illuminate\Support\Facades\Validator::class,
     'View'      => Illuminate\Support\Facades\View::class,
 
+
     'Debugbar' => Barryvdh\Debugbar\Facade::class,
     'Form' => Collective\Html\FormFacade::class,
     'Html' => Collective\Html\HtmlFacade::class,
     'Image' => Intervention\Image\Facades\Image::class,
-    'Date' => Jenssegers\Date\Date::class,
-    'Purifier' => Mews\Purifier\Facades\Purifier::class,
-    'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
+    //'Date' => Jenssegers\Date\Date::class,
+    //'Purifier' => Mews\Purifier\Facades\Purifier::class,
+    //'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
 
   ],
 

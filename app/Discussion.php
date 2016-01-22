@@ -5,14 +5,13 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
-use Conner\Tagging\Taggable;
 
 class Discussion extends Model
 {
   use \Venturecraft\Revisionable\RevisionableTrait;
   use ValidatingTrait;
   use SoftDeletes;
-  use Taggable;
+  
 
 
   protected $rules = [

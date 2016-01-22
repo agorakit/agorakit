@@ -13,7 +13,6 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //\App\Console\Commands\Inspire::class,
         \App\Console\Commands\SendNotifications::class,
         \App\Console\Commands\ImportActions::class,
     ];
@@ -26,7 +25,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('notifications:send')
-        ->everyThirtyMinutes();
+      $schedule->command('notifications:send')
+      ->everyThirtyMinutes();
     }
 }

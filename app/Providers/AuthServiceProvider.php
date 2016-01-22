@@ -14,11 +14,6 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'App\Model' => 'App\Policies\ModelPolicy',
-        'App\Group' => 'App\Policies\GroupPolicy',
-        'App\Comment' => 'App\Policies\CommentPolicy',
-        'App\Discussion' => 'App\Policies\DiscussionPolicy',
-        'App\File' => 'App\Policies\FilePolicy',
-        'App\User' => 'App\Policies\UserPolicy',
     ];
 
     /**
@@ -29,7 +24,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(GateContract $gate)
     {
-        parent::registerPolicies($gate);
+        $this->registerPolicies($gate);
 
         //
     }

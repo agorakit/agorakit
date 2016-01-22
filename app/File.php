@@ -5,7 +5,6 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
-use Conner\Tagging\Taggable;
 use Storage;
 use Response;
 
@@ -13,7 +12,7 @@ class File extends Model
 {
   use ValidatingTrait;
   use SoftDeletes;
-  use Taggable;
+
 
   protected $rules = [
     'path' => 'required',

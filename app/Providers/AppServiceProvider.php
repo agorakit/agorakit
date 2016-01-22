@@ -9,35 +9,38 @@ use Carbon\Carbon;
 
 class AppServiceProvider extends ServiceProvider
 {
-  /**
-  * Bootstrap any application services.
-  */
-  public function boot()
-  {
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
 
-    // adds user info to all views
-    view()->composer('partials.nav', function ($view) {
-      $view->with('user_logged', Auth::check());
+          // adds user info to all views
+          view()->composer('partials.nav', function ($view) {
+            $view->with('user_logged', Auth::check());
 
-      if (Auth::check()) {
-        $view->with('user', Auth::user());
+            if (Auth::check()) {
+              $view->with('user', Auth::user());
 
-        // count number of unread discussions.
-        $view->with('unread_discussions', QueryHelper::getUnreadDiscussionsCount());
-        $view->with('user_groups', QueryHelper::getUserGroups());
-      }
-    });
+              // count number of unread discussions.
+              $view->with('unread_discussions', QueryHelper::getUnreadDiscussionsCount());
+              $view->with('user_groups', QueryHelper::getUserGroups());
+            }
+          });
 
-    // set correct locale for Carbon
-    Carbon::setLocale(config('app.locale'));
+          // set correct locale for Carbon
+          Carbon::setLocale(config('app.locale'));
+    }
 
-  }
-
-  /**
-  * Register any application services.
-  */
-  public function register()
-  {
-    //
-  }
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
 }
