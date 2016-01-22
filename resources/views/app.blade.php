@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
   <!-- mobilizator specific css-->
-  {!! Html::style('/css/all.css') !!}
+  {!! Html::style('/css/all.css?v2') !!}
 
 
   @yield('head')
