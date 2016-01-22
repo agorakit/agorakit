@@ -17,7 +17,7 @@ class UserTest extends TestCase
     public function testUserRegistration()
     {
         App::setLocale('en');
-        $this->visit('/auth/register')
+        $this->visit('/register')
         ->type('Roberto', 'name')
         ->type('roberto@example.com', 'email')
         ->type('123456', 'password')

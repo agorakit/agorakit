@@ -26,5 +26,5 @@ function filter($content)
 
 function clean($content)
 {
-  return $content;
+  return strip_tags($content, '<br><p><a><li><img><hr><em><strong><i><code><h1><h2><h3><h4><ul><ol>');
 }

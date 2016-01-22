@@ -8,7 +8,7 @@
 				<div class="panel-heading">Login</div>
 				<div class="panel-body">
 
-					<form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/login') }}">
+					<form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 						<div class="form-group">
@@ -39,7 +39,7 @@
 							<div class="col-md-6 col-md-offset-4">
 								<button type="submit" class="btn btn-primary">{{ trans('messages.login') }}</button>
 
-								<a class="btn btn-link" href="{{ url('/password/email') }}">{{ trans('messages.forgotten_password') }}</a>
+								<a class="btn btn-link" href="{{ url('/password/reset') }}">{{ trans('messages.forgotten_password') }}</a>
 							</div>
 						</div>
 					</form>

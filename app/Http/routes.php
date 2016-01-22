@@ -10,11 +10,8 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-/*
-Route::get('/', function () {
-  return view('welcome');
-});
-*/
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +25,14 @@ Route::get('/', function () {
 */
 
 Route::group(['middleware' => ['web']], function () {
+
+
+  /*
+  Authentification routes
+  =======================
+  */
+
+  Route::auth();
 
 
 
@@ -55,15 +60,6 @@ Route::group(['middleware' => ['web']], function () {
   Route::get('agenda/ical', 'IcalController@index');
 
 
-  /*
-  Authentification routes
-  =======================
-  */
-
-  Route::controllers([
-    'auth' => 'Auth\AuthController',
-    'password' => 'Auth\PasswordController',
-    ]);
 
     /*
     Group related routes

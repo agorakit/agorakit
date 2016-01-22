@@ -117,7 +117,6 @@ class DiscussionController extends Controller
   */
   public function edit(Request $request, Group $group, Discussion $discussion)
   {
-    $tags = Discussion::existingTags();
     return view('discussions.edit')
     ->with('discussion', $discussion)
     ->with('group', $group)

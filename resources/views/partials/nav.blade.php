@@ -57,10 +57,10 @@
 
           @if ($user_logged)
           <li><a href="{{action('UserController@show', $user->id)}}">{{ trans('messages.hello') }}, {{{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}}</a></li>
-          <li><a href="{{ url('auth/logout') }}">{{ trans('messages.logout') }}</a></li>
+          <li><a href="{{ url('logout') }}">{{ trans('messages.logout') }}</a></li>
           @else
-          <li><a href="{{ url('auth/register') }}">{{ trans('messages.register') }}</a></li>
-          <li><a href="{{ url('auth/login') }}">{{ trans('messages.login') }}</a></li>
+          <li><a href="{{ url('register') }}">{{ trans('messages.register') }}</a></li>
+          <li><a href="{{ url('login') }}">{{ trans('messages.login') }}</a></li>
           @endif
 
 
