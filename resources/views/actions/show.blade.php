@@ -7,7 +7,7 @@
 
   <div class="action">
     <h2 class="name">
-      <a href="{{ action('ActionController@index', [$group->id]) }}">{{trans('messages.actions')}}</a> /
+      <a href="{{ action('ActionController@index', [$group->id]) }}">{{trans('messages.actions')}}</a> <i class="fa fa-angle-right"></i>
       {{ $action->name }} <a href="{{ action('ActionController@edit', [$group->id, $action->id]) }}" class="btn btn-primary btn-xs">{{trans('messages.edit')}}</a>
     </h2>
 

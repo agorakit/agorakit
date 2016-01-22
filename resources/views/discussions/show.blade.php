@@ -7,7 +7,7 @@
 
   <div class="discussion">
     <h2 class="name">
-      <a href="{{ action('DiscussionController@index', [$group->id]) }}">{{trans('messages.discussions')}}</a> /
+      <a href="{{ action('DiscussionController@index', [$group->id]) }}">{{trans('messages.discussions')}}</a> <i class="fa fa-angle-right"></i>
       {{ $discussion->name }}
     </h2>
 

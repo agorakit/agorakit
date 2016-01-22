@@ -1,5 +1,7 @@
 <div class="page_header">
-    <h1>{{ $group->name }}</h1>
+    <h1><a href="{{ action('DashboardController@index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
+
+ {{ $group->name }}</h1>
 </div>
 
   <ul class="nav nav-tabs">
