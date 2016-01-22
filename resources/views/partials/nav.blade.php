@@ -56,12 +56,22 @@
         <ul class="nav navbar-nav navbar-right">
 
           @if ($user_logged)
-          <li><a href="{{action('UserController@show', $user->id)}}">{{ trans('messages.hello') }}, {{{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}}</a></li>
-          <li><a href="{{ url('logout') }}">{{ trans('messages.logout') }}</a></li>
+          <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                  <span class="avatar"><img src="{{Auth::user()->avatar()}}"/></span> {{ Auth::user()->name }} <span class="caret"></span>
+              </a>
+
+              <ul class="dropdown-menu" role="menu">
+                  <li><a href="{{action('UserController@show', $user->id)}}"><i class="fa fa-btn fa-user"></i> {{ trans('messages.profile') }}</a></li>
+                  <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i> {{ trans('messages.logout') }}</a></li>
+              </ul>
+          </li>
           @else
           <li><a href="{{ url('register') }}">{{ trans('messages.register') }}</a></li>
           <li><a href="{{ url('login') }}">{{ trans('messages.login') }}</a></li>
           @endif
+
+
 
 
 

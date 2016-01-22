@@ -128,6 +128,14 @@ background-color: rgb(242, 241, 239);
   /*font-weight: bold;*/
 }
 
+
+/***************************** USERS ******************/
+.avatar img
+{
+  width: 24px;
+  height: 24px;
+}
+
 /***************************** COMMENTS ***************************************/
 
 .comment {
@@ -136,8 +144,6 @@ background-color: rgb(242, 241, 239);
   margin-bottom: 20px;
 }
 .comment .avatar img {
-  width: 24px;
-  height: 24px;
   float: left;
 }
 .comment .user, .comment .body, .comment .created, .comment .actions {

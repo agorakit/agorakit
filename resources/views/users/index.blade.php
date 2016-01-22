@@ -24,7 +24,7 @@
     @foreach( $users as $user )
     <tr>
       <td>
-        <a href="{{ action('UserController@show', $user->id) }}">{{ $user->name }}</a>
+        <a href="{{ action('UserController@show', $user->id) }}"> <span class="avatar"><img src="{{$user->avatar()}}"/></span> {{ $user->name }}</a>
       </td>
 
 

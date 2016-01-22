@@ -1,18 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/01/11 22:53:09 
+ Generated via "php artisan localization:missing" at 2016/01/22 15:10:03 
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/comments/_show.blade.php
-  'delete' => 'delete',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/comments/delete.blade.php
-  'delete_confirm_button' => 'delete_confirm_button',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/comments/delete.blade.php
-  'delete_confirm_title' => 'delete_confirm_title',
-  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/CommentController.php
-  'ressource_deleted_successfully' => 'ressource_deleted_successfully',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/partials/nav.blade.php
+  'profile' => 'TODO: profile',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'a_message_for_you',
   'actions' => 'Actions',
@@ -30,6 +24,9 @@ return array (
   'create' => 'Create',
   'create_file_button' => 'Upload file(s)',
   'date' => 'date',
+  'delete' => 'delete',
+  'delete_confirm_button' => 'delete_confirm_button',
+  'delete_confirm_title' => 'delete_confirm_title',
   'description' => 'Description',
   'details' => 'Details',
   'discussions' => 'Discussions',
@@ -41,7 +38,6 @@ return array (
   'files_in_this_group' => 'Files in this group',
   'forgotten_password' => 'Forgotten password',
   'groups' => 'Groups',
-  'hello' => 'Hello',
   'history' => 'history',
   'home' => 'Home',
   'howdy' => 'Whoops!',
@@ -68,12 +64,12 @@ return array (
   'or' => 'or',
   'password' => 'Password',
   'password_reset' => 'Password reset',
-  'please_confirm_your_email' => 'Please confirm your email',
   'register' => 'Register',
   'registration_time' => 'Registration time',
   'remember_me' => 'Remember me',
   'reply' => 'Reply',
   'ressource_created_successfully' => 'Ressource created successfully',
+  'ressource_deleted_successfully' => 'ressource_deleted_successfully',
   'ressource_updated_successfully' => 'Ressource updated successfully',
   'save' => 'Save',
   'send' => 'send',
@@ -93,12 +89,14 @@ return array (
   'when' => 'when',
   'where' => 'where',
   'your_groups' => 'Your groups',
-  'your_password_reset_link' => 'Your password reset link',
   //================================== Obsolete strings ==================================//
   'all_discussions' => 'all_discussions',
   'all_the_groups_welcome' => 'Here are all the groups on this server.',
   'close' => 'Close',
   'group' => 'Group',
   'groups_list' => 'Groups list',
+  'hello' => 'Hello',
+  'please_confirm_your_email' => 'Please confirm your email',
   'users' => 'Users',
+  'your_password_reset_link' => 'Your password reset link',
 );

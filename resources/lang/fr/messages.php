@@ -1,18 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/01/11 22:53:09
+ Generated via "php artisan localization:missing" at 2016/01/22 15:10:03
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/comments/_show.blade.php
-  'delete' => 'Effacer',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/comments/delete.blade.php
-  'delete_confirm_button' => 'Effacer ?',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/comments/delete.blade.php
-  'delete_confirm_title' => 'Voulez-vous vraiement effacer ceci ?',
-  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/CommentController.php
-  'ressource_deleted_successfully' => 'Ce contenu a bien été supprimé',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/partials/nav.blade.php
+  'profile' => 'Mon profil',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'actions' => 'Actions',
@@ -30,6 +24,9 @@ return array (
   'create' => 'Créer',
   'create_file_button' => 'Ajouter des fichiers',
   'date' => 'Date',
+  'delete' => 'Effacer',
+  'delete_confirm_button' => 'Effacer ?',
+  'delete_confirm_title' => 'Voulez-vous vraiement effacer ceci ?',
   'description' => 'Description',
   'details' => 'En savoir plus',
   'discussions' => 'Discussions',
@@ -41,7 +38,6 @@ return array (
   'files_in_this_group' => 'Fichiers de ce groupe',
   'forgotten_password' => 'Mot de passe oublié',
   'groups' => 'Groupes',
-  'hello' => 'Bonjour',
   'history' => 'Historique des modifications',
   'home' => 'Accueil',
   'howdy' => 'Oups',
@@ -68,12 +64,12 @@ return array (
   'or' => 'ou',
   'password' => 'Mot de passe',
   'password_reset' => 'Réinitialiser le mot de passe',
-  'please_confirm_your_email' => 'Veuillez vérifier votre adresse mail',
   'register' => 'S\'enregistrer',
   'registration_time' => 'Date d\'enregistrement',
   'remember_me' => 'Se souvenir de moi',
   'reply' => 'Répondre',
   'ressource_created_successfully' => 'Contenu créé avec succès',
+  'ressource_deleted_successfully' => 'Ce contenu a bien été supprimé',
   'ressource_updated_successfully' => 'Contenu mis à jour avec succès',
   'save' => 'Enregistrer',
   'send' => 'Envoyer',
@@ -93,7 +89,6 @@ return array (
   'when' => 'Quand',
   'where' => 'Où',
   'your_groups' => 'Mes groupes',
-  'your_password_reset_link' => 'Votre lien de changement de mot de passe',
   //================================== Obsolete strings ==================================//
   'all_discussions' => 'Toutes les discussions sur ce serveurc',
   'all_the_groups_welcome' => 'Vous trouverez ici tous les groupes disponibles sur ce serveur',
@@ -101,8 +96,11 @@ return array (
   'confirm_your_email' => 'Vérifiez votre adresse email',
   'group' => 'Groupe',
   'groups_list' => 'Liste des groupes',
+  'hello' => 'Bonjour',
   'not_a_member' => 'Vous ne faites pas partie de ce groupe',
   'not_logged_in' => 'Vous n\'êtes pas connecté(e). Merci de vous connecter ou de vous créer un compte afin de poursuivre',
+  'please_confirm_your_email' => 'Veuillez vérifier votre adresse mail',
   'unread_items' => 'Non lus',
   'users' => 'Utilisateurs',
+  'your_password_reset_link' => 'Votre lien de changement de mot de passe',
 );

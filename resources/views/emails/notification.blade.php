@@ -16,10 +16,10 @@
 <strong><a href="{{action('ActionController@show', [$group->id, $action->id])}}">{{$action->name}}</a></strong>
 <p>{{ summary($action->body) }}</p>
 <p>
-{{$action->start->format('d/m/Y H:i')}}
+  {{$action->start->format('d/m/Y H:i')}}
 </p>
 <p>
-{{trans('messages.location')}} : {{$action->location}}
+  {{trans('messages.location')}} : {{$action->location}}
 </p>
 <hr/>
 @endforeach
