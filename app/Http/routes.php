@@ -32,6 +32,8 @@ Route::group(['middleware' => ['web']], function () {
   =======================
   */
 
+  Route::get('confirm/{token}', 'Auth\AuthController@confirmEmail');
+
   Route::auth();
 
 
@@ -47,7 +49,7 @@ Route::group(['middleware' => ['web']], function () {
   Route::get('home', 'DashboardController@index');
 
 
-  Route::get('register/confirm/{token}', 'Auth\AuthController@confirmEmail');
+
 
 
   /*
