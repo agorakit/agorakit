@@ -94,16 +94,23 @@ class DiscussionController extends Controller
   public function show(Group $group, Discussion $discussion)
   {
     // if user is logged in, we update the read count for this discussion.
+    // just before that, we save the number of already read comments in $read_comments to be used in the view to scroll to the first unread comments
     if (Auth::check())
     {
       $UserReadDiscussion = \App\UserReadDiscussion::firstOrNew(['discussion_id' => $discussion->id, 'user_id' => Auth::user()->id]);
+      $read_comments = $UserReadDiscussion->read_comments;
       $UserReadDiscussion->read_comments = $discussion->total_comments;
       $UserReadDiscussion->read_at = Carbon::now();
       $UserReadDiscussion->save();
     }
+    else
+    {
+      $read_comments = 0;
+    }
 
     return view('discussions.show')
     ->with('discussion', $discussion)
+    ->with('read_comments', $read_comments)
     ->with('group', $group)
     ->with('tab', 'discussion');
   }

@@ -35,19 +35,25 @@
 
 
   <div class="comments">
-    @foreach ($discussion->comments as $comment)
+    @foreach ($discussion->comments as $comment_key => $comment)
     @include('comments._show')
     @endforeach
-
 
     @can('create-comment', $group)
     @include ('comments.create')
     @endcan
-
-
   </div>
 
 </div>
-
-
 @endsection
+
+@section('footer')
+<script>
+$(document).ready(function() {
+  if ($("#unread").length)
+  {
+    $(document).scrollTop( $("#unread").offset().top-60 );
+  }
+});
+</script>
+@append
