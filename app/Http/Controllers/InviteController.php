@@ -48,9 +48,7 @@ class InviteController extends Controller
     preg_match_all("/[\._a-zA-Z0-9-]+@[\._a-zA-Z0-9-]+/i", $request->invitations, $matches);
     $emails = $matches[0];
     $emails = array_unique($emails);
-    //dd($emails);
 
-    // If it's a mass invite, only confirmed people can do that
 
     // for each invite email,
     foreach ($emails as $email) {
@@ -60,9 +58,12 @@ class InviteController extends Controller
       ->where('group_id', '=', $group->id)
       ->count();
 
-      if ($invitation_counter > 0) {
+      if ($invitation_counter > 0)
+      {
         $status_message .= trans('membership.user_already_invited').' : ' . $email .'<br/>';
-      } else {
+      }
+      else
+      {
         // - create an invite token and store in invite table
         $invite = new \App\Invite();
         $invite->generateToken();
@@ -78,7 +79,6 @@ class InviteController extends Controller
           ->to($email)
           ->subject( '[' . env('APP_NAME') . '] Invitation à rejoindre le groupe "' . $group->name . '"');
         });
-
 
         $status_message .= trans('membership.users_has_been_invited') .  ' : ' .  $email . '<br/>';
       }
@@ -105,7 +105,6 @@ class InviteController extends Controller
   {
     // check if token is valid
     $invite = \App\Invite::whereToken($token)->firstOrFail();
-
     $user = \App\User::where('email', $invite->email)->first();
     $group = \App\Group::findOrFail($invite->group_id);
 
@@ -125,6 +124,7 @@ class InviteController extends Controller
     }
     else
     {
+      Auth::logout();
       // if user doesn't exists, we have the opportunity to create, login and validate email in one go (since we have the invite token)
       $request->session()->flash('message', 'Vous n\'avez pas encore de compte sur ce site, merci de vous en créer un');
 
