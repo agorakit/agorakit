@@ -1,12 +1,14 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/01/22 15:10:03
+ Generated via "php artisan localization:missing" at 2016/01/24 22:11:53
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
   // Defined in file /home/philippe/Sites/Mobilizator/resources/views/partials/nav.blade.php
-  'profile' => 'Mon profil',
+  'email_not_verified_send_again_verification' => 'Si vous n\'avez pas reçu le mail de confirmation cliquez ici pour en recevoir un autre',
+  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/UserController.php
+  'invitation_sent_again' => 'Un nouveau mail de vérification vous a été envoyé, vérifiez votre boite mail ainsi que le dossier spam afin de pouvoir vérifier votre adresse mail. Ceci nous permet d\'éviter le spam sur ce site. Merci pour votre compréhension.',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'actions' => 'Actions',
@@ -64,6 +66,7 @@ return array (
   'or' => 'ou',
   'password' => 'Mot de passe',
   'password_reset' => 'Réinitialiser le mot de passe',
+  'profile' => 'Mon profil',
   'register' => 'S\'enregistrer',
   'registration_time' => 'Date d\'enregistrement',
   'remember_me' => 'Se souvenir de moi',

@@ -1,12 +1,14 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/01/22 15:10:03 
+ Generated via "php artisan localization:missing" at 2016/01/24 22:11:53 
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
   // Defined in file /home/philippe/Sites/Mobilizator/resources/views/partials/nav.blade.php
-  'profile' => 'TODO: profile',
+  'email_not_verified_send_again_verification' => 'TODO: email_not_verified_send_again_verification',
+  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/UserController.php
+  'invitation_sent_again' => 'TODO: invitation_sent_again',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'a_message_for_you',
   'actions' => 'Actions',
@@ -64,6 +66,7 @@ return array (
   'or' => 'or',
   'password' => 'Password',
   'password_reset' => 'Password reset',
+  'profile' => 'TODO: profile',
   'register' => 'Register',
   'registration_time' => 'Registration time',
   'remember_me' => 'Remember me',

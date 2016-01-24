@@ -90,6 +90,8 @@
       </button>
       <i class="fa fa-info-circle"></i>
       {{trans('messages.email_not_verified')}}
+      <br/>
+      <a style="font-size: 0.6em" href="{{action('UserController@sendVerificationAgain', $user->id)}}">{{trans('messages.email_not_verified_send_again_verification')}}</a>
     </div>
   </div>
   @endif

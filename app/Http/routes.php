@@ -33,7 +33,6 @@ Route::group(['middleware' => ['web']], function () {
   */
 
   Route::get('confirm/{token}', 'Auth\AuthController@confirmEmail');
-
   Route::auth();
 
 
@@ -196,6 +195,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('users/{id}/cover', 'UserController@cover');
     Route::get('users/{id}/avatar', 'UserController@avatar');
 
+    Route::get('users/{id}/sendverification', 'UserController@sendVerificationAgain');
 
     Route::get('users/{id}/edit', 'UserController@edit');
     Route::post('users/{id}', 'UserController@update');

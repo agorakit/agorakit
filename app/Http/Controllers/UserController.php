@@ -200,6 +200,24 @@ class UserController extends Controller {
   }
 
   /**
+   * Send verification token to a user, again, for example if it's stuck in spam or wathever else event. Probably needs throttling TODO
+   * @param  Request $request
+   * @param  Int  $id      User id
+   * @return Flash message and returns to homepage
+   */
+  public function sendVerificationAgain(Request $request, $id)
+  {
+      $user = \App\User::findOrFail($id);
+      if ($user->verified == 0)
+      {
+        $mailer = new AppMailer;
+        $mailer->sendEmailConfirmationTo($user);
+        $request->session()->flash('message', trans('messages.invitation_sent_again'));
+        return redirect()->action('UserController@show', [$user->id]);
+      }
+  }
+
+  /**
   * Remove the specified resource from storage.
   *
   * @param  int  $id
