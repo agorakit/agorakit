@@ -2,7 +2,11 @@
 
 @section('content')
 
-<h1>Edit {{ $user->name }}</h1>
+@include('partials.usertab')
+
+<div class="tab_content">
+
+<h1>Modifier {{ $user->name }}</h1>
 <p>
 Inscription :  {{ $user->created_at->diffForHumans() }}
 </p>
@@ -18,6 +22,6 @@ Inscription :  {{ $user->created_at->diffForHumans() }}
 
 {!! Form::close() !!}
 
-
+</div>
 
 @endsection

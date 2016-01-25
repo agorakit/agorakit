@@ -1,14 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/01/24 22:11:53 
+ Generated via "php artisan localization:missing" at 2016/01/25 21:50:09 
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/partials/nav.blade.php
-  'email_not_verified_send_again_verification' => 'TODO: email_not_verified_send_again_verification',
-  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/UserController.php
-  'invitation_sent_again' => 'TODO: invitation_sent_again',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/partials/usertab.blade.php
+  'user_profile' => 'TODO: user_profile',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'a_message_for_you',
   'actions' => 'Actions',
@@ -35,6 +33,7 @@ return array (
   'edit' => 'Edit',
   'email' => 'Email',
   'email_not_verified' => 'Email not verified',
+  'email_not_verified_send_again_verification' => 'TODO: email_not_verified_send_again_verification',
   'ends' => 'Ends',
   'files' => 'Files',
   'files_in_this_group' => 'Files in this group',
@@ -45,6 +44,7 @@ return array (
   'howdy' => 'Whoops!',
   'i_changed_my_mind' => 'I changed my mind, I don\'t want to leave this group',
   'in' => 'in',
+  'invitation_sent_again' => 'TODO: invitation_sent_again',
   'join' => 'Join',
   'latest_discussions' => 'latest_discussions',
   'leave_this_group' => 'Leave this group',

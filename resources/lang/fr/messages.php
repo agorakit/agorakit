@@ -1,14 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/01/24 22:11:53
+ Generated via "php artisan localization:missing" at 2016/01/25 21:50:09
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/partials/nav.blade.php
-  'email_not_verified_send_again_verification' => 'Si vous n\'avez pas reçu le mail de confirmation cliquez ici pour en recevoir un autre',
-  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/UserController.php
-  'invitation_sent_again' => 'Un nouveau mail de vérification vous a été envoyé, vérifiez votre boite mail ainsi que le dossier spam afin de pouvoir vérifier votre adresse mail. Ceci nous permet d\'éviter le spam sur ce site. Merci pour votre compréhension.',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/partials/usertab.blade.php
+  'user_profile' => 'Profil utilisateur',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'actions' => 'Actions',
@@ -35,6 +33,7 @@ return array (
   'edit' => 'Modifier',
   'email' => 'Email',
   'email_not_verified' => 'Votre adresse mail n\'est pas vérifié, merci de la vérifier maintenant depuis votre boite email',
+  'email_not_verified_send_again_verification' => 'Si vous n\'avez pas reçu le mail de confirmation cliquez ici pour en recevoir un autre',
   'ends' => 'Fin',
   'files' => 'Fichiers',
   'files_in_this_group' => 'Fichiers de ce groupe',
@@ -45,6 +44,7 @@ return array (
   'howdy' => 'Oups',
   'i_changed_my_mind' => 'J\'ai changé d\'avis, je ne veux pas quitter ce groupe',
   'in' => 'dans',
+  'invitation_sent_again' => 'Un nouveau mail de vérification vous a été envoyé, vérifiez votre boite mail ainsi que le dossier spam afin de pouvoir vérifier votre adresse mail. Ceci nous permet d\'éviter le spam sur ce site. Merci pour votre compréhension.',
   'join' => 'Rejoindre ce groupe',
   'latest_discussions' => 'Discussions récentes',
   'leave_this_group' => 'Quitter ce groupe',

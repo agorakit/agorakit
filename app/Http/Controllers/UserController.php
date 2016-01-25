@@ -17,6 +17,7 @@ class UserController extends Controller {
   {
     $this->middleware('cache', ['only' => ['index', 'show']]);
     $this->middleware('verified', ['only' => ['contact', 'mail']]);
+    $this->middleware('throttle:2,1', ['only' => ['mail']]); // 2 emails per  minute should be enough for non bots
   }
 
   /**
@@ -44,6 +45,7 @@ class UserController extends Controller {
   {
     $user = \App\User::findOrFail($user_id);
     return view('users.contact')
+    ->with('tab', 'contact')
     ->with('user', $user);
   }
 
@@ -55,10 +57,8 @@ class UserController extends Controller {
     $to_user = \App\User::findOrFail($user_id);
     $from_user = Auth::user();
 
-
+    /*
     $requestsPerHour = 5;
-
-
     $key = 'contact_user_' . $to_user->id . '_from_user_' . $from_user->id;
 
     // Add if doesn't exist
@@ -67,26 +67,27 @@ class UserController extends Controller {
 
     // Add to count
     $count = \Cache::increment($key);
+    */
 
-    if( $count > $requestsPerHour )
+    //if( $count > $requestsPerHour )
+    //{
+    //  $request->session()->flash('message', trans('messages.message_not_sent_too_many_per_hour'));
+    //}
+    //else
+    //{
+    if ($request->has('body'))
     {
-      $request->session()->flash('message', trans('messages.message_not_sent_too_many_per_hour'));
-    }
-    else
-    {
-      if ($request->has('body'))
-      {
-        $body = $request->input('body');
+      $body = $request->input('body');
 
-        Mail::send('emails.contact', ['to_user' => $to_user, 'from_user' => $from_user, 'body' => $body ], function ($message) use ($to_user, $from_user) {
-          $message->from($from_user->email, $from_user->name)
-          ->to($to_user->email, $to_user->name)
-          ->subject('[' . env('APP_NAME') . '] ' . trans('messages.a_message_for_you'));
-        });
+      Mail::send('emails.contact', ['to_user' => $to_user, 'from_user' => $from_user, 'body' => $body ], function ($message) use ($to_user, $from_user) {
+        $message->from($from_user->email, $from_user->name)
+        ->to($to_user->email, $to_user->name)
+        ->subject('[' . env('APP_NAME') . '] ' . trans('messages.a_message_for_you'));
+      });
 
-        $request->session()->flash('message', trans('messages.message_sent'));
-      }
+      $request->session()->flash('message', trans('messages.message_sent'));
     }
+    //}
     return redirect()->action('UserController@show', $to_user->id);
   }
 
@@ -119,7 +120,7 @@ class UserController extends Controller {
   public function show($id)
   {
     $user = \App\User::findOrFail($id);
-    return view('users.show')->with('user', $user);
+    return view('users.show')->with('user', $user)->with('tab', 'profile');
   }
 
   /**
@@ -134,7 +135,7 @@ class UserController extends Controller {
     if (Gate::allows('update', $user))
     {
       return view('users.edit')
-      ->with('user', $user);
+      ->with('user', $user)->with('tab', 'edit');
     }
     else
     {
@@ -200,21 +201,21 @@ class UserController extends Controller {
   }
 
   /**
-   * Send verification token to a user, again, for example if it's stuck in spam or wathever else event. Probably needs throttling TODO
-   * @param  Request $request
-   * @param  Int  $id      User id
-   * @return Flash message and returns to homepage
-   */
+  * Send verification token to a user, again, for example if it's stuck in spam or wathever else event. Probably needs throttling TODO
+  * @param  Request $request
+  * @param  Int  $id      User id
+  * @return Flash message and returns to homepage
+  */
   public function sendVerificationAgain(Request $request, $id)
   {
-      $user = \App\User::findOrFail($id);
-      if ($user->verified == 0)
-      {
-        $mailer = new AppMailer;
-        $mailer->sendEmailConfirmationTo($user);
-        $request->session()->flash('message', trans('messages.invitation_sent_again'));
-        return redirect()->action('UserController@show', [$user->id]);
-      }
+    $user = \App\User::findOrFail($id);
+    if ($user->verified == 0)
+    {
+      $mailer = new AppMailer;
+      $mailer->sendEmailConfirmationTo($user);
+      $request->session()->flash('message', trans('messages.invitation_sent_again'));
+      return redirect()->action('UserController@show', [$user->id]);
+    }
   }
 
   /**
