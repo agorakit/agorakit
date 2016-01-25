@@ -14,9 +14,9 @@ class Comment extends Model {
 
 
 	protected $rules = [
-		 'body' => 'required|min:5',
-		 'user_id' => 'required|exists:users,id'
- ];
+		'body' => 'required|min:5',
+		'user_id' => 'required|exists:users,id'
+	];
 
 
 	protected $fillable = ['body'];
@@ -26,10 +26,7 @@ class Comment extends Model {
 	protected $touches = ['discussion'];
 
 	protected $casts = [ 'user_id' => 'integer' ];
-
-
-	public $read = false;
-
+	protected $dontKeepRevisionOf = ['vote'];
 
 	public function user()
 	{
@@ -43,9 +40,9 @@ class Comment extends Model {
 	}
 
 
-  public function discussion()
-    {
-        return $this->belongsTo('App\Discussion');
-    }
+	public function discussion()
+	{
+		return $this->belongsTo('App\Discussion');
+	}
 
 }

@@ -153,7 +153,7 @@ class ActionController extends Controller
     $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop'));
 
 
-    $action->user()->associate($request->user());
+    //$action->user()->associate($request->user()); // we use revisionable to manage who changed what, so we keep the original author
 
     if ( $action->isInvalid())
     {
@@ -177,4 +177,18 @@ class ActionController extends Controller
   public function destroy(Group $group, Action $action)
   {
   }
+
+
+  /**
+  * Show the revision history of the discussion
+  */
+  public function history(Group $group, Action $action)
+  {
+    return view('actions.history')
+    ->with('group', $group)
+    ->with('action', $action)
+    ->with('tab', 'action');
+  }
+
+
 }

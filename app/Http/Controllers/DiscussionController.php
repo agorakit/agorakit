@@ -141,7 +141,7 @@ class DiscussionController extends Controller
   {
     $discussion->name = $request->input('name');
     $discussion->body = $request->input('body');
-    $discussion->user()->associate(Auth::user());
+    //$discussion->user()->associate(Auth::user()); // we use revisionable to manage who changed what, so we keep the original author
     $discussion->save();
 
     $request->session()->flash('message', trans('messages.ressource_updated_successfully'));

@@ -11,7 +11,7 @@
       {{ $action->name }} <a href="{{ action('ActionController@edit', [$group->id, $action->id]) }}" class="btn btn-primary btn-xs">{{trans('messages.edit')}}</a>
     </h2>
 
-    <div class="meta">{{trans('messages.started_by')}} <span class="user">{{ $action->user->name}}</span>, in {{ $action->group->name}} {{ $action->created_at->diffForHumans()}} </div>
+    <div class="meta">{{trans('messages.started_by')}} <span class="user"><a href="{{ action('UserController@show', [$action->user->id]) }}">{{ $action->user->name}}</a></span>, {{trans('messages.in')}} <a href="{{ action('ActionController@index', [$group->id]) }}">{{ $action->group->name}}</a> {{ $action->created_at->diffForHumans()}} </div>
 
     <h4>{{trans('messages.what')}} ?</h4>
 
@@ -25,6 +25,10 @@
 
     <h4>{{trans('messages.where')}} ?</h4>
     <p>{{$action->location}}</p>
+
+    @if ($action->revisionHistory->count() > 0)
+    <a class="btn btn-default btn-xs" href="{{action('ActionController@history', [$group->id, $action->id])}}"><i class="fa fa-history"></i> {{trans('messages.show_history')}}</a>
+    @endif
 
   </div>
 

@@ -12,7 +12,8 @@ class Action extends Model
 
 
   use ValidatingTrait;
-  
+  use \Venturecraft\Revisionable\RevisionableTrait;
+
   protected $fillable = ['id']; // neede for actions import
 
 

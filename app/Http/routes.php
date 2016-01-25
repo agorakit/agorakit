@@ -142,8 +142,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('groups/{group}/discussions/{discussion}/edit', 'DiscussionController@edit');
     Route::post('groups/{group}/discussions/{discussion}', 'DiscussionController@update');
 
-    // group history
-    Route::get('groups/{group}/discussions/{discussion}/history', 'DiscussionController@history'); // TODO discussions history
+    // discussion history
+    Route::get('groups/{group}/discussions/{discussion}/history', 'DiscussionController@history');
 
 
     // Notification email test
@@ -174,6 +174,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('groups/{group}/actions/{action}', 'ActionController@show');
     Route::get('groups/{group}/actions/{action}/edit', 'ActionController@edit');
     Route::post('groups/{group}/actions/{action}', 'ActionController@update');
+
+    // action history
+    Route::get('groups/{group}/actions/{action}/history', 'ActionController@history');
 
 
     // Files
