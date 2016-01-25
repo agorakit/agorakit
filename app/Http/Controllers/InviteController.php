@@ -52,13 +52,27 @@ class InviteController extends Controller
 
     // for each invite email,
     foreach ($emails as $email) {
+
       // - check that the user has not been invited yet for this group
       $invitation_counter = \App\Invite::where('email', '=', $email)
       ->where('claimed_at', '=', null)
       ->where('group_id', '=', $group->id)
       ->count();
 
-      if ($invitation_counter > 0)
+      // check that the user is not already member of the group
+      $user_already_member = false;
+      $user = \App\User::where('email', $email)->first();
+      if ($user)
+      {
+        if ($user->isMemberOf($group))
+        {
+          $user_already_member = true;
+        }
+      }
+
+
+
+      if ($invitation_counter > 0 || $user_already_member)
       {
         $status_message .= trans('membership.user_already_invited').' : ' . $email .'<br/>';
       }
