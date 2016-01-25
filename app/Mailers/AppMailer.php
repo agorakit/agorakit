@@ -2,6 +2,7 @@
 namespace App\Mailers;
 use Mail;
 use App\User;
+use App\Group;
 use App\Helpers\QueryHelper;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
@@ -23,30 +24,25 @@ class AppMailer
       ->to($user->email, $user->name)
       ->subject('[' . env('APP_NAME') . '] ' . trans('messages.confirm_your_email'));
     });
-
   }
 
 
-  public function sendNotificationEmail($group_id, $user_id)
+  public function sendNotificationEmail(Group $group, User $user)
   {
-    $group = \App\Group::findOrFail($group_id);
-    $user = \App\User::findOrFail($user_id);
 
     if ($user->verified == 1)
     {
-
       // Establish timestamp for notifications from membership data (when was an email sent for the last time?)
+      $membership = \App\Membership::where('user_id', '=', $user->id)->where('group_id', "=", $group->id)->firstOrFail();
 
-      $membership = \App\Membership::where('user_id', '=', $user->id)
-      ->where('group_id', "=", $group->id)->firstOrFail();
+      $last_notification = $membership->notified_at;
 
       // find unread discussions since timestamp
       $discussions = QueryHelper::getUnreadDiscussionsSince($user->id, $group->id, $membership->notified_at);
 
 
       // find new files since timestamp
-      $files = \App\File::where('updated_at', '>', $membership->notified_at)
-      ->where('group_id', "=", $group->id)->get();
+      $files = \App\File::where('updated_at', '>', $membership->notified_at)->where('group_id', "=", $group->id)->get();
 
 
       // find new members since timestamp
@@ -67,10 +63,13 @@ class AppMailer
       $membership->save();
 
       // if we have anything, build the message and send
-      if (count($discussions) > 0 or count($files) > 0 or count($users) > 0 or ($actions_count) > 0)
+      // removed that : or count($users) > 0
+      // because we don't want to be notified just because there is a new member
+      if (count($discussions) > 0 or count($files) > 0  or ($actions_count) > 0)
       {
+
         Mail::send('emails.notification', ['user' => $user, 'group' => $group, 'membership' => $membership, 'discussions' => $discussions,
-        'files' => $files, 'users' => $users, 'actions' => $actions], function ($message) use($user, $group) {
+        'files' => $files, 'users' => $users, 'actions' => $actions, 'last_notification' => $last_notification], function ($message) use($user, $group) {
           $message->from(env('MAIL_FROM', 'noreply@example.com'), env('APP_NAME', 'Laravel'))
           ->to($user->email)
           ->subject('[' . env('APP_NAME') . '] ' . 'Des nouvelles du groupe "' . $group->name . '"');
@@ -80,12 +79,7 @@ class AppMailer
       }
 
       return false;
-
-
     }
-
-
   }
-
 
 }

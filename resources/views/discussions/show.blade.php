@@ -12,7 +12,7 @@
     </h2>
 
 
-    <div class="meta">{{trans('messages.started_by')}} <span class="user">{{ $discussion->user->name}}</span>, {{trans('messages.in')}} {{ $discussion->group->name}} {{ $discussion->created_at->diffForHumans()}} </div>
+    <div class="meta">{{trans('messages.started_by')}} <span class="user"><a href="{{ action('UserController@show', [$discussion->user->id]) }}">{{ $discussion->user->name}}</a></span>, {{trans('messages.in')}} {{ $discussion->group->name}} {{ $discussion->created_at->diffForHumans()}} </div>
     <div class="body">
       {!! filter($discussion->body) !!}
 

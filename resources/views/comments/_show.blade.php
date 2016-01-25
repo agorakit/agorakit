@@ -1,7 +1,7 @@
+<a name="comment_{{$comment->id}}"></a>
 
 <div class="comment @if ($comment_key + 2 > $read_comments) unread @else read @endif"
   @if ($comment_key + 2 == $read_comments) id="unread" @endif>
-
 
   <div class="avatar"><img src="{{$comment->user->avatar()}}"/></div>
 

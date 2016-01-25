@@ -50,7 +50,7 @@
 
         </tbody>
       </table>
-  
+
 
 
 
@@ -68,9 +68,6 @@
         <tbody>
           @foreach( $all_actions as $action )
           <tr>
-
-
-
             <td class="content">
               <a href="{{ action('ActionController@show', [$action->group_id, $action->id]) }}">
                 <span class="name">{{ $action->name }}</span>
@@ -87,7 +84,6 @@
             <td class="content">
               {{$action->location}}
             </td>
-
           </tr>
           @endforeach
 

@@ -3,7 +3,7 @@
 @section('content')
 
 
-<p>Bonjour {{$user->name}},</p>
+<strong>Bonjour {{$user->name}},</strong>
 
 <p>
   Voici les dernières nouvelles du groupe "<a href="{{action('GroupController@show', $group->id)}}">{{$group->name}}</a>"
@@ -26,41 +26,51 @@
 @endif
 
 
+@if ($discussions->count() > 0)
 <h2>Dernières discussion et mises à jour</h2>
-@forelse($discussions as $discussion)
-<strong><a href="{{action('DiscussionController@show', [$group->id, $discussion->id])}}">{{$discussion->name}} </a></strong>
+@foreach($discussions as $discussion)
+<h3><a href="{{action('DiscussionController@show', [$group->id, $discussion->id])}}">{{$discussion->name}} </a></h3>
 <p>
-  {{ summary($discussion->body) }}
+  {{ summary($discussion->body, 1000) }}
 </p>
-<br/>
-@empty Rien de neuf depuis le dernier mail
-@endforelse
+
+@foreach ($discussion->comments as $comment)
+@if ($comment->created_at > $last_notification)
+<p style="font-size: 0.8em">
+  <a href="{{ action('DiscussionController@show', [$group->id, $discussion->id]) }}#comment_{{$comment->id}}">{{$comment->user->name}}</a> ({{$comment->created_at->diffForHumans()}}):
+  {{ summary($comment->body, 800) }} ...
+</p>
+@endif
+@endforeach
+
+<hr/>
+@endforeach
+@endif
 
 
 
 
 
-
-
+@if ($users->count() > 0)
 <h2>Nouveaux membres</h2>
-@forelse($users as $user)
+@foreach($users as $user)
 <a href="{{action('UserController@show', $user->id)}}">{{$user->name}}</a>
 <br/>
-@empty Personne depuis le dernier mail
-@endforelse
+@endforeach
+@endif
 
-
+@if ($files->count() > 0)
 <h2>Nouveaux fichiers</h2>
-@forelse($files as $file)
-<a href="{{action('FileController@show', [$group->id, $file->id])}}">{{$file->name}}</a>
+@foreach($files as $file)
+<a href="{{action('FileController@show', [$group->id, $file->id])}}"><img src="{{action('FileController@thumbnail', [$group->id, $file->id])}}" style="width: 24px; height:24px"/>{{$file->name}}</a>
 <br/>
-@empty Rien de neuf depuis le dernier mail
-@endforelse
+@endforeach
+@endif
 
 
 
 
-<p style="font-size: 0.8em">
+<p style="margin-top: 5em; font-size: 0.8em">
   Vous recevez cet email car lors de votre inscription au groupe "{{$group->name}}", vous avez demandé à être tenu au courant de ses activités.
   <br/>
   Si vous ne souhaitez plus recevoir de message ou changer vos options d'abonnement, <a href="{{action('MembershipController@settings', $group->id)}}">cliquez ici</a>.

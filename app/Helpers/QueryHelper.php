@@ -6,6 +6,7 @@ use Auth;
 use DB;
 use Carbon\Carbon;
 
+
 /**
 * Here we have various queries that might be used by different parts of the applications.
 * I'm proud of the two firsts one already :-)
@@ -24,8 +25,8 @@ class QueryHelper
   public static function getUserGroups()
   {
 
-    $groups = DB::select('
-    select id, name from groups where groups.id in
+    $groups = \App\Group::hydrateRaw('
+    select * from groups where groups.id in
     (select group_id from membership where user_id = ? and membership.membership >= 10) order by name
     ', [Auth::user()->id] );
 
@@ -53,7 +54,7 @@ class QueryHelper
     if ($count < 0) {
       $count = 0; // it might happens, it's bad, but not too bad so we fail silently
     }
-    
+
     return $count;
   }
 
@@ -62,7 +63,6 @@ class QueryHelper
   */
   public static function  getUnreadDiscussions()
   {
-
     $discussions = DB::select('select * from
     (
     select *, (select read_comments from user_read_discussion where discussion_id = discussions.id and user_id = ?) as read_comments
@@ -92,7 +92,7 @@ class QueryHelper
   public static function  getUnreadDiscussionsSince($user_id, $group_id, $since)
   {
 
-    $discussions = DB::select('select * from
+    $discussions = \App\Discussion::hydrateRaw('select * from
     (
     select *,
     (select read_comments from user_read_discussion where discussion_id = discussions.id and user_id = :user_id) as read_comments
@@ -115,13 +115,12 @@ class QueryHelper
   public static function  getNewMembersSince($user_id, $group_id, $since)
   {
 
-    $members = DB::select('select * from users where id in
+    $users = \App\User::hydrateRaw('select * from users where id in
     (select user_id from membership where group_id = :group_id and created_at > :since and membership >=10 and user_id <> :user_id)
 
     ', ['user_id' => $user_id, 'group_id' => $group_id, 'since' => $since]);
 
-
-    return $members;
+    return $users;
 
   }
 

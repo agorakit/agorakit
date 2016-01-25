@@ -44,15 +44,14 @@ class SendNotifications extends Command
     $notifications = QueryHelper::getNotificationsToSend();
     if (count($notifications > 0))
     {
-
       foreach ($notifications as $notification)
       {
         $user = \App\User::find($notification->user_id);
         $group = \App\Group::find($notification->group_id);
 
-        $this->info('Sending notification to user:' . $notification->user_id . ' (' . $user->email .  ')'  .  ' for group:' . $notification->group_id . ' (' . $group->name .  ')' );
+        $this->info('Checking if there is something to send to user:' . $notification->user_id . ' (' . $user->email .  ')'  .  ' for group:' . $notification->group_id . ' (' . $group->name .  ')' );
         $mailer = new AppMailer();
-        if ($mailer->sendNotificationEmail($notification->group_id, $notification->user_id))
+        if ($mailer->sendNotificationEmail($group, $user))
         {
           $this->info('Message sent');
         }
@@ -62,7 +61,6 @@ class SendNotifications extends Command
         }
       }
     }
-
   }
 
 
