@@ -49,15 +49,18 @@ class SendNotifications extends Command
         $user = \App\User::find($notification->user_id);
         $group = \App\Group::find($notification->group_id);
 
-        $this->info('Checking if there is something to send to user:' . $notification->user_id . ' (' . $user->email .  ')'  .  ' for group:' . $notification->group_id . ' (' . $group->name .  ')' );
-        $mailer = new AppMailer();
-        if ($mailer->sendNotificationEmail($group, $user))
+        if ($user && $group)
         {
-          $this->info('Message sent');
-        }
-        else
-        {
-          $this->info('Nothing sent');
+          $this->info('Checking if there is something to send to user:' . $user->id . ' (' . $user->email .  ')'  .  ' for group:' . $group->id . ' (' . $group->name .  ')' );
+          $mailer = new AppMailer();
+          if ($mailer->sendNotificationEmail($group, $user))
+          {
+            $this->info('Message sent');
+          }
+          else
+          {
+            $this->info('Nothing sent');
+          }
         }
       }
     }
