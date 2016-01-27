@@ -1,6 +1,6 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/01/25 21:50:09 
+ Generated via "php artisan localization:missing" at 2016/01/27 21:54:48 
 *************************************************************************/
 
 return array (
@@ -16,10 +16,10 @@ return array (
   'latest_actions' => 'Latest actions',
   'latest_discussions' => 'Latest discussions',
   'latest_files' => 'Latest files',
+  'leave' => 'Leave',
   'name' => 'Group name',
-  'no_group_joined_yet_act_now' => 'no_group_joined_yet_act_now',
   'no_group_yet' => 'No group yet',
   'visit' => 'Visit',
   //================================== Obsolete strings ==================================//
-  'leave' => 'Leave',
+  'no_group_joined_yet_act_now' => 'no_group_joined_yet_act_now',
 );

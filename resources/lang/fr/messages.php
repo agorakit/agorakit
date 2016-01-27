@@ -1,12 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/01/25 21:50:09
+ Generated via "php artisan localization:missing" at 2016/01/27 21:54:48
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/partials/usertab.blade.php
-  'user_profile' => 'Profil utilisateur',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/dashboard/homepage.blade.php
+  'all_groups' => 'Tous les groupes',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'actions' => 'Actions',
@@ -88,6 +88,7 @@ return array (
   'title' => 'Titre',
   'toggle_navigation' => 'Activer la navigation',
   'unread_discussions' => 'Discussions non lues',
+  'user_profile' => 'Profil utilisateur',
   'what' => 'Quoi',
   'when' => 'Quand',
   'where' => 'Où',

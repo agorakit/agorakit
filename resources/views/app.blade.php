@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
   <!-- mobilizator specific css-->
-  {!! Html::style('/css/all.css?v2') !!}
+  {!! Html::style('/css/all.css?v3') !!}
 
   <!-- Jquery -->
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -31,15 +31,18 @@
 
   @include('partials.nav')
 
-  <div class="container">
+  <div class="container nav-margin-top">
     @include('partials.errors')
 
     @yield('content')
+
+    <p style="font-size: 0.6em; text-align: center;">Propulsé par <a href="https://github.com/philippejadin/Mobilizator">Mobilizator</a></p>
   </div>
 
 
 
   @yield('footer')
+
 
 
 </body>

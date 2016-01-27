@@ -39,6 +39,12 @@ h1, h2, h3, h4, h5, h6
   margin: 0;
 }
 
+
+.nav-margin-top
+{
+  margin-top: 30px;
+}
+
 /***************** SHADOWS *****************/
 .page_header, .tab_content, .alert, .row .group
 {
@@ -116,11 +122,8 @@ background-color: rgb(242, 241, 239);
   overflow: hidden;
 }
 .page_header {
-  /*order-bottom: 3px solid #DCDCDC;*/
-  margin-top: 2em;
   margin-bottom: 1em;
   background-color: white;
-  /*padding: 0.5em 2em 1em 2em;*/
   padding: 2%;
 }
 .page_header h1 {

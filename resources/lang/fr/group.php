@@ -1,6 +1,6 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/01/25 21:50:09 
+ Generated via "php artisan localization:missing" at 2016/01/27 21:54:48 
 *************************************************************************/
 
 return array (
@@ -16,10 +16,10 @@ return array (
   'latest_actions' => 'Prochaines actions',
   'latest_discussions' => 'Discussions récentes',
   'latest_files' => 'Fichiers récents',
+  'leave' => 'Quitter',
   'name' => 'Nom du groupe',
-  'no_group_joined_yet_act_now' => 'Vous ne faites pas encore partie d\'un groupe, rejoignez en un :-)',
   'no_group_yet' => 'Il n\'y a pas encore de groupe sur ce serveur. Allez-y !',
   'visit' => 'Visiter',
   //================================== Obsolete strings ==================================//
-  'leave' => 'Quitter',
+  'no_group_joined_yet_act_now' => 'Vous ne faites pas encore partie d\'un groupe, rejoignez en un :-)',
 );

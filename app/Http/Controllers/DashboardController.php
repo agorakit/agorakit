@@ -23,29 +23,30 @@ class DashboardController extends Controller
   {
     if (Auth::check())
     {
-      $groups = \App\Group::with('membership')->orderBy('name')->paginate(50);
       $my_groups = Auth::user()->groups()->orderBy('name')->paginate(50);
-
-      $all_discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group')->orderBy('updated_at', 'desc')->paginate(10);
-      $all_actions = \App\Action::with('user', 'group')->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->paginate(10);
-
-
-
-      return view('dashboard.homepage')
-      ->with('groups', $groups)
-      ->with('my_groups', $my_groups)
-      ->with('all_discussions', $all_discussions)
-      ->with('all_actions', $all_actions);
+      $groups = \App\Group::with('membership')->orderBy('name')->paginate(50);
+      $all_discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group')->orderBy('updated_at', 'desc')->paginate(25);
+      $all_actions = \App\Action::with('user', 'group')->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->paginate(25);
     }
     else
     {
       $groups = \App\Group::orderBy('name')->paginate(50);
-      return view('dashboard.homepage')
-      ->with('groups', $groups);
+      $all_discussions = \App\Discussion::with('user', 'group')->orderBy('updated_at', 'desc')->paginate(10);
+      $all_actions = \App\Action::with('user', 'group')->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->paginate(10);
+      $my_groups = false;
     }
 
 
+
+    return view('dashboard.homepage')
+    ->with('groups', $groups)
+    ->with('my_groups', $my_groups)
+    ->with('all_discussions', $all_discussions)
+    ->with('all_actions', $all_actions);
   }
+
+
+
 
 
 
