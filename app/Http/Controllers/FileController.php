@@ -150,7 +150,8 @@ class FileController extends Controller
     if (Storage::exists($file->path)) {
       //return response()->download($file->path, $file->original_filename);
       return (new Response(Storage::get($file->path), 200))
-      ->header('Content-Type', $file->mime); // TODO add filename header somehow
+      ->header('Content-Type', $file->mime)
+      ->header('Content-Disposition', 'inline; filename="' . $file->original_filename . '"');  // TODO add filename header somehow
     } else {
       abort(404, 'File not found in storage at ' . $file->path);
     }
