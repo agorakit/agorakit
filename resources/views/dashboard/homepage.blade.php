@@ -131,9 +131,9 @@
 
           <h1>{{ trans('messages.my_groups') }}</h1>
 
-
+          <div class="row">
           @forelse( $my_groups as $group )
-            <div class="row">
+
               <div class="col-xs-6 col-md-3">
                 <div class="thumbnail group">
                   <a href="{{ action('GroupController@show', $group->id) }}">
@@ -157,11 +157,11 @@
                     </div>
                   </div>
                 </div>
-              </div>
+
             @empty
               <p>{{trans('group.no_group_joined_yet')}}</p>
             @endforelse
-
+            </div>
 
           </div>
         @endif
