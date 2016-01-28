@@ -1,16 +1,17 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/01/27 21:54:48
+ Generated via "php artisan localization:missing" at 2016/01/28 11:33:32
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/dashboard/homepage.blade.php
-  'all_groups' => 'Tous les groupes',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/partials/grouptab.blade.php
+  'group_home' => 'A propos de ce groupe',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'actions' => 'Actions',
   'agenda' => 'Agenda',
+  'all_groups' => 'Tous les groupes',
   'back_to' => 'Retour à',
   'begins' => 'Début',
   'cancel' => 'J\'ai changé d\'avis, annuler',
@@ -40,7 +41,6 @@ return array (
   'forgotten_password' => 'Mot de passe oublié',
   'groups' => 'Groupes',
   'history' => 'Historique des modifications',
-  'home' => 'Accueil',
   'howdy' => 'Oups',
   'i_changed_my_mind' => 'J\'ai changé d\'avis, je ne veux pas quitter ce groupe',
   'in' => 'dans',
@@ -101,6 +101,7 @@ return array (
   'group' => 'Groupe',
   'groups_list' => 'Liste des groupes',
   'hello' => 'Bonjour',
+  'home' => 'Accueil',
   'not_a_member' => 'Vous ne faites pas partie de ce groupe',
   'not_logged_in' => 'Vous n\'êtes pas connecté(e). Merci de vous connecter ou de vous créer un compte afin de poursuivre',
   'please_confirm_your_email' => 'Veuillez vérifier votre adresse mail',

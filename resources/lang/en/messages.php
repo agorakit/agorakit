@@ -1,16 +1,17 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/01/27 21:54:48 
+ Generated via "php artisan localization:missing" at 2016/01/28 11:33:32 
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/dashboard/homepage.blade.php
-  'all_groups' => 'TODO: all_groups',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/partials/grouptab.blade.php
+  'group_home' => 'TODO: group_home',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'a_message_for_you',
   'actions' => 'Actions',
   'agenda' => 'Agenda',
+  'all_groups' => 'TODO: all_groups',
   'back_to' => 'Back to',
   'begins' => 'Begins',
   'cancel' => 'I changed my mind, cancel',
@@ -40,7 +41,6 @@ return array (
   'forgotten_password' => 'Forgotten password',
   'groups' => 'Groups',
   'history' => 'history',
-  'home' => 'Home',
   'howdy' => 'Whoops!',
   'i_changed_my_mind' => 'I changed my mind, I don\'t want to leave this group',
   'in' => 'in',
@@ -100,6 +100,7 @@ return array (
   'group' => 'Group',
   'groups_list' => 'Groups list',
   'hello' => 'Hello',
+  'home' => 'Home',
   'please_confirm_your_email' => 'Please confirm your email',
   'users' => 'Users',
   'your_password_reset_link' => 'Your password reset link',

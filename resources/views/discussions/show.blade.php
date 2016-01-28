@@ -34,6 +34,7 @@
 
 
 
+
   <div class="comments">
     @foreach ($discussion->comments as $comment_key => $comment)
     @include('comments._show')

@@ -49,7 +49,7 @@ $(document).ready(function() {
 
 
 <div class="page_header">
-  <h1>{{ trans('messages.agenda') }}</a></h1>
+  <h1><a href="{{ action('DashboardController@index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.agenda') }}</h1>
   <p>Si vous souhaitez ajouter des événements, rendez vous dans l'agenda d'un groupe précis</p>
 </div>
 
