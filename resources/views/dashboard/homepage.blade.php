@@ -3,7 +3,7 @@
 @section('content')
 
   <div class="page_header">
-    <h1><a href="{{ action('DashboardController@index') }}"><i class="fa fa-home"></i></a>
+    <h1><i class="fa fa-home"></i>
       {{Config::get('mobilizator.name')}}
     </h1>
   </div>

@@ -7,6 +7,7 @@ use App\Action;
 use App\Group;
 use Carbon\Carbon;
 use Auth;
+use Gate;
 
 class ActionController extends Controller
 {
@@ -167,16 +168,56 @@ class ActionController extends Controller
     return redirect()->action('ActionController@show', [$action->group->id, $action->id]);
   }
 
+
+
+
   /**
   * Remove the specified resource from storage.
   *
   * @param int $id
   *
-  * @return Response
+  * @return \Illuminate\Http\Response
   */
-  public function destroy(Group $group, Action $action)
+  public function destroyConfirm(Request $request, Group $group, Action $action)
   {
+
+    if (Gate::allows('delete', $action))
+    {
+      return view('actions.delete')
+      ->with('action', $action)
+      ->with('group', $group)
+      ->with('tab', 'discussion');
+    }
+    else
+    {
+      abort(403);
+    }
+
   }
+
+
+
+  /**
+  * Remove the specified resource from storage.
+  *
+  * @param int $id
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function destroy(Request $request, Group $group, Action $action)
+  {
+    if (Gate::allows('delete', $action))
+    {
+      $action->delete();
+      $request->session()->flash('message', trans('messages.ressource_deleted_successfully'));
+      return redirect()->action('ActionController@index', [$group->id]);
+    }
+    else
+    {
+      abort(403);
+    }
+  }
+
 
 
   /**

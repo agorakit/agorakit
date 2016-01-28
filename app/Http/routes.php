@@ -175,8 +175,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('groups/{group}/actions/{action}/edit', 'ActionController@edit');
     Route::post('groups/{group}/actions/{action}', 'ActionController@update');
 
-    // action history
     Route::get('groups/{group}/actions/{action}/history', 'ActionController@history');
+
+    Route::get('groups/{group}/actions/{action}/delete', 'ActionController@destroyConfirm');
+    Route::delete('groups/{group}/actions/{action}/delete', 'ActionController@destroy');
 
 
     // Files
