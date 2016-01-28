@@ -1,12 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/01/28 11:33:32
+ Generated via "php artisan localization:missing" at 2016/01/28 14:39:01
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/partials/grouptab.blade.php
-  'group_home' => 'A propos de ce groupe',
+  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/Auth/PasswordController.php
+  'reset_password_email_subject' => 'Changer votre mot de passe',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'actions' => 'Actions',
@@ -39,6 +39,7 @@ return array (
   'files' => 'Fichiers',
   'files_in_this_group' => 'Fichiers de ce groupe',
   'forgotten_password' => 'Mot de passe oublié',
+  'group_home' => 'A propos de ce groupe',
   'groups' => 'Groupes',
   'history' => 'Historique des modifications',
   'howdy' => 'Oups',

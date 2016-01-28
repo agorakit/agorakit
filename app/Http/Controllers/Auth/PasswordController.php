@@ -30,6 +30,6 @@ class PasswordController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
-        $this->subject = trans('messages.reset_password_email_subject');
+        $this->subject = '[' . env('APP_NAME') . '] ' . trans('messages.reset_password_email_subject');
     }
 }
