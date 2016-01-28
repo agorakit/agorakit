@@ -1,12 +1,9 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/01/28 14:39:01
+ Generated via "php artisan localization:missing" at 2016/01/28 14:47:28 
 *************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/Auth/PasswordController.php
-  'reset_password_email_subject' => 'Changer votre mot de passe',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'actions' => 'Actions',
@@ -72,6 +69,7 @@ return array (
   'registration_time' => 'Date d\'enregistrement',
   'remember_me' => 'Se souvenir de moi',
   'reply' => 'Répondre',
+  'reset_password_email_subject' => 'Changer votre mot de passe',
   'ressource_created_successfully' => 'Contenu créé avec succès',
   'ressource_deleted_successfully' => 'Ce contenu a bien été supprimé',
   'ressource_updated_successfully' => 'Contenu mis à jour avec succès',

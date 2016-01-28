@@ -1,9 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/01/28 14:39:01 
+ Generated via "php artisan localization:missing" at 2016/01/28 14:47:28
 *************************************************************************/
 
 return array (
+  //============================== New strings to translate ==============================//
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/dashboard/homepage.blade.php
+  'no_group_joined_yet' => 'Vous n\'avez pas encore rejoint de groupe, rendez-vous dans l\'onglet "Tous les groupes" afin de voir les groupes existants et d\'en rejoindre.',
   //==================================== Translations ====================================//
   'about_this_group' => 'A propos de ce groupe',
   'cover' => 'Image de présentation',

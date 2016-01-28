@@ -39,11 +39,12 @@
             <li><a href="{{ action('DashboardController@index')}}">{{ trans('membership.not_subscribed_to_group_yet') }}</a></li>
             @endforelse
 
+            <!--
             <li role="separator" class="divider"></li>
             <li><a href="{{ action('GroupController@create') }}">
               <i class="fa fa-bolt"></i>
               {{ trans('group.create_a_group_button') }}</a> </li>
-
+            -->
 
             </ul>
           </li>
