@@ -30,7 +30,7 @@
 
   <body>
 
-  <div class="body" style="max-width: 600px; padding: 3%; background-color: white;border: 0;border-bottom: 3px solid #DCDCDC;">
+  <div class="body" style="max-width: 600px;">
 
       @yield('content')
 

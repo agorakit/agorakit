@@ -15,9 +15,7 @@
 <p>{!! filter($group->body) !!}</p>
 
 
-<div class="button">
-<a  href="{{action('InviteController@inviteConfirm', [$group->id, $invite->token]) }}">Accepter l'invitation &rarr;</a>
-</div>
+@include('emails.button', ['url' => action('InviteController@inviteConfirm', [$group->id, $invite->token]), 'label' => 'Accepter l\'invitation'])
 
 <p style="font-size: 0.8em">Si vous ne souhaitez pas rejoindre ce groupe, ne faites rien. Vous ne recevrez pas d'invitations suplémentaires à participer à ce groupe.</p>
 
