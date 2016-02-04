@@ -25,6 +25,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-      $schedule->command('notifications:send')->everyFiveMinutes();
+      $schedule->command('notifications:send')->everyMinute()->appendOutputTo(storage_path() . '/logs/notifications.log');
     }
 }
