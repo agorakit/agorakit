@@ -52,7 +52,7 @@
 
 
 @if ($users->count() > 0)
-<h2>Nouveaux membres</h2>
+<h2>Nouveaux participants</h2>
 @foreach($users as $user)
 <a href="{{action('UserController@show', $user->id)}}">{{$user->name}}</a>
 <br/>

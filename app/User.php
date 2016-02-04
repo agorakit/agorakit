@@ -28,6 +28,10 @@ class User extends Authenticatable
     'password', 'remember_token',
   ];
 
+  protected $casts = [
+    'preferences' => 'array',
+  ];
+
 
   protected $rules = [
     'name' => 'required|unique:users',
@@ -82,9 +86,35 @@ class User extends Authenticatable
     {
       return true;
     }
-
     return false;
+  }
 
+  /**
+  * Returns the current preference $key for the user, $default if not set
+  */
+  public function getPreference($key, $default = false)
+  {
+    $preferences = $this->preferences;
+    if (isset($preferences[$key]))
+    {
+      return $preferences[$key];
+    }
+    else
+    {
+      return $default;
+    }
+  }
+
+  /**
+  * Set the preference $key to $value for the user
+  * No validation is made on this layer, preferences are stored in the json text field of the DB
+  */
+  public function setPreference($key, $value)
+  {
+    $preferences = $this->preferences;
+    $preferences[$key] = $value;
+    $this->preferences = $preferences;
+    return $this->save();
   }
 
 

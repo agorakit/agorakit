@@ -50,55 +50,9 @@
         <h1>{{ trans('messages.latest_discussions') }}</h1>
 
 
-        <!-- testing various toggles -->
-        <div class="btn-group btn-group-sm" role="group" aria-label="...">
-          <a type="button" role="button" class="btn btn-primary" disabled="disabled">Toutes les discussions</a>
-          <a type="button"  role="button" class="btn btn-default">Uniquement les discussions de mes groupes</a>
-        </div>
 
-        <br/>
-        <br/>
+      Afficher uniquement les discussions de mes groupes
 
-        <label class="radio-inline">
-          <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Toutes les discussions
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Uniquement les discussions de mes groupes
-        </label>
-
-        <br/>
-        <br/>
-
-
-        <!-- Single button -->
-        <div class="btn-group">
-          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Afficher... <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu">
-            <li><a href="#">Toutes les discussions</a></li>
-            <li><a href="#">Uniquement les discussions de mes groupes</a></li>
-          </ul>
-        </div>
-
-        <br/>
-        <br/>
-
-
-        <button type="button" class="btn btn-primary btn-sm active">Toutes les discussions</button>
-        <button type="button" class="btn btn-default btn-sm">Uniquement les discussions de mes groupes</button>
-
-        <br/>
-        <br/>
-
-        <div class="checkbox">
-    <label>
-      <input type="checkbox"> Afficher uniquement les discussions de mes groupes
-    </label>
-  </div>
-
-        <br/>
-        <br/>
 
 
         <table class="table table-hover special">
