@@ -1,7 +1,11 @@
 <div class="page_header">
   <h1>
     <a href="{{ action('DashboardController@index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
-    {{ $group->name }}
+    @if (isset($tab) && ($tab <> 'home'))
+      <a href="{{ action('GroupController@show', $group->id) }}">{{ $group->name }}</a>
+    @else
+      {{ $group->name }}
+    @endif
   </h1>
 </div>
 

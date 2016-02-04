@@ -17,10 +17,7 @@
   <!-- mobilizator specific css-->
   {!! Html::style('/css/all.css?v3') !!}
 
-  <!-- Jquery -->
-  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
 
   @yield('head')
 </head>
@@ -38,8 +35,16 @@
   </div>
 
 
+  <!-- Jquery -->
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+  {!! Html::script('/packages/js-cookie/js.cookie.js') !!}
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
   @yield('footer')
+
 
 
 </body>
