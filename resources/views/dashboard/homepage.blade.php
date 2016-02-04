@@ -50,11 +50,6 @@
         <h1>{{ trans('messages.latest_discussions') }}</h1>
 
 
-
-      Afficher uniquement les discussions de mes groupes
-
-
-
         <table class="table table-hover special">
           <thead>
             <tr>
