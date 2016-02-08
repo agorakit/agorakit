@@ -49,6 +49,15 @@
       <div role="tabpanel" class="tab-pane active" id="discussions">
         <h1>{{ trans('messages.latest_discussions') }}</h1>
 
+        @if (Auth::check() && Auth::user()->getPreference('show', 'all') == 'all')
+          Vous voyez toutes les discussions et actions de tous les groupes.
+          <a class="btn btn-default btn-sm" href="{{action('DashboardController@index')}}?show=my">Afficher uniquement mes groupes</a>
+        @endif
+
+        @if (Auth::check() && Auth::user()->getPreference('show', 'all') == 'my')
+          Vous ne voyez que les discussions et actions de vos groupes
+          <a class="btn btn-default btn-sm" href="{{action('DashboardController@index')}}?show=all">Afficher tout</a>
+        @endif
 
         <table class="table table-hover special">
           <thead>
@@ -92,6 +101,17 @@
 
       <div role="tabpanel" class="tab-pane" id="actions">
         <h1>{{ trans('group.latest_actions') }}</h1>
+
+        @if (Auth::check() && Auth::user()->getPreference('show', 'all') == 'all')
+          Vous voyez toutes les discussions et actions de tous les groupes.
+          <a class="btn btn-default btn-sm" href="{{action('DashboardController@index')}}?show=my">Afficher uniquement mes groupes</a>
+        @endif
+
+        @if (Auth::check() && Auth::user()->getPreference('show', 'all') == 'my')
+          Vous ne voyez que les discussions et actions de vos groupes
+          <a class="btn btn-default btn-sm" href="{{action('DashboardController@index')}}?show=all">Afficher tout</a>
+        @endif
+
         <table class="table table-hover special">
           <thead>
             <tr>

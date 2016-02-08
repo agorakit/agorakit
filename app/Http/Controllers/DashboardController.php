@@ -23,10 +23,46 @@ class DashboardController extends Controller
   {
     if (Auth::check())
     {
-      $my_groups = Auth::user()->groups()->orderBy('name')->paginate(50);
-      $groups = \App\Group::with('membership')->orderBy('name')->paginate(50);
-      $all_discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group')->orderBy('updated_at', 'desc')->paginate(25);
-      $all_actions = \App\Action::with('user', 'group')->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->paginate(25);
+
+      // handle show all stuff or only from "my group"
+      if ($request->input('show') == 'all')
+      {
+        Auth::user()->setPreference('show', 'all');
+      }
+      if ($request->input('show') == 'my')
+      {
+        Auth::user()->setPreference('show', 'my');
+      }
+
+      if (Auth::user()->getPreference('show', 'all') == 'all')
+      { // we show everything
+        $my_groups = Auth::user()->groups()->orderBy('name')->paginate(50);
+        $groups = \App\Group::with('membership')->orderBy('name')->paginate(50);
+        $all_discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group')->orderBy('updated_at', 'desc')->paginate(25);
+        $all_actions = \App\Action::with('user', 'group')->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->paginate(25);
+      }
+      else // we show only content from the user's groups
+      {
+        $my_groups = Auth::user()->groups()->orderBy('name')->get();
+
+        $my_groups_id = false;
+        // using this array we can adjust the quries after to only include stuff the user has
+        // might be a good idea to find a clever way to build this array of groups id :
+        foreach ($my_groups as $the_group)
+        {
+          $my_groups_id[] = $the_group->id;
+        }
+
+        $groups = \App\Group::with('membership')->orderBy('name')->paginate(50);
+
+        $all_discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group')
+        ->whereIn('group_id', $my_groups_id)
+        ->orderBy('updated_at', 'desc')->paginate(25);
+
+        $all_actions = \App\Action::with('user', 'group')
+        ->whereIn('group_id', $my_groups_id)
+        ->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->paginate(25);
+      }
     }
     else
     {
