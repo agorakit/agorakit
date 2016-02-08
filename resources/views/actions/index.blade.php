@@ -63,6 +63,10 @@ $(document).ready(function() {
 
   <div id="calendar"></div>
 
+
+  <p><a href="{{action('IcalController@group', $group->id)}}">Téléchargez le calendrier de ce groupe au format iCal</a></p>
+
+
   <div id="fullCalModal" class="modal fade">
     <div class="modal-dialog">
       <div class="modal-content">

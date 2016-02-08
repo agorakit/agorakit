@@ -171,6 +171,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('groups/{group}/actions/create', 'ActionController@store');
     Route::get('groups/{group}/actions/json', 'ActionController@indexJson');
 
+    Route::get('groups/{group}/actions/ical', 'IcalController@group');
+
     Route::get('groups/{group}/actions/{action}', 'ActionController@show');
     Route::get('groups/{group}/actions/{action}/edit', 'ActionController@edit');
     Route::post('groups/{group}/actions/{action}', 'ActionController@update');
