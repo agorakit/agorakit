@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\User;
 use App\Discussion;
 use Watson\Validating\ValidatingTrait;
@@ -13,6 +14,7 @@ class Group extends Model
 {
   use ValidatingTrait;
   use \Venturecraft\Revisionable\RevisionableTrait;
+  use SoftDeletes;
 
   protected $rules = [
     'name' => 'required',

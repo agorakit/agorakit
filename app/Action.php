@@ -13,9 +13,9 @@ class Action extends Model
 
   use ValidatingTrait;
   use \Venturecraft\Revisionable\RevisionableTrait;
+  use SoftDeletes;
 
   protected $fillable = ['id']; // neede for actions import
-
 
   protected $rules = [
     'name' => 'required|min:5',
@@ -26,14 +26,9 @@ class Action extends Model
   ];
 
 
-
   protected $table = 'actions';
   public $timestamps = true;
-
-  use SoftDeletes;
-
   protected $dates = ['deleted_at', 'start', 'stop'];
-
   protected $casts = [ 'user_id' => 'integer' ];
 
 
