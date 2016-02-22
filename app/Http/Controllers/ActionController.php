@@ -68,7 +68,27 @@ class ActionController extends Controller
   */
   public function create(Request $request, Group $group)
   {
+    $action = new Action;
+
+    if ($request->get('start'))
+    {
+      $action->start = Carbon::createFromFormat('Y-m-d H:i', $request->get('start'));
+    }
+
+    if ($request->get('stop'))
+    {
+      $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->get('stop'));
+    }
+
+    if ($request->get('title'))
+    {
+      $action->name = $request->get('title');
+    }
+
+
+
     return view('actions.create')
+    ->with('action', $action)
     ->with('group', $group)
     ->with('tab', 'action');
   }

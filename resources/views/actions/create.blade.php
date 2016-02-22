@@ -13,7 +13,7 @@
   <h1>Créer une action</h1>
 
 
-  {!! Form::open(array('action' => ['ActionController@store', $group->id])) !!}
+  {!! Form::model($action, array('action' => ['ActionController@store', $group->id])) !!}
 
   @include('actions.form')
 

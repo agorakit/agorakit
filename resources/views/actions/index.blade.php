@@ -19,6 +19,23 @@ $(document).ready(function() {
       right: 'month,agendaWeek,agendaDay'
     },
 
+    selectable: true,
+		selectHelper: true,
+    select: function(start, end) {
+				var title = prompt('Titre de l\'action');
+				var eventData;
+				if (title) {
+					eventData = {
+						title: title,
+						start: start,
+						end: end
+					};
+					$('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+          window.location.href = "{{ action('ActionController@create', $group->id ) }}?start=" + encodeURIComponent(start.format('YYYY-MM-DD HH:mm')) + "&stop=" + encodeURIComponent(end.format('YYYY-MM-DD HH:mm')) + "&title=" + encodeURIComponent(title);
+				}
+        $('#calendar').fullCalendar('unselect');
+			},
+
     eventClick:  function(event, jsEvent, view) {
       $('#modalTitle').html(event.title);
       $('#modal-body').html(event.body);
