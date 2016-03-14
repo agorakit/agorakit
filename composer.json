@@ -15,7 +15,8 @@
         "intervention/image": "^2.3",
         "intervention/imagecache": "^2.3",
         "eluceo/ical": "^0.9.0",
-        "kwi/urllinker": "dev-master"
+        "kwi/urllinker": "dev-master",
+        "mcamara/laravel-localization": " 1.1.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -168,6 +168,7 @@ return [
     //Mews\Purifier\PurifierServiceProvider::class,
     //DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
     //Conner\Tagging\Providers\TaggingServiceProvider::class,
+    Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
 
 
   ],

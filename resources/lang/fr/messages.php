@@ -1,9 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/01/28 14:47:28 
+ Generated via "php artisan localization:missing" at 2016/03/14 21:47:42
 *************************************************************************/
 
 return array (
+  //============================== New strings to translate ==============================//
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/dashboard/homepage.blade.php
+  'presentation' => 'Présentation',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'actions' => 'Actions',
@@ -93,18 +96,21 @@ return array (
   'where' => 'Où',
   'your_groups' => 'Mes groupes',
   //================================== Obsolete strings ==================================//
-  'all_discussions' => 'Toutes les discussions sur ce serveurc',
-  'all_the_groups_welcome' => 'Vous trouverez ici tous les groupes disponibles sur ce serveur',
-  'close' => 'Fermer',
-  'confirm_your_email' => 'Vérifiez votre adresse email',
-  'group' => 'Groupe',
-  'groups_list' => 'Liste des groupes',
-  'hello' => 'Bonjour',
-  'home' => 'Accueil',
-  'not_a_member' => 'Vous ne faites pas partie de ce groupe',
-  'not_logged_in' => 'Vous n\'êtes pas connecté(e). Merci de vous connecter ou de vous créer un compte afin de poursuivre',
-  'please_confirm_your_email' => 'Veuillez vérifier votre adresse mail',
-  'unread_items' => 'Non lus',
-  'users' => 'Utilisateurs',
-  'your_password_reset_link' => 'Votre lien de changement de mot de passe',
+  'LLH:obsolete' =>
+  array (
+    'all_discussions' => 'Toutes les discussions sur ce serveurc',
+    'all_the_groups_welcome' => 'Vous trouverez ici tous les groupes disponibles sur ce serveur',
+    'close' => 'Fermer',
+    'confirm_your_email' => 'Vérifiez votre adresse email',
+    'group' => 'Groupe',
+    'groups_list' => 'Liste des groupes',
+    'hello' => 'Bonjour',
+    'home' => 'Accueil',
+    'not_a_member' => 'Vous ne faites pas partie de ce groupe',
+    'not_logged_in' => 'Vous n\'êtes pas connecté(e). Merci de vous connecter ou de vous créer un compte afin de poursuivre',
+    'please_confirm_your_email' => 'Veuillez vérifier votre adresse mail',
+    'unread_items' => 'Non lus',
+    'users' => 'Utilisateurs',
+    'your_password_reset_link' => 'Votre lien de changement de mot de passe',
+  ),
 );

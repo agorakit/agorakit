@@ -1,9 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/01/28 14:47:28 
+ Generated via "php artisan localization:missing" at 2016/03/14 21:47:42 
 *************************************************************************/
 
 return array (
+  //============================== New strings to translate ==============================//
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/dashboard/homepage.blade.php
+  'presentation' => 'TODO: presentation',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'a_message_for_you',
   'actions' => 'Actions',
@@ -93,14 +96,17 @@ return array (
   'where' => 'where',
   'your_groups' => 'Your groups',
   //================================== Obsolete strings ==================================//
-  'all_discussions' => 'all_discussions',
-  'all_the_groups_welcome' => 'Here are all the groups on this server.',
-  'close' => 'Close',
-  'group' => 'Group',
-  'groups_list' => 'Groups list',
-  'hello' => 'Hello',
-  'home' => 'Home',
-  'please_confirm_your_email' => 'Please confirm your email',
-  'users' => 'Users',
-  'your_password_reset_link' => 'Your password reset link',
+  'LLH:obsolete' => 
+  array (
+    'all_discussions' => 'all_discussions',
+    'all_the_groups_welcome' => 'Here are all the groups on this server.',
+    'close' => 'Close',
+    'group' => 'Group',
+    'groups_list' => 'Groups list',
+    'hello' => 'Hello',
+    'home' => 'Home',
+    'please_confirm_your_email' => 'Please confirm your email',
+    'users' => 'Users',
+    'your_password_reset_link' => 'Your password reset link',
+  ),
 );

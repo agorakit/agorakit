@@ -1,11 +1,14 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/01/28 14:47:28 
+ Generated via "php artisan localization:missing" at 2016/03/14 21:47:42 
 *************************************************************************/
 
 return array (
   //==================================== Translations ====================================//
   'intro' => 'intro',
   //================================== Obsolete strings ==================================//
-  'my_groups' => 'my_groups',
+  'LLH:obsolete' => 
+  array (
+    'my_groups' => 'my_groups',
+  ),
 );

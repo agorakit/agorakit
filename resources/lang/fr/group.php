@@ -1,12 +1,9 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/01/28 14:47:28
+ Generated via "php artisan localization:missing" at 2016/03/14 21:47:42 
 *************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/dashboard/homepage.blade.php
-  'no_group_joined_yet' => 'Vous n\'avez pas encore rejoint de groupe, rendez-vous dans l\'onglet "Tous les groupes" afin de voir les groupes existants et d\'en rejoindre.',
   //==================================== Translations ====================================//
   'about_this_group' => 'A propos de ce groupe',
   'cover' => 'Image de présentation',
@@ -21,8 +18,12 @@ return array (
   'latest_files' => 'Fichiers récents',
   'leave' => 'Quitter',
   'name' => 'Nom du groupe',
+  'no_group_joined_yet' => 'Vous n\'avez pas encore rejoint de groupe, rendez-vous dans l\'onglet "Tous les groupes" afin de voir les groupes existants et d\'en rejoindre.',
   'no_group_yet' => 'Il n\'y a pas encore de groupe sur ce serveur. Allez-y !',
   'visit' => 'Visiter',
   //================================== Obsolete strings ==================================//
-  'no_group_joined_yet_act_now' => 'Vous ne faites pas encore partie d\'un groupe, rejoignez en un :-)',
+  'LLH:obsolete' => 
+  array (
+    'no_group_joined_yet_act_now' => 'Vous ne faites pas encore partie d\'un groupe, rejoignez en un :-)',
+  ),
 );
