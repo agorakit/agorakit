@@ -1,12 +1,9 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/03/14 21:47:42 
+ Generated via "php artisan localization:missing" at 2016/03/14 22:46:51 
 *************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/dashboard/homepage.blade.php
-  'presentation' => 'TODO: presentation',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'a_message_for_you',
   'actions' => 'Actions',
@@ -67,6 +64,7 @@ return array (
   'or' => 'or',
   'password' => 'Password',
   'password_reset' => 'Password reset',
+  'presentation' => 'TODO: presentation',
   'profile' => 'TODO: profile',
   'register' => 'Register',
   'registration_time' => 'Registration time',

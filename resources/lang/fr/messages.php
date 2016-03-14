@@ -1,12 +1,9 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/03/14 21:47:42
+ Generated via "php artisan localization:missing" at 2016/03/14 22:46:51 
 *************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/dashboard/homepage.blade.php
-  'presentation' => 'Présentation',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'actions' => 'Actions',
@@ -67,6 +64,7 @@ return array (
   'or' => 'ou',
   'password' => 'Mot de passe',
   'password_reset' => 'Réinitialiser le mot de passe',
+  'presentation' => 'Présentation',
   'profile' => 'Mon profil',
   'register' => 'S\'enregistrer',
   'registration_time' => 'Date d\'enregistrement',
@@ -96,7 +94,7 @@ return array (
   'where' => 'Où',
   'your_groups' => 'Mes groupes',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' =>
+  'LLH:obsolete' => 
   array (
     'all_discussions' => 'Toutes les discussions sur ce serveurc',
     'all_the_groups_welcome' => 'Vous trouverez ici tous les groupes disponibles sur ce serveur',

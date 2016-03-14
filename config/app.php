@@ -225,6 +225,7 @@ return [
     //'Date' => Jenssegers\Date\Date::class,
     //'Purifier' => Mews\Purifier\Facades\Purifier::class,
     //'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
+    'LaravelLocalization'   => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class
 
   ],
 
