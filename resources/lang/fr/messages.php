@@ -1,12 +1,13 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/03/14 22:46:51 
+ Generated via "php artisan localization:missing" at 2016/04/05 21:46:45 
 *************************************************************************/
 
 return array (
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'actions' => 'Actions',
+  'admin_settings' => 'TODO: admin_settings',
   'agenda' => 'Agenda',
   'all_groups' => 'Tous les groupes',
   'back_to' => 'Retour à',
@@ -17,6 +18,7 @@ return array (
   'changed_from' => 'valeur initiale',
   'changed_to' => 'changé en',
   'confirm_password' => 'Confirmer le mot de passe',
+  'confirm_your_email' => 'Vérifiez votre adresse email',
   'contact' => 'Contacter',
   'contact_this_user' => 'Contacter cette personne',
   'create' => 'Créer',
@@ -99,7 +101,6 @@ return array (
     'all_discussions' => 'Toutes les discussions sur ce serveurc',
     'all_the_groups_welcome' => 'Vous trouverez ici tous les groupes disponibles sur ce serveur',
     'close' => 'Fermer',
-    'confirm_your_email' => 'Vérifiez votre adresse email',
     'group' => 'Groupe',
     'groups_list' => 'Liste des groupes',
     'hello' => 'Bonjour',
