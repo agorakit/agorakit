@@ -1,9 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/04/05 21:58:14 
+ Generated via "php artisan localization:missing" at 2016/04/05 22:26:08 
 *************************************************************************/
 
 return array (
+  //============================== New strings to translate ==============================//
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/app.blade.php
+  'made_with' => 'TODO: made_with',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'a_message_for_you',
   'actions' => 'Actions',
@@ -46,7 +49,7 @@ return array (
   'in' => 'in',
   'invitation_sent_again' => 'Invitation sent again',
   'join' => 'Join',
-  'latest_discussions' => 'latest_discussions',
+  'latest_discussions' => 'Latest discussions',
   'leave_this_group' => 'Leave this group',
   'leaving_help_message' => 'We are sad to see you go... confirm that you want to leave this group. You won\'t receive notifications anymore.',
   'leaving_the_group_called' => 'Leaving the group called',
@@ -66,8 +69,8 @@ return array (
   'or' => 'or',
   'password' => 'Password',
   'password_reset' => 'Password reset',
-  'presentation' => 'TODO: presentation',
-  'profile' => 'TODO: profile',
+  'presentation' => 'Presentation',
+  'profile' => 'Profile',
   'register' => 'Register',
   'registration_time' => 'Registration time',
   'remember_me' => 'Remember me',
@@ -80,25 +83,30 @@ return array (
   'send' => 'send',
   'send_my_recover_email' => 'Send my recover email',
   'settings' => 'Settings',
+  'show_all' => 'TODO: show_all',
   'show_gallery' => 'Show photo gallery',
   'show_history' => 'Show history',
   'show_list' => 'Show file list',
+  'show_only_my_groups' => 'TODO: show_only_my_groups',
   'something_wrong' => 'Something is wrong with your submission',
   'start' => 'Start',
   'started_by' => 'Started by',
   'stop' => 'Stop',
   'title' => 'Title',
+  'to_read' => 'TODO: to_read',
   'toggle_navigation' => 'Toggle navigation',
   'unread_discussions' => 'Unread discussions',
   'user_profile' => 'User profile',
   'what' => 'what',
   'when' => 'when',
   'where' => 'where',
+  'you_see_all' => 'TODO: you_see_all',
+  'you_see_only_your_stuff' => 'TODO: you_see_only_your_stuff',
   'your_groups' => 'Your groups',
   //================================== Obsolete strings ==================================//
   'LLH:obsolete' => 
   array (
-    'all_discussions' => 'all_discussions',
+    'all_discussions' => 'All discussions',
     'all_the_groups_welcome' => 'Here are all the groups on this server.',
     'close' => 'Close',
     'group' => 'Group',
@@ -106,10 +114,10 @@ return array (
     'hello' => 'Hello',
     'home' => 'Home',
     'not_a_member' => 'Not a member',
-    'not_logged_in' => 'TODO: not_logged_in',
+    'not_logged_in' => 'Not logged in',
     'please_confirm_your_email' => 'Please confirm your email',
     'users' => 'Users',
-    'you_are_not_an_admin' => 'TODO: you_are_not_an_admin',
+    'you_are_not_an_admin' => 'You are not an admin',
     'your_password_reset_link' => 'Your password reset link',
   ),
 );

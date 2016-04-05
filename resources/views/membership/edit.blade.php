@@ -6,10 +6,10 @@
 
 <div class="tab_content">
 
-<h1>Vos préférences pour le groupe "{{$group->name}}"</h1>
+<h1>{{trans('membership.your_preferences_for')}} "{{$group->name}}"</h1>
 
 <div class="help">
-  <h4>Comment ça marche?</h4>
+  <h4>{{trans('membership.settings_how_does_it_works')}}</h4>
   <p>
     {{trans('membership.settings_intro')}}
   </p>
@@ -34,7 +34,7 @@
 </div>
 
 
-<p>Si vous souhaitez quitter ce groupe, <a href="{{action('MembershipController@leaveForm', $group->id)}}">cliquez ici</a></p>
+<p>{{trans('membership.if_you_want_to_leave_this_group')}}, <a href="{{action('MembershipController@leaveForm', $group->id)}}">{{trans('membership.click_here')}}</a></p>
 
 
 </div>

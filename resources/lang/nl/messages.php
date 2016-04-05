@@ -1,9 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/04/05 21:58:14 
+ Generated via "php artisan localization:missing" at 2016/04/05 22:26:08 
 *************************************************************************/
 
 return array (
+  //============================== New strings to translate ==============================//
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/app.blade.php
+  'made_with' => 'TODO: made_with',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'TODO: a_message_for_you',
   'actions' => 'TODO: actions',
@@ -80,20 +83,25 @@ return array (
   'send' => 'TODO: send',
   'send_my_recover_email' => 'TODO: send_my_recover_email',
   'settings' => 'TODO: settings',
+  'show_all' => 'TODO: show_all',
   'show_gallery' => 'TODO: show_gallery',
   'show_history' => 'TODO: show_history',
   'show_list' => 'TODO: show_list',
+  'show_only_my_groups' => 'TODO: show_only_my_groups',
   'something_wrong' => 'TODO: something_wrong',
   'start' => 'TODO: start',
   'started_by' => 'TODO: started_by',
   'stop' => 'TODO: stop',
   'title' => 'TODO: title',
+  'to_read' => 'TODO: to_read',
   'toggle_navigation' => 'TODO: toggle_navigation',
   'unread_discussions' => 'TODO: unread_discussions',
   'user_profile' => 'TODO: user_profile',
   'what' => 'TODO: what',
   'when' => 'TODO: when',
   'where' => 'TODO: where',
+  'you_see_all' => 'TODO: you_see_all',
+  'you_see_only_your_stuff' => 'TODO: you_see_only_your_stuff',
   'your_groups' => 'TODO: your_groups',
   //================================== Obsolete strings ==================================//
   'LLH:obsolete' => 

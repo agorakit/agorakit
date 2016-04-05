@@ -76,21 +76,22 @@
       <h1>{{ trans('messages.latest_discussions') }}</h1>
 
       @if (Auth::check() && Auth::user()->getPreference('show', 'all') == 'all')
-        Vous voyez toutes les discussions et actions de tous les groupes.
-        <a class="btn btn-default btn-sm" href="{{action('DashboardController@index')}}?show=my">Afficher uniquement mes groupes</a>
+
+        {{ trans('messages.you_see_all') }}
+        <a class="btn btn-default btn-sm" href="{{action('DashboardController@index')}}?show=my">{{ trans('messages.show_only_my_groups') }}</a>
       @endif
 
       @if (Auth::check() && Auth::user()->getPreference('show', 'all') == 'my')
-        Vous ne voyez que les discussions et actions de vos groupes
-        <a class="btn btn-default btn-sm" href="{{action('DashboardController@index')}}?show=all">Afficher tout</a>
+        {{ trans('messages.you_see_only_your_stuff') }}
+        <a class="btn btn-default btn-sm" href="{{action('DashboardController@index')}}?show=all">{{ trans('messages.show_all') }}</a>
       @endif
 
       <table class="table table-hover special">
         <thead>
           <tr>
-            <th style="width: 75%">Titre</th>
-            <th>Date</th>
-            <th>A lire</th>
+            <th style="width: 75%">{{ trans('messages.title') }}</th>
+            <th>{{ trans('messages.date') }}</th>
+            <th>{{ trans('messages.to_read') }}</th>
           </tr>
         </thead>
 
@@ -129,21 +130,21 @@
       <h1>{{ trans('group.latest_actions') }}</h1>
 
       @if (Auth::check() && Auth::user()->getPreference('show', 'all') == 'all')
-        Vous voyez toutes les discussions et actions de tous les groupes.
-        <a class="btn btn-default btn-sm" href="{{action('DashboardController@index')}}?show=my">Afficher uniquement mes groupes</a>
+        {{ trans('messages.you_see_all') }}
+        <a class="btn btn-default btn-sm" href="{{action('DashboardController@index')}}?show=my">{{ trans('messages.show_only_my_groups') }}</a>
       @endif
 
       @if (Auth::check() && Auth::user()->getPreference('show', 'all') == 'my')
-        Vous ne voyez que les discussions et actions de vos groupes
-        <a class="btn btn-default btn-sm" href="{{action('DashboardController@index')}}?show=all">Afficher tout</a>
+        {{ trans('messages.you_see_only_your_stuff') }}
+        <a class="btn btn-default btn-sm" href="{{action('DashboardController@index')}}?show=all">{{ trans('messages.show_all') }}</a>
       @endif
 
       <table class="table table-hover special">
         <thead>
           <tr>
-            <th style="width: 50%">Titre</th>
-            <th>Date</th>
-            <th>Où</th>
+            <th style="width: 50%">{{ trans('messages.title') }}</th>
+            <th>{{ trans('messages.date') }}</th>
+            <th>{{ trans('messages.where') }}</th>
           </tr>
         </thead>
 

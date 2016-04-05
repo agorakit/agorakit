@@ -1,13 +1,16 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/04/05 21:58:14 
+ Generated via "php artisan localization:missing" at 2016/04/05 22:26:08
 *************************************************************************/
 
 return array (
+  //============================== New strings to translate ==============================//
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/app.blade.php
+  'made_with' => 'Propulsé par',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'actions' => 'Actions',
-  'admin_settings' => 'TODO: admin_settings',
+  'admin_settings' => 'Modifier les préférences',
   'agenda' => 'Agenda',
   'all_groups' => 'Tous les groupes',
   'back_to' => 'Retour à',
@@ -80,23 +83,28 @@ return array (
   'send' => 'Envoyer',
   'send_my_recover_email' => 'M\'envoyer un mail pour changer mon mot de passe',
   'settings' => 'Préférences',
+  'show_all' => 'Afficher tout',
   'show_gallery' => 'Afficher sous forme de gallerie photo',
   'show_history' => 'Afficher l\'historique des modifications',
   'show_list' => 'Afficher sous forme de liste',
+  'show_only_my_groups' => 'Afficher uniquement mes groupes',
   'something_wrong' => 'Il y a quelque chose qui ne fonctionne pas',
   'start' => 'Début',
   'started_by' => 'Démarré par',
   'stop' => 'Fin',
   'title' => 'Titre',
+  'to_read' => 'à lire',
   'toggle_navigation' => 'Activer la navigation',
   'unread_discussions' => 'Discussions non lues',
   'user_profile' => 'Profil utilisateur',
   'what' => 'Quoi',
   'when' => 'Quand',
   'where' => 'Où',
+  'you_see_all' => 'Vous voyez toutes les discussions et actions de tous les groupes.',
+  'you_see_only_your_stuff' => 'Vous ne voyez que les discussions et actions de vos groupes',
   'your_groups' => 'Mes groupes',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' => 
+  'LLH:obsolete' =>
   array (
     'all_discussions' => 'Toutes les discussions sur ce serveurc',
     'all_the_groups_welcome' => 'Vous trouverez ici tous les groupes disponibles sur ce serveur',
