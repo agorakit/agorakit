@@ -1,6 +1,6 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/04/05 21:46:45
+ Generated via "php artisan localization:missing" at 2016/04/05 21:58:14 
 *************************************************************************/
 
 return array (
@@ -96,7 +96,7 @@ return array (
   'where' => 'where',
   'your_groups' => 'Your groups',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' =>
+  'LLH:obsolete' => 
   array (
     'all_discussions' => 'all_discussions',
     'all_the_groups_welcome' => 'Here are all the groups on this server.',

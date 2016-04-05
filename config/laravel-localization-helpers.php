@@ -319,9 +319,9 @@ return array(
 	*/
 	'translators' => array(
 		'Microsoft' => array(
-			'default_language' => 'fr' ,
-			'client_id'        => 'mobilizator_translation' ,
-			'client_secret'    => 'Owyp0qt+lE83R3eE2yN+r2mLGnDPfpTJNGk6q9iBS2U=' ,
+			'default_language' => null ,
+			'client_id'        => null ,
+			'client_secret'    => null ,
 		),
 	) ,
 );

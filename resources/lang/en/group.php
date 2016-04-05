@@ -1,6 +1,6 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/04/05 21:46:45
+ Generated via "php artisan localization:missing" at 2016/04/05 21:58:14 
 *************************************************************************/
 
 return array (
@@ -22,7 +22,7 @@ return array (
   'no_group_yet' => 'No group yet',
   'visit' => 'Visit',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' =>
+  'LLH:obsolete' => 
   array (
     'no_group_joined_yet_act_now' => 'No group joined yet act now',
   ),
