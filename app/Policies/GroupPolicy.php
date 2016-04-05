@@ -33,6 +33,9 @@ class GroupPolicy
       return $user->isMemberOf($group);
    }
 
+
+   
+
    /*
    the following functions let us decide if a user can or cannot creat some stuff in a group
    Curently it's based on the fact that you are an active member of the group

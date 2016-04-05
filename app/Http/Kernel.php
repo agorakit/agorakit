@@ -50,10 +50,11 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'member' => \App\Http\Middleware\RedirectIfNotGroupMember::class,
         'verified' => \App\Http\Middleware\Verified::class,
-        'cache' => \App\Http\Middleware\Cache::class
+        'cache' => \App\Http\Middleware\Cache::class,
+        'admin' => \App\Http\Middleware\Admin::class
     ];
 
 
-    
+
 
 }

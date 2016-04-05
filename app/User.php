@@ -117,6 +117,20 @@ class User extends Authenticatable
     return $this->save();
   }
 
+  /**
+   * Returns trus if the user is admin
+   */
+  public function isAdmin()
+  {
+    if ($this->admin >= 1)
+    {
+      return true;
+    }
+
+    return false;
+
+  }
+
 
   /**
   * The groups this user is part of.

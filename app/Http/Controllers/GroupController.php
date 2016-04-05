@@ -17,6 +17,7 @@ class GroupController extends Controller
     $this->middleware('verified', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
     $this->middleware('member', ['only' => ['edit', 'update', 'destroy']]);
     $this->middleware('cache', ['only' => ['index', 'show']]);
+    $this->middleware('admin', ['only' => ['create', 'store']]);
   }
 
 

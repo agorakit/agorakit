@@ -50,7 +50,18 @@ Route::group(['middleware' => ['web'], 'prefix' => LaravelLocalization::setLocal
   Route::get('home', 'DashboardController@index');
 
 
+  /*
+  Admin stuff
+  ===========
 
+  Altough we want as little adimn so called "rights" or "power" some stuff must be handled by a small group of trusted people like:
+  - group creation
+  - homepage introduction text
+
+  */
+
+  Route::get('admin/settings', 'AdminController@settings');
+  Route::post('admin/settings', 'AdminController@update');
 
 
   /*
