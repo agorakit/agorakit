@@ -23,6 +23,9 @@ $ php artisan serve
 
 The install will be available to localhost:8000
 
+Create a first user account. Set the admin field to 1 in phpmyadmin for this user in the Users table (this is a temporary solution). This user will be able to create groups at [yourinstall]/groups/create and also edit the homepage intro text.
+
+
 If you don't know how all this works, don't setup a production server around this tool without first digging laravel docs.
 
 ## Official Documentation
