@@ -1,13 +1,7 @@
 <?php
-/*************************************************************************
- Generated via "php artisan localization:missing" at 2016/04/05 22:26:08
-*************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/app.blade.php
   'made_with' => 'Propulsé par',
-  //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'actions' => 'Actions',
   'admin_settings' => 'Modifier les préférences',
@@ -103,8 +97,7 @@ return array (
   'you_see_all' => 'Vous voyez toutes les discussions et actions de tous les groupes.',
   'you_see_only_your_stuff' => 'Vous ne voyez que les discussions et actions de vos groupes',
   'your_groups' => 'Mes groupes',
-  //================================== Obsolete strings ==================================//
-  'LLH:obsolete' =>
+  'LLH:obsolete' => 
   array (
     'all_discussions' => 'Toutes les discussions sur ce serveurc',
     'all_the_groups_welcome' => 'Vous trouverez ici tous les groupes disponibles sur ce serveur',

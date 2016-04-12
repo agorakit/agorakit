@@ -1,13 +1,7 @@
 <?php
-/*************************************************************************
- Generated via "php artisan localization:missing" at 2016/04/05 22:24:38
-*************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/membership/form.blade.php
   'when_to_receive_notifications' => 'Quand recevoir des nouvelles par mail de ce groupe?',
-  //==================================== Translations ====================================//
   'click_here' => 'Cliquez ici',
   'everyday' => 'Tous les jours',
   'everyhour' => 'Toutes les heures',

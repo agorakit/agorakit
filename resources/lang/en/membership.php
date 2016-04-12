@@ -1,13 +1,7 @@
 <?php
-/*************************************************************************
- Generated via "php artisan localization:missing" at 2016/04/05 22:24:38 
-*************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/membership/form.blade.php
   'when_to_receive_notifications' => 'TODO: when_to_receive_notifications',
-  //==================================== Translations ====================================//
   'click_here' => 'TODO: click_here',
   'everyday' => 'Every day',
   'everyhour' => 'Every hour',

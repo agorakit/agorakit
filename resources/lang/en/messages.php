@@ -1,14 +1,8 @@
 <?php
-/*************************************************************************
- Generated via "php artisan localization:missing" at 2016/04/05 22:26:08 
-*************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/app.blade.php
   'made_with' => 'TODO: made_with',
-  //==================================== Translations ====================================//
-  'a_message_for_you' => 'a_message_for_you',
+  'a_message_for_you' => 'A message for you',
   'actions' => 'Actions',
   'admin_settings' => 'Admin settings',
   'agenda' => 'Agenda',
@@ -103,7 +97,6 @@ return array (
   'you_see_all' => 'TODO: you_see_all',
   'you_see_only_your_stuff' => 'TODO: you_see_only_your_stuff',
   'your_groups' => 'Your groups',
-  //================================== Obsolete strings ==================================//
   'LLH:obsolete' => 
   array (
     'all_discussions' => 'All discussions',

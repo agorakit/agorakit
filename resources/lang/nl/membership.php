@@ -1,34 +1,28 @@
 <?php
-/*************************************************************************
- Generated via "php artisan localization:missing" at 2016/04/05 22:24:38 
-*************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/membership/form.blade.php
-  'when_to_receive_notifications' => 'TODO: when_to_receive_notifications',
-  //==================================== Translations ====================================//
-  'click_here' => 'TODO: click_here',
-  'everyday' => 'TODO: everyday',
-  'everyhour' => 'TODO: everyhour',
-  'everymonth' => 'TODO: everymonth',
-  'everytwoweek' => 'TODO: everytwoweek',
-  'everyweek' => 'TODO: everyweek',
-  'if_you_want_to_leave_this_group' => 'TODO: if_you_want_to_leave_this_group',
-  'invite_button' => 'TODO: invite_button',
-  'invite_intro' => 'TODO: invite_intro',
-  'invite_one_button' => 'TODO: invite_one_button',
-  'invite_title' => 'TODO: invite_title',
-  'join_button' => 'TODO: join_button',
-  'join_intro' => 'TODO: join_intro',
-  'never' => 'TODO: never',
-  'not_subscribed_to_group_yet' => 'TODO: not_subscribed_to_group_yet',
-  'people_to_invite' => 'TODO: people_to_invite',
-  'settings_how_does_it_works' => 'TODO: settings_how_does_it_works',
-  'settings_intro' => 'TODO: settings_intro',
-  'settings_updated' => 'TODO: settings_updated',
-  'user_already_invited' => 'TODO: user_already_invited',
-  'users_has_been_invited' => 'TODO: users_has_been_invited',
-  'welcome' => 'TODO: welcome',
-  'your_preferences_for' => 'TODO: your_preferences_for',
+  'when_to_receive_notifications' => 'When to receive notifications?',
+  'click_here' => 'Klik hier',
+  'everyday' => 'Elke dag',
+  'everyhour' => 'Elk uur',
+  'everymonth' => 'Elke maand',
+  'everytwoweek' => 'Om de 15 dagen',
+  'everyweek' => 'Elke week',
+  'if_you_want_to_leave_this_group' => 'Indien u deze groep wil verlaten',
+  'invite_button' => 'Nodig deze perso(o)n(en) uit',
+  'invite_intro' => 'Geef nieuwe impulsen door personen uit te nodigen die mogelijks geïnteresseerd zijn in deze groep. Geef de e-mailadressen in van de personen die u zou willen uitnodigen. U kan deze ingeven zoals u wil: één per lijn of gescheiden door een spatie of een komma. Geef momenteel niet meer dan 50 personen tegelijk in, omdat de site anders dreigt te blokkeren. Maak geen misbruik van dit systeem om geen mensen te storen. De uitnodigingen worden slechts éénmaal naar elke persoon verstuurd.',
+  'invite_one_button' => 'Nodig deelnemers uit',
+  'invite_title' => 'Nodig mensen uit om tot deze groep toe te treden',
+  'join_button' => 'Tot deze groep toetreden',
+  'join_intro' => 'Treed toe tot deze groep en geef aan of u de updates van deze groep via mail wilt ontvangen. Deze optie is heel nuttig en we raden u aan om deze te activeren. U zal niet meer mails ontvangen dan gevraagd',
+  'never' => 'Zend me geen e-mails',
+  'not_subscribed_to_group_yet' => 'U bent nog geen lid van deze groep\'',
+  'people_to_invite' => 'E-mails',
+  'settings_how_does_it_works' => 'Hoe werkt dit?',
+  'settings_intro' => 'Geef aan of u de updates van deze groep via mail wilt ontvangen. Deze optie is heel nuttig en we raden u aan om deze te activeren. U zal niet meer mails ontvangen dan gevraagd',
+  'settings_updated' => 'Settings updated',
+  'user_already_invited' => 'Gebruiker reeds uitgenodigd',
+  'users_has_been_invited' => 'Gebruiker uitgenodigd',
+  'welcome' => 'Welkom in deze groep',
+  'your_preferences_for' => 'Uw voorkeuren voor deze groep',
 );

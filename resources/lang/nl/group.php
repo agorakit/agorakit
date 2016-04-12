@@ -1,40 +1,40 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/03/14 22:46:51 
+ Generated via "php artisan localization:missing" at 2016/03/14 22:46:51
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
   // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/show.blade.php
-  'about_this_group' => 'TODO: about_this_group',
+  'about_this_group' => 'Over deze groep',
   // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/form.blade.php
-  'cover' => 'TODO: cover',
+  'cover' => 'Cover',
   // Defined in file /home/philippe/Sites/Mobilizator/resources/views/dashboard/homepage.blade.php
-  'create_a_group_button' => 'TODO: create_a_group_button',
+  'create_a_group_button' => 'Een groep aanmaken',
   // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/create.blade.php
-  'create_button' => 'TODO: create_button',
+  'create_button' => 'Maak de groep aan',
   // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/create.blade.php
-  'create_group_title' => 'TODO: create_group_title',
+  'create_group_title' => 'Maak een titel aan',
   // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/form.blade.php
-  'description' => 'TODO: description',
+  'description' => 'Beschrijving van de groep',
   // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/history.blade.php
-  'history_of_this_group' => 'TODO: history_of_this_group',
+  'history_of_this_group' => 'Geschiedenis van deze groep',
   // Defined in file /home/philippe/Sites/Mobilizator/resources/views/dashboard/homepage.blade.php
-  'join' => 'TODO: join',
+  'join' => 'Toetreden',
   // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/show.blade.php
-  'latest_actions' => 'TODO: latest_actions',
+  'latest_actions' => 'Recente acties',
   // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/show.blade.php
-  'latest_discussions' => 'TODO: latest_discussions',
+  'latest_discussions' => 'Recente discussies',
   // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/show.blade.php
-  'latest_files' => 'TODO: latest_files',
+  'latest_files' => 'Recente bestanden',
   // Defined in file /home/philippe/Sites/Mobilizator/resources/views/dashboard/homepage.blade.php
-  'leave' => 'TODO: leave',
+  'leave' => 'Verlaten',
   // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/form.blade.php
-  'name' => 'TODO: name',
+  'name' => 'Naam van de groep',
   // Defined in file /home/philippe/Sites/Mobilizator/resources/views/dashboard/homepage.blade.php
-  'no_group_joined_yet' => 'TODO: no_group_joined_yet',
+  'no_group_joined_yet' => 'U  bent nog niet tot een groep toegetreden, ga naar "Alle groepen" om een overzicht van de groepen te krijgen en om tot een groep toe te treden',
   // Defined in file /home/philippe/Sites/Mobilizator/resources/views/dashboard/homepage.blade.php
-  'no_group_yet' => 'TODO: no_group_yet',
+  'no_group_yet' => 'Er is nog geen groep op deze server. Ga verder!',
   // Defined in file /home/philippe/Sites/Mobilizator/resources/views/dashboard/homepage.blade.php
-  'visit' => 'TODO: visit',
+  'visit' => 'Bezoeken',
 );

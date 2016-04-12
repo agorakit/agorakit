@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f7ee7944d650d7e33dfe2feb4683b4c6",
-    "content-hash": "176fa03e1231e3945428bf91d2469203",
+    "hash": "baa4d6c0db05f81756c1a94b5a6dd79b",
+    "content-hash": "c6afc3c740388e1df02b37cc3ec48e2e",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -60,6 +60,55 @@
                 "webprofiler"
             ],
             "time": "2016-02-17 08:32:21"
+        },
+        {
+            "name": "barryvdh/laravel-translation-manager",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/barryvdh/laravel-translation-manager.git",
+                "reference": "5f6862ac9766f57b60747dadf862fd2f6a75e8c1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/barryvdh/laravel-translation-manager/zipball/5f6862ac9766f57b60747dadf862fd2f6a75e8c1",
+                "reference": "5f6862ac9766f57b60747dadf862fd2f6a75e8c1",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.0.x|5.1.x|5.2.x",
+                "illuminate/translation": "5.0.x|5.1.x|5.2.x",
+                "php": ">=5.4.0",
+                "symfony/finder": "~2.3|~3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Barryvdh\\TranslationManager\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                }
+            ],
+            "description": "Manage Laravel Translations",
+            "keywords": [
+                "laravel",
+                "translations",
+                "translator"
+            ],
+            "time": "2016-04-12 05:16:04"
         },
         {
             "name": "classpreloader/classpreloader",
@@ -1061,16 +1110,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.18.2",
+            "version": "1.19.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "064b38c16790249488e7a8b987acf1c9d7383c09"
+                "reference": "5f56ed5212dc509c8dc8caeba2715732abb32dbf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/064b38c16790249488e7a8b987acf1c9d7383c09",
-                "reference": "064b38c16790249488e7a8b987acf1c9d7383c09",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/5f56ed5212dc509c8dc8caeba2715732abb32dbf",
+                "reference": "5f56ed5212dc509c8dc8caeba2715732abb32dbf",
                 "shasum": ""
             },
             "require": {
@@ -1135,7 +1184,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2016-04-02 13:12:58"
+            "time": "2016-04-12 18:29:35"
         },
         {
             "name": "mtdowling/cron-expression",
@@ -2667,16 +2716,16 @@
         },
         {
             "name": "watson/validating",
-            "version": "2.1.1",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dwightwatson/validating.git",
-                "reference": "f86c284d599a66120c651b9cd41da60eb6124e96"
+                "reference": "64dc3d211372576d468e2bfaf3c7b7ace66ee970"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dwightwatson/validating/zipball/f86c284d599a66120c651b9cd41da60eb6124e96",
-                "reference": "f86c284d599a66120c651b9cd41da60eb6124e96",
+                "url": "https://api.github.com/repos/dwightwatson/validating/zipball/64dc3d211372576d468e2bfaf3c7b7ace66ee970",
+                "reference": "64dc3d211372576d468e2bfaf3c7b7ace66ee970",
                 "shasum": ""
             },
             "require": {
@@ -2718,7 +2767,7 @@
                 "laravel",
                 "validation"
             ],
-            "time": "2016-03-29 13:54:50"
+            "time": "2016-04-07 14:59:06"
         }
     ],
     "packages-dev": [
@@ -3898,7 +3947,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "kwi/urllinker": 20
+        "kwi/urllinker": 20,
+        "barryvdh/laravel-translation-manager": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
