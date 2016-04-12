@@ -84,7 +84,7 @@ return array (
   'show_only_my_groups' => 'Enkel mijn groepen tonen',
   'something_wrong' => 'Er werkt iets niet',
   'start' => 'Start',
-  'started_by' => 'Er werkt iets niet',
+  'started_by' => 'Begonnen door',
   'stop' => 'Einde',
   'title' => 'Titel',
   'to_read' => 'Om te lezen',

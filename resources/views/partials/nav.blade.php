@@ -7,20 +7,20 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="{{ url('/') }}" class="navbar-brand"><i class="fa fa-child"></i> {{Config::get('mobilizator.name')}}</a>
+      <a href="{{ action('DashboardController@index') }}" class="navbar-brand"><i class="fa fa-child"></i> {{Config::get('mobilizator.name')}}</a>
     </div>
     <div class="navbar-collapse collapse" id="navbar">
 
       <ul class="nav navbar-nav">
         <li>
-          <a href="{{ url('agenda') }}">
+          <a href="{{ action('DashboardController@agenda') }}">
             {{trans('messages.agenda')}}
           </a>
         </li>
 
         @if ($user_logged)
         <li>
-          <a href="{{ url('unread') }}">
+          <a href="{{ action('DashboardController@unreadDiscussions') }}">
             {{ trans('messages.unread_discussions') }}
             @if ($unread_discussions > 0) <span class="badge">{{$unread_discussions}}</span>@endif
           </a>
