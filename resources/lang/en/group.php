@@ -1,10 +1,6 @@
 <?php
-/*************************************************************************
- Generated via "php artisan localization:missing" at 2016/04/05 22:26:08 
-*************************************************************************/
 
 return array (
-  //==================================== Translations ====================================//
   'about_this_group' => 'About this group',
   'cover' => 'Cover picture',
   'create_a_group_button' => 'Start a group',
@@ -21,7 +17,6 @@ return array (
   'no_group_joined_yet' => 'TODO: no_group_joined_yet',
   'no_group_yet' => 'No group yet',
   'visit' => 'Visit',
-  //================================== Obsolete strings ==================================//
   'LLH:obsolete' => 
   array (
     'no_group_joined_yet_act_now' => 'No group joined yet act now',

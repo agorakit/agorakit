@@ -250,15 +250,26 @@
               </div>
             @empty
               {{trans('group.no_group_yet')}}
-
-              <!--
-              <a href="{{ action('GroupController@create') }}" class="btn btn-primary">
-              <i class="fa fa-bolt"></i>
-              {{ trans('group.create_a_group_button') }}
-            </a>
-          -->
-
         @endforelse
+
+        <div class="col-xs-6 col-md-3">
+          <div class="thumbnail group">
+            <a href="{{ action('GroupController@create') }}">
+              <div style="margin: auto; text-align: center; width: 100%; height:auto;"><i class="fa fa-plus-circle" style="font-size: 150px;" aria-hidden="true"></i></div>
+
+            </a>
+            <div class="caption">
+              <h4><a href="{{ action('GroupController@create') }}">{{ trans('group.your_group_here') }}</a></h4>
+              <p class="summary">{{ trans('group.create_a_group_intro') }}</p>
+              <p>
+
+                  <a class="btn btn-primary" href="{{ action('GroupController@create') }}">{{ trans('group.create') }}</a>
+
+                </p>
+              </div>
+            </div>
+          </div>
+
       </div>
 
     </div>
