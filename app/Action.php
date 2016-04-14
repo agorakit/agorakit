@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
+use Venturecraft\Revisionable\RevisionableTrait;
 use Carbon\Carbon;
 
 class Action extends Model
@@ -12,7 +13,7 @@ class Action extends Model
 
 
   use ValidatingTrait;
-  use \Venturecraft\Revisionable\RevisionableTrait;
+  use RevisionableTrait;
   use SoftDeletes;
 
   protected $fillable = ['id']; // neede for actions import

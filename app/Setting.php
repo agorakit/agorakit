@@ -4,9 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Watson\Validating\ValidatingTrait;
+use Venturecraft\Revisionable\RevisionableTrait;
 
 class Setting extends Model {
 
+	use RevisionableTrait;
 
 
 	protected $fillable = ['name', 'value'];

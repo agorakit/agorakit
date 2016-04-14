@@ -4,7 +4,7 @@
 
 
 
-  {!! Form::open(array('action' => ['AdminController@update'])) !!}
+  {!! Form::open(array('action' => ['SettingsController@update'])) !!}
 
   <div class="form-group">
     {!! Form::textarea('homepage_presentation', $homepage_presentation, ['id' => 'wysiwyg', 'class' => 'form-control' , 'required']) !!}

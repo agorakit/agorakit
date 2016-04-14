@@ -60,8 +60,8 @@ Route::group(['middleware' => ['web'], 'prefix' => LaravelLocalization::setLocal
 
   */
 
-  Route::get('admin/settings', 'AdminController@settings');
-  Route::post('admin/settings', 'AdminController@update');
+  Route::get('admin/settings', 'SettingsController@settings');
+  Route::post('admin/settings', 'SettingsController@update');
 
 
   /*

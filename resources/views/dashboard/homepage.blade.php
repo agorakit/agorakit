@@ -58,9 +58,9 @@
 
     <div role="tabpanel" class="tab-pane @unless (Auth::check()) active @endunless" id="presentation">
       <h1>{{ trans('messages.presentation') }}
-        @if (Auth::check() && Auth::user()->isAdmin())
-          <a class="btn btn-primary btn-xs" href="{{action('AdminController@settings')}}">
-            <i class="fa fa-pencil"></i> {{trans('messages.admin_settings')}}
+        @if (Auth::check())
+          <a class="btn btn-primary btn-xs" href="{{action('SettingsController@settings')}}">
+            <i class="fa fa-pencil"></i> {{trans('messages.modify_intro_text')}}
           </a>
         @endif
       </h1>

@@ -5,10 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
+use Venturecraft\Revisionable\RevisionableTrait;
 
 class Comment extends Model {
 
-	use \Venturecraft\Revisionable\RevisionableTrait;
+	use RevisionableTrait;
 	use ValidatingTrait;
 	use SoftDeletes;
 

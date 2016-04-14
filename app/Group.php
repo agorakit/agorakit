@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\User;
 use App\Discussion;
 use Watson\Validating\ValidatingTrait;
+use Venturecraft\Revisionable\RevisionableTrait;
 use Auth;
 
 
 class Group extends Model
 {
   use ValidatingTrait;
-  use \Venturecraft\Revisionable\RevisionableTrait;
+  use RevisionableTrait;
   use SoftDeletes;
 
   protected $rules = [

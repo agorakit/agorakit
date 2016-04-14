@@ -103,4 +103,5 @@ return array (
     'not_logged_in' => 'TODO: not_logged_in',
     'you_are_not_an_admin' => 'TODO: you_are_not_an_admin',
   ),
+  'modify_intro_text' => 'Bewerken intro tekst',
 );

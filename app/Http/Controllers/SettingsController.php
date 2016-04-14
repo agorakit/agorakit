@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class AdminController extends Controller
+class SettingsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin', ['only' => ['settings', 'update']]);
+        $this->middleware('verified', ['only' => ['settings', 'update']]);
     }
 
 
@@ -22,7 +22,7 @@ class AdminController extends Controller
     */
     public function settings()
     {
-        return view('admin.settings')
+        return view('settings.list')
         ->with('homepage_presentation', \App\Setting::get('homepage_presentation'));
 
     }

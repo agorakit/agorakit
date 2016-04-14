@@ -113,4 +113,5 @@ return array (
     'you_are_not_an_admin' => 'You are not an admin',
     'your_password_reset_link' => 'Your password reset link',
   ),
+  'modify_intro_text' => 'Change introduction text',
 );
