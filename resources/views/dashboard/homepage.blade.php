@@ -221,7 +221,7 @@
       <div role="tabpanel" class="tab-pane" id="groups">
 
         <h1>{{ trans('messages.all_groups') }}</h1>
-        <p>{{ trans('documentation.intro') }}</p>
+
 
         <div class="row">
           @forelse( $groups as $group )
