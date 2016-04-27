@@ -1,6 +1,3 @@
-
-
-
 @if (count($errors) > 0)
 <div class="alert alert-danger">
   <strong><i class="fa fa-exclamation-triangle"></i>{{ trans('messages.howdy') }}</strong> {{ trans('messages.something_wrong') }}<br><br>
