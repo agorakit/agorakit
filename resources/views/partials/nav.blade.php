@@ -72,12 +72,33 @@
           <li><a href="{{ url('login') }}">{{ trans('messages.login') }}</a></li>
           @endif
 
-
-
-
-
+          @if(\Config::has('app.locales'))
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                {{ strtoupper(app()->getLocale()) }} <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                @foreach(\Config::get('app.locales') as $lang => $locale)
+                  @if($lang !== app()->getLocale())
+                  <li>
+                    <a href="<?= count($_GET) ? '?'.http_build_query(array_merge($_GET, ['force_locale' => $lang])) : '?force_locale='.$lang ?>">
+                      <?= strtoupper($lang); ?>
+                    </a>
+                  </li>
+                  @endif
+                @endforeach
+                <?php
+                // OU dans le cas de domain url ;-)
+                /*foreach (\Config::get('app.locales') as $lang => $locale){
+                  if($lang !== app()->getLocale()){
+                    echo '<li><a href="'.str_replace(url('/'), $locale['url'], request()->fullUrl()).'">'.strtoupper($lang).'</a></li>';
+                  }
+                }*/
+                ?>
+              </ul>
+            </li>
+          @endif
         </ul>
-
       </div><!--/.nav-collapse -->
     </div><!--/.container-fluid -->
   </nav>

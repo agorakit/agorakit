@@ -8,10 +8,16 @@ use Watson\Validating\ValidatingTrait;
 use Storage;
 use Response;
 
-class File extends Model
+use DraperStudio\Taggable\Contracts\Taggable;
+use DraperStudio\Taggable\Traits\Taggable as TaggableTrait;
+
+class File extends Model implements Taggable
 {
   use ValidatingTrait;
   use SoftDeletes;
+  use TaggableTrait;
+
+  protected $onlyUseExistingTags = false;
 
 
   protected $rules = [
@@ -19,7 +25,6 @@ class File extends Model
     'user_id' => 'required|exists:users,id',
     'group_id' => 'required|exists:groups,id',
   ];
-
 
   protected $table = 'files';
   public $timestamps = true;

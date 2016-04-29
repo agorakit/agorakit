@@ -18,7 +18,8 @@
         "kwi/urllinker": "dev-master",
         "mcamara/laravel-localization": " 1.1.*",
         "barryvdh/laravel-translation-manager": "0.2.x-dev",
-        "teamtnt/tntsearch": "^0.2.0"
+        "teamtnt/tntsearch": "^0.2.0",
+        "draperstudio/laravel-taggable": "^0.1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

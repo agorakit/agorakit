@@ -52,8 +52,10 @@ http://192.168.10.12/
 
 You must add the "domains" for your Nginx sites to the hosts file on your machine. The hosts file will redirect requests for your Homestead sites into your Homestead machine. On Mac and Linux, this file is located at /etc/hosts. On Windows, it is located at C:\Windows\System32\drivers\etc\hosts. The lines you add to this file will look like the following:
 
+````
 192.168.10.12  loc.participer.toutautrechose.be
 192.168.10.12  loc.deelnemen.hardbovenhard.be
+````
 
 ## Official Documentation
 
