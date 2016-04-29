@@ -31,16 +31,20 @@
 @foreach($discussions as $discussion)
 <h3><a href="{{action('DiscussionController@show', [$group->id, $discussion->id])}}">{{$discussion->name}} </a></h3>
 <p>
-  {{ summary($discussion->body, 1000) }}
+  {!! summary($discussion->body, 500) !!} ...
 </p>
 
 @foreach ($discussion->comments as $comment)
+
 @if ($comment->created_at > $last_notification)
-<p style="font-size: 0.8em">
+  <div style="border:1px solid #aaa; border-radius: 3px; margin-bottom: 1em; margin-left: 1em; padding: 1em">
+<p style="font-size: 0.8em;">
   <a href="{{ action('DiscussionController@show', [$group->id, $discussion->id]) }}#comment_{{$comment->id}}">{{$comment->user->name}}</a> ({{$comment->created_at->diffForHumans()}}):
-  {{ summary($comment->body, 800) }} ...
+  {!! summary($comment->body, 3000) !!}
 </p>
+</div>
 @endif
+
 @endforeach
 
 <hr/>

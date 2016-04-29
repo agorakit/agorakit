@@ -3,14 +3,15 @@
 <div class="comment @if ($comment_key + 2 > $read_comments) unread @else read @endif"
   @if ($comment_key + 2 == $read_comments) id="unread" @endif>
 
-  <div class="avatar"><img src="{{$comment->user->avatar()}}"/></div>
+  <div class="avatar"><img src="{{$comment->user->avatar()}}" class="img-circle"/></div>
 
+<!--
   <div class="vote">
     <div class="up"><a href="{{ action('VoteController@up', [$group->id, $discussion->id, $comment->id]) }}"><span class="glyphicon glyphicon-arrow-up"></span></a></div>
     <div class="score"><a href="{{ action('VoteController@cancel', [$group->id, $discussion->id, $comment->id]) }}">{{ $comment->vote }}</a></div>
     <div class="down"><a href="{{ action('VoteController@down', [$group->id, $discussion->id, $comment->id]) }}"><span class="glyphicon glyphicon-arrow-down"></span></a></div>
   </div>
-
+-->
 
   <div class="user"><a href="{{ action('UserController@show', [$comment->user->id]) }}">{{$comment->user->name}}</a></div>
 

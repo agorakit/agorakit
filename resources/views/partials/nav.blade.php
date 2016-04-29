@@ -59,7 +59,7 @@
           @if ($user_logged)
           <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                  <span class="avatar"><img src="{{Auth::user()->avatar()}}"/></span> {{ Auth::user()->name }} <span class="caret"></span>
+                  <span class="avatar"><img src="{{Auth::user()->avatar()}}" class="img-circle" style="width:24px; height:24px"/></span> {{ Auth::user()->name }} <span class="caret"></span>
               </a>
 
               <ul class="dropdown-menu" role="menu">
