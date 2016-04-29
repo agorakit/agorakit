@@ -170,16 +170,8 @@ return [
         Barryvdh\TranslationManager\ManagerServiceProvider::class,
 
 
-        Potsky\LaravelLocalizationHelpers\LaravelLocalizationHelpersServiceProvider::class,
-
         Intervention\Image\ImageServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-        //Jenssegers\Date\DateServiceProvider::class,
-        //Mews\Purifier\PurifierServiceProvider::class,
-        //DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
-        //Conner\Tagging\Providers\TaggingServiceProvider::class,
-        Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
-
 
         DraperStudio\Taggable\ServiceProvider::class
     ],
@@ -233,10 +225,6 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        //'Date' => Jenssegers\Date\Date::class,
-        //'Purifier' => Mews\Purifier\Facades\Purifier::class,
-        //'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
-        'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class
 
     ],
 
