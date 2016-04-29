@@ -67,6 +67,15 @@ return [
 
   'locale' => 'fr',
 
+  'locales' => [
+    'fr' => [
+        'url' => env('APP_FR_URL', 'participer.toutautrechose.be')
+    ],
+    'nl' => [
+        'url' => env('APP_NL_URL', 'deelnemen.hartbovenhard.be')
+    ]
+  ],
+
   /*
   |--------------------------------------------------------------------------
   | Application Fallback Locale

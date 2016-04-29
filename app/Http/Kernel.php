@@ -29,6 +29,8 @@ class Kernel extends HttpKernel
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
+            \App\Http\Middleware\RedirectLang::class,
+            //\App\Http\Middleware\RedirectLangByDomain::class, // Up to you to choose ;-)
         ],
 
         'api' => [
@@ -53,8 +55,4 @@ class Kernel extends HttpKernel
         'cache' => \App\Http\Middleware\Cache::class,
         'admin' => \App\Http\Middleware\Admin::class
     ];
-
-
-
-
 }
