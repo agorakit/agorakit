@@ -15,11 +15,16 @@ class DatabaseSeeder extends Seeder
     // create 10 users
     DB::table('users')->delete();
 
+    App\User::create([
+        'email' => 'admin@mobilisator.be',
+        'password' => bcrypt('secret'),
+        'name' => $faker->name,
+    ]);
+
     for ($i = 1; $i <= 10; ++$i) {
       App\User::create([
-        'email' => $faker->safe_email,
+        'email' => $faker->safeEmail,
         'password' => bcrypt('secret'),
-        'username' => $faker->name,
         'name' => $faker->name,
         ]);
       }
@@ -56,7 +61,7 @@ class DatabaseSeeder extends Seeder
                   $comment = new \App\Comment();
                   $comment->body = $faker->text;
                   $comment->user_id = App\User::orderByRaw('RAND()')->first()->id;
-                  $discussion->reply($comment);
+                  $discussion->comments()->save($comment);
                 }
               }
             }

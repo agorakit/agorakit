@@ -19,7 +19,8 @@
         "mcamara/laravel-localization": " 1.1.*",
         "barryvdh/laravel-translation-manager": "0.2.x-dev",
         "teamtnt/tntsearch": "^0.2.0",
-        "draperstudio/laravel-taggable": "^0.1.0"
+        "draperstudio/laravel-taggable": "^0.1.0",
+        "barryvdh/laravel-ide-helper": "^2.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -31,7 +32,8 @@
     },
     "autoload": {
         "classmap": [
-            "database"
+            "database",
+            "vendor/teamtnt"
         ],
         "files": [
           "app/Helpers/Functions.php"

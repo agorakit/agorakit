@@ -231,4 +231,9 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('groups/{group}/users', 'UserController@index');
 
+
+  // Search
+
+  Route::get('search', 'SearchController@index');
+
   });

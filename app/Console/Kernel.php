@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         \App\Console\Commands\SendNotifications::class,
         \App\Console\Commands\ImportActions::class,
+        \App\Console\Commands\IndexSearch::class,
     ];
 
     /**
