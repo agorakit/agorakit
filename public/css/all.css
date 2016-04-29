@@ -88,12 +88,18 @@ background-color: rgb(242, 241, 239);
   border-image: none;
   border-radius: 3px;
   border-left-color: #1B809E;
+  background-color: white;
 }
 .help h4 {
   color: #1B809E;
   margin-top: 0px;
   margin-bottom: 5px;
   font-size: 18px;
+}
+
+.help a
+{
+  text-decoration: underline;
 }
 
 

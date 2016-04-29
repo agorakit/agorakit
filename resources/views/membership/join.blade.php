@@ -6,10 +6,10 @@
 
 <div class="tab_content">
 
-  <h1>Rejoindre le groupe "{{$group->name}}"</h1>
+  <h1>{{trans('messages.join_the_group')}} <em>{{$group->name}}</em></h1>
 
 <div class="help">
-  <h4>Comment ça marche?</h4>
+  <h4>{{trans('messages.how_does_it_work')}}</h4>
   <p>
     {{trans('membership.join_intro')}}
   </p>
