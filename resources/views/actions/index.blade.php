@@ -63,6 +63,7 @@ $(document).ready(function() {
 
 <div class="tab_content">
 
+  @include('partials.invite')
 
   <h2>{{trans('action.agenda_of_this_group')}}
     @can('create-action', $group)

@@ -96,6 +96,13 @@ background-color: rgb(242, 241, 239);
   font-size: 18px;
 }
 
+
+.alert a
+{
+  color: white;
+  text-decoration: underline;
+}
+
 /****************************** GROUPS & THEIR HOMEPAGE ********************************/
 
 

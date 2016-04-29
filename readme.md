@@ -23,7 +23,7 @@ $ php artisan serve
 
 The install will be available to localhost:8000
 
-Create a first user account. Set the admin field to 1 in phpmyadmin for this user in the Users table (this is a temporary solution). This user will be able to create groups at [yourinstall]/groups/create and also edit the homepage intro text.
+Create a first user account. In some future release, the first created user will be admin.
 
 
 If you don't know how all this works, don't setup a production server around this tool without first digging laravel docs.
@@ -32,7 +32,7 @@ If you don't know how all this works, don't setup a production server around thi
 
 To use vagrant, you need to install : [Virtual Box](https://www.virtualbox.org/wiki/Downloads) and [Vagrant](https://www.virtualbox.org/wiki/Downloads).
 
-After in the root of your project : 
+After in the root of your project :
 
 ````bash
 $ vagrant up
@@ -44,7 +44,7 @@ $ php artisan migrate
 $ php artisan db:seed (if you want the db filled with fake infos)
 ````
 
-Then you will have access to the project using : 
+Then you will have access to the project using :
 
 http://192.168.10.12/
 

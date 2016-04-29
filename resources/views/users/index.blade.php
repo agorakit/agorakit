@@ -5,6 +5,7 @@
 @include('partials.grouptab')
 <div class="tab_content">
 
+  @include('partials.invite')
 
   <h2>
     {{ trans('messages.members_of_this_group') }}

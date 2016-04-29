@@ -39,13 +39,6 @@ Route::group(['middleware' => ['web']], function () {
 
 
   /*
-  Set user locale
-  ===============
-  */
-
-  Route::get('locale/{locale}', 'LocaleController@setLocale');
-
-  /*
   Homepage
   ========
 

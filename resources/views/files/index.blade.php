@@ -7,6 +7,8 @@
 
 <div class="tab_content">
 
+  @include('partials.invite')
+
   <h2>{{trans('messages.files_in_this_group')}}
 
     @can('create-file', $group)

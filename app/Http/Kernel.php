@@ -29,7 +29,7 @@ class Kernel extends HttpKernel
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
-            \App\Http\Middleware\RedirectLang::class,
+            \App\Http\Middleware\RedirectLang::class, // this one will be fine for now as far as I can tell :-)
             //\App\Http\Middleware\RedirectLangByDomain::class, // Up to you to choose ;-)
         ],
 

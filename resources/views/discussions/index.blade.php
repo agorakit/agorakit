@@ -5,7 +5,8 @@
 @include('partials.grouptab')
 <div class="tab_content">
 
-
+  @include('partials.invite')
+  
   <h2>{{trans('discussion.all_in_this_group')}}
 
     @can('create-discussion', $group)
@@ -13,9 +14,7 @@
       <i class="fa fa-plus"></i> {{trans('discussion.create_one_button')}}
     </a>
     @endcan
-
     </h2>
-
 
     <table class="table table-hover special">
       <thead>
@@ -29,7 +28,7 @@
       <tbody>
         @forelse( $discussions as $discussion )
         <tr>
-          
+
           <td class="content">
             <a href="{{ action('DiscussionController@show', [$discussion->group_id, $discussion->id]) }}">
               <span class="name">{{ $discussion->name }}</span>
