@@ -53,7 +53,7 @@ class RedirectLang {
             return $next($request)->withCookie(cookie()->forever('locale', Session::get('locale')));
         }
 
-        app()->setLocale(Session::get('locale', 'en'));
+        app()->setLocale(Session::get('locale', env('APP_DEFAULT_LOCALE', 'en'))); // added a default locale to env
 
         return $next($request);
     }
