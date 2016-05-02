@@ -1,6 +1,6 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/05/02 19:02:50 
+ Generated via "php artisan localization:missing" at 2016/05/02 19:27:54 
 *************************************************************************/
 
 return array (
@@ -37,6 +37,7 @@ return array (
   'files' => 'Fichiers',
   'files_in_this_group' => 'Fichiers de ce groupe',
   'forgotten_password' => 'Mot de passe oublié',
+  'group' => 'Groupe',
   'group_home' => 'A propos de ce groupe',
   'groups' => 'Groupes',
   'history' => 'Historique des modifications',
@@ -125,7 +126,6 @@ return array (
     'all_discussions' => 'Toutes les dicussions',
     'all_the_groups_welcome' => 'Voici tous les groupes sur ce serveur',
     'close' => 'Fermer',
-    'group' => 'Groupe',
     'groups_list' => 'Liste des groupes',
     'hello' => 'Bonjour',
     'home' => 'Accueil',

@@ -1,10 +1,10 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/05/02 19:02:50
+ Generated via "php artisan localization:missing" at 2016/05/02 19:27:54
 *************************************************************************/
 
 return array (
-  //==================================== Translations ====================================//
+ 
   'a_message_for_you' => 'U heeft een bericht',
   'actions' => 'Acties',
   'agenda' => 'Agenda',
