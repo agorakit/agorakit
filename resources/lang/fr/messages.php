@@ -1,12 +1,9 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/05/02 17:13:18
+ Generated via "php artisan localization:missing" at 2016/05/02 18:50:55 
 *************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file C:\\lamp\\www\\Mobilizator\\resources\\views\\partials\\nav.blade.php
-  'users_list' => 'Utilisateurs',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'actions' => 'Actions',
@@ -55,6 +52,7 @@ return array (
   'join_the_group' => 'rejoignez-le',
   'join_this_group' => 'Rejoignez ce groupe',
   'latest_discussions' => 'Discussions récentes',
+  'latest_files' => 'Derniers fichiers',
   'leave_this_group' => 'Quitter ce groupe',
   'leaving_help_message' => 'Nous sommes désolés de vous voir partir de ce groupe. Merci de confirmer que c\'est bien votre intention. Vous ne recevrez plus de notifications par mail de ce groupe et vous n\'apparaîtrez plus dans la liste des participants.',
   'leaving_the_group_called' => 'Quitter le groupe',
@@ -80,6 +78,7 @@ return array (
   'presentation' => 'Présentation',
   'profile' => 'Mon profil',
   'register' => 'S\'enregistrer',
+  'registered' => 'Inscription',
   'registration_time' => 'Date d\'enregistrement',
   'remember_me' => 'Se souvenir de moi',
   'reply' => 'Répondre',
@@ -106,6 +105,7 @@ return array (
   'unread_discussions' => 'Discussions non lues',
   'user_profile' => 'Profil utilisateur',
   'users' => 'Utilisateurs',
+  'users_list' => 'Utilisateurs',
   'what' => 'Quoi',
   'when' => 'Quand',
   'where' => 'Où',
@@ -118,7 +118,7 @@ return array (
   'you_see_only_your_stuff' => 'Vous ne voyez que les discussions et actions de vos groupes',
   'your_groups' => 'Mes groupes',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' =>
+  'LLH:obsolete' => 
   array (
     'admin_settings' => 'Modifier les préférences',
     'all_discussions' => 'Toutes les dicussions',

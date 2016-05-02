@@ -159,6 +159,17 @@ class User extends Authenticatable
         return $this->hasMany('App\Discussion');
     }
 
+
+    /**
+    * Discussions by this user.
+    */
+    public function files()
+    {
+        return $this->hasMany('App\File');
+    }
+
+
+
     public function avatar()
     {
         return url('/users/' . $this->id . '/avatar');

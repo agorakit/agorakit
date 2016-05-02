@@ -1,12 +1,9 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/05/02 17:13:17
+ Generated via "php artisan localization:missing" at 2016/05/02 18:50:55
 *************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file C:\\lamp\\www\\Mobilizator\\resources\\views\\partials\\nav.blade.php
-  'users_list' => 'Users',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'A message for you',
   'actions' => 'Actions',
@@ -55,6 +52,7 @@ return array (
   'join_the_group' => 'Join the group',
   'join_this_group' => 'Join this group',
   'latest_discussions' => 'Latest discussions',
+  'latest_files' => 'Latest files',
   'leave_this_group' => 'Leave this group',
   'leaving_help_message' => 'We are sad to see you go... confirm that you want to leave this group. You won\'t receive notifications anymore.',
   'leaving_the_group_called' => 'Leaving the group called',
@@ -80,6 +78,7 @@ return array (
   'presentation' => 'Presentation',
   'profile' => 'Profile',
   'register' => 'Register',
+  'registered' => 'Registered',
   'registration_time' => 'Registration time',
   'remember_me' => 'Remember me',
   'reply' => 'Reply',
@@ -106,6 +105,7 @@ return array (
   'unread_discussions' => 'Unread discussions',
   'user_profile' => 'User profile',
   'users' => 'Users',
+  'users_list' => 'Users',
   'what' => 'what',
   'when' => 'when',
   'where' => 'where',

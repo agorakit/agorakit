@@ -1,20 +1,15 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/05/02 17:13:17 
+ Generated via "php artisan localization:missing" at 2016/05/02 18:50:55 
 *************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file C:\\lamp\\www\\Mobilizator\\resources\\views\\dashboard\\homepage.blade.php
-  'create' => 'TODO: create',
-  // Defined in file C:\\lamp\\www\\Mobilizator\\resources\\views\\dashboard\\homepage.blade.php
-  'create_a_group_intro' => 'TODO: create_a_group_intro',
-  // Defined in file C:\\lamp\\www\\Mobilizator\\resources\\views\\dashboard\\homepage.blade.php
-  'your_group_here' => 'TODO: your_group_here',
   //==================================== Translations ====================================//
   'about_this_group' => 'About this group',
   'cover' => 'Cover picture',
+  'create' => 'TODO: create',
   'create_a_group_button' => 'Start a group',
+  'create_a_group_intro' => 'TODO: create_a_group_intro',
   'create_button' => 'Create the group',
   'create_group_title' => 'Create a new group',
   'description' => 'Group description',
@@ -28,6 +23,7 @@ return array (
   'no_group_joined_yet' => 'TODO: no_group_joined_yet',
   'no_group_yet' => 'No group yet',
   'visit' => 'Visit',
+  'your_group_here' => 'TODO: your_group_here',
   //================================== Obsolete strings ==================================//
   'LLH:obsolete' => 
   array (

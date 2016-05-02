@@ -1,10 +1,9 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/05/02 17:13:18
+ Generated via "php artisan localization:missing" at 2016/05/02 18:50:55
 *************************************************************************/
 
 return array (
- 
   //==================================== Translations ====================================//
   'a_message_for_you' => 'U heeft een bericht',
   'actions' => 'Acties',
@@ -41,12 +40,19 @@ return array (
   'group_home' => 'Over deze groep',
   'groups' => 'Groepen',
   'history' => 'Geschiedenis van de wijzigingen',
+
   'howdy' => 'Oeps',
   'i_changed_my_mind' => 'Ik heb me bedacht, ik wil deze groep niet verlaten',
+
+
+
   'in' => 'in',
   'invitation_sent_again' => '\'Een nieuwe bevestigingsmail is verstuurd. Controleer zowel uw mailbox als uw spam om uw e-mailadres te kunnen bevestigen. Dit zorgt ervoor dat we spam op deze site kunnen vermijden. Bedankt voor uw begrip.',
   'join' => 'Aansluiten bij deze groep',
+
+
   'latest_discussions' => 'Recente discussies',
+
   'leave_this_group' => 'Deze groep verlaten',
   'leaving_help_message' => 'Jammergenoeg wilt u deze groep verlaten. Gelieve te bevestigen dat dit echt uw bedoeling is. U zal geen meldingen van deze groep meer ontvangen via mail en u zal niet meer op de ledenlijst staan.',
   'leaving_the_group_called' => 'Deze groep verlaten',
@@ -106,8 +112,5 @@ return array (
   'LLH:obsolete' =>
   array (
     'admin_settings' => 'Voorkeuren wijzigen',
-    'not_a_member' => 'TODO: not_a_member',
-    'not_logged_in' => 'TODO: not_logged_in',
-    'you_are_not_an_admin' => 'TODO: you_are_not_an_admin',
   ),
 );
