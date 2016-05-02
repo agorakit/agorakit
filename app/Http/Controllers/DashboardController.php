@@ -81,11 +81,6 @@ class DashboardController extends Controller
     ->with('all_actions', $all_actions);
   }
 
-
-
-
-
-
   /**
   * Generates a list of unread discussions.
   */
@@ -135,8 +130,13 @@ class DashboardController extends Controller
       $events[] = $event;
     }
     return $events;
+  }
 
 
+  public function users()
+  {
+    $users = \App\User::with('groups')->orderBy('name')->paginate(30);
+    return view('dashboard.users')->with('users', $users);
   }
 
 

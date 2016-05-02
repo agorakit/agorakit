@@ -3,60 +3,60 @@
 /***************************** COMMON STUFF / BOOTSTRAP TWEAKS***********************************/
 
 body {
-  padding-top: 40px;
-  color: rgb(20, 20, 20);
-  background-color: rgb(244, 240, 231);
-  background-image: url("/images/seamless_paper_texture.png");
-  font-family: "Roboto";
+    padding-top: 40px;
+    color: rgb(20, 20, 20);
+    background-color: rgb(244, 240, 231);
+    background-image: url("/images/seamless_paper_texture.png");
+    font-family: "Roboto";
 }
 
 body, table
 {
-  font-size: 15px;
+    font-size: 15px;
 }
 
 h1, h2, h3, h4, h5, h6
 {
-  font-family: "Roboto";
-  font-weight: 300;
+    font-family: "Roboto";
+    font-weight: 300;
 }
 
 
 .nav-tabs > li.active > a
 {
-  border: 1px solid white;
+    border: 1px solid white;
 }
 
 
 .page-header, .tab_content
 {
-  background-color: white;
+    background-color: white;
 }
 
 .page_header h1, .page_header h2
 {
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
 }
 
 
 .nav-margin-top
 {
-  margin-top: 30px;
+    margin-top: 30px;
 }
 
 /***************** SHADOWS *****************/
 .page_header, .tab_content, .alert, .row .group
 {
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16);
 }
 
 
 .btn
 {
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
 }
 
 /*
@@ -67,187 +67,216 @@ background-color: rgb(242, 241, 239);
 */
 
 .spacer {
-  margin-bottom: 2em;
+    margin-bottom: 2em;
 }
 
 /******************************** UI ******************************************/
 
 .btn-right {
-  float: right;
+    float: right;
 }
 .history {
-  padding: 15px;
-  background-color: rgb(206, 222, 131);
+    padding: 15px;
+    background-color: rgb(206, 222, 131);
 }
 .help {
-  padding: 20px;
-  margin: 20px 0px;
-  border-width: 1px 1px 1px 5px;
-  border-style: solid;
-  border-color: #EEE;
-  border-image: none;
-  border-radius: 3px;
-  border-left-color: #1B809E;
-  background-color: white;
+    padding: 20px;
+    margin: 20px 0px;
+    border-width: 1px 1px 1px 5px;
+    border-style: solid;
+    border-color: #EEE;
+    border-image: none;
+    border-radius: 3px;
+    border-left-color: #1B809E;
+    background-color: white;
 }
 .help h4 {
-  color: #1B809E;
-  margin-top: 0px;
-  margin-bottom: 5px;
-  font-size: 18px;
+    color: #1B809E;
+    margin-top: 0px;
+    margin-bottom: 5px;
+    font-size: 18px;
 }
 
 .help a
 {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 
 .alert a
 {
-  color: white;
-  text-decoration: underline;
+    color: white;
+    text-decoration: underline;
 }
 
 /****************************** GROUPS & THEIR HOMEPAGE ********************************/
 
 
 .cover{
-  width: 25%;
-  float: right;
+    width: 25%;
+    float: right;
 }
 
 .thumbnail img {
-  width: 100%;
+    width: 100%;
 }
 .thumbnail {
-  display: inline-block;
-  width: 100%;
-  border: 0;
+    display: inline-block;
+    width: 100%;
+    border: 0;
 }
 .group .summary {
-  height: 6em;
-  font-size: 0.9em;
-  overflow: hidden;
+    height: 6em;
+    font-size: 0.9em;
+    overflow: hidden;
 }
 .group h4 {
-  height: 2.5em;
-  overflow: hidden;
+    height: 2.5em;
+    overflow: hidden;
 }
 .page_header {
-  margin-bottom: 1em;
-  background-color: white;
-  padding: 2%;
+    margin-bottom: 1em;
+    background-color: white;
+    padding: 2%;
 }
 .page_header h1 {
-  font-size: 2em;
-  /*font-weight: bold;*/
+    font-size: 2em;
+    /*font-weight: bold;*/
 }
 
 
 /***************************** USERS ******************/
 .avatar img
 {
-  width: 40px;
-  height: 40px;
+    width: 40px;
+    height: 40px;
 }
+
+.users_list
+{
+    -webkit-column-width: 20em; /* Chrome, Safari, Opera */
+    -moz-column-width: 20em; /* Firefox */
+    column-width: 20em;
+
+    -moz-column-fill: auto;
+    -webkit-column-fill: auto;
+    column-fill: auto;
+
+}
+
+
+.users_list .user
+{
+    font-size: 0.9em;
+    padding: 15px;
+    margin-bottom: 3em;
+}
+
+
+.users_list .user .profile .summary
+{
+    font-size: 0.8em;
+}
+
+
+
 
 /***************************** COMMENTS ***************************************/
 
 .comment {
-  border-bottom: 1px solid #aaa;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
+    border-bottom: 1px solid #aaa;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
 }
 .comment .avatar img {
-  float: left;
+    float: left;
 }
 .comment .user, .comment .body, .comment .created, .comment .actions {
-  margin-left: 60px;
+    margin-left: 60px;
 }
 .comment .created {
-  font-size: 0.7em;
+    font-size: 0.7em;
 }
 .comment .user {
-  font-weight: bold;
+    font-weight: bold;
 }
 .comment .vote {
-  width: 24px;
-  text-align: center;
-  float: right;
+    width: 24px;
+    text-align: center;
+    float: right;
 }
 
 .comment .actions
 {
-  font-size: 0.8em;
-  float: right;
+    font-size: 0.8em;
+    float: right;
 }
 
 /***************************** tables ***************************/
 
 table.special {
-  table-layout: fixed
+    table-layout: fixed
 }
 
 table.special td.content
 {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 span.summary {
-  color: gray;
+    color: gray;
 }
 
 
 span.group-name {
-  color: gray;
-  font-size: 0.8em;
+    color: gray;
+    font-size: 0.8em;
 }
 
 table.special .name {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 /************************** DISCUSSIONS ***************************************/
 
 .discussion, .comments {
-  max-width: 65em;
+    max-width: 65em;
 }
 .discussion .user {
-  font-weight: bold;
+    font-weight: bold;
 }
 .discussion .body {
-  margin-top: 1em;
-  margin-bottom: 2em;
+    margin-top: 1em;
+    margin-bottom: 2em;
 }
 
 /*********************** Gallery ************************************************/
 #gallery img
 {
-  display: inline-block;
-  padding-bottom: 4px;
+    display: inline-block;
+    padding-bottom: 4px;
 }
 
 
 /*********************** Calendar **********************************************/
 .fc-today
 {
-  background-color: rgb(255, 241, 144) !important;
+    background-color: rgb(255, 241, 144) !important;
 }
 
 
 /*********************** TABS and GROUP HEADERS ************************************/
 
 .tab_content {
-  background-color: white;
-  padding: 2%;
-  width: 100%;
+    background-color: white;
+    padding: 2%;
+    width: 100%;
 }
 
 /************************ dialogs *************************/
 
 .alert {
-  font-size: 1.5em;
+    font-size: 1.5em;
 }

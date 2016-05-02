@@ -71,6 +71,8 @@ Route::group(['middleware' => ['web']], function () {
   Route::get('agenda', 'DashboardController@agenda');
   Route::get('agenda/json', 'DashboardController@agendaJson');
   Route::get('agenda/ical', 'IcalController@index');
+  Route::get('users', 'DashboardController@users');
+
 
 
 

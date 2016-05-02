@@ -5,10 +5,10 @@ use Closure, Session, Config;
 class RedirectLang {
 
     /**
-     * The availables languages.
-     *
-     * @array $languages
-     */
+    * The availables languages.
+    *
+    * @array $languages
+    */
     protected $locales = null;
 
     public function __construct(){
@@ -16,20 +16,20 @@ class RedirectLang {
     }
 
     /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
+    * Handle an incoming request.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @param  \Closure  $next
+    * @return mixed
+    */
     public function handle($request, Closure $next)
     {
         // Detect the bot case => if bot we do nothing
         $isBot = isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT']);
 
         /**
-         * If User has never been logged => it will be redirected to his local url
-         */
+        * If User has never been logged => it will be redirected to his local url
+        */
         if(!$request->cookie('locale') && !$isBot)
         {
             $local = \App::getLocale();

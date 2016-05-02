@@ -7,6 +7,7 @@ use Gate;
 use Storage;
 use File;
 use Image;
+use Redirect;
 use App\Mailers\AppMailer;
 use App\Group;
 
@@ -260,14 +261,18 @@ class UserController extends Controller {
       $cachedImage = Image::cache(function($img) use ($path) {
         return $img->make($path)->fit(128, 128);
       }, 60000, true);
-
       return $cachedImage->response();
-
     }
     else
     {
-      return Image::canvas(128,128)->fill('#cccccc')->response(); // TODO caching or default group image instead
-      abort(404);
+
+      //$path = public_path() . '/images/avatar.jpg';
+      return Redirect::to(url('/images/avatar.jpg'));
+
+      $cachedImage = Image::cache(function($img) use ($path) {
+        return $img->make($path)->fit(128, 128);
+      }, 60000, true);
+      return $cachedImage->response();
     }
   }
 

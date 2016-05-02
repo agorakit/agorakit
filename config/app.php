@@ -167,7 +167,8 @@ return [
 
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-        Barryvdh\TranslationManager\ManagerServiceProvider::class,
+
+        Potsky\LaravelLocalizationHelpers\LaravelLocalizationHelpersServiceProvider::class,
 
 
         Intervention\Image\ImageServiceProvider::class,
