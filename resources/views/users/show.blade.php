@@ -42,6 +42,18 @@
         @endif
 
 
+        @if ($user->comments->count() > 0)
+            <div>
+                <h4>{{trans('messages.latest_comments')}}</h4>
+                @foreach ($user->comments()->orderBy('updated_at', 'desc')->take(10)->get() as $comment)
+                    <div>
+                        <a href="{{action('DiscussionController@show', [$comment->discussion->group, $comment->discussion])}}#comment_{{$comment->id}}">{{$comment->discussion->name}}</a>
+                    </div>
+                @endforeach
+            </div>
+        @endif
+
+
         @if ($user->files->count() > 0)
             <div>
                 <h4>{{trans('messages.latest_files')}}</h4>

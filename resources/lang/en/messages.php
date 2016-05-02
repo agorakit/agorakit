@@ -1,6 +1,6 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/05/02 18:50:55
+ Generated via "php artisan localization:missing" at 2016/05/02 19:02:50 
 *************************************************************************/
 
 return array (
@@ -51,6 +51,7 @@ return array (
   'join' => 'Join',
   'join_the_group' => 'Join the group',
   'join_this_group' => 'Join this group',
+  'latest_comments' => 'Latest comments',
   'latest_discussions' => 'Latest discussions',
   'latest_files' => 'Latest files',
   'leave_this_group' => 'Leave this group',
@@ -117,7 +118,7 @@ return array (
   'you_see_only_your_stuff' => 'You see only the discussions and actions from your groups',
   'your_groups' => 'Your groups',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' =>
+  'LLH:obsolete' => 
   array (
     'admin_settings' => 'Admin settings',
     'all_discussions' => 'All discussions',

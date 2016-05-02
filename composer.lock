@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f5b3f3d806a6cadcd5014eb8b95cf1bf",
+    "hash": "e5b2241364cd678c7ca875c9c5742cbf",
     "content-hash": "a6b2ee248edda440b15c3ff280b06ade",
     "packages": [
         {
@@ -180,16 +180,16 @@
         },
         {
             "name": "danielstjules/stringy",
-            "version": "2.3.1",
+            "version": "2.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danielstjules/Stringy.git",
-                "reference": "bd90918858ae079e34192710946449ed6c0bf795"
+                "reference": "4e214a5195fae3fb558e81b1c6010678f7600643"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danielstjules/Stringy/zipball/bd90918858ae079e34192710946449ed6c0bf795",
-                "reference": "bd90918858ae079e34192710946449ed6c0bf795",
+                "url": "https://api.github.com/repos/danielstjules/Stringy/zipball/4e214a5195fae3fb558e81b1c6010678f7600643",
+                "reference": "4e214a5195fae3fb558e81b1c6010678f7600643",
                 "shasum": ""
             },
             "require": {
@@ -232,7 +232,7 @@
                 "utility",
                 "utils"
             ],
-            "time": "2016-03-21 20:26:21"
+            "time": "2016-05-02 15:18:10"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",

@@ -109,6 +109,11 @@ background-color: rgb(242, 241, 239);
     text-decoration: underline;
 }
 
+.label
+{
+    border-radius: 2px;
+}
+
 /****************************** GROUPS & THEIR HOMEPAGE ********************************/
 
 

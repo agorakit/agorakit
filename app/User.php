@@ -159,6 +159,14 @@ class User extends Authenticatable
         return $this->hasMany('App\Discussion');
     }
 
+    /**
+    * Discussions by this user.
+    */
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
+
 
     /**
     * Discussions by this user.

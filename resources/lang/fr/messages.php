@@ -1,6 +1,6 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/05/02 18:50:55 
+ Generated via "php artisan localization:missing" at 2016/05/02 19:02:50 
 *************************************************************************/
 
 return array (
@@ -51,6 +51,7 @@ return array (
   'join' => 'Rejoindre ce groupe',
   'join_the_group' => 'rejoignez-le',
   'join_this_group' => 'Rejoignez ce groupe',
+  'latest_comments' => 'Derniers commentaires',
   'latest_discussions' => 'Discussions récentes',
   'latest_files' => 'Derniers fichiers',
   'leave_this_group' => 'Quitter ce groupe',
