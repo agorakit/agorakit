@@ -1,12 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/05/02 17:13:17 
+ Generated via "php artisan localization:missing" at 2016/05/02 17:13:17
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
   // Defined in file C:\\lamp\\www\\Mobilizator\\resources\\views\\partials\\nav.blade.php
-  'users_list' => 'TODO: users_list',
+  'users_list' => 'Users',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'A message for you',
   'actions' => 'Actions',
@@ -117,7 +117,7 @@ return array (
   'you_see_only_your_stuff' => 'You see only the discussions and actions from your groups',
   'your_groups' => 'Your groups',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' => 
+  'LLH:obsolete' =>
   array (
     'admin_settings' => 'Admin settings',
     'all_discussions' => 'All discussions',

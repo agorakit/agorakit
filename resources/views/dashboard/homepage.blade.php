@@ -15,20 +15,20 @@
     <li role="presentation" @unless (Auth::check()) class="active" @endunless>
       <a href="#presentation" aria-controls="presentation" role="tab" data-toggle="tab">
         <i class="fa fa-info-circle"></i>
-        <span class="hidden-xs">{{ trans('messages.presentation') }}</span>
+        <span class="hidden-sm">{{ trans('messages.presentation') }}</span>
       </a>
     </li>
 
     <li role="presentation" @if (Auth::check()) class="active" @endif>
       <a href="#discussions" aria-controls="discussions" role="tab" data-toggle="tab">
         <i class="fa fa-comments"></i>
-        <span class="hidden-xs">{{ trans('messages.latest_discussions') }}</span>
+        <span class="hidden-sm">{{ trans('messages.latest_discussions') }}</span>
       </a>
     </li>
     <li role="presentation">
       <a href="#actions" aria-controls="actions" role="tab" data-toggle="tab">
         <i class="fa fa-calendar"></i>
-        <span class="hidden-xs">{{ trans('group.latest_actions') }}</span>
+        <span class="hidden-sm">{{ trans('group.latest_actions') }}</span>
       </a>
     </li>
 
@@ -36,7 +36,7 @@
       <li role="presentation">
         <a href="#mygroups" aria-controls="groups" role="tab" data-toggle="tab">
           <i class="fa fa-cube"></i>
-          <span class="hidden-xs">{{ trans('messages.my_groups') }}</span>
+          <span class="hidden-sm">{{ trans('messages.my_groups') }}</span>
         </a>
       </li>
     @endif
@@ -44,7 +44,7 @@
     <li role="presentation">
       <a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">
         <i class="fa fa-cubes"></i>
-        <span class="hidden-xs">{{ trans('messages.all_groups') }}</span>
+        <span class="hidden-sm">{{ trans('messages.all_groups') }}</span>
       </a>
     </li>
 
@@ -63,7 +63,7 @@
             <i class="fa fa-pencil"></i> {{trans('messages.modify_intro_text')}}
           </a>
         @endif
-  
+
       {!! setting('homepage_presentation', trans('documentation.intro')) !!}
 
 

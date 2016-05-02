@@ -12,7 +12,7 @@
                 @foreach( $users->chunk(3) as $users_rows)
                     <div class="row">
                         @foreach( $users_rows as $user)
-                            <div class="col-md-4">
+                            <div class="col-xs-12 col-md-4 col">
                                 <div class="user">
                                     <a href="{{action('UserController@show', $user)}}">
                                         <img src="{{$user->avatar()}}" class="img-circle" style="float:right; width:60px; height:60px"/>
@@ -21,14 +21,14 @@
                                     <div class="summary">{{summary($user->body, 200)}}</div>
                                     @if ($user->groups->count() > 0)
                                         @foreach ($user->groups as $group)
-                                            <span class="label label-default">{{$group->name}}</span>
+                                            <span class="label label-default"><a href="{{action('GroupController@show', $group)}}">{{$group->name}}</a></span>
                                         @endforeach
                                     @endif
-                                @endforeach
+                                </div>
                             </div>
-                        </div>
-                    @endforeach
-                </div>
+                        @endforeach
+                    </div>
+                @endforeach
                 {!!$users->render()!!}
             @else
                 {{trans('messages.nothing_yet')}}

@@ -152,31 +152,17 @@ background-color: rgb(242, 241, 239);
     height: 40px;
 }
 
-.users_list
-{
-    -webkit-column-width: 20em; /* Chrome, Safari, Opera */
-    -moz-column-width: 20em; /* Firefox */
-    column-width: 20em;
-
-    -moz-column-fill: auto;
-    -webkit-column-fill: auto;
-    column-fill: auto;
-
-}
-
 
 .users_list .user
 {
     font-size: 0.9em;
-    padding: 15px;
+    padding: 1em;
     margin-bottom: 3em;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    min-height: 200px;
 }
 
-
-.users_list .user .profile .summary
-{
-    font-size: 0.8em;
-}
 
 
 

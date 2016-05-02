@@ -1,36 +1,10 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/05/02 17:13:18 
+ Generated via "php artisan localization:missing" at 2016/05/02 17:13:18
 *************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file C:\\lamp\\www\\Mobilizator\\resources\\views\\membership\\join.blade.php
-  'how_does_it_work' => 'TODO: how_does_it_work',
-  // Defined in file C:\\lamp\\www\\Mobilizator\\resources\\views\\auth\\register.blade.php
-  'if_you_already_have_account' => 'TODO: if_you_already_have_account',
-  // Defined in file C:\\lamp\\www\\Mobilizator\\resources\\views\\auth\\login.blade.php
-  'if_you_dont_have_account' => 'TODO: if_you_dont_have_account',
-  // Defined in file C:\\lamp\\www\\Mobilizator\\resources\\views\\partials\\invite.blade.php
-  'if_you_want_participate_in_this_group' => 'TODO: if_you_want_participate_in_this_group',
-  // Defined in file C:\\lamp\\www\\Mobilizator\\resources\\views\\membership\\join.blade.php
-  'join_the_group' => 'TODO: join_the_group',
-  // Defined in file C:\\lamp\\www\\Mobilizator\\resources\\views\\partials\\invite.blade.php
-  'join_this_group' => 'TODO: join_this_group',
-  // Defined in file C:\\lamp\\www\\Mobilizator\\app\\Mailers\\AppMailer.php
-  'news_from_group_email_subject' => 'TODO: news_from_group_email_subject',
-  // Defined in file C:\\lamp\\www\\Mobilizator\\resources\\views\\dashboard\\users.blade.php
-  'users' => 'TODO: users',
-  // Defined in file C:\\lamp\\www\\Mobilizator\\resources\\views\\partials\\nav.blade.php
-  'users_list' => 'TODO: users_list',
-  // Defined in file C:\\lamp\\www\\Mobilizator\\resources\\views\\auth\\login.blade.php
-  'you_can_create_one_here' => 'TODO: you_can_create_one_here',
-  // Defined in file C:\\lamp\\www\\Mobilizator\\resources\\views\\auth\\register.blade.php
-  'you_can_login_here' => 'TODO: you_can_login_here',
-  // Defined in file C:\\lamp\\www\\Mobilizator\\resources\\views\\partials\\invite.blade.php
-  'you_login' => 'TODO: you_login',
-  // Defined in file C:\\lamp\\www\\Mobilizator\\resources\\views\\partials\\invite.blade.php
-  'you_register' => 'TODO: you_register',
+ 
   //==================================== Translations ====================================//
   'a_message_for_you' => 'U heeft een bericht',
   'actions' => 'Acties',
@@ -129,7 +103,7 @@ return array (
   'you_see_only_your_stuff' => 'U ziet enkel de discussies en acties van uw groepen',
   'your_groups' => 'Mijn groepen',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' => 
+  'LLH:obsolete' =>
   array (
     'admin_settings' => 'Voorkeuren wijzigen',
     'not_a_member' => 'TODO: not_a_member',
