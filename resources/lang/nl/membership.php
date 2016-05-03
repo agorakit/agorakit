@@ -1,7 +1,7 @@
 <?php
 
 return array (
-  'when_to_receive_notifications' => 'When to receive notifications?',
+  'when_to_receive_notifications' => 'Wanneer meldingen ontvangen?',
   'click_here' => 'Klik hier',
   'everyday' => 'Elke dag',
   'everyhour' => 'Elk uur',

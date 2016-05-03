@@ -19,9 +19,10 @@
 
 <div class="tab_content">
 
-  <h1>Ajouter des fichiers</h1>
+  <h1>{{trans('messages.create_file_button')}}</h1>
 
-  <p>Glissez un ou plusieurs fichiers ci dessous</p>
+  <p>{{trans('messages.drop_file_here')}}
+      </p>
 
   {!! Form::open(['url' => action('FileController@create', $group->id), 'class' => 'dropzone', 'files'=>true, 'id'=>'real-dropzone']) !!}
 

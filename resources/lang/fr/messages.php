@@ -1,9 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/05/02 19:27:54 
+ Generated via "php artisan localization:missing" at 2016/05/03 20:19:57
 *************************************************************************/
 
 return array (
+  //============================== New strings to translate ==============================//
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/files/create.blade.php
+  'drop_file_here' => 'Glissez un ou plusieurs fichiers ci-dessous',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'actions' => 'Actions',
@@ -16,6 +19,7 @@ return array (
   'changed' => 'a modifié',
   'changed_from' => 'valeur initiale',
   'changed_to' => 'changé en',
+  'click_to_confirm' => 'Cliquez ici pour confirmer votre adresse email',
   'confirm_password' => 'Confirmer le mot de passe',
   'confirm_your_email' => 'Vérifiez votre adresse email',
   'contact' => 'Contacter',
@@ -29,6 +33,7 @@ return array (
   'description' => 'Description',
   'details' => 'En savoir plus',
   'discussions' => 'Discussions',
+  'do_nothing' => 'ne faites rien',
   'edit' => 'Modifier',
   'email' => 'Email',
   'email_not_verified' => 'Votre adresse mail n\'est pas vérifié, merci de la vérifier maintenant depuis votre boite email',
@@ -45,6 +50,7 @@ return array (
   'howdy' => 'Oups',
   'i_changed_my_mind' => 'J\'ai changé d\'avis, je ne veux pas quitter ce groupe',
   'if_you_already_have_account' => 'Si vous avez déjà un compte sur ce site',
+  'if_you_didnt_ask' => 'Si vous n\'avez pas demandé à rejoindre ce groupe',
   'if_you_dont_have_account' => 'Si vous n\'avez pas de compte sur ce site',
   'if_you_want_participate_in_this_group' => 'Si vous souhaitez participer à ce groupe, ',
   'in' => 'dans',
@@ -101,6 +107,7 @@ return array (
   'start' => 'Début',
   'started_by' => 'Démarré par',
   'stop' => 'Fin',
+  'thank_you_for_joining' => 'Merci d\'avoir rejoint',
   'title' => 'Titre',
   'to_read' => 'à lire',
   'toggle_navigation' => 'Activer la navigation',
@@ -108,6 +115,7 @@ return array (
   'user_profile' => 'Profil utilisateur',
   'users' => 'Utilisateurs',
   'users_list' => 'Utilisateurs',
+  'we_need_to_confirm' => 'Nous avons juste besoin de confirmer votre adresse mail.',
   'what' => 'Quoi',
   'when' => 'Quand',
   'where' => 'Où',
@@ -120,7 +128,7 @@ return array (
   'you_see_only_your_stuff' => 'Vous ne voyez que les discussions et actions de vos groupes',
   'your_groups' => 'Mes groupes',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' => 
+  'LLH:obsolete' =>
   array (
     'admin_settings' => 'Modifier les préférences',
     'all_discussions' => 'Toutes les dicussions',

@@ -1,9 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/05/02 19:27:54 
+ Generated via "php artisan localization:missing" at 2016/05/03 20:19:57 
 *************************************************************************/
 
 return array (
+  //============================== New strings to translate ==============================//
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/files/create.blade.php
+  'drop_file_here' => 'TODO: drop_file_here',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'A message for you',
   'actions' => 'Actions',
@@ -16,6 +19,7 @@ return array (
   'changed' => 'Changed',
   'changed_from' => 'Changed from',
   'changed_to' => 'Changed to',
+  'click_to_confirm' => 'TODO: click_to_confirm',
   'confirm_password' => 'Confirm password',
   'confirm_your_email' => 'Confirm your email',
   'contact' => 'contact',
@@ -29,6 +33,7 @@ return array (
   'description' => 'Description',
   'details' => 'Details',
   'discussions' => 'Discussions',
+  'do_nothing' => 'TODO: do_nothing',
   'edit' => 'Edit',
   'email' => 'Email',
   'email_not_verified' => 'Email not verified',
@@ -45,6 +50,7 @@ return array (
   'howdy' => 'Whoops!',
   'i_changed_my_mind' => 'I changed my mind, I don\'t want to leave this group',
   'if_you_already_have_account' => 'If you already have an account',
+  'if_you_didnt_ask' => 'TODO: if_you_didnt_ask',
   'if_you_dont_have_account' => 'If you don\'t have an account (yet!)',
   'if_you_want_participate_in_this_group' => 'If you want to participate in this group',
   'in' => 'in',
@@ -101,6 +107,7 @@ return array (
   'start' => 'Start',
   'started_by' => 'Started by',
   'stop' => 'Stop',
+  'thank_you_for_joining' => 'TODO: thank_you_for_joining',
   'title' => 'Title',
   'to_read' => 'To read',
   'toggle_navigation' => 'Toggle navigation',
@@ -108,6 +115,7 @@ return array (
   'user_profile' => 'User profile',
   'users' => 'Users',
   'users_list' => 'Users',
+  'we_need_to_confirm' => 'TODO: we_need_to_confirm',
   'what' => 'what',
   'when' => 'when',
   'where' => 'where',
