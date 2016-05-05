@@ -1,10 +1,10 @@
 <div class="form-group">
-	{!! Form::label('name', 'Titre:') !!}
+	{!! Form::label('name', trans('messages.title')) !!}
 	{!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <div class="form-group">
-	{!! Form::label('body', 'Text:') !!}
+	{!! Form::label('body', trans('messages.body')) !!}
 	{!! Form::textarea('body', null, ['id' => 'wysiwyg', 'class' => 'form-control', 'required']) !!}
 </div>
 

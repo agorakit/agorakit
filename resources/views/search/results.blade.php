@@ -4,12 +4,11 @@
 
     <div class="tab_content">
 
-        <h1>Your search for <strong>{{$query}}</strong></h1>
-        <p>Ce système de recherche est en cours de développement / This search system is being developed</p>
+        <h1>{{trans('messages.your_search_for')}}<strong>{{$query}}</strong></h1>
 
 
         @if ($groups->count() > 0)
-            <h2>Groups</h2>
+            <h2>{{trans('messages.groups')}}</h2>
         @endif
         @foreach ($groups as $group)
             <div class="result">
@@ -19,7 +18,7 @@
         @endforeach
 
         @if ($discussions->count() > 0)
-            <h2>Discussions</h2>
+            <h2>{{trans('messages.discussions')}}</h2>
         @endif
         @foreach ($discussions as $discussion)
             <div class="result">
@@ -30,7 +29,7 @@
 
 
         @if ($actions->count() > 0)
-            <h2>Actions</h2>
+            <h2>{{trans('messages.actions')}}</h2>
         @endif
         @foreach ($actions as $action)
             <div class="result">
@@ -41,7 +40,7 @@
 
 
         @if ($users->count() > 0)
-            <h2>Users</h2>
+            <h2>{{trans('messages.users')}}</h2>
         @endif
         @foreach ($users as $user)
             <div class="result">
@@ -51,7 +50,7 @@
         @endforeach
 
         @if ($comments->count() > 0)
-            <h2>Comments</h2>
+            <h2>{{trans('messages.comments')}}</h2>
         @endif
         @foreach ($comments as $comment)
             <div class="result">
@@ -62,7 +61,7 @@
 
 
         @if ($files->count() > 0)
-            <h2>Files</h2>
+            <h2>{{trans('messages.files')}}</h2>
         @endif
         @foreach ($files as $file)
             <div class="result">

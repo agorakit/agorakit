@@ -91,7 +91,7 @@ class InviteController extends Controller
         Mail::send('emails.invite', ['invite' => $invite, 'group' => $group, 'invitating_user' => $request->user()], function ($message) use ($email, $request, $group) {
           $message->from(env('MAIL_FROM', 'noreply@example.com'), env('APP_NAME', 'Laravel'))
           ->to($email)
-          ->subject( '[' . env('APP_NAME') . '] Invitation à rejoindre le groupe "' . $group->name . '"');
+          ->subject( '[' . env('APP_NAME') . '] ' . trans('messages.invitation_to_join') ' "'   . $group->name . '"');
         });
 
         $status_message .= trans('membership.users_has_been_invited') .  ' : ' .  $email . '<br/>';
@@ -133,14 +133,14 @@ class InviteController extends Controller
       // remove invite we don't need it anymore, or do we for logging purposes?
       $invite->delete();
 
-      $request->session()->flash('message', 'Vous êtes maintenant membre de ce groupe' );
+      $request->session()->flash('message', trans('messages.you_are_now_a_member_of_this_group') );
       return redirect()->action('GroupController@show', $group_id);
     }
     else
     {
       Auth::logout();
       // if user doesn't exists, we have the opportunity to create, login and validate email in one go (since we have the invite token)
-      $request->session()->flash('message', 'Vous n\'avez pas encore de compte sur ce site, merci de vous en créer un');
+      $request->session()->flash('message', trans('messages.you_dont_have_an_account_create_one_now'));
 
       return view('invites.register')
       ->with('email', $invite->email)
@@ -183,7 +183,7 @@ class InviteController extends Controller
 
       Auth::login($user);
 
-      $request->session()->flash('message', 'Vous êtes maintenant membre de ce groupe' );
+      $request->session()->flash('message', trans('messages.you_are_now_a_member_of_this_group') );
       return redirect()->action('GroupController@show', $group_id);
     }
   }

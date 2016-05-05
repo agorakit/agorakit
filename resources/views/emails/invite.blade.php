@@ -5,23 +5,25 @@
 
 
 
-<strong>Bonjour,</strong>
+<strong>{{trans('messages.hello')}}</strong>
 
 <p>
-  {{$invitating_user->name}} pense que vous pourriez être intéressé(e) de rejoindre le groupe "<a href="{{action('GroupController@show',  [$group->id] )}}">{{$group->name}}</a>" au sein de <a href="{{action('DashboardController@index')}}">{{env('APP_NAME')}}</a>
+  {{$invitating_user->name}} {{trans('messages.thinks_that_you_might_want_to_join')}} "<a href="{{action('GroupController@show',  [$group->id] )}}">{{$group->name}}</a>"
+   {{trans('messages.inside')}} <a href="{{action('DashboardController@index')}}">{{env('APP_NAME')}}</a>
 </p>
 <p>
-Cela vous permettra d'être informé(e) des actions de ce groupe et de prendre part aux discussions.
+{{trans('messages.this_will_allow_you_to_be_informed')}}
+
 </p>
 
-<p>Voici la description de ce groupe :
+<p>{{trans('messages.here_is_the_description_of_the_group')}} :
 <p>{!! filter($group->body) !!}</p>
 
 
 @include('emails.button', ['url' => action('InviteController@inviteConfirm', [$group->id, $invite->token]), 'label' => 'Accepter l\'invitation'])
-<p>(Cette action est réversible)</p>
+<p>({{trans('messages.this_action_can_be_reverted')}})</p>
 
-<p style="font-size: 0.8em">Si vous ne souhaitez pas rejoindre ce groupe, ne faites rien. Vous ne recevrez pas d'invitations suplémentaires à participer à ce groupe.</p>
+<p style="font-size: 0.8em">{{trans('messages.if_you_donwt_want_to_join_do_nothing')}}</p>
 
 
 @endsection

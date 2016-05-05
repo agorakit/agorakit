@@ -1,25 +1,34 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/05/03 20:19:57
+ Generated via "php artisan localization:missing" at 2016/05/05 21:31:51
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/files/create.blade.php
-  'drop_file_here' => 'Glissez un ou plusieurs fichiers ci-dessous',
+  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/InviteController.php
+  'invitation_to_join' => 'Invitation à rejoindre le groupe',
+  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/InviteController.php
+  'you_are_now_a_member_of_this_group' => 'Vous êtes maintenant membre du groupe',
+  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/InviteController.php
+  'you_dont_have_an_account_create_one_now' => 'Vous n\'avez pas encore de compte merci de vous en créer un',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'actions' => 'Actions',
   'agenda' => 'Agenda',
   'all_groups' => 'Tous les groupes',
   'back_to' => 'Retour à',
+  'because_you_asked_for_it' => 'parceque vous vous avez demandé à être tenu(e) au courant',
   'begins' => 'Début',
+  'body' => 'Texte',
   'cancel' => 'J\'ai changé d\'avis, annuler',
   'change_my_password' => 'Changer mon mot de passe',
   'changed' => 'a modifié',
   'changed_from' => 'valeur initiale',
   'changed_to' => 'changé en',
+  'click_here' => 'Cliquez ici',
+  'click_here_to_change_your_password' => 'Cliquez ici pour changer votre mot de passe',
   'click_to_confirm' => 'Cliquez ici pour confirmer votre adresse email',
+  'comments' => 'Commentaires',
   'confirm_password' => 'Confirmer le mot de passe',
   'confirm_your_email' => 'Vérifiez votre adresse email',
   'contact' => 'Contacter',
@@ -34,7 +43,9 @@ return array (
   'details' => 'En savoir plus',
   'discussions' => 'Discussions',
   'do_nothing' => 'ne faites rien',
+  'drop_file_here' => 'Glissez un ou plusieurs fichiers ci-dessous',
   'edit' => 'Modifier',
+  'edit_item' => 'Modifier',
   'email' => 'Email',
   'email_not_verified' => 'Votre adresse mail n\'est pas vérifié, merci de la vérifier maintenant depuis votre boite email',
   'email_not_verified_send_again_verification' => 'Si vous n\'avez pas reçu le mail de confirmation cliquez ici pour en recevoir un autre',
@@ -45,6 +56,9 @@ return array (
   'group' => 'Groupe',
   'group_home' => 'A propos de ce groupe',
   'groups' => 'Groupes',
+  'hello' => 'Bonjour',
+  'here_are_the_latest_news_of' => 'Voici les dernières nouvelles de',
+  'here_is_the_description_of_the_group' => 'Voici la description de ce groupe',
   'history' => 'Historique des modifications',
   'how_does_it_work' => 'Comment ça marche ?',
   'howdy' => 'Oups',
@@ -52,8 +66,12 @@ return array (
   'if_you_already_have_account' => 'Si vous avez déjà un compte sur ce site',
   'if_you_didnt_ask' => 'Si vous n\'avez pas demandé à rejoindre ce groupe',
   'if_you_dont_have_account' => 'Si vous n\'avez pas de compte sur ce site',
+  'if_you_dont_want_news_anymore' => 'Si vous ne souhaites plus recevoir de nouvelles',
+  'if_you_dont_want_to_change_password_do_nothing' => 'Si vous ne souhaitez pas changer de mot de passe, ne faites rien.',
+  'if_you_donwt_want_to_join_do_nothing' => 'Si vous ne souhaitez pas rejoindre ce groupe, ne faites rien. Vous ne recevrez pas d\'invitations suplémentaires à participer à ce groupe.',
   'if_you_want_participate_in_this_group' => 'Si vous souhaitez participer à ce groupe, ',
   'in' => 'dans',
+  'inside' => 'au sein de ',
   'invitation_sent_again' => 'Un nouveau mail de vérification vous a été envoyé, vérifiez votre boite mail ainsi que le dossier spam afin de pouvoir vérifier votre adresse mail. Ceci nous permet d\'éviter le spam sur ce site. Merci pour votre compréhension.',
   'join' => 'Rejoindre ce groupe',
   'join_the_group' => 'rejoignez-le',
@@ -61,6 +79,7 @@ return array (
   'latest_comments' => 'Derniers commentaires',
   'latest_discussions' => 'Discussions récentes',
   'latest_files' => 'Derniers fichiers',
+  'latest_users' => 'Nouveau participants',
   'leave_this_group' => 'Quitter ce groupe',
   'leaving_help_message' => 'Nous sommes désolés de vous voir partir de ce groupe. Merci de confirmer que c\'est bien votre intention. Vous ne recevrez plus de notifications par mail de ce groupe et vous n\'apparaîtrez plus dans la liste des participants.',
   'leaving_the_group_called' => 'Quitter le groupe',
@@ -79,6 +98,7 @@ return array (
   'my_groups' => 'Mes groupes',
   'name' => 'Nom',
   'news_from_group_email_subject' => 'Des nouvelles du groupe',
+  'next_actions' => 'Prochaines actions',
   'nothing_yet' => 'Il n\'y a encore rien ici',
   'or' => 'ou',
   'password' => 'Mot de passe',
@@ -97,6 +117,7 @@ return array (
   'save' => 'Enregistrer',
   'send' => 'Envoyer',
   'send_my_recover_email' => 'M\'envoyer un mail pour changer mon mot de passe',
+  'sent_you_a_message' => 'vous a envoyé un message',
   'settings' => 'Préférences',
   'show_all' => 'Afficher tout',
   'show_gallery' => 'Afficher sous forme de gallerie photo',
@@ -106,8 +127,12 @@ return array (
   'something_wrong' => 'Il y a quelque chose qui ne fonctionne pas',
   'start' => 'Début',
   'started_by' => 'Démarré par',
+  'starts' => 'Début',
   'stop' => 'Fin',
   'thank_you_for_joining' => 'Merci d\'avoir rejoint',
+  'thinks_that_you_might_want_to_join' => 'pense que vous pourriez être intéressé(e) à joindre',
+  'this_action_can_be_reverted' => 'Cette action est réversible',
+  'this_will_allow_you_to_be_informed' => 'Cela vous permettra d\'être informé(e) des actions de ce groupe et de prendre part aux discussions.',
   'title' => 'Titre',
   'to_read' => 'à lire',
   'toggle_navigation' => 'Activer la navigation',
@@ -119,14 +144,17 @@ return array (
   'what' => 'Quoi',
   'when' => 'Quand',
   'where' => 'Où',
+  'you_asked_for_assword_change' => 'Vous avez demandé de pouvoir changer votre mot de passe',
   'you_can_create_one_here' => 'Vous pouvez en créer un ici',
   'you_can_login_here' => 'vous pouvez vous connecter ici',
   'you_login' => 'connectez-vous',
+  'you_receive_this_email_from_the_group' => 'Vous recevez cet email du groupe',
   'you_register' => 'créez-vous un compte ici
 ',
   'you_see_all' => 'Vous voyez toutes les discussions et actions de tous les groupes.',
   'you_see_only_your_stuff' => 'Vous ne voyez que les discussions et actions de vos groupes',
   'your_groups' => 'Mes groupes',
+  'your_search_for' => 'Votre recherche pour',
   //================================== Obsolete strings ==================================//
   'LLH:obsolete' =>
   array (
@@ -135,7 +163,6 @@ return array (
     'all_the_groups_welcome' => 'Voici tous les groupes sur ce serveur',
     'close' => 'Fermer',
     'groups_list' => 'Liste des groupes',
-    'hello' => 'Bonjour',
     'home' => 'Accueil',
     'not_a_member' => 'Vous n\'êtes pas membre de ce groupe',
     'not_logged_in' => 'Vous n\'êtes pas connecté(e)',

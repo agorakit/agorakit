@@ -4,7 +4,7 @@
 
 @include('partials.grouptab')
 <div class="tab_content">
-  <h1>Modification du groupe</h1>
+  <h1>{{trans('messages.edit_item')}}</h1>
 
 
   {!! Form::model($group, array('action' => ['GroupController@update', $group->id], 'files' => true)) !!}

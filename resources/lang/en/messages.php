@@ -1,25 +1,34 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/05/03 20:19:57 
+ Generated via "php artisan localization:missing" at 2016/05/05 21:31:51 
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/files/create.blade.php
-  'drop_file_here' => 'TODO: drop_file_here',
+  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/InviteController.php
+  'invitation_to_join' => 'TODO: invitation_to_join',
+  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/InviteController.php
+  'you_are_now_a_member_of_this_group' => 'TODO: you_are_now_a_member_of_this_group',
+  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/InviteController.php
+  'you_dont_have_an_account_create_one_now' => 'TODO: you_dont_have_an_account_create_one_now',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'A message for you',
   'actions' => 'Actions',
   'agenda' => 'Agenda',
   'all_groups' => 'All groups',
   'back_to' => 'Back to',
+  'because_you_asked_for_it' => 'TODO: because_you_asked_for_it',
   'begins' => 'Begins',
+  'body' => 'TODO: body',
   'cancel' => 'I changed my mind, cancel',
   'change_my_password' => 'Change my password',
   'changed' => 'Changed',
   'changed_from' => 'Changed from',
   'changed_to' => 'Changed to',
+  'click_here' => 'TODO: click_here',
+  'click_here_to_change_your_password' => 'TODO: click_here_to_change_your_password',
   'click_to_confirm' => 'TODO: click_to_confirm',
+  'comments' => 'TODO: comments',
   'confirm_password' => 'Confirm password',
   'confirm_your_email' => 'Confirm your email',
   'contact' => 'contact',
@@ -34,7 +43,9 @@ return array (
   'details' => 'Details',
   'discussions' => 'Discussions',
   'do_nothing' => 'TODO: do_nothing',
+  'drop_file_here' => 'TODO: drop_file_here',
   'edit' => 'Edit',
+  'edit_item' => 'TODO: edit_item',
   'email' => 'Email',
   'email_not_verified' => 'Email not verified',
   'email_not_verified_send_again_verification' => 'Click here to send your verification email again',
@@ -45,6 +56,9 @@ return array (
   'group' => 'Group',
   'group_home' => 'Group home',
   'groups' => 'Groups',
+  'hello' => 'Hello',
+  'here_are_the_latest_news_of' => 'TODO: here_are_the_latest_news_of',
+  'here_is_the_description_of_the_group' => 'TODO: here_is_the_description_of_the_group',
   'history' => 'history',
   'how_does_it_work' => 'How does-it work?',
   'howdy' => 'Whoops!',
@@ -52,8 +66,12 @@ return array (
   'if_you_already_have_account' => 'If you already have an account',
   'if_you_didnt_ask' => 'TODO: if_you_didnt_ask',
   'if_you_dont_have_account' => 'If you don\'t have an account (yet!)',
+  'if_you_dont_want_news_anymore' => 'TODO: if_you_dont_want_news_anymore',
+  'if_you_dont_want_to_change_password_do_nothing' => 'TODO: if_you_dont_want_to_change_password_do_nothing',
+  'if_you_donwt_want_to_join_do_nothing' => 'TODO: if_you_donwt_want_to_join_do_nothing',
   'if_you_want_participate_in_this_group' => 'If you want to participate in this group',
   'in' => 'in',
+  'inside' => 'TODO: inside',
   'invitation_sent_again' => 'Invitation sent again',
   'join' => 'Join',
   'join_the_group' => 'Join the group',
@@ -61,6 +79,7 @@ return array (
   'latest_comments' => 'Latest comments',
   'latest_discussions' => 'Latest discussions',
   'latest_files' => 'Latest files',
+  'latest_users' => 'TODO: latest_users',
   'leave_this_group' => 'Leave this group',
   'leaving_help_message' => 'We are sad to see you go... confirm that you want to leave this group. You won\'t receive notifications anymore.',
   'leaving_the_group_called' => 'Leaving the group called',
@@ -79,6 +98,7 @@ return array (
   'my_groups' => 'My groups',
   'name' => 'Name',
   'news_from_group_email_subject' => 'News from the group',
+  'next_actions' => 'TODO: next_actions',
   'nothing_yet' => 'There is nothing here...yet!',
   'or' => 'or',
   'password' => 'Password',
@@ -97,6 +117,7 @@ return array (
   'save' => 'Save',
   'send' => 'send',
   'send_my_recover_email' => 'Send my recover email',
+  'sent_you_a_message' => 'TODO: sent_you_a_message',
   'settings' => 'Settings',
   'show_all' => 'TODO: show_all',
   'show_gallery' => 'Show photo gallery',
@@ -106,8 +127,12 @@ return array (
   'something_wrong' => 'Something is wrong with your submission',
   'start' => 'Start',
   'started_by' => 'Started by',
+  'starts' => 'TODO: starts',
   'stop' => 'Stop',
   'thank_you_for_joining' => 'TODO: thank_you_for_joining',
+  'thinks_that_you_might_want_to_join' => 'TODO: thinks_that_you_might_want_to_join',
+  'this_action_can_be_reverted' => 'TODO: this_action_can_be_reverted',
+  'this_will_allow_you_to_be_informed' => 'TODO: this_will_allow_you_to_be_informed',
   'title' => 'Title',
   'to_read' => 'To read',
   'toggle_navigation' => 'Toggle navigation',
@@ -119,13 +144,16 @@ return array (
   'what' => 'what',
   'when' => 'when',
   'where' => 'where',
+  'you_asked_for_assword_change' => 'TODO: you_asked_for_assword_change',
   'you_can_create_one_here' => 'You can create one here',
   'you_can_login_here' => 'You can login here',
   'you_login' => 'login here',
+  'you_receive_this_email_from_the_group' => 'TODO: you_receive_this_email_from_the_group',
   'you_register' => 'register here',
   'you_see_all' => 'You see all discussions and actions of all groups',
   'you_see_only_your_stuff' => 'You see only the discussions and actions from your groups',
   'your_groups' => 'Your groups',
+  'your_search_for' => 'TODO: your_search_for',
   //================================== Obsolete strings ==================================//
   'LLH:obsolete' => 
   array (
@@ -134,7 +162,6 @@ return array (
     'all_the_groups_welcome' => 'Here are all the groups on this server.',
     'close' => 'Close',
     'groups_list' => 'Groups list',
-    'hello' => 'Hello',
     'home' => 'Home',
     'not_a_member' => 'You are not a member of this group',
     'not_logged_in' => 'You are not logged-in',

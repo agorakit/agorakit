@@ -88,17 +88,17 @@ CKEDITOR.replace( 'wysiwyg' );
 
 
 <div class="form-group">
-  {!! Form::label('name', 'Titre') !!}
+  {!! Form::label('name', trans('messages.title')) !!}
   {!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <div class="form-group">
-  {!! Form::label('body', 'Description') !!}
+  {!! Form::label('body', trans('messages.description')) !!}
   {!! Form::textarea('body', null, ['id' => 'wysiwyg', 'class' => 'form-control', 'required']) !!}
 </div>
 
 <div class="form-group">
-  {!! Form::label('location', 'Localisation / adresse') !!}
+  {!! Form::label('location', rans('messages.place')) !!}
   {!! Form::textarea('location', null, ['class' => 'form-control']) !!}
 </div>
 
@@ -106,7 +106,7 @@ CKEDITOR.replace( 'wysiwyg' );
 
   <div class="col-md-6">
     <div class="form-group">
-      {!! Form::label('start', 'Début') !!}<br/>
+      {!! Form::label('start', trans('messages.starts')) !!}<br/>
       @if (isset($action->start))
         {!! Form::text('start', $action->start->format('Y-m-d H:i') , ['class' => 'form-control', 'id' => 'start', 'required']) !!}
       @else
@@ -118,7 +118,7 @@ CKEDITOR.replace( 'wysiwyg' );
 
   <div class="col-md-6">
     <div class="form-group">
-      {!! Form::label('stop', 'Fin') !!}<br/>
+      {!! Form::label('stop', trans('messages.ends')) !!}<br/>
       @if (isset($action->stop))
         {!! Form::text('stop', $action->stop->format('Y-m-d H:i') , ['class' => 'form-control', 'id' => 'stop', 'required']) !!}
       @else

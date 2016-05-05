@@ -1,25 +1,34 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/05/03 20:19:57
+ Generated via "php artisan localization:missing" at 2016/05/05 21:31:51 
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/files/create.blade.php
-  'drop_file_here' => 'Een of meer bestanden toevoegen',
+  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/InviteController.php
+  'invitation_to_join' => 'TODO: invitation_to_join',
+  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/InviteController.php
+  'you_are_now_a_member_of_this_group' => 'TODO: you_are_now_a_member_of_this_group',
+  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/InviteController.php
+  'you_dont_have_an_account_create_one_now' => 'TODO: you_dont_have_an_account_create_one_now',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'U heeft een bericht',
   'actions' => 'Acties',
   'agenda' => 'Agenda',
   'all_groups' => 'Alle groepen',
   'back_to' => 'Terugkeren naar',
+  'because_you_asked_for_it' => 'TODO: because_you_asked_for_it',
   'begins' => 'Start',
+  'body' => 'Tekst',
   'cancel' => 'Ik heb me bedacht, annuleren',
   'change_my_password' => 'Mijn wachtwoord veranderen',
   'changed' => 'veranderd',
   'changed_from' => 'veranderd van',
   'changed_to' => 'veranderd naar',
+  'click_here' => 'Klik hier',
+  'click_here_to_change_your_password' => 'Klik hier om uw wachtwoord te wijzigen',
   'click_to_confirm' => 'Klik om uw mailadres te bevestigen',
+  'comments' => 'Commentaar',
   'confirm_password' => 'Wachtwoord bevestigen',
   'confirm_your_email' => 'Bevestig uw e-mailadres',
   'contact' => 'Contacteren',
@@ -34,7 +43,9 @@ return array (
   'details' => 'Meer weten',
   'discussions' => 'Discussies',
   'do_nothing' => 'dan hoeft u niets te doen',
+  'drop_file_here' => 'Een of meer bestanden toevoegen',
   'edit' => 'Bewerken',
+  'edit_item' => 'Wijzigen',
   'email' => 'E-mail',
   'email_not_verified' => 'Uw e-mailadres is nog niet bevestigd, bevestig dit via je mailbox',
   'email_not_verified_send_again_verification' => '\'Indien u geen bevestigingsmail hebt ontvangen, klik dan hier voor een nieuwe',
@@ -45,6 +56,9 @@ return array (
   'group' => 'Groep',
   'group_home' => 'Over deze groep',
   'groups' => 'Groepen',
+  'hello' => 'Beste',
+  'here_are_the_latest_news_of' => 'TODO: here_are_the_latest_news_of',
+  'here_is_the_description_of_the_group' => 'Dit is de beschrijving van de groep',
   'history' => 'Geschiedenis van de wijzigingen',
   'how_does_it_work' => 'Hoe werkt het ?',
   'howdy' => 'Oeps',
@@ -52,8 +66,12 @@ return array (
   'if_you_already_have_account' => 'Als u al geregistreerd bent',
   'if_you_didnt_ask' => 'Als u geen registratie gevraagd hebt',
   'if_you_dont_have_account' => 'Als u niet geregistreerd bent',
+  'if_you_dont_want_news_anymore' => 'TODO: if_you_dont_want_news_anymore',
+  'if_you_dont_want_to_change_password_do_nothing' => 'Wil u uw wachtwoord niet wijzigen, doe dan niets.',
+  'if_you_donwt_want_to_join_do_nothing' => 'Wenst u niet bij deze groep aan te sluiten, dan hoeft u niets te doen. U krijgt dan geen uitnodigingen meer om bij deze groep aan te sluiten.',
   'if_you_want_participate_in_this_group' => 'Als u wil deelnemen aan deze groep',
   'in' => 'in',
+  'inside' => 'van',
   'invitation_sent_again' => '\'Een nieuwe bevestigingsmail is verstuurd. Controleer zowel uw mailbox als uw spam om uw e-mailadres te kunnen bevestigen. Dit zorgt ervoor dat we spam op deze site kunnen vermijden. Bedankt voor uw begrip.',
   'join' => 'Aansluiten bij deze groep',
   'join_the_group' => 'Neem deel aan deze groep',
@@ -61,6 +79,7 @@ return array (
   'latest_comments' => 'Laatste reacties',
   'latest_discussions' => 'Recente discussies',
   'latest_files' => 'Laatste bestanden',
+  'latest_users' => 'TODO: latest_users',
   'leave_this_group' => 'Deze groep verlaten',
   'leaving_help_message' => 'Jammergenoeg wilt u deze groep verlaten. Gelieve te bevestigen dat dit echt uw bedoeling is. U zal geen meldingen van deze groep meer ontvangen via mail en u zal niet meer op de ledenlijst staan.',
   'leaving_the_group_called' => 'Deze groep verlaten',
@@ -79,6 +98,7 @@ return array (
   'my_groups' => 'Mijn groepen',
   'name' => 'Naam',
   'news_from_group_email_subject' => 'Nieuws van :',
+  'next_actions' => 'TODO: next_actions',
   'nothing_yet' => 'Er staat hier nog niets',
   'or' => 'of',
   'password' => 'Wachtwoord',
@@ -97,6 +117,7 @@ return array (
   'save' => 'Opslaan',
   'send' => 'Verzenden',
   'send_my_recover_email' => 'Zend me een mail om mijn wachtwoord te veranderen',
+  'sent_you_a_message' => 'TODO: sent_you_a_message',
   'settings' => 'Voorkeuren',
   'show_all' => 'Alles tonen',
   'show_gallery' => 'Tonen als fotogalerij',
@@ -106,8 +127,12 @@ return array (
   'something_wrong' => 'Er werkt iets niet',
   'start' => 'Start',
   'started_by' => 'Begonnen door',
+  'starts' => 'Begint',
   'stop' => 'Einde',
   'thank_you_for_joining' => 'Bedankt voor uw registratie',
+  'thinks_that_you_might_want_to_join' => 'denkt dat u misschien geïnteresseerd bent om aan te sluiten bij de groep',
+  'this_action_can_be_reverted' => 'U kunt dit later ongedaan maken',
+  'this_will_allow_you_to_be_informed' => 'Op die manier blijft u op de hoogte van de activiteiten van deze groep, en kunt u deelnemen aan de discussies.',
   'title' => 'Titel',
   'to_read' => 'Om te lezen',
   'toggle_navigation' => 'Navigatie activeren',
@@ -119,15 +144,18 @@ return array (
   'what' => 'Wat',
   'when' => 'Wanneer',
   'where' => 'Waar',
+  'you_asked_for_assword_change' => 'U hebt gevraagd uw wachtwoord te wijzigen',
   'you_can_create_one_here' => 'kan u zich hier registreren',
   'you_can_login_here' => 'kan u hier inloggen',
   'you_login' => 'log in',
+  'you_receive_this_email_from_the_group' => 'TODO: you_receive_this_email_from_the_group',
   'you_register' => 'registreer',
   'you_see_all' => 'U ziet alle discussies en acties van alle groepen.',
   'you_see_only_your_stuff' => 'U ziet enkel de discussies en acties van uw groepen',
   'your_groups' => 'Mijn groepen',
+  'your_search_for' => 'Zoeken',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' =>
+  'LLH:obsolete' => 
   array (
     'admin_settings' => 'Voorkeuren wijzigen',
   ),

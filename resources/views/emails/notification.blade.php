@@ -3,15 +3,15 @@
 @section('content')
 
 
-<strong>Bonjour {{$user->name}},</strong>
+<strong>{{trans('messages.hello')}} {{$user->name}},</strong>
 
 <p>
-  Voici les dernières nouvelles du groupe "<a href="{{action('GroupController@show', $group->id)}}">{{$group->name}}</a>"
+  {{trans('messages.here_are_the_latest_news_of')}} "<a href="{{action('GroupController@show', $group->id)}}">{{$group->name}}</a>"
 </p>
 
 
 @if ($actions->count() > 0)
-<h2>Prochaines actions</h2>
+<h2>{{trans('messages.next_actions')}}</h2>
 @foreach($actions as $action)
 <strong><a href="{{action('ActionController@show', [$group->id, $action->id])}}">{{$action->name}}</a></strong>
 <p>{{ summary($action->body) }}</p>
@@ -27,7 +27,7 @@
 
 
 @if ($discussions->count() > 0)
-<h2>Dernières discussion et mises à jour</h2>
+<h2>{{trans('messages.latest_discussions')}}</h2>
 @foreach($discussions as $discussion)
 <h3><a href="{{action('DiscussionController@show', [$group->id, $discussion->id])}}">{{$discussion->name}} </a></h3>
 <p>
@@ -56,7 +56,7 @@
 
 
 @if ($users->count() > 0)
-<h2>Nouveaux participants</h2>
+<h2>{trans('messages.latest_users')}}</h2>
 @foreach($users as $user)
 <a href="{{action('UserController@show', $user->id)}}">{{$user->name}}</a>
 <br/>
@@ -64,7 +64,7 @@
 @endif
 
 @if ($files->count() > 0)
-<h2>Nouveaux fichiers</h2>
+<h2>{trans('messages.latest_files')}}</h2>
 @foreach($files as $file)
 <a href="{{action('FileController@show', [$group->id, $file->id])}}"><img src="{{action('FileController@thumbnail', [$group->id, $file->id])}}" style="width: 24px; height:24px"/>{{$file->name}}</a>
 <br/>
@@ -75,9 +75,9 @@
 
 
 <p style="margin-top: 5em; font-size: 0.8em">
-  Vous recevez cet email car lors de votre inscription au groupe "{{$group->name}}", vous avez demandé à être tenu au courant de ses activités.
+ {{trans('messages.you_receive_this_email_from_the_group')}} "{{$group->name}}", {{trans('messages.because_you_asked_for_it')}}.
   <br/>
-  Si vous ne souhaitez plus recevoir de message ou changer vos options d'abonnement, <a href="{{action('MembershipController@settings', $group->id)}}">cliquez ici</a>.
+  {{trans('messages.if_you_dont_want_news_anymore')}}, <a href="{{action('MembershipController@settings', $group->id)}}">{{trans('messages.click_here')}}</a>.
 </p>
 
 
