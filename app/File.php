@@ -41,4 +41,10 @@ class File extends Model implements Taggable
     return $this->belongsTo('App\Group');
   }
 
+
+  public function link()
+  {
+      return action('FileController@show', [$this->group, $this]);
+  }
+
 }

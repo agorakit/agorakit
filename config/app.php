@@ -174,7 +174,14 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
 
+        /*
+        // At some point this will be useful :
+        Bestmomo\Installer\InstallerServiceProvider::class,
+        */
+
         DraperStudio\Taggable\ServiceProvider::class
+
+
     ],
 
     /*

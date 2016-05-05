@@ -16,6 +16,7 @@ class SearchController extends Controller
 
     public function index(Request $request){
 
+        /*
         $tnt = new TNTSearch;
 
         // Get current dbconfig
@@ -30,7 +31,45 @@ class SearchController extends Controller
         $tnt->asYouType = true;
 
         $results = $tnt->search($request->get('query'), 10);
+        */
 
-        return $results;
+        $query = $request->get('query');
+
+        $groups = \App\Group::where('name', 'like', '%'. $query . '%')
+        ->orWhere('body', 'like', '%'. $query . '%')
+        ->get();
+
+        $users = \App\User::where('name', 'like', '%'. $query . '%')
+        ->orWhere('body', 'like','%'. $query . '%')
+        ->get();
+
+        $discussions = \App\Discussion::where('name', 'like', '%'. $query . '%')
+        ->orWhere('body', 'like','%'. $query . '%')
+        ->get();
+
+
+        $files = \App\File::where('name', 'like', '%'. $query . '%')
+        ->get();
+
+        $comments = \App\Comment::where('body', 'like', '%'. $query . '%')
+        ->get();
+
+
+
+        /*
+        $results['groups'] = $groups;
+        $results['users'] = $user;
+        $results['discussions'] = $discussions;
+        $results['files'] = $files;
+        $results['comments'] = $comments;
+        */
+
+        return view('search.results')
+        ->with('groups', $groups)
+        ->with('users', $users)
+        ->with('discussions', $discussions)
+        ->with('files', $files)
+        ->with('comments', $comments);
+
     }
 }

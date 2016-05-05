@@ -50,7 +50,7 @@
 
   </ul>
 
-  <div class="tab_content"
+  <div class="tab_content">
 
   <!-- Tab panes -->
   <div class="tab-content">
