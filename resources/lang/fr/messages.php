@@ -1,16 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/05/05 21:31:51
+ Generated via "php artisan localization:missing" at 2016/05/05 22:59:29
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/InviteController.php
-  'invitation_to_join' => 'Invitation à rejoindre le groupe',
-  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/InviteController.php
-  'you_are_now_a_member_of_this_group' => 'Vous êtes maintenant membre du groupe',
-  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/InviteController.php
-  'you_dont_have_an_account_create_one_now' => 'Vous n\'avez pas encore de compte merci de vous en créer un',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/partials/nav.blade.php
+  'search' => 'Rechercher',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'actions' => 'Actions',
@@ -73,6 +69,7 @@ return array (
   'in' => 'dans',
   'inside' => 'au sein de ',
   'invitation_sent_again' => 'Un nouveau mail de vérification vous a été envoyé, vérifiez votre boite mail ainsi que le dossier spam afin de pouvoir vérifier votre adresse mail. Ceci nous permet d\'éviter le spam sur ce site. Merci pour votre compréhension.',
+  'invitation_to_join' => 'Invitation à rejoindre le groupe',
   'join' => 'Rejoindre ce groupe',
   'join_the_group' => 'rejoignez-le',
   'join_this_group' => 'Rejoignez ce groupe',
@@ -144,9 +141,11 @@ return array (
   'what' => 'Quoi',
   'when' => 'Quand',
   'where' => 'Où',
+  'you_are_now_a_member_of_this_group' => 'Vous êtes maintenant membre du groupe',
   'you_asked_for_assword_change' => 'Vous avez demandé de pouvoir changer votre mot de passe',
   'you_can_create_one_here' => 'Vous pouvez en créer un ici',
   'you_can_login_here' => 'vous pouvez vous connecter ici',
+  'you_dont_have_an_account_create_one_now' => 'Vous n\'avez pas encore de compte merci de vous en créer un',
   'you_login' => 'connectez-vous',
   'you_receive_this_email_from_the_group' => 'Vous recevez cet email du groupe',
   'you_register' => 'créez-vous un compte ici

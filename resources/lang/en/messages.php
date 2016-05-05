@@ -1,16 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/05/05 21:31:51 
+ Generated via "php artisan localization:missing" at 2016/05/05 22:59:29 
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/InviteController.php
-  'invitation_to_join' => 'TODO: invitation_to_join',
-  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/InviteController.php
-  'you_are_now_a_member_of_this_group' => 'TODO: you_are_now_a_member_of_this_group',
-  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/InviteController.php
-  'you_dont_have_an_account_create_one_now' => 'TODO: you_dont_have_an_account_create_one_now',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/partials/nav.blade.php
+  'search' => 'TODO: search',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'A message for you',
   'actions' => 'Actions',
@@ -73,6 +69,7 @@ return array (
   'in' => 'in',
   'inside' => 'TODO: inside',
   'invitation_sent_again' => 'Invitation sent again',
+  'invitation_to_join' => 'TODO: invitation_to_join',
   'join' => 'Join',
   'join_the_group' => 'Join the group',
   'join_this_group' => 'Join this group',
@@ -144,9 +141,11 @@ return array (
   'what' => 'what',
   'when' => 'when',
   'where' => 'where',
+  'you_are_now_a_member_of_this_group' => 'TODO: you_are_now_a_member_of_this_group',
   'you_asked_for_assword_change' => 'TODO: you_asked_for_assword_change',
   'you_can_create_one_here' => 'You can create one here',
   'you_can_login_here' => 'You can login here',
+  'you_dont_have_an_account_create_one_now' => 'TODO: you_dont_have_an_account_create_one_now',
   'you_login' => 'login here',
   'you_receive_this_email_from_the_group' => 'TODO: you_receive_this_email_from_the_group',
   'you_register' => 'register here',

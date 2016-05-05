@@ -54,9 +54,9 @@
 
                         <form class="navbar-form navbar-left" role="search" action="{{url('search')}}">
                             <div class="input-group">
-                                <input type="text" name="query" class="form-control" placeholder="Search for...">
+                                <input type="text" name="query" class="form-control" placeholder="{{trans('messages.search')}}...">
                                 <span class="input-group-btn">
-                                    <button type="submit" class="btn btn-default" type="button">Go!</button>
+                                    <button type="submit" class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                                 </span>
                             </div><!-- /input-group -->
                         </form>

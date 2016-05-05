@@ -1,16 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/05/05 21:31:51 
+ Generated via "php artisan localization:missing" at 2016/05/05 22:59:29
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/InviteController.php
-  'invitation_to_join' => 'TODO: invitation_to_join',
-  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/InviteController.php
-  'you_are_now_a_member_of_this_group' => 'TODO: you_are_now_a_member_of_this_group',
-  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/InviteController.php
-  'you_dont_have_an_account_create_one_now' => 'TODO: you_dont_have_an_account_create_one_now',
+  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/partials/nav.blade.php
+  'search' => 'Zoeken',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'U heeft een bericht',
   'actions' => 'Acties',
@@ -73,6 +69,7 @@ return array (
   'in' => 'in',
   'inside' => 'van',
   'invitation_sent_again' => '\'Een nieuwe bevestigingsmail is verstuurd. Controleer zowel uw mailbox als uw spam om uw e-mailadres te kunnen bevestigen. Dit zorgt ervoor dat we spam op deze site kunnen vermijden. Bedankt voor uw begrip.',
+  'invitation_to_join' => 'TODO: invitation_to_join',
   'join' => 'Aansluiten bij deze groep',
   'join_the_group' => 'Neem deel aan deze groep',
   'join_this_group' => 'Neem deel aan deze groep',
@@ -144,9 +141,11 @@ return array (
   'what' => 'Wat',
   'when' => 'Wanneer',
   'where' => 'Waar',
+  'you_are_now_a_member_of_this_group' => 'TODO: you_are_now_a_member_of_this_group',
   'you_asked_for_assword_change' => 'U hebt gevraagd uw wachtwoord te wijzigen',
   'you_can_create_one_here' => 'kan u zich hier registreren',
   'you_can_login_here' => 'kan u hier inloggen',
+  'you_dont_have_an_account_create_one_now' => 'TODO: you_dont_have_an_account_create_one_now',
   'you_login' => 'log in',
   'you_receive_this_email_from_the_group' => 'TODO: you_receive_this_email_from_the_group',
   'you_register' => 'registreer',
@@ -155,7 +154,7 @@ return array (
   'your_groups' => 'Mijn groepen',
   'your_search_for' => 'Zoeken',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' => 
+  'LLH:obsolete' =>
   array (
     'admin_settings' => 'Voorkeuren wijzigen',
   ),

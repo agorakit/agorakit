@@ -115,6 +115,11 @@ background-color: rgb(242, 241, 239);
     border-radius: 2px;
 }
 
+.label a
+{
+    color: white;
+}
+
 /****************************** GROUPS & THEIR HOMEPAGE ********************************/
 
 
@@ -244,6 +249,20 @@ table.special .name {
     margin-bottom: 2em;
 }
 
+/************************** SEARCH  ***************************************/
+.result
+{
+    margin-bottom: 1em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #eee;
+}
+
+.search_results .tab_content
+{
+    padding-bottom: 10em;
+}
+
+
 /*********************** Gallery ************************************************/
 #gallery img
 {
@@ -266,6 +285,12 @@ table.special .name {
     padding: 2%;
     width: 100%;
 }
+
+.nav-tabs li
+{
+    background-color: rgba(238, 238, 238, 0.50);
+}
+
 
 /************************ dialogs *************************/
 
