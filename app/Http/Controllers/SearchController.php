@@ -41,10 +41,17 @@ class SearchController extends Controller
 
         $users = \App\User::where('name', 'like', '%'. $query . '%')
         ->orWhere('body', 'like','%'. $query . '%')
+        ->with('groups')
         ->get();
 
         $discussions = \App\Discussion::where('name', 'like', '%'. $query . '%')
         ->orWhere('body', 'like','%'. $query . '%')
+        ->with('group')
+        ->get();
+
+        $actions = \App\Action::where('name', 'like', '%'. $query . '%')
+        ->orWhere('body', 'like','%'. $query . '%')
+        ->with('group')
         ->get();
 
 
@@ -52,11 +59,12 @@ class SearchController extends Controller
         ->get();
 
         $comments = \App\Comment::where('body', 'like', '%'. $query . '%')
+        ->with('discussion.group')
         ->get();
 
 
-
         /*
+        // this could be used for json stuff
         $results['groups'] = $groups;
         $results['users'] = $user;
         $results['discussions'] = $discussions;
@@ -69,7 +77,8 @@ class SearchController extends Controller
         ->with('users', $users)
         ->with('discussions', $discussions)
         ->with('files', $files)
-        ->with('comments', $comments);
+        ->with('comments', $comments)
+        ->with('actions', $actions);
 
     }
 }

@@ -190,4 +190,10 @@ class User extends Authenticatable
     }
 
 
+    public function link()
+    {
+        return action('UserController@show', [$this]);
+    }
+
+
 }

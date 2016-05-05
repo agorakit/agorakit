@@ -48,4 +48,10 @@ class Action extends Model
   {
     return $this->morphMany('Vote', 'votable');
   }
+
+  public function link()
+  {
+      return action('ActionController@show', [$this->group, $this]);
+  }
+
 }

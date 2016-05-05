@@ -86,4 +86,11 @@ class Discussion extends Model
       abort(500, 'Need to be logged in to access this userReadDiscussion relation');
     }
   }
+
+
+  public function link()
+  {
+      return action('DiscussionController@show', [$this->group, $this]);
+  }
+
 }

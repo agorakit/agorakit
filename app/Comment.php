@@ -46,4 +46,10 @@ class Comment extends Model {
 		return $this->belongsTo('App\Discussion');
 	}
 
+
+    public function link()
+    {
+        return action('DiscussionController@show', [$this->discussion->group, $this->discussion]) . '#comment_' . $this->id;
+    }
+
 }

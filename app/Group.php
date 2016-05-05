@@ -150,4 +150,9 @@ class Group extends Model
   }
 
 
+  public function link()
+  {
+      return action('GroupController@show', $this);
+  }
+
 }
