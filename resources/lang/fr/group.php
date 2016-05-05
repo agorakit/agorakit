@@ -1,6 +1,6 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/05/05 21:31:51 
+ Generated via "php artisan localization:missing" at 2016/05/05 21:31:51
 *************************************************************************/
 
 return array (
@@ -15,7 +15,7 @@ return array (
   'description' => 'Description du groupe',
   'history_of_this_group' => 'Historique des modifications de ce groupe',
   'join' => 'Rejoindre',
-  'latest_actions' => 'Prochaines actions',
+  'latest_actions' => 'Agenda',
   'latest_discussions' => 'Discussions récentes',
   'latest_files' => 'Fichiers récents',
   'leave' => 'Quitter',
@@ -25,7 +25,7 @@ return array (
   'visit' => 'Visiter',
   'your_group_here' => 'Votre groupe ici ?',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' => 
+  'LLH:obsolete' =>
   array (
     'no_group_joined_yet_act_now' => 'Vous ne faites pas encore partie d\'un groupe, rejoignez en un :-)',
   ),

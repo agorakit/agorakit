@@ -1,16 +1,16 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/05/02 17:13:18 
+ Generated via "php artisan localization:missing" at 2016/05/02 17:13:18
 *************************************************************************/
 
 return array (
   //============================== New strings to translate ==============================//
   // Defined in file C:\\lamp\\www\\Mobilizator\\resources\\views\\dashboard\\homepage.blade.php
-  'create' => 'TODO: create',
+  'create' => 'Create',
   // Defined in file C:\\lamp\\www\\Mobilizator\\resources\\views\\dashboard\\homepage.blade.php
-  'create_a_group_intro' => 'TODO: create_a_group_intro',
+  'create_a_group_intro' => 'Klik hier om een nieuwe groep aan te maken',
   // Defined in file C:\\lamp\\www\\Mobilizator\\resources\\views\\dashboard\\homepage.blade.php
-  'your_group_here' => 'TODO: your_group_here',
+  'your_group_here' => 'Maak een nieuwe groep aan',
   //==================================== Translations ====================================//
   'about_this_group' => 'Over deze groep',
   'cover' => 'Cover',
@@ -20,7 +20,7 @@ return array (
   'description' => 'Beschrijving van de groep',
   'history_of_this_group' => 'Geschiedenis van deze groep',
   'join' => 'Toetreden',
-  'latest_actions' => 'Recente acties',
+  'latest_actions' => 'Agenda',
   'latest_discussions' => 'Recente discussies',
   'latest_files' => 'Recente bestanden',
   'leave' => 'Verlaten',

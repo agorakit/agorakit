@@ -78,12 +78,12 @@
       @if (Auth::check() && Auth::user()->getPreference('show', 'all') == 'all')
 
         {{ trans('messages.you_see_all') }}
-        <a class="btn btn-default btn-sm" href="{{action('DashboardController@index')}}?show=my">{{ trans('messages.show_only_my_groups') }}</a>
+        <a href="{{action('DashboardController@index')}}?show=my">{{ trans('messages.show_only_my_groups') }}</a>
       @endif
 
       @if (Auth::check() && Auth::user()->getPreference('show', 'all') == 'my')
         {{ trans('messages.you_see_only_your_stuff') }}
-        <a class="btn btn-default btn-sm" href="{{action('DashboardController@index')}}?show=all">{{ trans('messages.show_all') }}</a>
+        <a href="{{action('DashboardController@index')}}?show=all">{{ trans('messages.show_all') }}</a>
       @endif
 
       <table class="table table-hover special">
