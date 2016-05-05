@@ -10,16 +10,25 @@ Currently, you need to know how to install a laravel application. This is perfec
 
 In short :
 
-- clone this repository
-- copy .env.example to .env and put your db credentials there
-
 ```
+$ git clone https://github.com/philippejadin/Mobilizator.git
+$ cp .env.example .env
+$ editor .env
 $ composer install
 $ php artisan key:generate
 $ php artisan migrate
-$ php artisan db:seed (if you want the db filled with fake infos)
+```
+
+If you want the db filled with fake infos :
+```
+$ php artisan db:seed 
+```
+
+If you want to start a local server :
+```
 $ php artisan serve
 ```
+
 
 The install will be available to localhost:8000
 
