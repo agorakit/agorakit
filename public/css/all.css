@@ -4,6 +4,7 @@
 
 body {
     padding-top: 40px;
+    padding-bottom: 150px;
     color: rgb(20, 20, 20);
     background-color: rgb(244, 240, 231);
     background-image: url("/images/seamless_paper_texture.png");

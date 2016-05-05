@@ -4,8 +4,12 @@
 
     <div class="tab_content">
 
+        <h1>Your search for <strong>{{$query}}</strong></h1>
+        <p>Ce système de recherche est en cours de développement / This search system is being developed</p>
+
+
         @if ($groups->count() > 0)
-            <h1>Groups</h1>
+            <h2>Groups</h2>
         @endif
         @foreach ($groups as $group)
             <div class="result">
@@ -15,7 +19,7 @@
         @endforeach
 
         @if ($discussions->count() > 0)
-            <h1>Discussions</h1>
+            <h2>Discussions</h2>
         @endif
         @foreach ($discussions as $discussion)
             <div class="result">
@@ -26,7 +30,7 @@
 
 
         @if ($actions->count() > 0)
-            <h1>Actions</h1>
+            <h2>Actions</h2>
         @endif
         @foreach ($actions as $action)
             <div class="result">
@@ -37,7 +41,7 @@
 
 
         @if ($users->count() > 0)
-            <h1>Users</h1>
+            <h2>Users</h2>
         @endif
         @foreach ($users as $user)
             <div class="result">
@@ -47,7 +51,7 @@
         @endforeach
 
         @if ($comments->count() > 0)
-            <h1>Comments</h1>
+            <h2>Comments</h2>
         @endif
         @foreach ($comments as $comment)
             <div class="result">
@@ -58,7 +62,7 @@
 
 
         @if ($files->count() > 0)
-            <h1>Files</h1>
+            <h2>Files</h2>
         @endif
         @foreach ($files as $file)
             <div class="result">

@@ -78,7 +78,8 @@ class SearchController extends Controller
         ->with('discussions', $discussions)
         ->with('files', $files)
         ->with('comments', $comments)
-        ->with('actions', $actions);
+        ->with('actions', $actions)
+        ->with('query', $query);
 
     }
 }
