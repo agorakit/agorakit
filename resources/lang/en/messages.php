@@ -1,12 +1,9 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/05/05 22:59:29 
+ Generated via "php artisan localization:missing" at 2016/05/06 10:48:23 
 *************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/partials/nav.blade.php
-  'search' => 'TODO: search',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'A message for you',
   'actions' => 'Actions',
@@ -112,6 +109,7 @@ return array (
   'ressource_deleted_successfully' => 'ressource_deleted_successfully',
   'ressource_updated_successfully' => 'Ressource updated successfully',
   'save' => 'Save',
+  'search' => 'TODO: search',
   'send' => 'send',
   'send_my_recover_email' => 'Send my recover email',
   'sent_you_a_message' => 'TODO: sent_you_a_message',

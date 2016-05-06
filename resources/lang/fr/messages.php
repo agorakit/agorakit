@@ -1,12 +1,9 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/05/05 22:59:29
+ Generated via "php artisan localization:missing" at 2016/05/06 10:48:23 
 *************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/partials/nav.blade.php
-  'search' => 'Rechercher',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'actions' => 'Actions',
@@ -112,6 +109,7 @@ return array (
   'ressource_deleted_successfully' => 'Ce contenu a bien été supprimé',
   'ressource_updated_successfully' => 'Contenu mis à jour avec succès',
   'save' => 'Enregistrer',
+  'search' => 'Rechercher',
   'send' => 'Envoyer',
   'send_my_recover_email' => 'M\'envoyer un mail pour changer mon mot de passe',
   'sent_you_a_message' => 'vous a envoyé un message',
@@ -155,7 +153,7 @@ return array (
   'your_groups' => 'Mes groupes',
   'your_search_for' => 'Votre recherche pour',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' =>
+  'LLH:obsolete' => 
   array (
     'admin_settings' => 'Modifier les préférences',
     'all_discussions' => 'Toutes les dicussions',

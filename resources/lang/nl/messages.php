@@ -1,12 +1,9 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/05/05 22:59:29
+ Generated via "php artisan localization:missing" at 2016/05/06 10:48:23 
 *************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/partials/nav.blade.php
-  'search' => 'Zoeken',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'U heeft een bericht',
   'actions' => 'Acties',
@@ -112,6 +109,7 @@ return array (
   'ressource_deleted_successfully' => 'Deze inhoud is met succes verwijderd',
   'ressource_updated_successfully' => 'Inhoud met succes bewerkt',
   'save' => 'Opslaan',
+  'search' => 'Zoeken',
   'send' => 'Verzenden',
   'send_my_recover_email' => 'Zend me een mail om mijn wachtwoord te veranderen',
   'sent_you_a_message' => 'TODO: sent_you_a_message',
@@ -154,7 +152,7 @@ return array (
   'your_groups' => 'Mijn groepen',
   'your_search_for' => 'Zoeken',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' =>
+  'LLH:obsolete' => 
   array (
     'admin_settings' => 'Voorkeuren wijzigen',
   ),
