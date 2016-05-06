@@ -12,12 +12,15 @@
             {{trans('messages.registered')}} :  {{ $user->created_at->diffForHumans() }}
         </div>
 
-        <div>
-            <img src="{{$user->cover()}}" class="img-rounded"/>
-        </div>
 
-        <div>
-            {!! filter($user->body) !!}
+        <div class="row">
+            <div class="col-md-8">
+                {!! filter($user->body) !!}
+            </div>
+
+            <div class="col-md-4">
+                <img src="{{$user->cover()}}" class="img-rounded img-responsive"/>
+            </div>
         </div>
 
 

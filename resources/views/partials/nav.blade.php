@@ -7,7 +7,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="{{ action('DashboardController@index') }}" class="navbar-brand"><i class="fa fa-child"></i> {{Config::get('mobilizator.name')}}</a>
+            <a href="{{ action('DashboardController@index') }}" class="navbar-brand">
+                <i class="fa fa-child"></i> {{Config::get('mobilizator.name')}}
+            </a>
         </div>
         <div class="navbar-collapse collapse" id="navbar">
 
@@ -41,12 +43,14 @@
                                 </li>
                             </ul>
                         </li>
+
+                        <li>
+                            <a href="{{ action('DashboardController@users') }}">
+                                {{trans('messages.users_list')}}
+                            </a>
+                        </li>    
                     @endif
-                    <li>
-                        <a href="{{ action('DashboardController@users') }}">
-                            {{trans('messages.users_list')}}
-                        </a>
-                    </li>
+
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">

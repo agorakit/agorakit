@@ -7,7 +7,9 @@ body {
     padding-bottom: 150px;
     color: rgb(20, 20, 20);
     background-color: rgb(244, 240, 231);
-    background-image: url("/images/seamless_paper_texture.png");
+    /*background-image: url("/images/seamless_paper_texture.png");*/
+    /*background-image: url("/images/congruent_pentagon.png");*/
+    background-image: url("/images/ignasi_pattern_s.png");
     font-family: "Roboto";
 }
 
@@ -29,10 +31,19 @@ h1, h2, h3, h4, h5, h6
 }
 
 
-.page-header, .tab_content
+.page_header
 {
+    border-radius: 4px;
     background-color: white;
 }
+
+.tab_content
+{
+    border-radius: 4px;
+    border-top-left-radius: 0;
+    background-color: white;
+}
+
 
 .page_header h1, .page_header h2
 {
@@ -45,6 +56,14 @@ h1, h2, h3, h4, h5, h6
 {
     margin-top: 30px;
 }
+
+.credits
+{
+    font-size: 0.6em;
+    text-align: center;
+    margin-top: 3em;
+}
+
 
 /***************** SHADOWS *****************/
 .page_header, .tab_content, .alert, .row .group
@@ -130,6 +149,7 @@ background-color: rgb(242, 241, 239);
 
 .thumbnail img {
     width: 100%;
+    border-radius: 3px;
 }
 .thumbnail {
     display: inline-block;
@@ -142,7 +162,7 @@ background-color: rgb(242, 241, 239);
     overflow: hidden;
 }
 .group h4 {
-    height: 2.5em;
+    height: 2.3em;
     overflow: hidden;
 }
 .page_header {

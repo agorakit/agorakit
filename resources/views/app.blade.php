@@ -34,7 +34,7 @@
 
         @yield('content')
 
-        <p style="font-size: 0.6em; text-align: center;">{{trans('messages.made_with')}} <a href="https://github.com/philippejadin/Mobilizator">Mobilizator</a></p>
+        <div class="credits">{{trans('messages.made_with')}} <a href="https://github.com/philippejadin/Mobilizator">Mobilizator</a></div>
     </div>
 
 
