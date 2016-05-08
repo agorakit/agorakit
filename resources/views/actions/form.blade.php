@@ -98,7 +98,7 @@ CKEDITOR.replace( 'wysiwyg' );
 </div>
 
 <div class="form-group">
-  {!! Form::label('location', rans('messages.place')) !!}
+  {!! Form::label('location', trans('messages.location')) !!}
   {!! Form::textarea('location', null, ['class' => 'form-control']) !!}
 </div>
 
