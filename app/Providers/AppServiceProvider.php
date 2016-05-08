@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Auth;
 use App\Helpers\QueryHelper;
 use Carbon\Carbon;
+use Session;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,6 +33,8 @@ class AppServiceProvider extends ServiceProvider
 
           // set correct locale for Carbon
           Carbon::setLocale(config('app.locale'));
+          //Carbon::setLocale(Session::get('locale', env('APP_DEFAULT_LOCALE', 'nl'))); // TODO this doesn't work
+
     }
 
     /**

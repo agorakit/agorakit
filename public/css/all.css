@@ -6,10 +6,17 @@ body {
     padding-top: 40px;
     padding-bottom: 150px;
     color: rgb(20, 20, 20);
-    background-color: rgb(244, 240, 231);
+    background-color: rgb(41, 65, 75);
     /*background-image: url("/images/seamless_paper_texture.png");*/
     /*background-image: url("/images/congruent_pentagon.png");*/
-    background-image: url("/images/ignasi_pattern_s.png");
+
+    /*
+    background-color: #0a4f30;
+    background-image: url("http://www.transparenttextures.com/patterns/shattered.png");
+    */
+    /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+
+    /*background-image: url("/images/green_cup.png");*/
     font-family: "Roboto";
 }
 
@@ -35,6 +42,7 @@ h1, h2, h3, h4, h5, h6
 {
     border-radius: 4px;
     background-color: white;
+    /*background-color: #e4235c;*/
 }
 
 .tab_content
@@ -42,6 +50,7 @@ h1, h2, h3, h4, h5, h6
     border-radius: 4px;
     border-top-left-radius: 0;
     background-color: white;
+    /*background-color: #e4235c;*/
 }
 
 
@@ -64,6 +73,21 @@ h1, h2, h3, h4, h5, h6
     margin-top: 3em;
 }
 
+a
+{
+    color: rgb(41, 65, 75);
+}
+
+
+
+/****************** NAVBAR *******************/
+.navbar-default, .navbar-default .navbar-brand, .navbar-default .navbar-brand, .navbar-default .navbar-nav > li > a
+{
+    color: rgb(41, 65, 75);
+    text-transform: uppercase;
+    background-color: white;
+}
+
 
 /***************** SHADOWS *****************/
 .page_header, .tab_content, .alert, .row .group
@@ -79,12 +103,6 @@ h1, h2, h3, h4, h5, h6
     border-radius: 3px;
 }
 
-/*
-.container
-{
-background-color: rgb(242, 241, 239);
-}
-*/
 
 .spacer {
     margin-bottom: 2em;
@@ -167,7 +185,6 @@ background-color: rgb(242, 241, 239);
 }
 .page_header {
     margin-bottom: 1em;
-    background-color: white;
     padding: 2%;
 }
 .page_header h1 {
@@ -308,8 +325,19 @@ table.special .name {
 
 .nav-tabs li
 {
-    background-color: rgba(238, 238, 238, 0.50);
+    background-color: rgba(238, 238, 238, 0.70);
+    font-weight: bold;
+    font-weight: 1.1em;
+    color: rgb(41, 65, 75);
 }
+
+.nav-tabs li a
+{
+    color: rgb(41, 65, 75);
+}
+
+
+color: white;
 
 
 /************************ dialogs *************************/
