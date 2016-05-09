@@ -15,7 +15,7 @@ function summary($text, $length = 200)
     }
     else
     {
-    $post = '';
+        $post = '';
     }
     return str_limit(strip_tags($text), $length) . $post;
 }
@@ -27,13 +27,20 @@ function summary($text, $length = 200)
 */
 function filter($content)
 {
-    /*
+    // strip bad stuff
+    $content = safe_html($content);
 
-    $content = preg_replace('$(\s|^)(https?://[a-z0-9_./?=&-]+)(?![^<>]*>)$i', ' <a href="$2" target="_blank">$2</a> ', $content." ");
-    $content = preg_replace('$(\s|^)(www\.[a-z0-9_./?=&-]+)(?![^<>]*>)$i', ' <a target="_blank" href="http://$2"  target="_blank">$2</a> ', $content." ");
-    */
+    // convert links to embedable content TODO much more that that is needed
+    // taken from http://stackoverflow.com/questions/19050890/find-youtube-link-in-php-string-and-convert-it-into-embed-code
+    $content = preg_replace(
+    "/\s*[a-zA-Z\/\/:\.]*youtu(be.com\/watch\?v=|.be\/)([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i",
+    "<div class=\"embed-responsive embed-responsive-16by9\">
+    <iframe src=\"//www.youtube.com/embed/$2\" allowfullscreen frameborder=\"0\" class=\"embed-responsive-item\">
+    </iframe></div>", $content);
 
-    return safe_html(linkUrlsInTrustedHtml($content));
+
+    // add links and returns
+    return linkUrlsInTrustedHtml($content);
 }
 
 
@@ -41,6 +48,8 @@ function safe_html($content)
 {
     return strip_tags($content, '<br><p><a><li><img><hr><em><strong><i><code><h1><h2><h3><h4><ul><ol>');
 }
+
+
 
 /**
 * returns the value of $name setting as stored in DB
