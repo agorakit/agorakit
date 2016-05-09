@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700|Roboto+Slab:400,300,700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Roboto+Slab:400,300,700);
 
 /***************************** COMMON STUFF / BOOTSTRAP TWEAKS***********************************/
 
@@ -17,7 +17,7 @@ body {
     /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 
     /*background-image: url("/images/green_cup.png");*/
-    font-family: "Roboto Condensed";
+    font-family: "Open Sans";
 }
 
 body, table
@@ -28,14 +28,9 @@ body, table
 h1, h2, h3, h4, h5, h6
 {
     font-family: "Roboto Slab";
-    font-weight: 300;
+    font-weight: 400;
 }
 
-
-.nav-tabs > li.active > a
-{
-    border: 1px solid white;
-}
 
 
 .page_header
@@ -108,14 +103,12 @@ a
 /***************** SHADOWS *****************/
 .page_header, .tab_content, .alert, .row .group
 {
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16);
+    box-shadow: 0 4px 8px rgba(72, 78, 80, 0.5);
 }
 
 
 .btn
 {
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
     border-radius: 3px;
 }
 
@@ -123,6 +116,22 @@ a
 .spacer {
     margin-bottom: 2em;
 }
+
+
+/*********************** TABS ******************/
+/*
+.nav-tabs > li.active > a
+{
+    border: 1px solid white;
+}
+*/
+
+
+.nav-tabs
+{
+    border-bottom: 0;
+}
+
 
 /******************************** UI ******************************************/
 
@@ -142,7 +151,7 @@ a
     border-image: none;
     border-radius: 3px;
     border-left-color: #1B809E;
-    background-color: white;
+    background-color: rgb(188, 218, 226);
 }
 .help h4 {
     color: #1B809E;
