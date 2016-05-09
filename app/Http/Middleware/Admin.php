@@ -35,7 +35,6 @@ class Admin
 
     if ($this->auth->guest()) {
       return redirect()->guest('login');
-      return response(trans('messages.you_are_not_an_admin'), 401);
     }
 
     // we expect a url in the form /groups/{group_id}

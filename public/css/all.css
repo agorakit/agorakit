@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,300);
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700|Roboto+Slab:400,300,700);
 
 /***************************** COMMON STUFF / BOOTSTRAP TWEAKS***********************************/
 
@@ -17,7 +17,7 @@ body {
     /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 
     /*background-image: url("/images/green_cup.png");*/
-    font-family: "Roboto";
+    font-family: "Roboto Condensed";
 }
 
 body, table
@@ -27,7 +27,7 @@ body, table
 
 h1, h2, h3, h4, h5, h6
 {
-    font-family: "Roboto";
+    font-family: "Roboto Slab";
     font-weight: 300;
 }
 
@@ -68,24 +68,40 @@ h1, h2, h3, h4, h5, h6
 
 .credits
 {
-    font-size: 0.6em;
+    font-size: 0.7em;
     text-align: center;
-    margin-top: 3em;
+    margin-top: 1em;
+}
+
+.credits, .credits a
+{
+    color: rgb(108, 131, 136);
 }
 
 a
 {
-    color: rgb(41, 65, 75);
+    color: rgb(62, 41, 75);
+    color: rgb(22, 110, 166);
 }
 
+/*
+.tab_content a, .tab_content a:visited
+{
+        color: rgb(22, 110, 166);
+}
+*/
 
 
 /****************** NAVBAR *******************/
 .navbar-default, .navbar-default .navbar-brand, .navbar-default .navbar-brand, .navbar-default .navbar-nav > li > a
 {
     color: rgb(41, 65, 75);
-    text-transform: uppercase;
     background-color: white;
+}
+
+.navbar-nav > li > a
+{
+    text-transform: uppercase;
 }
 
 
@@ -189,7 +205,7 @@ a
 }
 .page_header h1 {
     font-size: 2em;
-    /*font-weight: bold;*/
+    /*font-weight: 700;*/
 }
 
 
@@ -232,7 +248,7 @@ a
     font-size: 0.7em;
 }
 .comment .user {
-    font-weight: bold;
+    font-weight: 700;
 }
 .comment .vote {
     width: 24px;
@@ -270,7 +286,7 @@ span.group-name {
 }
 
 table.special .name {
-    font-weight: bold;
+    font-weight: 700;
 }
 
 /************************** DISCUSSIONS ***************************************/
@@ -279,7 +295,7 @@ table.special .name {
     max-width: 65em;
 }
 .discussion .user {
-    font-weight: bold;
+    font-weight: 700;
 }
 .discussion .body {
     margin-top: 1em;
@@ -314,6 +330,11 @@ table.special .name {
     background-color: rgb(255, 241, 144) !important;
 }
 
+.fc-content a
+{
+    color: white !important;
+}
+
 
 /*********************** TABS and GROUP HEADERS ************************************/
 
@@ -323,10 +344,10 @@ table.special .name {
     width: 100%;
 }
 
-.nav-tabs li
+.nav-tabs li a
 {
     background-color: rgba(238, 238, 238, 0.70);
-    font-weight: bold;
+    font-weight: 700;
     font-weight: 1.1em;
     color: rgb(41, 65, 75);
 }

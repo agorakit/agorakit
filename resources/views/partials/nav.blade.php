@@ -39,7 +39,7 @@
                                 @endforelse
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{{ action('GroupController@create') }}">
-                                    <i class="fa fa-bolt"></i>{{ trans('group.create_a_group_button') }}</a>
+                                    <i class="fa fa-bolt"></i> {{ trans('group.create_a_group_button') }}</a>
                                 </li>
                             </ul>
                         </li>
@@ -48,7 +48,7 @@
                             <a href="{{ action('DashboardController@users') }}">
                                 {{trans('messages.users_list')}}
                             </a>
-                        </li>    
+                        </li>
                     @endif
 
                 </ul>
