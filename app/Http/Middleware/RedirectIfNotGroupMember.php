@@ -31,7 +31,7 @@ class RedirectIfNotGroupMember
     {
 
         // if current user is not a member of the passed in group
-        // curently it means the user must have membership level higher than 10
+        // TODO probably could be refactored 
 
         if ($this->auth->guest()) {
             return redirect()->back()->with('message', trans('messages.not_logged_in'));
@@ -41,7 +41,7 @@ class RedirectIfNotGroupMember
         if ($request->segment(1) == 'groups') {
             $membership = \App\Membership::where('user_id', '=',  $request->user()->id)->where('group_id', $request->segment(2))->first();
 
-            if ($membership && $membership->membership > 10) {
+            if ($membership && $membership->membership = \App\Membership::MEMBER) {
                 return $next($request);
             } else {
                 return redirect()->back()->with('message', trans('messages.not_a_member'));

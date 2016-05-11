@@ -60,6 +60,7 @@ class GroupController extends Controller
 
     // make the current user a member of the group
     $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
+    $membership->interval = 60 * 24; // default to daily interval
     $membership->membership = \App\Membership::MEMBER;
     $membership->save();
 

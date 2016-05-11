@@ -28,8 +28,8 @@ class Group extends Model
     /**** various gorup types ****/
     // open group, default
     const OPEN = 0;
-    const RESTRICTED = 1;
-    const CLOSED = 2;
+    const CLOSED = 1;
+    const SECRET = 2;
 
 
 

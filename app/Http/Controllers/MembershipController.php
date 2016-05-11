@@ -171,5 +171,5 @@ class MembershipController extends Controller
 
         return $interval;
     }
-    
+
 }
