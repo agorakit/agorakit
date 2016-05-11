@@ -27,7 +27,8 @@ class AppServiceProvider extends ServiceProvider
 
               // count number of unread discussions.
               $view->with('unread_discussions', QueryHelper::getUnreadDiscussionsCount());
-              $view->with('user_groups', QueryHelper::getUserGroups());
+              $view->with('user_groups', Auth::user()->groups()->orderBy('name')->get());
+
             }
           });
 

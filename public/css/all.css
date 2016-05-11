@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Roboto+Slab:400,300,700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Roboto:400,300,700);
 
 /***************************** COMMON STUFF / BOOTSTRAP TWEAKS***********************************/
 
@@ -8,15 +8,6 @@ body {
     color: rgb(20, 20, 20);
     background-color: rgb(41, 65, 75);
     /*background-image: url("/images/seamless_paper_texture.png");*/
-    /*background-image: url("/images/congruent_pentagon.png");*/
-
-    /*
-    background-color: #0a4f30;
-    background-image: url("http://www.transparenttextures.com/patterns/shattered.png");
-    */
-    /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
-
-    /*background-image: url("/images/green_cup.png");*/
     font-family: "Open Sans";
 }
 
@@ -27,8 +18,8 @@ body, table
 
 h1, h2, h3, h4, h5, h6
 {
-    font-family: "Roboto Slab";
-    font-weight: 400;
+    font-family: "Roboto";
+    font-weight: 300;
 }
 
 
@@ -356,7 +347,7 @@ table.special .name {
 .nav-tabs li a
 {
     background-color: rgba(238, 238, 238, 0.70);
-    font-weight: 700;
+    font-weight: 400;
     font-weight: 1.1em;
     color: rgb(41, 65, 75);
 }

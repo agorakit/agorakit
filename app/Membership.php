@@ -13,11 +13,25 @@ class Membership extends Model
     protected $dates = ['notifed_at'];
 
     protected $rules = [
-    'user_id' => 'required|exists:users,id',
-    'group_id' => 'required|exists:groups,id',
+        'user_id' => 'required|exists:users,id',
+        'group_id' => 'required|exists:groups,id',
     ];
 
-  
+
+    // Membership levels
+
+    // active member
+    const MEMBER = 20;
+
+    // invited
+    const INVITED = 0;
+
+    // left the group
+    const UNREGISTERED = -10;
+
+    // blacklisted
+    const BLACKLISTED = -20;
+
 
 
     public function votes()

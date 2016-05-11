@@ -82,7 +82,7 @@ class User extends Authenticatable
     {
         $membership = \App\Membership::where('user_id', '=', $this->id)->where('group_id', '=', $group->id)->first();
 
-        if ($membership && $membership->membership > 10)
+        if ($membership && $membership->membership == \App\Membership::MEMBER)
         {
             return true;
         }
@@ -137,7 +137,7 @@ class User extends Authenticatable
     */
     public function groups()
     {
-        return $this->belongsToMany('App\Group', 'membership')->where('membership.membership', '>', '10')->withTimestamps();
+        return $this->belongsToMany('App\Group', 'membership')->where('membership.membership', \App\Membership::MEMBER)->withTimestamps();
     }
 
     public function memberships()

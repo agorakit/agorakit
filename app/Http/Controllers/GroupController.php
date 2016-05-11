@@ -60,7 +60,7 @@ class GroupController extends Controller
 
     // make the current user a member of the group
     $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
-    $membership->membership = 20;
+    $membership->membership = \App\Membership::MEMBER;
     $membership->save();
 
     return redirect()->action('MembershipController@settings', [$group->id]);
