@@ -32,28 +32,32 @@ class RedirectLang {
         */
         if(!$request->cookie('locale') && !$isBot)
         {
-            $local = \App::getLocale();
+            $locale = \App::getLocale();
 
             // if local doesn't match the current user local => we redirect
-            $preferedLocal = $request->getPreferredLanguage($this->locales);
+            $preferedLocale = $request->getPreferredLanguage($this->locales);
 
             // If local doesn't match the current user => we redirect the user to the correct url
-            if ($local !== $preferedLocal) {
+            if ($locale !== $preferedLocale)
+            {
                 // Get Locales of the preferred local
-                Session::put('locale', $preferedLocal);
+                Session::put('locale', $preferedLocale);
             }
 
-        } elseif ($request->cookie('locale')) {
+        }
+        elseif ($request->cookie('locale'))
+        {
             Session::put('locale', $request->cookie('locale'));
         }
 
-        if ($request->has('force_locale')) {
+        if ($request->has('force_locale'))
+        {
             Session::put('locale', $request->get('force_locale'));
-            app()->setLocale(Session::get('locale'));
+            \App::setLocale(Session::get('locale', env('APP_DEFAULT_LOCALE', 'en')));
             return $next($request)->withCookie(cookie()->forever('locale', Session::get('locale')));
         }
 
-        app()->setLocale(Session::get('locale', env('APP_DEFAULT_LOCALE', 'en'))); // added a default locale to env
+        \App::setLocale(Session::get('locale', env('APP_DEFAULT_LOCALE', 'en')));
 
         return $next($request);
     }

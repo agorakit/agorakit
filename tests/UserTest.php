@@ -8,40 +8,46 @@ class UserTest extends TestCase
 {
 
     use DatabaseTransactions;
-    
+
     /**
-     * A basic test example.
-     *
-     * @return void
-     */
+    * A basic test example.
+    *
+    * @return void
+    */
     public function testUserRegistration()
     {
         App::setLocale('en');
-        $this->visit('/register')
+        $this->visit('/register?force_locale=en')
         ->type('Roberto', 'name')
         ->type('roberto@example.com', 'email')
         ->type('123456', 'password')
         ->type('123456', 'password_confirmation')
         ->press('Register')
-        ->seePageIs('/home');
+        ->seePageIs('');
     }
 
     public function validateUser()
     {
-      $user = \App\User::where('email', '=', 'roberto@example.com')->findOrFail();
-      $user->confirmEmail();
+        App::setLocale('en');
+        $user = \App\User::where('email', '=', 'roberto@example.com')->findOrFail();
+        $user->confirmEmail();
     }
 
     public function testGroupCreation()
     {
-      $this->assertTrue(Auth::attempt(['email' => 'roberto@example.com', 'password' => '123456'], true));
+        App::setLocale('en');
 
-      App::setLocale('en');
-      $this->visit('/groups/create')->see('Create a group');
-      $this->type('Test group', 'name')
-      ->type('this is a test group', 'body')
-      ->press('Create')
-      ->see('Test group');
+        Session::put('locale', 'en');
+
+        $this->withSession(['locale' => 'en'])
+        ->visit('/groups/create?force_locale=en')->see('Create a group');
+
+        $this->withSession(['locale' => 'en'])
+        ->visit('/groups/create?force_locale=en')
+        ->type('Test group', 'name')
+        ->type('this is a test group', 'body')
+        ->press('Create the group')
+        ->see('Test group');
     }
 
 }
