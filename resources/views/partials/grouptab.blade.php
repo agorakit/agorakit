@@ -47,11 +47,15 @@
       </a>
     </li>
   @else
-    <li role="presentation" @if (isset($tab) && ($tab == 'settings')) class="active" @endif>
-      <a href="{{ action('MembershipController@joinForm', $group->id) }}">
-        <i class="fa fa-cog"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.join') }}</span>
-      </a>
-    </li>
+    @can ('join', $group)
+      <li role="presentation" @if (isset($tab) && ($tab == 'settings')) class="active" @endif>
+        <a href="{{ action('MembershipController@joinForm', $group->id) }}">
+          <i class="fa fa-cog"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.join') }}</span>
+        </a>
+      </li>
+      @else
+      Groupe privé TODO
+      @endcan
   @endif
 
 </ul>

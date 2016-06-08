@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App;
 use Carbon\Carbon;
 use App\Group;
+use Gate;
 
 class MembershipController extends Controller
 {
@@ -19,6 +20,8 @@ class MembershipController extends Controller
     */
     public function joinForm(Request $request,  Group $group)
     {
+        if (Gate::allows('join', $group))
+        {
         // load or create membership for this group and user combination
         $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
 
@@ -27,7 +30,13 @@ class MembershipController extends Controller
         ->with('tab', 'settings')
         ->with('membership', $membership)
         ->with('interval', 'daily');
-        ;
+      }
+      else
+      {
+        $request->session()->flash('message', trans('messages.you_cannot_join_this_group_maybe_invite_only'));
+        return redirect()->back();
+      }
+
     }
 
     /**
@@ -40,6 +49,8 @@ class MembershipController extends Controller
     */
     public function join(Request $request, Group $group)
     {
+      if (Gate::allows('join', $group))
+      {
         // load or create membership for this group and user combination
         $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
         $membership->membership = \App\Membership::MEMBER;
@@ -50,11 +61,17 @@ class MembershipController extends Controller
         $membership->save();
 
         return redirect()->action('GroupController@show', [$group->id])->with('message', trans('membership.welcome'));
+      }
+        else
+        {
+          $request->session()->flash('message', trans('messages.you_cannot_join_this_group_maybe_invite_only'));
+          return redirect()->back();
+        }
     }
 
 
     /**
-    * Show a settings screen for a specific group. Allows a user to join, leave, set subscribe settings.
+    * Show a settings screen for a specific group. Allows a user to leave the group.
     */
     public function leaveForm(Request $request, Group $group)
     {
@@ -69,7 +86,7 @@ class MembershipController extends Controller
 
 
     /**
-    * Remove the specified resource from storage.
+    * Remove the specified user from the group.
     *
     * @param  int  $id
     *

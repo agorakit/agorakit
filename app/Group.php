@@ -29,7 +29,7 @@ class Group extends Model
     // open group, default
     const OPEN = 0;
     const CLOSED = 1;
-    const SECRET = 2;
+    // const SECRET = 2; // not in use for now
 
 
 

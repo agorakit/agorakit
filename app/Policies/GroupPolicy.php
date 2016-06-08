@@ -34,7 +34,7 @@ class GroupPolicy
    }
 
 
-   
+
 
    /*
    the following functions let us decide if a user can or cannot creat some stuff in a group
@@ -67,6 +67,26 @@ class GroupPolicy
    {
       return $user->isMemberOf($group);
    }
+
+
+   public function join(User $user, Group $group)
+   {
+     // if group is open anyone can join, else it's invite only
+     if ($group->group_type == $group::OPEN)
+     {
+        return true;
+     }
+     elseif ($group->group_type == $group::CLOSED)
+     {
+        // do we have an invite already for this group and user?
+        $invite = \App\Invite::where('email', $user->email)->where('group_id', $group->id)->count();
+        if ($invite == 1)
+        {
+          return true;
+        }
+      }
+      return false;
+    }
 
 
 
