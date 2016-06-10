@@ -50,7 +50,7 @@ class DashboardController extends Controller
                 $my_groups = Auth::user()->groups()->orderBy('name')->get();
 
                 $my_groups_id = false;
-                // using this array we can adjust the quries after to only include stuff the user has
+                // using this array we can adjust the queries after to only include stuff the user has
                 // might be a good idea to find a clever way to build this array of groups id :
                 foreach ($my_groups as $the_group)
                 {

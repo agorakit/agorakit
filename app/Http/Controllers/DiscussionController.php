@@ -78,7 +78,7 @@ class DiscussionController extends Controller
         if ( !$group->discussions()->save($discussion) )
         {
             // Oops.
-            return redirect()->action('DiscussionController@create', $group_id)
+            return redirect()->action('DiscussionController@create', $group->id)
             ->withErrors($discussion->getErrors())
             ->withInput();
         }

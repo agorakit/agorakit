@@ -74,9 +74,9 @@ class Group extends Model
     */
     public function membership()
     {
-            return $this->belongsToMany('App\User', 'membership')
-            ->where('user_id', "=", \Auth::user()->id)
-            ->withPivot('membership');
+        return $this->belongsToMany('App\User', 'membership')
+        ->where('user_id', "=", \Auth::user()->id)
+        ->withPivot('membership');
     }
 
 
@@ -156,18 +156,42 @@ class Group extends Model
         return action('GroupController@show', $this);
     }
 
-
+    
     /** returns true if the group is public (viewable by all) **/
     public function isPublic()
     {
-      if ($this->group_type == $this::OPEN)
-      {
-        return true;
-      }
-      else
-      {
-        return false;
-      }
+        if ($this->group_type == $this::OPEN)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
+
+
+    /**
+    * Scope a query to only include public groups.
+    *
+    * @return \Illuminate\Database\Eloquent\Builder
+    */
+    public function scopePublic($query)
+    {
+        return $query->where('group_type', $this::OPEN);
+    }
+
+
+
+    /**
+    * Scope a query to only include closed groups.
+    *
+    * @return \Illuminate\Database\Eloquent\Builder
+    */
+    public function scopeClosed($query)
+    {
+        return $query->where('group_type', $this::CLOSED);
+    }
+
 
 }
