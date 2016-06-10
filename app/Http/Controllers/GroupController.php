@@ -41,6 +41,7 @@ class GroupController extends Controller
 
     $group->name = $request->input('name');
     $group->body = $request->input('body');
+    $group->group_type = $request->input('group_type');
 
     if ($group->isInvalid()) {
       // Oops.
@@ -122,6 +123,7 @@ class GroupController extends Controller
   {
     $group->name = $request->input('name');
     $group->body = $request->input('body');
+    $group->group_type = $request->input('group_type');
 
     $group->user()->associate(Auth::user());
 

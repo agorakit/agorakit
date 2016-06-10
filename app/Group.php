@@ -25,7 +25,7 @@ class Group extends Model
     protected $fillable = ['id', 'name', 'body', 'cover'];
     protected $casts = [ 'user_id' => 'integer' ];
 
-    /**** various gorup types ****/
+    /**** various group types ****/
     // open group, default
     const OPEN = 0;
     const CLOSED = 1;
@@ -150,9 +150,24 @@ class Group extends Model
     }
 
 
+    /** constructs a links to the group **/
     public function link()
     {
         return action('GroupController@show', $this);
+    }
+
+
+    /** returns true if the group is public (viewable by all) **/
+    public function isPublic()
+    {
+      if ($this->group_type == $this::OPEN)
+      {
+        return true;
+      }
+      else
+      {
+        return false;
+      }
     }
 
 }

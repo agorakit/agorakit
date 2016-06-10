@@ -63,6 +63,15 @@ class GroupPolicy
    }
 
 
+   public function showDiscussions(User $user, Group $group)
+   {
+       // isn't it lovely :
+       return ($group->isPublic() || $user->isMemberOf($group));
+   }
+
+
+
+
    public function invite(User $user, Group $group)
    {
       return $user->isMemberOf($group);

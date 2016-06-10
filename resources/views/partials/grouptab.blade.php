@@ -6,6 +6,14 @@
     @else
       {{ $group->name }}
     @endif
+
+    <span class="small">
+    @if ($group->isPublic())
+      <i class="fa fa-globe" title="{{trans('group.public')}}"></i>
+    @else
+      <i class="fa fa-lock" title="{{trans('group.private')}}"></i>
+    @endif
+  </span>
   </h1>
 </div>
 
@@ -54,7 +62,11 @@
         </a>
       </li>
       @else
-      Groupe privé TODO
+      <li role="presentation" @if (isset($tab) && ($tab == 'settings')) class="active" @endif>
+        <a href="{{ action('MembershipController@joinForm', $group->id) }}">
+          <i class="fa fa-lock"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.join') }}</span>
+        </a>
+      </li>
       @endcan
   @endif
 
