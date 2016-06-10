@@ -34,7 +34,6 @@ class AppServiceProvider extends ServiceProvider
 
           // set correct locale for Carbon
           Carbon::setLocale(config('app.locale'));
-          //Carbon::setLocale(Session::get('locale', env('APP_DEFAULT_LOCALE', 'nl'))); // TODO this doesn't work
 
     }
 

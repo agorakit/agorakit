@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'locale' => 'fr',
+    'locale' => env('APP_DEFAULT_LOCALE', 'en'),
 
     'locales' => [
         'fr' => [
@@ -73,6 +73,9 @@ return [
         ],
         'nl' => [
             'url' => env('APP_NL_URL', 'deelnemen.hartbovenhard.be')
+        ],
+        'en' => [
+            'url' => env('APP_EN_URL', 'participate.hartbovenhard.be')
         ]
     ],
 
