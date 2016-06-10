@@ -1,20 +1,9 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/06/10 14:44:20
+ Generated via "php artisan localization:missing" at 2016/05/06 10:48:23
 *************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/form.blade.php
-  'closed' => 'Closed group',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/form.blade.php
-  'open' => 'Public group',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/partials/grouptab.blade.php
-  'private' => 'Closed group',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/partials/grouptab.blade.php
-  'public' => 'Public group',
-  // Defined in file /home/philippe/Sites/Mobilizator/resources/views/groups/form.blade.php
-  'type' => 'Group type',
   //==================================== Translations ====================================//
   'about_this_group' => 'About this group',
   'cover' => 'Cover picture',

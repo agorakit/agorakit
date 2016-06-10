@@ -9,9 +9,9 @@
 
     <span class="small">
     @if ($group->isPublic())
-      <i class="fa fa-globe" title="{{trans('group.public')}}"></i>
+      <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
     @else
-      <i class="fa fa-lock" title="{{trans('group.private')}}"></i>
+      <i class="fa fa-lock" title="{{trans('group.closed')}}"></i>
     @endif
   </span>
   </h1>

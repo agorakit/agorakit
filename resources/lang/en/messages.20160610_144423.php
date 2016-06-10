@@ -1,14 +1,9 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2016/06/10 14:44:20 
+ Generated via "php artisan localization:missing" at 2016/05/06 10:48:23
 *************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/MembershipController.php
-  'you_cannot_join_this_group_maybe_invite_only' => 'TODO: you_cannot_join_this_group_maybe_invite_only',
-  // Defined in file /home/philippe/Sites/Mobilizator/app/Http/Controllers/Auth/AuthController.php
-  'you_have_verified_your_email' => 'TODO: you_have_verified_your_email',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'A message for you',
   'actions' => 'Actions',
@@ -157,7 +152,7 @@ return array (
   'your_groups' => 'Your groups',
   'your_search_for' => 'Your search for',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' => 
+  'LLH:obsolete' =>
   array (
     'admin_settings' => 'Admin settings',
     'all_discussions' => 'All discussions',
