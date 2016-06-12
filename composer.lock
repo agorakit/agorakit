@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e5b2241364cd678c7ca875c9c5742cbf",
-    "content-hash": "a6b2ee248edda440b15c3ff280b06ade",
+    "hash": "81e8afb85823ad4de2a4b17788e5082e",
+    "content-hash": "06493b26e585619631f8422eaf5e4abd",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -333,6 +333,65 @@
                 "string"
             ],
             "time": "2015-11-06 14:35:42"
+        },
+        {
+            "name": "draperstudio/laravel-flash",
+            "version": "0.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DraperStudio/Laravel-Flash.git",
+                "reference": "43efa48b2d4e3d71d6a75f2393b7b10893c967b2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DraperStudio/Laravel-Flash/zipball/43efa48b2d4e3d71d6a75f2393b7b10893c967b2",
+                "reference": "43efa48b2d4e3d71d6a75f2393b7b10893c967b2",
+                "shasum": ""
+            },
+            "require": {
+                "draperstudio/laravel-service-provider": "^0.1",
+                "php": "^5.6 || ^7.0"
+            },
+            "require-dev": {
+                "graham-campbell/testbench": "^3.1",
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "^5.0",
+                "scrutinizer/ocular": "~1.1",
+                "squizlabs/php_codesniffer": "~2.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "DraperStudio\\Flash\\": "src/"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "DraperStudio",
+                    "email": "hello@draperstudio.tech",
+                    "homepage": "http://draperstudio.tech",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Flash messages for Laravel 5.",
+            "homepage": "https://github.com/DraperStudio/laravel-flash",
+            "keywords": [
+                "DraperStudio",
+                "laravel-flash"
+            ],
+            "time": "2016-05-27 07:20:07"
         },
         {
             "name": "draperstudio/laravel-service-provider",
