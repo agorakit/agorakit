@@ -20,6 +20,18 @@ class UserTest extends TestCase
 
     You need a mobilizator_testing DB available for those tests to run.
 
+
+    Our scenario :
+
+    - we have Roberto, our admin
+    - we also have Newbie, another user
+
+    - Roberto creates 2 groups, an open one and a closed one
+    - Newbie tries to join both
+
+    What happens ?
+
+
     */
 
     public function testSetupItAll()
@@ -104,6 +116,60 @@ class UserTest extends TestCase
     }
 
 
+    public function testPrivateGroupCreation()
+    {
+        $user = App\User::where('email', 'roberto@example.com')->first();
+
+        $this->actingAs($user)
+        ->visit('groups/create')
+        ->see('Create a new group')
+        ->type('Private test group', 'name')
+        ->type('this is a test group', 'body')
+        ->select('1', 'group_type')
+        ->press('Create the group')
+        ->see('Private test group')
+        ->see('Closed group');
+    }
+
+    public function testASecondUserIsRegistering()
+    {
+        $this->visit('/register')
+        ->type('Newbie', 'name')
+        ->type('newbie@example.com', 'email')
+        ->type('123456', 'password')
+        ->type('123456', 'password_confirmation')
+        ->press('Register')
+        ->seePageIs('');
+
+         $this->seeInDatabase('users', ['email' => 'newbie@example.com']);
+    }
+
+
+    public function testNewbieCantJoinPrivateGroup()
+    {
+        $group = App\Group::where('name', 'Private test group')->first();
+
+        $user = App\User::where('email', 'newbie@example.com')->first();
+
+        $this->actingAs($user)
+        ->visit('/groups/' . $group->id . '/join')
+        ->see(trans('you_cannot_join_this_group_maybe_invite_only'));
+    }
+
+
+
+    public function testNewbieCanJoinOpenGroup()
+    {
+        $group = App\Group::where('name', 'Test group')->first();
+
+        $user = App\User::where('email', 'newbie@example.com')->first();
+
+        $this->actingAs($user)
+        ->visit('/groups/' . $group->id . '/join')
+        ->see('Join the group')
+        ->press('Join')
+        ->see('Welcome');
+    }
 
 
 }
