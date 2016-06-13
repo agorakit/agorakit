@@ -41,7 +41,7 @@ return array(
 
     'route' => [
         'prefix' => 'elfinder',
-        'middleware' => null,//Set to null to disable middleware filter
+        'middleware' => ['web', 'verified'],//Set to null to disable middleware filter
     ],
 
     /*
