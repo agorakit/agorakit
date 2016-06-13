@@ -14,6 +14,7 @@ class CommentController extends Controller
   {
     $this->middleware('member', ['only' => ['reply', 'create', 'store', 'edit', 'update', 'destroy']]);
     $this->middleware('verified', ['only' => ['reply', 'create', 'store', 'edit', 'update', 'destroy']]);
+    $this->middleware('public', ['only' => ['reply', 'create', 'store', 'edit', 'update', 'destroy']]);
   }
 
 
@@ -49,17 +50,6 @@ class CommentController extends Controller
   }
 
 
-  /**
-  * Display the specified resource.
-  *
-  * @param int $id
-  *
-  * @return \Illuminate\Http\Response
-  */
-  public function show($id)
-  {
-    //
-  }
 
   /**
   * Show the form for editing the specified resource.

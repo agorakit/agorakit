@@ -13,6 +13,7 @@ class MembershipController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['only' => ['join', 'joinForm', 'leave', 'leaveForm', 'settings', 'settingsForm']]);
+        $this->middleware('public', ['only' => ['joinForm', 'join']]);
     }
 
     /**
@@ -33,7 +34,7 @@ class MembershipController extends Controller
       }
       else
       {
-        $request->session()->flash('message', trans('messages.you_cannot_join_this_group_maybe_invite_only'));
+        $request->session()->flash('message', trans('messages.not_allowed'));
         return redirect()->back();
       }
 
@@ -64,7 +65,7 @@ class MembershipController extends Controller
       }
         else
         {
-          $request->session()->flash('message', trans('messages.you_cannot_join_this_group_maybe_invite_only'));
+          $request->session()->flash('message', trans('messages.not_allowed'));
           return redirect()->back();
         }
     }

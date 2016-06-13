@@ -15,6 +15,7 @@ class InviteController extends Controller
     {
         $this->middleware('member', ['only' => ['invite', 'sendInvites']]);
         $this->middleware('verified', ['only' => ['invite', 'sendInvites']]);
+        $this->middleware('public', ['only' => ['invite', 'sendInvites']]);
     }
 
     /**

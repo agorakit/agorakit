@@ -150,10 +150,12 @@ class UserTest extends TestCase
         $group = App\Group::where('name', 'Private test group')->first();
 
         $user = App\User::where('email', 'newbie@example.com')->first();
+        $user->confirmEmail();
 
+        
         $this->actingAs($user)
         ->visit('/groups/' . $group->id . '/join')
-        ->see(trans('you_cannot_join_this_group_maybe_invite_only'));
+        ->see(trans('messages.not_allowed'));
     }
 
 

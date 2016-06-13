@@ -18,7 +18,7 @@ class UserController extends Controller {
     {
         $this->middleware('cache', ['only' => ['index', 'show']]);
         $this->middleware('verified', ['only' => ['contact', 'mail']]);
-        $this->middleware('throttle:2,1', ['only' => ['mail']]); // 2 emails per  minute should be enough for non bots
+        $this->middleware('throttle:2,1', ['only' => ['mail', 'sendVerificationAgain']]); // 2 emails per  minute should be enough for non bots
     }
 
     /**
@@ -58,24 +58,7 @@ class UserController extends Controller {
         $to_user = \App\User::findOrFail($user_id);
         $from_user = Auth::user();
 
-        /*
-        $requestsPerHour = 5;
-        $key = 'contact_user_' . $to_user->id . '_from_user_' . $from_user->id;
 
-        // Add if doesn't exist
-        // Remember for 1 hour
-        \Cache::add($key, 0, 60);
-
-        // Add to count
-        $count = \Cache::increment($key);
-        */
-
-        //if( $count > $requestsPerHour )
-        //{
-        //  $request->session()->flash('message', trans('messages.message_not_sent_too_many_per_hour'));
-        //}
-        //else
-        //{
         if ($request->has('body'))
         {
             $body = $request->input('body');
@@ -88,29 +71,10 @@ class UserController extends Controller {
 
             $request->session()->flash('message', trans('messages.message_sent'));
         }
-        //}
+
         return redirect()->action('UserController@show', $to_user->id);
     }
 
-    /**
-    * Show the form for creating a new resource.
-    *
-    * @return Response
-    */
-    public function create()
-    {
-
-    }
-
-    /**
-    * Store a newly created resource in storage.
-    *
-    * @return Response
-    */
-    public function store()
-    {
-
-    }
 
     /**
     * Display the specified resource.
@@ -202,7 +166,7 @@ class UserController extends Controller {
     }
 
     /**
-    * Send verification token to a user, again, for example if it's stuck in spam or wathever else event. Probably needs throttling TODO
+    * Send verification token to a user, again, for example if it's stuck in spam or wathever else event.
     * @param  Request $request
     * @param  Int  $id      User id
     * @return Flash message and returns to homepage
