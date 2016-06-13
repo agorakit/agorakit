@@ -19,7 +19,8 @@
         "draperstudio/laravel-taggable": "^0.1.0",
         "barryvdh/laravel-ide-helper": "^2.1",
         "potsky/laravel-localization-helpers" : "2.3.*",
-        "draperstudio/laravel-flash": "^0.2.1"
+        "draperstudio/laravel-flash": "^0.2.1",
+        "barryvdh/laravel-elfinder": "^0.3.7"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

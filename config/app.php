@@ -182,7 +182,10 @@ return [
         Bestmomo\Installer\InstallerServiceProvider::class,
         */
 
-        DraperStudio\Taggable\ServiceProvider::class
+        DraperStudio\Taggable\ServiceProvider::class,
+
+
+        Barryvdh\Elfinder\ElfinderServiceProvider::class
 
 
     ],
