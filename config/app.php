@@ -184,8 +184,9 @@ return [
 
         DraperStudio\Taggable\ServiceProvider::class,
         Barryvdh\Elfinder\ElfinderServiceProvider::class,
-        Arcanedev\LogViewer\LogViewerServiceProvider::class,
         DraperStudio\Flash\ServiceProvider::class,
+
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
 
 
     ],

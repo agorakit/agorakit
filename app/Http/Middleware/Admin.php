@@ -26,20 +26,10 @@ class Admin
     }
 
     /**
-    * Check if the current user is verified ((s)he verified the email adress)
+    * Check if the current user is an admin
     */
     public function handle($request, Closure $next)
     {
-        // if current user is not a member of the passed in group
-        // curently it means the user must have membership level higher than 10
-
-        if ($this->auth->guest())
-        {
-            flash()->message('please login');
-            return redirect()->guest('login');
-        }
-
-        // we expect a url in the form /groups/{group_id}
         if ($request->user()->isAdmin())
         {
             return $next($request);
@@ -49,6 +39,5 @@ class Admin
             flash()->error(trans('messages.you_are_not_an_admin'));
             return response(trans('messages.you_are_not_an_admin'), 401);
         }
-
     }
 }

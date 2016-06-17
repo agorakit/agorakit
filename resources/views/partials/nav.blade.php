@@ -76,6 +76,19 @@
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i> {{ trans('messages.logout') }}</a></li>
                             </ul>
                         </li>
+
+                        @if ($user->isAdmin())
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    Admin <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{ url('/log-viewer') }}">Logs</a></li>
+                                </ul>
+                            </li>
+                        @endif
+
                     @else
                         <li><a href="{{ url('register') }}">{{ trans('messages.register') }}</a></li>
                         <li><a href="{{ url('login') }}">{{ trans('messages.login') }}</a></li>

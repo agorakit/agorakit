@@ -32,6 +32,5 @@
 @endif
 
 
-<div class="container">
-    @include('flash::messages')
-</div><!-- /.container -->
+
+@include('flash::messages')
