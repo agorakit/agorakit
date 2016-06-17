@@ -120,7 +120,7 @@ return [
     |
     */
 
-    'log' => env('APP_LOG', 'single'),
+    'log' => env('APP_LOG', 'daily'),
 
     /*
     |--------------------------------------------------------------------------
@@ -183,9 +183,9 @@ return [
         */
 
         DraperStudio\Taggable\ServiceProvider::class,
-
-
-        Barryvdh\Elfinder\ElfinderServiceProvider::class
+        Barryvdh\Elfinder\ElfinderServiceProvider::class,
+        Arcanedev\LogViewer\LogViewerServiceProvider::class,
+        DraperStudio\Flash\ServiceProvider::class,
 
 
     ],

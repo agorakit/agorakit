@@ -230,7 +230,7 @@ class ActionController extends Controller
         if (Gate::allows('delete', $action))
         {
             $action->delete();
-            $request->session()->flash('message', trans('messages.ressource_deleted_successfully'));
+            flash()->success(trans('messages.ressource_deleted_successfully'));
             return redirect()->action('ActionController@index', [$group->id]);
         }
         else

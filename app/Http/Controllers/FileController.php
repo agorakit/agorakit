@@ -243,7 +243,7 @@ class FileController extends Controller
         if (Gate::allows('delete', $file))
         {
             $file->delete();
-            $request->session()->flash('message', trans('messages.ressource_deleted_successfully'));
+            flash()->info(trans('messages.ressource_deleted_successfully'));
             return redirect()->action('FileController@index', [$group_id]);
         }
         else

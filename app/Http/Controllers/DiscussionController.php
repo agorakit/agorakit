@@ -83,7 +83,7 @@ class DiscussionController extends Controller
             ->withInput();
         }
 
-        $request->session()->flash('message', trans('messages.ressource_created_successfully'));
+        flash()->info(trans('messages.ressource_created_successfully'));
         return redirect()->action('DiscussionController@show', [$group->id, $discussion->id]);
     }
 
@@ -147,7 +147,7 @@ class DiscussionController extends Controller
         //$discussion->user()->associate(Auth::user()); // we use revisionable to manage who changed what, so we keep the original author
         $discussion->save();
 
-        $request->session()->flash('message', trans('messages.ressource_updated_successfully'));
+        flash()->info(trans('messages.ressource_updated_successfully'));
         return redirect()->action('DiscussionController@show', [$discussion->group->id, $discussion->id]);
     }
 

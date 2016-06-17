@@ -25,6 +25,7 @@ class DashboardController extends Controller
     */
     public function index(Request $request)
     {
+
         if (Auth::check())
         {
 

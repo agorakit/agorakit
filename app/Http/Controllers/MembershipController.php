@@ -34,7 +34,7 @@ class MembershipController extends Controller
       }
       else
       {
-        $request->session()->flash('message', trans('messages.not_allowed'));
+        flash()->info( trans('messages.not_allowed'));
         return redirect()->back();
       }
 
@@ -65,7 +65,7 @@ class MembershipController extends Controller
       }
         else
         {
-          $request->session()->flash('message', trans('messages.not_allowed'));
+          flash()->info( trans('messages.not_allowed'));
           return redirect()->back();
         }
     }

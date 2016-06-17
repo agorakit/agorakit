@@ -145,7 +145,7 @@ class GroupController extends Controller
 
     $group->save();
 
-    $request->session()->flash('message', trans('messages.ressource_updated_successfully'));
+    flash()->info(trans('messages.ressource_updated_successfully'));
 
     return redirect()->action('GroupController@show', [$group->id]);
   }

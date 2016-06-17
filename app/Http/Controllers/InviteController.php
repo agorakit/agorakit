@@ -104,7 +104,7 @@ class InviteController extends Controller
 
         if ($status_message)
         {
-            $request->session()->flash('message', $status_message );
+            flash()->info($status_message);
         }
         return redirect()->back();
 
@@ -134,14 +134,14 @@ class InviteController extends Controller
             // remove invite we don't need it anymore, or do we for logging purposes?
             $invite->delete();
 
-            $request->session()->flash('message', trans('messages.you_are_now_a_member_of_this_group') );
+            flash()->error( trans('messages.you_are_now_a_member_of_this_group') );
             return redirect()->action('GroupController@show', $group_id);
         }
         else
         {
             Auth::logout();
             // if user doesn't exists, we have the opportunity to create, login and validate email in one go (since we have the invite token)
-            $request->session()->flash('message', trans('messages.you_dont_have_an_account_create_one_now'));
+            flash()->info( trans('messages.you_dont_have_an_account_create_one_now'));
 
             return view('invites.register')
             ->with('email', $invite->email)
@@ -184,7 +184,7 @@ class InviteController extends Controller
 
         Auth::login($user);
 
-        $request->session()->flash('message', trans('messages.you_are_now_a_member_of_this_group') );
+        flash()->info( trans('messages.you_are_now_a_member_of_this_group') );
         return redirect()->action('GroupController@show', $group_id);
     }
 }

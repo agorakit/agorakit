@@ -97,7 +97,7 @@ class AuthController extends Controller
         {
           Auth::login($user); //TODO security implication of this
         }
-        $request->session()->flash('message', trans('messages.you_have_verified_your_email') );
+        flash()->info(trans('messages.you_have_verified_your_email'));
         return redirect('/');
       }
     }

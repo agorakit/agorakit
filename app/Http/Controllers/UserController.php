@@ -69,7 +69,7 @@ class UserController extends Controller {
                 ->subject('[' . env('APP_NAME') . '] ' . trans('messages.a_message_for_you'));
             });
 
-            $request->session()->flash('message', trans('messages.message_sent'));
+            flash()->info( trans('messages.message_sent'));
         }
 
         return redirect()->action('UserController@show', $to_user->id);
@@ -154,7 +154,7 @@ class UserController extends Controller {
 
             $user->save();
 
-            $request->session()->flash('message', trans('messages.ressource_updated_successfully'));
+            flash()->info( trans('messages.ressource_updated_successfully'));
 
             return redirect()->action('UserController@show', [$user->id]);
         }
@@ -178,7 +178,7 @@ class UserController extends Controller {
         {
             $mailer = new AppMailer;
             $mailer->sendEmailConfirmationTo($user);
-            $request->session()->flash('message', trans('messages.invitation_sent_again'));
+            flash()->info( trans('messages.invitation_sent_again'));
             return redirect()->action('UserController@show', [$user->id]);
         }
     }
