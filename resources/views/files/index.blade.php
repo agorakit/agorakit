@@ -36,13 +36,22 @@
 
         <td>
           <a href="{{ action('FileController@show', [$group->id, $file->id]) }}">{{ $file->name }}</a>
+          <br/>
+          @foreach ($file->tagged as $tag)
+            <span class="label label-default">{{$tag->tag_name}}</span>
+          @endforeach
         </td>
 
-        <td>
-          <a class="btn btn-default btn-xs"href="{{ action('FileController@show', [$group->id, $file->id]) }}">Download</a>
+        <td style="min-width:200px">
+          <!--<a class="btn btn-default btn-xs"href="{{ action('FileController@show', [$group->id, $file->id]) }}">Download</a>-->
+
+          @can('edit', $file)
+            <a class="btn btn-default btn-xs" href="{{ action('FileController@edit', [$group->id, $file->id]) }}"><i class="fa fa-edit"></i>
+            {{trans('messages.edit')}}</a>
+          @endcan
 
           @can('delete', $file)
-            <a class="btn btn-default btn-xs" href="{{ action('FileController@destroyConfirm', [$group->id, $file->id]) }}"><i class="fa fa-trash"></i>
+            <a class="btn btn-warning btn-xs" href="{{ action('FileController@destroyConfirm', [$group->id, $file->id]) }}"><i class="fa fa-trash"></i>
             {{trans('messages.delete')}}</a>
           @endcan
 

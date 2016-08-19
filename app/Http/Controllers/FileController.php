@@ -198,6 +198,10 @@ class FileController extends Controller
     */
     public function edit(Group $group, File $file)
     {
+        return view('files.edit')
+        ->with('file', $file)
+        ->with('group', $group)
+        ->with('tab', 'file');
     }
 
     /**
@@ -207,8 +211,12 @@ class FileController extends Controller
     *
     * @return Response
     */
-    public function update(Group $group, File $file)
+    public function update(Request $request, Group $group, File $file)
     {
+        $file->tag($request->input('tags'));
+        /*$file->save();*/
+        flash()->info(trans('messages.ressource_updated_successfully'));
+        return redirect()->action('FileController@index', [$file->group->id]);
     }
 
 

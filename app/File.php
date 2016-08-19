@@ -5,17 +5,17 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
+use \Conner\Tagging\Taggable;
 use Storage;
 use Response;
 
-use DraperStudio\Taggable\Contracts\Taggable;
-use DraperStudio\Taggable\Traits\Taggable as TaggableTrait;
 
-class File extends Model implements Taggable
+class File extends Model
 {
   use ValidatingTrait;
   use SoftDeletes;
-  use TaggableTrait;
+  use Taggable;
+
 
   protected $onlyUseExistingTags = false;
 

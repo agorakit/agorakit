@@ -204,6 +204,9 @@ Route::group(['middleware' => ['web']], function () {
   Route::get('groups/{group}/files/{file}/delete', 'FileController@destroyConfirm');
   Route::delete('groups/{group}/files/{file}/delete', 'FileController@destroy');
 
+  Route::get('groups/{group}/files/{file}/edit', 'FileController@edit');
+  Route::post('groups/{group}/files/{file}', 'FileController@update');
+
 
 
   // Users

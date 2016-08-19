@@ -11,6 +11,9 @@
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/yeti/bootstrap.min.css">-->
     <!-- other candidates include simplex and united yeti and flatly and paper-->
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+
+
 
     <!-- Font awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -36,13 +39,9 @@
     </div>
 
 
-    <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-
-    {!! Html::script('/packages/js-cookie/js.cookie.js') !!}
-
-    <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
     @yield('footer')
 

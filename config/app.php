@@ -182,6 +182,8 @@ return [
 
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
 
+        Conner\Tagging\Providers\TaggingServiceProvider::class,
+
 
     ],
 

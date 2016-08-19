@@ -26,10 +26,10 @@
 
   {!! Form::open(['url' => action('FileController@create', $group->id), 'class' => 'dropzone', 'files'=>true, 'id'=>'real-dropzone']) !!}
 
-  <div class="fallback">
+
     <input name="file" type="file" multiple />
     <input type="submit"/>
-  </div>
+  
 
   {!! Form::close() !!}
 
