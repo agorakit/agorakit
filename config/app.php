@@ -177,13 +177,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
 
-        /*
-        // At some point this will be useful :
-        Bestmomo\Installer\InstallerServiceProvider::class,
-        */
-
         DraperStudio\Taggable\ServiceProvider::class,
-        Barryvdh\Elfinder\ElfinderServiceProvider::class,
         DraperStudio\Flash\ServiceProvider::class,
 
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
