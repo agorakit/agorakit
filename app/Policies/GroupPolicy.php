@@ -20,6 +20,21 @@ class GroupPolicy
       //
    }
 
+   public function before($user, $ability)
+   {
+      if ($user->isAdmin()) {
+         return true;
+      }
+   }
+
+
+   public function delete(User $user, Action $action)
+   {
+      if ($user->isAdmin())
+      {
+         return true;
+      }
+   }
 
    /**
    * Determine if the given post can be updated by the user.
@@ -65,8 +80,8 @@ class GroupPolicy
 
    public function showDiscussions(User $user, Group $group)
    {
-       // isn't it lovely :
-       return ($group->isPublic() || $user->isMemberOf($group));
+      // isn't it lovely :
+      return ($group->isPublic() || $user->isMemberOf($group));
    }
 
 
@@ -80,22 +95,22 @@ class GroupPolicy
 
    public function join(User $user, Group $group)
    {
-     // if group is open anyone can join, else it's invite only
-     if ($group->group_type == $group::OPEN)
-     {
-        return true;
-     }
-     elseif ($group->group_type == $group::CLOSED)
-     {
-        // do we have an invite already for this group and user?
-        $invite = \App\Invite::where('email', $user->email)->where('group_id', $group->id)->count();
-        if ($invite == 1)
-        {
-          return true;
-        }
+      // if group is open anyone can join, else it's invite only
+      if ($group->group_type == $group::OPEN)
+      {
+         return true;
+      }
+      elseif ($group->group_type == $group::CLOSED)
+      {
+         // do we have an invite already for this group and user?
+         $invite = \App\Invite::where('email', $user->email)->where('group_id', $group->id)->count();
+         if ($invite == 1)
+         {
+            return true;
+         }
       }
       return false;
-    }
+   }
 
 
 

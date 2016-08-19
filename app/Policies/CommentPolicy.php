@@ -21,6 +21,13 @@ class CommentPolicy
     }
 
 
+    public function before($user, $ability)
+    {
+        if ($user->isAdmin()) {
+            return true;
+        }
+    }
+
     public function update(User $user, Comment $comment)
     {
         return $user->id === $comment->user_id;

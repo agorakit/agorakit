@@ -20,6 +20,14 @@ class DiscussionPolicy
         //
     }
 
+    public function before($user, $ability)
+    {
+        if ($user->isAdmin()) {
+            return true;
+        }
+    }
+    
+
     public function update(User $user, Discussion $discussion)
     {
          return $user->isMemberOf($discussion->group);

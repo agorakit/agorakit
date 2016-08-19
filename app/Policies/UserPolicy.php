@@ -20,6 +20,14 @@ class UserPolicy
         //
     }
 
+    public function before($user, $ability)
+   {
+      if ($user->isAdmin()) {
+         return true;
+      }
+   }
+
+
 
     public function update(User $user, User $user2)
     {
@@ -31,5 +39,7 @@ class UserPolicy
     {
         return $user->id == $user2->id;
     }
+
+
 
 }

@@ -112,19 +112,15 @@ Route::group(['middleware' => ['web']], function () {
   Route::get('groups/create', 'GroupController@create');
   Route::post('groups/create', 'GroupController@store');
 
-  // specific group homepage
+  // Groups
   Route::get('groups/{group}', 'GroupController@show');
-
-  // group cover
   Route::get('groups/{group}/cover', 'GroupController@cover');
-
-
-  // group edit
   Route::get('groups/{group}/edit', 'GroupController@edit');
   Route::post('groups/{group}/edit', 'GroupController@update');
-
-  // group history
   Route::get('groups/{group}/history', 'GroupController@history');
+  Route::get('groups/{group}/delete', 'GroupController@destroyConfirm');
+  Route::delete('groups/{group}/delete', 'GroupController@destroy');
+
 
   // memberships & settings
   Route::get('groups/{group}/join', 'MembershipController@joinForm');

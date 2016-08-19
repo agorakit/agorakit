@@ -30,6 +30,12 @@
                             {{trans('messages.show_history')}}
                         </a>
                     @endif
+
+                    @can('delete', $group)
+                      <a class="btn btn-default btn-xs" href="{{ action('GroupController@destroyConfirm', [$group->id]) }}"><i class="fa fa-trash"></i>
+                      {{trans('messages.delete')}}</a>
+                    @endcan
+
                 </p>
             </div>
             <div class="col-md-6">
