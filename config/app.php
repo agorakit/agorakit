@@ -173,8 +173,6 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
 
-        //Potsky\LaravelLocalizationHelpers\LaravelLocalizationHelpersServiceProvider::class,
-
         Vsch\TranslationManager\ManagerServiceProvider::class,
         Vsch\TranslationManager\TranslationServiceProvider::class,
 
@@ -182,12 +180,13 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
 
-        //DraperStudio\Taggable\ServiceProvider::class,
         DraperStudio\Flash\ServiceProvider::class,
+        DraperStudio\Taggable\ServiceProvider::class,
+
 
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
 
-        Conner\Tagging\Providers\TaggingServiceProvider::class,
+
 
 
     ],

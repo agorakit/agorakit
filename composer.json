@@ -18,8 +18,8 @@
         "barryvdh/laravel-ide-helper": "^2.1",
         "draperstudio/laravel-flash": "^0.2.1",
         "rap2hpoutre/laravel-log-viewer": "^0.6.1",
-        "rtconner/laravel-tagging": "~2.1",
-        "vsch/laravel-translation-manager": "*"
+        "vsch/laravel-translation-manager": "*",
+        "draperstudio/laravel-taggable": "*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

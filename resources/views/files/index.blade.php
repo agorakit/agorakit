@@ -37,8 +37,8 @@
         <td>
           <a href="{{ action('FileController@show', [$group->id, $file->id]) }}">{{ $file->name }}</a>
           <br/>
-          @foreach ($file->tagged as $tag)
-            <span class="label label-default">{{$tag->tag_name}}</span>
+          @foreach ($file->tags as $tag)
+            <span class="label label-default">{{$tag->name}}</span>
           @endforeach
         </td>
 

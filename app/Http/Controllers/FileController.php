@@ -213,8 +213,17 @@ class FileController extends Controller
     */
     public function update(Request $request, Group $group, File $file)
     {
-        $file->tag($request->input('tags'));
-        /*$file->save();*/
+
+        /*
+        foreach ($request->input('tags') as $tag)
+        {
+            $tagnames[] = $tag;
+        }
+
+        dd(implode(',', $request->input('tags')));
+        */
+
+        $file->retag(implode(',', $request->input('tags')));
         flash()->info(trans('messages.ressource_updated_successfully'));
         return redirect()->action('FileController@index', [$file->group->id]);
     }

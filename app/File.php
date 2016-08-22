@@ -5,17 +5,19 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
-use \Conner\Tagging\Taggable;
 use Storage;
 use Response;
+use DraperStudio\Taggable\Traits\Taggable as TaggableTrait;
 
 
 class File extends Model
 {
   use ValidatingTrait;
   use SoftDeletes;
-  use Taggable;
 
+  use TaggableTrait;
+
+  
 
   protected $onlyUseExistingTags = false;
 
@@ -44,7 +46,9 @@ class File extends Model
 
   public function link()
   {
-      return action('FileController@show', [$this->group, $this]);
+    return action('FileController@show', [$this->group, $this]);
   }
+
+
 
 }
