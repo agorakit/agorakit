@@ -13,7 +13,6 @@ return [
     |
     */
 
-    'failed'   => 'Deze combinatie van e-mailadres en wachtwoord is niet geldig.',
-    'throttle' => 'Teveel gefaalde login pogingen. Probeer het over :seconds seconden nogmaals.',
-
+    'failed'    => 'Deze gebruikersnaam en/of dit wachtwoord zijn niet correct',
+    'throttle'  => 'Te veel verbindingspogingen. Probeer opnieuw binnen enkele seconden',
 ];

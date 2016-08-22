@@ -1,14 +1,8 @@
 <?php
-/*************************************************************************
- Generated via "php artisan localization:missing" at 2016/06/10 14:44:20
-*************************************************************************/
 
-return array (
-  //==================================== Translations ====================================//
-  'intro' => 'Intro text here, please change it',
-  //================================== Obsolete strings ==================================//
-  'LLH:obsolete' =>
-  array (
-    'my_groups' => 'My groups',
-  ),
-);
+return [
+    'LLH:obsolete'  => [
+        'my_groups' => 'My groups',
+    ],
+    'intro'         => 'Below you will find all the created groups. You can join and follow groups of your choice after you have to be registered(e).',
+];

@@ -1,0 +1,311 @@
+.editable-click,
+a.editable-click,
+a.editable-click:hover {
+    text-decoration: none;
+    border-bottom: dashed 1px #0088cc;
+}
+
+.translation-manager .editable-click,
+.translation-manager a.editable-click,
+.translation-manager a.editable-click:hover {
+    text-decoration: none;
+    border-bottom: none;
+}
+
+h1 .editable-click, h1 a.editable-click, h1 a.editable-click:hover {
+    text-decoration: none;
+    border-bottom: none;
+    border-bottom: dashed 1px #0088cc;
+}
+
+h2 .editable-click, h2 a.editable-click, h2 a.editable-click:hover {
+    text-decoration: none;
+    border-bottom: none;
+    border-bottom: dashed 1px #0088cc;
+}
+
+h3 .editable-click, h3 a.editable-click, h3 a.editable-click:hover {
+    text-decoration: none;
+    border-bottom: none;
+    border-bottom: dashed 1px #0088cc;
+}
+
+h4 .editable-click, h4 a.editable-click, h4 a.editable-click:hover {
+    text-decoration: none;
+    border-bottom: none;
+    border-bottom: dashed 1px #0088cc;
+}
+
+h5 .editable-click, h5 a.editable-click, h5 a.editable-click:hover {
+    text-decoration: none;
+    border-bottom: none;
+    border-bottom: dashed 1px #0088cc;
+}
+
+h6 .editable-click, h6 a.editable-click, h6 a.editable-click:hover {
+    text-decoration: none;
+    border-bottom: none;
+    border-bottom: dashed 1px #0088cc;
+}
+
+.translation-manager h1 .editable-click, h1 a.editable-click, h1 a.editable-click:hover {
+    text-decoration: none;
+    border-bottom: none;
+    border-bottom: dashed 1px #FF00cc !important;
+}
+
+.translation-manager h2 .editable-click, h2 a.editable-click, h2 a.editable-click:hover {
+    text-decoration: none;
+    border-bottom: none;
+    border-bottom: dashed 1px #FF00cc !important;
+}
+
+.translation-manager h3 .editable-click, h3 a.editable-click, h3 a.editable-click:hover {
+    text-decoration: none;
+    border-bottom: none;
+    border-bottom: dashed 1px #FF00cc !important;
+}
+
+.translation-manager h4 .editable-click, h4 a.editable-click, h4 a.editable-click:hover {
+    text-decoration: none;
+    border-bottom: none;
+    border-bottom: dashed 1px #FF00cc !important;
+}
+
+.translation-manager h5 .editable-click, h5 a.editable-click, h5 a.editable-click:hover {
+    text-decoration: none;
+    border-bottom: none;
+    border-bottom: dashed 1px #FF00cc !important;
+}
+
+.translation-manager h6 .editable-click, h6 a.editable-click, h6 a.editable-click:hover {
+    text-decoration: none;
+    border-bottom: none;
+    border-bottom: dashed 1px #FF00cc !important;
+}
+
+.table.translation-stats > thead > tr > th,
+.table.translation-stats > tbody > tr > td {
+    margin: 0 0 0 !important;
+    padding: 2px 6px 2px 6px;
+}
+
+.table.translation-stats > tbody > tr > td.group {
+    text-align: left;
+    font-weight: bold;
+    padding-left: 8px;
+}
+
+.table-translations td.unused-key
+{
+    color: #999999;
+}
+
+.table.translation-stats > thead > tr > th.deleted,
+.table.translation-stats > tbody > tr > td.deleted,
+.table.translation-stats > tbody > tr > td.group.deleted > a
+{
+    color: #c200c1;
+    font-weight: bold;
+}
+
+.table.translation-stats > thead > tr > th.missing,
+.table.translation-stats > tbody > tr > td.group.missing > a {
+    color: #d00030;
+}
+
+.table.translation-stats > thead > tr > th.changed,
+.table.translation-stats > tbody > tr > td.group.changed > a {
+    color: #00A030;
+}
+
+.table.translation-stats > thead > tr > th.cached,
+.table.translation-stats > tbody > tr > td.group.cached > a {
+    color: #3399f3;
+}
+
+textarea.editable-input {
+    width: 600px !important;
+    display: block !important;
+    white-space: pre-wrap;
+}
+
+.editable-container.editable-inline {
+    display: block !important;
+    width: 400px !important;
+}
+
+.editable-container .editable-error-block {
+    display: block !important;
+    max-width: 600px !important;
+}
+
+.editable-buttons .editable-translate {
+    margin-left: 1px;
+}
+
+.table-translations thead tr {
+    background-color: #f0f0f0;
+}
+
+.table-striped>tbody>tr:nth-of-type(even) {
+    background-color: #f9f9f9;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #ffffff;
+}
+
+.table-translations tr.editing {
+    background-color: rgba(255, 255, 100, .3);
+}
+
+.table-striped > tbody > tr.editing:nth-of-type(even) {
+    background-color: #f7f9da;
+}
+
+.table-striped > tbody > tr.editing:nth-of-type(odd) {
+    background-color: #fffdd9;
+}
+
+/*.table-translations tr.deleted-translation {*/
+/*text-decoration: line-through;*/
+/*}*/
+
+.table-translations > tbody > tr.deleted-translation:not(.editing):nth-of-type(even) {
+    background-color: #edd3ed;
+}
+
+.table-translations > tbody > tr.deleted-translation:not(.editing):nth-of-type(odd) {
+    background-color: #ffe0ff;
+}
+
+.table-translations > tbody > tr:not(.deleted-translation):not(.editing):nth-of-type(even) > td.has-unpublished-translation {
+    background-color: #ebf7e4;
+}
+
+.table-translations > tbody > tr:not(.deleted-translation):not(.editing):nth-of-type(odd) > td.has-unpublished-translation {
+    background-color: #f3ffed;
+}
+
+.table-translations > tbody > tr:not(.deleted-translation):not(.editing):nth-of-type(even) > td.has-cached-translation {
+    background-color: #e9f7f7;
+}
+
+.table-translations > tbody > tr:not(.deleted-translation):not(.editing):nth-of-type(odd) > td.has-cached-translation {
+    background-color: #f2feff;
+}
+
+a.status-1 {
+    font-weight: bold;
+}
+
+del {
+    color: #C80010;
+}
+
+ins {
+    color: #108030;
+}
+
+#accordion.panel-group .panel > .panel-heading a:not(.collapsed):not(.btn):before {
+    content: "▼ ";
+    display: inline;
+}
+
+#accordion.panel-group .panel > .panel-heading a.collapsed:not(.in):before {
+    content: "▶ " ;
+    display: inline;
+}
+
+.panel-heading > h1,
+.panel-heading > h2,
+.panel-heading > h3,
+.panel-heading > h4,
+.panel-heading > h5,
+.panel-heading > h6 {
+    margin-bottom: 0;
+}
+
+.key-filter {
+    float: right;
+    font-weight: normal;
+}
+
+.key-filter.have-filtered {
+    font-weight: bold;
+    color: #be0031;
+}
+
+.panel .table:last-child {
+    margin-bottom: 0;
+}
+
+input.bg-success {
+    background-color: #dff0d8;
+}
+input.bg-info {
+    background-color: #d9edf7;
+}
+input.bg-warning {
+    background-color: #fcf8e3;
+}
+input.bg-danger {
+    background-color: #f2dede;
+}
+
+.regex-error {
+    color: #c70155;
+}
+
+#accordion.panel-group {
+    margin-bottom: 2px;
+}
+
+label.regex-error {
+    color: #c70155;
+    margin-top: -30px;
+    /*height: 30px;*/
+}
+
+input.bg-highlight {
+    background-color: #d9edf7;
+}
+.has-highlight .help-block,
+.has-highlight .control-label,
+.has-highlight .radio,
+.has-highlight .checkbox,
+.has-highlight .radio-inline,
+.has-highlight .checkbox-inline,
+.has-highlight.radio label,
+.has-highlight.checkbox label,
+.has-highlight.radio-inline label,
+.has-highlight.checkbox-inline label {
+    color: #337ab7;
+}
+.has-highlight .form-control {
+    border-color: #337ab7;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
+.has-highlight .form-control:focus {
+    border-color: #286090;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #337ab7;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #337ab7;
+}
+.has-highlight .input-group-addon {
+    color: #337ab7;
+    background-color: #d9edf7;
+    border-color: #337ab7;
+}
+.has-highlight .form-control-feedback {
+    color: #337ab7;
+}
+
+.translation-filter.has-feedback label,
+.translation-filter.has-highlight label,
+.translation-filter.has-error label,
+.translation-filter.has-success label,
+.translation-filter.has-warning label {
+    font-weight: bold;
+}

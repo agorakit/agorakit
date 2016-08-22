@@ -156,7 +156,9 @@ return [
         Illuminate\Redis\RedisServiceProvider::class,
         Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
         Illuminate\Session\SessionServiceProvider::class,
-        Illuminate\Translation\TranslationServiceProvider::class,
+
+        // Illuminate\Translation\TranslationServiceProvider::class,
+
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
@@ -171,13 +173,16 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
 
-        Potsky\LaravelLocalizationHelpers\LaravelLocalizationHelpersServiceProvider::class,
+        //Potsky\LaravelLocalizationHelpers\LaravelLocalizationHelpersServiceProvider::class,
+
+        Vsch\TranslationManager\ManagerServiceProvider::class,
+        Vsch\TranslationManager\TranslationServiceProvider::class,
 
 
         Intervention\Image\ImageServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
 
-        DraperStudio\Taggable\ServiceProvider::class,
+        //DraperStudio\Taggable\ServiceProvider::class,
         DraperStudio\Flash\ServiceProvider::class,
 
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
