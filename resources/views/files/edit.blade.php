@@ -17,11 +17,7 @@
                 @foreach ($file->tags as $tag)
                     <option value="{{$tag->name}}" selected="selected">{{$tag->name}}</option>
                 @endforeach
-
             </select>
-
-
-
 
         </div>
 
