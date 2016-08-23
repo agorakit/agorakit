@@ -116,12 +116,20 @@ class InviteController extends Controller
     * - if user exists we directly subscribe him/her to the group
     * - if not we show an account creation screen
     */
-    public function inviteConfirm(Request $request, $group_id, $token)
+    public function inviteConfirm(Request $request, Group $group, $token)
     {
-        // check if token is valid
-        $invite = \App\Invite::whereToken($token)->firstOrFail();
+
+        $invite = \App\Invite::whereToken($token)->first();
+
+        if (!$invite)
+        {
+            flash()->error( trans('messages.invite_not_found_or_you_already_used_it') );
+            return redirect()->action('GroupController@show', $group->id);
+        }
+
+
         $user = \App\User::where('email', $invite->email)->first();
-        $group = \App\Group::findOrFail($invite->group_id);
+
 
         // check if user exists
         if ($user)

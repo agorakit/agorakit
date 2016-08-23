@@ -86,7 +86,7 @@ return array(
         'messages'        => true,  // Messages
         'time'            => true,  // Time Datalogger
         'memory'          => true,  // Memory usage
-        'exceptions'      => true,  // Exception displayer
+        'exceptions'      => false,  // Exception displayer // php 7 compatibility, cfr. https://github.com/barryvdh/laravel-debugbar/issues/497
         'log'             => true,  // Logs from Monolog (merged in messages if enabled)
         'db'              => true,  // Show database (PDO) queries and bindings
         'views'           => true,  // Views with their data

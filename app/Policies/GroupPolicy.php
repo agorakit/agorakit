@@ -28,7 +28,7 @@ class GroupPolicy
    }
 
 
-   public function delete(User $user, Action $action)
+   public function delete(User $user, Group $group)
    {
       if ($user->isAdmin())
       {

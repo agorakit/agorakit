@@ -16,6 +16,7 @@ class CreateTaggableTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('tags'); // needed because a previous module create one already (altough it was never used)
         Schema::create('tags', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');

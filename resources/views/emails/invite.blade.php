@@ -20,7 +20,7 @@
 <p>{!! filter($group->body) !!}</p>
 
 
-@include('emails.button', ['url' => action('InviteController@inviteConfirm', [$group->id, $invite->token]), 'label' => 'Accepter l\'invitation'])
+@include('emails.button', ['url' => action('InviteController@inviteConfirm', [$group->id, $invite->token]), 'label' => trans('messages.accept_invitation')])
 <p>({{trans('messages.this_action_can_be_reverted')}})</p>
 
 <p style="font-size: 0.8em">{{trans('messages.if_you_donwt_want_to_join_do_nothing')}}</p>
