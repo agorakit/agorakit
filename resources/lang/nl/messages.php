@@ -86,6 +86,8 @@ return [
     'inside'                                            => 'van',
     'invitation_sent_again'                             => '\'Een nieuwe bevestigingsmail is verstuurd. Controleer zowel uw mailbox als uw spam om uw e-mailadres te kunnen bevestigen. Dit zorgt ervoor dat we spam op deze site kunnen vermijden. Bedankt voor uw begrip.',
     'invitation_to_join'                                => 'Uitnodiging om lid te worden van de groep',
+    'invite_already_used_it'                            => 'Uitnodigen reeds gebruikt',
+    'invite_already_used_on'                            => 'Uitnodigen reeds gebruikt',
     'join'                                              => 'Aansluiten bij deze groep',
     'join_the_group'                                    => 'Neem deel aan deze groep',
     'join_this_group'                                   => 'Neem deel aan deze groep',

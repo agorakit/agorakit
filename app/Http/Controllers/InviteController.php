@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Mail;
+use Carbon;
 use Auth;
 use App\Group;
 
@@ -123,7 +124,13 @@ class InviteController extends Controller
 
         if (!$invite)
         {
-            flash()->error( trans('messages.invite_not_found_or_you_already_used_it') );
+            flash()->error( trans('messages.invite_not_found') );
+            return redirect()->action('GroupController@show', $group->id);
+        }
+
+        if (isset($invite->claimed_at))
+        {
+            flash()->error( trans('messages.invite_already_used') . ' (' . $invite->claimed_at . ')');
             return redirect()->action('GroupController@show', $group->id);
         }
 
@@ -140,7 +147,7 @@ class InviteController extends Controller
             $membership->save();
 
             // remove invite we don't need it anymore, or do we for logging purposes?
-            $invite->delete();
+            $invite->claimed_at = Carbon::now();
 
             flash()->error( trans('messages.you_are_now_a_member_of_this_group') );
             return redirect()->action('GroupController@show', $group_id);
@@ -162,7 +169,7 @@ class InviteController extends Controller
     /**
     * Process the account creation from the form of inviteConfirm()
     */
-    public function inviteRegister(Request $request, $group_id, $token)
+    public function inviteRegister(Request $request, Group $group, $token)
     {
         $this->validate($request, [
             'name' => 'required|max:255',
@@ -171,7 +178,7 @@ class InviteController extends Controller
         ]);
 
         $invite = \App\Invite::whereToken($token)->firstOrFail();
-        $invite->delete();
+        $invite->claimed_at = Carbon::now();
 
         $user = new \App\User;
         $user->name = $request->get('name');
@@ -186,13 +193,13 @@ class InviteController extends Controller
 
         $user->save();
 
-        $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $group_id]);
+        $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $group->id]);
         $membership->membership = \App\Membership::MEMBER;
         $membership->save();
 
         Auth::login($user);
 
         flash()->info( trans('messages.you_are_now_a_member_of_this_group') );
-        return redirect()->action('GroupController@show', $group_id);
+        return redirect()->action('GroupController@show', $group->id);
     }
 }

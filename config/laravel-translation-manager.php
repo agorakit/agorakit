@@ -12,7 +12,7 @@ return array(
     */
     'route' => [
         'prefix' => 'translations',
-        'middleware' => ['web', 'auth'],
+        'middleware' => ['web', 'admin'],
     ],
     /**
      * Specify the locale that is used for creating the initial translation strings. This locale is considered

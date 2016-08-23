@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'LLH:obsolete'          => [
+        'no_group_joined_yet_act_now'   => 'U  bent nog niet tot een groep toegetreden',
+    ],
     'about_this_group'      => 'Over deze groep',
     'closed'                => 'TODO: closed',
     'cover'                 => 'Cover',

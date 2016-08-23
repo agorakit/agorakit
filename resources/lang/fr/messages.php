@@ -86,6 +86,8 @@ return [
     'inside'                                            => 'au sein de',
     'invitation_sent_again'                             => 'Un nouveau mail de vérification vous a été envoyé, vérifiez votre boite mail ainsi que le dossier spam afin de pouvoir vérifier votre adresse mail. Ceci nous permet d\'éviter le spam sur ce site. Merci pour votre compréhension.',
     'invitation_to_join'                                => 'Invitation à rejoindre le groupe',
+    'invite_already_used_it'                            => 'Inviter déjà utilisé',
+    'invite_already_used_on'                            => 'Inviter déjà utilisé',
     'join'                                              => 'Rejoindre ce groupe',
     'join_the_group'                                    => 'rejoignez-le',
     'join_this_group'                                   => 'Rejoignez ce groupe',

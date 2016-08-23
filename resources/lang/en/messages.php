@@ -86,6 +86,8 @@ return [
     'inside'                                            => 'inside',
     'invitation_sent_again'                             => 'Invitation sent again',
     'invitation_to_join'                                => 'Invitation to join',
+    'invite_already_used_it'                            => 'Invite already used',
+    'invite_already_used_on'                            => 'Invite already used',
     'join'                                              => 'Join',
     'join_the_group'                                    => 'Join the group',
     'join_this_group'                                   => 'Join this group',
