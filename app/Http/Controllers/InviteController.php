@@ -146,11 +146,11 @@ class InviteController extends Controller
             $membership->membership = \App\Membership::MEMBER;
             $membership->save();
 
-            // remove invite we don't need it anymore, or do we for logging purposes?
+            // Invitation is now claimed, but not deleted
             $invite->claimed_at = Carbon::now();
 
             flash()->error( trans('messages.you_are_now_a_member_of_this_group') );
-            return redirect()->action('GroupController@show', $group_id);
+            return redirect()->action('GroupController@show', $group->id);
         }
         else
         {
