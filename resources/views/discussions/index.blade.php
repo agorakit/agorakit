@@ -6,7 +6,7 @@
 <div class="tab_content">
 
   @include('partials.invite')
-  
+
   <h2>{{trans('discussion.all_in_this_group')}}
 
     @can('create-discussion', $group)
@@ -19,7 +19,7 @@
     <table class="table table-hover special">
       <thead>
         <tr>
-          <th style="width: 75%">Titre</th>
+          <th style="width: 75%">{{trans('messages.title')}}</th>
           <th>Date</th>
           <th>A lire</th>
         </tr>

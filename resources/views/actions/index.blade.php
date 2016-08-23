@@ -22,7 +22,7 @@ $(document).ready(function() {
     selectable: true,
 		selectHelper: true,
     select: function(start, end) {
-				var title = prompt('Titre de l\'action');
+				var title = prompt('{{trans('messages.title')}}');
 				var eventData;
 				if (title) {
 					eventData = {

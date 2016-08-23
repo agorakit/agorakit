@@ -50,13 +50,13 @@ $(document).ready(function() {
 
 <div class="page_header">
   <h1><a href="{{ action('DashboardController@index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.agenda') }}</h1>
-  <p>Si vous souhaitez ajouter des événements, rendez vous dans l'agenda d'un groupe précis</p>
+  <p>{{trans('messages.if_you_want_to_add_event_goto_group_agenda')}}</p>
 </div>
 
 <div class="tab_content">
 <div id="calendar"></div>
 
-<p><a href="{{action('IcalController@index')}}">Téléchargez le calendrier au format iCal</a></p>
+<p><a href="{{action('IcalController@index')}}">{{trans('messages.download_ical')}}</a></p>
 
 </div>
 
