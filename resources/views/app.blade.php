@@ -33,9 +33,20 @@
     @include('partials.nav')
 
     <div class="container nav-margin-top">
-        @include('partials.errors')
 
-        @yield('content')
+        <div class="row">
+            <div class="col-lg-3">
+                @unless (Auth::guest())
+                    @include('partials.sidebar')
+                @endunless
+            </div>
+
+            <div class="col-lg-9">
+                @include('partials.errors')
+                @yield('content')
+            </div>
+
+        </div>
 
         <div class="credits">{{trans('messages.made_with')}} <a href="https://github.com/philippejadin/Mobilizator">Mobilizator</a></div>
     </div>

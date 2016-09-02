@@ -124,7 +124,11 @@ class GroupController extends Controller
   {
     $group->name = $request->input('name');
     $group->body = $request->input('body');
-    $group->group_type = $request->input('group_type');
+
+    if (Gate::allows('changeGroupType', $group))
+    {
+      $group->group_type = $request->input('group_type');
+    }
 
     $group->user()->associate(Auth::user());
 
@@ -135,7 +139,7 @@ class GroupController extends Controller
       ->withErrors($group->getErrors())
       ->withInput();
     }
-
+    
     // handle cover
     if ($request->hasFile('cover'))
     {

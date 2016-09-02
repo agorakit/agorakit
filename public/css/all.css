@@ -23,6 +23,28 @@ h1, h2, h3, h4, h5, h6
 }
 
 
+@media (min-width: 1600px) {
+    .container{
+        width: 1500px;
+    
+    }
+}
+
+
+.sidebar
+{
+    background-color: white;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.sidebar a
+{
+    display: block;
+    height: 1.5em;
+    overflow: hidden;
+}
+
 
 .page_header
 {
@@ -73,7 +95,7 @@ a
 /*
 .tab_content a, .tab_content a:visited
 {
-        color: rgb(22, 110, 166);
+color: rgb(22, 110, 166);
 }
 */
 
@@ -113,7 +135,7 @@ a
 /*
 .nav-tabs > li.active > a
 {
-    border: 1px solid white;
+border: 1px solid white;
 }
 */
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Auth;
 
 class SettingsController extends Controller
 {
@@ -33,8 +34,17 @@ class SettingsController extends Controller
     */
     public function update(Request $request)
     {
-        \App\Setting::set('homepage_presentation', $request->input('homepage_presentation'));
-        return redirect()->action('DashboardController@index');
+        if (Auth::user()->isAdmin())
+        {
+            \App\Setting::set('homepage_presentation', $request->input('homepage_presentation'));
+            return redirect()->action('DashboardController@index');
+        }
+        else
+        {
+            flash()->error(trans('messages.not_allowed'));
+            return redirect()->action('DashboardController@index');
+        }
+
     }
 
 

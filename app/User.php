@@ -136,7 +136,7 @@ class User extends Authenticatable
     */
     public function groups()
     {
-        return $this->belongsToMany('App\Group', 'membership')->where('membership.membership', \App\Membership::MEMBER)->withTimestamps();
+        return $this->belongsToMany('App\Group', 'membership')->where('membership.membership', \App\Membership::MEMBER)->orderBy('name')->withTimestamps();
     }
 
     public function memberships()

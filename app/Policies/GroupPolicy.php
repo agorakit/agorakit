@@ -105,6 +105,12 @@ class GroupPolicy
    }
 
 
+   public function changeGroupType(User $user, Group $group)
+   {
+
+      return $user->isAdmin();
+   }
+
 
 
 
