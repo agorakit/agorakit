@@ -21,7 +21,7 @@
     @yield('css')
 
     <!-- mobilizator specific css-->
-    {!! Html::style('/css/all.css?v5') !!}
+    {!! Html::style('/css/all.css?v6') !!}
 
 
 
@@ -34,19 +34,24 @@
 
     <div class="container nav-margin-top">
 
-        <div class="row">
-            <div class="col-lg-3">
-                @unless (Auth::guest())
+
+        @if (Auth::guest())
+            @include('partials.errors')
+            @yield('content')
+        @else
+
+            <div class="row">
+                <div class="col-lg-3">
                     @include('partials.sidebar')
-                @endunless
-            </div>
+                </div>
 
-            <div class="col-lg-9">
-                @include('partials.errors')
-                @yield('content')
-            </div>
+                <div class="col-lg-9">
+                    @include('partials.errors')
+                    @yield('content')
+                </div>
 
-        </div>
+            </div>
+        @endif
 
         <div class="credits">{{trans('messages.made_with')}} <a href="https://github.com/philippejadin/Mobilizator">Mobilizator</a></div>
     </div>
