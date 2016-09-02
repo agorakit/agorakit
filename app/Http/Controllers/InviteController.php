@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Mail;
-use Carbon;
+use Carbon\Carbon;
 use Auth;
 use App\Group;
 
