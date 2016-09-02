@@ -49,7 +49,7 @@
 
 
 
-        <h2>{{trans('group.latest_actions')}}</h2>
+        <h2>{{trans('messages.agenda')}}</h2>
 
         @if($actions->count() > 0)
             <table class="table table-hover special">

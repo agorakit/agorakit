@@ -36,7 +36,7 @@
   @can ('viewActions', $group)
     <li role="presentation" @if (isset($tab) && ($tab == 'action')) class="active" @endif>
       <a href="{{ action('ActionController@index', $group->id) }}">
-        <i class="fa fa-calendar"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.actions') }}</span>
+        <i class="fa fa-calendar"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.agenda') }}</span>
       </a>
     </li>
   @endcan

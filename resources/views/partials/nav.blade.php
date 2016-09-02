@@ -16,7 +16,7 @@
             <ul class="nav navbar-nav">
                 <li>
                     <a href="{{ action('DashboardController@agenda') }}">
-                        {{trans('group.latest_actions')}}
+                        {{trans('messages.agenda')}}
                     </a>
                 </li>
 

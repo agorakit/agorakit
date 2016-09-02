@@ -28,7 +28,7 @@
         <li role="presentation">
             <a href="#actions" aria-controls="actions" role="tab" data-toggle="tab">
                 <i class="fa fa-calendar"></i>
-                <span class="hidden-sm hidden-xs">{{ trans('group.latest_actions') }}</span>
+                <span class="hidden-sm hidden-xs">{{ trans('messages.agenda') }}</span>
             </a>
         </li>
 
@@ -123,7 +123,7 @@
 
 
             <div role="tabpanel" class="tab-pane" id="actions">
-                <h1>{{ trans('group.latest_actions') }}</h1>
+                <h1>{{ trans('messages.agenda') }}</h1>
 
                 @if (Auth::check() && Auth::user()->getPreference('show', 'all') == 'all')
                     {{ trans('messages.you_see_all') }}
@@ -185,7 +185,15 @@
                                         <img src="{{action('GroupController@cover', $group->id)}}"/>
                                     </a>
                                     <div class="caption">
-                                        <h4><a href="{{ action('GroupController@show', $group->id) }}">{{ $group->name }}</a></h4>
+                                        <h4>
+                                            <a href="{{ action('GroupController@show', $group->id) }}">{{ $group->name }}
+                                                @if ($group->isPublic())
+                                                    <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
+                                                @else
+                                                    <i class="fa fa-lock" title="{{trans('group.closed')}}"></i>
+                                                @endif
+                                            </a>
+                                        </h4>
                                         <p class="summary">{{ summary($group->body, 150) }}</p>
                                         <p>
                                             <a class="btn btn-primary" href="{{ action('MembershipController@leave', $group->id) }}">
@@ -223,7 +231,16 @@
                                     <img src="{{action('GroupController@cover', $group->id)}}"/>
                                 </a>
                                 <div class="caption">
-                                    <h4><a href="{{ action('GroupController@show', $group->id) }}">{{ $group->name }}</a></h4>
+                                    <h4>
+                                        <a href="{{ action('GroupController@show', $group->id) }}">{{ $group->name }}
+                                            @if ($group->isPublic())
+                                                <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
+                                            @else
+                                                <i class="fa fa-lock" title="{{trans('group.closed')}}"></i>
+                                            @endif
+
+                                        </a>
+                                    </h4>
                                     <p class="summary">{{ summary($group->body, 150) }}</p>
                                     <p>
 
