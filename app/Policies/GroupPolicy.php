@@ -78,11 +78,33 @@ class GroupPolicy
    }
 
 
-   public function showDiscussions(User $user, Group $group)
+   public function viewDiscussions(User $user, Group $group)
    {
       // isn't it lovely :
       return ($group->isPublic() || $user->isMemberOf($group));
    }
+
+   public function viewActions(User $user, Group $group)
+   {
+      // isn't it lovely :
+      return ($group->isPublic() || $user->isMemberOf($group));
+   }
+
+   public function viewMembers(User $user, Group $group)
+   {
+      // curently we return true, since a user might need to see group members to contact someone to be added to the group
+      return true;
+      //return ($group->isPublic() || $user->isMemberOf($group));
+   }
+
+
+   public function viewFiles(User $user, Group $group)
+   {
+      // isn't it lovely :
+      return ($group->isPublic() || $user->isMemberOf($group));
+   }
+
+
 
 
 

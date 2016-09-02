@@ -7,6 +7,8 @@ return [
     'everymonth'                        => 'Elke maand',
     'everytwoweek'                      => 'Om de 15 dagen',
     'everyweek'                         => 'Elke week',
+    'howtojoin'                         => 'Hoe bereik je dit groue?',
+    'howtojointext'                     => 'Deze groep is een gesloten groep. Om lid te worden, neem dan contact op met één van de leden, zodat deze er om vraagt.',
     'if_you_want_to_leave_this_group'   => 'Indien u deze groep wil verlaten',
     'invite_button'                     => 'Nodig deze perso(o)n(en) uit',
     'invite_intro'                      => 'Geef nieuwe impulsen door personen uit te nodigen die mogelijks geïnteresseerd zijn in deze groep. Geef de e-mailadressen in van de personen die u zou willen uitnodigen. U kan deze ingeven zoals u wil: één per lijn of gescheiden door een spatie of een komma. Geef momenteel niet meer dan 50 personen tegelijk in, omdat de site anders dreigt te blokkeren. Maak geen misbruik van dit systeem om geen mensen te storen. De uitnodigingen worden slechts éénmaal naar elke persoon verstuurd.',

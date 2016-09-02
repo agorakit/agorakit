@@ -8,12 +8,12 @@
     @endif
 
     <span class="small">
-    @if ($group->isPublic())
-      <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
-    @else
-      <i class="fa fa-lock" title="{{trans('group.closed')}}"></i>
-    @endif
-  </span>
+      @if ($group->isPublic())
+        <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
+      @else
+        <i class="fa fa-lock" title="{{trans('group.closed')}}"></i>
+      @endif
+    </span>
   </h1>
 </div>
 
@@ -24,29 +24,38 @@
     </a>
   </li>
 
-  <li role="presentation" @if (isset($tab) && ($tab == 'discussion')) class="active" @endif>
-    <a href="{{ action('DiscussionController@index', $group->id) }}">
-      <i class="fa fa-comments"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.discussions') }}</span>
-    </a>
-  </li>
 
-  <li role="presentation" @if (isset($tab) && ($tab == 'action')) class="active" @endif>
-    <a href="{{ action('ActionController@index', $group->id) }}">
-      <i class="fa fa-calendar"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.actions') }}</span>
-    </a>
-  </li>
+  @can ('viewDiscussions', $group)
+    <li role="presentation" @if (isset($tab) && ($tab == 'discussion')) class="active" @endif>
+      <a href="{{ action('DiscussionController@index', $group->id) }}">
+        <i class="fa fa-comments"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.discussions') }}</span>
+      </a>
+    </li>
+  @endcan
 
-  <li role="presentation" @if (isset($tab) && ($tab == 'files')) class="active" @endif>
-    <a href="{{ action('FileController@index', $group->id) }}">
-      <i class="fa fa-file-o"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.files') }}</span>
-    </a>
-  </li>
+  @can ('viewActions', $group)
+    <li role="presentation" @if (isset($tab) && ($tab == 'action')) class="active" @endif>
+      <a href="{{ action('ActionController@index', $group->id) }}">
+        <i class="fa fa-calendar"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.actions') }}</span>
+      </a>
+    </li>
+  @endcan
 
-  <li role="presentation" @if (isset($tab) && ($tab == 'users')) class="active" @endif>
-    <a href="{{ action('UserController@index', $group->id) }}">
-      <i class="fa fa-users"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.members') }}</span>
-    </a>
-  </li>
+  @can ('viewFiles', $group)
+    <li role="presentation" @if (isset($tab) && ($tab == 'files')) class="active" @endif>
+      <a href="{{ action('FileController@index', $group->id) }}">
+        <i class="fa fa-file-o"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.files') }}</span>
+      </a>
+    </li>
+  @endcan
+
+  @can ('viewMembers', $group)
+    <li role="presentation" @if (isset($tab) && ($tab == 'users')) class="active" @endif>
+      <a href="{{ action('UserController@index', $group->id) }}">
+        <i class="fa fa-users"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.members') }}</span>
+      </a>
+    </li>
+  @endcan
 
   @if ($group->isMember())
     <li role="presentation" @if (isset($tab) && ($tab == 'settings')) class="active" @endif>
@@ -61,13 +70,13 @@
           <i class="fa fa-cog"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.join') }}</span>
         </a>
       </li>
-      @else
+    @else
       <li role="presentation" @if (isset($tab) && ($tab == 'settings')) class="active" @endif>
-        <a href="{{ action('MembershipController@joinForm', $group->id) }}">
+        <a href="{{ action('MembershipController@howToJoin', $group->id) }}">
           <i class="fa fa-lock"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.join') }}</span>
         </a>
       </li>
-      @endcan
+    @endcan
   @endif
 
 </ul>

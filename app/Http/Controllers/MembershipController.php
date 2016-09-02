@@ -23,20 +23,20 @@ class MembershipController extends Controller
     {
         if (Gate::allows('join', $group))
         {
-        // load or create membership for this group and user combination
-        $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
+            // load or create membership for this group and user combination
+            $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
 
-        return view('membership.join')
-        ->with('group', $group)
-        ->with('tab', 'settings')
-        ->with('membership', $membership)
-        ->with('interval', 'daily');
-      }
-      else
-      {
-        flash()->info( trans('messages.not_allowed'));
-        return redirect()->back();
-      }
+            return view('membership.join')
+            ->with('group', $group)
+            ->with('tab', 'settings')
+            ->with('membership', $membership)
+            ->with('interval', 'daily');
+        }
+        else
+        {
+            flash()->info( trans('messages.not_allowed'));
+            return redirect()->back();
+        }
 
     }
 
@@ -50,23 +50,23 @@ class MembershipController extends Controller
     */
     public function join(Request $request, Group $group)
     {
-      if (Gate::allows('join', $group))
-      {
-        // load or create membership for this group and user combination
-        $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
-        $membership->membership = \App\Membership::MEMBER;
-        $membership->notification_interval = $this->intervalToMinutes($request->get('notifications'));
+        if (Gate::allows('join', $group))
+        {
+            // load or create membership for this group and user combination
+            $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
+            $membership->membership = \App\Membership::MEMBER;
+            $membership->notification_interval = $this->intervalToMinutes($request->get('notifications'));
 
-        // we prented the user has been already notified once, now. The first mail sent will be at the choosen interval from now on.
-        $membership->notified_at = Carbon::now();
-        $membership->save();
+            // we prented the user has been already notified once, now. The first mail sent will be at the choosen interval from now on.
+            $membership->notified_at = Carbon::now();
+            $membership->save();
 
-        return redirect()->action('GroupController@show', [$group->id])->with('message', trans('membership.welcome'));
-      }
+            return redirect()->action('GroupController@show', [$group->id])->with('message', trans('membership.welcome'));
+        }
         else
         {
-          flash()->info( trans('messages.not_allowed'));
-          return redirect()->back();
+            flash()->info( trans('messages.not_allowed'));
+            return redirect()->back();
         }
     }
 
@@ -132,6 +132,19 @@ class MembershipController extends Controller
         $membership->save();
 
         return redirect()->action('GroupController@show', [$group->id])->with('message', trans('membership.settings_updated'));
+    }
+
+
+
+
+    /**
+    * Show an explanation page on how to join a private group
+    */
+    public function howToJoin(Request $request, Group $group)
+    {
+        return view('membership.howtojoin')
+        ->with('tab', 'settings')
+        ->with('group', $group);
     }
 
 

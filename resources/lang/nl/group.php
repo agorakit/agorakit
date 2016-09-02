@@ -2,10 +2,10 @@
 
 return [
     'LLH:obsolete'          => [
-        'no_group_joined_yet_act_now'   => 'U  bent nog niet tot een groep toegetreden',
+        'no_group_joined_yet_act_now'   => 'U bent geen deel uitmaken van een groep, mee in een :-)',
     ],
     'about_this_group'      => 'Over deze groep',
-    'closed'                => 'TODO: closed',
+    'closed'                => 'Eigen groep',
     'cover'                 => 'Cover',
     'create'                => 'Create',
     'create_a_group_button' => 'Een groep aanmaken',
@@ -22,10 +22,10 @@ return [
     'name'                  => 'Naam van de groep',
     'no_group_joined_yet'   => 'U  bent nog niet tot een groep toegetreden, ga naar "Alle groepen" om een overzicht van de groepen te krijgen en om tot een groep toe te treden',
     'no_group_yet'          => 'Er is nog geen groep op deze server. Ga verder!',
-    'open'                  => 'TODO: open',
-    'private'               => 'TODO: private',
-    'public'                => 'TODO: public',
-    'type'                  => 'TODO: type',
+    'open'                  => 'Openbare groep',
+    'private'               => 'Eigen groep',
+    'public'                => 'Openbare groep',
+    'type'                  => 'Type groep',
     'visit'                 => 'Bezoeken',
     'your_group_here'       => 'Maak een nieuwe groep aan',
 ];

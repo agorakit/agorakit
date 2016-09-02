@@ -132,6 +132,8 @@ Route::group(['middleware' => ['web']], function () {
   Route::get('groups/{group}/leave', 'MembershipController@leaveForm');
   Route::post('groups/{group}/leave', 'MembershipController@leave');
 
+  // in the case of closed group, we show an howto join message
+  Route::get('groups/{group}/howtojoin', 'MembershipController@howToJoin');
 
   // invites
   Route::get('groups/{group}/invite', 'InviteController@invite');
@@ -239,7 +241,7 @@ Route::group(['middleware' => ['web']], function () {
   /***************** ADMIN STUFF **************/
   Route::group(['middleware' => ['admin']], function () {
 
-    Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+    Route::get('admin/logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
   });
 
