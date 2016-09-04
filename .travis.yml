@@ -8,6 +8,8 @@ before_script:
   - mysql -e 'create database mobilizator_testing;'
   - composer self-update
   - composer install --no-interaction
+  - php artisan key:generate
+  - php artisan migrate
 
 script:
   - vendor/bin/phpunit
