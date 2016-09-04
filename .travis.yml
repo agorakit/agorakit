@@ -7,6 +7,7 @@ before_script:
   - cp .env.travis .env
   - mysql -e 'create database mobilizator_testing;'
   - composer self-update
+  - composer require --dev --no-update phpunit/phpunit ~4
   - composer install --no-interaction
   - php artisan key:generate
   - php artisan migrate

@@ -70,8 +70,8 @@ return [
         'mysql_testing' => [
             'driver'    => 'mysql',
             'host'      => env('TESTING_DB_HOST', 'localhost'),
-            'database'  => env('TESTING_DB_DATABASE', 'forge'),
-            'username'  => env('TESTING_DB_USERNAME', 'forge'),
+            'database'  => env('TESTING_DB_DATABASE', 'mobilizator_testing'),
+            'username'  => env('TESTING_DB_USERNAME', 'root'),
             'password'  => env('TESTING_DB_PASSWORD', ''),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
