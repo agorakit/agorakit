@@ -4,11 +4,13 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Watson\Validating\ValidatingTrait;
+use Venturecraft\Revisionable\RevisionableTrait;
 
 class User extends Authenticatable
 {
 
     use ValidatingTrait;
+    use RevisionableTrait;
 
     /**
     * The attributes that are mass assignable.

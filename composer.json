@@ -19,7 +19,8 @@
         "draperstudio/laravel-flash": "^0.2.1",
         "rap2hpoutre/laravel-log-viewer": "^0.6.1",
         "vsch/laravel-translation-manager": "*",
-        "draperstudio/laravel-taggable": "*"
+        "draperstudio/laravel-taggable": "*",
+        "iatstuti/laravel-cascade-soft-deletes": "1.0.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

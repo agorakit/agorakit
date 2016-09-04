@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Watson\Validating\ValidatingTrait;
 use Venturecraft\Revisionable\RevisionableTrait;
 
@@ -12,6 +13,9 @@ class Discussion extends Model
   use RevisionableTrait;
   use ValidatingTrait;
   use SoftDeletes;
+  use CascadeSoftDeletes;
+
+  protected $cascadeDeletes = ['comments'];
 
 
 

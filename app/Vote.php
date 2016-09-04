@@ -5,11 +5,13 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
+use Venturecraft\Revisionable\RevisionableTrait;
 
 class Vote extends Model {
 
 
 	use SoftDeletes;
+    use RevisionableTrait;
 
 	protected $fillable = ['user_id', 'comment_id', 'vote'];
 	protected $rules = [
@@ -27,5 +29,5 @@ class Vote extends Model {
 	{
 		return $this->belongsTo('App\comment');
 	}
-	
+
 }

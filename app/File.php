@@ -8,16 +8,17 @@ use Watson\Validating\ValidatingTrait;
 use Storage;
 use Response;
 use DraperStudio\Taggable\Traits\Taggable as TaggableTrait;
+use Venturecraft\Revisionable\RevisionableTrait;
 
 
 class File extends Model
 {
   use ValidatingTrait;
   use SoftDeletes;
-
+  use RevisionableTrait;
   use TaggableTrait;
 
-  
+
 
   protected $onlyUseExistingTags = false;
 

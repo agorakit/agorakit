@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Iatstuti\Database\Support\CascadeSoftDeletes;
 use App\User;
 use App\Discussion;
 use Watson\Validating\ValidatingTrait;
@@ -16,6 +17,9 @@ class Group extends Model
     use ValidatingTrait;
     use RevisionableTrait;
     use SoftDeletes;
+    use CascadeSoftDeletes;
+
+    protected $cascadeDeletes = ['discussions', 'actions', 'files', 'memberships'];
 
     protected $rules = [
         'name' => 'required',
@@ -156,7 +160,7 @@ class Group extends Model
         return action('GroupController@show', $this);
     }
 
-    
+
     /** returns true if the group is public (viewable by all) **/
     public function isPublic()
     {

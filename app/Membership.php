@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Venturecraft\Revisionable\RevisionableTrait;
 
 class Membership extends Model
 {
+    use RevisionableTrait;
+
+    
     protected $table = 'membership';
     public $timestamps = true;
     protected $fillable = ['group_id', 'user_id', 'membership'];

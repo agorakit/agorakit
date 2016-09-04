@@ -4,10 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Watson\Validating\ValidatingTrait;
+use Venturecraft\Revisionable\RevisionableTrait;
 
 class Invite extends Model
 {
   use ValidatingTrait;
+  use RevisionableTrait;
 
   public $timestamps = true;
   protected $dates = ['deleted_at'];
