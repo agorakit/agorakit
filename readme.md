@@ -1,3 +1,6 @@
+ll
+[![Build Status](https://travis-ci.org/philippejadin/Mobilizator.svg?branch=master)](https://travis-ci.org/philippejadin/Mobilizator)
+
 ## Mobilizator
 
 Mobilize crowds efficiently. Allow anyone to create a collaborative group. No admins involved in the process. Manage communication, decision making, membership, files and events.
@@ -5,7 +8,7 @@ Mobilize crowds efficiently. Allow anyone to create a collaborative group. No ad
 Facebook for the paranoid inside any of us.
 
 ## Requirements
-You need a good webhosting provider that provides the following : 
+You need a good webhosting provider that provides the following :
 - php 5.6 or newer
 - mysql
 - composer
@@ -45,12 +48,15 @@ $ php artisan migrate
 $ php artisan up
 ```
 
-
-
 Create a first user account. In some future release, the first created user will be admin.
 
-
 If you don't know how all this works, don't setup a production server around this tool without first digging laravel docs.
+
+## Cron
+
+Setup a cron jon in order to have the automated notifications sent to every subscriber
+
+To do so, the laravel docs are pristine clear : https://laravel.com/docs/master/scheduling
 
 ## Development
 
