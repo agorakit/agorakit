@@ -9,6 +9,7 @@ use Storage;
 use Response;
 use DraperStudio\Taggable\Traits\Taggable as TaggableTrait;
 use Venturecraft\Revisionable\RevisionableTrait;
+use Kalnoy\Nestedset\NodeTrait;
 
 
 class File extends Model
@@ -17,6 +18,7 @@ class File extends Model
   use SoftDeletes;
   use RevisionableTrait;
   use TaggableTrait;
+  use NodeTrait;
 
 
 

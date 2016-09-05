@@ -1,4 +1,3 @@
-ll
 [![Build Status](https://travis-ci.org/philippejadin/Mobilizator.svg?branch=master)](https://travis-ci.org/philippejadin/Mobilizator)
 
 ## Mobilizator
