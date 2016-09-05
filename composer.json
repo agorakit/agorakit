@@ -20,7 +20,8 @@
         "rap2hpoutre/laravel-log-viewer": "^0.6.1",
         "vsch/laravel-translation-manager": "*",
         "draperstudio/laravel-taggable": "*",
-        "iatstuti/laravel-cascade-soft-deletes": "1.0.*"
+        "iatstuti/laravel-cascade-soft-deletes": "1.0.*",
+        "kalnoy/nestedset": "^4.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
