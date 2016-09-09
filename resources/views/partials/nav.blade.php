@@ -84,6 +84,7 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{ url('/admin/user') }}">Users</a></li>
                                     <li><a href="{{ url('/translations') }}">Translations</a></li>
                                     <li><a href="{{ url('/admin/logs') }}">Logs</a></li>
                                 </ul>

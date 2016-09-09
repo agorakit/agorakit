@@ -95,6 +95,15 @@ return [
         'attribute-name'    => [
             'rule-name' => 'custom-message',
         ],
+        'group_id'          => [
+            'required'  => 'Required',
+        ],
+        'path'              => [
+            'required'  => 'Required',
+        ],
+        'user_id'           => [
+            'required'  => 'Required',
+        ],
     ],
 
     /*
@@ -122,6 +131,7 @@ return [
         'excerpt'               => 'Excerpt',
         'first_name'            => 'First Name',
         'gender'                => 'Gender',
+        'group_id'              => 'Group number',
         'hour'                  => 'Hour',
         'last_name'             => 'Last Name',
         'minute'                => 'Minute',
@@ -130,12 +140,14 @@ return [
         'name'                  => 'Name',
         'password'              => 'Password',
         'password_confirmation' => 'Password Confirmation',
+        'path'                  => 'Path',
         'phone'                 => 'Phone',
         'second'                => 'Second',
         'sex'                   => 'Sex',
         'size'                  => 'Size',
         'time'                  => 'Time',
         'title'                 => 'Title',
+        'user_id'               => 'User Id',
         'username'              => 'Username',
         'year'                  => 'Year',
     ],

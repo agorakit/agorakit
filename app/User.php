@@ -61,8 +61,16 @@ class User extends Authenticatable
         parent::boot();
         static::creating(function ($user) {
             $user->token = str_random(30);
+
+            // first created user is automatically an admin
+            if (\App\User::count() == 0)
+            {
+                $user->admin = 1;
+            }
         });
     }
+
+
 
 
     /**
