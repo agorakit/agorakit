@@ -119,7 +119,9 @@ class FileController extends Controller
             if ($request->ajax()) {
                 return response()->json('success', 200);
             } else {
-                return redirect()->back()->with('message', 'File was uploaded successfuly');
+
+                flash()->info(trans('messages.ressource_created_successfully'));
+                return redirect()->action('FileController@index', [$group->id]);
             }
         } catch (Exception $e) {
 
@@ -131,6 +133,7 @@ class FileController extends Controller
             }
         }
     }
+
 
     /**
     * Display the specified resource.
@@ -153,7 +156,6 @@ class FileController extends Controller
 
     public function thumbnail(Group $group, File $file)
     {
-
         if (in_array($file->mime, ['image/jpeg', 'image/png', 'image/gif']))
         {
             $cachedImage = Image::cache(function($img) use ($file) {
@@ -164,8 +166,7 @@ class FileController extends Controller
         }
         else
         {
-            $img = Image::make(public_path().'/images/extensions/text-file.png')->fit(32, 32);
-            return $img->response('jpg');
+            return redirect('images/extensions/text-file.png');
         }
     }
 
@@ -183,8 +184,7 @@ class FileController extends Controller
         }
         else
         {
-            $img = Image::make(public_path().'/images/extensions/text-file.png')->fit(64, 64);
-            return $img->response('jpg');
+            return redirect('images/extensions/text-file.png');
         }
     }
 
@@ -213,16 +213,6 @@ class FileController extends Controller
     */
     public function update(Request $request, Group $group, File $file)
     {
-
-        /*
-        foreach ($request->input('tags') as $tag)
-        {
-            $tagnames[] = $tag;
-        }
-
-        dd(implode(',', $request->input('tags')));
-        */
-
         $file->retag(implode(',', $request->input('tags')));
         flash()->info(trans('messages.ressource_updated_successfully'));
         return redirect()->action('FileController@index', [$file->group->id]);
@@ -261,7 +251,7 @@ class FileController extends Controller
         {
             $file->delete();
             flash()->info(trans('messages.ressource_deleted_successfully'));
-            return redirect()->action('FileController@index', [$group_id]);
+            return redirect()->action('FileController@index', [$group->id]);
         }
         else
         {

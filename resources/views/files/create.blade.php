@@ -1,10 +1,10 @@
 @extends('app')
 
-@section('head')
+@section('css')
 {!! Html::style('/packages/dropzone/dropzone.css') !!}
 @stop
 
-@section('footer')
+@section('js')
 {!! Html::script('/packages/dropzone/dropzone.js') !!}
 {!! Html::script('/packages/dropzone/dropzone-config.js') !!}
 @stop
@@ -29,7 +29,7 @@
 
     <input name="file" type="file" multiple />
     <input type="submit"/>
-  
+
 
   {!! Form::close() !!}
 

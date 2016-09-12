@@ -26,7 +26,7 @@ h1, h2, h3, h4, h5, h6
 @media (min-width: 1600px) {
     .container{
         width: 1500px;
-    
+
     }
 }
 
@@ -188,6 +188,8 @@ border: 1px solid white;
 .label
 {
     border-radius: 2px;
+    margin-bottom: 2px;
+    line-height: 2.3em;
 }
 
 .label a

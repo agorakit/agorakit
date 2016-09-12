@@ -6,7 +6,7 @@
 <div class="tab_content">
   <h1>{{trans('messages.delete_confirm_title')}}</h1>
 
-  <p>{!!$comment->body!!}</p>
+  <p>{{strip_tags($comment->body)}}</p>
 
   {!! Form::model($comment, array('method' => 'DELETE', 'action' => ['CommentController@destroy', $group->id, $discussion->id, $comment->id])) !!}
 
