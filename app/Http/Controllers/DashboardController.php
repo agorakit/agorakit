@@ -15,7 +15,7 @@ class DashboardController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth', ['only' => ['unreadDiscussions', 'users']]);
+        $this->middleware('auth', ['only' => ['discussions', 'users']]);
     }
 
     /**
@@ -89,7 +89,7 @@ class DashboardController extends Controller
     /**
     * Generates a list of unread discussions.
     */
-    public function unreadDiscussions()
+    public function discussions()
     {
 
         $my_groups = Auth::user()->groups()->orderBy('name')->get();
@@ -106,7 +106,7 @@ class DashboardController extends Controller
         ->orderBy('updated_at', 'desc')->paginate(25);
 
 
-        return view('dashboard.unread')
+        return view('dashboard.discussions')
         ->with('discussions', $discussions);
     }
 

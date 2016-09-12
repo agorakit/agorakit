@@ -22,7 +22,7 @@
 
                 @if ($user_logged)
                     <li>
-                        <a href="{{ action('DashboardController@unreadDiscussions') }}">
+                        <a href="{{ action('DashboardController@discussions') }}">
                             {{ trans('messages.latest_discussions') }}
                             @if ($unread_discussions > 0) <span class="badge">{{$unread_discussions}}</span>@endif
                             </a>

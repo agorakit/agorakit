@@ -55,7 +55,7 @@ Route::group(['middleware' => ['web']], function () {
   General unread stuff, summary and dashboard
   ===========================================
   */
-  Route::get('unread', 'DashboardController@unreadDiscussions');
+  Route::get('discussions', 'DashboardController@discussions');
   Route::get('agenda', 'DashboardController@agenda');
   Route::get('agenda/json', 'DashboardController@agendaJson');
   Route::get('agenda/ical', 'IcalController@index');

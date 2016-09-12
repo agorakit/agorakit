@@ -55,6 +55,10 @@ class RedirectIfNotGroupMemberOrPublicGroup
                 {
                     return $next($request);
                 }
+                elseif ($request->user()->isAdmin())
+                {
+                    return $next($request); // user is admin, and sees everything, fine (at least in sync with current policies for admins)
+                }
                 else
                 {
                     return redirect()->back()->with('message', trans('messages.not_allowed'));

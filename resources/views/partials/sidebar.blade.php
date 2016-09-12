@@ -11,6 +11,11 @@
 
 
 <h4>{{ trans('messages.overview') }}</h4>
+
+<a href="{{ action('DashboardController@discussions') }}">
+  {{trans('messages.discussions')}}
+</a>
+
 <a href="{{ action('DashboardController@agenda') }}">
   {{trans('messages.agenda')}}
 </a>
@@ -18,5 +23,6 @@
 <a href="{{ action('DashboardController@users') }}">
   {{trans('messages.users_list')}}
 </a>
+
 
 </div>
