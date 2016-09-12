@@ -36,6 +36,16 @@ class File extends Model
   protected $dates = ['deleted_at'];
   protected $casts = [ 'user_id' => 'integer' ];
 
+
+  // Item type can be :
+  // 0 : file (stored on the server)
+  // 1 : folder (virtual folders)
+  // 2 : link (to an etherpad or google doc for instance)
+
+  const FILE = 0;
+  const FOLDER = 1;
+  const LINK = 2;
+
   public function user()
   {
     return $this->belongsTo('App\User');

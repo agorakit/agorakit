@@ -16,7 +16,7 @@ Inscription :  {{ $user->created_at->diffForHumans() }}
 @include('users.form')
 
 <div class="form-group">
-  {!! Form::submit({{trans('messages.edit_my_profile')}}, ['class' => 'btn btn-primary form-control']) !!}
+  {!! Form::submit(trans('messages.edit_my_profile'), ['class' => 'btn btn-primary form-control']) !!}
 </div>
 
 

@@ -49,25 +49,13 @@ Route::group(['middleware' => ['web']], function () {
   Route::get('home', 'DashboardController@index');
 
 
-  /*
-  Admin stuff
-  ===========
-
-  Altough we want as little adimn so called "rights" or "power" some stuff must be handled by a small group of trusted people like:
-  - group creation
-  - homepage introduction text
-
-  */
-
-  Route::get('admin/settings', 'SettingsController@settings');
-  Route::post('admin/settings', 'SettingsController@update');
 
 
   /*
   General unread stuff, summary and dashboard
   ===========================================
   */
-  Route::get('unread', 'DashboardController@unreadDiscussions');
+  Route::get('discussions', 'DashboardController@discussions');
   Route::get('agenda', 'DashboardController@agenda');
   Route::get('agenda/json', 'DashboardController@agendaJson');
   Route::get('agenda/ical', 'IcalController@index');
@@ -239,9 +227,19 @@ Route::group(['middleware' => ['web']], function () {
 
 
   /***************** ADMIN STUFF **************/
+  /*
+  Altough we want as little adimn so called "rights" or "power" some stuff must be handled by a small group of trusted people like:
+  - group creation
+  - homepage introduction text
+  */
+
   Route::group(['middleware' => ['admin']], function () {
 
     Route::get('admin/logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+    Route::get('admin/settings', 'SettingsController@settings');
+    Route::post('admin/settings', 'SettingsController@update');
+
+    Route::resource('admin/user', 'AdminUserController');
 
   });
 

@@ -126,6 +126,20 @@ class UserController extends Controller {
             $user->email = $request->input('email');
             $user->body = $request->input('body');
 
+            // handle the case the edit form is used to make a user an admin (or remove admin right)
+            if (Auth::user()->isAdmin())
+            {
+                if ($request->get('is_admin') == 'yes')
+                {
+                    $user->admin = 1;
+                }
+
+                if ($request->get('is_admin') == 'no')
+                {
+                    $user->admin = 0;
+                }
+            }
+
 
             // validation
             if ($user->isInvalid()) {
@@ -164,6 +178,8 @@ class UserController extends Controller {
         }
 
     }
+
+    
 
     /**
     * Send verification token to a user, again, for example if it's stuck in spam or wathever else event.

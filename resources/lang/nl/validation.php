@@ -95,6 +95,15 @@ return [
         'attribute-name'    => [
             'rule-name' => 'custom-message',
         ],
+        'group_id'          => [
+            'required'  => 'Vereist',
+        ],
+        'path'              => [
+            'required'  => 'Vereist',
+        ],
+        'user_id'           => [
+            'required'  => 'Vereist',
+        ],
     ],
 
     /*
@@ -122,6 +131,7 @@ return [
         'excerpt'               => 'Extract',
         'first_name'            => 'Voornaam',
         'gender'                => 'Genre',
+        'group_id'              => 'Groep aantal',
         'hour'                  => 'Tijd',
         'last_name'             => 'Naam',
         'minute'                => 'Minuut',
@@ -130,12 +140,14 @@ return [
         'name'                  => 'Naam',
         'password'              => 'Wachtwoord',
         'password_confirmation' => 'Bevestiging van het wachtwoord',
+        'path'                  => 'Pad',
         'phone'                 => 'Telefoon',
         'second'                => 'Tweede',
         'sex'                   => 'Geslacht',
         'size'                  => 'Grootte',
         'time'                  => 'Tijd',
         'title'                 => 'Titel',
+        'user_id'               => 'Gebruikers-Id',
         'username'              => 'Nick',
         'year'                  => 'Jaar',
     ],
