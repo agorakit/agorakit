@@ -29,7 +29,7 @@ class FileController extends Controller
     */
     public function index(Group $group)
     {
-        $files = $group->files()->with('user')->orderBy('updated_at', 'desc')->paginate(20);
+        $files = $group->files()->with('user')->orderBy('updated_at', 'desc')->get();
 
         return view('files.index')
         ->with('files', $files)

@@ -299,6 +299,13 @@ table.special td.content
     white-space: nowrap;
 }
 
+.ellipsis
+{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 span.summary {
     color: gray;
 }
