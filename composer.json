@@ -56,6 +56,7 @@
             "php artisan key:generate"
         ],
         "post-install-cmd": [
+            "composer dump-autoload",
             "php artisan clear-compiled",
             "php artisan optimize"
         ],

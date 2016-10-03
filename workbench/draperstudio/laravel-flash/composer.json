@@ -1,0 +1,54 @@
+{
+    "name": "draperstudio/laravel-flash",
+    "type": "library",
+    "description": "Flash messages for Laravel 5.",
+    "keywords": [
+        "draperstudio",
+        "laravel-flash"
+    ],
+    "homepage": "https://github.com/DraperStudio/laravel-flash",
+    "license": "MIT",
+    "authors": [{
+        "name": "DraperStudio",
+        "email": "hello@draperstudio.tech",
+        "homepage": "http://draperstudio.tech",
+        "role": "Developer"
+    }],
+    "require": {
+        "php": "^5.6 || ^7.0",
+        "draperstudio/laravel-service-provider": "^0.1"
+    },
+    "require-dev": {
+        "graham-campbell/testbench": "^3.1",
+        "mockery/mockery": "^0.9.4",
+        "phpunit/phpunit": "^5.0",
+        "scrutinizer/ocular": "~1.1",
+        "squizlabs/php_codesniffer": "~2.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "DraperStudio\\Flash\\": "src/"
+        },
+        "files": [
+            "src/functions.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "DraperStudio\\Tests\\Flash\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "config": {
+        "preferred-install": "dist"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
