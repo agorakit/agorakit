@@ -25,7 +25,7 @@ class FlashNotifier
      * @var Store
      */
     private $session;
-{
+
     /**
      * @var array
      */
