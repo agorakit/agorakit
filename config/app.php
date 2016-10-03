@@ -170,25 +170,19 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+
+        /**
+         * Third-partys providers
+         */
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-
-        Vsch\TranslationManager\ManagerServiceProvider::class,
-        Vsch\TranslationManager\TranslationServiceProvider::class,
-
-
         Intervention\Image\ImageServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-
+        Vsch\TranslationManager\ManagerServiceProvider::class,
+        Vsch\TranslationManager\TranslationServiceProvider::class,
         DraperStudio\Flash\ServiceProvider::class,
         DraperStudio\Taggable\ServiceProvider::class,
-
-
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
-
-
-
-
     ],
 
     /*

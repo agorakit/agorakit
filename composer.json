@@ -16,10 +16,8 @@
         "eluceo/ical": "^0.9.0",
         "kwi/urllinker": "dev-master",
         "barryvdh/laravel-ide-helper": "^2.1",
-        "draperstudio/laravel-flash": "^0.2.1",
         "rap2hpoutre/laravel-log-viewer": "^0.6.1",
         "vsch/laravel-translation-manager": "*",
-        "draperstudio/laravel-taggable": "*",
         "iatstuti/laravel-cascade-soft-deletes": "1.0.*",
         "kalnoy/nestedset": "^4.1"
     },
@@ -39,7 +37,10 @@
           "app/Helpers/Functions.php"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "DraperStudio\\ServiceProvider\\": "workbench/draperstudio/laravel-service-provider/src/",
+            "DraperStudio\\Taggable\\": "workbench/draperstudio/laravel-taggable/src/",
+            "DraperStudio\\Flash\\": "workbench/draperstudio/laravel-flash/src/"
         }
     },
     "autoload-dev": {
