@@ -21,6 +21,8 @@ return [
     'a_message_for_you'                                 => 'Un message pour vous',
     'accept_invitation'                                 => 'Accepter l\'invitation',
     'actions'                                           => 'Actions',
+    'address'                                           => 'Adresse',
+    'address_cannot_be_geocoded'                        => 'Votre adresse ne peut pas être géolocalisées. Veuillez utiliser un format simple, comme "numéro de rue, ville"',
     'admin'                                             => 'Administrateur',
     'admin_settings'                                    => 'Modifier les préférences',
     'agenda'                                            => 'Agenda',

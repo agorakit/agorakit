@@ -20,6 +20,12 @@
     {!! Form::file('cover', null, ['class' => 'form-control']) !!}
 </div>
 
+
+<div class="form-group">
+    {!! Form::label('address', trans('messages.address') . ':') !!}
+    {!! Form::textarea('address', null, ['class' => 'form-control']) !!}
+</div>
+
 @if (Auth::user()->isAdmin())
     <div class="form-group">
         {{Form::radio('is_admin', 'yes', $user->isAdmin())}} {{trans('messages.admin')}} <br/>

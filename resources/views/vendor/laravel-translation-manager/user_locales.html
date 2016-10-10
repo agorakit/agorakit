@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Vladimir Schneider">
+  <link rel="icon" href="https://s3.amazonaws.com/vladsch-env/images/favicon.png">
+  <meta name="description" content="Translation Manager - User Locale Access Management">
+  <link href="https://s3.amazonaws.com/vladsch-env/css/main-page.min.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+  <script src="https://s3.amazonaws.com/vladsch-env/js/main-top.min.js"></script><![endif]-->
+</head>
+<body>
+<div class="row">
+  <div class="col-sm-12 translation-manager">
+    <table id="user-locales" class="table table-condensed table-striped table-translations">
+      <thead>
+        <tr>
+          <th width="1%"></th>
+          <th width="29%">User Name</th>
+          <th width="70%">Locales</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <!--
+                      <a href="<?= action($controller . '@postUndelete', [$group, encodeKey($key)]) ?>"
+                          class="undelete-key <?= $is_deleted ? "" : "hidden" ?>" data-method="POST"
+                      data-remote="true">
+            -->
+            <!--<span class="glyphicon glyphicon-thumbs-up"></span>-->
+            <!--
+                      </a>
+            -->
+            <!--
+                      <a href="<?= action($controller . '@postDelete', [$group, encodeKey($key)]) ?>"
+                          class="delete-key <?= !$is_deleted ? "" : "hidden" ?>" data-method="POST"
+                      data-remote="true">
+            -->
+            <span class="glyphicon glyphicon-trash"></span>
+            <!--
+                      </a>
+            -->
+          </td>
+          <td>user_name</td>
+          <td>
+            <label>
+              <input class="display-locale" name="en" type="checkbox" value="en" checked>
+              en
+            </label>
+            <label>
+              <input class="display-locale" name="ru" type="checkbox" value="ru" checked>
+              ru
+            </label>
+            <label>
+              <input class="display-locale" name="fr" type="checkbox" value="fr">
+              fr
+            </label>
+            <label>
+              <input class="display-locale" name="pl" type="checkbox" value="pl">
+              pl
+            </label>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>

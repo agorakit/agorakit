@@ -21,6 +21,8 @@ return [
     'a_message_for_you'                                 => 'U heeft een bericht',
     'accept_invitation'                                 => 'De uitnodiging accepteren',
     'actions'                                           => 'Acties',
+    'address'                                           => 'Adres',
+    'address_cannot_be_geocoded'                        => 'Uw adres kan niet worden geogelokaliseerde. Gebruik een eenvoudige indeling, zoals "nummer straat, plaats"',
     'admin'                                             => 'Beheerder',
     'admin_settings'                                    => 'Voorkeuren wijzigen',
     'agenda'                                            => 'Agenda',

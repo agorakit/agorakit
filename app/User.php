@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Watson\Validating\ValidatingTrait;
 use Venturecraft\Revisionable\RevisionableTrait;
+use Toin0u\Geocoder\Facade\Geocoder;
 
 class User extends Authenticatable
 {
@@ -203,6 +204,31 @@ class User extends Authenticatable
     {
         return action('UserController@show', [$this]);
     }
+
+
+    /**
+     * Geocode the userReturns true if it worked, false if it didn't
+     */
+    public function geocode()
+    {
+        try
+        {
+            $geocode = Geocoder::geocode($this->address);
+        }
+        catch (\Exception $e)
+        {
+            //$this->geocode_message = get_class($e) . ' / ' . $e->getMessage();
+            return false;
+        }
+
+
+        $this->latitude = $geocode['latitude'];
+        $this->longitude = $geocode['longitude'];
+        return true;
+
+    }
+
+
 
 
 }
