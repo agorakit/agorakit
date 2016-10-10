@@ -151,4 +151,18 @@ class DashboardController extends Controller
         return view('dashboard.users')->with('users', $users);
     }
 
+
+    /**
+     * Renders a map of all users (curently)
+     */
+    public function map()
+    {
+        $users = \App\User::where('latitude', '<>', 0)->get();
+        return view('dashboard.map')
+        ->with('users', $users)
+        ->with('latitude', 50.8503396) // TODO make configurable, curently it's Brussels
+        ->with('longitude', 4.3517103);
+    }
+
+
 }

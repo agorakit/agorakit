@@ -23,6 +23,9 @@
 
 <div class="form-group">
     {!! Form::label('address', trans('messages.address') . ':') !!}
+    <div class="alert alert-info">
+        {{trans('messages.address_privacy_and_help')}}
+    </div>
     {!! Form::textarea('address', null, ['class' => 'form-control']) !!}
 </div>
 

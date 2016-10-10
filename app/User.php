@@ -207,10 +207,19 @@ class User extends Authenticatable
 
 
     /**
-     * Geocode the userReturns true if it worked, false if it didn't
-     */
+    * Geocode the user
+    * Returns true if it worked, false if it didn't
+    */
     public function geocode()
     {
+
+        if ($this->address == '')
+        {
+            $this->latitude = 0;
+            $this->longitude = 0;
+            return true;
+        }
+
         try
         {
             $geocode = Geocoder::geocode($this->address);

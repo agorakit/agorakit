@@ -128,12 +128,14 @@ class UserController extends Controller {
 
             if ($user->address <> $request->input('address'))
             {
+
                 // we need to update user address and geocode it
                 $user->address = $request->input('address');
                 if (!$user->geocode())
                 {
                     flash()->error(trans('messages.address_cannot_be_geocoded'));
                 }
+                
             }
 
             // handle the case the edit form is used to make a user an admin (or remove admin right)
