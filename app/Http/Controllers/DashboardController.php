@@ -158,7 +158,7 @@ class DashboardController extends Controller
     public function map()
     {
         $users = \App\User::where('latitude', '<>', 0)->get();
-        $actions = \App\Action::where('latitude', '<>', 0)->get();
+        $actions = \App\Action::where('start', '>=', Carbon::now())->where('latitude', '<>', 0)->get();
         $groups = \App\Group::where('latitude', '<>', 0)->get();
 
 

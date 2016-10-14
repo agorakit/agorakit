@@ -102,13 +102,13 @@ class ActionController extends Controller
 
         $action->name = $request->input('name');
         $action->body = $request->input('body');
-        $action->location = $request->input('location');
+
         $action->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start'));
         $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop'));
 
-        if ($request->get('address'))
+        if ($request->get('location'))
         {
-            $action->address = $request->input('address');
+            $action->location = $request->input('location');
             if (!$action->geocode())
             {
                 flash()->error(trans('messages.address_cannot_be_geocoded'));

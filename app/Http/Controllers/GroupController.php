@@ -13,217 +13,247 @@ use Gate;
 
 class GroupController extends Controller
 {
-  public function __construct()
-  {
-    $this->middleware('verified', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
-    $this->middleware('member', ['only' => ['edit', 'update', 'destroy']]);
-    $this->middleware('cache', ['only' => ['index', 'show']]);
-  }
-
-
-  /**
-  * Show the form for creating a new resource.
-  *
-  * @return Response
-  */
-  public function create()
-  {
-    return view('groups.create');
-  }
-
-  /**
-  * Store a newly created resource in storage.
-  *
-  * @return Response
-  */
-  public function store(Request $request)
-  {
-    $group = new group();
-
-    $group->name = $request->input('name');
-    $group->body = $request->input('body');
-    $group->group_type = $request->input('group_type');
-
-    if ($group->isInvalid()) {
-      // Oops.
-      return redirect()->action('GroupController@create')
-      ->withErrors($group->getErrors())
-      ->withInput();
-    }
-    $group->save();
-
-    // handle cover
-    if ($request->hasFile('cover'))
+    public function __construct()
     {
-      Storage::disk('local')->makeDirectory('groups/' . $group->id);
-      Image::make($request->file('cover'))->widen(800)->save(storage_path() . '/app/groups/' . $group->id . '/cover.jpg');
-      Image::make($request->file('cover'))->fit(300,200)->save(storage_path() . '/app/groups/' . $group->id . '/thumbnail.jpg');
+        $this->middleware('verified', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
+        $this->middleware('member', ['only' => ['edit', 'update', 'destroy']]);
+        $this->middleware('cache', ['only' => ['index', 'show']]);
     }
 
-    // make the current user a member of the group
-    $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
-    $membership->notification_interval = 60 * 24; // default to daily interval
-    $membership->membership = \App\Membership::MEMBER;
-    $membership->save();
 
-    return redirect()->action('MembershipController@settings', [$group->id]);
-  }
-
-  /**
-  * Display the specified resource.
-  *
-  * @param  int  $id
-  *
-  * @return Response
-  */
-  public function show(Group $group)
-  {
-
-    if (Auth::check()) {
-      $discussions = $group->discussions()->with('user', 'userReadDiscussion')->orderBy('updated_at', 'desc')->limit(5)->get();
-    } else {
-      $discussions = $group->discussions()->with('user')->orderBy('updated_at', 'desc')->limit(5)->get();
-    }
-    $files = $group->files()->with('user')->orderBy('updated_at', 'desc')->limit(5)->get();
-
-    $actions = $group->actions()->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->limit(10)->get();
-
-    return view('groups.show')
-    ->with('group', $group)
-    ->with('discussions', $discussions)
-    ->with('actions', $actions)
-    ->with('files', $files)
-    ->with('tab', 'home');
-  }
-
-  /**
-  * Show the form for editing the specified resource.
-  *
-  * @param  int  $id
-  *
-  * @return Response
-  */
-  public function edit(Request $request, Group $group)
-  {
-
-
-    return view('groups.edit')
-    ->with('group', $group)
-    ->with('group', $group)
-    ->with('tab', 'home');
-  }
-
-  /**
-  * Update the specified resource in storage.
-  *
-  * @param  int  $id
-  *
-  * @return Response
-  */
-  public function update(Request $request, Group $group)
-  {
-    $group->name = $request->input('name');
-    $group->body = $request->input('body');
-
-    if (Gate::allows('changeGroupType', $group))
+    /**
+    * Show the form for creating a new resource.
+    *
+    * @return Response
+    */
+    public function create()
     {
-      $group->group_type = $request->input('group_type');
+        return view('groups.create');
     }
 
-    $group->user()->associate(Auth::user());
-
-    // validation
-    if ($group->isInvalid()) {
-      // Oops.
-      return redirect()->action('GroupController@edit', $group->id)
-      ->withErrors($group->getErrors())
-      ->withInput();
-    }
-    
-    // handle cover
-    if ($request->hasFile('cover'))
+    /**
+    * Store a newly created resource in storage.
+    *
+    * @return Response
+    */
+    public function store(Request $request)
     {
-      Storage::disk('local')->makeDirectory('groups/' . $group->id);
-      Image::make($request->file('cover'))->widen(800)->save(storage_path() . '/app/groups/' . $group->id . '/cover.jpg');
-      Image::make($request->file('cover'))->fit(300,200)->save(storage_path() . '/app/groups/' . $group->id . '/thumbnail.jpg');
+        $group = new group();
+
+        $group->name = $request->input('name');
+        $group->body = $request->input('body');
+        $group->group_type = $request->input('group_type');
+
+        if ($request->get('address'))
+        {
+            $group->address = $request->input('address');
+            if (!$group->geocode())
+            {
+                flash()->error(trans('messages.address_cannot_be_geocoded'));
+            }
+            else
+            {
+                flash()->info( trans('messages.ressource_geocoded_successfully'));
+            }
+        }
+
+
+        if ($group->isInvalid()) {
+            // Oops.
+            return redirect()->action('GroupController@create')
+            ->withErrors($group->getErrors())
+            ->withInput();
+        }
+        $group->save();
+
+        // handle cover
+        if ($request->hasFile('cover'))
+        {
+            Storage::disk('local')->makeDirectory('groups/' . $group->id);
+            Image::make($request->file('cover'))->widen(800)->save(storage_path() . '/app/groups/' . $group->id . '/cover.jpg');
+            Image::make($request->file('cover'))->fit(300,200)->save(storage_path() . '/app/groups/' . $group->id . '/thumbnail.jpg');
+        }
+
+        // make the current user a member of the group
+        $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
+        $membership->notification_interval = 60 * 24; // default to daily interval
+        $membership->membership = \App\Membership::MEMBER;
+        $membership->save();
+
+        return redirect()->action('MembershipController@settings', [$group->id]);
     }
 
-    $group->save();
-
-    flash()->info(trans('messages.ressource_updated_successfully'));
-
-    return redirect()->action('GroupController@show', [$group->id]);
-  }
-
-
-  public function cover(Group $group)
-  {
-    $path = storage_path() . '/app/groups/' . $group->id . '/cover.jpg';
-
-    if (File::exists($path))
+    /**
+    * Display the specified resource.
+    *
+    * @param  int  $id
+    *
+    * @return Response
+    */
+    public function show(Group $group)
     {
-      $cachedImage = Image::cache(function($img) use ($path) {
-        return $img->make($path)->fit(600, 400);
-      }, 60000, true);
 
-      return $cachedImage->response();
+        if (Auth::check()) {
+            $discussions = $group->discussions()->with('user', 'userReadDiscussion')->orderBy('updated_at', 'desc')->limit(5)->get();
+        } else {
+            $discussions = $group->discussions()->with('user')->orderBy('updated_at', 'desc')->limit(5)->get();
+        }
+        $files = $group->files()->with('user')->orderBy('updated_at', 'desc')->limit(5)->get();
 
+        $actions = $group->actions()->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->limit(10)->get();
+
+        return view('groups.show')
+        ->with('group', $group)
+        ->with('discussions', $discussions)
+        ->with('actions', $actions)
+        ->with('files', $files)
+        ->with('tab', 'home');
     }
-    else
+
+    /**
+    * Show the form for editing the specified resource.
+    *
+    * @param  int  $id
+    *
+    * @return Response
+    */
+    public function edit(Request $request, Group $group)
     {
-      return Image::canvas(300,200)->fill('#cccccc')->response(); // TODO caching or default group image instead
-      abort(404);
+
+
+        return view('groups.edit')
+        ->with('group', $group)
+        ->with('group', $group)
+        ->with('tab', 'home');
     }
-  }
 
-
-
-
-  /**
-  * Show the revision history of the group
-  */
-  public function history(Group $group)
-  {
-    return view('groups.history')
-    ->with('group', $group)
-    ->with('tab', 'home');
-  }
-
-
-  public function destroyConfirm(Request $request, Group $group)
-  {
-    if (Gate::allows('delete', $group))
+    /**
+    * Update the specified resource in storage.
+    *
+    * @param  int  $id
+    *
+    * @return Response
+    */
+    public function update(Request $request, Group $group)
     {
-      return view('groups.delete')
-      ->with('group', $group)
-      ->with('tab', 'home');
+        $group->name = $request->input('name');
+        $group->body = $request->input('body');
+
+        if (Gate::allows('changeGroupType', $group))
+        {
+            $group->group_type = $request->input('group_type');
+        }
+
+
+        if ($group->address <> $request->input('address'))
+        {
+            // we need to update user address and geocode it
+            $group->address = $request->input('address');
+            if (!$group->geocode())
+            {
+                flash()->error(trans('messages.address_cannot_be_geocoded'));
+            }
+            else
+            {
+                flash()->info( trans('messages.ressource_geocoded_successfully'));
+            }
+        }
+
+
+        $group->user()->associate(Auth::user());
+
+        // validation
+        if ($group->isInvalid()) {
+            // Oops.
+            return redirect()->action('GroupController@edit', $group->id)
+            ->withErrors($group->getErrors())
+            ->withInput();
+        }
+
+        // handle cover
+        if ($request->hasFile('cover'))
+        {
+            Storage::disk('local')->makeDirectory('groups/' . $group->id);
+            Image::make($request->file('cover'))->widen(800)->save(storage_path() . '/app/groups/' . $group->id . '/cover.jpg');
+            Image::make($request->file('cover'))->fit(300,200)->save(storage_path() . '/app/groups/' . $group->id . '/thumbnail.jpg');
+        }
+
+        $group->save();
+
+        flash()->info(trans('messages.ressource_updated_successfully'));
+
+        return redirect()->action('GroupController@show', [$group->id]);
     }
-    else
+
+
+    public function cover(Group $group)
     {
-      abort(403);
+        $path = storage_path() . '/app/groups/' . $group->id . '/cover.jpg';
+
+        if (File::exists($path))
+        {
+            $cachedImage = Image::cache(function($img) use ($path) {
+                return $img->make($path)->fit(600, 400);
+            }, 60000, true);
+
+            return $cachedImage->response();
+
+        }
+        else
+        {
+            return Image::canvas(300,200)->fill('#cccccc')->response(); // TODO caching or default group image instead
+            abort(404);
+        }
     }
-  }
 
 
 
-  /**
-  * Remove the specified resource from storage.
-  *
-  * @param int $id
-  *
-  * @return \Illuminate\Http\Response
-  */
-  public function destroy(Request $request, Group $group)
-  {
-    if (Gate::allows('delete', $group))
+
+    /**
+    * Show the revision history of the group
+    */
+    public function history(Group $group)
     {
-      $group->delete();
-      flash()->info(trans('messages.ressource_deleted_successfully'));
-      return redirect()->action('DashboardController@index');
+        return view('groups.history')
+        ->with('group', $group)
+        ->with('tab', 'home');
     }
-    else
+
+
+    public function destroyConfirm(Request $request, Group $group)
     {
-      abort(403);
+        if (Gate::allows('delete', $group))
+        {
+            return view('groups.delete')
+            ->with('group', $group)
+            ->with('tab', 'home');
+        }
+        else
+        {
+            abort(403);
+        }
     }
-  }
+
+
+
+    /**
+    * Remove the specified resource from storage.
+    *
+    * @param int $id
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function destroy(Request $request, Group $group)
+    {
+        if (Gate::allows('delete', $group))
+        {
+            $group->delete();
+            flash()->info(trans('messages.ressource_deleted_successfully'));
+            return redirect()->action('DashboardController@index');
+        }
+        else
+        {
+            abort(403);
+        }
+    }
 }
