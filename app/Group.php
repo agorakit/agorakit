@@ -10,6 +10,7 @@ use App\Discussion;
 use Watson\Validating\ValidatingTrait;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Auth;
+use Toin0u\Geocoder\Facade\Geocoder;
 
 
 class Group extends Model
@@ -195,6 +196,36 @@ class Group extends Model
     public function scopeClosed($query)
     {
         return $query->where('group_type', $this::CLOSED);
+    }
+
+
+    /**
+    * Geocode the item
+    * Returns true if it worked, false if it didn't
+    */
+    public function geocode()
+    {
+
+        if ($this->address == '')
+        {
+            $this->latitude = 0;
+            $this->longitude = 0;
+            return true;
+        }
+
+        try
+        {
+            $geocode = Geocoder::geocode($this->address);
+        }
+        catch (\Exception $e)
+        {
+            return false;
+        }
+
+
+        $this->latitude = $geocode['latitude'];
+        $this->longitude = $geocode['longitude'];
+        return true;
     }
 
 

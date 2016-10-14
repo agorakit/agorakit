@@ -86,8 +86,6 @@ class ActionController extends Controller
             $action->name = $request->get('title');
         }
 
-
-
         return view('actions.create')
         ->with('action', $action)
         ->with('group', $group)
@@ -107,6 +105,19 @@ class ActionController extends Controller
         $action->location = $request->input('location');
         $action->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start'));
         $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop'));
+
+        if ($request->get('address'))
+        {
+            $action->address = $request->input('address');
+            if (!$action->geocode())
+            {
+                flash()->error(trans('messages.address_cannot_be_geocoded'));
+            }
+            else
+            {
+                flash()->info( trans('messages.ressource_geocoded_successfully'));
+            }
+        }
 
 
         $action->user()->associate($request->user());
@@ -170,10 +181,25 @@ class ActionController extends Controller
     {
         $action->name = $request->input('name');
         $action->body = $request->input('body');
-        $action->location = $request->input('location');
         $action->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start'));
         $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop'));
 
+
+        if ($action->location <> $request->input('location'))
+        {
+
+            // we need to update user address and geocode it
+            $action->location = $request->input('location');
+            if (!$action->geocode())
+            {
+                flash()->error(trans('messages.address_cannot_be_geocoded'));
+
+            }
+            else
+            {
+                flash()->info( trans('messages.ressource_geocoded_successfully'));
+            }
+        }
 
         //$action->user()->associate($request->user()); // we use revisionable to manage who changed what, so we keep the original author
 

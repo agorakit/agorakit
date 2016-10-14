@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Carbon\Carbon;
+use Toin0u\Geocoder\Facade\Geocoder;
 
 class Action extends Model
 {
@@ -53,5 +54,36 @@ class Action extends Model
   {
       return action('ActionController@show', [$this->group, $this]);
   }
+
+
+  /**
+  * Geocode the item
+  * Returns true if it worked, false if it didn't
+  */
+  public function geocode()
+  {
+
+      if ($this->location == '')
+      {
+          $this->latitude = 0;
+          $this->longitude = 0;
+          return true;
+      }
+
+      try
+      {
+          $geocode = Geocoder::geocode($this->location);
+      }
+      catch (\Exception $e)
+      {
+          return false;
+      }
+
+
+      $this->latitude = $geocode['latitude'];
+      $this->longitude = $geocode['longitude'];
+      return true;
+  }
+
 
 }

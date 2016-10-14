@@ -158,8 +158,14 @@ class DashboardController extends Controller
     public function map()
     {
         $users = \App\User::where('latitude', '<>', 0)->get();
+        $actions = \App\Action::where('latitude', '<>', 0)->get();
+        $groups = \App\Group::where('latitude', '<>', 0)->get();
+
+
         return view('dashboard.map')
         ->with('users', $users)
+        ->with('actions', $actions)
+        ->with('groups', $groups)
         ->with('latitude', 50.8503396) // TODO make configurable, curently it's Brussels
         ->with('longitude', 4.3517103);
     }
