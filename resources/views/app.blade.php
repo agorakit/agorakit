@@ -32,7 +32,7 @@
 
     @include('partials.nav')
 
-    <div class="container nav-margin-top">
+    <div class="container-fluid nav-margin-top">
 
 
         @if (Auth::guest())

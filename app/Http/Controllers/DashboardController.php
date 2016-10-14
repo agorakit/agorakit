@@ -28,7 +28,6 @@ class DashboardController extends Controller
 
         if (Auth::check())
         {
-
             // handle show all stuff or only from "my group"
             if ($request->input('show') == 'all')
             {
@@ -38,7 +37,6 @@ class DashboardController extends Controller
             {
                 Auth::user()->setPreference('show', 'my');
             }
-
             if (Auth::user()->getPreference('show', 'all') == 'all')
             { // we show everything
                 $my_groups = Auth::user()->groups()->orderBy('name')->paginate(50);
@@ -49,7 +47,6 @@ class DashboardController extends Controller
             else // we show only content from the user's groups
             {
                 $my_groups = Auth::user()->groups()->orderBy('name')->get();
-
                 $my_groups_id = false;
                 // using this array we can adjust the queries after to only include stuff the user has
                 // might be a good idea to find a clever way to build this array of groups id :
@@ -57,13 +54,10 @@ class DashboardController extends Controller
                 {
                     $my_groups_id[] = $the_group->id;
                 }
-
                 $groups = \App\Group::with('membership')->orderBy('name')->paginate(50);
-
                 $all_discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group')
                 ->whereIn('group_id', $my_groups_id)
                 ->orderBy('updated_at', 'desc')->paginate(25);
-
                 $all_actions = \App\Action::with('user', 'group')
                 ->whereIn('group_id', $my_groups_id)
                 ->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->paginate(25);
@@ -76,14 +70,54 @@ class DashboardController extends Controller
             $all_actions = \App\Action::with('user', 'group')->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->paginate(10);
             $my_groups = false;
         }
-
-
-
         return view('dashboard.homepage')
         ->with('groups', $groups)
         ->with('my_groups', $my_groups)
         ->with('all_discussions', $all_discussions)
         ->with('all_actions', $all_actions);
+    }
+    
+
+
+    public function my()
+    {
+        $groups = \App\Group::with('membership')->orderBy('name')->paginate(50);
+
+
+        $my_groups = Auth::user()->groups()->orderBy('name')->get();
+        $my_groups_id = false;
+        // using this array we can adjust the queries after to only include stuff the user has
+        // might be a good idea to find a clever way to build this array of groups id :
+        foreach ($my_groups as $the_group)
+        {
+            $my_groups_id[] = $the_group->id;
+        }
+
+
+        $my_discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group')
+        ->whereIn('group_id', $my_groups_id)
+        ->orderBy('updated_at', 'desc')->paginate(10);
+
+        $my_actions = \App\Action::with('user', 'group')
+        ->whereIn('group_id', $my_groups_id)
+        ->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->paginate(10);
+
+
+        $other_discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group')
+        ->whereNotIn('group_id', $my_groups_id)
+        ->orderBy('updated_at', 'desc')->paginate(10);
+
+        $other_actions = \App\Action::with('user', 'group')
+        ->whereNotIn('group_id', $my_groups_id)
+        ->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->paginate(10);
+
+        return view('dashboard.my')
+        ->with('groups', $groups)
+        ->with('my_groups', $my_groups)
+        ->with('my_discussions', $my_discussions)
+        ->with('my_actions', $my_actions)
+        ->with('other_actions', $other_actions)
+        ->with('other_discussions', $other_discussions);
     }
 
     /**
@@ -153,8 +187,8 @@ class DashboardController extends Controller
 
 
     /**
-     * Renders a map of all users (curently)
-     */
+    * Renders a map of all users (curently)
+    */
     public function map()
     {
         $users = \App\User::where('latitude', '<>', 0)->get();
