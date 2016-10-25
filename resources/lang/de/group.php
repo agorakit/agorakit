@@ -1,0 +1,31 @@
+<?php
+
+return [
+    'LLH:obsolete'          => [
+        'no_group_joined_yet_act_now'   => 'No group joined yet act now',
+    ],
+    'about_this_group'      => 'About this group',
+    'closed'                => 'Closed group',
+    'cover'                 => 'Cover picture',
+    'create'                => 'Create',
+    'create_a_group_button' => 'Start a group',
+    'create_a_group_intro'  => 'Create a group easily here',
+    'create_button'         => 'Create the group',
+    'create_group_title'    => 'Create a new group',
+    'description'           => 'Group description',
+    'history_of_this_group' => 'Edit history of this group',
+    'join'                  => 'Join',
+    'latest_actions'        => 'Latest actions',
+    'latest_discussions'    => 'Latest discussions',
+    'latest_files'          => 'Latest files',
+    'leave'                 => 'Leave',
+    'name'                  => 'Group name',
+    'no_group_joined_yet'   => 'You have not yet joined a group, go to the tab "All groups" to see existing groups and join.',
+    'no_group_yet'          => 'No group yet',
+    'open'                  => 'Public group',
+    'private'               => 'Closed group',
+    'public'                => 'Public group',
+    'type'                  => 'Group type',
+    'visit'                 => 'Visit',
+    'your_group_here'       => 'Your group here',
+];
