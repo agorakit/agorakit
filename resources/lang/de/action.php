@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'agenda_of_this_group'  => 'Agenda of this group',
-    'create_one_button'     => 'Create one',
+    'agenda_of_this_group'  => 'Thema dieser Gruppe',
+    'create_one_button'     => 'Neues Thema',
 ];
