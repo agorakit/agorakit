@@ -74,6 +74,9 @@ return [
         'nl' => [
             'url' => env('APP_NL_URL', 'deelnemen.hartbovenhard.be')
         ],
+        'de' => [
+            'url' => env('APP_DE_URL', 'teilnehmen.hartbovenhard.be')
+        ],
         'en' => [
             'url' => env('APP_EN_URL', 'participate.hartbovenhard.be')
         ]
