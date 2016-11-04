@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'password'  => 'Passwords must be at least six characters and match the confirmation.',
-    'reset'     => 'Your password has been reset!',
-    'sent'      => 'We have e-mailed your password reset link!',
-    'token'     => 'This password reset token is invalid.',
-    'user'      => 'We can\'t find a user with that e-mail address.',
+    'password'  => 'Passworte müssen aus mindestens 6 Zeichen bestehen und mit der Bestätigung übereinstimmen.',
+    'reset'     => 'Ihr Passwort wurde zurückgesetzt!',
+    'sent'      => 'Wir haben Ihren Link zur Passwortrücksetzung per E-Mail geschickt!',
+    'token'     => 'Dieses Passwortrücksetzungs-Token ist ungültig.',
+    'user'      => 'Unter der E-Mail-Adresse haben wir keinen Nutzer gefunden.',
 ];
