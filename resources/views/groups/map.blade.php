@@ -54,7 +54,7 @@
                 glyph: 'user'
             })
         })
-        .bindPopup("<a href=\"{{action('UserController@show', $user)}}\">{{$user->name}}</a><br/>" + {!!json_encode($user->body)!!} ).addTo(map);
+        .bindPopup("<a href=\"{{action('UserController@show', $user)}}\">{{$user->name}}</a><br/>" + {!!json_encode(summary($user->body))!!} ).addTo(map);
         @endforeach
 
 
