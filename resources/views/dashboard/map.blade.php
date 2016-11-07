@@ -33,7 +33,7 @@
     // voodoo magic to center it on everything if we have more than one user
     @if ($users->count() > 1)
     map.fitBounds([ @foreach($users as $user) [{{$user->latitude}}, {{$user->longitude}}], @endforeach ]);
-    @endif;
+    @endif
 
     // set provider and credits
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {

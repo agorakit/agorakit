@@ -219,6 +219,10 @@ Route::group(['middleware' => ['web']], function () {
   Route::get('groups/{group}/users', 'UserController@index');
 
 
+
+  Route::get('groups/{group}/map', 'MapController@map');
+
+
   // Tags
   Route::get('tags', 'TagController@index');
   Route::get('tags/{tag}', 'TagController@show');

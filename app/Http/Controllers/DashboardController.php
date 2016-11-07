@@ -76,7 +76,7 @@ class DashboardController extends Controller
         ->with('all_discussions', $all_discussions)
         ->with('all_actions', $all_actions);
     }
-    
+
 
 
     public function my()
