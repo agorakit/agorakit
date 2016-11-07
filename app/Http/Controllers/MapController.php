@@ -26,6 +26,7 @@ class MapController extends Controller
 
 
         return view('groups.map')
+        ->with('tab', 'users')
         ->with('group', $group)
         ->with('users', $users)
         ->with('actions', $actions)
