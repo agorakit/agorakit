@@ -69,70 +69,246 @@
 
 
             <div role="tabpanel" class="tab-pane @if (Auth::check()) active @endif" id="discussions">
-                <h1>{{ trans('messages.latest_discussions') }}</h1>
 
-                @if (Auth::check() && Auth::user()->getPreference('show', 'all') == 'all')
+                <div class="row">
+                    @if (isset($my_discussions))
+                        <div class="col-md-6">
+                            <h2>{{ trans('messages.latest_discussions_my') }}</h2>
 
-                    {{ trans('messages.you_see_all') }}
-                    <a href="{{action('DashboardController@index')}}?show=my">{{ trans('messages.show_only_my_groups') }}</a>
-                @endif
 
-                @if (Auth::check() && Auth::user()->getPreference('show', 'all') == 'my')
-                    {{ trans('messages.you_see_only_your_stuff') }}
-                    <a href="{{action('DashboardController@index')}}?show=all">{{ trans('messages.show_all') }}</a>
-                @endif
 
-                <table class="table table-hover special">
-                    <thead>
-                        <tr>
-                            <th style="width: 75%">{{ trans('messages.title') }}</th>
-                            <th>{{ trans('messages.date') }}</th>
-                            <th>{{ trans('messages.to_read') }}</th>
-                        </tr>
-                    </thead>
+                            <table class="table table-hover special">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 75%">{{ trans('messages.title') }}</th>
+                                        <th>{{ trans('messages.date') }}</th>
+                                        <th>{{ trans('messages.to_read') }}</th>
+                                    </tr>
+                                </thead>
 
-                    <tbody>
-                        @foreach( $all_discussions as $discussion )
-                            <tr>
-                                <td class="content">
-                                    <a href="{{ action('DiscussionController@show', [$discussion->group_id, $discussion->id]) }}">
-                                        <span class="name">{{ $discussion->name }}</span>
-                                        <span class="summary">{{ summary($discussion->body) }}</span>
-                                    </a>
-                                    <br/>
-                                    <span class="group-name"><a href="{{ action('GroupController@show', [$discussion->group_id]) }}">{{ $discussion->group->name }}</a></span>
-                                </td>
+                                <tbody>
+                                    @foreach( $my_discussions as $discussion )
+                                        <tr>
+                                            <td class="content">
+                                                <a href="{{ action('DiscussionController@show', [$discussion->group_id, $discussion->id]) }}">
+                                                    <span class="name">{{ $discussion->name }}</span>
+                                                    <span class="summary">{{ summary($discussion->body) }}</span>
+                                                </a>
+                                                <br/>
+                                                <span class="group-name"><a href="{{ action('GroupController@show', [$discussion->group_id]) }}">{{ $discussion->group->name }}</a></span>
+                                            </td>
 
-                                <td>
-                                    {{ $discussion->updated_at->diffForHumans() }}
-                                </td>
+                                            <td class="small">
+                                                {{ $discussion->updated_at->diffForHumans() }}
+                                            </td>
 
-                                <td>
-                                    @if ($discussion->unReadCount() > 0)
-                                        <i class="fa fa-comment"></i>
-                                        <span class="badge">{{ $discussion->unReadCount() }}</span>
-                                    @endif
-                                </td>
+                                            <td class="small">
+                                                @if ($discussion->unReadCount() > 0)
+                                                    <i class="fa fa-comment"></i>
+                                                    <span class="badge">{{ $discussion->unReadCount() }}</span>
+                                                @endif
+                                            </td>
 
-                            </tr>
-                        @endforeach
+                                        </tr>
+                                    @endforeach
 
-                    </tbody>
-                </table>
+                                </tbody>
+                            </table>
+                        </div>
+                    @endif
+
+                    @if (isset($my_actions))
+                        <div class="col-md-6">
+                            <h2>{{ trans('messages.agenda_my') }}</h2>
+
+
+                            <table class="table table-hover special">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 50%">{{ trans('messages.title') }}</th>
+                                        <th>{{ trans('messages.date') }}</th>
+                                        <th>{{ trans('messages.where') }}</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach( $my_actions as $action )
+                                        <tr>
+                                            <td class="content">
+                                                <a href="{{ action('ActionController@show', [$action->group_id, $action->id]) }}">
+                                                    <span class="name">{{ $action->name }}</span>
+                                                    <span class="summary">{{ summary($action->body) }}</span>
+                                                </a>
+                                                <br/>
+                                                <span class="group-name"><a href="{{ action('GroupController@show', [$action->group_id]) }}">{{ $action->group->name }}</a></span>
+                                            </td>
+
+                                            <td>
+                                                {{$action->start->format('d/m/Y H:i')}}
+                                            </td>
+
+                                            <td class="content">
+                                                {{$action->location}}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
+                                </tbody>
+                            </table>
+                        </div>
+                    @endif
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        @if (Auth::guest())
+                            <h1>{{ trans('messages.latest_discussions') }}</h1>
+                        @else
+                            <h2>{{ trans('messages.latest_discussions_others') }}</h2>
+                        @endif
+                        <table class="table table-hover special">
+                            <thead>
+                                <tr>
+                                    <th style="width: 75%">{{ trans('messages.title') }}</th>
+                                    <th>{{ trans('messages.date') }}</th>
+                                    <th>{{ trans('messages.to_read') }}</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach( $other_discussions as $discussion )
+                                    <tr>
+                                        <td class="content">
+                                            <a href="{{ action('DiscussionController@show', [$discussion->group_id, $discussion->id]) }}">
+                                                <span class="name">{{ $discussion->name }}</span>
+                                                <span class="summary">{{ summary($discussion->body) }}</span>
+                                            </a>
+                                            <br/>
+                                            <span class="group-name"><a href="{{ action('GroupController@show', [$discussion->group_id]) }}">{{ $discussion->group->name }}</a></span>
+                                        </td>
+
+                                        <td class="small">
+                                            {{ $discussion->updated_at->diffForHumans() }}
+                                        </td>
+
+                                        <td class="small">
+                                            @if ($discussion->unReadCount() > 0)
+                                                <i class="fa fa-comment"></i>
+                                                <span class="badge">{{ $discussion->unReadCount() }}</span>
+                                            @endif
+                                        </td>
+
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+
+
+
+
+                    <div class="col-md-6">
+
+                        @if (Auth::guest())
+                            <h1>{{ trans('messages.agenda') }}</h1>
+                        @else
+                            <h2>{{ trans('messages.agenda_others') }}</h2>
+                        @endif
+
+
+
+                        <table class="table table-hover special">
+                            <thead>
+                                <tr>
+                                    <th style="width: 50%">{{ trans('messages.title') }}</th>
+                                    <th>{{ trans('messages.date') }}</th>
+                                    <th>{{ trans('messages.where') }}</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach( $other_actions as $action )
+                                    <tr>
+                                        <td class="content">
+                                            <a href="{{ action('ActionController@show', [$action->group_id, $action->id]) }}">
+                                                <span class="name">{{ $action->name }}</span>
+                                                <span class="summary">{{ summary($action->body) }}</span>
+                                            </a>
+                                            <br/>
+                                            <span class="group-name"><a href="{{ action('GroupController@show', [$action->group_id]) }}">{{ $action->group->name }}</a></span>
+                                        </td>
+
+                                        <td>
+                                            {{$action->start->format('d/m/Y H:i')}}
+                                        </td>
+
+                                        <td class="content">
+                                            {{$action->location}}
+                                        </td>
+                                    </tr>
+                                @endforeach
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+
+
             </div>
 
 
             <div role="tabpanel" class="tab-pane" id="actions">
-                <h1>{{ trans('messages.agenda') }}</h1>
 
-                @if (Auth::check() && Auth::user()->getPreference('show', 'all') == 'all')
-                    {{ trans('messages.you_see_all') }}
-                    <a class="btn btn-default btn-sm" href="{{action('DashboardController@index')}}?show=my">{{ trans('messages.show_only_my_groups') }}</a>
+
+
+                @if (isset($my_actions))
+                    <h1>{{ trans('messages.agenda_my') }}</h1>
+                    <table class="table table-hover special">
+                        <thead>
+                            <tr>
+                                <th style="width: 50%">{{ trans('messages.title') }}</th>
+                                <th>{{ trans('messages.date') }}</th>
+                                <th>{{ trans('messages.where') }}</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach( $my_actions as $action )
+                                <tr>
+                                    <td class="content">
+                                        <a href="{{ action('ActionController@show', [$action->group_id, $action->id]) }}">
+                                            <span class="name">{{ $action->name }}</span>
+                                            <span class="summary">{{ summary($action->body) }}</span>
+                                        </a>
+                                        <br/>
+                                        <span class="group-name"><a href="{{ action('GroupController@show', [$action->group_id]) }}">{{ $action->group->name }}</a></span>
+                                    </td>
+
+                                    <td>
+                                        {{$action->start->format('d/m/Y H:i')}}
+                                    </td>
+
+                                    <td class="content">
+                                        {{$action->location}}
+                                    </td>
+                                </tr>
+                            @endforeach
+
+                        </tbody>
+                    </table>
                 @endif
 
-                @if (Auth::check() && Auth::user()->getPreference('show', 'all') == 'my')
-                    {{ trans('messages.you_see_only_your_stuff') }}
-                    <a class="btn btn-default btn-sm" href="{{action('DashboardController@index')}}?show=all">{{ trans('messages.show_all') }}</a>
+
+                @if (Auth::guest())
+                    <h1>{{ trans('messages.agenda') }}</h1>
+                @else
+                    <h2>{{ trans('messages.agenda_others') }}</h2>
                 @endif
 
                 <table class="table table-hover special">
@@ -145,7 +321,7 @@
                     </thead>
 
                     <tbody>
-                        @foreach( $all_actions as $action )
+                        @foreach( $other_actions as $action )
                             <tr>
                                 <td class="content">
                                     <a href="{{ action('ActionController@show', [$action->group_id, $action->id]) }}">
@@ -168,6 +344,7 @@
 
                     </tbody>
                 </table>
+
 
             </div>
 
