@@ -74,6 +74,51 @@
         </table>
       </div>
 
+      <div class="col-md-6">
+        <h2>{{ trans('messages.agenda_my') }}</h2>
+
+
+        <table class="table table-hover special">
+          <thead>
+            <tr>
+              <th style="width: 50%">{{ trans('messages.title') }}</th>
+              <th>{{ trans('messages.date') }}</th>
+              <th>{{ trans('messages.where') }}</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @foreach( $my_actions as $action )
+              <tr>
+                <td class="content">
+                  <a href="{{ action('ActionController@show', [$action->group_id, $action->id]) }}">
+                    <span class="name">{{ $action->name }}</span>
+                    <span class="summary">{{ summary($action->body) }}</span>
+                  </a>
+                  <br/>
+                  <span class="group-name"><a href="{{ action('GroupController@show', [$action->group_id]) }}">{{ $action->group->name }}</a></span>
+                </td>
+
+                <td>
+                  {{$action->start->format('d/m/Y H:i')}}
+                </td>
+
+                <td class="content">
+                  {{$action->location}}
+                </td>
+              </tr>
+            @endforeach
+
+          </tbody>
+        </table>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="row">
 
       <div class="col-md-6">
         <h2>{{ trans('messages.latest_discussions_others') }}</h2>
@@ -115,50 +160,11 @@
           </tbody>
         </table>
       </div>
-    </div>
 
 
 
-    <div class="row">
-      <div class="col-md-6">
-        <h2>{{ trans('messages.agenda_my') }}</h2>
 
 
-        <table class="table table-hover special">
-          <thead>
-            <tr>
-              <th style="width: 50%">{{ trans('messages.title') }}</th>
-              <th>{{ trans('messages.date') }}</th>
-              <th>{{ trans('messages.where') }}</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            @foreach( $my_actions as $action )
-              <tr>
-                <td class="content">
-                  <a href="{{ action('ActionController@show', [$action->group_id, $action->id]) }}">
-                    <span class="name">{{ $action->name }}</span>
-                    <span class="summary">{{ summary($action->body) }}</span>
-                  </a>
-                  <br/>
-                  <span class="group-name"><a href="{{ action('GroupController@show', [$action->group_id]) }}">{{ $action->group->name }}</a></span>
-                </td>
-
-                <td>
-                  {{$action->start->format('d/m/Y H:i')}}
-                </td>
-
-                <td class="content">
-                  {{$action->location}}
-                </td>
-              </tr>
-            @endforeach
-
-          </tbody>
-        </table>
-
-      </div>
 
 
       <div class="col-md-6">
@@ -203,8 +209,8 @@
       </div>
     </div>
 
-
-
-
   </div>
+
+
+
 @endsection
