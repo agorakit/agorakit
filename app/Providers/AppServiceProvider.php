@@ -26,8 +26,9 @@ class AppServiceProvider extends ServiceProvider
               $view->with('user', Auth::user());
 
               // count number of unread discussions.
-              $view->with('unread_discussions', QueryHelper::getUnreadDiscussionsCount());
-              $view->with('user_groups', Auth::user()->groups()->orderBy('name')->get());
+              /*$view->with('unread_discussions', QueryHelper::getUnreadDiscussionsCount());*/
+              /*$view->with('user_groups', Auth::user()->groups()->orderBy('name')->get());*/
+              // Why are the two above removed ? Because it slows everything down I think
 
             }
           });

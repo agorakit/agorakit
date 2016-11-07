@@ -22,21 +22,20 @@
 
                 @if ($user_logged)
                     <li>
-                        <a href="{{ action('DashboardController@discussions') }}">
-                            {{ trans('messages.latest_discussions') }}
-                            @if ($unread_discussions > 0) <span class="badge">{{$unread_discussions}}</span>@endif
-                            </a>
+                        <a href="{{ action('DashboardController@discussions') }}">{{ trans('messages.latest_discussions') }}</a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 {{ trans('messages.your_groups') }} <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                @forelse ($user_groups as $user_group)
-                                    <li><a href="{{ action('GroupController@show', $user_group->id)}}">{{$user_group->name}}</a></li>
-                                @empty
-                                    <li><a href="{{ action('DashboardController@index')}}">{{ trans('membership.not_subscribed_to_group_yet') }}</a></li>
-                                @endforelse
+                                @if (Auth::check())
+                                    @forelse ($user->groups()->orderBy('name')->get() as $group)
+                                        <li><a href="{{ action('GroupController@show', $group->id)}}">{{$group->name}}</a></li>
+                                    @empty
+                                        <li><a href="{{ action('DashboardController@index')}}">{{ trans('membership.not_subscribed_to_group_yet') }}</a></li>
+                                    @endforelse
+                                @endif
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{{ action('GroupController@create') }}">
                                     <i class="fa fa-bolt"></i> {{ trans('group.create_a_group_button') }}</a>

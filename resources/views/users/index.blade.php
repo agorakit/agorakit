@@ -14,7 +14,6 @@
             <a class="btn btn-primary btn-xs" href="{{ action('MapController@map', $group ) }}">{{trans('messages.show_map')}}</a>
         </h2>
 
-        <a href="{{ action('MapController@map', $group ) }}">{{trans('messages.show_map')}}</a>
 
         <table class="table table-hover">
             <tr>
