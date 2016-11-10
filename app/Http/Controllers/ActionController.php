@@ -45,8 +45,8 @@ class ActionController extends Controller
         if ($request->has('start') && $request->has('end'))
         {
             $actions = $group->actions()
-            ->where('start', '>', $request->get(start))
-            ->where('stop', '<', $request->get(end))
+            ->where('start', '>', Carbon::parse($request->get('start')))
+            ->where('stop', '<', Carbon::parse($request->get('end')))
             ->orderBy('start', 'asc')->get();
         }
         else
