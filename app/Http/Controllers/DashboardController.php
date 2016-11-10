@@ -155,10 +155,25 @@ class DashboardController extends Controller
         return view('dashboard.agenda')->with('actions', $actions);
     }
 
-    public function agendaJson()
+    public function agendaJson(Request $request)
     {
-        // TODO ajax load of actions or similar trick, else the json will become larger and larger
-        $actions = \App\Action::with('group')->get();
+
+
+        // load of actions between start and stop provided by calendar js
+        if ($request->has('start') && $request->has('end'))
+        {
+            $actions = \App\Action::with('group')
+            ->where('start', '>', Carbon::parse($request->get('start')))
+            ->where('stop', '<', Carbon::parse($request->get('end')))
+            ->orderBy('start', 'asc')->get();
+        }
+        else
+        {
+
+            $actions = \App\Action::with('group')->orderBy('start', 'asc')->get();
+        }
+
+
 
         $event = '';
         $events = '';

@@ -38,8 +38,23 @@ class ActionController extends Controller
 
     public function indexJson(Request $request, Group $group)
     {
-        // TODO ajax load of actions or similar trick, else the json will become larger and larger
-        $actions = $group->actions()->orderBy('start', 'asc')->get();
+
+        //dd($request);
+
+        // load of actions between start and stop provided by calendar js
+        if ($request->has('start') && $request->has('end'))
+        {
+            $actions = $group->actions()
+            ->where('start', '>', $request->get(start))
+            ->where('stop', '<', $request->get(end))
+            ->orderBy('start', 'asc')->get();
+        }
+        else
+        {
+
+            $actions = $group->actions()->orderBy('start', 'asc')->get();
+        }
+
 
         $event = '';
         $events = '';
