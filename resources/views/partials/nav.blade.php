@@ -72,6 +72,7 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{action('UserController@show', $user->id)}}"><i class="fa fa-btn fa-user"></i> {{ trans('messages.profile') }}</a></li>
+                                <li><a href="{{action('UserController@edit', $user->id)}}"><i class="fa fa-btn fa-edit"></i> {{ trans('messages.edit_my_profile') }}</a></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i> {{ trans('messages.logout') }}</a></li>
                             </ul>
                         </li>
