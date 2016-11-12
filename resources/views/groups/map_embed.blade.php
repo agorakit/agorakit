@@ -1,4 +1,4 @@
-@extends('app')
+@extends('embed')
 
 @section('head')
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
@@ -8,32 +8,23 @@
 
 @section('css')
 <style>
-#map { height: 600px; }
+
+
+html, body, #map
+{
+    height: 100%;
+}
+
 </style>
+
 @endsection
 
 @section('content')
 
-    @include('partials.grouptab')
 
-    <div class="tab_content">
-
-        <h2>{{trans('messages.map_of_this_group')}}
-        </h2>
+    <div id="map"></div>
 
 
-
-        <div id="map"></div>
-
-
-        <div class="pannel">
-            <strong>{{trans('messages.embed_this_page')}}</strong>
-            <p>
-                <textarea cols="90" rows="2"><iframe src="{{ action('MapController@embed', $group)}}" width="600" height="400" frameborder="0"></iframe></textarea>
-            </p>
-        </div>
-
-    </div>
 
     <script>
     // init map to a predefined center
@@ -76,10 +67,6 @@
     })
     .bindPopup("<a href=\"{{action('ActionController@show', [$action->group, $action])}}\">{{$action->name}}</a><br/>" + {!!json_encode($action->body)!!} ).addTo(map);
     @endforeach
-
-
-
-
 
     </script>
 

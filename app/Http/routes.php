@@ -221,6 +221,7 @@ Route::group(['middleware' => ['web']], function () {
 
 
   Route::get('groups/{group}/map', 'MapController@map');
+  Route::get('groups/{group}/map/embed', 'MapController@embed');
 
 
   // Tags

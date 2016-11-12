@@ -61,6 +61,15 @@
             </li>
         @endcan
 
+
+        @can ('viewMembers', $group)
+            <li role="presentation" @if (isset($tab) && ($tab == 'map')) class="active" @endif>
+                <a href="{{ action('MapController@map', $group->id) }}">
+                    <i class="fa fa-map-marker"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.map') }}</span>
+                </a>
+            </li>
+        @endcan
+
         @if ($group->isMember())
             <li role="presentation" @if (isset($tab) && ($tab == 'settings')) class="active" @endif>
                 <a href="{{ action('MembershipController@settingsForm', $group->id) }}">
