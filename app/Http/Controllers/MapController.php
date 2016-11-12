@@ -24,6 +24,12 @@ class MapController extends Controller
         $users = $group->users()->where('latitude', '<>', 0)->get();
         $actions = $group->actions()->where('start', '>=', Carbon::now())->where('latitude', '<>', 0)->get();
 
+        // randomize users geolocation by a few meters
+        foreach ($users as $user)
+        {
+            $user->latitude = $user->latitude + (mt_rand(0, 10) / 10000);
+            $user->longitude = $user->longitude + (mt_rand(0, 10) / 10000);
+        }
 
         return view('groups.map')
         ->with('tab', 'map')
@@ -43,6 +49,12 @@ class MapController extends Controller
         $users = $group->users()->where('latitude', '<>', 0)->get();
         $actions = $group->actions()->where('start', '>=', Carbon::now())->where('latitude', '<>', 0)->get();
 
+        // randomize users geolocation by a few meters
+        foreach ($users as $user)
+        {
+            $user->latitude = $user->latitude + (mt_rand(0, 10) / 10000);
+            $user->longitude = $user->longitude + (mt_rand(0, 10) / 10000);
+        }
 
         return view('groups.map_embed')
         ->with('tab', 'map')

@@ -215,6 +215,13 @@ class DashboardController extends Controller
         $actions = \App\Action::where('start', '>=', Carbon::now())->where('latitude', '<>', 0)->get();
         $groups = \App\Group::where('latitude', '<>', 0)->get();
 
+        // randomize users geolocation by a few meters
+        foreach ($users as $user)
+        {
+            $user->latitude = $user->latitude + (mt_rand(0, 10) / 10000);
+            $user->longitude = $user->longitude + (mt_rand(0, 10) / 10000);
+        }
+
 
         return view('dashboard.map')
         ->with('users', $users)
