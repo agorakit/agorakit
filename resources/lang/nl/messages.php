@@ -68,6 +68,7 @@ return [
     'email'                                             => 'E-mail',
     'email_not_verified'                                => 'Uw e-mailadres is nog niet bevestigd, bevestig dit via je mailbox',
     'email_not_verified_send_again_verification'        => '\'Indien u geen bevestigingsmail hebt ontvangen, klik dan hier voor een nieuwe',
+    'embed_this_page'                                   => 'Embed deze pagina',
     'ends'                                              => 'Einde',
     'files'                                             => 'Bestanden',
     'files_in_this_group'                               => 'Bestanden in deze groep',

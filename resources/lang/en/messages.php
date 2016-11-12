@@ -68,6 +68,7 @@ return [
     'email'                                             => 'Email',
     'email_not_verified'                                => 'Email not verified',
     'email_not_verified_send_again_verification'        => 'Click here to send your verification email again',
+    'embed_this_page'                                   => 'Embed this page',
     'ends'                                              => 'Ends',
     'files'                                             => 'Files',
     'files_in_this_group'                               => 'Files in this group',
