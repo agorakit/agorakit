@@ -152,8 +152,8 @@ class FileController extends Controller
 
         if ($file->item_type == 1)
         {
-            return view('files.folder')
-            ->with('files', $file->children())
+            return view('files.index')
+            ->with('files', $file->children)
             ->with('file', $file)
             ->with('group', $group)
             ->with('tab', 'files');
