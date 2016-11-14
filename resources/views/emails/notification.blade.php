@@ -61,7 +61,7 @@
     @if ($files->count() > 0)
         <h2>{{trans('messages.latest_files')}}</h2>
         @foreach($files as $file)
-            <a href="{{action('FileController@show', [$group->id, $file->id])}}"><img src="{{action('FileController@thumbnail', [$group->id, $file->id])}}" style="width: 24px; height:24px"/>{{$file->name}}</a>
+            <a href="{{action('FileController@download', [$group->id, $file->id])}}"><img src="{{action('FileController@thumbnail', [$group->id, $file->id])}}" style="width: 24px; height:24px"/>{{$file->name}}</a>
             <br/>
         @endforeach
     @endif

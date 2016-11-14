@@ -1,22 +1,6 @@
 @extends('app')
 
 
-@section('js')
-    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-    <script>
-    $(document).ready(function() {
-        $('.table').DataTable(
-            {
-                "stateSave": true,
-                "ordering": true,
-                "order": [[ 4, "desc" ]],
-                "info":     true
-            }
-        );
-    } );
-    </script>
-@endsection
-
 @section('css')
     {!! Html::style('https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css') !!}
 @endsection
@@ -43,11 +27,6 @@
 
         </h2>
 
-        <p>
-            <a class="btn btn-default btn-xs" href="{{ action('FileController@gallery', $group->id ) }}">
-                <i class="fa fa-camera-retro "></i>
-                {{trans('messages.show_gallery')}}</a>
-            </p>
 
             <table class="table table-hover">
                 <thead>
@@ -67,7 +46,7 @@
 
                         <td>
                             <div class="ellipsis" style="max-width: 30em">
-                                <a  href="{{ action('FileController@download', [$group->id, $file->id]) }}">{{ $file->name }}</a>
+                                <a  href="{{ action('FileController@show', [$group->id, $file->id]) }}">{{ $file->name }}</a>
                             </div>
                         </td>
 

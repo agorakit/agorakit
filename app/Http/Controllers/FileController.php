@@ -29,7 +29,9 @@ class FileController extends Controller
     */
     public function index(Group $group)
     {
-        $files = $group->files()->with('user')->orderBy('updated_at', 'desc')->get();
+        // list all files and folders without parent id's (parent_id=NULL)
+        //$files = $group->files()->with('user')->orderBy('updated_at', 'desc')->get();
+        $files = $group->files()->with('user')->whereNull('parent_id')->orderBy('updated_at', 'desc')->get();
 
         return view('files.index')
         ->with('files', $files)
@@ -135,6 +137,7 @@ class FileController extends Controller
     }
 
 
+
     /**
     * Display the specified resource.
     *
@@ -143,6 +146,52 @@ class FileController extends Controller
     * @return Response
     */
     public function show(Group $group, File $file)
+    {
+        // view depends on file type
+        // folder :
+
+        if ($file->item_type == 1)
+        {
+            return view('files.folder')
+            ->with('files', $file->children())
+            ->with('file', $file)
+            ->with('group', $group)
+            ->with('tab', 'files');
+        }
+
+
+        // file
+        if ($file->item_type == 0)
+        {
+            return view('files.show')
+            ->with('file', $file)
+            ->with('group', $group)
+            ->with('tab', 'files');
+        }
+
+        // link
+        if ($file->item_type == 2)
+        {
+            return view('files.link')
+            ->with('file', $file)
+            ->with('group', $group)
+            ->with('tab', 'files');
+        }
+
+
+
+
+    }
+
+
+    /**
+    * Display the specified resource.
+    *
+    * @param int $id
+    *
+    * @return Response
+    */
+    public function download(Group $group, File $file)
     {
         if (Storage::exists($file->path)) {
             //return response()->download($file->path, $file->original_filename);

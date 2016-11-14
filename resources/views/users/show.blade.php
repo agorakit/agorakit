@@ -62,7 +62,7 @@
                 <h4>{{trans('messages.latest_files')}}</h4>
                 @foreach ($user->files()->orderBy('updated_at', 'desc')->take(10)->get() as $file)
                     <div>
-                        <a href="{{action('FileController@show', [$file->group, $file])}}">{{$file->name}}</a>
+                        <a href="{{action('FileController@download', [$file->group, $file])}}">{{$file->name}}</a>
                     </div>
                 @endforeach
             </div>

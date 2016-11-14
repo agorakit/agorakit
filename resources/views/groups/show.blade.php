@@ -134,15 +134,15 @@
                     @forelse ($files as $file)
                         <tr>
                             <td>
-                                <a href="{{ action('FileController@show', [$group->id, $file->id]) }}"><img src="{{ action('FileController@thumbnail', [$group->id, $file->id]) }}"/></a>
+                                <a href="{{ action('FileController@download', [$group->id, $file->id]) }}"><img src="{{ action('FileController@thumbnail', [$group->id, $file->id]) }}"/></a>
                             </td>
 
                             <td>
-                                <a href="{{ action('FileController@show', [$group->id, $file->id]) }}">{{ $file->name }}</a>
+                                <a href="{{ action('FileController@download', [$group->id, $file->id]) }}">{{ $file->name }}</a>
                             </td>
 
                             <td>
-                                <a href="{{ action('FileController@show', [$group->id, $file->id]) }}">{{trans('file.download')}}</a>
+                                <a href="{{ action('FileController@download', [$group->id, $file->id]) }}">{{trans('file.download')}}</a>
                             </td>
 
                             <td>

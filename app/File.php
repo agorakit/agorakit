@@ -59,7 +59,7 @@ class File extends Model
 
   public function link()
   {
-    return action('FileController@show', [$this->group, $this]);
+    return action('FileController@download', [$this->group, $this]);
   }
 
 
