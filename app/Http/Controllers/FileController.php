@@ -90,38 +90,30 @@ class FileController extends Controller
     */
     public function storeFolder(Request $request, Group $group)
     {
-        try {
-            $file = new \App\File();
-            $file->name = $request->get('folder');
 
+        $file = new \App\File;
+        $file->name = $request->get('folder');
 
-            $file->type == \App\File::FOLDER;
+        $file->path = $request->get('folder');
 
-            // add group
-            $file->group()->associate($group);
+        $file->type == \App\File::FOLDER;
 
-            $file->user()->associate(Auth::user());
+        // add group
+        $file->group()->associate($group);
 
+        // add user
+        $file->user()->associate(Auth::user());
 
-
-            $file->save();
-
-            if ($request->ajax()) {
-                return response()->json('success', 200);
-            } else {
-
-                flash()->info(trans('messages.ressource_created_successfully'));
-                return redirect()->action('FileController@index', [$group->id]);
-            }
-        } catch (Exception $e) {
-
-            if ($request->ajax()) {
-                return response()->json($e->getMessage(), 400);
-            }
-            else {
-                abort(400, $e->getMessage());
-            }
+        if ($file->save())
+        {
+            flash()->info(trans('messages.ressource_created_successfully'));
+            return redirect()->action('FileController@index', [$group->id]);
         }
+        else
+        {
+            dd('folder creation failed');
+        }
+
     }
 
 
