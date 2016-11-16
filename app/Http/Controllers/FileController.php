@@ -70,6 +70,61 @@ class FileController extends Controller
         ->with('tab', 'files');
     }
 
+
+    /**
+    * Show the form for creating a new resource.
+    *
+    * @return Response
+    */
+    public function createFolder(Group $group)
+    {
+        return view('files.create_folder')
+        ->with('group', $group)
+        ->with('tab', 'files');
+    }
+
+    /**
+    * Show the form for creating a new resource.
+    *
+    * @return Response
+    */
+    public function storeFolder(Request $request, Group $group)
+    {
+        try {
+            $file = new \App\File();
+            $file->name = $request->get('folder');
+
+
+            $file->type == \App\File::FOLDER;
+
+            // add group
+            $file->group()->associate($group);
+
+            $file->user()->associate(Auth::user());
+
+
+
+            $file->save();
+
+            if ($request->ajax()) {
+                return response()->json('success', 200);
+            } else {
+
+                flash()->info(trans('messages.ressource_created_successfully'));
+                return redirect()->action('FileController@index', [$group->id]);
+            }
+        } catch (Exception $e) {
+
+            if ($request->ajax()) {
+                return response()->json($e->getMessage(), 400);
+            }
+            else {
+                abort(400, $e->getMessage());
+            }
+        }
+    }
+
+
     /**
     * Store a newly created resource in storage.
     *

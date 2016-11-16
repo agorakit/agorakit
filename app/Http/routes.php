@@ -191,6 +191,11 @@ Route::group(['middleware' => ['web']], function () {
   Route::get('groups/{group}/files/gallery', 'FileController@gallery');
   Route::get('groups/{group}/files/create', 'FileController@create');
   Route::post('groups/{group}/files/create', 'FileController@store');
+
+  // specific use case of folders
+  Route::get('groups/{group}/files/createfolder', 'FileController@createFolder');
+  Route::post('groups/{group}/files/storefolder', 'FileController@storeFolder');
+
   Route::get('groups/{group}/files/{file}/download', 'FileController@download');
   Route::get('groups/{group}/files/{file}', 'FileController@show');
   Route::get('groups/{group}/files/{file}/thumbnail', 'FileController@thumbnail');
