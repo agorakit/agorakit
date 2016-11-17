@@ -186,15 +186,18 @@ Route::group(['middleware' => ['web']], function () {
   Route::delete('groups/{group}/actions/{action}/delete', 'ActionController@destroy');
 
 
-  // Files
+  // Listing of files and folders :
   Route::get('groups/{group}/files', 'FileController@index');
   Route::get('groups/{group}/files/gallery', 'FileController@gallery');
-  Route::get('groups/{group}/files/{parent?}/create', 'FileController@create');
-  Route::post('groups/{group}/files/{parent?}/create', 'FileController@store');
 
-  // specific use case of folders
-  Route::get('groups/{group}/files/{parent?}/createfolder', 'FileController@createFolder');
-  Route::post('groups/{group}/files/{parent?}/storefolder', 'FileController@storeFolder');
+  // upload of files
+  Route::get('groups/{group}/files/create', 'FileController@create');
+  Route::post('groups/{group}/files/create', 'FileController@store');
+
+  // Creation of folders
+  Route::get('groups/{group}/files/createfolder', 'FileController@createFolder');
+  Route::post('groups/{group}/files/storefolder', 'FileController@storeFolder');
+
 
   Route::get('groups/{group}/files/{file}/download', 'FileController@download');
   Route::get('groups/{group}/files/{file}', 'FileController@show');

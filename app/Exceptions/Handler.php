@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-//use Winternight\LaravelErrorHandler\Handlers\ExceptionHandler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
@@ -45,6 +44,7 @@ class Handler extends ExceptionHandler
   */
   public function render($request, Exception $e)
   {
+    // whoops error handler :
 
     if ($this->isHttpException($e))
     {
@@ -57,31 +57,35 @@ class Handler extends ExceptionHandler
     }
 
     return parent::render($request, $e);
+
+    // laravel original error handler :
+
     /*
+
     if ($e instanceof ModelNotFoundException) {
     $e = new NotFoundHttpException($e->getMessage(), $e);
-  }
+    }
 
-  return parent::render($request, $e);
+    return parent::render($request, $e);
+    */
+ }
+
+
+  /**
+  * Render an exception using Whoops.
+  *
+  * @param  \Exception $e
+  * @return \Illuminate\Http\Response
   */
-}
+  protected function renderExceptionWithWhoops(Exception $e)
+  {
+    $whoops = new \Whoops\Run;
+    $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler());
 
-
-/**
-* Render an exception using Whoops.
-*
-* @param  \Exception $e
-* @return \Illuminate\Http\Response
-*/
-protected function renderExceptionWithWhoops(Exception $e)
-{
-  $whoops = new \Whoops\Run;
-  $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler());
-
-  return new \Illuminate\Http\Response(
-  $whoops->handleException($e),
-  $e->getStatusCode(),
-  $e->getHeaders());
-}
+    return new \Illuminate\Http\Response(
+    $whoops->handleException($e),
+    $e->getStatusCode(),
+    $e->getHeaders());
+  }
 
 }

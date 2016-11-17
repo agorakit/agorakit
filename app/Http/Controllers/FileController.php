@@ -31,9 +31,16 @@ class FileController extends Controller
     {
         // list all files and folders without parent id's (parent_id=NULL)
         //$files = $group->files()->with('user')->orderBy('updated_at', 'desc')->get();
-        $files = $group->files()->with('user')->whereNull('parent_id')->orderBy('updated_at', 'desc')->get();
+        $files = $group->files()
+        ->with('user')
+        ->whereNull('parent_id')
+        ->orderBy('item_type', 'desc')
+        ->orderBy('name', 'asc')
+        ->orderBy('updated_at', 'desc')
+        ->get();
 
         return view('files.index')
+        ->with('parent_id', null)
         ->with('files', $files)
         ->with('group', $group)
         ->with('tab', 'files');
@@ -58,138 +65,6 @@ class FileController extends Controller
     }
 
 
-    /************************** Files handling methods **********************/
-
-    /**
-    * Show the form for creating a new resource.
-    *
-    * @return Response
-    */
-    public function create(Group $group, File $parent = null)
-    {
-        return view('files.create')
-        ->with('parent', $parent)
-        ->with('group', $group)
-        ->with('tab', 'files');
-    }
-
-
-
-    /**
-    * Store a newly created resource in storage.
-    *
-    * @return Response
-    */
-    public function store(Request $request, Group $group, File $parent = null)
-    {
-        try {
-            $file = new File();
-
-            // we save it first to get an ID from the database, it will later be used to generate a unique filename.
-            $file->forceSave(); // we bypass autovalidation, since we don't have a complete model yet, but we *need* an id
-
-            // add group
-            $file->group()->associate($group);
-            $file->user()->associate(Auth::user());
-
-
-
-
-            // generate filenames and path
-            $filepath = '/groups/'.$file->group->id.'/files/';
-
-
-            $filename = $file->id . '.' . strtolower($request->file('file')->getClientOriginalExtension());
-
-            // resize big images only if they are png, gif or jpeg
-            if (in_array ($request->file('file')->getClientMimeType(), ['image/jpeg', 'image/png', 'image/gif']))
-            {
-                Storage::disk('local')->makeDirectory($filepath);
-                Image::make($request->file('file'))->widen(1200, function ($constraint) {
-                    $constraint->upsize();
-                })
-                ->save(storage_path().'/app/' . $filepath.$filename);
-            }
-            else
-            {
-                // store the file
-                Storage::disk('local')->put($filepath.$filename,  file_get_contents($request->file('file')->getRealPath()) );
-            }
-
-            // add path and other infos to the file record on DB
-            $file->path = $filepath.$filename;
-            $file->name = $request->file('file')->getClientOriginalName();
-            $file->original_filename = $request->file('file')->getClientOriginalName();
-            $file->mime = $request->file('file')->getClientMimeType();
-
-            // save it again
-            $file->save();
-
-            if ($request->ajax()) {
-                return response()->json('success', 200);
-            } else {
-
-                flash()->info(trans('messages.ressource_created_successfully'));
-                return redirect()->action('FileController@index', [$group->id]);
-            }
-        } catch (Exception $e) {
-
-            if ($request->ajax()) {
-                return response()->json($e->getMessage(), 400);
-            }
-            else {
-                abort(400, $e->getMessage());
-            }
-        }
-    }
-
-
-    /************************** Folder handling methods *****************/
-
-    /**
-    * Show the form for creating a new resource.
-    *
-    * @return Response
-    */
-    public function createFolder(Group $group, File $parent = null)
-    {
-        return view('files.create_folder')
-        ->with('group', $group)
-        ->with('tab', 'files');
-    }
-
-    /**
-    * Show the form for creating a new resource.
-    *
-    * @return Response
-    */
-    public function storeFolder(Request $request, Group $group, File $parent = null)
-    {
-
-        $file = new File;
-        $file->name = $request->get('folder');
-
-        $file->path = $request->get('folder');
-
-        $file->item_type = File::FOLDER;
-
-        // add group
-        $file->group()->associate($group);
-
-        // add user
-        $file->user()->associate(Auth::user());
-
-        if ($file->save())
-        {
-            flash()->info(trans('messages.ressource_created_successfully'));
-            return redirect()->action('FileController@index', [$group->id]);
-        }
-        else
-        {
-            dd('folder creation failed');
-        }
-
-    }
 
 
     /**
@@ -201,6 +76,16 @@ class FileController extends Controller
     */
     public function show(Group $group, File $file)
     {
+
+        if ($file->parent_id)
+        {
+            $parent_id = $file->parent_id;
+        }
+        else
+        {
+            $parent_id = null;
+        }
+
         // view depends on file type
         // folder :
 
@@ -208,6 +93,7 @@ class FileController extends Controller
         {
             return view('files.index')
             ->with('files', $file->children)
+            ->with('parent_id', $parent_id)
             ->with('file', $file)
             ->with('group', $group)
             ->with('tab', 'files');
@@ -267,10 +153,16 @@ class FileController extends Controller
 
             return $cachedImage->response();
         }
-        else
+
+        if ($file->isFolder())
         {
-            return redirect('images/extensions/text-file.png');
+            return redirect('images/extensions/folder.png');
         }
+
+
+
+        return redirect('images/extensions/text-file.png');
+
     }
 
 
@@ -292,6 +184,110 @@ class FileController extends Controller
     }
 
 
+    /************************** Files handling methods **********************/
+
+    /**
+    * Show the form for creating a new resource.
+    *
+    * @return Response
+    */
+    public function create(Request $request, Group $group)
+    {
+
+        if ($request->get('parent_id'))
+        {
+            $parent = File::findOrFail($request->get('parent_id'));
+        }
+        else
+        {
+            $parent = null;
+        }
+
+        return view('files.create')
+        ->with('parent', $parent)
+        ->with('group', $group)
+        ->with('tab', 'files');
+    }
+
+
+
+    /**
+    * Store a new file.
+    *
+    * @return Response
+    */
+    public function store(Request $request, Group $group)
+    {
+
+        try {
+            $file = new File();
+
+            // we save it first to get an ID from the database, it will later be used to generate a unique filename.
+            $file->forceSave(); // we bypass autovalidation, since we don't have a complete model yet, but we *need* an id
+
+            // add group
+            $file->group()->associate($group);
+            $file->user()->associate(Auth::user());
+
+
+            // generate filenames and path
+            $filepath = '/groups/'.$file->group->id.'/files/';
+
+
+            $filename = $file->id . '.' . strtolower($request->file('file')->getClientOriginalExtension());
+
+            // resize big images only if they are png, gif or jpeg
+            if (in_array ($request->file('file')->getClientMimeType(), ['image/jpeg', 'image/png', 'image/gif']))
+            {
+                Storage::disk('local')->makeDirectory($filepath);
+                Image::make($request->file('file'))->widen(1200, function ($constraint) {
+                    $constraint->upsize();
+                })
+                ->save(storage_path().'/app/' . $filepath.$filename);
+            }
+            else
+            {
+                // store the file
+                Storage::disk('local')->put($filepath.$filename,  file_get_contents($request->file('file')->getRealPath()) );
+            }
+
+            // add path and other infos to the file record on DB
+            $file->path = $filepath.$filename;
+            $file->name = $request->file('file')->getClientOriginalName();
+            $file->original_filename = $request->file('file')->getClientOriginalName();
+            $file->mime = $request->file('file')->getClientMimeType();
+
+
+            // handle parenting
+            if ($request->has('parent_id'))
+            {
+                $parent = File::findOrFail($request->get('parent_id'));
+                $parent->appendNode($file);
+            }
+
+            // save it again
+            $file->save();
+
+
+            if ($request->ajax()) {
+                return response()->json('success', 200);
+            } else {
+
+                flash()->info(trans('messages.ressource_created_successfully'));
+                return redirect()->action('FileController@index', [$group->id]);
+            }
+        } catch (Exception $e) {
+
+            if ($request->ajax()) {
+                return response()->json($e->getMessage(), 400);
+            }
+            else {
+                abort(400, $e->getMessage());
+            }
+        }
+    }
+
+
     /**
     * Show the form for editing the specified resource.
     *
@@ -301,7 +297,11 @@ class FileController extends Controller
     */
     public function edit(Group $group, File $file)
     {
+        // get all folders
+        $folders = $group->files()->where('item_type', File::FOLDER)->get();
+
         return view('files.edit')
+        ->with('folders', $folders)
         ->with('file', $file)
         ->with('group', $group)
         ->with('tab', 'file');
@@ -316,9 +316,12 @@ class FileController extends Controller
     */
     public function update(Request $request, Group $group, File $file)
     {
-        $file->retag(implode(',', $request->input('tags')));
+        $parent = File::findOrFail($request->get('parent_id'));
+        $file->parent_id = $parent->id;
+        $file->save();
+
         flash()->info(trans('messages.ressource_updated_successfully'));
-        return redirect()->action('FileController@index', [$file->group->id]);
+        return redirect()->action('FileController@show', [$group, $parent]);
     }
 
 
@@ -361,4 +364,73 @@ class FileController extends Controller
             abort(403);
         }
     }
+
+
+    /************************** Folder handling methods *****************/
+
+    /**
+    * Show the form for creating a folder.
+    *
+    * @return Response
+    */
+    public function createFolder(Request $request, Group $group)
+    {
+        if ($request->get('parent_id'))
+        {
+            $parent = File::findOrFail($request->get('parent_id'));
+        }
+        else
+        {
+            $parent = null;
+        }
+
+        return view('files.create_folder')
+        ->with('parent', $parent)
+        ->with('group', $group)
+        ->with('tab', 'files');
+    }
+
+    /**
+    * Store the folde rin the file DB.
+    *
+    * @return Response
+    */
+    public function storeFolder(Request $request, Group $group)
+    {
+
+        $file = new File;
+        $file->name = $request->get('folder');
+
+        $file->path = $request->get('folder');
+
+        $file->item_type = File::FOLDER;
+
+        // handle parenting
+        if ($request->has('parent_id'))
+        {
+            $parent = File::findOrFail($request->get('parent_id'));
+            $parent->appendNode($file);
+        }
+
+        // add group
+        $file->group()->associate($group);
+
+        // add user
+        $file->user()->associate(Auth::user());
+
+        if ($file->save())
+        {
+            flash()->info(trans('messages.ressource_created_successfully'));
+            return redirect()->action('FileController@index', [$group->id]);
+        }
+        else
+        {
+            dd('folder creation failed');
+        }
+
+    }
+
+
+
+
 }
