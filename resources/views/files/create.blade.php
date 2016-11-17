@@ -24,8 +24,13 @@
   <p>{{trans('messages.drop_file_here')}}
       </p>
 
-  {!! Form::open(['url' => action('FileController@create', $group->id), 'class' => 'dropzone', 'files'=>true, 'id'=>'real-dropzone']) !!}
+  {!! Form::open(['url' => action('FileController@create', [$group->id, $parent]), 'class' => 'dropzone', 'files'=>true, 'id'=>'real-dropzone']) !!}
 
+  <!--
+  @if ($parent)
+      <input name="parent_id" type="hidden" value="{{$parent->id}}" />
+  @endif
+-->
 
     <input name="file" type="file" multiple />
     <input type="submit"/>

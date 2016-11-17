@@ -187,6 +187,7 @@ return [
         DraperStudio\Taggable\ServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         Toin0u\Geocoder\GeocoderServiceProvider::class,
+
     ],
 
     /*

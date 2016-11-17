@@ -16,6 +16,10 @@
     {!! Form::open(['url' => action('FileController@storeFolder', $group->id)]) !!}
 
 
+    @if ($parent)
+        <input name="parent_id" type="hidden" value="{{$parent->id}}" />
+    @endif
+
     <input name="folder" type="text"/>
     <div class="form-group">
       {!! Form::submit(trans('group.create_button'), ['class' => 'btn btn-primary form-control']) !!}

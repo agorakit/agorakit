@@ -63,5 +63,21 @@ class File extends Model
   }
 
 
+  public function isFile()
+  {
+      return $this->item_type == $this::FILE;
+
+  }
+
+  public function isFolder()
+  {
+      return $this->item_type == $this::FOLDER;
+  }
+
+  public function isLink()
+  {
+      return $this->item_type == $this::LINK;
+  }
+
 
 }

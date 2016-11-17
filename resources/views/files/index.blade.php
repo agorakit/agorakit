@@ -63,7 +63,7 @@
 
                         <td>
                             <div class="ellipsis" style="max-width: 30em">
-                                <a  href="{{ action('FileController@download', [$group->id, $file->id]) }}">{{ $file->name }}</a>
+                                <a  href="{{ action('FileController@show', [$group->id, $file->id]) }}">{{ $file->name }}</a>
                             </div>
                         </td>
 

@@ -58,63 +58,21 @@ class FileController extends Controller
     }
 
 
+    /************************** Files handling methods **********************/
+
     /**
     * Show the form for creating a new resource.
     *
     * @return Response
     */
-    public function create(Group $group)
+    public function create(Group $group, File $parent = null)
     {
         return view('files.create')
+        ->with('parent', $parent)
         ->with('group', $group)
         ->with('tab', 'files');
     }
 
-
-    /**
-    * Show the form for creating a new resource.
-    *
-    * @return Response
-    */
-    public function createFolder(Group $group)
-    {
-        return view('files.create_folder')
-        ->with('group', $group)
-        ->with('tab', 'files');
-    }
-
-    /**
-    * Show the form for creating a new resource.
-    *
-    * @return Response
-    */
-    public function storeFolder(Request $request, Group $group)
-    {
-
-        $file = new \App\File;
-        $file->name = $request->get('folder');
-
-        $file->path = $request->get('folder');
-
-        $file->type == \App\File::FOLDER;
-
-        // add group
-        $file->group()->associate($group);
-
-        // add user
-        $file->user()->associate(Auth::user());
-
-        if ($file->save())
-        {
-            flash()->info(trans('messages.ressource_created_successfully'));
-            return redirect()->action('FileController@index', [$group->id]);
-        }
-        else
-        {
-            dd('folder creation failed');
-        }
-
-    }
 
 
     /**
@@ -122,18 +80,20 @@ class FileController extends Controller
     *
     * @return Response
     */
-    public function store(Request $request, Group $group)
+    public function store(Request $request, Group $group, File $parent = null)
     {
         try {
-            $file = new \App\File();
+            $file = new File();
 
             // we save it first to get an ID from the database, it will later be used to generate a unique filename.
             $file->forceSave(); // we bypass autovalidation, since we don't have a complete model yet, but we *need* an id
 
             // add group
             $file->group()->associate($group);
-
             $file->user()->associate(Auth::user());
+
+
+
 
             // generate filenames and path
             $filepath = '/groups/'.$file->group->id.'/files/';
@@ -184,6 +144,53 @@ class FileController extends Controller
     }
 
 
+    /************************** Folder handling methods *****************/
+
+    /**
+    * Show the form for creating a new resource.
+    *
+    * @return Response
+    */
+    public function createFolder(Group $group, File $parent = null)
+    {
+        return view('files.create_folder')
+        ->with('group', $group)
+        ->with('tab', 'files');
+    }
+
+    /**
+    * Show the form for creating a new resource.
+    *
+    * @return Response
+    */
+    public function storeFolder(Request $request, Group $group, File $parent = null)
+    {
+
+        $file = new File;
+        $file->name = $request->get('folder');
+
+        $file->path = $request->get('folder');
+
+        $file->item_type = File::FOLDER;
+
+        // add group
+        $file->group()->associate($group);
+
+        // add user
+        $file->user()->associate(Auth::user());
+
+        if ($file->save())
+        {
+            flash()->info(trans('messages.ressource_created_successfully'));
+            return redirect()->action('FileController@index', [$group->id]);
+        }
+        else
+        {
+            dd('folder creation failed');
+        }
+
+    }
+
 
     /**
     * Display the specified resource.
@@ -197,7 +204,7 @@ class FileController extends Controller
         // view depends on file type
         // folder :
 
-        if ($file->item_type == 1)
+        if ($file->isFolder())
         {
             return view('files.index')
             ->with('files', $file->children)
@@ -208,7 +215,7 @@ class FileController extends Controller
 
 
         // file
-        if ($file->item_type == 0)
+        if ($file->isFile())
         {
             return view('files.show')
             ->with('file', $file)
@@ -217,7 +224,7 @@ class FileController extends Controller
         }
 
         // link
-        if ($file->item_type == 2)
+        if ($file->isLink())
         {
             return view('files.link')
             ->with('file', $file)
