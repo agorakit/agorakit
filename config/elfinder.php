@@ -27,8 +27,6 @@ return array(
     */
     'disks' => [
 
-
-
     ],
 
     /*

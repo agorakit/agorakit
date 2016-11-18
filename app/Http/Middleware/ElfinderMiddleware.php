@@ -20,7 +20,14 @@ class ElfinderMiddleware
         if ($request->segment(1) == 'groups')
         {
             $group = \App\Group::findOrFail($request->segment(2));
-            Config::set('elfinder.dir', 'groups/' . $group->id);
+            Config::set('elfinder.dir', '/files/groups/' . $group->id);
+            Config::set('elfinder.alias', 'Bonjour' . $group->id);
+
+            if(!\File::exists(public_path() . '/files/groups/' . $group->id))
+            {
+                \File::makeDirectory(public_path() . '/files/groups/' . $group->id);
+            }
+
             return $next($request);
 
         }

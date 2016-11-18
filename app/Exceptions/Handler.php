@@ -45,7 +45,7 @@ class Handler extends ExceptionHandler
   public function render($request, Exception $e)
   {
     // whoops error handler :
-
+    /*
     if ($this->isHttpException($e))
     {
       return $this->renderHttpException($e);
@@ -57,17 +57,17 @@ class Handler extends ExceptionHandler
     }
 
     return parent::render($request, $e);
-
+    */
     // laravel original error handler :
 
-    /*
+
 
     if ($e instanceof ModelNotFoundException) {
     $e = new NotFoundHttpException($e->getMessage(), $e);
     }
 
     return parent::render($request, $e);
-    */
+    
  }
 
 

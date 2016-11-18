@@ -188,10 +188,11 @@ Route::group(['middleware' => ['web']], function () {
 
 
   // elfinder stuff
-  Route::group(['middleware' => ['elfinder']], function () {
+  Route::group(['middleware' => ['elfinder', 'member']], function () {
     Route::get('groups/{group}/elfinder', '\Barryvdh\Elfinder\ElfinderController@showIndex');
-    Route::get('groups/{group}/elfinder/connector', '\Barryvdh\Elfinder\ElfinderController@showConnector');
+    Route::any('groups/{group}/elfinder/connector', '\Barryvdh\Elfinder\ElfinderController@showConnector');
   });
+
 
   // Listing of files and folders :
   Route::get('groups/{group}/files', 'FileController@index');
