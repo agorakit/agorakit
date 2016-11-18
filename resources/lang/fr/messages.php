@@ -54,6 +54,8 @@ return [
     'contact_this_user'                                 => 'Contacter cette personne',
     'create'                                            => 'Créer',
     'create_file_button'                                => 'Ajouter des fichiers',
+    'create_folder'                                     => 'Créer un dossier',
+    'create_folder_button'                              => 'Créer un dossier',
     'date'                                              => 'Date',
     'delete'                                            => 'Effacer',
     'delete_confirm_button'                             => 'Effacer ?',

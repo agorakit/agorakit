@@ -269,19 +269,33 @@ class FileController extends Controller
             $file->save();
 
 
-            if ($request->ajax()) {
+            if ($request->ajax())
+            {
                 return response()->json('success', 200);
-            } else {
+            }
+            else
+            {
 
                 flash()->info(trans('messages.ressource_created_successfully'));
-                return redirect()->action('FileController@index', [$group->id]);
+                if (isset($parent))
+                {
+                    return redirect()->action('FileController@show', [$group, $parent]);
+                }
+                else
+                {
+                    return redirect()->action('FileController@index', $group);
+                }
             }
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
 
-            if ($request->ajax()) {
+            if ($request->ajax())
+            {
                 return response()->json($e->getMessage(), 400);
             }
-            else {
+            else
+            {
                 abort(400, $e->getMessage());
             }
         }
@@ -353,11 +367,22 @@ class FileController extends Controller
     */
     public function destroy(Request $request, Group $group, File $file)
     {
+
+        $parent = $file->getParent();
+
         if (Gate::allows('delete', $file))
         {
             $file->delete();
             flash()->info(trans('messages.ressource_deleted_successfully'));
-            return redirect()->action('FileController@index', [$group->id]);
+
+            if ($parent)
+            {
+                return redirect()->action('FileController@show', [$group, $parent]);
+            }
+            else
+            {
+                return redirect()->action('FileController@index', [$group]);
+            }
         }
         else
         {
@@ -400,7 +425,6 @@ class FileController extends Controller
 
         $file = new File;
         $file->name = $request->get('folder');
-
         $file->path = $request->get('folder');
 
         $file->item_type = File::FOLDER;
@@ -421,7 +445,15 @@ class FileController extends Controller
         if ($file->save())
         {
             flash()->info(trans('messages.ressource_created_successfully'));
-            return redirect()->action('FileController@index', [$group->id]);
+            if (isset($parent))
+            {
+                return redirect()->action('FileController@show', [$group, $file]);
+            }
+            else
+            {
+                return redirect()->action('FileController@index', $group);
+            }
+
         }
         else
         {

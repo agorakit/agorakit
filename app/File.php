@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 use Storage;
 use Response;
-use DraperStudio\Taggable\Traits\Taggable as TaggableTrait;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Kalnoy\Nestedset\NodeTrait;
 
@@ -17,7 +16,6 @@ class File extends Model
     use ValidatingTrait;
     use SoftDeletes;
     use RevisionableTrait;
-    //use TaggableTrait;
     use NodeTrait;
 
 
@@ -26,7 +24,7 @@ class File extends Model
 
 
     protected $rules = [
-        'path' => 'required',
+        'name' => 'required',
         'user_id' => 'required|exists:users,id',
         'group_id' => 'required|exists:groups,id',
     ];
@@ -83,23 +81,50 @@ class File extends Model
 
     public function getParent()
     {
-        if ($this->parent_id)
-        {
-            return File::findOrFail($this->parent_id);
-        }
-        else
+        if (is_null($this->parent_id))
         {
             return false;
         }
+        else
+        {
+            return File::findOrFail($this->parent_id);
+        }
     }
 
-    /*
+
     public function addChild(File $file)
     {
         $file->parent_id = $this->id;
         return $file->save();
     }
-    */
+
+
+    public function getAncestors()
+    {
+        $ancestors = [];
+
+        $current = $this;
+        // limit tree depth to 5 just in case, and this way we avoid recursive function
+        for ($i = 0; $i <5; $i++)
+        {
+            $parent =  $current->getParent();
+
+            if ($parent)
+            {
+                $ancestors[] = $parent;
+                $current = $parent;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        return $ancestors;
+
+
+    }
+
 
 
 

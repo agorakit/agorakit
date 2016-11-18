@@ -54,6 +54,8 @@ return [
     'contact_this_user'                                 => 'Contact this person',
     'create'                                            => 'Create',
     'create_file_button'                                => 'Upload file(s)',
+    'create_folder'                                     => 'Create Folder',
+    'create_folder_button'                              => 'Create folder',
     'date'                                              => 'Date',
     'delete'                                            => 'delete',
     'delete_confirm_button'                             => 'Delete',
