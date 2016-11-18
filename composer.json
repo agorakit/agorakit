@@ -23,7 +23,8 @@
     "vsch/laravel-translation-manager": "*",
     "iatstuti/laravel-cascade-soft-deletes": "1.0.*",
     "kalnoy/nestedset": "^4.1",
-    "toin0u/geocoder-laravel": "@stable"
+    "toin0u/geocoder-laravel": "@stable",
+    "barryvdh/laravel-elfinder": "^0.3.8"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

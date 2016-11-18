@@ -186,6 +186,13 @@ Route::group(['middleware' => ['web']], function () {
   Route::delete('groups/{group}/actions/{action}/delete', 'ActionController@destroy');
 
 
+
+  // elfinder stuff
+  Route::group(['middleware' => ['elfinder']], function () {
+    Route::get('groups/{group}/elfinder', '\Barryvdh\Elfinder\ElfinderController@showIndex');
+    Route::get('groups/{group}/elfinder/connector', '\Barryvdh\Elfinder\ElfinderController@showConnector');
+  });
+
   // Listing of files and folders :
   Route::get('groups/{group}/files', 'FileController@index');
   Route::get('groups/{group}/files/gallery', 'FileController@gallery');

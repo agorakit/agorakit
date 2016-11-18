@@ -22,6 +22,13 @@ class FileController extends Controller
         $this->middleware('public', ['only' => ['index', 'gallery', 'thumbnail', 'preview']]);
     }
 
+
+
+    public function elfinder(Group $group)
+    {
+        
+    }
+
     /**
     * Display a listing of the resource.
     *
