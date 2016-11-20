@@ -51,6 +51,14 @@ class FileController extends Controller
     {
         // TODO here I can set permissions on finer level
 
+        // remove php access
+        /*
+        if(stristr($path, '.php'))
+        {
+            return false;
+        }
+        */
+
         /*
         Log::info('elfinder attr : ' . $attr);
         Log::info('elfinder path : ' . $path);
@@ -64,7 +72,7 @@ class FileController extends Controller
     return strpos(basename($path), '.') === 0       // if file/folder begins with '.' (dot)
     ? !($attr == 'read' || $attr == 'write')    // set read+write to false, other (locked+hidden) set to true
     :  null;                                    // else elFinder decide it itself
-    }
+}
 
 public function elfinder(Group $group)
 {

@@ -62,6 +62,8 @@ return array(
 
     'roots' => [],
 
+
+
     /*
     |--------------------------------------------------------------------------
     | Options
@@ -72,12 +74,7 @@ return array(
     |
     */
 
-    'options' => [
-        'bind' => [
-            'rm.pre' => ['\App\Http\Controllers\FileController::elfinderRmCallback'],
-        ],
-        'disabled' => 'rm', // doesn't work
-    ],
+    'options' => [],
 
     /*
     |--------------------------------------------------------------------------
@@ -88,6 +85,26 @@ return array(
     | See https://github.com/Studio-42/elFinder/wiki/Connector-configuration-options-2.1#root-options
     |
     */
-    'root_options' => array('disabled' => 'rm'), // doesn't work either...
+    'root_options' =>
+    [
+        'disabled' => ['rm'],
+        'alias' => 'home',
+        'uploadMaxSize' => '20M',
+        /*'uploadOrder' => 'Allow,Deny',*/
+        /*'uploadAllow' => ['audio', 'video', 'image', 'application/msword', 'text/plain', 'application/pdf'],*/
+        'uploadDeny' => ['text/php', 'text/x-php', 'application/php', 'application/x-php', 'application/x-httpd-php', 'application/x-httpd-php-source'], // TODO security issues
+        // todo see here : https://github.com/Studio-42/elFinder/wiki/Simple-file-permissions-control
+
+        /*
+        'attributes'    =>
+        [
+            'pattern' => '/.(Pictures+)/', // Access for Folders named "Pictures" and his subfolders
+            'read'  => false,
+            'write' => true,
+            'locked' => true
+        ]
+        */
+
+    ],
 
 );
