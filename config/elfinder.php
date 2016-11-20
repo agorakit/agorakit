@@ -25,9 +25,7 @@ return array(
     |        'alias' => 'Local storage',
     |    ]
     */
-    'disks' => [
-
-    ],
+    'disks' => [],
 
     /*
     |--------------------------------------------------------------------------
@@ -38,10 +36,7 @@ return array(
     |
     */
 
-    'route' => [
-        'prefix' => 'admin/elfinder',
-        'middleware' => ['web', 'admin'], //Set to null to disable middleware filter
-    ],
+    'route' => ['prefix' => 'admin/elfinder', 'middleware' => ['web', 'admin']], //Set to null to disable middleware filter
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +47,8 @@ return array(
     |
     */
 
-    'access' => 'Barryvdh\Elfinder\Elfinder::checkAccess',
+    //'access' => 'Barryvdh\Elfinder\Elfinder::checkAccess',
+    'access' => '\App\Http\Controllers\FileController::checkAccess',
 
     /*
     |--------------------------------------------------------------------------
@@ -64,7 +60,7 @@ return array(
     |
     */
 
-    'roots' => null,
+    'roots' => [],
 
     /*
     |--------------------------------------------------------------------------
@@ -76,7 +72,12 @@ return array(
     |
     */
 
-    'options' => array(),
+    'options' => [
+        'bind' => [
+            'rm.pre' => ['\App\Http\Controllers\FileController::elfinderRmCallback'],
+        ],
+        'disabled' => 'rm', // doesn't work
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -87,7 +88,6 @@ return array(
     | See https://github.com/Studio-42/elFinder/wiki/Connector-configuration-options-2.1#root-options
     |
     */
-    'root_options' => array(
-    ),
+    'root_options' => array('disabled' => 'rm'), // doesn't work either...
 
 );
