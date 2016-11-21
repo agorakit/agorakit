@@ -13,7 +13,7 @@
 
 
         <div class="alert alert-info">
-            Utilisez le nouveau système de gestion des fichiers <a style="color: black" href="{{ action('FileController@elfinder', [$group->id]) }}">en cliquant ici</a>
+            Utilisez le nouveau système de gestion des fichiers <a style="color: black" href="{{ action('FileController@index', [$group->id]) }}">en cliquant ici</a>
         </div>
 
 

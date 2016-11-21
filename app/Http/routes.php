@@ -189,34 +189,25 @@ Route::group(['middleware' => ['web']], function () {
 
   // elfinder stuff
   Route::group(['middleware' => ['elfinder', 'member']], function () {
-    //Route::get('groups/{group}/elfinder', '\Barryvdh\Elfinder\ElfinderController@showIndex');
-    Route::get('groups/{group}/elfinder', 'FileController@elfinder');
-    Route::any('groups/{group}/elfinder/connector', '\Barryvdh\Elfinder\ElfinderController@showConnector');
+    Route::get('groups/{group}/files', 'FileController@index');
+    Route::any('groups/{group}/files/connector', '\Barryvdh\Elfinder\ElfinderController@showConnector');
   });
 
 
-  // Listing of files and folders :
-  Route::get('groups/{group}/files', 'FileController@index');
+
+
+
+  // Listing of files and folders  (deprecated):
+
   Route::get('groups/{group}/files/gallery', 'FileController@gallery');
-
-  // upload of files
-  Route::get('groups/{group}/files/create', 'FileController@create');
-  Route::post('groups/{group}/files/create', 'FileController@store');
-
-  // Creation of folders
-  Route::get('groups/{group}/files/createfolder', 'FileController@createFolder');
-  Route::post('groups/{group}/files/storefolder', 'FileController@storeFolder');
-
 
   Route::get('groups/{group}/files/{file}/download', 'FileController@download');
   Route::get('groups/{group}/files/{file}', 'FileController@show');
   Route::get('groups/{group}/files/{file}/thumbnail', 'FileController@thumbnail');
   Route::get('groups/{group}/files/{file}/preview', 'FileController@preview');
-  Route::get('groups/{group}/files/{file}/delete', 'FileController@destroyConfirm');
-  Route::delete('groups/{group}/files/{file}/delete', 'FileController@destroy');
 
-  Route::get('groups/{group}/files/{file}/edit', 'FileController@edit');
-  Route::post('groups/{group}/files/{file}', 'FileController@update');
+
+
 
 
 

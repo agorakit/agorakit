@@ -46,7 +46,7 @@
     @stop
 
 
-    
+
     @section('footer')
         {!! Html::script('https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.2.6/js/lightgallery.min.js') !!}
 
