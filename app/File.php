@@ -8,7 +8,7 @@ use Watson\Validating\ValidatingTrait;
 use Storage;
 use Response;
 use Venturecraft\Revisionable\RevisionableTrait;
-use Kalnoy\Nestedset\NodeTrait;
+
 
 
 class File extends Model
@@ -16,9 +16,6 @@ class File extends Model
     use ValidatingTrait;
     use SoftDeletes;
     use RevisionableTrait;
-    use NodeTrait;
-
-
 
     protected $onlyUseExistingTags = false;
 
@@ -76,59 +73,5 @@ class File extends Model
     {
         return $this->item_type == $this::LINK;
     }
-
-
-
-    public function getParent()
-    {
-        if (is_null($this->parent_id))
-        {
-            return false;
-        }
-        else
-        {
-            return File::findOrFail($this->parent_id);
-        }
-    }
-
-
-    public function addChild(File $file)
-    {
-        $file->parent_id = $this->id;
-        return $file->save();
-    }
-
-
-    public function getAncestors()
-    {
-        $ancestors = [];
-
-        $current = $this;
-        // limit tree depth to 5 just in case, and this way we avoid recursive function
-        for ($i = 0; $i <5; $i++)
-        {
-            $parent =  $current->getParent();
-
-            if ($parent)
-            {
-                $ancestors[] = $parent;
-                $current = $parent;
-            }
-            else
-            {
-                break;
-            }
-        }
-
-        return $ancestors;
-
-
-    }
-
-
-
-
-
-
 
 }

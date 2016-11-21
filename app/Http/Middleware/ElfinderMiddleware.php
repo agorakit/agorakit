@@ -19,13 +19,15 @@ class ElfinderMiddleware
         // we expect a url in the form /groups/{group_id}
         if ($request->segment(1) == 'groups')
         {
-            $group = \App\Group::findOrFail($request->segment(2));
-            Config::set('elfinder.dir', '/files/groups/' . $group->id);
+            $group_id = $request->segment(2);
 
-            if(!\File::exists(public_path() . '/files/groups/' . $group->id))
+            if(!\File::exists(public_path() . '/files/groups/' . $group_id))
             {
+                $group = \App\Group::findOrFail($request->segment(2));
                 \File::makeDirectory(public_path() . '/files/groups/' . $group->id);
             }
+
+            Config::set('elfinder.dir', '/files/groups/' . $group_id);
 
             return $next($request);
 

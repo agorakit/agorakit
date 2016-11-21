@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Kalnoy\Nestedset\NestedSet;
+//use Kalnoy\Nestedset\NestedSet;
 
 class AddTreeToFiles extends Migration
 {
@@ -13,9 +13,11 @@ class AddTreeToFiles extends Migration
     */
     public function up()
     {
+        /*
         Schema::table('files', function ($table) {
             NestedSet::columns($table);
         });
+        */
     }
 
     /**
@@ -25,10 +27,12 @@ class AddTreeToFiles extends Migration
     */
     public function down()
     {
-        
+
+        /*
         Schema::table('files', function ($table) {
             NestedSet::dropColumns($table);
         });
+        */
 
     }
 }
