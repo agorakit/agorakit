@@ -8,7 +8,7 @@ use Config;
 class ElfinderMiddleware
 {
     /**
-    * Handle an incoming request.
+    * This middleware sets the correct elfinder "root" for each group. It also creates the group folder if it doesn't exists already.
     *
     * @param  \Illuminate\Http\Request  $request
     * @param  \Closure  $next

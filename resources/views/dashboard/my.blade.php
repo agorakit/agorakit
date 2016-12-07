@@ -12,6 +12,11 @@
 
   <div class="tab_content">
 
+    <div class="menu">
+      This is a test for the future menu system :
+      {!! Menu::get('navbar')->asUl() !!}
+    </div>
+
     <div class="intro">
 
       <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#intro" aria-expanded="false" aria-controls="collapseExample">

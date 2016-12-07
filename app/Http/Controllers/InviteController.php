@@ -72,7 +72,7 @@ class InviteController extends Controller
                 }
             }
 
-
+            
 
             if ($invitation_counter > 0 || $user_already_member)
             {
@@ -152,10 +152,9 @@ class InviteController extends Controller
             flash()->error( trans('messages.you_are_now_a_member_of_this_group') );
             return redirect()->action('GroupController@show', $group->id);
         }
-        else
+        else // if user doesn't exists, we have the opportunity to create, login and validate email in one go (since we have the invite token)
         {
             Auth::logout();
-            // if user doesn't exists, we have the opportunity to create, login and validate email in one go (since we have the invite token)
             flash()->info( trans('messages.you_dont_have_an_account_create_one_now'));
 
             return view('invites.register')
