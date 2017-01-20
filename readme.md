@@ -1,5 +1,15 @@
 [![Build Status](https://travis-ci.org/philippejadin/Mobilizator.svg?branch=master)](https://travis-ci.org/philippejadin/Mobilizator)
 
+## Laravel backend & frontend developer wanted
+We are looking for help to enhance this collaborative platform called "Mobilizator" used by multiple citizen initiatives (Tout autre chose, Hart Boven Hard, Collectif Roosevelt, Stop-TTIP, etc.). 
+
+- Backend developer with experience of the Laravel framework : add new features to the existing tool, fix bug, write tests, document everything
+- Frontend developer with experience of the Laravel framework : the current UI is not pretty, make it brilliant. Fix UX as you see fit.
+
+If you have some time to give to this project, there are already some issues to fix (see. https://github.com/philippejadin/Mobilizator/issues ). Whether you have one hour per day or one hour per month, help is really appreciated! And remember, "talk is silver, code is gold" :-)
+
+All the work is open source (GPL) and will benefit every interested citizen initiative. We already have 100's of users who might benefit from your help.
+
 ## Mobilizator
 
 Mobilize crowds efficiently. Allow anyone to create a collaborative group. No admins involved in the process. Manage communication, decision making, membership, files and events.
