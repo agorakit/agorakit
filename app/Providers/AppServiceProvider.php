@@ -11,38 +11,44 @@ use Session;
 class AppServiceProvider extends ServiceProvider
 {
     /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
+    * Bootstrap any application services.
+    *
+    * @return void
+    */
     public function boot()
     {
 
-          // adds user info to all views
-          view()->composer('partials.nav', function ($view) {
+        // adds user info to all views
+        view()->composer('partials.nav', function ($view) {
             $view->with('user_logged', Auth::check());
 
             if (Auth::check()) {
-              $view->with('user', Auth::user());
+                $view->with('user', Auth::user());
 
-              // count number of unread discussions.
-              /*$view->with('unread_discussions', QueryHelper::getUnreadDiscussionsCount());*/
-              /*$view->with('user_groups', Auth::user()->groups()->orderBy('name')->get());*/
-              // Why are the two above removed ? Because it slows everything down I think
+                // count number of unread discussions.
+                /*$view->with('unread_discussions', QueryHelper::getUnreadDiscussionsCount());*/
+                /*$view->with('user_groups', Auth::user()->groups()->orderBy('name')->get());*/
+                // Why are the two above removed ? Because it slows everything down I think
 
             }
-          });
+        });
 
-          // set correct locale for Carbon
-          Carbon::setLocale(config('app.locale'));
+        // adds breadcrumb to breadcrumb view
+
+        view()->composer('partials.breadcrumb', function ($view) {
+            $view->with('breadcrumb', false);
+        });
+
+        // set correct locale for Carbon
+        Carbon::setLocale(config('app.locale'));
 
     }
 
     /**
-     * Register any application services.
-     *
-     * @return void
-     */
+    * Register any application services.
+    *
+    * @return void
+    */
     public function register()
     {
         //

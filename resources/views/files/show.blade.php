@@ -21,7 +21,9 @@
 
 
         <a href="{{ action('FileController@download', [$group->id, $file->id]) }}">
-            <img src="{{ action('FileController@preview', [$group->id, $file->id]) }}"/>{{$file->name}}
+            <img src="{{ action('FileController@preview', [$group->id, $file->id]) }}"/>
+            <br/>
+            {{$file->name}}
         </a>
 
 

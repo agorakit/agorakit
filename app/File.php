@@ -17,6 +17,7 @@ class File extends Model
     use SoftDeletes;
     use RevisionableTrait;
 
+
     protected $onlyUseExistingTags = false;
 
 
@@ -73,5 +74,66 @@ class File extends Model
     {
         return $this->item_type == $this::LINK;
     }
+
+
+
+/************************** Parenting and folder functions ***********************/
+
+    public function getParent()
+    {
+        if (is_null($this->parent_id))
+        {
+            return false;
+        }
+        else
+        {
+            return File::findOrFail($this->parent_id);
+        }
+    }
+
+    public function getChildren()
+    {
+            return File::where('parent_id', $this->id)->with('user')->orderBy('item_type', 'desc')->get();
+    }
+
+
+    public function addChild(File $file)
+    {
+        if ($this->isFolder())
+        {
+            $file->parent_id = $this->id;
+            return $file->save();
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
+    public function getAncestors()
+    {
+        $ancestors = [];
+
+        $current = $this;
+        // limit tree depth to 5 just in case, and this way we avoid recursive function
+        for ($i = 0; $i <5; $i++)
+        {
+            $parent =  $current->getParent();
+
+            if ($parent)
+            {
+                $ancestors[] = $parent;
+                $current = $parent;
+            }
+            else
+            {
+                break;
+            }
+        }
+        return $ancestors;
+
+    }
+
 
 }

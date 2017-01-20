@@ -23,7 +23,6 @@
     "vsch/laravel-translation-manager": "*",
     "iatstuti/laravel-cascade-soft-deletes": "1.0.*",
     "toin0u/geocoder-laravel": "@stable",
-    "barryvdh/laravel-elfinder": "^0.3.8",
     "lavary/laravel-menu": "^1.6"
   },
   "require-dev": {

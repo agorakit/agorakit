@@ -12,9 +12,20 @@
         @include('partials.invite')
 
 
-        <div class="alert alert-info">
-            Utilisez le nouveau système de gestion des fichiers <a style="color: black" href="{{ action('FileController@index', [$group->id]) }}">en cliquant ici</a>
-        </div>
+
+        @can('create-file', $group)
+            <a class="btn btn-primary btn-xs" href="{{ action('FileController@create', $group->id ) }}@if (isset($file))?parent_id={{$file->id}}@endif">
+                <i class="fa fa-file"></i>
+                {{trans('messages.create_file_button')}}
+            </a>
+        @endcan
+
+        @can('create-file', $group)
+            <a class="btn btn-primary btn-xs" href="{{ action('FileController@createFolder', $group ) }}@if (isset($file))?parent_id={{$file->id}}@endif">
+                <i class="fa fa-folder-open-o"></i>
+                {{trans('messages.create_folder_button')}}
+            </a>
+        @endcan
 
 
         <h3>
@@ -26,9 +37,6 @@
                 / {{$file->name}}
             @endif
         </h3>
-
-
-
 
         <table class="table table-hover">
 
@@ -96,7 +104,9 @@
     </table>
 
 
+    <!--
     <a class="btn btn-default btn-xs" href="{{ action('FileController@gallery', $group->id ) }}"><i class="fa fa-camera-retro "></i>{{trans('messages.show_gallery')}}</a>
+-->
 
 </div>
 

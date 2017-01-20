@@ -55,7 +55,6 @@ class Kernel extends HttpKernel
         'cache' => \App\Http\Middleware\Cache::class,
         'admin' => \App\Http\Middleware\Admin::class,
         'public' => \App\Http\Middleware\RedirectIfNotGroupMemberOrPublicGroup::class,
-        'elfinder' => \App\Http\Middleware\ElfinderMiddleware::class,
         'menu' => \App\Http\Middleware\MenuMiddleware::class
     ];
 }
