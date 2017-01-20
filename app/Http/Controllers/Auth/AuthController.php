@@ -98,6 +98,19 @@ class AuthController extends Controller
           Auth::login($user); //TODO security implication of this
         }
         flash()->info(trans('messages.you_have_verified_your_email'));
+
+        // add user to the group (s)he has been invited to before registering //TODO : good idea ?
+        $invites = \App\Invite::where('email', '=', $user->email)->get();
+        if ($invites)
+        {
+            foreach ($invites as $invite)
+            {
+                $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $invite->group_id]);
+                $membership->membership = \App\Membership::MEMBER;
+                $membership->save();
+            }
+        }
+
         return redirect('/');
       }
     }
