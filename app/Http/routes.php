@@ -126,6 +126,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('groups/{group}/users/add', 'MembershipController@addUserForm');
     Route::post('groups/{group}/users/add', 'MembershipController@addUser');
 
+    Route::delete('groups/{group}/users/delete/{user}', 'MembershipController@removeUser');
+
 
     // in the case of closed group, we show an howto join message
     Route::get('groups/{group}/howtojoin', 'MembershipController@howToJoin');
