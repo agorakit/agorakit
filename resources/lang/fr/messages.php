@@ -190,6 +190,7 @@ return [
     'toggle_navigation'                                 => 'Toggle Navigation',
     'unread_discussions'                                => 'Discussions non lues',
     'unread_items'                                      => 'Non lus',
+    'user_added_successfuly'                            => 'L\'utilisateur ajouté avec succès',
     'user_profile'                                      => 'Profil utilisateur',
     'users'                                             => 'Utilisateurs',
     'users_list'                                        => 'La Liste Des Utilisateurs',

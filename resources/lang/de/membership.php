@@ -1,7 +1,12 @@
 <?php
 
 return [
+    'add_button'                        => 'Add user(s)',
+    'add_users'                         => 'Benutzer hinzufügen',
+    'add_users_button'                  => 'Benutzer hinzufügen',
+    'add_users_intro'                   => 'Verwenden Sie diese, um direkt hinzufügen von vorhandenen Benutzern zu der Gruppe ohne Einladung. Admin nur',
     'click_here'                        => 'Hier klicken',
+    'directly_add_users_button'         => 'Direkt benutzer hinzufügen',
     'everyday'                          => 'Jeden Tag',
     'everyhour'                         => 'Jede Stunde',
     'everymonth'                        => 'Jeden Monat',
@@ -16,6 +21,9 @@ return [
     'invite_title'                      => 'Neue Mitglieder zu dieser Gruppe einladen',
     'join_button'                       => 'Beitreten',
     'join_intro'                        => 'Hier können Sie anwählen, wenn Sie Neuigkeiten von dieser Gruppe per E-Mail erhalten möchten. Sie werden nie mehr Nachrichten erhalten, als Sie wollen, bezogen auf Ihr Engagement.',
+    'membership'                        => [
+        'add_users_button'  => 'Benutzer hinzufügen',
+    ],
     'never'                             => 'Nie',
     'not_subscribed_to_group_yet'       => 'Sie haben diese Gruppe noch nicht abonniert',
     'people_to_invite'                  => 'Einzuladene Interessierte',
@@ -25,6 +33,7 @@ return [
     'user_already_invited'              => 'Nutzer bereits eingeladen',
     'users_has_been_added'              => 'Benutzer wurde hinzugefügt',
     'users_has_been_invited'            => 'Nutzer wurden bereits zu der Gruppe eingeladen',
+    'users_to_add'                      => 'Benutzer hinzufügen (vorhandene Benutzer nur, verwenden Sie die einladen-Funktion für neue Benutzer)',
     'welcome'                           => 'Wilkommen',
     'when_to_receive_notifications'     => 'Wann möchten Sie Neuigkeiten per E-Mail von dieser Gruppe erhalten?',
     'your_preferences_for'              => 'Ihre Präferenzen für die Gruppe',

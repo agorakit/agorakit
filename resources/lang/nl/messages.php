@@ -190,6 +190,7 @@ return [
     'toggle_navigation'                                 => 'Navigatie activeren',
     'unread_discussions'                                => 'Niet-gelezen discussies',
     'unread_items'                                      => 'Ongelezen',
+    'user_added_successfuly'                            => 'Gebruiker toegevoegd',
     'user_profile'                                      => 'Gebruikersprofiel',
     'users'                                             => 'Gebruikers',
     'users_list'                                        => 'Gebruikerslijst',

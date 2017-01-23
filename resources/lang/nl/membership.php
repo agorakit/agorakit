@@ -1,7 +1,12 @@
 <?php
 
 return [
+    'add_button'                        => 'Voeg gebruiker(s)',
+    'add_users'                         => 'Het toevoegen van gebruikers',
+    'add_users_button'                  => 'Het toevoegen van gebruikers',
+    'add_users_intro'                   => 'Gebruik deze optie om rechtstreeks bestaande gebruikers toevoegen aan de groep zonder uitnodiging. Alleen Admin',
     'click_here'                        => 'Klik hier',
+    'directly_add_users_button'         => 'De gebruikers meteen toevoegen',
     'everyday'                          => 'Elke dag',
     'everyhour'                         => 'Elk uur',
     'everymonth'                        => 'Elke maand',
@@ -16,6 +21,9 @@ return [
     'invite_title'                      => 'Nodig mensen uit om tot deze groep toe te treden',
     'join_button'                       => 'Tot deze groep toetreden',
     'join_intro'                        => 'Treed toe tot deze groep en geef aan of u de updates van deze groep via mail wilt ontvangen. Deze optie is heel nuttig en we raden u aan om deze te activeren. U zal niet meer mails ontvangen dan gevraagd',
+    'membership'                        => [
+        'add_users_button'  => 'Het toevoegen van gebruikers',
+    ],
     'never'                             => 'Zend me geen e-mails',
     'not_subscribed_to_group_yet'       => 'U bent nog geen lid van deze groep\'',
     'people_to_invite'                  => 'E-mails',
@@ -25,6 +33,7 @@ return [
     'user_already_invited'              => 'Gebruiker reeds uitgenodigd',
     'users_has_been_added'              => 'Gebruikers zijn toegevoegd',
     'users_has_been_invited'            => 'Gebruiker uitgenodigd',
+    'users_to_add'                      => 'Gebruikers toevoegen (bestaande gebruikers alleen gebruik maken van de uitnodiging functie voor nieuwe gebruikers)',
     'welcome'                           => 'Welkom in deze groep',
     'when_to_receive_notifications'     => 'When to receive notifications?',
     'your_preferences_for'              => 'Uw voorkeuren voor deze groep',

@@ -1,7 +1,12 @@
 <?php
 
 return [
+    'add_button'                        => 'Add user(s)',
+    'add_users'                         => 'Add users',
+    'add_users_button'                  => 'Add users',
+    'add_users_intro'                   => 'Use this to directly add existing users to the group without invitation. Admin only',
     'click_here'                        => 'Click here',
+    'directly_add_users_button'         => 'Directly add users',
     'everyday'                          => 'Every day',
     'everyhour'                         => 'Every hour',
     'everymonth'                        => 'Every month',
@@ -16,6 +21,9 @@ return [
     'invite_title'                      => 'Invite people to this group',
     'join_button'                       => 'Join',
     'join_intro'                        => 'Here you can choose if you want to receive news from this group by email. You will never receive more mails than what you choose. Depending of your involvement.',
+    'membership'                        => [
+        'add_users_button'  => 'Add users',
+    ],
     'never'                             => 'Never',
     'not_subscribed_to_group_yet'       => 'You are not subscribed to this group yet',
     'people_to_invite'                  => 'People to invite',
@@ -25,6 +33,7 @@ return [
     'user_already_invited'              => 'User already invited',
     'users_has_been_added'              => 'Users Has Been Added',
     'users_has_been_invited'            => 'Users have been invited',
+    'users_to_add'                      => 'Users to add (existing users only, use the invite feature for new users)',
     'welcome'                           => 'Welcome',
     'when_to_receive_notifications'     => 'When receiving news by e-mail to this group?',
     'your_preferences_for'              => 'Your preferences for the group',

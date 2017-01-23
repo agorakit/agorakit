@@ -1,7 +1,12 @@
 <?php
 
 return [
+    'add_button'                        => 'Ajout d\'un utilisateur(s)',
+    'add_users'                         => 'Ajouter des utilisateurs',
+    'add_users_button'                  => 'Ajouter des utilisateurs',
+    'add_users_intro'                   => 'L\'utiliser pour ajouter directement des utilisateurs existants à ce groupe sans invitation. Admin uniquement',
     'click_here'                        => 'Cliquez ici',
+    'directly_add_users_button'         => 'Ajouter directement des utilisateurs',
     'everyday'                          => 'Tous les jours',
     'everyhour'                         => 'Toutes les heures',
     'everymonth'                        => 'Tous les mois',
@@ -16,6 +21,9 @@ return [
     'invite_title'                      => 'Invitez des personnes à rejoindre ce groupe.',
     'join_button'                       => 'Rejoindre ce groupe',
     'join_intro'                        => 'Rejoignez ce groupe et choisissez si vous souhaitez recevoir des nouvelles du groupe par email. C\'est très utile, nous vous conseillons d\'activer cette option. Vous ne recevrez pas plus de mails que demandé.',
+    'membership'                        => [
+        'add_users_button'  => 'Ajouter des utilisateurs',
+    ],
     'never'                             => 'Ne jamais m\'envoyer de mail',
     'not_subscribed_to_group_yet'       => 'Vous ne n\'avez pas encore rejoint ce groupe',
     'people_to_invite'                  => 'Emails',
@@ -25,6 +33,7 @@ return [
     'user_already_invited'              => 'Utilisateur déjà invité',
     'users_has_been_added'              => 'Les utilisateurs ont été ajoutés',
     'users_has_been_invited'            => 'Utilisateur invité',
+    'users_to_add'                      => 'Les utilisateurs à ajouter (les utilisateurs existants uniquement, utilisez la caractéristique d\'invitation pour les nouveaux utilisateurs)',
     'welcome'                           => 'Bienvenue dans ce groupe',
     'when_to_receive_notifications'     => 'Quand recevoir des nouvelles par mail de ce groupe?',
     'your_preferences_for'              => 'Vos préférences pour le groupe',
