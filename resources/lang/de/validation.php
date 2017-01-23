@@ -98,6 +98,10 @@ return [
         'group_id'          => [
             'required'  => 'Required',
         ],
+        'password'          => [
+            'confirmed' => 'Bestätigt',
+            'min'       => 'Min',
+        ],
         'path'              => [
             'required'  => 'Required',
         ],

@@ -23,6 +23,7 @@ return [
     'settings_intro'                    => 'Hier könnnen Sie anwählen, wenn Sie Neuigkeiten von dieser Gruppe per E-Mail erhalten möchten. Sie werden nie mehr Nachrichten erhalten, als Sie wollen, bezogen auf Ihr Engagement.',
     'settings_updated'                  => 'Einstellungen aktualisiert',
     'user_already_invited'              => 'Nutzer bereits eingeladen',
+    'users_has_been_added'              => 'Benutzer wurde hinzugefügt',
     'users_has_been_invited'            => 'Nutzer wurden bereits zu der Gruppe eingeladen',
     'welcome'                           => 'Wilkommen',
     'when_to_receive_notifications'     => 'Wann möchten Sie Neuigkeiten per E-Mail von dieser Gruppe erhalten?',

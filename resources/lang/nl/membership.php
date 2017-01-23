@@ -23,6 +23,7 @@ return [
     'settings_intro'                    => 'Geef aan of u de updates van deze groep via mail wilt ontvangen. Deze optie is heel nuttig en we raden u aan om deze te activeren. U zal niet meer mails ontvangen dan gevraagd',
     'settings_updated'                  => 'Settings updated',
     'user_already_invited'              => 'Gebruiker reeds uitgenodigd',
+    'users_has_been_added'              => 'Gebruikers zijn toegevoegd',
     'users_has_been_invited'            => 'Gebruiker uitgenodigd',
     'welcome'                           => 'Welkom in deze groep',
     'when_to_receive_notifications'     => 'When to receive notifications?',

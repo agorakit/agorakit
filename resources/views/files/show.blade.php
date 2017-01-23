@@ -19,12 +19,24 @@
         </h3>
 
 
+        <div>
+            <a href="{{ action('FileController@download', [$group->id, $file->id]) }}">
+                <img src="{{ action('FileController@preview', [$group->id, $file->id]) }}"/>
+            </a>
+        </div>
 
-        <a href="{{ action('FileController@download', [$group->id, $file->id]) }}">
-            <img src="{{ action('FileController@preview', [$group->id, $file->id]) }}"/>
-            <br/>
-            {{$file->name}}
-        </a>
+        <div>
+            <ul>
+                <li>{{trans('messages.author')}} : {{$file->user->name}}</li>
+                <li>{{trans('messages.created')}} : {{$file->created_at}}</li>
+            </ul>
+        </div>
+
+        <div>
+            <a class="btn btn-primary" href="{{ action('FileController@download', [$group->id, $file->id]) }}">
+                {{trans('messages.download')}} {{$file->name}}
+            </a>
+        </div>
 
 
     </div>

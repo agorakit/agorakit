@@ -99,6 +99,19 @@ class File extends Model
 
     public function addChild(File $file)
     {
+        // we cannot add a folder to itself
+        if ($file->id == $this->id)
+        {
+            return false;
+        }
+
+        // file & folders must belong to the same group
+        if ($file->group_id <> $this->group_id)
+        {
+            return false;
+        }
+
+        // we can only add child to an existing folder
         if ($this->isFolder())
         {
             $file->parent_id = $this->id;

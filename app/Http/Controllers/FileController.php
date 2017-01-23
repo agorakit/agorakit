@@ -262,7 +262,7 @@ class FileController extends Controller
             if ($request->has('parent_id'))
             {
                 $parent = File::findOrFail($request->get('parent_id'));
-                $file->parent_id = $parent->id;
+                $parent->addChild($file);
             }
 
             // save it again
@@ -331,8 +331,7 @@ class FileController extends Controller
     public function update(Request $request, Group $group, File $file)
     {
         $parent = File::findOrFail($request->get('parent_id'));
-        $file->parent_id = $parent->id;
-        $file->save();
+        $parent->addChild($file);
 
         flash()->info(trans('messages.ressource_updated_successfully'));
         return redirect()->action('FileController@show', [$group, $parent]);
@@ -416,7 +415,7 @@ class FileController extends Controller
     }
 
     /**
-    * Store the folde rin the file DB.
+    * Store the folder in the file DB.
     *
     * @return Response
     */
@@ -429,15 +428,17 @@ class FileController extends Controller
 
         $file->item_type = File::FOLDER;
 
+        // add group
+        $file->group()->associate($group);
+
         // handle parenting
         if ($request->has('parent_id'))
         {
             $parent = File::findOrFail($request->get('parent_id'));
-            $file->parent_id = $parent->id;
+            $parent->addChild($file);
         }
 
-        // add group
-        $file->group()->associate($group);
+
 
         // add user
         $file->user()->associate(Auth::user());

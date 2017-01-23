@@ -23,6 +23,7 @@ return [
     'settings_intro'                    => 'Here you can choose if you want to receive news from this group by email. You will never receive more mails than what you choose. Depending of your involvement.',
     'settings_updated'                  => 'Settings updated',
     'user_already_invited'              => 'User already invited',
+    'users_has_been_added'              => 'Users Has Been Added',
     'users_has_been_invited'            => 'Users have been invited',
     'welcome'                           => 'Welcome',
     'when_to_receive_notifications'     => 'When receiving news by e-mail to this group?',

@@ -23,6 +23,7 @@ return [
     'settings_intro'                    => 'Choisissez si vous souhaitez recevoir des nouvelles du groupe par email. C\'est très utile, nous vous conseillons d\'activer cette option. Vous ne recevrez pas plus de mails que demandé.',
     'settings_updated'                  => 'Préférences mises à jour',
     'user_already_invited'              => 'Utilisateur déjà invité',
+    'users_has_been_added'              => 'Les utilisateurs ont été ajoutés',
     'users_has_been_invited'            => 'Utilisateur invité',
     'welcome'                           => 'Bienvenue dans ce groupe',
     'when_to_receive_notifications'     => 'Quand recevoir des nouvelles par mail de ce groupe?',
