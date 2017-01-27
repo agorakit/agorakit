@@ -42,7 +42,7 @@
 
                             {!! Form::open(['action'=> ['MembershipController@removeUser', $group, $user], 'method'=>'DELETE','class'=>'form-horizontal','role'=>'form','onsubmit' => 'return confirm("are you sure ?")'])!!}
                             <button type="submit" name="button" class="btn btn-warning btn-sm">
-                                <i class="fa fa-trash-o"></i>
+                                <i class="fa fa-times"></i>
                             </button>
                             {!! Form::close() !!}
 

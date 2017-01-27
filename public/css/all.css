@@ -187,9 +187,11 @@ border: 1px solid white;
 
 .label
 {
+    font-size: 8px;
     border-radius: 2px;
     margin-bottom: 2px;
-    line-height: 2.3em;
+    /*line-height: 2.6em;*/
+    padding-right: 5px;
 }
 
 .label a

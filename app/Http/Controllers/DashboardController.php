@@ -206,6 +206,14 @@ class DashboardController extends Controller
     }
 
 
+    public function groups()
+    {
+        $groups = \App\Group::with('membership')->orderBy('name')->paginate(50);
+        return view('dashboard.groups')->with('groups', $groups);
+    }
+
+
+
     /**
     * Renders a map of all users (curently)
     */

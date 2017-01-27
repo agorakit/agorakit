@@ -99,7 +99,7 @@ Route::group(['middleware' => ['web']], function () {
     */
 
     // application homepage, lists all groups on the server
-    Route::get('groups', 'DashboardController@index');
+    Route::get('groups', 'DashboardController@groups');
     Route::get('groups/create', 'GroupController@create');
     Route::post('groups/create', 'GroupController@store');
 
