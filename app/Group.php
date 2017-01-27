@@ -79,9 +79,17 @@ class Group extends Model
     */
     public function membership()
     {
-        return $this->belongsToMany('App\User', 'membership')
-        ->where('user_id', "=", \Auth::user()->id)
-        ->withPivot('membership');
+        if (\Auth::check())
+        {
+            return $this->belongsToMany('App\User', 'membership')
+            ->where('user_id', "=", \Auth::user()->id)
+            ->withPivot('membership');
+        }
+        else
+        {
+            return $this->belongsToMany('App\User', 'membership')
+            ->withPivot('membership');
+        }
     }
 
 
