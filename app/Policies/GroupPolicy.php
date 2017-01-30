@@ -135,6 +135,12 @@ class GroupPolicy
     }
 
 
+    public function addAdmin(User $user, Group $group)
+    {
+        return $user->isAdmin();
+    }
+
+
     public function join(User $user, Group $group)
     {
         // if group is open anyone can join, else it's invite only

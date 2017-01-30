@@ -9,7 +9,7 @@ class Membership extends Model
 {
     use RevisionableTrait;
 
-    
+
     protected $table = 'membership';
     public $timestamps = true;
     protected $fillable = ['group_id', 'user_id', 'membership'];
@@ -23,6 +23,9 @@ class Membership extends Model
 
 
     // Membership levels
+
+    // active member
+    const ADMIN = 100;
 
     // active member
     const MEMBER = 20;

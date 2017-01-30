@@ -28,7 +28,7 @@ class UserController extends Controller {
     */
     public function index($group_id)
     {
-        $group = \App\Group::with('users')->findOrFail($group_id);
+        $group = \App\Group::with('users.memberships')->findOrFail($group_id);
         $users = $group->users()->orderBy('name', 'asc')->paginate(25);
 
         return view('users.index')

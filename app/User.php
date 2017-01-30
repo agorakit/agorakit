@@ -93,12 +93,28 @@ class User extends Authenticatable
     {
         $membership = \App\Membership::where('user_id', '=', $this->id)->where('group_id', '=', $group->id)->first();
 
-        if ($membership && $membership->membership == \App\Membership::MEMBER)
+        if ($membership && $membership->membership >= \App\Membership::MEMBER)
         {
             return true;
         }
         return false;
     }
+
+    /**
+    * Returns true if the user is admin of $group
+    */
+    public function isAdminOf(Group $group)
+    {
+        //$membership = \App\Membership::where('user_id', '=', $this->id)->where('group_id', '=', $group->id)->first();
+        // the following might save us n+1 query problem later :
+        $membership = $this->memberships()->where('group_id', '=', $group->id)->first();
+        if ($membership && $membership->membership == \App\Membership::ADMIN)
+        {
+            return true;
+        }
+        return false;
+    }
+
 
     /**
     * Returns the current preference $key for the user, $default if not set

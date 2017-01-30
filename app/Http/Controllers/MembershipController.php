@@ -172,6 +172,35 @@ class MembershipController extends Controller
     }
 
 
+    /**
+    * Set a member of a group to admin (admin feature)
+    */
+    public function addAdminUser(Request $request, Group $group, User $user)
+    {
+        $this->authorize('add-admin', $group);
+
+        $membership = \App\Membership::where(['user_id' => $user->id, 'group_id' => $group->id])->firstOrFail();
+        $membership->membership = \App\Membership::ADMIN;
+        $membership->save();
+        flash()->info(trans('messages.user_made_admin_successfuly') . ' : ' . $user->name);
+        return redirect()->action('UserController@index', $group);
+    }
+
+
+    /**
+    * Set a member of a group to admin (admin feature)
+    */
+    public function removeAdminUser(Request $request, Group $group, User $user)
+    {
+        $this->authorize('remove-admin', $group);
+
+        $membership = \App\Membership::where(['user_id' => $user->id, 'group_id' => $group->id])->firstOrFail();
+        $membership->membership = \App\Membership::MEMBER;
+        $membership->save();
+        flash()->info(trans('messages.user_made_member_successfuly') . ' : ' . $user->name);
+        return redirect()->action('UserController@index', $group);
+    }
+
 
     /**
     * Show a settings screen for a specific group. Allows a user to join, leave, set subscribe settings.
