@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class AdminUserController extends Controller
+class UserAdminController extends Controller
 {
     /**
      * Display a listing of the resource.

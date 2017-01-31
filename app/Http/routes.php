@@ -123,15 +123,18 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('groups/{group}/leave', 'MembershipController@leaveForm');
     Route::post('groups/{group}/leave', 'MembershipController@leave');
 
-    Route::get('groups/{group}/users/add', 'MembershipController@addUserForm');
-    Route::post('groups/{group}/users/add', 'MembershipController@addUser');
 
-    Route::get('groups/{group}/users/{user}/admin', 'MembershipController@adminForm');
+    // membership admins
 
-    Route::delete('groups/{group}/users/delete/{user}', 'MembershipController@removeUser');
+    Route::get('groups/{group}/users/add', 'MembershipAdminController@addUserForm');
+    Route::post('groups/{group}/users/add', 'MembershipAdminController@addUser');
 
-    Route::post('groups/{group}/users/{user}/addadmin', 'MembershipController@addAdminUser');
-    Route::delete('groups/{group}/users/{user}/removeadmin', 'MembershipController@removeAdminUser');
+    Route::get('groups/{group}/users/{user}/admin', 'MembershipAdminController@editUserForm');
+
+    Route::delete('groups/{group}/users/delete/{user}', 'MembershipAdminController@removeUser');
+
+    Route::post('groups/{group}/users/{user}/admin/add', 'MembershipAdminController@addAdminUser');
+    Route::delete('groups/{group}/users/{user}/admin/delete', 'MembershipAdminController@removeAdminUser');
 
 
     // in the case of closed group, we show an howto join message
@@ -256,8 +259,8 @@ Route::group(['middleware' => ['web']], function () {
 
     /***************** ADMIN STUFF **************/
     /*
-    Altough we want as little adimn so called "rights" or "power" some stuff must be handled by a small group of trusted people like:
-    - group creation
+    Altough we want as little admin so called "rights" or "power" some stuff must be handled by a small group of trusted people like:
+    - group creation (that is even questionable, and not yet the case - we want self service)
     - homepage introduction text
     */
 
@@ -267,7 +270,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('admin/settings', 'SettingsController@settings');
         Route::post('admin/settings', 'SettingsController@update');
 
-        Route::resource('admin/user', 'AdminUserController');
+        Route::resource('admin/user', 'UserAdminController');
 
     });
 

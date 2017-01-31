@@ -1,22 +1,22 @@
 @extends('app')
 
 @section('css')
-{!! Html::style('/packages/selectize/css/selectize.bootstrap3.css') !!}
+    {!! Html::style('/packages/selectize/css/selectize.bootstrap3.css') !!}
 @stop
 
 @section('js')
-{!! Html::script('/packages/selectize/js/standalone/selectize.min.js') !!}
+    {!! Html::script('/packages/selectize/js/standalone/selectize.min.js') !!}
 @stop
 
 
 @section('footer')
-<script>
-$( document ).ready(function() {
-  $('#users').selectize({
-         maxItems: null
+    <script>
+    $( document ).ready(function() {
+        $('#users').selectize({
+            maxItems: null
+        });
     });
-});
-</script>
+    </script>
 @stop
 
 
@@ -33,7 +33,7 @@ $( document ).ready(function() {
         </p>
 
 
-        {!! Form::open(array('action' => ['MembershipController@addUser', $group])) !!}
+        {!! Form::open(array('action' => ['MembershipAdminController@addUser', $group])) !!}
 
         <div class="form-group">
             {!! Form::label('users', trans('membership.users_to_add')) !!}

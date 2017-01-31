@@ -35,6 +35,7 @@ return [
     'all_groups'                                        => 'Alle groepen',
     'all_the_groups_welcome'                            => 'U vindt hier alle doelgroepen op deze server',
     'apply'                                             => 'Toepassing',
+    'are_you_sure'                                      => 'Bent u zeker ?',
     'author'                                            => 'Auteur',
     'back_to'                                           => 'Terugkeren naar',
     'because_you_asked_for_it'                          => 'omdat u het heeft aangevraagd op de hoogte gehouden worden',

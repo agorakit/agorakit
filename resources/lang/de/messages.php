@@ -35,6 +35,7 @@ return [
     'all_groups'                                        => 'Alle Gruppen',
     'all_the_groups_welcome'                            => 'Hier finden Sie alle Gruppen, die auf diesem Server zugänglich sind',
     'apply'                                             => 'Bewerben',
+    'are_you_sure'                                      => 'Sind Sie sicher ?',
     'author'                                            => 'Autor',
     'back_to'                                           => 'Zurück',
     'because_you_asked_for_it'                          => 'Weil Sie es angefordert haben',

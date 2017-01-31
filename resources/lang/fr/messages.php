@@ -39,6 +39,7 @@ TEXT
     'all_groups'                                        => 'Tous les groupes',
     'all_the_groups_welcome'                            => 'Vous trouverez ici tous les groupes disponibles sur ce serveur',
     'apply'                                             => 'Appliquer',
+    'are_you_sure'                                      => 'Êtes-vous sûr ?',
     'author'                                            => 'Auteur',
     'back_to'                                           => 'Retour à',
     'because_you_asked_for_it'                          => 'parceque vous vous avez demandé à être tenu(e) au courant',

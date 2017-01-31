@@ -35,6 +35,7 @@ return [
     'all_groups'                                        => 'All groups',
     'all_the_groups_welcome'                            => 'You will find here all the groups available on this server',
     'apply'                                             => 'Apply',
+    'are_you_sure'                                      => 'Are you sure ?',
     'author'                                            => 'Author',
     'back_to'                                           => 'Back to',
     'because_you_asked_for_it'                          => 'Because you asked for it',
