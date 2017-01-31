@@ -132,7 +132,7 @@ class Group extends Model
         if (\Auth::check())
         {
             $member = $this->membership->first();
-            if ($member && $member->pivot->membership == \App\Membership::MEMBER)
+            if ($member && $member->pivot->membership >= \App\Membership::MEMBER)
             {
                 return true;
             }

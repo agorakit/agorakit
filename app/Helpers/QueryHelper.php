@@ -43,12 +43,12 @@ class QueryHelper
         {
             $total = DB::select('select sum(total_comments) as count from discussions where discussions.group_id in
             (select id from groups where groups.id in
-            (select group_id from membership where user_id = ? and membership.membership = ?)
+            (select group_id from membership where user_id = ? and membership.membership >= ?)
             )', [Auth::user()->id, \App\Membership::MEMBER]);
 
             $read = DB::select('select sum(read_comments) as count from user_read_discussion where user_id = ? and discussion_id in
             (select id from discussions where group_id in
-            (select group_id from membership where user_id = ? and membership.membership = ?)
+            (select group_id from membership where user_id = ? and membership.membership >= ?)
             )
             ', [Auth::user()->id, Auth::user()->id, \App\Membership::MEMBER]);
 
@@ -75,7 +75,7 @@ class QueryHelper
             select *, (select read_comments from user_read_discussion where discussion_id = discussions.id and user_id = ?) as read_comments
             from discussions where discussions.group_id in
             (select id from groups where groups.id in
-            (select group_id from membership where user_id = ? and membership.membership = ?)
+            (select group_id from membership where user_id = ? and membership.membership >= ?)
             )
             ) as discussions
 
@@ -121,7 +121,7 @@ class QueryHelper
     {
 
         $users = \App\User::hydrateRaw('select * from users where id in
-        (select user_id from membership where group_id = :group_id and created_at > :since and membership = :membership and user_id <> :user_id)
+        (select user_id from membership where group_id = :group_id and created_at > :since and membership >= :membership and user_id <> :user_id)
 
         ', ['user_id' => $user_id, 'group_id' => $group_id, 'since' => $since, 'membership' => \App\Membership::MEMBER]);
 
@@ -143,7 +143,7 @@ class QueryHelper
         select * from
         (select *, date_add(notified_at, interval notification_interval minute) as notify from membership
         where notification_interval > 0
-        and membership = :membership) as memberships
+        and membership >= :membership) as memberships
         where notify < :now or notify is null
         ', ['now' => Carbon::now(), 'membership' => \App\Membership::MEMBER] );
 

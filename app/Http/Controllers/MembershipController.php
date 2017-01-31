@@ -129,7 +129,7 @@ class MembershipController extends Controller
     {
         // load or create membership for this group and user combination
         $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
-        $membership->membership = \App\Membership::MEMBER;
+        //$membership->membership = \App\Membership::MEMBER; // Why, but why ?
         $membership->notification_interval = $this->intervalToMinutes($request->get('notifications'));
         $membership->save();
 

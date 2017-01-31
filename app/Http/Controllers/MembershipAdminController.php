@@ -25,7 +25,7 @@ class MembershipAdminController extends Controller
     public function addUserForm(Request $request, Group $group)
     {
 
-        $this->authorize('add-member', $group);
+        $this->authorize('edit-membership', $group);
 
         // load a list of users not yet in this group
         $members = $group->users;
@@ -46,7 +46,7 @@ class MembershipAdminController extends Controller
     */
     public function addUser(Request $request, Group $group)
     {
-        $this->authorize('add-member', $group);
+        $this->authorize('edit-membership', $group);
 
         if ($request->has('users'))
         {
@@ -76,7 +76,7 @@ class MembershipAdminController extends Controller
     */
     public function removeUser(Request $request, Group $group, User $user)
     {
-        $this->authorize('remove-member', $group);
+        $this->authorize('edit-membership', $group);
         $membership = \App\Membership::where(['user_id' => $user->id, 'group_id' => $group->id])->firstOrFail();
         $membership->delete();
         flash()->info(trans('messages.user_removed_successfuly') . ' : ' . $user->name);
@@ -86,7 +86,7 @@ class MembershipAdminController extends Controller
 
     public function editUserForm(Request $request, Group $group, User $user)
     {
-        $this->authorize('edit-member', $group);
+        $this->authorize('edit-membership', $group);
 
         return view('membership.admin')
         ->with('group', $group)
@@ -101,7 +101,7 @@ class MembershipAdminController extends Controller
     */
     public function addAdminUser(Request $request, Group $group, User $user)
     {
-        $this->authorize('add-admin', $group);
+        $this->authorize('edit-membership', $group);
 
         $membership = \App\Membership::where(['user_id' => $user->id, 'group_id' => $group->id])->firstOrFail();
         $membership->membership = \App\Membership::ADMIN;
@@ -116,7 +116,7 @@ class MembershipAdminController extends Controller
     */
     public function removeAdminUser(Request $request, Group $group, User $user)
     {
-        $this->authorize('remove-admin', $group);
+        $this->authorize('edit-membership', $group);
 
         $membership = \App\Membership::where(['user_id' => $user->id, 'group_id' => $group->id])->firstOrFail();
         $membership->membership = \App\Membership::MEMBER;

@@ -102,6 +102,7 @@ class User extends Authenticatable
 
     /**
     * Returns true if the user is admin of $group
+    * TODO : candidate for refactoring, generates a lot of n+1 slowness : Membership could be serialized in a field of the user DB and be readily available all the time
     */
     public function isAdminOf(Group $group)
     {
@@ -163,7 +164,7 @@ class User extends Authenticatable
     */
     public function groups()
     {
-        return $this->belongsToMany('App\Group', 'membership')->where('membership.membership', \App\Membership::MEMBER)->orderBy('name')->withTimestamps();
+        return $this->belongsToMany('App\Group', 'membership')->where('membership.membership', '>=', \App\Membership::MEMBER)->orderBy('name')->withTimestamps();
     }
 
     public function memberships()

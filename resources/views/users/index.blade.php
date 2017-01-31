@@ -12,7 +12,7 @@
                 <a class="btn btn-primary btn-xs" href="{{ action('InviteController@invite', $group->id ) }}"><i class="fa fa-plus"></i> {{trans('membership.invite_one_button')}}</a>
             @endcan
 
-            @can('add-members', $group)
+            @can('edit-membership', $group)
                 <a class="btn btn-warning btn-xs" href="{{ action('MembershipAdminController@addUserForm', $group->id ) }}"><i class="fa fa-plus"></i> {{trans('membership.directly_add_users_button')}}</a>
             @endcan
 

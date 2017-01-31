@@ -33,17 +33,13 @@ class GroupPolicy
 
     public function delete(User $user, Group $group)
     {
-        if ($user->isAdmin())
-        {
-            return true;
-        }
+        return ($user->isAdminOf($group) || $user->isAdmin());
     }
 
     /**
     * Determine if the given post can be updated by the user.
     *
     * @param  \App\User  $user
-    * @param  \App\Post  $post
     * @return bool
     */
     public function update(User $user, Group $group)
@@ -110,7 +106,7 @@ class GroupPolicy
 
     public function changeGroupType(User $user, Group $group)
     {
-        return $user->isAdmin();
+        return ($user->isAdminOf($group) || $user->isAdmin());
     }
 
 
@@ -125,18 +121,7 @@ class GroupPolicy
 
     public function editMembership(User $user, Group $group)
     {
-        if ($user->isAdmin())
-        {
-            return true;
-        }
-
-        if ($user->isAdminOf($group))
-        {
-            return true;
-        }
-
-        return false;
-
+        return ($user->isAdminOf($group) || $user->isAdmin());
     }
 
 
