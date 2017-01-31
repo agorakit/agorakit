@@ -58,7 +58,7 @@ class UserTest extends TestCase
         ->type('123456', 'password')
         ->type('123456', 'password_confirmation')
         ->press('Register')
-        ->seePageIs('');
+        ->see('Mobilizator');
 
          $this->seeInDatabase('users', ['email' => 'roberto@example.com']);
 
@@ -112,7 +112,8 @@ class UserTest extends TestCase
         ->type('2016-01-01 11:00', 'start')
         ->type('2016-01-01 15:00', 'stop')
         ->press('Create')
-        ->see('Test discussion');
+        ->seeInDatabase('actions', ['name' => 'Test action'])
+        ->see('Agenda of this group');
     }
 
 
@@ -139,7 +140,7 @@ class UserTest extends TestCase
         ->type('123456', 'password')
         ->type('123456', 'password_confirmation')
         ->press('Register')
-        ->seePageIs('');
+        ->see('Mobilizator');
 
          $this->seeInDatabase('users', ['email' => 'newbie@example.com']);
     }
@@ -152,7 +153,7 @@ class UserTest extends TestCase
         $user = App\User::where('email', 'newbie@example.com')->first();
         $user->confirmEmail();
 
-        
+
         $this->actingAs($user)
         ->visit('/groups/' . $group->id . '/join')
         ->see(trans('messages.not_allowed'));

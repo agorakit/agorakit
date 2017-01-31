@@ -18,7 +18,7 @@
   @include('actions.form')
 
   <div class="form-group">
-    {!! Form::submit(trans('action.create_one_button'), ['class' => 'btn btn-primary form-control']) !!}
+    {!! Form::submit(trans('messages.create'), ['class' => 'btn btn-primary form-control']) !!}
   </div>
 
 
