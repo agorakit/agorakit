@@ -28,11 +28,13 @@ class UserController extends Controller {
     */
     public function index($group_id)
     {
-        $group = \App\Group::with('users.memberships')->findOrFail($group_id);
-        $users = $group->users()->orderBy('name', 'asc')->paginate(25);
+        $group = \App\Group::findOrFail($group_id);
+        $users = $group->users()->where('membership', \App\Membership::MEMBER)->orderBy('name', 'asc')->paginate(25);
+        $admins = $group->users()->where('membership', \App\Membership::ADMIN)->orderBy('name', 'asc')->get();
 
         return view('users.index')
         ->with('users', $users)
+        ->with('admins', $admins)
         ->with('group', $group)
         ->with('tab', 'users');
     }

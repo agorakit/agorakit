@@ -63,7 +63,7 @@ class Group extends Model
     */
     public function users()
     {
-        return $this->belongsToMany('App\User', 'membership')->withTimestamps();
+        return $this->belongsToMany('App\User', 'membership')->withTimestamps()->withPivot('membership');
     }
 
     /**

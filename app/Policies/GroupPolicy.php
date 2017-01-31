@@ -123,22 +123,23 @@ class GroupPolicy
     }
 
 
-    public function addMember(User $user, Group $group)
+    public function editMembership(User $user, Group $group)
     {
-        return $user->isAdmin();
+        if ($user->isAdmin())
+        {
+            return true;
+        }
+
+        if ($user->isAdminOf($group))
+        {
+            return true;
+        }
+
+        return false;
+
     }
 
 
-    public function removeMember(User $user, Group $group)
-    {
-        return $user->isAdmin();
-    }
-
-
-    public function addAdmin(User $user, Group $group)
-    {
-        return $user->isAdmin();
-    }
 
 
     public function join(User $user, Group $group)

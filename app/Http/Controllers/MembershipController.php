@@ -172,6 +172,18 @@ class MembershipController extends Controller
     }
 
 
+    public function adminForm(Request $request, Group $group, User $user)
+    {
+        $this->authorize('edit-member', $group);
+
+        return view('membership.admin')
+        ->with('group', $group)
+        ->with('user', $user)
+        ->with('tab', 'users');
+
+    }
+
+
     /**
     * Set a member of a group to admin (admin feature)
     */
