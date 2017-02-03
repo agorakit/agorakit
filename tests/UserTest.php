@@ -146,20 +146,6 @@ class UserTest extends TestCase
     }
 
 
-    public function testNewbieCantJoinPrivateGroup()
-    {
-        $group = App\Group::where('name', 'Private test group')->first();
-
-        $user = App\User::where('email', 'newbie@example.com')->first();
-        $user->confirmEmail();
-
-
-        $this->actingAs($user)
-        ->visit('/groups/' . $group->id . '/join')
-        ->see(trans('messages.not_allowed'));
-    }
-
-
 
     public function testNewbieCanJoinOpenGroup()
     {
@@ -173,6 +159,20 @@ class UserTest extends TestCase
         ->press('Join')
         ->see('Welcome');
     }
+
+    public function testNewbieCantJoinPrivateGroup()
+    {
+        $group = App\Group::where('name', 'Private test group')->first();
+
+        $user = App\User::where('email', 'newbie@example.com')->first();
+        $user->confirmEmail();
+
+
+        $this->actingAs($user)
+        ->visit('/groups/' . $group->id . '/join')
+        ->see(trans('messages.not_allowed'));
+    }
+
 
 
     public function testNewbieCanCreateGroup()

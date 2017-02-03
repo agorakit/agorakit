@@ -17,7 +17,7 @@
 
 
     <!-- mobilizator specific css-->
-    {!! Html::style('/css/all.css?v6') !!}
+    {!! Html::style('/css/all.css?v7') !!}
 
 
     <!-- head -->

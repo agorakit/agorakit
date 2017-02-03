@@ -40,6 +40,12 @@ class DashboardController extends Controller
                 $my_groups_id[] = $the_group->id;
             }
 
+            // if user is not subscribed to any group, we redirect to group list homepage instead.
+            if ($my_groups->count() == 0)
+            {
+                return redirect('groups');
+            }
+
 
             $my_discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group')
             ->whereIn('group_id', $my_groups_id)
@@ -84,47 +90,6 @@ class DashboardController extends Controller
 
 
 
-    public function my()
-    {
-        $groups = \App\Group::with('membership')->orderBy('name')->paginate(50);
-
-
-        $my_groups = Auth::user()->groups()->orderBy('name')->get();
-        $my_groups_id = false;
-        // using this array we can adjust the queries after to only include stuff the user has
-        // might be a good idea to find a clever way to build this array of groups id :
-        foreach ($my_groups as $the_group)
-        {
-            $my_groups_id[] = $the_group->id;
-        }
-
-
-        $my_discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group')
-        ->whereIn('group_id', $my_groups_id)
-        ->orderBy('updated_at', 'desc')->paginate(10);
-
-        $my_actions = \App\Action::with('user', 'group')
-        ->whereIn('group_id', $my_groups_id)
-        ->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->paginate(10);
-
-
-        $other_discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group')
-        ->whereNotIn('group_id', $my_groups_id)
-        ->orderBy('updated_at', 'desc')->paginate(10);
-
-        $other_actions = \App\Action::with('user', 'group')
-        ->whereNotIn('group_id', $my_groups_id)
-        ->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->paginate(10);
-
-        return view('dashboard.my')
-        ->with('groups', $groups)
-        ->with('my_groups', $my_groups)
-        ->with('my_discussions', $my_discussions)
-        ->with('my_actions', $my_actions)
-        ->with('other_actions', $other_actions)
-        ->with('other_discussions', $other_discussions);
-    }
-
     /**
     * Generates a list of unread discussions.
     */
@@ -141,7 +106,7 @@ class DashboardController extends Controller
         }
 
         $discussions = \App\Discussion::with('userReadDiscussion', 'group')
-        ->whereIn('group_id', $my_groups_id)
+        //->whereIn('group_id', $my_groups_id)
         ->orderBy('updated_at', 'desc')->paginate(25);
 
 

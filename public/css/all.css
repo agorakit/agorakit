@@ -256,7 +256,6 @@ border: 1px solid white;
 
 
 
-
 /***************************** COMMENTS ***************************************/
 
 .comment {
@@ -310,6 +309,7 @@ table.special td.content
 
 span.summary {
     color: gray;
+    overflow: hidden;
 }
 
 
@@ -320,6 +320,41 @@ span.group-name {
 
 table.special .name {
     font-weight: 700;
+}
+
+table.special
+{
+    width: 100%;
+}
+
+
+th.avatar, td.avatar
+{
+    width: 50px;
+}
+
+th.summary
+{
+    /*width: 100%;*/
+}
+
+th.date
+{
+    width: 6.5em;
+}
+
+td.date
+{
+    font-size: 0.9em;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+
+
+th.unread, td.unread
+{
+    width: 6em;
 }
 
 /************************** DISCUSSIONS ***************************************/

@@ -62,7 +62,7 @@ function safe_html($content)
 
 
 /**
-* returns the value of $name setting as stored in DB // TODO refactor
+* returns the value of $name setting as stored in DB
 */
 function setting($name, $default = false)
 {

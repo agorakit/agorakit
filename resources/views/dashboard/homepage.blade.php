@@ -80,29 +80,32 @@
                             <table class="table table-hover special">
                                 <thead>
                                     <tr>
-                                        <th style="width: 75%">{{ trans('messages.title') }}</th>
-                                        <th>{{ trans('messages.date') }}</th>
-                                        <th>{{ trans('messages.to_read') }}</th>
+                                        <th class="avatar"></th>
+                                        <th class="summary"></th>
+                                        <th class="date"></th>
+                                        <th class="unread"></th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    @foreach( $my_discussions as $discussion )
+                                    @forelse( $my_discussions as $discussion )
                                         <tr>
+
+                                            <td class="avatar"><span class="avatar"><img src="{{$discussion->user->avatar()}}" class="img-circle"/></span></td>
                                             <td class="content">
                                                 <a href="{{ action('DiscussionController@show', [$discussion->group_id, $discussion->id]) }}">
                                                     <span class="name">{{ $discussion->name }}</span>
-                                                    <span class="summary">{{ summary($discussion->body) }}</span>
+                                                    <span class="summary">{{summary($discussion->body) }}</span>
+                                                    <br/>
                                                 </a>
-                                                <br/>
                                                 <span class="group-name"><a href="{{ action('GroupController@show', [$discussion->group_id]) }}">{{ $discussion->group->name }}</a></span>
                                             </td>
 
-                                            <td class="small">
+                                            <td class="date">
                                                 {{ $discussion->updated_at->diffForHumans() }}
                                             </td>
 
-                                            <td class="small">
+                                            <td>
                                                 @if ($discussion->unReadCount() > 0)
                                                     <i class="fa fa-comment"></i>
                                                     <span class="badge">{{ $discussion->unReadCount() }}</span>
@@ -110,8 +113,9 @@
                                             </td>
 
                                         </tr>
-                                    @endforeach
-
+                                    @empty
+                                        {{trans('messages.nothing_yet')}}
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
@@ -170,29 +174,32 @@
                         <table class="table table-hover special">
                             <thead>
                                 <tr>
-                                    <th style="width: 75%">{{ trans('messages.title') }}</th>
-                                    <th>{{ trans('messages.date') }}</th>
-                                    <th>{{ trans('messages.to_read') }}</th>
+                                    <th class="avatar"></th>
+                                    <th class="summary"></th>
+                                    <th class="date"></th>
+                                    <th class="unread"></th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                @foreach( $other_discussions as $discussion )
+                                @forelse( $other_discussions as $discussion )
                                     <tr>
+
+                                        <td class="avatar"><span class="avatar"><img src="{{$discussion->user->avatar()}}" class="img-circle"/></span></td>
                                         <td class="content">
                                             <a href="{{ action('DiscussionController@show', [$discussion->group_id, $discussion->id]) }}">
                                                 <span class="name">{{ $discussion->name }}</span>
-                                                <span class="summary">{{ summary($discussion->body) }}</span>
+                                                <span class="summary">{{summary($discussion->body) }}</span>
+                                                <br/>
                                             </a>
-                                            <br/>
                                             <span class="group-name"><a href="{{ action('GroupController@show', [$discussion->group_id]) }}">{{ $discussion->group->name }}</a></span>
                                         </td>
 
-                                        <td class="small">
+                                        <td class="date">
                                             {{ $discussion->updated_at->diffForHumans() }}
                                         </td>
 
-                                        <td class="small">
+                                        <td>
                                             @if ($discussion->unReadCount() > 0)
                                                 <i class="fa fa-comment"></i>
                                                 <span class="badge">{{ $discussion->unReadCount() }}</span>
@@ -200,7 +207,9 @@
                                         </td>
 
                                     </tr>
-                                @endforeach
+                                @empty
+                                    {{trans('messages.nothing_yet')}}
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
