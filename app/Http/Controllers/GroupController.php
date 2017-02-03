@@ -74,10 +74,10 @@ class GroupController extends Controller
             Image::make($request->file('cover'))->fit(300,200)->save(storage_path() . '/app/groups/' . $group->id . '/thumbnail.jpg');
         }
 
-        // make the current user a member of the group
+        // make the current user an admin of the group
         $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
         $membership->notification_interval = 60 * 24; // default to daily interval
-        $membership->membership = \App\Membership::MEMBER;
+        $membership->membership = \App\Membership::ADMIN;
         $membership->save();
 
         return redirect()->action('MembershipController@settings', [$group->id]);

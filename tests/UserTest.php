@@ -175,4 +175,41 @@ class UserTest extends TestCase
     }
 
 
+    public function testNewbieCanCreateGroup()
+    {
+      $user = App\User::where('email', 'newbie@example.com')->first();
+
+      $this->actingAs($user)
+      ->visit('groups/create')
+      ->see('Create a new group')
+      ->type('Test group of newbie', 'name')
+      ->type('this is a test group', 'body')
+      ->press('Create the group')
+      ->see('Test group of newbie');
+    }
+
+
+    public function testRobertoIsAdminOfTestGroup()
+    {
+      $user = App\User::where('email', 'roberto@example.com')->first();
+      $group = App\Group::where('name', 'Test group')->first();
+      $this->assertTrue($user->isAdminOf($group));
+    }
+
+
+    public function testNewbieIsNotAdminOfTestGroup()
+    {
+      $user = App\User::where('email', 'newbie@example.com')->first();
+      $group = App\Group::where('name', 'Test group')->first();
+      $this->assertFalse($user->isAdminOf($group));
+    }
+
+
+    public function testNewbieIsAdminOfTestGroupOfNewbie()
+    {
+      $user = App\User::where('email', 'newbie@example.com')->first();
+      $group = App\Group::where('name', 'Test group of newbie')->first();
+      $this->assertTrue($user->isAdminOf($group));
+    }
+
 }
