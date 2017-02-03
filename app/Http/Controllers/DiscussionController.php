@@ -34,12 +34,12 @@ class DiscussionController extends Controller
     {
         if (\Auth::check())
         {
-            $discussions = $group->discussions()->with('userReadDiscussion', 'user')->orderBy('updated_at', 'desc')->paginate(50);
+            $discussions = $group->discussions()->has('user')->with('userReadDiscussion', 'user')->orderBy('updated_at', 'desc')->paginate(50);
         }
         else // don't load the unread relation, since we don't know who to look for.
         {
 
-            $discussions = $group->discussions()->with('user')->orderBy('updated_at', 'desc')->paginate(50);
+            $discussions = $group->discussions()->has('user')->with('user')->orderBy('updated_at', 'desc')->paginate(50);
         }
 
         return view('discussions.index')

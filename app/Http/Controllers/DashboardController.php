@@ -48,6 +48,7 @@ class DashboardController extends Controller
 
 
             $my_discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group')
+            ->has('user')
             ->whereIn('group_id', $my_groups_id)
             ->orderBy('updated_at', 'desc')->paginate(10);
 
@@ -57,6 +58,7 @@ class DashboardController extends Controller
 
 
             $other_discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group')
+            ->has('user')
             ->whereNotIn('group_id', $my_groups_id)
             ->orderBy('updated_at', 'desc')->paginate(10);
 
