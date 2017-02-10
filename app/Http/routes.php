@@ -255,6 +255,19 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('search', 'SearchController@index');
 
 
+    // External cron
+    // call/curl/wget yoururl/cron every 5 minutes to have at least email notifiations sent
+    // only use this if laravel scheduler is not supoprted by your hosting provider
+    // this call is rate limited to one attempt each minute
+    Route::group(['middleware' => 'throttle:1'], function () {
+        Route::get('cron', function () {
+            $exitCode = Artisan::call('notifications:send');
+            return $exitCode;
+        });
+    });
+
+
+
 
     /***************** ADMIN STUFF **************/
     /*
