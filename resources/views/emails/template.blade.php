@@ -30,7 +30,7 @@
 
   <body>
 
-  <div class="body" style="max-width: 600px;">
+  <div class="body">
 
       @yield('content')
 

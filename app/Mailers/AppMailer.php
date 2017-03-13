@@ -73,7 +73,7 @@ class AppMailer
             // if we have anything, build the message and send
             // removed that : or count($users) > 0
             // because we don't want to be notified just because there is a new member
-            if (count($discussions) > 0 or count($files) > 0  or ($actions_count) > 0)
+            if (count($discussions) > 0 or count($files) > 0  or (($actions_count) > 0 && count($actions) > 0))
             {
 
                 Mail::send('emails.notification', ['user' => $user, 'group' => $group, 'membership' => $membership, 'discussions' => $discussions,

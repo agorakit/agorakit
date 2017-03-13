@@ -11,7 +11,7 @@
         <h2>{{trans('messages.next_actions')}}</h2>
         @foreach($actions as $action)
             <strong><a href="{{action('ActionController@show', [$group->id, $action->id])}}">{{$action->name}}</a></strong>
-            <p>{{summary($action->body) }}</p>
+            <p>{!!filter($action->body) !!}</p>
             <p>
                 {{$action->start->format('d/m/Y H:i')}}
             </p>
@@ -28,15 +28,19 @@
         @foreach($discussions as $discussion)
             <h3><a href="{{action('DiscussionController@show', [$group->id, $discussion->id])}}">{{$discussion->name}} </a></h3>
             <p>
-                {!! summary($discussion->body, 500) !!} ...
+                @if ($discussion->comments->count() > 0)
+                    {{ summary($discussion->body, 1000) }}
+                @else
+                    {!! filter($discussion->body) !!}
+                @endif
             </p>
 
             @foreach ($discussion->comments as $comment)
                 @if ($comment->created_at > $last_notification)
                     <div style="border:1px solid #aaa; border-radius: 3px; margin-bottom: 1em; margin-left: 1em; padding: 1em">
-                        <p style="font-size: 0.8em;">
+                        <p>
                             <a href="{{ action('DiscussionController@show', [$group->id, $discussion->id]) }}#comment_{{$comment->id}}">{{$comment->user->name}}</a> ({{$comment->created_at->diffForHumans()}}):
-                            {!! summary($comment->body, 3000) !!}
+                            {!! filter($comment->body) !!}
                         </p>
                     </div>
                 @endif
