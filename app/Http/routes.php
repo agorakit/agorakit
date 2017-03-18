@@ -63,6 +63,12 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('users', 'DashboardController@users');
     Route::get('map', 'DashboardController@map');
 
+    /*
+    Feeds (RSS ftw!)
+    ===========================================
+    */
+    Route::get('discussions/feed', 'FeedController@discussions');
+    Route::get('actions/feed', 'FeedController@actions');
 
 
 

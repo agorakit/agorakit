@@ -23,7 +23,8 @@
     "vsch/laravel-translation-manager": "*",
     "iatstuti/laravel-cascade-soft-deletes": "1.0.*",
     "toin0u/geocoder-laravel": "@stable",
-    "lavary/laravel-menu": "^1.6"
+    "lavary/laravel-menu": "^1.6",
+    "suin/php-rss-writer": "^1.5"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",
