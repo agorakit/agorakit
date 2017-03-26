@@ -47,21 +47,16 @@ Route::group(['middleware' => ['web']], function () {
     */
     Route::get('/', 'DashboardController@index');
     Route::get('home', 'DashboardController@index');
-
-
-
-
-
-    /*
-    General unread stuff, summary and dashboard
-    ===========================================
-    */
+    Route::get('presentation', 'DashboardController@presentation');
     Route::get('discussions', 'DashboardController@discussions');
+    Route::get('users', 'DashboardController@users');
+    Route::get('files', 'DashboardController@files');
+    Route::get('map', 'DashboardController@map');
+
     Route::get('agenda', 'DashboardController@agenda');
     Route::get('agenda/json', 'DashboardController@agendaJson');
     Route::get('agenda/ical', 'IcalController@index');
-    Route::get('users', 'DashboardController@users');
-    Route::get('map', 'DashboardController@map');
+
 
     /*
     Feeds (RSS ftw!)

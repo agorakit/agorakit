@@ -4,6 +4,11 @@
     <div class="page_header">
         <h1><a href="{{ action('DashboardController@index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.discussions') }}</h1>
     </div>
+
+
+    @include('dashboard.tabs')
+
+
     <div class="tab_content">
         @if ($discussions)
             <table class="table table-hover special">

@@ -91,28 +91,42 @@ class DashboardController extends Controller
     }
 
 
+    public function presentation()
+    {
+        return view('dashboard.presentation')
+        ->with('tab', 'presentation');
+    }
+
+    public function files()
+    {
+    }
+
+
 
     /**
     * Generates a list of unread discussions.
     */
     public function discussions()
     {
-
-        $my_groups = Auth::user()->groups()->orderBy('name')->get();
-        $my_groups_id = false;
-        // using this array we can adjust the queries after to only include stuff the user has
-        // might be a good idea to find a clever way to build this array of groups id :
-        foreach ($my_groups as $the_group)
+        if (Auth::check())
         {
-            $my_groups_id[] = $the_group->id;
-        }
+            $my_groups = Auth::user()->groups()->orderBy('name')->get();
+            $my_groups_id = false;
+            // using this array we can adjust the queries after to only include stuff the user has
+            // might be a good idea to find a clever way to build this array of groups id :
+            foreach ($my_groups as $the_group)
+            {
+                $my_groups_id[] = $the_group->id;
+            }
 
-        $discussions = \App\Discussion::with('userReadDiscussion', 'group')
-        //->whereIn('group_id', $my_groups_id)
-        ->orderBy('updated_at', 'desc')->paginate(25);
+            $discussions = \App\Discussion::with('userReadDiscussion', 'group', 'user')
+            ->whereIn('group_id', $my_groups_id)
+            ->orderBy('updated_at', 'desc')->paginate(25);
+        }
 
 
         return view('dashboard.discussions')
+        ->with('tab', 'discussions')
         ->with('discussions', $discussions);
     }
 

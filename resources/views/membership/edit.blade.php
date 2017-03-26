@@ -2,7 +2,7 @@
 
 @section('content')
 
-@include('partials.grouptab')
+@include('groups.tabs')
 
 <div class="tab_content">
 

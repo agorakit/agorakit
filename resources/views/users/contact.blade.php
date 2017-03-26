@@ -2,7 +2,7 @@
 
 @section('content')
 
-@include('partials.usertab')
+@include('users.tabs')
 
 <div class="tab_content">
 

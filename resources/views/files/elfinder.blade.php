@@ -45,7 +45,7 @@
 
 
 @section('content')
-    @include('partials.grouptab')
+    @include('groups.tabs')
 
     <div class="tab_content">
         <!-- Element where elFinder will be created (REQUIRED) -->

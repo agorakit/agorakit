@@ -2,7 +2,7 @@
 
 @section('content')
 
-@include('partials.grouptab')
+@include('groups.tabs')
 <div class="tab_content">
   <h1>{{trans('messages.delete_confirm_title')}}</h1>
 
