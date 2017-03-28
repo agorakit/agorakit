@@ -24,7 +24,8 @@
     "iatstuti/laravel-cascade-soft-deletes": "1.0.*",
     "toin0u/geocoder-laravel": "@stable",
     "lavary/laravel-menu": "^1.6",
-    "suin/php-rss-writer": "^1.5"
+    "suin/php-rss-writer": "^1.5",
+    "twbs/bootstrap": "4.0.0-alpha.6"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",
