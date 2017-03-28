@@ -22,10 +22,11 @@
     "rap2hpoutre/laravel-log-viewer": "^0.6.1",
     "vsch/laravel-translation-manager": "*",
     "iatstuti/laravel-cascade-soft-deletes": "1.0.*",
-    "toin0u/geocoder-laravel": "@stable",
+    "toin0u/geocoder-laravel": "^1.0",
     "lavary/laravel-menu": "^1.6",
     "suin/php-rss-writer": "^1.5",
-    "twbs/bootstrap": "4.0.0-alpha.6"
+    "twbs/bootstrap": "4.0.0-alpha.6",
+    "components/jquery": "^3.2"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",
