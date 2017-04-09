@@ -19,6 +19,8 @@
         <p>{{trans('messages.map_info')}}</p>
     </div>
 
+    @include('dashboard.tabs')
+
     <div class="tab_content">
 
         <div id="map"></div>

@@ -6,19 +6,19 @@
 
         @include('partials.invite')
 
-        <h2>
-            {{ trans('messages.members_of_this_group') }}
+
+        <div class="toolbox">
             @can('invite', $group)
-                <a class="btn btn-primary btn-xs" href="{{ action('InviteController@invite', $group->id ) }}"><i class="fa fa-plus"></i> {{trans('membership.invite_one_button')}}</a>
+                <a class="btn btn-primary" href="{{ action('InviteController@invite', $group->id ) }}"><i class="fa fa-plus"></i> {{trans('membership.invite_one_button')}}</a>
             @endcan
 
             @can('edit-membership', $group)
-                <a class="btn btn-warning btn-xs" href="{{ action('MembershipAdminController@addUserForm', $group->id ) }}"><i class="fa fa-plus"></i> {{trans('membership.directly_add_users_button')}}</a>
+                <a class="btn btn-warning" href="{{ action('MembershipAdminController@addUserForm', $group->id ) }}"><i class="fa fa-plus"></i> {{trans('membership.directly_add_users_button')}}</a>
             @endcan
 
-            <a class="btn btn-primary btn-xs" href="{{ action('MapController@map', $group ) }}">{{trans('messages.show_map')}}</a>
-        </h2>
+            <a class="btn btn-primary" href="{{ action('MapController@map', $group ) }}">{{trans('messages.show_map')}}</a>
 
+        </div>
 
         <table class="table table-hover">
             <tr>

@@ -6,11 +6,10 @@
     <title>{{env('APP_NAME')}}</title>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css">
 
     <!-- Font awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- css -->
     @yield('css')
@@ -18,6 +17,8 @@
 
     <!-- mobilizator specific css-->
     {!! Html::style('/css/all.css?v7') !!}
+
+    <!--{!! Html::script('/packages/turbolinks/turbolinks.js') !!}-->
 
 
     <!-- head -->
@@ -28,30 +29,17 @@
 
     @include('partials.nav')
 
-    <div class="container-fluid nav-margin-top">
 
-
-        @if (Auth::guest())
+    <div class="container main-container">
+        <div class="main">
             @include('partials.errors')
             @yield('content')
-        @else
 
-
-            <div class="row">
-                <div class="col-lg-3">
-                    @include('partials.sidebar')
-                </div>
-
-                <div class="col-lg-9">
-                    @include('partials.errors')
-                    @yield('content')
-                </div>
-
-            </div>
-        @endif
-
-        <div class="credits">{{trans('messages.made_with')}} <a href="https://github.com/philippejadin/Mobilizator">Mobilizator</a></div>
+        </div>
     </div>
+
+    <div class="credits">{{trans('messages.made_with')}} <a href="https://github.com/philippejadin/Mobilizator">Mobilizator</a></div>
+
 
 
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>

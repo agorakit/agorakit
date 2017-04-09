@@ -18,10 +18,6 @@
 
     <div class="tab_content">
 
-        <h2>{{trans('messages.map_of_this_group')}}
-        </h2>
-
-
 
         <div id="map"></div>
 

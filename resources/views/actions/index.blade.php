@@ -1,126 +1,128 @@
 @extends('app')
 
 @section('footer')
-<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/lang-all.js"></script>
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/lang-all.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
 
 
 
-<script>
-$(document).ready(function() {
-  $('#calendar').fullCalendar({
-    lang: '{{App::getLocale()}}',
-    events: '{{action('ActionController@indexJson', $group->id)}}',
-    header: {
-      left: 'prev,next',
-      center: 'title',
-      right: 'month,agendaWeek,agendaDay'
-    },
+    <script>
+    $(document).ready(function() {
+        $('#calendar').fullCalendar({
+            lang: '{{App::getLocale()}}',
+            events: '{{action('ActionController@indexJson', $group->id)}}',
+            header: {
+                left: 'prev,next',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
 
-    selectable: true,
-		selectHelper: true,
-    select: function(start, end) {
-				var title = prompt('{{trans('messages.title')}}');
-				var eventData;
-				if (title) {
-					eventData = {
-						title: title,
-						start: start,
-						end: end
-					};
-					$('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-          window.location.href = "{{ action('ActionController@create', $group->id ) }}?start=" + encodeURIComponent(start.format('YYYY-MM-DD HH:mm')) + "&stop=" + encodeURIComponent(end.format('YYYY-MM-DD HH:mm')) + "&title=" + encodeURIComponent(title);
-				}
-        $('#calendar').fullCalendar('unselect');
-			},
+            selectable: true,
+            selectHelper: true,
+            select: function(start, end) {
+                var title = prompt('{{trans('messages.title')}}');
+                var eventData;
+                if (title) {
+                    eventData = {
+                        title: title,
+                        start: start,
+                        end: end
+                    };
+                    $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+                    window.location.href = "{{ action('ActionController@create', $group->id ) }}?start=" + encodeURIComponent(start.format('YYYY-MM-DD HH:mm')) + "&stop=" + encodeURIComponent(end.format('YYYY-MM-DD HH:mm')) + "&title=" + encodeURIComponent(title);
+                }
+                $('#calendar').fullCalendar('unselect');
+            },
 
-    eventClick:  function(event, jsEvent, view) {
-      $('#modalTitle').html(event.title);
-      $('#modal-body').html(event.body);
-      $('#modal-location').html(String(event.location));
-      $('#modal-start').html(event.start.format('LLL'));
-      $('#modal-stop').html(event.end.format('LLL'));
-      $('#eventUrl').attr('href',String(event.url));
-      $('#fullCalModal').modal();
-      return false;
-    },
+            eventClick:  function(event, jsEvent, view) {
+                $('#modalTitle').html(event.title);
+                $('#modal-body').html(event.body);
+                $('#modal-location').html(String(event.location));
+                $('#modal-start').html(event.start.format('LLL'));
+                $('#modal-stop').html(event.end.format('LLL'));
+                $('#eventUrl').attr('href',String(event.url));
+                $('#fullCalModal').modal();
+                return false;
+            },
 
-    eventRender: function(event, element)
-    {
-      $(element).tooltip({title: event.summary});
-    }
-  });
-});
-</script>
+            eventRender: function(event, element)
+            {
+                $(element).tooltip({title: event.summary});
+            }
+        });
+    });
+    </script>
 
 @endsection
 
 @section('content')
 
-@include('groups.tabs')
+    @include('groups.tabs')
 
-<div class="tab_content">
+    <div class="tab_content">
 
-  @include('partials.invite')
-
-  <h2>{{trans('action.agenda_of_this_group')}}
-    @can('create-action', $group)
-    <a class="btn btn-primary btn-xs" href="{{ action('ActionController@create', $group->id ) }}">
-      <i class="fa fa-plus"></i> {{trans('action.create_one_button')}}
-    </a>
-    @endcan
-
-  </h2>
+        @include('partials.invite')
 
 
-  <div class="spacer"></div>
+        @can('create-action', $group)
+            <div class="toolbox">
+                <a class="btn btn-primary" href="{{ action('ActionController@create', $group->id ) }}">
+                    <i class="fa fa-plus"></i> {{trans('action.create_one_button')}}
+                </a>
+            </div>
+        @endcan
 
 
 
-  <div id="calendar"></div>
+
+        <div class="spacer"></div>
 
 
-  <p><a href="{{action('IcalController@group', $group->id)}}">Téléchargez le calendrier de ce groupe au format iCal</a></p>
+
+        <div id="calendar"></div>
 
 
-  <div id="fullCalModal" class="modal fade">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-          <h4 id="modalTitle" class="modal-title"></h4>
+        <p><a href="{{action('IcalController@group', $group->id)}}">Téléchargez le calendrier de ce groupe au format iCal</a></p>
+
+
+        <div id="fullCalModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+                        <h4 id="modalTitle" class="modal-title"></h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <p>
+                            <strong>{{trans('messages.description')}}</strong> : <span id="modal-body"></span>
+                        </p>
+
+                        <strong>{{trans('messages.location')}} : </strong><span id="modal-location"></span>
+                        <br/>
+                        <strong>{{trans('messages.start')}} : </strong><span id="modal-start"></span>
+                        <br/>
+                        <strong>{{trans('messages.stop')}} : </strong><span id="modal-stop"></span>
+                        <br/>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <a class="btn btn-primary" id="eventUrl">{{trans('messages.details')}}</a>
+                    </div>
+
+                </div>
+            </div>
         </div>
 
-        <div class="modal-body">
-          <p>
-            <strong>{{trans('messages.description')}}</strong> : <span id="modal-body"></span>
-          </p>
 
-          <strong>{{trans('messages.location')}} : </strong><span id="modal-location"></span>
-          <br/>
-          <strong>{{trans('messages.start')}} : </strong><span id="modal-start"></span>
-          <br/>
-          <strong>{{trans('messages.stop')}} : </strong><span id="modal-stop"></span>
-          <br/>
 
-        </div>
 
-        <div class="modal-footer">
-          <a class="btn btn-primary" id="eventUrl">{{trans('messages.details')}}</a>
-        </div>
 
-      </div>
+
+
     </div>
-  </div>
-
-
-
-
-
-
-
-</div>
 
 @endsection

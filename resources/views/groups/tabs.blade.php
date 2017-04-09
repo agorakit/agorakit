@@ -20,7 +20,7 @@
 
 @if (Auth::check())
 
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-pills center-pills">
 
         <li role="presentation" @if (isset($tab) && ($tab == 'home')) class="active" @endif>
             <a href="{{ action('GroupController@show', $group->id) }}">

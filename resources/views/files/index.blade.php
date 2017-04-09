@@ -13,20 +13,21 @@
 
 
 
+        <div class="toolbox">
         @can('create-file', $group)
-            <a class="btn btn-primary btn-xs" href="{{ action('FileController@create', $group->id ) }}@if (isset($file))?parent_id={{$file->id}}@endif">
+            <a class="btn btn-primary" href="{{ action('FileController@create', $group->id ) }}@if (isset($file))?parent_id={{$file->id}}@endif">
                 <i class="fa fa-file"></i>
                 {{trans('messages.create_file_button')}}
             </a>
         @endcan
 
         @can('create-file', $group)
-            <a class="btn btn-primary btn-xs" href="{{ action('FileController@createFolder', $group ) }}@if (isset($file))?parent_id={{$file->id}}@endif">
+            <a class="btn btn-primary" href="{{ action('FileController@createFolder', $group ) }}@if (isset($file))?parent_id={{$file->id}}@endif">
                 <i class="fa fa-folder-open-o"></i>
                 {{trans('messages.create_folder_button')}}
             </a>
         @endcan
-
+    </div>
 
         <h3>
             @if (isset($file))

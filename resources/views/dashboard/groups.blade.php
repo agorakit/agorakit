@@ -6,8 +6,10 @@
         <h1><a href="{{ action('DashboardController@index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.all_groups') }}</h1>
     </div>
 
+    @include('dashboard.tabs')
+
     <div class="tab_content">
-            
+
         <div class="row">
             @forelse( $groups as $group )
                 <div class="col-xs-6 col-md-3">

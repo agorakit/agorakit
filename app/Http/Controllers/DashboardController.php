@@ -133,13 +133,13 @@ class DashboardController extends Controller
     public function agenda()
     {
         $actions = \App\Action::with('group')->where('start', '>=', Carbon::now())->get();
-        return view('dashboard.agenda')->with('actions', $actions);
+        return view('dashboard.agenda')
+        ->with('tab', 'actions')
+        ->with('actions', $actions);
     }
 
     public function agendaJson(Request $request)
     {
-
-
         // load of actions between start and stop provided by calendar js
         if ($request->has('start') && $request->has('end'))
         {
@@ -153,8 +153,6 @@ class DashboardController extends Controller
 
             $actions = \App\Action::with('group')->orderBy('start', 'asc')->get();
         }
-
-
 
         $event = '';
         $events = '';
@@ -183,14 +181,18 @@ class DashboardController extends Controller
     public function users()
     {
         $users = \App\User::with('groups')->orderBy('name')->paginate(30);
-        return view('dashboard.users')->with('users', $users);
+        return view('dashboard.users')
+        ->with('tab', 'users')
+        ->with('users', $users);
     }
 
 
     public function groups()
     {
         $groups = \App\Group::with('membership')->orderBy('name')->paginate(50);
-        return view('dashboard.groups')->with('groups', $groups);
+        return view('dashboard.groups')
+        ->with('tab', 'groups')
+        ->with('groups', $groups);
     }
 
 
@@ -216,6 +218,7 @@ class DashboardController extends Controller
         ->with('users', $users)
         ->with('actions', $actions)
         ->with('groups', $groups)
+        ->with('tab', 'map')
         ->with('latitude', 50.8503396) // TODO make configurable, curently it's Brussels
         ->with('longitude', 4.3517103);
     }

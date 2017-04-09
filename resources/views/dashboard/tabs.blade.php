@@ -1,4 +1,4 @@
-<ul class="nav nav-tabs">
+<ul class="nav nav-pills">
 
     <li @if (isset($tab) && ($tab == 'presentation')) class="active" @endif>
         <a href="{{ action('DashboardController@presentation') }}">
@@ -6,6 +6,12 @@
         </a>
     </li>
 
+
+    <li @if (isset($tab) && ($tab == 'groups')) class="active" @endif>
+        <a href="{{ action('DashboardController@groups') }}">
+            <i class="fa fa-users"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.groups') }}</span>
+        </a>
+    </li>
 
     <li @if (isset($tab) && ($tab == 'discussions')) class="active" @endif>
         <a href="{{ action('DashboardController@discussions') }}">
@@ -22,13 +28,13 @@
     </li>
 
 
-
+<!--
     <li @if (isset($tab) && ($tab == 'files')) class="active" @endif>
         <a href="{{ action('DashboardController@files') }}">
             <i class="fa fa-file-o"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.files') }}</span>
         </a>
     </li>
-
+-->
 
 
     <li @if (isset($tab) && ($tab == 'users')) class="active" @endif>
@@ -45,3 +51,5 @@
     </li>
 
 </ul>
+
+<div class="spacer"></div>
