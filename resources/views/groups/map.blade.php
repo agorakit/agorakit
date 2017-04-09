@@ -18,6 +18,7 @@
 
     <div class="tab_content">
 
+        <div class="spacer"></div>
 
         <div id="map"></div>
 

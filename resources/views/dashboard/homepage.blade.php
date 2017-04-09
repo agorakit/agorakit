@@ -9,275 +9,74 @@
     </div>
 
 
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
-
-        <li role="presentation" @unless (Auth::check()) class="active" @endunless>
-            <a href="#presentation" aria-controls="presentation" role="tab" data-toggle="tab">
-                <i class="fa fa-info-circle"></i>
-                <span class="hidden-sm hidden-xs">{{ trans('messages.presentation') }}</span>
-            </a>
-        </li>
-
-        <li role="presentation" @if (Auth::check()) class="active" @endif>
-            <a href="#discussions" aria-controls="discussions" role="tab" data-toggle="tab">
-                <i class="fa fa-comments"></i>
-                <span class="hidden-sm hidden-xs">{{ trans('messages.latest_discussions') }}</span>
-            </a>
-        </li>
-        <li role="presentation">
-            <a href="#actions" aria-controls="actions" role="tab" data-toggle="tab">
-                <i class="fa fa-calendar"></i>
-                <span class="hidden-sm hidden-xs">{{ trans('messages.agenda') }}</span>
-            </a>
-        </li>
-
-        @if ($my_groups)
-            <li role="presentation">
-                <a href="#mygroups" aria-controls="groups" role="tab" data-toggle="tab">
-                    <i class="fa fa-cube"></i>
-                    <span class="hidden-sm hidden-xs">{{ trans('messages.my_groups') }}</span>
-                </a>
-            </li>
-        @endif
-
-        <li role="presentation">
-            <a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">
-                <i class="fa fa-cubes"></i>
-                <span class="hidden-sm hidden-xs">{{ trans('messages.all_groups') }}</span>
-            </a>
-        </li>
-
-    </ul>
+    @include('dashboard.tabs')
 
     <div class="tab_content">
 
-        <!-- Tab panes -->
-        <div class="tab-content">
 
-
-            <div role="tabpanel" class="tab-pane @unless (Auth::check()) active @endunless" id="presentation">
-                {!! setting('homepage_presentation', trans('documentation.intro')) !!}
-
-                @if (Auth::check())
-                    <a class="btn btn-primary btn-xs" href="{{action('SettingsController@settings')}}">
-                        <i class="fa fa-pencil"></i> {{trans('messages.modify_intro_text')}}
-                    </a>
-                @endif
-            </div>
+<h2>{{ trans('messages.my_groups') }}</h2>
+        @foreach ($my_groups as $group)
+            <a href="{{action('GroupController@show', $group)}}">{{$group->name}}</a> 
+        @endforeach
 
 
 
-            <div role="tabpanel" class="tab-pane @if (Auth::check()) active @endif" id="discussions">
-
-                <div class="row">
-                    @if (isset($my_discussions))
-                        <div class="col-md-6">
-                            <h2>{{ trans('messages.latest_discussions_my') }}</h2>
+        <div class="row">
+            @if (isset($my_discussions))
+                <div class="col-md-6">
+                    <h2>{{ trans('messages.latest_discussions_my') }}</h2>
 
 
 
-                            <table class="table table-hover special">
-                                <thead>
-                                    <tr>
-                                        <th class="avatar"></th>
-                                        <th class="summary"></th>
-                                        <th class="date"></th>
-                                        <th class="unread"></th>
-                                    </tr>
-                                </thead>
+                    <table class="table table-hover special">
+                        <thead>
+                            <tr>
+                                <th class="avatar"></th>
+                                <th class="summary"></th>
+                                <th class="date"></th>
+                                <th class="unread"></th>
+                            </tr>
+                        </thead>
 
-                                <tbody>
-                                    @forelse( $my_discussions as $discussion )
-                                        <tr>
-
-                                            <td class="avatar"><span class="avatar"><img src="{{$discussion->user->avatar()}}" class="img-circle"/></span></td>
-                                            <td class="content">
-                                                <a href="{{ action('DiscussionController@show', [$discussion->group_id, $discussion->id]) }}">
-                                                    <span class="name">{{ $discussion->name }}</span>
-                                                    <span class="summary">{{summary($discussion->body) }}</span>
-                                                    <br/>
-                                                </a>
-                                                <span class="group-name"><a href="{{ action('GroupController@show', [$discussion->group_id]) }}">{{ $discussion->group->name }}</a></span>
-                                            </td>
-
-                                            <td class="date">
-                                                {{ $discussion->updated_at->diffForHumans() }}
-                                            </td>
-
-                                            <td>
-                                                @if ($discussion->unReadCount() > 0)
-                                                    <i class="fa fa-comment"></i>
-                                                    <span class="badge">{{ $discussion->unReadCount() }}</span>
-                                                @endif
-                                            </td>
-
-                                        </tr>
-                                    @empty
-                                        {{trans('messages.nothing_yet')}}
-                                    @endforelse
-                                </tbody>
-                            </table>
-                        </div>
-                    @endif
-
-                    @if (isset($my_actions))
-                        <div class="col-md-6">
-                            <h2>{{ trans('messages.agenda_my') }}</h2>
-
-
-                            <table class="table table-hover special">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 50%">{{ trans('messages.title') }}</th>
-                                        <th>{{ trans('messages.date') }}</th>
-                                        <th>{{ trans('messages.where') }}</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    @foreach( $my_actions as $action )
-                                        <tr>
-                                            <td class="content">
-                                                <a href="{{ action('ActionController@show', [$action->group_id, $action->id]) }}">
-                                                    <span class="name">{{ $action->name }}</span>
-                                                    <span class="summary">{{ summary($action->body) }}</span>
-                                                </a>
-                                                <br/>
-                                                <span class="group-name"><a href="{{ action('GroupController@show', [$action->group_id]) }}">{{ $action->group->name }}</a></span>
-                                            </td>
-
-                                            <td>
-                                                {{$action->start->format('d/m/Y H:i')}}
-                                            </td>
-
-                                            <td class="content">
-                                                {{$action->location}}
-                                            </td>
-                                        </tr>
-                                    @endforeach
-
-                                </tbody>
-                            </table>
-                        </div>
-                    @endif
-                </div>
-
-
-                <div class="row">
-                    <div class="col-md-6">
-                        @if (Auth::guest())
-                            <h1>{{ trans('messages.latest_discussions') }}</h1>
-                        @else
-                            <h2>{{ trans('messages.latest_discussions_others') }}</h2>
-                        @endif
-                        <table class="table table-hover special">
-                            <thead>
+                        <tbody>
+                            @forelse( $my_discussions as $discussion )
                                 <tr>
-                                    <th class="avatar"></th>
-                                    <th class="summary"></th>
-                                    <th class="date"></th>
-                                    <th class="unread"></th>
-                                </tr>
-                            </thead>
 
-                            <tbody>
-                                @forelse( $other_discussions as $discussion )
-                                    <tr>
-
-                                        <td class="avatar"><span class="avatar"><img src="{{$discussion->user->avatar()}}" class="img-circle"/></span></td>
-                                        <td class="content">
-                                            <a href="{{ action('DiscussionController@show', [$discussion->group_id, $discussion->id]) }}">
-                                                <span class="name">{{ $discussion->name }}</span>
-                                                <span class="summary">{{summary($discussion->body) }}</span>
-                                                <br/>
-                                            </a>
-                                            <span class="group-name"><a href="{{ action('GroupController@show', [$discussion->group_id]) }}">{{ $discussion->group->name }}</a></span>
-                                        </td>
-
-                                        <td class="date">
-                                            {{ $discussion->updated_at->diffForHumans() }}
-                                        </td>
-
-                                        <td>
-                                            @if ($discussion->unReadCount() > 0)
-                                                <i class="fa fa-comment"></i>
-                                                <span class="badge">{{ $discussion->unReadCount() }}</span>
-                                            @endif
-                                        </td>
-
-                                    </tr>
-                                @empty
-                                    {{trans('messages.nothing_yet')}}
-                                @endforelse
-                            </tbody>
-                        </table>
-                    </div>
-
-
-
-
-
-
-
-                    <div class="col-md-6">
-
-                        @if (Auth::guest())
-                            <h1>{{ trans('messages.agenda') }}</h1>
-                        @else
-                            <h2>{{ trans('messages.agenda_others') }}</h2>
-                        @endif
-
-
-
-                        <table class="table table-hover special">
-                            <thead>
-                                <tr>
-                                    <th style="width: 50%">{{ trans('messages.title') }}</th>
-                                    <th>{{ trans('messages.date') }}</th>
-                                    <th>{{ trans('messages.where') }}</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                @foreach( $other_actions as $action )
-                                    <tr>
-                                        <td class="content">
-                                            <a href="{{ action('ActionController@show', [$action->group_id, $action->id]) }}">
-                                                <span class="name">{{ $action->name }}</span>
-                                                <span class="summary">{{ summary($action->body) }}</span>
-                                            </a>
+                                    <td class="avatar"><span class="avatar"><img src="{{$discussion->user->avatar()}}" class="img-circle"/></span></td>
+                                    <td class="content">
+                                        <a href="{{ action('DiscussionController@show', [$discussion->group_id, $discussion->id]) }}">
+                                            <span class="name">{{ $discussion->name }}</span>
+                                            <span class="summary">{{summary($discussion->body) }}</span>
                                             <br/>
-                                            <span class="group-name"><a href="{{ action('GroupController@show', [$action->group_id]) }}">{{ $action->group->name }}</a></span>
-                                        </td>
+                                        </a>
+                                        <span class="group-name"><a href="{{ action('GroupController@show', [$discussion->group_id]) }}">{{ $discussion->group->name }}</a></span>
+                                    </td>
 
-                                        <td>
-                                            {{$action->start->format('d/m/Y H:i')}}
-                                        </td>
+                                    <td class="date">
+                                        {{ $discussion->updated_at->diffForHumans() }}
+                                    </td>
 
-                                        <td class="content">
-                                            {{$action->location}}
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                    <td>
+                                        @if ($discussion->unReadCount() > 0)
+                                            <i class="fa fa-comment"></i>
+                                            <span class="badge">{{ $discussion->unReadCount() }}</span>
+                                        @endif
+                                    </td>
 
-                            </tbody>
-                        </table>
-
-                    </div>
+                                </tr>
+                            @empty
+                                {{trans('messages.nothing_yet')}}
+                            @endforelse
+                        </tbody>
+                    </table>
                 </div>
+            @endif
+
+            @if (isset($my_actions))
+                <div class="col-md-6">
+                    <h2>{{ trans('messages.agenda_my') }}</h2>
 
 
-
-            </div>
-
-
-            <div role="tabpanel" class="tab-pane" id="actions">
-
-
-
-                @if (isset($my_actions))
-                    <h1>{{ trans('messages.agenda_my') }}</h1>
                     <table class="table table-hover special">
                         <thead>
                             <tr>
@@ -311,8 +110,64 @@
 
                         </tbody>
                     </table>
-                @endif
+                </div>
+            @endif
+        </div>
 
+
+        <div class="row">
+            <div class="col-md-6">
+                @if (Auth::guest())
+                    <h1>{{ trans('messages.latest_discussions') }}</h1>
+                @else
+                    <h2>{{ trans('messages.latest_discussions_others') }}</h2>
+                @endif
+                <table class="table table-hover special">
+                    <thead>
+                        <tr>
+                            <th class="avatar"></th>
+                            <th class="summary"></th>
+                            <th class="date"></th>
+                            <th class="unread"></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @forelse( $other_discussions as $discussion )
+                            <tr>
+
+                                <td class="avatar"><span class="avatar"><img src="{{$discussion->user->avatar()}}" class="img-circle"/></span></td>
+                                <td class="content">
+                                    <a href="{{ action('DiscussionController@show', [$discussion->group_id, $discussion->id]) }}">
+                                        <span class="name">{{ $discussion->name }}</span>
+                                        <span class="summary">{{summary($discussion->body) }}</span>
+                                        <br/>
+                                    </a>
+                                    <span class="group-name"><a href="{{ action('GroupController@show', [$discussion->group_id]) }}">{{ $discussion->group->name }}</a></span>
+                                </td>
+
+                                <td class="date">
+                                    {{ $discussion->updated_at->diffForHumans() }}
+                                </td>
+
+                                <td>
+                                    @if ($discussion->unReadCount() > 0)
+                                        <i class="fa fa-comment"></i>
+                                        <span class="badge">{{ $discussion->unReadCount() }}</span>
+                                    @endif
+                                </td>
+
+                            </tr>
+                        @empty
+                            {{trans('messages.nothing_yet')}}
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+
+
+
+            <div class="col-md-6">
 
                 @if (Auth::guest())
                     <h1>{{ trans('messages.agenda') }}</h1>
@@ -353,123 +208,16 @@
 
                     </tbody>
                 </table>
-
-
-            </div>
-
-            @if ($my_groups)
-                <div role="tabpanel" class="tab-pane" id="mygroups">
-
-                    <h1>{{ trans('messages.my_groups') }}</h1>
-
-                    <div class="row">
-                        @forelse( $my_groups as $group )
-
-                            <div class="col-xs-6 col-md-3">
-                                <div class="thumbnail group">
-                                    <a href="{{ action('GroupController@show', $group->id) }}">
-                                        <img src="{{action('GroupController@cover', $group->id)}}"/>
-                                    </a>
-                                    <div class="caption">
-                                        <h4>
-                                            <a href="{{ action('GroupController@show', $group->id) }}">{{ $group->name }}
-                                                @if ($group->isPublic())
-                                                    <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
-                                                @else
-                                                    <i class="fa fa-lock" title="{{trans('group.closed')}}"></i>
-                                                @endif
-                                            </a>
-                                        </h4>
-                                        <p class="summary">{{ summary($group->body, 150) }}</p>
-                                        <p>
-                                            <a class="btn btn-primary" href="{{ action('MembershipController@leave', $group->id) }}">
-                                                <i class="fa fa-sign-out"></i>{{ trans('group.leave') }}
-                                            </a>
-                                            <a class="btn btn-primary" href="{{ action('GroupController@show', $group->id) }}">
-                                                {{ trans('group.visit') }}
-                                            </a>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                        @empty
-                            <p>{{trans('group.no_group_joined_yet')}}</p>
-                        @endforelse
-                    </div>
-
-                </div>
-            @endif
-
-
-
-
-            <div role="tabpanel" class="tab-pane" id="groups">
-
-                <h1>{{ trans('messages.all_groups') }}</h1>
-
-
-                <div class="row">
-                    @forelse( $groups as $group )
-                        <div class="col-xs-6 col-md-3">
-                            <div class="thumbnail group">
-                                <a href="{{ action('GroupController@show', $group->id) }}">
-                                    <img src="{{action('GroupController@cover', $group->id)}}"/>
-                                </a>
-                                <div class="caption">
-                                    <h4>
-                                        <a href="{{ action('GroupController@show', $group->id) }}">{{ $group->name }}
-                                            @if ($group->isPublic())
-                                                <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
-                                            @else
-                                                <i class="fa fa-lock" title="{{trans('group.closed')}}"></i>
-                                            @endif
-
-                                        </a>
-                                    </h4>
-                                    <p class="summary">{{ summary($group->body, 150) }}</p>
-                                    <p>
-
-
-
-                                        @unless ($group->isMember())
-                                            @can ('join', $group)
-                                                <a class="btn btn-primary" href="{{ action('MembershipController@join', $group->id) }}"><i class="fa fa-sign-in"></i>
-                                                    {{ trans('group.join') }}
-                                                </a>
-                                            @endcan
-
-                                        @endunless
-
-                                        <a class="btn btn-primary" href="{{ action('GroupController@show', $group->id) }}">{{ trans('group.visit') }}</a>
-
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    @empty
-                        {{trans('group.no_group_yet')}}
-                    @endforelse
-
-                    <div class="col-xs-6 col-md-3">
-                        <div class="thumbnail group">
-                            <a href="{{ action('GroupController@create') }}">
-                                <div style="margin: auto; text-align: center; width: 100%; height:auto;"><i class="fa fa-plus-circle" style="font-size: 150px;" aria-hidden="true"></i></div>
-
-                            </a>
-                            <div class="caption">
-                                <h4><a href="{{ action('GroupController@create') }}">{{ trans('group.your_group_here') }}</a></h4>
-                                <p class="summary">{{ trans('group.create_a_group_intro') }}</p>
-                                <p>
-
-                                    <a class="btn btn-primary" href="{{ action('GroupController@create') }}">{{ trans('group.create') }}</a>
-
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
+
+        {!! setting('homepage_presentation', trans('documentation.intro')) !!}
+        @if (Auth::check())
+            <a class="btn btn-primary" href="{{action('SettingsController@settings')}}">
+                <i class="fa fa-pencil"></i> {{trans('messages.modify_intro_text')}}
+            </a>
+        @endif
+
     </div>
+
 @endsection

@@ -113,7 +113,7 @@ class UserTest extends TestCase
         ->type('2016-01-01 15:00', 'stop')
         ->press('Create')
         ->seeInDatabase('actions', ['name' => 'Test action'])
-        ->see('Agenda of this group');
+        ->see(trans('action.create_one_button'));
     }
 
 

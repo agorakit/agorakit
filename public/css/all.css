@@ -17,8 +17,8 @@ body {
 
 /*
 a {
-    color: rgb(62, 41, 75);
-    color: rgb(22, 110, 166);
+color: rgb(62, 41, 75);
+color: rgb(22, 110, 166);
 }
 */
 
@@ -26,8 +26,8 @@ a {
 /*
 h1, h2, h3, h4, h5, h6
 {
-    font-family: "Roboto";
-    font-weight: 300;
+font-family: "Roboto";
+font-weight: 300;
 }
 */
 
@@ -35,12 +35,12 @@ h1, h2, h3, h4, h5, h6
 /**************************** Navigation **************************/
 /*
 .navbar-default, .navbar-default .navbar-brand, .navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a {
-    color: rgb(41, 65, 75);
-    background-color: white;
+color: rgb(41, 65, 75);
+background-color: white;
 }
 
 .navbar-nav>li>a {
-    text-transform: uppercase;
+text-transform: uppercase;
 }
 */
 
@@ -76,12 +76,9 @@ h1, h2, h3, h4, h5, h6
 .main-container
 {
     padding: 0 2em 5em 2em;
+    margin-top: 2em;
 }
 
-.main {
-    border-radius: 4px;
-    /*padding: 2%;*/
-}
 
 
 .page_header {
@@ -91,9 +88,9 @@ h1, h2, h3, h4, h5, h6
 
 
 
-.toolbox {
-    padding-top: 2em;
-    padding-bottom: 2em;
+.toolbox
+{
+    padding-bottom: 1em;
 }
 
 .spacer
@@ -104,12 +101,14 @@ h1, h2, h3, h4, h5, h6
 
 /**************************** Second level navigation **************************/
 
-.nav-pills {
-    background-color: white;
-    text-align: center;
+.nav-tabs > li.active > a
+{
+    border-radius: 4px 4px 0 0;
 }
 
-.center-pills {
+.nav-groups
+{
+    margin-bottom: 2em;
     display: flex;
     justify-content: center;
 }
@@ -188,7 +187,7 @@ color: rgb(22, 110, 166);
 /****************************** GROUPS & THEIR HOMEPAGE ********************************/
 
 .cover {
-    width: 25%;
+    width: 100%%;
     float: right;
 }
 
@@ -209,20 +208,17 @@ color: rgb(22, 110, 166);
     overflow: hidden;
 }
 
-.group h4 {
+.group h4
+{
     height: 2.3em;
     overflow: hidden;
 }
 
-.page_header {
-    /*margin-bottom: 1em;*/
+.page_header
+{
     padding: 2%;
 }
 
-.page_header h1 {
-    /*font-size: 2em;*/
-    /*font-weight: 700;*/
-}
 
 
 /***************************** USERS ******************/
@@ -279,6 +275,12 @@ color: rgb(22, 110, 166);
 
 
 /***************************** tables ***************************/
+
+table a
+{
+text-decoration: none !important;
+}
+
 
 table.special {
     table-layout: fixed

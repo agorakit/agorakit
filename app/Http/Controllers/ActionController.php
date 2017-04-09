@@ -142,14 +142,14 @@ class ActionController extends Controller
         if ( $action->isInvalid())
         {
             // Oops.
-            return redirect()->action('ActionController@create', $group_id)
+            return redirect()->action('ActionController@create', $group)
             ->withErrors($action->getErrors())
             ->withInput();
         }
         else
         {
             $action->save();
-            return redirect()->action('ActionController@index', [$group->id]);
+            return redirect()->action('ActionController@index', $group);
         }
     }
 

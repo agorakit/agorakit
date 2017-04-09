@@ -77,10 +77,6 @@
 
 
 
-        <div class="spacer"></div>
-
-
-
         <div id="calendar"></div>
 
 

@@ -6,11 +6,6 @@
 
     <div class="tab_content">
 
-
-
-
-        <h2>{{trans('group.about_this_group')}}  </h2>
-
         <div class="row">
             <div class="col-md-6">
                 {!! filter($group->body) !!}

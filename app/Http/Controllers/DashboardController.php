@@ -25,11 +25,11 @@ class DashboardController extends Controller
     */
     public function index(Request $request)
     {
-
         if (Auth::check())
         {
-            $groups = \App\Group::with('membership')->orderBy('name')->paginate(50);
+            $groups = \App\Group::with('membership')->orderBy('name')->get();
 
+            $other_groups = \App\Group::whereNotIn('id', Auth::user()->groups()->lists('groups.id'))->get();
 
             $my_groups = Auth::user()->groups()->orderBy('name')->get();
             $my_groups_id = false;
@@ -67,7 +67,9 @@ class DashboardController extends Controller
             ->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->paginate(10);
 
             return view('dashboard.homepage')
+            ->with('tab', 'homepage')
             ->with('groups', $groups)
+            ->with('other_groups', $other_groups)
             ->with('my_groups', $my_groups)
             ->with('my_discussions', $my_discussions)
             ->with('my_actions', $my_actions)
@@ -76,16 +78,8 @@ class DashboardController extends Controller
         }
         else
         {
-            $groups = \App\Group::orderBy('name')->paginate(50);
-            $other_discussions = \App\Discussion::with('user', 'group')->orderBy('updated_at', 'desc')->paginate(10);
-            $other_actions = \App\Action::with('user', 'group')->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->paginate(10);
-            $my_groups = false;
-
-            return view('dashboard.homepage')
-            ->with('groups', $groups)
-            ->with('my_groups', $my_groups)
-            ->with('other_discussions', $other_discussions)
-            ->with('other_actions', $other_actions);
+            return view('dashboard.presentation')
+            ->with('tab', 'homepage');
         }
 
     }
@@ -189,10 +183,25 @@ class DashboardController extends Controller
 
     public function groups()
     {
-        $groups = \App\Group::with('membership')->orderBy('name')->paginate(50);
+        if (Auth::check())
+        {
+            $other_groups = \App\Group::whereNotIn('id', Auth::user()->groups()->lists('groups.id'))->get();
+            $my_groups = Auth::user()->groups()->orderBy('name')->get();
+            $groups = false;
+        }
+        else
+        {
+            $groups = \App\Group::with('membership')->orderBy('name')->get();
+            $other_groups = false;
+            $my_groups = false;
+        }
+
         return view('dashboard.groups')
         ->with('tab', 'groups')
-        ->with('groups', $groups);
+        ->with('groups', $groups)
+        ->with('other_groups', $other_groups)
+        ->with('my_groups', $my_groups);
+
     }
 
 
