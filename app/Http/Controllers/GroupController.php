@@ -96,7 +96,7 @@ class GroupController extends Controller
         if (Auth::check()) {
             $discussions = $group->discussions()
             ->has('user')
-            ->with('user', 'userReadDiscussion')
+            ->with('user', 'group', 'userReadDiscussion')
             ->orderBy('updated_at', 'desc')
             ->limit(5)
             ->get();
@@ -104,7 +104,7 @@ class GroupController extends Controller
         } else {
             $discussions = $group->discussions()
             ->has('user')
-            ->with('user')
+            ->with('user', 'group')
             ->orderBy('updated_at', 'desc')
             ->limit(5)
             ->get();
@@ -130,8 +130,6 @@ class GroupController extends Controller
     */
     public function edit(Request $request, Group $group)
     {
-
-
         return view('groups.edit')
         ->with('group', $group)
         ->with('group', $group)

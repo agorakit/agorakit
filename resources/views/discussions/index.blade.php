@@ -25,9 +25,9 @@
             <thead>
                 <tr>
                     <th class="avatar"></th>
-                    <th class="summary">{{trans('messages.title')}}</th>
-                    <th class="date">{{trans('messages.date')}}</th>
-                    <th class="unread">{{trans('messages.to_read')}}</th>
+                    <th class="summary"></th>
+                    <th class="date"></th>
+                    <th class="unread"></th>
                 </tr>
             </thead>
 

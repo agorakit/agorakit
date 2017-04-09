@@ -16,7 +16,7 @@
 
 <h2>{{ trans('messages.my_groups') }}</h2>
         @foreach ($my_groups as $group)
-            <a href="{{action('GroupController@show', $group)}}">{{$group->name}}</a> 
+            <span class="label label-default"><a href="{{action('GroupController@show', $group)}}">{{$group->name}}</a> </span> 
         @endforeach
 
 

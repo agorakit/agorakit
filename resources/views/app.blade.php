@@ -16,7 +16,7 @@
 
 
     <!-- mobilizator specific css-->
-    {!! Html::style('/css/all.css?v7') !!}
+    {!! Html::style('/css/all.css?v8') !!}
 
     <!--{!! Html::script('/packages/turbolinks/turbolinks.js') !!}-->
 

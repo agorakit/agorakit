@@ -342,6 +342,10 @@ th.unread, td.unread {
 
 /******************************** UI ******************************************/
 
+.btn
+{
+    border-radius: 3px;
+}
 
 
 .btn-right {
@@ -384,10 +388,13 @@ th.unread, td.unread {
 
 .label {
     background-color: #1B809E;
-    font-size: 10px;
+    /*font-size: 10px;*/
     border-radius: 2px;
+    /*
     margin-bottom: 2px;
     padding-right: 8px;
+    */
+    display : inline-block;
 }
 
 .label a {

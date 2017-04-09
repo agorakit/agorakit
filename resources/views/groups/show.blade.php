@@ -109,7 +109,7 @@
                                                 <span class="summary">{{summary($discussion->body) }}</span>
                                                 <br/>
                                             </a>
-                                            <span class="group-name"><a href="{{ action('GroupController@show', [$discussion->group_id]) }}">{{ $discussion->group->name }}</a></span>
+                                            <span class="group-name"><a href="{{ action('GroupController@show', [$discussion->group]) }}">{{ $discussion->group->name }}</a></span>
                                         </td>
 
                                         <td class="date">

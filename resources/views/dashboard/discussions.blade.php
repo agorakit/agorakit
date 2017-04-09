@@ -15,16 +15,15 @@
                 <thead>
                     <tr>
                         <th class="avatar"></th>
-                        <th class="summary">{{trans('messages.title')}}</th>
-                        <th class="date">{{trans('messages.date')}}</th>
-                        <th class="unread">{{trans('messages.to_read')}}</th>
+                        <th class="summary"></th>
+                        <th class="date"></th>
+                        <th class="unread"></th>
                     </tr>
                 </thead>
 
                 <tbody>
                     @forelse( $discussions as $discussion )
                         <tr>
-
                             <td class="avatar"><span class="avatar"><img src="{{$discussion->user->avatar()}}" class="img-circle"/></span></td>
                             <td class="content">
                                 <a href="{{ action('DiscussionController@show', [$discussion->group_id, $discussion->id]) }}">
