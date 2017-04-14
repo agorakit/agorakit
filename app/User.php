@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Watson\Validating\ValidatingTrait;
 use Venturecraft\Revisionable\RevisionableTrait;
-use Toin0u\Geocoder\Facade\Geocoder;
+use Geocoder\Laravel\Facades\Geocoder;
 
 class User extends Authenticatable
 {
@@ -239,7 +239,7 @@ class User extends Authenticatable
 
         try
         {
-            $geocode = Geocoder::geocode($this->address);
+            $geocode = Geocoder::geocode($this->address)->get()->first();
         }
         catch (\Exception $e)
         {
@@ -248,8 +248,8 @@ class User extends Authenticatable
         }
 
 
-        $this->latitude = $geocode['latitude'];
-        $this->longitude = $geocode['longitude'];
+        $this->latitude = $geocode->getLatitude();
+        $this->longitude = $geocode->getLongitude();
         return true;
 
     }

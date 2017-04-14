@@ -109,6 +109,7 @@ class UserTest extends TestCase
         ->see('Create')
         ->type('Test action', 'name')
         ->type('this is a test action in the agenda', 'body')
+        ->type('Bruxelles', 'location')
         ->type('2016-01-01 11:00', 'start')
         ->type('2016-01-01 15:00', 'stop')
         ->press('Create')

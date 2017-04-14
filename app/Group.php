@@ -10,7 +10,7 @@ use App\Discussion;
 use Watson\Validating\ValidatingTrait;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Auth;
-use Toin0u\Geocoder\Facade\Geocoder;
+use Geocoder\Laravel\Facades\Geocoder;
 
 
 class Group extends Model
@@ -223,7 +223,7 @@ class Group extends Model
 
         try
         {
-            $geocode = Geocoder::geocode($this->address);
+            $geocode = Geocoder::geocode($this->address)->get()->first();
         }
         catch (\Exception $e)
         {
@@ -231,8 +231,8 @@ class Group extends Model
         }
 
 
-        $this->latitude = $geocode['latitude'];
-        $this->longitude = $geocode['longitude'];
+        $this->latitude = $geocode->getLatitude();
+        $this->longitude = $geocode->getLongitude();
         return true;
     }
 

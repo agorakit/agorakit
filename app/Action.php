@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Carbon\Carbon;
-use Toin0u\Geocoder\Facade\Geocoder;
+use Geocoder\Laravel\Facades\Geocoder;
 
 class Action extends Model
 {
@@ -72,16 +72,15 @@ class Action extends Model
 
       try
       {
-          $geocode = Geocoder::geocode($this->location);
+          $geocode = Geocoder::geocode($this->location)->get()->first();
       }
       catch (\Exception $e)
       {
           return false;
       }
 
-
-      $this->latitude = $geocode['latitude'];
-      $this->longitude = $geocode['longitude'];
+      $this->latitude = $geocode->getLatitude();
+      $this->longitude = $geocode->getLongitude();
       return true;
   }
 

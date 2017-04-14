@@ -9,14 +9,35 @@
  * file that was distributed with this source code.
  */
 
- return [
-     // Providers get called in the chain order given here.
-     // The first one to return a result will be used.
-     'providers' => [
-         'Geocoder\Provider\GoogleMapsProvider'  => ['fr-FR', 'Belgique', false],
-         'Geocoder\Provider\OpenStreetMapProvider' => null,
-         'Geocoder\Provider\FreeGeoIpProvider'  => null,
+use Ivory\HttpAdapter\CurlHttpAdapter;
+use Ivory\HttpAdapter\Guzzle6HttpAdapter;
+use Geocoder\Provider\Chain;
+use Geocoder\Provider\BingMaps;
+use Geocoder\Provider\FreeGeoIp;
+use Geocoder\Provider\GoogleMaps;
+use Geocoder\Provider\MaxMindBinary;
 
-     ],
-     'adapter'  => 'Geocoder\HttpAdapter\CurlHttpAdapter',
- ];
+return [
+    'providers' => [
+        Chain::class => [
+            GoogleMaps::class => [
+                'fr-FR',
+                'Belgique',
+                false,
+                env('GOOGLE_MAPS_API_KEY'),
+            ],
+            FreeGeoIp::class  => [],
+        ],
+        BingMaps::class => [
+            'fr-FR',
+            env('BING_MAPS_API_KEY'),
+        ],
+        GoogleMaps::class => [
+            'fr-FR',
+            'Belgique',
+            false,
+            env('GOOGLE_MAPS_API_KEY'),
+        ],
+    ],
+    'adapter'  => CurlHttpAdapter::class,
+];
