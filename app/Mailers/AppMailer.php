@@ -29,6 +29,7 @@ class AppMailer
 
     public function sendNotificationEmail(Group $group, User $user)
     {
+        \App::setLocale(env('APP_DEFAULT_LOCALE', 'en'));
 
         if ($user->verified == 1)
         {

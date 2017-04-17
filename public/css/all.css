@@ -23,13 +23,13 @@ color: rgb(22, 110, 166);
 */
 
 
-/*
+
 h1, h2, h3, h4, h5, h6
 {
 font-family: "Roboto";
-font-weight: 300;
+/*font-weight: 300;*/
 }
-*/
+
 
 
 /**************************** Navigation **************************/
@@ -111,6 +111,11 @@ text-transform: uppercase;
     margin-bottom: 2em;
     display: flex;
     justify-content: center;
+}
+
+.nav-pills > li > a
+{
+    border-radius: 3px;
 }
 
 /**************************** footer ****************************/

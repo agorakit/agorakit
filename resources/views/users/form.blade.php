@@ -1,22 +1,22 @@
 <div class="form-group">
-    {!! Form::label('name', 'Nom:') !!}
+    {!! Form::label('name', trans('messages.name')) !!}
     {!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 
 <div class="form-group">
-    {!! Form::label('email', 'Email:') !!}
+    {!! Form::label('email', trans('messages.email')) !!}
     {!! Form::text('email', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <div class="form-group">
-    {!! Form::label('body', 'Bio:') !!}
+    {!! Form::label('body', trans('messages.description')) !!}
     {!! Form::textarea('body', null, ['id' => 'wysiwyg', 'class' => 'form-control', 'required']) !!}
 </div>
 
 
 <div class="form-group">
-    {!! Form::label('cover', 'Photo:') !!}
+    {!! Form::label('cover', trans('messages.photo')) !!}
     {!! Form::file('cover', null, ['class' => 'form-control']) !!}
 </div>
 

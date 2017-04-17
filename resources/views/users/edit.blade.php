@@ -6,10 +6,7 @@
 
 <div class="tab_content">
 
-<h1>Modifier {{ $user->name }}</h1>
-<p>
-Inscription :  {{ $user->created_at->diffForHumans() }}
-</p>
+<h1>{{trans('messages.modify')}} "{{ $user->name }}"</h1>
 
 {!! Form::model($user, array('action' => ['UserController@update', $user->id], 'files' => true)) !!}
 
