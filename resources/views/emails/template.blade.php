@@ -21,7 +21,12 @@
     color: white;
     font-weight: bold;
     text-decoration: none;
+  }
 
+
+  .mobilizator
+  {
+      font-family: 'Open sans', 'Georgia', 'Arial';
   }
 
   </style>
@@ -30,7 +35,7 @@
 
   <body>
 
-  <div class="body">
+  <div class="body mobilizator">
 
       @yield('content')
 

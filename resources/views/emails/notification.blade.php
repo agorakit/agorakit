@@ -7,22 +7,6 @@
     </p>
 
 
-    @if ($actions->count() > 0)
-        <h2>{{trans('messages.next_actions')}}</h2>
-        @foreach($actions as $action)
-            <strong><a href="{{action('ActionController@show', [$group->id, $action->id])}}">{{$action->name}}</a></strong>
-            <p>{!!filter($action->body) !!}</p>
-            <p>
-                {{$action->start->format('d/m/Y H:i')}}
-            </p>
-            <p>
-                {{trans('messages.location')}} : {{$action->location}}
-            </p>
-            <hr/>
-        @endforeach
-    @endif
-
-
     @if ($discussions->count() > 0)
         <h2>{{trans('messages.latest_discussions')}}</h2>
         @foreach($discussions as $discussion)
@@ -51,6 +35,25 @@
     @endif
 
 
+    @if ($actions->count() > 0)
+        <h2>{{trans('messages.next_actions')}}</h2>
+        @foreach($actions as $action)
+            <strong><a href="{{action('ActionController@show', [$group->id, $action->id])}}">{{$action->name}}</a></strong>
+            <p>{!!filter($action->body) !!}</p>
+            <p>
+                {{$action->start->format('d/m/Y H:i')}}
+            </p>
+            <p>
+                {{trans('messages.location')}} : {{$action->location}}
+            </p>
+            <hr/>
+        @endforeach
+    @endif
+
+
+
+
+
 
 
 
@@ -65,7 +68,7 @@
     @if ($files->count() > 0)
         <h2>{{trans('messages.latest_files')}}</h2>
         @foreach($files as $file)
-            <a href="{{action('FileController@download', [$group->id, $file->id])}}"><img src="{{action('FileController@thumbnail', [$group->id, $file->id])}}" style="width: 24px; height:24px"/>{{$file->name}}</a>
+            <a href="{{action('FileController@show', [$group->id, $file->id])}}"><img src="{{action('FileController@thumbnail', [$group->id, $file->id])}}" style="width: 24px; height:24px"/>{{$file->name}}</a>
             <br/>
         @endforeach
     @endif
