@@ -9,7 +9,7 @@
 
     <li @if (isset($tab) && ($tab == 'groups')) class="active" @endif>
         <a href="{{ action('DashboardController@groups') }}">
-            <i class="fa fa-users"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.groups') }}</span>
+            <i class="fa fa-cubes"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.groups') }}</span>
         </a>
     </li>
 

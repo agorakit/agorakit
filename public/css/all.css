@@ -344,6 +344,41 @@ th.unread, td.unread {
 }
 
 
+/******************************** Mobile **************************************/
+@media screen and (max-width: 640px) {
+  th.date {
+    width: 10%;
+
+  }
+
+  th.avatar, td.avatar {
+      width: 30px;
+  }
+
+  .avatar img
+  {
+      width: 25px;
+      height: 25px;
+  }
+
+  table.special td.content
+  {
+      width: 80%;
+  }
+
+  th.unread, td.unread
+  {
+      width: 10%;
+      display: hidden;
+  }
+
+  .main-container
+  {
+      padding: 0 10px 50px 10px;
+      margin: 0;
+  }
+}
+
 
 /******************************** UI ******************************************/
 
@@ -383,6 +418,11 @@ th.unread, td.unread {
 
 .help a {
     text-decoration: underline;
+}
+
+.alert
+{
+    margin-top : 2em;
 }
 
 .alert a {
