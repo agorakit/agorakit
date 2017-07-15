@@ -1,11 +1,50 @@
 [![Build Status](https://travis-ci.org/philippejadin/Mobilizator.svg?branch=master)](https://travis-ci.org/philippejadin/Mobilizator)
 
 
-## Mobilizator
+## Mobilizator, a groupware for citizen
 
-Web based groupware for citizens initiatives. Mobilize crowds efficiently. Allow anyone to create a collaborative group. No admins involved in the process. Manage communication, decision making, membership, files and events. Flexible email notifications per group, per user preferences.
+Mobilizator is a web based groupware for citizens initiatives. It allows to mobilize crowds efficiently. Anyone can create a collaborative group with no admins involved in the process. 
+
+Manage communication, decision making, membership, files and events. Flexible email notifications per group, per user preferences.
 
 In other words : an organized Facebook for the paranoid inside any of us.
+
+
+### Create groups
+
+![mobilizator_groups.jpg](https://philippejadin.github.io/Mobilizator/mobilizator_groups.jpg)
+
+You can create as many groups as you like, groups can be fully open or closed (membership approval required).
+
+
+### Manage a collaborative agenda
+
+![mobilizator_agenda.jpg](https://philippejadin.github.io/Mobilizator/mobilizator_agenda.jpg)
+
+Each group has an agenda, you can display a complete agenda of every groups. iCal feed for each agenda ready to be imported elsewhere.
+
+
+### Geolocalize groups, people and events
+
+![mobilizator_map.jpg](https://philippejadin.github.io/Mobilizator/mobilizator_map.jpg)
+
+Put everything on a nice map automatically. Map everyone, every group and every event as needed.
+
+
+### Get an overview of your unread discussions and upcoming events
+
+![mobilizator_overview.jpg](https://philippejadin.github.io/Mobilizator/mobilizator_overview.jpg)
+
+Every user get a dashboard where you can see every unread discussions. No more mailing list horror.
+
+
+### Receive email notifications at the rate YOU specify for each groups
+aka "I don't want to be spammed for each comment in each group"
+
+![mobilizator_notifications.jpg](https://philippejadin.github.io/Mobilizator/mobilizator_notifications.jpg)
+
+Everyone can decide how often to receive notifications, for each groups. Choose your level of involvment per group. Also known as "do not disturb me more than once a week"
+
 
 
 ## Requirements
@@ -18,6 +57,8 @@ You need a good webhosting provider that provides the following :
 
 All those features together are are hard to find, so people are obliged to use a VPS and setup everything themselves. This is a riskier proposal. I successfuly installed everything at alwaysdata.com and combell.com (minus the cron job feature in the case of combell.com, which means you won't have automated email notifications)
 
+<img src="https://philippejadin.github.io/Mobilizator/mobilizator_groups.jpg">
+<img src="https://philippejadin.github.io/Mobilizator/mobilizator_overview.jpg">
 
 
 ## Installation
