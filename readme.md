@@ -1,11 +1,11 @@
 [![Build Status](https://travis-ci.org/philippejadin/Mobilizator.svg?branch=master)](https://travis-ci.org/philippejadin/Mobilizator)
 
 
-## Mobilizator, a groupware for citizen
+## AgoraKit, a groupware for citizen
 
-Mobilizator is a web based groupware for citizens initiatives. It allows to mobilize crowds efficiently. Anyone can create a collaborative group with no admins involved in the process. 
+AgoraKit is a web based open source groupware for citizens initiatives. By creating collaborative groups, people can discuss, organize events, store files and keep everyone updated when needed. AgoraKit is a forum, agenda, file manager and email notifier. 
 
-Manage communication, decision making, membership, files and events. Flexible email notifications per group, per user preferences.
+Manage communication, decision making, membership, files and events. Flexible email notifications per group, per user preferences. Most of the time no admin is involved in the process as we try to keep it as horizontal as possible. 
 
 In other words : an organized Facebook for the paranoid inside any of us.
 
@@ -65,7 +65,7 @@ Currently, you need to know how to install a laravel application. This is perfec
 In short :
 
 ```
-$ git clone https://github.com/philippejadin/Mobilizator.git
+$ git clone https://github.com/philippejadin/agorakit.git
 $ cp .env.example .env
 $ editor .env
 $ composer install
@@ -73,6 +73,8 @@ $ php artisan key:generate
 $ php artisan migrate
 ```
 - Then setup your webserver to serve the /public directory.
+
+Check the wiki for more informations
 
 
 ## Usage
@@ -83,35 +85,11 @@ $ php artisan migrate
 - Invite people to one or more groups using the invite feature of each group
 - Profit (or in some cases, revolution!)
 
-## Updates
-I try to keep the master branch always in a good, safe, and working condition (this is called a "rolling release" model).
 
-You can at anytime do this to update your install :
-
-```
-$ php artisan down
-$ git pull
-$ composer install
-$ php artisan migrate
-$ php artisan up
-```
-
-If you don't know how all this works, don't setup a production server around this tool without first digging laravel docs.
-
-## Cron
-
-Setup a cron jon in order to have the automated notifications sent to every subscriber
-
-To do so, the laravel docs are pristine clear : https://laravel.com/docs/master/scheduling
-
-## Development
+## Detailed installation, development, usage, contributing
 
 Check the wiki
 
-
-## Official Documentation
-
-Not yet, but have a look at the wiki
 
 ## Contributing : Laravel backend & frontend developer wanted
 We are looking for help to enhance this collaborative platform called "Mobilizator" used by multiple citizen initiatives (Tout autre chose, Hart Boven Hard, Collectif Roosevelt, Stop-TTIP, etc.).
@@ -130,4 +108,4 @@ Contact me
 
 ## License
 
-This tool is released under the GPL licence
+This tool is released under the GPL 3 licence
