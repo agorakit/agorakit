@@ -1,8 +1,8 @@
-## Mobilizator, a groupware for citizen
+## Agorakit, a groupware for citizens
 
-Mobilizator is a web based groupware for citizens initiatives. It allows to mobilize crowds efficiently. Anyone can create a collaborative group with no admins involved in the process. 
+AgoraKit is a web based open source groupware for citizens initiatives. By creating collaborative groups, people can discuss, organize events, store files and keep everyone updated when needed. AgoraKit is a forum, agenda, file manager and email notifier.
 
-Manage communication, decision making, membership, files and events. Flexible email notifications per group, per user preferences.
+Manage communication, decision making, membership, files and events. Flexible email notifications per group, per user preferences. Most of the time no admin is involved in the process as we try to keep it as horizontal as possible.
 
 In other words : an organized Facebook for the paranoid inside any of us.
 
@@ -45,7 +45,12 @@ Everyone can decide how often to receive notifications, for each groups. Choose 
 
 ### Technically
 
-Mobilizator is written in PHP using the Laravel framework and requires a modern webhosting provider. 
+Agorakit is written in PHP using the Laravel framework and requires a modern webhosting provider. 
 
 It has been used successfully since 2015 for several citizen initiatives such as [participer.toutautrechose.be](https://participer.toutautrechose.be), [deelnemen.hartbovenhard.be](http://deelnemen.hartbovenhard.be) and many others.
+
+### Status
+This software is in daily use by more than 1.000 users. While still in development, our hope are high that it will be useful to other initiatives. Join the team and help us fine tune the beast!
+
+
 
