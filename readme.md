@@ -12,28 +12,28 @@ In other words : an organized Facebook for the paranoid inside any of us.
 
 ### Create groups
 
-!(https://agorakit.org/mobilizator_groups.jpg)
+![AgoraKit screenshot](https://agorakit.org/mobilizator_groups.jpg)
 
 You can create as many groups as you like, groups can be fully open or closed (membership approval required).
 
 
 ### Manage a collaborative agenda
 
-!(https://agorakit.org/mobilizator_agenda.jpg)
+![AgoraKit screenshot](https://agorakit.org/mobilizator_agenda.jpg)
 
 Each group has an agenda, you can display a complete agenda of every groups. iCal feed for each agenda ready to be imported elsewhere.
 
 
 ### Geolocalize groups, people and events
 
-!(https://agorakit.org/mobilizator_map.jpg)
+![AgoraKit screenshot](https://agorakit.org/mobilizator_map.jpg)
 
 Put everything on a nice map automatically. Map everyone, every group and every event as needed.
 
 
 ### Get an overview of your unread discussions and upcoming events
 
-!(https://agorakit.org/mobilizator_overview.jpg)
+![AgoraKit screenshot](https://agorakit.org/mobilizator_overview.jpg)
 
 Every user get a dashboard where you can see every unread discussions. No more mailing list horror.
 
@@ -41,7 +41,7 @@ Every user get a dashboard where you can see every unread discussions. No more m
 ### Receive email notifications at the rate YOU specify for each groups
 aka "I don't want to be spammed for each comment in each group"
 
-!(https://agorakit.org/mobilizator_notifications.jpg)
+![AgoraKit screenshot](https://agorakit.org/mobilizator_notifications.jpg)
 
 Everyone can decide how often to receive notifications, for each groups. Choose your level of involvment per group. Also known as "do not disturb me more than once a week"
 
