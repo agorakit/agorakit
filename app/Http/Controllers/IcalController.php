@@ -24,7 +24,7 @@ class IcalController extends Controller
     {
         // 1. Create new calendar
         $vCalendar = new \Eluceo\iCal\Component\Calendar(config('app.url'));
-        $vCalendar->setName(config('mobilizator.name'));
+        $vCalendar->setName(config('agorakit.name'));
 
 
         // returns actions from the last 60 days
@@ -58,7 +58,7 @@ class IcalController extends Controller
     {
         // 1. Create new calendar
         $vCalendar = new \Eluceo\iCal\Component\Calendar(config('app.url'));
-        $vCalendar->setName(config('mobilizator.name') . ' : ' . $group->name);
+        $vCalendar->setName(config('agorakit.name') . ' : ' . $group->name);
         $vCalendar->setDescription(summary($group->body, 500));
 
         // returns actions started the last 60 days

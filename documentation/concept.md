@@ -1,4 +1,4 @@
-# Mobilizator
+# Agorakit
 A tool for those who want to (self) mobilize
 
 The goal of this tool is to allow citizens and activists to communicate, decide, organize and rejoice.

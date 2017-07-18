@@ -4,7 +4,7 @@
 
     <div class="page_header">
         <h1><i class="fa fa-home"></i>
-            {{Config::get('mobilizator.name')}}
+            {{Config::get('agorakit.name')}}
         </h1>
     </div>
 

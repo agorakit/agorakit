@@ -26,7 +26,7 @@
         <env name="APP_DEFAULT_LOCALE" value="en"/>
         <env name="DB_CONNECTION" value="mysql_testing"/>
         <env name="TESTING_DB_HOST" value="localhost"/>
-        <env name="TESTING_DB_DATABASE" value="mobilizator_testing"/>
+        <env name="TESTING_DB_DATABASE" value="agorakit_testing"/>
         <env name="TESTING_DB_USERNAME" value="root"/>
 
 

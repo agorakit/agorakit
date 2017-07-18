@@ -24,7 +24,7 @@
   }
 
 
-  .mobilizator
+  .agorakit
   {
       font-family: 'Open sans', 'Georgia', 'Arial';
   }
@@ -35,7 +35,7 @@
 
   <body>
 
-  <div class="body mobilizator">
+  <div class="body agorakit">
 
       @yield('content')
 

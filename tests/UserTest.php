@@ -18,7 +18,7 @@ class UserTest extends TestCase
     Sounds simplier like this for me, I don't want the database being remigrated after each test.
     Only after the whole suite has been run.
 
-    You need a mobilizator_testing DB available for those tests to run.
+    You need a agorakit_testing DB available for those tests to run.
 
 
     Our scenario :
@@ -39,7 +39,7 @@ class UserTest extends TestCase
         Artisan::call('migrate:refresh');
 
         $this->visit('/')
-             ->see('Mobilizator');
+             ->see('Agorakit');
 
     }
 
@@ -58,7 +58,7 @@ class UserTest extends TestCase
         ->type('123456', 'password')
         ->type('123456', 'password_confirmation')
         ->press('Register')
-        ->see('Mobilizator');
+        ->see('Agorakit');
 
          $this->seeInDatabase('users', ['email' => 'roberto@example.com']);
 
@@ -141,7 +141,7 @@ class UserTest extends TestCase
         ->type('123456', 'password')
         ->type('123456', 'password_confirmation')
         ->press('Register')
-        ->see('Mobilizator');
+        ->see('Agorakit');
 
          $this->seeInDatabase('users', ['email' => 'newbie@example.com']);
     }

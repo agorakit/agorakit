@@ -55,7 +55,7 @@ return [
         'mysql' => [
             'driver'    => 'mysql',
             'host'      => env('DB_HOST', 'localhost'),
-            'database'  => env('DB_DATABASE', 'mobilizator_testing'),
+            'database'  => env('DB_DATABASE', 'agorakit_testing'),
             'username'  => env('DB_USERNAME', 'root'),
             'password'  => env('DB_PASSWORD', ''),
             'charset'   => 'utf8',
@@ -70,7 +70,7 @@ return [
         'mysql_testing' => [
             'driver'    => 'mysql',
             'host'      => env('TESTING_DB_HOST', 'localhost'),
-            'database'  => env('TESTING_DB_DATABASE', 'mobilizator_testing'),
+            'database'  => env('TESTING_DB_DATABASE', 'agorakit_testing'),
             'username'  => env('TESTING_DB_USERNAME', 'root'),
             'password'  => env('TESTING_DB_PASSWORD', ''),
             'charset'   => 'utf8',

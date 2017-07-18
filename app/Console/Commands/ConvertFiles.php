@@ -12,7 +12,7 @@ class ConvertFiles extends Command
     *
     * @var string
     */
-    protected $signature = 'mobilizator:convertfiles';
+    protected $signature = 'agorakit:convertfiles';
 
     /**
     * The console command description.

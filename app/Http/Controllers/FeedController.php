@@ -18,8 +18,8 @@ class FeedController extends Controller
 
         $channel = new Channel();
         $channel
-        ->title(Config::get('mobilizator.name') . ' : ' . trans('messages.latest_discussions'))
-        ->description(Config::get('mobilizator.name'))
+        ->title(Config::get('agorakit.name') . ' : ' . trans('messages.latest_discussions'))
+        ->description(Config::get('agorakit.name'))
         ->ttl(60)
         ->appendTo($feed);
 
@@ -50,8 +50,8 @@ class FeedController extends Controller
 
         $channel = new Channel();
         $channel
-        ->title(Config::get('mobilizator.name') . ' : ' . trans('messages.agenda'))
-        ->description(Config::get('mobilizator.name'))
+        ->title(Config::get('agorakit.name') . ' : ' . trans('messages.agenda'))
+        ->description(Config::get('agorakit.name'))
         ->ttl(60)
         ->appendTo($feed);
 

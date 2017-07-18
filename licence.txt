@@ -1,4 +1,4 @@
-    Mobilizator, mobilize crowds efficiently
+    Agorakit, mobilize crowds efficiently
     Copyright (C) 2015  Philippe Jadin
     www.philippejadin.be
 
@@ -641,7 +641,7 @@ copy of the Program in return for a fee.
                      END OF TERMS AND CONDITIONS
 
            
-    Mobilizator, mobilize crowds efficiently
+    Agorakit, mobilize crowds efficiently
     Copyright (C) 2015  Philippe Jadin
     www.philippejadin.be
 

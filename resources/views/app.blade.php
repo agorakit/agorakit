@@ -15,7 +15,7 @@
     @yield('css')
 
 
-    <!-- mobilizator specific css-->
+    <!-- agorakit specific css-->
     {!! Html::style('/css/all.css?v8') !!}
 
     <!--{!! Html::script('/packages/turbolinks/turbolinks.js') !!}-->
@@ -38,7 +38,7 @@
         </div>
     </div>
 
-    <div class="credits">{{trans('messages.made_with')}} <a href="https://github.com/philippejadin/Mobilizator">Mobilizator</a></div>
+    <div class="credits">{{trans('messages.made_with')}} <a href="https://github.com/philippejadin/Agorakit">Agorakit</a></div>
 
 
 

@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="{{ action('DashboardController@index') }}" class="navbar-brand">
-                <i class="fa fa-child"></i> <span class="hidden-xs hidden-sm hidden-md">{{Config::get('mobilizator.name')}}</span>
+                <i class="fa fa-child"></i> <span class="hidden-xs hidden-sm hidden-md">{{Config::get('agorakit.name')}}</span>
             </a>
         </div>
         <div class="navbar-collapse collapse" id="navbar">
