@@ -53,4 +53,8 @@ It has been used successfully since 2015 for several citizen initiatives such as
 This software is in daily use by more than 1.000 users. While still in development, our hope are high that it will be useful to other initiatives. Join the team and help us fine tune the beast!
 
 
+## Contact
+Please drop a line to info (at) agorakit.org to keep in touch.
+
+
 
