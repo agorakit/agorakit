@@ -101,10 +101,17 @@ If you have some time to give to this project, there are already some issues to 
 
 All the work is open source (GPL) and will benefit every interested citizen initiative. We already have 100's of users who might benefit from your help.
 
+Please drop a line to info (at) agorakit.org if you are interested.
+
 
 ## Security Vulnerabilities
 
 Contact me
+
+## Contact
+Please drop a line to info (at) agorakit.org to keep in touch.
+
+
 
 ## License
 
