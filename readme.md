@@ -1,11 +1,11 @@
-[![Build Status](https://travis-ci.org/philippejadin/Agorakit.svg?branch=master)](https://travis-ci.org/philippejadin/Agorakit)
+[![Build Status](https://travis-ci.org/philippejadin/agorakit.svg?branch=master)](https://travis-ci.org/philippejadin/agorakit)
 
 
 ## AgoraKit, a groupware for citizen
 
-AgoraKit is a web based open source groupware for citizens initiatives. By creating collaborative groups, people can discuss, organize events, store files and keep everyone updated when needed. AgoraKit is a forum, agenda, file manager and email notifier. 
+AgoraKit is a web based open source groupware for citizens initiatives. By creating collaborative groups, people can discuss, organize events, store files and keep everyone updated when needed. AgoraKit is a forum, agenda, file manager and email notifier.
 
-Manage communication, decision making, membership, files and events. Flexible email notifications per group, per user preferences. Most of the time no admin is involved in the process as we try to keep it as horizontal as possible. 
+Manage communication, decision making, membership, files and events. Flexible email notifications per group, per user preferences. Most of the time no admin is involved in the process as we try to keep it as horizontal as possible.
 
 In other words : an organized Facebook for the paranoid inside any of us.
 
