@@ -100,7 +100,7 @@ return [
         ],
         'password'          => [
             'confirmed' => 'Confirmé',
-            'min'       => 'Min',
+            'min'       => 'Mot de passe trop court',
         ],
         'path'              => [
             'required'  => 'Required',
