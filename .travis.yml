@@ -5,7 +5,6 @@ php:
 
 before_script:
   - cp .env.travis .env
-  - mysql -e 'create database agorakit_testing;'
   - composer self-update
   - composer require --dev --no-update phpunit/phpunit ~4
   - composer install --no-interaction
@@ -14,3 +13,9 @@ before_script:
 
 script:
   - vendor/bin/phpunit
+
+services:
+  - mysql
+
+before_install:
+  - mysql -e 'CREATE DATABASE agorakit_testing;'
