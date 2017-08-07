@@ -76,30 +76,6 @@ class FileController extends Controller
     */
     public function show(Group $group, File $file)
     {
-
-        if ($file->parent_id)
-        {
-            $parent_id = $file->parent_id;
-        }
-        else
-        {
-            $parent_id = null;
-        }
-
-        // view depends on file type
-        // folder :
-
-        if ($file->isFolder())
-        {
-            return view('files.index')
-            ->with('files', $file->getChildren())
-            ->with('parent_id', $parent_id)
-            ->with('file', $file)
-            ->with('group', $group)
-            ->with('tab', 'files');
-        }
-
-
         // file
         if ($file->isFile())
         {
@@ -117,10 +93,6 @@ class FileController extends Controller
             ->with('group', $group)
             ->with('tab', 'files');
         }
-
-
-
-
     }
 
 

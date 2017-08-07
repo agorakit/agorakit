@@ -24,6 +24,8 @@
 
             <label for="tags">{{trans('messages.tags')}}</label>
             <input class="form-control" name="tags" type="text"/>
+
+
             <span id="tagshelp" class="help-block">{{trans('messages.tags_help')}}</span>
         </div>
 
