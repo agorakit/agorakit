@@ -381,8 +381,14 @@ class FileController extends Controller
 
         // add user
         $file->user()->associate(Auth::user());
+
+
+
         if ($file->save())
         {
+            // handle tags
+            $file->tag($request->get('tags'));
+            
             flash()->info(trans('messages.ressource_created_successfully'));
             return redirect()->action('FileController@index', $group);
         }
