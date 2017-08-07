@@ -208,9 +208,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('groups/{group}/files/create', 'FileController@create');
     Route::post('groups/{group}/files/create', 'FileController@store');
 
-    // Creation of folders
-    Route::get('groups/{group}/files/createfolder', 'FileController@createFolder');
-    Route::post('groups/{group}/files/storefolder', 'FileController@storeFolder');
+    // Creation of links
+    Route::get('groups/{group}/files/createlink', 'FileController@createLink');
+    Route::post('groups/{group}/files/createlink', 'FileController@storeLink');
 
 
     Route::get('groups/{group}/files/{file}/download', 'FileController@download');

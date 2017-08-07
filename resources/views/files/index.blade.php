@@ -15,16 +15,16 @@
 
         <div class="toolbox">
         @can('create-file', $group)
-            <a class="btn btn-primary" href="{{ action('FileController@create', $group->id ) }}@if (isset($file))?parent_id={{$file->id}}@endif">
+            <a class="btn btn-primary" href="{{ action('FileController@create', $group->id ) }}">
                 <i class="fa fa-file"></i>
                 {{trans('messages.create_file_button')}}
             </a>
         @endcan
 
         @can('create-file', $group)
-            <a class="btn btn-primary" href="{{ action('FileController@createFolder', $group ) }}@if (isset($file))?parent_id={{$file->id}}@endif">
-                <i class="fa fa-folder-open-o"></i>
-                {{trans('messages.create_folder_button')}}
+            <a class="btn btn-primary" href="{{ action('FileController@createLink', $group ) }}">
+                <i class="fa fa-link-o"></i>
+                {{trans('messages.create_link_button')}}
             </a>
         @endcan
     </div>
