@@ -10,6 +10,7 @@ use Image;
 use Auth;
 use Storage;
 use Gate;
+use Validator;
 
 class FileController extends Controller
 {
@@ -357,6 +358,19 @@ class FileController extends Controller
     */
     public function storeLink(Request $request, Group $group)
     {
+
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'link' => 'required|url',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+            ->back()
+            ->withErrors($validator)
+            ->withInput();
+        }
+
         $file = new File;
         $file->name = $request->get('title');
         $file->path = $request->get('link');
