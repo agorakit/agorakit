@@ -8,7 +8,7 @@ use Watson\Validating\ValidatingTrait;
 use Storage;
 use Response;
 use Venturecraft\Revisionable\RevisionableTrait;
-
+use Cviebrock\EloquentTaggable\Taggable;
 
 
 class File extends Model
@@ -16,7 +16,7 @@ class File extends Model
     use ValidatingTrait;
     use SoftDeletes;
     use RevisionableTrait;
-
+    use Taggable;
 
     protected $onlyUseExistingTags = false;
 
@@ -77,74 +77,28 @@ class File extends Model
 
 
 
-/************************** Parenting and folder functions ***********************/
+    /************************** Parenting and folder functions  - candidate for removal very soon ***********************/
 
     public function getParent()
     {
-        if (is_null($this->parent_id))
-        {
-            return false;
-        }
-        else
-        {
-            return File::findOrFail($this->parent_id);
-        }
+        return false;
     }
 
     public function getChildren()
     {
-            return File::where('parent_id', $this->id)->with('user')->orderBy('item_type', 'desc')->get();
+        return false;
     }
 
 
     public function addChild(File $file)
     {
-        // we cannot add a folder to itself
-        if ($file->id == $this->id)
-        {
-            return false;
-        }
-
-        // file & folders must belong to the same group
-        if ($file->group_id <> $this->group_id)
-        {
-            return false;
-        }
-
-        // we can only add child to an existing folder
-        if ($this->isFolder())
-        {
-            $file->parent_id = $this->id;
-            return $file->save();
-        }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 
 
     public function getAncestors()
     {
-        $ancestors = [];
-
-        $current = $this;
-        // limit tree depth to 5 just in case, and this way we avoid recursive function
-        for ($i = 0; $i <5; $i++)
-        {
-            $parent =  $current->getParent();
-
-            if ($parent)
-            {
-                $ancestors[] = $parent;
-                $current = $parent;
-            }
-            else
-            {
-                break;
-            }
-        }
-        return $ancestors;
+        return false;
 
     }
 

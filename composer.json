@@ -26,7 +26,8 @@
     "lavary/laravel-menu": "^1.6",
     "suin/php-rss-writer": "^1.5",
     "twbs/bootstrap": "4.0.0-alpha.6",
-    "components/jquery": "^3.2"
+    "components/jquery": "^3.2",
+    "cviebrock/eloquent-taggable": "^2.0"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

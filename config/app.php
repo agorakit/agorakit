@@ -184,11 +184,11 @@ return [
         Vsch\TranslationManager\ManagerServiceProvider::class,
         Vsch\TranslationManager\TranslationServiceProvider::class,
         DraperStudio\Flash\ServiceProvider::class,
-        DraperStudio\Taggable\ServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         //Toin0u\Geocoder\GeocoderServiceProvider::class,
         Geocoder\Laravel\Providers\GeocoderService::class,
-        Lavary\Menu\ServiceProvider::class
+        Lavary\Menu\ServiceProvider::class,
+        Cviebrock\EloquentTaggable\ServiceProvider::class
 
     ],
 
