@@ -34,9 +34,6 @@ class FileController extends Controller
         //$files = $group->files()->with('user')->orderBy('updated_at', 'desc')->get();
         $files = $group->files()
         ->with('user')
-        ->whereNull('parent_id')
-        ->orderBy('item_type', 'desc')
-        ->orderBy('name', 'asc')
         ->orderBy('updated_at', 'desc')
         ->get();
 
@@ -231,41 +228,27 @@ class FileController extends Controller
                     $file->original_filename = $uploaded_file->getClientOriginalName();
                     $file->mime = $uploaded_file->getClientMimeType();
 
-
-                    // handle parenting
-                    if ($request->has('parent_id'))
-                    {
-                        $parent = File::findOrFail($request->get('parent_id'));
-                        $parent->addChild($file);
-                    }
-
                     // save it again
                     $file->save();
 
                 }
 
-                if ($request->ajax())
+
+
+                flash()->info(trans('messages.ressource_created_successfully'));
+                if (isset($parent))
                 {
-                    return response()->json('success', 200);
+                    return redirect()->action('FileController@show', [$group, $parent]);
                 }
                 else
                 {
-
-                    flash()->info(trans('messages.ressource_created_successfully'));
-                    if (isset($parent))
-                    {
-                        return redirect()->action('FileController@show', [$group, $parent]);
-                    }
-                    else
-                    {
-                        return redirect()->action('FileController@index', $group);
-                    }
+                    return redirect()->action('FileController@index', $group);
                 }
+
             }
         }
         catch (Exception $e)
         {
-
             if ($request->ajax())
             {
                 return response()->json($e->getMessage(), 400);
@@ -290,7 +273,7 @@ class FileController extends Controller
     {
         return view('files.edit')
         ->with('file', $file)
-        ->with('tags', $file->tagList)
+        ->with('all_tags', \App\File::allTags())
         ->with('group', $group)
         ->with('tab', 'file');
     }

@@ -14,20 +14,20 @@
 
 
         <div class="toolbox">
-        @can('create-file', $group)
-            <a class="btn btn-primary" href="{{ action('FileController@create', $group->id ) }}">
-                <i class="fa fa-file"></i>
-                {{trans('messages.create_file_button')}}
-            </a>
-        @endcan
+            @can('create-file', $group)
+                <a class="btn btn-primary" href="{{ action('FileController@create', $group->id ) }}">
+                    <i class="fa fa-file"></i>
+                    {{trans('messages.create_file_button')}}
+                </a>
+            @endcan
 
-        @can('create-file', $group)
-            <a class="btn btn-primary" href="{{ action('FileController@createLink', $group ) }}">
-                <i class="fa fa-link-o"></i>
-                {{trans('messages.create_link_button')}}
-            </a>
-        @endcan
-    </div>
+            @can('create-file', $group)
+                <a class="btn btn-primary" href="{{ action('FileController@createLink', $group ) }}">
+                    <i class="fa fa-link-o"></i>
+                    {{trans('messages.create_link_button')}}
+                </a>
+            @endcan
+        </div>
 
         <h3>
             @if (isset($file))
@@ -39,11 +39,43 @@
             @endif
         </h3>
 
-        <table class="table table-hover">
+
+        @section ('js')
+            <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+
+            <script>
+            var $grid = $('.files-grid').isotope({
+                // options
+                itemSelector: '.file-item',
+                layoutMode: 'vertical'
+            });
 
 
+            // filter items on button click
+            $('.filter-button-group').on( 'click', 'button', function() {
+                var filterValue = $(this).attr('data-filter');
+                $grid.isotope({ filter: filterValue });
+            });
+
+            </script>
+
+
+        @endsection
+
+        <div class="button-group filter-button-group">
+            <button data-filter="*">show all</button>
+            <button data-filter=".tag-salut">salut</button>
+            <button data-filter=".transition">transition</button>
+            <button data-filter=".alkali, .alkaline-earth">alkali & alkaline-earth</button>
+            <button data-filter=":not(.transition)">not transition</button>
+            <button data-filter=".metal:not(.transition)">metal but not transition</button>
+        </div>
+
+
+
+        <table class="table table-hover files-grid">
             @forelse( $files as $file )
-                <tr>
+                <tr class="file-item @foreach ($file->tags as $tag)tag-{{$tag->name}}@endforeach">
                     <td>
                         <a href="{{ action('FileController@show', [$group->id, $file->id]) }}"><img src="{{ action('FileController@thumbnail', [$group->id, $file->id]) }}"/></a>
                     </td>
