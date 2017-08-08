@@ -11,15 +11,8 @@
 
 
         <div class="form-group">
-            Déplacer ce dossier / document dans le dossier suivant :
-
-            <select name="parent_id">
-                @foreach ($folders as $folder)
-                    <option value="{{$folder->id}}">{{$folder->name}}</option>
-                @endforeach
-            </select>
-
-
+            <label for="tags">{{trans('messages.tags')}}</label>
+            <input class="form-control" name="tags" type="text" value="{{$tags}}"/>
         </div>
 
 

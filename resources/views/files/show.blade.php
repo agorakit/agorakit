@@ -11,10 +11,7 @@
         <h3>
             @if (isset($file))
                 <a href="{{ action('FileController@index', $group->id) }}"><i class="fa fa-home" aria-hidden="true"></i></a>
-                @foreach ($file->getAncestors() as $ancestor)
-                    / <a href="{{ action('FileController@show', [$group->id, $ancestor->id]) }}">{{$ancestor->name}}</a>
-                @endforeach
-                / {{$file->name}}
+                {{$file->name}}
             @endif
         </h3>
 
@@ -29,6 +26,11 @@
             <ul>
                 <li>{{trans('messages.author')}} : {{$file->user->name}}</li>
                 <li>{{trans('messages.created')}} : {{$file->created_at}}</li>
+                <li>{{trans('messages.tags')}} : 
+                    @foreach ($file->tags as $tag)
+                        <span class="label label-default">{{$tag->name}}</span>
+                    @endforeach
+                </li>
             </ul>
         </div>
 

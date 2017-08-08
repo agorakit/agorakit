@@ -41,21 +41,6 @@
 
         <table class="table table-hover">
 
-            @if (isset($file))
-                <tr>
-                    <td>
-                        @if ($file->parent)
-                            <a href="{{ action('FileController@show', [$group->id, $file->parent->id]) }}">
-                                <i class="fa fa-level-up" aria-hidden="true"></i>
-                            </a>
-                        @else
-                            <a href="{{ action('FileController@index', [$group->id]) }}">
-                                <i class="fa fa-level-up" aria-hidden="true"></i>
-                            </a>
-                        @endif
-                    </td>
-                </tr>
-            @endif
 
             @forelse( $files as $file )
                 <tr>
@@ -72,6 +57,22 @@
 
 
                     <td>
+                        @foreach ($file->tags as $tag)
+                            <span class="label label-default">{{$tag->name}}</span>
+                        @endforeach
+                    </td>
+
+                    <td>
+                        @unless (is_null ($file->user))
+                            <a href="{{ action('UserController@show', $file->user->id) }}">{{ $file->user->name }}</a>
+                        @endunless
+                    </td>
+
+                    <td>
+                        {{ $file->created_at }}
+                    </td>
+
+                    <td>
                         @can('edit', $file)
                             <a class="btn btn-default btn-xs" href="{{ action('FileController@edit', [$group->id, $file->id]) }}"><i class="fa fa-edit"></i>
                                 {{trans('messages.edit')}}
@@ -84,16 +85,6 @@
                             </a>
                         @endcan
 
-                    </td>
-
-                    <td>
-                        @unless (is_null ($file->user))
-                            <a href="{{ action('UserController@show', $file->user->id) }}">{{ $file->user->name }}</a>
-                        @endunless
-                    </td>
-
-                    <td>
-                        {{ $file->created_at }}
                     </td>
                 </tr>
 

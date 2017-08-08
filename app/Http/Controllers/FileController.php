@@ -199,10 +199,10 @@ class FileController extends Controller
                     // we save it first to get an ID from the database, it will later be used to generate a unique filename.
                     $file->forceSave(); // we bypass autovalidation, since we don't have a complete model yet, but we *need* an id
 
-                    // add group
+                    // add group, user and tags
                     $file->group()->associate($group);
                     $file->user()->associate(Auth::user());
-
+                    $file->tag($request->get('tags'));
 
                     // generate filenames and path
                     $filepath = '/groups/'.$file->group->id.'/files/';
@@ -290,6 +290,7 @@ class FileController extends Controller
     {
         return view('files.edit')
         ->with('file', $file)
+        ->with('tags', $file->tagList)
         ->with('group', $group)
         ->with('tab', 'file');
     }
@@ -303,9 +304,18 @@ class FileController extends Controller
     */
     public function update(Request $request, Group $group, File $file)
     {
-        // TODO
-        flash()->info(trans('messages.ressource_updated_successfully'));
-        return redirect()->action('FileController@show', [$group, $parent]);
+        $file->retag($request->get('tags'));
+
+        if ($file->save())
+        {
+            flash()->info(trans('messages.ressource_updated_successfully'));
+            return redirect()->action('FileController@index', [$group]);
+        }
+        else
+        {
+            flash()->info(trans('messages.ressource_not_updated_successfully'));
+            return redirect()->back();
+        }
     }
 
 
@@ -388,7 +398,7 @@ class FileController extends Controller
         {
             // handle tags
             $file->tag($request->get('tags'));
-            
+
             flash()->info(trans('messages.ressource_created_successfully'));
             return redirect()->action('FileController@index', $group);
         }
