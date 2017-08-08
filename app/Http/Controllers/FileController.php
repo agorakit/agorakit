@@ -278,6 +278,7 @@ class FileController extends Controller
         return view('files.edit')
         ->with('file', $file)
         ->with('all_tags', \App\File::allTags())
+        ->with('model_tags', $file->tags)
         ->with('group', $group)
         ->with('tab', 'file');
     }

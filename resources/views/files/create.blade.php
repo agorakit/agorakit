@@ -16,11 +16,7 @@
             </label>
         </div>
 
-        <div class="form-group">
-            <label for="tags">{{trans('messages.tags')}}</label>
-            <input class="form-control" name="tags" type="text"/>
-            <span id="tagshelp" class="help-block">{{trans('messages.tags_help')}}</span>
-        </div>
+        @include('partials.tags_form')
 
         <input class="btn btn-default" type="submit" name="{{trans('messages.upload')}}"/>
 
