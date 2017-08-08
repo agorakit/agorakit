@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('js')
-    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <script>
     $(document).ready(function() {
         $('.table').DataTable();
@@ -10,7 +10,7 @@
 @endsection
 
 @section('css')
-    {!! Html::style('https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css') !!}
+    {!! Html::style('https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css') !!}
 @endsection
 
 @section('content')

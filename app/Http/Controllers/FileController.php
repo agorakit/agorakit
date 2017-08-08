@@ -40,6 +40,7 @@ class FileController extends Controller
         return view('files.index')
         ->with('parent_id', null)
         ->with('files', $files)
+        ->with('all_tags', \App\File::allTags())
         ->with('group', $group)
         ->with('tab', 'files');
     }
@@ -164,6 +165,7 @@ class FileController extends Controller
     public function create(Request $request, Group $group)
     {
         return view('files.create')
+        ->with('all_tags', \App\File::allTags())
         ->with('group', $group)
         ->with('tab', 'files');
     }
@@ -172,6 +174,7 @@ class FileController extends Controller
     public function createLink(Request $request, Group $group)
     {
         return view('files.createlink')
+        ->with('all_tags', \App\File::allTags())
         ->with('group', $group)
         ->with('tab', 'files');
     }
