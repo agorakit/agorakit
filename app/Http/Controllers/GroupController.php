@@ -17,7 +17,7 @@ class GroupController extends Controller
     {
         $this->middleware('verified', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
         $this->middleware('member', ['only' => ['edit', 'update', 'destroy']]);
-        $this->middleware('cache', ['only' => ['index', 'show']]);
+        $this->middleware('cache', ['only' => ['cover']]);
     }
 
 
@@ -202,7 +202,7 @@ class GroupController extends Controller
         if (File::exists($path))
         {
             $cachedImage = Image::cache(function($img) use ($path) {
-                return $img->make($path)->fit(600, 400);
+                return $img->make($path)->fit(300, 200);
             }, 60000, true);
 
             return $cachedImage->response();

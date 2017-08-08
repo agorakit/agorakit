@@ -19,7 +19,7 @@ class FileController extends Controller
     {
         $this->middleware('member', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
         $this->middleware('verified', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
-        $this->middleware('cache', ['only' => ['index', 'show']]);
+        $this->middleware('cache', ['only' => ['download', 'thumbnail', 'preview']]);
         $this->middleware('public', ['only' => ['index', 'gallery', 'thumbnail', 'preview']]);
     }
 

@@ -20,7 +20,6 @@ class DiscussionController extends Controller
         $this->middleware('auth', ['only' => ['indexUnRead']]);
         $this->middleware('member', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
         $this->middleware('verified', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
-        $this->middleware('cache', ['only' => ['index', 'show']]);
         $this->middleware('public', ['only' => ['index', 'show', 'history']]);
     }
 
