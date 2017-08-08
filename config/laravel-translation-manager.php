@@ -35,7 +35,7 @@ return array(
      *
      * @type array of strings
      */
-    'show_locales' => [
+    'show_locales' => [ 'en', 'fr','de', 'nl'
     ],
     /**
      * Specify the prefix used for all cookies, session data and cache persistence.

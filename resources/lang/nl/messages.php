@@ -140,7 +140,7 @@ return [
     'modify_intro_text'                                 => 'Bewerken intro tekst',
     'my_groups'                                         => 'Mijn groepen',
     'name'                                              => 'Naam',
-    'news_from_group_email_subject'                     => 'Nieuws van de groep ',
+    'news_from_group_email_subject'                     => 'Nieuws van de groep',
     'next_actions'                                      => 'Naast acties',
     'not_a_member'                                      => 'U bent geen deel van deze groep',
     'not_allowed'                                       => 'Niet toegestaan',
