@@ -33,6 +33,7 @@ class FileController extends Controller
         // list all files and folders without parent id's (parent_id=NULL)
         //$files = $group->files()->with('user')->orderBy('updated_at', 'desc')->get();
         $files = $group->files()
+        ->where('item_type', '<>', \App\File::FOLDER)
         ->with('user')
         ->orderBy('updated_at', 'desc')
         ->get();

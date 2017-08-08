@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         \App\Console\Commands\SendNotifications::class,
         \App\Console\Commands\ConvertFiles::class,
+        \App\Console\Commands\ConvertFoldersToTags::class,
         \App\Console\Commands\ImportActions::class,
     ];
 

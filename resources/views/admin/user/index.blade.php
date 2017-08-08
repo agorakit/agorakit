@@ -44,7 +44,7 @@
                             <a href="{{ action('UserController@show', $user->id) }}"> {{ $user->email }}</a>
                         </td>
 
-                        <td>
+                        <td data-order="{{ $user->created_at }}>
                             <a href="{{ action('UserController@show', $user->id) }}">{{ $user->created_at->diffForHumans() }}</a>
                         </td>
                         <td>
