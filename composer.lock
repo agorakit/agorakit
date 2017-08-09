@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "014175d0520c875b0937a10fdce2149d",
-    "content-hash": "baed4ae3f15e621e866376d8090eea58",
+    "hash": "6cbf9779f70f6d9763d3962ab9f85eae",
+    "content-hash": "fe26bae65f3376b6396d8a5618961f57",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -231,48 +231,6 @@
                 "preload"
             ],
             "time": "2016-09-16 12:50:15"
-        },
-        {
-            "name": "components/jquery",
-            "version": "3.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/components/jquery.git",
-                "reference": "e5534d4ab8e80c159553d507e358ed20a806d3bf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/components/jquery/zipball/e5534d4ab8e80c159553d507e358ed20a806d3bf",
-                "reference": "e5534d4ab8e80c159553d507e358ed20a806d3bf",
-                "shasum": ""
-            },
-            "type": "component",
-            "extra": {
-                "component": {
-                    "scripts": [
-                        "jquery.js"
-                    ],
-                    "files": [
-                        "jquery.min.js",
-                        "jquery.min.map",
-                        "jquery.slim.js",
-                        "jquery.slim.min.js",
-                        "jquery.slim.min.map"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "JS Foundation and other contributors"
-                }
-            ],
-            "description": "jQuery JavaScript Library",
-            "homepage": "http://jquery.com",
-            "time": "2017-03-21 07:01:49"
         },
         {
             "name": "cviebrock/eloquent-taggable",
@@ -1926,48 +1884,6 @@
             "description": "HTML and Form Builders for the Laravel Framework",
             "homepage": "http://laravelcollective.com",
             "time": "2017-05-21 18:02:21"
-        },
-        {
-            "name": "lavary/laravel-menu",
-            "version": "v1.6.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lavary/laravel-menu.git",
-                "reference": "1617add78aa8ec8e4657aba3d88d2b86fc534b9f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lavary/laravel-menu/zipball/1617add78aa8ec8e4657aba3d88d2b86fc534b9f",
-                "reference": "1617add78aa8ec8e4657aba3d88d2b86fc534b9f",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": ">=5.0",
-                "illuminate/view": ">=5.0",
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Lavary\\Menu\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Lavary",
-                    "email": "mrl.8081@gmail.com"
-                }
-            ],
-            "description": "A quick way to create menus in Laravel 5",
-            "homepage": "https://github.com/lavary/laravel-menu",
-            "keywords": [
-                "laravel"
-            ],
-            "time": "2016-09-12 13:17:45"
         },
         {
             "name": "league/flysystem",
@@ -3756,57 +3672,6 @@
             "time": "2017-07-13 01:25:36"
         },
         {
-            "name": "twbs/bootstrap",
-            "version": "4.0.0-alpha.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "65ffb1c3b6e94440812a2e228cb8e8be512652ec"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/65ffb1c3b6e94440812a2e228cb8e8be512652ec",
-                "reference": "65ffb1c3b6e94440812a2e228cb8e8be512652ec",
-                "shasum": ""
-            },
-            "replace": {
-                "twitter/bootstrap": "self.version"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.3.x-dev"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jacob Thornton",
-                    "email": "jacobthornton@gmail.com"
-                },
-                {
-                    "name": "Mark Otto",
-                    "email": "markdotto@gmail.com"
-                }
-            ],
-            "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
-            "homepage": "https://getbootstrap.com",
-            "keywords": [
-                "JS",
-                "css",
-                "framework",
-                "front-end",
-                "mobile-first",
-                "responsive",
-                "sass",
-                "web"
-            ],
-            "time": "2017-01-06 16:41:52"
-        },
-        {
             "name": "venturecraft/revisionable",
             "version": "1.28.0",
             "source": {
@@ -4393,16 +4258,16 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "3.2.1",
+            "version": "3.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "183824db76118b9dddffc7e522b91fa175f75119"
+                "reference": "4aada1f93c72c35e22fb1383b47fee43b8f1d157"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/183824db76118b9dddffc7e522b91fa175f75119",
-                "reference": "183824db76118b9dddffc7e522b91fa175f75119",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/4aada1f93c72c35e22fb1383b47fee43b8f1d157",
+                "reference": "4aada1f93c72c35e22fb1383b47fee43b8f1d157",
                 "shasum": ""
             },
             "require": {
@@ -4434,7 +4299,7 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "time": "2017-08-04 20:55:59"
+            "time": "2017-08-08 06:39:58"
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -5512,8 +5377,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "kwi/urllinker": 20,
-        "twbs/bootstrap": 15
+        "kwi/urllinker": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

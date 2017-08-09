@@ -185,9 +185,7 @@ return [
         Vsch\TranslationManager\TranslationServiceProvider::class,
         DraperStudio\Flash\ServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
-        //Toin0u\Geocoder\GeocoderServiceProvider::class,
         Geocoder\Laravel\Providers\GeocoderService::class,
-        Lavary\Menu\ServiceProvider::class,
         Cviebrock\EloquentTaggable\ServiceProvider::class
 
     ],
@@ -242,7 +240,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Geocoder' => Toin0u\Geocoder\Facade\Geocoder::class,
-        'Menu' => Lavary\Menu\Facade::class
+
 
     ],
 
