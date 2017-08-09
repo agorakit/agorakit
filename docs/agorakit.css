@@ -1,9 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 
+body
+{
+    font-family: 'Roboto', sans-serif;
+}
 
 .container
 {
-    max-width: 65em;
+    max-width: 70em;
+    padding-bottom: 2em;
 }
 
 .agorakit-intro
@@ -57,8 +63,7 @@ h1, h2, h3
 }
 
 
-
-.container
+.card
 {
-    padding-bottom: 2em;
+    margin-bottom: 3em;
 }
