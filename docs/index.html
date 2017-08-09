@@ -70,9 +70,11 @@
 <div class="container">
 
 
+
+
     <div class="card-deck">
         <div class="card">
-            <img class="card-img-top img-fluid" src="agorakit_groups.jpg"/>
+            <img class="card-img-top img-fluid" src="agorakit_groups.jpg" data-toggle="modal" data-target="#photo-modal"/>
             <div class="card-block">
                 <h3 class="card-title">Create groups for your projects</h3>
                 <p class="card-text">You can create as many groups as you like, groups can be fully open or closed (membership approval required).</p>
@@ -82,7 +84,7 @@
 
 
         <div class="card">
-            <img class="card-img-top img-fluid" src="agorakit_agenda.jpg"/>
+            <img class="card-img-top img-fluid" src="agorakit_agenda.jpg" data-toggle="modal" data-target="#photo-modal"/>
             <div class="card-block">
                 <h3 class="card-title">Manage a collaborative agenda</h3>
                 <p class="card-text">Each group has an agenda, you can display a complete agenda of every groups. iCal feed for each agenda ready to be imported elsewhere.</p>
@@ -92,7 +94,7 @@
 
 
         <div class="card">
-            <img class="card-img-top img-fluid" src="agorakit_map.jpg"/>
+            <img class="card-img-top img-fluid" src="agorakit_map.jpg" data-toggle="modal" data-target="#photo-modal"/>
             <div class="card-block">
                 <h3 class="card-title">Geolocalize groups, people and events</h3>
                 <p class="card-text">Put everything on a nice map automatically. Map everyone, every group and every event as needed. Wake up the paranoid inside you.</p>
@@ -110,7 +112,7 @@
 
 
         <div class="card">
-            <img class="card-img-top img-fluid" src="agorakit_overview.jpg"/>
+            <img class="card-img-top img-fluid" src="agorakit_overview.jpg" data-toggle="modal" data-target="#photo-modal"/>
             <div class="card-block">
                 <h3 class="card-title">Get an overview of your unread discussions and upcoming events</h3>
                 <p class="card-text">Every user get a dashboard where you can see every unread discussions. No more mailing list horror. Keep an archive of everything for new comers. Avoid being spammed with "me too" replies.</p>
@@ -119,7 +121,7 @@
 
 
         <div class="card">
-            <img class="card-img-top img-fluid" src="agorakit_notifications.jpg"/>
+            <img class="card-img-top img-fluid" src="agorakit_notifications.jpg" data-toggle="modal" data-target="#photo-modal"/>
             <div class="card-block">
                 <h3 class="card-title">Receive email notifications at the rate YOU specify for each groups</h3>
                 <p class="card-text">aka "I don't want to be spammed for each comment in each group".
@@ -130,7 +132,7 @@
 
 
         <div class="card">
-            <img class="card-img-top img-fluid" src="agorakit_files.jpg"/>
+            <img class="card-img-top img-fluid" src="agorakit_files.jpg" data-toggle="modal" data-target="#photo-modal"/>
             <div class="card-block">
                 <h3 class="card-title">Manage your files and links</h3>
                 <p>Each groups has a file repository where you can store nice pictures of cute kittens, meetings summaries, links to shared documents, etc...</p>
@@ -163,8 +165,6 @@
 
     <h2>Contact</h2>
     <p>Please drop a line to info (at) agorakit.org to keep in touch.</p>
-
-
 </div>
 
 <div class="container centered">
@@ -172,14 +172,33 @@
 </div>
 
 
+<div class="modal fade" id="photo-modal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src=""/ class="img-fluid">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$('#photo-modal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var src = button.attr("src") // Extract info from data-* attributes
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this)
+    modal.find('img').attr("src", src)
+})
+</script>
 
 
-<div class="container">
-    <hr>
-    <footer>
-        <p></p>
-    </footer>
-</div> <!-- /container -->
 
 </body>
 </html>
