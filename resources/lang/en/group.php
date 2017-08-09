@@ -20,7 +20,7 @@ return [
     'latest_files'          => 'Latest files',
     'leave'                 => 'Leave',
     'name'                  => 'Group name',
-    'no_group_joined_yet'   => 'TODO: no_group_joined_yet',
+    'no_group_joined_yet'   => 'No group joined yet',
     'no_group_yet'          => 'No group yet',
     'open'                  => 'Public group',
     'private'               => 'Closed group',
