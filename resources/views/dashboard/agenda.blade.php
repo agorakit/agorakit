@@ -94,36 +94,6 @@
         </div>
     </div>
 
-    <!--
-
-    @if ($actions)
-    @foreach( $actions as $action )
-    <div class="action">
-    <h2 class="name">
-    {{ $action->name }}</a>
-</h2>
-
-<div class="meta">{{trans('messages.started_by')}} <span class="user">{{ $action->user->name}}</span>, {{trans('messages.in')}} {{ $action->group->name}} {{ $action->created_at->diffForHumans()}} </div>
-
-<h4>{{trans('messages.what')}} ?</h4>
-<p class="body">
-{{ $action->body }}
-</p>
-<p>{{trans('messages.begins')}} : {{$action->start->format('d/m/Y H:i')}}</p>
-<p>{{trans('messages.ends')}} : {{$action->stop->format('d/m/Y H:i')}}</p>
-<p>{{trans('messages.location')}} : {{$action->location}}</p>
-
-</div>
-@endforeach
-
-</tbody>
-</table>
-@else
-{{trans('messages.nothing_yet')}}
-@endif
-
--->
-
 
 
 
