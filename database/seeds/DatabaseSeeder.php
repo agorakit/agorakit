@@ -17,17 +17,27 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->delete();
 
         $admin = App\User::create([
-            'email' => 'admin@mobilisator.be',
+            'email' => 'admin@agorakit.org',
             'password' => bcrypt('secret'),
             'name' => $faker->name,
+            'verified' => 1,
         ]);
 
+        // add avatar to admin user
+        Storage::disk('local')->makeDirectory('users/' . $admin->id);
+        Image::make($faker->imageUrl(500,400, 'people'))->widen(500)->save(storage_path() . '/app/users/' . $admin->id . '/cover.jpg')->fit(128,128)->save(storage_path() . '/app/users/' . $admin->id . '/thumbnail.jpg');
+
         for ($i = 1; $i <= 50; ++$i) {
-            App\User::create([
+            $user = App\User::create([
                 'email' => $faker->safeEmail,
                 'password' => bcrypt('secret'),
                 'name' => $faker->name,
             ]);
+
+            // add avatar to every user
+            Storage::disk('local')->makeDirectory('users/' . $user->id);
+            Image::make($faker->imageUrl(500,400, 'people'))->widen(500)->save(storage_path() . '/app/users/' . $user->id . '/cover.jpg')->fit(128,128)->save(storage_path() . '/app/users/' . $user->id . '/thumbnail.jpg');
+
         }
 
         // create 10 groups
@@ -38,6 +48,10 @@ class DatabaseSeeder extends Seeder
                 //'name' => 'Group ' . $faker->sentence(3),
                 'body' => $faker->text,
             ]);
+
+            // add cover image to groups
+            Storage::disk('local')->makeDirectory('groups/' . $group->id);
+            Image::make($faker->imageUrl())->widen(800)->save(storage_path() . '/app/groups/' . $group->id . '/cover.jpg')->fit(300,200)->save(storage_path() . '/app/groups/' . $group->id . '/thumbnail.jpg');
 
 
             // add members to the group
