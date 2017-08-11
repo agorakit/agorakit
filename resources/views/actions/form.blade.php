@@ -86,12 +86,3 @@
     </script>
 
 @endsection
-
-
-
-
-
-
-
-
-</div>

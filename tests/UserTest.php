@@ -106,7 +106,7 @@ class UserTest extends TestCase
 
         $this->actingAs($user)
         ->visit('/groups/'. $group->id .'/actions/create')
-        ->see('Create')
+        ->see('Add an event')
         ->type('Test action', 'name')
         ->type('this is a test action in the agenda', 'body')
         ->type('Bruxelles', 'location')
