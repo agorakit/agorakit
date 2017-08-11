@@ -202,7 +202,7 @@ class GroupController extends Controller
         if (File::exists($path))
         {
             $cachedImage = Image::cache(function($img) use ($path) {
-                return $img->make($path)->fit(300, 200);
+                return $img->make($path)->fit(600, 350);
             }, 60000, true);
 
             return $cachedImage->response();
@@ -210,7 +210,7 @@ class GroupController extends Controller
         }
         else
         {
-            return Image::canvas(300,200)->fill('#cccccc')->response(); // TODO caching or default group image instead
+            return Image::canvas(600,350)->fill('#cccccc')->response(); // TODO caching or default group image instead
             abort(404);
         }
     }

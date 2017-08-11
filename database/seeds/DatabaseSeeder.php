@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $admin = App\User::create([
             'email' => 'admin@agorakit.org',
             'password' => bcrypt('secret'),
+            'body' => $faker->text,
             'name' => $faker->name,
             'verified' => 1,
         ]);
@@ -32,6 +33,7 @@ class DatabaseSeeder extends Seeder
                 'email' => $faker->safeEmail,
                 'password' => bcrypt('secret'),
                 'name' => $faker->name,
+                'body' => $faker->text(1000)
             ]);
 
             // add avatar to every user

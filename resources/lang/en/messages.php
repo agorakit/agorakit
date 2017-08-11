@@ -54,7 +54,7 @@ return [
     'confirm_password'                                  => 'Confirm password',
     'confirm_your_email'                                => 'Confirm your email',
     'contact'                                           => 'contact',
-    'contact_this_user'                                 => 'contact_this_user',
+    'contact_this_user'                                 => 'Contact this user',
     'cover'                                             => 'Cover',
     'create'                                            => 'Create',
     'create_file_button'                                => 'Upload file(s)',

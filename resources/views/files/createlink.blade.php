@@ -16,12 +16,14 @@
 
         <div class="form-group">
 
+
+            <label for="link">{{trans('messages.link')}}</label>
+            <input class="form-control" name="link" type="text" placeholder="http://..."/>
+
+
             <label for="title">{{trans('messages.title')}}</label>
             <input class="form-control" name="title" type="text"/>
 
-            <label for="link">{{trans('messages.link')}}</label>
-            <input class="form-control" name="link" type="text"/>
-            
             @include('partials.tags_form')
 
         </div>

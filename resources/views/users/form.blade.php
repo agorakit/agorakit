@@ -16,8 +16,9 @@
 
 
 <div class="form-group">
-    {!! Form::label('cover', trans('messages.photo')) !!}
-    {!! Form::file('cover', null, ['class' => 'form-control']) !!}
+    <label>{{trans('messages.photo')}}</label><br/>
+    <input name="cover" id="file" type="file" class="btn btn-primary" title="{{trans('messages.select_one_file')}}">
+    
 </div>
 
 
@@ -38,3 +39,4 @@
 
 
 @include('partials.wysiwyg')
+@include('partials.better-file-inputs')

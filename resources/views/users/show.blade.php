@@ -19,7 +19,7 @@
             </div>
 
             <div class="col-md-4">
-                <img src="{{$user->cover()}}" class="img-rounded img-responsive"/>
+                <img src="{{$user->cover()}}" class="img-circle img-responsive"/>
             </div>
         </div>
 
