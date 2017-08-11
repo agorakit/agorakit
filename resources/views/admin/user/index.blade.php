@@ -1,17 +1,17 @@
 @extends('app')
 
-@section('js')
+@push('js')
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <script>
     $(document).ready(function() {
         $('.table').DataTable();
     } );
     </script>
-@endsection
+@endpush
 
-@section('css')
+@push('css')
     {!! Html::style('https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css') !!}
-@endsection
+@endpush
 
 @section('content')
 

@@ -21,11 +21,9 @@
 
             <label for="link">{{trans('messages.link')}}</label>
             <input class="form-control" name="link" type="text"/>
-
+            
             @include('partials.tags_form')
 
-
-            <span id="tagshelp" class="help-block">{{trans('messages.tags_help')}}</span>
         </div>
 
         <input class="btn btn-default" type="submit" name="{{trans('messages.create')}}"/>

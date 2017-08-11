@@ -52,7 +52,7 @@
     <link href="/packages/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
 @endsection
 
-@section('js')
+@push('js')
     <script src="/packages/moment/min/moment-with-locales.min.js"></script>
     <script src="/packages/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 
@@ -85,4 +85,4 @@
     CKEDITOR.replace( 'wysiwyg' );
     </script>
 
-@endsection
+@endpush

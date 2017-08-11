@@ -33,11 +33,11 @@
 
 
 
-        @section('css')
+        @push('css')
             <link href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" />
-        @endsection
+        @endpush
 
-        @section('js')
+        @push('js')
             <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 
             <script>
@@ -49,7 +49,7 @@
             });
             </script>
 
-        @endsection
+        @endpush
 
 
 

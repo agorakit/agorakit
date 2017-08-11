@@ -1,15 +1,11 @@
 @extends('app')
 
-@section('css')
+@push('css')
     {!! Html::style('/packages/selectize/css/selectize.bootstrap3.css') !!}
-@stop
+@endpush
 
-@section('js')
+@push('js')
     {!! Html::script('/packages/selectize/js/standalone/selectize.min.js') !!}
-@stop
-
-
-@section('footer')
     <script>
     $( document ).ready(function() {
         $('#users').selectize({
@@ -17,7 +13,8 @@
         });
     });
     </script>
-@stop
+@endpush
+
 
 
 @section('content')

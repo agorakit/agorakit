@@ -191,6 +191,7 @@ TEXT
     'ressource_updated_successfully'                    => 'Contenu mis à jour avec succès',
     'save'                                              => 'Enregistrer',
     'search'                                            => 'Rechercher',
+    'select_one_file'                                   => 'Sélectionnez un fichier',
     'select_one_or_more_files'                          => 'Sélectionnez un ou plusieurs fichiers',
     'send'                                              => 'Envoyer',
     'send_my_recover_email'                             => 'M\'envoyer un mail pour changer mon mot de passe',

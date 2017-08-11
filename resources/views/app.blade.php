@@ -14,6 +14,8 @@
     <!-- css -->
     @yield('css')
 
+    @stack('css')
+
 
     <!-- agorakit specific css-->
     {!! Html::style('/css/all.css?v8') !!}
@@ -48,6 +50,7 @@
 
     <!-- js -->
     @yield('js')
+    @stack('js')
 
 
     <!-- footer -->
