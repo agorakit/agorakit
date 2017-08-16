@@ -27,6 +27,7 @@ class Action extends Model
     'stop' => 'required',
   ];
 
+  protected $touches = ['group'];
 
   protected $table = 'actions';
   public $timestamps = true;

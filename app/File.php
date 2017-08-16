@@ -18,6 +18,7 @@ class File extends Model
     use RevisionableTrait;
     use Taggable;
 
+    protected $touches = ['group'];
 
 
     protected $rules = [

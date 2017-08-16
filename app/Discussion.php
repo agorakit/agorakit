@@ -17,7 +17,7 @@ class Discussion extends Model
 
   protected $cascadeDeletes = ['comments'];
 
-
+  protected $touches = ['group'];
 
   protected $rules = [
     'name' => 'required|min:5',
