@@ -185,19 +185,11 @@ class DashboardController extends Controller
     {
         if (Auth::check())
         {
-            /*
-            $other_groups = \App\Group::whereNotIn('id', Auth::user()->groups()->lists('groups.id'))->get();
-            $my_groups = Auth::user()->groups()->orderBy('name')->get();
-            */
-            $other_groups = false;
-            $my_groups = false;
-            $groups = \App\Group::with('membership')->orderBy('name')->get();
+            $groups = \App\Group::with('membership')->with('tags')->orderBy('updated_at', 'desc')->get();
         }
         else
         {
-            $groups = \App\Group::with('membership')->orderBy('name')->get();
-            $other_groups = false;
-            $my_groups = false;
+            $groups = \App\Group::with('tags')->orderBy('updated_at', 'desc')->get();
         }
 
 
@@ -207,8 +199,6 @@ class DashboardController extends Controller
         return view('dashboard.groups')
         ->with('tab', 'groups')
         ->with('groups', $groups)
-        ->with('other_groups', $other_groups)
-        ->with('my_groups', $my_groups)
         ->with('all_tags', $tagService->getAllTags('App\Group'));
 
 
