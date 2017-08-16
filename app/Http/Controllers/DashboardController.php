@@ -185,9 +185,12 @@ class DashboardController extends Controller
     {
         if (Auth::check())
         {
+            /*
             $other_groups = \App\Group::whereNotIn('id', Auth::user()->groups()->lists('groups.id'))->get();
             $my_groups = Auth::user()->groups()->orderBy('name')->get();
-            $groups = false;
+            */
+            $other_groups = false;
+            $my_groups = false;
             $groups = \App\Group::with('membership')->orderBy('name')->get();
         }
         else
@@ -198,14 +201,15 @@ class DashboardController extends Controller
         }
 
 
-        
+        $tagService = app(\Cviebrock\EloquentTaggable\Services\TagService::class);
+
 
         return view('dashboard.groups')
         ->with('tab', 'groups')
         ->with('groups', $groups)
         ->with('other_groups', $other_groups)
         ->with('my_groups', $my_groups)
-        ->with('all_tags', \App\Group::allTagModels());
+        ->with('all_tags', $tagService->getAllTags('App\Group'));
 
 
     }

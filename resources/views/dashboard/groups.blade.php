@@ -18,7 +18,7 @@
                 @foreach ($all_tags as $tag)
                 $("#toggle-tag-{{$tag->tag_id}}").click(function(){
                     $(".tag-{{$tag->tag_id}}").toggle();
-                    $(this).toggleClass("btn-primary");
+                    $(this).toggleClass("btn-checked");
                 });
                 @endforeach
             });
@@ -29,9 +29,11 @@
 
 
 
-            @foreach ($all_tags as $tag)
-                <a class="btn btn-default" id="toggle-tag-{{$tag->tag_id}}">{{$tag->name}} ({{$tag->tag_id}})</a>
-            @endforeach
+        @foreach ($all_tags as $tag)
+            <input type="checkbox" checked="checked" id="toggle-tag-{{$tag->tag_id}}"></input>
+            <label for="toggle-tag-{{$tag->tag_id}}">{{$tag->name}}</label>
+
+        @endforeach
 
 
 
@@ -95,7 +97,7 @@
             <h2>{{ trans('messages.my_groups') }}</h2>
             <div class="row">
                 @forelse( $my_groups as $group )
-                    <div class="col-xs-6 col-md-3">
+                    <div class="col-xs-6 col-md-3 @foreach ($group->tags as $tag)tag-{{$tag->tag_id}} @endforeach">
                         <div class="thumbnail group">
                             <a href="{{ action('GroupController@show', $group->id) }}">
                                 <img src="{{action('GroupController@cover', $group->id)}}"/>
@@ -151,7 +153,7 @@
             <h2>{{ trans('messages.other_groups') }}</h2>
             <div class="row">
                 @forelse( $other_groups as $group )
-                    <div class="col-xs-6 col-md-3">
+                    <div class="col-xs-6 col-md-3 @foreach ($group->tags as $tag)tag-{{$tag->tag_id}} @endforeach">
                         <div class="thumbnail group">
                             <a href="{{ action('GroupController@show', $group->id) }}">
                                 <img src="{{action('GroupController@cover', $group->id)}}"/>
