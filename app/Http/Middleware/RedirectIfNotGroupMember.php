@@ -37,6 +37,12 @@ class RedirectIfNotGroupMember
             return redirect()->back()->with('message', trans('messages.not_logged_in'));
         }
 
+        // an admin can bypass membership requirement
+        if ($request->user()->isAdmin())
+        {
+            return $next($request);
+        }
+
         // we expect a url in the form /groups/{group_id}
         if ($request->segment(1) == 'groups') {
             $membership = \App\Membership::where('user_id', '=',  $request->user()->id)->where('group_id', $request->segment(2))->first();
