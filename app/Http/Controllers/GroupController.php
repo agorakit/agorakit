@@ -179,7 +179,7 @@ class GroupController extends Controller
 
 
         $group->user()->associate(Auth::user());
-        $group->tag($request->get('tags'));
+        $group->retag($request->get('tags'));
 
         // validation
         if ($group->isInvalid()) {
