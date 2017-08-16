@@ -10,11 +10,38 @@
 
     <div class="tab_content">
 
+
+        @push ('js')
+
+            <script>
+            $(document).ready(function(){
+                @foreach ($all_tags as $tag)
+                $("#toggle-tag-{{$tag->tag_id}}").click(function(){
+                    $(".tag-{{$tag->tag_id}}").toggle();
+                    $(this).toggleClass("btn-primary");
+                });
+                @endforeach
+            });
+
+            </script>
+        @endpush
+
+
+
+
+            @foreach ($all_tags as $tag)
+                <a class="btn btn-default" id="toggle-tag-{{$tag->tag_id}}">{{$tag->name}} ({{$tag->tag_id}})</a>
+            @endforeach
+
+
+
+
+
         @if ($groups)
             <h2>{{ trans('messages.all_groups') }}</h2>
             <div class="row">
                 @forelse( $groups as $group )
-                    <div class="col-xs-6 col-md-3">
+                    <div class="col-xs-6 col-md-3 @foreach ($group->tags as $tag)tag-{{$tag->tag_id}} @endforeach">
                         <div class="thumbnail group">
                             <a href="{{ action('GroupController@show', $group->id) }}">
                                 <img src="{{action('GroupController@cover', $group->id)}}"/>
@@ -30,11 +57,17 @@
 
                                     </a>
                                 </h4>
-                                <p class="summary">{{ summary($group->body, 150) }}</p>
+
                                 <p>
+                                    @foreach ($group->tags as $tag)
+                                        <span class="label label-default">{{$tag->name}} {{$tag->tag_id}}</span>
+                                    @endforeach
+                                </p>
+
+                                <p class="summary">{{ summary($group->body, 150) }}</p>
 
 
-
+                                <p>
                                     @unless ($group->isMember())
                                         @can ('join', $group)
                                             <a class="btn btn-primary" href="{{ action('MembershipController@join', $group->id) }}"><i class="fa fa-sign-in"></i>
@@ -43,10 +76,9 @@
                                         @endcan
 
                                     @endunless
-
                                     <a class="btn btn-primary" href="{{ action('GroupController@show', $group->id) }}">{{ trans('group.visit') }}</a>
-
                                 </p>
+
                             </div>
                         </div>
                     </div>
@@ -79,11 +111,18 @@
 
                                     </a>
                                 </h4>
-                                <p class="summary">{{ summary($group->body, 150) }}</p>
+
                                 <p>
+                                    @foreach ($group->tags as $tag)
+                                        <span class="label label-default">{{$tag->name}}</span>
+                                    @endforeach
+                                </p>
+
+                                <p class="summary">{{ summary($group->body, 150) }}</p>
 
 
 
+                                <p>
                                     @unless ($group->isMember())
                                         @can ('join', $group)
                                             <a class="btn btn-primary" href="{{ action('MembershipController@join', $group->id) }}"><i class="fa fa-sign-in"></i>
@@ -128,6 +167,12 @@
 
                                     </a>
                                 </h4>
+                                <p>
+                                    @foreach ($group->tags as $tag)
+                                        <span class="label label-default">{{$tag->name}}</span>
+                                    @endforeach
+                                </p>
+
                                 <p class="summary">{{ summary($group->body, 150) }}</p>
                                 <p>
 
@@ -156,7 +201,7 @@
 
         @endif
 
-        
+
 
 
     </div>

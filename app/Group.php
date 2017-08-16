@@ -11,6 +11,7 @@ use Watson\Validating\ValidatingTrait;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Auth;
 use Geocoder\Laravel\Facades\Geocoder;
+use Cviebrock\EloquentTaggable\Taggable;
 
 
 class Group extends Model
@@ -19,6 +20,7 @@ class Group extends Model
     use RevisionableTrait;
     use SoftDeletes;
     use CascadeSoftDeletes;
+    use Taggable;
 
     protected $cascadeDeletes = ['discussions', 'actions', 'files', 'memberships'];
 

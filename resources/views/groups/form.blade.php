@@ -8,6 +8,8 @@
     {!! Form::textarea('body', null, ['id' => 'wysiwyg', 'class' => 'form-control', 'required']) !!}
 </div>
 
+@include('partials.tags_form')
+
 <div class="form-group">
     <label>{{trans('group.cover')}}</label><br/>
     <input name="cover" id="file" type="file" class="btn btn-primary" title="{{trans('messages.select_one_file')}}">

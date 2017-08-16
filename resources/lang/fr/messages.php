@@ -210,7 +210,7 @@ TEXT
     'stop'                                              => 'Fin',
     'summary'                                           => 'Résumé',
     'tags'                                              => 'Mots clé (étiquettes)',
-    'tags_help'                                         => 'Choisissez un ou plusieurs mots clés. Ces étiquettes permettron de retrouver facilement votre contribution. Dans la liste vous trouverez les mot clés déjà utilisés. Essayer d\'être cohérent(e) avec ce qui existe déjà. Séparez chaque mot clé par une virgule.',
+    'tags_help'                                         => 'Choisissez un ou plusieurs mots clés. Ces étiquettes permettront de retrouver facilement votre contribution. Dans la liste vous trouverez les mot clés déjà utilisés. Essayer d\'être cohérent(e) avec ce qui existe déjà. Séparez chaque mot clé par une virgule.',
     'thank_you_for_joining'                             => 'Merci d\'avoir rejoint',
     'thinks_that_you_might_want_to_join'                => 'pense que vous pourriez être intéressé(e) à joindre',
     'this_action_can_be_reverted'                       => 'Cette action est réversible',

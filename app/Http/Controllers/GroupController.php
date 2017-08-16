@@ -21,67 +21,6 @@ class GroupController extends Controller
     }
 
 
-    /**
-    * Show the form for creating a new resource.
-    *
-    * @return Response
-    */
-    public function create()
-    {
-        return view('groups.create');
-    }
-
-    /**
-    * Store a newly created resource in storage.
-    *
-    * @return Response
-    */
-    public function store(Request $request)
-    {
-        $group = new group();
-
-        $group->name = $request->input('name');
-        $group->body = $request->input('body');
-        $group->group_type = $request->input('group_type');
-
-        if ($request->get('address'))
-        {
-            $group->address = $request->input('address');
-            if (!$group->geocode())
-            {
-                flash()->error(trans('messages.address_cannot_be_geocoded'));
-            }
-            else
-            {
-                flash()->info( trans('messages.ressource_geocoded_successfully'));
-            }
-        }
-
-
-        if ($group->isInvalid()) {
-            // Oops.
-            return redirect()->action('GroupController@create')
-            ->withErrors($group->getErrors())
-            ->withInput();
-        }
-        $group->save();
-
-        // handle cover
-        if ($request->hasFile('cover'))
-        {
-            Storage::disk('local')->makeDirectory('groups/' . $group->id);
-            Image::make($request->file('cover'))->widen(800)->save(storage_path() . '/app/groups/' . $group->id . '/cover.jpg');
-            Image::make($request->file('cover'))->fit(300,200)->save(storage_path() . '/app/groups/' . $group->id . '/thumbnail.jpg');
-        }
-
-        // make the current user an admin of the group
-        $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
-        $membership->notification_interval = 60 * 24; // default to daily interval
-        $membership->membership = \App\Membership::ADMIN;
-        $membership->save();
-
-        return redirect()->action('MembershipController@settings', [$group->id]);
-    }
 
     /**
     * Display the specified resource.
@@ -122,6 +61,74 @@ class GroupController extends Controller
     }
 
     /**
+    * Show the form for creating a new resource.
+    *
+    * @return Response
+    */
+    public function create()
+    {
+        return view('groups.create')
+        ->with('all_tags', \App\Group::allTags());
+    }
+
+    /**
+    * Store a newly created resource in storage.
+    *
+    * @return Response
+    */
+    public function store(Request $request)
+    {
+        $group = new group();
+
+        $group->name = $request->input('name');
+        $group->body = $request->input('body');
+        $group->group_type = $request->input('group_type');
+
+        if ($request->get('address'))
+        {
+            $group->address = $request->input('address');
+            if (!$group->geocode())
+            {
+                flash()->error(trans('messages.address_cannot_be_geocoded'));
+            }
+            else
+            {
+                flash()->info( trans('messages.ressource_geocoded_successfully'));
+            }
+        }
+
+        $group->user()->associate(Auth::user());
+        $group->tag($request->get('tags'));
+
+
+        if ($group->isInvalid()) {
+            // Oops.
+            return redirect()->action('GroupController@create')
+            ->withErrors($group->getErrors())
+            ->withInput();
+        }
+        $group->save();
+
+        // handle cover
+        if ($request->hasFile('cover'))
+        {
+            Storage::disk('local')->makeDirectory('groups/' . $group->id);
+            Image::make($request->file('cover'))->widen(800)->save(storage_path() . '/app/groups/' . $group->id . '/cover.jpg');
+            Image::make($request->file('cover'))->fit(300,200)->save(storage_path() . '/app/groups/' . $group->id . '/thumbnail.jpg');
+        }
+
+        // make the current user an admin of the group
+        $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
+        $membership->notification_interval = 60 * 24; // default to daily interval
+        $membership->membership = \App\Membership::ADMIN;
+        $membership->save();
+
+        return redirect()->action('MembershipController@settings', [$group->id]);
+    }
+
+
+
+    /**
     * Show the form for editing the specified resource.
     *
     * @param  int  $id
@@ -132,7 +139,8 @@ class GroupController extends Controller
     {
         return view('groups.edit')
         ->with('group', $group)
-        ->with('group', $group)
+        ->with('all_tags', \App\Group::allTags())
+        ->with('model_tags', $group->tags)
         ->with('tab', 'home');
     }
 
@@ -145,6 +153,7 @@ class GroupController extends Controller
     */
     public function update(Request $request, Group $group)
     {
+
         $group->name = $request->input('name');
         $group->body = $request->input('body');
 
@@ -170,6 +179,7 @@ class GroupController extends Controller
 
 
         $group->user()->associate(Auth::user());
+        $group->tag($request->get('tags'));
 
         // validation
         if ($group->isInvalid()) {
@@ -211,7 +221,6 @@ class GroupController extends Controller
         else
         {
             return Image::canvas(600,350)->fill('#cccccc')->response(); // TODO caching or default group image instead
-            abort(404);
         }
     }
 

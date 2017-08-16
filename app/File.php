@@ -18,7 +18,6 @@ class File extends Model
     use RevisionableTrait;
     use Taggable;
 
-    protected $onlyUseExistingTags = false;
 
 
     protected $rules = [
@@ -121,7 +120,7 @@ class File extends Model
         }
     }
 
-    
+
     public function getAncestors()
     {
         $ancestors = [];
