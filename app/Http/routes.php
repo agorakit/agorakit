@@ -106,6 +106,7 @@ Route::group(['middleware' => ['web']], function () {
     // Groups
     Route::get('groups/{group}', 'GroupController@show');
     Route::get('groups/{group}/cover', 'GroupController@cover');
+    Route::get('groups/{group}/avatar', 'GroupController@avatar');
     Route::get('groups/{group}/edit', 'GroupController@edit');
     Route::post('groups/{group}/edit', 'GroupController@update');
     Route::get('groups/{group}/history', 'GroupController@history');
