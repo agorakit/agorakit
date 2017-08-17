@@ -38,11 +38,19 @@
                             </a>
                         </li>
 
-                        <li>
-                            <a href="{{ action('DashboardController@users') }}">
-                                <i class="fa fa-users"></i> {{trans('messages.users_list')}}
-                            </a>
-                        </li>
+                        @if (Auth::check())
+                            <li>
+                                <a href="{{ action('DashboardController@files') }}">
+                                    <i class="fa fa-files-o"></i> {{trans('messages.files')}}
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{ action('DashboardController@users') }}">
+                                    <i class="fa fa-users"></i> {{trans('messages.users_list')}}
+                                </a>
+                            </li>
+                        @endif
 
                         <li>
                             <a href="{{ action('DashboardController@map') }}">

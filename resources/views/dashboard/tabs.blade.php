@@ -33,7 +33,7 @@
     @if (Auth::check())
         <li @if (isset($tab) && ($tab == 'files')) class="active" @endif>
             <a href="{{ action('DashboardController@files') }}">
-                <i class="fa fa-file-o"></i> <span class="hidden-xs">{{ trans('messages.files') }}</span>
+                <i class="fa fa-files-o"></i> <span class="hidden-xs">{{ trans('messages.files') }}</span>
             </a>
         </li>
     @endif

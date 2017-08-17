@@ -48,7 +48,7 @@
         @can ('viewFiles', $group)
             <li role="presentation" @if (isset($tab) && ($tab == 'files')) class="active" @endif>
                 <a href="{{ action('FileController@index', $group->id) }}">
-                    <i class="fa fa-file-o"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.files') }}</span>
+                    <i class="fa fa-files-o"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.files') }}</span>
                 </a>
             </li>
         @endcan
@@ -123,7 +123,7 @@
         @if ($group->isPublic() )
             <li role="presentation" @if (isset($tab) && ($tab == 'files')) class="active" @endif>
                 <a href="{{ action('FileController@index', $group->id) }}">
-                    <i class="fa fa-file-o"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.files') }}</span>
+                    <i class="fa fa-files-o"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.files') }}</span>
                 </a>
             </li>
         @endif
