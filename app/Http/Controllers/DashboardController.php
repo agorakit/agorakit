@@ -95,15 +95,19 @@ class DashboardController extends Controller
             $groups = \App\Group::public()->get()->pluck('id')->merge(Auth::user()->groups()->pluck('groups.id'));
 
             $files = \App\File::with('group', 'user')
+            ->where('item_type', '<>', \App\File::FOLDER)
             ->whereIn('group_id', $groups)
             ->orderBy('updated_at', 'desc')->paginate(25);
         }
+        /*
         else
         {
             $files = \App\File::with('group', 'user')
+            ->where('item_type', '<>', \App\File::FOLDER)
             ->whereIn('group_id', \App\Group::public()->get()->pluck('id'))
             ->orderBy('updated_at', 'desc')->paginate(25);
         }
+        */
 
 
         return view('dashboard.files')
