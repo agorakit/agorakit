@@ -8,13 +8,31 @@
 
         <div class="row">
             <div class="col-md-6">
-                {!! filter($group->body) !!}
+                <p>
+                    {!! filter($group->body) !!}
+                </p>
 
                 <p>
-                    @foreach ($group->tags as $tag)
-                        <span class="label label-default">{{$tag->name}}</span>
-                    @endforeach
+                    @if ($admins->count() > 0)
+                        {{trans('messages.group_admin_users')}} :
+
+                        @foreach ($admins as $admin)
+                            <a href="{{ action('UserController@show', [$admin->id]) }}">{{$admin->name}}</a>
+                        @endforeach
+                    @endif
+
                 </p>
+
+                <p>
+                    @if ($group->tags->count() > 0)
+                        {{trans('messages.tags')}} :
+                        @foreach ($group->tags as $tag)
+                            <span class="label label-default">{{$tag->name}}</span>
+                        @endforeach
+                    @endif
+                </p>
+
+
 
                 <p>
                     @can('update', $group)

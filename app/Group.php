@@ -68,6 +68,16 @@ class Group extends Model
         return $this->belongsToMany('App\User', 'membership')->withTimestamps()->withPivot('membership');
     }
 
+
+    /**
+    * Returns all the admins of this group
+    *
+    */
+    public function admins()
+    {
+        return $this->belongsToMany('App\User', 'membership')->where('membership', \App\Membership::ADMIN)->withTimestamps()->withPivot('membership');
+    }
+
     /**
     * The user who crreated or updated this group title and description
     */

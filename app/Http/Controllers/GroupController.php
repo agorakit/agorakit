@@ -57,6 +57,7 @@ class GroupController extends Controller
         ->with('discussions', $discussions)
         ->with('actions', $actions)
         ->with('files', $files)
+        ->with('admins', $group->admins()->get())
         ->with('tab', 'home');
     }
 

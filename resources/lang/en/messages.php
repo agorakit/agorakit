@@ -91,6 +91,7 @@ TEXT
     'files_in_this_group'                               => 'Files in this group',
     'forgotten_password'                                => 'Forgotten password',
     'group'                                             => 'Group',
+    'group_admin_users'                                 => 'Contact person(s)',
     'group_home'                                        => 'Group home',
     'groups'                                            => 'Groups',
     'groups_list'                                       => 'List of groups',
