@@ -39,4 +39,18 @@ class FilePolicy
         return $user->id == $file->user_id;
     }
 
+    public function download(User $user, File $file)
+    {
+        if ($file->group->isPublic())
+        {
+            return true;
+        }
+        if ($user->isMemberOf($file->group))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
 }

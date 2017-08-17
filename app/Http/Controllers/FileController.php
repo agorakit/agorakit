@@ -105,30 +105,44 @@ class FileController extends Controller
     */
     public function download(Group $group, File $file)
     {
-        if (Storage::exists($file->path)) {
-            //return response()->download($file->path, $file->original_filename);
-            return (new Response(Storage::get($file->path), 200))
-            ->header('Content-Type', $file->mime)
-            ->header('Content-Disposition', 'inline; filename="' . $file->original_filename . '"');
-        } else {
-            abort(404, 'File not found in storage at ' . $file->path);
+        if (Gate::allows('download', $file))
+        {
+
+            if (Storage::exists($file->path))
+            {
+                return (new Response(Storage::get($file->path), 200))
+                ->header('Content-Type', $file->mime)
+                ->header('Content-Disposition', 'inline; filename="' . $file->original_filename . '"');
+            }
+            else
+            {
+                abort(404, 'File not found in storage at ' . $file->path);
+            }
         }
+        else
+        {
+            abort(404, 'Unauthorized');
+        }
+
     }
 
     public function thumbnail(Group $group, File $file)
     {
-        if (in_array($file->mime, ['image/jpeg', 'image/png', 'image/gif']))
+        if (Gate::allows('download', $file))
         {
-            $cachedImage = Image::cache(function($img) use ($file) {
-                return $img->make(storage_path().'/app/'.$file->path)->fit(32, 32);
-            }, 60000, true);
+            if (in_array($file->mime, ['image/jpeg', 'image/png', 'image/gif']))
+            {
+                $cachedImage = Image::cache(function($img) use ($file) {
+                    return $img->make(storage_path().'/app/'.$file->path)->fit(32, 32);
+                }, 60000, true);
 
-            return $cachedImage->response();
-        }
+                return $cachedImage->response();
+            }
 
-        if ($file->isFolder())
-        {
-            return redirect('images/extensions/folder.png');
+            if ($file->isFolder())
+            {
+                return redirect('images/extensions/folder.png');
+            }
         }
 
 
@@ -141,18 +155,19 @@ class FileController extends Controller
     public function preview(Group $group, File $file)
     {
 
-        if (in_array($file->mime, ['image/jpeg', 'image/png', 'image/gif']))
+        if (Gate::allows('download', $file))
         {
-            $cachedImage = Image::cache(function($img) use ($file) {
-                return $img->make(storage_path().'/app/'.$file->path)->fit(250,250);
-            }, 60000, true);
+            if (in_array($file->mime, ['image/jpeg', 'image/png', 'image/gif']))
+            {
+                $cachedImage = Image::cache(function($img) use ($file) {
+                    return $img->make(storage_path().'/app/'.$file->path)->fit(250,250);
+                }, 60000, true);
 
-            return $cachedImage->response();
+                return $cachedImage->response();
+            }
         }
-        else
-        {
-            return redirect('images/extensions/text-file.png');
-        }
+
+        return redirect('images/extensions/text-file.png');
     }
 
 
