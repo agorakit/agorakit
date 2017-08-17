@@ -15,7 +15,7 @@ class DashboardController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth', ['only' => ['discussions', 'users']]);
+        $this->middleware('auth', ['only' => ['users', 'files']]);
     }
 
     /**
@@ -85,14 +85,30 @@ class DashboardController extends Controller
     }
 
 
-    public function presentation()
-    {
-        return view('dashboard.presentation')
-        ->with('tab', 'presentation');
-    }
-
+    /**
+     * Show all the files independant of groups
+     */
     public function files()
     {
+        if (Auth::check())
+        {
+            $groups = \App\Group::public()->get()->pluck('id')->merge(Auth::user()->groups()->pluck('groups.id'));
+
+            $files = \App\File::with('group', 'user')
+            ->whereIn('group_id', $groups)
+            ->orderBy('updated_at', 'desc')->paginate(25);
+        }
+        else
+        {
+            $files = \App\File::with('group', 'user')
+            ->whereIn('group_id', \App\Group::public()->get()->pluck('id'))
+            ->orderBy('updated_at', 'desc')->paginate(25);
+        }
+
+
+        return view('dashboard.files')
+        ->with('tab', 'files')
+        ->with('files', $files);
     }
 
 
@@ -104,17 +120,21 @@ class DashboardController extends Controller
     {
         if (Auth::check())
         {
-            $my_groups = Auth::user()->groups()->orderBy('name')->get();
-            $my_groups_id = false;
-            // using this array we can adjust the queries after to only include stuff the user has
-            // might be a good idea to find a clever way to build this array of groups id :
-            foreach ($my_groups as $the_group)
-            {
-                $my_groups_id[] = $the_group->id;
-            }
+            // All the groups of a user : Auth::user()->groups()->pluck('groups.id')
+            // All the public groups : Auth::user()->groups()->pluck('groups.id')
+
+            // A merge of the two :
+
+            $groups = \App\Group::public()->get()->pluck('id')->merge(Auth::user()->groups()->pluck('groups.id'));
 
             $discussions = \App\Discussion::with('userReadDiscussion', 'group', 'user')
-            ->whereIn('group_id', $my_groups_id)
+            ->whereIn('group_id', $groups)
+            ->orderBy('updated_at', 'desc')->paginate(25);
+        }
+        else
+        {
+            $discussions = \App\Discussion::with('group', 'user')
+            ->whereIn('group_id', \App\Group::public()->get()->pluck('id'))
             ->orderBy('updated_at', 'desc')->paginate(25);
         }
 
@@ -126,7 +146,10 @@ class DashboardController extends Controller
 
     public function agenda()
     {
-        $actions = \App\Action::with('group')->where('start', '>=', Carbon::now())->get();
+        $actions = \App\Action::with('group')
+        ->where('start', '>=', Carbon::now())
+        ->get();
+
         return view('dashboard.agenda')
         ->with('tab', 'actions')
         ->with('actions', $actions);

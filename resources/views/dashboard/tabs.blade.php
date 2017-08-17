@@ -13,13 +13,13 @@
         </a>
     </li>
 
-    @if (Auth::check())
-        <li @if (isset($tab) && ($tab == 'discussions')) class="active" @endif>
-            <a href="{{ action('DashboardController@discussions') }}">
-                <i class="fa fa-comments"></i> <span class="hidden-xs">{{ trans('messages.latest_discussions') }}</span>
-            </a>
-        </li>
-    @endif
+
+    <li @if (isset($tab) && ($tab == 'discussions')) class="active" @endif>
+        <a href="{{ action('DashboardController@discussions') }}">
+            <i class="fa fa-comments"></i> <span class="hidden-xs">{{ trans('messages.latest_discussions') }}</span>
+        </a>
+    </li>
+
 
 
 
@@ -30,28 +30,29 @@
     </li>
 
 
-    <!--
-    <li @if (isset($tab) && ($tab == 'files')) class="active" @endif>
-    <a href="{{ action('DashboardController@files') }}">
-    <i class="fa fa-file-o"></i> <span class="hidden-xs">{{ trans('messages.files') }}</span>
-</a>
-</li>
--->
+    @if (Auth::check())
+        <li @if (isset($tab) && ($tab == 'files')) class="active" @endif>
+            <a href="{{ action('DashboardController@files') }}">
+                <i class="fa fa-file-o"></i> <span class="hidden-xs">{{ trans('messages.files') }}</span>
+            </a>
+        </li>
+    @endif
 
-@if (Auth::check())
-    <li @if (isset($tab) && ($tab == 'users')) class="active" @endif>
-        <a href="{{ action('DashboardController@users') }}">
-            <i class="fa fa-users"></i> <span class="hidden-xs">{{ trans('messages.members') }}</span>
+
+    @if (Auth::check())
+        <li @if (isset($tab) && ($tab == 'users')) class="active" @endif>
+            <a href="{{ action('DashboardController@users') }}">
+                <i class="fa fa-users"></i> <span class="hidden-xs">{{ trans('messages.members') }}</span>
+            </a>
+        </li>
+    @endif
+
+
+    <li @if (isset($tab) && ($tab == 'map')) class="active" @endif>
+        <a href="{{ action('DashboardController@map') }}">
+            <i class="fa fa-map-marker"></i> <span class="hidden-xs">{{ trans('messages.map') }}</span>
         </a>
     </li>
-@endif
-
-
-<li @if (isset($tab) && ($tab == 'map')) class="active" @endif>
-    <a href="{{ action('DashboardController@map') }}">
-        <i class="fa fa-map-marker"></i> <span class="hidden-xs">{{ trans('messages.map') }}</span>
-    </a>
-</li>
 
 </ul>
 
