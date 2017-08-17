@@ -92,7 +92,7 @@ class DashboardController extends Controller
     {
         if (Auth::check())
         {
-            $groups = \App\Group::public()->get()->pluck('id')->merge(Auth::user()->groups()->pluck('groups.id'));
+            $groups = \App\Group::publicgroups()->get()->pluck('id')->merge(Auth::user()->groups()->pluck('groups.id'));
 
             $files = \App\File::with('group', 'user')
             ->where('item_type', '<>', \App\File::FOLDER)
@@ -104,7 +104,7 @@ class DashboardController extends Controller
         {
             $files = \App\File::with('group', 'user')
             ->where('item_type', '<>', \App\File::FOLDER)
-            ->whereIn('group_id', \App\Group::public()->get()->pluck('id'))
+            ->whereIn('group_id', \App\Group::publicgroups()->get()->pluck('id'))
             ->orderBy('updated_at', 'desc')->paginate(25);
         }
         */
@@ -129,7 +129,7 @@ class DashboardController extends Controller
 
             // A merge of the two :
 
-            $groups = \App\Group::public()->get()->pluck('id')->merge(Auth::user()->groups()->pluck('groups.id'));
+            $groups = \App\Group::publicgroups()->get()->pluck('id')->merge(Auth::user()->groups()->pluck('groups.id'));
 
             $discussions = \App\Discussion::with('userReadDiscussion', 'group', 'user')
             ->whereIn('group_id', $groups)
@@ -138,7 +138,7 @@ class DashboardController extends Controller
         else
         {
             $discussions = \App\Discussion::with('group', 'user')
-            ->whereIn('group_id', \App\Group::public()->get()->pluck('id'))
+            ->whereIn('group_id', \App\Group::publicgroups()->get()->pluck('id'))
             ->orderBy('updated_at', 'desc')->paginate(25);
         }
 
