@@ -16,14 +16,16 @@
                     <tr>
                         <th class="avatar"></th>
                         <th class="summary"></th>
-                        <th class="date"></th>
+                        <th style="width:100px" class="date hidden-xs"></th>
                         <th class="unread"></th>
                     </tr>
                 </thead>
 
                 <tbody>
                     @forelse( $discussions as $discussion )
-                        <tr>
+
+
+                        <tr onclick="document.location = '{{ action('DiscussionController@show', [$discussion->group_id, $discussion->id]) }}';">
                             <td class="avatar"><span class="avatar"><img src="{{$discussion->user->avatar()}}" class="img-circle"/></span></td>
                             <td class="content">
                                 <a href="{{ action('DiscussionController@show', [$discussion->group_id, $discussion->id]) }}">
@@ -34,7 +36,7 @@
                                 <span class="group-name"><a href="{{ action('GroupController@show', [$discussion->group_id]) }}">{{ $discussion->group->name }}</a></span>
                             </td>
 
-                            <td class="date">
+                            <td class="date hidden-xs">
                                 {{ $discussion->updated_at->diffForHumans() }}
                             </td>
 
@@ -46,6 +48,7 @@
                             </td>
 
                         </tr>
+
                     @empty
                         {{trans('messages.nothing_yet')}}
                     @endforelse

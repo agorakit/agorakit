@@ -343,6 +343,15 @@ th.unread, td.unread {
     width: 6em;
 }
 
+table, th, tr
+{
+    border: 0 !important;
+}
+
+.table > tbody > tr > td
+{
+    padding: 12px;
+}
 
 /******************************** Mobile **************************************/
 @media screen and (max-width: 640px) {
@@ -415,6 +424,11 @@ th.unread, td.unread {
 
 .btn-right {
     float: right;
+}
+
+.btn.active, .btn.active:hover
+{
+    background-color: gray;
 }
 
 .history {

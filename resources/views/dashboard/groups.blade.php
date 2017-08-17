@@ -19,15 +19,16 @@
                 $("#toggle-tag-{{$tag->tag_id}}").click(function(){
                     $(".tag-group").hide();
                     $(".tag-{{$tag->tag_id}}").show();
-                    $(".tag-toggle").attr('disabled', false);
-                    $(this).attr('disabled', true);
+                    $(".tag-toggle").removeClass('active');
+                    $(this).addClass('active');
+
                 });
                 @endforeach
 
                 $("#toggle-tag-all").click(function(){
                     $(".tag-group").show();
-                    $(".tag-toggle").attr('disabled', false);
-                    $(this).attr('disabled', true);
+                    $(".tag-toggle").removeClass('active');
+                    $(this).addClass('active');
                 });
             });
 
@@ -38,10 +39,10 @@
 
 
         @foreach ($all_tags as $tag)
-            <a class="btn btn-primary btn-sm tag-toggle" id="toggle-tag-{{$tag->tag_id}}">{{$tag->name}}</a>
+            <a class="btn btn-default btn-sm tag-toggle" id="toggle-tag-{{$tag->tag_id}}">{{$tag->name}}</a>
         @endforeach
 
-        <a class="btn btn-primary btn-sm tag-toggle" id="toggle-tag-all">{{trans('messages.show_all')}}</a>
+        <a class="btn btn-default btn-sm tag-toggle active" id="toggle-tag-all">{{trans('messages.show_all')}}</a>
 
 
 
@@ -52,7 +53,7 @@
                         <tr>
                             <th class="avatar"></th>
                             <th class="summary"></th>
-                            <th style="width:100px" class=""></th>
+                            <th style="width:100px" class="hidden-xs"></th>
                             <th style="width:100px" class=""></th>
                         </tr>
                     </thead>
@@ -82,7 +83,7 @@
 
                                     </td>
 
-                                    <td class="date">
+                                    <td class="date hidden-xs">
                                         {{ $group->updated_at->diffForHumans() }}
                                     </td>
 
@@ -112,7 +113,7 @@
                 @endif
             </div>
 
-            
+
 
 
 
