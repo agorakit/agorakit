@@ -14,9 +14,9 @@
     <div class="tab_content">
 
 
-<h2>{{ trans('messages.my_groups') }}</h2>
+        <h2>{{ trans('messages.my_groups') }}</h2>
         @foreach ($my_groups as $group)
-            <span class="label label-default"><a href="{{action('GroupController@show', $group)}}">{{$group->name}}</a> </span> 
+            <span class="label label-default"><a href="{{action('GroupController@show', $group)}}">{{$group->name}}</a> </span>
         @endforeach
 
 

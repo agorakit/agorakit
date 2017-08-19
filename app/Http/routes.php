@@ -37,6 +37,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('confirm/{token}', 'Auth\AuthController@confirmEmail');
     Route::auth();
 
+    // OAuth Routes
+    Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
+    Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
+
 
     /*
     Homepage
