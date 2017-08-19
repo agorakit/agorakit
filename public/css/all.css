@@ -32,7 +32,7 @@ font-family: "Roboto";
 .row .group, .main-container
 {
     box-shadow: 0 2px 4px rgba(72, 78, 80, 0.2);
-    border-radius: 8px;
+    border-radius: 2px;
 }
 
 .main-container

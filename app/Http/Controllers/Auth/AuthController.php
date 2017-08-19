@@ -139,7 +139,6 @@ class AuthController extends Controller
     {
         $user = Socialite::driver($provider)->user();
 
-        //dd($user);
 
         $authUser = $this->findOrCreateUser($user, $provider);
         Auth::login($authUser, true);
@@ -155,6 +154,8 @@ class AuthController extends Controller
     */
     public function findOrCreateUser($user, $provider)
     {
+        /*
+
         $authUser = User::where('provider_id', $user->id)->first();
         if ($authUser) {
             return $authUser;
@@ -171,6 +172,8 @@ class AuthController extends Controller
 
 
         return $user;
+
+        */
     }
 
 

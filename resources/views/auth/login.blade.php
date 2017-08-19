@@ -51,6 +51,11 @@
 								<a class="btn btn-link" href="{{ url('/password/reset') }}">{{ trans('messages.forgotten_password') }}</a>
 							</div>
 						</div>
+
+                        <hr/>
+
+                        @include('partials.socialite')
+
 					</form>
 				</div>
 			</div>
