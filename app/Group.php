@@ -79,7 +79,7 @@ class Group extends Model
     }
 
     /**
-    * The user who crreated or updated this group title and description
+    * The user who created or updated this group title and description
     */
     public function user()
     {

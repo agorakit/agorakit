@@ -137,10 +137,10 @@ class AuthController extends Controller
     */
     public function handleProviderCallback($provider)
     {
-        $user = Socialite::driver($provider)->user();
+        $socialuser = Socialite::driver($provider)->user();
 
 
-        $authUser = $this->findOrCreateUser($user, $provider);
+        $authUser = $this->findOrCreateUser($socialuser, $provider);
         Auth::login($authUser, true);
         return redirect($this->redirectTo);
     }
@@ -152,28 +152,53 @@ class AuthController extends Controller
     * @param $provider Social auth provider
     * @return  User
     */
-    public function findOrCreateUser($user, $provider)
+    public function findOrCreateUser($socialuser, $provider)
     {
-        /*
+        $profile = \App\SocialProfile::where('provider_id', $socialuser->id)->where('provider', $provider)->first();
 
-        $authUser = User::where('provider_id', $user->id)->first();
-        if ($authUser) {
-            return $authUser;
+        // CASE 1 : we have a profile, so we have a user to return
+        if ($profile)
+        {
+            return $profile->user();
         }
+
+        // Let's find a matching user from the email returned by the provider
+        // TODO security : can we trust the email received from the provider? 
+        $user = \App\User::where('email', $socialuser->email)->first();
+
+        // we have a matching user by email, so we create the profile then return the user
+        if ($user)
+        {
+            $profile =  \App\SocialProfile::create([
+                'user_id'     => $user->id,
+                'provider' => $provider,
+                'provider_id' => $socialuser->id
+            ]);
+
+            return $user;
+        }
+
+
+        // we have nothing : we create a profile and a user
+
         $user =  User::create([
-            'name'     => $user->name,
-            'email'    => $user->email,
-            'provider' => $provider,
-            'provider_id' => $user->id
+            'name'     => $socialuser->name,
+            'email'    => $socialuser->email,
         ]);
 
         $user->verified = 1; // TODO security implications of this. In short we trust another provider to check that an email is correct and verified. Fair enough?
         $user->save();
 
+        $profile =  \App\SocialProfile::create([
+            'user_id'     => $user->id,
+            'provider' => $provider,
+            'provider_id' => $socialuser->id
+        ]);
+
 
         return $user;
 
-        */
+
     }
 
 
