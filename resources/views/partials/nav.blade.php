@@ -63,21 +63,17 @@
                 </li>
 
 
-                @if ($user_logged)
-
+                @if (Auth::check())
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             {{ trans('messages.your_groups') }} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            @if (Auth::check())
-                                @forelse ($user->groups()->orderBy('name')->get() as $group)
-                                    <li><a href="{{ action('GroupController@show', $group->id)}}">{{$group->name}}</a></li>
-                                @empty
-                                    <li><a href="{{ action('DashboardController@index')}}">{{ trans('membership.not_subscribed_to_group_yet') }}</a></li>
-                                @endforelse
-                            @endif
-
+                            @forelse (Auth::user()->groups()->orderBy('name')->get() as $group)
+                                <li><a href="{{ action('GroupController@show', $group->id)}}">{{$group->name}}</a></li>
+                            @empty
+                                <li><a href="{{ action('DashboardController@index')}}">{{ trans('membership.not_subscribed_to_group_yet') }}</a></li>
+                            @endforelse
                             <li role="separator" class="divider"></li>
 
                             <li>
@@ -101,7 +97,7 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                @if ($user_logged)
+                @if (Auth::check())
 
                     <form class="navbar-form navbar-left" role="search" action="{{url('search')}}">
                         <div class="input-group">
@@ -119,13 +115,13 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{action('UserController@show', $user->id)}}"><i class="fa fa-btn fa-user"></i> {{ trans('messages.profile') }}</a></li>
-                            <li><a href="{{action('UserController@edit', $user->id)}}"><i class="fa fa-btn fa-edit"></i> {{ trans('messages.edit_my_profile') }}</a></li>
+                            <li><a href="{{action('UserController@show', Auth::user()->id)}}"><i class="fa fa-btn fa-user"></i> {{ trans('messages.profile') }}</a></li>
+                            <li><a href="{{action('UserController@edit', Auth::user()->id)}}"><i class="fa fa-btn fa-edit"></i> {{ trans('messages.edit_my_profile') }}</a></li>
                             <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i> {{ trans('messages.logout') }}</a></li>
                         </ul>
                     </li>
 
-                    @if ($user->isAdmin())
+                    @if (Auth::user()->isAdmin())
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 Admin <span class="caret"></span>
@@ -159,14 +155,6 @@
                                     </li>
                                 @endif
                             @endforeach
-                            <?php
-                            // OU dans le cas de domain url ;-)
-                            /*foreach (\Config::get('app.locales') as $lang => $locale){
-                            if($lang !== app()->getLocale()){
-                            echo '<li><a href="'.str_replace(url('/'), $locale['url'], request()->fullUrl()).'">'.strtoupper($lang).'</a></li>';
-                        }
-                    }*/
-                    ?>
                 </ul>
             </li>
         @endif
@@ -176,7 +164,7 @@
 </nav>
 
 
-@if (isset($user->verified) && ($user->verified == 0))
+@if (isset(Auth::user()->verified) && (Auth::user()->verified == 0))
     <div class="container">
         <div class="alert alert-warning alert-dismissible fade in" id="message">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -185,7 +173,7 @@
             <i class="fa fa-info-circle"></i>
             {{trans('messages.email_not_verified')}}
             <br/>
-            <a style="font-size: 0.6em" href="{{action('UserController@sendVerificationAgain', $user->id)}}">{{trans('messages.email_not_verified_send_again_verification')}}</a>
+            <a href="{{action('UserController@sendVerificationAgain', Auth::user()->id)}}">{{trans('messages.email_not_verified_send_again_verification')}}</a>
         </div>
     </div>
 @endif

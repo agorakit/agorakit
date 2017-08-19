@@ -41,6 +41,7 @@ class DiscussionController extends Controller
             $discussions = $group->discussions()->has('user')->with('user')->orderBy('updated_at', 'desc')->paginate(50);
         }
 
+
         return view('discussions.index')
         ->with('discussions', $discussions)
         ->with('group', $group)

@@ -7,7 +7,6 @@ body {
     padding-bottom: 150px;
     color: rgb(20, 20, 20);
     background-image: url("/images/seamless_paper_texture.png");
-    /*background-color: #eee;*/
     font-family: "Open Sans";
 }
 
@@ -15,12 +14,7 @@ body {
     background-color: white;
 }
 
-/*
-a {
-color: rgb(62, 41, 75);
-color: rgb(22, 110, 166);
-}
-*/
+
 
 
 
@@ -29,38 +23,6 @@ h1, h2, h3, h4, h5, h6
 font-family: "Roboto";
 /*font-weight: 300;*/
 }
-
-
-
-/**************************** Navigation **************************/
-/*
-.navbar-default, .navbar-default .navbar-brand, .navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a {
-color: rgb(41, 65, 75);
-background-color: white;
-}
-
-.navbar-nav>li>a {
-text-transform: uppercase;
-}
-*/
-
-
-
-/**************************** Sidebar **************************/
-
-.sidebar {
-    background-color: white;
-    border-radius: 4px;
-    padding: 10px;
-}
-
-.sidebar a {
-    display: block;
-    height: 1.5em;
-    overflow: hidden;
-}
-
-
 
 
 
@@ -128,17 +90,6 @@ text-transform: uppercase;
 .credits, .credits a {
     color: rgb(108, 131, 136);
 }
-
-
-
-/*
-.tab_content a, .tab_content a:visited
-{
-color: rgb(22, 110, 166);
-}
-*/
-
-
 
 
 /************************** DISCUSSIONS ***************************************/
@@ -472,12 +423,7 @@ table, th, tr
 
 .label {
     background-color: #1B809E;
-    /*font-size: 10px;*/
     border-radius: 2px;
-    /*
-    margin-bottom: 2px;
-    padding-right: 8px;
-    */
     display : inline-block;
 }
 
