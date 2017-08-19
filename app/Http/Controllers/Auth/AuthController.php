@@ -159,11 +159,11 @@ class AuthController extends Controller
         // CASE 1 : we have a profile, so we have a user to return
         if ($profile)
         {
-            return $profile->user();
+            return $profile->user()->get();
         }
 
         // Let's find a matching user from the email returned by the provider
-        // TODO security : can we trust the email received from the provider? 
+        // TODO security : can we trust the email received from the provider?
         $user = \App\User::where('email', $socialuser->email)->first();
 
         // we have a matching user by email, so we create the profile then return the user
