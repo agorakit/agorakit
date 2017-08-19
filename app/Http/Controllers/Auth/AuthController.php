@@ -159,7 +159,7 @@ class AuthController extends Controller
         // CASE 1 : we have a profile, so we have a user to return
         if ($profile)
         {
-            return $profile->user()->get();
+            return $profile->user()->first();
         }
 
         // Let's find a matching user from the email returned by the provider
