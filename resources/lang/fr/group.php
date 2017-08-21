@@ -2,14 +2,14 @@
 
 return [
     'LLH:obsolete'          => [
-        'no_group_joined_yet_act_now'   => 'Vous ne faites pas encore partie d\'un groupe, rejoignez en un :-)',
+        'no_group_joined_yet_act_now'   => 'Vous ne faites pas encore partie d\'un groupe, rejoignez-en un :-)',
     ],
-    'about_this_group'      => 'A propos de ce groupe',
+    'about_this_group'      => 'À propos de ce groupe',
     'closed'                => 'Groupe privé',
     'cover'                 => 'Image de présentation',
     'create'                => 'Créer',
     'create_a_group_button' => 'Créer un groupe',
-    'create_a_group_intro'  => 'Créez un nouveau groupe très facilement. Prenez soin de réfléchir si d\'autres voudront participer avant de créer un groupe.',
+    'create_a_group_intro'  => 'Créez un nouveau groupe très facilement. Prenez soin de vous demander si d\'autres voudront participer avant de créer un groupe.',
     'create_button'         => 'Créer le groupe',
     'create_group_title'    => 'Créer un groupe',
     'description'           => 'Description du groupe',
