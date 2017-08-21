@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'edit'                      => 'Edit',
-    'send'                      => 'Send',
-    'your_password_reset_link'  => 'Your Password Reset Link',
+    'edit'                      => 'Modifier',
+    'send'                      => 'Envoyer',
+    'your_password_reset_link'  => 'Le lien vers votre mot de passe réinitialisé',
 ];
