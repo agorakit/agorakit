@@ -16,7 +16,7 @@ return [
     'howtojointext'                     => 'This group is a closed group. To join, please contact one of these members so that it prompts you.',
     'if_you_want_to_leave_this_group'   => 'If you want to leave this group',
     'invite_button'                     => 'Invite',
-    'invite_intro'                      => 'Invite people who might be interessed by this group. Please don\'t spam people',
+    'invite_intro'                      => 'Invite people who might be interested in this group. Please don\'t spam people emails',
     'invite_one_button'                 => 'Invite people',
     'invite_title'                      => 'Invite people to this group',
     'join_button'                       => 'Join',
