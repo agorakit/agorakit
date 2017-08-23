@@ -91,9 +91,8 @@ class GroupPolicy
 
     public function viewMembers(User $user, Group $group)
     {
-        // curently we return true, since a user might need to see group members to contact someone to be added to the group
-        return true;
-        //return ($group->isPublic() || $user->isMemberOf($group));
+        // same as the other ressources, since now groups have contact persons
+        return ($group->isPublic() || $user->isMemberOf($group));
     }
 
 
