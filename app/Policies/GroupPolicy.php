@@ -44,7 +44,7 @@ class GroupPolicy
     */
     public function update(User $user, Group $group)
     {
-        return $user->isMemberOf($group);
+        return $user->isAdminOf($group);
     }
 
 
