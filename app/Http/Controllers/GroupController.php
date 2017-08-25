@@ -31,20 +31,33 @@ class GroupController extends Controller
     */
     public function show(Group $group)
     {
+        $discussions = false;
+        $actions = false;
+        $files = false;
 
         if (Auth::check())
         {
-            $discussions = $group->discussions()
-            ->has('user')
-            ->with('user', 'group', 'userReadDiscussion')
-            ->orderBy('updated_at', 'desc')
-            ->limit(5)
-            ->get();
+            if (Gate::allows('viewDiscussions', $group))
+            {
+                $discussions = $group->discussions()
+                ->has('user')
+                ->with('user', 'group', 'userReadDiscussion')
+                ->orderBy('updated_at', 'desc')
+                ->limit(5)
+                ->get();
+            }
 
-            $files = $group->files()->with('user')->orderBy('updated_at', 'desc')->limit(5)->get();
-            $actions = $group->actions()->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->limit(10)->get();
+            if (Gate::allows('viewFiles', $group))
+            {
+                $files = $group->files()->with('user')->orderBy('updated_at', 'desc')->limit(5)->get();
+            }
 
+            if (Gate::allows('viewActions', $group))
+            {
+                $actions = $group->actions()->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->limit(10)->get();
+            }
         }
+
         else
         {
             if ($group->isPublic())
@@ -59,16 +72,7 @@ class GroupController extends Controller
                 $files = $group->files()->with('user')->orderBy('updated_at', 'desc')->limit(5)->get();
                 $actions = $group->actions()->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->limit(10)->get();
             }
-            else
-            {
-                $discussions = false;
-                $actions = false;
-                $files = false;
-            }
-
-
         }
-
 
         return view('groups.show')
         ->with('group', $group)
