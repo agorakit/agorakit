@@ -26,7 +26,7 @@ class GroupPolicy
     {
         if ($user->isAdmin())
         {
-            // return true;
+             return true;
         }
     }
 
