@@ -11,6 +11,11 @@ use Config;
 class SearchController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth', ['only' => ['users', 'files']]);
+    }
+
     public function index(Request $request)
     {
 
@@ -18,29 +23,8 @@ class SearchController extends Controller
         {
             $query = $request->get('query');
 
-            // build a list of public groups and groups the user has access to
-            $my_groups = Auth::user()->groups()->orderBy('name')->get();
-
-            $my_groups_id = [];
-            // using this array we can adjust the queries after to only include stuff the user has
-            // might be a good idea to find a clever way to build this array of groups id :
-            foreach ($my_groups as $the_group)
-            {
-                $my_groups_id[$the_group->id] = $the_group->id;
-            }
-
-            $public_groups = \App\Group::where('group_type', \App\Group::OPEN)->get();
-
-
-            $public_groups_id = [];
-            // using this array we can adjust the queries after to only include stuff the user has
-            // might be a good idea to find a clever way to build this array of groups id :
-            foreach ($public_groups as $the_group)
-            {
-                $public_groups_id[$the_group->id] = $the_group->id;
-            }
-
-            $allowed_groups = array_merge($my_groups_id,  $public_groups_id);
+            // Build a list of groups the user has access to. Those are public groups + groups the user is member of.
+            $allowed_groups = \App\Group::publicgroups()->get()->pluck('id')->merge(Auth::user()->groups()->pluck('groups.id'));
 
 
 
@@ -77,10 +61,17 @@ class SearchController extends Controller
             ->orderBy('updated_at', 'desc')
             ->get();
 
-            $comments = \App\Comment::where('body', 'like', '%'. $query . '%')
-            ->with('discussion.group') // TODO we'd better remove comments form search if the discussion they belong to is not from a public group
+
+
+            $comments = \App\Comment::with('discussion')
+            ->where('body', 'like', '%'. $query . '%')
+            ->whereHas('discussion', function($q) use ($allowed_groups){
+                $q->whereIn('group_id', $allowed_groups);
+            })
             ->orderBy('updated_at', 'desc')
             ->get();
+
+
 
 
 
