@@ -32,7 +32,8 @@ class GroupController extends Controller
     public function show(Group $group)
     {
 
-        if (Auth::check()) {
+        if (Auth::check())
+        {
             $discussions = $group->discussions()
             ->has('user')
             ->with('user', 'group', 'userReadDiscussion')
@@ -40,17 +41,34 @@ class GroupController extends Controller
             ->limit(5)
             ->get();
 
-        } else {
-            $discussions = $group->discussions()
-            ->has('user')
-            ->with('user', 'group')
-            ->orderBy('updated_at', 'desc')
-            ->limit(5)
-            ->get();
-        }
-        $files = $group->files()->with('user')->orderBy('updated_at', 'desc')->limit(5)->get();
+            $files = $group->files()->with('user')->orderBy('updated_at', 'desc')->limit(5)->get();
+            $actions = $group->actions()->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->limit(10)->get();
 
-        $actions = $group->actions()->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->limit(10)->get();
+        }
+        else
+        {
+            if ($group->isPublic())
+            {
+                $discussions = $group->discussions()
+                ->has('user')
+                ->with('user', 'group')
+                ->orderBy('updated_at', 'desc')
+                ->limit(5)
+                ->get();
+
+                $files = $group->files()->with('user')->orderBy('updated_at', 'desc')->limit(5)->get();
+                $actions = $group->actions()->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->limit(10)->get();
+            }
+            else
+            {
+                $discussions = false;
+                $actions = false;
+                $files = false;
+            }
+
+
+        }
+
 
         return view('groups.show')
         ->with('group', $group)
