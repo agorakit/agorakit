@@ -26,14 +26,14 @@ class GroupPolicy
     {
         if ($user->isAdmin())
         {
-            return true;
+            // return true;
         }
     }
 
 
     public function delete(User $user, Group $group)
     {
-        return ($user->isAdminOf($group) || $user->isAdmin());
+        return ($user->isAdminOf($group));
     }
 
     /**
@@ -85,7 +85,6 @@ class GroupPolicy
 
     public function viewActions(User $user, Group $group)
     {
-        // isn't it lovely :
         return ($group->isPublic() || $user->isMemberOf($group));
     }
 
@@ -98,18 +97,14 @@ class GroupPolicy
 
     public function viewFiles(User $user, Group $group)
     {
-        // isn't it lovely :
         return ($group->isPublic() || $user->isMemberOf($group));
     }
 
 
     public function changeGroupType(User $user, Group $group)
     {
-        return ($user->isAdminOf($group) || $user->isAdmin());
+        return $user->isAdminOf($group);
     }
-
-
-
 
 
     public function invite(User $user, Group $group)
@@ -117,12 +112,16 @@ class GroupPolicy
         return $user->isMemberOf($group);
     }
 
+    public function history(User $user, Group $group)
+    {
+        return $user->isMemberOf($group);
+    }
+
 
     public function editMembership(User $user, Group $group)
     {
-        return ($user->isAdminOf($group) || $user->isAdmin());
+        return ($user->isAdminOf($group));
     }
-
 
 
 
