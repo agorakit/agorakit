@@ -16,7 +16,7 @@
 
 </div>
 
-{!! Form::open(array('action' => ['MembershipController@settings', $group->id])) !!}
+{!! Form::open(array('action' => ['MembershipController@preferences', $group->id])) !!}
 
 @include('membership.form')
 

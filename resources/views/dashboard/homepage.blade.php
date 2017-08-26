@@ -211,11 +211,15 @@
             </div>
         </div>
 
+
         {!! setting('homepage_presentation', trans('documentation.intro')) !!}
-        @if (Auth::check())
-            <a class="btn btn-primary" href="{{action('SettingsController@settings')}}">
-                <i class="fa fa-pencil"></i> {{trans('messages.modify_intro_text')}}
-            </a>
+
+        @if (Auth::user()->isAdmin())
+            <div>
+                <a class="btn btn-primary" href="{{action('AdminSettingsController@settings')}}">
+                    <i class="fa fa-pencil"></i> {{trans('messages.modify_intro_text')}}
+                </a>
+            </div>
         @endif
 
     </div>

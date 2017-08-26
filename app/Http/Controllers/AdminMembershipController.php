@@ -14,7 +14,7 @@ use Gate;
 /**
 * Admin features to act on membership and to make other users admin of a group
 */
-class MembershipAdminController extends Controller
+class AdminMembershipAdminController extends Controller
 {
 
 

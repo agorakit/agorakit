@@ -71,26 +71,37 @@
         @endcan
 
         @if ($group->isMember())
-            <li role="presentation" @if (isset($tab) && ($tab == 'settings')) class="active" @endif>
-                <a href="{{ action('MembershipController@settingsForm', $group->id) }}">
-                    <i class="fa fa-cog"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.settings') }}</span>
+            <li role="presentation" @if (isset($tab) && ($tab == 'preferences')) class="active" @endif>
+                <a href="{{ action('MembershipController@preferencesForm', $group->id) }}">
+                    <i class="fa fa-bell-o"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.settings') }}</span>
                 </a>
             </li>
         @else
             @can ('join', $group)
-                <li role="presentation" @if (isset($tab) && ($tab == 'settings')) class="active" @endif>
+                <li role="presentation" @if (isset($tab) && ($tab == 'preferences')) class="active" @endif>
                     <a href="{{ action('MembershipController@joinForm', $group->id) }}">
-                        <i class="fa fa-cog"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.join') }}</span>
+                        <i class="fa fa-sign-in"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.join') }}</span>
                     </a>
                 </li>
             @else
-                <li role="presentation" @if (isset($tab) && ($tab == 'settings')) class="active" @endif>
+                <li role="presentation" @if (isset($tab) && ($tab == 'preferences')) class="active" @endif>
                     <a href="{{ action('MembershipController@howToJoin', $group->id) }}">
                         <i class="fa fa-lock"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.join') }}</span>
                     </a>
                 </li>
             @endcan
         @endif
+
+
+        @can ('administer', $group)
+            <li role="presentation" @if (isset($tab) && ($tab == 'admin')) class="active" @endif>
+                <a href="{{ action('AdminGroupController@settings', $group->id) }}">
+                    <i class="fa fa-wrench"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.administration') }}</span>
+                </a>
+            </li>
+        @endcan
+
+
     </ul>
 
 @else

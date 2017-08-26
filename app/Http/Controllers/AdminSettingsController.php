@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Auth;
 
-class SettingsController extends Controller
+class AdminSettingsController extends Controller
 {
     public function __construct()
     {

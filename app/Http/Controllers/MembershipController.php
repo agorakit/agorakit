@@ -109,13 +109,13 @@ class MembershipController extends Controller
     /**
     * Show a settings screen for a specific group. Allows a user to join, leave, set subscribe settings.
     */
-    public function settingsForm(Request $request, Group $group)
+    public function preferencesForm(Request $request, Group $group)
     {
         // load or create membership for this group and user combination
         $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
 
         return view('membership.edit')
-        ->with('tab', 'settings')
+        ->with('tab', 'preferences')
         ->with('group', $group)
         ->with('interval', $this->minutesToInterval($membership->notification_interval))
         ->with('membership', $membership);
@@ -123,9 +123,9 @@ class MembershipController extends Controller
 
 
     /**
-    * Store new settings from the settingsForm
+    * Store new settings from the preferencesForm
     */
-    public function settings(Request $request, Group $group)
+    public function preferences(Request $request, Group $group)
     {
         // load or create membership for this group and user combination
         $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
@@ -145,7 +145,7 @@ class MembershipController extends Controller
     public function howToJoin(Request $request, Group $group)
     {
         return view('membership.howtojoin')
-        ->with('tab', 'settings')
+        ->with('tab', 'preferences')
         ->with('group', $group);
     }
 
