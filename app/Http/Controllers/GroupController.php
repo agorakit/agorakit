@@ -164,7 +164,7 @@ class GroupController extends Controller
         ->with('group', $group)
         ->with('all_tags', \App\Group::allTags())
         ->with('model_tags', $group->tags)
-        ->with('tab', 'home');
+        ->with('tab', 'admin');
     }
 
     /**

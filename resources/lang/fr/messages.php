@@ -24,7 +24,7 @@ return [
     'address'                                           => 'Adresse',
     'address_cannot_be_geocoded'                        => 'Votre adresse ne peut pas être géolocalisées. Veuillez utiliser un format simple, comme "numéro de rue, ville"',
     'address_privacy_and_help'                          => <<<'TEXT'
-Comment remplir le champ adresse ? Ne remplissez que les informations que vous acceptez de mettre en ligne. L'information d'adresse même partielle, nous permet d'afficher une carte avec la localisation des personnes, des groupes et des actions. Si vous ne souhaitez pas être mentionné⋅e sur cette carte ne mettez rien ici. Vous pouvez également simplement mettre votre commune (ou votre rue sans le numéro de maison) afin d'apparaître sur le carte mais pas de manière précise.
+Comment remplir le champ adresse ? Ne remplissez que les informations que vous acceptez de mettre en ligne. L'information d'adresse même partielle, nous permet d'afficher une carte avec la localisation des personnes, des groupes et des actions. Si vous ne souhaitez pas être mentionné⋅e sur cette carte ne mettez rien ici. Vous pouvez également simplement mettre votre commune (ou votre rue sans le numéro de maison) afin d'apparaître sur le carte mais pas de manière précise.
 Utilisez le format numéro, rue, localité
 TEXT
 ,
@@ -32,6 +32,7 @@ TEXT
     'admin-back'                                        => 'De retour',
     'admin_of'                                          => 'Administrateur/trice de',
     'admin_settings'                                    => 'Modifier les préférences',
+    'administration'                                    => 'Administration',
     'agenda'                                            => 'Agenda',
     'agenda_my'                                         => 'Agenda de mes groupes',
     'agenda_others'                                     => 'Agenda des autres groupes',
@@ -157,6 +158,7 @@ TEXT
     'name'                                              => 'Nom',
     'news_from_group_email_subject'                     => 'Des nouvelles du groupe',
     'next_actions'                                      => 'Prochaines actions',
+    'not_a_group_admin'                                 => 'Vous n\'êtes pas administrateur de ce groupe',
     'not_a_member'                                      => 'Vous ne faites pas partie de ce groupe',
     'not_allowed'                                       => 'Pas autorisé',
     'not_an_admin'                                      => 'Pas administrateur',
