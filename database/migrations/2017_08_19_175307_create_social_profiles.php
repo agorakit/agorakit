@@ -25,17 +25,6 @@ class CreateSocialProfiles extends Migration
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
-        /*
-        Schema::table('users', function ($table) {
-            $table->string('provider');
-            $table->string('provider_id');
-            $table->string('email')->nullable()->change();
-            $table->string('password', 60)->nullable()->change();
-        });
-        */
-
-
-
     }
 
     /**

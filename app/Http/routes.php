@@ -118,12 +118,12 @@ Route::group(['middleware' => ['web']], function () {
     Route::delete('groups/{group}/delete', 'GroupController@destroy');
 
 
-    // memberships & settings
+    // memberships & preferences
     Route::get('groups/{group}/join', 'MembershipController@joinForm');
     Route::post('groups/{group}/join', 'MembershipController@join');
 
-    Route::get('groups/{group}/settings', 'MembershipController@settingsForm');
-    Route::post('groups/{group}/settings', 'MembershipController@settings');
+    Route::get('groups/{group}/preferences', 'MembershipController@preferencesForm');
+    Route::post('groups/{group}/preferences', 'MembershipController@preferences');
 
     Route::get('groups/{group}/leave', 'MembershipController@leaveForm');
     Route::post('groups/{group}/leave', 'MembershipController@leave');
@@ -285,11 +285,19 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['middleware' => ['admin']], function () {
 
         Route::get('admin/logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
-        Route::get('admin/settings', 'SettingsController@settings');
-        Route::post('admin/settings', 'SettingsController@update');
+        Route::get('admin/settings', 'AdminSettingsController@settings');
+        Route::post('admin/settings', 'AdminSettingsController@update');
 
-        Route::resource('admin/user', 'UserAdminController');
+        Route::resource('admin/user', 'AdminUserController');
 
     });
+
+
+    /***************** PER-GROUP ADMIN STUFF ************/
+
+        Route::group(['middleware' => ['groupadmin']], function () {
+            Route::get('groups/{group}/admin', 'AdminGroupController@settings');
+        });
+
 
 });

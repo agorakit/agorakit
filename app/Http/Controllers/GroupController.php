@@ -146,7 +146,7 @@ class GroupController extends Controller
         $membership->membership = \App\Membership::ADMIN;
         $membership->save();
 
-        return redirect()->action('MembershipController@settings', [$group->id]);
+        return redirect()->action('MembershipController@preferences', [$group->id]);
     }
 
 
