@@ -95,14 +95,38 @@
 
         @can ('administer', $group)
             <li role="presentation" @if (isset($tab) && ($tab == 'admin')) class="active" @endif>
-                <a href="{{ action('AdminGroupController@settings', $group->id) }}">
-                    <i class="fa fa-wrench"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.administration') }}</span>
-                </a>
+
             </li>
-        @endcan
 
 
-    </ul>
+
+            <li role="presentation" class="dropdown @if (isset($tab) && ($tab == 'admin')) active @endif">
+                <a href="#" class="dropdown-toggle" id="admin" data-toggle="dropdown" aria-controls="admin-contents" aria-expanded="false">
+                    <i class="fa fa-wrench"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.administration') }}</span>
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="admin" id="admin-contents">
+                    <li>
+                        <a href="{{ action('GroupController@edit', $group->id) }}">
+                            <i class="fa fa-pencil"></i> {{ trans('messages.edit') }}
+                        </a>
+                    </li>
+                    <li><a>...</a></li>
+
+                </ul>
+            </li>
+
+
+        </ul>
+
+
+    @endcan
+
+
+
+
+
+
 
 @else
 

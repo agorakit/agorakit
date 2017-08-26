@@ -296,7 +296,7 @@ Route::group(['middleware' => ['web']], function () {
     /***************** PER-GROUP ADMIN STUFF ************/
 
         Route::group(['middleware' => ['groupadmin']], function () {
-            Route::get('groups/{group}/admin', 'AdminGroupController@settings');
+            Route::get('groups/{group}/admin', 'GroupController@edit');
         });
 
 
