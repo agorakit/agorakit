@@ -187,7 +187,8 @@ return [
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         Geocoder\Laravel\Providers\GeocoderService::class,
         Cviebrock\EloquentTaggable\ServiceProvider::class,
-        Laravel\Socialite\SocialiteServiceProvider::class
+        Laravel\Socialite\SocialiteServiceProvider::class,
+        ConsoleTVs\Charts\ChartsServiceProvider::class
 
     ],
 
@@ -242,6 +243,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Geocoder' => Toin0u\Geocoder\Facade\Geocoder::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Charts' => ConsoleTVs\Charts\Facades\Charts::class
 
 
     ],

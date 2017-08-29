@@ -25,7 +25,8 @@
     "toin0u/geocoder-laravel": "^1.0",
     "suin/php-rss-writer": "^1.5",
     "cviebrock/eloquent-taggable": "^2.0",
-    "laravel/socialite": "^2.0"
+    "laravel/socialite": "^2.0",
+    "consoletvs/charts": "5.*"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",
