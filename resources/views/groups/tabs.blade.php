@@ -127,11 +127,13 @@
                 </ul>
             </li>
 
+        @endcan
 
-        </ul>
+        
+    </ul>
 
 
-    @endcan
+
 
 
 
