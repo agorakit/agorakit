@@ -151,81 +151,120 @@ class GroupController extends Controller
 
 
 
-    /**
-    * Show the form for editing the specified resource.
-    *
-    * @param  int  $id
-    *
-    * @return Response
-    */
-    public function edit(Request $request, Group $group)
-    {
-        return view('groups.edit')
-        ->with('group', $group)
-        ->with('all_tags', \App\Group::allTags())
-        ->with('model_tags', $group->tags)
-        ->with('tab', 'admin');
-    }
-
-    /**
-    * Update the specified resource in storage.
-    *
-    * @param  int  $id
-    *
-    * @return Response
-    */
-    public function update(Request $request, Group $group)
-    {
-
-        $group->name = $request->input('name');
-        $group->body = $request->input('body');
-
-        if (Gate::allows('changeGroupType', $group))
+        /**
+        * Show the form for editing the specified resource.
+        *
+        * @param  int  $id
+        *
+        * @return Response
+        */
+        public function edit(Request $request, Group $group)
         {
-            $group->group_type = $request->input('group_type');
+            return view('groups.edit')
+            ->with('group', $group)
+            ->with('all_tags', \App\Group::allTags())
+            ->with('model_tags', $group->tags)
+            ->with('tab', 'admin');
+        }
+
+        /**
+        * Update the specified resource in storage.
+        *
+        * @param  int  $id
+        *
+        * @return Response
+        */
+        public function update(Request $request, Group $group)
+        {
+
+            $group->name = $request->input('name');
+            $group->body = $request->input('body');
+
+            if (Gate::allows('changeGroupType', $group))
+            {
+                $group->group_type = $request->input('group_type');
+            }
+
+
+            if ($group->address <> $request->input('address'))
+            {
+                // we need to update user address and geocode it
+                $group->address = $request->input('address');
+                if (!$group->geocode())
+                {
+                    flash()->error(trans('messages.address_cannot_be_geocoded'));
+                }
+                else
+                {
+                    flash()->info( trans('messages.ressource_geocoded_successfully'));
+                }
+            }
+
+
+            $group->user()->associate(Auth::user());
+            $group->retag($request->get('tags'));
+
+            // validation
+            if ($group->isInvalid()) {
+                // Oops.
+                return redirect()->action('GroupController@edit', $group->id)
+                ->withErrors($group->getErrors())
+                ->withInput();
+            }
+
+            // handle cover
+            if ($request->hasFile('cover'))
+            {
+                Storage::disk('local')->makeDirectory('groups/' . $group->id);
+                Image::make($request->file('cover'))->widen(800)->save(storage_path() . '/app/groups/' . $group->id . '/cover.jpg');
+                Image::make($request->file('cover'))->fit(300,200)->save(storage_path() . '/app/groups/' . $group->id . '/thumbnail.jpg');
+            }
+
+            $group->save();
+
+            flash()->info(trans('messages.ressource_updated_successfully'));
+
+            return redirect()->action('GroupController@show', [$group->id]);
         }
 
 
-        if ($group->address <> $request->input('address'))
+        public function destroyConfirm(Request $request, Group $group)
         {
-            // we need to update user address and geocode it
-            $group->address = $request->input('address');
-            if (!$group->geocode())
+            if (Gate::allows('delete', $group))
             {
-                flash()->error(trans('messages.address_cannot_be_geocoded'));
+                return view('groups.delete')
+                ->with('group', $group)
+                ->with('tab', 'home');
             }
             else
             {
-                flash()->info( trans('messages.ressource_geocoded_successfully'));
+                abort(403);
             }
         }
 
 
-        $group->user()->associate(Auth::user());
-        $group->retag($request->get('tags'));
 
-        // validation
-        if ($group->isInvalid()) {
-            // Oops.
-            return redirect()->action('GroupController@edit', $group->id)
-            ->withErrors($group->getErrors())
-            ->withInput();
-        }
-
-        // handle cover
-        if ($request->hasFile('cover'))
+        /**
+        * Remove the specified resource from storage.
+        *
+        * @param int $id
+        *
+        * @return \Illuminate\Http\Response
+        */
+        public function destroy(Request $request, Group $group)
         {
-            Storage::disk('local')->makeDirectory('groups/' . $group->id);
-            Image::make($request->file('cover'))->widen(800)->save(storage_path() . '/app/groups/' . $group->id . '/cover.jpg');
-            Image::make($request->file('cover'))->fit(300,200)->save(storage_path() . '/app/groups/' . $group->id . '/thumbnail.jpg');
+            if (Gate::allows('delete', $group))
+            {
+                $group->delete();
+                flash()->info(trans('messages.ressource_deleted_successfully'));
+                return redirect()->action('DashboardController@index');
+            }
+            else
+            {
+                abort(403);
+            }
         }
 
-        $group->save();
-
-        flash()->info(trans('messages.ressource_updated_successfully'));
-
-        return redirect()->action('GroupController@show', [$group->id]);
-    }
 
 
     public function cover(Group $group)
@@ -268,9 +307,6 @@ class GroupController extends Controller
     }
 
 
-
-
-
     /**
     * Show the revision history of the group
     */
@@ -281,41 +317,4 @@ class GroupController extends Controller
         ->with('tab', 'home');
     }
 
-
-    public function destroyConfirm(Request $request, Group $group)
-    {
-        if (Gate::allows('delete', $group))
-        {
-            return view('groups.delete')
-            ->with('group', $group)
-            ->with('tab', 'home');
-        }
-        else
-        {
-            abort(403);
-        }
-    }
-
-
-
-    /**
-    * Remove the specified resource from storage.
-    *
-    * @param int $id
-    *
-    * @return \Illuminate\Http\Response
-    */
-    public function destroy(Request $request, Group $group)
-    {
-        if (Gate::allows('delete', $group))
-        {
-            $group->delete();
-            flash()->info(trans('messages.ressource_deleted_successfully'));
-            return redirect()->action('DashboardController@index');
-        }
-        else
-        {
-            abort(403);
-        }
-    }
 }
