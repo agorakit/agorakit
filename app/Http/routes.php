@@ -116,6 +116,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('groups/{group}/history', 'GroupController@history');
     Route::get('groups/{group}/delete', 'GroupController@destroyConfirm');
     Route::delete('groups/{group}/delete', 'GroupController@destroy');
+    Route::get('groups/{group}/insights', 'InsightsController@index');
 
 
     // memberships & preferences
