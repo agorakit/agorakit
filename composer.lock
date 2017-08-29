@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "78b6bcc35bf27fd34c2df49e02e37dab",
-    "content-hash": "8d910a67046bc935a167e75be8202851",
+    "hash": "e8a4f9fc0bd2dfc986ac741ff2b14d96",
+    "content-hash": "ea0d626996f5116cbe6b873aa3d8a841",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -231,6 +231,55 @@
                 "preload"
             ],
             "time": "2016-09-16 12:50:15"
+        },
+        {
+            "name": "consoletvs/charts",
+            "version": "5.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ConsoleTVs/Charts.git",
+                "reference": "954e969c974ad9cd53a6afd263824b33dcdb8540"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ConsoleTVs/Charts/zipball/954e969c974ad9cd53a6afd263824b33dcdb8540",
+                "reference": "954e969c974ad9cd53a6afd263824b33dcdb8540",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.*",
+                "jenssegers/date": "v3.*",
+                "jlawrence/eos": "3.*",
+                "php": ">=5.6.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ConsoleTVs\\Charts\\ChartsServiceProvider"
+                    ],
+                    "aliases": {
+                        "Charts": "ConsoleTVs\\Charts\\Facades\\Charts"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ConsoleTVs\\Charts\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Erik Campobadal",
+                    "email": "soc@erik.cat"
+                }
+            ],
+            "description": "Create charts for laravel using diferent charts libraries",
+            "time": "2017-08-14 11:10:46"
         },
         {
             "name": "cviebrock/eloquent-taggable",
@@ -1454,6 +1503,71 @@
             "time": "2015-04-20 18:58:01"
         },
         {
+            "name": "jenssegers/date",
+            "version": "v3.2.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jenssegers/date.git",
+                "reference": "1db4d580d1d45085a48fd4a332697619b9a3851c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jenssegers/date/zipball/1db4d580d1d45085a48fd4a332697619b9a3851c",
+                "reference": "1db4d580d1d45085a48fd4a332697619b9a3851c",
+                "shasum": ""
+            },
+            "require": {
+                "nesbot/carbon": "^1.0",
+                "php": ">=5.4",
+                "symfony/translation": "^2.7|^3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.0|^5.0|^6.0",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Jenssegers\\Date\\DateServiceProvider"
+                    ],
+                    "aliases": {
+                        "Date": "Jenssegers\\Date\\Date"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Jenssegers\\Date\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jens Segers",
+                    "homepage": "https://jenssegers.com"
+                }
+            ],
+            "description": "A date library to help you work with dates in different languages",
+            "homepage": "https://github.com/jenssegers/date",
+            "keywords": [
+                "carbon",
+                "date",
+                "datetime",
+                "i18n",
+                "laravel",
+                "time",
+                "translation"
+            ],
+            "time": "2017-06-30 11:51:03"
+        },
+        {
             "name": "jeremeamia/SuperClosure",
             "version": "2.3.0",
             "source": {
@@ -1510,6 +1624,49 @@
                 "tokenizer"
             ],
             "time": "2016-12-07 09:37:55"
+        },
+        {
+            "name": "jlawrence/eos",
+            "version": "v3.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jlawrence11/eos.git",
+                "reference": "25e3d0f2316cb4636000f452a8e7dcc83725a32a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jlawrence11/eos/zipball/25e3d0f2316cb4636000f452a8e7dcc83725a32a",
+                "reference": "25e3d0f2316cb4636000f452a8e7dcc83725a32a",
+                "shasum": ""
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "dev-master",
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "jlawrence\\eos\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1+"
+            ],
+            "authors": [
+                {
+                    "name": "Jon Lawrence",
+                    "email": "jon@jon-lawrence.com"
+                }
+            ],
+            "description": "Parse and solve math equations without using 'eval()'.",
+            "keywords": [
+                "eos",
+                "equations",
+                "math",
+                "solve"
+            ],
+            "time": "2016-03-02 22:35:41"
         },
         {
             "name": "jms/metadata",
