@@ -111,7 +111,12 @@
                             <i class="fa fa-pencil"></i> {{ trans('messages.edit') }}
                         </a>
                     </li>
-                    <li><a>...</a></li>
+
+                    <li>
+                        <a href="{{ action('GroupController@destroyConfirm', [$group->id]) }}">
+                            <i class="fa fa-trash"></i> {{trans('messages.delete')}}
+                        </a>
+                    </li>
 
                 </ul>
             </li>
