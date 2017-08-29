@@ -11,11 +11,10 @@ use \App\Group;
 class InsightsController extends Controller
 {
 
-    public function index(Group $group)
+
+
+    public function forGroup(Group $group)
     {
-
-        //dd($group->created_at->diffInMonths(Carbon::now()));
-
 
         // This is really a tribute to laravel efficiency and to the marvelous https://github.com/ConsoleTVs/Charts package
         $charts[] = Charts::database($group->actions()->get(), 'line', 'highcharts')
@@ -41,7 +40,7 @@ class InsightsController extends Controller
 
 
         $charts[] = Charts::database($group->memberships()->get(), 'line', 'highcharts')
-        ->title("Memberships per month")
+        ->title("New memberships per month")
         ->elementLabel('Memberships')
         ->dimensions(0, 400)
         ->lastByMonth($group->created_at->diffInMonths(Carbon::now()));
@@ -51,6 +50,50 @@ class InsightsController extends Controller
         return view('groups.insights')
         ->with('charts', $charts)
         ->with('group', $group);
-
     }
+
+
+    public function forAllGroups()
+    {
+        $group = \App\Group::orderBy('created_at', 'asc')->first();
+
+        // This is really a tribute to laravel efficiency and to the marvelous https://github.com/ConsoleTVs/Charts package
+        $charts[] = Charts::database(\App\Action::all(), 'line', 'highcharts')
+        ->title("Events per month")
+        ->elementLabel('Events')
+        ->dimensions(0, 400)
+        ->dateColumn('start')
+        ->lastByMonth($group->created_at->diffInMonths(Carbon::now())); // this finds the number of months since group creation. Clever isn't it ?
+
+
+        $charts[] = Charts::database(\App\Discussion::get(), 'line', 'highcharts')
+        ->title("Discussions per month")
+        ->elementLabel('Discussions')
+        ->dimensions(0, 400)
+        ->lastByMonth($group->created_at->diffInMonths(Carbon::now()));
+
+
+        $charts[] = Charts::database(\App\File::get(), 'line', 'highcharts')
+        ->title("Files per month")
+        ->elementLabel('Files')
+        ->dimensions(0, 400)
+        ->lastByMonth($group->created_at->diffInMonths(Carbon::now()));
+
+
+        $charts[] = Charts::database(\App\Membership::get(), 'line', 'highcharts')
+        ->title("New memberships per month")
+        ->elementLabel('Memberships')
+        ->dimensions(0, 400)
+        ->lastByMonth($group->created_at->diffInMonths(Carbon::now()));
+
+
+
+        return view('admin.insights')
+        ->with('charts', $charts)
+        ->with('group', $group);
+    }
+
+
+
+
 }

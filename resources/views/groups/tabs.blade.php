@@ -113,7 +113,7 @@
                     </li>
 
                     <li>
-                        <a href="{{ action('InsightsController@index', $group->id) }}">
+                        <a href="{{ action('InsightsController@forGroup', $group->id) }}">
                             <i class="fa fa-line-chart"></i> {{ trans('messages.insights') }}
                         </a>
                     </li>
@@ -129,7 +129,7 @@
 
         @endcan
 
-        
+
     </ul>
 
 

@@ -129,8 +129,14 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ url('/admin/user') }}">Users</a></li>
+                                <li>
+                                    <a href="{{ action('InsightsController@forAllGroups') }}">
+                                        <i class="fa fa-line-chart"></i> {{ trans('messages.insights') }}
+                                    </a>
+                                </li>
                                 <li><a href="{{ url('/translations') }}">Translations</a></li>
                                 <li><a href="{{ url('/admin/logs') }}">Logs</a></li>
+
                             </ul>
                         </li>
                     @endif
@@ -155,12 +161,12 @@
                                     </li>
                                 @endif
                             @endforeach
-                </ul>
-            </li>
-        @endif
-    </ul>
-</div><!--/.nav-collapse -->
-</div><!--/.container-fluid -->
+                        </ul>
+                    </li>
+                @endif
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
 </nav>
 
 
