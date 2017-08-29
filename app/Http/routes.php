@@ -116,7 +116,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('groups/{group}/history', 'GroupController@history');
     Route::get('groups/{group}/delete', 'GroupController@destroyConfirm');
     Route::delete('groups/{group}/delete', 'GroupController@destroy');
-    Route::get('groups/{group}/insights', 'InsightsController@index');
+    Route::get('groups/{group}/insights', 'InsightsController@forGroup');
 
 
     // memberships & preferences
@@ -290,6 +290,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('admin/settings', 'AdminSettingsController@update');
 
         Route::resource('admin/user', 'AdminUserController');
+        Route::get('admin/insights', 'InsightsController@forAllGroups');
 
     });
 
