@@ -22,28 +22,28 @@ class InsightsController extends Controller
         ->elementLabel('Events')
         ->dimensions(0, 400)
         ->dateColumn('start')
-        ->lastByMonth($group->created_at->diffInMonths(Carbon::now())); // this finds the number of months since group creation. Clever isn't it ?
+        ->lastByMonth($group->created_at->diffInMonths(Carbon::now()) + 1); // this finds the number of months since group creation. Clever isn't it ?
 
 
         $charts[] = Charts::database($group->discussions()->get(), 'line', 'highcharts')
         ->title("Discussions per month")
         ->elementLabel('Discussions')
         ->dimensions(0, 400)
-        ->lastByMonth($group->created_at->diffInMonths(Carbon::now()));
+        ->lastByMonth($group->created_at->diffInMonths(Carbon::now()) + 1);
 
 
         $charts[] = Charts::database($group->files()->get(), 'line', 'highcharts')
         ->title("Files per month")
         ->elementLabel('Files')
         ->dimensions(0, 400)
-        ->lastByMonth($group->created_at->diffInMonths(Carbon::now()));
+        ->lastByMonth($group->created_at->diffInMonths(Carbon::now()) + 1);
 
 
         $charts[] = Charts::database($group->memberships()->get(), 'line', 'highcharts')
         ->title("New memberships per month")
         ->elementLabel('Memberships')
         ->dimensions(0, 400)
-        ->lastByMonth($group->created_at->diffInMonths(Carbon::now()));
+        ->lastByMonth($group->created_at->diffInMonths(Carbon::now()) + 1);
 
 
 
@@ -63,28 +63,28 @@ class InsightsController extends Controller
         ->elementLabel('Events')
         ->dimensions(0, 400)
         ->dateColumn('start')
-        ->lastByMonth($group->created_at->diffInMonths(Carbon::now())); // this finds the number of months since group creation. Clever isn't it ?
+        ->lastByMonth($group->created_at->diffInMonths(Carbon::now()) + 1); // this finds the number of months since group creation. Clever isn't it ?
 
 
         $charts[] = Charts::database(\App\Discussion::get(), 'line', 'highcharts')
         ->title("Discussions per month")
         ->elementLabel('Discussions')
         ->dimensions(0, 400)
-        ->lastByMonth($group->created_at->diffInMonths(Carbon::now()));
+        ->lastByMonth($group->created_at->diffInMonths(Carbon::now())  + 1);
 
 
         $charts[] = Charts::database(\App\File::get(), 'line', 'highcharts')
         ->title("Files per month")
         ->elementLabel('Files')
         ->dimensions(0, 400)
-        ->lastByMonth($group->created_at->diffInMonths(Carbon::now()));
+        ->lastByMonth($group->created_at->diffInMonths(Carbon::now()) + 1);
 
 
         $charts[] = Charts::database(\App\Membership::get(), 'line', 'highcharts')
         ->title("New memberships per month")
         ->elementLabel('Memberships')
         ->dimensions(0, 400)
-        ->lastByMonth($group->created_at->diffInMonths(Carbon::now()));
+        ->lastByMonth($group->created_at->diffInMonths(Carbon::now()) + 1);
 
 
 
