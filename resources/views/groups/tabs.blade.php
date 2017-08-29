@@ -113,6 +113,12 @@
                     </li>
 
                     <li>
+                        <a href="{{ action('InsightsController@index', $group->id) }}">
+                            <i class="fa fa-line-chart"></i> {{ trans('messages.insights') }}
+                        </a>
+                    </li>
+
+                    <li>
                         <a href="{{ action('GroupController@destroyConfirm', [$group->id]) }}">
                             <i class="fa fa-trash"></i> {{trans('messages.delete')}}
                         </a>

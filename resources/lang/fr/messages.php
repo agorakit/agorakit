@@ -120,6 +120,7 @@ TEXT
     'in'                                                => 'dans',
     'info'                                              => 'Info',
     'inside'                                            => 'au sein de',
+    'insights'                                          => 'Statistiques',
     'invitation_sent_again'                             => 'Un nouveau mail de vérification vous a été envoyé, vérifiez votre boite mail ainsi que le dossier spam afin de pouvoir vérifier votre adresse mail. Ceci nous permet d\'éviter le spam sur ce site. Merci pour votre compréhension.',
     'invitation_to_join'                                => 'Invitation à rejoindre le groupe',
     'invite_already_used'                               => 'Invitation déjà utilisée',

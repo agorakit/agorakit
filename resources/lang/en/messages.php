@@ -116,6 +116,7 @@ TEXT
     'in'                                                => 'in',
     'info'                                              => 'Info',
     'inside'                                            => 'inside',
+    'insights'                                          => 'Insights',
     'invitation_sent_again'                             => 'Invitation sent again',
     'invitation_to_join'                                => 'Invitation to join',
     'invite_already_used'                               => 'Invitation already used',
