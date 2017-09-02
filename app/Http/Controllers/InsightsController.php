@@ -87,6 +87,13 @@ class InsightsController extends Controller
         ->lastByMonth($group->created_at->diffInMonths(Carbon::now()) + 1);
 
 
+        $charts[] = Charts::database(\App\Membership::get(), 'bar', 'highcharts')
+        ->title("Memberships notifications")
+        ->elementLabel('Members')
+        ->dimensions(0, 400)
+        ->groupBy('notification_interval');
+
+
 
         return view('admin.insights')
         ->with('charts', $charts)
