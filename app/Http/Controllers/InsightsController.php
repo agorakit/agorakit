@@ -87,11 +87,11 @@ class InsightsController extends Controller
         ->lastByMonth($group->created_at->diffInMonths(Carbon::now()) + 1);
 
 
-        $charts[] = Charts::database(\App\Membership::get(), 'bar', 'highcharts')
-        ->title("Memberships notifications")
+        $charts[] = Charts::database(\App\Membership::orderBy('notification_interval')->get(), 'bar', 'highcharts')
+        ->title("How often members want to be notified ?")
         ->elementLabel('Members')
         ->dimensions(0, 400)
-        ->groupBy('notification_interval');
+        ->groupBy('notification_interval', null, [60 => 'Every hour', 240 => "Every 4 hours", 600 => 'Every 10 hours', 10080 => 'Every week', 1440 => 'Every day', 0 => 'No notifications', -1 => 'Never', 20160 => 'Every two weeks', 43200 => 'Every month']);
 
 
 
