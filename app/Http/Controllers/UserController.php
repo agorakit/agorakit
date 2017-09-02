@@ -29,7 +29,7 @@ class UserController extends Controller {
     public function index($group_id)
     {
         $group = \App\Group::findOrFail($group_id);
-        $users = $group->users()->where('membership', \App\Membership::MEMBER)->orderBy('name', 'asc')->paginate(25);
+        $users = $group->users()->where('membership', \App\Membership::MEMBER)->orderBy('updated_at', 'desc')->paginate(25);
         $admins = $group->users()->where('membership', \App\Membership::ADMIN)->orderBy('name', 'asc')->get();
 
         return view('users.index')

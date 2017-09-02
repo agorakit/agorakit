@@ -124,6 +124,7 @@ TEXT
     'join'                                              => 'Join',
     'join_the_group'                                    => 'Join the group',
     'join_this_group'                                   => 'Join this group',
+    'last_activity'                                     => 'Last activity',
     'latest_actions'                                    => 'Latest actions',
     'latest_comments'                                   => 'Latest comments',
     'latest_discussions'                                => 'Latest discussions',

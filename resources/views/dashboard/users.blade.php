@@ -15,7 +15,7 @@
                     <tr>
                         <th style="width: 50px"></th>
                         <th style="width:80%;">{{ trans('messages.name') }}</th>
-                        <th style="min-width:150px;">{{ trans('messages.registration_time') }}</th>
+                        <th>{{ trans('messages.last_activity') }}</th>
                     </tr>
 
                     @foreach( $users as $user )
@@ -45,7 +45,7 @@
 
 
                             <td style="font-size: 10px;">
-                                <a href="{{ action('UserController@show', $user->id) }}">{{ $user->created_at->diffForHumans() }}</a>
+                                <a href="{{ action('UserController@show', $user->id) }}">{{ $user->updated_at->diffForHumans() }}</a>
                             </td>
 
 

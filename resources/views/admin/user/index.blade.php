@@ -28,6 +28,7 @@
                     <th>{{ trans('messages.name') }}</th>
                     <th>{{ trans('messages.email') }}</th>
                     <th>{{ trans('messages.registration_time') }}</th>
+                    <th>{{ trans('messages.last_activity') }}</th>
                     <th>{{ trans('messages.admin') }}</th>
                     <th></th>
                 </tr>
@@ -44,9 +45,14 @@
                             <a href="{{ action('UserController@show', $user->id) }}"> {{ $user->email }}</a>
                         </td>
 
-                        <td data-order="{{ $user->created_at }}>
+                        <td data-order="{{ $user->created_at }}">
                             <a href="{{ action('UserController@show', $user->id) }}">{{ $user->created_at->diffForHumans() }}</a>
                         </td>
+
+                        <td data-order="{{ $user->updated_at }}">
+                            <a href="{{ action('UserController@show', $user->id) }}">{{ $user->updated_at->diffForHumans() }}</a>
+                        </td>
+
                         <td>
                             @if ($user->isAdmin())
                                 {{trans('messages.admin')}}

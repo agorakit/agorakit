@@ -128,6 +128,7 @@ TEXT
     'join'                                              => 'Rejoindre ce groupe',
     'join_the_group'                                    => 'rejoignez-le',
     'join_this_group'                                   => 'Rejoignez ce groupe',
+    'last_activity'                                     => 'Dernière activité',
     'latest_actions'                                    => 'Prochaines actions',
     'latest_comments'                                   => 'Derniers commentaires',
     'latest_discussions'                                => 'Discussions récentes',
