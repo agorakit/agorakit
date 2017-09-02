@@ -11,10 +11,10 @@ class DiscussionPolicy
     use HandlesAuthorization;
 
     /**
-     * Create a new policy instance.
-     *
-     * @return void
-     */
+    * Create a new policy instance.
+    *
+    * @return void
+    */
     public function __construct()
     {
         //
@@ -26,12 +26,16 @@ class DiscussionPolicy
             return true;
         }
     }
-    
+
 
     public function update(User $user, Discussion $discussion)
     {
-         return $user->isMemberOf($discussion->group);
+        return $user->isMemberOf($discussion->group);
     }
 
+    public function delete(User $user, Discussion $discussion)
+    {
+        return ($user->isAdminOf($discussion->group));
+    }
 
 }

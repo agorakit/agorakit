@@ -151,17 +151,46 @@ class DiscussionController extends Controller
         return redirect()->action('DiscussionController@show', [$discussion->group->id, $discussion->id]);
     }
 
+
+
+
+    public function destroyConfirm(Request $request, Group $group, Discussion $discussion)
+    {
+        if (Gate::allows('delete', $discussion))
+        {
+            return view('discussions.delete')
+            ->with('group', $group)
+            ->with('discussion', $discussion)
+            ->with('tab', 'discussion');
+        }
+        else
+        {
+            abort(403);
+        }
+    }
+
+
+
     /**
     * Remove the specified resource from storage.
     *
-    * @param  int  $id
+    * @param int $id
     *
-    * @return Response
+    * @return \Illuminate\Http\Response
     */
-    public function destroy($id)
+    public function destroy(Request $request, Group $group, Discussion $discussion)
     {
+        if (Gate::allows('delete', $discussion))
+        {
+            $discussion->delete();
+            flash()->info(trans('messages.ressource_deleted_successfully'));
+            return redirect()->action('DiscussionController@index', [$group]);
+        }
+        else
+        {
+            abort(403);
+        }
     }
-
 
     /**
     * Show the revision history of the discussion

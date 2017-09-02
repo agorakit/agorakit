@@ -13,7 +13,7 @@
             @endcan
 
             @can('edit-membership', $group)
-                <a class="btn btn-warning" href="{{ action('MembershipAdminController@addUserForm', $group->id ) }}"><i class="fa fa-plus"></i> {{trans('membership.directly_add_users_button')}}</a>
+                <a class="btn btn-warning" href="{{ action('AdminMembershipController@addUserForm', $group->id ) }}"><i class="fa fa-plus"></i> {{trans('membership.directly_add_users_button')}}</a>
             @endcan
 
             <a class="btn btn-primary" href="{{ action('MapController@map', $group ) }}">{{trans('messages.show_map')}}</a>
@@ -47,7 +47,7 @@
 
                     <td>
                         @can('edit-membership', $group)
-                            <a href="{{ action('MembershipAdminController@editUserForm', [$group, $user]) }}" class="btn btn-warning btn-sm">{{trans('messages.edit')}}</a>
+                            <a href="{{ action('AdminMembershipController@editUserForm', [$group, $user]) }}" class="btn btn-warning btn-sm">{{trans('messages.edit')}}</a>
                         @endcan
 
                     </td>

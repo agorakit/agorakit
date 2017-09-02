@@ -132,15 +132,15 @@ Route::group(['middleware' => ['web']], function () {
 
     // membership admins
 
-    Route::get('groups/{group}/users/add', 'MembershipAdminController@addUserForm');
-    Route::post('groups/{group}/users/add', 'MembershipAdminController@addUser');
+    Route::get('groups/{group}/users/add', 'AdminMembershipController@addUserForm');
+    Route::post('groups/{group}/users/add', 'AdminMembershipController@addUser');
 
-    Route::get('groups/{group}/users/{user}/admin', 'MembershipAdminController@editUserForm');
+    Route::get('groups/{group}/users/{user}/admin', 'AdminMembershipController@editUserForm');
 
-    Route::delete('groups/{group}/users/delete/{user}', 'MembershipAdminController@removeUser');
+    Route::delete('groups/{group}/users/delete/{user}', 'AdminMembershipController@removeUser');
 
-    Route::post('groups/{group}/users/{user}/admin/add', 'MembershipAdminController@addAdminUser');
-    Route::delete('groups/{group}/users/{user}/admin/delete', 'MembershipAdminController@removeAdminUser');
+    Route::post('groups/{group}/users/{user}/admin/add', 'AdminMembershipController@addAdminUser');
+    Route::delete('groups/{group}/users/{user}/admin/delete', 'AdminMembershipController@removeAdminUser');
 
 
     // in the case of closed group, we show an howto join message
@@ -164,6 +164,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('groups/{group}/discussions/{discussion}', 'DiscussionController@show');
     Route::get('groups/{group}/discussions/{discussion}/edit', 'DiscussionController@edit');
     Route::post('groups/{group}/discussions/{discussion}', 'DiscussionController@update');
+
+    Route::get('groups/{group}/discussions/{discussion}/delete', 'DiscussionController@destroyConfirm');
+    Route::delete('groups/{group}/discussions/{discussion}/delete', 'DiscussionController@destroy');
+
 
     // discussion history
     Route::get('groups/{group}/discussions/{discussion}/history', 'DiscussionController@history');
@@ -223,6 +227,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('groups/{group}/files/{file}', 'FileController@show');
     Route::get('groups/{group}/files/{file}/thumbnail', 'FileController@thumbnail');
     Route::get('groups/{group}/files/{file}/preview', 'FileController@preview');
+
     Route::get('groups/{group}/files/{file}/delete', 'FileController@destroyConfirm');
     Route::delete('groups/{group}/files/{file}/delete', 'FileController@destroy');
 
