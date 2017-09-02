@@ -24,36 +24,11 @@
             <tr>
                 <th>{{ trans('messages.name') }}</th>
                 <th>{{ trans('messages.registration_time') }}</th>
+                <th>{{ trans('messages.last_activity') }}</th>
                 <th></th>
             </tr>
 
-            @can('edit-membership', $group)
-                @foreach( $admins as $user )
-                    <tr>
-                        <td>
-                            <a href="{{ action('UserController@show', $user->id) }}">
-                                <span class="avatar"><img src="{{$user->avatar()}}" class="img-circle"/></span>
-                                {{ $user->name }} ({{trans('messages.admin')}})
-                            </a>
-                        </td>
 
-                        <td>
-                            <a href="{{ action('UserController@show', $user->id) }}">{{ $user->created_at->diffForHumans() }}</a>
-                        </td>
-
-
-                        <td>
-                            @can('edit-membership', $group)
-                                <a href="{{ action('MembershipAdminController@editUserForm', [$group, $user]) }}" class="btn btn-warning btn-sm">{{trans('messages.edit')}}</a>
-                            @endcan
-
-                        </td>
-
-                    </tr>
-
-                @endforeach
-
-            @endcan
 
             @foreach( $users as $user )
                 <tr>
@@ -63,6 +38,10 @@
 
                     <td>
                         <a href="{{ action('UserController@show', $user->id) }}">{{ $user->created_at->diffForHumans() }}</a>
+                    </td>
+
+                    <td>
+                        <a href="{{ action('UserController@show', $user->id) }}">{{ $user->updated_at->diffForHumans() }}</a>
                     </td>
 
 
