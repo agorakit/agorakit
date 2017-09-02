@@ -11,7 +11,7 @@
 
 
         @can('edit-membership', $group)
-            {!! Form::open(['action'=> ['MembershipAdminController@removeUser', $group, $user], 'method'=>'DELETE', 'role'=>'form','onsubmit' => 'return confirm("'. trans('messages.are_you_sure') . '")' ])!!}
+            {!! Form::open(['action'=> ['AdminMembershipController@removeUser', $group, $user], 'method'=>'DELETE', 'role'=>'form','onsubmit' => 'return confirm("'. trans('messages.are_you_sure') . '")' ])!!}
             <button type="submit" name="button" class="btn btn-warning btn-sm">
                 <i class="fa fa-star"></i> {{trans('messages.remove_user')}}
             </button>
@@ -21,7 +21,7 @@
 
         @can('edit-membership', $group)
             @unless($user->isAdminOf($group))
-                {!! Form::open(['action'=> ['MembershipAdminController@addAdminUser', $group, $user], 'method'=>'POST', 'role'=>'form','onsubmit' => 'return confirm("'. trans('messages.are_you_sure') . '")' ])!!}
+                {!! Form::open(['action'=> ['AdminMembershipController@addAdminUser', $group, $user], 'method'=>'POST', 'role'=>'form','onsubmit' => 'return confirm("'. trans('messages.are_you_sure') . '")' ])!!}
                 <button type="submit" name="button" class="btn btn-warning btn-sm">
                     <i class="fa fa-star"></i> {{trans('messages.make_user_admin')}}
                 </button>
@@ -32,7 +32,7 @@
 
         @can('edit-membership', $group)
             @if($user->isAdminOf($group))
-                {!! Form::open(['action'=> ['MembershipAdminController@removeAdminUser', $group, $user], 'method'=>'DELETE', 'role'=>'form','onsubmit' => 'return confirm("'. trans('messages.are_you_sure') . '")' ])!!}
+                {!! Form::open(['action'=> ['AdminMembershipController@removeAdminUser', $group, $user], 'method'=>'DELETE', 'role'=>'form','onsubmit' => 'return confirm("'. trans('messages.are_you_sure') . '")' ])!!}
                 <button type="submit" name="button" class="btn btn-warning btn-sm">
                     <i class="fa fa-star-o"></i> {{trans('messages.remove_user_admin')}}
                 </button>

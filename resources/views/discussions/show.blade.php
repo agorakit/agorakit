@@ -32,6 +32,13 @@
               </a>
             @endcan
 
+            @can('delete', $discussion)
+              <a class="btn btn-warning btn-xs" href="{{ action('DiscussionController@destroyConfirm', [$group->id, $discussion->id]) }}">
+                <i class="fa fa-trash"></i>
+                {{trans('messages.delete')}}
+              </a>
+            @endcan
+
             @if ($discussion->revisionHistory->count() > 0)
               <a class="btn btn-default btn-xs" href="{{action('DiscussionController@history', [$group->id, $discussion->id])}}"><i class="fa fa-history"></i> {{trans('messages.show_history')}}</a>
             @endif
