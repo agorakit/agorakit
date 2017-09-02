@@ -17,6 +17,14 @@ class InsightsController extends Controller
     {
 
         // This is really a tribute to laravel efficiency and to the marvelous https://github.com/ConsoleTVs/Charts package
+
+        $charts[] = Charts::create('bar', 'highcharts')
+        ->title("General stats")
+        ->labels(['Users', 'Discussions', 'Events', 'Files'])
+        ->values([$group->users()->count(), $group->discussions()->count(), $group->actions()->count(), $group->files()->count()])
+        ->dimensions(0, 400);
+
+        
         $charts[] = Charts::database($group->actions()->get(), 'line', 'highcharts')
         ->title("Events per month")
         ->elementLabel('Events')
@@ -56,6 +64,13 @@ class InsightsController extends Controller
     public function forAllGroups()
     {
         $group = \App\Group::orderBy('created_at', 'asc')->first();
+
+        $charts[] = Charts::create('bar', 'highcharts')
+        ->title("General stats")
+        ->labels(['Groups', 'Users', 'Discussions', 'Comments', 'Events', 'Files'])
+        ->values([\App\Group::count(), \App\User::count(), \App\Discussion::count(), \App\Comment::count(), \App\Action::count(), \App\File::count()])
+        ->dimensions(0, 400);
+
 
         // This is really a tribute to laravel efficiency and to the marvelous https://github.com/ConsoleTVs/Charts package
         $charts[] = Charts::database(\App\Action::all(), 'line', 'highcharts')
