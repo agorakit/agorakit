@@ -178,8 +178,6 @@ class DashboardController extends Controller
         $event = [];
         $events = [];
 
-        dd ($actions);
-
         foreach ($actions as $action)
         {
             $event['id'] = $action->id;
