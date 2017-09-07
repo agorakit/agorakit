@@ -175,8 +175,10 @@ class DashboardController extends Controller
             $actions = \App\Action::with('group')->orderBy('start', 'asc')->get();
         }
 
-        $event = '';
-        $events = '';
+        $event = [];
+        $events = [];
+
+        dd ($actions);
 
         foreach ($actions as $action)
         {

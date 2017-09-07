@@ -39,8 +39,6 @@ class ActionController extends Controller
     public function indexJson(Request $request, Group $group)
     {
 
-        //dd($request);
-
         // load of actions between start and stop provided by calendar js
         if ($request->has('start') && $request->has('end'))
         {
@@ -56,8 +54,8 @@ class ActionController extends Controller
         }
 
 
-        $event = '';
-        $events = '';
+        $event = [];
+        $events = [];
 
         foreach ($actions as $action)
         {
