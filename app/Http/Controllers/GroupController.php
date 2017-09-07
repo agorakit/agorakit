@@ -120,10 +120,6 @@ class GroupController extends Controller
             }
         }
 
-        $group->user()->associate(Auth::user());
-        $group->tag($request->get('tags'));
-
-
         if ($group->isInvalid()) {
             // Oops.
             return redirect()->action('GroupController@create')
@@ -131,6 +127,9 @@ class GroupController extends Controller
             ->withInput();
         }
         $group->save();
+
+        $group->user()->associate(Auth::user());
+        $group->tag($request->get('tags'));
 
         // handle cover
         if ($request->hasFile('cover'))
