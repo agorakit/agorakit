@@ -4,7 +4,7 @@ return [
     'LLH:obsolete'          => [
         'no_group_joined_yet_act_now'   => 'Vous ne faites pas encore partie d\'un groupe, rejoignez-en un :-)',
     ],
-    'about_this_group'      => 'À propos de ce groupe',
+    'about_this_group'      => 'À propos',
     'closed'                => 'Groupe privé',
     'cover'                 => 'Image de présentation',
     'create'                => 'Créer',
