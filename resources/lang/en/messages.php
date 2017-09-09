@@ -29,6 +29,7 @@ return [
     'admin_of'                                          => 'Admin of',
     'admin_settings'                                    => 'Admin settings',
     'administration'                                    => 'Administration',
+    'admins'                                            => 'Admins',
     'agenda'                                            => 'Calendar',
     'agenda_my'                                         => 'My group\'s calendars',
     'agenda_others'                                     => 'Other groups\' calendars',

@@ -15,10 +15,8 @@
             @can('edit-membership', $group)
                 <a class="btn btn-warning" href="{{ action('AdminMembershipController@addUserForm', $group->id ) }}"><i class="fa fa-plus"></i> {{trans('membership.directly_add_users_button')}}</a>
             @endcan
-
-            <a class="btn btn-primary" href="{{ action('MapController@map', $group ) }}">{{trans('messages.show_map')}}</a>
-
         </div>
+
 
         <table class="table table-hover">
             <tr>
@@ -27,7 +25,6 @@
                 <th>{{ trans('messages.last_activity') }}</th>
                 <th></th>
             </tr>
-
 
 
             @foreach( $users as $user )
@@ -47,7 +44,36 @@
 
                     <td>
                         @can('edit-membership', $group)
-                            <a href="{{ action('AdminMembershipController@editUserForm', [$group, $user]) }}" class="btn btn-warning btn-sm">{{trans('messages.edit')}}</a>
+
+                            <div class="btn-group">
+                                <a type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-wrench"></i> <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+
+                                    <li>
+                                        @if($user->isAdminOf($group))
+                                            <a href="{{action('AdminMembershipController@removeAdminUser', [$group, $user])}}" onclick="return confirm('{{trans('messages.are_you_sure')}}');">
+                                                <i class="fa fa-trash-o"></i> {{trans('messages.remove_user_admin')}}
+                                            </a>
+                                        @else
+                                            <a href="{{action('AdminMembershipController@addAdminUser', [$group, $user])}}" onclick="return confirm('{{trans('messages.are_you_sure')}}');">
+                                                <i class="fa fa-key"></i> {{trans('messages.make_user_admin')}}
+                                            </a>
+                                        @endif
+                                    </li>
+
+
+                                    <li>
+                                        <a href="{{action('AdminMembershipController@removeUser', [$group, $user])}}" onclick="return confirm('{{trans('messages.are_you_sure')}}');">
+                                            <i class="fa fa-ban"></i> {{trans('messages.remove_user')}}
+                                        </a>
+                                    </li>
+
+
+                                </div>
+                            </ul>
+
                         @endcan
 
                     </td>
@@ -57,6 +83,14 @@
         </table>
 
         {!! $users->render() !!}
+
+
+        @if ($admins->count() > 0)
+            <strong>{{trans('messages.admins')}} : </strong>
+            @foreach( $admins as $admin )
+                <a href="{{ action('UserController@show', $admin) }}">{{ $admin->name }}</a>
+            @endforeach
+        @endif
 
 
     </div>
