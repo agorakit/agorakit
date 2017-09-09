@@ -140,7 +140,7 @@ class GroupController extends Controller
         }
 
         // make the current user an admin of the group
-        $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
+        $membership = \App\Membership::firstOrNew(['user_id' => Auth::user()->id, 'group_id' => $group->id]);
         $membership->notification_interval = 60 * 24; // default to daily interval
         $membership->membership = \App\Membership::ADMIN;
         $membership->save();

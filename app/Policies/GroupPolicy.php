@@ -48,6 +48,13 @@ class GroupPolicy
     }
 
 
+    /**
+    *   Can the user administer the group or not?
+    */
+    public function administer(User $user, Group $group)
+    {
+        return $user->isAdminOf($group);
+    }
 
 
     /*
