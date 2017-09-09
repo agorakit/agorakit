@@ -37,7 +37,7 @@ class User extends Authenticatable
 
 
     protected $rules = [
-        'name' => 'required|unique:users',
+        'name' => 'required',
         'email' => 'required|email|unique:users',
         //'password' => 'required',
     ];
