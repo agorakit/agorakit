@@ -137,10 +137,10 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('groups/{group}/users/{user}/admin', 'AdminMembershipController@editUserForm');
 
-    Route::delete('groups/{group}/users/delete/{user}', 'AdminMembershipController@removeUser');
+    Route::get('groups/{group}/users/delete/{user}', 'AdminMembershipController@removeUser');
 
-    Route::post('groups/{group}/users/{user}/admin/add', 'AdminMembershipController@addAdminUser');
-    Route::delete('groups/{group}/users/{user}/admin/delete', 'AdminMembershipController@removeAdminUser');
+    Route::get('groups/{group}/users/{user}/admin/add', 'AdminMembershipController@addAdminUser');
+    Route::get('groups/{group}/users/{user}/admin/delete', 'AdminMembershipController@removeAdminUser');
 
 
     // in the case of closed group, we show an howto join message

@@ -31,9 +31,12 @@ class UserController extends Controller {
         $group = \App\Group::findOrFail($group_id);
         $users = $group->users()->orderBy('updated_at', 'desc')->paginate(25);
 
+        $admins = $group->admins()->orderBy('name')->get();
+
 
         return view('users.index')
         ->with('users', $users)
+        ->with('admins', $admins)
         ->with('group', $group)
         ->with('tab', 'users');
     }

@@ -95,6 +95,9 @@ return [
         'attribute-name'    => [
             'rule-name' => 'custom-message',
         ],
+        'body'              => [
+            'required'  => 'requis',
+        ],
         'group_id'          => [
             'required'  => 'Required',
         ],
@@ -125,6 +128,7 @@ return [
         'address'               => 'Adresse',
         'age'                   => 'Age',
         'available'             => 'Disponible',
+        'body'                  => 'Corps du texte',
         'city'                  => 'Ville',
         'content'               => 'Contenu',
         'country'               => 'Pays',
