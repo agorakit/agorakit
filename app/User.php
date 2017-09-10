@@ -106,6 +106,18 @@ class User extends Authenticatable
     */
     public function isAdminOf(Group $group)
     {
+
+        foreach ($this->memberships as $membership)
+        {
+            //dd ($membership);
+            if (($membership->group_id == $group->id) && ($membership->membership == \App\Membership::ADMIN))
+            {
+                return true;
+            }
+        }
+
+        return false;
+
         //$membership = \App\Membership::where('user_id', '=', $this->id)->where('group_id', '=', $group->id)->first();
         // the following might save us n+1 query problem later :
         $membership = $this->memberships()->where('group_id', '=', $group->id)->first();
