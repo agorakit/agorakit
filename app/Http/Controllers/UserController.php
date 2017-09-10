@@ -10,6 +10,7 @@ use Image;
 use Redirect;
 use App\Mailers\AppMailer;
 use App\Group;
+use App\User;
 
 class UserController extends Controller {
 
@@ -26,13 +27,10 @@ class UserController extends Controller {
     *
     * @return Response
     */
-    public function index($group_id)
+    public function index(Group $group)
     {
-        $group = \App\Group::findOrFail($group_id);
-        $users = $group->users()->orderBy('updated_at', 'desc')->paginate(25);
-
+        $users = $group->users()->with('memberships')->orderBy('updated_at', 'desc')->paginate(25);
         $admins = $group->admins()->orderBy('name')->get();
-
 
         return view('users.index')
         ->with('users', $users)
@@ -46,9 +44,9 @@ class UserController extends Controller {
     /**
     * Show contact form for the user
     */
-    public function contact($user_id)
+    public function contact(User $user)
     {
-        $user = \App\User::findOrFail($user_id);
+        $user = User::findOrFail($user_id);
         return view('users.contact')
         ->with('tab', 'contact')
         ->with('user', $user);
@@ -57,9 +55,8 @@ class UserController extends Controller {
     /**
     * Mails the user
     */
-    public function mail($user_id, Request $request)
+    public function mail(User $to_user, Request $request)
     {
-        $to_user = \App\User::findOrFail($user_id);
         $from_user = Auth::user();
 
 
