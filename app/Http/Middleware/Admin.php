@@ -30,6 +30,10 @@ class Admin
     */
     public function handle($request, Closure $next)
     {
+        if ($this->auth->guest()) {
+            return redirect()->guest('login')->with('message', trans('messages.not_logged_in'));
+        }
+
         if ($request->user()->isAdmin())
         {
             return $next($request);

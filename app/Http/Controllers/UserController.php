@@ -19,7 +19,7 @@ class UserController extends Controller {
     {
         $this->middleware('cache', ['only' => ['cover', 'avatar']]);
         $this->middleware('verified', ['only' => ['contact', 'mail']]);
-        $this->middleware('throttle:2,1', ['only' => ['mail', 'sendVerificationAgain']]); // 2 emails per  minute should be enough for non bots
+    //    $this->middleware('throttle:2,1', ['only' => ['mail', 'sendVerificationAgain']]); // 2 emails per  minute should be enough for non bots
     }
 
     /**
@@ -46,7 +46,6 @@ class UserController extends Controller {
     */
     public function contact(User $user)
     {
-        $user = User::findOrFail($user_id);
         return view('users.contact')
         ->with('tab', 'contact')
         ->with('user', $user);
@@ -55,9 +54,10 @@ class UserController extends Controller {
     /**
     * Mails the user
     */
-    public function mail(User $to_user, Request $request)
+    public function mail(User $user, Request $request)
     {
         $from_user = Auth::user();
+        $to_user = $user;
 
 
         if ($request->has('body'))
@@ -83,10 +83,11 @@ class UserController extends Controller {
     * @param  int  $id
     * @return Response
     */
-    public function show($id)
+    public function show(User $user)
     {
-        $user = \App\User::findOrFail($id);
-        return view('users.show')->with('user', $user)->with('tab', 'profile');
+        return view('users.show')
+        ->with('user', $user)
+        ->with('tab', 'profile');
     }
 
     /**
@@ -95,9 +96,8 @@ class UserController extends Controller {
     * @param  int  $id
     * @return Response
     */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = \App\User::findOrFail($id);
         if (Gate::allows('update', $user))
         {
             return view('users.edit')
@@ -115,10 +115,8 @@ class UserController extends Controller {
     * @param  int  $id
     * @return Response
     */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        $user = \App\User::findOrFail($id);
-
         if (Gate::allows('update', $user))
         {
             $user->name = $request->input('name');
@@ -202,9 +200,8 @@ class UserController extends Controller {
     * @param  Int  $id      User id
     * @return Flash message and returns to homepage
     */
-    public function sendVerificationAgain(Request $request, $id)
+    public function sendVerificationAgain(Request $request, User $user)
     {
-        $user = \App\User::findOrFail($id);
         if ($user->verified == 0)
         {
             $mailer = new AppMailer;
@@ -220,14 +217,14 @@ class UserController extends Controller {
     * @param  int  $id
     * @return Response
     */
-    public function destroy($id)
+    public function destroy(User $user)
     {
 
     }
 
-    public function cover($id)
+    public function cover(User $user)
     {
-        $path = storage_path() . '/app/users/' . $id . '/cover.jpg';
+        $path = storage_path() . '/app/users/' . $user->id . '/cover.jpg';
 
         if (File::exists($path))
         {
@@ -245,9 +242,9 @@ class UserController extends Controller {
 
 
 
-    public function avatar($id)
+    public function avatar(User $user)
     {
-        $path = storage_path() . '/app/users/' . $id . '/cover.jpg';
+        $path = storage_path() . '/app/users/' . $user->id . '/cover.jpg';
 
         if (File::exists($path))
         {

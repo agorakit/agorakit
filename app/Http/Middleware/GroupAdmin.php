@@ -31,7 +31,7 @@ class GroupAdmin
     {
 
         if ($this->auth->guest()) {
-            return redirect()->back()->with('message', trans('messages.not_logged_in'));
+            return redirect()->guest('login')->with('message', trans('messages.not_logged_in'));
         }
 
         // an admin can bypass membership requirement

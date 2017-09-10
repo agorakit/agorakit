@@ -8,10 +8,10 @@ use Illuminate\Contracts\Auth\Guard;
 class RedirectIfNotGroupMember
 {
     /**
-     * The Guard implementation.
-     *
-     * @var Guard
-     */
+    * The Guard implementation.
+    *
+    * @var Guard
+    */
     protected $auth;
 
     public function __construct(Guard $auth)
@@ -20,13 +20,13 @@ class RedirectIfNotGroupMember
     }
 
     /**
-     * Handle an incoming request.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure                 $next
-     *
-     * @return mixed
-     */
+    * Handle an incoming request.
+    *
+    * @param \Illuminate\Http\Request $request
+    * @param \Closure                 $next
+    *
+    * @return mixed
+    */
     public function handle($request, Closure $next)
     {
 
@@ -34,7 +34,7 @@ class RedirectIfNotGroupMember
         // TODO probably could be refactored
 
         if ($this->auth->guest()) {
-            return redirect()->back()->with('message', trans('messages.not_logged_in'));
+            return redirect()->guest('login')->with('message', trans('messages.not_logged_in'));
         }
 
         // an admin can bypass membership requirement
