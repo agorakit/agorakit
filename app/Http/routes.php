@@ -237,30 +237,25 @@ Route::group(['middleware' => ['web']], function () {
 
 
     // Users
-    Route::get('users/{id}', 'UserController@show');
+    Route::get('users/{user}', 'UserController@show');
 
-    Route::get('users/{id}/cover', 'UserController@cover');
-    Route::get('users/{id}/avatar', 'UserController@avatar');
+    Route::get('users/{user}/cover', 'UserController@cover');
+    Route::get('users/{user}/avatar', 'UserController@avatar');
 
-    Route::get('users/{id}/sendverification', 'UserController@sendVerificationAgain');
+    Route::get('users/{user}/sendverification', 'UserController@sendVerificationAgain');
 
-    Route::get('users/{id}/edit', 'UserController@edit');
-    Route::post('users/{id}', 'UserController@update');
+    Route::get('users/{user}/edit', 'UserController@edit');
+    Route::post('users/{user}', 'UserController@update');
 
-    Route::get('users/{id}/contact', 'UserController@contact');
-    Route::post('users/{id}/contact', 'UserController@mail');
+    Route::get('users/{user}/contact', 'UserController@contact');
+    Route::post('users/{user}/contact', 'UserController@mail');
 
     Route::get('groups/{group}/users', 'UserController@index');
 
 
-
+    // Maps
     Route::get('groups/{group}/map', 'MapController@map');
     Route::get('groups/{group}/map/embed', 'MapController@embed');
-
-
-    // Tags
-    Route::get('tags', 'TagController@index');
-    Route::get('tags/{tag}', 'TagController@show');
 
 
     // Search
