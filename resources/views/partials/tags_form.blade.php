@@ -29,9 +29,11 @@
             @endforeach
         @endif
 
-        @foreach ($all_tags as $tag)
-            <option value="{{$tag}}">{{$tag}}</option>
-        @endforeach
+        @if (isset($all_tags))
+            @foreach ($all_tags as $tag)
+                <option value="{{$tag}}">{{$tag}}</option>
+            @endforeach
+        @endif
     </select>
     <span id="tagshelp" class="help-block">{{trans('messages.tags_help')}}</span>
 </div>
