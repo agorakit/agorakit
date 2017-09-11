@@ -11,8 +11,6 @@
 |
 */
 
-
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -26,9 +24,6 @@
 
 Route::group(['middleware' => ['web']], function () {
 
-
-
-
     /*
     Authentification routes
     =======================
@@ -40,7 +35,6 @@ Route::group(['middleware' => ['web']], function () {
     // OAuth Routes
     Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
     Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
-
 
     /*
     Homepage
@@ -61,15 +55,12 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('agenda/json', 'DashboardController@agendaJson');
     Route::get('agenda/ical', 'IcalController@index');
 
-
     /*
     Feeds (RSS ftw!)
     ===========================================
     */
     Route::get('discussions/feed', 'FeedController@discussions');
     Route::get('actions/feed', 'FeedController@actions');
-
-
 
     /*
     Group related routes
@@ -118,7 +109,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::delete('groups/{group}/delete', 'GroupController@destroy');
     Route::get('groups/{group}/insights', 'InsightsController@forGroup');
 
-
     // memberships & preferences
     Route::get('groups/{group}/join', 'MembershipController@joinForm');
     Route::post('groups/{group}/join', 'MembershipController@join');
@@ -128,7 +118,6 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('groups/{group}/leave', 'MembershipController@leaveForm');
     Route::post('groups/{group}/leave', 'MembershipController@leave');
-
 
     // membership admins
 
@@ -142,7 +131,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('groups/{group}/users/{user}/admin/add', 'AdminMembershipController@addAdminUser');
     Route::get('groups/{group}/users/{user}/admin/delete', 'AdminMembershipController@removeAdminUser');
 
-
     // in the case of closed group, we show an howto join message
     Route::get('groups/{group}/howtojoin', 'MembershipController@howToJoin');
 
@@ -151,8 +139,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('groups/{group}/invite', 'InviteController@sendInvites');
     Route::get('groups/{group}/invite/confirm/{token}', 'InviteController@inviteConfirm');
     Route::post('groups/{group}/invite/confirm/{token}', 'InviteController@inviteRegister');
-
-
 
     // Discussions
     Route::get('groups/{group}/discussions', 'DiscussionController@index');
@@ -168,14 +154,11 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('groups/{group}/discussions/{discussion}/delete', 'DiscussionController@destroyConfirm');
     Route::delete('groups/{group}/discussions/{discussion}/delete', 'DiscussionController@destroy');
 
-
     // discussion history
     Route::get('groups/{group}/discussions/{discussion}/history', 'DiscussionController@history');
 
-
     // Notification email test
     // Route::get('groups/{group}/notify', 'NotificationController@notify');
-
 
     // Comments
     Route::post('groups/{group}/discussions/{discussion}/reply', 'CommentController@reply');
@@ -190,7 +173,6 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('groups/{group}/discussions/{discussion}/comment/{comment}/delete', 'CommentController@destroyConfirm');
     Route::delete('groups/{group}/discussions/{discussion}/comment/{comment}/delete', 'CommentController@destroy');
-
 
     // Actions
     Route::get('groups/{group}/actions', 'ActionController@index');
@@ -209,7 +191,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('groups/{group}/actions/{action}/delete', 'ActionController@destroyConfirm');
     Route::delete('groups/{group}/actions/{action}/delete', 'ActionController@destroy');
 
-
     // Listing of files and folders :
     Route::get('groups/{group}/files', 'FileController@index');
     Route::get('groups/{group}/files/gallery', 'FileController@gallery');
@@ -222,7 +203,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('groups/{group}/files/createlink', 'FileController@createLink');
     Route::post('groups/{group}/files/createlink', 'FileController@storeLink');
 
-
     Route::get('groups/{group}/files/{file}/download', 'FileController@download');
     Route::get('groups/{group}/files/{file}', 'FileController@show');
     Route::get('groups/{group}/files/{file}/thumbnail', 'FileController@thumbnail');
@@ -233,8 +213,6 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('groups/{group}/files/{file}/edit', 'FileController@edit');
     Route::post('groups/{group}/files/{file}', 'FileController@update');
-
-
 
     // Users
     Route::get('users/{user}', 'UserController@show');
@@ -252,15 +230,12 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('groups/{group}/users', 'UserController@index');
 
-
     // Maps
     Route::get('groups/{group}/map', 'MapController@map');
     Route::get('groups/{group}/map/embed', 'MapController@embed');
 
-
     // Search
     Route::get('search', 'SearchController@index');
-
 
     // External cron
     // call/curl/wget yoururl/cron every 5 minutes to have at least email notifiations sent
@@ -269,12 +244,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['middleware' => 'throttle:1'], function () {
         Route::get('cron', function () {
             $exitCode = Artisan::call('notifications:send');
+
             return $exitCode;
         });
     });
-
-
-
 
     /***************** ADMIN STUFF **************/
     /*
@@ -284,22 +257,17 @@ Route::group(['middleware' => ['web']], function () {
     */
 
     Route::group(['middleware' => ['admin']], function () {
-
         Route::get('admin/logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
         Route::get('admin/settings', 'AdminSettingsController@settings');
         Route::post('admin/settings', 'AdminSettingsController@update');
 
         Route::resource('admin/user', 'AdminUserController');
         Route::get('admin/insights', 'InsightsController@forAllGroups');
-
     });
-
 
     /***************** PER-GROUP ADMIN STUFF ************/
 
-        Route::group(['middleware' => ['groupadmin']], function () {
-            Route::get('groups/{group}/admin', 'GroupController@edit');
-        });
-
-
+    Route::group(['middleware' => ['groupadmin']], function () {
+        Route::get('groups/{group}/admin', 'GroupController@edit');
+    });
 });

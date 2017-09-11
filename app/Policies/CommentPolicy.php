@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
+use App\Comment;
+use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use \App\Comment;
-use \App\User;
 
 class CommentPolicy
 {
@@ -20,7 +20,6 @@ class CommentPolicy
         //
     }
 
-
     public function before($user, $ability)
     {
         if ($user->isAdmin()) {
@@ -33,10 +32,8 @@ class CommentPolicy
         return $user->id === $comment->user_id;
     }
 
-
     public function delete(User $user, Comment $comment)
     {
         return $user->id === $comment->user_id;
     }
-
 }

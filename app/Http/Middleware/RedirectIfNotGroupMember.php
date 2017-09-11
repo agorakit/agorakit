@@ -8,10 +8,10 @@ use Illuminate\Contracts\Auth\Guard;
 class RedirectIfNotGroupMember
 {
     /**
-    * The Guard implementation.
-    *
-    * @var Guard
-    */
+     * The Guard implementation.
+     *
+     * @var Guard
+     */
     protected $auth;
 
     public function __construct(Guard $auth)
@@ -20,13 +20,13 @@ class RedirectIfNotGroupMember
     }
 
     /**
-    * Handle an incoming request.
-    *
-    * @param \Illuminate\Http\Request $request
-    * @param \Closure                 $next
-    *
-    * @return mixed
-    */
+     * Handle an incoming request.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
+     *
+     * @return mixed
+     */
     public function handle($request, Closure $next)
     {
 
@@ -38,14 +38,13 @@ class RedirectIfNotGroupMember
         }
 
         // an admin can bypass membership requirement
-        if ($request->user()->isAdmin())
-        {
+        if ($request->user()->isAdmin()) {
             return $next($request);
         }
 
         // we expect a url in the form /groups/{group_id}
         if ($request->segment(1) == 'groups') {
-            $membership = \App\Membership::where('user_id', '=',  $request->user()->id)->where('group_id', $request->segment(2))->first();
+            $membership = \App\Membership::where('user_id', '=', $request->user()->id)->where('group_id', $request->segment(2))->first();
 
             if ($membership && $membership->membership >= \App\Membership::MEMBER) {
                 return $next($request);

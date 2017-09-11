@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
+use App\File;
+use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use \App\File;
-use \App\User;
 
 class FilePolicy
 {
@@ -20,7 +20,6 @@ class FilePolicy
         //
     }
 
-
     public function before($user, $ability)
     {
         if ($user->isAdmin()) {
@@ -33,7 +32,6 @@ class FilePolicy
         return $user->id == $file->user_id;
     }
 
-
     public function delete(User $user, File $file)
     {
         return $user->id == $file->user_id;
@@ -41,16 +39,13 @@ class FilePolicy
 
     public function download(User $user, File $file)
     {
-        if ($file->group->isPublic())
-        {
+        if ($file->group->isPublic()) {
             return true;
         }
-        if ($user->isMemberOf($file->group))
-        {
+        if ($user->isMemberOf($file->group)) {
             return true;
         }
 
         return false;
     }
-
 }

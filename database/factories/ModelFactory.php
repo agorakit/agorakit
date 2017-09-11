@@ -13,20 +13,19 @@
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->email,
-        'body' => $faker->paragraphs(3),
-        'password' => bcrypt(str_random(10)),
+        'name'           => $faker->name,
+        'email'          => $faker->email,
+        'body'           => $faker->paragraphs(3),
+        'password'       => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
-        'verified' => true,
+        'verified'       => true,
     ];
 });
 
-
 $factory->define(App\Group::class, function (Faker\Generator $faker) {
     return [
-        'id' => 996545,
-        'name' => $faker->name,
+        'id'          => 996545,
+        'name'        => $faker->name,
         'description' => $faker->text,
     ];
 });

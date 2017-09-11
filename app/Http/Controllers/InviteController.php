@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Group;
+use Auth;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Mail;
-use Carbon\Carbon;
-use Auth;
-use App\Group;
-
 
 class InviteController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('member', ['only' => ['invite', 'sendInvites']]);
@@ -20,12 +18,12 @@ class InviteController extends Controller
     }
 
     /**
-    * Shows an invitation form for the specific group.
-    *
-    * @param  [type] $group_id [description]
-    *
-    * @return [type]           [description]
-    */
+     * Shows an invitation form for the specific group.
+     *
+     * @param [type] $group_id [description]
+     *
+     * @return [type] [description]
+     */
     public function invite(Request $request, Group $group)
     {
         return view('invites.form')
@@ -34,15 +32,14 @@ class InviteController extends Controller
     }
 
     /**
-    * Send invites to new members by email.
-    *
-    * @param  int $group_id [description]
-    *
-    * @return [type]           [description]
-    */
-    public function sendInvites(Request $request,  Group $group)
+     * Send invites to new members by email.
+     *
+     * @param int $group_id [description]
+     *
+     * @return [type] [description]
+     */
+    public function sendInvites(Request $request, Group $group)
     {
-
         $status_message = null;
 
         // extract emails
@@ -50,7 +47,6 @@ class InviteController extends Controller
         preg_match_all("/[\._a-zA-Z0-9-]+@[\._a-zA-Z0-9-]+/i", $request->invitations, $matches);
         $emails = $matches[0];
         $emails = array_unique($emails);
-
 
         // for each invite email,
         foreach ($emails as $email) {
@@ -64,10 +60,8 @@ class InviteController extends Controller
             // check that the user is not already member of the group
             $user_already_member = false;
             $user = \App\User::where('email', $email)->first();
-            if ($user)
-            {
-                if ($user->isMemberOf($group))
-                {
+            if ($user) {
+                if ($user->isMemberOf($group)) {
                     $user_already_member = true;
                 }
             }
@@ -80,26 +74,19 @@ class InviteController extends Controller
 
             //TODO : good idea ?
 
-            if (!$group->isPublic())
-            {
-                if ($user)
-                {
+            if (!$group->isPublic()) {
+                if ($user) {
                     // add user to membership for the group taken from the invite table
                     $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $group->id]);
                     $membership->membership = \App\Membership::MEMBER;
                     $membership->save();
-                    $status_message .= trans('membership.users_has_been_added') .  ' : ' .  $email . '<br/>';
+                    $status_message .= trans('membership.users_has_been_added').' : '.$email.'<br/>';
                 }
             }
 
-
-
-            if ($invitation_counter > 0 || $user_already_member)
-            {
-                $status_message .= trans('membership.user_already_invited').' : ' . $email .'<br/>';
-            }
-            else
-            {
+            if ($invitation_counter > 0 || $user_already_member) {
+                $status_message .= trans('membership.user_already_invited').' : '.$email.'<br/>';
+            } else {
                 // - create an invite token and store in invite table
                 $invite = new \App\Invite();
                 $invite->generateToken();
@@ -113,54 +100,47 @@ class InviteController extends Controller
                 Mail::send('emails.invite', ['invite' => $invite, 'group' => $group, 'invitating_user' => $request->user()], function ($message) use ($email, $request, $group) {
                     $message->from(env('MAIL_FROM', 'noreply@example.com'), env('APP_NAME', 'Laravel'))
                     ->to($email)
-                    ->subject( '[' . env('APP_NAME') . '] ' . trans('messages.invitation_to_join') . ' "'   . $group->name . '"');
+                    ->subject('['.env('APP_NAME').'] '.trans('messages.invitation_to_join').' "'.$group->name.'"');
                 });
 
-                $status_message .= trans('membership.users_has_been_invited') .  ' : ' .  $email . '<br/>';
+                $status_message .= trans('membership.users_has_been_invited').' : '.$email.'<br/>';
             }
         }
         // NICETOHAVE We could queue or wathever if more than 50 mails for instance.
         // But it's also a kind of spam prevention that it takes time to invite on the server
 
-
-        if ($status_message)
-        {
+        if ($status_message) {
             flash()->info($status_message);
         }
-        return redirect()->back();
 
+        return redirect()->back();
     }
 
-
     /**
-    * Whenever a user wants to confirm an invite he received from an email link
-    * - if user exists we directly subscribe him/her to the group
-    * - if not we show an account creation screen
-    */
+     * Whenever a user wants to confirm an invite he received from an email link
+     * - if user exists we directly subscribe him/her to the group
+     * - if not we show an account creation screen.
+     */
     public function inviteConfirm(Request $request, Group $group, $token)
     {
-
         $invite = \App\Invite::whereToken($token)->first();
 
-        if (!$invite)
-        {
-            flash()->error( trans('messages.invite_not_found') );
+        if (!$invite) {
+            flash()->error(trans('messages.invite_not_found'));
+
             return redirect()->action('GroupController@show', $group->id);
         }
 
-        if (isset($invite->claimed_at))
-        {
-            flash()->error( trans('messages.invite_already_used') . ' (' . $invite->claimed_at . ')');
+        if (isset($invite->claimed_at)) {
+            flash()->error(trans('messages.invite_already_used').' ('.$invite->claimed_at.')');
+
             return redirect()->action('GroupController@show', $group->id);
         }
-
 
         $user = \App\User::where('email', $invite->email)->first();
 
-
         // check if user exists
-        if ($user)
-        {
+        if ($user) {
             // add user to membership for the group taken from the invite table
             $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $invite->group_id]);
             $membership->membership = \App\Membership::MEMBER;
@@ -169,13 +149,12 @@ class InviteController extends Controller
             // Invitation is now claimed, but not deleted
             $invite->claimed_at = Carbon::now();
 
-            flash()->error( trans('messages.you_are_now_a_member_of_this_group') );
+            flash()->error(trans('messages.you_are_now_a_member_of_this_group'));
+
             return redirect()->action('GroupController@show', $group->id);
-        }
-        else // if user doesn't exists, we have the opportunity to create, login and validate email in one go (since we have the invite token)
-        {
+        } else { // if user doesn't exists, we have the opportunity to create, login and validate email in one go (since we have the invite token)
             Auth::logout();
-            flash()->info( trans('messages.you_dont_have_an_account_create_one_now'));
+            flash()->info(trans('messages.you_dont_have_an_account_create_one_now'));
 
             return view('invites.register')
             ->with('email', $invite->email)
@@ -184,29 +163,27 @@ class InviteController extends Controller
         }
     }
 
-
     /**
-    * Process the account creation from the form of inviteConfirm()
-    */
+     * Process the account creation from the form of inviteConfirm().
+     */
     public function inviteRegister(Request $request, Group $group, $token)
     {
         $this->validate($request, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'name'     => 'required|max:255',
+            'email'    => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
         ]);
 
         $invite = \App\Invite::whereToken($token)->firstOrFail();
         $invite->claimed_at = Carbon::now();
 
-        $user = new \App\User;
+        $user = new \App\User();
         $user->name = $request->get('name');
         $user->email = $request->get('email');
         $user->password = bcrypt($request->get('password'));
 
         // in the strange event the user changes the email on the registration form, we cannot consider it is verified using the invite.
-        if ($invite->email == $request->get('email'))
-        {
+        if ($invite->email == $request->get('email')) {
             $user->verified = 1;
         }
 
@@ -218,7 +195,8 @@ class InviteController extends Controller
 
         Auth::login($user);
 
-        flash()->info( trans('messages.you_are_now_a_member_of_this_group') );
+        flash()->info(trans('messages.you_are_now_a_member_of_this_group'));
+
         return redirect()->action('GroupController@show', $group->id);
     }
 }
