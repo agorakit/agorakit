@@ -2,14 +2,11 @@
 
 namespace App;
 
+use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Watson\Validating\ValidatingTrait;
-use Storage;
-use Response;
 use Venturecraft\Revisionable\RevisionableTrait;
-use Cviebrock\EloquentTaggable\Taggable;
-
+use Watson\Validating\ValidatingTrait;
 
 class File extends Model
 {
@@ -20,18 +17,16 @@ class File extends Model
 
     protected $touches = ['group', 'user'];
 
-
     protected $rules = [
-        'name' => 'required',
-        'user_id' => 'required|exists:users,id',
+        'name'     => 'required',
+        'user_id'  => 'required|exists:users,id',
         'group_id' => 'required|exists:groups,id',
     ];
 
     protected $table = 'files';
     public $timestamps = true;
     protected $dates = ['deleted_at'];
-    protected $casts = [ 'user_id' => 'integer' ];
-
+    protected $casts = ['user_id' => 'integer'];
 
     // Item type can be :
     // 0 : file (stored on the server)
@@ -52,17 +47,14 @@ class File extends Model
         return $this->belongsTo('App\Group');
     }
 
-
     public function link()
     {
         return action('FileController@download', [$this->group, $this]);
     }
 
-
     public function isFile()
     {
         return $this->item_type == $this::FILE;
-
     }
 
     public function isFolder()
@@ -75,72 +67,57 @@ class File extends Model
         return $this->item_type == $this::LINK;
     }
 
-
-
     /************************** Parenting and folder functions  - candidate for removal very soon ***********************/
 
     public function getParent()
     {
-        if (is_null($this->parent_id))
-        {
+        if (is_null($this->parent_id)) {
             return false;
-        }
-        else
-        {
-            return File::findOrFail($this->parent_id);
+        } else {
+            return self::findOrFail($this->parent_id);
         }
     }
 
     public function getChildren()
     {
-        return File::where('parent_id', $this->id)->with('user')->orderBy('item_type', 'desc')->get();
+        return self::where('parent_id', $this->id)->with('user')->orderBy('item_type', 'desc')->get();
     }
-
 
     public function addChild(File $file)
     {
         // we cannot add a folder to itself
-        if ($file->id == $this->id)
-        {
+        if ($file->id == $this->id) {
             return false;
         }
         // file & folders must belong to the same group
-        if ($file->group_id <> $this->group_id)
-        {
+        if ($file->group_id != $this->group_id) {
             return false;
         }
         // we can only add child to an existing folder
-        if ($this->isFolder())
-        {
+        if ($this->isFolder()) {
             $file->parent_id = $this->id;
+
             return $file->save();
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
-
 
     public function getAncestors()
     {
         $ancestors = [];
         $current = $this;
         // limit tree depth to 5 just in case, and this way we avoid recursive function
-        for ($i = 0; $i <5; $i++)
-        {
-            $parent =  $current->getParent();
-            if ($parent)
-            {
+        for ($i = 0; $i < 5; $i++) {
+            $parent = $current->getParent();
+            if ($parent) {
                 $ancestors[] = $parent;
                 $current = $parent;
-            }
-            else
-            {
+            } else {
                 break;
             }
         }
+
         return $ancestors;
     }
-
 }

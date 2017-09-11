@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App;
-use Carbon\Carbon;
 use App\Group;
 use App\User;
+use Carbon\Carbon;
 use Gate;
+use Illuminate\Http\Request;
 
 class MembershipController extends Controller
 {
@@ -18,12 +17,11 @@ class MembershipController extends Controller
     }
 
     /**
-    * Show a settings screen for a specific group. Allows a user to join, leave, set subscribe settings.
-    */
-    public function joinForm(Request $request,  Group $group)
+     * Show a settings screen for a specific group. Allows a user to join, leave, set subscribe settings.
+     */
+    public function joinForm(Request $request, Group $group)
     {
-        if (Gate::allows('join', $group))
-        {
+        if (Gate::allows('join', $group)) {
             // load or create membership for this group and user combination
             $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
 
@@ -32,27 +30,24 @@ class MembershipController extends Controller
             ->with('tab', 'settings')
             ->with('membership', $membership)
             ->with('interval', 'daily');
-        }
-        else
-        {
-            flash()->info( trans('messages.not_allowed'));
+        } else {
+            flash()->info(trans('messages.not_allowed'));
+
             return redirect()->back();
         }
-
     }
 
     /**
-    * Store the membership. It means: add a user to a group and store his/her notification settings.
-    *
-    * @param  Request $request  [description]
-    * @param  [type]  $group_id [description]
-    *
-    * @return [type]            [description]
-    */
+     * Store the membership. It means: add a user to a group and store his/her notification settings.
+     *
+     * @param Request $request  [description]
+     * @param [type]  $group_id [description]
+     *
+     * @return [type] [description]
+     */
     public function join(Request $request, Group $group)
     {
-        if (Gate::allows('join', $group))
-        {
+        if (Gate::allows('join', $group)) {
             // load or create membership for this group and user combination
             $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
             $membership->membership = \App\Membership::MEMBER;
@@ -63,18 +58,16 @@ class MembershipController extends Controller
             $membership->save();
 
             return redirect()->action('GroupController@show', [$group->id])->with('message', trans('membership.welcome'));
-        }
-        else
-        {
-            flash()->info( trans('messages.not_allowed'));
+        } else {
+            flash()->info(trans('messages.not_allowed'));
+
             return redirect()->back();
         }
     }
 
-
     /**
-    * Show a settings screen for a specific group. Allows a user to leave the group.
-    */
+     * Show a settings screen for a specific group. Allows a user to leave the group.
+     */
     public function leaveForm(Request $request, Group $group)
     {
         // load or create membership for this group and user combination
@@ -86,29 +79,26 @@ class MembershipController extends Controller
         ->with('membership', $membership);
     }
 
-
     /**
-    * Remove the specified user from the group.
-    *
-    * @param  int  $id
-    *
-    * @return Response
-    */
+     * Remove the specified user from the group.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function leave(Request $request, Group $group)
     {
         // load or create membership for this group and user combination
         $membership = \App\Membership::where(['user_id' => $request->user()->id, 'group_id' => $group->id])->firstOrFail();
         $membership->membership = \App\Membership::UNREGISTERED;
         $membership->save();
-        return redirect()->action('DashboardController@index');
 
+        return redirect()->action('DashboardController@index');
     }
 
-
-
     /**
-    * Show a settings screen for a specific group. Allows a user to join, leave, set subscribe settings.
-    */
+     * Show a settings screen for a specific group. Allows a user to join, leave, set subscribe settings.
+     */
     public function preferencesForm(Request $request, Group $group)
     {
         // load or create membership for this group and user combination
@@ -121,10 +111,9 @@ class MembershipController extends Controller
         ->with('membership', $membership);
     }
 
-
     /**
-    * Store new settings from the preferencesForm
-    */
+     * Store new settings from the preferencesForm.
+     */
     public function preferences(Request $request, Group $group)
     {
         // load or create membership for this group and user combination
@@ -136,12 +125,9 @@ class MembershipController extends Controller
         return redirect()->action('GroupController@show', [$group->id])->with('message', trans('membership.settings_updated'));
     }
 
-
-
-
     /**
-    * Show an explanation page on how to join a private group
-    */
+     * Show an explanation page on how to join a private group.
+     */
     public function howToJoin(Request $request, Group $group)
     {
         return view('membership.howtojoin')
@@ -149,8 +135,7 @@ class MembershipController extends Controller
         ->with('group', $group);
     }
 
-
-    function intervalToMinutes($interval)
+    public function intervalToMinutes($interval)
     {
         $minutes = -1;
 
@@ -174,10 +159,11 @@ class MembershipController extends Controller
             $minutes = -1;
             break;
         }
+
         return $minutes;
     }
 
-    function minutesToInterval($minutes)
+    public function minutesToInterval($minutes)
     {
         $interval = 'never';
 
@@ -204,5 +190,4 @@ class MembershipController extends Controller
 
         return $interval;
     }
-
 }

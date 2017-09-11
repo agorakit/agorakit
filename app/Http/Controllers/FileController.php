@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Group;
 use App\File;
-use Illuminate\Http\Response;
-use Illuminate\Http\Request;
-use Image;
+use App\Group;
 use Auth;
-use Storage;
 use Gate;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Image;
+use Storage;
 use Validator;
 
 class FileController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('member', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
@@ -24,10 +23,10 @@ class FileController extends Controller
     }
 
     /**
-    * Display a listing of the resource.
-    *
-    * @return Response
-    */
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
     public function index(Group $group)
     {
         // list all files and folders without parent id's (parent_id=NULL)
@@ -46,7 +45,6 @@ class FileController extends Controller
         ->with('tab', 'files');
     }
 
-
     public function gallery(Group $group)
     {
         $files = $group->files()
@@ -57,28 +55,23 @@ class FileController extends Controller
         ->orderBy('updated_at', 'desc')
         ->paginate(100);
 
-
         return view('files.gallery')
         ->with('files', $files)
         ->with('group', $group)
         ->with('tab', 'files');
     }
 
-
-
-
     /**
-    * Display the specified resource.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Display the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function show(Group $group, File $file)
     {
         // file
-        if ($file->isFile())
-        {
+        if ($file->isFile()) {
             return view('files.show')
             ->with('file', $file)
             ->with('group', $group)
@@ -86,8 +79,7 @@ class FileController extends Controller
         }
 
         // link
-        if ($file->isLink())
-        {
+        if ($file->isLink()) {
             return view('files.link')
             ->with('file', $file)
             ->with('group', $group)
@@ -95,72 +87,53 @@ class FileController extends Controller
         }
     }
 
-
     /**
-    * Display the specified resource.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Display the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function download(Group $group, File $file)
     {
-        if (Gate::allows('download', $file))
-        {
-
-            if (Storage::exists($file->path))
-            {
+        if (Gate::allows('download', $file)) {
+            if (Storage::exists($file->path)) {
                 return (new Response(Storage::get($file->path), 200))
                 ->header('Content-Type', $file->mime)
-                ->header('Content-Disposition', 'inline; filename="' . $file->original_filename . '"');
+                ->header('Content-Disposition', 'inline; filename="'.$file->original_filename.'"');
+            } else {
+                abort(404, 'File not found in storage at '.$file->path);
             }
-            else
-            {
-                abort(404, 'File not found in storage at ' . $file->path);
-            }
-        }
-        else
-        {
+        } else {
             abort(404, 'Unauthorized');
         }
-
     }
 
     public function thumbnail(Group $group, File $file)
     {
-        if (Gate::allows('download', $file))
-        {
-            if (in_array($file->mime, ['image/jpeg', 'image/png', 'image/gif']))
-            {
-                $cachedImage = Image::cache(function($img) use ($file) {
+        if (Gate::allows('download', $file)) {
+            if (in_array($file->mime, ['image/jpeg', 'image/png', 'image/gif'])) {
+                $cachedImage = Image::cache(function ($img) use ($file) {
                     return $img->make(storage_path().'/app/'.$file->path)->fit(32, 32);
                 }, 60000, true);
 
                 return $cachedImage->response();
             }
 
-            if ($file->isFolder())
-            {
+            if ($file->isFolder()) {
                 return redirect('images/extensions/folder.png');
             }
         }
 
-
-
         return redirect('images/extensions/text-file.png');
-
     }
-
 
     public function preview(Group $group, File $file)
     {
-
-        if (Gate::allows('download', $file))
-        {
-            if (in_array($file->mime, ['image/jpeg', 'image/png', 'image/gif']))
-            {
-                $cachedImage = Image::cache(function($img) use ($file) {
-                    return $img->make(storage_path().'/app/'.$file->path)->fit(250,250);
+        if (Gate::allows('download', $file)) {
+            if (in_array($file->mime, ['image/jpeg', 'image/png', 'image/gif'])) {
+                $cachedImage = Image::cache(function ($img) use ($file) {
+                    return $img->make(storage_path().'/app/'.$file->path)->fit(250, 250);
                 }, 60000, true);
 
                 return $cachedImage->response();
@@ -170,14 +143,13 @@ class FileController extends Controller
         return redirect('images/extensions/text-file.png');
     }
 
-
     /************************** Files handling methods **********************/
 
     /**
-    * Show the form for creating a new resource.
-    *
-    * @return Response
-    */
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
     public function create(Request $request, Group $group)
     {
         return view('files.create')
@@ -185,7 +157,6 @@ class FileController extends Controller
         ->with('group', $group)
         ->with('tab', 'files');
     }
-
 
     public function createLink(Request $request, Group $group)
     {
@@ -195,21 +166,16 @@ class FileController extends Controller
         ->with('tab', 'files');
     }
 
-
-
     /**
-    * Store a new file.²
-    *
-    * @return Response
-    */
+     * Store a new file.².
+     *
+     * @return Response
+     */
     public function store(Request $request, Group $group)
     {
-        try
-        {
-            if ($request->file('files'))
-            {
-                foreach ($request->file('files') as $uploaded_file)
-                {
+        try {
+            if ($request->file('files')) {
+                foreach ($request->file('files') as $uploaded_file) {
                     $file = new File();
 
                     // we save it first to get an ID from the database, it will later be used to generate a unique filename.
@@ -223,22 +189,18 @@ class FileController extends Controller
                     // generate filenames and path
                     $filepath = '/groups/'.$file->group->id.'/files/';
 
-
-                    $filename = $file->id . '.' . strtolower($uploaded_file->getClientOriginalExtension());
+                    $filename = $file->id.'.'.strtolower($uploaded_file->getClientOriginalExtension());
 
                     // resize big images only if they are png, gif or jpeg
-                    if (in_array ($uploaded_file->getClientMimeType(), ['image/jpeg', 'image/png', 'image/gif']))
-                    {
+                    if (in_array($uploaded_file->getClientMimeType(), ['image/jpeg', 'image/png', 'image/gif'])) {
                         Storage::disk('local')->makeDirectory($filepath);
                         Image::make($uploaded_file)->widen(1200, function ($constraint) {
                             $constraint->upsize();
                         })
-                        ->save(storage_path().'/app/' . $filepath.$filename);
-                    }
-                    else
-                    {
+                        ->save(storage_path().'/app/'.$filepath.$filename);
+                    } else {
                         // store the file
-                        Storage::disk('local')->put($filepath.$filename,  file_get_contents($uploaded_file->getRealPath()) );
+                        Storage::disk('local')->put($filepath.$filename, file_get_contents($uploaded_file->getRealPath()));
                     }
 
                     // add path and other infos to the file record on DB
@@ -249,45 +211,31 @@ class FileController extends Controller
 
                     // save it again
                     $file->save();
-
                 }
-
-
 
                 flash()->info(trans('messages.ressource_created_successfully'));
-                if (isset($parent))
-                {
+                if (isset($parent)) {
                     return redirect()->action('FileController@show', [$group, $parent]);
-                }
-                else
-                {
+                } else {
                     return redirect()->action('FileController@index', $group);
                 }
-
             }
-        }
-        catch (Exception $e)
-        {
-            if ($request->ajax())
-            {
+        } catch (Exception $e) {
+            if ($request->ajax()) {
                 return response()->json($e->getMessage(), 400);
-            }
-            else
-            {
+            } else {
                 abort(400, $e->getMessage());
             }
         }
     }
 
-
-
     /**
-    * Show the form for editing the specified resource.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function edit(Group $group, File $file)
     {
         return view('files.edit')
@@ -299,82 +247,68 @@ class FileController extends Controller
     }
 
     /**
-    * Update the specified resource in storage.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Update the specified resource in storage.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function update(Request $request, Group $group, File $file)
     {
         $file->retag($request->get('tags'));
 
-        if ($file->save())
-        {
+        if ($file->save()) {
             flash()->info(trans('messages.ressource_updated_successfully'));
+
             return redirect()->action('FileController@index', [$group]);
-        }
-        else
-        {
+        } else {
             flash()->info(trans('messages.ressource_not_updated_successfully'));
+
             return redirect()->back();
         }
     }
 
-
-
-
     public function destroyConfirm(Request $request, Group $group, File $file)
     {
-        if (Gate::allows('delete', $file))
-        {
+        if (Gate::allows('delete', $file)) {
             return view('files.delete')
             ->with('group', $group)
             ->with('file', $file)
             ->with('tab', 'file');
-        }
-        else
-        {
+        } else {
             abort(403);
         }
     }
 
-
-
     /**
-    * Remove the specified resource from storage.
-    *
-    * @param int $id
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(Request $request, Group $group, File $file)
     {
-        if (Gate::allows('delete', $file))
-        {
+        if (Gate::allows('delete', $file)) {
             $file->delete();
             flash()->info(trans('messages.ressource_deleted_successfully'));
+
             return redirect()->action('FileController@index', [$group]);
-        }
-        else
-        {
+        } else {
             abort(403);
         }
     }
 
-
-
     /**
-    * Store the folder in the file DB.
-    *
-    * @return Response
-    */
+     * Store the folder in the file DB.
+     *
+     * @return Response
+     */
     public function storeLink(Request $request, Group $group)
     {
-
         $validator = Validator::make($request->all(), [
             'title' => 'required',
-            'link' => 'required|url',
+            'link'  => 'required|url',
         ]);
 
         if ($validator->fails()) {
@@ -384,35 +318,27 @@ class FileController extends Controller
             ->withInput();
         }
 
-        $file = new File;
+        $file = new File();
         $file->name = $request->get('title');
         $file->path = $request->get('link');
         $file->item_type = File::LINK;
         // add group
         $file->group()->associate($group);
 
-
         // add user
         $file->user()->associate(Auth::user());
 
-
-
-        if ($file->save())
-        {
+        if ($file->save()) {
             // handle tags
             $file->tag($request->get('tags'));
 
             flash()->info(trans('messages.ressource_created_successfully'));
+
             return redirect()->action('FileController@index', $group);
-        }
-        else
-        {
+        } else {
             flash()->error(trans('messages.ressource_not_created_successfully'));
+
             return redirect()->back();
         }
     }
-
-
-
-
 }

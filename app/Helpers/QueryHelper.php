@@ -3,25 +3,21 @@
 namespace App\Helpers;
 
 use Auth;
-use DB;
 use Carbon\Carbon;
-
+use DB;
 
 /**
-* Here we have various queries that might be used by different parts of the applications.
-* I'm proud of the two firsts one already :-)
-* I hate joins as I don't understand it. But subqueries fit my logic.
-*
-* NICETOHAVE : return eloquent models anyway instead of simple arrays. But often the arrays contains additional info we need (like read counts)
-*
-*/
+ * Here we have various queries that might be used by different parts of the applications.
+ * I'm proud of the two firsts one already :-)
+ * I hate joins as I don't understand it. But subqueries fit my logic.
+ *
+ * NICETOHAVE : return eloquent models anyway instead of simple arrays. But often the arrays contains additional info we need (like read counts)
+ */
 class QueryHelper
 {
-
-
     /**
-    * Returns a list of groups the current user is subscribed to. This one is run on every page
-    */
+     * Returns a list of groups the current user is subscribed to. This one is run on every page.
+     */
     /*
     public static function getUserGroups()
     {
@@ -35,12 +31,11 @@ class QueryHelper
     */ // TODO candidate for destruction, is replaced by the much cleaner Auth::user()->groups()->get()
 
     /**
-    * Returns the number of unread discussions the current user has. Is run on every page !
-    */
+     * Returns the number of unread discussions the current user has. Is run on every page !
+     */
     public static function getUnreadDiscussionsCount()
     {
-        if (Auth::check())
-        {
+        if (Auth::check()) {
             $total = DB::select('select sum(total_comments) as count from discussions where discussions.group_id in
             (select id from groups where groups.id in
             (select group_id from membership where user_id = ? and membership.membership >= ?)
@@ -64,12 +59,11 @@ class QueryHelper
     }
 
     /**
-    * Returns a list of the 50 latest unread discussions for the current user
-    */
+     * Returns a list of the 50 latest unread discussions for the current user.
+     */
     public static function getUnreadDiscussions()
     {
-        if (Auth::check())
-        {
+        if (Auth::check()) {
             $discussions = DB::select('select * from
             (
             select *, (select read_comments from user_read_discussion where discussion_id = discussions.id and user_id = ?) as read_comments
@@ -87,18 +81,17 @@ class QueryHelper
 
             return $discussions;
         }
+
         return false;
     }
-
 
     /******************************** The following queries are used in the mail notification system : *************************/
 
     /**
-    * Returns a list of unread discussions for the $user_id $user, in the group_id group, since the $since time has passed
-    */
-    public static function  getUnreadDiscussionsSince($user_id, $group_id, $since)
+     * Returns a list of unread discussions for the $user_id $user, in the group_id group, since the $since time has passed.
+     */
+    public static function getUnreadDiscussionsSince($user_id, $group_id, $since)
     {
-
         $discussions = \App\Discussion::hydrateRaw('select * from
         (
         select *,
@@ -115,11 +108,10 @@ class QueryHelper
     }
 
     /**
-    * Returns a list of users that joined the $group_id $since this timestamp. Excludes the $user_id (which might be set to the current user)
-    */
-    public static function  getNewMembersSince($user_id, $group_id, $since)
+     * Returns a list of users that joined the $group_id $since this timestamp. Excludes the $user_id (which might be set to the current user).
+     */
+    public static function getNewMembersSince($user_id, $group_id, $since)
     {
-
         $users = \App\User::hydrateRaw('select * from users where id in
         (select user_id from membership where group_id = :group_id and created_at > :since and membership >= :membership and user_id <> :user_id)
 
@@ -128,14 +120,11 @@ class QueryHelper
         return $users;
     }
 
-
-
-
     /**
-    * Get a list of memberships rows that need to be processed for notification
-    * It means people who have opted in for notifcations and who have not been notified for a long enough time
-    * (This is configured, per user, per group, in notification_interval in the membership table)
-    */
+     * Get a list of memberships rows that need to be processed for notification
+     * It means people who have opted in for notifcations and who have not been notified for a long enough time
+     * (This is configured, per user, per group, in notification_interval in the membership table).
+     */
     public static function getNotificationsToSend()
     {
         // I use Carbon::now() instead of the now() provided by mysql to avoid different timezone settings in differents servers (php vs mysql config)
@@ -145,7 +134,7 @@ class QueryHelper
         where notification_interval > 0
         and membership >= :membership) as memberships
         where notify < :now or notify is null
-        ', ['now' => Carbon::now(), 'membership' => \App\Membership::MEMBER] );
+        ', ['now' => Carbon::now(), 'membership' => \App\Membership::MEMBER]);
 
         return $notifications;
     }

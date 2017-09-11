@@ -2,9 +2,8 @@
 
 namespace App\Policies;
 
+use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use \App\User;
-
 
 class UserPolicy
 {
@@ -21,25 +20,19 @@ class UserPolicy
     }
 
     public function before($user, $ability)
-   {
-      if ($user->isAdmin()) {
-         return true;
-      }
-   }
-
-
+    {
+        if ($user->isAdmin()) {
+            return true;
+        }
+    }
 
     public function update(User $user, User $user2)
     {
         return $user->id == $user2->id;
     }
 
-
     public function delete(User $user, User $user2)
     {
         return $user->id == $user2->id;
     }
-
-
-
 }

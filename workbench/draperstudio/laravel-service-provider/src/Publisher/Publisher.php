@@ -55,13 +55,13 @@ abstract class Publisher
         $this->publishPath = $publishPath;
 
         $this->destinationPaths = [
-            'migrations' => database_path('/migrations/%s_%s'),
-            'seeds' => database_path('/seeds/%s'),
-            'config' => config_path('%s'),
-            'views' => base_path('resources/views/vendor/%s'),
+            'migrations'   => database_path('/migrations/%s_%s'),
+            'seeds'        => database_path('/seeds/%s'),
+            'config'       => config_path('%s'),
+            'views'        => base_path('resources/views/vendor/%s'),
             'translations' => base_path('resources/lang/%s'),
-            'assets' => public_path('vendor/%s'),
-            'routes' => null,
+            'assets'       => public_path('vendor/%s'),
+            'routes'       => null,
         ];
     }
 
@@ -103,9 +103,9 @@ abstract class Publisher
      *
      * @param string $packagePath
      *
-     * @return string
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return string
      */
     abstract protected function getSource($packagePath);
 

@@ -8,14 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-use Ivory\HttpAdapter\CurlHttpAdapter;
-use Ivory\HttpAdapter\Guzzle6HttpAdapter;
-use Geocoder\Provider\Chain;
 use Geocoder\Provider\BingMaps;
+use Geocoder\Provider\Chain;
 use Geocoder\Provider\FreeGeoIp;
 use Geocoder\Provider\GoogleMaps;
-use Geocoder\Provider\MaxMindBinary;
+use Ivory\HttpAdapter\CurlHttpAdapter;
 
 return [
     'providers' => [

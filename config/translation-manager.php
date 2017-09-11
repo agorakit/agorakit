@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -11,29 +11,29 @@ return array(
     |
     */
     'route' => [
-        'prefix' => 'translations',
+        'prefix'     => 'translations',
         'middleware' => ['web', 'auth'],
     ],
 
-	/**
-	 * Enable deletion of translations
-	 *
-	 * @type boolean
-	 */
-	'delete_enabled' => true,
+    /*
+     * Enable deletion of translations
+     *
+     * @type boolean
+     */
+    'delete_enabled' => true,
 
-	/**
-	 * Exclude specific groups from Laravel Translation Manager.
-	 * This is useful if, for example, you want to avoid editing the official Laravel language files.
-	 *
-	 * @type array
-	 *
-	 * 	array(
-	 *		'pagination',
-	 *		'reminders',
-	 *		'validation',
-	 *	)
-	 */
-	'exclude_groups' => array(),
+    /*
+     * Exclude specific groups from Laravel Translation Manager.
+     * This is useful if, for example, you want to avoid editing the official Laravel language files.
+     *
+     * @type array
+     *
+     * 	array(
+     *		'pagination',
+     *		'reminders',
+     *		'validation',
+     *	)
+     */
+    'exclude_groups' => [],
 
-);
+];

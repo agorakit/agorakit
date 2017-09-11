@@ -68,9 +68,9 @@ abstract class Loader
      *
      * @param string $packagePath
      *
-     * @return string
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return string
      */
     abstract protected function getSource($packagePath);
 }

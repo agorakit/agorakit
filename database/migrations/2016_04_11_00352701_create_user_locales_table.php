@@ -5,14 +5,12 @@ use Illuminate\Database\Schema\Blueprint;
 
 class CreateUserLocalesTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public
-    function up()
+    public function up()
     {
         Schema::create('ltm_user_locales', function (Blueprint $table) {
             $table->increments('id');
@@ -28,8 +26,7 @@ class CreateUserLocalesTable extends Migration
      *
      * @return void
      */
-    public
-    function down()
+    public function down()
     {
         Schema::drop('ltm_user_locales');
     }

@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use Suin\RSSWriter\Feed;
-use Suin\RSSWriter\Channel;
-use Suin\RSSWriter\Item;
 use Config;
+use Suin\RSSWriter\Channel;
+use Suin\RSSWriter\Feed;
 
 class FeedController extends Controller
 {
@@ -18,15 +14,14 @@ class FeedController extends Controller
 
         $channel = new Channel();
         $channel
-        ->title(Config::get('agorakit.name') . ' : ' . trans('messages.latest_discussions'))
+        ->title(Config::get('agorakit.name').' : '.trans('messages.latest_discussions'))
         ->description(Config::get('agorakit.name'))
         ->ttl(60)
         ->appendTo($feed);
 
         $discussions = \App\Discussion::with('group')->with('user')->orderBy('created_at', 'desc')->take(20)->get();
 
-        foreach ($discussions as $discussion)
-        {
+        foreach ($discussions as $discussion) {
             $item = new \Suin\RSSWriter\Item();
             $item
             ->title($discussion->name)
@@ -43,22 +38,20 @@ class FeedController extends Controller
         return $feed;
     }
 
-
     public function actions()
     {
         $feed = new Feed();
 
         $channel = new Channel();
         $channel
-        ->title(Config::get('agorakit.name') . ' : ' . trans('messages.agenda'))
+        ->title(Config::get('agorakit.name').' : '.trans('messages.agenda'))
         ->description(Config::get('agorakit.name'))
         ->ttl(60)
         ->appendTo($feed);
 
         $actions = \App\Action::with('group')->with('user')->orderBy('start', 'desc')->take(20)->get();
 
-        foreach ($actions as $action)
-        {
+        foreach ($actions as $action) {
             $item = new \Suin\RSSWriter\Item();
             $item
             ->title($action->name)
@@ -74,5 +67,4 @@ class FeedController extends Controller
 
         return $feed;
     }
-
 }

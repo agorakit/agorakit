@@ -1,22 +1,20 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateMembershipTable extends Migration
 {
-
     public function up()
     {
-        Schema::create('membership', function(Blueprint $table) {
+        Schema::create('membership', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
             $table->integer('user_id')->unsigned()->references('id')->on('users');
             $table->integer('group_id')->unsigned()->references('id')->on('groups');
             $table->unique(['user_id', 'group_id']);
 
-
-            /**
+            /*
             * A json string that contains any additional info we'd need for memberships.
             * Not yet in use
             */
@@ -34,11 +32,6 @@ class CreateMembershipTable extends Migration
 
             // When was the last notification sent ?
             $table->timestamp('notified_at');
-
-
-
-
-
         });
     }
 

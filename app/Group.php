@@ -2,17 +2,13 @@
 
 namespace App;
 
+use Cviebrock\EloquentTaggable\Taggable;
+use Geocoder\Laravel\Facades\Geocoder;
+use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Iatstuti\Database\Support\CascadeSoftDeletes;
-use App\User;
-use App\Discussion;
-use Watson\Validating\ValidatingTrait;
 use Venturecraft\Revisionable\RevisionableTrait;
-use Auth;
-use Geocoder\Laravel\Facades\Geocoder;
-use Cviebrock\EloquentTaggable\Taggable;
-
+use Watson\Validating\ValidatingTrait;
 
 class Group extends Model
 {
@@ -26,11 +22,11 @@ class Group extends Model
 
     protected $rules = [
         'name' => 'required',
-        'body' => 'required'
+        'body' => 'required',
     ];
 
     protected $fillable = ['id', 'name', 'body', 'cover'];
-    protected $casts = [ 'user_id' => 'integer' ];
+    protected $casts = ['user_id' => 'integer'];
 
     /**** various group types ****/
     // open group, default
@@ -38,98 +34,80 @@ class Group extends Model
     const CLOSED = 1;
     // const SECRET = 2; // not in use for now at all
 
-
-
     /**
-    * Returns the css color (yes) of this group. Curently random generated
-    */
+     * Returns the css color (yes) of this group. Curently random generated.
+     */
     public function color()
     {
-
-        if ($this->color)
-        {
+        if ($this->color) {
             return $this->color;
-        }
-        else
-        {
-            $this->color = 'rgb(' . rand(0, 200) . ' , ' . rand(0, 200) . ' , ' . rand(0, 200) . ')';
+        } else {
+            $this->color = 'rgb('.rand(0, 200).' , '.rand(0, 200).' , '.rand(0, 200).')';
             $this->save();
+
             return $this->color;
         }
     }
 
-
     /**
-    * Returns all the users of this group
-    *
-    */
+     * Returns all the users of this group.
+     */
     public function users()
     {
         return $this->belongsToMany('App\User', 'membership')->withTimestamps()->withPivot('membership');
     }
 
-
     /**
-    * Returns all the admins of this group
-    *
-    */
+     * Returns all the admins of this group.
+     */
     public function admins()
     {
         return $this->belongsToMany('App\User', 'membership')->where('membership', \App\Membership::ADMIN)->withTimestamps()->withPivot('membership');
     }
 
     /**
-    * The user who created or updated this group title and description
-    */
+     * The user who created or updated this group title and description.
+     */
     public function user()
     {
         return $this->belongsTo('App\User');
     }
 
     /**
-    * return membership for the current user
-    */
+     * return membership for the current user.
+     */
     public function membership()
     {
-        if (\Auth::check())
-        {
+        if (\Auth::check()) {
             return $this->belongsToMany('App\User', 'membership')
-            ->where('user_id', "=", \Auth::user()->id)
+            ->where('user_id', '=', \Auth::user()->id)
             ->withPivot('membership');
-        }
-        else
-        {
+        } else {
             return $this->belongsToMany('App\User', 'membership')
             ->withPivot('membership');
         }
     }
-
 
     public function memberships()
     {
         return $this->hasMany('App\Membership');
     }
 
-
     /**
-    * Returns all the discussions belonging to this group
-    *
-    */
+     * Returns all the discussions belonging to this group.
+     */
     public function discussions()
     {
         return $this->hasMany('App\Discussion');
     }
 
-
     /**
-    * Returns all the actions belonging to this group
-    *
-    */
+     * Returns all the actions belonging to this group.
+     */
     public function actions()
     {
         return $this->hasMany('App\Action');
     }
-
 
     public function files()
     {
@@ -137,15 +115,13 @@ class Group extends Model
     }
 
     /**
-    *	Returns true if current user is a member of this group
-    */
+     *	Returns true if current user is a member of this group.
+     */
     public function isMember()
     {
-        if (\Auth::check())
-        {
+        if (\Auth::check()) {
             $member = $this->membership->first();
-            if ($member && $member->pivot->membership >= \App\Membership::MEMBER)
-            {
+            if ($member && $member->pivot->membership >= \App\Membership::MEMBER) {
                 return true;
             }
         }
@@ -153,27 +129,22 @@ class Group extends Model
         return false;
     }
 
-
     /**
-    * Returns membership info for curently logged user
-    * Returns false if no membership found
-    */
+     * Returns membership info for curently logged user
+     * Returns false if no membership found.
+     */
     public function getMembership()
     {
-        if (\Auth::check())
-        {
+        if (\Auth::check()) {
             $member = $this->membership->first();
 
-
-            if ($member )
-            {
-
+            if ($member) {
                 return $member->pivot->membership;
             }
         }
+
         return false;
     }
-
 
     /** constructs a links to the group **/
     public function link()
@@ -181,72 +152,58 @@ class Group extends Model
         return action('GroupController@show', $this);
     }
 
-
     /** returns true if the group is public (viewable by all) **/
     public function isPublic()
     {
-        if ($this->group_type == $this::OPEN)
-        {
+        if ($this->group_type == $this::OPEN) {
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
 
-
     /**
-    * Scope a query to only include public groups.
-    *
-    * @return \Illuminate\Database\Eloquent\Builder
-    */
+     * Scope a query to only include public groups.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
     public function scopePublicgroups($query)
     {
         return $query->where('group_type', $this::OPEN);
     }
 
-
-
     /**
-    * Scope a query to only include closed groups.
-    *
-    * @return \Illuminate\Database\Eloquent\Builder
-    */
+     * Scope a query to only include closed groups.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
     public function scopeClosed($query)
     {
         return $query->where('group_type', $this::CLOSED);
     }
 
-
     /**
-    * Geocode the item
-    * Returns true if it worked, false if it didn't
-    */
+     * Geocode the item
+     * Returns true if it worked, false if it didn't.
+     */
     public function geocode()
     {
-
-        if ($this->address == '')
-        {
+        if ($this->address == '') {
             $this->latitude = 0;
             $this->longitude = 0;
+
             return true;
         }
 
-        try
-        {
+        try {
             $geocode = Geocoder::geocode($this->address)->get()->first();
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return false;
         }
 
-
         $this->latitude = $geocode->getLatitude();
         $this->longitude = $geocode->getLongitude();
+
         return true;
     }
-
-
 }
