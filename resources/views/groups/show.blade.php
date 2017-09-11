@@ -13,7 +13,8 @@
                 </p>
 
                 <p>
-                    @if ($admins->count() > 0)
+
+                    @if (isset($admins) && $admins->count() > 0)
                         {{trans('messages.group_admin_users')}} :
 
                         @foreach ($admins as $admin)
