@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Cviebrock\EloquentTaggable\Taggable;
 use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -14,6 +15,7 @@ class Discussion extends Model
     use ValidatingTrait;
     use SoftDeletes;
     use CascadeSoftDeletes;
+    use Taggable;
 
     protected $cascadeDeletes = ['comments'];
 

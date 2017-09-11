@@ -98,7 +98,7 @@ TEXT
     'forgotten_password'                                => 'Mot de passe oublié',
     'group'                                             => 'Groupe',
     'group_admin_users'                                 => 'Personne(s) de contact',
-    'group_home'                                        => 'À propos de ce groupe',
+    'group_home'                                        => 'À propos',
     'groups'                                            => 'Groupes',
     'groups_list'                                       => 'Liste des groupes',
     'hello'                                             => 'Bonjour',

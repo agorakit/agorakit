@@ -8,5 +8,7 @@
 	{!! Form::textarea('body', null, ['id' => 'wysiwyg', 'class' => 'form-control', 'required']) !!}
 </div>
 
+@include('partials.tags_form')
+
 
 @include('partials.wysiwyg')

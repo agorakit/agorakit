@@ -47,6 +47,7 @@ class DiscussionController extends Controller
     {
         return view('discussions.create')
         ->with('group', $group)
+        ->with('all_tags', \App\Discussion::allTags())
         ->with('tab', 'discussion');
     }
 
@@ -70,6 +71,8 @@ class DiscussionController extends Controller
             ->withErrors($discussion->getErrors())
             ->withInput();
         }
+
+        $discussion->tag($request->get('tags'));
 
         flash()->info(trans('messages.ressource_created_successfully'));
 
@@ -116,6 +119,8 @@ class DiscussionController extends Controller
         return view('discussions.edit')
         ->with('discussion', $discussion)
         ->with('group', $group)
+        ->with('all_tags', \App\Discussion::allTags())
+        ->with('model_tags', $discussion->tags)
         ->with('tab', 'discussion');
     }
 
@@ -132,6 +137,8 @@ class DiscussionController extends Controller
         $discussion->body = $request->input('body');
         //$discussion->user()->associate(Auth::user()); // we use revisionable to manage who changed what, so we keep the original author
         $discussion->save();
+
+        $discussion->retag($request->get('tags'));
 
         flash()->info(trans('messages.ressource_updated_successfully'));
 
