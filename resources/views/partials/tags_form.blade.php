@@ -16,20 +16,18 @@
 
 
 
-
 @push('css')
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" />
 @endpush
+
 
 @push('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-
 
     <script>
     $(".tags").select2({
         tags: true,
         tokenSeparators: [',']
     })
-    </script>
-
+    </script>    
 @endpush

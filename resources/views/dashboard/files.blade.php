@@ -1,5 +1,19 @@
 @extends('app')
 
+@include('partials.datatables')
+
+@push('js')
+    <script>
+    $(document).ready(function(){
+        $('.files-grid').DataTable( {
+            paging: false,
+            order: []
+        });
+    });
+    </script>
+@endpush
+
+
 @section('content')
     <div class="page_header">
         <h1><a href="{{ action('DashboardController@index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.files') }}</h1>
@@ -7,27 +21,7 @@
 
 
     @include('dashboard.tabs')
-
-
-
-    @push('css')
-        <link href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" />
-    @endpush
-
-    @push('js')
-        <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-
-        <script>
-        $(document).ready(function(){
-            $('.files-grid').DataTable( {
-                paging: false,
-                order: []
-            });
-        });
-        </script>
-
-    @endpush
-
+    
 
     <div class="tab_content">
         @if ($files)

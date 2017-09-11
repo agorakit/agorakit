@@ -6,22 +6,19 @@
     <title>{{env('APP_NAME')}}</title>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" />
 
     <!-- Font awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 
-    <!-- css -->
+    <!-- additional css -->
+
     @yield('css')
-
     @stack('css')
 
 
     <!-- agorakit specific css-->
     {!! Html::style('/css/all.css?v8') !!}
-
-    <!--{!! Html::script('/packages/turbolinks/turbolinks.js') !!}-->
-
 
     <!-- head -->
     @yield('head')
@@ -44,11 +41,11 @@
 
 
 
+    <!-- js -->
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 
-    <!-- js -->
     @yield('js')
     @stack('js')
 

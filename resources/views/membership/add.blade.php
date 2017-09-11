@@ -1,15 +1,13 @@
 @extends('app')
 
-@push('css')
-    {!! Html::style('/packages/selectize/css/selectize.bootstrap3.css') !!}
-@endpush
+
+@include('partials.selectize')
 
 @push('js')
-    {!! Html::script('/packages/selectize/js/standalone/selectize.min.js') !!}
     <script>
+
     $( document ).ready(function() {
         $('#users').selectize({
-            maxItems: null
         });
     });
     </script>
