@@ -97,6 +97,11 @@ class FileController extends Controller
     public function download(Group $group, File $file)
     {
         if (Gate::allows('download', $file)) {
+            if ($file->isLink())
+            {
+                return redirect($file->path);
+            }
+
             if (Storage::exists($file->path)) {
                 return (new Response(Storage::get($file->path), 200))
                 ->header('Content-Type', $file->mime)
