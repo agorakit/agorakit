@@ -2,6 +2,21 @@
 
 
 
+@include('partials.datatables')
+@push('js')
+    <script>
+    $(document).ready(function(){
+        $('.files-grid').DataTable( {
+            paging: false,
+            order: []
+        });
+    });
+    </script>
+
+@endpush
+
+
+
 @section('content')
 
     @include('groups.tabs')
@@ -29,30 +44,7 @@
             @endcan
         </div>
 
-
-
-
-
-        @push('css')
-            <link href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" />
-        @endpush
-
-        @push('js')
-            <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-
-            <script>
-            $(document).ready(function(){
-                $('.files-grid').DataTable( {
-                    paging: false,
-                    order: []
-                });
-            });
-            </script>
-
-        @endpush
-
-
-
+    
 
         <table class="table table-hover files-grid">
 
@@ -124,11 +116,8 @@
         </table>
 
 
-        <!--
-        <a class="btn btn-default btn-xs" href="{{ action('FileController@gallery', $group->id ) }}"><i class="fa fa-camera-retro "></i>{{trans('messages.show_gallery')}}</a>
-    -->
 
-</div>
+    </div>
 
 
 @endsection

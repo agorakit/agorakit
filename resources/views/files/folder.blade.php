@@ -1,9 +1,6 @@
 @extends('app')
 
-
-@section('css')
-    {!! Html::style('https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css') !!}
-@endsection
+@include('partials.datatables')
 
 
 
