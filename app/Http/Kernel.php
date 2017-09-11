@@ -45,15 +45,15 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \App\Http\Middleware\Authenticate::class,
+        'auth'       => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
-        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'member' => \App\Http\Middleware\RedirectIfNotGroupMember::class,
-        'verified' => \App\Http\Middleware\Verified::class,
-        'cache' => \App\Http\Middleware\Cache::class,
-        'admin' => \App\Http\Middleware\Admin::class,
+        'guest'      => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'throttle'   => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'member'     => \App\Http\Middleware\RedirectIfNotGroupMember::class,
+        'verified'   => \App\Http\Middleware\Verified::class,
+        'cache'      => \App\Http\Middleware\Cache::class,
+        'admin'      => \App\Http\Middleware\Admin::class,
         'groupadmin' => \App\Http\Middleware\GroupAdmin::class,
-        'public' => \App\Http\Middleware\RedirectIfNotGroupMemberOrPublicGroup::class,
+        'public'     => \App\Http\Middleware\RedirectIfNotGroupMemberOrPublicGroup::class,
     ];
 }

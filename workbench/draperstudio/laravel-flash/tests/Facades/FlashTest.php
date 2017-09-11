@@ -11,10 +11,10 @@
 
 namespace DraperStudio\Tests\Flash\Facades;
 
-use GrahamCampbell\TestBenchCore\FacadeTrait;
-use DraperStudio\Tests\Flash\AbstractTestCase;
-use DraperStudio\Flash\FlashNotifier;
 use DraperStudio\Flash\Facades\Flash;
+use DraperStudio\Flash\FlashNotifier;
+use DraperStudio\Tests\Flash\AbstractTestCase;
+use GrahamCampbell\TestBenchCore\FacadeTrait;
 
 /**
  * This is the facade test class.

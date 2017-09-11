@@ -1,14 +1,14 @@
 <?php
 
-use Illuminate\Database\Seeder;
-use Faker\Factory as Faker;
 use Carbon\Carbon;
+use Faker\Factory as Faker;
+use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
     /**
-    * Run the database seeds.
-    */
+     * Run the database seeds.
+     */
     public function run()
     {
         $faker = Faker::create();
@@ -17,34 +17,32 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->delete();
 
         $admin = App\User::create([
-            'email' => 'admin@agorakit.org',
+            'email'    => 'admin@agorakit.org',
             'password' => bcrypt('secret'),
-            'body' => $faker->text,
-            'name' => $faker->name,
+            'body'     => $faker->text,
+            'name'     => $faker->name,
             'verified' => 1,
         ]);
 
         // add avatar to admin user
-        Storage::disk('local')->makeDirectory('users/' . $admin->id);
-        Image::make($faker->imageUrl(500,400, 'people'))->widen(500)->save(storage_path() . '/app/users/' . $admin->id . '/cover.jpg')->fit(128,128)->save(storage_path() . '/app/users/' . $admin->id . '/thumbnail.jpg');
+        Storage::disk('local')->makeDirectory('users/'.$admin->id);
+        Image::make($faker->imageUrl(500, 400, 'people'))->widen(500)->save(storage_path().'/app/users/'.$admin->id.'/cover.jpg')->fit(128, 128)->save(storage_path().'/app/users/'.$admin->id.'/thumbnail.jpg');
 
         for ($i = 1; $i <= 50; ++$i) {
             $user = App\User::create([
-                'email' => $faker->safeEmail,
+                'email'    => $faker->safeEmail,
                 'password' => bcrypt('secret'),
-                'name' => $faker->name,
-                'body' => $faker->text(1000)
+                'name'     => $faker->name,
+                'body'     => $faker->text(1000),
             ]);
 
             // add avatar to every user
-            Storage::disk('local')->makeDirectory('users/' . $user->id);
-            Image::make($faker->imageUrl(500,400, 'people'))->widen(500)->save(storage_path() . '/app/users/' . $user->id . '/cover.jpg')->fit(128,128)->save(storage_path() . '/app/users/' . $user->id . '/thumbnail.jpg');
-
+            Storage::disk('local')->makeDirectory('users/'.$user->id);
+            Image::make($faker->imageUrl(500, 400, 'people'))->widen(500)->save(storage_path().'/app/users/'.$user->id.'/cover.jpg')->fit(128, 128)->save(storage_path().'/app/users/'.$user->id.'/thumbnail.jpg');
         }
 
         // create 10 groups
-        for ($i = 1; $i <= 10; ++$i)
-        {
+        for ($i = 1; $i <= 10; ++$i) {
             $group = App\Group::create([
                 'name' => $faker->city.'\'s user group',
                 //'name' => 'Group ' . $faker->sentence(3),
@@ -52,13 +50,11 @@ class DatabaseSeeder extends Seeder
             ]);
 
             // add cover image to groups
-            Storage::disk('local')->makeDirectory('groups/' . $group->id);
-            Image::make($faker->imageUrl())->widen(800)->save(storage_path() . '/app/groups/' . $group->id . '/cover.jpg')->fit(300,200)->save(storage_path() . '/app/groups/' . $group->id . '/thumbnail.jpg');
-
+            Storage::disk('local')->makeDirectory('groups/'.$group->id);
+            Image::make($faker->imageUrl())->widen(800)->save(storage_path().'/app/groups/'.$group->id.'/cover.jpg')->fit(300, 200)->save(storage_path().'/app/groups/'.$group->id.'/thumbnail.jpg');
 
             // add members to the group
-            for ($j = 1; $j <= $faker->numberBetween(5,20); ++$j)
-            {
+            for ($j = 1; $j <= $faker->numberBetween(5, 20); ++$j) {
                 $membership = \App\Membership::firstOrNew(['user_id' => App\User::orderByRaw('RAND()')->first()->id, 'group_id' => $group->id]);
                 $membership->membership = \App\Membership::MEMBER;
                 $membership->notification_interval = 600;
@@ -69,8 +65,7 @@ class DatabaseSeeder extends Seeder
             }
 
             // add discussions to each group
-            for ($k = 1; $k <= $faker->numberBetween(5,20); ++$k)
-            {
+            for ($k = 1; $k <= $faker->numberBetween(5, 20); ++$k) {
                 $discussion = App\Discussion::create([
                     'name' => $faker->city,
                     'body' => $faker->text,
@@ -82,8 +77,7 @@ class DatabaseSeeder extends Seeder
 
                 // Add comments to each discussion
 
-                for ($l = 1; $l <= $faker->numberBetween(5,20); ++$l)
-                {
+                for ($l = 1; $l <= $faker->numberBetween(5, 20); ++$l) {
                     $comment = new \App\Comment();
                     $comment->body = $faker->text;
                     $comment->user_id = App\User::orderByRaw('RAND()')->first()->id;
@@ -92,8 +86,7 @@ class DatabaseSeeder extends Seeder
             }
 
             // add actions to each group
-            for ($m = 1; $m <= $faker->numberBetween(5,20); ++$m)
-            {
+            for ($m = 1; $m <= $faker->numberBetween(5, 20); ++$m) {
                 $start = $faker->dateTimeThisMonth('+2 months');
                 $action = App\Action::create([
                     'name' => $faker->sentence(5),
@@ -101,20 +94,18 @@ class DatabaseSeeder extends Seeder
                     /*'start' => Carbon::now(),
                     'stop' => Carbon::now(),
                     */
-                    'start' => $start,
-                    'stop' => Carbon::instance($start)->addHour(),
-                    'location' =>$faker->city
+                    'start'    => $start,
+                    'stop'     => Carbon::instance($start)->addHour(),
+                    'location' => $faker->city,
                 ]);
                 // attach one random author & group to each discussion
                 $action->user_id = App\User::orderByRaw('RAND()')->first()->id;
                 $action->group_id = App\Group::orderByRaw('RAND()')->first()->id;
-                if ($action->isInvalid())
-                {
+                if ($action->isInvalid()) {
                     dd($action->getErrors());
                 }
                 $action->save();
             }
-
         }
     }
 }

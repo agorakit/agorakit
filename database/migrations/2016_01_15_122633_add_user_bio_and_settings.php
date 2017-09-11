@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class AddUserBioAndSettings extends Migration
@@ -12,10 +11,10 @@ class AddUserBioAndSettings extends Migration
      */
     public function up()
     {
-      Schema::table('users', function ($table) {
-        $table->text('body');
-        $table->text('preferences');
-      });
+        Schema::table('users', function ($table) {
+            $table->text('body');
+            $table->text('preferences');
+        });
     }
 
     /**
@@ -25,9 +24,9 @@ class AddUserBioAndSettings extends Migration
      */
     public function down()
     {
-      Schema::table('users', function ($table) {
-        $table->dropColumn('body');
-        $table->dropColumn('preferences');
-      });
+        Schema::table('users', function ($table) {
+            $table->dropColumn('body');
+            $table->dropColumn('preferences');
+        });
     }
 }

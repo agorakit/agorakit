@@ -8,30 +8,30 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 class AuthServiceProvider extends ServiceProvider
 {
     /**
-    * The policy mappings for the application.
-    *
-    * @var array
-    */
+     * The policy mappings for the application.
+     *
+     * @var array
+     */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
-        'App\Action' => 'App\Policies\ActionPolicy',
-        'App\Comment' => 'App\Policies\CommentPolicy',
+        'App\Model'      => 'App\Policies\ModelPolicy',
+        'App\Action'     => 'App\Policies\ActionPolicy',
+        'App\Comment'    => 'App\Policies\CommentPolicy',
         'App\Discussion' => 'App\Policies\DiscussionPolicy',
-        'App\File' => 'App\Policies\FilePolicy',
-        'App\Group' => 'App\Policies\GroupPolicy',
-        'App\User' => 'App\Policies\UserPolicy',
+        'App\File'       => 'App\Policies\FilePolicy',
+        'App\Group'      => 'App\Policies\GroupPolicy',
+        'App\User'       => 'App\Policies\UserPolicy',
     ];
 
     /**
-    * Register any application authentication / authorization services.
-    *
-    * @param  \Illuminate\Contracts\Auth\Access\Gate  $gate
-    * @return void
-    */
+     * Register any application authentication / authorization services.
+     *
+     * @param \Illuminate\Contracts\Auth\Access\Gate $gate
+     *
+     * @return void
+     */
     public function boot(GateContract $gate)
     {
         $this->registerPolicies($gate);
-
 
         $gate->define('ltm-admin-translations', function ($user) {
             /* @var $user \App\User */

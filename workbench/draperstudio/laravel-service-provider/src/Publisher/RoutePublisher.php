@@ -21,9 +21,9 @@ class RoutePublisher extends Publisher
      * @param string $package
      * @param string $packagePath
      *
-     * @return string
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return string
      */
     protected function getSource($packagePath)
     {

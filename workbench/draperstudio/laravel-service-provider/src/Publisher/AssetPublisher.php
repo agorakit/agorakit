@@ -20,9 +20,9 @@ class AssetPublisher extends Publisher
      *
      * @param string $packagePath
      *
-     * @return string
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return string
      */
     protected function getSource($packagePath)
     {
