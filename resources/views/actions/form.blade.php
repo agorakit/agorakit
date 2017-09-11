@@ -47,14 +47,16 @@
     </div>
 </div>
 
+@include ('partials.wysiwyg')
+
 
 @section('css')
-    <link href="/packages/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" />
 @endsection
 
 @push('js')
-    <script src="/packages/moment/min/moment-with-locales.min.js"></script>
-    <script src="/packages/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment-with-locales.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 
 
     <script type="text/javascript">
@@ -79,10 +81,5 @@
     });
     </script>
 
-
-    <script src="//cdn.ckeditor.com/4.5.6/standard/ckeditor.js"></script>
-    <script>
-    CKEDITOR.replace( 'wysiwyg' );
-    </script>
 
 @endpush
