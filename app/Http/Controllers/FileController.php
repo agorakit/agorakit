@@ -194,7 +194,8 @@ class FileController extends Controller
                     // generate filenames and path
                     $filepath = '/groups/'.$file->group->id.'/files/';
 
-                    $filename = $file->id.'.'.strtolower($uploaded_file->getClientOriginalExtension());
+                    // simplified filename 
+                    $filename = $file->id.'-'.str_slug($uploaded_file->getClientOriginalName()).'.'.strtolower($uploaded_file->getClientOriginalExtension());
 
                     // resize big images only if they are png, gif or jpeg
                     if (in_array($uploaded_file->getClientMimeType(), ['image/jpeg', 'image/png', 'image/gif'])) {
