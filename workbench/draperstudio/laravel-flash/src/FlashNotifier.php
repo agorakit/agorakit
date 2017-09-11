@@ -126,5 +126,4 @@ class FlashNotifier
 
         return $this;
     }
-
 }

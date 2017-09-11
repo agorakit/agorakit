@@ -64,9 +64,6 @@ return [
             'strict'    => false,
         ],
 
-
-
-
         'mysql_testing' => [
             'driver'    => 'mysql',
             'host'      => env('TESTING_DB_HOST', 'localhost'),

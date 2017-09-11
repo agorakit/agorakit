@@ -9,7 +9,6 @@ class Membership extends Model
 {
     use RevisionableTrait;
 
-
     protected $table = 'membership';
     public $timestamps = true;
     protected $fillable = ['group_id', 'user_id', 'membership'];
@@ -17,10 +16,9 @@ class Membership extends Model
     protected $dates = ['notifed_at'];
 
     protected $rules = [
-        'user_id' => 'required|exists:users,id',
+        'user_id'  => 'required|exists:users,id',
         'group_id' => 'required|exists:groups,id',
     ];
-
 
     // Membership levels
 
@@ -38,8 +36,6 @@ class Membership extends Model
 
     // blacklisted
     const BLACKLISTED = -20;
-
-
 
     public function votes()
     {

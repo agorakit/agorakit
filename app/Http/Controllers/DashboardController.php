@@ -2,54 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use App\Helpers\QueryHelper;
-use Carbon\Carbon;
 use Auth;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth', ['only' => ['users', 'files']]);
     }
 
     /**
-    * Main HOMEPAGE
-    *
-    * @return Response
-    */
+     * Main HOMEPAGE.
+     *
+     * @return Response
+     */
     public function index(Request $request)
     {
-        if (Auth::check())
-        {
+        if (Auth::check()) {
             $my_groups = Auth::user()->groups()->get();
 
             // other groups are public and not groups the user is member of
             $other_groups = \App\Group::publicgroups()->whereNotIn('id', $my_groups->pluck('id'))->get();
 
-
             // if user is not subscribed to any group, we redirect to group list homepage instead.
-            if ($my_groups->count() == 0)
-            {
+            if ($my_groups->count() == 0) {
                 return redirect('groups');
             }
-
 
             $my_discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group')
             ->has('user')
             ->whereIn('group_id', $my_groups->pluck('id'))
             ->orderBy('updated_at', 'desc')->paginate(10);
 
-
             $my_actions = \App\Action::with('user', 'group')
             ->whereIn('group_id', $my_groups->pluck('id'))
             ->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->paginate(10);
-
 
             $other_discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group')
             ->has('user')
@@ -67,23 +56,18 @@ class DashboardController extends Controller
             ->with('my_actions', $my_actions)
             ->with('other_actions', $other_actions)
             ->with('other_discussions', $other_discussions);
-        }
-        else
-        {
+        } else {
             return view('dashboard.presentation')
             ->with('tab', 'homepage');
         }
-
     }
 
-
     /**
-     * Show all the files independant of groups
+     * Show all the files independant of groups.
      */
     public function files()
     {
-        if (Auth::check())
-        {
+        if (Auth::check()) {
             $groups = \App\Group::publicgroups()->get()->pluck('id')->merge(Auth::user()->groups()->pluck('groups.id'));
 
             $files = \App\File::with('group', 'user')
@@ -101,21 +85,17 @@ class DashboardController extends Controller
         }
         */
 
-
         return view('dashboard.files')
         ->with('tab', 'files')
         ->with('files', $files);
     }
 
-
-
     /**
-    * Generates a list of unread discussions.
-    */
+     * Generates a list of unread discussions.
+     */
     public function discussions()
     {
-        if (Auth::check())
-        {
+        if (Auth::check()) {
             // All the groups of a user : Auth::user()->groups()->pluck('groups.id')
             // All the public groups : Auth::user()->groups()->pluck('groups.id')
 
@@ -126,14 +106,11 @@ class DashboardController extends Controller
             $discussions = \App\Discussion::with('userReadDiscussion', 'group', 'user')
             ->whereIn('group_id', $groups)
             ->orderBy('updated_at', 'desc')->paginate(25);
-        }
-        else
-        {
+        } else {
             $discussions = \App\Discussion::with('group', 'user')
             ->whereIn('group_id', \App\Group::publicgroups()->get()->pluck('id'))
             ->orderBy('updated_at', 'desc')->paginate(25);
         }
-
 
         return view('dashboard.discussions')
         ->with('tab', 'discussions')
@@ -154,27 +131,22 @@ class DashboardController extends Controller
     public function agendaJson(Request $request)
     {
         // load of actions between start and stop provided by calendar js
-        if ($request->has('start') && $request->has('end'))
-        {
+        if ($request->has('start') && $request->has('end')) {
             $actions = \App\Action::with('group')
             ->where('start', '>', Carbon::parse($request->get('start')))
             ->where('stop', '<', Carbon::parse($request->get('end')))
             ->orderBy('start', 'asc')->get();
-        }
-        else
-        {
-
+        } else {
             $actions = \App\Action::with('group')->orderBy('start', 'asc')->get();
         }
 
         $event = [];
         $events = [];
 
-        foreach ($actions as $action)
-        {
+        foreach ($actions as $action) {
             $event['id'] = $action->id;
             $event['title'] = $action->name;
-            $event['description'] = $action->body . ' <br/> ' . $action->location;
+            $event['description'] = $action->body.' <br/> '.$action->location;
             $event['body'] = filter($action->body);
             $event['summary'] = summary($action->body);
             $event['location'] = $action->location;
@@ -187,47 +159,38 @@ class DashboardController extends Controller
 
             $events[] = $event;
         }
+
         return $events;
     }
-
 
     public function users()
     {
         $users = \App\User::with('groups')->orderBy('name')->paginate(30);
+
         return view('dashboard.users')
         ->with('tab', 'users')
         ->with('users', $users);
     }
 
-
     public function groups()
     {
-        if (Auth::check())
-        {
+        if (Auth::check()) {
             $groups = \App\Group::with('membership')->with('tags')->orderBy('updated_at', 'desc')->get();
-        }
-        else
-        {
+        } else {
             $groups = \App\Group::with('tags')->orderBy('updated_at', 'desc')->get();
         }
 
-
         $tagService = app(\Cviebrock\EloquentTaggable\Services\TagService::class);
-
 
         return view('dashboard.groups')
         ->with('tab', 'groups')
         ->with('groups', $groups)
         ->with('all_tags', $tagService->getAllTags('App\Group'));
-
-
     }
 
-
-
     /**
-    * Renders a map of all users (curently)
-    */
+     * Renders a map of all users (curently).
+     */
     public function map()
     {
         $users = \App\User::where('latitude', '<>', 0)->get();
@@ -235,12 +198,10 @@ class DashboardController extends Controller
         $groups = \App\Group::where('latitude', '<>', 0)->get();
 
         // randomize users geolocation by a few meters
-        foreach ($users as $user)
-        {
+        foreach ($users as $user) {
             $user->latitude = $user->latitude + (mt_rand(0, 10) / 10000);
             $user->longitude = $user->longitude + (mt_rand(0, 10) / 10000);
         }
-
 
         return view('dashboard.map')
         ->with('users', $users)
@@ -250,6 +211,4 @@ class DashboardController extends Controller
         ->with('latitude', 50.8503396) // TODO make configurable, curently it's Brussels
         ->with('longitude', 4.3517103);
     }
-
-
 }

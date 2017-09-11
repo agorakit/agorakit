@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateGroupsTable extends Migration
 {
@@ -21,8 +21,6 @@ class CreateGroupsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-
-
     }
 
     /**
@@ -33,6 +31,5 @@ class CreateGroupsTable extends Migration
     public function down()
     {
         Schema::drop('groups');
-
     }
 }

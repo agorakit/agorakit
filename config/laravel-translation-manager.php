@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -11,17 +11,17 @@ return array(
     |
     */
     'route' => [
-        'prefix' => 'translations',
+        'prefix'     => 'translations',
         'middleware' => ['web', 'admin'],
     ],
-    /**
+    /*
      * Specify the locale that is used for creating the initial translation strings. This locale is considered
      * to be the driver of all other translations.
      *
      * @type string
      */
     'primary_locale' => 'en',
-    /**
+    /*
      * Specify any additional locales that you want to be shown even if they have no translation files or translations in the database
      *
      * @type array of strings
@@ -29,27 +29,27 @@ return array(
     'locales' => [
         'en',
     ],
-    /**
+    /*
      * Specify locales that you want to show in the web interface, if empty or not provided then all locales in the database
      * will be shown
      *
      * @type array of strings
      */
-    'show_locales' => [ 'en', 'fr','de', 'nl'
+    'show_locales' => ['en', 'fr', 'de', 'nl',
     ],
-    /**
+    /*
      * Specify the prefix used for all cookies, session data and cache persistence.
      *
      * @type string
      */
     'persistent_prefix' => 'g2Lu2pyz8QcVrxhL32eN',
-    /**
+    /*
      * Enable management of translations beyond just editing and command line manipulations
      *
      * @type boolean
      */
     'admin_enabled' => true,
-    /**
+    /*
      * Enable management of translations for editors by locales
      *
      * Only applies to users that are not translation admins
@@ -60,7 +60,7 @@ return array(
      * @type boolean
      */
     'user_locales_enabled' => false,
-    /**
+    /*
      * Enable markdown translation to html on the fly
      *
      * With this option set to a suffix string, all keys that end in this suffix, will
@@ -87,7 +87,7 @@ return array(
      * @type string
      */
     'markdown_key_suffix' => '',
-    /**
+    /*
      * No Longer used. Must implement 'ltm-editors-list' ability that will return true
      * if the user can manage per locale access with an array of objects with: id, email,
      * and name fields that correspond to the list of users to be displayed in the web UI
@@ -95,7 +95,7 @@ return array(
      *
      */
     //'user_list_provider' => null,
-    /**
+    /*
      * Specify export formatting options:
      *
      * PRESERVE_EMPTY_ARRAYS - preserve first level translations that are empty arrays
@@ -106,56 +106,56 @@ return array(
      *
      * @type string | array
      */
-    'export_format' => array(
+    'export_format' => [
         'PRESERVE_EMPTY_ARRAYS',
         //'USE_QUOTES',
         'USE_HEREDOC',
         'USE_SHORT_ARRAY',
         'SORT_KEYS',
-    ),
-    /**
+    ],
+    /*
      * Enable mismatch dashboard
      *
      * @type boolean
      */
     'mismatch_enabled' => false,
-    /**
+    /*
      * Exclude specific groups from Laravel Translation Manager.
      * This is useful if, for example, you want to avoid editing the official Laravel language files.
      *
      * @type array
      */
-    'exclude_groups' => array(
+    'exclude_groups' => [
         //'pagination',
         //'reminders',
         //'validation',
-    ),
-    /**
+    ],
+    /*
      * Exclude specific groups from Laravel Translation Manager in page edit mode.
      * This is useful for groups that are used exclusively for non-display strings like page titles and emails
      *
      * @type array
      */
-    'exclude_page_edit_groups' => array(
+    'exclude_page_edit_groups' => [
         //'page-titles',
         //'reminders',
         //'validation',
-    ),
-    /**
+    ],
+    /*
      * determines whether missing keys are logged
      *
      * @type boolean
      */
     'log_missing_keys' => false,
 
-    /**
+    /*
      * determines whether usage of keys is logged, requires missing keys to be logged too
      *
      * @type boolean
      */
     'log_key_usage_info' => false,
 
-    /**
+    /*
      * determines one out of how many user sessions will have a chance to log missing keys
      * since the operation hits the database for every missing key you can limit this by setting a
      * higher number depending on the traffic load to your site.
@@ -170,7 +170,7 @@ return array(
      */
     'missing_keys_lottery' => 100, // 1 in 100 of users will have the missing translation keys logged.
 
-    /**
+    /*
      * @type int        0 - as usual, write out files and set status for translations to SAVED,
      *
      *                  1 - on publish will only copy value to saved_value in the database and set the status to SAVED_CACHED
@@ -187,7 +187,7 @@ return array(
      */
     'indatabase_publish' => 0,
 
-    /**
+    /*
      * @type array      list of alternate database connections and their properties indexed by app()->environment() value,
      *                  default connection settings are taken from config, so only add alternate connections
      *
@@ -205,16 +205,16 @@ return array(
      *                      useful for publishing to files while leaving all flags in the database as
      *                      they would be after publishing only to cache.
      */
-    'db_connections' => array(
+    'db_connections' => [
         //'local' => array(
         //    'mysql_prd' => array(
         //        'description' => 'production',
         //        'indatabase_publish' => 2,
         //    ),
         //),
-    ),
+    ],
 
-    /**
+    /*
      * used to provide an alternate default connection name for translation
      * tables
      *
@@ -226,7 +226,7 @@ return array(
 
     'default_connection' => null,
 
-    /**
+    /*
      * used to provide the Yandex key for use in automatic Yandex translations
      *
      * @type string     Yandex translation key
@@ -236,7 +236,7 @@ return array(
      */
 
     'yandex_translator_key' => env('YANDEX_TRANSLATOR_KEY'),
-    /**
+    /*
      * used to provide configuration on where the translation files are stored and where to write them out.
      *
      * This configuration provides the difference in layout between Laravel 4 & 5.
@@ -329,18 +329,18 @@ return array(
      *
      * Please read above before changing.
      */
-    'language_dirs' => array(
-        'lang' => '/resources/lang/{locale}/{group}',
-        'packages' => '/resources/lang/vendor/{package}/{locale}/{group}',
+    'language_dirs' => [
+        'lang'      => '/resources/lang/{locale}/{group}',
+        'packages'  => '/resources/lang/vendor/{package}/{locale}/{group}',
         'workbench' => [
             'include' => '*/*',
-            'root' => '/workbench/{vendor}/{package}',
-            'files' => 'resources/lang/{locale}/{group}',
+            'root'    => '/workbench/{vendor}/{package}',
+            'files'   => 'resources/lang/{locale}/{group}',
         ],
         'vendor' => [
             'include' => [],
-            'root' => '/vendor/{vendor}/{package}',
-            'files' => 'resources/lang/{locale}/{group}',
+            'root'    => '/vendor/{vendor}/{package}',
+            'files'   => 'resources/lang/{locale}/{group}',
         ],
         /*
          * add packages that need special mapping to their language files because they don't use the standard Laravel
@@ -359,8 +359,8 @@ return array(
          * loaded for it. Therefore only include in vendor section if it is not actually located in workbench.
          */
         'caouecs/laravel-lang' => [
-            '__merge' => ['vendor', 'workbench',],
-            'files' => 'src/{locale}/{group}',
+            '__merge' => ['vendor', 'workbench'],
+            'files'   => 'src/{locale}/{group}',
         ],
         /*
          * This one requires a very different definition. The file names are the locale.php, therefore more guts are
@@ -369,14 +369,14 @@ return array(
          * place from the rest of the packages. So there is a way to just hard code the group to any string.
          */
         'nesbot/carbon' => [
-            '__merge' => ['vendor', 'workbench',],
-            'files' => 'src/Carbon/Lang/{locale}',
-            'vars' => [
+            '__merge' => ['vendor', 'workbench'],
+            'files'   => 'src/Carbon/Lang/{locale}',
+            'vars'    => [
                 '{group}' => 'carbon',
             ],
         ],
-    ),
-    /**
+    ],
+    /*
      *
      * Provide the prefix for the root of the zip file
      * if a path from language_dirs does not start with this prefix then language files exported
@@ -386,4 +386,4 @@ return array(
      */
     'zip_root' => '/resources',
 
-);
+];

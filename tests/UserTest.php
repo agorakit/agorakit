@@ -1,14 +1,10 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class UserTest extends TestCase
 {
-
     //use DatabaseMigrations;
-
 
     /******************* Why is it done this way ? ***************/
 
@@ -40,16 +36,13 @@ class UserTest extends TestCase
 
         $this->visit('/')
              ->see('Agorakit');
-
     }
 
-
-
     /**
-    * A basic test example.
-    *
-    * @return void
-    */
+     * A basic test example.
+     *
+     * @return void
+     */
     public function testUserRegistration()
     {
         $this->visit('/register')
@@ -60,8 +53,7 @@ class UserTest extends TestCase
         ->press('Register')
         ->see('Agorakit');
 
-         $this->seeInDatabase('users', ['email' => 'roberto@example.com']);
-
+        $this->seeInDatabase('users', ['email' => 'roberto@example.com']);
     }
 
     public function testGroupCreation()
@@ -70,7 +62,6 @@ class UserTest extends TestCase
 
         $user->confirmEmail();
 
-
         $this->actingAs($user)
         ->visit('groups/create')
         ->see('Create a new group')
@@ -78,9 +69,7 @@ class UserTest extends TestCase
         ->type('this is a test group', 'body')
         ->press('Create the group')
         ->see('Test group');
-
     }
-
 
     public function testDiscussionCreation()
     {
@@ -89,14 +78,13 @@ class UserTest extends TestCase
         $group = App\Group::where('name', 'Test group')->first();
 
         $this->actingAs($user)
-        ->visit('/groups/'. $group->id .'/discussions/create')
+        ->visit('/groups/'.$group->id.'/discussions/create')
         ->see('Create')
         ->type('Test discussion', 'name')
         ->type('this is a test discussion', 'body')
         ->press('Create')
         ->see('Test discussion');
     }
-
 
     public function testActionCreation()
     {
@@ -105,7 +93,7 @@ class UserTest extends TestCase
         $group = App\Group::where('name', 'Test group')->first();
 
         $this->actingAs($user)
-        ->visit('/groups/'. $group->id .'/actions/create')
+        ->visit('/groups/'.$group->id.'/actions/create')
         ->see('Add an event')
         ->type('Test action', 'name')
         ->type('this is a test action in the agenda', 'body')
@@ -116,7 +104,6 @@ class UserTest extends TestCase
         ->seeInDatabase('actions', ['name' => 'Test action'])
         ->see(trans('action.create_one_button'));
     }
-
 
     public function testPrivateGroupCreation()
     {
@@ -143,10 +130,8 @@ class UserTest extends TestCase
         ->press('Register')
         ->see('Agorakit');
 
-         $this->seeInDatabase('users', ['email' => 'newbie@example.com']);
+        $this->seeInDatabase('users', ['email' => 'newbie@example.com']);
     }
-
-
 
     public function testNewbieCanJoinOpenGroup()
     {
@@ -155,7 +140,7 @@ class UserTest extends TestCase
         $user = App\User::where('email', 'newbie@example.com')->first();
 
         $this->actingAs($user)
-        ->visit('/groups/' . $group->id . '/join')
+        ->visit('/groups/'.$group->id.'/join')
         ->see('Join the group')
         ->press('Join')
         ->see('Welcome');
@@ -168,19 +153,16 @@ class UserTest extends TestCase
         $user = App\User::where('email', 'newbie@example.com')->first();
         $user->confirmEmail();
 
-
         $this->actingAs($user)
-        ->visit('/groups/' . $group->id . '/join')
+        ->visit('/groups/'.$group->id.'/join')
         ->see(trans('messages.not_allowed'));
     }
 
-
-
     public function testNewbieCanCreateGroup()
     {
-      $user = App\User::where('email', 'newbie@example.com')->first();
+        $user = App\User::where('email', 'newbie@example.com')->first();
 
-      $this->actingAs($user)
+        $this->actingAs($user)
       ->visit('groups/create')
       ->see('Create a new group')
       ->type('Test group of newbie', 'name')
@@ -189,28 +171,24 @@ class UserTest extends TestCase
       ->see('Test group of newbie');
     }
 
-
     public function testRobertoIsAdminOfTestGroup()
     {
-      $user = App\User::where('email', 'roberto@example.com')->first();
-      $group = App\Group::where('name', 'Test group')->first();
-      $this->assertTrue($user->isAdminOf($group));
+        $user = App\User::where('email', 'roberto@example.com')->first();
+        $group = App\Group::where('name', 'Test group')->first();
+        $this->assertTrue($user->isAdminOf($group));
     }
-
 
     public function testNewbieIsNotAdminOfTestGroup()
     {
-      $user = App\User::where('email', 'newbie@example.com')->first();
-      $group = App\Group::where('name', 'Test group')->first();
-      $this->assertFalse($user->isAdminOf($group));
+        $user = App\User::where('email', 'newbie@example.com')->first();
+        $group = App\Group::where('name', 'Test group')->first();
+        $this->assertFalse($user->isAdminOf($group));
     }
-
 
     public function testNewbieIsAdminOfTestGroupOfNewbie()
     {
-      $user = App\User::where('email', 'newbie@example.com')->first();
-      $group = App\Group::where('name', 'Test group of newbie')->first();
-      $this->assertTrue($user->isAdminOf($group));
+        $user = App\User::where('email', 'newbie@example.com')->first();
+        $group = App\Group::where('name', 'Test group of newbie')->first();
+        $this->assertTrue($user->isAdminOf($group));
     }
-
 }

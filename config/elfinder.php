@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -62,8 +62,6 @@ return array(
 
     'roots' => [],
 
-
-
     /*
     |--------------------------------------------------------------------------
     | Options
@@ -85,10 +83,9 @@ return array(
     | See https://github.com/Studio-42/elFinder/wiki/Connector-configuration-options-2.1#root-options
     |
     */
-    'root_options' =>
-    [
-        'disabled' => ['rm'],
-        'alias' => 'home',
+    'root_options' => [
+        'disabled'      => ['rm'],
+        'alias'         => 'home',
         'uploadMaxSize' => '20M',
         /*'uploadOrder' => 'Allow,Deny',*/
         /*'uploadAllow' => ['audio', 'video', 'image', 'application/msword', 'text/plain', 'application/pdf'],*/
@@ -107,4 +104,4 @@ return array(
 
     ],
 
-);
+];

@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class AddGroupIndexToTranslations extends Migration
 {
@@ -12,8 +12,7 @@ class AddGroupIndexToTranslations extends Migration
      */
     public function up()
     {
-        Schema::table('ltm_translations', function (Blueprint $table)
-        {
+        Schema::table('ltm_translations', function (Blueprint $table) {
             $table->index(['group'], 'ix_ltm_translations_group');
         });
     }
@@ -25,8 +24,7 @@ class AddGroupIndexToTranslations extends Migration
      */
     public function down()
     {
-        Schema::table('ltm_translations', function (Blueprint $table)
-        {
+        Schema::table('ltm_translations', function (Blueprint $table) {
             $table->dropIndex('ix_ltm_translations_group');
         });
     }

@@ -2,29 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use Carbon\Carbon;
 use App\Group;
 use App\User;
-use Gate;
-
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 /**
-* Admin features to act on membership and to make other users admin of a group
-*/
+ * Admin features to act on membership and to make other users admin of a group.
+ */
 class AdminMembershipController extends Controller
 {
-
-
     /**
-    * Force add a member to a group (admin feature)
-    * This is the form that allows an admin to select a user to add to a group
-    */
+     * Force add a member to a group (admin feature)
+     * This is the form that allows an admin to select a user to add to a group.
+     */
     public function addUserForm(Request $request, Group $group)
     {
-
         $this->authorize('edit-membership', $group);
 
         // load a list of users not yet in this group
@@ -36,22 +29,18 @@ class AdminMembershipController extends Controller
         ->with('members', $members)
         ->with('notmembers', $notmembers)
         ->with('tab', 'users');
-
     }
 
-
     /**
-    * Force add a member to a group (admin feature)
-    * Processing form's content
-    */
+     * Force add a member to a group (admin feature)
+     * Processing form's content.
+     */
     public function addUser(Request $request, Group $group)
     {
         $this->authorize('edit-membership', $group);
 
-        if ($request->has('users'))
-        {
-            foreach ($request->get('users') as $user_id)
-            {
+        if ($request->has('users')) {
+            foreach ($request->get('users') as $user_id) {
                 $user = \App\User::findOrFail($user_id);
                 // load or create membership for this group and user combination
                 $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $group->id]);
@@ -62,27 +51,26 @@ class AdminMembershipController extends Controller
                 $membership->notified_at = Carbon::now();
                 $membership->save();
 
-                flash()->info(trans('messages.user_added_successfuly') . ' : ' . $user->name);
+                flash()->info(trans('messages.user_added_successfuly').' : '.$user->name);
             }
         }
 
         return redirect()->action('UserController@index', $group);
     }
 
-
     /**
-    * Force remove a member to a group (admin feature)
-    * This is must be called from a delete form
-    */
+     * Force remove a member to a group (admin feature)
+     * This is must be called from a delete form.
+     */
     public function removeUser(Request $request, Group $group, User $user)
     {
         $this->authorize('edit-membership', $group);
         $membership = \App\Membership::where(['user_id' => $user->id, 'group_id' => $group->id])->firstOrFail();
         $membership->delete();
-        flash()->info(trans('messages.user_removed_successfuly') . ' : ' . $user->name);
+        flash()->info(trans('messages.user_removed_successfuly').' : '.$user->name);
+
         return redirect()->action('UserController@index', $group);
     }
-
 
     public function editUserForm(Request $request, Group $group, User $user)
     {
@@ -92,13 +80,11 @@ class AdminMembershipController extends Controller
         ->with('group', $group)
         ->with('user', $user)
         ->with('tab', 'users');
-
     }
 
-
     /**
-    * Set a member of a group to admin (admin feature)
-    */
+     * Set a member of a group to admin (admin feature).
+     */
     public function addAdminUser(Request $request, Group $group, User $user)
     {
         $this->authorize('edit-membership', $group);
@@ -106,14 +92,14 @@ class AdminMembershipController extends Controller
         $membership = \App\Membership::where(['user_id' => $user->id, 'group_id' => $group->id])->firstOrFail();
         $membership->membership = \App\Membership::ADMIN;
         $membership->save();
-        flash()->info(trans('messages.user_made_admin_successfuly') . ' : ' . $user->name);
+        flash()->info(trans('messages.user_made_admin_successfuly').' : '.$user->name);
+
         return redirect()->action('UserController@index', $group);
     }
 
-
     /**
-    * Set a member of a group to admin (admin feature)
-    */
+     * Set a member of a group to admin (admin feature).
+     */
     public function removeAdminUser(Request $request, Group $group, User $user)
     {
         $this->authorize('edit-membership', $group);
@@ -121,13 +107,12 @@ class AdminMembershipController extends Controller
         $membership = \App\Membership::where(['user_id' => $user->id, 'group_id' => $group->id])->firstOrFail();
         $membership->membership = \App\Membership::MEMBER;
         $membership->save();
-        flash()->info(trans('messages.user_made_member_successfuly') . ' : ' . $user->name);
+        flash()->info(trans('messages.user_made_member_successfuly').' : '.$user->name);
+
         return redirect()->action('UserController@index', $group);
     }
 
-
-
-    function intervalToMinutes($interval)
+    public function intervalToMinutes($interval)
     {
         $minutes = -1;
 
@@ -151,10 +136,11 @@ class AdminMembershipController extends Controller
             $minutes = -1;
             break;
         }
+
         return $minutes;
     }
 
-    function minutesToInterval($minutes)
+    public function minutesToInterval($minutes)
     {
         $interval = 'never';
 
@@ -181,5 +167,4 @@ class AdminMembershipController extends Controller
 
         return $interval;
     }
-
 }

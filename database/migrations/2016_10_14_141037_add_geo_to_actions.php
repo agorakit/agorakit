@@ -1,15 +1,15 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class AddGeoToActions extends Migration
 {
     /**
-    * Run the migrations.
-    *
-    * @return void
-    */
+     * Run the migrations.
+     *
+     * @return void
+     */
     public function up()
     {
         Schema::table('actions', function ($table) {
@@ -19,14 +19,13 @@ class AddGeoToActions extends Migration
     }
 
     /**
-    * Reverse the migrations.
-    *
-    * @return void
-    */
+     * Reverse the migrations.
+     *
+     * @return void
+     */
     public function down()
     {
-        Schema::table('actions', function (Blueprint $table)
-        {
+        Schema::table('actions', function (Blueprint $table) {
             $table->dropColumn('latitude');
             $table->dropColumn('longitude');
         });
