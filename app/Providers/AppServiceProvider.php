@@ -16,18 +16,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 
-        // adds user info to all views
-        /*
-        view()->composer('partials.nav', function ($view) {
-            $view->with('user_logged', Auth::check());
-
-            if (Auth::check()) {
-                $view->with('user', Auth::user());
-
-            }
-        });
-        */
-
         // set correct locale for Carbon
         Carbon::setLocale(config('app.locale'));
     }

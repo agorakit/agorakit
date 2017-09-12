@@ -188,6 +188,7 @@ return [
         Cviebrock\EloquentTaggable\ServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         ConsoleTVs\Charts\ChartsServiceProvider::class,
+        Spatie\Activitylog\ActivitylogServiceProvider::class,
 
     ],
 

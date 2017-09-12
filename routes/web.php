@@ -29,12 +29,13 @@ Route::group(['middleware' => ['web']], function () {
     =======================
     */
 
-    Route::get('confirm/{token}', 'Auth\AuthController@confirmEmail');
-    Route::auth();
+    Route::get('confirm/{token}', 'Auth\RegisterController@confirmEmail');
+
+    Auth::routes();
 
     // OAuth Routes
-    Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
-    Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
+    Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
+    Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
     /*
     Homepage
@@ -167,9 +168,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('groups/{group}/discussions/{discussion}/comment/{comment}/history', 'CommentController@history');
     Route::post('groups/{group}/discussions/{discussion}/comment/{comment}', 'CommentController@update');
 
-    Route::get('groups/{group}/discussions/{discussion}/comment/{comment}/up', 'VoteController@up');
-    Route::get('groups/{group}/discussions/{discussion}/comment/{comment}/down', 'VoteController@down');
-    Route::get('groups/{group}/discussions/{discussion}/comment/{comment}/cancel', 'VoteController@cancel');
 
     Route::get('groups/{group}/discussions/{discussion}/comment/{comment}/delete', 'CommentController@destroyConfirm');
     Route::delete('groups/{group}/discussions/{discussion}/comment/{comment}/delete', 'CommentController@destroy');

@@ -2,13 +2,17 @@
 
 namespace App;
 
-use Geocoder\Laravel\Facades\Geocoder;
+
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
+use Geocoder\Laravel\Facades\Geocoder;
 
 class User extends Authenticatable
 {
+    use Notifiable;
     use ValidatingTrait;
     use RevisionableTrait;
 
