@@ -3,115 +3,42 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Mailers\AppMailer;
-use App\User;
-use Auth;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Socialite;
-use Validator;
 
-class AuthController extends Controller
+class LoginController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
-    | Registration & Login Controller
+    | Login Controller
     |--------------------------------------------------------------------------
     |
-    | This controller handles the registration of new users, as well as the
-    | authentication of existing users. By default, this controller uses
-    | a simple trait to add these behaviors. Why don't you explore it?
+    | This controller handles authenticating users for the application and
+    | redirecting them to your home screen. The controller uses a trait
+    | to conveniently provide its functionality to your applications.
     |
     */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    use AuthenticatesUsers;
 
     /**
-     * Where to redirect users after login / registration.
+     * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/home';
 
     /**
-     * Create a new authentication controller instance.
+     * Create a new controller instance.
      *
      * @return void
      */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => ['logout', 'confirmEmail']]);
+        $this->middleware('guest', ['except' => 'logout']);
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param array $data
-     *
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name'     => 'required|max:255',
-            'email'    => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
-        ]);
-    }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param array $data
-     *
-     * @return User
-     */
-    protected function create(array $data)
-    {
-        $user = User::create([
-            'name'     => $data['name'],
-            'email'    => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
-
-        $mailer = new AppMailer();
-        $mailer->sendEmailConfirmationTo($user);
-
-        return $user;
-    }
-
-    /**
-     * Confirm a user's email address.
-     *
-     * @param string $token
-     *
-     * @return mixed
-     */
-    public function confirmEmail(Request $request, $token)
-    {
-        // find user based on the verif token
-        $user = User::whereToken($token)->firstOrFail();
-
-        // confirm and login if not logged already
-        $user->confirmEmail();
-        if (Auth::guest()) {
-            Auth::login($user); //TODO security implication of this
-        }
-        flash()->info(trans('messages.you_have_verified_your_email'));
-
-        // add user to the group (s)he has been invited to before registering //TODO : good idea ?
-        $invites = \App\Invite::where('email', '=', $user->email)->get();
-        if ($invites) {
-            foreach ($invites as $invite) {
-                $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $invite->group_id]);
-                $membership->membership = \App\Membership::MEMBER;
-                $membership->save();
-            }
-        }
-
-        return redirect('/');
-    }
 
     /**
      * Redirect the user to the OAuth Provider.

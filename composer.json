@@ -9,10 +9,10 @@
   "type": "project",
   "require": {
     "php": ">=5.5.9",
-    "laravel/framework": "5.2.*",
+    "laravel/framework": "5.3.*",
     "watson/validating": "^2.0",
     "venturecraft/revisionable": "1.*",
-    "laravelcollective/html": "5.2.*",
+    "laravelcollective/html": "5.3.*",
     "barryvdh/laravel-debugbar": "^2.1",
     "intervention/image": "^2.3",
     "intervention/imagecache": "^2.3",
@@ -26,14 +26,15 @@
     "suin/php-rss-writer": "^1.5",
     "cviebrock/eloquent-taggable": "^2.0",
     "laravel/socialite": "^2.0",
-    "consoletvs/charts": "5.*"
+    "consoletvs/charts": "5.*",
+    "spatie/laravel-activitylog": "1.15.5"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",
     "mockery/mockery": "0.9.*",
     "phpunit/phpunit": "~4.0",
-    "symfony/css-selector": "2.8.*|3.0.*",
-    "symfony/dom-crawler": "2.8.*|3.0.*",
+    "symfony/css-selector": "3.1.*",
+    "symfony/dom-crawler": "3.1.*",
     "laravel/homestead": "^3.0"
   },
   "autoload": {

@@ -117,56 +117,66 @@
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{action('UserController@show', Auth::user()->id)}}"><i class="fa fa-btn fa-user"></i> {{ trans('messages.profile') }}</a></li>
                             <li><a href="{{action('UserController@edit', Auth::user()->id)}}"><i class="fa fa-btn fa-edit"></i> {{ trans('messages.edit_my_profile') }}</a></li>
-                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i> {{ trans('messages.logout') }}</a></li>
-                        </ul>
-                    </li>
-
-                    @if (Auth::user()->isAdmin())
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                Admin <span class="caret"></span>
+                            <li>
+                                <a href="{{ url('/logout') }}"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                <i class="fa fa-btn fa-sign-out"></i> {{ trans('messages.logout') }}
                             </a>
 
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/admin/user') }}">Users</a></li>
-                                <li>
-                                    <a href="{{ action('InsightsController@forAllGroups') }}">
-                                        <i class="fa fa-line-chart"></i> {{ trans('messages.insights') }}
-                                    </a>
-                                </li>
-                                <li><a href="{{ url('/translations') }}">Translations</a></li>
-                                <li><a href="{{ url('/admin/logs') }}">Logs</a></li>
-
-                            </ul>
+                            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
                         </li>
-                    @endif
+                    </ul>
+                </li>
 
-                @else
-                    <li><a href="{{ url('register') }}">{{ trans('messages.register') }}</a></li>
-                    <li><a href="{{ url('login') }}">{{ trans('messages.login') }}</a></li>
-                @endif
-
-                @if(\Config::has('app.locales'))
+                @if (Auth::user()->isAdmin())
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            {{ strtoupper(app()->getLocale()) }} <span class="caret"></span>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            Admin <span class="caret"></span>
                         </a>
-                        <ul class="dropdown-menu">
-                            @foreach(\Config::get('app.locales') as $lang => $locale)
-                                @if($lang !== app()->getLocale())
-                                    <li>
-                                        <a href="<?= count($_GET) ? '?'.http_build_query(array_merge($_GET, ['force_locale' => $lang])) : '?force_locale='.$lang ?>">
-                                            <?= strtoupper($lang); ?>
-                                        </a>
-                                    </li>
-                                @endif
-                            @endforeach
+
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{ url('/admin/user') }}">Users</a></li>
+                            <li>
+                                <a href="{{ action('InsightsController@forAllGroups') }}">
+                                    <i class="fa fa-line-chart"></i> {{ trans('messages.insights') }}
+                                </a>
+                            </li>
+                            <li><a href="{{ url('/translations') }}">Translations</a></li>
+                            <li><a href="{{ url('/admin/logs') }}">Logs</a></li>
+
                         </ul>
                     </li>
                 @endif
-            </ul>
-        </div><!--/.nav-collapse -->
-    </div><!--/.container-fluid -->
+
+            @else
+                <li><a href="{{ url('register') }}">{{ trans('messages.register') }}</a></li>
+                <li><a href="{{ url('login') }}">{{ trans('messages.login') }}</a></li>
+            @endif
+
+            @if(\Config::has('app.locales'))
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        {{ strtoupper(app()->getLocale()) }} <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        @foreach(\Config::get('app.locales') as $lang => $locale)
+                            @if($lang !== app()->getLocale())
+                                <li>
+                                    <a href="<?= count($_GET) ? '?'.http_build_query(array_merge($_GET, ['force_locale' => $lang])) : '?force_locale='.$lang ?>">
+                                        <?= strtoupper($lang); ?>
+                                    </a>
+                                </li>
+                            @endif
+                        @endforeach
+                    </ul>
+                </li>
+            @endif
+        </ul>
+    </div><!--/.nav-collapse -->
+</div><!--/.container-fluid -->
 </nav>
 
 

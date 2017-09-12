@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use Illuminate\Contracts\Auth\Access\Gate as GateContract;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -29,21 +29,21 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(GateContract $gate)
+    public function boot()
     {
-        $this->registerPolicies($gate);
+        $this->registerPolicies();
 
-        $gate->define('ltm-admin-translations', function ($user) {
+        Gate::define('ltm-admin-translations', function ($user) {
             /* @var $user \App\User */
             return $user && $user->isAdmin();
         });
 
-        $gate->define('ltm-bypass-lottery', function ($user) {
+        Gate::define('ltm-bypass-lottery', function ($user) {
             /* @var $user \App\User */
             return $user && ($user->isAdmin() || $user->is_editor);
         });
 
-        $gate->define('ltm-list-editors', function ($user, $connection_name, &$user_list) {
+        Gate::define('ltm-list-editors', function ($user, $connection_name, &$user_list) {
             /* @var $user \App\User */
             /* @var $connection_name string */
             /* @var $query  \Illuminate\Database\Query\Builder */

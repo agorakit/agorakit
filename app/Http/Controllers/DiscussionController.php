@@ -92,6 +92,7 @@ class DiscussionController extends Controller
         // just before that, we save the number of already read comments in $read_comments to be used in the view to scroll to the first unread comments
         if (Auth::check()) {
             $UserReadDiscussion = \App\UserReadDiscussion::firstOrNew(['discussion_id' => $discussion->id, 'user_id' => Auth::user()->id]);
+
             $read_comments = $UserReadDiscussion->read_comments;
             $UserReadDiscussion->read_comments = $discussion->total_comments;
             $UserReadDiscussion->read_at = Carbon::now();
