@@ -3,10 +3,8 @@
 namespace App\Exceptions;
 
 use Exception;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -16,74 +14,52 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-    AuthorizationException::class,
-    HttpException::class,
-    ModelNotFoundException::class,
-    ValidationException::class,
-  ];
+        \Illuminate\Auth\AuthenticationException::class,
+        \Illuminate\Auth\Access\AuthorizationException::class,
+        \Symfony\Component\HttpKernel\Exception\HttpException::class,
+        \Illuminate\Database\Eloquent\ModelNotFoundException::class,
+        \Illuminate\Session\TokenMismatchException::class,
+        \Illuminate\Validation\ValidationException::class,
+    ];
 
     /**
      * Report or log an exception.
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param \Exception $e
-     *
+     * @param  \Exception  $exception
      * @return void
      */
-    public function report(Exception $e)
+    public function report(Exception $exception)
     {
-        return parent::report($e);
+        parent::report($exception);
     }
 
     /**
      * Render an exception into an HTTP response.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Exception               $e
-     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $e)
+    public function render($request, Exception $exception)
     {
-        // whoops error handler :
-        /*
-        if ($this->isHttpException($e))
-        {
-          return $this->renderHttpException($e);
-        }
-
-        if (config('app.debug'))
-        {
-          return $this->renderExceptionWithWhoops($e);
-        }
-
-        return parent::render($request, $e);
-        */
-        // laravel original error handler :
-
-        if ($e instanceof ModelNotFoundException) {
-            $e = new NotFoundHttpException($e->getMessage(), $e);
-        }
-
-        return parent::render($request, $e);
+        return parent::render($request, $exception);
     }
 
     /**
-     * Render an exception using Whoops.
+     * Convert an authentication exception into an unauthenticated response.
      *
-     * @param \Exception $e
-     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Auth\AuthenticationException  $exception
      * @return \Illuminate\Http\Response
      */
-    protected function renderExceptionWithWhoops(Exception $e)
+    protected function unauthenticated($request, AuthenticationException $exception)
     {
-        $whoops = new \Whoops\Run();
-        $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler());
+        if ($request->expectsJson()) {
+            return response()->json(['error' => 'Unauthenticated.'], 401);
+        }
 
-        return new \Illuminate\Http\Response(
-    $whoops->handleException($e),
-    $e->getStatusCode(),
-    $e->getHeaders());
+        return redirect()->guest('login');
     }
 }
