@@ -6,13 +6,12 @@ php:
 before_script:
   - cp .env.travis .env
   - composer self-update
-  - composer require --dev --no-update phpunit/phpunit ~4
   - composer install --no-interaction
   - php artisan key:generate
   - php artisan migrate
 
 script:
-  - vendor/bin/phpunit
+  - phpunit
 
 services:
   - mysql
