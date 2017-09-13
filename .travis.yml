@@ -4,7 +4,7 @@ php:
   - 7.0
 
 before_script:
-  - cp .env.travis .env
+  - php -r "file_exists('.env') || copy('.env.travis', '.env');"
   - composer self-update
   - composer install --no-interaction
   - php artisan key:generate
