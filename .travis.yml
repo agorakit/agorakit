@@ -11,7 +11,7 @@ before_script:
   - php artisan migrate
 
 script:
-  - phpunit
+  - vendor/bin/phpunit
 
 services:
   - mysql
