@@ -72,7 +72,6 @@ class InviteController extends Controller
             - if user is not registered yet, as soon as (s)he registers, (s)he is added to the groups (this case is handled in the auth controller)
             */
 
-            //TODO : good idea ?
 
             if (!$group->isPublic()) {
                 if ($user) {
@@ -144,6 +143,7 @@ class InviteController extends Controller
             // add user to membership for the group taken from the invite table
             $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $invite->group_id]);
             $membership->membership = \App\Membership::MEMBER;
+            $membership->notification_interval = 60 * 24 * 7; // this is a sane default imho for notification interval (weekly)
             $membership->save();
 
             // Invitation is now claimed, but not deleted
@@ -191,6 +191,7 @@ class InviteController extends Controller
 
         $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $group->id]);
         $membership->membership = \App\Membership::MEMBER;
+        $membership->notification_interval = 60 * 24 * 7; // this is a sane default imho for notification interval (weekly)
         $membership->save();
 
         Auth::login($user);
