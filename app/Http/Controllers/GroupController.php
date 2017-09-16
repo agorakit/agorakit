@@ -21,12 +21,12 @@ class GroupController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+    * Display the specified resource.
+    *
+    * @param int $id
+    *
+    * @return Response
+    */
     public function show(Group $group)
     {
         $discussions = false;
@@ -74,10 +74,10 @@ class GroupController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
+    * Show the form for creating a new resource.
+    *
+    * @return Response
+    */
     public function create()
     {
         return view('groups.create')
@@ -85,10 +85,10 @@ class GroupController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
+    * Store a newly created resource in storage.
+    *
+    * @return Response
+    */
     public function store(Request $request)
     {
         $group = new group();
@@ -115,7 +115,11 @@ class GroupController extends Controller
         $group->save();
 
         $group->user()->associate(Auth::user());
-        $group->tag($request->get('tags'));
+
+        if ($request->get('tags'))
+        {
+            $group->tag($request->get('tags'));
+        }
 
         // handle cover
         if ($request->hasFile('cover')) {
@@ -134,28 +138,28 @@ class GroupController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+    * Show the form for editing the specified resource.
+    *
+    * @param int $id
+    *
+    * @return Response
+    */
     public function edit(Request $request, Group $group)
     {
         return view('groups.edit')
-            ->with('group', $group)
-            ->with('all_tags', \App\Group::allTags())
-            ->with('model_tags', $group->tags)
-            ->with('tab', 'admin');
+        ->with('group', $group)
+        ->with('all_tags', \App\Group::allTags())
+        ->with('model_tags', $group->tags)
+        ->with('tab', 'admin');
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+    * Update the specified resource in storage.
+    *
+    * @param int $id
+    *
+    * @return Response
+    */
     public function update(Request $request, Group $group)
     {
         $group->name = $request->input('name');
@@ -176,14 +180,18 @@ class GroupController extends Controller
         }
 
         $group->user()->associate(Auth::user());
-        $group->retag($request->get('tags'));
+
+        if ($request->get('tags'))
+        {
+            $group->retag($request->get('tags'));
+        }
 
         // validation
         if ($group->isInvalid()) {
             // Oops.
             return redirect()->action('GroupController@edit', $group->id)
-                ->withErrors($group->getErrors())
-                ->withInput();
+            ->withErrors($group->getErrors())
+            ->withInput();
         }
 
         // handle cover
@@ -204,20 +212,20 @@ class GroupController extends Controller
     {
         if (Gate::allows('delete', $group)) {
             return view('groups.delete')
-                ->with('group', $group)
-                ->with('tab', 'home');
+            ->with('group', $group)
+            ->with('tab', 'home');
         } else {
             abort(403);
         }
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Remove the specified resource from storage.
+    *
+    * @param int $id
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function destroy(Request $request, Group $group)
     {
         if (Gate::allows('delete', $group)) {
@@ -261,8 +269,8 @@ class GroupController extends Controller
     }
 
     /**
-     * Show the revision history of the group.
-     */
+    * Show the revision history of the group.
+    */
     public function history(Group $group)
     {
         return view('groups.history')
