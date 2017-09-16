@@ -23,10 +23,10 @@ class FileController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
+    * Display a listing of the resource.
+    *
+    * @return Response
+    */
     public function index(Group $group)
     {
         // list all files and folders without parent id's (parent_id=NULL)
@@ -62,12 +62,12 @@ class FileController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+    * Display the specified resource.
+    *
+    * @param int $id
+    *
+    * @return Response
+    */
     public function show(Group $group, File $file)
     {
         // file
@@ -88,12 +88,12 @@ class FileController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+    * Display the specified resource.
+    *
+    * @param int $id
+    *
+    * @return Response
+    */
     public function download(Group $group, File $file)
     {
         if (Gate::allows('download', $file)) {
@@ -151,10 +151,10 @@ class FileController extends Controller
     /************************** Files handling methods **********************/
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
+    * Show the form for creating a new resource.
+    *
+    * @return Response
+    */
     public function create(Request $request, Group $group)
     {
         return view('files.create')
@@ -172,10 +172,10 @@ class FileController extends Controller
     }
 
     /**
-     * Store a new file.².
-     *
-     * @return Response
-     */
+    * Store a new file.².
+    *
+    * @return Response
+    */
     public function store(Request $request, Group $group)
     {
         try {
@@ -189,12 +189,16 @@ class FileController extends Controller
                     // add group, user and tags
                     $file->group()->associate($group);
                     $file->user()->associate(Auth::user());
-                    $file->tag($request->get('tags'));
+
+                    if ($request->get('tags'))
+                    {
+                        $file->tag($request->get('tags'));
+                    }
 
                     // generate filenames and path
                     $filepath = '/groups/'.$file->group->id.'/files/';
 
-                    // simplified filename 
+                    // simplified filename
                     $filename = $file->id.'-'.str_slug($uploaded_file->getClientOriginalName()).'.'.strtolower($uploaded_file->getClientOriginalExtension());
 
                     // resize big images only if they are png, gif or jpeg
@@ -236,12 +240,12 @@ class FileController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+    * Show the form for editing the specified resource.
+    *
+    * @param int $id
+    *
+    * @return Response
+    */
     public function edit(Group $group, File $file)
     {
         return view('files.edit')
@@ -253,15 +257,18 @@ class FileController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+    * Update the specified resource in storage.
+    *
+    * @param int $id
+    *
+    * @return Response
+    */
     public function update(Request $request, Group $group, File $file)
     {
-        $file->retag($request->get('tags'));
+        if ($request->get('tags'))
+        {
+            $file->retag($request->get('tags'));
+        }
 
         if ($file->save()) {
             flash()->info(trans('messages.ressource_updated_successfully'));
@@ -287,12 +294,12 @@ class FileController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Remove the specified resource from storage.
+    *
+    * @param int $id
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function destroy(Request $request, Group $group, File $file)
     {
         if (Gate::allows('delete', $file)) {
@@ -306,10 +313,10 @@ class FileController extends Controller
     }
 
     /**
-     * Store the folder in the file DB.
-     *
-     * @return Response
-     */
+    * Store the folder in the file DB.
+    *
+    * @return Response
+    */
     public function storeLink(Request $request, Group $group)
     {
         $validator = Validator::make($request->all(), [
@@ -336,7 +343,10 @@ class FileController extends Controller
 
         if ($file->save()) {
             // handle tags
-            $file->tag($request->get('tags'));
+            if ($request->get('tags'))
+            {
+                $file->tag($request->get('tags'));
+            }
 
             flash()->info(trans('messages.ressource_created_successfully'));
 

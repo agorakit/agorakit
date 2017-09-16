@@ -4,7 +4,6 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class UserTest extends BrowserKitTestCase
 {
-    //use DatabaseMigrations;
 
     /******************* Why is it done this way ? ***************/
 
