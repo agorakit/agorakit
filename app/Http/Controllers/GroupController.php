@@ -134,6 +134,8 @@ class GroupController extends Controller
         $membership->membership = \App\Membership::ADMIN;
         $membership->save();
 
+        flash(trans('messages.ressource_created_successfully'))->success();
+
         return redirect()->action('MembershipController@preferences', [$group->id]);
     }
 
