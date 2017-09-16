@@ -51,7 +51,7 @@ class AdminMembershipController extends Controller
                 $membership->notified_at = Carbon::now();
                 $membership->save();
 
-                flash(trans('messages.user_added_successfuly').' : '.$user->name));
+                flash(trans('messages.user_added_successfuly').' : '.$user->name))->success();
             }
         }
 
