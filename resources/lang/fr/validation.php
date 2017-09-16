@@ -102,7 +102,7 @@ return [
             'required'  => 'Required',
         ],
         'password'          => [
-            'confirmed' => 'Confirmé',
+            'confirmed' => 'Les mots de passe ne correspondent pas',
             'min'       => 'Mot de passe trop court',
         ],
         'path'              => [
