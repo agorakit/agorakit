@@ -33,7 +33,7 @@ class AdminSettingsController extends Controller
 
             return redirect()->action('DashboardController@index');
         } else {
-            flash()->error(trans('messages.not_allowed'));
+            flash(trans('messages.not_allowed'))->error();
 
             return redirect()->action('DashboardController@index');
         }

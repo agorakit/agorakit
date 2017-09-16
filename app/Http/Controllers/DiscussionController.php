@@ -77,7 +77,7 @@ class DiscussionController extends Controller
             $discussion->tag($request->get('tags'));
         }
 
-        flash()->info(trans('messages.ressource_created_successfully'));
+        flash(trans('messages.ressource_created_successfully'))->success();
 
         return redirect()->action('DiscussionController@show', [$group->id, $discussion->id]);
     }
@@ -147,7 +147,7 @@ class DiscussionController extends Controller
             $discussion->retag($request->get('tags'));
         }
 
-        flash()->info(trans('messages.ressource_updated_successfully'));
+        flash(trans('messages.ressource_updated_successfully'))->success();
 
         return redirect()->action('DiscussionController@show', [$discussion->group->id, $discussion->id]);
     }
@@ -175,7 +175,7 @@ class DiscussionController extends Controller
     {
         if (Gate::allows('delete', $discussion)) {
             $discussion->delete();
-            flash()->info(trans('messages.ressource_deleted_successfully'));
+            flash(trans('messages.ressource_deleted_successfully'))->success();
 
             return redirect()->action('DiscussionController@index', [$group]);
         } else {

@@ -31,7 +31,7 @@ class MembershipController extends Controller
             ->with('membership', $membership)
             ->with('interval', 'daily');
         } else {
-            flash()->info(trans('messages.not_allowed'));
+            flash(trans('messages.not_allowed'))->warning();
 
             return redirect()->back();
         }
@@ -59,7 +59,7 @@ class MembershipController extends Controller
 
             return redirect()->action('GroupController@show', [$group->id])->with('message', trans('membership.welcome'));
         } else {
-            flash()->info(trans('messages.not_allowed'));
+            flash(trans('messages.not_allowed'))->warning();
 
             return redirect()->back();
         }

@@ -67,7 +67,7 @@ class UserController extends Controller
                 ->subject('['.env('APP_NAME').'] '.trans('messages.a_message_for_you'));
             });
 
-            flash()->info(trans('messages.message_sent'));
+            flash(trans('messages.message_sent'))->success();
         }
 
         return redirect()->action('UserController@show', $to_user->id);
@@ -124,9 +124,9 @@ class UserController extends Controller
                 // we need to update user address and geocode it
                 $user->address = $request->input('address');
                 if (!$user->geocode()) {
-                    flash()->error(trans('messages.address_cannot_be_geocoded'));
+                    flash(trans('messages.address_cannot_be_geocoded'))->warning();
                 } else {
-                    flash()->info(trans('messages.ressource_geocoded_successfully'));
+                    flash(trans('messages.ressource_geocoded_successfully'));
                 }
             }
 
@@ -166,7 +166,7 @@ class UserController extends Controller
 
             $user->save();
 
-            flash()->info(trans('messages.ressource_updated_successfully'));
+            flash(trans('messages.ressource_updated_successfully'))->success();
 
             return redirect()->action('UserController@show', [$user->id]);
         } else {
@@ -187,7 +187,7 @@ class UserController extends Controller
         if ($user->verified == 0) {
             $mailer = new AppMailer();
             $mailer->sendEmailConfirmationTo($user);
-            flash()->info(trans('messages.invitation_sent_again'));
+            flash(trans('messages.invitation_sent_again'));
 
             return redirect()->action('UserController@show', [$user->id]);
         }

@@ -223,7 +223,7 @@ class FileController extends Controller
                     $file->save();
                 }
 
-                flash()->info(trans('messages.ressource_created_successfully'));
+                flash(trans('messages.ressource_created_successfully'))->success();
                 if (isset($parent)) {
                     return redirect()->action('FileController@show', [$group, $parent]);
                 } else {
@@ -271,11 +271,11 @@ class FileController extends Controller
         }
 
         if ($file->save()) {
-            flash()->info(trans('messages.ressource_updated_successfully'));
+            flash(trans('messages.ressource_updated_successfully'))->success();
 
             return redirect()->action('FileController@index', [$group]);
         } else {
-            flash()->info(trans('messages.ressource_not_updated_successfully'));
+            flash(trans('messages.ressource_not_updated_successfully'))->error();
 
             return redirect()->back();
         }
@@ -304,7 +304,7 @@ class FileController extends Controller
     {
         if (Gate::allows('delete', $file)) {
             $file->delete();
-            flash()->info(trans('messages.ressource_deleted_successfully'));
+            flash(trans('messages.ressource_deleted_successfully'))->success();
 
             return redirect()->action('FileController@index', [$group]);
         } else {
@@ -348,11 +348,11 @@ class FileController extends Controller
                 $file->tag($request->get('tags'));
             }
 
-            flash()->info(trans('messages.ressource_created_successfully'));
+            flash(trans('messages.ressource_created_successfully'))->success();
 
             return redirect()->action('FileController@index', $group);
         } else {
-            flash()->error(trans('messages.ressource_not_created_successfully'));
+            flash(trans('messages.ressource_not_created_successfully'))->error();
 
             return redirect()->back();
         }
