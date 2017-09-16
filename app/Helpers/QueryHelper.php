@@ -92,7 +92,7 @@ class QueryHelper
      */
     public static function getUnreadDiscussionsSince($user_id, $group_id, $since)
     {
-        $discussions = \App\Discussion::hydrateRaw('select * from
+        $discussions = \App\Discussion::fromQuery('select * from
         (
         select *,
         (select read_comments from user_read_discussion where discussion_id = discussions.id and user_id = :user_id) as read_comments
@@ -112,7 +112,7 @@ class QueryHelper
      */
     public static function getNewMembersSince($user_id, $group_id, $since)
     {
-        $users = \App\User::hydrateRaw('select * from users where id in
+        $users = \App\User::fromQuery('select * from users where id in
         (select user_id from membership where group_id = :group_id and created_at > :since and membership >= :membership and user_id <> :user_id)
 
         ', ['user_id' => $user_id, 'group_id' => $group_id, 'since' => $since, 'membership' => \App\Membership::MEMBER]);
