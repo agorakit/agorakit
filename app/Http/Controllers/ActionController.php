@@ -114,7 +114,7 @@ class ActionController extends Controller
             if (!$action->geocode()) {
                 flash(trans('messages.address_cannot_be_geocoded'))->error();
             } else {
-                flash(trans('messages.ressource_geocoded_successfully'))->info();
+                flash(trans('messages.ressource_geocoded_successfully'))->success();
             }
         }
 
@@ -185,7 +185,7 @@ class ActionController extends Controller
             if (!$action->geocode()) {
                 flash(trans('messages.address_cannot_be_geocoded'))->error();
             } else {
-                flash(trans('messages.ressource_geocoded_successfully'))->info();
+                flash(trans('messages.ressource_geocoded_successfully'))->success();
             }
         }
 
