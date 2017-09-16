@@ -109,7 +109,7 @@ class InviteController extends Controller
         // But it's also a kind of spam prevention that it takes time to invite on the server
 
         if ($status_message) {
-            flash()->info($status_message);
+            flash($status_message);
         }
 
         return redirect()->back();
@@ -125,13 +125,13 @@ class InviteController extends Controller
         $invite = \App\Invite::whereToken($token)->first();
 
         if (!$invite) {
-            flash()->error(trans('messages.invite_not_found'));
+            flash(trans('messages.invite_not_found'))->error();
 
             return redirect()->action('GroupController@show', $group->id);
         }
 
         if (isset($invite->claimed_at)) {
-            flash()->error(trans('messages.invite_already_used').' ('.$invite->claimed_at.')');
+            flash(trans('messages.invite_already_used').' ('.$invite->claimed_at.')')->warning();
 
             return redirect()->action('GroupController@show', $group->id);
         }
@@ -149,12 +149,12 @@ class InviteController extends Controller
             // Invitation is now claimed, but not deleted
             $invite->claimed_at = Carbon::now();
 
-            flash()->error(trans('messages.you_are_now_a_member_of_this_group'));
+            flash(trans('messages.you_are_now_a_member_of_this_group'))->success();
 
             return redirect()->action('GroupController@show', $group->id);
         } else { // if user doesn't exists, we have the opportunity to create, login and validate email in one go (since we have the invite token)
             Auth::logout();
-            flash()->info(trans('messages.you_dont_have_an_account_create_one_now'));
+            flash(trans('messages.you_dont_have_an_account_create_one_now'));
 
             return view('invites.register')
             ->with('email', $invite->email)
@@ -196,7 +196,7 @@ class InviteController extends Controller
 
         Auth::login($user);
 
-        flash()->info(trans('messages.you_are_now_a_member_of_this_group'));
+        flash(trans('messages.you_are_now_a_member_of_this_group'))->success();
 
         return redirect()->action('GroupController@show', $group->id);
     }

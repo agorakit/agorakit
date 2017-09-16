@@ -112,9 +112,9 @@ class ActionController extends Controller
         if ($request->get('location')) {
             $action->location = $request->input('location');
             if (!$action->geocode()) {
-                flash()->error(trans('messages.address_cannot_be_geocoded'));
+                flash(trans('messages.address_cannot_be_geocoded'))->error();
             } else {
-                flash()->info(trans('messages.ressource_geocoded_successfully'));
+                flash(trans('messages.ressource_geocoded_successfully')->info();
             }
         }
 
@@ -183,9 +183,9 @@ class ActionController extends Controller
             // we need to update user address and geocode it
             $action->location = $request->input('location');
             if (!$action->geocode()) {
-                flash()->error(trans('messages.address_cannot_be_geocoded'));
+                flash(trans('messages.address_cannot_be_geocoded'))->error();
             } else {
-                flash()->info(trans('messages.ressource_geocoded_successfully'));
+                flash(trans('messages.ressource_geocoded_successfully'))->info();
             }
         }
 
@@ -233,7 +233,7 @@ class ActionController extends Controller
     {
         if (Gate::allows('delete', $action)) {
             $action->delete();
-            flash()->success(trans('messages.ressource_deleted_successfully'));
+            flash(trans('messages.ressource_deleted_successfully'))->success();
 
             return redirect()->action('ActionController@index', [$group->id]);
         } else {

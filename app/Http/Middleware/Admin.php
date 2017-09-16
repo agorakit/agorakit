@@ -38,7 +38,7 @@ class Admin
         if ($request->user()->isAdmin()) {
             return $next($request);
         } else {
-            flash()->error(trans('messages.you_are_not_an_admin'));
+            flash(trans('messages.you_are_not_an_admin'))->error();
 
             return response(trans('messages.you_are_not_an_admin'), 401);
         }

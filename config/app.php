@@ -185,13 +185,12 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Vsch\TranslationManager\ManagerServiceProvider::class,
         Vsch\TranslationManager\TranslationServiceProvider::class,
-        DraperStudio\Flash\ServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         Geocoder\Laravel\Providers\GeocoderService::class,
         Cviebrock\EloquentTaggable\ServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         ConsoleTVs\Charts\ChartsServiceProvider::class,
-        Spatie\Activitylog\ActivitylogServiceProvider::class,
+        Laracasts\Flash\FlashServiceProvider::class,
 
     ],
 

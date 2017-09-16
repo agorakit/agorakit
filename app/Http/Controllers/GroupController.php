@@ -100,9 +100,9 @@ class GroupController extends Controller
         if ($request->get('address')) {
             $group->address = $request->input('address');
             if (!$group->geocode()) {
-                flash()->error(trans('messages.address_cannot_be_geocoded'));
+                flash(trans('messages.address_cannot_be_geocoded'))->warning();
             } else {
-                flash()->info(trans('messages.ressource_geocoded_successfully'));
+                flash(trans('messages.ressource_geocoded_successfully'))->success();
             }
         }
 
@@ -173,9 +173,9 @@ class GroupController extends Controller
             // we need to update user address and geocode it
             $group->address = $request->input('address');
             if (!$group->geocode()) {
-                flash()->error(trans('messages.address_cannot_be_geocoded'));
+                flash(trans('messages.address_cannot_be_geocoded'))->warning();
             } else {
-                flash()->info(trans('messages.ressource_geocoded_successfully'));
+                flash(trans('messages.ressource_geocoded_successfully'))->success();
             }
         }
 
@@ -203,7 +203,7 @@ class GroupController extends Controller
 
         $group->save();
 
-        flash()->info(trans('messages.ressource_updated_successfully'));
+        flash(trans('messages.ressource_updated_successfully'))->success();
 
         return redirect()->action('GroupController@show', [$group->id]);
     }
@@ -230,7 +230,7 @@ class GroupController extends Controller
     {
         if (Gate::allows('delete', $group)) {
             $group->delete();
-            flash()->info(trans('messages.ressource_deleted_successfully'));
+            flash(trans('messages.ressource_deleted_successfully'))->success();
 
             return redirect()->action('DashboardController@index');
         } else {
