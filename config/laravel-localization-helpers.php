@@ -143,7 +143,7 @@ return array(
 	| clean up obsolete lemma manually
 	|
 	*/
-	'obsolete_array_key'  => 'LLH:obsolete' ,
+	'obsolete_array_key'  => '' ,
 
 
 	/*
