@@ -162,11 +162,11 @@
                         {{ strtoupper(app()->getLocale()) }} <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        @foreach(\Config::get('app.locales') as $lang => $locale)
-                            @if($lang !== app()->getLocale())
+                        @foreach(\Config::get('app.locales') as $locale)
+                            @if($locale !== app()->getLocale())
                                 <li>
-                                    <a href="<?= count($_GET) ? '?'.http_build_query(array_merge($_GET, ['force_locale' => $lang])) : '?force_locale='.$lang ?>">
-                                        <?= strtoupper($lang); ?>
+                                    <a href="{{Request::url()}}?force_locale={{$locale}}">
+                                        {{ strtoupper($locale) }}
                                     </a>
                                 </li>
                             @endif
