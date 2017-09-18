@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Mail;
 
 use App\Mail\Notification;
+use App\Mail\UserConfirmation;
 
 class AppMailer
 {
@@ -21,11 +22,8 @@ class AppMailer
      */
     public function sendEmailConfirmationTo(User $user)
     {
-        Mail::send('emails.confirm', ['user' => $user], function ($message) use ($user) {
-            $message->from(env('MAIL_NOREPLY', 'noreply@example.com'), env('APP_NAME', 'Laravel'))
-            ->to($user->email, $user->name)
-            ->subject('['.env('APP_NAME').'] '.trans('messages.confirm_your_email'));
-        });
+        Mail::to($user)->send(new UserConfirmation($user));
+        return true;
     }
 
     public function sendNotificationEmail(Group $group, User $user)
