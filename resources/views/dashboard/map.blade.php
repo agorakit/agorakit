@@ -15,7 +15,7 @@
 @section('content')
 
     <div class="page_header">
-        <h1><a href="{{ action('DashboardController@index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.map') }} (EXPERIMENTAL)</h1>
+        <h1><a href="{{ action('DashboardController@index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.map') }}</h1>
         <p>{{trans('messages.map_info')}}</p>
     </div>
 
