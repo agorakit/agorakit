@@ -8,6 +8,8 @@ use App\User;
 use Carbon\Carbon;
 use Mail;
 
+use App\Mail\Notification;
+
 class AppMailer
 {
     /**
@@ -69,14 +71,21 @@ class AppMailer
             // if we have anything, build the message and send
             // removed that : or count($users) > 0
             // because we don't want to be notified just because there is a new member
-            if (count($discussions) > 0 or count($files) > 0 or (($actions_count) > 0 && count($actions) > 0)) {
-                Mail::send('emails.notification', ['user' => $user, 'group' => $group, 'membership' => $membership, 'discussions' => $discussions,
-                'files'                                   => $files, 'users' => $users, 'actions' => $actions, 'last_notification' => $last_notification, ], function ($message) use ($user, $group) {
-                    $message->from(env('MAIL_NOREPLY', 'noreply@example.com'), env('APP_NAME', 'Laravel'))
-                    ->to($user->email)
-                    ->subject('['.env('APP_NAME').'] '.trans('messages.news_from_group_email_subject').' "'.$group->name.'"');
-                });
+            if (count($discussions) > 0 or count($files) > 0 or (($actions_count) > 0 && count($actions) > 0))
+            {
+                $notification = new Notification;
 
+                $notification->user = $user;
+                $notification->group = $group;
+                $notification->membership = $membership;
+                $notification->discussions = $discussions;
+
+                $notification->files = $files;
+                $notification->users = $users;
+                $notification->actions = $actions;
+                $notification->last_notification = $last_notification;
+
+                Mail::to($user)->send($notification);
                 return true;
             }
 

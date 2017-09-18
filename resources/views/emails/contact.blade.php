@@ -3,7 +3,7 @@
 <strong>{{trans('messages.hello')}} {{$to_user->name}},</strong>
 
 <p>
-  <a href="{{action('UserController@show', $from_user)}}">{{$from_user->name}}</a> {{trans('messages.sent_you_a_message')}} :
+<a href="{{action('UserController@show', $from_user)}}">{{$from_user->name}}</a> {{trans('messages.sent_you_a_message')}} :
 </p>
 
 <p>
