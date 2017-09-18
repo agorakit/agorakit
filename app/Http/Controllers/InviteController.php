@@ -8,6 +8,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Mail;
 
+use App\Mail\InviteUser;
+
 class InviteController extends Controller
 {
     public function __construct()
@@ -15,15 +17,16 @@ class InviteController extends Controller
         $this->middleware('member', ['only' => ['invite', 'sendInvites']]);
         $this->middleware('verified', ['only' => ['invite', 'sendInvites']]);
         $this->middleware('public', ['only' => ['invite', 'sendInvites']]);
+        $this->middleware('throttle:2,1', ['only' => ['sendInvites']]); // 2 emails per  minute should be enough for non bots
     }
 
     /**
-     * Shows an invitation form for the specific group.
-     *
-     * @param [type] $group_id [description]
-     *
-     * @return [type] [description]
-     */
+    * Shows an invitation form for the specific group.
+    *
+    * @param [type] $group_id [description]
+    *
+    * @return [type] [description]
+    */
     public function invite(Request $request, Group $group)
     {
         return view('invites.form')
@@ -32,12 +35,12 @@ class InviteController extends Controller
     }
 
     /**
-     * Send invites to new members by email.
-     *
-     * @param int $group_id [description]
-     *
-     * @return [type] [description]
-     */
+    * Send invites to new members by email.
+    *
+    * @param int $group_id [description]
+    *
+    * @return [type] [description]
+    */
     public function sendInvites(Request $request, Group $group)
     {
         $status_message = null;
@@ -87,22 +90,18 @@ class InviteController extends Controller
                 $status_message .= trans('membership.user_already_invited').' : '.$email.'<br/>';
             } else {
                 // - create an invite token and store in invite table
-                $invite = new \App\Invite();
+                $invite = new \App\Invite;
                 $invite->generateToken();
                 $invite->email = $email;
+                $invite->group()->associate($group);
+                $invite->user()->associate(Auth::user());
 
-                $invite->group_id = $group->id;
-                $invite->user_id = $request->user()->id;
-                $invite->save();
-
-                // - send invitation email
-                Mail::send('emails.invite', ['invite' => $invite, 'group' => $group, 'invitating_user' => $request->user()], function ($message) use ($email, $request, $group) {
-                    $message->from(env('MAIL_FROM', 'noreply@example.com'), env('APP_NAME', 'Laravel'))
-                    ->to($email)
-                    ->subject('['.env('APP_NAME').'] '.trans('messages.invitation_to_join').' "'.$group->name.'"');
-                });
-
-                $status_message .= trans('membership.users_has_been_invited').' : '.$email.'<br/>';
+                if ($invite->save())
+                {
+                    // - send invitation email
+                    Mail::to($email)->send(new InviteUser($invite));
+                    $status_message .= trans('membership.users_has_been_invited').' : '.$email.'<br/>';
+                }
             }
         }
         // NICETOHAVE We could queue or wathever if more than 50 mails for instance.
@@ -116,10 +115,10 @@ class InviteController extends Controller
     }
 
     /**
-     * Whenever a user wants to confirm an invite he received from an email link
-     * - if user exists we directly subscribe him/her to the group
-     * - if not we show an account creation screen.
-     */
+    * Whenever a user wants to confirm an invite he received from an email link
+    * - if user exists we directly subscribe him/her to the group
+    * - if not we show an account creation screen.
+    */
     public function inviteConfirm(Request $request, Group $group, $token)
     {
         $invite = \App\Invite::whereToken($token)->first();
@@ -164,8 +163,8 @@ class InviteController extends Controller
     }
 
     /**
-     * Process the account creation from the form of inviteConfirm().
-     */
+    * Process the account creation from the form of inviteConfirm().
+    */
     public function inviteRegister(Request $request, Group $group, $token)
     {
         $this->validate($request, [

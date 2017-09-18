@@ -15,11 +15,11 @@ class Invite extends Model
     protected $dates = ['deleted_at'];
 
     protected $rules = [
-  'token'    => 'required',
-  'email'    => 'required|email',
-  'user_id'  => 'required|exists:users,id',
-  'group_id' => 'required|exists:groups,id',
-];
+        'token'    => 'required',
+        'email'    => 'required|email',
+        'user_id'  => 'required|exists:users,id',
+        'group_id' => 'required|exists:groups,id',
+    ];
 
     public function generatetoken()
     {
@@ -28,11 +28,11 @@ class Invite extends Model
 
     public function user()
     {
-        $this->belongsTo('\App\User');
+        return $this->belongsTo('\App\User');
     }
 
     public function group()
     {
-        $this->belongsTo('\App\Group');
+        return $this->belongsTo('\App\Group');
     }
 }
