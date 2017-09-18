@@ -1,6 +1,6 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2017/09/18 11:42:25
+ Generated via "php artisan localization:missing" at 2017/09/18 18:35:15 
 *************************************************************************/
 
 return array (
@@ -192,7 +192,7 @@ return array (
   'your_groups' => 'Mijn groepen',
   'your_search_for' => 'Zoeken',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' =>
+  'LLH:obsolete' => 
   array (
     'a_message_for_you' => 'U heeft een bericht',
     'admin-back' => 'Terug',

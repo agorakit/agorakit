@@ -1,6 +1,6 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2017/09/18 11:42:25 
+ Generated via "php artisan localization:missing" at 2017/09/18 18:34:27
 *************************************************************************/
 
 return array (
@@ -18,9 +18,7 @@ return array (
   'name' => 'Nom du groupe',
   'open' => 'Groupe public',
   'type' => 'Type de groupe',
-  //================================== Obsolete strings ==================================//
-  'LLH:obsolete' => 
-  array (
+
     'about_this_group' => 'À propos de ce groupe',
     'create' => 'Créer',
     'create_a_group_intro' => 'Créez un nouveau groupe très facilement. Prenez soin de vous demander si d\'autres voudront participer avant de créer un groupe.',
@@ -33,5 +31,5 @@ return array (
     'public' => 'Groupe public',
     'visit' => 'Visiter',
     'your_group_here' => 'Votre groupe ici ?',
-  ),
+
 );
