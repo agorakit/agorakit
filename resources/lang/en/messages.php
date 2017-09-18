@@ -1,6 +1,6 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2017/09/18 18:35:15 
+ Generated via "php artisan localization:missing" at 2017/09/18 18:35:15
 *************************************************************************/
 
 return array (
@@ -74,7 +74,7 @@ Enter a correct URL starting with http:// and set a title for this link. You can
   'how_does_it_work' => 'How does it work?',
   'i_changed_my_mind' => 'I changed my mind, I don\'t want to leave this group',
   'if_you_already_have_account' => 'If you already have an account',
-  'if_you_didnt_ask' => 'If you didnt ask',
+  'if_you_didnt_ask' => 'If you didnt ask to join',
   'if_you_dont_have_account' => 'If you don\'t have an account (yet!)',
   'if_you_dont_want_news_anymore' => 'If you don\'t want news anymore',
   'if_you_dont_want_to_change_password_do_nothing' => 'If you don\'t want to change your password, do nothing',
