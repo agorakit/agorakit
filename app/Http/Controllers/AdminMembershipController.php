@@ -51,7 +51,7 @@ class AdminMembershipController extends Controller
                 $membership->notified_at = Carbon::now();
                 $membership->save();
 
-                flash(trans('messages.user_added_successfuly').' : '.$user->name))->success();
+                flash(trans('messages.user_added_successfuly').' : '.$user->name)->success();
             }
         }
 
@@ -67,7 +67,7 @@ class AdminMembershipController extends Controller
         $this->authorize('edit-membership', $group);
         $membership = \App\Membership::where(['user_id' => $user->id, 'group_id' => $group->id])->firstOrFail();
         $membership->delete();
-        flash(trans('messages.user_removed_successfuly').' : '.$user->name))->success();
+        flash(trans('messages.user_removed_successfuly').' : '.$user->name)->success();
 
         return redirect()->action('UserController@index', $group);
     }
@@ -92,7 +92,7 @@ class AdminMembershipController extends Controller
         $membership = \App\Membership::where(['user_id' => $user->id, 'group_id' => $group->id])->firstOrFail();
         $membership->membership = \App\Membership::ADMIN;
         $membership->save();
-        flash(trans('messages.user_made_admin_successfuly').' : '.$user->name))->success();
+        flash(trans('messages.user_made_admin_successfuly').' : '.$user->name)->success();
 
         return redirect()->action('UserController@index', $group);
     }
@@ -107,7 +107,7 @@ class AdminMembershipController extends Controller
         $membership = \App\Membership::where(['user_id' => $user->id, 'group_id' => $group->id])->firstOrFail();
         $membership->membership = \App\Membership::MEMBER;
         $membership->save();
-        flash(trans('messages.user_made_member_successfuly').' : '.$user->name))->success();
+        flash(trans('messages.user_made_member_successfuly').' : '.$user->name)->success();
 
         return redirect()->action('UserController@index', $group);
     }
