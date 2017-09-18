@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Config;
 use Session;
+use App;
 
 class RedirectLang
 {
@@ -37,7 +38,7 @@ class RedirectLang
         * If User has never been logged => it will be redirected to his local url
         */
         if (!$request->cookie('locale') && !$isBot) {
-            $locale = \App::getLocale();
+            $locale = App::getLocale();
 
             // if local doesn't match the current user local => we redirect
             $preferedLocale = $request->getPreferredLanguage($this->locales);
@@ -53,12 +54,12 @@ class RedirectLang
 
         if ($request->has('force_locale')) {
             Session::put('locale', $request->get('force_locale'));
-            \App::setLocale(Session::get('locale', env('APP_DEFAULT_LOCALE', 'en')));
+            App::setLocale(Session::get('locale', env('APP_DEFAULT_LOCALE', 'en')));
 
             return $next($request)->withCookie(cookie()->forever('locale', Session::get('locale')));
         }
 
-        \App::setLocale(Session::get('locale', env('APP_DEFAULT_LOCALE', 'en')));
+        App::setLocale(Session::get('locale', env('APP_DEFAULT_LOCALE', 'en')));
 
         return $next($request);
     }
