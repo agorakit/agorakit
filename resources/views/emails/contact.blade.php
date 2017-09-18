@@ -1,22 +1,19 @@
-@extends('emails.template')
+@component('mail::message')
 
-@section('content')
-
-
-
-
-<strong>{{trans('messages.hello')}}, {{$to_user->name}} </strong>
+<strong>{{trans('messages.hello')}} {{$to_user->name}},</strong>
 
 <p>
-  {{$from_user->name}} {{trans('messages.sent_you_a_message')}} :
+  <a href="{{action('UserController@show', $from_user)}}">{{$from_user->name}}</a> {{trans('messages.sent_you_a_message')}} :
 </p>
 
 <p>
-{{ $body }}
+{!! nl2br(e($body)) !!}
 </p>
 
+@component('mail::button', ['url' => action('UserController@contact', $from_user)])
+{{trans('messages.reply')}}
+@endcomponent
+<small>{{trans('messages.you_can_also_reply')}}</small>
 
 
-
-
-@endsection
+@endcomponent
