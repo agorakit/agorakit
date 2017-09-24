@@ -190,6 +190,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         ConsoleTVs\Charts\ChartsServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
+        Laravel\Tinker\TinkerServiceProvider::class,
 
     ],
 
