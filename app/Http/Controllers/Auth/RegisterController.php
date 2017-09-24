@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Mailers\AppMailer;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -102,7 +104,7 @@ class RegisterController extends Controller
         }
         flash(trans('messages.you_have_verified_your_email'))->success();
 
-        // add user to the group (s)he has been invited to before registering //TODO : good idea ?
+        // add user to the group (s)he has been invited to before registering
         $invites = \App\Invite::where('email', '=', $user->email)->get();
         if ($invites) {
             foreach ($invites as $invite) {
@@ -112,7 +114,7 @@ class RegisterController extends Controller
             }
         }
 
-        return redirect('/');
+        //return redirect('/');
 
     }
 }
