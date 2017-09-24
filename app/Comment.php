@@ -6,12 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
+use App\Traits\LogsActivity;
 
 class Comment extends Model
 {
     use RevisionableTrait;
     use ValidatingTrait;
     use SoftDeletes;
+    use LogsActivity;
 
     protected $rules = [
         'body'    => 'required|min:5',

@@ -7,12 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
+use App\Traits\LogsActivity;
 
 class Action extends Model
 {
     use ValidatingTrait;
     use RevisionableTrait;
     use SoftDeletes;
+    use LogsActivity;
 
     protected $fillable = ['id']; // neede for actions import
 

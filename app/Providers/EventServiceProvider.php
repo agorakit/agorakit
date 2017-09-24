@@ -27,16 +27,5 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
-
-        // TODO : this should be somewhere else
-        \App\Discussion::created(function ($discussion) {
-            $activity = new \App\Activity;
-            $activity->action = 'created';
-            $activity->user()->associate(Auth::user());
-            $activity->model()->associate($discussion);
-            $activity->group()->associate($discussion->group);
-            $activity->saveOrFail();
-        });
-
     }
 }
