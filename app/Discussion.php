@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
+use App\Traits\LogsActivity;
 
 class Discussion extends Model
 {
@@ -16,6 +17,7 @@ class Discussion extends Model
     use SoftDeletes;
     use CascadeSoftDeletes;
     use Taggable;
+    use LogsActivity;
 
     protected $cascadeDeletes = ['comments'];
 
