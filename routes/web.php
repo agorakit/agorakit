@@ -51,6 +51,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('users', 'DashboardController@users');
     Route::get('files', 'DashboardController@files');
     Route::get('map', 'DashboardController@map');
+    Route::get('activities', 'DashboardController@activities');
 
     Route::get('agenda', 'DashboardController@agenda');
     Route::get('agenda/json', 'DashboardController@agendaJson');
