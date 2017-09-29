@@ -250,6 +250,7 @@ return [
         'Geocoder'  => Toin0u\Geocoder\Facade\Geocoder::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Charts'    => ConsoleTVs\Charts\Facades\Charts::class,
+        
 
     ],
 
