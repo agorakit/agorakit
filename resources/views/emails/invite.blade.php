@@ -4,7 +4,7 @@
 
 <p>
 <a href="{{action('UserController@show', $invite->user)}}">{{$invite->user->name}}</a> {{trans('messages.thinks_that_you_might_want_to_join')}} "<a href="{{action('GroupController@show',  [$invite->group] )}}">{{$invite->group->name}}</a>"
-{{trans('messages.inside')}} <a href="{{action('DashboardController@index')}}">{{env('APP_NAME')}}</a>
+{{trans('messages.inside')}} <a href="{{action('DashboardController@index')}}">{{config('app.name')}}</a>
 </p>
 
 <p>

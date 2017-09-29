@@ -32,7 +32,7 @@ class UserConfirmation extends Mailable
     public function build()
     {
         return $this->markdown('emails.confirm')
-        ->subject('['.env('APP_NAME').'] '.trans('messages.confirm_your_email'))
-        ->from(env('MAIL_NOREPLY', 'noreply@example.com'), env('APP_NAME', 'Agorakit'));
+        ->subject('['.config('app.name').'] '.trans('messages.confirm_your_email'))
+        ->from(config('mail.from.address'), config('mail.from.name'));
     }
 }

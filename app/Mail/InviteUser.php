@@ -35,7 +35,7 @@ class InviteUser extends Mailable
     public function build()
     {
         return $this->markdown('emails.invite')
-        ->from(env('MAIL_FROM', 'noreply@example.com'), env('APP_NAME', 'Laravel'))
-        ->subject('['.env('APP_NAME').'] '.trans('messages.invitation_to_join').' "'.$this->invite->group->name .'"');
+        ->from(config('mail.from.address'), config('mail.from.name'))
+        ->subject('['.config('app.name').'] '.trans('messages.invitation_to_join').' "'.$this->invite->group->name .'"');
     }
 }

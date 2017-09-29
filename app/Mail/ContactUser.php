@@ -37,7 +37,7 @@ class ContactUser extends Mailable
     public function build()
     {
         return $this->markdown('emails.contact')
-        ->subject('['.env('APP_NAME').'] '.trans('messages.a_message_for_you'))
+        ->subject('['.config('app.name').'] '.trans('messages.a_message_for_you'))
         ->from($this->from_user);
     }
 }
