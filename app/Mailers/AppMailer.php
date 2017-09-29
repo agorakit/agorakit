@@ -28,7 +28,7 @@ class AppMailer
 
     public function sendNotificationEmail(Group $group, User $user)
     {
-        \App::setLocale(env('APP_DEFAULT_LOCALE', 'en'));
+        \App::setLocale(config('app.locale'));
 
         if ($user->verified == 1) {
             // Establish timestamp for notifications from membership data (when was an email sent for the last time?)

@@ -54,12 +54,12 @@ class RedirectLang
 
         if ($request->has('force_locale')) {
             Session::put('locale', $request->get('force_locale'));
-            App::setLocale(Session::get('locale', env('APP_DEFAULT_LOCALE', 'en')));
+            App::setLocale(Session::get('locale', config('app.locale')));
 
             return $next($request)->withCookie(cookie()->forever('locale', Session::get('locale')));
         }
 
-        App::setLocale(Session::get('locale', env('APP_DEFAULT_LOCALE', 'en')));
+        App::setLocale(Session::get('locale', config('app.locale')));
 
         return $next($request);
     }
