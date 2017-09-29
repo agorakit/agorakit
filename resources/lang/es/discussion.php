@@ -5,10 +5,10 @@
 
 return array (
   //==================================== Translations ====================================//
-  'create_one_button' => 'Start a new one',
+  'create_one_button' => 'Empezar uno nuevo',
   //================================== Obsolete strings ==================================//
   'LLH:obsolete' => 
   array (
-    'all_in_this_group' => 'All discussionns in this group',
+    'all_in_this_group' => 'Todas las discusiones en este grupo',
   ),
 );
