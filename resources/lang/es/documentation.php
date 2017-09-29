@@ -5,10 +5,10 @@
 
 return array (
   //==================================== Translations ====================================//
-  'intro' => 'Intro',
+  'intro' => 'Introducción',
   //================================== Obsolete strings ==================================//
   'LLH:obsolete' => 
   array (
-    'my_groups' => 'My groups',
+    'my_groups' => 'Mis grupos',
   ),
 );
