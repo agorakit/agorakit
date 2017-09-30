@@ -15,7 +15,7 @@ trait LogsActivity
             $activity->user()->associate(Auth::user());
             $activity->model()->associate($model);
             $activity->group()->associate($model->group);
-            $activity->save();
+            $activity->saveORFail();
 
         });
 
@@ -25,7 +25,7 @@ trait LogsActivity
             $activity->user()->associate(Auth::user());
             $activity->model()->associate($model);
             $activity->group()->associate($model->group);
-            $activity->save();
+            $activity->saveORFail();
         });
 
         static::deleted(function ($model) {
@@ -34,7 +34,7 @@ trait LogsActivity
             $activity->user()->associate(Auth::user());
             $activity->model()->associate($model);
             $activity->group()->associate($model->group);
-            $activity->save();
+            $activity->saveORFail();
         });
     }
 }

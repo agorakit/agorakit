@@ -68,7 +68,7 @@ class DashboardController extends Controller
 
     public function activities()
     {
-        $activities = \App\Activity::with('user', 'group', 'model')->orderBy('created_at', 'asc')->paginate(10);
+        $activities = \App\Activity::with('user', 'group', 'model')->orderBy('created_at', 'desc')->paginate(50);
 
         return view('dashboard.activities')
         ->with('tab', 'homepage')
