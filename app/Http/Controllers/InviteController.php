@@ -16,7 +16,6 @@ class InviteController extends Controller
     {
         $this->middleware('member', ['only' => ['invite', 'sendInvites']]);
         $this->middleware('verified', ['only' => ['invite', 'sendInvites']]);
-        $this->middleware('public', ['only' => ['invite', 'sendInvites']]);
         $this->middleware('throttle:2,1', ['only' => ['sendInvites']]); // 2 emails per  minute should be enough for non bots
     }
 

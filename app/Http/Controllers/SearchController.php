@@ -9,7 +9,7 @@ class SearchController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['only' => ['users', 'files']]);
+        $this->middleware('verified', ['only' => ['index']]);
     }
 
     public function index(Request $request)

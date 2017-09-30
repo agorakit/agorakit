@@ -12,7 +12,7 @@ class MembershipController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['only' => ['join', 'joinForm', 'leave', 'leaveForm', 'settings', 'settingsForm']]);
+        $this->middleware('verified', ['only' => ['join', 'joinForm', 'leave', 'leaveForm', 'preferences', 'preferencesForm']]);
         $this->middleware('public', ['only' => ['joinForm', 'join']]);
     }
 

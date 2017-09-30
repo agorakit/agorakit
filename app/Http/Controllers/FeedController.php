@@ -19,7 +19,11 @@ class FeedController extends Controller
         ->ttl(60)
         ->appendTo($feed);
 
-        $discussions = \App\Discussion::with('group')->with('user')->orderBy('created_at', 'desc')->take(20)->get();
+        $discussions = \App\Discussion::with('group')
+        ->with('user')
+        ->orderBy('created_at', 'desc')
+        ->whereIn('group_id', \App\Group::publicgroups()->get()->pluck('id'))
+        ->take(20)->get();
 
         foreach ($discussions as $discussion) {
             $item = new \Suin\RSSWriter\Item();
@@ -49,7 +53,10 @@ class FeedController extends Controller
         ->ttl(60)
         ->appendTo($feed);
 
-        $actions = \App\Action::with('group')->with('user')->orderBy('start', 'desc')->take(20)->get();
+        $actions = \App\Action::with('group')
+        ->with('user')
+        ->whereIn('group_id', \App\Group::publicgroups()->get()->pluck('id'))
+        ->orderBy('start', 'desc')->take(20)->get();
 
         foreach ($actions as $action) {
             $item = new \Suin\RSSWriter\Item();
