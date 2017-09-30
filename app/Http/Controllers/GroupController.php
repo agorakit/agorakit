@@ -16,7 +16,7 @@ class GroupController extends Controller
     public function __construct()
     {
         $this->middleware('verified', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
-        $this->middleware('member', ['only' => ['edit', 'update', 'destroy']]);
+        $this->middleware('groupadmin', ['only' => ['edit', 'update', 'destroy']]);
         $this->middleware('cache', ['only' => ['cover']]);
     }
 

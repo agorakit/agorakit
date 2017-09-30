@@ -18,10 +18,10 @@ class CommentController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Display a listing of the resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function index()
     {
         //
@@ -35,126 +35,112 @@ class CommentController extends Controller
 
         if ($comment->isInvalid()) {
             return redirect()->back()
-      ->withErrors($comment->getErrors())
-      ->withInput();
+            ->withErrors($comment->getErrors())
+            ->withInput();
         }
 
         $discussion->comments()->save($comment);
         ++$discussion->total_comments;
         $discussion->save();
-        $group = $discussion->group;
 
-        return redirect()->action('DiscussionController@show', [$group->id, $discussion->id]);
+        return redirect()->action('DiscussionController@show', [$discussion->group, $discussion]);
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Show the form for editing the specified resource.
+    *
+    * @param int $id
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function edit(Request $request, Group $group, Discussion $discussion, Comment $comment)
     {
         if (Gate::allows('update', $comment)) {
             return view('comments.edit')
-      ->with('discussion', $discussion)
-      ->with('group', $group)
-      ->with('comment', $comment)
-      ->with('tab', 'discussion');
+            ->with('discussion', $discussion)
+            ->with('group', $group)
+            ->with('comment', $comment)
+            ->with('tab', 'discussion');
         } else {
             abort(403);
         }
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int                      $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $group_id, $discussion_id, $comment_id)
+    * Update the specified resource in storage.
+    *
+    * @param \Illuminate\Http\Request $request
+    * @param int                      $id
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function update(Request $request, Group $group, Discussion $discussion, Comment $comment)
     {
-        $comment = \App\Comment::findOrFail($comment_id);
-        $discussion = \App\Discussion::findOrFail($discussion_id);
-
         if (Gate::allows('update', $comment)) {
             $comment->body = $request->input('body');
 
             if ($comment->isInvalid()) {
                 return redirect()->back()
-        ->withErrors($comment->getErrors())
-        ->withInput();
+                ->withErrors($comment->getErrors())
+                ->withInput();
             }
             $comment->save();
             flash(trans('messages.ressource_updated_successfully'))->success();
 
-            return redirect()->action('DiscussionController@show', [$discussion->group->id, $discussion->id]);
+            return redirect()->action('DiscussionController@show', [$discussion->group, $discussion]);
         } else {
             abort(403);
         }
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function destroyConfirm(Request $request, $group_id, $discussion_id, $comment_id)
+    * Remove the specified resource from storage.
+    *
+    * @param int $id
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function destroyConfirm(Request $request, Group $group, Discussion $discussion, Comment $comment)
     {
-        $comment = \App\Comment::findOrFail($comment_id);
-        $group = \App\Group::findOrFail($group_id);
-        $discussion = \App\Discussion::findOrFail($discussion_id);
-
         if (Gate::allows('delete', $comment)) {
             return view('comments.delete')
-      ->with('discussion', $discussion)
-      ->with('group', $group)
-      ->with('comment', $comment)
-      ->with('tab', 'discussion');
+            ->with('discussion', $discussion)
+            ->with('group', $group)
+            ->with('comment', $comment)
+            ->with('tab', 'discussion');
         } else {
             abort(403);
         }
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Request $request, $group_id, $discussion_id, $comment_id)
+    * Remove the specified resource from storage.
+    *
+    * @param int $id
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function destroy(Request $request, Group $group, Discussion $discussion, Comment $comment)
     {
-        $comment = \App\Comment::findOrFail($comment_id);
-
         if (Gate::allows('delete', $comment)) {
             $comment->delete();
             flash(trans('messages.ressource_deleted_successfully'))->success();
 
-            return redirect()->action('DiscussionController@show', [$group_id, $discussion_id]);
+            return redirect()->action('DiscussionController@show', [$group, $discussion]);
         } else {
             abort(403);
         }
     }
 
     /**
-     * Show the revision history of the comment.
-     */
-    public function history($group_id, $discussion_id, $comment_id)
+    * Show the revision history of the comment.
+    */
+    public function history(Request $request, Group $group, Discussion $discussion, Comment $comment)
     {
-        $comment = \App\Comment::findOrFail($comment_id);
-        $discussion = $comment->discussion;
-        $group = $discussion->group;
-
         return view('comments.history')
-    ->with('group', $group)
-    ->with('discussion', $discussion)
-    ->with('comment', $comment)
-    ->with('tab', 'discussion');
+        ->with('group', $group)
+        ->with('discussion', $discussion)
+        ->with('comment', $comment)
+        ->with('tab', 'discussion');
     }
 }

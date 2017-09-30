@@ -8,9 +8,16 @@ use Charts;
 
 class InsightsController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('member', ['only' => ['forGroup']]);
+        $this->middleware('admin', ['only' => ['forAllGroup']]);
+    }
+
+
     public function forGroup(Group $group)
     {
-
         // This is really a tribute to laravel efficiency and to the marvelous https://github.com/ConsoleTVs/Charts package
 
         $charts[] = Charts::create('bar', 'highcharts')
