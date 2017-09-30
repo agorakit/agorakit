@@ -21,7 +21,7 @@ class Activity extends Model
     */
     public function model()
     {
-        return $this->morphTo();
+        return $this->morphTo()->withTrashed();
     }
 
     public function user()
@@ -31,7 +31,7 @@ class Activity extends Model
 
     public function group()
     {
-        return $this->belongsTo('App\Group');
+        return $this->belongsTo('App\Group')->withTrashed();
     }
 
 
