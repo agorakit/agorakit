@@ -138,6 +138,8 @@ class UserTest extends BrowserKitTestCase
 
         $user = App\User::where('email', 'newbie@example.com')->first();
 
+        $user->confirmEmail();
+
         $this->actingAs($user)
         ->visit('/groups/'.$group->id.'/join')
         ->see('Join the group')
@@ -150,7 +152,7 @@ class UserTest extends BrowserKitTestCase
         $group = App\Group::where('name', 'Private test group')->first();
 
         $user = App\User::where('email', 'newbie@example.com')->first();
-        $user->confirmEmail();
+
 
         $this->actingAs($user)
         ->visit('/groups/'.$group->id.'/join')
