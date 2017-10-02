@@ -14,12 +14,12 @@ use App\Mail\UserConfirmation;
 class AppMailer
 {
     /**
-     * Deliver the email confirmation.
-     *
-     * @param User $user
-     *
-     * @return void
-     */
+    * Deliver the email confirmation.
+    *
+    * @param User $user
+    *
+    * @return void
+    */
     public function sendEmailConfirmationTo(User $user)
     {
         Mail::to($user)->send(new UserConfirmation($user));
@@ -66,10 +66,13 @@ class AppMailer
             $membership->notified_at = Carbon::now();
             $membership->save();
 
+
             // if we have anything, build the message and send
             // removed that : or count($users) > 0
             // because we don't want to be notified just because there is a new member
-            if (count($discussions) > 0 or count($files) > 0 or (($actions_count) > 0 && count($actions) > 0))
+
+
+            if (count($discussions) > 0 or count($files) > 0 or ($actions_count > 0 ))
             {
                 $notification = new Notification;
 
@@ -83,9 +86,12 @@ class AppMailer
                 $notification->actions = $actions;
                 $notification->last_notification = $last_notification;
 
+
                 Mail::to($user)->send($notification);
                 return true;
+
             }
+
 
             return false;
         }
