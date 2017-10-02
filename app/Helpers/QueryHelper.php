@@ -15,20 +15,6 @@ use DB;
  */
 class QueryHelper
 {
-    /**
-     * Returns a list of groups the current user is subscribed to. This one is run on every page.
-     */
-    /*
-    public static function getUserGroups()
-    {
-        $groups = \App\Group::hydrateRaw('
-        select * from groups where groups.id in
-        (select group_id from membership where user_id = ? and membership.membership = ?) order by name
-        ', [Auth::user()->id, \App\Membership::MEMBER] );
-
-        return $groups;
-    }
-    */ // TODO candidate for destruction, is replaced by the much cleaner Auth::user()->groups()->get()
 
     /**
      * Returns the number of unread discussions the current user has. Is run on every page !
