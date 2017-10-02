@@ -55,12 +55,6 @@
 @endif
 
 
-
-
-
-
-
-
 @if ($users->count() > 0)
 <h2>{{trans('messages.latest_users')}}</h2>
 @foreach($users as $user)
@@ -68,6 +62,7 @@
 <br/>
 @endforeach
 @endif
+
 
 @if ($files->count() > 0)
 <h2>{{trans('messages.latest_files')}}</h2>
@@ -83,7 +78,7 @@
 <p style="margin-top: 5em; font-size: 0.8em">
 {{trans('messages.you_receive_this_email_from_the_group')}} "{{$group->name}}", {{trans('messages.because_you_asked_for_it')}}.
 <br/>
-{{trans('messages.if_you_dont_want_news_anymore')}}, <a href="{{action('MembershipController@preferences', $group->id)}}">{{trans('messages.click_here')}}</a>.
+{{trans('messages.if_you_dont_want_news_anymore')}}, <a href="{{action('MembershipController@preferencesForm', $group->id)}}">{{trans('messages.click_here')}}</a>.
 </p>
 
 

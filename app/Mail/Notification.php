@@ -41,8 +41,6 @@ class Notification extends Mailable
 
         return $this->markdown('emails.notification')
         ->subject('['.config('app.name').'] '.trans('messages.news_from_group_email_subject').' "'.$this->group->name.'"')
-        ->from(config('mail.from.email'), config('mail.from.email'));
-
-        return $this->view('view.name');
+        ->from(config('mail.from.address'), config('mail.from.name'));
     }
 }
