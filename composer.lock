@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "26824bab1f536c5434f34444f61ac5bc",
+    "content-hash": "c77b2edfb5a273cde481a939cf455ad9",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -970,66 +970,6 @@
                 }
             ],
             "time": "2015-04-20T18:58:01+00:00"
-        },
-        {
-            "name": "jameslkingsley/laravel-mentions",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jameslkingsley/laravel-mentions.git",
-                "reference": "503480835b23a7a5340b33e1517880361333a49b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jameslkingsley/laravel-mentions/zipball/503480835b23a7a5340b33e1517880361333a49b",
-                "reference": "503480835b23a7a5340b33e1517880361333a49b",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/database": "~5.4.0",
-                "illuminate/http": "~5.4.0",
-                "illuminate/routing": "~5.4.0",
-                "illuminate/support": "~5.4.0",
-                "php": "^7.0"
-            },
-            "require-dev": {
-                "fzaninotto/faker": "~1.4",
-                "mockery/mockery": "0.9.*",
-                "orchestra/testbench": "~3.0",
-                "phpunit/phpunit": "~5.7"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Kingsley\\Mentions\\MentionServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Kingsley\\Mentions\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "James Kingsley",
-                    "email": "jameslkingsley@outlook.com",
-                    "homepage": "https://github.com/jameslkingsley",
-                    "role": "Developer"
-                }
-            ],
-            "description": "End-to-end mentions in Laravel 5.",
-            "homepage": "https://github.com/jameslkingsley/laravel-mentions",
-            "keywords": [
-                "laravel",
-                "mentions"
-            ],
-            "time": "2017-06-20T18:05:51+00:00"
         },
         {
             "name": "jenssegers/date",
@@ -2029,16 +1969,16 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v2.0.10",
+            "version": "v2.0.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "634bae8e911eefa89c1abfbf1b66da679ac8f54d"
+                "reference": "5da4d3c796c275c55f057af5a643ae297d96b4d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/634bae8e911eefa89c1abfbf1b66da679ac8f54d",
-                "reference": "634bae8e911eefa89c1abfbf1b66da679ac8f54d",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/5da4d3c796c275c55f057af5a643ae297d96b4d8",
+                "reference": "5da4d3c796c275c55f057af5a643ae297d96b4d8",
                 "shasum": ""
             },
             "require": {
@@ -2073,7 +2013,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2017-03-13T16:27:32+00:00"
+            "time": "2017-09-27T21:40:39+00:00"
         },
         {
             "name": "potsky/laravel-localization-helpers",
@@ -2123,16 +2063,16 @@
         },
         {
             "name": "potsky/microsoft-translator-php-sdk",
-            "version": "v0.0.2",
+            "version": "v0.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/potsky/microsoft-translator-php-sdk.git",
-                "reference": "4d409498f4704ebf613062aa5a1d802c61f158c6"
+                "reference": "a8bdfd53a246965bb2958da3257502a4a68a33fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/potsky/microsoft-translator-php-sdk/zipball/4d409498f4704ebf613062aa5a1d802c61f158c6",
-                "reference": "4d409498f4704ebf613062aa5a1d802c61f158c6",
+                "url": "https://api.github.com/repos/potsky/microsoft-translator-php-sdk/zipball/a8bdfd53a246965bb2958da3257502a4a68a33fe",
+                "reference": "a8bdfd53a246965bb2958da3257502a4a68a33fe",
                 "shasum": ""
             },
             "require": {
@@ -2140,7 +2080,7 @@
             },
             "require-dev": {
                 "mockery/mockery": "^0.9",
-                "phpunit/phpunit": "^4.0|^5.0",
+                "phpunit/phpunit": "^5.0",
                 "satooshi/php-coveralls": "dev-master"
             },
             "type": "library",
@@ -2162,13 +2102,13 @@
             "description": "PHP SDK for Microsoft Translator",
             "homepage": "https://github.com/potsky/microsoft-translator-php-sdk",
             "keywords": [
-                "bing",
+                "azure",
                 "microsoft",
                 "php",
                 "sdk",
                 "translation"
             ],
-            "time": "2016-02-16T14:40:52+00:00"
+            "time": "2017-09-25T08:54:00+00:00"
         },
         {
             "name": "psr/http-message",
