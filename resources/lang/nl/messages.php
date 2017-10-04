@@ -1,10 +1,14 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2017/09/18 18:35:15 
+ Generated via "php artisan localization:missing" at 2017/10/04 22:42:34 
 *************************************************************************/
 
 return array (
+  //============================== New strings to translate ==============================//
+  // Defined in file /home/philippe/Sites/agorakit/resources/views/vendor/notifications/email.blade.php
+  'regard' => 'TODO: regard',
   //==================================== Translations ====================================//
+  'a_message_for_you' => 'U heeft een bericht',
   'accept_invitation' => 'De uitnodiging accepteren',
   'actions' => 'Acties',
   'address' => 'Adres',
@@ -34,6 +38,7 @@ return array (
   'click_to_confirm' => 'Klik om uw mailadres te bevestigen',
   'comments' => 'Commentaar',
   'confirm_password' => 'Wachtwoord bevestigen',
+  'confirm_your_email' => 'Bevestig uw e-mailadres',
   'contact' => 'Contacteren',
   'contact_this_user' => 'Deze persoon contacteren',
   'create' => 'Aanmaken',
@@ -50,6 +55,7 @@ return array (
   'details' => 'Meer weten',
   'discussions' => 'Discussies',
   'do_nothing' => 'dan hoeft u niets te doen',
+  'dont_reply_to_this_email' => 'TODO: dont_reply_to_this_email',
   'download' => 'Downloaden',
   'download_ical' => 'Download de kalender in iCal-indeling.',
   'edit' => 'Bewerken',
@@ -71,6 +77,7 @@ return array (
   'here_is_the_description_of_the_group' => 'Dit is de beschrijving van de groep',
   'history' => 'Geschiedenis van de wijzigingen',
   'how_does_it_work' => 'Hoe werkt het ?',
+  'howdy' => 'TODO: howdy',
   'i_changed_my_mind' => 'Ik heb me bedacht, ik wil deze groep niet verlaten',
   'if_you_already_have_account' => 'Als u al geregistreerd bent',
   'if_you_didnt_ask' => 'Als u geen registratie gevraagd hebt',
@@ -81,6 +88,7 @@ return array (
   'if_you_want_participate_in_this_group' => 'Als u wil deelnemen aan deze groep',
   'if_you_want_to_add_event_goto_group_agenda' => 'Als u wilt een actie toevoegen aan de agenda een afspraak in de agenda van een bepaalde groep om zijn volledige agenda',
   'in' => 'in',
+  'in_the_discussion' => 'TODO: in_the_discussion',
   'inside' => 'van',
   'insights' => 'TODO: insights',
   'invitation_sent_again' => '\'Een nieuwe bevestigingsmail is verstuurd. Controleer zowel uw mailbox als uw spam om uw e-mailadres te kunnen bevestigen. Dit zorgt ervoor dat we spam op deze site kunnen vermijden. Bedankt voor uw begrip.',
@@ -116,6 +124,7 @@ return array (
   'modify_intro_text' => 'Bewerken intro tekst',
   'my_groups' => 'Mijn groepen',
   'name' => 'Naam',
+  'news_from_group_email_subject' => 'Nieuws van :',
   'next_actions' => 'Naast acties',
   'not_allowed' => 'Niet toegestaan',
   'not_an_admin' => 'Geen beheerder',
@@ -152,6 +161,7 @@ return array (
   'show_all' => 'Alles tonen',
   'show_history' => 'Geschiedenis van aanpassingen tonen',
   'show_list' => 'Tonen als lijst',
+  'something_wrong' => 'TODO: something_wrong',
   'start' => 'Start',
   'started_by' => 'Begonnen door',
   'starts' => 'Begint',
@@ -160,7 +170,6 @@ return array (
   'tags_help' => 'TODO: tags_help',
   'thank_you_for_joining' => 'Bedankt voor uw registratie',
   'thinks_that_you_might_want_to_join' => 'denkt dat u misschien geïnteresseerd bent om aan te sluiten bij de groep',
-  'this_action_can_be_reverted' => 'U kunt dit later ongedaan maken',
   'this_will_allow_you_to_be_informed' => 'Op die manier blijft u op de hoogte van de activiteiten van deze groep, en kunt u deelnemen aan de discussies.',
   'title' => 'Titel',
   'toggle_navigation' => 'Navigatie activeren',
@@ -185,6 +194,7 @@ return array (
   'you_can_create_one_here' => 'kan u zich hier registreren',
   'you_can_login_here' => 'kan u hier inloggen',
   'you_dont_have_an_account_create_one_now' => 'Je hoeft geen account hebt, maak er dan een aan',
+  'you_have_been_mentionned_by' => 'TODO: you_have_been_mentionned_by',
   'you_have_verified_your_email' => 'U hebt geverifieerd dat uw e-mail adres',
   'you_login' => 'log in',
   'you_receive_this_email_from_the_group' => 'U ontvangt deze e-mail groep',
@@ -194,27 +204,23 @@ return array (
   //================================== Obsolete strings ==================================//
   'LLH:obsolete' => 
   array (
-    'a_message_for_you' => 'U heeft een bericht',
     'admin-back' => 'Terug',
     'admin_settings' => 'Voorkeuren wijzigen',
     'all_discussions' => 'Alle discussies over dit serveur',
     'all_the_groups_welcome' => 'U vindt hier alle doelgroepen op deze server',
     'apply' => 'Toepassing',
     'close' => 'Sluiten',
-    'confirm_your_email' => 'Bevestig uw e-mailadres',
     'create_folder' => 'Map maken',
     'create_folder_button' => 'Map maken',
     'drop_file_here' => 'Een of meer bestanden toevoegen',
     'group' => 'Groep',
     'groups_list' => 'Lijst van groepen',
     'home' => 'Home',
-    'howdy' => 'Oeps',
     'info' => 'Info',
     'latest_actions' => 'Nieuwste acties',
     'map_of_this_group' => 'Kaart van deze groep',
     'members_of_this_group' => 'Groepsleden',
     'message_not_sent_too_many_per_hour' => 'Het bericht is niet verstuurd omdat uw sessie is verlopen. Dit gebeurt om spam te vermijden.',
-    'news_from_group_email_subject' => 'Nieuws van :',
     'not_a_member' => 'U bent geen deel van deze groep',
     'not_logged_in' => 'U bent niet ingelogd(e). Log dan in of maak een account om door te gaan',
     'other_groups' => 'Andere groepen',
@@ -225,8 +231,8 @@ return array (
     'show_gallery' => 'Tonen als fotogallerij',
     'show_map' => 'Toon kaart',
     'show_only_my_groups' => 'Enkel mijn groepen tonen',
-    'something_wrong' => 'Er werkt iets niet',
     'summary' => 'Samenvatting',
+    'this_action_can_be_reverted' => 'U kunt dit later ongedaan maken',
     'to_read' => 'Om te lezen',
     'unread' => 'Ongelezen',
     'unread_items' => 'Ongelezen',
