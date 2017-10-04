@@ -1,9 +1,12 @@
-/vendor
 /node_modules
-Homestead.yaml
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+/.idea
+/.vagrant
 Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
 .env
-.vagrant/machines/default/virtualbox
-
-# Do not include backup lang files
-resources/lang/*/[a-zA-Z]*20[0-9][0-9][0-1][0-9][0-3][0-9]_[0-2][0-9][0-5][0-9][0-5][0-9].php
