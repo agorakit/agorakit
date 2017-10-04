@@ -44,11 +44,11 @@ class Mention extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->subject('You have been mentionned by ' . $this->user->name)
-        ->line('You have been mentionned by ' . $this->user->name . ' in the discussion ' . $this->comment->discussion->name)
+        ->subject(trans('messages.you_have_been_mentionned_by'). ' ' . $this->user->name)
+        ->line(trans('messages.you_have_been_mentionned_by'). ' ' . $this->user->name . ' ' . trans('messages.in_the_discussion') . ' ' . $this->comment->discussion->name . ' : ')
         ->line($this->comment->body)
-        ->action('Reply', action('DiscussionController@show', [$this->comment->discussion->group, $this->comment->discussion]))
-        ->line('Don\'t reply to this email, use the reply button above instead');
+        ->action(trans('messages.reply'), action('DiscussionController@show', [$this->comment->discussion->group, $this->comment->discussion]))
+        ->line(trans('messages.dont_reply_to_this_email'));
     }
 
     /**
