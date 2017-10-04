@@ -6,6 +6,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use App\Comment;
+use App\User;
 
 class Mention extends Notification
 {
@@ -16,9 +18,10 @@ class Mention extends Notification
     *
     * @return void
     */
-    public function __construct()
+    public function __construct(Comment $comment, User $user)
     {
-        //
+        $this->comment = $comment;
+        $this->user = $user;
     }
 
     /**
@@ -41,10 +44,11 @@ class Mention extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->subject('Test Mention')
-        ->line('The introduction to the notification.')
-        ->action('Notification Action', url('/'))
-        ->line('Thank you for using our application!');
+        ->subject('You have been mentionned by ' . $this->user->name)
+        ->line('You have been mentionned by ' . $this->user->name . ' in the discussion ' . $this->comment->discussion->name)
+        ->line($this->comment->body)
+        ->action('Reply', action('DiscussionController@show', [$this->comment->discussion->group, $this->comment->discussion]))
+        ->line('Don\'t reply to this email, use the reply button above instead');
     }
 
     /**
