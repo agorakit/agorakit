@@ -3,19 +3,26 @@
 </div>
 
 
+
+@include('partials.mention')
+
 @push ('js')
     <script>
-    var tribute = new Tribute({
-        values: [
+
+    $('#wysiwyg').atwho({
+        at: "@",
+        data:[
             @foreach (\App\User::all() as $user)
-            {key: '{{$user->name}}', value: '{{$user->name}}'},
+            {
+                slug : '{{str_slug($user->name)}}',
+                name : '{{$user->name}}'
+            },
             @endforeach
-        ]
+        ],
+        insertTpl: "${atwho-at}<a href=\"${slug}\">${name}</a>",
     })
 
 
-
-    tribute.attach(document.getElementById('wysiwyg'));
 
     </script>
 @endpush
