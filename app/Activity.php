@@ -15,7 +15,7 @@ class Activity extends Model
     protected $rules = [
     'user_id'  => 'required|exists:users,id',
     'group_id'  => 'required|exists:groups,id',
-    'action' => 'required|in:created,updated,deleted',
+    'action' => 'required|in:created,updated,deleted,commented',
   ];
 
 
