@@ -3,6 +3,7 @@ namespace App\Traits;
 
 use App\Activity;
 use Auth;
+use App\Comment;
 
 trait LogsActivity
 {
@@ -14,7 +15,16 @@ trait LogsActivity
             $activity->action = 'created';
             $activity->user()->associate(Auth::user());
             $activity->model()->associate($model);
-            $activity->group()->associate($model->group);
+
+            if ($model instanceof Comment) // who cares about leaky abstractions ;-)
+            {
+                $activity->action = 'commented';
+                $activity->group()->associate($model->discussion->group);
+            }
+            else
+            {
+                $activity->group()->associate($model->group);
+            }
             $activity->save();
 
         });
