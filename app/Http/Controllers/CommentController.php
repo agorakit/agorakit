@@ -7,7 +7,7 @@ use App\Discussion;
 use App\Group;
 use Gate;
 use Illuminate\Http\Request;
-use Notification;
+
 
 class CommentController extends Controller
 {
@@ -43,32 +43,6 @@ class CommentController extends Controller
         $discussion->comments()->save($comment);
         ++$discussion->total_comments;
         $discussion->save();
-
-        // notify the relevant users
-        // this code is not pretty and should not be in this controller, but it works.
-        $dom = new \DOMDocument;
-        $dom->loadHTML($comment->body);
-
-        $users_to_mention = array();
-
-        foreach ($dom->getElementsByTagName('a') as $tag)
-        {
-            foreach ($tag->attributes as $attribName => $attribNodeVal)
-            {
-                if ($attribName == 'data-mention-user-id')
-                {
-                    $users_to_mention[] = $tag->getAttribute($attribName);
-                }
-            }
-        }
-
-        // if we found some users to mention
-        if (count($users_to_mention) > 0)
-        {
-            $users = ($group->users->find($users_to_mention));
-            Notification::send($users, new \App\Notifications\Mention($comment, \Auth::user()));
-        }
-
 
 
         return redirect()->action('DiscussionController@show', [$discussion->group, $discussion]);
