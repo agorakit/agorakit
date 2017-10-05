@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
 use App\Traits\LogsActivity;
+use App\Traits\MentionUsers;
 
 class Comment extends Model
 {
@@ -14,6 +15,7 @@ class Comment extends Model
     use ValidatingTrait;
     use SoftDeletes;
     use LogsActivity;
+    use MentionUsers;
 
     protected $rules = [
         'body'    => 'required|min:5',

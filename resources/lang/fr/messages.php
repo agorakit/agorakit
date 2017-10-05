@@ -196,7 +196,7 @@ return array (
   'you_can_create_one_here' => 'Vous pouvez en créer un ici',
   'you_can_login_here' => 'vous pouvez vous connecter ici',
   'you_dont_have_an_account_create_one_now' => 'Vous n\'avez pas encore de compte merci de vous en créer un',
-  'you_have_been_mentionned_by' => 'Vous avez été mentionné par',
+  'you_have_been_mentionned_by' => 'Vous avez été mentionné⋅e par',
   'you_have_verified_your_email' => 'Vous avez vérifié votre adresse email',
   'you_login' => 'connectez-vous',
   'you_receive_this_email_from_the_group' => 'Vous recevez cet email du groupe',
