@@ -119,7 +119,7 @@ class FileController extends Controller
         if (Gate::allows('download', $file)) {
             if (in_array($file->mime, ['image/jpeg', 'image/png', 'image/gif'])) {
                 $cachedImage = Image::cache(function ($img) use ($file) {
-                    return $img->make(storage_path().'/app/'.$file->path)->fit(32, 32);
+                    return $img->make(storage_path().'/app/'.$file->path)->fit(64, 64);
                 }, 60000, true);
 
                 return $cachedImage->response();
