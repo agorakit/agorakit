@@ -90,6 +90,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         return view('users.show')
+        ->with('activities', $user->activities()->paginate(10))
         ->with('user', $user)
         ->with('tab', 'profile');
     }

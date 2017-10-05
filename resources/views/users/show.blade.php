@@ -33,6 +33,13 @@
             </div>
         @endif
 
+
+        <h4>{{trans('messages.recent_activity')}}</h4>
+
+        @each('partials.activity', $activities, 'activity')
+        {{$activities->render()}}
+
+
         @if ($user->discussions->count() > 0)
             <div>
                 <h4>{{trans('messages.latest_discussions')}}</h4>
