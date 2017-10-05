@@ -8,6 +8,11 @@ return array (
   // Defined in file /home/philippe/Sites/agorakit/resources/views/vendor/notifications/email.blade.php
   'regard' => 'Cordialement',
   //==================================== Translations ====================================//
+  'activity_created' => 'a créé',
+  'activity_updated' => 'a mis à jour',
+  'activity_deleted' => 'a effacé',
+  'activity_commented' => 'a commenté la discussion',
+  'visit' => 'Visiter',
   'a_message_for_you' => 'Un message pour vous',
   'accept_invitation' => 'Accepter l\'invitation',
   'actions' => 'Actions',

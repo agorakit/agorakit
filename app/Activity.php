@@ -7,6 +7,7 @@ use Watson\Validating\ValidatingTrait;
 use App\Discussion;
 use App\File;
 use App\Action;
+use App\Comment;
 
 class Activity extends Model
 {
@@ -37,6 +38,31 @@ class Activity extends Model
         return $this->belongsTo('App\Group')->withTrashed();
     }
 
+
+    public function getType()
+    {
+        if ($this->model instanceof Discussion)
+        {
+            return 'discussion';
+        }
+
+        if ($this->model instanceof File)
+        {
+            return 'file';
+        }
+
+        if ($this->model instanceof Action)
+        {
+            return 'action';
+        }
+
+        if ($this->model instanceof Comment)
+        {
+            return 'comment';
+        }
+    }
+
+
     /**
      * Little helper to returna link to the related model
      */
@@ -56,6 +82,11 @@ class Activity extends Model
         if ($this->model instanceof Action)
         {
             return action('ActionController@show', [$this->group, $this->model]);
+        }
+
+        if ($this->model instanceof Comment)
+        {
+            return action('DiscussionController@show', [$this->group, $this->model->discussion]);
         }
 
 
