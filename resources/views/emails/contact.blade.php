@@ -10,10 +10,10 @@
 {!! nl2br(e($body)) !!}
 </p>
 
-@component('mail::button', ['url' => action('UserController@contact', $from_user)])
+@component('mail::button', ['url' => Autologin::to($to_user, action('UserController@contact', $from_user))])
 {{trans('messages.reply')}}
 @endcomponent
-<small>{{trans('messages.you_can_also_reply')}}</small>
+<small>{{trans('messages.dont_reply_to_this_email')}}</small>
 
 
 @endcomponent

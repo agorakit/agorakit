@@ -58,17 +58,26 @@ class UserController extends Controller
     public function mail(User $user, Request $request)
     {
         $from_user = Auth::user();
+        $to_user = $user;
 
-        if ($request->has('body'))
+        if ($to_user->verified == 1)
         {
-            $body = $request->input('body');
-            Mail::to($user)->send(new ContactUser(Auth::user(), $user, $body));
+            if ($request->has('body'))
+            {
+                $body = $request->input('body');
+                Mail::to($to_user)->send(new ContactUser($from_user, $to_user, $body));
 
-            flash(trans('messages.message_sent'))->success();
-            return redirect()->action('UserController@contact', $user->id);
+                flash(trans('messages.message_sent'))->success();
+                return redirect()->action('UserController@contact', $to_user);
+            }
+
+            return redirect()->action('UserController@contact', $to_user);
         }
-
-        return redirect()->action('UserController@contact', $user->id);
+        else
+        {
+            flash(trans('messages.email_not_verified'))->error();
+            return redirect()->back();
+        }
     }
 
     /**

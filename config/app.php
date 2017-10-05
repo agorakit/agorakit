@@ -191,6 +191,7 @@ return [
         ConsoleTVs\Charts\ChartsServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
+        Watson\Autologin\AutologinServiceProvider::class,
 
     ],
 
@@ -250,7 +251,8 @@ return [
         'Geocoder'  => Toin0u\Geocoder\Facade\Geocoder::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Charts'    => ConsoleTVs\Charts\Facades\Charts::class,
-        
+        'Autologin' => Watson\Autologin\Facades\Autologin::class,
+
 
     ],
 

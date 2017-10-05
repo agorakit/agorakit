@@ -8,6 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use App\Comment;
 use App\User;
+use Autologin;
 
 class Mention extends Notification
 {
@@ -47,7 +48,7 @@ class Mention extends Notification
         ->subject('['. $this->comment->discussion->group->name . '] ' . trans('messages.you_have_been_mentionned_by'). ' ' . $this->user->name)
         ->line(trans('messages.you_have_been_mentionned_by'). ' ' . $this->user->name . ' ' . trans('messages.in_the_discussion') . ' ' . $this->comment->discussion->name . ' : ')
         ->line($this->comment->body)
-        ->action(trans('messages.reply'), action('DiscussionController@show', [$this->comment->discussion->group, $this->comment->discussion]))
+        ->action(trans('messages.reply'), Autologin::to($notifiable, action('DiscussionController@show', [$this->comment->discussion->group, $this->comment->discussion])))
         ->line(trans('messages.dont_reply_to_this_email'));
     }
 
