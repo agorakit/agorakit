@@ -57,8 +57,8 @@
 
 @if ($users->count() > 0)
 <h2>{{trans('messages.latest_users')}}</h2>
-@foreach($users as $user)
-<a href="{{action('UserController@show', $user)}}">{{$user->name}}</a>
+@foreach($users as $new_user)
+<a href="{{action('UserController@show', $new_user)}}">{{$new_user->name}}</a>
 <br/>
 @endforeach
 @endif
