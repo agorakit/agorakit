@@ -27,7 +27,8 @@
     "laravel/socialite": "^3.0",
     "consoletvs/charts": "5.*",
     "laracasts/flash": "3.0.0",
-    "laravel/tinker": "^1.0"
+    "laravel/tinker": "^1.0",
+    "watson/autologin": "^0.5.2"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

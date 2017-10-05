@@ -26,7 +26,7 @@ class ContactUser extends Mailable
     {
         $this->body = $body;
         $this->from_user = $from_user;
-        $this->to_user = $from_user;
+        $this->to_user = $to_user;
     }
 
     /**
@@ -37,7 +37,6 @@ class ContactUser extends Mailable
     public function build()
     {
         return $this->markdown('emails.contact')
-        ->subject('['.config('app.name').'] '.trans('messages.a_message_for_you'))
-        ->from($this->from_user);
+        ->subject('['.config('app.name').'] '.trans('messages.a_message_for_you'));
     }
 }
