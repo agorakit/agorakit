@@ -34,7 +34,14 @@ trait LogsActivity
             $activity->action = 'updated';
             $activity->user()->associate(Auth::user());
             $activity->model()->associate($model);
-            $activity->group()->associate($model->group);
+            if ($model instanceof Comment)
+            {
+                $activity->group()->associate($model->discussion->group);
+            }
+            else
+            {
+                $activity->group()->associate($model->group);
+            }
             $activity->save();
         });
 
@@ -43,7 +50,14 @@ trait LogsActivity
             $activity->action = 'deleted';
             $activity->user()->associate(Auth::user());
             $activity->model()->associate($model);
-            $activity->group()->associate($model->group);
+            if ($model instanceof Comment)
+            {
+                $activity->group()->associate($model->discussion->group);
+            }
+            else
+            {
+                $activity->group()->associate($model->group);
+            }
             $activity->save();
         });
     }
