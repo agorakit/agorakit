@@ -43,7 +43,7 @@ class Comment extends Model
 
     public function discussion()
     {
-        return $this->belongsTo('App\Discussion');
+        return $this->belongsTo('App\Discussion')->withTrashed();
     }
 
     public function link()
