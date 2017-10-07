@@ -249,10 +249,19 @@ font-family: "Roboto";
     font-size: 0.8em;
 }
 
-.activity .action 
+.activity .action
 {
     text-align:right;
 }
+
+
+.activity-small
+{
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+    border-bottom: 1px solid #ddd;
+}
+
 
 /***************************** tables ***************************/
 
