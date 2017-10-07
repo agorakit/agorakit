@@ -1,12 +1,9 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2017/10/04 22:42:34 
+ Generated via "php artisan localization:missing" at 2017/10/07 20:22:33 
 *************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/agorakit/resources/views/vendor/notifications/email.blade.php
-  'regard' => 'TODO: regard',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Eine Nachricht für Sie',
   'accept_invitation' => 'Die Einladung akzeptieren',
@@ -136,6 +133,8 @@ return array (
   'photo' => 'Foto',
   'presentation' => 'Presentation',
   'profile' => 'Profil',
+  'recent_activity' => 'TODO: recent_activity',
+  'regard' => 'TODO: regard',
   'register' => 'Registrieren',
   'registered' => 'Registriert',
   'registration_time' => 'Uhrzeit der Registrierung',
@@ -183,6 +182,7 @@ return array (
   'user_removed_successfuly' => 'Benutzer erfolgreich entfernt',
   'users' => 'Nutzer',
   'users_list' => 'Nutzer',
+  'visit' => 'TODO: visit',
   'visit_link' => 'TODO: visit_link',
   'we_need_to_confirm' => 'Wir müssen Ihr Konto bestätigen',
   'what' => 'was',
@@ -190,7 +190,6 @@ return array (
   'where' => 'wo',
   'you_are_now_a_member_of_this_group' => 'Sie sind nun Mitglied dieser Gruppe',
   'you_asked_for_assword_change' => 'Sie haben die Rücksetzung Ihres Passworts angefordert',
-  'you_can_also_reply' => 'TODO: you_can_also_reply',
   'you_can_create_one_here' => 'Sie können ein Passwort hier einrichten',
   'you_can_login_here' => 'Sie können sich hier anmelden',
   'you_dont_have_an_account_create_one_now' => 'Sie haben kein Nutzerkonto. Jetzt Konto einrichten',
@@ -241,6 +240,7 @@ return array (
     'unread_items' => 'Ungelesen',
     'view' => 'Anzeigen',
     'you_are_not_an_admin' => 'Sie haben keine Admin-Rechte',
+    'you_can_also_reply' => 'TODO: you_can_also_reply',
     'you_cannot_join_this_group_maybe_invite_only' => 'Sie können dieser Gruppe nicht beitreten. Die Gruppe ist wohl geschlossen oder auf Nur-Einladungs-Basis',
     'you_see_all' => 'Sie sehen alle Diskussionen und Handlungen aller Gruppen.',
     'you_see_only_your_stuff' => 'Sie sehen die Diskussioinen und Handlungen Ihrer Gruppen nicht',

@@ -1,12 +1,9 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2017/10/04 22:42:34 
+ Generated via "php artisan localization:missing" at 2017/10/07 20:22:33 
 *************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/agorakit/resources/views/vendor/notifications/email.blade.php
-  'regard' => 'TODO: regard',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'U heeft een bericht',
   'accept_invitation' => 'De uitnodiging accepteren',
@@ -136,6 +133,8 @@ return array (
   'photo' => 'TODO: photo',
   'presentation' => 'Presentatie',
   'profile' => 'Mijn profiel',
+  'recent_activity' => 'TODO: recent_activity',
+  'regard' => 'TODO: regard',
   'register' => 'Registreren',
   'registered' => 'Geregistreerd',
   'registration_time' => 'Datum van registratie',
@@ -183,6 +182,7 @@ return array (
   'user_removed_successfuly' => 'Gebruiker zijn succesvol verwijderd',
   'users' => 'Gebruikers',
   'users_list' => 'Gebruikerslijst',
+  'visit' => 'TODO: visit',
   'visit_link' => 'TODO: visit_link',
   'we_need_to_confirm' => 'Uw mailadres moet nog bevestigd worden',
   'what' => 'Wat',
@@ -190,7 +190,6 @@ return array (
   'where' => 'Waar',
   'you_are_now_a_member_of_this_group' => 'Je bent nu een lid van de groep',
   'you_asked_for_assword_change' => 'U hebt gevraagd uw wachtwoord te wijzigen',
-  'you_can_also_reply' => 'TODO: you_can_also_reply',
   'you_can_create_one_here' => 'kan u zich hier registreren',
   'you_can_login_here' => 'kan u hier inloggen',
   'you_dont_have_an_account_create_one_now' => 'Je hoeft geen account hebt, maak er dan een aan',
@@ -238,6 +237,7 @@ return array (
     'unread_items' => 'Ongelezen',
     'view' => 'Bekijk',
     'you_are_not_an_admin' => 'U bent geen beheerder',
+    'you_can_also_reply' => 'TODO: you_can_also_reply',
     'you_cannot_join_this_group_maybe_invite_only' => 'U kunt niet lid worden van deze groep, het is waarschijnlijk gesloten of alleen op uitnodiging',
     'you_see_all' => 'U ziet alle discussies en acties van alle groepen.',
     'you_see_only_your_stuff' => 'U ziet enkel de discussies en acties van uw groepen',

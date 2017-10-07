@@ -1,12 +1,9 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2017/10/04 22:42:34 
+ Generated via "php artisan localization:missing" at 2017/10/07 20:22:33 
 *************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/agorakit/resources/views/vendor/notifications/email.blade.php
-  'regard' => 'TODO: regard',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un mensaje para usted',
   'accept_invitation' => 'Acepta la invitación',
@@ -137,6 +134,8 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'photo' => 'Foto',
   'presentation' => 'Presentación',
   'profile' => 'Perfil',
+  'recent_activity' => 'TODO: recent_activity',
+  'regard' => 'TODO: regard',
   'register' => 'Registro',
   'registered' => 'Registrado',
   'registration_time' => 'Tiempo de registro',
@@ -184,6 +183,7 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'user_removed_successfuly' => 'Usuario eliminado con éxito',
   'users' => 'Usuarios',
   'users_list' => 'Usuarios',
+  'visit' => 'TODO: visit',
   'visit_link' => 'Visitar enlace',
   'we_need_to_confirm' => 'Necesitamos confirmar su cuenta',
   'what' => 'qué',
@@ -191,7 +191,6 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'where' => 'dónde',
   'you_are_now_a_member_of_this_group' => 'Usted es ahora un miembro de este grupo',
   'you_asked_for_assword_change' => 'Ha solicitado cambio de contraseña',
-  'you_can_also_reply' => 'También puede responder directamente a este correo electrónico',
   'you_can_create_one_here' => 'Tú puedes crear uno aquí',
   'you_can_login_here' => 'Puede iniciar sesión aquí',
   'you_dont_have_an_account_create_one_now' => 'No tienes una cuenta, crea una ahora',
@@ -245,6 +244,7 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
     'unread_items' => 'No leído',
     'view' => 'Ver',
     'you_are_not_an_admin' => 'No eres un administrador',
+    'you_can_also_reply' => 'También puede responder directamente a este correo electrónico',
     'you_cannot_join_this_group_maybe_invite_only' => 'No puedes unirte a este grupo; probablemente esté cerrado o solo invitación',
     'you_see_all' => 'Lo ves todo',
     'you_see_only_your_stuff' => 'Solo ves tus cosas',
