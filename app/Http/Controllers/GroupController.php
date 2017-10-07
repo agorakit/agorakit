@@ -32,8 +32,11 @@ class GroupController extends Controller
         $discussions = false;
         $actions = false;
         $files = false;
+        $activities = false;
 
-        if (Auth::check()) {
+        // User is logged
+        if (Auth::check())
+        {
             if (Gate::allows('viewDiscussions', $group)) {
                 $discussions = $group->discussions()
                 ->has('user')
@@ -50,7 +53,13 @@ class GroupController extends Controller
             if (Gate::allows('viewActions', $group)) {
                 $actions = $group->actions()->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->limit(10)->get();
             }
-        } else {
+
+            if (Gate::allows('viewActivities', $group)) {
+                $activities = $group->activities()->limit(10)->get();
+            }
+        }
+        else // anonymous user
+        {
             if ($group->isPublic()) {
                 $discussions = $group->discussions()
                 ->has('user')
@@ -69,6 +78,7 @@ class GroupController extends Controller
         ->with('discussions', $discussions)
         ->with('actions', $actions)
         ->with('files', $files)
+        ->with('activities', $activities)
         ->with('admins', $group->admins()->get())
         ->with('tab', 'home');
     }

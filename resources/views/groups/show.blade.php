@@ -189,6 +189,12 @@
                     @endif
                 @endif
 
+
+                @if ($activities)
+                    <h4>{{trans('messages.recent_activity')}}</h4>
+                    @each('partials.activity-small', $activities, 'activity')
+                @endif
+
             </div>
 
         @endsection

@@ -114,6 +114,11 @@ class Group extends Model
         return $this->hasMany('App\File');
     }
 
+    public function activities()
+    {
+        return $this->hasMany('App\Activity');
+    }
+
     /**
      *	Returns true if current user is a member of this group.
      */
