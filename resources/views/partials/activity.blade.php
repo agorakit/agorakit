@@ -15,7 +15,7 @@
         </div>
 
         <div class="action">
-            <a href="" class="btn btn-primary btn-sm">{{trans('messages.visit')}}</a>
+            <a href="{{$activity->linkToModel()}}" class="btn btn-primary btn-sm">{{trans('messages.visit')}}</a>
         </div>
 
     </div>
@@ -39,7 +39,7 @@
         </div>
 
         <div class="action">
-            <a href="" class="btn btn-primary btn-sm">{{trans('messages.visit')}}</a>
+            <a href="{{$activity->linkToModel()}}" class="btn btn-primary btn-sm">{{trans('messages.visit')}}</a>
         </div>
 
     </div>
@@ -62,7 +62,7 @@
         </div>
 
         <div class="action">
-            <a href="" class="btn btn-primary btn-sm">{{trans('messages.visit')}}</a>
+            <a href="{{$activity->linkToModel()}}" class="btn btn-primary btn-sm">{{trans('messages.visit')}}</a>
         </div>
 
     </div>
@@ -86,7 +86,7 @@
         </div>
 
         <div class="action">
-            <a href="" class="btn btn-primary btn-sm">{{trans('messages.reply')}}</a>
+            <a href="{{$activity->linkToModel()}}" class="btn btn-primary btn-sm">{{trans('messages.reply')}}</a>
         </div>
     </div>
 @endif
