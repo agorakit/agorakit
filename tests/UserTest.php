@@ -34,16 +34,18 @@ class UserTest extends BrowserKitTestCase
         Artisan::call('migrate:refresh');
 
         $this->visit('/')
-             ->see('Agorakit');
+        ->see('Agorakit');
     }
 
     /**
-     * A basic test example.
-     *
-     * @return void
-     */
+    * A basic test example.
+    *
+    * @return void
+    */
     public function testUserRegistration()
     {
+        Mail::fake();
+
         $this->visit('/register')
         ->type('Roberto', 'name')
         ->type('roberto@example.com', 'email')
@@ -121,6 +123,8 @@ class UserTest extends BrowserKitTestCase
 
     public function testASecondUserIsRegistering()
     {
+        Mail::fake();
+
         $this->visit('/register')
         ->type('Newbie', 'name')
         ->type('newbie@example.com', 'email')
@@ -164,12 +168,12 @@ class UserTest extends BrowserKitTestCase
         $user = App\User::where('email', 'newbie@example.com')->first();
 
         $this->actingAs($user)
-      ->visit('groups/create')
-      ->see('Create a new group')
-      ->type('Test group of newbie', 'name')
-      ->type('this is a test group', 'body')
-      ->press('Create the group')
-      ->see('Test group of newbie');
+        ->visit('groups/create')
+        ->see('Create a new group')
+        ->type('Test group of newbie', 'name')
+        ->type('this is a test group', 'body')
+        ->press('Create the group')
+        ->see('Test group of newbie');
     }
 
     public function testRobertoIsAdminOfTestGroup()
@@ -192,4 +196,45 @@ class UserTest extends BrowserKitTestCase
         $group = App\Group::where('name', 'Test group of newbie')->first();
         $this->assertTrue($user->isAdminOf($group));
     }
+
+
+    /* now let's test emails */
+
+    public function testNotificationReceived()
+    {
+
+        $group = App\Group::where('name', 'Test group')->firstOrFail();
+        $user = App\User::where('email', 'newbie@example.com')->firstOrFail();
+        $roberto = App\User::where('email', 'roberto@example.com')->firstOrFail();
+
+        // let's first create a discussion in test group that newbie has not read yet, and a long time ago
+        $discussion = new \App\Discussion;
+        $discussion->name = 'Notify me of this interesting discussion';
+        $discussion->body ='Such an interesting discussion blablbla';
+        $discussion->user_id = $roberto->id;
+        $discussion->group_id = $group->id;
+        $discussion->created_at = '2001-01-01';
+        $discussion->total_comments = 1;
+
+        $group->discussions()->save($discussion);
+
+
+        // fake newbie's membership in order to be in the situation of newbie must be notified
+        $membership = App\Membership::where('user_id', $user->id)->where('group_id', $group->id)->firstOrFail();
+        $membership->notified_at = '2001-01-01';
+        $membership->save();
+
+
+        // fake our mail sending
+        Mail::fake();
+
+        // send notifications if any
+        Artisan::call('notifications:send');
+
+        // Assert a message was sent to the given users...
+        Mail::assertSent(\App\Mail\Notification::class, function ($mail) use ($user) {
+            return $mail->hasTo($user->email);
+        });
+    }
+
 }
