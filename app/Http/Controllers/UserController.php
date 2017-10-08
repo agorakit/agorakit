@@ -45,7 +45,7 @@ class UserController extends Controller
     /**
     * Show contact form for the user.
     */
-    public function contact(User $user)
+    public function contactform(User $user)
     {
         return view('users.contact')
         ->with('tab', 'contact')
@@ -55,7 +55,7 @@ class UserController extends Controller
     /**
     * Mails the user.
     */
-    public function mail(User $user, Request $request)
+    public function contact(User $user, Request $request)
     {
         $from_user = Auth::user();
         $to_user = $user;
@@ -71,7 +71,7 @@ class UserController extends Controller
                 return redirect()->action('UserController@contact', $to_user);
             }
 
-            return redirect()->action('UserController@contact', $to_user);
+            return redirect()->back();
         }
         else
         {

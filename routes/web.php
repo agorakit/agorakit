@@ -37,7 +37,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
     Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
-    // autologin
+    // Autologin
     Route::get('autologin/{token}', ['as' => 'autologin', 'uses' => '\Watson\Autologin\AutologinController@autologin']);
 
     /*
@@ -51,7 +51,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('home', 'DashboardController@index');
     Route::get('presentation', 'DashboardController@presentation');
     Route::get('discussions', 'DashboardController@discussions');
-    Route::get('users', 'DashboardController@users');
+    Route::get('users', 'DashboardController@users')->name('users');
     Route::get('files', 'DashboardController@files');
     Route::get('map', 'DashboardController@map');
     Route::get('activities', 'DashboardController@activities');
@@ -75,14 +75,14 @@ Route::group(['middleware' => ['web']], function () {
 
     groups
     groups/{group}
-    groups/{group}/discussions
-    groups/{group}/discussions/{id}
-    groups/{group}/discussions/{id}/create
+    discussions
+    discussions/{id}
+    discussions/{id}/create
 
-    groups/{group}/files/{id}
-    groups/{group}/users/{id}
-    groups/{group}/documents/{id}
-    groups/{group}/actions/{id}
+    files/{id}
+    users/{id}
+    documents/{id}
+    actions/{id}
 
     -> I don't want slugs
 
@@ -98,143 +98,141 @@ Route::group(['middleware' => ['web']], function () {
     I will apply here the recomandtion "routes as documentation" from https://philsturgeon.uk/php/2013/07/23/beware-the-route-to-evil/
     */
 
+
+
     // application homepage, lists all groups on the server
     Route::get('groups', 'DashboardController@groups');
     Route::get('groups/create', 'GroupController@create');
     Route::post('groups/create', 'GroupController@store');
 
     // Groups
+
     Route::get('groups/{group}', 'GroupController@show');
-    Route::get('groups/{group}/cover', 'GroupController@cover');
-    Route::get('groups/{group}/avatar', 'GroupController@avatar');
-    Route::get('groups/{group}/edit', 'GroupController@edit');
-    Route::post('groups/{group}/edit', 'GroupController@update');
-    Route::get('groups/{group}/history', 'GroupController@history');
-    Route::get('groups/{group}/delete', 'GroupController@destroyConfirm');
-    Route::delete('groups/{group}/delete', 'GroupController@destroy');
-    Route::get('groups/{group}/insights', 'InsightsController@forGroup');
-
-    // memberships & preferences
-    Route::get('groups/{group}/join', 'MembershipController@joinForm');
-    Route::post('groups/{group}/join', 'MembershipController@join');
-
-    Route::get('groups/{group}/preferences', 'MembershipController@preferencesForm');
-    Route::post('groups/{group}/preferences', 'MembershipController@preferences');
-
-    Route::get('groups/{group}/leave', 'MembershipController@leaveForm');
-    Route::post('groups/{group}/leave', 'MembershipController@leave');
-
-    // membership admins
-
-    Route::get('groups/{group}/users/add', 'AdminMembershipController@addUserForm');
-    Route::post('groups/{group}/users/add', 'AdminMembershipController@addUser');
-
-    Route::get('groups/{group}/users/{user}/admin', 'AdminMembershipController@editUserForm');
-
-    Route::get('groups/{group}/users/delete/{user}', 'AdminMembershipController@removeUser');
-
-    Route::get('groups/{group}/users/{user}/admin/add', 'AdminMembershipController@addAdminUser');
-    Route::get('groups/{group}/users/{user}/admin/delete', 'AdminMembershipController@removeAdminUser');
-
-    // in the case of closed group, we show an howto join message
-    Route::get('groups/{group}/howtojoin', 'MembershipController@howToJoin');
-
-    // invites
-    Route::get('groups/{group}/invite', 'InviteController@invite');
-    Route::post('groups/{group}/invite', 'InviteController@sendInvites');
-    Route::get('groups/{group}/invite/confirm/{token}', 'InviteController@inviteConfirm');
-    Route::post('groups/{group}/invite/confirm/{token}', 'InviteController@inviteRegister');
-
-    // Discussions
-    Route::get('groups/{group}/discussions', 'DiscussionController@index');
-    Route::get('groups/{group}/discussions/create', 'DiscussionController@create');
-    Route::post('groups/{group}/discussions/create', 'DiscussionController@store');
-
-    Route::get('groups/{group}/discussions/unread', 'DiscussionController@indexUnRead');
-
-    Route::get('groups/{group}/discussions/{discussion}', 'DiscussionController@show');
-    Route::get('groups/{group}/discussions/{discussion}/edit', 'DiscussionController@edit');
-    Route::post('groups/{group}/discussions/{discussion}', 'DiscussionController@update');
-
-    Route::get('groups/{group}/discussions/{discussion}/delete', 'DiscussionController@destroyConfirm');
-    Route::delete('groups/{group}/discussions/{discussion}/delete', 'DiscussionController@destroy');
-
-    // discussion history
-    Route::get('groups/{group}/discussions/{discussion}/history', 'DiscussionController@history');
-
-    // Notification email test
-    // Route::get('groups/{group}/notify', 'NotificationController@notify');
-
-    // Comments
-    Route::post('groups/{group}/discussions/{discussion}/reply', 'CommentController@reply');
-
-    Route::get('groups/{group}/discussions/{discussion}/comment/{comment}/edit', 'CommentController@edit');
-    Route::get('groups/{group}/discussions/{discussion}/comment/{comment}/history', 'CommentController@history');
-    Route::post('groups/{group}/discussions/{discussion}/comment/{comment}', 'CommentController@update');
 
 
-    Route::get('groups/{group}/discussions/{discussion}/comment/{comment}/delete', 'CommentController@destroyConfirm');
-    Route::delete('groups/{group}/discussions/{discussion}/comment/{comment}/delete', 'CommentController@destroy');
+    Route::group(['middleware' => 'public', 'as' => 'groups', 'prefix' => 'groups/{group}'], function () {
+        //    Route::prefix('groups/{group}')->as('groups')->group(['middleware' => ['public']], function () {
+        Route::get('cover', 'GroupController@cover')->name('.cover');
+        Route::get('avatar', 'GroupController@avatar')->name('.avatar');
+        Route::get('edit', 'GroupController@edit')->name('.edit');
+        Route::post('edit', 'GroupController@update')->name('.update');
+        Route::get('history', 'GroupController@history')->name('.history');
+        Route::get('delete', 'GroupController@destroyConfirm')->name('.deleteform');
+        Route::delete('delete', 'GroupController@destroy')->name('.delete');
 
-    // Actions
-    Route::get('groups/{group}/actions', 'ActionController@index');
-    Route::get('groups/{group}/actions/create', 'ActionController@create');
-    Route::post('groups/{group}/actions/create', 'ActionController@store');
-    Route::get('groups/{group}/actions/json', 'ActionController@indexJson');
 
-    Route::get('groups/{group}/actions/ical', 'IcalController@group');
 
-    Route::get('groups/{group}/actions/{action}', 'ActionController@show');
-    Route::get('groups/{group}/actions/{action}/edit', 'ActionController@edit');
-    Route::post('groups/{group}/actions/{action}', 'ActionController@update');
+        // memberships & preferences
+        Route::get('join', 'MembershipController@joinForm')->name('.membership.create');
+        Route::post('join', 'MembershipController@join')->name('.membership.store');
+        Route::get('preferences', 'MembershipController@preferencesForm')->name('.membership.edit');
+        Route::post('preferences', 'MembershipController@preferences')->name('.membership.update');
+        Route::get('leave', 'MembershipController@leaveForm')->name('.membership.deleteform');
+        Route::post('leave', 'MembershipController@leave')->name('.membership.delete');
 
-    Route::get('groups/{group}/actions/{action}/history', 'ActionController@history');
 
-    Route::get('groups/{group}/actions/{action}/delete', 'ActionController@destroyConfirm');
-    Route::delete('groups/{group}/actions/{action}/delete', 'ActionController@destroy');
+        // Stats
+        Route::get('insights', 'InsightsController@forGroup')->name('.insights');
 
-    // Listing of files and folders :
-    Route::get('groups/{group}/files', 'FileController@index');
-    Route::get('groups/{group}/files/gallery', 'FileController@gallery');
+        // membership admins
+        Route::get('users/add', 'AdminMembershipController@addUserForm');
+        Route::post('users/add', 'AdminMembershipController@addUser');
+        Route::get('users/{user}/admin', 'AdminMembershipController@editUserForm');
+        Route::get('users/delete/{user}', 'AdminMembershipController@removeUser');
+        Route::get('users/{user}/admin/add', 'AdminMembershipController@addAdminUser');
+        Route::get('users/{user}/admin/delete', 'AdminMembershipController@removeAdminUser');
 
-    // upload of files
-    Route::get('groups/{group}/files/create', 'FileController@create');
-    Route::post('groups/{group}/files/create', 'FileController@store');
+        // in the case of closed group, we show an howto join message
+        Route::get('howtojoin', 'MembershipController@howToJoin')->name('.howtojoin');
 
-    // Creation of links
-    Route::get('groups/{group}/files/createlink', 'FileController@createLink');
-    Route::post('groups/{group}/files/createlink', 'FileController@storeLink');
+        // invites
+        Route::get('invite', 'InviteController@invite')->name('.invite.form');
+        Route::post('invite', 'InviteController@sendInvites')->name('.invite');
+        Route::get('invite/confirm/{token}', 'InviteController@inviteConfirm')->name('.invite.confirm');
+        Route::post('invite/confirm/{token}', 'InviteController@inviteRegister')->name('.invite.register');
 
-    Route::get('groups/{group}/files/{file}/download', 'FileController@download');
-    Route::get('groups/{group}/files/{file}', 'FileController@show');
-    Route::get('groups/{group}/files/{file}/thumbnail', 'FileController@thumbnail');
-    Route::get('groups/{group}/files/{file}/preview', 'FileController@preview');
+        // Discussions
+        Route::get('discussions', 'DiscussionController@index')->name('.discussions.index');
+        Route::get('discussions/create', 'DiscussionController@create')->name('.discussions.create');
+        Route::post('discussions/create', 'DiscussionController@store')->name('.discussions.store');
 
-    Route::get('groups/{group}/files/{file}/delete', 'FileController@destroyConfirm');
-    Route::delete('groups/{group}/files/{file}/delete', 'FileController@destroy');
+        Route::get('discussions/{discussion}', 'DiscussionController@show')->name('.discussions.show');
+        Route::get('discussions/{discussion}/edit', 'DiscussionController@edit')->name('.discussions.edit');
+        Route::post('discussions/{discussion}', 'DiscussionController@update')->name('.discussions.update');
 
-    Route::get('groups/{group}/files/{file}/edit', 'FileController@edit');
-    Route::post('groups/{group}/files/{file}', 'FileController@update');
+        Route::get('discussions/{discussion}/delete', 'DiscussionController@destroyConfirm')->name('.discussions.deleteform');
+        Route::delete('discussions/{discussion}/delete', 'DiscussionController@destroy')->name('.discussions.delete');
+
+        // discussion history
+        Route::get('discussions/{discussion}/history', 'DiscussionController@history')->name('.discussions.history');
+
+        // Notification email test
+        // Route::get('notify', 'NotificationController@notify');
+
+        // Comments
+        Route::post('discussions/{discussion}/reply', 'CommentController@reply')->name('.discussions.reply');
+        Route::get('discussions/{discussion}/comments/{comment}/edit', 'CommentController@edit')->name('.discussions.comments.edit');
+        Route::post('discussions/{discussion}/comments/{comment}', 'CommentController@update')->name('.discussions.comments.update');
+        Route::get('discussions/{discussion}/comments/{comment}/delete', 'CommentController@destroyConfirm')->name('.discussions.comments.deleteform');
+        Route::delete('discussions/{discussion}/comments/{comment}/delete', 'CommentController@destroy')->name('.discussions.comments.delete');
+        Route::get('discussions/{discussion}/comments/{comment}/history', 'CommentController@history')->name('.discussions.comments.history');
+
+        // Actions
+        Route::get('actions', 'ActionController@index')->name('.actions.index');
+        Route::get('actions/create', 'ActionController@create')->name('.actions.create');
+        Route::post('actions/create', 'ActionController@store')->name('.actions.store');
+        Route::get('actions/json', 'ActionController@indexJson')->name('.actions.index.json');
+        Route::get('actions/ical', 'IcalController@group')->name('.actions.index.ical');
+        Route::get('actions/{action}', 'ActionController@show')->name('.actions.show');
+        Route::get('actions/{action}/edit', 'ActionController@edit')->name('.actions.edit');
+        Route::post('actions/{action}', 'ActionController@update')->name('.actions.update');
+        Route::get('actions/{action}/delete', 'ActionController@destroyConfirm')->name('.actions.deleteform');
+        Route::delete('actions/{action}/delete', 'ActionController@destroy')->name('.actions.delete');
+        Route::get('actions/{action}/history', 'ActionController@history')->name('.actions.history');
+
+
+
+        // Files
+        Route::get('files', 'FileController@index')->name('.files.index');
+        Route::get('files/create', 'FileController@create')->name('.files.create');
+        Route::post('files/create', 'FileController@store')->name('.files.store');
+        Route::get('files/createlink', 'FileController@createLink')->name('.files.createlink');
+        Route::post('files/createlink', 'FileController@storeLink')->name('.files.storelink');
+        Route::get('files/{file}', 'FileController@show')->name('.files.show');
+        Route::get('files/{file}/edit', 'FileController@edit')->name('.files.edit');
+        Route::post('files/{file}', 'FileController@update')->name('.files.update');
+        Route::get('files/{file}/delete', 'FileController@destroyConfirm')->name('.files.deleteform');
+        Route::delete('files/{file}/delete', 'FileController@destroy')->name('.files.delete');
+
+        Route::get('files/{file}/download', 'FileController@download')->name('.files.download');
+        Route::get('files/{file}/thumbnail', 'FileController@thumbnail')->name('.files.thumbnail');
+        Route::get('files/{file}/preview', 'FileController@preview')->name('.files.preview');
+
+        // Members
+        Route::get('users', 'UserController@index')->name('.users.index');
+
+        // Maps
+        Route::get('map', 'MapController@map')->name('.map');
+        Route::get('map/embed', 'MapController@embed')->name('.map.embed');
+    });
 
     // Users
-    Route::get('users/{user}', 'UserController@show');
+    Route::get('users/{user}', 'UserController@show')->name('users.show');
 
-    Route::get('users/{user}/cover', 'UserController@cover');
-    Route::get('users/{user}/avatar', 'UserController@avatar');
+    Route::get('users/{user}/cover', 'UserController@cover')->name('users.cover');
+    Route::get('users/{user}/avatar', 'UserController@avatar')->name('users.avatar');
 
-    Route::get('users/{user}/sendverification', 'UserController@sendVerificationAgain');
+    Route::get('users/{user}/sendverification', 'UserController@sendVerificationAgain')->name('users.sendverification');
 
-    Route::get('users/{user}/edit', 'UserController@edit');
-    Route::post('users/{user}', 'UserController@update');
+    Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit');
+    Route::post('users/{user}', 'UserController@update')->name('users.update');
 
-    Route::get('users/{user}/contact', 'UserController@contact');
-    Route::post('users/{user}/contact', 'UserController@mail');
+    Route::get('users/{user}/contact', 'UserController@contactform')->name('users.contactform');
+    Route::post('users/{user}/contact', 'UserController@contact')->name('users.contact');
 
-    Route::get('groups/{group}/users', 'UserController@index');
 
-    // Maps
-    Route::get('groups/{group}/map', 'MapController@map');
-    Route::get('groups/{group}/map/embed', 'MapController@embed');
+
+
 
     // Search
     Route::get('search', 'SearchController@index');
@@ -267,9 +265,5 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('admin/insights', 'InsightsController@forAllGroups');
     });
 
-    /***************** PER-GROUP ADMIN STUFF ************/
 
-    Route::group(['middleware' => ['groupadmin']], function () {
-        Route::get('groups/{group}/admin', 'GroupController@edit');
-    });
 });
