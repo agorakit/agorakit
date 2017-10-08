@@ -8,7 +8,7 @@
 
   <h1>{{trans('messages.contact')}} {{ $user->name }}</h1>
 
-  {!! Form::open(['action' => ['UserController@mail', $user->id]]) !!}
+  {!! Form::open(['action' => ['UserController@contact', $user->id]]) !!}
 
 
 

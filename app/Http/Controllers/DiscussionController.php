@@ -13,7 +13,6 @@ class DiscussionController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['only' => ['indexUnRead']]);
         $this->middleware('member', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
         $this->middleware('verified', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
         $this->middleware('public', ['only' => ['index', 'show', 'history']]);
