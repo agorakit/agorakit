@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Auth;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class AdminSettingsController extends Controller
+class SettingsController extends Controller
 {
     public function __construct()
     {
@@ -13,11 +14,11 @@ class AdminSettingsController extends Controller
     }
 
     /**
-     * Display a settings edition screen.
+     * Display a settings edition screen. Currently only the homepage intro text, but this will change soon :-)
      *
      * @return \Illuminate\Http\Response
      */
-    public function settings()
+    public function index()
     {
         return view('settings.list')
         ->with('homepage_presentation', \App\Setting::get('homepage_presentation'));

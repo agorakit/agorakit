@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-class AdminUserController extends Controller
+use App\Http\Controllers\Controller;
+
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -12,7 +14,6 @@ class AdminUserController extends Controller
     public function index()
     {
         $users = \App\User::orderBy('updated_at', 'desc')->get();
-
         return view('admin.user.index')->with('users', $users);
     }
 }

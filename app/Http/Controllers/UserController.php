@@ -35,7 +35,7 @@ class UserController extends Controller
         $users = $group->users()->with('memberships')->orderBy('updated_at', 'desc')->paginate(25);
         $admins = $group->admins()->orderBy('name')->get();
 
-        return view('groups.users.index')
+        return view('users.index')
         ->with('users', $users)
         ->with('admins', $admins)
         ->with('group', $group)

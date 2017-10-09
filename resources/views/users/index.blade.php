@@ -13,7 +13,7 @@
             @endcan
 
             @can('edit-membership', $group)
-                <a class="btn btn-warning" href="{{ action('AdminMembershipController@addUserForm', $group->id ) }}"><i class="fa fa-plus"></i> {{trans('membership.directly_add_users_button')}}</a>
+                <a class="btn btn-warning" href="{{ action('Admin\MembershipController@addUserForm', $group->id ) }}"><i class="fa fa-plus"></i> {{trans('membership.directly_add_users_button')}}</a>
             @endcan
         </div>
 
@@ -53,11 +53,11 @@
 
                                     <li>
                                         @if($user->isAdminOf($group))
-                                            <a href="{{action('AdminMembershipController@removeAdminUser', [$group, $user])}}" onclick="return confirm('{{trans('messages.are_you_sure')}}');">
+                                            <a href="{{action('Admin\MembershipController@removeAdminUser', [$group, $user])}}" onclick="return confirm('{{trans('messages.are_you_sure')}}');">
                                                 <i class="fa fa-trash-o"></i> {{trans('messages.remove_user_admin')}}
                                             </a>
                                         @else
-                                            <a href="{{action('AdminMembershipController@addAdminUser', [$group, $user])}}" onclick="return confirm('{{trans('messages.are_you_sure')}}');">
+                                            <a href="{{action('Admin\MembershipController@addAdminUser', [$group, $user])}}" onclick="return confirm('{{trans('messages.are_you_sure')}}');">
                                                 <i class="fa fa-key"></i> {{trans('messages.make_user_admin')}}
                                             </a>
                                         @endif
@@ -65,7 +65,7 @@
 
 
                                     <li>
-                                        <a href="{{action('AdminMembershipController@removeUser', [$group, $user])}}" onclick="return confirm('{{trans('messages.are_you_sure')}}');">
+                                        <a href="{{action('Admin\MembershipController@removeUser', [$group, $user])}}" onclick="return confirm('{{trans('messages.are_you_sure')}}');">
                                             <i class="fa fa-ban"></i> {{trans('messages.remove_user')}}
                                         </a>
                                     </li>

@@ -135,12 +135,12 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('insights', 'InsightsController@forGroup')->name('.insights');
 
         // membership admins
-        Route::get('users/add', 'AdminMembershipController@addUserForm')->name('.users.create');
-        Route::post('users/add', 'AdminMembershipController@addUser')->name('.users.store');
-        Route::get('users/{user}/admin', 'AdminMembershipController@editUserForm')->name('.users.edit');
-        Route::get('users/delete/{user}', 'AdminMembershipController@removeUser')->name('.users.delete');
-        Route::get('users/{user}/admin/add', 'AdminMembershipController@addAdminUser')->name('.users.addadmin');
-        Route::get('users/{user}/admin/delete', 'AdminMembershipController@removeAdminUser')->name('.users.removeadmin');
+        Route::get('users/add', 'Admin\MembershipController@addUserForm')->name('.users.create');
+        Route::post('users/add', 'Admin\MembershipController@addUser')->name('.users.store');
+        Route::get('users/{user}/admin', 'Admin\MembershipController@editUserForm')->name('.users.edit');
+        Route::get('users/delete/{user}', 'Admin\MembershipController@removeUser')->name('.users.delete');
+        Route::get('users/{user}/admin/add', 'Admin\MembershipController@addAdminUser')->name('.users.addadmin');
+        Route::get('users/{user}/admin/delete', 'Admin\MembershipController@removeAdminUser')->name('.users.removeadmin');
 
         // in the case of closed group, we show an howto join message
         Route::get('howtojoin', 'MembershipController@howToJoin')->name('.howtojoin');
@@ -258,10 +258,10 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::group(['middleware' => ['admin']], function () {
         Route::get('admin/logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
-        Route::get('admin/settings', 'AdminSettingsController@settings');
-        Route::post('admin/settings', 'AdminSettingsController@update');
+        Route::get('admin/settings', 'Admin\SettingsController@index');
+        Route::post('admin/settings', 'Admin\SettingsController@update');
 
-        Route::resource('admin/user', 'AdminUserController');
+        Route::resource('admin/user', 'Admin\UserController');
         Route::get('admin/insights', 'InsightsController@forAllGroups');
     });
 
