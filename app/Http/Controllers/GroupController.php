@@ -146,7 +146,7 @@ class GroupController extends Controller
 
         flash(trans('messages.ressource_created_successfully'))->success();
 
-        return redirect()->action('MembershipController@preferences', [$group->id]);
+        return redirect()->action('MembershipController@update', [$group->id]);
     }
 
     /**

@@ -78,7 +78,7 @@
 <p style="margin-top: 5em; font-size: 0.8em">
 {{trans('messages.you_receive_this_email_from_the_group')}} "{{$group->name}}", {{trans('messages.because_you_asked_for_it')}}.
 <br/>
-{{trans('messages.if_you_dont_want_news_anymore')}}, <a href="{{Autologin::to($user, action('MembershipController@preferencesForm', $group))}}">{{trans('messages.click_here')}}</a>.
+{{trans('messages.if_you_dont_want_news_anymore')}}, <a href="{{Autologin::to($user, action('MembershipController@edit', $group))}}">{{trans('messages.click_here')}}</a>.
 </p>
 
 
