@@ -10,7 +10,7 @@
   <div class="help" role="alert">
     <i class="fa fa-info-circle" aria-hidden="true"></i>
     {{trans('messages.if_you_want_participate_in_this_group')}}
-    <a href="{{action('MembershipController@join', $group)}}">
+    <a href="{{action('MembershipController@store', $group)}}">
       {{trans('messages.join_this_group')}}</a>
     </div>
   @endif

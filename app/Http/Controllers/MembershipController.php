@@ -12,14 +12,14 @@ class MembershipController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('verified', ['only' => ['join', 'joinForm', 'leave', 'leaveForm', 'preferences', 'preferencesForm']]);
-        $this->middleware('public', ['only' => ['joinForm', 'join']]);
+        $this->middleware('verified');
+        $this->middleware('public', ['only' => ['create', 'store']]);
     }
 
     /**
-     * Show a settings screen for a specific group. Allows a user to join, leave, set subscribe settings.
+     * Show a form to allow a user to join a group
      */
-    public function joinForm(Request $request, Group $group)
+    public function create(Request $request, Group $group)
     {
         if (Gate::allows('join', $group)) {
             // load or create membership for this group and user combination
@@ -45,7 +45,7 @@ class MembershipController extends Controller
      *
      * @return [type] [description]
      */
-    public function join(Request $request, Group $group)
+    public function store(Request $request, Group $group)
     {
         if (Gate::allows('join', $group)) {
             // load or create membership for this group and user combination
@@ -68,10 +68,10 @@ class MembershipController extends Controller
     /**
      * Show a settings screen for a specific group. Allows a user to leave the group.
      */
-    public function leaveForm(Request $request, Group $group)
+    public function destroyConfirm(Request $request, Group $group)
     {
-        // load or create membership for this group and user combination
-        $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
+        // load a membership for this group and user combination
+        $membership = \App\Membership::where(['user_id' => $request->user()->id, 'group_id' => $group->id])->firstOrFail();
 
         return view('membership.leave')
         ->with('group', $group)
@@ -86,7 +86,7 @@ class MembershipController extends Controller
      *
      * @return Response
      */
-    public function leave(Request $request, Group $group)
+    public function destroy(Request $request, Group $group)
     {
         // load or create membership for this group and user combination
         $membership = \App\Membership::where(['user_id' => $request->user()->id, 'group_id' => $group->id])->firstOrFail();
@@ -99,7 +99,7 @@ class MembershipController extends Controller
     /**
      * Show a settings screen for a specific group. Allows a user to join, leave, set subscribe settings.
      */
-    public function preferencesForm(Request $request, Group $group)
+    public function edit(Request $request, Group $group)
     {
         // load or create membership for this group and user combination
         $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
@@ -114,7 +114,7 @@ class MembershipController extends Controller
     /**
      * Store new settings from the preferencesForm.
      */
-    public function preferences(Request $request, Group $group)
+    public function update(Request $request, Group $group)
     {
         // load or create membership for this group and user combination
         $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);

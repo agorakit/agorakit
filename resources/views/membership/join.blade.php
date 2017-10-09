@@ -17,7 +17,7 @@
         </div>
 
 
-        {!! Form::open(array('action' => ['MembershipController@join', $group->id])) !!}
+        {!! Form::open(array('action' => ['MembershipController@store', $group->id])) !!}
 
         @include('membership.form')
 

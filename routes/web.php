@@ -123,12 +123,12 @@ Route::group(['middleware' => ['web']], function () {
 
 
         // memberships & preferences
-        Route::get('join', 'MembershipController@joinForm')->name('.membership.create');
-        Route::post('join', 'MembershipController@join')->name('.membership.store');
-        Route::get('preferences', 'MembershipController@preferencesForm')->name('.membership.edit');
-        Route::post('preferences', 'MembershipController@preferences')->name('.membership.update');
-        Route::get('leave', 'MembershipController@leaveForm')->name('.membership.deleteconfirm');
-        Route::post('leave', 'MembershipController@leave')->name('.membership.delete');
+        Route::get('join', 'MembershipController@create')->name('.membership.create');
+        Route::post('join', 'MembershipController@store')->name('.membership.store');
+        Route::get('preferences', 'MembershipController@edit')->name('.membership.edit');
+        Route::post('preferences', 'MembershipController@update')->name('.membership.update');
+        Route::get('leave', 'MembershipController@destroyConfirm')->name('.membership.deleteconfirm');
+        Route::post('leave', 'MembershipController@destroy')->name('.membership.delete');
 
 
         // Stats

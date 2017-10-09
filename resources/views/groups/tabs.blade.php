@@ -72,14 +72,14 @@
 
         @if ($group->isMember())
             <li role="presentation" @if (isset($tab) && ($tab == 'preferences')) class="active" @endif>
-                <a href="{{ action('MembershipController@preferencesForm', $group->id) }}">
+                <a href="{{ action('MembershipController@edit', $group->id) }}">
                     <i class="fa fa-bell-o"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.settings') }}</span>
                 </a>
             </li>
         @else
             @can ('join', $group)
                 <li role="presentation" @if (isset($tab) && ($tab == 'preferences')) class="active" @endif>
-                    <a href="{{ action('MembershipController@joinForm', $group->id) }}">
+                    <a href="{{ action('MembershipController@create', $group->id) }}">
                         <i class="fa fa-sign-in"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.join') }}</span>
                     </a>
                 </li>
@@ -187,7 +187,7 @@
 
         @if ($group->isPublic() )
             <li role="presentation" @if (isset($tab) && ($tab == 'settings')) class="active" @endif>
-                <a href="{{ action('MembershipController@joinForm', $group->id) }}">
+                <a href="{{ action('MembershipController@create', $group->id) }}">
                     <i class="fa fa-cog"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.join') }}</span>
                 </a>
             </li>
