@@ -10,15 +10,15 @@
 
         <h3>
             @if (isset($file))
-                <a href="{{ action('FileController@index', $group->id) }}"><i class="fa fa-home" aria-hidden="true"></i></a>
+                <a href="{{ route('groups.files.index', $group->id) }}"><i class="fa fa-home" aria-hidden="true"></i></a>
                 {{$file->name}}
             @endif
         </h3>
 
 
         <div>
-            <a href="{{ action('FileController@download', [$group->id, $file->id]) }}">
-                <img src="{{ action('FileController@preview', [$group->id, $file->id]) }}"/>
+            <a href="{{ route('groups.files.download', [$group->id, $file->id]) }}">
+                <img src="{{ route('groups.files.preview', [$group->id, $file->id]) }}"/>
             </a>
         </div>
 
@@ -35,7 +35,7 @@
         </div>
 
         <div>
-            <a class="btn btn-primary" href="{{ action('FileController@download', [$group->id, $file->id]) }}">
+            <a class="btn btn-primary" href="{{ route('groups.files.download', [$group->id, $file->id]) }}">
                 {{trans('messages.download')}} {{$file->name}}
             </a>
         </div>

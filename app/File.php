@@ -51,7 +51,7 @@ class File extends Model
 
     public function link()
     {
-        return action('FileController@download', [$this->group, $this]);
+        return route('groups.files.download', [$this->group, $this]);
     }
 
     public function isFile()

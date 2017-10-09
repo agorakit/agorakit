@@ -45,7 +45,7 @@ class CommentController extends Controller
         $discussion->save();
 
 
-        return redirect()->action('DiscussionController@show', [$discussion->group, $discussion]);
+        return redirect()->route('groups.discussions.show', [$discussion->group, $discussion]);
     }
 
     /**
@@ -89,7 +89,7 @@ class CommentController extends Controller
             $comment->save();
             flash(trans('messages.ressource_updated_successfully'))->success();
 
-            return redirect()->action('DiscussionController@show', [$discussion->group, $discussion]);
+            return redirect()->route('groups.discussions.show', [$discussion->group, $discussion]);
         } else {
             abort(403);
         }
@@ -128,7 +128,7 @@ class CommentController extends Controller
             $comment->delete();
             flash(trans('messages.ressource_deleted_successfully'))->success();
 
-            return redirect()->action('DiscussionController@show', [$group, $discussion]);
+            return redirect()->route('groups.discussions.show', [$group, $discussion]);
         } else {
             abort(403);
         }

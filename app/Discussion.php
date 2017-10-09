@@ -89,6 +89,6 @@ class Discussion extends Model
 
     public function link()
     {
-        return action('DiscussionController@show', [$this->group, $this]);
+        return route('groups.discussions.show', [$this->group, $this]);
     }
 }

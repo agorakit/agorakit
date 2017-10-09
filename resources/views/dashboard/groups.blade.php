@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="page_header">
-        <h1><a href="{{ action('DashboardController@index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.all_groups') }}</h1>
+        <h1><a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.all_groups') }}</h1>
     </div>
 
     @include('dashboard.tabs')
@@ -61,9 +61,9 @@
                     <tbody>
                         @forelse( $groups as $group )
                             <tr class="tag-group @foreach ($group->tags as $tag)tag-{{$tag->tag_id}} @endforeach">
-                                <td class="avatar"><span class="avatar"><img src="{{ action('GroupController@avatar', $group)}}" class="img-rounded"/></span></td>
+                                <td class="avatar"><span class="avatar"><img src="{{ route('groups.avatar', $group)}}" class="img-rounded"/></span></td>
                                 <td class="content">
-                                    <a href="{{ action('GroupController@show',  $group->id) }}">
+                                    <a href="{{ route('groups.show',  $group->id) }}">
                                         <span class="name">{{ $group->name }}
 
                                             @if ($group->isPublic())

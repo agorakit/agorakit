@@ -48,6 +48,6 @@ class Comment extends Model
 
     public function link()
     {
-        return action('DiscussionController@show', [$this->discussion->group, $this->discussion]).'#comment_'.$this->id;
+        return route('groups.discussions.show', [$this->discussion->group, $this->discussion]).'#comment_'.$this->id;
     }
 }

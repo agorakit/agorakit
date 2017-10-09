@@ -154,7 +154,7 @@ class Group extends Model
     /** constructs a links to the group **/
     public function link()
     {
-        return action('GroupController@show', $this);
+        return route('groups.show', $this);
     }
 
     /** returns true if the group is public (viewable by all) **/

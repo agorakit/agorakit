@@ -57,7 +57,7 @@ class MembershipController extends Controller
             $membership->notified_at = Carbon::now();
             $membership->save();
 
-            return redirect()->action('GroupController@show', [$group->id])->with('message', trans('membership.welcome'));
+            return redirect()->route('groups.show', [$group->id])->with('message', trans('membership.welcome'));
         } else {
             flash(trans('messages.not_allowed'))->warning();
 
@@ -122,7 +122,7 @@ class MembershipController extends Controller
         $membership->notification_interval = $this->intervalToMinutes($request->get('notifications'));
         $membership->save();
 
-        return redirect()->action('GroupController@show', [$group->id])->with('message', trans('membership.settings_updated'));
+        return redirect()->route('groups.show', [$group->id])->with('message', trans('membership.settings_updated'));
     }
 
     /**

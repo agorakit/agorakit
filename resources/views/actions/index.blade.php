@@ -12,7 +12,7 @@
     $(document).ready(function() {
         $('#calendar').fullCalendar({
             lang: '{{App::getLocale()}}',
-            events: '{{action('ActionController@indexJson', $group->id)}}',
+            events: '{{route('groups.actions.index.json', $group->id)}}',
             header: {
                 left: 'prev,next',
                 center: 'title',
@@ -31,7 +31,7 @@
                         end: end
                     };
                     $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-                    window.location.href = "{{ action('ActionController@create', $group->id ) }}?start=" + encodeURIComponent(start.format('YYYY-MM-DD HH:mm')) + "&stop=" + encodeURIComponent(end.format('YYYY-MM-DD HH:mm')) + "&title=" + encodeURIComponent(title);
+                    window.location.href = "{{ route('groups.actions.create', $group->id ) }}?start=" + encodeURIComponent(start.format('YYYY-MM-DD HH:mm')) + "&stop=" + encodeURIComponent(end.format('YYYY-MM-DD HH:mm')) + "&title=" + encodeURIComponent(title);
                 }
                 $('#calendar').fullCalendar('unselect');
             },
@@ -68,7 +68,7 @@
 
         @can('create-action', $group)
             <div class="toolbox">
-                <a class="btn btn-primary" href="{{ action('ActionController@create', $group->id ) }}">
+                <a class="btn btn-primary" href="{{ route('groups.actions.create', $group->id ) }}">
                     <i class="fa fa-plus"></i> {{trans('action.create_one_button')}}
                 </a>
             </div>

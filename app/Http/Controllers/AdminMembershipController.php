@@ -55,7 +55,7 @@ class AdminMembershipController extends Controller
             }
         }
 
-        return redirect()->action('UserController@index', $group);
+        return redirect()->route('groups.users.index', $group);
     }
 
     /**
@@ -69,7 +69,7 @@ class AdminMembershipController extends Controller
         $membership->delete();
         flash(trans('messages.user_removed_successfuly').' : '.$user->name)->success();
 
-        return redirect()->action('UserController@index', $group);
+        return redirect()->route('groups.users.index', $group);
     }
 
     public function editUserForm(Request $request, Group $group, User $user)
@@ -94,7 +94,7 @@ class AdminMembershipController extends Controller
         $membership->save();
         flash(trans('messages.user_made_admin_successfuly').' : '.$user->name)->success();
 
-        return redirect()->action('UserController@index', $group);
+        return redirect()->route('groups.users.index', $group);
     }
 
     /**
@@ -109,7 +109,7 @@ class AdminMembershipController extends Controller
         $membership->save();
         flash(trans('messages.user_made_member_successfuly').' : '.$user->name)->success();
 
-        return redirect()->action('UserController@index', $group);
+        return redirect()->route('groups.users.index', $group);
     }
 
     public function intervalToMinutes($interval)

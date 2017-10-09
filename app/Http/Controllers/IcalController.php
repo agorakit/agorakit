@@ -34,7 +34,7 @@ class IcalController extends Controller
             $vEvent->setSummary($action->name);
             $vEvent->setDescription(summary($action->body), 1000);
             $vEvent->setLocation($action->location);
-            $vEvent->setUrl(action('ActionController@show', [$action->group->id, $action->id]));
+            $vEvent->setUrl(route('groups.actions.show', [$action->group->id, $action->id]));
             $vEvent->setUseUtc(false); //TODO fixme
 
             $vCalendar->addComponent($vEvent);
@@ -66,7 +66,7 @@ class IcalController extends Controller
             $vEvent->setSummary($action->name);
             $vEvent->setDescription(summary($action->body), 1000);
             $vEvent->setLocation($action->location);
-            $vEvent->setUrl(action('ActionController@show', [$action->group->id, $action->id]));
+            $vEvent->setUrl(route('groups.actions.show', [$action->group->id, $action->id]));
             $vEvent->setUseUtc(false); //TODO fixme
 
             $vCalendar->addComponent($vEvent);

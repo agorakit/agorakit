@@ -1,8 +1,8 @@
 <div class="page_header">
     <h1>
-        <a href="{{ action('DashboardController@index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
+        <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
         @if (isset($tab) && ($tab <> 'home'))
-            <a href="{{ action('GroupController@show', $group->id) }}">{{ $group->name }}</a>
+            <a href="{{ route('groups.show', $group->id) }}">{{ $group->name }}</a>
         @else
             {{ $group->name }}
         @endif
@@ -23,7 +23,7 @@
     <ul class="nav nav-tabs nav-groups">
 
         <li role="presentation" @if (isset($tab) && ($tab == 'home')) class="active" @endif>
-            <a href="{{ action('GroupController@show', $group->id) }}">
+            <a href="{{ route('groups.show', $group->id) }}">
                 <i class="fa fa-home"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.group_home') }}</span>
             </a>
         </li>
@@ -31,7 +31,7 @@
 
         @can ('viewDiscussions', $group)
             <li role="presentation" @if (isset($tab) && ($tab == 'discussion')) class="active" @endif>
-                <a href="{{ action('DiscussionController@index', $group->id) }}">
+                <a href="{{ route('groups.discussions.index', $group->id) }}">
                     <i class="fa fa-comments"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.discussions') }}</span>
                 </a>
             </li>
@@ -39,7 +39,7 @@
 
         @can ('viewActions', $group)
             <li role="presentation" @if (isset($tab) && ($tab == 'action')) class="active" @endif>
-                <a href="{{ action('ActionController@index', $group->id) }}">
+                <a href="{{ route('groups.actions.index', $group->id) }}">
                     <i class="fa fa-calendar"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.agenda') }}</span>
                 </a>
             </li>
@@ -47,7 +47,7 @@
 
         @can ('viewFiles', $group)
             <li role="presentation" @if (isset($tab) && ($tab == 'files')) class="active" @endif>
-                <a href="{{ action('FileController@index', $group->id) }}">
+                <a href="{{ route('groups.files.index', $group->id) }}">
                     <i class="fa fa-files-o"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.files') }}</span>
                 </a>
             </li>
@@ -55,7 +55,7 @@
 
         @can ('viewMembers', $group)
             <li role="presentation" @if (isset($tab) && ($tab == 'users')) class="active" @endif>
-                <a href="{{ action('UserController@index', $group->id) }}">
+                <a href="{{ route('groups.users.index', $group->id) }}">
                     <i class="fa fa-users"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.members') }}</span>
                 </a>
             </li>
@@ -107,7 +107,7 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="admin" id="admin-contents">
                     <li>
-                        <a href="{{ action('GroupController@edit', $group->id) }}">
+                        <a href="{{ route('groups.edit', $group->id) }}">
                             <i class="fa fa-pencil"></i> {{ trans('messages.edit') }}
                         </a>
                     </li>
@@ -119,7 +119,7 @@
                     </li>
 
                     <li>
-                        <a href="{{ action('GroupController@destroyConfirm', [$group->id]) }}">
+                        <a href="{{ route('groups.deleteconfirm', [$group->id]) }}">
                             <i class="fa fa-trash"></i> {{trans('messages.delete')}}
                         </a>
                     </li>
@@ -146,7 +146,7 @@
     <ul class="nav nav-tabs nav-groups">
 
         <li role="presentation" @if (isset($tab) && ($tab == 'home')) class="active" @endif>
-            <a href="{{ action('GroupController@show', $group->id) }}">
+            <a href="{{ route('groups.show', $group->id) }}">
                 <i class="fa fa-home"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.group_home') }}</span>
             </a>
         </li>
@@ -154,7 +154,7 @@
 
         @if ($group->isPublic() )
             <li role="presentation" @if (isset($tab) && ($tab == 'discussion')) class="active" @endif>
-                <a href="{{ action('DiscussionController@index', $group->id) }}">
+                <a href="{{ route('groups.discussions.index', $group->id) }}">
                     <i class="fa fa-comments"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.discussions') }}</span>
                 </a>
             </li>
@@ -162,7 +162,7 @@
 
         @if ($group->isPublic() )
             <li role="presentation" @if (isset($tab) && ($tab == 'action')) class="active" @endif>
-                <a href="{{ action('ActionController@index', $group->id) }}">
+                <a href="{{ route('groups.actions.index', $group->id) }}">
                     <i class="fa fa-calendar"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.agenda') }}</span>
                 </a>
             </li>
@@ -170,7 +170,7 @@
 
         @if ($group->isPublic() )
             <li role="presentation" @if (isset($tab) && ($tab == 'files')) class="active" @endif>
-                <a href="{{ action('FileController@index', $group->id) }}">
+                <a href="{{ route('groups.files.index', $group->id) }}">
                     <i class="fa fa-files-o"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.files') }}</span>
                 </a>
             </li>
@@ -178,7 +178,7 @@
 
         @if ($group->isPublic() )
             <li role="presentation" @if (isset($tab) && ($tab == 'users')) class="active" @endif>
-                <a href="{{ action('UserController@index', $group->id) }}">
+                <a href="{{ route('groups.users.index', $group->id) }}">
                     <i class="fa fa-users"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.members') }}</span>
                 </a>
             </li>

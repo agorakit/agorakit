@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="{{ action('DashboardController@index') }}" class="navbar-brand">
+            <a href="{{ route('index') }}" class="navbar-brand">
                 <i class="fa fa-child"></i> <span class="hidden-xs hidden-sm hidden-md">{{Config::get('agorakit.name')}}</span>
             </a>
         </div>
@@ -70,9 +70,9 @@
                         </a>
                         <ul class="dropdown-menu">
                             @forelse (Auth::user()->groups()->orderBy('name')->get() as $group)
-                                <li><a href="{{ action('GroupController@show', $group->id)}}">{{$group->name}}</a></li>
+                                <li><a href="{{ route('groups.show', $group->id)}}">{{$group->name}}</a></li>
                             @empty
-                                <li><a href="{{ action('DashboardController@index')}}">{{ trans('membership.not_subscribed_to_group_yet') }}</a></li>
+                                <li><a href="{{ route('index')}}">{{ trans('membership.not_subscribed_to_group_yet') }}</a></li>
                             @endforelse
                             <li role="separator" class="divider"></li>
 
@@ -84,7 +84,7 @@
 
                             <li role="separator" class="divider"></li>
 
-                            <li><a href="{{ action('GroupController@create') }}">
+                            <li><a href="{{ route('groups.create') }}">
                                 <i class="fa fa-bolt"></i> {{ trans('group.create_a_group_button') }}</a>
                             </li>
 
@@ -115,8 +115,8 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{action('UserController@show', Auth::user()->id)}}"><i class="fa fa-btn fa-user"></i> {{ trans('messages.profile') }}</a></li>
-                            <li><a href="{{action('UserController@edit', Auth::user()->id)}}"><i class="fa fa-btn fa-edit"></i> {{ trans('messages.edit_my_profile') }}</a></li>
+                            <li><a href="{{route('users.show', Auth::user()->id)}}"><i class="fa fa-btn fa-user"></i> {{ trans('messages.profile') }}</a></li>
+                            <li><a href="{{route('users.edit', Auth::user()->id)}}"><i class="fa fa-btn fa-edit"></i> {{ trans('messages.edit_my_profile') }}</a></li>
                             <li>
                                 <a href="{{ url('/logout') }}"
                                 onclick="event.preventDefault();
@@ -189,7 +189,7 @@
             <i class="fa fa-info-circle"></i>
             {{trans('messages.email_not_verified')}}
             <br/>
-            <a href="{{action('UserController@sendVerificationAgain', Auth::user()->id)}}">{{trans('messages.email_not_verified_send_again_verification')}}</a>
+            <a href="{{route('users.sendverification', Auth::user()->id)}}">{{trans('messages.email_not_verified_send_again_verification')}}</a>
         </div>
     </div>
 @endif

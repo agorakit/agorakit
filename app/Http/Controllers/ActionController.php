@@ -58,7 +58,7 @@ class ActionController extends Controller
             $event['location'] = $action->location;
             $event['start'] = $action->start->toIso8601String();
             $event['end'] = $action->stop->toIso8601String();
-            $event['url'] = action('ActionController@show', [$group->id, $action->id]);
+            $event['url'] = route('groups.actions.show', [$group->id, $action->id]);
             $event['color'] = $group->color();
 
             $events[] = $event;
@@ -124,13 +124,13 @@ class ActionController extends Controller
 
         if ($action->isInvalid()) {
             // Oops.
-            return redirect()->action('ActionController@create', $group)
+            return redirect()->route('groups.actions.create', $group)
             ->withErrors($action->getErrors())
             ->withInput();
         } else {
             $action->save();
 
-            return redirect()->action('ActionController@index', $group);
+            return redirect()->route('groups.actions.index', $group);
         }
     }
 
@@ -193,14 +193,14 @@ class ActionController extends Controller
 
         if ($action->isInvalid()) {
             // Oops.
-            return redirect()->action('ActionController@create', $group_id)
+            return redirect()->route('groups.actions.create', $group_id)
             ->withErrors($action->getErrors())
             ->withInput();
         }
 
         $action->save();
 
-        return redirect()->action('ActionController@show', [$action->group->id, $action->id]);
+        return redirect()->route('groups.actions.show', [$action->group->id, $action->id]);
     }
 
     /**
@@ -235,7 +235,7 @@ class ActionController extends Controller
             $action->delete();
             flash(trans('messages.ressource_deleted_successfully'))->success();
 
-            return redirect()->action('ActionController@index', [$group->id]);
+            return redirect()->route('groups.actions.index', [$group->id]);
         } else {
             abort(403);
         }

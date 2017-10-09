@@ -118,7 +118,7 @@ class GroupController extends Controller
 
         if ($group->isInvalid()) {
             // Oops.
-            return redirect()->action('GroupController@create')
+            return redirect()->route('groups.create')
             ->withErrors($group->getErrors())
             ->withInput();
         }
@@ -201,7 +201,7 @@ class GroupController extends Controller
         // validation
         if ($group->isInvalid()) {
             // Oops.
-            return redirect()->action('GroupController@edit', $group->id)
+            return redirect()->route('groups.edit', $group->id)
             ->withErrors($group->getErrors())
             ->withInput();
         }
@@ -217,7 +217,7 @@ class GroupController extends Controller
 
         flash(trans('messages.ressource_updated_successfully'))->success();
 
-        return redirect()->action('GroupController@show', [$group->id]);
+        return redirect()->route('groups.show', [$group->id]);
     }
 
     public function destroyConfirm(Request $request, Group $group)

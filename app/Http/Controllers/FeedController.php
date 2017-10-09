@@ -31,10 +31,10 @@ class FeedController extends Controller
             ->title($discussion->name)
             ->description($discussion->body)
             ->contentEncoded($discussion->body)
-            ->url(action('DiscussionController@show', [$discussion->group, $discussion]))
+            ->url(route('groups.discussions.show', [$discussion->group, $discussion]))
             ->author($discussion->user->name)
             ->pubDate($discussion->created_at->timestamp)
-            ->guid(action('DiscussionController@show', [$discussion->group, $discussion]), true)
+            ->guid(route('groups.discussions.show', [$discussion->group, $discussion]), true)
             ->preferCdata(true) // By this, title and description become CDATA wrapped HTML.
             ->appendTo($channel);
         }
@@ -64,10 +64,10 @@ class FeedController extends Controller
             ->title($action->name)
             ->description($action->body)
             ->contentEncoded($action->body)
-            ->url(action('ActionController@show', [$action->group, $action]))
+            ->url(route('groups.actions.show', [$action->group, $action]))
             ->author($action->user->name)
             ->pubDate($action->start->timestamp)
-            ->guid(action('ActionController@show', [$action->group, $action]), true)
+            ->guid(route('groups.actions.show', [$action->group, $action]), true)
             ->preferCdata(true) // By this, title and description become CDATA wrapped HTML.
             ->appendTo($channel);
         }

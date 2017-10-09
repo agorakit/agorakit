@@ -5,7 +5,7 @@
 
         <div class="avatar"><img src="{{$comment->user->avatar()}}" class="img-circle"/></div>
         
-        <div class="user"><a href="{{ action('UserController@show', [$comment->user->id]) }}">{{$comment->user->name}}</a></div>
+        <div class="user"><a href="{{ route('users.show', [$comment->user->id]) }}">{{$comment->user->name}}</a></div>
 
         <div class="body">{!! filter($comment->body) !!}</div>
 
