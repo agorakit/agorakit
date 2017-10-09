@@ -37,14 +37,14 @@
             @endcan
 
             @can('create-file', $group)
-                <a class="btn btn-primary" href="{{ route('groups.files.createLink', $group ) }}">
+                <a class="btn btn-primary" href="{{ route('groups.files.createlink', $group ) }}">
                     <i class="fa fa-link"></i>
                     {{trans('messages.create_link_button')}}
                 </a>
             @endcan
         </div>
 
-    
+
 
         <table class="table table-hover files-grid">
 

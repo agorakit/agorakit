@@ -28,7 +28,7 @@
         </p>
 
 
-        {!! Form::open(array('action' => ['AdminMembershipController@addUser', $group])) !!}
+        {!! Form::open(array('action' => ['Admin\MembershipController@addUser', $group])) !!}
 
         <div class="form-group">
             {!! Form::label('users', trans('membership.users_to_add')) !!}

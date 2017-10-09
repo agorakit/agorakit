@@ -216,7 +216,7 @@
 
         @if (Auth::user()->isAdmin())
             <div>
-                <a class="btn btn-primary" href="{{action('AdminSettingsController@settings')}}">
+                <a class="btn btn-primary" href="{{action('Admin\SettingsController@index')}}">
                     <i class="fa fa-pencil"></i> {{trans('messages.modify_intro_text')}}
                 </a>
             </div>
