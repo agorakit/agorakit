@@ -8,7 +8,7 @@
 
         <h3>
             @if (isset($file))
-                <a href="{{ action('FileController@index', $group->id) }}"><i class="fa fa-home" aria-hidden="true"></i></a>
+                <a href="{{ route('groups.files.index', $group->id) }}"><i class="fa fa-home" aria-hidden="true"></i></a>
                 {{$file->name}}
             @endif
         </h3>

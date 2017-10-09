@@ -30,15 +30,15 @@
             @foreach( $users as $user )
                 <tr>
                     <td>
-                        <a href="{{ action('UserController@show', $user->id) }}"> <span class="avatar"><img src="{{$user->avatar()}}" class="img-circle"/></span> {{ $user->name }}</a>
+                        <a href="{{ route('users.show', $user->id) }}"> <span class="avatar"><img src="{{$user->avatar()}}" class="img-circle"/></span> {{ $user->name }}</a>
                     </td>
 
                     <td>
-                        <a href="{{ action('UserController@show', $user->id) }}">{{ $user->created_at->diffForHumans() }}</a>
+                        <a href="{{ route('users.show', $user->id) }}">{{ $user->created_at->diffForHumans() }}</a>
                     </td>
 
                     <td>
-                        <a href="{{ action('UserController@show', $user->id) }}">{{ $user->updated_at->diffForHumans() }}</a>
+                        <a href="{{ route('users.show', $user->id) }}">{{ $user->updated_at->diffForHumans() }}</a>
                     </td>
 
 
@@ -88,7 +88,7 @@
         @if ($admins->count() > 0)
             <strong>{{trans('messages.admins')}} : </strong>
             @foreach( $admins as $admin )
-                <a href="{{ action('UserController@show', $admin) }}">{{ $admin->name }}</a>
+                <a href="{{ route('users.show', $admin) }}">{{ $admin->name }}</a>
             @endforeach
         @endif
 

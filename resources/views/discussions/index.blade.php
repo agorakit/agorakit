@@ -13,7 +13,7 @@
         @can('create-discussion', $group)
             <div class="toolbox">
 
-                <a class="btn btn-primary" href="{{ action('DiscussionController@create', $group->id ) }}">
+                <a class="btn btn-primary" href="{{ route('groups.discussions.create', $group->id ) }}">
                     <i class="fa fa-plus"></i> {{trans('discussion.create_one_button')}}
                 </a>
 
@@ -36,7 +36,7 @@
                     <tr>
                         <td class="avatar"><span class="avatar"><img src="{{$discussion->user->avatar()}}" class="img-circle"/></span></td>
                         <td class="content">
-                            <a href="{{ action('DiscussionController@show', [$discussion->group_id, $discussion->id]) }}">
+                            <a href="{{ route('groups.discussions.show', [$discussion->group_id, $discussion->id]) }}">
                                 <span class="name">{{ $discussion->name }}</span>
                                 <span class="summary">{{summary($discussion->body) }}</span>
                             </a>

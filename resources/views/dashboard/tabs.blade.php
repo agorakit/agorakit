@@ -1,7 +1,7 @@
 <ul class="nav nav-pills">
 
     <li @if (isset($tab) && ($tab == 'homepage')) class="active" @endif>
-        <a href="{{ action('DashboardController@index') }}">
+        <a href="{{ route('index') }}">
             <i class="fa fa-home"></i> <span class="hidden-xs">{{ trans('messages.presentation') }}</span>
         </a>
     </li>

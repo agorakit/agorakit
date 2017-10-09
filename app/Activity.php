@@ -71,22 +71,22 @@ class Activity extends Model
 
         if ($this->model instanceof Discussion)
         {
-            return action('DiscussionController@show', [$this->group, $this->model]);
+            return route('groups.discussions.show', [$this->group, $this->model]);
         }
 
         if ($this->model instanceof File)
         {
-            return action('FileController@show', [$this->group, $this->model]);
+            return route('groups.files.show', [$this->group, $this->model]);
         }
 
         if ($this->model instanceof Action)
         {
-            return action('ActionController@show', [$this->group, $this->model]);
+            return route('groups.actions.show', [$this->group, $this->model]);
         }
 
         if ($this->model instanceof Comment)
         {
-            return action('DiscussionController@show', [$this->group, $this->model->discussion]);
+            return route('groups.discussions.show', [$this->group, $this->model->discussion]);
         }
 
 

@@ -8,5 +8,5 @@ Breadcrumbs::register('home', function ($breadcrumbs) {
 // Home > Group
 Breadcrumbs::register('group', function ($breadcrumbs, $group) {
     $breadcrumbs->parent('home');
-    $breadcrumbs->push($group->name, action('GroupController@show', [$group->id]));
+    $breadcrumbs->push($group->name, route('groups.show', [$group->id]));
 });

@@ -66,7 +66,7 @@ class DiscussionController extends Controller
 
         if (!$group->discussions()->save($discussion)) {
             // Oops.
-            return redirect()->action('DiscussionController@create', $group->id)
+            return redirect()->route('groups.discussions.create', $group->id)
             ->withErrors($discussion->getErrors())
             ->withInput();
         }
@@ -78,7 +78,7 @@ class DiscussionController extends Controller
 
         flash(trans('messages.ressource_created_successfully'))->success();
 
-        return redirect()->action('DiscussionController@show', [$group->id, $discussion->id]);
+        return redirect()->route('groups.discussions.show', [$group->id, $discussion->id]);
     }
 
     /**
@@ -148,7 +148,7 @@ class DiscussionController extends Controller
 
         flash(trans('messages.ressource_updated_successfully'))->success();
 
-        return redirect()->action('DiscussionController@show', [$discussion->group->id, $discussion->id]);
+        return redirect()->route('groups.discussions.show', [$discussion->group->id, $discussion->id]);
     }
 
     public function destroyConfirm(Request $request, Group $group, Discussion $discussion)
@@ -176,7 +176,7 @@ class DiscussionController extends Controller
             $discussion->delete();
             flash(trans('messages.ressource_deleted_successfully'))->success();
 
-            return redirect()->action('DiscussionController@index', [$group]);
+            return redirect()->route('groups.discussions.index', [$group]);
         } else {
             abort(403);
         }

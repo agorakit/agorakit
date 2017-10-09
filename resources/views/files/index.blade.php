@@ -30,14 +30,14 @@
 
         <div class="toolbox">
             @can('create-file', $group)
-                <a class="btn btn-primary" href="{{ action('FileController@create', $group->id ) }}">
+                <a class="btn btn-primary" href="{{ route('groups.files.create', $group->id ) }}">
                     <i class="fa fa-file"></i>
                     {{trans('messages.create_file_button')}}
                 </a>
             @endcan
 
             @can('create-file', $group)
-                <a class="btn btn-primary" href="{{ action('FileController@createLink', $group ) }}">
+                <a class="btn btn-primary" href="{{ route('groups.files.createLink', $group ) }}">
                     <i class="fa fa-link"></i>
                     {{trans('messages.create_link_button')}}
                 </a>
@@ -65,12 +65,12 @@
                 @forelse( $files as $file )
                     <tr class="file-item @foreach ($file->tags as $tag)tag-{{$tag->name}} @endforeach">
                         <td>
-                            <a href="{{ action('FileController@show', [$group->id, $file->id]) }}"><img src="{{ action('FileController@thumbnail', [$group->id, $file->id]) }}"/></a>
+                            <a href="{{ route('groups.files.show', [$group->id, $file->id]) }}"><img src="{{ route('groups.files.thumbnail', [$group->id, $file->id]) }}"/></a>
                         </td>
 
                         <td>
                             <div class="ellipsis" style="max-width: 30em">
-                                <a  href="{{ action('FileController@show', [$group->id, $file->id]) }}">{{ $file->name }}</a>
+                                <a  href="{{ route('groups.files.show', [$group->id, $file->id]) }}">{{ $file->name }}</a>
                             </div>
                         </td>
 
@@ -84,7 +84,7 @@
 
                         <td>
                             @unless (is_null ($file->user))
-                                <a href="{{ action('UserController@show', $file->user->id) }}">{{ $file->user->name }}</a>
+                                <a href="{{ route('users.show', $file->user->id) }}">{{ $file->user->name }}</a>
                             @endunless
                         </td>
 
@@ -94,13 +94,13 @@
 
                         <td>
                             @can('edit', $file)
-                                <a class="btn btn-default btn-xs" href="{{ action('FileController@edit', [$group->id, $file->id]) }}"><i class="fa fa-edit"></i>
+                                <a class="btn btn-default btn-xs" href="{{ route('groups.files.edit', [$group->id, $file->id]) }}"><i class="fa fa-edit"></i>
                                     {{trans('messages.edit')}}
                                 </a>
                             @endcan
 
                             @can('delete', $file)
-                                <a class="btn btn-warning btn-xs" href="{{ action('FileController@destroyConfirm', [$group->id, $file->id]) }}"><i class="fa fa-trash"></i>
+                                <a class="btn btn-warning btn-xs" href="{{ route('groups.files.deleteconfirm', [$group->id, $file->id]) }}"><i class="fa fa-trash"></i>
                                     {{trans('messages.delete')}}
                                 </a>
                             @endcan

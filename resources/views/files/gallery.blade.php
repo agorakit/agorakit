@@ -9,7 +9,7 @@
         <h2>{{trans('messages.files_in_this_group')}}
 
             @can('create-file', $group)
-                <a class="btn btn-primary btn-xs" href="{{ action('FileController@create', $group->id ) }}">
+                <a class="btn btn-primary btn-xs" href="{{ route('groups.files.create', $group->id ) }}">
                     <i class="fa fa-plus"></i>
                     {{trans('messages.create_file_button')}}
                 </a>
@@ -18,7 +18,7 @@
         </h2>
 
         <p>
-            <a class="btn btn-default btn-xs" href="{{ action('FileController@index', $group->id ) }}">
+            <a class="btn btn-default btn-xs" href="{{ route('groups.files.index', $group->id ) }}">
                 <i class="fa fa-list "></i>
                 {{trans('messages.show_list')}}</a>
             </p>
@@ -26,8 +26,8 @@
 
             <div id="gallery">
                 @forelse( $files as $file )
-                    <a href="{{ action('FileController@download', [$group->id, $file->id]) }}">
-                        <img src="{{ action('FileController@preview', [$group->id, $file->id]) }}"/>
+                    <a href="{{ route('groups.files.download', [$group->id, $file->id]) }}">
+                        <img src="{{ route('groups.files.preview', [$group->id, $file->id]) }}"/>
                     </a>
                 @empty
                     {{trans('messages.nothing_yet')}}

@@ -225,9 +225,9 @@ class FileController extends Controller
 
                 flash(trans('messages.ressource_created_successfully'))->success();
                 if (isset($parent)) {
-                    return redirect()->action('FileController@show', [$group, $parent]);
+                    return redirect()->route('groups.files.show', [$group, $parent]);
                 } else {
-                    return redirect()->action('FileController@index', $group);
+                    return redirect()->route('groups.files.index', $group);
                 }
             }
         } catch (Exception $e) {
@@ -273,7 +273,7 @@ class FileController extends Controller
         if ($file->save()) {
             flash(trans('messages.ressource_updated_successfully'))->success();
 
-            return redirect()->action('FileController@index', [$group]);
+            return redirect()->route('groups.files.index', [$group]);
         } else {
             flash(trans('messages.ressource_not_updated_successfully'))->error();
 
@@ -306,7 +306,7 @@ class FileController extends Controller
             $file->delete();
             flash(trans('messages.ressource_deleted_successfully'))->success();
 
-            return redirect()->action('FileController@index', [$group]);
+            return redirect()->route('groups.files.index', [$group]);
         } else {
             abort(403);
         }
@@ -350,7 +350,7 @@ class FileController extends Controller
 
             flash(trans('messages.ressource_created_successfully'))->success();
 
-            return redirect()->action('FileController@index', $group);
+            return redirect()->route('groups.files.index', $group);
         } else {
             flash(trans('messages.ressource_not_created_successfully'))->error();
 

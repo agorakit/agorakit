@@ -15,7 +15,7 @@
 @section('content')
 
     <div class="page_header">
-        <h1><a href="{{ action('DashboardController@index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.map') }}</h1>
+        <h1><a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.map') }}</h1>
         <p>{{trans('messages.map_info')}}</p>
     </div>
 
@@ -51,7 +51,7 @@
             glyph: 'user'
         })
     })
-    .bindPopup("<a href=\"{{action('UserController@show', $user)}}\">{{$user->name}}</a><br/>" + {!!json_encode(summary($user->body))!!} ).addTo(map);
+    .bindPopup("<a href=\"{{route('users.show', $user)}}\">{{$user->name}}</a><br/>" + {!!json_encode(summary($user->body))!!} ).addTo(map);
     @endforeach
 
 
@@ -63,7 +63,7 @@
             glyph: 'calendar-check-o'
         })
     })
-    .bindPopup("<a href=\"{{action('ActionController@show', [$action->group, $action])}}\">{{$action->name}}</a><br/>" + {!!json_encode($action->body)!!} ).addTo(map);
+    .bindPopup("<a href=\"{{route('groups.actions.show', [$action->group, $action])}}\">{{$action->name}}</a><br/>" + {!!json_encode($action->body)!!} ).addTo(map);
     @endforeach
 
 
@@ -75,7 +75,7 @@
             glyph: 'users'
         })
     })
-    .bindPopup("<a href=\"{{action('GroupController@show', $group)}}\">{{$group->name}}</a><br/>" + {!!json_encode($group->body)!!} ).addTo(map);
+    .bindPopup("<a href=\"{{route('groups.show', $group)}}\">{{$group->name}}</a><br/>" + {!!json_encode($group->body)!!} ).addTo(map);
     @endforeach
 
 

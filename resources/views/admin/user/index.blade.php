@@ -36,19 +36,19 @@
                 @foreach( $users as $user )
                     <tr>
                         <td>
-                            <a href="{{ action('UserController@show', $user->id) }}"> {{ $user->name }}</a>
+                            <a href="{{ route('users.show', $user->id) }}"> {{ $user->name }}</a>
                         </td>
 
                         <td>
-                            <a href="{{ action('UserController@show', $user->id) }}"> {{ $user->email }}</a>
+                            <a href="{{ route('users.show', $user->id) }}"> {{ $user->email }}</a>
                         </td>
 
                         <td data-order="{{ $user->created_at }}">
-                            <a href="{{ action('UserController@show', $user->id) }}">{{ $user->created_at->diffForHumans() }}</a>
+                            <a href="{{ route('users.show', $user->id) }}">{{ $user->created_at->diffForHumans() }}</a>
                         </td>
 
                         <td data-order="{{ $user->updated_at }}">
-                            <a href="{{ action('UserController@show', $user->id) }}">{{ $user->updated_at->diffForHumans() }}</a>
+                            <a href="{{ route('users.show', $user->id) }}">{{ $user->updated_at->diffForHumans() }}</a>
                         </td>
 
                         <td>
@@ -60,7 +60,7 @@
                         </td>
 
                         <td>
-                            <a href="{{ action('UserController@edit', $user->id) }}">{{trans('messages.edit')}}</a>
+                            <a href="{{ route('users.edit', $user->id) }}">{{trans('messages.edit')}}</a>
                         </td>
 
                     </tr>

@@ -49,7 +49,7 @@
 
 
     <div class="page_header">
-        <h1><a href="{{ action('DashboardController@index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.agenda') }}</h1>
+        <h1><a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.agenda') }}</h1>
         <p>{{trans('messages.if_you_want_to_add_event_goto_group_agenda')}}</p>
     </div>
 

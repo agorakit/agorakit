@@ -50,7 +50,7 @@ class Action extends Model
 
     public function link()
     {
-        return action('ActionController@show', [$this->group, $this]);
+        return route('groups.actions.show', [$this->group, $this]);
     }
 
     /**

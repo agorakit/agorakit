@@ -16,7 +16,7 @@
 
         <h2>{{ trans('messages.my_groups') }}</h2>
         @foreach ($my_groups as $group)
-            <span class="label label-default"><a href="{{action('GroupController@show', $group)}}">{{$group->name}}</a> </span>
+            <span class="label label-default"><a href="{{route('groups.show', $group)}}">{{$group->name}}</a> </span>
         @endforeach
 
 
@@ -44,12 +44,12 @@
 
                                     <td class="avatar"><span class="avatar"><img src="{{$discussion->user->avatar()}}" class="img-circle"/></span></td>
                                     <td class="content">
-                                        <a href="{{ action('DiscussionController@show', [$discussion->group_id, $discussion->id]) }}">
+                                        <a href="{{ route('groups.discussions.show', [$discussion->group_id, $discussion->id]) }}">
                                             <span class="name">{{ $discussion->name }}</span>
                                             <span class="summary">{{summary($discussion->body) }}</span>
                                             <br/>
                                         </a>
-                                        <span class="group-name"><a href="{{ action('GroupController@show', [$discussion->group_id]) }}">{{ $discussion->group->name }}</a></span>
+                                        <span class="group-name"><a href="{{ route('groups.show', [$discussion->group_id]) }}">{{ $discussion->group->name }}</a></span>
                                     </td>
 
                                     <td class="date">
@@ -90,12 +90,12 @@
                             @foreach( $my_actions as $action )
                                 <tr>
                                     <td class="content">
-                                        <a href="{{ action('ActionController@show', [$action->group_id, $action->id]) }}">
+                                        <a href="{{ route('groups.actions.show', [$action->group_id, $action->id]) }}">
                                             <span class="name">{{ $action->name }}</span>
                                             <span class="summary">{{ summary($action->body) }}</span>
                                         </a>
                                         <br/>
-                                        <span class="group-name"><a href="{{ action('GroupController@show', [$action->group_id]) }}">{{ $action->group->name }}</a></span>
+                                        <span class="group-name"><a href="{{ route('groups.show', [$action->group_id]) }}">{{ $action->group->name }}</a></span>
                                     </td>
 
                                     <td>
@@ -138,12 +138,12 @@
 
                                 <td class="avatar"><span class="avatar"><img src="{{$discussion->user->avatar()}}" class="img-circle"/></span></td>
                                 <td class="content">
-                                    <a href="{{ action('DiscussionController@show', [$discussion->group_id, $discussion->id]) }}">
+                                    <a href="{{ route('groups.discussions.show', [$discussion->group_id, $discussion->id]) }}">
                                         <span class="name">{{ $discussion->name }}</span>
                                         <span class="summary">{{summary($discussion->body) }}</span>
                                         <br/>
                                     </a>
-                                    <span class="group-name"><a href="{{ action('GroupController@show', [$discussion->group_id]) }}">{{ $discussion->group->name }}</a></span>
+                                    <span class="group-name"><a href="{{ route('groups.show', [$discussion->group_id]) }}">{{ $discussion->group->name }}</a></span>
                                 </td>
 
                                 <td class="date">
@@ -188,12 +188,12 @@
                         @foreach( $other_actions as $action )
                             <tr>
                                 <td class="content">
-                                    <a href="{{ action('ActionController@show', [$action->group_id, $action->id]) }}">
+                                    <a href="{{ route('groups.actions.show', [$action->group_id, $action->id]) }}">
                                         <span class="name">{{ $action->name }}</span>
                                         <span class="summary">{{ summary($action->body) }}</span>
                                     </a>
                                     <br/>
-                                    <span class="group-name"><a href="{{ action('GroupController@show', [$action->group_id]) }}">{{ $action->group->name }}</a></span>
+                                    <span class="group-name"><a href="{{ route('groups.show', [$action->group_id]) }}">{{ $action->group->name }}</a></span>
                                 </td>
 
                                 <td>

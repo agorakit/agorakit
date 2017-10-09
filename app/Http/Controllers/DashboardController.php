@@ -211,8 +211,8 @@ class DashboardController extends Controller
             $event['location'] = $action->location;
             $event['start'] = $action->start->toIso8601String();
             $event['end'] = $action->stop->toIso8601String();
-            $event['url'] = action('ActionController@show', [$action->group->id, $action->id]);
-            $event['group_url'] = action('ActionController@index', [$action->group->id]);
+            $event['url'] = route('groups.actions.show', [$action->group->id, $action->id]);
+            $event['group_url'] = route('groups.actions.index', [$action->group->id]);
             $event['group_name'] = $action->group->name;
             $event['color'] = $action->group->color();
 

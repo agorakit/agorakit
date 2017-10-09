@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="page_header">
-        <h1><a href="{{ action('DashboardController@index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.users') }}</h1>
+        <h1><a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.users') }}</h1>
     </div>
 
     @include('dashboard.tabs')
@@ -23,12 +23,12 @@
 
 
                             <td>
-                                <a href="{{ action('UserController@show', $user->id) }}"> <span class="avatar"><img src="{{$user->avatar()}}" class="img-circle"/></span></a>
+                                <a href="{{ route('users.show', $user->id) }}"> <span class="avatar"><img src="{{$user->avatar()}}" class="img-circle"/></span></a>
 
                             </td>
 
                             <td class="content">
-                                <a href="{{ action('UserController@show', $user->id) }}">
+                                <a href="{{ route('users.show', $user->id) }}">
                                     <span class="name"> {{ $user->name }}</span>
                                     <span class="summary">{{summary($user->body, 200)}}</span>
                                 </a>
@@ -36,7 +36,7 @@
                                 <span class="summary">
                                     @if ($user->groups->count() > 0)
                                         @foreach ($user->groups as $group)
-                                            <span class="label label-default"><a href="{{action('GroupController@show', $group)}}">{{$group->name}}</a></span>
+                                            <span class="label label-default"><a href="{{route('groups.show', $group)}}">{{$group->name}}</a></span>
                                         @endforeach
                                     @endif
                                 </span>
@@ -45,7 +45,7 @@
 
 
                             <td style="font-size: 10px;">
-                                <a href="{{ action('UserController@show', $user->id) }}">{{ $user->updated_at->diffForHumans() }}</a>
+                                <a href="{{ route('users.show', $user->id) }}">{{ $user->updated_at->diffForHumans() }}</a>
                             </td>
 
 

@@ -53,7 +53,7 @@ html, body, #map
             glyph: 'user'
         })
     })
-    .bindPopup("<a href=\"{{action('UserController@show', $user)}}\">{{$user->name}}</a><br/>" + {!!json_encode(summary($user->body))!!} ).addTo(map);
+    .bindPopup("<a href=\"{{route('users.show', $user)}}\">{{$user->name}}</a><br/>" + {!!json_encode(summary($user->body))!!} ).addTo(map);
     @endforeach
 
 
@@ -65,7 +65,7 @@ html, body, #map
             glyph: 'calendar-check-o'
         })
     })
-    .bindPopup("<a href=\"{{action('ActionController@show', [$action->group, $action])}}\">{{$action->name}}</a><br/>" + {!!json_encode($action->body)!!} ).addTo(map);
+    .bindPopup("<a href=\"{{route('groups.actions.show', [$action->group, $action])}}\">{{$action->name}}</a><br/>" + {!!json_encode($action->body)!!} ).addTo(map);
     @endforeach
 
     </script>

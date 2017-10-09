@@ -15,7 +15,7 @@
 </p>
   @endforeach
 
-<a href="{{action('DiscussionController@show', [$group->id, $discussion->id])}}" class="btn btn-default">{{trans('messages.back_to')}} "{{$discussion->name}}"</a>
+<a href="{{route('groups.discussions.show', [$group->id, $discussion->id])}}" class="btn btn-default">{{trans('messages.back_to')}} "{{$discussion->name}}"</a>
 
 </div>
 

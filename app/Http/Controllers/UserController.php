@@ -35,7 +35,7 @@ class UserController extends Controller
         $users = $group->users()->with('memberships')->orderBy('updated_at', 'desc')->paginate(25);
         $admins = $group->admins()->orderBy('name')->get();
 
-        return view('users.index')
+        return view('groups.users.index')
         ->with('users', $users)
         ->with('admins', $admins)
         ->with('group', $group)
@@ -68,7 +68,7 @@ class UserController extends Controller
                 Mail::to($to_user)->send(new ContactUser($from_user, $to_user, $body));
 
                 flash(trans('messages.message_sent'))->success();
-                return redirect()->action('UserController@contact', $to_user);
+                return redirect()->route('users.contactform', $to_user);
             }
 
             return redirect()->back();
@@ -152,7 +152,7 @@ class UserController extends Controller
             // validation
             if ($user->isInvalid()) {
                 // Oops.
-                return redirect()->action('UserController@edit', $user->id)
+                return redirect()->route('users.edit', $user->id)
                 ->withErrors($user->getErrors())
                 ->withInput();
             }
@@ -176,7 +176,7 @@ class UserController extends Controller
 
             flash(trans('messages.ressource_updated_successfully'))->success();
 
-            return redirect()->action('UserController@show', [$user->id]);
+            return redirect()->route('users.show', [$user->id]);
         } else {
             abort(403);
         }
@@ -197,7 +197,7 @@ class UserController extends Controller
             $mailer->sendEmailConfirmationTo($user);
             flash(trans('messages.invitation_sent_again'));
 
-            return redirect()->action('UserController@show', [$user->id]);
+            return redirect()->route('users.show', [$user->id]);
         }
     }
 
