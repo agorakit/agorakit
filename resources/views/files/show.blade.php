@@ -26,7 +26,7 @@
             <ul>
                 <li>{{trans('messages.author')}} : {{$file->user->name}}</li>
                 <li>{{trans('messages.created')}} : {{$file->created_at}}</li>
-                <li>{{trans('messages.tags')}} : 
+                <li>{{trans('messages.tags')}} :
                     @foreach ($file->tags as $tag)
                         <span class="label label-default">{{$tag->name}}</span>
                     @endforeach
@@ -35,9 +35,15 @@
         </div>
 
         <div>
-            <a class="btn btn-primary" href="{{ route('groups.files.download', [$group->id, $file->id]) }}">
-                {{trans('messages.download')}} {{$file->name}}
-            </a>
+            @if ($file->isLink())
+                <a class="btn btn-primary" href="{{ route('groups.files.download', [$group->id, $file->id]) }}" target="_blank">
+                    {{trans('messages.visit')}} {{$file->name}} ({{$file->path}})
+                </a>
+            @else
+                <a class="btn btn-primary" href="{{ route('groups.files.download', [$group->id, $file->id]) }}">
+                    {{trans('messages.download')}} {{$file->name}}
+                </a>
+            @endif
         </div>
 
 

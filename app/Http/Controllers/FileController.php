@@ -29,8 +29,6 @@ class FileController extends Controller
     */
     public function index(Group $group)
     {
-        // list all files and folders without parent id's (parent_id=NULL)
-        //$files = $group->files()->with('user')->orderBy('updated_at', 'desc')->get();
         $files = $group->files()
         ->where('item_type', '<>', \App\File::FOLDER)
         ->with('user')
@@ -45,21 +43,7 @@ class FileController extends Controller
         ->with('tab', 'files');
     }
 
-    public function gallery(Group $group)
-    {
-        $files = $group->files()
-        ->with('user')
-        ->where('mime', 'like', 'image/jpeg')
-        ->orWhere('mime', 'like', 'image/png')
-        ->orWhere('mime', 'like', 'image/gif')
-        ->orderBy('updated_at', 'desc')
-        ->paginate(100);
 
-        return view('files.gallery')
-        ->with('files', $files)
-        ->with('group', $group)
-        ->with('tab', 'files');
-    }
 
     /**
     * Display the specified resource.
@@ -70,83 +54,13 @@ class FileController extends Controller
     */
     public function show(Group $group, File $file)
     {
-        // file
-        if ($file->isFile()) {
-            return view('files.show')
-            ->with('file', $file)
-            ->with('group', $group)
-            ->with('tab', 'files');
-        }
-
-        // link
-        if ($file->isLink()) {
-            return view('files.link')
-            ->with('file', $file)
-            ->with('group', $group)
-            ->with('tab', 'files');
-        }
+        return view('files.show')
+        ->with('file', $file)
+        ->with('group', $group)
+        ->with('tab', 'files');
     }
 
-    /**
-    * Display the specified resource.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
-    public function download(Group $group, File $file)
-    {
-        if (Gate::allows('download', $file)) {
-            if ($file->isLink())
-            {
-                return redirect($file->path);
-            }
 
-            if (Storage::exists($file->path)) {
-                return (new Response(Storage::get($file->path), 200))
-                ->header('Content-Type', $file->mime)
-                ->header('Content-Disposition', 'inline; filename="'.$file->original_filename.'"');
-            } else {
-                abort(404, 'File not found in storage at '.$file->path);
-            }
-        } else {
-            abort(404, 'Unauthorized');
-        }
-    }
-
-    public function thumbnail(Group $group, File $file)
-    {
-        if (Gate::allows('download', $file)) {
-            if (in_array($file->mime, ['image/jpeg', 'image/png', 'image/gif'])) {
-                $cachedImage = Image::cache(function ($img) use ($file) {
-                    return $img->make(storage_path().'/app/'.$file->path)->fit(64, 64);
-                }, 60000, true);
-
-                return $cachedImage->response();
-            }
-
-            if ($file->isFolder()) {
-                return redirect('images/extensions/folder.png');
-            }
-        }
-
-        return redirect('images/extensions/text-file.png');
-    }
-
-    public function preview(Group $group, File $file)
-    {
-        if (Gate::allows('download', $file)) {
-            if (in_array($file->mime, ['image/jpeg', 'image/png', 'image/gif'])) {
-                $cachedImage = Image::cache(function ($img) use ($file) {
-                    return $img->make(storage_path().'/app/'.$file->path)->fit(250, 250);
-                }, 60000, true);
-
-                return $cachedImage->response();
-            }
-        }
-
-        return redirect('images/extensions/text-file.png');
-    }
 
     /************************** Files handling methods **********************/
 
