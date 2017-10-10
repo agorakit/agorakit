@@ -90,7 +90,7 @@ class DashboardController extends Controller
             $files = \App\File::with('group', 'user')
             ->where('item_type', '<>', \App\File::FOLDER)
             ->whereIn('group_id', $groups)
-            ->orderBy('updated_at', 'desc')->paginate(25);
+            ->orderBy('created_at', 'desc')->paginate(25);
         }
 
         else

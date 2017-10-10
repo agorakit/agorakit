@@ -21,7 +21,7 @@
 
 
     @include('dashboard.tabs')
-    
+
 
     <div class="tab_content">
         @if ($files)
@@ -51,7 +51,7 @@
                             </td>
 
                             <td class="date hidden-xs">
-                                {{ $file->updated_at->diffForHumans() }}
+                                {{ $file->created_at->diffForHumans() }}
                             </td>
 
 

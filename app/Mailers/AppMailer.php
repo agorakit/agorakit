@@ -42,7 +42,7 @@ class AppMailer
             $discussions = QueryHelper::getUnreadDiscussionsSince($user->id, $group->id, $membership->notified_at);
 
             // find new files since timestamp
-            $files = \App\File::where('updated_at', '>', $membership->notified_at)
+            $files = \App\File::where('created_at', '>', $membership->notified_at)
             ->where('group_id', '=', $group->id)
             ->get();
 
