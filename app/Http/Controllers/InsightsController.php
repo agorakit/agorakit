@@ -51,6 +51,13 @@ class InsightsController extends Controller
         ->dimensions(0, 400)
         ->lastByMonth($group->created_at->diffInMonths(Carbon::now()) + 1);
 
+        $charts[] = Charts::create('bar', 'highcharts')
+        ->title('Storage use')
+        ->labels(['Files'])
+        ->values([$group->files()->sum('filesize')])
+        ->dimensions(0, 400);
+
+
         return view('groups.insights')
         ->with('charts', $charts)
         ->with('group', $group);
@@ -97,6 +104,12 @@ class InsightsController extends Controller
         ->elementLabel('Members')
         ->dimensions(0, 400)
         ->groupBy('notification_interval', null, [60 => 'Every hour', 240 => 'Every 4 hours', 600 => 'Every 10 hours', 10080 => 'Every week', 1440 => 'Every day', 0 => 'No notifications', -1 => 'Never', 20160 => 'Every two weeks', 43200 => 'Every month']);
+
+        $charts[] = Charts::create('bar', 'highcharts')
+        ->title('Storage use')
+        ->labels(['Files'])
+        ->values([\App\File::all()->sum('filesize')])
+        ->dimensions(0, 400);
 
         return view('admin.insights')
         ->with('charts', $charts)

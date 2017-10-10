@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Returns a summary of thep rovided text.
- *
- * @param [type] $text   $text to be summarized
- * @param int    $length lenght in chars to keep
- *
- * @return [type] summarized text
- */
+* Returns a summary of thep rovided text.
+*
+* @param [type] $text   $text to be summarized
+* @param int    $length lenght in chars to keep
+*
+* @return [type] summarized text
+*/
 function summary($text, $length = 200)
 {
     if (strlen(str_limit(strip_tags($text))) > $length) {
@@ -20,12 +20,12 @@ function summary($text, $length = 200)
 }
 
 /**
- * Filters the passed text to remove nasty html and turns urls to html links and embeds youtube and vimeo links.
- *
- * @param [type] $content [description]
- *
- * @return [type] [description]
- */
+* Filters the passed text to remove nasty html and turns urls to html links and embeds youtube and vimeo links.
+*
+* @param [type] $content [description]
+*
+* @return [type] [description]
+*/
 function filter($content)
 {
     // strip bad stuff
@@ -41,8 +41,8 @@ function safe_html($content)
 }
 
 /**
- * returns the value of $name setting as stored in DB.
- */
+* returns the value of $name setting as stored in DB.
+*/
 function setting($name, $default = false)
 {
     $setting = \App\Setting::where('name', $name)->first();
@@ -52,4 +52,36 @@ function setting($name, $default = false)
     }
 
     return $default;
+}
+
+
+
+function formatFileSize($bytes)
+{
+    if ($bytes >= 1073741824)
+    {
+        $bytes = number_format($bytes / 1073741824, 2) . ' GB';
+    }
+    elseif ($bytes >= 1048576)
+    {
+        $bytes = number_format($bytes / 1048576, 2) . ' MB';
+    }
+    elseif ($bytes >= 1024)
+    {
+        $bytes = number_format($bytes / 1024, 2) . ' KB';
+    }
+    elseif ($bytes > 1)
+    {
+        $bytes = $bytes . ' bytes';
+    }
+    elseif ($bytes == 1)
+    {
+        $bytes = $bytes . ' byte';
+    }
+    else
+    {
+        $bytes = '0 bytes';
+    }
+
+    return $bytes;
 }
