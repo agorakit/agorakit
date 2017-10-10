@@ -129,6 +129,7 @@ class FileController extends Controller
                     $file->name = $uploaded_file->getClientOriginalName();
                     $file->original_filename = $uploaded_file->getClientOriginalName();
                     $file->mime = $uploaded_file->getClientMimeType();
+                    $file->filesize =  $uploaded_file->getClientSize();
 
                     // save it again
                     $file->save();

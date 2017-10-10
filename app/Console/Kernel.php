@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\ConvertFiles::class,
         \App\Console\Commands\ConvertFoldersToTags::class,
         \App\Console\Commands\ImportActions::class,
+        \App\Console\Commands\PopulateFilesize::class,
     ];
 
     /**
