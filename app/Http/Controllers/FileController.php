@@ -61,9 +61,6 @@ class FileController extends Controller
     }
 
 
-
-    /************************** Files handling methods **********************/
-
     /**
     * Show the form for creating a new resource.
     *
@@ -86,7 +83,7 @@ class FileController extends Controller
     }
 
     /**
-    * Store a new file.².
+    * Store a new file.
     *
     * @return Response
     */
