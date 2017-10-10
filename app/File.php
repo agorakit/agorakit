@@ -69,5 +69,14 @@ class File extends Model
         return $this->item_type == $this::LINK;
     }
 
+    public function isImage()
+    {
+        if (in_array($this->mime, ['image/jpeg', 'image/png', 'image/gif']))
+        {
+            return true;
+        }
+         return false;
+    }
+
 
 }

@@ -204,9 +204,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('files/{file}/delete', 'FileController@destroyConfirm')->name('.files.deleteconfirm');
         Route::delete('files/{file}/delete', 'FileController@destroy')->name('.files.delete');
 
-        Route::get('files/{file}/download', 'FileController@download')->name('.files.download');
-        Route::get('files/{file}/thumbnail', 'FileController@thumbnail')->name('.files.thumbnail');
-        Route::get('files/{file}/preview', 'FileController@preview')->name('.files.preview');
+        Route::get('files/{file}/download', 'FileDownloadController@download')->name('.files.download');
+        Route::get('files/{file}/thumbnail', 'FileDownloadController@thumbnail')->name('.files.thumbnail');
+        Route::get('files/{file}/preview', 'FileDownloadController@preview')->name('.files.preview');
 
         // Members
         Route::get('users', 'UserController@index')->name('.users.index');
