@@ -1,9 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2017/10/07 20:22:33 
+ Generated via "php artisan localization:missing" at 2017/10/10 15:46:59
 *************************************************************************/
 
 return array (
+  //============================== New strings to translate ==============================//
+  // Defined in file /home/philippe/Sites/agorakit/resources/views/files/index.blade.php
+  'size' => 'Taille',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'accept_invitation' => 'Accepter l\'invitation',
@@ -185,7 +188,6 @@ return array (
   'users' => 'Utilisateurs',
   'users_list' => 'Utilisateurs',
   'visit' => 'Visiter',
-  'visit_link' => 'Visitez le lien',
   'we_need_to_confirm' => 'Nous avons juste besoin de confirmer votre adresse mail.',
   'what' => 'Quoi',
   'when' => 'Quand',
@@ -246,6 +248,7 @@ return array (
   'unread' => 'Non lu',
   'unread_items' => 'Non lus',
   'view' => 'Vue',
+  'visit_link' => 'Visitez le lien',
   'you_are_not_an_admin' => 'Vous n\'êtes pas administrateur',
   'you_can_also_reply' => 'Vous pouvez aussi directement répondre à ce mail',
   'you_cannot_join_this_group_maybe_invite_only' => 'Vous ne pouvez pas rejoindre ce groupe, il est probablement fermé ou sur invitation',

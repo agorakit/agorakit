@@ -1,9 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2017/10/07 20:22:33 
+ Generated via "php artisan localization:missing" at 2017/10/10 15:46:59
 *************************************************************************/
 
 return array (
+  //============================== New strings to translate ==============================//
+  // Defined in file /home/philippe/Sites/agorakit/resources/views/files/index.blade.php
+  'size' => 'Size',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'A message for you',
   'accept_invitation' => 'Accept the invitation',
@@ -184,7 +187,6 @@ Enter a correct URL starting with http:// and set a title for this link. You can
   'users' => 'Users',
   'users_list' => 'Users',
   'visit' => 'Visit',
-  'visit_link' => 'Visit Link',
   'we_need_to_confirm' => 'We need to confirm your account',
   'what' => 'what',
   'when' => 'when',
@@ -240,6 +242,7 @@ Enter a correct URL starting with http:// and set a title for this link. You can
   'unread' => 'Unread',
   'unread_items' => 'Unread',
   'view' => 'View',
+  'visit_link' => 'Visit Link',
   'you_are_not_an_admin' => 'You are not an administrator',
   'you_can_also_reply' => 'You can also reply directly to this email',
   'you_cannot_join_this_group_maybe_invite_only' => 'You cannot join this group; it is probably closed or invitation only',

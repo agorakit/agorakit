@@ -1,9 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2017/10/07 20:22:33 
+ Generated via "php artisan localization:missing" at 2017/10/10 15:46:59
 *************************************************************************/
 
 return array (
+  //============================== New strings to translate ==============================//
+  // Defined in file /home/philippe/Sites/agorakit/resources/views/files/index.blade.php
+  'size' => 'size',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'U heeft een bericht',
   'accept_invitation' => 'De uitnodiging accepteren',
@@ -183,7 +186,6 @@ return array (
   'users' => 'Gebruikers',
   'users_list' => 'Gebruikerslijst',
   'visit' => 'TODO: visit',
-  'visit_link' => 'TODO: visit_link',
   'we_need_to_confirm' => 'Uw mailadres moet nog bevestigd worden',
   'what' => 'Wat',
   'when' => 'Wanneer',
@@ -201,7 +203,7 @@ return array (
   'your_groups' => 'Mijn groepen',
   'your_search_for' => 'Zoeken',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' => 
+  'LLH:obsolete' =>
   array (
     'admin-back' => 'Terug',
     'admin_settings' => 'Voorkeuren wijzigen',
@@ -243,4 +245,5 @@ return array (
     'you_see_only_your_stuff' => 'U ziet enkel de discussies en acties van uw groepen',
     'your_password_reset_link' => 'Uw link wachtwoord te veranderen',
   ),
+  'visit_link' => 'TODO: visit_link',
 );
