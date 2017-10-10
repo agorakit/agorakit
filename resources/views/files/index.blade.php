@@ -54,6 +54,7 @@
                     <th>{{ trans('messages.title') }}</th>
                     <th>{{ trans('messages.tags') }}</th>
                     <th>{{ trans('messages.author') }}</th>
+                    <th>{{ trans('messages.size') }}</th>
                     <th>{{ trans('messages.date') }}</th>
                     <th></th>
                 </tr>
@@ -86,6 +87,10 @@
                             @unless (is_null ($file->user))
                                 <a href="{{ route('users.show', $file->user->id) }}">{{ $file->user->name }}</a>
                             @endunless
+                        </td>
+
+                        <td data-order="{{ $file->filesize }}">
+                            @if ($file->isFile()){{sizeForHumans($file->filesize)}}@endif
                         </td>
 
                         <td data-order="{{ $file->created_at }}">

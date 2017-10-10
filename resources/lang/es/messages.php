@@ -1,9 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2017/10/07 20:22:33 
+ Generated via "php artisan localization:missing" at 2017/10/10 15:46:59 
 *************************************************************************/
 
 return array (
+  //============================== New strings to translate ==============================//
+  // Defined in file /home/philippe/Sites/agorakit/resources/views/files/index.blade.php
+  'size' => 'TODO: size',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un mensaje para usted',
   'accept_invitation' => 'Acepta la invitación',
@@ -184,7 +187,6 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'users' => 'Usuarios',
   'users_list' => 'Usuarios',
   'visit' => 'TODO: visit',
-  'visit_link' => 'Visitar enlace',
   'we_need_to_confirm' => 'Necesitamos confirmar su cuenta',
   'what' => 'qué',
   'when' => 'cuando',
@@ -250,4 +252,5 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
     'you_see_only_your_stuff' => 'Solo ves tus cosas',
     'your_password_reset_link' => 'Enlace para restablecer contraseña',
   ),
+  'visit_link' => 'Visitar enlace',
 );

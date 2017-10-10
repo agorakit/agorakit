@@ -1,9 +1,12 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2017/10/07 20:22:33 
+ Generated via "php artisan localization:missing" at 2017/10/10 15:46:59 
 *************************************************************************/
 
 return array (
+  //============================== New strings to translate ==============================//
+  // Defined in file /home/philippe/Sites/agorakit/resources/views/files/index.blade.php
+  'size' => 'TODO: size',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Eine Nachricht für Sie',
   'accept_invitation' => 'Die Einladung akzeptieren',
@@ -183,7 +186,6 @@ return array (
   'users' => 'Nutzer',
   'users_list' => 'Nutzer',
   'visit' => 'TODO: visit',
-  'visit_link' => 'TODO: visit_link',
   'we_need_to_confirm' => 'Wir müssen Ihr Konto bestätigen',
   'what' => 'was',
   'when' => 'wann',
@@ -246,4 +248,5 @@ return array (
     'you_see_only_your_stuff' => 'Sie sehen die Diskussioinen und Handlungen Ihrer Gruppen nicht',
     'your_password_reset_link' => 'Ihr Link zur Passwortrücksetzung',
   ),
+  'visit_link' => 'TODO: visit_link',
 );

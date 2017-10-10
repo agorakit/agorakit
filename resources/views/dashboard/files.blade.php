@@ -30,6 +30,7 @@
                     <tr>
                         <th class="avatar"></th>
                         <th class="summary"></th>
+                        <th></th>
                         <th style="width:100px" class="date hidden-xs"></th>
 
                     </tr>
@@ -48,6 +49,10 @@
                                     <br/>
                                 </a>
                                 <span class="group-name"><a href="{{ route('groups.show', [$file->group_id]) }}">{{ $file->group->name }}</a></span>
+                            </td>
+
+                            <td>
+                                @if ($file->isFile()){{sizeForHumans($file->filesize)}}@endif
                             </td>
 
                             <td class="date hidden-xs">
