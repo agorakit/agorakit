@@ -112,8 +112,8 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::group(['middleware' => 'public', 'as' => 'groups', 'prefix' => 'groups/{group}'], function () {
         //    Route::prefix('groups/{group}')->as('groups')->group(['middleware' => ['public']], function () {
-        Route::get('cover', 'GroupController@cover')->name('.cover');
-        Route::get('avatar', 'GroupController@avatar')->name('.avatar');
+        Route::get('cover', 'GroupThumbnailController@cover')->name('.cover');
+        Route::get('avatar', 'GroupThumbnailController@avatar')->name('.avatar');
         Route::get('edit', 'GroupController@edit')->name('.edit');
         Route::post('edit', 'GroupController@update')->name('.update');
         Route::get('history', 'GroupController@history')->name('.history');

@@ -17,7 +17,6 @@ class GroupController extends Controller
     {
         $this->middleware('verified', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
         $this->middleware('groupadmin', ['only' => ['edit', 'update', 'destroy']]);
-        $this->middleware('cache', ['only' => ['cover']]);
     }
 
     /**
@@ -247,36 +246,6 @@ class GroupController extends Controller
             return redirect()->action('DashboardController@index');
         } else {
             abort(403);
-        }
-    }
-
-    public function cover(Group $group)
-    {
-        $path = storage_path().'/app/groups/'.$group->id.'/cover.jpg';
-
-        if (File::exists($path)) {
-            $cachedImage = Image::cache(function ($img) use ($path) {
-                return $img->make($path)->fit(600, 350);
-            }, 60000, true);
-
-            return $cachedImage->response();
-        } else {
-            return Image::canvas(600, 350)->fill('#cccccc')->response(); // TODO caching or default group image instead
-        }
-    }
-
-    public function avatar(Group $group)
-    {
-        $path = storage_path().'/app/groups/'.$group->id.'/cover.jpg';
-
-        if (File::exists($path)) {
-            $cachedImage = Image::cache(function ($img) use ($path) {
-                return $img->make($path)->fit(32, 32);
-            }, 60000, true);
-
-            return $cachedImage->response();
-        } else {
-            return Image::canvas(600, 350)->fill('#cccccc')->response(); // TODO caching or default group image instead
         }
     }
 
