@@ -1,7 +1,0 @@
-For maintenance :
-
-- archive groups with no activity or members for some time
-- remove old invitations from memberships after a while
-- close discussions? This can be done at runtime
-
-- backup of group data in each group storage, I'd favor json. Need to find a json import export package

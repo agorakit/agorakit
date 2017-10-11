@@ -12,9 +12,9 @@ $panel-inner-border: $laravel-border-color;
 */
 
 // Brands
-$brand-primary: #3f5666;
+$brand-primary: #299FC5;
 $brand-info: #e2e5c0;
-$brand-success: #2ab27b;
+$brand-success: #72C766;
 $brand-warning: #F8CA4D;
 $brand-danger: #ea6045;
 
@@ -25,10 +25,10 @@ $enable-hover-media-query:  true;
 
 // Typography
 $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
-$font-family-sans-serif: "Raleway", sans-serif;
+$font-family-sans-serif: "Open Sans", sans-serif;
 $font-size-base: 14px;
 $line-height-base: 1.6;
-//$text-color: #636b6f;
+$text-color: #1C211E;
 
 
 $headings-font-family:   "Roboto";
@@ -37,7 +37,7 @@ $headings-line-height:   1.1;
 //$headings-color:
 
 
-$navbar-default-bg: $brand-primary;
+$navbar-default-bg: #24363B;
 $navbar-default-color: white;
 $navbar-default-link-color: white;
 $navbar-default-link-hover-color: darken($navbar-default-link-color, 10%);
