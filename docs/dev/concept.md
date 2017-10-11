@@ -123,8 +123,6 @@ Recherche complète disponible pour tout le groupe (plein texte dans les documen
 
 
 
-Et cest tout ! (mais cest déjà beaucoup)
-
 ##Notes/idées/implantation
 * Markup
 * HTML ? ou remarkup partout

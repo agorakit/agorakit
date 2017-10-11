@@ -1,5 +1,7 @@
 
-How to manage unread count of discussions ?
+#How to manage unread count of discussions ?
+
+Check The query helper for the current (working) solution.
 
 Here is an interesting proposal : http://forum.kohanaframework.org/discussion/comment/35092#Comment_35092
 
