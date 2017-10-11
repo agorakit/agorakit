@@ -9,35 +9,35 @@
 
 @push ('js')
     <script>
+    var all_config = [
+        {
+            at: "@",
+            data:[
+                @foreach ($group->users as $user)
+                {
+                    id : '{{$user->id}}',
+                    name : '{{$user->name}}',
+                    url: '{{route('users.show', [$user])}}'
+                },
+                @endforeach
+            ],
+            insertTpl: "<a href=\"${url}\" data-mention-user-id=\"${id}\">${atwho-at}${name}</a>",
+        },
+        {
 
-    var at_config = {
-        at: "@",
-        data:[
-            @foreach ($group->users as $user)
-            {
-                id : '{{$user->id}}',
-                name : '{{$user->name}}'
-            },
-            @endforeach
-        ],
-        insertTpl: "<a href=\"/users/${id}\" data-mention-user-id=\"${id}\">${atwho-at}${name}</a>",
-    }
-
-    var file_config = {
-        at: "f:",
-        data:[
-            @foreach ($group->files()->orderBy('created_at', 'desc')->get() as $file)
-            {
-                id : '{{$file->id}}',
-                name : '{{$file->name}}',
-                url: '{{route('groups.files.show', [$group, $file])}}'
-            },
-            @endforeach
-        ],
-        insertTpl: "<a href=\"${url}\" data-mention-file-id=\"${id}\">${name} (${atwho-at}${id})</a>",
-    }
-
-
+            at: "f:",
+            data:[
+                @foreach ($group->files()->orderBy('created_at', 'desc')->get() as $file)
+                {
+                    id : '{{$file->id}}',
+                    name : '{{$file->name}}',
+                    url: '{{route('groups.files.show', [$group, $file])}}'
+                },
+                @endforeach
+            ],
+            insertTpl: "<a href=\"${url}\" data-mention-file-id=\"${id}\">${name} (${atwho-at}${id})</a>",
+        }
+    ];
 
     // Bind to every CKEditor instance that'll load in the future
     CKEDITOR.on('instanceReady', function(event) {
@@ -46,12 +46,12 @@
 
         // Switching from and to source mode
         editor.on('mode', function(e) {
-            load_atwho(this, at_config);
+            load_atwho(this, all_config);
+
         });
 
         // First load
-        load_atwho(editor, at_config);
-        load_atwho(editor, file_config);
+        load_atwho(editor, all_config);
 
     });
 
@@ -62,19 +62,22 @@
 
             editor.document.getBody().$.contentEditable = true;
 
-            $(editor.document.getBody().$)
-            .atwho('setIframe', editor.window.getFrame().$)
-            .atwho(at_config);
+            var my_element = $(editor.document.getBody().$)
+            .atwho('setIframe', editor.window.getFrame().$);
 
+
+            $.each(at_config, function(key, value) {
+                my_element.atwho(value);
+            });
         }
         // Source mode when switching from WYSIWYG
         else {
-            $(editor.container.$).find(".cke_source").atwho(at_config);
+            var my_element = $(editor.container.$).find(".cke_source");
+            $.each(at_config, function(key, value) {
+                my_element.atwho(value);
+            });
         }
-
     }
-
-
 
     </script>
 @endpush
