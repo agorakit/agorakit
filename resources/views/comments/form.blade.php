@@ -20,8 +20,24 @@
             },
             @endforeach
         ],
-        insertTpl: "${atwho-at}<a href=\"/users/${id}\" data-mention-user-id=\"${id}\">${name}</a>",
+        insertTpl: "<a href=\"/users/${id}\" data-mention-user-id=\"${id}\">${atwho-at}${name}</a>",
     }
+
+    var file_config = {
+        at: "f:",
+        data:[
+            @foreach ($group->files()->orderBy('created_at', 'desc')->get() as $file)
+            {
+                id : '{{$file->id}}',
+                name : '{{$file->name}}',
+                url: '{{route('groups.files.show', [$group, $file])}}'
+            },
+            @endforeach
+        ],
+        insertTpl: "<a href=\"${url}\" data-mention-file-id=\"${id}\">${name} (${atwho-at}${id})</a>",
+    }
+
+
 
     // Bind to every CKEditor instance that'll load in the future
     CKEDITOR.on('instanceReady', function(event) {
@@ -35,6 +51,7 @@
 
         // First load
         load_atwho(editor, at_config);
+        load_atwho(editor, file_config);
 
     });
 
