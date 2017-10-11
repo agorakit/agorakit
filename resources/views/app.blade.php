@@ -6,10 +6,13 @@
     <title>{{config('app.name')}}</title>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" />
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" />-->
 
     <!-- Font awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+
+    <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
 
     <!-- additional css -->
 
@@ -17,8 +20,6 @@
     @stack('css')
 
 
-    <!-- agorakit specific css-->
-    {!! Html::style('/css/all.css?v8') !!}
 
     <!-- head -->
     @yield('head')
