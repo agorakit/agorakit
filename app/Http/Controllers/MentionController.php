@@ -1,0 +1,74 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Group;
+use App\User;
+use Auth;
+
+use Gate;
+use Illuminate\Http\Request;
+use Redirect;
+
+/**
+* Returns a json representation of models, for at.js mention system
+*/
+class MentionController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('member');
+    }
+
+
+    public function users(Group $group)
+    {
+        $users =  $group->users()->get();
+        $simple_users = array();
+
+        foreach ($users as $user)
+        {
+            $simple_user['id'] = $user->id;
+            $simple_user['name'] = $user->name;
+            $simple_user['url'] = route('users.show', $user);
+            $simple_users[] = $simple_user;
+        }
+
+        return $simple_users;
+    }
+
+
+    public function discussions(Group $group)
+    {
+        $discussions =  $group->discussions()->get();
+        $simple_discussions = array();
+
+        foreach ($discussions as $discussion)
+        {
+            $simple_discussion['id'] = $discussion->id;
+            $simple_discussion['name'] = $discussion->name;
+            $simple_discussion['url'] = route('groups.discussions.show', [$group, $discussion]);
+            $simple_discussions[] = $simple_discussion;
+        }
+
+        return $simple_discussions;
+    }
+
+    public function files(Group $group)
+    {
+        $files =  $group->files()->get();
+        $simple_files = array();
+
+        foreach ($files as $file)
+        {
+            $simple_file['id'] = $file->id;
+            $simple_file['name'] = $file->name;
+            $simple_file['url'] = route('groups.files.show', [$group, $file]);
+            $simple_files[] = $simple_file;
+        }
+
+        return $simple_files;
+    }
+
+
+}

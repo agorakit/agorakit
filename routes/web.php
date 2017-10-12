@@ -111,7 +111,8 @@ Route::group(['middleware' => ['web']], function () {
 
 
     Route::group(['middleware' => 'public', 'as' => 'groups', 'prefix' => 'groups/{group}'], function () {
-        //    Route::prefix('groups/{group}')->as('groups')->group(['middleware' => ['public']], function () {
+
+        // Crud stuff
         Route::get('cover', 'GroupThumbnailController@cover')->name('.cover');
         Route::get('avatar', 'GroupThumbnailController@avatar')->name('.avatar');
         Route::get('edit', 'GroupController@edit')->name('.edit');
@@ -120,7 +121,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('delete', 'GroupController@destroyConfirm')->name('.deleteconfirm');
         Route::delete('delete', 'GroupController@destroy')->name('.delete');
 
-
+        // Mention at.js json routes
+        Route::get('users/mention', 'MentionController@users')->name('.users.mention');
+        Route::get('discussions/mention', 'MentionController@discussions')->name('.discussions.mention');
+        Route::get('files/mention', 'MentionController@files')->name('.files.mention');
 
         // memberships & preferences
         Route::get('join', 'MembershipController@create')->name('.membership.create');
@@ -214,6 +218,8 @@ Route::group(['middleware' => ['web']], function () {
         // Maps
         Route::get('map', 'MapController@map')->name('.map');
         Route::get('map/embed', 'MapController@embed')->name('.map.embed');
+
+
     });
 
     // Users

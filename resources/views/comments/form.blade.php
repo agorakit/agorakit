@@ -12,30 +12,18 @@
     var all_config = [
         {
             at: "@",
-            data:[
-                @foreach ($group->users as $user)
-                {
-                    id : '{{$user->id}}',
-                    name : '{{$user->name}}',
-                    url: '{{route('users.show', [$user])}}'
-                },
-                @endforeach
-            ],
+            data: '{{route('groups.users.mention', $group)}}',
             insertTpl: "<a href=\"${url}\" data-mention-user-id=\"${id}\">${atwho-at}${name}</a>",
         },
         {
-
             at: "f:",
-            data:[
-                @foreach ($group->files()->orderBy('created_at', 'desc')->get() as $file)
-                {
-                    id : '{{$file->id}}',
-                    name : '{{$file->name}}',
-                    url: '{{route('groups.files.show', [$group, $file])}}'
-                },
-                @endforeach
-            ],
+            data: '{{route('groups.files.mention', $group)}}',
             insertTpl: "<a href=\"${url}\" data-mention-file-id=\"${id}\">${name} (${atwho-at}${id})</a>",
+        },
+        {
+            at: "d:",
+            data: '{{route('groups.discussions.mention', $group)}}',
+            insertTpl: "<a href=\"${url}\" data-mention-discussion-id=\"${id}\">${name} (${atwho-at}${id})</a>",
         }
     ];
 
