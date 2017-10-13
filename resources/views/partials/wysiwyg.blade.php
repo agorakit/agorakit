@@ -1,9 +1,18 @@
+@push('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.8.1/ui/trumbowyg.min.css" />
+@endpush
+
 
 @push('js')
-    <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.8.1/trumbowyg.min.js"></script>
+
+
+
     <script>
-    CKEDITOR.replace( 'wysiwyg' );
+    $.trumbowyg.svgPath = '/svg/icons.svg';
+    $('#wysiwyg').trumbowyg()
+
+
     </script>
 
 @endpush
