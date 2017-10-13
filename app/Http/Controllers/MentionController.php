@@ -40,7 +40,7 @@ class MentionController extends Controller
 
     public function discussions(Group $group)
     {
-        $discussions =  $group->discussions()->get();
+        $discussions =  $group->discussions()->orderBy('created_at', 'desc')->get();
         $simple_discussions = array();
 
         foreach ($discussions as $discussion)
@@ -56,7 +56,7 @@ class MentionController extends Controller
 
     public function files(Group $group)
     {
-        $files =  $group->files()->get();
+        $files =  $group->files()->orderBy('created_at', 'desc')->get();
         $simple_files = array();
 
         foreach ($files as $file)
