@@ -1,12 +1,9 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2017/10/10 15:46:59
+ Generated via "php artisan localization:missing" at 2017/10/18 11:16:00 
 *************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/agorakit/resources/views/files/index.blade.php
-  'size' => 'Size',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'A message for you',
   'accept_invitation' => 'Accept the invitation',
@@ -97,6 +94,7 @@ Enter a correct URL starting with http:// and set a title for this link. You can
   'invite_already_used' => 'Invitation already used',
   'invite_not_found' => 'Invitation not found',
   'join' => 'Join',
+  'join_a_group' => 'Please join a group or create a group',
   'join_the_group' => 'Join the group',
   'join_this_group' => 'Join this group',
   'last_activity' => 'Last activity',
@@ -123,7 +121,6 @@ Enter a correct URL starting with http:// and set a title for this link. You can
   'message_sent' => 'Message sent',
   'modify' => 'Modify',
   'modify_intro_text' => 'Change introduction text',
-  'my_groups' => 'My groups',
   'name' => 'Name',
   'news_from_group_email_subject' => 'News from the group',
   'next_actions' => 'Next actions',
@@ -164,6 +161,7 @@ Enter a correct URL starting with http:// and set a title for this link. You can
   'show_all' => 'Show all',
   'show_history' => 'Show history',
   'show_list' => 'Show file list',
+  'size' => 'Size',
   'something_wrong' => 'Something is wrong with your submission',
   'start' => 'Start',
   'started_by' => 'Started by',
@@ -223,6 +221,7 @@ Enter a correct URL starting with http:// and set a title for this link. You can
   'map_of_this_group' => 'Map of this group',
   'members_of_this_group' => 'Members of this group',
   'message_not_sent_too_many_per_hour' => 'Message not sent: too many per hour',
+  'my_groups' => 'My groups',
   'not_a_group_admin' => 'You are not administrator of this group',
   'not_a_member' => 'You\'re not part of this group',
   'not_logged_in' => 'You are not logged in. Please log in or create an account to continue',

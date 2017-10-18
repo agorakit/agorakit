@@ -28,7 +28,7 @@ class DashboardController extends Controller
 
             // if user is not subscribed to any group, we redirect to group list homepage instead.
             if ($my_groups->count() == 0) {
-                return redirect('groups');
+                flash(trans('messages.join_a_group'));
             }
 
             $my_discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group')
