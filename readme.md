@@ -9,12 +9,69 @@ Manage communication, decision making, membership, files and events. Flexible em
 
 In other words: an organized Facebook for the paranoid inside all of us.
 
+## Features
 
 ### Create groups
+- Create an unlimited amount of groups
+- The group can be open (anyone can join) or private (invite only)
+- The group can have one or more admins
+- Each group has a discussion area, a calendar, a file repository, a member list & map.
+- Only members can use the discussion area, calendar and files
+- Content is public in public groups, and private in private groups (simple security model everyone understands)
 
-![AgoraKit screenshot](http://agorakit.org/agorakit_groups.jpg)
+### Discussions
+- Create discussion topics
+- Reply to topics with comments
+- Mention others in comments using @name (they get notified)
+- Mention files using f: (autocomplete opens)
+- Mention other discussions using d: (autocomplete opens)
 
-You can create as many groups as you like, groups can be fully open or closed (membership approval required).
+### Calendar
+- Create events
+- List upcoming events as a list or as a dynamic calendar
+- Show geolocalized events on a map
+- Global and per group calendar
+- iCal feed for each calendar
+- RSS
+- Embed elsewhere using iframes
+
+### Files
+- Upload & tag several files at once
+- Quick search among files by author, filename and tags
+- Preview images / download
+- re-tag files
+- Mention files in comments
+
+### Members
+- Access a list of members (global / per group)
+- Contact others without leaking your/their email (privacy)
+- Check what others are up to (activity feed)
+- Fill your profile with po
+
+### Notifications / emails
+- For each group, choose how often you want to be notified (every hour for the hardcore, everyday to keep your mailbox cool, every week or every month)
+- Auto login to your account from "Reply" links inside the notification emails you receive (great time saving)
+- Get instant notifications when someone mentions you (for urgent matters)
+
+### Admin
+- Get stats on everything
+- Mass invite members using their email
+- Mass add existing members to groups
+- Settings control panel (in progress)
+
+### Architecture
+- Standard Laravel structured application. If you know Laravel, you can work with Agorakit easily
+- Simple structure, no single page app complexities
+- Bootstrap based UI
+- Simple DB schema
+- Simple file storage scheme (per group, per file id)
+
+### Privacy
+- Host it where you want
+- Your data is yours
+- No leakage of emails
+- Geolocalization of users (on a voluntary basis) is randomized by ~100 meters
+
 
 
 ### Manage a collaborative calendar
