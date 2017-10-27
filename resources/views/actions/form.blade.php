@@ -5,7 +5,7 @@
 
 <div class="form-group">
     {!! Form::label('body', trans('messages.description')) !!}
-    {!! Form::textarea('body', null, ['id' => 'wysiwyg', 'class' => 'form-control', 'required']) !!}
+    {!! Form::textarea('body', null, ['class' => 'form-control wysiwyg', 'required']) !!}
 </div>
 
 <div class="form-group">

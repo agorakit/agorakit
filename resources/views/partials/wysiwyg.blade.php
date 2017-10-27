@@ -10,7 +10,7 @@
 
     <script>
     $.trumbowyg.svgPath = '/svg/icons.svg';
-    $('#wysiwyg').trumbowyg()
+    $('.wysiwyg').trumbowyg()
 
 
     </script>

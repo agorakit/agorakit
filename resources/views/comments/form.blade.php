@@ -1,5 +1,5 @@
 <div class="form-group">
-    {!! Form::textarea('body', null, ['id' => 'wysiwyg', 'class' => 'form-control' , 'required']) !!}
+    {!! Form::textarea('body', null, ['class' => 'form-control wysiwyg' , 'required']) !!}
 </div>
 
 
