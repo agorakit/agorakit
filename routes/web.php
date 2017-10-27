@@ -105,16 +105,14 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('groups/create', 'GroupController@create')->name('groups.create');
     Route::post('groups/create', 'GroupController@store')->name('groups.store');
 
-    // Groups
-
+    // Groups : what everyone can see
     Route::get('groups/{group}', 'GroupController@show')->name('groups.show');
+    Route::get('groups/{group}/cover', 'GroupThumbnailController@cover')->name('groups.cover');
 
-
+    // Groups : only members (or everyone if a group is public)
     Route::group(['middleware' => 'public', 'as' => 'groups', 'prefix' => 'groups/{group}'], function () {
 
         // Crud stuff
-        Route::get('cover', 'GroupThumbnailController@cover')->name('.cover');
-        Route::get('avatar', 'GroupThumbnailController@avatar')->name('.avatar');
         Route::get('edit', 'GroupController@edit')->name('.edit');
         Route::post('edit', 'GroupController@update')->name('.update');
         Route::get('history', 'GroupController@history')->name('.history');
