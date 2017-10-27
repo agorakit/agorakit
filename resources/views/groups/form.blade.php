@@ -5,7 +5,7 @@
 
 <div class="form-group">
     {!! Form::label('body', trans('group.description')) !!}
-    {!! Form::textarea('body', null, ['id' => 'wysiwyg', 'class' => 'form-control', 'required']) !!}
+    {!! Form::textarea('body', null, ['class' => 'wysiwyg form-control', 'required']) !!}
 </div>
 
 @include('partials.tags_form')
