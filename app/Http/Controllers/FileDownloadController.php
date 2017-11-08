@@ -13,26 +13,29 @@ use Storage;
 
 class FileDownloadController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('public');
+    }
+
+
     /**
     * Returns the specified file for downloading
     */
     public function download(Group $group, File $file)
     {
-        if (Gate::allows('download', $file)) {
-            if ($file->isLink())
-            {
-                return redirect($file->path);
-            }
+        if ($file->isLink())
+        {
+            return redirect($file->path);
+        }
 
-            if (Storage::exists($file->path)) {
-                return (new Response(Storage::get($file->path), 200))
-                ->header('Content-Type', $file->mime)
-                ->header('Content-Disposition', 'inline; filename="'.$file->original_filename.'"');
-            } else {
-                abort(404, 'File not found in storage at '.$file->path);
-            }
+        if (Storage::exists($file->path)) {
+            return (new Response(Storage::get($file->path), 200))
+            ->header('Content-Type', $file->mime)
+            ->header('Content-Disposition', 'inline; filename="'.$file->original_filename.'"');
         } else {
-            abort(404, 'Unauthorized');
+            abort(404, 'File not found in storage at '.$file->path);
         }
     }
 
@@ -41,19 +44,18 @@ class FileDownloadController extends Controller
     */
     public function thumbnail(Group $group, File $file)
     {
-        if (Gate::allows('download', $file)) {
-            if ($file->isImage()) {
-                $cachedImage = Image::cache(function ($img) use ($file) {
-                    return $img->make(storage_path().'/app/'.$file->path)->fit(32, 32);
-                }, 60000, true);
+        if ($file->isImage()) {
+            $cachedImage = Image::cache(function ($img) use ($file) {
+                return $img->make(storage_path().'/app/'.$file->path)->fit(32, 32);
+            }, 60000, true);
 
-                return $cachedImage->response();
-            }
-
-            if ($file->isFolder()) {
-                return redirect('images/extensions/folder.png');
-            }
+            return $cachedImage->response();
         }
+
+        if ($file->isFolder()) {
+            return redirect('images/extensions/folder.png');
+        }
+
 
         return redirect('images/extensions/text-file.png');
     }
@@ -63,20 +65,19 @@ class FileDownloadController extends Controller
     */
     public function preview(Group $group, File $file)
     {
-        if (Gate::allows('download', $file)) {
-            if ($file->isImage()) {
-                $cachedImage = Image::cache(function ($img) use ($file) {
-                    return $img->make(storage_path().'/app/'.$file->path)->widen(600);
-                }, 60000, true);
+        if ($file->isImage())
+        {
+            $cachedImage = Image::cache(function ($img) use ($file)
+            {
+                return $img->make(storage_path().'/app/'.$file->path)->widen(600);
+            }, 60000, true);
 
-                return $cachedImage->response();
-            }
+            return $cachedImage->response();
         }
+
 
         return redirect('images/extensions/text-file.png');
     }
-
-
 
 
 }
