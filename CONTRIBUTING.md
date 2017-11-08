@@ -11,7 +11,7 @@
 > There are tons of way to contribute, everything is highly appreciated.
 
 ## Dev laravel/php/html/css/js
-- You are a backend developer with experience of the Laravel framework: add new features, fix bug, write tests, document everything. I happily accept pull requests if they pass unit tests and follow the project philosophy
+- You are a backend developer with experience of the Laravel framework: add new features, fix bug, write tests, document everything. I happily accept pull requests ***on the DEV branch*** if they pass unit tests and follow the project philosophy
 - You are a frontend developer with experience of the Laravel framework: the current UI is not pretty, make it brilliant. Fix UX as you see fit. I happily accept pull requests if they pass unit tests and follow the project philosophy. We don't want the project to become a one page app powered by the latest "à la mode" js framework.
 - If you have some time to give to this project, there are already some issues to fix (see. https://github.com/philippejadin/agorakit/issues). Whether you have one hour per day or one hour per month, help is really appreciated! And remember, "talk is silver, code is gold" :-)
 - Let's talk in the issue queue if your idea involves big changes.
