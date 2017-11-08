@@ -109,6 +109,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('groups/{group}', 'GroupController@show')->name('groups.show');
     Route::get('groups/{group}/cover', 'GroupThumbnailController@cover')->name('groups.cover');
     Route::get('groups/{group}/cover/small', 'GroupThumbnailController@avatar')->name('groups.cover.small');
+    Route::get('groups/{group}/cover/carousel', 'GroupThumbnailController@carousel')->name('groups.cover.carousel');
 
     // Groups : only members (or everyone if a group is public)
     Route::group(['middleware' => 'public', 'as' => 'groups', 'prefix' => 'groups/{group}'], function () {
