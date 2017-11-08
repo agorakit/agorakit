@@ -59,7 +59,8 @@ class GroupController extends Controller
         }
         else // anonymous user
         {
-            if ($group->isPublic()) {
+            if ($group->isPublic())
+            {
                 $discussions = $group->discussions()
                 ->has('user')
                 ->with('user', 'group')
