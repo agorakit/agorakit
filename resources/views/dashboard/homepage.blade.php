@@ -14,20 +14,11 @@
     <div class="tab_content">
 
 
-        <h2>{{ trans('messages.my_groups') }}</h2>
-        @foreach ($my_groups as $group)
-            <span class="label label-default"><a href="{{route('groups.show', $group)}}">{{$group->name}}</a> </span>
-        @endforeach
-
-
 
         <div class="row">
-            @if (isset($my_discussions))
+            @if ($my_discussions->count() > 0)
                 <div class="col-md-6">
                     <h2>{{ trans('messages.latest_discussions_my') }}</h2>
-
-
-
                     <table class="table table-hover special">
                         <thead>
                             <tr>
@@ -72,7 +63,7 @@
                 </div>
             @endif
 
-            @if (isset($my_actions))
+            @if ($my_actions->count() > 0)
                 <div class="col-md-6">
                     <h2>{{ trans('messages.agenda_my') }}</h2>
 
@@ -116,101 +107,101 @@
 
 
         <div class="row">
-            <div class="col-md-6">
-                @if (Auth::guest())
-                    <h1>{{ trans('messages.latest_discussions') }}</h1>
-                @else
+
+
+            @if ($other_discussions->count() > 0)
+                <div class="col-md-6">
                     <h2>{{ trans('messages.latest_discussions_others') }}</h2>
-                @endif
-                <table class="table table-hover special">
-                    <thead>
-                        <tr>
-                            <th class="avatar"></th>
-                            <th class="summary"></th>
-                            <th class="date"></th>
-                            <th class="unread"></th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        @forelse( $other_discussions as $discussion )
+                    <table class="table table-hover special">
+                        <thead>
                             <tr>
-
-                                <td class="avatar"><span class="avatar"><img src="{{$discussion->user->avatar()}}" class="img-circle"/></span></td>
-                                <td class="content">
-                                    <a href="{{ route('groups.discussions.show', [$discussion->group_id, $discussion->id]) }}">
-                                        <span class="name">{{ $discussion->name }}</span>
-                                        <span class="summary">{{summary($discussion->body) }}</span>
-                                        <br/>
-                                    </a>
-                                    <span class="group-name"><a href="{{ route('groups.show', [$discussion->group_id]) }}">{{ $discussion->group->name }}</a></span>
-                                </td>
-
-                                <td class="date">
-                                    {{ $discussion->updated_at->diffForHumans() }}
-                                </td>
-
-                                <td>
-                                    @if ($discussion->unReadCount() > 0)
-                                        <i class="fa fa-comment"></i>
-                                        <span class="badge">{{ $discussion->unReadCount() }}</span>
-                                    @endif
-                                </td>
-
+                                <th class="avatar"></th>
+                                <th class="summary"></th>
+                                <th class="date"></th>
+                                <th class="unread"></th>
                             </tr>
-                        @empty
-                            {{trans('messages.nothing_yet')}}
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+
+                        <tbody>
+                            @foreach( $other_discussions as $discussion )
+                                <tr>
+
+                                    <td class="avatar"><span class="avatar"><img src="{{$discussion->user->avatar()}}" class="img-circle"/></span></td>
+                                    <td class="content">
+                                        <a href="{{ route('groups.discussions.show', [$discussion->group_id, $discussion->id]) }}">
+                                            <span class="name">{{ $discussion->name }}</span>
+                                            <span class="summary">{{summary($discussion->body) }}</span>
+                                            <br/>
+                                        </a>
+                                        <span class="group-name"><a href="{{ route('groups.show', [$discussion->group_id]) }}">{{ $discussion->group->name }}</a></span>
+                                    </td>
+
+                                    <td class="date">
+                                        {{ $discussion->updated_at->diffForHumans() }}
+                                    </td>
+
+                                    <td>
+                                        @if ($discussion->unReadCount() > 0)
+                                            <i class="fa fa-comment"></i>
+                                            <span class="badge">{{ $discussion->unReadCount() }}</span>
+                                        @endif
+                                    </td>
+
+                                </tr>
+
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @endif
 
 
 
-            <div class="col-md-6">
 
-                @if (Auth::guest())
-                    <h1>{{ trans('messages.agenda') }}</h1>
-                @else
+            @if ($other_actions->count() > 0)
+                <div class="col-md-6">
                     <h2>{{ trans('messages.agenda_others') }}</h2>
-                @endif
 
-                <table class="table table-hover special">
-                    <thead>
-                        <tr>
-                            <th style="width: 50%">{{ trans('messages.title') }}</th>
-                            <th>{{ trans('messages.date') }}</th>
-                            <th>{{ trans('messages.where') }}</th>
-                        </tr>
-                    </thead>
 
-                    <tbody>
-                        @foreach( $other_actions as $action )
+                    <table class="table table-hover special">
+                        <thead>
                             <tr>
-                                <td class="content">
-                                    <a href="{{ route('groups.actions.show', [$action->group_id, $action->id]) }}">
-                                        <span class="name">{{ $action->name }}</span>
-                                        <span class="summary">{{ summary($action->body) }}</span>
-                                    </a>
-                                    <br/>
-                                    <span class="group-name"><a href="{{ route('groups.show', [$action->group_id]) }}">{{ $action->group->name }}</a></span>
-                                </td>
-
-                                <td>
-                                    {{$action->start->format('d/m/Y H:i')}}
-                                </td>
-
-                                <td class="content">
-                                    {{$action->location}}
-                                </td>
+                                <th style="width: 50%">{{ trans('messages.title') }}</th>
+                                <th>{{ trans('messages.date') }}</th>
+                                <th>{{ trans('messages.where') }}</th>
                             </tr>
-                        @endforeach
+                        </thead>
 
-                    </tbody>
-                </table>
-            </div>
+                        <tbody>
+                            @foreach( $other_actions as $action )
+                                <tr>
+                                    <td class="content">
+                                        <a href="{{ route('groups.actions.show', [$action->group_id, $action->id]) }}">
+                                            <span class="name">{{ $action->name }}</span>
+                                            <span class="summary">{{ summary($action->body) }}</span>
+                                        </a>
+                                        <br/>
+                                        <span class="group-name"><a href="{{ route('groups.show', [$action->group_id]) }}">{{ $action->group->name }}</a></span>
+                                    </td>
+
+                                    <td>
+                                        {{$action->start->format('d/m/Y H:i')}}
+                                    </td>
+
+                                    <td class="content">
+                                        {{$action->location}}
+                                    </td>
+                                </tr>
+                            @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
+            @endif
+
         </div>
 
+        <div class="spacer"></div>
 
         {!! setting('homepage_presentation', trans('documentation.intro')) !!}
 

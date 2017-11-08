@@ -1,12 +1,9 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2017/10/10 15:46:59
+ Generated via "php artisan localization:missing" at 2017/10/18 11:16:00 
 *************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/agorakit/resources/views/files/index.blade.php
-  'size' => 'Taille',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'accept_invitation' => 'Accepter l\'invitation',
@@ -98,6 +95,7 @@ return array (
   'invite_already_used' => 'Invitation déjà utilisée',
   'invite_not_found' => 'Invitation non trouvée',
   'join' => 'Rejoindre ce groupe',
+  'join_a_group' => 'Vous n\'avez pas encore rejoint de groupe. N\'hésitez pas à le faire en cliquant sur "Groupes". Vous pouvez également créer un groupe',
   'join_the_group' => 'rejoignez-le',
   'join_this_group' => 'Rejoignez ce groupe',
   'last_activity' => 'Dernière activité',
@@ -124,7 +122,6 @@ return array (
   'message_sent' => 'Message envoyé',
   'modify' => 'Modifier',
   'modify_intro_text' => 'Modifier le texte de présentation',
-  'my_groups' => 'Mes groupes',
   'name' => 'Nom',
   'news_from_group_email_subject' => 'Des nouvelles du groupe',
   'next_actions' => 'Prochaines actions',
@@ -165,6 +162,7 @@ return array (
   'show_all' => 'Afficher tout',
   'show_history' => 'Afficher l\'historique des modifications',
   'show_list' => 'Afficher sous forme de liste',
+  'size' => 'Taille',
   'something_wrong' => 'Il y a quelque chose qui ne fonctionne pas',
   'start' => 'Début',
   'started_by' => 'Démarré par',
@@ -229,6 +227,7 @@ return array (
   'map_of_this_group' => 'Carte de ce groupe',
   'members_of_this_group' => 'Membres de ce groupe',
   'message_not_sent_too_many_per_hour' => 'Le message n\'a pas été envoyé car vous avez dépassé la limite pour cette période. Ceci est mis en place afin d\'éviter le spam',
+  'my_groups' => 'Mes groupes',
   'not_a_group_admin' => 'Vous n\'êtes pas administrateur de ce groupe',
   'not_a_member' => 'Vous ne faites pas partie de ce groupe',
   'not_logged_in' => 'Vous n\'êtes pas connecté⋅e. Merci de vous connecter ou de vous créer un compte afin de poursuivre',
