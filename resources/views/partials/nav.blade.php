@@ -134,18 +134,36 @@
                 @if (Auth::user()->isAdmin())
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            Admin <span class="caret"></span>
+                            <i class="fa fa-cog"></i> Admin <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ url('/admin/user') }}">Users</a></li>
+                            <li>
+                                <a href="{{ url('/admin/settings') }}">
+                                    <i class="fa fa-cog"></i> Settings
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{ url('/admin/user') }}">
+                                    <i class="fa fa-users"></i> Users
+                                </a>
+                            </li>
                             <li>
                                 <a href="{{ action('InsightsController@forAllGroups') }}">
                                     <i class="fa fa-line-chart"></i> {{ trans('messages.insights') }}
                                 </a>
                             </li>
-                            <li><a href="{{ url('/translations') }}">Translations</a></li>
-                            <li><a href="{{ url('/admin/logs') }}">Logs</a></li>
+                            <li>
+                                <a href="{{ url('/translations') }}">
+                                    <i class="fa fa-flag"></i> Translations
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url('/admin/logs') }}">
+                                    <i class="fa fa-keyboard-o"></i> Logs
+                                </a>
+                            </li>
 
                         </ul>
                     </li>
@@ -159,7 +177,7 @@
             @if(\Config::has('app.locales'))
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        {{ strtoupper(app()->getLocale()) }} <span class="caret"></span>
+                        <i class="fa fa-language"></i> {{ strtoupper(app()->getLocale()) }} <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         @foreach(\Config::get('app.locales') as $locale)

@@ -11,19 +11,7 @@
 
     <script>
     $.trumbowyg.svgPath = '/svg/icons.svg';
-    $('#wysiwyg').trumbowyg({
-        autogrow: true,
-        btns: [
-            ['formatting'],
-            ['strong', 'em', 'del'],
-            ['link'],
-            ['insertImage'],
-            ['unorderedList', 'orderedList'],
-            ['removeformat'],
-            ['fullscreen'],
-        ]
-    });
-
+    $('.wysiwyg').trumbowyg()
 
 
     </script>

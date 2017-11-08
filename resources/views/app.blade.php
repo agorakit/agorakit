@@ -38,7 +38,7 @@
         </div>
     </div>
 
-    <div class="credits">{{trans('messages.made_with')}} <a href="https://github.com/philippejadin/Agorakit">Agorakit {{config('agorakit.version')}}</a></div>
+    <div class="credits">{{trans('messages.made_with')}} <a href="https://www.agorakit.org">Agorakit ({{config('agorakit.version')}})</a></div>
 
 
 

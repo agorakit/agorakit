@@ -11,14 +11,14 @@
 
 <div class="form-group">
     {!! Form::label('body', trans('messages.description')) !!}
-    {!! Form::textarea('body', null, ['id' => 'wysiwyg', 'class' => 'form-control', 'required']) !!}
+    {!! Form::textarea('body', null, ['class' => 'wysiwyg form-control']) !!}
 </div>
 
 
 <div class="form-group">
     <label>{{trans('messages.photo')}}</label><br/>
     <input name="cover" id="file" type="file" class="btn btn-primary" title="{{trans('messages.select_one_file')}}">
-    
+
 </div>
 
 

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Venturecraft\Revisionable\RevisionableTrait;
+use Config;
 
 class Setting extends Model
 {
@@ -21,14 +22,22 @@ class Setting extends Model
     /**
      * Static method to get a value from the settings table.
      */
-    public static function get($key, $default = false)
+    public static function get($key, $default = null)
     {
         $setting = \App\Setting::where('name', $key)->first();
 
+        // first priority : setting stored in the DB
         if ($setting) {
             return $setting->value;
         }
 
+        // second priority, default setting stored in app/config/agorakit.php
+        if (Config::get('agorakit.' . $key))
+        {
+            return Config::get('agorakit.' . $key);
+        }
+
+        // lastly our $default
         return $default;
     }
 

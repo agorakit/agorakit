@@ -10,32 +10,38 @@ class SettingsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('verified', ['only' => ['settings', 'update']]);
+        $this->middleware('admin');
     }
 
     /**
-     * Display a settings edition screen. Currently only the homepage intro text, but this will change soon :-)
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Display a settings edition screen. Currently only the homepage intro text, but this will change soon :-)
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function index()
     {
-        return view('settings.list')
-        ->with('homepage_presentation', \App\Setting::get('homepage_presentation'));
+        return view('admin.settings.index');
     }
 
     /**
-     * Update settings from the edit form.
-     */
+    * Update settings from the edit form.
+    */
     public function update(Request $request)
     {
-        if (Auth::user()->isAdmin()) {
-            \App\Setting::set('homepage_presentation', $request->input('homepage_presentation'));
+        if (Auth::user()->isAdmin())
+        {
+            \App\Setting::set('homepage_presentation', $request->get('homepage_presentation'));
+            \App\Setting::set('homepage_presentation_for_members', $request->get('homepage_presentation_for_members'));
+            \App\Setting::set('help_text', $request->get('help_text'));
+            \App\Setting::set('user_can_create_groups', $request->has('user_can_create_groups') ? 1 : 0);
+            \App\Setting::set('notify_admins_on_group_create', $request->has('notify_admins_on_group_create') ? 1 : 0);
 
-            return redirect()->action('DashboardController@index');
-        } else {
+            flash('Settings saved')->success();
+            return view('admin.settings.index');
+        }
+        else
+        {
             flash(trans('messages.not_allowed'))->error();
-
             return redirect()->action('DashboardController@index');
         }
     }
