@@ -57,6 +57,10 @@ class DiscussionController extends Controller
     */
     public function store(Request $request, Group $group)
     {
+        if (!$group->exists)
+        {
+            $group = \App\Group::findOrFail($request->get('group'));
+        }
         $discussion = new Discussion();
         $discussion->name = $request->input('name');
         $discussion->body = $request->input('body');
