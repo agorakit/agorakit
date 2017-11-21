@@ -111,6 +111,11 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('groups/{group}/cover/small', 'GroupThumbnailController@avatar')->name('groups.cover.small');
     Route::get('groups/{group}/cover/carousel', 'GroupThumbnailController@carousel')->name('groups.cover.carousel');
 
+    // General discussion create route
+    Route::get('discussions/create', 'DiscussionController@create')->name('discussions.create');
+    Route::post('discussions/create', 'DiscussionController@store')->name('discussions.store');
+
+
     // Groups : only members (or everyone if a group is public)
     Route::group(['middleware' => 'public', 'as' => 'groups', 'prefix' => 'groups/{group}'], function () {
 
