@@ -115,6 +115,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('discussions/create', 'DiscussionController@create')->name('discussions.create');
     Route::post('discussions/create', 'DiscussionController@store')->name('discussions.store');
 
+    // General action create route
+    Route::get('actions/create', 'ActionController@create')->name('actions.create');
+    Route::post('actions/create', 'ActionController@store')->name('actions.store');
+
 
     // Groups : only members (or everyone if a group is public)
     Route::group(['middleware' => 'public', 'as' => 'groups', 'prefix' => 'groups/{group}'], function () {
