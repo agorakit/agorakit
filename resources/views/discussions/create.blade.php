@@ -9,7 +9,7 @@
 
     <div class="tab_content">
 
-        <h1>{{trans('messages.create')}}</h1>
+        <h1>{{trans('discussion.start_a_discussion')}}</h1>
 
 
 
@@ -19,6 +19,7 @@
             <div class="form-group">
                 {!! Form::label('group', trans('messages.group')) !!}
                 <select class="form-control" name="group">
+                    <option value="" disabled selected>{{trans('messages.choose_a_group')}}</option>
                     @foreach (Auth::user()->groups as $group)
                         <option value="{{$group->id}}">{{$group->name}}</option>
                     @endforeach
