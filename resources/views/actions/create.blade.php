@@ -9,21 +9,51 @@
     <div class="tab_content">
 
 
-
         <h1>{{trans('action.create_one_button')}}</h1>
 
 
-        {!! Form::model($action, array('action' => ['ActionController@store', $group->id])) !!}
+        @if (!$group->exists)
+            {!! Form::open(array('route' => 'actions.store')) !!}
 
-        @include('actions.form')
+            <div class="form-group">
+                {!! Form::label('group', trans('messages.group')) !!}
+                <select class="form-control" name="group">
+                    <option value="" disabled selected>{{trans('messages.choose_a_group')}}</option>
+                    @foreach (Auth::user()->groups as $group)
+                        <option value="{{$group->id}}">{{$group->name}}</option>
+                    @endforeach
+                </select>
+            </div>
 
-        <div class="form-group">
-            {!! Form::submit(trans('messages.create'), ['class' => 'btn btn-primary form-control']) !!}
-        </div>
+            @include('actions.form')
+
+            <div class="form-group">
+                {!! Form::submit(trans('messages.create'), ['class' => 'btn btn-primary form-control']) !!}
+            </div>
+
+            {!! Form::close() !!}
+
+        @else
+            {!! Form::model($action, array('action' => ['ActionController@store', $group->id])) !!}
+
+            @include('actions.form')
+
+            <div class="form-group">
+                {!! Form::submit(trans('messages.create'), ['class' => 'btn btn-primary form-control']) !!}
+            </div>
 
 
 
-        {!! Form::close() !!}
+            {!! Form::close() !!}
+
+        @endif
+
+
+
+
+
+
+
 
 
 

@@ -12,7 +12,7 @@ class ActionController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('member', ['only' => ['post', 'create', 'store', 'edit', 'update', 'destroy']]);
+        $this->middleware('member', ['only' => ['edit', 'update', 'destroy']]);
         $this->middleware('cache', ['only' => ['index', 'show']]);
         $this->middleware('verified', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
         $this->middleware('public', ['only' => ['index', 'indexJson', 'show']]);
@@ -101,6 +101,14 @@ class ActionController extends Controller
      */
     public function store(Request $request, Group $group)
     {
+        // if no group is in the route, it means user choose the group using the dropdown
+        if (!$group->exists)
+        {
+            $group = \App\Group::findOrFail($request->get('group'));
+        }
+
+        $this->authorize('createaction', $group);
+
         $action = new Action();
 
         $action->name = $request->input('name');
@@ -129,7 +137,7 @@ class ActionController extends Controller
             ->withInput();
         } else {
             $action->save();
-
+            flash(trans('messages.ressource_created_successfully'))->success();
             return redirect()->route('groups.actions.index', $group);
         }
     }
