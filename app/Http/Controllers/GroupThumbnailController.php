@@ -38,7 +38,7 @@ class GroupThumbnailController extends Controller
 
             return $cachedImage->response();
         } else {
-            return Image::canvas(600, 350)->fill('#cccccc')->response(); // TODO caching or default group image instead
+            return Image::canvas(1200, 500)->fill('#cccccc')->response(); // TODO caching or default group image instead
         }
     }
 
