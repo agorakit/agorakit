@@ -8,6 +8,11 @@
 
     @include('dashboard.tabs')
 
+    <div style="float:right">
+        <a class="btn btn-default" href="{{ route('discussions.create') }}">
+            <i class="fa fa-plus"></i> {{trans('discussion.create_one_button')}}
+        </a>
+    </div>
 
     <div class="tab_content">
         @if ($discussions)
