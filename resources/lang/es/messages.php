@@ -1,12 +1,6 @@
 <?php
-/*************************************************************************
- Generated via "php artisan localization:missing" at 2017/10/10 15:46:59 
-*************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/agorakit/resources/views/files/index.blade.php
-  'size' => 'TODO: size',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un mensaje para usted',
   'accept_invitation' => 'Acepta la invitación',
@@ -33,6 +27,7 @@ return array (
   'changed' => 'Cambiado',
   'changed_from' => 'Modificado a partir de',
   'changed_to' => 'Cambiado a',
+  'choose_a_group' => 'TODO: choose_a_group',
   'click_here' => 'Haga clic aquí',
   'click_here_to_change_your_password' => 'Presione aquí para cambiar su contraseña',
   'click_to_confirm' => 'Haga clic para confirmar',
@@ -70,6 +65,7 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'files' => 'Archivos',
   'files_in_this_group' => 'Archivos de este grupo',
   'forgotten_password' => 'Olvidó su contraseña',
+  'group' => 'TODO: group',
   'group_admin_users' => 'Persona(s) de contacto',
   'group_home' => 'Inicio del grupo',
   'groups' => 'Grupos',
@@ -87,7 +83,6 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'if_you_dont_want_to_change_password_do_nothing' => 'Si no desea cambiar su contraseña, no haga nada',
   'if_you_donwt_want_to_join_do_nothing' => 'Si no quieres unirte, no hagas nada. No se le pedirá que se una nuevamente al grupo',
   'if_you_want_participate_in_this_group' => 'Si quieres participar en este grupo',
-  'if_you_want_to_add_event_goto_group_agenda' => 'Si desea agregar un evento al calendario, vaya al calendario de ese grupo',
   'in' => 'en',
   'in_the_discussion' => 'TODO: in_the_discussion',
   'inside' => 'dentro',
@@ -97,10 +92,10 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'invite_already_used' => 'Invitación ya utilizada',
   'invite_not_found' => 'Invitación no encontrada',
   'join' => 'Unirse',
+  'join_a_group' => 'TODO: join_a_group',
   'join_the_group' => 'Unirse al grupo',
   'join_this_group' => 'Unirse a este grupo',
   'last_activity' => 'Última actividad',
-  'latest_comments' => 'Últimos comentarios',
   'latest_discussions' => 'Últimas discusiones',
   'latest_discussions_my' => 'Últimas discusiones en mis grupos',
   'latest_discussions_others' => 'Últimas discusiones en otros grupos',
@@ -123,7 +118,6 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'message_sent' => 'Mensaje enviado',
   'modify' => 'Modificar',
   'modify_intro_text' => 'Modificar texto de introducción',
-  'my_groups' => 'Mis grupos',
   'name' => 'Nombre',
   'news_from_group_email_subject' => 'Noticias del grupo',
   'next_actions' => 'Próximas acciones',
@@ -164,6 +158,7 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'show_all' => 'Mostrar todo',
   'show_history' => 'Mostrar historial',
   'show_list' => 'Mostrar la lista de archivos',
+  'size' => 'TODO: size',
   'something_wrong' => 'Algo no funciona con su envío',
   'start' => 'Inicio',
   'started_by' => 'Iniciado por',
@@ -252,5 +247,8 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
     'you_see_only_your_stuff' => 'Solo ves tus cosas',
     'your_password_reset_link' => 'Enlace para restablecer contraseña',
   ),
+  'if_you_want_to_add_event_goto_group_agenda' => 'Si desea agregar un evento al calendario, vaya al calendario de ese grupo',
+  'latest_comments' => 'Últimos comentarios',
+  'my_groups' => 'Mis grupos',
   'visit_link' => 'Visitar enlace',
 );

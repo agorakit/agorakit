@@ -1,7 +1,4 @@
 <?php
-/*************************************************************************
- Generated via "php artisan localization:missing" at 2017/10/10 15:46:59 
-*************************************************************************/
 
 return array (
   //==================================== Translations ====================================//
@@ -11,4 +8,5 @@ return array (
   array (
     'all_in_this_group' => 'Todas las discusiones en este grupo',
   ),
+  'start_a_discussion' => 'TODO: start_a_discussion',
 );

@@ -9,7 +9,7 @@
 
     <div class="tab_content">
 
-        <h1>{{trans('discussion.start_a_discussion')}}</h1>
+        <h1>{{trans('discussion.create_one_button')}}</h1>
 
 
 
