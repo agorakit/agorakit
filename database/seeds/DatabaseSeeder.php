@@ -13,20 +13,33 @@ class DatabaseSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        // create 50 users
+        // create users
         DB::table('users')->delete();
 
+        // first created user is automagically admin
         $admin = App\User::create([
             'email'    => 'admin@agorakit.org',
             'password' => bcrypt('secret'),
             'body'     => $faker->text,
-            'name'     => $faker->name,
+            'name'     => 'Administrator',
             'verified' => 1,
         ]);
 
         // add avatar to admin user
         Storage::disk('local')->makeDirectory('users/'.$admin->id);
         Image::make($faker->imageUrl(500, 400, 'people'))->widen(500)->save(storage_path().'/app/users/'.$admin->id.'/cover.jpg')->fit(128, 128)->save(storage_path().'/app/users/'.$admin->id.'/thumbnail.jpg');
+
+
+        // a second normal user
+        $normal_user = App\User::create([
+            'email'    => 'user@agorakit.org',
+            'password' => bcrypt('secret'),
+            'body'     => $faker->text,
+            'name'     => 'Normal user',
+            'verified' => 1,
+        ]);
+
+
 
         for ($i = 1; $i <= 50; ++$i) {
             $user = App\User::create([

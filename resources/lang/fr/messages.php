@@ -1,7 +1,4 @@
 <?php
-/*************************************************************************
- Generated via "php artisan localization:missing" at 2017/10/18 11:16:00 
-*************************************************************************/
 
 return array (
   //==================================== Translations ====================================//
@@ -31,6 +28,7 @@ return array (
   'changed' => 'a modifié',
   'changed_from' => 'valeur initiale',
   'changed_to' => 'changé en',
+  'choose_a_group' => 'Choisissez un groupe',
   'click_here' => 'Cliquez ici',
   'click_here_to_change_your_password' => 'Cliquez ici pour changer votre mot de passe',
   'click_to_confirm' => 'Cliquez ici pour confirmer votre adresse email',
@@ -68,6 +66,7 @@ return array (
   'files' => 'Fichiers',
   'files_in_this_group' => 'Fichiers de ce groupe',
   'forgotten_password' => 'Mot de passe oublié',
+  'group' => 'Groupe',
   'group_admin_users' => 'Personne(s) de contact',
   'group_home' => 'À propos',
   'groups' => 'Groupes',
@@ -85,7 +84,6 @@ return array (
   'if_you_dont_want_to_change_password_do_nothing' => 'Si vous ne souhaitez pas changer de mot de passe, ne faites rien.',
   'if_you_donwt_want_to_join_do_nothing' => 'Si vous ne souhaitez pas rejoindre ce groupe, ne faites rien. Vous ne recevrez pas d\'invitations suplémentaires à participer à ce groupe.',
   'if_you_want_participate_in_this_group' => 'Si vous souhaitez participer à ce groupe,',
-  'if_you_want_to_add_event_goto_group_agenda' => 'Si vous souhaitez ajouter une action à l\'agenda, rendez-vous dans l\'agenda d\'un groupe en particulier afin de compléter son agenda',
   'in' => 'dans',
   'in_the_discussion' => 'dans la discussion',
   'inside' => 'au sein de',
@@ -99,7 +97,6 @@ return array (
   'join_the_group' => 'rejoignez-le',
   'join_this_group' => 'Rejoignez ce groupe',
   'last_activity' => 'Dernière activité',
-  'latest_comments' => 'Derniers commentaires',
   'latest_discussions' => 'Discussions récentes',
   'latest_discussions_my' => 'Dernières discussions dans mes groupes',
   'latest_discussions_others' => 'Dernières discussions dans les autres groupes',
@@ -218,12 +215,13 @@ return array (
   'create_folder' => 'Créer un dossier',
   'create_folder_button' => 'Créer un dossier',
   'drop_file_here' => 'Glissez un ou plusieurs fichiers ci-dessous',
-  'group' => 'Groupe',
   'groups_list' => 'Liste des groupes',
   'help' => 'Aide',
   'home' => 'Accueil',
+  'if_you_want_to_add_event_goto_group_agenda' => 'Si vous souhaitez ajouter une action à l\'agenda, rendez-vous dans l\'agenda d\'un groupe en particulier afin de compléter son agenda',
   'info' => 'Info',
   'latest_actions' => 'Prochaines actions',
+  'latest_comments' => 'Derniers commentaires',
   'map_of_this_group' => 'Carte de ce groupe',
   'members_of_this_group' => 'Membres de ce groupe',
   'message_not_sent_too_many_per_hour' => 'Le message n\'a pas été envoyé car vous avez dépassé la limite pour cette période. Ceci est mis en place afin d\'éviter le spam',

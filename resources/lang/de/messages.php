@@ -1,12 +1,6 @@
 <?php
-/*************************************************************************
- Generated via "php artisan localization:missing" at 2017/10/10 15:46:59 
-*************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/agorakit/resources/views/files/index.blade.php
-  'size' => 'TODO: size',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Eine Nachricht für Sie',
   'accept_invitation' => 'Die Einladung akzeptieren',
@@ -33,6 +27,7 @@ return array (
   'changed' => 'Geändert',
   'changed_from' => 'Geändert von',
   'changed_to' => 'Geändert auf',
+  'choose_a_group' => 'TODO: choose_a_group',
   'click_here' => 'Hier klicken',
   'click_here_to_change_your_password' => 'Klicken Sie hier, um Ihr Passwort zu ändern',
   'click_to_confirm' => 'Klicken Sie hier, um die Eingabe zu bestätigen',
@@ -69,6 +64,7 @@ return array (
   'files' => 'Dateien',
   'files_in_this_group' => 'Dateien dieser Gruppe',
   'forgotten_password' => 'Passwort vergessen',
+  'group' => 'TODO: group',
   'group_admin_users' => 'TODO: group_admin_users',
   'group_home' => 'Gruppen-Startseite',
   'groups' => 'Gruppen',
@@ -86,7 +82,6 @@ return array (
   'if_you_dont_want_to_change_password_do_nothing' => 'Wenn Sie Ihr Passwort nicht ändern möchten, so machen Sie hier nichts',
   'if_you_donwt_want_to_join_do_nothing' => 'Wenn Sie der Gruppe nicht beitreten möchten, so machen Sie nichts. Sie werden nicht erneut danach gefragt.',
   'if_you_want_participate_in_this_group' => 'Wenn Sie an dieser Gruppe teilnehmen möchten',
-  'if_you_want_to_add_event_goto_group_agenda' => 'Wenn Sie eine Handlung dem Kalendar hinzufügen möchten, besuchen Sie die Agenda der betreffenden Gruppe',
   'in' => 'in',
   'in_the_discussion' => 'TODO: in_the_discussion',
   'inside' => 'Innen',
@@ -96,10 +91,10 @@ return array (
   'invite_already_used' => 'Einladung bereits eingelöst',
   'invite_not_found' => 'Einladung nicht gefunden',
   'join' => 'Beitreten',
+  'join_a_group' => 'TODO: join_a_group',
   'join_the_group' => 'Der Gruppe beitreten',
   'join_this_group' => 'Dieser Gruppe beitreten',
   'last_activity' => 'TODO: last_activity',
-  'latest_comments' => 'Neueste Kommentare',
   'latest_discussions' => 'Neueste Diskussionen',
   'latest_discussions_my' => 'Aktuelle diskussionen in meinen gruppen',
   'latest_discussions_others' => 'Neueste diskussionen die anderen',
@@ -122,7 +117,6 @@ return array (
   'message_sent' => 'Nachricht versendet',
   'modify' => 'Ändern',
   'modify_intro_text' => 'Einführungs-Text ändern',
-  'my_groups' => 'Meine Gruppen',
   'name' => 'Name',
   'news_from_group_email_subject' => 'Neuigkeiten von der Gruppe',
   'next_actions' => 'Nächste Handlungen',
@@ -163,6 +157,7 @@ return array (
   'show_all' => 'Alle einsehen',
   'show_history' => 'Verlauf anzeigen',
   'show_list' => 'Dateienliste anzeigen',
+  'size' => 'TODO: size',
   'something_wrong' => 'Es gibt ein Problem mit Ihrem Eintrag',
   'start' => 'Starten',
   'started_by' => 'Gestartet von',
@@ -248,5 +243,8 @@ return array (
     'you_see_only_your_stuff' => 'Sie sehen die Diskussioinen und Handlungen Ihrer Gruppen nicht',
     'your_password_reset_link' => 'Ihr Link zur Passwortrücksetzung',
   ),
+  'if_you_want_to_add_event_goto_group_agenda' => 'Wenn Sie eine Handlung dem Kalendar hinzufügen möchten, besuchen Sie die Agenda der betreffenden Gruppe',
+  'latest_comments' => 'Neueste Kommentare',
+  'my_groups' => 'Meine Gruppen',
   'visit_link' => 'TODO: visit_link',
 );

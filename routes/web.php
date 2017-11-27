@@ -108,6 +108,17 @@ Route::group(['middleware' => ['web']], function () {
     // Groups : what everyone can see
     Route::get('groups/{group}', 'GroupController@show')->name('groups.show');
     Route::get('groups/{group}/cover', 'GroupThumbnailController@cover')->name('groups.cover');
+    Route::get('groups/{group}/cover/small', 'GroupThumbnailController@avatar')->name('groups.cover.small');
+    Route::get('groups/{group}/cover/carousel', 'GroupThumbnailController@carousel')->name('groups.cover.carousel');
+
+    // General discussion create route
+    Route::get('discussions/create', 'DiscussionController@create')->name('discussions.create');
+    Route::post('discussions/create', 'DiscussionController@store')->name('discussions.store');
+
+    // General action create route
+    Route::get('actions/create', 'ActionController@create')->name('actions.create');
+    Route::post('actions/create', 'ActionController@store')->name('actions.store');
+
 
     // Groups : only members (or everyone if a group is public)
     Route::group(['middleware' => 'public', 'as' => 'groups', 'prefix' => 'groups/{group}'], function () {

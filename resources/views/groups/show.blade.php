@@ -58,7 +58,14 @@
 
         @if ($actions)
             @if($actions->count() > 0)
-                <h2><a href="{{ route('groups.actions.index', $group->id) }}">{{trans('messages.agenda')}}</a></h2>
+                <h2>
+                    <a href="{{ route('groups.actions.index', $group->id) }}">{{trans('messages.agenda')}}</a>
+                    @can('create-action', $group)
+                        <a class="btn btn-sm btn-default" href="{{ route('groups.actions.create', $group->id ) }}">
+                            <i class="fa fa-plus"></i> {{trans('action.create_one_button')}}
+                        </a>
+                    @endcan
+                </h2>
 
 
                 <table class="table table-hover special">
@@ -103,7 +110,14 @@
 
                 @if ($discussions)
                     @if($discussions->count() > 0)
-                        <h2><a href="{{ route('groups.discussions.index', $group->id) }}">{{trans('group.latest_discussions')}}</a></h2>
+                        <h2>
+                            <a href="{{ route('groups.discussions.index', $group->id) }}">{{trans('group.latest_discussions')}}</a>
+                            @can('create-discussion', $group)
+                                <a class="btn btn-sm btn-default" href="{{ route('groups.discussions.create', $group) }}">
+                                    <i class="fa fa-plus"></i> {{trans('discussion.create_one_button')}}
+                                </a>
+                            @endcan
+                        </h2>
                         <table class="table table-hover special">
                             <thead>
                                 <tr>
@@ -191,8 +205,10 @@
 
 
                 @if ($activities)
-                    <h4>{{trans('messages.recent_activity')}}</h4>
-                    @each('partials.activity-small', $activities, 'activity')
+                    @if($activities->count() > 0)
+                        <h2>{{trans('messages.recent_activity')}}</h2>
+                        @each('partials.activity-small', $activities, 'activity')
+                    @endif
                 @endif
 
             </div>
