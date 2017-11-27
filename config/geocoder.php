@@ -12,7 +12,7 @@ use Geocoder\Provider\BingMaps;
 use Geocoder\Provider\Chain;
 use Geocoder\Provider\FreeGeoIp;
 use Geocoder\Provider\GoogleMaps;
-use Ivory\HttpAdapter\CurlHttpAdapter;
+use Http\Client\Curl\Client;
 
 return [
     'providers' => [
@@ -23,7 +23,7 @@ return [
                 false,
                 env('GOOGLE_MAPS_API_KEY'),
             ],
-            FreeGeoIp::class  => [],
+            GeoPlugin::class  => [],
         ],
         BingMaps::class => [
             'fr-FR',
@@ -36,5 +36,5 @@ return [
             env('GOOGLE_MAPS_API_KEY'),
         ],
     ],
-    'adapter'  => CurlHttpAdapter::class,
+    'adapter'  => Client::class,
 ];

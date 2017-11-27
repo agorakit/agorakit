@@ -1,19 +1,17 @@
 <?php
 
-class TestCase extends Illuminate\Foundation\Testing\TestCase
-{
-    /**
-     * The base URL to use while testing the application.
-     *
-     * @var string
-     */
-    protected $baseUrl = 'http://localhost';
+namespace Tests;
 
+use Laravel\BrowserKitTesting\TestCase as BaseTestCase;
+
+abstract class TestCase extends BaseTestCase
+{
+    public $baseUrl = 'http://localhost';
     /**
-     * Creates the application.
-     *
-     * @return \Illuminate\Foundation\Application
-     */
+    * Creates the application.
+    *
+    * @return \Illuminate\Foundation\Application
+    */
     public function createApplication()
     {
         // putenv('DB_DEFAULT=sqlite_testing'); // TODO

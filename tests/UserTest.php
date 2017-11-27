@@ -2,7 +2,8 @@
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class UserTest extends BrowserKitTestCase
+
+class UserTest extends Tests\BrowserKitTestCase
 {
 
     /******************* Why is it done this way ? ***************/

@@ -1,80 +1,82 @@
 {
-  "name": "laravel/laravel",
-  "description": "The Laravel Framework.",
-  "keywords": [
-    "framework",
-    "laravel"
-  ],
-  "license": "MIT",
-  "type": "project",
-  "require": {
-    "php": ">=5.6.4",
-    "laravel/framework": "5.4.*",
-    "watson/validating": "^3.0",
-    "venturecraft/revisionable": "1.*",
-    "laravelcollective/html": "5.4.*",
-    "barryvdh/laravel-debugbar": "^2.4",
-    "intervention/image": "^2.3",
-    "intervention/imagecache": "^2.3",
-    "eluceo/ical": "^0.12.1",
-    "kwi/urllinker": "dev-master",
-    "rap2hpoutre/laravel-log-viewer": "^0.10.4",
-    "potsky/laravel-localization-helpers" : "2.5.*",
-    "iatstuti/laravel-cascade-soft-deletes": "1.3.*",
-    "toin0u/geocoder-laravel": "^1.0",
-    "suin/php-rss-writer": "^1.6",
-    "cviebrock/eloquent-taggable": "^3.1",
-    "laravel/socialite": "^3.0",
-    "consoletvs/charts": "5.*",
-    "laracasts/flash": "3.0.0",
-    "laravel/tinker": "^1.0",
-    "watson/autologin": "^0.5.2"
-  },
-  "require-dev": {
-    "fzaninotto/faker": "~1.4",
-    "mockery/mockery": "0.9.*",
-    "phpunit/phpunit": "~5.7",
-    "symfony/css-selector": "3.1.*",
-    "symfony/dom-crawler": "3.1.*",
-    "laravel/homestead": "^3.0",
-    "laravel/browser-kit-testing": "1.*"
-  },
-  "autoload": {
-    "classmap": [
-      "database"
-    ],
-    "files": [
-      "app/Helpers/Functions.php"
-    ],
-    "psr-4": {
-      "App\\": "app/"
+    "name": "laravel/laravel",
+    "description": "The Laravel Framework.",
+    "keywords": ["framework", "laravel"],
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": ">=7.0.0",
+        "fideloper/proxy": "~3.3",
+        "laravel/framework": "5.5.*",
+        "laravel/tinker": "~1.0",
+        "watson/validating": "^3.0",
+        "venturecraft/revisionable": "1.*",
+        "laravelcollective/html": "5.5.*",
+        "intervention/image": "^2.4.1",
+        "intervention/imagecache": "2.*",
+        "eluceo/ical": "^0.13.0",
+        "kwi/urllinker": "dev-master",
+        "rap2hpoutre/laravel-log-viewer": "^0.11.0",
+        "potsky/laravel-localization-helpers" : "2.6.*",
+        "iatstuti/laravel-cascade-soft-deletes": "1.3.*",
+        "toin0u/geocoder-laravel": "^4.0.3",
+        "suin/php-rss-writer": "^1.6",
+        "cviebrock/eloquent-taggable": "^3.2.3",
+        "laravel/socialite": "^3.0",
+        "consoletvs/charts": "5.*",
+        "laracasts/flash": "3.0.0",
+        "watson/autologin": "^0.5.2"
+    },
+    "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.1",
+        "filp/whoops": "~2.0",
+        "fzaninotto/faker": "~1.4",
+        "laravel/browser-kit-testing": "^1.0",
+        "mockery/mockery": "~1.0",
+        "phpunit/phpunit": "~5.7"
+    },
+    "autoload": {
+        "classmap": [
+            "database/seeds",
+            "database/factories"
+        ],
+        "files": [
+            "app/Helpers/Functions.php"
+        ],
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        },
+        "classmap": [
+            "tests/TestCase.php",
+            "tests/BrowserKitTestCase.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": [
+            ]
+        }
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate"
+        ],
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
     }
-  },
-  "autoload-dev": {
-    "classmap": [
-      "tests/TestCase.php",
-      "tests/BrowserKitTestCase.php"
-    ]
-  },
-  "scripts": {
-    "post-root-package-install": [
-      "php -r \"copy('.env.example', '.env');\""
-    ],
-    "post-create-project-cmd": [
-      "php artisan key:generate"
-    ],
-    "post-install-cmd": [
-      "php artisan clear-compiled",
-      "php artisan optimize"
-    ],
-    "pre-update-cmd": [
-      "php artisan clear-compiled"
-    ],
-    "post-update-cmd": [
-      "php artisan optimize"
-    ]
-  },
-  "config": {
-    "preferred-install": "dist"
-  }
 }
