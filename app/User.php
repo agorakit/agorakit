@@ -158,6 +158,11 @@ class User extends Authenticatable
         return false;
     }
 
+    public function scopeAdmins($query)
+    {
+        return $query->where('admin', 1);
+    }
+
     /**
     * The groups this user is part of.
     */
