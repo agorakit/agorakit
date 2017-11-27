@@ -90,6 +90,8 @@ class GroupController extends Controller
     */
     public function create()
     {
+        Gate::authorize('create', \App\Group::class);
+
         return view('groups.create')
         ->with('all_tags', \App\Group::allTags());
     }
@@ -101,6 +103,8 @@ class GroupController extends Controller
     */
     public function store(Request $request)
     {
+        Gate::authorize('create', \App\Group::class);
+
         $group = new group();
 
         $group->name = $request->input('name');
