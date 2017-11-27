@@ -13,7 +13,9 @@
 
     <div class="tab_content">
 
+        {!! setting('homepage_presentation_for_members', trans('documentation.intro')) !!}
 
+        <div class="spacer"></div>
 
         <div class="row">
             @if ($my_discussions->count() > 0)
@@ -201,17 +203,7 @@
 
         </div>
 
-        <div class="spacer"></div>
 
-        {!! setting('homepage_presentation', trans('documentation.intro')) !!}
-
-        @if (Auth::user()->isAdmin())
-            <div>
-                <a class="btn btn-primary" href="{{action('Admin\SettingsController@index')}}">
-                    <i class="fa fa-pencil"></i> {{trans('messages.modify_intro_text')}}
-                </a>
-            </div>
-        @endif
 
     </div>
 
