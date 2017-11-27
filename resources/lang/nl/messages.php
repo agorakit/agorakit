@@ -1,12 +1,6 @@
 <?php
-/*************************************************************************
- Generated via "php artisan localization:missing" at 2017/10/10 15:46:59
-*************************************************************************/
 
 return array (
-  //============================== New strings to translate ==============================//
-  // Defined in file /home/philippe/Sites/agorakit/resources/views/files/index.blade.php
-  'size' => 'size',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'U heeft een bericht',
   'accept_invitation' => 'De uitnodiging accepteren',
@@ -33,6 +27,7 @@ return array (
   'changed' => 'veranderd',
   'changed_from' => 'veranderd van',
   'changed_to' => 'veranderd naar',
+  'choose_a_group' => 'TODO: choose_a_group',
   'click_here' => 'Klik hier',
   'click_here_to_change_your_password' => 'Klik hier om uw wachtwoord te wijzigen',
   'click_to_confirm' => 'Klik om uw mailadres te bevestigen',
@@ -69,6 +64,7 @@ return array (
   'files' => 'Bestanden',
   'files_in_this_group' => 'Bestanden in deze groep',
   'forgotten_password' => 'Wachtwoord vergeten',
+  'group' => 'TODO: group',
   'group_admin_users' => 'TODO: group_admin_users',
   'group_home' => 'Over deze groep',
   'groups' => 'Groepen',
@@ -86,7 +82,6 @@ return array (
   'if_you_dont_want_to_change_password_do_nothing' => 'Wil u uw wachtwoord niet wijzigen, doe dan niets.',
   'if_you_donwt_want_to_join_do_nothing' => 'Wenst u niet bij deze groep aan te sluiten, dan hoeft u niets te doen. U krijgt dan geen uitnodigingen meer om bij deze groep aan te sluiten.',
   'if_you_want_participate_in_this_group' => 'Als u wil deelnemen aan deze groep',
-  'if_you_want_to_add_event_goto_group_agenda' => 'Als u wilt een actie toevoegen aan de agenda een afspraak in de agenda van een bepaalde groep om zijn volledige agenda',
   'in' => 'in',
   'in_the_discussion' => 'TODO: in_the_discussion',
   'inside' => 'van',
@@ -96,10 +91,10 @@ return array (
   'invite_already_used' => 'Uitnodiging al gebruikt',
   'invite_not_found' => 'Uitnodiging niet gevonden',
   'join' => 'Aansluiten bij deze groep',
+  'join_a_group' => 'TODO: join_a_group',
   'join_the_group' => 'Neem deel aan deze groep',
   'join_this_group' => 'Neem deel aan deze groep',
   'last_activity' => 'TODO: last_activity',
-  'latest_comments' => 'Laatste reacties',
   'latest_discussions' => 'Recente discussies',
   'latest_discussions_my' => 'Laatste discussies in mijn groepen',
   'latest_discussions_others' => 'Laatste discussies in andere groepen',
@@ -122,7 +117,6 @@ return array (
   'message_sent' => 'Bericht verstuurd',
   'modify' => 'Bewerken',
   'modify_intro_text' => 'Bewerken intro tekst',
-  'my_groups' => 'Mijn groepen',
   'name' => 'Naam',
   'news_from_group_email_subject' => 'Nieuws van :',
   'next_actions' => 'Naast acties',
@@ -163,6 +157,7 @@ return array (
   'show_all' => 'Alles tonen',
   'show_history' => 'Geschiedenis van aanpassingen tonen',
   'show_list' => 'Tonen als lijst',
+  'size' => 'size',
   'something_wrong' => 'TODO: something_wrong',
   'start' => 'Start',
   'started_by' => 'Begonnen door',
@@ -203,7 +198,7 @@ return array (
   'your_groups' => 'Mijn groepen',
   'your_search_for' => 'Zoeken',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' =>
+  'LLH:obsolete' => 
   array (
     'admin-back' => 'Terug',
     'admin_settings' => 'Voorkeuren wijzigen',
@@ -245,5 +240,8 @@ return array (
     'you_see_only_your_stuff' => 'U ziet enkel de discussies en acties van uw groepen',
     'your_password_reset_link' => 'Uw link wachtwoord te veranderen',
   ),
+  'if_you_want_to_add_event_goto_group_agenda' => 'Als u wilt een actie toevoegen aan de agenda een afspraak in de agenda van een bepaalde groep om zijn volledige agenda',
+  'latest_comments' => 'Laatste reacties',
+  'my_groups' => 'Mijn groepen',
   'visit_link' => 'TODO: visit_link',
 );

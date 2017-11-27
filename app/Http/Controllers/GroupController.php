@@ -59,7 +59,8 @@ class GroupController extends Controller
         }
         else // anonymous user
         {
-            if ($group->isPublic()) {
+            if ($group->isPublic())
+            {
                 $discussions = $group->discussions()
                 ->has('user')
                 ->with('user', 'group')
@@ -89,6 +90,8 @@ class GroupController extends Controller
     */
     public function create()
     {
+        Gate::authorize('create', \App\Group::class);
+
         return view('groups.create')
         ->with('all_tags', \App\Group::allTags());
     }
@@ -100,6 +103,8 @@ class GroupController extends Controller
     */
     public function store(Request $request)
     {
+        Gate::authorize('create', \App\Group::class);
+
         $group = new group();
 
         $group->name = $request->input('name');
@@ -142,6 +147,15 @@ class GroupController extends Controller
         $membership->notification_interval = 60 * 24; // default to daily interval
         $membership->membership = \App\Membership::ADMIN;
         $membership->save();
+
+        // notify admins (if they want it)
+        if (\App\Setting::get('notify_admins_on_group_create'))
+        {
+            foreach (\App\User::admins()->get() as $admin)
+            {
+                $admin->notify(new \App\Notifications\GroupCreated($group));
+            }
+        }
 
         flash(trans('messages.ressource_created_successfully'))->success();
 

@@ -29,7 +29,7 @@
     <h2>Group creation</h2>
     <div class="form-group">
         {!! Form::checkbox('user_can_create_groups',1 ,\App\Setting::get('user_can_create_groups')) !!}
-        Allow users to create groups
+        Allow regular users to create groups (if you uncheck this box, only admins will be able to create groups)
     </div>
 
     <div class="form-group">

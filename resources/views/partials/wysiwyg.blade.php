@@ -5,6 +5,7 @@
 
 @push('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.8.1/trumbowyg.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.8.1/plugins/upload/trumbowyg.upload.min.js"></script>
 
 
 

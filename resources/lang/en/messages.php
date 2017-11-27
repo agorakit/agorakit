@@ -1,7 +1,4 @@
 <?php
-/*************************************************************************
- Generated via "php artisan localization:missing" at 2017/10/18 11:16:00 
-*************************************************************************/
 
 return array (
   //==================================== Translations ====================================//
@@ -30,6 +27,7 @@ return array (
   'changed' => 'Changed',
   'changed_from' => 'Changed from',
   'changed_to' => 'Changed to',
+  'choose_a_group' => 'Choose a group',
   'click_here' => 'Click here',
   'click_here_to_change_your_password' => 'Click here to change your password',
   'click_to_confirm' => 'Click to confirm',
@@ -67,6 +65,7 @@ Enter a correct URL starting with http:// and set a title for this link. You can
   'files' => 'Files',
   'files_in_this_group' => 'Files in this group',
   'forgotten_password' => 'Forgotten password',
+  'group' => 'Group',
   'group_admin_users' => 'Contact person(s)',
   'group_home' => 'Group home',
   'groups' => 'Groups',
@@ -84,7 +83,6 @@ Enter a correct URL starting with http:// and set a title for this link. You can
   'if_you_dont_want_to_change_password_do_nothing' => 'If you don\'t want to change your password, do nothing',
   'if_you_donwt_want_to_join_do_nothing' => 'If you don\'t want to join, do nothing. You will not be asked again to join the group',
   'if_you_want_participate_in_this_group' => 'If you want to participate in this group',
-  'if_you_want_to_add_event_goto_group_agenda' => 'If you want to add an event to the calendar, go to that group\'s calendar',
   'in' => 'in',
   'in_the_discussion' => 'in the discussion',
   'inside' => 'inside',
@@ -98,7 +96,6 @@ Enter a correct URL starting with http:// and set a title for this link. You can
   'join_the_group' => 'Join the group',
   'join_this_group' => 'Join this group',
   'last_activity' => 'Last activity',
-  'latest_comments' => 'Latest comments',
   'latest_discussions' => 'Latest discussions',
   'latest_discussions_my' => 'Latest discussions in my groups',
   'latest_discussions_others' => 'Latest discussions in other groups',
@@ -212,12 +209,13 @@ Enter a correct URL starting with http:// and set a title for this link. You can
   'create_folder' => 'Create folder',
   'create_folder_button' => 'Create folder',
   'drop_file_here' => 'Drop file(s) here',
-  'group' => 'Group',
   'groups_list' => 'List of groups',
   'help' => 'Help',
   'home' => 'Home',
+  'if_you_want_to_add_event_goto_group_agenda' => 'If you want to add an event to the calendar, go to that group\'s calendar',
   'info' => 'Info',
   'latest_actions' => 'Latest actions',
+  'latest_comments' => 'Latest comments',
   'map_of_this_group' => 'Map of this group',
   'members_of_this_group' => 'Members of this group',
   'message_not_sent_too_many_per_hour' => 'Message not sent: too many per hour',

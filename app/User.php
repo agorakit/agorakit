@@ -158,6 +158,11 @@ class User extends Authenticatable
         return false;
     }
 
+    public function scopeAdmins($query)
+    {
+        return $query->where('admin', 1);
+    }
+
     /**
     * The groups this user is part of.
     */
@@ -237,10 +242,12 @@ class User extends Authenticatable
             return true;
         }
 
-        try {
+        try
+        {
             $geocode = Geocoder::geocode($this->address)->get()->first();
-        } catch (\Exception $e) {
-            //$this->geocode_message = get_class($e) . ' / ' . $e->getMessage();
+        }
+        catch (\Exception $e)
+        {
             return false;
         }
 
