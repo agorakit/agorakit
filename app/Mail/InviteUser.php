@@ -35,7 +35,7 @@ class InviteUser extends Mailable
     public function build()
     {
         return $this->markdown('emails.invite')
-        ->from(config('mail.from.address'), config('mail.from.name'))
+        ->from(config('mail.noreply'))
         ->subject('['.config('app.name').'] '.trans('messages.invitation_to_join').' "'.$this->invite->group->name .'"');
     }
 }

@@ -45,6 +45,7 @@ class Mention extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+        ->from(config('mail.noreply'))
         ->subject('['. $this->comment->discussion->group->name . '] ' . trans('messages.you_have_been_mentionned_by'). ' ' . $this->user->name)
         ->line(trans('messages.you_have_been_mentionned_by'). ' ' . $this->user->name . ' ' . trans('messages.in_the_discussion') . ' ' . $this->comment->discussion->name . ' : ')
         ->line($this->comment->body)

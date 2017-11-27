@@ -60,6 +60,9 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
+    'noreply' => env('MAIL_NOREPLY', 'noreply@example.com'),
+
+
     /*
     |--------------------------------------------------------------------------
     | E-Mail Encryption Protocol

@@ -33,6 +33,6 @@ class UserConfirmation extends Mailable
     {
         return $this->markdown('emails.confirm')
         ->subject('['.config('app.name').'] '.trans('messages.confirm_your_email'))
-        ->from(config('mail.from.address'), config('mail.from.name'));
+        ->from(config('mail.noreply'));
     }
 }
