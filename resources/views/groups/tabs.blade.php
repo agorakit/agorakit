@@ -24,7 +24,7 @@
 
         <li role="presentation" @if (isset($tab) && ($tab == 'home')) class="active" @endif>
             <a href="{{ route('groups.show', $group->id) }}">
-                <i class="fa fa-home"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.group_home') }}</span>
+                <i class="fa fa-info-circle"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.group_home') }}</span>
             </a>
         </li>
 
@@ -147,7 +147,7 @@
 
         <li role="presentation" @if (isset($tab) && ($tab == 'home')) class="active" @endif>
             <a href="{{ route('groups.show', $group->id) }}">
-                <i class="fa fa-home"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.group_home') }}</span>
+                <i class="fa fa-info-circle"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.group_home') }}</span>
             </a>
         </li>
 
