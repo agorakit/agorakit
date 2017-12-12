@@ -43,10 +43,10 @@ class AddedToGroup extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('You have been added to the group "' . $this->group->name . '"')
-                    ->line('You have been added to the group : "' . $this->group->name . '"')
-                    ->action('Visit it', route('groups.show', $this->group))
-                    ->line('Thank you for using our application!');
+                    ->subject(trans('notification.you_have_been_added_to_the_group', ['group' => $this->group->name]))
+                    ->line(trans('notification.you_have_been_added_to_the_group', ['group' => $this->group->name]))
+                    ->action(trans('messages.visit_link'), route('groups.show', $this->group))
+                    ->line(trans('Thank you for using our application!'));
     }
 
     /**
