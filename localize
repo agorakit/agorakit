@@ -1,0 +1,1 @@
+php artisan localization:missing -n -b -o -c -d
