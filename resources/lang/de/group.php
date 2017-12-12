@@ -15,20 +15,4 @@ return array (
   'name' => 'Gruppenname',
   'open' => 'Offene Gruppe',
   'type' => 'Art der Gruppe',
-  //================================== Obsolete strings ==================================//
-  'LLH:obsolete' => 
-  array (
-    'about_this_group' => 'Über diese Gruppe',
-    'create' => 'Einrichten',
-    'create_a_group_intro' => 'Neue Gruppe einfach hier starten',
-    'latest_actions' => 'Neueste Handlungen',
-    'leave' => 'Austreten',
-    'no_group_joined_yet' => 'Sie sind Mitglied noch keiner Gruppen. Gehen Sie auf "Alle Gruppen", um bereits existierende Gruppen einzusehen und beizutreten.',
-    'no_group_joined_yet_act_now' => 'Noch keine Gruppe beigetreten. Jetzt machen',
-    'no_group_yet' => 'Noch keine Gruppe',
-    'private' => 'Geschlossene Gruppe',
-    'public' => 'Öffentliche Gruppe',
-    'visit' => 'Besuchen',
-    'your_group_here' => 'Ihre Gruppe hier',
-  ),
 );

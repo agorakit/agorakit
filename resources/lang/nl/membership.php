@@ -34,13 +34,4 @@ return array (
   'welcome' => 'Welkom in deze groep',
   'when_to_receive_notifications' => 'When to receive notifications?',
   'your_preferences_for' => 'Uw voorkeuren voor deze groep',
-  //================================== Obsolete strings ==================================//
-  'LLH:obsolete' => 
-  array (
-    'add_users_button' => 'Het toevoegen van gebruikers',
-    'membership' => 
-    array (
-      'add_users_button' => 'Het toevoegen van gebruikers',
-    ),
-  ),
 );
