@@ -2,10 +2,7 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'not_a_group_admin' => 'TODO: not_a_group_admin',
-  'not_a_member' => 'TODO: not_a_member',
-  'not_logged_in' => 'TODO: not_logged_in',
-  'you_are_not_an_admin' => 'TODO: you_are_not_an_admin',
+  'thank_you' => 'TODO: thank_you',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un mensaje para usted',
   'accept_invitation' => 'Acepta la invitación',
@@ -125,8 +122,11 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'name' => 'Nombre',
   'news_from_group_email_subject' => 'Noticias del grupo',
   'next_actions' => 'Próximas acciones',
+  'not_a_group_admin' => 'TODO: not_a_group_admin',
+  'not_a_member' => 'TODO: not_a_member',
   'not_allowed' => 'No esta permitido',
   'not_an_admin' => 'No administrador',
+  'not_logged_in' => 'TODO: not_logged_in',
   'nothing_yet' => '¡Aquí no hay nada... todavía!',
   'or' => 'o',
   'overview' => 'Visión general',
@@ -191,6 +191,7 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'what' => 'qué',
   'when' => 'cuando',
   'where' => 'dónde',
+  'you_are_not_an_admin' => 'TODO: you_are_not_an_admin',
   'you_are_now_a_member_of_this_group' => 'Usted es ahora un miembro de este grupo',
   'you_asked_for_assword_change' => 'Ha solicitado cambio de contraseña',
   'you_can_create_one_here' => 'Tú puedes crear uno aquí',
