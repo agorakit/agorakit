@@ -22,6 +22,7 @@ return [
         '%APP/Notifications',
         '%APP/Mail',
         '%APP/Mailers',
+        '%APP',
     ],
 
     /*
@@ -160,7 +161,7 @@ return [
     | clean up obsolete lemma manually
     |
     */
-    'obsolete_array_key'       => '',
+    'obsolete_array_key'       => 'LLH:obsolete',
 
     /*
     |--------------------------------------------------------------------------
