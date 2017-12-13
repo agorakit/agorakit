@@ -2,10 +2,7 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'not_a_group_admin' => 'TODO: not_a_group_admin',
-  'not_a_member' => 'TODO: not_a_member',
-  'not_logged_in' => 'TODO: not_logged_in',
-  'you_are_not_an_admin' => 'TODO: you_are_not_an_admin',
+  'thank_you' => 'TODO: thank_you',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'U heeft een bericht',
   'accept_invitation' => 'De uitnodiging accepteren',
@@ -124,8 +121,11 @@ return array (
   'name' => 'Naam',
   'news_from_group_email_subject' => 'Nieuws van :',
   'next_actions' => 'Naast acties',
+  'not_a_group_admin' => 'TODO: not_a_group_admin',
+  'not_a_member' => 'TODO: not_a_member',
   'not_allowed' => 'Niet toegestaan',
   'not_an_admin' => 'Geen beheerder',
+  'not_logged_in' => 'TODO: not_logged_in',
   'nothing_yet' => 'Er staat hier nog niets',
   'or' => 'of',
   'overview' => 'Overzicht',
@@ -190,6 +190,7 @@ return array (
   'what' => 'Wat',
   'when' => 'Wanneer',
   'where' => 'Waar',
+  'you_are_not_an_admin' => 'TODO: you_are_not_an_admin',
   'you_are_now_a_member_of_this_group' => 'Je bent nu een lid van de groep',
   'you_asked_for_assword_change' => 'U hebt gevraagd uw wachtwoord te wijzigen',
   'you_can_create_one_here' => 'kan u zich hier registreren',

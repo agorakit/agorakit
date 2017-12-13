@@ -46,7 +46,7 @@ class AddedToGroup extends Notification
                     ->subject(trans('notification.you_have_been_added_to_the_group', ['group' => $this->group->name]))
                     ->line(trans('notification.you_have_been_added_to_the_group', ['group' => $this->group->name]))
                     ->action(trans('messages.visit_link'), route('groups.show', $this->group))
-                    ->line(trans('Thank you for using our application!'));
+                    ->line(trans('messages.thank_you'));
     }
 
     /**

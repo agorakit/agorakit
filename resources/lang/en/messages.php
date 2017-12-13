@@ -2,10 +2,7 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'not_a_group_admin' => 'You are not admin of this group',
-  'not_a_member' => 'You are not a member of this group',
-  'not_logged_in' => 'You are not logged in',
-  'you_are_not_an_admin' => 'You are not admin',
+  'thank_you' => 'Thank you for using this application',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'A message for you',
   'accept_invitation' => 'Accept the invitation',
@@ -125,8 +122,11 @@ Enter a correct URL starting with http:// and set a title for this link. You can
   'name' => 'Name',
   'news_from_group_email_subject' => 'News from the group',
   'next_actions' => 'Next actions',
+  'not_a_group_admin' => 'You are not admin of this group',
+  'not_a_member' => 'You are not a member of this group',
   'not_allowed' => 'Not allowed',
   'not_an_admin' => 'Not administrator',
+  'not_logged_in' => 'You are not logged in',
   'nothing_yet' => 'There is nothing here...yet!',
   'or' => 'or',
   'overview' => 'Overview',
@@ -191,6 +191,7 @@ Enter a correct URL starting with http:// and set a title for this link. You can
   'what' => 'what',
   'when' => 'when',
   'where' => 'where',
+  'you_are_not_an_admin' => 'You are not admin',
   'you_are_now_a_member_of_this_group' => 'You are now a member of this group',
   'you_asked_for_assword_change' => 'You asked for password change',
   'you_can_create_one_here' => 'You can create one here',
