@@ -1,9 +1,0 @@
-<?php
-
-return array (
-  //============================== New strings to translate ==============================//
-  'Thank you for using our application!' => 'Merci d\'utiliser notre application',
-  //==================================== Translations ====================================//
-  'If you’re having trouble clicking the' => 'Si vous n\'arrivez pas à cliquer sur le',
-  'button, copy and paste the URL below into your web browser' => 'boutton, copiez collez le lien ci-dessous dans votre navigateur',
-);
