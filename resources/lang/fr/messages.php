@@ -1,6 +1,11 @@
 <?php
 
 return array (
+  //============================== New strings to translate ==============================//
+  'not_a_group_admin' => 'Vous n\êtes pas administrateur-trice de ce groupe',
+  'not_a_member' => 'Vous n\êtes pas membre de ce groupe',
+  'not_logged_in' => 'Vous n\êtes pas connecté(e)',
+  'you_are_not_an_admin' => 'Vous n\êtes pas administrateur-trice',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'accept_invitation' => 'Accepter l\'invitation',
@@ -196,8 +201,7 @@ return array (
   'you_have_verified_your_email' => 'Vous avez vérifié votre adresse email',
   'you_login' => 'connectez-vous',
   'you_receive_this_email_from_the_group' => 'Vous recevez cet email du groupe',
-  'you_register' => 'créez-vous un compte ici
-    ',
+  'you_register' => 'créez-vous un compte ici',
   'your_groups' => 'Mes groupes',
   'your_search_for' => 'Votre recherche pour',
 );

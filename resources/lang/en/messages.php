@@ -1,6 +1,11 @@
 <?php
 
 return array (
+  //============================== New strings to translate ==============================//
+  'not_a_group_admin' => 'You are not admin of this group',
+  'not_a_member' => 'You are not a member of this group',
+  'not_logged_in' => 'You are not logged in',
+  'you_are_not_an_admin' => 'You are not admin',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'A message for you',
   'accept_invitation' => 'Accept the invitation',
