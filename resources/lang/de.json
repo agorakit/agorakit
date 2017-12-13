@@ -1,9 +1,0 @@
-<?php
-
-return array (
-  //============================== New strings to translate ==============================//
-  'Thank you for using our application!' => 'TODO: Thank you for using our application!',
-  //==================================== Translations ====================================//
-  'If you’re having trouble clicking the' => 'TODO: If you’re having trouble clicking the',
-  'button, copy and paste the URL below into your web browser' => 'TODO: button, copy and paste the URL below into your web browser',
-);
