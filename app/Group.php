@@ -3,7 +3,6 @@
 namespace App;
 
 use Cviebrock\EloquentTaggable\Taggable;
-use Geocoder\Laravel\Facades\Geocoder;
 use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -201,13 +200,13 @@ class Group extends Model
         }
 
         try {
-            $geocode = Geocoder::geocode($this->address)->get()->first();
+            $geocode = app('geocoder')->geocode($this->address)->get()->first();
         } catch (\Exception $e) {
             return false;
         }
 
-        $this->latitude = $geocode->getLatitude();
-        $this->longitude = $geocode->getLongitude();
+        $this->latitude = $geocode->getCoordinates()->getLatitude();
+        $this->longitude = $geocode->getCoordinates()->getLongitude();
 
         return true;
     }
