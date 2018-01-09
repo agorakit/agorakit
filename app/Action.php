@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Geocoder\Laravel\Facades\Geocoder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
@@ -67,13 +66,13 @@ class Action extends Model
         }
 
         try {
-            $geocode = Geocoder::geocode($this->location)->get()->first();
+            $geocode = app('geocoder')->geocode($this->location)->get()->first();
         } catch (\Exception $e) {
             return false;
         }
 
-        $this->latitude = $geocode->getLatitude();
-        $this->longitude = $geocode->getLongitude();
+        $this->latitude = $geocode->getCoordinates()->getLatitude();
+        $this->longitude = $geocode->getCoordinates()->getLongitude();
 
         return true;
     }

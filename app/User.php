@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
-use Geocoder\Laravel\Facades\Geocoder;
+
 
 class User extends Authenticatable
 {
@@ -242,17 +242,18 @@ class User extends Authenticatable
             return true;
         }
 
+        
         try
         {
-            $geocode = Geocoder::geocode($this->address)->get()->first();
+            $geocode = app('geocoder')->geocode($this->address)->get()->first();
         }
         catch (\Exception $e)
         {
             return false;
         }
 
-        $this->latitude = $geocode->getLatitude();
-        $this->longitude = $geocode->getLongitude();
+        $this->latitude = $geocode->getCoordinates()->getLatitude();
+        $this->longitude = $geocode->getCoordinates()->getLongitude();
 
         return true;
     }
