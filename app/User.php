@@ -242,19 +242,15 @@ class User extends Authenticatable
             return true;
         }
 
-        
-        try
+
+        $geocode = app('geocoder')->geocode($this->address)->get()->first();
+        if ($geocode)
         {
-            $geocode = app('geocoder')->geocode($this->address)->get()->first();
-        }
-        catch (\Exception $e)
-        {
-            return false;
+            $this->latitude = $geocode->getCoordinates()->getLatitude();
+            $this->longitude = $geocode->getCoordinates()->getLongitude();
+            return true;
         }
 
-        $this->latitude = $geocode->getCoordinates()->getLatitude();
-        $this->longitude = $geocode->getCoordinates()->getLongitude();
-
-        return true;
+        return false;
     }
 }
