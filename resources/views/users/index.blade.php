@@ -93,6 +93,17 @@
         @endif
 
 
+
+        @can('edit-membership', $group)
+            @if ($invites->count() > 0)
+                {{trans('messages.user_invited')}} :
+                @foreach ($invites as $invite)
+                    <li>{{$invite->email}}</li>
+                @endforeach
+            @endif
+        @endcan
+
+
     </div>
 
 
