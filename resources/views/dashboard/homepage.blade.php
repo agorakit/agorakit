@@ -18,52 +18,22 @@
         <div class="spacer"></div>
 
         <div class="row">
+
+
             @if ($my_discussions->count() > 0)
                 <div class="col-md-6">
                     <h2>{{ trans('messages.latest_discussions_my') }}</h2>
-                    <table class="table table-hover special">
-                        <thead>
-                            <tr>
-                                <th class="avatar"></th>
-                                <th class="summary"></th>
-                                <th class="date"></th>
-                                <th class="unread"></th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @forelse( $my_discussions as $discussion )
-                                <tr>
-
-                                    <td class="avatar"><span class="avatar"><img src="{{$discussion->user->avatar()}}" class="img-circle"/></span></td>
-                                    <td class="content">
-                                        <a href="{{ route('groups.discussions.show', [$discussion->group_id, $discussion->id]) }}">
-                                            <span class="name">{{ $discussion->name }}</span>
-                                            <span class="summary">{{summary($discussion->body) }}</span>
-                                            <br/>
-                                        </a>
-                                        <span class="group-name"><a href="{{ route('groups.show', [$discussion->group_id]) }}">{{ $discussion->group->name }}</a></span>
-                                    </td>
-
-                                    <td class="date">
-                                        {{ $discussion->updated_at->diffForHumans() }}
-                                    </td>
-
-                                    <td>
-                                        @if ($discussion->unReadCount() > 0)
-                                            <i class="fa fa-comment"></i>
-                                            <span class="badge">{{ $discussion->unReadCount() }}</span>
-                                        @endif
-                                    </td>
-
-                                </tr>
-                            @empty
-                                {{trans('messages.nothing_yet')}}
-                            @endforelse
-                        </tbody>
-                    </table>
+                    <div class="discussions">
+                        @forelse( $my_discussions as $discussion )
+                            @include('discussions.discussion')
+                        @empty
+                            {{trans('messages.nothing_yet')}}
+                        @endforelse
+                    </div>
                 </div>
             @endif
+
+            
 
             @if ($my_actions->count() > 0)
                 <div class="col-md-6">
