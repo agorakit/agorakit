@@ -33,48 +33,21 @@
                 </div>
             @endif
 
-            
+
 
             @if ($my_actions->count() > 0)
                 <div class="col-md-6">
                     <h2>{{ trans('messages.agenda_my') }}</h2>
-
-
-                    <table class="table table-hover special">
-                        <thead>
-                            <tr>
-                                <th style="width: 50%">{{ trans('messages.title') }}</th>
-                                <th>{{ trans('messages.date') }}</th>
-                                <th>{{ trans('messages.where') }}</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @foreach( $my_actions as $action )
-                                <tr>
-                                    <td class="content">
-                                        <a href="{{ route('groups.actions.show', [$action->group_id, $action->id]) }}">
-                                            <span class="name">{{ $action->name }}</span>
-                                            <span class="summary">{{ summary($action->body) }}</span>
-                                        </a>
-                                        <br/>
-                                        <span class="group-name"><a href="{{ route('groups.show', [$action->group_id]) }}">{{ $action->group->name }}</a></span>
-                                    </td>
-
-                                    <td>
-                                        {{$action->start->format('d/m/Y H:i')}}
-                                    </td>
-
-                                    <td class="content">
-                                        {{$action->location}}
-                                    </td>
-                                </tr>
-                            @endforeach
-
-                        </tbody>
-                    </table>
+                    <div class="actions">
+                        @forelse( $my_actions as $action)
+                            @include('actions.action')
+                        @empty
+                            {{trans('messages.nothing_yet')}}
+                        @endforelse
+                    </div>
                 </div>
             @endif
+
         </div>
 
 

@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
 
     <link rel="stylesheet" href="/css/discussions.css">
+    <link rel="stylesheet" href="/css/actions.css">
 
 
     <!-- additional css -->
