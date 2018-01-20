@@ -1,4 +1,4 @@
-.discussions .discussion
+.actions .action
 {
   width: 100%;
   margin-top: 10px;
@@ -8,26 +8,30 @@
   align-items: top;
 }
 
-.discussion .unread
+.action .unread
 {
   font-weight: bold;
 }
 
-.discussion .avatar
+.action .avatar
 {
   margin-right: 20px;
 }
 
-.discussion .date, .discussion .unread
+.action .date
 {
-  font-size: 0.8em !important;
+
   flex-shrink: 0;
-  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.action .date .day
+{
+  font-size: 2em;
 }
 
 
-
-.discussion .group
+.action .group
 {
   font-size: 0.8em;
 }
