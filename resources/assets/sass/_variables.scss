@@ -16,11 +16,19 @@ $warning: #cbb956;
 $danger: #bf5329;
 
 // Typography
-$font-family-sans-serif: "Raleway", sans-serif;
-$font-size-base: .875rem; // 14px
+$font-family-sans-serif: "Open Sans", sans-serif;
+//$font-size-base: .875rem; // 14px
 $line-height-base: 1.6;
 $text-color: #636b6f;
 
 // Inputs
 $input-border-color: lighten($text-color, 40%);
 $input-placeholder-color: lighten($text-color, 30%);
+
+$enable-shadows:            true;
+//$enable-gradients:          true;
+
+$grid-gutter-width:           40px;
+//$headings-font-family:       'Lato', sans-serif;
+
+$primary:       rgb(28, 102, 129);
