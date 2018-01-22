@@ -55,7 +55,7 @@
 
 
 
-        <div class="row">
+        <div class="row mt-5">
 
 
             @if ($discussions)

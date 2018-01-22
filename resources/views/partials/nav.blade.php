@@ -12,7 +12,7 @@
 
     <div class="collapse navbar-collapse" id="agorakit_navbar">
 
-        <div class="navbar-nav">
+        <div class="navbar-nav mr-auto">
 
             <!-- Overview -->
             <div class="nav-item dropdown">
@@ -88,15 +88,6 @@
 
 
             @if (Auth::check())
-                <!-- Search -->
-                <div class="nav-item">
-                    <form class="form-inline" role="search" action="{{url('search')}}">
-                        <input class="form-control mr-sm-2" type="text" name="query"  placeholder="{{trans('messages.search')}}..." aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>{{trans('messages.search')}}</button>
-                    </form>
-                </div>
-
-
                 <!-- User profile -->
                 <div class="dropdown nav-item">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -114,17 +105,11 @@
                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                             {{ csrf_field() }}
                         </form>
-                    </div>
-                </div>
 
-                <!-- Admin -->
-                @if (Auth::user()->isAdmin())
-                    <div class="dropdown nav-item">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <i class="fa fa-cog"></i> Admin <span class="caret"></span>
-                        </a>
 
-                        <div class="dropdown-menu" role="menu">
+                        <!-- Admin -->
+                        @if (Auth::user()->isAdmin())
+                            <div class="dropdown-divider"></div>
 
                             <a class="dropdown-item" href="{{ url('/admin/settings') }}">
                                 <i class="fa fa-cog"></i> Settings
@@ -143,9 +128,13 @@
                             <a class="dropdown-item" href="{{ url('/admin/logs') }}">
                                 <i class="fa fa-keyboard-o"></i> Logs
                             </a>
-                        </div>
+                        @endif
+
                     </div>
-                @endif
+
+                </div>
+
+
             @else
                 <div class="nav-item">
                     <a class="nav-link" href="{{ url('register') }}">{{ trans('messages.register') }}</a>
@@ -155,14 +144,21 @@
                     <a class="nav-link" href="{{ url('login') }}">{{ trans('messages.login') }}</a>
                 </div>
             @endif
+        </div>
 
 
 
 
+        @if (Auth::check())
+            <!-- Search -->
 
+            <form class="form-inline my-2 my-lg-0" role="search" action="{{url('search')}}">
+                <input class="form-control form-control-sm mr-sm-2" type="text" name="query"  placeholder="{{trans('messages.search')}}..." aria-label="Search">
+                <button class="btn btn-outline-success btn-sm my-2 my-sm-0" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>{{trans('messages.search')}}</button>
+            </form>
+        @endif
 
-
-
+        <div class="navbar-nav ml-auto">
             @if(\Config::has('app.locales'))
                 <div class="dropdown nav-item">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -179,6 +175,7 @@
                     </div>
                 </div>
             @endif
-
         </div>
+
+
     </nav>

@@ -49,7 +49,7 @@ $(this).addClass('active');
 <div class="tab_content">
     @if ($groups)
 
-        <div class="row">
+        <div class="row mb-3">
             @forelse( $groups as $group )
                 <div class="col-md-4">
                     <div class="card tag-group @foreach ($group->tags as $tag)tag-{{$tag->tag_id}} @endforeach">
@@ -70,17 +70,25 @@ $(this).addClass('active');
                                     <span class="label label-default">{{$tag->name}}</span>
                                 @endforeach
                             </p>
-                            <a class="btn btn-primary" href="{{ action('GroupController@show', $group) }}"></i>
-                                {{ trans('messages.visit') }}
-                            </a>
 
-                            @unless ($group->isMember())
-                                @can ('join', $group)
-                                    <a class="btn btn-primary" href="{{ action('MembershipController@store', $group->id) }}">
-                                        {{ trans('group.join') }}
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a class="btn btn-sm btn-outline-secondary" href="{{ action('GroupController@show', $group) }}"></i>
+                                        {{ trans('messages.visit') }}
                                     </a>
-                                @endcan
-                            @endunless
+
+                                    @unless ($group->isMember())
+                                        @can ('join', $group)
+                                            <a class="btn btn-sm btn-outline-secondary" href="{{ action('MembershipController@store', $group->id) }}">
+                                                {{ trans('group.join') }}
+                                            </a>
+                                        @endcan
+                                    @endunless
+                                </div>
+                                <small class="text-muted">{{ $group->updated_at->diffForHumans() }}</small>
+                            </div>
+
+
 
                         </div>
                     </div>
@@ -90,7 +98,7 @@ $(this).addClass('active');
 
                 @if ($loop->iteration % 3 == 0)
                 </div>
-                <div class="row">
+                <div class="row mb-3">
                 @endif
 
 
