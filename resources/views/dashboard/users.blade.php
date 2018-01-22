@@ -23,7 +23,7 @@
 
 
                             <td>
-                                <a href="{{ route('users.show', $user->id) }}"> <span class="avatar"><img src="{{$user->avatar()}}" class="img-circle"/></span></a>
+                                <a href="{{ route('users.show', $user->id) }}"> <span class="avatar"><img src="{{$user->avatar()}}" class="rounded-circle"/></span></a>
 
                             </td>
 

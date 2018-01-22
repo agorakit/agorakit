@@ -18,7 +18,7 @@
         </h2>
 
         <p>
-            <a class="btn btn-default btn-xs" href="{{ route('groups.files.index', $group->id ) }}">
+            <a class="btn btn-primary btn-xs" href="{{ route('groups.files.index', $group->id ) }}">
                 <i class="fa fa-list "></i>
                 {{trans('messages.show_list')}}</a>
             </p>
