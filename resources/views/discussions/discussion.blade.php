@@ -6,7 +6,11 @@
             <span class="summary">{{summary($discussion->body) }}</span>
         </a>
         <br/>
-        <span class="group"><a href="{{ route('groups.show', [$discussion->group_id]) }}">{{ $discussion->group->name }}</a></span>
+        <a href="{{ route('groups.show', [$discussion->group_id]) }}">
+            <span class="badge badge-primary">
+                {{ $discussion->group->name }}
+            </span>
+        </a>
     </div>
 
     <div class="date">
