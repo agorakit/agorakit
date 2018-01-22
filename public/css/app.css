@@ -3354,7 +3354,7 @@ output {
   color: #555555;
   background-color: #fff;
   background-image: none;
-  border: 1px solid #ccc;
+  border: 1px solid #7a8f82;
   border-radius: 4px;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -3366,23 +3366,23 @@ output {
 }
 
 .form-control:focus {
-  border-color: #66afe9;
+  border-color: #87cfe6;
   outline: 0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(135, 207, 230, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(135, 207, 230, 0.6);
 }
 
 .form-control::-moz-placeholder {
-  color: #999;
+  color: #627469;
   opacity: 1;
 }
 
 .form-control:-ms-input-placeholder {
-  color: #999;
+  color: #627469;
 }
 
 .form-control::-webkit-input-placeholder {
-  color: #999;
+  color: #627469;
 }
 
 .form-control::-ms-expand {
@@ -3994,7 +3994,7 @@ select[multiple].input-lg,
 .btn:hover,
 .btn:focus,
 .btn.focus {
-  color: #333;
+  color: #1C211E;
   text-decoration: none;
 }
 
@@ -4022,20 +4022,20 @@ fieldset[disabled] a.btn {
 }
 
 .btn-default {
-  color: #333;
+  color: #1C211E;
   background-color: #fff;
   border-color: #ccc;
 }
 
 .btn-default:focus,
 .btn-default.focus {
-  color: #333;
+  color: #1C211E;
   background-color: #e6e5e5;
   border-color: #8c8c8c;
 }
 
 .btn-default:hover {
-  color: #333;
+  color: #1C211E;
   background-color: #e6e5e5;
   border-color: #adadad;
 }
@@ -4043,7 +4043,7 @@ fieldset[disabled] a.btn {
 .btn-default:active,
 .btn-default.active,
 .open > .btn-default.dropdown-toggle {
-  color: #333;
+  color: #1C211E;
   background-color: #e6e5e5;
   border-color: #adadad;
 }
@@ -4057,7 +4057,7 @@ fieldset[disabled] a.btn {
 .open > .btn-default.dropdown-toggle:hover,
 .open > .btn-default.dropdown-toggle:focus,
 .open > .btn-default.dropdown-toggle.focus {
-  color: #333;
+  color: #1C211E;
   background-color: #d4d4d4;
   border-color: #8c8c8c;
 }
@@ -4083,7 +4083,7 @@ fieldset[disabled] .btn-default.focus {
 
 .btn-default .badge {
   color: #fff;
-  background-color: #333;
+  background-color: #1C211E;
 }
 
 .btn-primary {
@@ -4972,7 +4972,7 @@ tbody.collapse.in {
   color: #555555;
   text-align: center;
   background-color: #eeeeee;
-  border: 1px solid #ccc;
+  border: 1px solid #7a8f82;
   border-radius: 4px;
 }
 
@@ -7117,7 +7117,7 @@ button.list-group-item-danger.active:focus {
 
 .panel-default > .panel-heading {
   color: #333333;
-  background-color: #f5f5f5;
+  background-color: #fff;
   border-color: #d3e0e9;
 }
 
@@ -7126,7 +7126,7 @@ button.list-group-item-danger.active:focus {
 }
 
 .panel-default > .panel-heading .badge {
-  color: #f5f5f5;
+  color: #fff;
   background-color: #333333;
 }
 
@@ -8807,7 +8807,6 @@ tr {
   width: 100%;
   margin-top: 10px;
   padding-top: 10px;
-  /*  border-bottom: 1px solid #ccc;*/
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -8824,10 +8823,15 @@ tr {
   margin-right: 20px;
 }
 
+.action .name {
+  font-weight: bold;
+}
+
 .action .date {
   -ms-flex-negative: 0;
       flex-shrink: 0;
   padding-right: 20px;
+  text-align: center;
 }
 
 .action .date .day {
