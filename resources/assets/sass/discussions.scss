@@ -1,0 +1,33 @@
+.discussions .discussion
+{
+  width: 100%;
+  margin-top: 10px;
+  padding-top: 10px;
+/*  border-bottom: 1px solid #ccc;*/
+  display: flex;
+  align-items: top;
+}
+
+.discussion .unread
+{
+  font-weight: bold;
+}
+
+.discussion .avatar
+{
+  margin-right: 20px;
+}
+
+.discussion .date, .discussion .unread
+{
+  font-size: 0.8em !important;
+  flex-shrink: 0;
+  padding-left: 20px;
+}
+
+
+
+.discussion .group
+{
+  font-size: 0.8em;
+}
