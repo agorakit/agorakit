@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="col-md-4">
-                    <img src="{{$user->cover()}}" class="img-circle img-responsive"/>
+                    <img src="{{$user->cover()}}" class="rounded-circle img-fluid"/>
                 </div>
             </div>
 

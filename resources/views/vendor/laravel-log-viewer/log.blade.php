@@ -86,7 +86,7 @@
               <td class="text">{{$log['context']}}</td>
               <td class="date">{{{$log['date']}}}</td>
               <td class="text">
-                @if ($log['stack']) <a class="pull-right expand btn btn-default btn-xs"
+                @if ($log['stack']) <a class="pull-right expand btn btn-primary btn-xs"
                                        data-display="stack{{{$key}}}"><span
                       class="glyphicon glyphicon-search"></span></a>@endif
                 {{{$log['text']}}}

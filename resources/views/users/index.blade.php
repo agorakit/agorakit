@@ -30,7 +30,7 @@
             @foreach( $users as $user )
                 <tr>
                     <td>
-                        <a href="{{ route('users.show', $user->id) }}"> <span class="avatar"><img src="{{$user->avatar()}}" class="img-circle"/></span> {{ $user->name }}</a>
+                        <a href="{{ route('users.show', $user->id) }}"> <span class="avatar"><img src="{{$user->avatar()}}" class="rounded-circle"/></span> {{ $user->name }}</a>
                     </td>
 
                     <td>
@@ -46,7 +46,7 @@
                         @can('edit-membership', $group)
 
                             <div class="btn-group">
-                                <a type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa fa-wrench"></i> <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">

@@ -26,7 +26,7 @@
 
           <p>
             @can('update', $discussion)
-              <a class="btn btn-default btn-xs" href="{{ route('groups.discussions.edit', [$group->id, $discussion->id]) }}">
+              <a class="btn btn-primary btn-xs" href="{{ route('groups.discussions.edit', [$group->id, $discussion->id]) }}">
                 <i class="fa fa-pencil"></i>
                 {{trans('messages.edit')}}
               </a>
@@ -40,7 +40,7 @@
             @endcan
 
             @if ($discussion->revisionHistory->count() > 0)
-              <a class="btn btn-default btn-xs" href="{{route('groups.discussions.history', [$group->id, $discussion->id])}}"><i class="fa fa-history"></i> {{trans('messages.show_history')}}</a>
+              <a class="btn btn-primary btn-xs" href="{{route('groups.discussions.history', [$group->id, $discussion->id])}}"><i class="fa fa-history"></i> {{trans('messages.show_history')}}</a>
             @endif
           </p>
 

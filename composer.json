@@ -19,6 +19,7 @@
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "5.5.*",
+        "laravelnews/laravel-twbs4": "^1.3",
         "potsky/laravel-localization-helpers": "2.6.*",
         "rap2hpoutre/laravel-log-viewer": "^0.11.0",
         "suin/php-rss-writer": "^1.6",

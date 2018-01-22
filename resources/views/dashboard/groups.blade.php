@@ -39,10 +39,10 @@
 
 
         @foreach ($all_tags as $tag)
-            <a class="btn btn-default btn-sm tag-toggle" id="toggle-tag-{{$tag->tag_id}}">{{$tag->name}}</a>
+            <a class="btn btn-primary btn-sm tag-toggle" id="toggle-tag-{{$tag->tag_id}}">{{$tag->name}}</a>
         @endforeach
 
-        <a class="btn btn-default btn-sm tag-toggle active" id="toggle-tag-all">{{trans('messages.show_all')}}</a>
+        <a class="btn btn-primary btn-sm tag-toggle active" id="toggle-tag-all">{{trans('messages.show_all')}}</a>
 
 
 
@@ -61,7 +61,7 @@
                     <tbody>
                         @forelse( $groups as $group )
                             <tr class="tag-group @foreach ($group->tags as $tag)tag-{{$tag->tag_id}} @endforeach">
-                                <td class="avatar"><span class="avatar"><img src="{{ route('groups.cover.small', $group)}}" class="img-rounded"/></span></td>
+                                <td class="avatar"><span class="avatar"><img src="{{ route('groups.cover.small', $group)}}" class="rounded"/></span></td>
                                 <td class="content">
                                     <a href="{{ route('groups.show',  $group->id) }}">
                                         <span class="name">{{ $group->name }}
@@ -90,7 +90,7 @@
                                     <td>
                                         @unless ($group->isMember())
                                             @can ('join', $group)
-                                                <a class="btn btn-default btn-sm" href="{{ action('MembershipController@store', $group->id) }}"><i class="fa fa-sign-in"></i>
+                                                <a class="btn btn-primary btn-sm" href="{{ action('MembershipController@store', $group->id) }}"><i class="fa fa-sign-in"></i>
                                                     {{ trans('group.join') }}
                                                 </a>
                                             @endcan

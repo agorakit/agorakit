@@ -10,37 +10,37 @@
         <ul class="nav nav-tabs" role="tablist">
             @if ($groups->count() > 0)
                 <li role="presentation" class="{{$groups->class}}">
-                    <a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">{{trans('messages.groups')}} <span class="badge">{{$groups->count()}}</span></a>
+                    <a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">{{trans('messages.groups')}} <span class="badge badge-secondary">{{$groups->count()}}</span></a>
                 </li>
             @endif
 
             @if ($discussions->count() > 0)
                 <li role="presentation" class="{{$discussions->class}}">
-                    <a href="#discussions" aria-controls="discussions" role="tab" data-toggle="tab">{{trans('messages.discussions')}} <span class="badge">{{$discussions->count()}}</span></a>
+                    <a href="#discussions" aria-controls="discussions" role="tab" data-toggle="tab">{{trans('messages.discussions')}} <span class="badge badge-secondary">{{$discussions->count()}}</span></a>
                 </li>
             @endif
 
             @if ($actions->count() > 0)
                 <li role="presentation" class="{{$actions->class}}">
-                    <a href="#actions" aria-controls="actions" role="tab" data-toggle="tab">{{trans('messages.actions')}} <span class="badge">{{$actions->count()}}</span></a>
+                    <a href="#actions" aria-controls="actions" role="tab" data-toggle="tab">{{trans('messages.actions')}} <span class="badge badge-secondary">{{$actions->count()}}</span></a>
                 </li>
             @endif
 
             @if ($users->count() > 0)
                 <li role="presentation" class="{{$users->class}}">
-                    <a href="#users" aria-controls="users" role="tab" data-toggle="tab">{{trans('messages.users')}} <span class="badge">{{$users->count()}}</span></a>
+                    <a href="#users" aria-controls="users" role="tab" data-toggle="tab">{{trans('messages.users')}} <span class="badge badge-secondary">{{$users->count()}}</span></a>
                 </li>
             @endif
 
             @if ($comments->count() > 0)
                 <li role="presentation" class="{{$comments->class}}">
-                    <a href="#comments" aria-controls="users" role="tab" data-toggle="tab">{{trans('messages.comments')}} <span class="badge">{{$comments->count()}}</span></a>
+                    <a href="#comments" aria-controls="users" role="tab" data-toggle="tab">{{trans('messages.comments')}} <span class="badge badge-secondary">{{$comments->count()}}</span></a>
                 </li>
             @endif
 
             @if ($files->count() > 0)
                 <li role="presentation" class="{{$files->class}}">
-                    <a href="#files" aria-controls="users" role="tab" data-toggle="tab">{{trans('messages.files')}} <span class="badge">{{$files->count()}}</span></a>
+                    <a href="#files" aria-controls="users" role="tab" data-toggle="tab">{{trans('messages.files')}} <span class="badge badge-secondary">{{$files->count()}}</span></a>
                 </li>
             @endif
 
@@ -97,7 +97,7 @@
                         <h2>{{trans('messages.users')}}</h2>
                         @foreach ($users as $user)
                             <div class="result">
-                                <h4><span class="avatar"><img src="{{$user->avatar()}}" class="img-circle"/></span> <a href="{{$user->link()}}">{{$user->name}}</a></h4>
+                                <h4><span class="avatar"><img src="{{$user->avatar()}}" class="rounded-circle"/></span> <a href="{{$user->link()}}">{{$user->name}}</a></h4>
                                 {{summary($user->body)}}
                             </div>
                         @endforeach
