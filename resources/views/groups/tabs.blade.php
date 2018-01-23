@@ -131,40 +131,40 @@
 
     <ul class="nav nav-tabs nav-groups">
 
-        <li role="presentation" @if (isset($tab) && ($tab == 'home')) class="active" @endif>
-            <a href="{{ route('groups.show', $group->id) }}">
+        <li class="nav-item" role="presentation" >
+            <a class="nav-link @if (isset($tab) && ($tab == 'home')) active @endif" href="{{ route('groups.show', $group->id) }}">
                 <i class="fa fa-info-circle"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.group_home') }}</span>
             </a>
         </li>
 
 
         @if ($group->isPublic() )
-            <li role="presentation" @if (isset($tab) && ($tab == 'discussion')) class="active" @endif>
-                <a href="{{ route('groups.discussions.index', $group->id) }}">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link @if (isset($tab) && ($tab == 'discussion')) active @endif" href="{{ route('groups.discussions.index', $group->id) }}">
                     <i class="fa fa-comments"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.discussions') }}</span>
                 </a>
             </li>
         @endif
 
         @if ($group->isPublic() )
-            <li role="presentation" @if (isset($tab) && ($tab == 'action')) class="active" @endif>
-                <a href="{{ route('groups.actions.index', $group->id) }}">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link @if (isset($tab) && ($tab == 'action')) active @endif" href="{{ route('groups.actions.index', $group->id) }}">
                     <i class="fa fa-calendar"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.agenda') }}</span>
                 </a>
             </li>
         @endif
 
         @if ($group->isPublic() )
-            <li role="presentation" @if (isset($tab) && ($tab == 'files')) class="active" @endif>
-                <a href="{{ route('groups.files.index', $group->id) }}">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link @if (isset($tab) && ($tab == 'files')) active @endif" href="{{ route('groups.files.index', $group->id) }}">
                     <i class="fa fa-files-o"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.files') }}</span>
                 </a>
             </li>
         @endif
 
         @if ($group->isPublic() )
-            <li role="presentation" @if (isset($tab) && ($tab == 'users')) class="active" @endif>
-                <a href="{{ route('groups.users.index', $group->id) }}">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link @if (isset($tab) && ($tab == 'users')) active @endif" href="{{ route('groups.users.index', $group->id) }}">
                     <i class="fa fa-users"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.members') }}</span>
                 </a>
             </li>
@@ -172,8 +172,8 @@
 
 
         @if ($group->isPublic() )
-            <li role="presentation" @if (isset($tab) && ($tab == 'settings')) class="active" @endif>
-                <a href="{{ action('MembershipController@create', $group->id) }}">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link @if (isset($tab) && ($tab == 'settings')) active @endif" href="{{ action('MembershipController@create', $group->id) }}">
                     <i class="fa fa-cog"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.join') }}</span>
                 </a>
             </li>
