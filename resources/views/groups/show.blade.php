@@ -28,7 +28,7 @@
                     @if ($group->tags->count() > 0)
                         {{trans('messages.tags')}} :
                         @foreach ($group->tags as $tag)
-                            <span class="label label-default">{{$tag->name}}</span>
+                            <span class="badge badge-secondary">{{$tag->name}}</span>
                         @endforeach
                     @endif
                 </p>

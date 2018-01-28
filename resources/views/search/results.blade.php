@@ -69,7 +69,7 @@
                                 <h4><a href="{{$discussion->link()}}">{{$discussion->name}}</a></h4>
                                 {{summary($discussion->body, 500)}}
                                 <br/>
-                                <span class="label label-default">{{$discussion->group->name}}</span>
+                                <span class="badge badge-secondary">{{$discussion->group->name}}</span>
                             </div>
                         @endforeach
                     </div>
@@ -85,7 +85,7 @@
                                 <br/>
                                 {{$action->start}} / {{$action->stop}}
                                 <br/>
-                                <span class="label label-default">{{$action->group->name}}</span>
+                                <span class="badge badge-secondary">{{$action->group->name}}</span>
                             </div>
                         @endforeach
                     </div>
@@ -112,7 +112,7 @@
                                 <h4><a href="{{$comment->link()}}">{{$comment->discussion->name}}</a></h4>
                                 {{summary($comment->body)}}
                                 <br/>
-                                <span class="label label-default">{{$comment->discussion->group->name}}</span>
+                                <span class="badge badge-secondary">{{$comment->discussion->group->name}}</span>
                             </div>
                         @endforeach
                     </div>
@@ -125,7 +125,7 @@
                         @foreach ($files as $file)
                             <div class="result">
                                 <h4><a href="{{$file->link()}}">{{$file->name}}</a></h4>
-                                <span class="label label-default">{{$file->group->name}}</span>
+                                <span class="badge badge-secondary">{{$file->group->name}}</span>
                             </div>
                         @endforeach
                     </div>
