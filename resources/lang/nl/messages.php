@@ -2,7 +2,8 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'thank_you' => 'TODO: thank_you',
+  'more' => 'TODO: more',
+  'user_invited' => 'TODO: user_invited',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'U heeft een bericht',
   'accept_invitation' => 'De uitnodiging accepteren',
@@ -16,7 +17,6 @@ return array (
   'admins' => 'Admins',
   'agenda' => 'Agenda',
   'agenda_my' => 'Agenda van mijn groepen',
-  'agenda_others' => 'Agenda van andere groepen',
   'all_groups' => 'Alle groepen',
   'are_you_sure' => 'Bent u zeker ?',
   'author' => 'Auteur',
@@ -99,7 +99,6 @@ return array (
   'last_activity' => 'TODO: last_activity',
   'latest_discussions' => 'Recente discussies',
   'latest_discussions_my' => 'Laatste discussies in mijn groepen',
-  'latest_discussions_others' => 'Laatste discussies in andere groepen',
   'latest_files' => 'Laatste bestanden',
   'latest_users' => 'Nieuwe deelnemers',
   'leave_this_group' => 'Deze groep verlaten',
@@ -169,11 +168,11 @@ return array (
   'stop' => 'Einde',
   'tags' => 'TODO: tags',
   'tags_help' => 'TODO: tags_help',
+  'thank_you' => 'TODO: thank_you',
   'thank_you_for_joining' => 'Bedankt voor uw registratie',
   'thinks_that_you_might_want_to_join' => 'denkt dat u misschien geïnteresseerd bent om aan te sluiten bij de groep',
   'this_will_allow_you_to_be_informed' => 'Op die manier blijft u op de hoogte van de activiteiten van deze groep, en kunt u deelnemen aan de discussies.',
   'title' => 'Titel',
-  'toggle_navigation' => 'Navigatie activeren',
   'unread_discussions' => 'Niet-gelezen discussies',
   'upload' => 'TODO: upload',
   'upload_files' => 'TODO: upload_files',
@@ -203,4 +202,11 @@ return array (
   'you_register' => 'registreer',
   'your_groups' => 'Mijn groepen',
   'your_search_for' => 'Zoeken',
+  //================================== Obsolete strings ==================================//
+  'LLH:obsolete' => 
+  array (
+    'agenda_others' => 'Agenda van andere groepen',
+    'latest_discussions_others' => 'Laatste discussies in andere groepen',
+    'toggle_navigation' => 'Navigatie activeren',
+  ),
 );

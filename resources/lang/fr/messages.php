@@ -2,7 +2,8 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'thank_you' => 'Merci d\'utiliser cet application',
+  'more' => 'Plus',
+  'user_invited' => 'Utilisateurs-trices invité-es',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'accept_invitation' => 'Accepter l\'invitation',
@@ -17,7 +18,6 @@ return array (
   'admins' => 'Administrateurs',
   'agenda' => 'Agenda',
   'agenda_my' => 'Agenda de mes groupes',
-  'agenda_others' => 'Agenda des autres groupes',
   'all_groups' => 'Tous les groupes',
   'are_you_sure' => 'Êtes-vous sûr⋅e ?',
   'author' => 'Auteur',
@@ -101,7 +101,6 @@ return array (
   'last_activity' => 'Dernière activité',
   'latest_discussions' => 'Discussions récentes',
   'latest_discussions_my' => 'Dernières discussions dans mes groupes',
-  'latest_discussions_others' => 'Dernières discussions dans les autres groupes',
   'latest_files' => 'Derniers fichiers',
   'latest_users' => 'Nouveau participants',
   'leave_this_group' => 'Quitter ce groupe',
@@ -171,11 +170,11 @@ return array (
   'stop' => 'Fin',
   'tags' => 'Mots clé (étiquettes)',
   'tags_help' => 'Choisissez un ou plusieurs mots clés. Ces étiquettes permettront de retrouver facilement votre contribution. Dans la liste vous trouverez les mot clés déjà utilisés. Essayer d\'être cohérent(e) avec ce qui existe déjà. Séparez chaque mot clé par une virgule.',
+  'thank_you' => 'Merci d\'utiliser cet application',
   'thank_you_for_joining' => 'Merci d\'avoir rejoint',
   'thinks_that_you_might_want_to_join' => 'pense que vous pourriez être intéressé(e) à joindre',
   'this_will_allow_you_to_be_informed' => 'Cela vous permettra d\'être informé(e) des actions de ce groupe et de prendre part aux discussions.',
   'title' => 'Titre',
-  'toggle_navigation' => 'Activer la navigation',
   'unread_discussions' => 'Discussions non lues',
   'upload' => 'Envoyer',
   'upload_files' => 'Envoyer les fichiers',
@@ -205,4 +204,11 @@ return array (
   'you_register' => 'créez-vous un compte ici',
   'your_groups' => 'Mes groupes',
   'your_search_for' => 'Votre recherche pour',
+  //================================== Obsolete strings ==================================//
+  'LLH:obsolete' =>
+  array (
+    'agenda_others' => 'Agenda des autres groupes',
+    'latest_discussions_others' => 'Dernières discussions dans les autres groupes',
+    'toggle_navigation' => 'Activer la navigation',
+  ),
 );
