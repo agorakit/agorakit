@@ -21,7 +21,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('cache', ['only' => ['cover', 'avatar']]);
-        $this->middleware('verified', ['only' => ['contactForm', 'mail']]);
+        $this->middleware('verified', ['except' => ['index', 'cover', 'avatar']]);
         $this->middleware('throttle:2,1', ['only' => ['mail', 'sendVerificationAgain']]); // 2 emails per  minute should be enough for non bots
     }
 

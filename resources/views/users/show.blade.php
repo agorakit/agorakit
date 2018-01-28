@@ -7,8 +7,6 @@
 
     <div class="tab_content">
 
-        <h1>{{ $user->name }}</h1>
-
         @if (Auth::user())
             <div>
                 {{trans('messages.registered')}} :  {{ $user->created_at->diffForHumans() }}
@@ -30,7 +28,7 @@
                 <div>
                     <h4>{{trans('messages.groups')}}</h4>
                     @foreach ($user->groups as $group)
-                        <span class="label label-default"><a href="{{route('groups.show', $group)}}">{{$group->name}}</a></span>
+                        <a class="badge badge-secondary" href="{{route('groups.show', $group)}}">{{$group->name}}</a>
                     @endforeach
                 </div>
             @endif
