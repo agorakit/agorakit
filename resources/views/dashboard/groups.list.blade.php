@@ -77,7 +77,7 @@
                                         </a>
                                         <span class="group-name">
                                             @foreach ($group->tags as $tag)
-                                                <span class="label label-default">{{$tag->name}}</span>
+                                                <span class="badge badge-secondary">{{$tag->name}}</span>
                                             @endforeach
                                         </span>
 

@@ -79,7 +79,7 @@
 
                         <td>
                             @foreach ($file->tags as $tag)
-                                <span class="label label-default">{{$tag->name}}</span>
+                                <span class="badge badge-secondary">{{$tag->name}}</span>
                             @endforeach
                         </td>
 

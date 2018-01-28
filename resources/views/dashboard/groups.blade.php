@@ -53,11 +53,16 @@ $(this).addClass('active');
             @forelse( $groups as $group )
                 <div class="col-md-4">
                     <div class="card tag-group @foreach ($group->tags as $tag)tag-{{$tag->tag_id}} @endforeach">
-                        <img class="card-img-top" src="{{ route('groups.cover', $group)}}" />
+
+                        <a href="{{ action('GroupController@show', $group) }}">
+                            <img class="card-img-top" src="{{ route('groups.cover', $group)}}" />
+                        </a>
 
                         <div class="card-body">
                             <h5 class="card-title">
-                                {{ $group->name }}
+                                <a href="{{ action('GroupController@show', $group) }}">
+                                    {{ $group->name }}
+                                </a>
                                 @if ($group->isPublic())
                                     <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
                                 @else
@@ -67,19 +72,19 @@ $(this).addClass('active');
                             <p class="card-text">
                                 {{summary($group->body) }}
                                 @foreach ($group->tags as $tag)
-                                    <span class="label label-default">{{$tag->name}}</span>
+                                    <span class="badge badge-secondary">{{$tag->name}}</span>
                                 @endforeach
                             </p>
 
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a class="btn btn-sm btn-outline-secondary" href="{{ action('GroupController@show', $group) }}"></i>
+                                    <a class="btn btn-outline-secondary" href="{{ action('GroupController@show', $group) }}"></i>
                                         {{ trans('messages.visit') }}
                                     </a>
 
                                     @unless ($group->isMember())
                                         @can ('join', $group)
-                                            <a class="btn btn-sm btn-outline-secondary" href="{{ action('MembershipController@store', $group->id) }}">
+                                            <a class="btn btn-outline-secondary" href="{{ action('MembershipController@store', $group->id) }}">
                                                 {{ trans('group.join') }}
                                             </a>
                                         @endcan
