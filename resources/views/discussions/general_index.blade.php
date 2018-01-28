@@ -34,7 +34,7 @@
 
     <td>
       <i class="fa fa-comment"></i>
-      <span class="badge">{{ $discussion->unReadCount() }}</span>
+      <span class="badge badge-secondary">{{ $discussion->unReadCount() }}</span>
     </td>
 
     @endif

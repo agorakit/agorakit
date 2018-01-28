@@ -2,7 +2,8 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'thank_you' => 'TODO: thank_you',
+  'more' => 'TODO: more',
+  'user_invited' => 'TODO: user_invited',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un mensaje para usted',
   'accept_invitation' => 'Acepta la invitación',
@@ -16,7 +17,6 @@ return array (
   'admins' => 'Administradores',
   'agenda' => 'Calendario',
   'agenda_my' => 'Los calendarios de mi grupo',
-  'agenda_others' => 'Calendario de otros grupos',
   'all_groups' => 'Todos los grupos',
   'are_you_sure' => '¿Estás seguro?',
   'author' => 'Autor',
@@ -100,7 +100,6 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'last_activity' => 'Última actividad',
   'latest_discussions' => 'Últimas discusiones',
   'latest_discussions_my' => 'Últimas discusiones en mis grupos',
-  'latest_discussions_others' => 'Últimas discusiones en otros grupos',
   'latest_files' => 'Últimos archivos',
   'latest_users' => 'Últimos usuarios',
   'leave_this_group' => 'Dejar este grupo',
@@ -170,11 +169,11 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'stop' => 'Detener',
   'tags' => 'Etiquetas',
   'tags_help' => 'Elija o escriba una o más etiquetas (palabras clave si lo prefiere). Esto ayudará a otros a encontrar su contribución. En la lista verás las etiquetas que ya se han utilizado en otros lugares. Trate de seguir las etiquetas existentes. Separe cada etiqueta con una coma.',
+  'thank_you' => 'TODO: thank_you',
   'thank_you_for_joining' => 'Gracias por unirte',
   'thinks_that_you_might_want_to_join' => 'piensa que tal vez quieras unirte',
   'this_will_allow_you_to_be_informed' => 'esto le permitirá estar informado y participar.',
   'title' => 'Título',
-  'toggle_navigation' => 'Conmutar navegación',
   'unread_discussions' => 'Discusiones no leídas',
   'upload' => 'Subir',
   'upload_files' => 'Subir archivos',
@@ -204,4 +203,11 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'you_register' => 'registrarse aquí',
   'your_groups' => 'Tus grupos',
   'your_search_for' => 'Su búsqueda de',
+  //================================== Obsolete strings ==================================//
+  'LLH:obsolete' => 
+  array (
+    'agenda_others' => 'Calendario de otros grupos',
+    'latest_discussions_others' => 'Últimas discusiones en otros grupos',
+    'toggle_navigation' => 'Conmutar navegación',
+  ),
 );

@@ -1,9 +1,8 @@
 .actions .action
 {
   width: 100%;
-  margin-top: 10px;
-  padding-top: 10px;
-  border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
   display: flex;
   align-items: top;
 }
@@ -18,11 +17,17 @@
   margin-right: 20px;
 }
 
+.action .name
+{
+  font-weight: bold;
+}
+
 .action .date
 {
 
   flex-shrink: 0;
   padding-right: 20px;
+  text-align: center;
 }
 
 .action .date .day
