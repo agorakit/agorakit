@@ -22,7 +22,11 @@
 
 <body>
 
-    @include('partials.nav')
+    @if (Auth::check())
+        @include('partials.nav')
+    @else
+        @include('partials.nav-guest')
+    @endif
 
 
     <div class="container main-container">
@@ -37,7 +41,7 @@
 
 
 
-    
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 
