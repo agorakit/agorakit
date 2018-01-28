@@ -16,13 +16,13 @@
 
         {!! setting('homepage_presentation', trans('documentation.intro')) !!}
 
-
+{{--
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
                 @foreach (App\Group::whereNotNull('cover')->inRandomOrder()->limit(10)->get() as $group)
                     <div class="item  @if ($loop->first) active @endif">
-                        <img src="{{route('groups.cover.carousel', $group)}}" class="img-responsive">
+                        <img src="{{route('groups.cover.carousel', $group)}}" class="img-fluid">
                         <div class="carousel-caption">
                             <h3>{{$group->name}}</h3>
                             <p>{{summary($group->body)}}</p>
@@ -47,6 +47,7 @@
             {{App\User::count()}} personnes ont lancé {{App\Discussion::count()}} discussions
             et ont téléchargé {{App\File::count()}} fichiers.
         </h1>
+        --}}
 
 
     </div>

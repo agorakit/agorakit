@@ -23,7 +23,7 @@
 
 
                             <td>
-                                <a href="{{ route('users.show', $user->id) }}"> <span class="avatar"><img src="{{$user->avatar()}}" class="img-circle"/></span></a>
+                                <a href="{{ route('users.show', $user->id) }}"> <span class="avatar"><img src="{{$user->avatar()}}" class="rounded-circle"/></span></a>
 
                             </td>
 
@@ -36,7 +36,7 @@
                                 <span class="summary">
                                     @if ($user->groups->count() > 0)
                                         @foreach ($user->groups as $group)
-                                            <span class="label label-default"><a href="{{route('groups.show', $group)}}">{{$group->name}}</a></span>
+                                            <a class="badge badge-secondary" href="{{route('groups.show', $group)}}">{{$group->name}}</a>
                                         @endforeach
                                     @endif
                                 </span>

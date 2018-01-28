@@ -18,9 +18,15 @@
             <span class="summary">{{ summary($action->body) }}</span>
         </a>
         <br/>
-        <div class="group-name"><a href="{{ route('groups.show', [$action->group_id]) }}">{{ $action->group->name }}</a></div>
+        <div class="group-name">
+            <a href="{{ route('groups.show', [$action->group_id]) }}">
+                <span class="badge badge-secondary">
+                    {{ $action->group->name }}
+                </span>
+            </a>
+        </div>
 
-        
+
     </div>
 
 

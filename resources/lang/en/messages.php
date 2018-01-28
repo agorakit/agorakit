@@ -2,7 +2,8 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'thank_you' => 'Thank you for using this application',
+  'more' => 'More',
+  'user_invited' => 'User invited',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'A message for you',
   'accept_invitation' => 'Accept the invitation',
@@ -16,7 +17,6 @@ return array (
   'admins' => 'Admins',
   'agenda' => 'Calendar',
   'agenda_my' => 'My group\'s calendars',
-  'agenda_others' => 'Other groups\' calendars',
   'all_groups' => 'All groups',
   'are_you_sure' => 'Are you sure?',
   'author' => 'Author',
@@ -100,7 +100,6 @@ Enter a correct URL starting with http:// and set a title for this link. You can
   'last_activity' => 'Last activity',
   'latest_discussions' => 'Latest discussions',
   'latest_discussions_my' => 'Latest discussions in my groups',
-  'latest_discussions_others' => 'Latest discussions in other groups',
   'latest_files' => 'Latest files',
   'latest_users' => 'Latest users',
   'leave_this_group' => 'Leave this group',
@@ -170,11 +169,11 @@ Enter a correct URL starting with http:// and set a title for this link. You can
   'stop' => 'Stop',
   'tags' => 'Tags',
   'tags_help' => 'Choose or type one or more tag (keywords if you prefer). This will help others to find your contribution. In the list you will see the tags already used elsewhere. Try to follow the existing tags. Separate each tag with a comma.',
+  'thank_you' => 'Thank you for using this application',
   'thank_you_for_joining' => 'Thank you for joining',
   'thinks_that_you_might_want_to_join' => 'thinks that you might want to join',
   'this_will_allow_you_to_be_informed' => 'this will allow you to be informed and to participate',
   'title' => 'Title',
-  'toggle_navigation' => 'Toggle navigation',
   'unread_discussions' => 'Unread discussions',
   'upload' => 'Upload',
   'upload_files' => 'Upload Files',
@@ -204,4 +203,11 @@ Enter a correct URL starting with http:// and set a title for this link. You can
   'you_register' => 'register here',
   'your_groups' => 'Your groups',
   'your_search_for' => 'Your search for',
+  //================================== Obsolete strings ==================================//
+  'LLH:obsolete' =>
+  array (
+    'agenda_others' => 'Other groups\' calendars',
+    'latest_discussions_others' => 'Latest discussions in other groups',
+    'toggle_navigation' => 'Toggle navigation',
+  ),
 );

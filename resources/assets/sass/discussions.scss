@@ -1,0 +1,50 @@
+.discussions .discussion
+{
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: top;
+}
+
+.discussion .unread
+{
+  font-weight: bold;
+}
+.discussion .name
+{
+  font-weight: bold;
+  display: block;
+}
+
+
+.discussion .avatar
+{
+  margin-right: 20px;
+}
+
+.discussion .date, .discussion .unread
+{
+  flex-shrink: 0;
+  padding-left: 20px;
+}
+
+
+.discussion .group
+{
+  font-size: 0.8em;
+}
+
+
+.discussion, .comments {
+    max-width: 65em;
+}
+
+.discussion .user {
+    font-weight: 700;
+}
+
+.discussion .body {
+    margin-top: 1em;
+    margin-bottom: 2em;
+}

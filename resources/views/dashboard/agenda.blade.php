@@ -16,7 +16,7 @@
     <div class="tab_content">
 
         <div style="float:right">
-            <a class="btn btn-default" href="{{ route('actions.create') }}">
+            <a class="btn btn-primary" href="{{ route('actions.create') }}">
                 <i class="fa fa-plus"></i> {{trans('action.create_one_button')}}
             </a>
         </div>

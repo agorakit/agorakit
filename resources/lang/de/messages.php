@@ -2,7 +2,8 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'thank_you' => 'TODO: thank_you',
+  'more' => 'TODO: more',
+  'user_invited' => 'TODO: user_invited',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Eine Nachricht für Sie',
   'accept_invitation' => 'Die Einladung akzeptieren',
@@ -16,7 +17,6 @@ return array (
   'admins' => 'TODO: admins',
   'agenda' => 'Agenda',
   'agenda_my' => 'Agenda meine gruppen',
-  'agenda_others' => 'Agenda von anderen gruppen',
   'all_groups' => 'Alle Gruppen',
   'are_you_sure' => 'Sind Sie sicher ?',
   'author' => 'Autor',
@@ -99,7 +99,6 @@ return array (
   'last_activity' => 'TODO: last_activity',
   'latest_discussions' => 'Neueste Diskussionen',
   'latest_discussions_my' => 'Aktuelle diskussionen in meinen gruppen',
-  'latest_discussions_others' => 'Neueste diskussionen die anderen',
   'latest_files' => 'Neueste Dateien',
   'latest_users' => 'Neueste Nutzer',
   'leave_this_group' => 'Dieser Gruppe abtreten',
@@ -169,11 +168,11 @@ return array (
   'stop' => 'Stoppen',
   'tags' => 'TODO: tags',
   'tags_help' => 'TODO: tags_help',
+  'thank_you' => 'TODO: thank_you',
   'thank_you_for_joining' => 'Vielen Dank, dass Sie Mitglied geworden sind',
   'thinks_that_you_might_want_to_join' => 'meint, dass Sie eventuell Mitglied werden möchten',
   'this_will_allow_you_to_be_informed' => 'dies erlaubt es Ihnen, auf dem Laufenden zu bleiben und teilzunehmen',
   'title' => 'Titel',
-  'toggle_navigation' => 'Navigierung hin- und herschalten',
   'unread_discussions' => 'Ungelesene Diskussionen',
   'upload' => 'TODO: upload',
   'upload_files' => 'TODO: upload_files',
@@ -203,4 +202,11 @@ return array (
   'you_register' => 'Hier registrieren',
   'your_groups' => 'Ihre Gruppen',
   'your_search_for' => 'Ihre Suche für',
+  //================================== Obsolete strings ==================================//
+  'LLH:obsolete' => 
+  array (
+    'agenda_others' => 'Agenda von anderen gruppen',
+    'latest_discussions_others' => 'Neueste diskussionen die anderen',
+    'toggle_navigation' => 'Navigierung hin- und herschalten',
+  ),
 );

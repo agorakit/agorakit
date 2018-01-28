@@ -28,7 +28,7 @@
                 <li>{{trans('messages.created')}} : {{$file->created_at}}</li>
                 <li>{{trans('messages.tags')}} :
                     @foreach ($file->tags as $tag)
-                        <span class="label label-default">{{$tag->name}}</span>
+                        <span class="badge badge-secondary">{{$tag->name}}</span>
                     @endforeach
                 </li>
             </ul>

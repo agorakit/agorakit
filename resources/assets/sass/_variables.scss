@@ -1,55 +1,34 @@
 
 // Body
-//$body-bg: #f5f8fa;
+$body-bg: #fff;
 
 // Borders
-/*
 $laravel-border-color: darken($body-bg, 10%);
-$list-group-border: $laravel-border-color;
-$navbar-default-border: $laravel-border-color;
-$panel-default-border: $laravel-border-color;
-$panel-inner-border: $laravel-border-color;
-*/
+$list-group-border-color: $laravel-border-color;
+
+$card-border-color: $laravel-border-color;
 
 // Brands
-$brand-primary: #299FC5;
-$brand-info: #e2e5c0;
-$brand-success: #72C766;
-$brand-warning: #F8CA4D;
-$brand-danger: #ea6045;
-
-$enable-shadows:            true;
-$enable-gradients:          true;
-$enable-transitions:        true;
-$enable-hover-media-query:  true;
+$primary: #3097D1;
+$info: #8eb4cb;
+$success: #2ab27b;
+$warning: #cbb956;
+$danger: #bf5329;
 
 // Typography
-$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 $font-family-sans-serif: "Open Sans", sans-serif;
-$font-size-base: 16px;
+//$font-size-base: .875rem; // 14px
 $line-height-base: 1.6;
-$text-color: #1C211E;
-
-
-$headings-font-family:   "Roboto";
-$headings-font-weight:   300;
-$headings-line-height:   1.1;
-//$headings-color:
-
-
-$navbar-default-bg: #24363B;
-$navbar-default-color: white;
-$navbar-default-link-color: white;
-$navbar-default-link-hover-color: darken($navbar-default-link-color, 10%);
-$navbar-default-link-active-color: darken($navbar-default-link-color, 10%);
-
-// Buttons
-//$btn-default-color: $text-color;
+$text-color: #636b6f;
 
 // Inputs
-//$input-border: lighten($text-color, 40%);
-//$input-border-focus: lighten($brand-primary, 25%);
-//$input-color-placeholder: lighten($text-color, 30%);
+$input-border-color: lighten($text-color, 40%);
+$input-placeholder-color: lighten($text-color, 30%);
 
-// Panels
-//$panel-default-heading-bg: #fff;
+$enable-shadows:            true;
+//$enable-gradients:          true;
+
+$grid-gutter-width:           40px;
+//$headings-font-family:       'Lato', sans-serif;
+
+$primary:       rgb(28, 102, 129);
