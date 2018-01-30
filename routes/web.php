@@ -111,6 +111,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('groups/{group}/cover/small', 'GroupThumbnailController@avatar')->name('groups.cover.small');
     Route::get('groups/{group}/cover/carousel', 'GroupThumbnailController@carousel')->name('groups.cover.carousel');
 
+    Route::get('groups/{group}/invite/confirm/{token}', 'InviteController@inviteConfirm')->name('groups.invite.confirm');
+    Route::post('groups/{group}/invite/confirm/{token}', 'InviteController@inviteRegister')->name('groups.invite.register');
+
     // General discussion create route
     Route::get('discussions/create', 'DiscussionController@create')->name('discussions.create');
     Route::post('discussions/create', 'DiscussionController@store')->name('discussions.store');
@@ -161,8 +164,7 @@ Route::group(['middleware' => ['web']], function () {
         // invites
         Route::get('invite', 'InviteController@invite')->name('.invite.form');
         Route::post('invite', 'InviteController@sendInvites')->name('.invite');
-        Route::get('invite/confirm/{token}', 'InviteController@inviteConfirm')->name('.invite.confirm');
-        Route::post('invite/confirm/{token}', 'InviteController@inviteRegister')->name('.invite.register');
+
 
         // Discussions
         Route::get('discussions', 'DiscussionController@index')->name('.discussions.index');
