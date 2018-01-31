@@ -36,7 +36,7 @@
                 <p>
                     @can('history', $group)
                         @if ($group->revisionHistory->count() > 0)
-                            <a class="btn btn-primary btn-xs" href="{{route('groups.history', $group->id)}}">
+                            <a href="{{route('groups.history', $group->id)}}">
                                 <i class="fa fa-history"></i>
                                 {{trans('messages.show_history')}}
                             </a>
@@ -60,11 +60,11 @@
 
             @if ($discussions)
                 @if($discussions->count() > 0)
-                    <div class="col-md-8">
-                        <h2>
+                    <div class="col-md-7">
+                        <h2 class="mb-4">
                             <a href="{{ route('groups.discussions.index', $group->id) }}">{{trans('group.latest_discussions')}}</a>
                             @can('create-discussion', $group)
-                                <a class="btn btn-sm btn-primary" href="{{ route('groups.discussions.create', $group) }}">
+                                <a class="btn btn-sm btn-outline-primary" href="{{ route('groups.discussions.create', $group) }}">
                                     <i class="fa fa-plus"></i> {{trans('discussion.create_one_button')}}
                                 </a>
                             @endcan
@@ -80,11 +80,11 @@
 
             @if ($actions)
                 @if($actions->count() > 0)
-                    <div class="col-md-4">
-                        <h2>
+                    <div class="col-md-5">
+                        <h2 class="mb-4">
                             <a href="{{ route('groups.actions.index', $group->id) }}">{{trans('messages.agenda')}}</a>
                             @can('create-action', $group)
-                                <a class="btn btn-sm btn-primary" href="{{ route('groups.actions.create', $group->id ) }}">
+                                <a class="btn btn-sm btn-outline-primary" href="{{ route('groups.actions.create', $group->id ) }}">
                                     <i class="fa fa-plus"></i> {{trans('action.create_one_button')}}
                                 </a>
                             @endcan

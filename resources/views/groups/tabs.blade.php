@@ -1,4 +1,4 @@
-<div class="page_header">
+<div class="group-header">
     <h1>
         <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
         @if (isset($tab) && ($tab <> 'home'))
