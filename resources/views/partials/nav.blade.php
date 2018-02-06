@@ -103,7 +103,7 @@
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-language"></i> {{ strtoupper(app()->getLocale()) }}
                 </a>
-                <div class="dropdown-menu">
+                <div class="dropdown-menu dropdown-menu-right">
                     @foreach(\Config::get('app.locales') as $locale)
                         @if($locale !== app()->getLocale())
                             <a class="dropdown-item" href="{{Request::url()}}?force_locale={{$locale}}">
@@ -124,7 +124,7 @@
                 <span class="avatar"><img src="{{Auth::user()->avatar()}}" class="rounded-circle" style="width:24px; height:24px"/></span> {{ Auth::user()->name }} <span class="caret"></span>
             </a>
 
-            <div class="dropdown-menu" role="menu">
+            <div class="dropdown-menu dropdown-menu-right" role="menu">
                 <a class="dropdown-item" href="{{route('users.show', Auth::user()->id)}}"><i class="fa fa-btn fa-user"></i> {{ trans('messages.profile') }}</a>
                 <a class="dropdown-item" href="{{route('users.edit', Auth::user()->id)}}"><i class="fa fa-btn fa-edit"></i> {{ trans('messages.edit_my_profile') }}</a>
 
@@ -140,6 +140,7 @@
                 <!-- Admin -->
                 @if (Auth::user()->isAdmin())
                     <div class="dropdown-divider"></div>
+                    <h6 class="dropdown-header">Admin</h6>
 
                     <a class="dropdown-item" href="{{ url('/admin/settings') }}">
                         <i class="fa fa-cog"></i> Settings
