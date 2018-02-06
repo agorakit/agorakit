@@ -34,13 +34,4 @@ return array (
   'welcome' => 'Bienvenue dans ce groupe',
   'when_to_receive_notifications' => 'Quand recevoir des nouvelles par mail de ce groupe?',
   'your_preferences_for' => 'Vos préférences pour le groupe',
-  //================================== Obsolete strings ==================================//
-  'LLH:obsolete' => 
-  array (
-    'add_users_button' => 'Ajouter des utilisateurs',
-    'membership' => 
-    array (
-      'add_users_button' => 'Ajouter des utilisateurs',
-    ),
-  ),
 );

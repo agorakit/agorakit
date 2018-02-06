@@ -21,7 +21,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('cache', ['only' => ['cover', 'avatar']]);
-        $this->middleware('verified', ['only' => ['contactForm', 'mail']]);
+        $this->middleware('verified', ['except' => ['index', 'cover', 'avatar']]);
         $this->middleware('throttle:2,1', ['only' => ['mail', 'sendVerificationAgain']]); // 2 emails per  minute should be enough for non bots
     }
 
@@ -34,10 +34,12 @@ class UserController extends Controller
     {
         $users = $group->users()->with('memberships')->orderBy('updated_at', 'desc')->paginate(25);
         $admins = $group->admins()->orderBy('name')->get();
+        $invites = \App\Invite::where('group_id', $group->id)->get();
 
         return view('users.index')
         ->with('users', $users)
         ->with('admins', $admins)
+        ->with('invites', $invites)
         ->with('group', $group)
         ->with('tab', 'users');
     }

@@ -28,7 +28,7 @@
 
         </div>
 
-        <input class="btn btn-default" type="submit" name="{{trans('messages.create')}}"/>
+        <input class="btn btn-primary" type="submit" name="{{trans('messages.create')}}"/>
 
         {!! Form::close() !!}
 

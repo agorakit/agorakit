@@ -34,13 +34,4 @@ return array (
   'welcome' => 'Bienvenido',
   'when_to_receive_notifications' => '¿Con qué frecuencia desea recibir notificaciones por correo electrónico?',
   'your_preferences_for' => 'Sus preferencias para',
-  //================================== Obsolete strings ==================================//
-  'LLH:obsolete' => 
-  array (
-    'add_users_button' => 'Agregar usuarios',
-    'membership' => 
-    array (
-      'add_users_button' => 'Agregar usuarios',
-    ),
-  ),
 );
