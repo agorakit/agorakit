@@ -2,13 +2,14 @@
     <div class="avatar"><img src="{{$discussion->user->avatar()}}" class="rounded-circle"/></div>
     <div class="content w-100">
         <a href="{{ route('groups.discussions.show', [$discussion->group_id, $discussion->id]) }}">
-            <span class="name">
-                {{ $discussion->name }}
+            <div class="d-flex justify-content-between align-items-center">
+                <span class="name">
+                    {{ $discussion->name }}
+                </span>
                 @if ($discussion->unReadCount() > 0)
                     <span class="badge badge-secondary">{{ $discussion->unReadCount() }}</span>
                 @endif
-
-            </span>
+            </div>
             <span class="summary">{{summary($discussion->body) }}</span>
         </a>
         <br/>
