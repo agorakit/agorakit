@@ -27,11 +27,11 @@
       <p>{{$action->location}}</p>
 
       @if ($action->revisionHistory->count() > 0)
-        <a class="btn btn-default btn-xs" href="{{route('groups.actions.history', [$group->id, $action->id])}}"><i class="fa fa-history"></i> {{trans('messages.show_history')}}</a>
+        <a class="btn btn-primary btn-xs" href="{{route('groups.actions.history', [$group->id, $action->id])}}"><i class="fa fa-history"></i> {{trans('messages.show_history')}}</a>
       @endif
 
       @can('delete', $action)
-        <a class="btn btn-default btn-xs" href="{{ route('groups.actions.deleteconfirm', [$group->id, $action->id]) }}"><i class="fa fa-trash"></i>
+        <a class="btn btn-primary btn-xs" href="{{ route('groups.actions.deleteconfirm', [$group->id, $action->id]) }}"><i class="fa fa-trash"></i>
           {{trans('messages.delete')}}
         </a>
       @endcan

@@ -1,18 +1,16 @@
 @extends('app')
 
 @section('content')
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
+
 
 			<div class="help" role="alert">
 				<i class="fa fa-info-circle" aria-hidden="true"></i>
 				{{trans('messages.if_you_dont_have_account')}}, <a href="{{url('register')}}">{{trans('messages.you_can_create_one_here')}}</a>
 			</div>
 
-			<div class="panel panel-default">
-				<div class="panel-heading">{{trans('messages.login')}}</div>
-				<div class="panel-body">
+
+				<h2 class="col-md-4">{{trans('messages.login')}}</h2>
+
 
 
 
@@ -57,9 +55,5 @@
                         @include('partials.socialite')
 
 					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+			
 @endsection

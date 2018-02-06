@@ -147,6 +147,8 @@ class InviteController extends Controller
             // Invitation is now claimed, but not deleted
             $invite->claimed_at = Carbon::now();
 
+            $invite->save();
+
             flash(trans('messages.you_are_now_a_member_of_this_group'))->success();
 
             return redirect()->route('groups.show', $group->id);
@@ -174,6 +176,7 @@ class InviteController extends Controller
 
         $invite = \App\Invite::whereToken($token)->firstOrFail();
         $invite->claimed_at = Carbon::now();
+        $invite->save();
 
         $user = new \App\User();
         $user->name = $request->get('name');

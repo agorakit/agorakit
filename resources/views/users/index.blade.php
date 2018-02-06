@@ -13,7 +13,7 @@
             @endcan
 
             @can('edit-membership', $group)
-                <a class="btn btn-warning" href="{{ action('Admin\MembershipController@addUserForm', $group->id ) }}"><i class="fa fa-plus"></i> {{trans('membership.directly_add_users_button')}}</a>
+                <a class="btn btn-secondary" href="{{ action('Admin\MembershipController@addUserForm', $group->id ) }}"><i class="fa fa-plus"></i> {{trans('membership.directly_add_users_button')}}</a>
             @endcan
         </div>
 
@@ -30,7 +30,7 @@
             @foreach( $users as $user )
                 <tr>
                     <td>
-                        <a href="{{ route('users.show', $user->id) }}"> <span class="avatar"><img src="{{$user->avatar()}}" class="img-circle"/></span> {{ $user->name }}</a>
+                        <a href="{{ route('users.show', $user->id) }}"> <span class="avatar"><img src="{{$user->avatar()}}" class="rounded-circle"/></span> {{ $user->name }}</a>
                     </td>
 
                     <td>
@@ -45,34 +45,31 @@
                     <td>
                         @can('edit-membership', $group)
 
-                            <div class="btn-group">
-                                <a type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="dropdown">
+                                <a type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa fa-wrench"></i> <span class="caret"></span>
                                 </a>
-                                <ul class="dropdown-menu">
+                                <div class="dropdown-menu">
 
-                                    <li>
+
                                         @if($user->isAdminOf($group))
-                                            <a href="{{action('Admin\MembershipController@removeAdminUser', [$group, $user])}}" onclick="return confirm('{{trans('messages.are_you_sure')}}');">
+                                            <a class="dropdown-item" href="{{action('Admin\MembershipController@removeAdminUser', [$group, $user])}}" onclick="return confirm('{{trans('messages.are_you_sure')}}');">
                                                 <i class="fa fa-trash-o"></i> {{trans('messages.remove_user_admin')}}
                                             </a>
                                         @else
-                                            <a href="{{action('Admin\MembershipController@addAdminUser', [$group, $user])}}" onclick="return confirm('{{trans('messages.are_you_sure')}}');">
+                                            <a class="dropdown-item" href="{{action('Admin\MembershipController@addAdminUser', [$group, $user])}}" onclick="return confirm('{{trans('messages.are_you_sure')}}');">
                                                 <i class="fa fa-key"></i> {{trans('messages.make_user_admin')}}
                                             </a>
                                         @endif
-                                    </li>
 
-
-                                    <li>
-                                        <a href="{{action('Admin\MembershipController@removeUser', [$group, $user])}}" onclick="return confirm('{{trans('messages.are_you_sure')}}');">
+                                        <a class="dropdown-item" href="{{action('Admin\MembershipController@removeUser', [$group, $user])}}" onclick="return confirm('{{trans('messages.are_you_sure')}}');">
                                             <i class="fa fa-ban"></i> {{trans('messages.remove_user')}}
                                         </a>
-                                    </li>
+
 
 
                                 </div>
-                            </ul>
+                            </div>
 
                         @endcan
 
@@ -91,6 +88,17 @@
                 <a href="{{ route('users.show', $admin) }}">{{ $admin->name }}</a>
             @endforeach
         @endif
+
+
+
+        @can('edit-membership', $group)
+            @if ($invites->count() > 0)
+                {{trans('messages.user_invited')}} :
+                @foreach ($invites as $invite)
+                    <li>{{$invite->email}}</li>
+                @endforeach
+            @endif
+        @endcan
 
 
     </div>

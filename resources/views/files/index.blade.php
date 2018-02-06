@@ -79,7 +79,7 @@
 
                         <td>
                             @foreach ($file->tags as $tag)
-                                <span class="label label-default">{{$tag->name}}</span>
+                                <span class="badge badge-secondary">{{$tag->name}}</span>
                             @endforeach
                         </td>
 
@@ -99,7 +99,7 @@
 
                         <td>
                             @can('edit', $file)
-                                <a class="btn btn-default btn-xs" href="{{ route('groups.files.edit', [$group->id, $file->id]) }}"><i class="fa fa-edit"></i>
+                                <a class="btn btn-primary btn-xs" href="{{ route('groups.files.edit', [$group->id, $file->id]) }}"><i class="fa fa-edit"></i>
                                     {{trans('messages.edit')}}
                                 </a>
                             @endcan

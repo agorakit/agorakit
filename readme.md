@@ -98,3 +98,9 @@ Please drop a line to info (at) agorakit.org to keep in touch.
 
 ## License
 This tool is released under the GPL 3 licence
+
+## Credits
+Idea & development : Philippe Jadin
+Contributors : https://github.com/philippejadin/agorakit/graphs/contributors
+Logo : Patrick Iacono
+Illustrations : Raphaëlle Goffaux
