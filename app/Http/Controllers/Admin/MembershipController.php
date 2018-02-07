@@ -54,7 +54,7 @@ class MembershipController extends Controller
 
                 // notify the user
                 $user->notify(new \App\Notifications\AddedToGroup($group));
-                
+
                 flash(trans('messages.user_added_successfuly').' : '.$user->name)->success();
             }
         }
@@ -105,6 +105,22 @@ class MembershipController extends Controller
     * Set a member of a group to admin (admin feature).
     */
     public function removeAdminUser(Request $request, Group $group, User $user)
+    {
+        $this->authorize('edit-membership', $group);
+
+        $membership = \App\Membership::where(['user_id' => $user->id, 'group_id' => $group->id])->firstOrFail();
+        $membership->membership = \App\Membership::MEMBER;
+        $membership->save();
+        flash(trans('messages.user_made_member_successfuly').' : '.$user->name)->success();
+
+        return redirect()->route('groups.users.index', $group);
+    }
+
+
+    /**
+    * Allow an admin to confirm a membership application
+    */
+    public function confirm(Request $request, Group $group, User $user)
     {
         $this->authorize('edit-membership', $group);
 

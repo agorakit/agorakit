@@ -1,9 +1,6 @@
 <?php
 
 return array (
-  //============================== New strings to translate ==============================//
-  'more' => 'More',
-  'user_invited' => 'User invited',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'A message for you',
   'accept_invitation' => 'Accept the invitation',
@@ -25,6 +22,7 @@ return array (
   'begins' => 'Begins',
   'body' => 'Body',
   'cancel' => 'I changed my mind, cancel',
+  'candidates' => 'Candidates',
   'change_my_password' => 'Change my password',
   'changed' => 'Changed',
   'changed_from' => 'Changed from',
@@ -35,6 +33,7 @@ return array (
   'click_to_confirm' => 'Click to confirm',
   'comments' => 'Comments',
   'confirm_password' => 'Confirm password',
+  'confirm_user' => 'Confirm user',
   'confirm_your_email' => 'Confirm your email',
   'contact' => 'contact',
   'contact_this_user' => 'Contact this user',
@@ -118,6 +117,7 @@ Enter a correct URL starting with http:// and set a title for this link. You can
   'message' => 'message',
   'message_sent' => 'Message sent',
   'modify' => 'Modify',
+  'more' => 'More',
   'name' => 'Name',
   'news_from_group_email_subject' => 'News from the group',
   'next_actions' => 'Next actions',
@@ -178,6 +178,7 @@ Enter a correct URL starting with http:// and set a title for this link. You can
   'upload' => 'Upload',
   'upload_files' => 'Upload Files',
   'user_added_successfuly' => 'User added successfully',
+  'user_invited' => 'User invited',
   'user_made_admin_successfuly' => 'User made admin successfully',
   'user_made_member_successfuly' => 'User made member successfully',
   'user_profile' => 'User profile',
@@ -204,7 +205,7 @@ Enter a correct URL starting with http:// and set a title for this link. You can
   'your_groups' => 'Your groups',
   'your_search_for' => 'Your search for',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' =>
+  'LLH:obsolete' => 
   array (
     'agenda_others' => 'Other groups\' calendars',
     'latest_discussions_others' => 'Latest discussions in other groups',

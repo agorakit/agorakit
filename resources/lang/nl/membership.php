@@ -1,6 +1,10 @@
 <?php
 
 return array (
+  //============================== New strings to translate ==============================//
+  'application_stored' => 'TODO: application_stored',
+  'apply' => 'TODO: apply',
+  'apply_for_group' => 'TODO: apply_for_group',
   //==================================== Translations ====================================//
   'add_button' => 'Voeg gebruiker(s)',
   'add_users' => 'Het toevoegen van gebruikers',

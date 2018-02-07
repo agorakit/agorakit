@@ -34,6 +34,7 @@ class AppMailer
             // Establish timestamp for notifications from membership data (when was an email sent for the last time?)
             $membership = \App\Membership::where('user_id', '=', $user->id)
             ->where('group_id', '=', $group->id)
+            ->where('membership', '>=',\App\Membership::MEMBER)
             ->firstOrFail();
 
             $last_notification = $membership->notified_at;

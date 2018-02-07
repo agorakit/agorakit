@@ -1,6 +1,10 @@
 <?php
 
 return array (
+  //============================== New strings to translate ==============================//
+  'application_stored' => 'Votre demande d\'adhésion a été enregistrée',
+  'apply' => 'Faire une demande d\'adhésion au groupe',
+  'apply_for_group' => 'Rejoindre le groupe',
   //==================================== Translations ====================================//
   'add_button' => 'Ajout d\'un utilisateur(s)',
   'add_users' => 'Ajouter des utilisateurs',
