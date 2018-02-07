@@ -1,6 +1,10 @@
 <?php
 
 return array (
+  //============================== New strings to translate ==============================//
+  'application_stored' => 'Your application to this group has been stored',
+  'apply' => 'Apply',
+  'apply_for_group' => 'Apply for the group',
   //==================================== Translations ====================================//
   'add_button' => 'Add user(s)',
   'add_users' => 'Add users',
