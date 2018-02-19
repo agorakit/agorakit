@@ -164,6 +164,39 @@ class UserTest extends Tests\BrowserKitTestCase
         ->see(trans('membership.apply_for_group'));
     }
 
+    public function testNewbieCanApplyToPrivateGroup()
+    {
+        $group = App\Group::where('name', 'Private test group')->first();
+
+        $user = App\User::where('email', 'newbie@example.com')->first();
+
+
+        $this->actingAs($user)
+        ->visit('/groups/'.$group->id.'/join')
+        ->press(trans('membership.apply'))
+        ->see(trans('membership.application_stored'));
+    }
+
+
+    public function testAdminCanConfirmCandidateToPrivateGroup()
+    {
+        // don't you like this function name?
+        $group = App\Group::where('name', 'Private test group')->first();
+
+        $user = App\User::where('email', 'roberto@example.com')->first();
+        $newbie = App\User::where('email', 'newbie@example.com')->first();
+
+        $this->actingAs($user)
+        ->visit('groups/'.$group->id.'/users')
+        ->click(trans('messages.confirm_user'))
+        ->see(trans('messages.user_made_member_successfuly'));
+
+        $this->seeInDatabase('membership', ['user_id' => $newbie->id, 'membership' => '20']);
+
+    }
+
+
+
     public function testNewbieCanCreateGroup()
     {
         $user = App\User::where('email', 'newbie@example.com')->first();
