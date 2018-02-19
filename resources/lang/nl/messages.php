@@ -14,6 +14,7 @@ return array (
   'admins' => 'Admins',
   'agenda' => 'Agenda',
   'agenda_my' => 'Agenda van mijn groepen',
+  'agenda_others' => 'Agenda van andere groepen',
   'all_groups' => 'Alle groepen',
   'are_you_sure' => 'Bent u zeker ?',
   'author' => 'Auteur',
@@ -98,6 +99,7 @@ return array (
   'last_activity' => 'TODO: last_activity',
   'latest_discussions' => 'Recente discussies',
   'latest_discussions_my' => 'Laatste discussies in mijn groepen',
+  'latest_discussions_others' => 'Laatste discussies in andere groepen',
   'latest_files' => 'Laatste bestanden',
   'latest_users' => 'Nieuwe deelnemers',
   'leave_this_group' => 'Deze groep verlaten',
@@ -206,8 +208,6 @@ return array (
   //================================== Obsolete strings ==================================//
   'LLH:obsolete' => 
   array (
-    'agenda_others' => 'Agenda van andere groepen',
-    'latest_discussions_others' => 'Laatste discussies in andere groepen',
     'toggle_navigation' => 'Navigatie activeren',
   ),
 );

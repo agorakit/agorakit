@@ -24,7 +24,7 @@
 
         <li class="nav-item">
             <a href="{{ route('groups.show', $group->id) }}" class="nav-link @if (isset($tab) && ($tab == 'home')) active @endif">
-                <i class="fa fa-info-circle"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.group_home') }}</span>
+                <i class="fa fa-info-circle"></i> <span class="d-none d-lg-inline">{{ trans('messages.group_home') }}</span>
             </a>
         </li>
 
@@ -32,7 +32,7 @@
         @can ('viewDiscussions', $group)
             <li class="nav-item">
                 <a href="{{ route('groups.discussions.index', $group->id) }}"  class="nav-link @if (isset($tab) && ($tab == 'discussion')) active @endif">
-                    <i class="fa fa-comments"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.discussions') }}</span>
+                    <i class="fa fa-comments"></i> <span class="d-none d-lg-inline">{{ trans('messages.discussions') }}</span>
                 </a>
             </li>
         @endcan
@@ -40,7 +40,7 @@
         @can ('viewActions', $group)
             <li class="nav-item">
                 <a href="{{ route('groups.actions.index', $group->id) }}"  class="nav-link @if (isset($tab) && ($tab == 'action')) active @endif">
-                    <i class="fa fa-calendar"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.agenda') }}</span>
+                    <i class="fa fa-calendar"></i> <span class="d-none d-lg-inline">{{ trans('messages.agenda') }}</span>
                 </a>
             </li>
         @endcan
@@ -48,7 +48,7 @@
         @can ('viewFiles', $group)
             <li class="nav-item">
                 <a href="{{ route('groups.files.index', $group->id) }}"  class="nav-link @if (isset($tab) && ($tab == 'files')) active @endif">
-                    <i class="fa fa-files-o"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.files') }}</span>
+                    <i class="fa fa-files-o"></i> <span class="d-none d-lg-inline">{{ trans('messages.files') }}</span>
                 </a>
             </li>
         @endcan
@@ -56,7 +56,7 @@
         @can ('viewMembers', $group)
             <li class="nav-item">
                 <a href="{{ route('groups.users.index', $group->id) }}"  class="nav-link @if (isset($tab) && ($tab == 'users')) active @endif">
-                    <i class="fa fa-users"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.members') }}</span>
+                    <i class="fa fa-users"></i> <span class="d-none d-lg-inline">{{ trans('messages.members') }}</span>
                 </a>
             </li>
         @endcan
@@ -65,7 +65,7 @@
         @can ('viewMembers', $group)
             <li class="nav-item">
                 <a href="{{ action('MapController@map', $group->id) }}"  class="nav-link @if (isset($tab) && ($tab == 'map')) active @endif">
-                    <i class="fa fa-map-marker"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.map') }}</span>
+                    <i class="fa fa-map-marker"></i> <span class="d-none d-lg-inline">{{ trans('messages.map') }}</span>
                 </a>
             </li>
         @endcan
@@ -73,13 +73,13 @@
         @if ($group->isMember())
             <li class="nav-item">
                 <a href="{{ action('MembershipController@edit', $group->id) }}"  class="nav-link @if (isset($tab) && ($tab == 'preferences')) active @endif">
-                    <i class="fa fa-bell-o"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.settings') }}</span>
+                    <i class="fa fa-bell-o"></i> <span class="d-none d-lg-inline">{{ trans('messages.settings') }}</span>
                 </a>
             </li>
         @else
                 <li class="nav-item">
                     <a href="{{ action('MembershipController@create', $group->id) }}"  class="nav-link @if (isset($tab) && ($tab == 'settings')) active @endif">
-                        <i class="fa fa-sign-in"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.join') }}</span>
+                        <i class="fa fa-sign-in"></i> <span class="d-none d-lg-inline">{{ trans('messages.join') }}</span>
                     </a>
                 </li>
         @endif
@@ -88,7 +88,7 @@
         @can ('administer', $group)
             <li class="nav-item dropdown">
                 <a href="#" id="admin" data-toggle="dropdown" aria-controls="admin-contents" aria-expanded="false"  class="dropdown-toggle nav-link @if (isset($tab) && ($tab == 'admin')) active @endif">
-                    <i class="fa fa-wrench"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.administration') }}</span>
+                    <i class="fa fa-wrench"></i> <span class="d-none d-lg-inline">{{ trans('messages.administration') }}</span>
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="{{ route('groups.edit', $group->id) }}">
@@ -125,7 +125,7 @@
 
         <li class="nav-item" role="presentation" >
             <a class="nav-link @if (isset($tab) && ($tab == 'home')) active @endif" href="{{ route('groups.show', $group->id) }}">
-                <i class="fa fa-info-circle"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.group_home') }}</span>
+                <i class="fa fa-info-circle"></i> <span class="d-none d-lg-inline">{{ trans('messages.group_home') }}</span>
             </a>
         </li>
 
@@ -133,7 +133,7 @@
         @if ($group->isPublic() )
             <li class="nav-item" role="presentation">
                 <a class="nav-link @if (isset($tab) && ($tab == 'discussion')) active @endif" href="{{ route('groups.discussions.index', $group->id) }}">
-                    <i class="fa fa-comments"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.discussions') }}</span>
+                    <i class="fa fa-comments"></i> <span class="d-none d-lg-inline">{{ trans('messages.discussions') }}</span>
                 </a>
             </li>
         @endif
@@ -141,7 +141,7 @@
         @if ($group->isPublic() )
             <li class="nav-item" role="presentation">
                 <a class="nav-link @if (isset($tab) && ($tab == 'action')) active @endif" href="{{ route('groups.actions.index', $group->id) }}">
-                    <i class="fa fa-calendar"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.agenda') }}</span>
+                    <i class="fa fa-calendar"></i> <span class="d-none d-lg-inline">{{ trans('messages.agenda') }}</span>
                 </a>
             </li>
         @endif
@@ -149,7 +149,7 @@
         @if ($group->isPublic() )
             <li class="nav-item" role="presentation">
                 <a class="nav-link @if (isset($tab) && ($tab == 'files')) active @endif" href="{{ route('groups.files.index', $group->id) }}">
-                    <i class="fa fa-files-o"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.files') }}</span>
+                    <i class="fa fa-files-o"></i> <span class="d-none d-lg-inline">{{ trans('messages.files') }}</span>
                 </a>
             </li>
         @endif
@@ -157,7 +157,7 @@
         @if ($group->isPublic() )
             <li class="nav-item" role="presentation">
                 <a class="nav-link @if (isset($tab) && ($tab == 'users')) active @endif" href="{{ route('groups.users.index', $group->id) }}">
-                    <i class="fa fa-users"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.members') }}</span>
+                    <i class="fa fa-users"></i> <span class="d-none d-lg-inline">{{ trans('messages.members') }}</span>
                 </a>
             </li>
         @endif
@@ -166,7 +166,7 @@
         @if ($group->isPublic() )
             <li class="nav-item" role="presentation">
                 <a class="nav-link @if (isset($tab) && ($tab == 'settings')) active @endif" href="{{ action('MembershipController@create', $group->id) }}">
-                    <i class="fa fa-cog"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.join') }}</span>
+                    <i class="fa fa-cog"></i> <span class="d-none d-lg-inline">{{ trans('messages.join') }}</span>
                 </a>
             </li>
         @endif

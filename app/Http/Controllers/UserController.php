@@ -21,7 +21,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('cache', ['only' => ['cover', 'avatar']]);
-        $this->middleware('verified', ['except' => ['index', 'cover', 'avatar']]);
+        $this->middleware('verified', ['except' => ['index', 'cover', 'avatar', 'sendVerificationAgain']]);
         $this->middleware('throttle:2,1', ['only' => ['mail', 'sendVerificationAgain']]); // 2 emails per  minute should be enough for non bots
     }
 
@@ -202,7 +202,7 @@ class UserController extends Controller
             $mailer->sendEmailConfirmationTo($user);
             flash(trans('messages.invitation_sent_again'));
 
-            return redirect()->route('users.show', [$user->id]);
+            return redirect()->route('users.show', $user);
         }
     }
 
