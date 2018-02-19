@@ -161,7 +161,7 @@ class UserTest extends Tests\BrowserKitTestCase
 
         $this->actingAs($user)
         ->visit('/groups/'.$group->id.'/join')
-        ->see(trans('messages.not_allowed'));
+        ->see(trans('membership.apply_for_group'));
     }
 
     public function testNewbieCanCreateGroup()

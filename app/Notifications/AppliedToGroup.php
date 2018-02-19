@@ -48,12 +48,6 @@ class AppliedToGroup extends Notification
                     ->subject(trans('notification.user_applied_to_the_group', ['user' => $this->user->name, 'group' => $this->group->name]))
                     ->line(trans('notification.user_applied_to_the_group', ['user' => $this->user->name, 'group' => $this->group->name]))
                     ->action(trans('messages.visit_link'), route('groups.users.index', $this->group))
-                    /*
-                    ->action(trans('messages.confirm_user'), action('Admin\MembershipController@confirm', [$this->group, $this->user]))
-                    ->line('<a href="' . action('Admin\MembershipController@removeUser', [$this->group, $this->user]) . '">' .
-                    trans('messages.remove_user') . '</a>')
-
-                    */
                     ->line(trans('messages.thank_you'));
     }
 

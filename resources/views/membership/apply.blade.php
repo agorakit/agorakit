@@ -8,12 +8,7 @@
 
         <h1>{{trans('membership.apply_for_group')}} <em>{{$group->name}}</em></h1>
 
-
-
-
-        {!! Form::open(array('action' => ['MembershipController@apply', $group->id])) !!}
-
-
+        {!! Form::open(array('action' => ['MembershipController@store', $group])) !!}
 
         <div class="form-group">
             {!! Form::submit(trans('membership.apply'), ['class' => 'btn btn-primary form-control']) !!}

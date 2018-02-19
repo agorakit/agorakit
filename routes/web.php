@@ -115,9 +115,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('groups/{group}/invite/confirm/{token}', 'InviteController@inviteConfirm')->name('groups.invite.confirm');
     Route::post('groups/{group}/invite/confirm/{token}', 'InviteController@inviteRegister')->name('groups.invite.register');
 
-    // User can candidate to a closed group
-    Route::get('groups/{group}/apply', 'MembershipController@applyForm')->name('groups.apply.form');
-    Route::post('groups/{group}/apply', 'MembershipController@apply')->name('groups.apply');
+    // Join and apply for a group
+    Route::get('groups/{group}/join', 'MembershipController@create')->name('groups.membership.create');
+    Route::post('groups/{group}/join', 'MembershipController@store')->name('groups.membership.store');
+
 
     // General discussion create route
     Route::get('discussions/create', 'DiscussionController@create')->name('discussions.create');
@@ -143,9 +144,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('discussions/mention', 'MentionController@discussions')->name('.discussions.mention');
         Route::get('files/mention', 'MentionController@files')->name('.files.mention');
 
-        // memberships & preferences
-        Route::get('join', 'MembershipController@create')->name('.membership.create');
-        Route::post('join', 'MembershipController@store')->name('.membership.store');
+        // preferences and leave group
         Route::get('preferences', 'MembershipController@edit')->name('.membership.edit');
         Route::post('preferences', 'MembershipController@update')->name('.membership.update');
         Route::get('leave', 'MembershipController@destroyConfirm')->name('.membership.deleteconfirm');
