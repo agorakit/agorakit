@@ -1,9 +1,6 @@
 <?php
 
 return array (
-  //============================== New strings to translate ==============================//
-  'more' => 'TODO: more',
-  'user_invited' => 'TODO: user_invited',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Eine Nachricht für Sie',
   'accept_invitation' => 'Die Einladung akzeptieren',
@@ -25,6 +22,7 @@ return array (
   'begins' => 'Startet',
   'body' => 'Hauptteil',
   'cancel' => 'Ich habe mich anders entschieden, zurück',
+  'candidates' => 'TODO: candidates',
   'change_my_password' => 'Mein Passwort ändern',
   'changed' => 'Geändert',
   'changed_from' => 'Geändert von',
@@ -35,6 +33,7 @@ return array (
   'click_to_confirm' => 'Klicken Sie hier, um die Eingabe zu bestätigen',
   'comments' => 'Kommentare',
   'confirm_password' => 'Passwort bestätigen',
+  'confirm_user' => 'TODO: confirm_user',
   'confirm_your_email' => 'E-Mail-Adresse bestätigen',
   'contact' => 'Kontakt',
   'contact_this_user' => 'Diesen Teilnehmer kontaktieren',
@@ -117,6 +116,7 @@ return array (
   'message' => 'Nachricht',
   'message_sent' => 'Nachricht versendet',
   'modify' => 'Ändern',
+  'more' => 'TODO: more',
   'name' => 'Name',
   'news_from_group_email_subject' => 'Neuigkeiten von der Gruppe',
   'next_actions' => 'Nächste Handlungen',
@@ -177,6 +177,7 @@ return array (
   'upload' => 'TODO: upload',
   'upload_files' => 'TODO: upload_files',
   'user_added_successfuly' => 'Benutzer erfolgreich hinzugefügt',
+  'user_invited' => 'TODO: user_invited',
   'user_made_admin_successfuly' => 'Benutzer-admin erfolgreich',
   'user_made_member_successfuly' => 'Benutzer mitglied erfolgreich',
   'user_profile' => 'Nutzerprofil',
