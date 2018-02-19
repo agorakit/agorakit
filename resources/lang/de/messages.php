@@ -14,6 +14,7 @@ return array (
   'admins' => 'TODO: admins',
   'agenda' => 'Agenda',
   'agenda_my' => 'Agenda meine gruppen',
+  'agenda_others' => 'Agenda von anderen gruppen',
   'all_groups' => 'Alle Gruppen',
   'are_you_sure' => 'Sind Sie sicher ?',
   'author' => 'Autor',
@@ -98,6 +99,7 @@ return array (
   'last_activity' => 'TODO: last_activity',
   'latest_discussions' => 'Neueste Diskussionen',
   'latest_discussions_my' => 'Aktuelle diskussionen in meinen gruppen',
+  'latest_discussions_others' => 'Neueste diskussionen die anderen',
   'latest_files' => 'Neueste Dateien',
   'latest_users' => 'Neueste Nutzer',
   'leave_this_group' => 'Dieser Gruppe abtreten',
@@ -206,8 +208,6 @@ return array (
   //================================== Obsolete strings ==================================//
   'LLH:obsolete' => 
   array (
-    'agenda_others' => 'Agenda von anderen gruppen',
-    'latest_discussions_others' => 'Neueste diskussionen die anderen',
     'toggle_navigation' => 'Navigierung hin- und herschalten',
   ),
 );

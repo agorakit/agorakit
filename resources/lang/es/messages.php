@@ -14,6 +14,7 @@ return array (
   'admins' => 'Administradores',
   'agenda' => 'Calendario',
   'agenda_my' => 'Los calendarios de mi grupo',
+  'agenda_others' => 'Calendario de otros grupos',
   'all_groups' => 'Todos los grupos',
   'are_you_sure' => '¿Estás seguro?',
   'author' => 'Autor',
@@ -99,6 +100,7 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'last_activity' => 'Última actividad',
   'latest_discussions' => 'Últimas discusiones',
   'latest_discussions_my' => 'Últimas discusiones en mis grupos',
+  'latest_discussions_others' => 'Últimas discusiones en otros grupos',
   'latest_files' => 'Últimos archivos',
   'latest_users' => 'Últimos usuarios',
   'leave_this_group' => 'Dejar este grupo',
@@ -207,8 +209,6 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   //================================== Obsolete strings ==================================//
   'LLH:obsolete' => 
   array (
-    'agenda_others' => 'Calendario de otros grupos',
-    'latest_discussions_others' => 'Últimas discusiones en otros grupos',
     'toggle_navigation' => 'Conmutar navegación',
   ),
 );
