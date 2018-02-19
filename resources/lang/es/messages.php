@@ -1,9 +1,6 @@
 <?php
 
 return array (
-  //============================== New strings to translate ==============================//
-  'more' => 'TODO: more',
-  'user_invited' => 'TODO: user_invited',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un mensaje para usted',
   'accept_invitation' => 'Acepta la invitación',
@@ -25,6 +22,7 @@ return array (
   'begins' => 'Comienza',
   'body' => 'Cuerpo',
   'cancel' => 'Cambié de opinión, cancelé',
+  'candidates' => 'TODO: candidates',
   'change_my_password' => 'Cambiar mi contraseña',
   'changed' => 'Cambiado',
   'changed_from' => 'Modificado a partir de',
@@ -35,6 +33,7 @@ return array (
   'click_to_confirm' => 'Haga clic para confirmar',
   'comments' => 'Comentarios',
   'confirm_password' => 'Confirmar contraseña',
+  'confirm_user' => 'TODO: confirm_user',
   'confirm_your_email' => 'Confirme su email',
   'contact' => 'contacto',
   'contact_this_user' => 'Contactar con este usuario',
@@ -118,6 +117,7 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'message' => 'mensaje',
   'message_sent' => 'Mensaje enviado',
   'modify' => 'Modificar',
+  'more' => 'TODO: more',
   'name' => 'Nombre',
   'news_from_group_email_subject' => 'Noticias del grupo',
   'next_actions' => 'Próximas acciones',
@@ -178,6 +178,7 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'upload' => 'Subir',
   'upload_files' => 'Subir archivos',
   'user_added_successfuly' => 'Usuario agregado correctamente',
+  'user_invited' => 'TODO: user_invited',
   'user_made_admin_successfuly' => 'Administrador agregado correctamente',
   'user_made_member_successfuly' => 'Miembro agregado correctamente',
   'user_profile' => 'Perfil del usuario',
