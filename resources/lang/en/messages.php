@@ -14,6 +14,7 @@ return array (
   'admins' => 'Admins',
   'agenda' => 'Calendar',
   'agenda_my' => 'My group\'s calendars',
+  'agenda_others' => 'Other groups\' calendars',
   'all_groups' => 'All groups',
   'are_you_sure' => 'Are you sure?',
   'author' => 'Author',
@@ -42,7 +43,7 @@ return array (
   'create_link' => 'Create a link',
   'create_link_button' => 'Create Link',
   'create_link_help' => 'Here you can add a link (URL). For example link to videos, shared documents, etc...
-Enter a correct URL starting with http:// and set a title for this link. You can also add tags.',
+  Enter a correct URL starting with http:// and set a title for this link. You can also add tags.',
   'created' => 'Created',
   'date' => 'date',
   'delete' => 'delete',
@@ -99,6 +100,7 @@ Enter a correct URL starting with http:// and set a title for this link. You can
   'last_activity' => 'Last activity',
   'latest_discussions' => 'Latest discussions',
   'latest_discussions_my' => 'Latest discussions in my groups',
+  'latest_discussions_others' => 'Latest discussions in other groups',
   'latest_files' => 'Latest files',
   'latest_users' => 'Latest users',
   'leave_this_group' => 'Leave this group',
@@ -207,8 +209,6 @@ Enter a correct URL starting with http:// and set a title for this link. You can
   //================================== Obsolete strings ==================================//
   'LLH:obsolete' => 
   array (
-    'agenda_others' => 'Other groups\' calendars',
-    'latest_discussions_others' => 'Latest discussions in other groups',
     'toggle_navigation' => 'Toggle navigation',
   ),
 );
