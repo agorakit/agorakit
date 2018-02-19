@@ -39,7 +39,7 @@ class DashboardController extends Controller
             $my_actions = \App\Action::with('user', 'group')
             ->whereIn('group_id', $my_groups->pluck('id'))
             ->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->paginate(10);
-            /*
+
             $other_discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group')
             ->has('user')
             ->whereIn('group_id', $other_groups->pluck('id'))
@@ -49,15 +49,17 @@ class DashboardController extends Controller
             ->whereIn('group_id', $other_groups->pluck('id'))
             ->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->paginate(10);
 
+            /*
             $activities = \App\Activity::with('user', 'group', 'model')->orderBy('created_at', 'asc')->paginate(10);
-*/
+            */
+
             return view('dashboard.homepage')
             ->with('tab', 'homepage')
             ->with('my_groups', $my_groups)
             ->with('my_discussions', $my_discussions)
             ->with('my_actions', $my_actions)
-            //->with('other_actions', $other_actions)
-            //->with('other_discussions', $other_discussions)
+            ->with('other_actions', $other_actions)
+            ->with('other_discussions', $other_discussions)
             //->with('activities', $activities)
             ;
 

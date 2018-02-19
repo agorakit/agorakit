@@ -6,6 +6,7 @@ body
 {
     padding-bottom: 150px;
     background-image: url("/images/seamless_paper_texture.png");
+    font-size: 0.9rem;
 }
 
 
@@ -31,6 +32,13 @@ body
 .spacer
 {
     padding-bottom: 2em;
+}
+
+/************************** Header ************************************/
+
+h1.small
+{
+    font-size: 1.3rem;
 }
 
 
@@ -299,6 +307,8 @@ table, th, tr
 }
 
 /******************************** Mobile **************************************/
+
+/*
 @media screen and (max-width: 640px) {
   th.date {
     width: 10%;
@@ -357,18 +367,11 @@ table, th, tr
       font-size: 13px;
   }
 }
+*/
 
 
 /******************************** UI ******************************************/
 
-.btn-right {
-    float: right;
-}
-
-.btn.active, .btn.active:hover
-{
-    background-color: gray;
-}
 
 .history {
     padding: 15px;
@@ -398,10 +401,6 @@ table, th, tr
     text-decoration: underline;
 }
 
-.alert
-{
-    margin-top : 2em;
-}
 
 .alert a {
     text-decoration: underline;
