@@ -53,7 +53,7 @@ class Group extends Model
     */
     public function users()
     {
-        return $this->belongsToMany('App\User', 'membership')->withTimestamps()->withPivot('membership');
+        return $this->belongsToMany('App\User', 'membership')->where('membership', '>=',\App\Membership::MEMBER)->withTimestamps()->withPivot('membership');
     }
 
     /**
@@ -63,6 +63,15 @@ class Group extends Model
     {
         return $this->belongsToMany('App\User', 'membership')->where('membership', \App\Membership::ADMIN)->withTimestamps()->withPivot('membership');
     }
+
+    /**
+    * Returns all the candidates of this group.
+    */
+    public function candidates()
+    {
+        return $this->belongsToMany('App\User', 'membership')->where('membership', \App\Membership::CANDIDATE)->withTimestamps()->withPivot('membership');
+    }
+
 
     /**
     * The user who created or updated this group title and description.

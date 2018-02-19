@@ -105,14 +105,20 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('groups/create', 'GroupController@create')->name('groups.create');
     Route::post('groups/create', 'GroupController@store')->name('groups.store');
 
-    // Groups : what everyone can see
+    // Groups : what everyone can see, homepage and covers
     Route::get('groups/{group}', 'GroupController@show')->name('groups.show');
     Route::get('groups/{group}/cover', 'GroupThumbnailController@cover')->name('groups.cover');
     Route::get('groups/{group}/cover/small', 'GroupThumbnailController@avatar')->name('groups.cover.small');
     Route::get('groups/{group}/cover/carousel', 'GroupThumbnailController@carousel')->name('groups.cover.carousel');
 
+    // Invite system for groups
     Route::get('groups/{group}/invite/confirm/{token}', 'InviteController@inviteConfirm')->name('groups.invite.confirm');
     Route::post('groups/{group}/invite/confirm/{token}', 'InviteController@inviteRegister')->name('groups.invite.register');
+
+    // Join and apply for a group
+    Route::get('groups/{group}/join', 'MembershipController@create')->name('groups.membership.create');
+    Route::post('groups/{group}/join', 'MembershipController@store')->name('groups.membership.store');
+
 
     // General discussion create route
     Route::get('discussions/create', 'DiscussionController@create')->name('discussions.create');
@@ -138,9 +144,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('discussions/mention', 'MentionController@discussions')->name('.discussions.mention');
         Route::get('files/mention', 'MentionController@files')->name('.files.mention');
 
-        // memberships & preferences
-        Route::get('join', 'MembershipController@create')->name('.membership.create');
-        Route::post('join', 'MembershipController@store')->name('.membership.store');
+        // preferences and leave group
         Route::get('preferences', 'MembershipController@edit')->name('.membership.edit');
         Route::post('preferences', 'MembershipController@update')->name('.membership.update');
         Route::get('leave', 'MembershipController@destroyConfirm')->name('.membership.deleteconfirm');
@@ -154,9 +158,12 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('users/add', 'Admin\MembershipController@addUserForm')->name('.users.create');
         Route::post('users/add', 'Admin\MembershipController@addUser')->name('.users.store');
         Route::get('users/{user}/admin', 'Admin\MembershipController@editUserForm')->name('.users.edit');
-        Route::get('users/delete/{user}', 'Admin\MembershipController@removeUser')->name('.users.delete');
+        Route::get('users/{user}/delete', 'Admin\MembershipController@removeUser')->name('.users.delete');
         Route::get('users/{user}/admin/add', 'Admin\MembershipController@addAdminUser')->name('.users.addadmin');
         Route::get('users/{user}/admin/delete', 'Admin\MembershipController@removeAdminUser')->name('.users.removeadmin');
+
+        Route::get('users/{user}/confirm', 'Admin\MembershipController@confirm')->name('.users.confirm');
+
 
         // in the case of closed group, we show an howto join message
         Route::get('howtojoin', 'MembershipController@howToJoin')->name('.howtojoin');

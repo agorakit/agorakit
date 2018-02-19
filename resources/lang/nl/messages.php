@@ -1,9 +1,6 @@
 <?php
 
 return array (
-  //============================== New strings to translate ==============================//
-  'more' => 'TODO: more',
-  'user_invited' => 'TODO: user_invited',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'U heeft een bericht',
   'accept_invitation' => 'De uitnodiging accepteren',
@@ -25,6 +22,7 @@ return array (
   'begins' => 'Start',
   'body' => 'Tekst',
   'cancel' => 'Ik heb me bedacht, annuleren',
+  'candidates' => 'TODO: candidates',
   'change_my_password' => 'Mijn wachtwoord veranderen',
   'changed' => 'veranderd',
   'changed_from' => 'veranderd van',
@@ -35,6 +33,7 @@ return array (
   'click_to_confirm' => 'Klik om uw mailadres te bevestigen',
   'comments' => 'Commentaar',
   'confirm_password' => 'Wachtwoord bevestigen',
+  'confirm_user' => 'TODO: confirm_user',
   'confirm_your_email' => 'Bevestig uw e-mailadres',
   'contact' => 'Contacteren',
   'contact_this_user' => 'Deze persoon contacteren',
@@ -117,6 +116,7 @@ return array (
   'message' => 'Bericht',
   'message_sent' => 'Bericht verstuurd',
   'modify' => 'Bewerken',
+  'more' => 'TODO: more',
   'name' => 'Naam',
   'news_from_group_email_subject' => 'Nieuws van :',
   'next_actions' => 'Naast acties',
@@ -177,6 +177,7 @@ return array (
   'upload' => 'TODO: upload',
   'upload_files' => 'TODO: upload_files',
   'user_added_successfuly' => 'Gebruiker toegevoegd',
+  'user_invited' => 'TODO: user_invited',
   'user_made_admin_successfuly' => 'Gebruiker admin succes',
   'user_made_member_successfuly' => 'Gebruiker lid succesvol',
   'user_profile' => 'Gebruikersprofiel',

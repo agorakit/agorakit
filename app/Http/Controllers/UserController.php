@@ -34,11 +34,14 @@ class UserController extends Controller
     {
         $users = $group->users()->with('memberships')->orderBy('updated_at', 'desc')->paginate(25);
         $admins = $group->admins()->orderBy('name')->get();
-        $invites = \App\Invite::where('group_id', $group->id)->get();
+        $candidates = $group->candidates()->orderBy('name')->get();
+        $invites = \App\Invite::where('group_id', $group->id)->whereNull('claimed_at')->get();
+
 
         return view('users.index')
         ->with('users', $users)
         ->with('admins', $admins)
+        ->with('candidates', $candidates)
         ->with('invites', $invites)
         ->with('group', $group)
         ->with('tab', 'users');
