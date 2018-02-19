@@ -8,6 +8,15 @@
 
         <h1>{{trans('membership.apply_for_group')}} <em>{{$group->name}}</em></h1>
 
+
+
+        <div class="help">
+            <h4>{{trans('messages.how_does_it_work')}}</h4>
+            <p>
+                {{trans('membership.apply_intro')}}
+            </p>
+        </div>
+
         {!! Form::open(array('action' => ['MembershipController@store', $group])) !!}
 
         <div class="form-group">

@@ -2,13 +2,14 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'application_stored' => 'Votre demande d\'adhésion a été enregistrée',
-  'apply' => 'Faire une demande d\'adhésion au groupe',
-  'apply_for_group' => 'Rejoindre le groupe',
+  'apply_intro' => 'Ce groupe est un groupe fermé. Vous pouvez demander de le rejoindre ci-dessous. Un responsable du groupe recevra votre demande et s\'en occupera.',
   //==================================== Translations ====================================//
   'add_button' => 'Ajout d\'un utilisateur(s)',
   'add_users' => 'Ajouter des utilisateurs',
   'add_users_intro' => 'L\'utiliser pour ajouter directement des utilisateurs existants à ce groupe sans invitation. Admin uniquement',
+  'application_stored' => 'Votre demande d\'adhésion a été enregistrée',
+  'apply' => 'Faire une demande d\'adhésion au groupe',
+  'apply_for_group' => 'Rejoindre le groupe',
   'click_here' => 'Cliquez ici',
   'directly_add_users_button' => 'Ajouter directement des utilisateurs',
   'everyday' => 'Tous les jours',

@@ -49,18 +49,18 @@ class UserTest extends Tests\BrowserKitTestCase
 
         $this->visit('/register')
         ->type('Roberto', 'name')
-        ->type('roberto@example.com', 'email')
+        ->type('admin@agorakit.org', 'email')
         ->type('123456', 'password')
         ->type('123456', 'password_confirmation')
         ->press('Register')
         ->see('Agorakit');
 
-        $this->seeInDatabase('users', ['email' => 'roberto@example.com']);
+        $this->seeInDatabase('users', ['email' => 'admin@agorakit.org']);
     }
 
     public function testGroupCreation()
     {
-        $user = App\User::where('email', 'roberto@example.com')->first();
+        $user = App\User::where('email', 'admin@agorakit.org')->first();
 
         $user->confirmEmail();
 
@@ -75,7 +75,7 @@ class UserTest extends Tests\BrowserKitTestCase
 
     public function testDiscussionCreation()
     {
-        $user = App\User::where('email', 'roberto@example.com')->first();
+        $user = App\User::where('email', 'admin@agorakit.org')->first();
 
         $group = App\Group::where('name', 'Test group')->first();
 
@@ -90,7 +90,7 @@ class UserTest extends Tests\BrowserKitTestCase
 
     public function testActionCreation()
     {
-        $user = App\User::where('email', 'roberto@example.com')->first();
+        $user = App\User::where('email', 'admin@agorakit.org')->first();
 
         $group = App\Group::where('name', 'Test group')->first();
 
@@ -109,7 +109,7 @@ class UserTest extends Tests\BrowserKitTestCase
 
     public function testPrivateGroupCreation()
     {
-        $user = App\User::where('email', 'roberto@example.com')->first();
+        $user = App\User::where('email', 'admin@agorakit.org')->first();
 
         $this->actingAs($user)
         ->visit('groups/create')
@@ -128,20 +128,20 @@ class UserTest extends Tests\BrowserKitTestCase
 
         $this->visit('/register')
         ->type('Newbie', 'name')
-        ->type('newbie@example.com', 'email')
+        ->type('newbie@agorakit.org', 'email')
         ->type('123456', 'password')
         ->type('123456', 'password_confirmation')
         ->press('Register')
         ->see('Agorakit');
 
-        $this->seeInDatabase('users', ['email' => 'newbie@example.com']);
+        $this->seeInDatabase('users', ['email' => 'newbie@agorakit.org']);
     }
 
     public function testNewbieCanJoinOpenGroup()
     {
         $group = App\Group::where('name', 'Test group')->first();
 
-        $user = App\User::where('email', 'newbie@example.com')->first();
+        $user = App\User::where('email', 'newbie@agorakit.org')->first();
 
         $user->confirmEmail();
 
@@ -156,7 +156,7 @@ class UserTest extends Tests\BrowserKitTestCase
     {
         $group = App\Group::where('name', 'Private test group')->first();
 
-        $user = App\User::where('email', 'newbie@example.com')->first();
+        $user = App\User::where('email', 'newbie@agorakit.org')->first();
 
 
         $this->actingAs($user)
@@ -168,7 +168,7 @@ class UserTest extends Tests\BrowserKitTestCase
     {
         $group = App\Group::where('name', 'Private test group')->first();
 
-        $user = App\User::where('email', 'newbie@example.com')->first();
+        $user = App\User::where('email', 'newbie@agorakit.org')->first();
 
 
         $this->actingAs($user)
@@ -183,8 +183,8 @@ class UserTest extends Tests\BrowserKitTestCase
         // don't you like this function name?
         $group = App\Group::where('name', 'Private test group')->first();
 
-        $user = App\User::where('email', 'roberto@example.com')->first();
-        $newbie = App\User::where('email', 'newbie@example.com')->first();
+        $user = App\User::where('email', 'admin@agorakit.org')->first();
+        $newbie = App\User::where('email', 'newbie@agorakit.org')->first();
 
         $this->actingAs($user)
         ->visit('groups/'.$group->id.'/users')
@@ -199,7 +199,7 @@ class UserTest extends Tests\BrowserKitTestCase
 
     public function testNewbieCanCreateGroup()
     {
-        $user = App\User::where('email', 'newbie@example.com')->first();
+        $user = App\User::where('email', 'newbie@agorakit.org')->first();
 
         $this->actingAs($user)
         ->visit('groups/create')
@@ -212,21 +212,21 @@ class UserTest extends Tests\BrowserKitTestCase
 
     public function testRobertoIsAdminOfTestGroup()
     {
-        $user = App\User::where('email', 'roberto@example.com')->first();
+        $user = App\User::where('email', 'admin@agorakit.org')->first();
         $group = App\Group::where('name', 'Test group')->first();
         $this->assertTrue($user->isAdminOf($group));
     }
 
     public function testNewbieIsNotAdminOfTestGroup()
     {
-        $user = App\User::where('email', 'newbie@example.com')->first();
+        $user = App\User::where('email', 'newbie@agorakit.org')->first();
         $group = App\Group::where('name', 'Test group')->first();
         $this->assertFalse($user->isAdminOf($group));
     }
 
     public function testNewbieIsAdminOfTestGroupOfNewbie()
     {
-        $user = App\User::where('email', 'newbie@example.com')->first();
+        $user = App\User::where('email', 'newbie@agorakit.org')->first();
         $group = App\Group::where('name', 'Test group of newbie')->first();
         $this->assertTrue($user->isAdminOf($group));
     }
@@ -238,8 +238,8 @@ class UserTest extends Tests\BrowserKitTestCase
     {
 
         $group = App\Group::where('name', 'Test group')->firstOrFail();
-        $user = App\User::where('email', 'newbie@example.com')->firstOrFail();
-        $roberto = App\User::where('email', 'roberto@example.com')->firstOrFail();
+        $user = App\User::where('email', 'newbie@agorakit.org')->firstOrFail();
+        $roberto = App\User::where('email', 'admin@agorakit.org')->firstOrFail();
 
         // let's first create a discussion in test group that newbie has not read yet, and a long time ago
         $discussion = new \App\Discussion;

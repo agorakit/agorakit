@@ -2,13 +2,14 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'application_stored' => 'Your application to this group has been stored',
-  'apply' => 'Apply',
-  'apply_for_group' => 'Apply for the group',
+  'apply_intro' => 'This group is closed so you need to apply using the button bellow. An admin will be notified and will act accordingly.',
   //==================================== Translations ====================================//
   'add_button' => 'Add user(s)',
   'add_users' => 'Add users',
   'add_users_intro' => 'Use this to directly add existing users to the group without invitation. Admin only',
+  'application_stored' => 'Your application to this group has been stored',
+  'apply' => 'Apply',
+  'apply_for_group' => 'Apply for the group',
   'click_here' => 'Click here',
   'directly_add_users_button' => 'Directly add users',
   'everyday' => 'Every day',
