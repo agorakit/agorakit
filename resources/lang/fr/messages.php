@@ -1,9 +1,6 @@
 <?php
 
 return array (
-  //============================== New strings to translate ==============================//
-  'more' => 'Plus',
-  'user_invited' => 'Utilisateurs-trices invité-es',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'accept_invitation' => 'Accepter l\'invitation',
@@ -26,6 +23,7 @@ return array (
   'begins' => 'Début',
   'body' => 'Texte',
   'cancel' => 'J\'ai changé d\'avis, annuler',
+  'candidates' => 'Candidats',
   'change_my_password' => 'Changer mon mot de passe',
   'changed' => 'a modifié',
   'changed_from' => 'valeur initiale',
@@ -36,6 +34,7 @@ return array (
   'click_to_confirm' => 'Cliquez ici pour confirmer votre adresse email',
   'comments' => 'Commentaires',
   'confirm_password' => 'Confirmer le mot de passe',
+  'confirm_user' => 'Confirmer l\'utilisateur',
   'confirm_your_email' => 'Vérifiez votre adresse email',
   'contact' => 'Contacter',
   'contact_this_user' => 'Contacter cette personne',
@@ -119,6 +118,7 @@ return array (
   'message' => 'Message',
   'message_sent' => 'Message envoyé',
   'modify' => 'Modifier',
+  'more' => 'Plus',
   'name' => 'Nom',
   'news_from_group_email_subject' => 'Des nouvelles du groupe',
   'next_actions' => 'Prochaines actions',
@@ -179,6 +179,7 @@ return array (
   'upload' => 'Envoyer',
   'upload_files' => 'Envoyer les fichiers',
   'user_added_successfuly' => 'L\'utilisateur ajouté avec succès',
+  'user_invited' => 'Utilisateurs-trices invité-es',
   'user_made_admin_successfuly' => 'Utilisateur rendu admin avec succès',
   'user_made_member_successfuly' => 'Utilisateur membre avec succès',
   'user_profile' => 'Profil utilisateur',
@@ -205,7 +206,7 @@ return array (
   'your_groups' => 'Mes groupes',
   'your_search_for' => 'Votre recherche pour',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' =>
+  'LLH:obsolete' => 
   array (
     'agenda_others' => 'Agenda des autres groupes',
     'latest_discussions_others' => 'Dernières discussions dans les autres groupes',

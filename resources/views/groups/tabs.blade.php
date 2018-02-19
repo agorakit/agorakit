@@ -77,19 +77,11 @@
                 </a>
             </li>
         @else
-            @can ('join', $group)
                 <li class="nav-item">
-                    <a href="{{ action('MembershipController@create', $group->id) }}"  class="nav-link @if (isset($tab) && ($tab == 'preferences')) active @endif">
+                    <a href="{{ action('MembershipController@create', $group->id) }}"  class="nav-link @if (isset($tab) && ($tab == 'settings')) active @endif">
                         <i class="fa fa-sign-in"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.join') }}</span>
                     </a>
                 </li>
-            @else
-                <li class="nav-item">
-                    <a href="{{ action('MembershipController@howToJoin', $group->id) }}"  class="nav-link @if (isset($tab) && ($tab == 'preferences')) active @endif">
-                        <i class="fa fa-lock"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.join') }}</span>
-                    </a>
-                </li>
-            @endcan
         @endif
 
 

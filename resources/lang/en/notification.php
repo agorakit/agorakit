@@ -2,5 +2,7 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'you_have_been_added_to_the_group' => 'TODO: you_have_been_added_to_the_group',
+  'user_applied_to_the_group' => 'User :user applied to the group :group',
+  //==================================== Translations ====================================//
+  'you_have_been_added_to_the_group' => 'You have been added to the group',
 );
