@@ -2,13 +2,14 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'application_stored' => 'TODO: application_stored',
-  'apply' => 'TODO: apply',
-  'apply_for_group' => 'TODO: apply_for_group',
+  'apply_intro' => 'TODO: apply_intro',
   //==================================== Translations ====================================//
   'add_button' => 'Add user(s)',
   'add_users' => 'Benutzer hinzufügen',
   'add_users_intro' => 'Verwenden Sie diese, um direkt hinzufügen von vorhandenen Benutzern zu der Gruppe ohne Einladung. Admin nur',
+  'application_stored' => 'TODO: application_stored',
+  'apply' => 'TODO: apply',
+  'apply_for_group' => 'TODO: apply_for_group',
   'click_here' => 'Hier klicken',
   'directly_add_users_button' => 'Direkt benutzer hinzufügen',
   'everyday' => 'Jeden Tag',
