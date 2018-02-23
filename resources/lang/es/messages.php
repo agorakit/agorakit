@@ -1,6 +1,11 @@
 <?php
 
 return array (
+  //============================== New strings to translate ==============================//
+  'start_date' => 'TODO: start_date',
+  'start_time' => 'TODO: start_time',
+  'stop_date' => 'TODO: stop_date',
+  'stop_time' => 'TODO: stop_time',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un mensaje para usted',
   'accept_invitation' => 'Acepta la invitación',
@@ -167,7 +172,6 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'something_wrong' => 'Algo no funciona con su envío',
   'start' => 'Inicio',
   'started_by' => 'Iniciado por',
-  'starts' => 'Comienza',
   'stop' => 'Detener',
   'tags' => 'Etiquetas',
   'tags_help' => 'Elija o escriba una o más etiquetas (palabras clave si lo prefiere). Esto ayudará a otros a encontrar su contribución. En la lista verás las etiquetas que ya se han utilizado en otros lugares. Trate de seguir las etiquetas existentes. Separe cada etiqueta con una coma.',
@@ -209,6 +213,7 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   //================================== Obsolete strings ==================================//
   'LLH:obsolete' => 
   array (
+    'starts' => 'Comienza',
     'toggle_navigation' => 'Conmutar navegación',
   ),
 );
