@@ -1,0 +1,42 @@
+.actions .action
+{
+  width: 100%;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  align-items: top;
+}
+
+.action .unread
+{
+  font-weight: bold;
+}
+
+.action .avatar
+{
+  margin-right: 20px;
+}
+
+.action .name
+{
+  font-weight: bold;
+}
+
+.action .date
+{
+
+  flex-shrink: 0;
+  padding-right: 20px;
+  text-align: center;
+}
+
+.action .date .day
+{
+  font-size: 2em;
+}
+
+
+.action .group
+{
+  font-size: 0.8em;
+}

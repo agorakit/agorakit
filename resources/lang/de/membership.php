@@ -1,10 +1,15 @@
 <?php
 
 return array (
+  //============================== New strings to translate ==============================//
+  'apply_intro' => 'TODO: apply_intro',
   //==================================== Translations ====================================//
   'add_button' => 'Add user(s)',
   'add_users' => 'Benutzer hinzufügen',
   'add_users_intro' => 'Verwenden Sie diese, um direkt hinzufügen von vorhandenen Benutzern zu der Gruppe ohne Einladung. Admin nur',
+  'application_stored' => 'TODO: application_stored',
+  'apply' => 'TODO: apply',
+  'apply_for_group' => 'TODO: apply_for_group',
   'click_here' => 'Hier klicken',
   'directly_add_users_button' => 'Direkt benutzer hinzufügen',
   'everyday' => 'Jeden Tag',
@@ -34,13 +39,4 @@ return array (
   'welcome' => 'Wilkommen',
   'when_to_receive_notifications' => 'Wann möchten Sie Neuigkeiten per E-Mail von dieser Gruppe erhalten?',
   'your_preferences_for' => 'Ihre Präferenzen für die Gruppe',
-  //================================== Obsolete strings ==================================//
-  'LLH:obsolete' => 
-  array (
-    'add_users_button' => 'Benutzer hinzufügen',
-    'membership' => 
-    array (
-      'add_users_button' => 'Benutzer hinzufügen',
-    ),
-  ),
 );

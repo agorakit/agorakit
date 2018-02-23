@@ -5,75 +5,91 @@
   @include('groups.tabs')
   <div class="tab_content">
 
-      @include('partials.invite')
+    @include('partials.invite')
 
 
 
 
-      <div class="discussion">
+    <div class="discussion mb-5">
+
+      <div class="d-flex justify-content-between">
         <h2 class="name">
-          <a href="{{ route('groups.discussions.index', [$group->id]) }}">{{trans('messages.discussions')}}</a> <i class="fa fa-angle-right"></i>
           {{ $discussion->name }}
         </h2>
 
+        <div class="ml-4 dropdown">
+          <button class="btn btn-secondary-outline dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-wrench" aria-hidden="true"></i>
 
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-
-
-        <div class="meta">{{trans('messages.started_by')}} <span class="user"><a href="{{ route('users.show', [$discussion->user->id]) }}">{{ $discussion->user->name}}</a></span>, {{trans('messages.in')}} {{ $discussion->group->name}} {{ $discussion->created_at->diffForHumans()}} </div>
-        <div class="body">
-          {!! filter($discussion->body) !!}
-
-          <p>
             @can('update', $discussion)
-              <a class="btn btn-default btn-xs" href="{{ route('groups.discussions.edit', [$group->id, $discussion->id]) }}">
+              <a class="dropdown-item" href="{{ route('groups.discussions.edit', [$group->id, $discussion->id]) }}">
                 <i class="fa fa-pencil"></i>
                 {{trans('messages.edit')}}
               </a>
             @endcan
 
             @can('delete', $discussion)
-              <a class="btn btn-warning btn-xs" href="{{ route('groups.discussions.deleteconfirm', [$group->id, $discussion->id]) }}">
+              <a class="dropdown-item" href="{{ route('groups.discussions.deleteconfirm', [$group->id, $discussion->id]) }}">
                 <i class="fa fa-trash"></i>
                 {{trans('messages.delete')}}
               </a>
             @endcan
 
             @if ($discussion->revisionHistory->count() > 0)
-              <a class="btn btn-default btn-xs" href="{{route('groups.discussions.history', [$group->id, $discussion->id])}}"><i class="fa fa-history"></i> {{trans('messages.show_history')}}</a>
+              <a class="dropdown-item" href="{{route('groups.discussions.history', [$group->id, $discussion->id])}}"><i class="fa fa-history"></i> {{trans('messages.show_history')}}</a>
             @endif
-          </p>
-
+          </div>
         </div>
-      </div>
-
-
-
-
-      <div class="comments">
-        @foreach ($discussion->comments as $comment_key => $comment)
-          @include('comments._show')
-        @endforeach
-
-        @can('create-comment', $group)
-          @include ('comments.create')
-        @endcan
-      </div>
-
-
-      @include('partials.invite')
-
 
       </div>
-    @endsection
 
-    @section('footer')
-      <script>
-      $(document).ready(function() {
-        if ($("#unread").length)
-        {
-          $(document).scrollTop( $("#unread").offset().top-60 );
-        }
-      });
-      </script>
-    @append
+
+
+
+      <div class="meta text-secondary">
+        {{trans('messages.started_by')}}
+        <span class="user">
+          <a href="{{ route('users.show', [$discussion->user->id]) }}">{{ $discussion->user->name}}</a>
+        </span>,
+        {{trans('messages.in')}} {{ $discussion->group->name}} {{ $discussion->created_at->diffForHumans()}}
+      </div>
+
+      <div class="body">
+        {!! filter($discussion->body) !!}
+      </div>
+
+    </div>
+
+
+
+
+    <div class="comments">
+      @foreach ($discussion->comments as $comment_key => $comment)
+        @include('comments._show')
+      @endforeach
+
+      @can('create-comment', $group)
+        @include ('comments.create')
+      @endcan
+    </div>
+
+
+    @include('partials.invite')
+
+
+  </div>
+@endsection
+
+@section('footer')
+  <script>
+  $(document).ready(function() {
+    if ($("#unread").length)
+    {
+      $(document).scrollTop( $("#unread").offset().top-60 );
+    }
+  });
+  </script>
+@append

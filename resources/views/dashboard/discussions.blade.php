@@ -8,63 +8,23 @@
 
     @include('dashboard.tabs')
 
-    <div style="float:right">
-        <a class="btn btn-default" href="{{ route('discussions.create') }}">
+    <div class="toolbox">
+        <a class="btn btn-primary" href="{{ route('discussions.create') }}">
             <i class="fa fa-plus"></i> {{trans('discussion.create_one_button')}}
         </a>
     </div>
 
     <div class="tab_content">
-        @if ($discussions)
-            <table class="table table-hover special">
-                <thead>
-                    <tr>
-                        <th class="avatar"></th>
-                        <th class="summary"></th>
-                        <th style="width:100px" class="date hidden-xs"></th>
-                        <th class="unread"></th>
-                    </tr>
-                </thead>
 
-                <tbody>
-                    @forelse( $discussions as $discussion )
-
-
-                        <tr onclick="document.location = '{{ route('groups.discussions.show', [$discussion->group_id, $discussion->id]) }}';">
-                            <td class="avatar"><span class="avatar"><img src="{{$discussion->user->avatar()}}" class="img-circle"/></span></td>
-                            <td class="content">
-                                <a href="{{ route('groups.discussions.show', [$discussion->group_id, $discussion->id]) }}">
-                                    <span class="name">{{ $discussion->name }}</span>
-                                    <span class="summary">{{summary($discussion->body) }}</span>
-                                    <br/>
-                                </a>
-                                <span class="group-name"><a href="{{ route('groups.show', [$discussion->group_id]) }}">{{ $discussion->group->name }}</a></span>
-                            </td>
-
-                            <td class="date hidden-xs">
-                                {{ $discussion->updated_at->diffForHumans() }}
-                            </td>
-
-                            <td>
-                                @if ($discussion->unReadCount() > 0)
-                                    <i class="fa fa-comment"></i>
-                                    <span class="badge">{{ $discussion->unReadCount() }}</span>
-                                @endif
-                            </td>
-
-                        </tr>
-
-                    @empty
-                        {{trans('messages.nothing_yet')}}
-                    @endforelse
-                </tbody>
-            </table>
-
-
+        <div class="discussions">
+            @forelse( $discussions as $discussion )
+                @include('discussions.discussion')
+            @empty
+                {{trans('messages.nothing_yet')}}
+            @endforelse
             {!! $discussions->render() !!}
-        @else
-            {{trans('messages.nothing_yet')}}
-        @endif
+        </div>
+
     </div>
 
 @endsection

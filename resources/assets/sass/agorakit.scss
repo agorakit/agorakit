@@ -2,39 +2,26 @@
 
 /***************************** COMMON STUFF / BOOTSTRAP TWEAKS / TYPEFACES ***********************************/
 
-body {
-    padding-top: 40px;
+body
+{
     padding-bottom: 150px;
     background-image: url("/images/seamless_paper_texture.png");
+    font-size: 0.9rem;
 }
 
-.container {
-    background-color: white;
-}
 
 
 /**************************** main content **************************/
 
 
-.row .group, .main-container
-{
-    box-shadow: 0 2px 4px rgba(72, 78, 80, 0.2);
-    border-radius: 2px;
-}
-
 .main-container
 {
-    padding: 0 2em 5em 2em;
+    padding: 2em 2em 5em 2em;
     margin-top: 2em;
-}
-
-
-
-.page_header {
-    text-align: center;
+    box-shadow: 0 2px 4px rgba(72, 78, 80, 0.2);
+    border-radius: 4px;
     background-color: white;
 }
-
 
 
 .toolbox
@@ -47,14 +34,15 @@ body {
     padding-bottom: 2em;
 }
 
+/************************** Header ************************************/
 
-/**************************** Second level navigation **************************/
-
-.nav-tabs > li.active > a
+h1.small
 {
-    border-radius: 4px 4px 0 0;
+    font-size: 1.3rem;
 }
 
+
+/**************************** Second level navigation **************************/
 .nav-groups
 {
     margin-bottom: 2em;
@@ -62,9 +50,9 @@ body {
     justify-content: center;
 }
 
-.nav-pills > li > a
+.dashboard-nav
 {
-    border-radius: 3px;
+    padding-bottom: 20px;
 }
 
 /**************************** footer ****************************/
@@ -76,22 +64,6 @@ body {
 
 .credits, .credits a {
     color: rgb(108, 131, 136);
-}
-
-
-/************************** DISCUSSIONS ***************************************/
-
-.discussion, .comments {
-    max-width: 65em;
-}
-
-.discussion .user {
-    font-weight: 700;
-}
-
-.discussion .body {
-    margin-top: 1em;
-    margin-bottom: 2em;
 }
 
 
@@ -163,6 +135,16 @@ body {
 }
 
 
+
+.group-header h1
+{
+    font-size: 1.2rem;
+}
+
+.group-header
+{
+    padding-bottom: 2rem;
+}
 
 /***************************** USERS ******************/
 
@@ -325,6 +307,8 @@ table, th, tr
 }
 
 /******************************** Mobile **************************************/
+
+/*
 @media screen and (max-width: 640px) {
   th.date {
     width: 10%;
@@ -383,18 +367,11 @@ table, th, tr
       font-size: 13px;
   }
 }
+*/
 
 
 /******************************** UI ******************************************/
 
-.btn-right {
-    float: right;
-}
-
-.btn.active, .btn.active:hover
-{
-    background-color: gray;
-}
 
 .history {
     padding: 15px;
@@ -424,10 +401,6 @@ table, th, tr
     text-decoration: underline;
 }
 
-.alert
-{
-    margin-top : 2em;
-}
 
 .alert a {
     text-decoration: underline;

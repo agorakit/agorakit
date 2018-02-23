@@ -5,7 +5,9 @@
 
 @section('content')
 
-    @include('groups.tabs')
+    @if ($group->exists)
+        @include('groups.tabs')
+    @endif
     <div class="tab_content">
 
 
