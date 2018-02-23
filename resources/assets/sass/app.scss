@@ -1,14 +1,15 @@
-
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Roboto:400,300,700");
+//@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Roboto:400,300,700|Lato:300");
+
+
 
 // Variables
 @import "variables";
 
 // Bootstrap
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
-
-
+@import "~bootstrap/scss/bootstrap";
 
 @import "agorakit";
+@import "discussions";
+@import "actions";

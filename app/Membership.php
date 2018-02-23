@@ -28,6 +28,9 @@ class Membership extends Model
     // active member
     const MEMBER = 20;
 
+    // member asked to be part of the group, but it has not been confirmed yet
+    const CANDIDATE = 10;
+
     // invited
     const INVITED = 0;
 
