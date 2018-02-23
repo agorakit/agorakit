@@ -1,6 +1,11 @@
 <?php
 
 return array (
+  //============================== New strings to translate ==============================//
+  'start_date' => 'TODO: start_date',
+  'start_time' => 'TODO: start_time',
+  'stop_date' => 'TODO: stop_date',
+  'stop_time' => 'TODO: stop_time',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Eine Nachricht für Sie',
   'accept_invitation' => 'Die Einladung akzeptieren',
@@ -166,7 +171,6 @@ return array (
   'something_wrong' => 'Es gibt ein Problem mit Ihrem Eintrag',
   'start' => 'Starten',
   'started_by' => 'Gestartet von',
-  'starts' => 'Startet',
   'stop' => 'Stoppen',
   'tags' => 'TODO: tags',
   'tags_help' => 'TODO: tags_help',
@@ -208,6 +212,7 @@ return array (
   //================================== Obsolete strings ==================================//
   'LLH:obsolete' => 
   array (
+    'starts' => 'Startet',
     'toggle_navigation' => 'Navigierung hin- und herschalten',
   ),
 );
