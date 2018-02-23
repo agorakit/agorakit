@@ -2,10 +2,9 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'start_date' => 'TODO: start_date',
-  'start_time' => 'TODO: start_time',
-  'stop_date' => 'TODO: stop_date',
-  'stop_time' => 'TODO: stop_time',
+  'email_verified' => 'Email verified',
+  'no' => 'No',
+  'yes' => 'Yes',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un mensaje para usted',
   'accept_invitation' => 'Acepta la invitación',
@@ -171,8 +170,12 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'size' => 'TODO: size',
   'something_wrong' => 'Algo no funciona con su envío',
   'start' => 'Inicio',
+  'start_date' => 'TODO: start_date',
+  'start_time' => 'TODO: start_time',
   'started_by' => 'Iniciado por',
   'stop' => 'Detener',
+  'stop_date' => 'TODO: stop_date',
+  'stop_time' => 'TODO: stop_time',
   'tags' => 'Etiquetas',
   'tags_help' => 'Elija o escriba una o más etiquetas (palabras clave si lo prefiere). Esto ayudará a otros a encontrar su contribución. En la lista verás las etiquetas que ya se han utilizado en otros lugares. Trate de seguir las etiquetas existentes. Separe cada etiqueta con una coma.',
   'thank_you' => 'TODO: thank_you',
@@ -211,7 +214,7 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'your_groups' => 'Tus grupos',
   'your_search_for' => 'Su búsqueda de',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' => 
+  'LLH:obsolete' =>
   array (
     'starts' => 'Comienza',
     'toggle_navigation' => 'Conmutar navegación',

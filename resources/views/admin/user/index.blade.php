@@ -28,6 +28,7 @@
                     <th>{{ trans('messages.registration_time') }}</th>
                     <th>{{ trans('messages.last_activity') }}</th>
                     <th>{{ trans('messages.admin') }}</th>
+                    <th>{{ trans('messages.email_verified') }}</th>
                     <th></th>
                 </tr>
             </thead>
@@ -56,6 +57,14 @@
                                 {{trans('messages.admin')}}
                             @else
 
+                            @endif
+                        </td>
+
+                        <td>
+                            @if ($user->verified == 1 )
+                                {{trans('messages.yes')}}
+                            @else
+                                {{trans('messages.no')}}
                             @endif
                         </td>
 
