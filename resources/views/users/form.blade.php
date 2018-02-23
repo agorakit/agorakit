@@ -32,9 +32,17 @@
 
 @if (Auth::user()->isAdmin())
     <div class="form-group">
-        {{Form::radio('is_admin', 'yes', $user->isAdmin())}} {{trans('messages.admin')}} <br/>
-        {{Form::radio('is_admin', 'no', !$user->isAdmin())}} {{trans('messages.not_an_admin')}} <br/>
+        <div>{{trans('messages.admin')}}</div>
+        {{Form::radio('is_admin', 'yes', $user->isAdmin())}} {{trans('messages.yes')}} <br/>
+        {{Form::radio('is_admin', 'no', !$user->isAdmin())}} {{trans('messages.no')}} <br/>
     </div>
+
+    <div class="form-group">
+        <div>{{trans('messages.email_verified')}}</div>
+        {{Form::radio('is_verified', 'yes', $user->isVerified())}} {{trans('messages.yes')}} <br/>
+        {{Form::radio('is_verified', 'no', !$user->isVerified())}} {{trans('messages.no')}} <br/>
+    </div>
+
 @endif
 
 

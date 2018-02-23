@@ -2,10 +2,9 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'start_date' => 'Date de début',
-  'start_time' => 'Heure de début',
-  'stop_date' => 'Date de fin',
-  'stop_time' => 'Heure de fin',
+  'email_verified' => 'Email vérifié',
+  'no' => 'Non',
+  'yes' => 'Oui',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'accept_invitation' => 'Accepter l\'invitation',
@@ -172,8 +171,12 @@ return array (
   'size' => 'Taille',
   'something_wrong' => 'Il y a quelque chose qui ne fonctionne pas',
   'start' => 'Début',
+  'start_date' => 'Date de début',
+  'start_time' => 'Heure de début',
   'started_by' => 'Démarré par',
   'stop' => 'Fin',
+  'stop_date' => 'Date de fin',
+  'stop_time' => 'Heure de fin',
   'tags' => 'Mots clé (étiquettes)',
   'tags_help' => 'Choisissez un ou plusieurs mots clés. Ces étiquettes permettront de retrouver facilement votre contribution. Dans la liste vous trouverez les mot clés déjà utilisés. Essayer d\'être cohérent(e) avec ce qui existe déjà. Séparez chaque mot clé par une virgule.',
   'thank_you' => 'Merci d\'utiliser cet application',
