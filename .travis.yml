@@ -9,6 +9,7 @@ before_script:
   - composer install --no-interaction
   - php artisan key:generate
   - php artisan migrate
+  - echo "USE mysql;\nUPDATE user SET password=PASSWORD('root') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
 
 script:
   - vendor/bin/phpunit
