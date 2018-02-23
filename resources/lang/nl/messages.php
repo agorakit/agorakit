@@ -2,10 +2,9 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'start_date' => 'TODO: start_date',
-  'start_time' => 'TODO: start_time',
-  'stop_date' => 'TODO: stop_date',
-  'stop_time' => 'TODO: stop_time',
+  'email_verified' => 'TODO: email_verified',
+  'no' => 'TODO: no',
+  'yes' => 'TODO: yes',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'U heeft een bericht',
   'accept_invitation' => 'De uitnodiging accepteren',
@@ -170,8 +169,12 @@ return array (
   'size' => 'size',
   'something_wrong' => 'TODO: something_wrong',
   'start' => 'Start',
+  'start_date' => 'TODO: start_date',
+  'start_time' => 'TODO: start_time',
   'started_by' => 'Begonnen door',
   'stop' => 'Einde',
+  'stop_date' => 'TODO: stop_date',
+  'stop_time' => 'TODO: stop_time',
   'tags' => 'TODO: tags',
   'tags_help' => 'TODO: tags_help',
   'thank_you' => 'TODO: thank_you',

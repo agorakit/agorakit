@@ -152,6 +152,14 @@ class UserController extends Controller
                 if ($request->get('is_admin') == 'no') {
                     $user->admin = 0;
                 }
+
+                if ($request->get('is_verified') == 'yes') {
+                    $user->verified = 1;
+                }
+
+                if ($request->get('is_verified') == 'no') {
+                    $user->verified = 0;
+                }
             }
 
             // validation
