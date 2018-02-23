@@ -2,10 +2,9 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'start_date' => 'Start date',
-  'start_time' => 'Start time',
-  'stop_date' => 'Stop date',
-  'stop_time' => 'Stop time',
+  'email_verified' => 'TODO: email_verified',
+  'no' => 'TODO: no',
+  'yes' => 'TODO: yes',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'A message for you',
   'accept_invitation' => 'Accept the invitation',
@@ -171,8 +170,12 @@ return array (
   'size' => 'Size',
   'something_wrong' => 'Something is wrong with your submission',
   'start' => 'Start',
+  'start_date' => 'Start date',
+  'start_time' => 'Start time',
   'started_by' => 'Started by',
   'stop' => 'Stop',
+  'stop_date' => 'Stop date',
+  'stop_time' => 'Stop time',
   'tags' => 'Tags',
   'tags_help' => 'Choose or type one or more tag (keywords if you prefer). This will help others to find your contribution. In the list you will see the tags already used elsewhere. Try to follow the existing tags. Separate each tag with a comma.',
   'thank_you' => 'Thank you for using this application',
@@ -211,7 +214,7 @@ return array (
   'your_groups' => 'Your groups',
   'your_search_for' => 'Your search for',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' =>
+  'LLH:obsolete' => 
   array (
     'starts' => 'Starts',
     'toggle_navigation' => 'Toggle navigation',

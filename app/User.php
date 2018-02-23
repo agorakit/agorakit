@@ -147,11 +147,23 @@ class User extends Authenticatable
     }
 
     /**
-    * Returns trus if the user is admin.
+    * Returns true if the user is admin.
     */
     public function isAdmin()
     {
         if ($this->admin == 1) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+    * Returns true if the user's email is verified.
+    */
+    public function isVerified()
+    {
+        if ($this->verified == 1) {
             return true;
         }
 
