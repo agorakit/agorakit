@@ -28,7 +28,6 @@
         <env name="TESTING_DB_HOST" value="localhost"/>
         <env name="TESTING_DB_DATABASE" value="agorakit_testing"/>
         <env name="TESTING_DB_USERNAME" value="root"/>
-
-
+        <env name="TESTING_DB_PASSWORD" value="root"/>
     </php>
 </phpunit>

@@ -1,6 +1,11 @@
 <?php
 
 return array (
+  //============================== New strings to translate ==============================//
+  'start_date' => 'Date de début',
+  'start_time' => 'Heure de début',
+  'stop_date' => 'Date de fin',
+  'stop_time' => 'Heure de fin',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'accept_invitation' => 'Accepter l\'invitation',
@@ -168,7 +173,6 @@ return array (
   'something_wrong' => 'Il y a quelque chose qui ne fonctionne pas',
   'start' => 'Début',
   'started_by' => 'Démarré par',
-  'starts' => 'Début',
   'stop' => 'Fin',
   'tags' => 'Mots clé (étiquettes)',
   'tags_help' => 'Choisissez un ou plusieurs mots clés. Ces étiquettes permettront de retrouver facilement votre contribution. Dans la liste vous trouverez les mot clés déjà utilisés. Essayer d\'être cohérent(e) avec ce qui existe déjà. Séparez chaque mot clé par une virgule.',
@@ -208,8 +212,9 @@ return array (
   'your_groups' => 'Mes groupes',
   'your_search_for' => 'Votre recherche pour',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' => 
+  'LLH:obsolete' =>
   array (
+    'starts' => 'Début',
     'toggle_navigation' => 'Activer la navigation',
   ),
 );

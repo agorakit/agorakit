@@ -19,10 +19,10 @@ class ActionController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
+    * Display a listing of the resource.
+    *
+    * @return Response
+    */
     public function index(Request $request, Group $group)
     {
         $actions = $group->actions()->orderBy('start', 'asc')->get();
@@ -68,10 +68,10 @@ class ActionController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
+    * Show the form for creating a new resource.
+    *
+    * @return Response
+    */
     public function create(Request $request, Group $group)
     {
         $action = new Action();
@@ -79,10 +79,15 @@ class ActionController extends Controller
         if ($request->get('start')) {
             $action->start = Carbon::createFromFormat('Y-m-d H:i', $request->get('start'));
         }
+        else
+        {
+            $action->start = Carbon::now();
+        }
 
         if ($request->get('stop')) {
             $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->get('stop'));
         }
+
 
         if ($request->get('title')) {
             $action->name = $request->get('title');
@@ -95,10 +100,10 @@ class ActionController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
+    * Store a newly created resource in storage.
+    *
+    * @return Response
+    */
     public function store(Request $request, Group $group)
     {
         // if no group is in the route, it means user choose the group using the dropdown
@@ -114,8 +119,16 @@ class ActionController extends Controller
         $action->name = $request->input('name');
         $action->body = $request->input('body');
 
-        $action->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start'));
-        $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop'));
+        $action->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('start_time'));
+
+        if ($request->has('stop_date') && $request->get('stop_date')<>'')
+        {
+            $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('stop_time'));
+        }
+        else
+        {
+            $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
+        }
 
         if ($request->get('location')) {
             $action->location = $request->input('location');
@@ -143,12 +156,12 @@ class ActionController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+    * Display the specified resource.
+    *
+    * @param int $id
+    *
+    * @return Response
+    */
     public function show(Group $group, Action $action)
     {
         return view('actions.show')
@@ -158,12 +171,12 @@ class ActionController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+    * Show the form for editing the specified resource.
+    *
+    * @param int $id
+    *
+    * @return Response
+    */
     public function edit(Request $request, Group $group, Action $action)
     {
         return view('actions.edit')
@@ -173,19 +186,29 @@ class ActionController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+    * Update the specified resource in storage.
+    *
+    * @param int $id
+    *
+    * @return Response
+    */
     public function update(Request $request, Group $group, Action $action)
     {
         $action->name = $request->input('name');
         $action->body = $request->input('body');
-        $action->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start'));
-        $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop'));
 
+        $action->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('start_time'));
+
+        if ($request->has('stop_date') && $request->get('stop_date')<>'')
+        {
+            $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('stop_time'));
+        }
+        else
+        {
+            $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
+        }
+
+        
         if ($action->location != $request->input('location')) {
 
             // we need to update user address and geocode it
@@ -212,12 +235,12 @@ class ActionController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Remove the specified resource from storage.
+    *
+    * @param int $id
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function destroyConfirm(Request $request, Group $group, Action $action)
     {
         if (Gate::allows('delete', $action)) {
@@ -231,12 +254,12 @@ class ActionController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Remove the specified resource from storage.
+    *
+    * @param int $id
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function destroy(Request $request, Group $group, Action $action)
     {
         if (Gate::allows('delete', $action)) {
@@ -250,8 +273,8 @@ class ActionController extends Controller
     }
 
     /**
-     * Show the revision history of the discussion.
-     */
+    * Show the revision history of the discussion.
+    */
     public function history(Group $group, Action $action)
     {
         return view('actions.history')

@@ -100,8 +100,9 @@ class UserTest extends Tests\BrowserKitTestCase
         ->type('Test action', 'name')
         ->type('this is a test action in the agenda', 'body')
         ->type('Bruxelles', 'location')
-        ->type('2016-01-01 11:00', 'start')
-        ->type('2016-01-01 15:00', 'stop')
+        ->type('2016-01-01', 'start_date')
+        ->type('12:00', 'start_time')
+        ->type('13:00', 'stop_time')
         ->press('Create')
         ->seeInDatabase('actions', ['name' => 'Test action'])
         ->see(trans('action.create_one_button'));
