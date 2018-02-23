@@ -5,7 +5,7 @@ return array (
   'start_date' => 'Date de début',
   'start_time' => 'Heure de début',
   'stop_date' => 'Date de fin',
-  'stop_time' => 'Heure de fin (facultative)',
+  'stop_time' => 'Heure de fin',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'accept_invitation' => 'Accepter l\'invitation',
