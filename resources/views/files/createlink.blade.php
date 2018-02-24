@@ -18,11 +18,11 @@
 
 
             <label for="link">{{trans('messages.link')}}</label>
-            <input class="form-control" name="link" type="text" placeholder="http://..."/>
+            <input class="form-control" name="link" type="text" placeholder="http://..." value="{{ old('link') }}"/>
 
 
             <label for="title">{{trans('messages.title')}}</label>
-            <input class="form-control" name="title" type="text"/>
+            <input class="form-control" name="title" type="text" value="{{ old('title') }}"/>
 
             @include('partials.tags_form')
 
