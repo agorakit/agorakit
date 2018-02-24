@@ -10,8 +10,8 @@
 
 
         {!! Form::open(['url' => route('groups.files.create', $group->id), 'files'=>true]) !!}
-        <div class="form-group">
-            <input name="files[]" id="file" type="file" multiple="mutiple" class="btn btn-primary" title="{{trans('messages.select_one_or_more_files')}}">
+        <div class="form-group mt-4 mb-4">
+            <input name="files[]" id="file" type="file" multiple="mutiple" title="{{trans('messages.select_one_or_more_files')}}">
         </div>
 
         @include('partials.tags_form')
@@ -23,4 +23,4 @@
 
 @endsection
 
-@include('partials.better-file-inputs')
+{{--@include('partials.better-file-inputs')--}}

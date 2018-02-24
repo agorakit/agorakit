@@ -8,7 +8,10 @@
 
         {!! Form::model($file, ['action' => ['FileController@update', $file->group->id, $file->id], 'files' => true]) !!}
 
-
+        <div class="form-group">
+        	{!! Form::label('name', trans('messages.filename')) !!}
+        	{!! Form::text('name', $file->name, ['class' => 'form-control', 'required']) !!}
+        </div>
 
         @include('partials.tags_form')
 

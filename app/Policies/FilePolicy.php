@@ -29,6 +29,10 @@ class FilePolicy
 
     public function update(User $user, File $file)
     {
+        if ($user->isAdminOf($file->group))
+        {
+            return true;
+        }
         return $user->id == $file->user_id;
     }
 

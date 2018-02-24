@@ -32,6 +32,7 @@ class FileController extends Controller
         $files = $group->files()
         ->where('item_type', '<>', \App\File::FOLDER)
         ->with('user')
+        ->with('tags')
         ->orderBy('updated_at', 'desc')
         ->get();
 
@@ -182,6 +183,11 @@ class FileController extends Controller
             $file->retag($request->get('tags'));
         }
 
+        if ($request->get('name'))
+        {
+            $file->name = $request->get('name');
+        }
+
         if ($file->save()) {
             flash(trans('messages.ressource_updated_successfully'))->success();
 
@@ -266,7 +272,7 @@ class FileController extends Controller
         } else {
             flash(trans('messages.ressource_not_created_successfully'))->error();
 
-            return redirect()->back();
+            return redirect()->back()->withInput();
         }
     }
 }
