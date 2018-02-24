@@ -51,7 +51,7 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th>{{ trans('messages.title') }}</th>
+                    <th>{{ trans('messages.name') }}</th>
                     <th>{{ trans('messages.tags') }}</th>
                     <th>{{ trans('messages.author') }}</th>
                     <th>{{ trans('messages.size') }}</th>
@@ -66,12 +66,27 @@
                 @forelse( $files as $file )
                     <tr class="file-item @foreach ($file->tags as $tag)tag-{{$tag->name}} @endforeach">
                         <td>
-                            <a href="{{ route('groups.files.show', [$group->id, $file->id]) }}"><img src="{{ route('groups.files.thumbnail', [$group->id, $file->id]) }}"/></a>
+                            @if ($file->isLink())
+                                <a href="{{ route('groups.files.download', [$group->id, $file->id]) }}" target="_blank">
+                                    <i class="fa fa-link" aria-hidden="true" style="font-size:1.8rem; color: black"></i>
+                                </a>
+                            @else
+                                <a href="{{ route('groups.files.show', [$group->id, $file->id]) }}">
+                                    <img src="{{ route('groups.files.thumbnail', [$group->id, $file->id]) }}"/>
+                                </a>
+                            @endif
                         </td>
 
                         <td>
                             <div class="ellipsis" style="max-width: 30em">
-                                <a  href="{{ route('groups.files.show', [$group->id, $file->id]) }}">{{ $file->name }}</a>
+                                @if ($file->isLink())
+                                    <a href="{{ route('groups.files.download', [$group->id, $file->id]) }}" target="_blank">
+                                        {{ $file->name }}
+                                        <i class="fa fa-external-link"></i>
+                                    </a>
+                                @else
+                                    <a  href="{{ route('groups.files.show', [$group->id, $file->id]) }}">{{ $file->name }}</a>
+                                @endif
                             </div>
                         </td>
 
@@ -91,38 +106,38 @@
 
                         <td data-order="{{ $file->filesize }}">
                             @if ($file->isFile()){{sizeForHumans($file->filesize)}}@endif
-                        </td>
+                            </td>
 
-                        <td data-order="{{ $file->created_at }}">
-                            {{$file->created_at->diffForHumans()}}
-                        </td>
+                            <td data-order="{{ $file->created_at }}">
+                                {{$file->created_at->diffForHumans()}}
+                            </td>
 
-                        <td>
-                            @can('edit', $file)
-                                <a class="btn btn-primary btn-xs" href="{{ route('groups.files.edit', [$group->id, $file->id]) }}"><i class="fa fa-edit"></i>
-                                    {{trans('messages.edit')}}
-                                </a>
-                            @endcan
+                            <td>
+                                @can('update', $file)
+                                    <a class="btn btn-outline-primary btn-sm" href="{{ route('groups.files.edit', [$group->id, $file->id]) }}"><i class="fa fa-edit"></i>
+                                        {{trans('messages.edit')}}
+                                    </a>
+                                @endcan
 
-                            @can('delete', $file)
-                                <a class="btn btn-warning btn-xs" href="{{ route('groups.files.deleteconfirm', [$group->id, $file->id]) }}"><i class="fa fa-trash"></i>
-                                    {{trans('messages.delete')}}
-                                </a>
-                            @endcan
+                                @can('delete', $file)
+                                    <a class="btn btn-link btn-sm" href="{{ route('groups.files.deleteconfirm', [$group->id, $file->id]) }}"><i class="fa fa-trash"></i>
+                                        {{trans('messages.delete')}}
+                                    </a>
+                                @endcan
 
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
 
-                @empty
-                    {{trans('messages.nothing_yet')}}
-                @endforelse
+                    @empty
+                        {{trans('messages.nothing_yet')}}
+                    @endforelse
 
-            </tbody>
-        </table>
-
-
-
-    </div>
+                </tbody>
+            </table>
 
 
-@endsection
+
+        </div>
+
+
+    @endsection
