@@ -2,9 +2,10 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'email_verified' => 'TODO: email_verified',
-  'no' => 'TODO: no',
-  'yes' => 'TODO: yes',
+  'filename' => 'TODO: filename',
+  'grid' => 'TODO: grid',
+  'list' => 'TODO: list',
+  'liste' => 'TODO: liste',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'U heeft een bericht',
   'accept_invitation' => 'De uitnodiging accepteren',
@@ -65,6 +66,7 @@ return array (
   'email' => 'E-mail',
   'email_not_verified' => 'Uw e-mailadres is nog niet bevestigd, bevestig dit via je mailbox',
   'email_not_verified_send_again_verification' => '\'Indien u geen bevestigingsmail hebt ontvangen, klik dan hier voor een nieuwe',
+  'email_verified' => 'TODO: email_verified',
   'embed_this_page' => 'Embed deze pagina',
   'ends' => 'Einde',
   'files' => 'Bestanden',
@@ -126,10 +128,10 @@ return array (
   'name' => 'Naam',
   'news_from_group_email_subject' => 'Nieuws van :',
   'next_actions' => 'Naast acties',
+  'no' => 'TODO: no',
   'not_a_group_admin' => 'TODO: not_a_group_admin',
   'not_a_member' => 'TODO: not_a_member',
   'not_allowed' => 'Niet toegestaan',
-  'not_an_admin' => 'Geen beheerder',
   'not_logged_in' => 'TODO: not_logged_in',
   'nothing_yet' => 'Er staat hier nog niets',
   'or' => 'of',
@@ -199,6 +201,7 @@ return array (
   'what' => 'Wat',
   'when' => 'Wanneer',
   'where' => 'Waar',
+  'yes' => 'TODO: yes',
   'you_are_not_an_admin' => 'TODO: you_are_not_an_admin',
   'you_are_now_a_member_of_this_group' => 'Je bent nu een lid van de groep',
   'you_asked_for_assword_change' => 'U hebt gevraagd uw wachtwoord te wijzigen',
@@ -215,6 +218,7 @@ return array (
   //================================== Obsolete strings ==================================//
   'LLH:obsolete' => 
   array (
+    'not_an_admin' => 'Geen beheerder',
     'starts' => 'Begint',
     'toggle_navigation' => 'Navigatie activeren',
   ),

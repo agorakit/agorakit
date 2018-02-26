@@ -7,6 +7,7 @@ use App\Group;
 use Carbon\Carbon;
 use Gate;
 use Illuminate\Http\Request;
+use Auth;
 
 class ActionController extends Controller
 {
@@ -25,10 +26,63 @@ class ActionController extends Controller
     */
     public function index(Request $request, Group $group)
     {
-        $actions = $group->actions()->orderBy('start', 'asc')->get();
+        $view = 'grid';
+
+        if (Auth::check())
+        {
+            if (Auth::user()->getPreference('calendar'))
+            {
+                if (Auth::user()->getPreference('calendar') == 'list')
+                {
+                    $view = 'list';
+                }
+                else
+                {
+                    $view = 'grid';
+                }
+            }
+
+            if ($request->get('type') == 'list')
+            {
+                Auth::user()->setPreference('calendar', 'list');
+                $view = 'list';
+            }
+
+            if ($request->get('type') == 'grid')
+            {
+                Auth::user()->setPreference('calendar', 'grid');
+                $view = 'grid';
+            }
+
+        }
+        else
+        {
+
+            if ($request->get('type') == 'list')
+            {
+                $view = 'list';
+            }
+
+            if ($request->get('type') == 'grid')
+            {
+                $view = 'grid';
+            }
+
+        }
+
+        if ($view == 'list')
+        {
+            $actions = $group->actions()
+            ->orderBy('start', 'asc')
+            ->where('start', '>=', Carbon::now())
+            ->paginate(10);
+            return view('actions.index-list')
+            ->with('actions', $actions)
+            ->with('group', $group)
+            ->with('tab', 'action');
+        }
 
         return view('actions.index')
-        ->with('actions', $actions)
         ->with('group', $group)
         ->with('tab', 'action');
     }
