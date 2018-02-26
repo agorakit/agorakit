@@ -12,11 +12,28 @@ class Undocontroller extends Controller
     public function index()
     {
         // list all instances that have been deleted
-        $groups = \App\Group::onlyTrashed()->orderBy('deleted_at', 'desc')->get();
-        $discussions = \App\Discussion::onlyTrashed()->orderBy('deleted_at', 'desc')->get();
-        $comments = \App\Comment::onlyTrashed()->orderBy('deleted_at', 'desc')->get();
-        $files = \App\File::onlyTrashed()->orderBy('deleted_at', 'desc')->get();
-        $actions = \App\Action::onlyTrashed()->orderBy('deleted_at', 'desc')->get();
+        $groups = \App\Group::onlyTrashed()
+        ->orderBy('deleted_at', 'desc')
+        ->get();
+
+        $discussions = \App\Discussion::onlyTrashed()
+        ->orderBy('deleted_at', 'desc')
+        ->with('group', 'user')
+        ->get();
+
+        $comments = \App\Comment::onlyTrashed()
+        ->orderBy('deleted_at', 'desc')
+        ->get();
+
+        $files = \App\File::onlyTrashed()
+        ->orderBy('deleted_at', 'desc')
+        ->with('group', 'user')
+        ->get();
+
+        $actions = \App\Action::onlyTrashed()
+        ->orderBy('deleted_at', 'desc')
+        ->with('group', 'user')
+        ->get();
 
         return view('admin.undo.index')
         ->with('groups', $groups)
@@ -114,7 +131,7 @@ class Undocontroller extends Controller
                 {
                     $group->restore();
                 }
-                
+
                 $action->timestamps = false;
                 $action->restore();
                 return redirect()->route('groups.actions.show', [$action->group, $action]);
