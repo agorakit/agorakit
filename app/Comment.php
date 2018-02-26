@@ -26,7 +26,8 @@ class Comment extends Model
     public $timestamps = true;
     protected $dates = ['deleted_at'];
     protected $with = ['user']; // always load users with comments
-    protected $touches = ['discussion', 'user'];
+
+    //protected $touches = ['discussion', 'user'];
 
     protected $casts = ['user_id' => 'integer'];
     protected $dontKeepRevisionOf = ['vote'];
@@ -43,7 +44,7 @@ class Comment extends Model
 
     public function discussion()
     {
-        return $this->belongsTo('App\Discussion')->withTrashed();
+        return $this->belongsTo('App\Discussion');
     }
 
     public function link()

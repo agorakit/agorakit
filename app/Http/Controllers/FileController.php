@@ -134,6 +134,10 @@ class FileController extends Controller
 
                     // save it again
                     $file->save();
+
+                    // update activity timestamp on parent items
+                    $group->touch();
+                    \Auth::user()->touch();
                 }
 
                 flash(trans('messages.ressource_created_successfully'))->success();
@@ -265,6 +269,10 @@ class FileController extends Controller
             {
                 $file->tag($request->get('tags'));
             }
+
+            // update activity timestamp on parent items
+            $group->touch();
+            \Auth::user()->touch();
 
             flash(trans('messages.ressource_created_successfully'))->success();
 
