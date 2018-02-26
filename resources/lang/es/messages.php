@@ -2,9 +2,10 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'email_verified' => 'Email verified',
-  'no' => 'No',
-  'yes' => 'Yes',
+  'filename' => 'TODO: filename',
+  'grid' => 'TODO: grid',
+  'list' => 'TODO: list',
+  'liste' => 'TODO: liste',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un mensaje para usted',
   'accept_invitation' => 'Acepta la invitación',
@@ -66,6 +67,7 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'email' => 'Correo electrónico',
   'email_not_verified' => 'Correo electrónico no verificado',
   'email_not_verified_send_again_verification' => 'Haga clic aquí para enviar su correo electrónico de verificación de nuevo',
+  'email_verified' => 'Email verified',
   'embed_this_page' => 'Incorporar esta página',
   'ends' => 'Termina',
   'files' => 'Archivos',
@@ -127,10 +129,10 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'name' => 'Nombre',
   'news_from_group_email_subject' => 'Noticias del grupo',
   'next_actions' => 'Próximas acciones',
+  'no' => 'No',
   'not_a_group_admin' => 'TODO: not_a_group_admin',
   'not_a_member' => 'TODO: not_a_member',
   'not_allowed' => 'No esta permitido',
-  'not_an_admin' => 'No administrador',
   'not_logged_in' => 'TODO: not_logged_in',
   'nothing_yet' => '¡Aquí no hay nada... todavía!',
   'or' => 'o',
@@ -200,6 +202,7 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'what' => 'qué',
   'when' => 'cuando',
   'where' => 'dónde',
+  'yes' => 'Yes',
   'you_are_not_an_admin' => 'TODO: you_are_not_an_admin',
   'you_are_now_a_member_of_this_group' => 'Usted es ahora un miembro de este grupo',
   'you_asked_for_assword_change' => 'Ha solicitado cambio de contraseña',
@@ -214,8 +217,9 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'your_groups' => 'Tus grupos',
   'your_search_for' => 'Su búsqueda de',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' =>
+  'LLH:obsolete' => 
   array (
+    'not_an_admin' => 'No administrador',
     'starts' => 'Comienza',
     'toggle_navigation' => 'Conmutar navegación',
   ),
