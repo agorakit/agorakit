@@ -3,7 +3,6 @@
 namespace App;
 
 use Cviebrock\EloquentTaggable\Taggable;
-use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
@@ -15,13 +14,12 @@ class Discussion extends Model
     use RevisionableTrait;
     use ValidatingTrait;
     use SoftDeletes;
-    use CascadeSoftDeletes;
     use Taggable;
     use LogsActivity;
 
-    protected $cascadeDeletes = ['comments'];
+    //protected $softCascade =['comments'];
 
-    protected $touches = ['group', 'user'];
+    //protected $touches = ['group', 'user'];
 
     protected $rules = [
     'name'     => 'required|min:5',

@@ -129,6 +129,21 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('actions/create', 'ActionController@store')->name('actions.store');
 
 
+    // Users
+    Route::get('users/{user}', 'UserController@show')->name('users.show');
+
+    Route::get('users/{user}/cover', 'UserController@cover')->name('users.cover');
+    Route::get('users/{user}/avatar', 'UserController@avatar')->name('users.avatar');
+
+    Route::get('users/{user}/sendverification', 'UserController@sendVerificationAgain')->name('users.sendverification');
+
+    Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit');
+    Route::post('users/{user}', 'UserController@update')->name('users.update');
+
+    Route::get('users/{user}/contact', 'UserController@contactForm')->name('users.contactform');
+    Route::post('users/{user}/contact', 'UserController@contact')->name('users.contact');
+
+
     // Groups : only members (or everyone if a group is public)
     Route::group(['middleware' => 'public', 'as' => 'groups', 'prefix' => 'groups/{group}'], function () {
 
@@ -240,19 +255,7 @@ Route::group(['middleware' => ['web']], function () {
 
     });
 
-    // Users
-    Route::get('users/{user}', 'UserController@show')->name('users.show');
 
-    Route::get('users/{user}/cover', 'UserController@cover')->name('users.cover');
-    Route::get('users/{user}/avatar', 'UserController@avatar')->name('users.avatar');
-
-    Route::get('users/{user}/sendverification', 'UserController@sendVerificationAgain')->name('users.sendverification');
-
-    Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit');
-    Route::post('users/{user}', 'UserController@update')->name('users.update');
-
-    Route::get('users/{user}/contact', 'UserController@contactForm')->name('users.contactform');
-    Route::post('users/{user}/contact', 'UserController@contact')->name('users.contact');
 
 
 
@@ -287,6 +290,11 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::resource('admin/user', 'Admin\UserController');
         Route::get('admin/insights', 'InsightsController@forAllGroups');
+
+
+        Route::get('admin/undo', 'UndoController@index')->name('admin.undo');
+        Route::get('admin/{type}/{id}/restore', 'UndoController@restore')->name('admin.restore');
+
     });
 
 

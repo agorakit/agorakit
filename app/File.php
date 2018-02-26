@@ -17,7 +17,7 @@ class File extends Model
     use Taggable;
     use LogsActivity;
 
-    protected $touches = ['group', 'user'];
+    //protected $touches = ['group', 'user'];
 
     protected $rules = [
         'name'     => 'required',
