@@ -22,6 +22,7 @@
         @foreach ($discussions as $discussion)
             <tr>
                 <td>{{$discussion->name}}</td>
+                <td>{{$discussion->group()->withTrashed()->first()->name}}</td>
                 <td>{{$discussion->deleted_at}}</td>
                 <td><a href="{{route('admin.restore', ['discussion', $discussion->id] )}}">Recover</a></td>
             </tr>
