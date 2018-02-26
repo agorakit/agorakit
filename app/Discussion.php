@@ -3,7 +3,6 @@
 namespace App;
 
 use Cviebrock\EloquentTaggable\Taggable;
-use Askedio\SoftCascade\Traits\SoftCascadeTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
@@ -15,7 +14,6 @@ class Discussion extends Model
     use RevisionableTrait;
     use ValidatingTrait;
     use SoftDeletes;
-    use SoftCascadeTrait;
     use Taggable;
     use LogsActivity;
 

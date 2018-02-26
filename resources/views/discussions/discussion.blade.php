@@ -26,8 +26,7 @@
                     {{ $discussion->group->name }}
                 </span>
             </a>
-            <small>u:{{ $discussion->updated_at->diffForHumans() }}</small>
-            <small>c:{{ $discussion->created_at->diffForHumans() }}</small>
+            <small>{{ $discussion->updated_at->diffForHumans() }}</small>
         </div>
     </div>
 </div>

@@ -3,7 +3,6 @@
 namespace App;
 
 use Cviebrock\EloquentTaggable\Taggable;
-use Askedio\SoftCascade\Traits\SoftCascadeTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
@@ -14,10 +13,7 @@ class Group extends Model
     use ValidatingTrait;
     use RevisionableTrait;
     use SoftDeletes;
-    use SoftCascadeTrait;
     use Taggable;
-
-    protected $softCascade = ['discussions', 'actions', 'files', 'memberships'];
 
     protected $rules = [
         'name' => 'required',

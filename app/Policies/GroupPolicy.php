@@ -42,7 +42,11 @@ class GroupPolicy
 
     public function delete(User $user, Group $group)
     {
-        return $user->isAdminOf($group);
+        return false;
+
+        // this was too dangerous : 
+        // return $user->isAdminOf($group);
+        // instead ask a general admin to delete a group if needed.
     }
 
     /**

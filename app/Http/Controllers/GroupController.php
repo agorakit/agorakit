@@ -46,7 +46,7 @@ class GroupController extends Controller
             }
 
             if (Gate::allows('viewFiles', $group)) {
-                $files = $group->files()->with('user')->orderBy('updated_at', 'desc')->limit(5)->get();
+                $files = $group->files()->with('user')->orderBy('created_at', 'desc')->limit(5)->get();
             }
 
             if (Gate::allows('viewActions', $group)) {
@@ -68,7 +68,7 @@ class GroupController extends Controller
                 ->limit(5)
                 ->get();
 
-                $files = $group->files()->with('user')->orderBy('updated_at', 'desc')->limit(5)->get();
+                $files = $group->files()->with('user')->orderBy('created_at', 'desc')->limit(5)->get();
                 $actions = $group->actions()->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->limit(10)->get();
             }
         }
