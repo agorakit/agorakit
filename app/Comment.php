@@ -26,7 +26,8 @@ class Comment extends Model
     public $timestamps = true;
     protected $dates = ['deleted_at'];
     protected $with = ['user']; // always load users with comments
-    protected $touches = ['discussion', 'user'];
+
+    //protected $touches = ['discussion', 'user'];
 
     protected $casts = ['user_id' => 'integer'];
     protected $dontKeepRevisionOf = ['vote'];
