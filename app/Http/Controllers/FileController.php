@@ -33,7 +33,7 @@ class FileController extends Controller
         ->where('item_type', '<>', \App\File::FOLDER)
         ->with('user')
         ->with('tags')
-        ->orderBy('updated_at', 'desc')
+        ->orderBy('created_at', 'desc')
         ->get();
 
         return view('files.index')
