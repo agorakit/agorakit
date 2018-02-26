@@ -50,6 +50,12 @@ class Undocontroller extends Controller
             $discussion = \App\Discussion::withTrashed()->find($id);
             if ($discussion->trashed())
             {
+                $group = $discussion->group()->withTrashed()->first();
+                // if the group the discussion belongs to is trashed, warn the user
+                if ($group->trashed())
+                {
+                    $group->restore();
+                }
                 $discussion->timestamps = false;
                 $discussion->restore();
                 return redirect()->route('groups.discussions.show', [$discussion->group, $discussion]);
@@ -79,6 +85,13 @@ class Undocontroller extends Controller
             $file = \App\File::withTrashed()->find($id);
             if ($file->trashed())
             {
+                $group = $file->group()->withTrashed()->first();
+                // if the group the discussion belongs to is trashed, warn the user
+                if ($group->trashed())
+                {
+                    $group->restore();
+                }
+
                 $file->timestamps = false;
                 $file->restore();
                 return redirect()->route('groups.files.show', [$file->group, $file]);
@@ -95,6 +108,13 @@ class Undocontroller extends Controller
             $action = \App\Action::withTrashed()->find($id);
             if ($action->trashed())
             {
+                $group = $action->group()->withTrashed()->first();
+                // if the group the discussion belongs to is trashed, warn the user
+                if ($group->trashed())
+                {
+                    $group->restore();
+                }
+                
                 $action->timestamps = false;
                 $action->restore();
                 return redirect()->route('groups.actions.show', [$action->group, $action]);
