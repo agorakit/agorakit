@@ -2,9 +2,9 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'email_verified' => 'Email vérifié',
-  'no' => 'Non',
-  'yes' => 'Oui',
+  'filename' => 'Nom de fichier',
+  'grid' => 'Grille',
+  'list' => 'Liste',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'accept_invitation' => 'Accepter l\'invitation',
@@ -67,6 +67,7 @@ return array (
   'email' => 'Email',
   'email_not_verified' => 'Votre adresse mail n\'est pas vérifiée, merci de la vérifier maintenant depuis votre boite email',
   'email_not_verified_send_again_verification' => 'Si vous n\'avez pas reçu le mail de confirmation cliquez ici pour en recevoir un autre',
+  'email_verified' => 'Email vérifié',
   'embed_this_page' => 'Incorporer cette page',
   'ends' => 'Fin',
   'files' => 'Fichiers',
@@ -128,10 +129,10 @@ return array (
   'name' => 'Nom',
   'news_from_group_email_subject' => 'Des nouvelles du groupe',
   'next_actions' => 'Prochaines actions',
+  'no' => 'Non',
   'not_a_group_admin' => 'Vous n\\êtes pas administrateur-trice de ce groupe',
   'not_a_member' => 'Vous n\\êtes pas membre de ce groupe',
   'not_allowed' => 'Pas autorisé',
-  'not_an_admin' => 'Pas administrateur',
   'not_logged_in' => 'Vous n\\êtes pas connecté(e)',
   'nothing_yet' => 'Il n\'y a encore rien ici',
   'or' => 'ou',
@@ -201,6 +202,7 @@ return array (
   'what' => 'Quoi',
   'when' => 'Quand',
   'where' => 'Où',
+  'yes' => 'Oui',
   'you_are_not_an_admin' => 'Vous n\\êtes pas administrateur-trice',
   'you_are_now_a_member_of_this_group' => 'Vous êtes maintenant membre du groupe',
   'you_asked_for_assword_change' => 'Vous avez demandé de pouvoir changer votre mot de passe',
@@ -217,6 +219,7 @@ return array (
   //================================== Obsolete strings ==================================//
   'LLH:obsolete' =>
   array (
+    'not_an_admin' => 'Pas administrateur',
     'starts' => 'Début',
     'toggle_navigation' => 'Activer la navigation',
   ),

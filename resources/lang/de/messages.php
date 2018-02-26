@@ -2,9 +2,10 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'email_verified' => 'TODO: email_verified',
-  'no' => 'TODO: no',
-  'yes' => 'TODO: yes',
+  'filename' => 'TODO: filename',
+  'grid' => 'TODO: grid',
+  'list' => 'TODO: list',
+  'liste' => 'TODO: liste',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Eine Nachricht für Sie',
   'accept_invitation' => 'Die Einladung akzeptieren',
@@ -65,6 +66,7 @@ return array (
   'email' => 'E-Mail',
   'email_not_verified' => 'E-Mail nicht verifiziert',
   'email_not_verified_send_again_verification' => 'Klicken Sie hier, um die Verifizierungs-Mail erneut zu versenden',
+  'email_verified' => 'TODO: email_verified',
   'embed_this_page' => 'Einbetten dieser seite',
   'ends' => 'Ende',
   'files' => 'Dateien',
@@ -126,10 +128,10 @@ return array (
   'name' => 'Name',
   'news_from_group_email_subject' => 'Neuigkeiten von der Gruppe',
   'next_actions' => 'Nächste Handlungen',
+  'no' => 'TODO: no',
   'not_a_group_admin' => 'TODO: not_a_group_admin',
   'not_a_member' => 'TODO: not_a_member',
   'not_allowed' => 'Nicht zugelassen',
-  'not_an_admin' => 'Keine Admin-Rechte',
   'not_logged_in' => 'TODO: not_logged_in',
   'nothing_yet' => 'Es gibt nichts hier...bisher!',
   'or' => 'oder',
@@ -199,6 +201,7 @@ return array (
   'what' => 'was',
   'when' => 'wann',
   'where' => 'wo',
+  'yes' => 'TODO: yes',
   'you_are_not_an_admin' => 'TODO: you_are_not_an_admin',
   'you_are_now_a_member_of_this_group' => 'Sie sind nun Mitglied dieser Gruppe',
   'you_asked_for_assword_change' => 'Sie haben die Rücksetzung Ihres Passworts angefordert',
@@ -215,6 +218,7 @@ return array (
   //================================== Obsolete strings ==================================//
   'LLH:obsolete' => 
   array (
+    'not_an_admin' => 'Keine Admin-Rechte',
     'starts' => 'Startet',
     'toggle_navigation' => 'Navigierung hin- und herschalten',
   ),

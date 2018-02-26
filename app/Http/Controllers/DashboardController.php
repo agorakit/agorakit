@@ -142,31 +142,83 @@ class DashboardController extends Controller
         ->with('discussions', $discussions);
     }
 
-    public function agenda()
+    public function agenda(Request $request)
     {
-        /*
+
+        $view = 'grid';
+
         if (Auth::check())
         {
-            $groups = \App\Group::publicgroups()
-            ->get()
-            ->pluck('id')
-            ->merge(Auth::user()->groups()->pluck('groups.id'));
+            if (Auth::user()->getPreference('calendar'))
+            {
+                if (Auth::user()->getPreference('calendar') == 'list')
+                {
+                    $view = 'list';
+                }
+                else
+                {
+                    $view = 'grid';
+                }
+            }
+
+            if ($request->get('type') == 'list')
+            {
+                Auth::user()->setPreference('calendar', 'list');
+                $view = 'list';
+            }
+
+            if ($request->get('type') == 'grid')
+            {
+                Auth::user()->setPreference('calendar', 'grid');
+                $view = 'grid';
+            }
+
         }
         else
         {
-            $groups = \App\Group::publicgroups()->get()->pluck('id');
+
+            if ($request->get('type') == 'list')
+            {
+                $view = 'list';
+            }
+
+            if ($request->get('type') == 'grid')
+            {
+                $view = 'grid';
+            }
+
         }
 
-        $actions = \App\Action::with('group')
-        ->where('start', '>=', Carbon::now())
-        ->whereIn('group_id', $groups)
-        ->get();
+
+        if ($view == 'list')
+        {
+
+            if (Auth::check())
+            {
+                Auth::user()->setPreference('calendar', 'list');
+                $groups = \App\Group::publicgroups()
+                ->get()
+                ->pluck('id')
+                ->merge(Auth::user()->groups()->pluck('groups.id'));
+            }
+            else
+            {
+                $groups = \App\Group::publicgroups()->get()->pluck('id');
+            }
+
+            $actions = \App\Action::with('group')
+            ->where('start', '>=', Carbon::now())
+            ->whereIn('group_id', $groups)
+            ->orderBy('start')
+            ->paginate(10);
 
 
-        return view('dashboard.agenda')
-        ->with('tab', 'actions')
-        ->with('actions', $actions);
-        */
+
+            return view('dashboard.agenda-list')
+            ->with('tab', 'actions')
+            ->with('actions', $actions);
+        }
+
 
         return view('dashboard.agenda')
         ->with('tab', 'actions');
