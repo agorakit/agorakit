@@ -3,7 +3,7 @@
 namespace App;
 
 use Cviebrock\EloquentTaggable\Taggable;
-use Iatstuti\Database\Support\CascadeSoftDeletes;
+use Askedio\SoftCascade\Traits\SoftCascadeTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
@@ -14,10 +14,10 @@ class Group extends Model
     use ValidatingTrait;
     use RevisionableTrait;
     use SoftDeletes;
-    use CascadeSoftDeletes;
+    use SoftCascadeTrait;
     use Taggable;
 
-    protected $cascadeDeletes = ['discussions', 'actions', 'files', 'memberships'];
+    protected $softCascade = ['discussions', 'actions', 'files', 'memberships'];
 
     protected $rules = [
         'name' => 'required',

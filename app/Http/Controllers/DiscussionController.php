@@ -83,6 +83,10 @@ class DiscussionController extends Controller
             ->withInput();
         }
 
+        // update activity timestamp on parent items
+        $group->touch();
+        \Auth::user()->touch();
+
         if ($request->get('tags'))
         {
             $discussion->tag($request->get('tags'));

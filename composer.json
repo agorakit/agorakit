@@ -6,6 +6,7 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+        "askedio/laravel5-soft-cascade": "^5.5",
         "consoletvs/charts": "5.*",
         "cviebrock/eloquent-taggable": "^3.2.3",
         "eluceo/ical": "^0.13.0",

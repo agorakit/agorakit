@@ -152,6 +152,10 @@
                         <i class="fa fa-users"></i> Users
                     </a>
 
+                    <a class="dropdown-item" href="{{ url('/admin/undo') }}">
+                        <i class="fa fa-trash"></i> Recover content
+                    </a>
+
                     <a class="dropdown-item" href="{{ action('InsightsController@forAllGroups') }}">
                         <i class="fa fa-line-chart"></i> {{ trans('messages.insights') }}
                     </a>
