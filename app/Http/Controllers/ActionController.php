@@ -143,6 +143,10 @@ class ActionController extends Controller
 
         $action->group()->associate($group);
 
+        // update activity timestamp on parent items
+        $group->touch();
+        \Auth::user()->touch();
+
         if ($action->isInvalid()) {
             // Oops.
             return redirect()->route('groups.actions.create', $group)
@@ -208,7 +212,7 @@ class ActionController extends Controller
             $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
         }
 
-        
+
         if ($action->location != $request->input('location')) {
 
             // we need to update user address and geocode it
