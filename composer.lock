@@ -4,8 +4,49 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c567ab05020a56aca3fd73781d8a681b",
+    "content-hash": "21e09d138a48e8ff9c042b12d8a099c7",
     "packages": [
+        {
+            "name": "askedio/laravel5-soft-cascade",
+            "version": "5.5.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Askedio/laravel5-soft-cascade.git",
+                "reference": "2873dace0b308dcbfb38c1300316733dd461d447"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Askedio/laravel5-soft-cascade/zipball/2873dace0b308dcbfb38c1300316733dd461d447",
+                "reference": "2873dace0b308dcbfb38c1300316733dd461d447",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.5.x",
+                "laravel/lumen-framework": "5.5.x",
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "codacy/coverage": "dev-master",
+                "laravel/laravel": "5.5.x",
+                "phpunit/phpunit": "~6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Askedio\\SoftCascade\\Providers\\GenericServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Askedio\\SoftCascade\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Soft Delete & Restore Cascader",
+            "time": "2018-02-05T07:14:03+00:00"
+        },
         {
             "name": "clue/stream-filter",
             "version": "v1.4.0",
@@ -1904,6 +1945,89 @@
             "time": "2018-01-18T13:27:23+00:00"
         },
         {
+            "name": "laravel/lumen-framework",
+            "version": "v5.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/lumen-framework.git",
+                "reference": "63ac078a31774a70859c7ae982537eda6fd87386"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/lumen-framework/zipball/63ac078a31774a70859c7ae982537eda6fd87386",
+                "reference": "63ac078a31774a70859c7ae982537eda6fd87386",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/auth": "5.5.*",
+                "illuminate/broadcasting": "5.5.*",
+                "illuminate/bus": "5.5.*",
+                "illuminate/cache": "5.5.*",
+                "illuminate/config": "5.5.*",
+                "illuminate/container": "5.5.*",
+                "illuminate/contracts": "5.5.*",
+                "illuminate/database": "5.5.*",
+                "illuminate/encryption": "5.5.*",
+                "illuminate/events": "5.5.*",
+                "illuminate/filesystem": "5.5.*",
+                "illuminate/hashing": "5.5.*",
+                "illuminate/http": "5.5.*",
+                "illuminate/pagination": "5.5.*",
+                "illuminate/pipeline": "5.5.*",
+                "illuminate/queue": "5.5.*",
+                "illuminate/support": "5.5.*",
+                "illuminate/translation": "5.5.*",
+                "illuminate/validation": "5.5.*",
+                "illuminate/view": "5.5.*",
+                "monolog/monolog": "~1.12",
+                "mtdowling/cron-expression": "~1.0",
+                "nikic/fast-route": "~1.2",
+                "php": ">=7.0",
+                "symfony/http-foundation": "~3.3",
+                "symfony/http-kernel": "~3.3"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~5.7"
+            },
+            "suggest": {
+                "laravel/tinker": "Required to use the tinker console command (~1.0).",
+                "vlucas/phpdotenv": "Required to use .env files (~2.2)."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Lumen\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylorotwell@gmail.com"
+                }
+            ],
+            "description": "The Laravel Lumen Framework.",
+            "homepage": "https://lumen.laravel.com",
+            "keywords": [
+                "framework",
+                "laravel",
+                "lumen"
+            ],
+            "time": "2017-10-16T23:13:50+00:00"
+        },
+        {
             "name": "laravel/socialite",
             "version": "v3.0.9",
             "source": {
@@ -2459,6 +2583,52 @@
                 "time"
             ],
             "time": "2017-01-16T07:55:07+00:00"
+        },
+        {
+            "name": "nikic/fast-route",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nikic/FastRoute.git",
+                "reference": "181d480e08d9476e61381e04a71b34dc0432e812"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nikic/FastRoute/zipball/181d480e08d9476e61381e04a71b34dc0432e812",
+                "reference": "181d480e08d9476e61381e04a71b34dc0432e812",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.35|~5.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "FastRoute\\": "src/"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Nikita Popov",
+                    "email": "nikic@php.net"
+                }
+            ],
+            "description": "Fast request router for PHP",
+            "keywords": [
+                "router",
+                "routing"
+            ],
+            "time": "2018-02-13T20:26:39+00:00"
         },
         {
             "name": "nikic/php-parser",

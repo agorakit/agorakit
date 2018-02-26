@@ -44,6 +44,10 @@ class CommentController extends Controller
         ++$discussion->total_comments;
         $discussion->save();
 
+        // update activity timestamp on parent items
+        $group->touch();
+        $discussion->touch();
+        \Auth::user()->touch();
 
         return redirect()->route('groups.discussions.show', [$discussion->group, $discussion]);
     }

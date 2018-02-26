@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class User extends Authenticatable
@@ -15,6 +16,7 @@ class User extends Authenticatable
     use Notifiable;
     use ValidatingTrait;
     use RevisionableTrait;
+    use SoftDeletes;
 
     /**
     * The attributes that are mass assignable.
