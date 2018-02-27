@@ -2,9 +2,9 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'filename' => 'Filename',
-  'grid' => 'Grid',
-  'list' => 'List',
+  'attend' => 'Attend',
+  'unattend' => 'Unattend',
+  'user_attending' => 'Users attending',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'A message for you',
   'accept_invitation' => 'Accept the invitation',
@@ -69,9 +69,11 @@ return array (
   'email_verified' => 'TODO: email_verified',
   'embed_this_page' => 'Embed this page',
   'ends' => 'Ends',
+  'filename' => 'Filename',
   'files' => 'Files',
   'files_in_this_group' => 'Files in this group',
   'forgotten_password' => 'Forgotten password',
+  'grid' => 'Grid',
   'group' => 'Group',
   'group_admin_users' => 'Contact person(s)',
   'group_home' => 'Group home',
@@ -112,6 +114,7 @@ return array (
   'leaving_help_message' => 'We are sad to see you go... confirm that you want to leave this group. You won\'t receive notifications anymore.',
   'leaving_the_group_called' => 'Leaving the group called',
   'link' => 'Link',
+  'list' => 'List',
   'location' => 'Location',
   'login' => 'Login',
   'logout' => 'Logout',
@@ -198,7 +201,6 @@ return array (
   'visit' => 'Visit',
   'visit_link' => 'Visit Link',
   'we_need_to_confirm' => 'We need to confirm your account',
-  'what' => 'what',
   'when' => 'when',
   'where' => 'where',
   'yes' => 'TODO: yes',
@@ -221,5 +223,6 @@ return array (
     'not_an_admin' => 'Not administrator',
     'starts' => 'Starts',
     'toggle_navigation' => 'Toggle navigation',
+    'what' => 'what',
   ),
 );

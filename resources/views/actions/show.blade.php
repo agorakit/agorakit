@@ -60,7 +60,7 @@
                 {!! Form::open(['route' => ['groups.actions.unattend', $group, $action]]) !!}
                 {!! Form::submit(trans('messages.unattend'), ['class' => 'btn btn-primary']) !!}
                 {!! Form::close() !!}
-            @else
+            @elseif (Auth::user() && !Auth::user()->isAttending($action))
                 {!! Form::open(['route' => ['groups.actions.attend', $group, $action]]) !!}
                 {!! Form::submit(trans('messages.attend'), ['class' => 'btn btn-primary']) !!}
                 {!! Form::close() !!}

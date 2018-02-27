@@ -2,9 +2,9 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'filename' => 'Nom de fichier',
-  'grid' => 'Grille',
-  'list' => 'Liste',
+  'attend' => 'Participer',
+  'unattend' => 'Annuler ma participation',
+  'user_attending' => 'Participants',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'accept_invitation' => 'Accepter l\'invitation',
@@ -70,9 +70,11 @@ return array (
   'email_verified' => 'Email vérifié',
   'embed_this_page' => 'Incorporer cette page',
   'ends' => 'Fin',
+  'filename' => 'Nom de fichier',
   'files' => 'Fichiers',
   'files_in_this_group' => 'Fichiers de ce groupe',
   'forgotten_password' => 'Mot de passe oublié',
+  'grid' => 'Grille',
   'group' => 'Groupe',
   'group_admin_users' => 'Personne(s) de contact',
   'group_home' => 'À propos',
@@ -113,6 +115,7 @@ return array (
   'leaving_help_message' => 'Nous sommes désolés de vous voir quitter ce groupe. Merci de confirmer que c\'est bien votre intention. Vous ne recevrez plus de notifications par mail de ce groupe et vous n\'apparaîtrez plus dans la liste des participants.',
   'leaving_the_group_called' => 'Quitter le groupe',
   'link' => 'Lien',
+  'list' => 'Liste',
   'location' => 'Localisation',
   'login' => 'Connexion',
   'logout' => 'Déconnexion',
@@ -199,7 +202,6 @@ return array (
   'visit' => 'Visiter',
   'visit_link' => 'Visitez le lien',
   'we_need_to_confirm' => 'Nous avons juste besoin de confirmer votre adresse mail.',
-  'what' => 'Quoi',
   'when' => 'Quand',
   'where' => 'Où',
   'yes' => 'Oui',
@@ -222,5 +224,6 @@ return array (
     'not_an_admin' => 'Pas administrateur',
     'starts' => 'Début',
     'toggle_navigation' => 'Activer la navigation',
+    'what' => 'Quoi',
   ),
 );
