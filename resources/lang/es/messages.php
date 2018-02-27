@@ -2,10 +2,9 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'filename' => 'TODO: filename',
-  'grid' => 'TODO: grid',
-  'list' => 'TODO: list',
-  'liste' => 'TODO: liste',
+  'attend' => 'TODO: attend',
+  'unattend' => 'TODO: unattend',
+  'user_attending' => 'TODO: user_attending',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un mensaje para usted',
   'accept_invitation' => 'Acepta la invitación',
@@ -70,9 +69,11 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'email_verified' => 'Email verified',
   'embed_this_page' => 'Incorporar esta página',
   'ends' => 'Termina',
+  'filename' => 'TODO: filename',
   'files' => 'Archivos',
   'files_in_this_group' => 'Archivos de este grupo',
   'forgotten_password' => 'Olvidó su contraseña',
+  'grid' => 'TODO: grid',
   'group' => 'TODO: group',
   'group_admin_users' => 'Persona(s) de contacto',
   'group_home' => 'Inicio del grupo',
@@ -113,6 +114,7 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'leaving_help_message' => 'Nos entristece ver que te vayas... confirma que quieres dejar este grupo. Ya no recibirás más notificaciones.',
   'leaving_the_group_called' => 'Dejando el grupo llamado',
   'link' => 'Enlace',
+  'list' => 'TODO: list',
   'location' => 'Ubicación',
   'login' => 'Iniciar sesión',
   'logout' => 'Cerrar sesión',
@@ -199,7 +201,6 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'visit' => 'TODO: visit',
   'visit_link' => 'Visitar enlace',
   'we_need_to_confirm' => 'Necesitamos confirmar su cuenta',
-  'what' => 'qué',
   'when' => 'cuando',
   'where' => 'dónde',
   'yes' => 'Yes',
@@ -219,8 +220,10 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   //================================== Obsolete strings ==================================//
   'LLH:obsolete' => 
   array (
+    'liste' => 'TODO: liste',
     'not_an_admin' => 'No administrador',
     'starts' => 'Comienza',
     'toggle_navigation' => 'Conmutar navegación',
+    'what' => 'qué',
   ),
 );

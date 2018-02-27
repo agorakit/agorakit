@@ -2,10 +2,9 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'filename' => 'TODO: filename',
-  'grid' => 'TODO: grid',
-  'list' => 'TODO: list',
-  'liste' => 'TODO: liste',
+  'attend' => 'TODO: attend',
+  'unattend' => 'TODO: unattend',
+  'user_attending' => 'TODO: user_attending',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'U heeft een bericht',
   'accept_invitation' => 'De uitnodiging accepteren',
@@ -69,9 +68,11 @@ return array (
   'email_verified' => 'TODO: email_verified',
   'embed_this_page' => 'Embed deze pagina',
   'ends' => 'Einde',
+  'filename' => 'TODO: filename',
   'files' => 'Bestanden',
   'files_in_this_group' => 'Bestanden in deze groep',
   'forgotten_password' => 'Wachtwoord vergeten',
+  'grid' => 'TODO: grid',
   'group' => 'TODO: group',
   'group_admin_users' => 'TODO: group_admin_users',
   'group_home' => 'Over deze groep',
@@ -112,6 +113,7 @@ return array (
   'leaving_help_message' => 'Jammergenoeg wilt u deze groep verlaten. Gelieve te bevestigen dat dit echt uw bedoeling is. U zal geen meldingen van deze groep meer ontvangen via mail en u zal niet meer op de ledenlijst staan.',
   'leaving_the_group_called' => 'Deze groep verlaten',
   'link' => 'TODO: link',
+  'list' => 'TODO: list',
   'location' => 'Locatie',
   'login' => 'Log in',
   'logout' => 'Log out',
@@ -198,7 +200,6 @@ return array (
   'visit' => 'TODO: visit',
   'visit_link' => 'TODO: visit_link',
   'we_need_to_confirm' => 'Uw mailadres moet nog bevestigd worden',
-  'what' => 'Wat',
   'when' => 'Wanneer',
   'where' => 'Waar',
   'yes' => 'TODO: yes',
@@ -218,8 +219,10 @@ return array (
   //================================== Obsolete strings ==================================//
   'LLH:obsolete' => 
   array (
+    'liste' => 'TODO: liste',
     'not_an_admin' => 'Geen beheerder',
     'starts' => 'Begint',
     'toggle_navigation' => 'Navigatie activeren',
+    'what' => 'Wat',
   ),
 );

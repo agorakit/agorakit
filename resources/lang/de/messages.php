@@ -2,10 +2,9 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'filename' => 'TODO: filename',
-  'grid' => 'TODO: grid',
-  'list' => 'TODO: list',
-  'liste' => 'TODO: liste',
+  'attend' => 'TODO: attend',
+  'unattend' => 'TODO: unattend',
+  'user_attending' => 'TODO: user_attending',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Eine Nachricht für Sie',
   'accept_invitation' => 'Die Einladung akzeptieren',
@@ -69,9 +68,11 @@ return array (
   'email_verified' => 'TODO: email_verified',
   'embed_this_page' => 'Einbetten dieser seite',
   'ends' => 'Ende',
+  'filename' => 'TODO: filename',
   'files' => 'Dateien',
   'files_in_this_group' => 'Dateien dieser Gruppe',
   'forgotten_password' => 'Passwort vergessen',
+  'grid' => 'TODO: grid',
   'group' => 'TODO: group',
   'group_admin_users' => 'TODO: group_admin_users',
   'group_home' => 'Gruppen-Startseite',
@@ -112,6 +113,7 @@ return array (
   'leaving_help_message' => 'Es tut uns leid, dass Sie gehen möchten...bitte bestätigen Sie, dass Sie dies wünschen. Sie werden keine weiteren Benachrichtigungen erhalten.',
   'leaving_the_group_called' => 'Abgetretene Gruppe:',
   'link' => 'TODO: link',
+  'list' => 'TODO: list',
   'location' => 'Standort',
   'login' => 'Einloggen',
   'logout' => 'Abmelden',
@@ -198,7 +200,6 @@ return array (
   'visit' => 'TODO: visit',
   'visit_link' => 'TODO: visit_link',
   'we_need_to_confirm' => 'Wir müssen Ihr Konto bestätigen',
-  'what' => 'was',
   'when' => 'wann',
   'where' => 'wo',
   'yes' => 'TODO: yes',
@@ -218,8 +219,10 @@ return array (
   //================================== Obsolete strings ==================================//
   'LLH:obsolete' => 
   array (
+    'liste' => 'TODO: liste',
     'not_an_admin' => 'Keine Admin-Rechte',
     'starts' => 'Startet',
     'toggle_navigation' => 'Navigierung hin- und herschalten',
+    'what' => 'was',
   ),
 );
