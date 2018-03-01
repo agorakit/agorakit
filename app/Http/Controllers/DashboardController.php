@@ -280,7 +280,7 @@ class DashboardController extends Controller
 
     public function users()
     {
-        $users = \App\User::with('groups')->orderBy('name')->paginate(30);
+        $users = \App\User::with('groups')->orderBy('created_at', 'desc')->paginate(20);
 
         return view('dashboard.users')
         ->with('tab', 'users')

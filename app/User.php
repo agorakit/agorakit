@@ -185,6 +185,22 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Group', 'membership')->where('membership.membership', '>=', \App\Membership::MEMBER)->orderBy('name')->withTimestamps();
     }
 
+    /**
+     * The actions this user attends to
+     */
+    public function actions()
+    {
+        return $this->belongsToMany('App\Action');
+    }
+
+    public function isAttending(Action $action)
+    {
+
+
+        return $action->users->contains($this->id);
+        
+    }
+
     public function memberships()
     {
         return $this->hasMany('App\Membership');

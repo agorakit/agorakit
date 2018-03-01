@@ -18,11 +18,11 @@
         </h2>
 
         <div class="ml-4 dropdown">
-          <button class="btn btn-secondary-outline dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <button class="btn btn-outline-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-wrench" aria-hidden="true"></i>
 
           </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
 
             @can('update', $discussion)
               <a class="dropdown-item" href="{{ route('groups.discussions.edit', [$group->id, $discussion->id]) }}">
