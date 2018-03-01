@@ -21,7 +21,7 @@ class Group extends Model
     ];
 
     protected $fillable = ['id', 'name', 'body', 'cover'];
-    protected $casts = ['user_id' => 'integer'];
+    protected $casts = ['user_id' => 'integer', 'settings' => 'array'];
 
     /**** various group types ****/
     // open group, default
@@ -190,6 +190,34 @@ class Group extends Model
     {
         return $query->where('group_type', $this::CLOSED);
     }
+
+
+    /**
+    * Returns the current setting $key for the group, $default if not set.
+    */
+    public function getSetting($key, $default = false)
+    {
+        $settings = $this->settings;
+        if (isset($settings[$key])) {
+            return $settings[$key];
+        } else {
+            return $default;
+        }
+    }
+
+    /**
+    * Set the setting $key to $value for the group
+    * No validation is made on this layer, settings are stored in the json text field of the DB.
+    */
+    public function setSetting($key, $value)
+    {
+        $settings = $this->settings;
+        $settings[$key] = $value;
+        $this->settings = $settings;
+
+        return $this->save();
+    }
+
 
     /**
     * Geocode the item

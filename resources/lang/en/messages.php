@@ -1,8 +1,6 @@
 <?php
 
 return array (
-  //============================== New strings to translate ==============================//
-  'attend_to' => 'Attend to',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'A message for you',
   'accept_invitation' => 'Accept the invitation',
@@ -20,6 +18,7 @@ return array (
   'all_groups' => 'All groups',
   'are_you_sure' => 'Are you sure?',
   'attend' => 'Attend',
+  'attend_to' => 'Attend to',
   'author' => 'Author',
   'back_to' => 'Back to',
   'because_you_asked_for_it' => 'Because you asked for it',
@@ -68,6 +67,7 @@ return array (
   'email_verified' => 'TODO: email_verified',
   'embed_this_page' => 'Embed this page',
   'ends' => 'Ends',
+  'features' => 'TODO: features',
   'filename' => 'Filename',
   'files' => 'Files',
   'files_in_this_group' => 'Files in this group',
@@ -219,8 +219,9 @@ return array (
   'your_groups' => 'Your groups',
   'your_search_for' => 'Your search for',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' =>
+  'LLH:obsolete' => 
   array (
+    'modules' => 'TODO: modules',
     'not_an_admin' => 'Not administrator',
     'starts' => 'Starts',
     'toggle_navigation' => 'Toggle navigation',

@@ -93,6 +93,7 @@ class GroupController extends Controller
         Gate::authorize('create', \App\Group::class);
 
         return view('groups.create')
+        ->with('group', new \App\Group)
         ->with('all_tags', \App\Group::allTags());
     }
 

@@ -1,8 +1,6 @@
 <?php
 
 return array (
-  //============================== New strings to translate ==============================//
-  'attend_to' => 'TODO: attend_to',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'U heeft een bericht',
   'accept_invitation' => 'De uitnodiging accepteren',
@@ -20,6 +18,7 @@ return array (
   'all_groups' => 'Alle groepen',
   'are_you_sure' => 'Bent u zeker ?',
   'attend' => 'TODO: attend',
+  'attend_to' => 'TODO: attend_to',
   'author' => 'Auteur',
   'back_to' => 'Terugkeren naar',
   'because_you_asked_for_it' => 'omdat u het heeft aangevraagd op de hoogte gehouden worden',
@@ -67,6 +66,7 @@ return array (
   'email_verified' => 'TODO: email_verified',
   'embed_this_page' => 'Embed deze pagina',
   'ends' => 'Einde',
+  'features' => 'TODO: features',
   'filename' => 'TODO: filename',
   'files' => 'Bestanden',
   'files_in_this_group' => 'Bestanden in deze groep',
@@ -221,6 +221,7 @@ return array (
   'LLH:obsolete' => 
   array (
     'liste' => 'TODO: liste',
+    'modules' => 'TODO: modules',
     'not_an_admin' => 'Geen beheerder',
     'starts' => 'Begint',
     'toggle_navigation' => 'Navigatie activeren',
