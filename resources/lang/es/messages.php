@@ -1,8 +1,6 @@
 <?php
 
 return array (
-  //============================== New strings to translate ==============================//
-  'attend_to' => 'TODO: attend_to',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un mensaje para usted',
   'accept_invitation' => 'Acepta la invitación',
@@ -20,6 +18,7 @@ return array (
   'all_groups' => 'Todos los grupos',
   'are_you_sure' => '¿Estás seguro?',
   'attend' => 'TODO: attend',
+  'attend_to' => 'TODO: attend_to',
   'author' => 'Autor',
   'back_to' => 'Volver a',
   'because_you_asked_for_it' => 'Porque tú lo pediste.',
@@ -68,6 +67,7 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'email_verified' => 'Email verified',
   'embed_this_page' => 'Incorporar esta página',
   'ends' => 'Termina',
+  'features' => 'TODO: features',
   'filename' => 'TODO: filename',
   'files' => 'Archivos',
   'files_in_this_group' => 'Archivos de este grupo',
@@ -222,6 +222,7 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'LLH:obsolete' => 
   array (
     'liste' => 'TODO: liste',
+    'modules' => 'TODO: modules',
     'not_an_admin' => 'No administrador',
     'starts' => 'Comienza',
     'toggle_navigation' => 'Conmutar navegación',

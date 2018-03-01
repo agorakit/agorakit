@@ -1,6 +1,9 @@
 <?php
 
 return array (
+  //============================== New strings to translate ==============================//
+  'features' => 'Gestion des fonctionalités',
+  'features_help' => 'Activez ou désactivez les fonctionalités de votre groupe, vous pourrez les réactiver à tout moment.',
   //==================================== Translations ====================================//
   'closed' => 'Groupe privé',
   'cover' => 'Image de présentation',
@@ -15,4 +18,10 @@ return array (
   'name' => 'Nom du groupe',
   'open' => 'Groupe public',
   'type' => 'Type de groupe',
+  //================================== Obsolete strings ==================================//
+  'LLH:obsolete' =>
+  array (
+    'tabs' => 'Gestion des fonctionalités',
+    'tabs_help' => 'Activez ou désactivez les fonctionalités de votre groupe',
+  ),
 );

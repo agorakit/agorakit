@@ -29,46 +29,58 @@
         </li>
 
 
-        @can ('viewDiscussions', $group)
-            <li class="nav-item">
-                <a href="{{ route('groups.discussions.index', $group->id) }}"  class="nav-link @if (isset($tab) && ($tab == 'discussion')) active @endif">
-                    <i class="fa fa-comments"></i> <span class="d-none d-lg-inline">{{ trans('messages.discussions') }}</span>
-                </a>
-            </li>
-        @endcan
+        @if ($group->getSetting('module_discussion', true) == true)
+            @can ('viewDiscussions', $group)
+                <li class="nav-item">
+                    <a href="{{ route('groups.discussions.index', $group->id) }}"  class="nav-link @if (isset($tab) && ($tab == 'discussion')) active @endif">
+                        <i class="fa fa-comments"></i> <span class="d-none d-lg-inline">{{ trans('messages.discussions') }}</span>
+                    </a>
+                </li>
+            @endcan
+        @endif
 
-        @can ('viewActions', $group)
-            <li class="nav-item">
-                <a href="{{ route('groups.actions.index', $group->id) }}"  class="nav-link @if (isset($tab) && ($tab == 'action')) active @endif">
-                    <i class="fa fa-calendar"></i> <span class="d-none d-lg-inline">{{ trans('messages.agenda') }}</span>
-                </a>
-            </li>
-        @endcan
-
-        @can ('viewFiles', $group)
-            <li class="nav-item">
-                <a href="{{ route('groups.files.index', $group->id) }}"  class="nav-link @if (isset($tab) && ($tab == 'files')) active @endif">
-                    <i class="fa fa-files-o"></i> <span class="d-none d-lg-inline">{{ trans('messages.files') }}</span>
-                </a>
-            </li>
-        @endcan
-
-        @can ('viewMembers', $group)
-            <li class="nav-item">
-                <a href="{{ route('groups.users.index', $group->id) }}"  class="nav-link @if (isset($tab) && ($tab == 'users')) active @endif">
-                    <i class="fa fa-users"></i> <span class="d-none d-lg-inline">{{ trans('messages.members') }}</span>
-                </a>
-            </li>
-        @endcan
+        @if ($group->getSetting('module_action', true) == true)
+            @can ('viewActions', $group)
+                <li class="nav-item">
+                    <a href="{{ route('groups.actions.index', $group->id) }}"  class="nav-link @if (isset($tab) && ($tab == 'action')) active @endif">
+                        <i class="fa fa-calendar"></i> <span class="d-none d-lg-inline">{{ trans('messages.agenda') }}</span>
+                    </a>
+                </li>
+            @endcan
+        @endif
 
 
-        @can ('viewMembers', $group)
-            <li class="nav-item">
-                <a href="{{ action('MapController@map', $group->id) }}"  class="nav-link @if (isset($tab) && ($tab == 'map')) active @endif">
-                    <i class="fa fa-map-marker"></i> <span class="d-none d-lg-inline">{{ trans('messages.map') }}</span>
-                </a>
-            </li>
-        @endcan
+
+        @if ($group->getSetting('module_file', true) == true)
+            @can ('viewFiles', $group)
+                <li class="nav-item">
+                    <a href="{{ route('groups.files.index', $group->id) }}"  class="nav-link @if (isset($tab) && ($tab == 'files')) active @endif">
+                        <i class="fa fa-files-o"></i> <span class="d-none d-lg-inline">{{ trans('messages.files') }}</span>
+                    </a>
+                </li>
+            @endcan
+        @endif
+
+        @if ($group->getSetting('module_member', true) == true)
+            @can ('viewMembers', $group)
+                <li class="nav-item">
+                    <a href="{{ route('groups.users.index', $group->id) }}"  class="nav-link @if (isset($tab) && ($tab == 'users')) active @endif">
+                        <i class="fa fa-users"></i> <span class="d-none d-lg-inline">{{ trans('messages.members') }}</span>
+                    </a>
+                </li>
+            @endcan
+
+        @endif
+
+        @if ($group->getSetting('module_map', true) == true)
+            @can ('viewMembers', $group)
+                <li class="nav-item">
+                    <a href="{{ action('MapController@map', $group->id) }}"  class="nav-link @if (isset($tab) && ($tab == 'map')) active @endif">
+                        <i class="fa fa-map-marker"></i> <span class="d-none d-lg-inline">{{ trans('messages.map') }}</span>
+                    </a>
+                </li>
+            @endcan
+        @endif
 
         @if ($group->isMember())
             <li class="nav-item">
@@ -77,11 +89,11 @@
                 </a>
             </li>
         @else
-                <li class="nav-item">
-                    <a href="{{ action('MembershipController@create', $group->id) }}"  class="nav-link @if (isset($tab) && ($tab == 'settings')) active @endif">
-                        <i class="fa fa-sign-in"></i> <span class="d-none d-lg-inline">{{ trans('messages.join') }}</span>
-                    </a>
-                </li>
+            <li class="nav-item">
+                <a href="{{ action('MembershipController@create', $group->id) }}"  class="nav-link @if (isset($tab) && ($tab == 'settings')) active @endif">
+                    <i class="fa fa-sign-in"></i> <span class="d-none d-lg-inline">{{ trans('messages.join') }}</span>
+                </a>
+            </li>
         @endif
 
 
@@ -93,6 +105,10 @@
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="{{ route('groups.edit', $group->id) }}">
                         <i class="fa fa-pencil"></i> {{ trans('messages.edit') }}
+                    </a>
+
+                    <a class="dropdown-item" href="{{ action('ModuleController@update', $group->id) }}">
+                        <i class="fa fa-toggle-on"></i> {{ trans('messages.features') }}
                     </a>
 
                     <a class="dropdown-item" href="{{ action('InsightsController@forGroup', $group->id) }}">
@@ -130,36 +146,47 @@
         </li>
 
 
-        @if ($group->isPublic() )
-            <li class="nav-item" role="presentation">
-                <a class="nav-link @if (isset($tab) && ($tab == 'discussion')) active @endif" href="{{ route('groups.discussions.index', $group->id) }}">
-                    <i class="fa fa-comments"></i> <span class="d-none d-lg-inline">{{ trans('messages.discussions') }}</span>
-                </a>
-            </li>
+        @if ($group->getSetting('module_discussion', true) == true)
+            @if ($group->isPublic() )
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link @if (isset($tab) && ($tab == 'discussion')) active @endif" href="{{ route('groups.discussions.index', $group->id) }}">
+                        <i class="fa fa-comments"></i> <span class="d-none d-lg-inline">{{ trans('messages.discussions') }}</span>
+                    </a>
+                </li>
+            @endif
         @endif
 
-        @if ($group->isPublic() )
-            <li class="nav-item" role="presentation">
-                <a class="nav-link @if (isset($tab) && ($tab == 'action')) active @endif" href="{{ route('groups.actions.index', $group->id) }}">
-                    <i class="fa fa-calendar"></i> <span class="d-none d-lg-inline">{{ trans('messages.agenda') }}</span>
-                </a>
-            </li>
+        @if ($group->getSetting('module_action', true) == true)
+            @if ($group->isPublic() )
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link @if (isset($tab) && ($tab == 'action')) active @endif" href="{{ route('groups.actions.index', $group->id) }}">
+                        <i class="fa fa-calendar"></i> <span class="d-none d-lg-inline">{{ trans('messages.agenda') }}</span>
+                    </a>
+                </li>
+            @endif
+
+
         @endif
 
-        @if ($group->isPublic() )
-            <li class="nav-item" role="presentation">
-                <a class="nav-link @if (isset($tab) && ($tab == 'files')) active @endif" href="{{ route('groups.files.index', $group->id) }}">
-                    <i class="fa fa-files-o"></i> <span class="d-none d-lg-inline">{{ trans('messages.files') }}</span>
-                </a>
-            </li>
+        @if ($group->getSetting('module_files', true) == true)
+            @if ($group->isPublic() )
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link @if (isset($tab) && ($tab == 'files')) active @endif" href="{{ route('groups.files.index', $group->id) }}">
+                        <i class="fa fa-files-o"></i> <span class="d-none d-lg-inline">{{ trans('messages.files') }}</span>
+                    </a>
+                </li>
+            @endif
+
         @endif
 
-        @if ($group->isPublic() )
-            <li class="nav-item" role="presentation">
-                <a class="nav-link @if (isset($tab) && ($tab == 'users')) active @endif" href="{{ route('groups.users.index', $group->id) }}">
-                    <i class="fa fa-users"></i> <span class="d-none d-lg-inline">{{ trans('messages.members') }}</span>
-                </a>
-            </li>
+        @if ($group->getSetting('module_member', true) == true)
+            @if ($group->isPublic() )
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link @if (isset($tab) && ($tab == 'users')) active @endif" href="{{ route('groups.users.index', $group->id) }}">
+                        <i class="fa fa-users"></i> <span class="d-none d-lg-inline">{{ trans('messages.members') }}</span>
+                    </a>
+                </li>
+            @endif
         @endif
 
 
