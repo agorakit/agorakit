@@ -16,8 +16,8 @@ body
 
 .main-container
 {
-    padding: 2em 2em 5em 2em;
     margin-top: 2em;
+    padding: 2em 2em 5em 2em;
     box-shadow: 0 2px 4px rgba(72, 78, 80, 0.2);
     border-radius: 4px;
     background-color: white;
@@ -152,23 +152,6 @@ h1.small
     background-color: white;
     border: 1px solid #ddd;
 }
-
-/***************************** USERS ******************/
-
-.avatar img {
-    width: 40px;
-    height: 40px;
-}
-
-.users_list .user {
-    font-size: 0.9em;
-    padding: 1em;
-    margin-bottom: 3em;
-    border: 1px solid #aaa;
-    border-radius: 3px;
-    min-height: 200px;
-}
-
 
 /***************************** COMMENTS ***************************************/
 
@@ -315,6 +298,13 @@ table, th, tr
 
 
 /******************************** UI ******************************************/
+
+
+.avatar img
+{
+width: 40px;
+height: 40px;
+}
 
 .meta
 {

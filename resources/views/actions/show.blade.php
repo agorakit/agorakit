@@ -54,27 +54,27 @@
         <h4>{{trans('messages.where')}} ?</h4>
         <p>{{$action->location}}</p>
 
-        <h4>
-            {{trans('messages.user_attending')}}
+
+        <h4>{{trans('messages.user_attending')}}
             @if (Auth::user() && Auth::user()->isAttending($action))
-                {!! Form::open(['route' => ['groups.actions.unattend', $group, $action]]) !!}
-                {!! Form::submit(trans('messages.unattend'), ['class' => 'btn btn-primary']) !!}
-                {!! Form::close() !!}
+                <a class="btn btn-outline-primary" up-modal=".main" href="{{route('groups.actions.unattend', [$group, $action])}}">{{trans('messages.unattend')}}</a>
             @elseif (Auth::user() && !Auth::user()->isAttending($action))
-                {!! Form::open(['route' => ['groups.actions.attend', $group, $action]]) !!}
-                {!! Form::submit(trans('messages.attend'), ['class' => 'btn btn-primary']) !!}
-                {!! Form::close() !!}
+                <a class="btn btn-outline-primary" up-modal=".main" href="{{route('groups.actions.attend', [$group, $action])}}">{{trans('messages.attend')}}</a>
             @endif
         </h4>
 
-        @foreach ($action->users as $user)
-            <div class="avatar"><img src="{{$user->avatar()}}" class="rounded-circle"/>{{$user->name}}</div>
-        @endforeach
+        <div class="users">
+            @forelse($action->users as $user)
+                @include('users.user-simple')
+            @empty
+                {{trans('messages.nothing_yet')}}
+            @endforelse
+        </div>
+
+
 
     </div>
 
 </div>
-
-
 
 @endsection

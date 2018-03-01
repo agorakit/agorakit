@@ -2,9 +2,7 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'attend' => 'TODO: attend',
-  'unattend' => 'TODO: unattend',
-  'user_attending' => 'TODO: user_attending',
+  'attend_to' => 'TODO: attend_to',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Eine Nachricht für Sie',
   'accept_invitation' => 'Die Einladung akzeptieren',
@@ -21,6 +19,7 @@ return array (
   'agenda_others' => 'Agenda von anderen gruppen',
   'all_groups' => 'Alle Gruppen',
   'are_you_sure' => 'Sind Sie sicher ?',
+  'attend' => 'TODO: attend',
   'author' => 'Autor',
   'back_to' => 'Zurück',
   'because_you_asked_for_it' => 'Weil Sie es angefordert haben',
@@ -186,10 +185,12 @@ return array (
   'thinks_that_you_might_want_to_join' => 'meint, dass Sie eventuell Mitglied werden möchten',
   'this_will_allow_you_to_be_informed' => 'dies erlaubt es Ihnen, auf dem Laufenden zu bleiben und teilzunehmen',
   'title' => 'Titel',
+  'unattend' => 'TODO: unattend',
   'unread_discussions' => 'Ungelesene Diskussionen',
   'upload' => 'TODO: upload',
   'upload_files' => 'TODO: upload_files',
   'user_added_successfuly' => 'Benutzer erfolgreich hinzugefügt',
+  'user_attending' => 'TODO: user_attending',
   'user_invited' => 'TODO: user_invited',
   'user_made_admin_successfuly' => 'Benutzer-admin erfolgreich',
   'user_made_member_successfuly' => 'Benutzer mitglied erfolgreich',

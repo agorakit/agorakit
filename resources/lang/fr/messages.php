@@ -2,9 +2,7 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'attend' => 'Participer',
-  'unattend' => 'Annuler ma participation',
-  'user_attending' => 'Participants',
+  'attend_to' => 'Participer à',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'accept_invitation' => 'Accepter l\'invitation',
@@ -22,12 +20,13 @@ return array (
   'agenda_others' => 'Agenda des autres groupes',
   'all_groups' => 'Tous les groupes',
   'are_you_sure' => 'Êtes-vous sûr⋅e ?',
+  'attend' => 'Participer',
   'author' => 'Auteur',
   'back_to' => 'Retour à',
   'because_you_asked_for_it' => 'parce que vous vous avez demandé à être tenu⋅e au courant',
   'begins' => 'Début',
   'body' => 'Texte',
-  'cancel' => 'J\'ai changé d\'avis, annuler',
+  'cancel' => 'Annuler',
   'candidates' => 'Candidats',
   'change_my_password' => 'Changer mon mot de passe',
   'changed' => 'a modifié',
@@ -188,10 +187,12 @@ return array (
   'thinks_that_you_might_want_to_join' => 'pense que vous pourriez être intéressé(e) à joindre',
   'this_will_allow_you_to_be_informed' => 'Cela vous permettra d\'être informé(e) des actions de ce groupe et de prendre part aux discussions.',
   'title' => 'Titre',
+  'unattend' => 'Annuler ma participation',
   'unread_discussions' => 'Discussions non lues',
   'upload' => 'Envoyer',
   'upload_files' => 'Envoyer les fichiers',
   'user_added_successfuly' => 'L\'utilisateur ajouté avec succès',
+  'user_attending' => 'Participants',
   'user_invited' => 'Utilisateurs-trices invité-es',
   'user_made_admin_successfuly' => 'Utilisateur rendu admin avec succès',
   'user_made_member_successfuly' => 'Utilisateur membre avec succès',

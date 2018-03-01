@@ -11,7 +11,9 @@
 
     <div class="content">
         <a href="{{ route('groups.actions.show', [$action->group_id, $action->id]) }}">
-            <div class="name">{{ $action->name }}</div>
+            <div class="name">
+                {{ $action->name }}
+            </div>
             <div class="meta">
                 {{$action->start->format('H:i')}} - {{$action->location}}
             </div>
@@ -29,6 +31,24 @@
                     {{ $action->group->name }}
                 </span>
             </a>
+        </div>
+
+
+
+        <div class="d-inline-flex align-items-center">
+            <div class="users mt-2 mb-2">
+                @foreach($action->users as $user)
+                    @include('users.user-avatar')
+                @endforeach
+            </div>
+
+            <div class="mt-2 mb-2">
+                @if (Auth::user() && Auth::user()->isAttending($action))
+                    <a class="btn btn-outline-primary btn-sm" up-modal=".main" href="{{route('groups.actions.unattend', [$action->group, $action])}}">{{trans('messages.unattend')}}</a>
+                @elseif (Auth::user() && !Auth::user()->isAttending($action))
+                    <a class="btn btn-outline-primary btn-sm" up-modal=".main" href="{{route('groups.actions.attend', [$action->group, $action])}}">{{trans('messages.attend')}}</a>
+                @endif
+            </div>
         </div>
 
 
