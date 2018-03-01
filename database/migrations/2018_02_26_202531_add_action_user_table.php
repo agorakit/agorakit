@@ -30,6 +30,6 @@ class AddActionUserTable extends Migration
      */
     public function down()
     {
-        //
+          Schema::drop('action_user');
     }
 }
