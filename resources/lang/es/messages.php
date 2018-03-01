@@ -2,9 +2,7 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'attend' => 'TODO: attend',
-  'unattend' => 'TODO: unattend',
-  'user_attending' => 'TODO: user_attending',
+  'attend_to' => 'TODO: attend_to',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un mensaje para usted',
   'accept_invitation' => 'Acepta la invitación',
@@ -21,6 +19,7 @@ return array (
   'agenda_others' => 'Calendario de otros grupos',
   'all_groups' => 'Todos los grupos',
   'are_you_sure' => '¿Estás seguro?',
+  'attend' => 'TODO: attend',
   'author' => 'Autor',
   'back_to' => 'Volver a',
   'because_you_asked_for_it' => 'Porque tú lo pediste.',
@@ -187,10 +186,12 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'thinks_that_you_might_want_to_join' => 'piensa que tal vez quieras unirte',
   'this_will_allow_you_to_be_informed' => 'esto le permitirá estar informado y participar.',
   'title' => 'Título',
+  'unattend' => 'TODO: unattend',
   'unread_discussions' => 'Discusiones no leídas',
   'upload' => 'Subir',
   'upload_files' => 'Subir archivos',
   'user_added_successfuly' => 'Usuario agregado correctamente',
+  'user_attending' => 'TODO: user_attending',
   'user_invited' => 'TODO: user_invited',
   'user_made_admin_successfuly' => 'Administrador agregado correctamente',
   'user_made_member_successfuly' => 'Miembro agregado correctamente',

@@ -2,9 +2,7 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'attend' => 'TODO: attend',
-  'unattend' => 'TODO: unattend',
-  'user_attending' => 'TODO: user_attending',
+  'attend_to' => 'TODO: attend_to',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'U heeft een bericht',
   'accept_invitation' => 'De uitnodiging accepteren',
@@ -21,6 +19,7 @@ return array (
   'agenda_others' => 'Agenda van andere groepen',
   'all_groups' => 'Alle groepen',
   'are_you_sure' => 'Bent u zeker ?',
+  'attend' => 'TODO: attend',
   'author' => 'Auteur',
   'back_to' => 'Terugkeren naar',
   'because_you_asked_for_it' => 'omdat u het heeft aangevraagd op de hoogte gehouden worden',
@@ -186,10 +185,12 @@ return array (
   'thinks_that_you_might_want_to_join' => 'denkt dat u misschien geïnteresseerd bent om aan te sluiten bij de groep',
   'this_will_allow_you_to_be_informed' => 'Op die manier blijft u op de hoogte van de activiteiten van deze groep, en kunt u deelnemen aan de discussies.',
   'title' => 'Titel',
+  'unattend' => 'TODO: unattend',
   'unread_discussions' => 'Niet-gelezen discussies',
   'upload' => 'TODO: upload',
   'upload_files' => 'TODO: upload_files',
   'user_added_successfuly' => 'Gebruiker toegevoegd',
+  'user_attending' => 'TODO: user_attending',
   'user_invited' => 'TODO: user_invited',
   'user_made_admin_successfuly' => 'Gebruiker admin succes',
   'user_made_member_successfuly' => 'Gebruiker lid succesvol',

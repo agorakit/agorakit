@@ -2,9 +2,7 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'attend' => 'Attend',
-  'unattend' => 'Unattend',
-  'user_attending' => 'Users attending',
+  'attend_to' => 'Attend to',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'A message for you',
   'accept_invitation' => 'Accept the invitation',
@@ -21,12 +19,13 @@ return array (
   'agenda_others' => 'Other groups\' calendars',
   'all_groups' => 'All groups',
   'are_you_sure' => 'Are you sure?',
+  'attend' => 'Attend',
   'author' => 'Author',
   'back_to' => 'Back to',
   'because_you_asked_for_it' => 'Because you asked for it',
   'begins' => 'Begins',
   'body' => 'Body',
-  'cancel' => 'I changed my mind, cancel',
+  'cancel' => 'Cancel',
   'candidates' => 'Candidates',
   'change_my_password' => 'Change my password',
   'changed' => 'Changed',
@@ -187,10 +186,12 @@ return array (
   'thinks_that_you_might_want_to_join' => 'thinks that you might want to join',
   'this_will_allow_you_to_be_informed' => 'this will allow you to be informed and to participate',
   'title' => 'Title',
+  'unattend' => 'Unattend',
   'unread_discussions' => 'Unread discussions',
   'upload' => 'Upload',
   'upload_files' => 'Upload Files',
   'user_added_successfuly' => 'User added successfully',
+  'user_attending' => 'Users attending',
   'user_invited' => 'User invited',
   'user_made_admin_successfuly' => 'User made admin successfully',
   'user_made_member_successfuly' => 'User made member successfully',
