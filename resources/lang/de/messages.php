@@ -2,10 +2,7 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'filename' => 'TODO: filename',
-  'grid' => 'TODO: grid',
-  'list' => 'TODO: list',
-  'liste' => 'TODO: liste',
+  'attend_to' => 'TODO: attend_to',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Eine Nachricht für Sie',
   'accept_invitation' => 'Die Einladung akzeptieren',
@@ -22,6 +19,7 @@ return array (
   'agenda_others' => 'Agenda von anderen gruppen',
   'all_groups' => 'Alle Gruppen',
   'are_you_sure' => 'Sind Sie sicher ?',
+  'attend' => 'TODO: attend',
   'author' => 'Autor',
   'back_to' => 'Zurück',
   'because_you_asked_for_it' => 'Weil Sie es angefordert haben',
@@ -69,9 +67,11 @@ return array (
   'email_verified' => 'TODO: email_verified',
   'embed_this_page' => 'Einbetten dieser seite',
   'ends' => 'Ende',
+  'filename' => 'TODO: filename',
   'files' => 'Dateien',
   'files_in_this_group' => 'Dateien dieser Gruppe',
   'forgotten_password' => 'Passwort vergessen',
+  'grid' => 'TODO: grid',
   'group' => 'TODO: group',
   'group_admin_users' => 'TODO: group_admin_users',
   'group_home' => 'Gruppen-Startseite',
@@ -112,6 +112,7 @@ return array (
   'leaving_help_message' => 'Es tut uns leid, dass Sie gehen möchten...bitte bestätigen Sie, dass Sie dies wünschen. Sie werden keine weiteren Benachrichtigungen erhalten.',
   'leaving_the_group_called' => 'Abgetretene Gruppe:',
   'link' => 'TODO: link',
+  'list' => 'TODO: list',
   'location' => 'Standort',
   'login' => 'Einloggen',
   'logout' => 'Abmelden',
@@ -184,10 +185,12 @@ return array (
   'thinks_that_you_might_want_to_join' => 'meint, dass Sie eventuell Mitglied werden möchten',
   'this_will_allow_you_to_be_informed' => 'dies erlaubt es Ihnen, auf dem Laufenden zu bleiben und teilzunehmen',
   'title' => 'Titel',
+  'unattend' => 'TODO: unattend',
   'unread_discussions' => 'Ungelesene Diskussionen',
   'upload' => 'TODO: upload',
   'upload_files' => 'TODO: upload_files',
   'user_added_successfuly' => 'Benutzer erfolgreich hinzugefügt',
+  'user_attending' => 'TODO: user_attending',
   'user_invited' => 'TODO: user_invited',
   'user_made_admin_successfuly' => 'Benutzer-admin erfolgreich',
   'user_made_member_successfuly' => 'Benutzer mitglied erfolgreich',
@@ -198,7 +201,6 @@ return array (
   'visit' => 'TODO: visit',
   'visit_link' => 'TODO: visit_link',
   'we_need_to_confirm' => 'Wir müssen Ihr Konto bestätigen',
-  'what' => 'was',
   'when' => 'wann',
   'where' => 'wo',
   'yes' => 'TODO: yes',
@@ -218,8 +220,10 @@ return array (
   //================================== Obsolete strings ==================================//
   'LLH:obsolete' => 
   array (
+    'liste' => 'TODO: liste',
     'not_an_admin' => 'Keine Admin-Rechte',
     'starts' => 'Startet',
     'toggle_navigation' => 'Navigierung hin- und herschalten',
+    'what' => 'was',
   ),
 );

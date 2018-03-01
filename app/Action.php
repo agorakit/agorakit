@@ -52,6 +52,15 @@ class Action extends Model
         return route('groups.actions.show', [$this->group, $this]);
     }
 
+
+    /**
+     * The users attending this action
+     */
+    public function users()
+    {
+        return $this->belongsToMany('App\User');
+    }
+
     /**
     * Geocode the item
     * Returns true if it worked, false if it didn't.

@@ -16,8 +16,8 @@ body
 
 .main-container
 {
-    padding: 2em 2em 5em 2em;
     margin-top: 2em;
+    padding: 2em 2em 5em 2em;
     box-shadow: 0 2px 4px rgba(72, 78, 80, 0.2);
     border-radius: 4px;
     background-color: white;
@@ -152,23 +152,6 @@ h1.small
     background-color: white;
     border: 1px solid #ddd;
 }
-
-/***************************** USERS ******************/
-
-.avatar img {
-    width: 40px;
-    height: 40px;
-}
-
-.users_list .user {
-    font-size: 0.9em;
-    padding: 1em;
-    margin-bottom: 3em;
-    border: 1px solid #aaa;
-    border-radius: 3px;
-    min-height: 200px;
-}
-
 
 /***************************** COMMENTS ***************************************/
 
@@ -313,71 +296,20 @@ table, th, tr
     padding: 12px;
 }
 
-/******************************** Mobile **************************************/
-
-/*
-@media screen and (max-width: 640px) {
-  th.date {
-    width: 10%;
-
-  }
-
-  th.avatar, td.avatar {
-      width: 30px;
-  }
-
-  .avatar img
-  {
-      width: 25px;
-      height: 25px;
-  }
-
-  table.special td.content
-  {
-      width: 80%;
-  }
-
-  th.unread, td.unread
-  {
-      width: 10%;
-      display: hidden;
-  }
-
-  .main-container
-  {
-      padding: 0 10px 50px 10px;
-      margin: 0;
-  }
-
-  h1
-  {
-      font-size: 20px;
-  }
-
-  h2
-  {
-      font-size: 18px;
-  }
-
-  h3
-  {
-      font-size: 16px;
-  }
-
-  h4
-  {
-      font-size: 14px;
-  }
-
-  body, .btn
-  {
-      font-size: 13px;
-  }
-}
-*/
-
 
 /******************************** UI ******************************************/
+
+
+.avatar img
+{
+width: 40px;
+height: 40px;
+}
+
+.meta
+{
+    color: #888;
+}
 
 
 .history {

@@ -229,6 +229,13 @@ Route::group(['middleware' => ['web']], function () {
 
 
 
+        Route::get('actions/{action}/attend', 'ActionUserController@create')->name('.actions.attend');
+        Route::get('actions/{action}/unattend', 'ActionUserController@destroyConfirm')->name('.actions.unattend');
+
+        Route::post('actions/{action}/attend', 'ActionUserController@store')->name('.actions.attend.store');
+        Route::post('actions/{action}/unattend', 'ActionUserController@destroy')->name('.actions.unattend.store');
+
+
         // Files
         Route::get('files', 'FileController@index')->name('.files.index');
         Route::get('files/create', 'FileController@create')->name('.files.create');
