@@ -18,6 +18,20 @@ class ModuleController extends Controller
         $this->middleware('groupadmin');
     }
 
+    public function show(Request $request, Group $group)
+    {
+        if ($group->getSetting('module_custom_name'))
+        {
+            return view('groups.custom')
+            ->with('group', $group)
+            ->with('tab', 'custom');
+        }
+        else
+        {
+            abort(404, 'No custom module for this group');
+        }
+    }
+
 
     public function edit(Request $request, Group $group)
     {
@@ -73,6 +87,12 @@ class ModuleController extends Controller
         {
             $group->setSetting('module_map', false);
         }
+
+
+        // handle custom module (iframe or similar system)
+        $group->setSetting('module_custom_icon', $request->get('module_custom_icon'));
+        $group->setSetting('module_custom_name', $request->get('module_custom_name'));
+        $group->setSetting('module_custom_html', $request->get('module_custom_html'));
 
 
         flash(trans('messages.ressource_updated_successfully'));

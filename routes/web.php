@@ -155,6 +155,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::delete('delete', 'GroupController@destroy')->name('.delete');
 
         // Modules (tabs enable disable on each group
+        Route::get('custom', 'ModuleController@show')->name('.modules.show');
         Route::get('modules', 'ModuleController@edit')->name('.modules.edit');
         Route::post('modules', 'ModuleController@update')->name('.modules.update');
 
