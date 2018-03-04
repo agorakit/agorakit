@@ -23,11 +23,13 @@
 
 <body>
 
-    @if (Auth::check())
-        @include('partials.nav')
-    @else
-        @include('partials.nav-guest')
-    @endif
+    @unless (request()->get('embed'))
+        @if (Auth::check())
+            @include('partials.nav')
+        @else
+            @include('partials.nav-guest')
+        @endif
+    @endunless
 
     <div class="container main-container">
         <div class="main">
@@ -36,7 +38,11 @@
         </div>
     </div>
 
-    <div class="credits">{{trans('messages.made_with')}} <a href="https://www.agorakit.org">Agorakit ({{config('agorakit.version')}})</a></div>
+    <div class="credits">
+        {{trans('messages.made_with')}}
+        <a href="https://www.agorakit.org">Agorakit ({{config('agorakit.version')}})</a>
+        - <a href="{{request()->fullUrlWithQuery(['embed'=>1])}}">{{trans('messages.embed')}}</a>
+    </div>
 
 
     <!-- Scripts -->
