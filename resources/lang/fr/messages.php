@@ -1,8 +1,6 @@
 <?php
 
 return array (
-  //============================== New strings to translate ==============================//
-  'attend_to' => 'Participer à',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'accept_invitation' => 'Accepter l\'invitation',
@@ -21,6 +19,7 @@ return array (
   'all_groups' => 'Tous les groupes',
   'are_you_sure' => 'Êtes-vous sûr⋅e ?',
   'attend' => 'Participer',
+  'attend_to' => 'Participer à',
   'author' => 'Auteur',
   'back_to' => 'Retour à',
   'because_you_asked_for_it' => 'parce que vous vous avez demandé à être tenu⋅e au courant',
@@ -69,6 +68,7 @@ return array (
   'email_verified' => 'Email vérifié',
   'embed_this_page' => 'Incorporer cette page',
   'ends' => 'Fin',
+  'features' => 'Fonctionalités',
   'filename' => 'Nom de fichier',
   'files' => 'Fichiers',
   'files_in_this_group' => 'Fichiers de ce groupe',
@@ -220,8 +220,9 @@ return array (
   'your_groups' => 'Mes groupes',
   'your_search_for' => 'Votre recherche pour',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' =>
+  'LLH:obsolete' => 
   array (
+    'modules' => 'Modules',
     'not_an_admin' => 'Pas administrateur',
     'starts' => 'Début',
     'toggle_navigation' => 'Activer la navigation',

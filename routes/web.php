@@ -154,6 +154,11 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('delete', 'GroupController@destroyConfirm')->name('.deleteconfirm');
         Route::delete('delete', 'GroupController@destroy')->name('.delete');
 
+        // Modules (tabs enable disable on each group
+        Route::get('custom', 'ModuleController@show')->name('.modules.show');
+        Route::get('modules', 'ModuleController@edit')->name('.modules.edit');
+        Route::post('modules', 'ModuleController@update')->name('.modules.update');
+
         // Mention at.js json routes
         Route::get('users/mention', 'MentionController@users')->name('.users.mention');
         Route::get('discussions/mention', 'MentionController@discussions')->name('.discussions.mention');

@@ -1,8 +1,6 @@
 <?php
 
 return array (
-  //============================== New strings to translate ==============================//
-  'attend_to' => 'TODO: attend_to',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Eine Nachricht für Sie',
   'accept_invitation' => 'Die Einladung akzeptieren',
@@ -20,6 +18,7 @@ return array (
   'all_groups' => 'Alle Gruppen',
   'are_you_sure' => 'Sind Sie sicher ?',
   'attend' => 'TODO: attend',
+  'attend_to' => 'TODO: attend_to',
   'author' => 'Autor',
   'back_to' => 'Zurück',
   'because_you_asked_for_it' => 'Weil Sie es angefordert haben',
@@ -67,6 +66,7 @@ return array (
   'email_verified' => 'TODO: email_verified',
   'embed_this_page' => 'Einbetten dieser seite',
   'ends' => 'Ende',
+  'features' => 'TODO: features',
   'filename' => 'TODO: filename',
   'files' => 'Dateien',
   'files_in_this_group' => 'Dateien dieser Gruppe',
@@ -221,6 +221,7 @@ return array (
   'LLH:obsolete' => 
   array (
     'liste' => 'TODO: liste',
+    'modules' => 'TODO: modules',
     'not_an_admin' => 'Keine Admin-Rechte',
     'starts' => 'Startet',
     'toggle_navigation' => 'Navigierung hin- und herschalten',
