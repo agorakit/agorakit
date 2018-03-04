@@ -37,6 +37,11 @@
             },
 
             eventClick:  function(event, jsEvent, view) {
+                /*
+                up.modal.visit(event.url, { target: '.content' });
+                return false;
+                */
+
                 $('#modalTitle').html(event.title);
                 $('#modal-body').html(event.body);
                 $('#modal-location').html(String(event.location));
@@ -44,7 +49,9 @@
                 $('#modal-stop').html(event.end.format('LLL'));
                 $('#eventUrl').attr('href',String(event.url));
                 $('#fullCalModal').modal();
+
                 return false;
+
             },
 
             eventRender: function(event, element)

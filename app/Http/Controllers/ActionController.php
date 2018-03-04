@@ -74,7 +74,7 @@ class ActionController extends Controller
         {
             $actions = $group->actions()
             ->orderBy('start', 'asc')
-            ->where('start', '>=', Carbon::now())
+            ->where('start', '>=', Carbon::now()->subDays(1))
             ->paginate(10);
             return view('actions.index-list')
             ->with('actions', $actions)
@@ -175,13 +175,37 @@ class ActionController extends Controller
 
         $action->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('start_time'));
 
-        if ($request->has('stop_date') && $request->get('stop_date')<>'')
+        if ($request->get('stop_time'))
         {
-            $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('stop_time'));
+            $stop_time = $request->get('stop_time');
         }
         else
         {
-            $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
+
+            $stop_time = $request->input('start_time');
+        }
+
+        if ($request->get('stop_date'))
+        {
+            if ($request->get('stop_time'))
+            {
+                $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('stop_time'));
+            }
+            else // asssume action will have a one hour duration
+            {
+                $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('start_time'))->addHour();
+            }
+        }
+        else // assume it will be same day
+        {
+            if ($request->get('stop_time'))
+            {
+                $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
+            }
+            else // asssume action will have a one hour duration
+            {
+                $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('start_time'))->addHour();
+            }
         }
 
         if ($request->get('location')) {
