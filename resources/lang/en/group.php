@@ -1,9 +1,6 @@
 <?php
 
 return array (
-  //============================== New strings to translate ==============================//
-  'features' => 'Manage features',
-  'features_help' => 'Enable or disable features of your group',
   //==================================== Translations ====================================//
   'closed' => 'Closed group',
   'cover' => 'Cover picture',
@@ -11,6 +8,8 @@ return array (
   'create_button' => 'Create the group',
   'create_group_title' => 'Create a new group',
   'description' => 'Group description',
+  'features' => 'Manage features',
+  'features_help' => 'Enable or disable features of your group',
   'history_of_this_group' => 'Edit history of this group',
   'join' => 'Join',
   'latest_discussions' => 'Latest discussions',
@@ -19,7 +18,7 @@ return array (
   'open' => 'Public group',
   'type' => 'Group type',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' =>
+  'LLH:obsolete' => 
   array (
     'tabs' => 'TODO: tabs',
     'tabs_help' => 'TODO: tabs_help',

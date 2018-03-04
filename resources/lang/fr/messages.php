@@ -1,6 +1,8 @@
 <?php
 
 return array (
+  //============================== New strings to translate ==============================//
+  'embed' => 'Intégrer cette page',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'accept_invitation' => 'Accepter l\'invitation',
@@ -220,7 +222,7 @@ return array (
   'your_groups' => 'Mes groupes',
   'your_search_for' => 'Votre recherche pour',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' => 
+  'LLH:obsolete' =>
   array (
     'modules' => 'Modules',
     'not_an_admin' => 'Pas administrateur',

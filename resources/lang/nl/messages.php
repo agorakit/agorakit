@@ -1,6 +1,8 @@
 <?php
 
 return array (
+  //============================== New strings to translate ==============================//
+  'embed' => 'TODO: embed',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'U heeft een bericht',
   'accept_invitation' => 'De uitnodiging accepteren',

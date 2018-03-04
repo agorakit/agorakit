@@ -1,9 +1,6 @@
 <?php
 
 return array (
-  //============================== New strings to translate ==============================//
-  'features' => 'TODO: features',
-  'features_help' => 'TODO: features_help',
   //==================================== Translations ====================================//
   'closed' => 'Cerrar grupo',
   'cover' => 'Imagen de portada',
@@ -11,6 +8,8 @@ return array (
   'create_button' => 'Crear el grupo',
   'create_group_title' => 'Crear un nuevo grupo',
   'description' => 'Descripción del grupo',
+  'features' => 'TODO: features',
+  'features_help' => 'TODO: features_help',
   'history_of_this_group' => 'Editar historial de este grupo',
   'join' => 'Unirse',
   'latest_discussions' => 'Últimas discusiones',
