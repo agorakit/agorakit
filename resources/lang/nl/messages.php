@@ -1,6 +1,8 @@
 <?php
 
 return array (
+  //============================== New strings to translate ==============================//
+  'filter' => 'TODO: filter',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'U heeft een bericht',
   'accept_invitation' => 'De uitnodiging accepteren',
@@ -46,7 +48,6 @@ return array (
   'create_link_button' => 'Nieuwe link',
   'create_link_help' => 'TODO: create_link_help',
   'created' => 'Gemaakt',
-  'date' => 'Datum',
   'delete' => 'Verwijderen',
   'delete_confirm_button' => 'Verwijderen ?',
   'delete_confirm_title' => 'Bent u zeker dat u dit wilt verwijderen?',
@@ -64,6 +65,7 @@ return array (
   'email_not_verified' => 'Uw e-mailadres is nog niet bevestigd, bevestig dit via je mailbox',
   'email_not_verified_send_again_verification' => '\'Indien u geen bevestigingsmail hebt ontvangen, klik dan hier voor een nieuwe',
   'email_verified' => 'TODO: email_verified',
+  'embed' => 'TODO: embed',
   'embed_this_page' => 'Embed deze pagina',
   'ends' => 'Einde',
   'features' => 'TODO: features',
@@ -169,7 +171,6 @@ return array (
   'show_all' => 'Alles tonen',
   'show_history' => 'Geschiedenis van aanpassingen tonen',
   'show_list' => 'Tonen als lijst',
-  'size' => 'size',
   'something_wrong' => 'TODO: something_wrong',
   'start' => 'Start',
   'start_date' => 'TODO: start_date',
@@ -220,9 +221,12 @@ return array (
   //================================== Obsolete strings ==================================//
   'LLH:obsolete' => 
   array (
+    'by' => 'TODO: by',
+    'date' => 'Datum',
     'liste' => 'TODO: liste',
     'modules' => 'TODO: modules',
     'not_an_admin' => 'Geen beheerder',
+    'size' => 'size',
     'starts' => 'Begint',
     'toggle_navigation' => 'Navigatie activeren',
     'what' => 'Wat',

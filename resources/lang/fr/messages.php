@@ -1,6 +1,8 @@
 <?php
 
 return array (
+  //============================== New strings to translate ==============================//
+  'filter' => 'Filtrer',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'accept_invitation' => 'Accepter l\'invitation',
@@ -48,7 +50,6 @@ return array (
   'create_link_help' => 'Ici, vous pouvez ajouter un lien vers une page internet (url). Pour exemple vers des vidéos, des documents partagés, etc.
     Entrez une url commençant par http:// et définissez un titre pour votre lien. Vous pouvez également ajouter des mots-clés (étiquettes) afin de faciliter le classement.',
   'created' => 'Créé',
-  'date' => 'Date',
   'delete' => 'Effacer',
   'delete_confirm_button' => 'Effacer ?',
   'delete_confirm_title' => 'Voulez-vous vraiement effacer ceci ?',
@@ -66,6 +67,7 @@ return array (
   'email_not_verified' => 'Votre adresse mail n\'est pas vérifiée, merci de la vérifier maintenant depuis votre boite email',
   'email_not_verified_send_again_verification' => 'Si vous n\'avez pas reçu le mail de confirmation cliquez ici pour en recevoir un autre',
   'email_verified' => 'Email vérifié',
+  'embed' => 'Intégrer cette page',
   'embed_this_page' => 'Incorporer cette page',
   'ends' => 'Fin',
   'features' => 'Fonctionalités',
@@ -171,7 +173,6 @@ return array (
   'show_all' => 'Afficher tout',
   'show_history' => 'Afficher l\'historique des modifications',
   'show_list' => 'Afficher sous forme de liste',
-  'size' => 'Taille',
   'something_wrong' => 'Il y a quelque chose qui ne fonctionne pas',
   'start' => 'Début',
   'start_date' => 'Date de début',
@@ -220,10 +221,13 @@ return array (
   'your_groups' => 'Mes groupes',
   'your_search_for' => 'Votre recherche pour',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' => 
+  'LLH:obsolete' =>
   array (
+    'by' => 'par',
+    'date' => 'Date',
     'modules' => 'Modules',
     'not_an_admin' => 'Pas administrateur',
+    'size' => 'Taille',
     'starts' => 'Début',
     'toggle_navigation' => 'Activer la navigation',
     'what' => 'Quoi',

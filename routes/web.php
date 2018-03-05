@@ -174,7 +174,7 @@ Route::group(['middleware' => ['web']], function () {
         // Stats
         Route::get('insights', 'InsightsController@forGroup')->name('.insights');
 
-        // membership admins
+        // Membership admin
         Route::get('users/add', 'Admin\MembershipController@addUserForm')->name('.users.create');
         Route::post('users/add', 'Admin\MembershipController@addUser')->name('.users.store');
         Route::get('users/{user}/admin', 'Admin\MembershipController@editUserForm')->name('.users.edit');
@@ -184,14 +184,19 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::get('users/{user}/confirm', 'Admin\MembershipController@confirm')->name('.users.confirm');
 
-
-        // in the case of closed group, we show an howto join message
-        Route::get('howtojoin', 'MembershipController@howToJoin')->name('.howtojoin');
-
-        // invites
+        // Invites
         Route::get('invite', 'InviteController@invite')->name('.invite.form');
         Route::post('invite', 'InviteController@sendInvites')->name('.invite');
 
+        // In the case of closed group, we show an how to join message (not in use currently)
+        Route::get('howtojoin', 'MembershipController@howToJoin')->name('.howtojoin');
+
+        // Members
+        Route::get('users', 'UserController@index')->name('.users.index');
+
+        // Maps
+        Route::get('map', 'MapController@map')->name('.map');
+        Route::get('map/embed', 'MapController@embed')->name('.map.embed');
 
         // Discussions
         Route::get('discussions', 'DiscussionController@index')->name('.discussions.index');
@@ -205,11 +210,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('discussions/{discussion}/delete', 'DiscussionController@destroyConfirm')->name('.discussions.deleteconfirm');
         Route::delete('discussions/{discussion}/delete', 'DiscussionController@destroy')->name('.discussions.delete');
 
-        // discussion history
+        // Discussion history
         Route::get('discussions/{discussion}/history', 'DiscussionController@history')->name('.discussions.history');
 
-        // Notification email test
-        // Route::get('notify', 'NotificationController@notify');
 
         // Comments
         Route::post('discussions/{discussion}/reply', 'CommentController@reply')->name('.discussions.reply');
@@ -233,7 +236,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('actions/{action}/history', 'ActionController@history')->name('.actions.history');
 
 
-
+        // Action (un)attending
         Route::get('actions/{action}/attend', 'ActionUserController@create')->name('.actions.attend');
         Route::get('actions/{action}/unattend', 'ActionUserController@destroyConfirm')->name('.actions.unattend');
 
@@ -257,12 +260,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('files/{file}/thumbnail', 'FileDownloadController@thumbnail')->name('.files.thumbnail');
         Route::get('files/{file}/preview', 'FileDownloadController@preview')->name('.files.preview');
 
-        // Members
-        Route::get('users', 'UserController@index')->name('.users.index');
 
-        // Maps
-        Route::get('map', 'MapController@map')->name('.map');
-        Route::get('map/embed', 'MapController@embed')->name('.map.embed');
 
 
     });

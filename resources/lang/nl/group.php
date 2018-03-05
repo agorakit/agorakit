@@ -1,9 +1,6 @@
 <?php
 
 return array (
-  //============================== New strings to translate ==============================//
-  'features' => 'TODO: features',
-  'features_help' => 'TODO: features_help',
   //==================================== Translations ====================================//
   'closed' => 'Eigen groep',
   'cover' => 'Cover',
@@ -11,6 +8,8 @@ return array (
   'create_button' => 'Maak de groep aan',
   'create_group_title' => 'Maak een titel aan',
   'description' => 'Beschrijving van de groep',
+  'features' => 'TODO: features',
+  'features_help' => 'TODO: features_help',
   'history_of_this_group' => 'Geschiedenis van deze groep',
   'join' => 'Toetreden',
   'latest_discussions' => 'Recente discussies',

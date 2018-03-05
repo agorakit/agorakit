@@ -27,8 +27,9 @@ class FileController extends Controller
     *
     * @return Response
     */
-    public function index(Group $group)
+    public function index(Request $request, Group $group)
     {
+
         $files = $group->files()
         ->where('item_type', '<>', \App\File::FOLDER)
         ->with('user')
@@ -36,11 +37,31 @@ class FileController extends Controller
         ->orderBy('created_at', 'desc')
         ->get();
 
+        $tags = array();
+        foreach ($files as $file)
+        {
+            foreach ($file->tags as $tag)
+            {
+                $tags[$tag->tag_id] = $tag->name;
+            }
+        }
+
+        if ($request->get('tag'))
+        {
+            $files = $group->files()
+            ->where('item_type', '<>', \App\File::FOLDER)
+            ->with('user')
+            ->with('tags')
+            ->orderBy('created_at', 'desc')
+            ->withAnyTags($request->get('tag'))
+            ->get();
+        }
+
         return view('files.index')
         ->with('parent_id', null)
         ->with('files', $files)
-        ->with('all_tags', \App\File::allTags())
         ->with('group', $group)
+        ->with('tags', $tags)
         ->with('tab', 'files');
     }
 

@@ -1,6 +1,8 @@
 <?php
 
 return array (
+  //============================== New strings to translate ==============================//
+  'filter' => 'Filter',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'A message for you',
   'accept_invitation' => 'Accept the invitation',
@@ -47,7 +49,6 @@ return array (
   'create_link_help' => 'Here you can add a link (URL). For example link to videos, shared documents, etc...
   Enter a correct URL starting with http:// and set a title for this link. You can also add tags.',
   'created' => 'Created',
-  'date' => 'date',
   'delete' => 'delete',
   'delete_confirm_button' => 'Delete',
   'delete_confirm_title' => 'Are you sure you want to delete?',
@@ -65,6 +66,7 @@ return array (
   'email_not_verified' => 'Email not verified',
   'email_not_verified_send_again_verification' => 'Click here to send your verification email again',
   'email_verified' => 'TODO: email_verified',
+  'embed' => 'Embed this page',
   'embed_this_page' => 'Embed this page',
   'ends' => 'Ends',
   'features' => 'TODO: features',
@@ -170,7 +172,6 @@ return array (
   'show_all' => 'Show all',
   'show_history' => 'Show history',
   'show_list' => 'Show file list',
-  'size' => 'Size',
   'something_wrong' => 'Something is wrong with your submission',
   'start' => 'Start',
   'start_date' => 'Start date',
@@ -219,10 +220,13 @@ return array (
   'your_groups' => 'Your groups',
   'your_search_for' => 'Your search for',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' => 
+  'LLH:obsolete' =>
   array (
+    'by' => 'by',
+    'date' => 'date',
     'modules' => 'TODO: modules',
     'not_an_admin' => 'Not administrator',
+    'size' => 'Size',
     'starts' => 'Starts',
     'toggle_navigation' => 'Toggle navigation',
     'what' => 'what',
