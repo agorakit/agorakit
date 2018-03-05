@@ -8,8 +8,6 @@
     @include('partials.invite')
 
 
-
-
     <div class="discussion mb-5">
 
       <div class="d-flex justify-content-between">

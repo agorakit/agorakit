@@ -1,0 +1,31 @@
+.files
+{
+  .file
+  {
+
+    margin-bottom: 1.2rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: top;
+
+    .name a
+    {
+      font-weight: bold;
+    }
+
+
+    .thumbnail
+    {
+      margin-right: 20px;
+    }
+
+    .thumbnail img
+    {
+      width: 40px;
+      height: 40px;
+    }
+
+
+  }
+}

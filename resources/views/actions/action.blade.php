@@ -35,8 +35,8 @@
 
 
 
-        <div class="d-inline-flex align-items-center">
-            <div class="users mt-2 mb-2">
+        <div class="">
+            <div class="d-flex users mt-2 mb-2">
                 @foreach($action->users as $user)
                     @include('users.user-avatar')
                 @endforeach

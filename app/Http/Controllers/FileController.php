@@ -29,18 +29,29 @@ class FileController extends Controller
     */
     public function index(Group $group)
     {
+
         $files = $group->files()
         ->where('item_type', '<>', \App\File::FOLDER)
         ->with('user')
         ->with('tags')
         ->orderBy('created_at', 'desc')
-        ->get();
+        ->paginate();
+
+
+        $tags = array();
+        foreach ($files as $file)
+        {
+            foreach ($file->tags as $tag)
+            {
+                $tags[$tag->tag_id] = $tag->name;
+            }
+        }
 
         return view('files.index')
         ->with('parent_id', null)
         ->with('files', $files)
-        ->with('all_tags', \App\File::allTags())
         ->with('group', $group)
+        ->with('tags', $tags)
         ->with('tab', 'files');
     }
 

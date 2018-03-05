@@ -17,6 +17,12 @@
                     {{ trans('messages.your_groups') }}
                 </a>
                 <div class="dropdown-menu">
+                    <a class="dropdown-item" class="dropdown-item" href="{{ action('DashboardController@groups') }}">
+                        {{trans('messages.all_groups')}}
+                    </a>
+
+                    <div class="dropdown-divider"></div>
+
                     @forelse (Auth::user()->groups()->orderBy('name')->get() as $group)
                         <a class="dropdown-item" href="{{ route('groups.show', $group->id)}}">{{$group->name}}</a>
                     @empty
@@ -25,19 +31,9 @@
 
                     <div class="dropdown-divider"></div>
 
-
-                    <a class="dropdown-item" class="dropdown-item" href="{{ action('DashboardController@groups') }}">
-                        {{trans('messages.all_groups')}}
-                    </a>
-
-
-                    <div class="dropdown-divider"></div>
-
                     <a class="dropdown-item" href="{{ route('groups.create') }}">
                         <i class="fa fa-bolt"></i> {{ trans('group.create_a_group_button') }}
                     </a>
-
-
                 </div>
             </div>
 
