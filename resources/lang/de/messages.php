@@ -2,7 +2,7 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'embed' => 'TODO: embed',
+  'filter' => 'TODO: filter',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Eine Nachricht für Sie',
   'accept_invitation' => 'Die Einladung akzeptieren',
@@ -48,7 +48,6 @@ return array (
   'create_link_button' => 'TODO: create_link_button',
   'create_link_help' => 'TODO: create_link_help',
   'created' => 'Erstellt',
-  'date' => 'Datum',
   'delete' => 'Löschen',
   'delete_confirm_button' => 'Löschen',
   'delete_confirm_title' => 'Sind Sie sicher, dass Sie diese Datei löschen möchten?',
@@ -66,6 +65,7 @@ return array (
   'email_not_verified' => 'E-Mail nicht verifiziert',
   'email_not_verified_send_again_verification' => 'Klicken Sie hier, um die Verifizierungs-Mail erneut zu versenden',
   'email_verified' => 'TODO: email_verified',
+  'embed' => 'TODO: embed',
   'embed_this_page' => 'Einbetten dieser seite',
   'ends' => 'Ende',
   'features' => 'TODO: features',
@@ -171,7 +171,6 @@ return array (
   'show_all' => 'Alle einsehen',
   'show_history' => 'Verlauf anzeigen',
   'show_list' => 'Dateienliste anzeigen',
-  'size' => 'TODO: size',
   'something_wrong' => 'Es gibt ein Problem mit Ihrem Eintrag',
   'start' => 'Starten',
   'start_date' => 'TODO: start_date',
@@ -222,9 +221,12 @@ return array (
   //================================== Obsolete strings ==================================//
   'LLH:obsolete' => 
   array (
+    'by' => 'TODO: by',
+    'date' => 'Datum',
     'liste' => 'TODO: liste',
     'modules' => 'TODO: modules',
     'not_an_admin' => 'Keine Admin-Rechte',
+    'size' => 'TODO: size',
     'starts' => 'Startet',
     'toggle_navigation' => 'Navigierung hin- und herschalten',
     'what' => 'was',

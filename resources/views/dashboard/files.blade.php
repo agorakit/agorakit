@@ -6,6 +6,7 @@
         <h1><a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.files') }}</h1>
     </div>
 
+    @include('partials.tags_filter')
 
 
     <div class="files mt-5">
@@ -17,6 +18,6 @@
 
         {!! $files->render() !!}
     </div>
-    
+
 
 @endsection
