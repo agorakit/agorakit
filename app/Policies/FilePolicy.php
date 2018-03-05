@@ -29,11 +29,13 @@ class FilePolicy
 
     public function update(User $user, File $file)
     {
+        /*
         if ($user->isAdminOf($file->group))
         {
             return true;
         }
-        return $user->id == $file->user_id;
+        */
+        return $user->isMemberOf($file->group);
     }
 
     public function delete(User $user, File $file)

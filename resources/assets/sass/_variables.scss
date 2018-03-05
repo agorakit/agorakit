@@ -17,7 +17,7 @@ $danger: #bf5329;
 
 // Typography
 $font-family-sans-serif: "Open Sans", sans-serif;
-//$font-size-base: .875rem; // 14px
+$font-size-base: .875rem; // 14px
 $line-height-base: 1.6;
 $text-color: #636b6f;
 
@@ -29,6 +29,11 @@ $input-placeholder-color: lighten($text-color, 30%);
 //$enable-gradients:          true;
 
 $grid-gutter-width:           40px;
-//$headings-font-family:       'Lato', sans-serif;
+$headings-font-family:       'Roboto', sans-serif;
 
 $primary:       rgb(28, 102, 129);
+
+$h1-font-size:                $font-size-base * 2;
+$h2-font-size:                $font-size-base * 1.8;
+$h3-font-size:                $font-size-base * 1.5;
+$h4-font-size:                $font-size-base * 1.2;

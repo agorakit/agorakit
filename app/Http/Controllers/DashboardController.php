@@ -32,26 +32,22 @@ class DashboardController extends Controller
             }
 
             $my_discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group')
-            ->has('user')
             ->whereIn('group_id', $my_groups->pluck('id'))
-            ->orderBy('updated_at', 'desc')->paginate(10);
+            ->orderBy('updated_at', 'desc')->take(10)->get();
 
             $my_actions = \App\Action::with('user', 'group')
             ->whereIn('group_id', $my_groups->pluck('id'))
-            ->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->paginate(10);
+            ->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->take(5)->get();
 
             $other_discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group')
-            ->has('user')
             ->whereIn('group_id', $other_groups->pluck('id'))
-            ->orderBy('updated_at', 'desc')->paginate(10);
+            ->orderBy('updated_at', 'desc')->take(10)->get();
 
             $other_actions = \App\Action::with('user', 'group')
             ->whereIn('group_id', $other_groups->pluck('id'))
-            ->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->paginate(10);
+            ->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->take(5)->get();
 
-            /*
-            $activities = \App\Activity::with('user', 'group', 'model')->orderBy('created_at', 'asc')->paginate(10);
-            */
+
 
             return view('dashboard.homepage')
             ->with('tab', 'homepage')
@@ -59,9 +55,7 @@ class DashboardController extends Controller
             ->with('my_discussions', $my_discussions)
             ->with('my_actions', $my_actions)
             ->with('other_actions', $other_actions)
-            ->with('other_discussions', $other_discussions)
-            //->with('activities', $activities)
-            ;
+            ->with('other_discussions', $other_discussions);
 
 
         } else {
@@ -82,8 +76,12 @@ class DashboardController extends Controller
     /**
     * Show all the files independant of groups.
     */
-    public function files()
+    public function files(Request $request)
     {
+
+        $tags = \App\File::allTags();
+
+
         if (Auth::check())
         {
             $groups = \App\Group::publicgroups()
@@ -91,10 +89,21 @@ class DashboardController extends Controller
             ->pluck('id')
             ->merge(Auth::user()->groups()->pluck('groups.id'));
 
-            $files = \App\File::with('group', 'user')
-            ->where('item_type', '<>', \App\File::FOLDER)
-            ->whereIn('group_id', $groups)
-            ->orderBy('created_at', 'desc')->paginate(25);
+            if ($request->get('tag'))
+            {
+                $files = \App\File::with('group', 'user')
+                ->withAnyTags($request->get('tag'))
+                ->where('item_type', '<>', \App\File::FOLDER)
+                ->whereIn('group_id', $groups)
+                ->orderBy('created_at', 'desc')->paginate(25);
+            }
+            else
+            {
+                $files = \App\File::with('group', 'user')
+                ->where('item_type', '<>', \App\File::FOLDER)
+                ->whereIn('group_id', $groups)
+                ->orderBy('created_at', 'desc')->paginate(25);
+            }
         }
 
         else
@@ -107,6 +116,7 @@ class DashboardController extends Controller
 
 
         return view('dashboard.files')
+        ->with('tags', $tags)
         ->with('tab', 'files')
         ->with('files', $files);
     }
@@ -144,7 +154,6 @@ class DashboardController extends Controller
 
     public function agenda(Request $request)
     {
-
         $view = 'grid';
 
         if (Auth::check())

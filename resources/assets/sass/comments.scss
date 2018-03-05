@@ -1,0 +1,41 @@
+.comment
+{
+    border-bottom: 1px solid #aaa;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+
+    
+
+    .avatar img
+    {
+        float: left;
+    }
+
+    .user,  .body,  .created,  .actions
+    {
+        margin-left: 60px;
+    }
+
+    .created
+    {
+        font-size: 0.8em;
+    }
+
+    .user
+    {
+        font-weight: 700;
+    }
+
+    .vote
+    {
+        width: 24px;
+        text-align: center;
+        float: right;
+    }
+
+    .actions
+    {
+        font-size: 0.8em;
+        float: right;
+    }
+}

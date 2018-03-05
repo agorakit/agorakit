@@ -25,6 +25,8 @@ class Action extends Model
         'stop'     => 'required',
     ];
 
+    protected $with = ['users']; // always load participants with actions
+
     //protected $touches = ['group', 'user'];
 
     protected $table = 'actions';
