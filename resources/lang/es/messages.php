@@ -2,7 +2,7 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'embed' => 'TODO: embed',
+  'filter' => 'TODO: filter',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un mensaje para usted',
   'accept_invitation' => 'Acepta la invitación',
@@ -49,7 +49,6 @@ return array (
   'create_link_help' => 'Aquí puede añadir un enlace (URL). Por ejemplo, enlace a vídeos, documentos compartidos, etc...
 Introduzca una URL correcta comenzando por http:// y establezca un título para este enlace. También puede agregar etiquetas.',
   'created' => 'Creado',
-  'date' => 'fecha',
   'delete' => 'borrar',
   'delete_confirm_button' => 'Borrar',
   'delete_confirm_title' => '¿Estas seguro que quieres borrarlo?',
@@ -67,6 +66,7 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'email_not_verified' => 'Correo electrónico no verificado',
   'email_not_verified_send_again_verification' => 'Haga clic aquí para enviar su correo electrónico de verificación de nuevo',
   'email_verified' => 'Email verified',
+  'embed' => 'TODO: embed',
   'embed_this_page' => 'Incorporar esta página',
   'ends' => 'Termina',
   'features' => 'TODO: features',
@@ -172,7 +172,6 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'show_all' => 'Mostrar todo',
   'show_history' => 'Mostrar historial',
   'show_list' => 'Mostrar la lista de archivos',
-  'size' => 'TODO: size',
   'something_wrong' => 'Algo no funciona con su envío',
   'start' => 'Inicio',
   'start_date' => 'TODO: start_date',
@@ -223,9 +222,12 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   //================================== Obsolete strings ==================================//
   'LLH:obsolete' => 
   array (
+    'by' => 'TODO: by',
+    'date' => 'fecha',
     'liste' => 'TODO: liste',
     'modules' => 'TODO: modules',
     'not_an_admin' => 'No administrador',
+    'size' => 'TODO: size',
     'starts' => 'Comienza',
     'toggle_navigation' => 'Conmutar navegación',
     'what' => 'qué',

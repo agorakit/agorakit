@@ -76,8 +76,12 @@ class DashboardController extends Controller
     /**
     * Show all the files independant of groups.
     */
-    public function files()
+    public function files(Request $request)
     {
+
+        $tags = \App\File::allTags();
+
+
         if (Auth::check())
         {
             $groups = \App\Group::publicgroups()
@@ -85,10 +89,21 @@ class DashboardController extends Controller
             ->pluck('id')
             ->merge(Auth::user()->groups()->pluck('groups.id'));
 
-            $files = \App\File::with('group', 'user')
-            ->where('item_type', '<>', \App\File::FOLDER)
-            ->whereIn('group_id', $groups)
-            ->orderBy('created_at', 'desc')->paginate(25);
+            if ($request->get('tag'))
+            {
+                $files = \App\File::with('group', 'user')
+                ->withAnyTags($request->get('tag'))
+                ->where('item_type', '<>', \App\File::FOLDER)
+                ->whereIn('group_id', $groups)
+                ->orderBy('created_at', 'desc')->paginate(25);
+            }
+            else
+            {
+                $files = \App\File::with('group', 'user')
+                ->where('item_type', '<>', \App\File::FOLDER)
+                ->whereIn('group_id', $groups)
+                ->orderBy('created_at', 'desc')->paginate(25);
+            }
         }
 
         else
@@ -101,6 +116,7 @@ class DashboardController extends Controller
 
 
         return view('dashboard.files')
+        ->with('tags', $tags)
         ->with('tab', 'files')
         ->with('files', $files);
     }

@@ -20,9 +20,8 @@
         @endcan
     </div>
 
-    @foreach ($tags as $id=>$tag)
-        {{$tag}}
-    @endforeach
+
+    @include('partials.tags_filter')
 
 
     <div class="files mt-5">
@@ -31,8 +30,6 @@
         @empty
             {{trans('messages.nothing_yet')}}
         @endforelse
-
-        {!! $files->render() !!}
     </div>
 
 
