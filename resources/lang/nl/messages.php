@@ -2,7 +2,8 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'filter' => 'TODO: filter',
+  'sort_by_filesize_asc' => 'TODO: sort_by_filesize_asc',
+  'sort_by_filesize_desc' => 'TODO: sort_by_filesize_desc',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'U heeft een bericht',
   'accept_invitation' => 'De uitnodiging accepteren',
@@ -72,6 +73,7 @@ return array (
   'filename' => 'TODO: filename',
   'files' => 'Bestanden',
   'files_in_this_group' => 'Bestanden in deze groep',
+  'filter' => 'TODO: filter',
   'forgotten_password' => 'Wachtwoord vergeten',
   'grid' => 'TODO: grid',
   'group' => 'TODO: group',
@@ -172,6 +174,11 @@ return array (
   'show_history' => 'Geschiedenis van aanpassingen tonen',
   'show_list' => 'Tonen als lijst',
   'something_wrong' => 'TODO: something_wrong',
+  'sort' => 'TODO: sort',
+  'sort_by_created_at_asc' => 'TODO: sort_by_created_at_asc',
+  'sort_by_created_at_desc' => 'TODO: sort_by_created_at_desc',
+  'sort_by_name_asc' => 'TODO: sort_by_name_asc',
+  'sort_by_name_desc' => 'TODO: sort_by_name_desc',
   'start' => 'Start',
   'start_date' => 'TODO: start_date',
   'start_time' => 'TODO: start_time',
@@ -227,6 +234,8 @@ return array (
     'modules' => 'TODO: modules',
     'not_an_admin' => 'Geen beheerder',
     'size' => 'size',
+    'sort_by_size_asc' => 'TODO: sort_by_size_asc',
+    'sort_by_size_desc' => 'TODO: sort_by_size_desc',
     'starts' => 'Begint',
     'toggle_navigation' => 'Navigatie activeren',
     'what' => 'Wat',

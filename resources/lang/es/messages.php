@@ -2,7 +2,8 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'filter' => 'TODO: filter',
+  'sort_by_filesize_asc' => 'TODO: sort_by_filesize_asc',
+  'sort_by_filesize_desc' => 'TODO: sort_by_filesize_desc',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un mensaje para usted',
   'accept_invitation' => 'Acepta la invitación',
@@ -73,6 +74,7 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'filename' => 'TODO: filename',
   'files' => 'Archivos',
   'files_in_this_group' => 'Archivos de este grupo',
+  'filter' => 'TODO: filter',
   'forgotten_password' => 'Olvidó su contraseña',
   'grid' => 'TODO: grid',
   'group' => 'TODO: group',
@@ -173,6 +175,11 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'show_history' => 'Mostrar historial',
   'show_list' => 'Mostrar la lista de archivos',
   'something_wrong' => 'Algo no funciona con su envío',
+  'sort' => 'TODO: sort',
+  'sort_by_created_at_asc' => 'TODO: sort_by_created_at_asc',
+  'sort_by_created_at_desc' => 'TODO: sort_by_created_at_desc',
+  'sort_by_name_asc' => 'TODO: sort_by_name_asc',
+  'sort_by_name_desc' => 'TODO: sort_by_name_desc',
   'start' => 'Inicio',
   'start_date' => 'TODO: start_date',
   'start_time' => 'TODO: start_time',
@@ -228,6 +235,8 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
     'modules' => 'TODO: modules',
     'not_an_admin' => 'No administrador',
     'size' => 'TODO: size',
+    'sort_by_size_asc' => 'TODO: sort_by_size_asc',
+    'sort_by_size_desc' => 'TODO: sort_by_size_desc',
     'starts' => 'Comienza',
     'toggle_navigation' => 'Conmutar navegación',
     'what' => 'qué',

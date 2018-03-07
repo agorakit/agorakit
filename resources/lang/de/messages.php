@@ -2,7 +2,8 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'filter' => 'TODO: filter',
+  'sort_by_filesize_asc' => 'TODO: sort_by_filesize_asc',
+  'sort_by_filesize_desc' => 'TODO: sort_by_filesize_desc',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Eine Nachricht für Sie',
   'accept_invitation' => 'Die Einladung akzeptieren',
@@ -72,6 +73,7 @@ return array (
   'filename' => 'TODO: filename',
   'files' => 'Dateien',
   'files_in_this_group' => 'Dateien dieser Gruppe',
+  'filter' => 'TODO: filter',
   'forgotten_password' => 'Passwort vergessen',
   'grid' => 'TODO: grid',
   'group' => 'TODO: group',
@@ -172,6 +174,11 @@ return array (
   'show_history' => 'Verlauf anzeigen',
   'show_list' => 'Dateienliste anzeigen',
   'something_wrong' => 'Es gibt ein Problem mit Ihrem Eintrag',
+  'sort' => 'TODO: sort',
+  'sort_by_created_at_asc' => 'TODO: sort_by_created_at_asc',
+  'sort_by_created_at_desc' => 'TODO: sort_by_created_at_desc',
+  'sort_by_name_asc' => 'TODO: sort_by_name_asc',
+  'sort_by_name_desc' => 'TODO: sort_by_name_desc',
   'start' => 'Starten',
   'start_date' => 'TODO: start_date',
   'start_time' => 'TODO: start_time',
@@ -227,6 +234,8 @@ return array (
     'modules' => 'TODO: modules',
     'not_an_admin' => 'Keine Admin-Rechte',
     'size' => 'TODO: size',
+    'sort_by_size_asc' => 'TODO: sort_by_size_asc',
+    'sort_by_size_desc' => 'TODO: sort_by_size_desc',
     'starts' => 'Startet',
     'toggle_navigation' => 'Navigierung hin- und herschalten',
     'what' => 'was',

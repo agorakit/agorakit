@@ -1,8 +1,6 @@
 <?php
 
 return array (
-  //============================== New strings to translate ==============================//
-  'filter' => 'Filtrer',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'accept_invitation' => 'Accepter l\'invitation',
@@ -74,6 +72,7 @@ return array (
   'filename' => 'Nom de fichier',
   'files' => 'Fichiers',
   'files_in_this_group' => 'Fichiers de ce groupe',
+  'filter' => 'Filtrer',
   'forgotten_password' => 'Mot de passe oublié',
   'grid' => 'Grille',
   'group' => 'Groupe',
@@ -174,6 +173,13 @@ return array (
   'show_history' => 'Afficher l\'historique des modifications',
   'show_list' => 'Afficher sous forme de liste',
   'something_wrong' => 'Il y a quelque chose qui ne fonctionne pas',
+  'sort' => 'Trier',
+  'sort_by_created_at_asc' => 'Le plus ancien en premier',
+  'sort_by_created_at_desc' => 'Le plus récent en premier',
+  'sort_by_filesize_asc' => 'Par taille croissante',
+  'sort_by_filesize_desc' => 'Par taille décroissante',
+  'sort_by_name_asc' => 'Par ordre alphabétique',
+  'sort_by_name_desc' => 'Par ordre alphabétique inverse',
   'start' => 'Début',
   'start_date' => 'Date de début',
   'start_time' => 'Heure de début',
