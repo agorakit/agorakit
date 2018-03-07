@@ -29,12 +29,26 @@ class FileController extends Controller
     */
     public function index(Request $request, Group $group)
     {
+        // Validate query string, I feel it's better for sql injection prevention  :-)
+        if (!in_array($request->get('dir'), ['asc', 'desc', null]))
+        {
 
+            abort(404, 'invalid sort order');
+        }
+
+        if (!in_array($request->get('sort'), ['created_at', 'name', 'filesize', null]))
+        {
+
+            abort(404, 'invalid sort type');
+        }
+
+
+        // Generate a list of tags from this group :
+        // TODO optimize me
+        // One day, groups will have their own, fixed tag list
         $files = $group->files()
         ->where('item_type', '<>', \App\File::FOLDER)
-        ->with('user')
         ->with('tags')
-        ->orderBy('created_at', 'desc')
         ->get();
 
         $tags = array();
@@ -46,19 +60,31 @@ class FileController extends Controller
             }
         }
 
+        // Query depending of the request
+        // filter by tags and sort order
         if ($request->get('tag'))
         {
             $files = $group->files()
             ->where('item_type', '<>', \App\File::FOLDER)
             ->with('user')
             ->with('tags')
-            ->orderBy('created_at', 'desc')
+            ->with('group')
+            ->orderBy($request->get('sort', 'created_at'), $request->get('dir', 'desc'))
             ->withAnyTags($request->get('tag'))
-            ->get();
+            ->paginate(20);
+        }
+        else
+        {
+            $files = $group->files()
+            ->where('item_type', '<>', \App\File::FOLDER)
+            ->with('user')
+            ->with('tags')
+            ->with('group')
+            ->orderBy($request->get('sort', 'created_at'), $request->get('dir', 'desc'))
+            ->paginate(20);
         }
 
         return view('files.index')
-        ->with('parent_id', null)
         ->with('files', $files)
         ->with('group', $group)
         ->with('tags', $tags)
