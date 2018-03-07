@@ -57,9 +57,9 @@
 
         <h4>{{trans('messages.user_attending')}}
             @if (Auth::user() && Auth::user()->isAttending($action))
-                <a class="btn btn-outline-primary" up-modal=".main" href="{{route('groups.actions.unattend', [$group, $action])}}">{{trans('messages.unattend')}}</a>
+                <a class="btn btn-outline-primary" up-modal=".dialog" href="{{route('groups.actions.unattend', [$group, $action])}}">{{trans('messages.unattend')}}</a>
             @elseif (Auth::user() && !Auth::user()->isAttending($action))
-                <a class="btn btn-outline-primary" up-modal=".main" href="{{route('groups.actions.attend', [$group, $action])}}">{{trans('messages.attend')}}</a>
+                <a class="btn btn-outline-primary" up-modal=".dialog" href="{{route('groups.actions.attend', [$group, $action])}}">{{trans('messages.attend')}}</a>
             @endif
         </h4>
 
