@@ -1,8 +1,8 @@
 <div class="file d-flex">
     <div class="thumbnail">
         @if ($file->isLink())
-            <a href="{{ route('groups.files.download', [$file->group, $file]) }}" target="_blank">
-                <i class="fa fa-link" aria-hidden="true" style="font-size:1.8rem; color: black"></i>
+            <a class="mr-1" href="{{ route('groups.files.download', [$file->group, $file]) }}" target="_blank">
+                <i class="fa fa-link" aria-hidden="true" style="font-size:2.5rem; color: black"></i>
             </a>
         @else
             <a href="{{ route('groups.files.show', [$file->group, $file]) }}">
@@ -22,35 +22,40 @@
                 <a  href="{{ route('groups.files.show', [$file->group, $file]) }}">{{ $file->name }}</a>
             @endif
 
-
-
             @if ($file->tags->count() > 0)
                 @foreach ($file->tags as $tag)
                     <span class="badge badge-secondary">{{$tag->name}}</span>
                 @endforeach
             @endif
-
         </div>
 
-        <a href="{{ route('groups.show', [$file->group_id]) }}">
-            <span class="badge badge-secondary badge-group">
-                @if ( $file->group->isPublic())
-                    <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
-                @else
-                    <i class="fa fa-lock" title="{{trans('group.closed')}}"></i>
+        <div class="small meta">
+            <div>
+                <a href="{{ route('groups.show', [$file->group_id]) }}">
+                    @if ( $file->group->isPublic())
+                        <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
+                    @else
+                        <i class="fa fa-lock" title="{{trans('group.closed')}}"></i>
+                    @endif
+                    {{ $file->group->name }}
+                </a>
+            </div>
+
+            <div>
+                <a href="{{ route('users.show', [$file->user->id]) }}">
+                    <i class="fa fa-user-circle"></i> {{ $file->user->name }}
+                </a>
+            </div>
+
+            <div>
+                <i class="fa fa-clock-o"></i> {{ $file->updated_at }}
+            </div>
+
+            <div>
+                @if ($file->isFile())
+                    <i class="fa fa-database"></i> {{sizeForHumans($file->filesize)}}
                 @endif
-                {{ $file->group->name }}
-            </span>
-        </a>
-
-        <div>
-            {{ $file->updated_at->diffForHumans() }}
-        </div>
-
-        <div>
-            @if ($file->isFile())
-                {{sizeForHumans($file->filesize)}}
-            @endif
+            </div>
         </div>
 
     </div>
