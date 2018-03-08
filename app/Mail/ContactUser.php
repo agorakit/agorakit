@@ -37,7 +37,7 @@ class ContactUser extends Mailable
     public function build()
     {
         return $this->markdown('emails.contact')
-        ->from(config('mail.noreply'))
+        ->from(config('mail.noreply'), config('mail.from.name'))
         ->subject('['.config('app.name').'] '.trans('messages.a_message_for_you'));
     }
 }
