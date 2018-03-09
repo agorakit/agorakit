@@ -6,7 +6,6 @@ body
 {
     padding-bottom: 150px;
     background-image: url("/images/seamless_paper_texture.png");
-    font-size: 0.9rem;
 }
 
 
@@ -86,6 +85,15 @@ h1.small
     font-weight: bold;
 }
 
+
+.tag
+{
+    border: 1px solid #bbb;
+    background-color: #eee;
+    color: #555;
+    font-weight: 400;
+}
+
 .dialog
 {
     max-width: 50em;
@@ -103,6 +111,7 @@ h1.small
 .meta
 {
     color: #888;
+    font-size: 90%;
 }
 
 
