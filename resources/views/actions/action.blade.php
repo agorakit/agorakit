@@ -1,4 +1,4 @@
-<div class="action">
+<div class="action" up-expand>
 
     <div class="date">
         <div class="day">
@@ -10,15 +10,17 @@
     </div>
 
     <div class="content">
-        <a href="{{ route('groups.actions.show', [$action->group_id, $action->id]) }}">
-            <div class="name">
+
+        <div class="name">
+            <a href="{{ route('groups.actions.show', [$action->group_id, $action->id]) }}">
                 {{ $action->name }}
-            </div>
-            <div class="meta">
-                {{$action->start->format('H:i')}} - {{$action->location}}
-            </div>
-            <span class="summary">{{ summary($action->body) }}</span>
-        </a>
+            </a>
+        </div>
+        <div class="meta">
+            {{$action->start->format('H:i')}} - {{$action->location}}
+        </div>
+        <span class="summary">{{ summary($action->body) }}</span>
+
         <br/>
         <div class="group-name">
             <a href="{{ route('groups.show', [$action->group_id]) }}">
