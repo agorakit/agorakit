@@ -25,17 +25,39 @@ class DiscussionController extends Controller
     */
     public function index(Request $request, Group $group)
     {
+
+        $tag = $request->get('tag');
+
         if (\Auth::check())
         {
-            $discussions = $group->discussions()->has('user')->with('userReadDiscussion', 'user')->orderBy('updated_at', 'desc')->paginate(50);
+            $discussions =
+            $group->discussions()
+            ->has('user')
+            ->with('userReadDiscussion', 'user')
+            ->orderBy('updated_at', 'desc')
+            ->when($tag, function ($query) use ($tag) {
+                    return $query->withAnyTags($tag);
+                })
+            ->paginate(50);
         }
         else
         { // don't load the unread relation, since we don't know who to look for.
             $discussions = $group->discussions()->has('user')->with('user')->orderBy('updated_at', 'desc')->paginate(50);
         }
 
+        $popular_tags = \App\Discussion::popularTags(20);
+
+        foreach ($popular_tags as $name => $count)
+        {
+            $tags[] = $name;
+        }
+
+
+
+
         return view('discussions.index')
         ->with('discussions', $discussions)
+        ->with('tags', $tags)
         ->with('group', $group)
         ->with('tab', 'discussion');
     }

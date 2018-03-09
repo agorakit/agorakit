@@ -1,17 +1,23 @@
-<div class="discussion @if ($discussion->unReadCount() > 0) unread @endif">
+<div class="discussion @if ($discussion->unReadCount() > 0) unread @endif" up-expand>
     <div class="avatar"><img src="{{$discussion->user->avatar()}}" class="rounded-circle"/></div>
     <div class="content w-100">
-        <a href="{{ route('groups.discussions.show', [$discussion->group_id, $discussion->id]) }}">
-            <div class="d-flex justify-content-between align-items-center">
-                <span class="name">
+        <div class="d-flex justify-content-between align-items-start">
+            <span class="name">
+                <a href="{{ route('groups.discussions.show', [$discussion->group_id, $discussion->id]) }}">
                     {{ $discussion->name }}
-                </span>
-                @if ($discussion->unReadCount() > 0)
-                    <span class="badge badge-secondary">{{ $discussion->unReadCount() }}</span>
+                </a>
+                @if ($discussion->tags->count() > 0)
+                    @foreach ($discussion->tags as $tag)
+                        <span class="badge badge-secondary">{{$tag->name}}</span>
+                    @endforeach
                 @endif
-            </div>
-            <span class="summary">{{summary($discussion->body) }}</span>
-        </a>
+            </span>
+            @if ($discussion->unReadCount() > 0)
+                <div class="badge-unread">{{ $discussion->unReadCount() }}</div>
+            @endif
+        </div>
+        <span class="summary">{{summary($discussion->body) }}</span>
+
         <br/>
 
         <div class="d-flex justify-content-between">
