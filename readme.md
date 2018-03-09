@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/philippejadin/agorakit.svg?branch=master)](https://travis-ci.org/philippejadin/agorakit)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fphilippejadin%2Fagorakit.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fphilippejadin%2Fagorakit?ref=badge_shield)
 
 ![Agorakit, groupware for citizens](https://raw.githubusercontent.com/philippejadin/agorakit-website/master/agorakit-banner.png)
 
@@ -98,6 +99,9 @@ Please drop a line to info (at) agorakit.org to keep in touch.
 
 ## License
 This tool is released under the GPL 3 licence
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fphilippejadin%2Fagorakit.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fphilippejadin%2Fagorakit?ref=badge_large)
 
 ## Credits
 Idea & development : Philippe Jadin
