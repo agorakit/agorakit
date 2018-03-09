@@ -9,29 +9,31 @@ $list-group-border-color: $laravel-border-color;
 $card-border-color: $laravel-border-color;
 
 // Brands
-$primary: #3097D1;
+//$primary:       rgb(28, 102, 129);
+//$primary: #3097D1;
+$primary: #086bad;
+/*
 $info: #8eb4cb;
 $success: #2ab27b;
 $warning: #cbb956;
 $danger: #dc3545;
+*/
 
 // Typography
 $font-family-sans-serif: "Open Sans", sans-serif;
-$font-size-base: .875rem; // 14px
-$line-height-base: 1.6;
-$text-color: #636b6f;
+$font-size-base: 0.95rem;
+$font-weight-base: 400;
+$line-height-base: 1.5;
+//$text-color: #636b6f;
 
 // Inputs
-$input-border-color: lighten($text-color, 40%);
-$input-placeholder-color: lighten($text-color, 30%);
+//$input-border-color: lighten($text-color, 40%);
+//$input-placeholder-color: lighten($text-color, 30%);
 
-//$enable-shadows:            true;
-//$enable-gradients:          true;
 
-$grid-gutter-width:           40px;
+$grid-gutter-width:           3rem;
 $headings-font-family:       'Roboto', sans-serif;
-
-$primary:       rgb(28, 102, 129);
+$headings-font-weight: 400;
 
 $h1-font-size:                $font-size-base * 2;
 $h2-font-size:                $font-size-base * 1.8;

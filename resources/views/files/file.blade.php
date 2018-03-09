@@ -1,4 +1,4 @@
-<div class="file d-flex">
+<div class="file d-flex" up-expand>
     <div class="thumbnail">
         @if ($file->isLink())
             <a class="mr-1" href="{{ route('groups.files.download', [$file->group, $file]) }}" target="_blank">
@@ -24,7 +24,7 @@
 
             @if ($file->tags->count() > 0)
                 @foreach ($file->tags as $tag)
-                    <span class="badge badge-secondary">{{$tag->name}}</span>
+                    <span class="badge tag">{{$tag->name}}</span>
                 @endforeach
             @endif
         </div>

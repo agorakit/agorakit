@@ -8,7 +8,7 @@
                 </a>
                 @if ($discussion->tags->count() > 0)
                     @foreach ($discussion->tags as $tag)
-                        <span class="badge badge-secondary">{{$tag->name}}</span>
+                        <span class="badge tag">{{$tag->name}}</span>
                     @endforeach
                 @endif
             </span>

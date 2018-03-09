@@ -47,12 +47,17 @@
 
 
 
-      <div class="meta text-secondary">
+      <div class="meta mb-3">
         {{trans('messages.started_by')}}
         <span class="user">
           <a href="{{ route('users.show', [$discussion->user->id]) }}">{{ $discussion->user->name}}</a>
         </span>,
         {{trans('messages.in')}} {{ $discussion->group->name}} {{ $discussion->created_at->diffForHumans()}}
+        @if ($discussion->tags->count() > 0)
+          @foreach ($discussion->tags as $tag)
+            <span class="badge tag">{{$tag->name}}</span>
+          @endforeach
+        @endif
       </div>
 
       <div class="body">
