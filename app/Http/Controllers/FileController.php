@@ -32,13 +32,11 @@ class FileController extends Controller
         // Validate query string, I feel it's better for sql injection prevention  :-)
         if (!in_array($request->get('dir'), ['asc', 'desc', null]))
         {
-
             abort(404, 'invalid sort order');
         }
 
         if (!in_array($request->get('sort'), ['created_at', 'name', 'filesize', null]))
         {
-
             abort(404, 'invalid sort type');
         }
 
@@ -62,27 +60,20 @@ class FileController extends Controller
 
         // Query depending of the request
         // filter by tags and sort order
-        if ($request->get('tag'))
-        {
-            $files = $group->files()
-            ->where('item_type', '<>', \App\File::FOLDER)
-            ->with('user')
-            ->with('tags')
-            ->with('group')
-            ->orderBy($request->get('sort', 'created_at'), $request->get('dir', 'desc'))
-            ->withAnyTags($request->get('tag'))
-            ->paginate(20);
-        }
-        else
-        {
-            $files = $group->files()
-            ->where('item_type', '<>', \App\File::FOLDER)
-            ->with('user')
-            ->with('tags')
-            ->with('group')
-            ->orderBy($request->get('sort', 'created_at'), $request->get('dir', 'desc'))
-            ->paginate(20);
-        }
+        $tag = $request->get('tag');
+
+        $files = $group->files()
+        ->where('item_type', '<>', \App\File::FOLDER)
+        ->with('user')
+        ->with('tags')
+        ->with('group')
+        ->orderBy($request->get('sort', 'created_at'), $request->get('dir', 'desc'))
+        ->when($tag, function ($query) use ($tag) {
+            return $query->withAnyTags($tag);
+        })
+        ->paginate(20);
+
+
 
         return view('files.index')
         ->with('files', $files)
