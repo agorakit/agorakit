@@ -71,6 +71,21 @@ h1.small
 
 /******************************** UI ******************************************/
 
+.badge-unread
+{
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    text-align: center;
+    display: flex;
+    width: 1.4rem;
+    height: 1.4rem;
+    color: white;
+    background-color: $danger;
+    font-size: 70%;
+    font-weight: bold;
+}
+
 .dialog
 {
     max-width: 50em;
