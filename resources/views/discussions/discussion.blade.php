@@ -5,6 +5,11 @@
             <div class="d-flex justify-content-between align-items-center">
                 <span class="name">
                     {{ $discussion->name }}
+                    @if ($discussion->tags->count() > 0)
+                        @foreach ($discussion->tags as $tag)
+                            <span class="badge badge-secondary">{{$tag->name}}</span>
+                        @endforeach
+                    @endif
                 </span>
                 @if ($discussion->unReadCount() > 0)
                     <span class="badge badge-secondary">{{ $discussion->unReadCount() }}</span>
