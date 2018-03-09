@@ -30,7 +30,7 @@
 
 
 
-    <div class="files mt-5">
+    <div class="files items mt-5">
         @forelse( $files as $file )
             @include('files.file')
         @empty

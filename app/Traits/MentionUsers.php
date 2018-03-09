@@ -13,9 +13,12 @@ trait MentionUsers
         {
             if ($model instanceof Comment) // we curently only support comments
             {
+
                 // Find users to notify
                 $dom = new \DOMDocument;
+                libxml_use_internal_errors(true);
                 $dom->loadHTML($model->body);
+                libxml_clear_errors();
 
                 $users_to_mention = array();
 
@@ -29,6 +32,8 @@ trait MentionUsers
                         }
                     }
                 }
+            
+
                 // if we found some users to mention
                 if (count($users_to_mention) > 0)
                 {

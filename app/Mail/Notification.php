@@ -40,7 +40,7 @@ class Notification extends Mailable
         \App::setLocale(config('app.locale'));
 
         return $this->markdown('emails.notification')
-        ->from(config('mail.noreply'))
+        ->from(config('mail.noreply'), config('mail.from.name'))
         ->subject('['.config('app.name').'] '.trans('messages.news_from_group_email_subject').' "'.$this->group->name.'"');
 
     }

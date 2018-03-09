@@ -1,5 +1,5 @@
-<div class="group-header">
-    <h1>
+<div class="group-header mb-3">
+    <h1 class="small">
         <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
         @if (isset($tab) && ($tab <> 'home'))
             <a href="{{ route('groups.show', $group->id) }}">{{ $group->name }}</a>
