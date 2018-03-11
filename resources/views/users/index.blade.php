@@ -4,8 +4,6 @@
     @include('groups.tabs')
     <div class="tab_content">
 
-        @include('partials.invite')
-
 
         <div class="toolbox">
             @can('invite', $group)

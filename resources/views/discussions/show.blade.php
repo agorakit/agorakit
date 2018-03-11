@@ -5,7 +5,7 @@
   @include('groups.tabs')
   <div class="tab_content">
 
-    @include('partials.invite')
+
 
 
     <div class="discussion mb-5">
@@ -80,7 +80,6 @@
     </div>
 
 
-    @include('partials.invite')
 
 
   </div>

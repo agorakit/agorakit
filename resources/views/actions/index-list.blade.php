@@ -7,7 +7,6 @@
 
     <div class="tab_content">
 
-        @include('partials.invite')
 
 
         @can('create-action', $group)

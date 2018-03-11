@@ -15,6 +15,9 @@
             @endif
         </span>
     </h1>
+
+    @include('partials.invite')
+    
 </div>
 
 
