@@ -70,8 +70,6 @@
 
     <div class="tab_content">
 
-        @include('partials.invite')
-
 
         @can('create-action', $group)
             <div class="toolbox"  style="float:right">
