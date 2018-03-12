@@ -30,6 +30,7 @@ class SettingsController extends Controller
     {
         if (Auth::user()->isAdmin())
         {
+            \App\Setting::set('name', $request->get('name'));
             \App\Setting::set('homepage_presentation', $request->get('homepage_presentation'));
             \App\Setting::set('homepage_presentation_for_members', $request->get('homepage_presentation_for_members'));
             \App\Setting::set('help_text', $request->get('help_text'));

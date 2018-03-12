@@ -35,6 +35,6 @@ class ResetPasswordController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
-        $this->subject = '['.config('app.name').'] '.trans('messages.reset_password_email_subject');
+        $this->subject = '['.setting('name').'] '.trans('messages.reset_password_email_subject');
     }
 }

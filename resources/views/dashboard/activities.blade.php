@@ -4,7 +4,7 @@
 
     <div class="page_header">
         <h1><i class="fa fa-home"></i>
-            {{Config::get('agorakit.name')}}
+            {{setting('name')}}
         </h1>
     </div>
 
