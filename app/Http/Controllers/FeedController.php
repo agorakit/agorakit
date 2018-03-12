@@ -14,8 +14,8 @@ class FeedController extends Controller
 
         $channel = new Channel();
         $channel
-        ->title(Config::get('agorakit.name').' : '.trans('messages.latest_discussions'))
-        ->description(Config::get('agorakit.name'))
+        ->title(setting('name').' : '.trans('messages.latest_discussions'))
+        ->description(setting('name'))
         ->ttl(60)
         ->appendTo($feed);
 
@@ -48,8 +48,8 @@ class FeedController extends Controller
 
         $channel = new Channel();
         $channel
-        ->title(Config::get('agorakit.name').' : '.trans('messages.agenda'))
-        ->description(Config::get('agorakit.name'))
+        ->title(setting('name').' : '.trans('messages.agenda'))
+        ->description(setting('name'))
         ->ttl(60)
         ->appendTo($feed);
 

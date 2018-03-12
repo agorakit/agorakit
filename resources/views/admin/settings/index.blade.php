@@ -2,29 +2,55 @@
 
 @section('content')
 
-    <h1> Settings</h1>
 
-    {!! Form::open(['action' => 'Admin\SettingsController@update']) !!}
+<h1>Settings</h1>
 
-    <div class="alert alert-info">This admin setting page is a work in progress. Some settings are not used yet (but all are saved for future use)</div>
+{!! Form::open(['action' => 'Admin\SettingsController@update']) !!}
 
+<div class="alert alert-info">This admin setting page is a work in progress. Some settings are not used yet (but all are saved for future use)</div>
+
+<div class="setting">
+    <h2>Application name</h2>
+    <div class="form-group">
+        <div class="setting-help">
+            The name of your application. Used everywhere, in titles, in emails, etc... Choose a short and catchy name
+        </div>
+        {!! Form::text('name', setting('name'), ['class' => 'form-control']) !!}
+    </div>
+</div>
+
+<div class="setting">
     <h2>Home page presentation text : for anonymous users</h2>
     <div class="form-group">
+        <div class="setting-help">
+            This is shown on the homepage for non connected user. Make it attractive :-)
+        </div>
         {!! Form::textarea('homepage_presentation', setting('homepage_presentation'), ['class' => 'form-control wysiwyg']) !!}
     </div>
+</div>
 
-    <h2>Home page presentation text : for logged-in users</h2>
-    <p>You can use it for announcements for example</p>
+<div class="setting">
+    <h2>Home page presentation text <em>for logged-in users</em></h2>
+    <div class="setting-help">
+        You can use it for announcements for example
+    </div>
     <div class="form-group">
         {!! Form::textarea('homepage_presentation_for_members', setting('homepage_presentation_for_members'), ['class' => 'form-control wysiwyg']) !!}
     </div>
+</div>
+
+<div class="setting">
 
     <h2>Help page</h2>
-    <p>A single help page you can customize, available on the user menu, for logged in user</p>
+    <div class="setting-help">
+        A single help page you can customize, available on the user menu, for logged in user
+    </div>
     <div class="form-group">
         {!! Form::textarea('help_text', setting('help_text'), ['class' => 'form-control wysiwyg']) !!}
     </div>
+</div>
 
+<div class="setting">
 
     <h2>Group creation</h2>
     <div class="form-group">
@@ -36,15 +62,15 @@
         {!! Form::checkbox('notify_admins_on_group_create',1 , setting('notify_admins_on_group_create')) !!}
         Notify administrators when a new group is created
     </div>
+</div>
 
 
+<div class="form-group">
+    {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-lg btn-primary']) !!}
+</div>
 
-    <div class="form-group">
-        {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-lg btn-primary']) !!}
-    </div>
 
-
-    {!! Form::close() !!}
+{!! Form::close() !!}
 
 
 </div>

@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
     <a class="navbar-brand" href="{{ route('index') }}">
-        <i class="fa fa-child"></i> <span class="hidden-xs hidden-sm hidden-md">{{Config::get('agorakit.name')}}</span>
+        <i class="fa fa-child"></i> <span class="hidden-xs hidden-sm hidden-md">{{setting('name')}}</span>
     </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#agorakit_navbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,7 +75,7 @@
                     <a class="btn btn-outline-secondary" href="{{ url('register') }}">{{ trans('messages.register') }}</a>
                 </div>
             </div>
-            
+
         </div>
 
 
