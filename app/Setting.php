@@ -25,13 +25,13 @@ class Setting extends Model
     */
     public static function get($key, $default = null)
     {
-        $setting = Cache::rememberForever($key, function() use($key) {
+        $setting = Cache::rememberForever('settings_' . $key, function() use($key) {
             return \App\Setting::where('name', $key)->first();
         });
 
 
-        // first priority : setting stored in the DB
-        if ($setting) {
+        // first priority : non empty setting stored in the DB
+        if (isset($setting) && $setting->value) {
             return $setting->value;
         }
 
@@ -50,7 +50,7 @@ class Setting extends Model
     */
     public static function set($key, $value)
     {
-        Cache::forget($key);
+        Cache::forget('settings_' . $key);
         $setting = \App\Setting::firstOrNew(['name' => $key]);
         $setting->value = $value;
         $setting->save();
