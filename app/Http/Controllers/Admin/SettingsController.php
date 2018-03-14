@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Image;
+use Storage;
 
 class SettingsController extends Controller
 {
@@ -36,6 +38,15 @@ class SettingsController extends Controller
             \App\Setting::set('help_text', $request->get('help_text'));
             \App\Setting::set('user_can_create_groups', $request->has('user_can_create_groups') ? 1 : 0);
             \App\Setting::set('notify_admins_on_group_create', $request->has('notify_admins_on_group_create') ? 1 : 0);
+
+
+
+            // handle app logo
+            if ($request->hasFile('logo')) {
+                Storage::makeDirectory('public/logo');
+                Image::make($request->file('logo'))->fit(128,128)->save(storage_path().'/app/public/logo/favicon.png');
+                Image::make($request->file('logo'))->fit(640,640)->save(storage_path().'/app/public/logo/logo.jpg');
+            }
 
             flash('Settings saved')->success();
             return view('admin.settings.index');
