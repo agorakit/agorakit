@@ -52,9 +52,6 @@
         </div>
 
 
-
-
-
         <div class="row mt-5">
 
 
@@ -103,38 +100,12 @@
 
         @if ($files)
             @if($files->count() > 0)
-                <h2><a href="{{ route('groups.files.index', $group->id) }}">{{trans('group.latest_files')}}</a></h2>
-
-                <table class="table table-hover">
-                    @foreach ($files as $file)
-                        <tr>
-                            <td>
-                                <a href="{{ route('groups.files.download', [$group->id, $file->id]) }}"><img src="{{ route('groups.files.thumbnail', [$group->id, $file->id]) }}"/></a>
-                            </td>
-
-                            <td>
-                                <a href="{{ route('groups.files.download', [$group->id, $file->id]) }}">{{ $file->name }}</a>
-                            </td>
-
-                            <td>
-                                <a href="{{ route('groups.files.download', [$group->id, $file->id]) }}">{{trans('file.download')}}</a>
-                            </td>
-
-                            <td>
-                                @unless (is_null ($file->user))
-                                    <a href="{{ route('users.show', $file->user->id) }}">{{ $file->user->name }}</a>
-                                @endunless
-                            </td>
-
-                            <td>
-                                {{ $file->created_at->diffForHumans() }}
-                            </td>
-
-                        </tr>
-
+                <h2 class="mb-4 mt-5"><a href="{{ route('groups.files.index', $group->id) }}">{{trans('group.latest_files')}}</a></h2>
+                <div class="files">
+                    @forelse( $files as $file )
+                        @include('files.file')
                     @endforeach
-                </table>
-
+                </div>
             @endif
         @endif
 

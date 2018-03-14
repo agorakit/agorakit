@@ -5,8 +5,8 @@
     @include('groups.tabs')
 
     @auth
-        <div class="toolbox d-flex">
-            <div class="d-flex">
+        <div class="toolbox d-md-flex">
+            <div class="d-flex mb-2">
                 @include('partials.tags_filter')
             </div>
 

@@ -1,60 +1,51 @@
 
 /******************************** Mobile **************************************/
-@media screen and (max-width: 640px) {
-  th.date {
-    width: 10%;
+@media screen and (max-width: 575px) {
 
-  }
 
-  th.avatar, td.avatar {
-      width: 30px;
-  }
+    .avatar img
+    {
+        width: 25px;
+        height: 25px;
+    }
 
-  .avatar img
-  {
-      width: 25px;
-      height: 25px;
-  }
 
-  table.special td.content
-  {
-      width: 80%;
-  }
+    .main-container
+    {
+        margin: 0;
+        padding: 1.5rem;
+        border-radius: 0;
+    }
 
-  th.unread, td.unread
-  {
-      width: 10%;
-      display: hidden;
-  }
+    .nav-tabs
+    {
+        font-size: 70%;
+    }
 
-  .main-container
-  {
-      padding: 0 10px 50px 10px;
-      margin: 0;
-  }
+    /*
+    h1
+    {
+        font-size: 20px;
+    }
 
-  h1
-  {
-      font-size: 20px;
-  }
+    h2
+    {
+        font-size: 18px;
+    }
 
-  h2
-  {
-      font-size: 18px;
-  }
+    h3
+    {
+        font-size: 16px;
+    }
 
-  h3
-  {
-      font-size: 16px;
-  }
+    h4
+    {
+        font-size: 14px;
+    }
 
-  h4
-  {
-      font-size: 14px;
-  }
-
-  body, .btn
-  {
-      font-size: 13px;
-  }
+    body, .btn
+    {
+        font-size: 13px;
+    }
+    */
 }
