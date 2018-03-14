@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="page_header">
+    <div class="">
         <h1><i class="fa fa-home"></i>
             {{setting('name')}}
         </h1>
