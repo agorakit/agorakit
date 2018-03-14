@@ -41,7 +41,13 @@ h1.small
 }
 
 
-/**************************** Second level navigation **************************/
+/**************************** Navigation **************************/
+
+.navbar-brand
+{
+    padding: 0;
+}
+
 .nav-centered
 {
     display: flex;
