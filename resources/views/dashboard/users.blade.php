@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="page_header d-flex mb-3">
+    <div class=" d-flex mb-3">
         <h1><a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.users') }}</h1>
     </div>
 

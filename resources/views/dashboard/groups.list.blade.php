@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="page_header">
+    <div class="">
         <h1><a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.all_groups') }}</h1>
     </div>
 
@@ -77,7 +77,7 @@
                                         </a>
                                         <span class="group-name">
                                             @foreach ($group->tags as $tag)
-                                                <span class="badge badge-secondary">{{$tag->name}}</span>
+                                                <span class="badge tag">{{$tag->name}}</span>
                                             @endforeach
                                         </span>
 
