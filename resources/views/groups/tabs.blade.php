@@ -1,4 +1,4 @@
-<div class="group-header mb-3">
+<div class="group-header mb-4">
     <h1 class="small">
         <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
         @if (isset($tab) && ($tab <> 'home'))
@@ -15,12 +15,15 @@
             @endif
         </span>
     </h1>
+
+    @include('partials.invite')
+
 </div>
 
 
 @if (Auth::check())
 
-    <ul class="nav nav-tabs nav-groups">
+    <ul class="nav nav-tabs nav-centered mb-4">
 
         <li class="nav-item">
             <a href="{{ route('groups.show', $group->id) }}" class="nav-link @if (isset($tab) && ($tab == 'home')) active @endif">
@@ -146,7 +149,7 @@
 
 @else
 
-    <ul class="nav nav-tabs nav-groups">
+    <ul class="nav nav-tabs nav-centered">
 
         <li class="nav-item" role="presentation" >
             <a class="nav-link @if (isset($tab) && ($tab == 'home')) active @endif" href="{{ route('groups.show', $group->id) }}">

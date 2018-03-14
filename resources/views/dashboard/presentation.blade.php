@@ -5,7 +5,7 @@
     <div class="tab_content">
 
         <h1>
-            {{Config::get('agorakit.name')}}
+            {{setting('name')}}
         </h1>
 
         <div>

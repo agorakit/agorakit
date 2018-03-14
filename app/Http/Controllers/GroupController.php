@@ -150,7 +150,7 @@ class GroupController extends Controller
         $membership->save();
 
         // notify admins (if they want it)
-        if (\App\Setting::get('notify_admins_on_group_create'))
+        if (setting('notify_admins_on_group_create'))
         {
             foreach (\App\User::admins()->get() as $admin)
             {

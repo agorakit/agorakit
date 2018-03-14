@@ -1,11 +1,12 @@
-<div class="page_header">
-    <h1><a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
-        {{ $user->name }}
-    </h1>
-</div>
+
+<h1 class="small mb-3">
+    <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
+    {{ $user->name }}
+</h1>
 
 
-<ul class="nav nav-tabs">
+
+<ul class="nav nav-tabs mb-5 nav-centered">
 
     <li class="nav-item">
         <a href="{{ route('users.show', $user->id) }}" class="nav-link @if (isset($tab) && ($tab == 'profile')) active @endif">

@@ -45,7 +45,7 @@
 @if (! empty($salutation))
 {{ $salutation }}
 @else
-{{trans('messages.regard')}},<br>{{ config('app.name') }}
+{{trans('messages.regard')}},<br>{{ setting('name') }}
 @endif
 
 {{-- Subcopy --}}

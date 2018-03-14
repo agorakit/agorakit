@@ -2,53 +2,12 @@
 
 @section('content')
 
-    <div class="page_header">
-        <h1><a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.all_groups') }}</h1>
-    </div>
 
-    @include('dashboard.tabs')
-
-    <div class="tab_content">
-
-        {{--
-        @push ('js')
-
-        <script>
-        $(document).ready(function(){
-        @foreach ($all_tags as $tag)
-        $("#toggle-tag-{{$tag->tag_id}}").click(function(){
-        $(".tag-group").hide();
-        $(".tag-{{$tag->tag_id}}").show();
-        $(".tag-toggle").removeClass('active');
-        $(this).addClass('active');
-
-    });
-@endforeach
-
-$("#toggle-tag-all").click(function(){
-$(".tag-group").show();
-$(".tag-toggle").removeClass('active');
-$(this).addClass('active');
-});
-});
-
-</script>
-@endpush
+    <h1><a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.all_groups') }}</h1>
 
 
 
-
-@foreach ($all_tags as $tag)
-<a class="btn btn-primary btn-sm tag-toggle" id="toggle-tag-{{$tag->tag_id}}">{{$tag->name}}</a>
-@endforeach
-
-<a class="btn btn-primary btn-sm tag-toggle active" id="toggle-tag-all">{{trans('messages.show_all')}}</a>
---}}
-
-
-<div class="tab_content">
     @if ($groups)
-
         <div class="row mb-3">
             @forelse( $groups as $group )
                 <div class="col-md-4">
@@ -71,8 +30,9 @@ $(this).addClass('active');
                             </h5>
                             <p class="card-text">
                                 {{summary($group->body) }}
+                                <br/>
                                 @foreach ($group->tags as $tag)
-                                    <span class="badge badge-secondary">{{$tag->name}}</span>
+                                    <span class="badge tag">{{$tag->name}}</span>
                                 @endforeach
                             </p>
 
