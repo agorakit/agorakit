@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
     <a class="navbar-brand" href="{{ route('index') }}">
-        @if (Storage::exists('/logo/favicon.png'))
+        @if (Storage::exists('logo/favicon.png'))
             <img src="{{{ asset('storage/logo/favicon.png') }}}" width="40" height="40"/>
         @else
             <i class="fa fa-child"></i>
