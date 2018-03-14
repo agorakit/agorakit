@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="page_header">
+    <div class="">
         <h1><i class="fa fa-search"></i>{{trans('messages.your_search_for')}} <strong>{{$query}}</strong></h1>
     </div>
 

@@ -30,7 +30,7 @@ class GroupPolicy
 
     public function create(User $user)
     {
-        if (\App\Setting::get('user_can_create_groups') == true)
+        if (setting('user_can_create_groups') == true)
         {
             return true;
         }
@@ -44,7 +44,7 @@ class GroupPolicy
     {
         return false;
 
-        // this was too dangerous : 
+        // this was too dangerous :
         // return $user->isAdminOf($group);
         // instead ask a general admin to delete a group if needed.
     }

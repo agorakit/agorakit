@@ -45,13 +45,7 @@ function safe_html($content)
 */
 function setting($name, $default = false)
 {
-    $setting = \App\Setting::where('name', $name)->first();
-
-    if ($setting) {
-        return $setting->value;
-    }
-
-    return $default;
+    return \App\Setting::get($name, $default);
 }
 
 

@@ -24,7 +24,7 @@
         @if ($file->tags->count() > 0)
             {{trans('messages.tags')}} :
             @foreach ($file->tags as $tag)
-                <span class="badge badge-secondary">{{$tag->name}}</span>
+                <span class="badge tag">{{$tag->name}}</span>
             @endforeach
             <br/>
         @endif

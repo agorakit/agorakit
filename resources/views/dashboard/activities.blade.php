@@ -2,9 +2,9 @@
 
 @section('content')
 
-    <div class="page_header">
+    <div class="">
         <h1><i class="fa fa-home"></i>
-            {{Config::get('agorakit.name')}}
+            {{setting('name')}}
         </h1>
     </div>
 

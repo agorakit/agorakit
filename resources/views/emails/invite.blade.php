@@ -4,7 +4,7 @@
 
 <p>
 <a href="{{route('users.show', $invite->user)}}">{{$invite->user->name}}</a> {{trans('messages.thinks_that_you_might_want_to_join')}} "<a href="{{route('groups.show',  [$invite->group] )}}">{{$invite->group->name}}</a>"
-{{trans('messages.inside')}} <a href="{{route('index')}}">{{config('app.name')}}</a>
+{{trans('messages.inside')}} <a href="{{route('index')}}">{{setting('name')}}</a>
 </p>
 
 <p>

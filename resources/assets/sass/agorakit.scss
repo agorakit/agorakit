@@ -41,10 +41,15 @@ h1.small
 }
 
 
-/**************************** Second level navigation **************************/
-.nav-groups
+/**************************** Navigation **************************/
+
+.navbar-brand
 {
-    margin-bottom: 2em;
+    padding: 0;
+}
+
+.nav-centered
+{
     display: flex;
     justify-content: center;
 }
