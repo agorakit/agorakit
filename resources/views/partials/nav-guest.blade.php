@@ -6,7 +6,7 @@
         @else
             <i class="fa fa-child"></i>
         @endif
-        <span class="hidden-xs hidden-sm hidden-md">{{setting('name')}}</span>
+        <span class="ml-1 d-lg-none d-md-inline d-none d-xl-inline">{{setting('name')}}</span>
     </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#agorakit_navbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
