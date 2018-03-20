@@ -47,6 +47,8 @@ class DiscussionController extends Controller
 
         $popular_tags = \App\Discussion::popularTags(20);
 
+        $tags = false;
+
         foreach ($popular_tags as $name => $count)
         {
             $tags[] = $name;
