@@ -14,14 +14,18 @@ class SearchController extends Controller
 
     public function index(Request $request)
     {
-        if ($request->has('query')) {
+        if ($request->get('query'))
+        {
             $query = $request->get('query');
 
             // Build a list of groups the user has access to. Those are public groups + groups the user is member of.
-            $allowed_groups = \App\Group::publicgroups()->get()->pluck('id')->merge(Auth::user()->groups()->pluck('groups.id'));
+            $allowed_groups = \App\Group::open()->get()->pluck('id')->merge(Auth::user()->groups()->pluck('groups.id'));
 
-            $groups = \App\Group::where('name', 'like', '%'.$query.'%')
-            ->orWhere('body', 'like', '%'.$query.'%')
+            $groups = \App\Group::notSecret()
+            ->where(function ($query_builder) use($query) {
+                $query_builder->where('name', 'like', '%'.$query.'%')
+                ->orWhere('body', 'like', '%'.$query.'%');
+            })
             ->orderBy('name')
             ->get();
 
@@ -90,6 +94,10 @@ class SearchController extends Controller
             ->with('comments', $comments)
             ->with('actions', $actions)
             ->with('query', $query);
+        }
+        else
+        {
+            return redirect()->back();
         }
     }
 }
