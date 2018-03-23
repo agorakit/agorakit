@@ -70,7 +70,8 @@ class MembershipController extends Controller
     {
         $this->authorize('edit-membership', $group);
         $membership = \App\Membership::where(['user_id' => $user->id, 'group_id' => $group->id])->firstOrFail();
-        $membership->delete();
+        $membership->membership = \App\Membership::REMOVED;
+        $membership->save();
         flash(trans('messages.user_removed_successfuly').' : '.$user->name)->success();
 
         return redirect()->route('groups.users.index', $group);
@@ -134,7 +135,7 @@ class MembershipController extends Controller
 
     public function intervalToMinutes($interval)
     {
-        $minutes = -1;
+        $minutes = 60*24;
 
         switch ($interval) {
             case 'hourly':
@@ -162,7 +163,7 @@ class MembershipController extends Controller
 
     public function minutesToInterval($minutes)
     {
-        $interval = 'never';
+        $interval = 'daily';
 
         switch ($minutes) {
             case 60:
