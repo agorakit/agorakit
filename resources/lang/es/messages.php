@@ -1,9 +1,6 @@
 <?php
 
 return array (
-  //============================== New strings to translate ==============================//
-  'sort_by_filesize_asc' => 'TODO: sort_by_filesize_asc',
-  'sort_by_filesize_desc' => 'TODO: sort_by_filesize_desc',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un mensaje para usted',
   'accept_invitation' => 'Acepta la invitación',
@@ -178,6 +175,8 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'sort' => 'TODO: sort',
   'sort_by_created_at_asc' => 'TODO: sort_by_created_at_asc',
   'sort_by_created_at_desc' => 'TODO: sort_by_created_at_desc',
+  'sort_by_filesize_asc' => 'TODO: sort_by_filesize_asc',
+  'sort_by_filesize_desc' => 'TODO: sort_by_filesize_desc',
   'sort_by_name_asc' => 'TODO: sort_by_name_asc',
   'sort_by_name_desc' => 'TODO: sort_by_name_desc',
   'start' => 'Inicio',

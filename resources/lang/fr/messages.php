@@ -227,7 +227,7 @@ return array (
   'your_groups' => 'Mes groupes',
   'your_search_for' => 'Votre recherche pour',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' =>
+  'LLH:obsolete' => 
   array (
     'by' => 'par',
     'date' => 'Date',
