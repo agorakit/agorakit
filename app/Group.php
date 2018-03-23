@@ -204,6 +204,16 @@ class Group extends Model
     }
 
     /**
+    * Scope a query to only include open groups.
+    *
+    * @return \Illuminate\Database\Eloquent\Builder
+    */
+    public function scopeOpen($query)
+    {
+        return $query->where('group_type', $this::OPEN);
+    }
+
+    /**
     * Scope a query to only include closed groups.
     *
     * @return \Illuminate\Database\Eloquent\Builder
