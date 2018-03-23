@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="">
-        <h1><i class="fa fa-search"></i>{{trans('messages.your_search_for')}} <strong>"{{$query}}"</strong></h1>
+        <h1><i class="fa fa-search"></i> {{trans('messages.your_search_for')}} <strong>"{{$query}}"</strong></h1>
     </div>
 
     <div class="search_results">
@@ -144,7 +144,7 @@
                 <div role="tabpanel" class="tab-pane {{$files->class}}" id="files">
                     @foreach ($files as $file)
                         <div class="result">
-                            <h4><a href="{{$file->link()}}">{{$file->name}}</a></h4>
+                            <h4><a href="{{ route('groups.files.show', [$file->group, $file]) }}">{{$file->name}}</a></h4>
                             <span class="badge badge-secondary badge-group">
                                 @if ($file->group->isOpen())
                                     <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
