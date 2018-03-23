@@ -155,7 +155,7 @@ class MembershipController extends Controller
 
     public function intervalToMinutes($interval)
     {
-        $minutes = -1;
+        $minutes = 60*24;
 
         switch ($interval) {
             case 'hourly':
@@ -183,7 +183,7 @@ class MembershipController extends Controller
 
     public function minutesToInterval($minutes)
     {
-        $interval = 'never';
+        $interval = 'daily';
 
         switch ($minutes) {
             case 60:

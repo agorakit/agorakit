@@ -39,8 +39,11 @@ class Membership extends Model
     // left the group
     const UNREGISTERED = -10;
 
-    // blacklisted
-    const BLACKLISTED = -20;
+    // removed by admin
+    const REMOVED = -20;
+
+    // member is blacklisted and cannot join the group again (not yet in use)
+    const BLACKLISTED = -30;
 
     public function votes()
     {
