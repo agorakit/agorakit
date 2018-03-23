@@ -27,7 +27,7 @@
                 <span class="badge badge-secondary badge-group">
                     @if ($action->group->isOpen())
                         <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
-                    @elseif ($action->->isClosed())
+                    @elseif ($action->group->isClosed())
                         <i class="fa fa-lock" title="{{trans('group.closed')}}"></i>
                     @else
                         <i class="fa fa-eye-slash" title="{{trans('group.secret')}}"></i>
@@ -39,7 +39,7 @@
 
 
 
-        <div class="">
+        <div>
             <div class="d-flex users mt-2 mb-2">
                 @foreach($action->users as $user)
                     @include('users.user-avatar')

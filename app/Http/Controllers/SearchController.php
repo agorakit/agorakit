@@ -55,7 +55,7 @@ class SearchController extends Controller
             ->orderBy('updated_at', 'desc')
             ->get();
 
-            $comments = \App\Comment::with('discussion')
+            $comments = \App\Comment::with('discussion', 'discussion.group')
             ->where('body', 'like', '%'.$query.'%')
             ->whereHas('discussion', function ($q) use ($allowed_groups) {
                 $q->whereIn('group_id', $allowed_groups);
