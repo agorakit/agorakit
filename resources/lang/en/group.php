@@ -1,6 +1,8 @@
 <?php
 
 return array (
+  //============================== New strings to translate ==============================//
+  'secret' => 'Secret group',
   //==================================== Translations ====================================//
   'closed' => 'Closed group',
   'cover' => 'Cover picture',
@@ -18,7 +20,7 @@ return array (
   'open' => 'Public group',
   'type' => 'Group type',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' => 
+  'LLH:obsolete' =>
   array (
     'tabs' => 'TODO: tabs',
     'tabs_help' => 'TODO: tabs_help',
