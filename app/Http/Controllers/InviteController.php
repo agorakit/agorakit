@@ -75,7 +75,7 @@ class InviteController extends Controller
             */
 
 
-            if (!$group->isPublic()) {
+            if (!$group->isOpen()) {
                 if ($user) {
                     // add user to membership for the group taken from the invite table
                     $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $group->id]);

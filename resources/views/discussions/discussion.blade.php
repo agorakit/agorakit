@@ -23,12 +23,13 @@
         <div class="d-flex justify-content-between">
             <a href="{{ route('groups.show', [$discussion->group_id]) }}">
                 <span class="badge badge-secondary badge-group">
-                    @if ( $discussion->group->isPublic())
+                    @if ($discussion->group->isOpen())
                         <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
-                    @else
+                    @elseif ($discussion->group->isClosed())
                         <i class="fa fa-lock" title="{{trans('group.closed')}}"></i>
+                    @else
+                        <i class="fa fa-eye-slash" title="{{trans('group.secret')}}"></i>
                     @endif
-
                     {{ $discussion->group->name }}
                 </span>
             </a>

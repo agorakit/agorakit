@@ -25,7 +25,7 @@
 
 <div class="form-group">
     {!! Form::label('group_type', trans('group.type')) !!}
-    {!! Form::select('group_type', ['0' => trans('group.open'), '1' => trans('group.closed')], null, ['class' => 'form-control']) !!}
+    {!! Form::select('group_type', ['0' => trans('group.open'), '1' => trans('group.closed'), '2' => trans('group.secret')], null, ['class' => 'form-control']) !!}
 </div>
 
 

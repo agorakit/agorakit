@@ -8,10 +8,12 @@
         @endif
 
         <span class="small">
-            @if ($group->isPublic())
+            @if ($group->isOpen())
                 <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
-            @else
+            @elseif ($group->isClosed())
                 <i class="fa fa-lock" title="{{trans('group.closed')}}"></i>
+            @else
+                <i class="fa fa-eye-slash" title="{{trans('group.secret')}}"></i>
             @endif
         </span>
     </h1>
@@ -159,7 +161,7 @@
 
 
         @if ($group->getSetting('module_discussion', true) == true)
-            @if ($group->isPublic() )
+            @if ($group->isOpen() )
                 <li class="nav-item" role="presentation">
                     <a class="nav-link @if (isset($tab) && ($tab == 'discussion')) active @endif" href="{{ route('groups.discussions.index', $group->id) }}">
                         <i class="fa fa-comments"></i> <span class="d-none d-lg-inline">{{ trans('messages.discussions') }}</span>
@@ -169,7 +171,7 @@
         @endif
 
         @if ($group->getSetting('module_action', true) == true)
-            @if ($group->isPublic() )
+            @if ($group->isOpen() )
                 <li class="nav-item" role="presentation">
                     <a class="nav-link @if (isset($tab) && ($tab == 'action')) active @endif" href="{{ route('groups.actions.index', $group->id) }}">
                         <i class="fa fa-calendar"></i> <span class="d-none d-lg-inline">{{ trans('messages.agenda') }}</span>
@@ -181,7 +183,7 @@
         @endif
 
         @if ($group->getSetting('module_files', true) == true)
-            @if ($group->isPublic() )
+            @if ($group->isOpen() )
                 <li class="nav-item" role="presentation">
                     <a class="nav-link @if (isset($tab) && ($tab == 'files')) active @endif" href="{{ route('groups.files.index', $group->id) }}">
                         <i class="fa fa-files-o"></i> <span class="d-none d-lg-inline">{{ trans('messages.files') }}</span>
@@ -192,7 +194,7 @@
         @endif
 
         @if ($group->getSetting('module_member', true) == true)
-            @if ($group->isPublic() )
+            @if ($group->isOpen() )
                 <li class="nav-item" role="presentation">
                     <a class="nav-link @if (isset($tab) && ($tab == 'users')) active @endif" href="{{ route('groups.users.index', $group->id) }}">
                         <i class="fa fa-users"></i> <span class="d-none d-lg-inline">{{ trans('messages.members') }}</span>
@@ -202,7 +204,7 @@
         @endif
 
 
-        @if ($group->isPublic() )
+        @if ($group->isOpen() )
             <li class="nav-item" role="presentation">
                 <a class="nav-link @if (isset($tab) && ($tab == 'settings')) active @endif" href="{{ action('MembershipController@create', $group->id) }}">
                     <i class="fa fa-cog"></i> <span class="d-none d-lg-inline">{{ trans('messages.join') }}</span>

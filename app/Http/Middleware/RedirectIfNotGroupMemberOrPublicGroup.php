@@ -33,14 +33,14 @@ class RedirectIfNotGroupMemberOrPublicGroup
         if ($request->segment(1) == 'groups') {
             if ($this->auth->guest()) {
                 $group = \App\Group::findOrFail($request->segment(2));
-                if ($group->isPublic()) {
+                if ($group->isOpen()) {
                     return $next($request);
                 } else {
                     return redirect()->back()->with('message', trans('messages.not_allowed'));
                 }
             } else { // user is logged
                 $group = \App\Group::findOrFail($request->segment(2));
-                if ($group->isPublic()) { // group is public, fine
+                if ($group->isOpen()) { // group is public, fine
                     return $next($request);
                 } elseif ($group->isMember()) { // user is memberof the group, fine
                     return $next($request);

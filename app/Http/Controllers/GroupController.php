@@ -59,7 +59,11 @@ class GroupController extends Controller
         }
         else // anonymous user
         {
-            if ($group->isPublic())
+            if ($group->isSecret())
+            {
+                abort('404', 'No query results for model [App\Group].');
+            }
+            if ($group->isOpen())
             {
                 $discussions = $group->discussions()
                 ->has('user')

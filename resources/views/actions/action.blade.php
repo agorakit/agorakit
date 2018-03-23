@@ -25,10 +25,12 @@
         <div class="group-name">
             <a href="{{ route('groups.show', [$action->group_id]) }}">
                 <span class="badge badge-secondary badge-group">
-                    @if ( $action->group->isPublic())
+                    @if ($action->group->isOpen())
                         <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
-                    @else
+                    @elseif ($action->->isClosed())
                         <i class="fa fa-lock" title="{{trans('group.closed')}}"></i>
+                    @else
+                        <i class="fa fa-eye-slash" title="{{trans('group.secret')}}"></i>
                     @endif
                     {{ $action->group->name }}
                 </span>
