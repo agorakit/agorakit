@@ -22,10 +22,12 @@
                                 <a href="{{ action('GroupController@show', $group) }}">
                                     {{ $group->name }}
                                 </a>
-                                @if ($group->isPublic())
+                                @if ($group->isOpen())
                                     <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
-                                @else
+                                @elseif ($group->isClosed())
                                     <i class="fa fa-lock" title="{{trans('group.closed')}}"></i>
+                                @else
+                                    <i class="fa fa-eye-slash" title="{{trans('group.secret')}}"></i>
                                 @endif
                             </h5>
                             <p class="card-text">

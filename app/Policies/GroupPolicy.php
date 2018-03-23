@@ -97,23 +97,23 @@ class GroupPolicy
     public function viewDiscussions(User $user, Group $group)
     {
         // isn't it lovely :
-        return $group->isPublic() || $user->isMemberOf($group);
+        return $group->isOpen() || $user->isMemberOf($group);
     }
 
     public function viewActions(User $user, Group $group)
     {
-        return $group->isPublic() || $user->isMemberOf($group);
+        return $group->isOpen() || $user->isMemberOf($group);
     }
 
     public function viewMembers(User $user, Group $group)
     {
         // same as the other ressources, since now groups have contact persons
-        return $group->isPublic() || $user->isMemberOf($group);
+        return $group->isOpen() || $user->isMemberOf($group);
     }
 
     public function viewFiles(User $user, Group $group)
     {
-        return $group->isPublic() || $user->isMemberOf($group);
+        return $group->isOpen() || $user->isMemberOf($group);
     }
 
     public function changeGroupType(User $user, Group $group)

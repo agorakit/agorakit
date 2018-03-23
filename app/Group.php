@@ -27,7 +27,7 @@ class Group extends Model
     // open group, default
     const OPEN = 0;
     const CLOSED = 1;
-    // const SECRET = 2; // not in use for now at all
+    const SECRET = 2;
 
     /**
     * Returns the css color (yes) of this group. Curently random generated.
@@ -161,10 +161,32 @@ class Group extends Model
         return route('groups.show', $this);
     }
 
-    /** returns true if the group is public (viewable by all) **/
-    public function isPublic()
+
+
+    /** returns true if the group is open (joinable by all) **/
+    public function isOpen()
     {
         if ($this->group_type == $this::OPEN) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /** returns true if the group is closed (invite/ask to join only) **/
+    public function isClosed()
+    {
+        if ($this->group_type == $this::CLOSED) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /** returns true if the group is secret (hidden, invite only) **/
+    public function isSecret()
+    {
+        if ($this->group_type == $this::SECRET) {
             return true;
         } else {
             return false;
@@ -189,6 +211,26 @@ class Group extends Model
     public function scopeClosed($query)
     {
         return $query->where('group_type', $this::CLOSED);
+    }
+
+    /**
+    * Scope a query to only include secret groups.
+    *
+    * @return \Illuminate\Database\Eloquent\Builder
+    */
+    public function scopeSecret($query)
+    {
+        return $query->where('group_type', $this::SECRET);
+    }
+
+    /**
+    * Scope a query to exclude secret groups.
+    *
+    * @return \Illuminate\Database\Eloquent\Builder
+    */
+    public function scopeNotSecret($query)
+    {
+        return $query->where('group_type', '!=', $this::SECRET);
     }
 
 

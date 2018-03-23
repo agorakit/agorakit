@@ -28,7 +28,18 @@
                 <div>
                     <h4>{{trans('messages.groups')}}</h4>
                     @foreach ($user->groups as $group)
-                        <a class="badge badge-secondary" href="{{route('groups.show', $group)}}">{{$group->name}}</a>
+                        @unless ($group->isSecret())
+                            <a href="{{ route('groups.show', [$group]) }}">
+                                <span class="badge badge-secondary badge-group">
+                                    @if ($group->isOpen())
+                                        <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
+                                    @elseif ($group->isClosed())
+                                        <i class="fa fa-lock" title="{{trans('group.closed')}}"></i>
+                                    @endif
+                                    {{ $group->name }}
+                                </span>
+                            </a>
+                        @endunless
                     @endforeach
                 </div>
             @endif

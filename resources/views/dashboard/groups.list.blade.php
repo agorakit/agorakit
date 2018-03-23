@@ -66,11 +66,14 @@
                                     <a href="{{ route('groups.show',  $group->id) }}">
                                         <span class="name">{{ $group->name }}
 
-                                            @if ($group->isPublic())
+                                            @if ($group->isOpen())
                                                 <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
-                                            @else
+                                            @elseif ($group->isClosed())
                                                 <i class="fa fa-lock" title="{{trans('group.closed')}}"></i>
-                                            @endif</span>
+                                            @else
+                                                <i class="fa fa-eye-slash" title="{{trans('group.secret')}}"></i>
+                                            @endif
+                                        </span>
 
                                             <span class="summary">{{summary($group->body) }}</span>
                                             <br/>

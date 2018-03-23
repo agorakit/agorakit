@@ -32,10 +32,12 @@
         <div class="small meta">
             <div>
                 <a href="{{ route('groups.show', [$file->group_id]) }}">
-                    @if ( $file->group->isPublic())
+                    @if ($file->group->isOpen())
                         <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
-                    @else
+                    @elseif ($file->group->isClosed())
                         <i class="fa fa-lock" title="{{trans('group.closed')}}"></i>
+                    @else
+                        <i class="fa fa-eye-slash" title="{{trans('group.secret')}}"></i>
                     @endif
                     {{ $file->group->name }}
                 </a>
