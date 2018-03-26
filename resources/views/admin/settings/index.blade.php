@@ -69,6 +69,11 @@
         </div>
 
         <div class="form-group">
+            {!! Form::checkbox('user_can_create_secret_groups',0 , setting('user_can_create_secret_groups')) !!}
+            Allow regular users to create <strong>secret</strong> groups (if you uncheck this box, only admins will be able to create secret groups)
+        </div>
+
+        <div class="form-group">
             {!! Form::checkbox('notify_admins_on_group_create',1 , setting('notify_admins_on_group_create')) !!}
             Notify administrators when a new group is created
         </div>
