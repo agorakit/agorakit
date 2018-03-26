@@ -1,6 +1,8 @@
 <?php
 
 return array (
+  //============================== New strings to translate ==============================//
+  'secret' => 'TODO: secret',
   //==================================== Translations ====================================//
   'closed' => 'Cerrar grupo',
   'cover' => 'Imagen de portada',

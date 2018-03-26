@@ -299,9 +299,16 @@ class DashboardController extends Controller
     public function groups()
     {
         if (Auth::check()) {
-            $groups = \App\Group::with('membership')->with('tags')->orderBy('updated_at', 'desc')->get();
+            $groups = \App\Group::notSecret()
+            ->with('membership')
+            ->with('tags')
+            ->orderBy('updated_at', 'desc')
+            ->get();
         } else {
-            $groups = \App\Group::with('tags')->orderBy('updated_at', 'desc')->get();
+            $groups = \App\Group::notSecret()
+            ->with('tags')
+            ->orderBy('updated_at', 'desc')
+            ->get();
         }
 
         $tagService = app(\Cviebrock\EloquentTaggable\Services\TagService::class);

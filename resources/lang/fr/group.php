@@ -1,6 +1,8 @@
 <?php
 
 return array (
+  //============================== New strings to translate ==============================//
+  'secret' => 'Groupe secret',
   //==================================== Translations ====================================//
   'closed' => 'Groupe privé',
   'cover' => 'Image de présentation',
@@ -18,7 +20,7 @@ return array (
   'open' => 'Groupe public',
   'type' => 'Type de groupe',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' => 
+  'LLH:obsolete' =>
   array (
     'tabs' => 'Gestion des fonctionalités',
     'tabs_help' => 'Activez ou désactivez les fonctionalités de votre groupe',

@@ -20,7 +20,7 @@ class MembershipController extends Controller
     */
     public function create(Request $request, Group $group)
     {
-        if ($group->isPublic())
+        if ($group->isOpen())
         {
             // load or create membership for this group and user combination
             $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
@@ -49,7 +49,7 @@ class MembershipController extends Controller
     */
     public function store(Request $request, Group $group)
     {
-        if ($group->isPublic())
+        if ($group->isOpen())
         {
             // load or create membership for this group and user combination
             $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);

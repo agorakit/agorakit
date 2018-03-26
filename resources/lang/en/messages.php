@@ -1,9 +1,6 @@
 <?php
 
 return array (
-  //============================== New strings to translate ==============================//
-  'sort_by_filesize_asc' => 'Sort by filesize ascending',
-  'sort_by_filesize_desc' => 'Sort by filesize descending',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'A message for you',
   'accept_invitation' => 'Accept the invitation',
@@ -178,6 +175,8 @@ return array (
   'sort' => 'Sort',
   'sort_by_created_at_asc' => 'Sort by creation date ascending',
   'sort_by_created_at_desc' => 'Sort by creation date descending',
+  'sort_by_filesize_asc' => 'Sort by filesize ascending',
+  'sort_by_filesize_desc' => 'Sort by filesize descending',
   'sort_by_name_asc' => 'Sort by name ascending',
   'sort_by_name_desc' => 'Sort by name descending',
   'start' => 'Start',
@@ -227,7 +226,7 @@ return array (
   'your_groups' => 'Your groups',
   'your_search_for' => 'Your search for',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' =>
+  'LLH:obsolete' => 
   array (
     'by' => 'by',
     'date' => 'date',
