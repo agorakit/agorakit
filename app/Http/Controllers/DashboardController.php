@@ -11,6 +11,7 @@ class DashboardController extends Controller
     public function __construct()
     {
         $this->middleware('verified', ['only' => ['users', 'files', 'activities']]);
+        $this->middleware('preferences');
     }
 
     /**
@@ -129,14 +130,28 @@ class DashboardController extends Controller
         if (Auth::check())
         {
             // All the groups of a user : Auth::user()->groups()->pluck('groups.id')
-            // All the public groups : Auth::user()->groups()->pluck('groups.id')
+            // All the public groups : \App\Group::publicgroups()
 
             // A merge of the two :
 
-            $groups = \App\Group::publicgroups()
-            ->get()
-            ->pluck('id')
-            ->merge(Auth::user()->groups()->pluck('groups.id'));
+            //$groups = \App\Group::publicgroups()
+            //->get()
+            //->pluck('id')
+            //->merge(Auth::user()->groups()->pluck('groups.id'));
+
+            if (Auth::user()->getPreference('show') == 'all')
+            {
+                $groups = \App\Group::publicgroups()
+                ->get()
+                ->pluck('id')
+                ->merge(Auth::user()->groups()->pluck('groups.id'));
+            }
+            else
+            {
+                $groups = Auth::user()->groups()->pluck('groups.id');
+            }
+
+
 
             $discussions = \App\Discussion::with('userReadDiscussion', 'group', 'user')
             ->whereIn('group_id', $groups)
@@ -154,61 +169,31 @@ class DashboardController extends Controller
 
     public function agenda(Request $request)
     {
-        $view = 'grid';
-
         if (Auth::check())
         {
-            if (Auth::user()->getPreference('calendar'))
-            {
-                if (Auth::user()->getPreference('calendar') == 'list')
-                {
-                    $view = 'list';
-                }
-                else
-                {
-                    $view = 'grid';
-                }
-            }
-
-            if ($request->get('type') == 'list')
-            {
-                Auth::user()->setPreference('calendar', 'list');
-                $view = 'list';
-            }
-
-            if ($request->get('type') == 'grid')
-            {
-                Auth::user()->setPreference('calendar', 'grid');
-                $view = 'grid';
-            }
-
+            $view = Auth::user()->getPreference('calendar', 'grid');
         }
         else
         {
-
-            if ($request->get('type') == 'list')
-            {
-                $view = 'list';
-            }
-
-            if ($request->get('type') == 'grid')
-            {
-                $view = 'grid';
-            }
-
+            $view = 'grid';
         }
 
 
         if ($view == 'list')
         {
-
             if (Auth::check())
             {
-                Auth::user()->setPreference('calendar', 'list');
-                $groups = \App\Group::publicgroups()
-                ->get()
-                ->pluck('id')
-                ->merge(Auth::user()->groups()->pluck('groups.id'));
+                if (Auth::user()->getPreference('show') == 'all')
+                {
+                    $groups = \App\Group::publicgroups()
+                    ->get()
+                    ->pluck('id')
+                    ->merge(Auth::user()->groups()->pluck('groups.id'));
+                }
+                else
+                {
+                    $groups = Auth::user()->groups()->pluck('groups.id');
+                }
             }
             else
             {
@@ -220,7 +205,6 @@ class DashboardController extends Controller
             ->whereIn('group_id', $groups)
             ->orderBy('start')
             ->paginate(10);
-
 
 
             return view('dashboard.agenda-list')
@@ -237,10 +221,17 @@ class DashboardController extends Controller
     {
         if (Auth::check())
         {
-            $groups = \App\Group::publicgroups()
-            ->get()
-            ->pluck('id')
-            ->merge(Auth::user()->groups()->pluck('groups.id'));
+            if (Auth::user()->getPreference('show') == 'all')
+            {
+                $groups = \App\Group::publicgroups()
+                ->get()
+                ->pluck('id')
+                ->merge(Auth::user()->groups()->pluck('groups.id'));
+            }
+            else
+            {
+                $groups = Auth::user()->groups()->pluck('groups.id');
+            }
         }
         else
         {

@@ -1,8 +1,6 @@
 <?php
 
 return array (
-  //============================== New strings to translate ==============================//
-  'secret' => 'TODO: secret',
   //==================================== Translations ====================================//
   'closed' => 'Cerrar grupo',
   'cover' => 'Imagen de portada',
@@ -18,6 +16,7 @@ return array (
   'latest_files' => 'Últimos archivos',
   'name' => 'Nombre del grupo',
   'open' => 'Grupo público',
+  'secret' => 'TODO: secret',
   'type' => 'Tipo de grupo',
   //================================== Obsolete strings ==================================//
   'LLH:obsolete' => 
