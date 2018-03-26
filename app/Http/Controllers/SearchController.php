@@ -14,14 +14,18 @@ class SearchController extends Controller
 
     public function index(Request $request)
     {
-        if ($request->has('query')) {
+        if ($request->get('query'))
+        {
             $query = $request->get('query');
 
             // Build a list of groups the user has access to. Those are public groups + groups the user is member of.
-            $allowed_groups = \App\Group::publicgroups()->get()->pluck('id')->merge(Auth::user()->groups()->pluck('groups.id'));
+            $allowed_groups = \App\Group::open()->get()->pluck('id')->merge(Auth::user()->groups()->pluck('groups.id'));
 
-            $groups = \App\Group::where('name', 'like', '%'.$query.'%')
-            ->orWhere('body', 'like', '%'.$query.'%')
+            $groups = \App\Group::notSecret()
+            ->where(function ($query_builder) use($query) {
+                $query_builder->where('name', 'like', '%'.$query.'%')
+                ->orWhere('body', 'like', '%'.$query.'%');
+            })
             ->orderBy('name')
             ->get();
 
@@ -51,7 +55,7 @@ class SearchController extends Controller
             ->orderBy('updated_at', 'desc')
             ->get();
 
-            $comments = \App\Comment::with('discussion')
+            $comments = \App\Comment::with('discussion', 'discussion.group')
             ->where('body', 'like', '%'.$query.'%')
             ->whereHas('discussion', function ($q) use ($allowed_groups) {
                 $q->whereIn('group_id', $allowed_groups);
@@ -90,6 +94,10 @@ class SearchController extends Controller
             ->with('comments', $comments)
             ->with('actions', $actions)
             ->with('query', $query);
+        }
+        else
+        {
+            return redirect()->back();
         }
     }
 }

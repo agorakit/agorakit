@@ -15,17 +15,18 @@
         <div class="d-flex justify-content-between">
             <div class="groups">
                 @foreach ($user->groups as $group)
-                    <a href="{{ route('groups.show', [$group]) }}">
-                        <span class="badge badge-secondary badge-group">
-                            @if ( $group->isPublic())
-                                <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
-                            @else
-                                <i class="fa fa-lock" title="{{trans('group.closed')}}"></i>
-                            @endif
-
-                            {{ $group->name }}
-                        </span>
-                    </a>
+                    @unless ($group->isSecret())
+                        <a href="{{ route('groups.show', [$group]) }}">
+                            <span class="badge badge-secondary badge-group">
+                                @if ($user->group->isOpen())
+                                    <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
+                                @elseif ($user->group->isClosed())
+                                    <i class="fa fa-lock" title="{{trans('group.closed')}}"></i>
+                                @endif
+                                {{ $group->name }}
+                            </span>
+                        </a>
+                    @endunless
                 @endforeach
             </div>
             <small>{{ trans('messages.last_activity') }} : {{ $user->updated_at->diffForHumans() }}</small>

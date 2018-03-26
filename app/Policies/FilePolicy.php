@@ -45,7 +45,7 @@ class FilePolicy
 
     public function download(User $user, File $file)
     {
-        if ($file->group->isPublic()) {
+        if ($file->group->isOpen()) {
             return true;
         }
         if ($user->isMemberOf($file->group)) {
