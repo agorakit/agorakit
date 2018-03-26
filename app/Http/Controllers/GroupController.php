@@ -114,7 +114,24 @@ class GroupController extends Controller
 
         $group->name = $request->input('name');
         $group->body = $request->input('body');
-        $group->group_type = $request->input('group_type');
+
+        // handle secret group type
+        if ($request->input('group_type') == \App\Group::SECRET)
+        {
+            if (setting('users_can_create_secret_group') || $request->user()->isAdmin())
+            {
+                $group->group_type = $request->input('group_type');
+            }
+            else
+            {
+                abort(401, 'Cant create secret group on this instance, sorry');
+            }
+        }
+        else
+        {
+            $group->group_type = $request->input('group_type');
+        }
+
 
         if ($request->get('address')) {
             $group->address = $request->input('address');
@@ -195,8 +212,24 @@ class GroupController extends Controller
         $group->name = $request->input('name');
         $group->body = $request->input('body');
 
-        if (Gate::allows('changeGroupType', $group)) {
-            $group->group_type = $request->input('group_type');
+        if (Gate::allows('changeGroupType', $group))
+        {
+            // handle secret group type
+            if ($request->input('group_type') == \App\Group::SECRET)
+            {
+                if (setting('users_can_create_secret_group') || $request->user()->isAdmin())
+                {
+                    $group->group_type = $request->input('group_type');
+                }
+                else
+                {
+                    abort(401, 'Cant create secret group on this instance, sorry');
+                }
+            }
+            else
+            {
+                $group->group_type = $request->input('group_type');
+            }
         }
 
         if ($group->address != $request->input('address')) {
