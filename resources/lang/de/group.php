@@ -1,8 +1,6 @@
 <?php
 
 return array (
-  //============================== New strings to translate ==============================//
-  'secret' => 'TODO: secret',
   //==================================== Translations ====================================//
   'closed' => 'Geschlossene Gruppe',
   'cover' => 'Titelbild',
@@ -18,6 +16,7 @@ return array (
   'latest_files' => 'Neueste Dateien',
   'name' => 'Gruppenname',
   'open' => 'Offene Gruppe',
+  'secret' => 'TODO: secret',
   'type' => 'Art der Gruppe',
   //================================== Obsolete strings ==================================//
   'LLH:obsolete' => 
