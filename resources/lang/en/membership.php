@@ -22,7 +22,7 @@ return array (
   'if_you_want_to_leave_this_group' => 'If you want to leave this group',
   'invite_button' => 'Invite',
   'invite_intro' => 'Invite people who might be interested in this group. Please don\'t spam people emails',
-  'invite_one_button' => 'Invite people',
+  'invite_by_email' => 'Invite people by email',
   'invite_title' => 'Invite people to this group',
   'join_button' => 'Join',
   'join_intro' => 'Here you can choose if you want to receive news from this group by email. You will never receive more mails than what you choose. Depending of your involvement.',

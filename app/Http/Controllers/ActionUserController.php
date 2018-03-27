@@ -29,6 +29,7 @@ class ActionUserController extends Controller
         session()->put('url.intended', URL::previous());
 
         return view('actions.attend')
+        ->with('dialog', true)
         ->with('group', $group)
         ->with('action', $action);
     }
@@ -92,6 +93,7 @@ class ActionUserController extends Controller
         session()->put('url.intended', URL::previous());
 
         return view('actions.unattend')
+        ->with('dialog', true)
         ->with('group', $group)
         ->with('action', $action);
     }
