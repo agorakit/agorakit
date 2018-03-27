@@ -33,9 +33,10 @@
         @endif
     @endunless
 
-    <div class="container main-container">
+    @include('partials.errors')
+
+    <div class="container main-container @if (isset($dialog)) main-dialog @endif">
         <div class="main">
-            @include('partials.errors')
             @yield('content')
         </div>
     </div>

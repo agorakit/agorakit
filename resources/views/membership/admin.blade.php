@@ -17,7 +17,7 @@
             </button>
             {!! Form::close() !!}
 
-            
+
 
 
             @unless($user->isAdminOf($group))
@@ -41,15 +41,7 @@
         @endcan
 
 
-
-
-
-
-        @include('partials.errors')
-
-
-
-
+        
     </div>
 
 @endsection
