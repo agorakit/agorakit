@@ -5,7 +5,7 @@
     @include('groups.tabs')
 
     <div class="tab_content">
-        
+
         <h1>{{trans('messages.join_the_group')}} <em>{{$group->name}}</em></h1>
 
         <div class="help">
@@ -29,7 +29,7 @@
 
         {!! Form::close() !!}
 
-        @include('partials.errors')
+        
     </div>
 
 

@@ -10,17 +10,6 @@
 
 
 
-@if (count($errors) > 0)
-    <div class="alert alert-primary" role="alert">
-        <strong><i class="fa fa-exclamation-triangle"></i>{{ trans('messages.howdy') }}</strong> {{ trans('messages.something_wrong') }}<br><br>
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-
 @if ( Session::has('message') )
     <div class="alert alert-primary" role="alert">
         <i class="fa fa-info-circle"></i>
@@ -30,11 +19,17 @@
 
 
 @if ( Session::has('error') )
-    <div class="alert alert-primary" role="alert">
+    <div class=" alert alert-primary" role="alert">
         <i class="fa fa-exclamation-triangle"></i>
         {{ Session::get('error') }}
     </div>
 @endif
 
 
-@include('flash::message')
+@foreach ((array) session('flash_notification') as $message)
+        <div class="alert alert-primary" role="alert">
+                {!! $message['message'] !!}
+        </div>
+@endforeach
+
+{{ session()->forget('flash_notification') }}

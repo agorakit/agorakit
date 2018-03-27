@@ -15,22 +15,22 @@ body
 
 .main-container
 {
-    margin-top: 2em;
-    padding: 2em 2em 5em 2em;
-    box-shadow: 0 2px 4px rgba(72, 78, 80, 0.2);
-    border-radius: 4px;
+    margin-top: 2rem;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(72, 78, 80, 0.2);
+    border-radius: 2px;
     background-color: white;
 }
 
 
 .toolbox
 {
-    padding-bottom: 1em;
+    padding-bottom: 1rem;
 }
 
 .spacer
 {
-    padding-bottom: 2em;
+    padding-bottom: 2rem;
 }
 
 /************************** Header ************************************/
@@ -74,6 +74,10 @@ h1.small
 
 
 /******************************** UI ******************************************/
+label
+{
+    margin-bottom: 0;
+}
 
 .result
 {

@@ -18,7 +18,7 @@
 
         {!! Form::open(array('action' => ['MembershipController@update', $group->id])) !!}
 
-        
+
         @include('membership.form')
 
         <div class="form-group">
@@ -28,12 +28,8 @@
 
         {!! Form::close() !!}
 
-        @include('partials.errors')
 
-
-        <div class="spacer">
-        </div>
-
+    
 
         <p>{{trans('membership.if_you_want_to_leave_this_group')}}, <a href="{{action('MembershipController@destroyConfirm', $group->id)}}">{{trans('membership.click_here')}}</a></p>
 
