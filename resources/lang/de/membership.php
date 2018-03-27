@@ -22,7 +22,7 @@ return array (
   'if_you_want_to_leave_this_group' => 'Sollten Sie dieser Gruppe austreten möchten',
   'invite_button' => 'Einladen',
   'invite_intro' => 'Laden Sie Interessierte zu der Gruppe ein. Bitte keine Spam-Nachrichten versenden.',
-  'invite_one_button' => 'Neue Mitglieder einladen',
+  'invite_by_email' => 'Neue Mitglieder einladen',
   'invite_title' => 'Neue Mitglieder zu dieser Gruppe einladen',
   'join_button' => 'Beitreten',
   'join_intro' => 'Hier können Sie anwählen, wenn Sie Neuigkeiten von dieser Gruppe per E-Mail erhalten möchten. Sie werden nie mehr Nachrichten erhalten, als Sie wollen, bezogen auf Ihr Engagement.',

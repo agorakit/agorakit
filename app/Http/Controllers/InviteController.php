@@ -156,8 +156,10 @@ class InviteController extends Controller
             Auth::logout();
             flash(trans('messages.you_dont_have_an_account_create_one_now'));
 
-            return view('invites.register')
+            return view('auth.register')
             ->with('email', $invite->email)
+			->with('invite_and_register', true)
+			->with('dialog', true)
             ->with('group', $group)
             ->with('token', $token);
         }

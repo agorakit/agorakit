@@ -8,7 +8,7 @@
     <div class="toolbox d-md-flex">
         @can('invite', $group)
             <div class="mb-2 mr-2">
-                <a class="btn btn-primary" href="{{ action('InviteController@invite', $group->id ) }}"><i class="fa fa-plus"></i> {{trans('membership.invite_one_button')}}</a>
+                <a class="btn btn-primary" href="{{ action('InviteController@invite', $group->id ) }}"><i class="fa fa-plus"></i> {{trans('membership.invite_by_email')}}</a>
             </div>
         @endcan
 
