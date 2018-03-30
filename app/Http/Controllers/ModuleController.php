@@ -15,7 +15,8 @@ class ModuleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('groupadmin');
+        $this->middleware('groupadmin', ['except' => ['show']] );
+        $this->middleware('member');
     }
 
     public function show(Request $request, Group $group)
