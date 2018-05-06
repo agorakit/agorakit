@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Membership extends Model
 {
     use RevisionableTrait;
-    use SoftDeletes;
+    //use SoftDeletes;
 
     protected $table = 'membership';
     public $timestamps = true;
