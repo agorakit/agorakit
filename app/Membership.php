@@ -4,12 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Venturecraft\Revisionable\RevisionableTrait;
-use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Membership extends Model
 {
     use RevisionableTrait;
-    //use SoftDeletes;
 
     protected $table = 'membership';
     public $timestamps = true;
