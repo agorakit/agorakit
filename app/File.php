@@ -41,12 +41,12 @@ class File extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(\App\User::class);
     }
 
     public function group()
     {
-        return $this->belongsTo('App\Group');
+        return $this->belongsTo(\App\Group::class);
     }
 
     public function link()

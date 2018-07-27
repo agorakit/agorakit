@@ -275,7 +275,7 @@ class DashboardController extends Controller
         return view('dashboard.groups')
         ->with('tab', 'groups')
         ->with('groups', $groups)
-        ->with('all_tags', $tagService->getAllTags('App\Group'));
+        ->with('all_tags', $tagService->getAllTags(\App\Group::class));
     }
 
     /**
