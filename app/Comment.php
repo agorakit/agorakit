@@ -34,7 +34,7 @@ class Comment extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(\App\User::class);
     }
 
     public function votes()
@@ -44,7 +44,7 @@ class Comment extends Model
 
     public function discussion()
     {
-        return $this->belongsTo('App\Discussion');
+        return $this->belongsTo(\App\Discussion::class);
     }
 
     public function link()

@@ -30,11 +30,11 @@ class ActionUser extends Model
 
     public function action()
     {
-        return $this->belongsTo('\App\Action');
+        return $this->belongsTo(\App\Action::class);
     }
 
     public function user()
     {
-        return $this->belongsTo('\App\User');
+        return $this->belongsTo(\App\User::class);
     }
 }
