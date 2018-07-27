@@ -47,7 +47,7 @@ class FileController extends Controller
         ->with('tags')
         ->get();
 
-        $tags = array();
+        $tags = [];
         foreach ($files as $file) {
             foreach ($file->tags as $tag) {
                 $tags[$tag->tag_id] = $tag->name;
