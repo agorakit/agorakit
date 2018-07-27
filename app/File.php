@@ -71,12 +71,9 @@ class File extends Model
 
     public function isImage()
     {
-        if (in_array($this->mime, ['image/jpeg', 'image/png', 'image/gif']))
-        {
+        if (in_array($this->mime, ['image/jpeg', 'image/png', 'image/gif'])) {
             return true;
         }
          return false;
     }
-
-
 }

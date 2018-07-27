@@ -31,5 +31,4 @@ class AddActivityTable extends Migration
     {
         Schema::drop('activities');
     }
-
 }

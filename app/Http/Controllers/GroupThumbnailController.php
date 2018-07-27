@@ -33,7 +33,7 @@ class GroupThumbnailController extends Controller
 
         if (File::exists($path)) {
             $cachedImage = Image::cache(function ($img) use ($path) {
-                return $img->make($path)->fit(1200,500);
+                return $img->make($path)->fit(1200, 500);
             }, 60000, true);
 
             return $cachedImage->response();

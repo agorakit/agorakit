@@ -17,7 +17,7 @@ class Activity extends Model
     'user_id'  => 'required|exists:users,id',
     'group_id'  => 'required|exists:groups,id',
     'action' => 'required|in:created,updated,deleted,commented',
-  ];
+    ];
 
 
     /**
@@ -41,23 +41,19 @@ class Activity extends Model
 
     public function getType()
     {
-        if ($this->model instanceof Discussion)
-        {
+        if ($this->model instanceof Discussion) {
             return 'discussion';
         }
 
-        if ($this->model instanceof File)
-        {
+        if ($this->model instanceof File) {
             return 'file';
         }
 
-        if ($this->model instanceof Action)
-        {
+        if ($this->model instanceof Action) {
             return 'action';
         }
 
-        if ($this->model instanceof Comment)
-        {
+        if ($this->model instanceof Comment) {
             return 'comment';
         }
     }
@@ -69,28 +65,20 @@ class Activity extends Model
     public function linkToModel()
     {
 
-        if ($this->model instanceof Discussion)
-        {
+        if ($this->model instanceof Discussion) {
             return route('groups.discussions.show', [$this->group, $this->model]);
         }
 
-        if ($this->model instanceof File)
-        {
+        if ($this->model instanceof File) {
             return route('groups.files.show', [$this->group, $this->model]);
         }
 
-        if ($this->model instanceof Action)
-        {
+        if ($this->model instanceof Action) {
             return route('groups.actions.show', [$this->group, $this->model]);
         }
 
-        if ($this->model instanceof Comment)
-        {
+        if ($this->model instanceof Comment) {
             return route('groups.discussions.show', [$this->group, $this->model->discussion]);
         }
-
-
     }
-
-
 }

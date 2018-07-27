@@ -78,8 +78,7 @@ class Action extends Model
 
 
         $geocode = app('geocoder')->geocode($this->location)->get()->first();
-        if ($geocode)
-        {
+        if ($geocode) {
             $this->latitude = $geocode->getCoordinates()->getLatitude();
             $this->longitude = $geocode->getCoordinates()->getLongitude();
             return true;

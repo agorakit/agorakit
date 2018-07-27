@@ -2,7 +2,6 @@
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-
 class UserTest extends Tests\BrowserKitTestCase
 {
 
@@ -193,7 +192,6 @@ class UserTest extends Tests\BrowserKitTestCase
         ->see(trans('messages.user_made_member_successfuly'));
 
         $this->seeInDatabase('membership', ['user_id' => $newbie->id, 'membership' => '20']);
-
     }
 
 
@@ -271,5 +269,4 @@ class UserTest extends Tests\BrowserKitTestCase
             return $mail->hasTo($user->email);
         });
     }
-
 }

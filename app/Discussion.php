@@ -26,7 +26,7 @@ class Discussion extends Model
     'body'     => 'required|min:5',
     'user_id'  => 'required|exists:users,id',
     'group_id' => 'required|exists:groups,id',
-  ];
+    ];
 
     protected $dontKeepRevisionOf = ['total_comments'];
 

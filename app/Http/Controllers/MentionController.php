@@ -26,8 +26,7 @@ class MentionController extends Controller
         $users =  $group->users()->get();
         $simple_users = array();
 
-        foreach ($users as $user)
-        {
+        foreach ($users as $user) {
             $simple_user['id'] = $user->id;
             $simple_user['name'] = $user->name;
             $simple_user['url'] = route('users.show', $user);
@@ -43,8 +42,7 @@ class MentionController extends Controller
         $discussions =  $group->discussions()->orderBy('created_at', 'desc')->get();
         $simple_discussions = array();
 
-        foreach ($discussions as $discussion)
-        {
+        foreach ($discussions as $discussion) {
             $simple_discussion['id'] = $discussion->id;
             $simple_discussion['name'] = $discussion->name;
             $simple_discussion['url'] = route('groups.discussions.show', [$group, $discussion]);
@@ -59,8 +57,7 @@ class MentionController extends Controller
         $files =  $group->files()->orderBy('created_at', 'desc')->get();
         $simple_files = array();
 
-        foreach ($files as $file)
-        {
+        foreach ($files as $file) {
             $simple_file['id'] = $file->id;
             $simple_file['name'] = $file->name;
             $simple_file['url'] = route('groups.files.show', [$group, $file]);
@@ -69,6 +66,4 @@ class MentionController extends Controller
 
         return $simple_files;
     }
-
-
 }

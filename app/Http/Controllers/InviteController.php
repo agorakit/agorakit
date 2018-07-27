@@ -52,7 +52,6 @@ class InviteController extends Controller
 
         // for each invite email,
         foreach ($emails as $email) {
-
             // - check that the user has not been invited yet for this group
             $invitation_counter = \App\Invite::where('email', '=', $email)
             ->where('claimed_at', '=', null)
@@ -95,8 +94,7 @@ class InviteController extends Controller
                 $invite->group()->associate($group);
                 $invite->user()->associate(Auth::user());
 
-                if ($invite->save())
-                {
+                if ($invite->save()) {
                     // - send invitation email
                     Mail::to($email)->send(new InviteUser($invite));
                     $status_message .= trans('membership.users_has_been_invited').' : '.$email.'<br/>';
@@ -158,8 +156,8 @@ class InviteController extends Controller
 
             return view('auth.register')
             ->with('email', $invite->email)
-			->with('invite_and_register', true)
-			->with('dialog', true)
+            ->with('invite_and_register', true)
+            ->with('dialog', true)
             ->with('group', $group)
             ->with('token', $token);
         }
