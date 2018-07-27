@@ -24,7 +24,7 @@ class MentionController extends Controller
     public function users(Group $group)
     {
         $users =  $group->users()->get();
-        $simple_users = array();
+        $simple_users = [];
 
         foreach ($users as $user) {
             $simple_user['id'] = $user->id;
@@ -40,7 +40,7 @@ class MentionController extends Controller
     public function discussions(Group $group)
     {
         $discussions =  $group->discussions()->orderBy('created_at', 'desc')->get();
-        $simple_discussions = array();
+        $simple_discussions = [];
 
         foreach ($discussions as $discussion) {
             $simple_discussion['id'] = $discussion->id;
@@ -55,7 +55,7 @@ class MentionController extends Controller
     public function files(Group $group)
     {
         $files =  $group->files()->orderBy('created_at', 'desc')->get();
-        $simple_files = array();
+        $simple_files = [];
 
         foreach ($files as $file) {
             $simple_file['id'] = $file->id;

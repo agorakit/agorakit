@@ -17,7 +17,7 @@ trait MentionUsers
                 $dom->loadHTML($model->body);
                 libxml_clear_errors();
 
-                $users_to_mention = array();
+                $users_to_mention = [];
 
                 foreach ($dom->getElementsByTagName('a') as $tag) {
                     foreach ($tag->attributes as $attribName => $attribNodeVal) {
