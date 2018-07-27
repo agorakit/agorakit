@@ -18,7 +18,7 @@ class RedirectLang
 
     public function __construct()
     {
-        $this->locales = Config::get('app.locales');
+        $this->locales = config('app.locales');
     }
 
     /**
