@@ -232,7 +232,7 @@ class UserController extends Controller
 
             return $cachedImage->response();
         } else {
-            return Redirect::to(url('/images/avatar.jpg'));
+            return redirect(url('/images/avatar.jpg'));
         }
     }
 
@@ -247,7 +247,7 @@ class UserController extends Controller
 
             return $cachedImage->response();
         } else {
-            return Redirect::to(url('/images/avatar.jpg'));
+            return redirect(url('/images/avatar.jpg'));
         }
     }
 }
