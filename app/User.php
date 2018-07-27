@@ -2,14 +2,12 @@
 
 namespace App;
 
-
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
 
 class User extends Authenticatable
 {
@@ -198,7 +196,6 @@ class User extends Authenticatable
 
 
         return $action->users->contains($this->id);
-        
     }
 
     public function memberships()
@@ -274,8 +271,7 @@ class User extends Authenticatable
 
 
         $geocode = app('geocoder')->geocode($this->address)->get()->first();
-        if ($geocode)
-        {
+        if ($geocode) {
             $this->latitude = $geocode->getCoordinates()->getLatitude();
             $this->longitude = $geocode->getCoordinates()->getLongitude();
             return true;

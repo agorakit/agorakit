@@ -18,13 +18,11 @@ class HandleUserPreference
     */
     public function handle($request, Closure $next)
     {
-        if (Auth::guest())
-        {
+        if (Auth::guest()) {
             return $next($request);
         }
 
-        if ($request->has('set_preference'))
-        {
+        if ($request->has('set_preference')) {
             $request->user()->setPreference($request->set_preference, $request->value);
         }
 

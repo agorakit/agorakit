@@ -20,8 +20,7 @@ class MembershipController extends Controller
     */
     public function create(Request $request, Group $group)
     {
-        if ($group->isOpen())
-        {
+        if ($group->isOpen()) {
             // load or create membership for this group and user combination
             $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
 
@@ -30,9 +29,7 @@ class MembershipController extends Controller
             ->with('tab', 'settings')
             ->with('membership', $membership)
             ->with('interval', 'daily');
-        }
-        else
-        {
+        } else {
             return view('membership.apply')
             ->with('group', $group)
             ->with('tab', 'settings');
@@ -49,8 +46,7 @@ class MembershipController extends Controller
     */
     public function store(Request $request, Group $group)
     {
-        if ($group->isOpen())
-        {
+        if ($group->isOpen()) {
             // load or create membership for this group and user combination
             $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
             $membership->membership = \App\Membership::MEMBER;
@@ -61,9 +57,7 @@ class MembershipController extends Controller
             $membership->save();
 
             return redirect()->route('groups.show', [$group->id])->with('message', trans('membership.welcome'));
-        }
-        else
-        {
+        } else {
             // load or create membership for this group and user combination
             $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
             $membership->membership = \App\Membership::CANDIDATE;
@@ -74,8 +68,7 @@ class MembershipController extends Controller
             $membership->save();
 
             // notify group admins
-            foreach ($group->admins as $admin)
-            {
+            foreach ($group->admins as $admin) {
                 $admin->notify(new \App\Notifications\AppliedToGroup($group, $request->user()));
             }
 
@@ -160,23 +153,23 @@ class MembershipController extends Controller
 
         switch ($interval) {
             case 'hourly':
-            $minutes = 60;
-            break;
+                $minutes = 60;
+                break;
             case 'daily':
-            $minutes = 60 * 24;
-            break;
+                $minutes = 60 * 24;
+                break;
             case 'weekly':
-            $minutes = 60 * 24 * 7;
-            break;
+                $minutes = 60 * 24 * 7;
+                break;
             case 'biweekly':
-            $minutes = 60 * 24 * 14;
-            break;
+                $minutes = 60 * 24 * 14;
+                break;
             case 'monthly':
-            $minutes = 60 * 24 * 30;
-            break;
+                $minutes = 60 * 24 * 30;
+                break;
             case 'never':
-            $minutes = -1;
-            break;
+                $minutes = -1;
+                break;
         }
 
         return $minutes;
@@ -188,23 +181,23 @@ class MembershipController extends Controller
 
         switch ($minutes) {
             case 60:
-            $interval = 'hourly';
-            break;
+                $interval = 'hourly';
+                break;
             case 60 * 24:
-            $interval = 'daily';
-            break;
+                $interval = 'daily';
+                break;
             case 60 * 24 * 7:
-            $interval = 'weekly';
-            break;
+                $interval = 'weekly';
+                break;
             case 60 * 24 * 14:
-            $interval = 'biweekly';
-            break;
+                $interval = 'biweekly';
+                break;
             case 60 * 24 * 30:
-            $interval = 'monthly';
-            break;
+                $interval = 'monthly';
+                break;
             case -1:
-            $interval = 'never';
-            break;
+                $interval = 'never';
+                break;
         }
 
         return $interval;

@@ -15,7 +15,6 @@ class AddSettingsToGroups extends Migration
     {
         Schema::table('groups', function ($table) {
             $table->text('settings');
-
         });
     }
 

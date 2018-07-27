@@ -40,7 +40,7 @@ class DashboardController extends Controller
             ->whereIn('group_id', $my_groups->pluck('id'))
             ->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->take(5)->get();
 
-            $other_discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group' , 'tags')
+            $other_discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group', 'tags')
             ->whereIn('group_id', $other_groups->pluck('id'))
             ->orderBy('updated_at', 'desc')->take(10)->get();
 
@@ -57,8 +57,6 @@ class DashboardController extends Controller
             ->with('my_actions', $my_actions)
             ->with('other_actions', $other_actions)
             ->with('other_discussions', $other_discussions);
-
-
         } else {
             return view('dashboard.presentation')
             ->with('tab', 'homepage');
@@ -83,32 +81,25 @@ class DashboardController extends Controller
         $tags = \App\File::allTags();
 
 
-        if (Auth::check())
-        {
+        if (Auth::check()) {
             $groups = \App\Group::publicgroups()
             ->get()
             ->pluck('id')
             ->merge(Auth::user()->groups()->pluck('groups.id'));
 
-            if ($request->get('tag'))
-            {
+            if ($request->get('tag')) {
                 $files = \App\File::with('group', 'user')
                 ->withAnyTags($request->get('tag'))
                 ->where('item_type', '<>', \App\File::FOLDER)
                 ->whereIn('group_id', $groups)
                 ->orderBy('created_at', 'desc')->paginate(25);
-            }
-            else
-            {
+            } else {
                 $files = \App\File::with('group', 'user')
                 ->where('item_type', '<>', \App\File::FOLDER)
                 ->whereIn('group_id', $groups)
                 ->orderBy('created_at', 'desc')->paginate(25);
             }
-        }
-
-        else
-        {
+        } else {
             $files = \App\File::with('group', 'user')
             ->where('item_type', '<>', \App\File::FOLDER)
             ->whereIn('group_id', \App\Group::publicgroups()->get()->pluck('id'))
@@ -127,8 +118,7 @@ class DashboardController extends Controller
     */
     public function discussions()
     {
-        if (Auth::check())
-        {
+        if (Auth::check()) {
             // All the groups of a user : Auth::user()->groups()->pluck('groups.id')
             // All the public groups : \App\Group::publicgroups()
 
@@ -139,15 +129,12 @@ class DashboardController extends Controller
             //->pluck('id')
             //->merge(Auth::user()->groups()->pluck('groups.id'));
 
-            if (Auth::user()->getPreference('show') == 'all')
-            {
+            if (Auth::user()->getPreference('show') == 'all') {
                 $groups = \App\Group::publicgroups()
                 ->get()
                 ->pluck('id')
                 ->merge(Auth::user()->groups()->pluck('groups.id'));
-            }
-            else
-            {
+            } else {
                 $groups = Auth::user()->groups()->pluck('groups.id');
             }
 
@@ -169,34 +156,24 @@ class DashboardController extends Controller
 
     public function agenda(Request $request)
     {
-        if (Auth::check())
-        {
+        if (Auth::check()) {
             $view = Auth::user()->getPreference('calendar', 'grid');
-        }
-        else
-        {
+        } else {
             $view = 'grid';
         }
 
 
-        if ($view == 'list')
-        {
-            if (Auth::check())
-            {
-                if (Auth::user()->getPreference('show') == 'all')
-                {
+        if ($view == 'list') {
+            if (Auth::check()) {
+                if (Auth::user()->getPreference('show') == 'all') {
                     $groups = \App\Group::publicgroups()
                     ->get()
                     ->pluck('id')
                     ->merge(Auth::user()->groups()->pluck('groups.id'));
-                }
-                else
-                {
+                } else {
                     $groups = Auth::user()->groups()->pluck('groups.id');
                 }
-            }
-            else
-            {
+            } else {
                 $groups = \App\Group::publicgroups()->get()->pluck('id');
             }
 
@@ -219,36 +196,27 @@ class DashboardController extends Controller
 
     public function agendaJson(Request $request)
     {
-        if (Auth::check())
-        {
-            if (Auth::user()->getPreference('show') == 'all')
-            {
+        if (Auth::check()) {
+            if (Auth::user()->getPreference('show') == 'all') {
                 $groups = \App\Group::publicgroups()
                 ->get()
                 ->pluck('id')
                 ->merge(Auth::user()->groups()->pluck('groups.id'));
-            }
-            else
-            {
+            } else {
                 $groups = Auth::user()->groups()->pluck('groups.id');
             }
-        }
-        else
-        {
+        } else {
             $groups = \App\Group::publicgroups()->get()->pluck('id');
         }
 
         // load of actions between start and stop provided by calendar js
-        if ($request->has('start') && $request->has('end'))
-        {
+        if ($request->has('start') && $request->has('end')) {
             $actions = \App\Action::with('group')
             ->where('start', '>', Carbon::parse($request->get('start')))
             ->where('stop', '<', Carbon::parse($request->get('end')))
             ->whereIn('group_id', $groups)
             ->orderBy('start', 'asc')->get();
-        }
-        else
-        {
+        } else {
             $actions = \App\Action::with('group')
             ->orderBy('start', 'asc')
             ->whereIn('group_id', $groups)
@@ -317,15 +285,12 @@ class DashboardController extends Controller
     {
         $users = \App\User::where('latitude', '<>', 0)->get();
 
-        if (Auth::check())
-        {
+        if (Auth::check()) {
             $allowed_groups = \App\Group::publicgroups()
             ->get()
             ->pluck('id')
             ->merge(Auth::user()->groups()->pluck('groups.id'));
-        }
-        else
-        {
+        } else {
             $allowed_groups = \App\Group::publicgroups()->get()->pluck('id');
         }
 

@@ -9,12 +9,9 @@ trait MentionUsers
 {
     public static function bootMentionUsers()
     {
-        static::created(function ($model)
-        {
-            if ($model instanceof Comment) // we curently only support comments
-            {
-
-                // Find users to notify
+        static::created(function ($model) {
+            if ($model instanceof Comment) { // we curently only support comments
+            // Find users to notify
                 $dom = new \DOMDocument;
                 libxml_use_internal_errors(true);
                 $dom->loadHTML($model->body);
@@ -22,12 +19,9 @@ trait MentionUsers
 
                 $users_to_mention = array();
 
-                foreach ($dom->getElementsByTagName('a') as $tag)
-                {
-                    foreach ($tag->attributes as $attribName => $attribNodeVal)
-                    {
-                        if ($attribName == 'data-mention-user-id')
-                        {
+                foreach ($dom->getElementsByTagName('a') as $tag) {
+                    foreach ($tag->attributes as $attribName => $attribNodeVal) {
+                        if ($attribName == 'data-mention-user-id') {
                             $users_to_mention[] = $tag->getAttribute($attribName);
                         }
                     }
@@ -35,16 +29,11 @@ trait MentionUsers
             
 
                 // if we found some users to mention
-                if (count($users_to_mention) > 0)
-                {
+                if (count($users_to_mention) > 0) {
                     $users = ($model->discussion->group->users->find($users_to_mention)); // we find users only in the group from where the mention appered to avoid abuse
                     Notification::send($users, new \App\Notifications\Mention($model, \Auth::user()));
                 }
-
             }
         });
-
-
     }
-
 }

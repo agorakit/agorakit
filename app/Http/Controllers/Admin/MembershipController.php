@@ -139,23 +139,23 @@ class MembershipController extends Controller
 
         switch ($interval) {
             case 'hourly':
-            $minutes = 60;
-            break;
+                $minutes = 60;
+                break;
             case 'daily':
-            $minutes = 60 * 24;
-            break;
+                $minutes = 60 * 24;
+                break;
             case 'weekly':
-            $minutes = 60 * 24 * 7;
-            break;
+                $minutes = 60 * 24 * 7;
+                break;
             case 'biweekly':
-            $minutes = 60 * 24 * 14;
-            break;
+                $minutes = 60 * 24 * 14;
+                break;
             case 'monthly':
-            $minutes = 60 * 24 * 30;
-            break;
+                $minutes = 60 * 24 * 30;
+                break;
             case 'never':
-            $minutes = -1;
-            break;
+                $minutes = -1;
+                break;
         }
 
         return $minutes;
@@ -167,23 +167,23 @@ class MembershipController extends Controller
 
         switch ($minutes) {
             case 60:
-            $interval = 'hourly';
-            break;
+                $interval = 'hourly';
+                break;
             case 60 * 24:
-            $interval = 'daily';
-            break;
+                $interval = 'daily';
+                break;
             case 60 * 24 * 7:
-            $interval = 'weekly';
-            break;
+                $interval = 'weekly';
+                break;
             case 60 * 24 * 14:
-            $interval = 'biweekly';
-            break;
+                $interval = 'biweekly';
+                break;
             case 60 * 24 * 30:
-            $interval = 'monthly';
-            break;
+                $interval = 'monthly';
+                break;
             case -1:
-            $interval = 'never';
-            break;
+                $interval = 'never';
+                break;
         }
 
         return $interval;

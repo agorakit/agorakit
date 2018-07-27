@@ -42,6 +42,5 @@ class Notification extends Mailable
         return $this->markdown('emails.notification')
         ->from(config('mail.noreply'), config('mail.from.name'))
         ->subject('['.setting('name').'] '.trans('messages.news_from_group_email_subject').' "'.$this->group->name.'"');
-
     }
 }
