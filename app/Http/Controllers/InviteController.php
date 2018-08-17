@@ -121,13 +121,13 @@ class InviteController extends Controller
         $invite = \App\Invite::whereToken($token)->first();
 
         if (!$invite) {
-            flash(trans('messages.invite_not_found'))->error();
+            flash(trans('messages.invite_not_found'));
 
             return redirect()->route('groups.show', $group->id);
         }
 
         if (isset($invite->claimed_at)) {
-            flash(trans('messages.invite_already_used').' ('.$invite->claimed_at.')')->warning();
+            flash(trans('messages.invite_already_used').' ('.$invite->claimed_at.')');
 
             return redirect()->route('groups.show', $group->id);
         }
@@ -147,7 +147,7 @@ class InviteController extends Controller
 
             $invite->save();
 
-            flash(trans('messages.you_are_now_a_member_of_this_group'))->success();
+            flash(trans('messages.you_are_now_a_member_of_this_group'));
 
             return redirect()->route('groups.show', $group->id);
         } else { // if user doesn't exists, we have the opportunity to create, login and validate email in one go (since we have the invite token)
@@ -197,7 +197,7 @@ class InviteController extends Controller
 
         Auth::login($user);
 
-        flash(trans('messages.you_are_now_a_member_of_this_group'))->success();
+        flash(trans('messages.you_are_now_a_member_of_this_group'));
 
         return redirect()->route('groups.show', $group->id);
     }

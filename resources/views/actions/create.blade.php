@@ -36,7 +36,7 @@
             {!! Form::close() !!}
 
         @else
-            {!! Form::model($action, array('action' => ['ActionController@store', $group->id])) !!}
+            {!! Form::model($action, array('action' => ['GroupActionController@store', $group->id])) !!}
 
             @include('actions.form')
 

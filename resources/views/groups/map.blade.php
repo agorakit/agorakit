@@ -23,12 +23,6 @@
         <div id="map"></div>
 
 
-        <div class="pannel">
-            <strong>{{trans('messages.embed_this_page')}}</strong>
-            <p>
-                <textarea cols="90" rows="2"><iframe src="{{ action('MapController@embed', $group)}}" width="600" height="400" frameborder="0"></iframe></textarea>
-            </p>
-        </div>
 
     </div>
 

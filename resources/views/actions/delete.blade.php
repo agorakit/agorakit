@@ -8,7 +8,7 @@
 
   <p>{{$action->name}}</p>
 
-  {!! Form::model($action, array('method' => 'DELETE', 'action' => ['ActionController@destroy', $group->id, $action->id])) !!}
+  {!! Form::model($action, array('method' => 'DELETE', 'action' => ['GroupActionController@destroy', $group->id, $action->id])) !!}
 
 
 

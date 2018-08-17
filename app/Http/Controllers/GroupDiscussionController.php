@@ -9,7 +9,7 @@ use Carbon\Carbon;
 use Gate;
 use Illuminate\Http\Request;
 
-class DiscussionController extends Controller
+class GroupDiscussionController extends Controller
 {
     public function __construct()
     {
@@ -110,7 +110,7 @@ class DiscussionController extends Controller
             $discussion->tag($request->get('tags'));
         }
 
-        flash(trans('messages.ressource_created_successfully'))->success();
+        flash(trans('messages.ressource_created_successfully'));
 
         return redirect()->route('groups.discussions.show', [$group->id, $discussion->id]);
     }
@@ -179,7 +179,7 @@ class DiscussionController extends Controller
             $discussion->retag($request->get('tags'));
         }
 
-        flash(trans('messages.ressource_updated_successfully'))->success();
+        flash(trans('messages.ressource_updated_successfully'));
 
         return redirect()->route('groups.discussions.show', [$discussion->group->id, $discussion->id]);
     }
@@ -207,7 +207,7 @@ class DiscussionController extends Controller
     {
         if (Gate::allows('delete', $discussion)) {
             $discussion->delete();
-            flash(trans('messages.ressource_deleted_successfully'))->success();
+            flash(trans('messages.ressource_deleted_successfully'));
 
             return redirect()->route('groups.discussions.index', [$group]);
         } else {

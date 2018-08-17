@@ -121,12 +121,12 @@ Route::group(['middleware' => ['web']], function () {
 
 
     // General discussion create route
-    Route::get('discussions/create', 'DiscussionController@create')->name('discussions.create');
-    Route::post('discussions/create', 'DiscussionController@store')->name('discussions.store');
+    Route::get('discussions/create', 'GroupDiscussionController@create')->name('discussions.create');
+    Route::post('discussions/create', 'GroupDiscussionController@store')->name('discussions.store');
 
     // General action create route
-    Route::get('actions/create', 'ActionController@create')->name('actions.create');
-    Route::post('actions/create', 'ActionController@store')->name('actions.store');
+    Route::get('actions/create', 'GroupActionController@create')->name('actions.create');
+    Route::post('actions/create', 'GroupActionController@store')->name('actions.store');
 
 
     // Users
@@ -195,23 +195,23 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('users', 'UserController@index')->name('.users.index');
 
         // Maps
-        Route::get('map', 'MapController@map')->name('.map');
-        Route::get('map/embed', 'MapController@embed')->name('.map.embed');
+        Route::get('map', 'GroupMapController@map')->name('.map');
+        Route::get('map/embed', 'GroupMapController@embed')->name('.map.embed');
 
         // Discussions
-        Route::get('discussions', 'DiscussionController@index')->name('.discussions.index');
-        Route::get('discussions/create', 'DiscussionController@create')->name('.discussions.create');
-        Route::post('discussions/create', 'DiscussionController@store')->name('.discussions.store');
+        Route::get('discussions', 'GroupDiscussionController@index')->name('.discussions.index');
+        Route::get('discussions/create', 'GroupDiscussionController@create')->name('.discussions.create');
+        Route::post('discussions/create', 'GroupDiscussionController@store')->name('.discussions.store');
 
-        Route::get('discussions/{discussion}', 'DiscussionController@show')->name('.discussions.show');
-        Route::get('discussions/{discussion}/edit', 'DiscussionController@edit')->name('.discussions.edit');
-        Route::post('discussions/{discussion}', 'DiscussionController@update')->name('.discussions.update');
+        Route::get('discussions/{discussion}', 'GroupDiscussionController@show')->name('.discussions.show');
+        Route::get('discussions/{discussion}/edit', 'GroupDiscussionController@edit')->name('.discussions.edit');
+        Route::post('discussions/{discussion}', 'GroupDiscussionController@update')->name('.discussions.update');
 
-        Route::get('discussions/{discussion}/delete', 'DiscussionController@destroyConfirm')->name('.discussions.deleteconfirm');
-        Route::delete('discussions/{discussion}/delete', 'DiscussionController@destroy')->name('.discussions.delete');
+        Route::get('discussions/{discussion}/delete', 'GroupDiscussionController@destroyConfirm')->name('.discussions.deleteconfirm');
+        Route::delete('discussions/{discussion}/delete', 'GroupDiscussionController@destroy')->name('.discussions.delete');
 
         // Discussion history
-        Route::get('discussions/{discussion}/history', 'DiscussionController@history')->name('.discussions.history');
+        Route::get('discussions/{discussion}/history', 'GroupDiscussionController@history')->name('.discussions.history');
 
 
         // Comments
@@ -223,17 +223,17 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('discussions/{discussion}/comments/{comment}/history', 'CommentController@history')->name('.discussions.comments.history');
 
         // Actions
-        Route::get('actions', 'ActionController@index')->name('.actions.index');
-        Route::get('actions/create', 'ActionController@create')->name('.actions.create');
-        Route::post('actions/create', 'ActionController@store')->name('.actions.store');
-        Route::get('actions/json', 'ActionController@indexJson')->name('.actions.index.json');
-        Route::get('actions/ical', 'IcalController@group')->name('.actions.index.ical');
-        Route::get('actions/{action}', 'ActionController@show')->name('.actions.show');
-        Route::get('actions/{action}/edit', 'ActionController@edit')->name('.actions.edit');
-        Route::post('actions/{action}', 'ActionController@update')->name('.actions.update');
-        Route::get('actions/{action}/delete', 'ActionController@destroyConfirm')->name('.actions.deleteconfirm');
-        Route::delete('actions/{action}/delete', 'ActionController@destroy')->name('.actions.delete');
-        Route::get('actions/{action}/history', 'ActionController@history')->name('.actions.history');
+        Route::get('actions', 'GroupActionController@index')->name('.actions.index');
+        Route::get('actions/create', 'GroupActionController@create')->name('.actions.create');
+        Route::post('actions/create', 'GroupActionController@store')->name('.actions.store');
+        Route::get('actions/json', 'GroupActionController@indexJson')->name('.actions.index.json');
+        Route::get('actions/ical', 'GroupIcalController@index')->name('.actions.index.ical');
+        Route::get('actions/{action}', 'GroupActionController@show')->name('.actions.show');
+        Route::get('actions/{action}/edit', 'GroupActionController@edit')->name('.actions.edit');
+        Route::post('actions/{action}', 'GroupActionController@update')->name('.actions.update');
+        Route::get('actions/{action}/delete', 'GroupActionController@destroyConfirm')->name('.actions.deleteconfirm');
+        Route::delete('actions/{action}/delete', 'GroupActionController@destroy')->name('.actions.delete');
+        Route::get('actions/{action}/history', 'GroupActionController@history')->name('.actions.history');
 
 
         // Action (un)attending
@@ -245,16 +245,16 @@ Route::group(['middleware' => ['web']], function () {
 
 
         // Files
-        Route::get('files', 'FileController@index')->name('.files.index');
-        Route::get('files/create', 'FileController@create')->name('.files.create');
-        Route::post('files/create', 'FileController@store')->name('.files.store');
-        Route::get('files/createlink', 'FileController@createLink')->name('.files.createlink');
-        Route::post('files/createlink', 'FileController@storeLink')->name('.files.storelink');
-        Route::get('files/{file}', 'FileController@show')->name('.files.show');
-        Route::get('files/{file}/edit', 'FileController@edit')->name('.files.edit');
-        Route::post('files/{file}', 'FileController@update')->name('.files.update');
-        Route::get('files/{file}/delete', 'FileController@destroyConfirm')->name('.files.deleteconfirm');
-        Route::delete('files/{file}/delete', 'FileController@destroy')->name('.files.delete');
+        Route::get('files', 'GroupFileController@index')->name('.files.index');
+        Route::get('files/create', 'GroupFileController@create')->name('.files.create');
+        Route::post('files/create', 'GroupFileController@store')->name('.files.store');
+        Route::get('files/createlink', 'GroupFileController@createLink')->name('.files.createlink');
+        Route::post('files/createlink', 'GroupFileController@storeLink')->name('.files.storelink');
+        Route::get('files/{file}', 'GroupFileController@show')->name('.files.show');
+        Route::get('files/{file}/edit', 'GroupFileController@edit')->name('.files.edit');
+        Route::post('files/{file}', 'GroupFileController@update')->name('.files.update');
+        Route::get('files/{file}/delete', 'GroupFileController@destroyConfirm')->name('.files.deleteconfirm');
+        Route::delete('files/{file}/delete', 'GroupFileController@destroy')->name('.files.delete');
 
         Route::get('files/{file}/download', 'FileDownloadController@download')->name('.files.download');
         Route::get('files/{file}/thumbnail', 'FileDownloadController@thumbnail')->name('.files.thumbnail');
