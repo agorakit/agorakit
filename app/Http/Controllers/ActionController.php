@@ -28,50 +28,35 @@ class ActionController extends Controller
     {
         $view = 'grid';
 
-        if (Auth::check())
-        {
-            if (Auth::user()->getPreference('calendar'))
-            {
-                if (Auth::user()->getPreference('calendar') == 'list')
-                {
+        if (Auth::check()) {
+            if (Auth::user()->getPreference('calendar')) {
+                if (Auth::user()->getPreference('calendar') == 'list') {
                     $view = 'list';
-                }
-                else
-                {
+                } else {
                     $view = 'grid';
                 }
             }
 
-            if ($request->get('type') == 'list')
-            {
+            if ($request->get('type') == 'list') {
                 Auth::user()->setPreference('calendar', 'list');
                 $view = 'list';
             }
 
-            if ($request->get('type') == 'grid')
-            {
+            if ($request->get('type') == 'grid') {
                 Auth::user()->setPreference('calendar', 'grid');
                 $view = 'grid';
             }
-
-        }
-        else
-        {
-
-            if ($request->get('type') == 'list')
-            {
+        } else {
+            if ($request->get('type') == 'list') {
                 $view = 'list';
             }
 
-            if ($request->get('type') == 'grid')
-            {
+            if ($request->get('type') == 'grid') {
                 $view = 'grid';
             }
-
         }
 
-        if ($view == 'list')
-        {
+        if ($view == 'list') {
             $actions = $group->actions()
             ->orderBy('start', 'asc')
             ->where('start', '>=', Carbon::now()->subDays(1))
@@ -132,9 +117,7 @@ class ActionController extends Controller
 
         if ($request->get('start')) {
             $action->start = Carbon::createFromFormat('Y-m-d H:i', $request->get('start'));
-        }
-        else
-        {
+        } else {
             $action->start = Carbon::now();
         }
 
@@ -161,8 +144,7 @@ class ActionController extends Controller
     public function store(Request $request, Group $group)
     {
         // if no group is in the route, it means user choose the group using the dropdown
-        if (!$group->exists)
-        {
+        if (!$group->exists) {
             $group = \App\Group::findOrFail($request->get('group'));
         }
 
@@ -173,54 +155,39 @@ class ActionController extends Controller
         $action->name = $request->input('name');
         $action->body = $request->input('body');
 
-        try
-        {
+        try {
             $action->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('start_time'));
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return redirect()->route('groups.actions.create', $group)
             ->withErrors($e->getMessage() . '. Incorrect format in the start date, use yyyy-mm-dd hh:mm')
             ->withInput();
         }
 
 
-        if ($request->get('stop_time'))
-        {
+        if ($request->get('stop_time')) {
             $stop_time = $request->get('stop_time');
-        }
-        else
-        {
+        } else {
             $stop_time = $request->input('start_time');
         }
 
-        try
-        {
-            if ($request->get('stop_date'))
-            {
-                if ($request->get('stop_time'))
-                {
+        try {
+            if ($request->get('stop_date')) {
+                if ($request->get('stop_time')) {
                     $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('stop_time'));
-                }
-                else // asssume action will have a one hour duration
+                } else // asssume action will have a one hour duration
                 {
                     $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('start_time'))->addHour();
                 }
-            }
-            else // assume it will be same day
+            } else // assume it will be same day
             {
-                if ($request->get('stop_time'))
-                {
+                if ($request->get('stop_time')) {
                     $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
-                }
-                else // asssume action will have a one hour duration
+                } else // asssume action will have a one hour duration
                 {
                     $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('start_time'))->addHour();
                 }
             }
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return redirect()->route('groups.actions.create', $group)
             ->withErrors($e->getMessage() . '. Incorrect format in the stop date, use yyyy-mm-dd hh:mm')
             ->withInput();
@@ -299,18 +266,14 @@ class ActionController extends Controller
 
         $action->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('start_time'));
 
-        if ($request->has('stop_date') && $request->get('stop_date')<>'')
-        {
+        if ($request->has('stop_date') && $request->get('stop_date')<>'') {
             $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('stop_time'));
-        }
-        else
-        {
+        } else {
             $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
         }
 
 
         if ($action->location != $request->input('location')) {
-
             // we need to update user address and geocode it
             $action->location = $request->input('location');
             if (!$action->geocode()) {

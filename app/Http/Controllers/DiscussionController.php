@@ -28,8 +28,7 @@ class DiscussionController extends Controller
 
         $tag = $request->get('tag');
 
-        if (\Auth::check())
-        {
+        if (\Auth::check()) {
             $discussions =
             $group->discussions()
             ->has('user')
@@ -37,11 +36,9 @@ class DiscussionController extends Controller
             ->orderBy('updated_at', 'desc')
             ->when($tag, function ($query) use ($tag) {
                     return $query->withAnyTags($tag);
-                })
+            })
             ->paginate(50);
-        }
-        else
-        { // don't load the unread relation, since we don't know who to look for.
+        } else { // don't load the unread relation, since we don't know who to look for.
             $discussions = $group->discussions()->has('user')->with('user')->orderBy('updated_at', 'desc')->paginate(50);
         }
 
@@ -49,8 +46,7 @@ class DiscussionController extends Controller
 
         $tags = false;
 
-        foreach ($popular_tags as $name => $count)
-        {
+        foreach ($popular_tags as $name => $count) {
             $tags[] = $name;
         }
 
@@ -85,8 +81,7 @@ class DiscussionController extends Controller
     public function store(Request $request, Group $group)
     {
         // if no group is in the route, it means user choose the group using the dropdown
-        if (!$group->exists)
-        {
+        if (!$group->exists) {
             $group = \App\Group::findOrFail($request->get('group'));
         }
 
@@ -111,8 +106,7 @@ class DiscussionController extends Controller
         $group->touch();
         \Auth::user()->touch();
 
-        if ($request->get('tags'))
-        {
+        if ($request->get('tags')) {
             $discussion->tag($request->get('tags'));
         }
 
@@ -181,8 +175,7 @@ class DiscussionController extends Controller
         //$discussion->user()->associate(Auth::user()); // we use revisionable to manage who changed what, so we keep the original author
         $discussion->save();
 
-        if ($request->get('tags'))
-        {
+        if ($request->get('tags')) {
             $discussion->retag($request->get('tags'));
         }
 

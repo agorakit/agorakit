@@ -39,14 +39,11 @@ class PopulateFilesize extends Command
     */
     public function handle()
     {
-        foreach (\App\File::all() as $file)
-        {
-            if (Storage::exists($file->path))
-            {
+        foreach (\App\File::all() as $file) {
+            if (Storage::exists($file->path)) {
                 $file->filesize = Storage::size($file->path);
                 $file->save();
             }
         }
-
     }
 }

@@ -26,7 +26,7 @@ class Discussion extends Model
     'body'     => 'required|min:5',
     'user_id'  => 'required|exists:users,id',
     'group_id' => 'required|exists:groups,id',
-  ];
+    ];
 
     protected $dontKeepRevisionOf = ['total_comments'];
 
@@ -58,12 +58,12 @@ class Discussion extends Model
 
     public function group()
     {
-        return $this->belongsTo('App\Group');
+        return $this->belongsTo(\App\Group::class);
     }
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(\App\User::class);
     }
 
     public function votes()
@@ -73,13 +73,13 @@ class Discussion extends Model
 
     public function comments()
     {
-        return $this->hasMany('App\Comment');
+        return $this->hasMany(\App\Comment::class);
     }
 
     public function userReadDiscussion()
     {
         if (\Auth::check()) {
-            return $this->hasMany('App\UserReadDiscussion')->where('user_id', '=', \Auth::user()->id);
+            return $this->hasMany(\App\UserReadDiscussion::class)->where('user_id', '=', \Auth::user()->id);
         } else {
             abort(500, 'Need to be logged in to access this userReadDiscussion relation');
         }

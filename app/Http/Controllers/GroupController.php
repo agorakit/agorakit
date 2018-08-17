@@ -34,8 +34,7 @@ class GroupController extends Controller
         $activities = false;
 
         // User is logged
-        if (Auth::check())
-        {
+        if (Auth::check()) {
             if (Gate::allows('viewDiscussions', $group)) {
                 $discussions = $group->discussions()
                 ->has('user')
@@ -56,15 +55,12 @@ class GroupController extends Controller
             if (Gate::allows('viewActivities', $group)) {
                 $activities = $group->activities()->limit(10)->get();
             }
-        }
-        else // anonymous user
+        } else // anonymous user
         {
-            if ($group->isSecret())
-            {
+            if ($group->isSecret()) {
                 abort('404', 'No query results for model [App\Group].');
             }
-            if ($group->isOpen())
-            {
+            if ($group->isOpen()) {
                 $discussions = $group->discussions()
                 ->has('user')
                 ->with('user', 'group')
@@ -116,19 +112,13 @@ class GroupController extends Controller
         $group->body = $request->input('body');
 
         // handle secret group type
-        if ($request->input('group_type') == \App\Group::SECRET)
-        {
-            if (setting('users_can_create_secret_group') || $request->user()->isAdmin())
-            {
+        if ($request->input('group_type') == \App\Group::SECRET) {
+            if (setting('users_can_create_secret_group') || $request->user()->isAdmin()) {
                 $group->group_type = $request->input('group_type');
-            }
-            else
-            {
+            } else {
                 abort(401, 'Cant create secret group on this instance, sorry');
             }
-        }
-        else
-        {
+        } else {
             $group->group_type = $request->input('group_type');
         }
 
@@ -152,8 +142,7 @@ class GroupController extends Controller
 
         $group->user()->associate(Auth::user());
 
-        if ($request->get('tags'))
-        {
+        if ($request->get('tags')) {
             $group->tag($request->get('tags'));
         }
 
@@ -171,10 +160,8 @@ class GroupController extends Controller
         $membership->save();
 
         // notify admins (if they want it)
-        if (setting('notify_admins_on_group_create'))
-        {
-            foreach (\App\User::admins()->get() as $admin)
-            {
+        if (setting('notify_admins_on_group_create')) {
+            foreach (\App\User::admins()->get() as $admin) {
                 $admin->notify(new \App\Notifications\GroupCreated($group));
             }
         }
@@ -212,22 +199,15 @@ class GroupController extends Controller
         $group->name = $request->input('name');
         $group->body = $request->input('body');
 
-        if (Gate::allows('changeGroupType', $group))
-        {
+        if (Gate::allows('changeGroupType', $group)) {
             // handle secret group type
-            if ($request->input('group_type') == \App\Group::SECRET)
-            {
-                if (setting('users_can_create_secret_group') || $request->user()->isAdmin())
-                {
+            if ($request->input('group_type') == \App\Group::SECRET) {
+                if (setting('users_can_create_secret_group') || $request->user()->isAdmin()) {
                     $group->group_type = $request->input('group_type');
-                }
-                else
-                {
+                } else {
                     abort(401, 'Cant create secret group on this instance, sorry');
                 }
-            }
-            else
-            {
+            } else {
                 $group->group_type = $request->input('group_type');
             }
         }
@@ -244,8 +224,7 @@ class GroupController extends Controller
 
         $group->user()->associate(Auth::user());
 
-        if ($request->get('tags'))
-        {
+        if ($request->get('tags')) {
             $group->retag($request->get('tags'));
         }
 

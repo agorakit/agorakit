@@ -2,14 +2,12 @@
 
 namespace App;
 
-
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
 
 class User extends Authenticatable
 {
@@ -182,7 +180,7 @@ class User extends Authenticatable
     */
     public function groups()
     {
-        return $this->belongsToMany('App\Group', 'membership')->where('membership.membership', '>=', \App\Membership::MEMBER)->orderBy('name')->withTimestamps();
+        return $this->belongsToMany(\App\Group::class, 'membership')->where('membership.membership', '>=', \App\Membership::MEMBER)->orderBy('name')->withTimestamps();
     }
 
     /**
@@ -190,7 +188,7 @@ class User extends Authenticatable
      */
     public function actions()
     {
-        return $this->belongsToMany('App\Action');
+        return $this->belongsToMany(\App\Action::class);
     }
 
     public function isAttending(Action $action)
@@ -198,17 +196,16 @@ class User extends Authenticatable
 
 
         return $action->users->contains($this->id);
-        
     }
 
     public function memberships()
     {
-        return $this->hasMany('App\Membership');
+        return $this->hasMany(\App\Membership::class);
     }
 
     public function discussionsSubscribed()
     {
-        return $this->hasManyThrough('App\Discussion', 'App\Group');
+        return $this->hasManyThrough(\App\Discussion::class, \App\Group::class);
     }
 
     /**
@@ -216,7 +213,7 @@ class User extends Authenticatable
     */
     public function discussions()
     {
-        return $this->hasMany('App\Discussion');
+        return $this->hasMany(\App\Discussion::class);
     }
 
     /**
@@ -224,7 +221,7 @@ class User extends Authenticatable
     */
     public function comments()
     {
-        return $this->hasMany('App\Comment');
+        return $this->hasMany(\App\Comment::class);
     }
 
     /**
@@ -232,7 +229,7 @@ class User extends Authenticatable
     */
     public function files()
     {
-        return $this->hasMany('App\File');
+        return $this->hasMany(\App\File::class);
     }
 
 
@@ -241,7 +238,7 @@ class User extends Authenticatable
     */
     public function activities()
     {
-        return $this->hasMany('App\Activity')->orderBy('created_at', 'desc');
+        return $this->hasMany(\App\Activity::class)->orderBy('created_at', 'desc');
     }
 
     public function avatar()
@@ -274,8 +271,7 @@ class User extends Authenticatable
 
 
         $geocode = app('geocoder')->geocode($this->address)->get()->first();
-        if ($geocode)
-        {
+        if ($geocode) {
             $this->latitude = $geocode->getCoordinates()->getLatitude();
             $this->longitude = $geocode->getCoordinates()->getLongitude();
             return true;

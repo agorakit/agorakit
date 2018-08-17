@@ -259,10 +259,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('files/{file}/download', 'FileDownloadController@download')->name('.files.download');
         Route::get('files/{file}/thumbnail', 'FileDownloadController@thumbnail')->name('.files.thumbnail');
         Route::get('files/{file}/preview', 'FileDownloadController@preview')->name('.files.preview');
-
-
-
-
     });
 
 
@@ -304,8 +300,5 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::get('admin/undo', 'UndoController@index')->name('admin.undo');
         Route::get('admin/{type}/{id}/restore', 'UndoController@restore')->name('admin.restore');
-
     });
-
-
 });

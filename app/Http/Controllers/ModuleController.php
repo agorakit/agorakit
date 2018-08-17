@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \App\Group;
 
-
 /**
 * This controller taks care of enabling / disabling features (or modules) for each group
 * A module is for example the discussion module
@@ -15,20 +14,17 @@ class ModuleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('groupadmin', ['except' => ['show']] );
+        $this->middleware('groupadmin', ['except' => ['show']]);
         $this->middleware('member');
     }
 
     public function show(Request $request, Group $group)
     {
-        if ($group->getSetting('module_custom_name'))
-        {
+        if ($group->getSetting('module_custom_name')) {
             return view('groups.custom')
             ->with('group', $group)
             ->with('tab', 'custom');
-        }
-        else
-        {
+        } else {
             abort(404, 'No custom module for this group');
         }
     }
@@ -43,49 +39,34 @@ class ModuleController extends Controller
 
     public function update(Request $request, Group $group)
     {
-        if ($request->has('module_discussion'))
-        {
+        if ($request->has('module_discussion')) {
             $group->setSetting('module_discussion', true);
-        }
-        else
-        {
+        } else {
             $group->setSetting('module_discussion', false);
         }
 
-        if ($request->has('module_action'))
-        {
+        if ($request->has('module_action')) {
             $group->setSetting('module_action', true);
-        }
-        else
-        {
+        } else {
             $group->setSetting('module_action', false);
         }
 
-        if ($request->has('module_file'))
-        {
+        if ($request->has('module_file')) {
             $group->setSetting('module_file', true);
-        }
-        else
-        {
+        } else {
             $group->setSetting('module_file', false);
         }
 
 
-        if ($request->has('module_member'))
-        {
+        if ($request->has('module_member')) {
             $group->setSetting('module_member', true);
-        }
-        else
-        {
+        } else {
             $group->setSetting('module_member', false);
         }
 
-        if ($request->has('module_map'))
-        {
+        if ($request->has('module_map')) {
             $group->setSetting('module_map', true);
-        }
-        else
-        {
+        } else {
             $group->setSetting('module_map', false);
         }
 
@@ -100,5 +81,4 @@ class ModuleController extends Controller
 
         return redirect()->route('groups.show', $group);
     }
-
 }

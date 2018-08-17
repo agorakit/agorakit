@@ -34,12 +34,10 @@ class AppMailer
             // Establish timestamp for notifications from membership data (when was an email sent for the last time?)
             $membership = \App\Membership::where('user_id', '=', $user->id)
             ->where('group_id', '=', $group->id)
-            ->where('membership', '>=',\App\Membership::MEMBER)
+            ->where('membership', '>=', \App\Membership::MEMBER)
             ->first();
 
-            if ($membership)
-            {
-
+            if ($membership) {
                 $last_notification = $membership->notified_at;
 
                 // find unread discussions since timestamp
@@ -76,8 +74,7 @@ class AppMailer
                 // because we don't want to be notified just because there is a new member
 
 
-                if (count($discussions) > 0 or count($files) > 0 or ($actions_count > 0 ))
-                {
+                if (count($discussions) > 0 or count($files) > 0 or ($actions_count > 0 )) {
                     $notification = new Notification;
 
                     $notification->user = $user;
@@ -93,9 +90,7 @@ class AppMailer
 
                     Mail::to($user)->send($notification);
                     return true;
-
                 }
-
             }
 
 

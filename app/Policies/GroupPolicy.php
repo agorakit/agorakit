@@ -30,12 +30,9 @@ class GroupPolicy
 
     public function create(User $user)
     {
-        if (setting('user_can_create_groups') == true)
-        {
+        if (setting('user_can_create_groups') == true) {
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }

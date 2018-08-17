@@ -65,10 +65,8 @@ class UserController extends Controller
         $from_user = Auth::user();
         $to_user = $user;
 
-        if ($to_user->verified == 1)
-        {
-            if ($request->has('body'))
-            {
+        if ($to_user->verified == 1) {
+            if ($request->has('body')) {
                 $body = $request->input('body');
                 Mail::to($to_user)->send(new ContactUser($from_user, $to_user, $body));
 
@@ -77,9 +75,7 @@ class UserController extends Controller
             }
 
             return redirect()->back();
-        }
-        else
-        {
+        } else {
             flash(trans('messages.email_not_verified'))->error();
             return redirect()->back();
         }
@@ -236,7 +232,7 @@ class UserController extends Controller
 
             return $cachedImage->response();
         } else {
-            return Redirect::to(url('/images/avatar.jpg'));
+            return redirect(url('/images/avatar.jpg'));
         }
     }
 
@@ -251,7 +247,7 @@ class UserController extends Controller
 
             return $cachedImage->response();
         } else {
-            return Redirect::to(url('/images/avatar.jpg'));
+            return redirect(url('/images/avatar.jpg'));
         }
     }
 }

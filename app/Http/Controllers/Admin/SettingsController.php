@@ -30,8 +30,7 @@ class SettingsController extends Controller
     */
     public function update(Request $request)
     {
-        if (Auth::user()->isAdmin())
-        {
+        if (Auth::user()->isAdmin()) {
             \App\Setting::set('name', $request->get('name'));
             \App\Setting::set('homepage_presentation', $request->get('homepage_presentation'));
             \App\Setting::set('homepage_presentation_for_members', $request->get('homepage_presentation_for_members'));
@@ -45,15 +44,13 @@ class SettingsController extends Controller
             // handle app logo
             if ($request->hasFile('logo')) {
                 Storage::makeDirectory('public/logo');
-                Image::make($request->file('logo'))->fit(128,128)->save(storage_path().'/app/public/logo/favicon.png');
-                Image::make($request->file('logo'))->fit(640,640)->save(storage_path().'/app/public/logo/logo.jpg');
+                Image::make($request->file('logo'))->fit(128, 128)->save(storage_path().'/app/public/logo/favicon.png');
+                Image::make($request->file('logo'))->fit(640, 640)->save(storage_path().'/app/public/logo/logo.jpg');
             }
 
             flash('Settings saved')->success();
             return view('admin.settings.index');
-        }
-        else
-        {
+        } else {
             flash(trans('messages.not_allowed'))->error();
             return redirect()->action('DashboardController@index');
         }
