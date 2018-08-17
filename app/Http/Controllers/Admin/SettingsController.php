@@ -48,10 +48,10 @@ class SettingsController extends Controller
                 Image::make($request->file('logo'))->fit(640, 640)->save(storage_path().'/app/public/logo/logo.jpg');
             }
 
-            flash('Settings saved')->success();
+            flash('Settings saved');
             return view('admin.settings.index');
         } else {
-            flash(trans('messages.not_allowed'))->error();
+            flash(trans('messages.not_allowed'));
             return redirect()->action('DashboardController@index');
         }
     }

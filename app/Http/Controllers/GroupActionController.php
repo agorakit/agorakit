@@ -9,7 +9,7 @@ use Gate;
 use Illuminate\Http\Request;
 use Auth;
 
-class ActionController extends Controller
+class GroupActionController extends Controller
 {
     public function __construct()
     {
@@ -196,9 +196,9 @@ class ActionController extends Controller
         if ($request->get('location')) {
             $action->location = $request->input('location');
             if (!$action->geocode()) {
-                flash(trans('messages.address_cannot_be_geocoded'))->error();
+                flash(trans('messages.address_cannot_be_geocoded'));
             } else {
-                flash(trans('messages.ressource_geocoded_successfully'))->success();
+                flash(trans('messages.ressource_geocoded_successfully'));
             }
         }
 
@@ -217,7 +217,7 @@ class ActionController extends Controller
             ->withInput();
         } else {
             $action->save();
-            flash(trans('messages.ressource_created_successfully'))->success();
+            flash(trans('messages.ressource_created_successfully'));
             return redirect()->route('groups.actions.index', $group);
         }
     }
@@ -277,9 +277,9 @@ class ActionController extends Controller
             // we need to update user address and geocode it
             $action->location = $request->input('location');
             if (!$action->geocode()) {
-                flash(trans('messages.address_cannot_be_geocoded'))->error();
+                flash(trans('messages.address_cannot_be_geocoded'));
             } else {
-                flash(trans('messages.ressource_geocoded_successfully'))->success();
+                flash(trans('messages.ressource_geocoded_successfully'));
             }
         }
 
@@ -327,7 +327,7 @@ class ActionController extends Controller
     {
         if (Gate::allows('delete', $action)) {
             $action->delete();
-            flash(trans('messages.ressource_deleted_successfully'))->success();
+            flash(trans('messages.ressource_deleted_successfully'));
 
             return redirect()->route('groups.actions.index', [$group->id]);
         } else {

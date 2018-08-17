@@ -6,7 +6,7 @@
     <div class="tab_content">
 
 
-        {!! Form::model($file, ['action' => ['FileController@update', $file->group->id, $file->id], 'files' => true]) !!}
+        {!! Form::model($file, ['action' => ['GroupFileController@update', $file->group->id, $file->id], 'files' => true]) !!}
 
         <div class="form-group">
         	{!! Form::label('name', trans('messages.filename')) !!}

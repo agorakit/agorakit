@@ -12,7 +12,7 @@ use Image;
 use Storage;
 use Validator;
 
-class FileController extends Controller
+class GroupFileController extends Controller
 {
     public function __construct()
     {
@@ -173,7 +173,7 @@ class FileController extends Controller
                     \Auth::user()->touch();
                 }
 
-                flash(trans('messages.ressource_created_successfully'))->success();
+                flash(trans('messages.ressource_created_successfully'));
                 if (isset($parent)) {
                     return redirect()->route('groups.files.show', [$group, $parent]);
                 } else {
@@ -224,11 +224,11 @@ class FileController extends Controller
         }
 
         if ($file->save()) {
-            flash(trans('messages.ressource_updated_successfully'))->success();
+            flash(trans('messages.ressource_updated_successfully'));
 
             return redirect()->route('groups.files.index', [$group]);
         } else {
-            flash(trans('messages.ressource_not_updated_successfully'))->error();
+            flash(trans('messages.ressource_not_updated_successfully'));
 
             return redirect()->back();
         }
@@ -257,7 +257,7 @@ class FileController extends Controller
     {
         if (Gate::allows('delete', $file)) {
             $file->delete();
-            flash(trans('messages.ressource_deleted_successfully'))->success();
+            flash(trans('messages.ressource_deleted_successfully'));
 
             return redirect()->route('groups.files.index', [$group]);
         } else {
@@ -304,11 +304,11 @@ class FileController extends Controller
             $group->touch();
             \Auth::user()->touch();
 
-            flash(trans('messages.ressource_created_successfully'))->success();
+            flash(trans('messages.ressource_created_successfully'));
 
             return redirect()->route('groups.files.index', $group);
         } else {
-            flash(trans('messages.ressource_not_created_successfully'))->error();
+            flash(trans('messages.ressource_not_created_successfully'));
 
             return redirect()->back()->withInput();
         }

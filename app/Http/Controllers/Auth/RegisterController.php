@@ -103,7 +103,7 @@ class RegisterController extends Controller
         if (Auth::guest()) {
             Auth::login($user); //TODO security implication of this
         }
-        flash(trans('messages.you_have_verified_your_email'))->success();
+        flash(trans('messages.you_have_verified_your_email'));
 
         // add user to the group (s)he has been invited to before registering
         $invites = \App\Invite::where('email', '=', $user->email)->get();

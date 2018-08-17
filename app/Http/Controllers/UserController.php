@@ -70,13 +70,13 @@ class UserController extends Controller
                 $body = $request->input('body');
                 Mail::to($to_user)->send(new ContactUser($from_user, $to_user, $body));
 
-                flash(trans('messages.message_sent'))->success();
+                flash(trans('messages.message_sent'));
                 return redirect()->route('users.contactform', $to_user);
             }
 
             return redirect()->back();
         } else {
-            flash(trans('messages.email_not_verified'))->error();
+            flash(trans('messages.email_not_verified'));
             return redirect()->back();
         }
     }
@@ -133,7 +133,7 @@ class UserController extends Controller
                 // we need to update user address and geocode it
                 $user->address = $request->input('address');
                 if (!$user->geocode()) {
-                    flash(trans('messages.address_cannot_be_geocoded'))->warning();
+                    flash(trans('messages.address_cannot_be_geocoded'));
                 } else {
                     flash(trans('messages.ressource_geocoded_successfully'));
                 }
@@ -183,7 +183,7 @@ class UserController extends Controller
 
             $user->save();
 
-            flash(trans('messages.ressource_updated_successfully'))->success();
+            flash(trans('messages.ressource_updated_successfully'));
 
             return redirect()->route('users.show', [$user->id]);
         } else {

@@ -97,7 +97,7 @@
         <div id="calendar"></div>
 
 
-        <p><a href="{{action('IcalController@group', $group->id)}}">Téléchargez le calendrier de ce groupe au format iCal</a></p>
+        <p><a href="{{action('GroupIcalController@index', $group->id)}}">Téléchargez le calendrier de ce groupe au format iCal</a></p>
 
 
         <div id="fullCalModal" class="modal fade">

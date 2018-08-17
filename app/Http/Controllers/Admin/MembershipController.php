@@ -55,7 +55,7 @@ class MembershipController extends Controller
                 // notify the user
                 $user->notify(new \App\Notifications\AddedToGroup($group));
 
-                flash(trans('messages.user_added_successfuly').' : '.$user->name)->success();
+                flash(trans('messages.user_added_successfuly').' : '.$user->name);
             }
         }
 
@@ -72,7 +72,7 @@ class MembershipController extends Controller
         $membership = \App\Membership::where(['user_id' => $user->id, 'group_id' => $group->id])->firstOrFail();
         $membership->membership = \App\Membership::REMOVED;
         $membership->save();
-        flash(trans('messages.user_removed_successfuly').' : '.$user->name)->success();
+        flash(trans('messages.user_removed_successfuly').' : '.$user->name);
 
         return redirect()->route('groups.users.index', $group);
     }
@@ -97,7 +97,7 @@ class MembershipController extends Controller
         $membership = \App\Membership::where(['user_id' => $user->id, 'group_id' => $group->id])->firstOrFail();
         $membership->membership = \App\Membership::ADMIN;
         $membership->save();
-        flash(trans('messages.user_made_admin_successfuly').' : '.$user->name)->success();
+        flash(trans('messages.user_made_admin_successfuly').' : '.$user->name);
 
         return redirect()->route('groups.users.index', $group);
     }
@@ -112,7 +112,7 @@ class MembershipController extends Controller
         $membership = \App\Membership::where(['user_id' => $user->id, 'group_id' => $group->id])->firstOrFail();
         $membership->membership = \App\Membership::MEMBER;
         $membership->save();
-        flash(trans('messages.user_made_member_successfuly').' : '.$user->name)->success();
+        flash(trans('messages.user_made_member_successfuly').' : '.$user->name);
 
         return redirect()->route('groups.users.index', $group);
     }
@@ -128,7 +128,7 @@ class MembershipController extends Controller
         $membership = \App\Membership::where(['user_id' => $user->id, 'group_id' => $group->id])->firstOrFail();
         $membership->membership = \App\Membership::MEMBER;
         $membership->save();
-        flash(trans('messages.user_made_member_successfuly').' : '.$user->name)->success();
+        flash(trans('messages.user_made_member_successfuly').' : '.$user->name);
 
         return redirect()->route('groups.users.index', $group);
     }

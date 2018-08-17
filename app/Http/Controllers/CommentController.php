@@ -90,7 +90,7 @@ class CommentController extends Controller
                 ->withInput();
             }
             $comment->save();
-            flash(trans('messages.ressource_updated_successfully'))->success();
+            flash(trans('messages.ressource_updated_successfully'));
 
             return redirect()->route('groups.discussions.show', [$discussion->group, $discussion]);
         } else {
@@ -129,7 +129,7 @@ class CommentController extends Controller
     {
         if (Gate::allows('delete', $comment)) {
             $comment->delete();
-            flash(trans('messages.ressource_deleted_successfully'))->success();
+            flash(trans('messages.ressource_deleted_successfully'));
 
             return redirect()->route('groups.discussions.show', [$group, $discussion]);
         } else {

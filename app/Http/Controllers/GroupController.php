@@ -126,9 +126,9 @@ class GroupController extends Controller
         if ($request->get('address')) {
             $group->address = $request->input('address');
             if (!$group->geocode()) {
-                flash(trans('messages.address_cannot_be_geocoded'))->warning();
+                flash(trans('messages.address_cannot_be_geocoded'));
             } else {
-                flash(trans('messages.ressource_geocoded_successfully'))->success();
+                flash(trans('messages.ressource_geocoded_successfully'));
             }
         }
 
@@ -166,7 +166,7 @@ class GroupController extends Controller
             }
         }
 
-        flash(trans('messages.ressource_created_successfully'))->success();
+        flash(trans('messages.ressource_created_successfully'));
 
         return redirect()->action('MembershipController@update', [$group->id]);
     }
@@ -216,9 +216,9 @@ class GroupController extends Controller
             // we need to update user address and geocode it
             $group->address = $request->input('address');
             if (!$group->geocode()) {
-                flash(trans('messages.address_cannot_be_geocoded'))->warning();
+                flash(trans('messages.address_cannot_be_geocoded'));
             } else {
-                flash(trans('messages.ressource_geocoded_successfully'))->success();
+                flash(trans('messages.ressource_geocoded_successfully'));
             }
         }
 
@@ -245,7 +245,7 @@ class GroupController extends Controller
 
         $group->save();
 
-        flash(trans('messages.ressource_updated_successfully'))->success();
+        flash(trans('messages.ressource_updated_successfully'));
 
         return redirect()->route('groups.show', [$group->id]);
     }
@@ -272,7 +272,7 @@ class GroupController extends Controller
     {
         if (Gate::allows('delete', $group)) {
             $group->delete();
-            flash(trans('messages.ressource_deleted_successfully'))->success();
+            flash(trans('messages.ressource_deleted_successfully'));
 
             return redirect()->action('DashboardController@index');
         } else {

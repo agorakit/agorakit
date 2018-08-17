@@ -21,6 +21,7 @@ class DashboardController extends Controller
     */
     public function index(Request $request)
     {
+
         if (Auth::check()) {
             $my_groups = Auth::user()->groups()->get();
 

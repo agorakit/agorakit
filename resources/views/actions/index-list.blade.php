@@ -41,6 +41,6 @@
     @endif
 
 
-    <p><a href="{{action('IcalController@group', $group->id)}}">Téléchargez le calendrier de ce groupe au format iCal</a></p>
+    <p><a href="{{action('GroupIcalController@index', $group->id)}}">Téléchargez le calendrier de ce groupe au format iCal</a></p>
 
 @endsection
