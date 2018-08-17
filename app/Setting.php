@@ -25,7 +25,7 @@ class Setting extends Model
     */
     public static function get($key, $default = null)
     {
-        $setting = Cache::rememberForever('settings_' . $key, function() use($key) {
+        $setting = Cache::rememberForever('settings_' . $key, function () use ($key) {
             return \App\Setting::where('name', $key)->first();
         });
 
@@ -36,9 +36,8 @@ class Setting extends Model
         }
 
         // second priority, default setting stored in app/config/agorakit.php
-        if (Config::get('agorakit.' . $key))
-        {
-            return Config::get('agorakit.' . $key);
+        if (config('agorakit.' . $key)) {
+            return config('agorakit.' . $key);
         }
 
         // lastly our $default

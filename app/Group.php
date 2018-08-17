@@ -49,7 +49,7 @@ class Group extends Model
     */
     public function users()
     {
-        return $this->belongsToMany('App\User', 'membership')->where('membership', '>=',\App\Membership::MEMBER)->withTimestamps()->withPivot('membership');
+        return $this->belongsToMany(\App\User::class, 'membership')->where('membership', '>=', \App\Membership::MEMBER)->withTimestamps()->withPivot('membership');
     }
 
     /**
@@ -57,7 +57,7 @@ class Group extends Model
     */
     public function admins()
     {
-        return $this->belongsToMany('App\User', 'membership')->where('membership', \App\Membership::ADMIN)->withTimestamps()->withPivot('membership');
+        return $this->belongsToMany(\App\User::class, 'membership')->where('membership', \App\Membership::ADMIN)->withTimestamps()->withPivot('membership');
     }
 
     /**
@@ -65,7 +65,7 @@ class Group extends Model
     */
     public function candidates()
     {
-        return $this->belongsToMany('App\User', 'membership')->where('membership', \App\Membership::CANDIDATE)->withTimestamps()->withPivot('membership');
+        return $this->belongsToMany(\App\User::class, 'membership')->where('membership', \App\Membership::CANDIDATE)->withTimestamps()->withPivot('membership');
     }
 
 
@@ -74,7 +74,7 @@ class Group extends Model
     */
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(\App\User::class);
     }
 
     /**
@@ -83,18 +83,18 @@ class Group extends Model
     public function membership()
     {
         if (\Auth::check()) {
-            return $this->belongsToMany('App\User', 'membership')
+            return $this->belongsToMany(\App\User::class, 'membership')
             ->where('user_id', '=', \Auth::user()->id)
             ->withPivot('membership');
         } else {
-            return $this->belongsToMany('App\User', 'membership')
+            return $this->belongsToMany(\App\User::class, 'membership')
             ->withPivot('membership');
         }
     }
 
     public function memberships()
     {
-        return $this->hasMany('App\Membership');
+        return $this->hasMany(\App\Membership::class);
     }
 
     /**
@@ -102,7 +102,7 @@ class Group extends Model
     */
     public function discussions()
     {
-        return $this->hasMany('App\Discussion');
+        return $this->hasMany(\App\Discussion::class);
     }
 
     /**
@@ -110,21 +110,21 @@ class Group extends Model
     */
     public function actions()
     {
-        return $this->hasMany('App\Action');
+        return $this->hasMany(\App\Action::class);
     }
 
     public function files()
     {
-        return $this->hasMany('App\File');
+        return $this->hasMany(\App\File::class);
     }
 
     public function activities()
     {
-        return $this->hasMany('App\Activity')->orderBy('created_at', 'desc');
+        return $this->hasMany(\App\Activity::class)->orderBy('created_at', 'desc');
     }
 
     /**
-    *	Returns true if current user is a member of this group.
+    *   Returns true if current user is a member of this group.
     */
     public function isMember()
     {
@@ -277,8 +277,7 @@ class Group extends Model
     */
     public function geocode()
     {
-        if ($this->address == '')
-        {
+        if ($this->address == '') {
             $this->latitude = 0;
             $this->longitude = 0;
             return true;
@@ -286,8 +285,7 @@ class Group extends Model
 
         $geocode = app('geocoder')->geocode($this->address)->get()->first();
 
-        if ($geocode)
-        {
+        if ($geocode) {
             $this->latitude = $geocode->getCoordinates()->getLatitude();
             $this->longitude = $geocode->getCoordinates()->getLongitude();
             return true;

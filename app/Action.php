@@ -36,12 +36,12 @@ class Action extends Model
 
     public function group()
     {
-        return $this->belongsTo('\App\Group');
+        return $this->belongsTo(\App\Group::class);
     }
 
     public function user()
     {
-        return $this->belongsTo('\App\User');
+        return $this->belongsTo(\App\User::class);
     }
 
     public function votes()
@@ -60,7 +60,7 @@ class Action extends Model
      */
     public function users()
     {
-        return $this->belongsToMany('App\User');
+        return $this->belongsToMany(\App\User::class);
     }
 
     /**
@@ -78,8 +78,7 @@ class Action extends Model
 
 
         $geocode = app('geocoder')->geocode($this->location)->get()->first();
-        if ($geocode)
-        {
+        if ($geocode) {
             $this->latitude = $geocode->getCoordinates()->getLatitude();
             $this->longitude = $geocode->getCoordinates()->getLongitude();
             return true;

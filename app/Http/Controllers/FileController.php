@@ -30,13 +30,11 @@ class FileController extends Controller
     public function index(Request $request, Group $group)
     {
         // Validate query string, I feel it's better for sql injection prevention  :-)
-        if (!in_array($request->get('dir'), ['asc', 'desc', null]))
-        {
+        if (!in_array($request->get('dir'), ['asc', 'desc', null])) {
             abort(404, 'invalid sort order');
         }
 
-        if (!in_array($request->get('sort'), ['created_at', 'name', 'filesize', null]))
-        {
+        if (!in_array($request->get('sort'), ['created_at', 'name', 'filesize', null])) {
             abort(404, 'invalid sort type');
         }
 
@@ -49,11 +47,9 @@ class FileController extends Controller
         ->with('tags')
         ->get();
 
-        $tags = array();
-        foreach ($files as $file)
-        {
-            foreach ($file->tags as $tag)
-            {
+        $tags = [];
+        foreach ($files as $file) {
+            foreach ($file->tags as $tag) {
                 $tags[$tag->tag_id] = $tag->name;
             }
         }
@@ -140,8 +136,7 @@ class FileController extends Controller
                     $file->group()->associate($group);
                     $file->user()->associate(Auth::user());
 
-                    if ($request->get('tags'))
-                    {
+                    if ($request->get('tags')) {
                         $file->tag($request->get('tags'));
                     }
 
@@ -220,13 +215,11 @@ class FileController extends Controller
     */
     public function update(Request $request, Group $group, File $file)
     {
-        if ($request->get('tags'))
-        {
+        if ($request->get('tags')) {
             $file->retag($request->get('tags'));
         }
 
-        if ($request->get('name'))
-        {
+        if ($request->get('name')) {
             $file->name = $request->get('name');
         }
 
@@ -303,8 +296,7 @@ class FileController extends Controller
 
         if ($file->save()) {
             // handle tags
-            if ($request->get('tags'))
-            {
+            if ($request->get('tags')) {
                 $file->tag($request->get('tags'));
             }
 

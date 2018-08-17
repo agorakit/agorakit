@@ -56,7 +56,7 @@ class ImportActions extends Command
 
         // build a nice associative array from the csv
         foreach ($res as $data) {
-            foreach ($headers as $key=>$header) {
+            foreach ($headers as $key => $header) {
                 $action[$header] = $data[$key];
             }
             $actions_data[] = $action;

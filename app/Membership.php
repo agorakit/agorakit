@@ -5,7 +5,6 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Venturecraft\Revisionable\RevisionableTrait;
 
-
 class Membership extends Model
 {
     use RevisionableTrait;
@@ -51,11 +50,11 @@ class Membership extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(\App\User::class);
     }
 
     public function group()
     {
-        return $this->belongsTo('App\Group');
+        return $this->belongsTo(\App\Group::class);
     }
 }

@@ -10,7 +10,6 @@ use Gate;
 use Image;
 use Storage;
 
-
 class FileDownloadController extends Controller
 {
 
@@ -25,8 +24,7 @@ class FileDownloadController extends Controller
     */
     public function download(Group $group, File $file)
     {
-        if ($file->isLink())
-        {
+        if ($file->isLink()) {
             return redirect($file->path);
         }
 
@@ -65,10 +63,8 @@ class FileDownloadController extends Controller
     */
     public function preview(Group $group, File $file)
     {
-        if ($file->isImage())
-        {
-            $cachedImage = Image::cache(function ($img) use ($file)
-            {
+        if ($file->isImage()) {
+            $cachedImage = Image::cache(function ($img) use ($file) {
                 return $img->make(storage_path().'/app/'.$file->path)->widen(600);
             }, 60000, true);
 
@@ -78,6 +74,4 @@ class FileDownloadController extends Controller
 
         return redirect('images/extensions/text-file.png');
     }
-
-
 }
