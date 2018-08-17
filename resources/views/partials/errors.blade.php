@@ -36,10 +36,11 @@
 @endif
 
 
-@foreach ((array) session('flash_notification') as $message)
+@if ( Session::has('messages') )
+@foreach (session('messages') as $message)
         <div class="alert alert-primary" role="alert">
-                {!! $message['message'] !!}
+                {!!$message!!}
+                <?php session()->pull('messages'); ?>
         </div>
 @endforeach
-
-{{ session()->forget('flash_notification') }}
+@endif

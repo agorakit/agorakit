@@ -68,3 +68,9 @@ function sizeForHumans($bytes)
 
     return $bytes;
 }
+
+// this one line replace almost all laracast flash tutorial that became bloated for our use case
+function flash($message)
+{
+    session()->push('messages', $message);
+}
