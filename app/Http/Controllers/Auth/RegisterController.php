@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Mailers\AppMailer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Mail;
+use App\Mail\UserConfirmation;
 
 class RegisterController extends Controller
 {
@@ -80,8 +82,8 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
 
-        $mailer = new AppMailer();
-        $mailer->sendEmailConfirmationTo($user);
+        Mail::to($user)->send(new UserConfirmation($user));
+
 
         return $user;
     }

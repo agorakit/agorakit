@@ -13,6 +13,7 @@ use Image;
 use Mail;
 use Redirect;
 use Storage;
+use App\Mail\UserConfirmation;
 
 use App\Mail\ContactUser;
 
@@ -177,8 +178,7 @@ class UserController extends Controller
             if ($previous_email != $user->email) {
                 $user->verified = 0;
                 $user->token = str_random(30);
-                $mailer = new AppMailer();
-                $mailer->sendEmailConfirmationTo($user);
+                Mail::to($user)->send(new UserConfirmation($user));
             }
 
             $user->save();
@@ -202,8 +202,7 @@ class UserController extends Controller
     public function sendVerificationAgain(Request $request, User $user)
     {
         if ($user->verified == 0) {
-            $mailer = new AppMailer();
-            $mailer->sendEmailConfirmationTo($user);
+            Mail::to($user)->send(new UserConfirmation($user));
             flash(trans('messages.invitation_sent_again'));
 
             return redirect()->route('users.show', $user);
