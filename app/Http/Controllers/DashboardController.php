@@ -21,7 +21,6 @@ class DashboardController extends Controller
     */
     public function index(Request $request)
     {
-
         if (Auth::check()) {
             $my_groups = Auth::user()->groups()->get();
 
@@ -78,7 +77,6 @@ class DashboardController extends Controller
     */
     public function files(Request $request)
     {
-
         $tags = \App\File::allTags();
 
 
