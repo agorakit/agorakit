@@ -2,33 +2,51 @@
 
 namespace App\Http\Controllers;
 
-use App\Group;
+use Auth;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
-/**
-* This controller is used to display various kind of maps (geo content).
-*/
-class GroupMapController extends Controller
+class MapController extends Controller
 {
+  public function __construct()
+  {
+    //$this->middleware('verified');
+  }
+
+  /**
+  * Renders a map of all users (curently).
+  */
+  public function index()
+  {
+    return view('dashboard.map')
+    ->with('tab', 'map');
+  }
 
 
   /**
   * Renders a map of all users (curently).
   */
-  public function index(Group $group)
+  public function geoJson()
   {
-    return view('groups.map')
-    ->with('group', $group)
-    ->with('tab', 'map');
-  }
+    $users = \App\User::where('latitude', '<>', 0)->where('verified', 1)->get();
 
-  /**
-  * Renders a map of all users of a particular Group.
-  */
-  public function geoJson(Group $group)
-  {
-    $users = $group->users()->where('latitude', '<>', 0)->get();
-    $actions = $group->actions()->where('start', '>=', Carbon::now())->where('latitude', '<>', 0)->get();
+    if (Auth::check()) {
+      $allowed_groups = \App\Group::publicgroups()
+      ->get()
+      ->pluck('id')
+      ->merge(Auth::user()->groups()->pluck('groups.id'));
+    } else {
+      $allowed_groups = \App\Group::publicgroups()->get()->pluck('id');
+    }
+
+
+    $actions = \App\Action::where('start', '>=', Carbon::now())
+    ->where('latitude', '<>', 0)
+    ->whereIn('group_id', $allowed_groups)
+    ->get();
+
+
+    $groups = \App\Group::where('latitude', '<>', 0)->get();
 
     // randomize users geolocation by a few meters
     foreach ($users as $user) {
@@ -36,11 +54,10 @@ class GroupMapController extends Controller
       $user->longitude = $user->longitude + (mt_rand(0, 10) / 10000);
     }
 
-
-    // Generate GEOJSON
     $geojson = array( 'type' => 'FeatureCollection', 'features' => array());
 
     foreach ($users as $user) {
+
       $marker = array(
         'type' => 'Feature',
         'properties' => array(
@@ -62,6 +79,7 @@ class GroupMapController extends Controller
     }
 
     foreach ($actions as $action) {
+
       $marker = array(
         'type' => 'Feature',
         'properties' => array(
@@ -82,25 +100,28 @@ class GroupMapController extends Controller
       array_push($geojson['features'], $marker);
     }
 
-    // add the current group on the map
-    $marker = array(
-      'type' => 'Feature',
-      'properties' => array(
-        'title' => '<a href="' . route('groups.show', $group->id) . '">' . $group->name . '</a>',
-        'description' => summary($group->body) ,
-        'marker-color' => '#1f6edd',
-        'marker-symbol' => 'warehouse',
-      ),
-      'geometry' => array(
-        'type' => 'Point',
-        'coordinates' => array(
-          $group->longitude,
-          $group->latitude
 
+    foreach ($groups as $group) {
+
+      $marker = array(
+        'type' => 'Feature',
+        'properties' => array(
+          'title' => '<a href="' . route('groups.show', $group->id) . '">' . $group->name . '</a>',
+          'description' => summary($group->body) ,
+          'marker-color' => '#1f6edd',
+          'marker-symbol' => 'warehouse',
+        ),
+        'geometry' => array(
+          'type' => 'Point',
+          'coordinates' => array(
+            $group->longitude,
+            $group->latitude
+
+          )
         )
-      )
-    );
-    array_push($geojson['features'], $marker);
+      );
+      array_push($geojson['features'], $marker);
+    }
 
     return $geojson;
   }

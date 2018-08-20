@@ -60,7 +60,7 @@
                 {{ trans('messages.more') }}
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="{{ action('DashboardController@map') }}">
+                <a class="dropdown-item" href="{{ action('MapController@index') }}">
                     <i class="fa fa-map-marker"></i> {{trans('messages.map')}}
                 </a>
                 <a class="dropdown-item" href="{{ action('DashboardController@files') }}">
