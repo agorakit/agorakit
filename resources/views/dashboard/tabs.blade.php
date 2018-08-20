@@ -50,7 +50,7 @@
 
 
     <li class="nav-item">
-        <a href="{{ action('DashboardController@map') }}" class="nav-link @if (isset($tab) && ($tab == 'map')) active @endif">
+        <a href="{{ action('MapController@index') }}" class="nav-link @if (isset($tab) && ($tab == 'map')) active @endif">
             <i class="fa fa-map-marker"></i> <span class="hidden-xs">{{ trans('messages.map') }}</span>
         </a>
     </li>

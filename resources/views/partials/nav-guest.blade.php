@@ -39,7 +39,7 @@
             </div>
 
             <div class="nav-item">
-                <a class="nav-link" href="{{ action('DashboardController@map') }}">
+                <a class="nav-link" href="{{ action('MapController@index') }}">
                     <i class="fa fa-map-marker"></i> {{trans('messages.map')}}
                 </a>
             </div>

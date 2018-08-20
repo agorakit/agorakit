@@ -8,312 +8,277 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('verified', ['only' => ['users', 'files', 'activities']]);
-        $this->middleware('preferences');
+  public function __construct()
+  {
+    $this->middleware('verified', ['only' => ['users', 'files', 'activities']]);
+    $this->middleware('preferences');
+  }
+
+  /**
+  * Main HOMEPAGE.
+  *
+  * @return Response
+  */
+  public function index(Request $request)
+  {
+    if (Auth::check()) {
+      $my_groups = Auth::user()->groups()->get();
+
+      // other groups are public and not groups the user is member of
+      $other_groups = \App\Group::publicgroups()->whereNotIn('id', $my_groups->pluck('id'))->get();
+
+      // if user is not subscribed to any group, we redirect to group list homepage instead.
+      if ($my_groups->count() == 0) {
+        flash(trans('messages.join_a_group'));
+      }
+
+      $my_discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group', 'tags')
+      ->whereIn('group_id', $my_groups->pluck('id'))
+      ->orderBy('updated_at', 'desc')->take(10)->get();
+
+      $my_actions = \App\Action::with('user', 'group')
+      ->whereIn('group_id', $my_groups->pluck('id'))
+      ->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->take(5)->get();
+
+      $other_discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group', 'tags')
+      ->whereIn('group_id', $other_groups->pluck('id'))
+      ->orderBy('updated_at', 'desc')->take(10)->get();
+
+      $other_actions = \App\Action::with('user', 'group')
+      ->whereIn('group_id', $other_groups->pluck('id'))
+      ->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->take(5)->get();
+
+
+
+      return view('dashboard.homepage')
+      ->with('tab', 'homepage')
+      ->with('my_groups', $my_groups)
+      ->with('my_discussions', $my_discussions)
+      ->with('my_actions', $my_actions)
+      ->with('other_actions', $other_actions)
+      ->with('other_discussions', $other_discussions);
+    } else {
+      return view('dashboard.presentation')
+      ->with('tab', 'homepage');
+    }
+  }
+
+  public function activities()
+  {
+    $activities = \App\Activity::with('user', 'group', 'model')->orderBy('created_at', 'desc')->paginate(50);
+
+    return view('dashboard.activities')
+    ->with('tab', 'homepage')
+    ->with('activities', $activities);
+  }
+
+  /**
+  * Show all the files independant of groups.
+  */
+  public function files(Request $request)
+  {
+    $tags = \App\File::allTags();
+
+
+    if (Auth::check()) {
+      $groups = \App\Group::publicgroups()
+      ->get()
+      ->pluck('id')
+      ->merge(Auth::user()->groups()->pluck('groups.id'));
+
+      if ($request->get('tag')) {
+        $files = \App\File::with('group', 'user')
+        ->withAnyTags($request->get('tag'))
+        ->where('item_type', '<>', \App\File::FOLDER)
+        ->whereIn('group_id', $groups)
+        ->orderBy('created_at', 'desc')->paginate(25);
+      } else {
+        $files = \App\File::with('group', 'user')
+        ->where('item_type', '<>', \App\File::FOLDER)
+        ->whereIn('group_id', $groups)
+        ->orderBy('created_at', 'desc')->paginate(25);
+      }
+    } else {
+      $files = \App\File::with('group', 'user')
+      ->where('item_type', '<>', \App\File::FOLDER)
+      ->whereIn('group_id', \App\Group::publicgroups()->get()->pluck('id'))
+      ->orderBy('updated_at', 'desc')->paginate(25);
     }
 
-    /**
-    * Main HOMEPAGE.
-    *
-    * @return Response
-    */
-    public function index(Request $request)
-    {
-        if (Auth::check()) {
-            $my_groups = Auth::user()->groups()->get();
 
-            // other groups are public and not groups the user is member of
-            $other_groups = \App\Group::publicgroups()->whereNotIn('id', $my_groups->pluck('id'))->get();
+    return view('dashboard.files')
+    ->with('tags', $tags)
+    ->with('tab', 'files')
+    ->with('files', $files);
+  }
 
-            // if user is not subscribed to any group, we redirect to group list homepage instead.
-            if ($my_groups->count() == 0) {
-                flash(trans('messages.join_a_group'));
-            }
+  /**
+  * Generates a list of unread discussions.
+  */
+  public function discussions()
+  {
+    if (Auth::check()) {
+      // All the groups of a user : Auth::user()->groups()->pluck('groups.id')
+      // All the public groups : \App\Group::publicgroups()
 
-            $my_discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group', 'tags')
-            ->whereIn('group_id', $my_groups->pluck('id'))
-            ->orderBy('updated_at', 'desc')->take(10)->get();
+      // A merge of the two :
 
-            $my_actions = \App\Action::with('user', 'group')
-            ->whereIn('group_id', $my_groups->pluck('id'))
-            ->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->take(5)->get();
+      //$groups = \App\Group::publicgroups()
+      //->get()
+      //->pluck('id')
+      //->merge(Auth::user()->groups()->pluck('groups.id'));
 
-            $other_discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group', 'tags')
-            ->whereIn('group_id', $other_groups->pluck('id'))
-            ->orderBy('updated_at', 'desc')->take(10)->get();
-
-            $other_actions = \App\Action::with('user', 'group')
-            ->whereIn('group_id', $other_groups->pluck('id'))
-            ->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->take(5)->get();
+      if (Auth::user()->getPreference('show') == 'all') {
+        $groups = \App\Group::publicgroups()
+        ->get()
+        ->pluck('id')
+        ->merge(Auth::user()->groups()->pluck('groups.id'));
+      } else {
+        $groups = Auth::user()->groups()->pluck('groups.id');
+      }
 
 
 
-            return view('dashboard.homepage')
-            ->with('tab', 'homepage')
-            ->with('my_groups', $my_groups)
-            ->with('my_discussions', $my_discussions)
-            ->with('my_actions', $my_actions)
-            ->with('other_actions', $other_actions)
-            ->with('other_discussions', $other_discussions);
+      $discussions = \App\Discussion::with('userReadDiscussion', 'group', 'user')
+      ->whereIn('group_id', $groups)
+      ->orderBy('updated_at', 'desc')->paginate(25);
+    } else {
+      $discussions = \App\Discussion::with('group', 'user')
+      ->whereIn('group_id', \App\Group::publicgroups()->get()->pluck('id'))
+      ->orderBy('updated_at', 'desc')->paginate(25);
+    }
+
+    return view('dashboard.discussions')
+    ->with('tab', 'discussions')
+    ->with('discussions', $discussions);
+  }
+
+  public function agenda(Request $request)
+  {
+    if (Auth::check()) {
+      $view = Auth::user()->getPreference('calendar', 'grid');
+    } else {
+      $view = 'grid';
+    }
+
+
+    if ($view == 'list') {
+      if (Auth::check()) {
+        if (Auth::user()->getPreference('show') == 'all') {
+          $groups = \App\Group::publicgroups()
+          ->get()
+          ->pluck('id')
+          ->merge(Auth::user()->groups()->pluck('groups.id'));
         } else {
-            return view('dashboard.presentation')
-            ->with('tab', 'homepage');
+          $groups = Auth::user()->groups()->pluck('groups.id');
         }
+      } else {
+        $groups = \App\Group::publicgroups()->get()->pluck('id');
+      }
+
+      $actions = \App\Action::with('group')
+      ->where('start', '>=', Carbon::now())
+      ->whereIn('group_id', $groups)
+      ->orderBy('start')
+      ->paginate(10);
+
+
+      return view('dashboard.agenda-list')
+      ->with('tab', 'actions')
+      ->with('actions', $actions);
     }
 
-    public function activities()
-    {
-        $activities = \App\Activity::with('user', 'group', 'model')->orderBy('created_at', 'desc')->paginate(50);
 
-        return view('dashboard.activities')
-        ->with('tab', 'homepage')
-        ->with('activities', $activities);
+    return view('dashboard.agenda')
+    ->with('tab', 'actions');
+  }
+
+  public function agendaJson(Request $request)
+  {
+    if (Auth::check()) {
+      if (Auth::user()->getPreference('show') == 'all') {
+        $groups = \App\Group::publicgroups()
+        ->get()
+        ->pluck('id')
+        ->merge(Auth::user()->groups()->pluck('groups.id'));
+      } else {
+        $groups = Auth::user()->groups()->pluck('groups.id');
+      }
+    } else {
+      $groups = \App\Group::publicgroups()->get()->pluck('id');
     }
 
-    /**
-    * Show all the files independant of groups.
-    */
-    public function files(Request $request)
-    {
-        $tags = \App\File::allTags();
-
-
-        if (Auth::check()) {
-            $groups = \App\Group::publicgroups()
-            ->get()
-            ->pluck('id')
-            ->merge(Auth::user()->groups()->pluck('groups.id'));
-
-            if ($request->get('tag')) {
-                $files = \App\File::with('group', 'user')
-                ->withAnyTags($request->get('tag'))
-                ->where('item_type', '<>', \App\File::FOLDER)
-                ->whereIn('group_id', $groups)
-                ->orderBy('created_at', 'desc')->paginate(25);
-            } else {
-                $files = \App\File::with('group', 'user')
-                ->where('item_type', '<>', \App\File::FOLDER)
-                ->whereIn('group_id', $groups)
-                ->orderBy('created_at', 'desc')->paginate(25);
-            }
-        } else {
-            $files = \App\File::with('group', 'user')
-            ->where('item_type', '<>', \App\File::FOLDER)
-            ->whereIn('group_id', \App\Group::publicgroups()->get()->pluck('id'))
-            ->orderBy('updated_at', 'desc')->paginate(25);
-        }
-
-
-        return view('dashboard.files')
-        ->with('tags', $tags)
-        ->with('tab', 'files')
-        ->with('files', $files);
+    // load of actions between start and stop provided by calendar js
+    if ($request->has('start') && $request->has('end')) {
+      $actions = \App\Action::with('group')
+      ->where('start', '>', Carbon::parse($request->get('start')))
+      ->where('stop', '<', Carbon::parse($request->get('end')))
+      ->whereIn('group_id', $groups)
+      ->orderBy('start', 'asc')->get();
+    } else {
+      $actions = \App\Action::with('group')
+      ->orderBy('start', 'asc')
+      ->whereIn('group_id', $groups)
+      ->get();
     }
 
-    /**
-    * Generates a list of unread discussions.
-    */
-    public function discussions()
-    {
-        if (Auth::check()) {
-            // All the groups of a user : Auth::user()->groups()->pluck('groups.id')
-            // All the public groups : \App\Group::publicgroups()
+    $event = [];
+    $events = [];
 
-            // A merge of the two :
+    foreach ($actions as $action) {
+      $event['id'] = $action->id;
+      $event['title'] = $action->name;
+      $event['description'] = $action->body.' <br/> '.$action->location;
+      $event['body'] = filter($action->body);
+      $event['summary'] = summary($action->body);
+      $event['location'] = $action->location;
+      $event['start'] = $action->start->toIso8601String();
+      $event['end'] = $action->stop->toIso8601String();
+      $event['url'] = route('groups.actions.show', [$action->group->id, $action->id]);
+      $event['group_url'] = route('groups.actions.index', [$action->group->id]);
+      $event['group_name'] = $action->group->name;
+      $event['color'] = $action->group->color();
 
-            //$groups = \App\Group::publicgroups()
-            //->get()
-            //->pluck('id')
-            //->merge(Auth::user()->groups()->pluck('groups.id'));
-
-            if (Auth::user()->getPreference('show') == 'all') {
-                $groups = \App\Group::publicgroups()
-                ->get()
-                ->pluck('id')
-                ->merge(Auth::user()->groups()->pluck('groups.id'));
-            } else {
-                $groups = Auth::user()->groups()->pluck('groups.id');
-            }
-
-
-
-            $discussions = \App\Discussion::with('userReadDiscussion', 'group', 'user')
-            ->whereIn('group_id', $groups)
-            ->orderBy('updated_at', 'desc')->paginate(25);
-        } else {
-            $discussions = \App\Discussion::with('group', 'user')
-            ->whereIn('group_id', \App\Group::publicgroups()->get()->pluck('id'))
-            ->orderBy('updated_at', 'desc')->paginate(25);
-        }
-
-        return view('dashboard.discussions')
-        ->with('tab', 'discussions')
-        ->with('discussions', $discussions);
+      $events[] = $event;
     }
 
-    public function agenda(Request $request)
-    {
-        if (Auth::check()) {
-            $view = Auth::user()->getPreference('calendar', 'grid');
-        } else {
-            $view = 'grid';
-        }
+    return $events;
+  }
 
+  public function users()
+  {
+    $users = \App\User::with('groups')->where('verified', 1)->orderBy('created_at', 'desc')->paginate(20);
 
-        if ($view == 'list') {
-            if (Auth::check()) {
-                if (Auth::user()->getPreference('show') == 'all') {
-                    $groups = \App\Group::publicgroups()
-                    ->get()
-                    ->pluck('id')
-                    ->merge(Auth::user()->groups()->pluck('groups.id'));
-                } else {
-                    $groups = Auth::user()->groups()->pluck('groups.id');
-                }
-            } else {
-                $groups = \App\Group::publicgroups()->get()->pluck('id');
-            }
+    return view('dashboard.users')
+    ->with('tab', 'users')
+    ->with('users', $users);
+  }
 
-            $actions = \App\Action::with('group')
-            ->where('start', '>=', Carbon::now())
-            ->whereIn('group_id', $groups)
-            ->orderBy('start')
-            ->paginate(10);
-
-
-            return view('dashboard.agenda-list')
-            ->with('tab', 'actions')
-            ->with('actions', $actions);
-        }
-
-
-        return view('dashboard.agenda')
-        ->with('tab', 'actions');
+  public function groups()
+  {
+    if (Auth::check()) {
+      $groups = \App\Group::notSecret()
+      ->with('membership')
+      ->with('tags')
+      ->orderBy('updated_at', 'desc')
+      ->get();
+    } else {
+      $groups = \App\Group::notSecret()
+      ->with('tags')
+      ->orderBy('updated_at', 'desc')
+      ->get();
     }
 
-    public function agendaJson(Request $request)
-    {
-        if (Auth::check()) {
-            if (Auth::user()->getPreference('show') == 'all') {
-                $groups = \App\Group::publicgroups()
-                ->get()
-                ->pluck('id')
-                ->merge(Auth::user()->groups()->pluck('groups.id'));
-            } else {
-                $groups = Auth::user()->groups()->pluck('groups.id');
-            }
-        } else {
-            $groups = \App\Group::publicgroups()->get()->pluck('id');
-        }
+    $tagService = app(\Cviebrock\EloquentTaggable\Services\TagService::class);
 
-        // load of actions between start and stop provided by calendar js
-        if ($request->has('start') && $request->has('end')) {
-            $actions = \App\Action::with('group')
-            ->where('start', '>', Carbon::parse($request->get('start')))
-            ->where('stop', '<', Carbon::parse($request->get('end')))
-            ->whereIn('group_id', $groups)
-            ->orderBy('start', 'asc')->get();
-        } else {
-            $actions = \App\Action::with('group')
-            ->orderBy('start', 'asc')
-            ->whereIn('group_id', $groups)
-            ->get();
-        }
+    return view('dashboard.groups')
+    ->with('tab', 'groups')
+    ->with('groups', $groups)
+    ->with('all_tags', $tagService->getAllTags(\App\Group::class));
+  }
 
-        $event = [];
-        $events = [];
-
-        foreach ($actions as $action) {
-            $event['id'] = $action->id;
-            $event['title'] = $action->name;
-            $event['description'] = $action->body.' <br/> '.$action->location;
-            $event['body'] = filter($action->body);
-            $event['summary'] = summary($action->body);
-            $event['location'] = $action->location;
-            $event['start'] = $action->start->toIso8601String();
-            $event['end'] = $action->stop->toIso8601String();
-            $event['url'] = route('groups.actions.show', [$action->group->id, $action->id]);
-            $event['group_url'] = route('groups.actions.index', [$action->group->id]);
-            $event['group_name'] = $action->group->name;
-            $event['color'] = $action->group->color();
-
-            $events[] = $event;
-        }
-
-        return $events;
-    }
-
-    public function users()
-    {
-        $users = \App\User::with('groups')->where('verified', 1)->orderBy('created_at', 'desc')->paginate(20);
-
-        return view('dashboard.users')
-        ->with('tab', 'users')
-        ->with('users', $users);
-    }
-
-    public function groups()
-    {
-        if (Auth::check()) {
-            $groups = \App\Group::notSecret()
-            ->with('membership')
-            ->with('tags')
-            ->orderBy('updated_at', 'desc')
-            ->get();
-        } else {
-            $groups = \App\Group::notSecret()
-            ->with('tags')
-            ->orderBy('updated_at', 'desc')
-            ->get();
-        }
-
-        $tagService = app(\Cviebrock\EloquentTaggable\Services\TagService::class);
-
-        return view('dashboard.groups')
-        ->with('tab', 'groups')
-        ->with('groups', $groups)
-        ->with('all_tags', $tagService->getAllTags(\App\Group::class));
-    }
-
-    /**
-    * Renders a map of all users (curently).
-    */
-    public function map()
-    {
-        $users = \App\User::where('latitude', '<>', 0)->get();
-
-        if (Auth::check()) {
-            $allowed_groups = \App\Group::publicgroups()
-            ->get()
-            ->pluck('id')
-            ->merge(Auth::user()->groups()->pluck('groups.id'));
-        } else {
-            $allowed_groups = \App\Group::publicgroups()->get()->pluck('id');
-        }
+  
 
 
-        $actions = \App\Action::where('start', '>=', Carbon::now())
-        ->where('latitude', '<>', 0)
-        ->whereIn('group_id', $allowed_groups)
-        ->get();
 
-
-        $groups = \App\Group::where('latitude', '<>', 0)->get();
-
-        // randomize users geolocation by a few meters
-        foreach ($users as $user) {
-            $user->latitude = $user->latitude + (mt_rand(0, 10) / 10000);
-            $user->longitude = $user->longitude + (mt_rand(0, 10) / 10000);
-        }
-
-        return view('dashboard.map')
-        ->with('users', $users)
-        ->with('actions', $actions)
-        ->with('groups', $groups)
-        ->with('tab', 'map')
-        ->with('latitude', 50.8503396) // TODO make configurable, curently it's Brussels
-        ->with('longitude', 4.3517103);
-    }
 }

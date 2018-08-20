@@ -80,7 +80,7 @@
         @if ($group->getSetting('module_map', true) == true)
             @can ('viewMembers', $group)
                 <li class="nav-item">
-                    <a href="{{ action('GroupMapController@map', $group->id) }}"  class="nav-link @if (isset($tab) && ($tab == 'map')) active @endif">
+                    <a href="{{ action('GroupMapController@index', $group->id) }}"  class="nav-link @if (isset($tab) && ($tab == 'map')) active @endif">
                         <i class="fa fa-map-marker"></i> <span class="d-none d-lg-inline">{{ trans('messages.map') }}</span>
                     </a>
                 </li>

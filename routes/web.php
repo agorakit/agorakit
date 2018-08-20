@@ -53,7 +53,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('discussions', 'DashboardController@discussions')->name('discussions');
     Route::get('users', 'DashboardController@users')->name('users');
     Route::get('files', 'DashboardController@files')->name('files');
-    Route::get('map', 'DashboardController@map')->name('map');
+    Route::get('map', 'MapController@index')->name('map');
+    Route::get('map.geojson', 'MapController@geoJson')->name('map.geojson');
     Route::get('activities', 'DashboardController@activities')->name('activities');
 
     Route::get('agenda', 'DashboardController@agenda')->name('agenda');
@@ -195,8 +196,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('users', 'UserController@index')->name('.users.index');
 
         // Maps
-        Route::get('map', 'GroupMapController@map')->name('.map');
-        Route::get('map/embed', 'GroupMapController@embed')->name('.map.embed');
+        Route::get('map', 'GroupMapController@index')->name('.map');
+        Route::get('map.geojson', 'GroupMapController@geoJson')->name('.map.geojson');
+
 
         // Discussions
         Route::get('discussions', 'GroupDiscussionController@index')->name('.discussions.index');

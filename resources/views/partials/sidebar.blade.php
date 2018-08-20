@@ -24,7 +24,7 @@
   {{trans('messages.users_list')}}
 </a>
 
-<a href="{{ action('DashboardController@map') }}">
+<a href="{{ action('MapController@index') }}">
   {{trans('messages.map')}}
 </a>
 
