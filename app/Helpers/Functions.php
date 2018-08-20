@@ -10,13 +10,8 @@
 */
 function summary($text, $length = 200)
 {
-    if (strlen(str_limit(strip_tags($text))) > $length) {
-        $post = ' ...'; // append if it's longer than length
-    } else {
-        $post = '';
-    }
 
-    return str_limit(strip_tags($text), $length).$post;
+    return mb_strimwidth(strip_tags(html_entity_decode($text, ENT_QUOTES, "utf-8")),0, $length, '...');
 }
 
 /**
