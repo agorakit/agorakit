@@ -10483,7 +10483,7 @@ a.text-dark:focus {
 body {
   padding-bottom: 150px;
   /*background-image: url("/images/seamless_paper_texture.png");*/
-  background-color: #c1c1bb;
+  background-color: #edede0;
 }
 
 /**************************** main content **************************/
@@ -10544,6 +10544,10 @@ h1.small {
 }
 
 /******************************** UI ******************************************/
+
+.nav-tabs {
+  margin-bottom: 2rem;
+}
 
 label {
   margin-bottom: 0;
