@@ -173,7 +173,7 @@ Route::group(['middleware' => ['web']], function () {
 
 
         // Stats
-        Route::get('insights', 'InsightsController@forGroup')->name('.insights');
+        Route::get('insights', 'GroupInsightsController@index')->name('.insights');
 
         // Membership admin
         Route::get('users/add', 'Admin\MembershipController@create')->name('.users.create');
@@ -301,7 +301,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('admin/settings', 'Admin\SettingsController@update');
 
         Route::resource('admin/user', 'Admin\UserController');
-        Route::get('admin/insights', 'InsightsController@forAllGroups');
+        Route::get('admin/insights', 'Admin\InsightsController@index')->name('admin.insights');
 
 
         Route::get('admin/undo', 'UndoController@index')->name('admin.undo');

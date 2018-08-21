@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+
+namespace App\Http\Controllers\Admin;
 
 use App\Group;
 use Carbon\Carbon;
 use Charts;
+use App\Http\Controllers\Controller;
 
 class InsightsController extends Controller
 {
@@ -22,8 +24,8 @@ class InsightsController extends Controller
 
         $charts[] = Charts::create('bar', 'highcharts')
         ->title('General stats')
-        ->labels(['Groups', 'Users', 'Discussions', 'Comments', 'Events', 'Files'])
-        ->values([\App\Group::count(), \App\User::count(), \App\Discussion::count(), \App\Comment::count(), \App\Action::count(), \App\File::count()])
+        ->labels(['Groups', 'Users', 'Verified users', 'Discussions', 'Comments', 'Events', 'Files'])
+        ->values([\App\Group::count(), \App\User::count(), \App\User::verified()->count(), \App\Discussion::count(), \App\Comment::count(), \App\Action::count(), \App\File::count()])
         ->dimensions(0, 400);
 
         // This is really a tribute to laravel efficiency and to the marvelous https://github.com/ConsoleTVs/Charts package

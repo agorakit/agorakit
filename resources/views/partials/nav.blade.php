@@ -157,7 +157,7 @@
                         <i class="fa fa-trash"></i> Recover content
                     </a>
 
-                    <a class="dropdown-item" href="{{ action('InsightsController@forAllGroups') }}">
+                    <a class="dropdown-item" href="{{ action('Admin\InsightsController@index') }}">
                         <i class="fa fa-line-chart"></i> {{ trans('messages.insights') }}
                     </a>
 
