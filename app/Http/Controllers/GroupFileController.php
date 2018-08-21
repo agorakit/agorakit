@@ -54,6 +54,8 @@ class GroupFileController extends Controller
             }
         }
 
+        natcasesort($tags);
+
         // Query depending of the request
         // filter by tags and sort order
         $tag = $request->get('tag');
