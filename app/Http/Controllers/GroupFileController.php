@@ -221,9 +221,26 @@ class GroupFileController extends Controller
     */
     public function edit(Group $group, File $file)
     {
+
+        // Generate a list of tags from this group :
+        // TODO optimize me
+        // One day, groups will have their own, fixed tag list
+        $files = $group->files()
+        ->with('tags')
+        ->get();
+
+        $tags = [];
+        foreach ($files as $file) {
+            foreach ($file->tags as $tag) {
+                $tags[$tag->tag_id] = $tag->name;
+            }
+        }
+
+        natcasesort($tags);
+
         return view('files.edit')
         ->with('file', $file)
-        ->with('all_tags', \App\File::allTags())
+        ->with('all_tags', $tags)
         ->with('model_tags', $file->tags)
         ->with('group', $group)
         ->with('tab', 'file');
