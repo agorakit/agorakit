@@ -272,6 +272,93 @@ class Group extends Model
 
 
     /**
+    * Get all the tags used in this group
+    * This need refactor since is is expensive to query TODO
+    */
+    public function tagsUsed()
+    {
+      // Generate a list of tags from this group :
+      // TODO optimize me
+      // One day, groups might choose to have their own, fixed tag list, configured by admin
+
+      $discussions = $this->discussions()
+      ->with('tags')
+      ->get();
+
+      $files = $this->files()
+      ->with('tags')
+      ->get();
+
+      $tags = [];
+      foreach ($discussions as $discussion) {
+        foreach ($discussion->tags as $tag) {
+          $tags[$tag->tag_id] = $tag->name;
+        }
+      }
+
+      foreach ($files as $file) {
+        foreach ($file->tags as $tag) {
+          $tags[$tag->tag_id] = $tag->name;
+        }
+      }
+
+      natcasesort($tags);
+
+      return $tags;
+    }
+
+    /**
+    * Get all the tags used in this group's discussions
+    * This need refactor since is is expensive to query TODO
+    */
+    public function tagsInDiscussions()
+    {
+      // Generate a list of tags from this group :
+      // TODO optimize me
+      // One day, groups might choose to have their own, fixed tag list, configured by admin
+
+      $discussions = $this->discussions()
+      ->with('tags')
+      ->get();
+
+      $tags = [];
+      foreach ($discussions as $discussion) {
+        foreach ($discussion->tags as $tag) {
+          $tags[$tag->tag_id] = $tag->name;
+        }
+      }
+      natcasesort($tags);
+
+      return $tags;
+    }
+
+    /**
+    * Get all the tags used in this group's files
+    * This need refactor since is is expensive to query TODO
+    */
+    public function tagsInFiles()
+    {
+      // Generate a list of tags from this group :
+      // TODO optimize me
+      // One day, groups might choose to have their own, fixed tag list, configured by admin
+
+      $files = $this->files()
+      ->with('tags')
+      ->get();
+
+      $tags = [];
+      foreach ($files as $file) {
+        foreach ($file->tags as $tag) {
+          $tags[$tag->tag_id] = $tag->name;
+        }
+      }
+      natcasesort($tags);
+
+      return $tags;
+    }
+
+
+    /**
     * Geocode the item
     * Returns true if it worked, false if it didn't.
     */

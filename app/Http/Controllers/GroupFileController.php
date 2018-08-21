@@ -39,22 +39,7 @@ class GroupFileController extends Controller
         }
 
 
-        // Generate a list of tags from this group :
-        // TODO optimize me
-        // One day, groups will have their own, fixed tag list
-        $files = $group->files()
-        ->where('item_type', '<>', \App\File::FOLDER)
-        ->with('tags')
-        ->get();
-
-        $tags = [];
-        foreach ($files as $file) {
-            foreach ($file->tags as $tag) {
-                $tags[$tag->tag_id] = $tag->name;
-            }
-        }
-
-        natcasesort($tags);
+        $tags = $group->tagsInFiles();
 
         // Query depending of the request
         // filter by tags and sort order
@@ -106,21 +91,7 @@ class GroupFileController extends Controller
     public function create(Request $request, Group $group)
     {
 
-        // Generate a list of tags from this group :
-        // TODO optimize me
-        // One day, groups will have their own, fixed tag list
-        $files = $group->files()
-        ->with('tags')
-        ->get();
-
-        $tags = [];
-        foreach ($files as $file) {
-            foreach ($file->tags as $tag) {
-                $tags[$tag->tag_id] = $tag->name;
-            }
-        }
-
-        natcasesort($tags);
+        $tags = $group->tagsUsed();
 
         return view('files.create')
         ->with('all_tags', $tags)
@@ -221,22 +192,7 @@ class GroupFileController extends Controller
     */
     public function edit(Group $group, File $file)
     {
-
-        // Generate a list of tags from this group :
-        // TODO optimize me
-        // One day, groups will have their own, fixed tag list
-        $files = $group->files()
-        ->with('tags')
-        ->get();
-
-        $tags = [];
-        foreach ($files as $file) {
-            foreach ($file->tags as $tag) {
-                $tags[$tag->tag_id] = $tag->name;
-            }
-        }
-
-        natcasesort($tags);
+        $tags = $group->tagsUsed();
 
         return view('files.edit')
         ->with('file', $file)
