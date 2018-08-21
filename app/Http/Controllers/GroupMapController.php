@@ -82,25 +82,30 @@ class GroupMapController extends Controller
       array_push($geojson['features'], $marker);
     }
 
-    // add the current group on the map
-    $marker = array(
-      'type' => 'Feature',
-      'properties' => array(
-        'title' => '<a href="' . route('groups.show', $group->id) . '">' . $group->name . '</a>',
-        'description' => summary($group->body) ,
-        'marker-color' => '#1f6edd',
-        'marker-symbol' => 'warehouse',
-      ),
-      'geometry' => array(
-        'type' => 'Point',
-        'coordinates' => array(
-          $group->longitude,
-          $group->latitude
 
+
+    // add the current group on the map
+    if ($group->latitude <> 0)
+    {
+      $marker = array(
+        'type' => 'Feature',
+        'properties' => array(
+          'title' => '<a href="' . route('groups.show', $group->id) . '">' . $group->name . '</a>',
+          'description' => summary($group->body) ,
+          'marker-color' => '#1f6edd',
+          'marker-symbol' => 'warehouse',
+        ),
+        'geometry' => array(
+          'type' => 'Point',
+          'coordinates' => array(
+            $group->longitude,
+            $group->latitude
+
+          )
         )
-      )
-    );
-    array_push($geojson['features'], $marker);
+      );
+      array_push($geojson['features'], $marker);
+    }
 
     return $geojson;
   }
