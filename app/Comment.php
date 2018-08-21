@@ -8,6 +8,7 @@ use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
 use App\Traits\LogsActivity;
 use App\Traits\MentionUsers;
+use Muratbsts\Reactable\Traits\Reactable;
 
 class Comment extends Model
 {
@@ -16,6 +17,7 @@ class Comment extends Model
     use SoftDeletes;
     use LogsActivity;
     use MentionUsers;
+    use Reactable;
 
     protected $rules = [
         'body'    => 'required|min:5',

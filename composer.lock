@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b6bc4fb3614f4b0a262a035e29c09db1",
+    "content-hash": "a408b1fffd0ed035cc9c192cd8bf662d",
     "packages": [
         {
             "name": "beyondcode/laravel-self-diagnosis",
@@ -2038,6 +2038,57 @@
                 "psr-3"
             ],
             "time": "2017-06-19T01:22:40+00:00"
+        },
+        {
+            "name": "muratbsts/laravel-reactable",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/muratbsts/laravel-reactable.git",
+                "reference": "20138a469c90fde89ceb5c336f2e501ea931adba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/muratbsts/laravel-reactable/zipball/20138a469c90fde89ceb5c336f2e501ea931adba",
+                "reference": "20138a469c90fde89ceb5c336f2e501ea931adba",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^5.2.0",
+                "illuminate/database": "^5.2.0",
+                "illuminate/support": "^5.2.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Muratbsts\\Reactable\\Providers\\ReactableServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Muratbsts\\Reactable\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Murat Bastas",
+                    "email": "muratbsts@gmail.com"
+                }
+            ],
+            "description": "Use reactions for your Laravel model like Facebook, without pain",
+            "keywords": [
+                "facebook-reactions",
+                "laravel",
+                "reactable",
+                "reactions"
+            ],
+            "time": "2017-09-26T21:33:31+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -6579,7 +6630,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "kwi/urllinker": 20
+        "kwi/urllinker": 20,
+        "muratbsts/laravel-reactable": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
