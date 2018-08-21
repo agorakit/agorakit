@@ -22,7 +22,7 @@
                     {{ trans('messages.your_groups') }}
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" class="dropdown-item" href="{{ action('DashboardController@groups') }}">
+                    <a class="dropdown-item" class="dropdown-item" href="{{ action('GroupController@index') }}">
                         {{trans('messages.all_groups')}}
                     </a>
 
@@ -43,13 +43,13 @@
             </div>
 
             <div class="nav-item">
-                <a class="nav-link" href="{{ action('DashboardController@discussions') }}">
+                <a class="nav-link" href="{{ action('DiscussionController@index') }}">
                     {{trans('messages.discussions')}}
                 </a>
             </div>
 
             <div class="nav-item">
-                <a class="nav-link" href="{{ action('DashboardController@agenda') }}">
+                <a class="nav-link" href="{{ action('ActionController@index') }}">
                 </i> {{trans('messages.agenda')}}
             </a>
         </div>
@@ -63,11 +63,11 @@
                 <a class="dropdown-item" href="{{ action('MapController@index') }}">
                     <i class="fa fa-map-marker"></i> {{trans('messages.map')}}
                 </a>
-                <a class="dropdown-item" href="{{ action('DashboardController@files') }}">
+                <a class="dropdown-item" href="{{ action('FileController@index') }}">
                     <i class="fa fa-files-o"></i> {{trans('messages.files')}}
                 </a>
 
-                <a class="dropdown-item" href="{{ action('DashboardController@users') }}">
+                <a class="dropdown-item" href="{{ action('UserController@index') }}">
                     <i class="fa fa-users"></i> {{trans('messages.users_list')}}
                 </a>
             </div>

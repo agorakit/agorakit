@@ -54,11 +54,11 @@ class SendNotifications extends Command
                     $group = \App\Group::find($notification->group_id);
 
                     if ($user && $group) {
-                        $this->info('Checking if there is something to send to user:'.$user->id.' ('.$user->email.')'.' for group:'.$group->id.' ('.$group->name.')');
+                        $this->line('Checking if there is something to send to user:'.$user->id.' ('.$user->email.')'.' for group:'.$group->id.' ('.$group->name.')');
                         if ($this->sendNotificationEmail($group, $user)) {
                             $this->info('Message sent');
                         } else {
-                            $this->info('Nothing sent');
+                            $this->error('Nothing sent');
                         }
                     }
                 }

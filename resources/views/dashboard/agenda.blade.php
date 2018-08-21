@@ -70,7 +70,7 @@
     $(document).ready(function() {
         $('#calendar').fullCalendar({
             lang: '{{App::getLocale()}}',
-            events: '{{action('DashboardController@agendaJson')}}',
+            events: '{{action('ActionController@indexJson')}}',
             header: {
                 left: 'prev,next',
                 center: 'title',

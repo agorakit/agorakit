@@ -9,14 +9,14 @@
 
 
     <li class="nav-item">
-        <a href="{{ action('DashboardController@groups') }}" class="nav-link @if (isset($tab) && ($tab == 'groups')) active @endif">
+        <a href="{{ action('GroupController@index') }}" class="nav-link @if (isset($tab) && ($tab == 'groups')) active @endif">
             <i class="fa fa-cubes"></i> <span class="hidden-xs">{{ trans('messages.groups') }}</span>
         </a>
     </li>
 
 
     <li class="nav-item">
-        <a href="{{ action('DashboardController@discussions') }}" class="nav-link @if (isset($tab) && ($tab == 'discussions')) active @endif">
+        <a href="{{ action('DiscussionController@index') }}" class="nav-link @if (isset($tab) && ($tab == 'discussions')) active @endif">
             <i class="fa fa-comments"></i> <span class="hidden-xs">{{ trans('messages.latest_discussions') }}</span>
         </a>
     </li>
@@ -25,7 +25,7 @@
 
 
     <li class="nav-item">
-        <a href="{{ action('DashboardController@agenda') }}" class="nav-link @if (isset($tab) && ($tab == 'actions')) active @endif">
+        <a href="{{ action('ActionController@index') }}" class="nav-link @if (isset($tab) && ($tab == 'actions')) active @endif">
             <i class="fa fa-calendar"></i> <span class="hidden-xs">{{ trans('messages.agenda') }}</span>
         </a>
     </li>
@@ -33,7 +33,7 @@
 
     @if (Auth::check())
         <li class="nav-item">
-            <a href="{{ action('DashboardController@files') }}" class="nav-link @if (isset($tab) && ($tab == 'files')) active @endif">
+            <a href="{{ action('FileController@index') }}" class="nav-link @if (isset($tab) && ($tab == 'files')) active @endif">
                 <i class="fa fa-files-o"></i> <span class="hidden-xs">{{ trans('messages.files') }}</span>
             </a>
         </li>
@@ -42,7 +42,7 @@
 
     @if (Auth::check())
         <li class="nav-item">
-            <a href="{{ action('DashboardController@users') }}" class="nav-link @if (isset($tab) && ($tab == 'users')) active @endif">
+            <a href="{{ action('UserController@index') }}" class="nav-link @if (isset($tab) && ($tab == 'users')) active @endif">
                 <i class="fa fa-users"></i> <span class="hidden-xs">{{ trans('messages.members') }}</span>
             </a>
         </li>
