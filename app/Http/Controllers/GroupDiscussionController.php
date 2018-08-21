@@ -25,23 +25,7 @@ class GroupDiscussionController extends Controller
   */
   public function index(Request $request, Group $group)
   {
-
-
-    // Generate a list of tags from this group :
-    // TODO optimize me
-    // One day, groups will have their own, fixed tag list
-    $discussions = $group->discussions()
-    ->with('tags')
-    ->get();
-
-    $tags = [];
-    foreach ($discussions as $discussion) {
-      foreach ($discussion->tags as $tag) {
-        $tags[$tag->tag_id] = $tag->name;
-      }
-    }
-
-    natcasesort($tags);
+    $tags = $group->tagsInDiscussions();
 
 
     $tag = $request->get('tag');
@@ -78,22 +62,8 @@ class GroupDiscussionController extends Controller
   */
   public function create(Request $request, Group $group)
   {
+    $tags = $group->tagsUsed();
 
-    // Generate a list of tags from this group :
-    // TODO optimize me
-    // One day, groups will have their own, fixed tag list
-    $discussions = $group->discussions()
-    ->with('tags')
-    ->get();
-
-    $tags = [];
-    foreach ($discussions as $discussion) {
-      foreach ($discussion->tags as $tag) {
-        $tags[$tag->tag_id] = $tag->name;
-      }
-    }
-
-    natcasesort($tags);
 
     return view('discussions.create')
     ->with('group', $group)
@@ -182,21 +152,7 @@ class GroupDiscussionController extends Controller
   public function edit(Request $request, Group $group, Discussion $discussion)
   {
 
-    // Generate a list of tags from this group :
-    // TODO optimize me
-    // One day, groups will have their own, fixed tag list
-    $discussions = $group->discussions()
-    ->with('tags')
-    ->get();
-
-    $tags = [];
-    foreach ($discussions as $discussion) {
-      foreach ($discussion->tags as $tag) {
-        $tags[$tag->tag_id] = $tag->name;
-      }
-    }
-
-    natcasesort($tags);
+    $tags = $group->tagsUsed();
 
     return view('discussions.edit')
     ->with('discussion', $discussion)
