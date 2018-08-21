@@ -46,7 +46,7 @@ class MembershipController extends Controller
                 // load or create membership for this group and user combination
                 $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $group->id]);
                 $membership->membership = \App\Membership::MEMBER;
-                $membership->notification_interval = $this->intervalToMinutes('weekly'); // this is a sane default imho for notification interval
+                $membership->notification_interval = intervalToMinutes('weekly'); // this is a sane default imho for notification interval
 
                 // we prented the user has been already notified once, now. The first mail sent will be at the choosen interval from now on.
                 $membership->notified_at = Carbon::now();
@@ -133,59 +133,5 @@ class MembershipController extends Controller
         return redirect()->route('groups.users.index', $group);
     }
 
-    public function intervalToMinutes($interval)
-    {
-        $minutes = 60*24;
 
-        switch ($interval) {
-            case 'hourly':
-                $minutes = 60;
-                break;
-            case 'daily':
-                $minutes = 60 * 24;
-                break;
-            case 'weekly':
-                $minutes = 60 * 24 * 7;
-                break;
-            case 'biweekly':
-                $minutes = 60 * 24 * 14;
-                break;
-            case 'monthly':
-                $minutes = 60 * 24 * 30;
-                break;
-            case 'never':
-                $minutes = -1;
-                break;
-        }
-
-        return $minutes;
-    }
-
-    public function minutesToInterval($minutes)
-    {
-        $interval = 'daily';
-
-        switch ($minutes) {
-            case 60:
-                $interval = 'hourly';
-                break;
-            case 60 * 24:
-                $interval = 'daily';
-                break;
-            case 60 * 24 * 7:
-                $interval = 'weekly';
-                break;
-            case 60 * 24 * 14:
-                $interval = 'biweekly';
-                break;
-            case 60 * 24 * 30:
-                $interval = 'monthly';
-                break;
-            case -1:
-                $interval = 'never';
-                break;
-        }
-
-        return $interval;
-    }
 }

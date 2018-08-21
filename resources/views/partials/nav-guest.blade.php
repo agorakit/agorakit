@@ -21,19 +21,19 @@
 
 
             <div class="nav-item">
-                <a class="nav-link" href="{{ action('DashboardController@groups') }}">
+                <a class="nav-link" href="{{ action('GroupController@index') }}">
                     <i class="fa fa-cubes"></i> {{trans('messages.groups')}}
                 </a>
             </div>
 
             <div class="nav-item">
-                <a class="nav-link" href="{{ action('DashboardController@discussions') }}">
+                <a class="nav-link" href="{{ action('DiscussionController@index') }}">
                     <i class="fa fa-comments-o"></i> {{trans('messages.discussions')}}
                 </a>
             </div>
 
             <div class="nav-item">
-                <a class="nav-link" href="{{ action('DashboardController@agenda') }}">
+                <a class="nav-link" href="{{ action('ActionController@index') }}">
                     <i class="fa fa-calendar"></i> {{trans('messages.agenda')}}
                 </a>
             </div>

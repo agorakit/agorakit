@@ -19,6 +19,32 @@ class GroupController extends Controller
         $this->middleware('groupadmin', ['only' => ['edit', 'update', 'destroy']]);
     }
 
+
+    public function index()
+    {
+      if (Auth::check()) {
+        $groups = \App\Group::notSecret()
+        ->with('membership')
+        ->with('tags')
+        ->orderBy('updated_at', 'desc')
+        ->get();
+      } else {
+        $groups = \App\Group::notSecret()
+        ->with('tags')
+        ->orderBy('updated_at', 'desc')
+        ->get();
+      }
+
+      $tagService = app(\Cviebrock\EloquentTaggable\Services\TagService::class);
+
+      return view('dashboard.groups')
+      ->with('tab', 'groups')
+      ->with('groups', $groups)
+      ->with('all_tags', $tagService->getAllTags(\App\Group::class));
+    }
+
+
+
     /**
     * Display the specified resource.
     *

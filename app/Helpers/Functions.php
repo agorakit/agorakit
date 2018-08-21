@@ -64,6 +64,64 @@ function sizeForHumans($bytes)
     return $bytes;
 }
 
+
+function intervalToMinutes($interval)
+{
+    $minutes = 60*24;
+
+    switch ($interval) {
+        case 'hourly':
+            $minutes = 60;
+            break;
+        case 'daily':
+            $minutes = 60 * 24;
+            break;
+        case 'weekly':
+            $minutes = 60 * 24 * 7;
+            break;
+        case 'biweekly':
+            $minutes = 60 * 24 * 14;
+            break;
+        case 'monthly':
+            $minutes = 60 * 24 * 30;
+            break;
+        case 'never':
+            $minutes = -1;
+            break;
+    }
+
+    return $minutes;
+}
+
+function minutesToInterval($minutes)
+{
+    $interval = 'daily';
+
+    switch ($minutes) {
+        case 60:
+            $interval = 'hourly';
+            break;
+        case 60 * 24:
+            $interval = 'daily';
+            break;
+        case 60 * 24 * 7:
+            $interval = 'weekly';
+            break;
+        case 60 * 24 * 14:
+            $interval = 'biweekly';
+            break;
+        case 60 * 24 * 30:
+            $interval = 'monthly';
+            break;
+        case -1:
+            $interval = 'never';
+            break;
+    }
+
+    return $interval;
+}
+
+
 // this one line replace almost all laracast flash tutorial that became bloated for our use case
 function flash($message)
 {

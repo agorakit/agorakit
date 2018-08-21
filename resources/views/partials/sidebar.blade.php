@@ -12,15 +12,15 @@
 
 <h4>{{ trans('messages.overview') }}</h4>
 
-<a href="{{ action('DashboardController@discussions') }}">
+<a href="{{ action('DiscussionController@index') }}">
   {{trans('messages.discussions')}}
 </a>
 
-<a href="{{ action('DashboardController@agenda') }}">
+<a href="{{ action('ActionController@index') }}">
   {{trans('messages.agenda')}}
 </a>
 
-<a href="{{ action('DashboardController@users') }}">
+<a href="{{ action('UserController@index') }}">
   {{trans('messages.users_list')}}
 </a>
 

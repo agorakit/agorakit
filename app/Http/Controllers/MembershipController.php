@@ -15,6 +15,30 @@ class MembershipController extends Controller
         $this->middleware('verified');
     }
 
+
+    /**
+    * Display a listing of the resource.
+    *
+    * @return Response
+    */
+    public function index(Group $group)
+    {
+        $users = $group->users()->with('memberships')->orderBy('updated_at', 'desc')->paginate(25);
+        $admins = $group->admins()->orderBy('name')->get();
+        $candidates = $group->candidates()->orderBy('name')->get();
+        $invites = \App\Invite::where('group_id', $group->id)->whereNull('claimed_at')->get();
+
+
+        return view('users.index')
+        ->with('users', $users)
+        ->with('admins', $admins)
+        ->with('candidates', $candidates)
+        ->with('invites', $invites)
+        ->with('group', $group)
+        ->with('tab', 'users');
+    }
+
+
     /**
     * Show a form to allow a user to join a group
     */
@@ -119,7 +143,7 @@ class MembershipController extends Controller
         return view('membership.edit')
         ->with('tab', 'preferences')
         ->with('group', $group)
-        ->with('interval', $this->minutesToInterval($membership->notification_interval))
+        ->with('interval', minutesToInterval($membership->notification_interval))
         ->with('membership', $membership);
     }
 
@@ -147,59 +171,5 @@ class MembershipController extends Controller
         ->with('group', $group);
     }
 
-    public function intervalToMinutes($interval)
-    {
-        $minutes = 60*24;
 
-        switch ($interval) {
-            case 'hourly':
-                $minutes = 60;
-                break;
-            case 'daily':
-                $minutes = 60 * 24;
-                break;
-            case 'weekly':
-                $minutes = 60 * 24 * 7;
-                break;
-            case 'biweekly':
-                $minutes = 60 * 24 * 14;
-                break;
-            case 'monthly':
-                $minutes = 60 * 24 * 30;
-                break;
-            case 'never':
-                $minutes = -1;
-                break;
-        }
-
-        return $minutes;
-    }
-
-    public function minutesToInterval($minutes)
-    {
-        $interval = 'daily';
-
-        switch ($minutes) {
-            case 60:
-                $interval = 'hourly';
-                break;
-            case 60 * 24:
-                $interval = 'daily';
-                break;
-            case 60 * 24 * 7:
-                $interval = 'weekly';
-                break;
-            case 60 * 24 * 14:
-                $interval = 'biweekly';
-                break;
-            case 60 * 24 * 30:
-                $interval = 'monthly';
-                break;
-            case -1:
-                $interval = 'never';
-                break;
-        }
-
-        return $interval;
-    }
 }

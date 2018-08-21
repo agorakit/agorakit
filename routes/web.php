@@ -50,15 +50,15 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/', 'DashboardController@index')->name('index');
     Route::get('home', 'DashboardController@index')->name('index');
     Route::get('presentation', 'DashboardController@presentation');
-    Route::get('discussions', 'DashboardController@discussions')->name('discussions');
-    Route::get('users', 'DashboardController@users')->name('users');
-    Route::get('files', 'DashboardController@files')->name('files');
+    Route::get('discussions', 'DiscussionController@index')->name('discussions');
+    Route::get('users', 'UserController@index')->name('users');
+    Route::get('files', 'FileController@index')->name('files');
     Route::get('map', 'MapController@index')->name('map');
     Route::get('map.geojson', 'MapController@geoJson')->name('map.geojson');
-    Route::get('activities', 'DashboardController@activities')->name('activities');
+    Route::get('activities', 'ActivityController@index')->name('activities');
 
-    Route::get('agenda', 'DashboardController@agenda')->name('agenda');
-    Route::get('agenda/json', 'DashboardController@agendaJson')->name('agenda.json');
+    Route::get('agenda', 'ActionController@index')->name('agenda');
+    Route::get('agenda/json', 'ActionController@indexJson')->name('agenda.json');
     Route::get('agenda/ical', 'IcalController@index')->name('agenda.ical');
 
     /*
@@ -102,7 +102,7 @@ Route::group(['middleware' => ['web']], function () {
 
 
     // application homepage, lists all groups on the server
-    Route::get('groups', 'DashboardController@groups')->name('groups.index');
+    Route::get('groups', 'GroupController@index')->name('groups.index');
     Route::get('groups/create', 'GroupController@create')->name('groups.create');
     Route::post('groups/create', 'GroupController@store')->name('groups.store');
 
@@ -193,7 +193,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('howtojoin', 'MembershipController@howToJoin')->name('.howtojoin');
 
         // Members
-        Route::get('users', 'UserController@index')->name('.users.index');
+        Route::get('users', 'MembershipController@index')->name('.users.index');
 
         // Maps
         Route::get('map', 'GroupMapController@index')->name('.map');
