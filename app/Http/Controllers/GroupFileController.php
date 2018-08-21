@@ -105,8 +105,25 @@ class GroupFileController extends Controller
     */
     public function create(Request $request, Group $group)
     {
+
+        // Generate a list of tags from this group :
+        // TODO optimize me
+        // One day, groups will have their own, fixed tag list
+        $files = $group->files()
+        ->with('tags')
+        ->get();
+
+        $tags = [];
+        foreach ($files as $file) {
+            foreach ($file->tags as $tag) {
+                $tags[$tag->tag_id] = $tag->name;
+            }
+        }
+
+        natcasesort($tags);
+
         return view('files.create')
-        ->with('all_tags', \App\File::allTags())
+        ->with('all_tags', $tags)
         ->with('group', $group)
         ->with('tab', 'files');
     }
@@ -181,6 +198,10 @@ class GroupFileController extends Controller
                 } else {
                     return redirect()->route('groups.files.index', $group);
                 }
+            }
+            else
+            {
+                abort(400,trans('messages.no_file_selected'));
             }
         } catch (Exception $e) {
             if ($request->ajax()) {
