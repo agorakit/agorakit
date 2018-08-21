@@ -181,10 +181,27 @@ class GroupDiscussionController extends Controller
   */
   public function edit(Request $request, Group $group, Discussion $discussion)
   {
+
+    // Generate a list of tags from this group :
+    // TODO optimize me
+    // One day, groups will have their own, fixed tag list
+    $discussions = $group->discussions()
+    ->with('tags')
+    ->get();
+
+    $tags = [];
+    foreach ($discussions as $discussion) {
+      foreach ($discussion->tags as $tag) {
+        $tags[$tag->tag_id] = $tag->name;
+      }
+    }
+
+    natcasesort($tags);
+
     return view('discussions.edit')
     ->with('discussion', $discussion)
     ->with('group', $group)
-    ->with('all_tags', \App\Discussion::allTags())
+    ->with('all_tags', $tags)
     ->with('model_tags', $discussion->tags)
     ->with('tab', 'discussion');
   }
