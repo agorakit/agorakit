@@ -74,7 +74,7 @@ class MembershipController extends Controller
             // load or create membership for this group and user combination
             $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
             $membership->membership = \App\Membership::MEMBER;
-            $membership->notification_interval = $this->intervalToMinutes($request->get('notifications'));
+            $membership->notification_interval = intervalToMinutes($request->get('notifications'));
 
             // we prented the user has been already notified once, now. The first mail sent will be at the choosen interval from now on.
             $membership->notified_at = Carbon::now();
@@ -155,7 +155,7 @@ class MembershipController extends Controller
         // load or create membership for this group and user combination
         $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
         //$membership->membership = \App\Membership::MEMBER; // Why, but why ?
-        $membership->notification_interval = $this->intervalToMinutes($request->get('notifications'));
+        $membership->notification_interval = intervalToMinutes($request->get('notifications'));
         $membership->save();
 
         return redirect()->route('groups.show', [$group->id])->with('message', trans('membership.settings_updated'));
