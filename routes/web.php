@@ -176,12 +176,13 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('insights', 'InsightsController@forGroup')->name('.insights');
 
         // Membership admin
-        Route::get('users/add', 'Admin\MembershipController@addUserForm')->name('.users.create');
-        Route::post('users/add', 'Admin\MembershipController@addUser')->name('.users.store');
-        Route::get('users/{user}/admin', 'Admin\MembershipController@editUserForm')->name('.users.edit');
-        Route::get('users/{user}/delete', 'Admin\MembershipController@removeUser')->name('.users.delete');
-        Route::get('users/{user}/admin/add', 'Admin\MembershipController@addAdminUser')->name('.users.addadmin');
-        Route::get('users/{user}/admin/delete', 'Admin\MembershipController@removeAdminUser')->name('.users.removeadmin');
+        Route::get('users/add', 'Admin\MembershipController@create')->name('.users.create');
+        Route::post('users/add', 'Admin\MembershipController@store')->name('.users.store');
+        Route::get('users/{user}/admin', 'Admin\MembershipController@edit')->name('.users.edit');
+        Route::get('users/{user}/delete', 'Admin\MembershipController@destroy')->name('.users.delete');
+
+        Route::get('users/{user}/admin/add', 'Admin\AdminMembershipController@store')->name('.users.admin.store');
+        Route::get('users/{user}/admin/delete', 'Admin\AdminMembershipController@destroy')->name('.users.admin.delete');
 
         Route::get('users/{user}/confirm', 'Admin\MembershipController@confirm')->name('.users.confirm');
 

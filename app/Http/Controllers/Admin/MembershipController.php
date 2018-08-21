@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 /**
-* Admin features to act on membership and to make other users admin of a group.
+* Admin features to act on membership.
 */
 class MembershipController extends Controller
 {
@@ -17,7 +17,7 @@ class MembershipController extends Controller
     * Force add a member to a group (admin feature)
     * This is the form that allows an admin to select a user to add to a group.
     */
-    public function addUserForm(Request $request, Group $group)
+    public function create(Request $request, Group $group)
     {
         $this->authorize('edit-membership', $group);
 
@@ -36,7 +36,7 @@ class MembershipController extends Controller
     * Force add a member to a group (admin feature)
     * Processing form's content.
     */
-    public function addUser(Request $request, Group $group)
+    public function store(Request $request, Group $group)
     {
         $this->authorize('edit-membership', $group);
 
@@ -66,7 +66,7 @@ class MembershipController extends Controller
     * Force remove a member to a group (admin feature)
     * This is must be called from a delete form.
     */
-    public function removeUser(Request $request, Group $group, User $user)
+    public function destroy(Request $request, Group $group, User $user)
     {
         $this->authorize('edit-membership', $group);
         $membership = \App\Membership::where(['user_id' => $user->id, 'group_id' => $group->id])->firstOrFail();
@@ -77,7 +77,7 @@ class MembershipController extends Controller
         return redirect()->route('groups.users.index', $group);
     }
 
-    public function editUserForm(Request $request, Group $group, User $user)
+    public function edit(Request $request, Group $group, User $user)
     {
         $this->authorize('edit-membership', $group);
 
@@ -87,35 +87,7 @@ class MembershipController extends Controller
         ->with('tab', 'users');
     }
 
-    /**
-    * Set a member of a group to admin (admin feature).
-    */
-    public function addAdminUser(Request $request, Group $group, User $user)
-    {
-        $this->authorize('edit-membership', $group);
 
-        $membership = \App\Membership::where(['user_id' => $user->id, 'group_id' => $group->id])->firstOrFail();
-        $membership->membership = \App\Membership::ADMIN;
-        $membership->save();
-        flash(trans('messages.user_made_admin_successfuly').' : '.$user->name);
-
-        return redirect()->route('groups.users.index', $group);
-    }
-
-    /**
-    * Set a member of a group to admin (admin feature).
-    */
-    public function removeAdminUser(Request $request, Group $group, User $user)
-    {
-        $this->authorize('edit-membership', $group);
-
-        $membership = \App\Membership::where(['user_id' => $user->id, 'group_id' => $group->id])->firstOrFail();
-        $membership->membership = \App\Membership::MEMBER;
-        $membership->save();
-        flash(trans('messages.user_made_member_successfuly').' : '.$user->name);
-
-        return redirect()->route('groups.users.index', $group);
-    }
 
 
     /**
