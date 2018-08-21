@@ -17,6 +17,7 @@
         "laravel/framework": "5.6.*",
         "laravel/socialite": "^3.1",
         "laravelcollective/html": "5.6.*",
+        "muratbsts/laravel-reactable": "dev-master",
         "rap2hpoutre/laravel-log-viewer": "^0.19",
         "suin/php-rss-writer": "^1.6",
         "toin0u/geocoder-laravel": "^4.0",

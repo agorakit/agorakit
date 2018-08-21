@@ -144,6 +144,11 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('users/{user}/contact', 'UserController@contactForm')->name('users.contactform');
     Route::post('users/{user}/contact', 'UserController@contact')->name('users.contact');
 
+    // Reactions on comments
+
+    Route::get('comments/{comment}/react/{context}', 'CommentReactionController@store');
+    Route::get('comments/{comment}/unreact', 'CommentReactionController@destroy');
+
 
     // Groups : only members (or everyone if a group is public)
     Route::group(['middleware' => 'public', 'as' => 'groups', 'prefix' => 'groups/{group}'], function () {
