@@ -14,7 +14,7 @@
 
         @can('edit-membership', $group)
             <div>
-                <a class="btn btn-secondary" href="{{ action('Admin\MembershipController@addUserForm', $group->id ) }}"><i class="fa fa-plus"></i> {{trans('membership.directly_add_users_button')}}</a>
+                <a class="btn btn-secondary" href="{{ action('Admin\MembershipController@create', $group->id ) }}"><i class="fa fa-plus"></i> {{trans('membership.directly_add_users_button')}}</a>
             </div>
         @endcan
     </div>
@@ -55,16 +55,16 @@
 
 
                                 @if($user->isAdminOf($group))
-                                    <a class="dropdown-item" href="{{action('Admin\MembershipController@removeAdminUser', [$group, $user])}}" onclick="return confirm('{{trans('messages.are_you_sure')}}');">
+                                    <a class="dropdown-item" href="{{action('Admin\AdminMembershipController@destroy', [$group, $user])}}" onclick="return confirm('{{trans('messages.are_you_sure')}}');">
                                         <i class="fa fa-trash-o"></i> {{trans('messages.remove_user_admin')}}
                                     </a>
                                 @else
-                                    <a class="dropdown-item" href="{{action('Admin\MembershipController@addAdminUser', [$group, $user])}}" onclick="return confirm('{{trans('messages.are_you_sure')}}');">
+                                    <a class="dropdown-item" href="{{action('Admin\AdminMembershipController@store', [$group, $user])}}" onclick="return confirm('{{trans('messages.are_you_sure')}}');">
                                         <i class="fa fa-key"></i> {{trans('messages.make_user_admin')}}
                                     </a>
                                 @endif
 
-                                <a class="dropdown-item" href="{{action('Admin\MembershipController@removeUser', [$group, $user])}}" onclick="return confirm('{{trans('messages.are_you_sure')}}');">
+                                <a class="dropdown-item" href="{{action('Admin\MembershipController@destroy', [$group, $user])}}" onclick="return confirm('{{trans('messages.are_you_sure')}}');">
                                     <i class="fa fa-ban"></i> {{trans('messages.remove_user')}}
                                 </a>
 
@@ -120,7 +120,7 @@
                                 <i class="fa fa-check"></i> {{trans('messages.confirm_user')}}
                             </a>
 
-                            <a class="btn btn-secondary" href="{{action('Admin\MembershipController@removeUser', [$group, $candidate])}}" onclick="return confirm('{{trans('messages.are_you_sure')}}');">
+                            <a class="btn btn-secondary" href="{{action('Admin\MembershipController@destroy', [$group, $candidate])}}" onclick="return confirm('{{trans('messages.are_you_sure')}}');">
                                 <i class="fa fa-ban"></i> {{trans('messages.remove_user')}}
                             </a>
                         </td>

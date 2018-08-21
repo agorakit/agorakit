@@ -16,7 +16,7 @@ class ActivityController extends Controller
 {
   public function __construct()
   {
-    $this->middleware('verified', ['only' => ['users', 'files', 'activities']]);
+    $this->middleware('verified');
     $this->middleware('preferences');
   }
 
