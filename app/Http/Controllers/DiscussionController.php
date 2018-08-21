@@ -17,8 +17,11 @@ class DiscussionController extends Controller
   /**
   * Generates a global list of discussions with unread count (independant of groups).
   */
-  public function index()
+  public function index(Request $request)
   {
+
+    $tag = $request->get('tag');
+
     if (Auth::check()) {
       // All the groups of a user : Auth::user()->groups()->pluck('groups.id')
       // All the public groups : \App\Group::publicgroups()
@@ -38,21 +41,34 @@ class DiscussionController extends Controller
       } else {
         $groups = Auth::user()->groups()->pluck('groups.id');
       }
-
-
-
       $discussions = \App\Discussion::with('userReadDiscussion', 'group', 'user')
       ->whereIn('group_id', $groups)
+      ->when($tag, function ($query) use ($tag) {
+        return $query->withAnyTags($tag);
+      })
       ->orderBy('updated_at', 'desc')->paginate(25);
+
     } else {
       $discussions = \App\Discussion::with('group', 'user')
       ->whereIn('group_id', \App\Group::publicgroups()->get()->pluck('id'))
+      ->when($tag, function ($query) use ($tag) {
+        return $query->withAnyTags($tag);
+      })
       ->orderBy('updated_at', 'desc')->paginate(25);
     }
 
+
+
+    $tags = \App\Discussion::allTags();
+    natcasesort($tags);
+
+
+
+
     return view('dashboard.discussions')
     ->with('tab', 'discussions')
-    ->with('discussions', $discussions);
+    ->with('discussions', $discussions)
+    ->with('tags', $tags);
   }
 
 }

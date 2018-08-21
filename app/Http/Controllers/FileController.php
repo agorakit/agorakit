@@ -22,6 +22,8 @@ class FileController extends Controller
   {
     $tags = \App\File::allTags();
 
+    natcasesort($tags);
+
 
     if (Auth::check()) {
       $groups = \App\Group::publicgroups()
