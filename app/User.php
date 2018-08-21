@@ -175,6 +175,11 @@ class User extends Authenticatable
         return $query->where('admin', 1);
     }
 
+    public function scopeVerified($query)
+    {
+        return $query->where('verified', 1);
+    }
+
     /**
     * The groups this user is part of.
     */

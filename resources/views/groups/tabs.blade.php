@@ -125,7 +125,7 @@
                         <i class="fa fa-toggle-on"></i> {{ trans('messages.features') }}
                     </a>
 
-                    <a class="dropdown-item" href="{{ action('InsightsController@forGroup', $group->id) }}">
+                    <a class="dropdown-item" href="{{ action('GroupInsightsController@index', $group->id) }}">
                         <i class="fa fa-line-chart"></i> {{ trans('messages.insights') }}
                     </a>
 
