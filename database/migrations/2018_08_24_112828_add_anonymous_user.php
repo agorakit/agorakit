@@ -14,7 +14,7 @@ class AddAnonymousUser extends Migration
     public function up()
     {
         //
-        $anonymous = \App\User::firstOrNew(['email' => 'anonymous@gorakit.org']);
+        $anonymous = \App\User::firstOrNew(['email' => 'anonymous@agorakit.org']);
         $anonymous->name = 'Anonymous';
         $anonymous->body = 'Anonymous is a system user';
         $anonymous->verified = 1;

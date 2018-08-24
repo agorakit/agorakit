@@ -214,24 +214,78 @@ class UserController extends Controller
   {
     $this->authorize('delete', $user);
 
-      if ($request->isMethod('get')) {
-        // show a form to decide what do to
-        return view('users.delete')->with('user', $user);
+    if ($request->isMethod('get')) {
+      // show a form to decide what do to
+      return view('users.delete')->with('user', $user);
+    }
+
+    if ($request->isMethod('delete')) {
+      // delete!
+
+      $message = array();
+
+      // first case assign all to anonymous :
+
+      if ($request->content == 'anonymous')
+      {
+        $anonymous = \App\User::where('email', 'anonymous@agorakit.org')->firstOrFail();
+
+
+
+        foreach ($user->comments as $comment)
+        {
+          $comment->user()->associate($anonymous);
+          $comment->save();
+          $message[] = 'Comment ' . summary($comment->body) . ' anonymized';
+        }
+
+        foreach ($user->discussions as $discussion)
+        {
+          $discussion->user()->associate($anonymous);
+          $discussion->save();
+          $message[] = 'Discussion ' . $discussion->name . ' anonymized';
+        }
+
+        foreach ($user->files as $file)
+        {
+          $file->user()->associate($anonymous);
+          $file->save();
+          $message[] = 'File ' . $file->name . ' anonymized';
+        }
+
+        foreach ($user->actions as $action)
+        {
+          $action->user()->associate($anonymous);
+          $action->save();
+          $message[] = 'Action ' . $action->name . ' anonymized';
+        }
+
+
+
+        //$user->actions()->update(['actions.user_id' => $anonymous->id]);
+        $user->memberships()->delete();
+        $message[] = 'Memberships deleted';
+
       }
 
-      if ($request->isMethod('delete')) {
-        // delete!
-
-        // first case assign all to anonymous :
 
 
-        // second case delete all :
+      // second case delete all :
 
 
-        // finaly delete user account
+      // finaly delete user account
+      $user->delete();
+      $message[] = 'User deleted';
 
-        return 'I will delete';
+      foreach ($message as $txt)
+      {
+        flash($txt);
       }
+
+
+      return redirect()->route('index', $user);
+
+    }
 
 
 
