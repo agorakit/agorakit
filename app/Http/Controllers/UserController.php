@@ -195,7 +195,13 @@ class UserController extends Controller
 
       return redirect()->route('users.show', $user);
     }
+    else
+    {
+      abort(404, 'Your account is already verified');
+    }
   }
+
+
 
   /**
   * Remove the specified resource from storage.
@@ -204,8 +210,33 @@ class UserController extends Controller
   *
   * @return Response
   */
-  public function destroy(User $user)
+  public function destroy(User $user, Request $request)
   {
+    $this->authorize('delete', $user);
+
+      if ($request->isMethod('get')) {
+        // show a form to decide what do to
+        return view('users.delete')->with('user', $user);
+      }
+
+      if ($request->isMethod('delete')) {
+        // delete!
+
+        // first case assign all to anonymous :
+
+
+        // second case delete all :
+
+
+        // finaly delete user account
+
+        return 'I will delete';
+      }
+
+
+
+
+
   }
 
   public function cover(User $user)
