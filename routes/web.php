@@ -141,6 +141,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit');
     Route::post('users/{user}', 'UserController@update')->name('users.update');
 
+    Route::get('users/{user}/delete', 'UserController@destroy')->name('users.delete');
+    Route::delete('users/{user}/delete', 'UserController@destroy')->name('users.delete');
+
     Route::get('users/{user}/contact', 'UserController@contactForm')->name('users.contactform');
     Route::post('users/{user}/contact', 'UserController@contact')->name('users.contact');
 
