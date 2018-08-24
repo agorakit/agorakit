@@ -31,7 +31,7 @@ class Comment extends Model
 
     //protected $touches = ['discussion', 'user'];
 
-    protected $casts = ['user_id' => 'integer'];
+    //protected $casts = ['user_id' => 'integer'];
     protected $dontKeepRevisionOf = ['vote'];
 
     public function user()
