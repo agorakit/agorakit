@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
-use App\Traits\LogsActivity;
 
 class File extends Model
 {
@@ -15,9 +14,7 @@ class File extends Model
     use SoftDeletes;
     use RevisionableTrait;
     use Taggable;
-    use LogsActivity;
 
-    //protected $touches = ['group', 'user'];
 
     protected $rules = [
         'name'     => 'required',
@@ -29,6 +26,8 @@ class File extends Model
     public $timestamps = true;
     protected $dates = ['deleted_at'];
     protected $casts = ['user_id' => 'integer'];
+
+    protected $keepRevisionOf = ['name', 'path', 'filesize'];
 
     // Item type can be :
     // 0 : file (stored on the server)

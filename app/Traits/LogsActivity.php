@@ -5,6 +5,8 @@ use App\Activity;
 use Auth;
 use App\Comment;
 
+/************* candidate for REMOVAL TODO ************************/
+
 trait LogsActivity
 {
     public static function bootLogsActivity()

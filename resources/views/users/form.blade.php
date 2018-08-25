@@ -31,6 +31,7 @@
 </div>
 
 @if (Auth::user()->isAdmin())
+  <h1>Administration</h1>
     <div class="form-group">
         <div>{{trans('messages.admin')}}</div>
         {{Form::radio('is_admin', 'yes', $user->isAdmin())}} {{trans('messages.yes')}} <br/>

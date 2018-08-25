@@ -195,7 +195,13 @@ class UserController extends Controller
 
       return redirect()->route('users.show', $user);
     }
+    else
+    {
+      abort(404, 'Your account is already verified');
+    }
   }
+
+
 
   /**
   * Remove the specified resource from storage.
@@ -204,8 +210,141 @@ class UserController extends Controller
   *
   * @return Response
   */
-  public function destroy(User $user)
+  public function destroy(User $user, Request $request)
   {
+    $this->authorize('delete', $user);
+
+    // Show a form to decide what do to:
+    if ($request->isMethod('get')) {
+
+      return view('users.delete')->with('user', $user);
+    }
+
+    // Do the deletion:
+    if ($request->isMethod('delete')) {
+
+
+      if ($user->email == 'anonymous@agorakit.org')
+      {
+        abort(500, 'Do not delete anonymous user, you fool :-)');
+      }
+
+      $anonymous = \App\User::where('email', 'anonymous@agorakit.org')->first();
+
+      if (is_null($anonymous)) {
+        abort(500, 'Can\'t load the anonymous user model, please run all migrations to create the anynmous special system user');
+      }
+
+      $message = array();
+
+      // First case assign all to anonymous :
+      if ($request->content == 'anonymous')
+      {
+        $message[] = $user->comments->count() . ' comments anonymized';
+        foreach ($user->comments as $comment)
+        {
+          $comment->timestamps = false;
+          $comment->user()->associate($anonymous);
+          $comment->save();
+
+        }
+
+        $message[] = $user->discussions->count() . ' discussions anonymized';
+        foreach ($user->discussions as $discussion)
+        {
+          $discussion->timestamps = false;
+          $discussion->user()->associate($anonymous);
+          $discussion->save();
+        }
+
+        $message[] = $user->files->count() . ' files anonymized';
+        foreach ($user->files as $file)
+        {
+          $file->timestamps = false;
+          $file->user()->associate($anonymous);
+          $file->save();
+        }
+
+        $message[] = $user->actions->count() . ' actions anonymized';
+        foreach ($user->actions as $action)
+        {
+          $action->timestamps = false;
+          $action->user()->associate($anonymous);
+          $action->save();
+        }
+
+        $message[] = $user->memberships->count() . ' memberships deleted';
+        $user->memberships()->delete();
+      }
+
+
+
+      // Second case delete all :
+      if ($request->content == 'delete')
+      {
+        $message[] = $user->comments->count() . ' comments deleted';
+        foreach ($user->comments as $comment)
+        {
+          $comment->timestamps = false;
+          $comment->delete();
+        }
+
+
+        $message[] = $user->discussions->count() . ' discussions deleted';
+        foreach ($user->discussions as $discussion)
+        {
+          $discussion->timestamps = false;
+
+          if ($discussion->comments->count() > 0)
+          {
+            $discussion->user()->associate($anonymous);
+            $discussion->save();
+          }
+          else
+          {
+            $discussion->delete();
+          }
+        }
+
+        $message[] = $user->files->count() . ' files deleted';
+        foreach ($user->files as $file)
+        {
+          $file->timestamps = false;
+          $file->delete();
+        }
+
+        $message[] = $user->actions->count() . ' actions deleted';
+        foreach ($user->actions as $action)
+        {
+          $action->timestamps = false;
+          $action->delete();
+        }
+
+        $message[] = $user->memberships->count() . ' memberships deleted';
+        $user->memberships()->delete();
+
+      }
+
+
+      // finaly delete user account
+      $user->delete();
+      $message[] = 'User deleted';
+
+      // flash all info
+      foreach ($message as $txt)
+      {
+        flash($txt);
+      }
+
+
+      return redirect()->route('index', $user);
+
+    }
+
+
+
+
+
   }
 
   public function cover(User $user)
