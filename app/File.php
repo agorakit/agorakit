@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
-use App\Traits\LogsActivity;
 
 class File extends Model
 {
@@ -15,9 +14,7 @@ class File extends Model
     use SoftDeletes;
     use RevisionableTrait;
     use Taggable;
-    use LogsActivity;
 
-    //protected $touches = ['group', 'user'];
 
     protected $rules = [
         'name'     => 'required',
