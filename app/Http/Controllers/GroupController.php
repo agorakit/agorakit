@@ -175,8 +175,7 @@ class GroupController extends Controller
         // handle cover
         if ($request->hasFile('cover')) {
             Storage::disk('local')->makeDirectory('groups/'.$group->id);
-            Image::make($request->file('cover'))->widen(800)->save(storage_path().'/app/groups/'.$group->id.'/cover.jpg');
-            Image::make($request->file('cover'))->fit(300, 200)->save(storage_path().'/app/groups/'.$group->id.'/thumbnail.jpg');
+            Image::make($request->file('cover'))->widen(1600)->save(storage_path().'/app/groups/'.$group->id.'/cover.jpg');
         }
 
         // make the current user an admin of the group
@@ -265,8 +264,7 @@ class GroupController extends Controller
         // handle cover
         if ($request->hasFile('cover')) {
             Storage::disk('local')->makeDirectory('groups/'.$group->id);
-            Image::make($request->file('cover'))->widen(800)->save(storage_path().'/app/groups/'.$group->id.'/cover.jpg');
-            Image::make($request->file('cover'))->fit(300, 200)->save(storage_path().'/app/groups/'.$group->id.'/thumbnail.jpg');
+            Image::make($request->file('cover'))->widen(1600)->save(storage_path().'/app/groups/'.$group->id.'/cover.jpg');
         }
 
         $group->save();

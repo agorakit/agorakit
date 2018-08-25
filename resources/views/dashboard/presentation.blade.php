@@ -23,7 +23,7 @@
         <div class="carousel-inner" role="listbox">
         @foreach (App\Group::whereNotNull('cover')->inRandomOrder()->limit(10)->get() as $group)
         <div class="item  @if ($loop->first) active @endif">
-        <img src="{{route('groups.cover.carousel', $group)}}" class="img-fluid">
+        <img src="{{route('groups.cover.large', $group)}}" class="img-fluid">
         <div class="carousel-caption">
         <h3>{{$group->name}}</h3>
         <p>{{summary($group->body)}}</p>
