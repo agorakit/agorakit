@@ -46,7 +46,11 @@
             </div>
 
             <div class="col-md-6">
-                <img class="img-fluid rounded" src="{{route('groups.cover', $group->id)}}"/>
+              @if ($group->hasCover())
+                <img class="img-fluid rounded" src="{{route('groups.cover.large', $group->id)}}"/>
+              @else
+                <img class="img-fluid rounded" src="/images/group.svg"/>
+              @endif
             </div>
 
         </div>

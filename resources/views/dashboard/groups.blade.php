@@ -14,7 +14,11 @@
                     <div class="card tag-group @foreach ($group->tags as $tag)tag-{{$tag->tag_id}} @endforeach">
 
                         <a href="{{ action('GroupController@show', $group) }}">
-                            <img class="card-img-top" src="{{ route('groups.cover', $group)}}" />
+                            @if ($group->hasCover())
+                              <img class="card-img-top" src="{{ route('groups.cover.medium', $group)}}" />
+                            @else
+                              <img class="card-img-top" src="/images/group.svg"/>
+                            @endif
                         </a>
 
                         <div class="card-body">

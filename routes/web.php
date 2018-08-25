@@ -108,9 +108,9 @@ Route::group(['middleware' => ['web']], function () {
 
     // Groups : what everyone can see, homepage and covers
     Route::get('groups/{group}', 'GroupController@show')->name('groups.show');
-    Route::get('groups/{group}/cover', 'GroupThumbnailController@cover')->name('groups.cover');
-    Route::get('groups/{group}/cover/small', 'GroupThumbnailController@avatar')->name('groups.cover.small');
-    Route::get('groups/{group}/cover/carousel', 'GroupThumbnailController@carousel')->name('groups.cover.carousel');
+    Route::get('groups/{group}/cover/small', 'GroupCoverController@small')->name('groups.cover.small');
+    Route::get('groups/{group}/cover/medium', 'GroupCoverController@medium')->name('groups.cover.medium');
+    Route::get('groups/{group}/cover/large', 'GroupCoverController@large')->name('groups.cover.large');
 
     // Invite system for groups
     Route::get('groups/{group}/invite/confirm/{token}', 'InviteController@inviteConfirm')->name('groups.invite.confirm');
