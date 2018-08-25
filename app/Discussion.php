@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
-use App\Traits\LogsActivity;
 
 class Discussion extends Model
 {
@@ -15,11 +14,6 @@ class Discussion extends Model
     use ValidatingTrait;
     use SoftDeletes;
     use Taggable;
-    use LogsActivity;
-
-    //protected $softCascade =['comments'];
-
-    //protected $touches = ['group', 'user'];
 
     protected $rules = [
     'name'     => 'required|min:5',

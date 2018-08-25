@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
-use App\Traits\LogsActivity;
 use App\Traits\MentionUsers;
 use Muratbsts\Reactable\Traits\Reactable;
 
@@ -15,7 +14,6 @@ class Comment extends Model
     use RevisionableTrait;
     use ValidatingTrait;
     use SoftDeletes;
-    use LogsActivity;
     use MentionUsers;
     use Reactable;
 
