@@ -20,6 +20,8 @@ class Membership extends Model
         'group_id' => 'required|exists:groups,id',
     ];
 
+    protected $keepRevisionOf = ['config', 'membership', 'notification_interval'];
+
     // Membership levels
 
     // active member

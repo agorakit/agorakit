@@ -30,6 +30,8 @@ class File extends Model
     protected $dates = ['deleted_at'];
     protected $casts = ['user_id' => 'integer'];
 
+    protected $keepRevisionOf = ['name', 'path', 'filesize'];
+
     // Item type can be :
     // 0 : file (stored on the server)
     // 1 : folder (virtual folders)

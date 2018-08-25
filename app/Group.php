@@ -23,6 +23,8 @@ class Group extends Model
     protected $fillable = ['id', 'name', 'body', 'cover'];
     protected $casts = ['user_id' => 'integer', 'settings' => 'array'];
 
+    protected $keepRevisionOf = ['name', 'body', 'cover', 'color', 'group_type', 'address', 'settings'];
+
     /**** various group types ****/
     // open group, default
     const OPEN = 0;
