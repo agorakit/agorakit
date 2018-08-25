@@ -28,7 +28,7 @@ class Discussion extends Model
     'group_id' => 'required|exists:groups,id',
     ];
 
-    protected $dontKeepRevisionOf = ['total_comments'];
+    protected $keepRevisionOf = ['name', 'body'];
 
     protected $table = 'discussions';
     protected $fillable = ['name', 'body', 'group_id'];
