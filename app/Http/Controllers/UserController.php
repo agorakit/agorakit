@@ -229,18 +229,17 @@ class UserController extends Controller
         abort(500, 'Do not delete anonymous user, you fool :-)');
       }
 
+      $anonymous = \App\User::where('email', 'anonymous@agorakit.org')->first();
+
+      if (is_null($anonymous)) {
+        abort(500, 'Can\'t load the anonymous user model, please run all migrations to create the anynmous special system user');
+      }
+
       $message = array();
 
       // First case assign all to anonymous :
       if ($request->content == 'anonymous')
       {
-        $anonymous = \App\User::where('email', 'anonymous@agorakit.org')->first();
-
-        if (is_null($anonymous)) {
-          abort(500, 'Can\'t load the anonymous user model, please run all migrations to create the anynmous special system user');
-        }
-
-
         $message[] = $user->comments->count() . ' comments anonymized';
         foreach ($user->comments as $comment)
         {
@@ -295,7 +294,16 @@ class UserController extends Controller
         foreach ($user->discussions as $discussion)
         {
           $discussion->timestamps = false;
-          $discussion->delete();
+
+          if ($discussion->comments->count() > 0)
+          {
+            $discussion->user()->associate($anonymous);
+            $discussion->save();
+          }
+          else
+          {
+            $discussion->delete();
+          }
         }
 
         $message[] = $user->files->count() . ' files deleted';
