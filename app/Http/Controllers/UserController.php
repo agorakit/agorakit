@@ -214,69 +214,115 @@ class UserController extends Controller
   {
     $this->authorize('delete', $user);
 
+    // Show a form to decide what do to:
     if ($request->isMethod('get')) {
-      // show a form to decide what do to
+
       return view('users.delete')->with('user', $user);
     }
 
+    // Do the deletion:
     if ($request->isMethod('delete')) {
-      // delete!
+
+
+      if ($user->email == 'anonymous@agorakit.org')
+      {
+        abort(500, 'Do not delete anonymous user, you fool :-)');
+      }
 
       $message = array();
 
-      // first case assign all to anonymous :
-
+      // First case assign all to anonymous :
       if ($request->content == 'anonymous')
       {
-        $anonymous = \App\User::where('email', 'anonymous@agorakit.org')->firstOrFail();
+        $anonymous = \App\User::where('email', 'anonymous@agorakit.org')->first();
+
+        if (is_null($anonymous)) {
+          abort(500, 'Can\'t load the anonymous user model, please run all migrations to create the anynmous special system user');
+        }
 
 
-
+        $message[] = $user->comments->count() . ' comments anonymized';
         foreach ($user->comments as $comment)
         {
+          $comment->timestamps = false;
           $comment->user()->associate($anonymous);
           $comment->save();
-          $message[] = 'Comment ' . summary($comment->body) . ' anonymized';
+
         }
 
+        $message[] = $user->discussions->count() . ' discussions anonymized';
         foreach ($user->discussions as $discussion)
         {
+          $discussion->timestamps = false;
           $discussion->user()->associate($anonymous);
           $discussion->save();
-          $message[] = 'Discussion ' . $discussion->name . ' anonymized';
         }
 
+        $message[] = $user->files->count() . ' files anonymized';
         foreach ($user->files as $file)
         {
+          $file->timestamps = false;
           $file->user()->associate($anonymous);
           $file->save();
-          $message[] = 'File ' . $file->name . ' anonymized';
         }
 
+        $message[] = $user->actions->count() . ' actions anonymized';
         foreach ($user->actions as $action)
         {
+          $action->timestamps = false;
           $action->user()->associate($anonymous);
           $action->save();
-          $message[] = 'Action ' . $action->name . ' anonymized';
         }
 
-
-
-        //$user->actions()->update(['actions.user_id' => $anonymous->id]);
+        $message[] = $user->memberships->count() . ' memberships deleted';
         $user->memberships()->delete();
-        $message[] = 'Memberships deleted';
-
       }
 
 
 
-      // second case delete all :
+      // Second case delete all :
+      if ($request->content == 'delete')
+      {
+        $message[] = $user->comments->count() . ' comments deleted';
+        foreach ($user->comments as $comment)
+        {
+          $comment->timestamps = false;
+          $comment->delete();
+        }
+
+
+        $message[] = $user->discussions->count() . ' discussions deleted';
+        foreach ($user->discussions as $discussion)
+        {
+          $discussion->timestamps = false;
+          $discussion->delete();
+        }
+
+        $message[] = $user->files->count() . ' files deleted';
+        foreach ($user->files as $file)
+        {
+          $file->timestamps = false;
+          $file->delete();
+        }
+
+        $message[] = $user->actions->count() . ' actions deleted';
+        foreach ($user->actions as $action)
+        {
+          $action->timestamps = false;
+          $action->delete();
+        }
+
+        $message[] = $user->memberships->count() . ' memberships deleted';
+        $user->memberships()->delete();
+
+      }
 
 
       // finaly delete user account
       $user->delete();
       $message[] = 'User deleted';
 
+      // flash all info
       foreach ($message as $txt)
       {
         flash($txt);
