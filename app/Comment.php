@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
-use App\Traits\LogsActivity;
 use App\Traits\MentionUsers;
 use Muratbsts\Reactable\Traits\Reactable;
 
@@ -15,7 +14,6 @@ class Comment extends Model
     use RevisionableTrait;
     use ValidatingTrait;
     use SoftDeletes;
-    use LogsActivity;
     use MentionUsers;
     use Reactable;
 
@@ -29,10 +27,7 @@ class Comment extends Model
     protected $dates = ['deleted_at'];
     protected $with = ['user']; // always load users with comments
 
-    //protected $touches = ['discussion', 'user'];
-
-    protected $casts = ['user_id' => 'integer'];
-    protected $dontKeepRevisionOf = ['vote'];
+    protected $keepRevisionOf = ['body'];
 
     public function user()
     {

@@ -9,6 +9,8 @@ use App\File;
 use App\Action;
 use App\Comment;
 
+/************* candidate for REMOVAL TODO ************************/
+
 class Activity extends Model
 {
     use ValidatingTrait;

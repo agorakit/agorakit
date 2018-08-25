@@ -20,6 +20,8 @@ class Setting extends Model
     public $timestamps = true;
     protected $dates = ['deleted_at'];
 
+    protected $keepRevisionOf = ['name', 'locale', 'value'];
+
     /**
     * Static method to get a value from the settings table.
     */

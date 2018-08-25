@@ -46,6 +46,8 @@ class User extends Authenticatable
         //'password' => 'required',
     ];
 
+    protected $keepRevisionOf = ['name', 'body', 'email', 'admin', 'preferences', 'address'];
+
     /**
     * The database table used by the model.
     *
