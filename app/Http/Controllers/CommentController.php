@@ -17,17 +17,9 @@ class CommentController extends Controller
         $this->middleware('public', ['only' => ['reply', 'create', 'store', 'edit', 'update', 'destroy']]);
     }
 
-    /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
-    public function index()
-    {
-        //
-    }
 
-    public function reply(Request $request, Group $group, Discussion $discussion)
+
+    public function store(Request $request, Group $group, Discussion $discussion)
     {
         $comment = new \App\Comment();
         $comment->body = $request->input('body');
@@ -47,6 +39,8 @@ class CommentController extends Controller
         $group->touch();
         $discussion->touch();
         \Auth::user()->touch();
+
+        event(new \App\Events\ContentCreated($comment));
 
         return redirect()->route('groups.discussions.show', [$discussion->group, $discussion]);
     }

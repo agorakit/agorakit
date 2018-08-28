@@ -1,4 +1,4 @@
-{!! Form::open(array('action' => ['CommentController@reply', $group->id, $discussion->id])) !!}
+{!! Form::open(array('action' => ['CommentController@store', $group->id, $discussion->id])) !!}
 
 @include('comments.form')
 

@@ -229,7 +229,7 @@ class UserController extends Controller
         abort(500, 'Do not delete anonymous user, you fool :-)');
       }
 
-      $anonymous = \App\User::where('email', 'anonymous@agorakit.org')->first();
+      $anonymous = \App\User::getAnonymousUser();
 
       if (is_null($anonymous)) {
         abort(500, 'Can\'t load the anonymous user model, please run all migrations to create the anynmous special system user');
