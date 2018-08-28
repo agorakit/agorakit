@@ -117,6 +117,7 @@ class UserController extends Controller
       $previous_email = $user->email;
       $user->email = $request->input('email');
       $user->body = $request->input('body');
+      $user->username = $request->input('username');
 
       if ($user->address != $request->input('address')) {
         // we need to update user address and geocode it

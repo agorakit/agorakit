@@ -1,7 +1,7 @@
 
 <h1 class="small mb-3">
     <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
-    {{ $user->name }}
+    {{ $user->name }} <em>({{ '@' . $user->username }})</em>
 </h1>
 
 
