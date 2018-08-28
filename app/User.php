@@ -45,6 +45,7 @@ class User extends Authenticatable
     protected $rules = [
         'name'  => 'required',
         'email' => 'required|email|unique:users',
+        'username' => 'alpha_dash|unique:users'
         //'password' => 'required',
     ];
 
