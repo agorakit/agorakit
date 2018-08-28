@@ -8,7 +8,8 @@ use Illuminate\Notifications\Notifiable;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Muratbsts\Reactable\Traits\Reactor;
+use Cviebrock\EloquentSluggable\Sluggable;
+
 
 class User extends Authenticatable
 {
@@ -16,7 +17,8 @@ class User extends Authenticatable
     use ValidatingTrait;
     use RevisionableTrait;
     use SoftDeletes;
-    use Reactor;
+    use Sluggable;
+
 
     /**
     * The attributes that are mass assignable.
@@ -48,12 +50,28 @@ class User extends Authenticatable
 
     protected $keepRevisionOf = ['name', 'body', 'email', 'admin', 'preferences', 'address'];
 
+
+
     /**
     * The database table used by the model.
     *
     * @var string
     */
     protected $table = 'users';
+
+    /**
+    * Return the sluggable configuration array for this model.
+    *
+    * @return array
+    */
+    public function sluggable()
+    {
+        return [
+            'username' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 
     /**
     * Boot the model.
@@ -193,8 +211,8 @@ class User extends Authenticatable
     }
 
     /**
-     * The actions this user attends to
-     */
+    * The actions this user attends to
+    */
     public function actions()
     {
         return $this->belongsToMany(\App\Action::class);
@@ -264,6 +282,23 @@ class User extends Authenticatable
     {
         return route('users.show', [$this]);
     }
+
+    // create and return an anonymous user
+    // TODO refactor this to use a user service layer or something
+    public static function getAnonymousUser()
+    {
+        $anonymous = \App\User::firstOrNew(['email' => 'anonymous@agorakit.org']);
+        if ($anonymous->exists()) {
+            return $anonymous;
+        }
+        $anonymous->name = 'Anonymous';
+        $anonymous->body = 'Anonymous is a system user';
+        $anonymous->verified = 1;
+
+        $anonymous->save();
+        return $anonymous;
+    }
+
 
     /**
     * Geocode the user
