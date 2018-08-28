@@ -13,7 +13,7 @@
     $('.trumbowyg-editor').atwho({
         at: "@",
         data: '{{route('groups.users.mention', $group)}}',
-        insertTpl: "<a href=\"${url}\" data-mention-user-id=\"${id}\">${atwho-at}${name}</a>",
+        insertTpl: "${atwho-at}${username}",
     });
 
     $('.trumbowyg-editor').atwho({
