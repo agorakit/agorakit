@@ -1,92 +1,78 @@
 <?php
 
-
-
-/**************
-Route::resource('posts.comments', 'CommentsController');
-Route::resource('photos.comments', 'CommentsController');
-*/
-
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+
+/**
+ * This controller is used for quick tag editing on various models (discussions & files curently)
+ */
 class TagController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    * Show the form for editing the specified resource.
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+    public function edit(Request $request, $group, $type, $id)
     {
-        //
+        if ($type == 'discussions')
+        {
+            $model = \App\Discussion::findOrFail($id);
+            return view('tags.edit')
+            ->with('name', $model->name)
+            ->with('group', $model->group)
+            ->with('model', $model)
+            ->with('type', $type)
+            ->with('id', $id)
+            ->with('model_tags', $model->tags)
+            ->with('all_tags', $model->group->tagsUsed());
+        }
+
+        if ($type == 'files')
+        {
+            $model = \App\File::findOrFail($id);
+            return view('tags.edit')
+            ->with('name', $model->name)
+            ->with('group', $model->group)
+            ->with('model', $model)
+            ->with('type', $type)
+            ->with('id', $id)
+            ->with('model_tags', $model->tags)
+            ->with('all_tags', $model->group->tagsUsed());
+        }
+
+        abort(404, 'Unknown type');
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    * Update the specified resource in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+    public function update(Request $request, $group, $type, $id)
     {
-        //
+        if ($type == 'discussions')
+        {
+            $model = \App\Discussion::findOrFail($id);
+            $model->tag($request->get('tags'));
+            flash(trans('messages.ressource_created_successfully'));
+            return redirect()->route('groups.discussions.show', [$model->group, $model]);
+        }
+
+        if ($type == 'files')
+        {
+            $model = \App\File::findOrFail($id);
+            $model->tag($request->get('tags'));
+            flash(trans('messages.ressource_created_successfully'));
+            return redirect()->route('groups.files.show', [$model->group, $model]);
+        }
+
+        abort(404, 'Unknown type');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
