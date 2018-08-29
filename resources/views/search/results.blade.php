@@ -110,7 +110,7 @@
                 <div role="tabpanel" class="tab-pane {{$users->class}}" id="users">
                     @foreach ($users as $user)
                         <div class="result">
-                            <h4><span class="avatar"><img src="{{$user->avatar()}}" class="rounded-circle"/></span> <a href="{{$user->link()}}">{{$user->name}}</a></h4>
+                            <h4><span class="avatar"><img src="{{route('users.cover', [$user, 'small'])}}" class="rounded-circle"/></span> <a href="{{$user->link()}}">{{$user->name}}</a></h4>
                             {{summary($user->body)}}
                         </div>
                     @endforeach

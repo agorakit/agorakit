@@ -50,7 +50,7 @@
       <div class="meta mb-3">
         {{trans('messages.started_by')}}
         <span class="user">
-          <a href="{{ route('users.show', [$discussion->user->id]) }}">{{ $discussion->user->name}}</a>
+          <a href="{{ route('users.show', [$discussion->user]) }}">{{ $discussion->user->name}}</a>
         </span>,
         {{trans('messages.in')}} {{ $discussion->group->name}} {{ $discussion->created_at->diffForHumans()}}
         @if ($discussion->tags->count() > 0)

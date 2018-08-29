@@ -1,6 +1,6 @@
 @if ($activity->getType() == 'discussion')
     <div class="activity-small">
-        <span class="avatar"><img src="{{$activity->user->avatar()}}" class="rounded-circle"/></span>
+        <span class="avatar"><img src="{{{{route('users.cover', [$activity->user, 'small'])}}}}" class="rounded-circle"/></span>
         <a href="{{route('users.show', $activity->user)}}">{{$activity->user->name}}</a>
         {{trans('messages.activity_' . $activity->action)}}
         <a href="{{$activity->linkToModel()}}">{{$activity->model->name}}</a>
@@ -13,7 +13,7 @@
 
 @if ($activity->getType() == 'action')
     <div class="activity-small">
-        <span class="avatar"><img src="{{$activity->user->avatar()}}" class="rounded-circle"/></span>
+        <span class="avatar"><img src="{{{{route('users.cover', [$activity->user, 'small'])}}}}" class="rounded-circle"/></span>
         <a href="{{route('users.show', $activity->user)}}">{{$activity->user->name}}</a>
         {{trans('messages.activity_' . $activity->action)}}
         <a href="{{$activity->linkToModel()}}">{{$activity->model->name}}</a>
@@ -25,7 +25,7 @@
 
 @if ($activity->getType() == 'file')
     <div class="activity-small">
-        <span class="avatar"><img src="{{$activity->user->avatar()}}" class="rounded-circle"/></span>
+        <span class="avatar"><img src="{{{{route('users.cover', [$activity->user, 'small'])}}}}" class="rounded-circle"/></span>
         <a href="{{route('users.show', $activity->user)}}">{{$activity->user->name}}</a>
         {{trans('messages.activity_' . $activity->action)}}
         <a href="{{$activity->linkToModel()}}">{{$activity->model->name}}</a>
@@ -38,7 +38,7 @@
 
 @if ($activity->getType() == 'comment')
     <div class="activity-small">
-        <span class="avatar"><img src="{{$activity->user->avatar()}}" class="rounded-circle"/></span>
+        <span class="avatar"><img src="{{{{route('users.cover', [$activity->user, 'small'])}}}}" class="rounded-circle"/></span>
         <a href="{{route('users.show', $activity->user)}}">{{$activity->user->name}}</a>
         {{trans('messages.activity_' . $activity->action)}}
         <a href="{{$activity->linkToModel()}}">{{$activity->model->discussion->name}}</a>
