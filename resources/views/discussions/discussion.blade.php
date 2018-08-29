@@ -1,6 +1,6 @@
 <div class="discussion @if ($discussion->unReadCount() > 0) unread @endif">
 
-  <div class="avatar"><img src="{{$discussion->user->avatar()}}" class="rounded-circle"/></div>
+  <div class="avatar"><img src="{{route('users.cover', [$discussion->user, 'small'])}}" class="rounded-circle"/></div>
   <div class="content w-100">
     <div class="d-flex justify-content-between align-items-start">
       <span class="name">

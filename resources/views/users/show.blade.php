@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="col-md-4">
-                    <img src="{{$user->cover()}}" class="rounded-circle img-fluid"/>
+                    <img src="{{route('users.cover', [$user, 'medium'])}}" class="img-fluid rounded-circle" style="width: 100%"/>
                 </div>
             </div>
 

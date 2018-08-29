@@ -79,7 +79,8 @@ class User extends Authenticatable
   {
     return [
       'username' => [
-        'source' => 'name'
+        'source' => 'name',
+        'reserved' => 'my'
       ]
     ];
   }
@@ -277,16 +278,6 @@ class User extends Authenticatable
   public function activities()
   {
     return $this->hasMany(\App\Activity::class)->orderBy('created_at', 'desc');
-  }
-
-  public function avatar()
-  {
-    return url('/users/'.$this->id.'/avatar');
-  }
-
-  public function cover()
-  {
-    return url('/users/'.$this->id.'/cover');
   }
 
   public function link()
