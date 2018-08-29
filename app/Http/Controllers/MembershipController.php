@@ -110,7 +110,6 @@ class MembershipController extends Controller
 
         return view('membership.leave')
         ->with('group', $group)
-        ->with('dialog', true)
         ->with('tab', 'settings')
         ->with('membership', $membership);
     }

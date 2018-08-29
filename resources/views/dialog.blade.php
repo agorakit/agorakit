@@ -25,14 +25,17 @@
 
 <body>
 
+  @include('partials.nav-simple')
 
   @include('partials.errors')
 
-  <div class="main-dialog dialog">
+  <div class="container main-container  main-dialog dialog">
+
     <div class="main">
       @yield('content')
     </div>
   </div>
+
 
   <div class="credits">
     {{trans('messages.made_with')}}
