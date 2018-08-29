@@ -28,19 +28,19 @@
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
                             @can('update', $comment)
-                                <a class="dropdown-item" href="{{ action('CommentController@edit', [$group->id, $discussion->id, $comment->id]) }}"><i class="fa fa-pencil"></i>
+                                <a class="dropdown-item" href="{{ action('CommentController@edit', [$group, $discussion, $comment]) }}"><i class="fa fa-pencil"></i>
                                     {{trans('messages.edit')}}
                                 </a>
                             @endcan
 
                             @can('delete', $comment)
-                                <a class="dropdown-item" href="{{ action('CommentController@destroyConfirm', [$group->id, $discussion->id, $comment->id]) }}"><i class="fa fa-trash"></i>
+                                <a class="dropdown-item" up-modal=".dialog" href="{{ action('CommentController@destroyConfirm', [$group, $discussion, $comment]) }}"><i class="fa fa-trash"></i>
                                     {{trans('messages.delete')}}
                                 </a>
                             @endcan
 
                             @if ($comment->revisionHistory->count() > 0)
-                                <a class="dropdown-item" href="{{action('CommentController@history', [$group->id, $discussion->id, $comment->id])}}"><i class="fa fa-history"></i> {{trans('messages.show_history')}}</a>
+                                <a class="dropdown-item" href="{{action('CommentController@history', [$group, $discussion, $comment])}}"><i class="fa fa-history"></i> {{trans('messages.show_history')}}</a>
                             @endif
                         </div>
                     </div>

@@ -1,14 +1,14 @@
-@extends('app')
+@extends('dialog')
 
 @section('content')
 
-@include('groups.tabs')
-<div class="tab_content">
-  <h1>Tag</h1>
+
+  <h1>Edit Tag of <em>{{$name}}</em></h1>
 
 
-  {!! Form::model($item, array('action' => ['TagController@update', $item->group->id, $item->id])) !!}
+  {!! Form::model($model, array('action' => ['TagController@update', $group, $type, $id])) !!}
 
+  @include('partials.tags_form')
 
 
   <div class="form-group">
@@ -19,6 +19,5 @@
   {!! Form::close() !!}
 
 
-</div>
 
 @endsection
