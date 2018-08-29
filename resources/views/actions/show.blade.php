@@ -7,7 +7,7 @@
 
 <div class="content">
 
-    <div class="meta">{{trans('messages.started_by')}} <span class="user"><a href="{{ route('users.show', [$action->user->id]) }}">{{ $action->user->name}}</a></span>, {{trans('messages.in')}} <a href="{{ route('groups.actions.index', [$group->id]) }}">{{ $action->group->name}}</a>        {{ $action->created_at->diffForHumans()}} </div>
+    <div class="meta">{{trans('messages.started_by')}} <span class="user"><a href="{{ route('users.show', [$action->user]) }}">{{ $action->user->name}}</a></span>, {{trans('messages.in')}} <a href="{{ route('groups.actions.index', [$group->id]) }}">{{ $action->group->name}}</a>        {{ $action->created_at->diffForHumans()}} </div>
 
     <div class="d-flex justify-content-between">
         <h3>

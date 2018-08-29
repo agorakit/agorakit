@@ -44,7 +44,7 @@
             </div>
 
             <div>
-                <a href="{{ route('users.show', [$file->user->id]) }}">
+                <a href="{{ route('users.show', [$file->user]) }}">
                     <i class="fa fa-user-circle"></i> {{ $file->user->name }}
                 </a>
             </div>

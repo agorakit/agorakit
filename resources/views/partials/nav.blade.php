@@ -126,8 +126,8 @@
             </a>
 
             <div class="dropdown-menu dropdown-menu-right" role="menu">
-                <a class="dropdown-item" href="{{route('users.show', Auth::user()->id)}}"><i class="fa fa-btn fa-user"></i> {{ trans('messages.profile') }}</a>
-                <a class="dropdown-item" href="{{route('users.edit', Auth::user()->id)}}"><i class="fa fa-btn fa-edit"></i> {{ trans('messages.edit_my_profile') }}</a>
+                <a class="dropdown-item" href="{{route('users.show', Auth::user())}}"><i class="fa fa-btn fa-user"></i> {{ trans('messages.profile') }}</a>
+                <a class="dropdown-item" href="{{route('users.edit', Auth::user())}}"><i class="fa fa-btn fa-edit"></i> {{ trans('messages.edit_my_profile') }}</a>
 
                 <a class="dropdown-item" href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                     <i class="fa fa-btn fa-sign-out"></i> {{ trans('messages.logout') }}
