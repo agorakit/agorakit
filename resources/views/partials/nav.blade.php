@@ -122,7 +122,7 @@
         <!-- User profile -->
         <div class="dropdown nav-item">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                <span class="avatar"><img src="{{Auth::user()->avatar()}}" class="rounded-circle" style="width:24px; height:24px"/></span> {{ Auth::user()->name }} <span class="caret"></span>
+                <span class="avatar"><img src="{{route('users.cover', [Auth::user(), 'small'])}}" class="rounded-circle" style="width:24px; height:24px"/></span> {{ Auth::user()->name }} <span class="caret"></span>
             </a>
 
             <div class="dropdown-menu dropdown-menu-right" role="menu">

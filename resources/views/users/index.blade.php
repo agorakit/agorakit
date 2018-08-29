@@ -32,7 +32,7 @@
         @foreach( $users as $user )
             <tr>
                 <td>
-                    <a href="{{ route('users.show', $user) }}"> <span class="avatar"><img src="{{$user->avatar()}}" class="rounded-circle"/></span> {{ $user->name }}</a>
+                    <a href="{{ route('users.show', $user) }}"> <span class="avatar"><img src="{{route('users.cover', [$user, 'small'])}}" class="rounded-circle"/></span> {{ $user->name }}</a>
                 </td>
 
                 <td>
@@ -91,7 +91,7 @@
                 <tr>
                     <td>
                         <a href="{{ route('users.show', $admin) }}">
-                            <span class="avatar"><img src="{{$admin->avatar()}}" class="rounded-circle"/></span>
+                            <span class="avatar"><img src="{{route('users.cover', [$admin, 'small'])}}" class="rounded-circle"/></span>
                             {{ $admin->name }}
                         </a>
                     </td>
@@ -111,7 +111,7 @@
                     <tr>
                         <td>
                             <a href="{{ route('users.show', $candidate) }}">
-                                <span class="avatar"><img src="{{$candidate->avatar()}}" class="rounded-circle"/></span>
+                                <span class="avatar"><img src="{{route('users.cover', [$candidate, 'small'])}}" class="rounded-circle"/></span>
                                 {{ $candidate->name }}
                             </a>
                         </td>
