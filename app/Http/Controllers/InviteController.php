@@ -157,7 +157,6 @@ class InviteController extends Controller
             return view('auth.register')
             ->with('email', $invite->email)
             ->with('invite_and_register', true)
-            ->with('dialog', true)
             ->with('group', $group)
             ->with('token', $token);
         }

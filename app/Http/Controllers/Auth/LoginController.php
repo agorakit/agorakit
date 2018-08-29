@@ -41,8 +41,7 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-        return view('auth.login')
-        ->with('dialog', true);
+        return view('auth.login');
     }
 
 

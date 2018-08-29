@@ -47,8 +47,7 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        return view('auth.register')
-        ->with('dialog', true);
+        return view('auth.register');
     }
 
 

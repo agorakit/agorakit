@@ -1,6 +1,6 @@
 
 
-@extends('app')
+@extends('dialog')
 
 @section('content')
 

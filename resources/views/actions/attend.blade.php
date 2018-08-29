@@ -1,4 +1,4 @@
-@extends('app')
+@extends('dialog')
 
 @section('content')
         <h1>{{trans('messages.attend_to')}} "<em>{{$action->name}}</em>"?</h1>
