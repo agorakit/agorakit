@@ -63,7 +63,7 @@
 
                                 <td>
                                     @unless (is_null ($file->user))
-                                        <a href="{{ route('users.show', $file->user->id) }}">{{ $file->user->name }}</a>
+                                        <a href="{{ route('users.show', $file->user) }}">{{ $file->user->name }}</a>
                                     @endunless
                                 </td>
 

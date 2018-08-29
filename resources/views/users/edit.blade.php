@@ -8,7 +8,7 @@
 
     <h1>{{trans('messages.modify')}} "{{ $user->name }}"</h1>
 
-    {!! Form::model($user, array('action' => ['UserController@update', $user->id], 'files' => true)) !!}
+    {!! Form::model($user, array('action' => ['UserController@update', $user], 'files' => true)) !!}
 
     @include('users.form')
 
@@ -20,7 +20,7 @@
 
 
 
-    <h3 class="mt-5">Delete my account</h3>
+    <h3 style="margin-top: 200px">Delete my account</h3>
     <div class="alert alert-warning">Please note that undoing this will be impossible after some time, and will require admin work</div>
       <a href="{{route('users.delete', $user)}}" class="btn btn-danger">Click here to delete your account</a>
 
