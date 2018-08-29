@@ -29,9 +29,9 @@
 
   @include('partials.errors')
 
-  <div class="container main-container  main-dialog dialog">
+  <div class="container main-container main-dialog">
 
-    <div class="main">
+    <div class="main dialog">
       @yield('content')
     </div>
   </div>
