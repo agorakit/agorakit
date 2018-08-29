@@ -32,15 +32,15 @@
         @foreach( $users as $user )
             <tr>
                 <td>
-                    <a href="{{ route('users.show', $user->id) }}"> <span class="avatar"><img src="{{$user->avatar()}}" class="rounded-circle"/></span> {{ $user->name }}</a>
+                    <a href="{{ route('users.show', $user) }}"> <span class="avatar"><img src="{{$user->avatar()}}" class="rounded-circle"/></span> {{ $user->name }}</a>
                 </td>
 
                 <td>
-                    <a href="{{ route('users.show', $user->id) }}">{{ $user->created_at->diffForHumans() }}</a>
+                    <a href="{{ route('users.show', $user) }}">{{ $user->created_at->diffForHumans() }}</a>
                 </td>
 
                 <td>
-                    <a href="{{ route('users.show', $user->id) }}">{{ $user->updated_at->diffForHumans() }}</a>
+                    <a href="{{ route('users.show', $user) }}">{{ $user->updated_at->diffForHumans() }}</a>
                 </td>
 
 

@@ -8,7 +8,7 @@
 
     <h1>{{trans('messages.modify')}} "{{ $user->name }}"</h1>
 
-    {!! Form::model($user, array('action' => ['UserController@update', $user->id], 'files' => true)) !!}
+    {!! Form::model($user, array('action' => ['UserController@update', $user], 'files' => true)) !!}
 
     @include('users.form')
 

@@ -9,7 +9,7 @@
             <div class="avatar mr-3"><img src="{{$comment->user->avatar()}}" class="rounded-circle"/></div>
 
             <div class="w-100">
-                <div class="user"><a href="{{ route('users.show', [$comment->user->id]) }}">{{$comment->user->name}}</a></div>
+                <div class="user"><a href="{{ route('users.show', [$comment->user]) }}">{{$comment->user->name}}</a></div>
 
                 <div class="body">{!! filter($comment->body) !!}</div>
 

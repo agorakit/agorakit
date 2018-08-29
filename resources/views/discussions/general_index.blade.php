@@ -20,7 +20,7 @@
 
     <td>
       @unless (is_null ($discussion->user))
-      <a href="{{ route('users.show', $discussion->user->id) }}">{{ $discussion->user->name }}</a>
+      <a href="{{ route('users.show', $discussion->user) }}">{{ $discussion->user->name }}</a>
       @endunless
     </td>
 
