@@ -211,7 +211,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('map', 'GroupMapController@index')->name('.map');
         Route::get('map.geojson', 'GroupMapController@geoJson')->name('.map.geojson');
 
-        //
 
         Route::get('{type}/{id}/tag', 'TagController@edit')->name('.tags.edit');
         Route::post('{type}/{id}/tag', 'TagController@update')->name('.tags.store');
