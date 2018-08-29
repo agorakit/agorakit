@@ -117,6 +117,7 @@ class UserController extends Controller
       $previous_email = $user->email;
       $user->email = $request->input('email');
       $user->body = $request->input('body');
+      $user->username = $request->input('username');
 
       if ($user->address != $request->input('address')) {
         // we need to update user address and geocode it
@@ -150,7 +151,7 @@ class UserController extends Controller
       // validation
       if ($user->isInvalid()) {
         // Oops.
-        return redirect()->route('users.edit', $user->id)
+        return redirect()->route('users.edit', $user)
         ->withErrors($user->getErrors())
         ->withInput();
       }
@@ -158,8 +159,7 @@ class UserController extends Controller
       // handle cover
       if ($request->hasFile('cover')) {
         Storage::disk('local')->makeDirectory('users/'.$user->id);
-        Image::make($request->file('cover'))->widen(500)->save(storage_path().'/app/users/'.$user->id.'/cover.jpg');
-        Image::make($request->file('cover'))->fit(128, 128)->save(storage_path().'/app/users/'.$user->id.'/thumbnail.jpg');
+        Image::make($request->file('cover'))->widen(800)->save(storage_path().'/app/users/'.$user->id.'/cover.jpg');
       }
 
       // handle email change : if a user changes his email, we set him/her to unverified, and send a new verification email
@@ -173,7 +173,7 @@ class UserController extends Controller
 
       flash(trans('messages.ressource_updated_successfully'));
 
-      return redirect()->route('users.show', [$user->id]);
+      return redirect()->route('users.show', $user);
     } else {
       abort(403);
     }
@@ -229,7 +229,7 @@ class UserController extends Controller
         abort(500, 'Do not delete anonymous user, you fool :-)');
       }
 
-      $anonymous = \App\User::where('email', 'anonymous@agorakit.org')->first();
+      $anonymous = \App\User::getAnonymousUser();
 
       if (is_null($anonymous)) {
         abort(500, 'Can\'t load the anonymous user model, please run all migrations to create the anynmous special system user');

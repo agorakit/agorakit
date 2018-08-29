@@ -4,23 +4,20 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddAnonymousUser extends Migration
+class UsersFillUsernames extends Migration
 {
     /**
-     * Run the migrations.
+     * Run the migrations : run a save on each user to create a username from their name
      *
      * @return void
      */
     public function up()
     {
-        //
-        $anonymous = \App\User::firstOrNew(['email' => 'anonymous@agorakit.org']);
-        $anonymous->name = 'Anonymous';
-        $anonymous->body = 'Anonymous is a system user';
-        $anonymous->verified = 1;
-
-        $anonymous->save();
-
+        foreach (\App\User::all() as $user)
+        {
+          $user->timestamps = false;
+          $user->save();
+        }
     }
 
     /**

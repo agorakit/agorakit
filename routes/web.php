@@ -131,10 +131,11 @@ Route::group(['middleware' => ['web']], function () {
 
 
     // Users
+
     Route::get('users/{user}', 'UserController@show')->name('users.show');
 
-    Route::get('users/{user}/cover', 'UserController@cover')->name('users.cover');
-    Route::get('users/{user}/avatar', 'UserController@avatar')->name('users.avatar');
+    Route::get('users/{user}/cover/{size}', 'UserCoverController@show')->name('users.cover');
+  //  Route::get('users/{user}/avatar', 'UserController@avatar')->name('users.avatar');
 
     Route::get('users/{user}/sendverification', 'UserController@sendVerificationAgain')->name('users.sendverification');
 
@@ -226,7 +227,7 @@ Route::group(['middleware' => ['web']], function () {
 
 
         // Comments
-        Route::post('discussions/{discussion}/reply', 'CommentController@reply')->name('.discussions.reply');
+        Route::post('discussions/{discussion}/reply', 'CommentController@store')->name('.discussions.reply');
         Route::get('discussions/{discussion}/comments/{comment}/edit', 'CommentController@edit')->name('.discussions.comments.edit');
         Route::post('discussions/{discussion}/comments/{comment}', 'CommentController@update')->name('.discussions.comments.update');
         Route::get('discussions/{discussion}/comments/{comment}/delete', 'CommentController@destroyConfirm')->name('.discussions.comments.deleteconfirm');

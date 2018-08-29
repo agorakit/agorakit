@@ -37,19 +37,19 @@
                 @foreach( $users as $user )
                     <tr>
                         <td>
-                            <a href="{{ route('users.show', $user->id) }}"> {{ $user->name }}</a>
+                            <a href="{{ route('users.show', $user) }}"> {{ $user->name }}</a>
                         </td>
 
                         <td>
-                            <a href="{{ route('users.show', $user->id) }}"> {{ $user->email }}</a>
+                            <a href="{{ route('users.show', $user) }}"> {{ $user->email }}</a>
                         </td>
 
                         <td data-order="{{ $user->created_at }}">
-                            <a href="{{ route('users.show', $user->id) }}">{{ $user->created_at->diffForHumans() }}</a>
+                            <a href="{{ route('users.show', $user) }}">{{ $user->created_at->diffForHumans() }}</a>
                         </td>
 
                         <td data-order="{{ $user->updated_at }}">
-                            <a href="{{ route('users.show', $user->id) }}">{{ $user->updated_at->diffForHumans() }}</a>
+                            <a href="{{ route('users.show', $user) }}">{{ $user->updated_at->diffForHumans() }}</a>
                         </td>
 
                         <td>
@@ -69,7 +69,7 @@
                         </td>
 
                         <td>
-                            <a href="{{ route('users.edit', $user->id) }}">{{trans('messages.edit')}}</a>
+                            <a href="{{ route('users.edit', $user) }}">{{trans('messages.edit')}}</a>
                         </td>
 
                     </tr>

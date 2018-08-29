@@ -1,5 +1,5 @@
 <div class="user">
-    <div class="avatar"><img src="{{$user->avatar()}}" class="rounded-circle"/></div>
+    <div class="avatar"><img src="{{route('users.cover', [$user, 'small'])}}" class="rounded-circle"/></div>
     <div class="content w-100">
         <a href="{{ route('users.show', [$user]) }}">
             <div class="d-flex justify-content-between align-items-center">
