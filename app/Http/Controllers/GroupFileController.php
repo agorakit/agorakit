@@ -101,8 +101,10 @@ class GroupFileController extends Controller
 
     public function createLink(Request $request, Group $group)
     {
+        $tags = $group->tagsUsed();
+
         return view('files.createlink')
-        ->with('all_tags', \App\File::allTags())
+        ->with('all_tags', $tags)
         ->with('group', $group)
         ->with('tab', 'files');
     }

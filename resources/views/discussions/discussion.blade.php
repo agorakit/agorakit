@@ -7,15 +7,23 @@
         <a href="{{ route('groups.discussions.show', [$discussion->group_id, $discussion->id]) }}">
           {{ $discussion->name }}
         </a>
-        @if ($discussion->tags->count() > 0)
-          @foreach ($discussion->tags as $tag)
-            <span class="badge tag">{{$tag->name}}</span>
-          @endforeach
-        @endif
       </span>
       @if ($discussion->unReadCount() > 0)
         <div class="badge-unread">{{ $discussion->unReadCount() }}</div>
       @endif
+    </div>
+
+    <div class="tags">
+      @if ($discussion->tags->count() > 0)
+        @foreach ($discussion->tags as $tag)
+          <span class="badge tag">{{$tag->name}}</span>
+        @endforeach
+      @endif
+
+
+      @can('update', $discussion)
+        <a class="small" up-modal=".dialog" href="{{ route('groups.tags.edit', [$discussion->group, 'discussions', $discussion]) }}">Edit tags</a>
+      @endcan
     </div>
 
     <span class="summary">
