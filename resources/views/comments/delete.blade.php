@@ -5,7 +5,7 @@
 
   <p>{{strip_tags($comment->body)}}</p>
 
-  {!! Form::model($comment, array('method' => 'DELETE', 'action' => ['CommentController@destroy', $group->id, $discussion->id, $comment->id])) !!}
+  {!! Form::model($comment, array('method' => 'DELETE', 'action' => ['CommentController@destroy', $group, $discussion, $comment])) !!}
 
 
   <div class="mt-5 d-flex justify-content-between align-items-center">

@@ -4,7 +4,7 @@
   <div class="content w-100">
     <div class="d-flex justify-content-between align-items-start">
       <span class="name">
-        <a href="{{ route('groups.discussions.show', [$discussion->group_id, $discussion->id]) }}">
+        <a href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}">
           {{ $discussion->name }}
         </a>
       </span>
@@ -27,7 +27,7 @@
     </div>
 
     <span class="summary">
-      <a href="{{ route('groups.discussions.show', [$discussion->group_id, $discussion->id]) }}">
+      <a href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}">
         {{summary($discussion->body) }}
       </a>
     </span>

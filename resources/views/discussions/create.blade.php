@@ -35,7 +35,7 @@
             {!! Form::close() !!}
 
         @else
-            {!! Form::open(array('action' => ['GroupDiscussionController@store', $group->id])) !!}
+            {!! Form::open(array('action' => ['GroupDiscussionController@store', $group])) !!}
 
             @include('discussions.form')
 

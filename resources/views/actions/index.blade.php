@@ -12,7 +12,7 @@
     $(document).ready(function() {
         $('#calendar').fullCalendar({
             lang: '{{App::getLocale()}}',
-            events: '{{route('groups.actions.index.json', $group->id)}}',
+            events: '{{route('groups.actions.index.json', $group)}}',
             header: {
                 left: 'prev,next',
                 center: 'title',
@@ -31,7 +31,7 @@
                         end: end
                     };
                     $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-                    window.location.href = "{{ route('groups.actions.create', $group->id ) }}?start=" + encodeURIComponent(start.format('YYYY-MM-DD HH:mm')) + "&stop=" + encodeURIComponent(end.format('YYYY-MM-DD HH:mm')) + "&title=" + encodeURIComponent(title);
+                    window.location.href = "{{ route('groups.actions.create', $group ) }}?start=" + encodeURIComponent(start.format('YYYY-MM-DD HH:mm')) + "&stop=" + encodeURIComponent(end.format('YYYY-MM-DD HH:mm')) + "&title=" + encodeURIComponent(title);
                 }
                 $('#calendar').fullCalendar('unselect');
             },
@@ -82,7 +82,7 @@
 
                 @can('create-action', $group)
                     <div class="ml-auto">
-                        <a class="btn btn-primary" href="{{ route('groups.actions.create', $group->id ) }}">
+                        <a class="btn btn-primary" href="{{ route('groups.actions.create', $group ) }}">
                             <i class="fa fa-plus"></i> {{trans('action.create_one_button')}}
                         </a>
                     </div>
@@ -97,7 +97,7 @@
         <div id="calendar"></div>
 
 
-        <p><a href="{{action('GroupIcalController@index', $group->id)}}">Téléchargez le calendrier de ce groupe au format iCal</a></p>
+        <p><a href="{{action('GroupIcalController@index', $group)}}">Téléchargez le calendrier de ce groupe au format iCal</a></p>
 
 
         <div id="fullCalModal" class="modal fade">

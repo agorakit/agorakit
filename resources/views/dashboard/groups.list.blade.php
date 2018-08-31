@@ -63,7 +63,7 @@
                             <tr class="tag-group @foreach ($group->tags as $tag)tag-{{$tag->tag_id}} @endforeach">
                                 <td class="avatar"><span class="avatar"><img src="{{ route('groups.cover.small', $group)}}" class="rounded"/></span></td>
                                 <td class="content">
-                                    <a href="{{ route('groups.show',  $group->id) }}">
+                                    <a href="{{ route('groups.show',  $group) }}">
                                         <span class="name">{{ $group->name }}
 
                                             @if ($group->isOpen())

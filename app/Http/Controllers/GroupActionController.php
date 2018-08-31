@@ -294,7 +294,7 @@ class GroupActionController extends Controller
 
         $action->save();
 
-        return redirect()->route('groups.actions.show', [$action->group->id, $action->id]);
+        return redirect()->route('groups.actions.show', [$action->group, $action]);
     }
 
     /**
@@ -329,7 +329,7 @@ class GroupActionController extends Controller
             $action->delete();
             flash(trans('messages.ressource_deleted_successfully'));
 
-            return redirect()->route('groups.actions.index', [$group->id]);
+            return redirect()->route('groups.actions.index', [$group]);
         } else {
             abort(403);
         }

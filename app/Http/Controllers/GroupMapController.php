@@ -44,7 +44,7 @@ class GroupMapController extends Controller
       $marker = array(
         'type' => 'Feature',
         'properties' => array(
-          'title' => '<a href="' . route('users.show', $user->id) . '">' . $user->name . '</a>',
+          'title' => '<a href="' . route('users.show', $user) . '">' . $user->name . '</a>',
           'description' => summary($user->body) ,
           'marker-color' => '#f95311',
           'marker-symbol' => 'pitch',
@@ -65,7 +65,7 @@ class GroupMapController extends Controller
       $marker = array(
         'type' => 'Feature',
         'properties' => array(
-          'title' => '<a href="' . route('groups.actions.show', [$action->group->id, $action->id]) . '">' . $action->name . '</a>',
+          'title' => '<a href="' . route('groups.actions.show', [$action->group, $action]) . '">' . $action->name . '</a>',
           'description' => summary($action->body) ,
           'marker-color' => '#4edd1f',
           'marker-symbol' => 'rocket',
@@ -90,7 +90,7 @@ class GroupMapController extends Controller
       $marker = array(
         'type' => 'Feature',
         'properties' => array(
-          'title' => '<a href="' . route('groups.show', $group->id) . '">' . $group->name . '</a>',
+          'title' => '<a href="' . route('groups.show', $group) . '">' . $group->name . '</a>',
           'description' => summary($group->body) ,
           'marker-color' => '#1f6edd',
           'marker-symbol' => 'warehouse',

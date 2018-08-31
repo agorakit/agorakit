@@ -11,7 +11,7 @@
         </em>
 
 
-        {!! Form::model($discussion, array('method' => 'DELETE', 'action' => ['GroupDiscussionController@destroy', $group->id, $discussion->id])) !!}
+        {!! Form::model($discussion, array('method' => 'DELETE', 'action' => ['GroupDiscussionController@destroy', $group, $discussion])) !!}
 
 
 

@@ -193,7 +193,7 @@ class GroupController extends Controller
 
         flash(trans('messages.ressource_created_successfully'));
 
-        return redirect()->action('MembershipController@update', [$group->id]);
+        return redirect()->action('MembershipController@update', [$group]);
     }
 
     /**
@@ -256,14 +256,14 @@ class GroupController extends Controller
         // validation
         if ($group->isInvalid()) {
             // Oops.
-            return redirect()->route('groups.edit', $group->id)
+            return redirect()->route('groups.edit', $group)
             ->withErrors($group->getErrors())
             ->withInput();
         }
 
         // handle cover
         if ($request->hasFile('cover')) {
-            Storage::disk('local')->makeDirectory('groups/'.$group->id);
+            Storage::disk('local')->makeDirectory('groups/'.$group);
             Image::make($request->file('cover'))->widen(1600)->save(storage_path().'/app/groups/'.$group->id.'/cover.jpg');
         }
 
@@ -271,7 +271,7 @@ class GroupController extends Controller
 
         flash(trans('messages.ressource_updated_successfully'));
 
-        return redirect()->route('groups.show', [$group->id]);
+        return redirect()->route('groups.show', [$group]);
     }
 
     public function destroyConfirm(Request $request, Group $group)

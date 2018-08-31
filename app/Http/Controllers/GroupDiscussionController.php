@@ -95,7 +95,7 @@ class GroupDiscussionController extends Controller
 
     if (!$group->discussions()->save($discussion)) {
       // Oops.
-      return redirect()->route('groups.discussions.create', $group->id)
+      return redirect()->route('groups.discussions.create', $group)
       ->withErrors($discussion->getErrors())
       ->withInput();
     }
@@ -182,7 +182,7 @@ class GroupDiscussionController extends Controller
 
     flash(trans('messages.ressource_updated_successfully'));
 
-    return redirect()->route('groups.discussions.show', [$discussion->group->id, $discussion->id]);
+    return redirect()->route('groups.discussions.show', [$discussion->group, $discussion]);
   }
 
   public function destroyConfirm(Request $request, Group $group, Discussion $discussion)

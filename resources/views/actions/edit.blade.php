@@ -7,7 +7,7 @@
   <h1>Modifer une action</h1>
 
 
-  {!! Form::model($action, array('action' => ['GroupActionController@update', $action->group->id, $action->id])) !!}
+  {!! Form::model($action, array('action' => ['GroupActionController@update', $action->group, $action])) !!}
 
   @include('actions.form')
 
