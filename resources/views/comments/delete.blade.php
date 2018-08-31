@@ -8,7 +8,7 @@
   {!! Form::model($comment, array('method' => 'DELETE', 'action' => ['CommentController@destroy', $group->id, $discussion->id, $comment->id])) !!}
 
 
-  <div class="d-flex justify-content-end">
+  <div class="mt-5 d-flex justify-content-between align-items-center">
     {!! Form::submit(trans('messages.delete_confirm_button'), ['class' => 'btn btn-danger']) !!}
   </div>
 

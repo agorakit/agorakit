@@ -9,7 +9,7 @@
     </div>
     <div class="summary mb-4">{{ summary($action->body) }}</div>
 
-    <div class="d-flex justify-content-end">
+    <<div class="mt-5 d-flex justify-content-between align-items-center">
         {!! Form::open(['route' => ['groups.actions.unattend', $group, $action]]) !!}
         {!! Form::submit(trans('messages.unattend'), ['class' => 'btn btn-primary']) !!}
         {!! Form::close() !!}

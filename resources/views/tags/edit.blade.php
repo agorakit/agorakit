@@ -11,7 +11,7 @@
   @include('partials.tags_form')
 
 
-  <div class="form-group">
+  <div class="mt-5 d-flex justify-content-between align-items-center">
     {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-primary form-control']) !!}
   </div>
 

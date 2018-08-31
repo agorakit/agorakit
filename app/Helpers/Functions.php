@@ -39,7 +39,7 @@ function safe_html($content)
 
 
 /**
- * Highlight and link to user profiles in the passed $content
+ * Highlight and link to @user profiles in the passed $content
  */
 function highlightMentions($content)
 {
