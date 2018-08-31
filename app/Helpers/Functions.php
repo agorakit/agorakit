@@ -1,7 +1,9 @@
 <?php
+// TODO refactor some of this using a content filter helper class or something
+
 
 /**
-* Returns a summary of thep rovided text.
+* Returns a summary of the provided text.
 *
 * @param [type] $text   $text to be summarized
 * @param int    $length lenght in chars to keep
@@ -34,6 +36,16 @@ function safe_html($content)
 {
     return strip_tags($content, '<br><p><a><li><img><hr><em><strong><i><code><h1><h2><h3><h4><ul><ol>');
 }
+
+
+/**
+ * Highlight and link to user profiles in the passed $content
+ */
+function highlightMentions($content)
+{
+  return preg_replace("#(?<!\w)@([\w_\-\.]+)#", '<a href="/users/$1">@$1</a> ', $content);
+}
+
 
 /**
 * returns the value of $name setting as stored in DB.
