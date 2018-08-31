@@ -11,7 +11,7 @@
         <p>{{trans('messages.create_link_help')}}</p>
 
 
-        {!! Form::open(['url' => route('groups.files.createlink', $group->id)]) !!}
+        {!! Form::open(['url' => route('groups.files.createlink', $group)]) !!}
 
 
         <div class="form-group">

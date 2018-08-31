@@ -29,7 +29,7 @@
                     <div class="dropdown-divider"></div>
 
                     @forelse (Auth::user()->groups()->orderBy('name')->get() as $group)
-                        <a class="dropdown-item" href="{{ route('groups.show', $group->id)}}">{{$group->name}}</a>
+                        <a class="dropdown-item" href="{{ route('groups.show', $group)}}">{{$group->name}}</a>
                     @empty
                         <a class="dropdown-item" href="{{ route('index')}}">{{ trans('membership.not_subscribed_to_group_yet') }}</a>
                     @endforelse

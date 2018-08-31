@@ -18,7 +18,7 @@
                         {{trans('messages.group_admin_users')}} :
 
                         @foreach ($admins as $admin)
-                            <a href="{{ route('users.show', [$admin->id]) }}">{{$admin->name}}</a>
+                            <a href="{{ route('users.show', [$admin]) }}">{{$admin->name}}</a>
                         @endforeach
                     @endif
 
@@ -36,7 +36,7 @@
                 <p>
                     @can('history', $group)
                         @if ($group->revisionHistory->count() > 0)
-                            <a href="{{route('groups.history', $group->id)}}">
+                            <a href="{{route('groups.history', $group)}}">
                                 <i class="fa fa-history"></i>
                                 {{trans('messages.show_history')}}
                             </a>
@@ -47,7 +47,7 @@
 
             <div class="col-md-6">
               @if ($group->hasCover())
-                <img class="img-fluid rounded" src="{{route('groups.cover.large', $group->id)}}"/>
+                <img class="img-fluid rounded" src="{{route('groups.cover.large', $group)}}"/>
               @else
                 <img class="img-fluid rounded" src="/images/group.svg"/>
               @endif
@@ -63,7 +63,7 @@
                 @if($discussions->count() > 0)
                     <div class="col-md-7">
                         <h2 class="mb-4">
-                            <a href="{{ route('groups.discussions.index', $group->id) }}">{{trans('group.latest_discussions')}}</a>
+                            <a href="{{ route('groups.discussions.index', $group) }}">{{trans('group.latest_discussions')}}</a>
                             @can('create-discussion', $group)
                                 <a class="btn btn-sm btn-outline-primary" href="{{ route('groups.discussions.create', $group) }}">
                                     <i class="fa fa-plus"></i> {{trans('discussion.create_one_button')}}
@@ -83,9 +83,9 @@
                 @if($actions->count() > 0)
                     <div class="col-md-5">
                         <h2 class="mb-4">
-                            <a href="{{ route('groups.actions.index', $group->id) }}">{{trans('messages.agenda')}}</a>
+                            <a href="{{ route('groups.actions.index', $group) }}">{{trans('messages.agenda')}}</a>
                             @can('create-action', $group)
-                                <a class="btn btn-sm btn-outline-primary" href="{{ route('groups.actions.create', $group->id ) }}">
+                                <a class="btn btn-sm btn-outline-primary" href="{{ route('groups.actions.create', $group ) }}">
                                     <i class="fa fa-plus"></i> {{trans('action.create_one_button')}}
                                 </a>
                             @endcan
@@ -104,7 +104,7 @@
 
         @if ($files)
             @if($files->count() > 0)
-                <h2 class="mb-4 mt-5"><a href="{{ route('groups.files.index', $group->id) }}">{{trans('group.latest_files')}}</a></h2>
+                <h2 class="mb-4 mt-5"><a href="{{ route('groups.files.index', $group) }}">{{trans('group.latest_files')}}</a></h2>
                 <div class="files">
                     @forelse( $files as $file )
                         @include('files.file')

@@ -10,8 +10,8 @@
 
 
     <div>
-        <a href="{{ route('groups.files.download', [$group->id, $file->id]) }}">
-            <img src="{{ route('groups.files.preview', [$group->id, $file->id]) }}"/>
+        <a href="{{ route('groups.files.download', [$group, $file]) }}">
+            <img src="{{ route('groups.files.preview', [$group, $file]) }}"/>
         </a>
     </div>
 
@@ -33,25 +33,25 @@
 
     <div>
         @if ($file->isLink())
-            <a class="btn btn-primary" href="{{ route('groups.files.download', [$group->id, $file->id]) }}" target="_blank">
+            <a class="btn btn-primary" href="{{ route('groups.files.download', [$group, $file]) }}" target="_blank">
                 {{trans('messages.visit')}})
             </a>
         @else
-            <a class="btn btn-primary" href="{{ route('groups.files.download', [$group->id, $file->id]) }}">
+            <a class="btn btn-primary" href="{{ route('groups.files.download', [$group, $file]) }}">
                 {{trans('messages.download')}}
             </a>
         @endif
 
 
         @can('update', $file)
-            <a class="btn btn-secondary" href="{{ route('groups.files.edit', [$group->id, $file->id]) }}">
+            <a class="btn btn-secondary" href="{{ route('groups.files.edit', [$group, $file]) }}">
                 <i class="fa fa-pencil"></i>
                 {{trans('messages.edit')}}
             </a>
         @endcan
 
         @can('delete', $file)
-            <a class="btn btn-secondary" href="{{ route('groups.files.deleteconfirm', [$group->id, $file->id]) }}">
+            <a class="btn btn-secondary" href="{{ route('groups.files.deleteconfirm', [$group, $file]) }}">
                 <i class="fa fa-trash"></i>
                 {{trans('messages.delete')}}
             </a>
