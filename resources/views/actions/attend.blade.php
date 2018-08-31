@@ -9,8 +9,8 @@
 
         {!! Form::open(['route' => ['groups.actions.attend', $group, $action]]) !!}
 
-        <div class="d-flex justify-content-end">
-            <a class="btn btn-link mr-4" href="{{ route('groups.actions.show', [$group, $action]) }}" up-close class="ml-4">{{trans('messages.cancel')}}</a>
+        <div class="mt-5 d-flex justify-content-between align-items-center">
+            <a class="btn btn-link" href="{{ route('groups.actions.show', [$group, $action]) }}" up-close class="ml-4">{{trans('messages.cancel')}}</a>
             {!! Form::submit(trans('messages.attend'), ['class' => 'btn btn-primary']) !!}
         </div>
         {!! Form::close() !!}

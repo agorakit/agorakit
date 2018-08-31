@@ -30,7 +30,7 @@
             @endcan
 
             @can('delete', $discussion)
-              <a class="dropdown-item" href="{{ route('groups.discussions.deleteconfirm', [$group->id, $discussion->id]) }}">
+              <a up-modal=".dialog" class="dropdown-item" href="{{ route('groups.discussions.deleteconfirm', [$group->id, $discussion->id]) }}">
                 <i class="fa fa-trash"></i>
                 {{trans('messages.delete')}}
               </a>

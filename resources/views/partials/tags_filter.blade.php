@@ -8,10 +8,10 @@
             @endif
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a up-target="items" class="dropdown-item" href="{{request()->fullUrlWithQuery(['tag' => null, 'page' => null])}}">{{trans('messages.show_all')}}</a>
+            <a up-target=".items" class="dropdown-item" href="{{request()->fullUrlWithQuery(['tag' => null, 'page' => null])}}">{{trans('messages.show_all')}}</a>
             <div class="dropdown-divider"></div>
             @foreach ($tags as $id=>$tag)
-                <a up-target="items" class="dropdown-item" href="{{request()->fullUrlWithQuery(['tag' => $tag , 'page' => null])}}">{{$tag}}</a>
+                <a up-target=".items" class="dropdown-item" href="{{request()->fullUrlWithQuery(['tag' => $tag , 'page' => null])}}">{{$tag}}</a>
             @endforeach
         </div>
     </div>
