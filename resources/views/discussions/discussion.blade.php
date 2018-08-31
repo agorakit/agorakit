@@ -8,9 +8,48 @@
           {{ $discussion->name }}
         </a>
       </span>
-      @if ($discussion->unReadCount() > 0)
-        <div class="badge-unread">{{ $discussion->unReadCount() }}</div>
-      @endif
+
+      <div class="d-flex justify-content-right align-items-start">
+        @if ($discussion->unReadCount() > 0)
+          <div class="badge-unread">{{ $discussion->unReadCount() }}</div>
+        @endif
+
+
+
+        @can('update', $discussion)
+          <div class="ml-4 dropdown">
+            <button class="btn btn-outline-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-wrench" aria-hidden="true"></i>
+            </button>
+
+
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+              @can('update', $discussion)
+                <a class="dropdown-item" href="{{ route('groups.discussions.edit', [$discussion->group, $discussion]) }}">
+                  <i class="fa fa-pencil"></i>
+                  {{trans('messages.edit')}}
+                </a>
+              @endcan
+
+              <a class="dropdown-item" up-modal=".dialog" href="{{ route('groups.tags.edit', [$discussion->group, 'discussions', $discussion]) }}">
+                Edit tags
+              </a>
+
+              @can('delete', $discussion)
+                <a up-modal=".dialog" class="dropdown-item" href="{{ route('groups.discussions.deleteconfirm', [$discussion->group, $discussion]) }}">
+                  <i class="fa fa-trash"></i>
+                  {{trans('messages.delete')}}
+                </a>
+              @endcan
+
+              @if ($discussion->revisionHistory->count() > 0)
+                <a class="dropdown-item" href="{{route('groups.discussions.history', [$discussion->group, $discussion])}}"><i class="fa fa-history"></i> {{trans('messages.show_history')}}</a>
+              @endif
+            </div>
+          </div>
+        </div>
+      @endcan
+
     </div>
 
     <div class="tags">
@@ -19,11 +58,6 @@
           <span class="badge tag">{{$tag->name}}</span>
         @endforeach
       @endif
-
-
-      @can('update', $discussion)
-        <a class="small" up-modal=".dialog" href="{{ route('groups.tags.edit', [$discussion->group, 'discussions', $discussion]) }}">Edit tags</a>
-      @endcan
     </div>
 
     <span class="summary">
