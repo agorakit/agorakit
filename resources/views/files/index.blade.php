@@ -13,7 +13,7 @@
 
             <div class="ml-auto">
                 @can('create-file', $group)
-                    <a class="btn btn-primary" href="{{ route('groups.files.create', $group->id ) }}">
+                    <a class="btn btn-primary" href="{{ route('groups.files.create', $group ) }}">
                         <i class="fa fa-file"></i>
                         {{trans('messages.create_file_button')}}
                     </a>

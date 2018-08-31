@@ -15,7 +15,7 @@
         <h2>{{trans('messages.files_in_this_group')}}
 
             @can('create-file', $group)
-                <a class="btn btn-primary btn-xs" href="{{ route('groups.files.create', $group->id ) }}">
+                <a class="btn btn-primary btn-xs" href="{{ route('groups.files.create', $group ) }}">
                     <i class="fa fa-plus"></i>
                     {{trans('messages.create_file_button')}}
                 </a>
@@ -37,12 +37,12 @@
                 <tbody>
                     @forelse( $files as $file )
                         <td>
-                            <a href="{{ route('groups.files.show', [$group->id, $file->id]) }}"><img src="{{ route('groups.files.thumbnail', [$group->id, $file->id]) }}"/></a>
+                            <a href="{{ route('groups.files.show', [$group, $file]) }}"><img src="{{ route('groups.files.thumbnail', [$group, $file]) }}"/></a>
                         </td>
 
                         <td>
                             <div class="ellipsis" style="max-width: 30em">
-                                <a  href="{{ route('groups.files.show', [$group->id, $file->id]) }}">{{ $file->name }}</a>
+                                <a  href="{{ route('groups.files.show', [$group, $file]) }}">{{ $file->name }}</a>
                             </div>
                         </td>
 
@@ -50,12 +50,12 @@
 
                         <td>
                             @can('edit', $file)
-                                <a class="btn btn-primary btn-xs" href="{{ route('groups.files.edit', [$group->id, $file->id]) }}"><i class="fa fa-edit"></i>
+                                <a class="btn btn-primary btn-xs" href="{{ route('groups.files.edit', [$group, $file]) }}"><i class="fa fa-edit"></i>
                                     {{trans('messages.edit')}}</a>
                                 @endcan
 
                                 @can('delete', $file)
-                                    <a class="btn btn-warning btn-xs" href="{{ route('groups.files.deleteconfirm', [$group->id, $file->id]) }}"><i class="fa fa-trash"></i>
+                                    <a class="btn btn-warning btn-xs" href="{{ route('groups.files.deleteconfirm', [$group, $file]) }}"><i class="fa fa-trash"></i>
                                         {{trans('messages.delete')}}</a>
                                     @endcan
 

@@ -8,7 +8,7 @@
 
   <p>{{$file->name}}</p>
 
-  {!! Form::model($file, array('method' => 'DELETE', 'action' => ['GroupFileController@destroy', $group->id, $file->id])) !!}
+  {!! Form::model($file, array('method' => 'DELETE', 'action' => ['GroupFileController@destroy', $group, $file])) !!}
 
 
 
