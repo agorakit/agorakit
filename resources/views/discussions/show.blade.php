@@ -23,21 +23,21 @@
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
 
             @can('update', $discussion)
-              <a class="dropdown-item" href="{{ route('groups.discussions.edit', [$group->id, $discussion->id]) }}">
+              <a class="dropdown-item" href="{{ route('groups.discussions.edit', [$group, $discussion]) }}">
                 <i class="fa fa-pencil"></i>
                 {{trans('messages.edit')}}
               </a>
             @endcan
 
             @can('delete', $discussion)
-              <a up-modal=".dialog" class="dropdown-item" href="{{ route('groups.discussions.deleteconfirm', [$group->id, $discussion->id]) }}">
+              <a up-modal=".dialog" class="dropdown-item" href="{{ route('groups.discussions.deleteconfirm', [$group, $discussion]) }}">
                 <i class="fa fa-trash"></i>
                 {{trans('messages.delete')}}
               </a>
             @endcan
 
             @if ($discussion->revisionHistory->count() > 0)
-              <a class="dropdown-item" href="{{route('groups.discussions.history', [$group->id, $discussion->id])}}"><i class="fa fa-history"></i> {{trans('messages.show_history')}}</a>
+              <a class="dropdown-item" href="{{route('groups.discussions.history', [$group, $discussion])}}"><i class="fa fa-history"></i> {{trans('messages.show_history')}}</a>
             @endif
           </div>
         </div>

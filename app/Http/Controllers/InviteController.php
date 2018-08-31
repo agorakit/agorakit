@@ -123,13 +123,13 @@ class InviteController extends Controller
         if (!$invite) {
             flash(trans('messages.invite_not_found'));
 
-            return redirect()->route('groups.show', $group->id);
+            return redirect()->route('groups.show', $group);
         }
 
         if (isset($invite->claimed_at)) {
             flash(trans('messages.invite_already_used').' ('.$invite->claimed_at.')');
 
-            return redirect()->route('groups.show', $group->id);
+            return redirect()->route('groups.show', $group);
         }
 
         $user = \App\User::where('email', $invite->email)->first();
@@ -149,7 +149,7 @@ class InviteController extends Controller
 
             flash(trans('messages.you_are_now_a_member_of_this_group'));
 
-            return redirect()->route('groups.show', $group->id);
+            return redirect()->route('groups.show', $group);
         } else { // if user doesn't exists, we have the opportunity to create, login and validate email in one go (since we have the invite token)
             Auth::logout();
             flash(trans('messages.you_dont_have_an_account_create_one_now'));
@@ -198,6 +198,6 @@ class InviteController extends Controller
 
         flash(trans('messages.you_are_now_a_member_of_this_group'));
 
-        return redirect()->route('groups.show', $group->id);
+        return redirect()->route('groups.show', $group);
     }
 }

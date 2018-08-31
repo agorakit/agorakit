@@ -7,7 +7,7 @@
   <h1>{{trans('messages.modify')}}</h1>
 
 
-  {!! Form::model($discussion, array('action' => ['GroupDiscussionController@update', $discussion->group->id, $discussion->id])) !!}
+  {!! Form::model($discussion, array('action' => ['GroupDiscussionController@update', $discussion->group, $discussion])) !!}
 
   @include('discussions.form')
 

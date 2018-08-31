@@ -18,7 +18,7 @@
             <tr>
                 <td>{{$group->name}}</td>
                 <td>{{$group->deleted_at}}</td>
-                <td><a href="{{route('admin.restore', ['group', $group->id] )}}">Recover</a></td>
+                <td><a href="{{route('admin.restore', ['group', $group] )}}">Recover</a></td>
             </tr>
         @endforeach
     </table>
@@ -50,7 +50,7 @@
                     @endif
                 </td>
                 <td>{{$discussion->deleted_at}}</td>
-                <td><a href="{{route('admin.restore', ['discussion', $discussion->id] )}}">Recover</a></td>
+                <td><a href="{{route('admin.restore', ['discussion', $discussion] )}}">Recover</a></td>
             </tr>
         @endforeach
     </table>
@@ -74,7 +74,7 @@
                     @endif
                 </td>
                 <td>{{$comment->deleted_at}}</td>
-                <td><a href="{{route('admin.restore', ['comment', $comment->id] )}}">Recover</a></td>
+                <td><a href="{{route('admin.restore', ['comment', $comment] )}}">Recover</a></td>
             </tr>
         @endforeach
     </table>
@@ -106,7 +106,7 @@
                     @endif
                 </td>
                 <td>{{$file->deleted_at}}</td>
-                <td><a href="{{route('admin.restore', ['file', $file->id] )}}">Recover</a></td>
+                <td><a href="{{route('admin.restore', ['file', $file] )}}">Recover</a></td>
             </tr>
         @endforeach
     </table>
@@ -138,7 +138,7 @@
                     @endif
                 </td>
                 <td>{{$action->deleted_at}}</td>
-                <td><a href="{{route('admin.restore', ['action', $action->id] )}}">Recover</a></td>
+                <td><a href="{{route('admin.restore', ['action', $action] )}}">Recover</a></td>
             </tr>
         @endforeach
     </table>

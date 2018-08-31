@@ -7,7 +7,7 @@
 
 <div class="content">
 
-    <div class="meta">{{trans('messages.started_by')}} <span class="user"><a href="{{ route('users.show', [$action->user]) }}">{{ $action->user->name}}</a></span>, {{trans('messages.in')}} <a href="{{ route('groups.actions.index', [$group->id]) }}">{{ $action->group->name}}</a>        {{ $action->created_at->diffForHumans()}} </div>
+    <div class="meta">{{trans('messages.started_by')}} <span class="user"><a href="{{ route('users.show', [$action->user]) }}">{{ $action->user->name}}</a></span>, {{trans('messages.in')}} <a href="{{ route('groups.actions.index', [$group]) }}">{{ $action->group->name}}</a>        {{ $action->created_at->diffForHumans()}} </div>
 
     <div class="d-flex justify-content-between">
         <h3>
@@ -21,21 +21,21 @@
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
 
                 @can('update', $action)
-                <a class="dropdown-item" href="{{ route('groups.actions.edit', [$group->id, $action->id]) }}">
+                <a class="dropdown-item" href="{{ route('groups.actions.edit', [$group, $action]) }}">
                             <i class="fa fa-pencil"></i>
                             {{trans('messages.edit')}}
                         </a>
                 @endcan
 
                 @can('delete', $action)
-                <a class="dropdown-item" href="{{ route('groups.actions.deleteconfirm', [$group->id, $action->id]) }}">
+                <a class="dropdown-item" href="{{ route('groups.actions.deleteconfirm', [$group, $action]) }}">
                             <i class="fa fa-trash"></i>
                             {{trans('messages.delete')}}
                         </a>
                 @endcan
 
                 @if ($action->revisionHistory->count() > 0)
-                <a class="dropdown-item" href="{{route('groups.actions.history', [$group->id, $action->id])}}"><i class="fa fa-history"></i> {{trans('messages.show_history')}}</a>
+                <a class="dropdown-item" href="{{route('groups.actions.history', [$group, $action])}}"><i class="fa fa-history"></i> {{trans('messages.show_history')}}</a>
                 @endif
             </div>
         </div>

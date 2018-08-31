@@ -17,7 +17,7 @@
 
             @can('create-action', $group)
                 <div class="ml-auto">
-                    <a class="btn btn-primary" href="{{ route('groups.actions.create', $group->id ) }}">
+                    <a class="btn btn-primary" href="{{ route('groups.actions.create', $group ) }}">
                         <i class="fa fa-plus"></i> {{trans('action.create_one_button')}}
                     </a>
                 </div>
@@ -41,6 +41,6 @@
     @endif
 
 
-    <p><a href="{{action('GroupIcalController@index', $group->id)}}">Téléchargez le calendrier de ce groupe au format iCal</a></p>
+    <p><a href="{{action('GroupIcalController@index', $group)}}">Téléchargez le calendrier de ce groupe au format iCal</a></p>
 
 @endsection

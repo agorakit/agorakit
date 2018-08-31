@@ -6,7 +6,7 @@
 
 
     @if (isset($invite_and_register))
-        <form method="POST" action="{{ action('InviteController@inviteRegister', [$group->id, $token]) }}">
+        <form method="POST" action="{{ action('InviteController@inviteRegister', [$group, $token]) }}">
         @else
             <form method="POST" action="{{ url('register') }}">
                 <div class="help" role="alert">

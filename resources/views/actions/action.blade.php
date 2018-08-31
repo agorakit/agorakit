@@ -12,7 +12,7 @@
     <div class="content">
 
         <div class="name">
-            <a href="{{ route('groups.actions.show', [$action->group_id, $action->id]) }}">
+            <a href="{{ route('groups.actions.show', [$action->group, $action]) }}">
                 {{ $action->name }}
             </a>
         </div>

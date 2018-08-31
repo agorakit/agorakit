@@ -13,7 +13,7 @@
             <div class="ml-auto">
                 @can('create-discussion', $group)
                     <div class="toolbox">
-                        <a class="btn btn-primary" href="{{ route('groups.discussions.create', $group->id ) }}">
+                        <a class="btn btn-primary" href="{{ route('groups.discussions.create', $group ) }}">
                             <i class="fa fa-plus"></i> {{trans('discussion.create_one_button')}}
                         </a>
                     </div>
