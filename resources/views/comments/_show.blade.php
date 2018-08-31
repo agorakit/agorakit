@@ -11,7 +11,7 @@
             <div class="w-100">
                 <div class="user"><a href="{{ route('users.show', [$comment->user]) }}">{{$comment->user->name}}</a></div>
 
-                <div class="body">{!! filter($comment->body) !!}</div>
+                <div class="body">{!! highlightMentions(filter($comment->body)) !!}</div>
 
 
 
