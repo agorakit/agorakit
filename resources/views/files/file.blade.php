@@ -66,7 +66,7 @@
   @can('update', $file)
     <div class="ml-auto dropdown">
       <button class="btn btn-outline-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="fa fa-wrench" aria-hidden="true"></i>
+        <i class="fa fa-cog" aria-hidden="true"></i>
 
       </button>
 

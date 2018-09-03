@@ -49,7 +49,7 @@
 
                         <div class="dropdown">
                             <a type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-wrench"></i> <span class="caret"></span>
+                                <i class="fa fa-cog"></i> <span class="caret"></span>
                             </a>
                             <div class="dropdown-menu">
 

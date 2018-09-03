@@ -25,7 +25,7 @@
 
 <body>
 
-  @include('partials.nav-simple')
+  @include('partials.nav')
 
   @include('partials.errors')
 

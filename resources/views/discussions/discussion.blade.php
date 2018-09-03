@@ -18,8 +18,8 @@
 
         @can('update', $discussion)
           <div class="ml-4 dropdown">
-            <button class="btn btn-outline-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-wrench" aria-hidden="true"></i>
+            <button class="btn btn-secondary-outline dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-cog" aria-hidden="true"></i>
             </button>
 
 
@@ -32,7 +32,7 @@
               @endcan
 
               <a class="dropdown-item" up-modal=".dialog" href="{{ route('groups.tags.edit', [$discussion->group, 'discussions', $discussion]) }}">
-                Edit tags
+                <i class="fa fa-tags"></i> Edit tags
               </a>
 
               @can('delete', $discussion)
