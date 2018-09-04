@@ -9,7 +9,7 @@
         </a>
       </span>
 
-      <div class="d-flex justify-content-right align-items-start">
+      
         @if ($discussion->unReadCount() > 0)
           <div class="badge-unread">{{ $discussion->unReadCount() }}</div>
         @endif
