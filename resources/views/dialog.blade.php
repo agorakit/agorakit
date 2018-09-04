@@ -25,7 +25,11 @@
 
 <body>
 
-  @include('partials.nav')
+  @if (Auth::check())
+    @include('partials.nav')
+  @else
+    @include('partials.nav-guest')
+  @endif
 
   @include('partials.errors')
 
