@@ -44,6 +44,7 @@ class NotifyMentionedUsers
                 $user = $comment->discussion->group->users->where('username', $username)->first();
                 if ($user) {
                     Notification::send($user, new \App\Notifications\Mention($comment, \Auth::user()));
+                    flash($user->name . ' ' . trans('messages.notified'));
                 }
             }
         }
