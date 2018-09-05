@@ -4,7 +4,7 @@
         @if (Storage::exists('public/logo/favicon.png'))
             <img src="{{{ asset('storage/logo/favicon.png') }}}" width="40" height="40"/>
         @else
-            <i class="fa fa-child"></i>
+            <img src="/images/logo.svg" width="40" height="40"/>
         @endif
         <span class="ml-1 d-lg-none d-xl-inline">{{setting('name')}}</span>
     </a>
