@@ -75,7 +75,7 @@ class GroupController extends Controller
             }
 
             if (Gate::allows('viewActions', $group)) {
-                $actions = $group->actions()->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->limit(10)->get();
+                $actions = $group->actions()->where('stop', '>=', Carbon::now())->orderBy('start', 'asc')->limit(10)->get();
             }
 
             if (Gate::allows('viewActivities', $group)) {

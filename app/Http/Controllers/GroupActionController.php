@@ -59,7 +59,7 @@ class GroupActionController extends Controller
         if ($view == 'list') {
             $actions = $group->actions()
             ->orderBy('start', 'asc')
-            ->where('start', '>=', Carbon::now()->subDays(1))
+            ->where('stop', '>=', Carbon::now()->subDays(1))
             ->paginate(10);
             return view('actions.index-list')
             ->with('actions', $actions)

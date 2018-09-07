@@ -38,7 +38,7 @@ class DashboardController extends Controller
 
       $my_actions = \App\Action::with('user', 'group')
       ->whereIn('group_id', $my_groups->pluck('id'))
-      ->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->take(5)->get();
+      ->where('stop', '>=', Carbon::now())->orderBy('start', 'asc')->take(5)->get();
 
       $other_discussions = \App\Discussion::with('userReadDiscussion', 'user', 'group', 'tags')
       ->whereIn('group_id', $other_groups->pluck('id'))
@@ -46,7 +46,7 @@ class DashboardController extends Controller
 
       $other_actions = \App\Action::with('user', 'group')
       ->whereIn('group_id', $other_groups->pluck('id'))
-      ->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->take(5)->get();
+      ->where('stop', '>=', Carbon::now())->orderBy('start', 'asc')->take(5)->get();
 
 
 
