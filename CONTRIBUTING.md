@@ -5,6 +5,7 @@
 - Install it for non technical users/friends/groups
 - Help on the translations / add new translations
 - Write end users documentation
+- Enhance the presentation website with pictures and better texts. It's all there waiting for your pull requests : https://github.com/philippejadin/agorakit-website
 - Support existing users (I'm considering the creation of a support forum using... agorakit, let me know what you think)
 - Send me an email if you use the tool or are considering it. I love feedback! (info (at) agorakit.org)
 
