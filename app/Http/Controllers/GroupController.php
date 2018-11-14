@@ -263,7 +263,7 @@ class GroupController extends Controller
 
         // handle cover
         if ($request->hasFile('cover')) {
-            Storage::disk('local')->makeDirectory('groups/'.$group);
+            Storage::disk('local')->makeDirectory('groups/'.$group->id);
             Image::make($request->file('cover'))->widen(1600)->save(storage_path().'/app/groups/'.$group->id.'/cover.jpg');
         }
 
