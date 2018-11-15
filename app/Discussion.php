@@ -52,12 +52,12 @@ class Discussion extends Model
 
     public function group()
     {
-        return $this->belongsTo(\App\Group::class);
+        return $this->belongsTo(\App\Group::class)->withTrashed();
     }
 
     public function user()
     {
-        return $this->belongsTo(\App\User::class);
+        return $this->belongsTo(\App\User::class)->withTrashed();
     }
 
     public function votes()

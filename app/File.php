@@ -38,14 +38,15 @@ class File extends Model
     const FOLDER = 1;
     const LINK = 2;
 
+
     public function user()
     {
-        return $this->belongsTo(\App\User::class);
+        return $this->belongsTo(\App\User::class)->withTrashed();
     }
 
     public function group()
     {
-        return $this->belongsTo(\App\Group::class);
+        return $this->belongsTo(\App\Group::class)->withTrashed();
     }
 
     public function link()
