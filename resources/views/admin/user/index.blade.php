@@ -5,7 +5,13 @@
 @push('js')
     <script>
     $(document).ready(function() {
-        $('.table').DataTable();
+        $('.table').DataTable( {
+          responsive: true,
+          dom: 'Bfrtip',
+          buttons: [
+            'csv', 'excel', 'print'
+        ]
+        });
     } );
     </script>
 @endpush
@@ -24,11 +30,11 @@
             <thead>
                 <tr>
                     <th>{{ trans('messages.name') }}</th>
-                    <th>{{ trans('messages.email') }}</th>
+                    <th style="max-width: 150px; overflow: hidden;text-overflow: ellipsis;">{{ trans('messages.email') }}</th>
                     <th>{{ trans('messages.registration_time') }}</th>
                     <th>{{ trans('messages.last_activity') }}</th>
-                    <th>{{ trans('messages.admin') }}</th>
-                    <th>{{ trans('messages.email_verified') }}</th>
+                    <th style="max-width: 50px; overflow: hidden;text-overflow: ellipsis;">{{ trans('messages.admin') }}</th>
+                    <th style="max-width: 50px; overflow: hidden;text-overflow: ellipsis;">{{ trans('messages.email_verified') }}</th>
                     <th></th>
                 </tr>
             </thead>
@@ -40,7 +46,7 @@
                             <a href="{{ route('users.show', $user) }}"> {{ $user->name }}</a>
                         </td>
 
-                        <td>
+                        <td style="max-width: 150px; overflow: hidden;text-overflow: ellipsis;">
                             <a href="{{ route('users.show', $user) }}"> {{ $user->email }}</a>
                         </td>
 
@@ -52,15 +58,15 @@
                             <a href="{{ route('users.show', $user) }}">{{ $user->updated_at->diffForHumans() }}</a>
                         </td>
 
-                        <td>
+                        <td style="max-width: 50px; overflow: hidden;text-overflow: ellipsis;">
                             @if ($user->isAdmin())
-                                {{trans('messages.admin')}}
+                                {{trans('messages.yes')}}
                             @else
-
+                                {{trans('messages.no')}}
                             @endif
                         </td>
 
-                        <td>
+                        <td style="max-width: 50px; overflow: hidden;text-overflow: ellipsis;">
                             @if ($user->verified == 1 )
                                 {{trans('messages.yes')}}
                             @else
