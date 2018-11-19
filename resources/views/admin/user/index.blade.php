@@ -5,8 +5,9 @@
 @push('js')
     <script>
     $(document).ready(function() {
-        $('.table').DataTable( {
+        $('.data-table').DataTable( {
           responsive: true,
+          "pageLength": 25,
           dom: 'Bfrtip',
           buttons: [
             'csv', 'excel', 'print'
@@ -26,16 +27,16 @@
         </h2>
 
 
-        <table class="table table-hover">
-            <thead>
+        <table class="table data-table table-striped">
+            <thead class="thead-dark">
                 <tr>
-                    <th>{{ trans('messages.name') }}</th>
-                    <th style="max-width: 150px; overflow: hidden;text-overflow: ellipsis;">{{ trans('messages.email') }}</th>
+                    <th data-priority="1">{{ trans('messages.name') }}</th>
+                    <th data-priority="1" style="max-width: 150px; overflow: hidden;text-overflow: ellipsis;">{{ trans('messages.email') }}</th>
                     <th>{{ trans('messages.registration_time') }}</th>
                     <th>{{ trans('messages.last_activity') }}</th>
-                    <th style="max-width: 50px; overflow: hidden;text-overflow: ellipsis;">{{ trans('messages.admin') }}</th>
-                    <th style="max-width: 50px; overflow: hidden;text-overflow: ellipsis;">{{ trans('messages.email_verified') }}</th>
-                    <th></th>
+                    <th data-priority="1" style="max-width: 50px; overflow: hidden;text-overflow: ellipsis;">{{ trans('messages.admin') }}</th>
+                    <th data-priority="1" style="max-width: 50px; overflow: hidden;text-overflow: ellipsis;">{{ trans('messages.email_verified') }}</th>
+                    <th data-priority="1"></th>
                 </tr>
             </thead>
 
@@ -75,7 +76,7 @@
                         </td>
 
                         <td>
-                            <a href="{{ route('users.edit', $user) }}">{{trans('messages.edit')}}</a>
+                            <a class="btn btn-secondary" href="{{ route('users.edit', $user) }}">{{trans('messages.edit')}}</a>
                         </td>
 
                     </tr>

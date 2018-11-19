@@ -25,7 +25,15 @@ class MembershipController extends Controller
   */
   public function index(Group $group)
   {
-    $memberships = $group->memberships()->with('user')->orderBy('membership', 'desc')->get();
+
+    if (Gate::allows('edit-membership', $group))
+    {
+        $memberships = $group->memberships()->with('user')->orderBy('membership', 'desc')->get();
+    }
+    else
+    {
+      $memberships = $group->memberships()->where('membership', '>' , 0)->with('user')->orderBy('membership', 'desc')->get();
+    }
 
     $admins = $group->admins()->orderBy('name')->get();
     $candidates = $group->candidates()->orderBy('name')->get();

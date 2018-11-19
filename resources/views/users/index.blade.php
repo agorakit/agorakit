@@ -7,7 +7,7 @@
   <script>
   $(document).ready(function() {
     $('.data-table').DataTable( {
-      /*responsive: true,*/
+      responsive: true,
       "pageLength": 25,
       dom: 'Bfrtip',
       buttons: [
@@ -40,17 +40,17 @@
   </div>
 
 
-  <table class="table table-hover data-table">
-    <thead>
+  <table style="width: 100%" class="table data-table table-striped">
+    <thead class="thead-dark" style="width: 100%">
       <tr>
-        <th>{{ trans('messages.name') }}</th>
-        <th>{{ trans('messages.member_since') }}</th>
-        <th>{{ trans('messages.last_activity') }}</th>
+        <th data-priority="1">{{ trans('messages.name') }}</th>
+        <th data-priority="3">{{ trans('messages.member_since') }}</th>
+        <th data-priority="4">{{ trans('messages.last_activity') }}</th>
 
         @can('edit-membership', $group)
-          <th>{{ trans('messages.status') }}</th>
-          <th>{{ trans('messages.notifications_interval') }}</th>
-          <th></th>
+          <th data-priority="2">{{ trans('messages.status') }}</th>
+          <th data-priority="2">{{ trans('messages.notifications_interval') }}</th>
+          <th data-priority="1"></th>
         @endcan
 
       </tr>
@@ -74,7 +74,7 @@
 
           @can('edit-membership', $group)
 
-            <td>
+            <td data-order="{{ $membership->membership }}">
 
               @if ($membership->membership == \App\Membership::ADMIN)
                 {{trans('membership.admin')}}
