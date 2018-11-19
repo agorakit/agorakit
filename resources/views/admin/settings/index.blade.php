@@ -80,6 +80,30 @@
     </div>
 
 
+    <div class="setting">
+
+        <h2>Post by email</h2>
+        <div class="form-group">
+            {!! Form::checkbox('user_can_post_by_email',1 , setting('user_can_post_by_email')) !!}
+            Allow users to post by email
+        </div>
+
+        <div class="form-group">
+            Mail server (pop3) :
+            {!! Form::text('mail_server', setting('mail_server'), ['class' => 'form-control']) !!}
+            <br/>
+            Login :
+            {!! Form::text('mail_login', setting('mail_login'), ['class' => 'form-control']) !!}
+            <br/>
+            Password :
+            {!! Form::text('mail_password', setting('mail_password'), ['class' => 'form-control']) !!}
+
+        </div>
+
+
+    </div>
+
+
     <div class="form-group">
         {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-lg btn-primary']) !!}
     </div>

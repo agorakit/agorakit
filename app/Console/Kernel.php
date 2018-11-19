@@ -18,6 +18,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\ConvertFoldersToTags::class,
         \App\Console\Commands\ImportActions::class,
         \App\Console\Commands\PopulateFilesize::class,
+        \App\Console\Commands\CheckMailbox::class,
     ];
 
     /**
@@ -30,5 +31,6 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('notifications:send')->everyMinute()->appendOutputTo(storage_path().'/logs/notifications.log');
+        $schedule->command('notifications:send')->everyMinute()->appendOutputTo(storage_path().'/logs/mailbox.log');
     }
 }

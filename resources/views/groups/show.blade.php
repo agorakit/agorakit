@@ -24,6 +24,10 @@
 
                 </p>
 
+                @if (setting('user_can_post_by_email', false))
+                    {{trans('messages.email')}} : {{  $group->slug . '@' }}
+                @endif
+
                 <p>
                     @if ($group->tags->count() > 0)
                         {{trans('messages.tags')}} :
@@ -46,11 +50,11 @@
             </div>
 
             <div class="col-md-6">
-              @if ($group->hasCover())
-                <img class="img-fluid rounded" src="{{route('groups.cover.large', $group)}}"/>
-              @else
-                <img class="img-fluid rounded" src="/images/group.svg"/>
-              @endif
+                @if ($group->hasCover())
+                    <img class="img-fluid rounded" src="{{route('groups.cover.large', $group)}}"/>
+                @else
+                    <img class="img-fluid rounded" src="/images/group.svg"/>
+                @endif
             </div>
 
         </div>
