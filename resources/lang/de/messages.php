@@ -2,7 +2,13 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'my_groups' => 'TODO: my_groups',
+  'member_since' => 'TODO: member_since',
+  'no_file_selected' => 'TODO: no_file_selected',
+  'notifications_interval' => 'TODO: notifications_interval',
+  'notified' => 'TODO: notified',
+  'preferences_for' => 'TODO: preferences_for',
+  'status' => 'TODO: status',
+  'username' => 'TODO: username',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Eine Nachricht für Sie',
   'accept_invitation' => 'Die Einladung akzeptieren',
@@ -66,7 +72,6 @@ return array (
   'email_not_verified_send_again_verification' => 'Klicken Sie hier, um die Verifizierungs-Mail erneut zu versenden',
   'email_verified' => 'TODO: email_verified',
   'embed' => 'TODO: embed',
-  'embed_this_page' => 'Einbetten dieser seite',
   'ends' => 'Ende',
   'features' => 'TODO: features',
   'filename' => 'TODO: filename',
@@ -85,7 +90,6 @@ return array (
   'history' => 'Geschichte',
   'how_does_it_work' => 'Wie geht das?',
   'howdy' => 'Hoppla!',
-  'i_changed_my_mind' => 'Ich habe mich anders entschieden, ich will dieser Gruppe nicht abtreten',
   'if_you_already_have_account' => 'Wenn Sie bereits über ein Konto verfügen',
   'if_you_didnt_ask' => 'Wenn Sie nicht gefragt haben',
   'if_you_dont_have_account' => 'Wenn Sie (noch!) über kein Konto verfügen',
@@ -129,6 +133,7 @@ return array (
   'message_sent' => 'Nachricht versendet',
   'modify' => 'Ändern',
   'more' => 'TODO: more',
+  'my_groups' => 'TODO: my_groups',
   'name' => 'Name',
   'news_from_group_email_subject' => 'Neuigkeiten von der Gruppe',
   'next_actions' => 'Nächste Handlungen',
@@ -201,7 +206,6 @@ return array (
   'user_added_successfuly' => 'Benutzer erfolgreich hinzugefügt',
   'user_attending' => 'TODO: user_attending',
   'user_invited' => 'TODO: user_invited',
-  'user_made_admin_successfuly' => 'Benutzer-admin erfolgreich',
   'user_made_member_successfuly' => 'Benutzer mitglied erfolgreich',
   'user_profile' => 'Nutzerprofil',
   'user_removed_successfuly' => 'Benutzer erfolgreich entfernt',
@@ -231,6 +235,8 @@ return array (
   array (
     'by' => 'TODO: by',
     'date' => 'Datum',
+    'embed_this_page' => 'Einbetten dieser seite',
+    'i_changed_my_mind' => 'Ich habe mich anders entschieden, ich will dieser Gruppe nicht abtreten',
     'liste' => 'TODO: liste',
     'modules' => 'TODO: modules',
     'not_an_admin' => 'Keine Admin-Rechte',
@@ -239,6 +245,7 @@ return array (
     'sort_by_size_desc' => 'TODO: sort_by_size_desc',
     'starts' => 'Startet',
     'toggle_navigation' => 'Navigierung hin- und herschalten',
+    'user_made_admin_successfuly' => 'Benutzer-admin erfolgreich',
     'what' => 'was',
   ),
 );

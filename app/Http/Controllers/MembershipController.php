@@ -25,8 +25,7 @@ class MembershipController extends Controller
   */
   public function index(Group $group)
   {
-    //$users = $group->users()->with('memberships')->orderBy('updated_at', 'desc')->paginate(25);
-    $memberships = $group->memberships()->with('user')->orderBy('membership', 'desc')->paginate(25);
+    $memberships = $group->memberships()->with('user')->orderBy('membership', 'desc')->get();
 
     $admins = $group->admins()->orderBy('name')->get();
     $candidates = $group->candidates()->orderBy('name')->get();

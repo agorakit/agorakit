@@ -2,7 +2,13 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'my_groups' => 'TODO: my_groups',
+  'member_since' => 'TODO: member_since',
+  'no_file_selected' => 'TODO: no_file_selected',
+  'notifications_interval' => 'TODO: notifications_interval',
+  'notified' => 'TODO: notified',
+  'preferences_for' => 'TODO: preferences_for',
+  'status' => 'TODO: status',
+  'username' => 'TODO: username',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'U heeft een bericht',
   'accept_invitation' => 'De uitnodiging accepteren',
@@ -66,7 +72,6 @@ return array (
   'email_not_verified_send_again_verification' => '\'Indien u geen bevestigingsmail hebt ontvangen, klik dan hier voor een nieuwe',
   'email_verified' => 'TODO: email_verified',
   'embed' => 'TODO: embed',
-  'embed_this_page' => 'Embed deze pagina',
   'ends' => 'Einde',
   'features' => 'TODO: features',
   'filename' => 'TODO: filename',
@@ -85,7 +90,6 @@ return array (
   'history' => 'Geschiedenis van de wijzigingen',
   'how_does_it_work' => 'Hoe werkt het ?',
   'howdy' => 'TODO: howdy',
-  'i_changed_my_mind' => 'Ik heb me bedacht, ik wil deze groep niet verlaten',
   'if_you_already_have_account' => 'Als u al geregistreerd bent',
   'if_you_didnt_ask' => 'Als u geen registratie gevraagd hebt',
   'if_you_dont_have_account' => 'Als u niet geregistreerd bent',
@@ -129,6 +133,7 @@ return array (
   'message_sent' => 'Bericht verstuurd',
   'modify' => 'Bewerken',
   'more' => 'TODO: more',
+  'my_groups' => 'TODO: my_groups',
   'name' => 'Naam',
   'news_from_group_email_subject' => 'Nieuws van :',
   'next_actions' => 'Naast acties',
@@ -201,7 +206,6 @@ return array (
   'user_added_successfuly' => 'Gebruiker toegevoegd',
   'user_attending' => 'TODO: user_attending',
   'user_invited' => 'TODO: user_invited',
-  'user_made_admin_successfuly' => 'Gebruiker admin succes',
   'user_made_member_successfuly' => 'Gebruiker lid succesvol',
   'user_profile' => 'Gebruikersprofiel',
   'user_removed_successfuly' => 'Gebruiker zijn succesvol verwijderd',
@@ -231,6 +235,8 @@ return array (
   array (
     'by' => 'TODO: by',
     'date' => 'Datum',
+    'embed_this_page' => 'Embed deze pagina',
+    'i_changed_my_mind' => 'Ik heb me bedacht, ik wil deze groep niet verlaten',
     'liste' => 'TODO: liste',
     'modules' => 'TODO: modules',
     'not_an_admin' => 'Geen beheerder',
@@ -239,6 +245,7 @@ return array (
     'sort_by_size_desc' => 'TODO: sort_by_size_desc',
     'starts' => 'Begint',
     'toggle_navigation' => 'Navigatie activeren',
+    'user_made_admin_successfuly' => 'Gebruiker admin succes',
     'what' => 'Wat',
   ),
 );

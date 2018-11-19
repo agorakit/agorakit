@@ -2,7 +2,13 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'my_groups' => 'TODO: my_groups',
+  'member_since' => 'TODO: member_since',
+  'no_file_selected' => 'TODO: no_file_selected',
+  'notifications_interval' => 'TODO: notifications_interval',
+  'notified' => 'TODO: notified',
+  'preferences_for' => 'TODO: preferences_for',
+  'status' => 'TODO: status',
+  'username' => 'TODO: username',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un mensaje para usted',
   'accept_invitation' => 'Acepta la invitación',
@@ -67,7 +73,6 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'email_not_verified_send_again_verification' => 'Haga clic aquí para enviar su correo electrónico de verificación de nuevo',
   'email_verified' => 'Email verified',
   'embed' => 'TODO: embed',
-  'embed_this_page' => 'Incorporar esta página',
   'ends' => 'Termina',
   'features' => 'TODO: features',
   'filename' => 'TODO: filename',
@@ -86,7 +91,6 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'history' => 'historia',
   'how_does_it_work' => '¿Como funciona?',
   'howdy' => 'Whoops!',
-  'i_changed_my_mind' => 'He cambiado de opinión, no quiero dejar este grupo',
   'if_you_already_have_account' => 'Si ya tiene una cuenta',
   'if_you_didnt_ask' => 'Si no pediste unirte',
   'if_you_dont_have_account' => 'Si no tienes una cuenta (todavía!)',
@@ -130,6 +134,7 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'message_sent' => 'Mensaje enviado',
   'modify' => 'Modificar',
   'more' => 'TODO: more',
+  'my_groups' => 'TODO: my_groups',
   'name' => 'Nombre',
   'news_from_group_email_subject' => 'Noticias del grupo',
   'next_actions' => 'Próximas acciones',
@@ -202,7 +207,6 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'user_added_successfuly' => 'Usuario agregado correctamente',
   'user_attending' => 'TODO: user_attending',
   'user_invited' => 'TODO: user_invited',
-  'user_made_admin_successfuly' => 'Administrador agregado correctamente',
   'user_made_member_successfuly' => 'Miembro agregado correctamente',
   'user_profile' => 'Perfil del usuario',
   'user_removed_successfuly' => 'Usuario eliminado con éxito',
@@ -232,6 +236,8 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   array (
     'by' => 'TODO: by',
     'date' => 'fecha',
+    'embed_this_page' => 'Incorporar esta página',
+    'i_changed_my_mind' => 'He cambiado de opinión, no quiero dejar este grupo',
     'liste' => 'TODO: liste',
     'modules' => 'TODO: modules',
     'not_an_admin' => 'No administrador',
@@ -240,6 +246,7 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
     'sort_by_size_desc' => 'TODO: sort_by_size_desc',
     'starts' => 'Comienza',
     'toggle_navigation' => 'Conmutar navegación',
+    'user_made_admin_successfuly' => 'Administrador agregado correctamente',
     'what' => 'qué',
   ),
 );

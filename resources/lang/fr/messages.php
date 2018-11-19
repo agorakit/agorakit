@@ -2,7 +2,13 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'my_groups' => 'Mes groupes',
+  'member_since' => 'Membre depuis',
+  'no_file_selected' => 'Aucun fichier sélectionné',
+  'notifications_interval' => 'Notification',
+  'notified' => 'notifé',
+  'preferences_for' => 'préférences pour',
+  'status' => 'Status',
+  'username' => 'nom d\'utilisateur',
   //==================================== Translations ====================================//
   'a_message_for_you' => 'Un message pour vous',
   'accept_invitation' => 'Accepter l\'invitation',
@@ -68,7 +74,6 @@ return array (
   'email_not_verified_send_again_verification' => 'Si vous n\'avez pas reçu le mail de confirmation cliquez ici pour en recevoir un autre',
   'email_verified' => 'Email vérifié',
   'embed' => 'Intégrer cette page',
-  'embed_this_page' => 'Incorporer cette page',
   'ends' => 'Fin',
   'features' => 'Fonctionalités',
   'filename' => 'Nom de fichier',
@@ -87,7 +92,6 @@ return array (
   'history' => 'Historique des modifications',
   'how_does_it_work' => 'Comment ça marche ?',
   'howdy' => 'Oups',
-  'i_changed_my_mind' => 'J\'ai changé d\'avis, je ne veux pas quitter ce groupe',
   'if_you_already_have_account' => 'Si vous avez déjà un compte sur ce site',
   'if_you_didnt_ask' => 'Si vous n\'avez pas demandé à rejoindre ce groupe',
   'if_you_dont_have_account' => 'Si vous n\'avez pas de compte sur ce site',
@@ -131,6 +135,7 @@ return array (
   'message_sent' => 'Message envoyé',
   'modify' => 'Modifier',
   'more' => 'Plus',
+  'my_groups' => 'Mes groupes',
   'name' => 'Nom',
   'news_from_group_email_subject' => 'Des nouvelles du groupe',
   'next_actions' => 'Prochaines actions',
@@ -203,7 +208,6 @@ return array (
   'user_added_successfuly' => 'L\'utilisateur ajouté avec succès',
   'user_attending' => 'Participants',
   'user_invited' => 'Utilisateurs-trices invité-es',
-  'user_made_admin_successfuly' => 'Utilisateur rendu admin avec succès',
   'user_made_member_successfuly' => 'Utilisateur membre avec succès',
   'user_profile' => 'Profil utilisateur',
   'user_removed_successfuly' => 'Utilisateur supprimé avec succès',
@@ -233,11 +237,14 @@ return array (
   array (
     'by' => 'par',
     'date' => 'Date',
+    'embed_this_page' => 'Incorporer cette page',
+    'i_changed_my_mind' => 'J\'ai changé d\'avis, je ne veux pas quitter ce groupe',
     'modules' => 'Modules',
     'not_an_admin' => 'Pas administrateur',
     'size' => 'Taille',
     'starts' => 'Début',
     'toggle_navigation' => 'Activer la navigation',
+    'user_made_admin_successfuly' => 'Utilisateur rendu admin avec succès',
     'what' => 'Quoi',
   ),
 );

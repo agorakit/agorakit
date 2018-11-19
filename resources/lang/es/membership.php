@@ -2,7 +2,13 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'apply_intro' => 'TODO: apply_intro',
+  'admin' => 'TODO: admin',
+  'blacklisted' => 'TODO: blacklisted',
+  'candidate' => 'TODO: candidate',
+  'invited' => 'TODO: invited',
+  'member' => 'TODO: member',
+  'removed' => 'TODO: removed',
+  'unregistered' => 'TODO: unregistered',
   //==================================== Translations ====================================//
   'add_button' => 'Agregar usuario(s)',
   'add_users' => 'Agregar usuarios',
@@ -10,6 +16,7 @@ return array (
   'application_stored' => 'TODO: application_stored',
   'apply' => 'TODO: apply',
   'apply_for_group' => 'TODO: apply_for_group',
+  'apply_intro' => 'TODO: apply_intro',
   'click_here' => 'Haga clic aquí',
   'directly_add_users_button' => 'Agregar usuarios directamente',
   'everyday' => 'Cada día',
@@ -21,8 +28,8 @@ return array (
   'howtojointext' => 'Este grupo es un grupo cerrado. Para unirse, por favor contacte a uno de estos miembros para que le avise.',
   'if_you_want_to_leave_this_group' => 'Si quieres dejar este grupo',
   'invite_button' => 'Invitación',
-  'invite_intro' => 'Invite a personas que puedan estar interesadas en este grupo. Por favor, no envíes emails de spam a la gente',
   'invite_by_email' => 'Invitar a la gente',
+  'invite_intro' => 'Invite a personas que puedan estar interesadas en este grupo. Por favor, no envíes emails de spam a la gente',
   'invite_title' => 'Invitar a personas a este grupo',
   'join_button' => 'Unirse',
   'join_intro' => 'Aquí puedes elegir si quieres recibir noticias de este grupo por email. Nunca recibirás más correos que los que elijas. Depende de tu participación.',
@@ -38,5 +45,9 @@ return array (
   'users_to_add' => 'Usuarios a añadir (sólo usuarios existentes, utilice la función de invitación para nuevos usuarios)',
   'welcome' => 'Bienvenido',
   'when_to_receive_notifications' => '¿Con qué frecuencia desea recibir notificaciones por correo electrónico?',
-  'your_preferences_for' => 'Sus preferencias para',
+  //================================== Obsolete strings ==================================//
+  'LLH:obsolete' => 
+  array (
+    'your_preferences_for' => 'Sus preferencias para',
+  ),
 );

@@ -2,7 +2,13 @@
 
 return array (
   //============================== New strings to translate ==============================//
-  'apply_intro' => 'TODO: apply_intro',
+  'admin' => 'TODO: admin',
+  'blacklisted' => 'TODO: blacklisted',
+  'candidate' => 'TODO: candidate',
+  'invited' => 'TODO: invited',
+  'member' => 'TODO: member',
+  'removed' => 'TODO: removed',
+  'unregistered' => 'TODO: unregistered',
   //==================================== Translations ====================================//
   'add_button' => 'Add user(s)',
   'add_users' => 'Benutzer hinzufügen',
@@ -10,6 +16,7 @@ return array (
   'application_stored' => 'TODO: application_stored',
   'apply' => 'TODO: apply',
   'apply_for_group' => 'TODO: apply_for_group',
+  'apply_intro' => 'TODO: apply_intro',
   'click_here' => 'Hier klicken',
   'directly_add_users_button' => 'Direkt benutzer hinzufügen',
   'everyday' => 'Jeden Tag',
@@ -21,8 +28,8 @@ return array (
   'howtojointext' => 'Dies ist eine geschlossene Gruppe. Um der Gruppe beizutreten, kontaktieren Sie bitte einen Mitglied von der Gruppe.',
   'if_you_want_to_leave_this_group' => 'Sollten Sie dieser Gruppe austreten möchten',
   'invite_button' => 'Einladen',
-  'invite_intro' => 'Laden Sie Interessierte zu der Gruppe ein. Bitte keine Spam-Nachrichten versenden.',
   'invite_by_email' => 'Neue Mitglieder einladen',
+  'invite_intro' => 'Laden Sie Interessierte zu der Gruppe ein. Bitte keine Spam-Nachrichten versenden.',
   'invite_title' => 'Neue Mitglieder zu dieser Gruppe einladen',
   'join_button' => 'Beitreten',
   'join_intro' => 'Hier können Sie anwählen, wenn Sie Neuigkeiten von dieser Gruppe per E-Mail erhalten möchten. Sie werden nie mehr Nachrichten erhalten, als Sie wollen, bezogen auf Ihr Engagement.',
@@ -38,5 +45,9 @@ return array (
   'users_to_add' => 'Benutzer hinzufügen (vorhandene Benutzer nur, verwenden Sie die einladen-Funktion für neue Benutzer)',
   'welcome' => 'Wilkommen',
   'when_to_receive_notifications' => 'Wann möchten Sie Neuigkeiten per E-Mail von dieser Gruppe erhalten?',
-  'your_preferences_for' => 'Ihre Präferenzen für die Gruppe',
+  //================================== Obsolete strings ==================================//
+  'LLH:obsolete' => 
+  array (
+    'your_preferences_for' => 'Ihre Präferenzen für die Gruppe',
+  ),
 );
