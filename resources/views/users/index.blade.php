@@ -100,7 +100,7 @@
 
             </td>
 
-            <td>
+            <td data-order="{{ $membership->notification_interval }}">
               {{minutesToInterval($membership->notification_interval)}}
             </td>
 
