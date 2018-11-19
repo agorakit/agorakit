@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Storage;
 
 class Group extends Model
@@ -15,6 +16,7 @@ class Group extends Model
   use RevisionableTrait;
   use SoftDeletes;
   use Taggable;
+  use Sluggable;
 
   protected $rules = [
     'name' => 'required',
@@ -31,6 +33,23 @@ class Group extends Model
   const OPEN = 0;
   const CLOSED = 1;
   const SECRET = 2;
+
+
+  
+
+  /**
+  * Return the sluggable configuration array for this model.
+  *
+  * @return array
+  */
+  public function sluggable()
+  {
+    return [
+      'slug' => [
+        'source' => 'name'
+      ]
+    ];
+  }
 
   /**
   * Returns the css color (yes) of this group. Curently random generated.
