@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Group;
 use App\User;
+use App\Membership;
+use App\Invite;
 use Carbon\Carbon;
 use Gate;
 use Illuminate\Http\Request;
@@ -24,11 +26,11 @@ class MembershipController extends Controller
   public function index(Group $group)
   {
     //$users = $group->users()->with('memberships')->orderBy('updated_at', 'desc')->paginate(25);
-    $memberships = $group->memberships()->with('user')->paginate(25);
+    $memberships = $group->memberships()->with('user')->orderBy('membership', 'desc')->paginate(25);
 
     $admins = $group->admins()->orderBy('name')->get();
     $candidates = $group->candidates()->orderBy('name')->get();
-    $invites = \App\Invite::where('group_id', $group->id)->whereNull('claimed_at')->get();
+    $invites = Invite::where('group_id', $group->id)->whereNull('claimed_at')->get();
 
 
 
@@ -50,7 +52,7 @@ class MembershipController extends Controller
   {
     if ($group->isOpen()) {
       // load or create membership for this group and user combination
-      $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
+      $membership = Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
 
       return view('membership.join')
       ->with('group', $group)
@@ -76,8 +78,8 @@ class MembershipController extends Controller
   {
     if ($group->isOpen()) {
       // load or create membership for this group and user combination
-      $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
-      $membership->membership = \App\Membership::MEMBER;
+      $membership = Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
+      $membership->membership = Membership::MEMBER;
       $membership->notification_interval = intervalToMinutes($request->get('notifications'));
 
       // we prented the user has been already notified once, now. The first mail sent will be at the choosen interval from now on.
@@ -87,8 +89,8 @@ class MembershipController extends Controller
       return redirect()->route('groups.show', [$group->id])->with('message', trans('membership.welcome'));
     } else {
       // load or create membership for this group and user combination
-      $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
-      $membership->membership = \App\Membership::CANDIDATE;
+      $membership = Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
+      $membership->membership = Membership::CANDIDATE;
       $membership->notification_interval = 60*24;
 
       // we prented the user has been already notified once, now. The first mail sent will be at the choosen interval from now on.
@@ -110,7 +112,7 @@ class MembershipController extends Controller
   public function destroyConfirm(Request $request, Group $group)
   {
     // load a membership for this group and user combination
-    $membership = \App\Membership::where(['user_id' => $request->user()->id, 'group_id' => $group->id])->firstOrFail();
+    $membership =Membership::where(['user_id' => $request->user()->id, 'group_id' => $group->id])->firstOrFail();
 
     return view('membership.leave')
     ->with('group', $group)
@@ -128,8 +130,8 @@ class MembershipController extends Controller
   public function destroy(Request $request, Group $group)
   {
     // load or create membership for this group and user combination
-    $membership = \App\Membership::where(['user_id' => $request->user()->id, 'group_id' => $group->id])->firstOrFail();
-    $membership->membership = \App\Membership::UNREGISTERED;
+    $membership = Membership::where(['user_id' => $request->user()->id, 'group_id' => $group->id])->firstOrFail();
+    $membership->membership = Membership::UNREGISTERED;
     $membership->save();
 
     return redirect()->action('DashboardController@index');
@@ -138,10 +140,18 @@ class MembershipController extends Controller
   /**
   * Show a settings screen for a specific group. Allows a user to join, leave, set subscribe settings.
   */
-  public function edit(Request $request, Group $group)
+  public function edit(Request $request, Group $group, Membership $membership = null)
   {
     // load or create membership for this group and user combination
-    $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
+    if ($membership) // we have a membership we need to authorize the edit
+    {
+      $this->authorize('edit-membership', $group);
+    }
+    else // we edit membership for the current user
+    {
+      $membership = Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
+    }
+
 
     return view('membership.edit')
     ->with('tab', 'preferences')
@@ -153,15 +163,29 @@ class MembershipController extends Controller
   /**
   * Store new settings from the preferencesForm.
   */
-  public function update(Request $request, Group $group)
+  public function update(Request $request, Group $group,  Membership $membership = null)
   {
-    // load or create membership for this group and user combination
-    $membership = \App\Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
-    //$membership->membership = \App\Membership::MEMBER; // Why, but why ?
+    // load membership for this group and the current user combination
+    if (!$membership)
+    {
+      $membership = \App\Membership::firstOrFail(['user_id' => $request->user()->id, 'group_id' => $group->id]);
+    }
+
+    // authorize editing
+    $this->authorize('edit', $membership);
+
+    // if a membership level is defined, we need to check if the user is admin of the group to allow editing of membership levels
+    if ($request->get('membership_level'))
+    {
+      $this->authorize('edit-membership', $group);
+      $membership->membership = $request->get('membership_level');
+    }
+
+
     $membership->notification_interval = intervalToMinutes($request->get('notifications'));
     $membership->save();
 
-    return redirect()->route('groups.show', [$group->id])->with('message', trans('membership.settings_updated'));
+    return redirect()->route('groups.users.index', $group)->with('message', trans('membership.settings_updated'));
   }
 
   /**

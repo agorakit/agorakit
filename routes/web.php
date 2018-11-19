@@ -156,6 +156,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('comments/{comment}/unreact', 'CommentReactionController@destroy');
 
 
+
     // Groups : only members (or everyone if a group is public)
     Route::group(['middleware' => 'public', 'as' => 'groups', 'prefix' => 'groups/{group}'], function () {
 
@@ -176,11 +177,19 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('discussions/mention', 'MentionController@discussions')->name('.discussions.mention');
         Route::get('files/mention', 'MentionController@files')->name('.files.mention');
 
+
+
+
         // preferences and leave group
-        Route::get('preferences', 'MembershipController@edit')->name('.membership.edit');
-        Route::post('preferences', 'MembershipController@update')->name('.membership.update');
-        Route::get('leave', 'MembershipController@destroyConfirm')->name('.membership.deleteconfirm');
-        Route::post('leave', 'MembershipController@destroy')->name('.membership.delete');
+        //Route::get('preferences', 'MembershipController@edit')->name('.mymembership.edit');
+        //Route::post('preferences', 'MembershipController@update')->name('.mymembership.update');
+        Route::get('leave', 'MembershipController@destroyConfirm')->name('.mymembership.deleteconfirm');
+        Route::post('leave', 'MembershipController@destroy')->name('.mymembership.delete');
+
+
+        // edit membership
+        Route::get('membership/{membership?}', 'MembershipController@edit')->name('.membership.edit');
+        Route::post('membership/{membership?}', 'MembershipController@update')->name('.membership.update');
 
 
         // Stats
@@ -191,10 +200,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('users/add', 'Admin\MembershipController@store')->name('.users.store');
         Route::get('users/{user}/admin', 'Admin\MembershipController@edit')->name('.users.edit');
         Route::get('users/{user}/delete', 'Admin\MembershipController@destroy')->name('.users.delete');
-
-        Route::get('users/{user}/admin/add', 'Admin\AdminMembershipController@store')->name('.users.admin.store');
-        Route::get('users/{user}/admin/delete', 'Admin\AdminMembershipController@destroy')->name('.users.admin.delete');
-
         Route::get('users/{user}/confirm', 'Admin\MembershipController@confirm')->name('.users.confirm');
 
         // Invites
