@@ -235,7 +235,6 @@ class UserTest extends Tests\BrowserKitTestCase
 
     public function testNotificationReceived()
     {
-
         $group = App\Group::where('name', 'Test group')->firstOrFail();
         $user = App\User::where('email', 'newbie@agorakit.org')->firstOrFail();
         $roberto = App\User::where('email', 'admin@agorakit.org')->firstOrFail();
@@ -262,7 +261,7 @@ class UserTest extends Tests\BrowserKitTestCase
         Mail::fake();
 
         // send notifications if any
-        Artisan::call('notifications:send');
+        Artisan::call('agorakit:sendnotifications');
 
         // Assert a message was sent to the given users...
         Mail::assertSent(\App\Mail\Notification::class, function ($mail) use ($user) {
