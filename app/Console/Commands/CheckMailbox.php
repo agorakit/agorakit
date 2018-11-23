@@ -7,6 +7,7 @@ use PhpImap\Mailbox;
 use App\User;
 use App\Group;
 use App\Discussion;
+use Log;
 
 class CheckMailbox extends Command
 {
@@ -93,9 +94,11 @@ class CheckMailbox extends Command
                                     $group->touch();
                                     $user->touch();
                                     $this->info('Discussion has been created with id : ' . $discussion->id);
+                                    Log::info('Discussion has been created from email', ['mail'=> $mail, 'discussion' => $discussion]);
                                     $delete_mail = true;
                                 } else {
                                     $this->error('Could not create discussion');
+                                    Log::error('Could not create discussion', ['mail'=> $mail, 'discussion' => $discussion]);
                                 }
                             } else {
                                 $this->error($user->name . ' is not a member of ' . $group->name);
@@ -113,8 +116,9 @@ class CheckMailbox extends Command
 
 
                 if ($delete_mail) {
-                    //$mailbox->deleteMail($mail_id);
+                    $mailbox->deleteMail($mail_id);
                     $this->info('Email has been deleted from mail server');
+                    Log::info('Email has been deleted from mail server', ['mail_id'=> $mail_id]);
                     $delete_mail = false;
                 }
 
