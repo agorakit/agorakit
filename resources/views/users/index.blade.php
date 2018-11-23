@@ -48,6 +48,7 @@
         <th data-priority="4">{{ trans('messages.last_activity') }}</th>
 
         @can('edit-membership', $group)
+          <th data-priority="2">{{ trans('messages.email') }}</th>
           <th data-priority="2">{{ trans('messages.status') }}</th>
           <th data-priority="2">{{ trans('messages.notifications_interval') }}</th>
           <th data-priority="1"></th>
@@ -73,6 +74,9 @@
           </td>
 
           @can('edit-membership', $group)
+            <td>
+               {{$membership->user->email}}
+            </td>
 
             <td data-order="{{ $membership->membership }}">
 
