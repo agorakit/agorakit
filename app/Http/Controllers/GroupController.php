@@ -22,22 +22,22 @@ class GroupController extends Controller
 
     public function index()
     {
-      if (Auth::check()) {
-        $groups = \App\Group::notSecret()
+        if (Auth::check()) {
+            $groups = \App\Group::notSecret()
         ->with('membership')
         ->with('tags')
         ->orderBy('updated_at', 'desc')
         ->get();
-      } else {
-        $groups = \App\Group::notSecret()
+        } else {
+            $groups = \App\Group::notSecret()
         ->with('tags')
         ->orderBy('updated_at', 'desc')
         ->get();
-      }
+        }
 
-      $tagService = app(\Cviebrock\EloquentTaggable\Services\TagService::class);
+        $tagService = app(\Cviebrock\EloquentTaggable\Services\TagService::class);
 
-      return view('dashboard.groups')
+        return view('dashboard.groups')
       ->with('tab', 'groups')
       ->with('groups', $groups)
       ->with('all_tags', $tagService->getAllTags(\App\Group::class));
@@ -58,6 +58,7 @@ class GroupController extends Controller
         $actions = false;
         $files = false;
         $activities = false;
+        $group_email = false;
 
         // User is logged
         if (Auth::check()) {
@@ -81,8 +82,11 @@ class GroupController extends Controller
             if (Gate::allows('viewActivities', $group)) {
                 $activities = $group->activities()->limit(10)->get();
             }
-        } else // anonymous user
-        {
+
+            if (Auth::user()->isMemberOf($group) && setting('user_can_post_by_email')) {
+                $group_email = setting('mail_prefix') . $group->slug .  setting('mail_suffix');
+            }
+        } else { // anonymous user
             if ($group->isSecret()) {
                 abort('404', 'No query results for model [App\Group].');
             }
@@ -106,6 +110,7 @@ class GroupController extends Controller
         ->with('files', $files)
         ->with('activities', $activities)
         ->with('admins', $group->admins()->get())
+        ->with('group_email', $group_email)
         ->with('tab', 'home');
     }
 
