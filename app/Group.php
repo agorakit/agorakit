@@ -35,7 +35,7 @@ class Group extends Model
   const SECRET = 2;
 
 
-  
+
 
   /**
   * Return the sluggable configuration array for this model.
@@ -87,7 +87,7 @@ class Group extends Model
   */
   public function candidates()
   {
-    return $this->belongsToMany(\App\User::class, 'membership')->where('membership', \App\Membership::CANDIDATE)->withTimestamps()->withPivot('membership');
+    return $this->hasMany(\App\Membership::class)->where('membership', \App\Membership::CANDIDATE);
   }
 
 

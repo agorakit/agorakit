@@ -147,19 +147,16 @@
             @foreach ($candidates as $candidate)
               <tr>
                 <td>
-                  <a href="{{ route('users.show', $candidate) }}">
-                    <span class="avatar"><img src="{{route('users.cover', [$candidate, 'small'])}}" class="rounded-circle"/></span>
-                    {{ $candidate->name }}
+                  <a href="{{ route('users.show', $candidate->user) }}">
+                    <span class="avatar"><img src="{{route('users.cover', [$candidate->user, 'small'])}}" class="rounded-circle"/></span>
+                    {{ $candidate->user->name }}
                   </a>
                 </td>
                 <td>
-                  <a class="btn btn-secondary" href="{{action('Admin\MembershipController@confirm', [$group, $candidate])}}" onclick="return confirm('{{trans('messages.are_you_sure')}}');">
-                    <i class="fa fa-check"></i> {{trans('messages.confirm_user')}}
+                  <a class="btn btn-secondary" href="{{action('MembershipController@edit', [$group, $candidate])}}">
+                    <i class="fa fa-check"></i> {{trans('messages.edit')}}
                   </a>
 
-                  <a class="btn btn-secondary" href="{{action('Admin\MembershipController@destroy', [$group, $candidate])}}" onclick="return confirm('{{trans('messages.are_you_sure')}}');">
-                    <i class="fa fa-ban"></i> {{trans('messages.remove_user')}}
-                  </a>
                 </td>
 
               </tr>

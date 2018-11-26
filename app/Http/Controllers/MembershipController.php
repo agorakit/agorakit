@@ -36,7 +36,7 @@ class MembershipController extends Controller
     }
 
     $admins = $group->admins()->orderBy('name')->get();
-    $candidates = $group->candidates()->orderBy('name')->get();
+    $candidates = $group->candidates()->get();
     $invites = Invite::where('group_id', $group->id)->whereNull('claimed_at')->get();
 
 
