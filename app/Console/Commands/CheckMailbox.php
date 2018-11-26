@@ -8,6 +8,7 @@ use App\User;
 use App\Group;
 use App\Discussion;
 use Log;
+use EmailReplyParser\Parser\EmailParser;
 
 class CheckMailbox extends Command
 {
@@ -16,7 +17,10 @@ class CheckMailbox extends Command
     *
     * @var string
     */
-    protected $signature = 'agorakit:checkmailbox';
+    protected $signature = 'agorakit:checkmailbox
+    {{--keep : Use this to keep a copy of the email in the mailbox. Only for development!}}
+    {{--debug : Print each email content. Only for development!}}
+    ';
 
     /**
     * The console command description.
@@ -48,11 +52,21 @@ class CheckMailbox extends Command
 
             $mail_ids = $mailbox->searchMailbox();
 
+            if (count($mail_ids) == 0)
+            {
+                $this->info('No new emails in mailbox');
+            }
+
             foreach ($mail_ids as $mail_id) {
                 $delete_mail = false;
                 $mail = $mailbox->getMail($mail_id);
 
-                //print_r($mail);
+                if ($this->option('debug'))
+                {
+                    print_r($mail);
+                }
+
+
 
                 $this->info('Got a message from ' . $mail->fromAddress);
 
@@ -61,7 +75,7 @@ class CheckMailbox extends Command
                 if ($user) {
                     $this->info('This user exists, full name is ' . $user->name . ' / id is : ' . ($user->id));
 
-                    // check that mail to: is an existing group
+                    // check that each mail to: is an existing group
                     foreach ($mail->headers->to as $to) {
 
                         // here is our raw to: string
@@ -84,16 +98,37 @@ class CheckMailbox extends Command
                                 $discussion = new Discussion;
 
                                 $discussion->name = $mail->subject;
-                                $discussion->body = $mail->textHtml;
+
+
+                                $body_html = $mail->textHtml; // this is the raw html content
+                                $body_text = nl2br(\EmailReplyParser\EmailReplyParser::parseReply($mail->textPlain));
+
+                                // count the number of lines in plain text :
+                                if (count(explode("\n",$body_text)) < 2) // if we really have nothing in there using plain text, let's post the whole html mess from the email
+                                {
+                                    $discussion->body = $body_html;
+                                }
+                                else
+                                {
+                                    $discussion->body = $body_text;
+                                }
 
                                 $discussion->total_comments = 1; // the discussion itself is already a comment
                                 $discussion->user()->associate($user);
+
+                                if ($this->option('debug'))
+                                {
+                                    print_r($discussion->body);
+                                }
+
+
 
                                 if ($group->discussions()->save($discussion)) {
                                     // update activity timestamp on parent items
                                     $group->touch();
                                     $user->touch();
                                     $this->info('Discussion has been created with id : ' . $discussion->id);
+                                    $this->info('Title : ' . $discussion->name);
                                     Log::info('Discussion has been created from email', ['mail'=> $mail, 'discussion' => $discussion]);
                                     $delete_mail = true;
                                 } else {
@@ -116,13 +151,21 @@ class CheckMailbox extends Command
 
 
                 if ($delete_mail) {
-                    $mailbox->deleteMail($mail_id);
-                    $this->info('Email has been deleted from mail server');
-                    Log::info('Email has been deleted from mail server', ['mail_id'=> $mail_id]);
+                    if ($this->option('keep'))
+                    {
+                        $this->info('Email has been kept on the mail server');
+                    }
+                    else
+                    {
+                        $mailbox->deleteMail($mail_id);
+                        $this->info('Email has been deleted from mail server');
+                        Log::info('Email has been deleted from mail server', ['mail_id'=> $mail_id]);
+                    }
+
                     $delete_mail = false;
                 }
 
-                $this->info('-----------------------------------');
+                $this->line('-----------------------------------');
             }
         } else {
             return false;

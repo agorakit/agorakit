@@ -16,8 +16,8 @@ class Discussion extends Model
     use Taggable;
 
     protected $rules = [
-    'name'     => 'required|min:5',
-    'body'     => 'required|min:5',
+    'name'     => 'required',
+    'body'     => 'required',
     'user_id'  => 'required|exists:users,id',
     'group_id' => 'required|exists:groups,id',
     ];

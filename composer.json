@@ -23,7 +23,8 @@
     "toin0u/geocoder-laravel": "^4.0",
     "venturecraft/revisionable": "1.*",
     "watson/autologin": "^0.5",
-    "watson/validating": "^3"
+    "watson/validating": "^3",
+    "willdurand/email-reply-parser": "^2.8"
   },
   "require-dev": {
     "beyondcode/laravel-dump-server": "^1.0",
