@@ -49,6 +49,7 @@ class GroupDiscussionController extends Controller
 
 
     return view('discussions.index')
+    ->with('title', $group->name . ' - ' . trans('messages.discussions'))
     ->with('discussions', $discussions)
     ->with('tags', $tags)
     ->with('group', $group)
@@ -136,6 +137,7 @@ class GroupDiscussionController extends Controller
     }
 
     return view('discussions.show')
+    ->with('title', $group->name . ' - ' . $discussion->name)
     ->with('discussion', $discussion)
     ->with('read_comments', $read_comments)
     ->with('group', $group)

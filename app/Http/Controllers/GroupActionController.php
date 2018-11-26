@@ -61,7 +61,9 @@ class GroupActionController extends Controller
             ->orderBy('start', 'asc')
             ->where('stop', '>=', Carbon::now()->subDays(1))
             ->paginate(10);
+
             return view('actions.index-list')
+            ->with('title', $group->name . ' - ' . trans('messages.agenda'))
             ->with('actions', $actions)
             ->with('group', $group)
             ->with('tab', 'action');
@@ -232,6 +234,7 @@ class GroupActionController extends Controller
     public function show(Group $group, Action $action)
     {
         return view('actions.show')
+        ->with('title', $group->name . ' - ' . $action->name)
         ->with('action', $action)
         ->with('group', $group)
         ->with('tab', 'action');

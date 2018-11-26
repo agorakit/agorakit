@@ -66,6 +66,7 @@ class DiscussionController extends Controller
 
 
     return view('dashboard.discussions')
+    ->with('title', trans('messages.discussions'))
     ->with('tab', 'discussions')
     ->with('discussions', $discussions)
     ->with('tags', $tags);

@@ -59,6 +59,7 @@ class GroupFileController extends Controller
 
 
         return view('files.index')
+        ->with('title', $group->name . ' - ' . trans('messages.files'))
         ->with('files', $files)
         ->with('group', $group)
         ->with('tags', $tags)
@@ -77,6 +78,7 @@ class GroupFileController extends Controller
     public function show(Group $group, File $file)
     {
         return view('files.show')
+        ->with('title', $group->name . ' - ' . $file->name)
         ->with('file', $file)
         ->with('group', $group)
         ->with('tab', 'files');

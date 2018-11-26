@@ -43,6 +43,7 @@ class MembershipController extends Controller
 
 
     return view('users.index')
+    ->with('title', $group->name . ' - ' . trans('messages.members'))
     ->with('memberships', $memberships)
     ->with('admins', $admins)
     ->with('candidates', $candidates)
@@ -161,6 +162,7 @@ class MembershipController extends Controller
 
 
     return view('membership.edit')
+    ->with('title', $group->name . ' - ' . trans('messages.settings'))
     ->with('tab', 'preferences')
     ->with('group', $group)
     ->with('interval', minutesToInterval($membership->notification_interval))

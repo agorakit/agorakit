@@ -104,6 +104,7 @@ class GroupController extends Controller
         }
 
         return view('groups.show')
+        ->with('title', $group->name)
         ->with('group', $group)
         ->with('discussions', $discussions)
         ->with('actions', $actions)

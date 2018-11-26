@@ -45,12 +45,14 @@ class ActionController extends Controller
 
 
       return view('dashboard.agenda-list')
+      ->with('title', trans('messages.agenda'))
       ->with('tab', 'actions')
       ->with('actions', $actions);
     }
 
 
     return view('dashboard.agenda')
+    ->with('title', trans('messages.agenda'))
     ->with('tab', 'actions');
   }
 
