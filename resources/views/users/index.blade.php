@@ -34,7 +34,7 @@
 
     @can('edit-membership', $group)
       <div>
-        <a class="btn btn-secondary" href="{{ action('Admin\MembershipController@create', $group ) }}"><i class="fa fa-plus"></i> {{trans('membership.directly_add_users_button')}}</a>
+        <a class="btn btn-secondary" href="{{ action('MassMembershipController@create', $group ) }}"><i class="fa fa-plus"></i> {{trans('membership.directly_add_users_button')}}</a>
       </div>
     @endcan
   </div>

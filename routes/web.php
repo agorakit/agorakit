@@ -195,12 +195,10 @@ Route::group(['middleware' => ['web']], function () {
         // Stats
         Route::get('insights', 'GroupInsightsController@index')->name('.insights');
 
-        // Membership admin
-        Route::get('users/add', 'Admin\MembershipController@create')->name('.users.create');
-        Route::post('users/add', 'Admin\MembershipController@store')->name('.users.store');
-        Route::get('users/{user}/admin', 'Admin\MembershipController@edit')->name('.users.edit');
-        Route::get('users/{user}/delete', 'Admin\MembershipController@destroy')->name('.users.delete');
-        Route::get('users/{user}/confirm', 'Admin\MembershipController@confirm')->name('.users.confirm');
+        // Membership mass admin (add multiple users at once to a groupe)
+        Route::get('massmembership/create', 'MassMembershipController@create')->name('.massmembership.create');
+        Route::post('massmembership/store', 'MassMembershipController@store')->name('.massmembership.store');
+
 
         // Invites
         Route::get('invite', 'InviteController@invite')->name('.invite.form');
