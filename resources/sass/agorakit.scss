@@ -4,14 +4,14 @@
 
 body
 {
-    padding-bottom: 150px;
-    /*background-image: url("/images/seamless_paper_texture.png");*/
-    background-color: #edede0;
+  padding-bottom: 150px;
+  /*background-image: url("/images/seamless_paper_texture.png");*/
+  background-color: #edede0;
 }
 
 a
 {
-    text-overflow: ellipsis;
+  text-overflow: ellipsis;
 }
 
 
@@ -20,29 +20,29 @@ a
 
 .main-container
 {
-    margin-top: 2rem;
-    padding: 2rem;
-    box-shadow: 0 4px 6px rgba(72, 78, 80, 0.2);
-    border-radius: 2px;
-    background-color: white;
+  margin-top: 2rem;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(72, 78, 80, 0.2);
+  border-radius: 2px;
+  background-color: white;
 }
 
 
 .toolbox
 {
-    padding-bottom: 1rem;
+  padding-bottom: 1rem;
 }
 
 .spacer
 {
-    padding-bottom: 2rem;
+  padding-bottom: 2rem;
 }
 
 /************************** Header ************************************/
 
 h1.small
 {
-    font-size: 1.3rem;
+  font-size: 1.3rem;
 }
 
 
@@ -50,29 +50,29 @@ h1.small
 
 .navbar-brand
 {
-    padding: 0;
+  padding: 0;
 }
 
 .nav-centered
 {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .dashboard-nav
 {
-    padding-bottom: 20px;
+  padding-bottom: 20px;
 }
 
 /**************************** footer ****************************/
 .credits {
-    font-size: 0.7em;
-    text-align: center;
-    margin-top: 1em;
+  font-size: 0.7em;
+  text-align: center;
+  margin-top: 1em;
 }
 
 .credits, .credits a {
-    color: rgb(108, 131, 136);
+  color: rgb(108, 131, 136);
 }
 
 
@@ -82,90 +82,94 @@ h1.small
 
 .nav-tabs
 {
-    margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
 label
 {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .result
 {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid #eee;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #eee;
 }
 
 .badge-unread
 {
-    justify-content: center;
-    align-items: center;
-    border-radius: 100%;
-    text-align: center;
-    display: flex;
-    width: 1.4rem;
-    height: 1.4rem;
-    color: white;
-    background-color: $danger;
-    font-size: 70%;
-    font-weight: bold;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  text-align: center;
+  display: flex;
+  width: 1.4rem;
+  height: 1.4rem;
+  color: white;
+  background-color: $danger;
+  font-size: 70%;
+  font-weight: bold;
 }
 
 
 .tag
 {
-    border: 1px solid #bbb;
-    background-color: #eee;
-    color: #555;
-    font-weight: 400;
+  border: 1px solid #bbb;
+  background-color: #eee;
+  color: #555;
+  font-weight: 400;
 }
 
 .dialog
 {
-    max-width: 50em;
-    padding: 1rem;
+  max-width: 50em;
+  padding: 1rem;
 }
 
 .badge-group
 {
-    color: #888;
-    background-color: white;
-    border: 1px solid #ddd;
+  color: #888;
+  background-color: white;
+  border: 1px solid #ddd;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 25em;
 }
 
 
 .meta
 {
-    color: #888;
-    font-size: 90%;
+  color: #888;
+  font-size: 90%;
 }
 
 
 .help {
-    padding: 20px;
-    margin: 20px 0px;
-    border-width: 0px 0px 0px 5px;
-    border-style: solid;
-    border-color: #EEE;
-    border-image: none;
-    border-radius: 3px;
-    border-left-color: #1B809E;
-    background-color: rgb(188, 218, 226);
+  padding: 20px;
+  margin: 20px 0px;
+  border-width: 0px 0px 0px 5px;
+  border-style: solid;
+  border-color: #EEE;
+  border-image: none;
+  border-radius: 3px;
+  border-left-color: #1B809E;
+  background-color: rgb(188, 218, 226);
 }
 
 .help h4 {
-    color: #1B809E;
-    margin-top: 0px;
-    margin-bottom: 5px;
-    font-size: 18px;
+  color: #1B809E;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  font-size: 18px;
 }
 
 .help a {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 
 .alert a {
-    text-decoration: underline;
+  text-decoration: underline;
 }
