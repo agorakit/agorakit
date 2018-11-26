@@ -188,8 +188,19 @@ class UserTest extends Tests\BrowserKitTestCase
 
         $this->actingAs($user)
         ->visit('groups/'.$group->id.'/users')
-        ->click(trans('messages.confirm_user'))
-        ->see(trans('messages.user_made_member_successfuly'));
+        //->click(trans('messages.confirm_user'))
+        ->see(trans('messages.candidates'));
+
+        $membership = \App\Membership::where('user_id', $newbie->id)->where('group_id', $group->id)->first();
+
+
+
+
+        $this->actingAs($user)
+        ->visit(route('groups.membership.edit', [$group, $membership]))
+        ->select(\App\Membership::CANDIDATE, 'membership_level')
+        ->press(trans('messages.save'))
+        ->see(trans('membership.settings_updated'));
 
         $this->seeInDatabase('membership', ['user_id' => $newbie->id, 'membership' => '20']);
     }
