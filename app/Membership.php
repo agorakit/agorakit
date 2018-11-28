@@ -22,7 +22,7 @@ class Membership extends Model
 
     // Default notification interval is daily :
     protected $attributes = [
-      'notification_interval' => 60*24
+        'notification_interval' => 60*24
     ];
 
     protected $keepRevisionOf = ['config', 'membership', 'notification_interval'];
@@ -57,7 +57,7 @@ class Membership extends Model
 
     public function user()
     {
-        return $this->belongsTo(\App\User::class);
+        return $this->belongsTo(\App\User::class)->withTrashed();
     }
 
     public function group()

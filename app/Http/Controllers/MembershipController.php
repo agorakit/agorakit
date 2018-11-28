@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Gate;
 use Illuminate\Http\Request;
 
+
 class MembershipController extends Controller
 {
   public function __construct()
@@ -28,12 +29,14 @@ class MembershipController extends Controller
 
     if (Gate::allows('edit-membership', $group))
     {
-        $memberships = $group->memberships()->with('user')->orderBy('membership', 'desc')->get();
+      $memberships = $group->memberships()->with('user')->has('user')->orderBy('membership', 'desc')->get();
     }
     else
     {
-      $memberships = $group->memberships()->where('membership', '>' , 0)->with('user')->orderBy('membership', 'desc')->get();
+      $memberships = $group->memberships()->where('membership', '>' , 0)->with('user')->has('user')->orderBy('membership', 'desc')->get();
     }
+
+
 
     $admins = $group->admins()->orderBy('name')->get();
     $candidates = $group->candidates()->get();
