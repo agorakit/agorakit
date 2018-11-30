@@ -27,7 +27,7 @@ class MembershipController extends Controller
   public function index(Group $group)
   {
 
-    if (Gate::allows('edit-membership', $group))
+    if (Gate::allows('manage-membership', $group))
     {
       $memberships = $group->memberships()->with('user')->has('user')->orderBy('membership', 'desc')->get();
     }
@@ -156,7 +156,7 @@ class MembershipController extends Controller
     // load or create membership for this group and user combination
     if ($membership) // we have a membership we need to authorize the edit
     {
-      $this->authorize('edit-membership', $group);
+      $this->authorize('edit', $membership);
     }
     else // we edit membership for the current user
     {
@@ -189,7 +189,7 @@ class MembershipController extends Controller
     // if a membership level is defined, we need to check if the user is admin of the group to allow editing of membership levels
     if ($request->get('membership_level'))
     {
-      $this->authorize('edit-membership', $group);
+      $this->authorize('manage-membership', $group);
       $membership->membership = $request->get('membership_level');
     }
 

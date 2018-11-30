@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Group;
 use App\Membership;
+use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class MembershipPolicy
@@ -28,7 +29,7 @@ class MembershipPolicy
         }
     }
 
-    public function edit(Membership $membership)
+    public function edit(User $user, Membership $membership)
     {
         if ($user->isAdminOf($membership->group))
         {

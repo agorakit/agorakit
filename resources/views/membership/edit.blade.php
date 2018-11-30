@@ -28,7 +28,7 @@
         </div>
 
 
-        @can('edit-membership', $group)
+        @can('manage-membership', $group)
             <h2>Membership status</h2>
             <div class="form-group">
 

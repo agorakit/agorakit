@@ -32,7 +32,7 @@
       </div>
     @endcan
 
-    @can('edit-membership', $group)
+    @can('manage-membership', $group)
       <div>
         <a class="btn btn-secondary" href="{{ action('MassMembershipController@create', $group ) }}"><i class="fa fa-plus"></i> {{trans('membership.directly_add_users_button')}}</a>
       </div>
@@ -47,7 +47,7 @@
         <th data-priority="3">{{ trans('messages.member_since') }}</th>
         <th data-priority="4">{{ trans('messages.last_activity') }}</th>
 
-        @can('edit-membership', $group)
+        @can('manage-membership', $group)
           <th data-priority="2">{{ trans('messages.email') }}</th>
           <th data-priority="2">{{ trans('messages.status') }}</th>
           <th data-priority="2">{{ trans('messages.notifications_interval') }}</th>
@@ -73,7 +73,7 @@
             <a href="{{ route('users.show', $membership->user) }}">{{ $membership->user->updated_at->diffForHumans() }}</a>
           </td>
 
-          @can('edit-membership', $group)
+          @can('manage-membership', $group)
             <td>
                {{$membership->user->email}}
             </td>
@@ -139,7 +139,7 @@
 
 
 
-      @can('edit-membership', $group)
+      @can('manage-membership', $group)
 
         @if ($candidates->count() > 0)
           <h3 class="mt-5">{{trans('messages.candidates')}} :</h3>

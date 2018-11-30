@@ -19,7 +19,7 @@ class MassMembershipController extends Controller
     */
     public function create(Request $request, Group $group)
     {
-        $this->authorize('edit-membership', $group);
+        $this->authorize('manage-membership', $group);
 
         // load a list of users not yet in this group
         $members = $group->users;
@@ -38,7 +38,7 @@ class MassMembershipController extends Controller
     */
     public function store(Request $request, Group $group)
     {
-        $this->authorize('edit-membership', $group);
+        $this->authorize('manage-membership', $group);
 
         if ($request->has('users')) {
             foreach ($request->get('users') as $user_id) {

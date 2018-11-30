@@ -124,7 +124,7 @@ class GroupPolicy
         return $user->isMemberOf($group);
     }
 
-    public function editMembership(User $user, Group $group)
+    public function manageMembership(User $user, Group $group)
     {
         return $user->isAdminOf($group);
     }
