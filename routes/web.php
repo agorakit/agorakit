@@ -62,6 +62,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('agenda/ical', 'IcalController@index')->name('agenda.ical');
 
 
+    /* Pages */
+Route::get('pages/help', 'PageController@help')->name('pages.help');
 
     /*
     Feeds (RSS ftw!)
@@ -137,7 +139,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('users/{user}', 'UserController@show')->name('users.show');
 
     Route::get('users/{user}/cover/{size}', 'UserCoverController@show')->name('users.cover');
-  //  Route::get('users/{user}/avatar', 'UserController@avatar')->name('users.avatar');
+    //  Route::get('users/{user}/avatar', 'UserController@avatar')->name('users.avatar');
 
     Route::get('users/{user}/sendverification', 'UserController@sendVerificationAgain')->name('users.sendverification');
 
