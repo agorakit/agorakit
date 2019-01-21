@@ -19,14 +19,15 @@
 
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                    {{ trans('messages.your_groups') }}
+                     <i class="fa fa-cubes"></i>   {{ trans('messages.your_groups') }}
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" class="dropdown-item" href="{{ action('GroupController@index') }}">
-                        {{trans('messages.all_groups')}}
+                         {{trans('messages.all_groups')}}
                     </a>
 
                     <div class="dropdown-divider"></div>
+
 
                     @forelse (Auth::user()->groups()->orderBy('name')->get() as $group)
                         <a class="dropdown-item" href="{{ route('groups.show', $group)}}">{{$group->name}}</a>
@@ -44,13 +45,13 @@
 
             <div class="nav-item">
                 <a class="nav-link" href="{{ action('DiscussionController@index') }}">
-                    {{trans('messages.discussions')}}
+                    <i class="fa fa-comments-o"></i> {{trans('messages.discussions')}}
                 </a>
             </div>
 
             <div class="nav-item">
                 <a class="nav-link" href="{{ action('ActionController@index') }}">
-                </i> {{trans('messages.agenda')}}
+                <i class="fa fa-calendar"></i> {{trans('messages.agenda')}}
             </a>
         </div>
 
@@ -71,6 +72,13 @@
                     <i class="fa fa-users"></i> {{trans('messages.users_list')}}
                 </a>
             </div>
+        </div>
+
+        <div class="nav-item">
+            <a class="nav-link" href="{{ action('PageController@help') }}">
+                <i class="fa fa-info-circle"></i>
+                {{trans('messages.help')}}
+            </a>
         </div>
 
     </div>
