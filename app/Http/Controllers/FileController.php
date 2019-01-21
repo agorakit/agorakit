@@ -26,10 +26,20 @@ class FileController extends Controller
 
 
     if (Auth::check()) {
-      $groups = \App\Group::publicgroups()
-      ->get()
-      ->pluck('id')
-      ->merge(Auth::user()->groups()->pluck('groups.id'));
+      if (Auth::user()->getPreference('show') == 'all') {
+        // build a list of groups the user has access to
+        if (Auth::user()->isAdmin()) { // super admin sees everything
+          $groups = \App\Group::get()
+          ->pluck('id');
+        } else { // other see their groups + public groups
+          $groups = \App\Group::publicgroups()
+          ->get()
+          ->pluck('id')
+          ->merge(Auth::user()->groups()->pluck('groups.id'));
+        }
+      } else { // show just my groups
+        $groups = Auth::user()->groups()->pluck('groups.id');
+      }
 
       if ($request->get('tag')) {
         $files = \App\File::with('group', 'user')

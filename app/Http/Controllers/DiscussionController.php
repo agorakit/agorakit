@@ -33,11 +33,18 @@ class DiscussionController extends Controller
       //->pluck('id')
       //->merge(Auth::user()->groups()->pluck('groups.id'));
 
+
       if (Auth::user()->getPreference('show') == 'all') {
-        $groups = \App\Group::publicgroups()
-        ->get()
-        ->pluck('id')
-        ->merge(Auth::user()->groups()->pluck('groups.id'));
+        // build a list of groups the user has access to
+        if (Auth::user()->isAdmin()) { // super admin sees everything
+          $groups = \App\Group::get()
+          ->pluck('id');
+        } else {
+          $groups = \App\Group::publicgroups()
+          ->get()
+          ->pluck('id')
+          ->merge(Auth::user()->groups()->pluck('groups.id'));
+        }
       } else {
         $groups = Auth::user()->groups()->pluck('groups.id');
       }
