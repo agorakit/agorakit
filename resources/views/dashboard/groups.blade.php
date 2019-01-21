@@ -37,6 +37,14 @@
                             <p class="card-text">
                                 {{summary($group->body) }}
                                 <br/>
+
+                                <span class="badge badge-secondary"><i class="fa fa-users"></i> {{$group->users()->count()}}</span>
+                                <span class="badge badge-secondary"><i class="fa fa-comments"></i> {{$group->discussions()->count()}}</span>
+                                <span class="badge badge-secondary"><i class="fa fa-calendar"></i> {{$group->actions()->count()}}</span>
+
+                                
+
+
                                 @foreach ($group->tags as $tag)
                                     <span class="badge tag">{{$tag->name}}</span>
                                 @endforeach
@@ -73,10 +81,11 @@
                 @endif
 
 
+
             @empty
                 {{trans('messages.nothing_yet')}}
             @endforelse
-
+            {!!$groups->render()!!}
         </div>
     @else
         {{trans('messages.nothing_yet')}}

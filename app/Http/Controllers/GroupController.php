@@ -27,20 +27,20 @@ class GroupController extends Controller
         ->with('membership')
         ->with('tags')
         ->orderBy('updated_at', 'desc')
-        ->get();
+        ->paginate(21);
         } else {
             $groups = \App\Group::notSecret()
         ->with('tags')
         ->orderBy('updated_at', 'desc')
-        ->get();
+        ->paginate(21);
         }
 
-        $tagService = app(\Cviebrock\EloquentTaggable\Services\TagService::class);
+        //$tagService = app(\Cviebrock\EloquentTaggable\Services\TagService::class);
 
         return view('dashboard.groups')
       ->with('tab', 'groups')
-      ->with('groups', $groups)
-      ->with('all_tags', $tagService->getAllTags(\App\Group::class));
+      ->with('groups', $groups);
+      //->with('all_tags', $tagService->getAllTags(\App\Group::class));
     }
 
 
