@@ -10,6 +10,7 @@ return array (
   'status' => 'Status',
   'username' => 'nom d\'utilisateur',
   //==================================== Translations ====================================//
+  'help' => 'Aide',
   'a_message_for_you' => 'Un message pour vous',
   'accept_invitation' => 'Accepter l\'invitation',
   'actions' => 'Actions',
