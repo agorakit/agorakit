@@ -27,12 +27,12 @@
         @endif
 
         <p>
-          @if ($group->tags->count() > 0)
-            {{trans('messages.tags')}} :
-            @foreach ($group->tags as $tag)
-              <span class="badge tag">{{$tag->name}}</span>
-            @endforeach
-          @endif
+          <span class="badge badge-secondary"><i class="fa fa-users"></i> {{$group->users()->count()}}</span>
+          <span class="badge badge-secondary"><i class="fa fa-comments"></i> {{$group->discussions()->count()}}</span>
+          <span class="badge badge-secondary"><i class="fa fa-calendar"></i> {{$group->actions()->count()}}</span>
+          @foreach ($group->tags as $tag)
+            <span class="badge tag">{{$tag->name}}</span>
+          @endforeach
         </p>
 
         <p>
