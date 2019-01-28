@@ -42,7 +42,7 @@ return [
         Chain::class => [
             GoogleMaps::class => [
                 env('GOOGLE_MAPS_LOCALE', 'en-US'),
-                env('GOOGLE_MAPS_API_KEY'),
+                env('GOOGLE_MAPS_GEOCODING_API_KEY'),
             ],
             GeoPlugin::class  => [],
         ],
