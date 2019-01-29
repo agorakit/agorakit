@@ -20,7 +20,7 @@ class SendNotifications extends Command
     *
     * @var string
     */
-    protected $signature = 'agorakit:sendnotifications';
+    protected $signature = 'agorakit:sendnotifications {--batch=100}';
 
     /**
     * The console command description.
@@ -54,7 +54,7 @@ class SendNotifications extends Command
                     $user = \App\User::find($notification->user_id);
                     $group = \App\Group::find($notification->group_id);
 
-                    if ($user && $group) {
+                    if ($user && $group && $user->isVerified()) {
                         $this->line('Checking if there is something to send to user:'.$user->id.' ('.$user->email.')'.' for group:'.$group->id.' ('.$group->name.')');
                         if ($this->sendNotificationEmail($group, $user)) {
                             $this->info('Message sent');
@@ -81,8 +81,8 @@ class SendNotifications extends Command
         (select *, date_add(notified_at, interval notification_interval minute) as notify from membership
         where notification_interval > 0
         and membership >= :membership) as memberships
-        where notify < :now or notify is null
-        ', ['now' => Carbon::now(), 'membership' => \App\Membership::MEMBER]);
+        where notify < :now or notify is null limit :batch
+        ', ['now' => Carbon::now(), 'membership' => \App\Membership::MEMBER, 'batch' => $this->option('batch')]);
 
         return $notifications;
     }
@@ -91,75 +91,76 @@ class SendNotifications extends Command
 
     public function sendNotificationEmail(Group $group, User $user)
     {
-        \App::setLocale(config('app.locale'));
+        \App::setLocale(config('app.locale')); // TODO use user's locale from preferences
 
-        if ($user->verified == 1) {
-            // Establish timestamp for notifications from membership data (when was an email sent for the last time?)
-            $membership = \App\Membership::where('user_id', '=', $user->id)
+
+        // Establish timestamp for notifications from membership data (when was an email sent for the last time?)
+        $membership = \App\Membership::where('user_id', '=', $user->id)
+        ->where('group_id', '=', $group->id)
+        ->where('membership', '>=', \App\Membership::MEMBER)
+        ->first();
+
+
+        if ($membership) {
+            $last_notification = $membership->notified_at;
+
+            // find unread discussions since timestamp
+            $discussions = $this->getUnreadDiscussionsSince($user->id, $group->id, $membership->notified_at);
+
+            // find new files since timestamp
+            $files = \App\File::where('created_at', '>', $membership->notified_at)
             ->where('group_id', '=', $group->id)
-            ->where('membership', '>=', \App\Membership::MEMBER)
-            ->first();
+            ->get();
 
-            if ($membership) {
-                $last_notification = $membership->notified_at;
+            // find new members since timestamp
+            $users = $this->getNewMembersSince($user->id, $group->id, $membership->notified_at);
 
-                // find unread discussions since timestamp
-                $discussions = $this->getUnreadDiscussionsSince($user->id, $group->id, $membership->notified_at);
+            // find future actions until next 2 weeks, this is curently hardcoded... TODO use the mail sending interval to determine stop date
+            $actions = \App\Action::where('start', '>', Carbon::now())
+            ->where('stop', '<', Carbon::now()->addWeek()->addWeek())
+            ->where('group_id', '=', $group->id)
+            ->orderBy('start')
+            ->get();
 
-                // find new files since timestamp
-                $files = \App\File::where('created_at', '>', $membership->notified_at)
-                ->where('group_id', '=', $group->id)
-                ->get();
+            // we only trigger mail sending if a new action has been **created** since last notification email.
+            // BUT we will send actions for the next two weeks in all cases, IF a mail must be sent
+            $actions_count = \App\Action::where('created_at', '>', $membership->notified_at)
+            ->where('group_id', '=', $group->id)
+            ->count();
 
-                // find new members since timestamp
-                $users = $this->getNewMembersSince($user->id, $group->id, $membership->notified_at);
-
-                // find future actions until next 2 weeks, this is curently hardcoded... TODO use the mail sending interval to determine stop date
-                $actions = \App\Action::where('start', '>', Carbon::now())
-                ->where('stop', '<', Carbon::now()->addWeek()->addWeek())
-                ->where('group_id', '=', $group->id)
-                ->orderBy('start')
-                ->get();
-
-                // we only trigger mail sending if a new action has been **created** since last notification email.
-                // BUT we will send actions for the next two weeks in all cases, IF a mail must be sent
-                $actions_count = \App\Action::where('created_at', '>', $membership->notified_at)
-                ->where('group_id', '=', $group->id)
-                ->count();
-
-                // in all cases update timestamp
-                $membership->notified_at = Carbon::now();
-                $membership->save();
+            // in all cases update timestamp
+            $membership->notified_at = Carbon::now();
+            $membership->save();
 
 
-                // if we have anything, build the message and send
-                // removed that : or count($users) > 0
-                // because we don't want to be notified just because there is a new member
+            // if we have anything, build the message and send
+            // removed that : or count($users) > 0
+            // because we don't want to be notified just because there is a new member
 
 
-                if (count($discussions) > 0 or count($files) > 0 or ($actions_count > 0)) {
-                    $notification = new Notification;
+            if (count($discussions) > 0 or count($files) > 0 or ($actions_count > 0)) {
+                $notification = new Notification;
 
-                    $notification->user = $user;
-                    $notification->group = $group;
-                    $notification->membership = $membership;
-                    $notification->discussions = $discussions;
+                $notification->user = $user;
+                $notification->group = $group;
+                $notification->membership = $membership;
+                $notification->discussions = $discussions;
 
-                    $notification->files = $files;
-                    $notification->users = $users;
-                    $notification->actions = $actions;
-                    $notification->last_notification = $last_notification;
+                $notification->files = $files;
+                $notification->users = $users;
+                $notification->actions = $actions;
+                $notification->last_notification = $last_notification;
 
 
-                    Mail::to($user)->send($notification);
-                    Log::info('User Notified', ['user' => $user]);
-                    return true;
-                }
+                Mail::to($user)->send($notification);
+                Log::info('User Notified', ['user' => $user]);
+                return true;
             }
-
-
-            return false;
         }
+
+
+        return false;
+
     }
 
 
@@ -183,20 +184,20 @@ class SendNotifications extends Command
 
             ', ['user_id' => $user_id, 'group_id' => $group_id, 'since' => $since]);
 
-        return $discussions;
-    }
+            return $discussions;
+        }
 
-    /**
-    * Returns a list of users that joined the $group_id $since this timestamp.
-    * Excludes the $user_id (which might be set to the current user).
-    */
-    public function getNewMembersSince($user_id, $group_id, $since)
-    {
-        $users = \App\User::fromQuery('select * from users where id in
+        /**
+        * Returns a list of users that joined the $group_id $since this timestamp.
+        * Excludes the $user_id (which might be set to the current user).
+        */
+        public function getNewMembersSince($user_id, $group_id, $since)
+        {
+            $users = \App\User::fromQuery('select * from users where id in
             (select user_id from membership where group_id = :group_id and created_at > :since and membership >= :membership and user_id <> :user_id)
 
             ', ['user_id' => $user_id, 'group_id' => $group_id, 'since' => $since, 'membership' => \App\Membership::MEMBER]);
 
-        return $users;
+            return $users;
+        }
     }
-}
