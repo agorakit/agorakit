@@ -20,6 +20,11 @@ class AppServiceProvider extends ServiceProvider
     // set correct locale for Carbon
     Carbon::setLocale(config('app.locale'));
     Schema::defaultStringLength(191);
+
+    // Set HTTPS everywhere in production
+    if (config('app.env') === 'production') {
+      $this->app['request']->server->set('HTTPS', true);
+    }
   }
 
   /**
