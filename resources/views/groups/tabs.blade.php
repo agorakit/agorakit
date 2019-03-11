@@ -130,7 +130,7 @@
                     </a>
 
                     <a class="dropdown-item" href="{{ route('groups.deleteconfirm', [$group]) }}">
-                        <i class="fa fa-trash"></i> {{trans('messages.delete')}}
+                        <i class="fa fa-trash"></i> {{trans('messages.deleteGroup')}}
                     </a>
                 </div>
             </li>
