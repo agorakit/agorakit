@@ -98,7 +98,6 @@ class GroupDiscussionController extends Controller
     $discussion = new Discussion();
     $discussion->name = $request->input('name');
     $discussion->body = $request->input('body');
-   
     $discussion->total_comments = 1; // the discussion itself is already a comment
     $discussion->user()->associate(Auth::user());
 
