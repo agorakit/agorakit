@@ -88,7 +88,7 @@ class GroupDiscussionController extends Controller
         //if group is null, redirect to the discussion create page with error messages, saying
         //that you must select a group
         if (is_null($group)) {
-          return redirect()->route('discussions.create')->withErrors(['msg', 'The Message']);
+          return redirect()->route('discussions.create')->withErrors(['You must select a Group']);
         }
     
     }
