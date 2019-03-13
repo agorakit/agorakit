@@ -56,7 +56,8 @@ return array (
   'create_link_help' => 'Here you can add a link (URL). For example link to videos, shared documents, etc...
   Enter a correct URL starting with http:// and set a title for this link. You can also add tags.',
   'created' => 'Created',
-  'delete' => 'delete',
+  'delete' => 'Delete',
+  'deleteGroup' => 'Delete Group',
   'delete_confirm_button' => 'Delete',
   'delete_confirm_title' => 'Are you sure you want to delete?',
   'description' => 'Description',
