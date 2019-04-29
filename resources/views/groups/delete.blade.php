@@ -1,19 +1,20 @@
-@extends('app')
+@extends('dialog')
 
 @section('content')
 
-@include('groups.tabs')
 <div class="tab_content">
-  <h1>{{trans('messages.delete_confirm_title')}}</h1>
+  <h1>{{__('Are you really sure you want to delete this groups and all it\'s content?')}}</h1>
 
-  <p>{{$group->name}}</p>
+  <strong>@lang('You are going to delete this group : ') {{$group->name}}</strong>
+  <p>@lang('Altough this can be undone by an admin please make sure you want this groups to be deleted before clicking')
 
   {!! Form::model($group, array('method' => 'DELETE', 'action' => ['GroupController@destroy', $group])) !!}
 
 
 
   <div class="form-group">
-              {!! Form::submit(trans('messages.delete_confirm_button'), ['class' => 'btn btn-danger']) !!}
+    <a class="btn btn-secondary" href="{{route('groups.show', $group)}}">{{ trans('messages.cancel') }}</a>
+              {!! Form::submit(trans('Click here to confirm'), ['class' => 'btn btn-danger']) !!}
   </div>
 
 
