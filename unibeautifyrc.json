@@ -1,0 +1,20 @@
+{
+  "PHP": {
+    "beautifiers": [
+      "PHP-CS-Fixer"
+    ]
+  },
+  "HTML": {
+    "beautifiers": [
+      "Pretty Diff",
+      "JS-Beautify"
+    ]
+  },
+  "CSS": {
+    "beautifiers": [
+      "Prettier",
+      "Pretty Diff",
+      "JS-Beautify"
+    ]
+  }
+}
