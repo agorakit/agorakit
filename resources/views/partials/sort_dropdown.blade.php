@@ -3,7 +3,7 @@
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         {{trans('messages.sort')}}
         @if (request()->get('sort'))
-            : @lang('messages.sort_by_'.request()->get('sort').'_'.request()->get('dir'))
+            : {{ trans('messages.sort_by_' . request()->get('sort').'_'.request()->get('dir')) }}
         @else
             : @lang('messages.sort_by_created_at_desc')
         @endif
