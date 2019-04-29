@@ -5,7 +5,7 @@
   <meta name=viewport content="width=device-width, initial-scale=1">
   <title>{{setting('name')}}</title>
 
-  <link rel="shortcut icon" href="{{{ asset('storage/logo/favicon.png') }}}">
+  <link rel="shortcut icon" href="{{{ asset('logo/favicon.png') }}}">
 
   <!-- Font awesome -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
