@@ -1,5 +1,4 @@
 <?php
-
 return [
-    'download'  => 'Descargar',
+    'download' => 'Descargar'
 ];

@@ -1,7 +1,5 @@
 <?php
-
-return array (
-  //============================== New strings to translate ==============================//
-  'clicking_the_button' => 'TODO: clicking_the_button',
-  'if_you_have_trouble' => 'TODO: if_you_have_trouble',
-);
+return [
+    'clicking_the_button' => 'knop, kopieer en plak de onderstaande URL in uw webbrowser',
+    'if_you_have_trouble' => 'Als u problemen ondervindt bij het klikken op de'
+];

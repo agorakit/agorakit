@@ -1,5 +1,4 @@
 <?php
-
 return [
-    'download'  => 'TODO: download',
+    'download' => 'Downloaden'
 ];

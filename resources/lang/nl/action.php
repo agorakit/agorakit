@@ -1,6 +1,4 @@
 <?php
-
-return array (
-  //==================================== Translations ====================================//
-  'create_one_button' => 'Een actie aanmaken',
-);
+return [
+    'create_one_button' => 'Voeg een evenement toe aan de agenda'
+];
