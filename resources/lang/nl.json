@@ -1,0 +1,17 @@
+{
+    "messages.sort_by_created_at_desc": "messages.sort_by_created_at_desc",
+    "messages.sort_by_created_at_asc": "messages.sort_by_created_at_asc",
+    "messages.sort_by_name_asc": "messages.sort_by_name_asc",
+    "messages.sort_by_name_desc": "messages.sort_by_name_desc",
+    "messages.sort_by_filesize_asc": "messages.sort_by_filesize_asc",
+    "messages.sort_by_filesize_desc": "messages.sort_by_filesize_desc",
+    "Administer group": "Administer group",
+    "Delete group": "Delete group",
+    "Are you really sure you want to delete this groups and all it\\'s content?": "Are you really sure you want to delete this groups and all it\\'s content?",
+    "You are going to delete this group : ": "You are going to delete this group : ",
+    "Altough this can be undone by an admin please make sure you want this groups to be deleted before clicking": "Altough this can be undone by an admin please make sure you want this groups to be deleted before clicking",
+    "notifications.if_you_have_trouble": "notifications.if_you_have_trouble",
+    "notifications.clicking_the_button": "notifications.clicking_the_button",
+    "pagination.previous": "pagination.previous",
+    "pagination.next": "pagination.next"
+}
