@@ -1,7 +1,6 @@
 <?php
 
 return array (
-  //==================================== Translations ====================================//
   'closed' => 'Closed group',
   'cover' => 'Cover picture',
   'create_a_group_button' => 'Start a group',
@@ -18,7 +17,6 @@ return array (
   'open' => 'Public group',
   'secret' => 'Secret group',
   'type' => 'Group type',
-  //================================== Obsolete strings ==================================//
   'LLH:obsolete' => 
   array (
     'tabs' => 'TODO: tabs',

@@ -1,5 +1,6 @@
 <?php
-return [
-    'user_applied_to_the_group'        => 'TODO: user_applied_to_the_group',
-    'you_have_been_added_to_the_group' => 'TODO: you_have_been_added_to_the_group'
-];
+
+return array (
+  'user_applied_to_the_group' => 'Benutzer :user, der auf die Gruppe :group angewendet wurde',
+  'you_have_been_added_to_the_group' => 'Sie wurden der Gruppe hinzugefügt',
+);

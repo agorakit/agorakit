@@ -1,4 +1,5 @@
 <?php
-return [
-    'intro' => 'Introducción'
-];
+
+return array (
+  'intro' => 'Introducción',
+);

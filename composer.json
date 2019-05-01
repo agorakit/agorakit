@@ -8,6 +8,7 @@
 
   "require": {
     "php": ">=7.1.3",
+    "barryvdh/laravel-translation-manager": "^0.5.3",
     "consoletvs/charts": "5.*",
     "cviebrock/eloquent-sluggable": "4.6",
     "cviebrock/eloquent-taggable": "~3.4",

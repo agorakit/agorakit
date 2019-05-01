@@ -1,4 +1,5 @@
 <?php
-return [
-    'create_one_button' => 'Een discussie aanmaken'
-];
+
+return array (
+  'create_one_button' => 'Een discussie aanmaken',
+);

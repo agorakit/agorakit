@@ -1,7 +1,6 @@
 <?php
 
 return array (
-  //============================== New strings to translate ==============================//
   'admin' => 'administrator',
   'blacklisted' => 'blacklisted',
   'candidate' => 'candidate',
@@ -9,7 +8,6 @@ return array (
   'member' => 'member',
   'removed' => 'removed',
   'unregistered' => 'unregistered',
-  //==================================== Translations ====================================//
   'add_button' => 'Add user(s)',
   'add_users' => 'Add users',
   'add_users_intro' => 'Use this to directly add existing users to the group without invitation. Admin only',
@@ -45,8 +43,7 @@ return array (
   'users_to_add' => 'Users to add (existing users only, use the invite feature for new users)',
   'welcome' => 'Welcome',
   'when_to_receive_notifications' => 'How often do you want to receive notifications by email?',
-  //================================== Obsolete strings ==================================//
-  'LLH:obsolete' =>
+  'LLH:obsolete' => 
   array (
     'your_preferences_for' => 'Your preferences for',
   ),

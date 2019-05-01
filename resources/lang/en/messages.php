@@ -1,7 +1,6 @@
 <?php
 
 return array (
-  //============================== New strings to translate ==============================//
   'member_since' => 'Member since',
   'no_file_selected' => 'No file selected',
   'notifications_interval' => 'Notifications',
@@ -9,7 +8,6 @@ return array (
   'preferences_for' => 'Preferences for',
   'status' => 'Status',
   'username' => 'username',
-  //==================================== Translations ====================================//
   'help' => 'Help',
   'a_message_for_you' => 'A message for you',
   'accept_invitation' => 'Accept the invitation',
@@ -233,8 +231,7 @@ return array (
   'you_register' => 'register here',
   'your_groups' => 'Your groups',
   'your_search_for' => 'Your search for',
-  //================================== Obsolete strings ==================================//
-  'LLH:obsolete' =>
+  'LLH:obsolete' => 
   array (
     'by' => 'by',
     'date' => 'date',
