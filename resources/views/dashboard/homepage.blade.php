@@ -2,41 +2,29 @@
 
 @section('content')
 
-    <div class="tab_content">
 
-        {{--@include('dashboard.tabs')--}}
-
-        {{--
-        <div class="spacer"></div>
-
-
-        <div class="card text-white bg-info mb-3">
-        <div class="card-body">
-        <!--<h5 class="card-title">Info</h5>-->
-        <p class="card-text">    {!! setting('homepage_presentation_for_members', trans('documentation.intro')) !!}</p>
-    </div>
-</div>
---}}
+<h1><a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ __('Homepage') }}</h1>
+@include ('partials.preferences-show')
 
 
 <div class="row">
     <div class="col-md-8">
 
 
-        @if ($my_discussions->count() > 0)
-            <h1 class="small">{{ trans('messages.latest_discussions_my') }} </h1>
-                <a class="badge badge-pill badge-primary mb-4" href="{{ route('discussions.create') }}">
-                    <i class="fa fa-plus"></i> {{trans('discussion.create_one_button')}}
-                </a>
+        @if ($discussions->count() > 0)
+        <h1 class="small"> {{ __('Latest discussions') }}</h1>
+        <a class="badge badge-pill badge-primary mb-4" href="{{ route('discussions.create') }}">
+            <i class="fa fa-plus"></i> {{trans('discussion.create_one_button')}}
+        </a>
 
 
-            <div class="discussions">
-                @forelse( $my_discussions as $discussion )
-                    @include('discussions.discussion')
-                @empty
-                    {{trans('messages.nothing_yet')}}
-                @endforelse
-            </div>
+        <div class="discussions">
+            @forelse( $discussions as $discussion )
+            @include('discussions.discussion')
+            @empty
+            {{trans('messages.nothing_yet')}}
+            @endforelse
+        </div>
 
         @endif
     </div>
@@ -44,61 +32,29 @@
 
     <div class="col-md-4">
 
-        @if ($my_actions->count() > 0)
-            <h1 class="small">{{ trans('messages.agenda_my') }}</h1>
-                <a class="badge badge-pill badge-primary mb-4" href="{{ route('actions.create') }}">
-                    <i class="fa fa-plus"></i> {{trans('action.create_one_button')}}
-                </a>
+        @if ($actions->count() > 0)
+        <h1 class="small">{{ __('Calendar') }}</h1>
+        <a class="badge badge-pill badge-primary mb-4" href="{{ route('actions.create') }}">
+            <i class="fa fa-plus"></i> {{trans('action.create_one_button')}}
+        </a>
 
-            <div class="actions">
-                @forelse( $my_actions as $action)
-                    @include('actions.action')
-                @empty
-                    {{trans('messages.nothing_yet')}}
-                @endforelse
-            </div>
+        <div class="actions">
+            @forelse( $actions as $action)
+            @include('actions.action')
+            @empty
+            {{trans('messages.nothing_yet')}}
+            @endforelse
+        </div>
         @endif
     </div>
 </div>
 
 
-<div class="row mt-5">
-
-
-    @if ($other_discussions->count() > 0)
-        <div class="col-md-8">
-            <h1 class="small">{{ trans('messages.latest_discussions_others') }}</h1>
-            <div class="discussions">
-                @forelse( $other_discussions as $discussion )
-                    @include('discussions.discussion')
-                @empty
-                    {{trans('messages.nothing_yet')}}
-                @endforelse
-            </div>
-        </div>
-    @endif
 
 
 
-    @if ($other_actions->count() > 0)
-        <div class="col-md-4">
-            <h1 class="small">{{ trans('messages.agenda_others') }}</h1>
-            <div class="actions">
-                @forelse( $other_actions as $action)
-                    @include('actions.action')
-                @empty
-                    {{trans('messages.nothing_yet')}}
-                @endforelse
-            </div>
-        </div>
-    @endif
 
 
 
-</div>
-
-
-
-</div>
 
 @endsection
