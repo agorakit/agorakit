@@ -19,7 +19,7 @@
                 right: 'month,agendaWeek,agendaDay'
             },
 
-            selectable: true,
+            selectable: false,
             selectHelper: true,
             select: function(start, end) {
                 var title = prompt('{{trans('messages.title')}}');
