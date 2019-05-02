@@ -139,7 +139,7 @@ class InviteController extends Controller
             // add user to membership for the group taken from the invite table
             $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $invite->group_id]);
             $membership->membership = \App\Membership::MEMBER;
-            $membership->notification_interval = 60 * 24 * 7; // this is a sane default imho for notification interval (weekly)
+            $membership->notification_interval = 60 * 24; // this is a sane default imho for notification interval (daily)
             $membership->save();
 
             // Invitation is now claimed, but not deleted
