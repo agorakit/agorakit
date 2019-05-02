@@ -68,24 +68,15 @@
       </a>
     </span>
 
-    <br/>
-
-    <div class="d-flex justify-content-between">
-      <a href="{{ route('groups.show', [$discussion->group_id]) }}">
-        <span class="badge badge-secondary badge-group">
-          @if ($discussion->group->isOpen())
-            <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
-          @elseif ($discussion->group->isClosed())
-            <i class="fa fa-lock" title="{{trans('group.closed')}}"></i>
-          @else
-            <i class="fa fa-eye-slash" title="{{trans('group.secret')}}"></i>
-          @endif
-          {{ $discussion->group->name }}
-        </span>
-      </a>
-      <small>{{ $discussion->updated_at->diffForHumans() }}</small>
+    <div class="meta">
+      {{trans('messages.started_by')}}
+      <span class="user">
+        <a href="{{ route('users.show', [$discussion->user]) }}">{{ $discussion->user->name}}</a>
+      </span>
+      {{trans('messages.in')}} {{ $discussion->group->name}} {{ $discussion->created_at->diffForHumans()}}
     </div>
-  </div>
 
+
+  </div>
 
 </div>
