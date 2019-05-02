@@ -46,7 +46,7 @@
         @can('update', $file)
             <a class="btn btn-secondary" href="{{ route('groups.files.edit', [$group, $file]) }}">
                 <i class="fa fa-pencil"></i>
-                {{trans('messages.edit')}}
+                {{__('Rename')}}
             </a>
         @endcan
 
