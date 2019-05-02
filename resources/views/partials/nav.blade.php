@@ -1,10 +1,10 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
     <a class="navbar-brand" href="{{ route('index') }}">
         @if (Storage::exists('public/logo/favicon.png'))
             <img src="{{{ asset('storage/logo/favicon.png') }}}" width="40" height="40"/>
         @else
-            <img src="/images/logo.svg" width="40" height="40"/>
+            <img src="/images/logo-white.svg" width="40" height="40"/>
         @endif
         <span class="ml-1 d-lg-none d-xl-inline">{{setting('name')}}</span>
     </a>

@@ -3,15 +3,15 @@
 $body-bg: #fff;
 
 // Borders
-$laravel-border-color: darken($body-bg, 10%);
+$laravel-border-color: darken($body-bg, 20%);
 $list-group-border-color: $laravel-border-color;
-
 $card-border-color: $laravel-border-color;
+$border-color: $laravel-border-color;
 
 // Brands
 //$primary:       rgb(28, 102, 129);
-//$primary: #3097D1;
-$primary: #086bad;
+$primary: #3097D1;
+//$primary: #086bad;
 /*
 $info: #8eb4cb;
 $success: #2ab27b;
@@ -20,7 +20,7 @@ $danger: #dc3545;
 */
 
 // Typography
-$font-family-sans-serif: sans-serif;
+//$font-family-sans-serif: sans-serif;
 $font-size-base: 0.95rem;
 $font-weight-base: 400;
 $line-height-base: 1.5;
