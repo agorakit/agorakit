@@ -13,14 +13,10 @@
 
   <div class="content">
     <div class="name">
-      @if ($file->isLink())
         <a href="{{ route('groups.files.download', [$file->group, $file]) }}" target="_blank">
           {{ $file->name }}
           <i class="fa fa-external-link"></i>
         </a>
-      @else
-        <a  href="{{ route('groups.files.show', [$file->group, $file]) }}">{{ $file->name }}</a>
-      @endif
 
       @if ($file->tags->count() > 0)
         @foreach ($file->tags as $tag)
@@ -75,7 +71,7 @@
         @can('update', $file)
           <a class="dropdown-item" href="{{ route('groups.files.edit', [$file->group, $file]) }}">
             <i class="fa fa-pencil"></i>
-            {{trans('messages.edit')}}
+            {{__('Rename')}}
           </a>
         @endcan
 
