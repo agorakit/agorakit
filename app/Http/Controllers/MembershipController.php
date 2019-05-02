@@ -187,7 +187,7 @@ class MembershipController extends Controller
     $this->authorize('edit', $membership);
 
     // if a membership level is defined, we need to check if the user is admin of the group to allow editing of membership levels
-    if ($request->get('membership_level'))
+    if ($request->has('membership_level'))
     {
       $this->authorize('manage-membership', $group);
       $membership->membership = $request->get('membership_level');
