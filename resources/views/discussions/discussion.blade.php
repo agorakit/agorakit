@@ -11,48 +11,14 @@
       </span>
 
 
-      <div class="d-flex justify-content-right align-items-start">
-        @if ($discussion->unReadCount() > 0)
-          <div class="badge-unread">{{ $discussion->unReadCount() }}</div>
-        @endif
 
 
 
-        @can('update', $discussion)
-          <div class="ml-4 dropdown">
-            <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-cog" aria-hidden="true"></i>
-            </button>
 
-
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-              @can('update', $discussion)
-                <a class="dropdown-item" href="{{ route('groups.discussions.edit', [$discussion->group, $discussion]) }}">
-                  <i class="fa fa-pencil"></i>
-                  {{trans('messages.edit')}}
-                </a>
-              @endcan
-
-              <a class="dropdown-item" up-modal=".dialog" href="{{ route('groups.tags.edit', [$discussion->group, 'discussions', $discussion]) }}">
-                <i class="fa fa-tags"></i> Edit tags
-              </a>
-
-              @can('delete', $discussion)
-                <a up-modal=".dialog" class="dropdown-item" href="{{ route('groups.discussions.deleteconfirm', [$discussion->group, $discussion]) }}">
-                  <i class="fa fa-trash"></i>
-                  {{trans('messages.delete')}}
-                </a>
-              @endcan
-
-              @if ($discussion->revisionHistory->count() > 0)
-                <a class="dropdown-item" href="{{route('groups.discussions.history', [$discussion->group, $discussion])}}"><i class="fa fa-history"></i> {{trans('messages.show_history')}}</a>
-              @endif
-            </div>
-          </div>
-        @endcan
-
-      </div>
     </div>
+
+
+
 
     <div class="tags">
       @if ($discussion->tags->count() > 0)
@@ -62,11 +28,11 @@
       @endif
     </div>
 
-    <span class="summary">
+    <div class="summary">
       <a href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}">
         {{summary($discussion->body) }}
       </a>
-    </span>
+    </div>
 
     <div class="meta">
       {{trans('messages.started_by')}}
@@ -75,8 +41,53 @@
       </span>
       {{trans('messages.in')}} {{ $discussion->group->name}} {{ $discussion->created_at->diffForHumans()}}
     </div>
-
-
   </div>
+
+
+  <div class="comment-count">
+    @if ($discussion->unReadCount() > 0)
+      <div class="badge-unread">{{ $discussion->unReadCount() }}</div>
+    @else
+      <div class="d-flex align-self-center">{{ $discussion->comments->count() }} <i class="fa fa-comment-o ml-1" aria-hidden="true"></i></div>
+    @endif
+  </div>
+
+
+
+
+
+
+  @can('update', $discussion)
+    <div class="ml-4 dropdown">
+      <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-cog" aria-hidden="true"></i>
+      </button>
+
+
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+        @can('update', $discussion)
+          <a class="dropdown-item" href="{{ route('groups.discussions.edit', [$discussion->group, $discussion]) }}">
+            <i class="fa fa-pencil"></i>
+            {{trans('messages.edit')}}
+          </a>
+        @endcan
+
+        <a class="dropdown-item" up-modal=".dialog" href="{{ route('groups.tags.edit', [$discussion->group, 'discussions', $discussion]) }}">
+          <i class="fa fa-tags"></i> Edit tags
+        </a>
+
+        @can('delete', $discussion)
+          <a up-modal=".dialog" class="dropdown-item" href="{{ route('groups.discussions.deleteconfirm', [$discussion->group, $discussion]) }}">
+            <i class="fa fa-trash"></i>
+            {{trans('messages.delete')}}
+          </a>
+        @endcan
+
+        @if ($discussion->revisionHistory->count() > 0)
+          <a class="dropdown-item" href="{{route('groups.discussions.history', [$discussion->group, $discussion])}}"><i class="fa fa-history"></i> {{trans('messages.show_history')}}</a>
+        @endif
+      </div>
+    </div>
+  @endcan
 
 </div>
