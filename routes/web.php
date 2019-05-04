@@ -110,6 +110,9 @@ Route::get('pages/help', 'PageController@help')->name('pages.help');
     Route::get('groups/create', 'GroupController@create')->name('groups.create');
     Route::post('groups/create', 'GroupController@store')->name('groups.store');
 
+    Route::get('groups/search', 'GroupSearchController@index')->name('groups.search');
+
+
     // Groups : what everyone can see, homepage and covers
     Route::get('groups/{group}', 'GroupController@show')->name('groups.show');
     Route::get('groups/{group}/cover/small', 'GroupCoverController@small')->name('groups.cover.small');

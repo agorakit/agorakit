@@ -10,6 +10,8 @@ use Watson\Validating\ValidatingTrait;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Storage;
 
+use Nicolaslopezj\Searchable\SearchableTrait;
+
 class Group extends Model
 {
   use ValidatingTrait;
@@ -17,6 +19,7 @@ class Group extends Model
   use SoftDeletes;
   use Taggable;
   use Sluggable;
+  use SearchableTrait;
 
   protected $rules = [
     'name' => 'required',
@@ -34,7 +37,25 @@ class Group extends Model
   const CLOSED = 1;
   const SECRET = 2;
 
-
+  /**
+  * Searchable rules.
+  *
+  * @var array
+  */
+  protected $searchable = [
+    /**
+    * Columns and their priority in search results.
+    * Columns with higher values are more important.
+    * Columns with equal values have equal importance.
+    *
+    * @var array
+    */
+    'columns' => [
+      'groups.name' => 10,
+      'groups.body' => 10,
+      'groups.address' => 2,
+    ]
+  ];
 
 
   /**
