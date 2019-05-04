@@ -30,7 +30,7 @@ class ActionController extends Controller
             $groups = \App\Group::get()
             ->pluck('id');
           } else {
-            $groups = \App\Group::publicgroups()
+            $groups = \App\Group::public()
             ->get()
             ->pluck('id')
             ->merge(Auth::user()->groups()->pluck('groups.id'));
@@ -39,7 +39,7 @@ class ActionController extends Controller
           $groups = Auth::user()->groups()->pluck('groups.id');
         }
       } else {
-        $groups = \App\Group::publicgroups()->get()->pluck('id');
+        $groups = \App\Group::public()->get()->pluck('id');
       }
 
       $actions = \App\Action::with('group')
@@ -65,7 +65,7 @@ class ActionController extends Controller
   {
     if (Auth::check()) {
       if (Auth::user()->getPreference('show') == 'all') {
-        $groups = \App\Group::publicgroups()
+        $groups = \App\Group::public()
         ->get()
         ->pluck('id')
         ->merge(Auth::user()->groups()->pluck('groups.id'));
@@ -73,7 +73,7 @@ class ActionController extends Controller
         $groups = Auth::user()->groups()->pluck('groups.id');
       }
     } else {
-      $groups = \App\Group::publicgroups()->get()->pluck('id');
+      $groups = \App\Group::public()->get()->pluck('id');
     }
 
     // load of actions between start and stop provided by calendar js

@@ -13,7 +13,7 @@ class GroupSearchController extends Controller
   {
     if ($request->has('search'))
     {
-      $results = Group::publicGroups()->search($request->get('search'))->get();
+      $results = Group::public()->search($request->get('search'))->get();
     }
     else {
       $results = null;

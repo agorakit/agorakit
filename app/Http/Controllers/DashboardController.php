@@ -29,7 +29,7 @@ class DashboardController extends Controller
           $groups = \App\Group::get()
           ->pluck('id');
         } else {
-          $groups = \App\Group::publicgroups()
+          $groups = \App\Group::public()
           ->get()
           ->pluck('id')
           ->merge(Auth::user()->groups()->pluck('groups.id'));

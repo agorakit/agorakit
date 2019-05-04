@@ -32,7 +32,7 @@ class FileController extends Controller
           $groups = \App\Group::get()
           ->pluck('id');
         } else { // other see their groups + public groups
-          $groups = \App\Group::publicgroups()
+          $groups = \App\Group::public()
           ->get()
           ->pluck('id')
           ->merge(Auth::user()->groups()->pluck('groups.id'));
@@ -56,7 +56,7 @@ class FileController extends Controller
     } else {
       $files = \App\File::with('group', 'user')
       ->where('item_type', '<>', \App\File::FOLDER)
-      ->whereIn('group_id', \App\Group::publicgroups()->get()->pluck('id'))
+      ->whereIn('group_id', \App\Group::public()->get()->pluck('id'))
       ->orderBy('updated_at', 'desc')->paginate(25);
     }
 

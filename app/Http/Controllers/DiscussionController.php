@@ -24,11 +24,11 @@ class DiscussionController extends Controller
 
     if (Auth::check()) {
       // All the groups of a user : Auth::user()->groups()->pluck('groups.id')
-      // All the public groups : \App\Group::publicgroups()
+      // All the public groups : \App\Group::public()
 
       // A merge of the two :
 
-      //$groups = \App\Group::publicgroups()
+      //$groups = \App\Group::public()
       //->get()
       //->pluck('id')
       //->merge(Auth::user()->groups()->pluck('groups.id'));
@@ -40,7 +40,7 @@ class DiscussionController extends Controller
           $groups = \App\Group::get()
           ->pluck('id');
         } else {
-          $groups = \App\Group::publicgroups()
+          $groups = \App\Group::public()
           ->get()
           ->pluck('id')
           ->merge(Auth::user()->groups()->pluck('groups.id'));
@@ -57,7 +57,7 @@ class DiscussionController extends Controller
 
     } else {
       $discussions = \App\Discussion::with('group', 'user')
-      ->whereIn('group_id', \App\Group::publicgroups()->get()->pluck('id'))
+      ->whereIn('group_id', \App\Group::public()->get()->pluck('id'))
       ->when($tag, function ($query) use ($tag) {
         return $query->withAnyTags($tag);
       })

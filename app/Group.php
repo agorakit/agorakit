@@ -241,7 +241,7 @@ class Group extends Model
   *
   * @return \Illuminate\Database\Eloquent\Builder
   */
-  public function scopePublicgroups($query)
+  public function scopePublic($query)
   {
     return $query->where('group_type', $this::OPEN);
   }

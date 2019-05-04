@@ -31,12 +31,12 @@ class MapController extends Controller
     $users = \App\User::where('latitude', '<>', 0)->where('verified', 1)->get();
 
     if (Auth::check()) {
-      $allowed_groups = \App\Group::publicgroups()
+      $allowed_groups = \App\Group::public()
       ->get()
       ->pluck('id')
       ->merge(Auth::user()->groups()->pluck('groups.id'));
     } else {
-      $allowed_groups = \App\Group::publicgroups()->get()->pluck('id');
+      $allowed_groups = \App\Group::public()->get()->pluck('id');
     }
 
 
