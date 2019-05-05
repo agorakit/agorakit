@@ -14,11 +14,11 @@ class GroupDiscussionController extends Controller
 {
   public function __construct()
   {
-  
+
     $this->middleware('member', ['only' => ['edit', 'update', 'destroy']]);
     $this->middleware('verified', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
     $this->middleware('public', ['only' => ['index', 'show', 'history']]);
-    
+
   }
 
   /**
@@ -83,18 +83,18 @@ class GroupDiscussionController extends Controller
   {
 
     // if no group is in the route, it means user chose the group using the dropdown
-    if (!$group->exists) {      
+    if (!$group->exists) {
         $group = \App\Group::find($request->get('group'));
         //if group is null, redirect to the discussion create page with error messages, saying
         //that you must select a group
         if (is_null($group)) {
           return redirect()->route('discussions.create')->withErrors(['You must select a Group']);
         }
-    
+
     }
-    
+
     $this->authorize('creatediscussion', $group);
-    
+
     $discussion = new Discussion();
     $discussion->name = $request->input('name');
     $discussion->body = $request->input('body');

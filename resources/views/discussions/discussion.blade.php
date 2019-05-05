@@ -73,7 +73,7 @@
         @endcan
 
         <a class="dropdown-item" up-modal=".dialog" href="{{ route('groups.tags.edit', [$discussion->group, 'discussions', $discussion]) }}">
-          <i class="fa fa-tags"></i> Edit tags
+          <i class="fa fa-tags"></i> {{_('Edit tags')}}
         </a>
 
         @can('delete', $discussion)
@@ -83,9 +83,6 @@
           </a>
         @endcan
 
-        @if ($discussion->revisionHistory->count() > 0)
-          <a class="dropdown-item" href="{{route('groups.discussions.history', [$discussion->group, $discussion])}}"><i class="fa fa-history"></i> {{trans('messages.show_history')}}</a>
-        @endif
       </div>
     </div>
   @endcan

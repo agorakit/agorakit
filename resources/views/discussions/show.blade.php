@@ -16,7 +16,7 @@
         </h2>
 
         <div class="ml-4 dropdown">
-          <button class="btn btn-secondary-outline dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-cog" aria-hidden="true"></i>
 
           </button>
@@ -71,7 +71,7 @@
 
     <div class="comments">
       @foreach ($discussion->comments as $comment_key => $comment)
-        @include('comments._show')
+        @include('comments.comment')
       @endforeach
 
       @can('create-comment', $group)
