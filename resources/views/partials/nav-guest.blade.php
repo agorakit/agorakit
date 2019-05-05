@@ -4,7 +4,7 @@
     @if (Storage::exists('public/logo/favicon.png'))
       <img src="{{{ asset('storage/logo/favicon.png') }}}" width="40" height="40"/>
     @else
-      <img src="/images/logo.svg" width="40" height="40"/>
+      <img src="/images/logo-white.svg" width="40" height="40"/>
     @endif
     <span class="ml-1 d-lg-none d-md-inline d-none d-xl-inline">{{setting('name')}}</span>
   </a>
@@ -83,8 +83,8 @@
 
       <div class="nav-item">
         <div class="btn-group">
-          <a class="btn btn-outline-primary" href="{{ url('login') }}">{{ trans('messages.login') }}</a>
-          <a class="btn btn-outline-secondary" href="{{ url('register') }}">{{ trans('messages.register') }}</a>
+          <a class="btn btn-primary" href="{{ url('login') }}">{{ trans('messages.login') }}</a>
+          <a class="btn btn-secondary" href="{{ url('register') }}">{{ trans('messages.register') }}</a>
         </div>
       </div>
 
