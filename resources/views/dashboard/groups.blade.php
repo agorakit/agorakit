@@ -7,12 +7,12 @@
         <h1><a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.all_groups') }}</h1>
 
 
-        <form class="form-inline my-2 my-lg-0" role="search" method="GET" action="{{route('groups.index')}}" up-autosubmit up-delay="100" up-target=".groups" up-reveal='false'>
+        <form class="form-inline" role="search" method="GET" action="{{route('groups.index')}}" up-autosubmit up-delay="100" up-target=".groups" up-reveal='false'>
             <div class="input-group">
-                <input value="{{Request::get('search')}}" class="form-control form-control-sm" type="text" name="search"  placeholder="{{trans('messages.search')}}..." aria-label="Search">
+                <input value="{{Request::get('search')}}" class="form-control" type="text" name="search"  placeholder="{{_('Filter')}}..." aria-label="Search">
 
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary btn-sm my-2 my-sm-0" type="submit"><span class="fa fa-search"></span></button>
+                    <button class="btn btn-secondary" type="submit"><span class="fa fa-search"></span></button>
                 </div>
             </div>
         </form>
