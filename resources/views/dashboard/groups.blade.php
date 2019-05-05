@@ -2,22 +2,35 @@
 
 @section('content')
 
+    <div class="d-flex justify-content-between">
 
-    <h1><a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.all_groups') }}</h1>
+        <h1><a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.all_groups') }}</h1>
 
+
+        <form class="form-inline my-2 my-lg-0" role="search" method="GET" action="{{route('groups.index')}}" up-autosubmit up-delay="250" up-target=".groups">
+            <div class="input-group">
+                <input value="{{Request::get('search')}}" class="form-control form-control-sm" type="text" name="search"  placeholder="{{trans('messages.search')}}..." aria-label="Search">
+
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary btn-sm my-2 my-sm-0" type="submit"><span class="fa fa-search"></span></button>
+                </div>
+            </div>
+        </form>
+
+    </div>
 
 
     @if ($groups)
-        <div class="row mb-3">
+        <div class="row mb-3 groups">
             @forelse( $groups as $group )
                 <div class="col-md-4">
                     <div class="card tag-group @foreach ($group->tags as $tag)tag-{{$tag->tag_id}} @endforeach">
 
                         <a href="{{ action('GroupController@show', $group) }}">
                             @if ($group->hasCover())
-                              <img class="card-img-top" src="{{ route('groups.cover.medium', $group)}}" />
+                                <img class="card-img-top" src="{{ route('groups.cover.medium', $group)}}" />
                             @else
-                              <img class="card-img-top" src="/images/group.svg"/>
+                                <img class="card-img-top" src="/images/group.svg"/>
                             @endif
                         </a>
 
@@ -42,7 +55,7 @@
                                 <span class="badge badge-secondary"><i class="fa fa-comments"></i> {{$group->discussions()->count()}}</span>
                                 <span class="badge badge-secondary"><i class="fa fa-calendar"></i> {{$group->actions()->count()}}</span>
 
-                                
+
 
 
                                 @foreach ($group->tags as $tag)
