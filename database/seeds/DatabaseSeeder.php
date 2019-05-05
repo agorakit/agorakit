@@ -54,8 +54,8 @@ class DatabaseSeeder extends Seeder
             Image::make($faker->imageUrl(500, 400, 'people'))->widen(500)->save(storage_path().'/app/users/'.$user->id.'/cover.jpg')->fit(128, 128)->save(storage_path().'/app/users/'.$user->id.'/thumbnail.jpg');
         }
 
-        // create groups
-        for ($i = 1; $i <= 3; ++$i) {
+        // create 10 groups
+        for ($i = 1; $i <= 10; ++$i) {
             $group = App\Group::create([
                 'name' => $faker->city.'\'s user group',
                 //'name' => 'Group ' . $faker->sentence(3),
