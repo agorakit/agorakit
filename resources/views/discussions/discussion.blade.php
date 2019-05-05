@@ -48,7 +48,7 @@
     @if ($discussion->unReadCount() > 0)
       <div class="badge-unread">{{ $discussion->unReadCount() }}</div>
     @else
-      <div class="d-flex align-self-center">{{ $discussion->comments->count() }} <i class="fa fa-comment-o ml-1" aria-hidden="true"></i></div>
+      <div class="d-flex align-self-center">{{ $discussion->comments_count }} <i class="fa fa-comment-o ml-1" aria-hidden="true"></i></div>
     @endif
   </div>
 

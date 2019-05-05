@@ -22,6 +22,8 @@ class DiscussionController extends Controller
 
     $tag = $request->get('tag');
 
+
+    // define a list fo groups the user has access to // TODO generalize this somewhere else
     if (Auth::check()) {
       // All the groups of a user : Auth::user()->groups()->pluck('groups.id')
       // All the public groups : \App\Group::public()
@@ -39,7 +41,7 @@ class DiscussionController extends Controller
         if (Auth::user()->isAdmin()) { // super admin sees everything
           $groups = \App\Group::get()
           ->pluck('id');
-        } else {
+        } else { // normal user get public groups + groups he is member of
           $groups = \App\Group::public()
           ->get()
           ->pluck('id')
@@ -48,20 +50,30 @@ class DiscussionController extends Controller
       } else {
         $groups = Auth::user()->groups()->pluck('groups.id');
       }
-      $discussions = \App\Discussion::with('userReadDiscussion', 'group', 'user')
+
+
+      $discussions = \App\Discussion::with('userReadDiscussion', 'group', 'user', 'tags')
+      ->withCount('comments')
       ->whereIn('group_id', $groups)
       ->when($tag, function ($query) use ($tag) {
         return $query->withAnyTags($tag);
       })
       ->orderBy('updated_at', 'desc')->paginate(25);
 
-    } else {
-      $discussions = \App\Discussion::with('group', 'user')
+
+    } else { // anon get public groups
+
+      $groups = \App\Group::public()->get()->pluck('id');
+
+      $discussions = \App\Discussion::with('group', 'user', 'tags')
+      ->withCount('comments')
       ->whereIn('group_id', \App\Group::public()->get()->pluck('id'))
       ->when($tag, function ($query) use ($tag) {
         return $query->withAnyTags($tag);
       })
       ->orderBy('updated_at', 'desc')->paginate(25);
+
+
     }
 
 
