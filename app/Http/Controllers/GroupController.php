@@ -23,6 +23,8 @@ class GroupController extends Controller
   public function index(Request $request)
   {
 
+    // TODO: show the user groups first !!!
+    
     $groups = new Group;
     $groups = $groups->notSecret()
     ->with('tags')
