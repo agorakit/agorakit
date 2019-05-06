@@ -4,7 +4,7 @@ Installation
 Requirements
 ------------
 
-You need a good webhosting provider that provides the following :
+You need a good web hosting provider that provides the following :
 
 - php >= 7.1.3 with the following extensions :
     - OpenSSL PHP Extension
@@ -20,7 +20,7 @@ You need a good webhosting provider that provides the following :
 - Git
 - the ability to run cron jobs
 
-All those features together are hard to find, so people are obliged to use a VPS and setup everything themselves. This is a riskier proposal. I have been very successful on https://www.alwaysdata.com hosting.
+All those features together are hard to find, so people are obliged to use a VPS and setup everything themselves. This is a riskier proposal if you don't know how it works. I have been very successful on https://www.alwaysdata.com shared hosting (By the way they host the free instance of Agorakit at https://app.agorakit.org).
 
 
 Installation
@@ -33,21 +33,18 @@ This is perfectly standard and documented here : https://laravel.com/docs/master
 You need composer up and running.
 
 
-Clone the repository
-********************
+Clone the repository::
 
   $ git clone https://github.com/philippejadin/agorakit.git
 
 
-Create and edit the configuration file from the example provided
-****************************************************************
+Create and edit the configuration file from the example provided::
   $ cp .env.example .env
   $ nano .env
 
-You need to set at least your database credentials, site name. Check that your database exists and is reachable with those credentials.
+You need to set at least your database credentials & site name. Check that your database exists and is reachable with those credentials.
 
-Here is a description of every setting in the .env file :
-
+Here is a description of every setting in the .env file::
 
         APP_ENV=local  // local or production
         APP_DEBUG=true // show the debugbar and extended errors or not
@@ -79,21 +76,22 @@ Here is a description of every setting in the .env file :
 
 
 
-Download all the packages needed
-********************************
-`$ composer install`
+Download all the packages needed::
 
-Generate a key
-**************
-`$ php artisan key:generate`
+  $ composer install`
 
-Migrate (create all tables in) the database
-*******************************************
-`$ php artisan migrate`
+Generate a key::
+  $ php artisan key:generate`
 
-(Optional) Create sample content the database
-*********************************************
-`$ php artisan db:seed`
+Migrate (create all tables in) the database::
+
+ $ php artisan migrate`
+
+(Optional) Create sample content the database::
+
+  $ php artisan db:seed`
+
+Don't do this for a production install since it will create an admin user and dummy groups and content.
 
 Setup your web server
 *********************

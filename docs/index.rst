@@ -14,5 +14,5 @@ Manage communication, decision making, membership, files and events. Flexible em
 .. toctree::
    installation
    first_steps
-   external_authentification
    development
+   external_authentification
