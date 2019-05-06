@@ -48,7 +48,7 @@ class UserController extends Controller
       ->with('user', $user);
     }
     else {
-      flash(_('This user did not verify his/her email so you cannot contact him/her'));
+      flash(__('This user did not verify his/her email so you cannot contact him/her'));
       return redirect()->back();
     }
   }
@@ -71,13 +71,13 @@ class UserController extends Controller
         return redirect()->route('users.contactform', $to_user);
       }
       else {
-        flash(_('Please type a message'));
+        flash(__('Please type a message'));
         return redirect()->back();
       }
 
 
     } else {
-      flash(_('The user you are trying to contact did not verify his/her email'));
+      flash(__('The user you are trying to contact did not verify his/her email'));
       return redirect()->back();
     }
   }

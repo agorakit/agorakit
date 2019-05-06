@@ -3,7 +3,7 @@
 
     <div class="dropdown">
       <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        {{_('Show my groups')}}
+        {{__('Show my groups')}}
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <a href="?set_preference=show&value=my" class="dropdown-item">{{trans('messages.my_groups')}}</a>
@@ -14,7 +14,7 @@
   @else
     <div class="dropdown">
       <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        {{_('Show all groups')}}
+        {{__('Show all groups')}}
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <a href="?set_preference=show&value=my" class="dropdown-item">{{trans('messages.my_groups')}}</a>

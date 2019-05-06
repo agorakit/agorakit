@@ -6,10 +6,10 @@
 
 <div class="tab_content">
 
-  <h1>{{_('Contact')}} {{ $user->name }}</h1>
+  <h1>{{__('Contact')}} {{ $user->name }}</h1>
 
   <div class="help">
-    {{_('Use the form below to send an email directly to this user.')}}
+    {{__('Use the form below to send an email directly to this user.')}}
   </div>
 
   {!! Form::open(['action' => ['UserController@contact', $user]]) !!}
@@ -17,13 +17,13 @@
 
 
   <div class="form-group">
-    {!! Form::label('body', _('Your message :')) !!}
+    {!! Form::label('body', __('Your message :')) !!}
     {!! Form::textarea('body', null, ['class' => 'form-control', 'required']) !!}
   </div>
 
   <div class="form-check">
    <input type="checkbox" class="form-check-input" name="reveal_email" id="reveal_email" checked="checked">
-   <label class="form-check-label" for="reveal_email">{{_('Reveal my email to this user so we can communicate by email')}}</label>
+   <label class="form-check-label" for="reveal_email">{{__('Reveal my email to this user so we can communicate by email')}}</label>
  </div>
 
 

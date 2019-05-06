@@ -42,7 +42,7 @@
   <div class="comment-count d-flex justify-content-end">
     @if ($discussion->unReadCount() > 0)
       <div class="d-flex align-items-start">
-        <div class="badge badge-danger mr-1">{{_('New')}}</div>
+        <div class="badge badge-danger mr-1">{{__('New')}}</div>
         <div class="badge badge-primary" style="min-width: 2em">{{ $discussion->unReadCount() }}</div>
       </div>
     @else
@@ -71,7 +71,7 @@
         @endcan
 
         <a class="dropdown-item" up-modal=".dialog" href="{{ route('groups.tags.edit', [$discussion->group, 'discussions', $discussion]) }}">
-          <i class="fa fa-tags"></i> {{_('Edit tags')}}
+          <i class="fa fa-tags"></i> {{__('Edit tags')}}
         </a>
 
         @can('delete', $discussion)

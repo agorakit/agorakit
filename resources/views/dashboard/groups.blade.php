@@ -9,7 +9,7 @@
 
         <form class="form-inline" role="search" method="GET" action="{{route('groups.index')}}" up-autosubmit up-delay="100" up-target=".groups" up-reveal='false'>
             <div class="input-group">
-                <input value="{{Request::get('search')}}" class="form-control" type="text" name="search"  placeholder="{{_('Filter')}}..." aria-label="Search">
+                <input value="{{Request::get('search')}}" class="form-control" type="text" name="search"  placeholder="{{__('Filter')}}..." aria-label="Search">
 
                 <div class="input-group-append">
                     <button class="btn btn-secondary" type="submit"><span class="fa fa-search"></span></button>
