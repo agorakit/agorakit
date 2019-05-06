@@ -41,9 +41,16 @@ class UserController extends Controller
   */
   public function contactForm(User $user)
   {
-    return view('users.contact')
-    ->with('tab', 'contact')
-    ->with('user', $user);
+    if ($user->isVerified())
+    {
+      return view('users.contact')
+      ->with('tab', 'contact')
+      ->with('user', $user);
+    }
+    else {
+      flash(_('This user did not verify his/her email so you cannot contact him/her'));
+      return redirect()->back();
+    }
   }
 
   /**
@@ -54,18 +61,23 @@ class UserController extends Controller
     $from_user = Auth::user();
     $to_user = $user;
 
+
     if ($to_user->verified == 1) {
       if ($request->has('body')) {
         $body = $request->input('body');
-        Mail::to($to_user)->send(new ContactUser($from_user, $to_user, $body));
+        Mail::to($to_user)->send(new ContactUser($from_user, $to_user, $body, $request->has('reveal_email')));
 
         flash(trans('messages.message_sent'));
         return redirect()->route('users.contactform', $to_user);
       }
+      else {
+        flash(_('Please type a message'));
+        return redirect()->back();
+      }
 
-      return redirect()->back();
+
     } else {
-      flash(trans('messages.email_not_verified'));
+      flash(_('The user you are trying to contact did not verify his/her email'));
       return redirect()->back();
     }
   }
