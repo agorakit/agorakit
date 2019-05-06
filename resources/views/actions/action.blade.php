@@ -46,11 +46,11 @@
                 @endforeach
             </div>
 
-            <div class="mt-2 mb-2">
+            <div class="mb-2">
                 @if (Auth::user() && Auth::user()->isAttending($action))
-                    <a class="btn btn-outline-primary btn-sm" up-modal=".main" href="{{route('groups.actions.unattend', [$action->group, $action])}}">{{trans('messages.unattend')}}</a>
+                    <a class="btn btn-primary btn-sm" up-modal=".main" href="{{route('groups.actions.unattend', [$action->group, $action])}}">{{trans('messages.unattend')}}</a>
                 @elseif (Auth::user() && !Auth::user()->isAttending($action))
-                    <a class="btn btn-outline-primary btn-sm" up-modal=".main" href="{{route('groups.actions.attend', [$action->group, $action])}}">{{trans('messages.attend')}}</a>
+                    <a class="btn btn-primary btn-sm" up-modal=".main" href="{{route('groups.actions.attend', [$action->group, $action])}}">{{trans('messages.attend')}}</a>
                 @endif
             </div>
         </div>
