@@ -24,7 +24,7 @@ class GroupController extends Controller
   {
 
     // TODO: show the user groups first !!!
-    
+
     $groups = new Group;
     $groups = $groups->notSecret()
     ->with('tags')
@@ -98,6 +98,7 @@ class GroupController extends Controller
         $discussions = $group->discussions()
         ->has('user')
         ->with('user', 'group')
+        ->withCount('comments')
         ->orderBy('updated_at', 'desc')
         ->limit(5)
         ->get();

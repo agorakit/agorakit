@@ -39,6 +39,7 @@ class DashboardController extends Controller
       }
 
       $discussions = \App\Discussion::with('userReadDiscussion', 'group', 'user')
+      ->withCount('comments')
       ->whereIn('group_id', $groups)
       ->orderBy('updated_at', 'desc')->paginate(25);
 
