@@ -50,6 +50,11 @@ class Membership extends Model
     // member is blacklisted and cannot join the group again (not yet in use)
     const BLACKLISTED = -30;
 
+    public function isAdmin()
+    {
+      return $this->membership == \App\Membership::ADMIN;
+    }
+
     public function votes()
     {
         return $this->morphedByMany('Vote', 'votable');

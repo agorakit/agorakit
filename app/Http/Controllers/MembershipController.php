@@ -125,6 +125,12 @@ class MembershipController extends Controller
     // load a membership for this group and user combination
     $membership =Membership::where(['user_id' => $request->user()->id, 'group_id' => $group->id])->firstOrFail();
 
+    if ($membership->isAdmin() && $group->admins->count()  == 1)
+    {
+      flash('You cannot leave this group since you are the unique admin. Promote someone else as admin first.');
+      return redirect()->back();
+    }
+
     return view('membership.leave')
     ->with('group', $group)
     ->with('tab', 'settings')
@@ -177,6 +183,7 @@ class MembershipController extends Controller
   */
   public function update(Request $request, Group $group,  Membership $membership = null)
   {
+
     // load membership for this group and the current user combination
     if (!$membership)
     {
@@ -190,7 +197,17 @@ class MembershipController extends Controller
     if ($request->has('membership_level'))
     {
       $this->authorize('manage-membership', $group);
+
+      // handle the case an admin change his own level and is the only one admin of the group... yes it hapened...
+      if ($membership->isAdmin() && $group->admins->count()  == 1 && $request->get('membership_level') < \App\Membership::ADMIN)
+      {
+        flash('You cannot remove you as admin since you are the unique admin. Promote someone else as admin first.');
+        return redirect()->back();
+      }
+
       $membership->membership = $request->get('membership_level');
+
+
     }
 
 
