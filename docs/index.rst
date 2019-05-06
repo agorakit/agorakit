@@ -12,8 +12,6 @@ Manage communication, decision making, membership, files and events. Flexible em
 
 
 .. toctree::
-   :maxdepth: 2
-
    installation
    first_steps
    external_authentification
