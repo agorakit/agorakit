@@ -1,4 +1,4 @@
-<div class="discussion @if ($discussion->unReadCount() > 0) unread @endif">
+<div class="discussion @if ($discussion->unReadCount() > 0) unread @endif" up-expand>
 
   <div class="avatar"><img src="{{route('users.cover', [$discussion->user, 'small'])}}" class="rounded-circle"/></div>
   <div class="content w-100">
@@ -9,12 +9,6 @@
           {{ $discussion->name }}
         </a>
       </span>
-
-
-
-
-
-
     </div>
 
 
@@ -49,18 +43,18 @@
     @if ($discussion->unReadCount() > 0)
       <div class="d-flex align-items-start">
         <div class="badge badge-danger mr-1">{{_('New')}}</div>
-        <div class="badge badge-primary">{{ $discussion->unReadCount() }}</div>
+        <div class="badge badge-primary" style="min-width: 2em">{{ $discussion->unReadCount() }}</div>
       </div>
     @else
       <div class="d-flex align-items-start">
-        <div class="badge badge-secondary">{{ $discussion->comments_count }}</div>
+        <div class="badge badge-secondary" style="min-width: 2em">{{ $discussion->comments_count }}</div>
       </div>
     @endif
   </div>
 
-  
 
 
+{{--
   @can('update', $discussion)
     <div class="ml-4 dropdown">
       <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -90,5 +84,6 @@
       </div>
     </div>
   @endcan
+  --}}
 
 </div>
