@@ -2,7 +2,7 @@
   @if (Auth::user()->getPreference('show', 'my') == 'my')
 
     <div class="dropdown">
-      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         {{__('Show my groups')}}
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -13,7 +13,7 @@
 
   @else
     <div class="dropdown">
-      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         {{__('Show all groups')}}
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

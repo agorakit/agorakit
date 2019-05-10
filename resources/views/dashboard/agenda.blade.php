@@ -2,31 +2,33 @@
 
 @section('content')
 
+  <div class="toolbox d-md-flex">
+    <div class="d-flex mb-2">
+      <h1>
+        <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.agenda') }}
+      </hi>
+    </div>
 
-
-
-
-  <h1>
-    <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.agenda') }}
-  </h1>
+    <div class="ml-auto">
+      @include ('partials.preferences-show')
+    </div>
+  </div>
 
 
   <div class="d-md-flex justify-content-between">
 
-    <div class="my-4">
-      @include ('partials.preferences-show')
-    </div>
 
-    <div class="my-4">
-      @include ('partials.preferences-calendar')
-    </div>
-
-
-    <div class="my-4">
+    <div class="my-2">
       <a class="btn btn-primary" href="{{ route('actions.create') }}">
         <i class="fa fa-plus"></i> {{trans('action.create_one_button')}}
       </a>
     </div>
+
+
+    <div class="my-2">
+      @include ('partials.preferences-calendar')
+    </div>
+
   </div>
 
 

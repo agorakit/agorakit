@@ -3,10 +3,16 @@
 @section('content')
 
 
-  <h1><a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ __('Homepage') }}</h1>
-  <div class="my-4">
-    @include ('partials.preferences-show')
+  <div class="toolbox d-md-flex">
+      <div class="d-flex mb-2">
+          <h1><a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ __('Homepage') }}</h1>
+      </div>
+
+      <div class="ml-auto">
+        @include ('partials.preferences-show')
+      </div>
   </div>
+
 
   <div class="row">
     <div class="col-md-8">
