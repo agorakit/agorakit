@@ -50,9 +50,6 @@ class DashboardController extends Controller
       ->paginate(10);
 
 
-
-
-
       return view('dashboard.homepage')
       ->with('tab', 'homepage')
       ->with('discussions', $discussions)
@@ -62,19 +59,6 @@ class DashboardController extends Controller
       ->with('tab', 'homepage');
     }
   }
-
-  public function users()
-  {
-    $users = \App\User::with('groups')->where('verified', 1)->orderBy('created_at', 'desc')->paginate(20);
-
-    return view('dashboard.users')
-    ->with('tab', 'users')
-    ->with('users', $users);
-  }
-
-
-
-
 
 
 
