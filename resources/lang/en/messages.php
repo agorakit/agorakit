@@ -83,7 +83,7 @@ return array (
   'grid' => 'Grid',
   'group' => 'Group',
   'group_admin_users' => 'Contact person(s)',
-  'group_home' => 'Group home',
+  'group_home' => 'Home',
   'groups' => 'Groups',
   'hello' => 'Hello',
   'here_are_the_latest_news_of' => 'Here are the latest news of',

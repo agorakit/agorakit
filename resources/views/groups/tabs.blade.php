@@ -114,7 +114,7 @@
         @can ('administer', $group)
             <li class="nav-item dropdown">
                 <a href="#" id="admin" data-toggle="dropdown" aria-controls="admin-contents" aria-expanded="false"  class="dropdown-toggle nav-link @if (isset($tab) && ($tab == 'admin')) active @endif">
-                    <i class="fa fa-wrench"></i> <span class="d-none d-lg-inline">@lang('Administer group')</span>
+                    <i class="fa fa-wrench"></i> <span class="d-none d-lg-inline">@lang('Administer')</span>
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="{{ route('groups.edit', $group) }}">

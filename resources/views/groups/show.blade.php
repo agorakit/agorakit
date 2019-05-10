@@ -67,7 +67,7 @@
             <h2 class="mb-4">
               <a href="{{ route('groups.discussions.index', $group) }}">{{trans('group.latest_discussions')}}</a>
               @can('create-discussion', $group)
-                <a class="btn btn-sm btn-outline-primary" href="{{ route('groups.discussions.create', $group) }}">
+                <a class="btn btn-sm btn-primary" href="{{ route('groups.discussions.create', $group) }}">
                   <i class="fa fa-plus"></i> {{trans('discussion.create_one_button')}}
                 </a>
               @endcan
@@ -87,7 +87,7 @@
             <h2 class="mb-4">
               <a href="{{ route('groups.actions.index', $group) }}">{{trans('messages.agenda')}}</a>
               @can('create-action', $group)
-                <a class="btn btn-sm btn-outline-primary" href="{{ route('groups.actions.create', $group ) }}">
+                <a class="btn btn-sm btn-primary" href="{{ route('groups.actions.create', $group ) }}">
                   <i class="fa fa-plus"></i> {{trans('action.create_one_button')}}
                 </a>
               @endcan

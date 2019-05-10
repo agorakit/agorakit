@@ -106,7 +106,7 @@ return array (
   'invitation_to_join' => 'Invitation à rejoindre le groupe',
   'invite_already_used' => 'Invitation déjà utilisée',
   'invite_not_found' => 'Invitation non trouvée',
-  'join' => 'Rejoindre ce groupe',
+  'join' => 'Rejoindre',
   'join_a_group' => 'Vous n\'avez pas encore rejoint de groupe. N\'hésitez pas à le faire en cliquant sur "Groupes". Vous pouvez également créer un groupe',
   'join_the_group' => 'Rejoignez',
   'join_this_group' => 'rejoignez ce groupe',

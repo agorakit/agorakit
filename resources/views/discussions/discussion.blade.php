@@ -3,24 +3,25 @@
   <div class="avatar"><img src="{{route('users.cover', [$discussion->user, 'small'])}}" class="rounded-circle"/></div>
   <div class="content w-100">
 
-    <div class="d-flex justify-content-between align-items-start">
-      <span class="name">
+    <div class="d-flex">
+      <div class="name mr-2">
         <a href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}">
           {{ $discussion->name }}
         </a>
-      </span>
+      </div>
+      <div class="tags">
+        @if ($discussion->tags->count() > 0)
+          @foreach ($discussion->tags as $tag)
+            <span class="badge badge-primary">{{$tag->name}}</span>
+          @endforeach
+        @endif
+      </div>
     </div>
 
 
 
 
-    <div class="tags">
-      @if ($discussion->tags->count() > 0)
-        @foreach ($discussion->tags as $tag)
-          <span class="badge tag">{{$tag->name}}</span>
-        @endforeach
-      @endif
-    </div>
+
 
     <div class="summary">
       <a href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}">

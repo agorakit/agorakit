@@ -4,7 +4,8 @@
 
 @include('groups.tabs')
 <div class="tab_content">
-  <h1>Modifer une action</h1>
+  <h1>{{trans('messages.modify')}} <strong>"{{$action->name}}"</strong></h1>
+  
 
 
   {!! Form::model($action, array('action' => ['GroupActionController@update', $action->group, $action])) !!}
