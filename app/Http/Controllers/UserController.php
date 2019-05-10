@@ -52,7 +52,7 @@ class UserController extends Controller
       }
 
 
-
+      // Magic query to get all the users who have one of the groups defined above in their membership table
       $users = User::whereHas('groups', function($q) use ($groups) {
         $q->whereIn('group_id', $groups);
       })

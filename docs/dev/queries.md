@@ -1,11 +1,30 @@
+Attempts at understanding queries...
 
-#How to manage unread count of discussions ?
+
+
+Query to get all the users sharing a group with current user
+============================================================
+
+$groups = Auth::user()->groups()->pluck('groups.id');
+
+
+// Magic query to get all the users who have one of the groups defined above in their membership table
+$users = User::whereHas('groups', function($q) use ($groups) {
+$q->whereIn('group_id', $groups);
+})
+->where('verified', 1)
+->orderBy('created_at', 'desc')
+->paginate(20);
+
+
+How to manage unread count of discussions ?
+===========================================
 
 Check The query helper for the current (working) solution.
 
 Here is an interesting proposal : http://forum.kohanaframework.org/discussion/comment/35092#Comment_35092
 
-""""
+
 I've been doing something similar and needed to record how many comments signed in users have read too, so I could send them to the first unread comment in each discussion.
 
 I had a look at the latest source code of Vanilla Forums to see how they did it and their approach looks to save a lot of database calls, but requires tighter management.
@@ -37,17 +56,14 @@ Obviously there's more going on with handling the read_comments with pagination 
 Log the last time the signed in user visited the discussion. When they visit it, lookup the last time the visited, and find the first comment added after that time then send them to it. I had some problems going this way with pagination since they might read only page 1 of a 5 page discussion, and when they visit again, it would think they had read all 5 pages instead of just page 1. I could set the log timestamp to the created timestamp of the last read comment on page 1 but then my logs would be off (used for other things) and I may as well have another table to record those times.
 
 The Vanilla Forums way also saves database calls on the list of discussions pages, since instead of doing a call to count how many comments are in each discussion, I already have it in the total_comments property.
-""""
 
 
-
-
-Attempts at understanding queries...
 
 
 
 This one works (but is ugly and probably not scalable) :
----------------
+========================================================
+
 Get all the unread discussions of a user only for the groups he is a member of...
 
 SELECT *
@@ -69,7 +85,8 @@ and `comments`.`discussion_id` is not null and `user_read_discussion`.`id`
 is null)
 
 
-/* Selectionnner tous les commentaires auxquels quelqu'un est abonné */
+All comments someone is subscribed to
+=====================================
 SELECT *
 from comments
 where discussion_id
@@ -85,7 +102,8 @@ WHERE membership.user_id =235
 )
 
 
-/* Selectionnner toutes les discussions auxquelles quelqu'un est abonné */
+All discussions someone is subscribed to
+========================================
 SELECT *
 FROM discussions
 WHERE group_id
@@ -94,21 +112,3 @@ SELECT membership.group_id
 FROM membership
 WHERE membership.user_id =235
 )
-
-
-
-
-
-// get all discussions unread by a user ? : does't work
-$discussions = \App\Discussion::with('group')->select('discussions.*')
-->leftJoin('user_read_discussion', function($join)
-{
-  $join->on('user_read_discussion.discussion_id', '=', 'discussions.id')
-  ->where('user_read_discussion.user_id', '=', \Auth::user()->id)
-  ->on('user_read_discussion.read_at', '>=', 'discussions.created_at');
-})
-->whereNull('user_read_discussion.id')
-
-->orderBy('discussions.updated_at', 'desc')->paginate(50);
-return view('discussions.general_index')
-->with('discussions', $discussions);
