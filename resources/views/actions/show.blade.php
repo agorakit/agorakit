@@ -101,9 +101,11 @@
         @endif
 
 
-        @if (Auth::user() && !Auth::user()->isAttending($action))
-          <a class="btn btn-primary" up-modal=".main" href="{{route('groups.actions.attend', [$group, $action])}}">{{trans('messages.attend')}}</a>
-        @endif
+        <div class="mt-4">
+          @if (Auth::user() && !Auth::user()->isAttending($action))
+            <a class="btn btn-primary" up-modal=".main" href="{{route('groups.actions.attend', [$group, $action])}}">{{trans('messages.attend')}}</a>
+          @endif
+        </div>
       </div>
 
 
