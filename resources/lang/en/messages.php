@@ -194,7 +194,7 @@ return array (
   'stop_date' => 'Stop date',
   'stop_time' => 'Stop time',
   'tags' => 'Tags',
-  'tags_help' => 'Choose or type one or more tag (keywords if you prefer). This will help others to find your contribution. In the list you will see the tags already used elsewhere. Try to follow the existing tags. Separate each tag with a comma.',
+  'tags_help' => 'Choose or type one or more tag (keywords if you prefer). This will help others to find your contribution. In the list you will see the tags already used elsewhere. Try to follow the existing tags.',
   'thank_you' => 'Thank you for using this application',
   'thank_you_for_joining' => 'Thank you for joining',
   'thinks_that_you_might_want_to_join' => 'thinks that you might want to join',
@@ -231,7 +231,7 @@ return array (
   'you_register' => 'register here',
   'your_groups' => 'Your groups',
   'your_search_for' => 'Your search for',
-  'LLH:obsolete' => 
+  'LLH:obsolete' =>
   array (
     'by' => 'by',
     'date' => 'date',

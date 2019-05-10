@@ -194,7 +194,7 @@ return array (
   'stop_date' => 'Date de fin',
   'stop_time' => 'Heure de fin',
   'tags' => 'Mots clé (étiquettes)',
-  'tags_help' => 'Choisissez un ou plusieurs mots clés. Ces étiquettes permettront de retrouver facilement votre contribution. Dans la liste vous trouverez les mot clés déjà utilisés. Essayer d\'être cohérent(e) avec ce qui existe déjà. Séparez chaque mot clé par une virgule.',
+  'tags_help' => 'Choisissez un ou plusieurs mots clés. Ces étiquettes permettront de retrouver facilement votre contribution. Dans la liste vous trouverez les mot clés déjà utilisés. Essayer d\'être cohérent(e) avec ce qui existe déjà.',
   'thank_you' => 'Merci d\'utiliser cet application',
   'thank_you_for_joining' => 'Merci d\'avoir rejoint',
   'thinks_that_you_might_want_to_join' => 'pense que vous pourriez être intéressé(e) à joindre',
@@ -231,7 +231,7 @@ return array (
   'you_register' => 'créez-vous un compte ici',
   'your_groups' => 'Mes groupes',
   'your_search_for' => 'Votre recherche pour',
-  'LLH:obsolete' => 
+  'LLH:obsolete' =>
   array (
     'by' => 'par',
     'date' => 'Date',
