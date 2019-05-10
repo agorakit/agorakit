@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Group;
 use App\Mailers\AppMailer;
 use App\User;
+use DB;
 use Auth;
 use File;
 use Gate;
@@ -21,6 +22,7 @@ class UserController extends Controller
 {
   public function __construct()
   {
+    $this->middleware('preferences');
     $this->middleware('cache', ['only' => ['cover', 'avatar']]);
     $this->middleware('verified', ['only' => ['contact', 'contactForm']]);
     $this->middleware('throttle:2,1', ['only' => ['mail', 'sendVerificationAgain']]); // 2 emails per  minute should be enough for non bots
@@ -29,11 +31,53 @@ class UserController extends Controller
 
   public function index()
   {
-    $users = \App\User::with('groups')->where('verified', 1)->orderBy('created_at', 'desc')->paginate(20);
 
-    return view('dashboard.users')
-    ->with('tab', 'users')
-    ->with('users', $users);
+
+    if (Auth::check()) {
+
+      if (Auth::user()->getPreference('show') == 'all') {
+        // build a list of groups the user has access to
+        if (Auth::user()->isAdmin()) { // super admin sees everything
+          $groups = \App\Group::get()
+          ->pluck('id');
+        } else { // normal user get public groups + groups he is member of
+          $groups = \App\Group::public()
+          ->get()
+          ->pluck('id')
+          ->merge(Auth::user()->groups()->pluck('groups.id'));
+        }
+      } else {
+        // show only "my" group
+        $groups = Auth::user()->groups()->pluck('groups.id');
+      }
+
+
+
+      $users = User::whereHas('groups', function($q) use ($groups) {
+        $q->whereIn('group_id', $groups);
+      })
+      ->where('verified', 1)
+      ->orderBy('created_at', 'desc')
+      ->paginate(20);
+
+
+      return view('dashboard.users')
+      ->with('tab', 'users')
+      ->with('users', $users);
+    }
+
+    else {
+      $users = User::where('verified', 1)
+      ->orderBy('created_at', 'desc')
+      ->paginate(20);
+
+
+      return view('dashboard.users')
+      ->with('tab', 'users')
+      ->with('users', $users);
+
+    }
+
   }
 
   /**
