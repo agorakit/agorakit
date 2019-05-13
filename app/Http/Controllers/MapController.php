@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\User;
 
 class MapController extends Controller
 {
   public function __construct()
   {
-    //$this->middleware('verified');
+    $this->middleware('verified');
   }
 
   /**
@@ -28,7 +29,19 @@ class MapController extends Controller
   */
   public function geoJson()
   {
-    $users = \App\User::where('latitude', '<>', 0)->where('verified', 1)->get();
+    // query all users from "my" group
+    $groups = Auth::user()->groups()->pluck('groups.id');
+
+
+    // Magic query to get all the users who have one of the groups defined above in their membership table
+    $users = User::whereHas('groups', function($q) use ($groups) {
+      $q->whereIn('group_id', $groups);
+    })
+    ->where('verified', 1)
+    ->where('latitude', '<>', 0)
+    ->get();
+
+
 
     if (Auth::check()) {
       $allowed_groups = \App\Group::public()
