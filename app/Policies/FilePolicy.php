@@ -29,12 +29,12 @@ class FilePolicy
 
     public function update(User $user, File $file)
     {
-        /*
+
         if ($user->isAdminOf($file->group))
         {
             return true;
         }
-        */
+
         return $user->isMemberOf($file->group);
     }
 

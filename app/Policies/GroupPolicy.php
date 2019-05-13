@@ -77,6 +77,11 @@ class GroupPolicy
         return $user->isMemberOf($group);
     }
 
+    public function createLink(User $user, Group $group)
+    {
+        return $user->isMemberOf($group);
+    }
+
     public function createAction(User $user, Group $group)
     {
         return $user->isMemberOf($group);
@@ -104,7 +109,7 @@ class GroupPolicy
         return $group->isOpen() || $user->isMemberOf($group);
     }
 
-    public function viewFiles(User $user, Group $group)
+    public function viewFiles(?User $user, Group $group)
     {
         return $group->isOpen() || $user->isMemberOf($group);
     }
