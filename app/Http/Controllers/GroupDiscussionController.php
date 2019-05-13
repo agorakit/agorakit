@@ -28,6 +28,8 @@ class GroupDiscussionController extends Controller
   */
   public function index(Request $request, Group $group)
   {
+    $this->authorize('view-discussions', $group);
+
     $tags = $group->tagsInDiscussions();
 
     $tag = $request->get('tag');

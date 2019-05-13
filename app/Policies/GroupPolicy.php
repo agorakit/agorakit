@@ -28,6 +28,17 @@ class GroupPolicy
         }
     }
 
+    public function view(?User $user, Group $group)
+    {
+        if ($group->isSecret()) {
+            return false;
+        }
+
+        return true;
+
+
+    }
+
     public function create(User $user)
     {
         if (setting('user_can_create_groups') == true) {
@@ -92,18 +103,18 @@ class GroupPolicy
         return $user->isMemberOf($group);
     }
 
-    public function viewDiscussions(User $user, Group $group)
+    public function viewDiscussions(?User $user, Group $group)
     {
         // isn't it lovely :
         return $group->isOpen() || $user->isMemberOf($group);
     }
 
-    public function viewActions(User $user, Group $group)
+    public function viewActions(?User $user, Group $group)
     {
         return $group->isOpen() || $user->isMemberOf($group);
     }
 
-    public function viewMembers(User $user, Group $group)
+    public function viewMembers(?User $user, Group $group)
     {
         // same as the other ressources, since now groups have contact persons
         return $group->isOpen() || $user->isMemberOf($group);

@@ -58,6 +58,8 @@ class GroupController extends Controller
   */
   public function show(Group $group)
   {
+    $this->authorize('view', $group);
+
     $discussions = false;
     $actions = false;
     $files = false;
