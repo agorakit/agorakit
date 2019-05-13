@@ -110,7 +110,7 @@ Route::get('pages/help', 'PageController@help')->name('pages.help');
     Route::get('groups/create', 'GroupController@create')->name('groups.create');
     Route::post('groups/create', 'GroupController@store')->name('groups.store');
 
-    
+
     // Groups : what everyone can see, homepage and covers
     Route::get('groups/{group}', 'GroupController@show')->name('groups.show');
     Route::get('groups/{group}/cover/small', 'GroupCoverController@small')->name('groups.cover.small');
@@ -140,7 +140,7 @@ Route::get('pages/help', 'PageController@help')->name('pages.help');
     Route::get('users/{user}', 'UserController@show')->name('users.show');
 
     Route::get('users/{user}/cover/{size}', 'UserCoverController@show')->name('users.cover');
-    //  Route::get('users/{user}/avatar', 'UserController@avatar')->name('users.avatar');
+    
 
     Route::get('users/{user}/sendverification', 'UserController@sendVerificationAgain')->name('users.sendverification');
 

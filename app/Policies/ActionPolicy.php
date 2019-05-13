@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Action;
+use App\Group;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -11,10 +12,10 @@ class ActionPolicy
     use HandlesAuthorization;
 
     /**
-     * Create a new policy instance.
-     *
-     * @return void
-     */
+    * Create a new policy instance.
+    *
+    * @return void
+    */
     public function __construct()
     {
         //
@@ -26,6 +27,30 @@ class ActionPolicy
             return true;
         }
     }
+
+    /**
+    * Determine whether the user can view the action.
+    *
+    * @param  \App\User  $user
+    * @param  \App\Action  $action
+    * @return mixed
+    */
+    public function view(?User $user, Action $action)
+    {
+        if ($user) {
+            return $user->isMemberOf($group);
+        } else {
+            return ($action->group->isPublic());
+        }
+    }
+
+
+    public function create(User $user, Group $group)
+    {
+        return $user->isMemberOf($group);
+    }
+
+
 
     public function update(User $user, Action $action)
     {

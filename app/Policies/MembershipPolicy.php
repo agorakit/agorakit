@@ -29,6 +29,8 @@ class MembershipPolicy
         }
     }
 
+    // a group admin can edit user memberships
+    // a user can edit his/her own membership
     public function edit(User $user, Membership $membership)
     {
         if ($user->isAdminOf($membership->group))
