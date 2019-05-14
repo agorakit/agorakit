@@ -40,16 +40,16 @@ class ActionPolicy
         if ($user) {
             return $user->isMemberOf($group);
         } else {
-            return ($action->group->isPublic());
+            return ($action->group->isOpen());
         }
     }
 
-
-    public function create(User $user, Group $group)
-    {
-        return $user->isMemberOf($group);
-    }
-
+    /*
+        public function create(User $user, Group $group)
+        {
+            return $user->isMemberOf($group);
+        }
+    */
 
 
     public function update(User $user, Action $action)
@@ -60,5 +60,14 @@ class ActionPolicy
     public function delete(User $user, Action $action)
     {
         return $user->id === $action->user_id;
+    }
+
+    public function history(?User $user, Action $action)
+    {
+        if ($user) {
+            return $user->isMemberOf($group);
+        } else {
+            return ($action->group->isOpen());
+        }
     }
 }

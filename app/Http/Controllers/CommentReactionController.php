@@ -7,6 +7,9 @@ use \App\Comment;
 use \App\Reaction;
 use Auth;
 
+/**
+ * This controller is curently unused and will at some point allow user to react to comments (+1 -1 ...)
+ */
 class CommentReactionController extends Controller
 {
 

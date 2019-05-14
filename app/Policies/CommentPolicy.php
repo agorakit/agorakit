@@ -36,4 +36,9 @@ class CommentPolicy
     {
         return $user->id === $comment->user_id;
     }
+
+    public function history(User $user, Comment $comment)
+    {
+        return $user->isMemberOf($comment->discussion->group);
+    }
 }

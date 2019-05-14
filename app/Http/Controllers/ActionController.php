@@ -6,6 +6,9 @@ use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
+/**
+ *  Global listing of actions
+ */
 class ActionController extends Controller
 {
   public function __construct()

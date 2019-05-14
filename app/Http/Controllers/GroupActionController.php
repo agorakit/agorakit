@@ -26,6 +26,8 @@ class GroupActionController extends Controller
     */
     public function index(Request $request, Group $group)
     {
+        $this->authorize('view-actions', $group);
+
         $view = 'grid';
 
         if (Auth::check()) {
@@ -76,6 +78,7 @@ class GroupActionController extends Controller
 
     public function indexJson(Request $request, Group $group)
     {
+        $this->authorize('view-actions', $group);
 
         // load of actions between start and stop provided by calendar js
         if ($request->has('start') && $request->has('end')) {
@@ -115,6 +118,8 @@ class GroupActionController extends Controller
     */
     public function create(Request $request, Group $group)
     {
+        $this->authorize('create-action', $group);
+
         $action = new Action();
 
         if ($request->get('start')) {
@@ -145,6 +150,8 @@ class GroupActionController extends Controller
     */
     public function store(Request $request, Group $group)
     {
+        $this->authorize('create-action', $group);
+
         // if no group is in the route, it means user choose the group using the dropdown
         if (!$group->exists) {
             $group = \App\Group::findOrFail($request->get('group'));
@@ -176,16 +183,13 @@ class GroupActionController extends Controller
             if ($request->get('stop_date')) {
                 if ($request->get('stop_time')) {
                     $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('stop_time'));
-                } else // asssume action will have a one hour duration
-                {
+                } else { // asssume action will have a one hour duration
                     $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('start_time'))->addHour();
                 }
-            } else // assume it will be same day
-            {
+            } else { // assume it will be same day
                 if ($request->get('stop_time')) {
                     $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
-                } else // asssume action will have a one hour duration
-                {
+                } else { // asssume action will have a one hour duration
                     $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('start_time'))->addHour();
                 }
             }
@@ -233,6 +237,8 @@ class GroupActionController extends Controller
     */
     public function show(Group $group, Action $action)
     {
+        $this->authorize('view', $action);
+
         return view('actions.show')
         ->with('title', $group->name . ' - ' . $action->name)
         ->with('action', $action)
@@ -249,6 +255,8 @@ class GroupActionController extends Controller
     */
     public function edit(Request $request, Group $group, Action $action)
     {
+        $this->authorize('update', $action);
+
         return view('actions.edit')
         ->with('action', $action)
         ->with('group', $group)
@@ -264,6 +272,8 @@ class GroupActionController extends Controller
     */
     public function update(Request $request, Group $group, Action $action)
     {
+        $this->authorize('update', $action);
+
         $action->name = $request->input('name');
         $action->body = $request->input('body');
 
@@ -309,6 +319,8 @@ class GroupActionController extends Controller
     */
     public function destroyConfirm(Request $request, Group $group, Action $action)
     {
+        $this->authorize('delete', $action);
+
         if (Gate::allows('delete', $action)) {
             return view('actions.delete')
             ->with('action', $action)
@@ -328,14 +340,11 @@ class GroupActionController extends Controller
     */
     public function destroy(Request $request, Group $group, Action $action)
     {
-        if (Gate::allows('delete', $action)) {
-            $action->delete();
-            flash(trans('messages.ressource_deleted_successfully'));
+        $this->authorize('delete', $action);
+        $action->delete();
+        flash(trans('messages.ressource_deleted_successfully'));
 
-            return redirect()->route('groups.actions.index', [$group]);
-        } else {
-            abort(403);
-        }
+        return redirect()->route('groups.actions.index', [$group]);
     }
 
     /**
@@ -343,6 +352,8 @@ class GroupActionController extends Controller
     */
     public function history(Group $group, Action $action)
     {
+        $this->authorize('history', $action);
+
         return view('actions.history')
         ->with('group', $group)
         ->with('action', $action)

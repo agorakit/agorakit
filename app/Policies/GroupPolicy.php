@@ -28,6 +28,9 @@ class GroupPolicy
         }
     }
 
+/**
+ * Viewing a group means reading title and presentation (= group home page)
+ */
     public function view(?User $user, Group $group)
     {
         if ($group->isSecret()) {
@@ -35,8 +38,6 @@ class GroupPolicy
         }
 
         return true;
-
-
     }
 
     public function create(User $user)
@@ -116,8 +117,7 @@ class GroupPolicy
 
     public function viewMembers(?User $user, Group $group)
     {
-        // same as the other ressources, since now groups have contact persons
-        return $group->isOpen() || $user->isMemberOf($group);
+        return $user->isMemberOf($group);
     }
 
     public function viewFiles(?User $user, Group $group)

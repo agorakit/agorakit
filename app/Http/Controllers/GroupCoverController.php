@@ -10,15 +10,15 @@ use Illuminate\Http\Request;
 use Image;
 use Storage;
 
-
 /*
 Handle group cover image
 */
 class GroupCoverController extends Controller
 {
-
     public function small(Group $group)
     {
+        $this->authorize('view', $group);
+
         $path = storage_path().'/app/groups/'.$group->id.'/cover.jpg';
 
         if (File::exists($path)) {
@@ -34,6 +34,8 @@ class GroupCoverController extends Controller
 
     public function medium(Group $group)
     {
+        $this->authorize('view', $group);
+
         $path = storage_path().'/app/groups/'.$group->id.'/cover.jpg';
 
         if (File::exists($path)) {
@@ -49,6 +51,8 @@ class GroupCoverController extends Controller
 
     public function large(Group $group)
     {
+        $this->authorize('view', $group);
+        
         $path = storage_path().'/app/groups/'.$group->id.'/cover.jpg';
 
         if (File::exists($path)) {
@@ -61,6 +65,4 @@ class GroupCoverController extends Controller
             abort(404);
         }
     }
-
-
 }

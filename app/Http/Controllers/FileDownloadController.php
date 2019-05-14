@@ -12,7 +12,6 @@ use Storage;
 
 class FileDownloadController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('public');
@@ -24,6 +23,8 @@ class FileDownloadController extends Controller
     */
     public function download(Group $group, File $file)
     {
+        $this->authorize('view', $file);
+
         if ($file->isLink()) {
             return redirect($file->path);
         }
@@ -42,6 +43,8 @@ class FileDownloadController extends Controller
     */
     public function thumbnail(Group $group, File $file)
     {
+        $this->authorize('view', $file);
+
         if ($file->isImage()) {
             $cachedImage = Image::cache(function ($img) use ($file) {
                 return $img->make(storage_path().'/app/'.$file->path)->fit(32, 32);
@@ -63,6 +66,8 @@ class FileDownloadController extends Controller
     */
     public function preview(Group $group, File $file)
     {
+        $this->authorize('view', $file);
+        
         if ($file->isImage()) {
             $cachedImage = Image::cache(function ($img) use ($file) {
                 return $img->make(storage_path().'/app/'.$file->path)->widen(600);

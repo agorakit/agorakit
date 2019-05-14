@@ -7,6 +7,9 @@ use App\Group;
 use App\Action;
 use URL;
 
+/**
+ * This controller allow users to attend or not to events
+ */
 class ActionUserController extends Controller
 {
     /**

@@ -27,6 +27,17 @@ class DiscussionPolicy
         }
     }
 
+
+    public function view(?User $user, File $file)
+    {
+        if ($user) {
+            return $user->isMemberOf($group);
+        } else {
+            return ($action->group->isOpen());
+        }
+    }
+
+
     public function update(User $user, Discussion $discussion)
     {
         return $user->isMemberOf($discussion->group);
@@ -36,4 +47,11 @@ class DiscussionPolicy
     {
         return $user->isAdminOf($discussion->group);
     }
+
+    public function history(User $user, Discussion $discussion)
+    {
+        return $user->isMemberOf($discussion->group);
+    }
+
+
 }

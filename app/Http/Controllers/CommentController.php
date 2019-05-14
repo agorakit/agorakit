@@ -8,6 +8,10 @@ use App\Group;
 use Gate;
 use Illuminate\Http\Request;
 
+
+/**
+ * Comments CRUD controller
+ */
 class CommentController extends Controller
 {
     public function __construct()
@@ -21,6 +25,7 @@ class CommentController extends Controller
 
     public function store(Request $request, Group $group, Discussion $discussion)
     {
+        $this->authorize('create-comment', $group);
         $comment = new \App\Comment();
         $comment->body = $request->input('body');
         $comment->user()->associate(\Auth::user());
@@ -54,15 +59,13 @@ class CommentController extends Controller
     */
     public function edit(Request $request, Group $group, Discussion $discussion, Comment $comment)
     {
-        if (Gate::allows('update', $comment)) {
-            return view('comments.edit')
+        $this->authorize('update', $comment);
+
+        return view('comments.edit')
             ->with('discussion', $discussion)
             ->with('group', $group)
             ->with('comment', $comment)
             ->with('tab', 'discussion');
-        } else {
-            abort(403);
-        }
     }
 
     /**
@@ -75,21 +78,18 @@ class CommentController extends Controller
     */
     public function update(Request $request, Group $group, Discussion $discussion, Comment $comment)
     {
-        if (Gate::allows('update', $comment)) {
-            $comment->body = $request->input('body');
+        $this->authorize('update', $comment);
+        $comment->body = $request->input('body');
 
-            if ($comment->isInvalid()) {
-                return redirect()->back()
+        if ($comment->isInvalid()) {
+            return redirect()->back()
                 ->withErrors($comment->getErrors())
                 ->withInput();
-            }
-            $comment->save();
-            flash(trans('messages.ressource_updated_successfully'));
-
-            return redirect()->route('groups.discussions.show', [$discussion->group, $discussion]);
-        } else {
-            abort(403);
         }
+        $comment->save();
+        flash(trans('messages.ressource_updated_successfully'));
+
+        return redirect()->route('groups.discussions.show', [$discussion->group, $discussion]);
     }
 
     /**
@@ -101,15 +101,12 @@ class CommentController extends Controller
     */
     public function destroyConfirm(Request $request, Group $group, Discussion $discussion, Comment $comment)
     {
-        if (Gate::allows('delete', $comment)) {
-            return view('comments.delete')
+        $this->authorize('delete', $comment);
+        return view('comments.delete')
             ->with('discussion', $discussion)
             ->with('group', $group)
             ->with('comment', $comment)
             ->with('tab', 'discussion');
-        } else {
-            abort(403);
-        }
     }
 
     /**
@@ -121,14 +118,11 @@ class CommentController extends Controller
     */
     public function destroy(Request $request, Group $group, Discussion $discussion, Comment $comment)
     {
-        if (Gate::allows('delete', $comment)) {
-            $comment->delete();
-            flash(trans('messages.ressource_deleted_successfully'));
+        $this->authorize('update', $comment);
+        $comment->delete();
+        flash(trans('messages.ressource_deleted_successfully'));
 
-            return redirect()->route('groups.discussions.show', [$group, $discussion]);
-        } else {
-            abort(403);
-        }
+        return redirect()->route('groups.discussions.show', [$group, $discussion]);
     }
 
     /**
@@ -136,6 +130,7 @@ class CommentController extends Controller
     */
     public function history(Request $request, Group $group, Discussion $discussion, Comment $comment)
     {
+        $this->authorize('history', $comment);
         return view('comments.history')
         ->with('group', $group)
         ->with('discussion', $discussion)
