@@ -19,6 +19,7 @@ class GroupIcalController extends Controller
      */
     public function index(Group $group)
     {
+        $this->authorize('view-actions', $group);
         // 1. Create new calendar
         $vCalendar = new \Eluceo\iCal\Component\Calendar(config('app.url'));
         $vCalendar->setName(config('agorakit.name').' : '.$group->name);

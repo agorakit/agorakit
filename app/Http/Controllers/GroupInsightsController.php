@@ -11,12 +11,14 @@ class GroupInsightsController extends Controller
 
     public function __construct()
     {
-        $this->middleware('member');
+
     }
 
 
     public function index(Group $group)
     {
+        $this->authorize('administer', $group);
+
         // This is really a tribute to laravel efficiency and to the marvelous https://github.com/ConsoleTVs/Charts package
 
         $charts[] = Charts::create('bar', 'highcharts')
@@ -62,5 +64,5 @@ class GroupInsightsController extends Controller
         ->with('group', $group);
     }
 
-    
+
 }
