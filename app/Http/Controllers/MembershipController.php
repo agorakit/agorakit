@@ -110,9 +110,12 @@ class MembershipController extends Controller
      */
     public function destroyConfirm(Request $request, Group $group)
     {
-        $this->autorize('delete', $membership);
+
         // load a membership for this group and user combination
         $membership = Membership::where(['user_id' => $request->user()->id, 'group_id' => $group->id])->firstOrFail();
+
+        $this->authorize('delete', $membership);
+
 
         if ($membership->isAdmin() && $group->admins->count() == 1) {
             flash('You cannot leave this group since you are the unique admin. Promote someone else as admin first.');
@@ -135,10 +138,12 @@ class MembershipController extends Controller
      */
     public function destroy(Request $request, Group $group)
     {
-        $this->autorize('delete', $membership);
 
         // load or create membership for this group and user combination
         $membership = Membership::where(['user_id' => $request->user()->id, 'group_id' => $group->id])->firstOrFail();
+
+        $this->authorize('delete', $membership);
+
         $membership->membership = Membership::UNREGISTERED;
         $membership->save();
 
