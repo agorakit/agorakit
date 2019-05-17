@@ -28,9 +28,9 @@ class GroupPolicy
         }
     }
 
-/**
- * Viewing a group means reading title and presentation (= group home page)
- */
+    /**
+     * Viewing a group means reading title and presentation (= group home page)
+     */
     public function view(?User $user, Group $group)
     {
         if ($group->isSecret()) {
@@ -107,22 +107,30 @@ class GroupPolicy
     public function viewDiscussions(?User $user, Group $group)
     {
         // isn't it lovely :
-        return $group->isOpen() || $user->isMemberOf($group);
+        if ($user) {
+            return $group->isOpen() || $user->isMemberOf($group);
+        }
     }
 
     public function viewActions(?User $user, Group $group)
     {
-        return $group->isOpen() || $user->isMemberOf($group);
+        if ($user) {
+            return $group->isOpen() || $user->isMemberOf($group);
+        }
     }
 
     public function viewMembers(?User $user, Group $group)
     {
-        return $user->isMemberOf($group);
+        if ($user) {
+            return $user->isMemberOf($group);
+        }
     }
 
     public function viewFiles(?User $user, Group $group)
     {
-        return $group->isOpen() || $user->isMemberOf($group);
+        if ($user) {
+            return $group->isOpen() || $user->isMemberOf($group);
+        }
     }
 
     public function changeGroupType(User $user, Group $group)

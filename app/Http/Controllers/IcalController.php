@@ -9,7 +9,6 @@ class IcalController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('public', ['only' => ['group']]);
     }
 
     /**

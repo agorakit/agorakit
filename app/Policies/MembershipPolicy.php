@@ -33,16 +33,27 @@ class MembershipPolicy
     // a user can edit his/her own membership
     public function edit(User $user, Membership $membership)
     {
-        if ($user->isAdminOf($membership->group))
-        {
+        if ($user->isAdminOf($membership->group)) {
             return true;
         }
-        if ($user->id == $membership->user->id)
-        {
+        if ($user->id == $membership->user->id) {
             return true;
         }
 
         return false;
     }
 
+
+    // a user can leave a group, a group admin can remove a member
+    public function delete(User $user, Membership $membership)
+    {
+        if ($user->isAdminOf($membership->group)) {
+            return true;
+        }
+        if ($user->id == $membership->user->id) {
+            return true;
+        }
+
+        return false;
+    }
 }

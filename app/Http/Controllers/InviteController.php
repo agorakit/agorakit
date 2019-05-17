@@ -28,6 +28,8 @@ class InviteController extends Controller
     */
     public function invite(Request $request, Group $group)
     {
+        $this->authorize('invite', $group);
+
         return view('invites.form')
         ->with('tab', 'users')
         ->with('group', $group);
@@ -42,6 +44,8 @@ class InviteController extends Controller
     */
     public function sendInvites(Request $request, Group $group)
     {
+        $this->authorize('invite', $group);
+
         $status_message = null;
 
         // extract emails
@@ -173,7 +177,7 @@ class InviteController extends Controller
             'password' => 'required|confirmed|min:6',
         ]);
 
-        $invite = \App\Invite::whereToken($token)->firstOrFail();
+        $invite = \App\Invite::whereToken($token)->firstOrFail(); // TODO show a nicer error message if not found
         $invite->claimed_at = Carbon::now();
         $invite->save();
 
