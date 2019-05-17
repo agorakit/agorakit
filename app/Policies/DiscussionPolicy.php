@@ -30,7 +30,7 @@ class DiscussionPolicy
     public function view(?User $user, Discussion $discussion)
     {
         if ($user) {
-            return $user->isMemberOf($group);
+            return $user->isMemberOf($discussion->group);
         } else {
             return $discussion->group->isOpen();
         }

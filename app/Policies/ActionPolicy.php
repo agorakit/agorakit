@@ -39,7 +39,7 @@ class ActionPolicy
     public function view(?User $user, Action $action)
     {
         if ($user) {
-            return $user->isMemberOf($group);
+            return $user->isMemberOf($action->group);
         } else {
             return $action->group->isOpen();
         }
