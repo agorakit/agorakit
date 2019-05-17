@@ -75,4 +75,15 @@ class File extends Model
 
         return false;
     }
+
+
+    /**
+     * Permanently delete this file from storage
+     */
+    public function deleteFromStorage()
+    {
+      if (Storage::exists($this->path)) {
+        return Storage::delete($this->path)
+    }
+    return false;
 }
