@@ -4,10 +4,6 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Watson\Validating\ValidatingTrait;
-use App\Discussion;
-use App\File;
-use App\Action;
-use App\Comment;
 
 /************* candidate for REMOVAL TODO ************************/
 
@@ -16,15 +12,14 @@ class Activity extends Model
     use ValidatingTrait;
 
     protected $rules = [
-    'user_id'  => 'required|exists:users,id',
+    'user_id'   => 'required|exists:users,id',
     'group_id'  => 'required|exists:groups,id',
-    'action' => 'required|in:created,updated,deleted,commented',
+    'action'    => 'required|in:created,updated,deleted,commented',
     ];
 
-
     /**
-    * Get all of the owning models
-    */
+     * Get all of the owning models.
+     */
     public function model()
     {
         return $this->morphTo()->withTrashed();
@@ -39,7 +34,6 @@ class Activity extends Model
     {
         return $this->belongsTo(\App\Group::class)->withTrashed();
     }
-
 
     public function getType()
     {
@@ -60,13 +54,11 @@ class Activity extends Model
         }
     }
 
-
     /**
-     * Little helper to returna link to the related model
+     * Little helper to returna link to the related model.
      */
     public function linkToModel()
     {
-
         if ($this->model instanceof Discussion) {
             return route('groups.discussions.show', [$this->group, $this->model]);
         }

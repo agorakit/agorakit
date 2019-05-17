@@ -5,12 +5,10 @@ namespace App\Http\Controllers;
 use App\Comment;
 use App\Discussion;
 use App\Group;
-use Gate;
 use Illuminate\Http\Request;
 
-
 /**
- * Comments CRUD controller
+ * Comments CRUD controller.
  */
 class CommentController extends Controller
 {
@@ -20,8 +18,6 @@ class CommentController extends Controller
         $this->middleware('verified', ['only' => ['reply', 'create', 'store', 'edit', 'update', 'destroy']]);
         $this->middleware('public', ['only' => ['reply', 'create', 'store', 'edit', 'update', 'destroy']]);
     }
-
-
 
     public function store(Request $request, Group $group, Discussion $discussion)
     {
@@ -37,7 +33,7 @@ class CommentController extends Controller
         }
 
         $discussion->comments()->save($comment);
-        ++$discussion->total_comments;
+        $discussion->total_comments++;
         $discussion->save();
 
         // update activity timestamp on parent items
@@ -51,12 +47,12 @@ class CommentController extends Controller
     }
 
     /**
-    * Show the form for editing the specified resource.
-    *
-    * @param int $id
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function edit(Request $request, Group $group, Discussion $discussion, Comment $comment)
     {
         $this->authorize('update', $comment);
@@ -69,13 +65,13 @@ class CommentController extends Controller
     }
 
     /**
-    * Update the specified resource in storage.
-    *
-    * @param \Illuminate\Http\Request $request
-    * @param int                      $id
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, Group $group, Discussion $discussion, Comment $comment)
     {
         $this->authorize('update', $comment);
@@ -93,15 +89,16 @@ class CommentController extends Controller
     }
 
     /**
-    * Remove the specified resource from storage.
-    *
-    * @param int $id
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function destroyConfirm(Request $request, Group $group, Discussion $discussion, Comment $comment)
     {
         $this->authorize('delete', $comment);
+
         return view('comments.delete')
             ->with('discussion', $discussion)
             ->with('group', $group)
@@ -110,12 +107,12 @@ class CommentController extends Controller
     }
 
     /**
-    * Remove the specified resource from storage.
-    *
-    * @param int $id
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(Request $request, Group $group, Discussion $discussion, Comment $comment)
     {
         $this->authorize('update', $comment);
@@ -126,11 +123,12 @@ class CommentController extends Controller
     }
 
     /**
-    * Show the revision history of the comment.
-    */
+     * Show the revision history of the comment.
+     */
     public function history(Request $request, Group $group, Discussion $discussion, Comment $comment)
     {
         $this->authorize('history', $comment);
+
         return view('comments.history')
         ->with('group', $group)
         ->with('discussion', $discussion)

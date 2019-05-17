@@ -19,10 +19,10 @@ class GroupDiscussionController extends Controller
     }
 
     /**
-    * Display a listing of the resource.
-    *
-    * @return Response
-    */
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
     public function index(Request $request, Group $group)
     {
         $this->authorize('view-discussions', $group);
@@ -46,12 +46,8 @@ class GroupDiscussionController extends Controller
             $discussions = $group->discussions()->has('user')->with('user')->withCount('comments')->orderBy('updated_at', 'desc')->paginate(50);
         }
 
-
-
-
-
         return view('discussions.index')
-    ->with('title', $group->name . ' - ' . trans('messages.discussions'))
+    ->with('title', $group->name.' - '.trans('messages.discussions'))
     ->with('discussions', $discussions)
     ->with('tags', $tags)
     ->with('group', $group)
@@ -59,15 +55,14 @@ class GroupDiscussionController extends Controller
     }
 
     /**
-    * Show the form for creating a new resource.
-    *
-    * @return Response
-    */
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
     public function create(Request $request, Group $group)
     {
         // we don't authorize at this stage since we might not have a group
         $tags = $group->tagsUsed();
-
 
         return view('discussions.create')
     ->with('group', $group)
@@ -76,10 +71,10 @@ class GroupDiscussionController extends Controller
     }
 
     /**
-    * Store a newly created resource in storage.
-    *
-    * @return Response
-    */
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
     public function store(Request $request, Group $group)
     {
 
@@ -122,12 +117,12 @@ class GroupDiscussionController extends Controller
     }
 
     /**
-    * Display the specified resource.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Display the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function show(Group $group, Discussion $discussion)
     {
         $this->authorize('view', $discussion);
@@ -146,7 +141,7 @@ class GroupDiscussionController extends Controller
         }
 
         return view('discussions.show')
-    ->with('title', $group->name . ' - ' . $discussion->name)
+    ->with('title', $group->name.' - '.$discussion->name)
     ->with('discussion', $discussion)
     ->with('read_comments', $read_comments)
     ->with('group', $group)
@@ -154,12 +149,12 @@ class GroupDiscussionController extends Controller
     }
 
     /**
-    * Show the form for editing the specified resource.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function edit(Request $request, Group $group, Discussion $discussion)
     {
         $this->authorize('update', $discussion);
@@ -175,16 +170,15 @@ class GroupDiscussionController extends Controller
     }
 
     /**
-    * Update the specified resource in storage.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Update the specified resource in storage.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function update(Request $request, Group $group, Discussion $discussion)
     {
         $this->authorize('update', $discussion);
-
 
         $discussion->name = $request->input('name');
         $discussion->body = $request->input('body');
@@ -215,12 +209,12 @@ class GroupDiscussionController extends Controller
     }
 
     /**
-    * Remove the specified resource from storage.
-    *
-    * @param int $id
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(Request $request, Group $group, Discussion $discussion)
     {
         $this->authorize('view', $discussion);
@@ -231,8 +225,8 @@ class GroupDiscussionController extends Controller
     }
 
     /**
-    * Show the revision history of the discussion.
-    */
+     * Show the revision history of the discussion.
+     */
     public function history(Group $group, Discussion $discussion)
     {
         $this->authorize('history', $discussion);

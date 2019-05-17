@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use \App\Comment;
-use \App\Reaction;
+use App\Comment;
+use App\Reaction;
 use Auth;
+use Illuminate\Http\Request;
 
 /**
- * This controller is curently unused and will at some point allow user to react to comments (+1 -1 ...)
+ * This controller is curently unused and will at some point allow user to react to comments (+1 -1 ...).
  */
 class CommentReactionController extends Controller
 {
-
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Comment $comment, $context)
@@ -25,11 +25,11 @@ class CommentReactionController extends Controller
         Reaction::reactTo($comment, $context);
     }
 
-
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Comment $comment)

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Group;
 use Auth;
 use Carbon\Carbon;
-use File;
 use Gate;
 use Illuminate\Http\Request;
 use Image;
@@ -19,13 +18,12 @@ class GroupController extends Controller
         $this->middleware('groupadmin', ['only' => ['edit', 'update', 'destroy']]);
     }
 
-
     public function index(Request $request)
     {
 
     // TODO: show the user groups first !!!
 
-        $groups = new Group;
+        $groups = new Group();
         $groups = $groups->notSecret()
     ->with('tags')
     ->orderBy('updated_at', 'desc');
@@ -40,21 +38,18 @@ class GroupController extends Controller
 
         $groups = $groups->paginate(21);
 
-
         return view('dashboard.groups')
     ->with('tab', 'groups')
     ->with('groups', $groups);
     }
 
-
-
     /**
-    * Display the specified resource.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Display the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function show(Group $group)
     {
         $this->authorize('view', $group);
@@ -89,7 +84,7 @@ class GroupController extends Controller
             }
 
             if (Auth::user()->isMemberOf($group) && setting('user_can_post_by_email')) {
-                $group_email = setting('mail_prefix') . $group->slug .  setting('mail_suffix');
+                $group_email = setting('mail_prefix').$group->slug.setting('mail_suffix');
             }
         } else { // anonymous user
             if ($group->isSecret()) {
@@ -122,24 +117,24 @@ class GroupController extends Controller
     }
 
     /**
-    * Show the form for creating a new resource.
-    *
-    * @return Response
-    */
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
     public function create()
     {
         Gate::authorize('create', \App\Group::class);
 
         return view('groups.create')
-    ->with('group', new \App\Group)
+    ->with('group', new \App\Group())
     ->with('all_tags', \App\Group::allTags());
     }
 
     /**
-    * Store a newly created resource in storage.
-    *
-    * @return Response
-    */
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
     public function store(Request $request)
     {
         Gate::authorize('create', \App\Group::class);
@@ -159,7 +154,6 @@ class GroupController extends Controller
         } else {
             $group->group_type = $request->input('group_type');
         }
-
 
         if ($request->get('address')) {
             $group->address = $request->input('address');
@@ -209,12 +203,12 @@ class GroupController extends Controller
     }
 
     /**
-    * Show the form for editing the specified resource.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function edit(Request $request, Group $group)
     {
         $this->authorize('update', $group);
@@ -227,12 +221,12 @@ class GroupController extends Controller
     }
 
     /**
-    * Update the specified resource in storage.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Update the specified resource in storage.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function update(Request $request, Group $group)
     {
         $this->authorize('update', $group);
@@ -300,12 +294,12 @@ class GroupController extends Controller
     }
 
     /**
-    * Remove the specified resource from storage.
-    *
-    * @param int $id
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(Request $request, Group $group)
     {
         $this->authorize('delete', $group);
@@ -316,11 +310,12 @@ class GroupController extends Controller
     }
 
     /**
-    * Show the revision history of the group.
-    */
+     * Show the revision history of the group.
+     */
     public function history(Group $group)
     {
         $this->authorize('history', $group);
+
         return view('groups.history')
     ->with('group', $group)
     ->with('tab', 'home');

@@ -27,16 +27,14 @@ class DiscussionPolicy
         }
     }
 
-
     public function view(?User $user, File $file)
     {
         if ($user) {
             return $user->isMemberOf($group);
         } else {
-            return ($action->group->isOpen());
+            return $action->group->isOpen();
         }
     }
-
 
     public function update(User $user, Discussion $discussion)
     {
@@ -52,6 +50,4 @@ class DiscussionPolicy
     {
         return $user->isMemberOf($discussion->group);
     }
-
-
 }

@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use App\File;
 use App\Group;
-use Gate;
+use Illuminate\Http\Response;
 use Image;
 use Storage;
 
@@ -17,10 +15,9 @@ class FileDownloadController extends Controller
         $this->middleware('public');
     }
 
-
     /**
-    * Returns the specified file for downloading
-    */
+     * Returns the specified file for downloading.
+     */
     public function download(Group $group, File $file)
     {
         $this->authorize('view', $file);
@@ -39,8 +36,8 @@ class FileDownloadController extends Controller
     }
 
     /**
-    * Returns a square thumbnail of the file
-    */
+     * Returns a square thumbnail of the file.
+     */
     public function thumbnail(Group $group, File $file)
     {
         $this->authorize('view', $file);
@@ -57,17 +54,16 @@ class FileDownloadController extends Controller
             return redirect('images/extensions/folder.png');
         }
 
-
         return redirect('images/extensions/text-file.png');
     }
 
     /**
-    * Returns a medium sized preview of the file
-    */
+     * Returns a medium sized preview of the file.
+     */
     public function preview(Group $group, File $file)
     {
         $this->authorize('view', $file);
-        
+
         if ($file->isImage()) {
             $cachedImage = Image::cache(function ($img) use ($file) {
                 return $img->make(storage_path().'/app/'.$file->path)->widen(600);
@@ -75,7 +71,6 @@ class FileDownloadController extends Controller
 
             return $cachedImage->response();
         }
-
 
         return redirect('images/extensions/text-file.png');
     }

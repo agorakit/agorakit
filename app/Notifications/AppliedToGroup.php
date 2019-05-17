@@ -2,13 +2,11 @@
 
 namespace App\Notifications;
 
+use App\Group;
+use App\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-
-use \App\Group;
-use \App\User;
+use Illuminate\Notifications\Notification;
 
 class AppliedToGroup extends Notification
 {
@@ -21,14 +19,15 @@ class AppliedToGroup extends Notification
      */
     public function __construct(Group $group, User $user)
     {
-            $this->group = $group;
-            $this->user = $user;
+        $this->group = $group;
+        $this->user = $user;
     }
 
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
+     *
      * @return array
      */
     public function via($notifiable)
@@ -39,12 +38,13 @@ class AppliedToGroup extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
+     *
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
+        return (new MailMessage())
                     ->subject(trans('notification.user_applied_to_the_group', ['user' => $this->user->name, 'group' => $this->group->name]))
                     ->line(trans('notification.user_applied_to_the_group', ['user' => $this->user->name, 'group' => $this->group->name]))
                     ->action(trans('messages.visit_link'), route('groups.users.index', $this->group))
@@ -54,7 +54,8 @@ class AppliedToGroup extends Notification
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
+     *
      * @return array
      */
     public function toArray($notifiable)

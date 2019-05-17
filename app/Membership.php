@@ -22,7 +22,7 @@ class Membership extends Model
 
     // Default notification interval is daily :
     protected $attributes = [
-        'notification_interval' => 60*24
+        'notification_interval' => 60 * 24,
     ];
 
     protected $keepRevisionOf = ['config', 'membership', 'notification_interval'];
@@ -52,7 +52,7 @@ class Membership extends Model
 
     public function isAdmin()
     {
-      return $this->membership == \App\Membership::ADMIN;
+        return $this->membership == \App\Membership::ADMIN;
     }
 
     public function votes()

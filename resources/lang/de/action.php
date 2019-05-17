@@ -1,5 +1,5 @@
 <?php
 
-return array (
+return [
   'create_one_button' => 'Neues Thema',
-);
+];

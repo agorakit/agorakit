@@ -57,11 +57,10 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'name'    => env('MAIL_FROM_NAME', 'Example'),
     ],
 
     'noreply' => env('MAIL_NOREPLY', 'noreply@example.com'),
-
 
     /*
     |--------------------------------------------------------------------------
@@ -114,7 +113,6 @@ return [
     */
 
     'sendmail' => '/usr/sbin/sendmail -bs',
-
 
     'markdown' => [
         'theme' => 'default',

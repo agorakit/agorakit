@@ -3,7 +3,6 @@
 namespace App\Helpers;
 
 use Auth;
-use Carbon\Carbon;
 use DB;
 
 /**
@@ -15,7 +14,6 @@ use DB;
  */
 class QueryHelper
 {
-
     /**
      * Returns the number of unread discussions the current user has. Is run on every page !
      */
@@ -70,8 +68,4 @@ class QueryHelper
 
         return false;
     }
-
-    
-
-
 }

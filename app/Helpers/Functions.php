@@ -1,28 +1,27 @@
 <?php
+
 // TODO refactor some of this using a content filter helper class or something
 
-
 /**
-* Returns a summary of the provided text.
-*
-* @param [type] $text   $text to be summarized
-* @param int    $length lenght in chars to keep
-*
-* @return [type] summarized text
-*/
+ * Returns a summary of the provided text.
+ *
+ * @param [type] $text   $text to be summarized
+ * @param int    $length lenght in chars to keep
+ *
+ * @return [type] summarized text
+ */
 function summary($text, $length = 200)
 {
-
-    return mb_strimwidth(strip_tags(html_entity_decode($text, ENT_QUOTES, "utf-8")),0, $length, '...');
+    return mb_strimwidth(strip_tags(html_entity_decode($text, ENT_QUOTES, 'utf-8')), 0, $length, '...');
 }
 
 /**
-* Filters the passed text to remove nasty html and turns urls to html links and embeds youtube and vimeo links.
-*
-* @param [type] $content [description]
-*
-* @return [type] [description]
-*/
+ * Filters the passed text to remove nasty html and turns urls to html links and embeds youtube and vimeo links.
+ *
+ * @param [type] $content [description]
+ *
+ * @return [type] [description]
+ */
 function filter($content)
 {
     // strip bad stuff
@@ -37,38 +36,34 @@ function safe_html($content)
     return strip_tags($content, '<br><p><a><li><img><hr><em><strong><i><code><h1><h2><h3><h4><ul><ol>');
 }
 
-
 /**
- * Highlight and link to @user profiles in the passed $content
+ * Highlight and link to @user profiles in the passed $content.
  */
 function highlightMentions($content)
 {
-  return preg_replace("#(?<!\w)@([\w_\-\.]+)#", '<a href="/users/$1">@$1</a> ', $content);
+    return preg_replace("#(?<!\w)@([\w_\-\.]+)#", '<a href="/users/$1">@$1</a> ', $content);
 }
 
-
 /**
-* returns the value of $name setting as stored in DB.
-*/
+ * returns the value of $name setting as stored in DB.
+ */
 function setting($name, $default = false)
 {
     return \App\Setting::get($name, $default);
 }
 
-
-
 function sizeForHumans($bytes)
 {
     if ($bytes >= 1073741824) {
-        $bytes = number_format($bytes / 1073741824, 2) . 'GB';
+        $bytes = number_format($bytes / 1073741824, 2).'GB';
     } elseif ($bytes >= 1048576) {
-        $bytes = number_format($bytes / 1048576, 2) . 'MB';
+        $bytes = number_format($bytes / 1048576, 2).'MB';
     } elseif ($bytes >= 1024) {
-        $bytes = number_format($bytes / 1024, 2) . 'KB';
+        $bytes = number_format($bytes / 1024, 2).'KB';
     } elseif ($bytes > 1) {
-        $bytes = $bytes . ' bytes';
+        $bytes = $bytes.' bytes';
     } elseif ($bytes == 1) {
-        $bytes = $bytes . ' byte';
+        $bytes = $bytes.' byte';
     } else {
         $bytes = '0 bytes';
     }
@@ -76,10 +71,9 @@ function sizeForHumans($bytes)
     return $bytes;
 }
 
-
 function intervalToMinutes($interval)
 {
-    $minutes = 60*24;
+    $minutes = 60 * 24;
 
     switch ($interval) {
         case 'hourly':
@@ -132,7 +126,6 @@ function minutesToInterval($minutes)
 
     return $interval;
 }
-
 
 // this one line replace almost all laracast flash tutorial that became bloated for our use case
 function flash($message)

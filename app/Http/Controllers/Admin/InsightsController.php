@@ -1,22 +1,18 @@
 <?php
 
-
 namespace App\Http\Controllers\Admin;
 
 use App\Group;
+use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Charts;
-use App\Http\Controllers\Controller;
 
 class InsightsController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('admin');
     }
-
-
 
     public function index()
     {

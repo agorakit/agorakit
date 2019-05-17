@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 
 class AddSlugToGroups extends Migration
 {
@@ -13,9 +12,9 @@ class AddSlugToGroups extends Migration
      */
     public function up()
     {
-      Schema::table('groups', function ($table) {
-        $table->string('slug');
-      });
+        Schema::table('groups', function ($table) {
+            $table->string('slug');
+        });
     }
 
     /**
@@ -26,7 +25,7 @@ class AddSlugToGroups extends Migration
     public function down()
     {
         Schema::table('groups', function ($table) {
-      $table->dropColumn('slug');
-    });
+            $table->dropColumn('slug');
+        });
     }
 }

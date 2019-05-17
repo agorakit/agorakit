@@ -12,8 +12,6 @@ class GroupIcalController extends Controller
         $this->middleware('public');
     }
 
-
-
     /**
      * Renders an ical file for a specific group.
      */
@@ -46,5 +44,4 @@ class GroupIcalController extends Controller
         ->header('Content-Type', 'text/calendar; charset=utf-8')
         ->header('Content-Disposition', 'attachment; filename="cal.ics"');
     }
-
 }

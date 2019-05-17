@@ -12,10 +12,10 @@ class ActionPolicy
     use HandlesAuthorization;
 
     /**
-    * Create a new policy instance.
-    *
-    * @return void
-    */
+     * Create a new policy instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         //
@@ -29,18 +29,19 @@ class ActionPolicy
     }
 
     /**
-    * Determine whether the user can view the action.
-    *
-    * @param  \App\User  $user
-    * @param  \App\Action  $action
-    * @return mixed
-    */
+     * Determine whether the user can view the action.
+     *
+     * @param \App\User   $user
+     * @param \App\Action $action
+     *
+     * @return mixed
+     */
     public function view(?User $user, Action $action)
     {
         if ($user) {
             return $user->isMemberOf($group);
         } else {
-            return ($action->group->isOpen());
+            return $action->group->isOpen();
         }
     }
 
@@ -50,7 +51,6 @@ class ActionPolicy
             return $user->isMemberOf($group);
         }
     */
-
 
     public function update(User $user, Action $action)
     {
@@ -67,7 +67,7 @@ class ActionPolicy
         if ($user) {
             return $user->isMemberOf($group);
         } else {
-            return ($action->group->isOpen());
+            return $action->group->isOpen();
         }
     }
 }

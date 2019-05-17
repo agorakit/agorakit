@@ -2,48 +2,46 @@
 
 namespace App\Console\Commands;
 
-use App\Helpers\QueryHelper;
-use App\Mailers\AppMailer;
-use Illuminate\Console\Command;
+use App\Group;
+use App\Mail\Notification;
+use App\User;
 use Carbon\Carbon;
 use DB;
-use App\Group;
-use App\User;
-use App\Mail\Notification;
-use Mail;
+use Illuminate\Console\Command;
 use Log;
+use Mail;
 
 class SendNotifications extends Command
 {
     /**
-    *  The name and signature of the console command.
-    *
-    * @var string
-    */
+     *  The name and signature of the console command.
+     *
+     * @var string
+     */
     protected $signature = 'agorakit:sendnotifications {--batch=100}';
 
     /**
-    * The console command description.
-    *
-    * @var string
-    */
+     * The console command description.
+     *
+     * @var string
+     */
     protected $description = 'Sends all the pending notifications to all users who requested it. This might take time. Call this frequently to avoid trouble';
 
     /**
-    * Create a new command instance.
-    *
-    * @return void
-    */
+     * Create a new command instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         parent::__construct();
     }
 
     /**
-    * Execute the console command.
-    *
-    * @return mixed
-    */
+     * Execute the console command.
+     *
+     * @return mixed
+     */
     public function handle()
     {
         $notifications = $this->getNotificationsToSend();
@@ -67,12 +65,11 @@ class SendNotifications extends Command
         }
     }
 
-
     /**
-    * Get a list of memberships rows that need to be processed for notification
-    * It means people who have opted in for notifcations and who have not been notified for a long enough time
-    * (This is configured, per user, per group, in notification_interval in the membership table).
-    */
+     * Get a list of memberships rows that need to be processed for notification
+     * It means people who have opted in for notifcations and who have not been notified for a long enough time
+     * (This is configured, per user, per group, in notification_interval in the membership table).
+     */
     public function getNotificationsToSend()
     {
         // I use Carbon::now() instead of the now() provided by mysql to avoid different timezone settings in differents servers (php vs mysql config)
@@ -87,19 +84,15 @@ class SendNotifications extends Command
         return $notifications;
     }
 
-
-
     public function sendNotificationEmail(Group $group, User $user)
     {
         \App::setLocale(config('app.locale')); // TODO use user's locale from preferences
-
 
         // Establish timestamp for notifications from membership data (when was an email sent for the last time?)
         $membership = \App\Membership::where('user_id', '=', $user->id)
         ->where('group_id', '=', $group->id)
         ->where('membership', '>=', \App\Membership::MEMBER)
         ->first();
-
 
         if ($membership) {
             $last_notification = $membership->notified_at;
@@ -132,14 +125,12 @@ class SendNotifications extends Command
             $membership->notified_at = Carbon::now();
             $membership->save();
 
-
             // if we have anything, build the message and send
             // removed that : or count($users) > 0
             // because we don't want to be notified just because there is a new member
 
-
             if (count($discussions) > 0 or count($files) > 0 or ($actions_count > 0)) {
-                $notification = new Notification;
+                $notification = new Notification();
 
                 $notification->user = $user;
                 $notification->group = $group;
@@ -151,25 +142,21 @@ class SendNotifications extends Command
                 $notification->actions = $actions;
                 $notification->last_notification = $last_notification;
 
-
                 Mail::to($user)->send($notification);
                 Log::info('User Notified', ['user' => $user]);
+
                 return true;
             }
         }
 
-
         return false;
-
     }
-
-
 
     /******************************** The following queries are used in the mail notification system : *************************/
 
     /**
-    * Returns a list of unread discussions for the $user_id $user, in the group_id group, since the $since time has passed.
-    */
+     * Returns a list of unread discussions for the $user_id $user, in the group_id group, since the $since time has passed.
+     */
     public function getUnreadDiscussionsSince($user_id, $group_id, $since)
     {
         $discussions = \App\Discussion::fromQuery('select * from
@@ -184,20 +171,20 @@ class SendNotifications extends Command
 
             ', ['user_id' => $user_id, 'group_id' => $group_id, 'since' => $since]);
 
-            return $discussions;
-        }
+        return $discussions;
+    }
 
-        /**
-        * Returns a list of users that joined the $group_id $since this timestamp.
-        * Excludes the $user_id (which might be set to the current user).
-        */
-        public function getNewMembersSince($user_id, $group_id, $since)
-        {
-            $users = \App\User::fromQuery('select * from users where id in
+    /**
+     * Returns a list of users that joined the $group_id $since this timestamp.
+     * Excludes the $user_id (which might be set to the current user).
+     */
+    public function getNewMembersSince($user_id, $group_id, $since)
+    {
+        $users = \App\User::fromQuery('select * from users where id in
             (select user_id from membership where group_id = :group_id and created_at > :since and membership >= :membership and user_id <> :user_id)
 
             ', ['user_id' => $user_id, 'group_id' => $group_id, 'since' => $since, 'membership' => \App\Membership::MEMBER]);
 
-            return $users;
-        }
+        return $users;
     }
+}

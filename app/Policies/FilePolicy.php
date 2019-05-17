@@ -27,19 +27,14 @@ class FilePolicy
         }
     }
 
-
-
-
     public function view(?User $user, File $file)
     {
         if ($user) {
             return $user->isMemberOf($group);
         } else {
-            return ($action->group->isOpen());
+            return $action->group->isOpen();
         }
     }
-
-
 
     public function update(User $user, File $file)
     {

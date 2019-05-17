@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class FillSlugToGroups extends Migration
@@ -13,11 +11,10 @@ class FillSlugToGroups extends Migration
      */
     public function up()
     {
-      foreach (\App\Group::all() as $group)
-      {
-        $group->timestamps = false;
-        $group->save();
-      }
+        foreach (\App\Group::all() as $group) {
+            $group->timestamps = false;
+            $group->save();
+        }
     }
 
     /**

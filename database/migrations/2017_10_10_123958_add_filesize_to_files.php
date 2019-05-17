@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 
 class AddFilesizeToFiles extends Migration
 {
@@ -10,7 +9,7 @@ class AddFilesizeToFiles extends Migration
     {
         // add the filesize column
         Schema::table('files', function ($table) {
-                $table->integer('filesize')->unsigned()->default(0)->after('mime');
+            $table->integer('filesize')->unsigned()->default(0)->after('mime');
         });
     }
 

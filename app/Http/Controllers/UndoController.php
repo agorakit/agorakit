@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class Undocontroller extends Controller
 {
     /**
-    * List all actions that can be undoed (undeleted for now)
-    */
+     * List all actions that can be undoed (undeleted for now).
+     */
     public function index()
     {
         // list all instances that have been deleted
@@ -40,23 +38,23 @@ class Undocontroller extends Controller
         ->with('discussions', $discussions)
         ->with('comments', $comments)
         ->with('files', $files)
-        ->with('actions', $actions)
-        ;
+        ->with('actions', $actions);
     }
 
     public function restore($type, $id)
     {
-        if ($type=='group') {
+        if ($type == 'group') {
             $group = \App\Group::withTrashed()->find($id);
             if ($group->trashed()) {
                 $group->restore();
+
                 return redirect()->route('groups.show', $group);
             } else {
                 abort(404, 'Group is not trashed, cannot restore');
             }
         }
 
-        if ($type=='discussion') {
+        if ($type == 'discussion') {
             $discussion = \App\Discussion::withTrashed()->find($id);
             if ($discussion->trashed()) {
                 $group = $discussion->group()->withTrashed()->first();
@@ -66,23 +64,25 @@ class Undocontroller extends Controller
                 }
                 $discussion->timestamps = false;
                 $discussion->restore();
+
                 return redirect()->route('groups.discussions.show', [$discussion->group, $discussion]);
             } else {
                 abort(404, 'Discussion is not trashed, cannot restore');
             }
         }
 
-        if ($type=='comment') {
+        if ($type == 'comment') {
             $comment = \App\Comment::withTrashed()->find($id);
             if ($comment->trashed()) {
                 $comment->restore();
+
                 return redirect()->route('groups.discussions.show', [$comment->discussion->group, $comment->discussion]);
             } else {
                 abort(404, 'comment is not trashed, cannot restore');
             }
         }
 
-        if ($type=='file') {
+        if ($type == 'file') {
             $file = \App\File::withTrashed()->find($id);
             if ($file->trashed()) {
                 $group = $file->group()->withTrashed()->first();
@@ -93,14 +93,14 @@ class Undocontroller extends Controller
 
                 $file->timestamps = false;
                 $file->restore();
+
                 return redirect()->route('groups.files.show', [$file->group, $file]);
             } else {
                 abort(404, 'file is not trashed, cannot restore');
             }
         }
 
-
-        if ($type=='action') {
+        if ($type == 'action') {
             $action = \App\Action::withTrashed()->find($id);
             if ($action->trashed()) {
                 $group = $action->group()->withTrashed()->first();
@@ -111,6 +111,7 @@ class Undocontroller extends Controller
 
                 $action->timestamps = false;
                 $action->restore();
+
                 return redirect()->route('groups.actions.show', [$action->group, $action]);
             } else {
                 abort(404, 'action is not trashed, cannot restore');

@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Action;
 use App\Group;
+use Auth;
 use Carbon\Carbon;
 use Gate;
 use Illuminate\Http\Request;
-use Auth;
 
 class GroupActionController extends Controller
 {
@@ -20,10 +20,10 @@ class GroupActionController extends Controller
     }
 
     /**
-    * Display a listing of the resource.
-    *
-    * @return Response
-    */
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
     public function index(Request $request, Group $group)
     {
         $this->authorize('view-actions', $group);
@@ -65,7 +65,7 @@ class GroupActionController extends Controller
             ->paginate(10);
 
             return view('actions.index-list')
-            ->with('title', $group->name . ' - ' . trans('messages.agenda'))
+            ->with('title', $group->name.' - '.trans('messages.agenda'))
             ->with('actions', $actions)
             ->with('group', $group)
             ->with('tab', 'action');
@@ -112,10 +112,10 @@ class GroupActionController extends Controller
     }
 
     /**
-    * Show the form for creating a new resource.
-    *
-    * @return Response
-    */
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
     public function create(Request $request, Group $group)
     {
         $this->authorize('create-action', $group);
@@ -132,7 +132,6 @@ class GroupActionController extends Controller
             $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->get('stop'));
         }
 
-
         if ($request->get('title')) {
             $action->name = $request->get('title');
         }
@@ -144,10 +143,10 @@ class GroupActionController extends Controller
     }
 
     /**
-    * Store a newly created resource in storage.
-    *
-    * @return Response
-    */
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
     public function store(Request $request, Group $group)
     {
         $this->authorize('create-action', $group);
@@ -165,13 +164,12 @@ class GroupActionController extends Controller
         $action->body = $request->input('body');
 
         try {
-            $action->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('start_time'));
+            $action->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date').' '.$request->input('start_time'));
         } catch (\Exception $e) {
             return redirect()->route('groups.actions.create', $group)
-            ->withErrors($e->getMessage() . '. Incorrect format in the start date, use yyyy-mm-dd hh:mm')
+            ->withErrors($e->getMessage().'. Incorrect format in the start date, use yyyy-mm-dd hh:mm')
             ->withInput();
         }
-
 
         if ($request->get('stop_time')) {
             $stop_time = $request->get('stop_time');
@@ -182,20 +180,20 @@ class GroupActionController extends Controller
         try {
             if ($request->get('stop_date')) {
                 if ($request->get('stop_time')) {
-                    $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('stop_time'));
+                    $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date').' '.$request->input('stop_time'));
                 } else { // asssume action will have a one hour duration
-                    $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('start_time'))->addHour();
+                    $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date').' '.$request->input('start_time'))->addHour();
                 }
             } else { // assume it will be same day
                 if ($request->get('stop_time')) {
-                    $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
+                    $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date').' '.$request->input('stop_time'));
                 } else { // asssume action will have a one hour duration
-                    $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('start_time'))->addHour();
+                    $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date').' '.$request->input('start_time'))->addHour();
                 }
             }
         } catch (\Exception $e) {
             return redirect()->route('groups.actions.create', $group)
-            ->withErrors($e->getMessage() . '. Incorrect format in the stop date, use yyyy-mm-dd hh:mm')
+            ->withErrors($e->getMessage().'. Incorrect format in the stop date, use yyyy-mm-dd hh:mm')
             ->withInput();
         }
 
@@ -224,35 +222,36 @@ class GroupActionController extends Controller
         } else {
             $action->save();
             flash(trans('messages.ressource_created_successfully'));
+
             return redirect()->route('groups.actions.index', $group);
         }
     }
 
     /**
-    * Display the specified resource.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Display the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function show(Group $group, Action $action)
     {
         $this->authorize('view', $action);
 
         return view('actions.show')
-        ->with('title', $group->name . ' - ' . $action->name)
+        ->with('title', $group->name.' - '.$action->name)
         ->with('action', $action)
         ->with('group', $group)
         ->with('tab', 'action');
     }
 
     /**
-    * Show the form for editing the specified resource.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function edit(Request $request, Group $group, Action $action)
     {
         $this->authorize('update', $action);
@@ -264,12 +263,12 @@ class GroupActionController extends Controller
     }
 
     /**
-    * Update the specified resource in storage.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Update the specified resource in storage.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function update(Request $request, Group $group, Action $action)
     {
         $this->authorize('update', $action);
@@ -277,14 +276,13 @@ class GroupActionController extends Controller
         $action->name = $request->input('name');
         $action->body = $request->input('body');
 
-        $action->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('start_time'));
+        $action->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date').' '.$request->input('start_time'));
 
-        if ($request->has('stop_date') && $request->get('stop_date')<>'') {
-            $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('stop_time'));
+        if ($request->has('stop_date') && $request->get('stop_date') != '') {
+            $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date').' '.$request->input('stop_time'));
         } else {
-            $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
+            $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date').' '.$request->input('stop_time'));
         }
-
 
         if ($action->location != $request->input('location')) {
             // we need to update user address and geocode it
@@ -311,12 +309,12 @@ class GroupActionController extends Controller
     }
 
     /**
-    * Remove the specified resource from storage.
-    *
-    * @param int $id
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function destroyConfirm(Request $request, Group $group, Action $action)
     {
         $this->authorize('delete', $action);
@@ -332,12 +330,12 @@ class GroupActionController extends Controller
     }
 
     /**
-    * Remove the specified resource from storage.
-    *
-    * @param int $id
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(Request $request, Group $group, Action $action)
     {
         $this->authorize('delete', $action);
@@ -348,8 +346,8 @@ class GroupActionController extends Controller
     }
 
     /**
-    * Show the revision history of the discussion.
-    */
+     * Show the revision history of the discussion.
+     */
     public function history(Group $group, Action $action)
     {
         $this->authorize('history', $action);
