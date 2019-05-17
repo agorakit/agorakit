@@ -20,6 +20,7 @@ class ModuleController extends Controller
 
     public function show(Request $request, Group $group)
     {
+        $this->authorize('administer', $group);
         if ($group->getSetting('module_custom_name')) {
             return view('groups.custom')
             ->with('group', $group)
@@ -31,6 +32,8 @@ class ModuleController extends Controller
 
     public function edit(Request $request, Group $group)
     {
+        $this->authorize('administer', $group);
+
         return view('groups.modules')
         ->with('group', $group)
         ->with('tab', 'admin');
@@ -38,6 +41,8 @@ class ModuleController extends Controller
 
     public function update(Request $request, Group $group)
     {
+        $this->authorize('administer', $group);
+        
         if ($request->has('module_discussion')) {
             $group->setSetting('module_discussion', true);
         } else {

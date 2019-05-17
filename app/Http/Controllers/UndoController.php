@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 class Undocontroller extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
+
     /**
      * List all actions that can be undoed (undeleted for now).
      */

@@ -20,8 +20,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('preferences');
-        $this->middleware('cache', ['only' => ['cover', 'avatar']]);
-        $this->middleware('verified', ['only' => ['contact', 'contactForm']]);
+        $this->middleware('verified');
         $this->middleware('throttle:2,1', ['only' => ['mail', 'sendVerificationAgain']]); // 2 emails per  minute should be enough for non bots
     }
 
@@ -352,33 +351,4 @@ class UserController extends Controller
         }
     }
 
-    public function cover(User $user)
-    {
-        $path = storage_path().'/app/users/'.$user->id.'/cover.jpg';
-
-        if (File::exists($path)) {
-            $cachedImage = Image::cache(function ($img) use ($path) {
-                return $img->make($path)->fit(400, 400);
-            }, 60000, true);
-
-            return $cachedImage->response();
-        } else {
-            return redirect(url('/images/avatar.jpg'));
-        }
-    }
-
-    public function avatar(User $user)
-    {
-        $path = storage_path().'/app/users/'.$user->id.'/cover.jpg';
-
-        if (File::exists($path)) {
-            $cachedImage = Image::cache(function ($img) use ($path) {
-                return $img->make($path)->fit(128, 128);
-            }, 60000, true);
-
-            return $cachedImage->response();
-        } else {
-            return redirect(url('/images/avatar.jpg'));
-        }
-    }
 }

@@ -150,16 +150,15 @@ class MembershipController extends Controller
      */
     public function edit(Request $request, Group $group, Membership $membership = null)
     {
-        // load or create membership for this group and user combination
-
+        // We edit membership either for the current user or for another user if we are group admin
+        // If no membership in the route, we load the membership for the current logged in user
         if (!$membership) {
-            // we edit membership for the current user
             $membership = Membership::where('user_id', $request->user()->id)
             ->where('group_id', $group->id)
             ->firstOrFail();
         }
 
-        // we have a membership we need to authorize the edit
+        // Now we have a membership we need to authorize the edit in both cases
         $this->authorize('edit', $membership);
 
         return view('membership.edit')
