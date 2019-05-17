@@ -15,6 +15,7 @@ class UserController extends Controller
     {
         //$users = \App\User::where('verified', 1)->get();
         $users = \App\User::get();
+
         return view('admin.user.index')->with('users', $users);
     }
 }

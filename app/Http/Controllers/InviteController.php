@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Group;
+use App\Mail\InviteUser;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Mail;
-
-use App\Mail\InviteUser;
 
 class InviteController extends Controller
 {
@@ -20,12 +19,12 @@ class InviteController extends Controller
     }
 
     /**
-    * Shows an invitation form for the specific group.
-    *
-    * @param [type] $group_id [description]
-    *
-    * @return [type] [description]
-    */
+     * Shows an invitation form for the specific group.
+     *
+     * @param [type] $group_id [description]
+     *
+     * @return [type] [description]
+     */
     public function invite(Request $request, Group $group)
     {
         $this->authorize('invite', $group);
@@ -36,12 +35,12 @@ class InviteController extends Controller
     }
 
     /**
-    * Send invites to new members by email.
-    *
-    * @param int $group_id [description]
-    *
-    * @return [type] [description]
-    */
+     * Send invites to new members by email.
+     *
+     * @param int $group_id [description]
+     *
+     * @return [type] [description]
+     */
     public function sendInvites(Request $request, Group $group)
     {
         $this->authorize('invite', $group);
@@ -77,7 +76,6 @@ class InviteController extends Controller
             - if user is not registered yet, as soon as (s)he registers, (s)he is added to the groups (this case is handled in the auth controller)
             */
 
-
             if (!$group->isOpen()) {
                 if ($user) {
                     // add user to membership for the group taken from the invite table
@@ -92,7 +90,7 @@ class InviteController extends Controller
                 $status_message .= trans('membership.user_already_invited').' : '.$email.'<br/>';
             } else {
                 // - create an invite token and store in invite table
-                $invite = new \App\Invite;
+                $invite = new \App\Invite();
                 $invite->generateToken();
                 $invite->email = $email;
                 $invite->group()->associate($group);
@@ -116,10 +114,10 @@ class InviteController extends Controller
     }
 
     /**
-    * Whenever a user wants to confirm an invite he received from an email link
-    * - if user exists we directly subscribe him/her to the group
-    * - if not we show an account creation screen.
-    */
+     * Whenever a user wants to confirm an invite he received from an email link
+     * - if user exists we directly subscribe him/her to the group
+     * - if not we show an account creation screen.
+     */
     public function inviteConfirm(Request $request, Group $group, $token)
     {
         $invite = \App\Invite::whereToken($token)->first();
@@ -167,8 +165,8 @@ class InviteController extends Controller
     }
 
     /**
-    * Process the account creation from the form of inviteConfirm().
-    */
+     * Process the account creation from the form of inviteConfirm().
+     */
     public function inviteRegister(Request $request, Group $group, $token)
     {
         $this->validate($request, [

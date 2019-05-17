@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use Auth;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 /**
-* This controller generates a global list of discussions with unread count (independant of groups).
-*/
+ * This controller generates a global list of discussions with unread count (independant of groups).
+ */
 class DiscussionController extends Controller
 {
     public function __construct()
@@ -19,7 +18,6 @@ class DiscussionController extends Controller
     public function index(Request $request)
     {
         $tag = $request->get('tag');
-
 
         // define a list fo groups the user has access to // TODO generalize this somewhere else
         if (Auth::check()) {
@@ -32,7 +30,6 @@ class DiscussionController extends Controller
             //->get()
             //->pluck('id')
             //->merge(Auth::user()->groups()->pluck('groups.id'));
-
 
             if (Auth::user()->getPreference('show') == 'all') {
                 // build a list of groups the user has access to
@@ -48,7 +45,6 @@ class DiscussionController extends Controller
             } else {
                 $groups = Auth::user()->groups()->pluck('groups.id');
             }
-
 
             $discussions = \App\Discussion::with('userReadDiscussion', 'group', 'user', 'tags')
       ->withCount('comments')
@@ -70,13 +66,8 @@ class DiscussionController extends Controller
       ->orderBy('updated_at', 'desc')->paginate(25);
         }
 
-
-
         $tags = \App\Discussion::allTags();
         natcasesort($tags);
-
-
-
 
         return view('dashboard.discussions')
     ->with('title', trans('messages.discussions'))

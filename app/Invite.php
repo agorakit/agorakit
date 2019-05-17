@@ -9,7 +9,6 @@ class Invite extends Model
 {
     use ValidatingTrait;
 
-
     public $timestamps = true;
     protected $dates = ['deleted_at'];
 

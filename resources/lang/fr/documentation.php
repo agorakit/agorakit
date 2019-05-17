@@ -1,5 +1,5 @@
 <?php
 
-return array (
+return [
   'intro' => 'Texte d\'introduction que vous pouvez modifier',
-);
+];

@@ -3,12 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Group;
-use Auth;
 use File;
-use Gate;
-use Illuminate\Http\Request;
 use Image;
-use Storage;
 
 /*
 Handle group cover image
@@ -52,7 +48,7 @@ class GroupCoverController extends Controller
     public function large(Group $group)
     {
         $this->authorize('view', $group);
-        
+
         $path = storage_path().'/app/groups/'.$group->id.'/cover.jpg';
 
         if (File::exists($path)) {

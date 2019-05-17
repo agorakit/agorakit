@@ -8,12 +8,9 @@ use Charts;
 
 class GroupInsightsController extends Controller
 {
-
     public function __construct()
     {
-
     }
-
 
     public function index(Group $group)
     {
@@ -58,11 +55,8 @@ class GroupInsightsController extends Controller
         ->values([$group->files()->sum('filesize')])
         ->dimensions(0, 400);
 
-
         return view('groups.insights')
         ->with('charts', $charts)
         ->with('group', $group);
     }
-
-
 }

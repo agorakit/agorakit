@@ -22,47 +22,45 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     /**
-    * Where to redirect users after login.
-    *
-    * @var string
-    */
+     * Where to redirect users after login.
+     *
+     * @var string
+     */
     protected $redirectTo = '/';
 
     /**
-    * Create a new controller instance.
-    *
-    * @return void
-    */
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'logout']);
     }
-
 
     public function showLoginForm()
     {
         return view('auth.login');
     }
 
-
     /**
-    * Redirect the user to the OAuth Provider.
-    *
-    * @return Response
-    */
+     * Redirect the user to the OAuth Provider.
+     *
+     * @return Response
+     */
     public function redirectToProvider($provider)
     {
         return Socialite::driver($provider)->redirect();
     }
 
     /**
-    * Obtain the user information from provider.  Check if the user already exists in our
-    * database by looking up their provider_id in the database.
-    * If the user exists, log them in. Otherwise, create a new user then log them in. After that
-    * redirect them to the authenticated users homepage.
-    *
-    * @return Response
-    */
+     * Obtain the user information from provider.  Check if the user already exists in our
+     * database by looking up their provider_id in the database.
+     * If the user exists, log them in. Otherwise, create a new user then log them in. After that
+     * redirect them to the authenticated users homepage.
+     *
+     * @return Response
+     */
     public function handleProviderCallback($provider)
     {
         $socialuser = Socialite::driver($provider)->user();
@@ -74,14 +72,14 @@ class LoginController extends Controller
     }
 
     /**
-    * If a user has registered before using social auth, return the user
-    * else, create a new user object.
-    *
-    * @param  $user Socialite user object
-    * @param $provider Social auth provider
-    *
-    * @return User
-    */
+     * If a user has registered before using social auth, return the user
+     * else, create a new user object.
+     *
+     * @param  $user Socialite user object
+     * @param $provider Social auth provider
+     *
+     * @return User
+     */
     public function findOrCreateUser($socialuser, $provider)
     {
         $profile = \App\SocialProfile::where('provider_id', $socialuser->id)->where('provider', $provider)->first();

@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 /**
- * This controller is the homepage and main entry point
+ * This controller is the homepage and main entry point.
  */
 class DashboardController extends Controller
 {
@@ -18,10 +18,10 @@ class DashboardController extends Controller
     }
 
     /**
-    * Main HOMEPAGE.
-    *
-    * @return Response
-    */
+     * Main HOMEPAGE.
+     *
+     * @return Response
+     */
     public function index(Request $request)
     {
         if (Auth::check()) {
@@ -50,7 +50,6 @@ class DashboardController extends Controller
       ->whereIn('group_id', $groups)
       ->orderBy('start')
       ->paginate(10);
-
 
             return view('dashboard.homepage')
       ->with('tab', 'homepage')

@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Group;
 use Illuminate\Http\Request;
-use \App\Group;
 
 /**
-* This controller taks care of enabling / disabling features (or modules) for each group
-* A module is for example the discussion module
-* In the future we might go the dreaded way of a plugin system
-*/
+ * This controller taks care of enabling / disabling features (or modules) for each group
+ * A module is for example the discussion module
+ * In the future we might go the dreaded way of a plugin system.
+ */
 class ModuleController extends Controller
 {
     public function __construct()
@@ -28,7 +28,6 @@ class ModuleController extends Controller
             abort(404, 'No custom module for this group');
         }
     }
-
 
     public function edit(Request $request, Group $group)
     {
@@ -57,7 +56,6 @@ class ModuleController extends Controller
             $group->setSetting('module_file', false);
         }
 
-
         if ($request->has('module_member')) {
             $group->setSetting('module_member', true);
         } else {
@@ -70,12 +68,10 @@ class ModuleController extends Controller
             $group->setSetting('module_map', false);
         }
 
-
         // handle custom module (iframe or similar system)
         $group->setSetting('module_custom_icon', $request->get('module_custom_icon'));
         $group->setSetting('module_custom_name', $request->get('module_custom_name'));
         $group->setSetting('module_custom_html', $request->get('module_custom_html'));
-
 
         flash(trans('messages.ressource_updated_successfully'));
 

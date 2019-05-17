@@ -12,10 +12,10 @@ class MembershipPolicy
     use HandlesAuthorization;
 
     /**
-    * Create a new policy instance.
-    *
-    * @return void
-    */
+     * Create a new policy instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         //
@@ -42,7 +42,6 @@ class MembershipPolicy
 
         return false;
     }
-
 
     // a user can leave a group, a group admin can remove a member
     public function delete(User $user, Membership $membership)

@@ -2,20 +2,17 @@
 
 namespace App\Events;
 
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Database\Eloquent\Model;
-
-
+use Illuminate\Queue\SerializesModels;
 
 /**
- * This event is triggered each time a discussion is created
+ * This event is triggered each time a discussion is created.
  */
 class ContentCreated
 {
     use SerializesModels;
 
-
-     public $model;
+    public $model;
 
     /**
      * Create a new event instance.
@@ -24,8 +21,6 @@ class ContentCreated
      */
     public function __construct(Model $model)
     {
-       $this->model = $model;
+        $this->model = $model;
     }
-
-
 }

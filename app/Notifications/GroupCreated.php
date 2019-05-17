@@ -2,12 +2,10 @@
 
 namespace App\Notifications;
 
+use App\Group;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-
-use \App\Group;
+use Illuminate\Notifications\Notification;
 
 class GroupCreated extends Notification
 {
@@ -20,13 +18,14 @@ class GroupCreated extends Notification
      */
     public function __construct(Group $group)
     {
-            $this->group = $group;
+        $this->group = $group;
     }
 
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
+     *
      * @return array
      */
     public function via($notifiable)
@@ -37,14 +36,15 @@ class GroupCreated extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
+     *
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
+        return (new MailMessage())
                     ->subject('A new group has been created')
-                    ->line('A new group has been created : "' . $this->group->name . '"')
+                    ->line('A new group has been created : "'.$this->group->name.'"')
                     ->action('Visit it', route('groups.show', $this->group))
                     ->line(trans('messages.thank_you'));
     }
@@ -52,7 +52,8 @@ class GroupCreated extends Notification
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
+     *
      * @return array
      */
     public function toArray($notifiable)

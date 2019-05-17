@@ -61,9 +61,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('agenda/json', 'ActionController@indexJson')->name('agenda.json');
     Route::get('agenda/ical', 'IcalController@index')->name('agenda.ical');
 
-
     /* Pages */
-Route::get('pages/help', 'PageController@help')->name('pages.help');
+    Route::get('pages/help', 'PageController@help')->name('pages.help');
 
     /*
     Feeds (RSS ftw!)
@@ -103,13 +102,10 @@ Route::get('pages/help', 'PageController@help')->name('pages.help');
     I will apply here the recomandtion "routes as documentation" from https://philsturgeon.uk/php/2013/07/23/beware-the-route-to-evil/
     */
 
-
-
     // application homepage, lists all groups on the server
     Route::get('groups', 'GroupController@index')->name('groups.index');
     Route::get('groups/create', 'GroupController@create')->name('groups.create');
     Route::post('groups/create', 'GroupController@store')->name('groups.store');
-
 
     // Groups : what everyone can see, homepage and covers
     Route::get('groups/{group}', 'GroupController@show')->name('groups.show');
@@ -125,7 +121,6 @@ Route::get('pages/help', 'PageController@help')->name('pages.help');
     Route::get('groups/{group}/join', 'MembershipController@create')->name('groups.membership.create');
     Route::post('groups/{group}/join', 'MembershipController@store')->name('groups.membership.store');
 
-
     // General discussion create route
     Route::get('discussions/create', 'GroupDiscussionController@create')->name('discussions.create');
     Route::post('discussions/create', 'GroupDiscussionController@store')->name('discussions.store');
@@ -134,13 +129,11 @@ Route::get('pages/help', 'PageController@help')->name('pages.help');
     Route::get('actions/create', 'GroupActionController@create')->name('actions.create');
     Route::post('actions/create', 'GroupActionController@store')->name('actions.store');
 
-
     // Users
 
     Route::get('users/{user}', 'UserController@show')->name('users.show');
 
     Route::get('users/{user}/cover/{size}', 'UserCoverController@show')->name('users.cover');
-    
 
     Route::get('users/{user}/sendverification', 'UserController@sendVerificationAgain')->name('users.sendverification');
 
@@ -157,8 +150,6 @@ Route::get('pages/help', 'PageController@help')->name('pages.help');
 
     Route::get('comments/{comment}/react/{context}', 'CommentReactionController@store');
     Route::get('comments/{comment}/unreact', 'CommentReactionController@destroy');
-
-
 
     // Groups : only members (or everyone if a group is public)
     Route::group(['middleware' => 'public', 'as' => 'groups', 'prefix' => 'groups/{group}'], function () {
@@ -180,20 +171,15 @@ Route::get('pages/help', 'PageController@help')->name('pages.help');
         Route::get('discussions/mention', 'MentionController@discussions')->name('.discussions.mention');
         Route::get('files/mention', 'MentionController@files')->name('.files.mention');
 
-
-
-
         // preferences and leave group
         //Route::get('preferences', 'MembershipController@edit')->name('.mymembership.edit');
         //Route::post('preferences', 'MembershipController@update')->name('.mymembership.update');
         Route::get('leave', 'MembershipController@destroyConfirm')->name('.mymembership.deleteconfirm');
         Route::post('leave', 'MembershipController@destroy')->name('.mymembership.delete');
 
-
         // edit membership
         Route::get('membership/{membership?}', 'MembershipController@edit')->name('.membership.edit');
         Route::post('membership/{membership?}', 'MembershipController@update')->name('.membership.update');
-
 
         // Stats
         Route::get('insights', 'GroupInsightsController@index')->name('.insights');
@@ -201,7 +187,6 @@ Route::get('pages/help', 'PageController@help')->name('pages.help');
         // Membership mass admin (add multiple users at once to a groupe)
         Route::get('massmembership/create', 'MassMembershipController@create')->name('.massmembership.create');
         Route::post('massmembership/store', 'MassMembershipController@store')->name('.massmembership.store');
-
 
         // Invites
         Route::get('invite', 'InviteController@invite')->name('.invite.form');
@@ -217,10 +202,8 @@ Route::get('pages/help', 'PageController@help')->name('pages.help');
         Route::get('map', 'GroupMapController@index')->name('.map');
         Route::get('map.geojson', 'GroupMapController@geoJson')->name('.map.geojson');
 
-
         Route::get('{type}/{id}/tag', 'TagController@edit')->name('.tags.edit');
         Route::post('{type}/{id}/tag', 'TagController@update')->name('.tags.store');
-
 
         // Discussions
         Route::get('discussions', 'GroupDiscussionController@index')->name('.discussions.index');
@@ -236,7 +219,6 @@ Route::get('pages/help', 'PageController@help')->name('pages.help');
 
         // Discussion history
         Route::get('discussions/{discussion}/history', 'GroupDiscussionController@history')->name('.discussions.history');
-
 
         // Comments
         Route::post('discussions/{discussion}/reply', 'CommentController@store')->name('.discussions.reply');
@@ -259,14 +241,12 @@ Route::get('pages/help', 'PageController@help')->name('pages.help');
         Route::delete('actions/{action}/delete', 'GroupActionController@destroy')->name('.actions.delete');
         Route::get('actions/{action}/history', 'GroupActionController@history')->name('.actions.history');
 
-
         // Action (un)attending
         Route::get('actions/{action}/attend', 'ActionUserController@create')->name('.actions.attend');
         Route::get('actions/{action}/unattend', 'ActionUserController@destroyConfirm')->name('.actions.unattend');
 
         Route::post('actions/{action}/attend', 'ActionUserController@store')->name('.actions.attend.store');
         Route::post('actions/{action}/unattend', 'ActionUserController@destroy')->name('.actions.unattend.store');
-
 
         // Files
         Route::get('files', 'GroupFileController@index')->name('.files.index');
@@ -284,12 +264,6 @@ Route::get('pages/help', 'PageController@help')->name('pages.help');
         Route::get('files/{file}/thumbnail', 'FileDownloadController@thumbnail')->name('.files.thumbnail');
         Route::get('files/{file}/preview', 'FileDownloadController@preview')->name('.files.preview');
     });
-
-
-
-
-
-
 
     // Search
     Route::get('search', 'SearchController@index');
@@ -323,7 +297,6 @@ Route::get('pages/help', 'PageController@help')->name('pages.help');
 
         Route::resource('admin/user', 'Admin\UserController');
         Route::get('admin/insights', 'Admin\InsightsController@index')->name('admin.insights');
-
 
         Route::get('admin/undo', 'UndoController@index')->name('admin.undo');
         Route::get('admin/{type}/{id}/restore', 'UndoController@restore')->name('admin.restore');

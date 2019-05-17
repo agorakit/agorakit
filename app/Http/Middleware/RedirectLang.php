@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App;
 use Closure;
 use Config;
 use Session;
-use App;
 
 class RedirectLang
 {

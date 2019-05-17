@@ -2,48 +2,47 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use Ddeboer\Imap\Server;
-use App\User;
-use App\Group;
 use App\Discussion;
+use App\Group;
+use App\User;
+use Ddeboer\Imap\Server;
+use Illuminate\Console\Command;
 use Log;
-use EmailReplyParser\Parser\EmailParser;
 
 class CheckMailbox extends Command
 {
     /**
-    * The name and signature of the console command.
-    *
-    * @var string
-    */
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
     protected $signature = 'agorakit:checkmailbox
   {{--keep : Use this to keep a copy of the email in the mailbox. Only for development!}}
   {{--debug : Print each email content. Only for development!}}
   ';
 
     /**
-    * The console command description.
-    *
-    * @var string
-    */
+     * The console command description.
+     *
+     * @var string
+     */
     protected $description = 'Check the configured email imap server to allow post by email functionality';
 
     /**
-    * Create a new command instance.
-    *
-    * @return void
-    */
+     * Create a new command instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         parent::__construct();
     }
 
     /**
-    * Execute the console command.
-    *
-    * @return mixed
-    */
+     * Execute the console command.
+     *
+     * @return mixed
+     */
     public function handle()
     {
         if (setting('user_can_post_by_email')) {
@@ -64,7 +63,7 @@ class CheckMailbox extends Command
                 }
 
                 // $mailbox is instance of \Ddeboer\Imap\Mailbox
-                $this->line('Mailbox ' . $mailbox->getName() . ' has ' . $mailbox->count() . ' messages');
+                $this->line('Mailbox '.$mailbox->getName().' has '.$mailbox->count().' messages');
             }
 
             // open INBOX
@@ -98,12 +97,12 @@ class CheckMailbox extends Command
 
                 $success = false;
 
-                $this->info('Got a message from ' . $message->getFrom()->getAddress());
+                $this->info('Got a message from '.$message->getFrom()->getAddress());
 
                 // check that is is sent from an existing user
                 $user = User::where('email', $message->getFrom()->getAddress())->first();
                 if ($user) {
-                    $this->info('This user exists, full name is ' . $user->name . ' / id is : ' . ($user->id));
+                    $this->info('This user exists, full name is '.$user->name.' / id is : '.($user->id));
 
                     // check that each mail to: is an existing group
                     foreach ($message->getTo() as $to) {
@@ -112,21 +111,18 @@ class CheckMailbox extends Command
                         $search = str_replace(setting('mail_prefix'), '', $search);
                         $search = str_replace(setting('mail_suffix'), '', $search);
 
-
-
                         // check that is is sent to an existing group
                         $group = Group::where('slug', $search)->first();
                         if ($group) {
-                            $this->info('Group ' . $group->name . ' exists');
+                            $this->info('Group '.$group->name.' exists');
 
                             // check that the user is a member of the group
                             if ($user->isMemberOf($group)) {
-                                $this->info($user->name . ' is a member of this group');
+                                $this->info($user->name.' is a member of this group');
 
-                                $discussion = new Discussion;
+                                $discussion = new Discussion();
 
                                 $discussion->name = $message->getSubject();
-
 
                                 $body_html = $message->getBodyHtml(); // this is the raw html content
                                 $body_text = nl2br(\EmailReplyParser\EmailReplyParser::parseReply($message->getBodyText()));
@@ -146,14 +142,12 @@ class CheckMailbox extends Command
                                     print_r($discussion->body);
                                 }
 
-
-
                                 if ($group->discussions()->save($discussion)) {
                                     // update activity timestamp on parent items
                                     $group->touch();
                                     $user->touch();
-                                    $this->info('Discussion has been created with id : ' . $discussion->id);
-                                    $this->info('Title : ' . $discussion->name);
+                                    $this->info('Discussion has been created with id : '.$discussion->id);
+                                    $this->info('Title : '.$discussion->name);
                                     Log::info('Discussion has been created from email', ['mail'=> $message, 'discussion' => $discussion]);
 
                                     $success = true;
@@ -162,14 +156,14 @@ class CheckMailbox extends Command
                                     Log::error('Could not create discussion', ['mail'=> $mail, 'discussion' => $discussion]);
                                 }
                             } else {
-                                $this->error($user->name . ' is not a member of ' . $group->name);
+                                $this->error($user->name.' is not a member of '.$group->name);
                             }
                         } else {
-                            $this->error('No group named ' . $search);
+                            $this->error('No group named '.$search);
                         }
                     }
                 } else {
-                    $this->error('No user found with ' . $message->getFrom()->getAddress());
+                    $this->error('No user found with '.$message->getFrom()->getAddress());
                 }
 
                 // move message to the correct mailbox depending on outcome
@@ -189,6 +183,7 @@ class CheckMailbox extends Command
             $connection->expunge();
         } else {
             $this->info('Email checking disabled in settings');
+
             return false;
         }
     }

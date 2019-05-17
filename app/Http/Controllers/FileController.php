@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Auth;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 /**
- * Global listing of files
+ * Global listing of files.
  */
 class FileController extends Controller
 {
@@ -17,16 +16,14 @@ class FileController extends Controller
         $this->middleware('preferences');
     }
 
-
     /**
-    * Show all the files independant of groups.
-    */
+     * Show all the files independant of groups.
+     */
     public function index(Request $request)
     {
         $tags = \App\File::allTags();
 
         natcasesort($tags);
-
 
         if (Auth::check()) {
             if (Auth::user()->getPreference('show') == 'all') {
@@ -62,7 +59,6 @@ class FileController extends Controller
       ->whereIn('group_id', \App\Group::public()->get()->pluck('id'))
       ->orderBy('updated_at', 'desc')->paginate(25);
         }
-
 
         return view('dashboard.files')
     ->with('tags', $tags)

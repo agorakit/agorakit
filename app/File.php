@@ -15,7 +15,6 @@ class File extends Model
     use RevisionableTrait;
     use Taggable;
 
-
     protected $rules = [
         'name'     => 'required',
         'user_id'  => 'required|exists:users,id',
@@ -37,7 +36,6 @@ class File extends Model
     const FILE = 0;
     const FOLDER = 1;
     const LINK = 2;
-
 
     public function user()
     {
@@ -74,6 +72,7 @@ class File extends Model
         if (in_array($this->mime, ['image/jpeg', 'image/png', 'image/gif'])) {
             return true;
         }
-         return false;
+
+        return false;
     }
 }

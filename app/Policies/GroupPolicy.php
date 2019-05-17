@@ -11,10 +11,10 @@ class GroupPolicy
     use HandlesAuthorization;
 
     /**
-    * Create a new policy instance.
-    *
-    * @return void
-    */
+     * Create a new policy instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         //
@@ -29,7 +29,7 @@ class GroupPolicy
     }
 
     /**
-     * Viewing a group means reading title and presentation (= group home page)
+     * Viewing a group means reading title and presentation (= group home page).
      */
     public function view(?User $user, Group $group)
     {
@@ -55,20 +55,20 @@ class GroupPolicy
     }
 
     /**
-    * Determine if the given post can be updated by the user.
-    *
-    * @param \App\User $user
-    *
-    * @return bool
-    */
+     * Determine if the given post can be updated by the user.
+     *
+     * @param \App\User $user
+     *
+     * @return bool
+     */
     public function update(User $user, Group $group)
     {
         return $user->isAdminOf($group);
     }
 
     /**
-    *   Can the user administer the group or not?
-    */
+     *   Can the user administer the group or not?
+     */
     public function administer(User $user, Group $group)
     {
         return $user->isAdminOf($group);

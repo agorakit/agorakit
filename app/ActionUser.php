@@ -12,14 +12,13 @@ class ActionUser extends Model
     use SoftDeletes;
 
     protected $rules = [
-        'user_id'  => 'required|exists:users,id',
+        'user_id'   => 'required|exists:users,id',
         'action_id' => 'required|exists:actions,id',
     ];
 
     protected $fillable = [
-        'user_id', 'action_id'
+        'user_id', 'action_id',
     ];
-
 
     protected $table = 'action_user';
     public $timestamps = true;

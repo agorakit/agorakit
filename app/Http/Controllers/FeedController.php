@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Config;
 use Suin\RSSWriter\Channel;
 use Suin\RSSWriter\Feed;
 
 /**
- * This controller generates global public rss feeds for discussions and actions
+ * This controller generates global public rss feeds for discussions and actions.
  */
 class FeedController extends Controller
 {

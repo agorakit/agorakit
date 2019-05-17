@@ -6,17 +6,16 @@ use App\Group;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 /**
-* Admin features to act on membership.
-*/
+ * Admin features to act on membership.
+ */
 class MassMembershipController extends Controller
 {
     /**
-    * Force add a member to a group (admin feature)
-    * This is the form that allows an admin to select a user to add to a group.
-    */
+     * Force add a member to a group (admin feature)
+     * This is the form that allows an admin to select a user to add to a group.
+     */
     public function create(Request $request, Group $group)
     {
         $this->authorize('manage-membership', $group);
@@ -33,9 +32,9 @@ class MassMembershipController extends Controller
     }
 
     /**
-    * Force add a member to a group (admin feature)
-    * Processing form's content.
-    */
+     * Force add a member to a group (admin feature)
+     * Processing form's content.
+     */
     public function store(Request $request, Group $group)
     {
         $this->authorize('manage-membership', $group);
@@ -58,10 +57,8 @@ class MassMembershipController extends Controller
             }
         }
 
-          // TODO notifiy user
+        // TODO notifiy user
 
         return redirect()->route('groups.users.index', $group);
     }
-
-
 }
