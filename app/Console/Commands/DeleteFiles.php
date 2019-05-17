@@ -56,7 +56,7 @@ class DeleteFiles extends Command
       $this->line($file->name . ' takes ' .  sizeForHumans($file->filesize));
     }
 
-    $this->line('This would save ' . sizeForHumans($filesize));
+    $this->info('This would save ' . sizeForHumans($filesize));
 
     $really_delete = false;
     if ($this->option('force'))
@@ -75,8 +75,13 @@ class DeleteFiles extends Command
     {
       foreach ($files as $file)
       {
-        $this->line($file->name . ' deleted from storage');
-        $file->deleteFromStorage();
+        if ($file->deleteFromStorage())
+        {
+          $this->line($file->name . ' deleted from storage');
+        }
+        else {
+          $this->error($file->name . ' NOT deleted from storage');
+        }
       }
     }
 
