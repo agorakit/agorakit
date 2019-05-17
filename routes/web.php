@@ -56,7 +56,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('map', 'MapController@index')->name('map');
     Route::get('map.geojson', 'MapController@geoJson')->name('map.geojson');
 
-
     Route::get('agenda', 'ActionController@index')->name('agenda');
     Route::get('agenda/json', 'ActionController@indexJson')->name('agenda.json');
     Route::get('agenda/ical', 'IcalController@index')->name('agenda.ical');

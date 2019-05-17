@@ -51,7 +51,7 @@ class MentionController extends Controller
     public function files(Group $group)
     {
         $this->authorize('view-files', $group);
-        
+
         $files = $group->files()->orderBy('created_at', 'desc')->get();
         $simple_files = [];
 
