@@ -16,6 +16,7 @@ class MentionController extends Controller
 
     public function users(Group $group)
     {
+        $this->authorize('view-members', $group);
         $users = $group->users()->get();
         $simple_users = [];
 
@@ -32,6 +33,8 @@ class MentionController extends Controller
 
     public function discussions(Group $group)
     {
+        $this->authorize('view-discussions', $group);
+
         $discussions = $group->discussions()->orderBy('created_at', 'desc')->get();
         $simple_discussions = [];
 
@@ -47,6 +50,8 @@ class MentionController extends Controller
 
     public function files(Group $group)
     {
+        $this->authorize('view-files', $group);
+        
         $files = $group->files()->orderBy('created_at', 'desc')->get();
         $simple_files = [];
 
