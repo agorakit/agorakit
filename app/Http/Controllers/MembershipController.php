@@ -154,8 +154,11 @@ class MembershipController extends Controller
 
         if (!$membership) {
             // we edit membership for the current user
-            $membership = Membership::firstOrFail(['user_id' => $request->user()->id, 'group_id' => $group->id]);
+            $membership = Membership::where('user_id', $request->user()->id)
+            ->where('group_id', $group->id)
+            ->firstOrFail();
         }
+
         // we have a membership we need to authorize the edit
         $this->authorize('edit', $membership);
 
@@ -173,9 +176,12 @@ class MembershipController extends Controller
     public function update(Request $request, Group $group, Membership $membership = null)
     {
 
-    // load membership for this group and the current user combination
+        // load membership for this group and the current user combination
         if (!$membership) {
-            $membership = \App\Membership::firstOrFail(['user_id' => $request->user()->id, 'group_id' => $group->id]);
+            // we edit membership for the current user
+            $membership = Membership::where('user_id', $request->user()->id)
+        ->where('group_id', $group->id)
+        ->firstOrFail();
         }
 
         // authorize editing
