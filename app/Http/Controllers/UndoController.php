@@ -9,7 +9,6 @@ class Undocontroller extends Controller
         $this->middleware('admin');
     }
 
-
     /**
      * List all actions that can be undoed (undeleted for now).
      */

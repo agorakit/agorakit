@@ -42,7 +42,7 @@ class ModuleController extends Controller
     public function update(Request $request, Group $group)
     {
         $this->authorize('administer', $group);
-        
+
         if ($request->has('module_discussion')) {
             $group->setSetting('module_discussion', true);
         } else {

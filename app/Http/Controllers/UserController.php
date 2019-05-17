@@ -7,7 +7,6 @@ use App\Mail\ContactUser;
 use App\Mail\UserConfirmation;
 use App\User;
 use Auth;
-use File;
 use Gate;
 use Illuminate\Http\Request;
 use Image;
@@ -350,5 +349,4 @@ class UserController extends Controller
             return redirect()->route('index', $user);
         }
     }
-
 }
