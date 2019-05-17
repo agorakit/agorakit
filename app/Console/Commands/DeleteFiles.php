@@ -15,7 +15,7 @@ class DeleteFiles extends Command
   * @var string
   */
   protected $signature = 'agorakit:deletefiles
-  {{--yes : force confirm of deletion}}';
+  {{--force : force confirmation of deletion}}';
 
   /**
   * The console command description.
@@ -54,9 +54,33 @@ class DeleteFiles extends Command
     foreach ($files as $file)
     {
       $this->line($file->name . ' takes ' .  sizeForHumans($file->filesize));
-      //$file->deleteFromStorage()
     }
 
     $this->line('This would save ' . sizeForHumans($filesize));
+
+    $really_delete = false;
+    if ($this->option('force'))
+    {
+      $really_delete = true;
+    }
+    else {
+      $confirm = $this->confirm('Do you want to delete the files from storage (no undo!) ?');
+      if ($confirm)
+      {
+        $really_delete = true;
+      }
+    }
+
+    if ($really_delete)
+    {
+      foreach ($files as $file)
+      {
+        $this->line($file->name . ' deleted from storage');
+        $file->deleteFromStorage();
+      }
+    }
+
   }
+
+
 }
