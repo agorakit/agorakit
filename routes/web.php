@@ -60,6 +60,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('agenda/json', 'ActionController@indexJson')->name('agenda.json');
     Route::get('agenda/ical', 'IcalController@index')->name('agenda.ical');
 
+
+    Route::get('tags', 'TagController@index')->name('tags.index');
+    Route::get('tags/{tag}', 'TagController@show')->name('tags.show');
+
     /* Pages */
     Route::get('pages/help', 'PageController@help')->name('pages.help');
 
