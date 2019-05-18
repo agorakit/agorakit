@@ -2,33 +2,58 @@
 
 @section('content')
 
-  <h2 class="name">
+
+
+  <h1 class="name mb-4">
+    <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
+    <a href="{{ route('tags.index') }}">Tags</a> <i class="fa fa-angle-right"></i>
     Items tagged with <span class="badge badge-primary">{{ $tag }}</span>
-  </h2>
+  </h1>
 
-  <h3>Discussions</h3>
+  @if ($discussions->count() > 0)
+    <div class="mb-5">
+      <h2>Discussions</h2>
+      <div class="discussions items">
+        @foreach( $discussions as $discussion )
+          @include('discussions.discussion')
+        @endforeach
+      </div>
+    </div>
+  @endif
 
-  <div class="discussions items">
-    @forelse( $discussions as $discussion )
-      @include('discussions.discussion')
-    @empty
-      {{trans('messages.nothing_yet')}}
-    @endforelse
+  @if ($actions->count() > 0)
+    <div class="mb-5">
+      <h2>Actions</h2>
+      <div class="actions items">
+        @foreach( $actions as $action )
+          @include('actions.action')
+        @endforeach
+      </div>
+    </div>
+  @endif
 
-  </div>
+  @if ($files->count() > 0)
+    <div class="mb-5">
+      <h2>Files</h2>
+      <div class="files items">
+        @foreach( $files as $file )
+          @include('files.file')
+        @endforeach
+      </div>
+    </div>
+  @endif
 
 
-  <h3>Files</h3>
-
-  <div class="files items">
-    @forelse( $files as $file )
-      @include('files.file')
-    @empty
-      {{trans('messages.nothing_yet')}}
-    @endforelse
-
-  </div>
-
+  @if ($users->count() > 0)
+    <div class="mb-5">
+      <h2>Users</h2>
+      <div class="users items">
+        @foreach( $users as $user )
+          @include('users.user')
+        @endforeach
+      </div>
+    </div>
+  @endif
 
 
 @endsection
