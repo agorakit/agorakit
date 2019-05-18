@@ -19,7 +19,7 @@ class TagController extends Controller
 
   public function index(Request $request)
   {
-    //$tags = Discussion::allTagModels();
+
     $tagService = app(\Cviebrock\EloquentTaggable\Services\TagService::class);
     $tags = $tagService->getAllTags();
 
@@ -61,10 +61,44 @@ class TagController extends Controller
 
   public function show(Request $request, $tag)
   {
-    $discussions = Discussion::withAllTags($tag)->get();
-    $files = File::withAllTags($tag)->get();
-    $users = User::withAllTags($tag)->get();
-    $actions = Action::withAllTags($tag)->get();
+
+
+    $groups = Auth::user()->groups()->pluck('groups.id');
+
+
+    $discussions = Discussion::whereHas('group', function($q) use ($groups) {
+      $q->whereIn('group_id', $groups);
+    })
+    ->whereHas('tags', function($q) use ($tag) {
+      $q->where('normalized', $tag);
+    })
+    ->get();
+
+    $files = File::whereHas('group', function($q) use ($groups) {
+      $q->whereIn('group_id', $groups);
+    })
+    ->whereHas('tags', function($q) use ($tag) {
+      $q->where('normalized', $tag);
+    })
+    ->get();
+
+    $actions = Action::whereHas('group', function($q) use ($groups) {
+      $q->whereIn('group_id', $groups);
+    })
+    ->whereHas('tags', function($q) use ($tag) {
+      $q->where('normalized', $tag);
+    })
+    ->get();
+
+    $users = User::whereHas('groups', function($q) use ($groups) {
+      $q->whereIn('group_id', $groups);
+    })
+    ->whereHas('tags', function($q) use ($tag) {
+      $q->where('normalized', $tag);
+    })
+    ->get();
+
+
 
 
     return view('tags.show')
