@@ -12,7 +12,7 @@
 
 <div class="form-group">
     <label>{{trans('group.cover')}}</label><br/>
-    <input name="cover" id="file" type="file" class="btn btn-primary" title="{{trans('messages.select_one_file')}}">
+    <input name="cover" id="file" type="file" class="form-control-file" title="{{trans('messages.select_one_file')}}">
 </div>
 
 <div class="form-group">
@@ -36,4 +36,3 @@
 
 
 @include('partials.wysiwyg')
-@include('partials.better-file-inputs')

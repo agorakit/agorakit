@@ -22,5 +22,3 @@
     </div>
 
 @endsection
-
-{{--@include('partials.better-file-inputs')--}}
