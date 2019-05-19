@@ -88,11 +88,13 @@
         @endif
 
         @if ($group->getSetting('module_custom_name'))
-            <li class="nav-item">
-                <a href="{{ action('ModuleController@show', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'custom')) active @endif">
-                    <i class="fa {{$group->getSetting('module_custom_icon')}}"></i> <span class="d-none d-lg-inline">{{$group->getSetting('module_custom_name')}}</span>
-                </a>
-            </li>
+            @if ($group->isMember())
+                <li class="nav-item">
+                    <a href="{{ action('ModuleController@show', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'custom')) active @endif">
+                        <i class="fa {{$group->getSetting('module_custom_icon')}}"></i> <span class="d-none d-lg-inline">{{$group->getSetting('module_custom_name')}}</span>
+                    </a>
+                </li>
+            @endif
         @endif
 
 

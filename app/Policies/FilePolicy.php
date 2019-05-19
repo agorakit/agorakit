@@ -29,10 +29,12 @@ class FilePolicy
 
     public function view(?User $user, File $file)
     {
+        if ($file->group->isOpen()) {
+            return true;
+        }
+
         if ($user) {
             return $user->isMemberOf($file->group);
-        } else {
-            return $file->group->isOpen();
         }
     }
 

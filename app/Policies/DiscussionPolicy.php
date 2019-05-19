@@ -29,10 +29,12 @@ class DiscussionPolicy
 
     public function view(?User $user, Discussion $discussion)
     {
+        if ($discussion->group->isOpen()) {
+            return true;
+        }
+
         if ($user) {
             return $user->isMemberOf($discussion->group);
-        } else {
-            return $discussion->group->isOpen();
         }
     }
 
