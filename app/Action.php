@@ -6,12 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
+use Cviebrock\EloquentTaggable\Taggable;
 
 class Action extends Model
 {
     use ValidatingTrait;
     use RevisionableTrait;
     use SoftDeletes;
+    use Taggable;
 
     protected $fillable = ['id']; // neede for actions import
 

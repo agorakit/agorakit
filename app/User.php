@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
+use Cviebrock\EloquentTaggable\Taggable;
 
 class User extends Authenticatable
 {
@@ -16,6 +17,7 @@ class User extends Authenticatable
     use RevisionableTrait;
     use SoftDeletes;
     use Sluggable;
+    use Taggable;
 
     /**
      * The attributes that are mass assignable.
