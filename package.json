@@ -24,5 +24,9 @@
         "sass-loader": "^7.1.0",
         "vue": "^2.6.10",
         "vue-template-compiler": "^2.6.10"
+    },
+    "dependencies": {
+        "trumbowyg": "^2.16.2",
+        "unpoly": "^0.60.0"
     }
 }

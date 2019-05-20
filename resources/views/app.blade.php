@@ -11,9 +11,6 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/v4-shims.css">
 
-  <!-- Unpoly-->
-  <link rel="stylesheet" href="https://unpkg.com/unpoly@0.60.0/dist/unpoly.min.css">
-
   <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
 
 
@@ -53,7 +50,6 @@
 
   <!-- Scripts -->
   <script src="{{ asset('js/app.js') }}"></script>
-  <script src="https://unpkg.com/unpoly@0.60.0/dist/unpoly.js"></script>
 
 
   @yield('js')

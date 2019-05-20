@@ -9,6 +9,14 @@
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
 
+// unpoly
+@import "~unpoly/dist/unpoly.min.css";
+@import "~unpoly/dist/unpoly-bootstrap3.min.css";
+
+// trumbowyg
+@import "~trumbowyg/dist/ui/trumbowyg.min.css";
+
+
 @import "agorakit";
 @import "actions";
 @import "comments";

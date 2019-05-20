@@ -5,7 +5,6 @@
 
 
 @include('partials.mention')
-@include('partials.wysiwyg')
 
 @push ('js')
     <script>
