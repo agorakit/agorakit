@@ -2,10 +2,9 @@
 // Check docs here : https://unpoly.com/up.compiler
 
 
-up.$compiler('textarea.wysiwyg', function($element) {
+up.$compiler('.wysiwyg', function($element) {
   $element.trumbowyg({
     btns: [
-      /*['mention'],*/
       ['viewHTML'],
       ['undo', 'redo'], // Only supported in Blink browsers
       ['formatting'],
@@ -18,17 +17,18 @@ up.$compiler('textarea.wysiwyg', function($element) {
     ],
     minimalLinks: true,
     svgPath : '/svg/icons.svg',
-  /*
-    plugins: {
-        mention: {
-            source: [
-                {login: 'lucy'},
-                {login: 'jdoe'},
-                {login: 'mlisa'},
-                {login: 'jcesar'},
-            ]
-        }
-    }
-    */
   })
+})
+
+
+up.$compiler('.trumbowyg-editor', function($element) {
+  var tribute = new Tribute({
+    values: [
+      /*
+      {key: 'Phil Heartman', value: 'pheartman'},
+      {key: 'Gordon Ramsey', value: 'gramsey'}
+      */
+    ]
+  });
+  tribute.attach($element);
 })

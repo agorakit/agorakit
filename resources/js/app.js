@@ -19,5 +19,9 @@ require('trumbowyg/dist/plugins/mention/trumbowyg.mention.min.js');
 require('unpoly/dist/unpoly.min.js');
 require('unpoly/dist/unpoly-bootstrap3.min.js');
 
+// tribute
+import Tribute from "tributejs";
+window.Tribute = Tribute;
+
 // Unpoly custom compilers (include after the rest)
 require('./compilers');

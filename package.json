@@ -26,6 +26,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "tributejs": "^3.7.1",
         "trumbowyg": "^2.16.2",
         "unpoly": "^0.60.0"
     }
