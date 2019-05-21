@@ -16,6 +16,11 @@ use App\Tag;
 class TagController extends Controller
 {
 
+  public function __construct()
+  {
+      $this->middleware('preferences');
+  }
+
 
   public function index(Request $request)
   {
@@ -26,7 +31,22 @@ class TagController extends Controller
 
     $tags = collect();
 
-    foreach ($request->user()->groups as $group)
+
+    if (Auth::user()->getPreference('show') == 'all') {
+      // build a list of groups the user has access to
+      if (Auth::user()->isAdmin()) { // super admin sees everything
+        $groups = \App\Group::get();
+      } else { // normal user get public groups + groups he is member of
+        $groups = \App\Group::public()
+        ->get()
+        ->merge(Auth::user()->groups()->get());
+      }
+    } else {
+      $groups = Auth::user()->groups()->get();
+    }
+
+
+    foreach ($groups as $group)
     {
       $tags =  $tags->merge($group->tagsUsed());
     }
