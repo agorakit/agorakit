@@ -8,7 +8,7 @@ use App\File;
 use App\User;
 use App\Action;
 use Auth;
-use Cviebrock\EloquentTaggable\Models\Tag;
+use App\Tag;
 
 /**
 * This controller is used for quick tag editing on various models (discussions & files curently).
@@ -70,7 +70,7 @@ class TagController extends Controller
 */
 }
 
-public function show(Request $request, $tag)
+public function show(Request $request, Tag $tag)
 {
 
 
@@ -81,7 +81,7 @@ public function show(Request $request, $tag)
     $q->whereIn('group_id', $groups);
   })
   ->whereHas('tags', function($q) use ($tag) {
-    $q->where('normalized', $tag);
+    $q->where('normalized', $tag->normalized);
   })
   ->get();
 
@@ -89,7 +89,7 @@ public function show(Request $request, $tag)
     $q->whereIn('group_id', $groups);
   })
   ->whereHas('tags', function($q) use ($tag) {
-    $q->where('normalized', $tag);
+    $q->where('normalized', $tag->normalized);
   })
   ->get();
 
@@ -97,7 +97,7 @@ public function show(Request $request, $tag)
     $q->whereIn('group_id', $groups);
   })
   ->whereHas('tags', function($q) use ($tag) {
-    $q->where('normalized', $tag);
+    $q->where('normalized', $tag->normalized);
   })
   ->get();
 
@@ -105,7 +105,7 @@ public function show(Request $request, $tag)
     $q->whereIn('group_id', $groups);
   })
   ->whereHas('tags', function($q) use ($tag) {
-    $q->where('normalized', $tag);
+    $q->where('normalized', $tag->normalized);
   })
   ->get();
 

@@ -1,11 +1,12 @@
 <?php
 
 return [
-    'delimiters' => ',;',
+  'delimiters' => ',;',
 
-    'glue' => ',',
+  'glue' => ',',
 
-    'normalizer' => 'mb_strtolower',
+  'normalizer' => 'mb_strtolower',
 
-    'model'  => \App\Tag::class,
+
+  'model'  => \App\Tag::class,
 ];
