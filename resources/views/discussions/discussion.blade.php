@@ -35,7 +35,7 @@
       <strong>
         <a href="{{ route('groups.show', [$discussion->group]) }}">{{ $discussion->group->name}}</a>
       </strong>
-      {{ $discussion->created_at->diffForHumans()}}
+      {{ $discussion->updated_at->diffForHumans()}}
     </div>
   </div>
 
