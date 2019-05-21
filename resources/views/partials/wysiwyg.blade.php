@@ -1,9 +1,9 @@
-{{--
+
 @push('js')
 
     <script>
     $.trumbowyg.svgPath = '/svg/icons.svg';
-    $('.wysiwygxxx').trumbowyg({
+    $('.wysiwyg').trumbowyg({
         btns: [
             ['viewHTML'],
             ['undo', 'redo'], // Only supported in Blink browsers
@@ -21,5 +21,3 @@
     </script>
 
 @endpush
-
---}}

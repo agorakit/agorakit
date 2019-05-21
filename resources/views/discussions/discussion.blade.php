@@ -1,6 +1,10 @@
-<div class="discussion @if ($discussion->unReadCount() > 0) unread @endif" up-expand>
+<div class="discussion @if ($discussion->unReadCount() > 0) unread @endif">
 
-  <div class="avatar"><img src="{{route('users.cover', [$discussion->user, 'small'])}}" class="rounded-circle"/></div>
+  <a href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}">
+    <div class="avatar">
+      <img src="{{route('users.cover', [$discussion->user, 'small'])}}" class="rounded-circle"/>
+    </div>
+  </a>
   <div class="content w-100">
 
     <div class="d-flex">
@@ -49,39 +53,5 @@
       </div>
     @endif
   </div>
-
-
-
-  {{--
-  @can('update', $discussion)
-  <div class="ml-4 dropdown">
-  <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  <i class="fa fa-cog" aria-hidden="true"></i>
-</button>
-
-
-<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-@can('update', $discussion)
-<a class="dropdown-item" href="{{ route('groups.discussions.edit', [$discussion->group, $discussion]) }}">
-<i class="fa fa-pencil"></i>
-{{trans('messages.edit')}}
-</a>
-@endcan
-
-<a class="dropdown-item" up-modal=".dialog" href="{{ route('groups.tags.edit', [$discussion->group, 'discussions', $discussion]) }}">
-<i class="fa fa-tags"></i> {{__('Edit tags')}}
-</a>
-
-@can('delete', $discussion)
-<a up-modal=".dialog" class="dropdown-item" href="{{ route('groups.discussions.deleteconfirm', [$discussion->group, $discussion]) }}">
-<i class="fa fa-trash"></i>
-{{trans('messages.delete')}}
-</a>
-@endcan
-
 </div>
-</div>
-@endcan
---}}
-
-</div>
+</a>

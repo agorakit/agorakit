@@ -3,7 +3,7 @@
 </div>
 
 
-
+@include('partials.wysiwyg')
 @include('partials.mention')
 
 @push ('js')
