@@ -20,7 +20,7 @@
 
       @if ($file->tags->count() > 0)
         @foreach ($file->tags as $tag)
-          <span class="badge tag">{{$tag->name}}</span>
+          <a href="{{ action('TagController@show', $tag) }}"><span class="badge badge-primary">{{$tag->name}}</span></a>
         @endforeach
       @endif
     </div>

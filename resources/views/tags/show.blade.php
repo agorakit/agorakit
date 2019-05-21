@@ -6,13 +6,13 @@
 
   <h1 class="name mb-4">
     <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
-    <a href="{{ route('tags.index') }}">Tags</a> <i class="fa fa-angle-right"></i>
-    Items tagged with <span class="badge badge-primary">{{ $tag }}</span>
+    <a href="{{ route('tags.index') }}">@lang('Tags')</a> <i class="fa fa-angle-right"></i>
+    @lang('Items tagged with') <span class="badge badge-primary">{{ $tag }}</span>
   </h1>
 
   @if ($discussions->count() > 0)
     <div class="mb-5">
-      <h2>Discussions</h2>
+      <h2>@lang('Discussions')</h2>
       <div class="discussions items">
         @foreach( $discussions as $discussion )
           @include('discussions.discussion')
@@ -23,7 +23,7 @@
 
   @if ($actions->count() > 0)
     <div class="mb-5">
-      <h2>Actions</h2>
+      <h2>@lang('Actions')</h2>
       <div class="actions items">
         @foreach( $actions as $action )
           @include('actions.action')
@@ -34,7 +34,7 @@
 
   @if ($files->count() > 0)
     <div class="mb-5">
-      <h2>Files</h2>
+      <h2>@lang('Files')</h2>
       <div class="files items">
         @foreach( $files as $file )
           @include('files.file')
@@ -46,7 +46,7 @@
 
   @if ($users->count() > 0)
     <div class="mb-5">
-      <h2>Users</h2>
+      <h2>@lang('Users')</h2>
       <div class="users items">
         @foreach( $users as $user )
           @include('users.user')

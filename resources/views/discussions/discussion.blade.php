@@ -12,7 +12,7 @@
       <div class="tags">
         @if ($discussion->tags->count() > 0)
           @foreach ($discussion->tags as $tag)
-            <span class="badge badge-primary">{{$tag->name}}</span>
+            <a href="{{ action('TagController@show', $tag) }}"><span class="badge badge-primary">{{$tag->name}}</span></a>
           @endforeach
         @endif
       </div>

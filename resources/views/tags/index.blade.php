@@ -5,7 +5,7 @@
 
   <h1 class="name mb-4">
     <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
-    Tags
+    @lang('Tags')
   </h1>
 
 
