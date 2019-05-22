@@ -2,13 +2,20 @@
 
 @section('content')
 
+  <div class="d-flex justify-content-between">
+    <h1 class="name mb-4">
+      <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
+      <a href="{{ route('tags.index') }}">@lang('Tags')</a> <i class="fa fa-angle-right"></i>
+      @lang('Items tagged with') <span class="badge badge-primary">{{ $tag }}</span>
+    </h1>
 
+    @auth
+      <div class="d-flex mb-2">
+        @include('partials.preferences-show')
+      </div>
+    @endauth
 
-  <h1 class="name mb-4">
-    <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
-    <a href="{{ route('tags.index') }}">@lang('Tags')</a> <i class="fa fa-angle-right"></i>
-    @lang('Items tagged with') <span class="badge badge-primary">{{ $tag }}</span>
-  </h1>
+  </div>
 
   @if ($discussions->count() > 0)
     <div class="mb-5">

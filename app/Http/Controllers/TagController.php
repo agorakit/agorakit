@@ -19,18 +19,17 @@ class TagController extends Controller
   public function __construct()
   {
       $this->middleware('preferences');
+      $this->middleware('auth');
+
   }
 
 
   public function index(Request $request)
   {
-    /*
-    $tagService = app(\Cviebrock\EloquentTaggable\Services\TagService::class);
-    $tags = $tagService->getAllTags();
-    */
 
     $tags = collect();
 
+    // TODO optimize. This one is hugely unefficient (but does the job)
 
     if (Auth::user()->getPreference('show') == 'all') {
       // build a list of groups the user has access to
@@ -56,46 +55,25 @@ class TagController extends Controller
 
     return view('tags.index')
     ->with('tags', $tags);
-
-    // TODO query tags from user's groups
-    // TODO auto add tags to group when something is tagged
-
-
-    /*
-
-    $groups = Auth::user()->groups()->pluck('groups.id');
-
-
-    // Magic query to get all the users who have one of the groups defined above in their membership table
-    $discussion = Discussion::whereHas('group', function($q) use ($groups) {
-    $q->whereIn('group_id', $groups);
-  })
-  ->isTagged();
-
-  dd($discussion);
-
-
-
-
-  $groups = Auth::user()->groups()->pluck('groups.id');
-
-
-  // Magic query to get all the users who have one of the groups defined above in their membership table
-  $users = User::whereHas('groups', function($q) use ($groups) {
-  $q->whereIn('group_id', $groups);
-})
-->where('verified', 1)
-->orderBy('created_at', 'desc')
-->paginate(20);
-*/
 }
 
 public function show(Request $request, Tag $tag)
 {
 
 
-  $groups = Auth::user()->groups()->pluck('groups.id');
+  //$groups = Auth::user()->groups()->pluck('groups.id');
 
+  if (Auth::user()->getPreference('show') == 'all') {
+    // build a list of groups the user has access to
+    if (Auth::user()->isAdmin()) { // super admin sees everything
+      $groups = \App\Group::get()->pluck('id');
+    } else { // normal user get public groups + groups he is member of
+      $groups = \App\Group::public()->pluck('id')
+      ->merge(Auth::user()->groups()->pluck('groups.id'));
+    }
+  } else {
+    $groups = Auth::user()->groups()->pluck('groups.id');
+  }
 
   $discussions = Discussion::whereHas('group', function($q) use ($groups) {
     $q->whereIn('group_id', $groups);
