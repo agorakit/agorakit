@@ -24,11 +24,13 @@
 
 
   <div class="tags items">
-    @forelse( $tags as $tag )
-      <a href="{{route('tags.show', $tag)}}" class="badge badge-primary">{{$tag->name}}</a>
-    @empty
-      {{trans('messages.nothing_yet')}}
-    @endforelse
+    <h2>
+      @forelse( $tags as $tag )
+        <a href="{{route('tags.show', $tag)}}" class="badge badge-primary">{{$tag->name}}</a>
+      @empty
+        {{trans('messages.nothing_yet')}}
+      @endforelse
+    </h2>
   </div>
 
 

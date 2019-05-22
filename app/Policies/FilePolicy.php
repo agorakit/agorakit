@@ -11,10 +11,10 @@ class FilePolicy
     use HandlesAuthorization;
 
     /**
-     * Create a new policy instance.
-     *
-     * @return void
-     */
+    * Create a new policy instance.
+    *
+    * @return void
+    */
     public function __construct()
     {
         //
@@ -49,6 +49,10 @@ class FilePolicy
 
     public function delete(User $user, File $file)
     {
+        if ($user->isAdminOf($file->group)) {
+            return true;
+        }
+
         return $user->id == $file->user_id;
     }
 
