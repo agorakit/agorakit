@@ -3,16 +3,21 @@
 @section('content')
 
 
-  <div class="toolbox d-md-flex">
-      <div class="d-flex mb-2">
-          <h1><a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ __('Homepage') }}</h1>
-      </div>
+  <div class="d-sm-flex">
+    <div class="d-flex mb-2">
+      <h1><a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ __('Homepage') }}</h1>
+    </div>
 
-      <div class="ml-auto">
-        @include ('partials.preferences-show')
-      </div>
+    <div class="ml-auto mb-2">
+      @include ('partials.preferences-show')
+    </div>
   </div>
 
+  @if (setting('homepage_presentation_for_members', false))
+    <div class="alert" style="background-color: #eee">
+      {!! setting('homepage_presentation_for_members') !!}
+    </div>
+  @endif
 
   <div class="row">
     <div class="col-md-8">
