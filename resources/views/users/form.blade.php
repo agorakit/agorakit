@@ -26,11 +26,12 @@
   {!! Form::textarea('body', null, ['class' => 'wysiwyg form-control']) !!}
 </div>
 
+@include('partials.tags_form')
+
 
 <div class="form-group">
   <label>{{trans('messages.photo')}}</label><br/>
-  <input name="cover" id="file" type="file" class="btn btn-primary" title="{{trans('messages.select_one_file')}}">
-
+  <input name="cover" id="file" type="file" title="{{trans('messages.select_one_file')}}">
 </div>
 
 

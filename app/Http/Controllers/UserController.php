@@ -167,6 +167,12 @@ class UserController extends Controller
                 }
             }
 
+            // handle tags
+            if ($request->get('tags')) {
+                $user->tag($request->get('tags'));
+            }
+
+
             // handle the case the edit form is used to make a user an admin (or remove admin right)
             if (Auth::user()->isAdmin()) {
                 if ($request->get('is_admin') == 'yes') {
@@ -185,6 +191,8 @@ class UserController extends Controller
                     $user->verified = 0;
                 }
             }
+
+
 
             // validation
             if ($user->isInvalid()) {
