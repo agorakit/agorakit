@@ -31,7 +31,7 @@
           <span class="badge badge-secondary"><i class="fa fa-comments"></i> {{$group->discussions()->count()}}</span>
           <span class="badge badge-secondary"><i class="fa fa-calendar"></i> {{$group->actions()->count()}}</span>
           @foreach ($group->tags as $tag)
-            <span class="badge tag">{{$tag->name}}</span>
+              <a href="{{route('tags.show', $tag)}}" class="badge badge-primary">{{$tag->name}}</a>
           @endforeach
         </p>
 

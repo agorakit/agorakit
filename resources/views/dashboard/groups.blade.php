@@ -60,7 +60,7 @@
 
 
                                     @foreach ($group->tags as $tag)
-                                        <span class="badge tag">{{$tag->name}}</span>
+                                          <a href="{{route('tags.show', $tag)}}" class="badge badge-primary">{{$tag->name}}</a>
                                     @endforeach
                                 </p>
 
