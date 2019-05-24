@@ -8,9 +8,19 @@
   <div class="content">
 
     <div class="d-flex justify-content-between">
-      <h1>
-        {{ $action->name }}
-      </h1>
+      <div>
+        <h1>
+          {{ $action->name }}
+        </h1>
+        <div class="mb-3">
+          @if ($action->tags->count() > 0)
+            @foreach ($action->tags as $tag)
+              <a href="{{route('tags.show', $tag)}}" class="badge badge-primary">{{$tag->name}}</a>
+            @endforeach
+          @endif
+        </div>
+      </div>
+
 
       <div class="ml-4 dropdown">
         <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

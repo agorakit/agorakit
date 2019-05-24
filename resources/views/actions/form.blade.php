@@ -8,6 +8,8 @@
     {!! Form::textarea('body', null, ['class' => 'form-control wysiwyg', 'required']) !!}
 </div>
 
+@include('partials.tags_form')
+
 <div class="form-group">
     {!! Form::label('location', trans('messages.location')) !!}
     {!! Form::textarea('location', null, ['class' => 'form-control', 'rows'=>4]) !!}
