@@ -51,7 +51,8 @@
       "database/factories"
     ],
     "files": [
-      "app/Helpers/Functions.php"
+      "app/Helpers/Functions.php",
+      "app/Helpers/Filters.php"
     ],
     "psr-4": {
       "App\\": "app/"
