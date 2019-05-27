@@ -12,3 +12,4 @@
 
 
 @include('partials.wysiwyg')
+@include('partials.mention')

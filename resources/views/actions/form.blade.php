@@ -47,6 +47,7 @@
 
 
 @include ('partials.wysiwyg')
+@include ('partials.mention')
 
 
 @section('css')
