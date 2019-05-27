@@ -18,13 +18,13 @@
     $('.trumbowyg-editor').atwho({
         at: "f:",
         data: '{{route('groups.files.mention', $group)}}',
-        insertTpl: "<a href=\"${url}\" data-mention-file-id=\"${id}\">${name} (${atwho-at}${id})</a>",
+        insertTpl: "<span>f:${id}</span>",
     });
 
     $('.trumbowyg-editor').atwho({
         at: "d:",
         data: '{{route('groups.discussions.mention', $group)}}',
-        insertTpl: "<a href=\"${url}\" data-mention-discussion-id=\"${id}\">${name} (${atwho-at}${id})</a>",
+        insertTpl: "d:${id}",
     });
 
     </script>
