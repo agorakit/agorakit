@@ -13,8 +13,7 @@ class Setting extends Model
 
     protected $fillable = ['name', 'value'];
     protected $rules = [
-        'name'  => 'required',
-        'value' => 'required',
+        'name'  => 'required'
     ];
 
     public $timestamps = true;
@@ -27,12 +26,16 @@ class Setting extends Model
      */
     public static function get($key, $default = null)
     {
+
         $setting = Cache::rememberForever('settings_'.$key, function () use ($key) {
             return \App\Setting::where('name', $key)->first();
         });
 
+
+        //$setting = \App\Setting::where('name', $key)->first();
+
         // first priority : non empty setting stored in the DB
-        if (isset($setting) && $setting->value) {
+        if ($setting->exists) {
             return $setting->value;
         }
 
@@ -54,5 +57,7 @@ class Setting extends Model
         $setting = \App\Setting::firstOrNew(['name' => $key]);
         $setting->value = $value;
         $setting->save();
+
+        return $setting;
     }
 }

@@ -64,17 +64,17 @@
 
     <h2>{{ __('Group creation')}}</h2>
     <div class="form-group">
-      {!! Form::checkbox('user_can_create_groups',1 , setting('user_can_create_groups')) !!}
+      {!! Form::checkbox('user_can_create_groups', 'yes' , setting('user_can_create_groups')) !!}
       {{ __('Allow regular users to create groups (if you uncheck this box, only admins will be able to create groups)')}}
     </div>
 
     <div class="form-group">
-      {!! Form::checkbox('user_can_create_secret_groups',0 , setting('user_can_create_secret_groups')) !!}
+      {!! Form::checkbox('user_can_create_secret_groups','yes' , setting('user_can_create_secret_groups')) !!}
       {{ __('Allow regular users to create <strong>secret</strong> groups (if you uncheck this box, only admins will be able to create secret groups)')}}
     </div>
 
     <div class="form-group">
-      {!! Form::checkbox('notify_admins_on_group_create',1 , setting('notify_admins_on_group_create')) !!}
+      {!! Form::checkbox('notify_admins_on_group_create','yes' , setting('notify_admins_on_group_create')) !!}
       {{ __('Notify administrators when a new group is created')}}
     </div>
   </div>
