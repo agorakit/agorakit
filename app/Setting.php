@@ -31,11 +31,8 @@ class Setting extends Model
             return \App\Setting::where('name', $key)->first();
         });
 
-
-        //$setting = \App\Setting::where('name', $key)->first();
-
         // first priority : non empty setting stored in the DB
-        if ($setting->exists) {
+        if ($setting && $setting->exists) {
             return $setting->value;
         }
 
