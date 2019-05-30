@@ -8,15 +8,10 @@
     {!! Form::textarea('body', null, ['class' => 'wysiwyg form-control', 'required']) !!}
 </div>
 
-@include('partials.tags_form')
-
-<div class="form-group mt-5">
-  {!! Form::label('allowed_tags', __('Limit allowed tags in this group')) !!}
-  <div class="alert alert-info">
-      @lang('You can limit the tags members can use in this group. Enter each tag separated by a comma')
-  </div>
-  {!! Form::text('allowed_tags', $group->getSetting('allowed_tags'), ['class' => 'form-control']) !!}
+<div class="alert alert-info">
+    @lang('You can limit the tags members can use in this group. Enter each tag separated by a comma in the box below')
 </div>
+@include('partials.tags_form')
 
 <div class="form-group">
     <label>{{trans('group.cover')}}</label><br/>

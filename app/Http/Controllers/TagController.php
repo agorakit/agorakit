@@ -18,8 +18,8 @@ class TagController extends Controller
 
   public function __construct()
   {
-      $this->middleware('preferences');
-      $this->middleware('auth');
+    $this->middleware('preferences');
+    $this->middleware('auth');
 
   }
 
@@ -28,8 +28,6 @@ class TagController extends Controller
   {
 
     $tags = collect();
-
-    // TODO optimize. This one is hugely unefficient (but does the job)
 
     if (Auth::user()->getPreference('show') == 'all') {
       // build a list of groups the user has access to
@@ -47,142 +45,75 @@ class TagController extends Controller
 
     foreach ($groups as $group)
     {
-      $tags =  $tags->merge($group->tagsUsed());
+      $tags =  $tags->merge($group->tags);
     }
+
 
     $tags = $tags->sortKeys();
 
 
-    return view('tags.index')
+    return view('dashboard.tags-index')
     ->with('tags', $tags);
-}
+  }
 
-public function show(Request $request, Tag $tag)
-{
+  public function show(Request $request, Tag $tag)
+  {
+    //$groups = Auth::user()->groups()->pluck('groups.id');
 
-
-  //$groups = Auth::user()->groups()->pluck('groups.id');
-
-  if (Auth::user()->getPreference('show') == 'all') {
-    // build a list of groups the user has access to
-    if (Auth::user()->isAdmin()) { // super admin sees everything
-      $groups = \App\Group::get()->pluck('id');
-    } else { // normal user get public groups + groups he is member of
-      $groups = \App\Group::public()->pluck('id')
-      ->merge(Auth::user()->groups()->pluck('groups.id'));
+    if (Auth::user()->getPreference('show') == 'all') {
+      // build a list of groups the user has access to
+      if (Auth::user()->isAdmin()) { // super admin sees everything
+        $groups = \App\Group::get()->pluck('id');
+      } else { // normal user get public groups + groups he is member of
+        $groups = \App\Group::public()->pluck('id')
+        ->merge(Auth::user()->groups()->pluck('groups.id'));
+      }
+    } else {
+      $groups = Auth::user()->groups()->pluck('groups.id');
     }
-  } else {
-    $groups = Auth::user()->groups()->pluck('groups.id');
+
+    $discussions = Discussion::whereHas('group', function($q) use ($groups) {
+      $q->whereIn('group_id', $groups);
+    })
+    ->whereHas('tags', function($q) use ($tag) {
+      $q->where('normalized', $tag->normalized);
+    })
+    ->get();
+
+    $files = File::whereHas('group', function($q) use ($groups) {
+      $q->whereIn('group_id', $groups);
+    })
+    ->whereHas('tags', function($q) use ($tag) {
+      $q->where('normalized', $tag->normalized);
+    })
+    ->get();
+
+    $actions = Action::whereHas('group', function($q) use ($groups) {
+      $q->whereIn('group_id', $groups);
+    })
+    ->whereHas('tags', function($q) use ($tag) {
+      $q->where('normalized', $tag->normalized);
+    })
+    ->get();
+
+    $users = User::whereHas('groups', function($q) use ($groups) {
+      $q->whereIn('group_id', $groups);
+    })
+    ->whereHas('tags', function($q) use ($tag) {
+      $q->where('normalized', $tag->normalized);
+    })
+    ->get();
+
+
+
+
+    return view('dashboard.tags-show')
+    ->with('discussions', $discussions)
+    ->with('files', $files)
+    ->with('users', $users)
+    ->with('actions', $actions)
+    ->with('tag', $tag);
+
   }
 
-  $discussions = Discussion::whereHas('group', function($q) use ($groups) {
-    $q->whereIn('group_id', $groups);
-  })
-  ->whereHas('tags', function($q) use ($tag) {
-    $q->where('normalized', $tag->normalized);
-  })
-  ->get();
-
-  $files = File::whereHas('group', function($q) use ($groups) {
-    $q->whereIn('group_id', $groups);
-  })
-  ->whereHas('tags', function($q) use ($tag) {
-    $q->where('normalized', $tag->normalized);
-  })
-  ->get();
-
-  $actions = Action::whereHas('group', function($q) use ($groups) {
-    $q->whereIn('group_id', $groups);
-  })
-  ->whereHas('tags', function($q) use ($tag) {
-    $q->where('normalized', $tag->normalized);
-  })
-  ->get();
-
-  $users = User::whereHas('groups', function($q) use ($groups) {
-    $q->whereIn('group_id', $groups);
-  })
-  ->whereHas('tags', function($q) use ($tag) {
-    $q->where('normalized', $tag->normalized);
-  })
-  ->get();
-
-
-
-
-  return view('tags.show')
-  ->with('discussions', $discussions)
-  ->with('files', $files)
-  ->with('users', $users)
-  ->with('actions', $actions)
-  ->with('tag', $tag);
-
-}
-
-/**
-* Show the form for editing the specified resource.
-*
-* @param int $id
-*
-* @return \Illuminate\Http\Response
-*/
-public function edit(Request $request, $group, $type, $id)
-{
-  if ($type == 'discussions') {
-    $model = \App\Discussion::findOrFail($id);
-
-    return view('tags.edit')
-    ->with('name', $model->name)
-    ->with('group', $model->group)
-    ->with('model', $model)
-    ->with('type', $type)
-    ->with('id', $id)
-    ->with('model_tags', $model->tags)
-    ->with('all_tags', $model->group->tagsUsed());
-  }
-
-  if ($type == 'files') {
-    $model = \App\File::findOrFail($id);
-
-    return view('tags.edit')
-    ->with('name', $model->name)
-    ->with('group', $model->group)
-    ->with('model', $model)
-    ->with('type', $type)
-    ->with('id', $id)
-    ->with('model_tags', $model->tags)
-    ->with('all_tags', $model->group->tagsUsed());
-  }
-
-  abort(404, 'Unknown type');
-}
-
-/**
-* Update the specified resource in storage.
-*
-* @param \Illuminate\Http\Request $request
-* @param int                      $id
-*
-* @return \Illuminate\Http\Response
-*/
-public function update(Request $request, $group, $type, $id)
-{
-  if ($type == 'discussions') {
-    $model = \App\Discussion::findOrFail($id);
-    $model->tag($request->get('tags'));
-    flash(trans('messages.ressource_created_successfully'));
-
-    return redirect()->route('groups.discussions.show', [$model->group, $model]);
-  }
-
-  if ($type == 'files') {
-    $model = \App\File::findOrFail($id);
-    $model->tag($request->get('tags'));
-    flash(trans('messages.ressource_created_successfully'));
-
-    return redirect()->route('groups.files.show', [$model->group, $model]);
-  }
-
-  abort(404, 'Unknown type');
-}
 }

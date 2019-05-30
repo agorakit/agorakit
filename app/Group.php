@@ -308,6 +308,25 @@ class Group extends Model
   }
 
   /**
+  * Returns a list of allowed tags in this group
+  */
+  public function allowedTags()
+  {
+    $allowed_tags = explode(',', $this->getSetting('allowed_tags'));
+
+    $tags = collect();
+
+    if (is_array($allowed_tags)) {
+      foreach ($allowed_tags as $tag_name)
+      {
+        $tag = Tag::findByName($tag_name);
+        $tags->put($tag->normalized, $tag);
+      }
+    }
+
+  }
+
+  /**
   * Get all the tags used in this group
   * This need refactor since is is expensive to query TODO.
   */
