@@ -144,7 +144,7 @@ class GroupController extends Controller
         $group->name = $request->input('name');
         $group->body = $request->input('body');
 
-        // handle secret group type
+        // handle group type
         if ($request->input('group_type') == \App\Group::SECRET) {
             if (setting('users_can_create_secret_group') || $request->user()->isAdmin()) {
                 $group->group_type = $request->input('group_type');
@@ -177,6 +177,9 @@ class GroupController extends Controller
         if ($request->get('tags')) {
             $group->tag($request->get('tags'));
         }
+
+        // handle allowed tags
+        $group->setSetting('allowed_tags', $request->get('allowed_tags'));
 
         // handle cover
         if ($request->hasFile('cover')) {
@@ -240,7 +243,7 @@ class GroupController extends Controller
                 if (setting('users_can_create_secret_group') || $request->user()->isAdmin()) {
                     $group->group_type = $request->input('group_type');
                 } else {
-                    abort(401, 'Cant create secret group on this instance, sorry');
+                    abort(401, 'Can\'t create secret group on this instance, sorry');
                 }
             } else {
                 $group->group_type = $request->input('group_type');
@@ -262,6 +265,9 @@ class GroupController extends Controller
         if ($request->get('tags')) {
             $group->retag($request->get('tags'));
         }
+
+        // handle allowed tags
+        $group->setSetting('allowed_tags', $request->get('allowed_tags'));
 
         // validation
         if ($group->isInvalid()) {

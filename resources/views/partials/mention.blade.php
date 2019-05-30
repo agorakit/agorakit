@@ -23,7 +23,7 @@
     $('.trumbowyg-editor').atwho({
       at: "f:",
       data: '{{route('groups.files.mention', $group)}}',
-      insertTpl: "<span>f:${id}</span>",
+      insertTpl: "f:${id}",
     });
 
     $('.trumbowyg-editor').atwho({
