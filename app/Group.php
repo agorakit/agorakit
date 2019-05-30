@@ -308,7 +308,7 @@ class Group extends Model
   }
 
   /**
-  * Returns a list of allowed tags in this group
+  * Returns a list of allowed tags in this group or an empty collection if no allowed tags are set
   */
   public function allowedTags()
   {
@@ -319,10 +319,12 @@ class Group extends Model
     if (is_array($allowed_tags)) {
       foreach ($allowed_tags as $tag_name)
       {
-        $tag = Tag::findByName($tag_name);
+        $tag = Tag::firstOrCreate(['name' => trim($tag_name)]);
         $tags->put($tag->normalized, $tag);
       }
     }
+
+    return $tags;
 
   }
 
