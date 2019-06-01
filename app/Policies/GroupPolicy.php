@@ -133,6 +133,20 @@ class GroupPolicy
         }
     }
 
+    public function viewTags(?User $user, Group $group)
+    {
+        if ($user) {
+            return $group->isOpen() || $user->isMemberOf($group);
+        }
+    }
+
+    public function manageTags(?User $user, Group $group)
+    {
+        if ($user) {
+            return $user->isAdminOf($group);
+        }
+    }
+
     public function changeGroupType(User $user, Group $group)
     {
         return $user->isAdminOf($group);

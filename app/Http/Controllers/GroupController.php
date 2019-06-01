@@ -179,7 +179,10 @@ class GroupController extends Controller
         }
 
         // handle allowed tags
-        $group->setSetting('allowed_tags', $request->get('allowed_tags'));
+        $allowed_tags = explode(',', $request->get('allowed_tags'));
+        $allowed_tags = array_map('trim', $allowed_tags);
+        array_filter($allowed_tags, function($value) { return $value !== ''; });
+        $group->setSetting('allowed_tags', $allowed_tags);
 
         // handle cover
         if ($request->hasFile('cover')) {
@@ -267,7 +270,10 @@ class GroupController extends Controller
         }
 
         // handle allowed tags
-        $group->setSetting('allowed_tags', $request->get('allowed_tags'));
+        $allowed_tags = explode(',', $request->get('allowed_tags'));
+        $allowed_tags = array_map('trim', $allowed_tags);
+        array_filter($allowed_tags, function($value) { return $value !== ''; });
+        $group->setSetting('allowed_tags', $allowed_tags);
 
         // validation
         if ($group->isInvalid()) {

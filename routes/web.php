@@ -105,6 +105,8 @@ Route::group(['middleware' => ['web']], function () {
     I will apply here the recomandtion "routes as documentation" from https://philsturgeon.uk/php/2013/07/23/beware-the-route-to-evil/
     */
 
+    /////////////////// COMMON STUFF (Dashboard & overview) /////////////////////
+
     // application homepage, lists all groups on the server
     Route::get('groups', 'GroupController@index')->name('groups.index');
     Route::get('groups/create', 'GroupController@create')->name('groups.create');
@@ -153,6 +155,10 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('comments/{comment}/react/{context}', 'CommentReactionController@store');
     Route::get('comments/{comment}/unreact', 'CommentReactionController@destroy');
+
+
+    //////////////////////////// GROUPS /////////////////////////////////////////
+
 
     // Groups : only members (or everyone if a group is public)
     Route::group(['middleware' => 'public', 'as' => 'groups', 'prefix' => 'groups/{group}'], function () {
@@ -266,6 +272,19 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('files/{file}/download', 'FileDownloadController@download')->name('.files.download');
         Route::get('files/{file}/thumbnail', 'FileDownloadController@thumbnail')->name('.files.thumbnail');
         Route::get('files/{file}/preview', 'FileDownloadController@preview')->name('.files.preview');
+
+
+        Route::get('tags', 'GroupTagController@index')->name('.tags.index');
+        Route::get('tags/create', 'GroupTagController@create')->name('.tags.create');
+        Route::post('tags/create', 'GroupTagController@store')->name('.tags.store');
+        Route::get('tags/{tag}', 'GroupTagController@show')->name('.tags.show');
+        Route::get('tags/{tag}/edit', 'GroupTagController@edit')->name('.tags.edit');
+        Route::post('tags/{tag}', 'GroupTagController@update')->name('.tags.update');
+        Route::get('tags/{tag}/delete', 'GroupTagController@destroyConfirm')->name('.tags.deleteconfirm');
+        Route::delete('tags/{tag}/delete', 'GroupTagController@destroy')->name('.tags.delete');
+
+
+
     });
 
     // Search

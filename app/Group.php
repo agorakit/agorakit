@@ -312,7 +312,7 @@ class Group extends Model
   */
   public function allowedTags()
   {
-    $allowed_tags = explode(',', $this->getSetting('allowed_tags'));
+    $allowed_tags = $this->getSetting('allowed_tags');
 
     $tags = collect();
 
