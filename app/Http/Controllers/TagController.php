@@ -46,8 +46,8 @@ class TagController extends Controller
 
     foreach ($groups as $group)
     {
-      $tags =  $tags->merge($group->allowedTags());
-    
+      $tags = $tags->merge($group->allowedTags());
+      $tags = $tags->merge($group->tagsUsed());
     }
 
 

@@ -368,18 +368,6 @@ class Group extends Model
 
     $tags = collect();
 
-    $allowed_tags = $this->getSetting('allowed_tags');
-
-    if (is_array($allowed_tags)) {
-      foreach ($allowed_tags as $tag_name)
-      {
-        $tag = Tag::firstOrCreate(['name' => trim($tag_name)]);
-        $tags->put($tag->normalized, $tag);
-      }
-
-      return $tags;
-    }
-
     $discussions = $this->discussions()
     ->with('tags')
     ->get();
