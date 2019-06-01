@@ -58,7 +58,7 @@
       <div class="mb-3">
         @if ($discussion->tags->count() > 0)
           @foreach ($discussion->tags as $tag)
-            <a href="{{route('tags.show', $tag)}}" class="badge badge-primary">{{$tag->name}}</a>
+            @include('tags.tag')
           @endforeach
         @endif
       </div>

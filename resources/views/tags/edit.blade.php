@@ -4,7 +4,7 @@
 
   @include('groups.tabs')
   <div class="tab_content">
-    <h1>{{trans('messages.modify')}} <strong>"{{$tag->name}}"</strong></h1>
+    <h1>{{trans('messages.modify')}} @include('tags.tag') </h1>
 
     {!! Form::model($tag, array('action' => ['GroupTagController@update', $group, $tag])) !!}
     @include('tags.form')

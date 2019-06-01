@@ -17,7 +17,7 @@
       <div class="tags">
         @if ($user->tags->count() > 0)
           @foreach ($user->tags as $tag)
-            <a href="{{route('tags.show', $tag)}}" class="badge badge-primary">{{$tag->name}}</a>
+            @include('tags.tag')
           @endforeach
         @endif
       </div>
@@ -41,7 +41,7 @@
                 <i class="fa fa-lock" title="{{trans('group.closed')}}"></i>
               @endif
               {{ $group->name }}
-              
+
             </a>
           @endunless
         @endforeach

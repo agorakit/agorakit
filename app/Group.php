@@ -339,13 +339,19 @@ class Group extends Model
 
     $tags = collect();
 
-
-    // if allowed_tags is filled, it means the group is limited to a specific list of tags
-    $allowed_tags = explode(',', $this->getSetting('allowed_tags'));
+    $allowed_tags = $this->getSetting('allowed_tags');
 
     if (is_array($allowed_tags)) {
-      return $allowed_tags;
+      foreach ($allowed_tags as $tag_name)
+      {
+        $tag = Tag::firstOrCreate(['name' => trim($tag_name)]);
+        $tags->put($tag->normalized, $tag);
+      }
+
+      return $tags;
     }
+
+
 
     $discussions = $this->discussions()
     ->with('tags')

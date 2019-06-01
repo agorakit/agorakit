@@ -36,7 +36,7 @@
 
             @if ($user->tags->count() > 0)
               @foreach ($user->tags as $tag)
-                <a href="{{route('tags.show', $tag)}}" class="badge badge-primary">{{$tag->name}}</a>
+                @include('tags.tag')
               @endforeach
             @endif
           </div>

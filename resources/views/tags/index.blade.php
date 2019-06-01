@@ -25,7 +25,7 @@
             @forelse( $tags as $tag )
                 <tr>
                     <td>
-                        <a class="btn btn-primary" href="{{ route('groups.tags.show', [$group, $tag] ) }}">{{$tag->name}}</a>
+                        <a class="btn btn-primary" style="background-color: {{$tag->color}}" href="{{ route('groups.tags.show', [$group, $tag] ) }}">{{$tag->name}}</a>
                     </td>
                     <td>
                         <a class="btn btn-secondary" href="{{ route('groups.tags.edit', [$group, $tag] ) }}">

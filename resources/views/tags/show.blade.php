@@ -5,7 +5,7 @@
   @include('groups.tabs')
   <div class="tab_content">
 
-    {{$tag->name}}
+    @include('tags.tag')
 
   </div>
 

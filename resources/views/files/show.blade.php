@@ -24,7 +24,7 @@
         @if ($file->tags->count() > 0)
             {{trans('messages.tags')}} :
             @foreach ($file->tags as $tag)
-                  <a href="{{route('tags.show', $tag)}}" class="badge badge-primary">{{$tag->name}}</a>
+                  @include('tags.tag')
             @endforeach
             <br/>
         @endif

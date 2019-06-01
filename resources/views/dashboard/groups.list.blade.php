@@ -80,7 +80,7 @@
                                         </a>
                                         <span class="group-name">
                                             @foreach ($group->tags as $tag)
-                                                  <a href="{{route('tags.show', $tag)}}" class="badge badge-primary">{{$tag->name}}</a>
+                                                  @include('tags.tag')
                                             @endforeach
                                         </span>
 

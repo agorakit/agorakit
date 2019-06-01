@@ -13,14 +13,14 @@
 
   <div class="content">
     <div class="name">
-        <a href="{{ route('groups.files.download', [$file->group, $file]) }}" target="_blank">
-          {{ $file->name }}
-          <i class="fa fa-external-link"></i>
-        </a>
+      <a href="{{ route('groups.files.download', [$file->group, $file]) }}" target="_blank">
+        {{ $file->name }}
+        <i class="fa fa-external-link"></i>
+      </a>
 
       @if ($file->tags->count() > 0)
         @foreach ($file->tags as $tag)
-          <a href="{{ action('TagController@show', $tag) }}"><span class="badge badge-primary">{{$tag->name}}</span></a>
+          @include('tags.tag')
         @endforeach
       @endif
     </div>

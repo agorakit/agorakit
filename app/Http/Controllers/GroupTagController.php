@@ -123,7 +123,7 @@ class GroupTagController extends Controller
 
         if ($tag->save()) {
             flash(trans('messages.ressource_updated_successfully'));
-            return redirect()->route('groups.tags.show', [$tag->group, $tag]);
+            return redirect()->route('groups.tags.index', $group);
         }
         else
         {
@@ -155,7 +155,7 @@ class GroupTagController extends Controller
     */
     public function destroy(Request $request, Group $group, Tag $tag)
     {
-        $this->authorize('manage-tags', $group);;
+        $this->authorize('manage-tags', $group);
         //$tag->delete();
         flash(trans('messages.ressource_deleted_successfully'));
 
