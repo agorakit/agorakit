@@ -2,16 +2,9 @@
 
 @section('content')
 
-        <h1>{{trans('messages.delete_confirm_title')}}</h1>
+        <h1>{{trans('messages.delete_confirm_title')}} @include('tags.tag')</h1>
 
-
-        <em>
-                <strong>{{$discussion->name}}</strong>
-                <p>{{summary($discussion->body)}}</p>
-        </em>
-
-
-        {!! Form::model($discussion, array('method' => 'DELETE', 'action' => ['GroupDiscussionController@destroy', $group, $discussion])) !!}
+        {!! Form::model($tag, array('method' => 'DELETE', 'action' => ['GroupTagController@destroy', $group, $tag])) !!}
 
 
 
@@ -21,8 +14,5 @@
 
 
         {!! Form::close() !!}
-
-
-
 
 @endsection

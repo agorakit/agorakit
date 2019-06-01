@@ -10,13 +10,15 @@
 
 @include('partials.tags_form')
 
+{{--
 <div class="form-group mt-5">
-  {!! Form::label('allowed_tags', __('Limit allowed tags in this group')) !!}
+  {!! Form::label('limit_allowed_tags', __('Limit allowed tags in this group')) !!}
   <div class="alert alert-info">
-      @lang('You can limit the tags members can use in this group. Enter each tag separated by a comma')
+      @lang('You can limit the tags members can use in this group. Check the box bellow to limit the tags to a specific list')
   </div>
-  {!! Form::text('allowed_tags', $group->getSetting('allowed_tags'), ['class' => 'form-control']) !!}
+  {!! Form::text('limit_allowed_tags', $group->getSetting('limit_allowed_tags'), ['class' => 'form-control']) !!}
 </div>
+--}}
 
 <div class="form-group">
     <label>{{trans('group.cover')}}</label><br/>

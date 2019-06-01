@@ -328,6 +328,32 @@ class Group extends Model
 
   }
 
+
+  /**
+  * Add a tag to the list of allowed tags
+  */
+  public function addAllowedTag(Tag $tag)
+  {
+    $allowed_tags = $this->getSetting('allowed_tags');
+    $allowed_tags[] = $tag->normalized;
+
+    return $this->setSetting('allowed_tags', $allowed_tags);
+
+  }
+
+  /**
+  * Remove a tag to the list of allowed tags
+  */
+  public function removeAllowedTag(Tag $tag)
+  {
+    $allowed_tags = $this->getSetting('allowed_tags');
+    unset($allowed_tags[ $tag->normalized]);
+
+    return $this->setSetting('allowed_tags', $allowed_tags);
+
+
+  }
+
   /**
   * Get all the tags used in this group
   * This need refactor since is is expensive to query TODO.

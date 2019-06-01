@@ -63,10 +63,12 @@ class GroupTagController extends Controller
     {
         $this->authorize('manage-tags', $group);
         $tags = $group->allowedTags();
+        $tag = new Tag;
 
         return view('tags.create')
         ->with('group', $group)
         ->with('tags', $tags)
+        ->with('tag', $tag)
         ->with('tab', 'tags');
     }
 
@@ -83,7 +85,9 @@ class GroupTagController extends Controller
         $tag = new Tag();
         $tag->name = $request->input('name');
         $tag->color = $request->input('color');
+        $tag->save();
 
+        $group->addAllowedTag($tag);
 
         flash(trans('messages.ressource_created_successfully'));
 
@@ -122,6 +126,7 @@ class GroupTagController extends Controller
         $tag->color = $request->input('color');
 
         if ($tag->save()) {
+            $group->addAllowedTag($tag);
             flash(trans('messages.ressource_updated_successfully'));
             return redirect()->route('groups.tags.index', $group);
         }
@@ -156,9 +161,8 @@ class GroupTagController extends Controller
     public function destroy(Request $request, Group $group, Tag $tag)
     {
         $this->authorize('manage-tags', $group);
-        //$tag->delete();
+        $group->removeAllowedTag($tag);
         flash(trans('messages.ressource_deleted_successfully'));
-
         return redirect()->route('groups.tags.index', [$group]);
     }
 

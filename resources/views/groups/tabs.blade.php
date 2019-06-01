@@ -120,7 +120,11 @@
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="{{ route('groups.edit', $group) }}">
-                        <i class="fa fa-pencil"></i> {{ trans('messages.edit') }}
+                        <i class="fa fa-pencil"></i> {{ trans('messages.settings') }}
+                    </a>
+
+                    <a class="dropdown-item" href="{{ route('groups.tags.index', $group) }}">
+                        <i class="fa fa-tags"></i> {{ trans('Tags') }}
                     </a>
 
                     <a class="dropdown-item" href="{{ action('ModuleController@update', $group) }}">
