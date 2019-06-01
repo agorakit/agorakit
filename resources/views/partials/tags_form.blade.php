@@ -23,9 +23,9 @@
       @endforeach
     @endif
 
-    @if (isset($all_tags))
-      @foreach ($all_tags as $tag)
-        <option value="{{$tag}}">{{$tag}}</option>
+    @if (isset($group))
+      @foreach ($group->allowedTags() as $tag)
+        <option value="{{$tag->name}}">{{$tag->name}}</option>
       @endforeach
     @endif
   </select>

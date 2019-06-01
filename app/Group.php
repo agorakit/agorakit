@@ -347,7 +347,10 @@ class Group extends Model
   public function removeAllowedTag(Tag $tag)
   {
     $allowed_tags = $this->getSetting('allowed_tags');
-    unset($allowed_tags[ $tag->normalized]);
+
+    // from https://stackoverflow.com/questions/369602/deleting-an-element-from-an-array-in-php
+    $allowed_tags = array_diff($allowed_tags, array($tag->normalized));
+    //dd($allowed_tags);
 
     return $this->setSetting('allowed_tags', $allowed_tags);
 
@@ -376,8 +379,6 @@ class Group extends Model
 
       return $tags;
     }
-
-
 
     $discussions = $this->discussions()
     ->with('tags')

@@ -4,20 +4,26 @@
 
     @include('groups.tabs')
 
-    @auth
-        <div class="toolbox d-md-flex">
 
-            <div class="ml-auto">
-                @can('manage-tags', $group)
-                    <div class="toolbox">
-                        <a class="btn btn-primary" href="{{ route('groups.tags.create', $group ) }}">
-                            <i class="fa fa-plus"></i> {{trans('Add a tag')}}
-                        </a>
-                    </div>
-                @endcan
-            </div>
+    <div class="toolbox d-md-flex">
+
+        <div>
+            @lang('Add or remove tags to be used to classify content in this group.')
+            
+            @lang('Colors are shared between all groups')
         </div>
-    @endauth
+
+        <div class="ml-auto">
+            @can('manage-tags', $group)
+                <div class="toolbox">
+                    <a class="btn btn-primary" href="{{ route('groups.tags.create', $group ) }}">
+                        <i class="fa fa-plus"></i> {{trans('Add a tag')}}
+                    </a>
+                </div>
+            @endcan
+        </div>
+    </div>
+
 
 
     <div class="tags items">
@@ -28,13 +34,13 @@
                         <h2>@include('tags.tag')</h2>
                     </td>
                     <td>
-                        <a class="btn btn-secondary" href="{{ route('groups.tags.edit', [$group, $tag] ) }}">
+                        <a class="btn btn-primary" href="{{ route('groups.tags.edit', [$group, $tag] ) }}">
                             <i class="fas fa-edit"></i>
                             @lang('Edit')
                         </a>
                         <a class="btn btn-warning" href="{{ route('groups.tags.deleteconfirm', [$group, $tag] ) }}">
                             <i class="fas fa-trash"></i>
-                            @lang('Delete')
+                            @lang('Remove')
                         </a>
                     </td>
 
