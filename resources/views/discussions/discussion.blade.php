@@ -44,13 +44,14 @@
   <div class="comment-count d-flex justify-content-end">
     @if ($discussion->unReadCount() > 0)
       <div class="d-flex align-items-start">
-        <div class="badge badge-danger mr-1">{{__('New')}}</div>
-        <div class="badge badge-primary" style="min-width: 2em">{{ $discussion->unReadCount() }}</div>
+        <div class="badge badge-danger" style="min-width: 2em">{{ $discussion->unReadCount() }} {{__('New')}}</div>
       </div>
     @else
-      <div class="d-flex align-items-start">
-        <div class="badge badge-secondary" style="min-width: 2em">{{ $discussion->comments_count }}</div>
-      </div>
+      @if ($discussion->comments_count > 0)
+        <div class="d-flex align-items-start">
+          <div class="badge badge-secondary" style="min-width: 2em">{{ $discussion->comments_count }}</div>
+        </div>
+      @endif
     @endif
   </div>
 </div>
