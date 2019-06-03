@@ -305,6 +305,9 @@ class GroupActionController extends Controller
     if ($request->get('tags')) {
       $action->tag($request->get('tags'));
     }
+    else {
+      $action->detag();
+    }
 
 
     if ($action->isInvalid()) {

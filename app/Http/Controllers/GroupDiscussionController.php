@@ -188,6 +188,9 @@ class GroupDiscussionController extends Controller
         if ($request->get('tags')) {
             $discussion->retag($request->get('tags'));
         }
+        else {
+            $discussion->detag();
+        }
 
         flash(trans('messages.ressource_updated_successfully'));
 

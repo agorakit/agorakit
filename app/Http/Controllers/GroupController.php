@@ -174,9 +174,14 @@ class GroupController extends Controller
 
         $group->user()->associate(Auth::user());
 
+
         if ($request->get('tags')) {
             $group->tag($request->get('tags'));
         }
+        else {
+            $group->detag();
+        }
+
 
         // handle allowed tags
         $allowed_tags = explode(',', $request->get('allowed_tags'));
@@ -267,6 +272,9 @@ class GroupController extends Controller
 
         if ($request->get('tags')) {
             $group->retag($request->get('tags'));
+        }
+        else {
+            $group->detag();
         }
 
         // handle allowed tags
