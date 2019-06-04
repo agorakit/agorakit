@@ -2,7 +2,7 @@
   <div class="thumbnail">
     @if ($file->isLink())
       <a class="mr-1" href="{{ route('groups.files.download', [$file->group, $file]) }}" target="_blank">
-        <i class="fa fa-link" aria-hidden="true" style="font-size:2.5rem; color: black"></i>
+        <img src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}"/>
       </a>
     @else
       <a href="{{ route('groups.files.show', [$file->group, $file]) }}">

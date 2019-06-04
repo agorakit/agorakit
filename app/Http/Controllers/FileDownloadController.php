@@ -16,8 +16,8 @@ class FileDownloadController extends Controller
     }
 
     /**
-     * Returns the specified file for downloading.
-     */
+    * Returns the specified file for downloading.
+    */
     public function download(Group $group, File $file)
     {
         $this->authorize('view', $file);
@@ -36,8 +36,8 @@ class FileDownloadController extends Controller
     }
 
     /**
-     * Returns a square thumbnail of the file.
-     */
+    * Returns a square thumbnail of the file.
+    */
     public function thumbnail(Group $group, File $file)
     {
         $this->authorize('view', $file);
@@ -54,12 +54,12 @@ class FileDownloadController extends Controller
             return redirect('images/extensions/folder.png');
         }
 
-        return redirect('images/extensions/text-file.png');
+        return redirect('images/extensions/' . $file->icon() . '.svg');
     }
 
     /**
-     * Returns a medium sized preview of the file.
-     */
+    * Returns a medium sized preview of the file.
+    */
     public function preview(Group $group, File $file)
     {
         $this->authorize('view', $file);
@@ -72,6 +72,6 @@ class FileDownloadController extends Controller
             return $cachedImage->response();
         }
 
-        return redirect('images/extensions/text-file.png');
+        return redirect('images/extensions/' . $file->icon() . '.svg');
     }
 }
