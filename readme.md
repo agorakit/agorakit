@@ -79,8 +79,7 @@ Check https://www.agorakit.org for a more colorful overview.
 
 
 ## Requirements & installation
-Check the wiki for more information : https://github.com/philippejadin/agorakit/wiki/Installation
-
+Check the documentation for more information : https://agorakit.readthedocs.io/en/latest/index.html
 
 
 ## Contributing
@@ -92,12 +91,14 @@ It's all explained here :  https://github.com/philippejadin/agorakit/wiki/How-ca
 ## Security Vulnerabilities
 Please drop a line to info (at) agorakit.org . Security issues will be dealt with care and speed.
 
+
 ## Contact
 Please drop a line to info (at) agorakit.org to keep in touch.
 
 
 ## License
 This tool is released under the GPL 3 licence
+
 
 ## Credits
 Idea & development : Philippe Jadin
