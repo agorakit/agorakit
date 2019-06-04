@@ -15,7 +15,7 @@ class Action extends Model
     use SoftDeletes;
     use Taggable;
 
-    protected $fillable = ['id']; // neede for actions import
+    protected $fillable = ['id']; // needed for actions import
 
     protected $rules = [
     'name'     => 'required|min:5',

@@ -156,7 +156,7 @@ class GroupActionController extends Controller
       $group = \App\Group::findOrFail($request->get('group'));
     }
 
-    $this->authorize('createa-ction', $group);
+    $this->authorize('create-action', $group);
 
     $action = new Action();
 
@@ -206,30 +206,32 @@ class GroupActionController extends Controller
       }
     }
 
+    $action->user()->associate($request->user());
+
+    if (!$group->actions()->save($action)) {
+      // Oops.
+      return redirect()->route('groups.actions.create', $group)
+      ->withErrors($action->getErrors())
+      ->withInput();
+    }
+
     // handle tags
     if ($request->get('tags')) {
       $action->tag($request->get('tags'));
     }
 
-    $action->user()->associate($request->user());
 
-    $action->group()->associate($group);
+
+
 
     // update activity timestamp on parent items
     $group->touch();
     \Auth::user()->touch();
 
-    if ($action->isInvalid()) {
-      // Oops.
-      return redirect()->route('groups.actions.create', $group)
-      ->withErrors($action->getErrors())
-      ->withInput();
-    } else {
-      $action->save();
-      flash(trans('messages.ressource_created_successfully'));
+    flash(trans('messages.ressource_created_successfully'));
 
-      return redirect()->route('groups.actions.index', $group);
-    }
+    return redirect()->route('groups.actions.index', $group);
+
   }
 
   /**
