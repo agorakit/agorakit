@@ -19,10 +19,10 @@ class GroupDiscussionController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
+    * Display a listing of the resource.
+    *
+    * @return Response
+    */
     public function index(Request $request, Group $group)
     {
         $this->authorize('view-discussions', $group);
@@ -33,52 +33,52 @@ class GroupDiscussionController extends Controller
 
         if (\Auth::check()) {
             $discussions =
-      $group->discussions()
-      ->has('user')
-      ->with('userReadDiscussion', 'user')
-      ->withCount('comments')
-      ->orderBy('updated_at', 'desc')
-      ->when($tag, function ($query) use ($tag) {
-          return $query->withAnyTags($tag);
-      })
-      ->paginate(50);
+            $group->discussions()
+            ->has('user')
+            ->with('userReadDiscussion', 'user')
+            ->withCount('comments')
+            ->orderBy('updated_at', 'desc')
+            ->when($tag, function ($query) use ($tag) {
+                return $query->withAnyTags($tag);
+            })
+            ->paginate(50);
         } else { // don't load the unread relation, since we don't know who to look for.
             $discussions = $group->discussions()->has('user')->with('user')->withCount('comments')->orderBy('updated_at', 'desc')->paginate(50);
         }
 
         return view('discussions.index')
-    ->with('title', $group->name.' - '.trans('messages.discussions'))
-    ->with('discussions', $discussions)
-    ->with('tags', $tags)
-    ->with('group', $group)
-    ->with('tab', 'discussion');
+        ->with('title', $group->name.' - '.trans('messages.discussions'))
+        ->with('discussions', $discussions)
+        ->with('tags', $tags)
+        ->with('group', $group)
+        ->with('tab', 'discussion');
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
+    * Show the form for creating a new resource.
+    *
+    * @return Response
+    */
     public function create(Request $request, Group $group)
     {
         // we don't authorize at this stage since we might not have a group
         $tags = $group->tagsUsed();
 
         return view('discussions.create')
-    ->with('group', $group)
-    ->with('all_tags', $tags)
-    ->with('tab', 'discussion');
+        ->with('group', $group)
+        ->with('all_tags', $tags)
+        ->with('tab', 'discussion');
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
+    * Store a newly created resource in storage.
+    *
+    * @return Response
+    */
     public function store(Request $request, Group $group)
     {
 
-    // if no group is in the route, it means user chose the group using the dropdown
+        // if no group is in the route, it means user chose the group using the dropdown
         if (!$group->exists) {
             $group = \App\Group::find($request->get('group'));
             //if group is null, redirect to the discussion create page with error messages, saying
@@ -99,8 +99,8 @@ class GroupDiscussionController extends Controller
         if (!$group->discussions()->save($discussion)) {
             // Oops.
             return redirect()->route('groups.discussions.create', $group)
-      ->withErrors($discussion->getErrors())
-      ->withInput();
+            ->withErrors($discussion->getErrors())
+            ->withInput();
         }
 
         // update activity timestamp on parent items
@@ -117,12 +117,12 @@ class GroupDiscussionController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+    * Display the specified resource.
+    *
+    * @param int $id
+    *
+    * @return Response
+    */
     public function show(Group $group, Discussion $discussion)
     {
         $this->authorize('view', $discussion);
@@ -141,20 +141,20 @@ class GroupDiscussionController extends Controller
         }
 
         return view('discussions.show')
-    ->with('title', $group->name.' - '.$discussion->name)
-    ->with('discussion', $discussion)
-    ->with('read_comments', $read_comments)
-    ->with('group', $group)
-    ->with('tab', 'discussion');
+        ->with('title', $group->name.' - '.$discussion->name)
+        ->with('discussion', $discussion)
+        ->with('read_comments', $read_comments)
+        ->with('group', $group)
+        ->with('tab', 'discussion');
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+    * Show the form for editing the specified resource.
+    *
+    * @param int $id
+    *
+    * @return Response
+    */
     public function edit(Request $request, Group $group, Discussion $discussion)
     {
         $this->authorize('update', $discussion);
@@ -162,20 +162,20 @@ class GroupDiscussionController extends Controller
         $tags = $group->tagsUsed();
 
         return view('discussions.edit')
-    ->with('discussion', $discussion)
-    ->with('group', $group)
-    ->with('all_tags', $tags)
-    ->with('model_tags', $discussion->tags)
-    ->with('tab', 'discussion');
+        ->with('discussion', $discussion)
+        ->with('group', $group)
+        ->with('all_tags', $tags)
+        ->with('model_tags', $discussion->tags)
+        ->with('tab', 'discussion');
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+    * Update the specified resource in storage.
+    *
+    * @param int $id
+    *
+    * @return Response
+    */
     public function update(Request $request, Group $group, Discussion $discussion)
     {
         $this->authorize('update', $discussion);
@@ -203,21 +203,21 @@ class GroupDiscussionController extends Controller
 
         if (Gate::allows('delete', $discussion)) {
             return view('discussions.delete')
-      ->with('group', $group)
-      ->with('discussion', $discussion)
-      ->with('tab', 'discussion');
+            ->with('group', $group)
+            ->with('discussion', $discussion)
+            ->with('tab', 'discussion');
         } else {
             abort(403);
         }
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Remove the specified resource from storage.
+    *
+    * @param int $id
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function destroy(Request $request, Group $group, Discussion $discussion)
     {
         $this->authorize('view', $discussion);
@@ -228,15 +228,15 @@ class GroupDiscussionController extends Controller
     }
 
     /**
-     * Show the revision history of the discussion.
-     */
+    * Show the revision history of the discussion.
+    */
     public function history(Group $group, Discussion $discussion)
     {
         $this->authorize('history', $discussion);
 
         return view('discussions.history')
-    ->with('group', $group)
-    ->with('discussion', $discussion)
-    ->with('tab', 'discussion');
+        ->with('group', $group)
+        ->with('discussion', $discussion)
+        ->with('tab', 'discussion');
     }
 }

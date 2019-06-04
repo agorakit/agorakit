@@ -18,12 +18,12 @@ class Action extends Model
     protected $fillable = ['id']; // needed for actions import
 
     protected $rules = [
-    'name'     => 'required|min:5',
-    'user_id'  => 'required|exists:users,id',
-    'group_id' => 'required|exists:groups,id',
-    'start'    => 'required',
-    'stop'     => 'required',
-  ];
+        'name'     => 'required|min:5',
+        'user_id'  => 'required|exists:users,id',
+        'group_id' => 'required|exists:groups,id',
+        'start'    => 'required',
+        'stop'     => 'required',
+    ];
 
     protected $with = ['users']; // always load participants with actions
 
@@ -55,17 +55,17 @@ class Action extends Model
     }
 
     /**
-     * The users attending this action.
-     */
+    * The users attending this action.
+    */
     public function users()
     {
         return $this->belongsToMany(\App\User::class);
     }
 
     /**
-     * Geocode the item
-     * Returns true if it worked, false if it didn't.
-     */
+    * Geocode the item
+    * Returns true if it worked, false if it didn't.
+    */
     public function geocode()
     {
         if ($this->location == '') {

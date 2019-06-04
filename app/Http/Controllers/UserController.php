@@ -28,15 +28,15 @@ class UserController extends Controller
         if (Auth::check()) {
             if (Auth::user()->getPreference('show') == 'all') {
                 // build a list of groups the user has access to
-        if (Auth::user()->isAdmin()) { // super admin sees everything
-          $groups = \App\Group::get()
-          ->pluck('id');
-        } else { // normal user get public groups + groups he is member of
-            $groups = \App\Group::public()
-          ->get()
-          ->pluck('id')
-          ->merge(Auth::user()->groups()->pluck('groups.id'));
-        }
+                if (Auth::user()->isAdmin()) { // super admin sees everything
+                    $groups = \App\Group::get()
+                    ->pluck('id');
+                } else { // normal user get public groups + groups he is member of
+                    $groups = \App\Group::public()
+                    ->get()
+                    ->pluck('id')
+                    ->merge(Auth::user()->groups()->pluck('groups.id'));
+                }
             } else {
                 // show only "my" group
                 $groups = Auth::user()->groups()->pluck('groups.id');
@@ -46,33 +46,33 @@ class UserController extends Controller
             $users = User::whereHas('groups', function ($q) use ($groups) {
                 $q->whereIn('group_id', $groups);
             })
-      ->where('verified', 1)
-      ->orderBy('created_at', 'desc')
-      ->paginate(20);
+            ->where('verified', 1)
+            ->orderBy('created_at', 'desc')
+            ->paginate(20);
 
             return view('dashboard.users')
-      ->with('tab', 'users')
-      ->with('users', $users);
+            ->with('tab', 'users')
+            ->with('users', $users);
         } else {
             $users = User::where('verified', 1)
-      ->orderBy('created_at', 'desc')
-      ->paginate(20);
+            ->orderBy('created_at', 'desc')
+            ->paginate(20);
 
             return view('dashboard.users')
-      ->with('tab', 'users')
-      ->with('users', $users);
+            ->with('tab', 'users')
+            ->with('users', $users);
         }
     }
 
     /**
-     * Show contact form for the user.
-     */
+    * Show contact form for the user.
+    */
     public function contactForm(User $user)
     {
         if ($user->isVerified()) {
             return view('users.contact')
-      ->with('tab', 'contact')
-      ->with('user', $user);
+            ->with('tab', 'contact')
+            ->with('user', $user);
         } else {
             flash(__('This user did not verify his/her email so you cannot contact him/her'));
 
@@ -81,8 +81,8 @@ class UserController extends Controller
     }
 
     /**
-     * Mails the user.
-     */
+    * Mails the user.
+    */
     public function contact(User $user, Request $request)
     {
         $from_user = Auth::user();
@@ -109,44 +109,46 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+    * Display the specified resource.
+    *
+    * @param int $id
+    *
+    * @return Response
+    */
     public function show(User $user)
     {
         return view('users.show')
-    ->with('activities', $user->activities()->whereIn('group_id', \App\Group::public()->get()->pluck('id'))->paginate(10))
-    ->with('user', $user)
-    ->with('tab', 'profile');
+        ->with('activities', $user->activities()->whereIn('group_id', \App\Group::public()->get()->pluck('id'))->paginate(10))
+        ->with('user', $user)
+        ->with('tab', 'profile');
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+    * Show the form for editing the specified resource.
+    *
+    * @param int $id
+    *
+    * @return Response
+    */
     public function edit(User $user)
     {
         if (Gate::allows('update', $user)) {
             return view('users.edit')
-      ->with('user', $user)->with('tab', 'edit');
+            ->with('model_tags', $user->tags)
+            ->with('user', $user)
+            ->with('tab', 'edit');
         } else {
             abort(403);
         }
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+    * Update the specified resource in storage.
+    *
+    * @param int $id
+    *
+    * @return Response
+    */
     public function update(Request $request, User $user)
     {
         if (Gate::allows('update', $user)) {
@@ -170,6 +172,9 @@ class UserController extends Controller
             // handle tags
             if ($request->get('tags')) {
                 $user->tag($request->get('tags'));
+            }
+            else {
+                $user->detag();
             }
 
 
@@ -198,8 +203,8 @@ class UserController extends Controller
             if ($user->isInvalid()) {
                 // Oops.
                 return redirect()->route('users.edit', $user)
-        ->withErrors($user->getErrors())
-        ->withInput();
+                ->withErrors($user->getErrors())
+                ->withInput();
             }
 
             // handle cover
@@ -226,13 +231,13 @@ class UserController extends Controller
     }
 
     /**
-     * Send verification token to a user, again, for example if it's stuck in spam or wathever else event.
-     *
-     * @param Request $request
-     * @param int     $id      User id
-     *
-     * @return Flash message and returns to homepage
-     */
+    * Send verification token to a user, again, for example if it's stuck in spam or wathever else event.
+    *
+    * @param Request $request
+    * @param int     $id      User id
+    *
+    * @return Flash message and returns to homepage
+    */
     public function sendVerificationAgain(Request $request, User $user)
     {
         if ($user->verified == 0) {
@@ -246,12 +251,12 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+    * Remove the specified resource from storage.
+    *
+    * @param int $id
+    *
+    * @return Response
+    */
     public function destroy(User $user, Request $request)
     {
         $this->authorize('delete', $user);

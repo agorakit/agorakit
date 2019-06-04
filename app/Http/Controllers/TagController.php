@@ -44,17 +44,20 @@ class TagController extends Controller
 
 
 
+    // Add all allowed AND used tags from all requested groups
     foreach ($groups as $group)
     {
       $tags = $tags->merge($group->allowedTags());
       $tags = $tags->merge($group->tagsUsed());
     }
 
+    // Add all tags used on users
+    $tags = $tags->merge(User::allTagModels());
 
-    $tags = $tags->sortKeys();
-
+    $tags = $tags->sortBy('normalized');
 
     return view('dashboard.tags-index')
+    ->with('title', 'Tags')
     ->with('tags', $tags);
   }
 
@@ -114,7 +117,8 @@ class TagController extends Controller
     ->with('files', $files)
     ->with('users', $users)
     ->with('actions', $actions)
-    ->with('tag', $tag);
+    ->with('tag', $tag)
+    ->with('title', $tag->name);
 
   }
 
