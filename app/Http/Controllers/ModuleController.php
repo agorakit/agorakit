@@ -20,7 +20,7 @@ class ModuleController extends Controller
 
     public function show(Request $request, Group $group)
     {
-        $this->authorize('administer', $group);
+        $this->authorize('view', $group);
         if ($group->getSetting('module_custom_name')) {
             return view('groups.custom')
             ->with('group', $group)
