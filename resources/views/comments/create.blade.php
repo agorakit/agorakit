@@ -3,7 +3,7 @@
 @include('comments.form')
 
 <div class="form-group">
-  {!! Form::submit(trans('messages.reply'), ['class' => 'btn btn-primary form-control']) !!}
+  {!! Form::submit(trans('messages.reply'), ['class' => 'btn btn-primary btn-lg']) !!}
 </div>
 
 {!! Form::close() !!}

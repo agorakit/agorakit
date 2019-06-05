@@ -4,6 +4,7 @@
 </div>
 
 <div class="form-group">
+    {!! Form::label('color', trans('Tag color')) !!}
 	<input type="color" name="color" value="{{$tag->color}}">
 
 </div>

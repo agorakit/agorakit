@@ -87,8 +87,24 @@ h1.small
 
 label
 {
-  margin-bottom: 0;
+  margin-bottom: 0rem;
+  font-weight: bold;
+  /*font-size: 1.2rem;*/
+  font-family: "Roboto Condensed";
+  color: #444;
 }
+
+.trumbowyg
+{
+  margin-top: 0;
+}
+
+.form-group
+{
+  margin-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
 
 .result
 {
@@ -149,7 +165,7 @@ label
 
 .meta a
 {
-    color: #888;
+  color: #888;
 }
 
 

@@ -10,7 +10,7 @@
     @include('tags.form')
 
     <div class="form-group">
-      {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-primary form-control']) !!}
+      {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-primary btn-lg']) !!}
     </div>
     {!! Form::close() !!}
   </div>

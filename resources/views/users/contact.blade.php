@@ -28,7 +28,7 @@
 
 
   <div class="form-group mt-4">
-    {!! Form::submit(trans('messages.send'), ['class' => 'btn btn-primary form-control']) !!}
+    {!! Form::submit(trans('messages.send'), ['class' => 'btn btn-primary btn-lg']) !!}
   </div>
 
 

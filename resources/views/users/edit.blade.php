@@ -13,7 +13,7 @@
     @include('users.form')
 
     <div class="form-group mb-5">
-      {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-primary form-control']) !!}
+      {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-primary btn-lg']) !!}
     </div>
 
     {!! Form::close() !!}

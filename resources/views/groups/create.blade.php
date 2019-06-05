@@ -12,7 +12,7 @@
         @include('groups.form')
 
         <div class="form-group">
-            {!! Form::submit(trans('group.create_button'), ['class' => 'btn btn-primary form-control']) !!}
+            {!! Form::submit(trans('group.create_button'), ['class' => 'btn btn-primary btn-lg']) !!}
         </div>
 
 

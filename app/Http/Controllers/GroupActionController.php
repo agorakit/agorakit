@@ -118,7 +118,7 @@ class GroupActionController extends Controller
     */
     public function create(Request $request, Group $group)
     {
-        $this->authorize('create-action', $group);
+        //$this->authorize('create-action', $group);
 
         $action = new Action();
 
