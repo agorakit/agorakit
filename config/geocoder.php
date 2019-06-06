@@ -3,6 +3,7 @@
 use Geocoder\Provider\Chain\Chain;
 use Geocoder\Provider\GeoPlugin\GeoPlugin;
 use Geocoder\Provider\GoogleMaps\GoogleMaps;
+use Geocoder\Provider\Mapbox\Mapbox;
 use Http\Client\Curl\Client;
 
 return [
@@ -40,9 +41,8 @@ return [
     */
     'providers' => [
         Chain::class => [
-            GoogleMaps::class => [
-                env('GOOGLE_MAPS_LOCALE', 'en-US'),
-                env('GOOGLE_MAPS_GEOCODING_API_KEY'),
+            Mapbox::class => [
+                env('MAPBOX_TOKEN'),
             ],
             GeoPlugin::class  => [],
         ],
