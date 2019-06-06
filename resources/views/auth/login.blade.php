@@ -15,9 +15,9 @@
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 		<div class="form-group">
-			<label>{{ trans('messages.email') }}</label>
+			<label>{{ __('Username or Email') }}</label>
 			<div>
-				<input type="email" class="form-control" name="email" required="required" value="{{ old('email') }}">
+				<input type="text" class="form-control" name="login" required="required" value="{{ old('username') ?: old('email') }}">
 			</div>
 		</div>
 
