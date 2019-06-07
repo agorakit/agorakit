@@ -115,6 +115,10 @@ Follow Laravel cron documentation here : https://laravel.com/docs/5.2/scheduling
 The cron jobs are used to send group summaries at a fixed interval, for the inbound email handler and for various database interactions.
 
 
+Setup geolocalisation and mapping
+---------------------------------
+Create an account at Mapbox.com and create an api token. Then fill this api token in your .env file. With this, you will get geocoding and maps. We switched from Google maps to Mapbox because Google Maps now requires a credit card even for the free tier. Mapbox free tier is probably enough for your use (50k displays / month at the time of writing)
+
 Setup inbound emails
 --------------------
 This additional step allows you to have one mailbox for each group so members can post by email.
