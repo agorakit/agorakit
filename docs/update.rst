@@ -11,9 +11,16 @@ Make a backup
 -------------
 Make a backup of your SQL database in case something goes wrong.
 
+Update script for automated updates
+-----------------------------------
+There is a helper script that does the update for you ::
+  $ ./update
 
-Proceed with the update
------------------------
+Beware that the script will migrate your database without asking for confirmation. Always make a backup of the database just in case something goes wrong.
+
+
+Proceed with the update manually
+--------------------------------
 You can at anytime do this to update your install ::
 
   $ php artisan down
@@ -23,15 +30,9 @@ You can at anytime do this to update your install ::
   $ php artisan up
 
 
-Update script
--------------
-There is also a helper script that does it for you ::
-  $ ./update
-
-Beware that the script will migrate your database without asking for confirmation. Always make a backup of the database just in case something goes wrong.
 
 If something goes wrong
 -----------------------
 Restore your database backup and git checkout a previous (working) version. Then re-run composer install.
 
-Contact me if an update fails (it never happened so this kind of failure is highly interesting information for the project). 
+Contact me if an update fails (it never happened so this kind of failure is highly interesting information for the project).

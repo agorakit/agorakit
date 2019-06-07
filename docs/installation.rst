@@ -81,29 +81,33 @@ Here is a description of every setting in the .env file::
         MAIL_FROM_NAME=Agorakit // name of sender of admin emails
         MAIL_NOREPLY=noreply@localhost // no reply adress for service messages
 
+        MAPBOX_TOKEN=null // Create a Mapbox account and generate a token to enable geolocalisation and display maps
+
 
 
 Download all the packages needed::
 
-  $ composer install`
+  $ composer install
 
 Generate a key::
 
-  $ php artisan key:generate`
+  $ php artisan key:generate
 
 Migrate (create all tables in) the database::
 
- $ php artisan migrate`
+ $ php artisan migrate
 
 (Optional) Create sample content the database::
 
-  $ php artisan db:seed`
+  $ php artisan db:seed
 
 Don't do this last step for a production install since it will create an admin user and dummy groups and content.
+
 
 Setup your web server
 ---------------------
 Then setup your web server to serve the /public directory. This is very important, since you don't want to expose the rest of the directories (for example you DON'T want to expose your .env file!)
+
 
 Setup a cron job
 ----------------
