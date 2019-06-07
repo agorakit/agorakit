@@ -34,24 +34,24 @@ class GroupTagController extends Controller
 
 
 
-        /**
-        * Display the specified resource.
-        *
-        * @param int $id
-        *
-        * @return Response
-        */
-        public function show(Group $group, Tag $tag)
-        {
-            $this->authorize('view-tags', $group);
+    /**
+    * Display the specified resource.
+    *
+    * @param int $id
+    *
+    * @return Response
+    */
+    public function show(Group $group, Tag $tag)
+    {
+        $this->authorize('view-tags', $group);
 
 
-            return view('tags.show')
-            ->with('title', $group->name)
-            ->with('tag', $tag)
-            ->with('group', $group)
-            ->with('tab', 'tag');
-        }
+        return view('tags.show')
+        ->with('title', $group->name)
+        ->with('tag', $tag)
+        ->with('group', $group)
+        ->with('tab', 'tag');
+    }
 
 
     /**

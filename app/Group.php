@@ -313,21 +313,7 @@ class Group extends Model
     public function allowedTags()
     {
         $allowed_tags = $this->getSetting('allowed_tags');
-
-        $tags = collect();
-
-        if (is_array($allowed_tags)) {
-            foreach ($allowed_tags as $tag_name)
-            {
-                if (!empty($tag_name))
-                {
-                    $tag = Tag::firstOrCreate(['name' => trim($tag_name)]);
-                    $tags->put($tag->normalized, $tag);
-                }
-            }
-        }
-
-        return $tags;
+        return Tag::whereIn('normalized', $allowed_tags)->get();
     }
 
 
