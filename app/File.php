@@ -17,10 +17,10 @@ class File extends Model
     use Taggable;
 
     protected $rules = [
-    'name'     => 'required',
-    'user_id'  => 'required|exists:users,id',
-    'group_id' => 'required|exists:groups,id',
-  ];
+        'name'     => 'required',
+        'user_id'  => 'required|exists:users,id',
+        'group_id' => 'required|exists:groups,id',
+    ];
 
     protected $table = 'files';
     public $timestamps = true;
@@ -88,16 +88,16 @@ class File extends Model
         }
 
         $mimes = [
-      'application/pdf' => 'pdf',
-      'application/msword' => 'doc',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'doc',
-      'application/vnd.ms-powerpoint' => 'ppt',
-      'application/vnd.openxmlformats-officedocument.presentationml.presentation'  => 'ppt',
-      'application/zip'  => 'zip',
-      'audio/mpeg' => 'mp3',
-      'video/mpeg' => 'mp4',
-      'application/vnd.oasis.opendocument.text' => 'odt',
-    ];
+            'application/pdf' => 'pdf',
+            'application/msword' => 'doc',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'doc',
+            'application/vnd.ms-powerpoint' => 'ppt',
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation'  => 'ppt',
+            'application/zip'  => 'zip',
+            'audio/mpeg' => 'mp3',
+            'video/mpeg' => 'mp4',
+            'application/vnd.oasis.opendocument.text' => 'odt',
+        ];
 
         // we return 'txt' if unknown
         return array_get($mimes, $this->mime, 'txt');
@@ -113,5 +113,39 @@ class File extends Model
             return Storage::delete($this->path);
         }
         return false;
+    }
+
+    /**
+    * Set file content from a file request -> to storage
+    */
+    public function addToStorage($uploaded_file)
+    {
+        if ($this->exists)
+        {
+            // generate filenames and path
+            $storage_path = '/groups/'.$this->group->id.'/files';
+
+            // simplified filename
+            $filename = $this->id.'-'.str_slug(pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' .  $uploaded_file->guessExtension();
+
+            $complete_path = $uploaded_file->storeAs($storage_path, $filename );
+
+
+            $this->path = $complete_path;
+            $this->name = pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME) . '.' . $uploaded_file->guessExtension();
+            $this->original_filename = $uploaded_file->getClientOriginalName();
+            $this->mime = $uploaded_file->getMimeType();
+            $this->filesize = $uploaded_file->getClientSize();
+
+            // save it again
+            $this->save();
+
+            return $complete_path;
+        }
+        else
+        {
+            abort(500, 'First save a file before addToStorage(), file does not exists yet in DB');
+            return false;
+        }
     }
 }

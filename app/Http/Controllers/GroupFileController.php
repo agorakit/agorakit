@@ -46,22 +46,22 @@ class GroupFileController extends Controller
         $tag = $request->get('tag');
 
         $files = $group->files()
-    ->where('item_type', '<>', \App\File::FOLDER)
-    ->with('user')
-    ->with('tags')
-    ->with('group')
-    ->orderBy($request->get('sort', 'created_at'), $request->get('dir', 'desc'))
-    ->when($tag, function ($query) use ($tag) {
-        return $query->withAnyTags($tag);
-    })
-    ->paginate(20);
+        ->where('item_type', '<>', \App\File::FOLDER)
+        ->with('user')
+        ->with('tags')
+        ->with('group')
+        ->orderBy($request->get('sort', 'created_at'), $request->get('dir', 'desc'))
+        ->when($tag, function ($query) use ($tag) {
+            return $query->withAnyTags($tag);
+        })
+        ->paginate(20);
 
         return view('files.index')
-    ->with('title', $group->name.' - '.trans('messages.files'))
-    ->with('files', $files)
-    ->with('group', $group)
-    ->with('tags', $tags)
-    ->with('tab', 'files');
+        ->with('title', $group->name.' - '.trans('messages.files'))
+        ->with('files', $files)
+        ->with('group', $group)
+        ->with('tags', $tags)
+        ->with('tab', 'files');
     }
 
     /**
@@ -76,10 +76,10 @@ class GroupFileController extends Controller
         $this->authorize('view', $file);
 
         return view('files.show')
-    ->with('title', $group->name.' - '.$file->name)
-    ->with('file', $file)
-    ->with('group', $group)
-    ->with('tab', 'files');
+        ->with('title', $group->name.' - '.$file->name)
+        ->with('file', $file)
+        ->with('group', $group)
+        ->with('tab', 'files');
     }
 
     /**
@@ -94,9 +94,9 @@ class GroupFileController extends Controller
         $tags = $group->tagsUsed();
 
         return view('files.create')
-    ->with('all_tags', $tags)
-    ->with('group', $group)
-    ->with('tab', 'files');
+        ->with('all_tags', $tags)
+        ->with('group', $group)
+        ->with('tab', 'files');
     }
 
     public function createLink(Request $request, Group $group)
@@ -106,9 +106,9 @@ class GroupFileController extends Controller
         $tags = $group->tagsUsed();
 
         return view('files.createlink')
-    ->with('all_tags', $tags)
-    ->with('group', $group)
-    ->with('tab', 'files');
+        ->with('all_tags', $tags)
+        ->with('group', $group)
+        ->with('tab', 'files');
     }
 
     /**
@@ -126,9 +126,9 @@ class GroupFileController extends Controller
                     $file = new File();
 
                     // we save it first to get an ID from the database, it will later be used to generate a unique filename.
-          $file->forceSave(); // we bypass autovalidation, since we don't have a complete model yet, but we *need* an id
+                    $file->forceSave(); // we bypass autovalidation, since we don't have a complete model yet, but we *need* an id
 
-          // add group, user and tags
+                    // add group, user and tags
                     $file->group()->associate($group);
                     $file->user()->associate(Auth::user());
 
@@ -136,6 +136,8 @@ class GroupFileController extends Controller
                         $file->tag($request->get('tags'));
                     }
 
+                    $file->addToStorage($uploaded_file);
+                    /*
                     // generate filenames and path
                     $filepath = '/groups/'.$file->group->id.'/files/';
 
@@ -148,7 +150,7 @@ class GroupFileController extends Controller
                         Image::make($uploaded_file)->widen(1200, function ($constraint) {
                             $constraint->upsize();
                         })
-            ->save(storage_path().'/app/'.$filepath.$filename);
+                        ->save(storage_path().'/app/'.$filepath.$filename);
                     } else {
                         // store the file
                         Storage::disk('local')->put($filepath.$filename, file_get_contents($uploaded_file->getRealPath()));
@@ -163,6 +165,7 @@ class GroupFileController extends Controller
 
                     // save it again
                     $file->save();
+                    */
 
                     // update activity timestamp on parent items
                     $group->touch();
@@ -201,11 +204,11 @@ class GroupFileController extends Controller
         $tags = $group->tagsUsed();
 
         return view('files.edit')
-    ->with('file', $file)
-    ->with('all_tags', $tags)
-    ->with('model_tags', $file->tags)
-    ->with('group', $group)
-    ->with('tab', 'file');
+        ->with('file', $file)
+        ->with('all_tags', $tags)
+        ->with('model_tags', $file->tags)
+        ->with('group', $group)
+        ->with('tab', 'file');
     }
 
     /**
@@ -224,7 +227,7 @@ class GroupFileController extends Controller
         } else {
             $file->detag();
         }
-    
+
         if ($request->get('name')) {
             $file->name = $request->get('name');
         }
@@ -245,9 +248,9 @@ class GroupFileController extends Controller
         $this->authorize('delete', $file);
 
         return view('files.delete')
-    ->with('group', $group)
-    ->with('file', $file)
-    ->with('tab', 'file');
+        ->with('group', $group)
+        ->with('file', $file)
+        ->with('tab', 'file');
     }
 
     /**
@@ -277,15 +280,15 @@ class GroupFileController extends Controller
         $this->authorize('create-file', $group);
 
         $validator = Validator::make($request->all(), [
-      'title' => 'required',
-      'link'  => 'required|url',
-    ]);
+            'title' => 'required',
+            'link'  => 'required|url',
+        ]);
 
         if ($validator->fails()) {
             return redirect()
-      ->back()
-      ->withErrors($validator)
-      ->withInput();
+            ->back()
+            ->withErrors($validator)
+            ->withInput();
         }
 
         $file = new File();

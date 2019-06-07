@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Comment;
 use App\Discussion;
 use App\Group;
+use App\File;
+use Auth;
 use Illuminate\Http\Request;
 
 /**
@@ -30,6 +32,23 @@ class CommentController extends Controller
             return redirect()->back()
             ->withErrors($comment->getErrors())
             ->withInput();
+        }
+
+
+
+        // handle attached file to comment
+        if ($request->hasFile('file'))
+        {
+            $file = new File;
+            $file->forceSave(); // we bypass autovalidation, since we don't have a complete model yet, but we *need* an id
+
+            // add group, user
+            $file->group()->associate($group);
+            $file->user()->associate(Auth::user());
+            $file->addToStorage($request->file('file'));
+
+            $comment->body = $comment->body . '<p>f:' . $file->id . '</p>';
+
         }
 
         $discussion->comments()->save($comment);
