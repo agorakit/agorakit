@@ -136,7 +136,10 @@ class GroupFileController extends Controller
                         $file->tag($request->get('tags'));
                     }
 
+                    // Add file to disk
                     $file->addToStorage($uploaded_file);
+
+                    // this is replaced by the single line before ^^^:
                     /*
                     // generate filenames and path
                     $filepath = '/groups/'.$file->group->id.'/files/';

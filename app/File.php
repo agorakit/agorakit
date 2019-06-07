@@ -117,13 +117,15 @@ class File extends Model
 
     /**
     * Set file content from a file request -> to storage
+    * You need to pass an uploaded file from a $request as $uploaded_file
+    * The file you are attaching to must already exist in the DB
     */
     public function addToStorage($uploaded_file)
     {
         if ($this->exists)
         {
             // generate filenames and path
-            $storage_path = '/groups/'.$this->group->id.'/files';
+            $storage_path = 'groups/'.$this->group->id.'/files';
 
             // simplified filename
             $filename = $this->id.'-'.str_slug(pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' .  $uploaded_file->guessExtension();

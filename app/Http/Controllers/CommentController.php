@@ -39,16 +39,19 @@ class CommentController extends Controller
         // handle attached file to comment
         if ($request->hasFile('file'))
         {
+            // create a file instance
             $file = new File;
             $file->forceSave(); // we bypass autovalidation, since we don't have a complete model yet, but we *need* an id
 
             // add group, user
             $file->group()->associate($group);
             $file->user()->associate(Auth::user());
+
+            // store the file itself on disk
             $file->addToStorage($request->file('file'));
 
+            // add an f:xx to the comment so it is shown on display
             $comment->body = $comment->body . '<p>f:' . $file->id . '</p>';
-
         }
 
         $discussion->comments()->save($comment);
