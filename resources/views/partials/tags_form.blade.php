@@ -23,7 +23,7 @@
       @endforeach
     @endif
 
-    @if (isset($group))
+    @if (isset($group) && $group->exists)
       @foreach ($group->allowedTags() as $tag)
         <option value="{{$tag->name}}">{{$tag->name}}</option>
       @endforeach
