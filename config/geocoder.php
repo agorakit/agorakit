@@ -42,7 +42,7 @@ return [
     'providers' => [
         Chain::class => [
             Mapbox::class => [
-                env('MAPBOX_TOKEN'),
+                env('MAPBOX_TOKEN', 'xyz'),
             ],
             GeoPlugin::class  => [],
         ],
