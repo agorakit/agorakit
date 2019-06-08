@@ -14,7 +14,7 @@
 
 
         @if (!$group->exists)
-            {!! Form::open(array('route' => 'discussions.store')) !!}
+            {!! Form::open(['route' => 'discussions.store',  'files' => true]) !!}
 
             <div class="form-group">
                 {!! Form::label('group', trans('messages.group')) !!}
@@ -35,7 +35,7 @@
             {!! Form::close() !!}
 
         @else
-            {!! Form::open(array('action' => ['GroupDiscussionController@store', $group])) !!}
+            {!! Form::open(['action' => ['GroupDiscussionController@store', $group], 'files' => true] ) !!}
 
             @include('discussions.form')
 
