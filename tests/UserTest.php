@@ -16,7 +16,7 @@ class UserTest extends Tests\BrowserKitTestCase
 
     Our scenario :
 
-    - we have Roberto, our admin
+    - we have admin, our admin
     - we also have Newbie, another user
 
     - Roberto creates 2 groups, an open one and a closed one
@@ -45,7 +45,7 @@ class UserTest extends Tests\BrowserKitTestCase
         Mail::fake();
 
         $this->visit('/register')
-        ->type('Roberto', 'name')
+        ->type('Admin', 'name')
         ->type('admin@agorakit.org', 'email')
         ->type('12345678', 'password')
         ->type('12345678', 'password_confirmation')
