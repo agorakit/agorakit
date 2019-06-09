@@ -47,8 +47,8 @@ class UserTest extends Tests\BrowserKitTestCase
         $this->visit('/register')
         ->type('Roberto', 'name')
         ->type('admin@agorakit.org', 'email')
-        ->type('123456', 'password')
-        ->type('123456', 'password_confirmation')
+        ->type('12345678', 'password')
+        ->type('12345678', 'password_confirmation')
         ->press('Register')
         ->see('Agorakit');
 
@@ -127,8 +127,8 @@ class UserTest extends Tests\BrowserKitTestCase
         $this->visit('/register')
         ->type('Newbie', 'name')
         ->type('newbie@agorakit.org', 'email')
-        ->type('123456', 'password')
-        ->type('123456', 'password_confirmation')
+        ->type('12345678', 'password')
+        ->type('12345678', 'password_confirmation')
         ->press('Register')
         ->see('Agorakit');
 
