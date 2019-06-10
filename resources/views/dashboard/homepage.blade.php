@@ -64,7 +64,7 @@
 
                 <div class="files">
                     @forelse( $files as $file)
-                        @include('files.file')
+                        @include('files.file-simple')
                     @empty
                         {{trans('messages.nothing_yet')}}
                     @endforelse
