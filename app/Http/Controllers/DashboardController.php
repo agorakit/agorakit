@@ -60,6 +60,7 @@ class DashboardController extends Controller
 
             $files = File::with('group')
             ->has('group')
+            ->whereIn('group_id', $groups)
             ->orderBy('updated_at', 'desc')
             ->take(10)
             ->get();
