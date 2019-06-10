@@ -7,7 +7,7 @@
   <h1>{{trans('messages.modify')}} <strong>"{{$discussion->name}}"</strong></h1>
 
 
-  {!! Form::model($discussion, array('action' => ['GroupDiscussionController@update', $discussion->group, $discussion])) !!}
+  {!! Form::model($discussion, array('action' => ['GroupDiscussionController@update', $discussion->group, $discussion], 'files' => true)) !!}
 
   @include('discussions.form')
 

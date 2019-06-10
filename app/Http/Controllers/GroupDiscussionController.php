@@ -103,7 +103,7 @@ class GroupDiscussionController extends Controller
             ->withErrors($discussion->getErrors())
             ->withInput();
         }
-        
+
 
         // handle attached file to comment
         if ($request->hasFile('file'))
@@ -205,6 +205,25 @@ class GroupDiscussionController extends Controller
         $discussion->name = $request->input('name');
         $discussion->body = $request->input('body');
         //$discussion->user()->associate(Auth::user()); // we use revisionable to manage who changed what, so we keep the original author
+
+        // handle attached file to comment
+        if ($request->hasFile('file'))
+        {
+            // create a file instance
+            $file = new File;
+            $file->forceSave(); // we bypass autovalidation, since we don't have a complete model yet, but we *need* an id
+
+            // add group, user
+            $file->group()->associate($group);
+            $file->user()->associate(Auth::user());
+
+            // store the file itself on disk
+            $file->addToStorage($request->file('file'));
+
+            // add an f:xx to the comment so it is shown on display
+            $discussion->body = $discussion->body . '<p>f:' . $file->id . '</p>';
+        }
+
         $discussion->save();
 
         if ($request->get('tags')) {
@@ -213,6 +232,8 @@ class GroupDiscussionController extends Controller
         else {
             $discussion->detag();
         }
+
+
 
         flash(trans('messages.ressource_updated_successfully'));
 
