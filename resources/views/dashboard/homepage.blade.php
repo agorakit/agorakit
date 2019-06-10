@@ -20,7 +20,7 @@
     @endif
 
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-7">
 
 
             @if ($discussions->count() > 0)
@@ -42,7 +42,7 @@
         </div>
 
 
-        <div class="col-md-4">
+        <div class="col-md-5">
 
             @if ($actions->count() > 0)
                 <h1 class="small">{{ __('Calendar') }}</h1>
