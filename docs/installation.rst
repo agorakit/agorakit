@@ -111,7 +111,7 @@ Then setup your web server to serve the /public directory. This is very importan
 
 Setup a cron job
 ----------------
-Follow Laravel cron documentation here : https://laravel.com/docs/5.2/scheduling
+Follow Laravel cron documentation here : https://laravel.com/docs/master/scheduling
 The cron jobs are used to send group summaries at a fixed interval, for the inbound email handler and for various database interactions.
 
 
