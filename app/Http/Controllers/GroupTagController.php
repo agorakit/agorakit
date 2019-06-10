@@ -82,8 +82,14 @@ class GroupTagController extends Controller
 
         $this->authorize('manage-tags', $group);
 
-        $tag = new Tag();
-        $tag->name = $request->input('name');
+        $tag = Tag::findByName($request->input('name'));
+
+        if (!$tag)
+        {
+          $tag = new Tag();
+          $tag->name = $request->input('name');
+        }
+
         $tag->color = $request->input('color');
         $tag->save();
 

@@ -54,6 +54,8 @@ class TagController extends Controller
     // Add all tags used on users
     $tags = $tags->merge(User::allTagModels());
 
+    $tags = $tags->unique('normalized');
+
     $tags = $tags->sortBy('normalized');
 
     return view('dashboard.tags-index')

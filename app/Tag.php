@@ -3,13 +3,22 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Watson\Validating\ValidatingTrait;
 
 class Tag extends \Cviebrock\EloquentTaggable\Models\Tag
 {
-    /*
-    public function getRouteKeyName()
-    {
-        return 'normalized';
-    }
-    */
+
+  use ValidatingTrait;
+
+
+  protected $rules = [
+    'name'     => 'required',
+    'normalized'    => 'unique:taggable_tags',
+  ];
+  /*
+  public function getRouteKeyName()
+  {
+  return 'normalized';
+}
+*/
 }
