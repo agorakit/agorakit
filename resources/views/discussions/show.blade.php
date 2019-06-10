@@ -76,11 +76,11 @@
       @foreach ($discussion->comments as $comment_key => $comment)
         @include('comments.comment')
       @endforeach
-
-      @can('create-comment', $group)
-        @include ('comments.create')
-      @endcan
     </div>
+
+    @can('create-comment', $group)
+      @include ('comments.create')
+    @endcan
 
 
 
