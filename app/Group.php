@@ -313,7 +313,10 @@ class Group extends Model
     public function allowedTags()
     {
         $allowed_tags = array_unique($this->getSetting('allowed_tags', []));
-        return Tag::whereIn('normalized', $allowed_tags)->get();
+        return Tag::whereIn('normalized', $allowed_tags)
+        ->groupBy('normalized')
+        ->orderBy('normalized')
+        ->get();
     }
 
 
