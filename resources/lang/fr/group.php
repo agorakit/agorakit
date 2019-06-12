@@ -6,6 +6,7 @@ return [
   'create_a_group_button' => 'Créer un groupe',
   'create_button'         => 'Créer le groupe',
   'create_group_title'    => 'Créer un groupe',
+  'create_group_discussion' => 'Créer une discussion de groupe',
   'description'           => 'Description du groupe',
   'features'              => 'Gestion des fonctionalités',
   'features_help'         => 'Activez ou désactivez les fonctionalités de votre groupe, vous pourrez les réactiver à tout moment.',

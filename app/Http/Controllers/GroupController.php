@@ -124,7 +124,7 @@ class GroupController extends Controller
     public function create()
     {
         Gate::authorize('create', \App\Group::class);
-        $title = "Create group";
+        $title = trans('group.create_group_title');
         return view('groups.create')
         ->with('group', new \App\Group())
         ->with('all_tags', \App\Group::allTags())

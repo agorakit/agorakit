@@ -25,7 +25,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $title = "Users";
+        $title = trans('messages.users');
         if (Auth::check()) {
             if (Auth::user()->getPreference('show') == 'all') {
                 // build a list of groups the user has access to
@@ -120,7 +120,7 @@ class UserController extends Controller
     */
     public function show(User $user)
     {
-        $title = "$user->username profile";
+        $title = $user->username . " " . trans('messages.user_profile');
 
         return view('users.show')
         ->with('activities', $user->activities()->whereIn('group_id', \App\Group::public()->get()->pluck('id'))->paginate(10))

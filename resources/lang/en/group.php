@@ -6,6 +6,7 @@ return [
   'create_a_group_button' => 'Start a group',
   'create_button'         => 'Create the group',
   'create_group_title'    => 'Create a new group',
+  'create_group_discussion' => 'Create group discussion',
   'description'           => 'Group description',
   'features'              => 'Manage features',
   'features_help'         => 'Enable or disable features of your group',
