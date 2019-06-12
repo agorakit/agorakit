@@ -117,6 +117,8 @@ class User extends Authenticatable
      */
     public function isMemberOf(Group $group)
     {
+        // TODO refactor to avoid n+1
+        // Always load membership with user
         $membership = \App\Membership::where('user_id', '=', $this->id)->where('group_id', '=', $group->id)->first();
 
         if ($membership && $membership->membership >= \App\Membership::MEMBER) {
@@ -151,31 +153,6 @@ class User extends Authenticatable
         return false;
     }
 
-    /**
-     * Returns the current preference $key for the user, $default if not set.
-     */
-    public function getPreference($key, $default = false)
-    {
-        $preferences = $this->preferences;
-        if (isset($preferences[$key])) {
-            return $preferences[$key];
-        } else {
-            return $default;
-        }
-    }
-
-    /**
-     * Set the preference $key to $value for the user
-     * No validation is made on this layer, preferences are stored in the json text field of the DB.
-     */
-    public function setPreference($key, $value)
-    {
-        $preferences = $this->preferences;
-        $preferences[$key] = $value;
-        $this->preferences = $preferences;
-
-        return $this->save();
-    }
 
     /**
      * Returns true if the user is admin.
@@ -319,4 +296,44 @@ class User extends Authenticatable
 
         return false;
     }
+
+
+        /**
+         * Returns the current preference $key for the user, $default if not set.
+         */
+        public function getPreference($key, $default = false)
+        {
+            $preferences = $this->preferences;
+            if (isset($preferences[$key])) {
+                return $preferences[$key];
+            } else {
+                return $default;
+            }
+        }
+
+        /**
+         * Set the preference $key to $value for the user
+         * No validation is made on this layer, preferences are stored in the json text field of the DB.
+         */
+        public function setPreference($key, $value)
+        {
+            $preferences = $this->preferences;
+            $preferences[$key] = $value;
+            $this->preferences = $preferences;
+
+            return $this->save();
+        }
+
+
+        /**
+         * Returns a collection of permissions for the user in the $group
+         */
+        public function getPermissionsForGroup(Group $group)
+        {
+            // load membership for this user in the group
+              $membership = \App\Membership::where('user_id', '=', $this->id)->where('group_id', '=', $group->id)->first();
+            // get the permissions for this membership level from the group
+
+
+        }
 }
