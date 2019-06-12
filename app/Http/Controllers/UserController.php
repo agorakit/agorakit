@@ -25,6 +25,7 @@ class UserController extends Controller
 
     public function index()
     {
+        $title = "Users";
         if (Auth::check()) {
             if (Auth::user()->getPreference('show') == 'all') {
                 // build a list of groups the user has access to
@@ -52,7 +53,8 @@ class UserController extends Controller
 
             return view('dashboard.users')
             ->with('tab', 'users')
-            ->with('users', $users);
+            ->with('users', $users)
+            ->with('title', $title);
         } else {
             $users = User::where('verified', 1)
             ->orderBy('created_at', 'desc')
@@ -60,7 +62,8 @@ class UserController extends Controller
 
             return view('dashboard.users')
             ->with('tab', 'users')
-            ->with('users', $users);
+            ->with('users', $users)
+            ->with('title', $title);
         }
     }
 
@@ -117,10 +120,13 @@ class UserController extends Controller
     */
     public function show(User $user)
     {
+        $title = "$user->username profile";
+
         return view('users.show')
         ->with('activities', $user->activities()->whereIn('group_id', \App\Group::public()->get()->pluck('id'))->paginate(10))
         ->with('user', $user)
-        ->with('tab', 'profile');
+        ->with('tab', 'profile')
+        ->with('title', $title);
     }
 
     /**

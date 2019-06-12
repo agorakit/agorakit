@@ -18,8 +18,11 @@ class MapController extends Controller
      */
     public function index()
     {
+        $title = "Map";
+
         return view('dashboard.map')
-    ->with('tab', 'map');
+        ->with('tab', 'map')
+        ->with('title', $title);
     }
 
     /**
