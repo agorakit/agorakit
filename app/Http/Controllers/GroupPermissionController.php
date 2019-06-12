@@ -17,7 +17,6 @@ class GroupPermissionController extends Controller
         $this->authorize('administer', $group);
 
         $permissions = $group->getSetting('permissions');
-
         
         $member = collect($permissions['member']);
 

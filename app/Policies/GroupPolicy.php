@@ -81,6 +81,11 @@ class GroupPolicy
 
     public function createDiscussion(User $user, Group $group)
     {
+        $permissions = $group->getSetting('permissions');
+        $member = collect($permissions['member']);
+        return $member->contains('create-discussion');
+
+
         return $user->isMemberOf($group);
     }
 

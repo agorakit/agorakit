@@ -5,10 +5,13 @@
     @include('groups.tabs')
 
 
-    <h1 class="mb-5">
+    <h1>
         @lang('Manage permissions for this group')
     </h1>
 
+    <p class="mb-4">
+        @lang('Currently group admins always have all permissions')
+    </p>
 
     {!! Form::model($group, array('action' => ['GroupPermissionController@update', $group])) !!}
 
@@ -36,7 +39,7 @@
                 </td>
                 <td>
                     <div class="form-check">
-                        {!!Form::checkbox('admin[]', 'create-discussion', $admin->contains('create-discussion'))!!}
+                        {!!Form::checkbox('admin[]', 'create-discussion', $admin->contains('create-discussion'), ['disabled'])!!}
                     </div>
                 </td>
             </tr>
@@ -53,7 +56,7 @@
                 </td>
                 <td>
                     <div class="form-check">
-                        {!!Form::checkbox('admin[]', 'create-file', $admin->contains('create-file'))!!}
+                        {!!Form::checkbox('admin[]', 'create-file', $admin->contains('create-file'), ['disabled'])!!}
                     </div>
                 </td>
             </tr>
@@ -71,7 +74,7 @@
                 </td>
                 <td>
                     <div class="form-check">
-                        {!!Form::checkbox('admin[]', 'create-action', $admin->contains('create-action'))!!}
+                        {!!Form::checkbox('admin[]', 'create-action', $admin->contains('create-action'), ['disabled'])!!}
                     </div>
                 </td>
             </tr>
@@ -88,7 +91,7 @@
                 </td>
                 <td>
                     <div class="form-check">
-                        {!!Form::checkbox('admin[]', 'invite', $admin->contains('invite'))!!}
+                        {!!Form::checkbox('admin[]', 'invite', $admin->contains('invite'), ['disabled'])!!}
                     </div>
                 </td>
             </tr>

@@ -131,6 +131,10 @@
                         <i class="fa fa-toggle-on"></i> {{ trans('messages.features') }}
                     </a>
 
+                    <a class="dropdown-item" href="{{ action('GroupPermissionController@index', $group) }}">
+                        <i class="fa fa-crown"></i> {{ trans('Permissions') }}
+                    </a>
+
                     <a class="dropdown-item" href="{{ action('GroupInsightsController@index', $group) }}">
                         <i class="fa fa-line-chart"></i> {{ trans('messages.insights') }}
                     </a>
