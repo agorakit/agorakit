@@ -16,15 +16,47 @@ class GroupPermissionController extends Controller
     {
         $this->authorize('administer', $group);
 
-        //$permissions = $group->getSetting('permissions');
+        $permissions = $group->getSetting('permissions');
 
-        $permissions = ['member' => ['create-discussion', 'create-action', 'create-file', 'invite']];
+        
+        $member = collect($permissions['member']);
+
+        // curently admin can do it all
+        $admin = collect(['create-discussion', 'create-action', 'create-file', 'invite']);
+
+
 
         return view('permissions.index')
-        ->with('permissions', $permissions)
+        ->with('member', $member)
+        ->with('admin', $admin)
         ->with('group', $group)
         ->with('tab', 'admin');
     }
 
+
+    public function update(Request $request, Group $group)
+    {
+        $this->authorize('administer', $group);
+
+        $member = collect();
+
+        foreach ($request->get('member') as $member_perm)
+        {
+            $member->push($member_perm);
+        }
+
+
+        // todo filter with only allowed values here
+        $permissions['member'] = $member->toArray();
+
+        $group->setSetting('permissions', $permissions);
+
+        $group->save();
+
+        flash(trans('messages.ressource_updated_successfully'));
+
+        return redirect()->route('groups.permissions.index', $group);
+
+    }
 
 }

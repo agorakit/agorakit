@@ -286,6 +286,7 @@ Route::group(['middleware' => ['web']], function () {
 
         // Permissions
         Route::get('permissions', 'GroupPermissionController@index')->name('.permissions.index');
+        Route::post('permissions', 'GroupPermissionController@update')->name('.permissions.update');
 
     });
 
