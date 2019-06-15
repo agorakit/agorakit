@@ -44,7 +44,7 @@ class FilePolicy
             return true;
         }
 
-        return $user->isMemberOf($file->group);
+        return $user->id == $file->user_id;
     }
 
     public function delete(User $user, File $file)

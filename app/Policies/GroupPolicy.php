@@ -30,11 +30,17 @@ class GroupPolicy extends BasePolicy
 
     /**
     * Viewing a group means reading title and presentation (= group home page).
+    * Only secret groups are hidden from non members
     */
     public function view(?User $user, Group $group)
     {
         if ($group->isSecret()) {
-            return false;
+            if ($user->isMemberOf($group)) {
+                return true;
+            }
+            else {
+                return false;
+            }
         }
 
         return true;
@@ -55,7 +61,7 @@ class GroupPolicy extends BasePolicy
     }
 
     /**
-    * Determine if the given post can be updated by the user.
+    * Determine if the given group can be updated by the user.
     *
     * @param \App\User $user
     *
@@ -77,73 +83,32 @@ class GroupPolicy extends BasePolicy
     /*
     the following functions let us decide if a user can or cannot creat some stuff in a group
     Curently it's based on the fact that you are an active member of the group OR we use the admin defined permissions
+    The function getPermissionsFor() is defined in the base class BasePolicy::getPermissionsFor()
     */
 
     public function createDiscussion(User $user, Group $group)
     {
         return $this->getPermissionsFor($user, $group)->contains('create-discussion');
-
-        /*
-        // if admin enabled custom permissions
-        if ($group->getSetting('custom_permissions')){
-            //get all the permissions for members and collect it in a nice collection
-            $permissions = $group->getSetting('permissions');
-            $member = collect($permissions['member']);
-            // check if the member can
-            return $member->contains('create-discussion');
-        }
-
-
-        return $user->isMemberOf($group);
-        */
     }
 
     public function createFile(User $user, Group $group)
     {
-        if ($group->getSetting('custom_permissions')){
-            $permissions = $group->getSetting('permissions');
-            $member = collect($permissions['member']);
-            return $member->contains('create-file');
-        }
-
-
-        return $user->isMemberOf($group);
+        return $this->getPermissionsFor($user, $group)->contains('create-file');
     }
 
     public function createLink(User $user, Group $group)
     {
-        if ($group->getSetting('custom_permissions')){
-            $permissions = $group->getSetting('permissions');
-            $member = collect($permissions['member']);
-            return $member->contains('create-file');
-        }
-
-
-        return $user->isMemberOf($group);
+        return $this->getPermissionsFor($user, $group)->contains('create-file');
     }
 
     public function createAction(User $user, Group $group)
     {
-        if ($group->getSetting('custom_permissions')){
-            $permissions = $group->getSetting('permissions');
-            $member = collect($permissions['member']);
-            return $member->contains('create-action');
-        }
-
-
-        return $user->isMemberOf($group);
+        return $this->getPermissionsFor($user, $group)->contains('create-action');
     }
 
     public function createComment(User $user, Group $group)
     {
-        if ($group->getSetting('custom_permissions')){
-            $permissions = $group->getSetting('permissions');
-            $member = collect($permissions['member']);
-            return $member->contains('create-discussion');
-        }
-
-
-        return $user->isMemberOf($group);
+        return $this->getPermissionsFor($user, $group)->contains('create-discussion');
     }
 
     public function viewDiscussions(?User $user, Group $group)

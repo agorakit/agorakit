@@ -70,16 +70,4 @@ class Membership extends Model
         return $this->belongsTo(\App\Group::class);
     }
 
-    /**
-     * Returns the permissions of this particular user in this particular group
-     */
-    public function getPermissions()
-    {
-
-    }
-
-    
-    public function level()
-    {
-    }
 }

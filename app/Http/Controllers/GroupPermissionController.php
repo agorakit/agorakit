@@ -18,12 +18,11 @@ class GroupPermissionController extends Controller
 
         $custom_permissions = $group->getSetting('custom_permissions', false);
 
-        if ($custom_permissions)  {
+        if ($custom_permissions) {
             $permissions = $group->getSetting('permissions');
 
             $member = collect($permissions['member']);
-        }
-        else {
+        } else {
             $member = collect(['create-discussion', 'create-action', 'create-file', 'invite']);
         }
 
@@ -47,33 +46,29 @@ class GroupPermissionController extends Controller
 
         // admin enabled custom permissions :
         if ($request->has('custom_permissions')) {
-
             $group->setSetting('custom_permissions', true);
 
 
             $member = collect();
 
-            foreach ($request->get('member') as $member_perm)
-            {
-                $member->push($member_perm);
+            if ($request->has('member')) {
+                foreach ($request->get('member') as $member_perm) {
+                    $member->push($member_perm);
+                }
             }
-
 
             // todo filter with only allowed values here
             $permissions['member'] = $member->toArray();
 
             $group->setSetting('permissions', $permissions);
-        }
-        else {
+        } else {
             $group->setSetting('custom_permissions', false);
         }
-        
+
         $group->save();
 
         flash(trans('messages.ressource_updated_successfully'));
 
         return redirect()->route('groups.permissions.index', $group);
-
     }
-
 }
