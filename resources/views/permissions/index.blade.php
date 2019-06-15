@@ -15,6 +15,11 @@
 
     {!! Form::model($group, array('action' => ['GroupPermissionController@update', $group])) !!}
 
+    <div class="form-check">
+        {!!Form::checkbox('custom_permissions', 'yes', $custom_permissions)!!}
+        Enable custom permissions for this group
+    </div>
+
     <table class="table table-striped">
         <thead>
             <tr>

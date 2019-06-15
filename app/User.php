@@ -20,73 +20,73 @@ class User extends Authenticatable
     use Taggable;
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    * The attributes that are mass assignable.
+    *
+    * @var array
+    */
     protected $fillable = [
-    'name', 'email', 'password', 'provider', 'provider_id',
-  ];
+        'name', 'email', 'password', 'provider', 'provider_id',
+    ];
 
     /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
+    * The attributes excluded from the model's JSON form.
+    *
+    * @var array
+    */
     protected $hidden = [
-    'password', 'remember_token', 'token',
-  ];
+        'password', 'remember_token', 'token',
+    ];
 
     protected $casts = [
-    'preferences' => 'array',
-  ];
+        'preferences' => 'array',
+    ];
 
     protected $rules = [
-    'name'     => 'required',
-    'email'    => 'required|email|unique:users',
-    'username' => 'alpha_dash|unique:users',
-    //'password' => 'required',
-  ];
+        'name'     => 'required',
+        'email'    => 'required|email|unique:users',
+        'username' => 'alpha_dash|unique:users',
+        //'password' => 'required',
+    ];
 
     protected $keepRevisionOf = ['name', 'body', 'email', 'admin', 'preferences', 'address'];
 
     /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
+    * The database table used by the model.
+    *
+    * @var string
+    */
     protected $table = 'users';
 
     /**
-     * Get the route key for the model.
-     *
-     * @return string
-     */
+    * Get the route key for the model.
+    *
+    * @return string
+    */
     public function getRouteKeyName()
     {
         return 'username';
     }
 
     /**
-     * Return the sluggable configuration array for this model.
-     *
-     * @return array
-     */
+    * Return the sluggable configuration array for this model.
+    *
+    * @return array
+    */
     public function sluggable()
     {
         return [
-      'username' => [
-        'source'   => 'name',
-        'reserved' => ['my'],
-      ],
-    ];
+            'username' => [
+                'source'   => 'name',
+                'reserved' => ['my'],
+            ],
+        ];
     }
 
     /**
-     * Boot the model.
-     *
-     * @return void
-     */
+    * Boot the model.
+    *
+    * @return void
+    */
     public static function boot()
     {
         parent::boot();
@@ -101,10 +101,10 @@ class User extends Authenticatable
     }
 
     /**
-     * Confirm the user.
-     *
-     * @return void
-     */
+    * Confirm the user.
+    *
+    * @return void
+    */
     public function confirmEmail()
     {
         $this->verified = true;
@@ -113,8 +113,8 @@ class User extends Authenticatable
     }
 
     /**
-     * Returns true if the user is member of $group.
-     */
+    * Returns true if the user is member of $group.
+    */
     public function isMemberOf(Group $group)
     {
         // TODO refactor to avoid n+1
@@ -129,9 +129,9 @@ class User extends Authenticatable
     }
 
     /**
-     * Returns true if the user is admin of $group
-     * TODO : candidate for refactoring, generates a lot of n+1 slowness : Membership could be serialized in a field of the user DB and be readily available all the time.
-     */
+    * Returns true if the user is admin of $group
+    * TODO : candidate for refactoring, generates a lot of n+1 slowness : Membership could be serialized in a field of the user DB and be readily available all the time.
+    */
     public function isAdminOf(Group $group)
     {
         foreach ($this->memberships as $membership) {
@@ -155,8 +155,8 @@ class User extends Authenticatable
 
 
     /**
-     * Returns true if the user is admin.
-     */
+    * Returns true if the user is admin.
+    */
     public function isAdmin()
     {
         if ($this->admin == 1) {
@@ -167,8 +167,8 @@ class User extends Authenticatable
     }
 
     /**
-     * Returns true if the user's email is verified.
-     */
+    * Returns true if the user's email is verified.
+    */
     public function isVerified()
     {
         if ($this->verified == 1) {
@@ -189,16 +189,16 @@ class User extends Authenticatable
     }
 
     /**
-     * The groups this user is part of.
-     */
+    * The groups this user is part of.
+    */
     public function groups()
     {
         return $this->belongsToMany(\App\Group::class, 'membership')->where('membership.membership', '>=', \App\Membership::MEMBER)->orderBy('name')->withTimestamps();
     }
 
     /**
-     * The actions this user attends to.
-     */
+    * The actions this user attends to.
+    */
     public function actions()
     {
         return $this->belongsToMany(\App\Action::class);
@@ -220,32 +220,32 @@ class User extends Authenticatable
     }
 
     /**
-     * Discussions by this user.
-     */
+    * Discussions by this user.
+    */
     public function discussions()
     {
         return $this->hasMany(\App\Discussion::class);
     }
 
     /**
-     * Discussions by this user.
-     */
+    * Discussions by this user.
+    */
     public function comments()
     {
         return $this->hasMany(\App\Comment::class);
     }
 
     /**
-     * Discussions by this user.
-     */
+    * Discussions by this user.
+    */
     public function files()
     {
         return $this->hasMany(\App\File::class);
     }
 
     /**
-     * Activities by this user.
-     */
+    * Activities by this user.
+    */
     public function activities()
     {
         return $this->hasMany(\App\Activity::class)->orderBy('created_at', 'desc');
@@ -274,9 +274,9 @@ class User extends Authenticatable
     }
 
     /**
-     * Geocode the user
-     * Returns true if it worked, false if it didn't.
-     */
+    * Geocode the user
+    * Returns true if it worked, false if it didn't.
+    */
     public function geocode()
     {
         if ($this->address == '') {
@@ -298,42 +298,30 @@ class User extends Authenticatable
     }
 
 
-        /**
-         * Returns the current preference $key for the user, $default if not set.
-         */
-        public function getPreference($key, $default = false)
-        {
-            $preferences = $this->preferences;
-            if (isset($preferences[$key])) {
-                return $preferences[$key];
-            } else {
-                return $default;
-            }
+    /**
+    * Returns the current preference $key for the user, $default if not set.
+    */
+    public function getPreference($key, $default = false)
+    {
+        $preferences = $this->preferences;
+        if (isset($preferences[$key])) {
+            return $preferences[$key];
+        } else {
+            return $default;
         }
+    }
 
-        /**
-         * Set the preference $key to $value for the user
-         * No validation is made on this layer, preferences are stored in the json text field of the DB.
-         */
-        public function setPreference($key, $value)
-        {
-            $preferences = $this->preferences;
-            $preferences[$key] = $value;
-            $this->preferences = $preferences;
+    /**
+    * Set the preference $key to $value for the user
+    * No validation is made on this layer, preferences are stored in the json text field of the DB.
+    */
+    public function setPreference($key, $value)
+    {
+        $preferences = $this->preferences;
+        $preferences[$key] = $value;
+        $this->preferences = $preferences;
 
-            return $this->save();
-        }
+        return $this->save();
+    }
 
-
-        /**
-         * Returns a collection of permissions for the user in the $group
-         */
-        public function getPermissionsForGroup(Group $group)
-        {
-            // load membership for this user in the group
-              $membership = \App\Membership::where('user_id', '=', $this->id)->where('group_id', '=', $group->id)->first();
-            // get the permissions for this membership level from the group
-
-
-        }
 }

@@ -62,7 +62,10 @@ class GroupDiscussionController extends Controller
     */
     public function create(Request $request, Group $group)
     {
-        // we don't authorize at this stage since we might not have a group
+        if ($group->exists) {
+            $this->authorize('create-discussion', $group);
+        }
+
         $tags = $group->tagsUsed();
 
         return view('discussions.create')

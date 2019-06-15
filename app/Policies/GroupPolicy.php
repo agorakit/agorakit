@@ -6,15 +6,15 @@ use App\Group;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class GroupPolicy
+class GroupPolicy extends BasePolicy
 {
     use HandlesAuthorization;
 
     /**
-     * Create a new policy instance.
-     *
-     * @return void
-     */
+    * Create a new policy instance.
+    *
+    * @return void
+    */
     public function __construct()
     {
         //
@@ -29,8 +29,8 @@ class GroupPolicy
     }
 
     /**
-     * Viewing a group means reading title and presentation (= group home page).
-     */
+    * Viewing a group means reading title and presentation (= group home page).
+    */
     public function view(?User $user, Group $group)
     {
         if ($group->isSecret()) {
@@ -55,20 +55,20 @@ class GroupPolicy
     }
 
     /**
-     * Determine if the given post can be updated by the user.
-     *
-     * @param \App\User $user
-     *
-     * @return bool
-     */
+    * Determine if the given post can be updated by the user.
+    *
+    * @param \App\User $user
+    *
+    * @return bool
+    */
     public function update(User $user, Group $group)
     {
         return $user->isAdminOf($group);
     }
 
     /**
-     *   Can the user administer the group or not?
-     */
+    *   Can the user administer the group or not?
+    */
     public function administer(User $user, Group $group)
     {
         return $user->isAdminOf($group);
@@ -76,36 +76,73 @@ class GroupPolicy
 
     /*
     the following functions let us decide if a user can or cannot creat some stuff in a group
-    Curently it's based on the fact that you are an active member of the group
+    Curently it's based on the fact that you are an active member of the group OR we use the admin defined permissions
     */
 
     public function createDiscussion(User $user, Group $group)
     {
-        $permissions = $group->getSetting('permissions');
-        $member = collect($permissions['member']);
-        return $member->contains('create-discussion');
+        return $this->getPermissionsFor($user, $group)->contains('create-discussion');
+
+        /*
+        // if admin enabled custom permissions
+        if ($group->getSetting('custom_permissions')){
+            //get all the permissions for members and collect it in a nice collection
+            $permissions = $group->getSetting('permissions');
+            $member = collect($permissions['member']);
+            // check if the member can
+            return $member->contains('create-discussion');
+        }
 
 
         return $user->isMemberOf($group);
+        */
     }
 
     public function createFile(User $user, Group $group)
     {
+        if ($group->getSetting('custom_permissions')){
+            $permissions = $group->getSetting('permissions');
+            $member = collect($permissions['member']);
+            return $member->contains('create-file');
+        }
+
+
         return $user->isMemberOf($group);
     }
 
     public function createLink(User $user, Group $group)
     {
+        if ($group->getSetting('custom_permissions')){
+            $permissions = $group->getSetting('permissions');
+            $member = collect($permissions['member']);
+            return $member->contains('create-file');
+        }
+
+
         return $user->isMemberOf($group);
     }
 
     public function createAction(User $user, Group $group)
     {
+        if ($group->getSetting('custom_permissions')){
+            $permissions = $group->getSetting('permissions');
+            $member = collect($permissions['member']);
+            return $member->contains('create-action');
+        }
+
+
         return $user->isMemberOf($group);
     }
 
     public function createComment(User $user, Group $group)
     {
+        if ($group->getSetting('custom_permissions')){
+            $permissions = $group->getSetting('permissions');
+            $member = collect($permissions['member']);
+            return $member->contains('create-discussion');
+        }
+
+
         return $user->isMemberOf($group);
     }
 
@@ -159,6 +196,13 @@ class GroupPolicy
 
     public function invite(User $user, Group $group)
     {
+        if ($group->getSetting('custom_permissions')){
+            $permissions = $group->getSetting('permissions');
+            $member = collect($permissions['member']);
+            return $member->contains('invite');
+        }
+
+
         return $user->isMemberOf($group);
     }
 
