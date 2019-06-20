@@ -1,15 +1,23 @@
 // Bootstrap and Jquery
- try {
-     window.$ = window.jQuery = require('jquery/dist/jquery');
+try {
+  window.$ = window.jQuery = require('jquery/dist/jquery');
+  require('bootstrap');
 
-     require('bootstrap');
- } catch (e) {}
+  /**
+   * Add a scroll to top functionnalities
+   *
+   * @type {{default?}|{init: scrolltotop.init, controlHTML: string, controlattrs: {offsetx: number, offsety: number}, togglecontrol: scrolltotop.togglecontrol, state: {isvisible: boolean, shouldvisible: boolean}, keepfixed: scrolltotop.keepfixed, anchorkeyword: string, setting: {scrollduration: number, fadeduration: number[], startline: number, scrollto: number}, scrollup: scrolltotop.scrollup}}
+   */
+  let scrollToTop = require('./components/scrollToTop');
+  scrollToTop.init();
+
+} catch (e) {
+
+}
 
 
 // Open external links in blank tabs
 require('./external_links');
-
-
 
 
 // Trumbowyg wysiwyg editor
