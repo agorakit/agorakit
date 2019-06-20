@@ -64,11 +64,12 @@ class GroupDiscussionController extends Controller
     {
         // we don't authorize at this stage since we might not have a group
         $tags = $group->tagsUsed();
-
+        $title = trans('group.create_group_discussion');
         return view('discussions.create')
         ->with('group', $group)
         ->with('all_tags', $tags)
-        ->with('tab', 'discussion');
+        ->with('tab', 'discussion')
+        ->with('title', $title);
     }
 
     /**

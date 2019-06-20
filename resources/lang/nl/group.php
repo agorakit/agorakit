@@ -6,6 +6,7 @@ return [
   'create_a_group_button' => 'Een groep aanmaken',
   'create_button'         => 'Maak de groep aan',
   'create_group_title'    => 'Maak een titel aan',
+  'create_group_discussion' => 'Créer une discussion de groupe',
   'description'           => 'Beschrijving van de groep',
   'features'              => 'Beheer functies',
   'features_help'         => 'Schakel de functies van uw groep in of uit',
