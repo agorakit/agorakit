@@ -22,6 +22,7 @@ require('./external_links');
 
 // Trumbowyg wysiwyg editor
 require('trumbowyg/dist/trumbowyg.min.js');
+require('./components/trumbowyg.pasteembed');
 // ...with mention plugin
 require('trumbowyg/dist/plugins/mention/trumbowyg.mention.min.js');
 
