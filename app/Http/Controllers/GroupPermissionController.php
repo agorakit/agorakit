@@ -51,13 +51,18 @@ class GroupPermissionController extends Controller
 
             $member = collect();
 
-            if ($request->has('member')) {
-                foreach ($request->get('member') as $member_perm) {
-                    $member->push($member_perm);
-                }
+            if ($request->has('member-create-discussion')) {
+                $member->push('create-discussion');
             }
 
-            // todo filter with only allowed values here
+            if ($request->has('member-create-file')) {
+                $member->push('create-file');
+            }
+
+            if ($request->has('member-create-action')) {
+                $member->push('create-action');
+            }
+
             $permissions['member'] = $member->toArray();
 
             $group->setSetting('permissions', $permissions);

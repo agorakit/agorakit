@@ -39,12 +39,12 @@
 
                 <td>
                     <div class="form-check">
-                        {!!Form::checkbox('member[]', 'create-discussion', $member->contains('create-discussion'))!!}
+                        {!!Form::checkbox('member-create-discussion', 'yes', $member->contains('create-discussion'))!!}
                     </div>
                 </td>
                 <td>
                     <div class="form-check">
-                        {!!Form::checkbox('admin[]', 'create-discussion', $admin->contains('create-discussion'), ['disabled'])!!}
+                        {!!Form::checkbox('admin-create-discussion', 'yes', $admin->contains('create-discussion'), ['disabled'])!!}
                     </div>
                 </td>
             </tr>
@@ -56,12 +56,12 @@
 
                 <td>
                     <div class="form-check">
-                        {!!Form::checkbox('member[]', 'create-file', $member->contains('create-file'))!!}
+                        {!!Form::checkbox('member-create-file', 'yes', $member->contains('create-file'))!!}
                     </div>
                 </td>
                 <td>
                     <div class="form-check">
-                        {!!Form::checkbox('admin[]', 'create-file', $admin->contains('create-file'), ['disabled'])!!}
+                        {!!Form::checkbox('admin-create-file', 'yes', $admin->contains('create-file'), ['disabled'])!!}
                     </div>
                 </td>
             </tr>
@@ -74,12 +74,12 @@
 
                 <td>
                     <div class="form-check">
-                        {!!Form::checkbox('member[]', 'create-action', $member->contains('create-action'))!!}
+                        {!!Form::checkbox('member-create-action', 'yes', $member->contains('create-action'))!!}
                     </div>
                 </td>
                 <td>
                     <div class="form-check">
-                        {!!Form::checkbox('admin[]', 'create-action', $admin->contains('create-action'), ['disabled'])!!}
+                        {!!Form::checkbox('admin-create-action', 'yes', $admin->contains('create-action'), ['disabled'])!!}
                     </div>
                 </td>
             </tr>
@@ -91,12 +91,12 @@
 
                 <td>
                     <div class="form-check">
-                        {!!Form::checkbox('member[]', 'invite', $member->contains('invite'))!!}
+                        {!!Form::checkbox('member-invite', 'yes', $member->contains('invite'))!!}
                     </div>
                 </td>
                 <td>
                     <div class="form-check">
-                        {!!Form::checkbox('admin[]', 'invite', $admin->contains('invite'), ['disabled'])!!}
+                        {!!Form::checkbox('admin-invite', 'yes', $admin->contains('invite'), ['disabled'])!!}
                     </div>
                 </td>
             </tr>
