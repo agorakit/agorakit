@@ -297,6 +297,21 @@ class UserTest extends Tests\BrowserKitTestCase
     }
 
 
+    /**
+     * Admin will disable discussion creation for members
+     */
+    public function testNewbieCantChangePermissionsOnGroup()
+    {
+        $group = $this->getTestGroup();
+
+        $this->actingAs($this->newbie())
+        ->get('groups/'.$group->id.'/permissions')
+        ->assertResponseStatus(403);
+
+        // using get instead of visit to test responses is documented here : https://laracasts.com/discuss/channels/testing/testing-a-403-response-status-after-submiting-a-form-in-laravel-51?page=1#reply=188868
+    }
+
+
 
     /**
      * Admin will disable discussion creation for members
@@ -321,8 +336,8 @@ class UserTest extends Tests\BrowserKitTestCase
         $group = $this->getTestGroup();
 
         $this->actingAs($this->newbie())
-        ->visit('groups/'.$group->id.'/discussions')
-        ->dontSee(trans('discussion.create_one_button'));
+        ->get('groups/'.$group->id.'/discussions/create')
+        ->assertResponseStatus(403);
     }
 
     public function testNewbieCantCreateActionAnymore()
@@ -330,8 +345,8 @@ class UserTest extends Tests\BrowserKitTestCase
         $group = $this->getTestGroup();
 
         $this->actingAs($this->newbie())
-        ->visit('groups/'.$group->id.'/actions')
-        ->dontSee(trans('action.create_one_button'));
+        ->get('groups/'.$group->id.'/actions/create')
+        ->assertResponseStatus(403);
     }
 
 
