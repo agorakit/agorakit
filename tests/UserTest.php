@@ -27,6 +27,34 @@ class UserTest extends Tests\BrowserKitTestCase
 
     */
 
+
+    /* Some utility function*/
+
+    public function admin()
+    {
+        return App\User::where('email', 'admin@agorakit.org')->firstOrFail();
+    }
+
+    public function newbie()
+    {
+        return App\User::where('email', 'newbie@agorakit.org')->firstOrFail();
+    }
+
+    public function getTestGroup()
+    {
+        return App\Group::where('name', 'Test group')->firstOrFail();
+    }
+
+    public function getPrivateGroup()
+    {
+        return App\Group::where('name', 'Private test group')->firstOrFail();
+    }
+
+
+
+
+    /* tests starts here : let's setup the DB
+    */
     public function testSetupItAll()
     {
         Artisan::call('migrate:refresh');
@@ -36,10 +64,8 @@ class UserTest extends Tests\BrowserKitTestCase
     }
 
     /**
-     * A basic test example.
-     *
-     * @return void
-     */
+    * Register our first user
+    */
     public function testUserRegistration()
     {
         Mail::fake();
@@ -231,6 +257,9 @@ class UserTest extends Tests\BrowserKitTestCase
         $this->assertTrue($user->isAdminOf($group));
     }
 
+
+
+
     /* now let's test emails */
 
     public function testNotificationReceived()
@@ -266,4 +295,59 @@ class UserTest extends Tests\BrowserKitTestCase
             return $mail->hasTo($user->email);
         });
     }
+
+
+    /**
+     * Admin will disable discussion creation for members
+     */
+    public function testNewbieCantChangePermissionsOnGroup()
+    {
+        $group = $this->getTestGroup();
+
+        $this->actingAs($this->newbie())
+        ->get('groups/'.$group->id.'/permissions')
+        ->assertResponseStatus(403);
+
+        // using get instead of visit to test responses is documented here : https://laracasts.com/discuss/channels/testing/testing-a-403-response-status-after-submiting-a-form-in-laravel-51?page=1#reply=188868
+    }
+
+
+
+    /**
+     * Admin will disable discussion creation for members
+     */
+    public function testChangePermissionsOnGroup()
+    {
+        $group = $this->getTestGroup();
+
+        $this->actingAs($this->admin())
+        ->visit('groups/'.$group->id.'/permissions')
+        ->see('Permissions')
+        ->check('custom_permissions')
+        ->uncheck('member-create-discussion')
+        ->uncheck('member-create-file')
+        ->uncheck('member-create-action')
+        ->press(trans('messages.save'))
+        ->see(trans('messages.ressource_updated_successfully'));
+    }
+
+    public function testNewbieCantCreateDiscussionAnymore()
+    {
+        $group = $this->getTestGroup();
+
+        $this->actingAs($this->newbie())
+        ->get('groups/'.$group->id.'/discussions/create')
+        ->assertResponseStatus(403);
+    }
+
+    public function testNewbieCantCreateActionAnymore()
+    {
+        $group = $this->getTestGroup();
+
+        $this->actingAs($this->newbie())
+        ->get('groups/'.$group->id.'/actions/create')
+        ->assertResponseStatus(403);
+    }
+
+
 }

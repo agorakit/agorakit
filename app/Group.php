@@ -281,6 +281,44 @@ class Group extends Model
         return $query->where('group_type', '!=', $this::SECRET);
     }
 
+
+
+    /**
+    * Return true if the group has a cover image.
+    */
+    public function hasCover()
+    {
+        $path = '/groups/'.$this->id.'/cover.jpg';
+
+        return Storage::disk('local')->exists($path);
+    }
+
+    /**
+    * Geocode the item
+    * Returns true if it worked, false if it didn't.
+    */
+    public function geocode()
+    {
+        if ($this->address == '') {
+            $this->latitude = 0;
+            $this->longitude = 0;
+
+            return true;
+        }
+
+        $geocode = app('geocoder')->geocode($this->address)->get()->first();
+
+        if ($geocode) {
+            $this->latitude = $geocode->getCoordinates()->getLatitude();
+            $this->longitude = $geocode->getCoordinates()->getLongitude();
+
+            return true;
+        }
+
+        return false;
+    }
+
+
     /**
     * Returns the current setting $key for the group, $default if not set.
     */
@@ -433,38 +471,4 @@ class Group extends Model
         return $tags;
     }
 
-    /**
-    * Return true if the group has a cover image.
-    */
-    public function hasCover()
-    {
-        $path = '/groups/'.$this->id.'/cover.jpg';
-
-        return Storage::disk('local')->exists($path);
-    }
-
-    /**
-    * Geocode the item
-    * Returns true if it worked, false if it didn't.
-    */
-    public function geocode()
-    {
-        if ($this->address == '') {
-            $this->latitude = 0;
-            $this->longitude = 0;
-
-            return true;
-        }
-
-        $geocode = app('geocoder')->geocode($this->address)->get()->first();
-
-        if ($geocode) {
-            $this->latitude = $geocode->getCoordinates()->getLatitude();
-            $this->longitude = $geocode->getCoordinates()->getLongitude();
-
-            return true;
-        }
-
-        return false;
-    }
 }

@@ -6,15 +6,15 @@ use App\Group;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class GroupPolicy
+class GroupPolicy extends BasePolicy
 {
     use HandlesAuthorization;
 
     /**
-     * Create a new policy instance.
-     *
-     * @return void
-     */
+    * Create a new policy instance.
+    *
+    * @return void
+    */
     public function __construct()
     {
         //
@@ -29,12 +29,18 @@ class GroupPolicy
     }
 
     /**
-     * Viewing a group means reading title and presentation (= group home page).
-     */
+    * Viewing a group means reading title and presentation (= group home page).
+    * Only secret groups are hidden from non members
+    */
     public function view(?User $user, Group $group)
     {
         if ($group->isSecret()) {
-            return false;
+            if ($user->isMemberOf($group)) {
+                return true;
+            }
+            else {
+                return false;
+            }
         }
 
         return true;
@@ -55,20 +61,20 @@ class GroupPolicy
     }
 
     /**
-     * Determine if the given post can be updated by the user.
-     *
-     * @param \App\User $user
-     *
-     * @return bool
-     */
+    * Determine if the given group can be updated by the user.
+    *
+    * @param \App\User $user
+    *
+    * @return bool
+    */
     public function update(User $user, Group $group)
     {
         return $user->isAdminOf($group);
     }
 
     /**
-     *   Can the user administer the group or not?
-     */
+    *   Can the user administer the group or not?
+    */
     public function administer(User $user, Group $group)
     {
         return $user->isAdminOf($group);
@@ -76,32 +82,33 @@ class GroupPolicy
 
     /*
     the following functions let us decide if a user can or cannot creat some stuff in a group
-    Curently it's based on the fact that you are an active member of the group
+    Curently it's based on the fact that you are an active member of the group OR we use the admin defined permissions
+    The function getPermissionsFor() is defined in the base class BasePolicy::getPermissionsFor()
     */
 
     public function createDiscussion(User $user, Group $group)
     {
-        return $user->isMemberOf($group);
+        return $this->getPermissionsFor($user, $group)->contains('create-discussion');
     }
 
     public function createFile(User $user, Group $group)
     {
-        return $user->isMemberOf($group);
+        return $this->getPermissionsFor($user, $group)->contains('create-file');
     }
 
     public function createLink(User $user, Group $group)
     {
-        return $user->isMemberOf($group);
+        return $this->getPermissionsFor($user, $group)->contains('create-file');
     }
 
     public function createAction(User $user, Group $group)
     {
-        return $user->isMemberOf($group);
+        return $this->getPermissionsFor($user, $group)->contains('create-action');
     }
 
     public function createComment(User $user, Group $group)
     {
-        return $user->isMemberOf($group);
+        return $this->getPermissionsFor($user, $group)->contains('create-discussion');
     }
 
     public function viewDiscussions(?User $user, Group $group)
@@ -154,6 +161,13 @@ class GroupPolicy
 
     public function invite(User $user, Group $group)
     {
+        if ($group->getSetting('custom_permissions')){
+            $permissions = $group->getSetting('permissions');
+            $member = collect($permissions['member']);
+            return $member->contains('invite');
+        }
+
+
         return $user->isMemberOf($group);
     }
 

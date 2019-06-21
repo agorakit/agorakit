@@ -47,12 +47,6 @@ class ActionPolicy
         }
     }
 
-    /*
-        public function create(User $user, Group $group)
-        {
-            return $user->isMemberOf($group);
-        }
-    */
 
     public function update(User $user, Action $action)
     {

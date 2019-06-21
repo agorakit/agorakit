@@ -26,11 +26,13 @@ class UserPolicy
         }
     }
 
+    // A user can edit his/her own profile
     public function update(User $user, User $user2)
     {
         return $user->id == $user2->id;
     }
 
+    // A user can delete his/her own profile
     public function delete(User $user, User $user2)
     {
         return $user->id == $user2->id;
