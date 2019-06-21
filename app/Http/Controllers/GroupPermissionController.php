@@ -63,6 +63,10 @@ class GroupPermissionController extends Controller
                 $member->push('create-action');
             }
 
+            if ($request->has('member-invite')) {
+                $member->push('invite');
+            }
+
             $permissions['member'] = $member->toArray();
 
             $group->setSetting('permissions', $permissions);

@@ -7,7 +7,6 @@
   <script>
   $(document).ready(function() {
     $('.data-table').DataTable( {
-      responsive: true,
       "pageLength": 25,
       dom: 'Bfrtip',
       buttons: [
