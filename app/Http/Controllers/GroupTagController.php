@@ -24,12 +24,23 @@ class GroupTagController extends Controller
     {
         $this->authorize('view-tags', $group);
 
+        if ($request->get('limit_tags') == 'yes')
+        {
+            $group->limitTags(true);
+        }
+
+        if ($request->get('limit_tags') == 'no')
+        {
+            $group->limitTags(false);
+        }
+
         $tags = $group->allowedTags();
+
 
         return view('tags.index')
         ->with('tags', $tags)
         ->with('group', $group)
-        ->with('tab', 'tags');
+        ->with('tab', 'admin');
     }
 
 
@@ -50,7 +61,7 @@ class GroupTagController extends Controller
         ->with('title', $group->name)
         ->with('tag', $tag)
         ->with('group', $group)
-        ->with('tab', 'tag');
+        ->with('tab', 'admin');
     }
 
 
@@ -69,7 +80,7 @@ class GroupTagController extends Controller
         ->with('group', $group)
         ->with('tags', $tags)
         ->with('tag', $tag)
-        ->with('tab', 'tags');
+        ->with('tab', 'admin');
     }
 
     /**
@@ -114,7 +125,7 @@ class GroupTagController extends Controller
         return view('tags.edit')
         ->with('tag', $tag)
         ->with('group', $group)
-        ->with('tab', 'tag');
+        ->with('tab', 'admin');
     }
 
     /**
@@ -153,7 +164,7 @@ class GroupTagController extends Controller
         return view('tags.delete')
         ->with('group', $group)
         ->with('tag', $tag)
-        ->with('tab', 'tag');
+        ->with('tab', 'admin');
 
     }
 
