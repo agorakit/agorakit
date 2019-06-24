@@ -471,4 +471,21 @@ class Group extends Model
         return $tags;
     }
 
+    /**
+    * Enable or disable limited tags on this group ($limit must be true or false)
+    *
+    */
+    public function limitTags($limit)
+    {
+        $this->setSetting('limit_tag', $limit);
+    }
+
+    /**
+    * Return true if tags are limited in this group, false otherwise
+    */
+    public function tagsAreLimited()
+    {
+        return $this->getSetting('limit_tag', false);
+    }
+
 }
