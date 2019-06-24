@@ -39,7 +39,13 @@ class GroupFileController extends Controller
             abort(404, 'invalid sort type');
         }
 
-        $tags = $group->tagsInFiles();
+        if ($group->tagsAreLimited()) {
+            $tags = $group->allowedTags();
+        }
+        else {
+            $tags = $group->tagsInFiles();
+        }
+
 
         // Query depending of the request
         // filter by tags and sort order
