@@ -10,8 +10,8 @@ First follow the installation instructions including the creation of sample cont
 
 
 
-Option 1 : Using php's built in server
---------------------------------------
+Setup your environment, option 1 : Using php's built in server
+--------------------------------------------------------------
 
 
 If you want to start a local server for development::
@@ -22,8 +22,8 @@ The install will be available to 127.0.0.1:8000
 
 
 
-Option 2 : Using Vagrant, for development purposes
---------------------------------------------------
+Setup your environment, option 2 : Using Vagrant
+------------------------------------------------
 
 To use vagrant, you need to install : [Virtual Box](https://www.virtualbox.org/wiki/Downloads) and [Vagrant](https://www.virtualbox.org/wiki/Downloads).
 
