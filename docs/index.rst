@@ -12,23 +12,29 @@ Manage communication, decision making, membership, files and events. Flexible em
 
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :caption: Installation
+
    installation
    update
 
+
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :caption: Usage
+
    usage
 
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :caption: Development
+
    development
 
+
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :caption: Advanced topics
+
    external_authentification

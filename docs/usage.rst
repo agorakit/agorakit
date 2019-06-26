@@ -8,7 +8,7 @@ Open your browser and go to the url of your web server. If using php's built-in 
 
 Register account
 ----------------
-Register a first user account : it will be you, and you will be super admin, yeah!
+Register a first user account : it will be you, and you will be super admin, yeah! Note that you need to have email sending working in order to validate your account.
 
 Welcome group
 -------------
