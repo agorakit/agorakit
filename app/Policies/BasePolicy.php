@@ -36,7 +36,7 @@ class BasePolicy
             }
             else {
                 // return default permissions for members
-                return collect('create-discussion', 'create-action', 'create-file', 'invite');
+                return collect(['create-discussion', 'create-action', 'create-file', 'invite']);
             }
         }
 
@@ -44,7 +44,7 @@ class BasePolicy
         if ($membership->membership == Membership::ADMIN)
         {
             // currently we return all possible permissions for group admins
-            return collect('create-discussion', 'create-action', 'create-file', 'invite');
+            return collect(['create-discussion', 'create-action', 'create-file', 'invite']);
 
             // check if the groups has custom permissions enabled
             if ($group->getSetting('custom_permissions', false)) {
@@ -53,7 +53,7 @@ class BasePolicy
             }
             else {
                 // return default permissions for admins
-                return collect('create-discussion', 'create-action', 'create-file', 'invite');
+                return collect(['create-discussion', 'create-action', 'create-file', 'invite']);
             }
 
         }
