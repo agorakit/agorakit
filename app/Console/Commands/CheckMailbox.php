@@ -153,7 +153,7 @@ class CheckMailbox extends Command
                                     $success = true;
                                 } else {
                                     $this->error('Could not create discussion');
-                                    Log::error('Could not create discussion', ['mail'=> $mail, 'discussion' => $discussion]);
+                                    Log::error('Could not create discussion', ['mail'=> $message, 'discussion' => $discussion]);
                                 }
                             } else {
                                 $this->error($user->name.' is not a member of '.$group->name);
