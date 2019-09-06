@@ -21,6 +21,10 @@ class BasePolicy
         // load membership for this user in the group
         $membership = Membership::where('user_id', '=', $user->id)->where('group_id', '=', $group->id)->first();
 
+        if (!$membership){
+            return collect();
+        }
+        
         // return empty collection if no memberhsip found
         if (!$membership->exists) {
             return collect();
