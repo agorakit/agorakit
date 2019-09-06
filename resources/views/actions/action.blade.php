@@ -50,9 +50,11 @@
 
 
     <div>
-      <div class="d-flex users mt-2 mb-2">
+      <div class="d-flex flex-wrap users mt-2 mb-2">
         @foreach($action->users as $user)
+        <div class="mb-1">
           @include('users.user-avatar')
+        </div>
         @endforeach
       </div>
 
