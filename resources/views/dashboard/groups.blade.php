@@ -22,6 +22,9 @@
 
     <div class="groups">
         @if ($groups)
+
+            {!! $groups->appends(request()->query())->links() !!}
+
             <div class="row mb-3">
                 @forelse( $groups as $group )
                     <div class="col-md-4">
@@ -101,8 +104,12 @@
                         {{trans('messages.nothing_yet')}}
                     </div>
                 @endforelse
-                {!!$groups->render()!!}
+
+
             </div>
+
+            {!! $groups->appends(request()->query())->links() !!}
+            
         @else
             <div class="alert alert-info" role="alert">
                 {{trans('messages.nothing_yet')}}
