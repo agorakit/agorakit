@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Text/html processing and filters
- * The most used ont is filter($content)
- *
- * TODO : Refactor this so that is is part of the models ?
- * TODO : caching of all those embeded files and discussions queries
- */
+* Text/html processing and filters
+* The most used ont is filter($content)
+*
+* TODO : Refactor this so that is is part of the models ?
+* TODO : caching of all those embeded files and discussions queries
+*/
 
 
 /**
@@ -39,9 +39,11 @@ function filter($content)
 
     // link to d:xx discussions
     $content = highlightDiscussions($content);
+    
 
     // link to urls
-    $content = linkUrlsInTrustedHtml($content);
+    $linkify = new \Misd\Linkify\Linkify();
+    $content = $linkify->process($content);
 
     return $content;
 }
