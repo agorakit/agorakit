@@ -78,6 +78,9 @@ class DeleteFiles extends Command
         if ($file->deleteFromStorage())
         {
           $this->line($file->name . ' deleted from storage');
+
+          // also delete the db entry
+          $file->forceDelete();
         }
         else {
           $this->error($file->name . ' NOT deleted from storage');
