@@ -19,6 +19,7 @@
     "intervention/imagecache": "2.*",
     "kkomelin/laravel-translatable-string-exporter": "^1.2",
     "kwi/urllinker": "dev-master",
+    "fideloper/proxy": "^4.0",
     "laravel/framework": "5.8.*",
     "laravelcollective/html": "5.8.*",
     "nicolaslopezj/searchable": "^1.10",
