@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Group;
 use Carbon\Carbon;
+use Auth;
 
 class IcalController extends Controller
 {
@@ -12,18 +13,41 @@ class IcalController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Display a listing of the resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function index()
     {
         // 1. Create new calendar
         $vCalendar = new \Eluceo\iCal\Component\Calendar(config('app.url'));
         $vCalendar->setName(config('agorakit.name'));
 
+        // decide which groups to show
+        if (Auth::check()) {
+            if (Auth::user()->getPreference('show') == 'all') {
+                if (Auth::user()->isAdmin()) { // super admin sees everything
+                    $groups = \App\Group::get()
+                    ->pluck('id');
+                } else {
+                    $groups = \App\Group::public()
+                    ->get()
+                    ->pluck('id')
+                    ->merge(Auth::user()->groups()->pluck('groups.id'));
+                }
+            } else {
+                $groups = Auth::user()->groups()->pluck('groups.id');
+            }
+        } else {
+            $groups = \App\Group::public()->get()->pluck('id');
+        }
+
+
         // returns actions from the last 60 days
-        $actions = \App\Action::with('group')->where('start', '>=', Carbon::now()->subDays(60))->get();
+        $actions = \App\Action::with('group')
+        ->whereIn('group_id', $groups)
+        ->where('start', '>=', Carbon::now()->subDays(60))
+        ->get();
 
         foreach ($actions as $action) {
             // 2. Create an event
