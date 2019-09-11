@@ -20,13 +20,12 @@ class GroupController extends Controller
 
     public function index(Request $request)
     {
-
-    // TODO: show the user groups first !!!
-
+        
         $groups = new Group();
-        $groups = $groups->notSecret()
-    ->with('tags')
-    ->orderBy('updated_at', 'desc');
+        $groups = $groups->notSecret();
+
+
+        $groups = $groups->with('tags')->orderBy('updated_at', 'desc');
 
         if (Auth::check()) {
             $groups = $groups->with('membership');
@@ -39,17 +38,40 @@ class GroupController extends Controller
         $groups = $groups->paginate(21);
 
         return view('dashboard.groups')
-    ->with('tab', 'groups')
-    ->with('groups', $groups);
+        ->with('tab', 'groups')
+        ->with('groups', $groups);
     }
 
+
+    public function indexOfMyGroups(Request $request)
+    {
+        $groups = $request->user()->groups();
+
+        $groups = $groups->with('tags')->orderBy('updated_at', 'desc');
+
+        if (Auth::check()) {
+            $groups = $groups->with('membership');
+        }
+
+        if ($request->has('search')) {
+            $groups = $groups->search($request->get('search'));
+        }
+
+        $groups = $groups->paginate(21);
+
+        return view('dashboard.mygroups')
+        ->with('tab', 'groups')
+        ->with('groups', $groups);
+    }
+
+
     /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+    * Display the specified resource.
+    *
+    * @param int $id
+    *
+    * @return Response
+    */
     public function show(Group $group)
     {
         $this->authorize('view', $group);
@@ -64,11 +86,11 @@ class GroupController extends Controller
         if (Auth::check()) {
             if (Gate::allows('viewDiscussions', $group)) {
                 $discussions = $group->discussions()
-        ->has('user')
-        ->with('user', 'group', 'userReadDiscussion')
-        ->orderBy('updated_at', 'desc')
-        ->limit(5)
-        ->get();
+                ->has('user')
+                ->with('user', 'group', 'userReadDiscussion')
+                ->orderBy('updated_at', 'desc')
+                ->limit(5)
+                ->get();
             }
 
             if (Gate::allows('viewFiles', $group)) {
@@ -92,12 +114,12 @@ class GroupController extends Controller
             }
             if ($group->isOpen()) {
                 $discussions = $group->discussions()
-        ->has('user')
-        ->with('user', 'group')
-        ->withCount('comments')
-        ->orderBy('updated_at', 'desc')
-        ->limit(5)
-        ->get();
+                ->has('user')
+                ->with('user', 'group')
+                ->withCount('comments')
+                ->orderBy('updated_at', 'desc')
+                ->limit(5)
+                ->get();
 
                 $files = $group->files()->with('user')->orderBy('created_at', 'desc')->limit(5)->get();
                 $actions = $group->actions()->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->limit(10)->get();
@@ -105,22 +127,22 @@ class GroupController extends Controller
         }
 
         return view('groups.show')
-    ->with('title', $group->name)
-    ->with('group', $group)
-    ->with('discussions', $discussions)
-    ->with('actions', $actions)
-    ->with('files', $files)
-    ->with('activities', $activities)
-    ->with('admins', $group->admins()->get())
-    ->with('group_email', $group_email)
-    ->with('tab', 'home');
+        ->with('title', $group->name)
+        ->with('group', $group)
+        ->with('discussions', $discussions)
+        ->with('actions', $actions)
+        ->with('files', $files)
+        ->with('activities', $activities)
+        ->with('admins', $group->admins()->get())
+        ->with('group_email', $group_email)
+        ->with('tab', 'home');
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
+    * Show the form for creating a new resource.
+    *
+    * @return Response
+    */
     public function create()
     {
         Gate::authorize('create', \App\Group::class);
@@ -132,10 +154,10 @@ class GroupController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
+    * Store a newly created resource in storage.
+    *
+    * @return Response
+    */
     public function store(Request $request)
     {
         Gate::authorize('create', \App\Group::class);
@@ -168,8 +190,8 @@ class GroupController extends Controller
         if ($group->isInvalid()) {
             // Oops.
             return redirect()->route('groups.create')
-      ->withErrors($group->getErrors())
-      ->withInput();
+            ->withErrors($group->getErrors())
+            ->withInput();
         }
         $group->save();
 
@@ -215,30 +237,30 @@ class GroupController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+    * Show the form for editing the specified resource.
+    *
+    * @param int $id
+    *
+    * @return Response
+    */
     public function edit(Request $request, Group $group)
     {
         $this->authorize('update', $group);
 
         return view('groups.edit')
-    ->with('group', $group)
-    ->with('all_tags', \App\Group::allTags())
-    ->with('model_tags', $group->tags)
-    ->with('tab', 'admin');
+        ->with('group', $group)
+        ->with('all_tags', \App\Group::allTags())
+        ->with('model_tags', $group->tags)
+        ->with('tab', 'admin');
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+    * Update the specified resource in storage.
+    *
+    * @param int $id
+    *
+    * @return Response
+    */
     public function update(Request $request, Group $group)
     {
         $this->authorize('update', $group);
@@ -288,8 +310,8 @@ class GroupController extends Controller
         if ($group->isInvalid()) {
             // Oops.
             return redirect()->route('groups.edit', $group)
-      ->withErrors($group->getErrors())
-      ->withInput();
+            ->withErrors($group->getErrors())
+            ->withInput();
         }
 
         // handle cover
@@ -310,17 +332,17 @@ class GroupController extends Controller
         $this->authorize('delete', $group);
 
         return view('groups.delete')
-      ->with('group', $group)
-      ->with('tab', 'home');
+        ->with('group', $group)
+        ->with('tab', 'home');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Remove the specified resource from storage.
+    *
+    * @param int $id
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function destroy(Request $request, Group $group)
     {
         $this->authorize('delete', $group);
@@ -331,14 +353,14 @@ class GroupController extends Controller
     }
 
     /**
-     * Show the revision history of the group.
-     */
+    * Show the revision history of the group.
+    */
     public function history(Group $group)
     {
         $this->authorize('history', $group);
 
         return view('groups.history')
-    ->with('group', $group)
-    ->with('tab', 'home');
+        ->with('group', $group)
+        ->with('tab', 'home');
     }
 }
