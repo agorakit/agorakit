@@ -39,7 +39,15 @@ function filter($content)
 
     // link to d:xx discussions
     $content = highlightDiscussions($content);
-    
+
+    // embed youtube and others
+    // we create an embera class with offline support to reduce load : https://github.com/mpratt/Embera#offline-support
+    $config = array(
+      'oembed' => false
+    );
+
+    $embera = new \Embera\Embera($config);
+    $content = $embera->autoEmbed($content);
 
     // link to urls
     $linkify = new \Misd\Linkify\Linkify();
