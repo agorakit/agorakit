@@ -66,7 +66,7 @@ function safe_html($content)
 */
 function highlightMentions($content)
 {
-    return preg_replace("/(?<!\w)@([\w_\-\.]+)/", '<a href="/users/$1">@$1</a> ', $content);
+    return preg_replace("/(?<!\w)@([\w_\-\.]+)/", '<a href="' . URL::to('/') . '/users/$1">@$1</a> ', $content);
 }
 
 /**
