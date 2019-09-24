@@ -10,6 +10,7 @@ use DB;
 use Illuminate\Console\Command;
 use Log;
 use Mail;
+use Auth;
 
 class SendNotifications extends Command
 {
@@ -95,6 +96,9 @@ class SendNotifications extends Command
         ->first();
 
         if ($membership) {
+
+            Auth::login($user);
+
             $last_notification = $membership->notified_at;
 
             // find unread discussions since timestamp
