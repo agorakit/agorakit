@@ -106,3 +106,6 @@ Idea & development : Philippe Jadin
 Contributors : https://github.com/philippejadin/agorakit/graphs/contributors
 Logo : Patrick Iacono
 Illustrations : Raphaëlle Goffaux
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE5NDcxNjg1MjZdfQ==
+-->
