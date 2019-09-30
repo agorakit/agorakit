@@ -44,7 +44,7 @@
   @endif
 
 
-  <p><a href="{{action('IcalController@index')}}">{{trans('messages.download_ical')}}</a></p>
+  @include('dashboard.ical')
 
 
 @endsection

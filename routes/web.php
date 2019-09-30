@@ -152,6 +152,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('users/{user}/contact', 'UserController@contactForm')->name('users.contactform');
     Route::post('users/{user}/contact', 'UserController@contact')->name('users.contact');
 
+
+    // Ical feed per user
+    Route::get('users/{user}/ical', 'UserIcalController@index')->name('users.ical');
+
     // Reactions on comments
 
     Route::get('comments/{comment}/react/{context}', 'CommentReactionController@store');

@@ -34,7 +34,8 @@
 
 
   <div class="mt-5" id="calendar"></div>
-  <p><a href="{{action('IcalController@index')}}">{{trans('messages.download_ical')}}</a></p>
+
+@include('dashboard.ical')
 
 
 
