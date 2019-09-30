@@ -74,4 +74,13 @@ class FileDownloadController extends Controller
 
         return redirect('images/extensions/' . $file->icon() . '.svg');
     }
+
+    /**
+    * Returns a square svg icon of the file.
+    */
+    public function icon(Group $group, File $file)
+    {
+        $this->authorize('view', $file);
+        return redirect('images/extensions/' . $file->icon() . '.svg');
+    }
 }

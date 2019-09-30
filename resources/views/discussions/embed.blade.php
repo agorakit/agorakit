@@ -1,7 +1,9 @@
-
-<a href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}">
-  <div class="discussion-embed">
-    <div class="title"><i class="far fa-comment"></i> {{ $discussion->name }}</div>
-    <div class="summary">{{ summary($discussion->body) }}</div>
+<div class="card" style="max-width: 30rem;">
+  <div class="card-body">
+    <h5 class="card-title"><i class="far fa-comment"></i> {{ $discussion->name }}</h5>
+    <p class="card-text">{{ summary($discussion->body) }}</p>
+    <a href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}" class="btn btn-primary">
+      {{trans('messages.visit')}}
+    </a>
   </div>
-</a>
+</div>
