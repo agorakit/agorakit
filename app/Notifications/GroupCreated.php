@@ -30,7 +30,7 @@ class GroupCreated extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -58,8 +58,9 @@ class GroupCreated extends Notification
      */
     public function toArray($notifiable)
     {
+        // idea of storing everything from the model taken from here : https://stackoverflow.com/a/44909022
         return [
-            //
+            'group' => $this->group->toArray()
         ];
     }
 }

@@ -32,7 +32,7 @@ class AppliedToGroup extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -61,7 +61,8 @@ class AppliedToGroup extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+          'group' => $this->group->toArray(),
+          'user' => $this->user->toArray()
         ];
     }
 }
