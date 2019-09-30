@@ -39,7 +39,7 @@ class NotifyMentionedUsers
                 // we find users only in the group from where the mention was made
                 $user = $comment->discussion->group->users->where('username', $username)->first();
                 if ($user) {
-                    Notification::send($user, new \App\Notifications\Mention($comment, \Auth::user()));
+                    Notification::send($user, new \App\Notifications\MentionedUser($comment, \Auth::user()));
                     flash($user->name.' '.trans('messages.notified'));
                 }
             }

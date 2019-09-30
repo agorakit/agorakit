@@ -9,7 +9,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class Mention extends Notification
+class MentionedUser extends Notification
 {
     use Queueable;
 
@@ -33,7 +33,7 @@ class Mention extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -64,7 +64,8 @@ class Mention extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+          'comment' => $this->comment->toArray(),
+          'user' => $this->user->toArray()
         ];
     }
 }
