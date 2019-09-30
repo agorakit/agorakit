@@ -110,6 +110,10 @@ class RegisterController extends Controller
                 $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $invite->group_id]);
                 $membership->membership = \App\Membership::MEMBER;
                 $membership->save();
+
+                // mark the invite as claimed now
+                $invite->claimed_at = Carbon::now();
+                $invite->save();
             }
         }
 
