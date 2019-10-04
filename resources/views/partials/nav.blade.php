@@ -123,6 +123,7 @@
 
 
 
+      <!-- Notifications -->
       @if (isset($notifications))
         <div class="dropdown nav-item">
           <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -131,7 +132,7 @@
           <div class="dropdown-menu dropdown-menu-right">
             @foreach($notifications as $notification)
 
-              <a class="dropdown-item" href="{{Request::url()}}?force_locale={{$locale}}">
+              <a class="dropdown-item">
                 @if ($notification->type == 'App\Notifications\GroupCreated')
                   @include('notifications.group_created')
                 @endif
@@ -140,10 +141,7 @@
                   @include('notifications.mentioned_user')
                 @endif
               </a>
-
-
             @endforeach
-
           </div>
         </div>
       @endif
