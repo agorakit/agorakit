@@ -16,6 +16,7 @@
     "eluceo/ical": "^0.15.0",
     "fideloper/proxy": "^4.0",
     "geocoder-php/mapbox-provider": "^1.0",
+    "geocoder-php/nominatim-provider": "^5.1",
     "intervention/image": "^2.4",
     "intervention/imagecache": "2.*",
     "kkomelin/laravel-translatable-string-exporter": "^1.2",

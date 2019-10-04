@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2c0bd9103d8226c052628fb622a045a7",
+    "content-hash": "83b8c2c08b9e70a1fbe63a3ff1a0b5b9",
     "packages": [
         {
             "name": "barryvdh/laravel-translation-manager",
@@ -1138,6 +1138,62 @@
             "description": "Geocoder Mapbox adapter",
             "homepage": "http://geocoder-php.org/Geocoder/",
             "time": "2018-11-27T10:43:09+00:00"
+        },
+        {
+            "name": "geocoder-php/nominatim-provider",
+            "version": "5.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/geocoder-php/nominatim-provider.git",
+                "reference": "337ddc834bd955189232c0b38ba89087be148f46"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/geocoder-php/nominatim-provider/zipball/337ddc834bd955189232c0b38ba89087be148f46",
+                "reference": "337ddc834bd955189232c0b38ba89087be148f46",
+                "shasum": ""
+            },
+            "require": {
+                "geocoder-php/common-http": "^4.1",
+                "php": "^7.0",
+                "willdurand/geocoder": "^4.0"
+            },
+            "provide": {
+                "geocoder-php/provider-implementation": "1.0"
+            },
+            "require-dev": {
+                "geocoder-php/provider-integration-tests": "^1.0",
+                "php-http/curl-client": "^1.7",
+                "php-http/message": "^1.0",
+                "phpunit/phpunit": "^6.5 || ^7.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Geocoder\\Provider\\Nominatim\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "William Durand",
+                    "email": "william.durand1@gmail.com"
+                }
+            ],
+            "description": "Geocoder Nominatim adapter",
+            "homepage": "http://geocoder-php.org/Geocoder/",
+            "time": "2019-08-14T07:26:34+00:00"
         },
         {
             "name": "gettext/gettext",

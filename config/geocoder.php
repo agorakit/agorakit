@@ -4,6 +4,7 @@ use Geocoder\Provider\Chain\Chain;
 use Geocoder\Provider\GeoPlugin\GeoPlugin;
 use Geocoder\Provider\GoogleMaps\GoogleMaps;
 use Geocoder\Provider\Mapbox\Mapbox;
+use Geocoder\Provider\Nominatim\Nominatim;
 use Http\Client\Curl\Client;
 
 return [
@@ -20,7 +21,7 @@ return [
     | Default: 9999999 (integer)
     |
     */
-    'cache-duration' => 9999999,
+    'cache-duration' => 0,
 
     /*
     |--------------------------------------------------------------------------
@@ -39,14 +40,15 @@ return [
     | https://github.com/geocoder-php/Geocoder#providers
     |
     */
+
+
     'providers' => [
         Chain::class => [
-            Mapbox::class => [
-                env('MAPBOX_TOKEN', 'xyz'),
-            ],
+            Nominatim::class => ['https://nominatim.openstreetmap.org', 'Agorakit'],
             GeoPlugin::class  => [],
         ],
     ],
+
 
     /*
     |--------------------------------------------------------------------------
