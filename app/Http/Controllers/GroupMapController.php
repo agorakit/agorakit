@@ -29,7 +29,7 @@ class GroupMapController extends Controller
     {
         $this->authorize('view-members', $group);
         $users = $group->users()->where('latitude', '<>', 0)->get();
-        $actions = $group->actions()->where('start', '>=', Carbon::now())->where('latitude', '<>', 0)->get();
+        $actions = $group->actions()->where('stop', '>=', Carbon::now()->subDays(1))->where('latitude', '<>', 0)->get();
 
         // randomize users geolocation by a few meters
         foreach ($users as $user) {
