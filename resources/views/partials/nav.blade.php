@@ -26,7 +26,7 @@
           <a class="dropdown-item" class="dropdown-item" href="{{ action('GroupController@indexOfMyGroups') }}">
             {{trans('messages.my_groups')}}
           </a>
-          
+
           <div class="dropdown-divider"></div>
 
           <a class="dropdown-item" class="dropdown-item" href="{{ action('GroupController@index') }}">
@@ -120,6 +120,33 @@
           </div>
         </div>
       </form>
+
+
+
+      @if (isset($notifications))
+        <div class="dropdown nav-item">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-bell"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right">
+            @foreach($notifications as $notification)
+
+              <a class="dropdown-item" href="{{Request::url()}}?force_locale={{$locale}}">
+                @if ($notification->type == 'App\Notifications\GroupCreated')
+                  @include('notifications.group_created')
+                @endif
+
+                @if ($notification->type == 'App\Notifications\MentionedUser')
+                  @include('notifications.mentioned_user')
+                @endif
+              </a>
+
+
+            @endforeach
+
+          </div>
+        </div>
+      @endif
 
 
       <!-- locales -->
