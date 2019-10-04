@@ -62,7 +62,7 @@ class AppliedToGroup extends Notification
     {
         return [
           'group' => $this->group->toArray(),
-          'user' => $this->user->toArray()
+          'user'  => $this->user->toArray(),
         ];
     }
 }

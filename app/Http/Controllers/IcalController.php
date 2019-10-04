@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Group;
-use Carbon\Carbon;
 use Auth;
+use Carbon\Carbon;
 
 class IcalController extends Controller
 {
@@ -13,10 +12,10 @@ class IcalController extends Controller
     }
 
     /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         // 1. Create new calendar
@@ -41,7 +40,6 @@ class IcalController extends Controller
         } else {
             $groups = \App\Group::public()->get()->pluck('id');
         }
-
 
         // returns actions from the last 60 days
         $actions = \App\Action::with('group')

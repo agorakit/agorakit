@@ -60,7 +60,7 @@ class GroupCreated extends Notification
     {
         // idea of storing everything from the model taken from here : https://stackoverflow.com/a/44909022
         return [
-            'group' => $this->group->toArray()
+            'group' => $this->group->toArray(),
         ];
     }
 }

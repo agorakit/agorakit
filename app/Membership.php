@@ -69,5 +69,4 @@ class Membership extends Model
     {
         return $this->belongsTo(\App\Group::class);
     }
-
 }

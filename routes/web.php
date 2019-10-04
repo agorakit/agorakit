@@ -60,7 +60,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('agenda/json', 'ActionController@indexJson')->name('agenda.json');
     Route::get('agenda/ical', 'IcalController@index')->name('agenda.ical');
 
-
     Route::get('tags', 'TagController@index')->name('tags.index');
     Route::get('tags/{tag}', 'TagController@show')->name('tags.show');
 
@@ -152,7 +151,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('users/{user}/contact', 'UserController@contactForm')->name('users.contactform');
     Route::post('users/{user}/contact', 'UserController@contact')->name('users.contact');
 
-
     // Ical feed per user
     Route::get('users/{user}/ical', 'UserIcalController@index')->name('users.ical');
 
@@ -161,13 +159,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('comments/{comment}/react/{context}', 'CommentReactionController@store');
     Route::get('comments/{comment}/unreact', 'CommentReactionController@destroy');
 
-
     // Notifications
     Route::get('notifications', 'NotificationController@index')->name('notifications');
 
-
     //////////////////////////// GROUPS /////////////////////////////////////////
-
 
     // Groups : only members (or everyone if a group is public)
     Route::group(['middleware' => 'public', 'as' => 'groups', 'prefix' => 'groups/{group}'], function () {
@@ -283,7 +278,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('files/{file}/preview', 'FileDownloadController@preview')->name('.files.preview');
         Route::get('files/{file}/icon', 'FileDownloadController@icon')->name('.files.icon');
 
-
         // Allowed Tags
         Route::get('tags', 'GroupTagController@index')->name('.tags.index');
         Route::get('tags/create', 'GroupTagController@create')->name('.tags.create');
@@ -297,7 +291,6 @@ Route::group(['middleware' => ['web']], function () {
         // Permissions
         Route::get('permissions', 'GroupPermissionController@index')->name('.permissions.index');
         Route::post('permissions', 'GroupPermissionController@update')->name('.permissions.update');
-
     });
 
     // Search

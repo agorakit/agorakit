@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use App\Discussion;
-use App\Group;
 use App\File;
+use App\Group;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -34,13 +34,10 @@ class CommentController extends Controller
             ->withInput();
         }
 
-
-
         // handle attached file to comment
-        if ($request->hasFile('file'))
-        {
+        if ($request->hasFile('file')) {
             // create a file instance
-            $file = new File;
+            $file = new File();
             $file->forceSave(); // we bypass autovalidation, since we don't have a complete model yet, but we *need* an id
 
             // add group, user
@@ -51,7 +48,7 @@ class CommentController extends Controller
             $file->addToStorage($request->file('file'));
 
             // add an f:xx to the comment so it is shown on display
-            $comment->body = $comment->body . '<p>f:' . $file->id . '</p>';
+            $comment->body = $comment->body.'<p>f:'.$file->id.'</p>';
         }
 
         $discussion->comments()->save($comment);
@@ -100,10 +97,9 @@ class CommentController extends Controller
         $comment->body = $request->input('body');
 
         // handle attached file to comment
-        if ($request->hasFile('file'))
-        {
+        if ($request->hasFile('file')) {
             // create a file instance
-            $file = new File;
+            $file = new File();
             $file->forceSave(); // we bypass autovalidation, since we don't have a complete model yet, but we *need* an id
 
             // add group, user
@@ -114,9 +110,8 @@ class CommentController extends Controller
             $file->addToStorage($request->file('file'));
 
             // add an f:xx to the comment so it is shown on display
-            $comment->body = $comment->body . '<p>f:' . $file->id . '</p>';
+            $comment->body = $comment->body.'<p>f:'.$file->id.'</p>';
         }
-        
 
         if ($comment->isInvalid()) {
             return redirect()->back()

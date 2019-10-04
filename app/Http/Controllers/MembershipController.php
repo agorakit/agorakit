@@ -116,7 +116,6 @@ class MembershipController extends Controller
 
         $this->authorize('delete', $membership);
 
-
         if ($membership->isAdmin() && $group->admins->count() == 1) {
             flash('You cannot leave this group since you are the unique admin. Promote someone else as admin first.');
 

@@ -20,10 +20,8 @@ class GroupController extends Controller
 
     public function index(Request $request)
     {
-        
         $groups = new Group();
         $groups = $groups->notSecret();
-
 
         $groups = $groups->with('tags')->orderBy('updated_at', 'desc');
 
@@ -41,7 +39,6 @@ class GroupController extends Controller
         ->with('tab', 'groups')
         ->with('groups', $groups);
     }
-
 
     public function indexOfMyGroups(Request $request)
     {
@@ -64,14 +61,13 @@ class GroupController extends Controller
         ->with('groups', $groups);
     }
 
-
     /**
-    * Display the specified resource.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Display the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function show(Group $group)
     {
         $this->authorize('view', $group);
@@ -139,14 +135,15 @@ class GroupController extends Controller
     }
 
     /**
-    * Show the form for creating a new resource.
-    *
-    * @return Response
-    */
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
     public function create()
     {
         Gate::authorize('create', \App\Group::class);
         $title = trans('group.create_group_title');
+
         return view('groups.create')
         ->with('group', new \App\Group())
         ->with('all_tags', \App\Group::allTags())
@@ -154,10 +151,10 @@ class GroupController extends Controller
     }
 
     /**
-    * Store a newly created resource in storage.
-    *
-    * @return Response
-    */
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
     public function store(Request $request)
     {
         Gate::authorize('create', \App\Group::class);
@@ -197,19 +194,18 @@ class GroupController extends Controller
 
         $group->user()->associate(Auth::user());
 
-
         if ($request->get('tags')) {
             $group->tag($request->get('tags'));
-        }
-        else {
+        } else {
             $group->detag();
         }
-
 
         // handle allowed tags
         $allowed_tags = explode(',', $request->get('allowed_tags'));
         $allowed_tags = array_map('trim', $allowed_tags);
-        array_filter($allowed_tags, function($value) { return $value !== ''; });
+        array_filter($allowed_tags, function ($value) {
+            return $value !== '';
+        });
         $group->setSetting('allowed_tags', $allowed_tags);
 
         // handle cover
@@ -237,12 +233,12 @@ class GroupController extends Controller
     }
 
     /**
-    * Show the form for editing the specified resource.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function edit(Request $request, Group $group)
     {
         $this->authorize('update', $group);
@@ -255,12 +251,12 @@ class GroupController extends Controller
     }
 
     /**
-    * Update the specified resource in storage.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Update the specified resource in storage.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function update(Request $request, Group $group)
     {
         $this->authorize('update', $group);
@@ -295,15 +291,16 @@ class GroupController extends Controller
 
         if ($request->get('tags')) {
             $group->retag($request->get('tags'));
-        }
-        else {
+        } else {
             $group->detag();
         }
 
         // handle allowed tags
         $allowed_tags = explode(',', $request->get('allowed_tags'));
         $allowed_tags = array_map('trim', $allowed_tags);
-        array_filter($allowed_tags, function($value) { return $value !== ''; });
+        array_filter($allowed_tags, function ($value) {
+            return $value !== '';
+        });
         $group->setSetting('allowed_tags', $allowed_tags);
 
         // validation
@@ -337,12 +334,12 @@ class GroupController extends Controller
     }
 
     /**
-    * Remove the specified resource from storage.
-    *
-    * @param int $id
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(Request $request, Group $group)
     {
         $this->authorize('delete', $group);
@@ -353,8 +350,8 @@ class GroupController extends Controller
     }
 
     /**
-    * Show the revision history of the group.
-    */
+     * Show the revision history of the group.
+     */
     public function history(Group $group)
     {
         $this->authorize('history', $group);

@@ -59,7 +59,7 @@ class AddedToGroup extends Notification
     public function toArray($notifiable)
     {
         return [
-          'group' => $this->group->toArray()
+          'group' => $this->group->toArray(),
         ];
     }
 }

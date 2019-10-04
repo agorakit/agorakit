@@ -35,8 +35,9 @@ class CommentPolicy
     public function delete(User $user, Comment $comment)
     {
         if ($user->isAdminOf($comment->discussion->group)) {
-          return true;
+            return true;
         }
+
         return $user->id === $comment->user_id;
     }
 

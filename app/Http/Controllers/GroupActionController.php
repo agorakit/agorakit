@@ -19,10 +19,10 @@ class GroupActionController extends Controller
     }
 
     /**
-    * Display a listing of the resource.
-    *
-    * @return Response
-    */
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
     public function index(Request $request, Group $group)
     {
         $this->authorize('view-actions', $group);
@@ -111,10 +111,10 @@ class GroupActionController extends Controller
     }
 
     /**
-    * Show the form for creating a new resource.
-    *
-    * @return Response
-    */
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
     public function create(Request $request, Group $group)
     {
         if ($group->exists) {
@@ -137,7 +137,6 @@ class GroupActionController extends Controller
             $action->name = $request->get('title');
         }
 
-
         return view('actions.create')
         ->with('action', $action)
         ->with('group', $group)
@@ -146,10 +145,10 @@ class GroupActionController extends Controller
     }
 
     /**
-    * Store a newly created resource in storage.
-    *
-    * @return Response
-    */
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
     public function store(Request $request, Group $group)
     {
         // if no group is in the route, it means user choose the group using the dropdown
@@ -221,10 +220,6 @@ class GroupActionController extends Controller
             $action->tag($request->get('tags'));
         }
 
-
-
-
-
         // update activity timestamp on parent items
         $group->touch();
         \Auth::user()->touch();
@@ -232,16 +227,15 @@ class GroupActionController extends Controller
         flash(trans('messages.ressource_created_successfully'));
 
         return redirect()->route('groups.actions.index', $group);
-
     }
 
     /**
-    * Display the specified resource.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Display the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function show(Group $group, Action $action)
     {
         $this->authorize('view', $action);
@@ -254,12 +248,12 @@ class GroupActionController extends Controller
     }
 
     /**
-    * Show the form for editing the specified resource.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function edit(Request $request, Group $group, Action $action)
     {
         $this->authorize('update', $action);
@@ -273,12 +267,12 @@ class GroupActionController extends Controller
     }
 
     /**
-    * Update the specified resource in storage.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Update the specified resource in storage.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function update(Request $request, Group $group, Action $action)
     {
         $this->authorize('update', $action);
@@ -307,11 +301,9 @@ class GroupActionController extends Controller
         // handle tags
         if ($request->get('tags')) {
             $action->tag($request->get('tags'));
-        }
-        else {
+        } else {
             $action->detag();
         }
-
 
         if ($action->isInvalid()) {
             // Oops.
@@ -326,12 +318,12 @@ class GroupActionController extends Controller
     }
 
     /**
-    * Remove the specified resource from storage.
-    *
-    * @param int $id
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function destroyConfirm(Request $request, Group $group, Action $action)
     {
         $this->authorize('delete', $action);
@@ -347,12 +339,12 @@ class GroupActionController extends Controller
     }
 
     /**
-    * Remove the specified resource from storage.
-    *
-    * @param int $id
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(Request $request, Group $group, Action $action)
     {
         $this->authorize('delete', $action);
@@ -363,8 +355,8 @@ class GroupActionController extends Controller
     }
 
     /**
-    * Show the revision history of the discussion.
-    */
+     * Show the revision history of the discussion.
+     */
     public function history(Group $group, Action $action)
     {
         $this->authorize('history', $action);

@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Group;
-use Carbon\Carbon;
-use Auth;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 /**
-* This controller provides a specific Ical url for each user.
-* The feed is signed so is kept private (as long as the url is kept private as well)
-*/
+ * This controller provides a specific Ical url for each user.
+ * The feed is signed so is kept private (as long as the url is kept private as well).
+ */
 class UserIcalController extends Controller
 {
     public function __construct()
@@ -19,13 +17,13 @@ class UserIcalController extends Controller
     }
 
     /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index(Request $request, User $user)
     {
-        if (! $request->hasValidSignature()) {
+        if (!$request->hasValidSignature()) {
             abort(404, 'Invalid signature');
         }
 
@@ -35,7 +33,6 @@ class UserIcalController extends Controller
 
         // groups are all groups from the current user
         $groups = $user->groups()->pluck('groups.id');
-
 
         // returns actions from the last 60 days
         $actions = \App\Action::with('group')
