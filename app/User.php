@@ -279,6 +279,7 @@ class User extends Authenticatable
     */
     public function geocode()
     {
+
         if ($this->address == '') {
             $this->latitude = 0;
             $this->longitude = 0;
@@ -286,11 +287,12 @@ class User extends Authenticatable
             return true;
         }
 
-        $geocode = app('geocoder')->geocode($this->address)->get()->first();
-        if ($geocode) {
-            $this->latitude = $geocode->getCoordinates()->getLatitude();
-            $this->longitude = $geocode->getCoordinates()->getLongitude();
+        $geocode = geocode($this->address);
 
+
+        if ($geocode) {
+            $this->latitude = $geocode['latitude'];
+            $this->longitude = $geocode['longitude'];
             return true;
         }
 

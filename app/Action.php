@@ -75,14 +75,16 @@ class Action extends Model
             return true;
         }
 
-        $geocode = app('geocoder')->geocode($this->location)->get()->first();
-        if ($geocode) {
-            $this->latitude = $geocode->getCoordinates()->getLatitude();
-            $this->longitude = $geocode->getCoordinates()->getLongitude();
+        $geocode = geocode($this->location);
 
+
+        if ($geocode) {
+            $this->latitude = $geocode['latitude'];
+            $this->longitude = $geocode['longitude'];
             return true;
         }
 
         return false;
+        
     }
 }

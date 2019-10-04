@@ -1,8 +1,8 @@
 <?php
 
 /**
- * General helper functions that don't have a batter place
- */
+* General helper functions that don't have a batter place
+*/
 
 
 /**
@@ -92,4 +92,19 @@ function minutesToInterval($minutes)
 function flash($message)
 {
     session()->push('messages', $message);
+}
+
+
+// Geocode function - even more abstracted than geocoder php.
+// Pass it a string and it will return an array with longitude and latitude or false in case of problem
+function geocode($address)
+{
+    $geocode = app('geocoder')->geocode($address)->get()->first();
+
+    if ($geocode) {
+        $result['latitude'] = $geocode->getCoordinates()->getLatitude();
+        $result['longitude'] = $geocode->getCoordinates()->getLongitude();
+        return $result;
+    }
+    return false;
 }

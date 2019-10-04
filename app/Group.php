@@ -306,16 +306,15 @@ class Group extends Model
             return true;
         }
 
-        $geocode = app('geocoder')->geocode($this->address)->get()->first();
+        $geocode = geocode($this->address);
 
         if ($geocode) {
-            $this->latitude = $geocode->getCoordinates()->getLatitude();
-            $this->longitude = $geocode->getCoordinates()->getLongitude();
-
+            $this->latitude = $geocode['latitude'];
+            $this->longitude = $geocode['longitude'];
             return true;
         }
 
-        return false;
+        return false;        
     }
 
 
