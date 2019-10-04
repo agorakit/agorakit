@@ -6,8 +6,8 @@ use Auth;
 use Illuminate\Http\Request;
 
 /**
-* This controller generates a global list of discussions with unread count (independant of groups).
-*/
+ * This controller generates a global list of discussions with unread count (independant of groups).
+ */
 class DiscussionController extends Controller
 {
     public function __construct()

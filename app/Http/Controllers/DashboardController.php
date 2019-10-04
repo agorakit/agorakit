@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
 use App\Action;
 use App\Discussion;
 use App\File;
 use App\Group;
+use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 /**
-* This controller is the homepage and main entry point.
-*/
+ * This controller is the homepage and main entry point.
+ */
 class DashboardController extends Controller
 {
     public function __construct()
@@ -22,10 +22,10 @@ class DashboardController extends Controller
     }
 
     /**
-    * Main HOMEPAGE.
-    *
-    * @return Response
-    */
+     * Main HOMEPAGE.
+     *
+     * @return Response
+     */
     public function index(Request $request)
     {
         if (Auth::check()) {

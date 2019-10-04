@@ -3,7 +3,6 @@
 namespace App\Policies;
 
 use App\Action;
-use App\Group;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -46,7 +45,6 @@ class ActionPolicy
             return $user->isMemberOf($action->group);
         }
     }
-
 
     public function update(User $user, Action $action)
     {

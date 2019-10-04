@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Discussion;
-use App\Group;
 use App\File;
+use App\Group;
 use Auth;
 use Carbon\Carbon;
 use Gate;
@@ -20,19 +20,17 @@ class GroupDiscussionController extends Controller
     }
 
     /**
-    * Display a listing of the resource.
-    *
-    * @return Response
-    */
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
     public function index(Request $request, Group $group)
     {
         $this->authorize('view-discussions', $group);
 
-
         if ($group->tagsAreLimited()) {
             $tags = $group->allowedTags();
-        }
-        else {
+        } else {
             $tags = $group->tagsInDiscussions();
         }
 
@@ -62,10 +60,10 @@ class GroupDiscussionController extends Controller
     }
 
     /**
-    * Show the form for creating a new resource.
-    *
-    * @return Response
-    */
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
     public function create(Request $request, Group $group)
     {
         if ($group->exists) {
@@ -74,6 +72,7 @@ class GroupDiscussionController extends Controller
 
         $tags = $group->tagsUsed();
         $title = trans('group.create_group_discussion');
+
         return view('discussions.create')
         ->with('group', $group)
         ->with('all_tags', $tags)
@@ -82,10 +81,10 @@ class GroupDiscussionController extends Controller
     }
 
     /**
-    * Store a newly created resource in storage.
-    *
-    * @return Response
-    */
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
     public function store(Request $request, Group $group)
     {
 
@@ -114,12 +113,10 @@ class GroupDiscussionController extends Controller
             ->withInput();
         }
 
-
         // handle attached file to comment
-        if ($request->hasFile('file'))
-        {
+        if ($request->hasFile('file')) {
             // create a file instance
-            $file = new File;
+            $file = new File();
             $file->forceSave(); // we bypass autovalidation, since we don't have a complete model yet, but we *need* an id
 
             // add group, user
@@ -130,10 +127,9 @@ class GroupDiscussionController extends Controller
             $file->addToStorage($request->file('file'));
 
             // add an f:xx to the comment so it is shown on display
-            $discussion->body = $discussion->body . '<p>f:' . $file->id . '</p>';
+            $discussion->body = $discussion->body.'<p>f:'.$file->id.'</p>';
             $discussion->save();
         }
-
 
         // update activity timestamp on parent items
         $group->touch();
@@ -149,12 +145,12 @@ class GroupDiscussionController extends Controller
     }
 
     /**
-    * Display the specified resource.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Display the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function show(Group $group, Discussion $discussion)
     {
         $this->authorize('view', $discussion);
@@ -181,12 +177,12 @@ class GroupDiscussionController extends Controller
     }
 
     /**
-    * Show the form for editing the specified resource.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function edit(Request $request, Group $group, Discussion $discussion)
     {
         $this->authorize('update', $discussion);
@@ -202,12 +198,12 @@ class GroupDiscussionController extends Controller
     }
 
     /**
-    * Update the specified resource in storage.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Update the specified resource in storage.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function update(Request $request, Group $group, Discussion $discussion)
     {
         $this->authorize('update', $discussion);
@@ -217,10 +213,9 @@ class GroupDiscussionController extends Controller
         //$discussion->user()->associate(Auth::user()); // we use revisionable to manage who changed what, so we keep the original author
 
         // handle attached file to comment
-        if ($request->hasFile('file'))
-        {
+        if ($request->hasFile('file')) {
             // create a file instance
-            $file = new File;
+            $file = new File();
             $file->forceSave(); // we bypass autovalidation, since we don't have a complete model yet, but we *need* an id
 
             // add group, user
@@ -231,19 +226,16 @@ class GroupDiscussionController extends Controller
             $file->addToStorage($request->file('file'));
 
             // add an f:xx to the comment so it is shown on display
-            $discussion->body = $discussion->body . '<p>f:' . $file->id . '</p>';
+            $discussion->body = $discussion->body.'<p>f:'.$file->id.'</p>';
         }
 
         $discussion->save();
 
         if ($request->get('tags')) {
             $discussion->retag($request->get('tags'));
-        }
-        else {
+        } else {
             $discussion->detag();
         }
-
-
 
         flash(trans('messages.ressource_updated_successfully'));
 
@@ -265,12 +257,12 @@ class GroupDiscussionController extends Controller
     }
 
     /**
-    * Remove the specified resource from storage.
-    *
-    * @param int $id
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(Request $request, Group $group, Discussion $discussion)
     {
         $this->authorize('view', $discussion);
@@ -281,8 +273,8 @@ class GroupDiscussionController extends Controller
     }
 
     /**
-    * Show the revision history of the discussion.
-    */
+     * Show the revision history of the discussion.
+     */
     public function history(Group $group, Discussion $discussion)
     {
         $this->authorize('history', $discussion);

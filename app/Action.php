@@ -2,11 +2,11 @@
 
 namespace App;
 
+use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
-use Cviebrock\EloquentTaggable\Taggable;
 
 class Action extends Model
 {
@@ -55,17 +55,17 @@ class Action extends Model
     }
 
     /**
-    * The users attending this action.
-    */
+     * The users attending this action.
+     */
     public function users()
     {
         return $this->belongsToMany(\App\User::class);
     }
 
     /**
-    * Geocode the item
-    * Returns true if it worked, false if it didn't.
-    */
+     * Geocode the item
+     * Returns true if it worked, false if it didn't.
+     */
     public function geocode()
     {
         if ($this->location == '') {
@@ -77,14 +77,13 @@ class Action extends Model
 
         $geocode = geocode($this->location);
 
-
         if ($geocode) {
             $this->latitude = $geocode['latitude'];
             $this->longitude = $geocode['longitude'];
+
             return true;
         }
 
         return false;
-        
     }
 }

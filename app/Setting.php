@@ -13,7 +13,7 @@ class Setting extends Model
 
     protected $fillable = ['name', 'value'];
     protected $rules = [
-        'name'  => 'required'
+        'name'  => 'required',
     ];
 
     public $timestamps = true;
@@ -26,7 +26,6 @@ class Setting extends Model
      */
     public static function get($key, $default = null)
     {
-
         $setting = Cache::rememberForever('settings_'.$key, function () use ($key) {
             return \App\Setting::where('name', $key)->first();
         });

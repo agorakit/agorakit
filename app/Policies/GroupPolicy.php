@@ -11,10 +11,10 @@ class GroupPolicy extends BasePolicy
     use HandlesAuthorization;
 
     /**
-    * Create a new policy instance.
-    *
-    * @return void
-    */
+     * Create a new policy instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         //
@@ -29,16 +29,15 @@ class GroupPolicy extends BasePolicy
     }
 
     /**
-    * Viewing a group means reading title and presentation (= group home page).
-    * Only secret groups are hidden from non members
-    */
+     * Viewing a group means reading title and presentation (= group home page).
+     * Only secret groups are hidden from non members.
+     */
     public function view(?User $user, Group $group)
     {
         if ($group->isSecret()) {
             if ($user->isMemberOf($group)) {
                 return true;
-            }
-            else {
+            } else {
                 return false;
             }
         }
@@ -61,20 +60,20 @@ class GroupPolicy extends BasePolicy
     }
 
     /**
-    * Determine if the given group can be updated by the user.
-    *
-    * @param \App\User $user
-    *
-    * @return bool
-    */
+     * Determine if the given group can be updated by the user.
+     *
+     * @param \App\User $user
+     *
+     * @return bool
+     */
     public function update(User $user, Group $group)
     {
         return $user->isAdminOf($group);
     }
 
     /**
-    *   Can the user administer the group or not?
-    */
+     *   Can the user administer the group or not?
+     */
     public function administer(User $user, Group $group)
     {
         return $user->isAdminOf($group);
@@ -161,12 +160,12 @@ class GroupPolicy extends BasePolicy
 
     public function invite(User $user, Group $group)
     {
-        if ($group->getSetting('custom_permissions')){
+        if ($group->getSetting('custom_permissions')) {
             $permissions = $group->getSetting('permissions');
             $member = collect($permissions['member']);
+
             return $member->contains('invite');
         }
-
 
         return $user->isMemberOf($group);
     }

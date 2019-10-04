@@ -22,10 +22,10 @@ class GroupFileController extends Controller
     }
 
     /**
-    * Display a listing of the resource.
-    *
-    * @return Response
-    */
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
     public function index(Request $request, Group $group)
     {
         $this->authorize('view-files', $group);
@@ -41,11 +41,9 @@ class GroupFileController extends Controller
 
         if ($group->tagsAreLimited()) {
             $tags = $group->allowedTags();
-        }
-        else {
+        } else {
             $tags = $group->tagsInFiles();
         }
-
 
         // Query depending of the request
         // filter by tags and sort order
@@ -71,12 +69,12 @@ class GroupFileController extends Controller
     }
 
     /**
-    * Display the specified resource.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Display the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function show(Group $group, File $file)
     {
         $this->authorize('view', $file);
@@ -89,10 +87,10 @@ class GroupFileController extends Controller
     }
 
     /**
-    * Show the form for creating a new resource.
-    *
-    * @return Response
-    */
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
     public function create(Request $request, Group $group)
     {
         $this->authorize('create-file', $group);
@@ -118,10 +116,10 @@ class GroupFileController extends Controller
     }
 
     /**
-    * Store a new file.
-    *
-    * @return Response
-    */
+     * Store a new file.
+     *
+     * @return Response
+     */
     public function store(Request $request, Group $group)
     {
         $this->authorize('create-file', $group);
@@ -200,12 +198,12 @@ class GroupFileController extends Controller
     }
 
     /**
-    * Show the form for editing the specified resource.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function edit(Group $group, File $file)
     {
         $this->authorize('update', $file);
@@ -221,12 +219,12 @@ class GroupFileController extends Controller
     }
 
     /**
-    * Update the specified resource in storage.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Update the specified resource in storage.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function update(Request $request, Group $group, File $file)
     {
         $this->authorize('update', $file);
@@ -263,12 +261,12 @@ class GroupFileController extends Controller
     }
 
     /**
-    * Remove the specified resource from storage.
-    *
-    * @param int $id
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(Request $request, Group $group, File $file)
     {
         $this->authorize('delete', $file);
@@ -280,10 +278,10 @@ class GroupFileController extends Controller
     }
 
     /**
-    * Store the folder in the file DB.
-    *
-    * @return Response
-    */
+     * Store the folder in the file DB.
+     *
+     * @return Response
+     */
     public function storeLink(Request $request, Group $group)
     {
         $this->authorize('create-file', $group);

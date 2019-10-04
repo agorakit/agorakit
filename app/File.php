@@ -5,9 +5,9 @@ namespace App;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Storage;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
-use Storage;
 
 class File extends Model
 {
@@ -88,53 +88,51 @@ class File extends Model
         }
 
         $mimes = [
-            'application/pdf' => 'pdf',
-            'application/msword' => 'doc',
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'doc',
-            'application/vnd.ms-powerpoint' => 'ppt',
+            'application/pdf'                                                            => 'pdf',
+            'application/msword'                                                         => 'doc',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document'    => 'doc',
+            'application/vnd.ms-powerpoint'                                              => 'ppt',
             'application/vnd.openxmlformats-officedocument.presentationml.presentation'  => 'ppt',
-            'application/zip'  => 'zip',
-            'audio/mpeg' => 'mp3',
-            'video/mpeg' => 'mp4',
-            'application/vnd.oasis.opendocument.text' => 'odt',
+            'application/zip'                                                            => 'zip',
+            'audio/mpeg'                                                                 => 'mp3',
+            'video/mpeg'                                                                 => 'mp4',
+            'application/vnd.oasis.opendocument.text'                                    => 'odt',
         ];
 
         // we return 'txt' if unknown
         return array_get($mimes, $this->mime, 'txt');
     }
 
-
     /**
-    * Permanently delete this file from storage
-    */
+     * Permanently delete this file from storage.
+     */
     public function deleteFromStorage()
     {
         if (Storage::exists($this->path)) {
             return Storage::delete($this->path);
         }
+
         return false;
     }
 
     /**
-    * Set file content from a file request -> to storage
-    * You need to pass an uploaded file from a $request as $uploaded_file
-    * The file you are attaching to must already exist in the DB
-    */
+     * Set file content from a file request -> to storage
+     * You need to pass an uploaded file from a $request as $uploaded_file
+     * The file you are attaching to must already exist in the DB.
+     */
     public function addToStorage($uploaded_file)
     {
-        if ($this->exists)
-        {
+        if ($this->exists) {
             // generate filenames and path
             $storage_path = 'groups/'.$this->group->id.'/files';
 
             // simplified filename
-            $filename = $this->id.'-'.str_slug(pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' .  $uploaded_file->guessExtension();
+            $filename = $this->id.'-'.str_slug(pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME)).'.'.$uploaded_file->guessExtension();
 
-            $complete_path = $uploaded_file->storeAs($storage_path, $filename );
-
+            $complete_path = $uploaded_file->storeAs($storage_path, $filename);
 
             $this->path = $complete_path;
-            $this->name = pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME) . '.' . $uploaded_file->guessExtension();
+            $this->name = pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME).'.'.$uploaded_file->guessExtension();
             $this->original_filename = $uploaded_file->getClientOriginalName();
             $this->mime = $uploaded_file->getMimeType();
             $this->filesize = $uploaded_file->getClientSize();
@@ -143,10 +141,9 @@ class File extends Model
             $this->save();
 
             return $complete_path;
-        }
-        else
-        {
+        } else {
             abort(500, 'First save a file before addToStorage(), file does not exists yet in DB');
+
             return false;
         }
     }

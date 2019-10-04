@@ -1,6 +1,5 @@
 <?php
 
-
 class UserTest extends Tests\BrowserKitTestCase
 {
     /******************* Why is it done this way ? ***************/
@@ -27,7 +26,6 @@ class UserTest extends Tests\BrowserKitTestCase
 
     */
 
-
     /* Some utility function*/
 
     public function admin()
@@ -50,9 +48,6 @@ class UserTest extends Tests\BrowserKitTestCase
         return App\Group::where('name', 'Private test group')->firstOrFail();
     }
 
-
-
-
     /* tests starts here : let's setup the DB
     */
     public function testSetupItAll()
@@ -64,8 +59,8 @@ class UserTest extends Tests\BrowserKitTestCase
     }
 
     /**
-    * Register our first user
-    */
+     * Register our first user.
+     */
     public function testUserRegistration()
     {
         Mail::fake();
@@ -257,9 +252,6 @@ class UserTest extends Tests\BrowserKitTestCase
         $this->assertTrue($user->isAdminOf($group));
     }
 
-
-
-
     /* now let's test emails */
 
     public function testNotificationReceived()
@@ -296,9 +288,8 @@ class UserTest extends Tests\BrowserKitTestCase
         });
     }
 
-
     /**
-     * Admin will disable discussion creation for members
+     * Admin will disable discussion creation for members.
      */
     public function testNewbieCantChangePermissionsOnGroup()
     {
@@ -311,10 +302,8 @@ class UserTest extends Tests\BrowserKitTestCase
         // using get instead of visit to test responses is documented here : https://laracasts.com/discuss/channels/testing/testing-a-403-response-status-after-submiting-a-form-in-laravel-51?page=1#reply=188868
     }
 
-
-
     /**
-     * Admin will disable discussion creation for members
+     * Admin will disable discussion creation for members.
      */
     public function testChangePermissionsOnGroup()
     {
@@ -348,6 +337,4 @@ class UserTest extends Tests\BrowserKitTestCase
         ->get('groups/'.$group->id.'/actions/create')
         ->assertResponseStatus(403);
     }
-
-
 }

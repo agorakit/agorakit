@@ -65,7 +65,7 @@ class MentionedUser extends Notification
     {
         return [
           'comment' => $this->comment->toArray(),
-          'user' => $this->user->toArray()
+          'user'    => $this->user->toArray(),
         ];
     }
 }

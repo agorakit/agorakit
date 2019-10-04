@@ -2,8 +2,6 @@
 
 use Geocoder\Provider\Chain\Chain;
 use Geocoder\Provider\GeoPlugin\GeoPlugin;
-use Geocoder\Provider\GoogleMaps\GoogleMaps;
-use Geocoder\Provider\Mapbox\Mapbox;
 use Geocoder\Provider\Nominatim\Nominatim;
 use Http\Client\Curl\Client;
 
@@ -41,14 +39,12 @@ return [
     |
     */
 
-
     'providers' => [
         Chain::class => [
-            Nominatim::class => ['https://nominatim.openstreetmap.org', 'Agorakit'],
+            Nominatim::class  => ['https://nominatim.openstreetmap.org', 'Agorakit'],
             GeoPlugin::class  => [],
         ],
     ],
-
 
     /*
     |--------------------------------------------------------------------------

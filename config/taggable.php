@@ -7,6 +7,5 @@ return [
 
   'normalizer' => 'mb_strtolower',
 
-
   'model'  => \App\Tag::class,
 ];
