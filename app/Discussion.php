@@ -5,6 +5,7 @@ namespace App;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Nicolaslopezj\Searchable\SearchableTrait;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
 
@@ -14,6 +15,7 @@ class Discussion extends Model
     use ValidatingTrait;
     use SoftDeletes;
     use Taggable;
+    use SearchableTrait;
 
     protected $rules = [
     'name'     => 'required',
@@ -36,6 +38,25 @@ class Discussion extends Model
     protected $dates = ['deleted_at'];
 
     protected $casts = ['user_id' => 'integer'];
+
+    /**
+     * Searchable rules.
+     *
+     * @var array
+     */
+    protected $searchable = [
+        /*
+        * Columns and their priority in search results.
+        * Columns with higher values are more important.
+        * Columns with equal values have equal importance.
+        *
+        * @var array
+        */
+        'columns' => [
+            'discussions.name'    => 10,
+            'discussions.body'    => 10,
+        ],
+    ];
 
     public function unReadCount()
     {

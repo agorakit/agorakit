@@ -18,48 +18,39 @@ class SearchController extends Controller
             $query = $request->get('query');
 
             // Build a list of groups the user has access to. Those are public groups + groups the user is member of.
-            $allowed_groups = \App\Group::open()->get()->pluck('id')->merge(Auth::user()->groups()->pluck('groups.id'));
+            //$allowed_groups = \App\Group::open()->get()->pluck('id')->merge(Auth::user()->groups()->pluck('groups.id'));
 
-            $groups = \App\Group::notSecret()
-            ->where(function ($query_builder) use ($query) {
-                $query_builder->where('name', 'like', '%'.$query.'%')
-                ->orWhere('body', 'like', '%'.$query.'%');
-            })
-            ->orderBy('name')
+            // let's keep only the groups a user is member of for now.
+            $allowed_groups = Auth::user()->groups()->pluck('groups.id');
+
+            $groups = \App\Group::whereIn('id', $allowed_groups)
+            ->search($query)
             ->get();
 
-            $users = \App\User::where('name', 'like', '%'.$query.'%')
-            ->orWhere('body', 'like', '%'.$query.'%')
-            ->orderBy('name')
-            ->with('groups')
+            $users = \App\User::with('groups')
+            ->search($query)
             ->get();
 
-            $discussions = \App\Discussion::where('name', 'like', '%'.$query.'%')
-            ->orWhere('body', 'like', '%'.$query.'%')
-            ->whereIn('group_id', $allowed_groups)
-            ->orderBy('updated_at', 'desc')
+            $discussions = \App\Discussion::whereIn('group_id', $allowed_groups)
             ->with('group')
+            ->search($query)
             ->get();
 
-            $actions = \App\Action::where('name', 'like', '%'.$query.'%')
-            ->orWhere('body', 'like', '%'.$query.'%')
-            ->whereIn('group_id', $allowed_groups)
+            $actions = \App\Action::whereIn('group_id', $allowed_groups)
             ->with('group')
-            ->orderBy('updated_at', 'desc')
+            ->search($query)
             ->get();
 
-            $files = \App\File::where('name', 'like', '%'.$query.'%')
-            ->whereIn('group_id', $allowed_groups)
+            $files = \App\File::whereIn('group_id', $allowed_groups)
             ->with('group')
-            ->orderBy('updated_at', 'desc')
+            ->search($query)
             ->get();
 
             $comments = \App\Comment::with('discussion', 'discussion.group')
-            ->where('body', 'like', '%'.$query.'%')
             ->whereHas('discussion', function ($q) use ($allowed_groups) {
                 $q->whereIn('group_id', $allowed_groups);
             })
-            ->orderBy('updated_at', 'desc')
+            ->search($query)
             ->get();
 
             // set in advance which tab will be active on the search results page
@@ -76,7 +67,7 @@ class SearchController extends Controller
             } elseif ($discussions->count() > 0) {
                 $discussions->class = 'active';
             } elseif ($actions->count() > 0) {
-                $action->class = 'active';
+                $actions->class = 'active';
             } elseif ($users->count() > 0) {
                 $users->class = 'active';
             } elseif ($comments->count() > 0) {

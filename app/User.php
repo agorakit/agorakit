@@ -7,6 +7,7 @@ use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Nicolaslopezj\Searchable\SearchableTrait;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
 
@@ -18,6 +19,7 @@ class User extends Authenticatable
     use SoftDeletes;
     use Sluggable;
     use Taggable;
+    use SearchableTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -48,7 +50,27 @@ class User extends Authenticatable
         //'password' => 'required',
     ];
 
-    protected $keepRevisionOf = ['name', 'body', 'email', 'admin', 'preferences', 'address'];
+    protected $keepRevisionOf = ['name', 'body', 'email', 'admin', 'address'];
+
+    /**
+     * Searchable rules.
+     *
+     * @var array
+     */
+    protected $searchable = [
+        /*
+        * Columns and their priority in search results.
+        * Columns with higher values are more important.
+        * Columns with equal values have equal importance.
+        *
+        * @var array
+        */
+        'columns' => [
+            'users.name'    => 10,
+            'users.body'    => 10,
+        ],
+    ];
+
 
     /**
      * The database table used by the model.
