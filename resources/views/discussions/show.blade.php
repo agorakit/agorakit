@@ -65,7 +65,7 @@
         @can('update', $discussion)
 
           <a up-modal=".tab_content" href="{{ route('groups.discussions.tags.edit', [$group, $discussion]) }}">
-            <small>{{trans('messages.edit')}}</<small>
+            <small>{{trans('messages.edit')}}</small>
           </a>
 
         @endcan
