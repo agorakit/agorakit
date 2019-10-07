@@ -8,10 +8,6 @@
 
 
 
-
-
-
-
     @if ($group->tagsAreLimited())
 
         <div class="help d-flex justify-content-between">
@@ -64,6 +60,17 @@
             <div>This group uses free tagging (any tag is allowed to classify content)</div>
             <a href="?limit_tags=yes" class="btn btn-primary">Enable controlled tags</a>
         </div>
+
+        <div>
+            Here are the used tags in this group curently :
+
+            @forelse( $tags as $tag )
+                @include('tags.tag')
+            @empty
+                {{trans('messages.nothing_yet')}}
+            @endforelse
+        </div>
+
     @endif
 
 

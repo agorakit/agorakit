@@ -9,7 +9,8 @@
 
     <h1>{{trans('Add a tag')}}</h1>
 
-    {!! Form::open(array('action' => ['GroupTagController@store', $group])) !!}
+    
+    {!! Form::model($tag, array('action' => ['GroupTagController@store', $group, $tag])) !!}
 
     @include('tags.form')
 
