@@ -22,6 +22,39 @@
 |
 */
 
+/*
+
+So we will basically have this scheme :
+
+groups
+groups/{group}
+groups/{group}/discussions
+groups/{group}/discussions/{id}
+groups/{group}/discussions/{id}/create
+
+groups/{group}/files/{id}
+groups/{group}/actions/{id}
+
+etc.
+
+users/{id}
+
+
+-> I don't want slugs (except for users for now)
+
+
+Each page (view) would need to know
+
+- in which group we curently are (if any) and build a group navigation and related breadcrumb like : Home -> Groupname -> Discussions -> Discussion Title
+- a list of groups of the current user and list it in a dropdown nav
+
+*/
+
+/*
+I will apply here the recomandation "routes as documentation" from https://philsturgeon.uk/php/2013/07/23/beware-the-route-to-evil/
+*/
+
+
 Route::group(['middleware' => ['web']], function () {
 
     /*
@@ -73,36 +106,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('discussions/feed', 'FeedController@discussions')->name('discussions.feed');
     Route::get('actions/feed', 'FeedController@actions')->name('actions.feed');
 
-    /*
-    Group related routes
-    ====================
 
-    So we will basically have this scheme :
-
-    groups
-    groups/{group}
-    discussions
-    discussions/{id}
-    discussions/{id}/create
-
-    files/{id}
-    users/{id}
-    documents/{id}
-    actions/{id}
-
-    -> I don't want slugs
-
-
-    Each page (view) would need to know
-
-    - in which group we curently are (if any) and build a group navigation and related breadcrumb like : Home -> Groupname -> Discussions -> Discussion Title
-    - a list of groups of the current user and list it in a dropdown nav
-
-    */
-
-    /*
-    I will apply here the recomandtion "routes as documentation" from https://philsturgeon.uk/php/2013/07/23/beware-the-route-to-evil/
-    */
 
     /////////////////// COMMON STUFF (Dashboard & overview) /////////////////////
 
@@ -162,7 +166,10 @@ Route::group(['middleware' => ['web']], function () {
     // Notifications
     Route::get('notifications', 'NotificationController@index')->name('notifications');
 
+
+
     //////////////////////////// GROUPS /////////////////////////////////////////
+
 
     // Groups : only members (or everyone if a group is public)
     Route::group(['middleware' => 'public', 'as' => 'groups', 'prefix' => 'groups/{group}'], function () {
@@ -232,6 +239,9 @@ Route::group(['middleware' => ['web']], function () {
 
         // Discussion history
         Route::get('discussions/{discussion}/history', 'GroupDiscussionController@history')->name('.discussions.history');
+
+        // Discussion tags
+        Route::get('discussions/{discussion}/tags', 'DiscussionTagController@edit')->name('.discussions.tags.edit');
 
         // Comments
         Route::post('discussions/{discussion}/reply', 'CommentController@store')->name('.discussions.reply');
