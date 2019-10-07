@@ -14,16 +14,19 @@ class MembershipController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('verified');
+        //$this->middleware('verified');
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
+    * Display a listing of the resource.
+    *
+    * @return Response
+    */
     public function index(Group $group)
     {
+        $this->authorize('view-members', $group);
+
+
         if (Gate::allows('manage-membership', $group)) {
             $memberships = $group->memberships()->with('user')->has('user')->orderBy('membership', 'desc')->get();
         } else {
@@ -35,18 +38,18 @@ class MembershipController extends Controller
         $invites = Invite::where('group_id', $group->id)->whereNull('claimed_at')->get();
 
         return view('users.index')
-    ->with('title', $group->name.' - '.trans('messages.members'))
-    ->with('memberships', $memberships)
-    ->with('admins', $admins)
-    ->with('candidates', $candidates)
-    ->with('invites', $invites)
-    ->with('group', $group)
-    ->with('tab', 'users');
+        ->with('title', $group->name.' - '.trans('messages.members'))
+        ->with('memberships', $memberships)
+        ->with('admins', $admins)
+        ->with('candidates', $candidates)
+        ->with('invites', $invites)
+        ->with('group', $group)
+        ->with('tab', 'users');
     }
 
     /**
-     * Show a form to allow a user to join a group.
-     */
+    * Show a form to allow a user to join a group.
+    */
     public function create(Request $request, Group $group)
     {
         if (Gate::allows('join', $group)) {
@@ -54,27 +57,31 @@ class MembershipController extends Controller
             $membership = Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
 
             return view('membership.join')
-      ->with('group', $group)
-      ->with('tab', 'settings')
-      ->with('membership', $membership)
-      ->with('interval', 'daily');
+            ->with('group', $group)
+            ->with('tab', 'settings')
+            ->with('membership', $membership)
+            ->with('interval', 'daily');
         } else {
             return view('membership.apply')
-      ->with('group', $group)
-      ->with('tab', 'settings');
+            ->with('group', $group)
+            ->with('tab', 'settings');
         }
     }
 
     /**
-     * Store the membership. It means: add a user to a group and store his/her notification settings.
-     *
-     * @param Request $request  [description]
-     * @param [type]  $group_id [description]
-     *
-     * @return [type] [description]
-     */
+    * Store the membership. It means: add a user to a group and store his/her notification settings.
+    *
+    * @param Request $request  [description]
+    * @param [type]  $group_id [description]
+    *
+    * @return [type] [description]
+    */
     public function store(Request $request, Group $group)
     {
+        // we don't authorize here, because either the group is open and we allow the user to join directly, 
+        // either the group is closed and we store a candidate and notify gruop admins
+        // $this->authorize('join', $group);
+
         if ($group->isOpen()) {
             // load or create membership for this group and user combination
             $membership = Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
@@ -106,8 +113,8 @@ class MembershipController extends Controller
     }
 
     /**
-     * Show a settings screen for a specific group. Allows a user to leave the group.
-     */
+    * Show a settings screen for a specific group. Allows a user to leave the group.
+    */
     public function destroyConfirm(Request $request, Group $group)
     {
 
@@ -123,18 +130,18 @@ class MembershipController extends Controller
         }
 
         return view('membership.leave')
-    ->with('group', $group)
-    ->with('tab', 'settings')
-    ->with('membership', $membership);
+        ->with('group', $group)
+        ->with('tab', 'settings')
+        ->with('membership', $membership);
     }
 
     /**
-     * Remove the specified user from the group.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+    * Remove the specified user from the group.
+    *
+    * @param int $id
+    *
+    * @return Response
+    */
     public function destroy(Request $request, Group $group)
     {
 
@@ -150,8 +157,8 @@ class MembershipController extends Controller
     }
 
     /**
-     * Show a settings screen for a specific group. Allows a user to join, leave, set subscribe settings.
-     */
+    * Show a settings screen for a specific group. Allows a user to join, leave, set subscribe settings.
+    */
     public function edit(Request $request, Group $group, Membership $membership = null)
     {
         // We edit membership either for the current user or for another user if we are group admin
@@ -166,16 +173,16 @@ class MembershipController extends Controller
         $this->authorize('edit', $membership);
 
         return view('membership.edit')
-    ->with('title', $group->name.' - '.trans('messages.settings'))
-    ->with('tab', 'preferences')
-    ->with('group', $group)
-    ->with('interval', minutesToInterval($membership->notification_interval))
-    ->with('membership', $membership);
+        ->with('title', $group->name.' - '.trans('messages.settings'))
+        ->with('tab', 'preferences')
+        ->with('group', $group)
+        ->with('interval', minutesToInterval($membership->notification_interval))
+        ->with('membership', $membership);
     }
 
     /**
-     * Store new settings from the preferencesForm.
-     */
+    * Store new settings from the preferencesForm.
+    */
     public function update(Request $request, Group $group, Membership $membership = null)
     {
 
@@ -183,8 +190,8 @@ class MembershipController extends Controller
         if (!$membership) {
             // we edit membership for the current user
             $membership = Membership::where('user_id', $request->user()->id)
-        ->where('group_id', $group->id)
-        ->firstOrFail();
+            ->where('group_id', $group->id)
+            ->firstOrFail();
         }
 
         // authorize editing
@@ -211,12 +218,12 @@ class MembershipController extends Controller
     }
 
     /**
-     * Show an explanation page on how to join a private group.
-     */
+    * Show an explanation page on how to join a private group.
+    */
     public function howToJoin(Request $request, Group $group)
     {
         return view('membership.howtojoin')
-    ->with('tab', 'preferences')
-    ->with('group', $group);
+        ->with('tab', 'preferences')
+        ->with('group', $group);
     }
 }

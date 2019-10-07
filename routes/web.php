@@ -165,7 +165,7 @@ Route::group(['middleware' => ['web']], function () {
     //////////////////////////// GROUPS /////////////////////////////////////////
 
     // Groups : only members (or everyone if a group is public)
-    Route::group(['middleware' => 'public', 'as' => 'groups', 'prefix' => 'groups/{group}'], function () {
+    Route::group(['as' => 'groups', 'prefix' => 'groups/{group}'], function () {
 
         // Crud stuff
         Route::get('edit', 'GroupController@edit')->name('.edit');

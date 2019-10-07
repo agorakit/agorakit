@@ -18,7 +18,6 @@ class GroupFileController extends Controller
         $this->middleware('member', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
         $this->middleware('verified', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
         $this->middleware('cache', ['only' => ['download', 'thumbnail', 'preview']]);
-        $this->middleware('public', ['only' => ['index', 'gallery', 'thumbnail', 'preview']]);
     }
 
     /**
@@ -142,37 +141,6 @@ class GroupFileController extends Controller
 
                     // Add file to disk
                     $file->addToStorage($uploaded_file);
-
-                    // this is replaced by the single line before ^^^:
-                    /*
-                    // generate filenames and path
-                    $filepath = '/groups/'.$file->group->id.'/files/';
-
-                    // simplified filename
-                    $filename = $file->id.'-'.str_slug($uploaded_file->getClientOriginalName()).'.'.strtolower($uploaded_file->getClientOriginalExtension());
-
-                    // resize big images only if they are png, gif or jpeg
-                    if (in_array($uploaded_file->getClientMimeType(), ['image/jpeg', 'image/png', 'image/gif'])) {
-                        Storage::disk('local')->makeDirectory($filepath);
-                        Image::make($uploaded_file)->widen(1200, function ($constraint) {
-                            $constraint->upsize();
-                        })
-                        ->save(storage_path().'/app/'.$filepath.$filename);
-                    } else {
-                        // store the file
-                        Storage::disk('local')->put($filepath.$filename, file_get_contents($uploaded_file->getRealPath()));
-                    }
-
-                    // add path and other infos to the file record on DB
-                    $file->path = $filepath.$filename;
-                    $file->name = $uploaded_file->getClientOriginalName();
-                    $file->original_filename = $uploaded_file->getClientOriginalName();
-                    $file->mime = $uploaded_file->getClientMimeType();
-                    $file->filesize = $uploaded_file->getClientSize();
-
-                    // save it again
-                    $file->save();
-                    */
 
                     // update activity timestamp on parent items
                     $group->touch();

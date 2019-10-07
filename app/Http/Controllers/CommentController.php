@@ -16,9 +16,6 @@ class CommentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('member', ['only' => ['reply', 'create', 'store', 'edit', 'update', 'destroy']]);
-        $this->middleware('verified', ['only' => ['reply', 'create', 'store', 'edit', 'update', 'destroy']]);
-        $this->middleware('public', ['only' => ['reply', 'create', 'store', 'edit', 'update', 'destroy']]);
     }
 
     public function store(Request $request, Group $group, Discussion $discussion)

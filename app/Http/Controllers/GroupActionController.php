@@ -15,7 +15,6 @@ class GroupActionController extends Controller
     {
         $this->middleware('member', ['only' => ['edit', 'update', 'destroy']]);
         $this->middleware('verified', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
-        $this->middleware('public', ['only' => ['index', 'indexJson', 'show']]);
     }
 
     /**
