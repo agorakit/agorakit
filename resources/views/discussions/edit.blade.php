@@ -3,11 +3,11 @@
 @section('content')
 
 @include('groups.tabs')
-<div class="tab_content">
+<div class="tab_content discussion">
   <h1>{{trans('messages.modify')}} <strong>"{{$discussion->name}}"</strong></h1>
 
 
-  {!! Form::model($discussion, array('action' => ['GroupDiscussionController@update', $discussion->group, $discussion], 'files' => true)) !!}
+  {!! Form::model($discussion, array('action' => ['GroupDiscussionController@update', $discussion->group, $discussion], 'files' => true,  'up-target' => '.content')) !!}
 
   @include('discussions.form')
 

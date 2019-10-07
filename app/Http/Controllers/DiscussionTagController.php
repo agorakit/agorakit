@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Discussion;
 use App\File;
 use App\Group;
+use App\Tag;
 use Auth;
 use Carbon\Carbon;
 use Gate;
@@ -30,6 +31,22 @@ class DiscussionTagController extends Controller
         ->with('model', $discussion)
         ->with('all_tags', $tags)
         ->with('model_tags', $discussion->tags);
+    }
+
+    public function create(Request $request, Group $group, Discussion $discussion, Tag $tag)
+    {
+        $this->authorize('update', $discussion);
+        $discussion->tag($tag->name);
+
+        return redirect(route('groups.discussions.tags.edit', [$discussion->group, $discussion]));
+    }
+
+    public function destroy(Request $request, Group $group, Discussion $discussion, Tag $tag)
+    {
+      $this->authorize('update', $discussion);
+      $discussion->untag($tag->name);
+
+      return redirect(route('groups.discussions.tags.edit', [$discussion->group, $discussion]));
     }
 
     /**

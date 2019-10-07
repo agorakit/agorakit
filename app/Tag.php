@@ -16,7 +16,7 @@ class Tag extends \Cviebrock\EloquentTaggable\Models\Tag
 
 
     /**
-     * Generates a random color if no one is set
+     * Generates a random color if none is set
      */
     public function getColorAttribute($value)
     {

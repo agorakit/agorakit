@@ -61,6 +61,15 @@
             @include('tags.tag')
           @endforeach
         @endif
+
+        @can('update', $discussion)
+
+          <a up-drawer=".list-group" href="{{ route('groups.discussions.tags.edit', [$group, $discussion]) }}">
+            <i class="fa fa-pencil"></i>
+            Edit tags
+          </a>
+
+        @endcan
       </div>
 
       <div class="body">

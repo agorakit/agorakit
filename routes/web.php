@@ -242,6 +242,8 @@ Route::group(['middleware' => ['web']], function () {
 
         // Discussion tags
         Route::get('discussions/{discussion}/tags', 'DiscussionTagController@edit')->name('.discussions.tags.edit');
+        Route::get('discussions/{discussion}/tags/create/{tag}', 'DiscussionTagController@create')->name('.discussions.tags.create');
+        Route::get('discussions/{discussion}/tags/delete/{tag}', 'DiscussionTagController@destroy')->name('.discussions.tags.delete');
 
         // Comments
         Route::post('discussions/{discussion}/reply', 'CommentController@store')->name('.discussions.reply');
