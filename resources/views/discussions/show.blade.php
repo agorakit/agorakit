@@ -55,7 +55,7 @@
         {{trans('messages.in')}} {{ $discussion->group->name}} {{ $discussion->created_at->diffForHumans()}}
       </div>
 
-      <div class="mb-3">
+      <div class="mb-3 tags">
         @if ($discussion->tags->count() > 0)
           @foreach ($discussion->tags as $tag)
             @include('tags.tag')
@@ -64,9 +64,8 @@
 
         @can('update', $discussion)
 
-          <a up-drawer=".list-group" href="{{ route('groups.discussions.tags.edit', [$group, $discussion]) }}">
-            <i class="fa fa-pencil"></i>
-            Edit tags
+          <a up-modal=".tab_content" href="{{ route('groups.discussions.tags.edit', [$group, $discussion]) }}">
+            <small>{{trans('messages.edit')}}</<small>
           </a>
 
         @endcan

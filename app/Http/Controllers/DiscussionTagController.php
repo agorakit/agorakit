@@ -28,10 +28,13 @@ class DiscussionTagController extends Controller
         $tags = $group->allowedTags();
 
         return view('discussions.tags')
-        ->with('model', $discussion)
+        ->with('group', $group)
+        ->with('discussion', $discussion)
         ->with('all_tags', $tags)
-        ->with('model_tags', $discussion->tags);
+        ->with('discussion_tags', $discussion->tags);
     }
+
+
 
     public function create(Request $request, Group $group, Discussion $discussion, Tag $tag)
     {

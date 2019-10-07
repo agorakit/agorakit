@@ -2,29 +2,32 @@
 
 @section('content')
 
-  <ul class="list-group" style="min-width: 20rem">
-    @foreach ($all_tags as $tag)
+@include('groups.tabs')
+<div class="tab_content p-4">
+  <h1>{{trans('messages.modify')}} <strong>"{{$discussion->name}}"</strong></h1>
 
-      @if ($model_tags->contains($tag))
-        <a up-target=".list-group" href="{{ route('groups.discussions.tags.delete', [$model->group, $model, $tag]) }}" class="list-group-item list-group-item-action">
-          <div class="d-flex">
-            <div style="width: 2rem"><i class="fas fa-check"></i></div>
-            <div style="background-color: {{$tag->color}}; width: 1rem; height :1rem" class="m-1"></div>
-            <div class="flex-grow-1">{{$tag->name}}</div>
-            <div><i class="fas fa-times"></i></div>
-          </div>
-        </a>
-      @else
 
-        <a up-target=".list-group" href="{{ route('groups.discussions.tags.create', [$model->group, $model, $tag]) }}" class="list-group-item list-group-item-action">
-          <div class="d-flex">
-            <div style="width: 2rem"></div>
-            <div style="background-color: {{$tag->color}}; width: 1rem; height :1rem" class="m-1"></div>
-            <div style="color: #aaa">{{$tag->name}}</div>
-          </div>
-        </a>
-      @endif
-    @endforeach
-  </ul>
+  {!! Form::model($discussion, array('action' => ['DiscussionTagController@update', $discussion->group, $discussion], 'up-target' => '.tags', 'up-layer' => 'page')) !!}
+
+
+      @foreach ($all_tags as $tag)
+        <div class="form-check mb-1">
+          <input class="form-check-input" type="checkbox" name="tags[]" value="{{$tag->normalized}}" id="{{$tag->normalized}}"
+          @if ($discussion_tags->contains($tag)) checked="checked" @endif>
+          <label class="form-check-label badge" for="{{$tag->normalized}}" style="background-color : {{$tag->color}}; color: white; font-size: 1rem">
+            {{$tag->name}}
+          </label>
+        </div>
+      @endforeach
+
+  <div class="form-group">
+    {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-primary mt-4']) !!}
+  </div>
+
+
+  {!! Form::close() !!}
+
+
+</div>
 
 @endsection

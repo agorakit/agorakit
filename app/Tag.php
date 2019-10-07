@@ -16,16 +16,20 @@ class Tag extends \Cviebrock\EloquentTaggable\Models\Tag
 
 
     /**
-     * Generates a random color if none is set
-     */
+    * Generates a random color if none is set, and saves the tag.
+    */
     public function getColorAttribute($value)
     {
         if ($value) {
             return $value;
         } else {
-            return sprintf("#%06x",rand(0,16777215));
+            $color = sprintf("#%06x",rand(0,16777215));
+            $this->color = $color;
+            $this->save();
+            return $color;
         }
     }
+
 
 
 
