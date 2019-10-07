@@ -66,6 +66,7 @@ class GroupTagController extends Controller
         $tags = $group->allowedTags();
         $tag = new Tag();
 
+
         return view('tags.create')
         ->with('group', $group)
         ->with('tags', $tags)

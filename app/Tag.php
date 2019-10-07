@@ -9,13 +9,24 @@ class Tag extends \Cviebrock\EloquentTaggable\Models\Tag
     use ValidatingTrait;
 
     protected $rules = [
-    'name'          => 'required',
-    'normalized'    => 'unique:taggable_tags',
-  ];
-    /*
-    public function getRouteKeyName()
+        'name'          => 'required',
+        'normalized'    => 'unique:taggable_tags',
+    ];
+
+
+
+    /**
+     * Generates a random color if no one is set
+     */
+    public function getColorAttribute($value)
     {
-    return 'normalized';
-}
-*/
+        if ($value) {
+            return $value;
+        } else {
+            return sprintf("#%06x",rand(0,16777215));
+        }
+    }
+
+
+
 }
