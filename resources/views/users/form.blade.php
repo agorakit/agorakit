@@ -37,10 +37,10 @@
 
 <div class="form-group">
   {!! Form::label('address', trans('messages.address') . ':') !!}
-  <div class="alert alert-info">
+  {!! Form::text('address', null, ['class' => 'form-control']) !!}
+  <div class="alert alert-info mt-2">
     {{trans('messages.address_privacy_and_help')}}
   </div>
-  {!! Form::textarea('address', null, ['class' => 'form-control']) !!}
 </div>
 
 @if (Auth::user()->isAdmin())
@@ -56,8 +56,4 @@
     {{Form::radio('is_verified', 'yes', $user->isVerified())}} {{trans('messages.yes')}} <br/>
     {{Form::radio('is_verified', 'no', !$user->isVerified())}} {{trans('messages.no')}} <br/>
   </div>
-
 @endif
-
-
-@include('partials.wysiwyg')

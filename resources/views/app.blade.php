@@ -7,10 +7,10 @@
 
   <link rel="shortcut icon" href="{{{ asset('logo/favicon.png') }}}">
 
-  <!-- Font awesome -->
+
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/v4-shims.css">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/at.js/1.5.4/css/jquery.atwho.min.css" />
   <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
 
 
@@ -50,11 +50,16 @@
 
   <!-- Scripts -->
   <script src="{{ asset('js/app.js') }}"></script>
+  <script src="{{ asset('js/unpoly.min.js') }}"></script>
+  <script src="{{ asset('js/trumbowyg.min.js') }}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Caret.js/0.3.1/jquery.caret.min.js"></script>
+  <script src="/js/atwho.js"></script>
 
 
   @yield('js')
   @stack('js')
 
+  <script src="{{ asset('js/compilers.js') }}"></script>
 
   <!-- footer -->
   @yield('footer')

@@ -7,29 +7,24 @@
 
   <link rel="shortcut icon" href="{{{ asset('logo/favicon.png') }}}">
 
-  <!-- Font awesome -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="https://unpkg.com/unpoly@0.53.0/dist/unpoly.min.css">
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/v4-shims.css">
 
-  <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
+    <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
 
 
-  <!-- additional css -->
+    <!-- additional css -->
 
-  @yield('css')
-  @stack('css')
+    @yield('css')
+    @stack('css')
 
-  <!-- head -->
-  @yield('head')
+    <!-- head -->
+    @yield('head')
 </head>
 
 <body>
 
-  @if (Auth::check())
-    @include('partials.nav')
-  @else
-    @include('partials.nav-guest')
-  @endif
 
   @include('partials.errors')
 
@@ -44,21 +39,22 @@
   <div class="credits">
     {{trans('messages.made_with')}}
     <a href="https://www.agorakit.org">Agorakit ({{config('agorakit.version')}})</a>
-    - <a href="{{request()->fullUrlWithQuery(['embed'=>1])}}">{{trans('messages.embed')}}</a>
   </div>
 
 
-  <!-- Scripts -->
-  <script src="{{ asset('js/app.js') }}"></script>
-  <script src="https://unpkg.com/unpoly@0.53.0/dist/unpoly.min.js"></script>
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/unpoly.min.js') }}"></script>
+    <script src="{{ asset('js/trumbowyg.min.js') }}"></script>
 
 
-  @yield('js')
-  @stack('js')
+    @yield('js')
+    @stack('js')
 
+    <script src="{{ asset('js/compilers.js') }}"></script>
 
-  <!-- footer -->
-  @yield('footer')
+    <!-- footer -->
+    @yield('footer')
 
 
 

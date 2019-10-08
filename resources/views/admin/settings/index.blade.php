@@ -7,7 +7,6 @@
 
   {!! Form::open(['action' => 'Admin\SettingsController@update', 'files' => true]) !!}
 
-  <div class="alert alert-info">{{ __('This admin setting page is a work in progress. Some settings are not used yet (but all are saved for future use)')}}</div>
 
   <div class="setting">
     <h2>{{ __('Application name')}}</h2>
@@ -140,6 +139,3 @@
 </div>
 
 @endsection
-
-
-@include('partials.wysiwyg')

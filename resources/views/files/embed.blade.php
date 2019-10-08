@@ -37,14 +37,11 @@
     </p>
 
     @if ($file->isLink())
-      <a class="mr-1" href="{{ route('groups.files.download', [$file->group, $file]) }}" target="_blank"  class="btn btn-primary">
+      <a class="mr-1" href="{{ route('groups.files.download', [$file->group, $file]) }}" target="_blank"  class="btn btn-primary btn-sm">
         {{trans('messages.visit')}}
       </a>
     @else
-      <a href="{{ route('groups.files.show', [$file->group, $file]) }}"  class="btn btn-primary">
-        {{trans('messages.details')}}
-      </a>
-      <a href="{{ route('groups.files.download', [$file->group, $file]) }}"  class="btn btn-primary" target="_blank">
+      <a href="{{ route('groups.files.download', [$file->group, $file]) }}"  class="btn btn-primary btn-sm" target="_blank">
         {{trans('messages.download')}}
       </a>
     @endif

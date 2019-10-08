@@ -5,14 +5,21 @@
 
 <div class="form-group">
     {!! Form::label('body', trans('messages.description')) !!}
-    {!! Form::textarea('body', null, ['class' => 'form-control wysiwyg', 'required']) !!}
+    {!! Form::textarea('body', null, [
+        'class' => 'form-control wysiwyg' ,
+        'required',
+        'data-mention-files' => route('groups.files.mention', $group),
+        'data-mention-discussions' => route('groups.discussions.mention', $group),
+        'data-mention-users' => route('groups.users.mention', $group)
+    ]
+    ) !!}
 </div>
 
 @include('partials.tags_form')
 
 <div class="form-group">
     {!! Form::label('location', trans('messages.location')) !!}
-    {!! Form::textarea('location', null, ['class' => 'form-control', 'rows'=>4]) !!}
+    {!! Form::text('location', null, ['class' => 'form-control', 'rows'=>4]) !!}
 </div>
 
 
@@ -44,10 +51,6 @@
     @endif
 </div>
 
-
-
-@include ('partials.wysiwyg')
-@include ('partials.mention')
 
 
 @section('css')
