@@ -7,18 +7,18 @@
 
 
 // Open external links in blank tabs
-require('./external_links');
+//require('./external_links');
 
 
 
 
 // Trumbowyg wysiwyg editor
-require('trumbowyg/dist/trumbowyg.min.js');
-// ...with mention plugin
-//require('trumbowyg/dist/plugins/mention/trumbowyg.mention.min.js');
+//require('trumbowyg/dist/trumbowyg.min.js');
+
+
 
 // Unpoly
-require('unpoly/dist/unpoly.min.js');
+//require('unpoly/dist/unpoly.min.js');
 //require('unpoly/dist/unpoly-bootstrap3.min.js');
 
 // tribute
