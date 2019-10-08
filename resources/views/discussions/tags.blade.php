@@ -19,12 +19,9 @@
   @endforeach
 
 
-  <div class="d-flex justify-content-between mt-3">
+  <div class="mt-3">
     <div>
       {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-primary']) !!}
-    </div>
-    <div class="btn btn-danger" up-close>
-      {{trans('messages.cancel')}}
     </div>
   </div>
 

@@ -49,7 +49,7 @@
       </div>
     </div>
 
-    <div class="d-flex my-3">
+    <div class="d-flex mb-4">
       <div class="mr-2 avatar">
         <img src="{{route('users.cover', [$action->user, 'small'])}}" class="rounded-circle"/>
       </div>
@@ -64,64 +64,49 @@
     </div>
 
 
-    <div class="row my-5">
+    <h3>{{trans('messages.begins')}} : {{$action->start->format('d/m/Y H:i')}}</h3>
 
-      <div class="col order-md-last mb-5">
-        <div class="d-flex">
-          <div class="mr-3">
-            <i class="far fa-clock"></i>
-          </div>
-          <div>
-            {{trans('messages.begins')}} : {{$action->start->format('d/m/Y H:i')}}
-            <br/>
-            {{trans('messages.ends')}} : {{$action->stop->format('d/m/Y H:i')}}
-          </div>
-        </div>
+    <h3>{{trans('messages.ends')}} : {{$action->stop->format('d/m/Y H:i')}}</h3>
 
-        @if (!empty($action->location))
-          <div class="d-flex">
-            <div class="mr-3">
-              <i class="fas fa-map-marker-alt"></i>
-            </div>
-            <div>
-              {{$action->location}}
-            </div>
-          </div>
-        @endif
-      </div>
+    @if (!empty($action->location))
+      <h3>{{trans('messages.location')}} : {{$action->location}}</h3>
+    @endif
 
 
-      <div class="col-md-8 ">
-        {!! filter($action->body) !!}
-        @if ($action->users->count() > 0)
-          <div class="d-flex justify-content-between mt-5 mb-4">
-            <h2>{{trans('messages.user_attending')}} ({{$action->users->count()}})</h2>
-            <div>
-              @if (Auth::user() && Auth::user()->isAttending($action))
-                <a class="btn btn-primary" up-modal=".main" href="{{route('groups.actions.unattend', [$group, $action])}}">{{trans('messages.unattend')}}</a>
-              @endif
-            </div>
-          </div>
-          <div class="d-flex flex-wrap users mt-2 mb-2">
-            @foreach($action->users as $user)
-              @include('users.user-card')
-            @endforeach
-          </div>
 
-        @endif
+    <div>
+      {!! filter($action->body) !!}
+    </div>
 
-
-        <div class="mt-4">
-          @if (Auth::user() && !Auth::user()->isAttending($action))
-            <a class="btn btn-primary" up-modal=".main" href="{{route('groups.actions.attend', [$group, $action])}}">{{trans('messages.attend')}}</a>
+    @if ($action->users->count() > 0)
+      <div class="d-flex justify-content-between mt-5 mb-4">
+        <h2>{{trans('messages.user_attending')}} ({{$action->users->count()}})</h2>
+        <div>
+          @if (Auth::user() && Auth::user()->isAttending($action))
+            <a class="btn btn-primary btn-sm" up-modal=".main" href="{{route('groups.actions.unattend', [$group, $action])}}">{{trans('messages.unattend')}}</a>
           @endif
         </div>
       </div>
+      <div class="d-flex flex-wrap users mt-2 mb-2">
+        @foreach($action->users as $user)
+          @include('users.user-card')
+        @endforeach
+      </div>
+
+    @endif
 
 
-
-
-
+    <div class="mt-4">
+      @if (Auth::user() && !Auth::user()->isAttending($action))
+        <a class="btn btn-primary" up-modal=".main" href="{{route('groups.actions.attend', [$group, $action])}}">{{trans('messages.attend')}}</a>
+      @endif
     </div>
+  </div>
 
-  @endsection
+
+
+
+
+</div>
+
+@endsection
