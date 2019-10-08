@@ -19,7 +19,7 @@ return [
     | Default: 9999999 (integer)
     |
     */
-    'cache-duration' => 0,
+    'cache-duration' => 99999999,
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,6 @@ return [
     'providers' => [
         Chain::class => [
             Nominatim::class  => ['https://nominatim.openstreetmap.org', 'Agorakit'],
-            GeoPlugin::class  => [],
         ],
     ],
 
