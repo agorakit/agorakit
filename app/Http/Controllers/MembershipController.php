@@ -34,7 +34,7 @@ class MembershipController extends Controller
         }
 
         $admins = $group->admins()->orderBy('name')->get();
-        $candidates = $group->candidates()->get();
+        $candidates = $group->candidates()->with('user')->has('user')->orderBy('membership', 'desc')->get();
         $invites = Invite::where('group_id', $group->id)->whereNull('claimed_at')->get();
 
         return view('users.index')
@@ -78,7 +78,7 @@ class MembershipController extends Controller
     */
     public function store(Request $request, Group $group)
     {
-        // we don't authorize here, because either the group is open and we allow the user to join directly, 
+        // we don't authorize here, because either the group is open and we allow the user to join directly,
         // either the group is closed and we store a candidate and notify gruop admins
         // $this->authorize('join', $group);
 
