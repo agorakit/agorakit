@@ -10,7 +10,7 @@ $border-color: $laravel-border-color;
 
 
 $theme-colors: (
-  "primary": #234266,
+  "primary": #13457a,
   "danger": #ff4136,
   "info": rgb(7, 87, 139),
 );
@@ -19,19 +19,10 @@ $alert-bg-level:     -6;
 $alert-border-level:  0;
 $alert-color-level:    10;
 
-// Brands
-//$primary:       rgb(28, 102, 129);
-//$primary: #3097D1;
-/*
-$primary: #13457a;
-$info: #8eb4cb;
-$success: #2ab27b;
-$warning: #cbb956;
-$danger: #dc3545;
-*/
+
 
 // Typography
-//$font-family-sans-serif: sans-serif;
+$font-family-sans-serif: 'Lato', sans-serif;
 $font-size-base: 0.95rem;
 $font-weight-base: 400;
 $line-height-base: 1.5;

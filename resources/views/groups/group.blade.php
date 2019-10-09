@@ -40,13 +40,13 @@
 
                       <div class="d-flex justify-content-between align-items-center">
                           <div class="btn-group">
-                              <a class="btn btn-outline-secondary" href="{{ action('GroupController@show', $group) }}"></i>
+                              <a class="btn btn-primary" href="{{ action('GroupController@show', $group) }}"></i>
                                   {{ trans('messages.visit') }}
                               </a>
 
                               @unless ($group->isMember())
                                   @can ('join', $group)
-                                      <a class="btn btn-outline-secondary" href="{{ action('MembershipController@store', $group) }}">
+                                      <a class="btn btn-secondary" href="{{ action('MembershipController@store', $group) }}">
                                           {{ trans('group.join') }}
                                       </a>
                                   @endcan

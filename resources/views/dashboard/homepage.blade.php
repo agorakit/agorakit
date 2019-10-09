@@ -24,7 +24,7 @@
 
 
             @if ($discussions->count() > 0)
-                <h1 class="small"> {{ __('Latest discussions') }}</h1>
+                <h2> {{ __('Latest discussions') }}</h2>
                 <a class="badge badge-pill badge-primary mb-4" href="{{ route('discussions.create') }}">
                     <i class="fa fa-plus"></i> {{trans('discussion.create_one_button')}}
                 </a>
@@ -45,7 +45,7 @@
         <div class="col-md-5">
 
             @if ($actions->count() > 0)
-                <h1 class="small">{{ __('Calendar') }}</h1>
+                <h2>{{ __('Calendar') }}</h2>
                 <a class="badge badge-pill badge-primary mb-4" href="{{ route('actions.create') }}">
                     <i class="fa fa-plus"></i> {{trans('action.create_one_button')}}
                 </a>
@@ -60,7 +60,7 @@
             @endif
 
             @if ($files->count() > 0)
-                <h1 class="small">{{ __('Files') }}</h1>
+                <h2>{{ __('Files') }}</h2>
 
                 <div class="files">
                     @forelse( $files as $file)
