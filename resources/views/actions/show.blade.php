@@ -8,19 +8,10 @@
   <div class="content">
 
     <div class="d-flex justify-content-between">
-      <div>
-        <h1>
-          {{ $action->name }}
-        </h1>
-        <div class="mb-3">
-          @if ($action->tags->count() > 0)
-            @foreach ($action->tags as $tag)
-              @include('tags.tag')
-            @endforeach
-          @endif
-        </div>
-      </div>
 
+      <h1>
+        {{ $action->name }}
+      </h1>
 
       <div class="ml-4 dropdown">
         <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -49,18 +40,26 @@
       </div>
     </div>
 
-    <div class="d-flex mb-4">
-      <div class="mr-2 avatar">
-        <img src="{{route('users.cover', [$action->user, 'small'])}}" class="rounded-circle"/>
-      </div>
-      <div class="meta">
-        <div>
-          {{trans('messages.author')}} <a href="{{ route('users.show', [$action->user]) }}">{{ $action->user->name}}</a> {{ $action->created_at->diffForHumans()}}
-        </div>
-        <div>
-          {{trans('messages.in')}} <a href="{{ route('groups.actions.index', [$group]) }}">{{ $action->group->name}}</a>
-        </div>
-      </div>
+
+    <div class="meta mb-3">
+      {{trans('messages.started_by')}}
+      <span class="user">
+        <a href="{{ route('users.show', [$action->user]) }}">{{ $action->user->name}}</a>
+      </span>
+      {{trans('messages.in')}}
+      <strong>
+        <a href="{{ route('groups.show', [$action->group]) }}">{{ $action->group->name}}</a>
+      </strong>
+      {{ $action->created_at->diffForHumans()}}
+    </div>
+
+
+    <div class="tags mb-3">
+      @if ($action->tags->count() > 0)
+        @foreach ($action->tags as $tag)
+          @include('tags.tag')
+        @endforeach
+      @endif
     </div>
 
 

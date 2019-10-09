@@ -22,24 +22,21 @@
             selectable: false,
             selectHelper: true,
             select: function(start, end) {
-                var title = prompt('{{trans('messages.title')}}');
-                var eventData;
-                if (title) {
-                    eventData = {
-                        title: title,
-                        start: start,
-                        end: end
-                    };
-                    $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-                    window.location.href = "{{ route('groups.actions.create', $group ) }}?start=" + encodeURIComponent(start.format('YYYY-MM-DD HH:mm')) + "&stop=" + encodeURIComponent(end.format('YYYY-MM-DD HH:mm')) + "&title=" + encodeURIComponent(title);
-                }
-                $('#calendar').fullCalendar('unselect');
+                up.modal.visit("{{ route('groups.actions.create', $group ) }}?start="
+                 + encodeURIComponent(start.format('YYYY-MM-DD HH:mm'))
+                 + "&stop="
+                 + encodeURIComponent(end.format('YYYY-MM-DD HH:mm')),
+                  { target: '.tab_content' });
+
+                //$('#calendar').fullCalendar('unselect');
             },
+
 
             eventClick:  function(event, jsEvent, view) {
                 up.modal.visit(event.url, { target: '.content' });
                 return false;
             },
+            
 
             eventRender: function(event, element)
             {
@@ -85,42 +82,6 @@
 
 
         @include('actions.ical')
-
-
-        <div id="fullCalModal" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                        <h4 id="modalTitle" class="modal-title"></h4>
-                    </div>
-
-                    <div class="modal-body">
-                        <p>
-                            <strong>{{trans('messages.description')}}</strong> : <span id="modal-body"></span>
-                        </p>
-
-                        <strong>{{trans('messages.location')}} : </strong><span id="modal-location"></span>
-                        <br/>
-                        <strong>{{trans('messages.start')}} : </strong><span id="modal-start"></span>
-                        <br/>
-                        <strong>{{trans('messages.stop')}} : </strong><span id="modal-stop"></span>
-                        <br/>
-
-                    </div>
-
-                    <div class="modal-footer">
-                        <a class="btn btn-primary" id="eventUrl">{{trans('messages.details')}}</a>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-
-
-
-
 
 
     </div>
