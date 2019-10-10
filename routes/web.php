@@ -244,8 +244,8 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('discussions/{discussion}/tags', 'DiscussionTagController@edit')->name('.discussions.tags.edit');
         Route::post('discussions/{discussion}/tags', 'DiscussionTagController@update')->name('.discussions.tags.update');
 
-        Route::get('discussions/{discussion}/tags/create/{tag}', 'DiscussionTagController@create')->name('.discussions.tags.create');
-        Route::get('discussions/{discussion}/tags/delete/{tag}', 'DiscussionTagController@destroy')->name('.discussions.tags.delete');
+        Route::post('discussions/{discussion}/tags/create', 'DiscussionTagController@create')->name('.discussions.tags.create');
+        //Route::get('discussions/{discussion}/tags/delete/{tag}', 'DiscussionTagController@destroy')->name('.discussions.tags.delete');
 
         // Comments
         Route::post('discussions/{discussion}/reply', 'CommentController@store')->name('.discussions.reply');

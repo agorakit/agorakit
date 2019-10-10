@@ -36,10 +36,12 @@ class DiscussionTagController extends Controller
 
 
 
-    public function create(Request $request, Group $group, Discussion $discussion, Tag $tag)
+    public function create(Request $request, Group $group, Discussion $discussion)
     {
         $this->authorize('update', $discussion);
-        $discussion->tag($tag->name);
+        if ($request->has('tag')) {
+            $discussion->tag($request->get('tag'));
+        }
 
         return redirect(route('groups.discussions.tags.edit', [$discussion->group, $discussion]));
     }
