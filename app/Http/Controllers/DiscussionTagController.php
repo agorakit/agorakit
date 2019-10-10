@@ -41,6 +41,8 @@ class DiscussionTagController extends Controller
         $this->authorize('update', $discussion);
         if ($request->has('tag')) {
             $discussion->tag($request->get('tag'));
+            $tag = Tag::findByName($request->get('tag'));
+            $group->addAllowedTag($tag);
         }
 
         return redirect(route('groups.discussions.tags.edit', [$discussion->group, $discussion]));

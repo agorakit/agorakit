@@ -4,16 +4,16 @@
 
   <div class="tags-ui">
 
-
-        {!! Form::model($discussion, array('action' => ['DiscussionTagController@create', $discussion->group, $discussion], 'up-target' => '.tags-ui')) !!}
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="New tag" name="tag">
-          <div class="input-group-append">
-            <input type="submit" class="btn btn-secondary" value="{{trans('messages.create')}}">
-          </div>
+    @can('create-tag', $group)
+      {!! Form::model($discussion, array('action' => ['DiscussionTagController@create', $discussion->group, $discussion], 'up-target' => '.tags-ui')) !!}
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="New tag" name="tag">
+        <div class="input-group-append">
+          <input type="submit" class="btn btn-secondary" value="{{trans('messages.create')}}">
         </div>
-        {!! Form::close() !!}
-
+      </div>
+      {!! Form::close() !!}
+    @endcan
 
 
     @if ($all_tags->count() > 0)
@@ -29,9 +29,6 @@
           </label>
         </div>
       @endforeach
-
-
-
       <div class="mt-3">
         <div>
           {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-primary']) !!}

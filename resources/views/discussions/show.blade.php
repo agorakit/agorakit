@@ -63,11 +63,9 @@
         @endif
 
         @can('update', $discussion)
-
-          <a up-popup=".dialog" href="{{ route('groups.discussions.tags.edit', [$group, $discussion]) }}">
-            <small>{{trans('messages.edit')}}</small>
+          <a class="small ml-2" up-popup=".dialog" href="{{ route('groups.discussions.tags.edit', [$group, $discussion]) }}">
+            {{__('Edit tags')}}
           </a>
-
         @endcan
       </div>
 
