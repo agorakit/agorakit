@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-  <a class="navbar-brand" href="{{ route('index') }}">
+  <a up-target="main" class="navbar-brand" href="{{ route('index') }}">
     @if (Storage::exists('public/logo/favicon.png'))
       <img src="{{{ asset('storage/logo/favicon.png') }}}" width="40" height="40"/>
     @else
@@ -23,13 +23,13 @@
         </a>
         <div class="dropdown-menu">
 
-          <a class="dropdown-item" class="dropdown-item" href="{{ action('GroupController@indexOfMyGroups') }}">
+          <a up-target="main" class="dropdown-item" class="dropdown-item" href="{{ action('GroupController@indexOfMyGroups') }}">
             {{trans('messages.my_groups')}}
           </a>
 
           <div class="dropdown-divider"></div>
 
-          <a class="dropdown-item" class="dropdown-item" href="{{ action('GroupController@index') }}">
+          <a up-target="main" class="dropdown-item" class="dropdown-item" href="{{ action('GroupController@index') }}">
             {{trans('messages.all_groups')}}
           </a>
 
@@ -37,21 +37,21 @@
 
 
           @forelse (Auth::user()->groups()->orderBy('name')->get() as $group)
-            <a class="dropdown-item" href="{{ route('groups.show', $group)}}">{{$group->name}}</a>
+            <a up-target="main" class="dropdown-item" href="{{ route('groups.show', $group)}}">{{$group->name}}</a>
           @empty
             <a class="dropdown-item" href="{{ route('index')}}">{{ trans('membership.not_subscribed_to_group_yet') }}</a>
           @endforelse
 
           <div class="dropdown-divider"></div>
 
-          <a class="dropdown-item" href="{{ route('groups.create') }}">
+          <a up-target="main" class="dropdown-item" href="{{ route('groups.create') }}">
             <i class="fa fa-bolt"></i> {{ trans('group.create_a_group_button') }}
           </a>
         </div>
       </div>
 
       <div class="nav-item">
-        <a class="nav-link" href="{{ action('DiscussionController@index') }}">
+        <a up-target="main" class="nav-link" href="{{ action('DiscussionController@index') }}">
           <i class="fa fa-comments-o"></i> {{trans('messages.discussions')}}
         </a>
       </div>
@@ -63,7 +63,7 @@
       </div>
 
       <div class="nav-item">
-        <a class="nav-link" href="{{ action('TagController@index') }}">
+        <a up-target="main" class="nav-link" href="{{ action('TagController@index') }}">
           <i class="fa fa-tag"></i> @lang('Tags')
         </a>
       </div>
@@ -80,11 +80,11 @@
           <a class="dropdown-item" href="{{ action('MapController@index') }}">
             <i class="fa fa-map-marker"></i> {{trans('messages.map')}}
           </a>
-          <a class="dropdown-item" href="{{ action('FileController@index') }}">
+          <a up-target="main" class="dropdown-item" href="{{ action('FileController@index') }}">
             <i class="fa fa-files-o"></i> {{trans('messages.files')}}
           </a>
 
-          <a class="dropdown-item" href="{{ action('UserController@index') }}">
+          <a up-target="main" class="dropdown-item" href="{{ action('UserController@index') }}">
             <i class="fa fa-users"></i> {{trans('messages.users_list')}}
           </a>
         </div>
@@ -111,7 +111,7 @@
 
 
       <!-- search-->
-      <form class="form-inline my-2 my-lg-0" role="search" action="{{url('search')}}">
+      <form up-target=".main" class="form-inline my-2 my-lg-0" role="search" action="{{url('search')}}" method="get">
         <div class="input-group">
           <input class="form-control form-control-sm" type="text" name="query"  placeholder="{{trans('messages.search')}}..." aria-label="Search">
 
@@ -156,7 +156,7 @@
           <div class="dropdown-menu dropdown-menu-right">
             @foreach(\Config::get('app.locales') as $locale)
               @if($locale !== app()->getLocale())
-                <a class="dropdown-item" href="{{Request::url()}}?force_locale={{$locale}}">
+                <a up-target=".main" class="dropdown-item" href="{{Request::url()}}?force_locale={{$locale}}">
                   {{ strtoupper($locale) }}
                 </a>
               @endif
@@ -175,8 +175,8 @@
         </a>
 
         <div class="dropdown-menu dropdown-menu-right" role="menu">
-          <a class="dropdown-item" href="{{route('users.show', Auth::user())}}"><i class="fa fa-btn fa-user"></i> {{ trans('messages.profile') }}</a>
-          <a class="dropdown-item" href="{{route('users.edit', Auth::user())}}"><i class="fa fa-btn fa-edit"></i> {{ trans('messages.edit_my_profile') }}</a>
+          <a up-target=".main" class="dropdown-item" href="{{route('users.show', Auth::user())}}"><i class="fa fa-btn fa-user"></i> {{ trans('messages.profile') }}</a>
+          <a up-target=".main" class="dropdown-item" href="{{route('users.edit', Auth::user())}}"><i class="fa fa-btn fa-edit"></i> {{ trans('messages.edit_my_profile') }}</a>
 
           <a class="dropdown-item" href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
             <i class="fa fa-btn fa-sign-out"></i> {{ trans('messages.logout') }}
@@ -192,11 +192,9 @@
             <div class="dropdown-divider"></div>
             <h6 class="dropdown-header">Admin</h6>
 
-            <a class="dropdown-item" href="{{ url('/admin/settings') }}">
+            <a up-target=".main" class="dropdown-item" href="{{ url('/admin/settings') }}">
               <i class="fa fa-cog"></i> Settings
             </a>
-
-
 
             <a class="dropdown-item" href="{{ url('/admin/user') }}">
               <i class="fa fa-users"></i> Users

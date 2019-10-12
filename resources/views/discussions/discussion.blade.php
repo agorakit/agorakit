@@ -1,15 +1,15 @@
-<div class="discussion @if ($discussion->unReadCount() > 0) unread @endif">
+<div up-expand class="discussion @if ($discussion->unReadCount() > 0) unread @endif">
 
-  <a href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}">
-    <div class="avatar">
-      <img src="{{route('users.cover', [$discussion->user, 'small'])}}" class="rounded-circle"/>
-    </div>
-  </a>
+
+  <div class="avatar">
+    <img src="{{route('users.cover', [$discussion->user, 'small'])}}" class="rounded-circle"/>
+  </div>
+  
   <div class="content w-100">
 
     <div class="d-flex">
       <div class="name mr-2">
-        <a href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}">
+        <a up-target="main" href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}">
           {{ $discussion->name }}
         </a>
       </div>
