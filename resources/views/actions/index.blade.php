@@ -1,59 +1,10 @@
 @extends('app')
 
-@section('footer')
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/lang-all.js"></script>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
-
-
-
-    <script>
-    $(document).ready(function() {
-        $('#calendar').fullCalendar({
-            lang: '{{App::getLocale()}}',
-            events: '{{route('groups.actions.index.json', $group)}}',
-            header: {
-                left: 'prev,next',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay'
-            },
-
-            selectable: false,
-            selectHelper: true,
-            select: function(start, end) {
-                up.modal.visit("{{ route('groups.actions.create', $group ) }}?start="
-                 + encodeURIComponent(start.format('YYYY-MM-DD HH:mm'))
-                 + "&stop="
-                 + encodeURIComponent(end.format('YYYY-MM-DD HH:mm')),
-                  { target: '.tab_content' });
-
-                //$('#calendar').fullCalendar('unselect');
-            },
-
-
-            eventClick:  function(event, jsEvent, view) {
-                up.modal.visit(event.url, { target: '.content' });
-                return false;
-            },
-            
-
-            eventRender: function(event, element)
-            {
-                $(element).tooltip({title: event.summary});
-            }
-        });
-    });
-    </script>
-
-@endsection
-
 @section('content')
 
     @include('groups.tabs')
 
     <div class="tab_content">
-
 
         @auth
             <div class="toolbox d-md-flex mb-4">
@@ -76,10 +27,7 @@
         @endauth
 
 
-
-
-        <div id="calendar"></div>
-
+        <div id="calendar" class="calendar" data-json="{{route('groups.actions.index.json', $group)}}" data-locale="{{App::getLocale()}}"></div>
 
         @include('actions.ical')
 

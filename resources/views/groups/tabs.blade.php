@@ -47,7 +47,7 @@
         @if ($group->getSetting('module_action', true) == true)
             @can ('viewActions', $group)
                 <li class="nav-item">
-                    <a href="{{ route('groups.actions.index', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'action')) active @endif">
+                    <a up-target="tab_content" href="{{ route('groups.actions.index', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'action')) active @endif">
                         <i class="fa fa-calendar"></i> <span class="d-none d-lg-inline">{{ trans('messages.agenda') }}</span>
                     </a>
                 </li>

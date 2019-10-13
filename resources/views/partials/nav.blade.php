@@ -57,7 +57,7 @@
       </div>
 
       <div class="nav-item">
-        <a class="nav-link" href="{{ action('ActionController@index') }}">
+        <a up-target="main" class="nav-link" href="{{ action('ActionController@index') }}">
           <i class="fa fa-calendar"></i> {{trans('messages.agenda')}}
         </a>
       </div>

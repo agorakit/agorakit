@@ -1,9 +1,6 @@
 // Here we put custom compilers for unpoly
 // Check docs here : https://unpoly.com/up.compiler
 
-
-
-
 up.$compiler('.wysiwyg', function($element, data) {
 
   $element.trumbowyg({
@@ -62,3 +59,29 @@ up.$compiler('.wysiwyg', function($element, data) {
   });
 
 })
+
+
+
+
+up.$compiler('.calendar', function($element, data) {
+
+  var json = $element[0].getAttribute("data-json")
+  var locale = $element[0].getAttribute("data-locale")
+  $element.fullCalendar({
+    lang: locale,
+    events: json,
+    header: {
+      left: 'prev,next',
+      center: 'title',
+      right: 'month,agendaWeek,agendaDay'
+    },
+    eventClick:  function(event, jsEvent, view) {
+      up.modal.visit(event.url, { target: '.content' });
+      return false;
+    },
+    eventRender: function(event, element)
+    {
+      $(element).tooltip({title: event.group_name + ' : ' + event.title + ' : ' + event.summary});
+    }
+  });
+});
