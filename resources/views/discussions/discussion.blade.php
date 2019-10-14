@@ -4,7 +4,7 @@
   <div class="avatar">
     <img src="{{route('users.cover', [$discussion->user, 'small'])}}" class="rounded-circle"/>
   </div>
-  
+
   <div class="content w-100">
 
     <div class="d-flex">
@@ -13,13 +13,13 @@
           {{ $discussion->name }}
         </a>
       </div>
-      <div class="tags">
-        @if ($discussion->tags->count() > 0)
-          @foreach ($discussion->tags as $tag)
-            @include('tags.tag')
-          @endforeach
-        @endif
-      </div>
+    </div>
+    <div class="tags">
+      @if ($discussion->tags->count() > 0)
+        @foreach ($discussion->tags as $tag)
+          @include('tags.tag')
+        @endforeach
+      @endif
     </div>
 
     <div class="summary">

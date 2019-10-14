@@ -5,9 +5,6 @@
   @include('groups.tabs')
   <div class="tab_content">
 
-
-
-
     <div class="discussion mb-5">
 
       <div class="d-flex justify-content-between">
@@ -57,13 +54,15 @@
 
       <div class="mb-3 tags">
         @if ($discussion->tags->count() > 0)
-          @foreach ($discussion->tags as $tag)
-            @include('tags.tag')
-          @endforeach
+          <span class="mr-2">
+            @foreach ($discussion->tags as $tag)
+              @include('tags.tag')
+            @endforeach
+          </span>
         @endif
 
         @can('update', $discussion)
-          <a class="small ml-2" up-popup=".dialog" href="{{ route('groups.discussions.tags.edit', [$group, $discussion]) }}">
+          <a class="small" up-popup=".dialog" href="{{ route('groups.discussions.tags.edit', [$group, $discussion]) }}">
             {{__('Edit tags')}}
           </a>
         @endcan

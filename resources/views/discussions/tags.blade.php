@@ -7,7 +7,7 @@
     @can('create-tag', $group)
       {!! Form::model($discussion, array('action' => ['DiscussionTagController@create', $discussion->group, $discussion], 'up-target' => '.tags-ui')) !!}
       <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="New tag" name="tag">
+        <input type="text" class="form-control" placeholder="New tag" name="tag" required>
         <div class="input-group-append">
           <input type="submit" class="btn btn-secondary" value="{{trans('messages.create')}}">
         </div>
