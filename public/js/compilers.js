@@ -1,6 +1,8 @@
 // Here we put custom compilers for unpoly
 // Check docs here : https://unpoly.com/up.compiler
 
+
+
 up.$compiler('.wysiwyg', function($element, data) {
 
   $element.trumbowyg({
@@ -84,4 +86,13 @@ up.$compiler('.calendar', function($element, data) {
       $(element).tooltip({title: event.group_name + ' : ' + event.title + ' : ' + event.summary});
     }
   });
+});
+
+
+up.compiler('.spinner', function(element) {
+  function show() { element.style.display = 'block' }
+  function hide() { element.style.display = 'none' }
+  up.on('up:proxy:slow', show)
+  up.on('up:proxy:recover', hide)
+  hide()
 });

@@ -36,6 +36,11 @@
 
   @include('partials.errors')
 
+  <div class="spinner shadow">
+    <i class="far fa-save"></i>
+    Please wait!
+  </div>
+
   <div class="container main-container @if (isset($dialog)) main-dialog @endif">
     <div class="main">
       @yield('content')
