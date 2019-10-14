@@ -1,11 +1,9 @@
+@extends('dialog')
+
 @auth
-	@extends('errors::layout')
+	@section('content')
 
-	@section('title', 'Unauthorized')
-
-	@section('message')
-
-		This action is unauthorized
+		<h1>This action is unauthorized</h1>
 
 	@endsection
 @endauth
@@ -13,11 +11,8 @@
 
 
 @guest
-	@extends('dialog')
-
 	@section('content')
 
 		@include('auth.login-form')
-
 	@endsection
 @endguest
