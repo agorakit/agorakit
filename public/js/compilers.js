@@ -1,8 +1,14 @@
 // Here we put custom compilers for unpoly
 // Check docs here : https://unpoly.com/up.compiler
 
+/*
+To enable a wysiwyg editor, add a .wysiwyg class to a textarea
 
-
+You can also provide a json url for atwho mention plugin
+- data-mention-users for @users
+- data-mention-discussions
+- data-mention-files
+*/
 up.$compiler('.wysiwyg', function($element, data) {
 
   $element.trumbowyg({
@@ -64,7 +70,11 @@ up.$compiler('.wysiwyg', function($element, data) {
 
 
 
-
+/*
+Add a calendar to any div with the calendar class
+- data-locale to define the correct locale
+- data-json for the json url feed to use
+*/
 up.$compiler('.calendar', function($element, data) {
 
   var json = $element[0].getAttribute("data-json")
@@ -88,11 +98,25 @@ up.$compiler('.calendar', function($element, data) {
   });
 });
 
-
+/*
+A simple spinner that is shown when a request takes too long
+*/
 up.compiler('.spinner', function(element) {
   function show() { element.style.display = 'block' }
   function hide() { element.style.display = 'none' }
   up.on('up:proxy:slow', show)
   up.on('up:proxy:recover', hide)
   hide()
+});
+
+/*
+- add a tags class to select to enable selectize on it
+- add data-allow-new-tags to allow the creation of new tags
+*/
+up.$compiler('select.tags', function($element, data) {
+  var create = $element[0].hasAttribute("data-allow-new-tags")
+  $element.selectize({
+    persist: true,
+    create: create
+  });
 });

@@ -1,20 +1,6 @@
 @extends('app')
 
 
-@include('partials.selectize')
-
-@push('js')
-    <script>
-
-    $( document ).ready(function() {
-        $('#users').selectize({
-        });
-    });
-    </script>
-@endpush
-
-
-
 @section('content')
 
     @include('groups.tabs')
@@ -32,7 +18,7 @@
 
         <div class="form-group">
             {!! Form::label('users', trans('membership.users_to_add')) !!}
-            {!! Form::select('users[]', $notmembers, null, ['multiple' => true, 'class' => 'form-control', 'required', 'id' =>'users']) !!}
+            {!! Form::select('users[]', $notmembers, null, ['multiple' => true, 'class' => 'form-control tags', 'required', 'id' =>'users']) !!}
         </div>
 
         <div class="form-group">
