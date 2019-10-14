@@ -1,5 +1,5 @@
-<div class="col-md-4" up-expand>
-    <div class="card tag-group @foreach ($group->tags as $tag)tag-{{$tag->tag_id}} @endforeach">
+<div up-expand>
+    <div class="mb-3 card tag-group @foreach ($group->tags as $tag)tag-{{$tag->tag_id}} @endforeach">
 
         <a href="{{ action('GroupController@show', $group) }}">
             @if ($group->hasCover())

@@ -1,13 +1,18 @@
-<div class="mt-5">
-  <a class="btn btn-primary" href="{{action('IcalController@index')}}">
-    <i class="far fa-calendar-alt"></i>
-    Public iCal feed
-  </a>
+<div class="mt-5 d-md-flex justify-content-between">
+
+  <div class="mb-2">
+    <a class="btn btn-secondary" href="{{action('IcalController@index')}}">
+      <i class="far fa-calendar-alt"></i>
+      Public iCal feed
+    </a>
+  </div>
 
   @auth
-    <a class="btn btn-primary" href="{{URL::signedRoute('users.ical', ['user' => Auth::user()])}}">
-      <i class="far fa-calendar-alt"></i>
-      Personalized iCal feed of your groups
-    </a>
+    <div class="mb-2">
+      <a class="btn btn-secondary" href="{{URL::signedRoute('users.ical', ['user' => Auth::user()])}}">
+        <i class="fas fa-user-lock"></i>
+        Personalized iCal feed of your groups
+      </a>
+    </div>
   @endauth
 </div>

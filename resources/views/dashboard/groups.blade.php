@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="d-flex justify-content-between mb-3">
+    <div class="d-md-flex justify-content-between mb-3">
 
         <h1><a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.all_groups') }}</h1>
 
@@ -16,7 +16,6 @@
                 </div>
             </div>
         </form>
-
     </div>
 
 
@@ -25,27 +24,22 @@
         @if ($groups)
             {!! $groups->appends(request()->query())->links() !!}
 
-            <div class="row mb-3">
-                @forelse( $groups as $group )
-                    @include('groups.group')
+            @forelse($groups->chunk(3) as $chunk)
+                <div class="row mb-3">
+                    @foreach($chunk as $group)
+                        <div class="col-md-4">
+                            @include('groups.group')
+                        </div>
+                    @endforeach
+                </div>
+            @empty
+                <div class="alert alert-info" role="alert">
+                    {{trans('messages.nothing_yet')}}
+                </div>
+            @endforelse
 
 
 
-                    @if ($loop->iteration % 3 == 0)
-                    </div>
-                    <div class="row mb-3">
-                    @endif
-
-
-
-                @empty
-                    <div class="alert alert-info" role="alert">
-                        {{trans('messages.nothing_yet')}}
-                    </div>
-                @endforelse
-
-
-            </div>
 
             {!! $groups->appends(request()->query())->links() !!}
 

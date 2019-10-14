@@ -39,11 +39,3 @@
 
 
 @endsection
-
-@section('footer')
-
-
-
-
-
-@endsection
