@@ -16,6 +16,7 @@ class GroupController extends Controller
     {
         $this->middleware('verified', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
         $this->middleware('groupadmin', ['only' => ['edit', 'update', 'destroy']]);
+        $this->middleware('auth', ['only' => ['indexOfMyGroups']]);
     }
 
     public function index(Request $request)
