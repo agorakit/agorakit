@@ -15,37 +15,39 @@ use Mail;
 class SendNotifications extends Command
 {
     /**
-     *  The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'agorakit:sendnotifications {--batch=100}';
+    *  The name and signature of the console command.
+    *
+    * @var string
+    */
+    protected $signature = 'agorakit:sendnotifications {--batch=1000}';
 
     /**
-     * The console command description.
-     *
-     * @var string
-     */
+    * The console command description.
+    *
+    * @var string
+    */
     protected $description = 'Sends all the pending notifications to all users who requested it. This might take time. Call this frequently to avoid trouble';
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
+    * Create a new command instance.
+    *
+    * @return void
+    */
     public function __construct()
     {
         parent::__construct();
     }
 
     /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
+    * Execute the console command.
+    *
+    * @return mixed
+    */
     public function handle()
     {
         $notifications = $this->getNotificationsToSend();
+
+        $this->info(count($notifications) . ' notifications to send');
 
         if (is_array($notifications)) {
             if (count($notifications) > 0) {
@@ -67,12 +69,14 @@ class SendNotifications extends Command
     }
 
     /**
-     * Get a list of memberships rows that need to be processed for notification
-     * It means people who have opted in for notifcations and who have not been notified for a long enough time
-     * (This is configured, per user, per group, in notification_interval in the membership table).
-     */
+    * Get a list of memberships rows that need to be processed for notification
+    * It means people who have opted in for notifcations and who have not been notified for a long enough time
+    * (This is configured, per user, per group, in notification_interval in the membership table).
+    */
     public function getNotificationsToSend()
     {
+        //DB::enableQueryLog();
+
         // I use Carbon::now() instead of the now() provided by mysql to avoid different timezone settings in differents servers (php vs mysql config)
         $notifications = DB::select('
         select * from
@@ -80,7 +84,10 @@ class SendNotifications extends Command
         where notification_interval > 0
         and membership >= :membership) as memberships
         where notify < :now or notify is null limit :batch
-        ', ['now' => Carbon::now()->toDateTimeString(), 'membership' => \App\Membership::MEMBER, 'batch' => $this->option('batch')]);
+        ', ['now' => Carbon::now(), 'membership' => \App\Membership::MEMBER, 'batch' => $this->option('batch')]);
+
+
+        //dd(DB::getQueryLog());
 
 
         return $notifications;
@@ -159,8 +166,8 @@ class SendNotifications extends Command
     /******************************** The following queries are used in the mail notification system : *************************/
 
     /**
-     * Returns a list of unread discussions for the $user_id $user, in the group_id group, since the $since time has passed.
-     */
+    * Returns a list of unread discussions for the $user_id $user, in the group_id group, since the $since time has passed.
+    */
     public function getUnreadDiscussionsSince($user_id, $group_id, $since)
     {
         $discussions = \App\Discussion::fromQuery('select * from
@@ -175,20 +182,20 @@ class SendNotifications extends Command
 
             ', ['user_id' => $user_id, 'group_id' => $group_id, 'since' => $since]);
 
-        return $discussions;
-    }
+            return $discussions;
+        }
 
-    /**
-     * Returns a list of users that joined the $group_id $since this timestamp.
-     * Excludes the $user_id (which might be set to the current user).
-     */
-    public function getNewMembersSince($user_id, $group_id, $since)
-    {
-        $users = \App\User::fromQuery('select * from users where id in
+        /**
+        * Returns a list of users that joined the $group_id $since this timestamp.
+        * Excludes the $user_id (which might be set to the current user).
+        */
+        public function getNewMembersSince($user_id, $group_id, $since)
+        {
+            $users = \App\User::fromQuery('select * from users where id in
             (select user_id from membership where group_id = :group_id and created_at > :since and membership >= :membership and user_id <> :user_id)
 
             ', ['user_id' => $user_id, 'group_id' => $group_id, 'since' => $since, 'membership' => \App\Membership::MEMBER]);
 
-        return $users;
+            return $users;
+        }
     }
-}
