@@ -17,6 +17,7 @@ return [
   'apply_intro'                     => 'Ce groupe est un groupe fermé. Vous pouvez demander de le rejoindre ci-dessous. Un responsable du groupe recevra votre demande et s\'en occupera.',
   'click_here'                      => 'Cliquez ici',
   'directly_add_users_button'       => 'Ajouter directement des utilisateurs',
+  'instantly'                       => 'Instantanément',
   'everyday'                        => 'Tous les jours',
   'everyhour'                       => 'Toutes les heures',
   'everymonth'                      => 'Tous les mois',

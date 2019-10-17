@@ -1,12 +1,12 @@
 <?php
 
 /**
- * General helper functions that don't have a batter place.
- */
+* General helper functions that don't have a batter place.
+*/
 
 /**
- * returns the value of $name setting as stored in DB.
- */
+* returns the value of $name setting as stored in DB.
+*/
 function setting($name, $default = false)
 {
     return \App\Setting::get($name, $default);
@@ -36,6 +36,9 @@ function intervalToMinutes($interval)
     $minutes = 60 * 24;
 
     switch ($interval) {
+        case 'instantly':
+        $minutes = 1;
+        break;
         case 'hourly':
         $minutes = 60;
         break;
@@ -64,6 +67,9 @@ function minutesToInterval($minutes)
     $interval = 'daily';
 
     switch ($minutes) {
+        case 1:
+        $interval = 'instantly';
+        break;
         case 60:
         $interval = 'hourly';
         break;

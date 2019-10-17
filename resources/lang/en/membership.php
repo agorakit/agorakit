@@ -17,6 +17,7 @@ return [
   'apply_intro'                     => 'This group is closed so you need to apply using the button bellow. An admin will be notified and will act accordingly.',
   'click_here'                      => 'Click here',
   'directly_add_users_button'       => 'Directly add users',
+  'instantly'                       => 'As soon as possible',
   'everyday'                        => 'Every day',
   'everyhour'                       => 'Every hour',
   'everymonth'                      => 'Every month',
