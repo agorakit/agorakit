@@ -80,7 +80,8 @@ class SendNotifications extends Command
         where notification_interval > 0
         and membership >= :membership) as memberships
         where notify < :now or notify is null limit :batch
-        ', ['now' => Carbon::now(), 'membership' => \App\Membership::MEMBER, 'batch' => $this->option('batch')]);
+        ', ['now' => Carbon::now()->toDateTimeString(), 'membership' => \App\Membership::MEMBER, 'batch' => $this->option('batch')]);
+
 
         return $notifications;
     }
@@ -112,7 +113,7 @@ class SendNotifications extends Command
             $users = $this->getNewMembersSince($user->id, $group->id, $membership->notified_at);
 
             // find future actions until next 2 weeks, this is curently hardcoded... TODO use the mail sending interval to determine stop date
-            $actions = \App\Action::where('start', '>', Carbon::now())
+            $actions = \App\Action::where('start', '>', Carbon::now()->toDateTimeString())
             ->where('stop', '<', Carbon::now()->addWeek()->addWeek())
             ->where('group_id', '=', $group->id)
             ->orderBy('start')
@@ -125,7 +126,7 @@ class SendNotifications extends Command
             ->count();
 
             // in all cases update timestamp
-            $membership->notified_at = Carbon::now();
+            $membership->notified_at = Carbon::now()->toDateTimeString();
             $membership->save();
 
             // if we have anything, build the message and send
