@@ -38,7 +38,7 @@ class Verified
         if ($request->user()->verified == 1) {
             return $next($request);
         } else {
-            return redirect()->back()->with('message', trans('messages.email_not_verified'));
+            return redirect('home')->with('message', trans('messages.email_not_verified'));
         }
     }
 }
