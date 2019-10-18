@@ -68,8 +68,8 @@ class UserController extends Controller
     }
 
     /**
-     * Show contact form for the user.
-     */
+    * Show contact form for the user.
+    */
     public function contactForm(User $user)
     {
         if ($user->isVerified()) {
@@ -84,8 +84,8 @@ class UserController extends Controller
     }
 
     /**
-     * Mails the user.
-     */
+    * Mails the user.
+    */
     public function contact(User $user, Request $request)
     {
         $from_user = Auth::user();
@@ -112,30 +112,37 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+    * Display the specified resource.
+    *
+    * @param int $id
+    *
+    * @return Response
+    */
     public function show(User $user)
     {
-        $title = $user->username.' '.trans('messages.user_profile');
+        if ($user->isVerified()) {
+            $title = $user->username.' '.trans('messages.user_profile');
 
-        return view('users.show')
-        ->with('activities', $user->activities()->whereIn('group_id', \App\Group::public()->get()->pluck('id'))->paginate(10))
-        ->with('user', $user)
-        ->with('tab', 'profile')
-        ->with('title', $title);
+            return view('users.show')
+            ->with('activities', $user->activities()->whereIn('group_id', \App\Group::public()->get()->pluck('id'))->paginate(10))
+            ->with('user', $user)
+            ->with('tab', 'profile')
+            ->with('title', $title);
+        }
+
+        flash(__('This user is unverified'));
+
+        return redirect()->back();
+
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+    * Show the form for editing the specified resource.
+    *
+    * @param int $id
+    *
+    * @return Response
+    */
     public function edit(User $user)
     {
         if (Gate::allows('update', $user)) {
@@ -149,12 +156,12 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+    * Update the specified resource in storage.
+    *
+    * @param int $id
+    *
+    * @return Response
+    */
     public function update(Request $request, User $user)
     {
         if (Gate::allows('update', $user)) {
@@ -233,13 +240,13 @@ class UserController extends Controller
     }
 
     /**
-     * Send verification token to a user, again, for example if it's stuck in spam or wathever else event.
-     *
-     * @param Request $request
-     * @param int     $id      User id
-     *
-     * @return Flash message and returns to homepage
-     */
+    * Send verification token to a user, again, for example if it's stuck in spam or wathever else event.
+    *
+    * @param Request $request
+    * @param int     $id      User id
+    *
+    * @return Flash message and returns to homepage
+    */
     public function sendVerificationAgain(Request $request, User $user)
     {
         if ($user->verified == 0) {
@@ -253,12 +260,12 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+    * Remove the specified resource from storage.
+    *
+    * @param int $id
+    *
+    * @return Response
+    */
     public function destroy(User $user, Request $request)
     {
         $this->authorize('delete', $user);
