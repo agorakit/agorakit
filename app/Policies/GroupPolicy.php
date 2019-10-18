@@ -242,6 +242,10 @@ class GroupPolicy extends BasePolicy
 
     public function join(User $user, Group $group)
     {
+        if (!$user->isVerified()) {
+          return false;
+        }
+        
         // if group is open anyone can join, else it's invite only
         if ($group->group_type == $group::OPEN) {
             return true;
