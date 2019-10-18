@@ -41,6 +41,7 @@ class Kernel extends ConsoleKernel
         ->appendOutputTo(storage_path().'/logs/mailbox.log');
 
         $schedule->command('agorakit:cleanupdatabase')
-        ->daily();
+        ->daily()
+        ->appendOutputTo(storage_path().'/logs/cleanup.log');
     }
 }
