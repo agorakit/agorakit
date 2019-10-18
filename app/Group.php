@@ -158,6 +158,11 @@ class Group extends Model
         return $this->hasMany(\App\File::class);
     }
 
+    public function invites()
+    {
+        return $this->hasMany(\App\Invite::class);
+    }
+
     public function activities()
     {
         return $this->hasMany(\App\Activity::class)->orderBy('created_at', 'desc');
