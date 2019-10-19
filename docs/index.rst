@@ -6,10 +6,7 @@
 Welcome to Agorakit's documentation!
 ====================================
 
-Agorakit is a web based open source groupware for collectives. By creating collaborative groups, people can discuss, organize events, store files and keep everyone updated when needed. Agorakit is a forum, agenda, file manager and email notifier.
-
-Manage communication, decision making, membership, files and events. Flexible email notifications per group, per user preferences. Most of the time no admin is involved in the process as we try to keep it as horizontal as possible.
-
+Agorakit is an open source and web based groupware for collectives to communicate, organize and store their files. It keeps everyone updated in your collaborative group with a discuss forum, agenda for events, file manager and email notifier. And, most of the time, Agorakit doesn't need an admin, keeping the process as horizontal as possible.
 
 .. toctree::
    :maxdepth: 2
