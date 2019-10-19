@@ -1,11 +1,11 @@
 Installation
 ============
 
-Before installing Agorakit, if you just want to see if it fits your requirements, you might just create a free account on https://app.agorakit.org. This instance is free for citizen-activists and for evaluation purposes.
+If you are just looking to give Agorakit a try, you can do that without having to install it. Just create an account on https://app.agorakit.org, where you can try an Agorakit instance free for citizen-activists and for evaluation purposes.
 
-If you want managed hosting of a private Agorakit  instance, contact us at info [at] agorakit.org
+You can also get in touch with us if you are interested in managed hosting of a private Agorakit instance. Email us at info [at] agorakit.org for more details.
 
-On the other hand if you want to install it on your own server, here are the required steps :
+Keep reading for steps to install an Agorakit instance on your own server.
 
 Requirements
 ------------
