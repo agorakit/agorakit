@@ -5,7 +5,7 @@ If you are just looking to give Agorakit a try, you can do that without having t
 
 You can also get in touch with us if you are interested in managed hosting of a private Agorakit instance. Email us at info [at] agorakit.org for more details.
 
-Keep reading for the steps to installing an Agorakit instance on your own server.
+Keep reading for steps to install an Agorakit instance on your own server.
 
 Requirements
 ------------
