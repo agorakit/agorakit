@@ -46,6 +46,7 @@ class ActionUserController extends Controller
     public function store(Request $request, Group $group, Action $action)
     {
         $rsvp = \App\ActionUser::firstOrNew(['user_id' => \Auth::user()->id, 'action_id' => $action->id]);
+        $rsvp->notification = $request->get('notification');
         $rsvp->save();
         flash(trans('messages.ressource_updated_successfully'));
 

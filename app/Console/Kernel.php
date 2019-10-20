@@ -21,6 +21,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\CheckMailbox::class,
         \App\Console\Commands\DeleteFiles::class,
         \App\Console\Commands\CleanupDatabase::class,
+        \App\Console\Commands\SendReminders::class,
     ];
 
     /**

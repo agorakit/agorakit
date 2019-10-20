@@ -17,7 +17,7 @@ class ActionUser extends Model
     ];
 
     protected $fillable = [
-        'user_id', 'action_id',
+        'user_id', 'action_id', 'notification'
     ];
 
     protected $table = 'action_user';

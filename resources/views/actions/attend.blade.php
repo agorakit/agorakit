@@ -3,11 +3,14 @@
 @section('content')
         <h1>{{trans('messages.attend_to')}} "<em>{{$action->name}}</em>"?</h1>
         <div class="meta mb-2">
-            {{$action->start->format('H:i')}} - {{$action->location}}
+             {{$action->start->format('d/m/Y H:i')}} - {{$action->location}}
         </div>
         <div class="summary mb-4">{{ summary($action->body) }}</div>
 
-        {!! Form::open(['route' => ['groups.actions.attend', $group, $action]]) !!}
+        {!! Form::open(['route' => ['groups.actions.attend', $group, $action], 'up-target' => '.main']) !!}
+
+        <label>{{__('Send me a reminder') }} :</label>
+        {!! Form::select('notification', [60 => __('One hour before the event'), 60*24 => __('One day before the event'), 0 => __('No reminder please')], null, ['class' => 'form-control']) !!}
 
         <div class="mt-5 d-flex justify-content-between align-items-center">
             {!! Form::submit(trans('messages.attend'), ['class' => 'btn btn-primary']) !!}
