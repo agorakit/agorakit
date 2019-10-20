@@ -30,7 +30,7 @@
 
   <div class="container main-container main-dialog">
 
-    <div class="main dialog">
+    <div class="dialog">
       @yield('content')
     </div>
   </div>

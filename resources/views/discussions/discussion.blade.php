@@ -9,7 +9,7 @@
 
     <div class="d-flex">
       <div class="name mr-2">
-        <a up-target="main" href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}">
+        <a up-target=".main" href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}">
           {{ $discussion->name }}
         </a>
       </div>

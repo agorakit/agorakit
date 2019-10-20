@@ -1,8 +1,8 @@
 <div class="group-header mb-4">
     <h1 class="small">
-        <a href="{{ route('index') }}" up-target="main"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
+        <a href="{{ route('index') }}" up-target=".main"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
         @if (isset($tab) && ($tab <> 'home'))
-            <a href="{{ route('groups.show', $group) }}" up-target="main">{{ $group->name }}</a>
+            <a href="{{ route('groups.show', $group) }}" up-target=".main">{{ $group->name }}</a>
         @else
             {{ $group->name }}
         @endif

@@ -82,7 +82,7 @@
         <h2>{{trans('messages.user_attending')}} ({{$action->users->count()}})</h2>
         <div>
           @if (Auth::user() && Auth::user()->isAttending($action))
-            <a class="btn btn-primary btn-sm" up-modal=".main" href="{{route('groups.actions.unattend', [$group, $action])}}">{{trans('messages.unattend')}}</a>
+            <a class="btn btn-primary btn-sm" up-modal=".dialog" href="{{route('groups.actions.unattend', [$group, $action])}}">{{trans('messages.unattend')}}</a>
           @endif
         </div>
       </div>
@@ -97,7 +97,7 @@
 
     <div class="mt-4">
       @if (Auth::user() && !Auth::user()->isAttending($action))
-        <a class="btn btn-primary" up-modal=".main" href="{{route('groups.actions.attend', [$group, $action])}}">{{trans('messages.attend')}}</a>
+        <a class="btn btn-primary" up-modal=".dialog" href="{{route('groups.actions.attend', [$group, $action])}}">{{trans('messages.attend')}}</a>
       @endif
     </div>
   </div>
