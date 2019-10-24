@@ -46,14 +46,22 @@ class SendReminders extends Command
     */
     public function handle()
     {
-      // get all events that starts exactly in one hour
-
+      // get all events that starts exactly in one hour and notify users
       $actions = Action::whereBetween('start', [Carbon::now()->addHour()->subMinutes(5), Carbon::now()->addHour()])->get();
-
 
       foreach ($actions as $action)
       {
         $users =  $action->users()->where('notification', 60)->get();
+        Notification::send($users, new UpcomingAction($action));
+        if ($users->count() > 0) $this->info($users->count() . ' users notified for ' . $action->name);
+      }
+
+      // get all events that starts exactly in one day and notify users
+      $actions = Action::whereBetween('start', [Carbon::now()->addDay()->subMinutes(5), Carbon::now()->addDay()])->get();
+
+      foreach ($actions as $action)
+      {
+        $users =  $action->users()->where('notification', 60*24)->get();
         Notification::send($users, new UpcomingAction($action));
         if ($users->count() > 0) $this->info($users->count() . ' users notified for ' . $action->name);
       }
