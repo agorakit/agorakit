@@ -41,6 +41,10 @@ class Kernel extends ConsoleKernel
         ->everyFiveMinutes()
         ->appendOutputTo(storage_path().'/logs/mailbox.log');
 
+        $schedule->command('agorakit:sendreminders')
+        ->everyFiveMinutes()
+        ->appendOutputTo(storage_path().'/logs/mailbox.log');
+
         $schedule->command('agorakit:cleanupdatabase')
         ->daily()
         ->appendOutputTo(storage_path().'/logs/cleanup.log');

@@ -43,9 +43,12 @@ class UpcomingAction extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage())
-                    ->subject(__('You have an upcoming action') .  ': ' . $this->action->name)
-                    //->line(('This is a reminder that : "'.$this->action->name.'"' . __(')
-                    ->action(trans('messages.visit_link'), route('groups.actions.show', [$this->action->group, $this->action]))
+                    ->subject('[' . $this->action->group->name . '] ' . __('You have an upcoming action') .  ': ' . $this->action->name)
+                    ->line(__('You have an upcoming action') .  ': ' . $this->action->name)
+                    ->line(__('Starts on : ') . $this->action->start->format('d/m/Y H:i'))
+                    ->line(__('Ends on : ') . $this->action->stop->format('d/m/Y H:i'))
+                    ->line(__('Description : ') . $this->action->body)
+                    ->action(__('Show'), route('groups.actions.show', [$this->action->group, $this->action]))
                     ->line(trans('messages.thank_you'));
     }
 
