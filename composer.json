@@ -31,7 +31,6 @@
     "tio/laravel": "^1.6",
     "toin0u/geocoder-laravel": "^4.1",
     "venturecraft/revisionable": "1.*",
-    "watson/autologin": "^0.5",
     "watson/validating": "^3",
     "willdurand/email-reply-parser": "^2.8"
   },

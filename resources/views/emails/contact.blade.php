@@ -10,7 +10,7 @@
 {!! nl2br(e($body)) !!}
 </p>
 
-@component('mail::button', ['url' => Autologin::to($to_user, route('users.contactform', $from_user))])
+@component('mail::button', ['url' => route('users.contactform', $from_user)])
 {{trans('messages.reply')}}
 @endcomponent
 <small>{{trans('messages.dont_reply_to_this_email')}}</small>

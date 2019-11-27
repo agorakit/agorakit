@@ -70,9 +70,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
     Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
-    // Autologin
-    Route::get('autologin/{token}', ['as' => 'autologin', 'uses' => '\Watson\Autologin\AutologinController@autologin']);
-
+    
     /*
     Homepage
     ========
