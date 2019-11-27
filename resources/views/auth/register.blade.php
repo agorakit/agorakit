@@ -9,6 +9,7 @@
         <form method="POST" action="{{ action('InviteController@inviteRegister', [$group, $token]) }}">
         @else
             <form method="POST" action="{{ url('register') }}">
+                @honeypot
                 <div class="help" role="alert">
                     <i class="fa fa-info-circle" aria-hidden="true"></i>
                     {{trans('messages.if_you_already_have_account')}}, <a href="{{url('login')}}">{{trans('messages.you_can_login_here')}}</a>

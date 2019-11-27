@@ -27,6 +27,7 @@
     "mpratt/embera": "~1.0",
     "nicolaslopezj/searchable": "^1.10",
     "rap2hpoutre/laravel-log-viewer": "0.*",
+    "spatie/laravel-honeypot": "^1.4",
     "suin/php-rss-writer": "^1.6",
     "tio/laravel": "^1.6",
     "toin0u/geocoder-laravel": "^4.1",

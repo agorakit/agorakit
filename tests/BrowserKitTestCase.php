@@ -25,6 +25,9 @@ abstract class BrowserKitTestCase extends BaseTestCase
 
         $app->make(Kernel::class)->bootstrap();
 
+        // disable honeypot
+        config()->set('honeypot.enabled', false);
+
         return $app;
     }
 }
