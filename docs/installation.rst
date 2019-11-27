@@ -97,6 +97,10 @@ Migrate (create all tables in) the database::
 
  $ php artisan migrate
 
+ Link the storage public folder to the user visible public folder::
+
+  $ php artisan storage:link
+
 (Optional) Create sample content the database::
 
   $ php artisan db:seed
