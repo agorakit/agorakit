@@ -22,6 +22,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\DeleteFiles::class,
         \App\Console\Commands\CleanupDatabase::class,
         \App\Console\Commands\SendReminders::class,
+        \App\Console\Commands\ExportGroup::class,
     ];
 
     /**
