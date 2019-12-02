@@ -48,11 +48,19 @@ class ActionPolicy
 
     public function update(User $user, Action $action)
     {
+        if ($user->isAdminOf($action->group)) {
+            return true;
+        }
+
         return $user->id === $action->user_id;
     }
 
     public function delete(User $user, Action $action)
     {
+        if ($user->isAdminOf($action->group)) {
+            return true;
+        }
+        
         return $user->id === $action->user_id;
     }
 
