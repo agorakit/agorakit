@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c2d42b76860b19d0ddbbd5432dc11594",
+    "content-hash": "588e69d9e498c36a91933360856b0797",
     "packages": [
         {
             "name": "barryvdh/laravel-translation-manager",
@@ -277,20 +277,21 @@
         },
         {
             "name": "cviebrock/eloquent-sluggable",
-            "version": "4.8.0",
+            "version": "4.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cviebrock/eloquent-sluggable.git",
-                "reference": "4a5bf905b55e7eb0a30ef5933f647387dc8f365a"
+                "reference": "8820cf93a911cd6a1c440a8f5889caedac5cf697"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cviebrock/eloquent-sluggable/zipball/4a5bf905b55e7eb0a30ef5933f647387dc8f365a",
-                "reference": "4a5bf905b55e7eb0a30ef5933f647387dc8f365a",
+                "url": "https://api.github.com/repos/cviebrock/eloquent-sluggable/zipball/8820cf93a911cd6a1c440a8f5889caedac5cf697",
+                "reference": "8820cf93a911cd6a1c440a8f5889caedac5cf697",
                 "shasum": ""
             },
             "require": {
                 "cocur/slugify": "^3.1",
+                "ext-mbstring": "*",
                 "illuminate/config": "~5.8.0",
                 "illuminate/database": "~5.8.0",
                 "illuminate/support": "~5.8.0",
@@ -336,7 +337,7 @@
                 "slug",
                 "sluggable"
             ],
-            "time": "2019-03-01T05:04:21+00:00"
+            "time": "2020-02-09T22:52:29+00:00"
         },
         {
             "name": "cviebrock/eloquent-taggable",
@@ -735,8 +736,8 @@
             "authors": [
                 {
                     "name": "Markus Poerschke",
-                    "role": "Developer",
-                    "email": "markus@eluceo.de"
+                    "email": "markus@eluceo.de",
+                    "role": "Developer"
                 }
             ],
             "description": "The eluceo/iCal package offers a abstraction layer for creating iCalendars. You can easily create iCal files by using PHP object instead of typing your *.ics file by hand. The output will follow RFC 5545 as best as possible.",
@@ -1248,7 +1249,7 @@
             ],
             "authors": [
                 {
-                    "name": "William Durand",
+                    "name": "William DURAND",
                     "email": "william.durand1@gmail.com"
                 }
             ],
@@ -1304,7 +1305,7 @@
             ],
             "authors": [
                 {
-                    "name": "William Durand",
+                    "name": "William DURAND",
                     "email": "william.durand1@gmail.com"
                 }
             ],
@@ -2021,7 +2022,7 @@
             "time": "2019-03-10T08:50:58+00:00"
         },
         {
-            "name": "jeremeamia/SuperClosure",
+            "name": "jeremeamia/superclosure",
             "version": "2.4.0",
             "source": {
                 "type": "git",
@@ -3729,17 +3730,17 @@
             ],
             "authors": [
                 {
+                    "name": "Ben Ramsey",
+                    "email": "ben@benramsey.com",
+                    "homepage": "https://benramsey.com"
+                },
+                {
                     "name": "Marijn Huizendveld",
                     "email": "marijn.huizendveld@gmail.com"
                 },
                 {
                     "name": "Thibaud Fabre",
                     "email": "thibaud@aztech.io"
-                },
-                {
-                    "name": "Ben Ramsey",
-                    "email": "ben@benramsey.com",
-                    "homepage": "https://benramsey.com"
                 }
             ],
             "description": "Formerly rhumsaa/uuid. A PHP 5.4+ library for generating RFC 4122 version 1, 3, 4, and 5 universally unique identifiers (UUID).",
@@ -8604,8 +8605,8 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "role": "Developer",
-                    "email": "arne@blankerts.de"
+                    "email": "arne@blankerts.de",
+                    "role": "Developer"
                 }
             ],
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",
