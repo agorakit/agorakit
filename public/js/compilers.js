@@ -11,60 +11,60 @@ You can also provide a json url for atwho mention plugin
 */
 up.$compiler('.wysiwyg', function($element, data) {
 
-  $element.trumbowyg({
-    btns: [
-      ['viewHTML'],
-      ['undo', 'redo'], // Only supported in Blink browsers
-      ['formatting'],
-      ['strong', 'em'],
-      ['link'],
-      ['insertImage'],
-      ['unorderedList', 'orderedList'],
-      ['removeformat'],
-      ['fullscreen']
-    ],
-    minimalLinks: true,
-    svgPath : '/svg/icons.svg',
-  })
+	$element.trumbowyg({
+		btns: [
+			['viewHTML'],
+			['undo', 'redo'], // Only supported in Blink browsers
+			['formatting'],
+			['strong', 'em'],
+			['link'],
+			['insertImage'],
+			['unorderedList', 'orderedList'],
+			['removeformat'],
+			['fullscreen']
+		],
+		minimalLinks: true,
+		svgPath : '/svg/icons.svg',
+	})
 
 
-  var mention_users = $element[0].getAttribute("data-mention-users")
-  if (mention_users)
-  {
-    console.log(mention_users)
-    $('.trumbowyg-editor').atwho({
-      at: "@",
-      data: mention_users,
-      insertTpl: "${atwho-at}${username}"
-    });
-  }
+	var mention_users = $element[0].getAttribute("data-mention-users")
+	if (mention_users)
+	{
+		console.log(mention_users)
+		$('.trumbowyg-editor').atwho({
+			at: "@",
+			data: mention_users,
+			insertTpl: "${atwho-at}${username}"
+		});
+	}
 
-  var mention_files = $element[0].getAttribute("data-mention-files")
-  if (mention_files)
-  {
-    console.log(mention_files)
-    $('.trumbowyg-editor').atwho({
-      at: "f:",
-      data: mention_files,
-      insertTpl: "f:${id}"
-    });
-  }
+	var mention_files = $element[0].getAttribute("data-mention-files")
+	if (mention_files)
+	{
+		console.log(mention_files)
+		$('.trumbowyg-editor').atwho({
+			at: "f:",
+			data: mention_files,
+			insertTpl: "f:${id}"
+		});
+	}
 
 
-  var mention_discussions = $element[0].getAttribute("data-mention-discussions")
-  if (mention_discussions)
-  {
-    console.log(mention_discussions)
-    $('.trumbowyg-editor').atwho({
-      at: "d:",
-      data: mention_discussions,
-      insertTpl: "d:${id}"
-    });
-  }
+	var mention_discussions = $element[0].getAttribute("data-mention-discussions")
+	if (mention_discussions)
+	{
+		console.log(mention_discussions)
+		$('.trumbowyg-editor').atwho({
+			at: "d:",
+			data: mention_discussions,
+			insertTpl: "d:${id}"
+		});
+	}
 
-  $('body').on('mouseup', '.atwho-view-ul li', function (e) {
-    e.stopPropagation();
-  });
+	$('body').on('mouseup', '.atwho-view-ul li', function (e) {
+		e.stopPropagation();
+	});
 
 })
 
@@ -77,36 +77,36 @@ Add a calendar to any div with the calendar class
 */
 up.$compiler('.calendar', function($element, data) {
 
-  var json = $element[0].getAttribute("data-json")
-  var locale = $element[0].getAttribute("data-locale")
-  $element.fullCalendar({
-    lang: locale,
-    events: json,
-    header: {
-      left: 'prev,next',
-      center: 'title',
-      right: 'month,agendaWeek,agendaDay'
-    },
-    eventClick:  function(event, jsEvent, view) {
-      up.modal.visit(event.url, { target: '.content' });
-      return false;
-    },
-    eventRender: function(event, element)
-    {
-      $(element).tooltip({title: event.group_name + ' : ' + event.title + ' : ' + event.summary});
-    }
-  });
+	var json = $element[0].getAttribute("data-json")
+	var locale = $element[0].getAttribute("data-locale")
+	$element.fullCalendar({
+		lang: locale,
+		events: json,
+		header: {
+			left: 'prev,next',
+			center: 'title',
+			right: 'month,agendaWeek,agendaDay'
+		},
+		eventClick:  function(event, jsEvent, view) {
+			up.modal.visit(event.url, { target: '.content' });
+			return false;
+		},
+		eventRender: function(event, element)
+		{
+			$(element).tooltip({title: event.group_name + ' : ' + event.title + ' : ' + event.summary});
+		}
+	});
 });
 
 /*
 A simple spinner that is shown when a request takes too long
 */
 up.compiler('.spinner', function(element) {
-  function show() { element.style.display = 'block' }
-  function hide() { element.style.display = 'none' }
-  up.on('up:proxy:slow', show)
-  up.on('up:proxy:recover', hide)
-  hide()
+	function show() { element.style.display = 'block' }
+	function hide() { element.style.display = 'none' }
+	up.on('up:proxy:slow', show)
+	up.on('up:proxy:recover', hide)
+	hide()
 });
 
 /*
@@ -114,11 +114,11 @@ up.compiler('.spinner', function(element) {
 - add data-allow-new-tags to allow the creation of new tags
 */
 up.$compiler('select.tags', function($element, data) {
-  var create = $element[0].hasAttribute("data-allow-new-tags")
-  $element.selectize({
-    persist: true,
-    create: create
-  });
+	var create = $element[0].hasAttribute("data-allow-new-tags")
+	$element.selectize({
+		persist: true,
+		create: create
+	});
 });
 
 
@@ -128,5 +128,25 @@ up.$compiler('select.tags', function($element, data) {
 - scroll to first unread item
 */
 up.compiler('#unread', function(element) {
-  element.scrollIntoView();
+	console.log(element);
+	element.scrollIntoView({
+		block: 'start',
+		behavior: 'smooth',
+		inline: 'nearest'
+	});
+	console.log('unread found');
+});
+
+
+/*
+Datatables
+*/
+up.$compiler('.data-table', function($element) {
+	$element.DataTable( {
+		"pageLength": 25,
+		dom: 'Bfrtip',
+		buttons: [
+			'csv', 'excel'
+		]
+	});
 });

@@ -1,23 +1,6 @@
 @extends('app')
 
 
-@include('partials.datatables')
-
-@push('js')
-  <script>
-  $(document).ready(function() {
-    $('.data-table').DataTable( {
-      "pageLength": 25,
-      dom: 'Bfrtip',
-      buttons: [
-        'csv', 'excel'
-      ]
-    });
-  } );
-  </script>
-@endpush
-
-
 
 @section('content')
   @include('groups.tabs')
