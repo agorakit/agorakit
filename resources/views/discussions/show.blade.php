@@ -87,19 +87,5 @@
       @include ('comments.create')
     @endcan
 
-
-
-
   </div>
 @endsection
-
-@section('footer')
-  <script>
-  $(document).ready(function() {
-    if ($("#unread").length)
-    {
-      $(document).scrollTop( $("#unread").offset().top-60 );
-    }
-  });
-  </script>
-@append

@@ -120,3 +120,13 @@ up.$compiler('select.tags', function($element, data) {
     create: create
   });
 });
+
+
+
+
+/*
+- scroll to first unread item
+*/
+up.compiler('#unread', function(element) {
+  element.scrollIntoView();
+});
