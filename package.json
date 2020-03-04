@@ -10,23 +10,23 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
-        "axios": "^0.18.1",
-        "bootstrap": "^4.3",
-        "browser-sync": "^2.26.7",
-        "browser-sync-webpack-plugin": "^2.2.2",
-        "cross-env": "^5.2.1",
-        "jquery": "^3.4.1",
-        "laravel-mix": "^4.1.4",
-        "lodash": "^4.17.15",
-        "popper.js": "^1.15.0",
-        "resolve-url-loader": "^2.3.2",
-        "sass": "^1.22.10",
-        "sass-loader": "^7.3.1",
-        "vue": "^2.6.10",
-        "vue-template-compiler": "^2.6.10"
+        "axios": "0.18.1",
+        "bootstrap": "4.3.1",
+        "browser-sync": "2.26.7",
+        "browser-sync-webpack-plugin": "2.2.2",
+        "cross-env": "5.2.1",
+        "jquery": "3.4.1",
+        "laravel-mix": "4.1.4",
+        "lodash": "4.17.15",
+        "popper.js": "1.15.0",
+        "resolve-url-loader": "2.3.2",
+        "sass": "1.22.10",
+        "sass-loader": "7.3.1",
+        "vue": "2.6.10",
+        "vue-template-compiler": "2.6.10"
     },
     "dependencies": {
-        "trumbowyg": "^2.19.1",
-        "unpoly": "^0.61.0"
+        "trumbowyg": "2.19.1",
+        "unpoly": "0.60.3"
     }
 }
