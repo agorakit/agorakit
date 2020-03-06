@@ -10,7 +10,7 @@
     "php": ">=7.1.3",
     "barryvdh/laravel-translation-manager": "^0.5.3",
     "consoletvs/charts": "5.*",
-    "cviebrock/eloquent-sluggable": "4.8",
+    "cviebrock/eloquent-sluggable": "7.0.0",
     "cviebrock/eloquent-taggable": "~3.5",
     "ddeboer/imap": "^1.8",
     "eluceo/ical": "^0.15.0",
