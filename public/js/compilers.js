@@ -134,7 +134,6 @@ up.compiler('#unread', function(element) {
 		behavior: 'smooth',
 		inline: 'nearest'
 	});
-	console.log('unread found');
 });
 
 
