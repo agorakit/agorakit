@@ -149,3 +149,14 @@ up.$compiler('.data-table', function($element) {
 		]
 	});
 });
+
+/* external links */
+// Taken from : https://gist.github.com/CrocoDillon/7989214
+// vanilla JavaScript
+
+up.compiler('a', function(element) {
+	if (element.hostname != window.location.hostname)
+	{
+		element.target = '_blank';
+	}
+});
