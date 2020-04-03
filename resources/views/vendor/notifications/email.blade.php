@@ -3,16 +3,16 @@
 @if (! empty($greeting))
 # {{ $greeting }}
 @else
-@if ($level == 'error')
-# Whoops!
+@if ($level === 'error')
+# @lang('Whoops!')
 @else
-# Hello!
+# @lang('Hello!')
 @endif
 @endif
 
 {{-- Intro Lines --}}
 @foreach ($introLines as $line)
-{!! $line !!}
+{{ $line }}
 
 @endforeach
 
@@ -21,13 +21,11 @@
 <?php
     switch ($level) {
         case 'success':
-            $color = 'green';
-            break;
         case 'error':
-            $color = 'red';
+            $color = $level;
             break;
         default:
-            $color = 'blue';
+            $color = 'primary';
     }
 ?>
 @component('mail::button', ['url' => $actionUrl, 'color' => $color])
@@ -45,13 +43,22 @@
 @if (! empty($salutation))
 {{ $salutation }}
 @else
-{{trans('messages.regard')}},<br>{{ setting('name') }}
+@lang('Regards'),<br>
+{{ config('app.name') }}
 @endif
 
 {{-- Subcopy --}}
 @isset($actionText)
-@component('mail::subcopy')
-{{__('notifications.if_you_have_trouble')}} "{{ $actionText }}" {{__('notifications.clicking_the_button')}}: [{{ $actionUrl }}]({{ $actionUrl }})
-@endcomponent
+@slot('subcopy')
+@lang(
+    "If you’re having trouble clicking the \":actionText\" button, copy and paste the URL below\n".
+    'into your web browser: [:displayableActionUrl](:actionURL)',
+    [
+        'actionText' => $actionText,
+        'actionURL' => $actionUrl,
+        'displayableActionUrl' => $displayableActionUrl,
+    ]
+)
+@endslot
 @endisset
 @endcomponent
