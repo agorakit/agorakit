@@ -1,36 +1,48 @@
-
-@extends('dialog')
+@extends('app')
 
 @section('content')
-	<div class="container-fluid">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Reset Password') }}</div>
 
-		<h1>{{trans('messages.change_my_password')}}</h1>
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
 
+                    <form method="POST" action="{{ route('password.email') }}">
+                        @csrf
+                        @honeypot
 
-		@if (session('status'))
-			<div class="alert alert-success">
-				{{ session('status') }}
-			</div>
-		@endif
+                        <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
-		<form class="form-horizontal" role="form" method="POST" action="{{ url('/password/email') }}">
-			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
-			<div class="form-group">
-				<label> {{ trans('messages.email') }}</label>
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
-					<input type="email" class="form-control" name="email" required="required"  value="{{ old('email') }}">
-
-			</div>
-
-			<div class="form-group">
-
-					<button type="submit" class="btn btn-primary">
-						{{ trans('messages.send_my_recover_email') }}
-					</button>
-
-			</div>
-		</form>
-	</div>
-
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Send Password Reset Link') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
