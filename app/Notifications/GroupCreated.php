@@ -45,6 +45,7 @@ class GroupCreated extends Notification
         return (new MailMessage())
                     ->subject('A new group has been created')
                     ->line('A new group has been created : "'.$this->group->name.'"')
+                    ->line($this->group->body)
                     ->action('Visit it', route('groups.show', $this->group))
                     ->line(trans('messages.thank_you'));
     }
