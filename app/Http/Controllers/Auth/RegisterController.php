@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Request;
 use Auth;
+use Mail;
+use App\Mail\UserConfirmation;
 
 class RegisterController extends Controller
 {
