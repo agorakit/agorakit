@@ -6,7 +6,7 @@
 {{trans('messages.we_need_to_confirm')}}
 </p>
 
-@component('mail::button', ['url' => action('Auth\RegisterController@confirmEmail', [$user->token])])
+@component('mail::button', ['url' => action('Auth\RegisterController@confirmEmail', [$user->getToken()])])
 {{trans('messages.click_to_confirm')}}
 @endcomponent
 
