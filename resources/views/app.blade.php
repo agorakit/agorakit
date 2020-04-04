@@ -36,7 +36,7 @@
     @endif
   @endunless
 
-  @include('partials.errors')
+
 
   <div class="spinner shadow">
     <i class="far fa-save"></i>
@@ -45,6 +45,7 @@
 
   <div class="container main-container @if (isset($dialog)) main-dialog @endif">
     <div class="main">
+      @include('partials.errors')
       @yield('content')
     </div>
   </div>
