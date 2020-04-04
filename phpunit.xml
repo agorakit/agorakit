@@ -29,5 +29,7 @@
         <env name="TESTING_DB_DATABASE" value="agorakit_testing"/>
         <env name="TESTING_DB_USERNAME" value="root"/>
         <env name="TESTING_DB_PASSWORD" value="root"/>
+        <env name="MAIL_DRIVER" value="log"/>
+
     </php>
 </phpunit>
