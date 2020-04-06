@@ -1,16 +1,12 @@
-@extends('app')
+@extends('dialog')
 
 @section('content')
 
-  @include('groups.tabs')
-
-
-  <div class="tab_content">
 
     <h1>{{trans('Add a tag')}}</h1>
 
-    
-    {!! Form::model($tag, array('action' => ['GroupTagController@store', $group, $tag])) !!}
+
+    {!! Form::model($tag, ['action' => ['GroupTagController@store', $group, $tag], 'up-target' =>'tab_content']) !!}
 
     @include('tags.form')
 
@@ -20,6 +16,5 @@
 
     {!! Form::close() !!}
 
-  </div>
 
 @endsection
