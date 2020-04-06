@@ -4,24 +4,21 @@
 
     <div class="tab_content">
 
-        @push('css')
-            {!! Charts::styles() !!}
-        @endpush
+
 
         @push('js')
-            {!! Charts::scripts() !!}
-
-            @foreach ($charts as $chart)
-                {!! $chart->script() !!}
-            @endforeach
-
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
         @endpush
 
 
         <h1>{{trans('messages.insights')}}</h1>
 
         @foreach ($charts as $chart)
-            {!! $chart->html() !!}
+            <div style="height: 250px" class="mb-4">
+                {!! $chart->container() !!}
+            </div>
+            {!! $chart->script() !!}
+
         @endforeach
 
     </div>
