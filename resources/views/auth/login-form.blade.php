@@ -13,10 +13,10 @@
   <div class="form-group">
     <label>{{ __('Username or Email') }}</label>
     <div>
-      <input type="text" class="form-control" name="email" required="required" value="{{ old('username') ?: old('email') }}">
+      <input type="text" class="form-control" name="login" required="required" value="{{ old('username') ?: old('email') }}">
     </div>
 
-    @error('email')
+    @error('login')
       <span class="invalid-feedback" role="alert">
         <strong>{{ $message }}</strong>
       </span>
