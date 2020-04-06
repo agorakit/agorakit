@@ -156,7 +156,7 @@ class File extends Model
             $this->name = pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME).'.'.$uploaded_file->guessExtension();
             $this->original_filename = $uploaded_file->getClientOriginalName();
             $this->mime = $uploaded_file->getMimeType();
-            $this->filesize = $uploaded_file->getClientSize();
+            $this->filesize = $uploaded_file->getSize();
 
             // save it again
             $this->save();
