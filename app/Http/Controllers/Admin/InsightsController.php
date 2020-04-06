@@ -18,8 +18,8 @@ class InsightsController extends Controller
     public function index()
     {
 
-        // might e interesting to read this : https://www.plumislandmedia.net/mysql/sql-reporting-time-intervals/
-        
+        // might be interesting to read this : https://www.plumislandmedia.net/mysql/sql-reporting-time-intervals/
+
 
         // Global stats :
         $chart = new AgorakitChart;
@@ -116,7 +116,7 @@ class InsightsController extends Controller
         $charts[] = $chart;
 
 
-        /*
+
         // Evolution of storage use
         $results = \App\File::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, sum(filesize) as data')
         ->groupBy('yearmonth')
@@ -125,18 +125,20 @@ class InsightsController extends Controller
 
         $dataset = [];
         $labels = [];
+        $total = 0;
         foreach ($results as $result)
         {
-            $dataset[] = $result->data;
+            $total = $total + $result->data / 1000000;
+            $dataset[] = round($total);
             $labels[] = $result->year . ' / ' .  $result->month;
         }
 
         $chart = new AgorakitChart;
         $chart->title('Evolution of storage use');
         $chart->labels($labels);
-        $chart->dataset('Amount', 'line', $dataset);
+        $chart->dataset('Megabytes', 'line', $dataset);
         $charts[] = $chart;
-        */
+
 
 
         return view('admin.insights')

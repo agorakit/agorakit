@@ -14,7 +14,7 @@
         <h1>{{trans('messages.insights')}}</h1>
 
         @foreach ($charts as $chart)
-            <div style="height: 250px" class="mb-4">
+            <div style="height: 300px" class="mb-4">
                 {!! $chart->container() !!}
             </div>
             {!! $chart->script() !!}
