@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Socialite;
 
 class LoginController extends Controller
 {
@@ -22,138 +22,30 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/';
+    * Where to redirect users after login.
+    *
+    * @var string
+    */
+    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
-     * Login username to be used by the controller.
-     *
-     * @var string
-     */
-    protected $username;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+    * Create a new controller instance.
+    *
+    * @return void
+    */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'logout']);
-        $this->username = $this->findUsername();
+        $this->middleware('guest')->except('logout');
     }
 
     /**
-     * Get the login username to be used by the controller.
-     *
-     * @return string
-     */
-    public function findUsername()
-    {
-        $login = request()->input('login');
-
-        $fieldType = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-
-        request()->merge([$fieldType => $login]);
-
-        return $fieldType;
-    }
-
-    /**
-     * Get username property.
-     *
-     * @return string
+     * Allows to log with either username or email
      */
     public function username()
     {
-        return $this->username;
-    }
-
-    public function showLoginForm()
-    {
-        return view('auth.login');
-    }
-
-    /**
-     * Redirect the user to the OAuth Provider.
-     *
-     * @return Response
-     */
-    public function redirectToProvider($provider)
-    {
-        return Socialite::driver($provider)->redirect();
-    }
-
-    /**
-     * Obtain the user information from provider.  Check if the user already exists in our
-     * database by looking up their provider_id in the database.
-     * If the user exists, log them in. Otherwise, create a new user then log them in. After that
-     * redirect them to the authenticated users homepage.
-     *
-     * @return Response
-     */
-    public function handleProviderCallback($provider)
-    {
-        $socialuser = Socialite::driver($provider)->user();
-
-        $authUser = $this->findOrCreateUser($socialuser, $provider);
-        Auth::login($authUser, true);
-
-        return redirect($this->redirectTo);
-    }
-
-    /**
-     * If a user has registered before using social auth, return the user
-     * else, create a new user object.
-     *
-     * @param  $user Socialite user object
-     * @param $provider Social auth provider
-     *
-     * @return User
-     */
-    public function findOrCreateUser($socialuser, $provider)
-    {
-        $profile = \App\SocialProfile::where('provider_id', $socialuser->id)->where('provider', $provider)->first();
-
-        // CASE 1 : we have a profile, so we have a user to return
-        if ($profile) {
-            return $profile->user()->first();
-        }
-
-        // Let's find a matching user from the email returned by the provider
-        // TODO security : can we trust the email received from the provider?
-        $user = \App\User::where('email', $socialuser->email)->first();
-
-        // we have a matching user by email, so we create the profile then return the user
-        if ($user) {
-            $profile = \App\SocialProfile::create([
-                'user_id'     => $user->id,
-                'provider'    => $provider,
-                'provider_id' => $socialuser->id,
-            ]);
-
-            return $user;
-        }
-
-        // we have nothing : we create a profile and a user
-
-        $user = User::create([
-            'name'     => $socialuser->name,
-            'email'    => $socialuser->email,
-        ]);
-
-        $user->verified = 1; // TODO security implications of this. In short we trust another provider to check that an email is correct and verified. Fair enough?
-        $user->save();
-
-        $profile = \App\SocialProfile::create([
-            'user_id'     => $user->id,
-            'provider'    => $provider,
-            'provider_id' => $socialuser->id,
-        ]);
-
-        return $user;
+        $login = request()->input('login');
+        $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        request()->merge([$field => $login]);
+        return $field;
     }
 }

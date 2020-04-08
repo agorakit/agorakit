@@ -122,6 +122,21 @@ class User extends Authenticatable
         });
     }
 
+    public function getToken()
+    {
+        if ($this->token)
+        {
+            return $this->token;
+        }
+        else
+        {
+            $this->token = str_random(30);
+            $this->save();
+            return $this->token;
+        }
+
+    }
+
     /**
      * Confirm the user.
      *

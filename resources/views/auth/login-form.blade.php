@@ -6,13 +6,21 @@
 </p>
 
 <form method="POST" action="{{ url('/login') }}">
-  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+  @csrf
+  @honeypot
 
   <div class="form-group">
     <label>{{ __('Username or Email') }}</label>
     <div>
       <input type="text" class="form-control" name="login" required="required" value="{{ old('username') ?: old('email') }}">
     </div>
+
+    @error('login')
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
+    @enderror
   </div>
 
   <div class="form-group">
@@ -34,7 +42,5 @@
     <button type="submit" class="btn btn-primary">{{ trans('messages.login') }}</button>
   </div>
 
-
-  @include('partials.socialite')
 
 </form>

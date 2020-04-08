@@ -3,14 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Mail\UserConfirmation;
+use App\Providers\RouteServiceProvider;
 use App\User;
-use Carbon\Carbon;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Request;
+use Auth;
 use Mail;
+use App\Mail\UserConfirmation;
 
 class RegisterController extends Controller
 {
@@ -28,56 +29,49 @@ class RegisterController extends Controller
     use RegistersUsers;
 
     /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
+    * Where to redirect users after registration.
+    *
+    * @var string
+    */
+    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+    * Create a new controller instance.
+    *
+    * @return void
+    */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => ['confirmEmail']]);
-    }
-
-    public function showRegistrationForm()
-    {
-        return view('auth.register');
+          $this->middleware('guest', ['except' => ['confirmEmail']]);
     }
 
     /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param array $data
-     *
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
+    * Get a validator for an incoming registration request.
+    *
+    * @param  array  $data
+    * @return \Illuminate\Contracts\Validation\Validator
+    */
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name'     => 'required|max:255',
-            'email'    => 'required|email|max:255|unique:users',
-            'password' => 'required|min:8|confirmed',
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
 
     /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param array $data
-     *
-     * @return User
-     */
+    * Create a new user instance after a valid registration.
+    *
+    * @param  array  $data
+    * @return \App\User
+    */
     protected function create(array $data)
     {
-        $user = User::create([
-            'name'     => $data['name'],
-            'email'    => $data['email'],
-            'password' => bcrypt($data['password']),
+        $user =  User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
         ]);
 
         Mail::to($user)->send(new UserConfirmation($user));
@@ -86,12 +80,12 @@ class RegisterController extends Controller
     }
 
     /**
-     * Confirm a user's email address.
-     *
-     * @param string $token
-     *
-     * @return mixed
-     */
+    * Confirm a user's email address.
+    *
+    * @param string $token
+    *
+    * @return mixed
+    */
     public function confirmEmail(Request $request, $token)
     {
         // find user based on the verif token
@@ -120,4 +114,5 @@ class RegisterController extends Controller
 
         return redirect('/');
     }
+
 }

@@ -85,7 +85,6 @@ Route::group(['middleware' => ['web']], function () {
     The idea is to provide a group listing (most active first) and a list of groups subscribed to by the current user.
     */
     Route::get('/', 'DashboardController@index')->name('index');
-    Route::get('home', 'DashboardController@index')->name('index');
     Route::get('presentation', 'DashboardController@presentation');
     Route::get('discussions', 'DiscussionController@index')->name('discussions');
     Route::get('users', 'UserController@index')->name('users');
@@ -153,7 +152,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit');
     Route::post('users/{user}', 'UserController@update')->name('users.update');
 
-    Route::get('users/{user}/delete', 'UserController@destroy')->name('users.delete');
+    Route::get('users/{user}/delete', 'UserController@destroy')->name('users.delete.confirm');
     Route::delete('users/{user}/delete', 'UserController@destroy')->name('users.delete');
 
     Route::get('users/{user}/contact', 'UserController@contactForm')->name('users.contactform');
@@ -226,8 +225,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('map', 'GroupMapController@index')->name('.map');
         Route::get('map.geojson', 'GroupMapController@geoJson')->name('.map.geojson');
 
-        Route::get('{type}/{id}/tag', 'TagController@edit')->name('.tags.edit');
-        Route::post('{type}/{id}/tag', 'TagController@update')->name('.tags.store');
+
+        //Route::get('{type}/{id}/tag', 'TagController@edit')->name('.tags.edit');
+        //Route::post('{type}/{id}/tag', 'TagController@update')->name('.tags.store');
 
         // Discussions
         Route::get('discussions', 'GroupDiscussionController@index')->name('.discussions.index');

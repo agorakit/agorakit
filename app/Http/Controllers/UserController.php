@@ -19,7 +19,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('preferences');
-        $this->middleware('verified');
+        $this->middleware('verified', ['except' => 'sendVerificationAgain']);
         $this->middleware('throttle:2,1', ['only' => ['mail', 'sendVerificationAgain']]); // 2 emails per  minute should be enough for non bots
     }
 

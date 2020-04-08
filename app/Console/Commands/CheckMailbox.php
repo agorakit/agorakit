@@ -8,41 +8,63 @@ use App\User;
 use Ddeboer\Imap\Server;
 use Illuminate\Console\Command;
 use Log;
+use Mail;
+use App\Mail\MailBounce;
+
+/*
+Inbound  Email handler for Agorakit
+
+Multiple cases :
+
+1. Sending email to a group
+- The user exists
+- The group exists
+- The user is a member of the group
+
+2. Replying to a discussion
+- discussion exists
+- user is a member of the group
+
+In all cases the mail is processed
+Bounced to user in case of failure
+Moved to a folder on the imap server
+
+*/
 
 class CheckMailbox extends Command
 {
     /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
+    * The name and signature of the console command.
+    *
+    * @var string
+    */
     protected $signature = 'agorakit:checkmailbox
-  {{--keep : Use this to keep a copy of the email in the mailbox. Only for development!}}
-  {{--debug : Print each email content. Only for development!}}
-  ';
+    {{--keep : Use this to keep a copy of the email in the mailbox. Only for development!}}
+    {{--debug : Print each email content. Only for development!}}
+    ';
 
     /**
-     * The console command description.
-     *
-     * @var string
-     */
+    * The console command description.
+    *
+    * @var string
+    */
     protected $description = 'Check the configured email imap server to allow post by email functionality';
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
+    * Create a new command instance.
+    *
+    * @return void
+    */
     public function __construct()
     {
         parent::__construct();
     }
 
     /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
+    * Execute the console command.
+    *
+    * @return mixed
+    */
     public function handle()
     {
         if (setting('user_can_post_by_email')) {
@@ -50,10 +72,10 @@ class CheckMailbox extends Command
 
             $server = new Server(setting('mail_server'));
 
-            // $connection is instance of \Ddeboer\Imap\Connection
-            $connection = $server->authenticate(setting('mail_login'), setting('mail_password'));
+            // $this->connection is instance of \Ddeboer\Imap\Connection
+            $this->connection = $server->authenticate(setting('mail_login'), setting('mail_password'));
 
-            $mailboxes = $connection->getMailboxes();
+            $mailboxes = $this->connection->getMailboxes();
 
             foreach ($mailboxes as $mailbox) {
                 // Skip container-only mailboxes
@@ -68,27 +90,27 @@ class CheckMailbox extends Command
 
             // open INBOX
 
-            $inbox = $connection->getMailbox('INBOX');
+            $this->inbox = $this->connection->getMailbox('INBOX');
 
-            if ($inbox->count() == 0) {
+            if ($this->inbox->count() == 0) {
                 $this->info('No new emails in inbox');
             }
 
             // Open/create processed mailboxes
-            if ($connection->hasMailbox('processed')) {
-                $processed_mailbox = $connection->getMailbox('processed');
+            if ($this->connection->hasMailbox('processed')) {
+                $processed_mailbox = $this->connection->getMailbox('processed');
             } else {
-                $processed_mailbox = $connection->createMailbox('processed');
+                $processed_mailbox = $this->connection->createMailbox('processed');
             }
 
             // Open/create failed mailboxes
-            if ($connection->hasMailbox('failed')) {
-                $failed_mailbox = $connection->getMailbox('failed');
+            if ($this->connection->hasMailbox('failed')) {
+                $failed_mailbox = $this->connection->getMailbox('failed');
             } else {
-                $failed_mailbox = $connection->createMailbox('failed');
+                $failed_mailbox = $this->connection->createMailbox('failed');
             }
 
-            $messages = $inbox->getMessages();
+            $messages = $this->inbox->getMessages();
 
             foreach ($messages as $message) {
                 if ($this->option('debug')) {
@@ -106,13 +128,13 @@ class CheckMailbox extends Command
 
                     // check that each mail to: is an existing group
                     foreach ($message->getTo() as $to) {
-                        $search = $to->getAddress();
+                        $to_email = $to->getAddress();
                         // remove prefix and suffix to get the slug we need to check against
-                        $search = str_replace(setting('mail_prefix'), '', $search);
-                        $search = str_replace(setting('mail_suffix'), '', $search);
+                        $to_email = str_replace(setting('mail_prefix'), '', $to_email);
+                        $to_email = str_replace(setting('mail_suffix'), '', $to_email);
 
                         // check that is is sent to an existing group
-                        $group = Group::where('slug', $search)->first();
+                        $group = Group::where('slug', $to_email)->first();
                         if ($group) {
                             $this->info('Group '.$group->name.' exists');
 
@@ -127,9 +149,10 @@ class CheckMailbox extends Command
                                 $body_html = $message->getBodyHtml(); // this is the raw html content
                                 $body_text = nl2br(\EmailReplyParser\EmailReplyParser::parseReply($message->getBodyText()));
 
-                                // count the number of lines in plain text :
-                                // if we really have nothing in there using plain text, let's post the whole html mess from the email
-                                if (count(explode("\n", $body_text)) < 2) {
+                                // count the number of caracters in plain text :
+                                // if we really have less than 5 chars in there using plain text,
+                                // let's post the whole html mess from the email
+                                if (count($body_text) < 5) {
                                     $discussion->body = $body_html;
                                 } else {
                                     $discussion->body = $body_text;
@@ -157,30 +180,49 @@ class CheckMailbox extends Command
                                 }
                             } else {
                                 $this->error($user->name.' is not a member of '.$group->name);
+                                // bounce mail
+                                Mail::to($user)->send(new MailBounce($message, 'You are not a member of this group'));
                             }
                         } else {
-                            $this->error('No group named '.$search);
+                            $this->error('No group named '. $to_email);
+                            // bounce mail
+                            Mail::to($user)->send(new MailBounce($message, 'There is no group named ' . $to_email . ' at this adress'));
                         }
                     }
                 } else {
                     $this->error('No user found with '.$message->getFrom()->getAddress());
+                    // bounce mail, but
+                    // bouncing to a non member might create spam problems :
+                    Mail::to($message->getFrom()->getAddress())->send(new MailBounce($message, 'You are not registered on this server, please create an account first'));
                 }
 
                 // move message to the correct mailbox depending on outcome
                 if ($success) {
-                    $message->move($processed_mailbox);
-                    $this->info('Email has been moved to the processed folder on the mail server');
-                    Log::info('Email has been moved to the processed folder on the mail server', ['mail_id'=> $message->getId()]);
+                    if ($this->option('debug')) {
+                        $this->info('It worked but since debug is enabled the message has not been moved');
+                    }
+                    else
+                    {
+                        $message->move($processed_mailbox);
+                        $this->info('Email has been moved to the processed folder on the mail server');
+                        Log::info('Email has been moved to the processed folder on the mail server', ['mail_id'=> $message->getId()]);
+                    }
                 } else {
-                    $message->move($failed_mailbox);
-                    $this->info('Email has been moved to the failed folder on the mail server');
-                    Log::info('Email has been moved to the failed folder on the mail server', ['mail_id'=> $message->getId()]);
+                    if ($this->option('debug')) {
+                        $this->error('It did\'nt  work but since debug is enabled the message has not been moved');
+                    }
+                    else
+                    {
+                        $message->move($failed_mailbox);
+                        $this->error('Email has been moved to the failed folder on the mail server');
+                        Log::info('Email has been moved to the failed folder on the mail server', ['mail_id'=> $message->getId()]);
+                    }
                 }
             }
 
             $this->line('-----------------------------------');
 
-            $connection->expunge();
+            $this->connection->expunge();
         } else {
             $this->info('Email checking disabled in settings');
 
