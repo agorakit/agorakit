@@ -34,7 +34,10 @@ class NotifyMentionedUsers
 
             $users_to_mention = [];
 
-            foreach ($matches[0] as $username) {
+            // dedupe matches
+            $dedupe_matches = array_unique($matches[0]);
+
+            foreach ($dedupe_matches as $username) {
                 $username = substr($username, 1);
                 // we find users only in the group from where the mention was made
                 $user = $comment->discussion->group->users->where('username', $username)->first();

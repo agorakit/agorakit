@@ -17,14 +17,13 @@ class MentionController extends Controller
     public function users(Group $group)
     {
         $this->authorize('view-members', $group);
-        $users = $group->users()->get();
+        $users = $group->users()->orderBy('name')->get();
         $simple_users = [];
 
         foreach ($users as $user) {
-            $simple_user['id'] = $user->id;
-            $simple_user['name'] = $user->name.' ('.$user->username.')';
-            $simple_user['username'] = $user->username;
-            $simple_user['url'] = route('users.show', $user);
+            $simple_user['name'] = $user->name;
+            $simple_user['id'] = '@' . $user->username;
+            $simple_user['userid'] =  $user->id;
             $simple_users[] = $simple_user;
         }
 

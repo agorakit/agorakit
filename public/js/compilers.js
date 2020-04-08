@@ -1,72 +1,139 @@
 // Here we put custom compilers for unpoly
 // Check docs here : https://unpoly.com/up.compiler
 
+
 /*
 To enable a wysiwyg editor, add a .wysiwyg class to a textarea
 
-You can also provide a json url for atwho mention plugin
+You can also provide a json url for ckeditor mention plugin
 - data-mention-users for @users
-- data-mention-discussions
-- data-mention-files
+- data-mention-discussions REDO TODO
+- data-mention-files	REDO TODO
 */
-up.$compiler('.wysiwyg', function($element, data) {
 
-	$element.trumbowyg({
-		btns: [
-			['viewHTML'],
-			['undo', 'redo'], // Only supported in Blink browsers
-			['formatting'],
-			['strong', 'em'],
-			['link'],
-			['insertImage'],
-			['unorderedList', 'orderedList'],
-			['removeformat'],
-			['fullscreen']
-		],
-		minimalLinks: true,
-		svgPath : '/svg/icons.svg',
-	})
+up.compiler('.wysiwyg', function(element, data) {
 
+	// first le'ts handle the mentions
+	mentions_loaded = false
+	mentions = []
 
-	var mention_users = $element[0].getAttribute("data-mention-users")
-	if (mention_users)
-	{
-		console.log(mention_users)
-		$('.trumbowyg-editor').atwho({
-			at: "@",
-			data: mention_users,
-			insertTpl: "${atwho-at}${username}"
-		});
+	// if mentions are already loaded we directly filter and return
+	if (mentions_loaded) {
+		resolve(mentions.filter(isItemMatching).slice( 0, 10 ))
 	}
 
-	var mention_files = $element[0].getAttribute("data-mention-files")
-	if (mention_files)
-	{
-		console.log(mention_files)
-		$('.trumbowyg-editor').atwho({
-			at: "f:",
-			data: mention_files,
-			insertTpl: "f:${id}"
-		});
+	// this function will return the matching mentions based on the queryText entered by the user after an @
+	function getFeedItems(queryText) {
+		return new Promise( (resolve, reject) => {
+
+			// else we load the json and return
+			var mention_users = element.getAttribute("data-mention-users")
+			$.getJSON(mention_users, function(mentions) {
+				mentions_loaded = true;
+				console.log(mentions)
+				resolve(mentions.filter(isItemMatching).slice( 0, 10 ))
+			})
+			.fail(function() {
+				console.log( "error loading mentions" );
+				reject();
+			})
+
+		})
+
+		// This function filters items based on the name property (it contains both username and real name)
+		function isItemMatching( item ) {
+			// Make the search case-insensitive.
+			const searchString = queryText.toLowerCase();
+
+			// Include an item in the search results if the name or username includes the current user input.
+			return (
+				item.name.toLowerCase().includes( searchString ) ||
+				item.id.toLowerCase().includes( searchString )
+			);
+		}
+	}
+
+	function customItemRenderer( item ) {
+		const itemElement = document.createElement( 'span' );
+
+		itemElement.classList.add( 'custom-item' );
+		itemElement.id = `mention-list-item-id-${ item.userId }`;
+		itemElement.textContent = `${ item.name } `;
+
+		const usernameElement = document.createElement( 'span' );
+
+		usernameElement.classList.add( 'custom-item-username' );
+		usernameElement.textContent = item.id;
+
+		itemElement.appendChild( usernameElement );
+
+
+		return itemElement;
 	}
 
 
-	var mention_discussions = $element[0].getAttribute("data-mention-discussions")
-	if (mention_discussions)
-	{
-		console.log(mention_discussions)
-		$('.trumbowyg-editor').atwho({
-			at: "d:",
-			data: mention_discussions,
-			insertTpl: "d:${id}"
-		});
-	}
+	// This instantiate the CKeditor
+	ClassicEditor
+	.create( element, {
+		mention: {
+			feeds: [
+				{
+					marker: '@',
+					feed: getFeedItems,
+					minimumCharacters: 0,
+					itemRenderer: customItemRenderer
+				}
+			]
+		},
 
-	$('body').on('mouseup', '.atwho-view-ul li', function (e) {
-		e.stopPropagation();
-	});
+		toolbar: {
+			items: [
+				'heading',
+				'|',
+				'bold',
+				'italic',
+				'link',
+				'bulletedList',
+				'numberedList',
+				'|',
+				'indent',
+				'outdent',
+				'|',
+				'blockQuote',
+				'insertTable',
+				'mediaEmbed',
+				'undo',
+				'redo',
+			]
+		},
+		language: 'en',
+		image: {
+			toolbar: [
+				'imageTextAlternative',
+				'imageStyle:full',
+				'imageStyle:side'
+			]
+		},
+		table: {
+			contentToolbar: [
+				'tableColumn',
+				'tableRow',
+				'mergeTableCells'
+			]
+		},
 
-})
+
+	} )
+	.then( editor => {
+		window.editor = editor;
+
+	} )
+	.catch( error => {
+		console.error( 'Oops, something gone wrong!' );
+		console.error( error );
+	} );
+
+});
 
 
 

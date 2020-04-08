@@ -60,7 +60,9 @@
   <!-- Scripts -->
   <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{ asset('js/unpoly.min.js') }}"></script>
-  <script src="{{ asset('js/trumbowyg.min.js') }}"></script>
+  <!--<script src="{{ asset('js/trumbowyg.min.js') }}"></script>-->
+  <script src="{{ asset('js/ckeditor.js') }}"></script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Caret.js/0.3.1/jquery.caret.min.js"></script>
   <script src="{{ asset('js/atwho.js') }}"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
