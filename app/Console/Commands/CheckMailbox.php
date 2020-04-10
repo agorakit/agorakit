@@ -63,6 +63,100 @@ class CheckMailbox extends Command
         parent::__construct();
     }
 
+
+
+    /**
+    * Execute the console command.
+    *
+    * @return mixed
+    */
+    public function handle()
+    {
+        if ($this->option('debug')) {
+            $this->debug = true;
+        }
+
+        if (setting('user_can_post_by_email')) {
+            // open mailbox
+
+            $this->server = new Server(config('agorakit.inbox_host'));
+
+            // $this->connection is instance of \Ddeboer\Imap\Connection
+            $this->connection = $this->server->authenticate(config('agorakit.inbox_username'), config('agorakit.inbox_password'));
+
+            $mailboxes = $this->connection->getMailboxes();
+
+            if ($this->debug) {
+            foreach ($mailboxes as $mailbox) {
+                // Skip container-only mailboxes
+                // @see https://secure.php.net/manual/en/function.imap-getmailboxes.php
+                if ($mailbox->getAttributes() & \LATT_NOSELECT) {
+                    continue;
+                }
+                // $mailbox is instance of \Ddeboer\Imap\Mailbox
+                $this->line('Mailbox '.$mailbox->getName().' has '.$mailbox->count().' messages');
+            }
+        }
+
+            // open INBOX
+            $this->inbox = $this->connection->getMailbox('INBOX');
+
+            // create the required imap folders
+            $this->createImapFolders();
+
+            // get all messages
+            $messages = $this->inbox->getMessages();
+
+
+            $i = 0;
+            foreach ($messages as $message) {
+
+                $this->line('-----------------------------------');
+
+                // limit to 50 messages at a time (I did no find a better way to handle this iterator)
+                if ($i > 100) {
+                    break;
+                }
+                $i++;
+
+
+                if ($this->debug) {
+                    $this->line('Processing email "' . $message->getSubject() . '"');
+                    $this->line('From ' . $message->getFrom()->getAddress());
+                }
+
+
+                // Try to find a $user and a $group from the $message
+                $user = $this->extractUserFromMessage($message);
+                $group = $this->extractGroupFromMessage($message);
+
+                // Decide what to do
+                if ($group && $user->exists && $user->isMemberOf($group)){
+                    $this->info('User exists and is member of group, posting message');
+                    $this->processGroupExistsAndUserIsMember($group, $user, $message);
+                }
+                elseif ($group && $user->exists && !$user->isMemberOf($group)){
+                    $this->info('User exists BUT is not member of group, bouncing and inviting');
+                    $this->processGroupExistsButUserIsNotMember($group, $user, $message);
+                }
+                else {
+                    $this->error('Invalid user and/or group, discarding email');
+                    $this->processGroupNotFoundUserNotFound($user, $message);
+                }
+
+                // TODO handle the case of user exists but group doesn't -> might be a good idea to bounce back to user
+
+
+            }
+            $this->connection->expunge();
+        } else {
+            $this->info('Email checking disabled in settings');
+            return false;
+        }
+    }
+
+
+
     /**
     * Small helper debug output
     */
@@ -151,10 +245,11 @@ class CheckMailbox extends Command
         $body_html = $message->getBodyHtml(); // this is the raw html content
         $body_text = nl2br(\EmailReplyParser\EmailReplyParser::parseReply($message->getBodyText()));
 
+
         // count the number of caracters in plain text :
         // if we really have less than 5 chars in there using plain text,
         // let's post the whole html mess from the email
-        if (count($body_text) < 5) {
+        if (strlen($body_text) < 5) {
             $discussion->body = $body_html;
         } else {
             $discussion->body = $body_text;
@@ -194,95 +289,12 @@ class CheckMailbox extends Command
     }
 
 
-
-
-    /**
-    * Execute the console command.
-    *
-    * @return mixed
+    /*
+    TODO Detect automatic messages and discard them, see here : https://www.arp242.net/autoreply.html
     */
-    public function handle()
-    {
-        if ($this->option('debug')) {
-            $this->debug = true;
-        }
-
-        if (setting('user_can_post_by_email')) {
-            // open mailbox
-
-            $this->server = new Server(config('agorakit.inbox_host'));
-
-            // $this->connection is instance of \Ddeboer\Imap\Connection
-            $this->connection = $this->server->authenticate(config('agorakit.inbox_username'), config('agorakit.inbox_password'));
-
-            $mailboxes = $this->connection->getMailboxes();
-
-            foreach ($mailboxes as $mailbox) {
-                // Skip container-only mailboxes
-                // @see https://secure.php.net/manual/en/function.imap-getmailboxes.php
-                if ($mailbox->getAttributes() & \LATT_NOSELECT) {
-                    continue;
-                }
-
-                // $mailbox is instance of \Ddeboer\Imap\Mailbox
-                $this->line('Mailbox '.$mailbox->getName().' has '.$mailbox->count().' messages');
-            }
-
-            // open INBOX
-
-            $this->inbox = $this->connection->getMailbox('INBOX');
-
-            if ($this->inbox->count() == 0) {
-                $this->info('No new emails in inbox');
-            }
-
-            $this->createImapFolders();
 
 
-            $messages = $this->inbox->getMessages();
-            $this->debug($messages->count());
 
-            $i = 0;
-            foreach ($messages as $message) {
-                $i++;
-
-                if ($i > 50) {
-                    break;
-                }
-
-                if ($this->debug) {
-                    $this->line('Processing email "' . $message->getSubject() . '"');
-                    $this->line('From ' . $message->getFrom()->getAddress());
-                }
-
-                $success = false;
-
-                // Try to find a $user and a $group from the $message
-                $user = $this->extractUserFromMessage($message);
-                $group = $this->extractGroupFromMessage($message);
-
-                // Decide what to do
-                if ($group && $user->exists && $user->isMemberOf($group)){
-                    $this->info('User exists and is member of group, posting message');
-                    $this->processGroupExistsAndUserIsMember($group, $user, $message);
-                }
-                elseif ($group && $user->exists && !$user->isMemberOf($group)){
-                    $this->info('User exists BUT is member of group, bouncing and inviting');
-                    $this->processGroupExistsButUserIsNotMember($group, $user, $message);
-                }
-                else {
-                    $this->error('Invalid user and/or group, discarding email');
-                    $this->processGroupNotFoundUserNotFound($user, $message);
-                }
-
-                $this->line('-----------------------------------');
-            }
-            $this->connection->expunge();
-        } else {
-            $this->info('Email checking disabled in settings');
-            return false;
-        }
-    }
 }
 
 
