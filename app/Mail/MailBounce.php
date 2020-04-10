@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Ddeboer\Imap\Message;
 
 class MailBounce extends Mailable
 {
@@ -19,9 +20,9 @@ class MailBounce extends Mailable
      *
      * @return void
      */
-    public function __construct($email, $reason = false)
+    public function __construct(Message $message, $reason = false)
     {
-        $this->email = $email;
+        $this->message = $message;
         $this->reason = $reason;
     }
 
@@ -35,8 +36,8 @@ class MailBounce extends Mailable
         return $this->markdown('emails.bounce')
         ->subject('['.setting('name').'] '. __('Mail not delivered'))
         ->with('reason', $this->reason)
-        ->with('subject', $this->email->getSubject())
-        ->with('body', $this->email->getBodyText())
+        ->with('subject', $this->message->getSubject())
+        ->with('body', $this->message->getBodyText())
         ->from(config('mail.noreply'));
     }
 }
