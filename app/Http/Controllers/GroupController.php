@@ -77,7 +77,7 @@ class GroupController extends Controller
         $actions = false;
         $files = false;
         $activities = false;
-        $group_email = false;
+        $group_inbox = false;
 
         // User is logged
         if (Auth::check()) {
@@ -102,8 +102,8 @@ class GroupController extends Controller
                 $activities = $group->activities()->limit(10)->get();
             }
 
-            if (Auth::user()->isMemberOf($group) && setting('user_can_post_by_email')) {
-                $group_email = setting('mail_prefix').$group->slug.setting('mail_suffix');
+            if (Auth::user()->isMemberOf($group) && $group->inbox()) {
+                $group_inbox = $group->inbox();
             }
         } else { // anonymous user
             if ($group->isSecret()) {
@@ -131,7 +131,7 @@ class GroupController extends Controller
         ->with('files', $files)
         ->with('activities', $activities)
         ->with('admins', $group->admins()->get())
-        ->with('group_email', $group_email)
+        ->with('group_inbox', $group_inbox)
         ->with('tab', 'home');
     }
 

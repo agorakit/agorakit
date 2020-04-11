@@ -22,8 +22,8 @@
           @endif
         </p>
 
-        @if ($group_email)
-          {{trans('messages.email')}} : <a href="mailto:{{$group_email}}">{{$group_email}}</a>
+        @if ($group_inbox)
+          {{__('Inbox for this group')}} : <a href="mailto:{{$group_inbox}}">{{$group_inbox}}</a>
         @endif
 
         <p>

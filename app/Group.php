@@ -66,6 +66,7 @@ class Group extends Model
         return [
             'slug' => [
                 'source' => 'name',
+                'reserved' => ['reply', 'reply-', 'admin-'],
             ],
         ];
     }
@@ -205,6 +206,21 @@ class Group extends Model
     {
         return route('groups.show', $this);
     }
+
+    /**
+    * Returns the inbox email of this group (if it has one).
+    * A group has an inbox if INBOX_DRIVER is not null in .env
+    */
+    public function inbox()
+    {
+        if (config('agorakit.inbox_driver')) {
+            return config('agorakit.inbox_prefix').$this->slug.config('agorakit.inbox_suffix');
+        }
+        else {
+            return false;
+        }
+    }
+
 
     /** returns true if the group is open (joinable by all) **/
     public function isOpen()

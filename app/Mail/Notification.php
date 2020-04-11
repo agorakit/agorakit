@@ -20,26 +20,42 @@ class Notification extends Mailable
     public $last_notification;
 
     /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
+    * Create a new message instance.
+    *
+    * @return void
+    */
     public function __construct()
     {
         //
     }
 
     /**
-     * Build the message.
-     *
-     * @return $this
-     */
+    * Build the message.
+    *
+    * @return $this
+    */
     public function build()
     {
         \App::setLocale(config('app.locale'));
 
-        return $this->markdown('emails.notification')
-        ->from(config('mail.noreply'), config('mail.from.name'))
+        $message = $this->markdown('emails.notification')
         ->subject('['.setting('name').'] '.trans('messages.news_from_group_email_subject').' "'.$this->group->name.'"');
+
+        if ($this->group->inbox()) {
+            $message->from($this->group->inbox(), $this->group->name);
+            // if only one discussion, send from this discussion instead of the whole group inbox
+            if ($this->discussions->count() == 1) {
+                $message->replyTo($this->discussions->first()->inbox(), $this->group->name);
+            }
+            else {
+                $message->replyTo($this->group->inbox(), $this->group->name);
+            }
+        }
+        else {
+            $message->from(config('mail.noreply'), config('mail.from.name'));
+        }
+
+        return $message;
+
     }
 }

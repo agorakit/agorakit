@@ -104,4 +104,19 @@ class Discussion extends Model
     {
         return route('groups.discussions.show', [$this->group, $this]);
     }
+
+
+    /**
+    * Returns the inbox email of this discussion (if it has one).
+    * A discussion has an inbox if INBOX_DRIVER is not null in .env
+    */
+    public function inbox()
+    {
+        if (config('agorakit.inbox_driver')) {
+            return config('agorakit.inbox_prefix') . 'reply-' . $this->id . config('agorakit.inbox_suffix');
+        }
+        else {
+            return false;
+        }
+    }
 }
