@@ -227,7 +227,7 @@ class CheckMailbox extends Command
             $to_email = $to->getAddress();
             preg_match('#' . config('agorakit.inbox_prefix') . 'reply-(\d+)' . config('agorakit.inbox_prefix'). '#', $to_email, $matches);
             //dd($matches);
-            if ($matches[1]) {
+            if (isset($matches[1])) {
                 $discussion = Discussion::where('id', $matches[1])->first();
 
 
