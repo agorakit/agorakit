@@ -85,6 +85,10 @@ up.compiler('.wysiwyg', function(element, data) {
 				}
 			]
 		},
+		mediaEmbed: {
+			previewsInData: true
+		},
+		removePlugins: [ 'MediaEmbed'],
 
 		toolbar: {
 			items: [
