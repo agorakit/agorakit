@@ -121,63 +121,35 @@
 
             <h2>{{ __('Post by email')}}</h2>
 
-
-
-            <div class="alert alert-info" role="alert">
-              {{ __('If this is enabled, user will be able to post to your groups using a predefined email address.
-                Each group received an email address based on it\'s name')}}
-                <br/>
-                <a href="https://dos.agorakit.org">Read the docs</a> to understand this feature and how to configure it.
-              </div>
-
-              <div class="form-group">
-                {!! Form::checkbox('user_can_post_by_email',1 , setting('user_can_post_by_email')) !!}
-                {{ __('Allow users to post by email')}}
-              </div>
-
-              <div class="form-group">
-
-                Email prefix (this is the part before the group name in email). Leave it blank if you use a catch all email:
-                {!! Form::text('mail_prefix', setting('mail_prefix'), ['class' => 'form-control']) !!}
-
-                <br/>
-                Email suffix (this is the part after the group name in email):
-                {!! Form::text('mail_suffix', setting('mail_suffix'), ['class' => 'form-control']) !!}
-                <br/>
-                Mail server (pop3) :
-                {!! Form::text('mail_server', setting('mail_server'), ['class' => 'form-control']) !!}
-                <br/>
-                Login :
-                {!! Form::text('mail_login', setting('mail_login'), ['class' => 'form-control']) !!}
-                <br/>
-                Password (fill this field to change the password, leave blank otherwise):
-                {!! Form::password('mail_password',  ['class' => 'form-control']) !!}
-
-              </div>
-
+            <div class="alert alert-danger" role="alert">
+              This feature is now enabled in your .env file!
+              <a href="https://dos.agorakit.org">Read the docs</a> to understand this feature and how to configure/upgrade it.
             </div>
 
 
-            <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
           </div>
+
+
+          <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
         </div>
+      </div>
 
-        <div class="form-group">
-          {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-lg btn-primary']) !!}
-        </div>
-
-
+      <div class="form-group">
+        {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-lg btn-primary']) !!}
       </div>
 
 
     </div>
 
 
-
-
-    {!! Form::close() !!}
-
-
   </div>
+
+
+
+
+  {!! Form::close() !!}
+
+
+</div>
 
 @endsection
