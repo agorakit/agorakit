@@ -15,7 +15,7 @@ use App\Mail\MailBounce;
 /*
 Inbound  Email handler for Agorakit
 
-Multiple cases :
+High level overview :
 
 1. Sending email to a group
 - The user exists
@@ -41,7 +41,7 @@ class CheckMailbox extends Command
     */
     protected $signature = 'agorakit:checkmailbox
     {{--keep : Use this to keep a copy of the email in the mailbox. Only for development!}}
-    {{--debug : Show debug info and does not move emails on imap server. Only for development!}}
+    {{--debug : Show debug info.}}
     ';
 
     /**
@@ -63,8 +63,6 @@ class CheckMailbox extends Command
         parent::__construct();
     }
 
-
-
     /**
     * Execute the console command.
     *
@@ -76,7 +74,7 @@ class CheckMailbox extends Command
             $this->debug = true;
         }
 
-        if (setting('user_can_post_by_email')) {
+        if (config('agorakit.inbox_host')) {
             // open mailbox
 
             $this->server = new Server(config('agorakit.inbox_host'));
@@ -87,16 +85,16 @@ class CheckMailbox extends Command
             $mailboxes = $this->connection->getMailboxes();
 
             if ($this->debug) {
-            foreach ($mailboxes as $mailbox) {
-                // Skip container-only mailboxes
-                // @see https://secure.php.net/manual/en/function.imap-getmailboxes.php
-                if ($mailbox->getAttributes() & \LATT_NOSELECT) {
-                    continue;
+                foreach ($mailboxes as $mailbox) {
+                    // Skip container-only mailboxes
+                    // @see https://secure.php.net/manual/en/function.imap-getmailboxes.php
+                    if ($mailbox->getAttributes() & \LATT_NOSELECT) {
+                        continue;
+                    }
+                    // $mailbox is instance of \Ddeboer\Imap\Mailbox
+                    $this->line('Mailbox '.$mailbox->getName().' has '.$mailbox->count().' messages');
                 }
-                // $mailbox is instance of \Ddeboer\Imap\Mailbox
-                $this->line('Mailbox '.$mailbox->getName().' has '.$mailbox->count().' messages');
             }
-        }
 
             // open INBOX
             $this->inbox = $this->connection->getMailbox('INBOX');
@@ -113,25 +111,38 @@ class CheckMailbox extends Command
 
                 $this->line('-----------------------------------');
 
-                // limit to 50 messages at a time (I did no find a better way to handle this iterator)
+                // limit to 100 messages at a time (I did no find a better way to handle this iterator)
                 if ($i > 100) {
                     break;
                 }
                 $i++;
 
 
+                // debug message info
                 if ($this->debug) {
                     $this->line('Processing email "' . $message->getSubject() . '"');
                     $this->line('From ' . $message->getFrom()->getAddress());
                 }
 
+                // discard automated messages
+                if ($this->isMessageAutomated($message)) {
+                    $message->move($this->mailbox['automated']);
+                    $this->line('Message discarded because automated');
+                    continue;
+                }
 
-                // Try to find a $user and a $group from the $message
+
+                // Try to find a $user, $group and $discussion from the $message
                 $user = $this->extractUserFromMessage($message);
                 $group = $this->extractGroupFromMessage($message);
+                $discussion = $this->extractDiscussionFromMessage($message);
 
                 // Decide what to do
-                if ($group && $user->exists && $user->isMemberOf($group)){
+                if ($discussion && $user->exists && $user->isMemberOf($discussion->group)){
+                    $this->info('Discussion exists and user is member of group, posting message');
+                    $this->processDiscussionExistsAndUserIsMember($discussion, $user, $message);
+                }
+                elseif ($group && $user->exists && $user->isMemberOf($group)){
                     $this->info('User exists and is member of group, posting message');
                     $this->processGroupExistsAndUserIsMember($group, $user, $message);
                 }
@@ -167,14 +178,17 @@ class CheckMailbox extends Command
     }
 
 
-    // tries to find a valid user in the $message (using from: email header)
+    /**
+    * Tries to find a valid user in the $message (using from: email header)
+    * Else returns a new user with the email already set
+    */
     public function extractUserFromMessage(Message $message)
     {
         $user = User::where('email', $message->getFrom()->getAddress())->firstOrNew();
         if (!$user->exists){
             $user->email = $message->getFrom()->getAddress();
         }
-        $this->debug('from: header : '  . $user->email);
+        $this->debug('from: '  . $user->email);
         return $user;
     }
 
@@ -190,7 +204,7 @@ class CheckMailbox extends Command
 
             $to_emails[] = $to_email;
 
-            $this->debug('to: header : '  . $to_email);
+            $this->debug('to: '  . $to_email);
         }
 
         $group = Group::whereIn('slug', $to_emails)->first();
@@ -202,9 +216,89 @@ class CheckMailbox extends Command
         }
         $this->debug('group not found');
         return false;
+    }
+
+
+    // tries to find a valid discussion in the $message (using to: email header and message content)
+    public function extractDiscussionFromMessage(Message $message)
+    {
+        $to_emails = [];
+        foreach ($message->getTo() as $to) {
+            $to_email = $to->getAddress();
+            preg_match('#' . config('agorakit.inbox_prefix') . 'reply-(\d+)' . config('agorakit.inbox_prefix'). '#', $to_email, $matches);
+            //dd($matches);
+            if ($matches[1]) {
+                $discussion = Discussion::where('id', $matches[1])->first();
+
+
+                if ($discussion) {
+                    $this->debug('discussion found');
+                    return $discussion;
+                }
+            }
+        }
+
+        $this->debug('discussion not found');
+        return false;
 
     }
 
+    function parse_rfc822_headers(string $header_string): array {
+        // Reference:
+        // * Base: https://stackoverflow.com/questions/5631086/getting-x-mailer-attribute-in-php-imap/5631445#5631445
+        // * Improved regex: https://stackoverflow.com/questions/5631086/getting-x-mailer-attribute-in-php-imap#comment61912182_5631445
+        preg_match_all(
+            '/([^:\s]+): (.*?(?:\r\n\s(?:.+?))*)\r\n/m',
+            $header_string,
+            $matches
+        );
+        $headers = array_combine($matches[1], $matches[2]);
+        return $headers;
+    }
+
+    /**
+    * Returns true if message is an autoreply or vacation auto responder
+    */
+    public function isMessageAutomated(Message $message)
+    {
+        /*
+        TODO Detect automatic messages and discard them, see here : https://www.arp242.net/autoreply.html
+        */
+
+        $message_headers = $this->parse_rfc822_headers($message->getRawHeaders());
+
+        //dd($message_headers);
+        //dd($message->getHeaders());
+
+
+        if (array_key_exists('Auto-Submitted', $message_headers)) {
+            return true;
+        }
+
+        if (array_key_exists('X-Auto-Response-Suppress', $message_headers)) {
+            return true;
+        }
+
+        if (array_key_exists('List-Id', $message_headers)) {
+            return true;
+        }
+
+        if (array_key_exists('List-Unsubscribe', $message_headers)) {
+            return true;
+        }
+
+        if (array_key_exists('Feedback-ID', $message_headers)) {
+            return true;
+        }
+
+        return false;
+
+    }
+
+
+    /**
+    * Setup the imap server with the needed imap folders
+    */
     public function createImapFolders()
     {
         // Open/create processed mailboxes
@@ -234,7 +328,16 @@ class CheckMailbox extends Command
         } else {
             $this->mailbox['failed'] = $this->connection->createMailbox('failed');
         }
+
+
+
+        if ($this->connection->hasMailbox('automated')) {
+            $this->mailbox['automated'] = $this->connection->getMailbox('automated');
+        } else {
+            $this->mailbox['automated'] = $this->connection->createMailbox('automated');
+        }
     }
+
 
     public function processGroupExistsAndUserIsMember(Group $group, User $user, Message $message)
     {
@@ -276,6 +379,41 @@ class CheckMailbox extends Command
     }
 
 
+    public function processDiscussionExistsAndUserIsMember(Discussion $discussion, User $user, Message $message)
+    {
+        $body_html = $message->getBodyHtml(); // this is the raw html content
+        $body_text = nl2br(\EmailReplyParser\EmailReplyParser::parseReply($message->getBodyText()));
+
+
+        // count the number of caracters in plain text :
+        // if we really have less than 5 chars in there using plain text,
+        // let's post the whole html mess from the email
+        if (strlen($body_text) < 5) {
+            $body = $body_html;
+        } else {
+            $body = $body_text;
+        }
+
+        $comment = new \App\Comment();
+        $comment->body = $body;
+        $comment->user()->associate($user);
+        if ($discussion->comments()->save($comment)) {
+            $discussion->total_comments++;
+            $discussion->save();
+
+            // update activity timestamp on parent items
+            $discussion->group->touch();
+            $discussion->touch();
+            $message->move($this->mailbox['processed']);
+            return true;
+        }
+        else {
+            $message->move($this->mailbox['failed']);
+            return false;
+        }
+    }
+
+
     public function processGroupExistsButUserIsNotMember(Group $group, User $user, Message $message)
     {
         Mail::to($user)->send(new MailBounce($message, 'You are not member of ' . $group->name . ' please join the group first before posting'));
@@ -288,106 +426,4 @@ class CheckMailbox extends Command
         $message->move($this->mailbox['discarded']);
     }
 
-
-    /*
-    TODO Detect automatic messages and discard them, see here : https://www.arp242.net/autoreply.html
-    */
-
-
-
 }
-
-
-
-
-
-/*
-
-if ($user->exists) {
-$this->info('This user exists, full name is '.$user->name.' / id is : '.($user->id));
-
-// check that each mail to: is an existing group
-if ($group) {
-
-// check that the user is a member of the group
-if ($user->isMemberOf($group)) {
-$this->info($user->name.' is a member of this group');
-
-$discussion = new Discussion();
-
-$discussion->name = $message->getSubject();
-
-$body_html = $message->getBodyHtml(); // this is the raw html content
-$body_text = nl2br(\EmailReplyParser\EmailReplyParser::parseReply($message->getBodyText()));
-
-// count the number of caracters in plain text :
-// if we really have less than 5 chars in there using plain text,
-// let's post the whole html mess from the email
-if (count($body_text) < 5) {
-$discussion->body = $body_html;
-} else {
-$discussion->body = $body_text;
-}
-
-$discussion->total_comments = 1; // the discussion itself is already a comment
-$discussion->user()->associate($user);
-
-if ($this->debug) {
-print_r($discussion->body);
-}
-
-if ($group->discussions()->save($discussion)) {
-// update activity timestamp on parent items
-$group->touch();
-$user->touch();
-$this->info('Discussion has been created with id : '.$discussion->id);
-$this->info('Title : '.$discussion->name);
-Log::info('Discussion has been created from email', ['mail'=> $message, 'discussion' => $discussion]);
-
-$success = true;
-} else {
-$this->error('Could not create discussion');
-Log::error('Could not create discussion', ['mail'=> $message, 'discussion' => $discussion]);
-}
-} else {
-$this->error($user->name.' is not a member of '.$group->name);
-// bounce mail
-Mail::to($user)->send(new MailBounce($message, 'You are not a member of this group'));
-}
-} else {
-$this->error('No group named '. $to_email);
-// bounce mail
-Mail::to($user)->send(new MailBounce($message, 'There is no group named ' . $to_email . ' at this adress'));
-}
-}
-} else {
-$this->error('No user found with '.$message->getFrom()->getAddress());
-// bounce mail, but
-// bouncing to a non member might create spam problems :
-Mail::to($message->getFrom()->getAddress())->send(new MailBounce($message, 'You are not registered on this server, please create an account first'));
-}
-
-// move message to the correct mailbox depending on outcome
-if ($success) {
-if ($this->debug) {
-$this->info('It worked but since debug is enabled the message has not been moved');
-}
-else
-{
-$message->move($processed_mailbox);
-$this->info('Email has been moved to the processed folder on the mail server');
-Log::info('Email has been moved to the processed folder on the mail server', ['mail_id'=> $message->getId()]);
-}
-} else {
-if ($this->debug) {
-$this->error('It did\'nt  work but since debug is enabled the message has not been moved');
-}
-else
-{
-$message->move($failed_mailbox);
-$this->error('Email has been moved to the failed folder on the mail server');
-Log::info('Email has been moved to the failed folder on the mail server', ['mail_id'=> $message->getId()]);
-}
-}
-}
-*/
