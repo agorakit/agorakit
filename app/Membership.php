@@ -38,7 +38,7 @@ class Membership extends Model
     // member asked to be part of the group, but it has not been confirmed yet
     const CANDIDATE = 10;
 
-    // invited
+    // member invited by a group admin
     const INVITED = 0;
 
     // left the group

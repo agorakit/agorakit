@@ -22,16 +22,16 @@
   </div>
 
 
-  <table style="width: 100%" class="table data-table table-striped">
+  <table style="width: 100%" class="table data-table table-striped" data-order='[[ 3, "desc" ], [ 0, "asc" ]]'>
     <thead class="thead-dark" style="width: 100%">
       <tr>
         <th data-priority="1">{{ trans('messages.name') }}</th>
         <th data-priority="3">{{ trans('messages.member_since') }}</th>
         <th data-priority="4">{{ trans('messages.last_activity') }}</th>
+        <th data-priority="2">{{ trans('messages.status') }}</th>
 
         @can('manage-membership', $group)
           <th data-priority="2">{{ trans('messages.email') }}</th>
-          <th data-priority="2">{{ trans('messages.status') }}</th>
           <th data-priority="2">{{ trans('messages.notifications_interval') }}</th>
           <th data-priority="1"></th>
         @endcan
@@ -55,43 +55,57 @@
             <a href="{{ route('users.show', $membership->user) }}">{{ $membership->user->updated_at->diffForHumans() }}</a>
           </td>
 
+
+          <td data-order="{{ $membership->membership }}">
+
+            @if ($membership->membership == \App\Membership::ADMIN)
+              <span class="badge badge-pill badge-success" up-tooltip="@lang('This member is admin of the group and manages it')">
+                {{trans('membership.admin')}}
+              </span>
+            @endif
+            @if ($membership->membership == \App\Membership::MEMBER)
+              <span class="badge badge-pill badge-primary" up-tooltip="@lang('Regular member of the group')">
+                {{trans('membership.member')}}
+              </span>
+            @endif
+            @if ($membership->membership == \App\Membership::CANDIDATE)
+              <span class="badge badge-pill badge-info" up-tooltip="@lang('This user asked to be part of the group but has not yet been accepted')">
+                {{trans('membership.candidate')}}
+              </span>
+            @endif
+            @if ($membership->membership == \App\Membership::INVITED)
+              <span class="badge badge-pill badge-secondary" up-tooltip="@lang('This user has been invited to the group but did not accept yet')">
+                {{trans('membership.invited')}}
+              </span>
+            @endif
+            @if ($membership->membership == \App\Membership::UNREGISTERED)
+              <span class="badge badge-pill badge-dark" up-tooltip="@lang('This member left the group')">
+                {{trans('membership.unregistered')}}
+              </span>
+            @endif
+            @if ($membership->membership == \App\Membership::REMOVED)
+              <span class="badge badge-pill badge-dark" up-tooltip="@lang('This member has been removed from the group')">
+                {{trans('membership.removed')}}
+              </span>
+            @endif
+            @if ($membership->membership == \App\Membership::BLACKLISTED)
+              <span class="badge badge-pill badge-danger" up-tooltip="@lang('This member has been blacklisted')">
+                {{trans('membership.blacklisted')}}
+              </span>
+            @endif
+
+          </td>
+
           @can('manage-membership', $group)
             <td>
-               {{$membership->user->email}}
+              {{$membership->user->email}}
             </td>
-
-            <td data-order="{{ $membership->membership }}">
-
-              @if ($membership->membership == \App\Membership::ADMIN)
-                {{trans('membership.admin')}}
-              @endif
-              @if ($membership->membership == \App\Membership::MEMBER)
-                {{trans('membership.member')}}
-              @endif
-              @if ($membership->membership == \App\Membership::CANDIDATE)
-                {{trans('membership.candidate')}}
-              @endif
-              @if ($membership->membership == \App\Membership::INVITED)
-                {{trans('membership.invited')}}
-              @endif
-              @if ($membership->membership == \App\Membership::UNREGISTERED)
-                {{trans('membership.unregistered')}}
-              @endif
-              @if ($membership->membership == \App\Membership::REMOVED)
-                {{trans('membership.removed')}}
-              @endif
-              @if ($membership->membership == \App\Membership::BLACKLISTED)
-                {{trans('membership.blacklisted')}}
-              @endif
-
-            </td>
-
-            <td data-order="{{ $membership->notification_interval }}">
+        <td data-order="{{ $membership->notification_interval }}">
               {{minutesToInterval($membership->notification_interval)}}
             </td>
 
             <td>
-              <a class="btn btn-secondary" href="{{action('MembershipController@edit', [$group, $membership])}}">{{trans('messages.edit')}}</a>
+              <a class="btn btn-primary btn-sm" href="{{action('MembershipController@edit', [$group, $membership])}}">{{trans('messages.edit')}}</a>
             </td>
           @endcan
 
@@ -101,65 +115,6 @@
       <tbody>
 
       </table>
-
-
-      @if ($admins->count() > 0)
-        <h3 class="mt-5">{{trans('messages.admins')}} : </h3>
-        <table class="table">
-          @foreach( $admins as $admin )
-            <tr>
-              <td>
-                <a href="{{ route('users.show', $admin) }}">
-                  <span class="avatar"><img src="{{route('users.cover', [$admin, 'small'])}}" class="rounded-circle"/></span>
-                  {{ $admin->name }}
-                </a>
-              </td>
-            </tr>
-          @endforeach
-        </table>
-      @endif
-
-
-
-      @can('manage-membership', $group)
-
-        @if ($candidates->count() > 0)
-          <h3 class="mt-5">{{trans('messages.candidates')}} :</h3>
-          <table class="table">
-            @foreach ($candidates as $candidate)
-              <tr>
-                <td>
-                  <a href="{{ route('users.show', $candidate->user) }}">
-                    <span class="avatar"><img src="{{route('users.cover', [$candidate->user, 'small'])}}" class="rounded-circle"/></span>
-                    {{ $candidate->user->name }}
-                  </a>
-                </td>
-                <td>
-                  <a class="btn btn-secondary" href="{{action('MembershipController@edit', [$group, $candidate])}}">
-                    <i class="fa fa-check"></i> {{trans('messages.edit')}}
-                  </a>
-
-                </td>
-
-              </tr>
-            @endforeach
-          </table>
-        @endif
-
-        @if ($invites->count() > 0)
-          <h3 class="mt-5">{{trans('messages.user_invited')}} :</h3>
-          <table class="table">
-            @foreach ($invites as $invite)
-              <tr>
-                <td>{{$invite->email}}</td>
-                <td>{{$invite->created_at}}</td>
-                <!--<td>Resend invite TODO</td>-->
-              </tr>
-            @endforeach
-          </table>
-        @endif
-
-      @endcan
 
 
     @endsection

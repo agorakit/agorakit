@@ -2,7 +2,8 @@
 
 namespace App\Mail;
 
-use App\Invite;
+use App\Membership;
+use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -11,16 +12,18 @@ class InviteUser extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $invite;
+    public $membership;
+    public $group_user;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Invite $invite)
+    public function __construct(User $group_user, Membership $membership)
     {
-        $this->invite = $invite;
+        $this->membership = $membership;
+        $this->group_user = $group_user;
     }
 
     /**
@@ -32,6 +35,6 @@ class InviteUser extends Mailable
     {
         return $this->markdown('emails.invite')
         ->from(config('mail.noreply'), config('mail.from.name'))
-        ->subject('['.setting('name').'] '.trans('messages.invitation_to_join').' "'.$this->invite->group->name.'"');
+        ->subject('['.setting('name').'] '.trans('messages.invitation_to_join').' "'.$this->membership->group->name.'"');
     }
 }

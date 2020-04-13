@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Group;
+use App\User;
 use App\Mail\InviteUser;
 use Auth;
 use Carbon\Carbon;
@@ -19,12 +20,12 @@ class InviteController extends Controller
     }
 
     /**
-     * Shows an invitation form for the specific group.
-     *
-     * @param [type] $group_id [description]
-     *
-     * @return [type] [description]
-     */
+    * Shows an invitation form for the specific group.
+    *
+    * @param [type] $group_id [description]
+    *
+    * @return [type] [description]
+    */
     public function invite(Request $request, Group $group)
     {
         $this->authorize('invite', $group);
@@ -35,15 +36,19 @@ class InviteController extends Controller
     }
 
     /**
-     * Send invites to new members by email.
-     *
-     * @param int $group_id [description]
-     *
-     * @return [type] [description]
-     */
+    * Send invites to new members by email.
+    * Create user accounts already for those users.
+    * Set membership status to "invited"
+    *
+    * @param int $group_id [description]
+    *
+    * @return [type] [description]
+    */
     public function sendInvites(Request $request, Group $group)
     {
         $this->authorize('invite', $group);
+
+        $group_user = Auth::user();
 
         $status_message = null;
 
@@ -55,54 +60,27 @@ class InviteController extends Controller
 
         // for each invite email,
         foreach ($emails as $email) {
-            // - check that the user has not been invited yet for this group
-            $invitation_counter = \App\Invite::where('email', '=', $email)
-            ->where('claimed_at', '=', null)
-            ->where('group_id', '=', $group->id)
-            ->count();
+            // find or create users
+            $user = User::firstOrCreate(['email' => $email]);
 
-            // check that the user is not already member of the group
-            $user_already_member = false;
-            $user = \App\User::where('email', $email)->first();
-            if ($user) {
-                if ($user->isMemberOf($group)) {
-                    $user_already_member = true;
-                }
-            }
-
-            /*
-            if group is restricted (private), we proceed diferently :
-            - if user is already registered we add him/her immediately
-            - if user is not registered yet, as soon as (s)he registers, (s)he is added to the groups (this case is handled in the auth controller)
-            */
-
-            if (!$group->isOpen()) {
-                if ($user) {
-                    // add user to membership for the group taken from the invite table
-                    $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $group->id]);
-                    $membership->membership = \App\Membership::MEMBER;
-                    $membership->save();
-                    $status_message .= trans('membership.users_has_been_added').' : '.$email.'<br/>';
-                }
-            }
-
-            if ($invitation_counter > 0 || $user_already_member) {
+            if ($user->isMemberOf($group)) {
                 $status_message .= trans('membership.user_already_invited').' : '.$email.'<br/>';
-            } else {
-                // - create an invite token and store in invite table
-                $invite = new \App\Invite();
-                $invite->generateToken();
-                $invite->email = $email;
-                $invite->group()->associate($group);
-                $invite->user()->associate(Auth::user());
+            }
+            else
+            {
+                $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $group->id]);
+                $membership->membership = \App\Membership::INVITED;
+                $membership->save();
 
-                if ($invite->save()) {
-                    // - send invitation email
-                    Mail::to($email)->send(new InviteUser($invite));
-                    $status_message .= trans('membership.users_has_been_invited').' : '.$email.'<br/>';
-                }
+                // send invitation email
+                Mail::to($email)->send(new InviteUser($group_user, $membership));
+                $status_message .= trans('membership.users_has_been_invited').' : '.$email.'<br/>';
+
+
             }
         }
+
+
         // NICETOHAVE We could queue or wathever if more than 50 mails for instance.
         // But it's also a kind of spam prevention that it takes time to invite on the server
 
@@ -114,10 +92,10 @@ class InviteController extends Controller
     }
 
     /**
-     * Whenever a user wants to confirm an invite he received from an email link
-     * - if user exists we directly subscribe him/her to the group
-     * - if not we show an account creation screen.
-     */
+    * Whenever a user wants to confirm an invite he received from an email link
+    * - if user exists we directly subscribe him/her to the group
+    * - if not we show an account creation screen.
+    */
     public function inviteConfirm(Request $request, Group $group, $token)
     {
         $invite = \App\Invite::whereToken($token)->first();
@@ -165,8 +143,8 @@ class InviteController extends Controller
     }
 
     /**
-     * Process the account creation from the form of inviteConfirm().
-     */
+    * Process the account creation from the form of inviteConfirm().
+    */
     public function inviteRegister(Request $request, Group $group, $token)
     {
         $this->validate($request, [
