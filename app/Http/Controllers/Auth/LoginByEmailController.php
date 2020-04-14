@@ -6,30 +6,30 @@ use Illuminate\Http\Request;
 use \App\User;
 use Auth;
 use URL;
+use \App\Mail\LoginByEmail;
+use Mail;
 
 
-class LoginByMailController extends Controller
+class LoginByEmailController extends Controller
 {
     /**
     * Show a login by mail form
     */
-    public function showLoginByMailForm()
+    public function showLoginByEmailForm()
     {
-        return view('auth.loginbymail');
+        return view('auth.loginbyemail');
     }
 
-    public function sendLoginByMail(Request $request)
+    public function sendLoginByEmail(Request $request)
     {
 
         $user = \App\User::where('email', $request->get('email'))->first();
 
         if ($user) {
-            /* TODO
-            return URL::temporarySignedRoute(
-                'autologin', now()->addMinutes(30),
-                ['username' => $user->username, 'redirect' => '/']
-            );
-            */
+            // send invitation email
+            Mail::to($request->get('email'))->send(new LoginByEmail($user));
+            flash('Check your mailbox, we sent you a login link. It will expires in 30 minutes');
+            return redirect('/');
         }
         else {
             flash('No user found with this email, please create an account instead');

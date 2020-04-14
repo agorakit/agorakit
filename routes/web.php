@@ -73,8 +73,8 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('autologin/{username}', 'Auth\AutoLoginController@login')->name('autologin');
 
-    Route::get('loginbymail', 'Auth\LoginByMailController@showLoginByMailForm')->name('loginbymail');
-    Route::post('loginbymail', 'Auth\LoginByMailController@sendLoginByMail')->name('sendloginbymail');
+    Route::get('loginbyemail', 'Auth\LoginByEmailController@showLoginByEmailForm')->name('loginbyemail');
+    Route::post('loginbyemail', 'Auth\LoginByEmailController@sendLoginByEmail')->name('sendloginbyemail');
 
 
 
