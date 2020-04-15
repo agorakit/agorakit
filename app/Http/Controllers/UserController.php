@@ -120,7 +120,7 @@ class UserController extends Controller
     */
     public function show(User $user)
     {
-        if ($user->isVerified()) {
+        if ($user->isVerified() || auth()->user()->isAdmin()) {
             $title = $user->username.' '.trans('messages.user_profile');
 
             return view('users.show')
