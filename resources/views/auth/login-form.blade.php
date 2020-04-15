@@ -39,8 +39,15 @@
 
   <div class="d-flex justify-content-end mt-5">
     <a class="btn btn-link mr-4" href="{{ url('/password/reset') }}">{{ trans('messages.forgotten_password') }}</a>
+
     <button type="submit" class="btn btn-primary">{{ trans('messages.login') }}</button>
   </div>
+
+  <p class="help mt-5">
+    <i class="fa fa-info-circle" aria-hidden="true"></i>
+    @lang('If you prefer, you can receive a login link by email'),
+    <a up-target="body" href="{{ url('/loginbyemail') }}">@lang('click here to receive your link')</a>.
+  </p>
 
 
 </form>

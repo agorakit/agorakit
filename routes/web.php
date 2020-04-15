@@ -68,13 +68,15 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::middleware(ProtectAgainstSpam::class)->group(function() {
         Auth::routes();
+
+        Route::get('loginbyemail', 'Auth\LoginByEmailController@showLoginByEmailForm')->name('loginbyemail');
+        Route::post('loginbyemail', 'Auth\LoginByEmailController@sendLoginByEmail')->name('sendloginbyemail');
     });
 
 
     Route::get('autologin/{username}', 'Auth\AutoLoginController@login')->name('autologin');
 
-    Route::get('loginbyemail', 'Auth\LoginByEmailController@showLoginByEmailForm')->name('loginbyemail');
-    Route::post('loginbyemail', 'Auth\LoginByEmailController@sendLoginByEmail')->name('sendloginbyemail');
+
 
 
 
