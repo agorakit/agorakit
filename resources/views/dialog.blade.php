@@ -7,26 +7,27 @@
 
   <link rel="shortcut icon" href="{{{ asset('logo/favicon.png') }}}">
 
-    <!-- Font awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/v4-shims.css">
+  <!-- Font awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/v4-shims.css">
 
-    <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
+  <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
 
 
-    <!-- additional css -->
+  <!-- additional css -->
 
-    @yield('css')
-    @stack('css')
+  @yield('css')
+  @stack('css')
 
-    <!-- head -->
-    @yield('head')
+  <!-- head -->
+  @yield('head')
 </head>
 
 <body>
 
-
-  @include('partials.errors')
+  <div class="container mt-5" style="max-width: 35rem;">
+    @include('partials.errors')
+  </div>
 
   <div class="container main-container main-dialog">
 
@@ -42,19 +43,19 @@
   </div>
 
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/unpoly.min.js') }}"></script>
-    <script src="{{ asset('js/trumbowyg.min.js') }}"></script>
+  <!-- Scripts -->
+  <script src="{{ asset('js/app.js') }}"></script>
+  <script src="{{ asset('js/unpoly.min.js') }}"></script>
+  <script src="{{ asset('js/trumbowyg.min.js') }}"></script>
 
 
-    @yield('js')
-    @stack('js')
+  @yield('js')
+  @stack('js')
 
-    <script src="{{ asset('js/compilers.js') }}"></script>
+  <script src="{{ asset('js/compilers.js') }}"></script>
 
-    <!-- footer -->
-    @yield('footer')
+  <!-- footer -->
+  @yield('footer')
 
 
 
