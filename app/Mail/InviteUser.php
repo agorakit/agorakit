@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use URL;
 use App\Membership;
 use App\User;
 use Illuminate\Bus\Queueable;
@@ -33,8 +34,13 @@ class InviteUser extends Mailable
      */
     public function build()
     {
+        $login_url = URL::temporarySignedRoute(
+            'autologin', now()->addDays(15),
+            ['username' => $this->membership->user->username, 'redirect' => '/']
+        );
         return $this->markdown('emails.invite')
         ->from(config('mail.noreply'), config('mail.from.name'))
-        ->subject('['.setting('name').'] '.trans('messages.invitation_to_join').' "'.$this->membership->group->name.'"');
+        ->subject('['.setting('name').'] '.trans('messages.invitation_to_join').' "'.$this->membership->group->name.'"')
+        ->with('login_url', $login_url);
     }
 }

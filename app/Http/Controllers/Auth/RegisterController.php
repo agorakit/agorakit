@@ -3,37 +3,19 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use App\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+
+
+
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Request;
+use Illuminate\Http\Request;
+
+use App\User;
 use Auth;
 use Mail;
 use App\Mail\UserConfirmation;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
-
-    use RegistersUsers;
-
-    /**
-    * Where to redirect users after registration.
-    *
-    * @var string
-    */
-    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
     * Create a new controller instance.
@@ -42,42 +24,69 @@ class RegisterController extends Controller
     */
     public function __construct()
     {
-          $this->middleware('guest', ['except' => ['confirmEmail']]);
+        $this->middleware('guest');
     }
 
     /**
-    * Get a validator for an incoming registration request.
-    *
-    * @param  array  $data
-    * @return \Illuminate\Contracts\Validation\Validator
+    * Show registration form
     */
-    protected function validator(array $data)
+    public function showRegistrationForm()
     {
-        return Validator::make($data, [
+        return view('auth.register');
+    }
+
+
+    public function handleRegistrationForm(Request $request)
+    {
+        $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+        ]);
+
+
+        // store name an d email in the session
+        $request->session()->put('name', $request->input('name'));
+        $request->session()->put('email', $request->input('email'));
+
+
+        // check if mail is taken, if taken, propose a login link instead
+        $user = User::where('email', $request->input('email'))->first();
+        if($user) {
+            flash('You already have an account, use this form to receive a login link by email');
+            return redirect()->route('loginbyemail');
+        }
+
+        // else go to step 2 : we ask for the passwords
+        return redirect('/register/password');
+    }
+
+    public function showPasswordForm(Request $request)
+    {
+        return view('auth.register_password');
+    }
+
+
+
+    public function handlePasswordForm(Request $request)
+    {
+        $request->validate([
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
-    }
 
-    /**
-    * Create a new user instance after a valid registration.
-    *
-    * @param  array  $data
-    * @return \App\User
-    */
-    protected function create(array $data)
-    {
         $user =  User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'name' => $request->session()->get('name'),
+            'email' => $request->session()->get('email'),
+            'password' => Hash::make($request->input('password')),
         ]);
 
         Mail::to($user)->send(new UserConfirmation($user));
+        Auth::login($user);
 
-        return $user;
+        return redirect('/');
     }
+
+
+
 
     /**
     * Confirm a user's email address.

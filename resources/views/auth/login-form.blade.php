@@ -1,4 +1,4 @@
-<h1>{{trans('messages.login')}}</h1>
+<h1>{{config('agorakit.name')}} : {{trans('messages.login')}}</h1>
 
 <p class="help">
   <i class="fa fa-info-circle" aria-hidden="true"></i>

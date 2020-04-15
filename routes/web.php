@@ -69,6 +69,13 @@ Route::group(['middleware' => ['web', 'invites']], function () {
     Route::middleware(ProtectAgainstSpam::class)->group(function() {
         Auth::routes();
 
+        Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+        Route::post('register', 'Auth\RegisterController@handleRegistrationForm');
+
+        Route::get('register/password', 'Auth\RegisterController@showPasswordForm');
+        Route::post('register/password', 'Auth\RegisterController@handlePasswordForm');
+
+
         Route::get('loginbyemail', 'Auth\LoginByEmailController@showLoginByEmailForm')->name('loginbyemail');
         Route::post('loginbyemail', 'Auth\LoginByEmailController@sendLoginByEmail')->name('sendloginbyemail');
     });
@@ -136,6 +143,9 @@ Route::group(['middleware' => ['web', 'invites']], function () {
     Route::get('invites', 'InviteController@index')->name('invites.index');
     Route::get('invites/{membership}/accept', 'InviteController@accept')->name('invites.accept');
     Route::get('invites/{membership}/deny', 'InviteController@deny')->name('invites.deny');
+
+    Route::get('invites/register', 'InviteController@inviteForm')->name('invites.form');
+    Route::post('invites/register', 'InviteController@inviteRegister')->name('invites.register');
 
     /*
     Route::get('groups/{group}/invite/confirm/{token}', 'InviteController@inviteConfirm')->name('groups.invite.confirm');
