@@ -99,8 +99,6 @@ class CheckMailbox extends Command
             // open INBOX
             $this->inbox = $this->connection->getMailbox('INBOX');
 
-            // create the required imap folders
-            $this->createImapFolders();
 
             // get all messages
             $messages = $this->inbox->getMessages();
@@ -126,7 +124,7 @@ class CheckMailbox extends Command
 
                 // discard automated messages
                 if ($this->isMessageAutomated($message)) {
-                    $message->move($this->mailbox['automated']);
+                    $this->moveMessage($message, 'automated');
                     $this->line('Message discarded because automated');
                     continue;
                 }
@@ -151,8 +149,15 @@ class CheckMailbox extends Command
                     $this->processGroupExistsButUserIsNotMember($group, $user, $message);
                 }
                 else {
-                    $this->error('Invalid user and/or group, discarding email');
-                    $this->processGroupNotFoundUserNotFound($user, $message);
+                    if (!$group) {
+                        $this->moveMessage($message, 'group_not_found');
+                    }
+                    elseif (!$user->exists) {
+                        $this->moveMessage($message, 'user_not_found');
+                    }
+                    elseif (!$discussion) {
+                        $this->moveMessage($message, 'discussion_not_found');
+                    }
                 }
 
                 // TODO handle the case of user exists but group doesn't -> might be a good idea to bounce back to user
@@ -267,10 +272,6 @@ class CheckMailbox extends Command
 
         $message_headers = $this->parse_rfc822_headers($message->getRawHeaders());
 
-        //dd($message_headers);
-        //dd($message->getHeaders());
-
-
         if (array_key_exists('Auto-Submitted', $message_headers)) {
             return true;
         }
@@ -291,52 +292,30 @@ class CheckMailbox extends Command
             return true;
         }
 
+        if (array_key_exists('X-NIDENT', $message_headers)) {
+            return true;
+        }
+
+
         return false;
 
     }
 
-
     /**
-    * Setup the imap server with the needed imap folders
-    */
-    public function createImapFolders()
+     * Move the provided $message to a folder named $folder
+     */
+    public function moveMessage(Message $message, $folder)
     {
-        // Open/create processed mailboxes
-        if ($this->connection->hasMailbox('processed')) {
-            $this->mailbox['processed'] = $this->connection->getMailbox('processed');
+        if ($this->connection->hasMailbox($folder)) {
+            $folder = $this->connection->getMailbox($folder);
         } else {
-            $this->mailbox['processed'] = $this->connection->createMailbox('processed');
+            $folder = $this->connection->createMailbox($folder);
         }
 
-        // Open/create discarded mailboxes
-        if ($this->connection->hasMailbox('discarded')) {
-            $this->mailbox['discarded'] = $this->connection->getMailbox('discarded');
-        } else {
-            $this->mailbox['discarded'] = $this->connection->createMailbox('discarded');
-        }
-
-        // Open/create bounced mailboxes
-        if ($this->connection->hasMailbox('bounced')) {
-            $this->mailbox['bounced'] = $this->connection->getMailbox('bounced');
-        } else {
-            $this->mailbox['bounced'] = $this->connection->createMailbox('bounced');
-        }
-
-        // Open/create bounced mailboxes
-        if ($this->connection->hasMailbox('failed')) {
-            $this->mailbox['failed'] = $this->connection->getMailbox('failed');
-        } else {
-            $this->mailbox['failed'] = $this->connection->createMailbox('failed');
-        }
-
-
-
-        if ($this->connection->hasMailbox('automated')) {
-            $this->mailbox['automated'] = $this->connection->getMailbox('automated');
-        } else {
-            $this->mailbox['automated'] = $this->connection->createMailbox('automated');
-        }
+        return $message->move($folder);
     }
+
+
 
 
     public function processGroupExistsAndUserIsMember(Group $group, User $user, Message $message)
@@ -369,11 +348,10 @@ class CheckMailbox extends Command
             $this->info('Title : '.$discussion->name);
             Log::info('Discussion has been created from email', ['mail'=> $message, 'discussion' => $discussion]);
 
-            $message->move($this->mailbox['processed']);
+            $this->moveMessage($message, 'processed');
             return true;
-        }
-        else {
-            $message->move($this->mailbox['failed']);
+        } else {
+            $this->moveMessage($message, 'discussion_not_created');
             return false;
         }
     }
@@ -404,11 +382,11 @@ class CheckMailbox extends Command
             // update activity timestamp on parent items
             $discussion->group->touch();
             $discussion->touch();
-            $message->move($this->mailbox['processed']);
+            $this->moveMessage($message, 'processed');
             return true;
         }
         else {
-            $message->move($this->mailbox['failed']);
+            $this->moveMessage($message, 'comment_not_created');
             return false;
         }
     }
@@ -417,13 +395,13 @@ class CheckMailbox extends Command
     public function processGroupExistsButUserIsNotMember(Group $group, User $user, Message $message)
     {
         Mail::to($user)->send(new MailBounce($message, 'You are not member of ' . $group->name . ' please join the group first before posting'));
-        $message->move($this->mailbox['bounced']);
+        $this->moveMessage($message, 'bounced');
     }
 
 
     public function processGroupNotFoundUserNotFound(User $user, Message $message)
     {
-        $message->move($this->mailbox['discarded']);
+        $this->moveMessage($message, 'group_not_found_user_not_found');
     }
 
 }
