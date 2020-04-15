@@ -24,18 +24,21 @@ class RegisterController extends Controller
     */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest', ['except' => ['confirmEmail']]);
     }
 
     /**
-    * Show registration form
+    * Step 1 : Show registration form
     */
     public function showRegistrationForm()
     {
         return view('auth.register');
     }
 
-
+    /**
+    * Step 2 : store email and name from the previous form
+    * Redirect user to email login if account found, else redirecto to Step 3
+    */
     public function handleRegistrationForm(Request $request)
     {
         $request->validate([
@@ -44,7 +47,7 @@ class RegisterController extends Controller
         ]);
 
 
-        // store name an d email in the session
+        // store name and email in the session
         $request->session()->put('name', $request->input('name'));
         $request->session()->put('email', $request->input('email'));
 
@@ -56,17 +59,22 @@ class RegisterController extends Controller
             return redirect()->route('loginbyemail');
         }
 
-        // else go to step 2 : we ask for the passwords
+        // else go to step 3 : we ask for the passwords
         return redirect('/register/password');
     }
 
+    /**
+    * Step 3 : Show passwords form
+    */
     public function showPasswordForm(Request $request)
     {
         return view('auth.register_password');
     }
 
 
-
+    /**
+    * Step 4 : Handle everything and hopefuly create an account
+    */
     public function handlePasswordForm(Request $request)
     {
         $request->validate([
@@ -107,19 +115,6 @@ class RegisterController extends Controller
         }
         flash(trans('messages.you_have_verified_your_email'));
 
-        // add user to the group (s)he has been invited to before registering
-        $invites = \App\Invite::where('email', '=', $user->email)->get();
-        if ($invites) {
-            foreach ($invites as $invite) {
-                $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $invite->group_id]);
-                $membership->membership = \App\Membership::MEMBER;
-                $membership->save();
-
-                // mark the invite as claimed now
-                $invite->claimed_at = Carbon::now();
-                $invite->save();
-            }
-        }
 
         return redirect('/');
     }

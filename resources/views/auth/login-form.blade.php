@@ -46,7 +46,7 @@
   <p class="help mt-5">
     <i class="fa fa-info-circle" aria-hidden="true"></i>
     @lang('If you prefer, you can receive a login link by email'),
-    <a up-target="body" href="{{ url('/loginbyemail') }}">@lang('click here to receive your link')</a>.
+    <a up-target="body" href="{{ route('loginbyemail') }}">@lang('click here to receive your link')</a>.
   </p>
 
 

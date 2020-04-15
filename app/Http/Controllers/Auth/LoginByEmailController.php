@@ -15,14 +15,15 @@ class LoginByEmailController extends Controller
     /**
     * Show a login by mail form
     */
-    public function showLoginByEmailForm()
+    public function showLoginByEmailForm(Request $request)
     {
-        return view('auth.loginbyemail');
+        $email = $request->session()->get('email');
+        return view('auth.loginbyemail')
+        ->with('email', $email);
     }
 
     public function sendLoginByEmail(Request $request)
     {
-
         $user = \App\User::where('email', $request->get('email'))->first();
 
         if ($user) {
@@ -35,8 +36,5 @@ class LoginByEmailController extends Controller
             flash('No user found with this email, please create an account instead');
             return redirect()->back();
         }
-
     }
-
-
 }

@@ -76,8 +76,8 @@ Route::group(['middleware' => ['web', 'invites']], function () {
         Route::post('register/password', 'Auth\RegisterController@handlePasswordForm');
 
 
-        Route::get('loginbyemail', 'Auth\LoginByEmailController@showLoginByEmailForm')->name('loginbyemail');
-        Route::post('loginbyemail', 'Auth\LoginByEmailController@sendLoginByEmail')->name('sendloginbyemail');
+        Route::get('login/email', 'Auth\LoginByEmailController@showLoginByEmailForm')->name('loginbyemail');
+        Route::post('login/email', 'Auth\LoginByEmailController@sendLoginByEmail')->name('sendloginbyemail');
     });
 
 

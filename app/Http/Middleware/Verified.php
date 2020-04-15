@@ -35,7 +35,7 @@ class Verified
             return redirect()->guest('login')->with('message', trans('messages.not_logged_in'));
         }
 
-        if ($request->user()->verified == 1) {
+        if ($request->user()->isVerified()) {
             return $next($request);
         } else {
             return redirect('/')->with('message', trans('messages.email_not_verified'));
