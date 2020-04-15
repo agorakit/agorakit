@@ -11,7 +11,7 @@
 
 
 
-        {!! Form::open(array('action' => ['MembershipController@update', $group, $membership])) !!}
+        {!! Form::open(array('action' => ['GroupMembershipController@update', $group, $membership])) !!}
 
 
         <h2>{{trans('messages.notifications_interval')}}</h2>
@@ -36,6 +36,7 @@
                     [
                         \App\Membership::BLACKLISTED => trans('membership.blacklisted'),
                         \App\Membership::REMOVED => trans('membership.removed'),
+                        \App\Membership::DECLINED => trans('membership.declined'),
                         \App\Membership::UNREGISTERED => trans('membership.unregistered'),
                         \App\Membership::INVITED => trans('membership.invited'),
                         \App\Membership::CANDIDATE => trans('membership.candidate'),
@@ -57,7 +58,7 @@
 
 
 
-            <p>{{trans('membership.if_you_want_to_leave_this_group')}}, <a href="{{action('MembershipController@destroyConfirm', $group)}}">{{trans('membership.click_here')}}</a></p>
+            <p>{{trans('membership.if_you_want_to_leave_this_group')}}, <a href="{{action('GroupMembershipController@destroyConfirm', $group)}}">{{trans('membership.click_here')}}</a></p>
 
 
         </div>

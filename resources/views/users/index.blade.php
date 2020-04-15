@@ -16,7 +16,7 @@
 
     @can('manage-membership', $group)
       <div>
-        <a class="btn btn-secondary" href="{{ action('MassMembershipController@create', $group ) }}"><i class="fa fa-plus"></i> {{trans('membership.directly_add_users_button')}}</a>
+        <a class="btn btn-secondary" href="{{ action('GroupMassMembershipController@create', $group ) }}"><i class="fa fa-plus"></i> {{trans('membership.directly_add_users_button')}}</a>
       </div>
     @endcan
   </div>
@@ -78,6 +78,14 @@
                 {{trans('membership.invited')}}
               </span>
             @endif
+
+            @if ($membership->membership == \App\Membership::DECLINED)
+              <span class="badge badge-pill badge-dark" up-tooltip="@lang('This member declined the invitagion the group')">
+                {{trans('membership.declined')}}
+              </span>
+            @endif
+
+
             @if ($membership->membership == \App\Membership::UNREGISTERED)
               <span class="badge badge-pill badge-dark" up-tooltip="@lang('This member left the group')">
                 {{trans('membership.unregistered')}}
@@ -105,7 +113,7 @@
             </td>
 
             <td>
-              <a class="btn btn-primary btn-sm" href="{{action('MembershipController@edit', [$group, $membership])}}">{{trans('messages.edit')}}</a>
+              <a class="btn btn-primary btn-sm" href="{{action('GroupMembershipController@edit', [$group, $membership])}}">{{trans('messages.edit')}}</a>
             </td>
           @endcan
 

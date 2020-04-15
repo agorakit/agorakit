@@ -41,10 +41,13 @@ class Membership extends Model
     // member invited by a group admin
     const INVITED = 0;
 
-    // left the group
+    // user left the group
     const UNREGISTERED = -10;
 
-    // removed by admin
+    // user did not accept an invitation
+    const DECLINED = -15;
+
+    // removed by admin for other reason
     const REMOVED = -20;
 
     // member is blacklisted and cannot join the group again (not yet in use)

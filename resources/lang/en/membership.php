@@ -4,6 +4,7 @@ return [
   'admin'                           => 'administrator',
   'blacklisted'                     => 'blacklisted',
   'candidate'                       => 'candidate',
+  'declined'                        => 'declined',
   'invited'                         => 'invited',
   'member'                          => 'member',
   'removed'                         => 'removed',

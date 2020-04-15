@@ -7,6 +7,17 @@
   </div>
 @endif
 
+@if (isset(Auth::user()->has_invites) && (Auth::user()->has_invites))
+  <div class="alert alert-primary" role="alert">
+    <h4 class="alert-heading"><i class="fa fa-hand-point-right"></i>
+      {{__('You have pending group invites')}}
+    </h4>
+
+    <a class="alert-link" href="{{route('invites.index')}}" up-modal=".dialog">
+      {{__('Click here to accept or deny the invitation(s)')}}</a>
+  </div>
+@endif
+
 
 @if (count($errors) > 0)
   <div class="alert alert-danger" role="alert">

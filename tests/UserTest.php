@@ -205,7 +205,7 @@ class UserTest extends Tests\BrowserKitTestCase
         $this->actingAs($user)
         ->visit('groups/'.$group->id.'/users')
         //->click(trans('messages.confirm_user'))
-        ->see(trans('messages.candidates'));
+        ->see(trans('membership.candidate'));
 
         $membership = \App\Membership::where('user_id', $newbie->id)->where('group_id', $group->id)->first();
 

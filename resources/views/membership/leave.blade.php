@@ -12,7 +12,7 @@
 
 
 
-  {!! Form::open(array('action' => ['MembershipController@destroy', $group])) !!}
+  {!! Form::open(array('action' => ['GroupMembershipController@destroy', $group])) !!}
 
   <div class="d-flex justify-content-end">
     <a class="btn btn-link mr-4" href="{{route('groups.show', $group)}}">{{ trans('messages.cancel') }}</a>

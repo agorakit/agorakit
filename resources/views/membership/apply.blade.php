@@ -15,7 +15,7 @@
     </p>
   </div>
 
-  {!! Form::open(array('action' => ['MembershipController@store', $group])) !!}
+  {!! Form::open(array('action' => ['GroupMembershipController@store', $group])) !!}
 
   <div class="mt-5 d-flex justify-content-between align-items-center">
     <a class="mr-5" href="{{url('/')}}">{{trans('messages.cancel')}}</a>

@@ -100,13 +100,13 @@
 
         @if ($group->isMember())
             <li class="nav-item">
-                <a up-target="tab_content" href="{{ action('MembershipController@edit', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'preferences')) active @endif">
+                <a up-target="tab_content" href="{{ action('GroupMembershipController@edit', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'preferences')) active @endif">
                     <i class="fa fa-bell-o"></i> <span class="d-none d-lg-inline">{{ trans('messages.settings') }}</span>
                 </a>
             </li>
         @else
             <li class="nav-item">
-                <a up-target="tab_content" href="{{ action('MembershipController@create', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'settings')) active @endif">
+                <a up-target="tab_content" href="{{ action('GroupMembershipController@create', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'settings')) active @endif">
                     <i class="fa fa-sign-in"></i> <span class="d-none d-lg-inline">{{ trans('messages.join') }}</span>
                 </a>
             </li>
@@ -216,7 +216,7 @@
 
         @if ($group->isOpen() )
             <li class="nav-item" role="presentation">
-                <a up-target="tab_content" class="nav-link @if (isset($tab) && ($tab == 'settings')) active @endif" href="{{ action('MembershipController@create', $group) }}">
+                <a up-target="tab_content" class="nav-link @if (isset($tab) && ($tab == 'settings')) active @endif" href="{{ action('GroupMembershipController@create', $group) }}">
                     <i class="fa fa-cog"></i> <span class="d-none d-lg-inline">{{ trans('messages.join') }}</span>
                 </a>
             </li>

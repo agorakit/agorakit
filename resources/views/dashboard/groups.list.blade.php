@@ -93,7 +93,7 @@
                                     <td>
                                         @unless ($group->isMember())
                                             @can ('join', $group)
-                                                <a class="btn btn-primary btn-sm" href="{{ action('MembershipController@store', $group->id) }}"><i class="fa fa-sign-in"></i>
+                                                <a class="btn btn-primary btn-sm" href="{{ action('GroupMembershipController@store', $group->id) }}"><i class="fa fa-sign-in"></i>
                                                     {{ trans('group.join') }}
                                                 </a>
                                             @endcan

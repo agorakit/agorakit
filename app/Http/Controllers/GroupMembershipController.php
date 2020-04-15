@@ -10,7 +10,7 @@ use Carbon\Carbon;
 use Gate;
 use Illuminate\Http\Request;
 
-class MembershipController extends Controller
+class GroupMembershipController extends Controller
 {
     public function __construct()
     {

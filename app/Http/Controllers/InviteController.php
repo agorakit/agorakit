@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Group;
 use App\User;
+use App\Membership;
 use App\Mail\InviteUser;
 use Auth;
 use Carbon\Carbon;
@@ -17,6 +18,7 @@ class InviteController extends Controller
         $this->middleware('member', ['only' => ['invite', 'sendInvites']]);
         $this->middleware('verified', ['only' => ['invite', 'sendInvites']]);
         $this->middleware('throttle:2,1', ['only' => ['sendInvites']]); // 2 emails per  minute should be enough for non bots
+        $this->middleware('auth');
     }
 
     /**
@@ -92,55 +94,33 @@ class InviteController extends Controller
     }
 
     /**
-    * Whenever a user wants to confirm an invite he received from an email link
-    * - if user exists we directly subscribe him/her to the group
-    * - if not we show an account creation screen.
+    * Show a list of invites for the current user  and allow to accept / discard the invite
     */
-    public function inviteConfirm(Request $request, Group $group, $token)
+    public function index(Request $request)
     {
-        $invite = \App\Invite::whereToken($token)->first();
+        $memberships = Auth::user()->memberships()->where('membership', Membership::INVITED)->get();
+        return view('membership.invites')
+        ->with('memberships', $memberships);
+    }
 
-        if (!$invite) {
-            flash(trans('messages.invite_not_found'));
-
-            return redirect()->route('groups.show', $group);
-        }
-
-        if (isset($invite->claimed_at)) {
-            flash(trans('messages.invite_already_used').' ('.$invite->claimed_at.')');
-
-            return redirect()->route('groups.show', $group);
-        }
-
-        $user = \App\User::where('email', $invite->email)->first();
-
-        // check if user exists
-        if ($user) {
-            // add user to membership for the group taken from the invite table
-            $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $invite->group_id]);
-            $membership->membership = \App\Membership::MEMBER;
-            $membership->notification_interval = 60 * 24; // this is a sane default imho for notification interval (daily)
+    public function accept(Request $request, Membership $membership)
+    {
+        if (Auth::user()->id == $membership->user_id) {
+            $membership->membership = Membership::MEMBER;
             $membership->save();
-
-            // Invitation is now claimed, but not deleted
-            $invite->claimed_at = Carbon::now();
-
-            $invite->save();
-
-            flash(trans('messages.you_are_now_a_member_of_this_group'));
-
-            return redirect()->route('groups.show', $group);
-        } else { // if user doesn't exists, we have the opportunity to create, login and validate email in one go (since we have the invite token)
-            Auth::logout();
-            flash(trans('messages.you_dont_have_an_account_create_one_now'));
-
-            return view('auth.register')
-            ->with('email', $invite->email)
-            ->with('invite_and_register', true)
-            ->with('group', $group)
-            ->with('token', $token);
+            return redirect()->route('invites.index');
         }
     }
+
+    public function deny(Request $request, Membership $membership)
+    {
+        if (Auth::user()->id == $membership->user_id) {
+            $membership->membership = Membership::DECLINED;
+            $membership->save();
+            return redirect()->route('invites.index');
+        }
+    }
+
 
     /**
     * Process the account creation from the form of inviteConfirm().

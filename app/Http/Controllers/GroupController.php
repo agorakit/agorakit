@@ -230,7 +230,7 @@ class GroupController extends Controller
 
         flash(trans('messages.ressource_created_successfully'));
 
-        return redirect()->action('MembershipController@update', [$group]);
+        return redirect()->action('GroupMembershipController@update', [$group]);
     }
 
     /**

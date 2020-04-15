@@ -46,7 +46,7 @@
 
                     @unless ($group->isMember())
                         @can ('join', $group)
-                            <a class="btn btn-secondary" href="{{ action('MembershipController@store', $group) }}">
+                            <a class="btn btn-secondary" href="{{ action('GroupMembershipController@store', $group) }}">
                                 {{ trans('group.join') }}
                             </a>
                         @endcan

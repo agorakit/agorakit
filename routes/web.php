@@ -57,7 +57,7 @@ I will apply here the recomandation "routes as documentation" from https://phils
 */
 
 
-Route::group(['middleware' => ['web']], function () {
+Route::group(['middleware' => ['web', 'invites']], function () {
 
     /*
     Authentification routes
@@ -75,8 +75,6 @@ Route::group(['middleware' => ['web']], function () {
 
 
     Route::get('autologin/{username}', 'Auth\AutoLoginController@login')->name('autologin');
-
-
 
 
 
@@ -134,12 +132,19 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('groups/{group}/cover/large', 'GroupCoverController@large')->name('groups.cover.large');
 
     // Invite system for groups
+
+    Route::get('invites', 'InviteController@index')->name('invites.index');
+    Route::get('invites/{membership}/accept', 'InviteController@accept')->name('invites.accept');
+    Route::get('invites/{membership}/deny', 'InviteController@deny')->name('invites.deny');
+
+    /*
     Route::get('groups/{group}/invite/confirm/{token}', 'InviteController@inviteConfirm')->name('groups.invite.confirm');
     Route::post('groups/{group}/invite/confirm/{token}', 'InviteController@inviteRegister')->name('groups.invite.register');
+    */
 
     // Join and apply for a group
-    Route::get('groups/{group}/join', 'MembershipController@create')->name('groups.membership.create');
-    Route::post('groups/{group}/join', 'MembershipController@store')->name('groups.membership.store');
+    Route::get('groups/{group}/join', 'GroupMembershipController@create')->name('groups.membership.create');
+    Route::post('groups/{group}/join', 'GroupMembershipController@store')->name('groups.membership.store');
 
     // General discussion create route
     Route::get('discussions/create', 'GroupDiscussionController@create')->name('discussions.create');
@@ -203,31 +208,31 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('files/mention', 'MentionController@files')->name('.files.mention');
 
         // preferences and leave group
-        //Route::get('preferences', 'MembershipController@edit')->name('.mymembership.edit');
-        //Route::post('preferences', 'MembershipController@update')->name('.mymembership.update');
-        Route::get('leave', 'MembershipController@destroyConfirm')->name('.mymembership.deleteconfirm');
-        Route::post('leave', 'MembershipController@destroy')->name('.mymembership.delete');
+        //Route::get('preferences', 'GroupMembershipController@edit')->name('.mymembership.edit');
+        //Route::post('preferences', 'GroupMembershipController@update')->name('.mymembership.update');
+        Route::get('leave', 'GroupMembershipController@destroyConfirm')->name('.mymembership.deleteconfirm');
+        Route::post('leave', 'GroupMembershipController@destroy')->name('.mymembership.delete');
 
         // edit membership
-        Route::get('membership/{membership?}', 'MembershipController@edit')->name('.membership.edit');
-        Route::post('membership/{membership?}', 'MembershipController@update')->name('.membership.update');
+        Route::get('membership/{membership?}', 'GroupMembershipController@edit')->name('.membership.edit');
+        Route::post('membership/{membership?}', 'GroupMembershipController@update')->name('.membership.update');
 
         // Stats
         Route::get('insights', 'GroupInsightsController@index')->name('.insights');
 
         // Membership mass admin (add multiple users at once to a groupe)
-        Route::get('massmembership/create', 'MassMembershipController@create')->name('.massmembership.create');
-        Route::post('massmembership/store', 'MassMembershipController@store')->name('.massmembership.store');
+        Route::get('massmembership/create', 'GroupMassMembershipController@create')->name('.massmembership.create');
+        Route::post('massmembership/store', 'GroupMassMembershipController@store')->name('.massmembership.store');
 
         // Invites
         Route::get('invite', 'InviteController@invite')->name('.invite.form');
         Route::post('invite', 'InviteController@sendInvites')->name('.invite');
 
         // In the case of closed group, we show an how to join message (not in use currently)
-        Route::get('howtojoin', 'MembershipController@howToJoin')->name('.howtojoin');
+        Route::get('howtojoin', 'GroupMembershipController@howToJoin')->name('.howtojoin');
 
         // Members
-        Route::get('users', 'MembershipController@index')->name('.users.index');
+        Route::get('users', 'GroupMembershipController@index')->name('.users.index');
 
         // Maps
         Route::get('map', 'GroupMapController@index')->name('.map');

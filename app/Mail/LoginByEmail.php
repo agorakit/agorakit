@@ -37,6 +37,7 @@ class LoginByEmail extends Mailable
             ['username' => $this->user->username, 'redirect' => '/']
         );
         return $this->markdown('emails.loginbyemail')
+        ->subject('['.setting('name').'] '. trans('Your login link'))
         ->with('login_url', $login_url);
     }
 }

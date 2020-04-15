@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 /**
  * Admin features to act on membership.
  */
-class MassMembershipController extends Controller
+class GroupMassMembershipController extends Controller
 {
     /**
      * Force add a member to a group (admin feature)
