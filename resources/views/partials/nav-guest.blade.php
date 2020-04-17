@@ -78,8 +78,8 @@
 
       <div class="nav-item">
         <div class="btn-group">
-          <a class="btn btn-primary" href="{{ url('login') }}">{{ trans('messages.login') }}</a>
-          <a class="btn btn-secondary" href="{{ url('register') }}">{{ trans('messages.register') }}</a>
+          <a up-modal=".dialog" class="btn btn-primary" href="{{ url('login') }}">{{ trans('messages.login') }}</a>
+          <a up-modal=".dialog" class="btn btn-secondary" href="{{ url('register') }}">{{ trans('messages.register') }}</a>
         </div>
       </div>
 

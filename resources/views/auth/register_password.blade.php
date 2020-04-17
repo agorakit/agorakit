@@ -5,7 +5,7 @@
     <h1>{{config('agorakit.name')}} : @lang('Set your password')</h1>
 
     <p>Use a strong password with at least 8 characters</p>
-    
+
     <form method="POST" action="{{ url('register/password') }}">
         @honeypot
         @csrf
