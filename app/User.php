@@ -10,6 +10,10 @@ use Illuminate\Notifications\Notifiable;
 use Nicolaslopezj\Searchable\SearchableTrait;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\Support\Str;
+
+
 
 class User extends Authenticatable
 {
@@ -27,7 +31,7 @@ class User extends Authenticatable
     * @var array
     */
     protected $fillable = [
-        'name', 'email', 'password', 'provider', 'provider_id',
+        'name', 'username', 'email', 'password', 'provider', 'provider_id',
     ];
 
     /**
@@ -45,7 +49,6 @@ class User extends Authenticatable
 
     protected $rules = [
         'email'    => 'required|email|unique:users',
-        'username' => 'alpha_dash|unique:users',
     ];
 
     protected $keepRevisionOf = ['name', 'body', 'email', 'admin', 'address'];
@@ -96,6 +99,7 @@ class User extends Authenticatable
     {
         return [
             'username' => [
+                'unique' => true,
                 'source'   => 'name',
                 'reserved' => ['my'],
             ],
