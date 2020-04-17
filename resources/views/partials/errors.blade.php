@@ -7,7 +7,7 @@
   </div>
 @endif
 
-@if (isset(Auth::user()->has_invites) && (Auth::user()->has_invites))
+@if (Auth::user() && Auth::user()->invites->count() > 0)
   <div class="alert alert-primary" role="alert">
     <h4 class="alert-heading"><i class="fa fa-hand-point-right"></i>
       {{__('You have pending group invites')}}

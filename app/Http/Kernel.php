@@ -60,6 +60,5 @@ class Kernel extends HttpKernel
         'admin'           => \App\Http\Middleware\Admin::class,
         'groupadmin'      => \App\Http\Middleware\GroupAdmin::class,
         'preferences'     => \App\Http\Middleware\HandleUserPreference::class,
-        'invites'     => \App\Http\Middleware\RedirectIfHasInvites::class,
     ];
 }

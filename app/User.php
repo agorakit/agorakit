@@ -13,6 +13,8 @@ use Watson\Validating\ValidatingTrait;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Str;
 
+use App\Membership;
+
 
 
 class User extends Authenticatable
@@ -167,9 +169,9 @@ class User extends Authenticatable
     {
         // TODO refactor to avoid n+1
         // Always load membership with user
-        $membership = \App\Membership::where('user_id', '=', $this->id)->where('group_id', '=', $group->id)->first();
+        $membership = Membership::where('user_id', '=', $this->id)->where('group_id', '=', $group->id)->first();
 
-        if ($membership && $membership->membership >= \App\Membership::MEMBER) {
+        if ($membership && $membership->membership >= Membership::MEMBER) {
             return true;
         }
 
@@ -184,17 +186,17 @@ class User extends Authenticatable
     {
         foreach ($this->memberships as $membership) {
             //dd ($membership);
-            if (($membership->group_id == $group->id) && ($membership->membership == \App\Membership::ADMIN)) {
+            if (($membership->group_id == $group->id) && ($membership->membership == Membership::ADMIN)) {
                 return true;
             }
         }
 
         return false;
 
-        //$membership = \App\Membership::where('user_id', '=', $this->id)->where('group_id', '=', $group->id)->first();
+        //$membership = Membership::where('user_id', '=', $this->id)->where('group_id', '=', $group->id)->first();
         // the following might save us n+1 query problem later :
         $membership = $this->memberships()->where('group_id', '=', $group->id)->first();
-        if ($membership && $membership->membership == \App\Membership::ADMIN) {
+        if ($membership && $membership->membership == Membership::ADMIN) {
             return true;
         }
 
@@ -240,7 +242,7 @@ class User extends Authenticatable
     */
     public function groups()
     {
-        return $this->belongsToMany(\App\Group::class, 'membership')->where('membership.membership', '>=', \App\Membership::MEMBER)->orderBy('name')->withTimestamps();
+        return $this->belongsToMany(\App\Group::class, 'membership')->where('membership.membership', '>=', Membership::MEMBER)->orderBy('name')->withTimestamps();
     }
 
     /**
@@ -256,10 +258,23 @@ class User extends Authenticatable
         return $action->users->contains($this->id);
     }
 
+    /**
+     * Returns all memberships
+     */
     public function memberships()
     {
-        return $this->hasMany(\App\Membership::class);
+        return $this->hasMany(Membership::class);
     }
+
+    /**
+     * Returns only invites membership
+     */
+    public function invites()
+    {
+        return $this->hasMany(Membership::class)->where('membership.membership', Membership::INVITED);
+    }
+
+
 
     public function discussionsSubscribed()
     {
@@ -370,4 +385,5 @@ class User extends Authenticatable
 
         return $this->save();
     }
+
 }

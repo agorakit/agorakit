@@ -57,7 +57,7 @@ I will apply here the recomandation "routes as documentation" from https://phils
 */
 
 
-Route::group(['middleware' => ['web', 'invites']], function () {
+Route::group(['middleware' => ['web']], function () {
 
     /*
     Authentification routes

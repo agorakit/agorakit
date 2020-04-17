@@ -10,7 +10,7 @@
 
         @foreach ($memberships as $membership)
             <div class="d-flex justify-content-between @unless ($loop->last) border-bottom @endunless mb-3 pb-2">
-                <div>
+                <div class="mr-4">
                     <strong>{{$membership->group->name}}</strong>
                     <div>{{summary($membership->group->body) }}</div>
                 </div>
@@ -27,7 +27,7 @@
 
 
     @else
-        <h1>You have no pending invites</h1>
+        <h1>@lang('You have no pending invites')</h1>
 
     @endif
 
