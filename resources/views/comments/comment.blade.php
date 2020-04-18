@@ -4,6 +4,8 @@
 @if ($comment_key + 2 > $read_comments) unread @else read @endif"
     @if ($comment_key + 2 == $read_comments) id="unread" @endif>
 
+
+
         <div class="d-flex">
 
             <div class="avatar mr-3"><img src="{{route('users.cover', [$comment->user, 'small'])}}" class="rounded-circle"/></div>
@@ -12,9 +14,9 @@
                 <div class="user"><a href="{{ route('users.show', [$comment->user]) }}">{{$comment->user->name}}</a></div>
 
                 <div class="body">{!! filter($comment->body) !!}</div>
-                    <div class="meta">
-                        {{$comment->created_at->diffForHumans()}}
-                    </div>
+                <div class="meta">
+                    {{$comment->created_at->diffForHumans()}}
+                </div>
             </div>
 
             @can('update', $comment)
