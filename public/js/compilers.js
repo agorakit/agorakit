@@ -238,11 +238,15 @@ up.compiler('a', function(element) {
 /*
 Reloads every xx seconds using poll automagically
 */
-up.$compiler('[poll]', function($element) {
-	var interval = parseInt($element.attr('poll') || 5000);
+up.$compiler('.poll', function($element, data) {
+	console.log(data)
+	var interval = parseInt($element.attr('poll') || 10000);
 	var timer = setInterval(function() {
 		if (!document.hidden) {
-			up.reload($element)
+			up.replace("#live-content", data.url, {
+				history: false,
+				cache: false
+			})
 		}
 	}, interval);
 	return function() { clearInterval(timer) } // stop polling when element is removed

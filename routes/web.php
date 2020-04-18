@@ -281,6 +281,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('discussions/{discussion}/comments/{comment}/delete', 'CommentController@destroyConfirm')->name('.discussions.comments.deleteconfirm');
         Route::delete('discussions/{discussion}/comments/{comment}/delete', 'CommentController@destroy')->name('.discussions.comments.delete');
         Route::get('discussions/{discussion}/comments/{comment}/history', 'CommentController@history')->name('.discussions.comments.history');
+        Route::get('discussions/{discussion}/live/{comment}', 'CommentController@live')->name('.discussions.live');
 
         // Actions
         Route::get('actions', 'GroupActionController@index')->name('.actions.index');

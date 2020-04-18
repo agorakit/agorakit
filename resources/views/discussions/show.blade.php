@@ -78,11 +78,19 @@
 
 
     <div class="comments" >
-      <div poll="10000" id="poll">
-        @foreach ($discussion->comments as $comment_key => $comment)
-          @include('comments.comment')
-        @endforeach
-      </div>
+
+      @foreach ($discussion->comments as $comment_key => $comment)
+        @include('comments.comment')
+      @endforeach
+
+      @auth
+        @if (isset($comment))
+          <div class="poll" id="live" up-data='{"url": "{{route('groups.discussions.live', [$group, $discussion, $comment])}}"}'>
+            <div id="live-content"></div>
+          </div>
+        @endif
+
+      @endauth
 
       @can('create-comment', $group)
         @include ('comments.create')

@@ -16,12 +16,9 @@
 
 
     <div>
-        <div class="input-group">
-
-            <div class="">
-                {{trans('Attach a file')}} :
-                {!! Form::file('file', ['class' => 'btn btn-secondary', 'id'=>'file']) !!}
-            </div>
+        <div class="custom-file">
+            <input type="file" name="file" class="custom-file-input" id="customFileLangHTML">
+            <label class="custom-file-label" for="customFileLangHTML" data-browse="@lang('Browse')">{{trans('Attach a file')}}</label>
         </div>
     </div>
 

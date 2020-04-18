@@ -168,4 +168,23 @@ class CommentController extends Controller
         ->with('comment', $comment)
         ->with('tab', 'discussion');
     }
+
+
+    /**
+     * This function is called by the comment polling code
+     * It should be fast and simple and return only $comments after $comment
+     */
+    public function live(Request $request, Group $group, Discussion $discussion, Comment $comment)
+    {
+        $this->authorize('view', $discussion);
+
+        $last_comment_id = "12179";
+        $comments = $discussion->comments()->where('id', '>', $comment->id)->get();
+
+        return view('comments.live')
+        ->with('read_comments', 0)
+        ->with('group', $group)
+        ->with('discussion', $discussion)
+        ->with('comments', $comments);
+    }
 }

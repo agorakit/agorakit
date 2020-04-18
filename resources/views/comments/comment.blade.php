@@ -38,10 +38,7 @@
                                 {{trans('messages.delete')}}
                             </a>
                         @endcan
-
-                        @if ($comment->revisionHistory->count() > 0)
                             <a class="dropdown-item" href="{{action('CommentController@history', [$group, $discussion, $comment])}}"><i class="fa fa-history"></i> {{trans('messages.show_history')}}</a>
-                        @endif
                     </div>
                 </div>
             @endcan
