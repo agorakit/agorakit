@@ -233,3 +233,17 @@ up.compiler('a', function(element) {
 		element.target = '_blank';
 	}
 });
+
+
+/*
+Reloads every xx seconds using poll automagically
+*/
+up.$compiler('[poll]', function($element) {
+	var interval = parseInt($element.attr('poll') || 5000);
+	var timer = setInterval(function() {
+		if (!document.hidden) {
+			up.reload($element)
+		}
+	}, interval);
+	return function() { clearInterval(timer) } // stop polling when element is removed
+});

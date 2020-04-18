@@ -77,10 +77,12 @@
 
 
 
-    <div class="comments">
-      @foreach ($discussion->comments as $comment_key => $comment)
-        @include('comments.comment')
-      @endforeach
+    <div class="comments" >
+      <div poll="10000" id="poll">
+        @foreach ($discussion->comments as $comment_key => $comment)
+          @include('comments.comment')
+        @endforeach
+      </div>
 
       @can('create-comment', $group)
         @include ('comments.create')
