@@ -105,7 +105,6 @@ up.compiler('.wysiwyg', function(element, data) {
 				'|',
 				'blockQuote',
 				'insertTable',
-				'mediaEmbed',
 				'undo',
 				'redo',
 			]
@@ -198,6 +197,8 @@ up.$compiler('select.tags', function($element, data) {
 /*
 - scroll to first unread item
 */
+
+
 up.compiler('#unread', function(element) {
 	console.log(element);
 	element.scrollIntoView({
@@ -206,6 +207,7 @@ up.compiler('#unread', function(element) {
 		inline: 'nearest'
 	});
 });
+
 
 
 /*
