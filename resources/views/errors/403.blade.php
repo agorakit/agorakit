@@ -12,7 +12,6 @@
 
 @guest
 	@section('content')
-
-		@include('auth.login-form')
+		@include('auth.login')
 	@endsection
 @endguest
