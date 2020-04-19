@@ -13,11 +13,7 @@
         </div>
     </div>
 
-    @if (setting('homepage_presentation_for_members', false))
-        <div class="alert" style="background-color: #eee">
-            {!! setting('homepage_presentation_for_members') !!}
-        </div>
-    @endif
+
 
     <div class="row">
         <div class="col-md-7">
@@ -43,6 +39,12 @@
 
 
         <div class="col-md-5">
+
+            @if (setting('homepage_presentation_for_members', false))
+                <div class="alert alert-secondary" style="max-height: 15em; overflow-y: scroll; overflow-x:hidden">
+                    {!! setting('homepage_presentation_for_members') !!}
+                </div>
+            @endif
 
             @if ($actions->count() > 0)
                 <h2>{{ __('Calendar') }}</h2>
