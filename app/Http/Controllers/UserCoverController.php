@@ -13,7 +13,7 @@ class UserCoverController extends Controller
 {
     public function __construct()
     {
-        //$this->middleware('show');
+         $this->middleware('cache.headers:private,max-age=300;etag');
     }
 
     public function show(User $user, $size = 'medium')
@@ -37,7 +37,7 @@ class UserCoverController extends Controller
         if (File::exists($avatar_path)) {
             if ($size == 'small') {
                 $cachedImage = Image::cache(function ($img) use ($avatar_path) {
-                    return $img->make($avatar_path)->fit(40, 40);
+                    return $img->make($avatar_path)->fit(64, 64);
                 }, 60000, true);
 
                 return $cachedImage->response();

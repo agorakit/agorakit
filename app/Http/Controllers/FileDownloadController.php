@@ -12,11 +12,12 @@ class FileDownloadController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('cache.headers:private,max-age=300;etag');
     }
 
     /**
-     * Returns the specified file for downloading.
-     */
+    * Returns the specified file for downloading.
+    */
     public function download(Group $group, File $file)
     {
         $this->authorize('view', $file);
@@ -35,18 +36,23 @@ class FileDownloadController extends Controller
     }
 
     /**
-     * Returns a square thumbnail of the file.
-     */
+    * Returns a square thumbnail of the file.
+    */
     public function thumbnail(Group $group, File $file)
     {
         $this->authorize('view', $file);
 
-        if ($file->isImage()) {
-            $cachedImage = Image::cache(function ($img) use ($file) {
-                return $img->make(storage_path().'/app/'.$file->path)->fit(32, 32);
-            }, 60000, true);
+        if (Storage::exists($file->path)) {
+            if ($file->isImage()) {
+                $cachedImage = Image::cache(function ($img) use ($file) {
+                    return $img->make(storage_path().'/app/'.$file->path)->fit(32, 32);
+                }, 60000, true);
 
-            return $cachedImage->response();
+                return $cachedImage->response();
+            }
+        }
+        else {
+            abort(404, 'File not found in storage at '.$file->path);
         }
 
         if ($file->isFolder()) {
@@ -57,26 +63,32 @@ class FileDownloadController extends Controller
     }
 
     /**
-     * Returns a medium sized preview of the file.
-     */
+    * Returns a medium sized preview of the file.
+    */
     public function preview(Group $group, File $file)
     {
         $this->authorize('view', $file);
 
-        if ($file->isImage()) {
-            $cachedImage = Image::cache(function ($img) use ($file) {
-                return $img->make(storage_path().'/app/'.$file->path)->widen(600);
-            }, 60000, true);
 
-            return $cachedImage->response();
+        if (Storage::exists($file->path)) {
+            if ($file->isImage()) {
+                $cachedImage = Image::cache(function ($img) use ($file) {
+                    return $img->make(storage_path().'/app/'.$file->path)->widen(600);
+                }, 60000, true);
+
+                return $cachedImage->response();
+            }
+        }
+        else {
+            abort(404, 'File not found in storage at '.$file->path);
         }
 
         return redirect('images/extensions/'.$file->icon().'.svg');
     }
 
     /**
-     * Returns a square svg icon of the file.
-     */
+    * Returns a square svg icon of the file.
+    */
     public function icon(Group $group, File $file)
     {
         $this->authorize('view', $file);

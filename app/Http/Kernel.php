@@ -57,6 +57,7 @@ class Kernel extends HttpKernel
         'member'          => \App\Http\Middleware\RedirectIfNotGroupMember::class,
         'verified'        => \App\Http\Middleware\Verified::class,
         'cache'           => \App\Http\Middleware\Cache::class,
+        'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'admin'           => \App\Http\Middleware\Admin::class,
         'groupadmin'      => \App\Http\Middleware\GroupAdmin::class,
         'preferences'     => \App\Http\Middleware\HandleUserPreference::class,
