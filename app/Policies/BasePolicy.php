@@ -19,11 +19,12 @@ class BasePolicy
         // load membership for this user in the group
         $membership = Membership::where('user_id', '=', $user->id)->where('group_id', '=', $group->id)->first();
 
+        // return empty collection if no memberhsip found
         if (!$membership) {
             return collect();
         }
 
-        // return empty collection if no memberhsip found
+        // ? needed ?
         if (!$membership->exists) {
             return collect();
         }
@@ -56,5 +57,8 @@ class BasePolicy
                 return collect(['create-discussion', 'create-action', 'create-file', 'invite']);
             }
         }
+
+        // in all other cases : empty permissions
+        return collect();
     }
 }
