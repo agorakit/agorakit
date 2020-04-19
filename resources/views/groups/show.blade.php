@@ -8,43 +8,62 @@
 
     <div class="row">
       <div class="col-md-6">
-        <p>
+        <div>
           {!! filter($group->body) !!}
-        </p>
+        </div>
 
-        <p>
-          @if (isset($admins) && $admins->count() > 0)
-            {{trans('messages.group_admin_users')}} :
+
+        @if (isset($admins) && $admins->count() > 0)
+          <div class="mb-3">
+            <div class="font-weight-bold">
+              {{trans('messages.group_admin_users')}}
+            </div>
 
             @foreach ($admins as $admin)
-              <a href="{{ route('users.show', [$admin]) }}">{{$admin->name}}</a>
+              <a class="mr-2" href="{{ route('users.show', [$admin]) }}">{{$admin->name}}</a>
             @endforeach
-          @endif
-        </p>
-
-        @if ($group_inbox)
-          {{__('Inbox for this group')}} : <a href="mailto:{{$group_inbox}}">{{$group_inbox}}</a>
+          </div>
         @endif
 
-        <p>
+
+        @if ($group_inbox)
+          <div class="mb-3">
+            <div class="font-weight-bold">{{__('Inbox for this group')}}</div>
+            <a href="mailto:{{$group_inbox}}">{{$group_inbox}}</a>
+          </div>
+        @endif
+
+        <div class="mb-3">
+          <div class="font-weight-bold">{{__('Creation date')}}</div>
+          {{$group->created_at->diffForHumans()}}
+        </div>
+
+        <div class="mb-3">
+          <div class="font-weight-bold">{{__('Group type')}}</div>
+          @if ($group->isOpen())
+            <i class="fa fa-globe" title="{{trans('group.open')}}">
+            </i>
+            @lang('This group is public and open to members')
+          @elseif ($group->isClosed())
+            <i class="fa fa-lock" title="{{trans('group.closed')}}">
+            </i>
+            @lang('This group is private. Users must apply to join')
+          @else
+            <i class="fa fa-eye-slash" title="{{trans('group.secret')}}"></i>
+            @lang('This group is secret and only visible to it\'s members')
+          @endif
+
+        </div>
+
+        <div class="mb-3">
+          <div class="font-weight-bold">{{__('Stats & keywords')}}</div>
           <span class="badge badge-secondary"><i class="fa fa-users"></i> {{$group->users()->count()}}</span>
           <span class="badge badge-secondary"><i class="fa fa-comments"></i> {{$group->discussions()->count()}}</span>
           <span class="badge badge-secondary"><i class="fa fa-calendar"></i> {{$group->actions()->count()}}</span>
           @foreach ($group->tags as $tag)
-              @include('tags.tag')
+            @include('tags.tag')
           @endforeach
-        </p>
-
-        <p>
-          @can('history', $group)
-            @if ($group->revisionHistory->count() > 0)
-              <a href="{{route('groups.history', $group)}}">
-                <i class="fa fa-history"></i>
-                {{trans('messages.show_history')}}
-              </a>
-            @endif
-          @endcan
-        </p>
+        </div>
       </div>
 
       <div class="col-md-6">
