@@ -42,18 +42,20 @@ class FileDownloadController extends Controller
     {
         $this->authorize('view', $file);
 
-        if (Storage::exists($file->path)) {
-            if ($file->isImage()) {
+
+        if ($file->isImage()) {
+            if (Storage::exists($file->path)) {
                 $cachedImage = Image::cache(function ($img) use ($file) {
-                    return $img->make(storage_path().'/app/'.$file->path)->fit(32, 32);
+                    return $img->make(storage_path().'/app/'.$file->path)->fit(64, 64);
                 }, 60000, true);
 
                 return $cachedImage->response();
             }
+            else {
+                abort(404, 'File not found in storage at '.$file->path);
+            }
         }
-        else {
-            abort(404, 'File not found in storage at '.$file->path);
-        }
+
 
         if ($file->isFolder()) {
             return redirect('images/extensions/folder.png');
@@ -69,18 +71,17 @@ class FileDownloadController extends Controller
     {
         $this->authorize('view', $file);
 
-
-        if (Storage::exists($file->path)) {
-            if ($file->isImage()) {
+        if ($file->isImage()) {
+            if (Storage::exists($file->path)) {
                 $cachedImage = Image::cache(function ($img) use ($file) {
                     return $img->make(storage_path().'/app/'.$file->path)->widen(600);
                 }, 60000, true);
 
                 return $cachedImage->response();
             }
-        }
-        else {
-            abort(404, 'File not found in storage at '.$file->path);
+            else {
+                abort(404, 'File not found in storage at '.$file->path);
+            }
         }
 
         return redirect('images/extensions/'.$file->icon().'.svg');
