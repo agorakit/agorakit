@@ -25,6 +25,7 @@
     "laravel/tinker": "^2.0",
     "laravel/ui": "^2.0",
     "laravelcollective/html": "6.*",
+    "laravolt/avatar": "^3.2",
     "misd/linkify": "^1.1",
     "mpratt/embera": "~1.0",
     "nicolaslopezj/searchable": "^1.10",

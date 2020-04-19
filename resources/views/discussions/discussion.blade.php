@@ -1,6 +1,7 @@
 <div up-expand class="discussion @if ($discussion->unReadCount() > 0) unread @endif">
 
 
+
   <div class="avatar">
     <img src="{{route('users.cover', [$discussion->user, 'small'])}}" class="rounded-circle"/>
   </div>
