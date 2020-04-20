@@ -37,19 +37,15 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('agorakit:sendnotifications')
-        ->everyFiveMinutes()
-        ->appendOutputTo(storage_path().'/logs/notifications.log');
+        ->everyFiveMinutes();
 
         $schedule->command('agorakit:checkmailbox')
-        ->everyFiveMinutes()
-        ->appendOutputTo(storage_path().'/logs/mailbox.log');
+        ->everyFiveMinutes();
 
         $schedule->command('agorakit:sendreminders')
-        ->everyFiveMinutes()
-        ->appendOutputTo(storage_path().'/logs/mailbox.log');
+        ->everyFiveMinutes();
 
         $schedule->command('agorakit:cleanupdatabase')
-        ->daily()
-        ->appendOutputTo(storage_path().'/logs/cleanup.log');
+        ->daily();
     }
 }
