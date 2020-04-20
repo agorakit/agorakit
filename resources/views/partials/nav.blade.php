@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-    <a up-target=".main" class="navbar-brand" href="{{ route('index') }}">
+    <a up-target="body" class="navbar-brand" href="{{ route('index') }}">
         @if (Storage::exists('public/logo/favicon.png'))
             <img src="{{{ asset('storage/logo/favicon.png') }}}" width="40" height="40"/>
         @else
@@ -23,7 +23,7 @@
                 </a>
                 <div class="dropdown-menu">
 
-                    <a up-target=".main" class="dropdown-item" class="dropdown-item" href="{{ action('GroupController@indexOfMyGroups') }}">
+                    <a up-target="body" class="dropdown-item" class="dropdown-item" href="{{ action('GroupController@indexOfMyGroups') }}">
                         {{trans('messages.my_groups')}}
                     </a>
 
@@ -32,14 +32,14 @@
 
 
                     @forelse (Auth::user()->groups()->orderBy('name')->get() as $group)
-                        <a up-target=".main" class="dropdown-item" href="{{ route('groups.show', $group)}}">{{$group->name}}</a>
+                        <a up-target="body" class="dropdown-item" href="{{ route('groups.show', $group)}}">{{$group->name}}</a>
                     @empty
                         <a class="dropdown-item" href="{{ route('index')}}">{{ trans('membership.not_subscribed_to_group_yet') }}</a>
                     @endforelse
 
                     <div class="dropdown-divider"></div>
 
-                    <a up-target=".main" class="dropdown-item" href="{{ route('groups.create') }}">
+                    <a up-target="body" class="dropdown-item" href="{{ route('groups.create') }}">
                         <i class="fa fa-plus-circle"></i> {{ trans('group.create_a_group_button') }}
                     </a>
                 </div>
@@ -54,30 +54,30 @@
                 <div class="dropdown-menu">
 
 
-                    <a up-target=".main" class="dropdown-item" class="dropdown-item" href="{{ action('GroupController@index') }}">
+                    <a up-target="body" class="dropdown-item" class="dropdown-item" href="{{ action('GroupController@index') }}">
                         <i class="fa fa-layer-group"></i> {{trans('messages.all_groups')}}
                     </a>
 
-                    <a up-target=".main" class="dropdown-item" href="{{ action('DiscussionController@index') }}">
+                    <a up-target="body" class="dropdown-item" href="{{ action('DiscussionController@index') }}">
                         <i class="fa fa-comments-o"></i> {{trans('messages.discussions')}}
                     </a>
 
-                    <a up-target=".main" class="dropdown-item" href="{{ action('ActionController@index') }}">
+                    <a up-target="body" class="dropdown-item" href="{{ action('ActionController@index') }}">
                         <i class="fa fa-calendar"></i> {{trans('messages.agenda')}}
                     </a>
 
-                    <a up-target=".main" class="dropdown-item" href="{{ action('TagController@index') }}">
+                    <a up-target="body" class="dropdown-item" href="{{ action('TagController@index') }}">
                         <i class="fa fa-tag"></i> @lang('Tags')
                     </a>
 
                     <a class="dropdown-item" href="{{ action('MapController@index') }}">
                         <i class="fa fa-map-marker"></i> {{trans('messages.map')}}
                     </a>
-                    <a up-target=".main" class="dropdown-item" href="{{ action('FileController@index') }}">
+                    <a up-target="body" class="dropdown-item" href="{{ action('FileController@index') }}">
                         <i class="fa fa-files-o"></i> {{trans('messages.files')}}
                     </a>
 
-                    <a up-target=".main" class="dropdown-item" href="{{ action('UserController@index') }}">
+                    <a up-target="body" class="dropdown-item" href="{{ action('UserController@index') }}">
                         <i class="fa fa-users"></i> {{trans('messages.users_list')}}
                     </a>
 
@@ -128,7 +128,7 @@
 
 
             <!-- search-->
-            <form up-target=".main" class="form-inline my-2 my-lg-0" role="search" action="{{url('search')}}" method="get">
+            <form up-target="body" class="form-inline my-2 my-lg-0" role="search" action="{{url('search')}}" method="get">
                 <div class="input-group">
                     <input class="form-control form-control-sm" type="text" name="query"  placeholder="{{trans('messages.search')}}..." aria-label="Search">
 
@@ -192,8 +192,8 @@
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right" role="menu">
-                    <a up-target=".main" class="dropdown-item" href="{{route('users.show', Auth::user())}}"><i class="fa fa-btn fa-user"></i> {{ trans('messages.profile') }}</a>
-                    <a up-target=".main" class="dropdown-item" href="{{route('users.edit', Auth::user())}}"><i class="fa fa-btn fa-edit"></i> {{ trans('messages.edit_my_profile') }}</a>
+                    <a up-target="body" class="dropdown-item" href="{{route('users.show', Auth::user())}}"><i class="fa fa-btn fa-user"></i> {{ trans('messages.profile') }}</a>
+                    <a up-target="body" class="dropdown-item" href="{{route('users.edit', Auth::user())}}"><i class="fa fa-btn fa-edit"></i> {{ trans('messages.edit_my_profile') }}</a>
 
                     <a class="dropdown-item" href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                         <i class="fa fa-btn fa-sign-out"></i> {{ trans('messages.logout') }}
@@ -210,7 +210,7 @@
                         <div class="dropdown-divider"></div>
                         <h6 class="dropdown-header">Admin</h6>
 
-                        <a up-target=".main" class="dropdown-item" href="{{ url('/admin/settings') }}">
+                        <a up-target="body" class="dropdown-item" href="{{ url('/admin/settings') }}">
                             <i class="fa fa-cog"></i> Settings
                         </a>
 
