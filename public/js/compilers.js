@@ -215,10 +215,20 @@ Datatables
 */
 up.$compiler('.data-table', function($element) {
 	$element.DataTable( {
-		"pageLength": 25,
-		dom: 'Bfrtip',
+		"pageLength": 10,
+		stateSave: true,
+		dom: 'frtpBi',
 		buttons: [
-			'csv', 'excel'
+			{
+				extend: 'excel',
+				text: 'Export excel',
+				className: 'btn btn-secondary'
+			},
+			{
+				extend: 'csv',
+				text: 'Export csv',
+				className: 'btn btn-secondary'
+			}
 		]
 	});
 });
