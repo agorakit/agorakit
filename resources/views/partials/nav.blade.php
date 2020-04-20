@@ -173,7 +173,7 @@
                     <div class="dropdown-menu dropdown-menu-right">
                         @foreach(\Config::get('app.locales') as $locale)
                             @if($locale !== app()->getLocale())
-                                <a up-target=".main" class="dropdown-item" href="{{Request::url()}}?force_locale={{$locale}}">
+                                <a up-target="body" class="dropdown-item" href="{{Request::url()}}?force_locale={{$locale}}">
                                     {{ strtoupper($locale) }}
                                 </a>
                             @endif
