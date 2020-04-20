@@ -338,37 +338,26 @@ Route::group(['middleware' => ['web']], function () {
     // Search
     Route::get('search', 'SearchController@index');
 
-    // External cron
-    // call/curl/wget yoururl/cron every 5 minutes to have at least email notifiations sent
-    // only use this if laravel scheduler is not supoprted by your hosting provider
-    // this call is rate limited to one attempt each minute
 
+
+    /***************** ADMIN STUFF **************/
     /*
-    Route::group(['middleware' => 'throttle:1'], function () {
-    Route::get('cron', function () {
-    $exitCode = Artisan::call('notifications:send');
+    Altough we want as little admin so called "rights" or "power" some stuff must be handled by a small group of trusted people like:
+    - group creation (that is even questionable, and not yet the case - we want self service)
+    - homepage introduction text
+    */
 
-    return $exitCode;
-});
-});
-*/
+    Route::group(['middleware' => ['admin']], function () {
+        Route::get('admin/logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+        Route::get('admin/settings', 'Admin\SettingsController@index');
+        Route::post('admin/settings', 'Admin\SettingsController@update');
 
-/***************** ADMIN STUFF **************/
-/*
-Altough we want as little admin so called "rights" or "power" some stuff must be handled by a small group of trusted people like:
-- group creation (that is even questionable, and not yet the case - we want self service)
-- homepage introduction text
-*/
+        Route::resource('admin/user', 'Admin\UserController');
+        Route::get('admin/insights', 'Admin\InsightsController@index')->name('admin.insights');
 
-Route::group(['middleware' => ['admin']], function () {
-    Route::get('admin/logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
-    Route::get('admin/settings', 'Admin\SettingsController@index');
-    Route::post('admin/settings', 'Admin\SettingsController@update');
+        Route::get('admin/undo', 'UndoController@index')->name('admin.undo');
+        Route::get('admin/{type}/{id}/restore', 'UndoController@restore')->name('admin.restore');
 
-    Route::resource('admin/user', 'Admin\UserController');
-    Route::get('admin/insights', 'Admin\InsightsController@index')->name('admin.insights');
-
-    Route::get('admin/undo', 'UndoController@index')->name('admin.undo');
-    Route::get('admin/{type}/{id}/restore', 'UndoController@restore')->name('admin.restore');
-});
+        Route::get('admin/groupadmins', 'Admin\GroupAdminsController@index');
+    });
 });

@@ -218,6 +218,10 @@
                             <i class="fa fa-users"></i> Users
                         </a>
 
+                        <a class="dropdown-item" href="{{ url('/admin/groupadmins') }}">
+                            <i class="fa fa-users"></i> Group admins
+                        </a>
+
                         <a class="dropdown-item" href="{{ url('/admin/undo') }}">
                             <i class="fa fa-trash"></i> Recover content
                         </a>
