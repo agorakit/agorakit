@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/philippejadin/agorakit.svg?branch=master)](https://travis-ci.org/philippejadin/agorakit)
 
-![Agorakit, groupware for citizens](https://raw.githubusercontent.com/philippejadin/agorakit-website/master/agorakit-banner.png)
+![Agorakit, groupware for citizens](https://github.com/agorakit/website/blob/master/images/agorakit-banner.png)
 
 ## Agorakit, groupware for citizens
 
