@@ -23,19 +23,17 @@
                 @endif
             </h5>
             <p class="card-text">
-                {{summary($group->body) }}
-                <br/>
-
+                <div style="max-height:8em; overflow: hidden">
+                    {{summary($group->body) }}
+                </div>
                 <span class="badge badge-secondary"><i class="fa fa-users"></i> {{$group->users()->count()}}</span>
                 <span class="badge badge-secondary"><i class="fa fa-comments"></i> {{$group->discussions()->count()}}</span>
                 <span class="badge badge-secondary"><i class="fa fa-calendar"></i> {{$group->actions()->count()}}</span>
-
-
-
-
-                @foreach ($group->tags as $tag)
-                    @include('tags.tag')
-                @endforeach
+                <div style="max-height:3.8em; overflow: hidden">
+                    @foreach ($group->tags as $tag)
+                        @include('tags.tag')
+                    @endforeach
+                </div>
             </p>
 
             <div class="d-flex justify-content-between align-items-center">
