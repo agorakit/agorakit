@@ -50,9 +50,7 @@ class GroupFileController extends Controller
 
         $files = $group->files()
         ->where('item_type', '<>', \App\File::FOLDER)
-        ->with('user')
-        ->with('tags')
-        ->with('group')
+        ->with('user', 'group', 'tags')
         ->orderBy($request->get('sort', 'created_at'), $request->get('dir', 'desc'))
         ->when($tag, function ($query) use ($tag) {
             return $query->withAnyTags($tag);

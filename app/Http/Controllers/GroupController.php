@@ -84,23 +84,29 @@ class GroupController extends Controller
             if (Gate::allows('viewDiscussions', $group)) {
                 $discussions = $group->discussions()
                 ->has('user')
-                ->with('user', 'group', 'userReadDiscussion')
+                ->with('user', 'group', 'userReadDiscussion', 'tags')
                 ->orderBy('updated_at', 'desc')
                 ->limit(5)
                 ->get();
             }
 
             if (Gate::allows('viewFiles', $group)) {
-                $files = $group->files()->with('user')->orderBy('created_at', 'desc')->limit(5)->get();
+                $files = $group->files()
+                ->with('user', 'tags', 'group')
+                ->orderBy('created_at', 'desc')
+                ->limit(5)
+                ->get();
             }
 
             if (Gate::allows('viewActions', $group)) {
-                $actions = $group->actions()->where('stop', '>=', Carbon::now())->orderBy('start', 'asc')->limit(10)->get();
+                $actions = $group->actions()
+                ->with('user', 'tags', 'group')
+                ->where('stop', '>=', Carbon::now())
+                ->orderBy('start', 'asc')
+                ->limit(10)
+                ->get();
             }
 
-            if (Gate::allows('viewActivities', $group)) {
-                $activities = $group->activities()->limit(10)->get();
-            }
 
             if (Auth::user()->isMemberOf($group) && $group->inbox()) {
                 $group_inbox = $group->inbox();
@@ -112,14 +118,24 @@ class GroupController extends Controller
             if ($group->isOpen()) {
                 $discussions = $group->discussions()
                 ->has('user')
-                ->with('user', 'group')
+                ->with('user', 'group', 'tags')
                 ->withCount('comments')
                 ->orderBy('updated_at', 'desc')
                 ->limit(5)
                 ->get();
 
-                $files = $group->files()->with('user')->orderBy('created_at', 'desc')->limit(5)->get();
-                $actions = $group->actions()->where('start', '>=', Carbon::now())->orderBy('start', 'asc')->limit(10)->get();
+                $files = $group->files()
+                ->with('user', 'tags', 'group')
+                ->orderBy('created_at', 'desc')
+                ->limit(5)
+                ->get();
+
+                $actions = $group->actions()
+                ->with('user', 'tags', 'group')
+                ->where('start', '>=', Carbon::now())
+                ->orderBy('start', 'asc')
+                ->limit(10)
+                ->get();
             }
         }
 
@@ -129,7 +145,6 @@ class GroupController extends Controller
         ->with('discussions', $discussions)
         ->with('actions', $actions)
         ->with('files', $files)
-        ->with('activities', $activities)
         ->with('admins', $group->admins()->get())
         ->with('group_inbox', $group_inbox)
         ->with('tab', 'home');

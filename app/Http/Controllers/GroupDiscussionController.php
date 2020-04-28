@@ -39,7 +39,7 @@ class GroupDiscussionController extends Controller
             $discussions =
             $group->discussions()
             ->has('user')
-            ->with('userReadDiscussion', 'user')
+            ->with('userReadDiscussion', 'user', 'group', 'tags')
             ->withCount('comments')
             ->orderBy('updated_at', 'desc')
             ->when($tag, function ($query) use ($tag) {
@@ -47,7 +47,7 @@ class GroupDiscussionController extends Controller
             })
             ->paginate(50);
         } else { // don't load the unread relation, since we don't know who to look for.
-            $discussions = $group->discussions()->has('user')->with('user')->withCount('comments')->orderBy('updated_at', 'desc')->paginate(50);
+            $discussions = $group->discussions()->has('user')->with('user', 'group', 'tags')->withCount('comments')->orderBy('updated_at', 'desc')->paginate(50);
         }
 
         return view('discussions.index')

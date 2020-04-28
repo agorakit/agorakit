@@ -135,13 +135,6 @@
     @endif
 
 
-    @if ($activities)
-      @if($activities->count() > 0)
-        <h2>{{trans('messages.recent_activity')}}</h2>
-        @each('partials.activity-small', $activities, 'activity')
-      @endif
-    @endif
-
   </div>
 
 @endsection

@@ -44,21 +44,21 @@ class DashboardController extends Controller
                 $groups = Auth::user()->groups()->pluck('groups.id');
             }
 
-            $discussions = Discussion::with('userReadDiscussion', 'group', 'user')
+            $discussions = Discussion::with('userReadDiscussion', 'group', 'user', 'tags')
             ->withCount('comments')
             ->whereIn('group_id', $groups)
             ->orderBy('updated_at', 'desc')
             ->take(25)
             ->get();
 
-            $actions = Action::with('group')
+            $actions = Action::with('group', 'tags')
             ->where('start', '>=', Carbon::now())
             ->whereIn('group_id', $groups)
             ->orderBy('start')
             ->take(10)
             ->get();
 
-            $files = File::with('group')
+            $files = File::with('group', 'user', 'tags')
             ->has('group')
             ->whereIn('group_id', $groups)
             ->orderBy('updated_at', 'desc')

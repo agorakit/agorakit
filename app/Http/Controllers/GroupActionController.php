@@ -58,6 +58,7 @@ class GroupActionController extends Controller
 
         if ($view == 'list') {
             $actions = $group->actions()
+            ->with('user', 'group', 'tags')
             ->orderBy('start', 'asc')
             ->where('stop', '>=', Carbon::now()->subDays(1))
             ->paginate(10);
@@ -81,6 +82,7 @@ class GroupActionController extends Controller
         // load of actions between start and stop provided by calendar js
         if ($request->has('start') && $request->has('end')) {
             $actions = $group->actions()
+            ->with('user', 'group', 'tags')
             ->where('start', '>', Carbon::parse($request->get('start')))
             ->where('stop', '<', Carbon::parse($request->get('end')))
             ->orderBy('start', 'asc')->get();
