@@ -296,14 +296,20 @@ class CheckMailbox extends Command
             return true;
         }
 
+        if (array_key_exists('Delivered-To', $message_headers)) {
+            if ($message_headers['Delivered-To'] == 'Autoresponder') {
+                return true;
+            }
+        }
+
 
         return false;
 
     }
 
     /**
-     * Move the provided $message to a folder named $folder
-     */
+    * Move the provided $message to a folder named $folder
+    */
     public function moveMessage(Message $message, $folder)
     {
         if ($this->connection->hasMailbox($folder)) {
