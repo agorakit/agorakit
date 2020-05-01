@@ -25,6 +25,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\ExportGroup::class,
         \App\Console\Commands\ImportGroup::class,
         \App\Console\Commands\EnforceUniqueUsernames::class,
+        \App\Console\Commands\EnforceUniqueGroupSlugs::class,
     ];
 
     /**

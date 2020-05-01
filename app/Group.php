@@ -56,6 +56,7 @@ class Group extends Model
         ],
     ];
 
+    
     /**
     * Return the sluggable configuration array for this model.
     *
@@ -67,6 +68,7 @@ class Group extends Model
             'slug' => [
                 'source' => 'name',
                 'reserved' => ['reply', 'reply-', 'admin-'],
+                'unique' => true,
             ],
         ];
     }
