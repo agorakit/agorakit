@@ -65,6 +65,10 @@
           <a class="small" up-popup=".dialog" href="{{ route('groups.discussions.tags.edit', [$group, $discussion]) }}">
             {{__('Edit tags')}}
           </a>
+
+          <a class="small" up-popup=".dialog" href="{{ route('tagger.index', ['discussions', $discussion->id]) }}">
+            {{__('Edit tags')}}
+          </a>
         @endcan
       </div>
 
