@@ -9,6 +9,8 @@ return [
   'notify_admins_on_group_create' => true, // as it says :-)
   'inbox_driver' => env('INBOX_DRIVER', null),
   'inbox_host' => env('INBOX_HOST', null),
+  'inbox_port' => env('INBOX_PORT', 993),
+  'inbox_flags' => env('INBOX_FLAGS', '/imap/ssl/novalidate-cert'),
   'inbox_username' => env('INBOX_USERNAME'),
   'inbox_password' => env('INBOX_PASSWORD'),
   'inbox_prefix' => env('INBOX_PREFIX'),
