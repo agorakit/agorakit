@@ -11,11 +11,11 @@
 
 <div class="d-flex justify-content-between">
     <div class="form-group">
-        {!! Form::submit(trans('messages.reply'), ['class' => 'btn btn-primary btn-lg']) !!}
+        {!! Form::submit(trans('messages.reply'), ['class' => 'btn btn-primary']) !!}
     </div>
 
 
-    <div>
+    <div class="ml-2">
         <div class="custom-file">
             <input type="file" name="file" class="custom-file-input" id="customFileLangHTML">
             <label class="custom-file-label" for="customFileLangHTML" data-browse="@lang('Browse')">{{trans('Attach a file')}}</label>
