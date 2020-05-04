@@ -196,3 +196,16 @@ label
 .alert a {
   text-decoration: underline;
 }
+
+
+.body table
+{
+  width: 100%;
+  border: 1px solid #dee2e6;
+}
+
+.body td, .body th
+{
+    padding: .75rem;
+    border: 1px solid #aaa;
+}
