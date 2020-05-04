@@ -9,12 +9,17 @@
     height: 25px;
   }
 
+  .container
+  {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
 
   .main-container
   {
     margin: 0;
-    padding: 1.5rem;
     border-radius: 0;
+    padding-top: 0.5rem;
   }
 
   .nav-tabs
