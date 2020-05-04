@@ -46,8 +46,6 @@
   <!-- Scripts -->
   <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{ asset('js/unpoly.min.js') }}"></script>
-  <script src="{{ asset('js/trumbowyg.min.js') }}"></script>
-
 
   @yield('js')
   @stack('js')

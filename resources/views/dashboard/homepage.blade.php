@@ -3,12 +3,12 @@
 @section('content')
 
 
-    <div class="d-sm-flex">
-        <div class="d-flex mb-2">
+    <div class="d-flex justify-content-between">
+        <div class="">
             <h1><a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ __('Homepage') }}</h1>
         </div>
 
-        <div class="ml-auto mb-2">
+        <div class="">
             @include ('partials.preferences-show')
         </div>
     </div>
