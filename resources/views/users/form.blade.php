@@ -40,7 +40,7 @@
             <i class="fas fa-info-circle"></i>
             @lang('Use this to set your password or to change it. Minimum 8 characters.')
         </div>
-        {!! Form::password('password', ['class' => 'form-control']) !!}
+        {!! Form::password('password', ['class' => 'form-control', 'minlength'=> '8']) !!}
     </div>
 
     <div class="mt-2">
