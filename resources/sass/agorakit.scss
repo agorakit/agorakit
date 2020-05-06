@@ -101,7 +101,7 @@ label
 
 .form-group
 {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 
@@ -167,7 +167,11 @@ label
   color: #888;
 }
 
-
+.small-help
+{
+  color: #888;
+  font-size: 0.8rem,
+}
 
 .help {
   padding: 20px;
