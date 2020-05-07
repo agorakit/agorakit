@@ -10,7 +10,7 @@
         <div class="w-100">
             <div class="d-flex align-items-center">
                 <div class="user">
-                    <a href="{{ route('users.show', [$comment->user]) }}">{{$comment->user->name}}</a>
+                    <a up-follow href="{{ route('users.show', [$comment->user]) }}">{{$comment->user->name}}</a>
                 </div>
                 <div class="meta ml-2">
                     {{$comment->created_at->diffForHumans()}}

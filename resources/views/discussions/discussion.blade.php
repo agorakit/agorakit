@@ -10,7 +10,7 @@
             <div>
                 <div class="d-flex">
                     <div class="name">
-                        <a up-target=".main" up-reveal="false" href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}">
+                        <a up-follow up-reveal="false" href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}">
                             {{ $discussion->name }}
                         </a>
                     </div>
@@ -42,11 +42,11 @@
             <div class="meta">
                 {{trans('messages.started_by')}}
                 <strong>
-                    <a href="{{ route('users.show', [$discussion->user]) }}">{{ $discussion->user->name}}</a>
+                    <a up-follow href="{{ route('users.show', [$discussion->user]) }}">{{ $discussion->user->name}}</a>
                 </strong>
                 {{trans('messages.in')}}
                 <strong>
-                    <a href="{{ route('groups.show', [$discussion->group]) }}">{{ $discussion->group->name}}</a>
+                    <a up-follow href="{{ route('groups.show', [$discussion->group]) }}">{{ $discussion->group->name}}</a>
                 </strong>
                 {{ $discussion->updated_at->diffForHumans()}}
             </div>

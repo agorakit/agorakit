@@ -15,7 +15,7 @@
             <div class="mb-4 mt-2">
                 <i class="far fa-check-square"></i> Use controlled tags in this group (please define the allowed tags bellow)
                 <br/>
-                <a href="?limit_tags=no"  up-target=".tab_content"> <i class="far fa-square"></i> Allow any tags in this group to classify content</a>
+                <a up-follow href="?limit_tags=no"  up-target=".tab_content"> <i class="far fa-square"></i> Allow any tags in this group to classify content</a>
             </div>
 
         </h3>
@@ -64,7 +64,7 @@
     @else
         <h3>
             <div class="mb-4 mt-2">
-                <a href="?limit_tags=yes" up-target=".tab_content"> <i class="far fa-square"></i> Use controlled tags in this group (please define the allowed tags bellow)</a>
+                <a up-follow href="?limit_tags=yes" up-target=".tab_content"> <i class="far fa-square"></i> Use controlled tags in this group (please define the allowed tags bellow)</a>
                 <br/>
                 <i class="far fa-check-square"></i> Allow any tags in this group to classify content
             </div>

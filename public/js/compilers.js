@@ -179,6 +179,8 @@ up.compiler('.spinner', function(element) {
 	hide()
 });
 
+up.proxy.config.slowDelay=3
+
 /*
 - add a tags class to select to enable selectize on it
 - add data-allow-new-tags to allow the creation of new tags

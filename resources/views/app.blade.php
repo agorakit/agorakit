@@ -53,8 +53,8 @@
 
   <div class="credits">
     {{trans('messages.made_with')}}
-    <a href="https://www.agorakit.org">Agorakit ({{config('agorakit.version')}})</a>
-    - <a href="{{request()->fullUrlWithQuery(['embed'=>1])}}">{{trans('messages.embed')}}</a>
+    <a up-follow href="https://www.agorakit.org">Agorakit ({{config('agorakit.version')}})</a>
+    - <a up-follow href="{{request()->fullUrlWithQuery(['embed'=>1])}}">{{trans('messages.embed')}}</a>
   </div>
 
 

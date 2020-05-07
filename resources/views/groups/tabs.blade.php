@@ -1,8 +1,8 @@
 <div class="group-header mb-4">
     <h1 class="small">
-        <a href="{{ route('index') }}" up-target=".main"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
+        <a up-follow up-reveal="false" href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
         @if (isset($tab) && ($tab <> 'home'))
-            <a href="{{ route('groups.show', $group) }}" up-target=".main">{{ $group->name }}</a>
+            <a up-follow up-reveal="false" href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
         @else
             {{ $group->name }}
         @endif
@@ -28,7 +28,7 @@
     <ul class="nav nav-tabs nav-centered mb-4">
 
         <li class="nav-item">
-            <a up-target="tab_content" href="{{ route('groups.show', $group) }}" class="nav-link @if (isset($tab) && ($tab == 'home')) active @endif">
+            <a up-follow up-reveal="false" href="{{ route('groups.show', $group) }}" class="nav-link @if (isset($tab) && ($tab == 'home')) active @endif">
                 <i class="fa fa-info-circle"></i> <span class="d-none d-lg-inline">{{ trans('messages.group_home') }}</span>
             </a>
         </li>
@@ -37,7 +37,7 @@
         @if ($group->getSetting('module_discussion', true) == true)
             @can ('viewDiscussions', $group)
                 <li class="nav-item">
-                    <a up-target="tab_content" href="{{ route('groups.discussions.index', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'discussion')) active @endif">
+                    <a up-follow up-reveal="false" href="{{ route('groups.discussions.index', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'discussion')) active @endif">
                         <i class="fa fa-comments"></i> <span class="d-none d-lg-inline">{{ trans('messages.discussions') }}</span>
                     </a>
                 </li>
@@ -47,7 +47,7 @@
         @if ($group->getSetting('module_action', true) == true)
             @can ('viewActions', $group)
                 <li class="nav-item">
-                    <a up-target="tab_content" href="{{ route('groups.actions.index', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'action')) active @endif">
+                    <a up-follow up-reveal="false" href="{{ route('groups.actions.index', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'action')) active @endif">
                         <i class="fa fa-calendar"></i> <span class="d-none d-lg-inline">{{ trans('messages.agenda') }}</span>
                     </a>
                 </li>
@@ -59,7 +59,7 @@
         @if ($group->getSetting('module_file', true) == true)
             @can ('viewFiles', $group)
                 <li class="nav-item">
-                    <a up-target="tab_content" href="{{ route('groups.files.index', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'files')) active @endif">
+                    <a up-follow up-reveal="false" href="{{ route('groups.files.index', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'files')) active @endif">
                         <i class="fa fa-files-o"></i> <span class="d-none d-lg-inline">{{ trans('messages.files') }}</span>
                     </a>
                 </li>
@@ -69,7 +69,7 @@
         @if ($group->getSetting('module_member', true) == true)
             @can ('viewMembers', $group)
                 <li class="nav-item">
-                    <a up-target="tab_content" href="{{ route('groups.users.index', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'users')) active @endif">
+                    <a up-follow up-reveal="false" href="{{ route('groups.users.index', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'users')) active @endif">
                         <i class="fa fa-users"></i> <span class="d-none d-lg-inline">{{ trans('messages.members') }}</span>
                     </a>
                 </li>
@@ -80,7 +80,7 @@
         @if ($group->getSetting('module_map', true) == true)
             @can ('viewMembers', $group)
                 <li class="nav-item">
-                    <a href="{{ action('GroupMapController@index', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'map')) active @endif">
+                    <a up-follow up-reveal="false" href="{{ action('GroupMapController@index', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'map')) active @endif">
                         <i class="fa fa-map-marker"></i> <span class="d-none d-lg-inline">{{ trans('messages.map') }}</span>
                     </a>
                 </li>
@@ -90,7 +90,7 @@
         @if ($group->getSetting('module_custom_name'))
             @if ($group->isMember())
                 <li class="nav-item">
-                    <a up-target="tab_content" href="{{ action('ModuleController@show', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'custom')) active @endif">
+                    <a up-follow up-reveal="false" href="{{ action('ModuleController@show', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'custom')) active @endif">
                         <i class="fa {{$group->getSetting('module_custom_icon')}}"></i> <span class="d-none d-lg-inline">{{$group->getSetting('module_custom_name')}}</span>
                     </a>
                 </li>
@@ -100,13 +100,13 @@
 
         @if ($group->isMember())
             <li class="nav-item">
-                <a up-target="tab_content" href="{{ action('GroupMembershipController@edit', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'preferences')) active @endif">
+                <a up-follow up-reveal="false" href="{{ action('GroupMembershipController@edit', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'preferences')) active @endif">
                     <i class="fa fa-bell-o"></i> <span class="d-none d-lg-inline">{{ trans('messages.settings') }}</span>
                 </a>
             </li>
         @else
             <li class="nav-item">
-                <a up-target="tab_content" href="{{ action('GroupMembershipController@create', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'settings')) active @endif">
+                <a up-follow up-reveal="false" href="{{ action('GroupMembershipController@create', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'settings')) active @endif">
                     <i class="fa fa-sign-in"></i> <span class="d-none d-lg-inline">{{ trans('messages.join') }}</span>
                 </a>
             </li>
@@ -119,15 +119,15 @@
                     <i class="fa fa-wrench"></i> <span class="d-none d-lg-inline">@lang('Administer')</span>
                 </a>
                 <div class="dropdown-menu">
-                    <a up-target="tab_content" class="dropdown-item" href="{{ route('groups.edit', $group) }}">
+                    <a up-follow up-reveal="false" class="dropdown-item" href="{{ route('groups.edit', $group) }}">
                         <i class="fa fa-cogs"></i> {{ trans('Configuration') }}
                     </a>
 
-                    <a up-target="tab_content" class="dropdown-item" href="{{ route('groups.tags.index', $group) }}">
+                    <a up-follow up-reveal="false" class="dropdown-item" href="{{ route('groups.tags.index', $group) }}">
                         <i class="fa fa-tags"></i> {{ trans('Tags') }}
                     </a>
 
-                    <a up-target="tab_content" class="dropdown-item" href="{{ action('ModuleController@update', $group) }}">
+                    <a up-follow up-reveal="false" class="dropdown-item" href="{{ action('ModuleController@update', $group) }}">
                         <i class="fa fa-toggle-on"></i> {{ trans('messages.features') }}
                     </a>
 
@@ -173,7 +173,7 @@
         @if ($group->getSetting('module_discussion', true) == true)
             @if ($group->isOpen() )
                 <li class="nav-item" role="presentation">
-                    <a up-target="tab_content" class="nav-link @if (isset($tab) && ($tab == 'discussion')) active @endif" href="{{ route('groups.discussions.index', $group) }}">
+                    <a up-follow up-reveal="false" class="nav-link @if (isset($tab) && ($tab == 'discussion')) active @endif" href="{{ route('groups.discussions.index', $group) }}">
                         <i class="fa fa-comments"></i> <span class="d-none d-lg-inline">{{ trans('messages.discussions') }}</span>
                     </a>
                 </li>
@@ -195,7 +195,7 @@
         @if ($group->getSetting('module_files', true) == true)
             @if ($group->isOpen() )
                 <li class="nav-item" role="presentation">
-                    <a up-target="tab_content" class="nav-link @if (isset($tab) && ($tab == 'files')) active @endif" href="{{ route('groups.files.index', $group) }}">
+                    <a up-follow up-reveal="false" class="nav-link @if (isset($tab) && ($tab == 'files')) active @endif" href="{{ route('groups.files.index', $group) }}">
                         <i class="fa fa-files-o"></i> <span class="d-none d-lg-inline">{{ trans('messages.files') }}</span>
                     </a>
                 </li>
@@ -206,7 +206,7 @@
         @if ($group->getSetting('module_member', true) == true)
             @if ($group->isOpen() )
                 <li class="nav-item" role="presentation">
-                    <a up-target="tab_content" class="nav-link @if (isset($tab) && ($tab == 'users')) active @endif" href="{{ route('groups.users.index', $group) }}">
+                    <a up-follow up-reveal="false" class="nav-link @if (isset($tab) && ($tab == 'users')) active @endif" href="{{ route('groups.users.index', $group) }}">
                         <i class="fa fa-users"></i> <span class="d-none d-lg-inline">{{ trans('messages.members') }}</span>
                     </a>
                 </li>
@@ -216,7 +216,7 @@
 
         @if ($group->isOpen() )
             <li class="nav-item" role="presentation">
-                <a up-target="tab_content" class="nav-link @if (isset($tab) && ($tab == 'settings')) active @endif" href="{{ action('GroupMembershipController@create', $group) }}">
+                <a up-follow up-reveal="false" class="nav-link @if (isset($tab) && ($tab == 'settings')) active @endif" href="{{ action('GroupMembershipController@create', $group) }}">
                     <i class="fa fa-cog"></i> <span class="d-none d-lg-inline">{{ trans('messages.join') }}</span>
                 </a>
             </li>

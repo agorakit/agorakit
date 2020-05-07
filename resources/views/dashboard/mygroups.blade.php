@@ -4,7 +4,7 @@
 
     <div class="d-md-flex justify-content-between mb-3">
 
-        <h1><a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.my_groups') }}</h1>
+        <h1><a up-follow href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.my_groups') }}</h1>
 
 
         <form class="form-inline" role="search" method="GET" action="{{route('groups.index.my')}}" up-autosubmit up-delay="100" up-target=".groups" up-reveal='false'>

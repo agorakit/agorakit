@@ -1,6 +1,6 @@
 <div class="user">
   <div class="avatar">
-    <a href="{{ route('users.show', $user) }}">
+    <a up-follow href="{{ route('users.show', $user) }}">
       <img src="{{route('users.cover', [$user, 'small'])}}" class="rounded-circle" />
     </a>
   </div>
@@ -8,7 +8,7 @@
 
     <div class="d-flex">
       <div class="name mr-2">
-        <a href="{{ route('users.show', $user) }}">
+        <a up-follow href="{{ route('users.show', $user) }}">
           {{ $user->name }}
         </a>
       </div>
@@ -33,7 +33,7 @@
       <div class="groups">
         @foreach ($user->groups as $group)
           @unless ($group->isSecret())
-            <a href="{{ route('groups.show', [$group]) }}" class="badge badge-secondary">
+            <a up-follow href="{{ route('groups.show', [$group]) }}" class="badge badge-secondary">
 
               @if ($group->isOpen())
                 <i class="fa fa-globe" title="{{trans('group.open')}}"></i>

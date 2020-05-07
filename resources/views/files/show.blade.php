@@ -20,7 +20,7 @@
         <div class="col">
             <div class="mb-4">
                 <div>
-                    <a href="{{ route('users.show', [$file->user]) }}">
+                    <a up-follow href="{{ route('users.show', [$file->user]) }}">
                         <i class="fa fa-user-circle"></i> {{ $file->user->name }}
                     </a>
                 </div>
@@ -80,5 +80,5 @@
 
             </div>
         </div>
-    </div>    
+    </div>
 @endsection

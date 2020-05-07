@@ -7,14 +7,14 @@
   <div class="card-body">
     <h5 class="card-title">
       <img src="{{ route('groups.files.icon', [$file->group, $file]) }}" style="width:1rem; height: 1rem">
-      <a href="{{ route('groups.files.show', [$file->group, $file]) }}">
+      <a up-follow href="{{ route('groups.files.show', [$file->group, $file]) }}">
         {{ $file->name }}
       </a>
     </h5>
     <p class="card-text">
       <small>
         <div>
-          <a href="{{ route('users.show', [$file->user]) }}">
+          <a up-follow href="{{ route('users.show', [$file->user]) }}">
             <i class="fa fa-user-circle"></i> {{ $file->user->name }}
           </a>
         </div>

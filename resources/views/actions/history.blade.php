@@ -15,7 +15,7 @@
 </p>
   @endforeach
 
-<a href="{{route('groups.actions.show', [$group, $action])}}" class="btn btn-primary">{{trans('messages.back_to')}} "{{$action->name}}"</a>
+<a up-follow href="{{route('groups.actions.show', [$group, $action])}}" class="btn btn-primary">{{trans('messages.back_to')}} "{{$action->name}}"</a>
 
 </div>
 
