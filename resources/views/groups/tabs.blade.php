@@ -1,6 +1,6 @@
 <div class="group-header mb-4">
     <h1 class="small">
-        <a up-follow up-reveal="false" href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
+        <a up-follow up-reveal="false" up-cache="false" href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
         @if (isset($tab) && ($tab <> 'home'))
             <a up-follow up-reveal="false" href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
         @else
@@ -37,7 +37,7 @@
         @if ($group->getSetting('module_discussion', true) == true)
             @can ('viewDiscussions', $group)
                 <li class="nav-item">
-                    <a up-follow up-reveal="false" href="{{ route('groups.discussions.index', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'discussion')) active @endif">
+                    <a up-follow up-reveal="false" up-cache="false" href="{{ route('groups.discussions.index', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'discussion')) active @endif">
                         <i class="fa fa-comments"></i> <span class="d-none d-lg-inline">{{ trans('messages.discussions') }}</span>
                     </a>
                 </li>
