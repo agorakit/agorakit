@@ -136,6 +136,9 @@ class CleanupDatabase extends Command
             $count = $user->discussions()->delete();
             if ($count) $this->info($count . ' discussions soft deleted from ' . $user->name);
 
+            $count = $user->comments()->delete();
+            if ($count) $this->info($count . ' comments soft deleted from ' . $user->name);
+
             $count = $user->actions()->delete();
             if ($count) $this->info($count . ' actions soft deleted from ' . $user->name);
 
