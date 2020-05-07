@@ -179,7 +179,7 @@ up.compiler('.spinner', function(element) {
 	hide()
 });
 
-up.proxy.config.slowDelay=3
+//up.proxy.config.slowDelay=300
 
 /*
 - add a tags class to select to enable selectize on it
