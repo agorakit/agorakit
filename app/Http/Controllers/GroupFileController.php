@@ -299,6 +299,7 @@ class GroupFileController extends Controller
     {
         $this->authorize('pin', $file);
         $file->togglePin();
+        $file->timestamps = false;
         $file->save();
         flash(trans('messages.ressource_updated_successfully'));
         return redirect()->back();
@@ -308,6 +309,7 @@ class GroupFileController extends Controller
     {
         $this->authorize('archive', $file);
         $file->toggleArchive();
+        $file->timestamps = false;
         $file->save();
         flash(trans('messages.ressource_updated_successfully'));
         return redirect()->back();

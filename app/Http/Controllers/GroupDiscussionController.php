@@ -289,6 +289,7 @@ class GroupDiscussionController extends Controller
     {
         $this->authorize('pin', $discussion);
         $discussion->togglePin();
+        $discussion->timestamps = false;
         $discussion->save();
         flash(trans('messages.ressource_updated_successfully'));
         return redirect()->back();
@@ -298,6 +299,7 @@ class GroupDiscussionController extends Controller
     {
         $this->authorize('archive', $discussion);
         $discussion->toggleArchive();
+        $discussion->timestamps = false;
         $discussion->save();
         flash(trans('messages.ressource_updated_successfully'));
         return redirect()->back();
