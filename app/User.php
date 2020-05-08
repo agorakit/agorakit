@@ -242,7 +242,10 @@ class User extends Authenticatable
     */
     public function groups()
     {
-        return $this->belongsToMany(\App\Group::class, 'membership')->where('membership.membership', '>=', Membership::MEMBER)->orderBy('name')->withTimestamps();
+        return $this->belongsToMany(\App\Group::class, 'membership')
+            ->orderBy('status', 'desc')
+            ->orderBy('name')
+            ->withTimestamps();
     }
 
     /**
