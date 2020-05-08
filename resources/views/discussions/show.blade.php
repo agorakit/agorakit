@@ -10,7 +10,7 @@
             <div class="d-flex">
 
 
-                <div class="avatar mr-2 mt-1">
+                <div class="avatar mr-2">
                     <img src="{{route('users.cover', [$discussion->user, 'small'])}}" class="rounded-circle"/>
                 </div>
 
@@ -36,7 +36,7 @@
                             <a class="text-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-ellipsis-h"></i>
                             </a>
-                            
+
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
 
                                 @can('update', $discussion)
@@ -149,9 +149,17 @@
 
             @endauth
 
+
             @can('create-comment', $group)
-                @include ('comments.create')
+                @if ($discussion->isArchived())
+                    <div class="alert alert-info">
+                        @lang('This discussion is archived, you cannot comment anymore')
+                    </div>
+                @else
+                    @include ('comments.create')
+                @endif
             @endcan
+
         </div>
 
 
