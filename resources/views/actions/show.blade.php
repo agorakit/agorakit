@@ -44,11 +44,11 @@
     <div class="meta mb-3">
       {{trans('messages.started_by')}}
       <span class="user">
-        <a href="{{ route('users.show', [$action->user]) }}">{{ $action->user->name}}</a>
+        <a up-follow href="{{ route('users.show', [$action->user]) }}">{{ $action->user->name}}</a>
       </span>
       {{trans('messages.in')}}
       <strong>
-        <a href="{{ route('groups.show', [$action->group]) }}">{{ $action->group->name}}</a>
+        <a up-follow href="{{ route('groups.show', [$action->group]) }}">{{ $action->group->name}}</a>
       </strong>
       {{ $action->created_at->diffForHumans()}}
     </div>

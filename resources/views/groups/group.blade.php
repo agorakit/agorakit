@@ -1,7 +1,7 @@
 <div up-expand>
     <div class="mb-3 card tag-group @foreach ($group->tags as $tag)tag-{{$tag->tag_id}} @endforeach">
 
-        <a href="{{ action('GroupController@show', $group) }}">
+        <a up-follow href="{{ action('GroupController@show', $group) }}">
             @if ($group->hasCover())
                 <img class="card-img-top" src="{{ route('groups.cover.medium', $group)}}" />
             @else
@@ -11,7 +11,7 @@
 
         <div class="card-body">
             <h5 class="card-title">
-                <a href="{{ action('GroupController@show', $group) }}">
+                <a up-follow href="{{ action('GroupController@show', $group) }}">
                     {{ $group->name }}
                 </a>
                 @if ($group->isOpen())

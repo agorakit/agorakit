@@ -43,6 +43,9 @@
 
 		<div class="form-group">
 			<label>{{ trans('messages.password') }}</label>
+			<div class="small-help">
+				@lang('If you lost your password, leave it blank, we will send you a login link by email')
+			</div>
 			<div>
 				<input type="password" class="form-control" name="password">
 			</div>
@@ -57,7 +60,8 @@
 
 
 
-		<div class="d-flex justify-content-end mt-3">
+		<div class="d-flex justify-content-end align-items-center mt-3">
+			<a class="mr-4" href="{{route('password.email')}}">{{ trans('messages.password_reset') }}</a>
 			<button type="submit" class="btn btn-primary btn-lg">{{ trans('messages.login') }}</button>
 		</div>
 
@@ -66,9 +70,7 @@
 
 
 
-	<div class="alert alert-info">
-		@lang('If you lost your password, leave it blank, we will send you a login link by email')
-	</div>
+
 
 
 @endsection

@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="">
-        <h1><a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.all_groups') }}</h1>
+        <h1><a up-follow href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.all_groups') }}</h1>
     </div>
 
     @include('dashboard.tabs')
@@ -63,7 +63,7 @@
                             <tr class="tag-group @foreach ($group->tags as $tag)tag-{{$tag->tag_id}} @endforeach">
                                 <td class="avatar"><span class="avatar"><img src="{{ route('groups.cover.small', $group)}}" class="rounded"/></span></td>
                                 <td class="content">
-                                    <a href="{{ route('groups.show',  $group) }}">
+                                    <a up-follow href="{{ route('groups.show',  $group) }}">
                                         <span class="name">{{ $group->name }}
 
                                             @if ($group->isOpen())

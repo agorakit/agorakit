@@ -2,9 +2,9 @@
   <div class="help" role="alert">
     <i class="fa fa-info-circle" aria-hidden="true"></i>
     {{trans('messages.if_you_want_participate_in_this_group')}}
-    <a href="{{ url('login') }}">{{trans('messages.you_login')}}</a>
+    <a up-follow href="{{ url('login') }}">{{trans('messages.you_login')}}</a>
     {{trans('messages.or')}}
-    <a href="{{url('register')}}">{{trans('messages.you_register')}}</a>.
+    <a up-follow href="{{url('register')}}">{{trans('messages.you_register')}}</a>.
   </div>
 @endguest
 
@@ -13,7 +13,7 @@
   <div class="help" role="alert">
     <i class="fa fa-info-circle" aria-hidden="true"></i>
     {{trans('messages.if_you_want_participate_in_this_group')}}
-    <a href="{{action('GroupMembershipController@store', $group)}}">
+    <a up-follow href="{{action('GroupMembershipController@store', $group)}}">
       {{trans('messages.join_this_group')}}</a>
     </div>
   @endif

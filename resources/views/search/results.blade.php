@@ -52,7 +52,7 @@
                 <div role="tabpanel" class="tab-pane {{$groups->class}}" id="groups">
                     @foreach ($groups as $group)
                         <div class="result">
-                            <h4><a href="{{$group->link()}}">{{$group->name}}</a></h4>
+                            <h4><a up-follow href="{{$group->link()}}">{{$group->name}}</a></h4>
                             {{summary($group->body, 500)}}
                         </div>
                     @endforeach
@@ -63,7 +63,7 @@
                 <div role="tabpanel" class="tab-pane {{$discussions->class}}" id="discussions">
                     @foreach ($discussions as $discussion)
                         <div class="result">
-                            <h4><a href="{{$discussion->link()}}">{{$discussion->name}}</a></h4>
+                            <h4><a up-follow href="{{$discussion->link()}}">{{$discussion->name}}</a></h4>
                             {{summary($discussion->body, 500)}}
                             <br/>
                             <span class="badge badge-secondary badge-group">
@@ -85,7 +85,7 @@
                 <div role="tabpanel" class="tab-pane {{$actions->class}}" id="actions">
                     @foreach ($actions as $action)
                         <div class="result">
-                            <h4><a href="{{$action->link()}}">{{$action->name}}</a></h4>
+                            <h4><a up-follow href="{{$action->link()}}">{{$action->name}}</a></h4>
                             {{summary($action->body)}}
                             <br/>
                             {{$action->start}} / {{$action->stop}}
@@ -110,7 +110,7 @@
                 <div role="tabpanel" class="tab-pane {{$users->class}}" id="users">
                     @foreach ($users as $user)
                         <div class="result">
-                            <h4><span class="avatar"><img src="{{route('users.cover', [$user, 'small'])}}" class="rounded-circle"/></span> <a href="{{$user->link()}}">{{$user->name}}</a></h4>
+                            <h4><span class="avatar"><img src="{{route('users.cover', [$user, 'small'])}}" class="rounded-circle"/></span> <a up-follow href="{{$user->link()}}">{{$user->name}}</a></h4>
                             {{summary($user->body)}}
                         </div>
                     @endforeach
@@ -121,7 +121,7 @@
                 <div role="tabpanel" class="tab-pane {{$comments->class}}" id="comments">
                     @foreach ($comments as $comment)
                         <div class="result">
-                            <h4><a href="{{$comment->link()}}">{{$comment->discussion->name}}</a></h4>
+                            <h4><a up-follow href="{{$comment->link()}}">{{$comment->discussion->name}}</a></h4>
                             {{summary($comment->body)}}
                             <br/>
                             <span class="badge badge-secondary badge-group">
@@ -144,7 +144,7 @@
                 <div role="tabpanel" class="tab-pane {{$files->class}}" id="files">
                     @foreach ($files as $file)
                         <div class="result">
-                            <h4><a href="{{ route('groups.files.show', [$file->group, $file]) }}">{{$file->name}}</a></h4>
+                            <h4><a up-follow href="{{ route('groups.files.show', [$file->group, $file]) }}">{{$file->name}}</a></h4>
                             <span class="badge badge-secondary badge-group">
                                 @if ($file->group->isOpen())
                                     <i class="fa fa-globe" title="{{trans('group.open')}}"></i>

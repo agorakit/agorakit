@@ -19,7 +19,7 @@
     @include('membership.form')
 
     <div class="mt-5 d-flex justify-content-between align-items-center">
-        <a href="{{url('/')}}">{{trans('messages.cancel')}}</a>
+        <a up-follow href="{{url('/')}}">{{trans('messages.cancel')}}</a>
         {!! Form::submit(trans('membership.join_button'), ['class' => 'btn btn-primary btn-lg px-3']) !!}
 
     </div>

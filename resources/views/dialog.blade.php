@@ -39,7 +39,7 @@
 
   <div class="credits">
     {{trans('messages.made_with')}}
-    <a href="https://www.agorakit.org">Agorakit ({{config('agorakit.version')}})</a>
+    <a up-follow href="https://www.agorakit.org">Agorakit ({{config('agorakit.version')}})</a>
   </div>
 
 

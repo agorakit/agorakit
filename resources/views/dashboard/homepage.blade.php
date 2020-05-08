@@ -5,7 +5,7 @@
 
     <div class="d-flex justify-content-between">
         <div class="">
-            <h1><a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ __('Homepage') }}</h1>
+            <h1><a up-follow href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ __('Homepage') }}</h1>
         </div>
 
         <div class="">

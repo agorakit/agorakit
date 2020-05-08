@@ -123,7 +123,7 @@
 
             <div class="alert alert-danger" role="alert">
               This feature is now enabled in your .env file!
-              <a href="https://dos.agorakit.org">Read the docs</a> to understand this feature and how to configure/upgrade it.
+              <a up-follow href="https://dos.agorakit.org">Read the docs</a> to understand this feature and how to configure/upgrade it.
             </div>
 
 

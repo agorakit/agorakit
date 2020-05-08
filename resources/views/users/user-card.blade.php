@@ -4,7 +4,7 @@
   </div>
   <div>
     <h3 class="mt-2">
-      <a href="{{ route('users.show', [$user]) }}">
+      <a up-follow href="{{ route('users.show', [$user]) }}">
         {{ $user->name }}
       </a>
     </h3>

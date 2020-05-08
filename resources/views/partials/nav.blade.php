@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-    <a up-target="body" class="navbar-brand" href="{{ route('index') }}">
+    <a up-follow up-cache="false" class="navbar-brand" href="{{ route('index') }}">
         @if (Storage::exists('public/logo/favicon.png'))
             <img src="{{{ asset('storage/logo/favicon.png') }}}" width="40" height="40"/>
         @else
@@ -58,7 +58,7 @@
                         <i class="fa fa-layer-group"></i> {{trans('messages.all_groups')}}
                     </a>
 
-                    <a up-target="body" class="dropdown-item" href="{{ action('DiscussionController@index') }}">
+                    <a up-target="body" up-cache="false" class="dropdown-item" href="{{ action('DiscussionController@index') }}">
                         <i class="fa fa-comments-o"></i> {{trans('messages.discussions')}}
                     </a>
 

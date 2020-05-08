@@ -22,7 +22,7 @@
 
     <h3 style="margin-top: 200px">Delete my account</h3>
     <div class="alert alert-warning">Please note that undoing this will be impossible after some time, and will require admin work</div>
-      <a href="{{route('users.delete', $user)}}" class="btn btn-danger">Click here to delete your account</a>
+      <a up-follow href="{{route('users.delete', $user)}}" class="btn btn-danger">Click here to delete your account</a>
 
   </div>
 

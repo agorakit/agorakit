@@ -1,11 +1,12 @@
 .spinner
 {
-  left: 50%;
-  transform: translateX(-50%);
+  /*left: 50%;*/
+  /*transform: translateX(-50%);*/
   top:0;
-  padding: 1rem;
-  margin: 1rem;
-  border-radius: 5px;
+  padding: 1.5rem;
+  margin: auto;
+  width: 100%;
+
   background-color: #adbcdc;
   color: #000;
   display: none;

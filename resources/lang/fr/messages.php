@@ -7,7 +7,7 @@ return [
   'notified'                   => 'notifé',
   'preferences_for'            => 'préférences pour',
   'status'                     => 'Status',
-  'username'                   => 'nom d\'utilisateur',
+  'username'                   => 'Nom d\'utilisateur',
   'help'                       => 'Aide',
   'a_message_for_you'          => 'Un message pour vous',
   'accept_invitation'          => 'Accepter l\'invitation',

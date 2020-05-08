@@ -60,7 +60,7 @@
                     <div class="meta">
                         {{trans('messages.started_by')}}
                         <span class="user">
-                            <a href="{{ route('users.show', [$discussion->user]) }}">{{ $discussion->user->name}}</a>
+                            <a up-follow href="{{ route('users.show', [$discussion->user]) }}">{{ $discussion->user->name}}</a>
                         </span>
                         {{trans('messages.in')}} {{ $discussion->group->name}} {{ $discussion->created_at->diffForHumans()}}
                     </div>
