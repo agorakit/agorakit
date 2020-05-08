@@ -244,4 +244,8 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
     'user_made_admin_successfuly' => 'Administrador agregado correctamente',
     'what'                        => 'qué',
   ],
+  'pin' => 'Pin',
+  'unpin' => 'Desanclar',
+  'archive' => 'Archivo',
+  'unarchive' => 'Desempacar',
 ];
