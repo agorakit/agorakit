@@ -52,4 +52,14 @@ class DiscussionPolicy
     {
         return $user->isMemberOf($discussion->group);
     }
+
+    public function pin(User $user, Discussion $discussion)
+    {
+        return $user->isAdminOf($discussion->group);
+    }
+
+    public function archive(User $user, Discussion $discussion)
+    {
+        return $user->isAdminOf($discussion->group);
+    }
 }
