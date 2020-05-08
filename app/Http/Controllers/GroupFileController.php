@@ -301,7 +301,7 @@ class GroupFileController extends Controller
         $file->togglePin();
         $file->save();
         flash(trans('messages.ressource_updated_successfully'));
-        return redirect()->route('groups.files.index', [$file->group]);
+        return redirect()->back();
     }
 
     public function archive(Group $group, File $file)
@@ -310,6 +310,6 @@ class GroupFileController extends Controller
         $file->toggleArchive();
         $file->save();
         flash(trans('messages.ressource_updated_successfully'));
-        return redirect()->route('groups.files.index', [$file->group]);
+        return redirect()->back();
     }
 }

@@ -1,4 +1,4 @@
-<div class="file d-flex @if ($file->isArchived()) status-archived @endif" up-expand>
+<div class="file d-flex @if ($file->isArchived()) status-archived @endif  @if ($file->isPinned()) status-pinned @endif" up-expand>
     <div class="thumbnail">
         @if ($file->isLink())
             <a class="mr-1" href="{{ route('groups.files.download', [$file->group, $file]) }}" target="_blank">
@@ -28,10 +28,16 @@
         <div class="small meta">
             <div>
                 @if ($file->isPinned())
-                    <div class="badge badge-primary" style="min-width: 2em; margin: 0 2px;">{{__('Pinned')}}</div>
+                    <div class="badge badge-primary" style="min-width: 2em; margin: 0 2px;">
+                        <i class="fas fa-thumbtack"></i>
+                        {{__('Pinned')}}
+                    </div>
                 @endif
                 @if ($file->isArchived())
-                    <div class="badge badge-muted" style="min-width: 2em; margin: 0 2px;">{{__('Archived')}}</div>
+                    <div class="badge badge-secondary" style="min-width: 2em; margin: 0 2px;">
+                        <i class="fa fa-archive"></i>
+                        {{__('Archived')}}
+                    </div>
                 @endif
             </div>
             <div>
@@ -73,10 +79,9 @@
 
     @can('update', $file)
         <div class="ml-auto dropdown">
-            <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="far fa-edit"></i>
-
-            </button>
+            <a class="text-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-h"></i>
+            </a>
 
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
 
@@ -95,7 +100,7 @@
                 @endcan
 
                 @can('pin', $file)
-                    <a class="dropdown-item" href="{{ route('groups.files.pin', [$file->group, $file]) }}">
+                    <a up-follow up-cache="false" up-restore-scroll="true" class="dropdown-item" href="{{ route('groups.files.pin', [$file->group, $file]) }}">
                         <i class="fa fa-thumbtack"></i>
                         @if($file->isPinned())
                             {{trans('messages.unpin')}}
@@ -106,7 +111,7 @@
                 @endcan
 
                 @can('archive', $file)
-                    <a class="dropdown-item" href="{{ route('groups.files.archive', [$file->group, $file]) }}">
+                    <a up-follow up-cache="false" up-restore-scroll="true" class="dropdown-item" href="{{ route('groups.files.archive', [$file->group, $file]) }}">
                         <i class="fa fa-archive"></i>
                         @if($file->isArchived())
                             {{trans('messages.unarchive')}}

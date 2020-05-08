@@ -291,7 +291,7 @@ class GroupDiscussionController extends Controller
         $discussion->togglePin();
         $discussion->save();
         flash(trans('messages.ressource_updated_successfully'));
-        return redirect()->route('groups.discussions.show', [$discussion->group, $discussion]);
+        return redirect()->back();
     }
 
     public function archive(Group $group, Discussion $discussion)
@@ -300,6 +300,6 @@ class GroupDiscussionController extends Controller
         $discussion->toggleArchive();
         $discussion->save();
         flash(trans('messages.ressource_updated_successfully'));
-        return redirect()->route('groups.discussions.show', [$discussion->group, $discussion]);
+        return redirect()->back();
     }
 }

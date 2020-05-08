@@ -25,10 +25,10 @@
 
         @can('update', $comment)
             <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="far fa-edit" aria-hidden="true"></i>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="text-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-h"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
 
                     @can('update', $comment)
                         <a class="dropdown-item" href="{{ action('CommentController@edit', [$group, $discussion, $comment]) }}"><i class="fa fa-pencil"></i>
