@@ -1,5 +1,5 @@
 <div up-expand>
-    <div class="mb-3 card tag-group @foreach ($group->tags as $tag)tag-{{$tag->tag_id}} @endforeach">
+    <div class="mb-3 card tag-group @foreach ($group->tags as $tag)tag-{{$tag->tag_id}} @endforeach @if ($group->isArchived()) status-archived @endif">
 
         <a up-follow href="{{ action('GroupController@show', $group) }}">
             @if ($group->hasCover())
@@ -20,6 +20,12 @@
                     <i class="fa fa-lock" title="{{trans('group.closed')}}"></i>
                 @else
                     <i class="fa fa-eye-slash" title="{{trans('group.secret')}}"></i>
+                @endif
+                @if ($group->isPinned())
+                    <div class="badge badge-primary" style="min-width: 2em; margin: 0 2px; font-size: 0.5em;">{{__('Pinned')}}</div>
+                @endif
+                @if ($group->isArchived())
+                    <div class="badge badge-muted" style="min-width: 2em; margin: 0 2px; font-size: 0.5em;">{{__('Archived')}}</div>
                 @endif
             </h5>
             <p class="card-text">

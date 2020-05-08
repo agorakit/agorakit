@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\HasStatus;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
@@ -19,6 +20,7 @@ class Group extends Model
     use Taggable;
     use Sluggable;
     use SearchableTrait;
+    use HasStatus;
 
     protected $rules = [
         'name' => 'required',
@@ -56,7 +58,7 @@ class Group extends Model
         ],
     ];
 
-    
+
     /**
     * Return the sluggable configuration array for this model.
     *

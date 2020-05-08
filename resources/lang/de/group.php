@@ -18,6 +18,9 @@ return [
   'open'                    => 'Offene Gruppe',
   'secret'                  => 'Geheime Gruppe',
   'type'                    => 'Art der Gruppe',
+  'status'                  => 'Status',
+  'pinned'                  => 'Gepinnt',
+  'archived'                => 'Archiviert',
   'LLH:obsolete'            => [
     'tabs'      => 'TODO: tabs',
     'tabs_help' => 'TODO: tabs_help',

@@ -18,6 +18,9 @@ return [
   'open'                    => 'Openbare groep',
   'secret'                  => 'Geheime groep',
   'type'                    => 'Type groep',
+  'status'                  => 'Staat',
+  'pinned'                  => 'Vastgezet',
+  'archived'                => 'Gearchiveerd',
   'LLH:obsolete'            => [
     'tabs'      => 'TODO: tabs',
     'tabs_help' => 'TODO: tabs_help',

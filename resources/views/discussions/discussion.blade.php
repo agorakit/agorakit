@@ -1,4 +1,4 @@
-<div up-expand class="discussion @if ($discussion->unReadCount() > 0) unread @endif">
+<div up-expand class="discussion @if ($discussion->unReadCount() > 0) unread @endif @if ($discussion->isArchived()) status-archived @endif">
 
     <div class="d-flex">
         <div class="avatar">
@@ -16,17 +16,21 @@
                     </div>
 
                     <div class="ml-auto">
+                        <div class="d-flex align-items-start">
+                        @if ($discussion->isPinned())
+                            <div class="badge badge-primary" style="min-width: 2em; margin: 0 2px;">{{__('Pinned')}}</div>
+                        @endif
+                        @if ($discussion->isArchived())
+                            <div class="badge badge-muted" style="min-width: 2em; margin: 0 2px;">{{__('Archived')}}</div>
+                        @endif
                         @if ($discussion->unReadCount() > 0)
-                            <div class="d-flex align-items-start">
-                                <div class="badge badge-danger" style="min-width: 2em">{{ $discussion->unReadCount() }} {{__('New')}}</div>
-                            </div>
+                            <div class="badge badge-danger" style="min-width: 2em; margin: 0 2px;">{{ $discussion->unReadCount() }} {{__('New')}}</div>
                         @else
                             @if ($discussion->comments_count > 0)
-                                <div class="d-flex align-items-start">
-                                    <div class="badge badge-secondary" style="min-width: 2em">{{ $discussion->comments_count }}</div>
-                                </div>
+                                <div class="badge badge-secondary" style="min-width: 2em; margin: 0 2px;">{{ $discussion->comments_count }}</div>
                             @endif
                         @endif
+                        </div>
                     </div>
                 </div>
 

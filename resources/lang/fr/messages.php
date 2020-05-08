@@ -246,4 +246,8 @@ return [
     'sort_by_size_asc'            => 'Trier par taille en ordre croissant',
   ],
   'deleteGroup' => 'Supprimer le groupe',
+  'pin' => 'Épingler',
+  'unpin' => 'Désépingler',
+  'archive' => 'Archiver',
+  'unarchive' => 'Désarchiver',
 ];

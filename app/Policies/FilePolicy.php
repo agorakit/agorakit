@@ -67,4 +67,14 @@ class FilePolicy
 
         return false;
     }
+
+    public function pin(User $user, File $file)
+    {
+        return $user->isAdminOf($file->group);
+    }
+
+    public function archive(User $user, File $file)
+    {
+        return $user->isAdminOf($file->group);
+    }
 }

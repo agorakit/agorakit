@@ -51,6 +51,7 @@ class GroupFileController extends Controller
         $files = $group->files()
         ->where('item_type', '<>', \App\File::FOLDER)
         ->with('user', 'group', 'tags')
+        ->orderBy('status', 'desc')
         ->orderBy($request->get('sort', 'created_at'), $request->get('dir', 'desc'))
         ->when($tag, function ($query) use ($tag) {
             return $query->withAnyTags($tag);
@@ -292,5 +293,23 @@ class GroupFileController extends Controller
 
             return redirect()->back()->withInput();
         }
+    }
+
+    public function pin(Group $group, File $file)
+    {
+        $this->authorize('pin', $file);
+        $file->togglePin();
+        $file->save();
+        flash(trans('messages.ressource_updated_successfully'));
+        return redirect()->route('groups.files.index', [$file->group]);
+    }
+
+    public function archive(Group $group, File $file)
+    {
+        $this->authorize('archive', $file);
+        $file->toggleArchive();
+        $file->save();
+        flash(trans('messages.ressource_updated_successfully'));
+        return redirect()->route('groups.files.index', [$file->group]);
     }
 }

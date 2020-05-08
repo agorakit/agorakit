@@ -14,12 +14,23 @@
                     <img src="{{route('users.cover', [$discussion->user, 'small'])}}" class="rounded-circle"/>
                 </div>
 
-                <div>
+                <div style="width: 100%;">
 
                     <div class="d-flex justify-content-between">
                         <h2 class="name">
                             {{ $discussion->name }}
                         </h2>
+
+                        <div class="ml-auto">
+                            <div class="d-flex align-items-start">
+                                @if ($discussion->isPinned())
+                                    <div class="badge badge-primary" style="min-width: 2em; margin: 0 2px;">{{__('Pinned')}}</div>
+                                @endif
+                                @if ($discussion->isArchived())
+                                    <div class="badge badge-muted" style="min-width: 2em; margin: 0 2px;">{{__('Archived')}}</div>
+                                @endif
+                            </div>
+                        </div>
 
                         <div class="ml-4 dropdown">
                             <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -39,6 +50,28 @@
                                     <a up-modal=".dialog" class="dropdown-item" href="{{ route('groups.discussions.deleteconfirm', [$group, $discussion]) }}">
                                         <i class="fa fa-trash"></i>
                                         {{trans('messages.delete')}}
+                                    </a>
+                                @endcan
+
+                                @can('pin', $discussion)
+                                    <a class="dropdown-item" href="{{ route('groups.discussions.pin', [$group, $discussion]) }}">
+                                        <i class="fa fa-thumbtack"></i>
+                                        @if($discussion->isPinned())
+                                            {{trans('messages.unpin')}}
+                                        @else
+                                            {{trans('messages.pin')}}
+                                        @endif
+                                    </a>
+                                @endcan
+
+                                @can('archive', $discussion)
+                                    <a class="dropdown-item" href="{{ route('groups.discussions.archive', [$group, $discussion]) }}">
+                                        <i class="fa fa-archive"></i>
+                                        @if($discussion->isArchived())
+                                            {{trans('messages.unarchive')}}
+                                        @else
+                                            {{trans('messages.archive')}}
+                                        @endif
                                     </a>
                                 @endcan
 

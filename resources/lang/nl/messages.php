@@ -246,4 +246,8 @@ return [
   ],
   'help'        => 'Helpen',
   'deleteGroup' => 'Groep verwijderen',
+  'pin' => 'Vastpinnen',
+  'unpin' => 'Maak los',
+  'archive' => 'Archief',
+  'unarchive' => 'Uitpakken',
 ];

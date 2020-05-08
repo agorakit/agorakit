@@ -1,4 +1,4 @@
-<div class="file d-flex" up-expand>
+<div class="file d-flex @if ($file->isArchived()) status-archived @endif" up-expand>
     <div class="thumbnail">
         @if ($file->isLink())
             <a class="mr-1" href="{{ route('groups.files.download', [$file->group, $file]) }}" target="_blank">
@@ -11,7 +11,7 @@
         @endif
     </div>
 
-    <div class="content">
+    <div class="content" style="width: 100%;">
         <div class="name">
             <a href="{{ route('groups.files.download', [$file->group, $file]) }}" target="_blank">
                 {{ $file->name }}
@@ -26,6 +26,14 @@
         </div>
 
         <div class="small meta">
+            <div>
+                @if ($file->isPinned())
+                    <div class="badge badge-primary" style="min-width: 2em; margin: 0 2px;">{{__('Pinned')}}</div>
+                @endif
+                @if ($file->isArchived())
+                    <div class="badge badge-muted" style="min-width: 2em; margin: 0 2px;">{{__('Archived')}}</div>
+                @endif
+            </div>
             <div>
                 <a up-follow href="{{ route('groups.show', [$file->group_id]) }}">
                     @if ($file->group->isOpen())
@@ -63,7 +71,6 @@
 
     </div>
 
-
     @can('update', $file)
         <div class="ml-auto dropdown">
             <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -86,6 +93,29 @@
                         {{trans('messages.delete')}}
                     </a>
                 @endcan
+
+                @can('pin', $file)
+                    <a class="dropdown-item" href="{{ route('groups.files.pin', [$file->group, $file]) }}">
+                        <i class="fa fa-thumbtack"></i>
+                        @if($file->isPinned())
+                            {{trans('messages.unpin')}}
+                        @else
+                            {{trans('messages.pin')}}
+                        @endif
+                    </a>
+                @endcan
+
+                @can('archive', $file)
+                    <a class="dropdown-item" href="{{ route('groups.files.archive', [$file->group, $file]) }}">
+                        <i class="fa fa-archive"></i>
+                        @if($file->isArchived())
+                            {{trans('messages.unarchive')}}
+                        @else
+                            {{trans('messages.archive')}}
+                        @endif
+                    </a>
+                @endcan
+
             </div>
         </div>
     @endcan

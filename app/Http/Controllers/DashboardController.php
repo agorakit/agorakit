@@ -6,6 +6,7 @@ use App\Action;
 use App\Discussion;
 use App\File;
 use App\Group;
+use App\Traits\ContentStatus;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -47,6 +48,8 @@ class DashboardController extends Controller
             $discussions = Discussion::with('userReadDiscussion', 'group', 'user', 'tags')
             ->withCount('comments')
             ->whereIn('group_id', $groups)
+            ->where('status', '>=', ContentStatus::NORMAL)
+            ->orderBy('status', 'desc')
             ->orderBy('updated_at', 'desc')
             ->take(25)
             ->get();
@@ -61,6 +64,8 @@ class DashboardController extends Controller
             $files = File::with('group', 'user', 'tags')
             ->has('group')
             ->whereIn('group_id', $groups)
+            ->where('status', '>=', ContentStatus::NORMAL)
+            ->orderBy('status', 'desc')
             ->orderBy('updated_at', 'desc')
             ->take(10)
             ->get();
