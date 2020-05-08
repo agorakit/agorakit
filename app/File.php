@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\HasStatus;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,6 +18,7 @@ class File extends Model
     use RevisionableTrait;
     use Taggable;
     use SearchableTrait;
+    use HasStatus;
 
     protected $rules = [
         'name'     => 'required',
