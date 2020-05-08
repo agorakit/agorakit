@@ -26,7 +26,7 @@ class Discussion extends Model
     'group_id' => 'required|exists:groups,id',
     ];
 
-    protected $keepRevisionOf = ['name', 'body'];
+    protected $keepRevisionOf = ['name', 'body', 'status'];
 
     protected $table = 'discussions';
     protected $fillable = ['name', 'body', 'group_id'];
