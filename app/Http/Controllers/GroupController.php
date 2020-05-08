@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Group;
+use App\Traits\ContentStatus;
 use Auth;
 use Carbon\Carbon;
 use Gate;
@@ -24,7 +25,9 @@ class GroupController extends Controller
         $groups = new Group();
         $groups = $groups->notSecret();
 
-        $groups = $groups->with('tags')->orderBy('updated_at', 'desc');
+        $groups = $groups->with('tags')
+            ->orderBy('status', 'desc')
+            ->orderBy('updated_at', 'desc');
 
         if (Auth::check()) {
             $groups = $groups->with('membership');
@@ -45,7 +48,7 @@ class GroupController extends Controller
     {
         $groups = $request->user()->groups();
 
-        $groups = $groups->with('tags')->orderBy('updated_at', 'desc');
+        $groups = $groups->with('tags');
 
         if (Auth::check()) {
             $groups = $groups->with('membership');
@@ -85,6 +88,8 @@ class GroupController extends Controller
                 $discussions = $group->discussions()
                 ->has('user')
                 ->with('user', 'group', 'userReadDiscussion', 'tags')
+                ->where('status', '>=', ContentStatus::NORMAL)
+                ->orderBy('status', 'desc')
                 ->orderBy('updated_at', 'desc')
                 ->limit(5)
                 ->get();
@@ -93,6 +98,8 @@ class GroupController extends Controller
             if (Gate::allows('viewFiles', $group)) {
                 $files = $group->files()
                 ->with('user', 'tags', 'group')
+                ->where('status', '>=', ContentStatus::NORMAL)
+                ->orderBy('status', 'desc')
                 ->orderBy('created_at', 'desc')
                 ->limit(5)
                 ->get();
@@ -279,6 +286,7 @@ class GroupController extends Controller
 
         $group->name = $request->input('name');
         $group->body = $request->input('body');
+        $group->status = $request->input('status');
 
         if (Gate::allows('changeGroupType', $group)) {
             // handle secret group type

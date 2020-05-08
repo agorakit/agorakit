@@ -41,6 +41,7 @@ class GroupDiscussionController extends Controller
             ->has('user')
             ->with('userReadDiscussion', 'user', 'group', 'tags')
             ->withCount('comments')
+            ->orderBy('status', 'desc')
             ->orderBy('updated_at', 'desc')
             ->when($tag, function ($query) use ($tag) {
                 return $query->withAnyTags($tag);
