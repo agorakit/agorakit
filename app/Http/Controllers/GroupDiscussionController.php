@@ -284,4 +284,22 @@ class GroupDiscussionController extends Controller
         ->with('discussion', $discussion)
         ->with('tab', 'discussion');
     }
+
+    public function pin(Group $group, Discussion $discussion)
+    {
+        $this->authorize('pin', $discussion);
+        $discussion->togglePin();
+        $discussion->save();
+        flash(trans('messages.ressource_updated_successfully'));
+        return redirect()->route('groups.discussions.show', [$discussion->group, $discussion]);
+    }
+
+    public function archive(Group $group, Discussion $discussion)
+    {
+        $this->authorize('archive', $discussion);
+        $discussion->toggleArchive();
+        $discussion->save();
+        flash(trans('messages.ressource_updated_successfully'));
+        return redirect()->route('groups.discussions.show', [$discussion->group, $discussion]);
+    }
 }

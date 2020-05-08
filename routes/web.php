@@ -261,6 +261,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('discussions/{discussion}/edit', 'GroupDiscussionController@edit')->name('.discussions.edit');
         Route::post('discussions/{discussion}', 'GroupDiscussionController@update')->name('.discussions.update');
 
+        Route::get('discussions/{discussion}/pin', 'GroupDiscussionController@pin')->name('.discussions.pin');
+        Route::get('discussions/{discussion}/archive', 'GroupDiscussionController@archive')->name('.discussions.archive');
+
         Route::get('discussions/{discussion}/delete', 'GroupDiscussionController@destroyConfirm')->name('.discussions.deleteconfirm');
         Route::delete('discussions/{discussion}/delete', 'GroupDiscussionController@destroy')->name('.discussions.delete');
 
@@ -314,6 +317,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('files/{file}', 'GroupFileController@update')->name('.files.update');
         Route::get('files/{file}/delete', 'GroupFileController@destroyConfirm')->name('.files.deleteconfirm');
         Route::delete('files/{file}/delete', 'GroupFileController@destroy')->name('.files.delete');
+
+        Route::get('files/{file}/pin', 'GroupFileController@pin')->name('.files.pin');
+        Route::get('files/{file}/archive', 'GroupFileController@archive')->name('.files.archive');
 
         Route::get('files/{file}/download', 'FileDownloadController@download')->name('.files.download');
         Route::get('files/{file}/thumbnail', 'FileDownloadController@thumbnail')->name('.files.thumbnail');
