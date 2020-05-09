@@ -31,7 +31,12 @@
         @endforeach
     </div>
 
-    @if (!$model->group->tagsAreLimited())
+    @if ($model->group->tagsAreLimited())
+        <div class="text-secondary">
+            <i class="far fa-question-circle"></i>
+            @lang('You cannot add new tags to this group, ask a group admin if you need additional tags.')
+        </div>
+    @else
         <form method="post" class="form-inline mb-3" up-target=".tagger" up-history="false">
             <div class="form-group">
                 @csrf
@@ -43,7 +48,7 @@
 
 </div>
 
-<div class="mt-5 d-flex justify-content-end">
+<div class="d-flex justify-content-end">
     <a href="{{$return_to}}" up-cache="false" up-target=".main-content" class="btn btn-primary btn-lg">@lang('Done')</a>
 </div>
 

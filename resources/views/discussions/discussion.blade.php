@@ -87,6 +87,13 @@
                                 </a>
                             @endcan
 
+                            @can('update', $discussion)
+                                <a class="dropdown-item" up-modal=".dialog" up-closable="false" href="{{ route('tagger.index', ['discussions', $discussion->id]) }}?r={{rand(0,999999)}}">
+                                    <i class="fa fa-tag"></i>
+                                    {{__('Edit tags')}}
+                                </a>
+                            @endcan
+
                             @can('delete', $discussion)
                                 <a up-modal=".dialog" class="dropdown-item" href="{{ route('groups.discussions.deleteconfirm', [$discussion->group, $discussion]) }}">
                                     <i class="fa fa-trash"></i>

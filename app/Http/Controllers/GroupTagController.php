@@ -13,16 +13,27 @@ class GroupTagController extends Controller
     }
 
     /**
-     * Display a listing of tags in the specified group + admin ui for crud.
-     *
-     * @return Response
-     */
+    * Display a listing of tags in the specified group + admin ui for crud.
+    *
+    * @return Response
+    */
     public function index(Request $request, Group $group)
     {
         $this->authorize('view-tags', $group);
 
         if ($request->get('limit_tags') == 'yes') {
             $group->limitTags(true);
+
+            // if we have 0 tags :
+            if ($group->allowedTags()->count() == 0)
+            {
+                // add all the existing tags to allowed tags by default as an helper to the admin
+                foreach ($group->tagsUsed() as $tag) {
+                    $group->addAllowedTag($tag);
+                }
+            }
+
+
         }
 
         if ($request->get('limit_tags') == 'no') {
@@ -38,12 +49,12 @@ class GroupTagController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+    * Display the specified resource.
+    *
+    * @param int $id
+    *
+    * @return Response
+    */
     public function show(Group $group, Tag $tag)
     {
         $this->authorize('view-tags', $group);
@@ -56,10 +67,10 @@ class GroupTagController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
+    * Show the form for creating a new resource.
+    *
+    * @return Response
+    */
     public function create(Request $request, Group $group)
     {
         $this->authorize('manage-tags', $group);
@@ -75,10 +86,10 @@ class GroupTagController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
+    * Store a newly created resource in storage.
+    *
+    * @return Response
+    */
     public function store(Request $request, Group $group)
     {
         $this->authorize('manage-tags', $group);
@@ -101,12 +112,12 @@ class GroupTagController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+    * Show the form for editing the specified resource.
+    *
+    * @param int $id
+    *
+    * @return Response
+    */
     public function edit(Request $request, Group $group, Tag $tag)
     {
         $this->authorize('manage-tags', $group);
@@ -118,12 +129,12 @@ class GroupTagController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+    * Update the specified resource in storage.
+    *
+    * @param int $id
+    *
+    * @return Response
+    */
     public function update(Request $request, Group $group, Tag $tag)
     {
         $this->authorize('manage-tags', $group);
@@ -154,12 +165,12 @@ class GroupTagController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Remove the specified resource from storage.
+    *
+    * @param int $id
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function destroy(Request $request, Group $group, Tag $tag)
     {
         $this->authorize('manage-tags', $group);
