@@ -28,7 +28,7 @@
       @endforeach
     </div>
 
-    <a href="{{$return_to}}" up-target=".tags" up-cache="false" class="btn btn-primary">Done</a>
+    <a href="{{$return_to}}" up-cache="false" up-follow class="btn btn-primary">Done</a>
 
 
   </div>

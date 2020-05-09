@@ -63,7 +63,7 @@
       </div>
 
       @can('update', $discussion)
-        <a class="small" up-modal=".dialog" up-closable="false" up-cache="false" href="{{ route('tagger.index', ['discussions', $discussion->id]) }}">
+        <a class="small" up-modal=".dialog" href="{{ route('tagger.index', ['discussions', $discussion->id]) }}?r={{rand(0,999999)}}">
           {{__('Edit tags')}}
         </a>
       @endcan
