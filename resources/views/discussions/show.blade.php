@@ -52,7 +52,7 @@
         {{trans('messages.in')}} {{ $discussion->group->name}} {{ $discussion->created_at->diffForHumans()}}
       </div>
 
-      <div class="mb-3 tags">
+      <div class="tags">
         @if ($discussion->tags->count() > 0)
           <span class="mr-2">
             @foreach ($discussion->tags as $tag)
@@ -60,17 +60,13 @@
             @endforeach
           </span>
         @endif
-
-        @can('update', $discussion)
-          <a class="small" up-popup=".dialog" href="{{ route('groups.discussions.tags.edit', [$group, $discussion]) }}">
-            {{__('Edit tags')}}
-          </a>
-
-          <a class="small" up-popup=".dialog" href="{{ route('tagger.index', ['discussions', $discussion->id]) }}">
-            {{__('Edit tags')}}
-          </a>
-        @endcan
       </div>
+
+      @can('update', $discussion)
+        <a class="small" up-modal=".dialog" up-closable="false" up-cache="false" href="{{ route('tagger.index', ['discussions', $discussion->id]) }}">
+          {{__('Edit tags')}}
+        </a>
+      @endcan
 
       <div class="body">
         {!! filter($discussion->body) !!}

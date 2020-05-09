@@ -38,11 +38,11 @@ class TaggerController extends Controller
         ->with('id', $id)
         ->with('model', $model)
         ->with('allowed_tags', $allowed_tags)
-        ->with('used_tags', $used_tags)
-        ;
+        ->with('return_to', url()->previous())
+        ->with('used_tags', $used_tags);
     }
 
-    public function add(Request $request, $type, $id, $name)
+    public function tag(Request $request, $type, $id, $name)
     {
 
             if ($type == 'discussions') {
@@ -57,30 +57,17 @@ class TaggerController extends Controller
                 $model = File::findOrFail($id);
             }
 
-            $model->tag($name);
+            if ($model->hasTag($name)) {
+                $model->unTag($name);
+            }
+            else {
+                $model->tag($name);
+            }
 
             return redirect()->route('tagger.index', [$type, $id]);
     }
 
-    public function remove(Request $request, $type, $id, $name)
-    {
 
-            if ($type == 'discussions') {
-                $model = Discussion::findOrFail($id);
-            }
-
-            if ($type == 'actions') {
-                $model = Action::findOrFail($id);
-            }
-
-            if ($type == 'files') {
-                $model = File::findOrFail($id);
-            }
-
-            $model->untag($name);
-
-            return redirect()->route('tagger.index', [$type, $id]);
-    }
 
 
     /**
