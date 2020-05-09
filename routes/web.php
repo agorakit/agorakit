@@ -112,6 +112,15 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('tags', 'TagController@index')->name('tags.index');
     Route::get('tags/{tag}', 'TagController@show')->name('tags.show');
 
+    /* Tagger, our new tag manager */
+
+    Route::get('/tagger/{type}/{id}', 'TaggerController@index')->name('tagger.index');
+    Route::get('/tagger/{type}/{id}/tag/{name}', 'TaggerController@tag')->name('tagger.tag');
+    Route::post('/tagger/{type}/{id}', 'TaggerController@add')->name('tagger.add');
+
+
+
+
     /* Pages */
     Route::get('pages/help', 'PageController@help')->name('pages.help');
 

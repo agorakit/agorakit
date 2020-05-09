@@ -87,9 +87,6 @@
 
 
 
-
-
-
                     <div class="meta">
                         {{trans('messages.started_by')}}
                         <span class="user">
@@ -100,23 +97,23 @@
 
                     <div class="mb-3 d-flex">
 
-                        @if ($discussion->tags->count() > 0)
-                            <div class="mr-2">
-                                @foreach ($discussion->tags as $tag)
-                                    @include('tags.tag')
-                                @endforeach
-                            </div>
-                        @endif
+                      <div class="tags">
+                       @if ($discussion->tags->count() > 0)
+                        <span class="mr-2">
+                          @foreach ($discussion->tags as $tag)
+                            @include('tags.tag')
+                          @endforeach
+                        </span>
+                       @endif
+                      </div>
 
-                        @can('update', $discussion)
-                            <div>
-                                <a class="small" up-popup=".dialog" href="{{ route('groups.discussions.tags.edit', [$group, $discussion]) }}">
-                                    {{__('Edit tags')}}
-                                </a>
-                            </div>
-                        @endcan
+                    @can('update', $discussion)
+                      <a class="small" up-modal=".dialog" up-closable="false" href="{{ route('tagger.index', ['discussions', $discussion->id]) }}?r={{rand(0,999999)}}">
+                        {{__('Edit tags')}}
+                      </a>
+                    @endcan
 
-
+     
 
 
                     </div>
