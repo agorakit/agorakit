@@ -51,11 +51,11 @@ class DashboardController extends Controller
             ->where('status', '>=', ContentStatus::NORMAL)
             ->orderBy('status', 'desc')
             ->orderBy('updated_at', 'desc')
-            ->take(25)
+            ->take(10)
             ->get();
 
             $actions = Action::with('group', 'tags')
-            ->where('start', '>=', Carbon::now())
+            ->where('start', '>=', Carbon::now()->subHour())
             ->whereIn('group_id', $groups)
             ->orderBy('start')
             ->take(10)

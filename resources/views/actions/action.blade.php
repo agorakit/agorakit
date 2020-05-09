@@ -25,26 +25,12 @@
       @endif
     </div>
 
-    
-    <div class="meta">
-      {{$action->start->format('H:i')}} - {{$action->location}}
-    </div>
-    <span class="summary">{{ summary($action->body) }}</span>
 
-    <br/>
-    <div class="group-name">
-      <a up-follow href="{{ route('groups.show', [$action->group_id]) }}">
-        <span class="badge badge-secondary">
-          @if ($action->group->isOpen())
-            <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
-          @elseif ($action->group->isClosed())
-            <i class="fa fa-lock" title="{{trans('group.closed')}}"></i>
-          @else
-            <i class="fa fa-eye-slash" title="{{trans('group.secret')}}"></i>
-          @endif
-          {{ $action->group->name }}
-        </span>
-      </a>
+    <div class="meta">
+      {{$action->start->format('H:i')}} - {{$action->stop->format('H:i')}}, {{$action->location}}, {{ $action->group->name }}
+    </div>
+    <div class="summary">
+      {{ summary($action->body) }}
     </div>
 
 

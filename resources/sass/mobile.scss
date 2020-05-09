@@ -3,16 +3,32 @@
 @media screen and (max-width: 576px) {
 
 
+  .badge
+  {
+    font-size: 65%;
+  }
+
+  .discussions .tags
+  {
+    max-height: 1.3rem;
+    overflow: hidden;
+  }
+
   .avatar img
   {
     width: 25px;
     height: 25px;
   }
 
+  .discussions .discussion .avatar
+  {
+    margin-right: 0.5rem;
+  }
+
   .container
   {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
 
   .main-container
@@ -22,8 +38,14 @@
     padding-top: 1rem;
   }
 
-  .nav-tabs
+  .dialog h2
   {
-    font-size: 70%;
+    font-size: 1.4rem;
   }
+
+  /*.nav-tabs
+  {
+  font-size: 80%;
+}
+*/
 }

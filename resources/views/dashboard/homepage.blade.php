@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between mt-2 mb-2">
         <div class="">
             <h1><a up-follow href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ __('Homepage') }}</h1>
         </div>
@@ -20,10 +20,11 @@
 
 
             @if ($discussions->count() > 0)
-                <h2> {{ __('Latest discussions') }}</h2>
-                <a class="badge badge-pill badge-primary mb-4" href="{{ route('discussions.create') }}">
-                    <i class="fa fa-plus"></i> {{trans('discussion.create_one_button')}}
-                </a>
+                <h2 class="d-flex justify-content-between mb-3"> {{ __('Latest discussions') }}
+                    <a class="btn btn-outline-secondary btn-sm" href="{{ route('discussions.create') }}">
+                        <i class="fas fa-pencil-alt"></i>
+                    </a>
+                </h2>
 
 
                 <div class="discussions">
@@ -47,10 +48,12 @@
             @endif
 
             @if ($actions->count() > 0)
-                <h2>{{ __('Calendar') }}</h2>
-                <a class="badge badge-pill badge-primary mb-4" href="{{ route('actions.create') }}">
-                    <i class="fa fa-plus"></i> {{trans('action.create_one_button')}}
-                </a>
+                <h2 class="d-flex justify-content-between mb-3">{{ __('Calendar') }}
+                    <a class="btn btn-outline-secondary btn-sm" href="{{ route('actions.create') }}">
+                        <i class="fas fa-pencil-alt"></i>
+                    </a>
+                </h2>
+
 
                 <div class="actions">
                     @forelse( $actions as $action)
