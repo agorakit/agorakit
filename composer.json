@@ -27,7 +27,7 @@
     "laravelcollective/html": "6.*",
     "laravolt/avatar": "^3.2",
     "misd/linkify": "^1.1",
-    "mpratt/embera": "~1.0",
+    "mpratt/embera": "~2.0",
     "nicolaslopezj/searchable": "^1.10",
     "rap2hpoutre/laravel-log-viewer": "1.4",
     "spatie/laravel-honeypot": "^2",

@@ -41,7 +41,8 @@ function filter($content)
     // embed youtube and others
     // we create an embera class with offline support to reduce load : https://github.com/mpratt/Embera#offline-support
     $config = [
-        'oembed' => false,
+        /*'oembed' => false,*/
+        'responsive' => true
     ];
 
     $embera = new \Embera\Embera($config);
