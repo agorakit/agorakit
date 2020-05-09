@@ -13,8 +13,6 @@
                         <a up-follow up-reveal="false" href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}">
                             {{ $discussion->name }}
                         </a>
-
-
                     </div>
 
 
@@ -22,7 +20,9 @@
                     <div class="ml-auto">
                         <div class="d-flex align-items-start">
                             @if ($discussion->isPinned())
-                                <div class="badge badge-success" style="min-width: 2em; margin: 0 2px;"><i class="fas fa-thumbtack"></i> {{__('Pinned')}}</div>
+                                <div class="badge badge-success" style="min-width: 2em; margin: 0 2px;">
+                                    <i class="fas fa-thumbtack"></i> {{__('Pinned')}}
+                                </div>
                             @endif
                             @if ($discussion->isArchived())
                                 <div class="badge badge-secondary" style="min-width: 2em; margin: 0 2px;">
@@ -31,10 +31,14 @@
                                 </div>
                             @endif
                             @if ($discussion->unReadCount() > 0)
-                                <div class="badge badge-danger" style="min-width: 2em; margin: 0 2px;">{{ $discussion->unReadCount() }} {{__('New')}}</div>
+                                <div class="badge badge-danger" style="min-width: 2em; margin: 0 2px;">
+                                    {{ $discussion->unReadCount() }} {{__('New')}}
+                                </div>
                             @else
                                 @if ($discussion->comments_count > 0)
-                                    <div class="badge badge-secondary" style="min-width: 2em; margin: 0 2px;">{{ $discussion->comments_count }}</div>
+                                    <div class="badge badge-secondary" style="min-width: 2em; margin: 0 2px;">
+                                        {{ $discussion->comments_count }}
+                                    </div>
                                 @endif
                             @endif
                         </div>
@@ -56,7 +60,6 @@
             </div>
 
             <div class="d-flex">
-
                 <div class="meta">
                     {{trans('messages.started_by')}}
                     <strong>
@@ -74,7 +77,6 @@
                         <a class="text-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-ellipsis-h"></i>
                         </a>
-
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
 
@@ -118,9 +120,9 @@
                                 <a class="dropdown-item" href="{{route('groups.discussions.history', [$discussion->group, $discussion])}}"><i class="fa fa-history"></i> {{trans('messages.show_history')}}</a>
                             @endif
                         </div>
-                    @endcan
-                </div>
 
+                    </div>
+                @endcan
             </div>
 
 
