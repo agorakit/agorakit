@@ -1,20 +1,20 @@
 <div class="card" style="max-width: 30rem;">
   @if ($file->isImage())
     <a href="{{ route('groups.files.download', [$file->group, $file]) }}" target="_blank">
-      <img src="{{ route('groups.files.preview', [$file->group, $file]) }}" class="card-img-top">
+      <img src="{{ route('groups.files.preview', [$file->group, $file]) }}" class="card-img-top img-fluid">
     </a>
   @endif
   <div class="card-body">
     <h5 class="card-title">
       <img src="{{ route('groups.files.icon', [$file->group, $file]) }}" style="width:1rem; height: 1rem">
-      <a href="{{ route('groups.files.show', [$file->group, $file]) }}">
+      <a up-follow href="{{ route('groups.files.show', [$file->group, $file]) }}">
         {{ $file->name }}
       </a>
     </h5>
     <p class="card-text">
       <small>
         <div>
-          <a href="{{ route('users.show', [$file->user]) }}">
+          <a up-follow href="{{ route('users.show', [$file->user]) }}">
             <i class="fa fa-user-circle"></i> {{ $file->user->name }}
           </a>
         </div>

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\HasStatus;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
@@ -19,6 +20,7 @@ class Group extends Model
     use Taggable;
     use Sluggable;
     use SearchableTrait;
+    use HasStatus;
 
     protected $rules = [
         'name' => 'required',
@@ -28,7 +30,7 @@ class Group extends Model
     protected $fillable = ['id', 'name', 'body', 'cover'];
     protected $casts = ['user_id' => 'integer', 'settings' => 'array'];
 
-    protected $keepRevisionOf = ['name', 'body', 'cover', 'color', 'group_type', 'address', 'settings'];
+    protected $keepRevisionOf = ['name', 'body', 'cover', 'color', 'group_type', 'address', 'settings', 'status'];
 
     /**** various group types ****/
     // open group, default
@@ -56,6 +58,7 @@ class Group extends Model
         ],
     ];
 
+
     /**
     * Return the sluggable configuration array for this model.
     *
@@ -67,6 +70,7 @@ class Group extends Model
             'slug' => [
                 'source' => 'name',
                 'reserved' => ['reply', 'reply-', 'admin-'],
+                'unique' => true,
             ],
         ];
     }

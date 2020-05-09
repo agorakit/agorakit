@@ -4,7 +4,7 @@
 
     <h1>{{config('agorakit.name')}} : @lang('Set your password')</h1>
 
-    <p>Use a strong password with at least 8 characters</p>
+    <p>@lang('Use a strong password with at least 8 characters')</p>
 
     <form method="POST" action="{{ url('register/password') }}">
         @honeypot
@@ -13,14 +13,14 @@
         <div class="form-group">
             <label >{{ trans('messages.password') }}</label>
             <div>
-                <input type="password" class="form-control" required="required" name="password">
+                <input type="password" class="form-control" required="required" name="password"  minlength="8">
             </div>
         </div>
 
         <div class="form-group">
             <label >{{ trans('messages.confirm_password') }}</label>
             <div >
-                <input type="password" class="form-control" required="required" name="password_confirmation">
+                <input type="password" class="form-control" required="required" name="password_confirmation" minlength="8">
             </div>
         </div>
 

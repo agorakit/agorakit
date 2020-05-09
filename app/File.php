@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\HasStatus;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,6 +18,7 @@ class File extends Model
     use RevisionableTrait;
     use Taggable;
     use SearchableTrait;
+    use HasStatus;
 
     protected $rules = [
         'name'     => 'required',
@@ -29,7 +31,7 @@ class File extends Model
     protected $dates = ['deleted_at'];
     protected $casts = ['user_id' => 'integer'];
 
-    protected $keepRevisionOf = ['name', 'path', 'filesize'];
+    protected $keepRevisionOf = ['name', 'path', 'filesize', 'status'];
 
     // Item type can be :
     // 0 : file (stored on the server)

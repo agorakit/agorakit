@@ -13,7 +13,7 @@
 
 
     <div class="name mr-2">
-      <a href="{{ route('groups.actions.show', [$action->group, $action]) }}">
+      <a up-follow href="{{ route('groups.actions.show', [$action->group, $action]) }}">
         {{ $action->name }}
       </a>
     </div>
@@ -33,7 +33,7 @@
 
     <br/>
     <div class="group-name">
-      <a href="{{ route('groups.show', [$action->group_id]) }}">
+      <a up-follow href="{{ route('groups.show', [$action->group_id]) }}">
         <span class="badge badge-secondary">
           @if ($action->group->isOpen())
             <i class="fa fa-globe" title="{{trans('group.open')}}"></i>

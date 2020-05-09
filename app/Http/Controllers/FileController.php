@@ -51,6 +51,7 @@ class FileController extends Controller
                 $files = \App\File::with('group', 'user')
         ->where('item_type', '<>', \App\File::FOLDER)
         ->whereIn('group_id', $groups)
+        ->orderBy('status', 'desc')
         ->orderBy('created_at', 'desc')->paginate(25);
             }
         } else {

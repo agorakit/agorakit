@@ -12,27 +12,25 @@
     margin-bottom: 0.8rem;
     padding-bottom: 0.8rem;
     border-bottom: 1px solid $border-color;
-    display: flex;
-    align-items: top;
 
     .unread
     {
       font-weight: bold;
     }
 
-      .name
+    .name
     {
       font-weight: bold;
-      display: block;
+      height: 1.6em;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-/*
-    .comment-count
+    .name a
     {
-      margin-left: 2em;
-      font-size: 0.8rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    */
 
 
     .summary
@@ -49,7 +47,7 @@
 
     .avatar
     {
-      margin-right: 20px;
+      margin-right: 1rem;
     }
 
     .avatar img
@@ -58,11 +56,6 @@
       height: 40px;
     }
 
-    .date, .unread
-    {
-      flex-shrink: 0;
-      padding-left: 20px;
-    }
 
 
     .group

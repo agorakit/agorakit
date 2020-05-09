@@ -246,4 +246,8 @@ return [
     'user_made_admin_successfuly' => 'User made admin successfully',
     'what'                        => 'what',
   ],
+  'pin' => 'Pin',
+  'unpin' => 'Unpin',
+  'archive' => 'Archive',
+  'unarchive' => 'Unarchive',
 ];

@@ -39,15 +39,13 @@
 
   <div class="credits">
     {{trans('messages.made_with')}}
-    <a href="https://www.agorakit.org">Agorakit ({{config('agorakit.version')}})</a>
+    <a up-follow href="https://www.agorakit.org">Agorakit ({{config('agorakit.version')}})</a>
   </div>
 
 
   <!-- Scripts -->
   <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{ asset('js/unpoly.min.js') }}"></script>
-  <script src="{{ asset('js/trumbowyg.min.js') }}"></script>
-
 
   @yield('js')
   @stack('js')

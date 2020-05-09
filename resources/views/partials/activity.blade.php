@@ -2,12 +2,12 @@
     <div class="activity">
         <div class="header">
             <span class="avatar"><img src="{{{{route('users.cover', [$activity->user, 'small'])}}}}" class="rounded-circle"/></span>
-            <a href="{{route('users.show', $activity->user)}}">{{$activity->user->name}}</a>
+            <a up-follow href="{{route('users.show', $activity->user)}}">{{$activity->user->name}}</a>
             {{trans('messages.activity_' . $activity->action)}}
-            <a href="{{$activity->linkToModel()}}">{{$activity->model->name}}</a>
+            <a up-follow href="{{$activity->linkToModel()}}">{{$activity->model->name}}</a>
             {{$activity->created_at->diffForHumans()}}
             {{trans('messages.in')}}
-            <a href="{{route('groups.show', $activity->group)}}">{{$activity->group->name}}</a>
+            <a up-follow href="{{route('groups.show', $activity->group)}}">{{$activity->group->name}}</a>
         </div>
 
         <div class="detail">
@@ -15,7 +15,7 @@
         </div>
 
         <div class="action">
-            <a href="{{$activity->linkToModel()}}" class="btn btn-primary btn-sm">{{trans('messages.visit')}}</a>
+            <a up-follow href="{{$activity->linkToModel()}}" class="btn btn-primary btn-sm">{{trans('messages.visit')}}</a>
         </div>
 
     </div>
@@ -26,12 +26,12 @@
     <div class="activity">
         <div class="header">
             <span class="avatar"><img src="{{{{route('users.cover', [$activity->user, 'small'])}}}}" class="rounded-circle"/></span>
-            <a href="{{route('users.show', $activity->user)}}">{{$activity->user->name}}</a>
+            <a up-follow href="{{route('users.show', $activity->user)}}">{{$activity->user->name}}</a>
             {{trans('messages.activity_' . $activity->action)}}
-            <a href="{{$activity->linkToModel()}}">{{$activity->model->name}}</a>
+            <a up-follow href="{{$activity->linkToModel()}}">{{$activity->model->name}}</a>
             {{$activity->created_at->diffForHumans()}}
             {{trans('messages.in')}}
-            <a href="{{route('groups.show', $activity->group)}}">{{$activity->group->name}}</a>
+            <a up-follow href="{{route('groups.show', $activity->group)}}">{{$activity->group->name}}</a>
         </div>
 
         <div class="detail">
@@ -39,7 +39,7 @@
         </div>
 
         <div class="action">
-            <a href="{{$activity->linkToModel()}}" class="btn btn-primary btn-sm">{{trans('messages.visit')}}</a>
+            <a up-follow href="{{$activity->linkToModel()}}" class="btn btn-primary btn-sm">{{trans('messages.visit')}}</a>
         </div>
 
     </div>
@@ -49,12 +49,12 @@
     <div class="activity">
         <div class="header">
             <span class="avatar"><img src="{{{{route('users.cover', [$activity->user, 'small'])}}}}" class="rounded-circle"/></span>
-            <a href="{{route('users.show', $activity->user)}}">{{$activity->user->name}}</a>
+            <a up-follow href="{{route('users.show', $activity->user)}}">{{$activity->user->name}}</a>
             {{trans('messages.activity_' . $activity->action)}}
-            <a href="{{$activity->linkToModel()}}">{{$activity->model->name}}</a>
+            <a up-follow href="{{$activity->linkToModel()}}">{{$activity->model->name}}</a>
             {{$activity->created_at->diffForHumans()}}
             {{trans('messages.in')}}
-            <a href="{{route('groups.show', $activity->group)}}">{{$activity->group->name}}</a>
+            <a up-follow href="{{route('groups.show', $activity->group)}}">{{$activity->group->name}}</a>
         </div>
 
         <div class="detail">
@@ -62,7 +62,7 @@
         </div>
 
         <div class="action">
-            <a href="{{$activity->linkToModel()}}" class="btn btn-primary btn-sm">{{trans('messages.visit')}}</a>
+            <a up-follow href="{{$activity->linkToModel()}}" class="btn btn-primary btn-sm">{{trans('messages.visit')}}</a>
         </div>
 
     </div>
@@ -73,12 +73,12 @@
     <div class="activity">
         <div class="header">
             <span class="avatar"><img src="{{{{route('users.cover', [$activity->user, 'small'])}}}}" class="rounded-circle"/></span>
-            <a href="{{route('users.show', $activity->user)}}">{{$activity->user->name}}</a>
+            <a up-follow href="{{route('users.show', $activity->user)}}">{{$activity->user->name}}</a>
             {{trans('messages.activity_' . $activity->action)}}
-            <a href="{{$activity->linkToModel()}}">{{$activity->model->discussion->name}}</a>
+            <a up-follow href="{{$activity->linkToModel()}}">{{$activity->model->discussion->name}}</a>
             {{$activity->created_at->diffForHumans()}}
             {{trans('messages.in')}}
-            <a href="{{route('groups.show', $activity->group)}}">{{$activity->group->name}}</a>
+            <a up-follow href="{{route('groups.show', $activity->group)}}">{{$activity->group->name}}</a>
         </div>
 
         <div class="detail">
@@ -86,7 +86,7 @@
         </div>
 
         <div class="action">
-            <a href="{{$activity->linkToModel()}}" class="btn btn-primary btn-sm">{{trans('messages.reply')}}</a>
+            <a up-follow href="{{$activity->linkToModel()}}" class="btn btn-primary btn-sm">{{trans('messages.reply')}}</a>
         </div>
     </div>
 @endif

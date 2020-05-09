@@ -1,5 +1,15 @@
 php artisan down
+
 git pull
 composer install
 php artisan migrate --force
+
+
+
+php artisan view:cache
+php artisan config:cache
+php artisan event:cache
+php artisan route:clear
+
+
 php artisan up

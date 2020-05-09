@@ -3,10 +3,10 @@
 <strong>{{trans('messages.hello')}}</strong>
 
 
-<a href="{{route('users.show', $group_user)}}">{{$group_user->name}}</a>
+<a up-follow href="{{route('users.show', $group_user)}}">{{$group_user->name}}</a>
 {{trans('messages.thinks_that_you_might_want_to_join')}} "
-<a href="{{route('groups.show',  [$membership->group] )}}">{{$membership->group->name}}</a>"
-{{trans('messages.inside')}} <a href="{{route('index')}}">{{setting('name')}}</a>
+<a up-follow href="{{route('groups.show',  [$membership->group] )}}">{{$membership->group->name}}</a>"
+{{trans('messages.inside')}} <a up-follow href="{{route('index')}}">{{setting('name')}}</a>
 
 
 

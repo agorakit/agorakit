@@ -244,4 +244,8 @@ return [
     'user_made_admin_successfuly' => 'Benutzer-admin erfolgreich',
     'what'                        => 'was',
   ],
+  'pin' => 'Pin',
+  'unpin' => 'Lösen',
+  'archive' => 'Archiv',
+  'unarchive' => 'Auspacken',
 ];

@@ -1,6 +1,6 @@
 
 /******************************** Mobile **************************************/
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 576px) {
 
 
   .avatar img
@@ -9,12 +9,17 @@
     height: 25px;
   }
 
+  .container
+  {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 
   .main-container
   {
     margin: 0;
-    padding: 1.5rem;
     border-radius: 0;
+    padding-top: 1rem;
   }
 
   .nav-tabs

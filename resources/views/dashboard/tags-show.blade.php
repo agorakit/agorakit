@@ -4,8 +4,8 @@
 
   <div class="d-flex justify-content-between">
     <h1 class="name mb-4">
-      <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
-      <a href="{{ route('tags.index') }}">@lang('Tags')</a> <i class="fa fa-angle-right"></i>
+      <a up-follow href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
+      <a up-follow href="{{ route('tags.index') }}">@lang('Tags')</a> <i class="fa fa-angle-right"></i>
       @lang('Items tagged with') <span class="badge badge-primary" style="background-color: {{$tag->color}}">{{ $tag }}</span>
     </h1>
 

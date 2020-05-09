@@ -41,6 +41,7 @@ class GroupDiscussionController extends Controller
             ->has('user')
             ->with('userReadDiscussion', 'user', 'group', 'tags')
             ->withCount('comments')
+            ->orderBy('status', 'desc')
             ->orderBy('updated_at', 'desc')
             ->when($tag, function ($query) use ($tag) {
                 return $query->withAnyTags($tag);
@@ -282,5 +283,25 @@ class GroupDiscussionController extends Controller
         ->with('group', $group)
         ->with('discussion', $discussion)
         ->with('tab', 'discussion');
+    }
+
+    public function pin(Group $group, Discussion $discussion)
+    {
+        $this->authorize('pin', $discussion);
+        $discussion->togglePin();
+        $discussion->timestamps = false;
+        $discussion->save();
+        flash(trans('messages.ressource_updated_successfully'));
+        return redirect()->back();
+    }
+
+    public function archive(Group $group, Discussion $discussion)
+    {
+        $this->authorize('archive', $discussion);
+        $discussion->toggleArchive();
+        $discussion->timestamps = false;
+        $discussion->save();
+        flash(trans('messages.ressource_updated_successfully'));
+        return redirect()->back();
     }
 }

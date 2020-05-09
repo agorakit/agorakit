@@ -58,7 +58,7 @@
 
 
 
-            <p>{{trans('membership.if_you_want_to_leave_this_group')}}, <a href="{{action('GroupMembershipController@destroyConfirm', $group)}}">{{trans('membership.click_here')}}</a></p>
+            <p>{{trans('membership.if_you_want_to_leave_this_group')}}, <a up-follow href="{{action('GroupMembershipController@destroyConfirm', $group)}}">{{trans('membership.click_here')}}</a></p>
 
 
         </div>

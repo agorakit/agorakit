@@ -5,7 +5,7 @@
   <div class="toolbox d-md-flex">
     <div class="d-flex mb-2">
       <h1>
-        <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.agenda') }}
+        <a up-follow href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.agenda') }}
       </h1>
     </div>
 

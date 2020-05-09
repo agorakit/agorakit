@@ -44,15 +44,15 @@
       @foreach( $memberships as $membership )
         <tr>
           <td>
-            <a href="{{ route('users.show', $membership->user) }}"> <span class="avatar"><img src="{{route('users.cover', [$membership->user, 'small'])}}" class="rounded-circle"/></span> {{ $membership->user->name }}</a>
+            <a up-follow href="{{ route('users.show', $membership->user) }}"> <span class="avatar"><img src="{{route('users.cover', [$membership->user, 'small'])}}" class="rounded-circle"/></span> {{ $membership->user->name }}</a>
           </td>
 
           <td data-order="{{$membership->created_at}}">
-            <a href="{{ route('users.show', $membership->user) }}">{{ $membership->created_at->diffForHumans() }}</a>
+            <a up-follow href="{{ route('users.show', $membership->user) }}">{{ $membership->created_at->diffForHumans() }}</a>
           </td>
 
           <td data-order="{{ $membership->user->updated_at}}">
-            <a href="{{ route('users.show', $membership->user) }}">{{ $membership->user->updated_at->diffForHumans() }}</a>
+            <a up-follow href="{{ route('users.show', $membership->user) }}">{{ $membership->user->updated_at->diffForHumans() }}</a>
           </td>
 
 

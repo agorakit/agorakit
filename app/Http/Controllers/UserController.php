@@ -13,6 +13,8 @@ use Image;
 use Mail;
 use Redirect;
 use Storage;
+use Illuminate\Support\Facades\Hash;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class UserController extends Controller
 {
@@ -170,7 +172,7 @@ class UserController extends Controller
             $previous_email = $user->email;
             $user->email = $request->input('email');
             $user->body = $request->input('body');
-            $user->username = $request->input('username');
+
 
             if ($user->address != $request->input('address')) {
                 // we need to update user address and geocode it
@@ -181,6 +183,21 @@ class UserController extends Controller
                     flash(trans('messages.ressource_geocoded_successfully'));
                 }
             }
+
+            // handle username change
+            if ($user->username != $request->input('username')) {
+                $existing_user = User::where('username', $request->input('username'))->first();
+                if ($existing_user) {
+                    flash(trans('This username is taken, another one has been generated'));
+                    $user->username = SlugService::createSlug(User::class, 'username', $request->input('username'));
+                }
+                else {
+                    $user->username = $request->input('username');
+                }
+            }
+
+
+
 
             // handle tags
             if ($request->get('tags')) {
@@ -228,6 +245,18 @@ class UserController extends Controller
                 $user->token = str_random(30);
                 Mail::to($user)->send(new UserConfirmation($user));
             }
+
+            // handle password change
+            if ($request->input('password')) {
+                // validate password
+                $request->validate([
+                    'password' => ['required', 'string', 'min:8', 'confirmed'],
+                ]);
+
+                $user->password = Hash::make($request->input('password'));
+
+            }
+
 
             $user->save();
 

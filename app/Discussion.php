@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\HasStatus;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -16,6 +17,7 @@ class Discussion extends Model
     use SoftDeletes;
     use Taggable;
     use SearchableTrait;
+    use HasStatus;
 
     protected $rules = [
     'name'     => 'required',
@@ -24,7 +26,7 @@ class Discussion extends Model
     'group_id' => 'required|exists:groups,id',
     ];
 
-    protected $keepRevisionOf = ['name', 'body'];
+    protected $keepRevisionOf = ['name', 'body', 'status'];
 
     protected $table = 'discussions';
     protected $fillable = ['name', 'body', 'group_id'];

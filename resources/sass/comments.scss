@@ -9,8 +9,11 @@
 .comment
 {
     border-bottom: 1px solid #ccc;
-    padding-bottom: 20px;
-    margin-bottom: 20px;
+
+    p:last-child
+    {
+        margin-bottom: 0
+    }
 
     .body
     {

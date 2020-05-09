@@ -19,7 +19,7 @@
           <div class="mb-3">
             @foreach ($user->groups as $group)
               @unless ($group->isSecret())
-                <a href="{{ route('groups.show', [$group]) }}" class="badge badge-secondary">
+                <a up-follow href="{{ route('groups.show', [$group]) }}" class="badge badge-secondary">
 
                   @if ($group->isOpen())
                     <i class="fa fa-globe" title="{{trans('group.open')}}"></i>

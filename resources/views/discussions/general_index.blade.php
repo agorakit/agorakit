@@ -15,12 +15,12 @@
   @if ($discussion->unReadCount() > 0)
   <tr>
     <td>
-      <a href="{{ route('groups.discussions.show', [$group, $discussion]) }}">{{ $discussion->name }}</a>
+      <a up-follow href="{{ route('groups.discussions.show', [$group, $discussion]) }}">{{ $discussion->name }}</a>
     </td>
 
     <td>
       @unless (is_null ($discussion->user))
-      <a href="{{ route('users.show', $discussion->user) }}">{{ $discussion->user->name }}</a>
+      <a up-follow href="{{ route('users.show', $discussion->user) }}">{{ $discussion->user->name }}</a>
       @endunless
     </td>
 

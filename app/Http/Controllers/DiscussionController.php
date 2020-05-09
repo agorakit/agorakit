@@ -52,7 +52,9 @@ class DiscussionController extends Controller
             ->when($tag, function ($query) use ($tag) {
                 return $query->withAnyTags($tag);
             })
-            ->orderBy('updated_at', 'desc')->paginate(25);
+            ->orderBy('status', 'desc')
+            ->orderBy('updated_at', 'desc')
+            ->paginate(25);
         } else { // anon get public groups
 
             $groups = \App\Group::public()->get()->pluck('id');
@@ -63,7 +65,9 @@ class DiscussionController extends Controller
             ->when($tag, function ($query) use ($tag) {
                 return $query->withAnyTags($tag);
             })
-            ->orderBy('updated_at', 'desc')->paginate(25);
+            ->orderBy('status', 'desc')
+            ->orderBy('updated_at', 'desc')
+            ->paginate(25);
         }
 
         $tags = \App\Discussion::allTags();

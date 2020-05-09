@@ -36,7 +36,12 @@ class Notification extends Mailable
     */
     public function build()
     {
-        \App::setLocale(config('app.locale'));
+        if ($this->user->getPreference('locale')) {
+            \App::setLocale($this->user->getPreference('locale'));
+        }
+        else {
+            \App::setLocale(config('app.locale'));
+        }
 
         $message = $this->markdown('emails.notification')
         ->subject('['.setting('name').'] '.trans('messages.news_from_group_email_subject').' "'.$this->group->name.'"');

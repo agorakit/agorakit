@@ -1,13 +1,19 @@
 
 <div class="form-group">
     <label for="tags">{{trans('messages.tags')}}</label>
+
+    <div class="small-help">
+        <i class="fas fa-info-circle"></i>
+        {{trans('messages.tags_help')}}
+    </div>
+
+
     <select class="form-control tags"
     name="tags[]"
     multiple="multiple"
     @unless (isset($group) && $group->tagsAreLimited())
         data-allow-new-tags="true"
-    @endunless
-    >
+    @endunless>
 
     @if (isset($group) && $group->tagsAreLimited())
         @if (isset($model_tags))
@@ -35,5 +41,6 @@
     @endif
 
 </select>
-<span id="tagshelp" class="help-block">{{trans('messages.tags_help')}}</span>
+
+
 </div>

@@ -23,7 +23,7 @@
 
   <div class="form-group">
     {!! Form::submit(trans('membership.invite_button'), ['class' => 'btn btn-primary btn-lg']) !!}
-    <a href="{{url('/')}}">{{trans('messages.cancel')}}</a>
+    <a up-follow href="{{url('/')}}">{{trans('messages.cancel')}}</a>
   </div>
 
 

@@ -77,7 +77,7 @@ class CheckMailbox extends Command
         if (config('agorakit.inbox_host')) {
             // open mailbox
 
-            $this->server = new Server(config('agorakit.inbox_host'));
+            $this->server = new Server(config('agorakit.inbox_host'), config('agorakit.inbox_port'), config('agorakit.inbox_flags'));
 
             // $this->connection is instance of \Ddeboer\Imap\Connection
             $this->connection = $this->server->authenticate(config('agorakit.inbox_username'), config('agorakit.inbox_password'));
@@ -296,14 +296,20 @@ class CheckMailbox extends Command
             return true;
         }
 
+        if (array_key_exists('Delivered-To', $message_headers)) {
+            if ($message_headers['Delivered-To'] == 'Autoresponder') {
+                return true;
+            }
+        }
+
 
         return false;
 
     }
 
     /**
-     * Move the provided $message to a folder named $folder
-     */
+    * Move the provided $message to a folder named $folder
+    */
     public function moveMessage(Message $message, $folder)
     {
         if ($this->connection->hasMailbox($folder)) {
