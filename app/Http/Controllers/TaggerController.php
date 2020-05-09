@@ -45,29 +45,47 @@ class TaggerController extends Controller
     public function tag(Request $request, $type, $id, $name)
     {
 
-            if ($type == 'discussions') {
-                $model = Discussion::findOrFail($id);
-            }
+        if ($type == 'discussions') {
+            $model = Discussion::findOrFail($id);
+        }
 
-            if ($type == 'actions') {
-                $model = Action::findOrFail($id);
-            }
+        if ($type == 'actions') {
+            $model = Action::findOrFail($id);
+        }
 
-            if ($type == 'files') {
-                $model = File::findOrFail($id);
-            }
+        if ($type == 'files') {
+            $model = File::findOrFail($id);
+        }
 
-            if ($model->hasTag($name)) {
-                $model->unTag($name);
-            }
-            else {
-                $model->tag($name);
-            }
+        if ($model->hasTag($name)) {
+            $model->unTag($name);
+        }
+        else {
+            $model->tag($name);
+        }
 
-            return redirect()->route('tagger.index', [$type, $id]);
+        return redirect()->route('tagger.index', [$type, $id]);
     }
 
 
+    public function add(Request $request, $type, $id)
+    {
+        if ($type == 'discussions') {
+            $model = Discussion::findOrFail($id);
+        }
+
+        if ($type == 'actions') {
+            $model = Action::findOrFail($id);
+        }
+
+        if ($type == 'files') {
+            $model = File::findOrFail($id);
+        }
+
+        $model->tag($request->input('name'));
+
+        return redirect()->route('tagger.index', [$type, $id]);
+    }
 
 
     /**

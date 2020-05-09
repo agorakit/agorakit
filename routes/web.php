@@ -116,6 +116,7 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/tagger/{type}/{id}', 'TaggerController@index')->name('tagger.index');
     Route::get('/tagger/{type}/{id}/tag/{name}', 'TaggerController@tag')->name('tagger.tag');
+    Route::post('/tagger/{type}/{id}', 'TaggerController@add')->name('tagger.add');
 
 
 
