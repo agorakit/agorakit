@@ -13,6 +13,8 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
+    <a href="groups" up-drawer=".main-container">Test menu</a>
+
     <div class="collapse navbar-collapse" id="agorakit_navbar">
 
         <div class="navbar-nav mr-auto">
