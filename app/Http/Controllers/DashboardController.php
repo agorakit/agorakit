@@ -49,9 +49,8 @@ class DashboardController extends Controller
             ->withCount('comments')
             ->whereIn('group_id', $groups)
             ->where('status', '>=', ContentStatus::NORMAL)
-            ->orderBy('status', 'desc')
             ->orderBy('updated_at', 'desc')
-            ->take(10)
+            ->take(20)
             ->get();
 
             $actions = Action::with('group', 'tags')
@@ -65,7 +64,6 @@ class DashboardController extends Controller
             ->has('group')
             ->whereIn('group_id', $groups)
             ->where('status', '>=', ContentStatus::NORMAL)
-            ->orderBy('status', 'desc')
             ->orderBy('updated_at', 'desc')
             ->take(10)
             ->get();
