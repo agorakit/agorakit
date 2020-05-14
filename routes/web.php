@@ -119,6 +119,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/tagger/{type}/{id}', 'TaggerController@add')->name('tagger.add');
 
 
+    /* Drawer navigation */
+    Route::get('navigation', 'NavigationController@show')->name('navigation.main');
+
+
 
 
     /* Pages */

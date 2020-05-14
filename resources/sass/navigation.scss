@@ -1,0 +1,39 @@
+
+.navigation .item, .navigation .title
+{
+    display: block;
+    color: black;
+    padding: 0.7rem;
+    padding-right: 2rem;
+}
+
+.navigation .item:hover, .navigation .title:hover
+{
+    background-color: #eee;
+    text-decoration: none;
+}
+
+.navigation .item
+{
+    border-bottom: 1px solid #ccc;
+    color: #333;
+}
+
+.navigation .item:last-child
+{
+    border-bottom: none;
+}
+
+.navigation .title
+{
+    font-weight: bold;
+    text-align: center;
+    color: #aaa;
+    text-transform: uppercase;
+
+}
+
+
+.up-modal-content {
+    border-radius: 0;
+}
