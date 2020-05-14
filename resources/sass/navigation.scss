@@ -19,7 +19,7 @@
     color: #333;
 }
 
-.navigation:last-child
+.navigation .item:last-child
 {
     border-bottom: none;
 }
@@ -28,6 +28,8 @@
 {
     font-weight: bold;
     text-align: center;
+    color: #aaa;
+    text-transform: uppercase;
 
 }
 

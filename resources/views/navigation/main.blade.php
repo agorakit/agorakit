@@ -3,6 +3,16 @@
 
     <div class="navigation-container">
 
+        <div class="navigation ">
+
+            <a up-target="body" class="item" href="{{route('users.show', Auth::user())}}">
+                <span class="avatar mr-2"><img src="{{route('users.cover', [Auth::user(), 'small'])}}" class="rounded-circle" style="width:32px; height:32px"/></span> {{ Auth::user()->name }}
+            </a>
+
+
+        </div>
+
+
         <!-- search-->
         <form up-target="body" class="form-inline my-2" role="search" action="{{url('search')}}" method="get">
             <div class="input-group">
@@ -16,6 +26,8 @@
 
 
         <div class="navigation">
+
+
 
 
             <a up-target="body" class="title" class="item" href="{{ action('GroupController@indexOfMyGroups') }}">
@@ -35,14 +47,14 @@
 
             <div class="divider"></div>
 
-            <a up-target="body"  class="item"  href="{{ route('groups.create') }}">
+            <a up-target="body"  class="item text-secondary"  href="{{ route('groups.create') }}">
                 <i class="fa fa-plus-circle"></i> {{ trans('group.create_a_group_button') }}
             </a>
 
 
 
-            <div class="title mt-5">
-                <i class="fa fa-asterisk"></i>   @lang('Overview')
+            <div class="title mt-3">
+                @lang('Overview')
             </div>
 
             <a up-target="body" class="item" class="dropdown-item" href="{{ action('GroupController@index') }}">
@@ -83,7 +95,9 @@
             <!-- Admin -->
             @if (Auth::user()->isAdmin())
 
-                <div class="title">Admin</div>
+                <div class="title mt-3">
+                    Admin
+                </div>
 
                 <a up-target="body" class="item" href="{{ url('/admin/settings') }}">
                     <i class="fa fa-cog"></i> Settings
@@ -109,6 +123,19 @@
                     <i class="fa fa-keyboard-o"></i> Logs
                 </a>
             @endif
+
+            <div class="title mt-3">My account</div>
+            <a up-target="body" class="item" href="{{route('users.show', Auth::user())}}"><i class="fa fa-btn fa-user"></i> {{ trans('messages.profile') }}</a>
+            <a up-target="body" class="item" href="{{route('users.edit', Auth::user())}}"><i class="fa fa-btn fa-edit"></i> {{ trans('messages.edit_my_profile') }}</a>
+
+            <a class="item" href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                <i class="fa fa-btn fa-sign-out"></i> {{ trans('messages.logout') }}
+            </a>
+
+            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                @csrf
+                @honeypot
+            </form>
 
 
         </div>
