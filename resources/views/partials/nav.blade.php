@@ -9,11 +9,18 @@
         <span class="ml-1 d-lg-none d-xl-inline">{{setting('name')}}</span>
     </a>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#agorakit_navbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+    <!-- Mobile navigation drawer toggler : -->
+    <div class="navbar-nav d-lg-none">
+        <div class="nav-item">
+            <a href="{{route('navigation.main')}}" up-history="false" up-drawer=".navigation-container" class="nav-link">
+                <i class="fas fa-bars"></i>
+                Menu
+            </a>
+        </div>
+    </div>
 
 
+    <!-- Classic navigation shown on larger screens : -->
     <div class="collapse navbar-collapse" id="agorakit_navbar">
 
         <div class="navbar-nav mr-auto">
@@ -86,28 +93,6 @@
             </div>
 
 
-
-
-
-            <div class="nav-item">
-
-            </div>
-
-            <div class="nav-item">
-
-            </div>
-
-
-
-
-
-            <div class="nav-item dropdown">
-
-                <div class="dropdown-menu">
-
-                </div>
-            </div>
-
             <div class="nav-item">
                 <a class="nav-link" href="{{ action('PageController@help') }}">
                     <i class="fa fa-info-circle"></i>
@@ -116,12 +101,6 @@
             </div>
 
         </div>
-
-
-
-
-
-
 
 
 
