@@ -9,9 +9,20 @@
         <span class="ml-1 d-lg-none d-xl-inline">{{setting('name')}}</span>
     </a>
 
+    <div class="navbar-nav d-lg-none">
+        <div class="nav-item">
+            <a href="navigation" up-drawer=".navigation-container" class="nav-link">
+                <i class="fas fa-bars"></i>
+                Menu
+            </a>
+        </div>
+    </div>
+
+<!--
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#agorakit_navbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+-->
 
 
     <div class="collapse navbar-collapse" id="agorakit_navbar">
