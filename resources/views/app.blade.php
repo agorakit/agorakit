@@ -82,6 +82,11 @@
   @yield('footer')
 
 
+  <!-- Custom footer content added by admin -->
+  {!!setting('custom_footer')!!}
+
+
+
 
 </body>
 </html>

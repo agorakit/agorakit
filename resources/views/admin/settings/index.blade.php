@@ -23,6 +23,7 @@
         <a class="nav-link active"  data-toggle="pill" href="#presentation" role="tab"  aria-selected="true">Presentation & logo</a>
         <a class="nav-link" data-toggle="pill" href="#permissions" role="tab">Permissions</a>
         <a class="nav-link"  data-toggle="pill" href="#notifications" role="tab">Notifications</a>
+        <a class="nav-link"  data-toggle="pill" href="#custom" role="tab">Custom content</a>
         <a class="nav-link"  data-toggle="pill" href="#mail" role="tab">Post by mail</a>
       </div>
     </div>
@@ -111,6 +112,19 @@
             {!! Form::checkbox('notify_admins_on_group_create','yes' , setting('notify_admins_on_group_create')) !!}
             {{ __('Notify administrators when a new group is created')}}
           </div>
+        </div>
+
+
+        <div class="tab-pane fade" id="custom" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+          <h2>{{ __('Custom footer code')}}</h2>
+          <div class="form-group">
+            <div class="setting-help">
+              {{ __('You can add html / css / js at the footer of each page here')}}
+            </div>
+            <textarea name="custom_footer" class="form-control">{!!setting('custom_footer')!!}</textarea>
+
+          </div>
+
         </div>
 
 
