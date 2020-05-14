@@ -61,7 +61,7 @@
 
 
 		<div class="d-flex justify-content-end align-items-center mt-3">
-			<a class="mr-4" href="{{route('password.email')}}">{{ trans('messages.password_reset') }}</a>
+			<a class="mr-4" href="{{route('password.request')}}">{{ trans('messages.password_reset') }}</a>
 			<button type="submit" class="btn btn-primary btn-lg">{{ trans('messages.login') }}</button>
 		</div>
 
