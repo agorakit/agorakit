@@ -145,28 +145,41 @@ Add a calendar to any div with the calendar class
 - data-locale to define the correct locale
 - data-json for the json url feed to use
 */
-up.$compiler('.calendar', function($element, data) {
 
-	var json = $element[0].getAttribute("data-json")
-	var locale = $element[0].getAttribute("data-locale")
-	$element.fullCalendar({
-		lang: locale,
+up.compiler('.calendar', function(element, data) {
+
+	var json = element.getAttribute("data-json")
+	var locale = element.getAttribute("data-locale")
+	var calendar = new FullCalendar.Calendar(element, {
+		plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
+		locale: locale,
 		events: json,
+		selectable: true,
 		header: {
-			left: 'prev,next',
+			left: 'prev,next today',
 			center: 'title',
-			right: 'month,agendaWeek,agendaDay'
+			right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
 		},
-		eventClick:  function(event, jsEvent, view) {
-			up.modal.visit(event.url, { target: '.content' });
-			return false;
+		/*
+		dateClick: function(info) {
+			alert('clicked ' + info.dateStr);
 		},
-		eventRender: function(event, element)
+		select: function(info) {
+			alert('selected ' + info.startStr + ' to ' + info.endStr);
+		},
+		*/
+		eventClick:  function(info) {
+			info.jsEvent.preventDefault(); // don't let the browser navigate
+			up.modal.visit(info.event.url, { target: '.content' });
+		},
+		eventRender: function(info)
 		{
-			$(element).tooltip({title: event.group_name + ' : ' + event.title + ' : ' + event.summary});
+			$(info.el).tooltip({title: info.event.extendedProps.group_name});
 		}
 	});
+	calendar.render();
 });
+
 
 /*
 A simple spinner that is shown when a request takes too long

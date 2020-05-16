@@ -7,24 +7,30 @@
 
   <link rel="shortcut icon" href="{{{ asset('logo/favicon.png') }}}">
 
+  <!-- font awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/v4-shims.css">
 
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" media="print" onload="this.media='all'; this.onload=null;">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/v4-shims.css" media="print" onload="this.media='all'; this.onload=null;">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css" media="print" onload="this.media='all'; this.onload=null;">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" media="print" onload="this.media='all'; this.onload=null;">
+  <!-- full calendar -->
+  <link rel="stylesheet" href="https://unpkg.com/@fullcalendar/core@4.4.0/main.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/@fullcalendar/daygrid@4.4.0/main.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/@fullcalendar/timegrid@4.4.0/main.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/@fullcalendar/list@4.4.0/main.min.css">
 
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css" media="print" onload="this.media='all'; this.onload=null;">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css">
 
-<link rel="stylesheet" href="{{ mix('/css/app.css') }}">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css">
+
+  <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
 
 
-<!-- additional css -->
+  <!-- additional css -->
 
-@yield('css')
-@stack('css')
+  @yield('css')
+  @stack('css')
 
-<!-- head -->
-@yield('head')
+  <!-- head -->
+  @yield('head')
 </head>
 
 <body>
@@ -63,11 +69,19 @@
   <script src="{{ asset('js/unpoly.min.js') }}"></script>
   <script src="{{ asset('js/ckeditor.js') }}" defer></script>
 
-  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js" defer></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js" defer></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/lang-all.js" defer></script>
+  <!-- Full calendar-->
+  <script src='https://unpkg.com/@fullcalendar/core@4.4.0/locales/{{App::getLocale()}}.js'></script>
+  <script src="https://unpkg.com/@fullcalendar/core@4.4.0/main.min.js" defer></script>
+
+  <script src="https://unpkg.com/@fullcalendar/interaction@4.4.0/main.min.js" defer></script>
+  <script src="https://unpkg.com/@fullcalendar/daygrid@4.4.0/main.min.js" defer></script>
+  <script src="https://unpkg.com/@fullcalendar/timegrid@4.4.0/main.min.js" defer></script>
+  <script src="https://unpkg.com/@fullcalendar/list@4.4.0/main.min.js" defer></script>
+
+  <!-- Selectize-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" defer></script>
 
+  <!-- Datatables-->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js" defer></script>
   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" defer></script>
   <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" defer></script>
