@@ -15,27 +15,18 @@ $theme-colors: (
   "info": rgb(7, 87, 139),
 );
 
-/*
-$alert-bg-level:     -6;
-$alert-border-level:  0;
-$alert-color-level:    10;
-*/
 
 
 // Typography
-$font-family-sans-serif: 'Lato', sans-serif;
+$font-family-sans-serif:  'Nunito', sans-serif;
 $font-size-base: 0.95rem;
 $font-weight-base: 400;
 $line-height-base: 1.5;
-//$text-color: #636b6f;
-
-// Inputs
-//$input-border-color: lighten($text-color, 40%);
-//$input-placeholder-color: lighten($text-color, 30%);
+$text-color: #636b6f;
 
 
 $grid-gutter-width:           2rem;
-$headings-font-family:       'Roboto Condensed', sans-serif;
+$headings-font-family:       'Roboto', sans-serif;
 $headings-font-weight: 400;
 
 $h1-font-size:                $font-size-base * 2.2;
