@@ -95,6 +95,7 @@ class GroupActionController extends Controller
 
         foreach ($actions as $action) {
             $event['id'] = $action->id;
+            $event['group_name'] = $group->name;
             $event['title'] = $action->name.' ('.$group->name.')';
             $event['description'] = $action->body.' <br/> '.$action->location;
             $event['body'] = $action->body;

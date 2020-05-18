@@ -172,10 +172,13 @@ up.compiler('.calendar', function(element, data) {
 			info.jsEvent.preventDefault(); // don't let the browser navigate
 			up.modal.visit(info.event.url, { target: '.content' });
 		},
+
 		eventRender: function(info)
 		{
-			$(info.el).tooltip({title: info.event.extendedProps.group_name});
+			content = '<strong>' + info.event.extendedProps.group_name + '</strong><br/>' + info.event.extendedProps.summary;
+			$(info.el).tooltip({title: content, html: true});
 		}
+
 	});
 	calendar.render();
 });
