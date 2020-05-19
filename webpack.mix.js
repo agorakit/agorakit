@@ -13,6 +13,7 @@ mix.browserSync({proxy: '127.0.0.1:8000'});
 
 // unpoly
 mix.copy('node_modules/unpoly/dist/unpoly.min.js', 'public/js/unpoly.js');
+mix.copy('node_modules/unpoly/dist/unpoly.min.css', 'public/css/unpoly.css');
 
 // fullcalendar : we combine all files
 // js
