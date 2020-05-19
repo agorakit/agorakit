@@ -7,6 +7,8 @@
 
   <link rel="shortcut icon" href="{{{ asset('logo/favicon.png') }}}">
 
+  <link rel="manifest" href="{{route('pwa.index')}}">
+
   <!-- font awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/v4-shims.css">

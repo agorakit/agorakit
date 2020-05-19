@@ -89,6 +89,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
     Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
+    // PWA manifest.json
+
+    Route::get('manifest.webmanifest', 'PwaController@index')->name('pwa.index');
+
 
     /*
     Homepage
