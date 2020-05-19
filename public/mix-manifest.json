@@ -1,5 +1,9 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/js/unpoly.min.js": "/js/unpoly.min.js"
+    "/js/unpoly.js": "/js/unpoly.js",
+    "/js/fullcalendar.js": "/js/fullcalendar.js",
+    "/css/fullcalendar.css": "/css/fullcalendar.css",
+    "/js/selectize.js": "/js/selectize.js",
+    "/css/selectize.css": "/css/selectize.css"
 }

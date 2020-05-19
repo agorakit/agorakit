@@ -10,22 +10,28 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
-        "axios": "^0.18.1",
-        "bootstrap": "^4.3",
+        "axios": "^0.19.2",
+        "bootstrap": "^4.5.0",
         "browser-sync": "^2.26.7",
         "browser-sync-webpack-plugin": "^2.2.2",
-        "cross-env": "^5.2.1",
-        "jquery": "^3.4.1",
-        "laravel-mix": "^4.1.4",
+        "cross-env": "^7.0.2",
+        "jquery": "^3.5.1",
+        "laravel-mix": "^5.0.4",
+        "laravel-mix-purgecss": "^5.0.0",
         "lodash": "^4.17.15",
-        "popper.js": "^1.15.0",
-        "resolve-url-loader": "^2.3.2",
-        "sass": "^1.22.10",
-        "sass-loader": "^7.3.1",
+        "popper.js": "^1.16.1",
+        "resolve-url-loader": "^3.1.1",
+        "sass": "^1.26.5",
+        "sass-loader": "^8.0.2",
         "vue": "^2.6.10",
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "@fullcalendar/core": "^4.4.0",
+        "@fullcalendar/daygrid": "^4.4.0",
+        "@fullcalendar/list": "^4.4.0",
+        "@fullcalendar/timegrid": "^4.4.0",
+        "selectize.js": "^0.12.12",
         "unpoly": "^0.61.1"
     }
 }

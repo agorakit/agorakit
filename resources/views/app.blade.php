@@ -11,17 +11,14 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/v4-shims.css">
 
-  <!-- full calendar -->
-  <link rel="stylesheet" href="https://unpkg.com/@fullcalendar/core@4.4.0/main.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/@fullcalendar/daygrid@4.4.0/main.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/@fullcalendar/timegrid@4.4.0/main.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/@fullcalendar/list@4.4.0/main.min.css">
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css">
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css">
+  <link rel="stylesheet" href="{{ mix('/css/fullcalendar.css') }}">
 
   <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
+  <link rel="stylesheet" href="{{ asset('/css/datatables.css') }}">
+
+
+  <link rel="stylesheet" href="{{ asset('/css/selectize.css') }}">
 
 
   <!-- additional css -->
@@ -66,38 +63,28 @@
 
   <!-- Scripts -->
   <script src="{{ asset('js/app.js') }}"></script>
-  <script src="{{ asset('js/unpoly.min.js') }}"></script>
-  <script src="{{ asset('js/ckeditor.js') }}" defer></script>
+  <script src="{{ asset('js/unpoly.js') }}"></script>
+  <script src="{{ asset('js/fullcalendar.js') }}"></script>
+  <script src="{{ asset('js/ckeditor.js') }}"></script>
 
-  <!-- Full calendar-->
-  <script src='https://unpkg.com/@fullcalendar/core@4.4.0/locales/{{App::getLocale()}}.js'></script>
-  <script src="https://unpkg.com/@fullcalendar/core@4.4.0/main.min.js" defer></script>
-
-  <script src="https://unpkg.com/@fullcalendar/interaction@4.4.0/main.min.js" defer></script>
-  <script src="https://unpkg.com/@fullcalendar/daygrid@4.4.0/main.min.js" defer></script>
-  <script src="https://unpkg.com/@fullcalendar/timegrid@4.4.0/main.min.js" defer></script>
-  <script src="https://unpkg.com/@fullcalendar/list@4.4.0/main.min.js" defer></script>
-
-  <!-- Selectize-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" defer></script>
-
-  <!-- Datatables-->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js" defer></script>
-  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" defer></script>
-  <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" defer></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js" defer></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js" defer></script>
-  @yield('js')
-  @stack('js')
-
-  <script src="{{ asset('js/compilers.js') }}" defer></script>
-
-  <!-- footer -->
-  @yield('footer')
+  <script src="{{ asset('js/datatables.js') }}"></script>
 
 
-  <!-- Custom footer content added by admin -->
-  {!!setting('custom_footer')!!}
+  <script src="{{ asset('js/selectize.js') }}"></script>
+
+
+
+@yield('js')
+@stack('js')
+
+<script src="{{ asset('js/compilers.js') }}" defer></script>
+
+<!-- footer -->
+@yield('footer')
+
+
+<!-- Custom footer content added by admin -->
+{!!setting('custom_footer')!!}
 
 
 
