@@ -76,10 +76,22 @@
 
 
 
-@yield('js')
-@stack('js')
+  @yield('js')
+  @stack('js')
 
-<script src="{{ asset('js/compilers.js') }}" defer></script>
+  <script src="{{ asset('js/compilers.js') }}"></script>
+
+  <script type="module">
+  // This is the service worker with the combined offline experience (Offline page + Offline copy of pages)
+
+  // Add this below content to your HTML page inside a  tag, or add the js file to your page at the very top to register service worker
+
+  import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
+
+  const el = document.createElement('pwa-update');
+  document.body.appendChild(el);
+</script>
+
 
 <!-- footer -->
 @yield('footer')
