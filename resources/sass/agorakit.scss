@@ -95,6 +95,12 @@ h1.small
   padding-bottom: 20px;
 }
 
+nav
+{
+  box-shadow: 0 4px 6px rgba(72, 78, 80, 0.2);
+}
+
+
 /**************************** footer ****************************/
 .credits {
   font-size: 0.7em;
@@ -121,6 +127,20 @@ label
   margin-bottom: 0rem;
   font-weight: bold;
   color: #444;
+}
+
+.toast
+{
+  max-width: 100%;
+  width: 100%;
+  border-radius: 0;
+  border: 0;
+
+}
+
+.alert
+{
+  box-shadow: 0 4px 6px rgba(72, 78, 80, 0.2);
 }
 
 .btn-circle
