@@ -5,8 +5,14 @@
 body
 {
   padding-bottom: 150px;
-  /*background-image: url("/images/seamless_paper_texture.png");*/
+  background-image: url("/images/seamless_paper_texture.png");
   background-color: #edede0;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, .btn, label
+{
+  font-family: 'Nunito', sans-serif;
 }
 
 a
@@ -114,8 +120,6 @@ label
 {
   margin-bottom: 0rem;
   font-weight: bold;
-  /*font-size: 1.2rem;*/
-  font-family: "Roboto Condensed";
   color: #444;
 }
 

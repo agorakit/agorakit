@@ -22,6 +22,8 @@
 
   <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
 
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet"> 
+
 
   <!-- additional css -->
 

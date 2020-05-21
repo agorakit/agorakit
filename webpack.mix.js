@@ -1,13 +1,11 @@
 let mix = require('laravel-mix');
 
-//require('laravel-mix-purgecss');
-
 
 mix.js('resources/js/app.js', 'public/js')
 
 
 mix.sass('resources/sass/app.scss', 'public/css');
-//.purgeCss();
+
 
 mix.browserSync({proxy: '127.0.0.1:8000'});
 
@@ -38,5 +36,3 @@ mix.combine([
 // selectize js
 mix.copy('node_modules/selectize.js/dist/js/standalone/selectize.min.js', 'public/js/selectize.js');
 mix.copy('node_modules/selectize.js/dist/css/selectize.bootstrap3.css', 'public/css/selectize.css');
-
-mix.disableSuccessNotifications();
