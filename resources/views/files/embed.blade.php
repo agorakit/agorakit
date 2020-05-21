@@ -1,7 +1,7 @@
-<div class="card" style="max-width: 30rem;">
+<div class="card" style="max-width: 15rem;">
   @if ($file->isImage())
     <a href="{{ route('groups.files.download', [$file->group, $file]) }}" target="_blank">
-      <img src="{{ route('groups.files.preview', [$file->group, $file]) }}" class="card-img-top img-fluid">
+      <img src="{{ route('groups.files.preview', [$file->group, $file]) }}" class="card-img-top img-fluid" style="object-fit: cover; max-height: 10rem">
     </a>
   @endif
   <div class="card-body">
