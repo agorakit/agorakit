@@ -1,5 +1,7 @@
 // This is the service worker with the Cache-first network
 
+
+
 const CACHE = "pwabuilder-precache";
 
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.0.0/workbox-sw.js');
@@ -39,23 +41,18 @@ registerRoute(
 registerRoute(
     ({request}) => request.destination === 'script' ||
     request.destination === 'style',
-    new CacheFirst({
+    new StaleWhileRevalidate({
         cacheName: 'static-resources',
-        plugins: [
-            new ExpirationPlugin({
-                maxEntries: 500,
-                maxAgeSeconds: 60 * 60 * 24, // 1  Day
-            }),
-        ],
     })
 );
+
 
 // cache fonts & fontawesome
 registerRoute(
     ({url}) => url.origin === 'https://fonts.googleapis.com' ||
     url.origin === 'https://fonts.googleapis.com' ||
     url.origin === 'https://use.fontawesome.com',
-    new CacheFirst(),
+    new StaleWhileRevalidate(),
 );
 
 
