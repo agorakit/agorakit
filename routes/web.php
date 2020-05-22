@@ -93,6 +93,9 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('manifest.webmanifest', 'PwaController@index')->name('pwa.index');
 
+    // Icons
+    Route::get('icon/{size?}', 'IconController@index')->name('icon');
+
 
     /*
     Homepage

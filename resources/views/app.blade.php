@@ -5,7 +5,7 @@
   <meta name=viewport content="width=device-width, initial-scale=1">
   <title>{{$title ?? setting('name')}}</title>
 
-  <link rel="shortcut icon" href="{{{ asset('logo/favicon.png') }}}">
+  <link rel="shortcut icon" href="{{route('icon', 192)}}">
 
   <link rel="manifest" href="{{route('pwa.index')}}">
 
@@ -22,7 +22,7 @@
 
   <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
 
-<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
 
 
   <!-- additional css -->

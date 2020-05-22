@@ -15,27 +15,19 @@ class PwaController extends Controller
 
 
         // 512 px logo
-        if (Storage::exists('public/logo/favicon.png')) {
-            $icon['src'] = asset('storage/logo/favicon.png');
-        } else {
-            $icon['src'] = '/logo/agorakit-icon-512.png';
-        }
-
+        $icon['src'] = url('icon/512');
         $icon['type'] =  'image/png';
         $icon['sizes'] = '512x512';
 
         $manifest['icons'][] = $icon;
 
         // 192 px logo
-        if (Storage::exists('public/logo/favicon.png')) {
-            $icon['src'] = asset('storage/logo/favicon.png');
-        } else {
-            $icon['src'] = '/logo/agorakit-icon-192.png';
-        }
+        $icon['src'] = url('icon/192');
         $icon['type'] =  'image/png';
         $icon['sizes'] = '192x192';
 
         $manifest['icons'][] = $icon;
+
 
         $manifest['start_url']= '/';
 
@@ -47,29 +39,5 @@ class PwaController extends Controller
 
         return $manifest;
 
-        /*
-        {
-        "short_name": "Weather",
-        "name": "Weather: Do I need an umbrella?",
-        "description": "Weather forecast information",
-        "icons": [
-        {
-        "src": "/images/icons-192.png",
-        "type": "image/png",
-        "sizes": "192x192"
-    },
-    {
-    "src": "/images/icons-512.png",
-    "type": "image/png",
-    "sizes": "512x512"
-}
-],
-"start_url": "/?source=pwa",
-"background_color": "#3367D6",
-"display": "standalone",
-"scope": "/",
-"theme_color": "#3367D6"
-}
-*/
-}
+    }
 }
