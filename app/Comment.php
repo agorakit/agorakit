@@ -20,6 +20,12 @@ class Comment extends Model
         'user_id' => 'required|exists:users,id',
     ];
 
+    /*
+    protected $validationMessages = [
+    'body.required' => trans("Comment body is required")];
+    */
+
+
     protected $fillable = ['body'];
     public $timestamps = true;
     protected $dates = ['deleted_at'];

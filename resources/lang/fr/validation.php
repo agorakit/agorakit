@@ -72,20 +72,20 @@ return [
       'rule-name' => 'custom-message',
     ],
     'body' => [
-      'required' => 'requis',
+      'required' => 'Le corps du texte est requis',
     ],
     'group_id' => [
-      'required' => 'Required',
+      'required' => 'Le groupe est requis',
     ],
     'password' => [
       'confirmed' => 'Les mots de passe ne correspondent pas',
       'min'       => 'Mot de passe trop court',
     ],
     'path' => [
-      'required' => 'Required',
+      'required' => 'Le chemin est requis',
     ],
     'user_id' => [
-      'required' => 'Required',
+      'required' => 'L\'utilisateur est requis',
     ],
   ],
   'attributes' => [
