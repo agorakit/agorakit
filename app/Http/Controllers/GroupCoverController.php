@@ -26,7 +26,7 @@ class GroupCoverController extends Controller
         if (File::exists($path)) {
             $cachedImage = Image::cache(function ($img) use ($path) {
                 return $img->make($path)->fit(128, 128);
-            }, 60000, true);
+            }, 5, true);
 
             return $cachedImage->response();
         } else {
@@ -43,7 +43,7 @@ class GroupCoverController extends Controller
         if (File::exists($path)) {
             $cachedImage = Image::cache(function ($img) use ($path) {
                 return $img->make($path)->fit(400, 300);
-            }, 60000, true);
+            }, 5, true);
 
             return $cachedImage->response();
         } else {
@@ -60,7 +60,7 @@ class GroupCoverController extends Controller
         if (File::exists($path)) {
             $cachedImage = Image::cache(function ($img) use ($path) {
                 return $img->make($path)->fit(800, 600);
-            }, 60000, true);
+            }, 5, true);
 
             return $cachedImage->response();
         } else {

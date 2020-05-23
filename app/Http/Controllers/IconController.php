@@ -24,7 +24,7 @@ class IconController extends Controller
         if (File::exists($path)) {
             $cachedImage = Image::cache(function ($img) use ($path, $size) {
                 return $img->make($path)->fit($size, $size);
-            }, 60000, true);
+            }, 5, true);
 
             return $cachedImage->response();
         } else {
@@ -32,7 +32,7 @@ class IconController extends Controller
             //dd($path);
             $cachedImage = Image::cache(function ($img) use ($path, $size) {
                 return $img->make($path)->fit($size, $size);
-            }, 60000, true);
+            }, 5, true);
 
             return $cachedImage->response();
         }

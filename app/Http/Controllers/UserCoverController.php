@@ -38,14 +38,14 @@ class UserCoverController extends Controller
             if ($size == 'small') {
                 $cachedImage = Image::cache(function ($img) use ($avatar_path) {
                     return $img->make($avatar_path)->fit(64, 64);
-                }, 60000, true);
+                }, 5, true);
 
                 return $cachedImage->response();
             }
             if ($size == 'medium') {
                 $cachedImage = Image::cache(function ($img) use ($avatar_path) {
                     return $img->make($avatar_path)->fit(400, 400);
-                }, 60000, true);
+                }, 5, true);
 
                 return $cachedImage->response();
             }
@@ -53,7 +53,7 @@ class UserCoverController extends Controller
             if ($size == 'large') {
                 $cachedImage = Image::cache(function ($img) use ($avatar_path) {
                     return $img->make($avatar_path)->fit(800, 800);
-                }, 60000, true);
+                }, 5, true);
 
                 return $cachedImage->response();
             }

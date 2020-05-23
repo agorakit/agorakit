@@ -47,7 +47,7 @@ class FileDownloadController extends Controller
             if (Storage::exists($file->path)) {
                 $cachedImage = Image::cache(function ($img) use ($file) {
                     return $img->make(storage_path().'/app/'.$file->path)->fit(64, 64);
-                }, 60000, true);
+                }, 5, true);
 
                 return $cachedImage->response();
             }
@@ -75,7 +75,7 @@ class FileDownloadController extends Controller
             if (Storage::exists($file->path)) {
                 $cachedImage = Image::cache(function ($img) use ($file) {
                     return $img->make(storage_path().'/app/'.$file->path)->widen(600);
-                }, 60000, true);
+                }, 5, true);
 
                 return $cachedImage->response();
             }
