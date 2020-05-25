@@ -8,8 +8,9 @@
 
 
 @if ($discussions->count() > 0)
-<h2>{{trans('messages.latest_discussions')}}</h2>
+<h1>{{trans('messages.latest_discussions')}}</h1>
 @foreach($discussions as $discussion)
+<div class="discussion" style="margin-bottom: 30px; border-bottom: 1px solid #aaa">
 <h3><a up-follow href="{{route('groups.discussions.show', [$group, $discussion])}}">{{$discussion->name}} </a></h3>
 <p>
 @if ($discussion->comments->count() > 0)
@@ -34,51 +35,59 @@
 {{trans('messages.reply')}}
 @endcomponent
 
-<hr/>
+</div>
 @endforeach
 @endif
 
 
 @if ($actions->count() > 0)
-<h2>{{trans('messages.next_actions')}}</h2>
+<h1>{{trans('messages.next_actions')}}</h1>
 @foreach($actions as $action)
+<div style="border-bottom: 1px solid #aaa; margin-bottom: 20px; padding-bottom: 20px">
 <strong><a up-follow href="{{route('groups.actions.show', [$group, $action])}}">{{$action->name}}</a></strong>
 <p>{!!filter($action->body) !!}</p>
-<p>
-{{$action->start->format('d/m/Y H:i')}}
-</p>
-<p>
-{{trans('messages.location')}} : {{$action->location}}
-</p>
-<hr/>
+{{$action->start->format('d/m/Y H:i')}} - {{$action->stop->format('H:i')}}
+@if ($action->location) , {{$action->location}}@endif
+</div>
 @endforeach
+<br/>
+<br/>
 @endif
 
 
+
 @if ($users->count() > 0)
-<h2>{{trans('messages.latest_users')}}</h2>
+<h1>{{trans('messages.latest_users')}}</h1>
 @foreach($users as $new_user)
 <a up-follow href="{{route('users.show', $new_user)}}">{{$new_user->name}}</a>
 <br/>
 @endforeach
+
+<br/>
+<br/>
 @endif
 
 
 @if ($files->count() > 0)
-<h2>{{trans('messages.latest_files')}}</h2>
+<h1>{{trans('messages.latest_files')}}</h1>
 @foreach($files as $file)
 <a up-follow href="{{route('groups.files.show', [$group, $file])}}"><img src="{{route('groups.files.thumbnail', [$group, $file])}}" style="width: 24px; height:24px"/>{{$file->name}}</a>
 <br/>
 @endforeach
+<br/>
 @endif
 
 
+<div style="margin-top: 20px; text-align: center">
+<img src="{{route('icon', 128)}}" width="128" height="128"/>
+</div>
 
 
-<p style="margin-top: 5em; font-size: 0.8em">
+<p style="margin-top: 20px; font-size: 0.8em">
 {{trans('messages.you_receive_this_email_from_the_group')}} "{{$group->name}}", {{trans('messages.because_you_asked_for_it')}}.
 <br/>
-{{trans('messages.if_you_dont_want_news_anymore')}}, <a up-follow href="{{action('GroupMembershipController@edit', $group)}}">{{trans('messages.click_here')}}</a>.
+<a up-follow href="{{action('GroupMembershipController@edit', $group)}}">
+{{trans('Click here to change your notification preferences or to unsubscribe completely')}}</a>.
 </p>
 
 

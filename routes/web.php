@@ -385,5 +385,20 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('admin/{type}/{id}/restore', 'UndoController@restore')->name('admin.restore');
 
         Route::get('admin/groupadmins', 'Admin\GroupAdminsController@index');
+
+
+        // mailable preview, for devs mainly
+        Route::get('mailable', function () {
+            $notif = new App\Mail\Notification();
+            $notif->user = \App\User::first();
+            $notif->group = \App\Group::first();
+            $notif->discussions = \App\Discussion::take(5)->get();
+            $notif->actions = \App\Action::take(5)->get();
+            $notif->users = \App\User::take(5)->get();
+            $notif->files = \App\File::take(5)->get();
+
+            return $notif;
+        });
+
     });
 });

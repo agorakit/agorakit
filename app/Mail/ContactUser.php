@@ -17,10 +17,10 @@ class ContactUser extends Mailable
     public $from_user;
 
     /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
+    * Create a new message instance.
+    *
+    * @return void
+    */
     public function __construct(User $from_user, User $to_user, $body, $reveal_email = false)
     {
         $this->body = $body;
@@ -30,20 +30,20 @@ class ContactUser extends Mailable
     }
 
     /**
-     * Build the message.
-     *
-     * @return $this
-     */
+    * Build the message.
+    *
+    * @return $this
+    */
     public function build()
     {
         if ($this->reveal_email) {
             return $this->markdown('emails.contact_direct')
-      ->from($this->from_user->email, $this->from_user->name)
-      ->subject('['.setting('name').'] '.trans('messages.a_message_for_you'));
+            ->from($this->from_user->email, $this->from_user->name)
+            ->subject('['.setting('name').'] '.trans('messages.a_message_for_you'));
         } else {
             return $this->markdown('emails.contact')
-      ->from(config('mail.noreply'), config('mail.from.name'))
-      ->subject('['.setting('name').'] '.trans('messages.a_message_for_you'));
+            ->from(config('mail.noreply'), config('mail.from.name'))
+            ->subject('['.setting('name').'] '.trans('messages.a_message_for_you'));
         }
     }
 }

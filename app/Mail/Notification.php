@@ -48,13 +48,26 @@ class Notification extends Mailable
 
         if ($this->group->inbox()) {
             $message->from($this->group->inbox(), $this->group->name);
-            // if only one discussion, send from this discussion instead of the whole group inbox
-            if ($this->discussions->count() == 1) {
+
+            // experimental : let's send from the first discussion in most cases
+            if ($this->discussions->count() > 0) {
                 $message->replyTo($this->discussions->first()->inbox(), $this->group->name);
             }
             else {
                 $message->replyTo($this->group->inbox(), $this->group->name);
             }
+
+            /*
+            // old behavior was :
+            // if only one discussion, send from this discussion instead of the whole group inbox
+            if ($this->discussions->count() == 1) {
+                $message->replyTo($this->discussions->first()->inbox(), $this->group->name);
+            }
+            else {
+                //send from group because we don't know to which discussion we want the replies to be delivered
+                $message->replyTo($this->group->inbox(), $this->group->name);
+            }
+            */
         }
         else {
             $message->from(config('mail.noreply'), config('mail.from.name'));
