@@ -6,9 +6,19 @@
     text-transform: uppercase;
 }
 
-.comment
+.comment.unread
+{
+    border-right: 3px solid #426dad;
+    font-weight: bold;
+    padding-right: 5px;
+}
+
+.comment-content
 {
     border-bottom: 1px solid #ccc;
+}
+.comment
+{
 
     p:last-child
     {
