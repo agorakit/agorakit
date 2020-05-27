@@ -221,7 +221,7 @@ up.compiler('#unread', function(element) {
 	console.log(element);
 	element.scrollIntoView({
 		block: 'start',
-		behavior: 'smooth',
+		behavior: 'instant',
 		inline: 'nearest'
 	});
 });
