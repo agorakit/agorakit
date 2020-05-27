@@ -3,6 +3,7 @@ let mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
 
+//mix.js('resources/js/fullcalendar.js', 'public/js')
 
 mix.sass('resources/sass/app.scss', 'public/css');
 
@@ -15,13 +16,16 @@ mix.copy('node_modules/unpoly/dist/unpoly.min.css', 'public/css/unpoly.css');
 
 // fullcalendar : we combine all files
 // js
+
 mix.combine([
     'node_modules/@fullcalendar/core/main.min.js',
     'node_modules/@fullcalendar/core/locale-all.min.js',
     'node_modules/@fullcalendar/daygrid/main.min.js',
     'node_modules/@fullcalendar/list/main.min.js',
-    'node_modules/@fullcalendar/timegrid/main.min.js'
+    'node_modules/@fullcalendar/timegrid/main.min.js',
+    'node_modules/@fullcalendar/interaction/main.min.js'
 ], 'public/js/fullcalendar.js');
+
 
 // css
 mix.combine([

@@ -27,7 +27,7 @@
         @endauth
 
 
-        <div id="calendar" class="calendar" data-json="{{route('groups.actions.index.json', $group)}}" data-locale="{{App::getLocale()}}"></div>
+        <div id="calendar" class="calendar" data-json="{{route('groups.actions.index.json', $group)}}" data-locale="{{App::getLocale()}}" data-create-url="{{route('groups.actions.create', $group)}}"></div>
 
         @include('actions.ical')
 

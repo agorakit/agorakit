@@ -150,6 +150,7 @@ up.compiler('.calendar', function(element, data) {
 
 	var json = element.getAttribute("data-json")
 	var locale = element.getAttribute("data-locale")
+	var create_url = element.getAttribute("data-create-url")
 	var calendar = new FullCalendar.Calendar(element, {
 		plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
 		locale: locale,
@@ -158,16 +159,24 @@ up.compiler('.calendar', function(element, data) {
 		header: {
 			left: 'prev,next today',
 			center: 'title',
-			right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+			right: 'timeGridDay,timeGridWeek,dayGridMonth,listMonth'
 		},
+
 		/*
 		dateClick: function(info) {
-			alert('clicked ' + info.dateStr);
-		},
-		select: function(info) {
-			alert('selected ' + info.startStr + ' to ' + info.endStr);
+			if (create_url) {
+				url = create_url + '?start=' + info.start.toISOString() +'&stop=' + info.end.toISOString();
+				up.modal.visit(url, { target: '.tab_content' });
+			}
 		},
 		*/
+		select: function(info) {
+			if (create_url) {
+				url = create_url + '?start=' + info.start.toISOString() +'&stop=' + info.end.toISOString();
+				up.modal.visit(url, { target: '.tab_content' });
+			}
+		},
+
 		eventClick:  function(info) {
 			info.jsEvent.preventDefault(); // don't let the browser navigate
 			up.modal.visit(info.event.url, { target: '.content' });

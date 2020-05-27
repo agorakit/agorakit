@@ -92,7 +92,8 @@ class GroupMembershipController extends Controller
             $membership->notified_at = Carbon::now();
             $membership->save();
 
-            return redirect()->route('groups.show', [$group->id])->with('message', trans('membership.welcome'));
+            flash(trans('membership.welcome'));
+            return redirect()->route('groups.show', [$group->id]);
         } else {
             // load or create membership for this group and user combination
             $membership = Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
@@ -108,7 +109,8 @@ class GroupMembershipController extends Controller
                 $admin->notify(new \App\Notifications\AppliedToGroup($group, $request->user()));
             }
 
-            return redirect()->route('groups.show', $group)->with('message', trans('membership.application_stored'));
+            flash(trans('membership.application_stored'));
+            return redirect()->route('groups.show', $group);
         }
     }
 
@@ -214,7 +216,8 @@ class GroupMembershipController extends Controller
         $membership->notification_interval = intervalToMinutes($request->get('notifications'));
         $membership->save();
 
-        return redirect()->route('groups.users.index', $group)->with('message', trans('membership.settings_updated'));
+        flash(trans('membership.settings_updated'));
+        return redirect()->route('groups.users.index', $group);
     }
 
     /**

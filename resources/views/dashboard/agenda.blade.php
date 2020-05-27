@@ -33,7 +33,7 @@
 
 
 
-  <div class="mt-5 calendar" id="calendar" data-json="{{action('ActionController@indexJson')}}" data-locale="{{App::getLocale()}}"></div>
+  <div class="mt-5 calendar" id="calendar" data-json="{{action('ActionController@indexJson')}}" data-locale="{{App::getLocale()}}" data-create-url="/actions/create"></div>
 
   @include('dashboard.ical')
 

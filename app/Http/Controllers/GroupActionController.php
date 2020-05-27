@@ -126,13 +126,13 @@ class GroupActionController extends Controller
         $action = new Action();
 
         if ($request->get('start')) {
-            $action->start = Carbon::createFromFormat('Y-m-d H:i', $request->get('start'));
+            $action->start = Carbon::parse($request->get('start'));
         } else {
             $action->start = Carbon::now();
         }
 
         if ($request->get('stop')) {
-            $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->get('stop'));
+            $action->stop = Carbon::parse($request->get('stop'));
         }
 
         if ($request->get('title')) {
