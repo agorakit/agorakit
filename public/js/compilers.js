@@ -148,10 +148,13 @@ Add a calendar to any div with the calendar class
 
 up.compiler('.calendar', function(element, data) {
 
+
+	var defaultView = (localStorage.getItem("fcDefaultView") !== null ? localStorage.getItem("fcDefaultView") : "dayGridWeek");
 	var json = element.getAttribute("data-json")
 	var locale = element.getAttribute("data-locale")
 	var create_url = element.getAttribute("data-create-url")
 	var calendar = new FullCalendar.Calendar(element, {
+		defaultView: defaultView,
 		plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
 		locale: locale,
 		events: json,
@@ -162,14 +165,7 @@ up.compiler('.calendar', function(element, data) {
 			right: 'timeGridDay,timeGridWeek,dayGridMonth,listMonth'
 		},
 
-		/*
-		dateClick: function(info) {
-			if (create_url) {
-				url = create_url + '?start=' + info.start.toISOString() +'&stop=' + info.end.toISOString();
-				up.modal.visit(url, { target: '.tab_content' });
-			}
-		},
-		*/
+		// show add event form modal on date click / select
 		select: function(info) {
 			if (create_url) {
 				url = create_url + '?start=' + info.start.toISOString() +'&stop=' + info.end.toISOString();
@@ -177,15 +173,22 @@ up.compiler('.calendar', function(element, data) {
 			}
 		},
 
+		// show event detail modal on event click
 		eventClick:  function(info) {
 			info.jsEvent.preventDefault(); // don't let the browser navigate
 			up.modal.visit(info.event.url, { target: '.content' });
 		},
 
+		// add tooltip to all events
 		eventRender: function(info)
 		{
 			content = '<strong>' + info.event.extendedProps.group_name + '</strong><br/>' + info.event.extendedProps.summary;
 			$(info.el).tooltip({title: content, html: true});
+		},
+
+		// store the current view type on each view change
+		viewSkeletonRender: function (info) {
+			localStorage.setItem("fcDefaultView", info.view.type);
 		}
 
 	});
