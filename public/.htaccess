@@ -1,36 +1,21 @@
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
-        Options -MultiViews
+        Options -MultiViews -Indexes
     </IfModule>
 
     RewriteEngine On
 
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)/$ /$1 [L,R=301]
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
 
-    # Handle Front Controller...
+    # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
-
-## EXPIRES CACHING ##
-<IfModule mod_expires.c>
-ExpiresActive on
-          ExpiresByType image/jpg "access plus 60 days"
-          ExpiresByType image/png "access plus 60 days"
-          ExpiresByType image/gif "access plus 60 days"
-          ExpiresByType image/jpeg "access plus 60 days"
-          ExpiresByType text/css "access plus 1 days"
-          ExpiresByType image/x-icon "access plus 1 month"
-          ExpiresByType application/pdf "access plus 1 month"
-          ExpiresByType audio/x-wav "access plus 1 month"
-          ExpiresByType audio/mpeg "access plus 1 month"
-          ExpiresByType video/mpeg "access plus 1 month"
-          ExpiresByType video/mp4 "access plus 1 month"
-          ExpiresByType text/javascript "access plus 1 day"
-          ExpiresByType application/x-javascript "access plus 1 day"
-          ExpiresByType application/javascript "access plus 1 day"
-</IfModule>
-## EXPIRES CACHING ##
