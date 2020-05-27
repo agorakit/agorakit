@@ -149,7 +149,7 @@ Add a calendar to any div with the calendar class
 up.compiler('.calendar', function(element, data) {
 
 
-	var defaultView = (localStorage.getItem("fcDefaultView") !== null ? localStorage.getItem("fcDefaultView") : "dayGridWeek");
+	var defaultView = (localStorage.getItem("fcDefaultView") !== null ? localStorage.getItem("fcDefaultView") : "dayGridMonth");
 	var json = element.getAttribute("data-json")
 	var locale = element.getAttribute("data-locale")
 	var create_url = element.getAttribute("data-create-url")
