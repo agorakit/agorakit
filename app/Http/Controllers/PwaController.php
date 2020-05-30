@@ -31,10 +31,10 @@ class PwaController extends Controller
 
         $manifest['start_url']= '/';
 
-        $manifest['background_color'] = '#3367D6';
+        $manifest['background_color'] = '#343a40';
         $manifest['display'] = 'standalone';
         $manifest['scope'] = '/';
-        $manifest['theme_color'] = '#3367D6';
+        $manifest['theme_color'] = '#343a40';
 
 
         return $manifest;
