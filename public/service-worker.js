@@ -18,7 +18,7 @@ self.addEventListener("message", (event) => {
     }
 });
 
-// cache 500 images for 30 days
+// cache 500 images for 5 minutes
 registerRoute(
     ({request}) => request.destination === 'image',
     new CacheFirst({
@@ -26,7 +26,7 @@ registerRoute(
         plugins: [
             new ExpirationPlugin({
                 maxEntries: 500,
-                maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
+                maxAgeSeconds: 60 * 5,
             }),
         ],
     })
