@@ -27,6 +27,10 @@ class SearchController extends Controller
             ->search($query)
             ->get();
 
+            // also search all not secret groups
+            $groups = $groups->merge(\App\Group::search($query)->notSecret()->get());
+
+
             $users = \App\User::with('groups')
             ->search($query)
             ->get();
