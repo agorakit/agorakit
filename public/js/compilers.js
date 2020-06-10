@@ -168,7 +168,10 @@ up.compiler('.calendar', function(element, data) {
 		// show add event form modal on date click / select
 		select: function(info) {
 			if (create_url) {
-				url = create_url + '?start=' + info.start.toISOString() +'&stop=' + info.end.toISOString();
+				// correct timezone https://stackoverflow.com/questions/10830357/javascript-toisostring-ignores-timezone-offset
+				var start = new Date(info.start.getTime() - (info.start.getTimezoneOffset() * 60000)).toISOString();
+				var stop = new Date(info.end.getTime() - (info.end.getTimezoneOffset() * 60000)).toISOString();
+				url = create_url + '?start=' + start +'&stop=' + stop
 				up.modal.visit(url, { target: '.tab_content' });
 			}
 		},
