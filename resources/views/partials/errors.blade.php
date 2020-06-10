@@ -1,4 +1,4 @@
-<div class="alerts" style="position: sticky; top: 2rem; width: 100%; z-index: 2000" up-hungry>
+<div class="alerts" style="position: sticky; top: 2rem; width: 100%; z-index: 800" up-hungry>
 
 
   @if (isset(Auth::user()->verified) && (Auth::user()->verified == 0))
