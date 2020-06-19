@@ -17,6 +17,13 @@ class DatabaseSeeder extends Seeder
 
         $faker->addProvider(new \Mmo\Faker\PicsumProvider($faker));
 
+        // set intro text
+        Setting::set('homepage_presentation', $this->richtext());
+        Setting::set('homepage_presentation_for_members', $this->richtext());
+        Setting::set('help_text', $this->richtext());
+
+
+
         // create users
         DB::table('users')->delete();
 
@@ -147,10 +154,6 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-        // set intro text
-        Setting::set('homepage_presentation', $faker->text(1500));
-        Setting::set('homepage_presentation_for_members', $faker->text(500));
-        Setting::set('help_text', $faker->text(1000));
 
 
 
@@ -168,6 +171,22 @@ class DatabaseSeeder extends Seeder
 
 
         return implode(",", $tags);
+    }
+
+
+    public function richtext()
+    {
+        $amount = rand(3,10);
+
+        $text = '';
+
+        $faker = Faker::create();
+        for ($i = 0; $i < $amount; $i++) {
+            $text .= '<h2>' . $faker->sentence . '</h2>';
+            $text .= implode("<p>", $faker->paragraphs(rand(1,4)));
+        }
+
+        return $text;
     }
 
 }
