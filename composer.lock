@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f8f6f57186fcb3dc95ba7ce15ffdb1d4",
+    "content-hash": "76af27a36aa986c793d4186573bbff09",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -6827,6 +6827,56 @@
             "time": "2020-05-06T07:06:27+00:00"
         },
         {
+            "name": "mmo/faker-images",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/morawskim/faker-images.git",
+                "reference": "3b8e8fbfce3008c0ce3660bf63b1457f0a19ce16"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/morawskim/faker-images/zipball/3b8e8fbfce3008c0ce3660bf63b1457f0a19ce16",
+                "reference": "3b8e8fbfce3008c0ce3660bf63b1457f0a19ce16",
+                "shasum": ""
+            },
+            "require": {
+                "fzaninotto/faker": "~1.4",
+                "php": "^5.3.3 || ^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.7",
+                "squizlabs/php_codesniffer": "^2.9.2"
+            },
+            "suggest": {
+                "ext-curl": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Mmo\\Faker\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marcin Morawski",
+                    "email": "marcin@morawskim.pl"
+                }
+            ],
+            "description": "Different images provider for Faker",
+            "keywords": [
+                "faker",
+                "images",
+                "picsum",
+                "provider"
+            ],
+            "time": "2020-02-02T16:20:03+00:00"
+        },
+        {
             "name": "mockery/mockery",
             "version": "1.3.1",
             "source": {
@@ -8555,5 +8605,6 @@
     "platform": {
         "php": "^7.2.5"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }

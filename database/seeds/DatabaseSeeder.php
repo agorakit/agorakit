@@ -4,14 +4,18 @@ use Carbon\Carbon;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 
+use App\Setting;
+
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
-     */
+    * Run the database seeds.
+    */
     public function run()
     {
         $faker = Faker::create();
+
+        $faker->addProvider(new \Mmo\Faker\PicsumProvider($faker));
 
         // create users
         DB::table('users')->delete();
@@ -27,7 +31,7 @@ class DatabaseSeeder extends Seeder
 
         // add avatar to admin user
         Storage::disk('local')->makeDirectory('users/'.$admin->id);
-        Image::make($faker->imageUrl(500, 400, 'people'))->widen(500)->save(storage_path().'/app/users/'.$admin->id.'/cover.jpg')->fit(128, 128)->save(storage_path().'/app/users/'.$admin->id.'/thumbnail.jpg');
+        Image::make($faker->picsumUrl(500, 400))->widen(500)->save(storage_path().'/app/users/'.$admin->id.'/cover.jpg')->fit(128, 128)->save(storage_path().'/app/users/'.$admin->id.'/thumbnail.jpg');
 
         // a second normal user
         $normal_user = App\User::create([
@@ -48,7 +52,7 @@ class DatabaseSeeder extends Seeder
 
             // add avatar to every user
             Storage::disk('local')->makeDirectory('users/'.$user->id);
-            Image::make($faker->imageUrl(500, 400, 'people'))->widen(500)->save(storage_path().'/app/users/'.$user->id.'/cover.jpg')->fit(128, 128)->save(storage_path().'/app/users/'.$user->id.'/thumbnail.jpg');
+            Image::make($faker->picsumUrl(500, 400))->widen(500)->save(storage_path().'/app/users/'.$user->id.'/cover.jpg')->fit(128, 128)->save(storage_path().'/app/users/'.$user->id.'/thumbnail.jpg');
         }
 
         // create 10 groups
@@ -56,12 +60,14 @@ class DatabaseSeeder extends Seeder
             $group = App\Group::create([
                 'name' => $faker->city.'\'s user group',
                 //'name' => 'Group ' . $faker->sentence(3),
-                'body' => $faker->text,
+                'body' => $faker->text
             ]);
+
+            $group->tag($this->tags());
 
             // add cover image to groups
             Storage::disk('local')->makeDirectory('groups/'.$group->id);
-            Image::make($faker->imageUrl())->widen(800)->save(storage_path().'/app/groups/'.$group->id.'/cover.jpg')->fit(300, 200)->save(storage_path().'/app/groups/'.$group->id.'/thumbnail.jpg');
+            Image::make($faker->picsumUrl())->widen(800)->save(storage_path().'/app/groups/'.$group->id.'/cover.jpg')->fit(300, 200)->save(storage_path().'/app/groups/'.$group->id.'/thumbnail.jpg');
 
             // add members to the group
             for ($j = 1; $j <= $faker->numberBetween(5, 20); $j++) {
@@ -84,6 +90,8 @@ class DatabaseSeeder extends Seeder
                 $discussion->user_id = App\User::orderByRaw('RAND()')->first()->id;
                 $discussion->group_id = App\Group::orderByRaw('RAND()')->first()->id;
                 $discussion->save();
+
+                $discussion->tag($this->tags());
 
                 // Add comments to each discussion
 
@@ -108,14 +116,58 @@ class DatabaseSeeder extends Seeder
                     'stop'     => Carbon::instance($start)->addHour(),
                     'location' => $faker->city,
                 ]);
-                // attach one random author & group to each discussion
+                // attach one random author & group to each action
                 $action->user_id = App\User::orderByRaw('RAND()')->first()->id;
                 $action->group_id = App\Group::orderByRaw('RAND()')->first()->id;
                 if ($action->isInvalid()) {
                     dd($action->getErrors());
                 }
                 $action->save();
+
+                $action->tag($this->tags());
+            }
+
+            // add files to each group
+            for ($n = 1; $n <= $faker->numberBetween(5, 20); $n++) {
+                $start = $faker->dateTimeThisMonth('+2 months');
+                $file = App\File::create([
+                    'name' => $faker->sentence(5),
+                    'path'    => $faker->url,
+                    'item_type' => 2
+                ]);
+                // attach one random author & group to each action
+                $file->user_id = App\User::orderByRaw('RAND()')->first()->id;
+                $file->group_id = App\Group::orderByRaw('RAND()')->first()->id;
+                if ($file->isInvalid()) {
+                    dd($file->getErrors());
+                }
+                $file->save();
+
+                $file->tag($this->tags());
             }
         }
+
+        // set intro text
+        Setting::set('homepage_presentation', $faker->text(1500));
+        Setting::set('homepage_presentation_for_members', $faker->text(500));
+        Setting::set('help_text', $faker->text(1000));
+
+
+
     }
+
+    public function tags()
+    {
+        $amount = rand(0,10);
+        $tags=array();
+
+        $faker = Faker::create();
+        for ($i = 0; $i < $amount; $i++) {
+            $tags[] = $faker->word;
+        }
+
+
+        return implode(",", $tags);
+    }
+
 }
