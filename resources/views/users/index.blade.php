@@ -31,7 +31,6 @@
         <th data-priority="2">{{ trans('messages.status') }}</th>
 
         @can('manage-membership', $group)
-          <th data-priority="2">{{ trans('messages.email') }}</th>
           <th data-priority="2">{{ trans('messages.notifications_interval') }}</th>
           <th data-priority="1"></th>
         @endcan
