@@ -21,10 +21,6 @@
     {!! Form::textarea('body', null, ['class' => 'form-control', 'required']) !!}
   </div>
 
-  <div class="form-check">
-   <input type="checkbox" class="form-check-input" name="reveal_email" id="reveal_email" checked="checked">
-   <label class="form-check-label" for="reveal_email">{{__('Reveal my email to this user so we can communicate by email')}}</label>
- </div>
 
 
   <div class="form-group mt-4">
