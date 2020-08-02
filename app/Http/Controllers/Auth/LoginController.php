@@ -61,7 +61,7 @@ class LoginController extends Controller
             if ($user) {
                 // send invitation email
                 Mail::to($user->email)->send(new LoginByEmail($user));
-                flash(__('Check your mailbox, we sent you a login link. It will expires in 30 minutes'));
+                flash(__('Check your mailbox, we sent you a login link. It will expire in 30 minutes'));
                 return redirect('/');
             }
             else {
