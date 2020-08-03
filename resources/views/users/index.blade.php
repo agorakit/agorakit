@@ -100,13 +100,6 @@
 
           @can('manage-membership', $group)
             <td>
-              {{$membership->user->email}}
-            </td>
-        <td data-order="{{ $membership->notification_interval }}">
-              {{minutesToInterval($membership->notification_interval)}}
-            </td>
-
-            <td>
               <a class="btn btn-primary btn-sm" href="{{action('GroupMembershipController@edit', [$group, $membership])}}">{{trans('messages.edit')}}</a>
             </td>
           @endcan
