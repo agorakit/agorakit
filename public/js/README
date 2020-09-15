@@ -1,0 +1,16 @@
+The JS used by Agorakit is mainly instantiated by unpoly JS
+
+Thus almost everything happens  in compilers.JS
+
+
+
+CKeditor build note.
+- Go here : https://ckeditor.com/ckeditor-5/online-builder/
+- Choose classic editor
+- Remove ckfinder
+- Add image resize, mention
+
+Un zip resulting file and update ckeditor.js and ckeditor.js.map in this directory
+
+
+

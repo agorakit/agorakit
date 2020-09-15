@@ -1,20 +1,30 @@
-.spinner
-{
-  /*left: 50%;*/
-  /*transform: translateX(-50%);*/
-  top:0;
-  padding: 1.5rem;
-  margin: auto;
-  width: 100%;
+.spinner {
+    top: 0;
+    padding: 1.5rem;
+    margin: auto;
+    width: 100%;
 
-  background-color: #adbcdc;
-  color: #000;
-  display: none;
-  position: fixed;
-  z-index: 200;
+    background-color: #adbcdc;
+    color: #000;
+    display: none;
+    position: fixed;
+    z-index: 200;
 }
 
-.up-active
-{
-  opacity: 0.33;
+.up-active {
+    opacity: 0.33;
+}
+
+
+.network-error {
+    top: 0;
+    padding: 1.5rem;
+    margin: auto;
+    width: 100%;
+
+    background-color: #e23c1f;
+    color: rgb(236, 236, 236);
+    display: none;
+    position: fixed;
+    z-index: 200;
 }

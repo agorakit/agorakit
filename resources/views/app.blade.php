@@ -49,6 +49,11 @@
     Please wait!
   </div>
 
+  <div class="network-error shadow">
+    <i class="far fa-save"></i>
+   No network!
+  </div>
+
   <div class="container main-container @if (isset($dialog)) main-dialog @endif">
     <div class="main">
       @include('partials.errors')
