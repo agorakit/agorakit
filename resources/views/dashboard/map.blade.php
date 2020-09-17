@@ -1,82 +1,171 @@
 @extends('app')
 
 @section('head')
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-  crossorigin=""/>
-  <!-- Make sure you put this AFTER Leaflet's CSS -->
-  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-  integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-  crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" />
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
 @endsection
 
 @section('css')
-  <style>
-  #mapid { height: 600px; }
-</style>
+    <style>
+        #mapid {
+            height: 600px;
+        }
+
+        .marker {
+            width: 2rem;
+            height: 2rem;
+            display: block;
+            left: -1rem;
+            top: -1rem;
+            position: relative;
+            border-radius: 2rem 2rem 0;
+            transform: rotate(45deg);
+            border: 2px solid #000;
+        }
+
+    </style>
 @endsection
 
 @section('js')
 
-  <script>
-
-  // load all our points using geojson
-  // taken from https://medium.com/@maptastik/loading-external-geojson-a-nother-way-to-do-it-with-jquery-c72ae3b41c01
-  var points = $.ajax({
-    url:"{{ route('map.geojson') }}",
-    dataType: "json",
-    success: console.log("points data successfully loaded."),
-    error: function (xhr) {
-      alert(xhr.statusText)
-    }
-  })
-
-
-  // When loading is complete :
-  $.when(points).done(function() {
-    var map = L.map('mapid').setView([51.505, -0.09], 13);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-
-    // Add requested external GeoJSON to map
-    var kyCounties = L.geoJSON(points.responseJSON).addTo(map);
-
-    // todo get lat and long fonr the json
-    var bounds = new L.LatLngBounds(points.responseJSON);
-
-    map.fitBounds(bounds);
-
-  });
+    <script>
+        // load all our points using geojson
+        // taken from https://medium.com/@maptastik/loading-external-geojson-a-nother-way-to-do-it-with-jquery-c72ae3b41c01
+        var points = $.ajax({
+            url: "{{ route('map.geojson') }}",
+            dataType: "json",
+            success: console.log("points data successfully loaded."),
+            error: function(xhr) {
+                alert(xhr.statusText)
+            }
+        })
 
 
 
 
-</script>
+
+        // When loading is complete :
+        $.when(points).done(function() {
+            var map = L.map('mapid').setView([51.505, -0.09], 13);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+
+
+
+
+            // from https://stackoverflow.com/questions/23567203/leaflet-changing-marker-color
+
+            const userIcon = L.divIcon({
+                className: "my-custom-pin",
+                iconAnchor: [0, 24],
+                labelAnchor: [-6, 0],
+                popupAnchor: [0, -36],
+                html: `<span style="background-color: #1e60c9" class="marker"></span>`
+            })
+
+            const actionIcon = L.divIcon({
+                className: "my-custom-pin",
+                iconAnchor: [0, 24],
+                labelAnchor: [-6, 0],
+                popupAnchor: [0, -36],
+                html: `<span style="background-color: #871ec9" class="marker"></span>`
+            })
+
+            const groupIcon = L.divIcon({
+                className: "my-custom-pin",
+                iconAnchor: [0, 24],
+                labelAnchor: [-6, 0],
+                popupAnchor: [0, -36],
+                html: `<span style="background-color: #8dc91e" class="marker"></span>`
+            })
+
+            // from https://gist.github.com/geog4046instructor/80ee78db60862ede74eacba220809b64
+            // replace Leaflet's default blue marker with a custom icon
+            function createCustomIcon(feature, latlng) {
+                if (feature.properties.type == 'user') {
+                    return L.marker(latlng, {
+                        icon: userIcon
+                    })
+                }
+
+                if (feature.properties.type == 'action') {
+                    return L.marker(latlng, {
+                        icon: actionIcon
+                    })
+                }
+
+                if (feature.properties.type == 'group') {
+                    return L.marker(latlng, {
+                        icon: groupIcon
+                    })
+                }
+
+                return L.marker(latlng, {
+                    icon: userIcon
+                })
+            }
+
+
+
+            // Add requested external GeoJSON to map
+            var allPoints = L.geoJSON(points.responseJSON, {
+                    pointToLayer: createCustomIcon
+                })
+                .bindPopup(function(layer) {
+                    return "<strong>" + layer.feature.properties.title + '</strong><br/>' + layer.feature
+                        .properties.description;
+                }).addTo(map);
+
+
+
+            map.fitBounds(allPoints.getBounds());
+
+
+        });
+
+    </script>
 @endsection
 
 @section('content')
 
 
-  <div class="toolbox d-md-flex">
-    <div class="d-flex mb-2">
-      <h1>
-        <a up-follow href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.map') }}
-      </hi>
+    <div class="toolbox d-md-flex">
+        <div class="d-flex mb-2">
+            <h1>
+                <a up-follow href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
+                {{ trans('messages.map') }}
+            </h1>
+        </div>
+
+        <div class="ml-auto">
+            @include ('partials.preferences-show')
+        </div>
     </div>
 
-    <div class="ml-auto">
-      @include ('partials.preferences-show')
-    </div>
-  </div>
 
-
-  <p class="help">{{trans('messages.map_info')}}</p>
+    
 
 
 
-  <div id="mapid"></div>
+    <div id="mapid" class="mb-4"></div>
 
+
+    <span style="background-color: #8dc91e;" class="badge">Group</span>
+
+    <span style="background-color: #1e60c9" class="badge">User</span>
+
+    <span style="background-color: #871ec9" class="badge">Action</span>
+
+
+    <p class="help">{{ trans('messages.map_info') }}</p>
 
 
 @endsection
