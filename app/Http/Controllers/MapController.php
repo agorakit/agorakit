@@ -21,6 +21,7 @@ class MapController extends Controller
     $title = trans('messages.map');
 
     return view('dashboard.map')
+      ->with('json', route('map.geojson'))
       ->with('tab', 'map')
       ->with('title', $title);
   }
