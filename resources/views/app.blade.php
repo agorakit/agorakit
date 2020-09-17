@@ -16,7 +16,7 @@
 
 
   <link rel="stylesheet" href="{{ mix('/css/fullcalendar.css') }}">
-  <link rel="stylesheet" href="{{ asset('/css/datatables.css') }}">
+  <link rel="stylesheet" href="{{ asset('/css/datatables.min.css') }}">
   <link rel="stylesheet" href="{{ asset('/css/selectize.css') }}">
   <link rel="stylesheet" href="{{ asset('/css/unpoly.css') }}">
 
@@ -74,7 +74,7 @@
   <script src="{{ asset('js/fullcalendar.js') }}"></script>
   <script src="{{ asset('js/ckeditor.js') }}"></script>
 
-  <script src="{{ asset('js/datatables.js') }}"></script>
+  <script src="{{ asset('js/datatables.min.js') }}"></script>
 
 
   <script src="{{ asset('js/selectize.js') }}"></script>

@@ -276,6 +276,7 @@ up.$compiler('.data-table', function ($element) {
 	$element.DataTable({
 		"pageLength": 10,
 		stateSave: true,
+		responsive: true,
 		dom: 'frtpBi',
 		buttons: [
 			{
