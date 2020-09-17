@@ -17,7 +17,7 @@
 
                 @can('create-action', $group)
                     <div class="ml-auto">
-                        <a class="btn btn-primary" href="{{ route('groups.actions.create', $group ) }}">
+                        <a up-modal=".tab_content" class="btn btn-primary" href="{{ route('groups.actions.create', $group ) }}">
                             <i class="fa fa-plus"></i> {{trans('action.create_one_button')}}
                         </a>
                     </div>
