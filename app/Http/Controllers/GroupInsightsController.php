@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Group;
 use Carbon\Carbon;
-use Charts;
+use App\Charts\AgorakitChart;
+use DB;
 
 class GroupInsightsController extends Controller
 {
@@ -16,44 +17,130 @@ class GroupInsightsController extends Controller
     {
         $this->authorize('administer', $group);
 
-        // This is really a tribute to laravel efficiency and to the marvelous https://github.com/ConsoleTVs/Charts package
+         // Global stats :
+         $chart = new AgorakitChart;
+         $chart->title('General stats');
+         $chart->labels(['Users', 'Discussions', 'Events', 'Files']);
+         $chart->dataset('Amount', 'bar', [$group->users()->count(), $group->discussions()->count(), $group->actions()->count(), $group->files()->count()]);
+         $charts[] = $chart;
 
-        $charts[] = Charts::create('bar', 'highcharts')
-        ->title('General stats')
-        ->labels(['Users', 'Discussions', 'Events', 'Files'])
-        ->values([$group->users()->count(), $group->discussions()->count(), $group->actions()->count(), $group->files()->count()])
-        ->dimensions(0, 400);
 
-        $charts[] = Charts::database($group->actions()->get(), 'line', 'highcharts')
-        ->title('Events per month')
-        ->elementLabel('Events')
-        ->dimensions(0, 400)
-        ->dateColumn('start')
-        ->lastByMonth($group->created_at->diffInMonths(Carbon::now()) + 1); // this finds the number of months since group creation. Clever isn't it ?
+        // Discussions
+        $results = \App\Discussion::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
+        ->groupBy('yearmonth')
+        ->orderBy('yearmonth', 'asc')
+        ->where('group_id', $group->id)
+        ->get();
 
-        $charts[] = Charts::database($group->discussions()->get(), 'line', 'highcharts')
-        ->title('Discussions per month')
-        ->elementLabel('Discussions')
-        ->dimensions(0, 400)
-        ->lastByMonth($group->created_at->diffInMonths(Carbon::now()) + 1);
+        $dataset = null;
+        $labels = null;
+        foreach ($results as $result)
+        {
+            $dataset[] = $result->data;
+            $labels[] = $result->year . ' / ' .  $result->month;
+        }
 
-        $charts[] = Charts::database($group->files()->get(), 'line', 'highcharts')
-        ->title('Files per month')
-        ->elementLabel('Files')
-        ->dimensions(0, 400)
-        ->lastByMonth($group->created_at->diffInMonths(Carbon::now()) + 1);
+        $chart = new AgorakitChart;
+        $chart->title('Discussions per month');
+        $chart->labels($labels);
+        $chart->dataset('Amount', 'line', $dataset);
+        $charts[] = $chart;
 
-        $charts[] = Charts::database($group->memberships()->get(), 'line', 'highcharts')
-        ->title('New memberships per month')
-        ->elementLabel('Memberships')
-        ->dimensions(0, 400)
-        ->lastByMonth($group->created_at->diffInMonths(Carbon::now()) + 1);
 
-        $charts[] = Charts::create('bar', 'highcharts')
-        ->title('Storage use')
-        ->labels(['Files'])
-        ->values([$group->files()->sum('filesize')])
-        ->dimensions(0, 400);
+
+         // Actions
+         $results = \App\Action::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
+         ->groupBy('yearmonth')
+         ->orderBy('yearmonth', 'asc')
+         ->where('group_id', $group->id)
+         ->get();
+ 
+         $dataset = null;
+         $labels = null;
+         foreach ($results as $result)
+         {
+             $dataset[] = $result->data;
+             $labels[] = $result->year . ' / ' .  $result->month;
+         }
+ 
+         $chart = new AgorakitChart;
+         $chart->title('Actions per month');
+         $chart->labels($labels);
+         $chart->dataset('Amount', 'line', $dataset);
+         $charts[] = $chart;
+
+
+         // Members
+        $results = \App\Membership::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
+        ->groupBy('yearmonth')
+        ->orderBy('yearmonth', 'asc')
+        ->where('group_id', $group->id)
+        ->get();
+
+        $dataset = [];
+        $labels = [];
+        foreach ($results as $result)
+        {
+            $dataset[] = $result->data;
+            $labels[] = $result->year . ' / ' .  $result->month;
+        }
+
+        $chart = new AgorakitChart;
+        $chart->title('Memberships per month');
+        $chart->labels($labels);
+        $chart->dataset('Amount', 'line', $dataset);
+        $charts[] = $chart;
+
+
+
+        // Files
+        $results = \App\File::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
+        ->groupBy('yearmonth')
+        ->orderBy('yearmonth', 'asc')
+        ->where('group_id', $group->id)
+        ->get();
+
+        $dataset = [];
+        $labels = [];
+        foreach ($results as $result)
+        {
+            $dataset[] = $result->data;
+            $labels[] = $result->year . ' / ' .  $result->month;
+        }
+
+        $chart = new AgorakitChart;
+        $chart->title('Files per month');
+        $chart->labels($labels);
+        $chart->dataset('Amount', 'line', $dataset);
+        $charts[] = $chart;
+
+
+
+
+        // Evolution of storage use
+        $results = \App\File::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, sum(filesize) as data')
+        ->groupBy('yearmonth')
+        ->orderBy('yearmonth', 'asc')
+        ->where('group_id', $group->id)
+        ->get();
+
+        $dataset = [];
+        $labels = [];
+        $total = 0;
+        foreach ($results as $result)
+        {
+            $total = $total + $result->data / 1000000;
+            $dataset[] = round($total);
+            $labels[] = $result->year . ' / ' .  $result->month;
+        }
+
+        $chart = new AgorakitChart;
+        $chart->title('Evolution of storage use');
+        $chart->labels($labels);
+        $chart->dataset('Megabytes', 'line', $dataset);
+        $charts[] = $chart;
+
+         
 
         return view('groups.insights')
         ->with('charts', $charts)
