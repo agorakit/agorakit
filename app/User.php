@@ -259,7 +259,7 @@ class User extends Authenticatable
 
     public function isAttending(Action $action)
     {
-        return $action->users->contains($this->id);
+        return $action->attending->contains($this->id);
     }
 
     /**

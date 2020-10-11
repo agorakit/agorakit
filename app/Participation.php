@@ -6,10 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 
-class ActionUser extends Model
+/** 
+ * Wether a user participates or not to a specific action (event)
+ */
+class Participation extends Model
 {
     use ValidatingTrait;
     use SoftDeletes;
+
+    const UNDECIDED = 0;
+    const PARTICIPATE = 10;
+    const WONT_PARTICIPATE = -10;
+
+    protected $attributes = [
+        'status' => self::PARTICIPATE,
+        'notification' => 60,
+    ];
 
     protected $rules = [
         'user_id'   => 'required|exists:users,id',
@@ -17,7 +29,7 @@ class ActionUser extends Model
     ];
 
     protected $fillable = [
-        'user_id', 'action_id', 'notification'
+        'user_id', 'action_id', 'notification', 'status'
     ];
 
     protected $table = 'action_user';

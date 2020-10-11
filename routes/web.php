@@ -319,12 +319,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::delete('actions/{action}/delete', 'GroupActionController@destroy')->name('.actions.delete');
         Route::get('actions/{action}/history', 'GroupActionController@history')->name('.actions.history');
 
-        // Action (un)attending
-        Route::get('actions/{action}/attend', 'ActionUserController@create')->name('.actions.attend');
-        Route::get('actions/{action}/unattend', 'ActionUserController@destroyConfirm')->name('.actions.unattend');
-
-        Route::post('actions/{action}/attend', 'ActionUserController@store')->name('.actions.attend.store');
-        Route::post('actions/{action}/unattend', 'ActionUserController@destroy')->name('.actions.unattend.store');
+        // Action participation
+        Route::get('actions/{action}/participation', 'ParticipationController@edit')->name('.actions.participation');
+        Route::post('actions/{action}/participation', 'ParticipationController@update')->name('.actions.participation.update');
+        
 
         // Files
         Route::get('files', 'GroupFileController@index')->name('.files.index');

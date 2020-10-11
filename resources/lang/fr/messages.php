@@ -206,6 +206,7 @@ return [
   'upload_files'                                   => 'Envoyer les fichiers',
   'user_added_successfuly'                         => 'L\'utilisateur ajouté avec succès',
   'user_attending'                                 => 'Participants',
+  'user_not_attending'                                 => 'Ne participent pas',
   'user_invited'                                   => 'Utilisateurs-trices invité-es',
   'user_made_member_successfuly'                   => 'Utilisateur membre avec succès',
   'user_profile'                                   => 'Profil utilisateur',

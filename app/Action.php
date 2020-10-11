@@ -82,6 +82,24 @@ class Action extends Model
     public function users()
     {
         return $this->belongsToMany(\App\User::class);
+        // TODO candidate for deletion ?
+    }
+
+
+    /**
+     * The users attending this action.
+     */
+    public function attending()
+    {
+        return $this->belongsToMany(\App\User::class)->wherePivot('status', '10');
+    }
+
+    /**
+     * The users NOT attending this action.
+     */
+    public function notAttending()
+    {
+        return $this->belongsToMany(\App\User::class)->wherePivot('status', '-10');
     }
 
     /**

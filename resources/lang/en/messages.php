@@ -206,6 +206,7 @@ return [
   'upload_files'                                   => 'Upload Files',
   'user_added_successfuly'                         => 'User added successfully',
   'user_attending'                                 => 'Users attending',
+  'user_not_attending'                             => 'Users not attending',
   'user_invited'                                   => 'User invited',
   'user_made_member_successfuly'                   => 'User made member successfully',
   'user_profile'                                   => 'User profile',
