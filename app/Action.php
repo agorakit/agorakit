@@ -81,7 +81,7 @@ class Action extends Model
      */
     public function users()
     {
-        return $this->belongsToMany(\App\User::class);
+        return $this->belongsToMany(\App\User::class)->wherePivot('status', '10');
         // TODO candidate for deletion ?
     }
 
