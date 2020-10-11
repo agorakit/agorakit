@@ -37,8 +37,8 @@ class InsightsController extends Controller
         ->orderBy('yearmonth', 'asc')
         ->get();
 
-        $dataset = null;
-        $labels = null;
+        $dataset = [];
+        $labels = [];
         foreach ($results as $result)
         {
             $dataset[] = $result->data;
@@ -58,8 +58,8 @@ class InsightsController extends Controller
         ->orderBy('yearmonth', 'asc')
         ->get();
 
-        $dataset = null;
-        $labels = null;
+        $dataset = [];
+        $labels = [];
         foreach ($results as $result)
         {
             $dataset[] = $result->data;

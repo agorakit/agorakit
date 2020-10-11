@@ -32,8 +32,8 @@ class GroupInsightsController extends Controller
         ->where('group_id', $group->id)
         ->get();
 
-        $dataset = null;
-        $labels = null;
+        $dataset = [];
+        $labels = [];
         foreach ($results as $result)
         {
             $dataset[] = $result->data;
@@ -55,8 +55,8 @@ class GroupInsightsController extends Controller
          ->where('group_id', $group->id)
          ->get();
  
-         $dataset = null;
-         $labels = null;
+         $dataset = [];
+         $labels = [];
          foreach ($results as $result)
          {
              $dataset[] = $result->data;
