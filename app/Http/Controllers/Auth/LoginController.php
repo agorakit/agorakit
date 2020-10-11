@@ -53,13 +53,10 @@ class LoginController extends Controller
         // find user
         $user = User::where($field, $login)->first();
 
-        // check if password is not filled or too short
-        if (strlen($request->input('password')) < 8) {
-            // send login link by email
-            // redirect to homepage with flash message
-
+        // check if password is not filled
+        if (empty($request->input('password'))) {
             if ($user) {
-                // send invitation email
+                // send login link by email
                 Mail::to($user->email)->send(new LoginByEmail($user));
                 flash(__('Check your mailbox, we sent you a login link. It will expires in 30 minutes'));
                 return redirect('/');
