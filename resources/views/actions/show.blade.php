@@ -87,7 +87,7 @@
         </div>
       </div>
       <div class="d-flex flex-wrap users mt-2 mb-2">
-        @foreach($action->users as $user)
+        @foreach($action->attending as $user)
           @include('users.user-card')
         @endforeach
       </div>
@@ -105,7 +105,7 @@
         </div>
       </div>
       <div class="d-flex flex-wrap users mt-2 mb-2">
-        @foreach($action->users as $user)
+        @foreach($action->notAttending as $user)
           @include('users.user-card')
         @endforeach
       </div>
