@@ -160,6 +160,7 @@
                         @lang('This discussion is archived, you cannot comment anymore')
                     </div>
                 @else
+                <h2>@lang('messages.reply')</h2>
                     @include ('comments.create')
                 @endif
             @endcan
