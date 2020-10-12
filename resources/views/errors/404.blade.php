@@ -4,10 +4,15 @@
 
 @section('message')
 
-Sorry, the page you are looking for could not be found.
+<div class="container main-container">
+
+<h1>Sorry, the page you are looking for could not be found.</h1>
 
 <br/>
 <small>
 {{$exception->getMessage()}}
 </small>
+
+</div>
+
 @endsection
