@@ -1,6 +1,4 @@
-![logo](_media/icon.svg)
-
-# Agorakit
+![logo](https://agorakit.org/images/agorakit-logo.svg)
 
 > Organization tool for collectives / outil d'organisation pour collectifs
 
