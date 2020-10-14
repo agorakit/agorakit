@@ -20,7 +20,10 @@ if (mix.inProduction()) {
 
 
 
-mix.browserSync({ proxy: '127.0.0.1:8000' });
+mix.browserSync({ 
+    proxy: '127.0.0.1:8000',
+    notify: false 
+});
 
 // unpoly
 mix.copy('node_modules/unpoly/dist/unpoly.min.js', 'public/js/unpoly.js');
@@ -31,7 +34,7 @@ mix.copy('node_modules/unpoly/dist/unpoly.min.css', 'public/css/unpoly.css');
 
 mix.combine([
     'node_modules/@fullcalendar/core/main.min.js',
-    'node_modules/@fullcalendar/core/locale-all.min.js',
+    'node_modules/@fullcalendar/core/locales-all.min.js',
     'node_modules/@fullcalendar/daygrid/main.min.js',
     'node_modules/@fullcalendar/list/main.min.js',
     'node_modules/@fullcalendar/timegrid/main.min.js',
@@ -42,7 +45,6 @@ mix.combine([
 // css
 mix.combine([
     'node_modules/@fullcalendar/core/main.min.css',
-    'node_modules/@fullcalendar/core/locale-all.min.css',
     'node_modules/@fullcalendar/daygrid/main.min.css',
     'node_modules/@fullcalendar/list/main.min.css',
     'node_modules/@fullcalendar/timegrid/main.min.css'

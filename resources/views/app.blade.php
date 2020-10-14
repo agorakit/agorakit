@@ -12,6 +12,7 @@
   <!-- font awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/v4-shims.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 
 
 
@@ -44,13 +45,13 @@
 
 
 
-  <div class="spinner shadow">
+  <div class="spinner bg-gray-200 fixed px-4 py-2 m-6 rounded-full hidden">
     <i class="far fa-save"></i>
     Please wait!
   </div>
 
-  <div class="network-error shadow">
-    <i class="far fa-save"></i>
+  <div class="network-error bg-gray-200 fixed px-4 py-2 m-6 rounded-full hidden">
+      <i class="far fa-save"></i>
    No network!
   </div>
 
