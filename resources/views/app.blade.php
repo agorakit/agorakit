@@ -52,12 +52,12 @@
         No network!
     </div>
 
-    <div class="container main-container">
-        <div class="main">
-            @include('partials.errors')
-            @yield('content')
-        </div>
+
+    <div class="mx-auto md:w-10/12 lg:w-8/12 max-w-5xl bg-white sm:shadow-xl md:my-5 sm:rounded-lg">
+        @include('partials.errors')
+        @yield('content')
     </div>
+
 
     <footer class="text-xs text-gray-500 sm:rounded-lg mx-auto">
         {{ trans('messages.made_with') }}

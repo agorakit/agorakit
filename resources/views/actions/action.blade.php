@@ -1,5 +1,5 @@
 <div class="flex items-center px-4 py-3" up-expand>
-    <div class="border-gray-200 text-gray-600 border-2 flex flex-col items-center justify-center h-12 w-12 rounded-lg mx-1">
+    <div class="border-gray-200 text-gray-600 border-2 flex-shrink-0 flex flex-col items-center justify-center h-12 w-12 rounded-lg mx-1">
         <div class="text-xl -mb-2 text-gray-800">{{ $action->start->format('d') }}</div>
         <div class="text-sm">{{ $action->start->format('M') }}</div>
     </div>
