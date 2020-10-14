@@ -13,13 +13,12 @@
 
 
             <a class="bg-gray-700 text-gray-100 inline-block rounded-full px-4 py-1 sm:py-2 sticky shadow-lg text-sm"
-                href="">New
-                discussion</a>
+                href="{{ route('discussions.create') }}">{{ trans('discussion.create_one_button') }}</a>
         </div>
 
 
         @if ($discussions->count() > 0)
-            <div class="divide-y divide-gray-400">
+            <div class="divide-y divide-gray-300">
                 @foreach ($discussions as $discussion)
                     @include('discussions.discussion')
                 @endforeach
@@ -30,13 +29,17 @@
 
 
 
-        {{--
-        @forelse( $actions as $action)
-        @include('actions.action')
-        @empty
-        {{ trans('messages.nothing_yet') }}
-        @endforelse
-        --}}
+        @if ($actions->count() > 0)
+            <div class="divide-y divide-gray-300 my-8">
+                @foreach ($actions as $action)
+                    @include('actions.action')
+                @endforeach
+            </div>
+        @else
+            {{ trans('messages.nothing_yet') }}
+        @endif
+
+
 
     </div>
 
