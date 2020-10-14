@@ -15,12 +15,12 @@
 
 
 
-  <link rel="stylesheet" href="{{ mix('/css/fullcalendar.css') }}">
+  <link rel="stylesheet" href="{{ asset('/css/fullcalendar.css') }}">
   <link rel="stylesheet" href="{{ asset('/css/datatables.min.css') }}">
   <link rel="stylesheet" href="{{ asset('/css/selectize.css') }}">
   <link rel="stylesheet" href="{{ asset('/css/unpoly.css') }}">
 
-  <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
+  <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
 
 
   <!-- additional css -->

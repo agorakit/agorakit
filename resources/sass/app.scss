@@ -14,6 +14,7 @@
 @import "~@fullcalendar/list/main.css";
 
 
+/*
 @import "agorakit";
 @import "actions";
 @import "comments";
@@ -29,7 +30,14 @@
 @import "status";
 @import "oembed";
 @import "navigation";
-
+*/
 
 /**Uncomment to add visual debugging */
 //@import "debug";
+
+
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
