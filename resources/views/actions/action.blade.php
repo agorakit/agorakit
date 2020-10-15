@@ -1,60 +1,31 @@
-<div class="action" up-expand>
-
-  <div class="date">
-    <div class="day">
-      {{$action->start->format('d')}}
-    </div>
-    <div class="month">
-      {{$action->start->format('M')}}
-    </div>
-  </div>
-
-  <div class="content">
-
-
-    <div class="name mr-2">
-      <a up-follow href="{{ route('groups.actions.show', [$action->group, $action]) }}">
-        {{ $action->name }}
-      </a>
-    </div>
-    <div class="tags">
-      @if ($action->tags->count() > 0)
-        @foreach ($action->tags as $tag)
-          @include('tags.tag')
-        @endforeach
-      @endif
+<div class="flex items-center py-3" up-expand>
+    <div class="border-gray-200 text-gray-600 border-2 flex-shrink-0 flex flex-col items-center justify-center h-12 w-12 rounded-lg mx-1">
+        <div class="text-xl -mb-2 text-gray-800">{{ $action->start->format('d') }}</div>
+        <div class="text-sm">{{ $action->start->format('M') }}</div>
     </div>
 
 
-    <div class="meta">
-      {{$action->start->format('H:i')}} - {{$action->stop->format('H:i')}}, {{$action->location}}, {{ $action->group->name }}
+    <div class="mx-2">
+        <div class="text-gray-800">
+              <a up-follow href="{{ route('groups.actions.show', [$action->group, $action]) }}">
+                {{ $action->name }}
+            </a>
+        </div>
+        <div class="flex align-middle text-gray-600 text-xs">
+            <i class="ri-user-line mr-2"></i> {{$action->attending->count()}} {{trans('participants')}}
+        </div>
+
+        <div class="flex align-middle text-gray-600 text-xs">
+            <i class="ri-time-line mr-2"></i> {{ $action->start->format('H:i') }} - {{ $action->stop->format('H:i') }}
+        </div>
+
+        <div class="flex align-middle text-gray-600 text-xs">
+            <i class="ri-map-line mr-2"></i> {{ $action->location }}
+        </div>
     </div>
-    <div class="summary">
-      {{ summary($action->body) }}
-    </div>
-
-
-
-    <div>
-      <div class="d-flex flex-wrap users mt-2 mb-2">
-        @foreach($action->attending as $user)
-          <div class="mb-1">
-            @include('users.user-avatar')
-          </div>
-        @endforeach
-      </div>
-
-      <div class="mb-2">
-        @if (Auth::user() && Auth::user()->isAttending($action))
-          <a class="btn btn-warning btn-sm" up-modal=".dialog" href="{{route('groups.actions.participation', [$action->group, $action])}}">{{trans('messages.unattend')}}</a>
-        @elseif (Auth::user() && !Auth::user()->isAttending($action))
-          <a class="btn btn-success btn-sm" up-modal=".dialog" href="{{route('groups.actions.participation', [$action->group, $action])}}">{{trans('messages.attend')}}</a>
-        @endif
-      </div>
-    </div>
-
-
-  </div>
-
-
 </div>
+
+
+
+
+

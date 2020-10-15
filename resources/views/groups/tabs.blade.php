@@ -1,5 +1,5 @@
-<div class="group-header mb-4">
-    <h1 class="small">
+
+    <h1 class="text-2xl sm:text-3xl py-4 text-gray-700 truncate">
         <a up-follow up-reveal="false" up-cache="false" href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
         @if (isset($tab) && ($tab <> 'home'))
             <a up-follow up-reveal="false" href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
@@ -7,7 +7,7 @@
             {{ $group->name }}
         @endif
 
-        <span class="small">
+        
             @if ($group->isOpen())
                 <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
             @elseif ($group->isClosed())
@@ -15,12 +15,10 @@
             @else
                 <i class="fa fa-eye-slash" title="{{trans('group.secret')}}"></i>
             @endif
-        </span>
+        
     </h1>
 
     @include('partials.invite')
-
-</div>
 
 
 @if (Auth::check())
