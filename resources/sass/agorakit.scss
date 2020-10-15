@@ -23,7 +23,7 @@ a
 }
 
 // from https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/
-body
+a
 {
   /* These are technically the same, but use both */
   overflow-wrap: break-word;
@@ -40,6 +40,13 @@ body
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
+}
+
+blockquote
+{
+  border-left: 3px solid #aaa;
+  margin-left: 2rem;
+  padding-left : 1rem;
 }
 
 /**************************** main content **************************/
