@@ -4,7 +4,7 @@
 
   @include('groups.tabs')
 
-  <div class="tab_content p-8">
+  <div class="tab_content">
 
     <div class="row">
       <div class="col-md-6">

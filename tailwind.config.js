@@ -1,14 +1,16 @@
 module.exports = {
   future: {
-    // removeDeprecatedGapUtilities: true,
-    // purgeLayersByDefault: true,
-    // defaultLineHeights: true,
-    // standardFontWeights: true
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
+    defaultLineHeights: true,
+    standardFontWeights: true
   },
-  purge: [],
+  purge: false,
   theme: {
     extend: {}
   },
   variants: {},
-  plugins: []
+  plugins: [
+    require('@tailwindcss/typography')
+  ]
 }

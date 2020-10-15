@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="tab_content">
+    <div class="tab_content p-4 prose">
         @if (strlen(setting('help_text')) > 5)
             {!! setting('help_text')!!}
         @else

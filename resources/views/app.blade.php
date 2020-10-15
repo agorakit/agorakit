@@ -53,18 +53,17 @@
     </div>
 
 
-    <div class="mx-auto md:w-10/12 lg:w-8/12 max-w-5xl bg-white sm:shadow-xl md:my-5 sm:rounded-lg">
+    <div class="mx-auto md:w-10/12 lg:w-8/12 max-w-5xl bg-white sm:shadow-xl md:my-5 sm:rounded-lg p-4 lg:p-8">
         @include('partials.errors')
         @yield('content')
     </div>
 
 
-    <footer class="text-xs text-gray-500 sm:rounded-lg mx-auto">
+    <footer class="h-40  p-10 text-xs flex justify-center text-gray-500 sm:rounded-lg">
         {{ trans('messages.made_with') }}
         <a up-follow href="https://www.agorakit.org">Agorakit ({{ config('agorakit.version') }})</a>
         - <a up-follow href="{{ request()->fullUrlWithQuery(['embed' => 1]) }}">{{ trans('messages.embed') }}</a>
     </footer>
-
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>

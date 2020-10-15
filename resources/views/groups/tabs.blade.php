@@ -1,5 +1,5 @@
 
-    <h1 class="text-2xl sm:text-3xl py-4 px-8 text-gray-700 truncate">
+    <h1 class="text-2xl sm:text-3xl py-4 text-gray-700 truncate">
         <a up-follow up-reveal="false" up-cache="false" href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
         @if (isset($tab) && ($tab <> 'home'))
             <a up-follow up-reveal="false" href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
@@ -23,7 +23,7 @@
 
 @if (Auth::check())
 
-    <ul class="nav nav-tabs nav-centered mb-4 px-8">
+    <ul class="nav nav-tabs nav-centered mb-4">
 
         <li class="nav-item">
             <a up-follow up-reveal="false" href="{{ route('groups.show', $group) }}" class="nav-link @if (isset($tab) && ($tab == 'home')) active @endif">
