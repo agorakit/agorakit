@@ -38,6 +38,40 @@
 
 @tailwind base;
 
+/* bring back some default */
+
+h1, h2, h3
+{
+    @apply mt-2;
+    @apply mb-2;
+    @apply text-gray-600;
+}
+
+h1 {
+    @apply text-3xl;
+}
+
+h2 {
+    @apply text-2xl;
+}
+
+h3 {
+    @apply text-xl;
+}
+
+a {
+    
+}
+
+ul {
+    list-style: inside;
+    @apply ml-8;
+}
+
+
+
+
+
 @tailwind components;
 
 @tailwind utilities;

@@ -42,12 +42,12 @@
 
 
 
-    <div class="spinner bg-gray-200 fixed px-4 py-2 m-6 rounded-full hidden">
+    <div class="spinner bg-green-700 text-green-200 fixed px-4 py-2 m-6 rounded-full shadow hidden">
         <i class="far fa-save"></i>
         Please wait!
     </div>
 
-    <div class="network-error bg-gray-200 fixed px-4 py-2 m-6 rounded-full hidden">
+    <div class="network-error bg-red-700 text-red-200 fixed px-4 py-2 m-6 right-0 rounded-full shadow hidden">
         <i class="far fa-save"></i>
         No network!
     </div>
