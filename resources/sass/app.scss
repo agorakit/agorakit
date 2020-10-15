@@ -6,7 +6,7 @@
 
 // unpoly
 @import "~unpoly/dist/unpoly.min.css";
-@import "~unpoly/dist/unpoly-bootstrap3.min.css";
+//@import "~unpoly/dist/unpoly-bootstrap3.min.css";
 
 @import "~@fullcalendar/core/main.css";
 @import "~@fullcalendar/daygrid/main.css";
@@ -14,7 +14,7 @@
 @import "~@fullcalendar/list/main.css";
 
 
-/*
+
 @import "agorakit";
 @import "actions";
 @import "comments";
@@ -30,47 +30,13 @@
 @import "status";
 @import "oembed";
 @import "navigation";
-*/
+
 
 /**Uncomment to add visual debugging */
 //@import "debug";
 
 
 @tailwind base;
-
-/* bring back some default */
-
-h1, h2, h3
-{
-    @apply mt-2;
-    @apply mb-2;
-    @apply text-gray-600;
-}
-
-h1 {
-    @apply text-3xl;
-}
-
-h2 {
-    @apply text-2xl;
-}
-
-h3 {
-    @apply text-xl;
-}
-
-a {
-    
-}
-
-ul {
-    list-style: inside;
-    @apply ml-8;
-}
-
-
-
-
 
 @tailwind components;
 
