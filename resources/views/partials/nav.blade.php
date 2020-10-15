@@ -25,9 +25,10 @@
 
         <div class="navbar-nav mr-auto">
 
+            @auth
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-cubes"></i>   {{ trans('messages.your_groups') }}
+                    <i class="fa fa-cubes"></i>   {{ trans('messages.groups') }}
                 </a>
                 <div class="dropdown-menu">
 
@@ -39,6 +40,7 @@
 
 
 
+                    
                     @forelse (Auth::user()->groups()->orderBy('name')->get() as $group)
                         <a up-target="body" class="dropdown-item" href="{{ route('groups.show', $group)}}">{{$group->name}}</a>
                     @empty
@@ -52,6 +54,7 @@
                     </a>
                 </div>
             </div>
+            @endauth
 
 
             <!-- Overview -->
@@ -164,7 +167,7 @@
 
 
 
-
+    @auth
             <!-- User profile -->
             <div class="dropdown nav-item">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -218,6 +221,17 @@
                 </div>
 
             </div>
+
+            @endauth
+
+            @guest
+                <div class="nav-item">
+        <div class="btn-group">
+          <a up-modal=".dialog" class="btn btn-primary" href="{{ url('login') }}">{{ trans('messages.login') }}</a>
+          <a up-modal=".dialog" class="btn btn-secondary" href="{{ url('register') }}">{{ trans('messages.register') }}</a>
+        </div>
+      </div>
+            @endguest
 
 
         </div>

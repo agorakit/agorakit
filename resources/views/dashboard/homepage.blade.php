@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <div class="flex justify-between my-4">
+    <div class="flex justify-between my-4 items-center">
         <form up-target="body" class="form-inline my-2 my-lg-0" role="search" action="{{ url('search') }}" method="get">
             <div class="input-group">
                 <input
@@ -13,8 +13,11 @@
         </form>
 
 
-        <a class="bg-gray-700 text-gray-100 rounded-full px-4 py-1 shadow-md text-sm flex flex-shrink-0 items-center"
-            href="{{ route('discussions.create') }}">{{ trans('discussion.create_one_button') }}</a>
+        <a class="bg-gray-700 text-gray-100 rounded-full shadow-md text-sm h-10 px-4 flex items-center"
+            href="{{ route('discussions.create') }}">
+            <i class="fas fa-pencil-alt"></i>
+            <span class="hidden md:inline ml-2">{{ trans('discussion.create_one_button') }}</span>
+        </a>
     </div>
 
 
