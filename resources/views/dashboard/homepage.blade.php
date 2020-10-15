@@ -3,6 +3,11 @@
 @section('content')
 
 
+    <div class="flex justify-end">
+        @include ('partials.preferences-show')
+    </div>
+
+
     <div class="flex justify-between my-4 items-center">
         <form up-target="body" class="form-inline my-2 my-lg-0" role="search" action="{{ url('search') }}" method="get">
             <div class="input-group">
