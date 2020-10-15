@@ -31,7 +31,7 @@
 
     @if ($discussion->unReadCount() > 0)
         <div class="rounded-full bg-red-700 text-xs text-red-200 w-6 justify-center flex flex-shrink-0">
-            {{ $discussion->unReadCount() }} {{ __('New') }}
+            {{ $discussion->unReadCount() }}
         </div>
     @else
         @if ($discussion->comments_count > 0)
