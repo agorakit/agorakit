@@ -1,10 +1,10 @@
 {
-    "/js/app.js": "/js/app.js?id=9045e48aad6478352f3e",
-    "/css/app.css": "/css/app.css?id=0344cedce7b5b00870c5",
-    "/js/unpoly.js": "/js/unpoly.js?id=49fc82c3ff9f2a90e92e",
-    "/css/unpoly.css": "/css/unpoly.css?id=79a550793ab78d0b619a",
-    "/js/fullcalendar.js": "/js/fullcalendar.js?id=5c37de3688644560e26c",
-    "/css/fullcalendar.css": "/css/fullcalendar.css?id=5aee19df04628cb6cacc",
-    "/js/selectize.js": "/js/selectize.js?id=5e13505f150647321c91",
-    "/css/selectize.css": "/css/selectize.css?id=4ab26a1ff2f2f6fe5440"
+    "/js/app.js": "/js/app.js",
+    "/css/app.css": "/css/app.css",
+    "/js/unpoly.js": "/js/unpoly.js",
+    "/css/unpoly.css": "/css/unpoly.css",
+    "/js/fullcalendar.js": "/js/fullcalendar.js",
+    "/css/fullcalendar.css": "/css/fullcalendar.css",
+    "/js/selectize.js": "/js/selectize.js",
+    "/css/selectize.css": "/css/selectize.css"
 }

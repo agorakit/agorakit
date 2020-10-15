@@ -3,14 +3,17 @@
 @section('content')
 
 
-    <div class="flex justify-between mx-4 py-6">
+    <div class="flex justify-between my-4">
+        <form up-target="body" class="form-inline my-2 my-lg-0" role="search" action="{{ url('search') }}" method="get">
+            <div class="input-group">
+                <input
+                    class="shadow-md appearance-none border rounded-full py-2 px-3 w-32 sm:w-56 text-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    type="text" name="query" placeholder="{{ trans('messages.search') }}..." aria-label="Search">
+            </div>
+        </form>
 
-        <input
-            class="shadow-md appearance-none border rounded-full px-3 w-32 sm:w-56 text-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="username" type="text" placeholder="Search..." />
 
-
-        <a class="bg-gray-700 text-gray-100 inline-block rounded-full px-4 py-1 sm:py-2 sticky shadow-md text-sm flex-shrink-0"
+        <a class="bg-gray-700 text-gray-100 rounded-full px-4 py-1 shadow-md text-sm flex flex-shrink-0 items-center"
             href="{{ route('discussions.create') }}">{{ trans('discussion.create_one_button') }}</a>
     </div>
 

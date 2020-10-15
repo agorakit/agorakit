@@ -59,7 +59,7 @@
     </div>
 
 
-    <footer class="h-40  p-10 text-xs flex justify-center text-gray-500 sm:rounded-lg">
+    <footer class="h-40  p-10 text-xs text-gray-600 sm:rounded-lg text-center">
         {{ trans('messages.made_with') }}
         <a up-follow href="https://www.agorakit.org">Agorakit ({{ config('agorakit.version') }})</a>
         - <a up-follow href="{{ request()->fullUrlWithQuery(['embed' => 1]) }}">{{ trans('messages.embed') }}</a>

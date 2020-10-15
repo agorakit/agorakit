@@ -1,4 +1,4 @@
-<div up-follow up-expand up-reveal="false" class="flex items-center  px-4 py-3 hover:bg-gray-100">
+<div up-follow up-expand up-reveal="false" class="flex items-center py-3 hover:bg-gray-100">
 
     <img class="h-12 w-12 rounded-full object-cover mx-1  flex-shrink-0"
         src="{{ route('users.cover', [$discussion->user, 'small']) }}" />
