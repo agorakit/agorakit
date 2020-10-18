@@ -1,7 +1,7 @@
 <?php
 
 return [
-  'member_since'                       => 'Участник с',
+  'member_since'                       => 'Вступил',
   'no_file_selected'                   => 'Файл не выбран',
   'notifications_interval'             => 'Оповещения',
   'notified'                           => 'Уведомлен',
@@ -124,7 +124,7 @@ return [
   'location'                                       => 'Расположение',
   'login'                                          => 'Вход',
   'logout'                                         => 'Выход',
-  'made_with'                                      => 'Сделано с',
+  'made_with'                                      => 'Работает на',
   'mail'                                           => 'Email',
   'make_user_admin'                                => 'Сделать пользователя администратором',
   'map'                                            => 'Карта',
@@ -212,7 +212,7 @@ return [
   'user_removed_successfuly'                       => 'Пользователь успешно удален',
   'users'                                          => 'Участники',
   'users_list'                                     => 'Список участников',
-  'visit'                                          => 'Посещение',
+  'visit'                                          => 'Посетить',
   'visit_link'                                     => 'Перейдите по ссылке ',
   'we_need_to_confirm'                             => 'Нам нужно подтвердить ваш аккаунт',
   'when'                                           => 'когда',
