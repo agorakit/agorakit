@@ -159,7 +159,7 @@ return [
   'remember_me'                                    => 'Запомнить меня',
   'remove_user'                                    => 'Удалить пользователя',
   'remove_user_admin'                              => 'Отозвать права администратора',
-  'reply'                                          => 'Отвеить',
+  'reply'                                          => 'Ответить',
   'reset_password_email_subject'                   => 'Сбросить ваш пароль',
   'ressource_created_successfully'                 => 'Ресурс успешно создан',
   'ressource_deleted_successfully'                 => 'Ресурс успешно удален',
