@@ -1,0 +1,133 @@
+
+/* 
+Our custom reset, based partly on bootstrap and tailwind
+
+- in bootstrap I don't like default styling of links
+- in tailwind I hate the removal of styling on normal content
+*/
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  border-width: 0; 
+  border-style: solid; 
+  border-color: #e2e8f0; 
+}
+
+html {
+  font-family: sans-serif;
+}
+
+
+body {
+  margin: 0;
+}
+
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
+p > a
+{
+  text-decoration: underline;
+}
+
+//
+// Typography
+//
+
+// Remove top margins from headings
+//
+// By default, `<h1>`-`<h6>` all receive top and bottom margins. We nuke the top
+// margin for easier control within type scales as it avoids margin collapsing.
+// stylelint-disable-next-line selector-list-comma-newline-after
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  font-weight: 300;
+}
+
+html {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 1 */
+  line-height: 1.5; /* 2 */
+}
+
+
+// Reset margins on paragraphs
+//
+// Similarly, the top margin on `<p>`s get reset. However, we also reset the
+// bottom margin to use `rem` units instead of `em`.
+p {
+  margin-top: 0;
+  //margin-bottom: $paragraph-margin-bottom;
+}
+
+
+ol,
+ul,
+dl {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+ol ol,
+ul ul,
+ol ul,
+ul ol {
+  margin-bottom: 0;
+}
+
+dd {
+  margin-bottom: .5rem;
+  margin-left: 0; // Undo browser default
+}
+
+blockquote {
+  margin: 0 0 1rem;
+}
+
+//
+// Tables
+//
+
+table {
+  border-collapse: collapse; // Prevent double borders
+}
+
+
+//
+// Forms
+//
+
+label {
+  // Allow labels to use `margin` for spacing.
+  display: inline-block;
+}
+
+
+
+textarea {
+  overflow: auto; // Remove the default vertical scrollbar in IE.
+  // Textareas should really only resize vertically so they don't break their (horizontal) containers.
+  resize: vertical;
+}
+
+fieldset {
+  // Browsers set a default `min-width: min-content;` on fieldsets,
+  // unlike e.g. `<div>`s, which have `min-width: 0;` by default.
+  // So we reset that to ensure fieldsets behave more like a standard block element.
+  // See https://github.com/twbs/bootstrap/issues/12359
+  // and https://html.spec.whatwg.org/multipage/#the-fieldset-and-legend-elements
+  min-width: 0;
+  // Reset the default outline behavior of fieldsets so they don't affect page layout.
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+
+hr {
+  border-top-width: 1px;
+}

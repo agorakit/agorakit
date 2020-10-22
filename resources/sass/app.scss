@@ -1,8 +1,12 @@
 // Variables
 @import "variables";
 
-// Bootstrap
-@import "~bootstrap/scss/bootstrap";
+@import "reset";
+
+
+
+// Custom Bootstrap with only the elements we really use
+@import "bootstrap";
 
 // unpoly
 @import "~unpoly/dist/unpoly.min.css";
@@ -16,10 +20,11 @@
 
 
 @import "agorakit";
+
 @import "actions";
 @import "comments";
-@import "dialog";
-@import "discussions";
+//@import "dialog";
+//@import "discussions";
 @import "files";
 @import "users";
 @import "settings";

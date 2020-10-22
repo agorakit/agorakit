@@ -27,7 +27,7 @@
 
 
     @if ($discussions->count() > 0)
-        <div class="divide-y divide-gray-300">
+        <div class="">
             @foreach ($discussions as $discussion)
                 @include('discussions.discussion')
             @endforeach
@@ -39,7 +39,7 @@
 
 
     @if ($actions->count() > 0)
-        <div class="divide-y divide-gray-300 my-8">
+        <div class="my-8">
             @foreach ($actions as $action)
                 @include('actions.action')
             @endforeach

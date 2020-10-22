@@ -27,7 +27,7 @@
 
         <li class="nav-item">
             <a up-follow up-reveal="false" href="{{ route('groups.show', $group) }}" class="nav-link @if (isset($tab) && ($tab == 'home')) active @endif">
-                <i class="fa fa-info-circle"></i> <span class="d-none d-lg-inline">{{ trans('messages.group_home') }}</span>
+                <i class="fa fa-info-circle"></i> <span class="hidden xl:inline">{{ trans('messages.group_home') }}</span>
             </a>
         </li>
 
@@ -36,7 +36,7 @@
             @can ('viewDiscussions', $group)
                 <li class="nav-item">
                     <a up-follow up-reveal="false" up-cache="false" href="{{ route('groups.discussions.index', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'discussion')) active @endif">
-                        <i class="fa fa-comments"></i> <span class="d-none d-lg-inline">{{ trans('messages.discussions') }}</span>
+                        <i class="fa fa-comments"></i> <span class="hidden xl:inline">{{ trans('messages.discussions') }}</span>
                     </a>
                 </li>
             @endcan
@@ -46,7 +46,7 @@
             @can ('viewActions', $group)
                 <li class="nav-item">
                     <a up-follow up-reveal="false" href="{{ route('groups.actions.index', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'action')) active @endif">
-                        <i class="fa fa-calendar"></i> <span class="d-none d-lg-inline">{{ trans('messages.agenda') }}</span>
+                        <i class="fa fa-calendar"></i> <span class="hidden xl:inline">{{ trans('messages.agenda') }}</span>
                     </a>
                 </li>
             @endcan
@@ -58,7 +58,7 @@
             @can ('viewFiles', $group)
                 <li class="nav-item">
                     <a up-follow up-reveal="false" href="{{ route('groups.files.index', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'files')) active @endif">
-                        <i class="fa fa-files-o"></i> <span class="d-none d-lg-inline">{{ trans('messages.files') }}</span>
+                        <i class="fa fa-files-o"></i> <span class="hidden xl:inline">{{ trans('messages.files') }}</span>
                     </a>
                 </li>
             @endcan
@@ -68,7 +68,7 @@
             @can ('viewMembers', $group)
                 <li class="nav-item">
                     <a up-follow up-reveal="false" href="{{ route('groups.users.index', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'users')) active @endif">
-                        <i class="fa fa-users"></i> <span class="d-none d-lg-inline">{{ trans('messages.members') }}</span>
+                        <i class="fa fa-users"></i> <span class="hidden xl:inline">{{ trans('messages.members') }}</span>
                     </a>
                 </li>
             @endcan
@@ -79,7 +79,7 @@
             @can ('viewMembers', $group)
                 <li class="nav-item">
                     <a href="{{ action('GroupMapController@index', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'map')) active @endif">
-                        <i class="fa fa-map-marker"></i> <span class="d-none d-lg-inline">{{ trans('messages.map') }}</span>
+                        <i class="fa fa-map-marker"></i> <span class="hidden xl:inline">{{ trans('messages.map') }}</span>
                     </a>
                 </li>
             @endcan
@@ -89,7 +89,7 @@
             @if ($group->isMember())
                 <li class="nav-item">
                     <a up-follow up-reveal="false" href="{{ action('ModuleController@show', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'custom')) active @endif">
-                        <i class="fa {{$group->getSetting('module_custom_icon')}}"></i> <span class="d-none d-lg-inline">{{$group->getSetting('module_custom_name')}}</span>
+                        <i class="fa {{$group->getSetting('module_custom_icon')}}"></i> <span class="hidden xl:inline">{{$group->getSetting('module_custom_name')}}</span>
                     </a>
                 </li>
             @endif
@@ -99,13 +99,13 @@
         @if ($group->isMember())
             <li class="nav-item">
                 <a up-follow up-reveal="false" href="{{ action('GroupMembershipController@edit', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'preferences')) active @endif">
-                    <i class="fa fa-bell-o"></i> <span class="d-none d-lg-inline">{{ trans('messages.settings') }}</span>
+                    <i class="fa fa-bell-o"></i> <span class="hidden xl:inline">{{ trans('messages.settings') }}</span>
                 </a>
             </li>
         @else
             <li class="nav-item">
                 <a up-follow up-reveal="false" href="{{ action('GroupMembershipController@create', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'settings')) active @endif">
-                    <i class="fa fa-sign-in"></i> <span class="d-none d-lg-inline">{{ trans('messages.join') }}</span>
+                    <i class="fa fa-sign-in"></i> <span class="hidden xl:inline">{{ trans('messages.join') }}</span>
                 </a>
             </li>
         @endif
@@ -114,7 +114,7 @@
         @can ('administer', $group)
             <li class="nav-item dropdown">
                 <a href="#" id="admin" data-toggle="dropdown" aria-controls="admin-contents" aria-expanded="false"  class="dropdown-toggle nav-link @if (isset($tab) && ($tab == 'admin')) active @endif">
-                    <i class="fa fa-wrench"></i> <span class="d-none d-lg-inline">@lang('Administer')</span>
+                    <i class="fa fa-wrench"></i> <span class="hidden xl:inline">@lang('Administer')</span>
                 </a>
                 <div class="dropdown-menu">
                     <a up-follow up-reveal="false" class="dropdown-item" href="{{ route('groups.edit', $group) }}">
