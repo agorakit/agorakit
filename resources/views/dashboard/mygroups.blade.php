@@ -24,29 +24,21 @@
     <div class="groups">
         @if ($groups)
             {!! $groups->appends(request()->query())->links() !!}
-
-            @forelse($groups->chunk(3) as $chunk)
-                <div class="row mb-3">
-                    @foreach($chunk as $group)
-                        <div class="col-md-4">
+            <div class="flex flex-wrap">
+                @foreach ($groups as $group)
+                    <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+                        <div class="max-w-xs rounded-md overflow-hidden shadow-lg">
                             @include('groups.group')
                         </div>
-                    @endforeach
-                </div>
-            @empty
+                    </div>
+                @endforeach
+            @else
                 <div class="alert alert-info" role="alert">
-                    {{trans('messages.nothing_yet')}}
+                    {{ trans('messages.nothing_yet') }}
                 </div>
-            @endforelse
-
-            {!! $groups->appends(request()->query())->links() !!}
-
-        @else
-            <div class="alert alert-info" role="alert">
-                {{trans('messages.nothing_yet')}}
-            </div>
         @endif
     </div>
+
 
 
 @endsection

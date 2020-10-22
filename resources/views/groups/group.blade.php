@@ -1,5 +1,5 @@
 <div up-expand>
-    <div class="mb-3 card tag-group @foreach ($group->tags as $tag)tag-{{$tag->tag_id}} @endforeach @if ($group->isArchived()) status-archived @endif">
+    <div class="@if ($group->isArchived()) status-archived @endif">
 
         <a up-follow href="{{ action('GroupController@show', $group) }}">
             @if ($group->hasCover())
