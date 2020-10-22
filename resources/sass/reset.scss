@@ -131,3 +131,10 @@ fieldset {
 hr {
   border-top-width: 1px;
 }
+
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
