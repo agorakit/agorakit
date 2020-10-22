@@ -30,7 +30,6 @@
     "mpratt/embera": "~2.0",
     "nicolaslopezj/searchable": "^1.10",
     "rap2hpoutre/laravel-log-viewer": "1.4",
-    "spatie/laravel-backup": "^6.11",
     "spatie/laravel-honeypot": "^2",
     "suin/php-rss-writer": "^1.6",
     "toin0u/geocoder-laravel": "^4.1",
