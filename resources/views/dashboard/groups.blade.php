@@ -27,10 +27,11 @@
     <div class="groups">
         @if ($groups)
             {!! $groups->appends(request()->query())->links() !!}
-            <div class="flex flex-wrap">
+            <div class="md:flex content-center flex-wrap">
                 @foreach ($groups as $group)
-                    <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
-                        <div class="max-w-xs rounded-md overflow-hidden shadow-lg">
+                    <div class="md:flex md:w-1/2 lg:w-1/3">
+                        <div class="md:flex-1 rounded shadow m-2">
+
                             @include('groups.group')
                         </div>
                     </div>
