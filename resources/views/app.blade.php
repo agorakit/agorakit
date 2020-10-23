@@ -53,7 +53,7 @@
     </div>
 
 
-    <div class="mx-auto md:w-10/12 lg:w-8/12 max-w-5xl bg-white sm:shadow-xl md:my-5 sm:rounded-lg p-4">
+    <div class="mx-auto p-4 sm:rounded-lg md:w-10/12 xl:w-9/12 xl:p-8 bg-white sm:shadow-xl md:my-5 ">
         @include('partials.errors')
         @yield('content')
     </div>

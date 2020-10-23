@@ -1,4 +1,4 @@
-<nav class="bg-gray-700 flex text-gray-200 items-center justify-between px-3 py-2">
+<nav class="bg-gray-700 flex text-gray-200 items-center justify-between px-5 py-1">
 
     <a up-follow up-cache="false" class="navbar-brand flex items-center" href="{{ route('index') }}">
         @if(Storage::exists('public/logo/favicon.png'))

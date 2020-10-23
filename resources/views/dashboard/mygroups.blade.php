@@ -23,25 +23,20 @@
     </div>
 
 
-
-    <div class="groups">
-        @if ($groups)
-            {!! $groups->appends(request()->query())->links() !!}
-            <div class="md:flex content-center flex-wrap">
-                @foreach ($groups as $group)
-                    <div class="md:flex md:w-1/2 lg:w-1/3">
-                        <div class="md:flex-1 rounded shadow m-2">
-
-                            @include('groups.group')
-                        </div>
-                    </div>
-                @endforeach
-            @else
-                <div class="alert alert-info" role="alert">
-                    {{ trans('messages.nothing_yet') }}
-                </div>
-        @endif
-    </div>
+<div class="groups">
+    @if($groups)
+        {!! $groups->appends(request()->query())->links() !!}
+        <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-4">
+            @foreach($groups as $group)
+                @include('groups.group')
+            @endforeach
+        </div>
+    @else
+        <div class="alert alert-info" role="alert">
+            {{ trans('messages.nothing_yet') }}
+        </div>
+    @endif
+</div>
 
 
 
