@@ -3,55 +3,77 @@
 @section('content')
 
 
-  @include('users.tabs')
+@include('users.tabs')
 
-  <div class="tab_content">
+<div class="tab_content">
 
-    @if (Auth::user())
+    @if(Auth::user())
 
-      <div class="row">
-        <div class="col-md-8">
+        <div class="md:flex text-center md:text-left">
 
-          <div class="meta">
-            {{trans('messages.registered')}} :  {{ $user->created_at->diffForHumans() }}
-          </div>
-
-          <div class="mb-3">
-            @foreach ($user->groups as $group)
-              @unless ($group->isSecret())
-                <a up-follow href="{{ route('groups.show', [$group]) }}" class="badge badge-secondary">
-
-                  @if ($group->isOpen())
-                    <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
-                  @elseif ($group->isClosed())
-                    <i class="fa fa-lock" title="{{trans('group.closed')}}"></i>
-                  @endif
-                  {{ $group->name }}
-
-                </a>
-              @endunless
-            @endforeach
+            <img src="{{ route('users.cover', [$user, 'medium']) }}"
+                class="rounded-full h-32 w-32 mx-auto block my-4 md:mr-4" />
 
 
+            <div class="">
 
-            @if ($user->tags->count() > 0)
-              @foreach ($user->tags as $tag)
-                @include('tags.tag')
-              @endforeach
-            @endif
-          </div>
+            <div class="text-4xl my-1">
+            {{ $user->name }}
+            </div>
+
+            <div class="text-gray-600 my-1">
+            {{ '@' .$user->username }}
+            </div>
+
+                <div class="meta mb-4">
+                    {{ trans('messages.registered') }} : {{ $user->created_at->diffForHumans() }}
+                </div>
+
+                <div>
+                    {!! filter($user->body) !!}
+                </div>
+
+                
+                <div class="text-left mb-3 sm:grid-cols-2 lg:grid-cols-3 grid">
+                    @foreach($user->groups as $group)
+                        @unless($group->isSecret())
+                            <a up-follow href="{{ route('groups.show', [$group]) }}"
+                                class=" text-gray-600 text-sm">
+
+                                @if($group->isOpen())
+                                    <i class="fa fa-globe" title="{{ trans('group.open') }}"></i>
+                                @elseif($group->isClosed())
+                                    <i class="fa fa-lock" title="{{ trans('group.closed') }}"></i>
+                                @endif
+                                {{ $group->name }}
+
+                            </a>
+                        @endunless
+                    @endforeach
+                    </div>
+                
 
 
-          {!! filter($user->body) !!}
+                <div>
+                    @if($user->tags->count() > 0)
+                        @foreach($user->tags as $tag)
+                            @include('tags.tag')
+                        @endforeach
+                    @endif
+                </div>
+
+
+
+
+            </div>
+
+
+
+
 
         </div>
-
-        <div class="col-md-4">
-          <img src="{{route('users.cover', [$user, 'medium'])}}" class="img-fluid rounded-circle" style="width: 100%"/>
-        </div>
-      </div>
 
     @endif
 
-  </div>
+</div>
 @endsection

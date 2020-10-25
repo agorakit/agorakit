@@ -8,7 +8,7 @@
     <div class="">
 
         @auth
-            <div class="toolbox d-md-flex mb-4">
+            <div class="sm:flex mb-4 justify-between">
 
                 <div class="mb-2">
                     <div class="btn-group" role="group">
@@ -20,8 +20,8 @@
                 </div>
 
                 @can('create-action', $group)
-                    <div class="ml-auto">
-                        <a up-modal=".tab_content" class="btn btn-primary" href="{{ route('groups.actions.create', $group) }}">
+                    <div class="">
+                        <a up-follow class="btn btn-primary" href="{{ route('groups.actions.create', $group) }}">
                             <i class="fa fa-plus"></i> {{ trans('action.create_one_button') }}
                         </a>
                     </div>

@@ -7,7 +7,8 @@
     <div class="tab_content">
 
         @auth
-            <div class="toolbox d-md-flex mb-4">
+           <div class="sm:flex mb-4 justify-between">
+
                 <div class="mb-2">
                     <div class="btn-group" role="group">
                         <a up-follow href="?type=grid" class="btn btn-primary"><i class="fa fa-calendar"></i> {{trans('messages.grid')}}</a>
@@ -17,7 +18,7 @@
 
                 @can('create-action', $group)
                     <div class="ml-auto">
-                        <a up-modal=".tab_content" class="btn btn-primary" href="{{ route('groups.actions.create', $group ) }}">
+                        <a up-follow class="btn btn-primary" href="{{ route('groups.actions.create', $group ) }}">
                             <i class="fa fa-plus"></i> {{trans('action.create_one_button')}}
                         </a>
                     </div>

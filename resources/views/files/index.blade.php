@@ -5,13 +5,13 @@
     @include('groups.tabs')
 
     @auth
-        <div class="toolbox d-lg-flex">
-            <div class="d-flex mb-2">
+        <div class="flex justify-between">
+            <div class="flex mb-2">
                 @include('partials.tags_filter')
                 @include('partials.sort_dropdown')
             </div>
 
-            <div class="ml-auto">
+            <div class="">
                 @can('create-file', $group)
                     <a class="btn btn-primary" href="{{ route('groups.files.create', $group ) }}">
                         <i class="fa fa-file"></i>

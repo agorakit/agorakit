@@ -1,31 +1,36 @@
-<div class="file d-flex @if ($file->isArchived()) status-archived @endif  @if ($file->isPinned()) status-pinned @endif" up-expand>
-    <div class="thumbnail">
+<div class="py-3 border-gray-300 border-b flex @if ($file->isArchived()) status-archived @endif  @if ($file->isPinned()) status-pinned @endif" up-expand>
+    
         @if ($file->isLink())
-            <a class="mr-1" href="{{ route('groups.files.download', [$file->group, $file]) }}" target="_blank">
-                <img class="rounded" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}"/>
+            <a class="mr-4 flex-shrink-0" href="{{ route('groups.files.download', [$file->group, $file]) }}" target="_blank">
+                <img class="rounded w-12 h-12" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}"/>
             </a>
         @else
-            <a up-follow href="{{ route('groups.files.show', [$file->group, $file]) }}">
-                <img class="rounded" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}"/>
+            <a class="mr-4 flex-shrink-0" up-follow href="{{ route('groups.files.show', [$file->group, $file]) }}">
+                <img class="rounded w-12 h-12" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}"/>
             </a>
         @endif
-    </div>
+    
 
-    <div class="content" style="width: 100%;">
-        <div class="name">
+    <div class="w-100 flex-grow">
+        <div class="">
             <a href="{{ route('groups.files.download', [$file->group, $file]) }}" target="_blank">
                 {{ $file->name }}
                 <i class="fa fa-external-link"></i>
             </a>
+        </div>
 
-            @if ($file->tags->count() > 0)
+    
+        @if ($file->tags->count() > 0)
+        <div class="mb-2">
                 @foreach ($file->tags as $tag)
                     @include('tags.tag')
                 @endforeach
+                </div>
             @endif
-        </div>
 
-        <div class="small meta">
+            
+
+        <div class="text-xs text-gray-600">
             <div>
                 @if ($file->isPinned())
                     <div class="badge badge-primary" style="min-width: 2em; margin: 0 2px;">
@@ -88,14 +93,7 @@
                 @can('update', $file)
                     <a class="dropdown-item" href="{{ route('groups.files.edit', [$file->group, $file]) }}">
                         <i class="fa fa-pencil"></i>
-                        {{__('Rename')}}
-                    </a>
-                @endcan
-
-                @can('update', $file)
-                    <a class="dropdown-item" up-modal=".dialog" up-closable="false" href="{{ route('tagger.index', ['files', $file->id]) }}?r={{rand(0,999999)}}">
-                        <i class="fa fa-tag"></i>
-                        {{__('Edit tags')}}
+                        {{__('messages.edit')}}
                     </a>
                 @endcan
 

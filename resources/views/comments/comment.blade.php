@@ -3,16 +3,16 @@
 <div class="mb-3 pb-3 comment
 @if ($comment_key + 2 > $read_comments) unread @else read @endif" @if ($comment_key + 2 == $read_comments) id="unread" @endif>
 
-    <div class="d-flex">
+    <div class="flex">
 
-        <div class="avatar mr-2"><img src="{{route('users.cover', [$comment->user, 'small'])}}" class="rounded-circle"/></div>
+        <img src="{{route('users.cover', [$comment->user, 'small'])}}" class="rounded-full h-12 w-12 flex-shrink-0 mr-4"/>
 
-        <div class="w-100">
+        <div class="w-100 flex-grow">
             <div class="d-flex align-items-center">
                 <div class="user">
                     <a up-follow href="{{ route('users.show', [$comment->user]) }}">{{$comment->user->name}}</a>
                 </div>
-                <div class="meta ml-2">
+                <div class="text-sm text-gray-600">
                     {{$comment->created_at->diffForHumans()}}
                 </div>
             </div>

@@ -14,7 +14,9 @@ mix.sass('resources/sass/app.scss', 'public/css')
 
 
 if (mix.inProduction()) {
-    mix.purgeCss()
+    mix.purgeCss({
+        whitelistPatterns: [/show/],
+    })
         .version();
 }
 
