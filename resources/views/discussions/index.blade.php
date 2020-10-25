@@ -5,18 +5,19 @@
     @include('groups.tabs')
 
     @auth
-        <div class="toolbox d-md-flex">
-            <div class="d-flex mb-2">
+        <div class="flex justify-between">
+            <div class="flex mb-2">
                 @include('partials.tags_filter')
             </div>
 
-            <div class="ml-auto">
+            <div class="">
                 @can('create-discussion', $group)
-                    <div class="toolbox">
-                        <a up-modal=".tab_content" class="btn btn-primary" href="{{ route('groups.discussions.create', $group ) }}">
-                            <i class="fa fa-plus"></i> {{trans('discussion.create_one_button')}}
-                        </a>
-                    </div>
+                 <a up-follow class="bg-gray-700 text-gray-100 rounded-full shadow-md text-sm h-10 px-4 flex items-center"
+            href="{{ route('groups.discussions.create', $group ) }}">
+            <i class="fas fa-pencil-alt"></i>
+            <span class="hidden md:inline ml-2">{{ trans('discussion.create_one_button') }}</span>
+        </a>
+                    
                 @endcan
             </div>
         </div>
