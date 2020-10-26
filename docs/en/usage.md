@@ -5,8 +5,6 @@
 Each group allows one to create discussions. Within discussions and comments, you can use a special syntax to reference existing files and discussions, and mention users.
 
 - Just start typing @ to mention someone (autocomplete appears)
-- Type f: to link to a file ( a dropdown appear with recent uploaded files)
-- Type d: to link to a discussion.
 
 You may also directly attach a file to a discussion. Use the "Browse..." button below the discussion form to upload a file from your computer, attach it to the group, and mention it in the discussion in one go.
 
