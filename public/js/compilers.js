@@ -189,7 +189,7 @@ up.compiler('.calendar', function (element, data) {
 
 		// add tooltip to all events
 		eventDidMount: function(info) {
-			content = '<div class="bg-white p-4 rounded text-xs"><strong>' + info.event.extendedProps.group_name + '</strong><br/>' + info.event.extendedProps.summary + '</div>';
+			content = '<strong>' + info.event.extendedProps.group_name + '</strong><br/>' + info.event.extendedProps.summary;
 			$(info.el).tooltip({ title: content, html: true });
 		  },
 

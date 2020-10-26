@@ -15,7 +15,7 @@ mix.sass('resources/sass/app.scss', 'public/css')
 
 if (mix.inProduction()) {
     mix.purgeCss({
-        whitelistPatterns: [/show/],
+        whitelistPatterns: [/show/, /tooltip/, /dropdown/],
     })
         .version();
 }
