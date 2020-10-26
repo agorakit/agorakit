@@ -13,4 +13,10 @@ CKeditor build note.
 Un zip resulting file and update ckeditor.js and ckeditor.js.map in this directory
 
 
+Fullcalendar build note
+- https://www.jsdelivr.com/package/npm/fullcalendar?tab=collection
+- download the JS file and move it to public/js/fullcalendar.js
+- download CSS and move it to public/css/fullcalendar.css
 
+
+No build, no pain

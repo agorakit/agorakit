@@ -155,17 +155,16 @@ Add a calendar to any div with the calendar class
 up.compiler('.calendar', function (element, data) {
 
 
-	var defaultView = (localStorage.getItem("fcDefaultView") !== null ? localStorage.getItem("fcDefaultView") : "dayGridMonth");
+	var initialView = (localStorage.getItem("fcDefaultView") !== null ? localStorage.getItem("fcDefaultView") : "dayGridMonth");
 	var json = element.getAttribute("data-json")
 	var locale = element.getAttribute("data-locale")
 	var create_url = element.getAttribute("data-create-url")
 	var calendar = new FullCalendar.Calendar(element, {
-		defaultView: defaultView,
-		plugins: ['interaction', 'dayGrid', 'timeGrid', 'list'],
+		initialView: initialView,
 		locale: locale,
 		events: json,
 		selectable: true,
-		header: {
+		headerToolbar: {
 			left: 'prev,next today',
 			center: 'title',
 			right: 'timeGridDay,timeGridWeek,dayGridMonth,listMonth'
@@ -189,13 +188,13 @@ up.compiler('.calendar', function (element, data) {
 		},
 
 		// add tooltip to all events
-		eventRender: function (info) {
-			content = '<strong>' + info.event.extendedProps.group_name + '</strong><br/>' + info.event.extendedProps.summary;
+		eventDidMount: function(info) {
+			content = '<div class="bg-white p-4 rounded text-xs"><strong>' + info.event.extendedProps.group_name + '</strong><br/>' + info.event.extendedProps.summary + '</div>';
 			$(info.el).tooltip({ title: content, html: true });
-		},
+		  },
 
 		// store the current view type on each view change
-		viewSkeletonRender: function (info) {
+		viewDidMount: function (info) {
 			localStorage.setItem("fcDefaultView", info.view.type);
 		}
 
