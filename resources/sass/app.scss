@@ -6,6 +6,7 @@
 
 
 // Custom Bootstrap with only the elements we really use
+/* purgecss start ignore */
 @import "bootstrap";
 
 // unpoly
@@ -17,7 +18,7 @@
 //@import "~@fullcalendar/daygrid/main.css";
 //@import "~@fullcalendar/timegrid/main.css";
 //@import "~@fullcalendar/list/main.css";
-
+/* purgecss end ignore */
 
 
 @import "agorakit";
