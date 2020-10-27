@@ -3,10 +3,10 @@
 
 
      @if($group->hasCover())
-         <img class="object-cover w-full h-48 rounded rounded-b-none"
+         <img class="object-cover w-full h-40 rounded rounded-b-none"
              src="{{ route('groups.cover.medium', $group) }}" />
      @else
-         <img class="object-cover w-full h-48 rounded rounded-b-none" src="/images/group.svg" />
+         <img class="object-cover w-full h-40 rounded rounded-b-none" src="/images/group.svg" />
      @endif
 
 
@@ -21,12 +21,12 @@
                  <i class="text-xs text-gray-500 fa fa-eye-slash" title="{{ trans('group.secret') }}"></i>
              @endif
          </h2>
-         <div class="text-gray-600 mt-1 text-sm flex-grow">
+         <div class="text-gray-700 mt-1 text-sm sm:text-xs flex-grow">
              {{ summary($group->body) }}
          </div>
 
 
-         <div class="text-xs text-gray-600 my-2 flex align-middle space-x-5">
+         <div class="text-xs text-gray-700 my-2 flex align-middle space-x-5">
 
              <div>
                  <i class="ri-discuss-line mr-1"></i>

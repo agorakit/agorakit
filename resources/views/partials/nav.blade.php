@@ -30,7 +30,7 @@
                 aria-expanded="false">
                 <i class="fa fa-cubes"></i> {{ trans('messages.groups') }}
             </a>
-            <div class="dropdown-menu">
+            <div class="dropdown-menu rounded shadow">
 
                 <a up-target="body" class="dropdown-item" class="dropdown-item"
                     href="{{ action('GroupController@indexOfMyGroups') }}">
@@ -66,7 +66,7 @@
                 aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-asterisk"></i> @lang('Overview')
             </a>
-            <div class="dropdown-menu">
+            <div class="dropdown-menu rounded shadow">
 
 
                 <a up-target="body" class="dropdown-item" class="dropdown-item"
@@ -124,7 +124,7 @@
                 placeholder="{{ trans('messages.search') }}..." aria-label="Search">
 
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary btn-sm my-2 my-sm-0" type="submit"><span
+                <button class="btn btn-outline-secondary btn-sm" type="submit"><span
                         class="fa fa-search"></span></button>
             </div>
         </div>
@@ -139,7 +139,7 @@
             aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-bell"></i>
         </a>
-        <div class="dropdown-menu dropdown-menu-right">
+        <div class="dropdown-menu dropdown-menu-right rounded shadow">
             @foreach($notifications as $notification)
 
                             <a class="dropdown-item">
@@ -164,7 +164,7 @@
             aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-language"></i> {{ strtoupper(app()->getLocale()) }}
         </a>
-        <div class="dropdown-menu dropdown-menu-right">
+        <div class="dropdown-menu dropdown-menu-right rounded shadow">
             @foreach(\Config::get('app.locales') as $locale)
             @if($locale !== app()->getLocale())
             <a up-target="body" class="dropdown-item" href="{{ Request::url() }}?force_locale={{ $locale }}">
@@ -187,7 +187,7 @@
             {{ Auth::user()->name }} <span class="caret"></span>
         </a>
 
-        <div class="dropdown-menu dropdown-menu-right" role="menu">
+        <div class="dropdown-menu dropdown-menu-right rounded shadow" role="menu">
             <a up-target="body" class="dropdown-item" href="{{ route('users.show', Auth::user()) }}"><i
                     class="fa fa-btn fa-user"></i> {{ trans('messages.profile') }}</a>
             <a up-target="body" class="dropdown-item" href="{{ route('users.edit', Auth::user()) }}"><i
