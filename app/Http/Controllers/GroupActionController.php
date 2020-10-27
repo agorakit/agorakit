@@ -58,23 +58,23 @@ class GroupActionController extends Controller
 
         if ($view == 'list') {
             $actions = $group->actions()
-            ->with('user', 'group', 'tags')
-            ->orderBy('start', 'asc')
-            ->where('stop', '>=', Carbon::now()->subDays(1))
-            ->paginate(10);
+                ->with('user', 'group', 'tags')
+                ->orderBy('start', 'asc')
+                ->where('stop', '>=', Carbon::now()->subDays(1))
+                ->paginate(10);
 
             return view('actions.index')
-            ->with('type', 'list')
-            ->with('title', $group->name.' - '.trans('messages.agenda'))
-            ->with('actions', $actions)
-            ->with('group', $group)
-            ->with('tab', 'action');
+                ->with('type', 'list')
+                ->with('title', $group->name . ' - ' . trans('messages.agenda'))
+                ->with('actions', $actions)
+                ->with('group', $group)
+                ->with('tab', 'action');
         }
 
         return view('actions.index')
-        ->with('type', 'grid')
-        ->with('group', $group)
-        ->with('tab', 'action');
+            ->with('type', 'grid')
+            ->with('group', $group)
+            ->with('tab', 'action');
     }
 
     public function indexJson(Request $request, Group $group)
@@ -84,10 +84,10 @@ class GroupActionController extends Controller
         // load of actions between start and stop provided by calendar js
         if ($request->has('start') && $request->has('end')) {
             $actions = $group->actions()
-            ->with('user', 'group', 'tags')
-            ->where('start', '>', Carbon::parse($request->get('start')))
-            ->where('stop', '<', Carbon::parse($request->get('end')))
-            ->orderBy('start', 'asc')->get();
+                ->with('user', 'group', 'tags')
+                ->where('start', '>', Carbon::parse($request->get('start')))
+                ->where('stop', '<', Carbon::parse($request->get('end')))
+                ->orderBy('start', 'asc')->get();
         } else {
             $actions = $group->actions()->orderBy('start', 'asc')->get();
         }
@@ -98,8 +98,8 @@ class GroupActionController extends Controller
         foreach ($actions as $action) {
             $event['id'] = $action->id;
             $event['group_name'] = $group->name;
-            $event['title'] = $action->name.' ('.$group->name.')';
-            $event['description'] = $action->body.' <br/> '.$action->location;
+            $event['title'] = $action->name . ' (' . $group->name . ')';
+            $event['description'] = $action->body . ' <br/> ' . $action->location;
             $event['body'] = $action->body;
             $event['summary'] = summary($action->body);
             $event['location'] = $action->location;
@@ -142,10 +142,10 @@ class GroupActionController extends Controller
         }
 
         return view('actions.create')
-        ->with('action', $action)
-        ->with('group', $group)
-        ->with('all_tags', $group->tagsUsed())
-        ->with('tab', 'action');
+            ->with('action', $action)
+            ->with('group', $group)
+            ->with('all_tags', $group->tagsUsed())
+            ->with('tab', 'action');
     }
 
     /**
@@ -168,11 +168,11 @@ class GroupActionController extends Controller
         $action->body = $request->input('body');
 
         try {
-            $action->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date').' '.$request->input('start_time'));
+            $action->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('start_time'));
         } catch (\Exception $e) {
             return redirect()->route('groups.actions.create', $group)
-            ->withErrors($e->getMessage().'. Incorrect format in the start date, use yyyy-mm-dd hh:mm')
-            ->withInput();
+                ->withErrors($e->getMessage() . '. Incorrect format in the start date, use yyyy-mm-dd hh:mm')
+                ->withInput();
         }
 
         if ($request->get('stop_time')) {
@@ -184,21 +184,21 @@ class GroupActionController extends Controller
         try {
             if ($request->get('stop_date')) {
                 if ($request->get('stop_time')) {
-                    $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date').' '.$request->input('stop_time'));
+                    $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('stop_time'));
                 } else { // asssume action will have a one hour duration
-                    $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date').' '.$request->input('start_time'))->addHour();
+                    $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('start_time'))->addHour();
                 }
             } else { // assume it will be same day
                 if ($request->get('stop_time')) {
-                    $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date').' '.$request->input('stop_time'));
+                    $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
                 } else { // asssume action will have a one hour duration
-                    $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date').' '.$request->input('start_time'))->addHour();
+                    $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('start_time'))->addHour();
                 }
             }
         } catch (\Exception $e) {
             return redirect()->route('groups.actions.create', $group)
-            ->withErrors($e->getMessage().'. Incorrect format in the stop date, use yyyy-mm-dd hh:mm')
-            ->withInput();
+                ->withErrors($e->getMessage() . '. Incorrect format in the stop date, use yyyy-mm-dd hh:mm')
+                ->withInput();
         }
 
         if ($request->get('location')) {
@@ -215,8 +215,8 @@ class GroupActionController extends Controller
         if (!$group->actions()->save($action)) {
             // Oops.
             return redirect()->route('groups.actions.create', $group)
-            ->withErrors($action->getErrors())
-            ->withInput();
+                ->withErrors($action->getErrors())
+                ->withInput();
         }
 
         // handle tags
@@ -245,10 +245,10 @@ class GroupActionController extends Controller
         $this->authorize('view', $action);
 
         return view('actions.show')
-        ->with('title', $group->name.' - '.$action->name)
-        ->with('action', $action)
-        ->with('group', $group)
-        ->with('tab', 'action');
+            ->with('title', $group->name . ' - ' . $action->name)
+            ->with('action', $action)
+            ->with('group', $group)
+            ->with('tab', 'action');
     }
 
     /**
@@ -263,11 +263,11 @@ class GroupActionController extends Controller
         $this->authorize('update', $action);
 
         return view('actions.edit')
-        ->with('action', $action)
-        ->with('group', $group)
-        ->with('all_tags', $group->tagsUsed())
-        ->with('model_tags', $action->tags)
-        ->with('tab', 'action');
+            ->with('action', $action)
+            ->with('group', $group)
+            ->with('all_tags', $group->tagsUsed())
+            ->with('model_tags', $action->tags)
+            ->with('tab', 'action');
     }
 
     /**
@@ -284,12 +284,12 @@ class GroupActionController extends Controller
         $action->name = $request->input('name');
         $action->body = $request->input('body');
 
-        $action->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date').' '.$request->input('start_time'));
+        $action->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('start_time'));
 
         if ($request->has('stop_date') && $request->get('stop_date') != '') {
-            $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date').' '.$request->input('stop_time'));
+            $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('stop_time'));
         } else {
-            $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date').' '.$request->input('stop_time'));
+            $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
         }
 
         if ($action->location != $request->input('location')) {
@@ -312,8 +312,8 @@ class GroupActionController extends Controller
         if ($action->isInvalid()) {
             // Oops.
             return redirect()->route('groups.actions.create', $group_id)
-            ->withErrors($action->getErrors())
-            ->withInput();
+                ->withErrors($action->getErrors())
+                ->withInput();
         }
 
         $action->save();
@@ -334,9 +334,9 @@ class GroupActionController extends Controller
 
         if (Gate::allows('delete', $action)) {
             return view('actions.delete')
-            ->with('action', $action)
-            ->with('group', $group)
-            ->with('tab', 'discussion');
+                ->with('action', $action)
+                ->with('group', $group)
+                ->with('tab', 'discussion');
         } else {
             abort(403);
         }
@@ -366,8 +366,8 @@ class GroupActionController extends Controller
         $this->authorize('history', $action);
 
         return view('actions.history')
-        ->with('group', $group)
-        ->with('action', $action)
-        ->with('tab', 'action');
+            ->with('group', $group)
+            ->with('action', $action)
+            ->with('tab', 'action');
     }
 }
