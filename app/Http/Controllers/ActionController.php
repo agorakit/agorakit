@@ -69,17 +69,21 @@ class ActionController extends Controller
     public function indexJson(Request $request)
     {
         if (Auth::check()) {
-            if (Auth::user()->getPreference('show') == 'all') {
+            if (Auth::user()->getPreference('show', 'my') == 'admin') {
                 if (Auth::user()->isAdmin()) { // super admin sees everything
-                    $groups = \App\Group::get()
-                        ->pluck('id');
-                } else {
-                    $groups = \App\Group::public()
-                        ->get()
-                        ->pluck('id')
-                        ->merge(Auth::user()->groups()->pluck('groups.id'));
-                }
-            } else {
+                    $groups = Group::get()
+                    ->pluck('id');
+                } 
+            } 
+
+            if (Auth::user()->getPreference('show', 'my') == 'all') {
+                    $groups = Group::public()
+                    ->get()
+                    ->pluck('id')
+                    ->merge(Auth::user()->groups()->pluck('groups.id'));
+            } 
+            
+            if (Auth::user()->getPreference('show', 'my') == 'my') {
                 $groups = Auth::user()->groups()->pluck('groups.id');
             }
         } else {
