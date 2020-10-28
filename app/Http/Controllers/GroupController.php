@@ -40,8 +40,8 @@ class GroupController extends Controller
         $groups = $groups->paginate(21);
 
         return view('dashboard.groups')
-        ->with('tab', 'groups')
-        ->with('groups', $groups);
+            ->with('tab', 'groups')
+            ->with('groups', $groups);
     }
 
     public function indexOfMyGroups(Request $request)
@@ -61,8 +61,8 @@ class GroupController extends Controller
         $groups = $groups->paginate(21);
 
         return view('dashboard.mygroups')
-        ->with('tab', 'groups')
-        ->with('groups', $groups);
+            ->with('tab', 'groups')
+            ->with('groups', $groups);
     }
 
     /**
@@ -86,32 +86,32 @@ class GroupController extends Controller
         if (Auth::check()) {
             if (Gate::allows('viewDiscussions', $group)) {
                 $discussions = $group->discussions()
-                ->has('user')
-                ->with('user', 'group', 'userReadDiscussion', 'tags')
-                ->where('status', '>=', ContentStatus::NORMAL)
-                ->orderBy('status', 'desc')
-                ->orderBy('updated_at', 'desc')
-                ->limit(5)
-                ->get();
+                    ->has('user')
+                    ->with('user', 'group', 'userReadDiscussion', 'tags')
+                    ->where('status', '>=', ContentStatus::NORMAL)
+                    ->orderBy('status', 'desc')
+                    ->orderBy('updated_at', 'desc')
+                    ->limit(5)
+                    ->get();
             }
 
             if (Gate::allows('viewFiles', $group)) {
                 $files = $group->files()
-                ->with('user', 'tags', 'group')
-                ->where('status', '>=', ContentStatus::NORMAL)
-                ->orderBy('status', 'desc')
-                ->orderBy('created_at', 'desc')
-                ->limit(5)
-                ->get();
+                    ->with('user', 'tags', 'group')
+                    ->where('status', '>=', ContentStatus::NORMAL)
+                    ->orderBy('status', 'desc')
+                    ->orderBy('created_at', 'desc')
+                    ->limit(5)
+                    ->get();
             }
 
             if (Gate::allows('viewActions', $group)) {
                 $actions = $group->actions()
-                ->with('user', 'tags', 'group')
-                ->where('stop', '>=', Carbon::now())
-                ->orderBy('start', 'asc')
-                ->limit(10)
-                ->get();
+                    ->with('user', 'tags', 'group')
+                    ->where('stop', '>=', Carbon::now())
+                    ->orderBy('start', 'asc')
+                    ->limit(10)
+                    ->get();
             }
 
 
@@ -124,37 +124,37 @@ class GroupController extends Controller
             }
             if ($group->isOpen()) {
                 $discussions = $group->discussions()
-                ->has('user')
-                ->with('user', 'group', 'tags')
-                ->withCount('comments')
-                ->orderBy('updated_at', 'desc')
-                ->limit(5)
-                ->get();
+                    ->has('user')
+                    ->with('user', 'group', 'tags')
+                    ->withCount('comments')
+                    ->orderBy('updated_at', 'desc')
+                    ->limit(5)
+                    ->get();
 
                 $files = $group->files()
-                ->with('user', 'tags', 'group')
-                ->orderBy('created_at', 'desc')
-                ->limit(5)
-                ->get();
+                    ->with('user', 'tags', 'group')
+                    ->orderBy('created_at', 'desc')
+                    ->limit(5)
+                    ->get();
 
                 $actions = $group->actions()
-                ->with('user', 'tags', 'group')
-                ->where('start', '>=', Carbon::now())
-                ->orderBy('start', 'asc')
-                ->limit(10)
-                ->get();
+                    ->with('user', 'tags', 'group')
+                    ->where('start', '>=', Carbon::now())
+                    ->orderBy('start', 'asc')
+                    ->limit(10)
+                    ->get();
             }
         }
 
         return view('groups.show')
-        ->with('title', $group->name)
-        ->with('group', $group)
-        ->with('discussions', $discussions)
-        ->with('actions', $actions)
-        ->with('files', $files)
-        ->with('admins', $group->admins()->get())
-        ->with('group_inbox', $group_inbox)
-        ->with('tab', 'home');
+            ->with('title', $group->name)
+            ->with('group', $group)
+            ->with('discussions', $discussions)
+            ->with('actions', $actions)
+            ->with('files', $files)
+            ->with('admins', $group->admins()->get())
+            ->with('group_inbox', $group_inbox)
+            ->with('tab', 'home');
     }
 
     /**
@@ -168,9 +168,9 @@ class GroupController extends Controller
         $title = trans('group.create_group_title');
 
         return view('groups.create')
-        ->with('group', new \App\Group())
-        ->with('all_tags', \App\Group::allTags())
-        ->with('title', $title);
+            ->with('group', new \App\Group())
+            ->with('all_tags', \App\Group::allTags())
+            ->with('title', $title);
     }
 
     /**
@@ -186,6 +186,10 @@ class GroupController extends Controller
 
         $group->name = $request->input('name');
         $group->body = $request->input('body');
+
+        if ($request->user()->isAdmin()) {
+            $group->status = $request->input('status');
+        }
 
         // handle group type
         if ($request->input('group_type') == \App\Group::SECRET) {
@@ -210,8 +214,8 @@ class GroupController extends Controller
         if ($group->isInvalid()) {
             // Oops.
             return redirect()->route('groups.create')
-            ->withErrors($group->getErrors())
-            ->withInput();
+                ->withErrors($group->getErrors())
+                ->withInput();
         }
         $group->save();
 
@@ -233,8 +237,8 @@ class GroupController extends Controller
 
         // handle cover
         if ($request->hasFile('cover')) {
-            Storage::disk('local')->makeDirectory('groups/'.$group->id);
-            Image::make($request->file('cover'))->widen(1600)->save(storage_path().'/app/groups/'.$group->id.'/cover.jpg');
+            Storage::disk('local')->makeDirectory('groups/' . $group->id);
+            Image::make($request->file('cover'))->widen(1600)->save(storage_path() . '/app/groups/' . $group->id . '/cover.jpg');
         }
 
         // make the current user an admin of the group
@@ -267,10 +271,10 @@ class GroupController extends Controller
         $this->authorize('update', $group);
 
         return view('groups.edit')
-        ->with('group', $group)
-        ->with('all_tags', \App\Group::allTags())
-        ->with('model_tags', $group->tags)
-        ->with('tab', 'admin');
+            ->with('group', $group)
+            ->with('all_tags', \App\Group::allTags())
+            ->with('model_tags', $group->tags)
+            ->with('tab', 'admin');
     }
 
     /**
@@ -286,7 +290,10 @@ class GroupController extends Controller
 
         $group->name = $request->input('name');
         $group->body = $request->input('body');
-        $group->status = $request->input('status');
+        
+        if (Gate::allows('changeGroupStatus', $group)) {
+            $group->status = $request->input('status');
+        }
 
         if (Gate::allows('changeGroupType', $group)) {
             // handle secret group type
@@ -331,14 +338,14 @@ class GroupController extends Controller
         if ($group->isInvalid()) {
             // Oops.
             return redirect()->route('groups.edit', $group)
-            ->withErrors($group->getErrors())
-            ->withInput();
+                ->withErrors($group->getErrors())
+                ->withInput();
         }
 
         // handle cover
         if ($request->hasFile('cover')) {
-            Storage::disk('local')->makeDirectory('groups/'.$group->id);
-            Image::make($request->file('cover'))->widen(1600)->save(storage_path().'/app/groups/'.$group->id.'/cover.jpg');
+            Storage::disk('local')->makeDirectory('groups/' . $group->id);
+            Image::make($request->file('cover'))->widen(1600)->save(storage_path() . '/app/groups/' . $group->id . '/cover.jpg');
         }
 
         $group->save();
@@ -353,8 +360,8 @@ class GroupController extends Controller
         $this->authorize('delete', $group);
 
         return view('groups.delete')
-        ->with('group', $group)
-        ->with('tab', 'home');
+            ->with('group', $group)
+            ->with('tab', 'home');
     }
 
     /**
@@ -381,7 +388,7 @@ class GroupController extends Controller
         $this->authorize('history', $group);
 
         return view('groups.history')
-        ->with('group', $group)
-        ->with('tab', 'home');
+            ->with('group', $group)
+            ->with('tab', 'home');
     }
 }

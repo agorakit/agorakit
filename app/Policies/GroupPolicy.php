@@ -79,7 +79,7 @@ class GroupPolicy extends BasePolicy
     }
 
     /**
-    * A group admin can delete a user
+    * A group admin can delete a group
     */
     public function delete(User $user, Group $group)
     {
@@ -258,5 +258,10 @@ class GroupPolicy extends BasePolicy
         }
 
         return false;
+    }
+
+    public function changeGroupStatus(User $user, Group $group)
+    {
+        return $user->isAdmin();
     }
 }

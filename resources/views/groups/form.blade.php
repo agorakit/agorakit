@@ -33,7 +33,9 @@
     @endif
 </div>
 
-<div class="form-group">
-    {!! Form::label('status', trans('group.status')) !!}
-    {!! Form::select('status', ['0' => '', '10' => trans('group.pinned'), '-10' => trans('group.archived')], null, ['class' => 'form-control']) !!}
-</div>
+@can('changeGroupStatus', $group)
+    <div class="form-group">
+        {!! Form::label('status', trans('group.status')) !!}
+        {!! Form::select('status', ['0' => '', '10' => trans('group.pinned'), '-10' => trans('group.archived')], null, ['class' => 'form-control']) !!}
+    </div>
+@endcan
