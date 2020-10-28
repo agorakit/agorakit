@@ -16,7 +16,7 @@
 
 
     <div>
-        <a class="btn btn-primary" href="{{ route('discussions.create') }}">
+        <a up-follow class="btn btn-primary" href="{{ route('discussions.create') }}">
             <i class="fas fa-pencil-alt"></i>
             <span class="hidden md:inline ml-2">
                 {{ trans('discussion.create_one_button') }}
