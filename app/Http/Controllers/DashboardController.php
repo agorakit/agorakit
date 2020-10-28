@@ -19,7 +19,6 @@ class DashboardController extends Controller
     public function __construct()
     {
         $this->middleware('verified', ['only' => ['users', 'files', 'activities']]);
-        $this->middleware('preferences');
     }
 
     /**

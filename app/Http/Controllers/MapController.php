@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Group;
 use Auth;
 use Carbon\Carbon;
 
@@ -31,32 +32,49 @@ class MapController extends Controller
    */
   public function geoJson()
   {
-    // query all users from "my" group
-    $groups = Auth::user()->groups()->pluck('groups.id');
+
+    if (Auth::check()) {
+
+      if (Auth::user()->getPreference('show', 'my') == 'admin') {
+        // build a list of groups the user has access to
+        if (Auth::user()->isAdmin()) { // super admin sees everything
+          $groups_id = Group::get()
+            ->pluck('id');
+        }
+      }
+
+      if (Auth::user()->getPreference('show', 'my') == 'all') {
+        $groups_id = Group::public()
+          ->get()
+          ->pluck('id')
+          ->merge(Auth::user()->groups()->pluck('groups.id'));
+      }
+
+      if (Auth::user()->getPreference('show', 'my') == 'my') {
+        $groups_id = Auth::user()->groups()->pluck('groups.id');
+      }
+    } else {
+      $groups_id = Group::public()
+        ->get()
+        ->pluck('id');
+    }
+
 
     // Magic query to get all the users who have one of the groups defined above in their membership table
-    $users = User::whereHas('groups', function ($q) use ($groups) {
-      $q->whereIn('group_id', $groups);
+    $users = User::whereHas('groups', function ($q) use ($groups_id) {
+      $q->whereIn('group_id', $groups_id);
     })
       ->where('verified', 1)
       ->where('latitude', '<>', 0)
       ->get();
 
-    if (Auth::check()) {
-      $allowed_groups = \App\Group::public()
-        ->get()
-        ->pluck('id')
-        ->merge(Auth::user()->groups()->pluck('groups.id'));
-    } else {
-      $allowed_groups = \App\Group::public()->get()->pluck('id');
-    }
+
 
     $actions = \App\Action::where('start', '>=', Carbon::now())
       ->where('latitude', '<>', 0)
-      ->whereIn('group_id', $allowed_groups)
+      ->whereIn('group_id', $groups_id)
       ->get();
 
-    $groups = \App\Group::where('latitude', '<>', 0)->get();
 
     // randomize users geolocation by a few meters
     foreach ($users as $user) {
@@ -106,24 +124,28 @@ class MapController extends Controller
       array_push($geojson['features'], $marker);
     }
 
-    foreach ($groups as $group) {
-      $marker = [
-        'type'       => 'Feature',
-        'properties' => [
-          'title'         => '<a href="' . route('groups.show', $group) . '">' . $group->name . '</a>',
-          'description'   => summary($group->body),
-          'type' => 'group'
-        ],
-        'geometry' => [
-          'type'        => 'Point',
-          'coordinates' => [
-            $group->longitude,
-            $group->latitude,
+    $groups = Group::find($groups_id);
 
+    foreach ($groups as $group) {
+      if ($group->latitude <> 0) {
+        $marker = [
+          'type'       => 'Feature',
+          'properties' => [
+            'title'         => '<a href="' . route('groups.show', $group) . '">' . $group->name . '</a>',
+            'description'   => summary($group->body),
+            'type' => 'group'
           ],
-        ],
-      ];
-      array_push($geojson['features'], $marker);
+          'geometry' => [
+            'type'        => 'Point',
+            'coordinates' => [
+              $group->longitude,
+              $group->latitude,
+
+            ],
+          ],
+        ];
+        array_push($geojson['features'], $marker);
+      }
     }
 
     return $geojson;
