@@ -18,7 +18,7 @@
         </form>
 
 
-        <a class="bg-gray-700 text-gray-100 rounded-lg shadow-md text-sm h-10 px-4 flex items-center"
+        <a class="btn btn-primary"
             href="{{ route('discussions.create') }}">
             <i class="fas fa-pencil-alt"></i>
             <span class="hidden md:inline ml-2">{{ trans('discussion.create_one_button') }}</span>
