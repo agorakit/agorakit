@@ -135,6 +135,9 @@ up.compiler('.wysiwyg', function (element, data) {
 		})
 		.then(editor => {
 			window.editor = editor;
+			editor.editing.view.change( writer => {
+				writer.setStyle( 'max-height', '400px', editor.editing.view.document.getRoot() );
+			} );
 
 		})
 		.catch(error => {

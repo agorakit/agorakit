@@ -117,7 +117,7 @@
 
     <!-- search-->
     @auth
-    <form up-target="body" class="form-inline my-2 my-lg-0 hidden xl:block" role="search" action="{{ url('search') }}"
+    <form up-target="body" class="form-inline my-2 hidden xl:block" role="search" action="{{ url('search') }}"
         method="get">
         <div class="input-group">
             <input class="form-control form-control-sm" type="text" name="query"
