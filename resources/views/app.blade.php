@@ -11,11 +11,8 @@
     <link rel="manifest" href="{{ route('pwa.index') }}">
 
     <!-- font awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/v4-shims.css">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-
-
+    <link rel="stylesheet" href="{{ asset('/fonts/fontawesome/css/all.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('/fonts/fontawesome/css/v4-shims.min.css')}}">
 
     <link rel="stylesheet" href="{{ asset('/css/fullcalendar.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/datatables.min.css') }}">
