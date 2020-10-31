@@ -53,17 +53,22 @@ class TagController extends Controller
 
     public function show(Request $request, Tag $tag)
     {
-        //$groups = Auth::user()->groups()->pluck('groups.id');
-
-        if (Auth::user()->getPreference('show') == 'all') {
+        if (Auth::user()->getPreference('show', 'my') == 'admin') {
             // build a list of groups the user has access to
             if (Auth::user()->isAdmin()) { // super admin sees everything
-                $groups = \App\Group::get()->pluck('id');
-            } else { // normal user get public groups + groups he is member of
-                $groups = \App\Group::public()->pluck('id')
+                $groups = Group::get()
+                ->pluck('id');
+            } 
+        } 
+
+        if (Auth::user()->getPreference('show', 'my') == 'all') {
+                $groups = Group::public()
+                ->get()
+                ->pluck('id')
                 ->merge(Auth::user()->groups()->pluck('groups.id'));
-            }
-        } else {
+        } 
+        
+        if (Auth::user()->getPreference('show', 'my') == 'my') {
             $groups = Auth::user()->groups()->pluck('groups.id');
         }
 

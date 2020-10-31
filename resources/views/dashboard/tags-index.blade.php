@@ -7,9 +7,11 @@
 
 
 
-  <div class="d-flex justify-content-between">
+  <div class="flex justify-between">
     <h1 class="name mb-4">
-      <a up-follow href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
+      <a up-follow href="{{ route('index') }}">
+      <i class="fa fa-home"></i></a> 
+      <i class="fa fa-angle-right"></i>
       @lang('Tags')
     </h1>
 
