@@ -6,9 +6,10 @@
         @auth
             <div class="navigation ">
 
-                <a up-target="body" class="item" href="{{ route('users.show', Auth::user()) }}">
-                    <span class="avatar mr-2"><img src="{{ route('users.cover', [Auth::user(), 'small']) }}"
-                            class="rounded-circle" style="width:32px; height:32px" /></span> {{ Auth::user()->name }}
+                <a up-target="body" class="flex items-center" href="{{ route('users.show', Auth::user()) }}">
+                    <img src="{{ route('users.cover', [Auth::user(), 'small']) }}"
+                            class="rounded-full h-8 w-8 mr-2" />
+                    <span>{{ Auth::user()->name }}</span>
                 </a>
 
 

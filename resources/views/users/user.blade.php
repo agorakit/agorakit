@@ -1,12 +1,11 @@
 <div class="user">
-  <div class="avatar">
+  
     <a up-follow href="{{ route('users.show', $user) }}">
-      <img src="{{route('users.cover', [$user, 'small'])}}" class="rounded-circle" />
+      <img src="{{route('users.cover', [$user, 'small'])}}" class="rounded-full w-8 h-8 mr-4" />
     </a>
-  </div>
-  <div class="content w-100">
 
-    <div class="d-flex">
+  <div class="w-full">
+    <div class="flex">
       <div class="name mr-2">
         <a up-follow href="{{ route('users.show', $user) }}">
           {{ $user->name }}
@@ -29,11 +28,11 @@
 
     <br />
 
-    <div class="d-flex justify-content-between">
-      <div class="groups">
+    <div class="">
         @foreach ($user->groups as $group)
           @unless ($group->isSecret())
-            <a up-follow href="{{ route('groups.show', [$group]) }}" class="badge badge-secondary">
+            <a up-follow href="{{ route('groups.show', [$group]) }}" 
+            class="inline-block bg-gray-300 text-gray-700 rounded-full text-xs px-2 py-1 mr-1 mb-1">
 
               @if ($group->isOpen())
                 <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
@@ -45,7 +44,6 @@
             </a>
           @endunless
         @endforeach
-      </div>
       <small>{{ trans('messages.last_activity') }} : {{ $user->updated_at->diffForHumans() }}</small>
     </div>
   </div>

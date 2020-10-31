@@ -1,6 +1,6 @@
 <div class="user-simple text-center mb-5" style="width: 10rem;" up-expand>
   <div class="avatar medium">
-    <img src="{{route('users.cover', [$user, 'medium'])}}" class="rounded-circle"/>
+    <img src="{{route('users.cover', [$user, 'medium'])}}" class="rounded-full"/>
   </div>
   <div>
     <h3 class="mt-2">

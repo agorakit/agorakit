@@ -50,7 +50,7 @@
                         <td>
                             <a up-follow href="{{ route('users.show', $membership->user) }}"> <span class="avatar"><img
                                         src="{{ route('users.cover', [$membership->user, 'small']) }}"
-                                        class="rounded-circle" /></span> {{ $membership->user->name }}</a>
+                                        class="rounded-full" /></span> {{ $membership->user->name }}</a>
                         </td>
 
                         <td data-order="{{ $membership->created_at }}">
