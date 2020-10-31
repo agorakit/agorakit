@@ -7,6 +7,7 @@ use App\Discussion;
 use App\File;
 use App\Tag;
 use App\User;
+use App\Group;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -98,11 +99,18 @@ class TagController extends Controller
         })
         ->get();
 
+        $groups = Group::whereIn('id', $groups)
+        ->whereHas('tags', function ($q) use ($tag) {
+            $q->where('normalized', $tag->normalized);
+        })
+        ->get();
+
         return view('dashboard.tags-show')
         ->with('discussions', $discussions)
         ->with('files', $files)
         ->with('users', $users)
         ->with('actions', $actions)
+        ->with('groups', $groups)
         ->with('tag', $tag)
         ->with('title', $tag->name);
     }

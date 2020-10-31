@@ -63,4 +63,16 @@
   @endif
 
 
+  @if ($groups->count() > 0)
+    <div class="mb-5">
+      <h2>@lang('Groups')</h2>
+      <div class="groups items">
+        @foreach( $groups as $group )
+          @include('groups.group-list')
+        @endforeach
+      </div>
+    </div>
+  @endif
+
+
 @endsection

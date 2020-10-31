@@ -16,7 +16,7 @@
         @if($discussion->tags->count() > 0)
             <div class="text-gray-600 text-xs overflow-hidden my-1 h-5">
                 @foreach($discussion->tags as $tag)
-                    <span class="inline-block bg-gray-500 text-gray-100 rounded px-1 sm:-py-1 mb-1 mr-1">{{ $tag }}</span>
+                    @include('tags.tag')
                 @endforeach
             </div>
         @endif

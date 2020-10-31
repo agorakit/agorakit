@@ -1,4 +1,4 @@
-  <a up-follow style="margin-right: 10px; font-weight: bolder; font-size: 0.8rem; color: #333; text-transform: capitalize" href="{{ action('TagController@show', $tag) }}">
-    <span style="display: inline-block; background-color: {{$tag->color}}; width: 10px; height: 10px; border-radius: 50%"></span>
-    {{$tag->name}}
+  <a up-follow class="text-xs capitalize text-gray-700 px-1 hover:bg-gray-400 rounded-full" href="{{ action('TagController@show', $tag) }}">
+    <span class="inline-block w-2 h-2 rounded-full " style="background-color: {{$tag->color}}"></span>
+    <span class="hover:text-gray-900">{{$tag->name}}</span>
   </a>
