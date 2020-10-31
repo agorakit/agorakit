@@ -201,6 +201,12 @@ class GroupActionController extends Controller
                 ->withInput();
         }
 
+        if ($action->start > $action->stop) {
+            return redirect()->route('groups.actions.create', $group)
+                ->withErrors(__('Start date cannot be after end date'))
+                ->withInput();
+        }
+
         if ($request->get('location')) {
             $action->location = $request->input('location');
             if (!$action->geocode()) {
