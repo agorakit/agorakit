@@ -7,24 +7,26 @@
 
 
 
-    <div class="toolbox d-md-flex">
+    <div class="flex">
         @can('invite', $group)
-            <div class="mb-2 mr-2">
-                <a class="btn btn-primary" href="{{ action('InviteController@invite', $group) }}"><i class="fa fa-plus"></i>
-                    {{ trans('membership.invite_by_email') }}</a>
-            </div>
+          
+                <a class="btn btn-primary mb-2 mr-2" href="{{ action('InviteController@invite', $group) }}">
+                    {{ trans('membership.invite_by_email') }}
+                </a>
+            
         @endcan
 
         @can('manage-membership', $group)
             <div>
-                <a class="btn btn-secondary" href="{{ action('GroupMassMembershipController@create', $group) }}"><i
-                        class="fa fa-plus"></i> {{ trans('membership.directly_add_users_button') }}</a>
+                <a class="btn btn-secondary" href="{{ action('GroupMassMembershipController@create', $group) }}">
+                {{ trans('membership.directly_add_users_button') }}
+                </a>
             </div>
         @endcan
     </div>
 
 
-    <div class="table-responsive">
+    <div class="table">
         <table style="width: 100%" class="table responsive data-table table-striped"
             data-order='[[ 3, "desc" ], [ 0, "asc" ]]'>
             <thead class="thead-dark" style="width: 100%">
@@ -48,9 +50,13 @@
                 @foreach ($memberships as $membership)
                     <tr>
                         <td>
-                            <a up-follow href="{{ route('users.show', $membership->user) }}"> <span class="avatar"><img
+                            <a up-follow class="flex items-center" href="{{ route('users.show', $membership->user) }}"> 
+                            
+                            <img
                                         src="{{ route('users.cover', [$membership->user, 'small']) }}"
-                                        class="rounded-full" /></span> {{ $membership->user->name }}</a>
+                                        class="rounded-full h-8 w-8 mr-4" />
+                                        <span>{{ $membership->user->name }}</span>
+                            </a>
                         </td>
 
                         <td data-order="{{ $membership->created_at }}">
@@ -128,7 +134,7 @@
                             </td>
 
                             <td>
-                                <a class="btn btn-primary btn-sm"
+                                <a class="btn btn-primary inline-block"
                                     href="{{ action('GroupMembershipController@edit', [$group, $membership]) }}">{{ trans('messages.edit') }}</a>
                             </td>
                         @endcan

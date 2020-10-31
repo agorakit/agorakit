@@ -20,13 +20,13 @@
             </div>
 
             @can('create-action', $group)
-                
-                  <a up-follow class="bg-gray-700 text-gray-100 rounded-full shadow-md text-sm h-10 px-4 flex items-center"
+                <div>
+                  <a up-follow class="btn btn-primary"
             href="{{ route('groups.actions.create', $group ) }}">
             <i class="fas fa-pencil-alt"></i>
             <span class="hidden sm:inline ml-2">{{ trans('action.create_one_button') }}</span>
         </a>
-
+</div>
                 
             @endcan
 

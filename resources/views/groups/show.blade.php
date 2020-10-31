@@ -9,9 +9,6 @@
         <div class="grid sm:grid-cols-2 gap-6">
 
 
-          
-
-
             <div>
 
 
@@ -97,7 +94,7 @@
                     <a up-follow
                         href="{{ route('groups.discussions.index', $group) }}">{{ trans('group.latest_discussions') }}</a>
                     @can('create-discussion', $group)
-                        <a class="text-xs rounded-full py-2 px-3 bg-gray-500 text-gray-200" href="{{ route('groups.discussions.create', $group) }}">
+                        <a class="btn btn-primary" href="{{ route('groups.discussions.create', $group) }}">
                             {{ trans('discussion.create_one_button') }}
                         </a>
                     @endcan
