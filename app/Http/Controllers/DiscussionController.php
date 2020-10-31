@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\Group;
 use Illuminate\Http\Request;
 
 /**

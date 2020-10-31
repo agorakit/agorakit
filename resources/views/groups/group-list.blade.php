@@ -5,7 +5,7 @@ class="flex items-start py-3 hover:bg-gray-100 border-b border-gray-300">
          <img class="h-12 w-12 rounded object-cover mx-1  flex-shrink-0"
              src="{{ route('groups.cover.medium', $group) }}" />
      @else
-         <img class="h-12 w-12 rounded-full object-cover mx-1  flex-shrink-0" src="/images/group.svg" />
+         <img class="h-12 w-12 rounded object-cover mx-1  flex-shrink-0" src="/images/group.svg" />
      @endif
 
     <div class="mx-2 flex-grow -mt-1">
