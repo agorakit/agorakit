@@ -15,10 +15,8 @@ class InviteController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('member', ['only' => ['invite', 'sendInvites']]);
         $this->middleware('verified', ['only' => ['invite', 'sendInvites']]);
         $this->middleware('throttle:2,1', ['only' => ['sendInvites']]); // 2 emails per  minute should be enough for non bots
-        $this->middleware('auth');
     }
 
     /**
@@ -121,43 +119,53 @@ class InviteController extends Controller
         }
     }
 
-
     /**
-    * Process the account creation from the form of inviteConfirm().
-    */
-    public function inviteRegister(Request $request, Group $group, $token)
+     * Allow user to accept an invitation directly from a signed url sent by email
+     */
+    public function acceptWithSignature(Request $request, Membership $membership)
     {
-        $this->validate($request, [
-            'name'     => 'required|max:255',
-            'email'    => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
-        ]);
-
-        $invite = \App\Invite::whereToken($token)->firstOrFail(); // TODO show a nicer error message if not found
-        $invite->claimed_at = Carbon::now();
-        $invite->save();
-
-        $user = new \App\User();
-        $user->name = $request->get('name');
-        $user->email = $request->get('email');
-        $user->password = bcrypt($request->get('password'));
-
-        // in the strange event the user changes the email on the registration form, we cannot consider it is verified using the invite.
-        if ($invite->email == $request->get('email')) {
-            $user->verified = 1;
+        if (! $request->hasValidSignature()) {
+            abort(401, 'Invalid or expired signature');
         }
 
-        $user->save();
+        $user = $membership->user;
+        Auth::login($user, true);
 
-        $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $group->id]);
-        $membership->membership = \App\Membership::MEMBER;
-        $membership->notification_interval = 60 * 24 * 7; // this is a sane default imho for notification interval (weekly)
+        $user->verified = 1;
+        $user->save();
+    
+        $membership->membership = Membership::MEMBER;
         $membership->save();
 
-        Auth::login($user);
+        flash(trans('membership.welcome'));
 
-        flash(trans('messages.you_are_now_a_member_of_this_group'));
-
-        return redirect()->route('groups.show', $group);
+        return redirect()->route('groups.show', $membership->group);
+        
     }
+
+    /**
+     * Allow user to deny an invitation directly from a signed url sent by email
+     */
+    public function denyWithSignature(Request $request, Membership $membership)
+    {
+        if (! $request->hasValidSignature()) {
+            abort(401, 'Invalid or expired signature');
+        }
+
+        $user = $membership->user;
+        //Auth::login($user, true); // login not needed, maybe the user really does not want to have anything to do with us
+
+        $user->verified = 1;
+        $user->save();
+    
+        $membership->membership = Membership::DECLINED;
+        $membership->save();
+
+        flash(trans('membership.refusal_recorded'));
+
+        return redirect()->route('groups.show', $membership->group);
+    }
+
+
+    
 }

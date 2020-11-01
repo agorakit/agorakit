@@ -34,13 +34,20 @@ class InviteUser extends Mailable
      */
     public function build()
     {
-        $login_url = URL::temporarySignedRoute(
-            'autologin', now()->addDays(15),
-            ['username' => $this->membership->user->username, 'redirect' => '/']
+        $accept_url = URL::temporarySignedRoute(
+            'invite.accept.signed', now()->addDays(30),
+            ['membership' => $this->membership->id]
         );
+
+        $deny_url = URL::temporarySignedRoute(
+            'invite.deny.signed', now()->addDays(30),
+            ['membership' => $this->membership->id]
+        );
+
         return $this->markdown('emails.invite')
         ->from(config('mail.noreply'), config('mail.from.name'))
         ->subject('['.setting('name').'] '.trans('messages.invitation_to_join').' "'.$this->membership->group->name.'"')
-        ->with('login_url', $login_url);
+        ->with('accept_url', $accept_url)
+        ->with('deny_url', $deny_url);
     }
 }

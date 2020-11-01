@@ -45,6 +45,9 @@ return [
   'users_to_add'                    => 'Users to add (existing users only, use the invite feature for new users)',
   'welcome'                         => 'Welcome',
   'when_to_receive_notifications'   => 'How often do you want to receive notifications by email?',
+  'accept'                          => 'Accept the invitation',
+  'deny'                            => 'Refuse the invitation',
+  
   'LLH:obsolete'                    => [
     'your_preferences_for' => 'Your preferences for',
   ],

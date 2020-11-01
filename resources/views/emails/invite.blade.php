@@ -3,9 +3,9 @@
 <strong>{{trans('messages.hello')}}</strong>
 
 
-<a up-follow href="{{route('users.show', $group_user)}}">{{$group_user->name}}</a>
+<a href="{{route('users.show', $group_user)}}">{{$group_user->name}}</a>
 {{trans('messages.thinks_that_you_might_want_to_join')}} "
-<a up-follow href="{{route('groups.show',  [$membership->group] )}}">{{$membership->group->name}}</a>"
+<a href="{{route('groups.show',  [$membership->group] )}}">{{$membership->group->name}}</a>"
 {{trans('messages.inside')}} <a up-follow href="{{route('index')}}">{{setting('name')}}</a>
 
 
@@ -18,11 +18,15 @@
 {!! filter($membership->group->body) !!}</p>
 @endcomponent
 
-@component('mail::button', ['url' => $login_url])
-{{__('Click this link to accept the invitation')}}
+@component('mail::button', ['url' => $accept_url, 'color' => 'success'])
+{{trans('membership.accept')}}
 @endcomponent
 
-<small>{{trans('messages.if_you_donwt_want_to_join_do_nothing')}}</small>
+<div style="text-align: center">
+<a href="{{$deny_url}}">
+{{trans('membership.deny')}}
+</a>
+</div>
 
 
 @endcomponent

@@ -44,7 +44,10 @@ return [
   'users_has_been_invited'          => 'Utilisateur invité',
   'users_to_add'                    => 'Les utilisateurs à ajouter (les utilisateurs existants uniquement, utilisez la caractéristique d\'invitation pour les nouveaux utilisateurs)',
   'welcome'                         => 'Bienvenue dans ce groupe',
+  'refusal_recorded'                => 'Votre refus de rejoindre le groupe a bien été enregistré, vous ne serez plus contacté.e à son sujet',
   'when_to_receive_notifications'   => 'Quand recevoir des nouvelles par mail de ce groupe?',
+  'accept'                          => 'Accepter l\'invitation',
+  'deny'                            => 'Refuser l\'invitation',
   'LLH:obsolete'                    => [
     'your_preferences_for' => 'Vos préférences pour le groupe',
   ],
