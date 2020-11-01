@@ -44,7 +44,6 @@
     "beyondcode/laravel-self-diagnosis": "^1",
     "facade/ignition": "^2.0",
     "fzaninotto/faker": "^1.9.1",
-    "kkomelin/laravel-translatable-string-exporter": "^1.2",
     "laravel/browser-kit-testing": "^6",
     "laravel/tinker": "^2",
     "mmo/faker-images": "^0.1.0",
