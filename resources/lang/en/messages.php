@@ -253,4 +253,5 @@ return array (
   'archive' => 'Archive',
   'unarchive' => 'Unarchive',
   'new' => 'New',
+  'unread' => 'unread',
 );

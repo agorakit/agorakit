@@ -34,12 +34,12 @@
     </div>
 
     @if($discussion->unReadCount() > 0)
-        <div class="rounded-full bg-red-700 text-xs text-red-200 w-6 justify-center flex flex-shrink-0">
-            {{ $discussion->unReadCount() }}
+        <div class="rounded-full bg-red-700 text-xs text-red-100 justify-center px-2 py-1 flex flex-shrink-0">
+            {{ $discussion->unReadCount() }} {{trans('messages.new')}}
         </div>
     @else
         @if($discussion->comments_count > 0)
-            <div class="rounded-full bg-gray-700 text-xs text-gray-200 w-6 justify-center flex flex-shrink-0">
+            <div class="rounded-full bg-gray-700 text-xs text-gray-100 px-2 py-1 justify-center flex flex-shrink-0">
                 {{ $discussion->comments_count }}
             </div>
         @endif

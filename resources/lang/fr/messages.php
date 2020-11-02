@@ -219,7 +219,7 @@ return array (
   'when' => 'Quand',
   'where' => 'Où',
   'yes' => 'Oui',
-  'you_are_not_an_admin' => 'Vous n\\êtes pas administrateur-trice',
+  'you_are_not_an_admin' => 'Vous n\'êtes pas administrateur-trice',
   'you_are_now_a_member_of_this_group' => 'Vous êtes maintenant membre du groupe',
   'you_asked_for_assword_change' => 'Vous avez demandé de pouvoir changer votre mot de passe',
   'you_can_create_one_here' => 'Vous pouvez en créer un ici',
@@ -254,4 +254,5 @@ return array (
   'unarchive' => 'Désarchiver',
   'notifications' => 'Notifications',
   'new' => 'Nouveau',
+  'unread' => 'non lu(s)',
 );
