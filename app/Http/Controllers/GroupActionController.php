@@ -60,7 +60,7 @@ class GroupActionController extends Controller
             $actions = $group->actions()
                 ->with('user', 'group', 'tags')
                 ->orderBy('start', 'asc')
-                ->where('stop', '>=', Carbon::now()->subDays(1))
+                ->where('start', '>=', Carbon::now()->subDay())
                 ->paginate(10);
 
             return view('actions.index')

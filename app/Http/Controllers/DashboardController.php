@@ -58,7 +58,7 @@ class DashboardController extends Controller
             ->get();
 
             $actions = Action::with('group', 'tags')
-            ->where('start', '>=', Carbon::now()->subHour())
+            ->where('start', '>=', Carbon::now()->subDay())
             ->whereIn('group_id', $groups)
             ->orderBy('start')
             ->take(10)
