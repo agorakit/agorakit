@@ -37,7 +37,7 @@ class GroupController extends Controller
             $groups = $groups->search($request->get('search'));
         }
 
-        $groups = $groups->paginate(20)->appends(request()->query());
+        $groups = $groups->simplePaginate(2)->appends(request()->query());
 
         return view('dashboard.groups')
             ->with('tab', 'groups')
@@ -58,7 +58,7 @@ class GroupController extends Controller
             $groups = $groups->search($request->get('search'));
         }
 
-        $groups = $groups->paginate(20)->appends(request()->query());
+        $groups = $groups->simplePaginate(20)->appends(request()->query());
 
         return view('dashboard.mygroups')
             ->with('tab', 'groups')
