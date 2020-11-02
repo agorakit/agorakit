@@ -252,4 +252,5 @@ return array (
   'unpin' => 'Unpin',
   'archive' => 'Archive',
   'unarchive' => 'Unarchive',
+  'new' => 'New',
 );

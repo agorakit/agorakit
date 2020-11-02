@@ -253,4 +253,5 @@ return array (
   'archive' => 'Archiver',
   'unarchive' => 'Désarchiver',
   'notifications' => 'Notifications',
+  'new' => 'Nouveau',
 );

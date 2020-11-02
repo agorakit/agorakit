@@ -31,7 +31,7 @@
     @yield('head')
 </head>
 
-<body class="bg-gray-300">
+<body class="bg-gray-300 text-gray-900">
 
     @unless(request()->get('embed'))
         @include('partials.nav')

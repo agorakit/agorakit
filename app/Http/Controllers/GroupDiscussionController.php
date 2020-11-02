@@ -161,7 +161,7 @@ class GroupDiscussionController extends Controller
             $UserReadDiscussion = \App\UserReadDiscussion::firstOrNew(['discussion_id' => $discussion->id, 'user_id' => Auth::user()->id]);
 
             $read_comments = $UserReadDiscussion->read_comments;
-            $UserReadDiscussion->read_comments = $discussion->total_comments;
+            $UserReadDiscussion->read_comments = $discussion->comments->count();
             $UserReadDiscussion->read_at = Carbon::now();
             $UserReadDiscussion->save();
         } else {
