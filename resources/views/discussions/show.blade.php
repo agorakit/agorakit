@@ -15,7 +15,7 @@
                 class="rounded-full h-12 w-12 flex-shrink-0 mr-4" />
 
 
-            <div style="flex-grow">
+            <div class="flex-grow">
 
                 <div class="flex justify-content-between">
                     <h2 class="name flex-grow">
