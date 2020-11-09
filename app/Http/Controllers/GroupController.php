@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Group;
+use App\Setting;
 use App\Traits\ContentStatus;
 use Auth;
 use Carbon\Carbon;
@@ -167,9 +168,15 @@ class GroupController extends Controller
         Gate::authorize('create', \App\Group::class);
         $title = trans('group.create_group_title');
 
+        if (Setting::get('group_tags'))
+        {
+            $tags = Str::of(Setting::get('group_tags'))->explode(',')->trim();
+        }
+
+
         return view('groups.create')
             ->with('group', new \App\Group())
-            ->with('all_tags', \App\Group::allTags())
+            ->with('allowedTags', \App\Group::allTags())
             ->with('title', $title);
     }
 

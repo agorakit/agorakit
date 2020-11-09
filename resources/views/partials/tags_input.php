@@ -1,6 +1,4 @@
 
-{{-- Candidate for removal, use tags_input.blade instead --}}
-
 <div class="form-group">
     <label for="tags">{{trans('messages.tags')}}</label>
 

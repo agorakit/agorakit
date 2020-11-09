@@ -17,7 +17,6 @@ if (mix.inProduction()) {
     mix.purgeCss({
         whitelistPatterns: [/show/, /tooltip/, /dropdown/],
     })
-        .version();
 }
 
 

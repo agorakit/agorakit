@@ -7,6 +7,7 @@ use Auth;
 use Illuminate\Http\Request;
 use Image;
 use Storage;
+use Illuminate\Support\Str;
 use App\Setting;
 
 class SettingsController extends Controller
@@ -17,7 +18,7 @@ class SettingsController extends Controller
     }
 
     /**
-     * Display a settings edition screen. Currently only the homepage intro text, but this will change soon :-).
+     * Display a settings edition screen.
      *
      * @return \Illuminate\Http\Response
      */
@@ -39,7 +40,10 @@ class SettingsController extends Controller
             Setting::set('user_can_create_groups', $request->has('user_can_create_groups') ? 1 : 0);
             Setting::set('user_can_create_secret_groups', $request->has('user_can_create_secret_groups') ? 1 : 0);
             Setting::set('notify_admins_on_group_create', $request->has('notify_admins_on_group_create') ? 1 : 0);
-            Setting::set('user_tags', $request->get('user_tags'));
+            
+            
+            
+            Setting::setArray('user_tags', Str::of($request->get('user_tags'))->explode(',')->trim()->toArray());
             Setting::set('group_tags', $request->get('group_tags'));
 
             Setting::set('custom_footer', $request->get('custom_footer'));
