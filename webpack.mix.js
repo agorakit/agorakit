@@ -30,8 +30,3 @@ mix.browserSync({
 // unpoly
 mix.copy('node_modules/unpoly/dist/unpoly.min.js', 'public/js/unpoly.js');
 mix.copy('node_modules/unpoly/dist/unpoly.min.css', 'public/css/unpoly.css');
-
-
-// selectize js
-mix.copy('node_modules/selectize.js/dist/js/standalone/selectize.min.js', 'public/js/selectize.js');
-mix.copy('node_modules/selectize.js/dist/css/selectize.bootstrap3.css', 'public/css/selectize.css');

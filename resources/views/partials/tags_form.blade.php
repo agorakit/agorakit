@@ -12,7 +12,7 @@
     name="tags[]"
     multiple="multiple"
     @unless (isset($group) && $group->tagsAreLimited())
-        data-allow-new-tags="true"
+        data-tags="true"
     @endunless>
 
     @if (isset($group) && $group->tagsAreLimited())

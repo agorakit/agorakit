@@ -1,6 +1,6 @@
 The JS used by Agorakit is mainly instantiated by unpoly JS
 
-Thus almost everything happens  in compilers.JS
+Thus almost everything happens  in compilers.js
 
 
 
@@ -17,6 +17,12 @@ Fullcalendar build note
 - https://www.jsdelivr.com/package/npm/fullcalendar?tab=collection
 - download the JS file and move it to public/js/fullcalendar.js
 - download CSS and move it to public/css/fullcalendar.css
+
+
+Select2 build note
+- https://select2.org/getting-started/installation
+- Download the latest release from the CDN example and move it to public/css public/js
+
 
 
 No build, no pain
