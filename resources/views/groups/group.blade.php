@@ -1,4 +1,4 @@
- <a up-follow href="{{ action('GroupController@show', $group) }}"
+ <div up-expand
      class="relative rounded-md border-gray-300 border shadow-md hover:shadow-xl flex flex-col justify-start @if ($group->isArchived()) status-archived @endif">
 
      @auth
@@ -24,12 +24,14 @@
          </div>
      @endif
 
+    <a href="{{ action('GroupController@show', $group) }}">
      @if($group->hasCover())
          <img class="object-cover w-full h-40 rounded rounded-b-none"
              src="{{ route('groups.cover.medium', $group) }}" />
      @else
          <img class="object-cover w-full h-40 rounded rounded-b-none" src="/images/group.svg" />
      @endif
+     </a>
 
 
      <div class="p-4 flex flex-col justify-between h-full">
@@ -46,7 +48,18 @@
          </h2>
          <div class="text-gray-700 mt-1 text-sm sm:text-xs flex-grow">
              {{ summary($group->body) }}
+
+             @if($group->tags->count() > 0)
+            <div class="text-gray-600 text-xs my-2">
+                @foreach($group->tags as $tag)
+                    @include('tags.tag')
+                @endforeach
+            </div>
+        @endif
+        
          </div>
+
+         
 
 
          <div class="text-xs text-gray-700 my-2 flex align-middle space-x-5">
@@ -73,4 +86,4 @@
          </div>
      </div>
 
- </a>
+ </div>

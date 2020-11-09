@@ -15,7 +15,7 @@
                 class="rounded-full h-12 w-12 flex-shrink-0 mr-4" />
 
 
-            <div style="flex-grow">
+            <div class="flex-grow">
 
                 <div class="flex justify-content-between">
                     <h2 class="name flex-grow">
@@ -137,8 +137,15 @@
 
 
     <div class="comments">
-
         @foreach($discussion->comments as $comment_key => $comment)
+
+        @if ($comment_key == $read_count)
+        <div class="w-full flex justify-center my-4" id="unread">
+            <div class="inline-block bg-red-700 text-red-100 rounded-full px-4 py-2 text-sm uppercase">
+                <i class="far fa-arrow-alt-circle-down mr-2"></i> {{trans('messages.new')}}
+            </div>
+        </div>
+        @endif
             @include('comments.comment')
         @endforeach
 

@@ -164,14 +164,12 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('invites/{membership}/accept', 'InviteController@accept')->name('invites.accept');
     Route::get('invites/{membership}/deny', 'InviteController@deny')->name('invites.deny');
 
-    Route::get('invites/register', 'InviteController@inviteForm')->name('invites.form');
-    Route::post('invites/register', 'InviteController@inviteRegister')->name('invites.register');
+    // Allows invited users to accept or deny invitations from a signed link sent to their mailbox
+    Route::get('invite/{membership}/accept/signed', 'InviteController@acceptWithSignature')->name('invite.accept.signed');
+    Route::get('invite/{membership}/deny/signed', 'InviteController@denyWithSignature')->name('invite.deny.signed');
 
-    /*
-    Route::get('groups/{group}/invite/confirm/{token}', 'InviteController@inviteConfirm')->name('groups.invite.confirm');
-    Route::post('groups/{group}/invite/confirm/{token}', 'InviteController@inviteRegister')->name('groups.invite.register');
-    */
-
+    
+    
     // Join and apply for a group
     Route::get('groups/{group}/join', 'GroupMembershipController@create')->name('groups.membership.create');
     Route::post('groups/{group}/join', 'GroupMembershipController@store')->name('groups.membership.store');

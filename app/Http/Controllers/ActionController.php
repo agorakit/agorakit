@@ -51,7 +51,7 @@ class ActionController extends Controller
             }
 
             $actions = \App\Action::with('group')
-                ->where('start', '>=', Carbon::now())
+                ->where('start', '>=', Carbon::now()->subDay())
                 ->whereIn('group_id', $groups)
                 ->orderBy('start')
                 ->paginate(10);

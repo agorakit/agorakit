@@ -60,7 +60,7 @@ class GroupActionController extends Controller
             $actions = $group->actions()
                 ->with('user', 'group', 'tags')
                 ->orderBy('start', 'asc')
-                ->where('stop', '>=', Carbon::now()->subDays(1))
+                ->where('start', '>=', Carbon::now()->subDay())
                 ->paginate(10);
 
             return view('actions.index')
@@ -198,6 +198,12 @@ class GroupActionController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('groups.actions.create', $group)
                 ->withErrors($e->getMessage() . '. Incorrect format in the stop date, use yyyy-mm-dd hh:mm')
+                ->withInput();
+        }
+
+        if ($action->start > $action->stop) {
+            return redirect()->route('groups.actions.create', $group)
+                ->withErrors(__('Start date cannot be after end date'))
                 ->withInput();
         }
 

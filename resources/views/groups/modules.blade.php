@@ -75,14 +75,12 @@
 
 
 
-</div>
 
 
 
 
-
-<div class="form-group">
-  {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-primary btn-lg']) !!}
+<div class="form-group mt-8">
+  {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-primary']) !!}
 </div>
 
 

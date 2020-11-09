@@ -4,6 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Stores the number of comments a user has read on a discussion
+ */
 class UserReadDiscussion extends Model
 {
     protected $table = 'user_read_discussion';

@@ -25,7 +25,7 @@
 
 
     <div class="">
-        <a up-follow class="btn btn-primary" href="{{ route('actions.create') }}">
+        <a class="btn btn-primary" href="{{ route('actions.create') }}">
             <i class="fas fa-pencil-alt"></i>
             <span class="hidden md:inline ml-2">
                 {{ trans('action.create_one_button') }}

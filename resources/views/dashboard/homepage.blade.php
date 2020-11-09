@@ -5,19 +5,22 @@
 
 @if(setting('homepage_presentation_for_members', false))
 
-    <div class="overflow-y-auto border items-start  shadow p-3 mb-4 rounded-lg bg-gray-200 text-sm sm:text-base flex justify-between"
+    <div class="overflow-y-auto border items-start  shadow p-3 mb-4 rounded-lg bg-gray-200 text-sm sm:text-base flex"
         style="max-height: 10em;">
-        <i class="fa fa-info-circle text-4xl mr-3 text-gray-500"></i>
+        <i class="fa fa-info-circle text-4xl mr-3 text-gray-500 hidden sm:block"></i>
         <div class="text-gray-600 flex-grow -mb-3 mt-1">
-            {!! setting('homepage_presentation_for_members') !!}
-        </div>
+
         @if(Auth::user()->isAdmin())
             <a up-follow href="{{ url('/admin/settings') }}"
-                        class="ml-3 py-2  px-4 bg-gray-100 text-gray-600 rounded-lg shadow inline-block flex-shrink-0">
+                        class="ml-3 mb-3 py-2  px-4 bg-gray-100 text-gray-600 rounded-lg shadow inline-block float-right">
                         <i class="fa fa-cog"></i> 
                         <span class="hidden sm:inline">{{__('Edit')}}</span>
                     </a>
         @endif
+
+            {!! setting('homepage_presentation_for_members') !!}
+        </div>
+        
     </div>
 @endif
 

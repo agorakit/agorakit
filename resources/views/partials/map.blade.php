@@ -15,15 +15,13 @@
         }
 
         .marker {
-            width: 2rem;
-            height: 2rem;
+            width: 1rem;
+            height: 1rem;
             display: block;
-            left: -1rem;
-            top: -1rem;
             position: relative;
-            border-radius: 2rem 2rem 0;
-            transform: rotate(45deg);
-            border: 2px solid #000;
+            border-radius: 50%;
+            border: 2px solid gray;
+            box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);
         }
 
     </style>

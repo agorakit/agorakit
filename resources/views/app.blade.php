@@ -11,11 +11,8 @@
     <link rel="manifest" href="{{ route('pwa.index') }}">
 
     <!-- font awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/v4-shims.css">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-
-
+    <link rel="stylesheet" href="{{ asset('/fonts/fontawesome/css/all.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('/fonts/fontawesome/css/v4-shims.min.css')}}">
 
     <link rel="stylesheet" href="{{ asset('/css/fullcalendar.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/datatables.min.css') }}">
@@ -34,7 +31,7 @@
     @yield('head')
 </head>
 
-<body class="bg-gray-300">
+<body class="bg-gray-300 text-gray-900">
 
     @unless(request()->get('embed'))
         @include('partials.nav')
@@ -66,7 +63,6 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/unpoly.js') }}"></script>
     <script src="{{ asset('js/fullcalendar.js') }}"></script>

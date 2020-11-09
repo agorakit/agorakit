@@ -1,1 +1,0 @@
-php artisan translatable:export fr,nl,de,es

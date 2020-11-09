@@ -2,11 +2,17 @@
 
 @section('content')
 
-  <div class="d-flex justify-content-between">
+  <div class="flex justify-between">
     <h1 class="name mb-4">
       <a up-follow href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
       <a up-follow href="{{ route('tags.index') }}">@lang('Tags')</a> <i class="fa fa-angle-right"></i>
-      @lang('Items tagged with') <span class="badge badge-primary" style="background-color: {{$tag->color}}">{{ $tag }}</span>
+      @lang('Items tagged with')
+      <div class="inline-block bg-gray-300 rounded-full py-2 px-4">
+        <span class="inline-block w-6 h-6 rounded-full " style="background-color: {{$tag->color}}"></span>
+        <span class="hover:text-gray-900">{{$tag->name}}</span>
+      </div>
+  </a>
+
     </h1>
 
     @auth
@@ -57,6 +63,18 @@
       <div class="users items">
         @foreach( $users as $user )
           @include('users.user')
+        @endforeach
+      </div>
+    </div>
+  @endif
+
+
+  @if ($groups->count() > 0)
+    <div class="mb-5">
+      <h2>@lang('Groups')</h2>
+      <div class="groups items">
+        @foreach( $groups as $group )
+          @include('groups.group-list')
         @endforeach
       </div>
     </div>

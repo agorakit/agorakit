@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
             'email'    => 'admin@agorakit.org',
             'password' => bcrypt('123456'),
             'body'     => $faker->text,
-            'name'     => 'Administrator',
+            'name'     => 'administrator',
             'verified' => 1,
         ]);
 
@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
             'email'    => 'newbie@agorakit.org',
             'password' => bcrypt('123456'),
             'body'     => $faker->text,
-            'name'     => 'Normal user',
+            'name'     => 'newbie',
             'verified' => 1,
         ]);
 

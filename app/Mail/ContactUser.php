@@ -27,6 +27,9 @@ class ContactUser extends Mailable
         $this->from_user = $from_user;
         $this->to_user = $to_user;
         $this->reveal_email = $reveal_email; // wether to send as the sender user email or use the generic noreply from
+        if ($reveal_email) {
+            $this->replyTo($from_user);
+        }
     }
 
     /**
@@ -36,14 +39,9 @@ class ContactUser extends Mailable
     */
     public function build()
     {
-        if ($this->reveal_email) {
-            return $this->markdown('emails.contact_direct')
-            ->from($this->from_user->email, $this->from_user->name)
-            ->subject('['.setting('name').'] '.trans('messages.a_message_for_you'));
-        } else {
             return $this->markdown('emails.contact')
             ->from(config('mail.noreply'), config('mail.from.name'))
             ->subject('['.setting('name').'] '.trans('messages.a_message_for_you'));
-        }
+        
     }
 }

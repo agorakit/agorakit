@@ -10,6 +10,11 @@ use Nicolaslopezj\Searchable\SearchableTrait;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
 
+use App\User;
+use App\UserReadDiscussion;
+use Auth;
+use Carbon\Carbon;
+
 class Discussion extends Model
 {
     use RevisionableTrait;
@@ -60,17 +65,35 @@ class Discussion extends Model
         ],
     ];
 
+    /**
+     * Unread count of comments for the current user
+     */
     public function unReadCount()
     {
-        if (\Auth::guest()) {
+        if (Auth::guest()) {
             return 0;
         }
+        
+        $userReadDiscussion = UserReadDiscussion::where('user_id', Auth::user()->id)
+        ->where('discussion_id', $this->id)
+        ->first();
 
-        if ($this->userReadDiscussion->count() > 0) {
-            return $this->total_comments - $this->userReadDiscussion->first()->read_comments;
+        if ($userReadDiscussion) {
+            return $this->comments->count() - $userReadDiscussion->read_comments +1;
         }
 
-        return $this->total_comments;
+        return $this->comments->count() +1;
+    }
+
+    /**
+     * Mark this discussion as read for the current user
+     */
+    public function markAsRead()
+    {
+        $userReadDiscussion = UserReadDiscussion::firstOrNew(['user_id' => Auth::user()->id, 'discussion_id'=> $this->id]);
+        $userReadDiscussion->read_comments = $this->comments->count() + 1;
+        $userReadDiscussion->read_at = Carbon::now();
+        return $userReadDiscussion->save();
     }
 
     public function group()

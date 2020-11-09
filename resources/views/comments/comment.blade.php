@@ -1,7 +1,6 @@
 <a name="comment_{{$comment->id}}"></a>
 
-<div class="mb-3 pb-3 comment
-@if ($comment_key + 2 > $read_comments) unread @else read @endif" @if ($comment_key + 2 == $read_comments) id="unread" @endif>
+<div class="mb-3 pb-3 comment">
 
     <div class="flex">
 

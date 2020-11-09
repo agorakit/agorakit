@@ -156,22 +156,23 @@ class GroupDiscussionController extends Controller
         $this->authorize('view', $discussion);
 
         // if user is logged in, we update the read count for this discussion.
-        // just before that, we save the number of already read comments in $read_comments to be used in the view to scroll to the first unread comments
+        // just before that, we save the number of already read comments in $read_comments 
+        // to be used in the view to scroll to the first unread comments
         if (Auth::check()) {
-            $UserReadDiscussion = \App\UserReadDiscussion::firstOrNew(['discussion_id' => $discussion->id, 'user_id' => Auth::user()->id]);
-
-            $read_comments = $UserReadDiscussion->read_comments;
-            $UserReadDiscussion->read_comments = $discussion->total_comments;
-            $UserReadDiscussion->read_at = Carbon::now();
-            $UserReadDiscussion->save();
-        } else {
-            $read_comments = 0;
+            $unread_count = $discussion->unReadCount();
+            $discussion->markAsRead();
         }
+        else {
+            $unread_count = 0;
+        }
+
+        $read_count = $discussion->comments->count() - $unread_count;
 
         return view('discussions.show')
         ->with('title', $group->name.' - '.$discussion->name)
         ->with('discussion', $discussion)
-        ->with('read_comments', $read_comments)
+        ->with('unread_count', $unread_count)
+        ->with('read_count', $read_count)
         ->with('group', $group)
         ->with('tab', 'discussion');
     }
