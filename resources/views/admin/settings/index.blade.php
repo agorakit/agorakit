@@ -18,7 +18,7 @@
 </div>
 
 <div class="flex">
-    <div class="w-1/4">
+    <div class="w-1/3 mr-4">
         <div class="nav nav-pills sticky flex-col mr-4" style="top:8rem;" role="tablist" aria-orientation="vertical">
             <a class="nav-link active" data-toggle="pill" href="#presentation" role="tab"
                 aria-selected="true">Presentation & logo</a>
@@ -30,7 +30,7 @@
     </div>
 
 
-    <div class="w-3/4">
+    <div class="w-2/3">
         <div class="tab-content" id="v-pills-tabContent">
 
             <div class="tab-pane fade show active" id="presentation">
