@@ -283,10 +283,28 @@ class GroupController extends Controller
     {
         $this->authorize('update', $group);
 
+        if (is_array(Setting::getArray('group_tags')))
+        {
+            $allowedTags = Setting::getArray('group_tags');
+            $newTagsAllowed = false;
+        }
+        else
+        {
+            $newTagsAllowed = true;
+        }
+
+        $selectedTags = [];
+
+        foreach ($group->tags as $tag)
+        {
+        $selectedTags[] = $tag->name;
+        }
+
         return view('groups.edit')
             ->with('group', $group)
-            ->with('all_tags', \App\Group::allTags())
-            ->with('model_tags', $group->tags)
+            ->with('allowedTags', $allowedTags)
+            ->with('selectedTags', $selectedTags)
+            ->with('newTagsAllowed', $newTagsAllowed)
             ->with('tab', 'admin');
     }
 
