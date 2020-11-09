@@ -8,7 +8,7 @@
     {!! Form::textarea('body', null, ['class' => 'wysiwyg form-control']) !!}
 </div>
 
-@include('partials.tags_form')
+@include('partials.tags_input')
 
 <div class="form-group">
     <label>{{trans('group.cover')}}</label><br/>

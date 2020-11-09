@@ -144,7 +144,13 @@
                     <div class="setting-help">
                         {{ __('Enter a coma separated list of allowed tags or leave blank to allow free tagging') }}
                     </div>
-                    {!! Form::text('user_tags', setting('user_tags'), ['class' => 'form-control']) !!}
+                    <select style="width: 100%" name="user_tags[]" class="js-tags form-control" data-tags="true" multiple="multiple">
+                    @if (is_array(\App\Setting::getArray('user_tags')))
+                        @foreach (\App\Setting::getArray('user_tags') as $tag)
+                        <option value="{{$tag}}" selected="selected">{{$tag}}</option>
+                        @endforeach
+                    @endif
+                    </select>
 
                 </div>
 
@@ -153,8 +159,14 @@
                     <div class="setting-help">
                         {{ __('Enter a coma separated list of allowed tags or leave blank to allow free tagging') }}
                     </div>
-                    {!! Form::text('group_tags', setting('group_tags'), ['class' => 'form-control']) !!}
-                    
+
+                    <select style="width: 100%" name="group_tags[]" class="js-tags form-control" data-tags="true" multiple="multiple">
+                    @if (is_array(\App\Setting::getArray('group_tags')))
+                        @foreach (\App\Setting::getArray('group_tags') as $tag)
+                        <option value="{{$tag}}" selected="selected">{{$tag}}</option>
+                        @endforeach
+                    @endif
+                    </select>
 
                 </div>
 

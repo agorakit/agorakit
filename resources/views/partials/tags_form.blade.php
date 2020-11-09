@@ -10,7 +10,7 @@
     </div>
 
 
-    <select class="form-control tags"
+    <select class="form-control js-tags"
     name="tags[]"
     multiple="multiple"
     @unless (isset($group) && $group->tagsAreLimited())

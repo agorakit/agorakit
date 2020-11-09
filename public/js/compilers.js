@@ -244,17 +244,10 @@ up.compiler('.network-error', function (element) {
 - add a tags class to select to enable selectize on it
 - add data-allow-new-tags to allow the creation of new tags
 */
-up.$compiler('select.tags', function ($element, data) {
+up.$compiler('.js-tags', function ($element, data) {
 	$element.select2({
-		tags: true,
-		closeOnSelect: false,
-		dropdownAutoWidth: true,
-		tokenSeparators: [',']
 	});
 });
-
-
-
 
 /*
 - scroll to first unread item

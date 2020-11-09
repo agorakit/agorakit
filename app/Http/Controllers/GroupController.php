@@ -168,15 +168,21 @@ class GroupController extends Controller
         Gate::authorize('create', \App\Group::class);
         $title = trans('group.create_group_title');
 
-        if (Setting::get('group_tags'))
+        if (is_array(Setting::getArray('group_tags')))
         {
-            $tags = Str::of(Setting::get('group_tags'))->explode(',')->trim();
+            $allowedTags = Setting::getArray('group_tags');
+            $newTagsAllowed = false;
+        }
+        else
+        {
+            $newTagsAllowed = true;
         }
 
 
         return view('groups.create')
             ->with('group', new \App\Group())
-            ->with('allowedTags', \App\Group::allTags())
+            ->with('allowedTags', $allowedTags)
+            ->with('newTagsAllowed', $newTagsAllowed)
             ->with('title', $title);
     }
 

@@ -43,8 +43,8 @@ class SettingsController extends Controller
             
             
             
-            Setting::setArray('user_tags', Str::of($request->get('user_tags'))->explode(',')->trim()->toArray());
-            Setting::set('group_tags', $request->get('group_tags'));
+            Setting::setArray('user_tags', $request->get('user_tags'));
+            Setting::setArray('group_tags', $request->get('group_tags'));
 
             Setting::set('custom_footer', $request->get('custom_footer'));
 
