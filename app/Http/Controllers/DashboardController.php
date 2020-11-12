@@ -50,7 +50,6 @@ class DashboardController extends Controller
             }
 
             $discussions = Discussion::with('userReadDiscussion', 'group', 'user', 'tags', 'comments', 'revisionHistory')
-            ->withCount('comments')
             ->whereIn('group_id', $groups)
             ->where('status', '>=', ContentStatus::NORMAL)
             ->orderBy('updated_at', 'desc')

@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\User;
+use App\Group;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -27,7 +29,7 @@ class Action extends Model
         'stop'     => 'required',
     ];
 
-    protected $with = ['users']; // always load participants with actions
+    protected $with = ['attending']; // always load participants with actions
 
     protected $table = 'actions';
     public $timestamps = true;
@@ -58,12 +60,12 @@ class Action extends Model
 
     public function group()
     {
-        return $this->belongsTo(\App\Group::class)->withTrashed();
+        return $this->belongsTo(Group::class)->withTrashed();
     }
 
     public function user()
     {
-        return $this->belongsTo(\App\User::class)->withTrashed();
+        return $this->belongsTo(User::class)->withTrashed();
     }
 
     public function votes()
@@ -81,7 +83,7 @@ class Action extends Model
      */
     public function users()
     {
-        return $this->belongsToMany(\App\User::class)->wherePivot('status', '10');
+        return $this->belongsToMany(User::class)->wherePivot('status', '10');
         // TODO candidate for deletion ?
     }
 
@@ -91,7 +93,7 @@ class Action extends Model
      */
     public function attending()
     {
-        return $this->belongsToMany(\App\User::class)->wherePivot('status', '10');
+        return $this->belongsToMany(User::class)->wherePivot('status', '10');
     }
 
     /**
@@ -99,7 +101,7 @@ class Action extends Model
      */
     public function notAttending()
     {
-        return $this->belongsToMany(\App\User::class)->wherePivot('status', '-10');
+        return $this->belongsToMany(User::class)->wherePivot('status', '-10');
     }
 
     /**

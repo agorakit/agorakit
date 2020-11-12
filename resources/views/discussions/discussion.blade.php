@@ -24,11 +24,9 @@
 
         <div class="text-gray-600 text-xs">
             {{ trans('messages.started_by') }}
-            <a up-follow
-                href="{{ route('users.show', [$discussion->user]) }}">{{ $discussion->user->name }}</a>
+            {{ $discussion->user->name }}
             {{ trans('messages.in') }}
-            <a up-follow
-                href="{{ route('groups.show', [$discussion->group]) }}">{{ $discussion->group->name }}</a>
+            {{ $discussion->group->name }}
             {{ $discussion->updated_at->diffForHumans() }}
         </div>
     </div>

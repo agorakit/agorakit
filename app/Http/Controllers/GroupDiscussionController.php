@@ -39,7 +39,7 @@ class GroupDiscussionController extends Controller
             $discussions =
             $group->discussions()
             ->has('user')
-            ->with('userReadDiscussion', 'user', 'group', 'tags')
+            ->with('userReadDiscussion', 'group', 'user', 'tags', 'comments', 'revisionHistory')
             ->withCount('comments')
             ->orderBy('status', 'desc')
             ->orderBy('updated_at', 'desc')
