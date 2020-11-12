@@ -1,4 +1,5 @@
-- [Welcome](/en/)
+- Welcome
+    - [Introduction](/en/)
 - Installation 
     - [Quick start](install.md)
     - [Update your installation](update.md)

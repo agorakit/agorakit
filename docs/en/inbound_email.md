@@ -38,6 +38,6 @@ On the other hand if you use "+" addressing (a gmail box for instance, let's cal
 - prefix will be `agorakit+`
 - suffix will be `@gmail.com`
 
-Wich create emails like `agorakit+group-slug@gmail.com`
+This will create emails like `agorakit+group-slug@gmail.com`
 
 If you enable inbound email, the mailbox will be automatically checked and processed email will be put in a  "processed" folder under INBOX. Failed emails will be similarly put a "failed" folder under INBOX for inspection.

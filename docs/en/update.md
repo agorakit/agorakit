@@ -5,8 +5,7 @@ We try to keep the master branch always in a good, safe, and working condition (
 
 That means that tests passes and that you get the latest features directly from the master branch.
 
-!!! warning
-        Make a backup of your SQL database in case something goes wrong. Make a backup of all your files as well. Make two backups even, and store them in a separate computer.
+!> Make a backup of your SQL database in case something goes wrong. Make a backup of all your files as well. Make two backups even, and store them in a separate computer.
 
 # Choose your poison
 You can choose between an automated update procedure from the command line, or a step by step to update manually :
@@ -16,8 +15,7 @@ There is a helper script that does the update for you :
 
         $ ./update
 
-!!! warning
-        Beware that the script will migrate your database without asking for confirmation. Always make a backup of the database just in case something goes wrong.
+!> Beware that the script will migrate your database without asking for confirmation. Always make a backup of the database just in case something goes wrong.
 
 
 ## Proceed with the update manually

@@ -1,7 +1,9 @@
 # Provide external authentification to Agorakit
 
+!> External authentification is not working curently. I have fery few (if any) people ask for it. It is a privacy invading feature so no developement has been done on ths front. Feel free to submit PR if you want this.
 
-You can provide facebook, google, twitter and/or github authentication to your users.
+
+Some day, you will be able to  provide facebook, google, twitter and/or github authentication to your users.
 
 This feature is a work in progress, help is highly welcome.
 
