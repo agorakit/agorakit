@@ -41,7 +41,7 @@ class DiscussionController extends Controller
                 $groups = Auth::user()->groups()->pluck('groups.id');
             }
 
-            $discussions = \App\Discussion::with('userReadDiscussion', 'group', 'user', 'tags', 'comments', 'revisionHistory')
+            $discussions = \App\Discussion::with('userReadDiscussion', 'group', 'user', 'tags', 'comments')
             ->withCount('comments')
             ->whereIn('group_id', $groups)
             ->when($tag, function ($query) use ($tag) {

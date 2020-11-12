@@ -102,11 +102,11 @@
                     </a>
                 @endcan
 
-                @if($discussion->revisionHistory->count() > 0)
+                
                     <a class="dropdown-item"
                         href="{{ route('groups.discussions.history', [$discussion->group, $discussion]) }}"><i
                             class="fa fa-history"></i> {{ trans('messages.show_history') }}</a>
-                @endif
+                
             </div>
 
         </div>

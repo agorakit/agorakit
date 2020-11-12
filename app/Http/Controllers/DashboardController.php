@@ -49,7 +49,7 @@ class DashboardController extends Controller
                 $groups = Auth::user()->groups()->pluck('groups.id');
             }
 
-            $discussions = Discussion::with('userReadDiscussion', 'group', 'user', 'tags', 'comments', 'revisionHistory')
+            $discussions = Discussion::with('userReadDiscussion', 'group', 'user', 'tags', 'comments')
             ->whereIn('group_id', $groups)
             ->where('status', '>=', ContentStatus::NORMAL)
             ->orderBy('updated_at', 'desc')
