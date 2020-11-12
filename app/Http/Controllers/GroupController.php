@@ -168,13 +168,14 @@ class GroupController extends Controller
         Gate::authorize('create', \App\Group::class);
         $title = trans('group.create_group_title');
 
-        if (is_array(Setting::getArray('group_tags')))
+        if (Setting::getArray('group_tags'))
         {
             $allowedTags = Setting::getArray('group_tags');
             $newTagsAllowed = false;
         }
         else
         {
+            $allowedTags = [];
             $newTagsAllowed = true;
         }
 
@@ -283,13 +284,14 @@ class GroupController extends Controller
     {
         $this->authorize('update', $group);
 
-        if (is_array(Setting::getArray('group_tags')))
+        if (Setting::getArray('group_tags'))
         {
             $allowedTags = Setting::getArray('group_tags');
             $newTagsAllowed = false;
         }
         else
         {
+            $allowedTags = [];
             $newTagsAllowed = true;
         }
 

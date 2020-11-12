@@ -69,7 +69,7 @@ class Setting extends Model
 
         // first priority : non empty setting stored in the DB
         if ($setting && $setting->exists) {
-            return unserialize($setting->value);
+            return json_decode($setting->value);            
         }
 
         // second priority, default setting stored in app/config/agorakit.php
@@ -88,7 +88,7 @@ class Setting extends Model
     {
         Cache::forget('settings_'.$key);
         $setting = \App\Setting::firstOrNew(['name' => $key]);
-        $setting->value = serialize($value);
+        $setting->value = json_encode($value);
         $setting->save();
 
         return $setting;
