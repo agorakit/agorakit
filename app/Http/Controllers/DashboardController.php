@@ -49,7 +49,7 @@ class DashboardController extends Controller
                 $groups = Auth::user()->groups()->pluck('groups.id');
             }
 
-            $discussions = Discussion::with('userReadDiscussion', 'group', 'user', 'tags')
+            $discussions = Discussion::with('userReadDiscussion', 'group', 'user', 'tags', 'comments', 'revisionHistory')
             ->withCount('comments')
             ->whereIn('group_id', $groups)
             ->where('status', '>=', ContentStatus::NORMAL)
@@ -57,7 +57,7 @@ class DashboardController extends Controller
             ->take(20)
             ->get();
 
-            $actions = Action::with('group', 'tags')
+            $actions = Action::with('group', 'tags', 'attending', 'user')
             ->where('start', '>=', Carbon::now()->subDay())
             ->whereIn('group_id', $groups)
             ->orderBy('start')

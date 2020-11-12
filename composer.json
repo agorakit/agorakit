@@ -21,6 +21,7 @@
     "guzzlehttp/guzzle": "^6.3",
     "intervention/image": "2.*",
     "intervention/imagecache": "2.*",
+    "itsgoingd/clockwork": "^4.1",
     "laravel/framework": "^7.0",
     "laravel/helpers": "^1.2",
     "laravel/tinker": "^2.0",
@@ -41,6 +42,7 @@
   "require-dev": {
     "barryvdh/laravel-debugbar": "^3",
     "beyondcode/laravel-dump-server": "^1.0",
+    "beyondcode/laravel-query-detector": "^1.4",
     "beyondcode/laravel-self-diagnosis": "^1",
     "facade/ignition": "^2.0",
     "fzaninotto/faker": "^1.9.1",

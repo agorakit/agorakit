@@ -26,7 +26,7 @@ class GroupController extends Controller
         $groups = new Group();
         $groups = $groups->notSecret();
 
-        $groups = $groups->with('tags')
+        $groups = $groups->with('tags', 'users', 'actions', 'discussions')
             ->orderBy('status', 'desc')
             ->orderBy('updated_at', 'desc');
 
@@ -38,7 +38,7 @@ class GroupController extends Controller
             $groups = $groups->search($request->get('search'));
         }
 
-        $groups = $groups->simplePaginate(20)->appends(request()->query());
+        $groups = $groups->paginate(20)->appends(request()->query());
 
         return view('dashboard.groups')
             ->with('tab', 'groups')

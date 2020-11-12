@@ -66,16 +66,16 @@
 
              <div>
                  <i class="far fa-comments mr-1"></i>
-                 <span> {{ $group->discussions()->count() }}</span>
+                 <span> {{ $group->discussions->count() }}</span>
              </div>
 
              <div>
                  <i class="far fa-calendar-alt mr-1"></i>
-                 <span>{{ $group->actions()->count() }}</span>
+                 <span>{{ $group->actions->count() }}</span>
              </div>
              <div>
                  <i class="fas fa-users mr-1"></i>
-                 <span>{{ $group->users()->count() }}</span>
+                 <span>{{ $group->users->count() }}</span>
              </div>
 
              <div>
