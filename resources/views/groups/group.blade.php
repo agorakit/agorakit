@@ -51,7 +51,7 @@
 
              @if($group->tags->count() > 0)
             <div class="text-gray-600 text-xs my-2">
-                @foreach($group->tags as $tag)
+                @foreach($group->getSelectedTags() as $tag)
                     @include('tags.tag')
                 @endforeach
             </div>

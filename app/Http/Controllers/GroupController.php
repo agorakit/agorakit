@@ -165,26 +165,20 @@ class GroupController extends Controller
      */
     public function create()
     {
-        Gate::authorize('create', \App\Group::class);
-        $title = trans('group.create_group_title');
+        Gate::authorize('create', Group::class);
 
-        if (Setting::getArray('group_tags'))
-        {
-            $allowedTags = Setting::getArray('group_tags');
-            $newTagsAllowed = false;
-        }
-        else
-        {
-            $allowedTags = [];
-            $newTagsAllowed = true;
-        }
+        $group = new Group;
+        
+        $allowedTags = \App\Services\TagService::getAllowedTagsFor($group);
+        $newTagsAllowed = \App\Services\TagService::areNewTagsAllowedFor($group);
+        
 
 
         return view('groups.create')
-            ->with('group', new \App\Group())
+            ->with('group', $group)
             ->with('allowedTags', $allowedTags)
             ->with('newTagsAllowed', $newTagsAllowed)
-            ->with('title', $title);
+            ->with('title', trans('group.create_group_title'));
     }
 
     /**
@@ -284,24 +278,12 @@ class GroupController extends Controller
     {
         $this->authorize('update', $group);
 
-        if (Setting::getArray('group_tags'))
-        {
-            $allowedTags = Setting::getArray('group_tags');
-            $newTagsAllowed = false;
-        }
-        else
-        {
-            $allowedTags = [];
-            $newTagsAllowed = true;
-        }
+        
+        $allowedTags = \App\Services\TagService::getAllowedTagsFor($group);
+        $newTagsAllowed = \App\Services\TagService::areNewTagsAllowedFor($group);
+        $selectedTags = \App\Services\TagService::getSelectedTagsFor($group);
 
-        $selectedTags = [];
-
-        foreach ($group->tags as $tag)
-        {
-        $selectedTags[] = $tag->name;
-        }
-
+        
         return view('groups.edit')
             ->with('group', $group)
             ->with('allowedTags', $allowedTags)

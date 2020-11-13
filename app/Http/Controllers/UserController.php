@@ -33,12 +33,12 @@ class UserController extends Controller
                 // build a list of groups the user has access to
                 if (Auth::user()->isAdmin()) { // super admin sees everything
                     $groups = \App\Group::get()
-                    ->pluck('id');
+                        ->pluck('id');
                 } else { // normal user get public groups + groups he is member of
                     $groups = \App\Group::public()
-                    ->get()
-                    ->pluck('id')
-                    ->merge(Auth::user()->groups()->pluck('groups.id'));
+                        ->get()
+                        ->pluck('id')
+                        ->merge(Auth::user()->groups()->pluck('groups.id'));
                 }
             } else {
                 // show only "my" group
@@ -49,35 +49,35 @@ class UserController extends Controller
             $users = User::whereHas('groups', function ($q) use ($groups) {
                 $q->whereIn('group_id', $groups);
             })
-            ->where('verified', 1)
-            ->orderBy('created_at', 'desc')
-            ->paginate(20);
+                ->where('verified', 1)
+                ->orderBy('created_at', 'desc')
+                ->paginate(20);
 
             return view('dashboard.users')
-            ->with('tab', 'users')
-            ->with('users', $users)
-            ->with('title', $title);
+                ->with('tab', 'users')
+                ->with('users', $users)
+                ->with('title', $title);
         } else {
             $users = User::where('verified', 1)
-            ->orderBy('created_at', 'desc')
-            ->paginate(20);
+                ->orderBy('created_at', 'desc')
+                ->paginate(20);
 
             return view('dashboard.users')
-            ->with('tab', 'users')
-            ->with('users', $users)
-            ->with('title', $title);
+                ->with('tab', 'users')
+                ->with('users', $users)
+                ->with('title', $title);
         }
     }
 
     /**
-    * Show contact form for the user.
-    */
+     * Show contact form for the user.
+     */
     public function contactForm(User $user)
     {
         if ($user->isVerified()) {
             return view('users.contact')
-            ->with('tab', 'contact')
-            ->with('user', $user);
+                ->with('tab', 'contact')
+                ->with('user', $user);
         } else {
             flash(__('This user did not verify his/her email so you cannot contact him/her'));
 
@@ -86,8 +86,8 @@ class UserController extends Controller
     }
 
     /**
-    * Mails the user.
-    */
+     * Mails the user.
+     */
     public function contact(User $user, Request $request)
     {
         $from_user = Auth::user();
@@ -114,56 +114,63 @@ class UserController extends Controller
     }
 
     /**
-    * Display the specified resource.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Display the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function show(User $user)
     {
         if ($user->isVerified() || auth()->user()->isAdmin()) {
-            $title = $user->username.' '.trans('messages.user_profile');
+            $title = $user->username . ' ' . trans('messages.user_profile');
 
             return view('users.show')
-            ->with('activities', $user->activities()->whereIn('group_id', \App\Group::public()->get()->pluck('id'))->paginate(10))
-            ->with('user', $user)
-            ->with('tab', 'profile')
-            ->with('title', $title);
+                ->with('activities', $user->activities()->whereIn('group_id', \App\Group::public()->get()->pluck('id'))->paginate(10))
+                ->with('user', $user)
+                ->with('tab', 'profile')
+                ->with('title', $title);
         }
 
         flash(__('This user is unverified'));
 
         return redirect()->back();
-
     }
 
     /**
-    * Show the form for editing the specified resource.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function edit(User $user)
     {
+        $allowedTags = \App\Services\TagService::getAllowedTagsFor($user);
+        $newTagsAllowed = \App\Services\TagService::areNewTagsAllowedFor($user);
+        $selectedTags = \App\Services\TagService::getSelectedTagsFor($user);
+
+        
+
         if (Gate::allows('update', $user)) {
             return view('users.edit')
-            ->with('model_tags', $user->tags)
-            ->with('user', $user)
-            ->with('tab', 'edit');
+                ->with('allowedTags', $allowedTags)
+                ->with('selectedTags', $selectedTags)
+                ->with('newTagsAllowed', $newTagsAllowed)
+                ->with('user', $user)
+                ->with('tab', 'edit');
         } else {
             abort(403);
         }
     }
 
     /**
-    * Update the specified resource in storage.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Update the specified resource in storage.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function update(Request $request, User $user)
     {
         if (Gate::allows('update', $user)) {
@@ -190,8 +197,7 @@ class UserController extends Controller
                 if ($existing_user) {
                     flash(trans('This username is taken, another one has been generated'));
                     $user->username = SlugService::createSlug(User::class, 'username', $request->input('username'));
-                }
-                else {
+                } else {
                     $user->username = $request->input('username');
                 }
             }
@@ -229,14 +235,14 @@ class UserController extends Controller
             if ($user->isInvalid()) {
                 // Oops.
                 return redirect()->route('users.edit', $user)
-                ->withErrors($user->getErrors())
-                ->withInput();
+                    ->withErrors($user->getErrors())
+                    ->withInput();
             }
 
             // handle cover
             if ($request->hasFile('cover')) {
-                Storage::disk('local')->makeDirectory('users/'.$user->id);
-                Image::make($request->file('cover'))->widen(800)->save(storage_path().'/app/users/'.$user->id.'/cover.jpg');
+                Storage::disk('local')->makeDirectory('users/' . $user->id);
+                Image::make($request->file('cover'))->widen(800)->save(storage_path() . '/app/users/' . $user->id . '/cover.jpg');
             }
 
             // handle email change : if a user changes his email, we set him/her to unverified, and send a new verification email
@@ -254,7 +260,6 @@ class UserController extends Controller
                 ]);
 
                 $user->password = Hash::make($request->input('password'));
-
             }
 
 
@@ -269,13 +274,13 @@ class UserController extends Controller
     }
 
     /**
-    * Send verification token to a user, again, for example if it's stuck in spam or wathever else event.
-    *
-    * @param Request $request
-    * @param int     $id      User id
-    *
-    * @return Flash message and returns to homepage
-    */
+     * Send verification token to a user, again, for example if it's stuck in spam or wathever else event.
+     *
+     * @param Request $request
+     * @param int     $id      User id
+     *
+     * @return Flash message and returns to homepage
+     */
     public function sendVerificationAgain(Request $request, User $user)
     {
         if ($user->verified == 0) {
@@ -289,12 +294,12 @@ class UserController extends Controller
     }
 
     /**
-    * Remove the specified resource from storage.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function destroy(User $user, Request $request)
     {
         $this->authorize('delete', $user);
@@ -320,47 +325,47 @@ class UserController extends Controller
 
             // First case assign all to anonymous :
             if ($request->content == 'anonymous') {
-                $message[] = $user->comments->count().' comments anonymized';
+                $message[] = $user->comments->count() . ' comments anonymized';
                 foreach ($user->comments as $comment) {
                     $comment->timestamps = false;
                     $comment->user()->associate($anonymous);
                     $comment->save();
                 }
 
-                $message[] = $user->discussions->count().' discussions anonymized';
+                $message[] = $user->discussions->count() . ' discussions anonymized';
                 foreach ($user->discussions as $discussion) {
                     $discussion->timestamps = false;
                     $discussion->user()->associate($anonymous);
                     $discussion->save();
                 }
 
-                $message[] = $user->files->count().' files anonymized';
+                $message[] = $user->files->count() . ' files anonymized';
                 foreach ($user->files as $file) {
                     $file->timestamps = false;
                     $file->user()->associate($anonymous);
                     $file->save();
                 }
 
-                $message[] = $user->actions->count().' actions anonymized';
+                $message[] = $user->actions->count() . ' actions anonymized';
                 foreach ($user->actions as $action) {
                     $action->timestamps = false;
                     $action->user()->associate($anonymous);
                     $action->save();
                 }
 
-                $message[] = $user->memberships->count().' memberships deleted';
+                $message[] = $user->memberships->count() . ' memberships deleted';
                 $user->memberships()->delete();
             }
 
             // Second case delete all :
             if ($request->content == 'delete') {
-                $message[] = $user->comments->count().' comments deleted';
+                $message[] = $user->comments->count() . ' comments deleted';
                 foreach ($user->comments as $comment) {
                     $comment->timestamps = false;
                     $comment->delete();
                 }
 
-                $message[] = $user->discussions->count().' discussions deleted';
+                $message[] = $user->discussions->count() . ' discussions deleted';
                 foreach ($user->discussions as $discussion) {
                     $discussion->timestamps = false;
 
@@ -372,19 +377,19 @@ class UserController extends Controller
                     }
                 }
 
-                $message[] = $user->files->count().' files deleted';
+                $message[] = $user->files->count() . ' files deleted';
                 foreach ($user->files as $file) {
                     $file->timestamps = false;
                     $file->delete();
                 }
 
-                $message[] = $user->actions->count().' actions deleted';
+                $message[] = $user->actions->count() . ' actions deleted';
                 foreach ($user->actions as $action) {
                     $action->timestamps = false;
                     $action->delete();
                 }
 
-                $message[] = $user->memberships->count().' memberships deleted';
+                $message[] = $user->memberships->count() . ' memberships deleted';
                 $user->memberships()->delete();
             }
 

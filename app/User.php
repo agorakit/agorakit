@@ -147,7 +147,13 @@ class User extends Authenticatable
             $this->save();
             return $this->token;
         }
+    }
 
+
+    public function getSelectedTags()
+    {
+        $selectedTags = \App\Services\TagService::getSelectedTagsFor($this);
+        return \App\Tag::whereIn('normalized', $selectedTags)->get();
     }
 
     /**

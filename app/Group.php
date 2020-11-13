@@ -367,6 +367,14 @@ class Group extends Model
         return $this->save();
     }
 
+
+    public function getSelectedTags()
+    {
+        $selectedTags = \App\Services\TagService::getSelectedTagsFor($this);
+
+        return \App\Tag::whereIn('normalized', $selectedTags)->get();
+    }
+
     /**
     * Returns a list of allowed tags in this group or an empty collection if no allowed tags are set.
     */
