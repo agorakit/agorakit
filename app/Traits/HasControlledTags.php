@@ -5,6 +5,8 @@ namespace App\Traits;
 use Illuminate\Database\Eloquent\Builder;
 
 use App\Setting;
+use App\User;
+use App\Group;
 use App\Tag;
 use Exception;
 
@@ -15,41 +17,11 @@ use Exception;
  * 
  * - a super admin can decide which tags are allowed on groups and users
  * - a group admin can decide which tags are allowed on discussions, files and actions
+ * - if no controlled tags are defined, any tag can be added (aka free tagging)
  * 
  */
 trait HasControlledTags
 {
-
-
-    /** 
-     * Returns the allowed tags for a model
-     * 
-     * Depends on the global settings for groups and users
-     * Depends on the group settings for others
-     * 
-     * @return array
-     */
-    public function getAllowedTags()
-    {
-        if ($this instanceof User) {
-            if (Setting::getArray('user_tags')) {
-                return Setting::getArray('user_tags');
-            } else {
-                return [];
-            }
-        }
-
-        if ($this instanceof Group) {
-            if (Setting::getArray('group_tags')) {
-                return Setting::getArray('group_tags');
-            } else {
-                return [];
-            }
-        }
-
-        return [];
-        
-    }
 
 
     /** 
@@ -77,9 +49,43 @@ trait HasControlledTags
                 return true;
             }
         }
-        
+
         return true;
     }
+
+
+
+    /** 
+     * Returns the allowed tags for a model
+     * 
+     * Depends on the global settings for groups and users
+     * Depends on the group settings for others
+     * 
+     * @return collection of App\Tag
+     */
+    public function getAllowedTags()
+    {
+        if ($this instanceof User) {
+            if (Setting::getArray('user_tags')) {
+                return $this->arrayToTags(Setting::getArray('user_tags'));
+            } else {
+                return collect();
+            }
+        }
+
+        if ($this instanceof Group) {
+            if (Setting::getArray('group_tags')) {
+                return $this->arrayToTags(Setting::getArray('group_tags'));
+            } else {
+                return collect();
+            }
+        }
+
+        return collect();
+    }
+
+
+
 
 
     /** 
@@ -88,29 +94,41 @@ trait HasControlledTags
      * Enforce admin policies regarding tags : 
      * Will not return tags that are not allowed per admin settings even if they are attached to the model
      * 
-     * @return array
+     * @return collection of App\Tag
      */
     public function getSelectedTags()
     {
-       $selectedTags = [];
+        $selectedTags = collect();
 
-        if ($this instanceof User || $this instanceof Group) { // TODO find a way to make this work in traits...
-            foreach ($this->tags as $tag) {
-                if (in_array ($tag->name, \App\Services\TagService::getAllowedTagsFor($this)) || \App\Services\TagService::areNewTagsAllowedFor($this)) {
-                    $selectedTags[] = $tag->name;
-                }
+
+        foreach ($this->tags as $tag) {
+            if ($this->getAllowedTags()->contains($tag->name) || $this->areNewTagsAllowed()) {
+                $selectedTags->push($tag);
             }
-            
-            Tag::whereIn('normalized', $selectedTags);
-            return Tag::whereIn('normalized', $selectedTags);
         }
-       
-        
-        return [];
+
+        return $selectedTags;
     }
 
 
+    /** 
+     * Utility class
+     * 
+     * Convert an array of strings to a collection of tags
+     * Tags are created in the DB if needed
+     * 
+     * @return collection of App\Tag
+     */
+    private function arrayToTags($tagList)
+    {
+        $tags = collect();
 
+        if (is_array($tagList)) {
+        }
+        foreach ($tagList as $name) {
+            $tags->push(Tag::firstOrCreate(['name' => $name]));
+        }
+
+        return $tags;
+    }
 }
-
-

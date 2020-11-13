@@ -12,10 +12,7 @@
 
     <select class="form-control js-tags"
     name="tags[]"
-    multiple="multiple"
-    @unless (isset($group) && $group->tagsAreLimited())
-        data-tags="true"
-    @endunless>
+    multiple="multiple" data-tags="true">
 
     @if (isset($group) && $group->tagsAreLimited())
         @if (isset($model_tags))

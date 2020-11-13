@@ -24,11 +24,13 @@
     @if (isset($allowedTags))
             @foreach ($allowedTags as $tag)
                 @if (isset($selectedTags))
-                    @unless (in_array($tag, $selectedTags))
-                    <option value="{{$tag}}">{{$tag}}</option>
+                    @unless ($selectedTags->contains($tag->name)))
+                        <option value="{{$tag->name}}">
+                            {{$tag->name}}
+                        </option>
                     @endunless
                 @else 
-                <option value="{{$tag}}">{{$tag}}</option>
+                    <option value="{{$tag->name}}">{{$tag->name}}</option>
                 @endif
             @endforeach
     @endif

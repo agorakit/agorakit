@@ -272,7 +272,6 @@ class GroupController extends Controller
     {
         $this->authorize('update', $group);
 
-        dd($group->getSelectedTags());
 
         return view('groups.edit')
             ->with('group', $group)

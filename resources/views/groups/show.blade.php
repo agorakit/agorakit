@@ -66,7 +66,7 @@
                         {{ $group->discussions()->count() }}</span>
                     <span class="badge badge-secondary"><i class="fa fa-calendar"></i>
                         {{ $group->actions()->count() }}</span>
-                    @foreach ($group->tags as $tag)
+                    @foreach ($group->getSelectedTags() as $tag)
                         @include('tags.tag')
                     @endforeach
                 </div>
