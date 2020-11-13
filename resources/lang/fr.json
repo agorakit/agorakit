@@ -155,5 +155,12 @@
     "Confirm your password": "Confirmez votre mot de passe",
     "Comment body is required": "Le texte du commentaire est requis",
     "This username is taken, another one has been generated": "Ce nom d'utilisateur est pris, un autre a été généré",
-    "You must select a group": "Vous devez sélectionner un groupe"
+    "You must select a group": "Vous devez sélectionner un groupe",
+    "Settings": "Réglages",
+    "Allow regular users to create <strong>secret<\/strong> groups (if you uncheck this box,\n                        only admins will be able to create secret groups)": "Autoriser les utilisateurs normaux à créer des groupes <strong> secrets <\/strong> (si vous décochez cette case, seuls les administrateurs pourront créer des groupes secrets)",
+    "Limit the allowed tags for tagging users": "Limiter les tags disponibles pour classer des utilisateurs",
+    "Enter a coma separated list of allowed tags or leave blank to allow free tagging": "Entrez une liste de tags si vous souhaitez limiter leur usage. Sinon laissez la case vide pour permettre n'importe quel tag.",
+    "Limit the allowed tags for tagging groups": "Limiter les tags disponibles pour classer des groupes",
+    "Loading": "Chargement",
+    "Network error": "Pas de connexion réseau"
 }

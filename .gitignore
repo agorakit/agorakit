@@ -14,3 +14,4 @@ yarn-error.log
 .phpunit.result.cache
 # Do not include backup lang files
 resources/lang/*/[a-zA-Z]*20[0-9][0-9][0-1][0-9][0-3][0-9]_[0-2][0-9][0-5][0-9][0-5][0-9].php
+/public/mix-manifest.json

@@ -209,7 +209,7 @@ up.compiler('.calendar', function (element, data) {
 /*
 A simple spinner that is shown when a request takes too long
 */
-up.compiler('.spinner', function (element) {
+up.compiler('.js-spinner', function (element) {
 	function show() { element.style.display = 'block' }
 	function hide() { element.style.display = 'none' }
 	up.on('up:proxy:slow', show)
@@ -220,17 +220,7 @@ up.compiler('.spinner', function (element) {
 //up.proxy.config.slowDelay=300
 
 
-/*
-Warn user that there is no network 
-*/
-/*
-up.on('up:proxy:fatal', function(){
-	up.element.show(up.element.get('.network-error'))
-})
-*/
-
-
-up.compiler('.network-error', function (element) {
+up.compiler('.js-network-error', function (element) {
 	function show() { element.style.display = 'block' }
 	function hide() { element.style.display = 'none' }
 	up.on('up:proxy:fatal', show)

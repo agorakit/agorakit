@@ -93,7 +93,7 @@
                 @can('update', $file)
                     <a class="dropdown-item" href="{{ route('groups.files.edit', [$file->group, $file]) }}">
                         <i class="fa fa-pencil"></i>
-                        {{__('messages.edit')}}
+                        {{trans('messages.edit')}}
                     </a>
                 @endcan
 

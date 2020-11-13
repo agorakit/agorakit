@@ -38,19 +38,22 @@
     @endunless
 
 
-
-    <div class="spinner bg-green-700 text-green-200 fixed px-4 py-2 m-6 rounded-full shadow hidden">
-        <i class="far fa-save"></i>
-        Please wait!
+    <div class="js-spinner fixed hidden bg-green-700 top-0 z-50 w-full">
+        <div class="inline-block  text-green-200 m-4">
+            <i class="far fa-save mr-2"></i>
+            {{__('Loading')}}
+        </div>
     </div>
 
-    <div class="network-error bg-red-700 text-red-200 fixed px-4 py-2 m-6 right-0 rounded-full shadow hidden">
-        <i class="far fa-save"></i>
-        No network!
+    <div class="js-network-error fixed hidden bg-red-700 top-0 z-50 mt-12 w-full">
+        <div class="inline-block  text-red-200 m-4">
+            <i class="fa fa-plug mr-2"></i>
+            {{__('Network error')}}
+        </div>
     </div>
 
 
-    <div class="mx-auto p-4 md:rounded-lg  bg-white sm:shadow-xl xl:my-5 xl:p-8" style="max-width: 1280px">
+    <div class="mx-auto p-4 bg-white sm:shadow-xl xl:p-8 xl:rounded-lg xl:my-4" style="max-width: 1240px">
         @include('partials.errors')
         @yield('content')
     </div>
@@ -78,7 +81,7 @@
     @yield('js')
     @stack('js')
 
-    <script src="{{ asset('js/compilers.js') }}"></script>
+    <script src="{{ asset('js/compilers.js?v='.filemtime(public_path('js/compilers.js'))) }}"></script>
 
     <script>
         if ('serviceWorker' in navigator) {
