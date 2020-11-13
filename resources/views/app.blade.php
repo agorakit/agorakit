@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="{{ asset('/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/unpoly.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/app.css?v='.filemtime(public_path('css/app.css'))) }}">
 
 
     <!-- additional css -->
