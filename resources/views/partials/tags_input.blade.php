@@ -17,7 +17,7 @@
 
     @if (isset($selectedTags))
             @foreach ($selectedTags as $tag)
-                <option selected="selected" value="{{$tag}}">{{$tag}}</option>
+                <option selected="selected" value="{{$tag->name}}">{{$tag->name}}</option>
             @endforeach
     @endif
 

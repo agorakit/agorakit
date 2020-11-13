@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Traits\HasStatus;
+use App\Traits\HasControlledTags;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
@@ -21,6 +22,7 @@ class Group extends Model
     use Sluggable;
     use SearchableTrait;
     use HasStatus;
+    use HasControlledTags;
 
     protected $rules = [
         'name' => 'required',
@@ -367,13 +369,6 @@ class Group extends Model
         return $this->save();
     }
 
-
-    public function getSelectedTags()
-    {
-        $selectedTags = \App\Services\TagService::getSelectedTagsFor($this);
-
-        return \App\Tag::whereIn('normalized', $selectedTags)->get();
-    }
 
     /**
     * Returns a list of allowed tags in this group or an empty collection if no allowed tags are set.
