@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Setting;
 use App\User;
 use App\Group;
+use App\Discussion;
+use App\File;
+use App\Action;
 use App\Tag;
 use Exception;
 
@@ -81,6 +84,11 @@ trait HasControlledTags
             }
         }
 
+        if ($this instanceof Discussion || $this instanceof File || $this instanceof Action) {
+            return $this->arrayToTags($this->group->getSetting('allowed_tags'));   
+        }
+
+        throw new Exception ('unknown class type');
         return collect();
     }
 

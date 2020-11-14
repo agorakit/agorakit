@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Traits\HasStatus;
+use App\Traits\HasControlledTags;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -23,6 +24,7 @@ class Discussion extends Model
     use Taggable;
     use SearchableTrait;
     use HasStatus;
+    use HasControlledTags;
 
     protected $rules = [
     'name'     => 'required',
