@@ -191,8 +191,6 @@ class GroupDiscussionController extends Controller
     {
         $this->authorize('update', $discussion);
 
-        $tags = $group->tagsUsed();
-
         return view('discussions.edit')
         ->with('discussion', $discussion)
         ->with('group', $group)
