@@ -53,6 +53,14 @@ trait HasControlledTags
             }
         }
 
+        if ($this instanceof Discussion || $this instanceof File || $this instanceof Action) {
+            if ($this->getAllowedTags()->count() > 0) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
         return true;
     }
 

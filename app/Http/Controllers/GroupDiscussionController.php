@@ -70,12 +70,15 @@ class GroupDiscussionController extends Controller
             $this->authorize('create-discussion', $group);
         }
 
-        $tags = $group->tagsUsed();
+        $discussion = new Discussion;
+        $discussion->group()->associate($group);
+
         $title = trans('group.create_group_discussion');
 
         return view('discussions.create')
         ->with('group', $group)
-        ->with('all_tags', $tags)
+        ->with('allowedTags', $discussion->getAllowedTags())
+        ->with('newTagsAllowed', $discussion->areNewTagsAllowed())
         ->with('tab', 'discussion')
         ->with('title', $title);
     }
@@ -193,8 +196,9 @@ class GroupDiscussionController extends Controller
         return view('discussions.edit')
         ->with('discussion', $discussion)
         ->with('group', $group)
-        ->with('all_tags', $tags)
-        ->with('model_tags', $discussion->tags)
+        ->with('allowedTags', $discussion->getAllowedTags())
+        ->with('newTagsAllowed', $discussion->areNewTagsAllowed())
+        ->with('selectedTags', $discussion->getSelectedTags())
         ->with('tab', 'discussion');
     }
 

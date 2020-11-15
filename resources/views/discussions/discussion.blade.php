@@ -13,9 +13,9 @@
         </div>
 
 
-        @if($discussion->tags->count() > 0)
+        @if($discussion->getSelectedTags()->count() > 0)
             <div class="text-gray-600 text-xs overflow-hidden my-1 h-5">
-                @foreach($discussion->tags as $tag)
+                @foreach($discussion->getSelectedTags() as $tag)
                     @include('tags.tag')
                 @endforeach
             </div>
