@@ -11,15 +11,10 @@
             <a up-target=".items" class="dropdown-item" href="{{request()->fullUrlWithQuery(['tag' => null, 'page' => null])}}">{{trans('messages.show_all')}}</a>
             <div class="dropdown-divider"></div>
 
-            @if (isset($group) && $group->tagsAreLimited())
-                @foreach ($group->allowedTags() as $tag)
-                    <a up-target=".items" class="dropdown-item" href="{{request()->fullUrlWithQuery(['tag' => $tag->normalized , 'page' => null])}}">{{$tag}}</a>
+                @foreach ($tags as $tag)
+                    <a up-target=".items" class="dropdown-item" href="{{request()->fullUrlWithQuery(['tag' => $tag->name , 'page' => null])}}">{{$tag->name}}</a>
                 @endforeach
-            @else
-                @foreach ($tags as $id=>$tag)
-                    <a up-target=".items" class="dropdown-item" href="{{request()->fullUrlWithQuery(['tag' => $tag , 'page' => null])}}">{{$tag}}</a>
-                @endforeach
-            @endif
+          
         </div>
     </div>
 @endif
