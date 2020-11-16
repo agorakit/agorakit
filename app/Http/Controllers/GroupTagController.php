@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Group;
 use App\Tag;
+use App\Discussion;
 use Illuminate\Http\Request;
 
 class GroupTagController extends Controller
@@ -12,104 +13,6 @@ class GroupTagController extends Controller
     {
     }
 
-    /**
-    * Display a listing of tags in the specified group + admin ui for crud.
-    *
-    * @return Response
-    */
-    public function index(Request $request, Group $group)
-    {
-        $this->authorize('view-tags', $group);
-
-        if ($request->get('limit_tags') == 'yes') {
-            $group->limitTags(true);
-
-            // if we have 0 tags :
-            if ($group->allowedTags()->count() == 0)
-            {
-                // add all the existing tags to allowed tags by default as an helper to the admin
-                foreach ($group->tagsUsed() as $tag) {
-                    $group->addAllowedTag($tag);
-                }
-            }
-
-
-        }
-
-        if ($request->get('limit_tags') == 'no') {
-            $group->limitTags(false);
-        }
-
-        $tags = $group->allowedTags();
-
-        return view('tags.index')
-        ->with('tags', $tags)
-        ->with('group', $group)
-        ->with('tab', 'admin');
-    }
-
-    /**
-    * Display the specified resource.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
-    public function show(Group $group, Tag $tag)
-    {
-        $this->authorize('view-tags', $group);
-
-        return view('tags.show')
-        ->with('title', $group->name)
-        ->with('tag', $tag)
-        ->with('group', $group)
-        ->with('tab', 'admin');
-    }
-
-    /**
-    * Show the form for creating a new resource.
-    *
-    * @return Response
-    */
-    public function create(Request $request, Group $group)
-    {
-        $this->authorize('manage-tags', $group);
-        $tags = $group->allowedTags();
-        $tag = new Tag();
-
-
-        return view('tags.create')
-        ->with('group', $group)
-        ->with('tags', $tags)
-        ->with('tag', $tag)
-        ->with('tab', 'admin');
-    }
-
-    /**
-    * Store a newly created resource in storage.
-    *
-    * @return Response
-    */
-    public function store(Request $request, Group $group)
-    {
-        $this->authorize('manage-tags', $group);
-
-        $tag = Tag::findByName($request->input('name'));
-
-        if (!$tag) {
-            $tag = new Tag();
-            $tag->name = $request->input('name');
-        }
-
-        $tag->color = $request->input('color');
-        $tag->save();
-
-        $group->addAllowedTag($tag);
-
-        flash(trans('messages.ressource_created_successfully'));
-
-        return redirect()->route('groups.tags.index', $group);
-    }
 
     /**
     * Show the form for editing the specified resource.
@@ -122,10 +25,18 @@ class GroupTagController extends Controller
     {
         $this->authorize('manage-tags', $group);
 
-        return view('tags.edit')
-        ->with('tag', $tag)
+        // this is a bit hackish : 
+        // we instantiate a discussion just to get the current allowed tags for discussions, files and actions
+        // this is just to access the hascontrolledtags trait
+        $discussion = new Discussion;
+        $discussion->group()->associate($group);
+
+
+        return view('groups.allowed_tags')
         ->with('group', $group)
-        ->with('tab', 'admin');
+        ->with('newTagsAllowed', true)
+        ->with('selectedTags', $discussion->getAllowedTags());
+        
     }
 
     /**
@@ -135,48 +46,13 @@ class GroupTagController extends Controller
     *
     * @return Response
     */
-    public function update(Request $request, Group $group, Tag $tag)
+    public function update(Request $request, Group $group)
     {
         $this->authorize('manage-tags', $group);
+        $group->setSetting('allowed_tags', $request->input('tags'));
 
-        $tag->name = $request->input('name');
-        $tag->color = $request->input('color');
-
-        if ($tag->save()) {
-            $group->addAllowedTag($tag);
-            flash(trans('messages.ressource_updated_successfully'));
-
-            return redirect()->route('groups.tags.index', $group);
-        } else {
-            flash(trans('messages.ressource_not_updated_successfully'));
-
-            return redirect()->back();
-        }
+        flash(trans('messages.ressource_updated_successfully'));
+        return redirect()->route('groups.tags.edit', [$group]);
     }
 
-    public function destroyConfirm(Request $request, Group $group, Tag $tag)
-    {
-        $this->authorize('manage-tags', $group);
-
-        return view('tags.delete')
-        ->with('group', $group)
-        ->with('tag', $tag)
-        ->with('tab', 'admin');
-    }
-
-    /**
-    * Remove the specified resource from storage.
-    *
-    * @param int $id
-    *
-    * @return \Illuminate\Http\Response
-    */
-    public function destroy(Request $request, Group $group, Tag $tag)
-    {
-        $this->authorize('manage-tags', $group);
-        $group->removeAllowedTag($tag);
-        flash(trans('messages.ressource_deleted_successfully'));
-
-        return redirect()->route('groups.tags.index', [$group]);
-    }
 }

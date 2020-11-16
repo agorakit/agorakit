@@ -27,10 +27,11 @@ class GroupDiscussionController extends Controller
     {
         $this->authorize('view-discussions', $group);
 
-        if ($group->tagsAreLimited()) {
-            $tags = $group->allowedTags();
-        } else {
+        if ($group->areNewTagsAllowed()) {
             $tags = $group->tagsInDiscussions();
+            
+        } else {
+            $tags = $group->getAllowedTags();
         }
 
         $tag = $request->get('tag');

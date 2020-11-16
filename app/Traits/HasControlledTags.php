@@ -93,10 +93,10 @@ trait HasControlledTags
         }
 
         if ($this instanceof Discussion || $this instanceof File || $this instanceof Action) {
-            return $this->arrayToTags($this->group->getSetting('allowed_tags'));   
+            return $this->arrayToTags($this->group->getSetting('allowed_tags'));
         }
 
-        throw new Exception ('unknown class type');
+        throw new Exception('unknown class type');
         return collect();
     }
 
@@ -140,9 +140,10 @@ trait HasControlledTags
         $tags = collect();
 
         if (is_array($tagList)) {
-        }
-        foreach ($tagList as $name) {
-            $tags->push(Tag::firstOrCreate(['name' => $name]));
+
+            foreach ($tagList as $name) {
+                $tags->push(Tag::firstOrCreate(['name' => $name]));
+            }
         }
 
         return $tags;

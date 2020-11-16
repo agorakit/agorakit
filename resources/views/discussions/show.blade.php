@@ -111,9 +111,9 @@
                 <div class="mb-3 d-flex">
 
                     <div class="tags">
-                        @if($discussion->tags->count() > 0)
+                        @if($discussion->getSelectedTags()->count() > 0)
                             <span class="mr-2">
-                                @foreach($discussion->tags as $tag)
+                                @foreach($discussion->getSelectedTags() as $tag)
                                     @include('tags.tag')
                                 @endforeach
                             </span>
