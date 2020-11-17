@@ -1,7 +1,7 @@
 
 @if ($tags)
-    <div class="dropdown mr-2">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <div up-hungry class="dropdown mr-2">
+        <button  class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{trans('messages.filter')}}
             @if (request()->get('tag'))
                 : {{request()->get('tag')}}
@@ -12,7 +12,10 @@
             <div class="dropdown-divider"></div>
 
                 @foreach ($tags as $tag)
-                    <a up-target=".items" class="dropdown-item" href="{{request()->fullUrlWithQuery(['tag' => $tag->name , 'page' => null])}}">{{$tag->name}}</a>
+                    <a up-target=".items" class="dropdown-item" href="{{request()->fullUrlWithQuery(['tag' => $tag->name , 'page' => null])}}">
+                         <span class="inline-block w-2 h-2 rounded-full " style="background-color: {{$tag->color}}"></span>
+                        {{$tag->name}}
+                    </a>
                 @endforeach
           
         </div>

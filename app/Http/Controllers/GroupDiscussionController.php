@@ -30,12 +30,9 @@ class GroupDiscussionController extends Controller
         $discussion = new Discussion;
         $discussion->group()->associate($group);
 
-        if ($discussion->areNewTagsAllowed()) {
-            $tags = $group->tagsInDiscussions();
-            
-        } else {
-            $tags = $discussion->getAllowedTags();
-        }
+        $tags = $discussion->getTagsInUse();
+
+        //dd($tags);
 
         $tag = $request->get('tag');
 

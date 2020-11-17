@@ -137,12 +137,39 @@ trait HasControlledTags
     public function getTagsInUse()
     {
         if ($this instanceof Discussion || $this instanceof File || $this instanceof Action) {
+
             if ($this->areNewTagsAllowed()) {
+                if ($this instanceof Discussion) {
+                    $models = $this->group
+                        ->discussions()
+                        ->with('tags')
+                        ->get();
+                }
 
+                if ($this instanceof File) {
+                    $models = $this->group
+                        ->files()
+                        ->with('tags')
+                        ->get();
+                }
+
+                if ($this instanceof Action) {
+                    $models = $this->group
+                        ->actions()
+                        ->with('tags')
+                        ->get();
+                }
+
+                $tags = collect();
+
+                foreach ($models as $model) {
+                    $tags = $tags->merge($model->tags);
+                }
+                return $tags->unique()->sortBy('name');
+            } else {
+                return $this->getAllowedTags();
             }
-            return $this->arrayToTags($this->group->getSetting('allowed_tags'));   
         }
-
     }
 
 
