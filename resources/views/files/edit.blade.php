@@ -13,7 +13,7 @@
         	{!! Form::text('name', $file->name, ['class' => 'form-control', 'required']) !!}
         </div>
 
-        @include('partials.tags_form')
+        @include('partials.tags_input')
 
 
 

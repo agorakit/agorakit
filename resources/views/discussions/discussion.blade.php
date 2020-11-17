@@ -13,9 +13,9 @@
         </div>
 
 
-        @if($discussion->tags->count() > 0)
+        @if($discussion->getSelectedTags()->count() > 0)
             <div class="text-gray-600 text-xs overflow-hidden my-1 h-5">
-                @foreach($discussion->tags as $tag)
+                @foreach($discussion->getSelectedTags() as $tag)
                     @include('tags.tag')
                 @endforeach
             </div>
@@ -62,13 +62,6 @@
                     </a>
                 @endcan
 
-                @can('update', $discussion)
-                    <a class="dropdown-item" up-modal=".dialog" up-closable="false"
-                        href="{{ route('tagger.index', ['discussions', $discussion->id]) }}?r={{ rand(0,999999) }}">
-                        <i class="fa fa-tag"></i>
-                        {{ __('Edit tags') }}
-                    </a>
-                @endcan
 
                 @can('delete', $discussion)
                     <a up-modal=".dialog" class="dropdown-item"

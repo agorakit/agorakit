@@ -26,4 +26,10 @@ return array (
     'tabs' => 'Gestion des fonctionnalités',
     'tabs_help' => 'Activez ou désactivez les fonctionnalités de votre groupe',
   ),
+  'allowed_tags_title' => 'Gestion des tags sur les contenu dans ce groupe',
+  'allowed_tags_help' => 'Si vous souhaitez limiter les tags disponibles pour classer du contenu dans ce groupe, entrez les mots clés ci-dessous. Sinon laissez la boite vide afin de permettre n\'importe quel tag.',
+  'status_help' => 'Choisissez un statut pour ce groupe. Ceci vous permet d\'archiver un groupe inactif ou au contraire de le mettre en avant (épinglé en haut des listes)',
+  'normal' => 'Groupe normal',
+  'group_type_help' => 'Choisissez le type de groupe que vous souhaitez.
+Un groupe public est joignable par n\'importe qui et son contenu est public. Un groupe fermé est sur invitation uniquement et son contenu visible uniquement par les membres. Un groupe secret est carrément invisible pour les non-membres.',
 );

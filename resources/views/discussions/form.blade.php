@@ -22,4 +22,4 @@
 	{!! Form::file('file', ['class' => 'form-control-file', 'id'=>'file']) !!}
 </div>
 
-@include('partials.tags_form')
+@include('partials.tags_input')

@@ -121,7 +121,7 @@
                         <i class="fa fa-cogs"></i> {{ trans('Configuration') }}
                     </a>
 
-                    <a up-follow up-reveal="false" class="dropdown-item" href="{{ route('groups.tags.index', $group) }}">
+                    <a up-follow up-reveal="false" class="dropdown-item" href="{{ route('groups.tags.edit', $group) }}">
                         <i class="fa fa-tags"></i> {{ trans('Tags') }}
                     </a>
 

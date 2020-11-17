@@ -21,4 +21,9 @@ return array (
   'status' => 'Status',
   'pinned' => 'Pinned',
   'archived' => 'Archived',
+  'allowed_tags_title' => 'Manage tags on the content of this group',
+  'allowed_tags_help' => 'If you want to limit the available tags to classify content in this group, enter the tags in the box below. If you want to allow any tag, leave the box empty.',
+  'normal' => 'Normal group',
+  'status_help' => 'Choose a status for this group. This allows you to archive an inactive group or on the contrary pin an important group on top of lists',
+  'group_type_help' => 'Choose the group type you want. An open group has the content public and anyone can join it. A closed group is invite only and the content is only visible to it\'s members. A secret group is not even discoverable by non members.',
 );

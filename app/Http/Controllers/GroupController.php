@@ -166,18 +166,12 @@ class GroupController extends Controller
     public function create()
     {
         Gate::authorize('create', Group::class);
-
         $group = new Group;
-        
-        $allowedTags = \App\Services\TagService::getAllowedTagsFor($group);
-        $newTagsAllowed = \App\Services\TagService::areNewTagsAllowedFor($group);
-        
-
 
         return view('groups.create')
             ->with('group', $group)
-            ->with('allowedTags', $allowedTags)
-            ->with('newTagsAllowed', $newTagsAllowed)
+            ->with('allowedTags', $group->getAllowedTags())
+            ->with('newTagsAllowed', $group->areNewTagsAllowed())
             ->with('title', trans('group.create_group_title'));
     }
 
@@ -278,17 +272,12 @@ class GroupController extends Controller
     {
         $this->authorize('update', $group);
 
-        
-        $allowedTags = \App\Services\TagService::getAllowedTagsFor($group);
-        $newTagsAllowed = \App\Services\TagService::areNewTagsAllowedFor($group);
-        $selectedTags = \App\Services\TagService::getSelectedTagsFor($group);
 
-        
         return view('groups.edit')
             ->with('group', $group)
-            ->with('allowedTags', $allowedTags)
-            ->with('selectedTags', $selectedTags)
-            ->with('newTagsAllowed', $newTagsAllowed)
+            ->with('allowedTags', $group->getAllowedTags())
+            ->with('newTagsAllowed', $group->areNewTagsAllowed())
+            ->with('selectedTags', $group->getSelectedTags())
             ->with('tab', 'admin');
     }
 

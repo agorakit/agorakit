@@ -4,6 +4,7 @@ namespace App;
 
 use App\User;
 use App\Group;
+use App\Traits\HasControlledTags;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -18,6 +19,7 @@ class Action extends Model
     use SoftDeletes;
     use Taggable;
     use SearchableTrait;
+    use HasControlledTags;
 
     protected $fillable = ['id']; // needed for actions import
 

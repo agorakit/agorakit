@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\HasControlledTags;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,6 +18,7 @@ use App\Membership;
 
 
 
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -26,21 +28,13 @@ class User extends Authenticatable
     use Sluggable;
     use Taggable;
     use SearchableTrait;
+    use HasControlledTags;
 
-    /**
-    * The attributes that are mass assignable.
-    *
-    * @var array
-    */
+
     protected $fillable = [
         'name', 'username', 'email', 'password', 'provider', 'provider_id',
     ];
 
-    /**
-    * The attributes excluded from the model's JSON form.
-    *
-    * @var array
-    */
     protected $hidden = [
         'password', 'remember_token', 'token',
     ];
@@ -149,12 +143,6 @@ class User extends Authenticatable
         }
     }
 
-
-    public function getSelectedTags()
-    {
-        $selectedTags = \App\Services\TagService::getSelectedTagsFor($this);
-        return \App\Tag::whereIn('normalized', $selectedTags)->get();
-    }
 
     /**
     * Confirm the user.

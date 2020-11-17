@@ -255,4 +255,5 @@ return array (
   'notifications' => 'Notifications',
   'new' => 'Nouveau',
   'unread' => 'non lu(s)',
+  'group_tags_help' => 'Pour votre information, voici l\'ensemble des tags utilisés dans ce groupe',
 );

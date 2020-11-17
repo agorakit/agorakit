@@ -24,7 +24,7 @@
             <label for="title">{{trans('messages.title')}}</label>
             <input class="form-control" name="title" type="text" value="{{ old('title') }}"/>
 
-            @include('partials.tags_form')
+            @include('partials.tags_input')
 
         </div>
 
