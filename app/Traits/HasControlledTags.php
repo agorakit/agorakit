@@ -128,6 +128,25 @@ trait HasControlledTags
 
 
     /** 
+     * Returns a collection of tags used by the content of the same type, 
+     * in the same group, or the allowed tags if the tags are limited in this context.
+     * 
+     * @return collection of App\Tag
+     * 
+     */
+    public function getTagsInUse()
+    {
+        if ($this instanceof Discussion || $this instanceof File || $this instanceof Action) {
+            if ($this->areNewTagsAllowed()) {
+
+            }
+            return $this->arrayToTags($this->group->getSetting('allowed_tags'));   
+        }
+
+    }
+
+
+    /** 
      * Utility class
      * 
      * Convert an array of strings to a collection of tags
