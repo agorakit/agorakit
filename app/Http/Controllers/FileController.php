@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\File;
 use Illuminate\Http\Request;
 
 /**
@@ -21,9 +22,7 @@ class FileController extends Controller
      */
     public function index(Request $request)
     {
-        $tags = \App\File::allTags();
-
-        natcasesort($tags);
+        $tags = File::allTagModels()->sortBy('name');
 
         if (Auth::check()) {
             if (Auth::user()->getPreference('show') == 'all') {

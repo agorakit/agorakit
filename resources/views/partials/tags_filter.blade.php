@@ -13,7 +13,7 @@
 
                 @foreach ($tags as $tag)
                     <a up-target=".items" class="dropdown-item" href="{{request()->fullUrlWithQuery(['tag' => $tag->name , 'page' => null])}}">
-                         <span class="inline-block w-2 h-2 rounded-full " style="background-color: {{$tag->color}}"></span>
+                         <span class="inline-block w-2 h-2" style="background-color: {{$tag->color}}"></span>
                         {{$tag->name}}
                     </a>
                 @endforeach
