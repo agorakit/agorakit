@@ -16,7 +16,18 @@
 
   @include('partials.tags_input')
 
-  <div class="form-group">
+  @if ($tags->count() > 0)
+  <div class="small-help">
+        <i class="fas fa-info-circle"></i>
+        {{trans('messages.group_tags_help')}} : 
+         @foreach ($tags as $tag)
+            {{$tag->name}}, 
+          @endforeach
+  </div>
+  @endif
+ 
+
+  <div class="form-group mt-4">
     {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-primary btn-lg']) !!}
   </div>
 

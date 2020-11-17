@@ -133,15 +133,6 @@ class GroupPolicy extends BasePolicy
         return $this->getPermissionsFor($user, $group)->contains('create-discussion');
     }
 
-    public function createTag(User $user, Group $group)
-    {
-        if ($group->tagsAreLimited())
-        {
-            return $user->isAdminOf($group);
-        }
-
-        return $user->isMemberOf($group);
-    }
 
 
     /**

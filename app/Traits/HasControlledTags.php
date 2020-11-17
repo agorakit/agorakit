@@ -165,10 +165,40 @@ trait HasControlledTags
                 foreach ($models as $model) {
                     $tags = $tags->merge($model->tags);
                 }
-                return $tags->unique()->sortBy('name');
+                return $tags->unique('normalized')->sortBy('normalized');
             } else {
                 return $this->getAllowedTags();
             }
+        }
+
+        if ($this instanceof Group) {
+            // Generate a list of tags from this group :
+            // One day, groups might choose to have their own, fixed tag list, configured by admin
+            // this day has come :-)
+
+            $tags = collect();
+
+            $discussions = $this->discussions()
+                ->with('tags')
+                ->get();
+
+            $files = $this->files()
+                ->with('tags')
+                ->get();
+
+            foreach ($discussions as $discussion) {
+                foreach ($discussion->getSelectedTags() as $tag) {
+                    $tags->push($tag);
+                }
+            }
+
+            foreach ($files as $file) {
+                foreach ($file->getSelectedTags() as $tag) {
+                    $tags->push($tag);
+                }
+            }
+
+            return $tags->unique('normalized')->sortBy('normalized');
         }
     }
 
@@ -188,7 +218,9 @@ trait HasControlledTags
         if (is_array($tagList)) {
 
             foreach ($tagList as $name) {
-                $tags->push(Tag::firstOrCreate(['name' => $name]));
+                if (!empty($name)) {
+                    $tags->push(Tag::firstOrCreate(['normalized' => mb_strtolower($name)]));
+                }
             }
         }
 

@@ -30,10 +30,8 @@ class GroupDiscussionController extends Controller
         $discussion = new Discussion;
         $discussion->group()->associate($group);
 
+        // for the tag filter frop down
         $tags = $discussion->getTagsInUse();
-
-        //dd($tags);
-
         $tag = $request->get('tag');
 
         if (\Auth::check()) {

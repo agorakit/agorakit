@@ -38,15 +38,15 @@ class GroupFileController extends Controller
             abort(404, 'invalid sort type');
         }
 
-        if ($group->tagsAreLimited()) {
-            $tags = $group->allowedTags();
-        } else {
-            $tags = $group->tagsInFiles();
-        }
 
-        // Query depending of the request
-        // filter by tags and sort order
-        $tag = $request->get('tag');
+        $file = new File;
+        $file->group()->associate($group);
+
+
+         // for the tag filter frop down
+         $tags = $file->getTagsInUse();
+         $tag = $request->get('tag');
+
 
         $files = $group->files()
         ->where('item_type', '<>', \App\File::FOLDER)
