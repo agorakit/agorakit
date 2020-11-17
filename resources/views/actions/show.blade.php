@@ -56,8 +56,8 @@
 
 
     <div class="tags mb-3">
-      @if ($action->tags->count() > 0)
-        @foreach ($action->tags as $tag)
+      @if ($action->getSelectedTags()->count() > 0)
+        @foreach ($action->getSelectedTags() as $tag)
           @include('tags.tag')
         @endforeach
       @endif

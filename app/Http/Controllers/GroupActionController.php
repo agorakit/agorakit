@@ -141,10 +141,14 @@ class GroupActionController extends Controller
             $action->name = $request->get('title');
         }
 
+        
+        $action->group()->associate($group);
+
         return view('actions.create')
             ->with('action', $action)
             ->with('group', $group)
-            ->with('all_tags', $group->tagsUsed())
+            ->with('allowedTags', $action->getAllowedTags())
+            ->with('newTagsAllowed', $action->areNewTagsAllowed())
             ->with('tab', 'action');
     }
 
@@ -271,8 +275,9 @@ class GroupActionController extends Controller
         return view('actions.edit')
             ->with('action', $action)
             ->with('group', $group)
-            ->with('all_tags', $group->tagsUsed())
-            ->with('model_tags', $action->tags)
+            ->with('allowedTags', $action->getAllowedTags())
+            ->with('newTagsAllowed', $action->areNewTagsAllowed())
+            ->with('selectedTags', $action->getSelectedTags())
             ->with('tab', 'action');
     }
 

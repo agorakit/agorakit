@@ -38,15 +38,15 @@ class GroupFileController extends Controller
             abort(404, 'invalid sort type');
         }
 
-        if ($group->tagsAreLimited()) {
-            $tags = $group->allowedTags();
-        } else {
-            $tags = $group->tagsInFiles();
-        }
 
-        // Query depending of the request
-        // filter by tags and sort order
-        $tag = $request->get('tag');
+        $file = new File;
+        $file->group()->associate($group);
+
+
+         // for the tag filter frop down
+         $tags = $file->getTagsInUse();
+         $tag = $request->get('tag');
+
 
         $files = $group->files()
         ->where('item_type', '<>', \App\File::FOLDER)
@@ -93,10 +93,12 @@ class GroupFileController extends Controller
     {
         $this->authorize('create-file', $group);
 
-        $tags = $group->tagsUsed();
+        $file = new File;
+        $file->group()->associate($group);
 
         return view('files.create')
-        ->with('all_tags', $tags)
+        ->with('allowedTags', $file->getAllowedTags())
+        ->with('newTagsAllowed', $file->areNewTagsAllowed())
         ->with('group', $group)
         ->with('tab', 'files');
     }
@@ -105,10 +107,13 @@ class GroupFileController extends Controller
     {
         $this->authorize('create-link', $group);
 
-        $tags = $group->tagsUsed();
+        $file = new File;
+        $file->group()->associate($group);
+
 
         return view('files.createlink')
-        ->with('all_tags', $tags)
+        ->with('allowedTags', $file->getAllowedTags())
+        ->with('newTagsAllowed', $file->areNewTagsAllowed())
         ->with('group', $group)
         ->with('tab', 'files');
     }
@@ -175,12 +180,13 @@ class GroupFileController extends Controller
     {
         $this->authorize('update', $file);
 
-        $tags = $group->tagsUsed();
+       
 
         return view('files.edit')
         ->with('file', $file)
-        ->with('all_tags', $tags)
-        ->with('model_tags', $file->tags)
+        ->with('allowedTags', $file->getAllowedTags())
+        ->with('newTagsAllowed', $file->areNewTagsAllowed())
+        ->with('selectedTags', $file->getSelectedTags())
         ->with('group', $group)
         ->with('tab', 'file');
     }

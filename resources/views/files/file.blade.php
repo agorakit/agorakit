@@ -20,9 +20,9 @@
         </div>
 
     
-        @if ($file->tags->count() > 0)
+        @if ($file->getSelectedTags()->count() > 0)
         <div class="mb-2">
-                @foreach ($file->tags as $tag)
+                @foreach ($file->getSelectedTags() as $tag)
                     @include('tags.tag')
                 @endforeach
                 </div>

@@ -14,7 +14,7 @@
             <input name="files[]" id="file" type="file" multiple="mutiple" title="{{trans('messages.select_one_or_more_files')}}">
         </div>
 
-        @include('partials.tags_form')
+        @include('partials.tags_input')
 
         <input class="btn btn-primary" type="submit" name="{{trans('messages.upload')}}"/>
 

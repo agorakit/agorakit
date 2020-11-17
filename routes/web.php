@@ -343,14 +343,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('files/{file}/icon', 'FileDownloadController@icon')->name('.files.icon');
 
         // Allowed Tags
-        Route::get('tags', 'GroupTagController@index')->name('.tags.index');
-        Route::get('tags/create', 'GroupTagController@create')->name('.tags.create');
-        Route::post('tags/create', 'GroupTagController@store')->name('.tags.store');
-        Route::get('tags/{tag}', 'GroupTagController@show')->name('.tags.show');
-        Route::get('tags/{tag}/edit', 'GroupTagController@edit')->name('.tags.edit');
-        Route::post('tags/{tag}', 'GroupTagController@update')->name('.tags.update');
-        Route::get('tags/{tag}/delete', 'GroupTagController@destroyConfirm')->name('.tags.deleteconfirm');
-        Route::delete('tags/{tag}/delete', 'GroupTagController@destroy')->name('.tags.delete');
+        Route::get('tags', 'GroupTagController@edit')->name('.tags.edit');
+        Route::post('tags', 'GroupTagController@update')->name('.tags.update');
+
 
         // Permissions
         Route::get('permissions', 'GroupPermissionController@index')->name('.permissions.index');

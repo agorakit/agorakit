@@ -146,17 +146,11 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $allowedTags = \App\Services\TagService::getAllowedTagsFor($user);
-        $newTagsAllowed = \App\Services\TagService::areNewTagsAllowedFor($user);
-        $selectedTags = \App\Services\TagService::getSelectedTagsFor($user);
-
-        
-
         if (Gate::allows('update', $user)) {
             return view('users.edit')
-                ->with('allowedTags', $allowedTags)
-                ->with('selectedTags', $selectedTags)
-                ->with('newTagsAllowed', $newTagsAllowed)
+                ->with('allowedTags', $user->getAllowedTags())
+                ->with('newTagsAllowed', $user->areNewTagsAllowed())
+                ->with('selectedTags', $user->getSelectedTags())
                 ->with('user', $user)
                 ->with('tab', 'edit');
         } else {

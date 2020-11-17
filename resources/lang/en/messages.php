@@ -254,4 +254,5 @@ return array (
   'unarchive' => 'Unarchive',
   'new' => 'New',
   'unread' => 'unread',
+  'group_tags_help' => 'For your information, here are all the tags in use in this group',
 );

@@ -14,7 +14,7 @@
     ) !!}
 </div>
 
-@include('partials.tags_form')
+@include('partials.tags_input')
 
 <div class="form-group">
     {!! Form::label('location', trans('messages.location')) !!}
