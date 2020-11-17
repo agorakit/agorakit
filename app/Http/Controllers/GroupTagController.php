@@ -44,13 +44,13 @@ class GroupTagController extends Controller
             ->get();
 
         foreach ($discussions as $discussion) {
-            foreach ($discussion->getSelectedTags() as $tag) {
+            foreach ($discussion->tags as $tag) {
                 $tags->push($tag);
             }
         }
 
         foreach ($files as $file) {
-            foreach ($file->getSelectedTags() as $tag) {
+            foreach ($file->tags as $tag) {
                 $tags->push($tag);
             }
         }
