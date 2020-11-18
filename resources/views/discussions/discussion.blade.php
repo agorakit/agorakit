@@ -1,4 +1,4 @@
-<div up-follow up-expand up-reveal="false" class="flex items-center py-3 hover:bg-gray-100 border-b border-gray-300">
+<div up-follow up-expand up-reveal="false" class="flex items-start py-3 hover:bg-gray-100 border-b border-gray-300">
 
     <img class="h-12 w-12 rounded-full object-cover mx-1  flex-shrink-0"
         src="{{ route('users.cover', [$discussion->user, 'small']) }}" />
@@ -23,12 +23,16 @@
 
 
         <div class="text-gray-600 text-xs">
-            {{ trans('messages.started_by') }}
             {{ $discussion->user->name }}
             {{ trans('messages.in') }}
             {{ $discussion->group->name }}
             {{ $discussion->updated_at->diffForHumans() }}
         </div>
+
+         <div class="text-gray-800">
+            {{ summary($discussion->body, 100) }}
+        </div>
+
     </div>
 
     @if($discussion->unReadCount() > 0)

@@ -24,11 +24,11 @@
 
 
 
-    <span class="summary">{{summary($user->body) }}</span>
+    <div class="text-gray-700">{{summary($user->body) }}</div>
 
-    <br />
 
-    <div class="">
+
+    <div class="mt-2">
         @foreach ($user->groups as $group)
           @unless ($group->isSecret())
             <a up-follow href="{{ route('groups.show', [$group]) }}" 
@@ -44,7 +44,9 @@
             </a>
           @endunless
         @endforeach
-      <small>{{ trans('messages.last_activity') }} : {{ $user->updated_at->diffForHumans() }}</small>
+    </div>
+    <div class="mt-2 text-sm text-gray-600">
+    {{ trans('messages.last_activity') }} : {{ $user->updated_at->diffForHumans() }}
     </div>
   </div>
 </div>

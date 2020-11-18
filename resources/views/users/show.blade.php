@@ -9,36 +9,48 @@
 
     @if(Auth::user())
 
-        <div class="md:flex text-center md:text-left">
+        <div class="md:flex text-center md:text-left max-w-4xl">
 
             <img src="{{ route('users.cover', [$user, 'medium']) }}"
-                class="rounded-full h-32 w-32 mx-auto block my-4 md:mr-4" />
+                class="rounded-full h-32 w-32 md:h-48 md:w-48 mx-auto block my-4 md:mr-8 flex-shrink-0" />
 
 
             <div class="">
 
-            <div class="text-4xl my-1">
-            {{ $user->name }}
-            </div>
+                <div class="text-4xl my-1">
+                    {{ $user->name }}
+                </div>
 
-            <div class="text-gray-600 my-1">
-            {{ '@' .$user->username }}
-            </div>
+                <div class="text-gray-600 my-1">
+                    {{ '@' .$user->username }}
+                </div>
 
-                <div class="meta mb-4">
+
+                @if($user->tags->count() > 0)
+                    <div class="my-1">
+                        @foreach($user->tags as $tag)
+                            @include('tags.tag')
+                        @endforeach
+                    </div>
+                @endif
+
+
+                <div class="text-sm my-1">
                     {{ trans('messages.registered') }} : {{ $user->created_at->diffForHumans() }}
                 </div>
 
-                <div>
+
+
+                <div class="my-1">
                     {!! filter($user->body) !!}
                 </div>
 
-                
-                <div class="text-left mb-3 sm:grid-cols-2 lg:grid-cols-3 grid">
+
+                <div class="">
                     @foreach($user->groups as $group)
                         @unless($group->isSecret())
                             <a up-follow href="{{ route('groups.show', [$group]) }}"
-                                class=" text-gray-600 text-sm">
+                                class="inline-block bg-gray-300 text-gray-700 rounded-full text-xs px-2 py-1 mr-1 mb-1">
 
                                 @if($group->isOpen())
                                     <i class="fa fa-globe" title="{{ trans('group.open') }}"></i>
@@ -50,20 +62,7 @@
                             </a>
                         @endunless
                     @endforeach
-                    </div>
-                
-
-
-                <div>
-                    @if($user->tags->count() > 0)
-                        @foreach($user->tags as $tag)
-                            @include('tags.tag')
-                        @endforeach
-                    @endif
                 </div>
-
-
-
 
             </div>
 

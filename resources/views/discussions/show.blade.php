@@ -18,7 +18,7 @@
             <div class="flex-grow">
 
                 <div class="flex justify-content-between">
-                    <h2 class="name flex-grow">
+                    <h2 class="flex-grow text-xxl">
                         {{ $discussion->name }}
                     </h2>
 
@@ -123,12 +123,14 @@
 
                 </div>
 
-                <div class="body">
-                    {!! filter($discussion->body) !!}
-                </div>
+                
 
             </div>
 
+        </div>
+
+         <div class="sm:ml-16 lg:mr-40">
+            {!! filter($discussion->body) !!}
         </div>
 
     </div>
@@ -166,7 +168,7 @@
                     @lang('This discussion is archived, you cannot comment anymore')
                 </div>
             @else
-            <div class="ml-16">
+            <div class="sm:ml-16  lg:mr-40">
                 <h2>@lang('messages.reply')</h2>
                 @include('comments.create')
                 </div>
