@@ -1,7 +1,7 @@
-<nav class="bg-gray-800 flex text-gray-200 items-center justify-between px-5 py-1 sm:justify-start">
+<nav class="bg-gray-800 flex text-gray-200 items-center justify-between sm:justify-start px-5 py-3">
 
     <a up-follow up-cache="false" href="{{ route('index') }}"
-        class="text-gray-200 flex px-1 justify-center items-center rounded hover:opacity-75 h-12 w-12 sm:w-auto sm:px-4 my-2 sm:mr-12">
+        class="hidden sm:flex text-gray-200 px-1 justify-center items-center rounded h-12 w-12 sm:w-auto sm:px-4">
         @if(Storage::exists('public/logo/favicon.png'))
         <img src="{{asset('storage/logo/favicon.png')}}" width="40" height="40" />
         @else
@@ -10,28 +10,40 @@
         <span class="ml-1 hidden sm:inline text-gray-200">{{ setting('name') }}</span>
     </a>
 
+    <a up-follow up-cache="false" href="{{ route('index') }}"
+    class="sm:hidden text-gray-200 px-1 flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:mr-2 sm:w-auto sm:px-4 sm:bg-transparent sm:rounded"
+    >
+    <i class="fa fa-home text-lg"></i>
+    </a>
+
 
 
     @auth
     <div class="dropdown">
         <a href="#"
-            class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full hover:bg-gray-600 bg-gray-700 h-10 w-10 sm:w-auto sm:px-4 my-2 mr-2"
+            class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:mr-2 sm:w-auto sm:px-4 sm:bg-transparent sm:rounded"
             data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
-            <i class="fa fa-users text-lg sm:hidden"></i>
+            <i class="fa fa-cubes text-lg sm:hidden"></i>
             <span class="hidden sm:inline">
                 {{ trans('messages.groups') }}
+                <i class="fa fa-caret-down"></i>
             </span>
 
         </a>
         <div class="dropdown-menu rounded shadow">
 
+            <h6 class="dropdown-header">{{ trans('messages.my_groups') }}</h6>
+
+            {{--
             <a up-target="body" class="dropdown-item" class="dropdown-item"
                 href="{{ action('GroupController@indexOfMyGroups') }}">
                 {{ trans('messages.my_groups') }}
             </a>
-
             <div class="dropdown-divider"></div>
+            --}}
+
+            
 
 
 
@@ -46,7 +58,7 @@
             <div class="dropdown-divider"></div>
 
             <a up-target="body" class="dropdown-item" href="{{ route('groups.create') }}">
-                <i class="fa fa-plus-circle"></i> {{ trans('group.create_a_group_button') }}
+                {{ trans('group.create_a_group_button') }}
             </a>
         </div>
     </div>
@@ -56,17 +68,21 @@
     <!-- Overview -->
     <div class="dropdown text-gray-200">
         <a href="#"
-            class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full hover:bg-gray-600 bg-gray-700 h-10 w-10 sm:w-auto sm:px-4 my-2 mr-2"
+            class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:mr-2 sm:w-auto sm:px-4 sm:bg-transparent sm:rounded"
             data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
 
             <i class="fa fa-university text-lg sm:hidden"></i>
-            <span class="hidden sm:inline">@lang('Overview')</span>
+            <span class="hidden sm:inline">
+            @lang('Overview')
+            <i class="fa fa-caret-down"></i>
+            </span>
 
 
         </a>
         <div class="dropdown-menu rounded shadow">
 
+            <h6 class="dropdown-header">@lang('Overview')</h6>
 
             <a up-target="body" class="dropdown-item" class="dropdown-item"
                 href="{{ action('GroupController@index') }}">
@@ -101,9 +117,9 @@
     </div>
 
     <!-- help -->
-    <div class="nav-item">
+    <div class="nav-item sm:px-4">
         <a up-follow
-            class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full hover:bg-gray-600 bg-gray-700 h-10 w-10 sm:w-auto sm:px-4 my-2 mr-2"
+            class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:mr-2 sm:w-auto sm:px-4 sm:bg-transparent sm:rounded"
             href="{{ action('PageController@help') }}">
 
             <i class="fas fa-question text-lg sm:hidden"></i>
@@ -116,33 +132,36 @@
 
 
 
+    <div class="sm:flex-grow"></div>
 
 
 
 
-
-    {{--
+  
     <!-- search-->
     @auth
-    <form up-target="body" class="form-inline my-2 hidden lg:block" role="search" action="{{ url('search') }}"
+    <form up-target="body" class="form-inline my-2 hidden lg:block sm:px-4" role="search" action="{{ url('search') }}"
     method="get">
     <div class="input-group">
         <input class="form-control form-control-sm" type="text" name="query"
             placeholder="{{ trans('messages.search') }}..." aria-label="Search">
-
+         @csrf
+        
         <div class="input-group-append">
             <button class="btn btn-outline-secondary btn-sm" type="submit"><span class="fa fa-search"></span></button>
         </div>
     </div>
     </form>
     @endauth
-    --}}
+
 
     <!-- Notifications -->
-    {{--
+    
     @if(isset($notifications))
-    <div class="dropdown nav-item">
-        <a href="#" class="text-gray-200 nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+    <div class="dropdown hidden lg:block sm:px-4">
+        <a href="#" 
+        class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:mr-2 sm:px-4 sm:bg-transparent sm:rounded"
+        data-toggle="dropdown" role="button"
             aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-bell"></i>
         </a>
@@ -162,17 +181,23 @@
         </div>
     </div>
     @endif
-    --}}
+    
 
 
-    {{--
+
 
     <!-- locales -->
     @if(\Config::has('app.locales'))
-    <div class="dropdown nav-item hidden lg:block">
-        <a href="#" class="text-gray-200 mr-4" data-toggle="dropdown" role="button" aria-haspopup="true"
+    <div class="dropdown sm:px-4 hidden lg:block">
+        <a href="#" 
+        class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 mr-2 sm:w-auto sm:px- sm:bg-transparent sm:rounded"
+        data-toggle="dropdown" role="button" aria-haspopup="true"
             aria-expanded="false">
+            <span>
+            <i class="fa fa-globe"></i> 
             {{ strtoupper(app()->getLocale()) }}
+            <i class="fa fa-caret-down"></i>
+            <span>
     </a>
     <div class="dropdown-menu dropdown-menu-right rounded shadow">
         @foreach(\Config::get('app.locales') as $locale)
@@ -185,14 +210,15 @@
     </div>
     </div>
     @endif
-    --}}
+
 
 
     @auth
     <!-- User profile -->
-    <div class="dropdown ">
-        <a href="#" class="text-gray-200  flex items-center" data-toggle="dropdown" role="button" aria-expanded="false">
-            <img src="{{ route('users.cover', [Auth::user(), 'small']) }}" class="rounded-full h-10 w-10" />
+    <div class="dropdown flex-shrink-0 h-12 w-12">
+        <a href="#" 
+        data-toggle="dropdown" role="button" aria-expanded="false">
+            <img src="{{ route('users.cover', [Auth::user(), 'small']) }}" class="rounded-full h-12 w-12" />
 
         </a>
 
@@ -252,7 +278,7 @@
     @guest
 
     <a up-modal=".dialog"
-        class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full hover:bg-gray-600 bg-gray-700 h-10 w-10 sm:w-auto sm:px-4 my-2 mr-2"
+        class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:w-auto sm:px-4 my-2 mr-2"
         href="{{ url('login') }}">
 
         <i class="fa fa-sign-in text-lg sm:hidden"></i>
@@ -260,7 +286,7 @@
     </a>
 
     <a up-modal=".dialog"
-        class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full hover:bg-gray-600 bg-gray-700 h-10 w-10 sm:w-auto sm:px-4 my-2"
+        class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:w-auto sm:px-4 my-2"
         href="{{ url('register') }}">
         <i class="fa fa-pencil-square-o text-lg sm:hidden"></i>
         <span class="hidden sm:inline">{{ trans('messages.register') }}</span>

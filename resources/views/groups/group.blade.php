@@ -1,5 +1,5 @@
  <div up-expand
-     class="relative rounded-md border-gray-300 border shadow-md hover:shadow-xl flex flex-col justify-start @if ($group->isArchived()) status-archived @endif">
+     class="relative rounded-md border-gray-300 border flex flex-col justify-start @if ($group->isArchived()) status-archived @endif">
 
      @auth
          @if(Auth::user()->isMemberOf($group))
