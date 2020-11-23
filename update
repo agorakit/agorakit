@@ -3,11 +3,8 @@ php artisan down
 
 
 
-if [ $1 = "dev" ] 
+if [ $1 = "stable" ] 
 then
-    echo checking latest commit
-    git pull
-else    
     # Get new tags from remote
     git fetch --tags
 
@@ -18,6 +15,9 @@ else
 
     # Checkout latest tag
     git checkout $latestTag
+else    
+    echo checking latest commit
+    git pull
 fi
 
 
