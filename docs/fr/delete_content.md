@@ -24,10 +24,9 @@ Il n'est pas possible d'effacer individuellement une discussion sous laquelle il
 Un utilisateur qui est le seul administrateur d'un groupe ne peux pas quitter le groupe.
 
 
-# Nettoyage de la base de donnée
-Si Agorakit est installé correctement (avec les tâches "cron" récurentes), la base de donnée va être automatiquement nettoyée afin d'être en conformité avec ce qui est indiqué ci-dessus.
-Le nombre de jours de rétention des informations avant suppression définitive est configurable et fixé par défaut à 30.
-
 # Restauration d'un élément effacé
 Un administrateur d'instance peut restaurer tout contenu effacé pendant la période de rétention (30 jours par défaut). Il suffit de se rendre dans `Admin > settings > recover content` et de choisir le ou les éléments à restaurer.
 
+# Nettoyage de la base de donnée
+Si Agorakit est installé correctement (avec les tâches "cron" récurentes), la base de donnée va être automatiquement nettoyée afin d'être en conformité avec ce qui est indiqué ci-dessus.
+Le nombre de jours de rétention des informations avant suppression définitive est configurable et fixé par défaut à 30.
