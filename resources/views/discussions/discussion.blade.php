@@ -1,7 +1,9 @@
 <div up-follow up-expand up-reveal="false" class="flex items-start py-3 hover:bg-gray-100 border-b border-gray-300">
 
+    @if ($discussion->user)
     <img class="h-8 w-8 sm:h-12 sm:w-12 rounded-full object-cover mx-1  flex-shrink-0"
         src="{{ route('users.cover', [$discussion->user, 'small']) }}" />
+    @endif
 
     <div class="mx-2 min-w-0 flex-grow">
 
@@ -16,8 +18,10 @@
 
 
         <div class="text-gray-600 text-xs">
+            @if ($discussion->user)
             {{ trans('messages.started_by') }}
             {{ $discussion->user->name }}
+            @endif
             {{ trans('messages.in') }}
             {{ $discussion->group->name }}
             {{ $discussion->updated_at->diffForHumans() }}
