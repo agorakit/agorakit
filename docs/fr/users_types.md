@@ -19,4 +19,15 @@ Toute personne créant un groupe devient automatiquement administrateur de ce gr
 
 ## Membre d'un groupe
 Toute personne membre d'un groupe dispose au minimum de la permission de voir l'ensemble du contenu du groupe. Elle peut en plus, en fonction des permissions définies pour le groupe en question :
-- 
+- créer des discussions
+- créer des événements à l'agenda
+- ajouter des fichiers
+- inviter de nouveaux participants
+
+## Membre invité
+Dans le cas d'un groupe fermé : quand un utilisateur a été invité par mail à rejoindre un groupe, il reçoit le status d'invité. Dès qu'il confirme la demande, il devient membre effectif du groupe.
+
+## Candidat d'un groupe
+Quand une personne demande à rejoindre un groupe fermé, elle a le statut de candidat. Un des administrateurs du groupe doit accepter ou refuser sa candidature
+
+## 
