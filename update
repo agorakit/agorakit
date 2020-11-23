@@ -1,27 +1,6 @@
 php artisan down
 
-
-
-
-if [ $1 = "stable" ] 
-then
-    # Get new tags from remote
-    git fetch --tags
-
-    # Get latest tag name
-    latestTag=$(git describe --tags `git rev-list --tags --max-count=1`)
-
-    echo checking out version $latestTag
-
-    # Checkout latest tag
-    git checkout $latestTag
-else    
-    echo checking latest commit
-    git pull
-fi
-
-
-
+git pull
 
 composer install
 php artisan migrate --force
