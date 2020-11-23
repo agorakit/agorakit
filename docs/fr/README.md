@@ -13,4 +13,4 @@ Une partie de la documentation est dédiée aux *administrateurs d'instance*, il
 Le reste est destiné aux administrateurs de groupes et enfin aux participants des mêmes groupes.
 
 
-La documentation en français est en cours d'écriture. Toute aide est la bienvenue!
+!> La documentation en français est en cours d'écriture. Toute aide est la bienvenue!
