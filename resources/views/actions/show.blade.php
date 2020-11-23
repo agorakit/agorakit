@@ -7,14 +7,14 @@
 
 <div class="content">
 
-    <div class="flex justify-between">
+    <div class="flex justify-between mt-8">
 
         <h1>
             {{ $action->name }}
         </h1>
 
-        <div class="ml-4 dropdown">
-            <a class="text-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+        <div class="dropdown">
+            <a class="cursor-pointer hover:bg-gray-300 flex flex-col justify-center items-center rounded-full w-12 h-12 " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
                 <i class="fas fa-ellipsis-h"></i>
             </a>
