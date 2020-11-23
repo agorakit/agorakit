@@ -224,6 +224,6 @@ trait HasControlledTags
             }
         }
 
-        return $tags;
+        return $tags->unique('normalized')->sortBy('normalized');
     }
 }
