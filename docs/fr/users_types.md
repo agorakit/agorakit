@@ -28,6 +28,13 @@ Toute personne membre d'un groupe dispose au minimum de la permission de voir l'
 Dans le cas d'un groupe fermé : quand un utilisateur a été invité par mail à rejoindre un groupe, il reçoit le status d'invité. Dès qu'il confirme la demande, il devient membre effectif du groupe.
 
 ## Candidat d'un groupe
-Quand une personne demande à rejoindre un groupe fermé, elle a le statut de candidat. Un des administrateurs du groupe doit accepter ou refuser sa candidature
+Quand une personne demande à rejoindre un groupe fermé, elle a le statut de candidat. Un des administrateurs du groupe doit accepter ou refuser sa candidature.
 
-## 
+## Désenregistré / supprimé
+Ce statut est attribué aux personnes qui ont supprimé leur compte de l'instance Agorakit.
+
+## A refusé
+Ce statut est attribué aux personnes qui ont refusé une invitation à rejoindre le groupe. Il est fortement conseillé de ne pas les recontacter à propos du groupe, selon leur souhait, sauf bien entendu si il s'agit d'une fausse manoeuvre de leur part :-)
+
+## Blacklisté
+Ce statut est attribué à une personne qui ne peut plus rejoindre le groupe.
