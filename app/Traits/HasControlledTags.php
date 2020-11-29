@@ -216,10 +216,12 @@ trait HasControlledTags
         $tags = collect();
 
         if (is_array($tagList)) {
-
             foreach ($tagList as $name) {
                 if (!empty($name)) {
-                    $tags->push(Tag::firstOrCreate(['normalized' => mb_strtolower($name)]));
+                    $tag = Tag::firstOrNew(['normalized' => trim(mb_strtolower($name))]);
+                    $tag->name = $name;
+                    $tag->save();
+                    $tags->push($tag);
                 }
             }
         }
