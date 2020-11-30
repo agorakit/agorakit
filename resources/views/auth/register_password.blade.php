@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1>{{config('agorakit.name')}} : @lang('Set your password')</h1>
+    <h1>{{setting('name')}} : @lang('Set your password')</h1>
 
     <p>@lang('Use a strong password with at least 8 characters')</p>
 

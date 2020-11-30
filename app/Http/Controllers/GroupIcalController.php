@@ -19,7 +19,7 @@ class GroupIcalController extends Controller
         $this->authorize('view-actions', $group);
         // 1. Create new calendar
         $vCalendar = new \Eluceo\iCal\Component\Calendar(config('app.url'));
-        $vCalendar->setName(config('agorakit.name').' : '.$group->name);
+        $vCalendar->setName(setting('name').' : '.$group->name);
         $vCalendar->setDescription(summary($group->body, 500));
 
         // returns actions started the last 60 days

@@ -11,7 +11,7 @@
     @endif
 
     <div class="ml-2">
-        {{config('agorakit.name')}} : {{ strtolower(trans('messages.login')) }}
+        {{setting('name')}} : {{ strtolower(trans('messages.login')) }}
     </div>
 </h1>
 

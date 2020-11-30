@@ -10,7 +10,7 @@
         @endif
 
         <div class="ml-2">
-        {{config('agorakit.name')}} : {{ strtolower(trans('messages.register')) }}
+        {{setting('name')}} : {{ strtolower(trans('messages.register')) }}
         </div>
     </h1>
 
