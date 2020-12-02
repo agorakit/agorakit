@@ -306,3 +306,17 @@ up.$compiler('.poll', function ($element, data) {
 	}, interval);
 	return function () { clearInterval(timer) } // stop polling when element is removed
 });
+
+
+
+/**
+ * Add simple history.back behaviour onclick on element 
+ */
+up.compiler('.js-back', function (element) {
+	
+	element.onclick = function() {
+		window.history.back();
+		return false;
+	};
+	
+});

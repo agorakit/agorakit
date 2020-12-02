@@ -22,13 +22,13 @@ class GroupMassMembershipController extends Controller
 
         // load a list of users not yet in this group
         $members = $group->users;
-        $notmembers = \App\User::whereNotIn('id', $members->pluck('id'))->verified()->orderBy('name')->pluck('name', 'id');
+        $notmembers = \App\User::whereNotIn('id', $members->pluck('id'))->orderBy('name')->pluck('name', 'id');
 
         return view('membership.add')
-        ->with('group', $group)
-        ->with('members', $members)
-        ->with('notmembers', $notmembers)
-        ->with('tab', 'users');
+            ->with('group', $group)
+            ->with('members', $members)
+            ->with('notmembers', $notmembers)
+            ->with('tab', 'users');
     }
 
     /**
@@ -50,10 +50,12 @@ class GroupMassMembershipController extends Controller
                 $membership->notified_at = Carbon::now();
                 $membership->save();
 
-                // notify the user
-                $user->notify(new \App\Notifications\AddedToGroup($group));
+                // notify the user if (s)he is verified
+                if ($user->isVerified()) {
+                    $user->notify(new \App\Notifications\AddedToGroup($group));
+                }
 
-                flash(trans('messages.user_added_successfuly').' : '.$user->name);
+                flash(trans('messages.user_added_successfuly') . ' : ' . $user->name);
             }
         }
 

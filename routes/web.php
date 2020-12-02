@@ -119,11 +119,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('tags', 'TagController@index')->name('tags.index');
     Route::get('tags/{tag}', 'TagController@show')->name('tags.show');
 
-    /* Tagger, our new tag manager */
-
-    Route::get('/tagger/{type}/{id}', 'TaggerController@index')->name('tagger.index');
-    Route::get('/tagger/{type}/{id}/tag/{name}', 'TaggerController@tag')->name('tagger.tag');
-    Route::post('/tagger/{type}/{id}', 'TaggerController@add')->name('tagger.add');
 
 
     /* Drawer navigation */
@@ -169,11 +164,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('invite/{membership}/deny/signed', 'InviteController@denyWithSignature')->name('invite.deny.signed');
 
     
-    
-    // Join and apply for a group
-    Route::get('groups/{group}/join', 'GroupMembershipController@create')->name('groups.membership.create');
-    Route::post('groups/{group}/join', 'GroupMembershipController@store')->name('groups.membership.store');
-
     // General discussion create route
     Route::get('discussions/create', 'GroupDiscussionController@create')->name('discussions.create');
     Route::post('discussions/create', 'GroupDiscussionController@store')->name('discussions.store');
@@ -235,40 +225,64 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('discussions/mention', 'MentionController@discussions')->name('.discussions.mention');
         Route::get('files/mention', 'MentionController@files')->name('.files.mention');
 
+
+        /***************** Memberships for users ***********/
+
+         // Member's list
+         Route::get('users', 'GroupMembershipController@index')->name('.users.index');
+
+         // Join and apply for a group
+        Route::get('join', 'GroupMembershipController@create')->name('groups.membership.create');
+        Route::post('join', 'GroupMembershipController@store')->name('groups.membership.store');
+
+
         // preferences and leave group
-        //Route::get('preferences', 'GroupMembershipController@edit')->name('.mymembership.edit');
-        //Route::post('preferences', 'GroupMembershipController@update')->name('.mymembership.update');
+        Route::get('preferences', 'GroupMembershipController@edit')->name('.mymembership.edit');
+        Route::post('preferences', 'GroupMembershipController@update')->name('.mymembership.update');
         Route::get('leave', 'GroupMembershipController@destroyConfirm')->name('.mymembership.deleteconfirm');
         Route::post('leave', 'GroupMembershipController@destroy')->name('.mymembership.delete');
 
-        // edit membership
-        Route::get('membership/{membership?}', 'GroupMembershipController@edit')->name('.membership.edit');
-        Route::post('membership/{membership?}', 'GroupMembershipController@update')->name('.membership.update');
+         // In the case of closed group, we show an how to join message (not in use currently)
+         Route::get('howtojoin', 'GroupMembershipController@howToJoin')->name('.howtojoin');
+
+
+        /************** Memberships for group admins  ***********/
+        
+        // mass invite
+        Route::get('membership/create', 'GroupMassMembershipController@create')->name('.membership.create');
+        Route::post('membership/store', 'GroupMassMembershipController@store')->name('.membership.store');
+
+        // edit existing memberships
+        Route::get('membership/{membership}', 'GroupMembershipAdminController@edit')->name('.membership.edit');
+        Route::post('membership/{membership}', 'GroupMembershipAdminController@update')->name('.membership.update');
+        
+
+
 
         // Stats
         Route::get('insights', 'GroupInsightsController@index')->name('.insights');
-
-        // Membership mass admin (add multiple users at once to a groupe)
-        Route::get('massmembership/create', 'GroupMassMembershipController@create')->name('.massmembership.create');
-        Route::post('massmembership/store', 'GroupMassMembershipController@store')->name('.massmembership.store');
+        
 
         // Invites
         Route::get('invite', 'InviteController@invite')->name('.invite.form');
         Route::post('invite', 'InviteController@sendInvites')->name('.invite');
 
-        // In the case of closed group, we show an how to join message (not in use currently)
-        Route::get('howtojoin', 'GroupMembershipController@howToJoin')->name('.howtojoin');
 
-        // Members
-        Route::get('users', 'GroupMembershipController@index')->name('.users.index');
+
+
+
+        // Stats
+        Route::get('insights', 'GroupInsightsController@index')->name('.insights');
+
+        
+       
 
         // Maps
         Route::get('map', 'GroupMapController@index')->name('.map');
         Route::get('map.geojson', 'GroupMapController@geoJson')->name('.map.geojson');
 
 
-        //Route::get('{type}/{id}/tag', 'TagController@edit')->name('.tags.edit');
-        //Route::post('{type}/{id}/tag', 'TagController@update')->name('.tags.store');
+
 
         // Discussions
         Route::get('discussions', 'GroupDiscussionController@index')->name('.discussions.index');
@@ -288,12 +302,6 @@ Route::group(['middleware' => ['web']], function () {
         // Discussion history
         Route::get('discussions/{discussion}/history', 'GroupDiscussionController@history')->name('.discussions.history');
 
-        // Discussion tags
-        Route::get('discussions/{discussion}/tags', 'DiscussionTagController@edit')->name('.discussions.tags.edit');
-        Route::post('discussions/{discussion}/tags', 'DiscussionTagController@update')->name('.discussions.tags.update');
-
-        Route::post('discussions/{discussion}/tags/create', 'DiscussionTagController@create')->name('.discussions.tags.create');
-        //Route::get('discussions/{discussion}/tags/delete/{tag}', 'DiscussionTagController@destroy')->name('.discussions.tags.delete');
 
         // Comments
         Route::post('discussions/{discussion}/reply', 'CommentController@store')->name('.discussions.reply');
