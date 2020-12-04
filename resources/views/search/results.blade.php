@@ -51,10 +51,7 @@
             @if ($groups->count() > 0)
                 <div role="tabpanel" class="tab-pane {{$groups->class}}" id="groups">
                     @foreach ($groups as $group)
-                        <div class="result">
-                            <h4><a up-follow href="{{$group->link()}}">{{$group->name}}</a></h4>
-                            {{summary($group->body, 500)}}
-                        </div>
+                        @include('groups.group-list')
                     @endforeach
                 </div>
             @endif
@@ -62,21 +59,7 @@
             @if ($discussions->count() > 0)
                 <div role="tabpanel" class="tab-pane {{$discussions->class}}" id="discussions">
                     @foreach ($discussions as $discussion)
-                        <div class="result">
-                            <h4><a up-follow href="{{$discussion->link()}}">{{$discussion->name}}</a></h4>
-                            {{summary($discussion->body, 500)}}
-                            <br/>
-                            <span class="badge badge-secondary badge-group">
-                                @if ($discussion->group->isOpen())
-                                    <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
-                                @elseif ($discussion->group->isClosed())
-                                    <i class="fa fa-lock" title="{{trans('group.closed')}}"></i>
-                                @else
-                                    <i class="fa fa-eye-slash" title="{{trans('group.secret')}}"></i>
-                                @endif
-                                {{ $discussion->group->name }}
-                            </span>
-                        </div>
+                         @include('discussions.discussion')
                     @endforeach
                 </div>
             @endif
@@ -84,23 +67,7 @@
             @if ($actions->count() > 0)
                 <div role="tabpanel" class="tab-pane {{$actions->class}}" id="actions">
                     @foreach ($actions as $action)
-                        <div class="result">
-                            <h4><a up-follow href="{{$action->link()}}">{{$action->name}}</a></h4>
-                            {{summary($action->body)}}
-                            <br/>
-                            {{$action->start}} / {{$action->stop}}
-                            <br/>
-                            <span class="badge badge-secondary badge-group">
-                                @if ($action->group->isOpen())
-                                    <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
-                                @elseif ($action->group->isClosed())
-                                    <i class="fa fa-lock" title="{{trans('group.closed')}}"></i>
-                                @else
-                                    <i class="fa fa-eye-slash" title="{{trans('group.secret')}}"></i>
-                                @endif
-                                {{ $action->group->name }}
-                            </span>
-                        </div>
+                         @include('actions.action')
                     @endforeach
                 </div>
             @endif
@@ -109,10 +76,7 @@
             @if ($users->count() > 0)
                 <div role="tabpanel" class="tab-pane {{$users->class}}" id="users">
                     @foreach ($users as $user)
-                        <div class="result">
-                            <h4><span class="avatar"><img src="{{route('users.cover', [$user, 'small'])}}" class="rounded-full"/></span> <a up-follow href="{{$user->link()}}">{{$user->name}}</a></h4>
-                            {{summary($user->body)}}
-                        </div>
+                        @include('users.user-list')
                     @endforeach
                 </div>
             @endif
@@ -120,21 +84,7 @@
             @if ($comments->count() > 0)
                 <div role="tabpanel" class="tab-pane {{$comments->class}}" id="comments">
                     @foreach ($comments as $comment)
-                        <div class="result">
-                            <h4><a up-follow href="{{$comment->link()}}">{{$comment->discussion->name}}</a></h4>
-                            {{summary($comment->body)}}
-                            <br/>
-                            <span class="badge badge-secondary badge-group">
-                                @if ($comment->discussion->group->isOpen())
-                                    <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
-                                @elseif ($comment->discussion->group->isClosed())
-                                    <i class="fa fa-lock" title="{{trans('group.closed')}}"></i>
-                                @else
-                                    <i class="fa fa-eye-slash" title="{{trans('group.secret')}}"></i>
-                                @endif
-                                {{ $comment->discussion->group->name }}
-                            </span>
-                        </div>
+                     @include('comments.comment')
                     @endforeach
                 </div>
             @endif
@@ -143,19 +93,7 @@
             @if ($files->count() > 0)
                 <div role="tabpanel" class="tab-pane {{$files->class}}" id="files">
                     @foreach ($files as $file)
-                        <div class="result">
-                            <h4><a up-follow href="{{ route('groups.files.show', [$file->group, $file]) }}">{{$file->name}}</a></h4>
-                            <span class="badge badge-secondary badge-group">
-                                @if ($file->group->isOpen())
-                                    <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
-                                @elseif ($file->group->isClosed())
-                                    <i class="fa fa-lock" title="{{trans('group.closed')}}"></i>
-                                @else
-                                    <i class="fa fa-eye-slash" title="{{trans('group.secret')}}"></i>
-                                @endif
-                                {{ $file->group->name }}
-                            </span>
-                        </div>
+                         @include('files.file')
                     @endforeach
                 </div>
             @endif
