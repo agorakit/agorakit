@@ -3,32 +3,40 @@
 
 @section('content')
 
-  <div class="toolbox d-md-flex">
-    <div class="d-flex mb-2">
-      <h1>
-            <h1><a up-follow href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.files') }}</h1>
-      </hi>
-    </div>
 
+<h1><a up-follow href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
+    {{ trans('messages.files') }}</h1>
+
+
+<div class="flex">
+    @include('partials.tags_filter')
     <div class="ml-auto">
-      @include ('partials.preferences-show')
+        @include ('partials.preferences-show')
     </div>
-  </div>
+</div>
 
 
 
-  @include('partials.tags_filter')
 
 
-  <div class="files mt-4">
-    @forelse( $files as $file )
-      @include('files.file')
-    @empty
-      {{trans('messages.nothing_yet')}}
-    @endforelse
 
-    {!! $files->render() !!}
-  </div>
+
+<div class="files mt-4">
+    @if ($files->count() > 0)
+
+    @foreach ($files as $file)
+    @include('files.file')
+    @endforeach
+
+    {{$files->render()}}
+
+
+    @else
+    {{trans('messages.nothing_yet')}}
+    @endif
+
+
+</div>
 
 
 @endsection
