@@ -97,7 +97,7 @@ class GroupFileController extends Controller
         $file->group()->associate($group);
 
         return view('files.create')
-        ->with('allowedTags', $file->getAllowedTags())
+        ->with('allowedTags', $file->getTagsInUse())
         ->with('newTagsAllowed', $file->areNewTagsAllowed())
         ->with('group', $group)
         ->with('tab', 'files');
@@ -112,7 +112,7 @@ class GroupFileController extends Controller
 
 
         return view('files.createlink')
-        ->with('allowedTags', $file->getAllowedTags())
+        ->with('allowedTags', $file->getTagsInUse())
         ->with('newTagsAllowed', $file->areNewTagsAllowed())
         ->with('group', $group)
         ->with('tab', 'files');

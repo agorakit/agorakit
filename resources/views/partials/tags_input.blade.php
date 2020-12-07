@@ -11,9 +11,12 @@
 
     @if (isset($selectedTags))
             @foreach ($selectedTags as $tag)
-                <div class="mr-4">
-                    <input type=checkbox checked value="{{$tag->normalized}}" id="{{$tag->normalized}}" name="tags[]"/>
-                    <label for="{{$tag->normalized}}">{{$tag->name}}</label>
+                <div class="mr-4" >
+                    <input type=checkbox checked value="{{$tag->normalized}}" id="{{$tag->normalized}}"  name="tags[]"/>
+                    <label for="{{$tag->normalized}}">
+                    <span class="inline-block w-2 h-2 rounded-sm" style="background-color: {{$tag->color}}"></span>
+                     {{$tag->name}}
+                    </label>
                 </div>
             @endforeach
     @endif
@@ -25,13 +28,19 @@
                     @unless ($selectedTags->contains($tag->name))
                         <div class="mr-4">
                             <input type="checkbox" value="{{$tag->normalized}}" name="tags[]" id="{{$tag->normalized}}"/>
-                            <label for="{{$tag->normalized}}">{{$tag->name}}</label>
+                            <label for="{{$tag->normalized}}">
+                            <span class="inline-block w-2 h-2 rounded-sm" style="background-color: {{$tag->color}}"></span>
+                            {{$tag->name}}
+                            </label>
                         </div>
                     @endunless
                 @else 
                     <div class="mr-4">
                         <input type="checkbox" value="{{$tag->normalized}}" name="tags[]" id="{{$tag->normalized}}"/>
-                        <label for="{{$tag->normalized}}">{{$tag->name}}</label>
+                        <label for="{{$tag->normalized}}">
+                        <span class="inline-block w-2 h-2 rounded-sm" style="background-color: {{$tag->color}}"></span>
+                        {{$tag->name}}
+                        </label>
                     </div>
                 @endif
             @endforeach
@@ -42,11 +51,11 @@
 
     @if ($newTagsAllowed)
         <label>
-            Add new tags, comma separated : 
+            {{trans('messages.new_tags')}} : 
         </label>
         <select class="form-control js-tags" name="tags[]" multiple="multiple"  data-tags="true">
         </select>
-    @endif>
     @endif
+
 
 </div>

@@ -255,4 +255,5 @@ return array (
   'new' => 'New',
   'unread' => 'unread',
   'group_tags_help' => 'For your information, here are all the tags in use in this group',
+  'new_tags' => 'Add new tags',
 );
