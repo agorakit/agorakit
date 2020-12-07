@@ -18,7 +18,7 @@
 
         <div class="form-group">
             {!! Form::label('users', trans('membership.users_to_add')) !!}
-            {!! Form::select('users[]', $notmembers, null, ['multiple' => true, 'class' => 'form-control tags', 'required', 'id' =>'users']) !!}
+            {!! Form::select('users[]', $notmembers, null, ['multiple' => true, 'class' => 'form-control js-tags', 'required', 'id' =>'users']) !!}
         </div>
 
         <div class="form-group">

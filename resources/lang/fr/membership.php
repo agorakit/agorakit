@@ -52,4 +52,6 @@ return array (
   array (
     'your_preferences_for' => 'Vos préférences pour le groupe',
   ),
+  'group_candidate_info' => 'Vous avez demandé à rejoindre ce groupe. Vous devez attendre la réponse d\'un admin.',
+  'status' => 'Status',
 );

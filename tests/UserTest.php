@@ -213,7 +213,7 @@ class UserTest extends Tests\BrowserKitTestCase
 
         $this->actingAs($user)
         ->visit(route('groups.membership.edit', [$group, $membership]))
-        ->select(\App\Membership::CANDIDATE, 'membership_level')
+        ->select(\App\Membership::MEMBER, 'membership_level')
         ->press(trans('messages.save'))
         ->see(trans('membership.settings_updated'));
 

@@ -14,7 +14,7 @@
 
 
 
-  @include('partials.tags_input')
+  @include('partials.tags_select')
 
   @if ($tags->count() > 0)
   <div class="small-help">

@@ -2,14 +2,16 @@
 
 @section('content')
 
-    <h1 class="text-center mb-4">
+    <h1 class="flex items-center justify-center mb-4 text-xl">
         @if (Storage::exists('public/logo/favicon.png'))
             <img src="{{{ asset('storage/logo/favicon.png') }}}" width="40" height="40" class="rounded"/>
         @else
             <img src="/images/logo.svg" width="40" height="40" class="rounded"/>
         @endif
 
-        {{config('agorakit.name')}} : {{ strtolower(trans('messages.register')) }}
+        <div class="ml-2">
+        {{setting('name')}} : {{ strtolower(trans('messages.register')) }}
+        </div>
     </h1>
 
 
@@ -40,7 +42,7 @@
             </div>
 
 
-            <div class="d-flex justify-content-end mt-4">
+            <div class="d-flex justify-content-end mt-8">
 
                 <button type="submit" class="btn btn-primary">
                     {{ trans('messages.register') }}

@@ -37,7 +37,7 @@ class GroupMembershipController extends Controller
         $candidates = $group->candidates()->with('user')->has('user')->orderBy('membership', 'desc')->get();
         $invites = Invite::where('group_id', $group->id)->whereNull('claimed_at')->get();
 
-        return view('users.index')
+        return view('membership.index')
         ->with('title', $group->name.' - '.trans('messages.members'))
         ->with('memberships', $memberships)
         ->with('admins', $admins)

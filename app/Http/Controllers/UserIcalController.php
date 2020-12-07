@@ -29,7 +29,7 @@ class UserIcalController extends Controller
 
         // 1. Create new calendar
         $vCalendar = new \Eluceo\iCal\Component\Calendar(config('app.url'));
-        $vCalendar->setName(config('agorakit.name'));
+        $vCalendar->setName(setting('name'));
 
         // groups are all groups from the current user
         $groups = $user->groups()->pluck('groups.id');

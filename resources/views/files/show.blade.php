@@ -24,12 +24,6 @@
                         </a>
                     @endcan
 
-                    @can('update', $file)
-                        <a class="dropdown-item" up-modal=".dialog" up-closable="false" href="{{ route('tagger.index', ['files', $file->id]) }}?r={{rand(0,999999)}}">
-                            <i class="fa fa-tag"></i>
-                            {{__('Edit tags')}}
-                        </a>
-                    @endcan
 
                     @can('delete', $file)
                         <a class="dropdown-item" href="{{ route('groups.files.deleteconfirm', [$file->group, $file]) }}">

@@ -73,32 +73,32 @@
                         <td data-order="{{ $membership->membership }}">
 
                             @if ($membership->membership == \App\Membership::ADMIN)
-                                <span class="badge badge-pill badge-success"
+                                <span class="rounded-full bg-green-600 text-green-100 px-2 py-1 text-xs capitalize"
                                     up-tooltip="@lang('This member is admin of the group and manages it')">
                                     {{ trans('membership.admin') }}
                                 </span>
                             @endif
                             @if ($membership->membership == \App\Membership::MEMBER)
-                                <span class="badge badge-pill badge-primary"
+                                <span class="rounded-full bg-purple-600 text-purple-100 px-2 py-1 text-xs capitalize"
                                     up-tooltip="@lang('Regular member of the group')">
                                     {{ trans('membership.member') }}
                                 </span>
                             @endif
                             @if ($membership->membership == \App\Membership::CANDIDATE)
-                                <span class="badge badge-pill badge-info"
+                                <span class="rounded-full bg-orange-600 text-orange-100 px-2 py-1 text-xs capitalize"
                                     up-tooltip="@lang('This user asked to be part of the group but has not yet been accepted')">
                                     {{ trans('membership.candidate') }}
                                 </span>
                             @endif
                             @if ($membership->membership == \App\Membership::INVITED)
-                                <span class="badge badge-pill badge-secondary"
+                                <span class="rounded-full bg-blue-600 text-blue-100 px-2 py-1 text-xs capitalize"
                                     up-tooltip="@lang('This user has been invited to the group but did not accept yet')">
                                     {{ trans('membership.invited') }}
                                 </span>
                             @endif
 
                             @if ($membership->membership == \App\Membership::DECLINED)
-                                <span class="badge badge-pill badge-dark"
+                                <span class="rounded-full bg-gray-800 text-gray-100 px-2 py-1 text-xs capitalize"
                                     up-tooltip="@lang('This member declined the invitagion the group')">
                                     {{ trans('membership.declined') }}
                                 </span>
@@ -106,18 +106,18 @@
 
 
                             @if ($membership->membership == \App\Membership::UNREGISTERED)
-                                <span class="badge badge-pill badge-dark" up-tooltip="@lang('This member left the group')">
+                                <span class="rounded-full bg-gray-800 text-gray-100 px-2 py-1 text-xs capitalize" up-tooltip="@lang('This member left the group')">
                                     {{ trans('membership.unregistered') }}
                                 </span>
                             @endif
                             @if ($membership->membership == \App\Membership::REMOVED)
-                                <span class="badge badge-pill badge-dark"
+                                <span class="rounded-full bg-gray-800 text-gray-100 px-2 py-1 text-xs capitalize"
                                     up-tooltip="@lang('This member has been removed from the group')">
                                     {{ trans('membership.removed') }}
                                 </span>
                             @endif
                             @if ($membership->membership == \App\Membership::BLACKLISTED)
-                                <span class="badge badge-pill badge-danger"
+                                <span class="rounded-full bg-red-800 text-red-100 px-2 py-1 text-xs capitalize"
                                     up-tooltip="@lang('This member has been blacklisted')">
                                     {{ trans('membership.blacklisted') }}
                                 </span>
@@ -135,7 +135,7 @@
 
                             <td>
                                 <a class="btn btn-primary inline-block"
-                                    href="{{ action('GroupMembershipController@edit', [$group, $membership]) }}">{{ trans('messages.edit') }}</a>
+                                    href="{{ action('GroupMembershipAdminController@edit', [$group, $membership]) }}">{{ trans('messages.edit') }}</a>
                             </td>
                         @endcan
 

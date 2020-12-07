@@ -21,34 +21,35 @@
     @include('partials.invite')
 
 
+  <div class="flex justify-start content-start mb-10 space-x-8 text-gray-700 hover:text-blue-900">
+
 @if (Auth::check())
 
-    <ul class="nav nav-tabs nav-centered mb-4">
+  
 
-        <li class="nav-item">
-            <a up-follow up-reveal="false" href="{{ route('groups.show', $group) }}" class="nav-link @if (isset($tab) && ($tab == 'home')) active @endif">
-                <i class="fa fa-info-circle"></i> <span class="hidden xl:inline">{{ trans('messages.group_home') }}</span>
+        
+            <a up-follow up-reveal="false" href="{{ route('groups.show', $group) }}" class="@if (isset($tab) && ($tab == 'home')) text-blue-800 border-b-4 border-blue-800 @endif">
+                <i class="fa fa-info-circle"></i> <span class="hidden lg:inline">{{ trans('messages.group_home') }}</span>
             </a>
-        </li>
 
 
         @if ($group->getSetting('module_discussion', true) == true)
             @can ('viewDiscussions', $group)
-                <li class="nav-item">
-                    <a up-follow up-reveal="false" up-cache="false" href="{{ route('groups.discussions.index', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'discussion')) active @endif">
+                
+                    <a up-follow up-reveal="false" up-cache="false" href="{{ route('groups.discussions.index', $group) }}"  class="@if (isset($tab) && ($tab == 'discussion')) text-blue-800 border-b-4 border-blue-800 @endif">
                         <i class="fa fa-comments"></i> <span class="hidden xl:inline">{{ trans('messages.discussions') }}</span>
                     </a>
-                </li>
+                
             @endcan
         @endif
 
         @if ($group->getSetting('module_action', true) == true)
             @can ('viewActions', $group)
-                <li class="nav-item">
-                    <a up-follow up-reveal="false" href="{{ route('groups.actions.index', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'action')) active @endif">
+               
+                    <a up-follow up-reveal="false" href="{{ route('groups.actions.index', $group) }}"  class="@if (isset($tab) && ($tab == 'action')) text-blue-800 border-b-4 border-blue-800 @endif">
                         <i class="fa fa-calendar"></i> <span class="hidden xl:inline">{{ trans('messages.agenda') }}</span>
                     </a>
-                </li>
+               
             @endcan
         @endif
 
@@ -56,64 +57,64 @@
 
         @if ($group->getSetting('module_file', true) == true)
             @can ('viewFiles', $group)
-                <li class="nav-item">
-                    <a up-follow up-reveal="false" href="{{ route('groups.files.index', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'files')) active @endif">
+                
+                    <a up-follow up-reveal="false" href="{{ route('groups.files.index', $group) }}"  class=" @if (isset($tab) && ($tab == 'files')) text-blue-800 border-b-4 border-blue-800 @endif">
                         <i class="fa fa-files-o"></i> <span class="hidden xl:inline">{{ trans('messages.files') }}</span>
                     </a>
-                </li>
+                
             @endcan
         @endif
 
         @if ($group->getSetting('module_member', true) == true)
             @can ('viewMembers', $group)
-                <li class="nav-item">
-                    <a up-follow up-reveal="false" href="{{ route('groups.users.index', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'users')) active @endif">
+                
+                    <a up-follow up-reveal="false" href="{{ route('groups.users.index', $group) }}"  class=" @if (isset($tab) && ($tab == 'users')) text-blue-800 border-b-4 border-blue-800 @endif">
                         <i class="fa fa-users"></i> <span class="hidden xl:inline">{{ trans('messages.members') }}</span>
                     </a>
-                </li>
+                
             @endcan
 
         @endif
 
         @if ($group->getSetting('module_map', true) == true)
             @can ('viewMembers', $group)
-                <li class="nav-item">
-                    <a href="{{ action('GroupMapController@index', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'map')) active @endif">
+                
+                    <a href="{{ action('GroupMapController@index', $group) }}"  class=" @if (isset($tab) && ($tab == 'map')) text-blue-800 border-b-4 border-blue-800 @endif">
                         <i class="fa fa-map-marker"></i> <span class="hidden xl:inline">{{ trans('messages.map') }}</span>
                     </a>
-                </li>
+                
             @endcan
         @endif
 
         @if ($group->getSetting('module_custom_name'))
             @if ($group->isMember())
-                <li class="nav-item">
-                    <a up-follow up-reveal="false" href="{{ action('ModuleController@show', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'custom')) active @endif">
+                
+                    <a up-follow up-reveal="false" href="{{ action('ModuleController@show', $group) }}"  class=" @if (isset($tab) && ($tab == 'custom')) text-blue-800 border-b-4 border-blue-800 @endif">
                         <i class="fa {{$group->getSetting('module_custom_icon')}}"></i> <span class="hidden xl:inline">{{$group->getSetting('module_custom_name')}}</span>
                     </a>
-                </li>
+                
             @endif
         @endif
 
 
         @if ($group->isMember())
-            <li class="nav-item">
-                <a up-follow up-reveal="false" href="{{ action('GroupMembershipController@edit', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'preferences')) active @endif">
+            
+                <a up-follow up-reveal="false" href="{{ action('GroupMembershipController@edit', $group) }}"  class=" @if (isset($tab) && ($tab == 'preferences')) text-blue-800 border-b-4 border-blue-800 @endif">
                     <i class="fa fa-bell-o"></i> <span class="hidden xl:inline">{{ trans('messages.settings') }}</span>
                 </a>
-            </li>
+            
         @else
-            <li class="nav-item">
-                <a up-follow up-reveal="false" href="{{ action('GroupMembershipController@create', $group) }}"  class="nav-link @if (isset($tab) && ($tab == 'settings')) active @endif">
+            
+                <a up-follow up-reveal="false" href="{{ action('GroupMembershipController@create', $group) }}"  class=" @if (isset($tab) && ($tab == 'settings')) text-blue-800 border-b-4 border-blue-800 @endif">
                     <i class="fa fa-sign-in"></i> <span class="hidden xl:inline">{{ trans('messages.join') }}</span>
                 </a>
-            </li>
+            
         @endif
 
 
         @can ('administer', $group)
-            <li class="nav-item dropdown">
-                <a href="#" id="admin" data-toggle="dropdown" aria-controls="admin-contents" aria-expanded="false"  class="dropdown-toggle nav-link @if (isset($tab) && ($tab == 'admin')) active @endif">
+            <div class="dropdown">
+                <a href="#" id="admin" data-toggle="dropdown" aria-controls="admin-contents" aria-expanded="false"  class="dropdown-toggle  @if (isset($tab) && ($tab == 'admin')) text-blue-800 border-b-4 border-blue-800 @endif">
                     <i class="fa fa-wrench"></i> <span class="hidden xl:inline">@lang('Administer')</span>
                 </a>
                 <div class="dropdown-menu">
@@ -141,12 +142,12 @@
                         <i class="fa fa-trash"></i> @lang('Delete group')
                     </a>
                 </div>
-            </li>
+            </div>
 
         @endcan
 
 
-    </ul>
+
 
 
 
@@ -159,32 +160,30 @@
 
 @else
 
-    <ul class="nav nav-tabs nav-centered">
-
-        <li class="nav-item" role="presentation" >
-            <a class="nav-link @if (isset($tab) && ($tab == 'home')) active @endif" href="{{ route('groups.show', $group) }}">
+      
+            <a class=" @if (isset($tab) && ($tab == 'home')) text-blue-800 border-b-4 border-blue-800 @endif" href="{{ route('groups.show', $group) }}">
                 <i class="fa fa-info-circle"></i> <span class="d-none d-lg-inline">{{ trans('messages.group_home') }}</span>
             </a>
-        </li>
+  
 
 
         @if ($group->getSetting('module_discussion', true) == true)
             @if ($group->isOpen() )
-                <li class="nav-item" role="presentation">
-                    <a up-follow up-reveal="false" class="nav-link @if (isset($tab) && ($tab == 'discussion')) active @endif" href="{{ route('groups.discussions.index', $group) }}">
+               
+                    <a up-follow up-reveal="false" class=" @if (isset($tab) && ($tab == 'discussion')) text-blue-800 border-b-4 border-blue-800 @endif" href="{{ route('groups.discussions.index', $group) }}">
                         <i class="fa fa-comments"></i> <span class="d-none d-lg-inline">{{ trans('messages.discussions') }}</span>
                     </a>
-                </li>
+               
             @endif
         @endif
 
         @if ($group->getSetting('module_action', true) == true)
             @if ($group->isOpen() )
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link @if (isset($tab) && ($tab == 'action')) active @endif" href="{{ route('groups.actions.index', $group) }}">
+                
+                    <a class=" @if (isset($tab) && ($tab == 'action')) text-blue-800 border-b-4 border-blue-800 @endif" href="{{ route('groups.actions.index', $group) }}">
                         <i class="fa fa-calendar"></i> <span class="d-none d-lg-inline">{{ trans('messages.agenda') }}</span>
                     </a>
-                </li>
+                
             @endif
 
 
@@ -192,34 +191,37 @@
 
         @if ($group->getSetting('module_files', true) == true)
             @if ($group->isOpen() )
-                <li class="nav-item" role="presentation">
-                    <a up-follow up-reveal="false" class="nav-link @if (isset($tab) && ($tab == 'files')) active @endif" href="{{ route('groups.files.index', $group) }}">
+                
+                    <a up-follow up-reveal="false" class=" @if (isset($tab) && ($tab == 'files')) text-blue-800 border-b-4 border-blue-800 @endif" href="{{ route('groups.files.index', $group) }}">
                         <i class="fa fa-files-o"></i> <span class="d-none d-lg-inline">{{ trans('messages.files') }}</span>
                     </a>
-                </li>
+                
             @endif
 
         @endif
 
         @if ($group->getSetting('module_member', true) == true)
             @if ($group->isOpen() )
-                <li class="nav-item" role="presentation">
-                    <a up-follow up-reveal="false" class="nav-link @if (isset($tab) && ($tab == 'users')) active @endif" href="{{ route('groups.users.index', $group) }}">
+               
+                    <a up-follow up-reveal="false" class=" @if (isset($tab) && ($tab == 'users')) text-blue-800 border-b-4 border-blue-800 @endif" href="{{ route('groups.users.index', $group) }}">
                         <i class="fa fa-users"></i> <span class="d-none d-lg-inline">{{ trans('messages.members') }}</span>
                     </a>
-                </li>
+                
             @endif
         @endif
 
 
         @if ($group->isOpen() )
-            <li class="nav-item" role="presentation">
-                <a up-follow up-reveal="false" class="nav-link @if (isset($tab) && ($tab == 'settings')) active @endif" href="{{ action('GroupMembershipController@create', $group) }}">
+            
+                <a up-follow up-reveal="false" class=" @if (isset($tab) && ($tab == 'settings')) text-blue-800 border-b-4 border-blue-800 @endif" href="{{ action('GroupMembershipController@create', $group) }}">
                     <i class="fa fa-cog"></i> <span class="d-none d-lg-inline">{{ trans('messages.join') }}</span>
                 </a>
-            </li>
+            
         @endif
-    </ul>
+
 
 
 @endif
+
+
+    </div>

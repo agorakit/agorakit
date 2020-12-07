@@ -117,6 +117,7 @@
     </div>
 
     <!-- help -->
+    @auth
     <div class="nav-item sm:px-4">
         <a up-follow
             class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:mr-2 sm:w-auto sm:px-4 sm:bg-transparent sm:rounded"
@@ -129,7 +130,7 @@
 
         </a>
     </div>
-
+    @endauth
 
 
     <div class="sm:flex-grow"></div>
@@ -140,7 +141,7 @@
   
     <!-- search-->
     @auth
-    <form up-target="body" class="form-inline my-2 hidden lg:block sm:px-4" role="search" action="{{ url('search') }}"
+    <form class="form-inline my-2 hidden lg:block sm:px-4" role="search" action="{{ url('search') }}"
     method="get">
     <div class="input-group">
         <input class="form-control form-control-sm" type="text" name="query"
@@ -156,7 +157,7 @@
 
 
     <!-- Notifications -->
-    
+    @auth
     @if(isset($notifications))
     <div class="dropdown hidden lg:block sm:px-4">
         <a href="#" 
@@ -181,7 +182,7 @@
         </div>
     </div>
     @endif
-    
+    @endauth
 
 
 
@@ -278,18 +279,18 @@
     @guest
 
     <a up-modal=".dialog"
-        class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:w-auto sm:px-4 my-2 mr-2"
+        class="text-gray-200 flex flex-col justify-center items-center rounded hover:bg-gray-600 bg-gray-700 h-12 w-auto sm:w-auto px-4 my-2 mr-2"
         href="{{ url('login') }}">
 
-        <i class="fa fa-sign-in text-lg sm:hidden"></i>
-        <span class="hidden sm:inline">{{ trans('messages.login') }}</span>
+        
+        <span class="text-xs sm:text-base">{{ trans('messages.login') }}</span>
     </a>
 
     <a up-modal=".dialog"
-        class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:w-auto sm:px-4 my-2"
+        class="text-gray-200 flex flex-col justify-center items-center rounded hover:bg-gray-600 bg-gray-700 h-12 w-auto sm:w-auto px-4 my-2"
         href="{{ url('register') }}">
-        <i class="fa fa-pencil-square-o text-lg sm:hidden"></i>
-        <span class="hidden sm:inline">{{ trans('messages.register') }}</span>
+        
+        <span class="text-xs sm:text-base">{{ trans('messages.register') }}</span>
     </a>
 
     @endguest
