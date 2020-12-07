@@ -7,34 +7,46 @@
         {{trans('messages.tags_help')}}
     </div>
 
-
-    <select class="form-control js-tags"
-    name="tags[]"
-    multiple="multiple"
-    @if ($newTagsAllowed)
-        data-tags="true"
-    @endif>
+    <div class="flex flex-wrap sm:grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 my-4">
 
     @if (isset($selectedTags))
             @foreach ($selectedTags as $tag)
-                <option selected="selected" value="{{$tag->name}}">{{$tag->name}}</option>
+                <div class="mr-4">
+                    <input type=checkbox checked value="{{$tag->normalized}}" id="{{$tag->normalized}}" name="tags[]"/>
+                    <label for="{{$tag->normalized}}">{{$tag->name}}</label>
+                </div>
             @endforeach
     @endif
+
 
     @if (isset($allowedTags))
             @foreach ($allowedTags as $tag)
                 @if (isset($selectedTags))
-                    @unless ($selectedTags->contains($tag->name)))
-                        <option value="{{$tag->name}}">
-                            {{$tag->name}}
-                        </option>
+                    @unless ($selectedTags->contains($tag->name))
+                        <div class="mr-4">
+                            <input type="checkbox" value="{{$tag->normalized}}" name="tags[]" id="{{$tag->normalized}}"/>
+                            <label for="{{$tag->normalized}}">{{$tag->name}}</label>
+                        </div>
                     @endunless
                 @else 
-                    <option value="{{$tag->name}}">{{$tag->name}}</option>
+                    <div class="mr-4">
+                        <input type="checkbox" value="{{$tag->normalized}}" name="tags[]" id="{{$tag->normalized}}"/>
+                        <label for="{{$tag->normalized}}">{{$tag->name}}</label>
+                    </div>
                 @endif
             @endforeach
     @endif
-</select>
 
+    </div>
+
+
+    @if ($newTagsAllowed)
+        <label>
+            Add new tags, comma separated : 
+        </label>
+        <select class="form-control js-tags" name="tags[]" multiple="multiple"  data-tags="true">
+        </select>
+    @endif>
+    @endif
 
 </div>

@@ -123,7 +123,7 @@ trait HasControlledTags
             }
         }
 
-        return $selectedTags;
+        return $selectedTags->unique('normalized')->sortBy('normalized');
     }
 
 
