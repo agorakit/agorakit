@@ -226,7 +226,7 @@
             <a up-target="body" class="dropdown-item" href="{{ route('users.show', Auth::user()) }}"><i
                     class="fa fa-btn fa-user"></i> {{ trans('messages.profile') }}</a>
             <a up-target="body" class="dropdown-item" href="{{ route('users.edit', Auth::user()) }}"><i
-                    class="fa fa-btn fa-edit"></i> {{ trans('messages.edit_my_profile') }}</a>
+                    class="fas fa-btn fa-user-edit"></i> {{ trans('messages.edit_my_profile') }}</a>
 
             <a class="dropdown-item" href="{{ url('/logout') }}"
                 onclick="event.preventDefault();document.getElementById('logout-form').submit();">
