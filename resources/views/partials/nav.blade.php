@@ -1,13 +1,13 @@
-<nav class="bg-gray-800 flex text-gray-200 items-center justify-between sm:justify-start px-5 py-3">
+<nav class="bg-gray-800 flex text-gray-200 items-center justify-between sm:justify-start px-2 py-3">
 
     <a up-follow up-cache="false" href="{{ route('index') }}"
-        class="hidden sm:flex text-gray-200 px-1 justify-center items-center rounded h-12 w-12 sm:w-auto sm:px-4">
+        class="hidden sm:flex text-gray-200 px-1 justify-center items-center sm:w-auto mr-4">
         @if(Storage::exists('public/logo/favicon.png'))
-        <img src="{{asset('storage/logo/favicon.png')}}" width="40" height="40" />
+        <img src="{{asset('storage/logo/favicon.png')}}"  class="rounded h-12 w-12" />
         @else
-        <img src="/images/logo-white.svg" width="40" height="40" />
+        <img src="/images/logo-white.svg"  class="rounded h-12 w-12" />
         @endif
-        <span class="ml-1 hidden sm:inline text-gray-200">{{ setting('name') }}</span>
+        <span class="ml-2 hidden sm:inline text-gray-200">{{ setting('name') }}</span>
     </a>
 
     <a up-follow up-cache="false" href="{{ route('index') }}"
