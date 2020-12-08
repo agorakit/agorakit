@@ -16,13 +16,6 @@
 
 
 
-    <div class="alert alert-secondary" role="alert">
-        <i class="fa fa-info-circle" aria-hidden="true"></i>
-        {{trans('messages.if_you_already_have_account')}}, <a up-target=".dialog" href="{{url('login')}}">{{trans('messages.you_can_login_here')}}</a>
-    </div>
-
-
-
     <form method="POST" action="{{ url('register') }}" up-target=".dialog">
         @honeypot
         @csrf
@@ -55,6 +48,11 @@
         </div>
     </form>
 
+
+ <div class="alert alert-primary" role="alert">
+        <i class="fa fa-info-circle" aria-hidden="true"></i>
+        {{trans('messages.if_you_already_have_account')}}, <a up-target=".dialog" href="{{url('login')}}">{{trans('messages.you_can_login_here')}}</a>
+</div>
 
 
 @endsection

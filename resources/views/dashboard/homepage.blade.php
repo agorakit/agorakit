@@ -24,55 +24,70 @@
 </div>
 @endif
 
+@if (Auth::user()->groups()->count() > 0)
 
-<div class="sm:flex justify-end hidden">
-    @include('partials.preferences-show')
-</div>
-
-
-
-<div class="@if($actions->count() > 0) lg:grid lg:grid-cols-3 gap-32 @endif">
-
-    <div class="col-span-2">
-        <div class="flex justify-between my-8 items-center">
-            <a class="btn btn-secondary" href="{{ route('discussions.create') }}">
-                <i class="fas fa-comment-medical"></i>
-                <span class="ml-3">{{ trans('discussion.create_one_button') }}</span>
-            </a>
-        </div>
-
-
-        @if($discussions->count() > 0)
-        <div class="">
-            @foreach($discussions as $discussion)
-            @include('discussions.discussion')
-            @endforeach
-        </div>
-        @endif
+    <div class="sm:flex justify-end hidden">
+        @include('partials.preferences-show')
     </div>
 
-    <div class="col-span-1 mt-16 lg:mt-0">
 
-        
 
-        @if($actions->count() > 0)
-        <div class="flex justify-between my-8 items-center">
-            <a class="btn btn-secondary" href="{{ route('actions.create') }}">
-                <i class="fa fa-calendar-plus-o"></i>
-                <span class="ml-3">{{ trans('action.create_one_button') }}</span>
-            </a>
+    <div class="@if($actions->count() > 0) lg:grid lg:grid-cols-3 gap-32 @endif">
+
+        <div class="col-span-2">
+            <div class="flex justify-between my-8 items-center">
+                <a class="btn btn-secondary" href="{{ route('discussions.create') }}">
+                    <i class="fas fa-comment-medical"></i>
+                    <span class="ml-3">{{ trans('discussion.create_one_button') }}</span>
+                </a>
+            </div>
+
+
+            @if($discussions->count() > 0)
+            <div class="">
+                @foreach($discussions as $discussion)
+                @include('discussions.discussion')
+                @endforeach
+            </div>
+            @endif
         </div>
 
-        
-        <div class="">
-            @foreach($actions as $action)
-            @include('actions.action')
-            @endforeach
+        <div class="col-span-1 mt-16 lg:mt-0">
+
+            
+
+            @if($actions->count() > 0)
+            <div class="flex justify-between my-8 items-center">
+                <a class="btn btn-secondary" href="{{ route('actions.create') }}">
+                    <i class="fa fa-calendar-plus-o"></i>
+                    <span class="ml-3">{{ trans('action.create_one_button') }}</span>
+                </a>
+            </div>
+
+            
+            <div class="">
+                @foreach($actions as $action)
+                @include('actions.action')
+                @endforeach
+            </div>
+            @endif
         </div>
-        @endif
+
     </div>
 
-</div>
+@else
+<h1>
+{{trans('membership.join_your_first_group_title')}}
+</h1>
+<p>
+{{trans('membership.join_your_first_group_text')}}
+</p>
+
+<a up-target="body" class="btn btn-primary"
+                href="{{ action('GroupController@index') }}">
+                <i class="fa fa-layer-group"></i> {{ trans('messages.all_groups') }}
+</a>
+@endif
 
 
 @endsection

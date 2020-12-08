@@ -7,11 +7,18 @@
 
   <link rel="shortcut icon" href="{{{ asset('logo/favicon.png') }}}">
 
-  <!-- Font awesome -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/v4-shims.css">
+  <link rel="manifest" href="{{ route('pwa.index') }}">
 
-  <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
+    <!-- font awesome -->
+    <link rel="stylesheet" href="{{ asset('/fonts/fontawesome/css/all.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('/fonts/fontawesome/css/v4-shims.min.css')}}">
+
+    <link rel="stylesheet" href="{{ asset('/css/fullcalendar.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/unpoly.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('/css/app.css?v='.filemtime(public_path('css/app.css'))) }}">
 
 
   <!-- additional css -->

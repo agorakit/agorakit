@@ -38,23 +38,13 @@
     @endunless
 
 
-    <div class="js-spinner fixed hidden bg-green-700 top-0 z-50 w-full">
-        <div class="inline-block  text-green-200 m-4">
-            <i class="far fa-save mr-2"></i>
-            {{__('Loading')}}
-        </div>
-    </div>
+    
 
-    <div class="js-network-error fixed hidden bg-red-700 top-0 z-50 mt-12 w-full">
-        <div class="inline-block  text-red-200 m-4">
-            <i class="fa fa-plug mr-2"></i>
-            {{__('Network error')}}
-        </div>
-    </div>
+ @include('partials.errors')
 
 
     <div class="mx-auto p-2 bg-white sm:shadow-xl sm:p-4 xl:p-8 xl:rounded-lg xl:my-4" style="max-width: 1240px">
-        @include('partials.errors')
+       
         @yield('content')
     </div>
 

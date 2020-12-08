@@ -19,49 +19,37 @@
 
 
     @auth
-    <div class="dropdown">
-        <a href="#"
-            class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:mr-2 sm:w-auto sm:px-4 sm:bg-transparent sm:rounded"
-            data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
-            <i class="fa fa-cubes text-lg sm:hidden"></i>
-            <span class="hidden sm:inline">
-                {{ trans('messages.groups') }}
-                <i class="fa fa-caret-down"></i>
-            </span>
+        @if (Auth::user()->groups()->count() > 0)
+        <div class="dropdown">
+            <a href="#"
+                class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:mr-2 sm:w-auto sm:px-4 sm:bg-transparent sm:rounded"
+                data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
-        </a>
-        <div class="dropdown-menu rounded shadow">
+                <i class="fa fa-cubes text-lg sm:hidden"></i>
+                <span class="hidden sm:inline">
+                    {{ trans('messages.groups') }}
+                    <i class="fa fa-caret-down"></i>
+                </span>
 
-            <h6 class="dropdown-header">{{ trans('messages.my_groups') }}</h6>
-
-            {{--
-            <a up-target="body" class="dropdown-item" class="dropdown-item"
-                href="{{ action('GroupController@indexOfMyGroups') }}">
-                {{ trans('messages.my_groups') }}
             </a>
-            <div class="dropdown-divider"></div>
-            --}}
+            <div class="dropdown-menu rounded shadow">
 
-            
-
+                <h6 class="dropdown-header">{{ trans('messages.my_groups') }}</h6>
 
 
+                @foreach (Auth::user()->groups()->orderBy('name')->get() as $group)
+                <a up-target="body" class="dropdown-item" href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
+                @endforeach
 
-            @forelse (Auth::user()->groups()->orderBy('name')->get() as $group)
-            <a up-target="body" class="dropdown-item" href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
-            @empty
-            <a class="dropdown-item"
-                href="{{ route('index') }}">{{ trans('membership.not_subscribed_to_group_yet') }}</a>
-            @endforelse
+                <div class="dropdown-divider"></div>
 
-            <div class="dropdown-divider"></div>
-
-            <a up-target="body" class="dropdown-item" href="{{ route('groups.create') }}">
-                {{ trans('group.create_a_group_button') }}
-            </a>
+                <a up-target="body" class="dropdown-item" href="{{ route('groups.create') }}">
+                    {{ trans('group.create_a_group_button') }}
+                </a>
+            </div>
         </div>
-    </div>
+        @endif
     @endauth
 
 

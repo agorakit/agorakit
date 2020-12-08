@@ -16,11 +16,6 @@
 </h1>
 
 
-<div class="alert alert-secondary" role="alert">
-    <i class="fa fa-info-circle" aria-hidden="true"></i>
-    <a up-target=".dialog" href="{{ route('register') }}">@lang('Click here to register a new account')</a>
-</div>
-
 
 
 <form method="POST" action="{{ url('/login') }}" class="mb-5">
@@ -61,13 +56,18 @@
 
 
 
-    <div class="flex justify-between items-center mt-8">
+    <div class="flex justify-between items-center my-8">
         
         <button type="submit" class="btn btn-primary btn">{{ trans('messages.login') }}</button>
 		<a class="mr-4" href="{{route('password.request')}}">{{ trans('messages.password_reset') }}</a>
     </div>
 
 </form>
+
+<div class="alert alert-primary" role="alert">
+    <i class="fa fa-info-circle" aria-hidden="true"></i>
+    <a up-target=".dialog" href="{{ route('register') }}">@lang('Click here to register a new account')</a>
+</div>
 
 
 
