@@ -89,7 +89,7 @@
         @if ($group->getSetting('module_custom_name'))
             @if ($group->isMember())
                 
-                    <a up-follow up-reveal="false" href="{{ action('ModuleController@show', $group) }}"  class=" @if (isset($tab) && ($tab == 'custom')) text-blue-800 border-b-4 border-blue-800 @endif">
+                    <a href="{{ action('ModuleController@show', $group) }}"  class=" @if (isset($tab) && ($tab == 'custom')) text-blue-800 border-b-4 border-blue-800 @endif">
                         <i class="fa {{$group->getSetting('module_custom_icon')}}"></i> <span class="hidden xl:inline">{{$group->getSetting('module_custom_name')}}</span>
                     </a>
                 
