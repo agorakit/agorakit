@@ -147,7 +147,7 @@ class GroupActionController extends Controller
         return view('actions.create')
             ->with('action', $action)
             ->with('group', $group)
-            ->with('allowedTags', $action->getAllowedTags())
+            ->with('allowedTags', $action->getTagsInUse())
             ->with('newTagsAllowed', $action->areNewTagsAllowed())
             ->with('tab', 'action');
     }

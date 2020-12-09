@@ -256,4 +256,5 @@ return array (
   'new' => 'Nouveau',
   'unread' => 'non lu(s)',
   'group_tags_help' => 'Pour votre information, voici l\'ensemble des tags utilisés dans ce groupe',
+  'new_tags' => 'Ajouter des nouveaux mots-clés',
 );

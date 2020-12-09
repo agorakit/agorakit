@@ -76,7 +76,7 @@ class GroupDiscussionController extends Controller
 
         return view('discussions.create')
         ->with('group', $group)
-        ->with('allowedTags', $discussion->getAllowedTags())
+        ->with('allowedTags', $discussion->getTagsInUse())
         ->with('newTagsAllowed', $discussion->areNewTagsAllowed())
         ->with('tab', 'discussion')
         ->with('title', $title);
