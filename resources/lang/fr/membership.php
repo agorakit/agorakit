@@ -54,4 +54,6 @@ return array (
   ),
   'group_candidate_info' => 'Vous avez demandé à rejoindre ce groupe. Vous devez attendre la réponse d\'un admin.',
   'status' => 'Status',
+  'join_your_first_group_title' => 'Vous n\'avez pas encore rejoint de groupe',
+  'join_your_first_group_text' => 'Visitez la vue d\'ensemble des groupes afin d\'en rejoindre un ou plusieurs. Vous pouvez aussi y créer des groupes.',
 );

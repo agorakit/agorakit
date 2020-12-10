@@ -54,4 +54,6 @@ return array (
   'refusal_recorded' => 'Your refusal has been recorded. You won\'t be contacted again about this group.',
   'status' => 'Status',
   'group_candidate_info' => 'You have asked to join this group. You must now wait for an admin\'s response.',
+  'join_your_first_group_title' => 'You didn\'t join any group yet',
+  'join_your_first_group_text' => 'Visit the group overview page to join one or more groups or create your own.',
 );
