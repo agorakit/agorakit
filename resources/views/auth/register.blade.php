@@ -2,17 +2,21 @@
 
 @section('content')
 
-    <h1 class="flex items-center justify-center mb-4 text-xl">
-        @if (Storage::exists('public/logo/favicon.png'))
-            <img src="{{{ asset('storage/logo/favicon.png') }}}" width="40" height="40" class="rounded"/>
-        @else
-            <img src="/images/logo.svg" width="40" height="40" class="rounded"/>
-        @endif
+    <a href="{{ route('index') }}">
+        <h1 class="flex items-center justify-center mb-4 text-xl">
+       
+            @if (Storage::exists('public/logo/favicon.png'))
+                <img src="{{{ asset('storage/logo/favicon.png') }}}" width="40" height="40" class="rounded"/>
+            @else
+                <img src="/images/logo.svg" width="40" height="40" class="rounded"/>
+            @endif
 
-        <div class="ml-2">
-        {{setting('name')}} : {{ strtolower(trans('messages.register')) }}
-        </div>
-    </h1>
+            <div class="ml-2">
+            {{setting('name')}} : {{ strtolower(trans('messages.register')) }}
+            </div>
+       
+        </h1>
+    </a>
 
 
 

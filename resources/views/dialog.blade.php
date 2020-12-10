@@ -37,9 +37,10 @@
   
 
 
-
-  <div class="container  main-container main-dialog dialog  mx-auto max-w-xl bg-white sm:shadow-xl sm:rounded-lg p-4 lg:p-8">
-      @yield('content')
+  <div class="sm:shadow-xl sm:rounded-lg mx-auto max-w-xl bg-white p-4 m-4">
+    <div class=" dialog  ">
+        @yield('content')
+    </div>
   </div>
 
 
