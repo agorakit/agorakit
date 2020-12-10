@@ -46,23 +46,29 @@
 
 
   @if ( Session::has('messages') )
+    <div class="bg-blue-700 sticky top-0 z-50 w-full text-blue-100 p-4" up-hungry>
     @foreach (session('messages') as $message)
-        {!!$message!!}
+        <div>{!!$message!!}</div>
         <?php session()->pull('messages'); ?>
     @endforeach
+    </div>
   @endif
 
   @if ( Session::has('message') )
+   <div class="bg-blue-700 sticky top-0 z-50 w-full text-blue-100 p-4" up-hungry>
       {!!Session::get('message')!!}
+      </div>
   @endif
 
 
 
 
   @if ($errors->any())
+  <div class="bg-red-700 sticky top-0 z-50 w-full text-red-100 p-4" up-hungry>
     @foreach ($errors->all() as $error)
-        {{ $error }}
+        <div>{{ $error }}</div>
     @endforeach
+    </div>
   @endif
 
 

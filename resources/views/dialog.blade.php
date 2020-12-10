@@ -32,17 +32,14 @@
 
 <body>
 
-  <div class="container max-w-xl">
+
     @include('partials.errors')
-  </div>
+  
 
 
 
-  <div class="container  main-container main-dialog mx-auto max-w-xl bg-white sm:shadow-xl sm:rounded-lg p-4 lg:p-8">
-
-    <div class="dialog">
+  <div class="container  main-container main-dialog dialog  mx-auto max-w-xl bg-white sm:shadow-xl sm:rounded-lg p-4 lg:p-8">
       @yield('content')
-    </div>
   </div>
 
 
