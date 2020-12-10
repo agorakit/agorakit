@@ -69,8 +69,8 @@ class UserTest extends Tests\BrowserKitTestCase
         ->type('Admin', 'name')
         ->type('admin@agorakit.org', 'email')
         ->press('Register')
-        ->type('12345678', 'password')
-        ->type('12345678', 'password_confirmation')
+        ->type('123456789', 'password')
+        ->type('123456789', 'password_confirmation')
         ->press('Register')
         ->see('Agorakit');
 
