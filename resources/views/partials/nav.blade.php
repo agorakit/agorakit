@@ -42,11 +42,13 @@
                 <a up-target="body" class="dropdown-item" href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
                 @endforeach
 
+                @can ('create', \App\Group::class)
                 <div class="dropdown-divider"></div>
 
                 <a up-target="body" class="dropdown-item" href="{{ route('groups.create') }}">
                     {{ trans('group.create_a_group_button') }}
                 </a>
+                @endcan
             </div>
         </div>
         @endif

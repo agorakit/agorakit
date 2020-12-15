@@ -2,14 +2,14 @@
 
 @section('content')
 
-<div class="d-md-flex justify-content-between mb-3">
-
-    <h1><a up-follow href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i
-            class="fa fa-angle-right"></i>
-        {{ trans('messages.all_groups') }}
-    </h1>
 
 
+<h1><a up-follow href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i
+        class="fa fa-angle-right"></i>
+    {{ trans('messages.all_groups') }}
+</h1>
+
+<div class="sm:flex justify-between mb-3">
     <form class="form-inline" role="search" method="GET" action="{{ route('groups.index') }}"
         up-autosubmit up-delay="500" up-target=".groups" up-reveal="false">
         <div class="input-group">
@@ -21,6 +21,14 @@
             </div>
         </div>
     </form>
+
+    @can ('create', \App\Group::class)
+        <a up-target="body" class="btn btn-primary" href="{{ route('groups.create') }}">
+            {{ trans('group.create_a_group_button') }}
+        </a>
+    @endcan
+
+
 </div>
 
 

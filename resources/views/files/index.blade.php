@@ -5,7 +5,7 @@
     @include('groups.tabs')
 
     @auth
-        <div class="flex justify-between">
+        <div class="sm:flex justify-between">
             <div class="flex mb-2">
                 @include('partials.tags_filter')
                 @include('partials.sort_dropdown')
