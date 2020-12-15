@@ -19,7 +19,7 @@
 
                 @if (isset($admins) && $admins->count() > 0)
                     <div class="mb-3">
-                        <div class="font-weight-bold">
+                        <div class="font-bold">
                             {{ trans('messages.group_admin_users') }}
                         </div>
 
@@ -32,18 +32,18 @@
 
                 @if ($group_inbox)
                     <div class="mb-3">
-                        <div class="font-weight-bold">{{ __('Inbox for this group') }}</div>
+                        <div class="font-bold">{{ __('Inbox for this group') }}</div>
                         <a up-follow href="mailto:{{ $group_inbox }}">{{ $group_inbox }}</a>
                     </div>
                 @endif
 
                 <div class="mb-3">
-                    <div class="font-weight-bold">{{ __('Creation date') }}</div>
+                    <div class="font-bold">{{ __('Creation date') }}</div>
                     {{ $group->created_at->diffForHumans() }}
                 </div>
 
                 <div class="mb-3">
-                    <div class="font-weight-bold">{{ __('Group type') }}</div>
+                    <div class="font-bold">{{ __('Group type') }}</div>
                     @if ($group->isOpen())
                         <i class="fa fa-globe" title="{{ trans('group.open') }}">
                         </i>
@@ -59,8 +59,9 @@
 
                 </div>
 
+               
                 <div class="mb-3">
-                    <div class="font-weight-bold">{{ __('Stats & keywords') }}</div>
+                    <div class="font-bold">{{ __('Stats & keywords') }}</div>
                     <span class="badge badge-secondary"><i class="fa fa-users"></i> {{ $group->users()->count() }}</span>
                     <span class="badge badge-secondary"><i class="fa fa-comments"></i>
                         {{ $group->discussions()->count() }}</span>
@@ -112,7 +113,7 @@
                 <h2 class="my-4 flex justify-between">
                     <a up-follow href="{{ route('groups.actions.index', $group) }}">{{ trans('messages.agenda') }}</a>
                     @can('create-action', $group)
-                        <a class="text-xs rounded-full py-2 px-3 bg-gray-500 text-gray-200" href="{{ route('groups.actions.create', $group) }}">
+                        <a class="btn btn-primary" href="{{ route('groups.actions.create', $group) }}">
                             {{ trans('action.create_one_button') }}
                         </a>
                     @endcan
