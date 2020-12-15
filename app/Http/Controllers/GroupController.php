@@ -109,7 +109,7 @@ class GroupController extends Controller
             if (Gate::allows('viewActions', $group)) {
                 $actions = $group->actions()
                     ->with('user', 'tags', 'group')
-                    ->where('stop', '>=', Carbon::now())
+                    ->where('stop', '>=', Carbon::now()->subDay())
                     ->orderBy('start', 'asc')
                     ->limit(10)
                     ->get();
