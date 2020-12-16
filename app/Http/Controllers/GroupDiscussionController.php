@@ -44,11 +44,17 @@ class GroupDiscussionController extends Controller
             ->orderBy('updated_at', 'desc')
             ->when($tag, function ($query) use ($tag) {
                 return $query->withAnyTags($tag);
-            })
-            ->paginate(50);
+            });
+           
         } else { // don't load the unread relation, since we don't know who to look for.
-            $discussions = $group->discussions()->has('user')->with('user', 'group', 'tags')->withCount('comments')->orderBy('updated_at', 'desc')->paginate(50);
+            $discussions = $group->discussions()->has('user')->with('user', 'group', 'tags')->withCount('comments')->orderBy('updated_at', 'desc');
         }
+
+        if ($request->has('search')) {
+            $discussions = $discussions->search($request->get('search'));
+        }
+
+        $discussions = $discussions->paginate(50);
 
         return view('discussions.index')
         ->with('title', $group->name.' - '.trans('messages.discussions'))
