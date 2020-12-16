@@ -26,6 +26,14 @@ class UserPolicy
         }
     }
 
+    /** 
+     * Setting let us define if users can be created
+     */
+    public function create(?User $user)
+    {
+        return setting('user_can_register', true);
+    }
+
     // A user can edit his/her own profile
     public function update(User $user, User $user2)
     {

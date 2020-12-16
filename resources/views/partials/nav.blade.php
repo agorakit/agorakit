@@ -276,12 +276,14 @@
         <span class="text-xs sm:text-base">{{ trans('messages.login') }}</span>
     </a>
 
+    @can('create', App\User::class)
     <a up-modal=".dialog"
         class="text-gray-200 flex flex-col justify-center items-center rounded hover:bg-gray-600 bg-gray-700 h-12 w-auto sm:w-auto px-4 my-2"
         href="{{ url('register') }}">
         
         <span class="text-xs sm:text-base">{{ trans('messages.register') }}</span>
     </a>
+    @endcan
 
     @endguest
 

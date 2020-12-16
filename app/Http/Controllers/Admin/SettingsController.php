@@ -40,6 +40,8 @@ class SettingsController extends Controller
             Setting::set('user_can_create_groups', $request->has('user_can_create_groups') ? 1 : 0);
             Setting::set('user_can_create_secret_groups', $request->has('user_can_create_secret_groups') ? 1 : 0);
             Setting::set('notify_admins_on_group_create', $request->has('notify_admins_on_group_create') ? 1 : 0);
+            Setting::set('user_can_register', $request->has('user_can_register') ? 1 : 0);
+            
             
             
             

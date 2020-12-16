@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Auth;
 use Mail;
+use Gate;
 use App\Mail\UserConfirmation;
 
 class RegisterController extends Controller
@@ -32,7 +33,12 @@ class RegisterController extends Controller
     */
     public function showRegistrationForm()
     {
-        return view('auth.register');
+        if (Gate::allows('create', User::class)) {
+            return view('auth.register');
+        }
+        else {
+            abort(500, 'You cannot create an account on this server');
+        }
     }
 
     /**
@@ -41,6 +47,8 @@ class RegisterController extends Controller
     */
     public function handleRegistrationForm(Request $request)
     {
+        Gate::authorize('create', User::class);
+
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
@@ -68,6 +76,8 @@ class RegisterController extends Controller
     */
     public function showPasswordForm(Request $request)
     {
+        Gate::authorize('create', User::class);
+
         return view('auth.register_password');
     }
 
@@ -77,6 +87,8 @@ class RegisterController extends Controller
     */
     public function handlePasswordForm(Request $request)
     {
+        Gate::authorize('create', User::class);
+
         $request->validate([
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);

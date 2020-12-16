@@ -98,7 +98,7 @@
 
                     <h2>{{ __('Group creation') }}</h2>
                     <div class="form-group">
-                        {!! Form::checkbox('user_can_create_groups', 'yes' , setting('user_can_create_groups')) !!}
+                        {!! Form::checkbox('user_can_create_groups', 'yes' , setting('user_can_create_groups',true)) !!}
                         {{ __('Allow regular users to create groups (if you uncheck this box, only admins will be able to create groups)') }}
 
                         <br />
@@ -107,6 +107,12 @@
                         setting('user_can_create_secret_groups')) !!}
                         {!! __('Allow regular users to create <strong>secret</strong> groups (if you uncheck this box,
                         only admins will be able to create secret groups)')!!}
+
+                        <br/>
+                        {!! Form::checkbox('user_can_register','yes' ,
+                        setting('user_can_register', true)) !!}
+                        {!! __('Allow anyone to create a new user account on this server (unchecking this box will disable registration)')!!}
+                    
                     </div>
 
 
