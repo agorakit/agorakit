@@ -45,6 +45,7 @@ class User extends Authenticatable
 
     protected $rules = [
         'email'    => 'required|email|unique:users',
+        'username'    => 'unique:users|alpha_dash',
     ];
 
     protected $keepRevisionOf = ['name', 'body', 'email', 'admin', 'address'];
@@ -110,6 +111,12 @@ class User extends Authenticatable
         }
         $name = explode("@", $this->email);
         return $name[0];
+    }
+
+
+    public function setUsernameAttribute($value)
+    {
+        $this->attributes['username'] = Str::slug($value);
     }
 
     /**
