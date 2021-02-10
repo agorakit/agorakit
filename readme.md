@@ -11,7 +11,7 @@ Manage communication, decision making, membership, files and events. Flexible em
 In other words: an organized Facebook for the paranoid inside all of us.
 
 Check https://www.agorakit.org for a more colorful overview.
-Read the docs here : https://agorakit.readthedocs.io/en/latest/index.html
+Read the docs here : https://docs.agorakit.org
 
 ## Features
 
