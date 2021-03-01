@@ -14,7 +14,7 @@
         {!! Form::open(array('action' => ['GroupMembershipAdminController@update', $group, $membership])) !!}
 
 
-        <h2>{{trans('messages.notifications_interval')}}</h2>
+        <strong>{{trans('messages.notifications_interval')}}</strong>
 
         <div class="form-group">
             {!! Form::select('notifications', ['instantly' => trans('membership.instantly'), 'hourly' => trans('membership.everyhour'), 'daily' => trans('membership.everyday'), 'weekly' => trans('membership.everyweek'), 'biweekly' => trans('membership.everytwoweek'), 'monthly' => trans('membership.everymonth'), 'never' => trans('membership.never')], $interval, ['class' => 'form-control']) !!}
@@ -22,7 +22,7 @@
 
 
         @can('manage-membership', $group)
-            <h2>{{trans('membership.status')}}</h2>
+            <strong>{{trans('membership.status')}}</strong>
             <div class="form-group">
 
                 {!! Form::select('membership_level',

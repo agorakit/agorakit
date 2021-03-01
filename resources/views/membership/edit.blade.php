@@ -6,15 +6,13 @@
 
 <div class="tab_content">
 
-    <h1>{{trans('messages.preferences_for')}} {{$membership->user->name}} in "{{$group->name}}"</h1>
-
-
+   
 
 
     {!! Form::open(array('action' => ['GroupMembershipController@update', $group, $membership])) !!}
 
 
-    <h2>{{trans('messages.notifications_interval')}}</h2>
+    <h1>{{trans('messages.notifications_interval')}}</h1>
     <div class="help">
         <strong>{{trans('membership.settings_how_does_it_works')}}</strong>
         <p>
@@ -33,17 +31,22 @@
 
 
 
-    <div class="form-group">
-        {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-primary btn-lg']) !!}
-    </div>
+    <div class="mt-5 flex justify-between items-center">
 
+        <div class="form-group">
+            {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-primary btn-lg']) !!}
+        </div>
+
+
+
+        <div>{{trans('membership.if_you_want_to_leave_this_group')}}, <a up-follow
+                href="{{action('GroupMembershipController@destroyConfirm', $group)}}">{{trans('membership.click_here')}}</a>
+        </div>
+    </div>
 
     {!! Form::close() !!}
 
 
-    <p>{{trans('membership.if_you_want_to_leave_this_group')}}, <a up-follow
-            href="{{action('GroupMembershipController@destroyConfirm', $group)}}">{{trans('membership.click_here')}}</a>
-    </p>
 
 
 </div>
