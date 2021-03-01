@@ -253,6 +253,15 @@ up.compiler('#unread', function (element) {
 	});
 });
 
+up.compiler('#last_read', function (element) {
+	console.log(element);
+	element.scrollIntoView({
+		block: 'end',
+		behavior: 'instant',
+		inline: 'nearest'
+	});
+});
+
 
 
 /*

@@ -175,12 +175,14 @@ class GroupDiscussionController extends Controller
         }
 
         $read_count = $discussion->comments->count() - $unread_count;
+        $total_count = $discussion->comments->count();
 
         return view('discussions.show')
         ->with('title', $group->name.' - '.$discussion->name)
         ->with('discussion', $discussion)
         ->with('unread_count', $unread_count)
         ->with('read_count', $read_count)
+        ->with('total_count', $total_count)
         ->with('group', $group)
         ->with('tab', 'discussion');
     }

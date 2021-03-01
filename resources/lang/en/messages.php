@@ -256,4 +256,5 @@ return array (
   'unread' => 'unread',
   'group_tags_help' => 'For your information, here are all the tags in use in this group',
   'new_tags' => 'Add new tags',
+  'all_is_read' => 'You\'ve read everything in this discussion',
 );

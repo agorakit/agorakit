@@ -7,6 +7,14 @@
 
     <div class="discussion mb-5">
 
+
+        @if ($total_count == 0)
+        {{-- no comments yet, we scroll right here --}} 
+                <div id="unread">
+                  
+                </div>
+         @endif
+
         <div class="flex">
 
 
@@ -129,27 +137,54 @@
 
         </div>
 
+         
+
+
          <div class="sm:ml-16 lg:mr-40">
             {!! filter($discussion->body) !!}
         </div>
 
     </div>
 
+    {{--
+    {{$read_count}} / {{$total_count}}
+    --}}
 
 
 
     <div class="comments">
         @foreach($discussion->comments as $comment_key => $comment)
 
-        @if ($comment_key == $read_count)
-        <div class="w-full flex justify-center my-4" id="unread">
-            <div class="inline-block bg-red-700 text-red-100 rounded-full px-4 py-2 text-sm uppercase">
-                <i class="far fa-arrow-alt-circle-down mr-2"></i> {{trans('messages.new')}}
-            </div>
-        </div>
-        @endif
+            {{--
+            {{$comment_key}} / {{$read_count}} / {{$total_count}}
+            --}}
+
+            {{-- this is the first new unread comment --}}
+            @if ($comment_key == $read_count)
+                <div class="w-full flex justify-center my-4" id="unread">
+                    <div class="inline-block bg-red-700 text-red-100 rounded-full px-4 py-2 text-sm uppercase">
+                        <i class="far fa-arrow-alt-circle-down mr-2"></i> {{trans('messages.new')}}
+                    </div>
+                </div>
+            @endif
+
+             
+            
             @include('comments.comment')
+
+
+            {{-- this is the latest comment, it is read, we scroll here --}}
+            @if ($comment_key + 1  == $read_count)
+                <div class="w-full flex justify-center my-4" id="last_read">
+                    <div class="inline-block bg-gray-500 text-gray-100 rounded-full px-4 py-2 text-sm uppercase">
+                        <i class="far fa-arrow-alt-circle-up mr-2"></i> {{trans('messages.all_is_read')}}
+                    </div>
+                </div>
+            @endif
+
         @endforeach
+
+
 
         @auth
             @if(isset($comment))
