@@ -20,7 +20,7 @@
 
     @auth
 
-        @if (Auth::user()->groups()->count() > 0)
+        
         <div class="dropdown">
             <a href="#"
                 class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:mr-2 sm:w-auto sm:px-4 sm:bg-transparent sm:rounded"
@@ -34,13 +34,16 @@
 
             </a>
             <div class="dropdown-menu rounded shadow">
-
+                
+                @if (Auth::user()->groups()->count() > 0)
                 <h6 class="dropdown-header">{{ trans('messages.my_groups') }}</h6>
 
 
                 @foreach (Auth::user()->groups()->orderBy('name')->get() as $group)
                 <a up-target="body" class="dropdown-item" href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
                 @endforeach
+
+                @endif
 
                 @can ('create', \App\Group::class)
                 <div class="dropdown-divider"></div>
@@ -51,7 +54,7 @@
                 @endcan
             </div>
         </div>
-        @endif
+        
     @endauth
 
 
