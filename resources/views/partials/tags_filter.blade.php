@@ -1,6 +1,6 @@
 
 @if ($tags->count() > 0)
-    <div up-hungry class="dropdown">
+    <div class="dropdown">
         <button  class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{trans('messages.filter')}}
             @if (request()->get('tag'))
