@@ -5,6 +5,10 @@
     <a class="mr-4 flex-shrink-0" href="{{ route('groups.files.download', [$file->group, $file]) }}" target="_blank">
         <img class="rounded w-12 h-12" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" />
     </a>
+    @elseif ($file->isFolder())
+    <a class="mr-4 flex-shrink-0" href="{{ route('groups.files.index', [$file->group]) }}?parent={{$file->id}}">
+        <img class="rounded w-12 h-12" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" />
+    </a>
     @else
     <a class="mr-4 flex-shrink-0" up-follow href="{{ route('groups.files.show', [$file->group, $file]) }}">
         <img class="rounded w-12 h-12" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" />
@@ -16,7 +20,6 @@
         <div class="">
             <a href="{{ route('groups.files.download', [$file->group, $file]) }}" target="_blank">
                 {{ $file->name }}
-                <i class="fa fa-external-link"></i>
             </a>
         </div>
 
@@ -41,7 +44,7 @@
                 @endif
             </div>
             <div>
-                <a up-follow href="{{ route('groups.show', [$file->group_id]) }}">
+                <a up-follow href="{{ route('groups.show', [$file->group]) }}">
                     @if ($file->group->isOpen())
                     <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
                     @elseif ($file->group->isClosed())

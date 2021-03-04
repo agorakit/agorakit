@@ -336,6 +336,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('files/create', 'GroupFileController@store')->name('.files.store');
         Route::get('files/createlink', 'GroupFileController@createLink')->name('.files.createlink');
         Route::post('files/createlink', 'GroupFileController@storeLink')->name('.files.storelink');
+        Route::get('files/createfolder', 'GroupFileController@createFolder')->name('.files.createfolder');
+        Route::post('files/createfolder', 'GroupFileController@storeFolder')->name('.files.storefolder');
+        
         Route::get('files/{file}', 'GroupFileController@show')->name('.files.show');
         Route::get('files/{file}/edit', 'GroupFileController@edit')->name('.files.edit');
         Route::post('files/{file}', 'GroupFileController@update')->name('.files.update');

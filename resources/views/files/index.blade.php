@@ -6,7 +6,7 @@
 
     @auth
         <div class="sm:flex justify-between">
-            <div class="flex mb-2">
+            <div class="flex mb-2 space-x-1">
                 @include('partials.tags_filter')
                 @include('partials.sort_dropdown')
             </div>
@@ -23,6 +23,13 @@
                     <a class="btn btn-primary" href="{{ route('groups.files.createlink', $group ) }}">
                         <i class="fa fa-link"></i>
                         {{trans('messages.create_link_button')}}
+                    </a>
+                @endcan
+
+                @can('create-folder', $group)
+                    <a class="btn btn-primary" href="{{ route('groups.files.createfolder', $group ) }}">
+                        <i class="fa fa-folder"></i>
+                        {{trans('messages.create_folder_button')}}
                     </a>
                 @endcan
             </div>

@@ -43,27 +43,31 @@ class GroupFileController extends Controller
         $file->group()->associate($group);
 
 
-         // for the tag filter frop down
-         $tags = $file->getTagsInUse();
-         $tag = $request->get('tag');
+        // for the tag filter frop down
+        $tags = $file->getTagsInUse();
+        $tag = $request->get('tag');
+
+        $parent = $request->get('parent');
 
 
         $files = $group->files()
-        ->where('item_type', '<>', \App\File::FOLDER)
-        ->with('user', 'group', 'tags')
-        ->orderBy('status', 'desc')
-        ->orderBy($request->get('sort', 'created_at'), $request->get('dir', 'desc'))
-        ->when($tag, function ($query) use ($tag) {
-            return $query->withAnyTags($tag);
-        })
-        ->paginate(20);
+            ->with('user', 'group', 'tags')
+            ->orderBy('status', 'desc')
+            ->orderBy($request->get('sort', 'created_at'), $request->get('dir', 'desc'))
+            ->when($tag, function ($query) use ($tag) {
+                return $query->withAnyTags($tag);
+            })
+            ->when($parent, function ($query) use ($parent) {
+                return $query->where('parent_id', $parent);
+            })
+            ->paginate(200);
 
         return view('files.index')
-        ->with('title', $group->name.' - '.trans('messages.files'))
-        ->with('files', $files)
-        ->with('group', $group)
-        ->with('tags', $tags)
-        ->with('tab', 'files');
+            ->with('title', $group->name . ' - ' . trans('messages.files'))
+            ->with('files', $files)
+            ->with('group', $group)
+            ->with('tags', $tags)
+            ->with('tab', 'files');
     }
 
     /**
@@ -78,10 +82,10 @@ class GroupFileController extends Controller
         $this->authorize('view', $file);
 
         return view('files.show')
-        ->with('title', $group->name.' - '.$file->name)
-        ->with('file', $file)
-        ->with('group', $group)
-        ->with('tab', 'files');
+            ->with('title', $group->name . ' - ' . $file->name)
+            ->with('file', $file)
+            ->with('group', $group)
+            ->with('tab', 'files');
     }
 
     /**
@@ -97,10 +101,10 @@ class GroupFileController extends Controller
         $file->group()->associate($group);
 
         return view('files.create')
-        ->with('allowedTags', $file->getTagsInUse())
-        ->with('newTagsAllowed', $file->areNewTagsAllowed())
-        ->with('group', $group)
-        ->with('tab', 'files');
+            ->with('allowedTags', $file->getTagsInUse())
+            ->with('newTagsAllowed', $file->areNewTagsAllowed())
+            ->with('group', $group)
+            ->with('tab', 'files');
     }
 
     public function createLink(Request $request, Group $group)
@@ -112,10 +116,19 @@ class GroupFileController extends Controller
 
 
         return view('files.createlink')
-        ->with('allowedTags', $file->getTagsInUse())
-        ->with('newTagsAllowed', $file->areNewTagsAllowed())
-        ->with('group', $group)
-        ->with('tab', 'files');
+            ->with('allowedTags', $file->getTagsInUse())
+            ->with('newTagsAllowed', $file->areNewTagsAllowed())
+            ->with('group', $group)
+            ->with('tab', 'files');
+    }
+
+    public function createFolder(Request $request, Group $group)
+    {
+        $this->authorize('create-folder', $group);
+
+        return view('files.createfolder')
+            ->with('group', $group)
+            ->with('tab', 'files');
     }
 
     /**
@@ -170,6 +183,100 @@ class GroupFileController extends Controller
     }
 
     /**
+     * Store the folder in the file DB.
+     *
+     * @return Response
+     */
+    public function storeLink(Request $request, Group $group)
+    {
+        $this->authorize('create-file', $group);
+
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'link'  => 'required|url',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $file = new File();
+        $file->name = $request->get('title');
+        $file->path = $request->get('link');
+        $file->item_type = File::LINK;
+        // add group
+        $file->group()->associate($group);
+
+        // add user
+        $file->user()->associate(Auth::user());
+
+        if ($file->save()) {
+            // handle tags
+            if ($request->get('tags')) {
+                $file->tag($request->get('tags'));
+            }
+
+            // update activity timestamp on parent items
+            $group->touch();
+            \Auth::user()->touch();
+
+            flash(trans('messages.ressource_created_successfully'));
+
+            return redirect()->route('groups.files.index', $group);
+        } else {
+            flash(trans('messages.ressource_not_created_successfully'));
+
+            return redirect()->back()->withInput();
+        }
+    }
+
+    /**
+     * Store the folder in the file DB.
+     *
+     * @return Response
+     */
+    public function storeFolder(Request $request, Group $group)
+    {
+        $this->authorize('create-file', $group);
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $file = new File();
+        $file->name = $request->get('name');
+
+        $file->item_type = File::FOLDER;
+        // add group
+        $file->group()->associate($group);
+
+        // add user
+        $file->user()->associate(Auth::user());
+
+        if ($file->save()) {
+            // update activity timestamp on parent items
+            $group->touch();
+            \Auth::user()->touch();
+            flash(trans('messages.ressource_created_successfully'));
+            return redirect()->route('groups.files.index', $group);
+        } else {
+            flash(trans('messages.ressource_not_created_successfully'));
+
+            return redirect()->back()->withInput();
+        }
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param int $id
@@ -180,15 +287,15 @@ class GroupFileController extends Controller
     {
         $this->authorize('update', $file);
 
-       
+
 
         return view('files.edit')
-        ->with('file', $file)
-        ->with('allowedTags', $file->getAllowedTags())
-        ->with('newTagsAllowed', $file->areNewTagsAllowed())
-        ->with('selectedTags', $file->getSelectedTags())
-        ->with('group', $group)
-        ->with('tab', 'file');
+            ->with('file', $file)
+            ->with('allowedTags', $file->getAllowedTags())
+            ->with('newTagsAllowed', $file->areNewTagsAllowed())
+            ->with('selectedTags', $file->getSelectedTags())
+            ->with('group', $group)
+            ->with('tab', 'file');
     }
 
     /**
@@ -228,9 +335,9 @@ class GroupFileController extends Controller
         $this->authorize('delete', $file);
 
         return view('files.delete')
-        ->with('group', $group)
-        ->with('file', $file)
-        ->with('tab', 'file');
+            ->with('group', $group)
+            ->with('file', $file)
+            ->with('tab', 'file');
     }
 
     /**
@@ -250,56 +357,7 @@ class GroupFileController extends Controller
         return redirect()->route('groups.files.index', [$group]);
     }
 
-    /**
-     * Store the folder in the file DB.
-     *
-     * @return Response
-     */
-    public function storeLink(Request $request, Group $group)
-    {
-        $this->authorize('create-file', $group);
 
-        $validator = Validator::make($request->all(), [
-            'title' => 'required',
-            'link'  => 'required|url',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()
-            ->back()
-            ->withErrors($validator)
-            ->withInput();
-        }
-
-        $file = new File();
-        $file->name = $request->get('title');
-        $file->path = $request->get('link');
-        $file->item_type = File::LINK;
-        // add group
-        $file->group()->associate($group);
-
-        // add user
-        $file->user()->associate(Auth::user());
-
-        if ($file->save()) {
-            // handle tags
-            if ($request->get('tags')) {
-                $file->tag($request->get('tags'));
-            }
-
-            // update activity timestamp on parent items
-            $group->touch();
-            \Auth::user()->touch();
-
-            flash(trans('messages.ressource_created_successfully'));
-
-            return redirect()->route('groups.files.index', $group);
-        } else {
-            flash(trans('messages.ressource_not_created_successfully'));
-
-            return redirect()->back()->withInput();
-        }
-    }
 
     public function pin(Group $group, File $file)
     {
