@@ -53,6 +53,11 @@
     @endif
 
     <div class="files items mt-5">
+        @forelse( $folders as $file )
+            @include('files.file')
+        @empty
+        @endforelse
+
         @forelse( $files as $file )
             @include('files.file')
         @empty

@@ -21,7 +21,7 @@
             @if ($file->isFolder())
                 <a up-follow href="{{ route('groups.files.index', ['group' => $file->group, 'parent' => $file]) }}">
             @else
-                <a href="{{ route('groups.files.show', [$file->group, $file]) }}" target="_blank">
+                <a up-follow href="{{ route('groups.files.show', [$file->group, $file]) }}">
             @endif
                 {{ $file->name }}
             </a>

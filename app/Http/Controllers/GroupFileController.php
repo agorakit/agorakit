@@ -62,8 +62,20 @@ class GroupFileController extends Controller
         }
 
 
+        $folders = $group->files()
+        ->with('user', 'group', 'tags')
+        ->where('item_type', File::FOLDER)
+        ->when($parent, function ($query) use ($parent) {
+            return $query->where('parent_id', $parent);
+        })
+        ->when(!$parent, function ($query) {
+            return $query->whereNull('parent_id');
+        })
+        ->get();
+
         $files = $group->files()
             ->with('user', 'group', 'tags')
+            ->where('item_type', '<>', File::FOLDER)
             ->orderBy('status', 'desc')
             ->orderBy($request->get('sort', 'created_at'), $request->get('dir', 'desc'))
             ->when($tag, function ($query) use ($tag) {
@@ -75,10 +87,12 @@ class GroupFileController extends Controller
             ->when(!$parent, function ($query) {
                 return $query->whereNull('parent_id');
             })
-            ->paginate(200);
+            ->paginate(20);
+        
 
         return view('files.index')
             ->with('title', $group->name . ' - ' . trans('messages.files'))
+            ->with('folders', $folders)
             ->with('files', $files)
             ->with('parent', $parent)
             ->with('parents', $parents)
@@ -98,6 +112,11 @@ class GroupFileController extends Controller
     public function show(Group $group, File $file)
     {
         $this->authorize('view', $file);
+
+        if ($file->isFolder()) {
+            return redirect()->route('groups.files.index', ['group' => $group, 'parent' => $file]);
+        }
+
 
         return view('files.show')
             ->with('title', $group->name . ' - ' . $file->name)
@@ -193,11 +212,10 @@ class GroupFileController extends Controller
                 }
 
                 flash(trans('messages.ressource_created_successfully'));
-                if (isset($parent)) {
-                    return redirect()->route('groups.files.index', ['group' => $group, 'parent' => $parent]);
-                } else {
-                    return redirect()->route('groups.files.index', $group);
-                }
+                
+                return redirect()->route('groups.files.index', ['group' => $group, 'parent' => $parent]);
+                
+                
             } else {
                 abort(400, trans('messages.no_file_selected'));
             }
@@ -257,8 +275,8 @@ class GroupFileController extends Controller
             \Auth::user()->touch();
 
             flash(trans('messages.ressource_created_successfully'));
+            return redirect()->route('groups.files.index', ['group' => $group, 'parent' => $parent]);
 
-            return redirect()->route('groups.files.index', $group);
         } else {
             flash(trans('messages.ressource_not_created_successfully'));
 
@@ -306,7 +324,7 @@ class GroupFileController extends Controller
             $group->touch();
             \Auth::user()->touch();
             flash(trans('messages.ressource_created_successfully'));
-            return redirect()->route('groups.files.index', $group);
+            return redirect()->route('groups.files.index', ['group' => $group, 'parent' => $parent]);
         } else {
             flash(trans('messages.ressource_not_created_successfully'));
 
