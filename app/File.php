@@ -78,6 +78,43 @@ class File extends Model
         return route('groups.files.download', [$this->group, $this]);
     }
 
+    /**
+     * Returns the parent if it exists
+     */
+    public function parent()
+    {
+        return $this->belongsTo(File::class, 'parent_id');
+    }
+
+    /**
+     * Returns all the parents as a collection of App\File
+     */
+    public function parents()
+    {
+       
+        if ($this->parent) {
+            $parents = collect();
+
+            $parent = $this->parent;
+            
+
+            // max parent depth is 10 // code is ugly but at least it's not recursive so it stops after 10 whatever happens // need to add error checking
+            for ($i = 0; $i < 10; $i++) {
+                $parents->add($parent);
+                if ($parent->parent) {
+                    $parent = $parent->parent;
+                } else {
+                    break;
+                }
+            }
+
+            return $parents;
+        }
+
+        return false;
+        
+    }
+
     public function isFile()
     {
         return $this->item_type == $this::FILE;
@@ -149,15 +186,15 @@ class File extends Model
     {
         if ($this->exists) {
             // generate filenames and path
-            $storage_path = 'groups/'.$this->group->id.'/files';
+            $storage_path = 'groups/' . $this->group->id . '/files';
 
             // simplified filename
-            $filename = $this->id.'-'.str_slug(pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME)).'.'.$uploaded_file->guessExtension();
+            $filename = $this->id . '-' . str_slug(pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $uploaded_file->guessExtension();
 
             $complete_path = $uploaded_file->storeAs($storage_path, $filename);
 
             $this->path = $complete_path;
-            $this->name = pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME).'.'.$uploaded_file->guessExtension();
+            $this->name = pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME) . '.' . $uploaded_file->guessExtension();
             $this->original_filename = $uploaded_file->getClientOriginalName();
             $this->mime = $uploaded_file->getMimeType();
             $this->filesize = $uploaded_file->getSize();
