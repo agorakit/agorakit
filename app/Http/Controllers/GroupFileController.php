@@ -49,6 +49,18 @@ class GroupFileController extends Controller
 
         $parent = $request->get('parent');
 
+        if ($parent) {
+            // load the current parent and it's parents in a single "parents" collection
+            $file = File::findOrFail($parent);
+            $parents = collect();
+            $parents->add($file);
+            if ($file->parents()) {
+                $parents->add($file->parents());
+            }
+        } else {
+            $parents = false;
+        }
+
 
         $files = $group->files()
             ->with('user', 'group', 'tags')
@@ -65,6 +77,7 @@ class GroupFileController extends Controller
         return view('files.index')
             ->with('title', $group->name . ' - ' . trans('messages.files'))
             ->with('files', $files)
+            ->with('parents', $parents)
             ->with('group', $group)
             ->with('tags', $tags)
             ->with('tab', 'files');

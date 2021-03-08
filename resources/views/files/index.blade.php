@@ -38,6 +38,18 @@
     @endauth
 
 
+    @if ($parents)
+    <a href="{{ route('groups.files.index', $group ) }}">
+    Home
+    </a>
+        @foreach ($parents as $parent)
+        > 
+        <a href="{{ route('groups.files.index', $group ) }}?parent={{$parent->id}}">
+        {{$parent->name}} 
+        </a>
+        @endforeach
+
+    @endif
 
     <div class="files items mt-5">
         @forelse( $files as $file )
