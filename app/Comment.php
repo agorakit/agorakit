@@ -16,14 +16,11 @@ class Comment extends Model
     use SearchableTrait;
 
     protected $rules = [
-        'body'    => 'required|min:5',
+        'body'    => 'required',
         'user_id' => 'required|exists:users,id',
     ];
 
-    /*
-    protected $validationMessages = [
-    'body.required' => trans("Comment body is required")];
-    */
+    
 
 
     protected $fillable = ['body'];
