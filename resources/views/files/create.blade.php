@@ -9,7 +9,7 @@
         <h1>{{trans('messages.upload_files')}}</h1>
 
 
-        {!! Form::open(['url' => route('groups.files.create', $group), 'files'=>true]) !!}
+        {!! Form::open(['url' => route('groups.files.create', ['group' => $group, 'parent' => $parent]), 'files'=>true]) !!}
         <div class="form-group mt-4 mb-4">
             <input name="files[]" id="file" type="file" multiple="mutiple" title="{{trans('messages.select_one_or_more_files')}}">
         </div>

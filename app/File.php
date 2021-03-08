@@ -89,18 +89,22 @@ class File extends Model
     /**
      * Returns all the parents as a collection of App\File
      */
-    public function parents()
+    public function parents($includemyself = false)
     {
-       
+        $parents = collect();
+
+        if ($includemyself) {
+            $parents->push($this);
+        }
+
         if ($this->parent) {
-            $parents = collect();
+            
 
             $parent = $this->parent;
             
-
             // max parent depth is 10 // code is ugly but at least it's not recursive so it stops after 10 whatever happens // need to add error checking
             for ($i = 0; $i < 10; $i++) {
-                $parents->add($parent);
+                $parents->push($parent);
                 if ($parent->parent) {
                     $parent = $parent->parent;
                 } else {
@@ -111,8 +115,19 @@ class File extends Model
             return $parents;
         }
 
-        return false;
+        return $parents;
         
+    }
+
+    public function setParent(File $parent)
+    {
+        if ($parent->group_id == $this->group_id) {
+            $this->parent_id = $parent->id;
+            $this->save();
+            return $this;
+        }
+        abort(500, 'Trying to set parent on a file from a different group or no group defined');
+        return false;
     }
 
     public function isFile()

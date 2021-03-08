@@ -13,21 +13,21 @@
 
             <div class="">
                 @can('create-file', $group)
-                    <a class="btn btn-primary" href="{{ route('groups.files.create', $group ) }}">
+                    <a class="btn btn-primary" href="{{ route('groups.files.create', ['group' => $group, 'parent' =>  $parent] ) }}">
                         <i class="fa fa-file"></i>
                         {{trans('messages.create_file_button')}}
                     </a>
                 @endcan
 
                 @can('create-file', $group)
-                    <a class="btn btn-primary" href="{{ route('groups.files.createlink', $group ) }}">
+                    <a class="btn btn-primary" href="{{ route('groups.files.createlink', ['group' => $group, 'parent' =>  $parent] ) }}">
                         <i class="fa fa-link"></i>
                         {{trans('messages.create_link_button')}}
                     </a>
                 @endcan
 
                 @can('create-folder', $group)
-                    <a class="btn btn-primary" href="{{ route('groups.files.createfolder', $group ) }}">
+                    <a class="btn btn-primary" href="{{ route('groups.files.createfolder', ['group' => $group, 'parent' =>  $parent] ) }}">
                         <i class="fa fa-folder"></i>
                         {{trans('messages.create_folder_button')}}
                     </a>
@@ -38,14 +38,15 @@
     @endauth
 
 
-    @if ($parents)
-    <a href="{{ route('groups.files.index', $group ) }}">
+    @if ($breadcrumb)
+
+    <a up-follow href="{{ route('groups.files.index', $group ) }}">
     Home
     </a>
-        @foreach ($parents as $parent)
+        @foreach ($breadcrumb as $my_parent)
         > 
-        <a href="{{ route('groups.files.index', $group ) }}?parent={{$parent->id}}">
-        {{$parent->name}} 
+        <a up-follow href="{{ route('groups.files.index', ['group' => $group, 'parent' =>  $my_parent->id]) }}">
+        {{$my_parent->name}} 
         </a>
         @endforeach
 

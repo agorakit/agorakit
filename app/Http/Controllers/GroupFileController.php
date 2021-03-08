@@ -48,17 +48,17 @@ class GroupFileController extends Controller
         $tag = $request->get('tag');
 
         $parent = $request->get('parent');
+        
+        
 
         if ($parent) {
             // load the current parent and it's parents in a single "parents" collection
             $file = File::findOrFail($parent);
-            $parents = collect();
-            $parents->add($file);
-            if ($file->parents()) {
-                $parents->add($file->parents());
-            }
+            $parents = $file->parents(true);
+            $breadcrumb = $parents->reverse();
         } else {
             $parents = false;
+            $breadcrumb = false;
         }
 
 
@@ -72,12 +72,17 @@ class GroupFileController extends Controller
             ->when($parent, function ($query) use ($parent) {
                 return $query->where('parent_id', $parent);
             })
+            ->when(!$parent, function ($query) {
+                return $query->whereNull('parent_id');
+            })
             ->paginate(200);
 
         return view('files.index')
             ->with('title', $group->name . ' - ' . trans('messages.files'))
             ->with('files', $files)
+            ->with('parent', $parent)
             ->with('parents', $parents)
+            ->with('breadcrumb', $breadcrumb)
             ->with('group', $group)
             ->with('tags', $tags)
             ->with('tab', 'files');
@@ -106,21 +111,24 @@ class GroupFileController extends Controller
      *
      * @return Response
      */
-    public function create(Request $request, Group $group)
+    public function create(Request $request, Group $group, File $parent = null)
     {
         $this->authorize('create-file', $group);
 
         $file = new File;
         $file->group()->associate($group);
 
+
+
         return view('files.create')
             ->with('allowedTags', $file->getTagsInUse())
             ->with('newTagsAllowed', $file->areNewTagsAllowed())
             ->with('group', $group)
+            ->with('parent', $parent)
             ->with('tab', 'files');
     }
 
-    public function createLink(Request $request, Group $group)
+    public function createLink(Request $request, Group $group, File $parent = null)
     {
         $this->authorize('create-link', $group);
 
@@ -132,15 +140,17 @@ class GroupFileController extends Controller
             ->with('allowedTags', $file->getTagsInUse())
             ->with('newTagsAllowed', $file->areNewTagsAllowed())
             ->with('group', $group)
+            ->with('parent', $parent)
             ->with('tab', 'files');
     }
 
-    public function createFolder(Request $request, Group $group)
+    public function createFolder(Request $request, Group $group, File $parent = null)
     {
         $this->authorize('create-folder', $group);
 
         return view('files.createfolder')
             ->with('group', $group)
+            ->with('parent', $parent)
             ->with('tab', 'files');
     }
 
@@ -149,7 +159,7 @@ class GroupFileController extends Controller
      *
      * @return Response
      */
-    public function store(Request $request, Group $group)
+    public function store(Request $request, Group $group, File $parent = null)
     {
         $this->authorize('create-file', $group);
 
@@ -169,6 +179,11 @@ class GroupFileController extends Controller
                         $file->tag($request->get('tags'));
                     }
 
+
+                    if ($parent) {
+                        $file->setParent($parent);
+                    }
+
                     // Add file to disk
                     $file->addToStorage($uploaded_file);
 
@@ -179,7 +194,7 @@ class GroupFileController extends Controller
 
                 flash(trans('messages.ressource_created_successfully'));
                 if (isset($parent)) {
-                    return redirect()->route('groups.files.show', [$group, $parent]);
+                    return redirect()->route('groups.files.index', ['group' => $group, 'parent' => $parent]);
                 } else {
                     return redirect()->route('groups.files.index', $group);
                 }
@@ -200,7 +215,7 @@ class GroupFileController extends Controller
      *
      * @return Response
      */
-    public function storeLink(Request $request, Group $group)
+    public function storeLink(Request $request, Group $group, File $parent = null)
     {
         $this->authorize('create-file', $group);
 
@@ -225,6 +240,11 @@ class GroupFileController extends Controller
 
         // add user
         $file->user()->associate(Auth::user());
+
+        // set parent
+        if ($parent) {
+            $file->setParent($parent);
+        }
 
         if ($file->save()) {
             // handle tags
@@ -251,7 +271,7 @@ class GroupFileController extends Controller
      *
      * @return Response
      */
-    public function storeFolder(Request $request, Group $group)
+    public function storeFolder(Request $request, Group $group, File $parent = null)
     {
         $this->authorize('create-file', $group);
 
@@ -275,6 +295,11 @@ class GroupFileController extends Controller
 
         // add user
         $file->user()->associate(Auth::user());
+
+        // set parent
+        if ($parent) {
+            $file->setParent($parent);
+        }
 
         if ($file->save()) {
             // update activity timestamp on parent items

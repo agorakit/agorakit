@@ -6,11 +6,11 @@
         <img class="rounded w-12 h-12" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" />
     </a>
     @elseif ($file->isFolder())
-    <a class="mr-4 flex-shrink-0" href="{{ route('groups.files.index', [$file->group]) }}?parent={{$file->id}}">
+    <a up-follow class="mr-4 flex-shrink-0" href="{{ route('groups.files.index', ['group' => $file->group, 'parent' => $file]) }}">
         <img class="rounded w-12 h-12" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" />
     </a>
     @else
-    <a class="mr-4 flex-shrink-0" up-follow href="{{ route('groups.files.show', [$file->group, $file]) }}">
+    <a up-follow  class="mr-4 flex-shrink-0" up-follow href="{{ route('groups.files.show', [$file->group, $file]) }}">
         <img class="rounded w-12 h-12" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" />
     </a>
     @endif
@@ -18,7 +18,11 @@
 
     <div class="w-100 flex-grow">
         <div class="">
-            <a href="{{ route('groups.files.download', [$file->group, $file]) }}" target="_blank">
+            @if ($file->isFolder())
+                <a up-follow href="{{ route('groups.files.index', ['group' => $file->group, 'parent' => $file]) }}">
+            @else
+                <a href="{{ route('groups.files.show', [$file->group, $file]) }}" target="_blank">
+            @endif
                 {{ $file->name }}
             </a>
         </div>

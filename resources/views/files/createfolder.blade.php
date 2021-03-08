@@ -11,7 +11,7 @@
         <p>{{trans('messages.create_folder_help')}}</p>
 
 
-        {!! Form::open(['url' => route('groups.files.createfolder', $group)]) !!}
+        {!! Form::open(['url' => route('groups.files.createfolder', ['group' => $group, 'parent' => $parent])]) !!}
 
 
         <div class="form-group">
