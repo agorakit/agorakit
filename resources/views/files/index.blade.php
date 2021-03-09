@@ -38,22 +38,27 @@
     @endauth
 
 
-    @if ($breadcrumb)
+
+    <div class="mt-5 text-2xl text-gray-800">
 
     <a  up-follow href="{{ route('groups.files.index', $group ) }}">
-    <i class="fa fa-home"></i> 
-    <span class="underline">{{trans('messages.home')}}</span>
+        <i class="fa fa-home"></i> 
+        <span class="">{{trans('messages.home')}}</span>
     </a>
+
+    @if ($breadcrumb)
         @foreach ($breadcrumb as $my_parent)
-        > 
-        <a up-follow class="underline" href="{{ route('groups.files.index', ['group' => $group, 'parent' =>  $my_parent->id]) }}">
+        <i class="fa fa-angle-right fill-current text-gray-600"></i> 
+        <a up-follow class="" href="{{ route('groups.files.index', ['group' => $group, 'parent' =>  $my_parent->id]) }}">
         {{$my_parent->name}} 
         </a>
         @endforeach
 
     @endif
 
-    <div class="files items mt-5">
+    </div>
+
+    <div class="files items mt-2">
         @forelse( $folders as $file )
             @include('files.file')
         @empty
@@ -62,7 +67,8 @@
         @forelse( $files as $file )
             @include('files.file')
         @empty
-            {{trans('messages.nothing_yet')}}
+
+            <div class="help">{{trans('messages.nothing_yet')}}</div>
         @endforelse
         {{$files->appends(request()->query())->links()}}
     </div>
