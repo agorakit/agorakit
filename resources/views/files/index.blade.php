@@ -40,12 +40,13 @@
 
     @if ($breadcrumb)
 
-    <a up-follow href="{{ route('groups.files.index', $group ) }}">
-    Home
+    <a  up-follow href="{{ route('groups.files.index', $group ) }}">
+    <i class="fa fa-home"></i> 
+    <span class="underline">{{trans('messages.home')}}</span>
     </a>
         @foreach ($breadcrumb as $my_parent)
         > 
-        <a up-follow href="{{ route('groups.files.index', ['group' => $group, 'parent' =>  $my_parent->id]) }}">
+        <a up-follow class="underline" href="{{ route('groups.files.index', ['group' => $group, 'parent' =>  $my_parent->id]) }}">
         {{$my_parent->name}} 
         </a>
         @endforeach

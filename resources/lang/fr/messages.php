@@ -258,4 +258,8 @@ return array (
     'sort_by_size_asc' => 'Trier par taille en ordre croissant',
   ),
   'deleteGroup' => 'Supprimer le groupe',
+  'create_folder' => 'Créer un dossier',
+  'create_folder_button' => 'Créer un dossier',
+  'create_folder_help' => 'Entrez le nom du dossier à créer',
+  'home' => 'Racine',
 );

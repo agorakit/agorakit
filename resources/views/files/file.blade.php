@@ -17,7 +17,7 @@
 
 
     <div class="w-100 flex-grow">
-        <div class="">
+        <div class="text-lg">
             @if ($file->isFolder())
                 <a up-follow href="{{ route('groups.files.index', ['group' => $file->group, 'parent' => $file]) }}">
             @else
@@ -32,8 +32,9 @@
 
 
 
-        <div class="text-xs text-gray-600">
-            <div>
+
+        <div class="text-xs text-gray-500 flex space-x-2 hover:text-gray-600">
+           
                 @if ($file->isPinned())
                 <div class="badge badge-primary" style="min-width: 2em; margin: 0 2px;">
                     <i class="fas fa-thumbtack"></i>
@@ -46,9 +47,9 @@
                     {{__('Archived')}}
                 </div>
                 @endif
-            </div>
+           
             <div>
-                <a up-follow href="{{ route('groups.show', [$file->group]) }}">
+                
                     @if ($file->group->isOpen())
                     <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
                     @elseif ($file->group->isClosed())
@@ -57,13 +58,13 @@
                     <i class="fa fa-eye-slash" title="{{trans('group.secret')}}"></i>
                     @endif
                     {{ $file->group->name }}
-                </a>
+                
             </div>
 
             <div>
-                <a up-follow href="{{ route('users.show', [$file->user]) }}">
+                
                     <i class="fa fa-user-circle"></i> {{ $file->user->name }}
-                </a>
+                
             </div>
 
             <div>
@@ -91,6 +92,8 @@
             @endif
 
         </div>
+
+        
 
     </div>
 
