@@ -344,12 +344,12 @@ class GroupFileController extends Controller
         $this->authorize('update', $file);
 
 
-
         return view('files.edit')
             ->with('file', $file)
             ->with('allowedTags', $file->getAllowedTags())
             ->with('newTagsAllowed', $file->areNewTagsAllowed())
             ->with('selectedTags', $file->getSelectedTags())
+            ->with('folders', $group->folders)
             ->with('group', $group)
             ->with('tab', 'file');
     }
@@ -373,6 +373,11 @@ class GroupFileController extends Controller
 
         if ($request->get('name')) {
             $file->name = $request->get('name');
+        }
+
+        if ($request->get('parent')) {
+            // TODO handle null case (aka root)
+            $file->setParent(File::find($request->get('parent')));
         }
 
         if ($file->save()) {

@@ -98,10 +98,10 @@ class File extends Model
         }
 
         if ($this->parent) {
-            
+
 
             $parent = $this->parent;
-            
+
             // max parent depth is 10 // code is ugly but at least it's not recursive so it stops after 10 whatever happens // need to add error checking
             for ($i = 0; $i < 10; $i++) {
                 $parents->push($parent);
@@ -116,18 +116,34 @@ class File extends Model
         }
 
         return $parents;
-        
     }
 
+    /**
+     * Sets the parent of the file. Validates the parent before saving
+     * Never set parent_id directly, use this function instead
+     */
     public function setParent(File $parent)
     {
-        if ($parent->group_id == $this->group_id) {
-            $this->parent_id = $parent->id;
-            $this->save();
-            return $this;
+        // Validate parent :  not self, is a folder, exists, is in same group
+        if ($parent->group_id <> $this->group_id) {
+            // TODO throw error instead
+            abort(500, 'Trying to set parent on a file from a different group or no group defined');
         }
-        abort(500, 'Trying to set parent on a file from a different group or no group defined');
-        return false;
+
+        if ($parent->id == $this->id) {
+            // TODO throw error instead
+            abort(500, 'Cannot set parent to myself');
+        }
+
+        if (!$parent->isFolder()) {
+            // TODO throw error instead
+            abort(500, 'Parent must be a folder');
+        }
+
+
+        $this->parent_id = $parent->id;
+        $this->save();
+        return $this;
     }
 
     public function isFile()
