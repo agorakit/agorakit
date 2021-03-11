@@ -65,6 +65,8 @@ class GroupFileController extends Controller
         $folders = $group->files()
         ->with('user', 'group', 'tags')
         ->where('item_type', File::FOLDER)
+        ->orderBy('status', 'desc')
+        ->orderBy('name', 'asc')
         ->when($parent, function ($query) use ($parent) {
             return $query->where('parent_id', $parent);
         })
@@ -361,7 +363,7 @@ class GroupFileController extends Controller
      *
      * @return Response
      */
-    public function update(Request $request, Group $group, File $file)
+    public function update(Request $request, Group $group, File $file, File $parent = null)
     {
         $this->authorize('update', $file);
 
@@ -375,15 +377,21 @@ class GroupFileController extends Controller
             $file->name = $request->get('name');
         }
 
-        if ($request->get('parent')) {
-            // TODO handle null case (aka root)
-            $file->setParent(File::find($request->get('parent')));
+        if ($request->has('parent')) {
+             // handle null case (aka root)
+            if ($request->get('parent') == 'root') {
+                $parent = null;
+                $file->setParent(null);
+            } else {
+                $parent = File::find($request->get('parent'));
+                $file->setParent($parent);
+            }
         }
 
         if ($file->save()) {
             flash(trans('messages.ressource_updated_successfully'));
 
-            return redirect()->route('groups.files.index', [$group]);
+            return redirect()->route('groups.files.index', ['group' => $group, 'parent' => $parent]);
         } else {
             flash(trans('messages.ressource_not_updated_successfully'));
 

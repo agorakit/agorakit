@@ -121,9 +121,17 @@ class File extends Model
     /**
      * Sets the parent of the file. Validates the parent before saving
      * Never set parent_id directly, use this function instead
+     * Use setParent(null) to move to root
      */
-    public function setParent(File $parent)
+    public function setParent(File $parent = null)
     {
+        // handle case where parent is false : we move the file to root
+        if (is_null($parent)) {
+            $this->parent_id = null;
+            $this->save();
+            return $this;
+        }
+
         // Validate parent :  not self, is a folder, exists, is in same group
         if ($parent->group_id <> $this->group_id) {
             // TODO throw error instead

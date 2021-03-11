@@ -261,5 +261,7 @@ return array (
   'create_folder' => 'Créer un dossier',
   'create_folder_button' => 'Créer un dossier',
   'create_folder_help' => 'Entrez le nom du dossier à créer',
-  'home' => 'Racine',
+  'home' => 'Accueil',
+  'folder' => 'Dossier',
+  'root' => 'Racine',
 );
