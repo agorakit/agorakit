@@ -1,0 +1,2 @@
+php artisan translations:import
+php artisan translations:find
