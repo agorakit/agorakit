@@ -1,10 +1,7 @@
-@extends('app')
+@extends('dialog')
 
 @section('content')
 
-    @include('groups.tabs')
-
-    <div class="tab_content">
 
         <h1>{{trans('messages.create_link')}}</h1>
 
@@ -28,11 +25,16 @@
 
         </div>
 
-        <input class="btn btn-primary" type="submit" name="{{trans('messages.create')}}"/>
+        
+
+
+
+<div class="flex justify-between items-center my-8">
+    <input class="btn btn-primary" type="submit" name="{{trans('messages.create')}}"/>
+    <a href="#" class="js-back">{{trans('messages.cancel')}}</a>
+</div>
 
         {!! Form::close() !!}
 
-
-    </div>
 
 @endsection

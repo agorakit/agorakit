@@ -44,13 +44,13 @@
         <div class="text-xs text-gray-500 flex space-x-2 hover:text-gray-600">
            
                 @if ($file->isPinned())
-                <div class="badge badge-primary" style="min-width: 2em; margin: 0 2px;">
+                <div>
                     <i class="fas fa-thumbtack"></i>
                     {{__('Pinned')}}
                 </div>
                 @endif
                 @if ($file->isArchived())
-                <div class="badge badge-secondary" style="min-width: 2em; margin: 0 2px;">
+                <div>
                     <i class="fa fa-archive"></i>
                     {{__('Archived')}}
                 </div>

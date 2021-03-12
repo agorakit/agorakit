@@ -38,7 +38,7 @@
 
 
   <div class="sm:shadow-xl sm:rounded-lg mx-auto max-w-xl bg-white p-4 m-4">
-    <div class=" dialog  ">
+    <div class="dialog  ">
         @yield('content')
     </div>
   </div>
@@ -49,16 +49,21 @@
     <a up-follow href="https://www.agorakit.org">Agorakit ({{config('agorakit.version')}})</a>
   </div>
 
+ <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/unpoly.js') }}"></script>
+    <script src="{{ asset('js/fullcalendar.js') }}"></script>
+    <script src="{{ asset('js/ckeditor.js') }}"></script>
 
-  <!-- Scripts -->
-  <script src="{{ asset('js/app.js') }}"></script>
-  <script src="{{ asset('js/unpoly.min.js') }}"></script>
+    <script src="{{ asset('js/datatables.min.js') }}"></script>
 
-  @yield('js')
-  @stack('js')
 
-  <script src="{{ asset('js/compilers.js') }}"></script>
+    <script src="{{ asset('js/select2.min.js') }}"></script>
 
+
+
+    @yield('js')
+    @stack('js')
   <!-- footer -->
   @yield('footer')
 

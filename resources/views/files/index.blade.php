@@ -16,7 +16,7 @@
 
     <div class="">
         @can('create-file', $group)
-        <a class="btn btn-primary"
+        <a up-modal=".dialog" class="btn btn-primary"
             href="{{ route('groups.files.create', ['group' => $group, 'parent' =>  $parent] ) }}">
             <i class="fa fa-file"></i>
             {{trans('messages.create_file_button')}}
@@ -24,7 +24,7 @@
         @endcan
 
         @can('create-file', $group)
-        <a class="btn btn-primary"
+        <a up-modal=".dialog" class="btn btn-primary"
             href="{{ route('groups.files.createlink', ['group' => $group, 'parent' =>  $parent] ) }}">
             <i class="fa fa-link"></i>
             {{trans('messages.create_link_button')}}
@@ -32,7 +32,7 @@
         @endcan
 
         @can('create-folder', $group)
-        <a class="btn btn-primary"
+        <a up-modal=".dialog" class="btn btn-primary"
             href="{{ route('groups.files.createfolder', ['group' => $group, 'parent' =>  $parent] ) }}">
             <i class="fa fa-folder"></i>
             {{trans('messages.create_folder_button')}}
