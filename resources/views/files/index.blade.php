@@ -67,8 +67,6 @@
         @forelse( $files as $file )
             @include('files.file')
         @empty
-
-            <div class="help">{{trans('messages.nothing_yet')}}</div>
         @endforelse
         {{$files->appends(request()->query())->links()}}
     </div>
