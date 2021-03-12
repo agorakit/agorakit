@@ -78,6 +78,82 @@ class File extends Model
         return route('groups.files.download', [$this->group, $this]);
     }
 
+    /**
+     * Returns the parent if it exists
+     */
+    public function parent()
+    {
+        return $this->belongsTo(File::class, 'parent_id');
+    }
+
+    /**
+     * Returns all the parents as a collection of App\File
+     */
+    public function parents($includemyself = false)
+    {
+        $parents = collect();
+
+        if ($includemyself) {
+            $parents->push($this);
+        }
+
+        if ($this->parent) {
+
+
+            $parent = $this->parent;
+
+            // max parent depth is 10 // code is ugly but at least it's not recursive so it stops after 10 whatever happens // need to add error checking
+            for ($i = 0; $i < 10; $i++) {
+                $parents->push($parent);
+                if ($parent->parent) {
+                    $parent = $parent->parent;
+                } else {
+                    break;
+                }
+            }
+
+            return $parents;
+        }
+
+        return $parents;
+    }
+
+    /**
+     * Sets the parent of the file. Validates the parent before saving
+     * Never set parent_id directly, use this function instead
+     * Use setParent(null) to move to root
+     */
+    public function setParent(File $parent = null)
+    {
+        // handle case where parent is false : we move the file to root
+        if (is_null($parent)) {
+            $this->parent_id = null;
+            $this->save();
+            return $this;
+        }
+
+        // Validate parent :  not self, is a folder, exists, is in same group
+        if ($parent->group_id <> $this->group_id) {
+            // TODO throw error instead
+            abort(500, 'Trying to set parent on a file from a different group or no group defined');
+        }
+
+        if ($parent->id == $this->id) {
+            // TODO throw error instead
+            abort(500, 'Cannot set parent to myself');
+        }
+
+        if (!$parent->isFolder()) {
+            // TODO throw error instead
+            abort(500, 'Parent must be a folder');
+        }
+
+
+        $this->parent_id = $parent->id;
+        $this->save();
+        return $this;
+    }
+
     public function isFile()
     {
         return $this->item_type == $this::FILE;
@@ -149,15 +225,15 @@ class File extends Model
     {
         if ($this->exists) {
             // generate filenames and path
-            $storage_path = 'groups/'.$this->group->id.'/files';
+            $storage_path = 'groups/' . $this->group->id . '/files';
 
             // simplified filename
-            $filename = $this->id.'-'.str_slug(pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME)).'.'.$uploaded_file->guessExtension();
+            $filename = $this->id . '-' . str_slug(pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $uploaded_file->guessExtension();
 
             $complete_path = $uploaded_file->storeAs($storage_path, $filename);
 
             $this->path = $complete_path;
-            $this->name = pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME).'.'.$uploaded_file->guessExtension();
+            $this->name = pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME) . '.' . $uploaded_file->guessExtension();
             $this->original_filename = $uploaded_file->getClientOriginalName();
             $this->mime = $uploaded_file->getMimeType();
             $this->filesize = $uploaded_file->getSize();

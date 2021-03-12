@@ -58,7 +58,7 @@ class FileDownloadController extends Controller
 
 
         if ($file->isFolder()) {
-            return redirect('images/extensions/folder.png');
+            return redirect('images/extensions/folder.svg');
         }
 
         return redirect('images/extensions/'.$file->icon().'.svg');

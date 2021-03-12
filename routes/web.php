@@ -332,10 +332,13 @@ Route::group(['middleware' => ['web']], function () {
 
         // Files
         Route::get('files', 'GroupFileController@index')->name('.files.index');
-        Route::get('files/create', 'GroupFileController@create')->name('.files.create');
-        Route::post('files/create', 'GroupFileController@store')->name('.files.store');
-        Route::get('files/createlink', 'GroupFileController@createLink')->name('.files.createlink');
-        Route::post('files/createlink', 'GroupFileController@storeLink')->name('.files.storelink');
+        Route::get('files/create/{parent?}', 'GroupFileController@create')->name('.files.create');
+        Route::post('files/create/{parent?}', 'GroupFileController@store')->name('.files.store');
+        Route::get('files/createlink/{parent?}', 'GroupFileController@createLink')->name('.files.createlink');
+        Route::post('files/createlink/{parent?}', 'GroupFileController@storeLink')->name('.files.storelink');
+        Route::get('files/createfolder/{parent?}', 'GroupFileController@createFolder')->name('.files.createfolder');
+        Route::post('files/createfolder/{parent?}', 'GroupFileController@storeFolder')->name('.files.storefolder');
+        
         Route::get('files/{file}', 'GroupFileController@show')->name('.files.show');
         Route::get('files/{file}/edit', 'GroupFileController@edit')->name('.files.edit');
         Route::post('files/{file}', 'GroupFileController@update')->name('.files.update');
