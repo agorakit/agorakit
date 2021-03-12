@@ -249,4 +249,6 @@ return array (
   'unpin' => 'Lösen',
   'archive' => 'Archiv',
   'unarchive' => 'Auspacken',
+  'folder' => 'Folder
+',
 );

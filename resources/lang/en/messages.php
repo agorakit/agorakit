@@ -257,4 +257,12 @@ return array (
   'group_tags_help' => 'For your information, here are all the tags in use in this group',
   'new_tags' => 'Add new tags',
   'all_is_read' => 'You\'ve read everything in this discussion',
+  'notifications' => 'Notifications',
+  'create_folder_button' => 'Create a folder',
+  'home' => 'Home
+',
+  'create_folder' => 'Create a folder',
+  'create_folder_help' => 'Enter the name of the folder',
+  'folder' => 'Folder',
+  'root' => 'Root',
 );

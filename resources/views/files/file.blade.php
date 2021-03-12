@@ -1,22 +1,37 @@
 <div class="py-3 border-gray-300 border-b flex @if ($file->isArchived()) status-archived @endif  @if ($file->isPinned()) status-pinned @endif"
     up-expand>
 
-    @if ($file->isLink())
-    <a class="mr-4 flex-shrink-0" href="{{ route('groups.files.download', [$file->group, $file]) }}" target="_blank">
-        <img class="rounded w-12 h-12" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" />
-    </a>
-    @else
-    <a class="mr-4 flex-shrink-0" up-follow href="{{ route('groups.files.show', [$file->group, $file]) }}">
-        <img class="rounded w-12 h-12" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" />
-    </a>
-    @endif
+    <div class="relative">
+        @if ($file->isPinned())
+                    <div class="text-xs absolute right-0 w-6 h-6 rounded-full text-white bg-blue-700 flex items-center justify-center border-white border-2 shadow-md ">
+                        <i class="fas fa-thumbtack" title="{{__('Pinned')}}"></i>
+                    </div>
+        @endif
+        
+        @if ($file->isLink())
+        <a class="mr-4 flex-shrink-0" href="{{ route('groups.files.download', [$file->group, $file]) }}" target="_blank">
+            <img class="rounded w-12 h-12" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" />
+        </a>
+        @elseif ($file->isFolder())
+        <a up-follow up-target=".files" class="mr-4 flex-shrink-0" href="{{ route('groups.files.index', ['group' => $file->group, 'parent' => $file]) }}">
+            <img class="rounded w-12 h-12" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" />
+        </a>
+        @else
+        <a up-follow  up-target=".files" class="mr-4 flex-shrink-0" up-follow href="{{ route('groups.files.show', [$file->group, $file]) }}">
+            <img class="rounded w-12 h-12" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" />
+        </a>
+        @endif
+    </div>
 
 
     <div class="w-100 flex-grow">
-        <div class="">
-            <a href="{{ route('groups.files.download', [$file->group, $file]) }}" target="_blank">
+        <div class="text-lg">
+            @if ($file->isFolder())
+                <a up-follow href="{{ route('groups.files.index', ['group' => $file->group, 'parent' => $file]) }}">
+            @else
+                <a up-follow href="{{ route('groups.files.show', [$file->group, $file]) }}">
+            @endif
                 {{ $file->name }}
-                <i class="fa fa-external-link"></i>
             </a>
         </div>
 
@@ -25,8 +40,9 @@
 
 
 
-        <div class="text-xs text-gray-600">
-            <div>
+
+        <div class="text-xs text-gray-500 flex space-x-2 hover:text-gray-600">
+           
                 @if ($file->isPinned())
                 <div class="badge badge-primary" style="min-width: 2em; margin: 0 2px;">
                     <i class="fas fa-thumbtack"></i>
@@ -39,9 +55,9 @@
                     {{__('Archived')}}
                 </div>
                 @endif
-            </div>
+           
             <div>
-                <a up-follow href="{{ route('groups.show', [$file->group_id]) }}">
+                
                     @if ($file->group->isOpen())
                     <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
                     @elseif ($file->group->isClosed())
@@ -50,13 +66,13 @@
                     <i class="fa fa-eye-slash" title="{{trans('group.secret')}}"></i>
                     @endif
                     {{ $file->group->name }}
-                </a>
+                
             </div>
 
             <div>
-                <a up-follow href="{{ route('users.show', [$file->user]) }}">
+                
                     <i class="fa fa-user-circle"></i> {{ $file->user->name }}
-                </a>
+                
             </div>
 
             <div>
@@ -85,11 +101,13 @@
 
         </div>
 
+        
+
     </div>
 
     @can('update', $file)
     <div class="ml-auto dropdown">
-        <a class="text-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+        <a class="rounded-full hover:bg-gray-400 w-10 h-10 flex items-center justify-center" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
             <i class="fas fa-ellipsis-h"></i>
         </a>

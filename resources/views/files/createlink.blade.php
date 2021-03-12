@@ -11,14 +11,14 @@
         <p>{{trans('messages.create_link_help')}}</p>
 
 
-        {!! Form::open(['url' => route('groups.files.createlink', $group)]) !!}
+        {!! Form::open(['url' => route('groups.files.createlink', ['group' => $group, 'parent' => $parent])]) !!}
 
 
         <div class="form-group">
 
 
             <label for="link">{{trans('messages.link')}}</label>
-            <input class="form-control" name="link" type="text" placeholder="http://..." value="{{ old('link') }}"/>
+            <input class="form-control" name="link" type="text" placeholder="https://..." value="{{ old('link') }}"/>
 
 
             <label for="title">{{trans('messages.title')}}</label>

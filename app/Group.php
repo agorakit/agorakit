@@ -12,6 +12,10 @@ use Nicolaslopezj\Searchable\SearchableTrait;
 use Storage;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
+use App\File;
+use App\Action;
+use App\Invite;
+use App\Activity;
 
 class Group extends Model
 {
@@ -157,22 +161,27 @@ class Group extends Model
     */
     public function actions()
     {
-        return $this->hasMany(\App\Action::class);
+        return $this->hasMany(Action::class);
     }
 
     public function files()
     {
-        return $this->hasMany(\App\File::class);
+        return $this->hasMany(File::class);
+    }
+
+    public function folders()
+    {
+        return $this->hasMany(File::class)->where('item_type', File::FOLDER);
     }
 
     public function invites()
     {
-        return $this->hasMany(\App\Invite::class);
+        return $this->hasMany(Invite::class);
     }
 
     public function activities()
     {
-        return $this->hasMany(\App\Activity::class)->orderBy('created_at', 'desc');
+        return $this->hasMany(Activity::class)->orderBy('created_at', 'desc');
     }
 
     /**

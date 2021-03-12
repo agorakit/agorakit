@@ -4,10 +4,34 @@
 
     @include('groups.tabs')
 
+
+
+
     <div class="flex justify-between">
-        <h3>
-            {{$file->name}}
-        </h3>
+      
+
+<h3 class="my-5">
+
+    <i class="fa fa-folder-open-o"></i>
+    <a up-follow up-target=".files" href="{{ route('groups.files.index', $group ) }}">
+        <span class="">{{trans('messages.root')}}</span>
+    </a>
+
+    @if (isset($breadcrumb))
+    @foreach ($breadcrumb as $my_parent)
+    <i class="fa fa-angle-right fill-current text-gray-600"></i>
+    <a up-follow up-target=".files" class="" href="{{ route('groups.files.index', ['group' => $group, 'parent' =>  $my_parent->id]) }}">
+        {{$my_parent->name}}
+    </a>
+    @endforeach
+    @endif
+    
+    <i class="fa fa-angle-right fill-current text-gray-600"></i>
+    
+    {{$file->name}}
+
+</h3>
+
 
         @can('update', $file)
             <div class="ml-auto dropdown">
@@ -20,7 +44,7 @@
                     @can('update', $file)
                         <a class="dropdown-item" href="{{ route('groups.files.edit', [$file->group, $file]) }}">
                             <i class="fa fa-pencil"></i>
-                            {{__('Rename')}}
+                             {{trans('messages.edit')}}
                         </a>
                     @endcan
 
@@ -117,7 +141,7 @@
                 @can('update', $file)
                     <a class="btn btn-secondary" href="{{ route('groups.files.edit', [$group, $file]) }}">
                         <i class="fa fa-pencil"></i>
-                        {{__('Rename')}}
+                         {{trans('messages.edit')}}
                     </a>
                 @endcan
 

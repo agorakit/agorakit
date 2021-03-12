@@ -123,6 +123,11 @@ class GroupPolicy extends BasePolicy
         return $this->getPermissionsFor($user, $group)->contains('create-file');
     }
 
+    public function createFolder(User $user, Group $group)
+    {
+        return $this->getPermissionsFor($user, $group)->contains('create-file');
+    }
+
     public function createAction(User $user, Group $group)
     {
         return $this->getPermissionsFor($user, $group)->contains('create-action');
