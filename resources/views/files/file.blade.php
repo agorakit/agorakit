@@ -1,9 +1,9 @@
 <div class="py-3 border-gray-300 border-b flex @if ($file->isArchived()) status-archived @endif  @if ($file->isPinned()) status-pinned @endif"
     up-expand>
 
-    <div>
+    <div class="relative">
         @if ($file->isPinned())
-                    <div class="text-xs absolute w-5 h-5 rounded-full text-white bg-red-700 flex items-center justify-center border-white border-2 shadow-md ">
+                    <div class="text-xs absolute right-0 w-6 h-6 rounded-full text-white bg-blue-700 flex items-center justify-center border-white border-2 shadow-md ">
                         <i class="fas fa-thumbtack" title="{{__('Pinned')}}"></i>
                     </div>
         @endif
@@ -13,11 +13,11 @@
             <img class="rounded w-12 h-12" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" />
         </a>
         @elseif ($file->isFolder())
-        <a up-follow class="mr-4 flex-shrink-0" href="{{ route('groups.files.index', ['group' => $file->group, 'parent' => $file]) }}">
+        <a up-follow up-target=".files" class="mr-4 flex-shrink-0" href="{{ route('groups.files.index', ['group' => $file->group, 'parent' => $file]) }}">
             <img class="rounded w-12 h-12" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" />
         </a>
         @else
-        <a up-follow  class="mr-4 flex-shrink-0" up-follow href="{{ route('groups.files.show', [$file->group, $file]) }}">
+        <a up-follow  up-target=".files" class="mr-4 flex-shrink-0" up-follow href="{{ route('groups.files.show', [$file->group, $file]) }}">
             <img class="rounded w-12 h-12" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" />
         </a>
         @endif

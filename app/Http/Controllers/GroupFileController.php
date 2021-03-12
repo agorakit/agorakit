@@ -119,10 +119,20 @@ class GroupFileController extends Controller
             return redirect()->route('groups.files.index', ['group' => $group, 'parent' => $file]);
         }
 
+        if ($file->parents()) {
+            // load the current parent and it's parents in a single "parents" collection
+            $parents = $file->parents();
+            $breadcrumb = $parents->reverse();
+        } else {
+            $parents = false;
+            $breadcrumb = false;
+        }
+
 
         return view('files.show')
             ->with('title', $group->name . ' - ' . $file->name)
             ->with('file', $file)
+            ->with('breadcrumb', $breadcrumb)
             ->with('group', $group)
             ->with('tab', 'files');
     }
