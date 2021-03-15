@@ -184,8 +184,6 @@ class CommentController extends Controller
     public function live(Request $request, Group $group, Discussion $discussion, Comment $comment)
     {
         $this->authorize('view', $discussion);
-
-        $last_comment_id = "12179";
         $comments = $discussion->comments()->where('id', '>', $comment->id)->get();
 
         return view('comments.live')
