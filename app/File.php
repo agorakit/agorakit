@@ -154,6 +154,20 @@ class File extends Model
         return $this;
     }
 
+    public function children()
+    {
+        return $this->group->files()->where('parent_id', $this->id);
+    }
+
+    public function hasChildren()
+    {
+        if ($this->children->count() > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
     public function isFile()
     {
         return $this->item_type == $this::FILE;

@@ -3,51 +3,41 @@
 @section('content')
 
 
-  <h1>{{trans('messages.delete_confirm_title')}}</h1>
+  <h1>{{trans('messages.delete_confirm_title')}} : <strong>{{$file->name}}</strong>
+
+
+   
+</h1>
+
+{{--
+@if ($file->hasChildren())
+
+<div class=" alert alert-info primary">This file contains the following items :
+@foreach ($file->children as $file)
+<div>@include('files.button')</div>
+@endforeach
+
+<div><input type="radio"/> I want to delete all children</div>
+<div><input type="radio"/> Move all children to root</div>
+
+</div>
 
 
 
-  <div class="small meta">
-
-    <strong>{{$file->name}}</strong>
-
-    <div>
-      <a up-follow href="{{ route('groups.show', [$file->group]) }}">
-        @if ($file->group->isOpen())
-          <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
-        @elseif ($file->group->isClosed())
-          <i class="fa fa-lock" title="{{trans('group.closed')}}"></i>
-        @else
-          <i class="fa fa-eye-slash" title="{{trans('group.secret')}}"></i>
-        @endif
-        {{ $file->group->name }}
-      </a>
-    </div>
-
-    <div>
-      <a up-follow href="{{ route('users.show', [$file->user]) }}">
-        <i class="fa fa-user-circle"></i> {{ $file->user->name }}
-      </a>
-    </div>
-
-    <div>
-      <i class="fa fa-clock-o"></i> {{ $file->updated_at }}
-    </div>
-
-    <div>
-      @if ($file->isFile())
-        <i class="fa fa-database"></i> {{sizeForHumans($file->filesize)}}
-      @endif
-    </div>
-  </div>
+@endif
+--}}
 
   {!! Form::model($file, array('method' => 'DELETE', 'action' => ['GroupFileController@destroy', $group, $file])) !!}
 
-
-
-  <div class="mt-5 d-flex justify-content-between align-items-center">
+  
+        <div class="flex justify-between mt-5">
+        <div class="form-group">
     {!! Form::submit(trans('messages.delete_confirm_button'), ['class' => 'btn btn-danger']) !!}
   </div>
+  <div>
+            <a class="btn btn-link js-back">{{__('messages.cancel')}}</a>
+        </div>
+    </div>
 
 
   {!! Form::close() !!}
