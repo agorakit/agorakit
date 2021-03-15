@@ -27,25 +27,30 @@ class CommentController extends Controller
 
         if ($comment->isInvalid()) {
             return redirect()->back()
-            ->withErrors($comment->getErrors())
-            ->withInput();
+                ->withErrors($comment->getErrors())
+                ->withInput();
         }
 
+
+
         // handle attached file to comment
-        if ($request->hasFile('file')) {
-            // create a file instance
-            $file = new File();
-            $file->forceSave(); // we bypass autovalidation, since we don't have a complete model yet, but we *need* an id
+        if ($request->hasFile('files')) {
 
-            // add group, user
-            $file->group()->associate($group);
-            $file->user()->associate(Auth::user());
+            foreach ($request->file('files') as $uploaded_file) {
+                // create a file instance
+                $file = new File();
+                $file->forceSave(); // we bypass autovalidation, since we don't have a complete model yet, but we *need* an id
 
-            // store the file itself on disk
-            $file->addToStorage($request->file('file'));
+                // add group, user
+                $file->group()->associate($group);
+                $file->user()->associate(Auth::user());
 
-            // add an f:xx to the comment so it is shown on display
-            $comment->body = $comment->body.'<p>f:'.$file->id.'</p>';
+                // store the file itself on disk
+                $file->addToStorage($uploaded_file);
+
+                // add an f:xx to the comment so it is shown on display
+                $comment->body = $comment->body . '<p>f:' . $file->id . '</p>';
+            }
         }
 
         $discussion->comments()->save($comment);
@@ -93,21 +98,23 @@ class CommentController extends Controller
         $this->authorize('update', $comment);
         $comment->body = $request->input('body');
 
-        // handle attached file to comment
-        if ($request->hasFile('file')) {
-            // create a file instance
-            $file = new File();
-            $file->forceSave(); // we bypass autovalidation, since we don't have a complete model yet, but we *need* an id
+        // handle attached files to comment
+        if ($request->hasFile('files')) {
+            foreach ($request->file('files') as $uploaded_file) {
+                // create a file instance
+                $file = new File();
+                $file->forceSave(); // we bypass autovalidation, since we don't have a complete model yet, but we *need* an id
 
-            // add group, user
-            $file->group()->associate($group);
-            $file->user()->associate(Auth::user());
+                // add group, user
+                $file->group()->associate($group);
+                $file->user()->associate(Auth::user());
 
-            // store the file itself on disk
-            $file->addToStorage($request->file('file'));
+                // store the file itself on disk
+                $file->addToStorage($uploaded_file);
 
-            // add an f:xx to the comment so it is shown on display
-            $comment->body = $comment->body.'<p>f:'.$file->id.'</p>';
+                // add an f:xx to the comment so it is shown on display
+                $comment->body = $comment->body . '<p>f:' . $file->id . '</p>';
+            }
         }
 
         if ($comment->isInvalid()) {
@@ -163,10 +170,10 @@ class CommentController extends Controller
         $this->authorize('history', $comment);
 
         return view('comments.history')
-        ->with('group', $group)
-        ->with('discussion', $discussion)
-        ->with('comment', $comment)
-        ->with('tab', 'discussion');
+            ->with('group', $group)
+            ->with('discussion', $discussion)
+            ->with('comment', $comment)
+            ->with('tab', 'discussion');
     }
 
 
@@ -182,9 +189,9 @@ class CommentController extends Controller
         $comments = $discussion->comments()->where('id', '>', $comment->id)->get();
 
         return view('comments.live')
-        ->with('read_comments', 0)
-        ->with('group', $group)
-        ->with('discussion', $discussion)
-        ->with('comments', $comments);
+            ->with('read_comments', 0)
+            ->with('group', $group)
+            ->with('discussion', $discussion)
+            ->with('comments', $comments);
     }
 }
