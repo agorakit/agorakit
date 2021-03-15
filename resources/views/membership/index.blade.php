@@ -130,12 +130,17 @@
                                 {{ $membership->user->email }}
                             </td>
                             <td data-order="{{ $membership->notification_interval }}">
+                                <span class="rounded-full bg-green-600 text-green-100 px-2 py-1 text-xs capitalize">
                                 {{ minutesToInterval($membership->notification_interval) }}
+                                </span>
                             </td>
 
                             <td>
-                                <a class="btn btn-primary inline-block"
-                                    href="{{ action('GroupMembershipAdminController@edit', [$group, $membership]) }}">{{ trans('messages.edit') }}</a>
+                            <a class="rounded-full hover:bg-gray-400 w-10 h-10 flex items-center justify-center"
+                            href="{{ action('GroupMembershipAdminController@edit', [$group, $membership]) }}">
+            <i class="fas fa-ellipsis-h"></i>
+        </a>
+
                             </td>
                         @endcan
 

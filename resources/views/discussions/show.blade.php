@@ -27,17 +27,20 @@
 
                 <div class="flex justify-content-between">
                     <h2 class="flex-grow text-xxl">
+                         @if($discussion->isArchived())
+                                    [{{ __('Archived') }}]
+                        @endif
                         {{ $discussion->name }}
                     </h2>
 
                     <div class="ml-auto">
                         <div class="d-flex align-items-start">
                             @if($discussion->isPinned())
-                                <div class="bg-red-900 text-red-100 text-xs rounded-full px-3 py-1">
+                                <div class="bg-blue-900 text-blue-100 text-xs rounded-full px-3 py-1">
                                     {{ __('Pinned') }}</div>
                             @endif
                             @if($discussion->isArchived())
-                                <div class="bg-red-900 text-red-100 text-xs rounded-full px-3 py-1">
+                                <div class="bg-gray-800 text-gray-100 text-xs rounded-full px-3 py-1">
                                     {{ __('Archived') }}</div>
                             @endif
                         </div>

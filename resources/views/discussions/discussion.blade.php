@@ -1,9 +1,16 @@
 <div up-follow up-expand up-reveal="false" class="flex items-start py-3 hover:bg-gray-100 border-b border-gray-300">
 
-    @if ($discussion->user)
-    <img class="h-8 w-8 sm:h-12 sm:w-12 rounded-full object-cover mx-1  flex-shrink-0"
-        src="{{ route('users.cover', [$discussion->user, 'small']) }}" />
-    @endif
+<div class="relative">
+            @if ($discussion->isPinned())
+                    <div class="text-xs absolute right-0 w-6 h-6 rounded-full text-white bg-blue-700 flex items-center justify-center border-white border-2 shadow-md ">
+                        <i class="fas fa-thumbtack" title="{{__('Pinned')}}"></i>
+                    </div>
+            @endif
+        @if ($discussion->user)
+        <img class="h-8 w-8 sm:h-12 sm:w-12 rounded-full object-cover mx-1  flex-shrink-0"
+            src="{{ route('users.cover', [$discussion->user, 'small']) }}" />
+        @endif
+    </div>
 
     <div class="mx-2 min-w-0 flex-grow">
 
@@ -11,21 +18,27 @@
         <div class="text-gray-900 text-lg truncate min-w-0">
         <a 
             href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}">
+            @if($discussion->isArchived())
+                [{{ __('Archived') }}]
+            @endif
             {{ summary($discussion->name) }}
         </a>
         </div>
 
 
 
-        <div class="text-gray-600 text-xs">
-            @if ($discussion->user)
-            {{ trans('messages.started_by') }}
-            {{ $discussion->user->name }}
-            @endif
-            {{ trans('messages.in') }}
-            {{ $discussion->group->name }}
-            {{ $discussion->updated_at->diffForHumans() }}
-        </div>
+        
+
+            <div class="text-gray-600 text-xs">
+                @if ($discussion->user)
+                {{ trans('messages.started_by') }}
+                {{ $discussion->user->name }}
+                @endif
+                {{ trans('messages.in') }}
+                {{ $discussion->group->name }}
+                {{ $discussion->updated_at->diffForHumans() }}
+            </div>
+     
 
         <div class="text-gray-600 truncate min-w-0 h-6">
             {{ summary($discussion->body) }}
@@ -57,7 +70,7 @@
     @can('update', $discussion)
 
     <div class="dropdown ml-4">
-        <a class="text-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+        <a class="rounded-full hover:bg-gray-400 w-10 h-10 flex items-center justify-center" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
             <i class="fas fa-ellipsis-h"></i>
         </a>

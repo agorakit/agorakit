@@ -15,9 +15,16 @@
 
 
 
-        <div class="mt-5 d-flex justify-content-between align-items-center">
-                {!! Form::submit(trans('messages.delete_confirm_button'), ['class' => 'btn btn-danger']) !!}
+        
+        <div class="flex justify-between">
+        <div class="form-group">
+            {!! Form::submit(trans('messages.delete_confirm_button'), ['class' => 'btn btn-danger']) !!}
         </div>
+        <div>
+            <a href="#" class="btn btn-link js-back">{{__('messages.cancel')}}</a>
+        </div>
+    </div>
+
 
 
         {!! Form::close() !!}
