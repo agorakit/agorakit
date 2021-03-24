@@ -35,8 +35,8 @@
             {{ $discussion->user->name }}
             @endif
             {{ trans('messages.in') }}
-            {{ $discussion->group->name }}
-            {{ $discussion->updated_at->diffForHumans() }}
+            {{ $discussion->group->name }}, 
+            {{ dateForHumans($discussion->updated_at) }}
         </div>
 
 
