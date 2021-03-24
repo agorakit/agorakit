@@ -14,8 +14,8 @@
         </h1>
 
         <div class="dropdown">
-            <a class="cursor-pointer hover:bg-gray-300 flex flex-col justify-center items-center rounded-full w-12 h-12 " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
+            <a class="cursor-pointer hover:bg-gray-300 flex flex-col justify-center items-center rounded-full w-12 h-12 "
+                type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-ellipsis-h"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
@@ -54,7 +54,7 @@
         <strong>
             <a up-follow href="{{ route('groups.show', [$action->group]) }}">{{ $action->group->name}}</a>
         </strong>
-        {{ $action->created_at->diffForHumans()}}
+        {{ dateForHumans($action->created_at) }}
     </div>
 
 

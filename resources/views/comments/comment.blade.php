@@ -15,7 +15,7 @@
 
                 <a up-follow href="{{ route('users.show', [$comment->user]) }}">{{$comment->user->name}}</a>
 
-                {{$comment->created_at->diffForHumans()}}
+                {{ dateForHumans($comment->created_at) }}
 
             </div>
         </div>

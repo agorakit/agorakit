@@ -36,7 +36,7 @@
 
 
                 <div class="text-sm my-1">
-                    {{ trans('messages.registered') }} : {{ $user->created_at->diffForHumans() }}
+                    {{ trans('messages.registered') }} : {{ dateForHumans($user->created_at) }}
                 </div>
 
 

@@ -18,65 +18,56 @@
         <div class="flex">
 
 
-            <div class="flex-grow">
+            @include('users.avatar', ['user' => $discussion->user])
 
-                <div class="flex justify-content-between">
-                    <h2 class="flex-grow text-xxl">
-                        @if($discussion->isArchived())
-                        [{{ __('Archived') }}]
-                        @endif
-                        {{ $discussion->name }}
-                    </h2>
 
-                    <div class="ml-auto">
-                        <div class="d-flex align-items-start">
-                            @if($discussion->isPinned())
-                            <div class="bg-blue-900 text-blue-100 text-xs rounded-full px-3 py-1">
-                                {{ __('Pinned') }}</div>
-                            @endif
-                            @if($discussion->isArchived())
-                            <div class="bg-gray-800 text-gray-100 text-xs rounded-full px-3 py-1">
-                                {{ __('Archived') }}</div>
-                            @endif
-                        </div>
-                    </div>
 
-                   
-                    @include('discussions.dropdown')
-                   
+            <div class="flex-grow w-100 ml-4">
 
+
+                <h2 class="text-xxl">
+                    {{ $discussion->name }}
+                </h2>
+
+            </div>
+
+            @include('discussions.dropdown')
+
+        </div>
+
+
+
+
+        <div class="ml-16">
+
+
+            <div>
+                {!! filter($discussion->body) !!}
+            </div>
+
+            <div class="text-xs text-gray-500">
+                {{ trans('messages.started_by') }}
+                <span class="user">
+                    <a up-follow href="{{ route('users.show', [$discussion->user]) }}">{{ $discussion->user->name }}</a>
+                </span>
+                {{ trans('messages.in') }} {{ $discussion->group->name }}
+                {{ dateForHumans($discussion->created_at) }}
+            </div>
+
+            <div class="mb-3 d-flex">
+
+                <div class="tags">
+                    @if($discussion->getSelectedTags()->count() > 0)
+                    <span class="mr-2">
+                        @foreach($discussion->getSelectedTags() as $tag)
+                        @include('tags.tag')
+                        @endforeach
+                    </span>
+                    @endif
                 </div>
 
+
             </div>
-
-        </div>
-
-
-        <div>
-            {!! filter($discussion->body) !!}
-        </div>
-
-        <div class="text-xs text-gray-500">
-            {{ trans('messages.started_by') }}
-            <span class="user">
-                <a up-follow href="{{ route('users.show', [$discussion->user]) }}">{{ $discussion->user->name }}</a>
-            </span>
-            {{ trans('messages.in') }} {{ $discussion->group->name }}
-            {{ $discussion->created_at->diffForHumans() }}
-        </div>
-
-        <div class="mb-3 d-flex">
-
-            <div class="tags">
-                @if($discussion->getSelectedTags()->count() > 0)
-                <span class="mr-2">
-                    @foreach($discussion->getSelectedTags() as $tag)
-                    @include('tags.tag')
-                    @endforeach
-                </span>
-                @endif
-            </div>
-
 
         </div>
 
@@ -91,9 +82,9 @@
     <div class="comments">
         @foreach($discussion->comments as $comment_key => $comment)
 
-        
-           {{-- {{$comment_key}} / {{$read_count}} / {{$total_count}} --}}
-        
+
+        {{-- {{$comment_key}} / {{$read_count}} / {{$total_count}} --}}
+
 
         {{-- this is the first new unread comment --}}
         @if ($comment_key == $read_count)
@@ -110,7 +101,7 @@
 
         {{-- this is the latest comment, it is read, we scroll below after the comment post box --}}
         @if ($comment_key + 1 == $read_count)
-        <div class="w-full flex justify-center my-4">
+        <div class="w-full flex justify-center my-4" id="last_read">
             <div class="inline-block bg-gray-500 text-gray-100 rounded-full px-4 py-2 text-sm uppercase">
                 <i class="far fa-arrow-alt-circle-up mr-2"></i> {{trans('messages.all_is_read')}}
             </div>
@@ -147,11 +138,6 @@
         @endif
         @endcan
 
-
-        {{-- this is the latest comment, it is read, we scroll here --}}
-        @if ($comment_key + 1 == $read_count)
-        <div id="last_read"></div>
-        @endif
 
     </div>
 

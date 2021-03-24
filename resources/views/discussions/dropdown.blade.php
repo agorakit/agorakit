@@ -11,7 +11,7 @@
 
         @can('update', $discussion)
         <a class="dropdown-item"
-            href="{{ route('groups.discussions.edit', [$group, $discussion]) }}">
+            href="{{ route('groups.discussions.edit', [$discussion->group, $discussion]) }}">
             <i class="fa fa-pencil"></i>
             {{ trans('messages.edit') }}
         </a>
@@ -19,7 +19,7 @@
 
         @can('delete', $discussion)
         <a up-modal=".dialog" class="dropdown-item"
-            href="{{ route('groups.discussions.deleteconfirm', [$group, $discussion]) }}">
+            href="{{ route('groups.discussions.deleteconfirm', [$discussion->group, $discussion]) }}">
             <i class="fa fa-trash"></i>
             {{ trans('messages.delete') }}
         </a>
@@ -27,7 +27,7 @@
 
         @can('pin', $discussion)
         <a class="dropdown-item"
-            href="{{ route('groups.discussions.pin', [$group, $discussion]) }}">
+            href="{{ route('groups.discussions.pin', [$discussion->group, $discussion]) }}">
             <i class="fa fa-thumbtack"></i>
             @if($discussion->isPinned())
             {{ trans('messages.unpin') }}
@@ -39,7 +39,7 @@
 
         @can('archive', $discussion)
         <a class="dropdown-item"
-            href="{{ route('groups.discussions.archive', [$group, $discussion]) }}">
+            href="{{ route('groups.discussions.archive', [$discussion->group, $discussion]) }}">
             <i class="fa fa-archive"></i>
             @if($discussion->isArchived())
             {{ trans('messages.unarchive') }}
@@ -51,7 +51,7 @@
 
         @if($discussion->revisionHistory->count() > 0)
         <a class="dropdown-item"
-            href="{{ route('groups.discussions.history', [$group, $discussion]) }}"><i
+            href="{{ route('groups.discussions.history', [$discussion->group, $discussion]) }}"><i
                 class="fa fa-history"></i>
             {{ trans('messages.show_history') }}</a>
         @endif
