@@ -8,8 +8,7 @@
 
     <div class="mx-2">
         <div class="text-gray-800">
-            <a up-follow
-                href="{{ route('groups.actions.show', [$action->group, $action]) }}">
+            <a up-follow href="{{ route('groups.actions.show', [$action->group, $action]) }}">
                 {{ $action->name }}
             </a>
         </div>
@@ -29,12 +28,12 @@
             <i class="ri-map-line mr-2"></i> {{ $action->location }}
         </div>
 
-         @if($action->getSelectedTags()->count() > 0)
-            <div class="text-gray-600 text-xs overflow-hidden my-1 h-5">
-                @foreach($action->getSelectedTags() as $tag)
-                    @include('tags.tag')
-                @endforeach
-            </div>
+        @if($action->getSelectedTags()->count() > 0)
+        <div class="text-gray-600 text-xs overflow-hidden my-1 h-5">
+            @foreach($action->getSelectedTags() as $tag)
+            @include('tags.tag')
+            @endforeach
+        </div>
         @endif
     </div>
 </div>
