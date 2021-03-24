@@ -67,4 +67,5 @@ class Comment extends Model
     {
         return route('groups.discussions.show', [$this->discussion->group, $this->discussion]).'#comment_'.$this->id;
     }
+
 }
