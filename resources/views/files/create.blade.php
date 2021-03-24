@@ -3,24 +3,25 @@
 @section('content')
 
 
-        <h1>{{trans('messages.upload_files')}}</h1>
+<h1>{{ trans('messages.upload_files') }}</h1>
 
 
-        {!! Form::open(['url' => route('groups.files.create', ['group' => $group, 'parent' => $parent]), 'files'=>true]) !!}
-        <div class="form-group mt-4 mb-4">
-            <input name="files[]" id="file" type="file" multiple="mutiple" title="{{trans('messages.select_one_or_more_files')}}">
-        </div>
+{!! Form::open(['url' => route('groups.files.create', ['group' => $group, 'parent' => $parent]), 'files' => true]) !!}
+<div class="form-group mt-4 mb-4">
+    <input name="files[]" id="file" type="file" multiple="mutiple"
+        title="{{ trans('messages.select_one_or_more_files') }}">
+</div>
 
-        @include('partials.tags_input')
+@include('partials.tags_input')
 
-       
 
-        <div class="flex justify-between items-center my-8">
-        <input class="btn btn-primary" type="submit" value="{{trans('messages.create')}}" />
-        <a href="#" class="js-back">{{trans('messages.cancel')}}</a>
-        </div>
 
-        {!! Form::close() !!}
+<div class="flex justify-between items-center my-8">
+    <input class="btn btn-primary" type="submit" value="{{ trans('messages.create') }}" />
+    <a href="#" class="js-back">{{ trans('messages.cancel') }}</a>
+</div>
+
+{!! Form::close() !!}
 
 
 @endsection
