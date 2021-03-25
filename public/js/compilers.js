@@ -13,139 +13,177 @@ You can also provide a json url for ckeditor mention plugin
 
 up.compiler('.wysiwyg', function (element, data) {
 
-	// first le'ts handle the mentions
-	mentions_loaded = false
-	mentions = []
 
-	// if mentions are already loaded we directly filter and return
-	if (mentions_loaded) {
-		resolve(mentions.filter(isItemMatching).slice(0, 10))
-	}
+	// load mentions
+	var mention_users = element.getAttribute("data-mention-users")
+	mentions = $.getJSON(mention_users, function (mentions) {
+	
+	console.log(mentions);
+	})
 
-	// this function will return the matching mentions based on the queryText entered by the user after an @
-	function getFeedItems(queryText) {
-		return new Promise((resolve, reject) => {
+	$(element).summernote({
 
-			// else we load the json and return
-			var mention_users = element.getAttribute("data-mention-users")
-			$.getJSON(mention_users, function (mentions) {
-				mentions_loaded = true;
-				console.log(mentions)
-				resolve(mentions.filter(isItemMatching).slice(0, 10))
-			})
-				.fail(function () {
-					console.log("error loading mentions");
-					reject();
-				})
-
-		})
-
-		// This function filters items based on the name property (it contains both username and real name)
-		function isItemMatching(item) {
-			// Make the search case-insensitive.
-			const searchString = queryText.toLowerCase();
-
-			// Include an item in the search results if the name or username includes the current user input.
-			return (
-				item.name.toLowerCase().includes(searchString) ||
-				item.id.toLowerCase().includes(searchString)
-			);
+		callbacks: {
+			onImageUpload: function (files) {
+				// upload image to server and create imgNode...
+				$summernote.summernote('insertNode', imgNode);
+			}
+		},
+		hint: {
+			mentions: ['jayden', 'sam', 'alvin', 'david'],
+			match: /\B@(\w*)$/,
+			search: function (keyword, callback) {
+				callback($.grep(this.mentions, function (item) {
+					return item.indexOf(keyword) == 0;
+				}));
+			},
+			content: function (item) {
+				return '@' + item;
+			}
 		}
-	}
-
-	function customItemRenderer(item) {
-		const itemElement = document.createElement('span');
-
-		itemElement.classList.add('custom-item');
-		itemElement.id = `mention-list-item-id-${item.userId}`;
-		itemElement.textContent = `${item.name} `;
-
-		const usernameElement = document.createElement('span');
-
-		usernameElement.classList.add('custom-item-username');
-		usernameElement.textContent = item.id;
-
-		itemElement.appendChild(usernameElement);
+	});
 
 
-		return itemElement;
-	}
-
-
-	// This instantiate the CKeditor
-	ClassicEditor
-		.create(element, {
-			mention: {
-				feeds: [
-					{
-						marker: '@',
-						feed: getFeedItems,
-						minimumCharacters: 0,
-						itemRenderer: customItemRenderer
-					}
-				]
-			},
-			mediaEmbed: {
-				previewsInData: true
-			},
-			removePlugins: ['MediaEmbed'],
-
-			toolbar: {
-				items: [
-					'heading',
-					'|',
-					'bold',
-					'italic',
-					'link',
-					'bulletedList',
-					'numberedList',
-					'|',
-					'indent',
-					'outdent',
-					'|',
-					'blockQuote',
-					'insertTable',
-					'imageUpload',
-					'undo',
-					'redo',
-				]
-			},
-			language: 'en',
-			image: {
-				toolbar: [
-					'imageTextAlternative',
-					'imageStyle:full',
-					'imageStyle:side'
-				],
-				upload: {
-					panel: {
-						items: ['insertImageViaUrl']
-					}
-				}
-			},
-			table: {
-				contentToolbar: [
-					'tableColumn',
-					'tableRow',
-					'mergeTableCells'
-				]
-			},
-
-
-		})
-		.then(editor => {
-			window.editor = editor;
-			editor.editing.view.change( writer => {
-				writer.setStyle( 'max-height', '400px', editor.editing.view.document.getRoot() );
-			} );
-
-		})
-		.catch(error => {
-			console.error('Oops, something gone wrong!');
-			console.error(error);
-		});
 
 });
+
+/*
+
+// first le'ts handle the mentions
+mentions_loaded = false
+mentions = []
+
+// if mentions are already loaded we directly filter and return
+if (mentions_loaded) {
+	resolve(mentions.filter(isItemMatching).slice(0, 10))
+}
+
+// this function will return the matching mentions based on the queryText entered by the user after an @
+function getFeedItems(queryText) {
+	return new Promise((resolve, reject) => {
+
+		// else we load the json and return
+		var mention_users = element.getAttribute("data-mention-users")
+		$.getJSON(mention_users, function (mentions) {
+			mentions_loaded = true;
+			console.log(mentions)
+			resolve(mentions.filter(isItemMatching).slice(0, 10))
+		})
+			.fail(function () {
+				console.log("error loading mentions");
+				reject();
+			})
+
+	})
+
+	// This function filters items based on the name property (it contains both username and real name)
+	function isItemMatching(item) {
+		// Make the search case-insensitive.
+		const searchString = queryText.toLowerCase();
+
+		// Include an item in the search results if the name or username includes the current user input.
+		return (
+			item.name.toLowerCase().includes(searchString) ||
+			item.id.toLowerCase().includes(searchString)
+		);
+	}
+}
+
+function customItemRenderer(item) {
+	const itemElement = document.createElement('span');
+
+	itemElement.classList.add('custom-item');
+	itemElement.id = `mention-list-item-id-${item.userId}`;
+	itemElement.textContent = `${item.name} `;
+
+	const usernameElement = document.createElement('span');
+
+	usernameElement.classList.add('custom-item-username');
+	usernameElement.textContent = item.id;
+
+	itemElement.appendChild(usernameElement);
+
+
+	return itemElement;
+}
+
+
+// This instantiate the CKeditor
+ClassicEditor
+	.create(element, {
+		mention: {
+			feeds: [
+				{
+					marker: '@',
+					feed: getFeedItems,
+					minimumCharacters: 0,
+					itemRenderer: customItemRenderer
+				}
+			]
+		},
+		mediaEmbed: {
+			previewsInData: true
+		},
+		removePlugins: ['MediaEmbed'],
+
+		toolbar: {
+			items: [
+				'heading',
+				'|',
+				'bold',
+				'italic',
+				'link',
+				'bulletedList',
+				'numberedList',
+				'|',
+				'indent',
+				'outdent',
+				'|',
+				'blockQuote',
+				'insertTable',
+				'imageUpload',
+				'undo',
+				'redo',
+			]
+		},
+		language: 'en',
+		image: {
+			toolbar: [
+				'imageTextAlternative',
+				'imageStyle:full',
+				'imageStyle:side'
+			],
+			upload: {
+				panel: {
+					items: ['insertImageViaUrl']
+				}
+			}
+		},
+		table: {
+			contentToolbar: [
+				'tableColumn',
+				'tableRow',
+				'mergeTableCells'
+			]
+		},
+
+
+	})
+	.then(editor => {
+		window.editor = editor;
+		editor.editing.view.change( writer => {
+			writer.setStyle( 'max-height', '400px', editor.editing.view.document.getRoot() );
+		} );
+
+	})
+	.catch(error => {
+		console.error('Oops, something gone wrong!');
+		console.error(error);
+	});
+	*/
+
+
+//});
 
 
 
@@ -191,10 +229,10 @@ up.compiler('.calendar', function (element, data) {
 		},
 
 		// add tooltip to all events
-		eventDidMount: function(info) {
+		eventDidMount: function (info) {
 			content = '<strong>' + info.event.extendedProps.group_name + '</strong><br/>' + info.event.extendedProps.summary;
 			$(info.el).tooltip({ title: content, html: true });
-		  },
+		},
 
 		// store the current view type on each view change
 		viewDidMount: function (info) {
@@ -322,10 +360,10 @@ up.$compiler('.poll', function ($element, data) {
  * Add simple history.back behaviour onclick on element 
  */
 up.compiler('.js-back', function (element) {
-	
-	element.onclick = function() {
+
+	element.onclick = function () {
 		window.history.back();
 		return false;
 	};
-	
+
 });

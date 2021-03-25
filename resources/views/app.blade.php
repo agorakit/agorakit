@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{{ asset('/css/datatables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/unpoly.css') }}">
+    <link rel="stylesheet" href="{{ asset('/packages/summernote/summernote-lite.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('/css/app.css?v='.filemtime(public_path('css/app.css'))) }}">
 
@@ -59,7 +60,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/unpoly.js') }}"></script>
     <script src="{{ asset('js/fullcalendar.js') }}"></script>
-    <script src="{{ asset('js/ckeditor.js') }}"></script>
+    <script src="{{ asset('packages/summernote/summernote-lite.min.js') }}"></script>
 
     <script src="{{ asset('js/datatables.min.js') }}"></script>
 
