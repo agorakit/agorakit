@@ -103,6 +103,14 @@ class User extends Authenticatable
         ];
     }
 
+    /**
+     * Returns the preferred locale of the user. It is set in the preferences row in the DB.
+     */
+    public function preferredLocale()
+    {
+        return $this->getPreference('locale', config('app.locale'));
+    }
+
     // Name of user should be set by user, but if we don't have it, we can just extract it from email
     public function getNameAttribute($value)
     {
@@ -114,6 +122,9 @@ class User extends Authenticatable
     }
 
 
+    /**
+     * Force sluggification of username
+     */
     public function setUsernameAttribute($value)
     {
         $this->attributes['username'] = Str::slug($value);
@@ -137,6 +148,9 @@ class User extends Authenticatable
         });
     }
 
+    /** 
+     * Re-generates token if none is set
+     */
     public function getToken()
     {
         if ($this->token) {
@@ -150,7 +164,7 @@ class User extends Authenticatable
 
 
     /**
-     * Confirm the user.
+     * Confirm the user and invalidate token
      *
      * @return void
      */
