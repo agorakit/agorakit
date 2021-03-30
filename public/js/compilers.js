@@ -15,11 +15,10 @@ up.compiler('.wysiwyg', function (element, data) {
 
 
 	// load mentions
-	var mention_users = element.getAttribute("data-mention-users")
-	mentions = $.getJSON(mention_users, function (mentions) {
+	var mentions = JSON.parse(element.getAttribute("data-mention-users-list"))
 	
 	console.log(mentions);
-	})
+	
 
 	$(element).summernote({
 
@@ -30,7 +29,7 @@ up.compiler('.wysiwyg', function (element, data) {
 			}
 		},
 		hint: {
-			mentions: ['jayden', 'sam', 'alvin', 'david'],
+			mentions: mentions,
 			match: /\B@(\w*)$/,
 			search: function (keyword, callback) {
 				callback($.grep(this.mentions, function (item) {
