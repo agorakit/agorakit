@@ -11,14 +11,43 @@ You can also provide a json url for ckeditor mention plugin
 - data-mention-files	REDO TODO
 */
 
+
+function sendFile(files) {
+	console.log(files)
+
+	// add multiple files!!!
+
+	// use default laravel files route
+
+	// edit file controller to support ajax return of url
+	
+	var formData = new FormData();
+	formData.append("file", file);
+	formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+	$.ajax({
+		url: '/summernote-upload',
+		data: formData,
+		cache: false,
+		contentType: false,
+		processData: false,
+		type: 'POST',
+		success: function (data) {
+			$summernote.summernote('insertImage', data, function ($image) {
+				$image.attr('src', data);
+			});
+		}
+	});
+}
+
+
 up.compiler('.wysiwyg', function (element, data) {
 
 
 	// load mentions
 	var mentions = JSON.parse(element.getAttribute("data-mention-users-list"))
-	
+
 	console.log(mentions);
-	
+
 
 	$(element).summernote({
 
@@ -31,12 +60,17 @@ up.compiler('.wysiwyg', function (element, data) {
 			['table', ['table']],
 			['insert', ['link', 'picture', 'video']],
 			['view', ['fullscreen', 'codeview', 'help']],
-		  ],
-		  
+		],
+
 		callbacks: {
 			onImageUpload: function (files) {
-				// upload image to server and create imgNode...
-				$summernote.summernote('insertNode', imgNode);
+				console.log(files);
+				console.log($(element));
+				
+				/*
+				if (!files.length) return;            
+				sendFile(files)
+				*/
 			}
 		},
 		hint: {
