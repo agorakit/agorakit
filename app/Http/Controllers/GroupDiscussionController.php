@@ -34,7 +34,7 @@ class GroupDiscussionController extends Controller
         $tags = $discussion->getTagsInUse();
         $tag = $request->get('tag');
 
-        if (\Auth::check()) {
+        if (Auth::check()) {
             $discussions =
             $group->discussions()
             ->has('user')
@@ -141,7 +141,7 @@ class GroupDiscussionController extends Controller
 
         // update activity timestamp on parent items
         $group->touch();
-        \Auth::user()->touch();
+        Auth::user()->touch();
 
         if ($request->get('tags')) {
             $discussion->tag($request->get('tags'));
@@ -176,6 +176,17 @@ class GroupDiscussionController extends Controller
 
         $read_count = $discussion->comments->count() - $unread_count;
         $total_count = $discussion->comments->count();
+
+        /*
+        foreach ($discussion->comments as $comment_key => $comment)
+        {
+            if ($comment_key == $read_count) {
+                $comment->isFirstUnread = true;
+            }
+        }
+        
+       // {{$comment_key}} / {{$read_count}} / {{$total_count}}
+       */
 
         return view('discussions.show')
         ->with('title', $group->name.' - '.$discussion->name)

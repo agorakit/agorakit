@@ -1,12 +1,14 @@
 <?php
 
-/**
-* General helper functions that don't have a batter place.
-*/
+use Carbon\Carbon;
 
 /**
-* returns the value of $name setting as stored in DB.
-*/
+ * General helper functions that don't have a batter place.
+ */
+
+/**
+ * returns the value of $name setting as stored in DB.
+ */
 function setting($name, $default = false)
 {
     return \App\Setting::get($name, $default);
@@ -15,20 +17,33 @@ function setting($name, $default = false)
 function sizeForHumans($bytes)
 {
     if ($bytes >= 1073741824) {
-        $bytes = number_format($bytes / 1073741824, 2).'GB';
+        $bytes = number_format($bytes / 1073741824, 2) . 'GB';
     } elseif ($bytes >= 1048576) {
-        $bytes = number_format($bytes / 1048576, 2).'MB';
+        $bytes = number_format($bytes / 1048576, 2) . 'MB';
     } elseif ($bytes >= 1024) {
-        $bytes = number_format($bytes / 1024, 2).'KB';
+        $bytes = number_format($bytes / 1024, 2) . 'KB';
     } elseif ($bytes > 1) {
-        $bytes = $bytes.' bytes';
+        $bytes = $bytes . ' bytes';
     } elseif ($bytes == 1) {
-        $bytes = $bytes.' byte';
+        $bytes = $bytes . ' byte';
     } else {
         $bytes = '0 bytes';
     }
 
     return $bytes;
+}
+
+
+/** 
+ * Format a date correctly, if less than 2 days, use carbon diffForhumans, else returns a formated date
+ */
+function dateForHumans($date)
+{
+    if ($date->lessThan(Carbon::now()->subDays(2))) {
+        return $date->toDateTimeString();
+    }
+
+    return $date->diffForHumans();
 }
 
 function intervalToMinutes($interval)
@@ -37,26 +52,26 @@ function intervalToMinutes($interval)
 
     switch ($interval) {
         case 'instantly':
-        $minutes = 1;
-        break;
+            $minutes = 1;
+            break;
         case 'hourly':
-        $minutes = 60;
-        break;
+            $minutes = 60;
+            break;
         case 'daily':
-        $minutes = 60 * 24;
-        break;
+            $minutes = 60 * 24;
+            break;
         case 'weekly':
-        $minutes = 60 * 24 * 7;
-        break;
+            $minutes = 60 * 24 * 7;
+            break;
         case 'biweekly':
-        $minutes = 60 * 24 * 14;
-        break;
+            $minutes = 60 * 24 * 14;
+            break;
         case 'monthly':
-        $minutes = 60 * 24 * 30;
-        break;
+            $minutes = 60 * 24 * 30;
+            break;
         case 'never':
-        $minutes = -1;
-        break;
+            $minutes = -1;
+            break;
     }
 
     return $minutes;
@@ -68,26 +83,26 @@ function minutesToInterval($minutes)
 
     switch ($minutes) {
         case 1:
-        $interval = 'instantly';
-        break;
+            $interval = 'instantly';
+            break;
         case 60:
-        $interval = 'hourly';
-        break;
+            $interval = 'hourly';
+            break;
         case 60 * 24:
-        $interval = 'daily';
-        break;
+            $interval = 'daily';
+            break;
         case 60 * 24 * 7:
-        $interval = 'weekly';
-        break;
+            $interval = 'weekly';
+            break;
         case 60 * 24 * 14:
-        $interval = 'biweekly';
-        break;
+            $interval = 'biweekly';
+            break;
         case 60 * 24 * 30:
-        $interval = 'monthly';
-        break;
+            $interval = 'monthly';
+            break;
         case -1:
-        $interval = 'never';
-        break;
+            $interval = 'never';
+            break;
     }
 
     return $interval;

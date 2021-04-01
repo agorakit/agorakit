@@ -3,38 +3,38 @@
 @section('content')
 
 
-        <h1>{{trans('messages.create_link')}}</h1>
+<h1>{{ trans('messages.create_link') }}</h1>
 
-        <p>{{trans('messages.create_link_help')}}</p>
-
-
-        {!! Form::open(['url' => route('groups.files.createlink', ['group' => $group, 'parent' => $parent])]) !!}
+<p>{{ trans('messages.create_link_help') }}</p>
 
 
-        <div class="form-group">
+{!! Form::open(['url' => route('groups.files.createlink', ['group' => $group, 'parent' => $parent])]) !!}
 
 
-            <label for="link">{{trans('messages.link')}}</label>
-            <input class="form-control" name="link" type="text" placeholder="https://..." value="{{ old('link') }}"/>
+<div class="form-group">
 
 
-            <label for="title">{{trans('messages.title')}}</label>
-            <input class="form-control" name="title" type="text" value="{{ old('title') }}"/>
+    <label for="link">{{ trans('messages.link') }}</label>
+    <input class="form-control" name="link" type="text" placeholder="https://..." value="{{ old('link') }}" />
 
-            @include('partials.tags_input')
 
-        </div>
+    <label for="title">{{ trans('messages.title') }}</label>
+    <input class="form-control" name="title" type="text" value="{{ old('title') }}" />
 
-        
+    @include('partials.tags_input')
+
+</div>
+
+
 
 
 
 <div class="flex justify-between items-center my-8">
-    <input class="btn btn-primary" type="submit" name="{{trans('messages.create')}}"/>
-    <a href="#" class="js-back">{{trans('messages.cancel')}}</a>
+    <input class="btn btn-primary" type="submit" name="{{ trans('messages.create') }}" />
+    <a href="#" class="js-back">{{ trans('messages.cancel') }}</a>
 </div>
 
-        {!! Form::close() !!}
+{!! Form::close() !!}
 
 
 @endsection

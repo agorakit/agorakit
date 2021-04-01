@@ -256,7 +256,7 @@ up.compiler('#unread', function (element) {
 up.compiler('#last_read', function (element) {
 	console.log(element);
 	element.scrollIntoView({
-		block: 'end',
+		block: 'center',
 		behavior: 'instant',
 		inline: 'nearest'
 	});

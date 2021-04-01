@@ -61,12 +61,12 @@
 
                         <td data-order="{{ $membership->created_at }}">
                             <a up-follow
-                                href="{{ route('users.show', $membership->user) }}">{{ $membership->created_at->diffForHumans() }}</a>
+                                href="{{ route('users.show', $membership->user) }}">{{ dateForHumans($membership->created_at) }}</a>
                         </td>
 
                         <td data-order="{{ $membership->user->updated_at }}">
                             <a up-follow
-                                href="{{ route('users.show', $membership->user) }}">{{ $membership->user->updated_at->diffForHumans() }}</a>
+                                href="{{ route('users.show', $membership->user) }}">{{ dateForHumans($membership->user->updated_at) }}</a>
                         </td>
 
 
