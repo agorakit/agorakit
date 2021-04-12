@@ -53,7 +53,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/unpoly.js') }}"></script>
     <script src="{{ asset('js/fullcalendar.js') }}"></script>
-    <script src="{{ asset('js/ckeditor.js') }}"></script>
+    <script src="{{ asset('packages/summernote/summernote-lite.min.js') }}"></script>
 
     <script src="{{ asset('js/datatables.min.js') }}"></script>
 

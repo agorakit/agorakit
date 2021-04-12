@@ -38,76 +38,85 @@
 </div>
 
 
-<div class="sm:flex">
+<div class="file">
 
-    <div class="w:-1/2 sm:w-1/4 mr-4">
-        <a href="{{ route('groups.files.download', [$group, $file]) }}">
-            <img src="{{ route('groups.files.preview', [$group, $file]) }}" class="responsive" />
-        </a>
+    @if ($file->isImage())
+    <a href="{{ route('groups.files.download', [$group, $file]) }}">
+        <img src="{{ route('groups.files.preview', [$group, $file]) }}" class="responsive rounded" />
+    </a>
+    @else
+    <a href="{{ route('groups.files.download', [$group, $file]) }}">
+        <img src="{{ route('groups.files.thumbnail', [$group, $file]) }}" class="w-20 h-20 rounded" />
+    </a>
+    @endif
+
+    <div>
+        {{$file->name}}
     </div>
 
-    <div class="sm:w-3/4">
-        <div class="mb-4">
-            <div>
-                <a up-follow href="{{ route('users.show', [$file->user]) }}">
-                    <i class="fa fa-user-circle"></i> {{ $file->user->name }}
-                </a>
-            </div>
 
-            <div>
-                <i class="fa fa-clock-o"></i> {{ $file->updated_at }}
-            </div>
-
-            <div>
-                @if ($file->isFile())
-                <i class="fa fa-database"></i> {{sizeForHumans($file->filesize)}}
-                @endif
-            </div>
-            <div>
-                @if ($file->isLink())
-                <i class="fas fa-link"></i> {{$file->path}}
-                @endif
-            </div>
-
-
-            @if ($file->tags->count() > 0)
-            {{trans('messages.tags')}} :
-            @foreach ($file->tags as $tag)
-            @include('tags.tag')
-            @endforeach
-            <br />
-            @endif
-
+    <div class="my-4 flex space-x-3 text-sm text-gray-700">
+        <div>
+            <a up-follow href="{{ route('users.show', [$file->user]) }}">
+                <i class="fa fa-user-circle"></i> {{ $file->user->name }}
+            </a>
         </div>
 
         <div>
-            @if ($file->isLink())
-            <a class="btn btn-primary" href="{{ route('groups.files.download', [$group, $file]) }}" target="_blank">
-                {{trans('messages.visit')}})
-            </a>
-            @else
-            <a class="btn btn-primary" href="{{ route('groups.files.download', [$group, $file]) }}" target="_blank">
-                {{trans('messages.download')}}
-            </a>
-            @endif
-
-
-            @can('update', $file)
-            <a class="btn btn-secondary" href="{{ route('groups.files.edit', [$group, $file]) }}">
-                <i class="fa fa-pencil"></i>
-                {{trans('messages.edit')}}
-            </a>
-            @endcan
-
-            @can('delete', $file)
-            <a class="btn btn-secondary" href="{{ route('groups.files.deleteconfirm', [$group, $file]) }}">
-                <i class="fa fa-trash"></i>
-                {{trans('messages.delete')}}
-            </a>
-            @endcan
-
-
+            <i class="fa fa-clock-o"></i> {{ $file->updated_at }}
         </div>
+
+        <div>
+            @if ($file->isFile())
+            <i class="fa fa-database"></i> {{sizeForHumans($file->filesize)}}
+            @endif
+        </div>
+        <div>
+            @if ($file->isLink())
+            <i class="fas fa-link"></i> {{$file->path}}
+            @endif
+        </div>
+
+
+        @if ($file->tags->count() > 0)
+        {{trans('messages.tags')}} :
+        @foreach ($file->tags as $tag)
+        @include('tags.tag')
+        @endforeach
+        <br />
+        @endif
+
+    </div>
+
+    <div>
+        @if ($file->isLink())
+        <a class="btn btn-primary" href="{{ route('groups.files.download', [$group, $file]) }}" target="_blank">
+            {{trans('messages.visit')}})
+        </a>
+        @else
+        <a class="btn btn-primary" href="{{ route('groups.files.download', [$group, $file]) }}" target="_blank">
+            <i class="fa fa-download"></i>
+            {{trans('messages.download')}}
+        </a>
+        @endif
+
+
+        @can('update', $file)
+        <a up-follow class="btn btn-secondary" href="{{ route('groups.files.edit', [$group, $file]) }}">
+            <i class="fa fa-pencil"></i>
+            {{trans('messages.edit')}}
+        </a>
+        @endcan
+
+        @can('delete', $file)
+        <a up-follow class="btn btn-danger" href="{{ route('groups.files.deleteconfirm', [$group, $file]) }}">
+            <i class="fa fa-trash"></i>
+            {{trans('messages.delete')}}
+        </a>
+        @endcan
+
+
     </div>
 </div>
+
 @endsection

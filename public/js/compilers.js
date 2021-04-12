@@ -16,8 +16,6 @@ up.compiler('.wysiwyg', function (element, data) {
 	// load mentions
 	var mentions = JSON.parse(element.getAttribute("data-mention-users-list"))
 
-	console.log(mentions);
-
 
 	var $summernote = $(element).summernote({
 
@@ -33,11 +31,10 @@ up.compiler('.wysiwyg', function (element, data) {
 		],
 
 		// this is the main call back to upload a file (image or anything else with summernote)
+		// multiple files can be uploaded at once
 		callbacks: {
 			onImageUpload: function (files) {
-				console.log(files);
 				for (var i = 0; i < files.length; i++) {
-					console.log(files[i])
 					sendFile($summernote, files[i]);
 				}
 			}
@@ -61,7 +58,10 @@ up.compiler('.wysiwyg', function (element, data) {
 
 });
 
-
+/**
+ * This function upload a file to the server and in return it will get a file id, to add f:xxx to the thextarea 
+ * to be later rendered as a nice embeded file.
+ */
 function sendFile($summernote, file) {
 	var formData = new FormData();
 	formData.append("file", file);
@@ -77,14 +77,19 @@ function sendFile($summernote, file) {
 		processData: false,
 		type: 'POST',
 		success: function (data) {
-			console.log(data);
 			$summernote.summernote('pasteHTML', '<div>f:' + data + '</div>')
-			
-			/*
-			$summernote.summernote('insertImage', data, function ($image) {
-				$image.attr('src', data);
-			});
-			*/
+			$('.note-status-output').html(
+				'<div class="alert alert-info">' +
+				'Upload OK' +
+				'</div>'
+			);
+		},
+		error: function (data) {
+			$('.note-status-output').html(
+				'<div class="alert alert-danger">' +
+				'File upload failled' +
+				'</div>'
+			);
 		}
 	});
 }

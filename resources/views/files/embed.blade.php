@@ -1,5 +1,5 @@
 <div class="w-32 bg-gray-200 shadow-md mr-3 mb-3 p-3 inline-block rounded">
-    <a up-follow up-expand href="{{ route('groups.files.show', [$file->group, $file]) }}">
+    <a up-modal=".file" up-expand href="{{ route('groups.files.show', [$file->group, $file]) }}">
 
         <img src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" class="w-full">
 
