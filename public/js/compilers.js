@@ -78,9 +78,13 @@ function sendFile($summernote, file) {
 		type: 'POST',
 		success: function (data) {
 			console.log(data);
+			$summernote.summernote('pasteHTML', '<div>f:' + data + '</div>')
+			
+			/*
 			$summernote.summernote('insertImage', data, function ($image) {
 				$image.attr('src', data);
 			});
+			*/
 		}
 	});
 }

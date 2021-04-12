@@ -205,7 +205,8 @@ class GroupFileController extends Controller
                 $group->touch();
                 \Auth::user()->touch();
 
-                return response()->json(route('groups.files.preview', [$group, $file]), 200, [], JSON_UNESCAPED_SLASHES);
+                //return response()->json(route('groups.files.preview', [$group, $file]), 200, [], JSON_UNESCAPED_SLASHES);
+                return response()->json($file->id);
             }
             return response()->json('no file found in request', 404, [], JSON_UNESCAPED_SLASHES);
         }
