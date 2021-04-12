@@ -353,6 +353,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('files/{file}/preview', 'FileDownloadController@preview')->name('.files.preview');
         Route::get('files/{file}/icon', 'FileDownloadController@icon')->name('.files.icon');
 
+
         // Allowed Tags
         Route::get('tags', 'GroupTagController@edit')->name('.tags.edit');
         Route::post('tags', 'GroupTagController@update')->name('.tags.update');

@@ -4,6 +4,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name=viewport content="width=device-width, initial-scale=1">
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    @if (isset($group))
+    <meta name="group-id" content="{{ $group->id }}">
+    @endif
+
     <title>{{ $title ?? setting('name') }}</title>
 
     <link rel="shortcut icon" href="{{ route('icon', 192) }}">
@@ -18,6 +24,7 @@
     <link rel="stylesheet" href="{{ asset('/css/datatables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/unpoly.css') }}">
+    <link rel="stylesheet" href="{{ asset('/packages/summernote/summernote-lite.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('/css/app.css?v='.filemtime(public_path('css/app.css'))) }}">
 
@@ -34,17 +41,17 @@
 <body class="bg-gray-300 text-gray-900">
 
     @unless(request()->get('embed'))
-        @include('partials.nav')
+    @include('partials.nav')
     @endunless
 
 
-    
 
- @include('partials.errors')
+
+    @include('partials.errors')
 
 
     <div class="mx-auto p-2 bg-white sm:shadow-xl sm:p-4 xl:p-8 xl:rounded-lg xl:my-4" style="max-width: 1240px">
-       
+
         @yield('content')
     </div>
 
@@ -59,7 +66,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/unpoly.js') }}"></script>
     <script src="{{ asset('js/fullcalendar.js') }}"></script>
-    <script src="{{ asset('js/ckeditor.js') }}"></script>
+    <script src="{{ asset('packages/summernote/summernote-lite.min.js') }}"></script>
 
     <script src="{{ asset('js/datatables.min.js') }}"></script>
 
