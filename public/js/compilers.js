@@ -6,42 +6,12 @@
 To enable a wysiwyg editor, add a .wysiwyg class to a textarea
 
 You can also provide a json url for ckeditor mention plugin
-- data-mention-users for @users
+- data-mention-users-list should contain a json encoded list of users
 - data-mention-discussions REDO TODO
 - data-mention-files	REDO TODO
 */
 
-
-function sendFile(files) {
-	console.log(files)
-
-	// add multiple files!!!
-
-	// use default laravel files route
-
-	// edit file controller to support ajax return of url
-	
-	var formData = new FormData();
-	formData.append("file", file);
-	formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
-	$.ajax({
-		url: '/summernote-upload',
-		data: formData,
-		cache: false,
-		contentType: false,
-		processData: false,
-		type: 'POST',
-		success: function (data) {
-			$summernote.summernote('insertImage', data, function ($image) {
-				$image.attr('src', data);
-			});
-		}
-	});
-}
-
-
 up.compiler('.wysiwyg', function (element, data) {
-
 
 	// load mentions
 	var mentions = JSON.parse(element.getAttribute("data-mention-users-list"))
@@ -49,7 +19,7 @@ up.compiler('.wysiwyg', function (element, data) {
 	console.log(mentions);
 
 
-	$(element).summernote({
+	var $summernote = $(element).summernote({
 
 		toolbar: [
 			['style', ['style']],
@@ -62,17 +32,17 @@ up.compiler('.wysiwyg', function (element, data) {
 			['view', ['fullscreen', 'codeview', 'help']],
 		],
 
+		// this is the main call back to upload a file (image or anything else with summernote)
 		callbacks: {
 			onImageUpload: function (files) {
 				console.log(files);
-				console.log($(element));
-				
-				/*
-				if (!files.length) return;            
-				sendFile(files)
-				*/
+				for (var i = 0; i < files.length; i++) {
+					console.log(files[i])
+					sendFile($summernote, files[i]);
+				}
 			}
 		},
+
 		hint: {
 			mentions: mentions,
 			match: /\B@(\w*)$/,
@@ -91,143 +61,29 @@ up.compiler('.wysiwyg', function (element, data) {
 
 });
 
-/*
 
-// first le'ts handle the mentions
-mentions_loaded = false
-mentions = []
-
-// if mentions are already loaded we directly filter and return
-if (mentions_loaded) {
-	resolve(mentions.filter(isItemMatching).slice(0, 10))
-}
-
-// this function will return the matching mentions based on the queryText entered by the user after an @
-function getFeedItems(queryText) {
-	return new Promise((resolve, reject) => {
-
-		// else we load the json and return
-		var mention_users = element.getAttribute("data-mention-users")
-		$.getJSON(mention_users, function (mentions) {
-			mentions_loaded = true;
-			console.log(mentions)
-			resolve(mentions.filter(isItemMatching).slice(0, 10))
-		})
-			.fail(function () {
-				console.log("error loading mentions");
-				reject();
-			})
-
-	})
-
-	// This function filters items based on the name property (it contains both username and real name)
-	function isItemMatching(item) {
-		// Make the search case-insensitive.
-		const searchString = queryText.toLowerCase();
-
-		// Include an item in the search results if the name or username includes the current user input.
-		return (
-			item.name.toLowerCase().includes(searchString) ||
-			item.id.toLowerCase().includes(searchString)
-		);
-	}
-}
-
-function customItemRenderer(item) {
-	const itemElement = document.createElement('span');
-
-	itemElement.classList.add('custom-item');
-	itemElement.id = `mention-list-item-id-${item.userId}`;
-	itemElement.textContent = `${item.name} `;
-
-	const usernameElement = document.createElement('span');
-
-	usernameElement.classList.add('custom-item-username');
-	usernameElement.textContent = item.id;
-
-	itemElement.appendChild(usernameElement);
+function sendFile($summernote, file) {
+	var formData = new FormData();
+	formData.append("file", file);
+	formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+	group_id = $('meta[name="group-id"]').attr('content');
 
 
-	return itemElement;
-}
-
-
-// This instantiate the CKeditor
-ClassicEditor
-	.create(element, {
-		mention: {
-			feeds: [
-				{
-					marker: '@',
-					feed: getFeedItems,
-					minimumCharacters: 0,
-					itemRenderer: customItemRenderer
-				}
-			]
-		},
-		mediaEmbed: {
-			previewsInData: true
-		},
-		removePlugins: ['MediaEmbed'],
-
-		toolbar: {
-			items: [
-				'heading',
-				'|',
-				'bold',
-				'italic',
-				'link',
-				'bulletedList',
-				'numberedList',
-				'|',
-				'indent',
-				'outdent',
-				'|',
-				'blockQuote',
-				'insertTable',
-				'imageUpload',
-				'undo',
-				'redo',
-			]
-		},
-		language: 'en',
-		image: {
-			toolbar: [
-				'imageTextAlternative',
-				'imageStyle:full',
-				'imageStyle:side'
-			],
-			upload: {
-				panel: {
-					items: ['insertImageViaUrl']
-				}
-			}
-		},
-		table: {
-			contentToolbar: [
-				'tableColumn',
-				'tableRow',
-				'mergeTableCells'
-			]
-		},
-
-
-	})
-	.then(editor => {
-		window.editor = editor;
-		editor.editing.view.change( writer => {
-			writer.setStyle( 'max-height', '400px', editor.editing.view.document.getRoot() );
-		} );
-
-	})
-	.catch(error => {
-		console.error('Oops, something gone wrong!');
-		console.error(error);
+	$.ajax({
+		url: '/groups/' + group_id + '/files/create',
+		data: formData,
+		cache: false,
+		contentType: false,
+		processData: false,
+		type: 'POST',
+		success: function (data) {
+			console.log(data);
+			$summernote.summernote('insertImage', data, function ($image) {
+				$image.attr('src', data);
+			});
+		}
 	});
-	*/
-
-
-//});
+}
 
 
 

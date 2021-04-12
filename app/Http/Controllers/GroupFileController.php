@@ -48,8 +48,8 @@ class GroupFileController extends Controller
         $tag = $request->get('tag');
 
         $parent = $request->get('parent');
-        
-        
+
+
 
         if ($parent) {
             // load the current parent and it's parents in a single "parents" collection
@@ -63,17 +63,17 @@ class GroupFileController extends Controller
 
 
         $folders = $group->files()
-        ->with('user', 'group', 'tags')
-        ->where('item_type', File::FOLDER)
-        ->orderBy('status', 'desc')
-        ->orderBy('name', 'asc')
-        ->when($parent, function ($query) use ($parent) {
-            return $query->where('parent_id', $parent);
-        })
-        ->when(!$parent, function ($query) {
-            return $query->whereNull('parent_id');
-        })
-        ->get();
+            ->with('user', 'group', 'tags')
+            ->where('item_type', File::FOLDER)
+            ->orderBy('status', 'desc')
+            ->orderBy('name', 'asc')
+            ->when($parent, function ($query) use ($parent) {
+                return $query->where('parent_id', $parent);
+            })
+            ->when(!$parent, function ($query) {
+                return $query->whereNull('parent_id');
+            })
+            ->get();
 
         $files = $group->files()
             ->with('user', 'group', 'tags')
@@ -90,7 +90,7 @@ class GroupFileController extends Controller
                 return $query->whereNull('parent_id');
             })
             ->paginate(20);
-        
+
 
         return view('files.index')
             ->with('title', $group->name . ' - ' . trans('messages.files'))
@@ -194,6 +194,22 @@ class GroupFileController extends Controller
     {
         $this->authorize('create-file', $group);
 
+        // handle the case of a summernote upaload (via ajax)
+        if ($request->ajax()) {
+            if ($request->file('file')) {
+                $file = new File();
+                $file->forceSave();
+                $file->group()->associate($group);
+                $file->user()->associate(Auth::user());
+                $file->addToStorage($request->file('file'));
+                $group->touch();
+                \Auth::user()->touch();
+
+                return response()->json(route('groups.files.preview', [$group, $file]), 200, [], JSON_UNESCAPED_SLASHES);
+            }
+            return response()->json('no file found in request', 404, [], JSON_UNESCAPED_SLASHES);
+        }
+
         try {
             if ($request->file('files')) {
                 foreach ($request->file('files') as $uploaded_file) {
@@ -224,10 +240,10 @@ class GroupFileController extends Controller
                 }
 
                 flash(trans('messages.ressource_created_successfully'));
-                
+
+
+
                 return redirect()->route('groups.files.index', ['group' => $group, 'parent' => $parent]);
-                
-                
             } else {
                 abort(400, trans('messages.no_file_selected'));
             }
@@ -239,6 +255,8 @@ class GroupFileController extends Controller
             }
         }
     }
+
+
 
     /**
      * Store the folder in the file DB.
@@ -288,7 +306,6 @@ class GroupFileController extends Controller
 
             flash(trans('messages.ressource_created_successfully'));
             return redirect()->route('groups.files.index', ['group' => $group, 'parent' => $parent]);
-
         } else {
             flash(trans('messages.ressource_not_created_successfully'));
 
@@ -388,7 +405,7 @@ class GroupFileController extends Controller
         }
 
         if ($request->has('parent')) {
-             // handle null case (aka root)
+            // handle null case (aka root)
             if ($request->get('parent') == 'root') {
                 $parent = null;
                 $file->setParent(null);
