@@ -354,6 +354,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('files/{file}/icon', 'FileDownloadController@icon')->name('.files.icon');
 
 
+        // Collaboration
+        Route::get('files/{file}/collaboration', 'CollaborationController@edit')->name('.files.collaboration');
+        Route::get('files/{file}/collaboration/download', 'CollaborationController@show')->name('.files.collaboration.download');
+
         // Allowed Tags
         Route::get('tags', 'GroupTagController@edit')->name('.tags.edit');
         Route::post('tags', 'GroupTagController@update')->name('.tags.update');

@@ -15,4 +15,7 @@ return [
   'inbox_password' => env('INBOX_PASSWORD'),
   'inbox_prefix' => env('INBOX_PREFIX'),
   'inbox_suffix' => env('INBOX_SUFFIX'),
+
+  'onlyoffice_url' => env('ONLYOFFICE_URL'),
+
 ];
