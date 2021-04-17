@@ -18,15 +18,15 @@ self.addEventListener("message", (event) => {
     }
 });
 
-// cache 500 images for 5 minutes
+// cache 5000 images for 60 minutes
 registerRoute(
     ({request}) => request.destination === 'image',
     new CacheFirst({
         cacheName: 'images',
         plugins: [
             new ExpirationPlugin({
-                maxEntries: 500,
-                maxAgeSeconds: 60 * 5,
+                maxEntries: 5000,
+                maxAgeSeconds: 60 * 60,
             }),
         ],
     })
