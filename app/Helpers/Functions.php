@@ -10,9 +10,8 @@ use Carbon\Carbon;
  * returns the value of $name setting as stored in DB.
  */
 function setting($name, $default = false)
-{
-    
-    return \App\Setting::get($name, $default, App::getLocale());
+{   
+    return \App\Setting::get($name, $default);
 }
 
 function sizeForHumans($bytes)

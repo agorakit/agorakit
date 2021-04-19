@@ -23,9 +23,12 @@ class Setting extends Model
 
     /**
      * Static method to get a value from the settings table.
+     * It returns the localized version if found
      */
     public static function get($key, $default = null, $locale = null)
     {
+        //$locale = \App::getLocale();
+
         $setting = Cache::rememberForever('settings_' . $key . $locale, function () use ($key, $locale) {
             if (\App\Setting::where('name', $key)->where('locale', $locale)->count() > 0) {
                 return \App\Setting::where('name', $key)->where('locale', $locale)->first();
@@ -54,10 +57,15 @@ class Setting extends Model
     /**
      * Static method to set a value to the settings table.
      */
-    public static function set($key, $value)
+    public static function set($key, $value, $locale = null)
     {
-        Cache::forget('settings_' . $key);
-        $setting = \App\Setting::firstOrNew(['name' => $key]);
+        Cache::forget('settings_' . $key . $locale);
+
+        if ($locale) {
+            $setting = \App\Setting::firstOrNew(['name' => $key, 'locale' => $locale]);
+        } else {
+            $setting = \App\Setting::firstOrNew(['name' => $key]);
+        }
         $setting->value = $value;
         $setting->save();
 
