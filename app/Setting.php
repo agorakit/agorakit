@@ -24,11 +24,16 @@ class Setting extends Model
     /**
      * Static method to get a value from the settings table.
      */
-    public static function get($key, $default = null)
+    public static function get($key, $default = null, $locale = null)
     {
-        $setting = Cache::rememberForever('settings_'.$key, function () use ($key) {
+        $setting = Cache::rememberForever('settings_' . $key . $locale, function () use ($key, $locale) {
+            if (\App\Setting::where('name', $key)->where('locale', $locale)->count() > 0) {
+                return \App\Setting::where('name', $key)->where('locale', $locale)->first();
+            }
             return \App\Setting::where('name', $key)->first();
         });
+
+
 
         // first priority : non empty setting stored in the DB
         if ($setting && $setting->exists) {
@@ -36,20 +41,22 @@ class Setting extends Model
         }
 
         // second priority, default setting stored in app/config/agorakit.php
-        if (config('agorakit.'.$key)) {
-            return config('agorakit.'.$key);
+        if (config('agorakit.' . $key)) {
+            return config('agorakit.' . $key);
         }
 
         // lastly our $default
         return $default;
     }
 
+
+
     /**
      * Static method to set a value to the settings table.
      */
     public static function set($key, $value)
     {
-        Cache::forget('settings_'.$key);
+        Cache::forget('settings_' . $key);
         $setting = \App\Setting::firstOrNew(['name' => $key]);
         $setting->value = $value;
         $setting->save();
@@ -63,18 +70,18 @@ class Setting extends Model
      */
     public static function getArray($key, $default = null)
     {
-        $setting = Cache::rememberForever('settings_'.$key, function () use ($key) {
+        $setting = Cache::rememberForever('settings_' . $key, function () use ($key) {
             return \App\Setting::where('name', $key)->first();
         });
 
         // first priority : non empty setting stored in the DB
         if ($setting && $setting->exists) {
-            return json_decode($setting->value);            
+            return json_decode($setting->value);
         }
 
         // second priority, default setting stored in app/config/agorakit.php
-        if (config('agorakit.'.$key)) {
-            return config('agorakit.'.$key);
+        if (config('agorakit.' . $key)) {
+            return config('agorakit.' . $key);
         }
 
         // lastly our $default
@@ -86,7 +93,7 @@ class Setting extends Model
      */
     public static function setArray($key, $value)
     {
-        Cache::forget('settings_'.$key);
+        Cache::forget('settings_' . $key);
         $setting = \App\Setting::firstOrNew(['name' => $key]);
         $setting->value = json_encode($value);
         $setting->save();

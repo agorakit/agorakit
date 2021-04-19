@@ -11,7 +11,8 @@ use Carbon\Carbon;
  */
 function setting($name, $default = false)
 {
-    return \App\Setting::get($name, $default);
+    
+    return \App\Setting::get($name, $default, App::getLocale());
 }
 
 function sizeForHumans($bytes)
