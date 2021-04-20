@@ -18,7 +18,7 @@
         </a>
         @endif
 
-        {!! setting('homepage_presentation_for_members') !!}
+        {!! setting()->localized()->get('homepage_presentation_for_members') !!}
     </div>
 
 </div>

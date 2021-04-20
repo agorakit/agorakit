@@ -62,30 +62,7 @@
                             {{ __('This is shown on the homepage for non connected user. Make it attractive :-)') }}
                         </div>
 
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            @foreach(\Config::get('app.locales') as $locale)
-
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="homepage_presentation_tab-{{$locale}}" data-toggle="tab"
-                                    href="#homepage_presentation-{{$locale}}" role="tab" aria-controls="home"
-                                    >
-                                    {{strtoupper($locale)}}
-                                </a>
-                            </li>
-                            @endforeach
-                        </ul>
-
-                        <div class="tab-content">
-                            @foreach(\Config::get('app.locales') as $locale)
-                            <div class="tab-pane" id="homepage_presentation-{{$locale}}" role="tabpanel" aria-labelledby="profile-tab">
-                                {!! Form::textarea('homepage_presentation[' .
-                                $locale . ']' , App\Setting::firstOrNew(['name'=>'homepage_presentation', 'locale' =>
-                                $locale])->value,
-                                ['class' =>
-                                'form-control wysiwyg']) !!}
-                            </div>
-                            @endforeach
-                        </div>
+                        <x-setting-localized name="homepage_presentation"/>
                     </div>
                 </div>
 

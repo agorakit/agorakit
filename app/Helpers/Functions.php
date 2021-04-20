@@ -9,9 +9,19 @@ use Carbon\Carbon;
 /**
  * returns the value of $name setting as stored in DB.
  */
-function setting($name, $default = false)
-{   
-    return \App\Setting::get($name, $default);
+function setting($name = false, $default = false)
+{
+    $setting = new \App\Setting;
+    if ($name) {
+        return $setting->get($name, $default);
+    }
+    return $setting;
+}
+
+
+function settingLocalized($name, $default = false)
+{
+    return \App\Setting::getLocalized($name, \App::getLocale(), $default);
 }
 
 function sizeForHumans($bytes)
