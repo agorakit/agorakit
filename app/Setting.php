@@ -34,7 +34,7 @@ class Setting extends Model
 
     /**
      * Method to get a value from the settings table.
-     * It returns the localized version if found
+     * If $this->localized() is used, the localized version is returned
      */
     public function get($key, $default = null)
     {
@@ -97,11 +97,9 @@ class Setting extends Model
     /** 
      * Static method to get an array from the settings table.
      */
-    public static function getArray($key, $default = null)
+    public function getArray($key, $default = null)
     {
-        $setting = Cache::rememberForever('settings_' . $key, function () use ($key) {
-            return \App\Setting::where('name', $key)->first();
-        });
+        $setting  = $this->get($key);
 
         // first priority : non empty setting stored in the DB
         if ($setting && $setting->exists) {
@@ -120,13 +118,8 @@ class Setting extends Model
     /**
      * Static method to set a value to the settings table.
      */
-    public static function setArray($key, $value)
+    public function setArray($key, $value)
     {
-        Cache::forget('settings_' . $key);
-        $setting = \App\Setting::firstOrNew(['name' => $key]);
-        $setting->value = json_encode($value);
-        $setting->save();
-
-        return $setting;
+        return $this->set(json_encode($value));
     }
 }

@@ -62,7 +62,7 @@
                             {{ __('This is shown on the homepage for non connected user. Make it attractive :-)') }}
                         </div>
 
-                        <x-setting-localized name="homepage_presentation"/>
+                        <x-setting-localized name="homepage_presentation" />
                     </div>
                 </div>
 
@@ -156,8 +156,8 @@
                     </div>
                     <select style="width: 100%" name="user_tags[]" class="js-tags form-control" data-tags="true"
                         multiple="multiple">
-                        @if (is_array(\App\Setting::getArray('user_tags')))
-                        @foreach (\App\Setting::getArray('user_tags') as $tag)
+                        @if (is_array(setting()->getArray('user_tags')))
+                        @foreach (setting()->getArray('user_tags') as $tag)
                         <option value="{{$tag}}" selected="selected">{{$tag}}</option>
                         @endforeach
                         @endif
@@ -173,8 +173,8 @@
 
                     <select style="width: 100%" name="group_tags[]" class="js-tags form-control" data-tags="true"
                         multiple="multiple">
-                        @if (is_array(\App\Setting::getArray('group_tags')))
-                        @foreach (\App\Setting::getArray('group_tags') as $tag)
+                        @if (is_array(setting()->getArray('group_tags')))
+                        @foreach (setting()->getArray('group_tags') as $tag)
                         <option value="{{$tag}}" selected="selected">{{$tag}}</option>
                         @endforeach
                         @endif

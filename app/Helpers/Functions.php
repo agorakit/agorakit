@@ -19,11 +19,6 @@ function setting($name = false, $default = false)
 }
 
 
-function settingLocalized($name, $default = false)
-{
-    return \App\Setting::getLocalized($name, \App::getLocale(), $default);
-}
-
 function sizeForHumans($bytes)
 {
     if ($bytes >= 1073741824) {
