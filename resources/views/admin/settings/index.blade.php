@@ -72,10 +72,7 @@
                     <div class="setting-help">
                         {{ __('You can use it for announcements for example') }}
                     </div>
-                    <div class="form-group">
-                        {!! Form::textarea('homepage_presentation_for_members',
-                        setting('homepage_presentation_for_members'), ['class' => 'form-control wysiwyg']) !!}
-                    </div>
+                    <x-setting-localized name="homepage_presentation_for_members" />
                 </div>
 
                 <div class="setting">
@@ -85,8 +82,7 @@
                         {{ __('A single help page you can customize, available on the user menu, for logged in user') }}
                     </div>
                     <div class="form-group">
-                        {!! Form::textarea('help_text', setting('help_text'), ['class' => 'form-control wysiwyg'])
-                        !!}
+                        <x-setting-localized name="help_text" />
                     </div>
                 </div>
             </div>
@@ -142,7 +138,7 @@
                         {{ __('You can add html / css / js at the footer of each page here') }}
                     </div>
                     <textarea name="custom_footer" class="form-control">{!!setting('custom_footer')!!}</textarea>
-
+                    
                 </div>
 
             </div>

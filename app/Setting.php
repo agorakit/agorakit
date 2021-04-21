@@ -13,8 +13,8 @@ use Venturecraft\Revisionable\RevisionableTrait;
  * 
  * setting()->localized($locale)->get($name) will return the $name setting using the $locale 
  * setting()->localized()->get($name) will return the $name setting using current app locale
- * setting()->get($name) will return the setting without locale support
- * 
+ * setting()->get($name) will return the $name setting value without locale support
+ * setting($name) will return the $name setting value directly
  */
 class Setting extends Model
 {
@@ -102,8 +102,8 @@ class Setting extends Model
         $setting  = $this->get($key);
 
         // first priority : non empty setting stored in the DB
-        if ($setting && $setting->exists) {
-            return json_decode($setting->value);
+        if ($setting) {
+            return json_decode($setting);
         }
 
         // second priority, default setting stored in app/config/agorakit.php
@@ -120,6 +120,6 @@ class Setting extends Model
      */
     public function setArray($key, $value)
     {
-        return $this->set(json_encode($value));
+        return $this->set($key, json_encode($value));
     }
 }
