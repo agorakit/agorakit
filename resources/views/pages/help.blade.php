@@ -17,10 +17,10 @@
 
         <div class="prose lg:prose-l">
 
-            @if (strlen(setting('help_text')) > 5)
-                {!! setting('help_text') !!}
+            @if (setting()->localized()->get('help_text'))
+            {!! setting()->localized()->get('help_text') !!}
             @else
-                {!! setting('homepage_presentation', trans('documentation.intro')) !!}
+            {!! setting()->get('help_text', trans('documentation.intro'))!!}
             @endif
         </div>
 

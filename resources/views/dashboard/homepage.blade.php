@@ -3,7 +3,7 @@
 @section('content')
 
 
-@if(setting('homepage_presentation_for_members', false))
+@if(setting()->get('homepage_presentation_for_members') || setting()->localized()->get('homepage_presentation_for_members'))
 
 <div class="overflow-y-auto border items-start  p-3 mb-4 rounded bg-gray-200 text-sm sm:text-base flex"
     style="max-height: 10em;">
@@ -23,7 +23,7 @@
         @else
         {!! setting()->get('homepage_presentation_for_members')!!}
         @endif
-        
+
     </div>
 
 </div>
