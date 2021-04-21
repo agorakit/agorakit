@@ -71,6 +71,9 @@ class CollaborationController extends Controller
      */
     public function edit(Request $request, Group $group, File $file)
     {
+        $this->authorize('view', $file);
+
+
         return view('collaboration.edit')
             ->with('group', $group)
             ->with('file', $file);
