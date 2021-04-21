@@ -50,18 +50,18 @@ class CollaborationController extends Controller
      */
     public function show(Request $request, Group $group, File $file)
     {
-       // $this->authorize('view', $file);
-       // TODO NEED TO SIGN THIS URL
+        $this->authorize('view', $file);
+        if (!$request->hasValidSignature()) {
+            abort(401, 'Invalid signature');
+        }
 
-       
         if (Storage::exists($file->path)) {
             return (new Response(Storage::get($file->path), 200))
-            ->header('Content-Type', $file->mime);
+                ->header('Content-Type', $file->mime);
             //->header('Content-Disposition', 'inline; filename="'.$file->original_filename.'"');
         } else {
-            abort(404, 'File not found in storage at '.$file->path);
+            abort(404, 'File not found in storage at ' . $file->path);
         }
-    
     }
 
     /**
@@ -73,8 +73,8 @@ class CollaborationController extends Controller
     public function edit(Request $request, Group $group, File $file)
     {
         return view('collaboration.edit')
-        ->with('group', $group)
-        ->with('file', $file);
+            ->with('group', $group)
+            ->with('file', $file);
     }
 
     /**

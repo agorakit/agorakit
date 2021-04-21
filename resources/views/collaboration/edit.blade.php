@@ -12,7 +12,7 @@
     </script>
 
 
-    <div id="placeholder" style="width:800px"></div>
+    <div id="placeholder" style="height:100%">The editor will load here</div>
 
 
     <script>
@@ -21,7 +21,7 @@
             "fileType": "docx",
             "key": "{{$file->id}}",
             "title": "{{$file->name}}",
-            "url": "{{route('groups.files.collaboration.download', [$group, $file])}}"            
+            "url": "{!!URL::temporarySignedRoute('groups.files.collaboration.download', now()->addMinutes(30), [$group, $file]) !!}"            
         },
         "documentType": "word"
     });
