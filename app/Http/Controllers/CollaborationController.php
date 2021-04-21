@@ -50,7 +50,6 @@ class CollaborationController extends Controller
      */
     public function show(Request $request, Group $group, File $file)
     {
-        $this->authorize('view', $file);
         if (!$request->hasValidSignature()) {
             abort(401, 'Invalid signature');
         }
