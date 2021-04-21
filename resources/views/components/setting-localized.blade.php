@@ -9,6 +9,11 @@
         </a>
     </li>
     @endforeach
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" data-toggle="tab" href="#{{$name}}-default" role="tab" aria-controls="home">
+            Default
+        </a>
+    </li>
 </ul>
 
 <div class="tab-content">
@@ -20,4 +25,9 @@
         'form-control wysiwyg']) !!}
     </div>
     @endforeach
+    <div class="tab-pane" id="{{$name}}-default" role="tabpanel" aria-labelledby="profile-tab">
+        {!! Form::textarea($name . "[default]" , setting()->get($name),
+        ['class' =>
+        'form-control wysiwyg']) !!}
+    </div>
 </div>
