@@ -50,8 +50,7 @@
                         <div class="setting-help">
                             {{ __('This logo will be used in the top left area and as a favicon') }}
                         </div>
-                        <input name="logo" id="logo" type="file"
-                            title="{{ trans('messages.select_one_file') }}">
+                        <input name="logo" id="logo" type="file" title="{{ trans('messages.select_one_file') }}">
                     </div>
                 </div>
 
@@ -62,8 +61,8 @@
                         <div class="setting-help">
                             {{ __('This is shown on the homepage for non connected user. Make it attractive :-)') }}
                         </div>
-                        {!! Form::textarea('homepage_presentation', setting('homepage_presentation'), ['class' =>
-                        'form-control wysiwyg']) !!}
+
+                        <x-setting-localized name="homepage_presentation" />
                     </div>
                 </div>
 
@@ -73,10 +72,7 @@
                     <div class="setting-help">
                         {{ __('You can use it for announcements for example') }}
                     </div>
-                    <div class="form-group">
-                        {!! Form::textarea('homepage_presentation_for_members',
-                        setting('homepage_presentation_for_members'), ['class' => 'form-control wysiwyg']) !!}
-                    </div>
+                    <x-setting-localized name="homepage_presentation_for_members" />
                 </div>
 
                 <div class="setting">
@@ -86,7 +82,7 @@
                         {{ __('A single help page you can customize, available on the user menu, for logged in user') }}
                     </div>
                     <div class="form-group">
-                        {!! Form::textarea('help_text', setting('help_text'), ['class' => 'form-control wysiwyg']) !!}
+                        <x-setting-localized name="help_text" />
                     </div>
                 </div>
             </div>
@@ -98,21 +94,24 @@
 
                     <h2>{{ __('Group creation') }}</h2>
                     <div class="form-group">
-                        {!! Form::checkbox('user_can_create_groups', 'yes' , setting('user_can_create_groups',true)) !!}
+                        {!! Form::checkbox('user_can_create_groups', 'yes' , setting('user_can_create_groups',true))
+                        !!}
                         {{ __('Allow regular users to create groups (if you uncheck this box, only admins will be able to create groups)') }}
 
                         <br />
 
                         {!! Form::checkbox('user_can_create_secret_groups','yes' ,
                         setting('user_can_create_secret_groups')) !!}
-                        {!! __('Allow regular users to create <strong>secret</strong> groups (if you uncheck this box,
+                        {!! __('Allow regular users to create <strong>secret</strong> groups (if you uncheck this
+                        box,
                         only admins will be able to create secret groups)')!!}
 
-                        <br/>
+                        <br />
                         {!! Form::checkbox('user_can_register','yes' ,
                         setting('user_can_register', true)) !!}
-                        {!! __('Allow anyone to create a new user account on this server (unchecking this box will disable registration)')!!}
-                    
+                        {!! __('Allow anyone to create a new user account on this server (unchecking this box will
+                        disable registration)')!!}
+
                     </div>
 
 
@@ -122,9 +121,10 @@
             </div>
 
             <div class="tab-pane fade" id="notifications" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-            
+
                 <div class="form-group">
-                    {!! Form::checkbox('notify_admins_on_group_create','yes' , setting('notify_admins_on_group_create'))
+                    {!! Form::checkbox('notify_admins_on_group_create','yes' ,
+                    setting('notify_admins_on_group_create'))
                     !!}
                     {{ __('Notify administrators when a new group is created') }}
                 </div>
@@ -138,7 +138,7 @@
                         {{ __('You can add html / css / js at the footer of each page here') }}
                     </div>
                     <textarea name="custom_footer" class="form-control">{!!setting('custom_footer')!!}</textarea>
-
+                    
                 </div>
 
             </div>
@@ -146,32 +146,34 @@
             <div class="tab-pane fade setting" id="tags" role="tabpanel" aria-labelledby="v-pills-messages-tab">
                 <h2>{{ __('Tags') }}</h2>
                 <div class="form-group">
-                    {{ __('Limit the allowed tags for tagging users') }}.<br/>
+                    {{ __('Limit the allowed tags for tagging users') }}.<br />
                     <div class="setting-help">
                         {{ __('Enter a coma separated list of allowed tags or leave blank to allow free tagging') }}
                     </div>
-                    <select style="width: 100%" name="user_tags[]" class="js-tags form-control" data-tags="true" multiple="multiple">
-                    @if (is_array(\App\Setting::getArray('user_tags')))
-                        @foreach (\App\Setting::getArray('user_tags') as $tag)
+                    <select style="width: 100%" name="user_tags[]" class="js-tags form-control" data-tags="true"
+                        multiple="multiple">
+                        @if (is_array(setting()->getArray('user_tags')))
+                        @foreach (setting()->getArray('user_tags') as $tag)
                         <option value="{{$tag}}" selected="selected">{{$tag}}</option>
                         @endforeach
-                    @endif
+                        @endif
                     </select>
 
                 </div>
 
                 <div class="form-group">
-                    {{ __('Limit the allowed tags for tagging groups') }}.<br/>
+                    {{ __('Limit the allowed tags for tagging groups') }}.<br />
                     <div class="setting-help">
                         {{ __('Enter a coma separated list of allowed tags or leave blank to allow free tagging') }}
                     </div>
 
-                    <select style="width: 100%" name="group_tags[]" class="js-tags form-control" data-tags="true" multiple="multiple">
-                    @if (is_array(\App\Setting::getArray('group_tags')))
-                        @foreach (\App\Setting::getArray('group_tags') as $tag)
+                    <select style="width: 100%" name="group_tags[]" class="js-tags form-control" data-tags="true"
+                        multiple="multiple">
+                        @if (is_array(setting()->getArray('group_tags')))
+                        @foreach (setting()->getArray('group_tags') as $tag)
                         <option value="{{$tag}}" selected="selected">{{$tag}}</option>
                         @endforeach
-                    @endif
+                        @endif
                     </select>
 
                 </div>

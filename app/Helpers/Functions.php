@@ -9,10 +9,15 @@ use Carbon\Carbon;
 /**
  * returns the value of $name setting as stored in DB.
  */
-function setting($name, $default = false)
+function setting($name = false, $default = false)
 {
-    return \App\Setting::get($name, $default);
+    $setting = new \App\Setting;
+    if ($name) {
+        return $setting->get($name, $default);
+    }
+    return $setting;
 }
+
 
 function sizeForHumans($bytes)
 {
