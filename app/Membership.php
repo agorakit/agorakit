@@ -20,9 +20,9 @@ class Membership extends Model
         'group_id' => 'required|exists:groups,id',
     ];
 
-    // Default notification interval is daily :
+    // Default notification interval is hourly :
     protected $attributes = [
-        'notification_interval' => 60 * 24,
+        'notification_interval' => 60,
     ];
 
     protected $keepRevisionOf = ['config', 'membership', 'notification_interval'];
