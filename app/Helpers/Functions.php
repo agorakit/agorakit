@@ -129,3 +129,31 @@ function geocode($address)
 
     return false;
 }
+
+
+
+/**
+ * provide a link to any model
+ */
+function linkTo($model)
+{
+    if ($model instanceof App\User) {
+        return route('users.show', $model);
+    }
+
+    if ($model instanceof App\Discussion) {
+        return route('groups.discussions.show', [$model->group, $model]);
+    }
+
+    if ($model instanceof App\File) {
+        return route('groups.files.show', [$model->group, $model]);
+    }
+
+    if ($model instanceof App\Action) {
+        return route('groups.actions.show', [$model->group, $model]);
+    }
+
+    if ($model instanceof App\Comment) {
+        return route('groups.discussions.show', [$model->group, $model->discussion]);
+    }
+}
