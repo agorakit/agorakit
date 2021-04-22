@@ -62,30 +62,7 @@
                             {{ __('This is shown on the homepage for non connected user. Make it attractive :-)') }}
                         </div>
 
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            @foreach(\Config::get('app.locales') as $locale)
-
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="homepage_presentation_tab-{{$locale}}" data-toggle="tab"
-                                    href="#homepage_presentation-{{$locale}}" role="tab" aria-controls="home"
-                                    >
-                                    {{strtoupper($locale)}}
-                                </a>
-                            </li>
-                            @endforeach
-                        </ul>
-
-                        <div class="tab-content">
-                            @foreach(\Config::get('app.locales') as $locale)
-                            <div class="tab-pane" id="homepage_presentation-{{$locale}}" role="tabpanel" aria-labelledby="profile-tab">
-                                {!! Form::textarea('homepage_presentation[' .
-                                $locale . ']' , App\Setting::firstOrNew(['name'=>'homepage_presentation', 'locale' =>
-                                $locale])->value,
-                                ['class' =>
-                                'form-control wysiwyg']) !!}
-                            </div>
-                            @endforeach
-                        </div>
+                        <x-setting-localized name="homepage_presentation" />
                     </div>
                 </div>
 
@@ -95,10 +72,7 @@
                     <div class="setting-help">
                         {{ __('You can use it for announcements for example') }}
                     </div>
-                    <div class="form-group">
-                        {!! Form::textarea('homepage_presentation_for_members',
-                        setting('homepage_presentation_for_members'), ['class' => 'form-control wysiwyg']) !!}
-                    </div>
+                    <x-setting-localized name="homepage_presentation_for_members" />
                 </div>
 
                 <div class="setting">
@@ -108,8 +82,7 @@
                         {{ __('A single help page you can customize, available on the user menu, for logged in user') }}
                     </div>
                     <div class="form-group">
-                        {!! Form::textarea('help_text', setting('help_text'), ['class' => 'form-control wysiwyg'])
-                        !!}
+                        <x-setting-localized name="help_text" />
                     </div>
                 </div>
             </div>
@@ -165,7 +138,7 @@
                         {{ __('You can add html / css / js at the footer of each page here') }}
                     </div>
                     <textarea name="custom_footer" class="form-control">{!!setting('custom_footer')!!}</textarea>
-
+                    
                 </div>
 
             </div>
@@ -179,8 +152,8 @@
                     </div>
                     <select style="width: 100%" name="user_tags[]" class="js-tags form-control" data-tags="true"
                         multiple="multiple">
-                        @if (is_array(\App\Setting::getArray('user_tags')))
-                        @foreach (\App\Setting::getArray('user_tags') as $tag)
+                        @if (is_array(setting()->getArray('user_tags')))
+                        @foreach (setting()->getArray('user_tags') as $tag)
                         <option value="{{$tag}}" selected="selected">{{$tag}}</option>
                         @endforeach
                         @endif
@@ -196,8 +169,8 @@
 
                     <select style="width: 100%" name="group_tags[]" class="js-tags form-control" data-tags="true"
                         multiple="multiple">
-                        @if (is_array(\App\Setting::getArray('group_tags')))
-                        @foreach (\App\Setting::getArray('group_tags') as $tag)
+                        @if (is_array(setting()->getArray('group_tags')))
+                        @foreach (setting()->getArray('group_tags') as $tag)
                         <option value="{{$tag}}" selected="selected">{{$tag}}</option>
                         @endforeach
                         @endif

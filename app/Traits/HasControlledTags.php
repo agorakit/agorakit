@@ -39,14 +39,14 @@ trait HasControlledTags
     public function areNewTagsAllowed()
     {
         if ($this instanceof User) {
-            if (Setting::getArray('user_tags')) {
+            if (setting()->getArray('user_tags')) {
                 return false;
             } else {
                 return true;
             }
         }
         if ($this instanceof Group) {
-            if (Setting::getArray('group_tags')) {
+            if (setting()->getArray('group_tags')) {
                 return false;
             } else {
                 return true;
@@ -77,16 +77,16 @@ trait HasControlledTags
     public function getAllowedTags()
     {
         if ($this instanceof User) {
-            if (Setting::getArray('user_tags')) {
-                return $this->arrayToTags(Setting::getArray('user_tags'));
+            if (setting()->getArray('user_tags')) {
+                return $this->arrayToTags(setting()->getArray('user_tags'));
             } else {
                 return collect();
             }
         }
 
         if ($this instanceof Group) {
-            if (Setting::getArray('group_tags')) {
-                return $this->arrayToTags(Setting::getArray('group_tags'));
+            if (setting()->getArray('group_tags')) {
+                return $this->arrayToTags(setting()->getArray('group_tags'));
             } else {
                 return collect();
             }

@@ -18,9 +18,9 @@ class DatabaseSeeder extends Seeder
         $faker->addProvider(new \Mmo\Faker\PicsumProvider($faker));
 
         // set intro text
-        Setting::set('homepage_presentation', $this->richtext());
-        Setting::set('homepage_presentation_for_members', $this->richtext());
-        Setting::set('help_text', $this->richtext());
+        setting()->set('homepage_presentation', $this->richtext());
+        setting()->set('homepage_presentation_for_members', $this->richtext());
+        setting()->set('help_text', $this->richtext());
 
 
 

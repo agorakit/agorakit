@@ -7,11 +7,20 @@ use Config;
 use Illuminate\Database\Eloquent\Model;
 use Venturecraft\Revisionable\RevisionableTrait;
 
+
+/**
+ * This model is used to store settings. Settings are stored in the settings table. This model support fluent use.
+ * 
+ * setting()->localized($locale)->get($name) will return the $name setting using the $locale 
+ * setting()->localized()->get($name) will return the $name setting using current app locale
+ * setting()->get($name) will return the $name setting value without locale support
+ * setting($name) will return the $name setting value directly
+ */
 class Setting extends Model
 {
     use RevisionableTrait;
 
-    protected $fillable = ['name', 'value'];
+    protected $fillable = ['name', 'value', 'locale'];
     protected $rules = [
         'name'  => 'required',
     ];
@@ -21,22 +30,24 @@ class Setting extends Model
 
     protected $keepRevisionOf = ['name', 'locale', 'value'];
 
+    protected $lang = null;
+
     /**
-     * Static method to get a value from the settings table.
-     * It returns the localized version if found
+     * Method to get a value from the settings table.
+     * If $this->localized() is used, the localized version is returned
      */
-    public static function get($key, $default = null, $locale = null)
+    public function get($key, $default = null)
     {
-        //$locale = \App::getLocale();
-
-        $setting = Cache::rememberForever('settings_' . $key . $locale, function () use ($key, $locale) {
-            if (\App\Setting::where('name', $key)->where('locale', $locale)->count() > 0) {
+        if ($this->lang) {
+            $locale = $this->lang;
+            $setting = Cache::rememberForever('settings_' . $key . $locale, function () use ($key, $locale) {
                 return \App\Setting::where('name', $key)->where('locale', $locale)->first();
-            }
-            return \App\Setting::where('name', $key)->first();
-        });
-
-
+            });
+        } else {
+            $setting = Cache::rememberForever('settings_' . $key, function () use ($key) {
+                return \App\Setting::where('name', $key)->first();
+            });
+        }
 
         // first priority : non empty setting stored in the DB
         if ($setting && $setting->exists) {
@@ -52,18 +63,28 @@ class Setting extends Model
         return $default;
     }
 
+    public function localized($locale = false)
+    {
+        if ($locale) {
+            $this->lang = $locale;
+        } else {
+            $this->lang = \App::getLocale();
+        }
+
+        return $this;
+    }
 
 
     /**
      * Static method to set a value to the settings table.
      */
-    public static function set($key, $value, $locale = null)
+    public function set($key, $value)
     {
-        Cache::forget('settings_' . $key . $locale);
-
-        if ($locale) {
-            $setting = \App\Setting::firstOrNew(['name' => $key, 'locale' => $locale]);
+        if ($this->lang) {
+            Cache::forget('settings_' . $key . $this->lang);
+            $setting = \App\Setting::firstOrNew(['name' => $key, 'locale' => $this->lang]);
         } else {
+            Cache::forget('settings_' . $key);
             $setting = \App\Setting::firstOrNew(['name' => $key]);
         }
         $setting->value = $value;
@@ -76,15 +97,13 @@ class Setting extends Model
     /** 
      * Static method to get an array from the settings table.
      */
-    public static function getArray($key, $default = null)
+    public function getArray($key, $default = null)
     {
-        $setting = Cache::rememberForever('settings_' . $key, function () use ($key) {
-            return \App\Setting::where('name', $key)->first();
-        });
+        $setting  = $this->get($key);
 
         // first priority : non empty setting stored in the DB
-        if ($setting && $setting->exists) {
-            return json_decode($setting->value);
+        if ($setting) {
+            return json_decode($setting);
         }
 
         // second priority, default setting stored in app/config/agorakit.php
@@ -99,13 +118,8 @@ class Setting extends Model
     /**
      * Static method to set a value to the settings table.
      */
-    public static function setArray($key, $value)
+    public function setArray($key, $value)
     {
-        Cache::forget('settings_' . $key);
-        $setting = \App\Setting::firstOrNew(['name' => $key]);
-        $setting->value = json_encode($value);
-        $setting->save();
-
-        return $setting;
+        return $this->set($key, json_encode($value));
     }
 }
