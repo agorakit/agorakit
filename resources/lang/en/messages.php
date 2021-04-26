@@ -265,4 +265,5 @@ return array (
   'create_folder_help' => 'Enter the name of the folder',
   'folder' => 'Folder',
   'root' => 'Root',
+  'attach_file_help' => 'Simply drop a file on the editor to add it or use the image button in the toolbar',
 );

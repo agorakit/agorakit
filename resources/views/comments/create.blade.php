@@ -10,23 +10,18 @@
     'data-mention-users-list' => $group->users->pluck('username')
     ]
     ) !!}
+    <div class="text-sm text-gray-700 mt-2"><i class="fa fa-info-circle"></i> {{trans('messages.attach_file_help')}}</div>
 </div>
 
 
 
-<div class="flex justify-between">
 
-    <div class="form-group">
-        {!! Form::submit(trans('messages.reply'), ['class' => 'btn btn-primary']) !!}
-    </div>
 
-    <div class="form-group">
-        <label for="attachment">{{trans('Attach a file')}}</label>
-        <br />
-        <input type="file" name="files[]" id="attachment" multiple="multiple">
-    </div>
-
+<div class="form-group">
+    {!! Form::submit(trans('messages.reply'), ['class' => 'btn btn-primary']) !!}
 </div>
+
+
 
 
 

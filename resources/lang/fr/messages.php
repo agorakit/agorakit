@@ -264,4 +264,5 @@ return array (
   'home' => 'Accueil',
   'folder' => 'Dossier',
   'root' => 'Racine',
+  'attach_file_help' => 'Glissez un fichier sur l\'éditeur de texte pour le joindre ou utilisez le bouton "image" dans la bare d\'outils',
 );
