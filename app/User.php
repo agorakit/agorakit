@@ -296,7 +296,7 @@ class User extends Authenticatable
     public function isAttending(Action $action)
     {
         $participation = Participation::firstOrNew(['user_id' => $this->id, 'action_id' => $action->id]);
-        if ($participation->status == Participation::PARTICIPATE) {
+        if ($participation->status == Participation::PARTICIPATE && $participation->exists) {
             return true;
         } else {
             return false;

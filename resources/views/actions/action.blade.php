@@ -52,10 +52,11 @@
     </div>
 
 
-
+    @can ('participate', $action)
     <div class="ml-5">
         @include('participation.dropdown')
     </div>
+    @endcan
 
 
 </div>
