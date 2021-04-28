@@ -107,6 +107,14 @@ class Action extends Model
     }
 
     /**
+     * The users MAYBE attending this action.
+     */
+    public function maybeAttending()
+    {
+        return $this->belongsToMany(User::class)->wherePivot('status', '0');
+    }
+
+    /**
      * Geocode the item
      * Returns true if it worked, false if it didn't.
      */

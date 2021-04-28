@@ -326,8 +326,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('actions/{action}/history', 'GroupActionController@history')->name('.actions.history');
 
         // Action participation
+        Route::get('actions/{action}/participation/set/{status}', 'ParticipationController@set')->name('.actions.participation.set');
         Route::get('actions/{action}/participation', 'ParticipationController@edit')->name('.actions.participation');
         Route::post('actions/{action}/participation', 'ParticipationController@update')->name('.actions.participation.update');
+
         
 
         // Files

@@ -1,15 +1,10 @@
-<div class="user-simple text-center mb-5" style="width: 10rem;" up-expand>
-  <div class="avatar medium">
-    <img src="{{route('users.cover', [$user, 'medium'])}}" class="rounded-full"/>
-  </div>
+<div class="text-center mb-5 mx-4" up-expand>
+  <img src="{{route('users.cover', [$user, 'medium'])}}" class="rounded-full h-12 w-12 image-cover shrink-0" />
   <div>
-    <h3 class="mt-2">
-      <a up-follow href="{{ route('users.show', [$user]) }}">
-        {{ $user->name }}
-      </a>
-    </h3>
-    <div class="meta">
-      {{ trans('messages.last_activity') }} : {{ $user->updated_at->diffForHumans() }}
-    </div>
+
+    <a up-follow href="{{ route('users.show', [$user]) }}">
+      {{ $user->name }}
+    </a>
+
   </div>
 </div>
