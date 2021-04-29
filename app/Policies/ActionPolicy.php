@@ -78,6 +78,6 @@ class ActionPolicy
      */
     public function participate(User $user, Action $action)
     {
-        return $user->isMemberOf($group);
+        return $user->isMemberOf($action->group);
     }
 }
