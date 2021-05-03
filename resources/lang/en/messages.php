@@ -266,4 +266,5 @@ return array (
   'folder' => 'Folder',
   'root' => 'Root',
   'attach_file_help' => 'Simply drop a file on the editor to add it or use the image button in the toolbar',
+  'max_file_size' => 'Maximum file size',
 );
