@@ -12,7 +12,7 @@
         title="{{ trans('messages.select_one_or_more_files') }}">
         <div class="small-help">
             <i class="fas fa-info-circle"></i>
-            {{trans('messages.max_file_size')}} {{config('agorakit.max_file_size')}} Kb
+            {{trans('messages.max_file_size')}} {{sizeForHumans(config('agorakit.max_file_size') * 1000) }}
         </div>
 </div>
 

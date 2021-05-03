@@ -13,7 +13,7 @@
     <div class="text-sm text-gray-700 mt-2">
         <i class="fa fa-info-circle"></i> {{trans('messages.attach_file_help')}}.
 
-        {{trans('messages.max_file_size')}} : {{config('agorakit.max_file_size')}} Kb
+        {{trans('messages.max_file_size')}} : {{sizeForHumans(config('agorakit.max_file_size') * 1000) }}
 
     </div>
 </div>
