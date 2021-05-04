@@ -286,7 +286,7 @@ class CheckMailbox extends Command
     /** 
      * Returns all recipients form the message, in the to: and cc: fields
      */
-    function extratRecipientsFromMessage(Message $message)
+    function extractRecipientsFromMessage(Message $message)
     {
         $recipients = [];
         
