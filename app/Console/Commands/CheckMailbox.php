@@ -245,6 +245,27 @@ class CheckMailbox extends Command
 
         $this->debug('discussion not found');
         return false;
+    }
+
+     /**
+     * Returns a rich text represenation of the email, stripping away all quoted text, signatures, etc...
+     */
+    function extractTextFromMessage(Message $message)
+    {
+        $body_html = $message->getBodyHtml(); // this is the raw html content
+        $body_text = nl2br(\EmailReplyParser\EmailReplyParser::parseReply($message->getBodyText()));
+
+
+        // count the number of caracters in plain text :
+        // if we really have less than 5 chars in there using plain text,
+        // let's post the whole html mess from the email
+        if (strlen($body_text) < 5) {
+            $result = $body_html;
+        } else {
+            $result = $body_text;
+        }
+
+        return $result;
 
     }
 
@@ -260,6 +281,9 @@ class CheckMailbox extends Command
         $headers = array_combine($matches[1], $matches[2]);
         return $headers;
     }
+
+
+   
 
     /**
     * Returns true if message is an autoreply or vacation auto responder
@@ -302,6 +326,11 @@ class CheckMailbox extends Command
             }
         }
 
+        if (array_key_exists('X-AG-AUTOREPLY', $message_headers)) {
+            return true;
+        }
+        
+
 
         return false;
 
@@ -329,19 +358,7 @@ class CheckMailbox extends Command
         $discussion = new Discussion();
 
         $discussion->name = $message->getSubject();
-
-        $body_html = $message->getBodyHtml(); // this is the raw html content
-        $body_text = nl2br(\EmailReplyParser\EmailReplyParser::parseReply($message->getBodyText()));
-
-
-        // count the number of caracters in plain text :
-        // if we really have less than 5 chars in there using plain text,
-        // let's post the whole html mess from the email
-        if (strlen($body_text) < 5) {
-            $discussion->body = $body_html;
-        } else {
-            $discussion->body = $body_text;
-        }
+        $discussion->body = $this->extractTextFromMessage($message);
 
         $discussion->total_comments = 1; // the discussion itself is already a comment
         $discussion->user()->associate($user);
@@ -365,18 +382,7 @@ class CheckMailbox extends Command
 
     public function processDiscussionExistsAndUserIsMember(Discussion $discussion, User $user, Message $message)
     {
-        $body_html = $message->getBodyHtml(); // this is the raw html content
-        $body_text = nl2br(\EmailReplyParser\EmailReplyParser::parseReply($message->getBodyText()));
-
-
-        // count the number of caracters in plain text :
-        // if we really have less than 5 chars in there using plain text,
-        // let's post the whole html mess from the email
-        if (strlen($body_text) < 5) {
-            $body = $body_html;
-        } else {
-            $body = $body_text;
-        }
+        $discussion->body = $this->extractTextFromMessage($message);
 
         $comment = new \App\Comment();
         $comment->body = $body;
