@@ -33,6 +33,14 @@ In all cases the mail is processed
 Bounced to user in case of failure
 Moved to a folder on the imap server
 
+Emails are generated as follow :  
+
+[INBOX_PREFIX][group-slug][INBOX_SUFFIX]
+
+[INBOX_PREFIX]reply-[discussion-id][INBOX_SUFFIX]
+
+Prefix and suffix is defined in the .env file
+
 */
 
 class CheckMailbox extends Command
@@ -149,10 +157,10 @@ class CheckMailbox extends Command
                     $this->info('User exists BUT is not member of group, bouncing and inviting');
                     $this->processGroupExistsButUserIsNotMember($group, $user, $message);
                 } else {
-                    if (!$group) {
-                        $this->moveMessage($message, 'group_not_found');
-                    } elseif (!$user->exists) {
+                    if (!$user->exists) {
                         $this->moveMessage($message, 'user_not_found');
+                    } elseif (!$group) {
+                        $this->moveMessage($message, 'group_not_found');
                     } elseif (!$discussion) {
                         $this->moveMessage($message, 'discussion_not_found');
                     }
@@ -190,18 +198,21 @@ class CheckMailbox extends Command
     {
         $user = User::where('email', $message->getFrom()->getAddress())->firstOrNew();
         if (!$user->exists) {
+            $this->debug('User does not exist, created from: '  . $user->email);
             $user->email = $message->getFrom()->getAddress();
+        } else {
+            $this->debug('User exists, from: '  . $user->email);
         }
-        $this->debug('from: '  . $user->email);
+
         return $user;
     }
 
     // tries to find a valid group in the $message (using to: email header)
     public function extractGroupFromMessage(Message $message)
     {
-        $to_emails = [];
-        foreach ($message->getTo() as $to) {
-            $to_email = $to->getAddress();
+        $recipients = $this->extractRecipientsFromMessage($message);
+        
+        foreach ($recipients as $to_email) {
             // remove prefix and suffix to get the slug we need to check against
             $to_email = str_replace(config('agorakit.inbox_prefix'), '', $to_email);
             $to_email = str_replace(config('agorakit.inbox_suffix'), '', $to_email);
@@ -226,9 +237,9 @@ class CheckMailbox extends Command
     // tries to find a valid discussion in the $message (using to: email header and message content)
     public function extractDiscussionFromMessage(Message $message)
     {
-        $to_emails = [];
-        foreach ($message->getTo() as $to) {
-            $to_email = $to->getAddress();
+        $recipients = $this->extractRecipientsFromMessage($message);
+        
+        foreach ($recipients as $to_email) {
             preg_match('#' . config('agorakit.inbox_prefix') . 'reply-(\d+)' . config('agorakit.inbox_prefix') . '#', $to_email, $matches);
             //dd($matches);
             if (isset($matches[1])) {
@@ -265,12 +276,30 @@ class CheckMailbox extends Command
             $converter = new HtmlConverter();
             $markdown = $converter->convert($body_html);
             $result = Markdown::defaultTransform(EmailReplyParser::parseReply($markdown));
-            
         } else {
             $result = $body_text;
         }
 
         return $result;
+    }
+
+    /** 
+     * Returns all recipients form the message, in the to: and cc: fields
+     */
+    function extratRecipientsFromMessage(Message $message)
+    {
+        $recipients = [];
+        
+        foreach ($message->getTo() as $to) {
+            $recipients[] = $to->getAddress();
+        }
+
+        foreach ($message->getCc() as $to) {
+            $recipients[] = $to->getAddress();
+        }
+
+        return $recipients;
+
     }
 
     function parse_rfc822_headers(string $header_string): array
@@ -345,6 +374,11 @@ class CheckMailbox extends Command
      */
     public function moveMessage(Message $message, $folder)
     {
+        // don't move message in dev
+        if ($this->option('keep')) {
+            return true;
+        }
+
         if ($this->connection->hasMailbox($folder)) {
             $folder = $this->connection->getMailbox($folder);
         } else {
@@ -379,6 +413,7 @@ class CheckMailbox extends Command
             return true;
         } else {
             $this->moveMessage($message, 'discussion_not_created');
+            Mail::to($user)->send(new MailBounce($message, 'Your discussion could not be created in the group, maybe your message was empty'));
             return false;
         }
     }
