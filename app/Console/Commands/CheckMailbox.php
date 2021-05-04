@@ -198,10 +198,10 @@ class CheckMailbox extends Command
     {
         $user = User::where('email', $message->getFrom()->getAddress())->firstOrNew();
         if (!$user->exists) {
-            $this->debug('User does not exist, created from: '  . $user->email);
             $user->email = $message->getFrom()->getAddress();
+            $this->debug('User does not exist, created from: '  . $user->email);
         } else {
-            $this->debug('User exists, from: '  . $user->email);
+            $this->debug('User exists, email: '  . $user->email);
         }
 
         return $user;
@@ -219,14 +219,14 @@ class CheckMailbox extends Command
 
             $to_emails[] = $to_email;
 
-            $this->debug('to: '  . $to_email);
+            $this->debug('(group candidate) to: '  . $to_email);
         }
 
         $group = Group::whereIn('slug', $to_emails)->first();
 
 
         if ($group) {
-            $this->debug('group found');
+            $this->debug('group found : ' . $group->name . ' (' . $group->id . ')');
             return $group;
         }
         $this->debug('group not found');
