@@ -11,6 +11,9 @@ use Illuminate\Console\Command;
 use Log;
 use Mail;
 use App\Mail\MailBounce;
+use League\HTMLToMarkdown\HtmlConverter;
+use Michelf\Markdown;
+use EmailReplyParser\EmailReplyParser;
 
 /*
 Inbound  Email handler for Agorakit
@@ -35,39 +38,39 @@ Moved to a folder on the imap server
 class CheckMailbox extends Command
 {
     /**
-    * The name and signature of the console command.
-    *
-    * @var string
-    */
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
     protected $signature = 'agorakit:checkmailbox
     {{--keep : Use this to keep a copy of the email in the mailbox. Only for development!}}
     {{--debug : Show debug info.}}
     ';
 
     /**
-    * The console command description.
-    *
-    * @var string
-    */
+     * The console command description.
+     *
+     * @var string
+     */
     protected $description = 'Check the configured email imap server to allow post by email functionality';
 
     protected $debug = false;
 
     /**
-    * Create a new command instance.
-    *
-    * @return void
-    */
+     * Create a new command instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         parent::__construct();
     }
 
     /**
-    * Execute the console command.
-    *
-    * @return mixed
-    */
+     * Execute the console command.
+     *
+     * @return mixed
+     */
     public function handle()
     {
         if ($this->option('debug')) {
@@ -92,7 +95,7 @@ class CheckMailbox extends Command
                         continue;
                     }
                     // $mailbox is instance of \Ddeboer\Imap\Mailbox
-                    $this->line('Mailbox '.$mailbox->getName().' has '.$mailbox->count().' messages');
+                    $this->line('Mailbox ' . $mailbox->getName() . ' has ' . $mailbox->count() . ' messages');
                 }
             }
 
@@ -136,26 +139,21 @@ class CheckMailbox extends Command
                 $discussion = $this->extractDiscussionFromMessage($message);
 
                 // Decide what to do
-                if ($discussion && $user->exists && $user->isMemberOf($discussion->group)){
+                if ($discussion && $user->exists && $user->isMemberOf($discussion->group)) {
                     $this->info('Discussion exists and user is member of group, posting message');
                     $this->processDiscussionExistsAndUserIsMember($discussion, $user, $message);
-                }
-                elseif ($group && $user->exists && $user->isMemberOf($group)){
+                } elseif ($group && $user->exists && $user->isMemberOf($group)) {
                     $this->info('User exists and is member of group, posting message');
                     $this->processGroupExistsAndUserIsMember($group, $user, $message);
-                }
-                elseif ($group && $user->exists && !$user->isMemberOf($group)){
+                } elseif ($group && $user->exists && !$user->isMemberOf($group)) {
                     $this->info('User exists BUT is not member of group, bouncing and inviting');
                     $this->processGroupExistsButUserIsNotMember($group, $user, $message);
-                }
-                else {
+                } else {
                     if (!$group) {
                         $this->moveMessage($message, 'group_not_found');
-                    }
-                    elseif (!$user->exists) {
+                    } elseif (!$user->exists) {
                         $this->moveMessage($message, 'user_not_found');
-                    }
-                    elseif (!$discussion) {
+                    } elseif (!$discussion) {
                         $this->moveMessage($message, 'discussion_not_found');
                     }
                 }
@@ -174,9 +172,10 @@ class CheckMailbox extends Command
 
 
     /**
-    * Small helper debug output
-    */
-    public function debug($message) {
+     * Small helper debug output
+     */
+    public function debug($message)
+    {
         if ($this->option('debug')) {
             $this->line($message);
         }
@@ -184,13 +183,13 @@ class CheckMailbox extends Command
 
 
     /**
-    * Tries to find a valid user in the $message (using from: email header)
-    * Else returns a new user with the email already set
-    */
+     * Tries to find a valid user in the $message (using from: email header)
+     * Else returns a new user with the email already set
+     */
     public function extractUserFromMessage(Message $message)
     {
         $user = User::where('email', $message->getFrom()->getAddress())->firstOrNew();
-        if (!$user->exists){
+        if (!$user->exists) {
             $user->email = $message->getFrom()->getAddress();
         }
         $this->debug('from: '  . $user->email);
@@ -230,7 +229,7 @@ class CheckMailbox extends Command
         $to_emails = [];
         foreach ($message->getTo() as $to) {
             $to_email = $to->getAddress();
-            preg_match('#' . config('agorakit.inbox_prefix') . 'reply-(\d+)' . config('agorakit.inbox_prefix'). '#', $to_email, $matches);
+            preg_match('#' . config('agorakit.inbox_prefix') . 'reply-(\d+)' . config('agorakit.inbox_prefix') . '#', $to_email, $matches);
             //dd($matches);
             if (isset($matches[1])) {
                 $discussion = Discussion::where('id', $matches[1])->first();
@@ -247,29 +246,35 @@ class CheckMailbox extends Command
         return false;
     }
 
-     /**
+    /**
      * Returns a rich text represenation of the email, stripping away all quoted text, signatures, etc...
      */
     function extractTextFromMessage(Message $message)
     {
         $body_html = $message->getBodyHtml(); // this is the raw html content
-        $body_text = nl2br(\EmailReplyParser\EmailReplyParser::parseReply($message->getBodyText()));
+        $body_text = nl2br(EmailReplyParser::parseReply($message->getBodyText()));
 
 
         // count the number of caracters in plain text :
         // if we really have less than 5 chars in there using plain text,
-        // let's post the whole html mess from the email
+        // let's post the whole html mess, 
+        // converted to markdown, 
+        // then stripped with the same EmailReplyParser, 
+        // then converted from markdown back to html, pfeeew
         if (strlen($body_text) < 5) {
-            $result = $body_html;
+            $converter = new HtmlConverter();
+            $markdown = $converter->convert($body_html);
+            $result = Markdown::defaultTransform(EmailReplyParser::parseReply($markdown));
+            
         } else {
             $result = $body_text;
         }
 
         return $result;
-
     }
 
-    function parse_rfc822_headers(string $header_string): array {
+    function parse_rfc822_headers(string $header_string): array
+    {
         // Reference:
         // * Base: https://stackoverflow.com/questions/5631086/getting-x-mailer-attribute-in-php-imap/5631445#5631445
         // * Improved regex: https://stackoverflow.com/questions/5631086/getting-x-mailer-attribute-in-php-imap#comment61912182_5631445
@@ -283,11 +288,11 @@ class CheckMailbox extends Command
     }
 
 
-   
+
 
     /**
-    * Returns true if message is an autoreply or vacation auto responder
-    */
+     * Returns true if message is an autoreply or vacation auto responder
+     */
     public function isMessageAutomated(Message $message)
     {
         /*
@@ -329,16 +334,15 @@ class CheckMailbox extends Command
         if (array_key_exists('X-AG-AUTOREPLY', $message_headers)) {
             return true;
         }
-        
+
 
 
         return false;
-
     }
 
     /**
-    * Move the provided $message to a folder named $folder
-    */
+     * Move the provided $message to a folder named $folder
+     */
     public function moveMessage(Message $message, $folder)
     {
         if ($this->connection->hasMailbox($folder)) {
@@ -367,9 +371,9 @@ class CheckMailbox extends Command
             // update activity timestamp on parent items
             $group->touch();
             $user->touch();
-            $this->info('Discussion has been created with id : '.$discussion->id);
-            $this->info('Title : '.$discussion->name);
-            Log::info('Discussion has been created from email', ['mail'=> $message, 'discussion' => $discussion]);
+            $this->info('Discussion has been created with id : ' . $discussion->id);
+            $this->info('Title : ' . $discussion->name);
+            Log::info('Discussion has been created from email', ['mail' => $message, 'discussion' => $discussion]);
 
             $this->moveMessage($message, 'processed');
             return true;
@@ -396,8 +400,7 @@ class CheckMailbox extends Command
             $discussion->touch();
             $this->moveMessage($message, 'processed');
             return true;
-        }
-        else {
+        } else {
             $this->moveMessage($message, 'comment_not_created');
             return false;
         }
@@ -415,5 +418,4 @@ class CheckMailbox extends Command
     {
         $this->moveMessage($message, 'group_not_found_user_not_found');
     }
-
 }

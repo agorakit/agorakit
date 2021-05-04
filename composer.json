@@ -27,6 +27,8 @@
     "laravel/ui": "^2.0",
     "laravelcollective/html": "6.*",
     "laravolt/avatar": "^3.2",
+    "league/html-to-markdown": "^5.0",
+    "michelf/php-markdown": "^1.9",
     "misd/linkify": "^1.1",
     "mpratt/embera": "~2.0",
     "nicolaslopezj/searchable": "^1.10",
