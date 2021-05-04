@@ -2,11 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Message;
 use App\Discussion;
 use App\Group;
 use App\User;
-use Ddeboer\Imap\Server;
-use Ddeboer\Imap\Message;
 use Illuminate\Console\Command;
 use Log;
 use Mail;
@@ -16,7 +15,7 @@ use Michelf\Markdown;
 use EmailReplyParser\EmailReplyParser;
 
 /*
-Inbound  Email handler for Agorakit
+Inbound Email handler for Agorakit
 
 High level overview :
 
@@ -31,7 +30,7 @@ High level overview :
 
 In all cases the mail is processed
 Bounced to user in case of failure
-Moved to a folder on the imap server
+
 
 Emails are generated as follow :  
 
@@ -43,15 +42,14 @@ Prefix and suffix is defined in the .env file
 
 */
 
-class CheckMailbox extends Command
+class ProcessMessages extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'agorakit:checkmailbox
-    {{--keep : Use this to keep a copy of the email in the mailbox. Only for development!}}
+    protected $signature = 'agorakit:processmessages
     {{--debug : Show debug info.}}
     ';
 
@@ -60,7 +58,7 @@ class CheckMailbox extends Command
      *
      * @var string
      */
-    protected $description = 'Check the configured email imap server to allow post by email functionality';
+    protected $description = 'Process the messages table to allow post by email functionality';
 
     protected $debug = false;
 
@@ -72,6 +70,10 @@ class CheckMailbox extends Command
     public function __construct()
     {
         parent::__construct();
+
+        if ($this->option('debug')) {
+            $this->debug = true;
+        }
     }
 
     /**
@@ -81,99 +83,50 @@ class CheckMailbox extends Command
      */
     public function handle()
     {
-        if ($this->option('debug')) {
-            $this->debug = true;
-        }
 
-        if (config('agorakit.inbox_host')) {
-            // open mailbox
+        $messages = Message::all();
+        foreach ($messages as $message) {
 
-            $this->server = new Server(config('agorakit.inbox_host'), config('agorakit.inbox_port'), config('agorakit.inbox_flags'));
 
-            // $this->connection is instance of \Ddeboer\Imap\Connection
-            $this->connection = $this->server->authenticate(config('agorakit.inbox_username'), config('agorakit.inbox_password'));
-
-            $mailboxes = $this->connection->getMailboxes();
-
+            // debug message info
             if ($this->debug) {
-                foreach ($mailboxes as $mailbox) {
-                    // Skip container-only mailboxes
-                    // @see https://secure.php.net/manual/en/function.imap-getmailboxes.php
-                    if ($mailbox->getAttributes() & \LATT_NOSELECT) {
-                        continue;
-                    }
-                    // $mailbox is instance of \Ddeboer\Imap\Mailbox
-                    $this->line('Mailbox ' . $mailbox->getName() . ' has ' . $mailbox->count() . ' messages');
+                $this->line('Processing email "' . $message->subject . '"');
+                $this->line('From ' . $message->getFrom()->getAddress());
+            }
+
+            // discard automated messages
+            if ($message->isAutomated()) {
+                $this->line('Message discarded because automated');
+                continue;
+            }
+
+
+            // Try to find a $user, $group and $discussion from the $message
+            $user = $this->extractUserFromMessage($message);
+            $group = $this->extractGroupFromMessage($message);
+            $discussion = $this->extractDiscussionFromMessage($message);
+
+            // Decide what to do
+            if ($discussion && $user->exists && $user->isMemberOf($discussion->group)) {
+                $this->info('Discussion exists and user is member of group, posting message');
+                $this->processDiscussionExistsAndUserIsMember($discussion, $user, $message);
+            } elseif ($group && $user->exists && $user->isMemberOf($group)) {
+                $this->info('User exists and is member of group, posting message');
+                $this->processGroupExistsAndUserIsMember($group, $user, $message);
+            } elseif ($group && $user->exists && !$user->isMemberOf($group)) {
+                $this->info('User exists BUT is not member of group, bouncing and inviting');
+                $this->processGroupExistsButUserIsNotMember($group, $user, $message);
+            } else {
+                if (!$user->exists) {
+                    $this->moveMessage($message, 'user_not_found');
+                } elseif (!$group) {
+                    $this->moveMessage($message, 'group_not_found');
+                } elseif (!$discussion) {
+                    $this->moveMessage($message, 'discussion_not_found');
                 }
             }
 
-            // open INBOX
-            $this->inbox = $this->connection->getMailbox('INBOX');
-
-
-            // get all messages
-            $messages = $this->inbox->getMessages();
-
-
-            $i = 0;
-            foreach ($messages as $message) {
-
-                $this->line('-----------------------------------');
-
-                // limit to 100 messages at a time (I did no find a better way to handle this iterator)
-                if ($i > 100) {
-                    break;
-                }
-                $i++;
-
-
-                // debug message info
-                if ($this->debug) {
-                    $this->line('Processing email "' . $message->getSubject() . '"');
-                    $this->line('From ' . $message->getFrom()->getAddress());
-                }
-
-                // discard automated messages
-                if ($this->isMessageAutomated($message)) {
-                    $this->moveMessage($message, 'automated');
-                    $this->line('Message discarded because automated');
-                    continue;
-                }
-
-
-                // Try to find a $user, $group and $discussion from the $message
-                $user = $this->extractUserFromMessage($message);
-                $group = $this->extractGroupFromMessage($message);
-                $discussion = $this->extractDiscussionFromMessage($message);
-
-                // Decide what to do
-                if ($discussion && $user->exists && $user->isMemberOf($discussion->group)) {
-                    $this->info('Discussion exists and user is member of group, posting message');
-                    $this->processDiscussionExistsAndUserIsMember($discussion, $user, $message);
-                } elseif ($group && $user->exists && $user->isMemberOf($group)) {
-                    $this->info('User exists and is member of group, posting message');
-                    $this->processGroupExistsAndUserIsMember($group, $user, $message);
-                } elseif ($group && $user->exists && !$user->isMemberOf($group)) {
-                    $this->info('User exists BUT is not member of group, bouncing and inviting');
-                    $this->processGroupExistsButUserIsNotMember($group, $user, $message);
-                } else {
-                    if (!$user->exists) {
-                        $this->moveMessage($message, 'user_not_found');
-                    } elseif (!$group) {
-                        $this->moveMessage($message, 'group_not_found');
-                    } elseif (!$discussion) {
-                        $this->moveMessage($message, 'discussion_not_found');
-                    }
-                }
-
-                // TODO handle the case of user exists but group doesn't -> might be a good idea to bounce back to user
-
-
-            }
-            $this->connection->expunge();
-        } else {
-            $this->info('Email checking disabled in settings');
-            return false;
+            // TODO handle the case of user exists but group doesn't -> might be a good idea to bounce back to user
         }
     }
 
@@ -211,7 +164,7 @@ class CheckMailbox extends Command
     public function extractGroupFromMessage(Message $message)
     {
         $recipients = $this->extractRecipientsFromMessage($message);
-        
+
         foreach ($recipients as $to_email) {
             // remove prefix and suffix to get the slug we need to check against
             $to_email = str_replace(config('agorakit.inbox_prefix'), '', $to_email);
@@ -238,7 +191,7 @@ class CheckMailbox extends Command
     public function extractDiscussionFromMessage(Message $message)
     {
         $recipients = $this->extractRecipientsFromMessage($message);
-        
+
         foreach ($recipients as $to_email) {
             preg_match('#' . config('agorakit.inbox_prefix') . 'reply-(\d+)' . config('agorakit.inbox_prefix') . '#', $to_email, $matches);
             //dd($matches);
@@ -289,7 +242,7 @@ class CheckMailbox extends Command
     function extractRecipientsFromMessage(Message $message)
     {
         $recipients = [];
-        
+
         foreach ($message->getTo() as $to) {
             $recipients[] = $to->getAddress();
         }
@@ -299,7 +252,6 @@ class CheckMailbox extends Command
         }
 
         return $recipients;
-
     }
 
     function parse_rfc822_headers(string $header_string): array
@@ -319,55 +271,7 @@ class CheckMailbox extends Command
 
 
 
-    /**
-     * Returns true if message is an autoreply or vacation auto responder
-     */
-    public function isMessageAutomated(Message $message)
-    {
-        /*
-        TODO Detect automatic messages and discard them, see here : https://www.arp242.net/autoreply.html
-        */
-
-        $message_headers = $this->parse_rfc822_headers($message->getRawHeaders());
-
-        if (array_key_exists('Auto-Submitted', $message_headers)) {
-            return true;
-        }
-
-        if (array_key_exists('X-Auto-Response-Suppress', $message_headers)) {
-            return true;
-        }
-
-        if (array_key_exists('List-Id', $message_headers)) {
-            return true;
-        }
-
-        if (array_key_exists('List-Unsubscribe', $message_headers)) {
-            return true;
-        }
-
-        if (array_key_exists('Feedback-ID', $message_headers)) {
-            return true;
-        }
-
-        if (array_key_exists('X-NIDENT', $message_headers)) {
-            return true;
-        }
-
-        if (array_key_exists('Delivered-To', $message_headers)) {
-            if ($message_headers['Delivered-To'] == 'Autoresponder') {
-                return true;
-            }
-        }
-
-        if (array_key_exists('X-AG-AUTOREPLY', $message_headers)) {
-            return true;
-        }
-
-
-
-        return false;
-    }
+   
 
     /**
      * Move the provided $message to a folder named $folder
