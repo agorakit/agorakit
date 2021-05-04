@@ -2,12 +2,11 @@
 
 namespace App\Console\Commands;
 
-use App\Message;
 use App\Discussion;
 use App\Group;
 use App\User;
 use Ddeboer\Imap\Server;
-use Ddeboer\Imap\Message as ImapMessage;
+use Ddeboer\Imap\Message;
 use Illuminate\Console\Command;
 use Log;
 use Mail;
@@ -117,7 +116,7 @@ class CheckMailbox extends Command
 
 
             $i = 0;
-            foreach ($messages as $mailbox_message) {
+            foreach ($messages as $message) {
 
                 $this->line('-----------------------------------');
 
@@ -130,25 +129,45 @@ class CheckMailbox extends Command
 
                 // debug message info
                 if ($this->debug) {
-                    $this->line('Processing email "' . $mailbox_message->getSubject() . '"');
-                    $this->line('From ' . $mailbox_message->getFrom()->getAddress());
+                    $this->line('Processing email "' . $message->getSubject() . '"');
+                    $this->line('From ' . $message->getFrom()->getAddress());
                 }
 
-                $message = new Message;
+                // discard automated messages
+                if ($this->isMessageAutomated($message)) {
+                    $this->moveMessage($message, 'automated');
+                    $this->line('Message discarded because automated');
+                    continue;
+                }
 
-                $message->subject = $mailbox_message->getSubject();
-                $message->from = $mailbox_message->getFrom()->getAddress();
-                $message->raw = $mailbox_message->getRawMessage();
 
-                $message->saveOrFail();
+                // Try to find a $user, $group and $discussion from the $message
+                $user = $this->extractUserFromMessage($message);
+                $group = $this->extractGroupFromMessage($message);
+                $discussion = $this->extractDiscussionFromMessage($message);
 
-                $this->moveMessage($mailbox_message, 'stored');
-                
-                /*
-                $message->user = $this->extractUserFromMessage($message);
-                $message->group = $this->extractGroupFromMessage($message);
-                $message->discussion = $this->extractDiscussionFromMessage($message);
-                */
+                // Decide what to do
+                if ($discussion && $user->exists && $user->isMemberOf($discussion->group)) {
+                    $this->info('Discussion exists and user is member of group, posting message');
+                    $this->processDiscussionExistsAndUserIsMember($discussion, $user, $message);
+                } elseif ($group && $user->exists && $user->isMemberOf($group)) {
+                    $this->info('User exists and is member of group, posting message');
+                    $this->processGroupExistsAndUserIsMember($group, $user, $message);
+                } elseif ($group && $user->exists && !$user->isMemberOf($group)) {
+                    $this->info('User exists BUT is not member of group, bouncing and inviting');
+                    $this->processGroupExistsButUserIsNotMember($group, $user, $message);
+                } else {
+                    if (!$user->exists) {
+                        $this->moveMessage($message, 'user_not_found');
+                    } elseif (!$group) {
+                        $this->moveMessage($message, 'group_not_found');
+                    } elseif (!$discussion) {
+                        $this->moveMessage($message, 'discussion_not_found');
+                    }
+                }
+
+                // TODO handle the case of user exists but group doesn't -> might be a good idea to bounce back to user
+
 
             }
             $this->connection->expunge();
@@ -175,7 +194,7 @@ class CheckMailbox extends Command
      * Tries to find a valid user in the $message (using from: email header)
      * Else returns a new user with the email already set
      */
-    public function extractUserFromMessage(ImapMessage $message)
+    public function extractUserFromMessage(Message $message)
     {
         $user = User::where('email', $message->getFrom()->getAddress())->firstOrNew();
         if (!$user->exists) {
@@ -189,7 +208,7 @@ class CheckMailbox extends Command
     }
 
     // tries to find a valid group in the $message (using to: email header)
-    public function extractGroupFromMessage(ImapMessage $message)
+    public function extractGroupFromMessage(Message $message)
     {
         $recipients = $this->extractRecipientsFromMessage($message);
         
@@ -216,7 +235,7 @@ class CheckMailbox extends Command
 
 
     // tries to find a valid discussion in the $message (using to: email header and message content)
-    public function extractDiscussionFromMessage(ImapMessage $message)
+    public function extractDiscussionFromMessage(Message $message)
     {
         $recipients = $this->extractRecipientsFromMessage($message);
         
@@ -241,7 +260,7 @@ class CheckMailbox extends Command
     /**
      * Returns a rich text represenation of the email, stripping away all quoted text, signatures, etc...
      */
-    function extractTextFromMessage(ImapMessage $message)
+    function extractTextFromMessage(Message $message)
     {
         $body_html = $message->getBodyHtml(); // this is the raw html content
         $body_text = nl2br(EmailReplyParser::parseReply($message->getBodyText()));
@@ -267,7 +286,7 @@ class CheckMailbox extends Command
     /** 
      * Returns all recipients form the message, in the to: and cc: fields
      */
-    function extractRecipientsFromMessage(ImapMessage $message)
+    function extractRecipientsFromMessage(Message $message)
     {
         $recipients = [];
         
@@ -303,7 +322,7 @@ class CheckMailbox extends Command
     /**
      * Returns true if message is an autoreply or vacation auto responder
      */
-    public function isMessageAutomated(ImapMessage $message)
+    public function isMessageAutomated(Message $message)
     {
         /*
         TODO Detect automatic messages and discard them, see here : https://www.arp242.net/autoreply.html
@@ -353,7 +372,7 @@ class CheckMailbox extends Command
     /**
      * Move the provided $message to a folder named $folder
      */
-    public function moveMessage(ImapMessage $message, $folder)
+    public function moveMessage(Message $message, $folder)
     {
         // don't move message in dev
         if ($this->option('keep')) {
@@ -372,7 +391,7 @@ class CheckMailbox extends Command
 
 
 
-    public function processGroupExistsAndUserIsMember(Group $group, User $user, ImapMessage $message)
+    public function processGroupExistsAndUserIsMember(Group $group, User $user, Message $message)
     {
         $discussion = new Discussion();
 
@@ -400,7 +419,7 @@ class CheckMailbox extends Command
     }
 
 
-    public function processDiscussionExistsAndUserIsMember(Discussion $discussion, User $user, ImapMessage $message)
+    public function processDiscussionExistsAndUserIsMember(Discussion $discussion, User $user, Message $message)
     {
         $discussion->body = $this->extractTextFromMessage($message);
 
@@ -423,14 +442,14 @@ class CheckMailbox extends Command
     }
 
 
-    public function processGroupExistsButUserIsNotMember(Group $group, User $user, ImapMessage $message)
+    public function processGroupExistsButUserIsNotMember(Group $group, User $user, Message $message)
     {
         Mail::to($user)->send(new MailBounce($message, 'You are not member of ' . $group->name . ' please join the group first before posting'));
         $this->moveMessage($message, 'bounced');
     }
 
 
-    public function processGroupNotFoundUserNotFound(User $user, ImapMessage $message)
+    public function processGroupNotFoundUserNotFound(User $user, Message $message)
     {
         $this->moveMessage($message, 'group_not_found_user_not_found');
     }
