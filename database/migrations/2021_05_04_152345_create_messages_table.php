@@ -22,9 +22,9 @@ class CreateMessagesTable extends Migration
             $table->string('from');
             $table->text('body');
             $table->mediumText('raw');
-            $table->integer('group_id')->unsigned();
-            $table->integer('user_id')->unsigned();
-            $table->integer('discussion_id')->unsigned();
+            $table->integer('group_id')->nullable();
+            $table->integer('user_id')->nullable();
+            $table->integer('discussion_id')->nullable();
             $table->integer('status')->default(0);
         });
     }
