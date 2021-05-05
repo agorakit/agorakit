@@ -1,3 +1,4 @@
+@auth
 <div class="participate-dropdown" id="participate-{{$action->id}}">
     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
@@ -30,3 +31,4 @@
 
     </div>
 </div>
+@endauth
