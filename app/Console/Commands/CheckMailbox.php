@@ -421,10 +421,8 @@ class CheckMailbox extends Command
 
     public function processDiscussionExistsAndUserIsMember(Discussion $discussion, User $user, Message $message)
     {
-        $discussion->body = $this->extractTextFromMessage($message);
-
         $comment = new \App\Comment();
-        $comment->body = $body;
+        $comment->body = $this->extractTextFromMessage($message);
         $comment->user()->associate($user);
         if ($discussion->comments()->save($comment)) {
             $discussion->total_comments++;
