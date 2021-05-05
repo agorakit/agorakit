@@ -70,10 +70,6 @@ class ProcessMessages extends Command
     public function __construct()
     {
         parent::__construct();
-
-        if ($this->option('debug')) {
-            $this->debug = true;
-        }
     }
 
     /**
@@ -83,6 +79,9 @@ class ProcessMessages extends Command
      */
     public function handle()
     {
+        if ($this->option('debug')) {
+            $this->debug = true;
+        }
 
         $messages = Message::all(); // ony with the right status 
         foreach ($messages as $message) {
