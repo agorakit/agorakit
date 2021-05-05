@@ -12,9 +12,7 @@ class Membership extends Model
     protected $table = 'membership';
     public $timestamps = true;
     protected $fillable = ['group_id', 'user_id', 'membership'];
-
     protected $dates = ['notifed_at'];
-
     protected $rules = [
         'user_id'  => 'required|exists:users,id',
         'group_id' => 'required|exists:groups,id',
@@ -28,30 +26,14 @@ class Membership extends Model
     protected $keepRevisionOf = ['config', 'membership', 'notification_interval'];
 
     // Membership levels
-
-    // active member
-    const ADMIN = 100;
-
-    // active member
-    const MEMBER = 20;
-
-    // member asked to be part of the group, but it has not been confirmed yet
-    const CANDIDATE = 10;
-
-    // member invited by a group admin
-    const INVITED = 0;
-
-    // user left the group
-    const UNREGISTERED = -10;
-
-    // user did not accept an invitation
-    const DECLINED = -15;
-
-    // removed by admin for other reason
-    const REMOVED = -20;
-
-    // member is blacklisted and cannot join the group again (not yet in use)
-    const BLACKLISTED = -30;
+    const ADMIN = 100; // group admin
+    const MEMBER = 20; // active member
+    const CANDIDATE = 10; // member asked to be part of the group, but it has not been confirmed yet
+    const INVITED = 0;  // member invited by a group admin    
+    const UNREGISTERED = -10; // user left the group
+    const DECLINED = -15;  // user did not accept an invitation
+    const REMOVED = -20; // removed by admin for another reason
+    const BLACKLISTED = -30; // member is blacklisted and cannot join the group again (not yet in use)
 
     public function isAdmin()
     {

@@ -84,22 +84,15 @@ class ProcessMessages extends Command
     public function handle()
     {
 
-        $messages = Message::all();
+        $messages = Message::all(); // ony with the right status 
         foreach ($messages as $message) {
 
-
-            // debug message info
-            if ($this->debug) {
-                $this->line('Processing email "' . $message->subject . '"');
-                $this->line('From ' . $message->getFrom()->getAddress());
-            }
-
-            // discard automated messages
             if ($message->isAutomated()) {
-                $this->line('Message discarded because automated');
+                $message->status = Message::AUTOMATED;
                 continue;
             }
 
+            ////// TODOOOOOOOOOOOOOO ////////////////////
 
             // Try to find a $user, $group and $discussion from the $message
             $user = $this->extractUserFromMessage($message);
@@ -149,7 +142,7 @@ class ProcessMessages extends Command
      */
     public function extractUserFromMessage(Message $message)
     {
-        $user = User::where('email', $message->getFrom()->getAddress())->firstOrNew();
+        $user = User::where('email', $message->parse()->getFrom()->getAddress())->firstOrNew();
         if (!$user->exists) {
             $user->email = $message->getFrom()->getAddress();
             $this->debug('User does not exist, created from: '  . $user->email);
@@ -210,31 +203,7 @@ class ProcessMessages extends Command
         return false;
     }
 
-    /**
-     * Returns a rich text represenation of the email, stripping away all quoted text, signatures, etc...
-     */
-    function extractTextFromMessage(Message $message)
-    {
-        $body_html = $message->getBodyHtml(); // this is the raw html content
-        $body_text = nl2br(EmailReplyParser::parseReply($message->getBodyText()));
-
-
-        // count the number of caracters in plain text :
-        // if we really have less than 5 chars in there using plain text,
-        // let's post the whole html mess, 
-        // converted to markdown, 
-        // then stripped with the same EmailReplyParser, 
-        // then converted from markdown back to html, pfeeew
-        if (strlen($body_text) < 5) {
-            $converter = new HtmlConverter();
-            $markdown = $converter->convert($body_html);
-            $result = Markdown::defaultTransform(EmailReplyParser::parseReply($markdown));
-        } else {
-            $result = $body_text;
-        }
-
-        return $result;
-    }
+    
 
     /** 
      * Returns all recipients form the message, in the to: and cc: fields
@@ -271,7 +240,7 @@ class ProcessMessages extends Command
 
 
 
-   
+
 
     /**
      * Move the provided $message to a folder named $folder
@@ -300,7 +269,7 @@ class ProcessMessages extends Command
         $discussion = new Discussion();
 
         $discussion->name = $message->getSubject();
-        $discussion->body = $this->extractTextFromMessage($message);
+        $discussion->body = $message->extractText();
 
         $discussion->total_comments = 1; // the discussion itself is already a comment
         $discussion->user()->associate($user);
@@ -325,10 +294,8 @@ class ProcessMessages extends Command
 
     public function processDiscussionExistsAndUserIsMember(Discussion $discussion, User $user, Message $message)
     {
-        $discussion->body = $this->extractTextFromMessage($message);
-
         $comment = new \App\Comment();
-        $comment->body = $body;
+        $comment->body = $message->extractText();
         $comment->user()->associate($user);
         if ($discussion->comments()->save($comment)) {
             $discussion->total_comments++;
