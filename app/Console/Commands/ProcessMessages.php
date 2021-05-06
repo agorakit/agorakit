@@ -15,9 +15,9 @@ use Michelf\Markdown;
 use EmailReplyParser\EmailReplyParser;
 
 /*
-Inbound Email handler for Agorakit
+Inbound Email handler for Agorakit, second step
 
-High level overview :
+Read this issue : https://github.com/agorakit/agorakit/issues/371
 
 1. Sending email to a group
 - The user exists

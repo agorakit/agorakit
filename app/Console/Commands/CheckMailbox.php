@@ -17,9 +17,16 @@ use Michelf\Markdown;
 use EmailReplyParser\EmailReplyParser;
 
 /*
-Inbound Email Importer for Agorakit
+Inbound Email handler for Agorakit, allows user to post content by email, first step
 
 Everytime it's run, emails found in the defined inbox are imported in the messages table
+
+Read this issue for an overview : https://github.com/agorakit/agorakit/issues/371
+
+A catch-all email is required, or an email server supporting "+" adressing.
+This command simply imports all emails in the messages table and remove it from the mailserver
+
+After that, the process messages command is called, it's the second step of the process
 
 */
 
