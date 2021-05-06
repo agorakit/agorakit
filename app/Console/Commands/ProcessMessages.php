@@ -141,12 +141,14 @@ class ProcessMessages extends Command
      */
     public function extractUserFromMessage(Message $message)
     {
-        $user = User::where('email', $message->parse()->getFrom()->getAddress())->firstOrNew();
+        $email = $message->parse()->getHeader('From')->getEmail();
+
+        $user = User::where('email', $email)->firstOrNew();
         if (!$user->exists) {
-            $user->email = $message->getFrom()->getAddress();
-            $this->debug('User does not exist, created from: '  . $user->email);
+            $user->email = $email;
+            $this->debug('User does not exist, created from: '  . $email);
         } else {
-            $this->debug('User exists, email: '  . $user->email);
+            $this->debug('User exists, email: '  . $email);
         }
 
         return $user;
@@ -202,7 +204,7 @@ class ProcessMessages extends Command
         return false;
     }
 
-    
+
 
     /** 
      * Returns all recipients form the message, in the to: and cc: fields
@@ -211,33 +213,16 @@ class ProcessMessages extends Command
     {
         $recipients = [];
 
-        foreach ($message->getTo() as $to) {
-            $recipients[] = $to->getAddress();
+        foreach ($message->parse()->getHeader('To')->getAllAddresses() as $to) {
+            $recipients[] = $to->getEmail();
         }
 
-        foreach ($message->getCc() as $to) {
-            $recipients[] = $to->getAddress();
+        foreach ($message->parse()->getHeader('Cc')->getAllAddresses() as $to) {
+            $recipients[] = $to->getEmail();
         }
 
         return $recipients;
     }
-
-    function parse_rfc822_headers(string $header_string): array
-    {
-        // Reference:
-        // * Base: https://stackoverflow.com/questions/5631086/getting-x-mailer-attribute-in-php-imap/5631445#5631445
-        // * Improved regex: https://stackoverflow.com/questions/5631086/getting-x-mailer-attribute-in-php-imap#comment61912182_5631445
-        preg_match_all(
-            '/([^:\s]+): (.*?(?:\r\n\s(?:.+?))*)\r\n/m',
-            $header_string,
-            $matches
-        );
-        $headers = array_combine($matches[1], $matches[2]);
-        return $headers;
-    }
-
-
-
 
 
 
