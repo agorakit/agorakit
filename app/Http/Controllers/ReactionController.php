@@ -19,22 +19,25 @@ class ReactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $model, $id, $reaction)
+    public function store(Request $request, $model, $id, $reaction = null)
     {
-        if (in_array($reaction, setting()->getArray('reactions'))) {
 
-            if ($model == 'comment') {
-                $model = Comment::findOrFail($id);
+        if ($model == 'comment') {
+            $model = Comment::findOrFail($id);
+
+            dd($model->reactions);
+
+            if (in_array($reaction, setting()->getArray('reactions'))) {
                 $this->authorize('react', $model);
-                $model->toggleReaction($reaction);
+                Reaction::reactTo($model, $reaction);
 
                 return view('reactions.show')
                     ->with('model', $model);
             }
-        } else {
-            abort(404, 'Reaction type not found');
-        }
 
-        return false;
+
+            return view('reactions.show')
+                ->with('model', $model);
+        }
     }
 }

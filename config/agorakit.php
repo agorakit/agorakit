@@ -15,5 +15,5 @@ return [
   'inbox_password' => env('INBOX_PASSWORD'),
   'inbox_prefix' => env('INBOX_PREFIX'),
   'inbox_suffix' => env('INBOX_SUFFIX'),
-  'reactions' => ['like', 'dislike', 'up', 'down', 'happy', 'sad', 'party']
+  'reactions' => ['plusone', 'minusone', 'laugh', 'confused', 'heart', 'hooray', 'rocket', 'eyes']
 ];

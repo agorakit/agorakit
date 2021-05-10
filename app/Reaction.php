@@ -7,18 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reaction extends Model
 {
-    protected $fillable = ['reactable_type', 'reactable_id', 'reactor_type', 'reactor_id', 'context'];
+    protected $fillable = ['reactable_type', 'reactable_id', 'user_id', 'type'];
 
-    public static function reactTo($model, $reaction_name)
+    public static function reactTo($model, $reaction)
     {
         $reaction = Reaction::firstOrNew([
             'reactable_type' => get_class($model),
             'reactable_id'   => $model->id,
-            'reactor_type'   => 'App\User',
-            'reactor_id'     => Auth::user()->id,
+            'user_id'     => Auth::user()->id,
         ]);
 
-        $reaction->context = $reaction_name;
+        $reaction->type = $reaction;
 
         return $reaction->save();
     }
@@ -27,6 +26,21 @@ class Reaction extends Model
     {
         return Reaction::where('reactable_type', get_class($model))
             ->where('reactable_id', $model->id)
-            ->where('reactor_type', 'App\User')->where('reactor_id', Auth::user()->id)->delete();
+            ->where('user_id', Auth::user()->id)->delete();
+    }
+
+    public function model()
+    {
+        return $this->morphTo()->withTrashed();
+    }
+
+    public function modelB()
+    {
+    return $this->morphedByMany($class, 'taggable', $table, 'tag_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(\App\User::class)->withTrashed();
     }
 }

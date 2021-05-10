@@ -194,7 +194,7 @@ Route::group(['middleware' => ['web']], function () {
 
     // Reactions on models
 
-    Route::get('react/{model}/{id}/{reaction}', 'ReactionController@store');
+    Route::get('react/{model}/{id}/{reaction?}', 'ReactionController@store')->name('reaction.store');
 
     // Notifications
     Route::get('notifications', 'NotificationController@index')->name('notifications');

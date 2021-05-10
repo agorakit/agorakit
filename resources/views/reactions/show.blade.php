@@ -1,19 +1,26 @@
 {{$model->link()}}
+<pre>
+{{$model->reactions->toArray()}}
+</pre>
+@foreach ($model->reactions as $reaction)
 
-{{$model->reactionSummary()}}
+<li>{{ $reaction->user->name }} reacted with a {{$reaction->type}}
 
-@foreach ($model->reactionSummary() as $reaction => $amount)
+    {{--
 
-<div class="flex">
-    
-    <div>
-        @if ($reaction == 'like') [[icon like]] @endif
-        @if ($reaction == 'dislike') [[icon dislike]] @endif
+<a href="{{route('reaction.store', ['model' => 'comment', 'id' => $model->id, 'reaction'=> $reaction])}}">
+    <div class="flex">
+
+
+        <img src="{{asset('/images/reactions/' . $reaction . '.png')}}" class="image-cover h-8 w-8" />
+
+        <div>
+
+        </div>
+
     </div>
-    <div>
-        {{$amount}}
-    </div>
-    
-</div>
+    </a>
 
-@endforeach
+    --}}
+
+    @endforeach

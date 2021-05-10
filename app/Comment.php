@@ -7,16 +7,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Nicolaslopezj\Searchable\SearchableTrait;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
-use Qirolab\Laravel\Reactions\Traits\Reactable;
-use Qirolab\Laravel\Reactions\Contracts\ReactableInterface;
 
-class Comment extends Model implements ReactableInterface
+class Comment extends Model
 {
     use RevisionableTrait;
     use ValidatingTrait;
     use SoftDeletes;
     use SearchableTrait;
-    use Reactable;
 
     protected $rules = [
         'body'    => 'required',
@@ -59,6 +56,11 @@ class Comment extends Model implements ReactableInterface
     public function votes()
     {
         return $this->hasMany('App\Vote');
+    }
+
+    public function reactions()
+    {
+        return $this->hasMany('App\Reaction');
     }
 
     public function discussion()
