@@ -12,11 +12,11 @@ class Reaction extends Model
     public static function reactTo($model, $reaction_name)
     {
         $reaction = Reaction::firstOrNew([
-      'reactable_type' => get_class($model),
-      'reactable_id'   => $model->id,
-      'reactor_type'   => 'App\User',
-      'reactor_id'     => Auth::user()->id,
-    ]);
+            'reactable_type' => get_class($model),
+            'reactable_id'   => $model->id,
+            'reactor_type'   => 'App\User',
+            'reactor_id'     => Auth::user()->id,
+        ]);
 
         $reaction->context = $reaction_name;
 
@@ -26,7 +26,7 @@ class Reaction extends Model
     public static function unReactTo($model)
     {
         return Reaction::where('reactable_type', get_class($model))
-    ->where('reactable_id', $model->id)
-    ->where('reactor_type', 'App\User')->where('reactor_id', Auth::user()->id)->delete();
+            ->where('reactable_id', $model->id)
+            ->where('reactor_type', 'App\User')->where('reactor_id', Auth::user()->id)->delete();
     }
 }

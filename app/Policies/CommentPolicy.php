@@ -45,4 +45,9 @@ class CommentPolicy
     {
         return $user->isMemberOf($comment->discussion->group);
     }
+
+    public function react(User $user, Comment $comment)
+    {
+        return $user->isMemberOf($comment->discussion->group);
+    }
 }
