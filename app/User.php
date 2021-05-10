@@ -13,15 +13,14 @@ use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Str;
-use Qirolab\Laravel\Reactions\Traits\Reacts;
-use Qirolab\Laravel\Reactions\Contracts\ReactsInterface;
+
 
 use App\Membership;
 
 
 
 
-class User extends Authenticatable implements ReactsInterface
+class User extends Authenticatable
 {
     use Notifiable;
     use ValidatingTrait;
@@ -31,7 +30,6 @@ class User extends Authenticatable implements ReactsInterface
     use Taggable;
     use SearchableTrait;
     use HasControlledTags;
-    use Reacts;
 
 
     protected $fillable = [

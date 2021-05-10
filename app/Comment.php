@@ -60,7 +60,7 @@ class Comment extends Model
 
     public function reactions()
     {
-        return $this->hasMany('App\Reaction');
+        return $this->morphMany(Reaction::class, 'reactable');
     }
 
     public function discussion()

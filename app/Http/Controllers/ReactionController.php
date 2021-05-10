@@ -24,8 +24,25 @@ class ReactionController extends Controller
 
         if ($model == 'comment') {
             $model = Comment::findOrFail($id);
+            $this->authorize('react', $model);
 
-            dd($model->reactions);
+            if (in_array($reaction, setting()->getArray('reactions'))) {
+                Reaction::reactTo($model, $reaction);
+            } else {
+                Reaction::unReactTo($model);
+            }
+
+            return view('reactions.show')
+                ->with('model', $model);
+        }
+    }
+
+
+    public function destroy(Request $request, $model, $id, $reaction = null)
+    {
+        if ($model == 'comment') {
+            $model = Comment::findOrFail($id);
+
 
             if (in_array($reaction, setting()->getArray('reactions'))) {
                 $this->authorize('react', $model);

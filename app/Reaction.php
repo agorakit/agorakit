@@ -9,7 +9,7 @@ class Reaction extends Model
 {
     protected $fillable = ['reactable_type', 'reactable_id', 'user_id', 'type'];
 
-    public static function reactTo($model, $reaction)
+    public static function reactTo($model, $reaction_type)
     {
         $reaction = Reaction::firstOrNew([
             'reactable_type' => get_class($model),
@@ -17,7 +17,7 @@ class Reaction extends Model
             'user_id'     => Auth::user()->id,
         ]);
 
-        $reaction->type = $reaction;
+        $reaction->type = $reaction_type;
 
         return $reaction->save();
     }
@@ -29,15 +29,17 @@ class Reaction extends Model
             ->where('user_id', Auth::user()->id)->delete();
     }
 
-    public function model()
+    public function reactable()
     {
         return $this->morphTo()->withTrashed();
     }
 
-    public function modelB()
+    public function model()
     {
-    return $this->morphedByMany($class, 'taggable', $table, 'tag_id');
+        return $this->morphTo(__FUNCTION__, 'reactable_type', 'reactable_id')->withTrashed();
     }
+
+
 
     public function user()
     {
