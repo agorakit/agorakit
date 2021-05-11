@@ -32,7 +32,6 @@
     "misd/linkify": "^1.1",
     "mpratt/embera": "~2.0",
     "nicolaslopezj/searchable": "^1.10",
-    "qirolab/laravel-reactions": "^2.5",
     "rap2hpoutre/laravel-log-viewer": "1.4",
     "spatie/icalendar-generator": "^2.1",
     "spatie/laravel-honeypot": "^2",
