@@ -14,6 +14,7 @@ use Watson\Validating\ValidatingTrait;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Str;
 
+
 use App\Membership;
 
 

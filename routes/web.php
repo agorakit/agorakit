@@ -205,10 +205,9 @@ Route::group(['middleware' => ['web']], function () {
     // Ical feed per user
     Route::get('users/{user}/ical', 'UserIcalController@index')->name('users.ical');
 
-    // Reactions on comments
-
-    Route::get('comments/{comment}/react/{context}', 'CommentReactionController@store');
-    Route::get('comments/{comment}/unreact', 'CommentReactionController@destroy');
+    // Reactions on models
+    Route::get('reactions/react/{model}/{id}/{reaction}', 'ReactionController@react')->name('reaction.react');
+    Route::get('reactions/unreact/{model}/{id}', 'ReactionController@unReact')->name('reaction.unreact');
 
     // Notifications
     Route::get('notifications', 'NotificationController@index')->name('notifications');
