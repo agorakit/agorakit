@@ -11,6 +11,11 @@
             <div>
                 {!! filter($comment->body) !!}
             </div>
+
+            <div>
+                <x-reactions :model="$comment"/>
+            </div>
+
             <div class="text-xs text-gray-600">
 
                 <a up-follow href="{{ route('users.show', [$comment->user]) }}">{{$comment->user->name}}</a>

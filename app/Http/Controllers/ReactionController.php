@@ -31,10 +31,9 @@ class ReactionController extends Controller
             } else {
                 Reaction::unReactTo($model);
             }
-
-            return view('reactions.show')
-                ->with('model', $model);
         }
+
+        return redirect()->back();
     }
 
 
@@ -42,19 +41,12 @@ class ReactionController extends Controller
     {
         if ($model == 'comment') {
             $model = Comment::findOrFail($id);
-
-
             if (in_array($reaction, setting()->getArray('reactions'))) {
                 $this->authorize('react', $model);
                 Reaction::reactTo($model, $reaction);
-
-                return view('reactions.show')
-                    ->with('model', $model);
             }
-
-
-            return view('reactions.show')
-                ->with('model', $model);
         }
+
+        return redirect()->back();
     }
 }

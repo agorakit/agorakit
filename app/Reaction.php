@@ -41,20 +41,9 @@ class Reaction extends Model
             ->where('user_id', Auth::user()->id)->delete();
     }
 
-    /**
-     * returns a summary of all reactions to $model, grouped by reaction type
-     */
-    public static function summary($model)
-    {
-        return $model->reactions->groupBy('type');
-        
-        /*
-        return $model->reactions->groupBy('type')->map(function ($val) {
-            return $val->count();
-        });
-        */
-    }
+    
 
+   
 
     /**
      * Returns the model this reaction is related to
