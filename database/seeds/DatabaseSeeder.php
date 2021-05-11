@@ -5,12 +5,13 @@ use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 
 use App\Setting;
+use App\Participation;
 
 class DatabaseSeeder extends Seeder
 {
     /**
-    * Run the database seeds.
-    */
+     * Run the database seeds.
+     */
     public function run()
     {
         $faker = Faker::create();
@@ -37,8 +38,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // add avatar to admin user
-        Storage::disk('local')->makeDirectory('users/'.$admin->id);
-        Image::make($faker->picsumUrl(500, 400))->widen(500)->save(storage_path().'/app/users/'.$admin->id.'/cover.jpg')->fit(128, 128)->save(storage_path().'/app/users/'.$admin->id.'/thumbnail.jpg');
+        Storage::disk('local')->makeDirectory('users/' . $admin->id);
+        try {
+            Image::make($faker->picsumUrl(500, 400))->widen(500)->save(storage_path() . '/app/users/' . $admin->id . '/cover.jpg')->fit(128, 128)->save(storage_path() . '/app/users/' . $admin->id . '/thumbnail.jpg');
+        } catch (Exception $e) {
+        }
 
         // a second normal user
         $normal_user = App\User::create([
@@ -49,7 +53,7 @@ class DatabaseSeeder extends Seeder
             'verified' => 1,
         ]);
 
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 50; $i++) {
             $user = App\User::create([
                 'email'    => $faker->safeEmail,
                 'password' => bcrypt('secret'),
@@ -58,23 +62,32 @@ class DatabaseSeeder extends Seeder
             ]);
 
             // add avatar to every user
-            Storage::disk('local')->makeDirectory('users/'.$user->id);
-            Image::make($faker->picsumUrl(500, 400))->widen(500)->save(storage_path().'/app/users/'.$user->id.'/cover.jpg')->fit(128, 128)->save(storage_path().'/app/users/'.$user->id.'/thumbnail.jpg');
+
+            Storage::disk('local')->makeDirectory('users/' . $user->id);
+            try {
+                Image::make($faker->picsumUrl(500, 400))->widen(500)->save(storage_path() . '/app/users/' . $user->id . '/cover.jpg')->fit(128, 128)->save(storage_path() . '/app/users/' . $user->id . '/thumbnail.jpg');
+            } catch (Exception $e) {
+            }
         }
 
         // create 10 groups
         for ($i = 1; $i <= 10; $i++) {
             $group = App\Group::create([
-                'name' => $faker->city.'\'s user group',
-                //'name' => 'Group ' . $faker->sentence(3),
-                'body' => $faker->text
+                'name' => $faker->city . '\'s user group',
+                'body' => $faker->text,
             ]);
+
+            $group->group_type = rand(0,2);
+            $group->save();
 
             $group->tag($this->tags());
 
             // add cover image to groups
-            Storage::disk('local')->makeDirectory('groups/'.$group->id);
-            Image::make($faker->picsumUrl())->widen(800)->save(storage_path().'/app/groups/'.$group->id.'/cover.jpg')->fit(300, 200)->save(storage_path().'/app/groups/'.$group->id.'/thumbnail.jpg');
+            Storage::disk('local')->makeDirectory('groups/' . $group->id);
+            try {
+                Image::make($faker->picsumUrl())->widen(800)->save(storage_path() . '/app/groups/' . $group->id . '/cover.jpg')->fit(300, 200)->save(storage_path() . '/app/groups/' . $group->id . '/thumbnail.jpg');
+            } catch (Exception $e) {
+            }
 
             // add members to the group
             for ($j = 1; $j <= $faker->numberBetween(5, 20); $j++) {
@@ -111,14 +124,11 @@ class DatabaseSeeder extends Seeder
             }
 
             // add actions to each group
-            for ($m = 1; $m <= $faker->numberBetween(5, 20); $m++) {
+            for ($m = 0; $m <= $faker->numberBetween(5, 20); $m++) {
                 $start = $faker->dateTimeThisMonth('+2 months');
                 $action = App\Action::create([
                     'name' => $faker->sentence(5),
                     'body' => $faker->text,
-                    /*'start' => Carbon::now(),
-                    'stop' => Carbon::now(),
-                    */
                     'start'    => $start,
                     'stop'     => Carbon::instance($start)->addHour(),
                     'location' => $faker->city,
@@ -132,6 +142,25 @@ class DatabaseSeeder extends Seeder
                 $action->save();
 
                 $action->tag($this->tags());
+
+                for ($pp = 1; $pp <= $faker->numberBetween(1, 20); $pp++) {
+                    // add participants to each action
+                    $rsvp = Participation::firstOrCreate([
+                        'user_id' => App\User::orderByRaw('RAND()')->first()->id,
+                        'action_id' => $action->id
+                    ]);
+
+                    $status = $faker->numberBetween(1, 3);
+                    if ($status == 1) {
+                        $rsvp->status = Participation::PARTICIPATE;
+                    } elseif ($status == 2) {
+                        $rsvp->status = Participation::WONT_PARTICIPATE;
+                    } elseif ($status == 3) {
+                        $rsvp->status = Participation::UNDECIDED;
+                    }
+
+                    $rsvp->save();
+                }
             }
 
             // add files to each group
@@ -153,16 +182,12 @@ class DatabaseSeeder extends Seeder
                 $file->tag($this->tags());
             }
         }
-
-
-
-
     }
 
     public function tags()
     {
-        $amount = rand(0,10);
-        $tags=array();
+        $amount = rand(0, 10);
+        $tags = array();
 
         $faker = Faker::create();
         for ($i = 0; $i < $amount; $i++) {
@@ -176,17 +201,16 @@ class DatabaseSeeder extends Seeder
 
     public function richtext()
     {
-        $amount = rand(3,10);
+        $amount = rand(3, 10);
 
         $text = '';
 
         $faker = Faker::create();
         for ($i = 0; $i < $amount; $i++) {
             $text .= '<h2>' . $faker->sentence . '</h2>';
-            $text .= implode("<p>", $faker->paragraphs(rand(1,4)));
+            $text .= implode("<p>", $faker->paragraphs(rand(1, 4)));
         }
 
         return $text;
     }
-
 }

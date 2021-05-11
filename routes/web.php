@@ -59,6 +59,19 @@ I will apply here the recomandation "routes as documentation" from https://phils
 
 Route::group(['middleware' => ['web']], function () {
 
+
+
+    /*
+    // Uncomment this to test mailable
+
+    Route::get('/mailable', function () {
+        $notification = new App\Mail\Notification();
+        $notification->user = \App\User::first();
+        $notification->group = \App\Group::first();
+        return $notification;
+    });
+    */
+
     /*
     Authentification routes
     =======================
@@ -66,7 +79,7 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('confirm/{token}', 'Auth\RegisterController@confirmEmail');
 
-    Route::middleware(ProtectAgainstSpam::class)->group(function() {
+    Route::middleware(ProtectAgainstSpam::class)->group(function () {
         Auth::routes();
 
         Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
@@ -163,7 +176,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('invite/{membership}/accept/signed', 'InviteController@acceptWithSignature')->name('invite.accept.signed');
     Route::get('invite/{membership}/deny/signed', 'InviteController@denyWithSignature')->name('invite.deny.signed');
 
-    
+
     // General discussion create route
     Route::get('discussions/create', 'GroupDiscussionController@create')->name('discussions.create');
     Route::post('discussions/create', 'GroupDiscussionController@store')->name('discussions.store');
@@ -227,10 +240,10 @@ Route::group(['middleware' => ['web']], function () {
 
         /***************** Memberships for users ***********/
 
-         // Member's list
-         Route::get('users', 'GroupMembershipController@index')->name('.users.index');
+        // Member's list
+        Route::get('users', 'GroupMembershipController@index')->name('.users.index');
 
-         // Join and apply for a group
+        // Join and apply for a group
         Route::get('join', 'GroupMembershipController@create')->name('groups.membership.create');
         Route::post('join', 'GroupMembershipController@store')->name('groups.membership.store');
 
@@ -241,12 +254,12 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('leave', 'GroupMembershipController@destroyConfirm')->name('.mymembership.deleteconfirm');
         Route::post('leave', 'GroupMembershipController@destroy')->name('.mymembership.delete');
 
-         // In the case of closed group, we show an how to join message (not in use currently)
-         Route::get('howtojoin', 'GroupMembershipController@howToJoin')->name('.howtojoin');
+        // In the case of closed group, we show an how to join message (not in use currently)
+        Route::get('howtojoin', 'GroupMembershipController@howToJoin')->name('.howtojoin');
 
 
         /************** Memberships for group admins  ***********/
-        
+
         // mass invite
         Route::get('membership/create', 'GroupMassMembershipController@create')->name('.membership.create');
         Route::post('membership/store', 'GroupMassMembershipController@store')->name('.membership.store');
@@ -254,13 +267,13 @@ Route::group(['middleware' => ['web']], function () {
         // edit existing memberships
         Route::get('membership/{membership}', 'GroupMembershipAdminController@edit')->name('.membership.edit');
         Route::post('membership/{membership}', 'GroupMembershipAdminController@update')->name('.membership.update');
-        
+
 
 
 
         // Stats
         Route::get('insights', 'GroupInsightsController@index')->name('.insights');
-        
+
 
         // Invites
         Route::get('invite', 'InviteController@invite')->name('.invite.form');
@@ -273,8 +286,8 @@ Route::group(['middleware' => ['web']], function () {
         // Stats
         Route::get('insights', 'GroupInsightsController@index')->name('.insights');
 
-        
-       
+
+
 
         // Maps
         Route::get('map', 'GroupMapController@index')->name('.map');
@@ -325,9 +338,11 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('actions/{action}/history', 'GroupActionController@history')->name('.actions.history');
 
         // Action participation
+        Route::get('actions/{action}/participation/set/{status}', 'ParticipationController@set')->name('.actions.participation.set');
         Route::get('actions/{action}/participation', 'ParticipationController@edit')->name('.actions.participation');
         Route::post('actions/{action}/participation', 'ParticipationController@update')->name('.actions.participation.update');
-        
+
+
 
         // Files
         Route::get('files', 'GroupFileController@index')->name('.files.index');
@@ -337,7 +352,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('files/createlink/{parent?}', 'GroupFileController@storeLink')->name('.files.storelink');
         Route::get('files/createfolder/{parent?}', 'GroupFileController@createFolder')->name('.files.createfolder');
         Route::post('files/createfolder/{parent?}', 'GroupFileController@storeFolder')->name('.files.storefolder');
-        
+
         Route::get('files/{file}', 'GroupFileController@show')->name('.files.show');
         Route::get('files/{file}/edit', 'GroupFileController@edit')->name('.files.edit');
         Route::post('files/{file}', 'GroupFileController@update')->name('.files.update');
@@ -401,6 +416,5 @@ Route::group(['middleware' => ['web']], function () {
 
             return $notif;
         });
-
     });
 });

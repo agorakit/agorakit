@@ -40,10 +40,9 @@
 <div class="@if($actions->count() > 0) lg:grid lg:grid-cols-3 gap-32 @endif">
 
     <div class="col-span-2">
-        <div class="flex justify-between my-8 items-center">
+        <div class="my-5">
             <a class="btn btn-secondary" href="{{ route('discussions.create') }}">
-                <i class="fas fa-comment-medical"></i>
-                <span class="ml-3">{{ trans('discussion.create_one_button') }}</span>
+                {{ trans('discussion.create_one_button') }}
             </a>
         </div>
 
@@ -62,17 +61,16 @@
 
 
         @if($actions->count() > 0)
-        <div class="flex justify-between my-8 items-center">
+        <div class="my-5">
             <a class="btn btn-secondary" href="{{ route('actions.create') }}">
-                <i class="fa fa-calendar-plus-o"></i>
-                <span class="ml-3">{{ trans('action.create_one_button') }}</span>
+                {{ trans('action.create_one_button') }}
             </a>
         </div>
 
 
         <div class="">
             @foreach($actions as $action)
-            @include('actions.action')
+            @include('actions.action-small')
             @endforeach
         </div>
         @endif

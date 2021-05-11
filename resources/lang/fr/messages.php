@@ -1,6 +1,7 @@
 <?php
 
 return array (
+  'inbox_help' => 'Cette boite email ne peux être utilisée que par les membre du groupe',
   'edit' => 'Modifier',
   'delete' => 'Effacer',
   'show_history' => 'Afficher l\'historique des modifications',
@@ -264,4 +265,6 @@ return array (
   'home' => 'Accueil',
   'folder' => 'Dossier',
   'root' => 'Racine',
+  'attach_file_help' => 'Glissez un fichier sur l\'éditeur de texte pour le joindre ou utilisez le bouton "image" dans la bare d\'outils',
+  'max_file_size' => 'Taille de fichier maximum',
 );

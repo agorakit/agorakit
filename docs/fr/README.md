@@ -9,8 +9,8 @@
 
 Cette documentation a pour objectif de vous permettre **en tant qu'tilisateur.trice** de vous y retrouver le plus facilement possible avec Agorakit.
 
-Une partie de la documentation est dédiée aux *administrateurs d'instance*, il s'agit d'une ou plusieurs personnes qui gèrent une installation d'Agorakit.
-Le reste est destiné aux administrateurs de groupes et enfin aux participants des mêmes groupes.
+Une partie de la documentation est dédiée aux *administrateurs.trices de serveur*, il s'agit d'une ou plusieurs personnes qui gèrent une installation d'Agorakit.
+Le reste est destiné aux administrateurs.trices de groupes et enfin aux participant.e.s des mêmes groupes.
 
 
 !> La documentation en français est en cours d'écriture. Toute aide est la bienvenue!

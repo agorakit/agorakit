@@ -49,6 +49,7 @@ up.compiler('.wysiwyg', function (element, data) {
 				}));
 			},
 			content: function (item) {
+				setTimeout(() => { $summernote.summernote('insertText',''); }, 100);
 				return '@' + item;
 			}
 		}
@@ -77,7 +78,7 @@ function sendFile($summernote, file) {
 		processData: false,
 		type: 'POST',
 		success: function (data) {
-			$summernote.summernote('pasteHTML', '<div>f:' + data + '</div>')
+			$summernote.summernote('pasteHTML', '<p>f:' + data + '</p>')
 			$('.note-status-output').html(
 				'<div class="alert alert-info">' +
 				'Upload OK' +

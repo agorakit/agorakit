@@ -34,6 +34,7 @@
                     <div class="mb-3">
                         <div class="font-bold">{{ __('Inbox for this group') }}</div>
                         <a up-follow href="mailto:{{ $group_inbox }}">{{ $group_inbox }}</a>
+                        <div class="small-help">{{ trans('messages.inbox_help') }}</div>
                     </div>
                 @endif
 

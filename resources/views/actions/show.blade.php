@@ -81,36 +81,28 @@
         {!! filter($action->body) !!}
     </div>
 
-    @if ($action->attending->count() > 0)
-    <div class="d-flex justify-content-between mt-5 mb-4">
-        <h2>{{trans('messages.user_attending')}} ({{$action->attending->count()}})</h2>
-        <div>
-            @if (Auth::user() && Auth::user()->isAttending($action))
-            <a class="btn btn-primary btn-sm" up-modal=".dialog"
-                href="{{route('groups.actions.participation', [$group, $action])}}">{{trans('messages.edit')}}</a>
-            @endif
-        </div>
+
+    <div class="my-5">
+        @include('participation.dropdown')
     </div>
-    <div class="d-flex flex-wrap users mt-2 mb-2">
+
+    @if ($action->attending->count() > 0)
+    <h3>{{trans('messages.user_attending')}} ({{$action->attending->count()}})</h3>
+
+
+    <div class="flex flex-wrap users mt-2 mb-2">
         @foreach($action->attending as $user)
         @include('users.user-card')
         @endforeach
     </div>
-
     @endif
 
 
     @if ($action->notAttending->count() > 0)
-    <div class="d-flex justify-content-between mt-5 mb-4">
-        <h2>{{trans('messages.user_not_attending')}} ({{$action->notAttending->count()}})</h2>
-        <div>
-            @if (Auth::user() && Auth::user()->isAttending($action))
-            <a class="btn btn-primary btn-sm" up-modal=".dialog"
-                href="{{route('groups.actions.participation', [$group, $action])}}">{{trans('messages.edit')}}</a>
-            @endif
-        </div>
-    </div>
-    <div class="d-flex flex-wrap users mt-2 mb-2">
+
+    <h3>{{trans('messages.user_not_attending')}} ({{$action->notAttending->count()}})</h3>
+
+    <div class="flex flex-wrap users mt-2 mb-2">
         @foreach($action->notAttending as $user)
         @include('users.user-card')
         @endforeach
