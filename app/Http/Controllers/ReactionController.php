@@ -19,32 +19,27 @@ class ReactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $model, $id, $reaction = null)
+    public function react(Request $request, $model, $id, $reaction = null)
     {
 
         if ($model == 'comment') {
             $model = Comment::findOrFail($id);
             $this->authorize('react', $model);
-
-            if (in_array($reaction, setting()->getArray('reactions'))) {
-                Reaction::reactTo($model, $reaction);
-            } else {
-                Reaction::unReactTo($model);
-            }
+            Reaction::reactTo($model, $reaction);
         }
-
         return redirect()->back();
     }
 
 
-    public function destroy(Request $request, $model, $id, $reaction = null)
+    /**
+     * Remove reaction for the model/id for the current user
+     */
+    public function unReact(Request $request, $model, $id)
     {
         if ($model == 'comment') {
             $model = Comment::findOrFail($id);
-            if (in_array($reaction, setting()->getArray('reactions'))) {
-                $this->authorize('react', $model);
-                Reaction::reactTo($model, $reaction);
-            }
+            $this->authorize('react', $model);
+            Reaction::unReactTo($model);
         }
 
         return redirect()->back();
