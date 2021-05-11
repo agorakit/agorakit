@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Discussion;
 use App\Reaction;
 use Auth;
 use Illuminate\Http\Request;
@@ -27,6 +28,13 @@ class ReactionController extends Controller
             $this->authorize('react', $model);
             Reaction::reactTo($model, $reaction);
         }
+
+        if ($model == 'discussion') {
+            $model = Discussion::findOrFail($id);
+            $this->authorize('react', $model);
+            Reaction::reactTo($model, $reaction);
+        }
+        
         return redirect()->back();
     }
 
@@ -38,6 +46,12 @@ class ReactionController extends Controller
     {
         if ($model == 'comment') {
             $model = Comment::findOrFail($id);
+            $this->authorize('react', $model);
+            Reaction::unReactTo($model);
+        }
+
+        if ($model == 'discussion') {
+            $model = Discussion::findOrFail($id);
             $this->authorize('react', $model);
             Reaction::unReactTo($model);
         }

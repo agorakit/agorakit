@@ -41,9 +41,6 @@ class Reaction extends Model
             ->where('user_id', Auth::user()->id)->delete();
     }
 
-    
-
-   
 
     /**
      * Returns the model this reaction is related to

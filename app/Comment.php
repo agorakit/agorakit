@@ -20,15 +20,12 @@ class Comment extends Model
         'user_id' => 'required|exists:users,id',
     ];
 
-    
-
-
     protected $fillable = ['body'];
     public $timestamps = true;
     protected $dates = ['deleted_at'];
     protected $with = ['user']; // always load users with comments
-
     protected $keepRevisionOf = ['body'];
+    public $modelName = 'comment';
 
     /*
     * Searchable rules.

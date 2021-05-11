@@ -62,4 +62,9 @@ class DiscussionPolicy
     {
         return $user->isAdminOf($discussion->group);
     }
+
+    public function react(User $user, Discussion $discussion)
+    {
+        return $user->isMemberOf($discussion->group);
+    }
 }

@@ -35,7 +35,7 @@
             {{ $discussion->user->name }}
             @endif
             {{ trans('messages.in') }}
-            {{ $discussion->group->name }}, 
+            {{ $discussion->group->name }},
             {{ dateForHumans($discussion->updated_at) }}
         </div>
 
@@ -52,6 +52,7 @@
         </div>
         @endif
 
+       
     </div>
 
     @if($discussion->unReadCount() > 0)
