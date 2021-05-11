@@ -14,13 +14,9 @@ use Illuminate\Http\Request;
 class ReactionController extends Controller
 {
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\Response
+     * Adds a reaction to the $model for the current user
      */
-    public function react(Request $request, $model, $id, $reaction = null)
+    public function react(Request $request, $model, $id, $reaction)
     {
 
         if ($model == 'comment') {

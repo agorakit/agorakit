@@ -193,9 +193,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('users/{user}/ical', 'UserIcalController@index')->name('users.ical');
 
     // Reactions on models
-
-    Route::get('reactions/react/{model}/{id}/{reaction?}', 'ReactionController@react')->name('reaction.react');
-    Route::get('reactions/unreact/{model}/{id}/{reaction?}', 'ReactionController@unReact')->name('reaction.unreact');
+    Route::get('reactions/react/{model}/{id}/{reaction}', 'ReactionController@react')->name('reaction.react');
+    Route::get('reactions/unreact/{model}/{id}', 'ReactionController@unReact')->name('reaction.unreact');
 
     // Notifications
     Route::get('notifications', 'NotificationController@index')->name('notifications');
