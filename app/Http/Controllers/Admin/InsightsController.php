@@ -140,12 +140,6 @@ class InsightsController extends Controller
         $charts[] = $chart;
 
 
-        // Evolution of storage use
-        $results = DB::query('select group_id sum(filesize) as filesize from files group by group_id order by filesize desc')
-        ->get();
-
-        dd($results);
-
 
 
         return view('admin.insights')
