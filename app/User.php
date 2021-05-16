@@ -275,7 +275,7 @@ class User extends Authenticatable
 
     public function scopeActive($query)
     {
-        return $query->where('updated_at', '>',  Carbon::now()->subMonths(3)->toDateTimeString());
+        return $query->where('users.updated_at', '>',  Carbon::now()->subMonths(3)->toDateTimeString());
     }
 
     /**
