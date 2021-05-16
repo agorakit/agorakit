@@ -13,6 +13,7 @@ use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 
 use App\Membership;
@@ -270,6 +271,11 @@ class User extends Authenticatable
     public function scopeVerified($query)
     {
         return $query->where('verified', 1);
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('updated_at', '>',  Carbon::now()->subMonths(6)->toDateTimeString());
     }
 
     /**

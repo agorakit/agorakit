@@ -12,6 +12,7 @@ use Nicolaslopezj\Searchable\SearchableTrait;
 use Storage;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
+use Carbon\Carbon;
 use App\File;
 use App\Action;
 use App\Invite;
@@ -315,6 +316,11 @@ class Group extends Model
     public function scopeNotSecret($query)
     {
         return $query->where('group_type', '!=', $this::SECRET);
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('updated_at', '>',  Carbon::now()->subMonths(6)->toDateTimeString());
     }
 
     /**
