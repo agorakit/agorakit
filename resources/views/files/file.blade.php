@@ -41,27 +41,16 @@
 
 
 
+        <div class="text-xs text-gray-500 flex flex-wrap hover:text-gray-600">
 
-
-
-
-        <div class="text-xs text-gray-500 flex space-x-2 hover:text-gray-600">
-
-            @if ($file->isPinned())
-            <div>
-                <i class="fas fa-thumbtack"></i>
-                {{__('Pinned')}}
-            </div>
-            @endif
             @if ($file->isArchived())
-            <div>
+            <div class="mr-2">
                 <i class="fa fa-archive"></i>
                 {{__('Archived')}}
             </div>
             @endif
 
-            <div>
-
+            <div class="mr-2">
                 @if ($file->group->isOpen())
                 <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
                 @elseif ($file->group->isClosed())
@@ -70,16 +59,13 @@
                 <i class="fa fa-eye-slash" title="{{trans('group.secret')}}"></i>
                 @endif
                 {{ $file->group->name }}
-
             </div>
 
-            <div>
-
+            <div class="mr-2">
                 <i class="fa fa-user-circle"></i> {{ $file->user->name }}
-
             </div>
 
-            <div>
+            <div class="mr-2">
                 <i class="fa fa-clock-o"></i> {{ $file->updated_at }}
             </div>
 
@@ -88,22 +74,24 @@
                 <i class="fa fa-database"></i> {{sizeForHumans($file->filesize)}}
                 @endif
             </div>
-            <div>
-                @if ($file->isLink())
-                <i class="fas fa-link"></i> {{$file->path}}
-                @endif
-            </div>
 
-            @if ($file->getSelectedTags()->count() > 0)
-            <div class="">
-                <i class="fa fa-tags"></i>
-                @foreach ($file->getSelectedTags() as $tag)
-                @include('tags.tag')
-                @endforeach
+
+            @if ($file->isLink())
+            <div class="mr-2">
+                <i class="fas fa-link"></i> {{$file->path}}
             </div>
             @endif
 
+
         </div>
+
+        @if ($file->getSelectedTags()->count() > 0)
+        <div class="text-xs text-gray-500">
+            @foreach ($file->getSelectedTags() as $tag)
+            @include('tags.tag')
+            @endforeach
+        </div>
+        @endif
 
 
 
