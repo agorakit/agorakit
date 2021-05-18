@@ -82,41 +82,36 @@
     </div>
 
 
-    <div class="my-5">
-        @include('participation.dropdown')
-    </div>
+    <div id="participate-{{$action->id}}">
+        <div class="my-5">
+            @include('participation.dropdown')
+        </div>
 
-    @if ($action->attending->count() > 0)
-    <h3>{{trans('messages.user_attending')}} ({{$action->attending->count()}})</h3>
-
-
-    <div class="flex flex-wrap users mt-2 mb-2">
-        @foreach($action->attending as $user)
-        @include('users.user-card')
-        @endforeach
-    </div>
-    @endif
+        @if ($action->attending->count() > 0)
+        <h3>{{trans('messages.user_attending')}} ({{$action->attending->count()}})</h3>
 
 
-    @if ($action->notAttending->count() > 0)
-
-    <h3>{{trans('messages.user_not_attending')}} ({{$action->notAttending->count()}})</h3>
-
-    <div class="flex flex-wrap users mt-2 mb-2">
-        @foreach($action->notAttending as $user)
-        @include('users.user-card')
-        @endforeach
-    </div>
-
-    @endif
-
-
-    <div class="mt-4">
-        @if (Auth::user())
-        <a class="btn btn-primary" up-modal=".dialog"
-            href="{{route('groups.actions.participation', [$group, $action])}}">{{trans('Edit my participation')}}</a>
+        <div class="flex flex-wrap users mt-2 mb-2">
+            @foreach($action->attending as $user)
+            @include('users.user-card')
+            @endforeach
+        </div>
         @endif
-    </div>
+
+
+        @if ($action->notAttending->count() > 0)
+
+        <h3>{{trans('messages.user_not_attending')}} ({{$action->notAttending->count()}})</h3>
+
+        <div class="flex flex-wrap users mt-2 mb-2">
+            @foreach($action->notAttending as $user)
+            @include('users.user-card')
+            @endforeach
+        </div>
+
+        @endif
+
+   </div>
 </div>
 
 

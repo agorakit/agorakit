@@ -54,19 +54,19 @@
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-            <a up-follow up-cache="false" up-history="false" class="dropdown-item"
+            <a up-target="#participate-{{$action->id}}" up-cache="false" up-history="false" class="dropdown-item"
                 href="{{route('groups.actions.participation.set', ['group' => $action->group, 'action' => $action, 'status' => 'yes'])}}">
                 {{__('I will participate')}}
             </a>
 
-            <a up-follow up-cache="false" up-history="false" class="dropdown-item"
+            <a up-target="#participate-{{$action->id}}" up-cache="false" up-history="false" class="dropdown-item"
                 href="{{route('groups.actions.participation.set', ['group' => $action->group, 'action' => $action, 'status' => 'no'])}}">
                 {{__('I will not participate')}}
             </a>
 
 
 
-            <a up-follow up-cache="false" up-history="false" class="dropdown-item"
+            <a up-target="#participate-{{$action->id}}" up-cache="false" up-history="false" class="dropdown-item"
                 href="{{route('groups.actions.participation.set', ['group' => $action->group, 'action' => $action, 'status' => 'maybe'])}}">
                 {{__('I don\'t know yet')}}
             </a>
