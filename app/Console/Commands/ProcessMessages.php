@@ -15,9 +15,12 @@ use Michelf\Markdown;
 use EmailReplyParser\EmailReplyParser;
 
 /*
-Inbound Email handler for Agorakit, second step
+Inbound Email handler for Agorakit, second step : processing the messages table
 
 Read this issue : https://github.com/agorakit/agorakit/issues/371
+
+For each message in the messages table, this command tries to handle the message and create comments or discussions when possible
+A log of each message and their status is kept
 
 1. Sending email to a group
 - The user exists
@@ -29,7 +32,7 @@ Read this issue : https://github.com/agorakit/agorakit/issues/371
 - user is a member of the group
 
 In all cases the mail is processed
-Bounced to user in case of failure
+Bounced to user in case of failure and known user
 
 
 Emails are generated as follow :  
@@ -39,6 +42,9 @@ Emails are generated as follow :
 [INBOX_PREFIX]reply-[discussion-id][INBOX_SUFFIX]
 
 Prefix and suffix is defined in the .env file
+
+
+This is long and monolithic but it does the job
 
 */
 
@@ -229,12 +235,6 @@ class ProcessMessages extends Command
         $this->debug('discussion not found');
         return false;
     }
-
-
-
-
-
-
 
 
     public function processGroupExistsAndUserIsMember(Group $group, User $user, Message $message)
