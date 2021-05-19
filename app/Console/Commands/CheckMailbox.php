@@ -123,7 +123,9 @@ class CheckMailbox extends Command
 
                 $message->saveOrFail();
 
-                $this->moveMessage($mailbox_message, 'stored');
+                if (!$this->option('debug')) {
+                    $this->moveMessage($mailbox_message, 'stored');
+                }
             }
             $this->connection->expunge();
         } else {
@@ -163,5 +165,4 @@ class CheckMailbox extends Command
 
         return $message->move($folder);
     }
-
 }

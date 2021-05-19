@@ -64,41 +64,42 @@ class Message extends Model
      */
     public function isAutomated()
     {
-        $message_headers = $this->parse()->headers(); // TODO
+        // $message_headers = $this->parse()->headers(); // TODO
 
-        if (array_key_exists('Auto-Submitted', $message_headers)) {
+        if ($this->parse()->getHeaderValue('Auto-Submitted')) {
             return true;
         }
 
-        if (array_key_exists('X-Auto-Response-Suppress', $message_headers)) {
+        if ($this->parse()->getHeaderValue('X-Auto-Response-Suppress')) {
             return true;
         }
 
-        if (array_key_exists('List-Id', $message_headers)) {
+        if ($this->parse()->getHeaderValue('List-Id')) {
             return true;
         }
 
-        if (array_key_exists('List-Unsubscribe', $message_headers)) {
+        if ($this->parse()->getHeaderValue('List-Unsubscribe')) {
             return true;
         }
 
-        if (array_key_exists('Feedback-ID', $message_headers)) {
+        if ($this->parse()->getHeaderValue('Feedback-ID')) {
             return true;
         }
 
-        if (array_key_exists('X-NIDENT', $message_headers)) {
+        if ($this->parse()->getHeaderValue('X-NIDENT')) {
             return true;
         }
 
-        if (array_key_exists('Delivered-To', $message_headers)) {
-            if ($message_headers['Delivered-To'] == 'Autoresponder') {
+        if ($this->parse()->getHeaderValue('Delivered-To')) {
+            if ($this->parse()->getHeaderValue('Delivered-To') == 'Autoresponder') {
                 return true;
             }
         }
 
-        if (array_key_exists('X-AG-AUTOREPLY', $message_headers)) {
+        if ($this->parse()->getHeaderValue('X-AG-AUTOREPLY')) {
             return true;
         }
+
 
         return false;
     }
@@ -123,8 +124,8 @@ class Message extends Model
      */
     function extractText()
     {
-        $body_text  = nl2br(EmailReplyParser::parseReply($this->parse()->getTextContent())); 
-        $body_html = $this->parse()->getHtmlContent(); 
+        $body_text  = nl2br(EmailReplyParser::parseReply($this->parse()->getTextContent()));
+        $body_html = $this->parse()->getHtmlContent();
 
         // count the number of caracters in plain text :
         // if we really have less than 5 chars in there using plain text,

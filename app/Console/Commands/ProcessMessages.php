@@ -91,11 +91,14 @@ class ProcessMessages extends Command
 
         $messages = Message::all(); // ony with the right status 
         foreach ($messages as $message) {
+            
+            $this->line('---------------------------------------------------');
 
             $this->line('Processing message id ' . $message->id);
 
             // check if message is automated
             if ($message->isAutomated()) {
+                $this->info('Message is automated');
                 $message->status = Message::AUTOMATED;
                 $message->save();
                 continue;
@@ -108,7 +111,7 @@ class ProcessMessages extends Command
 
             // Decide what to do
             if ($discussion && $user->exists && $user->isMemberOf($discussion->group)) {
-                $this->line('Discussion exists and user is member of group, posting message');
+                $this->info('Discussion exists and user is member of group, posting message');
                 $this->processDiscussionExistsAndUserIsMember($discussion, $user, $message);
                 continue;
             }
@@ -132,6 +135,8 @@ class ProcessMessages extends Command
             $message->status = Message::INVALID;
             $message->save();
             continue;
+
+            
         }
     }
 
@@ -155,13 +160,18 @@ class ProcessMessages extends Command
     {
         $recipients = [];
 
-        foreach ($message->parse()->getHeader('To')->getAllAddresses() as $to) {
-            $recipients[] = $to->getEmail();
+        if ($message->parse()->getHeader('To')) {
+            foreach ($message->parse()->getHeader('To') as $to) {
+                $recipients[] = $to->getEmail();
+            }
         }
 
-        foreach ($message->parse()->getHeader('Cc')->getAllAddresses() as $to) {
-            $recipients[] = $to->getEmail();
+        if ($message->parse()->getHeader('Cc')) {
+            foreach ($message->parse()->getHeader('Cc') as $to) {
+                $recipients[] = $to->getEmail();
+            }
         }
+
 
         return $recipients;
     }
@@ -190,6 +200,7 @@ class ProcessMessages extends Command
     public function extractGroupFromMessage(Message $message)
     {
         $recipients = $this->extractRecipientsFromMessage($message);
+        $to_emails = [];
 
         foreach ($recipients as $to_email) {
             // remove prefix and suffix to get the slug we need to check against
