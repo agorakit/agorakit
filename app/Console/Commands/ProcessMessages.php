@@ -86,12 +86,14 @@ class ProcessMessages extends Command
         $messages = Message::all(); // ony with the right status 
         foreach ($messages as $message) {
 
+            $this->line('Processing message id ' . $message->id);
+
+            // check if message is automated
             if ($message->isAutomated()) {
                 $message->status = Message::AUTOMATED;
+                $message->save();
                 continue;
             }
-
-            ////// TODOOOOOOOOOOOOOO ////////////////////
 
             // Try to find a $user, $group and $discussion from the $message
             $user = $this->extractUserFromMessage($message);
@@ -100,25 +102,30 @@ class ProcessMessages extends Command
 
             // Decide what to do
             if ($discussion && $user->exists && $user->isMemberOf($discussion->group)) {
-                $this->info('Discussion exists and user is member of group, posting message');
+                $this->line('Discussion exists and user is member of group, posting message');
                 $this->processDiscussionExistsAndUserIsMember($discussion, $user, $message);
-            } elseif ($group && $user->exists && $user->isMemberOf($group)) {
-                $this->info('User exists and is member of group, posting message');
+                continue;
+            }
+
+            if ($group && $user->exists && $user->isMemberOf($group)) {
+                $this->info('User exists and is member of group, creating new discussion');
                 $this->processGroupExistsAndUserIsMember($group, $user, $message);
-            } elseif ($group && $user->exists && !$user->isMemberOf($group)) {
-                $this->info('User exists BUT is not member of group, bouncing and inviting');
+                continue;
+            }
+
+            if ($group && $user->exists && !$user->isMemberOf($group)) {
+                $this->info('User exists BUT is not member of group, bouncing and inviting to join');
                 $this->processGroupExistsButUserIsNotMember($group, $user, $message);
-            } else {
-                if (!$user->exists) {
-                    $this->moveMessage($message, 'user_not_found');
-                } elseif (!$group) {
-                    $this->moveMessage($message, 'group_not_found');
-                } elseif (!$discussion) {
-                    $this->moveMessage($message, 'discussion_not_found');
-                }
+                continue;
             }
 
             // TODO handle the case of user exists but group doesn't -> might be a good idea to bounce back to user
+
+            // else mark the message as invalid
+            $this->info('Message is invalid / cannot find a valid recipient');
+            $message->status = Message::INVALID;
+            $message->save();
+            continue;
         }
     }
 
@@ -132,6 +139,25 @@ class ProcessMessages extends Command
         if ($this->option('debug')) {
             $this->line($message);
         }
+    }
+
+
+    /** 
+     * Returns all recipients from the message, in the to: and cc: fields
+     */
+    function extractRecipientsFromMessage(Message $message)
+    {
+        $recipients = [];
+
+        foreach ($message->parse()->getHeader('To')->getAllAddresses() as $to) {
+            $recipients[] = $to->getEmail();
+        }
+
+        foreach ($message->parse()->getHeader('Cc')->getAllAddresses() as $to) {
+            $recipients[] = $to->getEmail();
+        }
+
+        return $recipients;
     }
 
 
@@ -206,44 +232,7 @@ class ProcessMessages extends Command
 
 
 
-    /** 
-     * Returns all recipients form the message, in the to: and cc: fields
-     */
-    function extractRecipientsFromMessage(Message $message)
-    {
-        $recipients = [];
 
-        foreach ($message->parse()->getHeader('To')->getAllAddresses() as $to) {
-            $recipients[] = $to->getEmail();
-        }
-
-        foreach ($message->parse()->getHeader('Cc')->getAllAddresses() as $to) {
-            $recipients[] = $to->getEmail();
-        }
-
-        return $recipients;
-    }
-
-
-
-    /**
-     * Move the provided $message to a folder named $folder
-     */
-    public function moveMessage(Message $message, $folder)
-    {
-        // don't move message in dev
-        if ($this->option('keep')) {
-            return true;
-        }
-
-        if ($this->connection->hasMailbox($folder)) {
-            $folder = $this->connection->getMailbox($folder);
-        } else {
-            $folder = $this->connection->createMailbox($folder);
-        }
-
-        return $message->move($folder);
-    }
 
 
 
@@ -266,10 +255,16 @@ class ProcessMessages extends Command
             $this->info('Title : ' . $discussion->name);
             Log::info('Discussion has been created from email', ['mail' => $message, 'discussion' => $discussion]);
 
-            $this->moveMessage($message, 'processed');
+            // associate the message with the created content
+            $message->discussion()->associate($discussion);
+            $message->group()->associate($discussion->group);
+            $message->user()->associate($user);
+            $message->status = Message::POSTED;
+            $message->save();
             return true;
         } else {
-            $this->moveMessage($message, 'discussion_not_created');
+            $message->status = Message::ERROR;
+            $message->save();
             Mail::to($user)->send(new MailBounce($message, 'Your discussion could not be created in the group, maybe your message was empty'));
             return false;
         }
@@ -288,10 +283,21 @@ class ProcessMessages extends Command
             // update activity timestamp on parent items
             $discussion->group->touch();
             $discussion->touch();
-            $this->moveMessage($message, 'processed');
+
+            // associate the message with the created content
+            $message->discussion()->associate($discussion);
+            $message->group()->associate($discussion->group);
+            $message->user()->associate($user);
+
+            $message->status = Message::POSTED;
+            $message->save();
+
+
+
             return true;
         } else {
-            $this->moveMessage($message, 'comment_not_created');
+            $message->status = Message::ERROR;
+            $message->save();
             return false;
         }
     }
@@ -300,12 +306,14 @@ class ProcessMessages extends Command
     public function processGroupExistsButUserIsNotMember(Group $group, User $user, Message $message)
     {
         Mail::to($user)->send(new MailBounce($message, 'You are not member of ' . $group->name . ' please join the group first before posting'));
-        $this->moveMessage($message, 'bounced');
+        $message->status = Message::BOUNCED;
+        $message->save();
+        return true;
     }
 
 
     public function processGroupNotFoundUserNotFound(User $user, Message $message)
     {
-        $this->moveMessage($message, 'group_not_found_user_not_found');
+        return true;
     }
 }

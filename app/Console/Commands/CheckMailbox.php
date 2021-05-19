@@ -26,7 +26,9 @@ Read this issue for an overview : https://github.com/agorakit/agorakit/issues/37
 A catch-all email is required, or an email server supporting "+" adressing.
 This command simply imports all emails in the messages table and remove it from the mailserver
 
-After that, the process messages command is called, it's the second step of the process
+After that, the agorakit:processmessages command should be called, it's the second step of the process
+
+TODO : create a POP3 mail parser as well, would be very easy to do
 
 */
 

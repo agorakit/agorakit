@@ -27,7 +27,6 @@ class Message extends Model
     use SoftDeletes;
 
     protected $rules = [
-        'subject'     => 'required',
         'raw'     => 'required',
     ];
     protected $keepRevisionOf = ['status'];
@@ -38,8 +37,10 @@ class Message extends Model
     const POSTED = 100; // Message has been successfuly converted to discussion or wathever
     const NEEDS_VALIDATION = 10; // message needs to be validated by poster or admin
     const CREATED = 0; // message has just been imported from the mail server (default)
-    const INVALID = -10; // message cannot be posted to a group (group not found...)
-    const AUTOMATED = -20; // message is an autoreply or away message
+    const BOUNCED = -10; // message bounced back to user
+    const INVALID = -20; // message cannot be posted to a group (group not found...)
+    const AUTOMATED = -30; // message is an autoreply or away message
+    const ERROR = -50; // message cound not be converted to content
     const SPAM = -100; // message is spam
 
     public function group()
@@ -63,7 +64,7 @@ class Message extends Model
      */
     public function isAutomated()
     {
-        $message_headers = $this->headers();
+        $message_headers = $this->parse()->headers(); // TODO
 
         if (array_key_exists('Auto-Submitted', $message_headers)) {
             return true;
@@ -99,29 +100,7 @@ class Message extends Model
             return true;
         }
 
-
-
         return false;
-    }
-
-
-
-
-    /**
-     * Parse headers of the raw email message and return everything as an array
-     */
-    function headers()
-    {
-        // Reference:
-        // * Base: https://stackoverflow.com/questions/5631086/getting-x-mailer-attribute-in-php-imap/5631445#5631445
-        // * Improved regex: https://stackoverflow.com/questions/5631086/getting-x-mailer-attribute-in-php-imap#comment61912182_5631445
-        preg_match_all(
-            '/([^:\s]+): (.*?(?:\r\n\s(?:.+?))*)\r\n/m',
-            $this->raw,
-            $matches
-        );
-        $headers = array_combine($matches[1], $matches[2]);
-        return $headers;
     }
 
 

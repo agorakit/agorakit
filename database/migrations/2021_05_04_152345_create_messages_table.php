@@ -21,7 +21,7 @@ class CreateMessagesTable extends Migration
             $table->string('to');
             $table->string('from');
             $table->text('body');
-            $table->mediumText('raw');
+            $table->longText('raw');
             $table->integer('group_id')->nullable();
             $table->integer('user_id')->nullable();
             $table->integer('discussion_id')->nullable();

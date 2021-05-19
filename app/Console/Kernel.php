@@ -42,10 +42,10 @@ class Kernel extends ConsoleKernel
         ->everyFiveMinutes();
 
         $schedule->command('agorakit:checkmailbox')
-        ->everyFiveMinutes();
+        ->everyMinute();
 
         $schedule->command('agorakit:processmessages')
-        ->everyFiveMinutes();
+        ->everyMinute();
 
         $schedule->command('agorakit:sendreminders')
         ->everyFiveMinutes();
