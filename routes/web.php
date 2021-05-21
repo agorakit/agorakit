@@ -391,7 +391,10 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::get('admin/groupadmins', 'Admin\GroupAdminsController@index');
 
-        Route::get('admin/messages', 'Admin\MessageController@index');
+        
+        Route::get('admin/messages', 'Admin\MessageController@index')->name('admin.messages.index');
+        Route::get('admin/messages/{message}', 'Admin\MessageController@show')->name('admin.messages.show');
+        
 
 
         // mailable preview, for devs mainly

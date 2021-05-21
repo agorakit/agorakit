@@ -145,4 +145,26 @@ class Message extends Model
 
         return $result;
     }
+
+    /**
+     * Returns all recipients of this message
+     */
+    function extractRecipients()
+    {
+        $recipients = [];
+
+        if ($this->parse()->getHeader(HeaderConsts::TO)) {
+            foreach ($this->parse()->getHeader(HeaderConsts::TO)->getAddresses() as $to) {
+                $recipients[] = $to->getEmail();
+            }
+        }
+
+        if ($this->parse()->getHeader(HeaderConsts::CC)) {
+            foreach ($this->parse()->getHeader(HeaderConsts::CC)->getAddresses() as $to) {
+                $recipients[] = $to->getEmail();
+            }
+        }
+
+        return $recipients;
+    }
 }

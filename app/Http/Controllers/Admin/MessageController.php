@@ -19,4 +19,15 @@ class MessageController extends Controller
 
         return view('admin.messages.index')->with('messages', $messages);
     }
+
+    /**
+    * Display a listing of the resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function show(Message $message)
+    {   
+
+        return view('admin.messages.show')->with('message', $message);
+    }
 }
