@@ -14,45 +14,49 @@ use Carbon\Carbon;
 class CleanupDatabase extends Command
 {
     /**
-    * The name and signature of the console command.
-    *
-    * @var string
-    */
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
     protected $signature = 'agorakit:cleanupdatabase {--days=30}';
 
     /**
-    * The console command description.
-    *
-    * @var string
-    */
+     * The console command description.
+     *
+     * @var string
+     */
     protected $description = 'Cleanup the database, delete forever soft deleted models and unverified users older than 30 days';
 
     /**
-    * Create a new command instance.
-    *
-    * @return void
-    */
+     * Create a new command instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         parent::__construct();
     }
 
     /**
-    * Execute the console command.
-    *
-    * @return mixed
-    */
+     * Execute the console command.
+     *
+     * @return mixed
+     */
     public function handle()
     {
+        // just in case
+        if ($this->option('days') < 1) {
+            return false;
+        }
+
         // definitely delete deleted groups and all their contents after 30 days
 
         // get a list of groups
         $groups = Group::onlyTrashed()
-        ->where('deleted_at', '<', Carbon::today()->subDays($this->option('days')))
-        ->get();
+            ->where('deleted_at', '<', Carbon::today()->subDays($this->option('days')))
+            ->get();
 
-        foreach ($groups as $group)
-        {
+        foreach ($groups as $group) {
             $count = $group->discussions()->delete();
             if ($count) $this->info($count . ' discussions soft deleted in group ' . $group->name);
 
@@ -69,7 +73,7 @@ class CleanupDatabase extends Command
             if ($count) $this->info($count . ' invites hard deleted in group ' . $group->name);
 
             $group->forceDelete();
-            if ($count) $this->info('Group '. $group->name . ' hard deleted');
+            if ($count) $this->info('Group ' . $group->name . ' hard deleted');
         }
 
 
@@ -77,23 +81,22 @@ class CleanupDatabase extends Command
         // Handle discussions and their related comments :
 
         $discussions = Discussion::onlyTrashed()
-        ->where('deleted_at', '<', Carbon::today()->subDays($this->option('days')))
-        ->get();
+            ->where('deleted_at', '<', Carbon::today()->subDays($this->option('days')))
+            ->get();
 
-        foreach ($discussions as $discussion)
-        {
+        foreach ($discussions as $discussion) {
             // definitely delete comments
             $count = $discussion->comments()->forceDelete();
             if ($count) $this->info($count . ' comments hard deleted on ' . $discussion->name);
 
             $count = $discussion->forceDelete();
-            if ($count) $this->info('Discussion '. $discussion->name . ' hard deleted');
+            if ($count) $this->info('Discussion ' . $discussion->name . ' hard deleted');
         }
 
         // Handle actions
         $count = Action::onlyTrashed()
-        ->where('deleted_at', '<', Carbon::today()->subDays($this->option('days')))
-        ->forceDelete();
+            ->where('deleted_at', '<', Carbon::today()->subDays($this->option('days')))
+            ->forceDelete();
 
 
         if ($count) $this->info($count . ' actions hard deleted');
@@ -101,12 +104,11 @@ class CleanupDatabase extends Command
 
         // Handle files
         $files = File::onlyTrashed()
-        ->where('deleted_at', '<', Carbon::today()->subDays($this->option('days')))
-        ->get();
+            ->where('deleted_at', '<', Carbon::today()->subDays($this->option('days')))
+            ->get();
 
 
-        foreach ($files as $file)
-        {
+        foreach ($files as $file) {
             // definitely delete files on storage
             $file->deleteFromStorage();
             if ($count) $this->info($file->name . ' deleted from storage at ' . $file->path);
@@ -119,18 +121,16 @@ class CleanupDatabase extends Command
 
         // delete soft deleted and unverified users + their content and their memberships after 30 days
         $users = User::onlyTrashed()
-        ->where('deleted_at', '<', Carbon::today()->subDays($this->option('days')))
-        ->get();
+            ->where('deleted_at', '<', Carbon::today()->subDays($this->option('days')))
+            ->get();
 
         $users = $users->merge(User::where('verified', 0)
-        ->where('created_at', '<', Carbon::today()->subDays($this->option('days')))
-        ->get());
+            ->where('created_at', '<', Carbon::today()->subDays($this->option('days')))
+            ->get());
 
-        foreach ($users as $user)
-        {
-            if ($user->verified == 0)
-            {
-                $this->info('Unverfied user '. $user->name . '(' . $user->email . ')');
+        foreach ($users as $user) {
+            if ($user->verified == 0) {
+                $this->info('Unverfied user ' . $user->name . '(' . $user->email . ')');
             }
 
             $count = $user->discussions()->delete();
@@ -149,8 +149,12 @@ class CleanupDatabase extends Command
             if ($count) $this->info($count . ' memberships hard deleted from ' . $user->name);
 
             $user->forceDelete();
-            $this->info('User '. $user->name . '(' . $user->email . ')' . ' hard deleted');
+            $this->info('User ' . $user->name . '(' . $user->email . ')' . ' hard deleted');
         }
+
+        // delete all old revisions TODO
+
+        // delete all old imported messages TODO
 
     }
 }

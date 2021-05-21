@@ -19,6 +19,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\ImportActions::class,
         \App\Console\Commands\PopulateFilesize::class,
         \App\Console\Commands\CheckMailbox::class,
+        \App\Console\Commands\ProcessMessages::class,
         \App\Console\Commands\DeleteFiles::class,
         \App\Console\Commands\CleanupDatabase::class,
         \App\Console\Commands\SendReminders::class,
@@ -41,7 +42,10 @@ class Kernel extends ConsoleKernel
         ->everyFiveMinutes();
 
         $schedule->command('agorakit:checkmailbox')
-        ->everyFiveMinutes();
+        ->everyMinute();
+
+        $schedule->command('agorakit:processmessages')
+        ->everyMinute();
 
         $schedule->command('agorakit:sendreminders')
         ->everyFiveMinutes();
