@@ -52,6 +52,7 @@
         </div>
         @endif
 
+       
     </div>
 
     @if($discussion->unReadCount() > 0)

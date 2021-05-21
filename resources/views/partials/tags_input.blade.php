@@ -7,13 +7,13 @@
         {{trans('messages.tags_help')}}
     </div>
 
-    <div class="flex flex-wrap sm:grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 my-4">
+    <div class="flex flex-wrap my-4">
 
     @if (isset($selectedTags))
             @foreach ($selectedTags as $tag)
-                <div class="mr-4" >
+                <div class="mr-2 mb-2 bg-gray-300 py-1 px-2 rounded-lg hover:bg-gray-400 cursor-pointer">
                     <input type=checkbox checked value="{{$tag->normalized}}" id="{{$tag->normalized}}"  name="tags[]"/>
-                    <label for="{{$tag->normalized}}">
+                    <label for="{{$tag->normalized}}" class="cursor-pointer">
                     <span class="inline-block w-2 h-2 rounded-sm" style="background-color: {{$tag->color}}"></span>
                      {{$tag->name}}
                     </label>

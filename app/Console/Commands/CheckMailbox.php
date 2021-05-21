@@ -30,6 +30,14 @@ After that, the agorakit:processmessages command should be called, it's the seco
 
 TODO : create a POP3 mail parser as well, would be very easy to do
 
+Emails are generated as follow :  
+
+[INBOX_PREFIX][group-slug][INBOX_SUFFIX]
+
+[INBOX_PREFIX]reply-[discussion-id][INBOX_SUFFIX]
+
+Prefix and suffix is defined in the .env file
+
 */
 
 class CheckMailbox extends Command
@@ -126,6 +134,8 @@ class CheckMailbox extends Command
                 if (!$this->option('debug')) {
                     $this->moveMessage($mailbox_message, 'stored');
                 }
+
+
             }
             $this->connection->expunge();
         } else {
@@ -157,6 +167,7 @@ class CheckMailbox extends Command
             return true;
         }
 
+      
         if ($this->connection->hasMailbox($folder)) {
             $folder = $this->connection->getMailbox($folder);
         } else {
@@ -165,4 +176,5 @@ class CheckMailbox extends Command
 
         return $message->move($folder);
     }
+
 }

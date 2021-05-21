@@ -24,8 +24,18 @@ class InsightsController extends Controller
         // Global stats :
         $chart = new AgorakitChart;
         $chart->title('General stats');
-        $chart->labels(['Groups', 'Users', 'Verified users', 'Discussions', 'Comments', 'Events', 'Files']);
-        $chart->dataset('Amount', 'bar', [\App\Group::count(), \App\User::count(), \App\User::verified()->count(), \App\Discussion::count(), \App\Comment::count(), \App\Action::count(), \App\File::count()]);
+        $chart->labels(['Groups', 'Active groups', 'Users', 'Verified users', 'Active users', 'Discussions', 'Comments', 'Events', 'Files']);
+        $chart->dataset('Amount', 'bar', [
+            \App\Group::count(),
+            \App\Group::active()->count(),
+            \App\User::count(),
+            \App\User::verified()->count(),
+            \App\User::active()->verified()->count(),
+            \App\Discussion::count(),
+            \App\Comment::count(),
+            \App\Action::count(),
+            \App\File::count()
+        ]);
         $charts[] = $chart;
 
 
@@ -33,14 +43,13 @@ class InsightsController extends Controller
 
         // Discussions
         $results = \App\Discussion::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
-        ->groupBy('yearmonth')
-        ->orderBy('yearmonth', 'asc')
-        ->get();
+            ->groupBy('yearmonth')
+            ->orderBy('yearmonth', 'asc')
+            ->get();
 
         $dataset = [];
         $labels = [];
-        foreach ($results as $result)
-        {
+        foreach ($results as $result) {
             $dataset[] = $result->data;
             $labels[] = $result->year . ' / ' .  $result->month;
         }
@@ -54,14 +63,13 @@ class InsightsController extends Controller
 
         // Actions
         $results = \App\Action::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
-        ->groupBy('yearmonth')
-        ->orderBy('yearmonth', 'asc')
-        ->get();
+            ->groupBy('yearmonth')
+            ->orderBy('yearmonth', 'asc')
+            ->get();
 
         $dataset = [];
         $labels = [];
-        foreach ($results as $result)
-        {
+        foreach ($results as $result) {
             $dataset[] = $result->data;
             $labels[] = $result->year . ' / ' .  $result->month;
         }
@@ -75,14 +83,13 @@ class InsightsController extends Controller
 
         // Members
         $results = \App\Membership::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
-        ->groupBy('yearmonth')
-        ->orderBy('yearmonth', 'asc')
-        ->get();
+            ->groupBy('yearmonth')
+            ->orderBy('yearmonth', 'asc')
+            ->get();
 
         $dataset = [];
         $labels = [];
-        foreach ($results as $result)
-        {
+        foreach ($results as $result) {
             $dataset[] = $result->data;
             $labels[] = $result->year . ' / ' .  $result->month;
         }
@@ -97,14 +104,13 @@ class InsightsController extends Controller
 
         // Files
         $results = \App\File::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
-        ->groupBy('yearmonth')
-        ->orderBy('yearmonth', 'asc')
-        ->get();
+            ->groupBy('yearmonth')
+            ->orderBy('yearmonth', 'asc')
+            ->get();
 
         $dataset = [];
         $labels = [];
-        foreach ($results as $result)
-        {
+        foreach ($results as $result) {
             $dataset[] = $result->data;
             $labels[] = $result->year . ' / ' .  $result->month;
         }
@@ -119,15 +125,14 @@ class InsightsController extends Controller
 
         // Evolution of storage use
         $results = \App\File::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, sum(filesize) as data')
-        ->groupBy('yearmonth')
-        ->orderBy('yearmonth', 'asc')
-        ->get();
+            ->groupBy('yearmonth')
+            ->orderBy('yearmonth', 'asc')
+            ->get();
 
         $dataset = [];
         $labels = [];
         $total = 0;
-        foreach ($results as $result)
-        {
+        foreach ($results as $result) {
             $total = $total + $result->data / 1000000;
             $dataset[] = round($total);
             $labels[] = $result->year . ' / ' .  $result->month;
@@ -140,15 +145,9 @@ class InsightsController extends Controller
         $charts[] = $chart;
 
 
-        // Evolution of storage use
-        $results = DB::query('select group_id sum(filesize) as filesize from files group by group_id order by filesize desc')
-        ->get();
-
-        dd($results);
-
 
 
         return view('admin.insights')
-        ->with('charts', $charts);
+            ->with('charts', $charts);
     }
 }

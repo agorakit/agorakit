@@ -16,4 +16,5 @@ return [
   'inbox_prefix' => env('INBOX_PREFIX'),
   'inbox_suffix' => env('INBOX_SUFFIX'),
   'max_file_size' => env('MAX_FILE_SIZE', 10000),
+  'reactions' => ['plusone', 'minusone', 'laugh', 'confused', 'heart', 'hooray', 'rocket', 'eyes']
 ];

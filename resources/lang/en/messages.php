@@ -1,6 +1,7 @@
 <?php
 
 return array (
+  'inbox_help' => 'The group email can only be used by group members',
   'member_since' => 'Member since',
   'no_file_selected' => 'No file selected',
   'notifications_interval' => 'Notifications',

@@ -101,6 +101,11 @@ class Setting extends Model
     {
         $setting  = $this->get($key);
 
+        if (is_array($setting)) 
+        {
+            return $setting;
+        }
+
         // first priority : non empty setting stored in the DB
         if ($setting) {
             return json_decode($setting);
