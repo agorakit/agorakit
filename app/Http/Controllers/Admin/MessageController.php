@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Message;
 
-
+/** 
+ * Allows admin to list imported message from the inbound mailbox, and check how good or bad they were processed
+ */
 class MessageController extends Controller
 {
     /**

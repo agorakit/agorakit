@@ -154,28 +154,6 @@ class ProcessMessages extends Command
     }
 
 
-    /** 
-     * Returns all recipients from the message, in the to: and cc: fields
-     */
-    function extractRecipientsFromMessage(Message $message)
-    {
-        $recipients = [];
-
-        if ($message->parse()->getHeader(HeaderConsts::TO)) {
-            foreach ($message->parse()->getHeader(HeaderConsts::TO)->getAddresses() as $to) {
-                $recipients[] = $to->getEmail();
-            }
-        }
-
-        if ($message->parse()->getHeader(HeaderConsts::CC)) {
-            foreach ($message->parse()->getHeader(HeaderConsts::CC)->getAddresses() as $to) {
-                $recipients[] = $to->getEmail();
-            }
-        }
-        
-        return $recipients;
-    }
-
 
     /**
      * Tries to find a valid user in the $message (using from: email header)
@@ -199,7 +177,7 @@ class ProcessMessages extends Command
     // tries to find a valid group in the $message (using to: email header)
     public function extractGroupFromMessage(Message $message)
     {
-        $recipients = $this->extractRecipientsFromMessage($message);
+        $recipients = $message->extractRecipients();
         $to_emails = [];
 
         foreach ($recipients as $to_email) {
@@ -227,7 +205,7 @@ class ProcessMessages extends Command
     // tries to find a valid discussion in the $message (using to: email header and message content)
     public function extractDiscussionFromMessage(Message $message)
     {
-        $recipients = $this->extractRecipientsFromMessage($message);
+        $recipients = $message->extractRecipients();
 
         foreach ($recipients as $to_email) {
             preg_match('#' . config('agorakit.inbox_prefix') . 'reply-(\d+)' . config('agorakit.inbox_prefix') . '#', $to_email, $matches);

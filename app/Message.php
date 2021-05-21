@@ -147,7 +147,7 @@ class Message extends Model
     }
 
     /**
-     * Returns all recipients of this message
+     * Returns all recipients email of this message, using TO and CC fields. Parses the raw email content
      */
     function extractRecipients()
     {
