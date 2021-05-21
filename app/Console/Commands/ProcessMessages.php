@@ -13,6 +13,7 @@ use App\Mail\MailBounce;
 use League\HTMLToMarkdown\HtmlConverter;
 use Michelf\Markdown;
 use EmailReplyParser\EmailReplyParser;
+use ZBateson\MailMimeParser\Header\HeaderConsts;
 
 /*
 Inbound Email handler for Agorakit, second step : processing the messages table
@@ -160,19 +161,18 @@ class ProcessMessages extends Command
     {
         $recipients = [];
 
-        if ($message->parse()->getHeader('To')) {
-            foreach ($message->parse()->getHeader('To') as $to) {
+        if ($message->parse()->getHeader(HeaderConsts::TO)) {
+            foreach ($message->parse()->getHeader(HeaderConsts::TO)->getAddresses() as $to) {
                 $recipients[] = $to->getEmail();
             }
         }
 
-        if ($message->parse()->getHeader('Cc')) {
-            foreach ($message->parse()->getHeader('Cc') as $to) {
+        if ($message->parse()->getHeader(HeaderConsts::CC)) {
+            foreach ($message->parse()->getHeader(HeaderConsts::CC)->getAddresses() as $to) {
                 $recipients[] = $to->getEmail();
             }
         }
-
-
+        
         return $recipients;
     }
 
@@ -252,7 +252,7 @@ class ProcessMessages extends Command
     {
         $discussion = new Discussion();
 
-        $discussion->name = $message->getSubject();
+        $discussion->name = $message->subject;
         $discussion->body = $message->extractText();
 
         $discussion->total_comments = 1; // the discussion itself is already a comment
@@ -264,7 +264,7 @@ class ProcessMessages extends Command
             $user->touch();
             $this->info('Discussion has been created with id : ' . $discussion->id);
             $this->info('Title : ' . $discussion->name);
-            Log::info('Discussion has been created from email', ['mail' => $message, 'discussion' => $discussion]);
+            Log::info('Discussion has been created from email', ['message' => $message, 'discussion' => $discussion]);
 
             // associate the message with the created content
             $message->discussion()->associate($discussion);

@@ -11,6 +11,8 @@ use ZBateson\MailMimeParser\MailMimeParser;
 use ZBateson\MailMimeParser\Message as MailMessage;
 use ZBateson\MailMimeParser\Header\HeaderConsts;
 
+use EmailReplyParser\EmailReplyParser;
+
 use App\User;
 use Auth;
 
