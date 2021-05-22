@@ -90,7 +90,9 @@ class ProcessMessages extends Command
             $this->debug = true;
         }
 
-        $messages = Message::all(); // ony with the right status 
+        $this->debug(Message::where('status', Message::CREATED)->count() . ' messages to handle');
+
+        $messages = Message::where('status', Message::CREATED)->get(); // ony with the right status 
         foreach ($messages as $message) {
             
             $this->line('---------------------------------------------------');
