@@ -7,9 +7,12 @@ use App\Group;
 use App\Discussion;
 use App\Comment;
 use App\Action;
+use App\Message;
 use App\User;
 use App\File;
 use Carbon\Carbon;
+use Venturecraft\Revisionable\Revision;
+
 
 class CleanupDatabase extends Command
 {
@@ -49,7 +52,7 @@ class CleanupDatabase extends Command
             return false;
         }
 
-        // definitely delete deleted groups and all their contents after 30 days
+        // definitely delete deleted groups and all their contents
 
         // get a list of groups
         $groups = Group::onlyTrashed()
@@ -119,7 +122,7 @@ class CleanupDatabase extends Command
         }
 
 
-        // delete soft deleted and unverified users + their content and their memberships after 30 days
+        // delete soft deleted and unverified users + their content and their memberships
         $users = User::onlyTrashed()
             ->where('deleted_at', '<', Carbon::today()->subDays($this->option('days')))
             ->get();
@@ -152,9 +155,13 @@ class CleanupDatabase extends Command
             $this->info('User ' . $user->name . '(' . $user->email . ')' . ' hard deleted');
         }
 
-        // delete all old revisions TODO
-
-        // delete all old imported messages TODO
+        // delete all old revisions
+        $count = Revision::where('created_at', '<', Carbon::today()->subDays($this->option('days')))->forceDelete();
+        if ($count) $this->info($count . ' revisions deleted');
+        
+        // delete all old imported messages
+        $count = Message::where('created_at', '<', Carbon::today()->subDays($this->option('days')))->forceDelete();
+        if ($count) $this->info($count . ' inbound mail messages deleted');
 
     }
 }
