@@ -1,8 +1,8 @@
 {
-  "name": "philippejadin/agorakit",
+  "name": "agorakit/agorakit",
   "description": "Agorakit, groupware for citizen.",
   "keywords": ["groupware", "laravel"],
-  "license": "GPL",
+  "license": "AGPL",
   "type": "project",
 
 
