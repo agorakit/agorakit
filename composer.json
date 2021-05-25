@@ -41,13 +41,13 @@
   },
   "require-dev": {
     "barryvdh/laravel-debugbar": "^3",
-    "facade/ignition": "^2.3.6",
+    "facade/ignition": "^2",
     "fzaninotto/faker": "^1.9.1",
     "laravel/browser-kit-testing": "^6",
     "laravel/tinker": "^2",
-    "mmo/faker-images": "^0.1.0",
-    "mockery/mockery": "^1.3.1",
-    "nunomaduro/collision": "^5.0",
+    "mmo/faker-images": "^0.3",
+    "mockery/mockery": "^1",
+    "nunomaduro/collision": "^5",
     "phpunit/phpunit": "^9.0"
   },
 

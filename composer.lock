@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "82011edba9222cb9eb8def3cc33e41d9",
+    "content-hash": "cbf1c40a2e29d6fbe79a59e0d7f78ff9",
     "packages": [
         {
             "name": "barryvdh/laravel-translation-manager",
@@ -9041,16 +9041,16 @@
         },
         {
             "name": "mmo/faker-images",
-            "version": "v0.1.0",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/morawskim/faker-images.git",
-                "reference": "3b8e8fbfce3008c0ce3660bf63b1457f0a19ce16"
+                "reference": "f92b66e0c3771891280786ad3a1c4fab21f8e34d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/morawskim/faker-images/zipball/3b8e8fbfce3008c0ce3660bf63b1457f0a19ce16",
-                "reference": "3b8e8fbfce3008c0ce3660bf63b1457f0a19ce16",
+                "url": "https://api.github.com/repos/morawskim/faker-images/zipball/f92b66e0c3771891280786ad3a1c4fab21f8e34d",
+                "reference": "f92b66e0c3771891280786ad3a1c4fab21f8e34d",
                 "shasum": ""
             },
             "require": {
@@ -9089,9 +9089,9 @@
             ],
             "support": {
                 "issues": "https://github.com/morawskim/faker-images/issues",
-                "source": "https://github.com/morawskim/faker-images/tree/master"
+                "source": "https://github.com/morawskim/faker-images/tree/v0.3.0"
             },
-            "time": "2020-02-02T16:20:03+00:00"
+            "time": "2021-01-24T10:59:29+00:00"
         },
         {
             "name": "mockery/mockery",
