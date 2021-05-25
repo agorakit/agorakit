@@ -31,7 +31,7 @@
             <div class="dropdown-menu dropdown-menu-left grid-cols-3 p-2" aria-labelledby="dropdownMenuButton">
 
                 @foreach (setting()->getArray('reactions') as $reaction)
-                <a up-target="#model-{{$model->id}}" up-reveal="false" class="dropdown-items"
+                <a up-target="#model-{{$model->id}}" up-reveal="false" class="no-underline"
                     href="{{route('reaction.react', ['model' => $model->modelName, 'id' => $model->id, 'reaction'=> $reaction])}}">
                     <img src="{{asset('/images/reactions/' . $reaction . '.png')}}"
                         class="image-cover h-8 w-8 hover:bg-gray-300 p-1 rounded" title="{{$reaction}}" />
