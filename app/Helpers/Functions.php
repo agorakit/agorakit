@@ -45,7 +45,7 @@ function sizeForHumans($bytes)
 function dateForHumans($date)
 {
     if ($date->lessThan(Carbon::now()->subDays(5))) {
-        return $date->toDateTimeString();
+        return $date->isoFormat('LLL'); // soooo much better like that cfr. https://carbon.nesbot.com/docs/#api-localization
     }
 
     return $date->diffForHumans();
