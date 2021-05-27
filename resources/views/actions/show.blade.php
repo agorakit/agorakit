@@ -67,9 +67,9 @@
     </div>
 
 
-    <h3>{{trans('messages.begins')}} : {{$action->start->format('d/m/Y H:i')}}</h3>
+    <h3>{{trans('messages.begins')}} : {{$action->start->isoFormat('LLLL')}}</h3>
 
-    <h3>{{trans('messages.ends')}} : {{$action->stop->format('d/m/Y H:i')}}</h3>
+    <h3>{{trans('messages.ends')}} : {{$action->stop->isoFormat('LLLL')}}</h3>
 
     @if (!empty($action->location))
     <h3>{{trans('messages.location')}} : {{$action->location}}</h3>

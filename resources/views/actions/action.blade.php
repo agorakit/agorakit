@@ -1,9 +1,9 @@
 <div class="flex items-center py-3 border-b border-gray-300 hover:bg-gray-100">
-    <a up-follow href="{{ route('groups.actions.show', [$action->group, $action]) }}">
+    <a up-follow href="{{ route('groups.actions.show', [$action->group, $action]) }}" class="no-underline">
         <div
             class="border-gray-400 text-gray-600 bg-gray-200 border-2 flex-shrink-0 flex flex-col items-center justify-center h-12 w-12 rounded-lg mx-1">
             <div class="text-xl -mb-2 text-gray-800">{{ $action->start->format('d') }}</div>
-            <div class="text-sm">{{ $action->start->format('M') }}</div>
+            <div class="text-sm">{{ $action->start->monthName }}</div>
         </div>
     </a>
 
