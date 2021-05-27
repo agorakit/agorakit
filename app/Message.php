@@ -130,6 +130,10 @@ class Message extends Model
         $body_text  = nl2br(EmailReplyParser::parseReply($this->parse()->getTextContent()));
         $body_html = $this->parse()->getHtmlContent();
 
+        if (!$body_text && !$body_html) {
+            return false;
+        }
+
         // count the number of caracters in plain text :
         // if we really have less than 5 chars in there using plain text,
         // let's post the whole html mess, 
