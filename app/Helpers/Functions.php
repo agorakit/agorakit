@@ -44,7 +44,7 @@ function sizeForHumans($bytes)
  */
 function dateForHumans($date)
 {
-    if ($date->lessThan(Carbon::now()->subDays(2))) {
+    if ($date->lessThan(Carbon::now()->subDays(5))) {
         return $date->toDateTimeString();
     }
 
