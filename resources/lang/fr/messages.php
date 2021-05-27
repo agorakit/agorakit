@@ -1,7 +1,7 @@
 <?php
 
 return array (
-  'inbox_help' => 'Cette boite email ne peux être utilisée que par les membre du groupe',
+  'inbox_help' => 'Cette boite email ne peux être utilisée que par les membres du groupe',
   'edit' => 'Modifier',
   'delete' => 'Effacer',
   'show_history' => 'Afficher l\'historique des modifications',
