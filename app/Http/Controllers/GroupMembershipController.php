@@ -60,7 +60,7 @@ class GroupMembershipController extends Controller
             ->with('group', $group)
             ->with('tab', 'settings')
             ->with('membership', $membership)
-            ->with('interval', 'daily');
+            ->with('interval', 'hourly');
         } else {
             return view('membership.apply')
             ->with('group', $group)
