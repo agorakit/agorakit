@@ -12,6 +12,7 @@ use ZBateson\MailMimeParser\Message as MailMessage;
 use ZBateson\MailMimeParser\Header\HeaderConsts;
 
 use EmailReplyParser\EmailReplyParser;
+use League\HTMLToMarkdown\HtmlConverter;
 
 use App\User;
 use Auth;
