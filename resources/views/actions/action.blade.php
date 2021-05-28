@@ -1,4 +1,4 @@
-<div class="flex items-center py-3 border-b border-gray-300 hover:bg-gray-100">
+<div class="flex items-center py-3 border-b border-gray-300 hover:bg-gray-200">
     <a up-follow href="{{ route('groups.actions.show', [$action->group, $action]) }}" class="no-underline">
         <div
             class="border-gray-400 text-gray-600 bg-gray-200 border-2 flex-shrink-0 flex flex-col items-center justify-center h-12 w-12 rounded-lg mx-1">
@@ -10,8 +10,8 @@
 
     <div up-expand class="flex-grow flex">
         <div class="mx-2">
-            <div class="text-gray-800">
-                <a up-follow href="{{ route('groups.actions.show', [$action->group, $action]) }}">
+            <div class="text-gray-900 font-bold">
+                <a up-follow href="{{ route('groups.actions.show', [$action->group, $action]) }}" class="no-underline">
                     {{ $action->name }}
                 </a>
             </div>

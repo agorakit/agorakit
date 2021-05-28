@@ -1,5 +1,5 @@
 <div up-follow up-expand up-reveal="false"
-    class="flex relative items-start py-3 hover:bg-gray-100 border-b border-gray-300">
+    class="flex relative items-start py-3 hover:bg-gray-200 border-b border-gray-300">
 
     @if ($discussion->isPinned())
     <div
@@ -16,12 +16,12 @@
     <div class="mx-2 min-w-0 flex-grow">
 
 
-        <div class="text-gray-900 text-lg truncate min-w-0">
-            <a href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}">
+        <div class="text-gray-900 font-bold text-lg truncate min-w-0">
+            <a href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}" class="no-underline">
                 @if($discussion->isArchived())
                 [{{ __('Archived') }}]
                 @endif
-                {{ summary($discussion->name) }}
+                {{$discussion->name}}
             </a>
         </div>
 

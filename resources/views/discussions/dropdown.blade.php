@@ -27,7 +27,8 @@
 
         @can('pin', $discussion)
         <a class="dropdown-item"
-            href="{{ route('groups.discussions.pin', [$discussion->group, $discussion]) }}">
+            href="{{ route('groups.discussions.pin', [$discussion->group, $discussion]) }}"
+            up-target="#discussion-{{$discussion->id}}" up-cache="false" up-reveal="false">
             <i class="fa fa-thumbtack"></i>
             @if($discussion->isPinned())
             {{ trans('messages.unpin') }}
@@ -39,7 +40,8 @@
 
         @can('archive', $discussion)
         <a class="dropdown-item"
-            href="{{ route('groups.discussions.archive', [$discussion->group, $discussion]) }}">
+            href="{{ route('groups.discussions.archive', [$discussion->group, $discussion]) }}"
+            up-target="#discussion-{{$discussion->id}}" up-cache="false" up-reveal="false">
             <i class="fa fa-archive"></i>
             @if($discussion->isArchived())
             {{ trans('messages.unarchive') }}

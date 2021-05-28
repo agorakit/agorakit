@@ -1,18 +1,18 @@
-<div class="flex items-start py-3 border-b border-gray-300 hover:bg-gray-100">
-    <a up-follow href="{{ route('groups.actions.show', [$action->group, $action]) }}">
+<div class="flex items-start py-3 border-b border-gray-300 hover:bg-gray-200" id="action-{{$action->id}}">
+    <a up-follow href="{{ route('groups.actions.show', [$action->group, $action]) }}" class="no-underline">
         <div
             class="border-gray-400 text-gray-600 bg-gray-200 border-2 flex-shrink-0 flex flex-col items-center justify-center h-12 w-12 rounded-lg mx-1">
             <div class="text-xl -mb-2 text-gray-800">{{ $action->start->format('d') }}</div>
-            <div class="text-sm">{{ $action->start->format('M') }}</div>
+            <div class="text-sm">{{ $action->start->monthName }}</div>
         </div>
     </a>
 
 
-    <div up-expand class="ml-3 flex-grow">
+    <div up-expand class="ml-3 flex-grow min-w-0">
 
-        <div class="text-gray-800 overflow-ellipsis overflow-hidden h-5">
-            <a up-follow href="{{ route('groups.actions.show', [$action->group, $action]) }}">
-                {{ $action->name }}
+        <div class="text-gray-900 font-bold text-lg truncate">
+            <a up-follow href="{{ route('groups.actions.show', [$action->group, $action]) }}" class="no-underline">
+                {{$action->name}}
             </a>
         </div>
         @if ($action->attending->count() > 0)
@@ -54,19 +54,19 @@
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-            <a up-target="#participate-{{$action->id}}" up-cache="false" up-history="false" class="dropdown-item"
+            <a up-target="#action-{{$action->id}}" up-cache="false" up-history="false" class="dropdown-item"
                 href="{{route('groups.actions.participation.set', ['group' => $action->group, 'action' => $action, 'status' => 'yes'])}}">
                 {{__('I will participate')}}
             </a>
 
-            <a up-target="#participate-{{$action->id}}" up-cache="false" up-history="false" class="dropdown-item"
+            <a up-target="#action-{{$action->id}}" up-cache="false" up-history="false" class="dropdown-item"
                 href="{{route('groups.actions.participation.set', ['group' => $action->group, 'action' => $action, 'status' => 'no'])}}">
                 {{__('I will not participate')}}
             </a>
 
 
 
-            <a up-target="#participate-{{$action->id}}" up-cache="false" up-history="false" class="dropdown-item"
+            <a up-target="#action-{{$action->id}}" up-cache="false" up-history="false" class="dropdown-item"
                 href="{{route('groups.actions.participation.set', ['group' => $action->group, 'action' => $action, 'status' => 'maybe'])}}">
                 {{__('I don\'t know yet')}}
             </a>
