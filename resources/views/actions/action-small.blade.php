@@ -10,7 +10,7 @@
 
     <div up-expand class="ml-3 flex-grow min-w-0">
 
-        <div class="text-gray-900 font-bold text-lg truncate">
+        <div class="text-gray-900 text-lg truncate">
             <a up-follow href="{{ route('groups.actions.show', [$action->group, $action]) }}" class="no-underline">
                 {{$action->name}}
             </a>

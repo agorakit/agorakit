@@ -16,7 +16,7 @@
     <div class="mx-2 min-w-0 flex-grow">
 
 
-        <div class="text-gray-900 font-bold text-lg truncate min-w-0">
+        <div class="text-gray-900 text-lg truncate min-w-0">
             <a href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}" class="no-underline">
                 @if($discussion->isArchived())
                 [{{ __('Archived') }}]
