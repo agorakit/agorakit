@@ -4,8 +4,54 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cbf1c40a2e29d6fbe79a59e0d7f78ff9",
+    "content-hash": "b285051251bf2334b7e305f31af57377",
     "packages": [
+        {
+            "name": "balping/json-raw-encoder",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://gitlab.com/balping/json-raw-encoder.git",
+                "reference": "e2b0ab888342b0716f1f0628e2fa13b345c5f276"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/balping%2Fjson-raw-encoder/repository/archive.zip?sha=e2b0ab888342b0716f1f0628e2fa13b345c5f276",
+                "reference": "e2b0ab888342b0716f1f0628e2fa13b345c5f276",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Balping\\JsonRaw\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Balázs Dura-Kovács"
+                }
+            ],
+            "description": "Encode arrays to json with raw JS objects (eg. callbacks) in them",
+            "keywords": [
+                "callback",
+                "encode",
+                "json"
+            ],
+            "support": {
+                "issues": "https://gitlab.com/api/v4/projects/6731265/issues"
+            },
+            "time": "2020-06-06T16:24:31+00:00"
+        },
         {
             "name": "barryvdh/laravel-translation-manager",
             "version": "v0.5.10",
@@ -120,46 +166,6 @@
                 }
             ],
             "time": "2021-01-20T22:51:39+00:00"
-        },
-        {
-            "name": "chartisan/php",
-            "version": "1.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Chartisan/PHP.git",
-                "reference": "85d2352077800e9bcb411aec1ff7e4d23eef93a1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Chartisan/PHP/zipball/85d2352077800e9bcb411aec1ff7e4d23eef93a1",
-                "reference": "85d2352077800e9bcb411aec1ff7e4d23eef93a1",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.4"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Chartisan\\PHP\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Èrik Campobadal Forés",
-                    "email": "soc@erik.cat"
-                }
-            ],
-            "description": "Chartisan's PHP backend",
-            "support": {
-                "issues": "https://github.com/Chartisan/PHP/issues",
-                "source": "https://github.com/Chartisan/PHP/tree/1.2.1"
-            },
-            "time": "2020-11-05T13:13:58+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -303,25 +309,23 @@
         },
         {
             "name": "consoletvs/charts",
-            "version": "7.2.0",
+            "version": "6.5.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ConsoleTVs/Charts.git",
-                "reference": "cc820595e9bec13fbaf4cf552128860830a0f9e2"
+                "reference": "0005d14e4fe6715f4146a4dc3b56add768233001"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ConsoleTVs/Charts/zipball/cc820595e9bec13fbaf4cf552128860830a0f9e2",
-                "reference": "cc820595e9bec13fbaf4cf552128860830a0f9e2",
+                "url": "https://api.github.com/repos/ConsoleTVs/Charts/zipball/0005d14e4fe6715f4146a4dc3b56add768233001",
+                "reference": "0005d14e4fe6715f4146a4dc3b56add768233001",
                 "shasum": ""
             },
             "require": {
-                "chartisan/php": "^1.2.0",
-                "illuminate/console": "^7.14.1|^8.0",
-                "illuminate/contracts": "^7.14.1|^8.0",
-                "illuminate/http": "^7.14.1|^8.0",
-                "illuminate/support": "^7.14.1|^8.0",
-                "php": ">=7.4"
+                "balping/json-raw-encoder": "^1.0",
+                "illuminate/console": "^5.0|^6.0|^7.0|^8.0",
+                "illuminate/support": "^5.0|^6.0|^7.0|^8.0",
+                "php": ">=7.0"
             },
             "type": "library",
             "extra": {
@@ -342,14 +346,14 @@
             ],
             "authors": [
                 {
-                    "name": "Èrik C. Forés",
+                    "name": "Èrik Campobadal Forés",
                     "email": "soc@erik.cat"
                 }
             ],
-            "description": "The missing charting library on laravel, powered by Chartisan",
+            "description": "The laravel charting package",
             "support": {
                 "issues": "https://github.com/ConsoleTVs/Charts/issues",
-                "source": "https://github.com/ConsoleTVs/Charts/tree/7.2.0"
+                "source": "https://github.com/ConsoleTVs/Charts/tree/6.5.5"
             },
             "funding": [
                 {
@@ -361,7 +365,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-12-11T02:13:47+00:00"
+            "time": "2020-09-10T14:20:26+00:00"
         },
         {
             "name": "cviebrock/eloquent-sluggable",

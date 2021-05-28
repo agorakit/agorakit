@@ -9,7 +9,7 @@
   "require": {
     "php": "^7.3",
     "barryvdh/laravel-translation-manager": "^0.5",
-    "consoletvs/charts": "7.*",
+    "consoletvs/charts": "6.*",
     "cviebrock/eloquent-sluggable": "^8",
     "cviebrock/eloquent-taggable": "^8",
     "ddeboer/imap": "^1",
