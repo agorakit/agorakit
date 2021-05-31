@@ -223,11 +223,15 @@ class File extends Model
      */
     public function deleteFromStorage()
     {
-        if (Storage::exists($this->path)) {
-            return Storage::delete($this->path);
-        }
+        // this returns all stored revisions of this file as a path to storage
+        foreach ($this->revisionHistory()->where('key', 'path')->pluck('new_value') as $path) 
+        {
+            if (Storage::exists($path)) {
+                Storage::delete($path);
+            }
 
-        return false;
+        }
+        return true;
     }
 
 
