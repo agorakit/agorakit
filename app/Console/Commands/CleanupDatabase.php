@@ -155,8 +155,8 @@ class CleanupDatabase extends Command
             $this->info('User ' . $user->name . '(' . $user->email . ')' . ' hard deleted');
         }
 
-        // delete all old revisions
-        $count = Revision::where('created_at', '<', Carbon::today()->subDays($this->option('days')))->forceDelete();
+        // delete all old revisions, older than double amount of days of retention, just in case
+        $count = Revision::where('created_at', '<', Carbon::today()->subDays($this->option('days') * 2 ))->forceDelete();
         if ($count) $this->info($count . ' revisions deleted');
         
         // delete all old imported messages
