@@ -230,39 +230,6 @@ class File extends Model
         return false;
     }
 
-    /**
-     * Set file content from a file request -> to storage
-     * You need to pass an uploaded file from a $request as $uploaded_file
-     * The file you are attaching to must already exist in the DB.
-     */
-    public function addToStorage($uploaded_file)
-    {
-        if ($this->exists) {
-            // generate filenames and path
-            $storage_path = 'groups/' . $this->group->id . '/files';
-
-            // simplified filename
-            $filename = $this->id . '-' . str_slug(pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $uploaded_file->guessExtension();
-
-            $complete_path = $uploaded_file->storeAs($storage_path, $filename);
-
-            $this->path = $complete_path;
-            $this->name = pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME) . '.' . $uploaded_file->guessExtension();
-            $this->original_filename = $uploaded_file->getClientOriginalName();
-            $this->mime = $uploaded_file->getMimeType();
-            $this->filesize = $uploaded_file->getSize();
-
-            // save it again
-            $this->save();
-
-            return $complete_path;
-        } else {
-            abort(500, 'First save a file before addToStorage(), file does not exists yet in DB');
-
-            return false;
-        }
-    }
-
 
     /*
     How file versioning works ?
@@ -276,38 +243,30 @@ class File extends Model
     */
 
     /**
-     * Return an array of versions
-     */
-    public function getVersions()
-    {
-        $storage_path = 'groups/' . $this->group->id . '/files/versions/' . $this->id;
-    }
-
-
-    /**
-     * Adds a new version of the file to storage
+     * Set file content from a file request -> to storage
      * You need to pass an uploaded file from a $request as $uploaded_file
      * The file you are attaching to must already exist in the DB.
      * 
-     * returns version number
+     * If called multiple times, a /versions folder is created containing previous versions of the uploaded file.
+     * 
      */
-    public function addVersionToStorage($uploaded_file)
+    public function addToStorage($uploaded_file)
     {
         if ($this->exists) {
             // generate filenames and path
             $storage_path = 'groups/' . $this->group->id . '/files';
 
-            // count number of versions
-
-            /// generate correct version number to append :  _00 _01 _02 ...
-
             // simplified filename
-            $filename = $this->id . '-' . str_slug(pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $uploaded_file->guessExtension();
+            $filename = str_slug(pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $uploaded_file->guessExtension();
+            // $storage_filename = $this->id . $filename;
 
-            $complete_path = $uploaded_file->storeAs($storage_path, $filename);
 
-            $this->path = $complete_path;
-            $this->name = pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME) . '.' . $uploaded_file->guessExtension();
+            // if file exists, move the previous one inside "versions"
+            // create a new version and store it
+            $stored_path = $uploaded_file->store($storage_path);
+
+            $this->path = $stored_path;
+            $this->name = $filename;
             $this->original_filename = $uploaded_file->getClientOriginalName();
             $this->mime = $uploaded_file->getMimeType();
             $this->filesize = $uploaded_file->getSize();
@@ -315,13 +274,14 @@ class File extends Model
             // save it again
             $this->save();
 
-            return $complete_path;
+            return $stored_path;
         } else {
-            abort(500, 'First save a file before addVersionToStorage(), file does not exists yet in DB');
+            abort(500, 'First save a file before addToStorage(), file does not exists yet in DB');
 
             return false;
         }
     }
+
 
     
 }
