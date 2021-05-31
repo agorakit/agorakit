@@ -262,4 +262,66 @@ class File extends Model
             return false;
         }
     }
+
+
+    /*
+    How file versioning works ?
+
+    Inside the storage folder, there might be a folder named : 
+    groups/[group id]/files/versions/[file id]/[version number]/[filename] 
+
+    version number is just an int 0..9999
+    filename is the same file name as initial version
+
+    */
+
+    /**
+     * Return an array of versions
+     */
+    public function getVersions()
+    {
+        $storage_path = 'groups/' . $this->group->id . '/files/versions/' . $this->id;
+    }
+
+
+    /**
+     * Adds a new version of the file to storage
+     * You need to pass an uploaded file from a $request as $uploaded_file
+     * The file you are attaching to must already exist in the DB.
+     * 
+     * returns version number
+     */
+    public function addVersionToStorage($uploaded_file)
+    {
+        if ($this->exists) {
+            // generate filenames and path
+            $storage_path = 'groups/' . $this->group->id . '/files';
+
+            // count number of versions
+
+            /// generate correct version number to append :  _00 _01 _02 ...
+
+            // simplified filename
+            $filename = $this->id . '-' . str_slug(pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $uploaded_file->guessExtension();
+
+            $complete_path = $uploaded_file->storeAs($storage_path, $filename);
+
+            $this->path = $complete_path;
+            $this->name = pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME) . '.' . $uploaded_file->guessExtension();
+            $this->original_filename = $uploaded_file->getClientOriginalName();
+            $this->mime = $uploaded_file->getMimeType();
+            $this->filesize = $uploaded_file->getSize();
+
+            // save it again
+            $this->save();
+
+            return $complete_path;
+        } else {
+            abort(500, 'First save a file before addVersionToStorage(), file does not exists yet in DB');
+
+            return false;
+        }
+    }
+
+    
 }

@@ -9,7 +9,11 @@ use App\File;
 use App\Group;
 
 
-class CollaborationController extends Controller
+/**
+ * This is the integration with onlyoffice (this can change later).
+ * Provide users the ability to edit a file using onlyoffice (documents, spreadsheets, presentations)
+ */
+class FileEditorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -71,7 +75,7 @@ class CollaborationController extends Controller
      */
     public function edit(Request $request, Group $group, File $file)
     {
-        $this->authorize('view', $file);
+        $this->authorize('update', $file);
 
 
         return view('collaboration.edit')
