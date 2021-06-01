@@ -235,23 +235,14 @@ class File extends Model
     }
 
 
-    /*
-    How file versioning works ?
 
-    Inside the storage folder, there might be a folder named : 
-    groups/[group id]/files/versions/[file id]/[version number]/[filename] 
-
-    version number is just an int 0..9999
-    filename is the same file name as initial version
-
-    */
 
     /**
      * Set file content from a file request -> to storage
      * You need to pass an uploaded file from a $request as $uploaded_file
      * The file you are attaching to must already exist in the DB.
      * 
-     * If called multiple times, a /versions folder is created containing previous versions of the uploaded file.
+     * Can be called multiple times, a new uuid filename is generated each time by the framework.
      * 
      */
     public function addToStorage($uploaded_file)
@@ -262,8 +253,7 @@ class File extends Model
 
             // simplified filename
             $filename = str_slug(pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $uploaded_file->guessExtension();
-            // $storage_filename = $this->id . $filename;
-
+           
 
             // if file exists, move the previous one inside "versions"
             // create a new version and store it
