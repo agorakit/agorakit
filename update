@@ -1,4 +1,4 @@
-php artisan down
+php artisan down --refresh=30 --render="errors::503"
 
 git pull
 

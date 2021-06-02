@@ -10,7 +10,13 @@
 <div class="form-group mt-4 mb-4">
     <input name="files[]" id="file" type="file" multiple="mutiple"
         title="{{ trans('messages.select_one_or_more_files') }}">
+        <div class="small-help">
+            <i class="fas fa-info-circle"></i>
+            {{trans('messages.max_file_size')}} {{sizeForHumans(config('agorakit.max_file_size') * 1000) }}
+        </div>
 </div>
+
+
 
 @include('partials.tags_input')
 

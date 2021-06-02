@@ -137,6 +137,14 @@ class GroupActionController extends Controller
             $action->stop = Carbon::parse($request->get('stop'));
         }
 
+        // handle the case where the event is exactly one (ore more) day duration : it's a full day event, remove one second
+ 
+        if ($action->start->hour == 0 && $action->start->minute == 0 && $action->stop->hour == 0 && $action->stop->minute == 0) 
+        {
+            $action->stop = Carbon::parse($request->get('stop'))->subSecond();
+        }
+
+
         if ($request->get('title')) {
             $action->name = $request->get('title');
         }

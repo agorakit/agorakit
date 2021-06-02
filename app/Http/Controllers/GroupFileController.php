@@ -194,8 +194,19 @@ class GroupFileController extends Controller
     {
         $this->authorize('create-file', $group);
 
+
+
+
+
+
         // handle the case of a summernote upaload (via ajax)
         if ($request->ajax()) {
+             
+            // validate file size
+             $validated = $request->validate([
+                'file' => 'required|max:' . config('agorakit.max_file_size'),
+            ]);
+
             if ($request->file('file')) {
                 $file = new File();
                 $file->forceSave();
@@ -205,7 +216,6 @@ class GroupFileController extends Controller
                 $group->touch();
                 \Auth::user()->touch();
 
-                //return response()->json(route('groups.files.preview', [$group, $file]), 200, [], JSON_UNESCAPED_SLASHES);
                 return response()->json($file->id);
             }
             return response()->json('no file found in request', 404, [], JSON_UNESCAPED_SLASHES);
@@ -213,6 +223,13 @@ class GroupFileController extends Controller
 
         try {
             if ($request->file('files')) {
+
+                // validate file size
+                $validated = $request->validate([
+                    'files.*' => 'required|max:' . config('agorakit.max_file_size'),
+                ]);
+
+
                 foreach ($request->file('files') as $uploaded_file) {
                     $file = new File();
 

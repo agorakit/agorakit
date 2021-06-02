@@ -201,7 +201,7 @@ class UserController extends Controller
 
             // handle tags
             if ($request->get('tags')) {
-                $user->tag($request->get('tags'));
+                $user->retag($request->get('tags'));
             } else {
                 $user->detag();
             }

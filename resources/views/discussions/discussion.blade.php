@@ -1,5 +1,5 @@
 <div up-follow up-expand up-reveal="false"
-    class="flex relative items-start py-3 hover:bg-gray-100 border-b border-gray-300">
+    class="flex relative items-start py-3 hover:bg-gray-200 border-b border-gray-300">
 
     @if ($discussion->isPinned())
     <div
@@ -17,11 +17,11 @@
 
 
         <div class="text-gray-900 text-lg truncate min-w-0">
-            <a href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}">
+            <a href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}" class="no-underline">
                 @if($discussion->isArchived())
                 [{{ __('Archived') }}]
                 @endif
-                {{ summary($discussion->name) }}
+                {{$discussion->name}}
             </a>
         </div>
 
@@ -35,7 +35,7 @@
             {{ $discussion->user->name }}
             @endif
             {{ trans('messages.in') }}
-            {{ $discussion->group->name }}, 
+            {{ $discussion->group->name }},
             {{ dateForHumans($discussion->updated_at) }}
         </div>
 
@@ -52,6 +52,7 @@
         </div>
         @endif
 
+       
     </div>
 
     @if($discussion->unReadCount() > 0)

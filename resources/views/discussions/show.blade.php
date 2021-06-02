@@ -16,31 +16,16 @@
         @endif
 
         <div class="flex">
-
-
             @include('users.avatar', ['user' => $discussion->user])
-
-
-
             <div class="flex-grow w-100 ml-4">
-
-
                 <h2 class="text-xxl">
                     {{ $discussion->name }}
                 </h2>
-
             </div>
-
             @include('discussions.dropdown')
-
         </div>
 
-
-
-
         <div class="ml-16">
-
-
             <div>
                 {!! filter($discussion->body) !!}
             </div>
@@ -55,7 +40,6 @@
             </div>
 
             <div class="mb-3 d-flex">
-
                 <div class="tags">
                     @if($discussion->getSelectedTags()->count() > 0)
                     <span class="mr-2">
@@ -65,9 +49,12 @@
                     </span>
                     @endif
                 </div>
-
-
             </div>
+
+            <div>
+                <x-reactions :model="$discussion"/>
+            </div>
+    
 
         </div>
 

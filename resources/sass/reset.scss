@@ -25,15 +25,17 @@ body {
   margin: 0;
 }
 
-a{
-  text-decoration: none;
+a
+{
   color: inherit;
 }
 
-p > a
+// remove underline on navigational items & buttons
+nav a, a.btn, .tabs a, h1 a, h2 a, h3 a, .dropdown-item, .nav a
 {
-  text-decoration: underline;
+  text-decoration: none;
 }
+
 
 //
 // Typography

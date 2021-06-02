@@ -21,7 +21,7 @@
 @include('partials.invite')
 
 
-<div class="flex justify-start content-start mb-10 space-x-8 text-gray-700 hover:text-blue-900">
+<div class="flex justify-start content-start mb-10 space-x-8 text-gray-700 hover:text-blue-900 tabs">
 
     @if (Auth::check())
 

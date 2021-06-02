@@ -312,7 +312,7 @@ class GroupDiscussionController extends Controller
         $discussion->togglePin();
         $discussion->timestamps = false;
         $discussion->save();
-        flash(trans('messages.ressource_updated_successfully'));
+        //flash(trans('messages.ressource_updated_successfully'));
         return redirect()->back();
     }
 
@@ -322,7 +322,7 @@ class GroupDiscussionController extends Controller
         $discussion->toggleArchive();
         $discussion->timestamps = false;
         $discussion->save();
-        flash(trans('messages.ressource_updated_successfully'));
+        //flash(trans('messages.ressource_updated_successfully'));
         return redirect()->back();
     }
 }

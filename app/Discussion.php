@@ -34,19 +34,14 @@ class Discussion extends Model
     ];
 
     protected $keepRevisionOf = ['name', 'body', 'status'];
-
     protected $table = 'discussions';
     protected $fillable = ['name', 'body', 'group_id'];
-
     public $timestamps = true;
-
     public $unreadcounter;
-
     public $read_comments;
-
     protected $dates = ['deleted_at'];
-
     protected $casts = ['user_id' => 'integer'];
+    public $modelName = 'discussion';
 
     /**
      * Searchable rules.
@@ -149,5 +144,10 @@ class Discussion extends Model
         else {
             return false;
         }
+    }
+
+    public function reactions()
+    {
+        return $this->morphMany(Reaction::class, 'reactable');
     }
 }

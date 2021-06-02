@@ -1,6 +1,7 @@
 <?php
 
 return array (
+  'inbox_help' => 'Cette boite email ne peux être utilisée que par les membres du groupe',
   'edit' => 'Modifier',
   'delete' => 'Effacer',
   'show_history' => 'Afficher l\'historique des modifications',
@@ -242,21 +243,6 @@ return array (
   'you_are_now_a_member_of_this_group' => 'Vous êtes maintenant membre du groupe',
   'you_can_create_one_here' => 'Vous pouvez en créer un ici',
   'you_dont_have_an_account_create_one_now' => 'Vous n\'avez pas encore de compte merci de vous en créer un',
-  'LLH:obsolete' => 
-  array (
-    'by' => 'par',
-    'date' => 'Date',
-    'embed_this_page' => 'Incorporer cette page',
-    'i_changed_my_mind' => 'J\'ai changé d\'avis, je ne veux pas quitter ce groupe',
-    'modules' => 'Modules',
-    'not_an_admin' => 'Pas administrateur',
-    'size' => 'Taille',
-    'starts' => 'Début',
-    'toggle_navigation' => 'Activer la navigation',
-    'user_made_admin_successfuly' => 'Utilisateur rendu admin avec succès',
-    'what' => 'Quoi',
-    'sort_by_size_asc' => 'Trier par taille en ordre croissant',
-  ),
   'deleteGroup' => 'Supprimer le groupe',
   'create_folder' => 'Créer un dossier',
   'create_folder_button' => 'Créer un dossier',
@@ -265,4 +251,6 @@ return array (
   'folder' => 'Dossier',
   'root' => 'Racine',
   'upload_new_file_version' => 'Envoyer une nouvelle version du fichier',
+  'attach_file_help' => 'Glissez un fichier sur l\'éditeur de texte pour le joindre ou utilisez le bouton "image" dans la bare d\'outils',
+  'max_file_size' => 'Taille de fichier maximum',
 );

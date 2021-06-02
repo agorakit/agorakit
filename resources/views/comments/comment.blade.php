@@ -11,12 +11,18 @@
             <div>
                 {!! filter($comment->body) !!}
             </div>
+
+
+
             <div class="text-xs text-gray-600">
 
                 <a up-follow href="{{ route('users.show', [$comment->user]) }}">{{$comment->user->name}}</a>
 
                 {{ dateForHumans($comment->created_at) }}
+            </div>
 
+            <div>
+                <x-reactions :model="$comment" />
             </div>
         </div>
 

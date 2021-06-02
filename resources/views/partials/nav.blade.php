@@ -3,58 +3,67 @@
     <a up-follow up-cache="false" href="{{ route('index') }}"
         class="hidden sm:flex text-gray-200 px-1 justify-center items-center sm:w-auto mr-4">
         @if(Storage::exists('public/logo/favicon.png'))
-        <img src="{{asset('storage/logo/favicon.png')}}"  class="rounded h-12 w-12" />
+        <img src="{{asset('storage/logo/favicon.png')}}" class="rounded h-12 w-12" />
         @else
-        <img src="/images/logo-white.svg"  class="rounded h-12 w-12" />
+        <img src="/images/logo-white.svg" class="rounded h-12 w-12" />
         @endif
         <span class="ml-2 hidden sm:inline text-gray-200">{{ setting('name') }}</span>
     </a>
 
     <a up-follow up-cache="false" href="{{ route('index') }}"
-    class="sm:hidden text-gray-200 px-1 flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:mr-2 sm:w-auto sm:px-4 sm:bg-transparent sm:rounded"
-    >
-    <i class="fa fa-home text-lg"></i>
+        class="sm:hidden text-gray-200 px-1 flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:mr-2 sm:w-auto sm:px-4 sm:bg-transparent sm:rounded">
+        <i class="fa fa-home text-lg"></i>
     </a>
 
 
 
     @auth
 
-        
-        <div class="dropdown">
-            <a href="#"
-                class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:mr-2 sm:w-auto sm:px-4 sm:bg-transparent sm:rounded"
-                data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
-                <i class="fa fa-cubes text-lg sm:hidden"></i>
-                <span class="hidden sm:inline">
-                    {{ trans('messages.groups') }}
-                    <i class="fa fa-caret-down"></i>
-                </span>
+    <div class="dropdown">
+        <a href="#"
+            class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:mr-2 sm:w-auto sm:px-4 sm:bg-transparent sm:rounded"
+            data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
+            <i class="fa fa-cubes text-lg sm:hidden"></i>
+            <span class="hidden sm:inline">
+                {{ trans('messages.groups') }}
+                <i class="fa fa-caret-down"></i>
+            </span>
+
+        </a>
+        <div class="dropdown-menu rounded shadow">
+
+            @if (Auth::user()->groups()->count() > 0)
+            <h6 class="dropdown-header">{{ trans('messages.my_groups') }}</h6>
+
+
+            @foreach (Auth::user()->groups()->orderBy('name')->get() as $group)
+            <a up-target="body" class="dropdown-item" href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
+            @endforeach
+
+            <div class="dropdown-divider"></div>
+
+            @endif
+
+            
+            <a up-target="body" class="dropdown-item" class="dropdown-item"
+                href="{{ action('GroupController@index') }}">
+                <i class="fa fa-layer-group"></i> {{ trans('messages.all_groups') }}
             </a>
-            <div class="dropdown-menu rounded shadow">
-                
-                @if (Auth::user()->groups()->count() > 0)
-                <h6 class="dropdown-header">{{ trans('messages.my_groups') }}</h6>
+
+            @can ('create', \App\Group::class)
+            <div class="dropdown-divider"></div>
+
+            <a up-target="body" class="dropdown-item" href="{{ route('groups.create') }}">
+                {{ trans('group.create_a_group_button') }}
+            </a>
+            @endcan
 
 
-                @foreach (Auth::user()->groups()->orderBy('name')->get() as $group)
-                <a up-target="body" class="dropdown-item" href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
-                @endforeach
-
-                @endif
-
-                @can ('create', \App\Group::class)
-                <div class="dropdown-divider"></div>
-
-                <a up-target="body" class="dropdown-item" href="{{ route('groups.create') }}">
-                    {{ trans('group.create_a_group_button') }}
-                </a>
-                @endcan
-            </div>
         </div>
-        
+    </div>
+
     @endauth
 
 
@@ -67,8 +76,8 @@
 
             <i class="fa fa-university text-lg sm:hidden"></i>
             <span class="hidden sm:inline">
-            @lang('Overview')
-            <i class="fa fa-caret-down"></i>
+                @lang('Overview')
+                <i class="fa fa-caret-down"></i>
             </span>
 
 
@@ -131,20 +140,20 @@
 
 
 
-  
+
     <!-- search-->
     @auth
-    <form class="form-inline my-2 hidden lg:block sm:px-4" role="search" action="{{ url('search') }}"
-    method="get">
-    <div class="input-group">
-        <input class="form-control form-control-sm" type="text" name="query"
-            placeholder="{{ trans('messages.search') }}..." aria-label="Search">
-         @csrf
-        
-        <div class="input-group-append">
-            <button class="btn btn-outline-secondary btn-sm" type="submit"><span class="fa fa-search"></span></button>
+    <form class="form-inline my-2 hidden lg:block sm:px-4" role="search" action="{{ url('search') }}" method="get">
+        <div class="input-group">
+            <input class="form-control form-control-sm" type="text" name="query"
+                placeholder="{{ trans('messages.search') }}..." aria-label="Search">
+            @csrf
+
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary btn-sm" type="submit"><span
+                        class="fa fa-search"></span></button>
+            </div>
         </div>
-    </div>
     </form>
     @endauth
 
@@ -153,10 +162,9 @@
     @auth
     @if(isset($notifications))
     <div class="dropdown hidden lg:block sm:px-4">
-        <a href="#" 
-        class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:mr-2 sm:px-4 sm:bg-transparent sm:rounded"
-        data-toggle="dropdown" role="button"
-            aria-haspopup="true" aria-expanded="false">
+        <a href="#"
+            class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:mr-2 sm:px-4 sm:bg-transparent sm:rounded"
+            data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-bell"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-right rounded shadow">
@@ -183,25 +191,24 @@
     <!-- locales -->
     @if(\Config::has('app.locales'))
     <div class="dropdown sm:px-4 hidden lg:block">
-        <a href="#" 
-        class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 mr-2 sm:w-auto sm:px- sm:bg-transparent sm:rounded"
-        data-toggle="dropdown" role="button" aria-haspopup="true"
-            aria-expanded="false">
+        <a href="#"
+            class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 mr-2 sm:w-auto sm:px- sm:bg-transparent sm:rounded"
+            data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             <span>
-            <i class="fa fa-globe"></i> 
-            {{ strtoupper(app()->getLocale()) }}
-            <i class="fa fa-caret-down"></i>
-            <span>
-    </a>
-    <div class="dropdown-menu dropdown-menu-right rounded shadow">
-        @foreach(\Config::get('app.locales') as $locale)
-        @if($locale !== app()->getLocale())
-        <a up-target="body" class="dropdown-item" href="{{ Request::url() }}?force_locale={{ $locale }}">
-            {{ strtoupper($locale) }}
+                <i class="fa fa-globe"></i>
+                {{ strtoupper(app()->getLocale()) }}
+                <i class="fa fa-caret-down"></i>
+                <span>
         </a>
-        @endif
-        @endforeach
-    </div>
+        <div class="dropdown-menu dropdown-menu-right rounded shadow">
+            @foreach(\Config::get('app.locales') as $locale)
+            @if($locale !== app()->getLocale())
+            <a up-target="body" class="dropdown-item" href="{{ Request::url() }}?force_locale={{ $locale }}">
+                {{ strtoupper($locale) }}
+            </a>
+            @endif
+            @endforeach
+        </div>
     </div>
     @endif
 
@@ -210,8 +217,7 @@
     @auth
     <!-- User profile -->
     <div class="dropdown flex-shrink-0 h-12 w-12">
-        <a href="#" 
-        data-toggle="dropdown" role="button" aria-expanded="false">
+        <a href="#" data-toggle="dropdown" role="button" aria-expanded="false">
             <img src="{{ route('users.cover', [Auth::user(), 'small']) }}" class="rounded-full h-12 w-12" />
 
         </a>
@@ -275,7 +281,7 @@
         class="text-gray-200 flex flex-col justify-center items-center rounded hover:bg-gray-600 bg-gray-700 h-12 w-auto sm:w-auto px-4 my-2 mr-2"
         href="{{ url('login') }}">
 
-        
+
         <span class="text-xs sm:text-base">{{ trans('messages.login') }}</span>
     </a>
 
@@ -283,7 +289,7 @@
     <a up-modal=".dialog"
         class="text-gray-200 flex flex-col justify-center items-center rounded hover:bg-gray-600 bg-gray-700 h-12 w-auto sm:w-auto px-4 my-2"
         href="{{ url('register') }}">
-        
+
         <span class="text-xs sm:text-base">{{ trans('messages.register') }}</span>
     </a>
     @endcan

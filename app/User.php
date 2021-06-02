@@ -13,6 +13,8 @@ use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
+
 
 use App\Membership;
 
@@ -200,9 +202,9 @@ class User extends Authenticatable
         // TODO refactor to avoid n+1
         // Always load membership with user
         $membership = Membership::where('user_id', '=', $this->id)
-        ->where('group_id', '=', $group->id)
-        ->where('membership', $level)
-        ->first();
+            ->where('group_id', '=', $group->id)
+            ->where('membership', $level)
+            ->first();
 
 
         if ($membership) {
@@ -271,6 +273,11 @@ class User extends Authenticatable
         return $query->where('verified', 1);
     }
 
+    public function scopeActive($query)
+    {
+        return $query->where('users.updated_at', '>',  Carbon::now()->subMonths(3)->toDateTimeString());
+    }
+
     /**
      * The groups this user is part of.
      */
@@ -291,9 +298,43 @@ class User extends Authenticatable
         return $this->belongsToMany(\App\Action::class);
     }
 
+
+
     public function isAttending(Action $action)
     {
-        return $action->attending->contains($this->id);
+        $participation = Participation::firstOrNew(['user_id' => $this->id, 'action_id' => $action->id]);
+        if ($participation->status == Participation::PARTICIPATE && $participation->exists) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function isNotAttending(Action $action)
+    {
+        $participation = Participation::firstOrNew(['user_id' => $this->id, 'action_id' => $action->id]);
+        if ($participation->status == Participation::WONT_PARTICIPATE) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function isMaybeAttending(Action $action)
+    {
+        $participation = Participation::firstOrNew(['user_id' => $this->id, 'action_id' => $action->id]);
+        if ($participation->status == Participation::UNDECIDED) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function participation(Action $action)
+    {
+        return Participation::firstOrNew(['user_id' => $this->id, 'action_id' => $action->id]);
     }
 
     /**

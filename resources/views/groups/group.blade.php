@@ -2,7 +2,12 @@
      class="relative rounded-md border-gray-300 border flex flex-col justify-start @if ($group->isArchived()) status-archived @endif">
 
      @auth
-         @if(Auth::user()->isMemberOf($group))
+        @if(Auth::user()->isAdminOf($group))
+             <div
+                 class="absolute top-0 right-0 py-1 px-2 bg-gray-700 text-gray-200 rounded-full m-2 text-xs shadow">
+                 {{ __('membership.admin') }}
+             </div>
+         @elseif(Auth::user()->isMemberOf($group))
              <div
                  class="absolute top-0 right-0 py-1 px-2 bg-gray-700 text-gray-200 capitalize rounded-full m-2 text-xs shadow">
                  {{ __('membership.member') }}

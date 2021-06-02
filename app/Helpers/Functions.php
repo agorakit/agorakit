@@ -9,19 +9,24 @@ use Carbon\Carbon;
 /**
  * returns the value of $name setting as stored in DB.
  */
-function setting($name, $default = false)
+function setting($name = false, $default = false)
 {
-    return \App\Setting::get($name, $default);
+    $setting = new \App\Setting;
+    if ($name) {
+        return $setting->get($name, $default);
+    }
+    return $setting;
 }
+
 
 function sizeForHumans($bytes)
 {
-    if ($bytes >= 1073741824) {
-        $bytes = number_format($bytes / 1073741824, 2) . 'GB';
-    } elseif ($bytes >= 1048576) {
-        $bytes = number_format($bytes / 1048576, 2) . 'MB';
-    } elseif ($bytes >= 1024) {
-        $bytes = number_format($bytes / 1024, 2) . 'KB';
+    if ($bytes >= 1000000000) {
+        $bytes = number_format($bytes / 1000000000, 1) . 'GB';
+    } elseif ($bytes >= 1000000) {
+        $bytes = number_format($bytes / 1000000, 1) . 'MB';
+    } elseif ($bytes >= 1000) {
+        $bytes = number_format($bytes / 1000, 0) . 'KB';
     } elseif ($bytes > 1) {
         $bytes = $bytes . ' bytes';
     } elseif ($bytes == 1) {
@@ -39,8 +44,8 @@ function sizeForHumans($bytes)
  */
 function dateForHumans($date)
 {
-    if ($date->lessThan(Carbon::now()->subDays(2))) {
-        return $date->toDateTimeString();
+    if ($date->lessThan(Carbon::now()->subDays(5))) {
+        return $date->isoFormat('LLL'); // soooo much better like that cfr. https://carbon.nesbot.com/docs/#api-localization
     }
 
     return $date->diffForHumans();
@@ -128,4 +133,32 @@ function geocode($address)
     }
 
     return false;
+}
+
+
+
+/**
+ * provide a link to any model
+ */
+function linkTo($model)
+{
+    if ($model instanceof App\User) {
+        return route('users.show', $model);
+    }
+
+    if ($model instanceof App\Discussion) {
+        return route('groups.discussions.show', [$model->group, $model]);
+    }
+
+    if ($model instanceof App\File) {
+        return route('groups.files.show', [$model->group, $model]);
+    }
+
+    if ($model instanceof App\Action) {
+        return route('groups.actions.show', [$model->group, $model]);
+    }
+
+    if ($model instanceof App\Comment) {
+        return route('groups.discussions.show', [$model->group, $model->discussion]);
+    }
 }

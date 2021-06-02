@@ -1,0 +1,7 @@
+Ok all the emails view now use markdown.
+
+I don't like it that much, but that way we have a nice, Laravel provided, basic email template that renders well.
+
+Only one must be very careful to avoid too much indentation in the views, else the parser will think it's a block.
+
+Crap.
