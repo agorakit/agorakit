@@ -55,7 +55,7 @@
     </div>
 
 
-    <div class="my-4 flex space-x-3 text-sm text-gray-700">
+    <div class="my-4 text-sm text-gray-700">
         <div>
             <a up-follow href="{{ route('users.show', [$file->user]) }}">
                 <i class="fa fa-user-circle"></i> {{ $file->user->name }}
@@ -91,7 +91,7 @@
     <div>
         @if ($file->isLink())
         <a class="btn btn-primary" href="{{ route('groups.files.download', [$group, $file]) }}" target="_blank">
-            {{trans('messages.visit')}})
+            {{trans('messages.visit')}}
         </a>
         @else
         <a class="btn btn-primary" href="{{ route('groups.files.download', [$group, $file]) }}" target="_blank">

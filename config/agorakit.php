@@ -15,6 +15,7 @@ return [
   'inbox_password' => env('INBOX_PASSWORD'),
   'inbox_prefix' => env('INBOX_PREFIX'),
   'inbox_suffix' => env('INBOX_SUFFIX'),
+  'onlyoffice_url' => env('ONLYOFFICE_URL'),
   'max_file_size' => env('MAX_FILE_SIZE', 10000),
   'reactions' => ['plusone', 'minusone', 'laugh', 'confused', 'heart', 'hooray', 'rocket', 'eyes']
 ];

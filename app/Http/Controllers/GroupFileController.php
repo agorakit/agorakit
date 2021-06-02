@@ -433,6 +433,11 @@ class GroupFileController extends Controller
             }
         }
 
+        if ($request->has('file')) 
+        {
+            $file->addToStorage($request->file('file'));
+        }
+
         if ($file->save()) {
             flash(trans('messages.ressource_updated_successfully'));
 
