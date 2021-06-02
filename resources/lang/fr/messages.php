@@ -264,4 +264,5 @@ return array (
   'home' => 'Accueil',
   'folder' => 'Dossier',
   'root' => 'Racine',
+  'upload_new_file_version' => 'Envoyer une nouvelle version du fichier',
 );
