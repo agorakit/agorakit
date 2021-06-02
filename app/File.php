@@ -220,32 +220,20 @@ class File extends Model
     }
 
     /**
-     * Permanently delete this file from storage.
+     * Permanently delete this file and all versions  from storage.
      */
     public function deleteFromStorage()
     {
-        // this returns all stored revisions of this file as a path to storage
-        /*
-        foreach ($this->revisionHistory()->where('key', 'path')->pluck('new_value') as $path) 
-        {
-            if (Storage::exists($path)) {
-                Storage::delete($path);
-            }
-
-        }
-        */
-
-        // delete current file
+        // delete current file version
         if (Storage::exists($this->path)) {
             Storage::delete($this->path);
         }
 
-        // delete versions
-        $storage_path = 'groups/' . $this->group->id . '/files/' . $this->id . '/';
+        // delete version directory
+        $storage_path = 'groups/' . $this->group->id . '/files/' . $this->id;
         if (Storage::exists($storage_path)) {
             Storage::deleteDirectory($storage_path);
         }
-
 
         return $this;
     }
@@ -258,22 +246,23 @@ class File extends Model
      * You need to pass an uploaded file from a $request as $uploaded_file
      * The file you are attaching to must already exist in the DB.
      * 
-     * Can be called multiple times, a new uuid filename is generated each time by the framework.
+     * Can be called multiple times, a new timestamped filename is generated each time.
      * 
+     * Files are stored in groups/[group-id]/files/[file-id]/[timestamp]-[filename]
      */
     public function addToStorage($uploaded_file)
     {
         if ($this->exists) {
             // generate filenames and path
-            $storage_path = 'groups/' . $this->group->id . '/files' . '/' . $this->id . '/';
+            $storage_path = 'groups/' . $this->group->id . '/files/' . $this->id;
 
             // simplified filename
             $filename = str_slug(pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $uploaded_file->guessExtension();
            
+            // storage filename start with precise timestamp including millisecond to avoid race condition
             $storage_filename = Carbon::now()->format('Y-m-d_H-i-s-v') . '-' . $filename;
 
-            // if file exists, move the previous one inside "versions"
-            // create a new version and store it
+            
             $stored_path = $uploaded_file->storeAs($storage_path, $storage_filename);
 
             $this->path = $stored_path;
