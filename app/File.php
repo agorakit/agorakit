@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Nicolaslopezj\Searchable\SearchableTrait;
 use Storage;
+use Carbon\Carbon;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
 
@@ -224,6 +225,7 @@ class File extends Model
     public function deleteFromStorage()
     {
         // this returns all stored revisions of this file as a path to storage
+        /*
         foreach ($this->revisionHistory()->where('key', 'path')->pluck('new_value') as $path) 
         {
             if (Storage::exists($path)) {
@@ -231,7 +233,21 @@ class File extends Model
             }
 
         }
-        return true;
+        */
+
+        // delete current file
+        if (Storage::exists($this->path)) {
+            Storage::delete($this->path);
+        }
+
+        // delete versions
+        $storage_path = 'groups/' . $this->group->id . '/files/' . $this->id . '/';
+        if (Storage::exists($storage_path)) {
+            Storage::deleteDirectory($storage_path);
+        }
+
+
+        return $this;
     }
 
 
@@ -249,15 +265,16 @@ class File extends Model
     {
         if ($this->exists) {
             // generate filenames and path
-            $storage_path = 'groups/' . $this->group->id . '/files';
+            $storage_path = 'groups/' . $this->group->id . '/files' . '/' . $this->id . '/';
 
             // simplified filename
             $filename = str_slug(pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $uploaded_file->guessExtension();
            
+            $storage_filename = Carbon::now()->format('Y-m-d_H-i-s-v') . '-' . $filename;
 
             // if file exists, move the previous one inside "versions"
             // create a new version and store it
-            $stored_path = $uploaded_file->store($storage_path);
+            $stored_path = $uploaded_file->storeAs($storage_path, $storage_filename);
 
             $this->path = $stored_path;
             $this->name = $filename;
