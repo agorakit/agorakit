@@ -13,6 +13,16 @@
         	{!! Form::text('name', $file->name, ['class' => 'form-control', 'required']) !!}
         </div>
 
+
+        @if ($file->isFile())
+        <div class="form-group mt-4 mb-4">
+            {!! Form::label('file', trans('messages.upload_new_file_version')) !!}
+            <input name="file" id="file" type="file" class="form-control"
+                title="{{ trans('messages.upload_new_file_version') }}">
+        </div>
+        @endif
+
+
         @if ($folders->count() > 0) 
             <div class="form-group">
             	{!! Form::label('parent', trans('messages.folder')) !!}

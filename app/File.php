@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Nicolaslopezj\Searchable\SearchableTrait;
 use Storage;
+use Carbon\Carbon;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
 
@@ -219,35 +220,53 @@ class File extends Model
     }
 
     /**
-     * Permanently delete this file from storage.
+     * Permanently delete this file and all versions  from storage.
      */
     public function deleteFromStorage()
     {
+        // delete current file version
         if (Storage::exists($this->path)) {
-            return Storage::delete($this->path);
+            Storage::delete($this->path);
         }
 
-        return false;
+        // delete version directory
+        $storage_path = 'groups/' . $this->group->id . '/files/' . $this->id;
+        if (Storage::exists($storage_path)) {
+            Storage::deleteDirectory($storage_path);
+        }
+
+        return $this;
     }
+
+
+
 
     /**
      * Set file content from a file request -> to storage
      * You need to pass an uploaded file from a $request as $uploaded_file
      * The file you are attaching to must already exist in the DB.
+     * 
+     * Can be called multiple times, a new timestamped filename is generated each time.
+     * 
+     * Files are stored in groups/[group-id]/files/[file-id]/[timestamp]-[filename]
      */
     public function addToStorage($uploaded_file)
     {
         if ($this->exists) {
             // generate filenames and path
-            $storage_path = 'groups/' . $this->group->id . '/files';
+            $storage_path = 'groups/' . $this->group->id . '/files/' . $this->id;
 
             // simplified filename
-            $filename = $this->id . '-' . str_slug(pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $uploaded_file->guessExtension();
+            $filename = str_slug(pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $uploaded_file->guessExtension();
+           
+            // storage filename start with precise timestamp including millisecond to avoid race condition
+            $storage_filename = Carbon::now()->format('Y-m-d_H-i-s-v') . '-' . $filename;
 
-            $complete_path = $uploaded_file->storeAs($storage_path, $filename);
+            
+            $stored_path = $uploaded_file->storeAs($storage_path, $storage_filename);
 
-            $this->path = $complete_path;
-            $this->name = pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME) . '.' . $uploaded_file->guessExtension();
+            $this->path = $stored_path;
+            $this->name = $filename;
             $this->original_filename = $uploaded_file->getClientOriginalName();
             $this->mime = $uploaded_file->getMimeType();
             $this->filesize = $uploaded_file->getSize();
@@ -255,11 +274,14 @@ class File extends Model
             // save it again
             $this->save();
 
-            return $complete_path;
+            return $stored_path;
         } else {
             abort(500, 'First save a file before addToStorage(), file does not exists yet in DB');
 
             return false;
         }
     }
+
+
+    
 }
