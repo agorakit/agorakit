@@ -3,7 +3,7 @@
         <div
             class="border-gray-400 text-gray-600 bg-gray-200 border-2 flex-shrink-0 flex flex-col items-center justify-center h-12 w-12 rounded-lg mx-1">
             <div class="text-xl -mb-2 text-gray-800">{{ $action->start->format('d') }}</div>
-            <div class="text-sm">{{ $action->start->monthName }}</div>
+            <div class="text-sm">{{ $action->start->isoFormat('MMM') }}</div>
         </div>
     </a>
 
