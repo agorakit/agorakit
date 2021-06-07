@@ -41,7 +41,7 @@ class SearchController extends Controller
             $groups = Group::whereIn('id', $allowed_groups)
             ->search($query)
             ->orderBy('updated_at', 'desc')
-            ->paginate(5, ['*'], 'groups')->withQueryString();
+            ->paginate(20, ['*'], 'groups')->withQueryString();
             
 
           
