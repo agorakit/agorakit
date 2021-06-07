@@ -41,34 +41,36 @@ class SearchController extends Controller
             $groups = Group::whereIn('id', $allowed_groups)
             ->search($query)
             ->orderBy('updated_at', 'desc')
-            ->get();
+            ->paginate(5, ['*'], 'groups')->withQueryString();
+            
 
-            // also search all not secret groups
-            $groups = $groups->merge(Group::search($query)->notSecret()->orderBy('updated_at', 'desc')->get());
-
+          
 
             $users = \App\User::with('groups')
             ->search($query)
             ->orderBy('updated_at', 'desc')
-            ->get();
+            ->paginate(20, ['*'], 'users');
+            
 
             $discussions = \App\Discussion::whereIn('group_id', $allowed_groups)
             ->with('group')
             ->search($query)
             ->orderBy('updated_at', 'desc')
-            ->get();
+            ->paginate(20, ['*'], 'discussions');
+            
+            
 
             $actions = \App\Action::whereIn('group_id', $allowed_groups)
             ->with('group')
             ->search($query)
             ->orderBy('updated_at', 'desc')
-            ->get();
+            ->paginate(20, ['*'], 'actions');
 
             $files = \App\File::whereIn('group_id', $allowed_groups)
             ->with('group')
             ->search($query)
             ->orderBy('updated_at', 'desc')
-            ->get();
+            ->paginate(20, ['*'], 'files');
 
             $comments = \App\Comment::with('discussion', 'discussion.group')
             ->whereHas('discussion', function ($q) use ($allowed_groups) {
@@ -76,7 +78,7 @@ class SearchController extends Controller
             })
             ->search($query)
             ->orderBy('updated_at', 'desc')
-            ->get();
+            ->paginate(20, ['*'], 'comments');
 
             // set in advance which tab will be active on the search results page
             $groups->class = '';

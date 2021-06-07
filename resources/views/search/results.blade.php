@@ -56,6 +56,7 @@
                     @foreach ($groups as $group)
                         @include('groups.group-list')
                     @endforeach
+                {!!$groups->render()!!}
                 </div>
             @endif
 
@@ -64,6 +65,7 @@
                     @foreach ($discussions as $discussion)
                          @include('discussions.discussion')
                     @endforeach
+                    {!!$discussions->render()!!}
                 </div>
             @endif
 
@@ -72,6 +74,7 @@
                     @foreach ($actions as $action)
                          @include('actions.action')
                     @endforeach
+                    {!!$actions->render()!!}
                 </div>
             @endif
 
@@ -81,6 +84,7 @@
                     @foreach ($users as $user)
                         @include('users.user-list')
                     @endforeach
+                    {!!$users->render()!!}
                 </div>
             @endif
 
@@ -89,6 +93,7 @@
                     @foreach ($comments as $comment)
                      @include('comments.comment')
                     @endforeach
+                    {!!$comments->render()!!}
                 </div>
             @endif
 
@@ -98,6 +103,7 @@
                     @foreach ($files as $file)
                          @include('files.file')
                     @endforeach
+                    {!!$files->render()!!}
                 </div>
             @endif
 
