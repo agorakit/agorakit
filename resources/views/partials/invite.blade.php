@@ -1,5 +1,5 @@
 @guest
-<div class="help" role="alert">
+<div class="text-gray-600 mb-10">
     <i class="fa fa-info-circle" aria-hidden="true"></i>
     {{trans('messages.if_you_want_participate_in_this_group')}}
     <a up-follow href="{{ url('login') }}">{{trans('messages.you_login')}}</a>
@@ -10,11 +10,11 @@
 
 @auth
 @if(Auth::user()->hasLevel(\App\Membership::CANDIDATE, $group))
-<div class="help" role="alert">
+<div class="text-gray-600 mb-10 mt-10">
     {{trans('membership.group_candidate_info')}}
 </div>
 @elseif (!Auth::user()->isMemberOf($group))
-<div class="help" role="alert">
+<div class="text-gray-600 mb-10 text-sm">
     <i class="fa fa-info-circle" aria-hidden="true"></i>
     {{trans('messages.if_you_want_participate_in_this_group')}}
     <a up-follow href="{{action('GroupMembershipController@store', $group)}}">

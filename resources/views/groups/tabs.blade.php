@@ -1,4 +1,4 @@
-<h1 class="text-2xl sm:text-3xl py-4 text-gray-700 truncate">
+<h1 class="text-lg font-bold mb-8 text-gray-700 truncate">
     <a up-follow up-reveal="false" up-cache="false" href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i
         class="fa fa-angle-right"></i>
     @if (isset($tab) && ($tab <> 'home'))
@@ -15,20 +15,19 @@
         @else
         <i class="fa fa-eye-slash" title="{{trans('group.secret')}}"></i>
         @endif
-
 </h1>
 
 @include('partials.invite')
 
 
-<div class="flex justify-start content-start mb-10 space-x-8 text-gray-700 hover:text-blue-900 tabs">
+<div class="flex justify-start content-start mb-10 space-x-5 lg:space-x-10 text-gray-700 tabs flex-wrap">
 
     @if (Auth::check())
 
 
     <a up-follow up-reveal="false" href="{{ route('groups.show', $group) }}"
-        class="@if (isset($tab) && ($tab == 'home')) text-blue-800 border-b-4 border-blue-800 @endif">
-        <i class="fa fa-info-circle"></i> <span class="hidden lg:inline">{{ trans('messages.group_home') }}</span>
+        class="@if (isset($tab) && ($tab == 'home')) font-bold text-blue-800 border-b-4 border-blue-800 @endif hover:text-blue-900">
+        <i class="fa fa-info-circle sm:hidden"></i> <span class="hidden sm:inline">{{ trans('messages.group_home') }}</span>
     </a>
 
 
@@ -36,8 +35,8 @@
     @can ('viewDiscussions', $group)
 
     <a up-follow up-reveal="false" up-cache="false" href="{{ route('groups.discussions.index', $group) }}"
-        class="@if (isset($tab) && ($tab == 'discussion')) text-blue-800 border-b-4 border-blue-800 @endif">
-        <i class="fa fa-comments"></i> <span class="hidden lg:inline">{{ trans('messages.discussions') }}</span>
+        class="@if (isset($tab) && ($tab == 'discussion')) font-bold text-blue-800 border-b-4 border-blue-800 @endif hover:text-blue-900">
+        <i class="fa fa-comments sm:hidden"></i> <span class="hidden sm:inline">{{ trans('messages.discussions') }}</span>
     </a>
 
     @endcan
@@ -47,8 +46,8 @@
     @can ('viewActions', $group)
 
     <a up-follow up-reveal="false" href="{{ route('groups.actions.index', $group) }}"
-        class="@if (isset($tab) && ($tab == 'action')) text-blue-800 border-b-4 border-blue-800 @endif">
-        <i class="fa fa-calendar"></i> <span class="hidden lg:inline">{{ trans('messages.agenda') }}</span>
+    class="@if (isset($tab) && ($tab == 'action')) font-bold text-blue-800 border-b-4 border-blue-800 @endif hover:text-blue-900">
+    <i class="fa fa-calendar sm:hidden"></i> <span class="hidden sm:inline">{{ trans('messages.agenda') }}</span>
     </a>
 
     @endcan
@@ -60,8 +59,8 @@
     @can ('viewFiles', $group)
 
     <a up-follow up-reveal="false" href="{{ route('groups.files.index', $group) }}"
-        class=" @if (isset($tab) && ($tab == 'files')) text-blue-800 border-b-4 border-blue-800 @endif">
-        <i class="fa fa-files-o"></i> <span class="hidden lg:inline">{{ trans('messages.files') }}</span>
+        class=" @if (isset($tab) && ($tab == 'files')) font-bold text-blue-800 border-b-4 border-blue-800 @endif hover:text-blue-900">
+        <i class="fa fa-files-o sm:hidden"></i> <span class="hidden sm:inline">{{ trans('messages.files') }}</span>
     </a>
 
     @endcan
@@ -71,8 +70,8 @@
     @can ('viewMembers', $group)
 
     <a up-follow up-reveal="false" href="{{ route('groups.users.index', $group) }}"
-        class=" @if (isset($tab) && ($tab == 'users')) text-blue-800 border-b-4 border-blue-800 @endif">
-        <i class="fa fa-users"></i> <span class="hidden lg:inline">{{ trans('messages.members') }}</span>
+        class=" @if (isset($tab) && ($tab == 'users')) font-bold text-blue-800 border-b-4 border-blue-800 @endif hover:text-blue-900">
+        <i class="fa fa-users sm:hidden"></i> <span class="hidden sm:inline">{{ trans('messages.members') }}</span>
     </a>
 
     @endcan
@@ -83,8 +82,8 @@
     @can ('viewMembers', $group)
 
     <a href="{{ action('GroupMapController@index', $group) }}"
-        class=" @if (isset($tab) && ($tab == 'map')) text-blue-800 border-b-4 border-blue-800 @endif">
-        <i class="fa fa-map-marker"></i> <span class="hidden xl:inline">{{ trans('messages.map') }}</span>
+        class=" @if (isset($tab) && ($tab == 'map')) font-bold text-blue-800 border-b-4 border-blue-800 @endif hover:text-blue-900">
+        <i class="fa fa-map-marker sm:hidden"></i> <span class="hidden sm:inline">{{ trans('messages.map') }}</span>
     </a>
 
     @endcan
@@ -94,9 +93,9 @@
     @if ($group->isMember())
 
     <a href="{{ action('ModuleController@show', $group) }}"
-        class=" @if (isset($tab) && ($tab == 'custom')) text-blue-800 border-b-4 border-blue-800 @endif">
-        <i class="fa {{$group->getSetting('module_custom_icon')}}"></i> <span
-            class="hidden xl:inline">{{$group->getSetting('module_custom_name')}}</span>
+        class=" @if (isset($tab) && ($tab == 'custom')) font-bold text-blue-800 border-b-4 border-blue-800 @endif hover:text-blue-900">
+        <i class="fa {{$group->getSetting('module_custom_icon')}} sm:hidden"></i> <span
+            class="hidden sm:inline">{{$group->getSetting('module_custom_name')}}</span>
     </a>
 
     @endif
@@ -106,15 +105,15 @@
     @if ($group->isMember())
 
     <a up-follow up-reveal="false" href="{{ action('GroupMembershipController@edit', $group) }}"
-        class=" @if (isset($tab) && ($tab == 'preferences')) text-blue-800 border-b-4 border-blue-800 @endif">
-        <i class="fa fa-bell-o"></i> <span class="hidden xl:inline">{{ trans('messages.settings') }}</span>
+        class=" @if (isset($tab) && ($tab == 'preferences')) font-bold text-blue-800 border-b-4 border-blue-800 @endif hover:text-blue-900">
+        <i class="fa fa-bell-o sm:hidden"></i> <span class="hidden sm:inline">{{ trans('messages.settings') }}</span>
     </a>
 
     @else
 
     <a up-follow up-reveal="false" href="{{ action('GroupMembershipController@create', $group) }}"
-        class=" @if (isset($tab) && ($tab == 'settings')) text-blue-800 border-b-4 border-blue-800 @endif">
-        <i class="fa fa-sign-in"></i> <span class="hidden xl:inline">{{ trans('messages.join') }}</span>
+        class=" @if (isset($tab) && ($tab == 'settings')) font-bold text-blue-800 border-b-4 border-blue-800 @endif hover:text-blue-900">
+        <i class="fa fa-sign-in sm:hidden"></i> <span class="hidden sm:inline">{{ trans('messages.join') }}</span>
     </a>
 
     @endif
@@ -123,8 +122,8 @@
     @can ('administer', $group)
     <div class="dropdown">
         <a href="#" id="admin" data-toggle="dropdown" aria-controls="admin-contents" aria-expanded="false"
-            class="dropdown-toggle  @if (isset($tab) && ($tab == 'admin')) text-blue-800 border-b-4 border-blue-800 @endif">
-            <i class="fa fa-wrench"></i> <span class="hidden xl:inline">@lang('Administer')</span>
+            class="dropdown-toggle  @if (isset($tab) && ($tab == 'admin')) font-bold text-blue-800 border-b-4 border-blue-800 @endif hover:text-blue-900">
+            <i class="fa fa-wrench sm:hidden"></i> <span class="hidden sm:inline">@lang('Administer')</span>
         </a>
         <div class="dropdown-menu">
             <a up-follow up-reveal="false" class="dropdown-item" href="{{ route('groups.edit', $group) }}">
