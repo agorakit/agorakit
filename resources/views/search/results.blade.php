@@ -2,8 +2,11 @@
 
 @section('content')
 
-    <div class="">
+   
+
+    <div class="sm:flex justify-between">
         <h1><i class="fa fa-search"></i> {{trans('messages.your_search_for')}} <strong>"{{$query}}"</strong></h1>
+        @include('partials.preferences-show')
     </div>
 
     <div class="search_results">

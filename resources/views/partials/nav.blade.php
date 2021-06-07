@@ -146,8 +146,8 @@
     <form class="form-inline my-2 hidden lg:block sm:px-4" role="search" action="{{ url('search') }}" method="get">
         <div class="input-group">
             <input class="form-control form-control-sm" type="text" name="query"
-                placeholder="{{ trans('messages.search') }}..." aria-label="Search">
-            @csrf
+                placeholder="{{ trans('messages.search') }}..." aria-label="Search" value="{{request()->get('query')}}">
+            
 
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary btn-sm" type="submit"><span

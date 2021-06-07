@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\Group;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -17,37 +18,56 @@ class SearchController extends Controller
         if ($request->get('query')) {
             $query = $request->get('query');
 
-            // Build a list of groups the user has access to. Those are public groups + groups the user is member of.
-            //$allowed_groups = \App\Group::open()->get()->pluck('id')->merge(Auth::user()->groups()->pluck('groups.id'));
+            if (Auth::user()->getPreference('show', 'my') == 'admin') {
+                // build a list of groups the user has access to
+                if (Auth::user()->isAdmin()) { // super admin sees everything
+                    $allowed_groups = Group::get()
+                        ->pluck('id');
+                }
+            }
 
-            // let's keep only the groups a user is member of for now.
-            $allowed_groups = Auth::user()->groups()->pluck('groups.id');
+            if (Auth::user()->getPreference('show', 'my') == 'all') {
+                $allowed_groups = Group::public()
+                    ->get()
+                    ->pluck('id')
+                    ->merge(Auth::user()->groups()->pluck('groups.id'));
+            }
 
-            $groups = \App\Group::whereIn('id', $allowed_groups)
+            if (Auth::user()->getPreference('show', 'my') == 'my') {
+                $allowed_groups = Auth::user()->groups()->pluck('groups.id');
+            }
+
+
+            $groups = Group::whereIn('id', $allowed_groups)
             ->search($query)
+            ->orderBy('updated_at', 'desc')
             ->get();
 
             // also search all not secret groups
-            $groups = $groups->merge(\App\Group::search($query)->notSecret()->get());
+            $groups = $groups->merge(Group::search($query)->notSecret()->orderBy('updated_at', 'desc')->get());
 
 
             $users = \App\User::with('groups')
             ->search($query)
+            ->orderBy('updated_at', 'desc')
             ->get();
 
             $discussions = \App\Discussion::whereIn('group_id', $allowed_groups)
             ->with('group')
             ->search($query)
+            ->orderBy('updated_at', 'desc')
             ->get();
 
             $actions = \App\Action::whereIn('group_id', $allowed_groups)
             ->with('group')
             ->search($query)
+            ->orderBy('updated_at', 'desc')
             ->get();
 
             $files = \App\File::whereIn('group_id', $allowed_groups)
             ->with('group')
             ->search($query)
+            ->orderBy('updated_at', 'desc')
             ->get();
 
             $comments = \App\Comment::with('discussion', 'discussion.group')
@@ -55,6 +75,7 @@ class SearchController extends Controller
                 $q->whereIn('group_id', $allowed_groups);
             })
             ->search($query)
+            ->orderBy('updated_at', 'desc')
             ->get();
 
             // set in advance which tab will be active on the search results page
