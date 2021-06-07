@@ -133,7 +133,7 @@ return array (
   'you_login' => 'connectez-vous',
   'or' => 'ou',
   'you_register' => 'créez-vous un compte ici',
-  'join_this_group' => 'rejoignez ce groupe',
+  'join_this_group' => 'rejoignez-le ici',
   'filter' => 'Filtrer',
   'show_all' => 'Afficher tout',
   'email_not_verified' => 'Votre adresse mail n\'est pas vérifiée, merci de la vérifier maintenant depuis votre boite email',

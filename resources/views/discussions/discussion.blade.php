@@ -1,5 +1,5 @@
 <div up-follow up-expand up-reveal="false"
-    class="flex relative items-start py-3 hover:bg-gray-200 border-b border-gray-300">
+    class="flex relative items-start py-4 hover:bg-gray-200 border-b-2 border-gray-200">
 
     @if ($discussion->isPinned())
     <div

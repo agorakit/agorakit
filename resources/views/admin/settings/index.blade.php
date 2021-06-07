@@ -94,30 +94,35 @@
 
                     <h2>{{ __('Group creation') }}</h2>
                     <div class="form-group">
-                        {!! Form::checkbox('user_can_create_groups', 'yes' , setting('user_can_create_groups',true))
-                        !!}
-                        {{ __('Allow regular users to create groups (if you uncheck this box, only admins will be able to create groups)') }}
+                        <div class="space-y-4">
+                            <div>
+                                {!! Form::checkbox('user_can_create_groups', 'yes' ,
+                                setting('user_can_create_groups',true))
+                                !!}
+                                {{ __('Allow regular users to create groups (if you uncheck this box, only admins will be able to create groups)') }}
+                            </div>
+                            <div>
 
-                        <br />
+                                {!! Form::checkbox('user_can_create_secret_groups','yes' ,
+                                setting('user_can_create_secret_groups')) !!}
+                                {!! __('Allow regular users to create <strong>secret</strong> groups (if you uncheck
+                                this
+                                box,
+                                only admins will be able to create secret groups)')!!}
+                            </div>
+                            <div>
 
-                        {!! Form::checkbox('user_can_create_secret_groups','yes' ,
-                        setting('user_can_create_secret_groups')) !!}
-                        {!! __('Allow regular users to create <strong>secret</strong> groups (if you uncheck this
-                        box,
-                        only admins will be able to create secret groups)')!!}
-
-                        <br />
-                        {!! Form::checkbox('user_can_register','yes' ,
-                        setting('user_can_register', true)) !!}
-                        {!! __('Allow anyone to create a new user account on this server (unchecking this box will
-                        disable registration)')!!}
-
+                                {!! Form::checkbox('user_can_register','yes' ,
+                                setting('user_can_register', true)) !!}
+                                {!! __('Allow anyone to create a new user account on this server (unchecking this box
+                                will
+                                disable registration)')!!}
+                            </div>
+                        </div>
                     </div>
 
 
                 </div>
-
-
             </div>
 
             <div class="tab-pane fade" id="notifications" role="tabpanel" aria-labelledby="v-pills-messages-tab">
@@ -138,7 +143,7 @@
                         {{ __('You can add html / css / js at the footer of each page here') }}
                     </div>
                     <textarea name="custom_footer" class="form-control">{!!setting('custom_footer')!!}</textarea>
-                    
+
                 </div>
 
             </div>

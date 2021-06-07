@@ -8,17 +8,15 @@
   <strong>@lang('You are going to delete this group : ') {{$group->name}}</strong>
   <p>@lang('Altough this can be undone by an admin please make sure you want this groups to be deleted before clicking')
 
-  {!! Form::model($group, array('method' => 'DELETE', 'action' => ['GroupController@destroy', $group])) !!}
+    {!! Form::model($group, array('method' => 'DELETE', 'action' => ['GroupController@destroy', $group])) !!}
+
+    <div class="form-group">
+      <a class="btn btn-secondary" href="{{route('groups.show', $group)}}">{{ trans('messages.cancel') }}</a>
+      {!! Form::submit(trans('Click here to confirm'), ['class' => 'btn btn-danger']) !!}
+    </div>
 
 
-
-  <div class="form-group">
-    <a class="btn btn-secondary" href="{{route('groups.show', $group)}}">{{ trans('messages.cancel') }}</a>
-              {!! Form::submit(trans('Click here to confirm'), ['class' => 'btn btn-danger']) !!}
-  </div>
-
-
-  {!! Form::close() !!}
+    {!! Form::close() !!}
 
 
 </div>

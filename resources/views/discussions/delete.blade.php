@@ -12,9 +12,6 @@
 
 
         {!! Form::model($discussion, array('method' => 'DELETE', 'action' => ['GroupDiscussionController@destroy', $group, $discussion])) !!}
-
-
-
         
         <div class="flex justify-between">
         <div class="form-group">

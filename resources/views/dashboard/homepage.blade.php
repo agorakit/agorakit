@@ -12,7 +12,7 @@
 
         @if(Auth::user()->isAdmin())
         <a up-follow href="{{ url('/admin/settings') }}"
-            class="ml-3 mb-3 py-2  px-4 bg-gray-100 text-gray-600 rounded inline-block float-right">
+            class="btn btn-secondary float-right">
             <i class="fa fa-cog"></i>
             <span class="hidden sm:inline">{{__('Edit')}}</span>
         </a>

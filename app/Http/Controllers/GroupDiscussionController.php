@@ -6,6 +6,7 @@ use App\Discussion;
 use App\File;
 use App\Group;
 use Auth;
+use URL;
 use Carbon\Carbon;
 use Gate;
 use Illuminate\Http\Request;
@@ -36,16 +37,15 @@ class GroupDiscussionController extends Controller
 
         if (Auth::check()) {
             $discussions =
-            $group->discussions()
-            ->has('user')
-            ->with('userReadDiscussion', 'group', 'user', 'tags', 'comments')
-            ->withCount('comments')
-            ->orderBy('status', 'desc')
-            ->orderBy('updated_at', 'desc')
-            ->when($tag, function ($query) use ($tag) {
-                return $query->withAnyTags($tag);
-            });
-           
+                $group->discussions()
+                ->has('user')
+                ->with('userReadDiscussion', 'group', 'user', 'tags', 'comments')
+                ->withCount('comments')
+                ->orderBy('status', 'desc')
+                ->orderBy('updated_at', 'desc')
+                ->when($tag, function ($query) use ($tag) {
+                    return $query->withAnyTags($tag);
+                });
         } else { // don't load the unread relation, since we don't know who to look for.
             $discussions = $group->discussions()->has('user')->with('user', 'group', 'tags')->withCount('comments')->orderBy('updated_at', 'desc');
         }
@@ -57,11 +57,11 @@ class GroupDiscussionController extends Controller
         $discussions = $discussions->paginate(50);
 
         return view('discussions.index')
-        ->with('title', $group->name.' - '.trans('messages.discussions'))
-        ->with('discussions', $discussions)
-        ->with('tags', $tags)
-        ->with('group', $group)
-        ->with('tab', 'discussion');
+            ->with('title', $group->name . ' - ' . trans('messages.discussions'))
+            ->with('discussions', $discussions)
+            ->with('tags', $tags)
+            ->with('group', $group)
+            ->with('tab', 'discussion');
     }
 
     /**
@@ -81,11 +81,11 @@ class GroupDiscussionController extends Controller
         $title = trans('group.create_group_discussion');
 
         return view('discussions.create')
-        ->with('group', $group)
-        ->with('allowedTags', $discussion->getTagsInUse())
-        ->with('newTagsAllowed', $discussion->areNewTagsAllowed())
-        ->with('tab', 'discussion')
-        ->with('title', $title);
+            ->with('group', $group)
+            ->with('allowedTags', $discussion->getTagsInUse())
+            ->with('newTagsAllowed', $discussion->areNewTagsAllowed())
+            ->with('tab', 'discussion')
+            ->with('title', $title);
     }
 
     /**
@@ -117,8 +117,8 @@ class GroupDiscussionController extends Controller
         if (!$group->discussions()->save($discussion)) {
             // Oops.
             return redirect()->route('groups.discussions.create', $group)
-            ->withErrors($discussion->getErrors())
-            ->withInput();
+                ->withErrors($discussion->getErrors())
+                ->withInput();
         }
 
         // handle attached file to comment
@@ -135,7 +135,7 @@ class GroupDiscussionController extends Controller
             $file->addToStorage($request->file('file'));
 
             // add an f:xx to the comment so it is shown on display
-            $discussion->body = $discussion->body.'<p>f:'.$file->id.'</p>';
+            $discussion->body = $discussion->body . '<p>f:' . $file->id . '</p>';
             $discussion->save();
         }
 
@@ -169,8 +169,7 @@ class GroupDiscussionController extends Controller
         if (Auth::check()) {
             $unread_count = $discussion->unReadCount();
             $discussion->markAsRead();
-        }
-        else {
+        } else {
             $unread_count = 0;
         }
 
@@ -189,13 +188,13 @@ class GroupDiscussionController extends Controller
        */
 
         return view('discussions.show')
-        ->with('title', $group->name.' - '.$discussion->name)
-        ->with('discussion', $discussion)
-        ->with('unread_count', $unread_count)
-        ->with('read_count', $read_count)
-        ->with('total_count', $total_count)
-        ->with('group', $group)
-        ->with('tab', 'discussion');
+            ->with('title', $group->name . ' - ' . $discussion->name)
+            ->with('discussion', $discussion)
+            ->with('unread_count', $unread_count)
+            ->with('read_count', $read_count)
+            ->with('total_count', $total_count)
+            ->with('group', $group)
+            ->with('tab', 'discussion');
     }
 
     /**
@@ -210,12 +209,12 @@ class GroupDiscussionController extends Controller
         $this->authorize('update', $discussion);
 
         return view('discussions.edit')
-        ->with('discussion', $discussion)
-        ->with('group', $group)
-        ->with('allowedTags', $discussion->getTagsInUse())
-        ->with('newTagsAllowed', $discussion->areNewTagsAllowed())
-        ->with('selectedTags', $discussion->getSelectedTags())
-        ->with('tab', 'discussion');
+            ->with('discussion', $discussion)
+            ->with('group', $group)
+            ->with('allowedTags', $discussion->getTagsInUse())
+            ->with('newTagsAllowed', $discussion->areNewTagsAllowed())
+            ->with('selectedTags', $discussion->getSelectedTags())
+            ->with('tab', 'discussion');
     }
 
     /**
@@ -247,7 +246,7 @@ class GroupDiscussionController extends Controller
             $file->addToStorage($request->file('file'));
 
             // add an f:xx to the comment so it is shown on display
-            $discussion->body = $discussion->body.'<p>f:'.$file->id.'</p>';
+            $discussion->body = $discussion->body . '<p>f:' . $file->id . '</p>';
         }
 
         $discussion->save();
@@ -266,15 +265,13 @@ class GroupDiscussionController extends Controller
     public function destroyConfirm(Request $request, Group $group, Discussion $discussion)
     {
         $this->authorize('delete', $discussion);
+        
+        session()->put('url.intended', URL::previous());
 
-        if (Gate::allows('delete', $discussion)) {
-            return view('discussions.delete')
+        return view('discussions.delete')
             ->with('group', $group)
             ->with('discussion', $discussion)
             ->with('tab', 'discussion');
-        } else {
-            abort(403);
-        }
     }
 
     /**
@@ -286,11 +283,11 @@ class GroupDiscussionController extends Controller
      */
     public function destroy(Request $request, Group $group, Discussion $discussion)
     {
-        $this->authorize('view', $discussion);
+        $this->authorize('delete', $discussion);
         $discussion->delete();
         flash(trans('messages.ressource_deleted_successfully'));
 
-        return redirect()->route('groups.discussions.index', [$group]);
+        return redirect()->intended();
     }
 
     /**
@@ -301,9 +298,9 @@ class GroupDiscussionController extends Controller
         $this->authorize('history', $discussion);
 
         return view('discussions.history')
-        ->with('group', $group)
-        ->with('discussion', $discussion)
-        ->with('tab', 'discussion');
+            ->with('group', $group)
+            ->with('discussion', $discussion)
+            ->with('tab', 'discussion');
     }
 
     public function pin(Group $group, Discussion $discussion)
