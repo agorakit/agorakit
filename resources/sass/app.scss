@@ -10,26 +10,15 @@
 // Custom Bootstrap with only the elements we really use
 /* purgecss start ignore */
 @import "bootstrap";
-
+@import "agorakit";
+@import "actions";
+@import "settings";
+@import "spinner";
+@import "oembed";
 /* purgecss end ignore */
 
 
-@import "agorakit";
 
-@import "actions";
-@import "comments";
-@import "dialog";
-//@import "discussions";
-@import "files";
-@import "users";
-@import "settings";
-@import "mobile";
-@import "tags";
-@import "embeds";
-@import "spinner";
-@import "status";
-@import "oembed";
-@import "navigation";
 
 
 

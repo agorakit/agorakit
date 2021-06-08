@@ -5,19 +5,20 @@
 
 @include('users.tabs')
 
-<div class="tab_content">
+<div class="tab_content mt-10 mb-32">
 
     @if(Auth::user())
 
-        <div class="md:flex text-center md:text-left max-w-4xl">
+        <div class="sm:flex">
 
+            
             <img src="{{ route('users.cover', [$user, 'medium']) }}"
-                class="rounded-full h-32 w-32 md:h-48 md:w-48 mx-auto block my-4 md:mr-8 flex-shrink-0" />
-
+                class="rounded-full mx-auto h-48 w-48 flex-shrink-0 sm:mx-10 block" />
+            
 
             <div class="">
 
-                <div class="text-4xl my-1">
+                <div class="text-xl my-1 font-bold">
                     {{ $user->name }}
                 </div>
 
@@ -50,7 +51,7 @@
                     @foreach($user->groups as $group)
                         @unless($group->isSecret())
                             <a up-follow href="{{ route('groups.show', [$group]) }}"
-                                class="inline-block bg-gray-300 text-gray-700 rounded-full text-xs px-2 py-1 mr-1 mb-1">
+                                class="inline-block bg-gray-300 text-gray-700 rounded-full text-xs px-2 py-1 mr-1 mb-1 no-underline">
 
                                 @if($group->isOpen())
                                     <i class="fa fa-globe" title="{{ trans('group.open') }}"></i>
