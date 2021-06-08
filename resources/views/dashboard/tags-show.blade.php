@@ -39,7 +39,7 @@
       <h2>@lang('Actions')</h2>
       <div class="actions items">
         @foreach( $actions as $action )
-          @include('actions.action')
+        <x-action :action="$action" :participants="false" />
         @endforeach
       </div>
     </div>

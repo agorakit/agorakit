@@ -49,7 +49,7 @@
     @if($actions->count() > 0)
     <div class="actions">
         @forelse( $actions as $action)
-        @include('actions.action')
+        <x-action :action="$action" :participants="true" />
         @empty
         {{ trans('messages.nothing_yet') }}
         @endforelse

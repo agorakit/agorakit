@@ -3,7 +3,8 @@
 @section('content')
 
 
-@if(setting()->get('homepage_presentation_for_members') || setting()->localized()->get('homepage_presentation_for_members'))
+@if(setting()->get('homepage_presentation_for_members') ||
+setting()->localized()->get('homepage_presentation_for_members'))
 
 <div class="overflow-y-auto border items-start  p-3 mb-4 rounded bg-gray-200 text-sm sm:text-base flex"
     style="max-height: 10em;">
@@ -11,8 +12,7 @@
     <div class="text-gray-600 flex-grow -mb-3 mt-1">
 
         @if(Auth::user()->isAdmin())
-        <a up-follow href="{{ url('/admin/settings') }}"
-            class="btn btn-secondary float-right">
+        <a up-follow href="{{ url('/admin/settings') }}" class="btn btn-secondary float-right">
             <i class="fa fa-cog"></i>
             <span class="hidden sm:inline">{{__('Edit')}}</span>
         </a>
@@ -70,7 +70,7 @@
 
         <div class="">
             @foreach($actions as $action)
-            @include('actions.action-small')
+            <x-action :action="$action" :participants="false" />
             @endforeach
         </div>
         @endif

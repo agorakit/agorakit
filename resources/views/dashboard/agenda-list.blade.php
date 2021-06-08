@@ -6,8 +6,8 @@
 
 <div class="d-flex">
     <h1>
-        <a up-follow href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i
-            class="fa fa-angle-right"></i> {{ trans('messages.agenda') }}
+        <a up-follow href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
+        {{ trans('messages.agenda') }}
     </h1>
 </div>
 
@@ -38,16 +38,16 @@
 
 
 @if($actions->count() > 0)
-    <div class="actions mt-5">
-        @foreach( $actions as $action)
-            @include('actions.action')
-        @endforeach
-    </div>
-    {{ $actions->render() }}
+<div class="actions my-5">
+    @foreach( $actions as $action)
+    <x-action :action="$action" :participants="true" />
+    @endforeach
+</div>
+{{ $actions->render() }}
 @else
-    <div class="alert">
-        {{ trans('messages.nothing_yet') }}
-    </div>
+<div class="alert">
+    {{ trans('messages.nothing_yet') }}
+</div>
 @endif
 
 

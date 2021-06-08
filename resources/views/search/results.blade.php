@@ -72,7 +72,7 @@
             @if ($actions->count() > 0)
                 <div role="tabpanel" class="tab-pane {{$actions->class}}" id="actions">
                     @foreach ($actions as $action)
-                         @include('actions.action')
+                    <x-action :action="$action" :participants="false" />
                     @endforeach
                     {!!$actions->render()!!}
                 </div>
