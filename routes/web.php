@@ -407,6 +407,8 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::get('admin/groupadmins', 'Admin\GroupAdminsController@index');
 
+        Route::get('admin/group', 'Admin\GroupController@index');
+
         
         Route::get('admin/messages', 'Admin\MessageController@index')->name('admin.messages.index');
         Route::get('admin/messages/{message}', 'Admin\MessageController@show')->name('admin.messages.show');
