@@ -50,7 +50,7 @@
     @include('partials.errors')
 
 
-    <div class="mx-auto p-2 bg-white sm:shadow-xl sm:p-4 xl:p-8 xl:rounded-lg xl:my-4" style="max-width: 1240px">
+    <div class="mx-auto p-2 bg-white sm:shadow-xl sm:p-4 xl:p-8 xl:rounded-lg xl:my-4 sm:pb-24 xl:pb-24" style="max-width: 1240px">
 
         @yield('content')
     </div>
