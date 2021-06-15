@@ -12,6 +12,12 @@ use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 use Illuminate\Support\Facades\Storage as FacadesStorage;
 
+
+/**
+ * Import content command
+ * 
+ * This might look a bit ugly and unoptimized but at least it's easy to understand what's going on.
+ */
 class ImportGroup extends Command
 {
     /**
