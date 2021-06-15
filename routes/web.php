@@ -416,7 +416,7 @@ Route::group(['middleware' => ['web']], function () {
 
 
         // mailable preview, for devs mainly
-        Route::get('mailable', function () {
+        Route::get('admin/mailable', function () {
             $notif = new App\Mail\Notification();
             $notif->user = \App\User::first();
             $notif->group = \App\Group::first();
@@ -427,5 +427,7 @@ Route::group(['middleware' => ['web']], function () {
 
             return $notif;
         });
+
+        
     });
 });
