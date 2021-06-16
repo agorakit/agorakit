@@ -12,6 +12,7 @@ use App\User;
 use App\File;
 use Carbon\Carbon;
 use Venturecraft\Revisionable\Revision;
+use Illuminate\Notifications\DatabaseNotification;
 
 
 class CleanupDatabase extends Command
@@ -160,8 +161,12 @@ class CleanupDatabase extends Command
         if ($count) $this->info($count . ' revisions deleted');
         
         // delete all old imported messages
-        $count = Message::where('created_at', '<', Carbon::today()->subDays($this->option('days')))->forceDelete();
+        $count = Message::where('created_at', '<', Carbon::today()->subDays(7))->forceDelete();
         if ($count) $this->info($count . ' inbound mail messages deleted');
+
+        // delete all old notifications
+        $count = DatabaseNotification::where('created_at', '<', Carbon::today()->subDays($this->option('days')))->forceDelete();
+        if ($count) $this->info($count . ' database notifications deleted');
 
     }
 }

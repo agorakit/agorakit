@@ -92,7 +92,7 @@ class ProcessMessages extends Command
 
         $this->debug(Message::where('status', Message::CREATED)->count() . ' messages to handle');
 
-        $messages = Message::where('status', Message::CREATED)->get(); // ony with the right status 
+        $messages = Message::where('status', Message::CREATED)->get(); // process only those with the "created" status 
         foreach ($messages as $message) {
             
             $this->line('---------------------------------------------------');
