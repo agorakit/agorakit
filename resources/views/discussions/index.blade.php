@@ -5,15 +5,11 @@
 @include('groups.tabs')
 
 @auth
-<div class="md:flex justify-between">
-    <div class="mb-2 mr-4">
-        @include('partials.tags_filter')
-    </div>
-
-
+<div class="sm:flex sm:justify-between sm:space-x-4 space-y-4 sm:space-y-0 mb-6">
+    {{--@include('partials.tags_filter')--}}
     <div>
-        <form role="search" method="GET" action="./discussions" class="mb-2 mr-4" up-autosubmit up-delay="500"
-            up-target=".groups" up-reveal="false">
+        <form role="search" method="GET" action="./discussions" up-autosubmit up-delay="500" up-target=".groups"
+            up-reveal="false">
 
             <input value="{{ Request::get('search') }}" class="form-control" type="text" name="search"
                 placeholder="{{ __('messages.search') }}..." aria-label="Search">
@@ -21,16 +17,13 @@
     </div>
 
 
-    <div class="mb-2 mr-4">
+    <div class="">
         @can('create-discussion', $group)
         <a up-follow class="btn btn-primary" href="{{ route('groups.discussions.create', $group ) }}">
             {{ trans('discussion.create_one_button') }}
         </a>
         @endcan
     </div>
-
-
-
 </div>
 @endauth
 

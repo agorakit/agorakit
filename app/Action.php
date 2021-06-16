@@ -21,7 +21,6 @@ class Action extends Model
     use SearchableTrait;
     use HasControlledTags;
 
-    protected $fillable = ['id']; // needed for actions import
 
     protected $rules = [
         'name'     => 'required|min:5',
@@ -31,7 +30,7 @@ class Action extends Model
         'stop'     => 'required',
     ];
 
-    protected $with = ['attending']; // always load participants with actions
+    protected $with = ['attending', 'notAttending']; // always load participants with actions
 
     protected $table = 'actions';
     public $timestamps = true;
@@ -81,12 +80,11 @@ class Action extends Model
     }
 
     /**
-     * The users attending this action.
+     * The users attending (or not) this action.
      */
-    public function users()
+    public function participation()
     {
-        return $this->belongsToMany(User::class)->wherePivot('status', '10');
-        // TODO candidate for deletion ?
+        return $this->belongsToMany(User::class)->withPivot('status', 'notification');
     }
 
 
