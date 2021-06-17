@@ -329,7 +329,7 @@ class GroupActionController extends Controller
 
         if ($action->isInvalid()) {
             // Oops.
-            return redirect()->route('groups.actions.create', $group_id)
+            return redirect()->route('groups.actions.create', $group)
                 ->withErrors($action->getErrors())
                 ->withInput();
         }
@@ -373,7 +373,7 @@ class GroupActionController extends Controller
         $action->delete();
         flash(trans('messages.ressource_deleted_successfully'));
 
-        return redirect()->route('groups.actions.index', [$group]);
+        return redirect()->route('groups.actions.index', $group);
     }
 
     /**

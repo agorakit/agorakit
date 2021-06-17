@@ -31,8 +31,6 @@ class CommentController extends Controller
                 ->withInput();
         }
 
-
-
         // handle attached file to comment
         if ($request->hasFile('files')) {
 
@@ -60,7 +58,7 @@ class CommentController extends Controller
         // update activity timestamp on parent items
         $group->touch();
         $discussion->touch();
-        \Auth::user()->touch();
+        Auth::user()->touch();
 
         event(new \App\Events\ContentCreated($comment));
 
