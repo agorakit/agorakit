@@ -13,7 +13,6 @@ class GroupActionController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('member', ['only' => ['edit', 'update', 'destroy']]);
         $this->middleware('verified', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
     }
 

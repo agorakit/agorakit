@@ -15,7 +15,6 @@ class GroupFileController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('member', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
         $this->middleware('verified', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
         $this->middleware('cache', ['only' => ['download', 'thumbnail', 'preview']]);
     }
@@ -193,11 +192,6 @@ class GroupFileController extends Controller
     public function store(Request $request, Group $group, File $parent = null)
     {
         $this->authorize('create-file', $group);
-
-
-
-
-
 
         // handle the case of a summernote upaload (via ajax)
         if ($request->ajax()) {
@@ -481,6 +475,7 @@ class GroupFileController extends Controller
     public function pin(Group $group, File $file)
     {
         $this->authorize('pin', $file);
+
         $file->togglePin();
         $file->timestamps = false;
         $file->save();
@@ -491,6 +486,7 @@ class GroupFileController extends Controller
     public function archive(Group $group, File $file)
     {
         $this->authorize('archive', $file);
+        
         $file->toggleArchive();
         $file->timestamps = false;
         $file->save();

@@ -52,6 +52,8 @@ class User extends Authenticatable
 
     protected $keepRevisionOf = ['name', 'body', 'email', 'admin', 'address'];
 
+    protected $with = ['memberships'];
+
     /**
      * Searchable rules.
      *
@@ -178,45 +180,21 @@ class User extends Authenticatable
     }
 
     /**
-     *   Returns true if the user is member of $group.
+     * Returns true if the user is member of $group.
      */
     public function isMemberOf(Group $group)
     {
-        // TODO refactor to avoid n+1
-        // Always load membership with user
-        $membership = Membership::where('user_id', '=', $this->id)->where('group_id', '=', $group->id)->first();
-
-
-        if ($membership && $membership->membership >= Membership::MEMBER) {
-            return true;
+        foreach ($this->memberships as $membership) {
+            if (($membership->group_id == $group->id) && ($membership->membership >= Membership::MEMBER)) {
+                return true;
+            }
         }
-
         return false;
     }
 
-    /**
-     *   Returns true if the user is $level of $group.
-     */
-    public function hasLevel($level, Group $group)
-    {
-        // TODO refactor to avoid n+1
-        // Always load membership with user
-        $membership = Membership::where('user_id', '=', $this->id)
-            ->where('group_id', '=', $group->id)
-            ->where('membership', $level)
-            ->first();
-
-
-        if ($membership) {
-            return true;
-        }
-
-        return false;
-    }
 
     /**
      * Returns true if the user is admin of $group
-     * TODO : candidate for refactoring, generates a lot of n+1 slowness : Membership could be serialized in a field of the user DB and be readily available all the time.
      */
     public function isAdminOf(Group $group)
     {
@@ -226,16 +204,19 @@ class User extends Authenticatable
                 return true;
             }
         }
-
         return false;
+    }
 
-        //$membership = Membership::where('user_id', '=', $this->id)->where('group_id', '=', $group->id)->first();
-        // the following might save us n+1 query problem later :
-        $membership = $this->memberships()->where('group_id', '=', $group->id)->first();
-        if ($membership && $membership->membership == Membership::ADMIN) {
-            return true;
+    /**
+     * Returns true if the user is candidate of $group
+     */
+    public function isCandidateOf(Group $group)
+    {
+        foreach ($this->memberships as $membership) {
+            if (($membership->group_id == $group->id) && ($membership->membership == Membership::CANDIDATE)) {
+                return true;
+            }
         }
-
         return false;
     }
 

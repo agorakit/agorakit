@@ -11,12 +11,12 @@ class MentionController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('member');
     }
 
     public function users(Group $group)
     {
         $this->authorize('view-members', $group);
+
         $users = $group->users()->orderBy('name')->get();
         $simple_users = [];
 

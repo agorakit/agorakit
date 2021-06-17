@@ -14,7 +14,7 @@
              </div>
          @endif
 
-         @if(Auth::user()->hasLevel(\App\Membership::CANDIDATE, $group))
+         @if(Auth::user()->isCandidateOf($group))
              <div
                  class="absolute top-0 right-0 py-1 px-2 bg-gray-700 text-gray-200 capitalize rounded-full m-2 text-xs shadow">
                  {{ __('membership.candidate') }}

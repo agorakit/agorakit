@@ -9,7 +9,7 @@
 @endguest
 
 @auth
-@if(Auth::user()->hasLevel(\App\Membership::CANDIDATE, $group))
+@if(Auth::user()->isCandidateOf($group))
 <div class="text-gray-600 mb-10 mt-10">
     {{trans('membership.group_candidate_info')}}
 </div>

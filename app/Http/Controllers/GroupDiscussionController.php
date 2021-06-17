@@ -15,7 +15,6 @@ class GroupDiscussionController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('member', ['only' => ['edit', 'update', 'destroy']]);
         $this->middleware('verified', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
     }
 
@@ -306,6 +305,7 @@ class GroupDiscussionController extends Controller
     public function pin(Group $group, Discussion $discussion)
     {
         $this->authorize('pin', $discussion);
+
         $discussion->togglePin();
         $discussion->timestamps = false;
         $discussion->save();
@@ -316,6 +316,7 @@ class GroupDiscussionController extends Controller
     public function archive(Group $group, Discussion $discussion)
     {
         $this->authorize('archive', $discussion);
+        
         $discussion->toggleArchive();
         $discussion->timestamps = false;
         $discussion->save();

@@ -17,7 +17,6 @@ class GroupController extends Controller
     public function __construct()
     {
         $this->middleware('verified', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
-        $this->middleware('groupadmin', ['only' => ['edit', 'update', 'destroy']]);
         $this->middleware('auth', ['only' => ['indexOfMyGroups']]);
     }
 
@@ -165,7 +164,7 @@ class GroupController extends Controller
      */
     public function create()
     {
-        Gate::authorize('create', Group::class);
+        $this->authorize('create', Group::class);
         $group = new Group;
 
         return view('groups.create')
@@ -182,7 +181,7 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        Gate::authorize('create', \App\Group::class);
+        $this->authorize('create', Group::class);
 
         $group = new group();
 

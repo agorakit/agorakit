@@ -15,7 +15,6 @@
 
     <div class="mx-2 min-w-0 flex-grow">
 
-
         <div class="text-gray-900 text-lg truncate min-w-0">
             <a href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}" class="no-underline">
                 @if($discussion->isArchived())
@@ -24,10 +23,6 @@
                 {{$discussion->name}}
             </a>
         </div>
-
-
-
-
 
         <div class="text-gray-600 text-xs">
             @if ($discussion->user)
@@ -67,10 +62,6 @@
     @endif
     @endif
 
-
-
     @include('discussions.dropdown')
-
-
 
 </div>

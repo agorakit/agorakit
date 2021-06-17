@@ -4,7 +4,7 @@
 
 <h1>{{trans('membership.apply_for_group')}} <em>{{$group->name}}</em></h1>
 
-@if(Auth::user()->hasLevel(\App\Membership::CANDIDATE, $group))
+@if(Auth::user()->isCandidateOf($group))
 <div class="help" role="alert">
     {{trans('membership.group_candidate_info')}}
 </div>

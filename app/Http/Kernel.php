@@ -55,12 +55,10 @@ class Kernel extends HttpKernel
         'can'             => \Illuminate\Auth\Middleware\Authorize::class,
         'guest'           => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle'        => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'member'          => \App\Http\Middleware\RedirectIfNotGroupMember::class,
         'verified'        => \App\Http\Middleware\Verified::class,
         'cache'           => \App\Http\Middleware\Cache::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'admin'           => \App\Http\Middleware\Admin::class,
-        'groupadmin'      => \App\Http\Middleware\GroupAdmin::class,
         'preferences'     => \App\Http\Middleware\HandleUserPreference::class,
     ];
 }
