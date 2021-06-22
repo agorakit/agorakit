@@ -4,6 +4,9 @@ namespace App\Listeners;
 
 use App\Events\ContentCreated;
 use Notification;
+use App\Comment;
+use App\User;
+use App\Discussion;
 
 class NotifyMentionedUsers
 {
@@ -27,25 +30,42 @@ class NotifyMentionedUsers
     public function handle(ContentCreated $event)
     {
 
-        // we curently only handle comments, but in the future this listener could work on discussions or wathever
-        if ($event->model instanceof \App\Comment) {
+        // Comments
+        if ($event->model instanceof Comment) {
             $comment = $event->model;
-            preg_match_all("#(?<!\w)@([\w_\-\.]+)#", $comment->body, $matches);
+           
+            $users = $this->findUsers($comment->body);
 
-            $users_to_mention = [];
-
-            // dedupe matches
-            $dedupe_matches = array_unique($matches[0]);
-
-            foreach ($dedupe_matches as $username) {
-                $username = substr($username, 1);
-                // we find users only in the group from where the mention was made
-                $user = $comment->discussion->group->users->where('username', $username)->first();
-                if ($user) {
+            foreach ($users as $user) {
+                if ($user->isMemberOf($comment->discussion->group)) {
                     Notification::send($user, new \App\Notifications\MentionedUser($comment, \Auth::user()));
-                    flash($user->name.' '.trans('messages.notified'));
+                    flash($user->name . ' ' . trans('messages.notified'));
                 }
             }
         }
+    }
+
+    /**
+     * Finds users to mention in a string, looks for @username style mentions in the string an returns users models
+     */
+    function findUsers($body)
+    {
+        preg_match_all("#(?<!\w)@([\w_\-\.]+)#", $body, $matches);
+
+        $users = [];
+
+        // dedupe matches
+        $matches = array_unique($matches[0]);
+
+        $usernames = collect();
+        foreach ($matches as $username) {
+            // remove @ char
+            $usernames->push(substr($username, 1));
+        }
+        // find user
+        $users = User::whereIn('username', $usernames)->get();
+        
+
+        return $users;
     }
 }
