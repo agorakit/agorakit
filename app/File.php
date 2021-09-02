@@ -282,6 +282,14 @@ class File extends Model
         }
     }
 
+    /**
+     * Returns the complete storage path to this file
+     */
+    public function storagePath()
+    {
+        return storage_path('app/') . $this->path;
+    }
+    
 
     
 }
