@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use App\Group;
 use App\User;
 use App\Membership;
+use App\Action;
 use Storage;
 use ZipArchive;
 use File;
@@ -60,29 +61,30 @@ class ImportGroup extends Command
         $data = json_decode(Storage::get('exports/1/group.json')); // for tests
 
 
+        // create group
         $group = $this->createGroup($data);
-        $user = $this->createUser($data->user);
-        $group->user()->associate($user);
-        $group->name = $group->name . ' (imported)';
-        $group->save();
-
-        // any function called from now on, can use this group model for it's inner working
-        $this->group = $group;
-
         
+        // any function called from now on, can (and will) use this group model for it's inner working
+        $this->group = $group;
 
 
         // handle memberships
         foreach ($data->memberships as $membership) {
-            $this->createMembership($membership);
+            if ($this->createMembership($membership)) {
+                $this->info('Created membership for ' . $membership->user->name);
+            }
         }
 
 
+        // handle actions & participations
+
+        foreach ($data->actions as $action) {
+            if ($this->createAction($action)) {
+                $this->info('Created action called ' . $action->name);
+            }
+        }
 
 
-        // handle actions
-
-        // handle participations
 
         // handle files
 
@@ -101,7 +103,7 @@ class ImportGroup extends Command
         // handle group cover
 
 
-        dd($group);
+        //dd($group);
 
         //dd (Storage::get)
         // open the zip file
@@ -210,7 +212,17 @@ class ImportGroup extends Command
         $group->slug = $slug;
         $group->status = $data->status;
 
-        return $group;
+        $user = $this->createUser($data->user);
+        $group->user()->associate($user);
+        $group->name = $group->name . ' (imported)';
+        
+        if ($group->isValid()) {
+            $group->save();
+            return $group;
+        } else {
+            $this->error($group->getErrors());
+            return false;
+        }
     }
 
 
@@ -235,11 +247,52 @@ class ImportGroup extends Command
         $membership->notification_interval = $data->notification_interval;
         $membership->notified_at = $data->notified_at;
         $membership->deleted_at = $data->deleted_at;
-          
-        $membership->save();
 
-        return $membership;
+        if ($membership->isValid()) {
+            $membership->save();
+            return $membership;
+        } else {
+            $this->error($membership->getErrors());
+            return false;
+        }
+    }
 
-        
+    /**
+     * Create a new action based on a json parsed array $data
+     */
+    function createAction($data)
+    {
+        $action = new Action;
+
+        $user = $this->createUser($data->user);
+
+
+        $action->group_id = $this->group->id;
+        $action->user_id = $user->id;
+
+        $action->created_at = $data->created_at;
+        $action->updated_at = $data->updated_at;
+        $action->deleted_at = $data->deleted_at;
+
+        $action->name = $data->name;
+        $action->body = $data->body;
+        $action->start = $data->start;
+        $action->stop = $data->stop;
+        $action->location = $data->location;
+        $action->latitude = $data->latitude;
+        $action->longitude = $data->longitude;
+
+        /*
+        "attending": [],
+        "not_attending": [],
+        */
+
+        if ($action->isValid()) {
+            $action->save();
+            return $action;
+        } else {
+            $this->error($action->getErrors());
+            return false;
+        }
     }
 }

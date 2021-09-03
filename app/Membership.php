@@ -4,10 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Venturecraft\Revisionable\RevisionableTrait;
+use Watson\Validating\ValidatingTrait;
 
 class Membership extends Model
 {
     use RevisionableTrait;
+    use ValidatingTrait;
 
     protected $table = 'membership';
     public $timestamps = true;
@@ -17,6 +19,7 @@ class Membership extends Model
         'user_id'  => 'required|exists:users,id',
         'group_id' => 'required|exists:groups,id',
     ];
+
 
     // Default notification interval is hourly :
     protected $attributes = [
