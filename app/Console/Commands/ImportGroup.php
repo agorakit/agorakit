@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Group;
 use App\User;
+use App\Membership;
 use Storage;
 use ZipArchive;
 use File;
@@ -35,6 +36,7 @@ class ImportGroup extends Command
     protected $description = 'Import a group from an Agorakit export zip file';
 
 
+    protected $group;
 
     /**
      * Create a new command instance.
@@ -61,10 +63,45 @@ class ImportGroup extends Command
         $group = $this->createGroup($data);
         $user = $this->createUser($data->user);
         $group->user()->associate($user);
+        $group->name = $group->name . ' (imported)';
         $group->save();
 
-        dd($group);
+        // any function called from now on, can use this group model for it's inner working
+        $this->group = $group;
 
+        
+
+
+        // handle memberships
+        foreach ($data->memberships as $membership) {
+            $this->createMembership($membership);
+        }
+
+
+
+
+        // handle actions
+
+        // handle participations
+
+        // handle files
+
+        // handle discussions
+
+        // handle comments
+
+        // handle reactions
+
+
+
+        // handle file content
+
+        // handle user's avatar
+
+        // handle group cover
+
+
+        dd($group);
 
         //dd (Storage::get)
         // open the zip file
@@ -174,5 +211,35 @@ class ImportGroup extends Command
         $group->status = $data->status;
 
         return $group;
+    }
+
+
+    /**
+     * Create a new membership based on a json parsed array $data
+     */
+    function createMembership($data)
+    {
+        $membership = new Membership;
+        $membership->group()->associate($this->group);
+
+        // this is our group member : 
+        $user = $this->createUser($data->user);
+
+
+        $membership->user()->associate($user);
+
+        $membership->created_at = $data->created_at;
+        $membership->updated_at = $data->updated_at;
+        $membership->config = $data->config;
+        $membership->membership = $data->membership;
+        $membership->notification_interval = $data->notification_interval;
+        $membership->notified_at = $data->notified_at;
+        $membership->deleted_at = $data->deleted_at;
+          
+        $membership->save();
+
+        return $membership;
+
+        
     }
 }
