@@ -22,6 +22,9 @@ use Illuminate\Support\Facades\Storage as FacadesStorage;
  * Import content command
  * 
  * This might look a bit ugly and unoptimized but at least it's easy to understand what's going on.
+ * 
+ *  Import expects a zip file in [your app installation]/storage/app/exports/[group id]/group.zip
+ * 
  */
 class ImportGroup extends Command
 {
@@ -30,7 +33,7 @@ class ImportGroup extends Command
      *
      * @var string
      */
-    protected $signature = 'agorakit:import';
+    protected $signature = 'agorakit:import {group : the ID of the group}';
 
     /**
      * The console command description.
@@ -41,6 +44,7 @@ class ImportGroup extends Command
 
 
     protected $group;
+    protected $zip;
 
     /**
      * Create a new command instance.
@@ -60,8 +64,29 @@ class ImportGroup extends Command
     public function handle()
     {
 
-        //$data = json_decode(Storage::get('imports/group.json'));
-        $data = json_decode(Storage::get('exports/1/group.json')); // for tests
+        // open the zip file
+
+        $zipfilename = storage_path('app/exports/' . $this->argument('group') . '/group.zip');
+
+        $this->zip = new ZipArchive;
+
+        if ($this->zip->open($zipfilename) === TRUE) {
+
+            $this->line('Extracting zip file : ' . $zipfilename);
+
+            // extract group content
+            $this->zip->extractTo(storage_path('app/imports/' . $this->argument('group')));
+            $this->zip->close();
+        } else {
+            $this->error('Could not open zip file or file not found at ' . $zipfilename);
+            die();
+        }
+
+        $this->newLine();
+
+
+        // parse json
+        $data = json_decode(Storage::get('imports/' . $this->argument('group') . '/group.json'));
 
 
         // create group
@@ -78,6 +103,8 @@ class ImportGroup extends Command
             }
         }
 
+        $this->newLine();
+
 
         // handle actions & participations
         foreach ($data->actions as $actionData) {
@@ -85,6 +112,8 @@ class ImportGroup extends Command
                 $this->info('Created action called ' . $actionData->name);
             }
         }
+
+        $this->newLine();
 
 
         // handle discussions, comments and reactions
@@ -94,7 +123,9 @@ class ImportGroup extends Command
             }
         }
 
-        
+        $this->newLine();
+
+
 
         // handle files
         foreach ($data->files as $fileData) {
@@ -103,65 +134,23 @@ class ImportGroup extends Command
             }
         }
 
+        $this->newLine();
+
 
         // handle user's avatar
 
         // handle group cover
 
 
-        //dd($group);
+        // delete tmp files
 
-        //dd (Storage::get)
-        // open the zip file
-
-        /*
-        $zip = new ZipArchive;
-
-        if ($zip->open(storage_path('app/import/group.zip')) === TRUE)
-        {
-
-            // extract group content
-            $zip->extractTo(storage_path('app/import/tmp'));
-            $zip->close();
-
-            // open the json
-            $json = Storage::get('import/tmp/group.json');
-            $data = json_decode($json);
-
-
-            // create group
-            $group = new Group;
-            $group->forceFill([
-                //'id' => $data->id, // Here we will decide if we create new id's or not
-                'body' => $data->body,
-                'name' => $data->name,
-                'cover' => $data->cover,
-                'user_id' => $data->user_id,
-                'created_at' => $data->created_at,
-                'group_type' => $data->group_type,
-                'color' => $data->color,
-                'latitude' => $data->latitude,
-                'longitude' => $data->longitude,
-                'settings' => $data->settings,
-                'slug' => $data->slug,
-            ]);
-
-            $group->save();
-
-
-
-            // create discussions and comments
-
-            // create files
-
-
-            $this->info('Group imported successfuly');
+        if (Storage::deleteDirectory('imports/' . $this->argument('group'))) {
+            $this->info('Temp files deleted');
+        } else {
+            $this->error('Could not delete temp files');
         }
-        else
-        {
-            $this->error('Could not open zip file');
-        }
-*/
+
+        $this->line('Group imported successfuly');
     }
 
     /**
@@ -410,7 +399,7 @@ class ImportGroup extends Command
 
         $reaction->created_at = $data->created_at;
         $reaction->updated_at = $data->updated_at;
-        
+
         $reaction->type = $data->type;
 
         $reaction->reactable_type = $data->reactable_type;
@@ -427,7 +416,7 @@ class ImportGroup extends Command
 
 
 
-     /**
+    /**
      * Create a new file based on a json parsed array $data
      */
     function createFile($data)
@@ -460,7 +449,7 @@ class ImportGroup extends Command
             $file->save();
 
             // now we have a file let's handle the content
-           
+
 
             return $file;
         } else {
@@ -468,7 +457,4 @@ class ImportGroup extends Command
             return false;
         }
     }
-
-
-
 }
