@@ -7,6 +7,8 @@ use App\Group;
 use App\User;
 use App\Membership;
 use App\Action;
+use App\Discussion;
+use App\Comment;
 use Storage;
 use ZipArchive;
 use File;
@@ -63,7 +65,7 @@ class ImportGroup extends Command
 
         // create group
         $group = $this->createGroup($data);
-        
+
         // any function called from now on, can (and will) use this group model for it's inner working
         $this->group = $group;
 
@@ -78,21 +80,28 @@ class ImportGroup extends Command
 
         // handle actions & participations
 
-        foreach ($data->actions as $action) {
-            if ($this->createAction($action)) {
-                $this->info('Created action called ' . $action->name);
+        foreach ($data->actions as $actionData) {
+            if ($this->createAction($actionData)) {
+                $this->info('Created action called ' . $actionData->name);
             }
         }
 
 
-
-        // handle files
-
         // handle discussions
+        foreach ($data->discussions as $discussionData) {
+            if ($this->createDiscussion($discussionData)) {
+                $this->info('Created discussion called ' . $discussionData->name);
+            }
+        }
 
         // handle comments
 
         // handle reactions
+
+
+        // handle files
+
+
 
 
 
@@ -183,9 +192,13 @@ class ImportGroup extends Command
         $user->longitude = $data->longitude;
         $user->username = $data->username;
 
-        $user->save();
-
-        return $user;
+        if ($user->isValid()) {
+            $user->save();
+            return $user;
+        } else {
+            $this->error($user->getErrors());
+            return false;
+        }
     }
 
     /**
@@ -215,7 +228,7 @@ class ImportGroup extends Command
         $user = $this->createUser($data->user);
         $group->user()->associate($user);
         $group->name = $group->name . ' (imported)';
-        
+
         if ($group->isValid()) {
             $group->save();
             return $group;
@@ -282,16 +295,100 @@ class ImportGroup extends Command
         $action->latitude = $data->latitude;
         $action->longitude = $data->longitude;
 
-        /*
-        "attending": [],
-        "not_attending": [],
-        */
+
+
 
         if ($action->isValid()) {
             $action->save();
+
+            // Now the action is saved, we can handle attending and not attending users
+
+            if (is_array($data->attending)) {
+                foreach ($data->attending as $userAttendingData) {
+                    $userAttending = $this->createUser($userAttendingData);
+                    $action->attending()->save($userAttending);
+                }
+            }
+
+            if (is_array($data->not_attending)) {
+                foreach ($data->not_attending as $userNotAttendingData) {
+                    $userNotAttending = $this->createUser($userNotAttendingData);
+                    $action->notAttending()->save($userNotAttending);
+                }
+            }
+
             return $action;
         } else {
             $this->error($action->getErrors());
+            return false;
+        }
+    }
+
+
+    /**
+     * Create a new discussion based on a json parsed array $data
+     */
+    function createDiscussion($data)
+    {
+        $discussion = new Discussion;
+
+        $user = $this->createUser($data->user);
+
+
+        $discussion->group_id = $this->group->id;
+        $discussion->user_id = $user->id;
+
+        $discussion->created_at = $data->created_at;
+        $discussion->updated_at = $data->updated_at;
+        $discussion->deleted_at = $data->deleted_at;
+
+        $discussion->name = $data->name;
+        $discussion->body = $data->body;
+
+
+
+
+
+        if ($discussion->isValid()) {
+            $discussion->save();
+
+            // now we have a discussion let's handle the comments
+            foreach ($data->comments as $commentData) {
+                $this->createComment($discussion, $commentData);
+            }
+
+
+            return $discussion;
+        } else {
+            $this->error($discussion->getErrors());
+            return false;
+        }
+    }
+
+
+    /**
+     * Create a new comment based on a json parsed array $data
+     */
+    function createComment(Discussion $discussion, $data)
+    {
+        $comment = new Comment;
+
+        $user = $this->createUser($data->user);
+
+        $comment->user_id = $user->id;
+
+        $comment->created_at = $data->created_at;
+        $comment->updated_at = $data->updated_at;
+        $comment->deleted_at = $data->deleted_at;
+
+        $comment->body = $data->body;
+
+        if ($comment->isValid()) {
+            $comment->save();
+            $discussion->comments()->save($comment);
+            return $comment;
+        } else {
+            $this->error($discussion->getErrors());
             return false;
         }
     }
