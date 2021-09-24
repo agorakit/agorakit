@@ -10,9 +10,9 @@ use App\Action;
 use App\Discussion;
 use App\Comment;
 use App\Reaction;
+use App\File;
 use Storage;
 use ZipArchive;
-use File;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 use Illuminate\Support\Facades\Storage as FacadesStorage;
@@ -80,7 +80,6 @@ class ImportGroup extends Command
 
 
         // handle actions & participations
-
         foreach ($data->actions as $actionData) {
             if ($this->createAction($actionData)) {
                 $this->info('Created action called ' . $actionData->name);
@@ -88,25 +87,22 @@ class ImportGroup extends Command
         }
 
 
-        // handle discussions
+        // handle discussions, comments and reactions
         foreach ($data->discussions as $discussionData) {
             if ($this->createDiscussion($discussionData)) {
                 $this->info('Created discussion called ' . $discussionData->name);
             }
         }
 
-        // handle comments
-
-        // handle reactions
-
+        
 
         // handle files
+        foreach ($data->files as $fileData) {
+            if ($this->createFile($fileData)) {
+                $this->info('Created file called ' . $fileData->name);
+            }
+        }
 
-
-
-
-
-        // handle file content
 
         // handle user's avatar
 
@@ -345,6 +341,8 @@ class ImportGroup extends Command
 
         $discussion->name = $data->name;
         $discussion->body = $data->body;
+        $discussion->status = $data->status;
+        $discussion->total_comments = $data->total_comments;
 
 
         if ($discussion->isValid()) {
@@ -426,4 +424,51 @@ class ImportGroup extends Command
             return false;
         }
     }
+
+
+
+     /**
+     * Create a new file based on a json parsed array $data
+     */
+    function createFile($data)
+    {
+        $file = new File;
+
+        $user = $this->createUser($data->user);
+
+
+        $file->group_id = $this->group->id;
+        $file->user_id = $user->id;
+
+        $file->created_at = $data->created_at;
+        $file->updated_at = $data->updated_at;
+        $file->deleted_at = $data->deleted_at;
+
+        $file->name = $data->name;
+        $file->path = $data->path;
+        $file->mime = $data->mime;
+        $file->original_filename = $data->original_filename;
+        $file->original_extension = $data->original_extension;
+        $file->filesize = $data->filesize;
+        $file->item_type = $data->item_type;
+        $file->parent_id = $data->parent_id;
+        $file->status = $data->status;
+
+
+
+        if ($file->isValid()) {
+            $file->save();
+
+            // now we have a file let's handle the content
+           
+
+            return $file;
+        } else {
+            $this->error($file->getErrors());
+            return false;
+        }
+    }
+
+
+
 }
