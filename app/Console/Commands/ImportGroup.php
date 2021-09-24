@@ -9,6 +9,7 @@ use App\Membership;
 use App\Action;
 use App\Discussion;
 use App\Comment;
+use App\Reaction;
 use Storage;
 use ZipArchive;
 use File;
@@ -346,9 +347,6 @@ class ImportGroup extends Command
         $discussion->body = $data->body;
 
 
-
-
-
         if ($discussion->isValid()) {
             $discussion->save();
 
@@ -386,9 +384,45 @@ class ImportGroup extends Command
         if ($comment->isValid()) {
             $comment->save();
             $discussion->comments()->save($comment);
+
+            // now we have a comment let's handle reactions
+            foreach ($data->reactions as $reactionData) {
+                $this->createReaction($comment, $reactionData);
+            }
+
+
             return $comment;
         } else {
             $this->error($discussion->getErrors());
+            return false;
+        }
+    }
+
+
+    /**
+     * Create a new reaction based on a json parsed array $data
+     */
+    function createReaction($model, $data)
+    {
+        $reaction = new Reaction;
+
+        $user = $this->createUser($data->user);
+
+        $reaction->user_id = $user->id;
+
+        $reaction->created_at = $data->created_at;
+        $reaction->updated_at = $data->updated_at;
+        
+        $reaction->type = $data->type;
+
+        $reaction->reactable_type = $data->reactable_type;
+        $reaction->reactable_id = $model->id;
+
+        if ($reaction->isValid()) {
+            $reaction->save();
+            return $reaction;
+        } else {
+            $this->error($reaction->getErrors());
             return false;
         }
     }

@@ -4,10 +4,21 @@ namespace App;
 
 use Auth;
 use Illuminate\Database\Eloquent\Model;
+use Watson\Validating\ValidatingTrait;
 
 class Reaction extends Model
 {
+
+    use ValidatingTrait;
+
     protected $fillable = ['reactable_type', 'reactable_id', 'user_id', 'type'];
+
+    protected $rules = [
+        'reactable_id'     => 'required',
+        'reactable_type'     => 'required',
+        'user_id'  => 'required|exists:users,id',
+        'type' => 'required',
+    ];
 
 
     /**
