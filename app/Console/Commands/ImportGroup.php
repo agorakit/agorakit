@@ -16,7 +16,7 @@ use ZipArchive;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 use Illuminate\Support\Facades\Storage as FacadesStorage;
-
+use Illuminate\Support\Str;
 
 /**
  * Import content command
@@ -95,6 +95,9 @@ class ImportGroup extends Command
         // any function called from now on, can (and will) use this group model for it's inner working
         $this->group = $group;
 
+        // store original group id, we'll need it
+        $this->originalGroupId = $data->id;
+
 
         // handle memberships
         foreach ($data->memberships as $membership) {
@@ -144,11 +147,13 @@ class ImportGroup extends Command
 
         // delete tmp files
 
+        /*
         if (Storage::deleteDirectory('imports/' . $this->argument('group'))) {
             $this->info('Temp files deleted');
         } else {
             $this->error('Could not delete temp files');
         }
+        */
 
         $this->line('Group imported successfuly');
     }
@@ -449,6 +454,15 @@ class ImportGroup extends Command
             $file->save();
 
             // now we have a file let's handle the content
+            // this part is tightly coupled to the way files are stored on disk, there is something wrong here but it does the job. 
+            // Should be a responsability of the file model... well it's an interim solution while importing content, it will be dirty
+            $original_path = ('imports/' . $this->argument('group') . '/files/' . $data->id . '/' . basename($file->path));
+            
+            // move the file to it's new location
+
+            // change the path
+            
+            // profit
 
 
             return $file;
