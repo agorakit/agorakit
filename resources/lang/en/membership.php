@@ -15,7 +15,7 @@ return array (
   'application_stored' => 'Your application to this group has been stored',
   'apply' => 'Apply',
   'apply_for_group' => 'Apply for the group',
-  'apply_intro' => 'This group is closed so you need to apply using the button bellow. An admin will be notified and will act accordingly.',
+  'apply_intro' => 'This group is closed so you need to apply using the button below. An admin will be notified and will act accordingly.',
   'click_here' => 'Click here',
   'directly_add_users_button' => 'Directly add users',
   'instantly' => 'As soon as possible',

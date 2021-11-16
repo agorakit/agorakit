@@ -178,7 +178,7 @@ return array (
   'you_have_been_mentionned_by' => 'You have been mentioned by',
   'in_the_discussion' => 'in the discussion',
   'ressource_updated_successfully' => 'Resource updated successfully',
-  'ressource_deleted_successfully' => 'ressource_deleted_successfully',
+  'ressource_deleted_successfully' => 'Resource deleted successfully',
   'ressource_created_successfully' => 'Resource created successfully',
   'no_file_selected' => 'No file selected',
   'ressource_not_created_successfully' => 'Resource Not Created Successfully',
