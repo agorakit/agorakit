@@ -142,9 +142,13 @@ class Message extends Model
         // then stripped with the same EmailReplyParser, 
         // then converted from markdown back to html, pfeeew what could go wrong ?
         if (strlen($body_text) < 5) {
-            $converter = new HtmlConverter();
-            $markdown = $converter->convert($body_html);
-            $result = Markdown::defaultTransform(EmailReplyParser::parseReply($markdown));
+            if ($body_html) {
+                $converter = new HtmlConverter();
+                $markdown = $converter->convert($body_html);
+                $result = Markdown::defaultTransform(EmailReplyParser::parseReply($markdown));
+            } else {
+                return false;
+            }
         } else {
             $result = $body_text;
         }
