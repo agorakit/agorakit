@@ -59,8 +59,10 @@ class GroupActionController extends Controller
             $actions = $group->actions()
                 ->with('user', 'group', 'tags')
                 ->orderBy('start', 'asc')
-                ->where('start', '>', Carbon::now()->subDay())
-                ->orWhere('stop', '>', Carbon::now()->addDay())
+                ->where(function ($query) {
+                    $query->where('start', '>', Carbon::now()->subDay())
+                        ->orWhere('stop', '>', Carbon::now()->addDay());
+                })
                 ->paginate(10);
 
             return view('actions.index')
@@ -138,9 +140,8 @@ class GroupActionController extends Controller
         }
 
         // handle the case where the event is exactly one (ore more) day duration : it's a full day event, remove one second
- 
-        if ($action->start->hour == 0 && $action->start->minute == 0 && $action->stop->hour == 0 && $action->stop->minute == 0) 
-        {
+
+        if ($action->start->hour == 0 && $action->start->minute == 0 && $action->stop->hour == 0 && $action->stop->minute == 0) {
             $action->stop = Carbon::parse($request->get('stop'))->subSecond();
         }
 
@@ -149,7 +150,7 @@ class GroupActionController extends Controller
             $action->name = $request->get('title');
         }
 
-        
+
         $action->group()->associate($group);
 
         return view('actions.create')
