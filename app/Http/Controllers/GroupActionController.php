@@ -59,7 +59,8 @@ class GroupActionController extends Controller
             $actions = $group->actions()
                 ->with('user', 'group', 'tags')
                 ->orderBy('start', 'asc')
-                ->where('start', '>=', Carbon::now()->subDay())
+                ->where('start', '>', Carbon::now()->subDay())
+                ->orWhere('stop', '>', Carbon::now()->addDay())
                 ->paginate(10);
 
             return view('actions.index')
@@ -84,8 +85,8 @@ class GroupActionController extends Controller
         if ($request->has('start') && $request->has('end')) {
             $actions = $group->actions()
                 ->with('user', 'group', 'tags')
-                ->where('start', '>', Carbon::parse($request->get('start')))
-                ->where('stop', '<', Carbon::parse($request->get('end')))
+                ->where('start', '>', Carbon::parse($request->get('start'))->subMonth())
+                ->where('stop', '<', Carbon::parse($request->get('end'))->addMonth())
                 ->orderBy('start', 'asc')->get();
         } else {
             $actions = $group->actions()->orderBy('start', 'asc')->get();
