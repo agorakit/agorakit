@@ -29,6 +29,7 @@ class NotifyMentionedUsers
      */
     public function handle(ContentCreated $event)
     {
+        
 
         // Comments
         if ($event->model instanceof Comment) {

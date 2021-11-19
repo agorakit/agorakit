@@ -14,8 +14,9 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         'App\Events\ContentCreated' => [
-            'App\Listeners\NotifyMentionedUsers',
+            'App\Listeners\NotifyMentionedUsers', 'App\Listeners\NotifyInstantly'
         ],
+        
     ];
 
     /**
