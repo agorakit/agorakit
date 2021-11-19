@@ -13,9 +13,8 @@
 <div class="discussion" style="margin-bottom: 30px; border-bottom: 1px solid #aaa">
 <h3><a up-follow href="{{route('groups.discussions.show', [$group, $discussion])}}">{{$discussion->name}} </a></h3>
 <p>
-@if ($discussion->comments->count() > 0)
-{{ summary($discussion->body, 1000) }}
-@else
+@if ($discussion->comments->count() == 0)
+<a href="{{ route('groups.discussions.show', [$group, $discussion]) }}">{{$discussion->user->name}}</a> ({{$discussion->created_at->diffForHumans()}}):
 {!! filter($discussion->body) !!}
 @endif
 </p>

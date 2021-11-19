@@ -70,7 +70,7 @@ class SendNotifications extends Command
 
     /**
      * Get a list of memberships rows that need to be processed for notification
-     * It means people who have opted in for notifcations and who have not been notified for a long enough time
+     * It means people who have opted in for notifications and who have not been notified for a long enough time
      * (This is configured, per user, per group, in notification_interval in the membership table).
      */
     public function getNotificationsToSend()
