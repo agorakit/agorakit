@@ -14,6 +14,8 @@ use Watson\Validating\ValidatingTrait;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Illuminate\Contracts\Translation\HasLocalePreference;
+
 
 
 use App\Membership;
