@@ -25,7 +25,7 @@ class FeedController extends Controller
         ->with('user')
         ->orderBy('created_at', 'desc')
         ->whereIn('group_id', \App\Group::public()->get()->pluck('id'))
-        ->take(20)->get();
+        ->take(50)->get();
 
         foreach ($discussions as $discussion) {
             $item = new \Suin\RSSWriter\Item();
@@ -41,7 +41,8 @@ class FeedController extends Controller
             ->appendTo($channel);
         }
 
-        return $feed;
+
+        return response($feed, 200, ['Content-Type' => 'application/xml']);
     }
 
     public function actions()
@@ -58,7 +59,7 @@ class FeedController extends Controller
         $actions = \App\Action::with('group')
         ->with('user')
         ->whereIn('group_id', \App\Group::public()->get()->pluck('id'))
-        ->orderBy('start', 'desc')->take(20)->get();
+        ->orderBy('start', 'desc')->take(50)->get();
 
         foreach ($actions as $action) {
             $item = new \Suin\RSSWriter\Item();
@@ -74,6 +75,6 @@ class FeedController extends Controller
             ->appendTo($channel);
         }
 
-        return $feed;
+        return response($feed, 200, ['Content-Type' => 'application/xml']);
     }
 }

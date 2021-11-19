@@ -35,6 +35,8 @@
     {!! $discussions->render() !!}
 </div>
 
-
+<div class="mt-16 text-gray-600">
+    <a class="btn btn-secondary" href="{{route('discussions.feed')}}"><i class="fas fa-rss"></i> RSS</a>
+</div>
 
 @endsection
