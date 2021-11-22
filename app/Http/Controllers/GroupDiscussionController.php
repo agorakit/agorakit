@@ -148,6 +148,8 @@ class GroupDiscussionController extends Controller
 
         flash(trans('messages.ressource_created_successfully'));
 
+        event(new \App\Events\ContentCreated($discussion));
+
         return redirect()->route('groups.discussions.show', [$group, $discussion]);
     }
 

@@ -85,7 +85,7 @@ class SendNotifications extends Command
         $notifications = DB::select('
         select * from
         (select *, date_add(notified_at, interval notification_interval minute) as notify from membership
-        where notification_interval > 0
+        where notification_interval > 1
         and membership >= :membership) as memberships
         where notify < :now or notify is null limit :batch
         ', ['now' => Carbon::now(), 'membership' => \App\Membership::MEMBER, 'batch' => $this->option('batch')]);
