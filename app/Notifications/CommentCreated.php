@@ -8,6 +8,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\HtmlString;
+use Request;
 
 class CommentCreated extends Notification
 {
@@ -65,8 +66,8 @@ class CommentCreated extends Notification
         }
 
         $message->withSwiftMessage(function ($message) {
-            $message->getHeaders()->addTextHeader('Message-ID',  'comment-'. $this->comment->id . '@' . config('app.url'));
-            $message->getHeaders()->addTextHeader('References',  'discussion-'. $this->comment->discussion->id . '@' . config('app.url'));
+            $message->getHeaders()->addTextHeader('References',  'discussion-'. $this->comment->discussion->id . '@' . Request::getHost());
+            $message->setId('comment-'. $this->comment->id . '@' . Request::getHost());
         });
 
         return $message;
