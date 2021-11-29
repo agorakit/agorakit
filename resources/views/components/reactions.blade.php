@@ -12,8 +12,10 @@
         </a>
         @else
 
-        <img src="{{asset('/images/reactions/' . $reaction->type . '.png')}}" class="image-cover h-5 w-5 mr-1"
-            title="{{ $reaction->user->name }}" />
+            @if ($reaction->user)
+            <img src="{{asset('/images/reactions/' . $reaction->type . '.png')}}" class="image-cover h-5 w-5 mr-1"
+                title="{{ $reaction->user->name }}" />
+            @endif
 
         @endif
         @endforeach
