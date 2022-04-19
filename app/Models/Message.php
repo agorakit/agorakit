@@ -1,8 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-use App\User;
+use App\Models\User;
 use Auth;
 use EmailReplyParser\EmailReplyParser;
 use Illuminate\Database\Eloquent\Model;
@@ -56,17 +56,17 @@ class Message extends Model
 
     public function group()
     {
-        return $this->belongsTo(\App\Group::class)->withTrashed();
+        return $this->belongsTo(\App\Models\Group::class)->withTrashed();
     }
 
     public function user()
     {
-        return $this->belongsTo(\App\User::class)->withTrashed();
+        return $this->belongsTo(\App\Models\User::class)->withTrashed();
     }
 
     public function discussion()
     {
-        return $this->belongsTo(\App\Discussion::class);
+        return $this->belongsTo(\App\Models\Discussion::class);
     }
 
     /**

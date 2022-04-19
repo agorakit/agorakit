@@ -2,8 +2,8 @@
 
 namespace App\Traits;
 
-use App\Activity;
-use App\Comment;
+use App\Models\Activity;
+use App\Models\Comment;
 use Auth;
 
 /************* candidate for REMOVAL TODO ************************/

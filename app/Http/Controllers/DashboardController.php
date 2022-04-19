@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Action;
-use App\Discussion;
-use App\File;
-use App\Group;
+use App\Models\Action;
+use App\Models\Discussion;
+use App\Models\File;
+use App\Models\Group;
 use App\Traits\ContentStatus;
 use Auth;
 use Carbon\Carbon;

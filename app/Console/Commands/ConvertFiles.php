@@ -38,7 +38,7 @@ class ConvertFiles extends Command
      */
     public function handle()
     {
-        foreach (\App\Group::all() as $group) {
+        foreach (\App\Models\Group::all() as $group) {
             $this->info('Checking if there is something to convert for group '.$group->name.' ('.$group->id.')');
             foreach ($group->files as $file) {
                 if ($file->isFile()) {

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Group;
-use App\User;
+use App\Models\Group;
+use App\Models\User;
 use Auth;
 use Carbon\Carbon;
 
@@ -65,7 +65,7 @@ class MapController extends Controller
       ->where('latitude', '<>', 0)
       ->get();
 
-        $actions = \App\Action::where('start', '>=', Carbon::now())
+        $actions = \App\Models\Action::where('start', '>=', Carbon::now())
       ->where('latitude', '<>', 0)
       ->whereIn('group_id', $groups_id)
       ->get();

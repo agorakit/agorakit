@@ -11,7 +11,7 @@ use Carbon\Carbon;
  */
 function setting($name = false, $default = false)
 {
-    $setting = new \App\Setting;
+    $setting = new \App\Models\Setting;
     if ($name) {
         return $setting->get($name, $default);
     }
@@ -139,23 +139,23 @@ function geocode($address)
  */
 function linkTo($model)
 {
-    if ($model instanceof App\User) {
+    if ($model instanceof App\Models\User) {
         return route('users.show', $model);
     }
 
-    if ($model instanceof App\Discussion) {
+    if ($model instanceof App\Models\Discussion) {
         return route('groups.discussions.show', [$model->group, $model]);
     }
 
-    if ($model instanceof App\File) {
+    if ($model instanceof App\Models\File) {
         return route('groups.files.show', [$model->group, $model]);
     }
 
-    if ($model instanceof App\Action) {
+    if ($model instanceof App\Models\Action) {
         return route('groups.actions.show', [$model->group, $model]);
     }
 
-    if ($model instanceof App\Comment) {
+    if ($model instanceof App\Models\Comment) {
         return route('groups.discussions.show', [$model->group, $model->discussion]);
     }
 }

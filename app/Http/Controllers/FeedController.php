@@ -21,10 +21,10 @@ class FeedController extends Controller
         ->ttl(60)
         ->appendTo($feed);
 
-        $discussions = \App\Discussion::with('group')
+        $discussions = \App\Models\Discussion::with('group')
         ->with('user')
         ->orderBy('created_at', 'desc')
-        ->whereIn('group_id', \App\Group::public()->get()->pluck('id'))
+        ->whereIn('group_id', \App\Models\Group::public()->get()->pluck('id'))
         ->take(50)->get();
 
         foreach ($discussions as $discussion) {
@@ -55,9 +55,9 @@ class FeedController extends Controller
         ->ttl(60)
         ->appendTo($feed);
 
-        $actions = \App\Action::with('group')
+        $actions = \App\Models\Action::with('group')
         ->with('user')
-        ->whereIn('group_id', \App\Group::public()->get()->pluck('id'))
+        ->whereIn('group_id', \App\Models\Group::public()->get()->pluck('id'))
         ->orderBy('start', 'desc')->take(50)->get();
 
         foreach ($actions as $action) {

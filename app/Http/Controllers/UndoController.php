@@ -15,25 +15,25 @@ class UndoController extends Controller
     public function index()
     {
         // list all instances that have been deleted
-        $groups = \App\Group::onlyTrashed()
+        $groups = \App\Models\Group::onlyTrashed()
         ->orderBy('deleted_at', 'desc')
         ->get();
 
-        $discussions = \App\Discussion::onlyTrashed()
-        ->orderBy('deleted_at', 'desc')
-        ->with('group', 'user')
-        ->get();
-
-        $comments = \App\Comment::onlyTrashed()
-        ->orderBy('deleted_at', 'desc')
-        ->get();
-
-        $files = \App\File::onlyTrashed()
+        $discussions = \App\Models\Discussion::onlyTrashed()
         ->orderBy('deleted_at', 'desc')
         ->with('group', 'user')
         ->get();
 
-        $actions = \App\Action::onlyTrashed()
+        $comments = \App\Models\Comment::onlyTrashed()
+        ->orderBy('deleted_at', 'desc')
+        ->get();
+
+        $files = \App\Models\File::onlyTrashed()
+        ->orderBy('deleted_at', 'desc')
+        ->with('group', 'user')
+        ->get();
+
+        $actions = \App\Models\Action::onlyTrashed()
         ->orderBy('deleted_at', 'desc')
         ->with('group', 'user')
         ->get();
@@ -49,7 +49,7 @@ class UndoController extends Controller
     public function restore($type, $id)
     {
         if ($type == 'group') {
-            $group = \App\Group::withTrashed()->find($id);
+            $group = \App\Models\Group::withTrashed()->find($id);
             if ($group->trashed()) {
                 $group->restore();
 
@@ -60,7 +60,7 @@ class UndoController extends Controller
         }
 
         if ($type == 'discussion') {
-            $discussion = \App\Discussion::withTrashed()->find($id);
+            $discussion = \App\Models\Discussion::withTrashed()->find($id);
             if ($discussion->trashed()) {
                 $group = $discussion->group()->withTrashed()->first();
                 // if the group the discussion belongs to is trashed, warn the user
@@ -77,7 +77,7 @@ class UndoController extends Controller
         }
 
         if ($type == 'comment') {
-            $comment = \App\Comment::withTrashed()->find($id);
+            $comment = \App\Models\Comment::withTrashed()->find($id);
             if ($comment->trashed()) {
                 $comment->restore();
 
@@ -88,7 +88,7 @@ class UndoController extends Controller
         }
 
         if ($type == 'file') {
-            $file = \App\File::withTrashed()->find($id);
+            $file = \App\Models\File::withTrashed()->find($id);
             if ($file->trashed()) {
                 $group = $file->group()->withTrashed()->first();
                 // if the group the discussion belongs to is trashed, warn the user
@@ -106,7 +106,7 @@ class UndoController extends Controller
         }
 
         if ($type == 'action') {
-            $action = \App\Action::withTrashed()->find($id);
+            $action = \App\Models\Action::withTrashed()->find($id);
             if ($action->trashed()) {
                 $group = $action->group()->withTrashed()->first();
                 // if the group the discussion belongs to is trashed, warn the user

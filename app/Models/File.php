@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\Traits\HasControlledTags;
 use App\Traits\HasStatus;
@@ -70,12 +70,12 @@ class File extends Model
 
     public function user()
     {
-        return $this->belongsTo(\App\User::class)->withTrashed();
+        return $this->belongsTo(\App\Models\User::class)->withTrashed();
     }
 
     public function group()
     {
-        return $this->belongsTo(\App\Group::class)->withTrashed();
+        return $this->belongsTo(\App\Models\Group::class)->withTrashed();
     }
 
     public function link()

@@ -27,10 +27,10 @@ class IcalController extends Controller
         if (Auth::check()) {
             if (Auth::user()->getPreference('show') == 'all') {
                 if (Auth::user()->isAdmin()) { // super admin sees everything
-                    $groups = \App\Group::get()
+                    $groups = \App\Models\Group::get()
                         ->pluck('id');
                 } else {
-                    $groups = \App\Group::public()
+                    $groups = \App\Models\Group::public()
                         ->get()
                         ->pluck('id')
                         ->merge(Auth::user()->groups()->pluck('groups.id'));
@@ -39,11 +39,11 @@ class IcalController extends Controller
                 $groups = Auth::user()->groups()->pluck('groups.id');
             }
         } else {
-            $groups = \App\Group::public()->get()->pluck('id');
+            $groups = \App\Models\Group::public()->get()->pluck('id');
         }
 
         // returns actions from the last 60 days
-        $actions = \App\Action::with('group')
+        $actions = \App\Models\Action::with('group')
             ->whereIn('group_id', $groups)
             ->where('start', '>=', Carbon::now()->subDays(60))
             ->get();

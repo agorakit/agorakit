@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -40,11 +40,11 @@ class Participation extends Model
 
     public function action()
     {
-        return $this->belongsTo(\App\Action::class);
+        return $this->belongsTo(\App\Models\Action::class);
     }
 
     public function user()
     {
-        return $this->belongsTo(\App\User::class)->withTrashed();
+        return $this->belongsTo(\App\Models\User::class)->withTrashed();
     }
 }

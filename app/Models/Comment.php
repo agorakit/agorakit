@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -52,7 +52,7 @@ class Comment extends Model
 
     public function user()
     {
-        return $this->belongsTo(\App\User::class)->withTrashed();
+        return $this->belongsTo(\App\Models\User::class)->withTrashed();
     }
 
     public function votes()
@@ -67,7 +67,7 @@ class Comment extends Model
 
     public function discussion()
     {
-        return $this->belongsTo(\App\Discussion::class);
+        return $this->belongsTo(\App\Models\Discussion::class);
     }
 
     public function link()

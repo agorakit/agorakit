@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Membership;
+use App\Models\Membership;
 
 class GroupAdminsController extends Controller
 {

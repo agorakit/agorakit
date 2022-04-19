@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Mail\LoginByEmail;
-use App\User;
+use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
 use Mail;
@@ -25,7 +25,7 @@ class LoginByEmailController extends Controller
 
     public function sendLoginByEmail(Request $request)
     {
-        $user = \App\User::where('email', $request->get('email'))->first();
+        $user = \App\Models\User::where('email', $request->get('email'))->first();
 
         if ($user) {
             // send invitation email

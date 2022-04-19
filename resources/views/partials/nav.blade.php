@@ -52,7 +52,7 @@
                 <i class="fa fa-layer-group"></i> {{ trans('messages.all_groups') }}
             </a>
 
-            @can ('create', \App\Group::class)
+            @can ('create', \App\Models\Group::class)
             <div class="dropdown-divider"></div>
 
             <a up-target="body" class="dropdown-item" href="{{ route('groups.create') }}">
@@ -285,7 +285,7 @@
         <span class="text-xs sm:text-base">{{ trans('messages.login') }}</span>
     </a>
 
-    @can('create', App\User::class)
+    @can('create', App\Models\User::class)
     <a up-modal=".dialog"
         class="text-gray-200 flex flex-col justify-center items-center rounded hover:bg-gray-600 bg-gray-700 h-12 w-auto sm:w-auto px-4 my-2"
         href="{{ url('register') }}">

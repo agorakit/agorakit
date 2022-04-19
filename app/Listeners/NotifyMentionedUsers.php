@@ -2,10 +2,10 @@
 
 namespace App\Listeners;
 
-use App\Comment;
-use App\Discussion;
+use App\Models\Comment;
+use App\Models\Discussion;
 use App\Events\ContentCreated;
-use App\User;
+use App\Models\User;
 use Notification;
 
 class NotifyMentionedUsers

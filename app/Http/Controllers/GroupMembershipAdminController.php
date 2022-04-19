@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Group;
-use App\Invite;
-use App\Membership;
-use App\User;
+use App\Models\Group;
+use App\Models\Invite;
+use App\Models\Membership;
+use App\Models\User;
 use Carbon\Carbon;
 use Gate;
 use Illuminate\Http\Request;
@@ -40,7 +40,7 @@ class GroupMembershipAdminController extends Controller
             $this->authorize('manage-membership', $group);
 
             // handle the case an admin change his own level and is the only one admin of the group... yes it hapened...
-            if ($membership->isAdmin() && $group->admins->count() == 1 && $request->get('membership_level') < \App\Membership::ADMIN) {
+            if ($membership->isAdmin() && $group->admins->count() == 1 && $request->get('membership_level') < \App\Models\Membership::ADMIN) {
                 flash('You cannot remove you as admin since you are the unique admin. Promote someone else as admin first.');
 
                 return redirect()->back();

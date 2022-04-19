@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Action;
-use App\Discussion;
-use App\File;
-use App\Group;
+use App\Models\Action;
+use App\Models\Discussion;
+use App\Models\File;
+use App\Models\Group;
 use App\Tag;
-use App\User;
+use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
 

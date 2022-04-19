@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use App\Group;
+use App\Models\Group;
 use App\Mail\Notification;
-use App\User;
+use App\Models\User;
 use Auth;
 use Carbon\Carbon;
 use DB;
@@ -52,8 +52,8 @@ class SendNotifications extends Command
         if (is_array($notifications)) {
             if (count($notifications) > 0) {
                 foreach ($notifications as $notification) {
-                    $user = \App\User::find($notification->user_id);
-                    $group = \App\Group::find($notification->group_id);
+                    $user = \App\Models\User::find($notification->user_id);
+                    $group = \App\Models\Group::find($notification->group_id);
 
                     if ($user && $group && $user->isVerified()) {
                         $this->line('Checking if there is something to send to user:'.$user->id.' ('.$user->email.')'.' for group:'.$group->id.' ('.$group->name.')');
@@ -87,7 +87,7 @@ class SendNotifications extends Command
         where notification_interval > 1
         and membership >= :membership) as memberships
         where notify < :now or notify is null limit :batch
-        ', ['now' => Carbon::now(), 'membership' => \App\Membership::MEMBER, 'batch' => $this->option('batch')]);
+        ', ['now' => Carbon::now(), 'membership' => \App\Models\Membership::MEMBER, 'batch' => $this->option('batch')]);
 
         //dd(DB::getQueryLog());
 
@@ -99,9 +99,9 @@ class SendNotifications extends Command
         \App::setLocale($user->preferredLocale()); // use user's locale from preferences
 
         // Establish timestamp for notifications from membership data (when was an email sent for the last time?)
-        $membership = \App\Membership::where('user_id', '=', $user->id)
+        $membership = \App\Models\Membership::where('user_id', '=', $user->id)
             ->where('group_id', '=', $group->id)
-            ->where('membership', '>=', \App\Membership::MEMBER)
+            ->where('membership', '>=', \App\Models\Membership::MEMBER)
             ->first();
 
         if ($membership) {
@@ -113,7 +113,7 @@ class SendNotifications extends Command
             $discussions = $this->getUnreadDiscussionsSince($user->id, $group->id, $membership->notified_at);
 
             // find new files since timestamp
-            $files = \App\File::where('created_at', '>', $membership->notified_at)
+            $files = \App\Models\File::where('created_at', '>', $membership->notified_at)
                 ->where('group_id', '=', $group->id)
                 ->get();
 
@@ -121,7 +121,7 @@ class SendNotifications extends Command
             $users = $this->getNewMembersSince($user->id, $group->id, $membership->notified_at);
 
             // find future actions until next 2 weeks, this is curently hardcoded... TODO use the mail sending interval to determine stop date
-            $actions = \App\Action::where('start', '>', Carbon::now()->toDateTimeString())
+            $actions = \App\Models\Action::where('start', '>', Carbon::now()->toDateTimeString())
                 ->where('stop', '<', Carbon::now()->addWeek()->addWeek())
                 ->where('group_id', '=', $group->id)
                 ->orderBy('start')
@@ -129,7 +129,7 @@ class SendNotifications extends Command
 
             // we only trigger mail sending if a new action has been **created** since last notification email.
             // BUT we will send actions for the next two weeks in all cases, IF a mail must be sent
-            $actions_count = \App\Action::where('created_at', '>', $membership->notified_at)
+            $actions_count = \App\Models\Action::where('created_at', '>', $membership->notified_at)
                 ->where('group_id', '=', $group->id)
                 ->count();
 
@@ -171,7 +171,7 @@ class SendNotifications extends Command
      */
     public function getUnreadDiscussionsSince($user_id, $group_id, $since)
     {
-        $discussions = \App\Discussion::fromQuery('select * from
+        $discussions = \App\Models\Discussion::fromQuery('select * from
         (
             select *,
             (select read_comments from user_read_discussion where discussion_id = discussions.id and user_id = :user_id) as read_comments
@@ -192,10 +192,10 @@ class SendNotifications extends Command
      */
     public function getNewMembersSince($user_id, $group_id, $since)
     {
-        $users = \App\User::fromQuery('select * from users where id in
+        $users = \App\Models\User::fromQuery('select * from users where id in
             (select user_id from membership where group_id = :group_id and created_at > :since and membership >= :membership and user_id <> :user_id)
 
-            ', ['user_id' => $user_id, 'group_id' => $group_id, 'since' => $since, 'membership' => \App\Membership::MEMBER]);
+            ', ['user_id' => $user_id, 'group_id' => $group_id, 'since' => $since, 'membership' => \App\Models\Membership::MEMBER]);
 
         return $users;
     }

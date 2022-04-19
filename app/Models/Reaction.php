@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Auth;
 use Illuminate\Database\Eloquent\Model;
@@ -72,6 +72,6 @@ class Reaction extends Model
      */
     public function user()
     {
-        return $this->belongsTo(\App\User::class)->withTrashed();
+        return $this->belongsTo(\App\Models\User::class)->withTrashed();
     }
 }

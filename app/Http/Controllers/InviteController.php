@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Group;
+use App\Models\Group;
 use App\Mail\InviteUser;
-use App\Membership;
-use App\User;
+use App\Models\Membership;
+use App\Models\User;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -66,8 +66,8 @@ class InviteController extends Controller
             if ($user->isMemberOf($group)) {
                 $status_message .= trans('membership.user_already_invited').' : '.$email.'<br/>';
             } else {
-                $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $group->id]);
-                $membership->membership = \App\Membership::INVITED;
+                $membership = \App\Models\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $group->id]);
+                $membership->membership = \App\Models\Membership::INVITED;
                 $membership->save();
 
                 // send invitation email

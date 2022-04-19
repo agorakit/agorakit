@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Comment;
-use App\Discussion;
-use App\Reaction;
+use App\Models\Comment;
+use App\Models\Discussion;
+use App\Models\Reaction;
 use Auth;
 use Illuminate\Http\Request;
 

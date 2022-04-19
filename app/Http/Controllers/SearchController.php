@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Group;
+use App\Models\Group;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -42,30 +42,30 @@ class SearchController extends Controller
             ->orderBy('updated_at', 'desc')
             ->paginate(20, ['*'], 'groups')->withQueryString();
 
-            $users = \App\User::with('groups')
+            $users = \App\Models\User::with('groups')
             ->search($query)
             ->orderBy('updated_at', 'desc')
             ->paginate(20, ['*'], 'users');
 
-            $discussions = \App\Discussion::whereIn('group_id', $allowed_groups)
+            $discussions = \App\Models\Discussion::whereIn('group_id', $allowed_groups)
             ->with('group')
             ->search($query)
             ->orderBy('updated_at', 'desc')
             ->paginate(20, ['*'], 'discussions');
 
-            $actions = \App\Action::whereIn('group_id', $allowed_groups)
+            $actions = \App\Models\Action::whereIn('group_id', $allowed_groups)
             ->with('group')
             ->search($query)
             ->orderBy('updated_at', 'desc')
             ->paginate(20, ['*'], 'actions');
 
-            $files = \App\File::whereIn('group_id', $allowed_groups)
+            $files = \App\Models\File::whereIn('group_id', $allowed_groups)
             ->with('group')
             ->search($query)
             ->orderBy('updated_at', 'desc')
             ->paginate(20, ['*'], 'files');
 
-            $comments = \App\Comment::with('discussion', 'discussion.group')
+            $comments = \App\Models\Comment::with('discussion', 'discussion.group')
             ->whereHas('discussion', function ($q) use ($allowed_groups) {
                 $q->whereIn('group_id', $allowed_groups);
             })

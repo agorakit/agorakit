@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\File;
-use App\Group;
+use App\Models\File;
+use App\Models\Group;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -48,10 +48,10 @@ class FileController extends Controller
                 $groups = Auth::user()->groups()->pluck('groups.id');
             }
         } else {
-            $groups = \App\Group::public()->get()->pluck('id');
+            $groups = \App\Models\Group::public()->get()->pluck('id');
         }
 
-        $files = \App\File::with('group', 'user', 'tags')
+        $files = \App\Models\File::with('group', 'user', 'tags')
             ->when($tag, function ($query) use ($tag) {
                 return $query->withAnyTags($tag);
             })

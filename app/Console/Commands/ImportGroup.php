@@ -2,14 +2,14 @@
 
 namespace App\Console\Commands;
 
-use App\Action;
-use App\Comment;
-use App\Discussion;
-use App\File;
-use App\Group;
-use App\Membership;
-use App\Reaction;
-use App\User;
+use App\Models\Action;
+use App\Models\Comment;
+use App\Models\Discussion;
+use App\Models\File;
+use App\Models\Group;
+use App\Models\Membership;
+use App\Models\Reaction;
+use App\Models\User;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage as FacadesStorage;

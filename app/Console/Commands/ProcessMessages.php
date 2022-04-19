@@ -2,11 +2,11 @@
 
 namespace App\Console\Commands;
 
-use App\Discussion;
-use App\Group;
+use App\Models\Discussion;
+use App\Models\Group;
 use App\Mail\MailBounce;
-use App\Message;
-use App\User;
+use App\Models\Message;
+use App\Models\User;
 use EmailReplyParser\EmailReplyParser;
 use Illuminate\Console\Command;
 use League\HTMLToMarkdown\HtmlConverter;
@@ -258,7 +258,7 @@ class ProcessMessages extends Command
 
     public function processDiscussionExistsAndUserIsMember(Discussion $discussion, User $user, Message $message)
     {
-        $comment = new \App\Comment();
+        $comment = new \App\Models\Comment();
         $comment->body = $message->extractText();
         $comment->user()->associate($user);
         if ($discussion->comments()->save($comment)) {

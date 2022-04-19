@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Action;
-use App\Group;
+use App\Models\Action;
+use App\Models\Group;
 use Auth;
 use Carbon\Carbon;
 use Gate;
@@ -168,7 +168,7 @@ class GroupActionController extends Controller
     {
         // if no group is in the route, it means user choose the group using the dropdown
         if (! $group->exists) {
-            $group = \App\Group::findOrFail($request->get('group'));
+            $group = \App\Models\Group::findOrFail($request->get('group'));
         }
 
         $this->authorize('create-action', $group);

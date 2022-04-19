@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Group;
+use App\Models\Group;
 use File;
 use Image;
 

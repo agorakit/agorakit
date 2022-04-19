@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Venturecraft\Revisionable\RevisionableTrait;
@@ -60,11 +60,11 @@ class Membership extends Model
 
     public function user()
     {
-        return $this->belongsTo(\App\User::class)->withTrashed();
+        return $this->belongsTo(\App\Models\User::class)->withTrashed();
     }
 
     public function group()
     {
-        return $this->belongsTo(\App\Group::class);
+        return $this->belongsTo(\App\Models\Group::class);
     }
 }

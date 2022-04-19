@@ -1,8 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-use App\Membership;
+use App\Models\Membership;
 use App\Traits\HasControlledTags;
 use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Services\SlugService;
@@ -260,7 +260,7 @@ class User extends Authenticatable
      */
     public function groups()
     {
-        return $this->belongsToMany(\App\Group::class, 'membership')
+        return $this->belongsToMany(\App\Models\Group::class, 'membership')
             ->where('membership.membership', '>=', Membership::MEMBER)
             ->orderBy('status', 'desc')
             ->orderBy('name')
@@ -272,7 +272,7 @@ class User extends Authenticatable
      */
     public function actions()
     {
-        return $this->belongsToMany(\App\Action::class);
+        return $this->belongsToMany(\App\Models\Action::class);
     }
 
     public function isAttending(Action $action)
@@ -328,7 +328,7 @@ class User extends Authenticatable
 
     public function discussionsSubscribed()
     {
-        return $this->hasManyThrough(\App\Discussion::class, \App\Group::class);
+        return $this->hasManyThrough(\App\Models\Discussion::class, \App\Models\Group::class);
     }
 
     /**
@@ -336,7 +336,7 @@ class User extends Authenticatable
      */
     public function discussions()
     {
-        return $this->hasMany(\App\Discussion::class);
+        return $this->hasMany(\App\Models\Discussion::class);
     }
 
     /**
@@ -344,7 +344,7 @@ class User extends Authenticatable
      */
     public function comments()
     {
-        return $this->hasMany(\App\Comment::class);
+        return $this->hasMany(\App\Models\Comment::class);
     }
 
     /**
@@ -352,7 +352,7 @@ class User extends Authenticatable
      */
     public function files()
     {
-        return $this->hasMany(\App\File::class);
+        return $this->hasMany(\App\Models\File::class);
     }
 
     /**
@@ -360,7 +360,7 @@ class User extends Authenticatable
      */
     public function activities()
     {
-        return $this->hasMany(\App\Activity::class)->orderBy('created_at', 'desc');
+        return $this->hasMany(\App\Models\Activity::class)->orderBy('created_at', 'desc');
     }
 
     public function link()

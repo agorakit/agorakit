@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
-use App\Action;
-use App\Group;
+use App\Models\Action;
+use App\Models\Group;
 use App\Notifications\UpcomingAction;
-use App\User;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Notification;

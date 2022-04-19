@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Discussion;
-use App\Group;
+use App\Models\Discussion;
+use App\Models\Group;
 use App\Tag;
 use Illuminate\Http\Request;
 

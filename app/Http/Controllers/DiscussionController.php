@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Group;
+use App\Models\Group;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -41,7 +41,7 @@ class DiscussionController extends Controller
                 $groups = Auth::user()->groups()->pluck('groups.id');
             }
 
-            $discussions = \App\Discussion::with('userReadDiscussion', 'group', 'user', 'tags', 'comments')
+            $discussions = \App\Models\Discussion::with('userReadDiscussion', 'group', 'user', 'tags', 'comments')
             ->withCount('comments')
             ->whereIn('group_id', $groups)
             ->when($tag, function ($query) use ($tag) {
@@ -52,11 +52,11 @@ class DiscussionController extends Controller
             ->paginate(25);
         } else { // anon get public groups
 
-            $groups = \App\Group::public()->get()->pluck('id');
+            $groups = \App\Models\Group::public()->get()->pluck('id');
 
-            $discussions = \App\Discussion::with('group', 'user', 'tags')
+            $discussions = \App\Models\Discussion::with('group', 'user', 'tags')
             ->withCount('comments')
-            ->whereIn('group_id', \App\Group::public()->get()->pluck('id'))
+            ->whereIn('group_id', \App\Models\Group::public()->get()->pluck('id'))
             ->when($tag, function ($query) use ($tag) {
                 return $query->withAnyTags($tag);
             })
@@ -65,7 +65,7 @@ class DiscussionController extends Controller
             ->paginate(25);
         }
 
-        $tags = \App\Discussion::allTags();
+        $tags = \App\Models\Discussion::allTags();
         natcasesort($tags);
 
         return view('dashboard.discussions')

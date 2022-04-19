@@ -2,8 +2,8 @@
 
 namespace App\Notifications;
 
-use App\Group;
-use App\User;
+use App\Models\Group;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;

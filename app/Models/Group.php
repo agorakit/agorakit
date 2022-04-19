@@ -1,11 +1,11 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-use App\Action;
-use App\Activity;
-use App\File;
-use App\Invite;
+use App\Models\Action;
+use App\Models\Activity;
+use App\Models\File;
+use App\Models\Invite;
 use App\Traits\HasControlledTags;
 use App\Traits\HasStatus;
 use Carbon\Carbon;
@@ -104,7 +104,7 @@ class Group extends Model
      */
     public function users()
     {
-        return $this->belongsToMany(\App\User::class, 'membership')->where('membership', '>=', \App\Membership::MEMBER)->withTimestamps()->withPivot('membership');
+        return $this->belongsToMany(\App\Models\User::class, 'membership')->where('membership', '>=', \App\Models\Membership::MEMBER)->withTimestamps()->withPivot('membership');
     }
 
     /**
@@ -112,7 +112,7 @@ class Group extends Model
      */
     public function admins()
     {
-        return $this->belongsToMany(\App\User::class, 'membership')->where('membership', \App\Membership::ADMIN)->withTimestamps()->withPivot('membership');
+        return $this->belongsToMany(\App\Models\User::class, 'membership')->where('membership', \App\Models\Membership::ADMIN)->withTimestamps()->withPivot('membership');
     }
 
     /**
@@ -120,7 +120,7 @@ class Group extends Model
      */
     public function candidates()
     {
-        return $this->hasMany(\App\Membership::class)->where('membership', \App\Membership::CANDIDATE);
+        return $this->hasMany(\App\Models\Membership::class)->where('membership', \App\Models\Membership::CANDIDATE);
     }
 
     /**
@@ -128,7 +128,7 @@ class Group extends Model
      */
     public function user()
     {
-        return $this->belongsTo(\App\User::class)->withTrashed();
+        return $this->belongsTo(\App\Models\User::class)->withTrashed();
     }
 
     /**
@@ -137,18 +137,18 @@ class Group extends Model
     public function membership()
     {
         if (\Auth::check()) {
-            return $this->belongsToMany(\App\User::class, 'membership')
+            return $this->belongsToMany(\App\Models\User::class, 'membership')
             ->where('user_id', '=', \Auth::user()->id)
             ->withPivot('membership');
         } else {
-            return $this->belongsToMany(\App\User::class, 'membership')
+            return $this->belongsToMany(\App\Models\User::class, 'membership')
             ->withPivot('membership');
         }
     }
 
     public function memberships()
     {
-        return $this->hasMany(\App\Membership::class);
+        return $this->hasMany(\App\Models\Membership::class);
     }
 
     /**
@@ -156,7 +156,7 @@ class Group extends Model
      */
     public function discussions()
     {
-        return $this->hasMany(\App\Discussion::class);
+        return $this->hasMany(\App\Models\Discussion::class);
     }
 
     /**
@@ -194,7 +194,7 @@ class Group extends Model
     {
         if (\Auth::check()) {
             $member = $this->membership->first();
-            if ($member && $member->pivot->membership >= \App\Membership::MEMBER) {
+            if ($member && $member->pivot->membership >= \App\Models\Membership::MEMBER) {
                 return true;
             }
         }

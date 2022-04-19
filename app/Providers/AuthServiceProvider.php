@@ -13,13 +13,13 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'App\Model'                  => 'App\Policies\ModelPolicy',
-        \App\Action::class           => \App\Policies\ActionPolicy::class,
-        \App\Comment::class          => \App\Policies\CommentPolicy::class,
-        \App\Discussion::class       => \App\Policies\DiscussionPolicy::class,
-        \App\File::class             => \App\Policies\FilePolicy::class,
-        \App\Group::class            => \App\Policies\GroupPolicy::class,
-        \App\User::class             => \App\Policies\UserPolicy::class,
-        \App\Membership::class       => \App\Policies\MembershipPolicy::class,
+        \App\Models\Action::class           => \App\Policies\ActionPolicy::class,
+        \App\Models\Comment::class          => \App\Policies\CommentPolicy::class,
+        \App\Models\Discussion::class       => \App\Policies\DiscussionPolicy::class,
+        \App\Models\File::class             => \App\Policies\FilePolicy::class,
+        \App\Models\Group::class            => \App\Policies\GroupPolicy::class,
+        \App\Models\User::class             => \App\Policies\UserPolicy::class,
+        \App\Models\Membership::class       => \App\Policies\MembershipPolicy::class,
     ];
 
     /**

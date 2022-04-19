@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\File;
-use App\Group;
+use App\Models\File;
+use App\Models\Group;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;

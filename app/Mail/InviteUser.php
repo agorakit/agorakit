@@ -2,8 +2,8 @@
 
 namespace App\Mail;
 
-use App\Membership;
-use App\User;
+use App\Models\Membership;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;

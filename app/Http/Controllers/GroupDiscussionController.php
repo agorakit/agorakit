@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Discussion;
-use App\File;
-use App\Group;
+use App\Models\Discussion;
+use App\Models\File;
+use App\Models\Group;
 use Auth;
 use Carbon\Carbon;
 use Gate;
@@ -97,7 +97,7 @@ class GroupDiscussionController extends Controller
 
         // if no group is in the route, it means user chose the group using the dropdown
         if (! $group->exists) {
-            $group = \App\Group::find($request->get('group'));
+            $group = \App\Models\Group::find($request->get('group'));
             //if group is null, redirect to the discussion create page with error messages, saying
             //that you must select a group
             if (is_null($group)) {

@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Action;
-use App\User;
+use App\Models\Action;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ActionPolicy
@@ -30,8 +30,8 @@ class ActionPolicy
     /**
      * Determine whether the user can view the action.
      *
-     * @param \App\User   $user
-     * @param \App\Action $action
+     * @param \App\Models\User   $user
+     * @param \App\Models\Action $action
      *
      * @return mixed
      */

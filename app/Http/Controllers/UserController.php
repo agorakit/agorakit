@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Group;
+use App\Models\Group;
 use App\Mail\ContactUser;
 use App\Mail\UserConfirmation;
-use App\User;
+use App\Models\User;
 use Auth;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Gate;
@@ -32,10 +32,10 @@ class UserController extends Controller
             if (Auth::user()->getPreference('show') == 'all') {
                 // build a list of groups the user has access to
                 if (Auth::user()->isAdmin()) { // super admin sees everything
-                    $groups = \App\Group::get()
+                    $groups = \App\Models\Group::get()
                         ->pluck('id');
                 } else { // normal user get public groups + groups he is member of
-                    $groups = \App\Group::public()
+                    $groups = \App\Models\Group::public()
                         ->get()
                         ->pluck('id')
                         ->merge(Auth::user()->groups()->pluck('groups.id'));
@@ -126,7 +126,7 @@ class UserController extends Controller
             $title = $user->username.' '.trans('messages.user_profile');
 
             return view('users.show')
-                ->with('activities', $user->activities()->whereIn('group_id', \App\Group::public()->get()->pluck('id'))->paginate(10))
+                ->with('activities', $user->activities()->whereIn('group_id', \App\Models\Group::public()->get()->pluck('id'))->paginate(10))
                 ->with('user', $user)
                 ->with('tab', 'profile')
                 ->with('title', $title);
@@ -304,7 +304,7 @@ class UserController extends Controller
                 abort(500, 'Do not delete anonymous user, you fool :-)');
             }
 
-            $anonymous = \App\User::getAnonymousUser();
+            $anonymous = \App\Models\User::getAnonymousUser();
 
             if (is_null($anonymous)) {
                 abort(500, 'Can\'t load the anonymous user model, please run all migrations to create the anynmous special system user');

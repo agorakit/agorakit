@@ -11,7 +11,7 @@ class FillSlugToGroups extends Migration
      */
     public function up()
     {
-        foreach (\App\Group::all() as $group) {
+        foreach (\App\Models\Group::all() as $group) {
             $group->timestamps = false;
             $group->save();
         }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Group;
+use App\Models\Group;
 
 /**
  * Returns a json representation of models, for at.js mention system.

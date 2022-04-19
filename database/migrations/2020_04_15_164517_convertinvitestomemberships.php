@@ -1,7 +1,7 @@
 <?php
 
-use App\Group;
-use App\User;
+use App\Models\Group;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,7 +15,7 @@ class Convertinvitestomemberships extends Migration
      */
     public function up()
     {
-        foreach (\App\Invite::whereNull('claimed_at')->get() as $invite) {
+        foreach (\App\Models\Invite::whereNull('claimed_at')->get() as $invite) {
 
             //$this->info('converting invite to new membership');
 
@@ -26,8 +26,8 @@ class Convertinvitestomemberships extends Migration
                 if ($user->isMemberOf($group)) {
                     //$this->error('User already member : '.$invite->email);
                 } else {
-                    $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $group->id]);
-                    $membership->membership = \App\Membership::INVITED;
+                    $membership = \App\Models\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $group->id]);
+                    $membership->membership = \App\Models\Membership::INVITED;
                     $membership->save();
 
                     //$this->line('User added to membership invite : '.$invite->email);

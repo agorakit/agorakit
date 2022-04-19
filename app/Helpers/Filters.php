@@ -81,7 +81,7 @@ function highlightFiles($content)
     return preg_replace_callback(
         '/f:([0-9]+)/',
         function ($matches) {
-            $file = \App\File::find($matches[1]);
+            $file = \App\Models\File::find($matches[1]);
             if ($file) {
                 if (Gate::allows('view', $file)) {
                     return view('files.embed')
@@ -106,7 +106,7 @@ function highlightDiscussions($content)
     return preg_replace_callback(
         '/d:([0-9]+)/',
         function ($matches) {
-            $discussion = \App\Discussion::find($matches[1]);
+            $discussion = \App\Models\Discussion::find($matches[1]);
 
             if ($discussion) {
                 if (Gate::allows('view', $discussion)) {

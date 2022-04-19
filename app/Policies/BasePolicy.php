@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
-use App\Group;
-use App\Membership;
-use App\User;
+use App\Models\Group;
+use App\Models\Membership;
+use App\Models\User;
 
 /**
  * This policy provides a base method used by other policies.

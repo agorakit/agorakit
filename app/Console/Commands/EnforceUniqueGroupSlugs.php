@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Group;
+use App\Models\Group;
 use DB;
 use Illuminate\Console\Command;
 

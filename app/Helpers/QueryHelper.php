@@ -23,13 +23,13 @@ class QueryHelper
             $total = DB::select('select sum(total_comments) as count from discussions where discussions.group_id in
             (select id from groups where groups.id in
             (select group_id from membership where user_id = ? and membership.membership >= ?)
-            )', [Auth::user()->id, \App\Membership::MEMBER]);
+            )', [Auth::user()->id, \App\Models\Membership::MEMBER]);
 
             $read = DB::select('select sum(read_comments) as count from user_read_discussion where user_id = ? and discussion_id in
             (select id from discussions where group_id in
             (select group_id from membership where user_id = ? and membership.membership >= ?)
             )
-            ', [Auth::user()->id, Auth::user()->id, \App\Membership::MEMBER]);
+            ', [Auth::user()->id, Auth::user()->id, \App\Models\Membership::MEMBER]);
 
             $count = $total[0]->count - $read[0]->count;
             if ($count < 0) {
@@ -61,7 +61,7 @@ class QueryHelper
             order by updated_at desc
             limit 0, 50
 
-            ', [Auth::user()->id, Auth::user()->id, \App\Membership::MEMBER]);
+            ', [Auth::user()->id, Auth::user()->id, \App\Models\Membership::MEMBER]);
 
             return $discussions;
         }

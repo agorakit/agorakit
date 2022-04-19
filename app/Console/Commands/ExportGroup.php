@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Group;
+use App\Models\Group;
 use File;
 use Illuminate\Console\Command;
 use Storage;
@@ -42,7 +42,7 @@ class ExportGroup extends Command
     public function handle()
     {
         // load the group
-        $group = \App\Group::findOrFail($this->argument('group'));
+        $group = \App\Models\Group::findOrFail($this->argument('group'));
 
         // load related content. I know it cascades but this way I have a complete list of models I need to process
         $group->load([

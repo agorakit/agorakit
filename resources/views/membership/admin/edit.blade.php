@@ -27,13 +27,13 @@
 
                 {!! Form::select('membership_level',
                     [
-                        \App\Membership::ADMIN => trans('membership.admin'),
-                        \App\Membership::MEMBER => trans('membership.member'),
-                        \App\Membership::INVITED => trans('membership.invited'),
-                        \App\Membership::CANDIDATE => trans('membership.candidate'),
-                        \App\Membership::REMOVED => trans('membership.removed'),
-                        \App\Membership::DECLINED => trans('membership.declined'),
-                        \App\Membership::BLACKLISTED => trans('membership.blacklisted'),
+                        \App\Models\Membership::ADMIN => trans('membership.admin'),
+                        \App\Models\Membership::MEMBER => trans('membership.member'),
+                        \App\Models\Membership::INVITED => trans('membership.invited'),
+                        \App\Models\Membership::CANDIDATE => trans('membership.candidate'),
+                        \App\Models\Membership::REMOVED => trans('membership.removed'),
+                        \App\Models\Membership::DECLINED => trans('membership.declined'),
+                        \App\Models\Membership::BLACKLISTED => trans('membership.blacklisted'),
                     ],
                     $membership->membership, ['class' => 'form-control']) !!}
                 </div>

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Comment;
-use App\Discussion;
-use App\File;
-use App\Group;
+use App\Models\Comment;
+use App\Models\Discussion;
+use App\Models\File;
+use App\Models\Group;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -21,7 +21,7 @@ class CommentController extends Controller
     public function store(Request $request, Group $group, Discussion $discussion)
     {
         $this->authorize('create-comment', $group);
-        $comment = new \App\Comment();
+        $comment = new \App\Models\Comment();
         $comment->body = $request->input('body');
         $comment->user()->associate(\Auth::user());
 

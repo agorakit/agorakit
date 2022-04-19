@@ -13,8 +13,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //$users = \App\User::where('verified', 1)->get();
-        $users = \App\User::get();
+        //$users = \App\Models\User::where('verified', 1)->get();
+        $users = \App\Models\User::get();
 
         return view('admin.user.index')->with('users', $users);
     }

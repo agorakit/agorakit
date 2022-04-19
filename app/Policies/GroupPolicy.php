@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Group;
-use App\User;
+use App\Models\Group;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 /**
@@ -236,7 +236,7 @@ class GroupPolicy extends BasePolicy
             return true;
         } elseif ($group->group_type == $group::CLOSED) {
             // do we have an invite already for this group and user?
-            $invite = \App\Invite::where('email', $user->email)->where('group_id', $group->id)->count();
+            $invite = \App\Models\Invite::where('email', $user->email)->where('group_id', $group->id)->count();
             if ($invite == 1) {
                 return true;
             }

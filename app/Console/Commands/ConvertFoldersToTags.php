@@ -37,7 +37,7 @@ class ConvertFoldersToTags extends Command
      */
     public function handle()
     {
-        foreach (\App\File::all() as $file) {
+        foreach (\App\Models\File::all() as $file) {
             $this->info('Checking if there is something to do for file '.$file->name.' ('.$file->id.')');
 
             if ($file->isFile()) {

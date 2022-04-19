@@ -2,11 +2,11 @@
 
 namespace App\Console\Commands;
 
-use App\Discussion;
-use App\Group;
+use App\Models\Discussion;
+use App\Models\Group;
 use App\Mail\MailBounce;
-use App\Message;
-use App\User;
+use App\Models\Message;
+use App\Models\User;
 use Ddeboer\Imap\Message as ImapMessage;
 use Ddeboer\Imap\Server;
 use EmailReplyParser\EmailReplyParser;

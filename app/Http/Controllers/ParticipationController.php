@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Action;
-use App\Group;
-use App\Participation;
+use App\Models\Action;
+use App\Models\Group;
+use App\Models\Participation;
 use Illuminate\Http\Request;
 use URL;
 

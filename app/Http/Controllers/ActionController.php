@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Group;
+use App\Models\Group;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -46,10 +46,10 @@ class ActionController extends Controller
                     $groups = Auth::user()->groups()->pluck('groups.id');
                 }
             } else {
-                $groups = \App\Group::public()->get()->pluck('id');
+                $groups = \App\Models\Group::public()->get()->pluck('id');
             }
 
-            $actions = \App\Action::with('group')
+            $actions = \App\Models\Action::with('group')
                 ->where('start', '>=', Carbon::now()->subDay())
                 ->whereIn('group_id', $groups)
                 ->orderBy('start')
@@ -87,18 +87,18 @@ class ActionController extends Controller
                 $groups = Auth::user()->groups()->pluck('groups.id');
             }
         } else {
-            $groups = \App\Group::public()->get()->pluck('id');
+            $groups = \App\Models\Group::public()->get()->pluck('id');
         }
 
         // load of actions between start and stop provided by calendar js
         if ($request->has('start') && $request->has('end')) {
-            $actions = \App\Action::with('group')
+            $actions = \App\Models\Action::with('group')
                 ->where('start', '>', Carbon::parse($request->get('start')))
                 ->where('stop', '<', Carbon::parse($request->get('end')))
                 ->whereIn('group_id', $groups)
                 ->orderBy('start', 'asc')->get();
         } else {
-            $actions = \App\Action::with('group')
+            $actions = \App\Models\Action::with('group')
                 ->orderBy('start', 'asc')
                 ->whereIn('group_id', $groups)
                 ->get();

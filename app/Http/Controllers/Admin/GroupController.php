@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Group;
+use App\Models\Group;
 use App\Http\Controllers\Controller;
 
 class GroupController extends Controller

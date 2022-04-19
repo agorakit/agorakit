@@ -11,7 +11,7 @@ class UsersFillUsernames extends Migration
      */
     public function up()
     {
-        foreach (\App\User::all() as $user) {
+        foreach (\App\Models\User::all() as $user) {
             $user->timestamps = false;
             $user->save();
         }

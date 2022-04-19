@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Charts\AgorakitChart;
-use App\Group;
+use App\Models\Group;
 use Carbon\Carbon;
 use DB;
 
@@ -31,7 +31,7 @@ class GroupInsightsController extends Controller
         $charts[] = $chart;
 
         // Discussions
-        $results = \App\Discussion::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
+        $results = \App\Models\Discussion::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
             ->groupBy('yearmonth')
             ->orderBy('yearmonth', 'asc')
             ->where('group_id', $group->id)
@@ -51,7 +51,7 @@ class GroupInsightsController extends Controller
         $charts[] = $chart;
 
         // Actions
-        $results = \App\Action::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
+        $results = \App\Models\Action::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
             ->groupBy('yearmonth')
             ->orderBy('yearmonth', 'asc')
             ->where('group_id', $group->id)
@@ -71,7 +71,7 @@ class GroupInsightsController extends Controller
         $charts[] = $chart;
 
         // Members
-        $results = \App\Membership::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
+        $results = \App\Models\Membership::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
             ->groupBy('yearmonth')
             ->orderBy('yearmonth', 'asc')
             ->where('group_id', $group->id)
@@ -91,7 +91,7 @@ class GroupInsightsController extends Controller
         $charts[] = $chart;
 
         // Files
-        $results = \App\File::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
+        $results = \App\Models\File::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
             ->groupBy('yearmonth')
             ->orderBy('yearmonth', 'asc')
             ->where('group_id', $group->id)
@@ -111,7 +111,7 @@ class GroupInsightsController extends Controller
         $charts[] = $chart;
 
         // Evolution of storage use
-        $results = \App\File::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, sum(filesize) as data')
+        $results = \App\Models\File::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, sum(filesize) as data')
             ->groupBy('yearmonth')
             ->orderBy('yearmonth', 'asc')
             ->where('group_id', $group->id)

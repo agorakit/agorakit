@@ -1,11 +1,11 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\Traits\HasControlledTags;
 use App\Traits\HasStatus;
-use App\User;
-use App\UserReadDiscussion;
+use App\Models\User;
+use App\Models\UserReadDiscussion;
 use Auth;
 use Carbon\Carbon;
 use Cviebrock\EloquentTaggable\Taggable;
@@ -107,12 +107,12 @@ class Discussion extends Model
 
     public function group()
     {
-        return $this->belongsTo(\App\Group::class)->withTrashed();
+        return $this->belongsTo(\App\Models\Group::class)->withTrashed();
     }
 
     public function user()
     {
-        return $this->belongsTo(\App\User::class)->withTrashed();
+        return $this->belongsTo(\App\Models\User::class)->withTrashed();
     }
 
     public function votes()
@@ -122,13 +122,13 @@ class Discussion extends Model
 
     public function comments()
     {
-        return $this->hasMany(\App\Comment::class);
+        return $this->hasMany(\App\Models\Comment::class);
     }
 
     public function userReadDiscussion()
     {
         if (\Auth::check()) {
-            return $this->hasMany(\App\UserReadDiscussion::class)->where('user_id', '=', \Auth::user()->id);
+            return $this->hasMany(\App\Models\UserReadDiscussion::class)->where('user_id', '=', \Auth::user()->id);
         } else {
             abort(500, 'Need to be logged in to access this userReadDiscussion relation');
         }

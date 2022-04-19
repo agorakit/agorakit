@@ -26,34 +26,34 @@
         Status : {{$message->status}}
 
         (
-        @if ($message->status == App\Message::POSTED)
+        @if ($message->status == App\Models\Message::POSTED)
         Posted
         @endif
-        @if ($message->status == App\Message::NEEDS_VALIDATION)
+        @if ($message->status == App\Models\Message::NEEDS_VALIDATION)
         Needs validation
         @endif
 
-        @if ($message->status == App\Message::CREATED)
+        @if ($message->status == App\Models\Message::CREATED)
         Created
         @endif
 
-        @if ($message->status == App\Message::BOUNCED)
+        @if ($message->status == App\Models\Message::BOUNCED)
         Bounced
         @endif
 
-        @if ($message->status == App\Message::INVALID)
+        @if ($message->status == App\Models\Message::INVALID)
         Invalid
         @endif
 
-        @if ($message->status == App\Message::AUTOMATED)
+        @if ($message->status == App\Models\Message::AUTOMATED)
         Automated
         @endif
 
-        @if ($message->status == App\Message::ERROR)
+        @if ($message->status == App\Models\Message::ERROR)
         Error
         @endif
 
-        @if ($message->status == App\Message::SPAM)
+        @if ($message->status == App\Models\Message::SPAM)
         Spam
         @endif
         )

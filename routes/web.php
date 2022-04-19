@@ -63,8 +63,8 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/mailable', function () {
         $notification = new App\Mail\Notification();
-        $notification->user = \App\User::first();
-        $notification->group = \App\Group::first();
+        $notification->user = \App\Models\User::first();
+        $notification->group = \App\Models\Group::first();
         return $notification;
     });
     */
@@ -372,12 +372,12 @@ Route::group(['middleware' => ['web']], function () {
         // mailable preview, for devs mainly
         Route::get('admin/mailable', function () {
             $notif = new App\Mail\Notification();
-            $notif->user = \App\User::first();
-            $notif->group = \App\Group::first();
-            $notif->discussions = \App\Discussion::take(5)->get();
-            $notif->actions = \App\Action::take(5)->get();
-            $notif->users = \App\User::take(5)->get();
-            $notif->files = \App\File::take(5)->get();
+            $notif->user = \App\Models\User::first();
+            $notif->group = \App\Models\Group::first();
+            $notif->discussions = \App\Models\Discussion::take(5)->get();
+            $notif->actions = \App\Models\Action::take(5)->get();
+            $notif->users = \App\Models\User::take(5)->get();
+            $notif->files = \App\Models\File::take(5)->get();
 
             return $notif;
         });

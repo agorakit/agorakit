@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\User;
+use App\Models\User;
 use DB;
 use Illuminate\Console\Command;
 

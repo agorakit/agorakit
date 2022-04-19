@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Spatie\IcalendarGenerator\Components\Calendar;
@@ -36,7 +36,7 @@ class UserIcalController extends Controller
         $groups = $user->groups()->pluck('groups.id');
 
         // returns actions from the last 60 days
-        $actions = \App\Action::with('group')
+        $actions = \App\Models\Action::with('group')
             ->whereIn('group_id', $groups)
             ->where('start', '>=', Carbon::now()->subDays(60))
             ->get();

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Watson\Validating\ValidatingTrait;
@@ -27,11 +27,11 @@ class Invite extends Model
 
     public function user()
     {
-        return $this->belongsTo(\App\User::class);
+        return $this->belongsTo(\App\Models\User::class);
     }
 
     public function group()
     {
-        return $this->belongsTo(\App\Group::class);
+        return $this->belongsTo(\App\Models\Group::class);
     }
 }

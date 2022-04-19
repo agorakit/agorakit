@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-use App\Group;
+use App\Models\Group;
 use App\Traits\HasControlledTags;
-use App\User;
+use App\Models\User;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;

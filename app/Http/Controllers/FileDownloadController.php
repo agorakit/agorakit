@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\File;
-use App\Group;
+use App\Models\File;
+use App\Models\Group;
 use Illuminate\Http\Response;
 use Image;
 use Storage;

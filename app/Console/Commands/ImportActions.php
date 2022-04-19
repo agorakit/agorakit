@@ -64,7 +64,7 @@ class ImportActions extends Command
 
         foreach ($actions_data as $action_data) {
             if (isset($action_data['id'])) {
-                $action = \App\Action::firstOrNew(['id' => $action_data['id']]);
+                $action = \App\Models\Action::firstOrNew(['id' => $action_data['id']]);
 
                 $action->name = $action_data['name'];
                 $action->body = $action_data['body'];
@@ -77,7 +77,7 @@ class ImportActions extends Command
 
                 // create the group if not existing yet and associate it.
                 if (! empty($action_data['group_id']) && ! empty($action_data['group'])) {
-                    $group = \App\Group::firstOrNew(['id' => $action_data['group_id'] + $this->id_offset]);
+                    $group = \App\Models\Group::firstOrNew(['id' => $action_data['group_id'] + $this->id_offset]);
                     $group->name = $action_data['group'];
                     $group->body = 'No description';
                     $group->save();
