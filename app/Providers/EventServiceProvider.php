@@ -13,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\ContentCreated' => [
-            'App\Listeners\NotifyMentionedUsers', 'App\Listeners\NotifyInstantly',
+        \App\Events\ContentCreated::class => [
+            \App\Listeners\NotifyMentionedUsers::class, \App\Listeners\NotifyInstantly::class,
         ],
 
     ];
