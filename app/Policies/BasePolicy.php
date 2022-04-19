@@ -20,12 +20,12 @@ class BasePolicy
         $membership = Membership::where('user_id', '=', $user->id)->where('group_id', '=', $group->id)->first();
 
         // return empty collection if no memberhsip found
-        if (!$membership) {
+        if (! $membership) {
             return collect();
         }
 
         // ? needed ?
-        if (!$membership->exists) {
+        if (! $membership->exists) {
             return collect();
         }
 

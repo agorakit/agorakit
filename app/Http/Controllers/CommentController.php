@@ -33,7 +33,6 @@ class CommentController extends Controller
 
         // handle attached file to comment
         if ($request->hasFile('files')) {
-
             foreach ($request->file('files') as $uploaded_file) {
                 // create a file instance
                 $file = new File();
@@ -47,7 +46,7 @@ class CommentController extends Controller
                 $file->addToStorage($uploaded_file);
 
                 // add an f:xx to the comment so it is shown on display
-                $comment->body = $comment->body . '<p>f:' . $file->id . '</p>';
+                $comment->body = $comment->body.'<p>f:'.$file->id.'</p>';
             }
         }
 
@@ -111,7 +110,7 @@ class CommentController extends Controller
                 $file->addToStorage($uploaded_file);
 
                 // add an f:xx to the comment so it is shown on display
-                $comment->body = $comment->body . '<p>f:' . $file->id . '</p>';
+                $comment->body = $comment->body.'<p>f:'.$file->id.'</p>';
             }
         }
 
@@ -173,7 +172,6 @@ class CommentController extends Controller
             ->with('comment', $comment)
             ->with('tab', 'discussion');
     }
-
 
     /**
      * This function is called by the comment polling code

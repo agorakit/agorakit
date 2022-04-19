@@ -6,10 +6,10 @@ use App\Discussion;
 use App\File;
 use App\Group;
 use Auth;
-use URL;
 use Carbon\Carbon;
 use Gate;
 use Illuminate\Http\Request;
+use URL;
 
 class GroupDiscussionController extends Controller
 {
@@ -56,7 +56,7 @@ class GroupDiscussionController extends Controller
         $discussions = $discussions->paginate(50);
 
         return view('discussions.index')
-            ->with('title', $group->name . ' - ' . trans('messages.discussions'))
+            ->with('title', $group->name.' - '.trans('messages.discussions'))
             ->with('discussions', $discussions)
             ->with('tags', $tags)
             ->with('group', $group)
@@ -96,7 +96,7 @@ class GroupDiscussionController extends Controller
     {
 
         // if no group is in the route, it means user chose the group using the dropdown
-        if (!$group->exists) {
+        if (! $group->exists) {
             $group = \App\Group::find($request->get('group'));
             //if group is null, redirect to the discussion create page with error messages, saying
             //that you must select a group
@@ -113,7 +113,7 @@ class GroupDiscussionController extends Controller
         $discussion->total_comments = 1; // the discussion itself is already a comment
         $discussion->user()->associate(Auth::user());
 
-        if (!$group->discussions()->save($discussion)) {
+        if (! $group->discussions()->save($discussion)) {
             // Oops.
             return redirect()->route('groups.discussions.create', $group)
                 ->withErrors($discussion->getErrors())
@@ -134,7 +134,7 @@ class GroupDiscussionController extends Controller
             $file->addToStorage($request->file('file'));
 
             // add an f:xx to the comment so it is shown on display
-            $discussion->body = $discussion->body . '<p>f:' . $file->id . '</p>';
+            $discussion->body = $discussion->body.'<p>f:'.$file->id.'</p>';
             $discussion->save();
         }
 
@@ -165,7 +165,7 @@ class GroupDiscussionController extends Controller
         $this->authorize('view', $discussion);
 
         // if user is logged in, we update the read count for this discussion.
-        // just before that, we save the number of already read comments in $read_comments 
+        // just before that, we save the number of already read comments in $read_comments
         // to be used in the view to scroll to the first unread comments
         if (Auth::check()) {
             $unread_count = $discussion->unReadCount();
@@ -184,12 +184,12 @@ class GroupDiscussionController extends Controller
                 $comment->isFirstUnread = true;
             }
         }
-        
+
        // {{$comment_key}} / {{$read_count}} / {{$total_count}}
        */
 
         return view('discussions.show')
-            ->with('title', $group->name . ' - ' . $discussion->name)
+            ->with('title', $group->name.' - '.$discussion->name)
             ->with('discussion', $discussion)
             ->with('unread_count', $unread_count)
             ->with('read_count', $read_count)
@@ -247,7 +247,7 @@ class GroupDiscussionController extends Controller
             $file->addToStorage($request->file('file'));
 
             // add an f:xx to the comment so it is shown on display
-            $discussion->body = $discussion->body . '<p>f:' . $file->id . '</p>';
+            $discussion->body = $discussion->body.'<p>f:'.$file->id.'</p>';
         }
 
         $discussion->save();
@@ -266,7 +266,7 @@ class GroupDiscussionController extends Controller
     public function destroyConfirm(Request $request, Group $group, Discussion $discussion)
     {
         $this->authorize('delete', $discussion);
-        
+
         session()->put('url.intended', URL::previous());
 
         return view('discussions.delete')
@@ -318,7 +318,7 @@ class GroupDiscussionController extends Controller
     public function archive(Group $group, Discussion $discussion)
     {
         $this->authorize('archive', $discussion);
-        
+
         $discussion->toggleArchive();
         $discussion->timestamps = false;
         $discussion->save();

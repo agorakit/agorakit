@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Setting;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Image;
 use Storage;
-use Illuminate\Support\Str;
-use App\Setting;
 
 class SettingsController extends Controller
 {
@@ -58,12 +58,8 @@ class SettingsController extends Controller
             setting()->set('notify_admins_on_group_create', $request->has('notify_admins_on_group_create') ? 1 : 0);
             setting()->set('user_can_register', $request->has('user_can_register') ? 1 : 0);
 
-
-
-
             setting()->setArray('user_tags', $request->get('user_tags'));
             setting()->setArray('group_tags', $request->get('group_tags'));
-
 
             setting()->set('custom_footer', $request->get('custom_footer'));
 
@@ -71,11 +67,11 @@ class SettingsController extends Controller
             if ($request->hasFile('logo')) {
                 Storage::makeDirectory('public/logo');
 
-                Image::make($request->file('logo'))->fit(128, 128)->save(storage_path() . '/app/public/logo/favicon.png');
+                Image::make($request->file('logo'))->fit(128, 128)->save(storage_path().'/app/public/logo/favicon.png');
 
-                Image::make($request->file('logo'))->fit(640, 640)->save(storage_path() . '/app/public/logo/logo.jpg');
+                Image::make($request->file('logo'))->fit(640, 640)->save(storage_path().'/app/public/logo/logo.jpg');
 
-                Image::make($request->file('logo'))->widen(1024)->save(storage_path() . '/app/logo.png');
+                Image::make($request->file('logo'))->widen(1024)->save(storage_path().'/app/logo.png');
             }
 
             flash('Settings saved');

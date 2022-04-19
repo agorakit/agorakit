@@ -22,8 +22,8 @@ class MentionController extends Controller
 
         foreach ($users as $user) {
             $simple_user['name'] = $user->name;
-            $simple_user['id'] = '@' . $user->username;
-            $simple_user['userid'] =  $user->id;
+            $simple_user['id'] = '@'.$user->username;
+            $simple_user['userid'] = $user->id;
             $simple_users[] = $simple_user;
         }
 

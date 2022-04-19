@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Avatar;
 use File;
 use Image;
 use Redirect;
-use Avatar;
 use Storage;
 
 class UserCoverController extends Controller
 {
     public function __construct()
     {
-         $this->middleware('cache.headers:private,max-age=300;etag');
+        $this->middleware('cache.headers:private,max-age=300;etag');
     }
 
     public function show(User $user, $size = 'medium')
@@ -21,7 +21,7 @@ class UserCoverController extends Controller
 
         // do we have an uploaded avatar ?
         $avatar_path = storage_path().'/app/users/'.$user->id.'/cover.jpg';
-        if (!File::exists($avatar_path)) {
+        if (! File::exists($avatar_path)) {
 
             // if not we generate one
             Storage::disk('local')->makeDirectory('users/'.$user->id);
@@ -31,8 +31,6 @@ class UserCoverController extends Controller
             ->save(storage_path().'/app/users/'.$user->id.'/generated_cover.png');
             $avatar_path = storage_path().'/app/users/'.$user->id.'/generated_cover.png';
         }
-
-
 
         if (File::exists($avatar_path)) {
             if ($size == 'small') {

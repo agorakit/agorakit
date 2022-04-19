@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Action;
 use App\Discussion;
 use App\File;
+use App\Group;
 use App\Tag;
 use App\User;
-use App\Group;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -37,14 +37,11 @@ class TagController extends Controller
             }
         }
 
-
-
         // Add all tags used on users
         $tags = $tags->merge(User::allTagModels());
 
         // filter and sort
         $tags = $tags->unique('normalized')->sortBy('normalized');
-
 
         return view('dashboard.tags-index')
             ->with('title', 'Tags')

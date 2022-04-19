@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
 use App\Group;
+use Auth;
 use Illuminate\Http\Request;
 
 /**
@@ -27,16 +27,16 @@ class DiscussionController extends Controller
                 if (Auth::user()->isAdmin()) { // super admin sees everything
                     $groups = Group::get()
                     ->pluck('id');
-                } 
-            } 
+                }
+            }
 
             if (Auth::user()->getPreference('show', 'my') == 'all') {
-                    $groups = Group::public()
+                $groups = Group::public()
                     ->get()
                     ->pluck('id')
                     ->merge(Auth::user()->groups()->pluck('groups.id'));
-            } 
-            
+            }
+
             if (Auth::user()->getPreference('show', 'my') == 'my') {
                 $groups = Auth::user()->groups()->pluck('groups.id');
             }

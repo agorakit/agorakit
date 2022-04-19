@@ -2,19 +2,18 @@
 
 namespace App;
 
-use App\Traits\HasStatus;
 use App\Traits\HasControlledTags;
+use App\Traits\HasStatus;
+use App\User;
+use App\UserReadDiscussion;
+use Auth;
+use Carbon\Carbon;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Nicolaslopezj\Searchable\SearchableTrait;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
-
-use App\User;
-use App\UserReadDiscussion;
-use Auth;
-use Carbon\Carbon;
 
 class Discussion extends Model
 {
@@ -27,20 +26,28 @@ class Discussion extends Model
     use HasControlledTags;
 
     protected $rules = [
-    'name'     => 'required',
-    'body'     => 'required',
-    'user_id'  => 'required|exists:users,id',
-    'group_id' => 'required|exists:groups,id',
+        'name'     => 'required',
+        'body'     => 'required',
+        'user_id'  => 'required|exists:users,id',
+        'group_id' => 'required|exists:groups,id',
     ];
 
     protected $keepRevisionOf = ['name', 'body', 'status'];
+
     protected $table = 'discussions';
+
     protected $fillable = ['name', 'body', 'group_id'];
+
     public $timestamps = true;
+
     public $unreadcounter;
+
     public $read_comments;
+
     protected $dates = ['deleted_at'];
+
     protected $casts = ['user_id' => 'integer'];
+
     public $modelName = 'discussion';
 
     /**
@@ -72,7 +79,7 @@ class Discussion extends Model
         }
 
         $userReadDiscussion = $this->userReadDiscussion->first();
-        
+
         /*
         $userReadDiscussion = UserReadDiscussion::where('user_id', Auth::user()->id)
         ->where('discussion_id', $this->id)
@@ -80,10 +87,10 @@ class Discussion extends Model
         */
 
         if ($userReadDiscussion) {
-            return $this->comments->count() - $userReadDiscussion->read_comments +1;
+            return $this->comments->count() - $userReadDiscussion->read_comments + 1;
         }
 
-        return $this->comments->count() +1;
+        return $this->comments->count() + 1;
     }
 
     /**
@@ -94,6 +101,7 @@ class Discussion extends Model
         $userReadDiscussion = UserReadDiscussion::firstOrNew(['user_id' => Auth::user()->id, 'discussion_id'=> $this->id]);
         $userReadDiscussion->read_comments = $this->comments->count() + 1;
         $userReadDiscussion->read_at = Carbon::now();
+
         return $userReadDiscussion->save();
     }
 
@@ -131,17 +139,15 @@ class Discussion extends Model
         return route('groups.discussions.show', [$this->group, $this]);
     }
 
-
     /**
-    * Returns the inbox email of this discussion (if it has one).
-    * A discussion has an inbox if INBOX_DRIVER is not null in .env
-    */
+     * Returns the inbox email of this discussion (if it has one).
+     * A discussion has an inbox if INBOX_DRIVER is not null in .env
+     */
     public function inbox()
     {
         if (config('agorakit.inbox_driver')) {
-            return config('agorakit.inbox_prefix') . 'reply-' . $this->id . config('agorakit.inbox_suffix');
-        }
-        else {
+            return config('agorakit.inbox_prefix').'reply-'.$this->id.config('agorakit.inbox_suffix');
+        } else {
             return false;
         }
     }

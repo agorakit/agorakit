@@ -2,29 +2,27 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use App\Group;
-use App\User;
-use App\Membership;
 use App\Action;
-use App\Discussion;
 use App\Comment;
-use App\Reaction;
+use App\Discussion;
 use App\File;
-use Storage;
-use ZipArchive;
-use \Cviebrock\EloquentSluggable\Services\SlugService;
-
+use App\Group;
+use App\Membership;
+use App\Reaction;
+use App\User;
+use Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage as FacadesStorage;
 use Illuminate\Support\Str;
+use Storage;
+use ZipArchive;
 
 /**
  * Import content command
- * 
+ *
  * This might look a bit ugly and unoptimized but at least it's easy to understand what's going on.
- * 
+ *
  *  Import expects a zip file in [your app installation]/storage/app/exports/[group id]/group.zip
- * 
  */
 class ImportGroup extends Command
 {
@@ -42,8 +40,8 @@ class ImportGroup extends Command
      */
     protected $description = 'Import a group from an Agorakit export zip file';
 
-
     protected $group;
+
     protected $zip;
 
     /**
@@ -66,28 +64,25 @@ class ImportGroup extends Command
 
         // open the zip file
 
-        $zipfilename = storage_path('app/exports/' . $this->argument('group') . '/group.zip');
+        $zipfilename = storage_path('app/exports/'.$this->argument('group').'/group.zip');
 
         $this->zip = new ZipArchive;
 
-        if ($this->zip->open($zipfilename) === TRUE) {
-
-            $this->line('Extracting zip file : ' . $zipfilename);
+        if ($this->zip->open($zipfilename) === true) {
+            $this->line('Extracting zip file : '.$zipfilename);
 
             // extract group content
-            $this->zip->extractTo(storage_path('app/imports/' . $this->argument('group')));
+            $this->zip->extractTo(storage_path('app/imports/'.$this->argument('group')));
             $this->zip->close();
         } else {
-            $this->error('Could not open zip file or file not found at ' . $zipfilename);
+            $this->error('Could not open zip file or file not found at '.$zipfilename);
             die();
         }
 
         $this->newLine();
 
-
         // parse json
-        $data = json_decode(Storage::get('imports/' . $this->argument('group') . '/group.json'));
-
+        $data = json_decode(Storage::get('imports/'.$this->argument('group').'/group.json'));
 
         // create group
         $group = $this->createGroup($data);
@@ -98,52 +93,45 @@ class ImportGroup extends Command
         // store original group id, we'll need it
         $this->originalGroupId = $data->id;
 
-
         // handle memberships
         foreach ($data->memberships as $membership) {
             if ($this->createMembership($membership)) {
-                $this->info('Created membership for ' . $membership->user->name);
+                $this->info('Created membership for '.$membership->user->name);
             }
         }
 
         $this->newLine();
-
 
         // handle actions & participations
         foreach ($data->actions as $actionData) {
             if ($this->createAction($actionData)) {
-                $this->info('Created action called ' . $actionData->name);
+                $this->info('Created action called '.$actionData->name);
             }
         }
 
         $this->newLine();
-
 
         // handle discussions, comments and reactions
         foreach ($data->discussions as $discussionData) {
             if ($this->createDiscussion($discussionData)) {
-                $this->info('Created discussion called ' . $discussionData->name);
+                $this->info('Created discussion called '.$discussionData->name);
             }
         }
 
         $this->newLine();
-
-
 
         // handle files
         foreach ($data->files as $fileData) {
             if ($this->createFile($fileData)) {
-                $this->info('Created file called ' . $fileData->name);
+                $this->info('Created file called '.$fileData->name);
             }
         }
 
         $this->newLine();
 
-
         // handle user's avatar
 
         // handle group cover
-
 
         // delete tmp files
 
@@ -185,9 +173,11 @@ class ImportGroup extends Command
 
         if ($user->isValid()) {
             $user->save();
+
             return $user;
         } else {
             $this->error($user->getErrors());
+
             return false;
         }
     }
@@ -196,7 +186,7 @@ class ImportGroup extends Command
      * Create a new group based on passed data
      * Does not save the group yet
      */
-    function createGroup($data)
+    public function createGroup($data)
     {
         $group = new Group;
         $group->name = $data->name;
@@ -209,7 +199,6 @@ class ImportGroup extends Command
         $group->longitude = $data->longitude;
         $group->settings = (array) $data->settings;
 
-
         // regenerate a slug just in case it's already taken
         $slug = SlugService::createSlug(Group::class, 'slug', $data->slug);
 
@@ -218,29 +207,29 @@ class ImportGroup extends Command
 
         $user = $this->createUser($data->user);
         $group->user()->associate($user);
-        $group->name = $group->name . ' (imported)';
+        $group->name = $group->name.' (imported)';
 
         if ($group->isValid()) {
             $group->save();
+
             return $group;
         } else {
             $this->error($group->getErrors());
+
             return false;
         }
     }
 
-
     /**
      * Create a new membership based on a json parsed array $data
      */
-    function createMembership($data)
+    public function createMembership($data)
     {
         $membership = new Membership;
         $membership->group()->associate($this->group);
 
-        // this is our group member : 
+        // this is our group member :
         $user = $this->createUser($data->user);
-
 
         $membership->user()->associate($user);
 
@@ -254,9 +243,11 @@ class ImportGroup extends Command
 
         if ($membership->isValid()) {
             $membership->save();
+
             return $membership;
         } else {
             $this->error($membership->getErrors());
+
             return false;
         }
     }
@@ -264,12 +255,11 @@ class ImportGroup extends Command
     /**
      * Create a new action based on a json parsed array $data
      */
-    function createAction($data)
+    public function createAction($data)
     {
         $action = new Action;
 
         $user = $this->createUser($data->user);
-
 
         $action->group_id = $this->group->id;
         $action->user_id = $user->id;
@@ -285,9 +275,6 @@ class ImportGroup extends Command
         $action->location = $data->location;
         $action->latitude = $data->latitude;
         $action->longitude = $data->longitude;
-
-
-
 
         if ($action->isValid()) {
             $action->save();
@@ -311,20 +298,19 @@ class ImportGroup extends Command
             return $action;
         } else {
             $this->error($action->getErrors());
+
             return false;
         }
     }
 
-
     /**
      * Create a new discussion based on a json parsed array $data
      */
-    function createDiscussion($data)
+    public function createDiscussion($data)
     {
         $discussion = new Discussion;
 
         $user = $this->createUser($data->user);
-
 
         $discussion->group_id = $this->group->id;
         $discussion->user_id = $user->id;
@@ -338,7 +324,6 @@ class ImportGroup extends Command
         $discussion->status = $data->status;
         $discussion->total_comments = $data->total_comments;
 
-
         if ($discussion->isValid()) {
             $discussion->save();
 
@@ -347,19 +332,18 @@ class ImportGroup extends Command
                 $this->createComment($discussion, $commentData);
             }
 
-
             return $discussion;
         } else {
             $this->error($discussion->getErrors());
+
             return false;
         }
     }
 
-
     /**
      * Create a new comment based on a json parsed array $data
      */
-    function createComment(Discussion $discussion, $data)
+    public function createComment(Discussion $discussion, $data)
     {
         $comment = new Comment;
 
@@ -382,19 +366,18 @@ class ImportGroup extends Command
                 $this->createReaction($comment, $reactionData);
             }
 
-
             return $comment;
         } else {
             $this->error($discussion->getErrors());
+
             return false;
         }
     }
 
-
     /**
      * Create a new reaction based on a json parsed array $data
      */
-    function createReaction($model, $data)
+    public function createReaction($model, $data)
     {
         $reaction = new Reaction;
 
@@ -412,24 +395,23 @@ class ImportGroup extends Command
 
         if ($reaction->isValid()) {
             $reaction->save();
+
             return $reaction;
         } else {
             $this->error($reaction->getErrors());
+
             return false;
         }
     }
 
-
-
     /**
      * Create a new file based on a json parsed array $data
      */
-    function createFile($data)
+    public function createFile($data)
     {
         $file = new File;
 
         $user = $this->createUser($data->user);
-
 
         $file->group_id = $this->group->id;
         $file->user_id = $user->id;
@@ -448,26 +430,24 @@ class ImportGroup extends Command
         $file->parent_id = $data->parent_id;
         $file->status = $data->status;
 
-
-
         if ($file->isValid()) {
             $file->save();
 
             // now we have a file let's handle the content
-            // this part is tightly coupled to the way files are stored on disk, there is something wrong here but it does the job. 
+            // this part is tightly coupled to the way files are stored on disk, there is something wrong here but it does the job.
             // Should be a responsability of the file model... well it's an interim solution while importing content, it will be dirty
-            $original_path = ('imports/' . $this->argument('group') . '/files/' . $data->id . '/' . basename($file->path));
-            
+            $original_path = ('imports/'.$this->argument('group').'/files/'.$data->id.'/'.basename($file->path));
+
             // move the file to it's new location
 
             // change the path
-            
-            // profit
 
+            // profit
 
             return $file;
         } else {
             $this->error($file->getErrors());
+
             return false;
         }
     }

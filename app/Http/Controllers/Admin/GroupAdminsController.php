@@ -5,22 +5,18 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Membership;
 
-
 class GroupAdminsController extends Controller
 {
     /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-
         $memberships = Membership::where('membership', Membership::ADMIN)
         ->with('user')
         ->get();
-
-
 
         $users = collect();
 

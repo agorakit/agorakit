@@ -2,26 +2,20 @@
 
 namespace App;
 
+use App\Membership;
 use App\Traits\HasControlledTags;
+use Carbon\Carbon;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentTaggable\Taggable;
+use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Nicolaslopezj\Searchable\SearchableTrait;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
-use \Cviebrock\EloquentSluggable\Services\SlugService;
-use Illuminate\Support\Str;
-use Carbon\Carbon;
-use Illuminate\Contracts\Translation\HasLocalePreference;
-
-
-
-use App\Membership;
-
-
-
 
 class User extends Authenticatable
 {
@@ -33,7 +27,6 @@ class User extends Authenticatable
     use Taggable;
     use SearchableTrait;
     use HasControlledTags;
-
 
     protected $fillable = [
         'name', 'username', 'email', 'password', 'provider', 'provider_id',
@@ -74,7 +67,6 @@ class User extends Authenticatable
             'users.body'    => 10,
         ],
     ];
-
 
     /**
      * The database table used by the model.
@@ -123,10 +115,10 @@ class User extends Authenticatable
         if ($value) {
             return $value;
         }
-        $name = explode("@", $this->email);
+        $name = explode('@', $this->email);
+
         return $name[0];
     }
-
 
     /**
      * Force sluggification of username
@@ -148,13 +140,13 @@ class User extends Authenticatable
             $user->token = str_random(30);
 
             // first created user is automatically an admin
-            if (\App\User::count() == 0) {
+            if (self::count() == 0) {
                 $user->admin = 1;
             }
         });
     }
 
-    /** 
+    /**
      * Re-generates token if none is set
      */
     public function getToken()
@@ -164,10 +156,10 @@ class User extends Authenticatable
         } else {
             $this->token = str_random(30);
             $this->save();
+
             return $this->token;
         }
     }
-
 
     /**
      * Confirm the user and invalidate token
@@ -191,9 +183,9 @@ class User extends Authenticatable
                 return true;
             }
         }
+
         return false;
     }
-
 
     /**
      * Returns true if the user is admin of $group
@@ -206,6 +198,7 @@ class User extends Authenticatable
                 return true;
             }
         }
+
         return false;
     }
 
@@ -219,6 +212,7 @@ class User extends Authenticatable
                 return true;
             }
         }
+
         return false;
     }
 
@@ -258,7 +252,7 @@ class User extends Authenticatable
 
     public function scopeActive($query)
     {
-        return $query->where('users.updated_at', '>',  Carbon::now()->subMonths(3)->toDateTimeString());
+        return $query->where('users.updated_at', '>', Carbon::now()->subMonths(3)->toDateTimeString());
     }
 
     /**
@@ -281,8 +275,6 @@ class User extends Authenticatable
         return $this->belongsToMany(\App\Action::class);
     }
 
-
-
     public function isAttending(Action $action)
     {
         $participation = Participation::firstOrNew(['user_id' => $this->id, 'action_id' => $action->id]);
@@ -292,7 +284,6 @@ class User extends Authenticatable
             return false;
         }
     }
-
 
     public function isNotAttending(Action $action)
     {
@@ -314,7 +305,6 @@ class User extends Authenticatable
         }
     }
 
-
     public function participation(Action $action)
     {
         return Participation::firstOrNew(['user_id' => $this->id, 'action_id' => $action->id]);
@@ -335,8 +325,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(Membership::class)->where('membership.membership', Membership::INVITED);
     }
-
-
 
     public function discussionsSubscribed()
     {
@@ -384,7 +372,7 @@ class User extends Authenticatable
     // TODO refactor this to use a user service layer or something
     public static function getAnonymousUser()
     {
-        $anonymous = \App\User::firstOrNew(['email' => 'anonymous@agorakit.org']);
+        $anonymous = self::firstOrNew(['email' => 'anonymous@agorakit.org']);
         if ($anonymous->exists()) {
             return $anonymous;
         }

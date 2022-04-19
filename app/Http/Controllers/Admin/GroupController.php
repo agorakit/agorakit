@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Group;
-
+use App\Http\Controllers\Controller;
 
 class GroupController extends Controller
 {
     /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-
         $groups = Group::withCount('users')
         ->withCount('discussions')
         ->get();

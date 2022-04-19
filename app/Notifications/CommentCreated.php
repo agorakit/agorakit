@@ -46,16 +46,14 @@ class CommentCreated extends Notification
      */
     public function toMail($notifiable)
     {
-
-        $message =  (new MailMessage())
+        $message = (new MailMessage())
             ->greeting(' ')
             ->salutation(' ')
-            ->subject('[' . $this->comment->discussion->group->name . '] ' . $this->comment->discussion->name)
+            ->subject('['.$this->comment->discussion->group->name.'] '.$this->comment->discussion->name)
             ->line(new HtmlString(filter($this->comment->body)))
             ->line($this->comment->user->name)
             ->action(trans('messages.reply'), route('groups.discussions.show', [$this->comment->discussion->group, $this->comment->discussion]));
-        $message->from(config('mail.noreply'),  $this->comment->user->name);
-
+        $message->from(config('mail.noreply'), $this->comment->user->name);
 
         // send notification directly from discussion inbox if there is one
         if ($this->comment->discussion->inbox()) {
@@ -66,8 +64,8 @@ class CommentCreated extends Notification
         }
 
         $message->withSwiftMessage(function ($message) {
-            $message->getHeaders()->addTextHeader('References',  'discussion-'. $this->comment->discussion->id . '@' . Request::getHost());
-            $message->setId('comment-'. $this->comment->id . '@' . Request::getHost());
+            $message->getHeaders()->addTextHeader('References', 'discussion-'.$this->comment->discussion->id.'@'.Request::getHost());
+            $message->setId('comment-'.$this->comment->id.'@'.Request::getHost());
         });
 
         return $message;

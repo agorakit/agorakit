@@ -114,7 +114,6 @@ class GroupController extends Controller
                     ->get();
             }
 
-
             if (Auth::user()->isMemberOf($group) && $group->inbox()) {
                 $group_inbox = $group->inbox();
             }
@@ -205,7 +204,7 @@ class GroupController extends Controller
 
         if ($request->get('address')) {
             $group->address = $request->input('address');
-            if (!$group->geocode()) {
+            if (! $group->geocode()) {
                 flash(trans('messages.address_cannot_be_geocoded'));
             } else {
                 flash(trans('messages.ressource_geocoded_successfully'));
@@ -238,8 +237,8 @@ class GroupController extends Controller
 
         // handle cover
         if ($request->hasFile('cover')) {
-            Storage::disk('local')->makeDirectory('groups/' . $group->id);
-            Image::make($request->file('cover'))->widen(1600)->save(storage_path() . '/app/groups/' . $group->id . '/cover.jpg');
+            Storage::disk('local')->makeDirectory('groups/'.$group->id);
+            Image::make($request->file('cover'))->widen(1600)->save(storage_path().'/app/groups/'.$group->id.'/cover.jpg');
         }
 
         // make the current user an admin of the group
@@ -271,7 +270,6 @@ class GroupController extends Controller
     {
         $this->authorize('update', $group);
 
-
         return view('groups.edit')
             ->with('group', $group)
             ->with('allowedTags', $group->getAllowedTags())
@@ -293,7 +291,7 @@ class GroupController extends Controller
 
         $group->name = $request->input('name');
         $group->body = $request->input('body');
-        
+
         if (Gate::allows('changeGroupStatus', $group)) {
             $group->status = $request->input('status');
         }
@@ -314,7 +312,7 @@ class GroupController extends Controller
         if ($group->address != $request->input('address')) {
             // we need to update user address and geocode it
             $group->address = $request->input('address');
-            if (!$group->geocode()) {
+            if (! $group->geocode()) {
                 flash(trans('messages.address_cannot_be_geocoded'));
             } else {
                 flash(trans('messages.ressource_geocoded_successfully'));
@@ -347,8 +345,8 @@ class GroupController extends Controller
 
         // handle cover
         if ($request->hasFile('cover')) {
-            Storage::disk('local')->makeDirectory('groups/' . $group->id);
-            Image::make($request->file('cover'))->widen(1600)->save(storage_path() . '/app/groups/' . $group->id . '/cover.jpg');
+            Storage::disk('local')->makeDirectory('groups/'.$group->id);
+            Image::make($request->file('cover'))->widen(1600)->save(storage_path().'/app/groups/'.$group->id.'/cover.jpg');
         }
 
         $group->save();

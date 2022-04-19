@@ -14,13 +14,14 @@ class ContactUser extends Mailable
     public $body;
 
     public $to_user;
+
     public $from_user;
 
     /**
-    * Create a new message instance.
-    *
-    * @return void
-    */
+     * Create a new message instance.
+     *
+     * @return void
+     */
     public function __construct(User $from_user, User $to_user, $body, $reveal_email = false)
     {
         $this->body = $body;
@@ -33,15 +34,14 @@ class ContactUser extends Mailable
     }
 
     /**
-    * Build the message.
-    *
-    * @return $this
-    */
+     * Build the message.
+     *
+     * @return $this
+     */
     public function build()
     {
-            return $this->markdown('emails.contact')
+        return $this->markdown('emails.contact')
             ->from(config('mail.noreply'), config('mail.from.name'))
             ->subject('['.setting('name').'] '.trans('messages.a_message_for_you'));
-        
     }
 }

@@ -2,8 +2,13 @@
 
 namespace App;
 
-use App\Traits\HasStatus;
+use App\Action;
+use App\Activity;
+use App\File;
+use App\Invite;
 use App\Traits\HasControlledTags;
+use App\Traits\HasStatus;
+use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
@@ -12,11 +17,6 @@ use Nicolaslopezj\Searchable\SearchableTrait;
 use Storage;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
-use Carbon\Carbon;
-use App\File;
-use App\Action;
-use App\Invite;
-use App\Activity;
 
 class Group extends Model
 {
@@ -35,6 +35,7 @@ class Group extends Model
     ];
 
     protected $fillable = ['id', 'name', 'body', 'cover'];
+
     protected $casts = ['user_id' => 'integer', 'settings' => 'array'];
 
     protected $keepRevisionOf = ['name', 'body', 'cover', 'color', 'group_type', 'address', 'settings', 'status'];
@@ -42,14 +43,16 @@ class Group extends Model
     /**** various group types ****/
     // open group, default
     const OPEN = 0;
+
     const CLOSED = 1;
+
     const SECRET = 2;
 
     /**
-    * Searchable rules.
-    *
-    * @var array
-    */
+     * Searchable rules.
+     *
+     * @var array
+     */
     protected $searchable = [
         /*
         * Columns and their priority in search results.
@@ -65,12 +68,11 @@ class Group extends Model
         ],
     ];
 
-
     /**
-    * Return the sluggable configuration array for this model.
-    *
-    * @return array
-    */
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
     public function sluggable()
     {
         return [
@@ -83,8 +85,8 @@ class Group extends Model
     }
 
     /**
-    * Returns the css color (yes) of this group. Curently random generated.
-    */
+     * Returns the css color (yes) of this group. Curently random generated.
+     */
     public function color()
     {
         if ($this->color) {
@@ -98,40 +100,40 @@ class Group extends Model
     }
 
     /**
-    * Returns all the users of this group.
-    */
+     * Returns all the users of this group.
+     */
     public function users()
     {
         return $this->belongsToMany(\App\User::class, 'membership')->where('membership', '>=', \App\Membership::MEMBER)->withTimestamps()->withPivot('membership');
     }
 
     /**
-    * Returns all the admins of this group.
-    */
+     * Returns all the admins of this group.
+     */
     public function admins()
     {
         return $this->belongsToMany(\App\User::class, 'membership')->where('membership', \App\Membership::ADMIN)->withTimestamps()->withPivot('membership');
     }
 
     /**
-    * Returns all the candidates of this group.
-    */
+     * Returns all the candidates of this group.
+     */
     public function candidates()
     {
         return $this->hasMany(\App\Membership::class)->where('membership', \App\Membership::CANDIDATE);
     }
 
     /**
-    * The user who created or updated this group title and description.
-    */
+     * The user who created or updated this group title and description.
+     */
     public function user()
     {
         return $this->belongsTo(\App\User::class)->withTrashed();
     }
 
     /**
-    * return membership for the current user.
-    */
+     * return membership for the current user.
+     */
     public function membership()
     {
         if (\Auth::check()) {
@@ -150,16 +152,16 @@ class Group extends Model
     }
 
     /**
-    * Returns all the discussions belonging to this group.
-    */
+     * Returns all the discussions belonging to this group.
+     */
     public function discussions()
     {
         return $this->hasMany(\App\Discussion::class);
     }
 
     /**
-    * Returns all the actions belonging to this group.
-    */
+     * Returns all the actions belonging to this group.
+     */
     public function actions()
     {
         return $this->hasMany(Action::class);
@@ -186,8 +188,8 @@ class Group extends Model
     }
 
     /**
-    *   Returns true if current user is a member of this group.
-    */
+     *   Returns true if current user is a member of this group.
+     */
     public function isMember()
     {
         if (\Auth::check()) {
@@ -201,9 +203,9 @@ class Group extends Model
     }
 
     /**
-    * Returns membership info for curently logged user
-    * Returns false if no membership found.
-    */
+     * Returns membership info for curently logged user
+     * Returns false if no membership found.
+     */
     public function getMembership()
     {
         if (\Auth::check()) {
@@ -224,19 +226,17 @@ class Group extends Model
     }
 
     /**
-    * Returns the inbox email of this group (if it has one).
-    * A group has an inbox if INBOX_DRIVER is not null in .env
-    */
+     * Returns the inbox email of this group (if it has one).
+     * A group has an inbox if INBOX_DRIVER is not null in .env
+     */
     public function inbox()
     {
         if (config('agorakit.inbox_driver')) {
             return config('agorakit.inbox_prefix').$this->slug.config('agorakit.inbox_suffix');
-        }
-        else {
+        } else {
             return false;
         }
     }
-
 
     /** returns true if the group is open (joinable by all) **/
     public function isOpen()
@@ -269,50 +269,50 @@ class Group extends Model
     }
 
     /**
-    * Scope a query to only include public groups.
-    *
-    * @return \Illuminate\Database\Eloquent\Builder
-    */
+     * Scope a query to only include public groups.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
     public function scopePublic($query)
     {
         return $query->where('group_type', $this::OPEN);
     }
 
     /**
-    * Scope a query to only include open groups.
-    *
-    * @return \Illuminate\Database\Eloquent\Builder
-    */
+     * Scope a query to only include open groups.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
     public function scopeOpen($query)
     {
         return $query->where('group_type', $this::OPEN);
     }
 
     /**
-    * Scope a query to only include closed groups.
-    *
-    * @return \Illuminate\Database\Eloquent\Builder
-    */
+     * Scope a query to only include closed groups.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
     public function scopeClosed($query)
     {
         return $query->where('group_type', $this::CLOSED);
     }
 
     /**
-    * Scope a query to only include secret groups.
-    *
-    * @return \Illuminate\Database\Eloquent\Builder
-    */
+     * Scope a query to only include secret groups.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
     public function scopeSecret($query)
     {
         return $query->where('group_type', $this::SECRET);
     }
 
     /**
-    * Scope a query to exclude secret groups.
-    *
-    * @return \Illuminate\Database\Eloquent\Builder
-    */
+     * Scope a query to exclude secret groups.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
     public function scopeNotSecret($query)
     {
         return $query->where('group_type', '!=', $this::SECRET);
@@ -320,12 +320,12 @@ class Group extends Model
 
     public function scopeActive($query)
     {
-        return $query->where('updated_at', '>',  Carbon::now()->subMonths(3)->toDateTimeString());
+        return $query->where('updated_at', '>', Carbon::now()->subMonths(3)->toDateTimeString());
     }
 
     /**
-    * Return true if the group has a cover image.
-    */
+     * Return true if the group has a cover image.
+     */
     public function hasCover()
     {
         $path = '/groups/'.$this->id.'/cover.jpg';
@@ -334,9 +334,9 @@ class Group extends Model
     }
 
     /**
-    * Geocode the item
-    * Returns true if it worked, false if it didn't.
-    */
+     * Geocode the item
+     * Returns true if it worked, false if it didn't.
+     */
     public function geocode()
     {
         if ($this->address == '') {
@@ -359,8 +359,8 @@ class Group extends Model
     }
 
     /**
-    * Returns the current setting $key for the group, $default if not set.
-    */
+     * Returns the current setting $key for the group, $default if not set.
+     */
     public function getSetting($key, $default = false)
     {
         $settings = $this->settings;
@@ -372,9 +372,9 @@ class Group extends Model
     }
 
     /**
-    * Set the setting $key to $value for the group
-    * No validation is made on this layer, settings are stored in the json text field of the DB.
-    */
+     * Set the setting $key to $value for the group
+     * No validation is made on this layer, settings are stored in the json text field of the DB.
+     */
     public function setSetting($key, $value)
     {
         $settings = $this->settings;
@@ -383,5 +383,4 @@ class Group extends Model
 
         return $this->save();
     }
-
 }

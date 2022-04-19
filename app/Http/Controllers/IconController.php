@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use File;
+use Illuminate\Http\Request;
 use Image;
 
 /**
-* This controller takes care of returning the correct favicon / icon wathever for the app
-*/
+ * This controller takes care of returning the correct favicon / icon wathever for the app
+ */
 class IconController extends Controller
 {
     public function index(Request $request, $size = 128)
     {
 
         // validate allowed sizes
-        if (!in_array($size, [40, 128, 192, 512])) {
+        if (! in_array($size, [40, 128, 192, 512])) {
             $size = 128;
         }
 

@@ -1,5 +1,5 @@
 <?php
 
 return [
-  'intro' => 'Texte d\'introduction que vous pouvez modifier',
+    'intro' => 'Texte d\'introduction que vous pouvez modifier',
 ];

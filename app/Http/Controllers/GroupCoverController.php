@@ -11,10 +11,9 @@ Handle group cover image
 */
 class GroupCoverController extends Controller
 {
-
     public function __construct()
     {
-         $this->middleware('cache.headers:private,max-age=300;etag');
+        $this->middleware('cache.headers:private,max-age=300;etag');
     }
 
     public function small(Group $group)

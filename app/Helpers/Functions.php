@@ -15,22 +15,22 @@ function setting($name = false, $default = false)
     if ($name) {
         return $setting->get($name, $default);
     }
+
     return $setting;
 }
-
 
 function sizeForHumans($bytes)
 {
     if ($bytes >= 1000000000) {
-        $bytes = number_format($bytes / 1000000000, 1) . 'GB';
+        $bytes = number_format($bytes / 1000000000, 1).'GB';
     } elseif ($bytes >= 1000000) {
-        $bytes = number_format($bytes / 1000000, 1) . 'MB';
+        $bytes = number_format($bytes / 1000000, 1).'MB';
     } elseif ($bytes >= 1000) {
-        $bytes = number_format($bytes / 1000, 0) . 'KB';
+        $bytes = number_format($bytes / 1000, 0).'KB';
     } elseif ($bytes > 1) {
-        $bytes = $bytes . ' bytes';
+        $bytes = $bytes.' bytes';
     } elseif ($bytes == 1) {
-        $bytes = $bytes . ' byte';
+        $bytes = $bytes.' byte';
     } else {
         $bytes = '0 bytes';
     }
@@ -38,8 +38,7 @@ function sizeForHumans($bytes)
     return $bytes;
 }
 
-
-/** 
+/**
  * Format a date correctly, if less than 2 days, use carbon diffForhumans, else returns a formated date
  */
 function dateForHumans($date)
@@ -134,8 +133,6 @@ function geocode($address)
 
     return false;
 }
-
-
 
 /**
  * provide a link to any model

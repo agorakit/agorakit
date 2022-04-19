@@ -2,11 +2,11 @@
 
 namespace App\Listeners;
 
-use App\Events\ContentCreated;
-use Notification;
 use App\Comment;
-use App\User;
 use App\Discussion;
+use App\Events\ContentCreated;
+use App\User;
+use Notification;
 
 class NotifyMentionedUsers
 {
@@ -29,18 +29,17 @@ class NotifyMentionedUsers
      */
     public function handle(ContentCreated $event)
     {
-        
 
         // Comments
         if ($event->model instanceof Comment) {
             $comment = $event->model;
-           
+
             $users = $this->findUsers($comment->body);
 
             foreach ($users as $user) {
                 if ($user->isMemberOf($comment->discussion->group)) {
                     Notification::send($user, new \App\Notifications\MentionedUser($comment, \Auth::user()));
-                    flash($user->name . ' ' . trans('messages.notified'));
+                    flash($user->name.' '.trans('messages.notified'));
                 }
             }
         }
@@ -49,7 +48,7 @@ class NotifyMentionedUsers
     /**
      * Finds users to mention in a string, looks for @username style mentions in the string an returns users models
      */
-    function findUsers($body)
+    public function findUsers($body)
     {
         preg_match_all("#(?<!\w)@([\w_\-\.]+)#", $body, $matches);
 
@@ -65,7 +64,6 @@ class NotifyMentionedUsers
         }
         // find user
         $users = User::whereIn('username', $usernames)->get();
-        
 
         return $users;
     }

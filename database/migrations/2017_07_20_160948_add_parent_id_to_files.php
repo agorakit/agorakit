@@ -12,7 +12,7 @@ class AddParentIdToFiles extends Migration
     public function up()
     {
         Schema::table('files', function ($table) {
-            if (!Schema::hasColumn('files', 'parent_id')) {
+            if (! Schema::hasColumn('files', 'parent_id')) {
                 $table->integer('parent_id')->nullable();
             }
         });

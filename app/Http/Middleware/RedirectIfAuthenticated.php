@@ -20,6 +20,7 @@ class RedirectIfAuthenticated
     {
         if (Auth::guard($guard)->check()) {
             flash('You must be guest to do this');
+
             return redirect(RouteServiceProvider::HOME);
         }
 

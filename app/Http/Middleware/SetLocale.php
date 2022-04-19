@@ -11,10 +11,10 @@ use Session;
 class SetLocale
 {
     /**
-    * The availables languages.
-    *
-    * @array $languages
-    */
+     * The availables languages.
+     *
+     * @array $languages
+     */
     protected $locales = null;
 
     public function __construct()
@@ -23,13 +23,13 @@ class SetLocale
     }
 
     /**
-    * Handle an incoming request.
-    *
-    * @param \Illuminate\Http\Request $request
-    * @param \Closure                 $next
-    *
-    * @return mixed
-    */
+     * Handle an incoming request.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
+     *
+     * @return mixed
+     */
     public function handle($request, Closure $next)
     {
 
@@ -45,12 +45,10 @@ class SetLocale
         // 4- autodetect from browser
         // 5- default application locale
 
-
         // 1- Parameter force_locale from request
         if ($request->has('force_locale') && in_array($request->get('force_locale'), $this->locales)) {
             $locale = $request->get('force_locale');
             Session::put('locale', $locale);
-
 
             // store locale in user preferences
             if (Auth::check()) {
@@ -59,15 +57,16 @@ class SetLocale
             }
 
             App::setLocale($locale);
+
             return $next($request)->withCookie(cookie()->forever('locale', $locale));
         }
-
 
         // 2- Locale from user settings
         if (Auth::check() && Auth::user()->getPreference('locale')) {
             $locale = Auth::user()->getPreference('locale');
             Session::put('locale', $locale);
             App::setLocale($locale);
+
             return $next($request)->withCookie(cookie()->forever('locale', $locale));
         }
 
@@ -81,6 +80,7 @@ class SetLocale
                 $user->setPreference('locale', $locale);
             }
             App::setLocale($locale);
+
             return $next($request)->withCookie(cookie()->forever('locale', $locale));
         }
 
@@ -93,11 +93,13 @@ class SetLocale
                 $user->setPreference('locale', $locale);
             }
             App::setLocale($locale);
+
             return $next($request)->withCookie(cookie()->forever('locale', $locale));
         }
 
         // 5- default application locale
         App::setLocale(config('app.locale'));
+
         return $next($request);
     }
 }

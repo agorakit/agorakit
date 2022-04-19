@@ -46,16 +46,14 @@ class DiscussionCreated extends Notification
      */
     public function toMail($notifiable)
     {
-
-        $message =  (new MailMessage())
+        $message = (new MailMessage())
             ->greeting(' ')
             ->salutation(' ')
-            ->subject('[' . $this->discussion->group->name . '] ' . $this->discussion->name)
+            ->subject('['.$this->discussion->group->name.'] '.$this->discussion->name)
             ->line(new HtmlString(filter($this->discussion->body)))
             ->line($this->discussion->user->name)
             ->action(trans('messages.reply'), route('groups.discussions.show', [$this->discussion->group, $this->discussion]));
-        $message->from(config('mail.noreply'),  $this->discussion->user->name);
-
+        $message->from(config('mail.noreply'), $this->discussion->user->name);
 
         // send notification directly from discussion inbox if there is one
         if ($this->discussion->inbox()) {
@@ -66,7 +64,7 @@ class DiscussionCreated extends Notification
         }
 
         $message->withSwiftMessage(function ($message) {
-            $message->setId('discussion-'. $this->discussion->id . '@' . Request::getHost());
+            $message->setId('discussion-'.$this->discussion->id.'@'.Request::getHost());
         });
 
         return $message;

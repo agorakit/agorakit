@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
 use App\Group;
+use Auth;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -37,28 +37,21 @@ class SearchController extends Controller
                 $allowed_groups = Auth::user()->groups()->pluck('groups.id');
             }
 
-
             $groups = Group::whereIn('id', $allowed_groups)
             ->search($query)
             ->orderBy('updated_at', 'desc')
             ->paginate(20, ['*'], 'groups')->withQueryString();
-            
-
-          
 
             $users = \App\User::with('groups')
             ->search($query)
             ->orderBy('updated_at', 'desc')
             ->paginate(20, ['*'], 'users');
-            
 
             $discussions = \App\Discussion::whereIn('group_id', $allowed_groups)
             ->with('group')
             ->search($query)
             ->orderBy('updated_at', 'desc')
             ->paginate(20, ['*'], 'discussions');
-            
-            
 
             $actions = \App\Action::whereIn('group_id', $allowed_groups)
             ->with('group')

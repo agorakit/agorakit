@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Auth;
 use Carbon\Carbon;
-
 use Spatie\IcalendarGenerator\Components\Calendar;
 use Spatie\IcalendarGenerator\Components\Event;
 
@@ -54,7 +53,7 @@ class IcalController extends Controller
             $event = Event::create()
                 ->name($action->name)
                 ->description(summary($action->body), 1000)
-                ->uniqueIdentifier($group->name . '-' . $action->id)
+                ->uniqueIdentifier($group->name.'-'.$action->id)
                 ->createdAt($action->created_at)
                 ->startsAt($action->start)
                 ->endsAt($action->stop)
@@ -66,6 +65,5 @@ class IcalController extends Controller
         return response($calendar->get())
             ->header('Content-Type', 'text/calendar')
             ->header('charset', 'utf-8');
-
     }
 }

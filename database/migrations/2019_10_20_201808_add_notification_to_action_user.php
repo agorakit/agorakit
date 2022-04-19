@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class AddNotificationToActionUser extends Migration
 {
@@ -26,7 +26,7 @@ class AddNotificationToActionUser extends Migration
     public function down()
     {
         Schema::table('action_user', function (Blueprint $table) {
-              $table->dropColumn('notification');
+            $table->dropColumn('notification');
         });
     }
 }

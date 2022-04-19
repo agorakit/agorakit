@@ -43,11 +43,11 @@ class UpcomingAction extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage())
-                    ->subject('[' . $this->action->group->name . '] ' . __('You have an upcoming action') .  ': ' . $this->action->name)
-                    ->line(__('You have an upcoming action') .  ': ' . $this->action->name)
-                    ->line(__('Starts on : ') . $this->action->start->format('d/m/Y H:i'))
-                    ->line(__('Ends on : ') . $this->action->stop->format('d/m/Y H:i'))
-                    ->line(__('Description : ') . strip_tags($this->action->body))
+                    ->subject('['.$this->action->group->name.'] '.__('You have an upcoming action').': '.$this->action->name)
+                    ->line(__('You have an upcoming action').': '.$this->action->name)
+                    ->line(__('Starts on : ').$this->action->start->format('d/m/Y H:i'))
+                    ->line(__('Ends on : ').$this->action->stop->format('d/m/Y H:i'))
+                    ->line(__('Description : ').strip_tags($this->action->body))
                     ->action(__('Show'), route('groups.actions.show', [$this->action->group, $this->action]))
                     ->line(trans('messages.thank_you'));
     }
@@ -62,7 +62,7 @@ class UpcomingAction extends Notification
     public function toArray($notifiable)
     {
         return [
-          'action' => $this->action->toArray(),
+            'action' => $this->action->toArray(),
         ];
     }
 }

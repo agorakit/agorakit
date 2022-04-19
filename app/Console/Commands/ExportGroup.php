@@ -2,11 +2,11 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Group;
+use File;
+use Illuminate\Console\Command;
 use Storage;
 use ZipArchive;
-use File;
 
 class ExportGroup extends Command
 {
@@ -23,8 +23,6 @@ class ExportGroup extends Command
      * @var string
      */
     protected $description = 'Export a group to a zip file';
-
-
 
     /**
      * Create a new command instance.
@@ -62,7 +60,7 @@ class ExportGroup extends Command
             'discussions.reactions.user',
             'files',
             'files.user',
-            'tags'
+            'tags',
         ]);
 
         if ($this->option('passwords')) {
@@ -75,19 +73,18 @@ class ExportGroup extends Command
             $this->info('No user passwords have been added to the json file. Users will have to reset their password on the target instance');
         }
 
-
         // save group json to storage
-        Storage::disk('local')->makeDirectory('exports/' . $group->id);
-        Storage::put('exports/' . $group->id . '/group.json', $group->toJson());
+        Storage::disk('local')->makeDirectory('exports/'.$group->id);
+        Storage::put('exports/'.$group->id.'/group.json', $group->toJson());
 
-        $this->info('Json export has been put into ' . 'exports/' . $group->id . '/group.json');
+        $this->info('Json export has been put into '.'exports/'.$group->id.'/group.json');
 
         // make a zip file of everything
         $zip = new ZipArchive;
 
-        if ($zip->open(storage_path('app/exports/' . $group->id . '/group.zip'), ZipArchive::CREATE) === TRUE) {
+        if ($zip->open(storage_path('app/exports/'.$group->id.'/group.zip'), ZipArchive::CREATE) === true) {
             // add json
-            if ($zip->addFile(storage_path('app/exports/' . $group->id . '/group.json'), 'group.json')) {
+            if ($zip->addFile(storage_path('app/exports/'.$group->id.'/group.json'), 'group.json')) {
                 $this->line('Added group.json dump to archive');
             } else {
                 $this->error('Json dump could not be added to archive');
@@ -95,15 +92,15 @@ class ExportGroup extends Command
 
             // handle groups files
             foreach ($group->files as $file) {
-                if ($zip->addFile($file->storagePath(), '/files/' . $file->id . '/' . basename($file->path))) {
-                    $this->line('Added ' . $file->path . ' to group files export');
+                if ($zip->addFile($file->storagePath(), '/files/'.$file->id.'/'.basename($file->path))) {
+                    $this->line('Added '.$file->path.' to group files export');
                 } else {
-                    $this->error('Failed to add ' . $file->path . ' to group files export');
+                    $this->error('Failed to add '.$file->path.' to group files export');
                 }
             }
 
             // handle groups cover
-            $files = File::files(storage_path('app/groups/' . $group->id));
+            $files = File::files(storage_path('app/groups/'.$group->id));
 
             foreach ($files as $file) {
                 $zip->addFile($file, basename($file));
@@ -111,13 +108,13 @@ class ExportGroup extends Command
 
             // handle groups users covers
             foreach ($group->users as $user) {
-                $zip->addFile(storage_path('app/users/' . $user->id . '/cover.jpg'), 'users/' . $user->id . '/cover.jpg');
-                $zip->addFile(storage_path('app/users/' . $user->id . '/thumbnail.jpg'), 'users/' . $user->id . '/thumbnail.jpg');
+                $zip->addFile(storage_path('app/users/'.$user->id.'/cover.jpg'), 'users/'.$user->id.'/cover.jpg');
+                $zip->addFile(storage_path('app/users/'.$user->id.'/thumbnail.jpg'), 'users/'.$user->id.'/thumbnail.jpg');
             }
 
             $zip->close();
 
-            $this->info('Group exported successfuly to ' . storage_path('app/exports/' . $group->id . '/group.zip'));
+            $this->info('Group exported successfuly to '.storage_path('app/exports/'.$group->id.'/group.zip'));
         } else {
             $this->error('Could not create zip file');
         }

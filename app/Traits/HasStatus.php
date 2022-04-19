@@ -8,13 +8,14 @@ use Illuminate\Database\Eloquent\Builder;
 interface ContentStatus
 {
     const NORMAL = 0;
+
     const PINNED = 10;
+
     const ARCHIVED = -10;
 }
 
 trait HasStatus
 {
-
     public function getStatus(): int
     {
         return $this->{'status'};
@@ -23,6 +24,7 @@ trait HasStatus
     public function setStatus(int $status)
     {
         $this->{'status'} = $status;
+
         return $this;
     }
 
@@ -48,6 +50,7 @@ trait HasStatus
         } else {
             $this->pin();
         }
+
         return $this;
     }
 
@@ -73,7 +76,7 @@ trait HasStatus
         } else {
             $this->archive();
         }
+
         return $this;
     }
-
 }

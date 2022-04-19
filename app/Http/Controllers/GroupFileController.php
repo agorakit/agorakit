@@ -29,26 +29,22 @@ class GroupFileController extends Controller
         $this->authorize('view-files', $group);
 
         // Validate query string, I feel it's better for sql injection prevention  :-)
-        if (!in_array($request->get('dir'), ['asc', 'desc', null])) {
+        if (! in_array($request->get('dir'), ['asc', 'desc', null])) {
             abort(404, 'invalid sort order');
         }
 
-        if (!in_array($request->get('sort'), ['created_at', 'name', 'filesize', null])) {
+        if (! in_array($request->get('sort'), ['created_at', 'name', 'filesize', null])) {
             abort(404, 'invalid sort type');
         }
 
-
         $file = new File;
         $file->group()->associate($group);
-
 
         // for the tag filter frop down
         $tags = $file->getTagsInUse();
         $tag = $request->get('tag');
 
         $parent = $request->get('parent');
-
-
 
         if ($parent) {
             // load the current parent and it's parents in a single "parents" collection
@@ -60,7 +56,6 @@ class GroupFileController extends Controller
             $breadcrumb = false;
         }
 
-
         $folders = $group->files()
             ->with('user', 'group', 'tags')
             ->where('item_type', File::FOLDER)
@@ -69,7 +64,7 @@ class GroupFileController extends Controller
             ->when($parent, function ($query) use ($parent) {
                 return $query->where('parent_id', $parent);
             })
-            ->when(!$parent, function ($query) {
+            ->when(! $parent, function ($query) {
                 return $query->whereNull('parent_id');
             })
             ->get();
@@ -85,14 +80,13 @@ class GroupFileController extends Controller
             ->when($parent, function ($query) use ($parent) {
                 return $query->where('parent_id', $parent);
             })
-            ->when(!$parent, function ($query) {
+            ->when(! $parent, function ($query) {
                 return $query->whereNull('parent_id');
             })
             ->paginate(20);
 
-
         return view('files.index')
-            ->with('title', $group->name . ' - ' . trans('messages.files'))
+            ->with('title', $group->name.' - '.trans('messages.files'))
             ->with('folders', $folders)
             ->with('files', $files)
             ->with('parent', $parent)
@@ -127,9 +121,8 @@ class GroupFileController extends Controller
             $breadcrumb = false;
         }
 
-
         return view('files.show')
-            ->with('title', $group->name . ' - ' . $file->name)
+            ->with('title', $group->name.' - '.$file->name)
             ->with('file', $file)
             ->with('breadcrumb', $breadcrumb)
             ->with('group', $group)
@@ -148,8 +141,6 @@ class GroupFileController extends Controller
         $file = new File;
         $file->group()->associate($group);
 
-
-
         return view('files.create')
             ->with('allowedTags', $file->getTagsInUse())
             ->with('newTagsAllowed', $file->areNewTagsAllowed())
@@ -164,7 +155,6 @@ class GroupFileController extends Controller
 
         $file = new File;
         $file->group()->associate($group);
-
 
         return view('files.createlink')
             ->with('allowedTags', $file->getTagsInUse())
@@ -195,10 +185,10 @@ class GroupFileController extends Controller
 
         // handle the case of a summernote upaload (via ajax)
         if ($request->ajax()) {
-             
+
             // validate file size
-             $validated = $request->validate([
-                'file' => 'required|max:' . config('agorakit.max_file_size'),
+            $validated = $request->validate([
+                'file' => 'required|max:'.config('agorakit.max_file_size'),
             ]);
 
             if ($request->file('file')) {
@@ -212,6 +202,7 @@ class GroupFileController extends Controller
 
                 return response()->json($file->id);
             }
+
             return response()->json('no file found in request', 404, [], JSON_UNESCAPED_SLASHES);
         }
 
@@ -220,9 +211,8 @@ class GroupFileController extends Controller
 
                 // validate file size
                 $validated = $request->validate([
-                    'files.*' => 'required|max:' . config('agorakit.max_file_size'),
+                    'files.*' => 'required|max:'.config('agorakit.max_file_size'),
                 ]);
-
 
                 foreach ($request->file('files') as $uploaded_file) {
                     $file = new File();
@@ -238,7 +228,6 @@ class GroupFileController extends Controller
                         $file->tag($request->get('tags'));
                     }
 
-
                     if ($parent) {
                         $file->setParent($parent);
                     }
@@ -253,8 +242,6 @@ class GroupFileController extends Controller
 
                 flash(trans('messages.ressource_created_successfully'));
 
-
-
                 return redirect()->route('groups.files.index', ['group' => $group, 'parent' => $parent]);
             } else {
                 abort(400, trans('messages.no_file_selected'));
@@ -267,8 +254,6 @@ class GroupFileController extends Controller
             }
         }
     }
-
-
 
     /**
      * Store the folder in the file DB.
@@ -317,6 +302,7 @@ class GroupFileController extends Controller
             \Auth::user()->touch();
 
             flash(trans('messages.ressource_created_successfully'));
+
             return redirect()->route('groups.files.index', ['group' => $group, 'parent' => $parent]);
         } else {
             flash(trans('messages.ressource_not_created_successfully'));
@@ -365,6 +351,7 @@ class GroupFileController extends Controller
             $group->touch();
             \Auth::user()->touch();
             flash(trans('messages.ressource_created_successfully'));
+
             return redirect()->route('groups.files.index', ['group' => $group, 'parent' => $parent]);
         } else {
             flash(trans('messages.ressource_not_created_successfully'));
@@ -383,7 +370,6 @@ class GroupFileController extends Controller
     public function edit(Group $group, File $file)
     {
         $this->authorize('update', $file);
-
 
         return view('files.edit')
             ->with('file', $file)
@@ -427,8 +413,7 @@ class GroupFileController extends Controller
             }
         }
 
-        if ($request->has('file')) 
-        {
+        if ($request->has('file')) {
             $file->addToStorage($request->file('file'));
         }
 
@@ -470,8 +455,6 @@ class GroupFileController extends Controller
         return redirect()->route('groups.files.index', [$group]);
     }
 
-
-
     public function pin(Group $group, File $file)
     {
         $this->authorize('pin', $file);
@@ -480,17 +463,19 @@ class GroupFileController extends Controller
         $file->timestamps = false;
         $file->save();
         flash(trans('messages.ressource_updated_successfully'));
+
         return redirect()->back();
     }
 
     public function archive(Group $group, File $file)
     {
         $this->authorize('archive', $file);
-        
+
         $file->toggleArchive();
         $file->timestamps = false;
         $file->save();
         flash(trans('messages.ressource_updated_successfully'));
+
         return redirect()->back();
     }
 }

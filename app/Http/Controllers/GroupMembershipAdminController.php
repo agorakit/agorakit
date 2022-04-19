@@ -12,10 +12,9 @@ use Illuminate\Http\Request;
 
 class GroupMembershipAdminController extends Controller
 {
-   
     /**
-    * Show admin a form to edit a membership
-    */
+     * Show admin a form to edit a membership
+     */
     public function edit(Request $request, Group $group, Membership $membership)
     {
         $this->authorize('edit', $membership);
@@ -29,8 +28,8 @@ class GroupMembershipAdminController extends Controller
     }
 
     /**
-    * Store new settings from the membership form
-    */
+     * Store new settings from the membership form
+     */
     public function update(Request $request, Group $group, Membership $membership)
     {
         // authorize editing
@@ -54,6 +53,7 @@ class GroupMembershipAdminController extends Controller
         $membership->save();
 
         flash(trans('membership.settings_updated'));
+
         return redirect()->route('groups.users.index', $group);
     }
 }

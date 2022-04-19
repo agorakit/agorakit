@@ -2,9 +2,9 @@
 
 namespace App;
 
-use App\User;
 use App\Group;
 use App\Traits\HasControlledTags;
+use App\User;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -21,7 +21,6 @@ class Action extends Model
     use SearchableTrait;
     use HasControlledTags;
 
-
     protected $rules = [
         'name'     => 'required|min:5',
         'user_id'  => 'required|exists:users,id',
@@ -33,8 +32,11 @@ class Action extends Model
     protected $with = ['attending', 'notAttending']; // always load participants with actions
 
     protected $table = 'actions';
+
     public $timestamps = true;
+
     protected $dates = ['deleted_at', 'start', 'stop'];
+
     protected $casts = ['user_id' => 'integer'];
 
     protected $keepRevisionOf = ['name', 'start', 'stop', 'body', 'location'];
@@ -86,7 +88,6 @@ class Action extends Model
     {
         return $this->belongsToMany(User::class)->withPivot('status', 'notification');
     }
-
 
     /**
      * The users attending this action.

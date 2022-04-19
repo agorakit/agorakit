@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 
-/** 
+/**
  * Wether a user participates or not to a specific action (event)
  */
 class Participation extends Model
@@ -15,7 +15,9 @@ class Participation extends Model
     use SoftDeletes;
 
     const UNDECIDED = 0;
+
     const PARTICIPATE = 10;
+
     const WONT_PARTICIPATE = -10;
 
     protected $attributes = [
@@ -29,10 +31,11 @@ class Participation extends Model
     ];
 
     protected $fillable = [
-        'user_id', 'action_id', 'notification', 'status'
+        'user_id', 'action_id', 'notification', 'status',
     ];
 
     protected $table = 'action_user';
+
     public $timestamps = true;
 
     public function action()

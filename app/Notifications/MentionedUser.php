@@ -13,10 +13,10 @@ class MentionedUser extends Notification
     use Queueable;
 
     /**
-    * Create a new notification instance.
-    *
-    * @return void
-    */
+     * Create a new notification instance.
+     *
+     * @return void
+     */
     public function __construct(Comment $comment, User $user)
     {
         $this->comment = $comment;
@@ -24,28 +24,27 @@ class MentionedUser extends Notification
     }
 
     /**
-    * Get the notification's delivery channels.
-    *
-    * @param mixed $notifiable
-    *
-    * @return array
-    */
+     * Get the notification's delivery channels.
+     *
+     * @param mixed $notifiable
+     *
+     * @return array
+     */
     public function via($notifiable)
     {
         return ['mail', 'database'];
     }
 
     /**
-    * Get the mail representation of the notification.
-    *
-    * @param mixed $notifiable
-    *
-    * @return \Illuminate\Notifications\Messages\MailMessage
-    */
+     * Get the mail representation of the notification.
+     *
+     * @param mixed $notifiable
+     *
+     * @return \Illuminate\Notifications\Messages\MailMessage
+     */
     public function toMail($notifiable)
     {
-
-        $message =  (new MailMessage())
+        $message = (new MailMessage())
         ->subject('['.$this->comment->discussion->group->name.'] '.trans('messages.you_have_been_mentionned_by').' '.$this->user->name)
         ->line(trans('messages.you_have_been_mentionned_by').' '.$this->user->name.' '.trans('messages.in_the_discussion').' '.$this->comment->discussion->name.' : ')
         ->line(html_entity_decode(strip_tags(filter($this->comment->body))))
@@ -55,8 +54,7 @@ class MentionedUser extends Notification
         // send notification directly from discussion inbox if there is one
         if ($this->comment->discussion->inbox()) {
             $message->from($this->comment->discussion->inbox(), $this->comment->discussion->group->name);
-        }
-        else {
+        } else {
             $message->from(config('mail.noreply'), config('mail.from.name'));
         }
 
@@ -64,12 +62,12 @@ class MentionedUser extends Notification
     }
 
     /**
-    * Get the array representation of the notification.
-    *
-    * @param mixed $notifiable
-    *
-    * @return array
-    */
+     * Get the array representation of the notification.
+     *
+     * @param mixed $notifiable
+     *
+     * @return array
+     */
     public function toArray($notifiable)
     {
         return [

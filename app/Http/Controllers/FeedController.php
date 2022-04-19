@@ -41,7 +41,6 @@ class FeedController extends Controller
             ->appendTo($channel);
         }
 
-
         return response($feed, 200, ['Content-Type' => 'application/xml']);
     }
 

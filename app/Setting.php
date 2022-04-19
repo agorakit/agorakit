@@ -7,11 +7,10 @@ use Config;
 use Illuminate\Database\Eloquent\Model;
 use Venturecraft\Revisionable\RevisionableTrait;
 
-
 /**
  * This model is used to store settings. Settings are stored in the settings table. This model support fluent use.
- * 
- * setting()->localized($locale)->get($name) will return the $name setting using the $locale 
+ *
+ * setting()->localized($locale)->get($name) will return the $name setting using the $locale
  * setting()->localized()->get($name) will return the $name setting using current app locale
  * setting()->get($name) will return the $name setting value without locale support
  * setting($name) will return the $name setting value directly
@@ -21,11 +20,13 @@ class Setting extends Model
     use RevisionableTrait;
 
     protected $fillable = ['name', 'value', 'locale'];
+
     protected $rules = [
         'name'  => 'required',
     ];
 
     public $timestamps = true;
+
     protected $dates = ['deleted_at'];
 
     protected $keepRevisionOf = ['name', 'locale', 'value'];
@@ -40,12 +41,12 @@ class Setting extends Model
     {
         if ($this->lang) {
             $locale = $this->lang;
-            $setting = Cache::rememberForever('settings_' . $key . $locale, function () use ($key, $locale) {
-                return \App\Setting::where('name', $key)->where('locale', $locale)->first();
+            $setting = Cache::rememberForever('settings_'.$key.$locale, function () use ($key, $locale) {
+                return self::where('name', $key)->where('locale', $locale)->first();
             });
         } else {
-            $setting = Cache::rememberForever('settings_' . $key, function () use ($key) {
-                return \App\Setting::where('name', $key)->first();
+            $setting = Cache::rememberForever('settings_'.$key, function () use ($key) {
+                return self::where('name', $key)->first();
             });
         }
 
@@ -55,8 +56,8 @@ class Setting extends Model
         }
 
         // second priority, default setting stored in app/config/agorakit.php
-        if (config('agorakit.' . $key)) {
-            return config('agorakit.' . $key);
+        if (config('agorakit.'.$key)) {
+            return config('agorakit.'.$key);
         }
 
         // lastly our $default
@@ -74,18 +75,17 @@ class Setting extends Model
         return $this;
     }
 
-
     /**
      * Static method to set a value to the settings table.
      */
     public function set($key, $value)
     {
         if ($this->lang) {
-            Cache::forget('settings_' . $key . $this->lang);
-            $setting = \App\Setting::firstOrNew(['name' => $key, 'locale' => $this->lang]);
+            Cache::forget('settings_'.$key.$this->lang);
+            $setting = self::firstOrNew(['name' => $key, 'locale' => $this->lang]);
         } else {
-            Cache::forget('settings_' . $key);
-            $setting = \App\Setting::firstOrNew(['name' => $key]);
+            Cache::forget('settings_'.$key);
+            $setting = self::firstOrNew(['name' => $key]);
         }
         $setting->value = $value;
         $setting->save();
@@ -93,16 +93,14 @@ class Setting extends Model
         return $setting;
     }
 
-
-    /** 
+    /**
      * Static method to get an array from the settings table.
      */
     public function getArray($key, $default = null)
     {
-        $setting  = $this->get($key);
+        $setting = $this->get($key);
 
-        if (is_array($setting)) 
-        {
+        if (is_array($setting)) {
             return $setting;
         }
 
@@ -112,8 +110,8 @@ class Setting extends Model
         }
 
         // second priority, default setting stored in app/config/agorakit.php
-        if (config('agorakit.' . $key)) {
-            return config('agorakit.' . $key);
+        if (config('agorakit.'.$key)) {
+            return config('agorakit.'.$key);
         }
 
         // lastly our $default

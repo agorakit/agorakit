@@ -47,7 +47,7 @@ class SendNotifications extends Command
     {
         $notifications = $this->getNotificationsToSend();
 
-        $this->info(count($notifications) . ' notifications to send');
+        $this->info(count($notifications).' notifications to send');
 
         if (is_array($notifications)) {
             if (count($notifications) > 0) {
@@ -56,7 +56,7 @@ class SendNotifications extends Command
                     $group = \App\Group::find($notification->group_id);
 
                     if ($user && $group && $user->isVerified()) {
-                        $this->line('Checking if there is something to send to user:' . $user->id . ' (' . $user->email . ')' . ' for group:' . $group->id . ' (' . $group->name . ')');
+                        $this->line('Checking if there is something to send to user:'.$user->id.' ('.$user->email.')'.' for group:'.$group->id.' ('.$group->name.')');
                         if ($this->sendNotificationEmail($group, $user)) {
                             $this->info('Message sent');
                         } else {
@@ -80,7 +80,6 @@ class SendNotifications extends Command
         // we need to check here instead of later in the notification chain
         // if we really have a valid user and a valid group from the membership table
 
-
         // I use Carbon::now() instead of the now() provided by mysql to avoid different timezone settings in differents servers (php vs mysql config)
         $notifications = DB::select('
         select * from
@@ -90,9 +89,7 @@ class SendNotifications extends Command
         where notify < :now or notify is null limit :batch
         ', ['now' => Carbon::now(), 'membership' => \App\Membership::MEMBER, 'batch' => $this->option('batch')]);
 
-
         //dd(DB::getQueryLog());
-
 
         return $notifications;
     }

@@ -16,8 +16,8 @@ class FileDownloadController extends Controller
     }
 
     /**
-    * Returns the specified file for downloading.
-    */
+     * Returns the specified file for downloading.
+     */
     public function download(Group $group, File $file)
     {
         $this->authorize('view', $file);
@@ -36,12 +36,11 @@ class FileDownloadController extends Controller
     }
 
     /**
-    * Returns a square thumbnail of the file.
-    */
+     * Returns a square thumbnail of the file.
+     */
     public function thumbnail(Group $group, File $file)
     {
         $this->authorize('view', $file);
-
 
         if ($file->isImage()) {
             if (Storage::exists($file->path)) {
@@ -50,12 +49,10 @@ class FileDownloadController extends Controller
                 }, 5, true);
 
                 return $cachedImage->response();
-            }
-            else {
+            } else {
                 abort(404, 'File not found in storage at '.$file->path);
             }
         }
-
 
         if ($file->isFolder()) {
             return redirect('images/extensions/folder.svg');
@@ -65,8 +62,8 @@ class FileDownloadController extends Controller
     }
 
     /**
-    * Returns a medium sized preview of the file.
-    */
+     * Returns a medium sized preview of the file.
+     */
     public function preview(Group $group, File $file)
     {
         $this->authorize('view', $file);
@@ -78,8 +75,7 @@ class FileDownloadController extends Controller
                 }, 5, true);
 
                 return $cachedImage->response();
-            }
-            else {
+            } else {
                 abort(404, 'File not found in storage at '.$file->path);
             }
         }
@@ -88,8 +84,8 @@ class FileDownloadController extends Controller
     }
 
     /**
-    * Returns a square svg icon of the file.
-    */
+     * Returns a square svg icon of the file.
+     */
     public function icon(Group $group, File $file)
     {
         $this->authorize('view', $file);

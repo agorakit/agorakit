@@ -2,14 +2,14 @@
 
 namespace App;
 
-use App\Traits\HasStatus;
 use App\Traits\HasControlledTags;
+use App\Traits\HasStatus;
+use Carbon\Carbon;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Nicolaslopezj\Searchable\SearchableTrait;
 use Storage;
-use Carbon\Carbon;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
 
@@ -30,8 +30,11 @@ class File extends Model
     ];
 
     protected $table = 'files';
+
     public $timestamps = true;
+
     protected $dates = ['deleted_at'];
+
     protected $casts = ['user_id' => 'integer'];
 
     protected $keepRevisionOf = ['name', 'path', 'filesize', 'status'];
@@ -42,9 +45,10 @@ class File extends Model
     // 2 : link (to an etherpad or google doc for instance)
 
     const FILE = 0;
-    const FOLDER = 1;
-    const LINK = 2;
 
+    const FOLDER = 1;
+
+    const LINK = 2;
 
     /**
      * Searchable rules.
@@ -84,7 +88,7 @@ class File extends Model
      */
     public function parent()
     {
-        return $this->belongsTo(File::class, 'parent_id');
+        return $this->belongsTo(self::class, 'parent_id');
     }
 
     /**
@@ -99,8 +103,6 @@ class File extends Model
         }
 
         if ($this->parent) {
-
-
             $parent = $this->parent;
 
             // max parent depth is 10 // code is ugly but at least it's not recursive so it stops after 10 whatever happens // need to add error checking
@@ -124,17 +126,18 @@ class File extends Model
      * Never set parent_id directly, use this function instead
      * Use setParent(null) to move to root
      */
-    public function setParent(File $parent = null)
+    public function setParent(self $parent = null)
     {
         // handle case where parent is false : we move the file to root
         if (is_null($parent)) {
             $this->parent_id = null;
             $this->save();
+
             return $this;
         }
 
         // Validate parent :  not self, is a folder, exists, is in same group
-        if ($parent->group_id <> $this->group_id) {
+        if ($parent->group_id != $this->group_id) {
             // TODO throw error instead
             abort(500, 'Trying to set parent on a file from a different group or no group defined');
         }
@@ -144,14 +147,14 @@ class File extends Model
             abort(500, 'Cannot set parent to myself');
         }
 
-        if (!$parent->isFolder()) {
+        if (! $parent->isFolder()) {
             // TODO throw error instead
             abort(500, 'Parent must be a folder');
         }
 
-
         $this->parent_id = $parent->id;
         $this->save();
+
         return $this;
     }
 
@@ -232,7 +235,7 @@ class File extends Model
 
             // delete version directory
 
-            $storage_path = 'groups/' . $this->group->id . '/files/' . $this->id;
+            $storage_path = 'groups/'.$this->group->id.'/files/'.$this->id;
             if (Storage::exists($storage_path)) {
                 Storage::deleteDirectory($storage_path);
             }
@@ -243,30 +246,26 @@ class File extends Model
         return $this;
     }
 
-
-
-
     /**
      * Set file content from a file request -> to storage
      * You need to pass an uploaded file from a $request as $uploaded_file
      * The file you are attaching to must already exist in the DB.
-     * 
+     *
      * Can be called multiple times, a new timestamped filename is generated each time.
-     * 
+     *
      * Files are stored in groups/[group-id]/files/[file-id]/[timestamp]-[filename]
      */
     public function addToStorage($uploaded_file)
     {
         if ($this->exists) {
             // generate filenames and path
-            $storage_path = 'groups/' . $this->group->id . '/files/' . $this->id;
+            $storage_path = 'groups/'.$this->group->id.'/files/'.$this->id;
 
             // simplified filename
-            $filename = str_slug(pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $uploaded_file->guessExtension();
+            $filename = str_slug(pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME)).'.'.$uploaded_file->guessExtension();
 
             // storage filename start with precise timestamp including millisecond to avoid race condition
-            $storage_filename = Carbon::now()->format('Y-m-d_H-i-s-v') . '-' . $filename;
-
+            $storage_filename = Carbon::now()->format('Y-m-d_H-i-s-v').'-'.$filename;
 
             $stored_path = $uploaded_file->storeAs($storage_path, $storage_filename);
 
@@ -292,6 +291,6 @@ class File extends Model
      */
     public function storagePath()
     {
-        return storage_path('app/') . $this->path;
+        return storage_path('app/').$this->path;
     }
 }

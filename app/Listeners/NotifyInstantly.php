@@ -2,12 +2,12 @@
 
 namespace App\Listeners;
 
-use App\Events\ContentCreated;
-use Notification;
 use App\Comment;
-use App\User;
 use App\Discussion;
+use App\Events\ContentCreated;
+use App\User;
 use Auth;
+use Notification;
 
 class NotifyInstantly
 {
@@ -37,14 +37,13 @@ class NotifyInstantly
             // get a list of users that must be notified instantly
             $users = $comment->discussion->group->users()->where('notification_interval', 1)->get()->except(Auth::id());
 
-
             foreach ($users as $user) {
                 Notification::send($user, new \App\Notifications\CommentCreated($comment, Auth::user()));
             }
         }
 
-         // Comments
-         if ($event->model instanceof Discussion) {
+        // Comments
+        if ($event->model instanceof Discussion) {
             $discussion = $event->model;
 
             // get a list of users that must be notified instantly

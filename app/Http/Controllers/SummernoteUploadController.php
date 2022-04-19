@@ -38,8 +38,8 @@ class SummernoteUploadController extends Controller
             $store = $file->store('summer-uploads', 'public');
 
             // resize the file, optional (intervention/image package)
-            $image = Image::make(public_path('storage/' . $store));
-            if($image->width() > 600) {
+            $image = Image::make(public_path('storage/'.$store));
+            if ($image->width() > 600) {
                 $image->resize(600, null, function ($constraint) {
                     $constraint->aspectRatio();
                 });
@@ -48,7 +48,7 @@ class SummernoteUploadController extends Controller
             $image->save();
 
             //respons to the editor
-            return response()->json($request->root() . '/storage/' . $store, 200, [], JSON_UNESCAPED_SLASHES);
+            return response()->json($request->root().'/storage/'.$store, 200, [], JSON_UNESCAPED_SLASHES);
         }
 
         return App::abort(404);

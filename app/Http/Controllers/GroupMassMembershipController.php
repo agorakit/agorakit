@@ -55,7 +55,7 @@ class GroupMassMembershipController extends Controller
                     $user->notify(new \App\Notifications\AddedToGroup($group));
                 }
 
-                flash(trans('messages.user_added_successfuly') . ' : ' . $user->name);
+                flash(trans('messages.user_added_successfuly').' : '.$user->name);
             }
         }
 

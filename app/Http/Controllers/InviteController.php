@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Group;
-use App\User;
-use App\Membership;
 use App\Mail\InviteUser;
+use App\Membership;
+use App\User;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -20,12 +20,12 @@ class InviteController extends Controller
     }
 
     /**
-    * Shows an invitation form for the specific group.
-    *
-    * @param [type] $group_id [description]
-    *
-    * @return [type] [description]
-    */
+     * Shows an invitation form for the specific group.
+     *
+     * @param [type] $group_id [description]
+     *
+     * @return [type] [description]
+     */
     public function invite(Request $request, Group $group)
     {
         $this->authorize('invite', $group);
@@ -36,14 +36,14 @@ class InviteController extends Controller
     }
 
     /**
-    * Send invites to new members by email.
-    * Create user accounts already for those users.
-    * Set membership status to "invited"
-    *
-    * @param int $group_id [description]
-    *
-    * @return [type] [description]
-    */
+     * Send invites to new members by email.
+     * Create user accounts already for those users.
+     * Set membership status to "invited"
+     *
+     * @param int $group_id [description]
+     *
+     * @return [type] [description]
+     */
     public function sendInvites(Request $request, Group $group)
     {
         $this->authorize('invite', $group);
@@ -65,9 +65,7 @@ class InviteController extends Controller
 
             if ($user->isMemberOf($group)) {
                 $status_message .= trans('membership.user_already_invited').' : '.$email.'<br/>';
-            }
-            else
-            {
+            } else {
                 $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $group->id]);
                 $membership->membership = \App\Membership::INVITED;
                 $membership->save();
@@ -75,11 +73,8 @@ class InviteController extends Controller
                 // send invitation email
                 Mail::to($email)->send(new InviteUser($group_user, $membership));
                 $status_message .= trans('membership.users_has_been_invited').' : '.$email.'<br/>';
-
-
             }
         }
-
 
         // NICETOHAVE We could queue or wathever if more than 50 mails for instance.
         // But it's also a kind of spam prevention that it takes time to invite on the server
@@ -92,11 +87,12 @@ class InviteController extends Controller
     }
 
     /**
-    * Show a list of invites for the current user  and allow to accept / discard the invite
-    */
+     * Show a list of invites for the current user  and allow to accept / discard the invite
+     */
     public function index(Request $request)
     {
         $memberships = Auth::user()->memberships()->where('membership', Membership::INVITED)->get();
+
         return view('membership.invites')
         ->with('memberships', $memberships);
     }
@@ -106,6 +102,7 @@ class InviteController extends Controller
         if (Auth::user()->id == $membership->user_id) {
             $membership->membership = Membership::MEMBER;
             $membership->save();
+
             return redirect()->route('invites.index');
         }
     }
@@ -115,6 +112,7 @@ class InviteController extends Controller
         if (Auth::user()->id == $membership->user_id) {
             $membership->membership = Membership::DECLINED;
             $membership->save();
+
             return redirect()->route('invites.index');
         }
     }
@@ -133,14 +131,13 @@ class InviteController extends Controller
 
         $user->verified = 1;
         $user->save();
-    
+
         $membership->membership = Membership::MEMBER;
         $membership->save();
 
         flash(trans('membership.welcome'));
 
         return redirect()->route('groups.show', $membership->group);
-        
     }
 
     /**
@@ -157,7 +154,7 @@ class InviteController extends Controller
 
         $user->verified = 1;
         $user->save();
-    
+
         $membership->membership = Membership::DECLINED;
         $membership->save();
 
@@ -165,7 +162,4 @@ class InviteController extends Controller
 
         return redirect()->route('groups.show', $membership->group);
     }
-
-
-    
 }

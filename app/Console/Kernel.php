@@ -8,10 +8,10 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 class Kernel extends ConsoleKernel
 {
     /**
-    * The Artisan commands provided by your application.
-    *
-    * @var array
-    */
+     * The Artisan commands provided by your application.
+     *
+     * @var array
+     */
     protected $commands = [
         \App\Console\Commands\SendNotifications::class,
         \App\Console\Commands\ConvertFiles::class,
@@ -30,12 +30,12 @@ class Kernel extends ConsoleKernel
     ];
 
     /**
-    * Define the application's command schedule.
-    *
-    * @param \Illuminate\Console\Scheduling\Schedule $schedule
-    *
-    * @return void
-    */
+     * Define the application's command schedule.
+     *
+     * @param \Illuminate\Console\Scheduling\Schedule $schedule
+     *
+     * @return void
+     */
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('agorakit:sendnotifications')

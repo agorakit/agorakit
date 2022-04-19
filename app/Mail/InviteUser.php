@@ -2,18 +2,19 @@
 
 namespace App\Mail;
 
-use URL;
 use App\Membership;
 use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use URL;
 
 class InviteUser extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $membership;
+
     public $group_user;
 
     /**

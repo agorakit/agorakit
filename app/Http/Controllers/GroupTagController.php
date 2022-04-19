@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Discussion;
 use App\Group;
 use App\Tag;
-use App\Discussion;
 use Illuminate\Http\Request;
 
 class GroupTagController extends Controller
@@ -12,7 +12,6 @@ class GroupTagController extends Controller
     public function __construct()
     {
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -25,7 +24,7 @@ class GroupTagController extends Controller
     {
         $this->authorize('manage-tags', $group);
 
-        // this is a bit hackish : 
+        // this is a bit hackish :
         // we instantiate a discussion just to get the current allowed tags for discussions, files and actions
         // this is just to access the getAllowedTags() function from the hasControlledTags trait
         $discussion = new Discussion;
@@ -33,7 +32,6 @@ class GroupTagController extends Controller
 
         // generate a complete list of tags used in this group to help the admin set correct limitations
         $tags = collect();
-
 
         $discussions = $group->discussions()
             ->with('tags')
@@ -57,7 +55,6 @@ class GroupTagController extends Controller
 
         $tags = $tags->unique('normalized')->sortBy('normalized');
 
-
         return view('groups.allowed_tags')
             ->with('group', $group)
             ->with('tags', $tags)
@@ -78,6 +75,7 @@ class GroupTagController extends Controller
         $group->setSetting('allowed_tags', $request->input('tags'));
 
         flash(trans('messages.ressource_updated_successfully'));
+
         return redirect()->route('groups.tags.edit', [$group]);
     }
 }

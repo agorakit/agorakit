@@ -5,12 +5,8 @@ namespace App\Http\Controllers;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
-
 use Spatie\IcalendarGenerator\Components\Calendar;
 use Spatie\IcalendarGenerator\Components\Event;
-
-
 
 /**
  * This controller provides a specific Ical url for each user.
@@ -29,10 +25,9 @@ class UserIcalController extends Controller
      */
     public function index(Request $request, User $user)
     {
-        if (!$request->hasValidSignature()) {
+        if (! $request->hasValidSignature()) {
             abort(404, 'Invalid signature');
         }
-
 
         // Create new calendar
         $calendar = Calendar::create(setting('name'));
@@ -51,7 +46,7 @@ class UserIcalController extends Controller
             $event = Event::create()
                 ->name($action->name)
                 ->description(summary($action->body), 1000)
-                ->uniqueIdentifier($action->group->name . '-' . $action->id)
+                ->uniqueIdentifier($action->group->name.'-'.$action->id)
                 ->createdAt($action->created_at)
                 ->startsAt($action->start)
                 ->endsAt($action->stop)

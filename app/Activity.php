@@ -12,9 +12,9 @@ class Activity extends Model
     use ValidatingTrait;
 
     protected $rules = [
-    'user_id'   => 'required|exists:users,id',
-    'group_id'  => 'required|exists:groups,id',
-    'action'    => 'required|in:created,updated,deleted,commented',
+        'user_id'   => 'required|exists:users,id',
+        'group_id'  => 'required|exists:groups,id',
+        'action'    => 'required|in:created,updated,deleted,commented',
     ];
 
     /**

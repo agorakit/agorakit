@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
 use App\File;
 use App\Group;
+use Auth;
 use Illuminate\Http\Request;
 
 /**
@@ -51,9 +51,6 @@ class FileController extends Controller
             $groups = \App\Group::public()->get()->pluck('id');
         }
 
-
-
-
         $files = \App\File::with('group', 'user', 'tags')
             ->when($tag, function ($query) use ($tag) {
                 return $query->withAnyTags($tag);
@@ -62,8 +59,6 @@ class FileController extends Controller
             ->orderBy('status', 'desc')
             ->orderBy('created_at', 'desc')
             ->paginate(25);
-        
-
 
         return view('dashboard.files')
             ->with('tags', $tags)

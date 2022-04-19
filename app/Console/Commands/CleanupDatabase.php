@@ -2,18 +2,17 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use App\Group;
-use App\Discussion;
-use App\Comment;
 use App\Action;
+use App\Comment;
+use App\Discussion;
+use App\File;
+use App\Group;
 use App\Message;
 use App\User;
-use App\File;
 use Carbon\Carbon;
-use Venturecraft\Revisionable\Revision;
+use Illuminate\Console\Command;
 use Illuminate\Notifications\DatabaseNotification;
-
+use Venturecraft\Revisionable\Revision;
 
 class CleanupDatabase extends Command
 {
@@ -62,25 +61,35 @@ class CleanupDatabase extends Command
 
         foreach ($groups as $group) {
             $count = $group->discussions()->delete();
-            if ($count) $this->info($count . ' discussions soft deleted in group ' . $group->name);
+            if ($count) {
+                $this->info($count.' discussions soft deleted in group '.$group->name);
+            }
 
             $count = $group->actions()->delete();
-            if ($count) $this->info($count . ' actions soft deleted in group ' . $group->name);
+            if ($count) {
+                $this->info($count.' actions soft deleted in group '.$group->name);
+            }
 
             $count = $group->files()->delete();
-            if ($count) $this->info($count . ' files soft deleted in group ' . $group->name);
+            if ($count) {
+                $this->info($count.' files soft deleted in group '.$group->name);
+            }
 
             $count = $group->memberships()->delete();
-            if ($count) $this->info($count . ' memberships hard deleted in group ' . $group->name);
+            if ($count) {
+                $this->info($count.' memberships hard deleted in group '.$group->name);
+            }
 
             $count = $group->invites()->delete();
-            if ($count) $this->info($count . ' invites hard deleted in group ' . $group->name);
+            if ($count) {
+                $this->info($count.' invites hard deleted in group '.$group->name);
+            }
 
             $group->forceDelete();
-            if ($count) $this->info('Group ' . $group->name . ' hard deleted');
+            if ($count) {
+                $this->info('Group '.$group->name.' hard deleted');
+            }
         }
-
-
 
         // Handle discussions and their related comments :
 
@@ -91,10 +100,14 @@ class CleanupDatabase extends Command
         foreach ($discussions as $discussion) {
             // definitely delete comments
             $count = $discussion->comments()->forceDelete();
-            if ($count) $this->info($count . ' comments hard deleted on ' . $discussion->name);
+            if ($count) {
+                $this->info($count.' comments hard deleted on '.$discussion->name);
+            }
 
             $count = $discussion->forceDelete();
-            if ($count) $this->info('Discussion ' . $discussion->name . ' hard deleted');
+            if ($count) {
+                $this->info('Discussion '.$discussion->name.' hard deleted');
+            }
         }
 
         // Handle actions
@@ -102,26 +115,28 @@ class CleanupDatabase extends Command
             ->where('deleted_at', '<', Carbon::today()->subDays($this->option('days')))
             ->forceDelete();
 
-
-        if ($count) $this->info($count . ' actions hard deleted');
-
+        if ($count) {
+            $this->info($count.' actions hard deleted');
+        }
 
         // Handle files
         $files = File::onlyTrashed()
             ->where('deleted_at', '<', Carbon::today()->subDays($this->option('days')))
             ->get();
 
-
         foreach ($files as $file) {
             // definitely delete files on storage
             $file->deleteFromStorage();
-            if ($count) $this->info($file->name . ' deleted from storage at ' . $file->path);
+            if ($count) {
+                $this->info($file->name.' deleted from storage at '.$file->path);
+            }
 
             // ...and from DB
             $file->forceDelete();
-            if ($count) $this->info($file->name . ' hard deleted');
+            if ($count) {
+                $this->info($file->name.' hard deleted');
+            }
         }
-
 
         // delete soft deleted and unverified users + their content and their memberships
         $users = User::onlyTrashed()
@@ -134,39 +149,54 @@ class CleanupDatabase extends Command
 
         foreach ($users as $user) {
             if ($user->verified == 0) {
-                $this->info('Unverfied user ' . $user->name . '(' . $user->email . ')');
+                $this->info('Unverfied user '.$user->name.'('.$user->email.')');
             }
 
             $count = $user->discussions()->delete();
-            if ($count) $this->info($count . ' discussions soft deleted from ' . $user->name);
+            if ($count) {
+                $this->info($count.' discussions soft deleted from '.$user->name);
+            }
 
             $count = $user->comments()->delete();
-            if ($count) $this->info($count . ' comments soft deleted from ' . $user->name);
+            if ($count) {
+                $this->info($count.' comments soft deleted from '.$user->name);
+            }
 
             $count = $user->actions()->delete();
-            if ($count) $this->info($count . ' actions soft deleted from ' . $user->name);
+            if ($count) {
+                $this->info($count.' actions soft deleted from '.$user->name);
+            }
 
             $count = $user->files()->delete();
-            if ($count) $this->info($count . ' files soft deleted from ' . $user->name);
+            if ($count) {
+                $this->info($count.' files soft deleted from '.$user->name);
+            }
 
             $count = $user->memberships()->delete();
-            if ($count) $this->info($count . ' memberships hard deleted from ' . $user->name);
+            if ($count) {
+                $this->info($count.' memberships hard deleted from '.$user->name);
+            }
 
             $user->forceDelete();
-            $this->info('User ' . $user->name . '(' . $user->email . ')' . ' hard deleted');
+            $this->info('User '.$user->name.'('.$user->email.')'.' hard deleted');
         }
 
         // delete all old revisions, older than double amount of days of retention, just in case
-        $count = Revision::where('created_at', '<', Carbon::today()->subDays($this->option('days') * 2 ))->forceDelete();
-        if ($count) $this->info($count . ' revisions deleted');
-        
+        $count = Revision::where('created_at', '<', Carbon::today()->subDays($this->option('days') * 2))->forceDelete();
+        if ($count) {
+            $this->info($count.' revisions deleted');
+        }
+
         // delete all old imported messages
         $count = Message::where('created_at', '<', Carbon::today()->subDays(7))->forceDelete();
-        if ($count) $this->info($count . ' inbound mail messages deleted');
+        if ($count) {
+            $this->info($count.' inbound mail messages deleted');
+        }
 
         // delete all old notifications
         $count = DatabaseNotification::where('created_at', '<', Carbon::today()->subDays($this->option('days')))->forceDelete();
-        if ($count) $this->info($count . ' database notifications deleted');
-
+        if ($count) {
+            $this->info($count.' database notifications deleted');
+        }
     }
 }

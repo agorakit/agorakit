@@ -3,48 +3,42 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-
-
-
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\Request;
-
+use App\Mail\UserConfirmation;
 use App\User;
 use Auth;
-use Mail;
 use Gate;
-use App\Mail\UserConfirmation;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Mail;
 
 class RegisterController extends Controller
 {
-
     /**
-    * Create a new controller instance.
-    *
-    * @return void
-    */
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('guest', ['except' => ['confirmEmail']]);
     }
 
     /**
-    * Step 1 : Show registration form
-    */
+     * Step 1 : Show registration form
+     */
     public function showRegistrationForm()
     {
         if (Gate::allows('create', User::class)) {
             return view('auth.register');
-        }
-        else {
+        } else {
             abort(500, 'You cannot create an account on this server');
         }
     }
 
     /**
-    * Step 2 : store email and name from the previous form
-    * Redirect user to email login if account found, else redirecto to Step 3
-    */
+     * Step 2 : store email and name from the previous form
+     * Redirect user to email login if account found, else redirecto to Step 3
+     */
     public function handleRegistrationForm(Request $request)
     {
         Gate::authorize('create', User::class);
@@ -54,16 +48,15 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255'],
         ]);
 
-
         // store name and email in the session
         $request->session()->put('name', $request->input('name'));
         $request->session()->put('email', $request->input('email'));
 
-
         // check if mail is taken, if taken, propose a login link instead
         $user = User::where('email', $request->input('email'))->first();
-        if($user) {
+        if ($user) {
             flash('You already have an account, use this form to receive a login link by email');
+
             return redirect()->route('loginbyemail');
         }
 
@@ -72,8 +65,8 @@ class RegisterController extends Controller
     }
 
     /**
-    * Step 3 : Show passwords form
-    */
+     * Step 3 : Show passwords form
+     */
     public function showPasswordForm(Request $request)
     {
         Gate::authorize('create', User::class);
@@ -81,10 +74,9 @@ class RegisterController extends Controller
         return view('auth.register_password');
     }
 
-
     /**
-    * Step 4 : Handle everything and hopefuly create an account
-    */
+     * Step 4 : Handle everything and hopefuly create an account
+     */
     public function handlePasswordForm(Request $request)
     {
         Gate::authorize('create', User::class);
@@ -93,7 +85,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-        $user =  User::create([
+        $user = User::create([
             'name' => $request->session()->get('name'),
             'email' => $request->session()->get('email'),
             'password' => Hash::make($request->input('password')),
@@ -105,16 +97,13 @@ class RegisterController extends Controller
         return redirect('/');
     }
 
-
-
-
     /**
-    * Confirm a user's email address.
-    *
-    * @param string $token
-    *
-    * @return mixed
-    */
+     * Confirm a user's email address.
+     *
+     * @param string $token
+     *
+     * @return mixed
+     */
     public function confirmEmail(Request $request, $token)
     {
         // find user based on the verif token
@@ -127,8 +116,6 @@ class RegisterController extends Controller
         }
         flash(trans('messages.you_have_verified_your_email'));
 
-
         return redirect('/');
     }
-
 }

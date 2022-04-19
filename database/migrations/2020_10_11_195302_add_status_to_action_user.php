@@ -14,8 +14,7 @@ class AddStatusToActionUser extends Migration
     public function up()
     {
         Schema::table('action_user', function (Blueprint $table) {
-            $table->integer('status')->default(10); 
-            
+            $table->integer('status')->default(10);
         });
     }
 

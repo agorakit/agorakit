@@ -2,19 +2,19 @@
 
 namespace App\Console\Commands;
 
-use App\Message;
 use App\Discussion;
 use App\Group;
+use App\Mail\MailBounce;
+use App\Message;
 use App\User;
-use Ddeboer\Imap\Server;
 use Ddeboer\Imap\Message as ImapMessage;
+use Ddeboer\Imap\Server;
+use EmailReplyParser\EmailReplyParser;
 use Illuminate\Console\Command;
+use League\HTMLToMarkdown\HtmlConverter;
 use Log;
 use Mail;
-use App\Mail\MailBounce;
-use League\HTMLToMarkdown\HtmlConverter;
 use Michelf\Markdown;
-use EmailReplyParser\EmailReplyParser;
 
 /*
 Inbound Email handler for Agorakit, allows user to post content by email, first step
@@ -30,7 +30,7 @@ After that, the agorakit:processmessages command should be called, it's the seco
 
 TODO : create a POP3 mail parser as well, would be very easy to do
 
-Emails are generated as follow :  
+Emails are generated as follow :
 
 [INBOX_PREFIX][group-slug][INBOX_SUFFIX]
 
@@ -96,21 +96,18 @@ class CheckMailbox extends Command
                         continue;
                     }
                     // $mailbox is instance of \Ddeboer\Imap\Mailbox
-                    $this->line('Mailbox ' . $mailbox->getName() . ' has ' . $mailbox->count() . ' messages');
+                    $this->line('Mailbox '.$mailbox->getName().' has '.$mailbox->count().' messages');
                 }
             }
 
             // open INBOX
             $this->inbox = $this->connection->getMailbox('INBOX');
 
-
             // get all messages
             $messages = $this->inbox->getMessages();
 
-
             $i = 0;
             foreach ($messages as $mailbox_message) {
-
                 $this->debug('-----------------------------------');
 
                 // limit to 100 messages at a time (I did no find a better way to handle this iterator)
@@ -119,9 +116,8 @@ class CheckMailbox extends Command
                 }
                 $i++;
 
-                $this->debug('Processing email "' . $mailbox_message->getSubject() . '"');
-                $this->debug('From ' . $mailbox_message->getFrom()->getAddress());
-
+                $this->debug('Processing email "'.$mailbox_message->getSubject().'"');
+                $this->debug('From '.$mailbox_message->getFrom()->getAddress());
 
                 $message = new Message;
 
@@ -131,20 +127,17 @@ class CheckMailbox extends Command
 
                 $message->saveOrFail();
 
-                if (!$this->option('debug')) {
+                if (! $this->option('debug')) {
                     $this->moveMessage($mailbox_message, 'stored');
                 }
-
-
             }
             $this->connection->expunge();
         } else {
             $this->info('Email checking disabled in settings');
+
             return false;
         }
     }
-
-
 
     /**
      * Small helper debug output
@@ -156,7 +149,6 @@ class CheckMailbox extends Command
         }
     }
 
-
     /**
      * Move the provided $message to a folder named $folder
      */
@@ -167,7 +159,6 @@ class CheckMailbox extends Command
             return true;
         }
 
-      
         if ($this->connection->hasMailbox($folder)) {
             $folder = $this->connection->getMailbox($folder);
         } else {
@@ -176,5 +167,4 @@ class CheckMailbox extends Command
 
         return $message->move($folder);
     }
-
 }

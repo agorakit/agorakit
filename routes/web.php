@@ -56,10 +56,7 @@ Each page (view) would need to know
 I will apply here the recomandation "routes as documentation" from https://philsturgeon.uk/php/2013/07/23/beware-the-route-to-evil/
 */
 
-
 Route::group(['middleware' => ['web']], function () {
-
-
 
     /*
     // Uncomment this to test mailable
@@ -88,15 +85,11 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('register/password', 'Auth\RegisterController@showPasswordForm');
         Route::post('register/password', 'Auth\RegisterController@handlePasswordForm');
 
-
         Route::get('login/email', 'Auth\LoginByEmailController@showLoginByEmailForm')->name('loginbyemail');
         Route::post('login/email', 'Auth\LoginByEmailController@sendLoginByEmail')->name('sendloginbyemail');
     });
 
-
     Route::get('autologin/{username}', 'Auth\AutoLoginController@login')->name('autologin');
-
-
 
     // OAuth Routes
     Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
@@ -108,7 +101,6 @@ Route::group(['middleware' => ['web']], function () {
 
     // Icons
     Route::get('icon/{size?}', 'IconController@index')->name('icon');
-
 
     /*
     Homepage
@@ -132,13 +124,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('tags', 'TagController@index')->name('tags.index');
     Route::get('tags/{tag}', 'TagController@show')->name('tags.show');
 
-
-
     /* Drawer navigation */
     Route::get('navigation', 'NavigationController@show')->name('navigation.main');
-
-
-
 
     /* Pages */
     Route::get('pages/help', 'PageController@help')->name('pages.help');
@@ -149,8 +136,6 @@ Route::group(['middleware' => ['web']], function () {
     */
     Route::get('discussions/feed', 'FeedController@discussions')->name('discussions.feed');
     Route::get('actions/feed', 'FeedController@actions')->name('actions.feed');
-
-
 
     /////////////////// COMMON STUFF (Dashboard & overview) /////////////////////
 
@@ -175,7 +160,6 @@ Route::group(['middleware' => ['web']], function () {
     // Allows invited users to accept or deny invitations from a signed link sent to their mailbox
     Route::get('invite/{membership}/accept/signed', 'InviteController@acceptWithSignature')->name('invite.accept.signed');
     Route::get('invite/{membership}/deny/signed', 'InviteController@denyWithSignature')->name('invite.deny.signed');
-
 
     // General discussion create route
     Route::get('discussions/create', 'GroupDiscussionController@create')->name('discussions.create');
@@ -212,10 +196,7 @@ Route::group(['middleware' => ['web']], function () {
     // Notifications
     Route::get('notifications', 'NotificationController@index')->name('notifications');
 
-
-
     //////////////////////////// GROUPS /////////////////////////////////////////
-
 
     // Groups : only members (or everyone if a group is public)
     Route::group(['as' => 'groups', 'prefix' => 'groups/{group}'], function () {
@@ -237,7 +218,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('discussions/mention', 'MentionController@discussions')->name('.discussions.mention');
         Route::get('files/mention', 'MentionController@files')->name('.files.mention');
 
-
         /***************** Memberships for users ***********/
 
         // Member's list
@@ -247,7 +227,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('join', 'GroupMembershipController@create')->name('groups.membership.create');
         Route::post('join', 'GroupMembershipController@store')->name('groups.membership.store');
 
-
         // preferences and leave group
         Route::get('preferences', 'GroupMembershipController@edit')->name('.mymembership.edit');
         Route::post('preferences', 'GroupMembershipController@update')->name('.mymembership.update');
@@ -256,7 +235,6 @@ Route::group(['middleware' => ['web']], function () {
 
         // In the case of closed group, we show an how to join message (not in use currently)
         Route::get('howtojoin', 'GroupMembershipController@howToJoin')->name('.howtojoin');
-
 
         /************** Memberships for group admins  ***********/
 
@@ -268,33 +246,19 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('membership/{membership}', 'GroupMembershipAdminController@edit')->name('.membership.edit');
         Route::post('membership/{membership}', 'GroupMembershipAdminController@update')->name('.membership.update');
 
-
-
-
         // Stats
         Route::get('insights', 'GroupInsightsController@index')->name('.insights');
-
 
         // Invites
         Route::get('invite', 'InviteController@invite')->name('.invite.form');
         Route::post('invite', 'InviteController@sendInvites')->name('.invite');
 
-
-
-
-
         // Stats
         Route::get('insights', 'GroupInsightsController@index')->name('.insights');
-
-
-
 
         // Maps
         Route::get('map', 'GroupMapController@index')->name('.map');
         Route::get('map.geojson', 'GroupMapController@geoJson')->name('.map.geojson');
-
-
-
 
         // Discussions
         Route::get('discussions', 'GroupDiscussionController@index')->name('.discussions.index');
@@ -313,7 +277,6 @@ Route::group(['middleware' => ['web']], function () {
 
         // Discussion history
         Route::get('discussions/{discussion}/history', 'GroupDiscussionController@history')->name('.discussions.history');
-
 
         // Comments
         Route::post('discussions/{discussion}/reply', 'CommentController@store')->name('.discussions.reply');
@@ -342,8 +305,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('actions/{action}/participation', 'ParticipationController@edit')->name('.actions.participation');
         Route::post('actions/{action}/participation', 'ParticipationController@update')->name('.actions.participation.update');
 
-
-
         // Files
         Route::get('files', 'GroupFileController@index')->name('.files.index');
         Route::get('files/create/{parent?}', 'GroupFileController@create')->name('.files.create');
@@ -367,7 +328,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('files/{file}/preview', 'FileDownloadController@preview')->name('.files.preview');
         Route::get('files/{file}/icon', 'FileDownloadController@icon')->name('.files.icon');
 
-
         // Collaboration
         Route::get('files/{file}/collaboration', 'CollaborationController@edit')->name('.files.collaboration');
         Route::get('files/{file}/collaboration/download', 'CollaborationController@show')->name('.files.collaboration.download');
@@ -376,7 +336,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('tags', 'GroupTagController@edit')->name('.tags.edit');
         Route::post('tags', 'GroupTagController@update')->name('.tags.update');
 
-
         // Permissions
         Route::get('permissions', 'GroupPermissionController@index')->name('.permissions.index');
         Route::post('permissions', 'GroupPermissionController@update')->name('.permissions.update');
@@ -384,8 +343,6 @@ Route::group(['middleware' => ['web']], function () {
 
     // Search
     Route::get('search', 'SearchController@index');
-
-
 
     /***************** ADMIN STUFF **************/
     /*
@@ -409,11 +366,8 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::get('admin/group', 'Admin\GroupController@index');
 
-        
         Route::get('admin/messages', 'Admin\MessageController@index')->name('admin.messages.index');
         Route::get('admin/messages/{message}', 'Admin\MessageController@show')->name('admin.messages.show');
-        
-
 
         // mailable preview, for devs mainly
         Route::get('admin/mailable', function () {
@@ -427,7 +381,5 @@ Route::group(['middleware' => ['web']], function () {
 
             return $notif;
         });
-
-        
     });
 });

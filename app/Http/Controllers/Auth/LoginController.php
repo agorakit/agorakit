@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Mail\LoginByEmail;
 use App\Providers\RouteServiceProvider;
+use App\User;
+use Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
-use App\User;
+use Illuminate\Http\Request;
 use Mail;
-use Auth;
-use App\Mail\LoginByEmail;
 
 class LoginController extends Controller
 {
@@ -28,17 +28,17 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     /**
-    * Where to redirect users after login.
-    *
-    * @var string
-    */
+     * Where to redirect users after login.
+     *
+     * @var string
+     */
     protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
-    * Create a new controller instance.
-    *
-    * @return void
-    */
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
@@ -59,14 +59,14 @@ class LoginController extends Controller
                 // send login link by email
                 Mail::to($user->email)->send(new LoginByEmail($user));
                 flash(__('Check your mailbox, we sent you a login link. It will expires in 30 minutes'));
+
                 return redirect('/');
-            }
-            else {
+            } else {
                 flash(__('No user found, please create an account instead'));
+
                 return redirect()->back();
             }
-        }
-        else  {
+        } else {
             if ($user) {
                 // attempt to login
                 if (Auth::attempt(['email' => $user->email, 'password' => $request->input('password')], request()->input('remember'))) {
@@ -74,25 +74,26 @@ class LoginController extends Controller
                 } else {
                     $this->incrementLoginAttempts($request);
                     flash(__('Incorrect password and/or username'));
+
                     return redirect()->back();
                 }
-            }
-            else {
+            } else {
                 flash(__('No user found, please create an account instead'));
+
                 return redirect()->back();
             }
-
         }
     }
 
     /**
-    * Allows to log with either username or email
-    */
+     * Allows to log with either username or email
+     */
     public function username()
     {
         $login = request()->input('login');
         $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
         request()->merge([$field => $login]);
+
         return $field;
     }
 }

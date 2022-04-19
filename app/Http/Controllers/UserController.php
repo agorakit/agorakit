@@ -7,14 +7,14 @@ use App\Mail\ContactUser;
 use App\Mail\UserConfirmation;
 use App\User;
 use Auth;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Image;
 use Mail;
 use Redirect;
 use Storage;
-use Illuminate\Support\Facades\Hash;
-use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class UserController extends Controller
 {
@@ -123,7 +123,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         if ($user->isVerified() || auth()->user()->isAdmin()) {
-            $title = $user->username . ' ' . trans('messages.user_profile');
+            $title = $user->username.' '.trans('messages.user_profile');
 
             return view('users.show')
                 ->with('activities', $user->activities()->whereIn('group_id', \App\Group::public()->get()->pluck('id'))->paginate(10))
@@ -174,11 +174,10 @@ class UserController extends Controller
             $user->email = $request->input('email');
             $user->body = $request->input('body');
 
-
             if ($user->address != $request->input('address')) {
                 // we need to update user address and geocode it
                 $user->address = $request->input('address');
-                if (!$user->geocode()) {
+                if (! $user->geocode()) {
                     flash(trans('messages.address_cannot_be_geocoded'));
                 } else {
                     flash(trans('messages.ressource_geocoded_successfully'));
@@ -195,9 +194,6 @@ class UserController extends Controller
                     $user->username = $request->input('username');
                 }
             }
-
-
-
 
             // handle tags
             if ($request->get('tags')) {
@@ -235,8 +231,8 @@ class UserController extends Controller
 
             // handle cover
             if ($request->hasFile('cover')) {
-                Storage::disk('local')->makeDirectory('users/' . $user->id);
-                Image::make($request->file('cover'))->widen(800)->save(storage_path() . '/app/users/' . $user->id . '/cover.jpg');
+                Storage::disk('local')->makeDirectory('users/'.$user->id);
+                Image::make($request->file('cover'))->widen(800)->save(storage_path().'/app/users/'.$user->id.'/cover.jpg');
             }
 
             // handle email change : if a user changes his email, we set him/her to unverified, and send a new verification email
@@ -255,7 +251,6 @@ class UserController extends Controller
 
                 $user->password = Hash::make($request->input('password'));
             }
-
 
             $user->save();
 
@@ -319,47 +314,47 @@ class UserController extends Controller
 
             // First case assign all to anonymous :
             if ($request->content == 'anonymous') {
-                $message[] = $user->comments->count() . ' comments anonymized';
+                $message[] = $user->comments->count().' comments anonymized';
                 foreach ($user->comments as $comment) {
                     $comment->timestamps = false;
                     $comment->user()->associate($anonymous);
                     $comment->save();
                 }
 
-                $message[] = $user->discussions->count() . ' discussions anonymized';
+                $message[] = $user->discussions->count().' discussions anonymized';
                 foreach ($user->discussions as $discussion) {
                     $discussion->timestamps = false;
                     $discussion->user()->associate($anonymous);
                     $discussion->save();
                 }
 
-                $message[] = $user->files->count() . ' files anonymized';
+                $message[] = $user->files->count().' files anonymized';
                 foreach ($user->files as $file) {
                     $file->timestamps = false;
                     $file->user()->associate($anonymous);
                     $file->save();
                 }
 
-                $message[] = $user->actions->count() . ' actions anonymized';
+                $message[] = $user->actions->count().' actions anonymized';
                 foreach ($user->actions as $action) {
                     $action->timestamps = false;
                     $action->user()->associate($anonymous);
                     $action->save();
                 }
 
-                $message[] = $user->memberships->count() . ' memberships deleted';
+                $message[] = $user->memberships->count().' memberships deleted';
                 $user->memberships()->delete();
             }
 
             // Second case delete all :
             if ($request->content == 'delete') {
-                $message[] = $user->comments->count() . ' comments deleted';
+                $message[] = $user->comments->count().' comments deleted';
                 foreach ($user->comments as $comment) {
                     $comment->timestamps = false;
                     $comment->delete();
                 }
 
-                $message[] = $user->discussions->count() . ' discussions deleted';
+                $message[] = $user->discussions->count().' discussions deleted';
                 foreach ($user->discussions as $discussion) {
                     $discussion->timestamps = false;
 
@@ -371,19 +366,19 @@ class UserController extends Controller
                     }
                 }
 
-                $message[] = $user->files->count() . ' files deleted';
+                $message[] = $user->files->count().' files deleted';
                 foreach ($user->files as $file) {
                     $file->timestamps = false;
                     $file->delete();
                 }
 
-                $message[] = $user->actions->count() . ' actions deleted';
+                $message[] = $user->actions->count().' actions deleted';
                 foreach ($user->actions as $action) {
                     $action->timestamps = false;
                     $action->delete();
                 }
 
-                $message[] = $user->memberships->count() . ' memberships deleted';
+                $message[] = $user->memberships->count().' memberships deleted';
                 $user->memberships()->delete();
             }
 

@@ -18,14 +18,13 @@ class GroupMembershipController extends Controller
     }
 
     /**
-    * Display a listing of the resource.
-    *
-    * @return Response
-    */
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
     public function index(Group $group)
     {
         $this->authorize('view-members', $group);
-
 
         if (Gate::allows('manage-membership', $group)) {
             $memberships = $group->memberships()->with('user')->has('user')->orderBy('membership', 'desc')->get();
@@ -48,8 +47,8 @@ class GroupMembershipController extends Controller
     }
 
     /**
-    * Show a form to allow a user to join a group.
-    */
+     * Show a form to allow a user to join a group.
+     */
     public function create(Request $request, Group $group)
     {
         if (Gate::allows('join', $group)) {
@@ -69,13 +68,13 @@ class GroupMembershipController extends Controller
     }
 
     /**
-    * Store the membership. It means: add a user to a group and store his/her notification settings.
-    *
-    * @param Request $request  [description]
-    * @param [type]  $group_id [description]
-    *
-    * @return [type] [description]
-    */
+     * Store the membership. It means: add a user to a group and store his/her notification settings.
+     *
+     * @param Request $request  [description]
+     * @param [type]  $group_id [description]
+     *
+     * @return [type] [description]
+     */
     public function store(Request $request, Group $group)
     {
         // we don't authorize here, because either the group is open and we allow the user to join directly,
@@ -93,6 +92,7 @@ class GroupMembershipController extends Controller
             $membership->save();
 
             flash(trans('membership.welcome'));
+
             return redirect()->route('groups.show', [$group->id]);
         } else {
             // load or create membership for this group and user combination
@@ -110,13 +110,14 @@ class GroupMembershipController extends Controller
             }
 
             flash(trans('membership.application_stored'));
+
             return redirect()->route('groups.show', $group);
         }
     }
 
     /**
-    * Show a settings screen for a specific group. Allows a user to leave the group.
-    */
+     * Show a settings screen for a specific group. Allows a user to leave the group.
+     */
     public function destroyConfirm(Request $request, Group $group)
     {
 
@@ -138,12 +139,12 @@ class GroupMembershipController extends Controller
     }
 
     /**
-    * Remove the specified user from the group.
-    *
-    * @param int $id
-    *
-    * @return Response
-    */
+     * Remove the specified user from the group.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
     public function destroy(Request $request, Group $group)
     {
 
@@ -159,13 +160,13 @@ class GroupMembershipController extends Controller
     }
 
     /**
-    * Show a settings screen for a specific group. Allows a user to join, leave, set subscribe settings.
-    */
+     * Show a settings screen for a specific group. Allows a user to join, leave, set subscribe settings.
+     */
     public function edit(Request $request, Group $group, Membership $membership = null)
     {
         // We edit membership either for the current user or for another user if we are group admin
         // If no membership in the route, we load the membership for the current logged in user
-        if (!$membership) {
+        if (! $membership) {
             $membership = Membership::where('user_id', $request->user()->id)
             ->where('group_id', $group->id)
             ->firstOrFail();
@@ -183,13 +184,13 @@ class GroupMembershipController extends Controller
     }
 
     /**
-    * Store new settings from the preferencesForm.
-    */
+     * Store new settings from the preferencesForm.
+     */
     public function update(Request $request, Group $group, Membership $membership = null)
     {
 
         // load membership for this group and the current user combination
-        if (!$membership) {
+        if (! $membership) {
             // we edit membership for the current user
             $membership = Membership::where('user_id', $request->user()->id)
             ->where('group_id', $group->id)
@@ -217,12 +218,13 @@ class GroupMembershipController extends Controller
         $membership->save();
 
         flash(trans('membership.settings_updated'));
+
         return redirect()->route('groups.users.index', $group);
     }
 
     /**
-    * Show an explanation page on how to join a private group.
-    */
+     * Show an explanation page on how to join a private group.
+     */
     public function howToJoin(Request $request, Group $group)
     {
         return view('membership.howtojoin')

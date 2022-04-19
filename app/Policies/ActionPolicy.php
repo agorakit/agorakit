@@ -60,7 +60,7 @@ class ActionPolicy
         if ($user->isAdminOf($action->group)) {
             return true;
         }
-        
+
         return $user->id === $action->user_id;
     }
 
@@ -73,7 +73,7 @@ class ActionPolicy
         }
     }
 
-    /** 
+    /**
      * Defines if a user can participate or not or maybe to an event
      */
     public function participate(User $user, Action $action)

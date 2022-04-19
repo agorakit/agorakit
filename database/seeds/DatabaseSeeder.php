@@ -1,11 +1,10 @@
 <?php
 
+use App\Participation;
+use App\Setting;
 use Carbon\Carbon;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
-
-use App\Setting;
-use App\Participation;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,8 +22,6 @@ class DatabaseSeeder extends Seeder
         setting()->set('homepage_presentation_for_members', $this->richtext());
         setting()->set('help_text', $this->richtext());
 
-
-
         // create users
         DB::table('users')->delete();
 
@@ -38,9 +35,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // add avatar to admin user
-        Storage::disk('local')->makeDirectory('users/' . $admin->id);
+        Storage::disk('local')->makeDirectory('users/'.$admin->id);
         try {
-            Image::make($faker->picsumUrl(500, 400))->widen(500)->save(storage_path() . '/app/users/' . $admin->id . '/cover.jpg')->fit(128, 128)->save(storage_path() . '/app/users/' . $admin->id . '/thumbnail.jpg');
+            Image::make($faker->picsumUrl(500, 400))->widen(500)->save(storage_path().'/app/users/'.$admin->id.'/cover.jpg')->fit(128, 128)->save(storage_path().'/app/users/'.$admin->id.'/thumbnail.jpg');
         } catch (Exception $e) {
         }
 
@@ -63,9 +60,9 @@ class DatabaseSeeder extends Seeder
 
             // add avatar to every user
 
-            Storage::disk('local')->makeDirectory('users/' . $user->id);
+            Storage::disk('local')->makeDirectory('users/'.$user->id);
             try {
-                Image::make($faker->picsumUrl(500, 400))->widen(500)->save(storage_path() . '/app/users/' . $user->id . '/cover.jpg')->fit(128, 128)->save(storage_path() . '/app/users/' . $user->id . '/thumbnail.jpg');
+                Image::make($faker->picsumUrl(500, 400))->widen(500)->save(storage_path().'/app/users/'.$user->id.'/cover.jpg')->fit(128, 128)->save(storage_path().'/app/users/'.$user->id.'/thumbnail.jpg');
             } catch (Exception $e) {
             }
         }
@@ -73,19 +70,19 @@ class DatabaseSeeder extends Seeder
         // create 10 groups
         for ($i = 1; $i <= 10; $i++) {
             $group = App\Group::create([
-                'name' => $faker->city . '\'s user group',
+                'name' => $faker->city.'\'s user group',
                 'body' => $faker->text,
             ]);
 
-            $group->group_type = rand(0,2);
+            $group->group_type = rand(0, 2);
             $group->save();
 
             $group->tag($this->tags());
 
             // add cover image to groups
-            Storage::disk('local')->makeDirectory('groups/' . $group->id);
+            Storage::disk('local')->makeDirectory('groups/'.$group->id);
             try {
-                Image::make($faker->picsumUrl())->widen(800)->save(storage_path() . '/app/groups/' . $group->id . '/cover.jpg')->fit(300, 200)->save(storage_path() . '/app/groups/' . $group->id . '/thumbnail.jpg');
+                Image::make($faker->picsumUrl())->widen(800)->save(storage_path().'/app/groups/'.$group->id.'/cover.jpg')->fit(300, 200)->save(storage_path().'/app/groups/'.$group->id.'/thumbnail.jpg');
             } catch (Exception $e) {
             }
 
@@ -147,7 +144,7 @@ class DatabaseSeeder extends Seeder
                     // add participants to each action
                     $rsvp = Participation::firstOrCreate([
                         'user_id' => App\User::orderByRaw('RAND()')->first()->id,
-                        'action_id' => $action->id
+                        'action_id' => $action->id,
                     ]);
 
                     $status = $faker->numberBetween(1, 3);
@@ -169,7 +166,7 @@ class DatabaseSeeder extends Seeder
                 $file = App\File::create([
                     'name' => $faker->sentence(5),
                     'path'    => $faker->url,
-                    'item_type' => 2
+                    'item_type' => 2,
                 ]);
                 // attach one random author & group to each action
                 $file->user_id = App\User::orderByRaw('RAND()')->first()->id;
@@ -187,17 +184,15 @@ class DatabaseSeeder extends Seeder
     public function tags()
     {
         $amount = rand(0, 10);
-        $tags = array();
+        $tags = [];
 
         $faker = Faker::create();
         for ($i = 0; $i < $amount; $i++) {
             $tags[] = $faker->word;
         }
 
-
-        return implode(",", $tags);
+        return implode(',', $tags);
     }
-
 
     public function richtext()
     {
@@ -207,8 +202,8 @@ class DatabaseSeeder extends Seeder
 
         $faker = Faker::create();
         for ($i = 0; $i < $amount; $i++) {
-            $text .= '<h2>' . $faker->sentence . '</h2>';
-            $text .= implode("<p>", $faker->paragraphs(rand(1, 4)));
+            $text .= '<h2>'.$faker->sentence.'</h2>';
+            $text .= implode('<p>', $faker->paragraphs(rand(1, 4)));
         }
 
         return $text;

@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Group;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Group;
 
 /**
-
  * Global listing of actions.
  */
 class ActionController extends Controller
@@ -33,16 +32,16 @@ class ActionController extends Controller
                     if (Auth::user()->isAdmin()) { // super admin sees everything
                         $groups = Group::get()
                         ->pluck('id');
-                    } 
-                } 
-    
+                    }
+                }
+
                 if (Auth::user()->getPreference('show', 'my') == 'all') {
-                        $groups = Group::public()
+                    $groups = Group::public()
                         ->get()
                         ->pluck('id')
                         ->merge(Auth::user()->groups()->pluck('groups.id'));
-                } 
-                
+                }
+
                 if (Auth::user()->getPreference('show', 'my') == 'my') {
                     $groups = Auth::user()->groups()->pluck('groups.id');
                 }
@@ -74,16 +73,16 @@ class ActionController extends Controller
                 if (Auth::user()->isAdmin()) { // super admin sees everything
                     $groups = Group::get()
                     ->pluck('id');
-                } 
-            } 
+                }
+            }
 
             if (Auth::user()->getPreference('show', 'my') == 'all') {
-                    $groups = Group::public()
+                $groups = Group::public()
                     ->get()
                     ->pluck('id')
                     ->merge(Auth::user()->groups()->pluck('groups.id'));
-            } 
-            
+            }
+
             if (Auth::user()->getPreference('show', 'my') == 'my') {
                 $groups = Auth::user()->groups()->pluck('groups.id');
             }
@@ -111,7 +110,7 @@ class ActionController extends Controller
         foreach ($actions as $action) {
             $event['id'] = $action->id;
             $event['title'] = $action->name;
-            $event['description'] = $action->body . ' <br/> ' . $action->location;
+            $event['description'] = $action->body.' <br/> '.$action->location;
             $event['body'] = filter($action->body);
             $event['summary'] = summary($action->body);
             $event['location'] = $action->location;

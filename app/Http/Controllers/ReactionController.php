@@ -18,7 +18,6 @@ class ReactionController extends Controller
      */
     public function react(Request $request, $model, $id, $reaction)
     {
-
         if ($model == 'comment') {
             $model = Comment::findOrFail($id);
             $this->authorize('react', $model);
@@ -30,10 +29,9 @@ class ReactionController extends Controller
             $this->authorize('react', $model);
             Reaction::reactTo($model, $reaction);
         }
-        
+
         return redirect()->back();
     }
-
 
     /**
      * Remove reaction for the model/id for the current user

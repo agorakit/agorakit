@@ -1,5 +1,5 @@
 <?php
 
 return [
-  'create_one_button' => 'Démarrer une nouvelle discussion',
+    'create_one_button' => 'Démarrer une nouvelle discussion',
 ];

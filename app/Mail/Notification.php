@@ -11,12 +11,19 @@ class Notification extends Mailable
     use Queueable, SerializesModels;
 
     public $user;
+
     public $group;
+
     public $membership;
+
     public $discussions;
+
     public $files;
+
     public $users;
+
     public $actions;
+
     public $last_notification;
 
     /**
@@ -43,7 +50,7 @@ class Notification extends Mailable
         }
 
         $message = $this->markdown('emails.notification')
-            ->subject('[' . setting('name') . '] ' . trans('messages.news_from_group_email_subject') . ' "' . $this->group->name . '"');
+            ->subject('['.setting('name').'] '.trans('messages.news_from_group_email_subject').' "'.$this->group->name.'"');
 
         if ($this->group->inbox()) {
             $message->from($this->group->inbox(), $this->group->name);
@@ -71,10 +78,6 @@ class Notification extends Mailable
         } else {
             $message->from(config('mail.noreply'), config('mail.from.name'));
         }
-
-
-
-
 
         return $message;
     }

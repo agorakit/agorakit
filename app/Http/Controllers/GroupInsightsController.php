@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\AgorakitChart;
 use App\Group;
 use Carbon\Carbon;
-use App\Charts\AgorakitChart;
 use DB;
 
 class GroupInsightsController extends Controller
@@ -26,10 +26,9 @@ class GroupInsightsController extends Controller
             $group->users()->active()->count(),
             $group->discussions()->count(),
             $group->actions()->count(),
-            $group->files()->count()
+            $group->files()->count(),
         ]);
         $charts[] = $chart;
-
 
         // Discussions
         $results = \App\Discussion::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
@@ -42,7 +41,7 @@ class GroupInsightsController extends Controller
         $labels = [];
         foreach ($results as $result) {
             $dataset[] = $result->data;
-            $labels[] = $result->year . ' / ' .  $result->month;
+            $labels[] = $result->year.' / '.$result->month;
         }
 
         $chart = new AgorakitChart;
@@ -50,8 +49,6 @@ class GroupInsightsController extends Controller
         $chart->labels($labels);
         $chart->dataset('Amount', 'line', $dataset);
         $charts[] = $chart;
-
-
 
         // Actions
         $results = \App\Action::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
@@ -64,7 +61,7 @@ class GroupInsightsController extends Controller
         $labels = [];
         foreach ($results as $result) {
             $dataset[] = $result->data;
-            $labels[] = $result->year . ' / ' .  $result->month;
+            $labels[] = $result->year.' / '.$result->month;
         }
 
         $chart = new AgorakitChart;
@@ -72,7 +69,6 @@ class GroupInsightsController extends Controller
         $chart->labels($labels);
         $chart->dataset('Amount', 'line', $dataset);
         $charts[] = $chart;
-
 
         // Members
         $results = \App\Membership::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
@@ -85,7 +81,7 @@ class GroupInsightsController extends Controller
         $labels = [];
         foreach ($results as $result) {
             $dataset[] = $result->data;
-            $labels[] = $result->year . ' / ' .  $result->month;
+            $labels[] = $result->year.' / '.$result->month;
         }
 
         $chart = new AgorakitChart;
@@ -93,8 +89,6 @@ class GroupInsightsController extends Controller
         $chart->labels($labels);
         $chart->dataset('Amount', 'line', $dataset);
         $charts[] = $chart;
-
-
 
         // Files
         $results = \App\File::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
@@ -107,7 +101,7 @@ class GroupInsightsController extends Controller
         $labels = [];
         foreach ($results as $result) {
             $dataset[] = $result->data;
-            $labels[] = $result->year . ' / ' .  $result->month;
+            $labels[] = $result->year.' / '.$result->month;
         }
 
         $chart = new AgorakitChart;
@@ -115,9 +109,6 @@ class GroupInsightsController extends Controller
         $chart->labels($labels);
         $chart->dataset('Amount', 'line', $dataset);
         $charts[] = $chart;
-
-
-
 
         // Evolution of storage use
         $results = \App\File::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, sum(filesize) as data')
@@ -132,7 +123,7 @@ class GroupInsightsController extends Controller
         foreach ($results as $result) {
             $total = $total + $result->data / 1000000;
             $dataset[] = round($total);
-            $labels[] = $result->year . ' / ' .  $result->month;
+            $labels[] = $result->year.' / '.$result->month;
         }
 
         $chart = new AgorakitChart;
@@ -140,8 +131,6 @@ class GroupInsightsController extends Controller
         $chart->labels($labels);
         $chart->dataset('Megabytes', 'line', $dataset);
         $charts[] = $chart;
-
-
 
         return view('groups.insights')
             ->with('charts', $charts)

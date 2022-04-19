@@ -2,17 +2,18 @@
 
 namespace App\Mail;
 
+use App\Message;
 use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use App\Message;
 
 class MailBounce extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $email;
+
     public $user;
 
     /**
@@ -34,7 +35,7 @@ class MailBounce extends Mailable
     public function build()
     {
         return $this->markdown('emails.bounce')
-        ->subject('['.setting('name').'] '. __('Mail not delivered'))
+        ->subject('['.setting('name').'] '.__('Mail not delivered'))
         ->with('reason', $this->reason)
         ->with('subject', $this->message->subject)
         ->with('body', $this->message->extractText())

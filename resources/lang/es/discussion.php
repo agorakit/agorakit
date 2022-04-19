@@ -1,5 +1,5 @@
 <?php
 
 return [
-  'create_one_button' => 'Empezar uno nuevo',
+    'create_one_button' => 'Empezar uno nuevo',
 ];

@@ -7,41 +7,39 @@ use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 /**
-* This policy is the most important one. It defines what one can and cannot do in a group.
-* It is used everywhere to check for user abilities.
-*
-* It uses the newish laravel policy for anonymous users
-* (user object can be null, in this case the policy is for unauthenticated user)
-*
-* Policies will replace almost all middleware at some point,
-* because this way we have a single place to write sensitive code.
-* The policies can be used in controllers, views, etc...
-*
-*
-* The BasePolicy class provides common methods used in other policies
-*
-* !! This is sensitive code !!
-* --> Peer review appreciated <--
-*
-*/
-
+ * This policy is the most important one. It defines what one can and cannot do in a group.
+ * It is used everywhere to check for user abilities.
+ *
+ * It uses the newish laravel policy for anonymous users
+ * (user object can be null, in this case the policy is for unauthenticated user)
+ *
+ * Policies will replace almost all middleware at some point,
+ * because this way we have a single place to write sensitive code.
+ * The policies can be used in controllers, views, etc...
+ *
+ *
+ * The BasePolicy class provides common methods used in other policies
+ *
+ * !! This is sensitive code !!
+ * --> Peer review appreciated <--
+ */
 class GroupPolicy extends BasePolicy
 {
     use HandlesAuthorization;
 
     /**
-    * Create a new policy instance.
-    *
-    * @return void
-    */
+     * Create a new policy instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         //
     }
 
     /**
-    * A super admin can do everything, this bypasses all the following code
-    */
+     * A super admin can do everything, this bypasses all the following code
+     */
     public function before($user, $ability)
     {
         if ($user->isAdmin()) {
@@ -50,9 +48,9 @@ class GroupPolicy extends BasePolicy
     }
 
     /**
-    * Viewing a group means reading title and presentation (= group home page).
-    * Only secret groups are hidden from non members.
-    */
+     * Viewing a group means reading title and presentation (= group home page).
+     * Only secret groups are hidden from non members.
+     */
     public function view(?User $user, Group $group)
     {
         if ($group->isSecret()) {
@@ -67,8 +65,8 @@ class GroupPolicy extends BasePolicy
     }
 
     /**
-    * A user can create a group if it is allowed in the global settings (set by admin-wide accounts)
-    */
+     * A user can create a group if it is allowed in the global settings (set by admin-wide accounts)
+     */
     public function create(User $user)
     {
         if (setting('user_can_create_groups') == true) {
@@ -79,24 +77,24 @@ class GroupPolicy extends BasePolicy
     }
 
     /**
-    * A group admin can delete a group
-    */
+     * A group admin can delete a group
+     */
     public function delete(User $user, Group $group)
     {
         return $user->isAdminOf($group);
     }
 
     /**
-    * A group admin can edit a group
-    */
+     * A group admin can edit a group
+     */
     public function update(User $user, Group $group)
     {
         return $user->isAdminOf($group);
     }
 
     /**
-    *   Can the user administer the group or not?
-    */
+     *   Can the user administer the group or not?
+     */
     public function administer(User $user, Group $group)
     {
         return $user->isAdminOf($group);
@@ -138,21 +136,19 @@ class GroupPolicy extends BasePolicy
         return $this->getPermissionsFor($user, $group)->contains('create-discussion');
     }
 
-
-
     /**
-    * Invite is also a customizable permission
-    */
+     * Invite is also a customizable permission
+     */
     public function invite(User $user, Group $group)
     {
         return $this->getPermissionsFor($user, $group)->contains('invite');
     }
 
     /**
-    * Ability to "index" (list) group content
-    * If there is a user we check that either the group is open, either the user is member of the group
-    * If we have no user, we check if the group is open
-    */
+     * Ability to "index" (list) group content
+     * If there is a user we check that either the group is open, either the user is member of the group
+     * If we have no user, we check if the group is open
+     */
     public function viewDiscussions(?User $user, Group $group)
     {
         // isn't it lovely :
@@ -173,14 +169,13 @@ class GroupPolicy extends BasePolicy
     }
 
     /**
-    * Only show members to group members
-    */
+     * Only show members to group members
+     */
     public function viewMembers(?User $user, Group $group)
     {
         if ($user) {
             return $user->isMemberOf($group);
         }
-
     }
 
     public function viewFiles(?User $user, Group $group)
@@ -201,13 +196,10 @@ class GroupPolicy extends BasePolicy
         return $group->isOpen();
     }
 
-
-
-
     /**
-    * Admin stuff :
-    * Group admins can manage tags
-    */
+     * Admin stuff :
+     * Group admins can manage tags
+     */
     public function manageTags(?User $user, Group $group)
     {
         if ($user) {
@@ -216,8 +208,8 @@ class GroupPolicy extends BasePolicy
     }
 
     /**
-    * Group admins can change group type
-    */
+     * Group admins can change group type
+     */
     public function changeGroupType(User $user, Group $group)
     {
         return $user->isAdminOf($group);
@@ -228,20 +220,17 @@ class GroupPolicy extends BasePolicy
         return $user->isAdminOf($group);
     }
 
-
-
     public function history(User $user, Group $group)
     {
         return $user->isMemberOf($group);
     }
 
-
     public function join(User $user, Group $group)
     {
-        if (!$user->isVerified()) {
-          return false;
+        if (! $user->isVerified()) {
+            return false;
         }
-        
+
         // if group is open anyone can join, else it's invite only
         if ($group->group_type == $group::OPEN) {
             return true;

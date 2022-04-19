@@ -76,7 +76,7 @@ class ImportActions extends Command
                 $action->user_id = 1;
 
                 // create the group if not existing yet and associate it.
-                if (!empty($action_data['group_id']) && !empty($action_data['group'])) {
+                if (! empty($action_data['group_id']) && ! empty($action_data['group'])) {
                     $group = \App\Group::firstOrNew(['id' => $action_data['group_id'] + $this->id_offset]);
                     $group->name = $action_data['group'];
                     $group->body = 'No description';
