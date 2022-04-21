@@ -1,32 +1,23 @@
 image:
-  file: .gitpod.dockerfile
+  file: .gitpod.Dockerfile
+
 ports:
-- port: 8000
-  onOpen: notify
-- port: 5432
-  onOpen: ignore
-- port: 3306
-  onOpen: ignore
+  # Laravel server
+  - port: 8000
+    onOpen: open-preview
+  # MySQL server
+  - port: 3306
+    onOpen: ignore
+
 tasks:
-- name: Init & Logs
-  command: >
-    ( mysqld --skip-grant-tables & ) &&
-    sleep 3 &&
-    ( mysql -uroot -e "USE mysql; UPDATE user SET authentication_string=PASSWORD(\"123456\") WHERE user='root'; UPDATE user SET plugin=\"mysql_native_password\" WHERE user='root'; FLUSH PRIVILEGES;" );
-    mysqladmin -uroot shutdown;
-    killall mysqld;
-    ( mysqld & );
-    pg_start.sh;
-    apachectl start;
-    clear;
-    multitail /var/log/apache2/access.log -I /var/log/apache2/error.log /var/log/mysql/mysql.log -I /var/log/mysql/error.log -I ~/pg/logs/pgsql.log;
-- name: Terminal
-  command: >
-    clear;
-    echo "Commands:";
-    echo " * apachectl start";
-    echo " * apachectl stop";
-    echo " * pg_start.sh";
-    echo " * pg_stop.sh";
-    echo " * mysqld &";
-    echo " * mysqladmin -uroot shutdown -p";
+  - init: >
+      mysql -u root -e "create database example_app" &&
+      cp .env.example .env &&
+      sed -i "s|APP_URL=|APP_URL=${GITPOD_WORKSPACE_URL}|g" .env &&
+      sed -i "s|APP_URL=https://|APP_URL=https://8000-|g" .env &&
+      composer install &&
+      npm i &&
+      php artisan key:generate
+    command: >
+      php -S 0.0.0.0:8000 -t public
+    
