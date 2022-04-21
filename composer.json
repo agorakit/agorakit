@@ -7,7 +7,7 @@
 
 
   "require": {
-    "php": "^7.3",
+    "php": "^8",
     "barryvdh/laravel-translation-manager": "^0.5",
     "consoletvs/charts": "6.*",
     "cviebrock/eloquent-sluggable": "^8",
@@ -31,7 +31,7 @@
     "nicolaslopezj/searchable": "^1",
     "rap2hpoutre/laravel-log-viewer": "1.7",
     "spatie/icalendar-generator": "^2.1",
-    "spatie/laravel-honeypot": "^2",
+    "spatie/laravel-honeypot": "^3",
     "suin/php-rss-writer": "^1.6",
     "toin0u/geocoder-laravel": "^4",
     "venturecraft/revisionable": "1.*",
@@ -42,10 +42,10 @@
   "require-dev": {
     "barryvdh/laravel-debugbar": "^3",
     "facade/ignition": "^2",
-    "fzaninotto/faker": "^1.9.1",
+    "fakerphp/faker": "^1.19",
     "laravel/browser-kit-testing": "^6",
     "laravel/tinker": "^2",
-    "mmo/faker-images": "^0.3",
+    "mmo/faker-images": "^0.6",
     "mockery/mockery": "^1",
     "nunomaduro/collision": "^5",
     "phpunit/phpunit": "^9.0"
