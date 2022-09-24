@@ -316,13 +316,13 @@
             "version": "6.5.6",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Chartisan/Charts.git",
-                "reference": "fc73038a006ddc2d6b277b9567ee01c6272448b3"
+                "url": "https://github.com/ConsoleTVs/Charts.git",
+                "reference": "6914e85086749ac90832b0b14479642fe0337cf4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Chartisan/Charts/zipball/fc73038a006ddc2d6b277b9567ee01c6272448b3",
-                "reference": "fc73038a006ddc2d6b277b9567ee01c6272448b3",
+                "url": "https://api.github.com/repos/ConsoleTVs/Charts/zipball/6914e85086749ac90832b0b14479642fe0337cf4",
+                "reference": "6914e85086749ac90832b0b14479642fe0337cf4",
                 "shasum": ""
             },
             "require": {
@@ -356,20 +356,16 @@
             ],
             "description": "The laravel charting package",
             "support": {
-                "issues": "https://github.com/Chartisan/Charts/issues",
-                "source": "https://github.com/Chartisan/Charts/tree/6.5.6"
+                "issues": "https://github.com/ConsoleTVs/Charts/issues",
+                "source": "https://github.com/ConsoleTVs/Charts/tree/6.5.6"
             },
             "funding": [
-                {
-                    "url": "https://github.com/ConsoleTVs",
-                    "type": "github"
-                },
                 {
                     "url": "https://www.patreon.com/ErikCampobadal",
                     "type": "patreon"
                 }
             ],
-            "time": "2022-01-20T05:36:01+00:00"
+            "time": "2022-08-08T11:01:59+00:00"
         },
         {
             "name": "cviebrock/eloquent-sluggable",
@@ -11686,6 +11682,7 @@
                     "type": "tidelift"
                 }
             ],
+            "abandoned": "symfony/error-handler",
             "time": "2022-01-02T09:41:36+00:00"
         },
         {
@@ -11821,5 +11818,5 @@
         "php": "^8"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
