@@ -51,7 +51,7 @@ class SendReminders extends Command
 
       foreach ($actions as $action)
       {
-        $users =  $action->users()->where('notification', 60)->get();
+        $users =  $action->attending()->where('notification', 60)->get();
         Notification::send($users, new UpcomingAction($action));
         if ($users->count() > 0) $this->info($users->count() . ' users notified for ' . $action->name);
       }
@@ -61,7 +61,7 @@ class SendReminders extends Command
 
       foreach ($actions as $action)
       {
-        $users =  $action->users()->where('notification', 60*24)->get();
+        $users =  $action->attending()->where('notification', 60*24)->get();
         Notification::send($users, new UpcomingAction($action));
         if ($users->count() > 0) $this->info($users->count() . ' users notified for ' . $action->name);
       }
