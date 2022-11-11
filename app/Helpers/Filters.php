@@ -28,8 +28,8 @@ function summary($text, $length = 200)
 */
 function filter($content)
 {
-    // strip bad stuff
-    $content = safe_html($content);
+    // strip bad stuff using html purifier
+    $content = Purifier::clean($content);
 
     // link to user mentions
     $content = highlightMentions($content);
