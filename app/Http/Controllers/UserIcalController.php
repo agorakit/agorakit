@@ -40,10 +40,11 @@ class UserIcalController extends Controller
         // groups are all groups from the current user
         $groups = $user->groups()->pluck('groups.id');
 
-        // returns actions from the last 60 days
+        //  // returns the 500 most recent actions
         $actions = \App\Action::with('group')
             ->whereIn('group_id', $groups)
-            ->where('start', '>=', Carbon::now()->subDays(60))
+            ->orderBy('start', 'desc')
+            ->take(500)
             ->get();
 
         foreach ($actions as $action) {

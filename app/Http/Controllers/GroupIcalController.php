@@ -27,8 +27,8 @@ class GroupIcalController extends Controller
 
 
 
-        // returns actions started the last 60 days
-        $actions = $group->actions()->where('start', '>=', Carbon::now()->subDays(60))->get();
+        // returns the 500 most recent actions
+        $actions = $group->actions()->orderBy('start', 'desc')->take(500)->get();
 
         foreach ($actions as $action) {
             // Create an event
