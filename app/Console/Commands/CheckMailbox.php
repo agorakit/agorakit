@@ -129,7 +129,7 @@ class CheckMailbox extends Command
                 $message->from = $mailbox_message->getFrom()->getAddress();
                 $message->raw = $mailbox_message->getRawMessage();
 
-                $message->saveOrFail();
+                $message->forceSave();
 
                 if (!$this->option('debug')) {
                     $this->moveMessage($mailbox_message, 'stored');
