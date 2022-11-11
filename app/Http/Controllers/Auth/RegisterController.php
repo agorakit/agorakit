@@ -55,6 +55,7 @@ class RegisterController extends Controller
         ]);
 
 
+
         // store name and email in the session
         $request->session()->put('name', $request->input('name'));
         $request->session()->put('email', $request->input('email'));
@@ -63,9 +64,17 @@ class RegisterController extends Controller
         // check if mail is taken, if taken, propose a login link instead
         $user = User::where('email', $request->input('email'))->first();
         if($user) {
-            flash('You already have an account, use this form to receive a login link by email');
+            flash(trans('You already have an account, use this form to receive a login link by email'));
             return redirect()->route('loginbyemail');
         }
+
+        // check if mail is taken and user account deleted
+        
+         $user = User::withTrashed()->where('email', $request->input('email'))->first();
+         if($user) {
+             flash(trans('Your user account is marked for deletion, contact an admin if you want to re-activate your account'));
+             return redirect('/');
+            }
 
         // else go to step 3 : we ask for the passwords
         return redirect('/register/password');
