@@ -2,7 +2,8 @@ php artisan down --refresh=30 --render="errors::503"
 
 git pull
 
-composer install
+composer install --ignore-platform-reqs
+
 php artisan migrate --force
 
 
