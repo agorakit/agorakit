@@ -55,7 +55,7 @@ class IcalController extends Controller
             $event = Event::create()
                 ->name($action->name)
                 ->description(summary($action->body), 1000)
-                ->uniqueIdentifier($group->name . '-' . $action->id)
+                ->uniqueIdentifier($action->group->name . '-' . $action->id)
                 ->createdAt($action->created_at)
                 ->startsAt($action->start)
                 ->endsAt($action->stop)
