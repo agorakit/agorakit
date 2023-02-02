@@ -125,7 +125,7 @@ class CheckMailbox extends Command
 
                 $message = new Message;
 
-                $message->subject = $mailbox_message->getSubject();
+                $message->subject = $mailbox_message->getSubject() || 'no subject';
                 $message->from = $mailbox_message->getFrom()->getAddress();
                 $message->raw = $mailbox_message->getRawMessage();
 
