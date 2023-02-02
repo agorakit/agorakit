@@ -62,6 +62,8 @@ class SendNotifications extends Command
                         } else {
                             $this->error('Nothing sent');
                         }
+                    } else {
+                        $this->error('No user or group or verified user');
                     }
                 }
             }
