@@ -90,6 +90,7 @@ class SendNotifications extends Command
         where notification_interval > 1
         and membership >= :membership) as memberships
         where notify < :now or notify is null limit :batch
+        order by rand() 
         ', ['now' => Carbon::now(), 'membership' => \App\Membership::MEMBER, 'batch' => $this->option('batch')]);
 
 
