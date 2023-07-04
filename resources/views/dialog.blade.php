@@ -38,7 +38,7 @@
 
 
 
-  <div class="sm:shadow-xl sm:rounded-lg mx-auto max-w-xl bg-white p-4 m-4">
+  <div class="container-sm">
     <div class="dialog  ">
       @yield('content')
     </div>

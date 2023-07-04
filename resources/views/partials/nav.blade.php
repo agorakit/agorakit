@@ -1,299 +1,275 @@
-<nav class="bg-gray-800 flex text-gray-200 items-center justify-between sm:justify-start px-2 py-3">
-
-    <a up-follow up-cache="false" href="{{ route('index') }}"
-        class="hidden sm:flex text-gray-200 px-1 justify-center items-center sm:w-auto mr-4">
-        @if(Storage::exists('public/logo/favicon.png'))
-        <img src="{{asset('storage/logo/favicon.png')}}" class="rounded h-12 w-12" />
-        @else
-        <img src="/images/logo-white.svg" class="rounded h-12 w-12" />
-        @endif
-        <span class="ml-2 hidden sm:inline text-gray-200">{{ setting('name') }}</span>
-    </a>
-
-    <a up-follow up-cache="false" href="{{ route('index') }}"
-        class="sm:hidden text-gray-200 px-1 flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:mr-2 sm:w-auto sm:px-4 sm:bg-transparent sm:rounded">
-        <i class="fa fa-home text-lg"></i>
-    </a>
-
-
-
-    @auth
-
-
-    <div class="dropdown">
-        <a href="#"
-            class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:mr-2 sm:w-auto sm:px-4 sm:bg-transparent sm:rounded"
-            data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-
-            <i class="fa fa-cubes text-lg sm:hidden"></i>
-            <span class="hidden sm:inline">
-                {{ trans('messages.groups') }}
-                <i class="fa fa-caret-down"></i>
-            </span>
-
-        </a>
-        <div class="dropdown-menu rounded shadow">
-
-            @if (Auth::user()->groups()->count() > 0)
-            <h6 class="dropdown-header">{{ trans('messages.my_groups') }}</h6>
-
-
-            @foreach (Auth::user()->groups()->orderBy('name')->get() as $group)
-            <a up-target="body" class="dropdown-item" href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
-            @endforeach
-
-            <div class="dropdown-divider"></div>
-
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <div class="container-fluid">
+        <!-- logo -->
+        <a class="navbar-brand" href="{{ route('index') }}">
+            @if (Storage::exists('public/logo/favicon.png'))
+                <img src="{{ asset('storage/logo/favicon.png') }}" width="30" height="24" />
+            @else
+                <img src="/images/logo-white.svg" width="30" height="24" />
             @endif
-
-            
-            <a up-target="body" class="dropdown-item" class="dropdown-item"
-                href="{{ action('GroupController@index') }}">
-                <i class="fa fa-layer-group"></i> {{ trans('messages.all_groups') }}
-            </a>
-
-            @can ('create', \App\Group::class)
-            <div class="dropdown-divider"></div>
-
-            <a up-target="body" class="dropdown-item" href="{{ route('groups.create') }}">
-                {{ trans('group.create_a_group_button') }}
-            </a>
-            @endcan
-
-
-        </div>
-    </div>
-
-    @endauth
-
-
-    <!-- Overview -->
-    <div class="dropdown text-gray-200">
-        <a href="#"
-            class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:mr-2 sm:w-auto sm:px-4 sm:bg-transparent sm:rounded"
-            data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-
-
-            <i class="fa fa-university text-lg sm:hidden"></i>
-            <span class="hidden sm:inline">
-                @lang('Overview')
-                <i class="fa fa-caret-down"></i>
-            </span>
-
-
+            <span class="ml-2 hidden sm:inline text-gray-200">{{ setting('name') }}</span>
         </a>
-        <div class="dropdown-menu rounded shadow">
 
-            <h6 class="dropdown-header">@lang('Overview')</h6>
+        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" type="button"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <a up-target="body" class="dropdown-item" class="dropdown-item"
-                href="{{ action('GroupController@index') }}">
-                <i class="fa fa-layer-group"></i> {{ trans('messages.all_groups') }}
-            </a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
 
-            <a up-target="body" up-cache="false" class="dropdown-item"
-                href="{{ action('DiscussionController@index') }}">
-                <i class="fa fa-comments-o"></i> {{ trans('messages.discussions') }}
-            </a>
+                @auth
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <a class="nav-item" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                                aria-expanded="false">
 
-            <a up-target="body" class="dropdown-item" href="{{ action('ActionController@index') }}">
-                <i class="fa fa-calendar"></i> {{ trans('messages.agenda') }}
-            </a>
+                                <i class="fa fa-cubes text-lg sm:hidden"></i>
+                                <span class="hidden sm:inline">
+                                    {{ trans('messages.groups') }}
+                                    <i class="fa fa-caret-down"></i>
+                                </span>
 
-            <a up-target="body" class="dropdown-item" href="{{ action('TagController@index') }}">
-                <i class="fa fa-tag"></i> @lang('Tags')
-            </a>
+                            </a>
+                            <div class="dropdown-menu rounded shadow">
 
-            <a class="dropdown-item" href="{{ action('MapController@index') }}">
-                <i class="fa fa-map-marker"></i> {{ trans('messages.map') }}
-            </a>
-            <a up-target="body" class="dropdown-item" href="{{ action('FileController@index') }}">
-                <i class="fa fa-files-o"></i> {{ trans('messages.files') }}
-            </a>
+                                @if (Auth::user()->groups()->count() > 0)
+                                    <h6 class="dropdown-header">{{ trans('messages.my_groups') }}</h6>
 
-            <a up-target="body" class="dropdown-item" href="{{ action('UserController@index') }}">
-                <i class="fa fa-users"></i> {{ trans('messages.users_list') }}
-            </a>
+                                    @foreach (Auth::user()->groups()->orderBy('name')->get() as $group)
+                                        <a class="dropdown-item" href="{{ route('groups.show', $group) }}"
+                                            up-target="body">{{ $group->name }}</a>
+                                    @endforeach
 
-        </div>
-    </div>
+                                    <div class="dropdown-divider"></div>
+                                @endif
 
-    <!-- help -->
-    @auth
-    <div class="nav-item sm:px-4">
-        <a up-follow
-            class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:mr-2 sm:w-auto sm:px-4 sm:bg-transparent sm:rounded"
-            href="{{ action('PageController@help') }}">
+                                <a class="dropdown-item" class="dropdown-item" href="{{ action('GroupController@index') }}"
+                                    up-target="body">
+                                    <i class="fa fa-layer-group"></i> {{ trans('messages.all_groups') }}
+                                </a>
 
-            <i class="fas fa-question text-lg sm:hidden"></i>
-            <span class="hidden sm:inline">{{ trans('messages.help') }}</span>
+                                @can('create', \App\Group::class)
+                                    <div class="dropdown-divider"></div>
 
+                                    <a class="dropdown-item" href="{{ route('groups.create') }}" up-target="body">
+                                        {{ trans('group.create_a_group_button') }}
+                                    </a>
+                                @endcan
 
+                            </div>
+                        </div>
 
-        </a>
-    </div>
-    @endauth
+                    </li>
 
+                @endauth
 
-    <div class="sm:flex-grow"></div>
+                <!-- Overview -->
+                <li class="nav-item dropdown">
 
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" href="#"
+                        role="button" aria-expanded="false">
+                        <i class="fa fa-university"></i>
+                        @lang('Overview')
+                    </a>
 
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item">@lang('Overview')</a>
+                        </li>
+                        <a class="dropdown-item" class="dropdown-item" href="{{ action('GroupController@index') }}">
+                            <i class="fa fa-layer-group"></i> {{ trans('messages.all_groups') }}
+                        </a>
 
+                        <a class="dropdown-item " href="{{ action('DiscussionController@index') }}">
+                            <i class="fa fa-comments-o"></i> {{ trans('messages.discussions') }}
+                        </a>
 
+                        <a class="dropdown-item" href="{{ action('ActionController@index') }}">
+                            <i class="fa fa-calendar"></i> {{ trans('messages.agenda') }}
+                        </a>
 
-    <!-- search-->
-    @auth
-    <form class="form-inline my-2 hidden lg:block sm:px-4" role="search" action="{{ url('search') }}" method="get">
-        <div class="input-group">
-            <input class="form-control form-control-sm" type="text" name="query"
-                placeholder="{{ trans('messages.search') }}..." aria-label="Search" value="{{request()->get('query')}}">
-            
+                        <a class="dropdown-item" href="{{ action('TagController@index') }}">
+                            <i class="fa fa-tag"></i> @lang('Tags')
+                        </a>
 
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary btn-sm" type="submit"><span
-                        class="fa fa-search"></span></button>
-            </div>
-        </div>
-    </form>
-    @endauth
+                        <a class="dropdown-item" href="{{ action('MapController@index') }}">
+                            <i class="fa fa-map-marker"></i> {{ trans('messages.map') }}
+                        </a>
+                        <a class="dropdown-item" href="{{ action('FileController@index') }}">
+                            <i class="fa fa-files-o"></i> {{ trans('messages.files') }}
+                        </a>
 
+                        <a class="dropdown-item" href="{{ action('UserController@index') }}">
+                            <i class="fa fa-users"></i> {{ trans('messages.users_list') }}
+                        </a>
+                    </ul>
+                </li>
 
-    <!-- Notifications -->
-    @auth
-    @if(isset($notifications))
-    <div class="dropdown hidden lg:block sm:px-4">
-        <a href="#"
-            class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:mr-2 sm:px-4 sm:bg-transparent sm:rounded"
-            data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-bell"></i>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right rounded shadow">
-            @foreach($notifications as $notification)
+                <!-- help -->
+                @auth
+                    <li class="nav-item">
+                        <a class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:mr-2 sm:w-auto sm:px-4 sm:bg-transparent sm:rounded"
+                            href="{{ action('PageController@help') }}" up-follow>
 
-            <a class="dropdown-item">
-                @if ($notification->type == 'App\Notifications\GroupCreated')
-                @include('notifications.group_created')
+                            <i class="fas fa-question text-lg sm:hidden"></i>
+                            <span class="hidden sm:inline">{{ trans('messages.help') }}</span>
+
+                        </a>
+                    </li>
+                @endauth
+
+                <!-- search-->
+                @auth
+                    <form class="form-inline my-2 hidden lg:block sm:px-4" role="search" action="{{ url('search') }}"
+                        method="get">
+                        <div class="input-group">
+                            <input class="form-control form-control-sm" name="query" type="text"
+                                value="{{ request()->get('query') }}" aria-label="Search"
+                                placeholder="{{ trans('messages.search') }}...">
+
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary btn-sm" type="submit"><span
+                                        class="fa fa-search"></span></button>
+                            </div>
+                        </div>
+                    </form>
+                @endauth
+
+                <!-- Notifications -->
+                @auth
+                    @if (isset($notifications))
+                        <div class="dropdown hidden lg:block sm:px-4">
+                            <a class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:mr-2 sm:px-4 sm:bg-transparent sm:rounded"
+                                data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="fas fa-bell"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right rounded shadow">
+                                @foreach ($notifications as $notification)
+                                    <a class="dropdown-item">
+                                        @if ($notification->type == 'App\Notifications\GroupCreated')
+                                            @include('notifications.group_created')
+                                        @endif
+
+                                        @if ($notification->type == 'App\Notifications\MentionedUser')
+                                            @include('notifications.mentioned_user')
+                                        @endif
+                                    </a>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+                @endauth
+
+                <!-- locales -->
+                @if (\Config::has('app.locales'))
+                    <div class="dropdown">
+                        <a class=""
+                            data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                            aria-expanded="false">
+                            <span>
+                                <i class="fa fa-globe"></i>
+                                {{ strtoupper(app()->getLocale()) }}
+                                <i class="fa fa-caret-down"></i>
+                                <span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right rounded shadow">
+                            @foreach (\Config::get('app.locales') as $locale)
+                                @if ($locale !== app()->getLocale())
+                                    <a class="dropdown-item"
+                                        href="{{ Request::url() }}?force_locale={{ $locale }}"
+                                        up-target="body">
+                                        {{ strtoupper($locale) }}
+                                    </a>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
                 @endif
 
-                @if ($notification->type == 'App\Notifications\MentionedUser')
-                @include('notifications.mentioned_user')
-                @endif
-            </a>
-            @endforeach
-        </div>
-    </div>
-    @endif
-    @endauth
+                @auth
+                    <!-- User profile -->
+                    <div class="dropdown flex-shrink-0 h-12 w-12">
+                        <a data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                            <img class="rounded-full h-12 w-12"
+                                src="{{ route('users.cover', [Auth::user(), 'small']) }}" />
 
+                        </a>
 
+                        <div class="dropdown-menu dropdown-menu-right rounded shadow" role="menu">
+                            <a class="dropdown-item" href="{{ route('users.show', Auth::user()) }}" up-target="body"><i
+                                    class="fa fa-btn fa-user"></i> {{ trans('messages.profile') }}</a>
+                            <a class="dropdown-item" href="{{ route('users.edit', Auth::user()) }}" up-target="body"><i
+                                    class="fas fa-btn fa-user-edit"></i> {{ trans('messages.edit_my_profile') }}</a>
 
+                            <a class="dropdown-item" href="{{ url('/logout') }}"
+                                onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                <i class="fa fa-btn fa-sign-out"></i> {{ trans('messages.logout') }}
+                            </a>
 
-    <!-- locales -->
-    @if(\Config::has('app.locales'))
-    <div class="dropdown sm:px-4 hidden lg:block">
-        <a href="#"
-            class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 mr-2 sm:w-auto sm:px- sm:bg-transparent sm:rounded"
-            data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            <span>
-                <i class="fa fa-globe"></i>
-                {{ strtoupper(app()->getLocale()) }}
-                <i class="fa fa-caret-down"></i>
-                <span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right rounded shadow">
-            @foreach(\Config::get('app.locales') as $locale)
-            @if($locale !== app()->getLocale())
-            <a up-target="body" class="dropdown-item" href="{{ Request::url() }}?force_locale={{ $locale }}">
-                {{ strtoupper($locale) }}
-            </a>
-            @endif
-            @endforeach
-        </div>
-    </div>
-    @endif
+                            <form id="logout-form" style="display: none;" action="{{ url('/logout') }}" method="POST">
+                                @csrf
+                                @honeypot
+                            </form>
 
+                            <!-- Admin -->
+                            @if (Auth::user()->isAdmin())
+                                <div class="dropdown-divider"></div>
+                                <h6 class="dropdown-header">Admin</h6>
 
+                                <a class="dropdown-item" href="{{ url('/admin/settings') }}" up-target="body">
+                                    <i class="fa fa-cog"></i> Settings
+                                </a>
 
-    @auth
-    <!-- User profile -->
-    <div class="dropdown flex-shrink-0 h-12 w-12">
-        <a href="#" data-toggle="dropdown" role="button" aria-expanded="false">
-            <img src="{{ route('users.cover', [Auth::user(), 'small']) }}" class="rounded-full h-12 w-12" />
+                                <a class="dropdown-item" href="{{ url('/admin/user') }}">
+                                    <i class="fa fa-users"></i> Users
+                                </a>
 
-        </a>
+                                <a class="dropdown-item" href="{{ url('/admin/groupadmins') }}">
+                                    <i class="fa fa-users"></i> Group admins
+                                </a>
 
-        <div class="dropdown-menu dropdown-menu-right rounded shadow" role="menu">
-            <a up-target="body" class="dropdown-item" href="{{ route('users.show', Auth::user()) }}"><i
-                    class="fa fa-btn fa-user"></i> {{ trans('messages.profile') }}</a>
-            <a up-target="body" class="dropdown-item" href="{{ route('users.edit', Auth::user()) }}"><i
-                    class="fas fa-btn fa-user-edit"></i> {{ trans('messages.edit_my_profile') }}</a>
+                                <a class="dropdown-item" href="{{ url('/admin/undo') }}">
+                                    <i class="fa fa-trash"></i> Recover content
+                                </a>
 
-            <a class="dropdown-item" href="{{ url('/logout') }}"
-                onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                <i class="fa fa-btn fa-sign-out"></i> {{ trans('messages.logout') }}
-            </a>
+                                <a class="dropdown-item" href="{{ action('Admin\InsightsController@index') }}">
+                                    <i class="fa fa-line-chart"></i> {{ trans('messages.insights') }}
+                                </a>
 
-            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                @csrf
-                @honeypot
-            </form>
+                                <a class="dropdown-item" href="{{ url('/admin/logs') }}">
+                                    <i class="fa fa-keyboard-o"></i> Logs
+                                </a>
+                            @endif
 
+                        </div>
 
-            <!-- Admin -->
-            @if(Auth::user()->isAdmin())
-            <div class="dropdown-divider"></div>
-            <h6 class="dropdown-header">Admin</h6>
+                    </div>
 
-            <a up-target="body" class="dropdown-item" href="{{ url('/admin/settings') }}">
-                <i class="fa fa-cog"></i> Settings
-            </a>
+                @endauth
 
-            <a class="dropdown-item" href="{{ url('/admin/user') }}">
-                <i class="fa fa-users"></i> Users
-            </a>
+                @guest
 
-            <a class="dropdown-item" href="{{ url('/admin/groupadmins') }}">
-                <i class="fa fa-users"></i> Group admins
-            </a>
+                    <a class="text-gray-200 flex flex-col justify-center items-center rounded hover:bg-gray-600 bg-gray-700 h-12 w-auto sm:w-auto px-4 my-2 mr-2"
+                        href="{{ url('login') }}" up-modal=".dialog">
 
-            <a class="dropdown-item" href="{{ url('/admin/undo') }}">
-                <i class="fa fa-trash"></i> Recover content
-            </a>
+                        <span class="text-xs sm:text-base">{{ trans('messages.login') }}</span>
+                    </a>
 
-            <a class="dropdown-item" href="{{ action('Admin\InsightsController@index') }}">
-                <i class="fa fa-line-chart"></i> {{ trans('messages.insights') }}
-            </a>
+                    @can('create', App\User::class)
+                        <a class="text-gray-200 flex flex-col justify-center items-center rounded hover:bg-gray-600 bg-gray-700 h-12 w-auto sm:w-auto px-4 my-2"
+                            href="{{ url('register') }}" up-modal=".dialog">
 
-            <a class="dropdown-item" href="{{ url('/admin/logs') }}">
-                <i class="fa fa-keyboard-o"></i> Logs
-            </a>
-            @endif
+                            <span class="text-xs sm:text-base">{{ trans('messages.register') }}</span>
+                        </a>
+                    @endcan
+
+                @endguest
+
+            </ul>
 
         </div>
-
     </div>
-
-    @endauth
-
-    @guest
-
-    <a up-modal=".dialog"
-        class="text-gray-200 flex flex-col justify-center items-center rounded hover:bg-gray-600 bg-gray-700 h-12 w-auto sm:w-auto px-4 my-2 mr-2"
-        href="{{ url('login') }}">
-
-
-        <span class="text-xs sm:text-base">{{ trans('messages.login') }}</span>
-    </a>
-
-    @can('create', App\User::class)
-    <a up-modal=".dialog"
-        class="text-gray-200 flex flex-col justify-center items-center rounded hover:bg-gray-600 bg-gray-700 h-12 w-auto sm:w-auto px-4 my-2"
-        href="{{ url('register') }}">
-
-        <span class="text-xs sm:text-base">{{ trans('messages.register') }}</span>
-    </a>
-    @endcan
-
-    @endguest
 
 </nav>
