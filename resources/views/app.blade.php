@@ -17,6 +17,8 @@
     <link href="{{ route('pwa.index') }}" rel="manifest">
 
     <!-- font awesome -->
+
+    <!--
     <link href="{{ asset('/fonts/fontawesome/css/all.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/fonts/fontawesome/css/v4-shims.min.css') }}" rel="stylesheet">
 
@@ -25,19 +27,22 @@
     <link href="{{ asset('/css/select2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/unpoly.css') }}" rel="stylesheet">
     <link href="{{ asset('/packages/summernote/summernote-lite.min.css') }}" rel="stylesheet">
+    -->
 
     <!-- bootstrap 5.2 -->
+    <!--
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
     </script>
+    -->
 
     <!-- tabler.io -->
-    <!--
+    
     <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler.min.css" rel="stylesheet">
-    -->
+    
 
     <!-- additional css -->
 

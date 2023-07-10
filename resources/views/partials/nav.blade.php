@@ -7,15 +7,15 @@
             @else
                 <img src="/images/logo-white.svg" width="30" height="24" />
             @endif
-            <span class="ml-2 hidden sm:inline text-gray-200">{{ setting('name') }}</span>
+            <span class="">{{ setting('name') }}</span>
         </a>
 
-        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" type="button"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar" type="button"
+            aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav">
 
                 @auth
@@ -79,6 +79,7 @@
                         </li>
                         <a class="dropdown-item" class="dropdown-item" href="{{ action('GroupController@index') }}">
                             <i class="fa fa-layer-group"></i> {{ trans('messages.all_groups') }}
+
                         </a>
 
                         <a class="dropdown-item " href="{{ action('DiscussionController@index') }}">
@@ -164,17 +165,16 @@
 
                 <!-- locales -->
                 @if (\Config::has('app.locales'))
-                    <div class="dropdown">
-                        <a class=""
-                            data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                            aria-expanded="false">
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                            aria-haspopup="true" aria-expanded="false">
                             <span>
                                 <i class="fa fa-globe"></i>
                                 {{ strtoupper(app()->getLocale()) }}
                                 <i class="fa fa-caret-down"></i>
                                 <span>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right rounded shadow">
+                        <div class="dropdown-menu">
                             @foreach (\Config::get('app.locales') as $locale)
                                 @if ($locale !== app()->getLocale())
                                     <a class="dropdown-item"
@@ -190,7 +190,7 @@
 
                 @auth
                     <!-- User profile -->
-                    <div class="dropdown flex-shrink-0 h-12 w-12">
+                    <div class="nav-item dropdown">
                         <a data-toggle="dropdown" href="#" role="button" aria-expanded="false">
                             <img class="rounded-full h-12 w-12"
                                 src="{{ route('users.cover', [Auth::user(), 'small']) }}" />
@@ -251,18 +251,18 @@
 
                 @guest
 
-                    <a class="text-gray-200 flex flex-col justify-center items-center rounded hover:bg-gray-600 bg-gray-700 h-12 w-auto sm:w-auto px-4 my-2 mr-2"
-                        href="{{ url('login') }}" up-modal=".dialog">
-
-                        <span class="text-xs sm:text-base">{{ trans('messages.login') }}</span>
-                    </a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('login') }}" up-modal=".dialog">
+                            {{ trans('messages.login') }}
+                        </a>
+                    </li>
 
                     @can('create', App\User::class)
-                        <a class="text-gray-200 flex flex-col justify-center items-center rounded hover:bg-gray-600 bg-gray-700 h-12 w-auto sm:w-auto px-4 my-2"
-                            href="{{ url('register') }}" up-modal=".dialog">
-
-                            <span class="text-xs sm:text-base">{{ trans('messages.register') }}</span>
-                        </a>
+                        <li class="nav-item">
+                            <a class="nav-link"  href="{{ url('register') }}" up-modal=".dialog">
+                                {{ trans('messages.register') }}
+                            </a>
+                        </li>
                     @endcan
 
                 @endguest
