@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
     <div class="container-fluid">
         <!-- logo -->
-        <a class="navbar-brand" href="{{ route('index') }}">
+        <a class="navbar-brand me-3" href="{{ route('index') }}">
             @if (Storage::exists('public/logo/favicon.png'))
                 <img src="{{ asset('storage/logo/favicon.png') }}" width="30" height="24" />
             @else
@@ -69,14 +69,11 @@
 
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" href="#"
                         role="button" aria-expanded="false">
-                        <i class="fa fa-university"></i>
                         @lang('Overview')
                     </a>
 
                     <ul class="dropdown-menu">
-                        <li>
-                            <a class="dropdown-item">@lang('Overview')</a>
-                        </li>
+                        
                         <a class="dropdown-item" class="dropdown-item" href="{{ action('GroupController@index') }}">
                             <i class="fa fa-layer-group"></i> {{ trans('messages.all_groups') }}
 
@@ -168,11 +165,7 @@
                     <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
                             aria-haspopup="true" aria-expanded="false">
-                            <span>
-                                <i class="fa fa-globe"></i>
-                                {{ strtoupper(app()->getLocale()) }}
-                                <i class="fa fa-caret-down"></i>
-                                <span>
+                            {{ strtoupper(app()->getLocale()) }}
                         </a>
                         <div class="dropdown-menu">
                             @foreach (\Config::get('app.locales') as $locale)
@@ -250,7 +243,6 @@
                 @endauth
 
                 @guest
-
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('login') }}" up-modal=".dialog">
                             {{ trans('messages.login') }}
@@ -259,16 +251,13 @@
 
                     @can('create', App\User::class)
                         <li class="nav-item">
-                            <a class="nav-link"  href="{{ url('register') }}" up-modal=".dialog">
+                            <a class="nav-link" href="{{ url('register') }}" up-modal=".dialog">
                                 {{ trans('messages.register') }}
                             </a>
                         </li>
                     @endcan
-
                 @endguest
-
             </ul>
-
         </div>
     </div>
 

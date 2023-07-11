@@ -1,5 +1,5 @@
 <div up-follow up-expand up-reveal="false" 
-class="flex items-start py-3 hover:bg-gray-100 border-b border-gray-300">
+class="d-flex items-start py-3 hover:bg-gray-100 border-b border-gray-300">
 
      @if($group->hasCover())
          <img class="h-12 w-12 rounded object-cover mx-1  flex-shrink-0"

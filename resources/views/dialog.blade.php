@@ -10,14 +10,13 @@
 <body>
 
     <div class="page page-center">
-        <div class="dialog container container-tight py-4">
+        <div class="container container-tight py-4">
             <div class="card card-md">
-                <div class="card-body">
+                <div class="card-body dialog">
                     @yield('content')
+                    @include('partials.errors')
                 </div>
-                @include('partials.errors')
             </div>
-
             @include('partials.footer')
         </div>
     </div>

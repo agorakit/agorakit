@@ -16,7 +16,7 @@
 
     @include('partials.errors')
 
-    <div class="container">
+    <div class="container mt-4">
         @yield('content')
     </div>
 
