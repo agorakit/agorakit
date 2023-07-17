@@ -10,8 +10,8 @@
             <span class="">{{ setting('name') }}</span>
         </a>
 
-        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar" type="button"
-            aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar" type="button" aria-controls="navbar" aria-expanded="false"
+            aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -19,116 +19,77 @@
             <ul class="navbar-nav">
 
                 @auth
-                    <li class="nav-item">
-                        <div class="dropdown">
-                            <a class="nav-item" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                                aria-expanded="false">
-
-                                <i class="fa fa-cubes text-lg sm:hidden"></i>
-                                <span class="hidden sm:inline">
-                                    {{ trans('messages.groups') }}
-                                    <i class="fa fa-caret-down"></i>
-                                </span>
-
+                    @if (Auth::user()->groups()->count() > 0)
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                {{ trans('messages.my_groups') }}
                             </a>
-                            <div class="dropdown-menu rounded shadow">
-
-                                @if (Auth::user()->groups()->count() > 0)
-                                    <h6 class="dropdown-header">{{ trans('messages.my_groups') }}</h6>
-
-                                    @foreach (Auth::user()->groups()->orderBy('name')->get() as $group)
-                                        <a class="dropdown-item" href="{{ route('groups.show', $group) }}"
-                                            up-target="body">{{ $group->name }}</a>
-                                    @endforeach
-
-                                    <div class="dropdown-divider"></div>
-                                @endif
-
-                                <a class="dropdown-item" class="dropdown-item" href="{{ action('GroupController@index') }}"
-                                    up-target="body">
-                                    <i class="fa fa-layer-group"></i> {{ trans('messages.all_groups') }}
-                                </a>
-
-                                @can('create', \App\Group::class)
-                                    <div class="dropdown-divider"></div>
-
-                                    <a class="dropdown-item" href="{{ route('groups.create') }}" up-target="body">
-                                        {{ trans('group.create_a_group_button') }}
-                                    </a>
-                                @endcan
-
+                            <div class="dropdown-menu">
+                                @foreach (Auth::user()->groups()->orderBy('name')->get() as $group)
+                                    <a class="dropdown-item" href="{{ route('groups.show', $group) }}" up-target="body">{{ $group->name }}</a>
+                                @endforeach
                             </div>
-                        </div>
-
-                    </li>
-
+                        </li>
+                    @endif
                 @endauth
 
                 <!-- Overview -->
                 <li class="nav-item dropdown">
 
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" href="#"
-                        role="button" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
                         @lang('Overview')
                     </a>
 
                     <ul class="dropdown-menu">
-                        
-                        <a class="dropdown-item" class="dropdown-item" href="{{ action('GroupController@index') }}">
-                            <i class="fa fa-layer-group"></i> {{ trans('messages.all_groups') }}
 
+                        <a class="dropdown-item" class="dropdown-item" href="{{ action('GroupController@index') }}">
+                            {{ trans('messages.all_groups') }}
                         </a>
 
                         <a class="dropdown-item " href="{{ action('DiscussionController@index') }}">
-                            <i class="fa fa-comments-o"></i> {{ trans('messages.discussions') }}
+                            {{ trans('messages.discussions') }}
                         </a>
 
                         <a class="dropdown-item" href="{{ action('ActionController@index') }}">
-                            <i class="fa fa-calendar"></i> {{ trans('messages.agenda') }}
+                            {{ trans('messages.agenda') }}
                         </a>
+                        @auth
+                            <a class="dropdown-item" href="{{ action('TagController@index') }}">
+                                @lang('Tags')
+                            </a>
 
-                        <a class="dropdown-item" href="{{ action('TagController@index') }}">
-                            <i class="fa fa-tag"></i> @lang('Tags')
-                        </a>
+                            <a class="dropdown-item" href="{{ action('MapController@index') }}">
+                                {{ trans('messages.map') }}
+                            </a>
+                            <a class="dropdown-item" href="{{ action('FileController@index') }}">
+                                {{ trans('messages.files') }}
+                            </a>
 
-                        <a class="dropdown-item" href="{{ action('MapController@index') }}">
-                            <i class="fa fa-map-marker"></i> {{ trans('messages.map') }}
-                        </a>
-                        <a class="dropdown-item" href="{{ action('FileController@index') }}">
-                            <i class="fa fa-files-o"></i> {{ trans('messages.files') }}
-                        </a>
-
-                        <a class="dropdown-item" href="{{ action('UserController@index') }}">
-                            <i class="fa fa-users"></i> {{ trans('messages.users_list') }}
-                        </a>
+                            <a class="dropdown-item" href="{{ action('UserController@index') }}">
+                                {{ trans('messages.users_list') }}
+                            </a>
+                        @endauth
                     </ul>
                 </li>
 
                 <!-- help -->
                 @auth
                     <li class="nav-item">
-                        <a class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:mr-2 sm:w-auto sm:px-4 sm:bg-transparent sm:rounded"
-                            href="{{ action('PageController@help') }}" up-follow>
-
-                            <i class="fas fa-question text-lg sm:hidden"></i>
-                            <span class="hidden sm:inline">{{ trans('messages.help') }}</span>
-
+                        <a class="nav-link" href="{{ action('PageController@help') }}">
+                            {{ trans('messages.help') }}
                         </a>
                     </li>
                 @endauth
 
                 <!-- search-->
                 @auth
-                    <form class="form-inline my-2 hidden lg:block sm:px-4" role="search" action="{{ url('search') }}"
-                        method="get">
+                    <form class="form-inline my-2 hidden lg:block sm:px-4" role="search" action="{{ url('search') }}" method="get">
                         <div class="input-group">
-                            <input class="form-control form-control-sm" name="query" type="text"
-                                value="{{ request()->get('query') }}" aria-label="Search"
+                            <input class="form-control form-control-sm" name="query" type="text" value="{{ request()->get('query') }}" aria-label="Search"
                                 placeholder="{{ trans('messages.search') }}...">
 
                             <div class="input-group-append">
-                                <button class="btn btn-outline-secondary btn-sm" type="submit"><span
-                                        class="fa fa-search"></span></button>
+                                <button class="btn btn-outline-secondary btn-sm" type="submit"><span class="fa fa-search"></span></button>
                             </div>
                         </div>
                     </form>
@@ -139,8 +100,7 @@
                     @if (isset($notifications))
                         <div class="dropdown hidden lg:block sm:px-4">
                             <a class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:mr-2 sm:px-4 sm:bg-transparent sm:rounded"
-                                data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                                aria-expanded="false">
+                                data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right rounded shadow">
@@ -162,42 +122,40 @@
 
                 <!-- locales -->
                 @if (\Config::has('app.locales'))
-                    <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                            aria-haspopup="true" aria-expanded="false">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
                             {{ strtoupper(app()->getLocale()) }}
                         </a>
-                        <div class="dropdown-menu">
+
+                        <ul class="dropdown-menu">
                             @foreach (\Config::get('app.locales') as $locale)
                                 @if ($locale !== app()->getLocale())
-                                    <a class="dropdown-item"
-                                        href="{{ Request::url() }}?force_locale={{ $locale }}"
-                                        up-target="body">
-                                        {{ strtoupper($locale) }}
-                                    </a>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ Request::url() }}?force_locale={{ $locale }}" up-target="body">
+                                            {{ strtoupper($locale) }}
+                                        </a>
+                                    </li>
                                 @endif
                             @endforeach
-                        </div>
-                    </div>
+                        </ul>
+                    </li>
                 @endif
 
                 @auth
                     <!-- User profile -->
                     <div class="nav-item dropdown">
                         <a data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                            <img class="rounded-full h-12 w-12"
-                                src="{{ route('users.cover', [Auth::user(), 'small']) }}" />
+                            <img class="rounded-full h-12 w-12" src="{{ route('users.cover', [Auth::user(), 'small']) }}" />
 
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right rounded shadow" role="menu">
-                            <a class="dropdown-item" href="{{ route('users.show', Auth::user()) }}" up-target="body"><i
-                                    class="fa fa-btn fa-user"></i> {{ trans('messages.profile') }}</a>
-                            <a class="dropdown-item" href="{{ route('users.edit', Auth::user()) }}" up-target="body"><i
-                                    class="fas fa-btn fa-user-edit"></i> {{ trans('messages.edit_my_profile') }}</a>
+                            <a class="dropdown-item" href="{{ route('users.show', Auth::user()) }}" up-target="body"><i class="fa fa-btn fa-user"></i>
+                                {{ trans('messages.profile') }}</a>
+                            <a class="dropdown-item" href="{{ route('users.edit', Auth::user()) }}" up-target="body"><i class="fas fa-btn fa-user-edit"></i>
+                                {{ trans('messages.edit_my_profile') }}</a>
 
-                            <a class="dropdown-item" href="{{ url('/logout') }}"
-                                onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                            <a class="dropdown-item" href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                 <i class="fa fa-btn fa-sign-out"></i> {{ trans('messages.logout') }}
                             </a>
 

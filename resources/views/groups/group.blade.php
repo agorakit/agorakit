@@ -1,18 +1,6 @@
 <div class="col">
     <div class="card h-100 @if ($group->isArchived()) status-archived @endif" up-expand>
 
-        @auth
-            @if (Auth::user()->isAdminOf($group))
-                <div class="ribbon bg-red">{{ __('membership.admin') }}</div>
-            @elseif(Auth::user()->isMemberOf($group))
-                <div class="ribbon bg-green">{{ __('membership.member') }}</div>
-            @endif
-
-            @if (Auth::user()->isCandidateOf($group))
-                <div class="ribbon bg-gray">{{ __('membership.candidate') }}</div>
-            @endif
-        @endauth
-
         @if ($group->isPinned())
             <div class="ribbon ribbon-top bg-yellow" title="{{ trans('group.pinned') }}">
                 <i class="far fa-star"></i>
@@ -25,12 +13,24 @@
             </div>
         @endif
 
-        <a href="{{ action('GroupController@show', $group) }}">
+        <a class="position-relative" href="{{ action('GroupController@show', $group) }}">
             @if ($group->hasCover())
                 <img class="card-img-top" src="{{ route('groups.cover.medium', $group) }}" />
             @else
                 <img class="card-img-top" src="/images/group.svg" />
             @endif
+
+            @auth
+                @if (Auth::user()->isAdminOf($group))
+                    <div class="mb-2 me-2 position-absolute bottom-0 end-0  badge bg-pink">{{ __('membership.admin') }}</div>
+                @elseif(Auth::user()->isMemberOf($group))
+                    <div class="mb-2 me-2 position-absolute bottom-0 end-0  badge bg-azure">{{ __('membership.member') }}</div>
+                @endif
+                @if (Auth::user()->isCandidateOf($group))
+                    <div class="mb-2 me-2 position-absolute bottom-0 end-0  badge bg-lime">{{ __('membership.candidate') }}</div>
+                @endif
+            @endauth
+
         </a>
 
         <div class="card-body">
@@ -44,7 +44,8 @@
                     <i class="text-xs text-gray-500 fa fa-eye-slash" title="{{ trans('group.secret') }}"></i>
                 @endif
             </h2>
-            <div class="text-gray-700 mt-1 text-sm sm:text-xs flex-grow">
+
+            <div>
                 {{ summary($group->body) }}
 
                 @if ($group->tags->count() > 0)
