@@ -14,13 +14,13 @@
         @include('partials.nav')
     @endunless
 
-    @include('partials.errors')
+    <main>
+        <div class="container mt-4">
+            @include('partials.errors')
+            @yield('content')
+        </div>
+    </main>
 
-    <div class="container mt-4">
-        @yield('content')
-    </div>
-
-   
     @include('partials.footer')
 
 </body>

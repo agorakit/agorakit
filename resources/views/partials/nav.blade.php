@@ -81,8 +81,6 @@
                     </li>
                 @endauth
 
-              
-
                 <!-- Notifications -->
                 @auth
                     @if (isset($notifications))
@@ -129,9 +127,22 @@
                     </li>
                 @endif
 
+                <!-- search-->
                 @auth
-                    <!-- User profile -->
-                    <div class="nav-item dropdown">
+                    <li class="nav-item">
+                        <form class="d-flex" role="search" action="{{ url('search') }}" method="get">
+                            <div class="input-group">
+                                <input class="form-control" name="query" type="text" value="{{ request()->get('query') }}" aria-label="{{ trans('messages.search') }}"
+                                    placeholder="{{ trans('messages.search') }}">
+                                <input class="btn btn-outline-secondary" type="submit" value="search" />
+                            </div>
+                        </form>
+                    </li>
+                @endauth
+
+                <!-- User profile -->
+                @auth
+                    <div class="nav-item dropdown ms-3">
                         <a data-toggle="dropdown" href="#" role="button" aria-expanded="false">
                             <img class="avatar rounded" src="{{ route('users.cover', [Auth::user(), 'small']) }}" />
                         </a>
@@ -189,33 +200,21 @@
 
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('login') }}" up-modal=".dialog">
+                        <a class="nav-link" href="{{ url('login') }}" up-modal>
                             {{ trans('messages.login') }}
                         </a>
                     </li>
 
                     @can('create', App\User::class)
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('register') }}" up-modal=".dialog">
+                            <a class="nav-link" href="{{ url('register') }}" up-modal>
                                 {{ trans('messages.register') }}
                             </a>
                         </li>
                     @endcan
                 @endguest
+
             </ul>
-
-
-              <!-- search-->
-                @auth
-                    <form class="d-flex" role="search" action="{{ url('search') }}" method="get">
-                        <div class="input-group">
-                            <input class="form-control" name="query" type="text" value="{{ request()->get('query') }}" aria-label="{{ trans('messages.search') }}"
-                                placeholder="{{ trans('messages.search') }}">
-                            <input class="btn btn-outline-secondary" type="submit" value="search"/>
-                        </div>
-                    </form>
-
-                @endauth
         </div>
     </div>
 
