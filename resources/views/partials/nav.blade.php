@@ -81,19 +81,7 @@
                     </li>
                 @endauth
 
-                <!-- search-->
-                @auth
-                    <form class="form-inline my-2 hidden lg:block sm:px-4" role="search" action="{{ url('search') }}" method="get">
-                        <div class="input-group">
-                            <input class="form-control form-control-sm" name="query" type="text" value="{{ request()->get('query') }}" aria-label="Search"
-                                placeholder="{{ trans('messages.search') }}...">
-
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary btn-sm" type="submit"><span class="fa fa-search"></span></button>
-                            </div>
-                        </div>
-                    </form>
-                @endauth
+              
 
                 <!-- Notifications -->
                 @auth
@@ -145,11 +133,10 @@
                     <!-- User profile -->
                     <div class="nav-item dropdown">
                         <a data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                            <img class="rounded-full h-12 w-12" src="{{ route('users.cover', [Auth::user(), 'small']) }}" />
-
+                            <img class="avatar rounded" src="{{ route('users.cover', [Auth::user(), 'small']) }}" />
                         </a>
 
-                        <div class="dropdown-menu dropdown-menu-right rounded shadow" role="menu">
+                        <div class="dropdown-menu" role="menu">
                             <a class="dropdown-item" href="{{ route('users.show', Auth::user()) }}" up-target="body"><i class="fa fa-btn fa-user"></i>
                                 {{ trans('messages.profile') }}</a>
                             <a class="dropdown-item" href="{{ route('users.edit', Auth::user()) }}" up-target="body"><i class="fas fa-btn fa-user-edit"></i>
@@ -216,6 +203,19 @@
                     @endcan
                 @endguest
             </ul>
+
+
+              <!-- search-->
+                @auth
+                    <form class="d-flex" role="search" action="{{ url('search') }}" method="get">
+                        <div class="input-group">
+                            <input class="form-control" name="query" type="text" value="{{ request()->get('query') }}" aria-label="{{ trans('messages.search') }}"
+                                placeholder="{{ trans('messages.search') }}">
+                            <input class="btn btn-outline-secondary" type="submit" value="search"/>
+                        </div>
+                    </form>
+
+                @endauth
         </div>
     </div>
 
