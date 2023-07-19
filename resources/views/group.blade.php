@@ -18,7 +18,7 @@
         <div class="container mt-4">
             @include('groups.tabs')
 
-            <div class="container text-bg-light p-4 rounded-2 rounded-top-0">
+            <div class="container p-4 rounded-2 rounded-top-0 group">
                 @include('partials.errors')
                 @yield('content')
             </div>

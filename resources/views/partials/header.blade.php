@@ -24,14 +24,12 @@
 <link href="{{ asset('/css/select2.min.css') }}" rel="stylesheet">
 <link href="{{ asset('/packages/summernote/summernote-lite.min.css') }}" rel="stylesheet">
 
-
 <!-- unpoly -->
 
 <script src="https://cdn.jsdelivr.net/npm/unpoly@3.3.0/unpoly.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/unpoly@3.3.0/unpoly-migrate.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/unpoly@3.3.0/unpoly.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/unpoly@3.3.0/unpoly-bootstrap5.min.css" rel="stylesheet">
-
 
 <script>
     up.link.config.followSelectors.push('a[href]')
@@ -47,29 +45,40 @@
 <!--<link href="{{ asset('/css/app.css') }}" rel="stylesheet">-->
 
 <!-- bootstrap 5.2 -->
-
-
+<!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">-->
 
 <!-- tabler.io -->
 
-<script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta19/dist/js/tabler.min.js"></script>
-<!--<link href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta19/dist/css/tabler.min.css" rel="stylesheet">-->
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler.min.css" rel="stylesheet">
 
 <style>
-    :root
-    {
+    :root {
         /*--tblr-font-sans-serif: 'Inter';*/
-        --tblr-nav-tabs-link-active-bg: white;
         --tblr-border-radius: 5px;
-        --tblr-body-bg: #ccc;
-
+        --tblr-body-bg: #ddd;
     }
 
-    .nav-tabs .nav-link.active
-    {
+    .nav-tabs .nav-link.active {
         background-color: white;
+        border: none;
+        border-bottom: 1px solid white;
+    }
+
+    .nav-pills .nav-link.active {
+        background-color: var(--tblr-primary);
+        color: white;
+    }
+
+    .nav-tabs {
+        border-bottom: none;
+    }
+
+    .group,
+    .container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
     }
 </style>
 

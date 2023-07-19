@@ -17,7 +17,7 @@
 
 @include('partials.invite')
 
-<ul class="nav nav-tabs">
+<ul class="nav nav-pills">
 
     <li class="nav-item">
         <a class="nav-link @if (isset($tab) && $tab == 'home') active @endif" href="{{ route('groups.show', $group) }}" up-follow up-reveal="false">
