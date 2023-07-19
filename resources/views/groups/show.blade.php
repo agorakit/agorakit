@@ -1,6 +1,6 @@
-@extends('groups.container')
+@extends('group')
 
-@section('group')
+@section('content')
     <div class="row">
 
         <div class="col">

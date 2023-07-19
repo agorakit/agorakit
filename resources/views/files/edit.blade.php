@@ -1,6 +1,6 @@
-@extends('groups.container')
+@extends('group')
 
-@section('group')
+@section('content')
 
     {!! Form::model($file, ['action' => ['GroupFileController@update', $file->group, $file], 'files' => true]) !!}
 

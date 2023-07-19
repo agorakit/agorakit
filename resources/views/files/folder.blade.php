@@ -1,6 +1,6 @@
-@extends('groups.container')
+@extends('group')
 
-@section('group')
+@section('content')
 @include('partials.datatables')
 
         <h2>{{trans('messages.files_in_this_group')}}

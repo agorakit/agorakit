@@ -1,6 +1,6 @@
-@extends('groups.container')
+@extends('group')
 
-@section('group')
+@section('content')
     <h1>{{ trans('group.create_group_title') }}</h1>
 
     {!! Form::open(['action' => ['GroupController@store'], 'files' => true], null) !!}

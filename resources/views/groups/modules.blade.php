@@ -1,6 +1,6 @@
-@extends('groups.container')
+@extends('group')
 
-@section('group')
+@section('content')
 
   <h1>{{ trans('group.features') }}</h1>
 

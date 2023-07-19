@@ -1,6 +1,6 @@
-@extends('groups.container')
+@extends('group')
 
-@section('group')
+@section('content')
     <h2>{{ trans('group.history_of_this_group') }}</h2>
 
     @foreach ($group->revisionHistory as $history)

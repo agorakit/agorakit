@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name=viewport content="width=device-width, initial-scale=1">
+
+    @include('partials.header')
+</head>
+
+<body style="background-image: none;">
+
+    <main>
+        @unless (request()->get('embed'))
+            @include('partials.nav')
+        @endunless
+
+        <div class="container mt-4">
+            @include('groups.tabs')
+
+            <div class="container text-bg-light p-4 rounded-2 rounded-top-0">
+                @include('partials.errors')
+                @yield('content')
+            </div>
+        </div>
+
+    </main>
+
+    @include('partials.footer')
+
+</body>
+
+</html>

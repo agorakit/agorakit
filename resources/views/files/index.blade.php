@@ -1,6 +1,6 @@
-@extends('groups.container')
+@extends('group')
 
-@section('group')
+@section('content')
 
 @auth
 <div class="sm:flex justify-between">

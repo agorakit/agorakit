@@ -1,6 +1,6 @@
-@extends('groups.container')
+@extends('group')
 
-@section('group')
+@section('content')
     <h1 class="mb-3">{{ trans('group.allowed_tags_title') }}</h1>
 
     <div class="alert alert-primary">

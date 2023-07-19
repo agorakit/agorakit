@@ -1,5 +1,5 @@
-@extends('groups.container')
+@extends('group')
 
-@section('group')
+@section('content')
     @include('partials.map')
 @endsection
