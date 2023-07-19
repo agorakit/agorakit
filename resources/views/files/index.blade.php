@@ -1,11 +1,6 @@
-@extends('app')
+@extends('groups.container')
 
-@section('content')
-
-@include('groups.tabs')
-
-
-
+@section('group')
 
 @auth
 <div class="sm:flex justify-between">
@@ -77,7 +72,5 @@
     {{$files->appends(request()->query())->links()}}
 </div>
 
-
-</div>
 
 @endsection

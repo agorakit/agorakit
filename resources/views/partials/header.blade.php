@@ -40,7 +40,7 @@
 <script src="{{ asset('js/compilers.js?v=' . filemtime(public_path('js/compilers.js'))) }}"></script>
 
 <!-- main app css, candidate for removal -->
-<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+<!--<link href="{{ asset('/css/app.css') }}" rel="stylesheet">-->
 
 <!-- bootstrap 5.2 -->
 <!--

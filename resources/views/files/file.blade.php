@@ -62,7 +62,7 @@
             </div>
 
             <div class="mr-2">
-                <i class="fa fa-user-circle"></i> {{ $file->user->name }}
+                <i class="fa fa-user-circle"></i> @if (isset($file->user)) {{$file->user->name}} @endif
             </div>
 
             <div class="mr-2">

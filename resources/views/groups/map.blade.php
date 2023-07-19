@@ -1,13 +1,5 @@
-@extends('app')
+@extends('groups.container')
 
-
-@section('content')
-    @include('groups.tabs')
-    <div class="tab_content">
-        <div class="spacer"></div>
-
-        @include('partials.map')
-
-
-    </div>
+@section('group')
+    @include('partials.map')
 @endsection

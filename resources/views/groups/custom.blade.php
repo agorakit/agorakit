@@ -1,10 +1,5 @@
-@extends('app')
+@extends('groups.container')
 
-@section('content')
-
-  @include('groups.tabs')
-
-  {!!$group->getSetting('module_custom_html') !!}
-
-
+@section('group')
+    {!! $group->getSetting('module_custom_html') !!}
 @endsection
