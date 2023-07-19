@@ -14,15 +14,14 @@
 <link href="{{ asset('/fonts/fontawesome/css/all.min.css') }}" rel="stylesheet">
 <link href="{{ asset('/fonts/fontawesome/css/v4-shims.min.css') }}" rel="stylesheet">
 
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+
 <!-- additional css from modules -->
 <link href="{{ asset('/css/fullcalendar.css') }}" rel="stylesheet">
 <link href="{{ asset('/css/datatables.min.css') }}" rel="stylesheet">
 <link href="{{ asset('/css/select2.min.css') }}" rel="stylesheet">
 <link href="{{ asset('/packages/summernote/summernote-lite.min.css') }}" rel="stylesheet">
-
-<!-- jquery -->
-<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-
 
 <!-- unpoly -->
 <script src="https://cdn.jsdelivr.net/npm/unpoly@3.3.0/unpoly.min.js"></script>
@@ -33,6 +32,12 @@
 <script>
     up.link.config.followSelectors.push('a[href]')
 </script>
+
+<script src="{{ asset('js/fullcalendar.js') }}"></script>
+<script src="{{ asset('packages/summernote/summernote-lite.min.js') }}"></script>
+<script src="{{ asset('js/datatables.min.js') }}"></script>
+<script src="{{ asset('js/select2.min.js') }}"></script>
+<script src="{{ asset('js/compilers.js?v=' . filemtime(public_path('js/compilers.js'))) }}"></script>
 
 <!-- main app css, candidate for removal -->
 <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
@@ -62,6 +67,10 @@
 
 @yield('css')
 @stack('css')
+
+<!-- additional js -->
+@yield('js')
+@stack('js')
 
 <!-- head -->
 @yield('head')

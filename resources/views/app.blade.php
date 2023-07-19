@@ -8,13 +8,13 @@
     @include('partials.header')
 </head>
 
-<body>
-
-    @unless (request()->get('embed'))
-        @include('partials.nav')
-    @endunless
+<body style="background-image: none;">
 
     <main>
+        @unless (request()->get('embed'))
+            @include('partials.nav')
+        @endunless
+
         <div class="container mt-4">
             @include('partials.errors')
             @yield('content')
