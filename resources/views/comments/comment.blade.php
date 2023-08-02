@@ -30,8 +30,8 @@
 
         @can('update', $comment)
         <div class="dropdown">
-            <a class="rounded-full hover:bg-gray-400 w-10 h-10 flex items-center justify-center type=" button"
-                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="rounded-full hover:bg-gray-400 w-10 h-10 d-flex items-center justify-center type=" button"
+                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-ellipsis-h"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">

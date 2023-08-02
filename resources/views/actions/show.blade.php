@@ -14,8 +14,8 @@
         </h1>
 
         <div class="dropdown">
-            <a class="cursor-pointer hover:bg-gray-300 flex flex-col justify-center items-center rounded-full w-12 h-12 "
-                type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="cursor-pointer hover:bg-gray-300 d-flex flex-col justify-center items-center rounded-full w-12 h-12 "
+                type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-ellipsis-h"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">

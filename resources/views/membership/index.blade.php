@@ -114,7 +114,7 @@
                             </td>
 
                             <td>
-                                <a class="rounded-full hover:bg-gray-400 w-10 h-10 flex items-center justify-center no-underline"
+                                <a class="rounded-full hover:bg-gray-400 w-10 h-10 d-flex items-center justify-center no-underline"
                                     href="{{ action('GroupMembershipAdminController@edit', [$group, $membership]) }}">
                                     <i class="fas fa-ellipsis-h"></i>
                                 </a>

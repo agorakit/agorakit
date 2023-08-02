@@ -1,4 +1,4 @@
-<div class="user flex mb-8">
+<div class="user d-flex mb-8">
 
   <a up-follow href="{{ route('users.show', $user) }}">
     <img src="{{route('users.cover', [$user, 'small'])}}" class="rounded-full w-12 h-12 mr-4" />

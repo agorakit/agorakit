@@ -23,8 +23,8 @@
 
         @can('react', $model)
         <div class="dropdown">
-            <a class="cursor-pointer flex items-center bg-gray-s300 text-gray-700 rounded-lg text-xs opacity-25 hover:opacity-100"
-                type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="cursor-pointer d-flex items-center bg-gray-s300 text-gray-700 rounded-lg text-xs opacity-25 hover:opacity-100"
+                type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img src="{{asset('/images/reactions/reaction.svg')}}" class="image-cover h-5 w-5"
                     title="Add a reaction" />
 

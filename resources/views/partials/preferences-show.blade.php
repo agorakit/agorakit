@@ -1,6 +1,6 @@
 @auth
 <div class="dropdown">
-  <a class="dropdown-toggle cursor-pointer text-gray-700" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+  <a class="dropdown-toggle cursor-pointer text-gray-700" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
     aria-haspopup="true" aria-expanded="false">
     @if (Auth::user()->getPreference('show', 'my') == 'my')
     {{__('Show my groups')}}

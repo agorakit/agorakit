@@ -85,8 +85,8 @@
                 @auth
                     @if (isset($notifications))
                         <div class="dropdown hidden lg:block sm:px-4">
-                            <a class="text-gray-200 px-1 flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:mr-2 sm:px-4 sm:bg-transparent sm:rounded"
-                                data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            <a class="text-gray-200 px-1 d-flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:mr-2 sm:px-4 sm:bg-transparent sm:rounded"
+                                data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right rounded shadow">
@@ -143,7 +143,7 @@
                 <!-- User profile -->
                 @auth
                     <div class="nav-item dropdown ms-3">
-                        <a data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                        <a data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
                             <img class="avatar rounded" src="{{ route('users.cover', [Auth::user(), 'small']) }}" />
                         </a>
 

@@ -3,7 +3,7 @@
 <div class="flex items-start py-5 border-b-2 border-gray-300 hover:bg-gray-200" id="action-{{$action->id}}">
     <a up-follow href="{{ route('groups.actions.show', [$action->group, $action]) }}" class="no-underline">
         <div
-            class="border-gray-400 text-gray-600 bg-gray-200 border-2 flex-shrink-0 flex flex-col items-center justify-center h-12 w-12 rounded-lg mx-1">
+            class="border-gray-400 text-gray-600 bg-gray-200 border-2 flex-shrink-0 d-flex flex-col items-center justify-center h-12 w-12 rounded-lg mx-1">
             <div class="text-xl -mb-2 text-gray-800">{{ $action->start->format('d') }}</div>
             <div class="text-sm">{{ $action->start->isoFormat('MMM') }}</div>
         </div>
@@ -59,7 +59,7 @@
     @can ('participate', $action)
     <div class="participate-dropdown ml-2 mr-2" id="participate-{{$action->id}}">
         <button class="dropdown-toggle bg-transparent text-gray-700" type="button" id="dropdownMenuButton"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             @if (Auth::user()->isAttending($action))
             <i class="fa fa-calendar-check-o"></i>
             @elseif (Auth::user()->isNotAttending($action))

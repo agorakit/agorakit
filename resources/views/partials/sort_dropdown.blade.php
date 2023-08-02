@@ -1,6 +1,6 @@
 
 <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         {{trans('messages.sort')}}
         @if (request()->get('sort'))
             : {{ trans('messages.sort_by_' . request()->get('sort').'_'.request()->get('dir')) }}

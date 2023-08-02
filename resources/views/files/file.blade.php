@@ -1,10 +1,10 @@
-<div class="py-3 border-gray-300 border-b flex @if ($file->isArchived()) status-archived @endif  @if ($file->isPinned()) status-pinned @endif"
+<div class="py-3 border-gray-300 border-b d-flex @if ($file->isArchived()) status-archived @endif  @if ($file->isPinned()) status-pinned @endif"
     up-expand>
 
     <div class="relative">
         @if ($file->isPinned())
         <div
-            class="text-xs absolute right-0 w-6 h-6 rounded-full text-white bg-blue-700 flex items-center justify-center border-white border-2 shadow-md ">
+            class="text-xs absolute right-0 w-6 h-6 rounded-full text-white bg-blue-700 d-flex items-center justify-center border-white border-2 shadow-md ">
             <i class="fas fa-thumbtack" title="{{__('Pinned')}}"></i>
         </div>
         @endif
@@ -41,7 +41,7 @@
 
 
 
-        <div class="text-xs text-gray-500 flex flex-wrap hover:text-gray-600">
+        <div class="text-xs text-gray-500 d-flex flex-wrap hover:text-gray-600">
 
             @if ($file->isArchived())
             <div class="mr-2">

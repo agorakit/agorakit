@@ -21,7 +21,7 @@
 
     <li class="nav-item">
         <a class="nav-link @if (isset($tab) && $tab == 'home') active @endif" href="{{ route('groups.show', $group) }}" up-follow up-reveal="false">
-            <i class="fa fa-info-circle"></i> <span class="hidden sm:inline">{{ trans('messages.group_home') }}</span>
+            <i class="fa fa-info-circle"></i> {{ trans('messages.group_home') }}
         </a>
     </li>
 
@@ -49,7 +49,7 @@
         @can('viewFiles', $group)
             <li class="nav-item">
                 <a class="nav-link @if (isset($tab) && $tab == 'files') active @endif" href="{{ route('groups.files.index', $group) }}" up-follow up-reveal="false">
-                    <i class="fa fa-files-o sm:hidden"></i> <span class="hidden sm:inline">{{ trans('messages.files') }}</span>
+                    <i class="fa fa-files-o sm:hidden"></i> {{ trans('messages.files') }}
                 </a>
             </li>
         @endcan
@@ -59,7 +59,7 @@
         @can('viewMembers', $group)
             <li class="nav-item">
                 <a class="nav-link @if (isset($tab) && $tab == 'users') active @endif" href="{{ route('groups.users.index', $group) }}" up-follow up-reveal="false">
-                    <i class="fa fa-users sm:hidden"></i> <span class="hidden sm:inline">{{ trans('messages.members') }}</span>
+                    <i class="fa fa-users sm:hidden"></i> {{ trans('messages.members') }}
                 </a>
             </li>
         @endcan
@@ -69,7 +69,7 @@
         @can('viewMembers', $group)
             <li class="nav-item">
                 <a class="nav-link @if (isset($tab) && $tab == 'map') active @endif" href="{{ action('GroupMapController@index', $group) }}">
-                    <i class="fa fa-map-marker sm:hidden"></i> <span class="hidden sm:inline">{{ trans('messages.map') }}</span>
+                    <i class="fa fa-map-marker sm:hidden"></i> {{ trans('messages.map') }}
                 </a>
             </li>
         @endcan
@@ -79,8 +79,8 @@
         @if ($group->isMember())
             <li class="nav-item">
                 <a class="nav-link @if (isset($tab) && $tab == 'custom') active @endif" href="{{ action('ModuleController@show', $group) }}">
-                    <i class="fa {{ $group->getSetting('module_custom_icon') }} sm:hidden"></i> <span
-                        class="hidden sm:inline">{{ $group->getSetting('module_custom_name') }}</span>
+                    <i class="fa {{ $group->getSetting('module_custom_icon') }} sm:hidden"></i
+                        class="hidden sm:inline">{{ $group->getSetting('module_custom_name') }}
                 </a>
             </li>
         @endif
@@ -89,13 +89,13 @@
     @if ($group->isMember())
         <li class="nav-item">
             <a class="nav-link @if (isset($tab) && $tab == 'preferences') active @endif" href="{{ action('GroupMembershipController@edit', $group) }}" up-follow up-reveal="false">
-                <i class="fa fa-bell-o sm:hidden"></i> <span class="hidden sm:inline">{{ trans('messages.settings') }}</span>
+                <i class="fa fa-bell-o sm:hidden"></i> {{ trans('messages.settings') }}
             </a>
         </li>
     @else
         <li class="nav-item">
             <a class="nav-link @if (isset($tab) && $tab == 'settings') active @endif" href="{{ action('GroupMembershipController@create', $group) }}" up-follow up-reveal="false">
-                <i class="fa fa-sign-in sm:hidden"></i> <span class="hidden sm:inline">{{ trans('messages.join') }}</span>
+                <i class="fa fa-sign-in sm:hidden"></i> {{ trans('messages.join') }}
             </a>
         </li>
     @endif
@@ -103,9 +103,9 @@
     @can('administer', $group)
         <li class="nav-item dropdown">
 
-            <a class=" nav-link dropdown-toggle  @if (isset($tab) && $tab == 'admin') active @endif" id="admin" data-toggle="dropdown" href="#" aria-controls="admin-contents"
+            <a class=" nav-link dropdown-toggle  @if (isset($tab) && $tab == 'admin') active @endif" id="admin" data-bs-toggle="dropdown" href="#" aria-controls="admin-contents"
                 aria-expanded="false">
-                <i class="fa fa-wrench sm:hidden"></i> <span class="hidden sm:inline">@lang('Administer')</span>
+                <i class="fa fa-wrench sm:hidden"></i> @lang('Administer')
             </a>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="{{ route('groups.edit', $group) }}" up-follow up-reveal="false">

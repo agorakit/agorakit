@@ -75,7 +75,7 @@
 
         {{-- this is the first new unread comment --}}
         @if ($comment_key == $read_count)
-        <div class="w-full flex justify-center my-4" id="unread">
+        <div class="w-full d-flex justify-center my-4" id="unread">
             <div class="inline-block bg-red-700 text-red-100 rounded-full px-4 py-2 text-sm uppercase">
                 <i class="far fa-arrow-alt-circle-down mr-2"></i> {{trans('messages.new')}}
             </div>
@@ -88,7 +88,7 @@
 
         {{-- this is the latest comment, it is read, we scroll below after the comment post box --}}
         @if ($comment_key + 1 == $read_count)
-        <div class="w-full flex justify-center my-4" id="last_read">
+        <div class="w-full d-flex justify-center my-4" id="last_read">
             <div class="inline-block bg-gray-500 text-gray-100 rounded-full px-4 py-2 text-sm uppercase">
                 <i class="far fa-arrow-alt-circle-up mr-2"></i> {{trans('messages.all_is_read')}}
             </div>

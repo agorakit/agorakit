@@ -77,7 +77,7 @@
 
     @if ($discussions)
         @if ($discussions->count() > 0)
-            <h2 class="my-4 flex justify-between">
+            <h2 class="my-4 d-flex justify-between">
                 <a href="{{ route('groups.discussions.index', $group) }}" up-follow>{{ trans('group.latest_discussions') }}</a>
                 @can('create-discussion', $group)
                     <a class="btn btn-primary" href="{{ route('groups.discussions.create', $group) }}">
@@ -85,7 +85,7 @@
                     </a>
                 @endcan
             </h2>
-            <div class="discussions">
+            <div class="list-group mt-4">
                 @foreach ($discussions as $discussion)
                     @include('discussions.discussion')
                 @endforeach
@@ -95,7 +95,7 @@
 
     @if ($actions)
         @if ($actions->count() > 0)
-            <h2 class="my-4 flex justify-between">
+            <h2 class="my-4 d-flex justify-between">
                 <a href="{{ route('groups.actions.index', $group) }}" up-follow>{{ trans('messages.agenda') }}</a>
                 @can('create-action', $group)
                     <a class="btn btn-primary" href="{{ route('groups.actions.create', $group) }}">
