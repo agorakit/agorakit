@@ -1,7 +1,7 @@
 @extends('group')
 
 @section('content')
-    <div class="row">
+    <div class="row mb-4">
 
         <div class="col">
 
@@ -76,21 +76,7 @@
     </div>
 
     @if ($discussions)
-        @if ($discussions->count() > 0)
-            <h2 class="my-4 d-flex justify-between">
-                <a href="{{ route('groups.discussions.index', $group) }}" up-follow>{{ trans('group.latest_discussions') }}</a>
-                @can('create-discussion', $group)
-                    <a class="btn btn-primary" href="{{ route('groups.discussions.create', $group) }}">
-                        {{ trans('discussion.create_one_button') }}
-                    </a>
-                @endcan
-            </h2>
-            <div class="list-group mt-4">
-                @foreach ($discussions as $discussion)
-                    @include('discussions.discussion')
-                @endforeach
-            </div>
-        @endif
+    @include('discussions.list', ['discussions' => $discussions])
     @endif
 
     @if ($actions)
