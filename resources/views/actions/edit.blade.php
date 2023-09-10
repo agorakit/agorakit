@@ -8,7 +8,7 @@
     @include('actions.form')
 
     <div class="form-group">
-        {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-primary btn-lg']) !!}
+        {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-primary']) !!}
     </div>
 
     {!! Form::close() !!}

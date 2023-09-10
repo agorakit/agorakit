@@ -12,7 +12,7 @@
 
 
     <div>
-        {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-lg btn-primary shadow']) !!}
+        {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-primary']) !!}
     </div>
 
 </div>

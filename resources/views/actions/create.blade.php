@@ -30,7 +30,7 @@
             @include('actions.form')
 
             <div class="form-group">
-                {!! Form::submit(trans('messages.create'), ['class' => 'btn btn-primary btn-lg']) !!}
+                {!! Form::submit(trans('messages.create'), ['class' => 'btn btn-primary']) !!}
             </div>
 
             {!! Form::close() !!}
@@ -41,7 +41,7 @@
             @include('actions.form')
 
             <div class="form-group">
-                {!! Form::submit(trans('messages.create'), ['class' => 'btn btn-primary btn-lg']) !!}
+                {!! Form::submit(trans('messages.create'), ['class' => 'btn btn-primary']) !!}
             </div>
 
 
