@@ -1,36 +1,26 @@
-@extends('app')
+@extends('group')
 
 @section('content')
+    <h2>{{ trans('membership.invite_title') }}</h2>
 
-@include('groups.tabs')
+    <p>
+        {{ trans('membership.invite_intro') }}
 
-<div class="tab_content">
+    </p>
 
-  <h2>{{trans('membership.invite_title')}}</h2>
+    {!! Form::open(['action' => ['InviteController@sendInvites', $group]]) !!}
 
-  <p>
-    {{trans('membership.invite_intro')}}
+    <div class="form-group">
+        {!! Form::label('invitations', trans('membership.people_to_invite')) !!}
+        {!! Form::textarea('invitations', null, ['class' => 'form-control', 'required']) !!}
+    </div>
 
-  </p>
+    <div class="form-group">
+        {!! Form::submit(trans('membership.invite_button'), ['class' => 'btn btn-primary']) !!}
+        <a href="{{ url('/') }}" up-follow>{{ trans('messages.cancel') }}</a>
+    </div>
 
+    {!! Form::close() !!}
 
-  {!! Form::open(array('action' => ['InviteController@sendInvites', $group])) !!}
-
-  <div class="form-group">
-    {!! Form::label('invitations', trans('membership.people_to_invite')) !!}
-    {!! Form::textarea('invitations', null, ['class' => 'form-control', 'required']) !!}
-  </div>
-
-  <div class="form-group">
-    {!! Form::submit(trans('membership.invite_button'), ['class' => 'btn btn-primary btn-lg']) !!}
-    <a up-follow href="{{url('/')}}">{{trans('messages.cancel')}}</a>
-  </div>
-
-
-  {!! Form::close() !!}
-
-
-</div>
-
-
+    </div>
 @endsection

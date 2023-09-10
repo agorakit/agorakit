@@ -1,9 +1,9 @@
 @extends('group')
 
 @section('content')
-    <div class="d-flex mb-8">
+    <div class="d-flex mb-2">
         @can('invite', $group)
-            <div>
+            <div class="me-2">
                 <a class="btn btn-primary mb-2 mr-2" href="{{ action('InviteController@invite', $group) }}">
                     {{ trans('membership.invite_by_email') }}
                 </a>

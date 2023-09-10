@@ -20,7 +20,7 @@
 
 
 		<div class="d-flex justify-content-center mt-2">
-			<button type="submit" class="btn btn-primary btn-lg">@lang('Send me the link')</button>
+			<button type="submit" class="btn btn-primary">@lang('Send me the link')</button>
 		</div>
 
 

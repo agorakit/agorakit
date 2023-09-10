@@ -32,7 +32,7 @@
     <div class="mt-5 d-flex justify-between items-center">
 
         <div class="form-group">
-            {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-primary btn-lg']) !!}
+            {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-primary']) !!}
         </div>
 
         <div>{{ trans('membership.if_you_want_to_leave_this_group') }}, <a href="{{ action('GroupMembershipController@destroyConfirm', $group) }}"

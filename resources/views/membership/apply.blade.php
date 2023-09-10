@@ -28,7 +28,7 @@
 
 <div class="mt-5 d-flex justify-between items-center">
 
-    {!! Form::submit(trans('membership.apply'), ['class' => 'btn btn-primary btn-lg']) !!}
+    {!! Form::submit(trans('membership.apply'), ['class' => 'btn btn-primary']) !!}
     <a class="js-back" href="{{url('/')}}">{{trans('messages.cancel')}}</a>
 
 </div>
