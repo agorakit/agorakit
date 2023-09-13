@@ -19,7 +19,7 @@ class="d-flex items-start py-3 hover:bg-gray-100 border-b border-gray-300">
 
 
         @if($group->tags->count() > 0)
-            <div class="text-gray-600 text-xs overflow-hidden h-5">
+            <div class="text-secondary text-xs overflow-hidden h-5">
                 @foreach($group->tags as $tag)
                     @include('tags.tag')
                 @endforeach
@@ -30,7 +30,7 @@ class="d-flex items-start py-3 hover:bg-gray-100 border-b border-gray-300">
  {{ summary($group->body, 100) }}
  </div>
 
-        <div class="text-gray-600 text-xs">
+        <div class="text-secondary text-xs">
             {{ trans('created at') }}
             {{ $group->created_at->diffForHumans() }} - 
             {{ trans('updated at') }}

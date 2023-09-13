@@ -22,7 +22,7 @@
                     {{ $user->name }}
                 </div>
 
-                <div class="text-gray-600 my-1">
+                <div class="text-secondary my-1">
                     {{ '@' .$user->username }}
                 </div>
 

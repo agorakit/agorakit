@@ -50,7 +50,7 @@
 
     @if ($breadcrumb)
     @foreach ($breadcrumb as $my_parent)
-    <i class="fa fa-angle-right fill-current text-gray-600"></i>
+    <i class="fa fa-angle-right fill-current text-secondary"></i>
     <a up-follow up-target=".files" class="" href="{{ route('groups.files.index', ['group' => $group, 'parent' =>  $my_parent->id]) }}">
         {{$my_parent->name}}
     </a>

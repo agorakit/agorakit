@@ -17,7 +17,7 @@
         @endif
     @endauth
 
-    <div class="list-group discussions">
+    <div class="list-group list-group-flush list-group-hoverable">
         @forelse($discussions as $discussion)
             @include('discussions.discussion')
         @empty

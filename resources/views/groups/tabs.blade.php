@@ -1,4 +1,4 @@
-<h1 class="truncate mb-4">
+<h1 class="text-truncate">
     <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
     @if (isset($tab) && $tab != 'home')
         <a href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
@@ -79,8 +79,7 @@
         @if ($group->isMember())
             <li class="nav-item">
                 <a class="nav-link @if (isset($tab) && $tab == 'custom') active @endif" href="{{ action('ModuleController@show', $group) }}">
-                    <i class="fa {{ $group->getSetting('module_custom_icon') }} sm:hidden"></i
-                        class="hidden me-2">{{ $group->getSetting('module_custom_name') }}
+                    <i class="fa {{ $group->getSetting('module_custom_icon') }} sm:hidden"></i class="hidden me-2">{{ $group->getSetting('module_custom_name') }}
                 </a>
             </li>
         @endif
@@ -103,8 +102,8 @@
     @can('administer', $group)
         <li class="nav-item dropdown">
 
-            <a class=" nav-link dropdown-toggle  @if (isset($tab) && $tab == 'admin') active @endif" id="admin" data-bs-toggle="dropdown" href="#" aria-controls="admin-contents"
-                aria-expanded="false">
+            <a class=" nav-link dropdown-toggle  @if (isset($tab) && $tab == 'admin') active @endif" id="admin" data-bs-toggle="dropdown" href="#"
+                aria-controls="admin-contents" aria-expanded="false">
                 <i class="fa fa-wrench me-2"></i> @lang('Administer')
             </a>
             <div class="dropdown-menu">

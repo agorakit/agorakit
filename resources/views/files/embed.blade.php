@@ -7,7 +7,7 @@
 {{ $file->name }}
 </div>
 
-<div class="text-xs text-gray-600">
+<div class="text-xs text-secondary">
 
 <div class="h-4 overflow-hidden">
 <i class="fa fa-user-circle"></i> {{ $file->user->name }}

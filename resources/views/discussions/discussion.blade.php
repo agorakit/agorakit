@@ -1,4 +1,4 @@
-<div class="list-group-item d-flex justify-content-between align-items-start">
+<div class="list-group-item d-flex justify-content-between align-items-start" up-expand>
 
     @if ($discussion->user)
         <div class="me-4">
@@ -6,9 +6,9 @@
         </div>
     @endif
 
-    <div class="flex-grow-1">
+    <div class="flex-grow-1 text-truncate">
 
-        <div class="truncate fw-bold">
+        <div class="text-truncate mt-n1">
             <a href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}">
                 @if ($discussion->isArchived())
                     [{{ __('Archived') }}]
@@ -17,7 +17,7 @@
             </a>
         </div>
 
-        <div class="text-gray-600 text-xs">
+        <div class="text-secondary text-xs">
             @if ($discussion->user)
                 {{ trans('messages.started_by') }}
                 {{ $discussion->user->name }}
@@ -27,12 +27,12 @@
             {{ dateForHumans($discussion->updated_at) }}
         </div>
 
-        <div class="text-gray-600 truncate min-w-0 h-6">
+        <div class="text-secondary text-truncate d-block">
             {{ summary($discussion->body) }}
         </div>
 
         @if ($discussion->getSelectedTags()->count() > 0)
-            <div class="text-gray-600 text-xs overflow-hidden h-5">
+            <div class="text-secondary text-xs overflow-hidden">
                 @foreach ($discussion->getSelectedTags() as $tag)
                     @include('tags.tag')
                 @endforeach

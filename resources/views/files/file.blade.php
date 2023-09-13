@@ -41,7 +41,7 @@
 
 
 
-        <div class="text-xs text-gray-500 d-flex flex-wrap hover:text-gray-600">
+        <div class="text-xs text-gray-500 d-flex flex-wrap hover:text-secondary">
 
             @if ($file->isArchived())
             <div class="mr-2">

@@ -45,7 +45,7 @@
       @endunless
       @endforeach
     </div>
-    <div class="text-xs text-gray-600">
+    <div class="text-xs text-secondary">
       {{ trans('messages.last_activity') }} : {{ $user->updated_at->diffForHumans() }}
     </div>
   </div>

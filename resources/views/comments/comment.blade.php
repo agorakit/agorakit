@@ -14,7 +14,7 @@
 
 
 
-            <div class="text-xs text-gray-600">
+            <div class="text-xs text-secondary">
 
                 <a up-follow href="{{ route('users.show', [$comment->user]) }}">{{$comment->user->name}}</a>
 
