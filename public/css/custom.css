@@ -1,3 +1,14 @@
+:root {
+    font-family: 'Inter', sans-serif;
+}
+
+@supports (font-variation-settings: normal) {
+    :root {
+        font-family: 'Inter var', sans-serif;
+    }
+}
+
+
 up-modal-box {
     border-radius: 13px;
     padding: 0;
@@ -5,7 +16,7 @@ up-modal-box {
 
 
 :root {
-    /*--tblr-font-sans-serif: 'Inter';*/
+    --tblr-font-sans-serif: 'Inter';
     --tblr-border-radius: 5px;
     --tblr-body-bg: #e6e5d8;
     --tblr-list-group-item-padding-x: 0;
@@ -33,7 +44,6 @@ up-modal-box {
     border-radius: 10px;
 }
 
-.list-group-item
-{
-    padding: var(--tblr-list-group-item-padding-y) 0 ;
+.list-group-item {
+    padding: var(--tblr-list-group-item-padding-y) 0;
 }

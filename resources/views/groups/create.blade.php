@@ -1,4 +1,4 @@
-@extends('group')
+@extends('app')
 
 @section('content')
     <h1>{{ trans('group.create_group_title') }}</h1>
