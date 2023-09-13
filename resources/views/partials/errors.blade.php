@@ -1,10 +1,3 @@
-<div class="js-spinner sticky  hidden bg-green-700 top-0 z-50 w-full">
-    <div class="inline-block  text-green-200 m-4">
-        <i class="far fa-save mr-2"></i>
-        {{ __('Loading') }}
-    </div>
-</div>
-
 <div class="js-network-error alert alert-warning" up-hungry>
     <i class="fa fa-plug mr-2"></i>
     {{ __('Network error') }}
@@ -26,7 +19,7 @@
 @endif
 
 @if (Auth::user() && Auth::user()->invites->count() > 0)
-    <div class="alert alert-success" up-hungry>
+    <div class="alert alert-info" up-hungry>
         <h4 class="alert-heading"><i class="fa fa-hand-point-right"></i>
             {{ __('You have pending group invites') }}
         </h4>
@@ -38,7 +31,7 @@
 @endif
 
 @if (Session::has('messages'))
-    <div class="alert alert-success" up-hungry>
+    <div class="alert alert-info" up-hungry>
         @foreach (session('messages') as $message)
             <div>{!! $message !!}</div>
             <?php session()->pull('messages'); ?>
@@ -47,7 +40,7 @@
 @endif
 
 @if (Session::has('message'))
-    <div class="alert alert-success" up-hungry>
+    <div class="alert alert-info" up-hungry>
         {!! Session::get('message') !!}
     </div>
 @endif

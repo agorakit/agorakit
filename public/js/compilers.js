@@ -154,20 +154,6 @@ up.compiler('.calendar', function (element, data) {
 });
 
 
-/*
-A simple spinner that is shown when a request takes too long
-*/
-up.compiler('.js-spinner', function (element) {
-	function show() { element.style.display = 'block' }
-	function hide() { element.style.display = 'none' }
-	up.on('up:proxy:slow', show)
-	up.on('up:proxy:recover', hide)
-	hide()
-});
-
-//up.proxy.config.slowDelay=300
-
-
 up.compiler('.js-network-error', function (element) {
 	function show() { element.style.display = 'block' }
 	function hide() { element.style.display = 'none' }

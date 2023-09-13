@@ -1,4 +1,7 @@
 <div class="mb-4">
+
+    @include('partials.invite')
+
     <h1 class="text-truncate">
         <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
         @if (isset($tab) && $tab != 'home')
@@ -15,8 +18,6 @@
             <i class="fa fa-eye-slash" title="{{ trans('group.secret') }}"></i>
         @endif
     </h1>
-
-    @include('partials.invite')
 
     <ul class="nav nav-pills">
 
