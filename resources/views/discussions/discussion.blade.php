@@ -1,14 +1,14 @@
 <div class="list-group-item d-flex justify-content-between align-items-start" up-expand>
 
     @if ($discussion->user)
-        <div class="me-4">
+        <div class="me-3">
             @include('users.avatar', ['user' => $discussion->user])
         </div>
     @endif
 
     <div class="flex-grow-1 text-truncate">
 
-        <div class="text-truncate mt-n1">
+        <div class="text-truncate">
             <a href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}">
                 @if ($discussion->isArchived())
                     [{{ __('Archived') }}]
@@ -17,7 +17,7 @@
             </a>
         </div>
 
-        <div class="text-secondary text-xs">
+        <div class="text-secondary">
             @if ($discussion->user)
                 {{ trans('messages.started_by') }}
                 {{ $discussion->user->name }}
@@ -41,7 +41,7 @@
 
     </div>
 
-    <div class="d-flex ms-4">
+    <div class="d-flex ms-3">
 
         @if ($discussion->isPinned())
             <div class="">

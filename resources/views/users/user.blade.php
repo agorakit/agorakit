@@ -6,7 +6,7 @@
 
   <div class="w-full">
     <div class="flex">
-      <div class="name mr-2">
+      <div class="name me-2">
         <a class="no-underline font-bold text-gray-800" up-follow href="{{ route('users.show', $user) }}">
           {{ $user->name }}
         </a>

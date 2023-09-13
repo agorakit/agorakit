@@ -28,7 +28,7 @@
         <div class="small meta">
 
             <div class="d-flex">
-                <div class="mr-2">
+                <div class="me-2">
                     <a up-follow href="{{ route('groups.show', [$file->group_id]) }}">
                         @if ($file->group->isOpen())
                             <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
@@ -49,7 +49,7 @@
             </div>
 
             <div class="d-flex">
-                <div class="mr-2">
+                <div class="me-2">
                     <i class="fa fa-clock-o"></i> {{ $file->updated_at }}
                 </div>
 

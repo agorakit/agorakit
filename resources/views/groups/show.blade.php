@@ -16,7 +16,7 @@
                     </div>
 
                     @foreach ($admins as $admin)
-                        <a class="mr-2" href="{{ route('users.show', [$admin]) }}">{{ $admin->name }}</a>
+                        <a class="me-2" href="{{ route('users.show', [$admin]) }}">{{ $admin->name }}</a>
                     @endforeach
                 </div>
             @endif

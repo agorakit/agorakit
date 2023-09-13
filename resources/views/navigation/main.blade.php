@@ -8,7 +8,7 @@
 
                 <a up-target="body" class="flex align-items-center" href="{{ route('users.show', Auth::user()) }}">
                     <img src="{{ route('users.cover', [Auth::user(), 'small']) }}"
-                            class="rounded-full h-8 w-8 mr-2" />
+                            class="rounded-full h-8 w-8 me-2" />
                     <span>{{ Auth::user()->name }}</span>
                 </a>
 
@@ -38,13 +38,13 @@
                     @lang('Login')
                 </div>
 
-                <a up-modal=".dialog" class="item" href="{{ url('login') }}">
+                <a up-layer="new" class="item" href="{{ url('login') }}">
                     <i class="fas fa-key"></i>
                     {{ trans('messages.login') }}
                 </a>
 
 
-                <a up-modal=".dialog" class="item" href="{{ url('register') }}">
+                <a up-layer="new" class="item" href="{{ url('register') }}">
                     <i class="fas fa-sign-in-alt"></i>
                     {{ trans('messages.register') }}
                 </a>

@@ -45,7 +45,7 @@
                 @endcan
 
                 @can('delete', $comment)
-                <a class="dropdown-item" up-modal=".dialog"
+                <a class="dropdown-item" up-layer="new"
                     href="{{ action('CommentController@destroyConfirm', [$comment->discussion->group, $comment->discussion, $comment]) }}"><i
                         class="fa fa-trash"></i>
                     {{trans('messages.delete')}}

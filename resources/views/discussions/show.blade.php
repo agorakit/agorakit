@@ -42,7 +42,7 @@
             <div class="mb-3 d-flex">
                 <div class="tags">
                     @if($discussion->getSelectedTags()->count() > 0)
-                    <span class="mr-2">
+                    <span class="me-2">
                         @foreach($discussion->getSelectedTags() as $tag)
                         @include('tags.tag')
                         @endforeach
@@ -77,7 +77,7 @@
         @if ($comment_key == $read_count)
         <div class="w-full d-flex justify-center my-4" id="unread">
             <div class="inline-block bg-red-700 text-red-100 rounded-full px-4 py-2 text-sm uppercase">
-                <i class="far fa-arrow-alt-circle-down mr-2"></i> {{trans('messages.new')}}
+                <i class="far fa-arrow-alt-circle-down me-2"></i> {{trans('messages.new')}}
             </div>
         </div>
         @endif
@@ -90,7 +90,7 @@
         @if ($comment_key + 1 == $read_count)
         <div class="w-full d-flex justify-center my-4" id="last_read">
             <div class="inline-block bg-gray-500 text-gray-100 rounded-full px-4 py-2 text-sm uppercase">
-                <i class="far fa-arrow-alt-circle-up mr-2"></i> {{trans('messages.all_is_read')}}
+                <i class="far fa-arrow-alt-circle-up me-2"></i> {{trans('messages.all_is_read')}}
             </div>
         </div>
         @endif
@@ -117,7 +117,7 @@
         {{--<h2>@lang('messages.reply')</h2>--}}
         <div class="flex">
             <img src="{{route('users.cover', [Auth::user(), 'small'])}}"
-                class="rounded-full h-10 w-10 sm:h-12 sm:w-12 flex-shrink-0 mr-2 sm:mr-4" />
+                class="rounded-full h-10 w-10 sm:h-12 sm:w-12 flex-shrink-0 me-2 sm:mr-4" />
             <div class="flex-grow">
                 @include('comments.create')
             </div>

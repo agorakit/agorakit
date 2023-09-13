@@ -57,7 +57,7 @@
 
 
     @can ('participate', $action)
-    <div class="participate-dropdown ml-2 mr-2" id="participate-{{$action->id}}">
+    <div class="participate-dropdown ml-2 me-2" id="participate-{{$action->id}}">
         <button class="dropdown-toggle bg-transparent text-gray-700" type="button" id="dropdownMenuButton"
             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             @if (Auth::user()->isAttending($action))

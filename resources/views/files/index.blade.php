@@ -2,75 +2,70 @@
 
 @section('content')
 
-@auth
-<div class="sm:flex justify-content-between">
-    <div class="flex mb-2 space-x-1">
-        @include('partials.tags_filter')
-        @include('partials.sort_dropdown')
-    </div>
+    @auth
+        <div>
+            <div class="flex mb-2 space-x-1">
+                @include('partials.tags_filter')
+                @include('partials.sort_dropdown')
+            </div>
 
-    <div class="">
-        @can('create-file', $group)
-        <a up-modal=".dialog" class="btn btn-primary"
-            href="{{ route('groups.files.create', ['group' => $group, 'parent' =>  $parent] ) }}">
-            <i class="fa fa-file me-2"></i>
-            {{trans('messages.create_file_button')}}
-        </a>
-        @endcan
+            <div class="">
+                @can('create-file', $group)
+                    <a class="btn btn-primary" href="{{ route('groups.files.create', ['group' => $group, 'parent' => $parent]) }}" up-layer="new">
+                        <i class="fa fa-file me-2"></i>
+                        {{ trans('messages.create_file_button') }}
+                    </a>
+                @endcan
 
-        @can('create-file', $group)
-        <a up-modal=".dialog" class="btn btn-primary"
-            href="{{ route('groups.files.createlink', ['group' => $group, 'parent' =>  $parent] ) }}">
-            <i class="fa fa-link me-2"></i>
-            {{trans('messages.create_link_button')}}
-        </a>
-        @endcan
+                @can('create-file', $group)
+                    <a class="btn btn-primary" href="{{ route('groups.files.createlink', ['group' => $group, 'parent' => $parent]) }}" up-layer="new">
+                        <i class="fa fa-link me-2"></i>
+                        {{ trans('messages.create_link_button') }}
+                    </a>
+                @endcan
 
-        @can('create-folder', $group)
-        <a up-modal=".dialog" class="btn btn-primary"
-            href="{{ route('groups.files.createfolder', ['group' => $group, 'parent' =>  $parent] ) }}">
-            <i class="fa fa-folder me-2"></i>
-            {{trans('messages.create_folder_button')}}
-        </a>
-        @endcan
-    </div>
+                @can('create-folder', $group)
+                    <a class="btn btn-primary" href="{{ route('groups.files.createfolder', ['group' => $group, 'parent' => $parent]) }}" up-layer="new">
+                        <i class="fa fa-folder me-2"></i>
+                        {{ trans('messages.create_folder_button') }}
+                    </a>
+                @endcan
+            </div>
 
-</div>
-@endauth
+        </div>
+    @endauth
 
-<div class="files">
+    <div class="files">
 
+        <h3 class="my-3 text-2xl text-gray-800">
 
-<h3 class="my-5 text-2xl text-gray-800">
+            <a href="{{ route('groups.files.index', $group) }}" up-follow up-target=".files">
+                <i class="fa fa-folder-open-o"></i>
+                <span class="">{{ trans('messages.root') }}</span>
+            </a>
 
-    <a up-follow up-target=".files" href="{{ route('groups.files.index', $group ) }}">
-        <i class="fa fa-folder-open-o"></i>
-        <span class="">{{trans('messages.root')}}</span>
-    </a>
+            @if ($breadcrumb)
+                @foreach ($breadcrumb as $my_parent)
+                    <i class="fa fa-angle-right fill-current text-secondary"></i>
+                    <a class="" href="{{ route('groups.files.index', ['group' => $group, 'parent' => $my_parent->id]) }}" up-follow up-target=".files">
+                        {{ $my_parent->name }}
+                    </a>
+                @endforeach
+            @endif
 
-    @if ($breadcrumb)
-    @foreach ($breadcrumb as $my_parent)
-    <i class="fa fa-angle-right fill-current text-secondary"></i>
-    <a up-follow up-target=".files" class="" href="{{ route('groups.files.index', ['group' => $group, 'parent' =>  $my_parent->id]) }}">
-        {{$my_parent->name}}
-    </a>
-    @endforeach
-    @endif
+        </h3>
 
-</h3>
+        <div class="list-group list-group-flush list-group-hoverable">
+            @forelse($folders as $file)
+                @include('files.file')
+            @empty
+            @endforelse
 
-<div class="items mt-2">
-    @forelse( $folders as $file )
-    @include('files.file')
-    @empty
-    @endforelse
+            @forelse($files as $file)
+                @include('files.file')
+            @empty
+            @endforelse
+            {{ $files->appends(request()->query())->links() }}
+        </div>
 
-    @forelse( $files as $file )
-    @include('files.file')
-    @empty
-    @endforelse
-    {{$files->appends(request()->query())->links()}}
-</div>
-
-
-@endsection
+    @endsection

@@ -8,6 +8,7 @@ up-modal-box {
     /*--tblr-font-sans-serif: 'Inter';*/
     --tblr-border-radius: 5px;
     --tblr-body-bg: #e6e5d8;
+    --tblr-list-group-item-padding-x: 0;
 }
 
 .nav-tabs .nav-link.active {
@@ -17,7 +18,7 @@ up-modal-box {
 }
 
 .nav-pills .nav-link.active {
-    background-color: var(--tblr-primary);
+    background-color: var(--tblr-info);
     color: white;
 }
 
@@ -30,4 +31,9 @@ up-modal-box {
     background-color: white;
     padding: 20px;
     border-radius: 10px;
+}
+
+.list-group-item
+{
+    padding: var(--tblr-list-group-item-padding-y) 0 ;
 }

@@ -111,27 +111,27 @@
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="{{ route('groups.edit', $group) }}" up-follow up-reveal="false">
-                        <i class="fa fa-cogs"></i> {{ trans('Configuration') }}
+                        <i class="fa fa-cogs me-2"></i> {{ trans('Configuration') }}
                     </a>
 
                     <a class="dropdown-item" href="{{ route('groups.tags.edit', $group) }}" up-follow up-reveal="false">
-                        <i class="fa fa-tags"></i> {{ trans('Tags') }}
+                        <i class="fa fa-tags me-2"></i> {{ trans('Tags') }}
                     </a>
 
                     <a class="dropdown-item" href="{{ action('ModuleController@update', $group) }}" up-follow up-reveal="false">
-                        <i class="fa fa-toggle-on"></i> {{ trans('messages.features') }}
+                        <i class="fa fa-toggle-on me-2"></i> {{ trans('messages.features') }}
                     </a>
 
                     <a class="dropdown-item" href="{{ action('GroupPermissionController@index', $group) }}">
-                        <i class="fa fa-crown"></i> {{ trans('Permissions') }}
+                        <i class="fa fa-crown me-2"></i> {{ trans('Permissions') }}
                     </a>
 
                     <a class="dropdown-item" href="{{ action('GroupInsightsController@index', $group) }}">
-                        <i class="fa fa-line-chart"></i> {{ trans('messages.insights') }}
+                        <i class="fa fa-line-chart me-2"></i> {{ trans('messages.insights') }}
                     </a>
 
                     <a class="dropdown-item" href="{{ route('groups.deleteconfirm', [$group]) }}">
-                        <i class="fa fa-trash"></i> @lang('Delete group')
+                        <i class="fa fa-trash me-2"></i> @lang('Delete group')
                     </a>
                 </div>
             </li>
