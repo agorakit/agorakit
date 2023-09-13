@@ -2,7 +2,7 @@
 
     @include('partials.invite')
 
-    <h1 class="text-truncate">
+    <h1 class="text-truncate mb-4">
         <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
         @if (isset($tab) && $tab != 'home')
             <a href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
@@ -90,13 +90,13 @@
 
         @if ($group->isMember())
             <li class="nav-item">
-                <a class="nav-link @if (isset($tab) && $tab == 'preferences') active @endif" href="{{ action('GroupMembershipController@edit', $group) }}" up-follow up-reveal="false">
+                <a class="nav-link @if (isset($tab) && $tab == 'preferences') active @endif" href="{{ action('GroupMembershipController@edit', $group) }}" >
                     <i class="fa fa-bell-o me-2"></i> {{ trans('messages.settings') }}
                 </a>
             </li>
         @else
             <li class="nav-item">
-                <a class="nav-link @if (isset($tab) && $tab == 'settings') active @endif" href="{{ action('GroupMembershipController@create', $group) }}" up-follow up-reveal="false">
+                <a class="nav-link @if (isset($tab) && $tab == 'settings') active @endif" href="{{ action('GroupMembershipController@create', $group) }}" up-layer="new">
                     <i class="fa fa-sign-in me-2"></i> {{ trans('messages.join') }}
                 </a>
             </li>
@@ -110,11 +110,11 @@
                     <i class="fa fa-wrench me-2"></i> @lang('Administer')
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{ route('groups.edit', $group) }}" up-follow up-reveal="false">
+                    <a class="dropdown-item" href="{{ route('groups.edit', $group) }}">
                         <i class="fa fa-cogs me-2"></i> {{ trans('Configuration') }}
                     </a>
 
-                    <a class="dropdown-item" href="{{ route('groups.tags.edit', $group) }}" up-follow up-reveal="false">
+                    <a class="dropdown-item" href="{{ route('groups.tags.edit', $group) }}">
                         <i class="fa fa-tags me-2"></i> {{ trans('Tags') }}
                     </a>
 
