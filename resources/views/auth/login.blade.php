@@ -15,7 +15,7 @@
 
     </h1>
 
-    <form class="mb-5" method="POST" action="{{ url('/login') }}">
+    <form class="mb-5" method="POST" action="{{ url('/login') }}" up-submit>
 
         @csrf
         @honeypot
@@ -47,16 +47,16 @@
             </label>
         </div>
 
-        <div class="flex justify-content-between align-items-center my-8">
+        <div class="flex justify-content-between align-items-center my-4">
 
-            <button class="btn btn-primary btn" type="submit">{{ trans('messages.login') }}</button>
-            <a class="mr-4" href="{{ route('password.request') }}">{{ trans('messages.password_reset') }}</a>
+            <button class="btn btn-primary" type="submit">{{ trans('messages.login') }}</button>
+            <a class="ms-4" href="{{ route('password.request') }}">{{ trans('messages.password_reset') }}</a>
         </div>
 
     </form>
 
     <div class="alert alert-primary" role="alert">
         <i class="fa fa-info-circle" aria-hidden="true"></i>
-        <a href="{{ route('register') }}" up-target=".dialog">@lang('Click here to register a new account')</a>
+        <a href="{{ route('register') }}">@lang('Click here to register a new account')</a>
     </div>
 @endsection

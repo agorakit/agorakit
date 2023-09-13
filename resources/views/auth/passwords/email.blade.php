@@ -27,7 +27,7 @@
 
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mt-4">
 
                     <button type="submit" class="btn btn-primary">
                         {{ __('Send Password Reset Link') }}

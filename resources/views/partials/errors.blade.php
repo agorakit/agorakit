@@ -1,8 +1,3 @@
-<div class="js-network-error alert alert-warning" up-hungry>
-    <i class="fa fa-plug mr-2"></i>
-    {{ __('Network error') }}
-</div>
-
 @if (isset(Auth::user()->verified) && Auth::user()->verified == 0)
     <div class="alert alert-warning" up-hungry>
         <h4 class="alert-title">

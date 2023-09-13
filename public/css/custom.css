@@ -2,3 +2,32 @@ up-modal-box {
     border-radius: 13px;
     padding: 0;
 }
+
+
+:root {
+    /*--tblr-font-sans-serif: 'Inter';*/
+    --tblr-border-radius: 5px;
+    --tblr-body-bg: #e6e5d8;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: white;
+    border: none;
+    border-bottom: 1px solid white;
+}
+
+.nav-pills .nav-link.active {
+    background-color: var(--tblr-primary);
+    color: white;
+}
+
+.nav-tabs {
+    border-bottom: none;
+}
+
+.group,
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+}

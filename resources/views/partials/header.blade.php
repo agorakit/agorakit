@@ -41,11 +41,6 @@
 <script src="{{ asset('js/select2.min.js') }}"></script>
 <script src="{{ asset('js/compilers.js?v=' . filemtime(public_path('js/compilers.js'))) }}"></script>
 
-<!-- main app css, candidate for removal -->
-<!--<link href="{{ asset('/css/app.css') }}" rel="stylesheet">-->
-
-<!-- bootstrap 5.2 -->
-<!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">-->
 
 <!-- tabler.io -->
 
@@ -53,36 +48,6 @@
 <link href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler.min.css" rel="stylesheet">
 
 <link href="{{ asset('/css/custom.css') }}" rel="stylesheet">
-
-<style>
-    :root {
-        /*--tblr-font-sans-serif: 'Inter';*/
-        --tblr-border-radius: 5px;
-        --tblr-body-bg: #ddd;
-    }
-
-    .nav-tabs .nav-link.active {
-        background-color: white;
-        border: none;
-        border-bottom: 1px solid white;
-    }
-
-    .nav-pills .nav-link.active {
-        background-color: var(--tblr-primary);
-        color: white;
-    }
-
-    .nav-tabs {
-        border-bottom: none;
-    }
-
-    .group,
-    .container {
-        background-color: white;
-        padding: 20px;
-        border-radius: 10px;
-    }
-</style>
 
 <!-- additional css -->
 

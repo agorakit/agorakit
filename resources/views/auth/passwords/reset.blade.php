@@ -44,7 +44,7 @@
                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group mt-4">
 
                         <button type="submit" class="btn btn-primary">
                             {{ __('Reset Password') }}

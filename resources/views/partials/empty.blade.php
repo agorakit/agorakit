@@ -11,6 +11,6 @@
     </div>
     <p class="empty-title">{{ trans('messages.nothing_yet') }}</p>
     <p class="empty-subtitle text-muted">
-        Try adjusting your search or filter to find what you're looking for.
+        
     </p>
 </div>
