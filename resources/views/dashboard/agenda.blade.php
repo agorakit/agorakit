@@ -12,7 +12,7 @@
 
 
 
-<div class="flex justify-between">
+<div class="flex justify-content-between">
 
     <div class="flex ">
         <div class="mr-4">

@@ -28,7 +28,7 @@
 {!! Form::model($file, ['method' => 'DELETE', 'action' => ['GroupFileController@destroy', $group, $file]]) !!}
 
 
-<div class="flex justify-between mt-5">
+<div class="flex justify-content-between mt-5">
     <div class="form-group">
         {!! Form::submit(trans('messages.delete_confirm_button'), ['class' => 'btn btn-danger']) !!}
     </div>

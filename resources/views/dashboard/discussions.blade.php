@@ -9,7 +9,7 @@
 </div>
 
 
-<div class="flex justify-between">
+<div class="flex justify-content-between">
     <div>
         @include('partials.preferences-show')
     </div>

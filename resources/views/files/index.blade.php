@@ -3,7 +3,7 @@
 @section('content')
 
 @auth
-<div class="sm:flex justify-between">
+<div class="sm:flex justify-content-between">
     <div class="flex mb-2 space-x-1">
         @include('partials.tags_filter')
         @include('partials.sort_dropdown')

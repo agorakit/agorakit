@@ -4,7 +4,7 @@
     <div class="relative">
         @if ($file->isPinned())
         <div
-            class="text-xs absolute right-0 w-6 h-6 rounded-full text-white bg-blue-700 d-flex items-center justify-center border-white border-2 shadow-md ">
+            class="text-xs absolute right-0 w-6 h-6 rounded-full text-white bg-blue-700 d-flex align-items-center justify-center border-white border-2 shadow-md ">
             <i class="fas fa-thumbtack" title="{{__('Pinned')}}"></i>
         </div>
         @endif

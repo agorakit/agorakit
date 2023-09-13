@@ -7,7 +7,7 @@
 
 
 
-<div class="flex justify-between">
+<div class="flex justify-content-between">
 
 
     <h3 class="my-5">

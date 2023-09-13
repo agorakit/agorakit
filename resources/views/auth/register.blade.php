@@ -3,7 +3,7 @@
 @section('content')
 
 
-<h1 class="flex items-center justify-center mb-4 text-xl">
+<h1 class="flex align-items-center justify-center mb-4 text-xl">
 
     @if (Storage::exists('public/logo/favicon.png'))
     <img src="{{{ asset('storage/logo/favicon.png') }}}" width="40" height="40" class="rounded" />

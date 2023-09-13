@@ -85,7 +85,7 @@
                 @auth
                     @if (isset($notifications))
                         <div class="dropdown hidden lg:block sm:px-4">
-                            <a class="text-gray-200 px-1 d-flex flex-col justify-center items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:mr-2 sm:px-4 sm:bg-transparent sm:rounded"
+                            <a class="text-gray-200 px-1 d-flex flex-col justify-center align-items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:mr-2 sm:px-4 sm:bg-transparent sm:rounded"
                                 data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell"></i>
                             </a>
@@ -200,14 +200,14 @@
 
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('login') }}" up-modal>
+                        <a class="nav-link" href="{{ url('login') }}" up-layer="new">
                             {{ trans('messages.login') }}
                         </a>
                     </li>
 
                     @can('create', App\User::class)
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('register') }}" up-modal>
+                            <a class="nav-link" href="{{ url('register') }}" up-layer="new">
                                 {{ trans('messages.register') }}
                             </a>
                         </li>

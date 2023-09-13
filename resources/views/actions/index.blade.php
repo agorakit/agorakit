@@ -3,7 +3,7 @@
 @section('content')
 
     @auth
-        <div class="flex mb-4 justify-between">
+        <div class="flex mb-4 justify-content-between">
 
             <div class="mb-2">
                 <div class="btn-group" role="group">

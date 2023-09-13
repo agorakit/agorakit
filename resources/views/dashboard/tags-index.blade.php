@@ -7,7 +7,7 @@
 
 
 
-  <div class="flex justify-between">
+  <div class="flex justify-content-between">
     <h1 class="name mb-4">
       <a up-follow href="{{ route('index') }}">
       <i class="fa fa-home"></i></a> 

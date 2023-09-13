@@ -6,7 +6,7 @@
         @auth
             <div class="navigation ">
 
-                <a up-target="body" class="flex items-center" href="{{ route('users.show', Auth::user()) }}">
+                <a up-target="body" class="flex align-items-center" href="{{ route('users.show', Auth::user()) }}">
                     <img src="{{ route('users.cover', [Auth::user(), 'small']) }}"
                             class="rounded-full h-8 w-8 mr-2" />
                     <span>{{ Auth::user()->name }}</span>

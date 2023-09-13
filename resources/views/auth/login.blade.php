@@ -47,7 +47,7 @@
             </label>
         </div>
 
-        <div class="flex justify-between items-center my-8">
+        <div class="flex justify-content-between align-items-center my-8">
 
             <button class="btn btn-primary btn" type="submit">{{ trans('messages.login') }}</button>
             <a class="mr-4" href="{{ route('password.request') }}">{{ trans('messages.password_reset') }}</a>
