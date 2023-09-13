@@ -1,4 +1,4 @@
-<div class="list-group-item d-flex justify-content-between align-items-center" up-expand>
+<div class="d-flex justify-content-between align-items-start my-3" up-expand>
 
     <div class="me-3">
         @if ($file->isLink())
@@ -6,7 +6,7 @@
                 <img class="avatar" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" />
             </a>
         @elseif ($file->isFolder())
-            <a class="" href="{{ route('groups.files.index', ['group' => $file->group, 'parent' => $file]) }}" up-follow up-target=".files">
+            <a class="" href="{{ route('groups.files.index', ['group' => $file->group, 'parent' => $file]) }}" up-follow up-target=".files" up-history=true>
                 <img class="avatar" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" />
             </a>
         @else
@@ -34,7 +34,7 @@
 
         </div>
 
-        <div class="text-secondary">
+        <div class="text-secondary inline">
 
             @if ($file->isArchived())
                 <div class="">
@@ -88,7 +88,7 @@
         @endif
 
     </div>
-    
+
     @if ($file->isPinned())
         <i class="fas fa-thumbtack me-2" title="{{ __('Pinned') }}"></i>
     @endif

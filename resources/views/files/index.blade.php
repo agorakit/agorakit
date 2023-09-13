@@ -39,7 +39,7 @@
 
         <h3 class="my-3 text-2xl text-gray-800">
 
-            <a href="{{ route('groups.files.index', $group) }}" up-follow up-target=".files">
+            <a href="{{ route('groups.files.index', $group) }}" up-follow up-target=".files" up-history=true>
                 <i class="fa fa-folder-open-o"></i>
                 <span class="">{{ trans('messages.root') }}</span>
             </a>
@@ -47,7 +47,7 @@
             @if ($breadcrumb)
                 @foreach ($breadcrumb as $my_parent)
                     <i class="fa fa-angle-right fill-current text-secondary"></i>
-                    <a class="" href="{{ route('groups.files.index', ['group' => $group, 'parent' => $my_parent->id]) }}" up-follow up-target=".files">
+                    <a class="" href="{{ route('groups.files.index', ['group' => $group, 'parent' => $my_parent->id]) }}" up-follow up-target=".files" up-history=true>
                         {{ $my_parent->name }}
                     </a>
                 @endforeach
