@@ -4,7 +4,8 @@
 
     @if (setting()->get('homepage_presentation_for_members') ||
             setting()->localized()->get('homepage_presentation_for_members'))
-        <div class="overflow-y-auto border items-start  p-3 mb-4 rounded bg-gray-200 text-sm sm:text-base flex" style="max-height: 10em;">
+        <div class="overflow-y-auto border items-start  p-3 mb-4 rounded bg-gray-200 text-sm sm:text-base flex"
+            style="max-height: 10em;">
             <i class="fa fa-info-circle text-4xl mr-3 text-gray-500 hidden sm:block"></i>
             <div class="text-secondary flex-grow -mb-3 mt-1">
 
@@ -39,18 +40,7 @@
 
             @if ($actions->count() > 0)
                 <div class="col">
-
-                    <div class="my-5">
-                        <a class="btn btn-secondary" href="{{ route('actions.create') }}">
-                            {{ trans('action.create_one_button') }}
-                        </a>
-                    </div>
-
-                    <div class="">
-                        @foreach ($actions as $action)
-                            <x-action :action="$action" :participants="false" />
-                        @endforeach
-                    </div>
+                    @include('actions.list', ['actions' => $actions])
                 </div>
             @endif
 

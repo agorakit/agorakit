@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-between align-items-start my-4" up-expand>
+<div class="d-flex justify-content-between align-items-start mb-4 pb-4 border-bottom" up-expand>
 
     @if ($discussion->user)
         <div class="me-3">

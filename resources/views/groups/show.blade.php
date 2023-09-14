@@ -90,9 +90,7 @@
                 @endcan
             </h2>
             <div class="actions">
-                @foreach ($actions as $action)
-                    <x-action :action="$action" :participants="true" />
-                @endforeach
+               @include('actions.list', ['actions' => $actions])
             </div>
         @endif
     @endif

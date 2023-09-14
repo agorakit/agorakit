@@ -1,42 +1,38 @@
 @extends('app')
 
 @section('content')
+    <h1><a up-follow href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
+        {{ trans('messages.discussions') }}</h1>
 
 
-<div class="d-flex mb-2">
-    <h1><a up-follow href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i
-            class="fa fa-angle-right"></i> {{ trans('messages.discussions') }}</h1>
-</div>
+
+    <div class="d-flex justify-content-between">
+        <div>
+            @include('partials.preferences-show')
+        </div>
 
 
-<div class="flex justify-content-between">
-    <div>
-        @include('partials.preferences-show')
-    </div>
+        <div>
+            <a up-follow class="btn btn-primary" href="{{ route('discussions.create') }}">
+                <i class="fas fa-pencil-alt me-2"></i>
 
-
-    <div>
-        <a up-follow class="btn btn-primary" href="{{ route('discussions.create') }}">
-            <i class="fas fa-pencil-alt"></i>
-            <span class="hidden md:inline ml-2">
                 {{ trans('discussion.create_one_button') }}
-            </span>
-        </a>
+
+            </a>
+        </div>
+
     </div>
 
-</div>
+    <div class="mt-4">
+        @forelse($discussions as $discussion)
+            @include('discussions.discussion')
+        @empty
+            {{ trans('messages.nothing_yet') }}
+        @endforelse
+        {!! $discussions->render() !!}
+    </div>
 
-<div class="discussions">
-    @forelse( $discussions as $discussion )
-        @include('discussions.discussion')
-    @empty
-        {{ trans('messages.nothing_yet') }}
-    @endforelse
-    {!! $discussions->render() !!}
-</div>
-
-<div class="mt-16 text-secondary">
-    <a class="btn btn-secondary" href="{{route('discussions.feed')}}"><i class="fas fa-rss"></i> RSS</a>
-</div>
-
+    <div class="mt-16 text-secondary">
+        <a class="btn btn-secondary" href="{{ route('discussions.feed') }}"><i class="fas fa-rss"></i> RSS</a>
+    </div>
 @endsection

@@ -8,9 +8,11 @@
             <div class="mb-2">
                 <div class="btn-group" role="group">
 
-                    <a class="btn @if ($type == 'list') btn-outline-primary @else btn-primary @endif" href="?type=grid" up-follow><i class="fa fa-calendar"></i>
+                    <a class="btn @if ($type == 'list') btn-outline-primary @else btn-primary @endif"
+                        href="?type=grid" up-follow><i class="fa fa-calendar"></i>
                         {{ trans('messages.grid') }}</a>
-                    <a class="btn @if ($type == 'grid') btn-outline-primary @else btn-primary @endif" href="?type=list" up-follow><i class="fa fa-list"></i>
+                    <a class="btn @if ($type == 'grid') btn-outline-primary @else btn-primary @endif"
+                        href="?type=list" up-follow><i class="fa fa-list"></i>
                         {{ trans('messages.list') }}</a>
                 </div>
             </div>
@@ -28,21 +30,15 @@
     @endauth
 
     @if ($type == 'grid')
-        <div class="calendar" id="calendar" data-json="{{ route('groups.actions.index.json', $group) }}" data-locale="{{ App::getLocale() }}"
-            data-create-url="{{ route('groups.actions.create', $group) }}"></div>
+        <div class="calendar" id="calendar" data-json="{{ route('groups.actions.index.json', $group) }}"
+            data-locale="{{ App::getLocale() }}" data-create-url="{{ route('groups.actions.create', $group) }}"></div>
 
         @include('actions.ical')
     @endif
 
     @if ($type == 'list')
         @if ($actions->count() > 0)
-            <div class="actions">
-                @forelse($actions as $action)
-                    <x-action :action="$action" :participants="true" />
-                @empty
-                    {{ trans('messages.nothing_yet') }}
-                @endforelse
-            </div>
+            @include('actions.list', ['actions' => $actions])
 
             {{ $actions->render() }}
 

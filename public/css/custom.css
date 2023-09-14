@@ -1,10 +1,10 @@
 :root {
-    font-family: 'Inter', sans-serif;
+    /* font-family: 'Inter', sans-serif;*/
 }
 
 @supports (font-variation-settings: normal) {
     :root {
-        font-family: 'Inter var', sans-serif;
+        /* font-family: 'Inter var', sans-serif;*/
     }
 }
 
@@ -16,7 +16,7 @@ up-modal-box {
 
 
 :root {
-    --tblr-font-sans-serif: 'Inter';
+    /*--tblr-font-sans-serif: 'Inter';*/
     --tblr-border-radius: 5px;
     --tblr-body-bg: #e6e5d8;
     --tblr-list-group-item-padding-x: 0;
@@ -46,4 +46,46 @@ up-modal-box {
 
 .list-group-item {
     padding: var(--tblr-list-group-item-padding-y) 0;
+}
+
+.form-group label {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #444;
+    /*font-size: small;*/
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+
+
+.small-help {
+    color: #888;
+    font-size: 0.8rem,
+}
+
+.help {
+    padding: 20px;
+    margin: 20px 0px;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    background-color: rgb(188, 218, 226);
+}
+
+.help h4 {
+    color: #1B809E;
+    margin-top: 0px;
+    margin-bottom: 5px;
+    font-size: 18px;
+}
+
+.help a {
+    text-decoration: underline;
+}
+
+
+.alert a {
+    text-decoration: underline;
 }

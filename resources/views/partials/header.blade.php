@@ -15,8 +15,11 @@
 <link href="{{ asset('/fonts/fontawesome/css/v4-shims.min.css') }}" rel="stylesheet">
 
 <!-- inter font -->
+<!--
 <link rel="preconnect" href="https://rsms.me/">
 <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+-->
+
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"
