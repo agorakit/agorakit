@@ -1,18 +1,18 @@
-<div class="flex items-start py-5 border-b-2 border-gray-300 hover:bg-gray-200" id="action-{{ $action->id }}">
-    <a href="{{ route('groups.actions.show', [$action->group, $action]) }}" class="no-underline">
-        <div
-            class="border-gray-400 text-secondary bg-gray-200 border-2 flex-shrink-0 d-flex flex-col align-items-center justify-center h-12 w-12 rounded-lg mx-1">
-            <div class="text-xl -mb-2 text-gray-800">{{ $action->start->format('d') }}</div>
-            <div class="text-sm">{{ $action->start->isoFormat('MMM') }}</div>
-        </div>
-    </a>
+<div class="d-flex align-items-start mb-4 pb-4 border-bottom" id="action-{{ $action->id }}" up-expand>
 
-    <div up-expand class="flex-grow min-w-0">
+    <div class="btn btn-outline-secondary me-3">
+        <div>
+            <div class="display-6">{{ $action->start->format('d') }}</div>
+            <div class="">{{ $action->start->isoFormat('MMM') }}</div>
+        </div>
+    </div>
+
+    <div class="flex-grow">
 
         <div class="mx-2">
 
             <div class="text-gray-900 text-lg truncate">
-                <a  href="{{ route('groups.actions.show', [$action->group, $action]) }}" class="no-underline">
+                <a class="no-underline" href="{{ route('groups.actions.show', [$action->group, $action]) }}">
                     {{ $action->name }}
                 </a>
             </div>
@@ -36,47 +36,23 @@
 
         </div>
 
-        @if ($action->attending->count() > 0)
-            <div class="flex -space-x-5 overflow-hidden">
-                @foreach ($action->attending as $user)
-                    @include('users.avatar')
-                @endforeach
-            </div>
-        @endif
+        <div id="participate-{{ $action->id }}">
+            @if ($action->attending->count() > 0)
+                <div class="avatar-list avatar-list-stacked">
+                    @foreach ($action->attending as $user)
+                        @include('users.avatar')
+                    @endforeach
+                </div>
+            @endif
+
+            @can('participate', $action)
+                <div class="mt-2">
+                    @include('participation.dropdown')
+                </div>
+            @endcan
+
+        </div>
 
     </div>
-
-    @can('participate', $action)
-        <div class="participate-dropdown ml-2 me-2" id="participate-{{ $action->id }}">
-            <button class="dropdown-toggle  btn btn-secondary" type="button" id="dropdownMenuButton"
-                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                @if (Auth::user()->isAttending($action))
-                    <i class="fa fa-calendar-check-o"></i>
-                @elseif (Auth::user()->isNotAttending($action))
-                    <i class="fa fa-calendar-times-o"></i>
-                @else
-                    <i class="fa fa-question-circle-o"></i>
-                @endif
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-                <a up-target="#action-{{ $action->id }}" up-cache="false" up-history="false" class="dropdown-item"
-                    href="{{ route('groups.actions.participation.set', ['group' => $action->group, 'action' => $action, 'status' => 'yes']) }}">
-                    {{ __('I will participate') }}
-                </a>
-
-                <a up-target="#action-{{ $action->id }}" up-cache="false" up-history="false" class="dropdown-item"
-                    href="{{ route('groups.actions.participation.set', ['group' => $action->group, 'action' => $action, 'status' => 'no']) }}">
-                    {{ __('I will not participate') }}
-                </a>
-
-                <a up-target="#action-{{ $action->id }}" up-cache="false" up-history="false" class="dropdown-item"
-                    href="{{ route('groups.actions.participation.set', ['group' => $action->group, 'action' => $action, 'status' => 'maybe']) }}">
-                    {{ __('I don\'t know yet') }}
-                </a>
-
-            </div>
-        </div>
-    @endcan
 
 </div>
