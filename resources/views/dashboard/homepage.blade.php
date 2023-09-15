@@ -9,7 +9,7 @@
             <div class="">
 
                 @if (Auth::user()->isAdmin())
-                    <a class="btn btn-secondary float-right" href="{{ url('/admin/settings') }}" >
+                    <a class="btn btn-secondary float-end" href="{{ url('/admin/settings') }}" >
                         <i class="fa fa-cog me-2"></i>
                         {{ __('Edit') }}
                     </a>
