@@ -10,7 +10,7 @@
             <div class="text-secondary flex-grow -mb-3 mt-1">
 
                 @if (Auth::user()->isAdmin())
-                    <a class="btn btn-secondary float-right" href="{{ url('/admin/settings') }}" up-follow>
+                    <a class="btn btn-secondary float-right" href="{{ url('/admin/settings') }}" >
                         <i class="fa fa-cog"></i>
                         <span class="hidden sm:inline">{{ __('Edit') }}</span>
                     </a>

@@ -3,7 +3,7 @@
 @section('content')
     <div class="d-flex">
         <h1>
-            <a up-follow href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
+            <a  href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
             {{ trans('messages.agenda') }}
         </h1>
     </div>

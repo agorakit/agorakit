@@ -45,7 +45,7 @@
                 <div>
                     @foreach ($user->groups as $group)
                         @unless ($group->isSecret())
-                            <a up-follow href="{{ route('groups.show', [$group]) }}"
+                            <a  href="{{ route('groups.show', [$group]) }}"
                                 class="inline-block bg-gray-300 text-gray-700 rounded-full text-xs px-2 py-1 mr-1 mb-1 no-underline">
 
                                 @if ($group->isOpen())

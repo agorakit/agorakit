@@ -24,7 +24,7 @@
             @if ($group_inbox)
                 <div class="mb-3">
                     <div class="font-bold">{{ __('Inbox for this group') }}</div>
-                    <a href="mailto:{{ $group_inbox }}" up-follow>{{ $group_inbox }}</a>
+                    <a href="mailto:{{ $group_inbox }}" >{{ $group_inbox }}</a>
                     <div class="small-help">{{ trans('messages.inbox_help') }}</div>
                 </div>
             @endif
@@ -82,7 +82,7 @@
     @if ($actions)
         @if ($actions->count() > 0)
             <h2 class="my-4 d-flex justify-content-between">
-                <a href="{{ route('groups.actions.index', $group) }}" up-follow>{{ trans('messages.agenda') }}</a>
+                <a href="{{ route('groups.actions.index', $group) }}" >{{ trans('messages.agenda') }}</a>
                 @can('create-action', $group)
                     <a class="btn btn-primary" href="{{ route('groups.actions.create', $group) }}">
                         {{ trans('action.create_one_button') }}
@@ -97,7 +97,7 @@
 
     @if ($files)
         @if ($files->count() > 0)
-            <h2 class="mb-4 mt-5"><a href="{{ route('groups.files.index', $group) }}" up-follow>{{ trans('group.latest_files') }}</a></h2>
+            <h2 class="mb-4 mt-5"><a href="{{ route('groups.files.index', $group) }}" >{{ trans('group.latest_files') }}</a></h2>
             <div class="files">
                 @forelse( $files as $file )
                     @include('files.file')

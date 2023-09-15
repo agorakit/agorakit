@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1><a href="{{ route('index') }}" up-follow><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
+    <h1><a href="{{ route('index') }}" ><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
         {{ trans('messages.files') }}</h1>
 
     <div class="flex">

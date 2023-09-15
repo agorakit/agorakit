@@ -36,7 +36,7 @@
         </div>
 
         <div>{{ trans('membership.if_you_want_to_leave_this_group') }}, <a href="{{ action('GroupMembershipController@destroyConfirm', $group) }}"
-                up-follow>{{ trans('membership.click_here') }}</a>
+                >{{ trans('membership.click_here') }}</a>
         </div>
     </div>
 

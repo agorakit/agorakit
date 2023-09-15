@@ -41,7 +41,7 @@
                 @foreach ($memberships as $membership)
                     <tr>
                         <td>
-                            <a class="d-flex align-items-center" href="{{ route('users.show', $membership->user) }}" up-follow>
+                            <a class="d-flex align-items-center" href="{{ route('users.show', $membership->user) }}" >
 
                                 <img class="avatar me-2" src="{{ route('users.cover', [$membership->user, 'small']) }}" />
                                 <span>{{ $membership->user->name }}</span>
@@ -49,11 +49,11 @@
                         </td>
 
                         <td data-order="{{ $membership->created_at }}">
-                            <a href="{{ route('users.show', $membership->user) }}" up-follow>{{ dateForHumans($membership->created_at) }}</a>
+                            <a href="{{ route('users.show', $membership->user) }}" >{{ dateForHumans($membership->created_at) }}</a>
                         </td>
 
                         <td data-order="{{ $membership->user->updated_at }}">
-                            <a href="{{ route('users.show', $membership->user) }}" up-follow>{{ dateForHumans($membership->user->updated_at) }}</a>
+                            <a href="{{ route('users.show', $membership->user) }}" >{{ dateForHumans($membership->user->updated_at) }}</a>
                         </td>
 
                         <td data-order="{{ $membership->membership }}">

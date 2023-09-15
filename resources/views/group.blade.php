@@ -8,9 +8,9 @@
     @include('partials.header')
 </head>
 
-<body style="background-image: none;">
+<body>
 
-    <main>
+    <div>
         @unless (request()->get('embed'))
             @include('partials.nav')
         @endunless
@@ -18,13 +18,13 @@
         <div class="container mt-4 p-4">
             @include('groups.tabs')
 
-            <div class="mt-4">
+            <div class="mt-4 content" up-main="modal">
                 @include('partials.errors')
                 @yield('content')
             </div>
         </div>
 
-    </main>
+    </div>
 
     @include('partials.footer')
 

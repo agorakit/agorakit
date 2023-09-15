@@ -13,14 +13,14 @@
     <h3 class="my-5">
 
         <i class="fa fa-folder-open-o"></i>
-        <a up-follow up-target=".files" href="{{ route('groups.files.index', $group ) }}">
+        <a  up-target=".files" href="{{ route('groups.files.index', $group ) }}">
             <span class="">{{trans('messages.root')}}</span>
         </a>
 
         @if (isset($breadcrumb))
         @foreach ($breadcrumb as $my_parent)
         <i class="fa fa-angle-right fill-current text-secondary"></i>
-        <a up-follow up-target=".files" class=""
+        <a  up-target=".files" class=""
             href="{{ route('groups.files.index', ['group' => $group, 'parent' =>  $my_parent->id]) }}">
             {{$my_parent->name}}
         </a>
@@ -57,7 +57,7 @@
 
     <div class="my-4 text-sm text-gray-700">
         <div>
-            <a up-follow href="{{ route('users.show', [$file->user]) }}">
+            <a  href="{{ route('users.show', [$file->user]) }}">
                 <i class="fa fa-user-circle"></i> {{ $file->user->name }}
             </a>
         </div>
@@ -102,14 +102,14 @@
 
 
         @can('update', $file)
-        <a up-follow class="btn btn-secondary" href="{{ route('groups.files.edit', [$group, $file]) }}">
+        <a  class="btn btn-secondary" href="{{ route('groups.files.edit', [$group, $file]) }}">
             <i class="fa fa-pencil"></i>
             {{trans('messages.edit')}}
         </a>
         @endcan
 
         @can('delete', $file)
-        <a up-follow class="btn btn-danger" href="{{ route('groups.files.deleteconfirm', [$group, $file]) }}">
+        <a  class="btn btn-danger" href="{{ route('groups.files.deleteconfirm', [$group, $file]) }}">
             <i class="fa fa-trash"></i>
             {{trans('messages.delete')}}
         </a>

@@ -28,7 +28,7 @@
                 <tbody>
                     @forelse( $files as $file )
                         <td>
-                            <a up-follow href="{{ route('groups.files.show', [$group, $file]) }}"><img src="{{ route('groups.files.thumbnail', [$group, $file]) }}"/></a>
+                            <a  href="{{ route('groups.files.show', [$group, $file]) }}"><img src="{{ route('groups.files.thumbnail', [$group, $file]) }}"/></a>
                         </td>
 
                         <td>
@@ -54,7 +54,7 @@
 
                                 <td>
                                     @unless (is_null ($file->user))
-                                        <a up-follow href="{{ route('users.show', $file->user) }}">{{ $file->user->name }}</a>
+                                        <a  href="{{ route('users.show', $file->user) }}">{{ $file->user->name }}</a>
                                     @endunless
                                 </td>
 

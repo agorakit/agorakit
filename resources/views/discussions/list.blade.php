@@ -4,7 +4,7 @@
             <div class="d-flex justify-content-between mb-2">
 
                 @can('create-discussion', $group)
-                    <a class="btn btn-primary" href="{{ route('groups.discussions.create', $group) }}" up-follow>
+                    <a class="btn btn-primary" href="{{ route('groups.discussions.create', $group) }}" >
                         {{ trans('discussion.create_one_button') }}
                     </a>
                 @endcan

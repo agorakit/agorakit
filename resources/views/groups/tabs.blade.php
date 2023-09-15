@@ -22,7 +22,7 @@
     <ul class="nav nav-pills">
 
         <li class="nav-item">
-            <a class="nav-link @if (isset($tab) && $tab == 'home') active @endif" href="{{ route('groups.show', $group) }}" up-follow up-reveal="false">
+            <a class="nav-link @if (isset($tab) && $tab == 'home') active @endif" href="{{ route('groups.show', $group) }}"  up-reveal="false">
                 <i class="fa fa-info-circle me-2"></i> {{ trans('messages.group_home') }}
             </a>
         </li>
@@ -30,7 +30,7 @@
         @if ($group->getSetting('module_discussion', true) == true)
             @can('viewDiscussions', $group)
                 <li class="nav-item">
-                    <a class="nav-link @if (isset($tab) && $tab == 'discussion') active @endif" href="{{ route('groups.discussions.index', $group) }}" up-follow up-reveal="false"
+                    <a class="nav-link @if (isset($tab) && $tab == 'discussion') active @endif" href="{{ route('groups.discussions.index', $group) }}"  up-reveal="false"
                         up-cache="false">
                         <i class="fa fa-comments me-2"></i> {{ trans('messages.discussions') }}
                     </a>
@@ -41,7 +41,7 @@
         @if ($group->getSetting('module_action', true) == true)
             @can('viewActions', $group)
                 <li class="nav-item">
-                    <a class="nav-link @if (isset($tab) && $tab == 'action') active @endif" href="{{ route('groups.actions.index', $group) }}" up-follow up-reveal="false">
+                    <a class="nav-link @if (isset($tab) && $tab == 'action') active @endif" href="{{ route('groups.actions.index', $group) }}"  up-reveal="false">
                         <i class="fa fa-calendar me-2"></i> {{ trans('messages.agenda') }}
                     </a>
                 </li>
@@ -51,7 +51,7 @@
         @if ($group->getSetting('module_file', true) == true)
             @can('viewFiles', $group)
                 <li class="nav-item">
-                    <a class="nav-link @if (isset($tab) && $tab == 'files') active @endif" href="{{ route('groups.files.index', $group) }}" up-follow up-reveal="false">
+                    <a class="nav-link @if (isset($tab) && $tab == 'files') active @endif" href="{{ route('groups.files.index', $group) }}"  up-reveal="false">
                         <i class="fa fa-files-o  me-2"></i> {{ trans('messages.files') }}
                     </a>
                 </li>
@@ -61,7 +61,7 @@
         @if ($group->getSetting('module_member', true) == true)
             @can('viewMembers', $group)
                 <li class="nav-item">
-                    <a class="nav-link @if (isset($tab) && $tab == 'users') active @endif" href="{{ route('groups.users.index', $group) }}" up-follow up-reveal="false">
+                    <a class="nav-link @if (isset($tab) && $tab == 'users') active @endif" href="{{ route('groups.users.index', $group) }}"  up-reveal="false">
                         <i class="fa fa-users me-2"></i> {{ trans('messages.members') }}
                     </a>
                 </li>
@@ -118,7 +118,7 @@
                         <i class="fa fa-tags me-2"></i> {{ trans('Tags') }}
                     </a>
 
-                    <a class="dropdown-item" href="{{ action('ModuleController@update', $group) }}" up-follow up-reveal="false">
+                    <a class="dropdown-item" href="{{ action('ModuleController@update', $group) }}"  up-reveal="false">
                         <i class="fa fa-toggle-on me-2"></i> {{ trans('messages.features') }}
                     </a>
 

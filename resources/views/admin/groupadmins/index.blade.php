@@ -23,19 +23,19 @@
             @foreach ($users as $user)
                 <tr>
                     <td>
-                        <a href="{{ route('users.show', $user) }}" up-follow> {{ $user->name }}</a>
+                        <a href="{{ route('users.show', $user) }}" > {{ $user->name }}</a>
                     </td>
 
                     <td style="max-width: 150px; overflow: hidden;text-overflow: ellipsis;">
-                        <a href="{{ route('users.show', $user) }}" up-follow> {{ $user->email }}</a>
+                        <a href="{{ route('users.show', $user) }}" > {{ $user->email }}</a>
                     </td>
 
                     <td data-order="{{ $user->created_at }}">
-                        <a href="{{ route('users.show', $user) }}" up-follow>{{ $user->created_at }}</a>
+                        <a href="{{ route('users.show', $user) }}" >{{ $user->created_at }}</a>
                     </td>
 
                     <td data-order="{{ $user->updated_at }}">
-                        <a href="{{ route('users.show', $user) }}" up-follow>{{ $user->updated_at }}</a>
+                        <a href="{{ route('users.show', $user) }}" >{{ $user->updated_at }}</a>
                     </td>
 
                     <td style="max-width: 50px; overflow: hidden;text-overflow: ellipsis;">

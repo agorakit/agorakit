@@ -1,5 +1,5 @@
 <div class="flex items-start py-5 border-b-2 border-gray-300 hover:bg-gray-200" id="action-{{ $action->id }}">
-    <a up-follow href="{{ route('groups.actions.show', [$action->group, $action]) }}" class="no-underline">
+    <a href="{{ route('groups.actions.show', [$action->group, $action]) }}" class="no-underline">
         <div
             class="border-gray-400 text-secondary bg-gray-200 border-2 flex-shrink-0 d-flex flex-col align-items-center justify-center h-12 w-12 rounded-lg mx-1">
             <div class="text-xl -mb-2 text-gray-800">{{ $action->start->format('d') }}</div>
@@ -12,7 +12,7 @@
         <div class="mx-2">
 
             <div class="text-gray-900 text-lg truncate">
-                <a up-follow href="{{ route('groups.actions.show', [$action->group, $action]) }}" class="no-underline">
+                <a  href="{{ route('groups.actions.show', [$action->group, $action]) }}" class="no-underline">
                     {{ $action->name }}
                 </a>
             </div>

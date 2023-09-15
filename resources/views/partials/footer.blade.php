@@ -1,7 +1,7 @@
  <footer class="container mt-5 mb-5 text-center">
      {{ trans('messages.made_with') }}
-     <a href="https://www.agorakit.org" up-follow>Agorakit ({{ config('agorakit.version') }})</a>
-     - <a href="{{ request()->fullUrlWithQuery(['embed' => 1]) }}" up-follow>{{ trans('messages.embed') }}</a>
+     <a href="https://www.agorakit.org" >Agorakit ({{ config('agorakit.version') }})</a>
+     - <a href="{{ request()->fullUrlWithQuery(['embed' => 1]) }}" >{{ trans('messages.embed') }}</a>
  </footer>
 
 

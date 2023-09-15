@@ -21,7 +21,7 @@
         @endcan
 
         @can('pin', $file)
-        <a up-follow up-cache="false" up-restore-scroll="true" class="dropdown-item"
+        <a  up-cache="false" up-restore-scroll="true" class="dropdown-item"
             href="{{ route('groups.files.pin', [$file->group, $file]) }}">
             <i class="fa fa-thumbtack me-2"></i>
             @if($file->isPinned())
@@ -33,7 +33,7 @@
         @endcan
 
         @can('archive', $file)
-        <a up-follow up-cache="false" up-restore-scroll="true" class="dropdown-item"
+        <a  up-cache="false" up-restore-scroll="true" class="dropdown-item"
             href="{{ route('groups.files.archive', [$file->group, $file]) }}">
             <i class="fa fa-archive me-2"></i>
             @if($file->isArchived())

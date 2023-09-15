@@ -9,10 +9,10 @@
                 <div class="btn-group" role="group">
 
                     <a class="btn @if ($type == 'list') btn-outline-primary @else btn-primary @endif"
-                        href="?type=grid" up-follow><i class="fa fa-calendar"></i>
+                        href="?type=grid" ><i class="fa fa-calendar"></i>
                         {{ trans('messages.grid') }}</a>
                     <a class="btn @if ($type == 'grid') btn-outline-primary @else btn-primary @endif"
-                        href="?type=list" up-follow><i class="fa fa-list"></i>
+                        href="?type=list" ><i class="fa fa-list"></i>
                         {{ trans('messages.list') }}</a>
                 </div>
             </div>
@@ -30,7 +30,7 @@
     @endauth
 
     @if ($type == 'grid')
-        <div class="calendar" id="calendar" data-json="{{ route('groups.actions.index.json', $group) }}"
+        <div class="js-calendar" id="calendar" data-json="{{ route('groups.actions.index.json', $group) }}"
             data-locale="{{ App::getLocale() }}" data-create-url="{{ route('groups.actions.create', $group) }}"></div>
 
         @include('actions.ical')

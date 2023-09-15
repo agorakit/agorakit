@@ -4,8 +4,8 @@
 
     <div class="flex justify-content-between">
         <h1 class="name mb-4">
-            <a up-follow href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
-            <a up-follow href="{{ route('tags.index') }}">@lang('Tags')</a> <i class="fa fa-angle-right"></i>
+            <a  href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
+            <a  href="{{ route('tags.index') }}">@lang('Tags')</a> <i class="fa fa-angle-right"></i>
             @lang('Items tagged with')
             <div class="inline-block bg-gray-200 rounded-lg py-1 px-4">
                 <span class="inline-block w-5 h-5 rounded" style="background-color: {{ $tag->color }}"></span>

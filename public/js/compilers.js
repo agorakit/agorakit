@@ -103,7 +103,7 @@ Add a calendar to any div with the calendar class
 - data-json for the json url feed to use
 */
 
-up.compiler('.calendar', function (element, data) {
+up.compiler('.js-calendar', function (element, data) {
 
 
 	var initialView = (localStorage.getItem("fcDefaultView") !== null ? localStorage.getItem("fcDefaultView") : "dayGridMonth");
@@ -128,14 +128,14 @@ up.compiler('.calendar', function (element, data) {
 				var start = new Date(info.start.getTime() - (info.start.getTimezoneOffset() * 60000)).toISOString();
 				var stop = new Date(info.end.getTime() - (info.end.getTimezoneOffset() * 60000)).toISOString();
 				url = create_url + '?start=' + start + '&stop=' + stop
-				up.modal.visit(url, { target: '.tab_content' });
+				up.navigate({url: url, layer: 'new'});
 			}
 		},
 
 		// show event detail modal on event click
 		eventClick: function (info) {
 			info.jsEvent.preventDefault(); // don't let the browser navigate
-			up.modal.visit(info.event.url, { target: '.content' });
+			up.navigate({url: info.event.url, layer: 'new'});
 		},
 
 		// add tooltip to all events

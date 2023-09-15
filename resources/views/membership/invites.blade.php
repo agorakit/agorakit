@@ -17,8 +17,8 @@
 
                 <div>
                     <div class="btn-group">
-                        <a up-follow href="{{route('invites.accept', $membership)}}" class="btn btn-primary" up-target=".dialog">@lang('Accept')</a>
-                        <a up-follow href="{{route('invites.deny', $membership)}}" class="btn btn-danger" up-target=".dialog">@lang('Discard')</a>
+                        <a  href="{{route('invites.accept', $membership)}}" class="btn btn-primary" up-target=".dialog">@lang('Accept')</a>
+                        <a  href="{{route('invites.deny', $membership)}}" class="btn btn-danger" up-target=".dialog">@lang('Discard')</a>
                     </div>
                 </div>
             </div>

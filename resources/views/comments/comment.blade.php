@@ -16,7 +16,7 @@
 
             <div class="text-xs text-secondary">
 
-                <a up-follow href="{{ route('users.show', [$comment->user]) }}">{{$comment->user->name}}</a>
+                <a  href="{{ route('users.show', [$comment->user]) }}">{{$comment->user->name}}</a>
 
                 {{ dateForHumans($comment->created_at) }}
             </div>

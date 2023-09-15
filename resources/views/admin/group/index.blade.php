@@ -25,7 +25,7 @@
                 @foreach( $groups as $group )
                     <tr>
                         <td>
-                            <a up-follow href="{{ route('groups.show', $group) }}"> {{ $group->name }}</a>
+                            <a  href="{{ route('groups.show', $group) }}"> {{ $group->name }}</a>
                         </td>
 
                         <td>{{$group->updated_at}}</td>

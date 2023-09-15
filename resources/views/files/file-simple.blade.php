@@ -5,7 +5,7 @@
                 <img src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}"/>
             </a>
         @else
-            <a up-follow href="{{ route('groups.files.show', [$file->group, $file]) }}">
+            <a  href="{{ route('groups.files.show', [$file->group, $file]) }}">
                 <img src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}"/>
             </a>
         @endif
@@ -29,7 +29,7 @@
 
             <div class="d-flex">
                 <div class="me-2">
-                    <a up-follow href="{{ route('groups.show', [$file->group_id]) }}">
+                    <a  href="{{ route('groups.show', [$file->group_id]) }}">
                         @if ($file->group->isOpen())
                             <i class="fa fa-globe" title="{{trans('group.open')}}"></i>
                         @elseif ($file->group->isClosed())
@@ -42,7 +42,7 @@
                 </div>
 
                 <div>
-                    <a up-follow href="{{ route('users.show', [$file->user]) }}">
+                    <a  href="{{ route('users.show', [$file->user]) }}">
                         <i class="fa fa-user-circle"></i> {{ $file->user->name }}
                     </a>
                 </div>

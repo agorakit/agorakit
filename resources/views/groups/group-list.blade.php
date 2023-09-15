@@ -1,4 +1,4 @@
-<div up-follow up-expand up-reveal="false" 
+<div  up-expand up-reveal="false" 
 class="d-flex items-start py-3 hover:bg-gray-100 border-b border-gray-300">
 
      @if($group->hasCover())
