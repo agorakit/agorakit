@@ -1,20 +1,8 @@
- <footer class="container mt-5 mb-5 text-center">
+ <footer class="text-center my-5 text-secondary">
      {{ trans('messages.made_with') }}
      <a href="https://www.agorakit.org" >Agorakit ({{ config('agorakit.version') }})</a>
      - <a href="{{ request()->fullUrlWithQuery(['embed' => 1]) }}" >{{ trans('messages.embed') }}</a>
  </footer>
-
-
-<!--
- <script>
-     if ('serviceWorker' in navigator) {
-         window.addEventListener('load', function() {
-             navigator.serviceWorker.register('/service-worker.js');
-         });
-     }
- </script>
-
- -->
 
  <!-- footer -->
  @yield('footer')

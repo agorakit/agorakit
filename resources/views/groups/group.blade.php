@@ -49,7 +49,7 @@
                 {{ summary($group->body) }}
 
                 @if ($group->tags->count() > 0)
-                    <div class="text-secondary text-xs my-2">
+                    <div class="d-flex gap-1 flex-wrap my-2">
                         @foreach ($group->getSelectedTags() as $tag)
                             @include('tags.tag')
                         @endforeach

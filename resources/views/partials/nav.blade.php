@@ -1,11 +1,11 @@
-<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
     <div class="container-fluid">
         <!-- logo -->
         <a class="navbar-brand me-3" href="{{ route('index') }}">
             @if (Storage::exists('public/logo/favicon.png'))
-                <img src="{{ asset('storage/logo/favicon.png') }}" width="30" height="24" />
+                <img src="{{ asset('storage/logo/favicon.png') }}" width="40" height="40" />
             @else
-                <img src="/images/logo-white.svg" width="30" height="24" />
+                <img src="/images/logo-white.svg" width="40" height="40" />
             @endif
             <span class="">{{ setting('name') }}</span>
         </a>
@@ -16,8 +16,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbar">
-            <ul class="navbar-nav me-auto">
-
+            <ul class="navbar-nav">
                 @auth
                     @if (Auth::user()->groups()->count() > 0)
                         <li class="nav-item dropdown">
@@ -27,8 +26,8 @@
                             </a>
                             <div class="dropdown-menu">
                                 @foreach (Auth::user()->groups()->orderBy('name')->get() as $group)
-                                    <a class="dropdown-item" href="{{ route('groups.show', $group) }}"
-                                        >{{ $group->name }}</a>
+                                    <a class="dropdown-item"
+                                        href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
                                 @endforeach
                             </div>
                         </li>
@@ -110,13 +109,12 @@
                     @endif
                 @endauth
 
-               
                 <!-- locales -->
                 @if (\Config::has('app.locales'))
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                             aria-expanded="false">
-                            {{ strtoupper(app()->getLocale()) }}
+                            Locale ({{ strtoupper(app()->getLocale()) }})
                         </a>
 
                         <ul class="dropdown-menu">
@@ -124,8 +122,7 @@
                                 @if ($locale !== app()->getLocale())
                                     <li>
                                         <a class="dropdown-item"
-                                            href="{{ Request::url() }}?force_locale={{ $locale }}"
-                                            >
+                                            href="{{ Request::url() }}?force_locale={{ $locale }}">
                                             {{ strtoupper($locale) }}
                                         </a>
                                     </li>
@@ -135,25 +132,12 @@
                     </li>
                 @endif
 
-                <!-- search-->
-                @auth
-                    <li class="nav-item">
-                        <form class="d-flex" role="search" action="{{ url('search') }}" method="get">
-                            <div class="input-group">
-                                <input class="form-control" name="query" type="text"
-                                    value="{{ request()->get('query') }}" aria-label="{{ trans('messages.search') }}"
-                                    placeholder="{{ trans('messages.search') }}">
-                                <input class="btn btn-outline-secondary" type="submit" value="search" />
-                            </div>
-                        </form>
-                    </li>
-                @endauth
-
                 <!-- User profile -->
                 @auth
-                    <div class="nav-item dropdown ms-3">
-                        <a data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                            <img class="avatar rounded" src="{{ route('users.cover', [Auth::user(), 'small']) }}" />
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                            aria-expanded="false">
+                            {{ Auth::user()->name }}
                         </a>
 
                         <div class="dropdown-menu" role="menu">
@@ -174,40 +158,56 @@
                                 @honeypot
                             </form>
 
-                            <!-- Admin -->
-                            @if (Auth::user()->isAdmin())
-                                <div class="dropdown-divider"></div>
-                                <h6 class="dropdown-header">Admin</h6>
-
-                                <a class="dropdown-item" href="{{ url('/admin/settings') }}" >
-                                    <i class="fa fa-cog me-2"></i> Settings
-                                </a>
-
-                                <a class="dropdown-item" href="{{ url('/admin/user') }}">
-                                    <i class="fa fa-users me-2"></i> Users
-                                </a>
-
-                                <a class="dropdown-item" href="{{ url('/admin/groupadmins') }}">
-                                    <i class="fa fa-users me-2"></i> Group admins
-                                </a>
-
-                                <a class="dropdown-item" href="{{ url('/admin/undo') }}">
-                                    <i class="fa fa-trash me-2"></i> Recover content
-                                </a>
-
-                                <a class="dropdown-item" href="{{ action('Admin\InsightsController@index') }}">
-                                    <i class="fa fa-line-chart me-2"></i> {{ trans('messages.insights') }}
-                                </a>
-
-                                <a class="dropdown-item" href="{{ url('/admin/logs') }}">
-                                    <i class="fa fa-keyboard-o me-2"></i> Logs
-                                </a>
-                            @endif
-
                         </div>
 
                     </div>
+                @endauth
 
+                <!-- Admin -->
+                @if (Auth::user()->isAdmin())
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                            aria-expanded="false">
+                            Admin & settings
+                        </a>
+
+                        <div class="dropdown-menu" role="menu">
+
+                            <a class="dropdown-item" href="{{ url('/admin/settings') }}">
+                                <i class="fa fa-cog me-2"></i> Settings
+                            </a>
+
+                            <a class="dropdown-item" href="{{ url('/admin/user') }}">
+                                <i class="fa fa-users me-2"></i> Users
+                            </a>
+
+                            <a class="dropdown-item" href="{{ url('/admin/groupadmins') }}">
+                                <i class="fa fa-users me-2"></i> Group admins
+                            </a>
+
+                            <a class="dropdown-item" href="{{ url('/admin/undo') }}">
+                                <i class="fa fa-trash me-2"></i> Recover content
+                            </a>
+
+                            <a class="dropdown-item" href="{{ action('Admin\InsightsController@index') }}">
+                                <i class="fa fa-line-chart me-2"></i> {{ trans('messages.insights') }}
+                            </a>
+
+                            <a class="dropdown-item" href="{{ url('/admin/logs') }}">
+                                <i class="fa fa-keyboard-o me-2"></i> Logs
+                            </a>
+                        </div>
+                    </div>
+                @endif
+
+                <!-- search-->
+                @auth
+                    <li class="nav-item" >
+                        <form class="d-flex" role="search" action="{{ url('search') }}" method="get" >
+                            <input value="{{ request()->get('query') }}" name="query" class="form-control me-2 bg-light text-dark"
+                                type="search" placeholder="{{ trans('messages.search') }}" aria-label="Search"/>
+                        </form>
+                    </li>
                 @endauth
 
                 @guest

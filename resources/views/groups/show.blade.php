@@ -24,18 +24,18 @@
             @if ($group_inbox)
                 <div class="mb-3">
                     <div class="font-bold">{{ __('Inbox for this group') }}</div>
-                    <a href="mailto:{{ $group_inbox }}" >{{ $group_inbox }}</a>
+                    <a href="mailto:{{ $group_inbox }}">{{ $group_inbox }}</a>
                     <div class="small-help">{{ trans('messages.inbox_help') }}</div>
                 </div>
             @endif
 
             <div class="mb-3">
-                <div class="font-bold">{{ __('Creation date') }}</div>
+                <div class="fw-bold">{{ __('Creation date') }}</div>
                 {{ $group->created_at->diffForHumans() }}
             </div>
 
             <div class="mb-3">
-                <div class="font-bold">{{ __('Group type') }}</div>
+                <div class="fw-bold">{{ __('Group type') }}</div>
                 @if ($group->isOpen())
                     <i class="fa fa-globe" title="{{ trans('group.open') }}">
                     </i>
@@ -52,15 +52,19 @@
             </div>
 
             <div class="mb-3">
-                <div class="font-bold">{{ __('Stats & keywords') }}</div>
-                <span class="badge badge-secondary"><i class="fa fa-users"></i> {{ $group->users()->count() }}</span>
-                <span class="badge badge-secondary"><i class="fa fa-comments"></i>
-                    {{ $group->discussions()->count() }}</span>
-                <span class="badge badge-secondary"><i class="fa fa-calendar"></i>
-                    {{ $group->actions()->count() }}</span>
-                @foreach ($group->getSelectedTags() as $tag)
-                    @include('tags.tag')
-                @endforeach
+                <div class="fw-bold">{{ __('Stats & keywords') }}</div>
+                <div class="mb-2">
+                    <span class="badge badge-secondary"><i class="fa fa-users"></i> {{ $group->users()->count() }}</span>
+                    <span class="badge badge-secondary"><i class="fa fa-comments"></i>
+                        {{ $group->discussions()->count() }}</span>
+                    <span class="badge badge-secondary"><i
+                            class="fa fa-calendar"></i>{{ $group->actions()->count() }}</span>
+                </div>
+                <div class="d-flex gap-1 flex-wrap">
+                    @foreach ($group->getSelectedTags() as $tag)
+                        @include('tags.tag')
+                    @endforeach
+                </div>
             </div>
 
         </div>
@@ -76,13 +80,13 @@
     </div>
 
     @if ($discussions)
-    @include('discussions.list', ['discussions' => $discussions])
+        @include('discussions.list', ['discussions' => $discussions])
     @endif
 
     @if ($actions)
         @if ($actions->count() > 0)
             <h2 class="my-4 d-flex justify-content-between">
-                <a href="{{ route('groups.actions.index', $group) }}" >{{ trans('messages.agenda') }}</a>
+                <a href="{{ route('groups.actions.index', $group) }}">{{ trans('messages.agenda') }}</a>
                 @can('create-action', $group)
                     <a class="btn btn-primary" href="{{ route('groups.actions.create', $group) }}">
                         {{ trans('action.create_one_button') }}
@@ -90,14 +94,15 @@
                 @endcan
             </h2>
             <div class="actions">
-               @include('actions.list', ['actions' => $actions])
+                @include('actions.list', ['actions' => $actions])
             </div>
         @endif
     @endif
 
     @if ($files)
         @if ($files->count() > 0)
-            <h2 class="mb-4 mt-5"><a href="{{ route('groups.files.index', $group) }}" >{{ trans('group.latest_files') }}</a></h2>
+            <h2 class="mb-4 mt-5"><a
+                    href="{{ route('groups.files.index', $group) }}">{{ trans('group.latest_files') }}</a></h2>
             <div class="files">
                 @forelse( $files as $file )
                     @include('files.file')
