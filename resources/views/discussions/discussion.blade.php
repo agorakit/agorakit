@@ -17,7 +17,7 @@
             </a>
         </div>
 
-        <div class="text-secondary">
+        <div class="text-meta">
             @if ($discussion->user)
                 {{ trans('messages.started_by') }}
                 {{ $discussion->user->name }}
@@ -27,7 +27,7 @@
             {{ dateForHumans($discussion->updated_at) }}
         </div>
 
-        <div class="text-secondary text-truncate d-block">
+        <div class="text-truncate">
             {{ summary($discussion->body) }}
         </div>
 

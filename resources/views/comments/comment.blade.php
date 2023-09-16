@@ -8,13 +8,13 @@
             @include('users.avatar', ['user' => $comment->user])
         </div>
 
-        <div class="w-100 flex-grow ml-4 @if ($comment->isRead) read @endif">
+        <div class="w-100 flex-grow @if ($comment->isRead) read @endif">
 
             <div>
                 {!! filter($comment->body) !!}
             </div>
 
-            <div class="text-xs text-secondary">
+            <div class="text-meta">
                 @if (isset($comment->user))
                     <a href="{{ route('users.show', [$comment->user]) }}">{{ $comment->user->name }}</a>
                 @else
@@ -24,7 +24,7 @@
                 {{ dateForHumans($comment->created_at) }}
             </div>
 
-            <div>
+            <div class="mb-2">
                 @include ('reactions.reactions', ['model' => $comment])
             </div>
         </div>

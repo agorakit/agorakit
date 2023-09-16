@@ -17,15 +17,11 @@
                 </div>
 
                 <div class="flex-grow w-100 ml-4">
-                    <h2 class="text-xxl">
+                    <h2 class="mb-0">
                         {{ $discussion->name }}
                     </h2>
 
-                    <div>
-                        {!! filter($discussion->body) !!}
-                    </div>
-
-                    <div class="text-xs text-gray-500">
+                    <div class="text-meta">
                         @if (isset($discussion->user))
                             {{ trans('messages.started_by') }}
                             <span class="user">
@@ -36,7 +32,11 @@
                         {{ dateForHumans($discussion->created_at) }}
                     </div>
 
-                    <div class="mb-3 d-flex">
+                    <div>
+                        {!! filter($discussion->body) !!}
+                    </div>
+
+                    <div class="mb-1 d-flex">
                         <div class="tags">
                             @if ($discussion->getSelectedTags()->count() > 0)
                                 <span class="me-2">
@@ -48,7 +48,7 @@
                         </div>
                     </div>
 
-                    <div>
+                    <div class="mb-2">
                         @include ('reactions.reactions', ['model' => $discussion])
                     </div>
 

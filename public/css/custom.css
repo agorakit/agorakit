@@ -54,6 +54,11 @@ up-modal-box {
     font-size: 0.8rem,
 }
 
+.text-meta {
+    color: #888;
+    font-size: 0.8rem;
+}
+
 .help {
     padding: 20px;
     margin: 20px 0px;
@@ -79,8 +84,7 @@ up-modal-box {
 }
 
 
-.reaction
-{
-    width:24px;
+.reaction {
+    width: 24px;
     height: 24px;
 }

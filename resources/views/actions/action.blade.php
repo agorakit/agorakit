@@ -11,28 +11,31 @@
 
         <div class="mx-2">
 
-            <div class="text-gray-900 text-lg truncate">
-                <a class="no-underline" href="{{ route('groups.actions.show', [$action->group, $action]) }}">
+            <div class="text-truncate">
+                <a class="text-truncate d-block" href="{{ route('groups.actions.show', [$action->group, $action]) }}">
                     {{ $action->name }}
                 </a>
             </div>
-            @if ($action->attending->count() > 0)
-                <div class="text-secondary text-xs">
-                    <i class="fa fa-users"></i> {{ $action->attending->count() }}
-                    {{ trans('participants') }}
-                </div>
-            @endif
 
-            <div class="text-secondary text-xs">
-                <i class="fa fa-clock-o"></i> {{ $action->start->format('H:i') }} -
-                {{ $action->stop->format('H:i') }}
+            <div class="text-meta text-truncate">
+                @if ($action->attending->count() > 0)
+                    <div>
+                        <i class="fa fa-users me-1"></i> {{ $action->attending->count() }}
+                        {{ trans('participants') }}
+                    </div>
+                @endif
+
+                <div>
+                    <i class="fa fa-clock-o me-1"></i> {{ $action->start->format('H:i') }} -
+                    {{ $action->stop->format('H:i') }}
+                </div>
+
+                @if ($action->location)
+                    <div>
+                        <i class="fa fa-map-marker me-1"></i> {{ $action->location }}
+                    </div>
+                @endif
             </div>
-
-            @if ($action->location)
-                <div class="text-secondary text-xs overflow-ellipsis overflow-hidden h-4">
-                    <i class="fa fa-map-marker"></i> {{ $action->location }}
-                </div>
-            @endif
 
         </div>
 
