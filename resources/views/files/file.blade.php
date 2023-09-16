@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-between align-items-start my-3" up-expand>
+<div class="d-flex justify-content-between align-items-start mb-md-4 pb-md-4 mb-3 pb-3 border-bottom" up-expand>
 
     <div class="me-3">
         @if ($file->isLink())
