@@ -50,7 +50,7 @@
             {{ trans('membership.join_your_first_group_text') }}
         </p>
 
-        <a class="btn btn-primary" href="{{ action('GroupController@index') }}" up-target="body">
+        <a class="btn btn-primary" href="{{ action('GroupController@index') }}">
             <i class="fa fa-layer-group"></i> {{ trans('messages.all_groups') }}
         </a>
     @endif

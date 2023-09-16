@@ -20,7 +20,7 @@
 
         @can('create', \App\Group::class)
             <div>
-                <a class="btn btn-primary" href="{{ route('groups.create') }}" up-target="body">
+                <a class="btn btn-primary" href="{{ route('groups.create') }}" >
                     {{ trans('group.create_a_group_button') }}
                 </a>
             </div>

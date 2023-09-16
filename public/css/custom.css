@@ -77,3 +77,10 @@ up-modal-box {
 .alert a {
     text-decoration: underline;
 }
+
+
+.reaction
+{
+    width:24px;
+    height: 24px;
+}

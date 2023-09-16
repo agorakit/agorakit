@@ -28,7 +28,7 @@
                             <div class="dropdown-menu">
                                 @foreach (Auth::user()->groups()->orderBy('name')->get() as $group)
                                     <a class="dropdown-item" href="{{ route('groups.show', $group) }}"
-                                        up-target="body">{{ $group->name }}</a>
+                                        >{{ $group->name }}</a>
                                 @endforeach
                             </div>
                         </li>
@@ -124,7 +124,7 @@
                                     <li>
                                         <a class="dropdown-item"
                                             href="{{ Request::url() }}?force_locale={{ $locale }}"
-                                            up-target="body">
+                                            >
                                             {{ strtoupper($locale) }}
                                         </a>
                                     </li>
@@ -156,10 +156,10 @@
                         </a>
 
                         <div class="dropdown-menu" role="menu">
-                            <a class="dropdown-item" href="{{ route('users.show', Auth::user()) }}" up-target="body"><i
+                            <a class="dropdown-item" href="{{ route('users.show', Auth::user()) }}"><i
                                     class="fa fa-btn fa-user me-2"></i>
                                 {{ trans('messages.profile') }}</a>
-                            <a class="dropdown-item" href="{{ route('users.edit', Auth::user()) }}" up-target="body"><i
+                            <a class="dropdown-item" href="{{ route('users.edit', Auth::user()) }}"><i
                                     class="fa fa-btn fa-user-edit me-2"></i>
                                 {{ trans('messages.edit_my_profile') }}</a>
 
@@ -178,7 +178,7 @@
                                 <div class="dropdown-divider"></div>
                                 <h6 class="dropdown-header">Admin</h6>
 
-                                <a class="dropdown-item" href="{{ url('/admin/settings') }}" up-target="body">
+                                <a class="dropdown-item" href="{{ url('/admin/settings') }}" >
                                     <i class="fa fa-cog me-2"></i> Settings
                                 </a>
 
