@@ -15,7 +15,7 @@
             @include('partials.nav')
         @endunless
 
-        <div class="container mt-4 p-4" up-main="modal">
+        <div class="container mt-md-4 p-md-4 p-2" up-main="modal">
             @include('partials.errors')
             @yield('content')
         </div>

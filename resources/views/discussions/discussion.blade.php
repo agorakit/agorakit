@@ -1,7 +1,7 @@
-<div class="d-flex justify-content-between align-items-start mb-4 pb-4 border-bottom" up-expand>
+<div class="d-flex justify-content-between align-items-start mb-md-4 pb-md-4 mb-3 pb-3 border-bottom" up-expand>
 
     @if ($discussion->user)
-        <div class="me-3">
+        <div class="me-md-3 me-2">
             @include('users.avatar', ['user' => $discussion->user])
         </div>
     @endif

@@ -2,7 +2,7 @@
 
     @include('partials.invite')
 
-    <h1 class="text-truncate mb-4">
+    <h1 class="text-truncate mb-md-4 mb-2">
         <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
         @if (isset($tab) && $tab != 'home')
             <a href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
@@ -19,7 +19,7 @@
         @endif
     </h1>
 
-    <ul class="nav nav-pills">
+    <ul class="nav nav-tabs">
 
         <li class="nav-item">
             <a class="nav-link @if (isset($tab) && $tab == 'home') active @endif" href="{{ route('groups.show', $group) }}"  up-reveal="false">

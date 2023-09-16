@@ -34,6 +34,26 @@
     </div>
 @endif
 
+
+@if (Session::has('errors'))
+    <div class="alert alert-error" up-hungry>
+        @foreach (session('errors') as $message)
+            <div>{!! $message !!}</div>
+            <?php session()->pull('errors'); ?>
+        @endforeach
+    </div>
+@endif
+
+
+@if (Session::has('warnings'))
+    <div class="alert alert-warning" up-hungry>
+        @foreach (session('warnings') as $message)
+            <div>{!! $message !!}</div>
+            <?php session()->pull('warnings'); ?>
+        @endforeach
+    </div>
+@endif
+
 @if (Session::has('message'))
     <div class="alert alert-info" up-hungry>
         {!! Session::get('message') !!}

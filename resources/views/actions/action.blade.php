@@ -1,13 +1,13 @@
-<div class="d-flex align-items-start mb-4 pb-4 border-bottom" id="action-{{ $action->id }}" up-expand>
+<div class="d-flex align-items-start mb-md-4 pb-md-4 mb-2 pb-2 border-bottom" id="action-{{ $action->id }}" up-expand>
 
-    <div class="btn btn-outline-secondary me-3">
+    <div class="me-md-3 me-1 action-date">
         <div>
-            <div class="display-6">{{ $action->start->format('d') }}</div>
+            <div class="fw-bold">{{ $action->start->format('d') }}</div>
             <div class="">{{ $action->start->isoFormat('MMM') }}</div>
         </div>
     </div>
 
-    <div class="flex-grow">
+    <div class="flex-grow text-truncate">
 
         <div class="mx-2">
 

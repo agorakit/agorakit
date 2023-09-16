@@ -16,7 +16,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbar">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav me-auto">
 
                 @auth
                     @if (Auth::user()->groups()->count() > 0)
@@ -110,6 +110,7 @@
                     @endif
                 @endauth
 
+               
                 <!-- locales -->
                 @if (\Config::has('app.locales'))
                     <li class="nav-item dropdown">

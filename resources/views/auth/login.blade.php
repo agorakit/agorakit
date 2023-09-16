@@ -15,7 +15,7 @@
 
     </h1>
 
-    <form class="mb-5" method="POST" action="{{ url('/login') }}" up-submit>
+    <form class="mb-5" method="POST" action="{{ url('/login') }}">
 
         @csrf
         @honeypot

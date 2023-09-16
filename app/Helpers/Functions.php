@@ -113,10 +113,22 @@ function minutesToInterval($minutes)
     return $interval;
 }
 
-// this one line replace almost all laracast flash tutorial that became bloated for our use case
+
 function flash($message)
 {
     session()->push('messages', $message);
+}
+
+
+function error($message)
+{
+    session()->push('errors', $message);
+}
+
+
+function warning($message)
+{
+    session()->push('warnings', $message);
 }
 
 // Geocode function - even more abstracted than geocoder php.

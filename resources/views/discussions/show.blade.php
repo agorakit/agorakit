@@ -12,7 +12,7 @@
 
             <div class="d-flex">
 
-                <div class="me-4">
+                <div class="me-md-4 me-2">
                     @include('users.avatar', ['user' => $discussion->user])
                 </div>
 
@@ -54,7 +54,7 @@
 
                 </div>
                 <div>
-                    @include('discussions.dropdown')
+                        @include('discussions.dropdown')
                 </div>
             </div>
 
@@ -91,7 +91,8 @@
 
             @auth
                 @if (isset($comment))
-                    <div id="live" up-poll up-data='{"url": "{{ route('groups.discussions.live', [$group, $discussion, $comment]) }}"}'>
+                    <div id="live" up-poll
+                        up-data='{"url": "{{ route('groups.discussions.live', [$group, $discussion, $comment]) }}"}'>
                         <div id="live-content"></div>
                     </div>
                 @endif
@@ -104,7 +105,7 @@
                     </div>
                 @else
                     <div class="d-flex">
-                        <div class="me-4">
+                        <div class="me-md-4 me-2">
                             @include('users.avatar', ['user' => Auth::user()])
                         </div>
                         <div class="flex-grow">
