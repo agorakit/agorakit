@@ -2,7 +2,7 @@
 
     @include('partials.invite')
 
-    <h1 class="text-truncate mb-md-5 mb-2">
+    <h1 class="text-truncate mb-md-5 mb-3">
         <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
         @if (isset($tab) && $tab != 'home')
             <a href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>

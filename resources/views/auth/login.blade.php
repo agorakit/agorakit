@@ -24,12 +24,6 @@
             <label class="form-label">{{ __('Username or Email') }}</label>
             <input class="form-control" name="login" type="text" value="{{ old('username') ?: old('email') }}"
                 required="required">
-
-            @error('login')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
         </div>
 
         <div class="form-group mb-3">

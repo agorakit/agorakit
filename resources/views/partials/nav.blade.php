@@ -137,7 +137,7 @@
                     <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                             aria-expanded="false">
-                            {{ Auth::user()->name }}
+                            {{ trans('messages.profile') }} ({{ Auth::user()->name }})
                         </a>
 
                         <div class="dropdown-menu" role="menu">
@@ -163,49 +163,52 @@
                     </div>
                 @endauth
 
-                <!-- Admin -->
-                @if (Auth::user()->isAdmin())
-                    <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                            aria-expanded="false">
-                            Admin & settings
-                        </a>
-
-                        <div class="dropdown-menu" role="menu">
-
-                            <a class="dropdown-item" href="{{ url('/admin/settings') }}">
-                                <i class="fa fa-cog me-2"></i> Settings
+                @auth
+                    <!-- Admin -->
+                    @if (Auth::user()->isAdmin())
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                                aria-expanded="false">
+                                Admin & settings
                             </a>
 
-                            <a class="dropdown-item" href="{{ url('/admin/user') }}">
-                                <i class="fa fa-users me-2"></i> Users
-                            </a>
+                            <div class="dropdown-menu" role="menu">
 
-                            <a class="dropdown-item" href="{{ url('/admin/groupadmins') }}">
-                                <i class="fa fa-users me-2"></i> Group admins
-                            </a>
+                                <a class="dropdown-item" href="{{ url('/admin/settings') }}">
+                                    <i class="fa fa-cog me-2"></i> Settings
+                                </a>
 
-                            <a class="dropdown-item" href="{{ url('/admin/undo') }}">
-                                <i class="fa fa-trash me-2"></i> Recover content
-                            </a>
+                                <a class="dropdown-item" href="{{ url('/admin/user') }}">
+                                    <i class="fa fa-users me-2"></i> Users
+                                </a>
 
-                            <a class="dropdown-item" href="{{ action('Admin\InsightsController@index') }}">
-                                <i class="fa fa-line-chart me-2"></i> {{ trans('messages.insights') }}
-                            </a>
+                                <a class="dropdown-item" href="{{ url('/admin/groupadmins') }}">
+                                    <i class="fa fa-users me-2"></i> Group admins
+                                </a>
 
-                            <a class="dropdown-item" href="{{ url('/admin/logs') }}">
-                                <i class="fa fa-keyboard-o me-2"></i> Logs
-                            </a>
+                                <a class="dropdown-item" href="{{ url('/admin/undo') }}">
+                                    <i class="fa fa-trash me-2"></i> Recover content
+                                </a>
+
+                                <a class="dropdown-item" href="{{ action('Admin\InsightsController@index') }}">
+                                    <i class="fa fa-line-chart me-2"></i> {{ trans('messages.insights') }}
+                                </a>
+
+                                <a class="dropdown-item" href="{{ url('/admin/logs') }}">
+                                    <i class="fa fa-keyboard-o me-2"></i> Logs
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                @endif
+                    @endif
+                @endauth
 
                 <!-- search-->
                 @auth
-                    <li class="nav-item" >
-                        <form class="d-flex" role="search" action="{{ url('search') }}" method="get" >
-                            <input value="{{ request()->get('query') }}" name="query" class="form-control me-2 bg-light text-dark"
-                                type="search" placeholder="{{ trans('messages.search') }}" aria-label="Search"/>
+                    <li class="nav-item">
+                        <form class="d-flex" role="search" action="{{ url('search') }}" method="get">
+                            <input value="{{ request()->get('query') }}" name="query"
+                                class="form-control me-2 bg-light text-dark" type="search"
+                                placeholder="{{ trans('messages.search') }}" aria-label="Search" />
                         </form>
                     </li>
                 @endauth

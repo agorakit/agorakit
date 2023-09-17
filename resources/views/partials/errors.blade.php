@@ -59,11 +59,3 @@
         {!! Session::get('message') !!}
     </div>
 @endif
-
-@if ($errors->any())
-    <div class="alert alert-error" up-hungry>
-        @foreach ($errors->all() as $error)
-            <div>{{ $error }}</div>
-        @endforeach
-    </div>
-@endif
