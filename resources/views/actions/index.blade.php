@@ -3,33 +3,31 @@
 @section('content')
 
     @auth
-        <div class="flex mb-4 justify-content-between">
+        <div class="flex mb-2 justify-content-between">
 
             <div class="mb-2">
                 <div class="btn-group" role="group">
 
                     <a class="btn @if ($type == 'list') btn-outline-primary @else btn-primary @endif"
-                        href="?type=grid" ><i class="fa fa-calendar"></i>
+                        href="?type=grid"><i class="fa fa-calendar me-2"></i>
                         {{ trans('messages.grid') }}</a>
                     <a class="btn @if ($type == 'grid') btn-outline-primary @else btn-primary @endif"
-                        href="?type=list" ><i class="fa fa-list"></i>
+                        href="?type=list"><i class="fa fa-list me-2"></i>
                         {{ trans('messages.list') }}</a>
                 </div>
             </div>
-
-            @can('create-action', $group)
-                <div>
-                    <a class="btn btn-primary" href="{{ route('groups.actions.create', $group) }}">
-                        <i class="fas fa-pencil-alt"></i>
-                        <span class="hidden sm:inline ml-2">{{ trans('action.create_one_button') }}</span>
-                    </a>
-                </div>
-            @endcan
 
         </div>
     @endauth
 
     @if ($type == 'grid')
+        @can('create-action', $group)
+            <div class="mb-4">
+                <a class="btn btn-primary" href="{{ route('groups.actions.create', $group) }}">
+                    {{ trans('action.create_one_button') }}
+                </a>
+            </div>
+        @endcan
         <div class="js-calendar" id="calendar" data-json="{{ route('groups.actions.index.json', $group) }}"
             data-locale="{{ App::getLocale() }}" data-create-url="{{ route('groups.actions.create', $group) }}"></div>
 

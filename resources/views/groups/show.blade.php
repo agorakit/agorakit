@@ -85,13 +85,8 @@
 
     @if ($actions)
         @if ($actions->count() > 0)
-            <h2 class="my-4 d-flex justify-content-between">
+            <h2 class="mt-4">
                 <a href="{{ route('groups.actions.index', $group) }}">{{ trans('messages.agenda') }}</a>
-                @can('create-action', $group)
-                    <a class="btn btn-primary" href="{{ route('groups.actions.create', $group) }}">
-                        {{ trans('action.create_one_button') }}
-                    </a>
-                @endcan
             </h2>
             <div class="actions">
                 @include('actions.list', ['actions' => $actions])
