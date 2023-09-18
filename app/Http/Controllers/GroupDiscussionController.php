@@ -266,9 +266,7 @@ class GroupDiscussionController extends Controller
     public function destroyConfirm(Request $request, Group $group, Discussion $discussion)
     {
         $this->authorize('delete', $discussion);
-        
-        session()->put('url.intended', URL::previous());
-
+    
         return view('discussions.delete')
             ->with('group', $group)
             ->with('discussion', $discussion)
@@ -288,7 +286,7 @@ class GroupDiscussionController extends Controller
         $discussion->delete();
         flash(trans('messages.ressource_deleted_successfully'));
 
-        return redirect()->intended();
+        return redirect()->route('groups.discussions.index', [$discussion->group]);
     }
 
     /**

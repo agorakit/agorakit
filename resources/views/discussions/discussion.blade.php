@@ -29,14 +29,12 @@
                     {{ $discussion->group->name }},
                     {{ dateForHumans($discussion->updated_at) }}
                 </div>
-
-                @if ($discussion->isPinned())
-                    <div class="">
-                        <i class="fas fa-thumbtack" title="{{ __('Pinned') }}"></i>
-                    </div>
-                @endif
-
             </div>
+            @if ($discussion->isPinned())
+                <div class="me-2">
+                    <i class="fas fa-thumbtack" title="{{ __('Pinned') }}"></i>
+                </div>
+            @endif
             <div>
                 @if ($discussion->unReadCount() > 0)
                     <span class="badge bg-primary rounded-pill">
