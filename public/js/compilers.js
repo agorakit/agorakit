@@ -15,7 +15,7 @@ up.compiler('.wysiwyg', function (element, data) {
 
 	// load mentions
 	var mentions = JSON.parse(element.getAttribute("data-mention-users-list"))
-
+	var group_id = element.getAttribute("data-group-id")
 
 	var $summernote = $(element).summernote({
 
@@ -35,7 +35,7 @@ up.compiler('.wysiwyg', function (element, data) {
 		callbacks: {
 			onImageUpload: function (files) {
 				for (var i = 0; i < files.length; i++) {
-					sendFile($summernote, files[i]);
+					sendFile($summernote, files[i], group_id);
 				}
 			}
 		},
@@ -63,11 +63,11 @@ up.compiler('.wysiwyg', function (element, data) {
  * This function upload a file to the server and in return it will get a file id, to add f:xxx to the thextarea 
  * to be later rendered as a nice embeded file.
  */
-function sendFile($summernote, file) {
+function sendFile($summernote, file, group_id) {
 	var formData = new FormData();
 	formData.append("file", file);
 	formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
-	group_id = $('meta[name="group-id"]').attr('content');
+	//group_id = $('meta[name="group-id"]').attr('content');
 
 
 	$.ajax({
