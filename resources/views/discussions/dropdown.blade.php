@@ -6,7 +6,7 @@
             <i class="fas fa-ellipsis-h"></i>
         </a>
 
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
 
             @can('update', $discussion)
                 <a class="dropdown-item" href="{{ route('groups.discussions.edit', [$discussion->group, $discussion]) }}">

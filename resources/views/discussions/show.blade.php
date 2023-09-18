@@ -16,10 +16,16 @@
                     @include('users.avatar', ['user' => $discussion->user])
                 </div>
 
-                <div class="flex-grow w-100 ml-4">
-                    <h2 class="mb-0">
-                        {{ $discussion->name }}
-                    </h2>
+                <div class="flex-grow-1 ml-4">
+
+                    <div class="d-flex">
+                        <h2 class="mb-0 flex-grow-1">
+                            {{ $discussion->name }}
+                        </h2>
+                        <div>
+                            @include('discussions.dropdown')
+                        </div>
+                    </div>
 
                     <div class="text-meta">
                         @if (isset($discussion->user))
@@ -36,26 +42,20 @@
                         {!! filter($discussion->body) !!}
                     </div>
 
-                    <div class="mb-1 d-flex">
-                        <div class="tags">
-                            @if ($discussion->getSelectedTags()->count() > 0)
-                                <span class="me-2">
-                                    @foreach ($discussion->getSelectedTags() as $tag)
-                                        @include('tags.tag')
-                                    @endforeach
-                                </span>
-                            @endif
+                    @if ($discussion->getSelectedTags()->count() > 0)
+                        <div class="d-flex gap-1 flex-wrap">
+                            @foreach ($discussion->getSelectedTags() as $tag)
+                                @include('tags.tag')
+                            @endforeach
                         </div>
-                    </div>
+                    @endif
 
                     <div class="mb-2">
                         @include ('reactions.reactions', ['model' => $discussion])
                     </div>
 
                 </div>
-                <div>
-                        @include('discussions.dropdown')
-                </div>
+
             </div>
 
         </div>

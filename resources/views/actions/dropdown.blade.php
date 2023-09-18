@@ -2,7 +2,7 @@
      <a class="btn" id="dropdownMenuButton" data-bs-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">
          <i class="fas fa-ellipsis-h"></i>
      </a>
-     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
 
          @can('update', $action)
              <a class="dropdown-item" href="{{ route('groups.actions.edit', [$group, $action]) }}">

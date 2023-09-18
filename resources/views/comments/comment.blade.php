@@ -8,15 +8,48 @@
             @include('users.avatar', ['user' => $comment->user])
         </div>
 
-        <div class="w-100 flex-grow @if ($comment->isRead) read @endif">
+        <div class="w-100 flex-grow-1 @if ($comment->isRead) read @endif">
 
-            <div class="text-meta">
-                @if (isset($comment->user))
-                    <a href="{{ route('users.show', [$comment->user]) }}">{{ $comment->user->name }}</a>
-                @else
-                    Unknown user
-                @endif
-                {{ dateForHumans($comment->created_at) }}
+            <div class="d-flex">
+                <div class="text-meta flex-grow-1">
+                    @if (isset($comment->user))
+                        <a href="{{ route('users.show', [$comment->user]) }}">{{ $comment->user->name }}</a>
+                    @else
+                        Unknown user
+                    @endif
+                    {{ dateForHumans($comment->created_at) }}
+                </div>
+
+                @can('update', $comment)
+                    <div class="dropdown">
+                        <a class="btn btn-pills" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false" button">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+
+                            @can('update', $comment)
+                                <a class="dropdown-item"
+                                    href="{{ action('CommentController@edit', [$comment->discussion->group, $comment->discussion, $comment]) }}">
+                                    <i class="fa fa-pencil me-2"></i>
+                                    {{ trans('messages.edit') }}
+                                </a>
+                            @endcan
+
+                            @can('delete', $comment)
+                                <a class="dropdown-item"
+                                    href="{{ action('CommentController@destroyConfirm', [$comment->discussion->group, $comment->discussion, $comment]) }}"
+                                    up-layer="new">
+                                    <i class="fa fa-trash me-2"></i>
+                                    {{ trans('messages.delete') }}
+                                </a>
+                            @endcan
+                            <a class="dropdown-item"
+                                href="{{ action('CommentController@history', [$comment->discussion->group, $comment->discussion, $comment]) }}">
+                                <i class="fa fa-history me-2"></i> {{ trans('messages.show_history') }}</a>
+                        </div>
+                    </div>
+                @endcan
             </div>
 
             <div>
@@ -27,37 +60,6 @@
                 @include ('reactions.reactions', ['model' => $comment])
             </div>
         </div>
-
-        @can('update', $comment)
-            <div class="dropdown">
-                <a class="btn btn-pills" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false" button">
-                    <i class="fas fa-ellipsis-h"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-
-                    @can('update', $comment)
-                        <a class="dropdown-item"
-                            href="{{ action('CommentController@edit', [$comment->discussion->group, $comment->discussion, $comment]) }}">
-                            <i class="fa fa-pencil me-2"></i>
-                            {{ trans('messages.edit') }}
-                        </a>
-                    @endcan
-
-                    @can('delete', $comment)
-                        <a class="dropdown-item"
-                            href="{{ action('CommentController@destroyConfirm', [$comment->discussion->group, $comment->discussion, $comment]) }}"
-                            up-layer="new">
-                            <i class="fa fa-trash me-2"></i>
-                            {{ trans('messages.delete') }}
-                        </a>
-                    @endcan
-                    <a class="dropdown-item"
-                        href="{{ action('CommentController@history', [$comment->discussion->group, $comment->discussion, $comment]) }}">
-                        <i class="fa fa-history me-2"></i> {{ trans('messages.show_history') }}</a>
-                </div>
-            </div>
-        @endcan
 
     </div>
 

@@ -92,7 +92,7 @@
                                 aria-expanded="false">
                                 <i class="fas fa-bell"></i>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right rounded shadow">
+                            <div class="dropdown-menu-end rounded shadow">
                                 @foreach ($notifications as $notification)
                                     <a class="dropdown-item">
                                         @if ($notification->type == 'App\Notifications\GroupCreated')

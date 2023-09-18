@@ -4,7 +4,7 @@
         <i class="fas fa-ellipsis-h"></i>
     </a>
 
-    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
 
         @can('update', $file)
         <a class="dropdown-item" href="{{ route('groups.files.edit', [$file->group, $file]) }}">
