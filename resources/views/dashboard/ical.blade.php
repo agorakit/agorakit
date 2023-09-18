@@ -16,7 +16,7 @@
     </div>
   @endauth
 
-  <div class="text-gray-600">
+  <div class="text-secondary">
     <a class="btn btn-secondary" href="{{route('actions.feed')}}"><i class="fas fa-rss"></i> RSS</a>
 </div>
 

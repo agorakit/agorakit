@@ -1,68 +1,47 @@
-@extends('app')
+@extends('group')
 
 @section('content')
 
-@include('groups.tabs')
-
-<div class="tab_content">
-
     @auth
-    <div class="flex mb-4 justify-between">
+        <div class="flex mb-2 justify-content-between">
 
-        <div class="mb-2">
-            <div class="btn-group" role="group">
+            <div class="mb-2">
+                <div class="btn-group" role="group">
 
-                <a up-follow href="?type=grid"
-                    class="btn @if($type == 'list') btn-outline-primary @else btn-primary @endif"><i
-                        class="fa fa-calendar"></i>
-                    {{ trans('messages.grid') }}</a>
-                <a up-follow href="?type=list"
-                    class="btn @if($type == 'grid') btn-outline-primary @else btn-primary @endif"><i
-                        class="fa fa-list"></i>
-                    {{ trans('messages.list') }}</a>
+                    <a class="btn @if ($type == 'list') btn-outline-primary @else btn-primary @endif"
+                        href="?type=grid"><i class="fa fa-calendar me-2"></i>
+                        {{ trans('messages.grid') }}</a>
+                    <a class="btn @if ($type == 'grid') btn-outline-primary @else btn-primary @endif"
+                        href="?type=list"><i class="fa fa-list me-2"></i>
+                        {{ trans('messages.list') }}</a>
+                </div>
             </div>
+
         </div>
-
-        @can('create-action', $group)
-        <div>
-            <a class="btn btn-primary" href="{{ route('groups.actions.create', $group ) }}">
-                <i class="fas fa-pencil-alt"></i>
-                <span class="hidden sm:inline ml-2">{{ trans('action.create_one_button') }}</span>
-            </a>
-        </div>
-
-        @endcan
-
-    </div>
     @endauth
 
+    @if ($type == 'grid')
+        @can('create-action', $group)
+            <div class="mb-4">
+                <a class="btn btn-primary" href="{{ route('groups.actions.create', $group) }}">
+                    {{ trans('action.create_one_button') }}
+                </a>
+            </div>
+        @endcan
+        <div class="js-calendar" id="calendar" data-json="{{ route('groups.actions.index.json', $group) }}"
+            data-locale="{{ App::getLocale() }}" data-create-url="{{ route('groups.actions.create', $group) }}"></div>
 
-    @if($type == 'grid')
-
-    <div id="calendar" class="calendar" data-json="{{ route('groups.actions.index.json', $group) }}"
-        data-locale="{{ App::getLocale() }}" data-create-url="{{ route('groups.actions.create', $group) }}"></div>
-
-    @include('actions.ical')
+        @include('actions.ical')
     @endif
 
-    @if($type == 'list')
-    @if($actions->count() > 0)
-    <div class="actions">
-        @forelse( $actions as $action)
-        <x-action :action="$action" :participants="true" />
-        @empty
-        {{ trans('messages.nothing_yet') }}
-        @endforelse
-    </div>
+    @if ($type == 'list')
+        @if ($actions->count() > 0)
+            @include('actions.list', ['actions' => $actions])
 
-    {{ $actions->render() }}
+            {{ $actions->render() }}
 
-    @include('actions.ical')
+            @include('actions.ical')
+        @endif
     @endif
-    @endif
-
-
-
-</div>
 
 @endsection

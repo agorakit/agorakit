@@ -1,4 +1,4 @@
-<div class="my-5 sm:flex justify-between">
+<div class="my-5 sm:flex justify-content-between">
   
   <div class="mb-4">
   <a class="btn btn-secondary" href="{{action('GroupIcalController@index', $group)}}">

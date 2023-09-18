@@ -1,67 +1,68 @@
-<div up-follow up-expand up-reveal="false"
-    class="flex relative items-start py-4 hover:bg-gray-200 border-b-2 border-gray-200">
-
-    @if ($discussion->isPinned())
-    <div
-        class="text-xs absolute left-0 w-6 h-6 rounded-full text-white bg-blue-700 flex items-center justify-center border-white border-2 shadow-md ">
-        <i class="fas fa-thumbtack" title="{{__('Pinned')}}"></i>
-    </div>
-    @endif
+<div class="d-flex justify-content-between align-items-start mb-md-4 pb-md-4 mb-3 pb-3 border-bottom" up-expand>
 
     @if ($discussion->user)
-    @include('users.avatar', ['user' => $discussion->user])
+        <div class="me-md-3 me-2">
+            @include('users.avatar', ['user' => $discussion->user])
+        </div>
     @endif
 
+    <div class="flex-grow-1 text-truncate">
 
-    <div class="mx-2 min-w-0 flex-grow">
-
-        <div class="text-gray-900 text-lg truncate min-w-0">
-            <a href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}" class="no-underline">
-                @if($discussion->isArchived())
-                [{{ __('Archived') }}]
+        <div class="text-truncate">
+            <a href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}">
+                @if ($discussion->isArchived())
+                    [{{ __('Archived') }}]
                 @endif
-                {{$discussion->name}}
+                {{ $discussion->name }}
             </a>
         </div>
 
-        <div class="text-gray-600 text-xs">
+        <div class="text-meta">
             @if ($discussion->user)
-            {{ trans('messages.started_by') }}
-            {{ $discussion->user->name }}
+                {{ trans('messages.started_by') }}
+                {{ $discussion->user->name }}
             @endif
             {{ trans('messages.in') }}
             {{ $discussion->group->name }},
             {{ dateForHumans($discussion->updated_at) }}
         </div>
 
-
-        <div class="text-gray-600 truncate min-w-0 h-6">
+        <div class="text-truncate">
             {{ summary($discussion->body) }}
         </div>
 
-        @if($discussion->getSelectedTags()->count() > 0)
-        <div class="text-gray-600 text-xs overflow-hidden h-5">
-            @foreach($discussion->getSelectedTags() as $tag)
-            @include('tags.tag')
-            @endforeach
-        </div>
+        @if ($discussion->getSelectedTags()->count() > 0)
+            <div class="text-secondary text-xs overflow-hidden">
+                @foreach ($discussion->getSelectedTags() as $tag)
+                    @include('tags.tag')
+                @endforeach
+            </div>
         @endif
 
-       
     </div>
 
-    @if($discussion->unReadCount() > 0)
-    <div class="rounded-full bg-red-700 text-xs text-red-100 justify-center px-2 py-1 flex flex-shrink-0">
-        {{ $discussion->unReadCount() }} {{trans('messages.new')}}
-    </div>
-    @else
-    @if($discussion->comments_count > 0)
-    <div class="rounded-full bg-gray-700 text-xs text-gray-100 px-2 py-1 justify-center flex flex-shrink-0">
-        {{ $discussion->comments_count }}
-    </div>
-    @endif
-    @endif
+    <div class="d-flex ms-3">
 
-    @include('discussions.dropdown')
+        @if ($discussion->isPinned())
+            <div class="">
+                <i class="fas fa-thumbtack" title="{{ __('Pinned') }}"></i>
+            </div>
+        @endif
 
+        <div class="me-2">
+            @if ($discussion->unReadCount() > 0)
+                <span class="badge bg-primary rounded-pill">
+                    {{ $discussion->unReadCount() }}
+                </span>
+            @else
+                @if ($discussion->comments_count > 0)
+                    <span class="badge bg-primary rounded-pill">
+                        {{ $discussion->comments_count }}
+                    </span>
+                @endif
+            @endif
+        </div>
+
+        @include('discussions.dropdown')
+    </div>
 </div>

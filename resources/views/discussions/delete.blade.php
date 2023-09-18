@@ -13,7 +13,7 @@
 
         {!! Form::model($discussion, array('method' => 'DELETE', 'action' => ['GroupDiscussionController@destroy', $group, $discussion])) !!}
         
-        <div class="flex justify-between">
+        <div class="flex justify-content-between">
         <div class="form-group">
             {!! Form::submit(trans('messages.delete_confirm_button'), ['class' => 'btn btn-danger']) !!}
         </div>

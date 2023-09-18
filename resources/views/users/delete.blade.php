@@ -35,7 +35,7 @@
   </label>
 </div>
 
-<div class="mt-5 flex justify-between align-items-center">
+<div class="mt-5 d-flex justify-content-between align-items-center">
   {!! Form::submit('Delete my account (remember, no easy undo!)', ['class' => 'btn btn-danger']) !!}
   <a class="btn btn-link mr-4" href="{{route('users.show', $user)}}">{{ trans('messages.cancel') }}</a>
 </div>

@@ -5,14 +5,14 @@
 
 <div class="d-flex ">
     <h1>
-        <a up-follow href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i
+        <a  href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i
             class="fa fa-angle-right"></i> {{ trans('messages.agenda') }}
     </h1>
 </div>
 
 
 
-<div class="flex justify-between">
+<div class="flex justify-content-between">
 
     <div class="flex ">
         <div class="mr-4">
@@ -32,15 +32,11 @@
             </span>
         </a>
     </div>
-
-
-
-
 </div>
 
 
 
-<div class="mt-5 calendar" id="calendar" data-json="{{ action('ActionController@indexJson') }}"
+<div class="mt-5 js-calendar" id="calendar" data-json="{{ action('ActionController@indexJson') }}"
     data-locale="{{ App::getLocale() }}" data-create-url="/actions/create"></div>
 
 @include('dashboard.ical')

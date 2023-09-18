@@ -2,7 +2,7 @@
 
 <div id="model-{{$model->id}}">
 
-    <div class="flex items-center mt-2">
+    <div class="flex align-items-center mt-2">
         @foreach ($model->reactions as $reaction)
         @if (Auth::check() && Auth::user()->is($reaction->user))
         <a up-target="#model-{{$model->id}}" up-reveal="false" class="m-0 p-0 h-5 w-5 mr-1"
@@ -23,8 +23,8 @@
 
         @can('react', $model)
         <div class="dropdown">
-            <a class="cursor-pointer flex items-center bg-gray-s300 text-gray-700 rounded-lg text-xs opacity-25 hover:opacity-100"
-                type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="cursor-pointer d-flex align-items-center bg-gray-s300 text-gray-700 rounded-lg text-xs opacity-25 hover:opacity-100"
+                type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img src="{{asset('/images/reactions/reaction.svg')}}" class="image-cover h-5 w-5"
                     title="Add a reaction" />
 

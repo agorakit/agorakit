@@ -1,53 +1,53 @@
-@extends('app')
+@extends('group')
 
 @section('content')
+    <h1>{{ trans('messages.edit') }} {{ $membership->user->name }} in "{{ $group->name }}"</h1>
 
-    @include('groups.tabs')
+    {!! Form::open(['action' => ['GroupMembershipAdminController@update', $group, $membership]]) !!}
 
-    <div class="tab_content">
+    <strong>{{ trans('messages.notifications_interval') }}</strong>
 
-        <h1>{{trans('messages.edit')}} {{$membership->user->name}} in "{{$group->name}}"</h1>
+    <div class="form-group">
+        {!! Form::select(
+            'notifications',
+            [
+                'instantly' => trans('membership.instantly'),
+                'hourly' => trans('membership.everyhour'),
+                'daily' => trans('membership.everyday'),
+                'weekly' => trans('membership.everyweek'),
+                'biweekly' => trans('membership.everytwoweek'),
+                'monthly' => trans('membership.everymonth'),
+                'never' => trans('membership.never'),
+            ],
+            $interval,
+            ['class' => 'form-control'],
+        ) !!}
+    </div>
 
-
-
-
-        {!! Form::open(array('action' => ['GroupMembershipAdminController@update', $group, $membership])) !!}
-
-
-        <strong>{{trans('messages.notifications_interval')}}</strong>
-
+    @can('manage-membership', $group)
+        <strong>{{ trans('membership.status') }}</strong>
         <div class="form-group">
-            {!! Form::select('notifications', ['instantly' => trans('membership.instantly'), 'hourly' => trans('membership.everyhour'), 'daily' => trans('membership.everyday'), 'weekly' => trans('membership.everyweek'), 'biweekly' => trans('membership.everytwoweek'), 'monthly' => trans('membership.everymonth'), 'never' => trans('membership.never')], $interval, ['class' => 'form-control']) !!}
+
+            {!! Form::select(
+                'membership_level',
+                [
+                    \App\Membership::ADMIN => trans('membership.admin'),
+                    \App\Membership::MEMBER => trans('membership.member'),
+                    \App\Membership::INVITED => trans('membership.invited'),
+                    \App\Membership::CANDIDATE => trans('membership.candidate'),
+                    \App\Membership::REMOVED => trans('membership.removed'),
+                    \App\Membership::DECLINED => trans('membership.declined'),
+                    \App\Membership::BLACKLISTED => trans('membership.blacklisted'),
+                ],
+                $membership->membership,
+                ['class' => 'form-control'],
+            ) !!}
         </div>
+    @endcan
 
+    <div class="form-group">
+        {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-primary']) !!}
+    </div>
 
-        @can('manage-membership', $group)
-            <strong>{{trans('membership.status')}}</strong>
-            <div class="form-group">
-
-                {!! Form::select('membership_level',
-                    [
-                        \App\Membership::ADMIN => trans('membership.admin'),
-                        \App\Membership::MEMBER => trans('membership.member'),
-                        \App\Membership::INVITED => trans('membership.invited'),
-                        \App\Membership::CANDIDATE => trans('membership.candidate'),
-                        \App\Membership::REMOVED => trans('membership.removed'),
-                        \App\Membership::DECLINED => trans('membership.declined'),
-                        \App\Membership::BLACKLISTED => trans('membership.blacklisted'),
-                    ],
-                    $membership->membership, ['class' => 'form-control']) !!}
-                </div>
-
-            @endcan
-
-            <div class="form-group">
-                {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-primary btn-lg']) !!}
-            </div>
-
-
-            {!! Form::close() !!}
-
-
-        </div>
-
-    @endsection
+    {!! Form::close() !!}
+@endsection

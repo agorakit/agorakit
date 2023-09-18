@@ -1,2 +1,5 @@
-<img class="inline-block rounded-full h-10 w-10 sm:h-12 sm:w-12 flex-shrink-0 image-cover border-4 border-white"
-    src="{{ route('users.cover', [$user, 'small']) }}" title="{{$user->name}}" />
+@if (isset($user))
+    <img class="avatar rounded-circle" src="{{ route('users.cover', [$user, 'small']) }}" title="{{ $user->name }}" style="max-width:40px;" width="40" height="40" />
+@else
+    <span class="avatar rounded-circle" title="Unknown user">?</span>
+@endif

@@ -1,8 +1,6 @@
-@extends('app')
+@extends('group')
 
 @section('content')
-
-  @include('groups.tabs')
 
   <h1>{{ trans('group.features') }}</h1>
 

@@ -1,0 +1,119 @@
+up-modal-box {
+    border-radius: 10px;
+    padding: 32px;
+}
+
+
+:root {
+    --tblr-border-radius: 5px;
+    --tblr-body-bg: #e6e5d8;
+    --tblr-list-group-item-padding-x: 0;
+    /*--tblr-border-color: #aaa;*/
+}
+
+/*
+.nav-tabs .nav-link.active {
+    background-color: white;
+    border: none;
+    border-bottom: 1px solid white;
+}
+
+
+.nav-pills .nav-link.active {
+    background-color: var(--tblr-info);
+    color: white;
+}
+
+.nav-tabs {
+    border-bottom: none;
+}
+*/
+
+.group,
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.list-group-item {
+    padding: var(--tblr-list-group-item-padding-y) 0;
+}
+
+.form-group label {
+    font-weight: bold;
+    /*text-transform: uppercase;*/
+    color: #444;
+    /*font-size: small;*/
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+
+
+.small-help {
+    color: #888;
+    font-size: 0.8rem,
+}
+
+.text-meta {
+    color: #888;
+    font-size: 0.8rem;
+}
+
+.help {
+    padding: 20px;
+    margin: 20px 0px;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    background-color: rgb(188, 218, 226);
+}
+
+.help h4 {
+    color: #1B809E;
+    margin-top: 0px;
+    margin-bottom: 5px;
+    font-size: 18px;
+}
+
+.help a {
+    text-decoration: underline;
+}
+
+
+.alert a {
+    text-decoration: underline;
+}
+
+
+.reaction {
+    width: 24px;
+    height: 24px;
+}
+
+
+.action-date {
+    width: 50px;
+    height: 40px;
+    border: 1px solid #aaa;
+    text-align: center;
+    border-radius: 4px;
+    background: #f8f6f3;
+    padding: 3px;
+    box-sizing: content-box;
+}
+
+.square
+{
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+}
+
+
+h1, h2, h3, h4, h5, h6
+{
+    font-weight: normal;
+}

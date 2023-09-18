@@ -26,7 +26,7 @@
 
             <div id="gallery">
                 @forelse( $files as $file )
-                    <a up-follow href="{{ route('groups.files.download', [$group, $file]) }}">
+                    <a  href="{{ route('groups.files.download', [$group, $file]) }}">
                         <img src="{{ route('groups.files.preview', [$group, $file]) }}"/>
                     </a>
                 @empty

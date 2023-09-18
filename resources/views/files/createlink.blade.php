@@ -29,7 +29,7 @@
 
 
 
-<div class="flex justify-between items-center my-8">
+<div class="flex justify-content-between align-items-center my-8">
     <input class="btn btn-primary" type="submit" name="{{ trans('messages.create') }}" />
     <a href="#" class="js-back">{{ trans('messages.cancel') }}</a>
 </div>

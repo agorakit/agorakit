@@ -7,12 +7,12 @@
 
 {!! Form::open(['action' => 'Admin\SettingsController@update', 'files' => true]) !!}
 
-<div class="flex justify-between sticky top-0 bg-white py-4 mb-8 border-b border-gray-300 z-50">
+<div class="flex justify-content-between sticky top-0 bg-white py-4 mb-8 border-b border-gray-300 z-50">
     <h1>{{ __('Settings') }}</h1>
 
 
     <div>
-        {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-lg btn-primary shadow']) !!}
+        {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-primary']) !!}
     </div>
 
 </div>

@@ -6,8 +6,8 @@
 
         @auth
             @if (Auth::user()->isAdmin())
-                <div class="mb-4 flex justify-end">
-                    <a up-target="body" href="{{ url('/admin/settings') }}"
+                <div class="mb-4 d-flex justify-end">
+                    <a  href="{{ url('/admin/settings') }}"
                         class="btn btn-primary">
                         <i class="fa fa-cog"></i> Edit this text
                     </a>
