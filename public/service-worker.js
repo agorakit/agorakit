@@ -1,12 +1,12 @@
 // This is the service worker with the Cache-first network
-
+/*
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.0.0/workbox-sw.js');
 
-const {registerRoute} = workbox.routing;
-const {CacheFirst} = workbox.strategies;
-const {NetworkFirst} = workbox.strategies;
-const {StaleWhileRevalidate} = workbox.strategies;
-const {ExpirationPlugin} = workbox.expiration;
+const { registerRoute } = workbox.routing;
+const { CacheFirst } = workbox.strategies;
+const { NetworkFirst } = workbox.strategies;
+const { StaleWhileRevalidate } = workbox.strategies;
+const { ExpirationPlugin } = workbox.expiration;
 
 
 
@@ -17,7 +17,10 @@ self.addEventListener("message", (event) => {
         self.skipWaiting();
     }
 });
+*/
 
+
+/*
 // cache 5000 images for 60 minutes
 registerRoute(
     ({request}) => request.destination === 'image',
@@ -58,3 +61,4 @@ registerRoute(
         cacheName: 'pages-content'
     })
 );
+*/
