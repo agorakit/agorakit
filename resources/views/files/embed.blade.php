@@ -1,36 +1,38 @@
-<div class="w-32 bg-gray-200 shadow-md mr-3 mb-3 p-3 inline-block rounded">
-<a up-layer="new" up-expand href="{{ route('groups.files.show', [$file->group, $file]) }}">
+<div class="mb-3 border p-2" up-expand>
+    <div class="d-flex gap-2">
+        <div>
+            <img src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" alt="file cover"
+                style="width: 3rem; height: 3rem" class="rounded">
+        </div>
+        <div>
+            <div>
+                <a up-layer="new" up-expand href="{{ route('groups.files.show', [$file->group, $file]) }}">
+                    {{ $file->name }}
+                </a>
+            </div>
+            <div class="text-secondary d-flex flex-wrap gap-2">
 
-<img src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" class="w-full">
+                <div class="">
+                    <i class="fa fa-user-circle"></i> {{ $file->user->name }}
+                </div>
 
-<div class="text-xs h-8 overflow-hidden">
-{{ $file->name }}
-</div>
+                <div class="">
+                    <i class="fa fa-clock-o"></i> {{ $file->updated_at }}
 
-<div class="text-xs text-secondary">
+                </div>
 
-<div class="h-4 overflow-hidden">
-<i class="fa fa-user-circle"></i> {{ $file->user->name }}
-</div>
+                <div class="">
+                    @if ($file->isFile())
+                        <i class="fa fa-database"></i> {{ sizeForHumans($file->filesize) }}
+                    @endif
+                </div>
 
-<div class="h-4 overflow-hidden">
-<i class="fa fa-clock-o"></i> {{ $file->updated_at }}
-
-</div>
-
-<div class="h-4 overflow-hidden">
-@if ($file->isFile())
-<i class="fa fa-database"></i> {{sizeForHumans($file->filesize)}}
-@endif
-</div>
-
-<div class="h-4 overflow-hidden">
-@if ($file->isLink())
-<i class="fas fa-link"></i> {{$file->path}}
-@endif
-</div>
-
-</div>
-
-</a>
+                <div class="">
+                    @if ($file->isLink())
+                        <i class="fas fa-link"></i> {{ $file->path }}
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
