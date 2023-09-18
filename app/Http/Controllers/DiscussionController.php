@@ -47,7 +47,7 @@ class DiscussionController extends Controller
             ->when($tag, function ($query) use ($tag) {
                 return $query->withAnyTags($tag);
             })
-            ->orderBy('status', 'desc')
+            // ->orderBy('status', 'desc') // don't show pinned discussions first in overview imvho
             ->orderBy('updated_at', 'desc')
             ->paginate(25);
         } else { // anon get public groups
