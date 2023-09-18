@@ -3,29 +3,29 @@
 use \Embera\Embera;
 
 /**
-* Text/html processing and filters
-* The most used ont is filter($content).
-*
-* TODO : Refactor this so that is is part of the models ?
-* TODO : caching of all those embeded files and discussions queries
-*/
+ * Text/html processing and filters
+ * The most used ont is filter($content).
+ *
+ * TODO : Refactor this so that is is part of the models ?
+ * TODO : caching of all those embeded files and discussions queries
+ */
 
 /**
-* Returns a text only summary of the provided text.
-*
-* @param [type] $text   $text to be summarized
-* @param int    $length lenght in chars to keep
-*
-* @return [type] summarized text
-*/
+ * Returns a text only summary of the provided text.
+ *
+ * @param [type] $text   $text to be summarized
+ * @param int    $length lenght in chars to keep
+ *
+ * @return [type] summarized text
+ */
 function summary($text, $length = 200)
 {
     return mb_strimwidth(strip_tags(html_entity_decode($text, ENT_QUOTES, 'utf-8')), 0, $length, '...');
 }
 
 /**
-* Filters the passed text to remove nasty html and turns urls to html links and embeds youtube and vimeo links.
-*/
+ * Filters the passed text to remove nasty html and turns urls to html links and embeds youtube and vimeo links.
+ */
 function filter($content)
 {
     // strip bad stuff using html purifier
@@ -54,29 +54,32 @@ function filter($content)
     $linkify = new \Misd\Linkify\Linkify();
     $content = $linkify->process($content);
 
+    // remove empty <p>
+    //$content =  preg_replace("/<p[^>]*><\\/p[^>]*>/", '',  $content);
+
     return $content;
 }
 
 
 /**
-* Keep only html tags considered "safe"
-*/
+ * Keep only html tags considered "safe"
+ */
 function safe_html($content)
 {
     return strip_tags($content, '<span><br><p><a><li><img><hr><em><blockquote><strong><i><b><u><code><h1><h2><h3><h4><ul><ol><table><tr><td><th>');
 }
 
 /**
-* Highlight and link to @user profiles in the passed $content.
-*/
+ * Highlight and link to @user profiles in the passed $content.
+ */
 function highlightMentions($content)
 {
-    return preg_replace("/(?<!\w)@([\w_\-\.]+)/", '<a href="'.URL::to('/').'/users/$1">@$1</a> ', $content);
+    return preg_replace("/(?<!\w)@([\w_\-\.]+)/", '<a href="' . URL::to('/') . '/users/$1">@$1</a> ', $content);
 }
 
 /**
-* Highlight and link to f:xx files and d:xx discussions.
-*/
+ * Highlight and link to f:xx files and d:xx discussions.
+ */
 function highlightFiles($content)
 {
     return preg_replace_callback(
@@ -86,8 +89,8 @@ function highlightFiles($content)
             if ($file) {
                 if (Gate::allows('view', $file)) {
                     return view('files.embed')
-                    ->with('file', $file)
-                    ->render();
+                        ->with('file', $file)
+                        ->render();
                 } else {
                     return route('groups.files.show', [$file->group, $file]);
                 }
@@ -100,8 +103,8 @@ function highlightFiles($content)
 }
 
 /**
-* Highlight and link to f:xx files and d:xx discussions.
-*/
+ * Highlight and link to f:xx files and d:xx discussions.
+ */
 function highlightDiscussions($content)
 {
     return preg_replace_callback(
@@ -112,8 +115,8 @@ function highlightDiscussions($content)
             if ($discussion) {
                 if (Gate::allows('view', $discussion)) {
                     return view('discussions.embed')
-                    ->with('discussion', $discussion)
-                    ->render();
+                        ->with('discussion', $discussion)
+                        ->render();
                 } else {
                     return 'This content is unavailable';
                 }

@@ -2,8 +2,8 @@
 
 @section('content')
 
-    <div style="max-width: 60em">
-        <div class="discussion">
+    <div style="max-width: 70em">
+        <div class="discussion mb-4">
 
             @if ($total_count == 0)
                 {{-- no comments yet, we scroll right here --}}
