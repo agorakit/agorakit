@@ -59,7 +59,7 @@ class GroupCoverController extends Controller
 
         if (File::exists($path)) {
             $cachedImage = Image::cache(function ($img) use ($path) {
-                return $img->make($path)->fit(800, 600);
+                return $img->make($path)->widen(800);
             }, 5, true);
 
             return $cachedImage->response();

@@ -3,7 +3,15 @@
 @section('content')
     <div class="row mb-4">
 
-        <div class="col">
+        <div class="col-12 col-md-6 mb-2 order-md-2">
+            @if ($group->hasCover())
+                <img class="rounded" src="{{ route('groups.cover.large', $group) }}" />
+            @else
+                <img class="rounded" src="/images/group.svg" />
+            @endif
+        </div>
+
+        <div class="col-12 col-md-6">
 
             <div>
                 {!! filter($group->body) !!}
@@ -67,14 +75,6 @@
                 </div>
             </div>
 
-        </div>
-
-        <div class="col">
-            @if ($group->hasCover())
-                <img class="rounded" src="{{ route('groups.cover.large', $group) }}" />
-            @else
-                <img class="rounded" src="/images/group.svg" />
-            @endif
         </div>
 
     </div>
