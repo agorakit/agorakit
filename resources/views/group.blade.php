@@ -10,7 +10,7 @@
 
 <body>
 
-    <div>
+    <div up-main>
         @unless (request()->get('embed'))
             @include('partials.nav')
         @endunless

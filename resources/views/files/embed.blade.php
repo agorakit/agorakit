@@ -6,7 +6,7 @@
         </div>
         <div>
             <div>
-                <a up-layer="new" up-expand href="{{ route('groups.files.show', [$file->group, $file]) }}">
+                <a up-layer="new" href="{{ route('groups.files.show', [$file->group, $file]) }}">
                     {{ $file->name }}
                 </a>
             </div>
