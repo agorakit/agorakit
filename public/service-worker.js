@@ -1,64 +1,48 @@
 // This is the service worker with the Cache-first network
-/*
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.0.0/workbox-sw.js');
-
-const { registerRoute } = workbox.routing;
-const { CacheFirst } = workbox.strategies;
-const { NetworkFirst } = workbox.strategies;
-const { StaleWhileRevalidate } = workbox.strategies;
-const { ExpirationPlugin } = workbox.expiration;
 
 
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/6.2.0/workbox-sw.js');
+
+
+const {registerRoute} = workbox.routing;
+const {Route} = workbox.routing;
+const {NavigationRoute} = workbox.routing;
+const {CacheFirst} = workbox.strategies;
+const {NetworkFirst} = workbox.strategies;
+const {StaleWhileRevalidate} = workbox.strategies;
+const {ExpirationPlugin} = workbox.expiration;
+
+// Handle images:
+const imageRoute = new Route(({ request }) => {
+    return request.destination === 'image'
+}, new StaleWhileRevalidate({
+    cacheName: 'images'
+}));
+
+// Handle scripts:
+const scriptsRoute = new Route(({ request }) => {
+    return request.destination === 'script';
+}, new CacheFirst({
+    cacheName: 'scripts'
+}));
+
+// Handle styles:
+const stylesRoute = new Route(({ request }) => {
+    return request.destination === 'style';
+}, new CacheFirst({
+    cacheName: 'styles'
+}));
+
+
+// Handle the rest:
+const navigationRoute = new NavigationRoute(new NetworkFirst({
+    cacheName: 'navigations'
+  }));
 
 
 
-self.addEventListener("message", (event) => {
-    if (event.data && event.data.type === "SKIP_WAITING") {
-        self.skipWaiting();
-    }
-});
-*/
-
-
-/*
-// cache 5000 images for 60 minutes
-registerRoute(
-    ({request}) => request.destination === 'image',
-    new CacheFirst({
-        cacheName: 'images',
-        plugins: [
-            new ExpirationPlugin({
-                maxEntries: 5000,
-                maxAgeSeconds: 60 * 60,
-            }),
-        ],
-    })
-);
-
-// cache css & scripts
-registerRoute(
-    ({request}) => request.destination === 'script' ||
-    request.destination === 'style',
-    new StaleWhileRevalidate({
-        cacheName: 'static-resources',
-    })
-);
-
-
-// cache fonts & fontawesome
-registerRoute(
-    ({url}) => url.origin === 'https://fonts.googleapis.com' ||
-    url.origin === 'https://fonts.googleapis.com' ||
-    url.origin === 'https://use.fontawesome.com',
-    new StaleWhileRevalidate(),
-);
-
-
-// cache everything
-registerRoute(
-    new RegExp('/*'),
-    new NetworkFirst({
-        cacheName: 'pages-content'
-    })
-);
-*/
+// Register routes
+registerRoute(imageRoute);
+registerRoute(scriptsRoute);
+registerRoute(stylesRoute);
+registerRoute(navigationRoute);
