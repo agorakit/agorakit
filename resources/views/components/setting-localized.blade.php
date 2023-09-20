@@ -1,18 +1,18 @@
 @props(['name', 'value'])
 
 
-<ul class="nav nav-tabs" id="myTab" role="tablist">
+<ul class="nav nav-tabs" role="tablist">
     @foreach(\Config::get('app.locales') as $locale)
     <li class="nav-item" role="presentation">
-        <a class="nav-link  @if ($loop->first) active @endif" data-toggle="tab" href="#{{$name}}-{{$locale}}" role="tab" aria-controls="home">
+        <button class="nav-link  @if ($loop->first) active @endif" type="button" role="tab" data-bs-toggle="tab" data-bs-target="#{{$name}}-{{$locale}}" role="tab" aria-controls="home">
             {{strtoupper($locale)}}
-        </a>
+        </button>
     </li>
     @endforeach
     <li class="nav-item" role="presentation">
-        <a class="nav-link" data-toggle="tab" href="#{{$name}}-default" role="tab" aria-controls="home">
+        <button class="nav-link" type="button" role="tab" data-bs-toggle="tab" data-bs-target="#{{$name}}-default" role="tab" aria-controls="home">
             Default
-        </a>
+        </button>
     </li>
 </ul>
 
