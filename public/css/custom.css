@@ -4,6 +4,11 @@ up-modal-box {
 }
 
 
+a {
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+}
+
 :root {
     --tblr-border-radius: 5px;
     --tblr-body-bg: #e6e5d8;
