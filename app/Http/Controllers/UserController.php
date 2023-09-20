@@ -179,7 +179,7 @@ class UserController extends Controller
                 // we need to update user address and geocode it
                 $user->address = $request->input('address');
                 if (!$user->geocode()) {
-                    flash(trans('messages.address_cannot_be_geocoded'));
+                    warning(trans('messages.address_cannot_be_geocoded'));
                 } else {
                     flash(trans('messages.ressource_geocoded_successfully'));
                 }
@@ -189,7 +189,7 @@ class UserController extends Controller
             if ($user->username != $request->input('username')) {
                 $existing_user = User::where('username', $request->input('username'))->first();
                 if ($existing_user) {
-                    flash(trans('This username is taken, another one has been generated'));
+                    error(trans('This username is taken, another one has been generated'));
                     $user->username = SlugService::createSlug(User::class, 'username', $request->input('username'));
                 } else {
                     $user->username = $request->input('username');

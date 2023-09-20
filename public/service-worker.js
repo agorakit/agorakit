@@ -3,7 +3,8 @@
 
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/6.2.0/workbox-sw.js');
 
-
+// this way of importing stuff works without "module" feature of JS.
+// https://stackoverflow.com/questions/69436284/instantiate-javascript-object-from-constant
 const {registerRoute} = workbox.routing;
 const {Route} = workbox.routing;
 const {NavigationRoute} = workbox.routing;

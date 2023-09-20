@@ -9,7 +9,7 @@
             <div class="">
 
                 @if (Auth::user()->isAdmin())
-                    <a class="btn btn-secondary float-end" href="{{ url('/admin/settings') }}" >
+                    <a class="btn btn-secondary float-end" href="{{ url('/admin/settings') }}">
                         <i class="fa fa-cog me-2"></i>
                         {{ __('Edit') }}
                     </a>
@@ -26,6 +26,12 @@
         </div>
     @endif
 
+    @auth
+        <div>
+            @include('partials.preferences-show')
+        </div>
+    @endauth
+    
     @if (Auth::user()->groups()->count() > 0)
         <div class="row">
             <div class="col-lg-8 col-12">

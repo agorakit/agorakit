@@ -1,3 +1,4 @@
-<a class="badge" href="{{ action('TagController@show', $tag) }}" style="background-color: {{ $tag->color }}">
+<a class="badge text-body" href="{{ action('TagController@show', $tag) }}">
+<span class="circle" style="background-color: {{ $tag->color }}"></span>
     {{ $tag->name }}
 </a>

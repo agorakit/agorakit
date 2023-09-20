@@ -44,7 +44,7 @@ class UserCoverController extends Controller
             }
             if ($size == 'medium') {
                 $cachedImage = Image::cache(function ($img) use ($avatar_path) {
-                    return $img->make($avatar_path)->fit(400, 400);
+                    return $img->make($avatar_path)->widen(400);
                 }, 5, true);
 
                 return $cachedImage->response();
@@ -52,7 +52,7 @@ class UserCoverController extends Controller
 
             if ($size == 'large') {
                 $cachedImage = Image::cache(function ($img) use ($avatar_path) {
-                    return $img->make($avatar_path)->fit(800, 800);
+                    return $img->make($avatar_path)->widen(800);
                 }, 5, true);
 
                 return $cachedImage->response();
