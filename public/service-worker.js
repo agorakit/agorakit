@@ -23,14 +23,14 @@ const imageRoute = new Route(({ request }) => {
 // Handle scripts:
 const scriptsRoute = new Route(({ request }) => {
     return request.destination === 'script';
-}, new CacheFirst({
+}, new StaleWhileRevalidate({
     cacheName: 'scripts'
 }));
 
 // Handle styles:
 const stylesRoute = new Route(({ request }) => {
     return request.destination === 'style';
-}, new CacheFirst({
+}, new StaleWhileRevalidate({
     cacheName: 'styles'
 }));
 
