@@ -75,7 +75,7 @@ function sendFile($summernote, file, group_id) {
 		processData: false,
 		type: 'POST',
 		success: function (data) {
-			$summernote.summernote('pasteHTML', 'f:' + data + ' &nbsp; ')
+			$summernote.summernote('pasteHTML', ' &nbsp; f:' + data + ' &nbsp; ')
 			$('.note-status-output').html(
 				'<div class="alert alert-info">' +
 				'Upload OK' +
