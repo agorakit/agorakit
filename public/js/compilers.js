@@ -22,12 +22,9 @@ up.compiler('.wysiwyg', function (element, data) {
 		toolbar: [
 			['style', ['style']],
 			['font', ['bold', 'underline', 'clear']],
-			/*['fontname', ['fontname']],*/
-			['color', ['color']],
-			['para', ['ul', 'ol', 'paragraph']],
-			['table', ['table']],
-			['insert', ['link', 'picture', 'video']],
-			['view', ['fullscreen', 'codeview', 'help']],
+			['para', ['ul', 'ol']],
+			['insert', ['link', 'picture']],
+			['view', ['fullscreen']],
 		],
 
 		// this is the main call back to upload a file (image or anything else with summernote)
@@ -78,7 +75,7 @@ function sendFile($summernote, file, group_id) {
 		processData: false,
 		type: 'POST',
 		success: function (data) {
-			$summernote.summernote('pasteHTML', '<p>f:' + data + '</p>')
+			$summernote.summernote('pasteHTML', 'f:' + data + ' &nbsp; ')
 			$('.note-status-output').html(
 				'<div class="alert alert-info">' +
 				'Upload OK' +

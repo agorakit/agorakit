@@ -87,8 +87,8 @@ up-modal-box {
 
 
 .reaction {
-    width: 30px;
-    height: 30px;
+    width: 24px;
+    height: 24px;
 }
 
 
@@ -103,28 +103,49 @@ up-modal-box {
     box-sizing: content-box;
 }
 
-.square
-{
+.square {
     width: 8px;
     height: 8px;
     display: inline-block;
 }
 
-.circle
-{
+.circle {
     width: 8px;
     height: 8px;
     display: inline-block;
     border-radius: 100%;
 }
 
-.badge
-{
-    background-color: #f1f5f9;
+.tag {
+    background-color: #f9f7f1;
+    padding: 1px 8px 1px 8px;
+    border-radius: 8px;
+    color: #95948f;
+    text-decoration: none;
+}
+
+.tag:hover {
+    color: #726f6a;
+    background-color: #dbdac6;
+    text-decoration: none;
+}
+
+.file-embed {
+    background-color: #f9f7f1;
+    border-radius: 8px;
+}
+
+.file-embed:hover {
+    background-color: #e4e4d7;
+    text-decoration: none;
 }
 
 
-h1, h2, h3, h4, h5, h6
-{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-weight: normal;
 }

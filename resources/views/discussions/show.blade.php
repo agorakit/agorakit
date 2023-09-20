@@ -12,13 +12,13 @@
 
             <div class="d-flex">
 
-                <div class="me-md-4 me-2">
-                    @include('users.avatar', ['user' => $discussion->user])
-                </div>
-
                 <div class="flex-grow-1 ml-4">
 
-                    <div class="d-flex">
+                    <div class="d-flex align-items-center mb-1">
+
+                        <div class="me-md-4 me-2">
+                            @include('users.avatar', ['user' => $discussion->user])
+                        </div>
                         <h2 class="mb-0 flex-grow-1">
                             {{ $discussion->name }}
                         </h2>
@@ -27,7 +27,7 @@
                         </div>
                     </div>
 
-                    <div class="text-meta">
+                    <div class="text-meta mb-1">
                         @if (isset($discussion->user))
                             {{ trans('messages.started_by') }}
                             <span class="user">
@@ -43,14 +43,14 @@
                     </div>
 
                     @if ($discussion->getSelectedTags()->count() > 0)
-                        <div class="d-flex gap-1 flex-wrap">
+                        <div class="d-flex gap-1 flex-wrap mb-2">
                             @foreach ($discussion->getSelectedTags() as $tag)
                                 @include('tags.tag')
                             @endforeach
                         </div>
                     @endif
 
-                    <div class="mb-2">
+                    <div>
                         @include ('reactions.reactions', ['model' => $discussion])
                     </div>
 
@@ -104,13 +104,8 @@
                         @lang('This discussion is archived, you cannot comment anymore')
                     </div>
                 @else
-                    <div class="d-flex">
-                        <div class="me-md-4 me-2">
-                            @include('users.avatar', ['user' => Auth::user()])
-                        </div>
-                        <div class="flex-grow">
-                            @include('comments.create')
-                        </div>
+                    <div>
+                        @include('comments.create')
                     </div>
                 @endif
             @endcan

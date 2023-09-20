@@ -1,23 +1,27 @@
 <a name="comment_{{ $comment->id }}"></a>
 
-<div class="mb-md-3 pb-md-3 mb-2 pb-2 comment">
+<div class="mb-md-4 pb-md-4 mb-3 pb-3 comment border-bottom">
 
     <div class="d-flex">
 
-        <div class="me-md-4 me-2">
-            @include('users.avatar', ['user' => $comment->user])
-        </div>
+        <div class="flex-grow-1 @if ($comment->isRead) read @endif">
 
-        <div class="w-100 flex-grow-1 @if ($comment->isRead) read @endif">
+            <div class="d-flex align-items-center mb-2">
+                <div class="me-md-4 me-2">
+                    @include('users.avatar', ['user' => $comment->user])
+                </div>
 
-            <div class="d-flex">
-                <div class="text-meta flex-grow-1">
-                    @if (isset($comment->user))
-                        <a href="{{ route('users.show', [$comment->user]) }}">{{ $comment->user->name }}</a>
-                    @else
-                        Unknown user
-                    @endif
-                    {{ dateForHumans($comment->created_at) }}
+                <div class="flex-grow-1">
+                    <div class="fw-bold">
+                        @if (isset($comment->user))
+                            <a href="{{ route('users.show', [$comment->user]) }}">{{ $comment->user->name }}</a>
+                        @else
+                            Unknown user
+                        @endif
+                    </div>
+                    <div class=text-meta>
+                        {{ dateForHumans($comment->created_at) }}
+                    </div>
                 </div>
 
                 @can('update', $comment)
@@ -56,7 +60,7 @@
                 {!! filter($comment->body) !!}
             </div>
 
-            <div class="mb-2">
+            <div>
                 @include ('reactions.reactions', ['model' => $comment])
             </div>
         </div>

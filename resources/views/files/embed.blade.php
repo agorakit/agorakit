@@ -1,4 +1,4 @@
-<div class="mb-3 border p-2" up-expand>
+<div class="mb-3 p-2 file-embed d-inline-block" up-expand>
     <div class="d-flex gap-2">
         <div>
             <img src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" alt="file cover"

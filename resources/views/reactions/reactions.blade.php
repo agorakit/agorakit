@@ -1,6 +1,6 @@
 <div id="model-{{ $model->id }}">
 
-    <div class="d-flex align-items-center mt-2">
+    <div class="d-flex align-items-center">
         @foreach ($model->reactions as $reaction)
             @if (Auth::check() && Auth::user()->is($reaction->user))
                 <a href="{{ route('reaction.unreact', ['model' => $model->modelName, 'id' => $model->id]) }}"
@@ -18,9 +18,9 @@
 
         @can('react', $model)
             <div class="dropdown">
-                <a class="opacity-50 hover:opacity-100" id="dropdownMenuButton" data-bs-toggle="dropdown" type="button"
+                <a class="" id="dropdownMenuButton" data-bs-toggle="dropdown" type="button"
                     aria-haspopup="true" aria-expanded="false">
-                    <img class="reaction" src="{{ asset('/images/reactions/reaction.svg') }}" title="Add a reaction" />
+                    <img class="reaction opacity-50" src="{{ asset('/images/reactions/reaction.svg') }}" title="Add a reaction" />
 
                 </a>
 

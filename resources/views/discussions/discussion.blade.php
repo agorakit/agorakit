@@ -1,34 +1,23 @@
 <div class="d-flex justify-content-between align-items-start mb-md-4 pb-md-4 mb-3 pb-3 border-bottom" up-expand>
 
-    @if ($discussion->user)
-        <div class="me-md-3 me-2">
-            @include('users.avatar', ['user' => $discussion->user])
-        </div>
-    @endif
-
     <div class="flex-grow-1">
+        <div class="d-flex align-items-center mb-1">
+            @if ($discussion->user)
+                <div class="me-md-3 me-2">
+                    @include('users.avatar', ['user' => $discussion->user])
+                </div>
+            @endif
 
-        <div class="d-flex">
             <div class="flex-grow-1">
-
                 <div>
-                    <a href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}">
+                    <a class="fw-bold" href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}">
                         @if ($discussion->isArchived())
-                            [{{ __('Archived') }}]
+                            ([{{ __('Archived') }}])
                         @endif
                         {{ $discussion->name }}
                     </a>
                 </div>
 
-                <div class="text-meta">
-                    @if ($discussion->user)
-                        {{ trans('messages.started_by') }}
-                        {{ $discussion->user->name }}
-                    @endif
-                    {{ trans('messages.in') }}
-                    {{ $discussion->group->name }},
-                    {{ dateForHumans($discussion->updated_at) }}
-                </div>
             </div>
             @if ($discussion->isPinned())
                 <div class="me-2">
@@ -52,7 +41,16 @@
         </div>
 
         <div class="">
-            {{ summary($discussion->body) }}
+            <div class="text-meta mb-1">
+                @if ($discussion->user)
+                    {{ trans('messages.started_by') }}
+                    {{ $discussion->user->name }}
+                @endif
+                {{ trans('messages.in') }}
+                {{ $discussion->group->name }},
+                {{ dateForHumans($discussion->updated_at) }}
+            </div>
+            {{ summary($discussion->body, 150) }}
         </div>
 
         @if ($discussion->getSelectedTags()->count() > 0)
