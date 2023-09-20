@@ -24,7 +24,6 @@ up.compiler('.wysiwyg', function (element, data) {
 			['font', ['bold', 'underline', 'clear']],
 			['para', ['ul', 'ol']],
 			['insert', ['link', 'picture']],
-			['view', ['fullscreen']],
 		],
 
 		// this is the main call back to upload a file (image or anything else with summernote)
