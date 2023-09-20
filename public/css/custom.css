@@ -4,8 +4,7 @@ up-modal-box {
 }
 
 
-a {
-    white-space: pre-line;
+a, p {
     overflow-wrap: anywhere;
 }
 
