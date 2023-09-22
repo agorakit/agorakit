@@ -29,12 +29,6 @@
                     <span class="badge bg-primary rounded-pill">
                         {{ $discussion->unReadCount() }}
                     </span>
-                @else
-                    @if ($discussion->comments_count > 0)
-                        <span class="badge bg-primary rounded-pill">
-                            {{ $discussion->comments_count }}
-                        </span>
-                    @endif
                 @endif
             </div>
             @include('discussions.dropdown')

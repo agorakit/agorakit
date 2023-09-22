@@ -72,12 +72,6 @@ class Discussion extends Model
         }
 
         $userReadDiscussion = $this->userReadDiscussion->first();
-        
-        /*
-        $userReadDiscussion = UserReadDiscussion::where('user_id', Auth::user()->id)
-        ->where('discussion_id', $this->id)
-        ->first();
-        */
 
         if ($userReadDiscussion) {
             return $this->comments->count() - $userReadDiscussion->read_comments +1;
