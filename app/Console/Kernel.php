@@ -39,7 +39,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('agorakit:sendnotifications')
-        ->everyFiveMinutes();
+        ->everyMinute();
 
         $schedule->command('agorakit:checkmailbox')
         ->everyMinute();
