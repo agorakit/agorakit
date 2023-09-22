@@ -36,24 +36,6 @@
 @endif
 
 
-{{--
-@if (Session::has('messages'))
-    <div class="toast-container p-3 bottom-0 end-0">
-        <div class="toast show " role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <strong class="me-auto">Info</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body">
-                @foreach (session('messages') as $message)
-                    <div>{!! $message !!}</div>
-                    <?php session()->pull('messages'); ?>
-                @endforeach
-            </div>
-        </div>
-    </div>
-@endif
---}}
 
 @if (Session::has('warnings'))
     <div class="alert alert-warning" up-hungry>
@@ -70,18 +52,8 @@
     </div>
 @endif
 
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-
 @if (Session::has('errors'))
-    <div class="alert alert-error" up-hungry>
+    <div class="alert alert-danger" up-hungry>
         @foreach (session('errors') as $message)
             <div>{!! $message !!}</div>
             <?php session()->pull('errors'); ?>
