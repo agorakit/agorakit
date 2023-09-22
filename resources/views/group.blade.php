@@ -15,11 +15,14 @@
             @include('partials.nav')
         @endunless
 
+        
+
         <div class="container mt-md-4 p-md-4 p-2">
+
+         @include('partials.errors')
             @include('groups.tabs')
 
             <div class="mt-md-4 mt-2 content" up-main="modal">
-                @include('partials.errors')
                 @yield('content')
             </div>
         </div>
