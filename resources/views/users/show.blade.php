@@ -1,18 +1,15 @@
 @extends('app')
 
 @section('content')
-
     @include('users.tabs')
-
-    @if (Auth::user())
-
+    @auth
         <div class="row">
             <div class="col-12 col-md-6 mb-2 order-md-2">
-                <img src="{{ route('users.cover', [$user, 'medium']) }}" class="rounded" />
+                <img class="rounded" src="{{ route('users.cover', [$user, 'medium']) }}" />
             </div>
 
             <div class="col-12 col-md-6">
-                <h2>
+                <h2 class="mb-1">
                     {{ $user->name }}
                 </h2>
 
@@ -21,30 +18,35 @@
                 </div>
 
                 @if ($user->tags->count() > 0)
-                    <div class="my-1">
+                    <div class="d-flex flex-wrap gap-1 mb-1">
                         @foreach ($user->tags as $tag)
                             @include('tags.tag')
                         @endforeach
                     </div>
                 @endif
 
-                <div>
-                    {{ trans('messages.registered') }} : {{ dateForHumans($user->created_at) }}
+                <div class="text-meta mb-2">
+                    <div>
+                        {{ trans('messages.registered') }} : {{ dateForHumans($user->created_at) }}
+                    </div>
+
+                    <div>
+                        {{ trans('messages.last_activity') }} : {{ $user->updated_at->diffForHumans() }}
+                    </div>
                 </div>
 
-                <div class="my-3">
+                <div class="mb-3">
                     {!! filter($user->body) !!}
                 </div>
 
-                <div>
+                <div class="d-flex flex-wrap gap-1 mb-2">
                     @foreach ($user->groups as $group)
                         @unless ($group->isSecret())
-                            <a href="{{ route('groups.show', [$group]) }}"
-                                class="inline-block bg-gray-300 text-gray-700 rounded-full text-xs px-2 py-1 mr-1 mb-1 no-underline">
+                            <a class="tag" href="{{ route('groups.show', [$group]) }}">
 
                                 @if ($group->isOpen())
                                     <i class="fa fa-globe" title="{{ trans('group.open') }}"></i>
-                                @elseif($group->isClosed())
+                                @elseif ($group->isClosed())
                                     <i class="fa fa-lock" title="{{ trans('group.closed') }}"></i>
                                 @endif
                                 {{ $group->name }}
@@ -53,10 +55,9 @@
                         @endunless
                     @endforeach
                 </div>
+
             </div>
         </div>
 
-    @endif
-
-    </div>
+    @endauth
 @endsection

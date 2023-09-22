@@ -121,16 +121,16 @@ a, p {
 }
 
 .tag {
-    background-color: #f9f7f1;
-    padding: 1px 8px 1px 8px;
+    background-color: #dbd7d1;
+    padding: 1px 7px 1px 7px;
     border-radius: 8px;
-    color: #95948f;
+    color: #63615b;
     text-decoration: none;
+    font-size: 0.9em;
 }
 
 .tag:hover {
-    color: #726f6a;
-    background-color: #dbdac6;
+    background-color: #a7a69a;
     text-decoration: none;
 }
 
