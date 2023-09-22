@@ -25,7 +25,7 @@ class UserController extends Controller
         $this->middleware('throttle:2,1', ['only' => ['mail', 'sendVerificationAgain']]); // 2 emails per  minute should be enough for non bots
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $title = trans('messages.users');
         if (Auth::check()) {
@@ -50,8 +50,14 @@ class UserController extends Controller
                 $q->whereIn('group_id', $groups);
             })
                 ->where('verified', 1)
-                ->orderBy('created_at', 'desc')
-                ->paginate(20);
+                ->orderBy('created_at', 'desc');
+
+            if ($request->has('search')) {
+                $users = $users->search($request->get('search'));
+            }
+
+
+            $users = $users->paginate(20);
 
             return view('dashboard.users')
                 ->with('tab', 'users')
@@ -395,7 +401,8 @@ class UserController extends Controller
             foreach ($message as $txt) {
                 flash($txt);
             }
-            Auth:logout();
+            Auth:
+            logout();
 
             return redirect()->route('index');
         }

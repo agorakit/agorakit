@@ -177,16 +177,6 @@ class GroupDiscussionController extends Controller
         $read_count = $discussion->comments->count() - $unread_count;
         $total_count = $discussion->comments->count();
 
-        /*
-        foreach ($discussion->comments as $comment_key => $comment)
-        {
-            if ($comment_key == $read_count) {
-                $comment->isFirstUnread = true;
-            }
-        }
-        
-       // {{$comment_key}} / {{$read_count}} / {{$total_count}}
-       */
 
         return view('discussions.show')
             ->with('title', $group->name . ' - ' . $discussion->name)
