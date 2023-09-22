@@ -1,3 +1,17 @@
+/**
+ * Unpoly global config 
+ */
+
+// set cache expiration to 5 seconds (instead of the default 15)
+up.network.config.cacheExpireAge = 5_000
+
+// use unpoly on all links by default
+up.link.config.followSelectors.push('a[href]')
+
+
+
+
+
 // Here we put custom compilers for unpoly
 // Check docs here : https://unpoly.com/up.compiler
 
@@ -45,7 +59,7 @@ up.compiler('.wysiwyg', function (element, data) {
 				}));
 			},
 			content: function (item) {
-				setTimeout(() => { $summernote.summernote('insertText',''); }, 100);
+				setTimeout(() => { $summernote.summernote('insertText', ''); }, 100);
 				return '@' + item;
 			}
 		}
@@ -124,14 +138,14 @@ up.compiler('.js-calendar', function (element, data) {
 				var start = new Date(info.start.getTime() - (info.start.getTimezoneOffset() * 60000)).toISOString();
 				var stop = new Date(info.end.getTime() - (info.end.getTimezoneOffset() * 60000)).toISOString();
 				url = create_url + '?start=' + start + '&stop=' + stop
-				up.navigate({url: url, layer: 'new'});
+				up.navigate({ url: url, layer: 'new' });
 			}
 		},
 
 		// show event detail modal on event click
 		eventClick: function (info) {
 			info.jsEvent.preventDefault(); // don't let the browser navigate
-			up.navigate({url: info.event.url, layer: 'new'});
+			up.navigate({ url: info.event.url, layer: 'new' });
 		},
 
 		// add tooltip to all events

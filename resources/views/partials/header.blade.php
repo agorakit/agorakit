@@ -33,9 +33,7 @@
 <link href="https://cdn.jsdelivr.net/npm/unpoly@3.3.0/unpoly.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/unpoly@3.3.0/unpoly-bootstrap5.min.css" rel="stylesheet">
 
-<script>
-    up.link.config.followSelectors.push('a[href]')
-</script>
+
 
 <script src="{{ asset('js/fullcalendar.js') }}"></script>
 <script src="{{ asset('packages/summernote/summernote-lite.min.js') }}"></script>
