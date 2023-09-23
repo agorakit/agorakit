@@ -33,6 +33,13 @@ a, p {
 }
 */
 
+
+.nav-pills .nav-link.active
+{
+background-color: var(--tblr-secondary);
+color: var(--tblr-light);
+} 
+
 .group,
 .container {
     background-color: white;
