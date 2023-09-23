@@ -8,26 +8,24 @@
         </h1>
     </div>
 
-    <div class="flex justify-content-between">
+    <div class="mb-2">
+        @include('partials.preferences-show')
+    </div>
 
-        <div class="flex ">
-            <div class="mr-4">
-                @include('partials.preferences-show')
-            </div>
-            <div>
-                @include('partials.preferences-calendar')
-            </div>
+    <div class="d-flex justify-content-between">
+
+        <div>
+            @include('partials.preferences-calendar')
         </div>
 
         <div class="">
+
             <a class="btn btn-primary" href="{{ route('actions.create') }}">
-                <i class="fas fa-pencil-alt"></i>
                 <span class="hidden md:inline ml-2">
                     {{ trans('action.create_one_button') }}
                 </span>
             </a>
         </div>
-
     </div>
 
     @if ($actions->count() > 0)

@@ -1,15 +1,14 @@
-<div up-expand up-reveal="false" class="d-flex items-start py-3 hover:bg-gray-100 border-b border-gray-300">
+<div up-expand up-scroll="false" class="d-flex items-start pb-3 mb-3 border-bottom">
 
     @if ($group->hasCover())
-        <img class="h-12 w-12 rounded object-cover mx-1  flex-shrink-0"
-            src="{{ route('groups.cover.medium', $group) }}" />
+        <img class="rounded" width="150" src="{{ route('groups.cover.medium', $group) }}" />
     @else
-        <img class="h-12 w-12 rounded object-cover mx-1  flex-shrink-0" src="/images/group.svg" />
+        <img class="rounded" width="150" src="/images/group.svg" />
     @endif
 
-    <div class="mx-2 flex-grow -mt-1">
+    <div class="mx-2 flex-grow ">
 
-        <div class="text-gray-900 text-sm sm:text-base">
+        <div class="">
             <a href="{{ route('groups.show', $group) }}">
                 {{ summary($group->name) }}
             </a>
@@ -23,11 +22,11 @@
             </div>
         @endif
 
-        <div class="text-sm text-gray-700">
+        <div class="">
             {{ summary($group->body, 100) }}
         </div>
 
-        <div class="text-secondary text-xs">
+        <div class="text-meta">
             {{ trans('created at') }}
             {{ $group->created_at->diffForHumans() }} -
             {{ trans('updated at') }}

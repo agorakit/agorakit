@@ -8,7 +8,7 @@
 
     <div class="d-flex justify-content-between mb-3">
         <form class="form-inline" role="search" method="GET" action="{{ route('groups.index') }}" up-autosubmit up-delay="500"
-            up-target=".groups" up-reveal="false">
+            up-target=".groups" up-scroll="false">
             <div class="input-group">
                 <input class="form-control" name="search" type="text" value="{{ Request::get('search') }}"
                     aria-label="Search" placeholder="{{ __('Filter') }}...">

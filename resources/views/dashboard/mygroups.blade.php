@@ -9,7 +9,7 @@
 
 
         <form class="form-inline" role="search" method="GET" action="{{ route('groups.index.my') }}" up-autosubmit
-            up-delay="100" up-target=".groups" up-reveal='false'>
+            up-watch-delay="500" up-target=".groups" up-reveal='false'>
             <div class="input-group">
                 <input value="{{ Request::get('search') }}" class="form-control" type="text" name="search"
                     placeholder="{{ __('Filter') }}..." aria-label="Search">

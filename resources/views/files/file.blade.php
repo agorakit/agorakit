@@ -6,35 +6,37 @@
                 <img class="avatar" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" />
             </a>
         @elseif ($file->isFolder())
-            <a class="" href="{{ route('groups.files.index', ['group' => $file->group, 'parent' => $file]) }}"  up-target=".files" up-history=true>
+            <a class="" href="{{ route('groups.files.index', ['group' => $file->group, 'parent' => $file]) }}"
+                up-target=".files" up-history=true>
                 <img class="avatar" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" />
             </a>
         @else
-            <a class="mr-4 flex-shrink-0" href="{{ route('groups.files.show', [$file->group, $file]) }}"  up-target=".files" >
+            <a class="mr-4 flex-shrink-0" href="{{ route('groups.files.show', [$file->group, $file]) }}"
+                up-target=".files">
                 <img class="avatar" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" />
             </a>
         @endif
     </div>
 
     <div class="w-100 flex-grow">
-        <div class="text-lg">
+        <div class="fw-bold">
             @if ($file->isLink())
                 <a class="" href="{{ $file->path }}" target="_blank">
                     {{ $file->name }}
                 </a>
             @elseif ($file->isFolder())
-                <a href="{{ route('groups.files.index', ['group' => $file->group, 'parent' => $file]) }}" >
+                <a href="{{ route('groups.files.index', ['group' => $file->group, 'parent' => $file]) }}">
                     {{ $file->name }}
                 </a>
             @else
-                <a href="{{ route('groups.files.show', [$file->group, $file]) }}" >
+                <a href="{{ route('groups.files.show', [$file->group, $file]) }}">
                     {{ $file->name }}
                 </a>
             @endif
 
         </div>
 
-        <div class="text-secondary inline">
+        <div class="text-secondary d-flex flex-wrap gap-2">
 
             @if ($file->isArchived())
                 <div class="">
@@ -71,13 +73,13 @@
                 @endif
             </div>
 
-            @if ($file->isLink())
-                <div class="me-2">
-                    <i class="fas fa-link"></i> <a href="{{ $file->path }}" target="_blank">{{ $file->path }}</a>
-                </div>
-            @endif
-
         </div>
+
+        @if ($file->isLink())
+            <div class="me-2">
+                <i class="fas fa-link"></i> <a href="{{ $file->path }}" target="_blank">{{ $file->path }}</a>
+            </div>
+        @endif
 
         @if ($file->getSelectedTags()->count() > 0)
             <div class="text-secondary mt-2">

@@ -7,7 +7,7 @@
             <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.users') }}
         </h1>
 
-        <form class="form-inline" role="search" method="GET" action="{{ route('users') }}" up-autosubmit up-delay="500" up-target=".users" up-reveal="false">
+        <form class="form-inline" role="search" method="GET" action="{{ route('users') }}" up-autosubmit up-delay="500" up-target=".users">
             <div class="input-group">
                 <input class="form-control" name="search" type="text" value="{{ Request::get('search') }}" aria-label="Search" placeholder="{{ __('Filter') }}...">
 

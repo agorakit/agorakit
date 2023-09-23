@@ -8,7 +8,7 @@
                     </a>
                 @endcan
 
-                <form role="search" method="GET" action="{{ route('groups.discussions.index', $group) }}" up-autosubmit up-delay="500" up-target=".discussions">
+                <form role="search" method="GET" action="{{ route('groups.discussions.index', $group) }}" up-autosubmit up-watch-delay="500" up-target=".discussions">
                     <input class="form-control" name="search" type="text" value="{{ Request::get('search') }}" aria-label="Search" placeholder="{{ __('messages.search') }}...">
                 </form>
 
