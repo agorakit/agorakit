@@ -1,6 +1,6 @@
 <ul class="nav nav-pills nav-fill mb-5 mt-2">
     <li class="nav-item">
-        <a href="{{ route('index') }}" class="nav-link @if (isset($tab) && $tab == 'homepage') active @endif">
+        <a href="{{ route('presentation') }}" class="nav-link @if (isset($tab) && $tab == 'homepage') active @endif">
             <i class="fa fa-home"></i> <span class="ms-2 d-none d-lg-inline">{{ trans('messages.presentation') }}</span>
         </a>
     </li>

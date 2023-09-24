@@ -111,14 +111,14 @@ Route::group(['middleware' => ['web']], function () {
 
 
     /*
-    Homepage
+    Dashboard
     ========
 
     Basic homepage for all users, either logged in or not.
     The idea is to provide a group listing (most active first) and a list of groups subscribed to by the current user.
     */
     Route::get('/', 'DashboardController@index')->name('index');
-    Route::get('presentation', 'DashboardController@presentation');
+    Route::get('presentation', 'DashboardController@presentation')->name('presentation');
     Route::get('discussions', 'DiscussionController@index')->name('discussions');
     Route::get('users', 'UserController@index')->name('users');
     Route::get('files', 'FileController@index')->name('files');

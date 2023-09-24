@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-dark sticky-top" data-bs-theme="dark">
     <div class="container-fluid">
         <!-- logo -->
-        <a class="navbar-brand me-3" @auth href="{{ action('DiscussionController@index') }}" @else href="{{ route('index') }} @endauth ">
+        <a class="navbar-brand me-3" href="{{ route('index') }}">
             @if (Storage::exists('public/logo/favicon.png'))
                 <img src="{{ asset('storage/logo/favicon.png') }}" width="40" height="40" />
             @else

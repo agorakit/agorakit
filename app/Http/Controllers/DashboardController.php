@@ -21,14 +21,23 @@ class DashboardController extends Controller
         $this->middleware('verified', ['only' => ['users', 'files', 'activities']]);
     }
 
+    public function index(Request $request)
+    {
+        if (Auth::check()) {
+            return redirect()->route('discussions');
+        } else {
+            return redirect()->route('presentation');
+        }
+    }
+
     /**
      * Main HOMEPAGE.
      *
      * @return Response
      */
-    public function index(Request $request)
+    public function presentation(Request $request)
     {
-       /*if (Auth::check()) {
+        /*if (Auth::check()) {
 
             if (Auth::user()->getPreference('show', 'my') == 'admin') {
                 // build a list of groups the user has access to
@@ -79,6 +88,15 @@ class DashboardController extends Controller
         } else { // anonymous user
             */
 
+
+        if (Auth::check()) {
+            $groups = $request->user()->groups();
+            $groups = $groups->with('tags', 'users', 'actions', 'discussions')
+            ->orderBy('status', 'desc')
+            ->orderBy('updated_at', 'desc');
+            $groups = $groups->simplePaginate(20)->appends(request()->query());
+        } else {
+
             $groups = new Group();
             $groups = $groups->notSecret();
 
@@ -87,12 +105,12 @@ class DashboardController extends Controller
                 ->orderBy('updated_at', 'desc');
 
             $groups = $groups->paginate(20)->appends(request()->query());
+        }
 
-            
 
-            return view('dashboard.presentation')
-                ->with('groups', $groups)
-                ->with('tab', 'homepage');
+        return view('dashboard.presentation')
+            ->with('groups', $groups)
+            ->with('tab', 'homepage');
         //}
     }
 }
