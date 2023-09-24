@@ -19,10 +19,6 @@
         </div>
     @endguest
 
-    <h1>
-        {{ setting('name') }}
-    </h1>
-
     <div class="mb-3">
         @auth
             @if (setting()->localized()->get('homepage_presentation_for_members'))
