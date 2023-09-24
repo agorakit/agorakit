@@ -79,31 +79,4 @@
 
     </div>
 
-    @if ($discussions)
-        @include('discussions.list', ['discussions' => $discussions])
-    @endif
-
-    @if ($actions)
-        @if ($actions->count() > 0)
-            <h2 class="mt-4">
-                <a href="{{ route('groups.actions.index', $group) }}">{{ trans('messages.agenda') }}</a>
-            </h2>
-            <div class="actions">
-                @include('actions.list', ['actions' => $actions])
-            </div>
-        @endif
-    @endif
-
-    @if ($files)
-        @if ($files->count() > 0)
-            <h2 class="mb-4 mt-5"><a
-                    href="{{ route('groups.files.index', $group) }}">{{ trans('group.latest_files') }}</a></h2>
-            <div class="files">
-                @forelse( $files as $file )
-                    @include('files.file')
-                @endforeach
-            </div>
-        @endif
-    @endif
-
 @endsection

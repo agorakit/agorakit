@@ -1,15 +1,13 @@
 @extends('app')
 
 @section('content')
+    <div class="mb-2">
+        @include('dashboard.tabs')
+    </div>
 
-    <h1><a href="{{ route('index') }}" ><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
-        {{ trans('messages.files') }}</h1>
-
-    <div class="flex">
+    <div class="d-flex flex-wrap gap-2">
         @include('partials.tags_filter')
-        <div class="ml-auto">
-            @include ('partials.preferences-show')
-        </div>
+        @include ('partials.preferences-show')
     </div>
 
     <div class="mt-4">

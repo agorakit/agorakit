@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-dark sticky-top" data-bs-theme="dark">
     <div class="container-fluid">
         <!-- logo -->
-        <a class="navbar-brand me-3" href="{{ route('index') }}">
+        <a class="navbar-brand me-3" @auth href="{{ action('DiscussionController@index') }}" @else href="{{ route('index') }} @endauth ">
             @if (Storage::exists('public/logo/favicon.png'))
                 <img src="{{ asset('storage/logo/favicon.png') }}" width="40" height="40" />
             @else
@@ -34,45 +34,7 @@
                     @endif
                 @endauth
 
-                <!-- Overview -->
-                <li class="nav-item dropdown">
-
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-toggle="dropdown"
-                        href="#" role="button" aria-expanded="false">
-                        @lang('Overview')
-                    </a>
-
-                    <ul class="dropdown-menu">
-
-                        <a class="dropdown-item" class="dropdown-item" href="{{ action('GroupController@index') }}">
-                            {{ trans('messages.all_groups') }}
-                        </a>
-
-                        <a class="dropdown-item " href="{{ action('DiscussionController@index') }}">
-                            {{ trans('messages.discussions') }}
-                        </a>
-
-                        <a class="dropdown-item" href="{{ action('ActionController@index') }}">
-                            {{ trans('messages.agenda') }}
-                        </a>
-                        @auth
-                            <a class="dropdown-item" href="{{ action('TagController@index') }}">
-                                @lang('Tags')
-                            </a>
-
-                            <a class="dropdown-item" href="{{ action('MapController@index') }}">
-                                {{ trans('messages.map') }}
-                            </a>
-                            <a class="dropdown-item" href="{{ action('FileController@index') }}">
-                                {{ trans('messages.files') }}
-                            </a>
-
-                            <a class="dropdown-item" href="{{ action('UserController@index') }}">
-                                {{ trans('messages.users_list') }}
-                            </a>
-                        @endauth
-                    </ul>
-                </li>
+               
 
                 <!-- help -->
                 @auth

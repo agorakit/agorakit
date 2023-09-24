@@ -177,7 +177,7 @@
         <li class="nav-item">
             <a class="nav-link @if (isset($tab) && $tab == 'home') active @endif"
                 href="{{ route('groups.show', $group) }}" title="{{ trans('messages.group_home') }}">
-                <i class="fa fa-info-circle me-2"></i>
+                <i class="fa fa-info-circle"></i>
             </a>
         </li>
 
@@ -187,7 +187,7 @@
                     <a class="nav-link @if (isset($tab) && $tab == 'discussion') active @endif"
                         href="{{ route('groups.discussions.index', $group) }}"
                         title="{{ trans('messages.discussions') }}">
-                        <i class="fa fa-comments me-2"></i>
+                        <i class="fa fa-comments"></i>
                     </a>
                 </li>
             @endcan
@@ -198,7 +198,7 @@
                 <li class="nav-item">
                     <a class="nav-link @if (isset($tab) && $tab == 'action') active @endif"
                         href="{{ route('groups.actions.index', $group) }}" title="{{ trans('messages.agenda') }}">
-                        <i class="fa fa-calendar me-2"></i>
+                        <i class="fa fa-calendar"></i>
                     </a>
                 </li>
             @endcan
@@ -209,7 +209,7 @@
                 <li class="nav-item">
                     <a class="nav-link @if (isset($tab) && $tab == 'files') active @endif"
                         href="{{ route('groups.files.index', $group) }}" title=" {{ trans('messages.files') }}">
-                        <i class="fa fa-files-o  me-2"></i>
+                        <i class="fa fa-files-o"></i>
                     </a>
                 </li>
             @endcan

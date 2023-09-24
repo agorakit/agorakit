@@ -28,7 +28,7 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
-        if (Auth::check()) {
+       /*if (Auth::check()) {
 
             if (Auth::user()->getPreference('show', 'my') == 'admin') {
                 // build a list of groups the user has access to
@@ -77,6 +77,7 @@ class DashboardController extends Controller
                 ->with('actions', $actions)
                 ->with('files', $files);
         } else { // anonymous user
+            */
 
             $groups = new Group();
             $groups = $groups->notSecret();
@@ -92,6 +93,6 @@ class DashboardController extends Controller
             return view('dashboard.presentation')
                 ->with('groups', $groups)
                 ->with('tab', 'homepage');
-        }
+        //}
     }
 }

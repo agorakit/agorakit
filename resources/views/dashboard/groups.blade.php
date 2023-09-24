@@ -2,11 +2,11 @@
 
 @section('content')
 
-    <h1><a href="{{ route('index') }}" ><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
-        {{ trans('messages.all_groups') }}
-    </h1>
+    <div class="mb-2">
+        @include('dashboard.tabs')
+    </div>
 
-    <div class="d-flex justify-content-between mb-3">
+    <div class="d-flex justify-content-between mb-4">
         <form class="form-inline" role="search" method="GET" action="{{ route('groups.index') }}" up-autosubmit up-delay="500"
             up-target=".groups" up-scroll="false">
             <div class="input-group">
@@ -20,7 +20,7 @@
 
         @can('create', \App\Group::class)
             <div>
-                <a class="btn btn-primary" href="{{ route('groups.create') }}" >
+                <a class="btn btn-primary" href="{{ route('groups.create') }}">
                     {{ trans('group.create_a_group_button') }}
                 </a>
             </div>
@@ -34,11 +34,7 @@
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 
                 @foreach ($groups as $group)
-                    
-
-                        @include('groups.group')
-
-         
+                    @include('groups.group')
                 @endforeach
             </div>
             {!! $groups->links() !!}

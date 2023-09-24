@@ -1,15 +1,9 @@
 @extends('app')
 
 @section('content')
-    <div class="d-flex ">
-        <h1>
-            <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
-            {{ trans('messages.agenda') }}
-        </h1>
-    </div>
 
     <div class="mb-2">
-        @include('partials.preferences-show')
+        @include('dashboard.tabs')
     </div>
 
     <div class="d-flex justify-content-between">

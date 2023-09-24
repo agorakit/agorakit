@@ -2,24 +2,24 @@
 
 @section('content')
 
-    <div class="d-flex flex-wrap justify-content-between">
-        <h1 class="mb-2">
-            <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('messages.users') }}
-        </h1>
+    <div class="mb-2">
+        @include('dashboard.tabs')
+    </div>
 
-        <form class="form-inline" role="search" method="GET" action="{{ route('users') }}" up-autosubmit up-delay="500" up-target=".users">
+    <div class="d-flex flex-wrap justify-content-between mb-3">
+
+        @include ('partials.preferences-show')
+        <form class="form-inline" role="search" method="GET" action="{{ route('users') }}" up-autosubmit up-delay="500"
+            up-target=".users">
             <div class="input-group">
-                <input class="form-control" name="search" type="text" value="{{ Request::get('search') }}" aria-label="Search" placeholder="{{ __('Filter') }}...">
+                <input class="form-control" name="search" type="text" value="{{ Request::get('search') }}"
+                    aria-label="Search" placeholder="{{ __('Filter') }}...">
 
                 <button class="btn btn-secondary" type="submit"><span class="fa fa-search"></span></button>
 
             </div>
         </form>
 
-    </div>
-
-    <div class="mb-4">
-        @include ('partials.preferences-show')
     </div>
 
     <div class="users">
