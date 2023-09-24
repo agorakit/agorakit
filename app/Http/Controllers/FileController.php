@@ -52,14 +52,11 @@ class FileController extends Controller
         }
 
 
-
-
         $files = \App\File::with('group', 'user', 'tags')
             ->when($tag, function ($query) use ($tag) {
                 return $query->withAnyTags($tag);
             })
             ->whereIn('group_id', $groups)
-            ->orderBy('status', 'desc')
             ->orderBy('created_at', 'desc')
             ->paginate(25);
         

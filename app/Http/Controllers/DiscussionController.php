@@ -60,7 +60,6 @@ class DiscussionController extends Controller
             ->when($tag, function ($query) use ($tag) {
                 return $query->withAnyTags($tag);
             })
-            ->orderBy('status', 'desc')
             ->orderBy('updated_at', 'desc')
             ->paginate(25);
         }
