@@ -15,7 +15,7 @@
 
     </div>
 
-    <div class="mt-4">
+    <div class="mt-4" up-poll>
         @forelse($discussions as $discussion)
             @include('discussions.discussion')
         @empty
