@@ -94,13 +94,13 @@ class ActionController extends Controller
 
         // load of actions between start and stop provided by calendar js
         if ($request->has('start') && $request->has('end')) {
-            $actions = \App\Action::with('group')
+            $actions = \App\Action::with('group', 'attending')
                 ->where('start', '>', Carbon::parse($request->get('start')))
                 ->where('stop', '<', Carbon::parse($request->get('end')))
                 ->whereIn('group_id', $groups)
                 ->orderBy('start', 'asc')->get();
         } else { // return current month
-            $actions = \App\Action::with('group')
+            $actions = \App\Action::with('group', 'attending')
                 ->orderBy('start', 'asc')
                 ->where('start', '>', Carbon::now()->subMonth())
                 ->where('stop', '<', Carbon::now()->addMonth())
@@ -118,12 +118,12 @@ class ActionController extends Controller
             $event['body'] = strip_tags(summary($action->body));
             $event['summary'] = strip_tags(summary($action->body));
 
-            // this seems super slow, need rework : 
-            /*if ($action->attending()->count() > 0) {
+            
+            if ($action->attending()->count() > 0) {
                 $event['summary'] .= '<br/><br/><strong>' . trans('messages.user_attending') . '</strong><br/>';
                 $event['summary'] .= implode(', ', $action->attending()->pluck('username')->toArray());
             }
-            */
+            
 
             $event['location'] = $action->location;
             $event['start'] = $action->start->toIso8601String();
