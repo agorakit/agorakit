@@ -7,8 +7,6 @@
     </div>
 
     <div class="d-flex flex-wrap justify-content-between mb-3">
-
-        @include ('partials.preferences-show')
         <form class="form-inline" role="search" method="GET" action="{{ route('users') }}" up-autosubmit up-delay="500"
             up-target=".users">
             <div class="input-group">

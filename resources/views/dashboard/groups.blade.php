@@ -6,7 +6,7 @@
         @include('dashboard.tabs')
     </div>
 
-    <div class="d-flex justify-content-between mb-4">
+    <div class="d-flex justify-content-between mb-4 gap-2 flex-wrap">
         <form class="form-inline" role="search" method="GET" action="{{ route('groups.index') }}" up-autosubmit up-delay="500"
             up-target=".groups" up-scroll="false">
             <div class="input-group">

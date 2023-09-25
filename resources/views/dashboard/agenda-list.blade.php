@@ -6,8 +6,6 @@
     </div>
 
     <div class="d-flex flex-wrap gap-2 justify-content-between mb-2">
-        @include ('partials.preferences-show')
-
         <a class="btn btn-primary" href="{{ route('actions.create') }}">
             <span class="hidden md:inline ml-2">
                 {{ trans('action.create_one_button') }}

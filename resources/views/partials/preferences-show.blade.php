@@ -1,15 +1,8 @@
 @auth
     <div class="dropdown">
-        <a class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+        <a class="btn btn-secondary-outline dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            @if (Auth::user()->getPreference('show', 'my') == 'my')
-                {{ __('Show my groups') }}
-            @elseif (Auth::user()->getPreference('show', 'my') == 'all')
-                {{ __('Show all groups') }}
-            @elseif (Auth::user()->getPreference('show', 'my') == 'admin')
-                {{ __('Show all groups (admin overview)') }}
-            @endif
-
+            <i class="fa fa-cog text-secondary"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a href="?set_preference=show&value=my" class="dropdown-item @if (Auth::user()->getPreference('show', 'my') == 'my') active @endif">

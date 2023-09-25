@@ -1,12 +1,15 @@
- <h1 class="text-truncate">
-     <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
-     {{ trans('Overview') }}
- </h1>
+ <div class="d-flex gap-2 justify-content-between">
+     <h1 class="text-truncate">
+         <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
+         {{ trans('Overview') }}
+     </h1>
+     @include ('partials.preferences-show')
+ </div>
 
  <ul class="nav nav-pills nav-fill mb-5 mt-2">
      <li class="nav-item">
          <a href="{{ route('presentation') }}" class="nav-link @if (isset($tab) && $tab == 'homepage') active @endif">
-             <i class="fa fa-home"></i> <span class="ms-2 d-none d-lg-inline">{{ trans('messages.presentation') }}</span>
+             <i class="fas fa-info-circle"></i> <span class="ms-2 d-none d-lg-inline">{{ trans('messages.presentation') }}</span>
          </a>
      </li>
 

@@ -2,12 +2,6 @@
 
 @section('content')
     <div id="homepage" up-poll up-interval="60000">
-        @auth
-            <div>
-                @include('partials.preferences-show')
-            </div>
-        @endauth
-
         @if (Auth::user()->groups()->count() > 0)
             <div class="row">
                 <div class="col-lg-8 col-12">

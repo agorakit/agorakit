@@ -2,11 +2,6 @@
 
 @section('content')
 
-
-
-
-
-
   <div class="d-flex justify-content-between">
     <h1 class="name mb-4">
       <a  href="{{ route('index') }}">
@@ -15,15 +10,7 @@
       @lang('Tags')
     </h1>
 
-    @auth
-      <div class="d-flex mb-2">
-        @include('partials.preferences-show')
-      </div>
-    @endauth
-
   </div>
-
-
 
   <div class="d-flex gap-1 flex-wrap">
       @forelse( $tags as $tag )

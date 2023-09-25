@@ -6,7 +6,6 @@
     </div>
 
     <div class="d-flex flex-wrap gap-2 justify-content-between">
-        @include ('partials.preferences-show')
         <div>
             <a class="btn btn-primary" href="{{ route('discussions.create') }}">
                 {{ trans('discussion.create_one_button') }}

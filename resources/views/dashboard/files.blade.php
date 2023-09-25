@@ -7,7 +7,6 @@
 
     <div class="d-flex flex-wrap gap-2">
         @include('partials.tags_filter')
-        @include ('partials.preferences-show')
     </div>
 
     <div class="mt-4">
