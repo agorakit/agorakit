@@ -119,9 +119,9 @@ class ActionController extends Controller
             $event['summary'] = strip_tags(summary($action->body));
 
             
-            if ($action->attending()->count() > 0) {
+            if ($action->attending->count() > 0) {
                 $event['summary'] .= '<br/><br/><strong>' . trans('messages.user_attending') . '</strong><br/>';
-                $event['summary'] .= implode(', ', $action->attending()->pluck('username')->toArray());
+                $event['summary'] .= implode(', ', $action->attending->pluck('username')->toArray());
             }
             
 
