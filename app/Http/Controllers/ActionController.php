@@ -99,9 +99,11 @@ class ActionController extends Controller
                 ->where('stop', '<', Carbon::parse($request->get('end')))
                 ->whereIn('group_id', $groups)
                 ->orderBy('start', 'asc')->get();
-        } else {
+        } else { // return current month
             $actions = \App\Action::with('group')
                 ->orderBy('start', 'asc')
+                ->where('start', '>', Carbon::now()->subMonth())
+                ->where('stop', '<', Carbon::now()->addMonth())
                 ->whereIn('group_id', $groups)
                 ->get();
         }
