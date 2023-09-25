@@ -33,6 +33,9 @@ up.compiler('.wysiwyg', function (element, data) {
 
 	var $summernote = $(element).summernote({
 
+		minHeight: 200,
+		maxHeight: 600,
+
 		toolbar: [
 			['style', ['style']],
 			['font', ['bold', 'underline', 'clear']],
@@ -66,8 +69,18 @@ up.compiler('.wysiwyg', function (element, data) {
 	});
 
 
-
 });
+
+/*
+// fix summernote dropdown for bootstrap
+up.compiler('.note-toolbar', function (element) {
+	var noteBar = $(element)
+	noteBar.find('[data-toggle]').each(function () {
+		$(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-toggle');
+	});
+});
+*/
+
 
 /**
  * This function upload a file to the server and in return it will get a file id, to add f:xxx to the thextarea 
@@ -186,7 +199,7 @@ up.$compiler('.js-tags', function ($element, data) {
 - scroll to first unread item
 */
 up.compiler('#unread', function (element) {
-	up.reveal(element, {behavior: "instant"})
+	up.reveal(element, { behavior: "instant" })
 });
 
 
@@ -215,7 +228,7 @@ up.$compiler('.data-table', function ($element) {
 	});
 });
 
-/* external links */
+/* Open external links in new window */
 // Taken from : https://gist.github.com/CrocoDillon/7989214
 // vanilla JavaScript
 
@@ -223,24 +236,6 @@ up.compiler('a', function (element) {
 	if (element.hostname != window.location.hostname) {
 		element.target = '_blank';
 	}
-});
-
-
-/*
-Reloads every xx seconds using poll automagically
-*/
-up.$compiler('.poll', function ($element, data) {
-	console.log(data)
-	var interval = parseInt($element.attr('poll') || 10000);
-	var timer = setInterval(function () {
-		if (!document.hidden) {
-			up.replace("#live-content", data.url, {
-				history: false,
-				cache: false
-			})
-		}
-	}, interval);
-	return function () { clearInterval(timer) } // stop polling when element is removed
 });
 
 

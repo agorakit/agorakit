@@ -9,54 +9,52 @@
 
 <link href="{{ route('pwa.index') }}" rel="manifest">
 
-<!-- font awesome -->
-
+{{-- font awesome --}}
 <link href="{{ asset('/fonts/fontawesome/css/all.min.css') }}" rel="stylesheet">
 <link href="{{ asset('/fonts/fontawesome/css/v4-shims.min.css') }}" rel="stylesheet">
 
-<!-- jquery -->
+{{-- jquery --}}
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"
     integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous" defer></script>
 
-<!-- summernote -->
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js" defer></script>
-
-<!-- full calendar -->
+{{-- full calendar --}}
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js' defer></script>
 <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.9/locales-all.global.min.js' defer></script>
 
-<!-- additional css from modules -->
-<link href="{{ asset('/css/datatables.min.css') }}" rel="stylesheet">
-<link href="{{ asset('/css/select2.min.css') }}" rel="stylesheet">
-
-<!-- unpoly -->
-
+{{-- unpoly --}}
 <script src="https://cdn.jsdelivr.net/npm/unpoly@3.3.0/unpoly.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/unpoly@3.3.0/unpoly-migrate.min.js" defer></script>
 <link href="https://cdn.jsdelivr.net/npm/unpoly@3.3.0/unpoly.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/unpoly@3.3.0/unpoly-bootstrap5.min.css" rel="stylesheet">
 
-
+{{-- datatables --}}
 <script src="{{ asset('js/datatables.min.js') }}" defer></script>
+<link href="{{ asset('/css/datatables.min.css') }}" rel="stylesheet">
+
+{{-- select 2 --}}
+<link href="{{ asset('/css/select2.min.css') }}" rel="stylesheet">
 <script src="{{ asset('js/select2.min.js') }}" defer></script>
-<script src="{{ asset('js/compilers.js?v=' . filemtime(public_path('js/compilers.js'))) }}" defer></script>
 
-<!-- tabler.io -->
-
+{{-- tabler.io --}}
 <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta19/dist/js/tabler.min.js" defer></script>
 <link href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta19/dist/css/tabler.min.css" rel="stylesheet">
 
+{{-- summernote, lite version does not rely on bootstrap --}}
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js" defer></script>
+
+{{-- unpoly compilers --}}
+<script src="{{ asset('js/compilers.js?v=' . filemtime(public_path('js/compilers.js'))) }}" defer></script>
+
 <link href="{{ asset('/css/custom.css') }}" rel="stylesheet">
 
-<!-- additional css -->
-
+{{-- additional css --}}
 @yield('css')
 @stack('css')
 
-<!-- additional js -->
+{{-- additional js --}}
 @yield('js')
 @stack('js')
 
-<!-- head -->
+{{-- head --}}
 @yield('head')
