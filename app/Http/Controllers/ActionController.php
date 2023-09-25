@@ -94,13 +94,13 @@ class ActionController extends Controller
 
         // load of actions between start and stop provided by calendar js
         if ($request->has('start') && $request->has('end')) {
-            $actions = \App\Action::with('group', 'attending')
+            $actions = \App\Action::with('group')
                 ->where('start', '>', Carbon::parse($request->get('start')))
                 ->where('stop', '<', Carbon::parse($request->get('end')))
                 ->whereIn('group_id', $groups)
                 ->orderBy('start', 'asc')->get();
         } else {
-            $actions = \App\Action::with('group', 'attending')
+            $actions = \App\Action::with('group')
                 ->orderBy('start', 'asc')
                 ->whereIn('group_id', $groups)
                 ->get();
@@ -113,12 +113,15 @@ class ActionController extends Controller
             $event['id'] = $action->id;
             $event['title'] = $action->name;
             $event['description'] = $action->body . ' <br/> ' . $action->location;
-            $event['body'] = strip_tags($action->body);
+            $event['body'] = strip_tags(summary($action->body));
             $event['summary'] = strip_tags(summary($action->body));
-            if ($action->attending()->count() > 0) {
+
+            // this seems super slow, need rework : 
+            /*if ($action->attending()->count() > 0) {
                 $event['summary'] .= '<br/><br/><strong>' . trans('messages.user_attending') . '</strong><br/>';
                 $event['summary'] .= implode(', ', $action->attending()->pluck('username')->toArray());
             }
+            */
 
             $event['location'] = $action->location;
             $event['start'] = $action->start->toIso8601String();
