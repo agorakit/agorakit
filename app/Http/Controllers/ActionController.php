@@ -100,7 +100,7 @@ class ActionController extends Controller
                 ->whereIn('group_id', $groups)
                 ->orderBy('start', 'asc')->get();
         } else {
-            $actions = \App\Action::with('group')
+            $actions = \App\Action::with('group', 'attending')
                 ->orderBy('start', 'asc')
                 ->whereIn('group_id', $groups)
                 ->get();
@@ -113,8 +113,8 @@ class ActionController extends Controller
             $event['id'] = $action->id;
             $event['title'] = $action->name;
             $event['description'] = $action->body . ' <br/> ' . $action->location;
-            $event['body'] = filter($action->body);
-            $event['summary'] = summary($action->body);
+            $event['body'] = strip_tags($action->body);
+            $event['summary'] = strip_tags(summary($action->body));
             if ($action->attending()->count() > 0) {
                 $event['summary'] .= '<br/><br/><strong>' . trans('messages.user_attending') . '</strong><br/>';
                 $event['summary'] .= implode(', ', $action->attending()->pluck('username')->toArray());
