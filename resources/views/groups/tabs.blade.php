@@ -151,7 +151,7 @@
 </div>
 
 {{-- tabs for mobile size screens : --}}
-<div class="mb-4 d-md-none ">
+<div class="mb-4 mt-2 d-md-none ">
 
     <h1 class="text-truncate">
         <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>

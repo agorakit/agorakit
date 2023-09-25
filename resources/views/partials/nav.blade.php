@@ -1,14 +1,31 @@
 <nav class="navbar navbar-expand-lg bg-dark sticky-top" data-bs-theme="dark" up-fixed="top">
     <div class="container-fluid">
         <!-- logo -->
-        <a class="navbar-brand me-3" href="{{ route('index') }}">
+        <a class="navbar-brand" href="{{ route('index') }}">
             @if (Storage::exists('public/logo/favicon.png'))
                 <img src="{{ asset('storage/logo/favicon.png') }}" width="40" height="40" />
             @else
                 <img src="/images/logo-white.svg" width="40" height="40" />
             @endif
-            <span class="">{{ setting('name') }}</span>
+            <span class="d-none d-md-inline">{{ setting('name') }}</span>
         </a>
+
+        @auth
+            @if (Auth::user()->groups()->count() > 0)
+                <div class="dropdown d-lg-none">
+                    <a class="dropdown-toggle nav-link fs-2" data-bs-toggle="dropdown" href="#" role="button"
+                        aria-haspopup="true" aria-expanded="false">
+                        {{ trans('messages.my_groups') }}
+                    </a>
+                    <div class="dropdown-menu">
+                        @foreach (Auth::user()->groups()->orderBy('name')->get() as $group)
+                            <a class="dropdown-item" href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+
+        @endauth
 
         <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar" type="button"
             aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,8 +50,6 @@
                         </li>
                     @endif
                 @endauth
-
-               
 
                 <!-- help -->
                 @auth
