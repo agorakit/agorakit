@@ -401,8 +401,8 @@ class UserController extends Controller
             foreach ($message as $txt) {
                 flash($txt);
             }
-            Auth:
-            logout();
+
+            Auth::logout();
 
             return redirect()->route('index');
         }
