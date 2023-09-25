@@ -9,6 +9,7 @@ up.network.config.cacheExpireAge = 5_000
 up.link.config.followSelectors.push('a[href]')
 
 
+up.viewport.config.revealTop = true;
 
 
 
@@ -187,23 +188,8 @@ up.$compiler('.js-tags', function ($element, data) {
 - scroll to first unread item
 */
 
-
 up.compiler('#unread', function (element) {
-	console.log(element);
-	element.scrollIntoView({
-		block: 'start',
-		behavior: 'instant',
-		inline: 'nearest'
-	});
-});
-
-up.compiler('#last_read', function (element) {
-	console.log(element);
-	element.scrollIntoView({
-		block: 'center',
-		behavior: 'instant',
-		inline: 'nearest'
-	});
+	up.reveal(element, {behavior: "instant"})
 });
 
 

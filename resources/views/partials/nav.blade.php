@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-dark sticky-top" data-bs-theme="dark">
+<nav class="navbar navbar-expand-lg bg-dark sticky-top" data-bs-theme="dark" up-fixed="top">
     <div class="container-fluid">
         <!-- logo -->
         <a class="navbar-brand me-3" href="{{ route('index') }}">

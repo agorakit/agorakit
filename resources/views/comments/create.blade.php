@@ -3,7 +3,6 @@
     'files' => true,
     'up-target' => '.comments',
     'up-reveal' => '#unread',
-    'up-restore-scroll' => 'true',
 ]) !!}
 
 <div class="form-group">
