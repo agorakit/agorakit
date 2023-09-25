@@ -112,7 +112,7 @@ class ActionController extends Controller
         foreach ($actions as $action) {
             $event['id'] = $action->id;
             $event['title'] = $action->name;
-            $event['description'] = $action->body . ' <br/> ' . $action->location;
+            $event['description'] = strip_tags(summary($action->body)) . ' <br/> ' . $action->location;
             $event['body'] = strip_tags(summary($action->body));
             $event['summary'] = strip_tags(summary($action->body));
 
