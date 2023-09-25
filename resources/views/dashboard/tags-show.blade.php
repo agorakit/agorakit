@@ -11,13 +11,6 @@
             </a>
 
         </h1>
-
-        @auth
-            <div class="d-flex mb-2">
-                @include('partials.preferences-show')
-            </div>
-        @endauth
-
     </div>
 
     @if ($discussions->count() > 0)
