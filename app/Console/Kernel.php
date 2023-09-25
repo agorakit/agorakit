@@ -14,19 +14,13 @@ class Kernel extends ConsoleKernel
     */
     protected $commands = [
         \App\Console\Commands\SendNotifications::class,
-        \App\Console\Commands\ConvertFiles::class,
-        \App\Console\Commands\ConvertFoldersToTags::class,
-        \App\Console\Commands\ImportActions::class,
-        \App\Console\Commands\PopulateFilesize::class,
         \App\Console\Commands\CheckMailbox::class,
-        \App\Console\Commands\ProcessMessages::class,
         \App\Console\Commands\DeleteFiles::class,
         \App\Console\Commands\CleanupDatabase::class,
         \App\Console\Commands\SendReminders::class,
         \App\Console\Commands\ExportGroup::class,
         \App\Console\Commands\ImportGroup::class,
-        \App\Console\Commands\EnforceUniqueUsernames::class,
-        \App\Console\Commands\EnforceUniqueGroupSlugs::class,
+
     ];
 
     /**
@@ -42,9 +36,6 @@ class Kernel extends ConsoleKernel
         ->everyMinute();
 
         $schedule->command('agorakit:checkmailbox')
-        ->everyMinute();
-
-        $schedule->command('agorakit:processmessages')
         ->everyMinute();
 
         $schedule->command('agorakit:sendreminders')

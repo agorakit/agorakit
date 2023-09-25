@@ -40,7 +40,7 @@
             <i class="fas fa-info-circle"></i>
             @lang('Use this to set your password or to change it. Minimum 8 characters.')
         </div>
-        {!! Form::password('password', ['class' => 'form-control', 'minlength'=> '8']) !!}
+        {!! Form::password('password', ['class' => 'form-control', 'minlength'=> '8', 'autocomplete'=>'new-password']) !!}
     </div>
 
     <div class="mt-2">
@@ -49,7 +49,7 @@
             <i class="fas fa-info-circle"></i>
             @lang('Re-type your password')
         </div>
-        {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
+        {!! Form::password('password_confirmation', ['class' => 'form-control', 'autocomplete'=>'new-password']) !!}
     </div>
 
 </div>
