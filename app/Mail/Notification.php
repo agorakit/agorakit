@@ -52,9 +52,6 @@ class Notification extends Mailable
             if ($this->discussions->count() > 0) {
                 $message->replyTo($this->discussions->first()->inbox(), $this->group->name);
                 $message->withSwiftMessage(function ($message) {
-                    $message_id = $message->getHeaders()->get('Message-ID');
-                    $message_id->setValue($this->discussions->first()->inbox());
-
                     $message->getHeaders()->addTextHeader(
                         'References',
                         $this->discussions->first()->inbox()
