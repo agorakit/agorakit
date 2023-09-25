@@ -94,7 +94,7 @@ class ActionController extends Controller
 
         // load of actions between start and stop provided by calendar js
         if ($request->has('start') && $request->has('end')) {
-            $actions = \App\Action::with('group')
+            $actions = \App\Action::with('group', 'attending')
                 ->where('start', '>', Carbon::parse($request->get('start')))
                 ->where('stop', '<', Carbon::parse($request->get('end')))
                 ->whereIn('group_id', $groups)
@@ -117,7 +117,7 @@ class ActionController extends Controller
             $event['summary'] = summary($action->body);
             if ($action->attending()->count() > 0) {
                 $event['summary'] .= '<br/><br/><strong>' . trans('messages.user_attending') . '</strong><br/>';
-                $event['summary'] .= implode(', ', $action->attending()->pluck('name')->toArray());
+                $event['summary'] .= implode(', ', $action->attending()->pluck('username')->toArray());
             }
 
             $event['location'] = $action->location;
