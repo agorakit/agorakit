@@ -46,7 +46,7 @@
 {{-- unpoly compilers --}}
 <script src="{{ asset('js/compilers.js?v=' . filemtime(public_path('js/compilers.js'))) }}" defer></script>
 
-<link href="{{ asset('/css/custom.css') }}" rel="stylesheet">
+<link href="{{ asset('/css/custom.css?v=' . filemtime(public_path('css/custom.css'))) }}" rel="stylesheet">
 
 {{-- additional css --}}
 @yield('css')
