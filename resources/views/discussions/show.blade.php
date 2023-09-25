@@ -53,16 +53,9 @@
                     <div>
                         @include ('reactions.reactions', ['model' => $discussion])
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-
-        {{--
-    {{$read_count}} / {{$total_count}}
-    --}}
 
         <div class="comments">
             @foreach ($discussion->comments as $comment_key => $comment)

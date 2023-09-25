@@ -8,7 +8,7 @@ up.network.config.cacheExpireAge = 5_000
 // use unpoly on all links by default
 up.link.config.followSelectors.push('a[href]')
 
-
+// reveal content from the top of it
 up.viewport.config.revealTop = true;
 
 
@@ -20,7 +20,6 @@ up.viewport.config.revealTop = true;
 /*
 To enable a wysiwyg editor, add a .wysiwyg class to a textarea
 
-You can also provide a json url for ckeditor mention plugin
 - data-mention-users-list should contain a json encoded list of users
 - data-mention-discussions REDO TODO
 - data-mention-files	REDO TODO
@@ -115,8 +114,6 @@ Add a calendar to any div with the calendar class
 */
 
 up.compiler('.js-calendar', function (element, data) {
-
-
 	var initialView = (localStorage.getItem("fcDefaultView") !== null ? localStorage.getItem("fcDefaultView") : "dayGridMonth");
 	var json = element.getAttribute("data-json")
 	var locale = element.getAttribute("data-locale")
@@ -157,6 +154,7 @@ up.compiler('.js-calendar', function (element, data) {
 
 		// store the current view type on each view change
 		viewDidMount: function (info) {
+			console.log(info.view.type);
 			localStorage.setItem("fcDefaultView", info.view.type);
 		}
 
@@ -187,7 +185,6 @@ up.$compiler('.js-tags', function ($element, data) {
 /*
 - scroll to first unread item
 */
-
 up.compiler('#unread', function (element) {
 	up.reveal(element, {behavior: "instant"})
 });

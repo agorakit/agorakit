@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Group;
 
+
 /**
 
  * Global listing of actions.
@@ -32,17 +33,17 @@ class ActionController extends Controller
                     // build a list of groups the user has access to
                     if (Auth::user()->isAdmin()) { // super admin sees everything
                         $groups = Group::get()
-                        ->pluck('id');
-                    } 
-                } 
-    
+                            ->pluck('id');
+                    }
+                }
+
                 if (Auth::user()->getPreference('show', 'my') == 'all') {
-                        $groups = Group::public()
+                    $groups = Group::public()
                         ->get()
                         ->pluck('id')
                         ->merge(Auth::user()->groups()->pluck('groups.id'));
-                } 
-                
+                }
+
                 if (Auth::user()->getPreference('show', 'my') == 'my') {
                     $groups = Auth::user()->groups()->pluck('groups.id');
                 }
@@ -73,17 +74,17 @@ class ActionController extends Controller
             if (Auth::user()->getPreference('show', 'my') == 'admin') {
                 if (Auth::user()->isAdmin()) { // super admin sees everything
                     $groups = Group::get()
-                    ->pluck('id');
-                } 
-            } 
+                        ->pluck('id');
+                }
+            }
 
             if (Auth::user()->getPreference('show', 'my') == 'all') {
-                    $groups = Group::public()
+                $groups = Group::public()
                     ->get()
                     ->pluck('id')
                     ->merge(Auth::user()->groups()->pluck('groups.id'));
-            } 
-            
+            }
+
             if (Auth::user()->getPreference('show', 'my') == 'my') {
                 $groups = Auth::user()->groups()->pluck('groups.id');
             }
@@ -114,6 +115,11 @@ class ActionController extends Controller
             $event['description'] = $action->body . ' <br/> ' . $action->location;
             $event['body'] = filter($action->body);
             $event['summary'] = summary($action->body);
+            if ($action->attending()->count() > 0) {
+                $event['summary'] .= '<br/><br/><strong>' . trans('messages.user_attending') . '</strong><br/>';
+                $event['summary'] .= implode(', ', $action->attending()->pluck('name')->toArray());
+            }
+
             $event['location'] = $action->location;
             $event['start'] = $action->start->toIso8601String();
             $event['end'] = $action->stop->toIso8601String();
