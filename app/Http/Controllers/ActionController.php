@@ -113,15 +113,17 @@ class ActionController extends Controller
 
         foreach ($actions as $action) {
             $event['id'] = $action->id;
-            $event['title'] = $action->name;
+            $event['title'] = $action->name . ' (' . $action->group->name . ')';
             $event['description'] = strip_tags(summary($action->body)) . ' <br/> ' . $action->location;
             $event['body'] = strip_tags(summary($action->body));
             $event['summary'] = strip_tags(summary($action->body));
 
+            $event['tooltip'] =  '<strong>'. strip_tags(summary($action->name)) . '</strong>';
+            $event['tooltip'] .= '<div>'. strip_tags(summary($action->body)) . '</div>';
             
             if ($action->attending->count() > 0) {
-                $event['summary'] .= '<br/><br/><strong>' . trans('messages.user_attending') . '</strong><br/>';
-                $event['summary'] .= implode(', ', $action->attending->pluck('username')->toArray());
+                $event['tooltip'] .= '<strong class="mt-2">' . trans('messages.user_attending') . '</strong>';
+                $event['tooltip'] .= '<div>' . implode(', ', $action->attending->pluck('username')->toArray()) . '</div>';
             }
             
 

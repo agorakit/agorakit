@@ -99,16 +99,27 @@ class GroupActionController extends Controller
 
         foreach ($actions as $action) {
             $event['id'] = $action->id;
-            $event['group_name'] = $group->name;
-            $event['title'] = $action->name . ' (' . $group->name . ')';
-            $event['description'] = $action->body . ' <br/> ' . $action->location;
-            $event['body'] = $action->body;
-            $event['summary'] = summary($action->body);
+            $event['title'] = $action->name . ' (' . $action->group->name . ')';
+            $event['description'] = strip_tags(summary($action->body)) . ' <br/> ' . $action->location;
+            $event['body'] = strip_tags(summary($action->body));
+            $event['summary'] = strip_tags(summary($action->body));
+
+            $event['tooltip'] =  '<strong>'. strip_tags(summary($action->name)) . '</strong>';
+            $event['tooltip'] .= '<div>'. strip_tags(summary($action->body)) . '</div>';
+            
+            if ($action->attending->count() > 0) {
+                $event['tooltip'] .= '<strong class="mt-2">' . trans('messages.user_attending') . '</strong>';
+                $event['tooltip'] .= '<div>' . implode(', ', $action->attending->pluck('username')->toArray()) . '</div>';
+            }
+            
+
             $event['location'] = $action->location;
             $event['start'] = $action->start->toIso8601String();
             $event['end'] = $action->stop->toIso8601String();
-            $event['url'] = route('groups.actions.show', [$group->id, $action->id]);
-            $event['color'] = $group->color();
+            $event['url'] = route('groups.actions.show', [$action->group, $action]);
+            $event['group_url'] = route('groups.actions.index', [$action->group]);
+            $event['group_name'] = $action->group->name;
+            $event['color'] = $action->group->color();
 
             $events[] = $event;
         }
