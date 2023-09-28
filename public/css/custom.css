@@ -4,7 +4,8 @@ up-modal-box {
 }
 
 
-a, p {
+a,
+p {
     overflow-wrap: anywhere;
 }
 
@@ -34,11 +35,10 @@ a, p {
 */
 
 
-.nav-pills .nav-link.active
-{
-background-color: var(--tblr-secondary);
-color: var(--tblr-light);
-} 
+.nav-pills .nav-link.active {
+    background-color: var(--tblr-secondary);
+    color: var(--tblr-light);
+}
 
 .group,
 .container {
@@ -166,7 +166,28 @@ h6 {
 
 .fc {
     & .fc-toolbar {
-      flex-wrap: wrap;
-      gap : .5rem;
+        flex-wrap: wrap;
+        gap: .5rem;
     }
+}
+
+
+.sticky-messages {
+    position: sticky;
+    top: 64px;
+    z-index: 50000;
+}
+
+.js-loader {
+    background-color: #4f9f00;
+    color: #cdff9b;
+    padding: 15px;
+    display: none;
+}
+
+.js-network-error {
+    background-color: #dd1701;
+    color: #e9a58c;
+    padding: 15px;
+    display: none;
 }

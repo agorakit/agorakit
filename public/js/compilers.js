@@ -9,8 +9,10 @@ up.network.config.cacheExpireAge = 5_000
 up.link.config.followSelectors.push('a[href]')
 
 // reveal content from the top of it
-up.viewport.config.revealTop = true;
+//up.viewport.config.revealTop = true
 
+
+up.network.config.badResponseTime = 200
 
 
 // Here we put custom compilers for unpoly
@@ -176,6 +178,7 @@ up.compiler('.js-calendar', function (element, data) {
 });
 
 
+// network errors show message
 up.compiler('.js-network-error', function (element) {
 	function show() { element.style.display = 'block' }
 	function hide() { element.style.display = 'none' }
@@ -185,6 +188,29 @@ up.compiler('.js-network-error', function (element) {
 });
 
 
+// loading bar
+// network errors show message
+up.compiler('.js-loader', function (element) {
+	function show() { element.style.display = 'block' }
+	function hide() { element.style.display = 'none' }
+	up.on('up:network:late', show)
+	up.on('up:request:loaded', hide)
+	hide()
+});
+
+/*
+up.compiler('.js-loader', function(indicator) {
+	function show() { up.element.show(indicator) }
+	function hide() { up.element.hide(indicator) }
+  
+	hide()
+  
+	return [
+	  up.on('up:network:loading', show),
+	  up.on('up:network:recover', hide)
+	]
+  })
+*/
 
 /*
 - add a tags class to select to enable selectize on it
