@@ -176,7 +176,7 @@ class CheckMailbox extends Command
      */
     public function debug($message)
     {
-            $this->line($message);
+        $this->line($message);
     }
 
 
@@ -185,8 +185,7 @@ class CheckMailbox extends Command
      */
     public function moveMessage(ImapMessage $message, $folder)
     {
-        if ($this->dry)
-        {
+        if ($this->dry) {
             $this->info("The message would have been moved to folder " . $folder . " (dry run)");
             return true;
         }
@@ -255,7 +254,7 @@ class CheckMailbox extends Command
             $preg = "#" .  'reply-(\d+)' . config('agorakit.inbox_suffix') . "#";
             preg_match($preg, $to_email, $matches);
             // $this->debug('preg run ' . $preg);
-            
+
             if (isset($matches[1])) {
                 $discussion = Discussion::where('id', $matches[1])->first();
 
@@ -345,6 +344,10 @@ class CheckMailbox extends Command
             return true;
         }
 
+        if (array_key_exists('Auto-submitted', $message_headers)) {
+            return true;
+        }
+
         if (array_key_exists('X-Auto-Response-Suppress', $message_headers)) {
             return true;
         }
@@ -390,8 +393,7 @@ class CheckMailbox extends Command
         $discussion->total_comments = 1; // the discussion itself is already a comment
         $discussion->user()->associate($user);
 
-        if ($this->dry)
-        {
+        if ($this->dry) {
             $this->info('Discussion would have been created ' . $discussion);
             return true;
         }
@@ -419,8 +421,7 @@ class CheckMailbox extends Command
         $comment = new \App\Comment();
         $comment->body = $this->extractTextFromMessage($message);
         $comment->user()->associate($user);
-        if ($this->dry)
-        {
+        if ($this->dry) {
             $this->info('Comment would have been created ' . $comment);
             return true;
         }
