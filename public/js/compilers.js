@@ -189,28 +189,16 @@ up.compiler('.js-network-error', function (element) {
 
 
 // loading bar
-// network errors show message
 up.compiler('.js-loader', function (element) {
 	function show() { element.style.display = 'block' }
 	function hide() { element.style.display = 'none' }
 	up.on('up:network:late', show)
+	// could also be  up.on('up:network:loading', show),
 	up.on('up:request:loaded', hide)
+	// could also be  up.on('up:network:recover', hide)
 	hide()
 });
 
-/*
-up.compiler('.js-loader', function(indicator) {
-	function show() { up.element.show(indicator) }
-	function hide() { up.element.hide(indicator) }
-  
-	hide()
-  
-	return [
-	  up.on('up:network:loading', show),
-	  up.on('up:network:recover', hide)
-	]
-  })
-*/
 
 /*
 - add a tags class to select to enable selectize on it
