@@ -54,49 +54,62 @@
             <button class="form-control btn btn-primary" type="submit">{{ trans('messages.search') }}</button>
         </div>
 
-
     </form>
 
 
-
-    @if ($groups->count() > 0)
-        @foreach ($groups as $group)
-            @include('groups.group-list')
-        @endforeach
-        {!! $groups->render() !!}
+    @if ($type == 'groups')
+        @if ($results->count() > 0)
+            @foreach ($results as $group)
+                @include('groups.group-list')
+            @endforeach
+            {!! $results->render() !!}
+        @endif
     @endif
 
-    @if ($discussions->count() > 0)
-        @foreach ($discussions as $discussion)
-            @include('discussions.discussion')
-        @endforeach
-        {!! $discussions->render() !!}
+    @if ($type == 'discussions')
+        @if ($results->count() > 0)
+            @foreach ($results as $discussion)
+                @include('discussions.discussion')
+            @endforeach
+            {!! $results->render() !!}
+        @endif
     @endif
 
-    @if ($actions->count() > 0)
-        @include('actions.list', ['actions' => $actions])
-        {!! $actions->render() !!}
+    @if ($type == 'actions')
+        @if ($results->count() > 0)
+            @include('actions.list', ['actions' => $results])
+        @endif
     @endif
 
-    @if ($users->count() > 0)
-        @foreach ($users as $user)
-            @include('users.user-list')
-        @endforeach
-        {!! $users->render() !!}
+    @if ($type == 'users')
+        @if ($results->count() > 0)
+            @foreach ($results as $user)
+                @include('users.user-list')
+            @endforeach
+            {!! $results->render() !!}
+        @endif
     @endif
 
-    @if ($comments->count() > 0)
-        @foreach ($comments as $comment)
-            @include('comments.comment')
-        @endforeach
-        {!! $comments->render() !!}
+    @if ($type == 'comments')
+        @if ($results->count() > 0)
+            @foreach ($results as $comment)
+                @include('comments.comment')
+            @endforeach
+            {!! $results->render() !!}
+        @endif
     @endif
 
-    @if ($files->count() > 0)
-        @foreach ($files as $file)
-            @include('files.file')
-        @endforeach
-        {!! $files->render() !!}
+    @if ($type == 'files')
+        @if ($results->count() > 0)
+            @foreach ($results as $file)
+                @include('files.file')
+            @endforeach
+            {!! $results->render() !!}
+        @endif
+    @endif
+
+    @if ($results->count() == 0)
+        Nothing found
     @endif
 
 @endsection
