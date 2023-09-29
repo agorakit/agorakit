@@ -12,7 +12,7 @@ up.link.config.followSelectors.push('a[href]')
 //up.viewport.config.revealTop = true
 
 
-up.network.config.badResponseTime = 300
+up.network.config.badResponseTime = 200
 
 
 // Here we put custom compilers for unpoly

@@ -176,19 +176,29 @@ h6 {
     position: sticky;
     top: 64px;
     z-index: 50000;
+    width: 100%;
+}
+
+.bottom-messages {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 50000;
+    /*width: 100%;*/
 }
 
 .js-loader {
     background-color: #4f9f00;
     color: #cdff9b;
-    padding: 15px;
+    padding: 10px 20px;
     display: none;
+    border-top-left-radius: 5px;
 }
 
 .js-network-error {
     background-color: #dd1701;
     color: #e9a58c;
-    padding: 15px;
+    padding: 10px;
     display: none;
 }
 
