@@ -80,28 +80,6 @@ class SearchController extends Controller
             ->orderBy('updated_at', 'desc')
             ->paginate(20, ['*'], 'comments');
 
-            // set in advance which tab will be active on the search results page
-            $groups->class = '';
-            $discussions->class = '';
-            $actions->class = '';
-            $users->class = '';
-            $comments->class = '';
-            $files->class = '';
-
-            // the order of those ifs should match the order of the tabs on the results view :-)
-            if ($groups->count() > 0) {
-                $groups->class = 'active';
-            } elseif ($discussions->count() > 0) {
-                $discussions->class = 'active';
-            } elseif ($actions->count() > 0) {
-                $actions->class = 'active';
-            } elseif ($users->count() > 0) {
-                $users->class = 'active';
-            } elseif ($comments->count() > 0) {
-                $comments->class = 'active';
-            } elseif ($files->count() > 0) {
-                $files->class = 'active';
-            }
 
             return view('search.results')
             ->with('groups', $groups)
@@ -112,7 +90,7 @@ class SearchController extends Controller
             ->with('actions', $actions)
             ->with('query', $query);
         } else {
-            return redirect()->back();
+            return view('search.search');
         }
     }
 }
