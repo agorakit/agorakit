@@ -191,3 +191,10 @@ h6 {
     padding: 15px;
     display: none;
 }
+
+.sticky-messages
+.alert {
+    background-color: #034e80;
+    color: #e7edf8;
+    border-radius: 0;
+}

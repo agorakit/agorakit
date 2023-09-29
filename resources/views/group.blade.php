@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name=viewport content="width=device-width, initial-scale=1">
+    <meta content="width=device-width, initial-scale=1" name=viewport>
 
     @include('partials.header')
 </head>
@@ -18,7 +18,9 @@
         @include('partials.errors')
 
         <div class="container mt-md-4 p-md-4 p-2">
-            @include('groups.tabs')
+            @if ($group->exists)
+                @include('groups.tabs')
+            @endif
 
             <div class="mt-md-4 mt-2 content" up-main="modal">
                 @yield('content')
