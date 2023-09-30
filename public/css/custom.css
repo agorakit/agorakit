@@ -3,6 +3,9 @@ up-modal-box {
     padding: 32px;
 }
 
+body{
+    font-family: 'nunitoregular';
+}
 
 a,
 p {
