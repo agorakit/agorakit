@@ -2,47 +2,22 @@
 
 
 
-@font-face {
-    font-family: 'nunitobold';
-    src: url('nunito-bold-webfont.woff2') format('woff2'),
-         url('nunito-bold-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
-
-
 
 @font-face {
-    font-family: 'nunitoitalic';
-    src: url('nunito-italic-webfont.woff2') format('woff2'),
-         url('nunito-italic-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
-
-
-
-@font-face {
-    font-family: 'nunitoregular';
+    font-family: 'nunito';
     src: url('nunito-regular-webfont.woff2') format('woff2'),
-         url('nunito-regular-webfont.woff') format('woff');
+        url('nunito-regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
 }
 
 
-
-
 @font-face {
-    font-family: 'nunitobold';
+    font-family: 'nunito';
     src: url('nunito-bold-webfont.woff2') format('woff2'),
-         url('nunito-bold-webfont.woff') format('woff');
-    font-weight: normal;
+        url('nunito-bold-webfont.woff') format('woff');
+    font-weight: bold;
     font-style: normal;
 
 }
@@ -51,22 +26,10 @@
 
 
 @font-face {
-    font-family: 'nunitoitalic';
+    font-family: 'nunito';
     src: url('nunito-italic-webfont.woff2') format('woff2'),
-         url('nunito-italic-webfont.woff') format('woff');
+        url('nunito-italic-webfont.woff') format('woff');
     font-weight: normal;
-    font-style: normal;
-
-}
-
-
-
-
-@font-face {
-    font-family: 'nunitoregular';
-    src: url('nunito-regular-webfont.woff2') format('woff2'),
-         url('nunito-regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+    font-style: italic;
 
 }
