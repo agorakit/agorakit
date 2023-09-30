@@ -3,9 +3,18 @@ up-modal-box {
     padding: 32px;
 }
 
-body{
+body {
     font-family: 'nunito';
-    font-size: 1rem;
+}
+
+/* bigger font on larger screen*/
+@media (min-width: 992px) {
+
+    body,
+    .dropdown-item,
+    .btn {
+        font-size: 1rem;
+    }
 }
 
 a,
@@ -49,7 +58,7 @@ p {
     background-color: white;
     padding: 20px;
     border-radius: 10px;
-    box-shadow:0 1px 15px 1px #0000000a,0 1px 6px #0000000a;
+    box-shadow: 0 1px 15px 1px #0000000a, 0 1px 6px #0000000a;
 }
 
 .list-group-item {
@@ -67,14 +76,12 @@ p {
 
 
 
-.small-help, .text-meta {
+.small-help,
+.text-meta {
     color: #888;
     font-size: 0.9rem;
 }
 
-.dropdown-item {
-    font-size: 1rem;
-}
 
 .help {
     padding: 20px;
@@ -206,8 +213,7 @@ h6 {
     display: none;
 }
 
-.sticky-messages
-.alert {
+.sticky-messages .alert {
     background-color: #034e80;
     color: #e7edf8;
     border-radius: 0;
