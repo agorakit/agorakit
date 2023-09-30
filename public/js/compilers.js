@@ -40,9 +40,11 @@ up.compiler('.wysiwyg', function (element, data) {
 
 		toolbar: [
 			['style', ['style']],
-			['font', ['bold', 'underline', 'clear']],
+			['font', ['bold', 'clear']],
+			['color', ['color']],
 			['para', ['ul', 'ol']],
 			['insert', ['link', 'picture']],
+			['view', ['codeview', 'help']]
 		],
 
 		// this is the main call back to upload a file (image or anything else with summernote)
