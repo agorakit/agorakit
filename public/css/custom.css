@@ -5,6 +5,7 @@ up-modal-box {
 
 body{
     font-family: 'nunito';
+    font-size: 1rem;
 }
 
 a,
@@ -14,7 +15,7 @@ p {
 
 :root {
     --tblr-border-radius: 5px;
-    --tblr-body-bg: #e6e5d8;
+    --tblr-body-bg: #f5f4e9;
     --tblr-list-group-item-padding-x: 0;
     /*--tblr-border-color: #aaa;*/
 }
@@ -48,6 +49,7 @@ p {
     background-color: white;
     padding: 20px;
     border-radius: 10px;
+    box-shadow:0 1px 15px 1px #0000000a,0 1px 6px #0000000a;
 }
 
 .list-group-item {
@@ -65,14 +67,13 @@ p {
 
 
 
-.small-help {
+.small-help, .text-meta {
     color: #888;
-    font-size: 0.8rem,
+    font-size: 0.9rem;
 }
 
-.text-meta {
-    color: #888;
-    font-size: 0.8rem;
+.dropdown-item {
+    font-size: 1rem;
 }
 
 .help {
