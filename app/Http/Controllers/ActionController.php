@@ -54,8 +54,15 @@ class ActionController extends Controller
             $actions = \App\Action::with('group')
                 ->where('start', '>=', Carbon::now()->subDay())
                 ->whereIn('group_id', $groups)
-                ->orderBy('start')
-                ->paginate(10);
+                ->orderBy('start');
+
+
+            if (Auth::user()->getPreference('show', 'my') == 'all') {
+
+                $actions->orWhere('visibility', 10);
+            }
+
+            $actions = $actions->paginate(20);
 
             return view('dashboard.agenda-list')
                 ->with('title', trans('messages.agenda'))
@@ -98,15 +105,20 @@ class ActionController extends Controller
                 ->where('start', '>', Carbon::parse($request->get('start')))
                 ->where('stop', '<', Carbon::parse($request->get('end')))
                 ->whereIn('group_id', $groups)
-                ->orderBy('start', 'asc')->get();
+                ->orderBy('start', 'asc');
         } else { // return current month
             $actions = \App\Action::with('group', 'attending')
                 ->orderBy('start', 'asc')
                 ->where('start', '>', Carbon::now()->subMonth())
                 ->where('stop', '<', Carbon::now()->addMonth())
-                ->whereIn('group_id', $groups)
-                ->get();
+                ->whereIn('group_id', $groups);
         }
+
+        if (Auth::user()->getPreference('show', 'my') == 'all') {
+            $actions->orWhere('visibility', 10);
+        }
+
+        $actions = $actions->get();
 
         $event = [];
         $events = [];
@@ -118,14 +130,14 @@ class ActionController extends Controller
             $event['body'] = strip_tags(summary($action->body));
             $event['summary'] = strip_tags(summary($action->body));
 
-            $event['tooltip'] =  '<strong>'. strip_tags(summary($action->name)) . '</strong>';
-            $event['tooltip'] .= '<div>'. strip_tags(summary($action->body)) . '</div>';
-            
+            $event['tooltip'] =  '<strong>' . strip_tags(summary($action->name)) . '</strong>';
+            $event['tooltip'] .= '<div>' . strip_tags(summary($action->body)) . '</div>';
+
             if ($action->attending->count() > 0) {
                 $event['tooltip'] .= '<strong class="mt-2">' . trans('messages.user_attending') . '</strong>';
                 $event['tooltip'] .= '<div>' . implode(', ', $action->attending->pluck('username')->toArray()) . '</div>';
             }
-            
+
 
             $event['location'] = $action->location;
             $event['start'] = $action->start->toIso8601String();
