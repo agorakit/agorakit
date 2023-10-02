@@ -2,7 +2,6 @@
 
 namespace App\Traits;
 
-use App\Scopes\HasVisibilityScope;
 use Illuminate\Database\Eloquent\Builder;
 
 interface ContentVisibility
