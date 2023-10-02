@@ -15,7 +15,7 @@ class AddVisibilityToActions extends Migration
     public function up()
     {
         Schema::table('actions', function (Blueprint $table) {
-            $table->integer('visibility')->default(ContentVisibility::INHERITED);
+            $table->integer('visibility')->default(0);
             $table->index('visibility');
         });
     }
