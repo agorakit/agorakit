@@ -13,7 +13,12 @@
 
             <div class="text-truncate">
                 <a class="text-truncate d-block" href="{{ route('groups.actions.show', [$action->group, $action]) }}">
-                    {{ $action->name }}
+                    {{ $action->name }} 
+                    @if ($action->isPublic())
+                        <i class="fa fa-globe" title="{{ trans('messages.public') }}"></i>
+                    @elseif ($action->isPrivate())
+                        <i class="fa fa-lock" title="{{ trans('messages.private') }}"></i>
+                    @endif
                 </a>
             </div>
 

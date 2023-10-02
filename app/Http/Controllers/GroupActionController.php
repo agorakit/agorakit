@@ -104,14 +104,14 @@ class GroupActionController extends Controller
             $event['body'] = strip_tags(summary($action->body));
             $event['summary'] = strip_tags(summary($action->body));
 
-            $event['tooltip'] =  '<strong>'. strip_tags(summary($action->name)) . '</strong>';
-            $event['tooltip'] .= '<div>'. strip_tags(summary($action->body)) . '</div>';
-            
+            $event['tooltip'] =  '<strong>' . strip_tags(summary($action->name)) . '</strong>';
+            $event['tooltip'] .= '<div>' . strip_tags(summary($action->body)) . '</div>';
+
             if ($action->attending->count() > 0) {
                 $event['tooltip'] .= '<strong class="mt-2">' . trans('messages.user_attending') . '</strong>';
                 $event['tooltip'] .= '<div>' . implode(', ', $action->attending->pluck('username')->toArray()) . '</div>';
             }
-            
+
 
             $event['location'] = $action->location;
             $event['start'] = $action->start->toIso8601String();
@@ -181,7 +181,7 @@ class GroupActionController extends Controller
     {
         // if no group is in the route, it means user choose the group using the dropdown
         if (!$group->exists) {
-            $group = \App\Group::findOrFail($request->get('group'));
+            $group = Group::findOrFail($request->get('group'));
         }
 
         $this->authorize('create-action', $group);
@@ -234,13 +234,20 @@ class GroupActionController extends Controller
         if ($request->get('location')) {
             $action->location = $request->input('location');
             if (!$action->geocode()) {
-                flash(trans('messages.address_cannot_be_geocoded'));
+                warning(trans('messages.address_cannot_be_geocoded'));
             } else {
                 flash(trans('messages.ressource_geocoded_successfully'));
             }
         }
 
         $action->user()->associate($request->user());
+
+        // handle visibility
+        if ($request->has('visibility')) {
+            $action->makePublic();
+        } else {
+            $action->makePrivate();
+        }
 
         if (!$group->actions()->save($action)) {
             // Oops.
@@ -254,9 +261,12 @@ class GroupActionController extends Controller
             $action->tag($request->get('tags'));
         }
 
+
+
+
         // update activity timestamp on parent items
         $group->touch();
-        \Auth::user()->touch();
+        Auth::user()->touch();
 
         flash(trans('messages.ressource_created_successfully'));
 
@@ -338,6 +348,13 @@ class GroupActionController extends Controller
             $action->tag($request->get('tags'));
         } else {
             $action->detag();
+        }
+
+        // handle visibility
+        if ($request->has('visibility')) {
+            $action->makePublic();
+        } else {
+            $action->makePrivate();
         }
 
         if ($action->isInvalid()) {

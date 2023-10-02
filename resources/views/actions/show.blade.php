@@ -6,6 +6,11 @@
 
         <h1>
             {{ $action->name }}
+            @if ($action->isPublic())
+                <i class="fa fa-globe" title="{{ trans('messages.public') }}"></i>
+            @elseif ($action->isPrivate())
+                <i class="fa fa-lock" title="{{ trans('messages.private') }}"></i>
+            @endif
         </h1>
 
         @include('actions.dropdown')
@@ -15,12 +20,12 @@
         {{ trans('messages.started_by') }}
         <span class="user">
             @if ($action->user)
-                <a href="{{ route('users.show', [$action->user]) }}" >{{ $action->user->name }}</a>
+                <a href="{{ route('users.show', [$action->user]) }}">{{ $action->user->name }}</a>
             @endif
         </span>
         {{ trans('messages.in') }}
         <strong>
-            <a href="{{ route('groups.show', [$action->group]) }}" >{{ $action->group->name }}</a>
+            <a href="{{ route('groups.show', [$action->group]) }}">{{ $action->group->name }}</a>
         </strong>
         {{ dateForHumans($action->created_at) }}
     </div>

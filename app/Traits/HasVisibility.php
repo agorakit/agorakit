@@ -14,7 +14,7 @@ interface ContentVisibility
 trait HasVisibility
 {
 
-    public function getVisibility(): int
+    public function getVisibility()
     {
         return $this->{'visibility'};
     }
