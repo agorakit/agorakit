@@ -20,13 +20,24 @@
     @endif
 </div>
 
+<div class="form-group">
+    <label>{{ trans('messages.visibility') }}</label>
+      <div class="small-help">
+        <i class="fas fa-info-circle"></i>
+        {{ trans('messages.visibility_help') }}
+    </div>
+    <label class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" @if (isset($action) && $action->isPublic()) checked=checked @endif name="visibility">
+        <span>{{ trans('messages.public') }}</span>
+    </label>
+</div>
+
 @include('partials.tags_input')
 
 <div class="form-group">
     {!! Form::label('location', trans('messages.location')) !!}
     {!! Form::text('location', null, ['class' => 'form-control', 'rows' => 4]) !!}
 </div>
-
 
 <div class="form-group">
     {{ trans('messages.start_date') }}

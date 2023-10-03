@@ -15,16 +15,22 @@
         {{ trans('messages.started_by') }}
         <span class="user">
             @if ($action->user)
-                <a href="{{ route('users.show', [$action->user]) }}" >{{ $action->user->name }}</a>
+                <a href="{{ route('users.show', [$action->user]) }}">{{ $action->user->name }}</a>
             @endif
         </span>
         {{ trans('messages.in') }}
         <strong>
-            <a href="{{ route('groups.show', [$action->group]) }}" >{{ $action->group->name }}</a>
+            <a href="{{ route('groups.show', [$action->group]) }}">{{ $action->group->name }}</a>
         </strong>
         {{ dateForHumans($action->created_at) }}
     </div>
-
+    <div class="tags mb-3">
+        @if ($action->isPublic())
+            <span class="tag d-inline-block">{{ trans('messages.public') }}</span>
+        @elseif ($action->isPrivate())
+            <span class="tag d-inline-block">{{ trans('messages.private') }}</span>
+        @endif
+    </div>
     <div class="tags mb-3">
         @if ($action->getSelectedTags()->count() > 0)
             @foreach ($action->getSelectedTags() as $tag)
