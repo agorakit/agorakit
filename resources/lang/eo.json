@@ -162,5 +162,12 @@
     "Enter a coma separated list of allowed tags or leave blank to allow free tagging": "Entrez une liste de tags si vous souhaitez limiter leur usage. Sinon laissez la case vide pour permettre n'importe quel tag.",
     "Limit the allowed tags for tagging groups": "Limiter les tags disponibles pour classer des groupes",
     "Loading": "Chargement",
-    "Network error": "Pas de connexion réseau"
+    "Network error": "Pas de connexion réseau",
+    "Go Home": "Accueil",
+    "I don't know yet": "Je ne sais pas encore",
+    "Oh no": "Oh non",
+    "Page Expired": "Page expirée",
+    "Service Unavailable": "Service indisponible",
+    "You already have an account, use this form to receive a login link by email": "Vous avez déjà un compte, utilisez ce formulaire pour recevoir un lien de connexion par mail",
+    "Your user account is marked for deletion, contact an admin if you want to re-activate your account": "Votre compte utilisateur.trice est marqué pour effacement. Contactez un.e admin si vous voulez réactiver votre compte."
 }
