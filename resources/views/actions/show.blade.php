@@ -6,11 +6,6 @@
 
         <h1>
             {{ $action->name }}
-            @if ($action->isPublic())
-                <i class="fa fa-globe" title="{{ trans('messages.public') }}"></i>
-            @elseif ($action->isPrivate())
-                <i class="fa fa-lock" title="{{ trans('messages.private') }}"></i>
-            @endif
         </h1>
 
         @include('actions.dropdown')
@@ -29,7 +24,13 @@
         </strong>
         {{ dateForHumans($action->created_at) }}
     </div>
-
+    <div class="tags mb-3">
+        @if ($action->isPublic())
+            <span class="tag d-inline-block">{{ trans('messages.public') }}</span>
+        @elseif ($action->isPrivate())
+            <span class="tag d-inline-block">{{ trans('messages.private') }}</span>
+        @endif
+    </div>
     <div class="tags mb-3">
         @if ($action->getSelectedTags()->count() > 0)
             @foreach ($action->getSelectedTags() as $tag)

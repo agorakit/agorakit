@@ -27,11 +27,18 @@ trait HasVisibility
 
     public function isPublic(): bool
     {
+        if ($this->group->isOpen()) {
+            return true;
+        }
+        
         return $this->getVisibility() === ContentVisibility::PUBLIC;
     }
 
     public function isPrivate(): bool
     {
+        if ($this->group->isOpen()) {
+            return false;
+        }
         return $this->getVisibility() === ContentVisibility::PRIVATE;
     }
 
@@ -55,6 +62,4 @@ trait HasVisibility
     {
         $query->where('visibility', '=', ContentVisibility::PRIVATE);
     }
- 
-
 }

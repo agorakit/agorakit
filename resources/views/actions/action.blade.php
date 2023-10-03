@@ -13,22 +13,14 @@
 
             <div class="text-truncate">
                 <a class="text-truncate d-block" href="{{ route('groups.actions.show', [$action->group, $action]) }}">
-                    {{ $action->name }} 
-                    @if ($action->isPublic())
-                        <i class="fa fa-globe" title="{{ trans('messages.public') }}"></i>
-                    @elseif ($action->isPrivate())
-                        <i class="fa fa-lock" title="{{ trans('messages.private') }}"></i>
-                    @endif
+                    {{ $action->name }}
                 </a>
             </div>
 
+
+
+
             <div class="text-meta text-truncate">
-                @if ($action->attending->count() > 0)
-                    <div>
-                        <i class="fa fa-users me-1"></i> {{ $action->attending->count() }}
-                        {{ trans('participants') }}
-                    </div>
-                @endif
 
                 <div>
                     <i class="fa fa-clock-o me-1"></i> {{ $action->start->format('H:i') }} -
@@ -40,6 +32,22 @@
                         <i class="fa fa-map-marker me-1"></i> {{ $action->location }}
                     </div>
                 @endif
+
+
+                @if ($action->isPublic())
+                    <span class="tag d-inline-block">{{ trans('messages.public') }}</span>
+                @elseif ($action->isPrivate())
+                    <span class="tag d-inline-block">{{ trans('messages.private') }}</span>
+                @endif
+
+                @if ($action->attending->count() > 0)
+                    <div>
+                        <i class="fa fa-users me-1"></i> {{ $action->attending->count() }}
+                        {{ trans('participants') }}
+                    </div>
+                @endif
+
+
             </div>
 
         </div>
