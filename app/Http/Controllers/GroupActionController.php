@@ -262,6 +262,9 @@ class GroupActionController extends Controller
         }
 
 
+        // handle cover
+        $action->setCoverFromRequest($request);
+
 
 
         // update activity timestamp on parent items
@@ -356,6 +359,9 @@ class GroupActionController extends Controller
         } else {
             $action->makePrivate();
         }
+
+         // handle cover
+         $action->setCoverFromRequest($request);
 
         if ($action->isInvalid()) {
             // Oops.

@@ -21,6 +21,11 @@
 </div>
 
 <div class="form-group">
+    <label>{{trans('group.cover')}}</label><br/>
+    <input name="cover" id="file" type="file" class="form-control-file" title="{{trans('messages.select_one_file')}}">
+</div>
+
+<div class="form-group">
     <label>{{ trans('messages.visibility') }}</label>
       <div class="small-help">
         <i class="fas fa-info-circle"></i>

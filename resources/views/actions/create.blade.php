@@ -4,7 +4,7 @@
     <h1>{{ trans('action.create_one_button') }}</h1>
 
     @if (!$group->exists)
-        {!! Form::open(['route' => 'actions.store']) !!}
+        {!! Form::open(['route' => 'actions.store', 'files' => true]) !!}
 
         <div class="form-group">
             {!! Form::label('group', trans('messages.group')) !!}
@@ -24,7 +24,7 @@
 
         {!! Form::close() !!}
     @else
-        {!! Form::model($action, ['action' => ['GroupActionController@store', $group]]) !!}
+        {!! Form::model($action, ['action' => ['GroupActionController@store', $group], 'files' => true]) !!}
 
         @include('actions.form')
 

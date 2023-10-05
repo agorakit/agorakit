@@ -3,7 +3,7 @@
 @section('content')
     <h1>{{ trans('messages.modify') }} <strong>"{{ $action->name }}"</strong></h1>
 
-    {!! Form::model($action, ['action' => ['GroupActionController@update', $action->group, $action]]) !!}
+    {!! Form::model($action, ['action' => ['GroupActionController@update', $action->group, $action], 'files' => true]) !!}
 
     @include('actions.form')
 

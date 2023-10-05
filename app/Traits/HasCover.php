@@ -5,6 +5,7 @@ namespace App\Traits;
 
 use Image;
 use File;
+use Storage;
 use Illuminate\Http\Request;
 
 /** 
@@ -58,7 +59,7 @@ trait HasCover
         }
     }
 
-    public function setCover(Request $request)
+    public function setCoverFromRequest(Request $request)
     {
         if ($request->hasFile('cover')) {
             Storage::disk('local')->makeDirectory($this->class . '/' . $this->id);
