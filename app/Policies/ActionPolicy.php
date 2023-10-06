@@ -41,6 +41,10 @@ class ActionPolicy
             return true;
         }
 
+        if ($action->isPublic()) {
+            return true;
+        }
+
         if ($user) {
             return $user->isMemberOf($action->group);
         }
@@ -60,7 +64,7 @@ class ActionPolicy
         if ($user->isAdminOf($action->group)) {
             return true;
         }
-        
+
         return $user->id === $action->user_id;
     }
 

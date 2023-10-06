@@ -4,6 +4,7 @@ namespace App;
 
 use App\Traits\HasStatus;
 use App\Traits\HasControlledTags;
+use App\Traits\HasCover;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
@@ -27,6 +28,7 @@ class Group extends Model
     use Sluggable;
     use SearchableTrait;
     use HasStatus;
+    use hasCover;
     use HasControlledTags;
 
     protected $rules = [
@@ -44,6 +46,7 @@ class Group extends Model
     const OPEN = 0;
     const CLOSED = 1;
     const SECRET = 2;
+
 
     /**
     * Searchable rules.
@@ -65,6 +68,7 @@ class Group extends Model
         ],
     ];
 
+    public $type = 'group';
 
     /**
     * Return the sluggable configuration array for this model.
@@ -326,12 +330,13 @@ class Group extends Model
     /**
     * Return true if the group has a cover image.
     */
-    public function hasCover()
+   /*  public function hasCover()
     {
         $path = '/groups/'.$this->id.'/cover.jpg';
 
         return Storage::disk('local')->exists($path);
     }
+    */
 
     /**
     * Geocode the item

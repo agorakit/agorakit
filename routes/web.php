@@ -181,9 +181,16 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('discussions/create', 'GroupDiscussionController@create')->name('discussions.create');
     Route::post('discussions/create', 'GroupDiscussionController@store')->name('discussions.store');
 
-    // General action create route
+    // General action create & cover route
     Route::get('actions/create', 'GroupActionController@create')->name('actions.create');
     Route::post('actions/create', 'GroupActionController@store')->name('actions.store');
+  
+    Route::get('actions/{action}/cover/small', 'ActionCoverController@small')->name('actions.cover.small');
+    Route::get('actions/{action}/cover/medium', 'ActionCoverController@medium')->name('actions.cover.medium');
+    Route::get('actions/{action}/cover/large', 'ActionCoverController@large')->name('actions.cover.large');
+    Route::get('actions/{action}/cover/square', 'ActionCoverController@square')->name('actions.cover.square');
+
+
 
     // Users
 
