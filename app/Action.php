@@ -5,6 +5,7 @@ namespace App;
 use App\User;
 use App\Group;
 use App\Traits\HasControlledTags;
+use App\Traits\HasVisibility;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -20,6 +21,7 @@ class Action extends Model
     use Taggable;
     use SearchableTrait;
     use HasControlledTags;
+    use HasVisibility;
 
 
     protected $rules = [

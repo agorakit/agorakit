@@ -253,4 +253,9 @@ return array (
   'upload_new_file_version' => 'Envoyer une nouvelle version du fichier',
   'attach_file_help' => 'Glissez un fichier sur l\'éditeur de texte pour le joindre ou utilisez le bouton "image" dans la bare d\'outils',
   'max_file_size' => 'Taille de fichier maximum',
+  'public' => 'Public',
+  'private' => 'Privé',
+  'visibility' => 'Visibilité
+',
+  'visibility_help' => 'Vous pouvez rendre cet élément public même si votre groupe est privé. Dans ce cas tout le monde verra cet élément même sans être membre du groupe.',
 );

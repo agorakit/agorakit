@@ -186,7 +186,7 @@ h6 {
 .sticky-messages {
     position: sticky;
     top: 64px;
-    z-index: 50000;
+    z-index: 1;
     width: 100%;
 }
 
