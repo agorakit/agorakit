@@ -41,6 +41,10 @@ class ActionPolicy
             return true;
         }
 
+        if ($action->isPublic()) {
+            return true;
+        }
+
         if ($user) {
             return $user->isMemberOf($action->group);
         }
@@ -60,14 +64,14 @@ class ActionPolicy
         if ($user->isAdminOf($action->group)) {
             return true;
         }
-        
+
         return $user->id === $action->user_id;
     }
 
     public function history(?User $user, Action $action)
     {
         if ($user) {
-            return $user->isMemberOf($group);
+            return $user->isMemberOf($action->group);
         } else {
             return $action->group->isOpen();
         }
