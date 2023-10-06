@@ -4,7 +4,12 @@
 
     <div class="d-flex justify-content-between">
         <h1>
-            {{ $action->name }}
+            <span class="me-2">{{ $action->name }}</span>
+            @if ($action->isPublic())
+                <span class="tag d-inline-block">{{ trans('messages.public') }}</span>
+            @elseif ($action->isPrivate())
+                <span class="tag d-inline-block">{{ trans('messages.private') }}</span>
+            @endif
         </h1>
         @include('actions.dropdown')
     </div>
@@ -35,11 +40,7 @@
             </div>
 
             <div class="tags mb-3">
-                @if ($action->isPublic())
-                    <span class="tag d-inline-block">{{ trans('messages.public') }}</span>
-                @elseif ($action->isPrivate())
-                    <span class="tag d-inline-block">{{ trans('messages.private') }}</span>
-                @endif
+
             </div>
             <div class="tags mb-3">
                 @if ($action->getSelectedTags()->count() > 0)

@@ -116,10 +116,12 @@ p {
 
 .action-date {
     width: 50px;
-    height: 40px;
-    border: 1px solid #aaa;
+    height: 50px;
+    border: 2px solid #aaa;
     text-align: center;
-    border-radius: 4px;
+    margin-top: auto;
+    margin-bottom: auto;
+    border-radius: 8px;
     background: #f8f6f3;
     padding: 3px;
     box-sizing: content-box;

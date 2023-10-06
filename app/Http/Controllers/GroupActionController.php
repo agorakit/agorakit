@@ -138,29 +138,34 @@ class GroupActionController extends Controller
             $this->authorize('create-action', $group);
         }
 
-        $action = new Action();
-
-        if ($request->get('start')) {
-            $action->start = Carbon::parse($request->get('start'));
+        // preload the action to duplicate if present in url to allow easy duplication of an existing action
+        if ($request->has('duplicate')) {
+            $action = Action::findOrFail($request->get('duplicate'));
+            $this->authorize('view', $action);
         } else {
-            $action->start = Carbon::now();
-        }
+            $action = new Action();
 
-        if ($request->get('stop')) {
-            $action->stop = Carbon::parse($request->get('stop'));
-        }
+            if ($request->get('start')) {
+                $action->start = Carbon::parse($request->get('start'));
+            } else {
+                $action->start = Carbon::now();
+            }
 
-        // handle the case where the event is exactly one (ore more) day duration : it's a full day event, remove one second
+            if ($request->get('stop')) {
+                $action->stop = Carbon::parse($request->get('stop'));
+            }
 
-        if ($action->start->hour == 0 && $action->start->minute == 0 && $action->stop->hour == 0 && $action->stop->minute == 0) {
-            $action->stop = Carbon::parse($request->get('stop'))->subSecond();
+            // handle the case where the event is exactly one (ore more) day duration : it's a full day event, remove one second
+
+            if ($action->start->hour == 0 && $action->start->minute == 0 && $action->stop->hour == 0 && $action->stop->minute == 0) {
+                $action->stop = Carbon::parse($request->get('stop'))->subSecond();
+            }
         }
 
 
         if ($request->get('title')) {
             $action->name = $request->get('title');
         }
-
 
         $action->group()->associate($group);
 
@@ -360,8 +365,8 @@ class GroupActionController extends Controller
             $action->makePrivate();
         }
 
-         // handle cover
-         $action->setCoverFromRequest($request);
+        // handle cover
+        $action->setCoverFromRequest($request);
 
         if ($action->isInvalid()) {
             // Oops.
