@@ -67,7 +67,7 @@ class ActionPolicy
     public function history(?User $user, Action $action)
     {
         if ($user) {
-            return $user->isMemberOf($group);
+            return $user->isMemberOf($action->group);
         } else {
             return $action->group->isOpen();
         }
