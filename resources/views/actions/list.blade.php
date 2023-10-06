@@ -2,7 +2,6 @@
     @auth
         @if (isset($group))
             <div class="d-flex justify-content-between mb-2">
-
                 @can('create-action', $group)
                     <a class="btn btn-primary" href="{{ route('groups.actions.create', $group) }}" >
                         {{ trans('action.create_one_button') }}
