@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-dark sticky-top" data-bs-theme="dark" up-fixed="top">
     <div class="container-fluid">
         <!-- logo -->
-        <a class="navbar-brand" href="{{ route('index') }}">
+        <a class="navbar-brand me-4" href="{{ route('index') }}">
             @if (Storage::exists('public/logo/favicon.png'))
                 <img src="{{ asset('storage/logo/favicon.png') }}" width="40" height="40" />
             @else
@@ -10,6 +10,8 @@
             <span class="d-none d-md-inline">{{ setting('name') }}</span>
         </a>
 
+
+        <!-- Single dropdown on mobile to browse groups -->
         @auth
             @if (Auth::user()->groups()->count() > 0)
                 <div class="dropdown d-lg-none">
@@ -24,16 +26,18 @@
                     </div>
                 </div>
             @endif
-
         @endauth
 
+        <!-- navbar toggler hamburger -->
         <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar" type="button"
             aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
+        <!-- collapsable navbar -->
         <div class="collapse navbar-collapse" id="navbar">
-            <ul class="navbar-nav">
+
+            <ul class="navbar-nav me-auto">
                 @auth
                     @if (Auth::user()->groups()->count() > 0)
                         <li class="nav-item dropdown">
@@ -50,6 +54,46 @@
                         </li>
                     @endif
                 @endauth
+
+                <!-- Overview -->
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-toggle="dropdown"
+                        href="#" role="button" aria-expanded="false">
+                        @lang('Overview')
+                    </a>
+
+                    <ul class="dropdown-menu">
+
+                        <a class="dropdown-item" class="dropdown-item" href="{{ action('GroupController@index') }}">
+                            {{ trans('messages.all_groups') }}
+                        </a>
+
+                        <a class="dropdown-item " href="{{ action('DiscussionController@index') }}">
+                            {{ trans('messages.discussions') }}
+                        </a>
+
+                        <a class="dropdown-item" href="{{ action('ActionController@index') }}">
+                            {{ trans('messages.agenda') }}
+                        </a>
+                        @auth
+                            <a class="dropdown-item" href="{{ action('TagController@index') }}">
+                                @lang('Tags')
+                            </a>
+
+                            <a class="dropdown-item" href="{{ action('MapController@index') }}">
+                                {{ trans('messages.map') }}
+                            </a>
+                            <a class="dropdown-item" href="{{ action('FileController@index') }}">
+                                {{ trans('messages.files') }}
+                            </a>
+
+                            <a class="dropdown-item" href="{{ action('UserController@index') }}">
+                                {{ trans('messages.users_list') }}
+                            </a>
+                        @endauth
+                    </ul>
+                </li>
 
                 <!-- help -->
                 @auth
@@ -109,36 +153,7 @@
                     </li>
                 @endif
 
-                <!-- User profile -->
-                @auth
-                    <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                            aria-expanded="false">
-                            {{ trans('messages.profile') }} ({{ Auth::user()->name }})
-                        </a>
 
-                        <div class="dropdown-menu" role="menu">
-                            <a class="dropdown-item" href="{{ route('users.show', Auth::user()) }}"><i
-                                    class="fa fa-btn fa-user me-2"></i>
-                                {{ trans('messages.profile') }}</a>
-                            <a class="dropdown-item" href="{{ route('users.edit', Auth::user()) }}"><i
-                                    class="fa fa-btn fa-user-edit me-2"></i>
-                                {{ trans('messages.edit_my_profile') }}</a>
-
-                            <a class="dropdown-item" href="{{ url('/logout') }}"
-                                onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                <i class="fa fa-btn fa-sign-out  me-2"></i> {{ trans('messages.logout') }}
-                            </a>
-
-                            <form id="logout-form" style="display: none;" action="{{ url('/logout') }}" method="POST">
-                                @csrf
-                                @honeypot
-                            </form>
-
-                        </div>
-
-                    </div>
-                @endauth
 
                 @auth
                     <!-- Admin -->
@@ -179,17 +194,6 @@
                     @endif
                 @endauth
 
-                <!-- search-->
-                @auth
-                    <li class="nav-item">
-                        <form class="d-flex" role="search" action="{{ url('search') }}" method="get">
-                            <input value="{{ request()->get('query') }}" name="query"
-                                class="form-control me-2 bg-light text-dark" type="search"
-                                placeholder="{{ trans('messages.search') }}" aria-label="Search" />
-                        </form>
-                    </li>
-                @endauth
-
                 @guest
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('login') }}" up-layer="new">
@@ -207,7 +211,50 @@
                 @endguest
 
             </ul>
+            <ul class="navbar-nav">
+                <!-- search-->
+                @auth
+                    <li class="nav-item d-lg-none d-xl-inline mt-2">
+                        <form class="d-flex" role="search" action="{{ url('search') }}" method="get">
+                            <input value="{{ request()->get('query') }}" name="query"
+                                class="form-control me-2 bg-light text-dark" type="search"
+                                placeholder="{{ trans('messages.search') }}" aria-label="Search" />
+                        </form>
+                    </li>
+                @endauth
+
+                <!-- User profile -->
+                @auth
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                            aria-expanded="false">
+                            {{ trans('messages.profile') }} ({{ Auth::user()->name }})
+                        </a>
+
+                        <div class="dropdown-menu" role="menu">
+                            <a class="dropdown-item" href="{{ route('users.show', Auth::user()) }}"><i
+                                    class="fa fa-btn fa-user me-2"></i>
+                                {{ trans('messages.profile') }}</a>
+                            <a class="dropdown-item" href="{{ route('users.edit', Auth::user()) }}"><i
+                                    class="fa fa-btn fa-user-edit me-2"></i>
+                                {{ trans('messages.edit_my_profile') }}</a>
+
+                            <a class="dropdown-item" href="{{ url('/logout') }}"
+                                onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                <i class="fa fa-btn fa-sign-out  me-2"></i> {{ trans('messages.logout') }}
+                            </a>
+
+                            <form id="logout-form" style="display: none;" action="{{ url('/logout') }}" method="POST">
+                                @csrf
+                                @honeypot
+                            </form>
+
+                        </div>
+
+                    </div>
+                @endauth
+            </ul>
+
         </div>
     </div>
-
 </nav>
