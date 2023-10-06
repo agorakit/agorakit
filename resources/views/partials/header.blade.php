@@ -34,9 +34,9 @@
 <script src="{{ asset('js/datatables.min.js') }}" defer></script>
 <link href="{{ asset('/css/datatables.min.css') }}" rel="stylesheet">
 
-{{-- select 2 --}}
-<link href="{{ asset('/css/select2.min.css') }}" rel="stylesheet">
-<script src="{{ asset('js/select2.min.js') }}" defer></script>
+{{-- Tom select --}}
+<link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
 
 {{-- tabler.io --}}
 <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta19/dist/js/tabler.min.js" defer></script>

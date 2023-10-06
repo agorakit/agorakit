@@ -218,3 +218,27 @@ h6 {
     color: #e7edf8;
     border-radius: 0;
 }
+
+/* tom select*/
+.ts-control
+{
+    border: 0;
+}
+
+.ts-wrapper
+{
+    padding: 0;
+}
+
+.ts-wrapper.multi .ts-control > div
+{
+    padding: 4px 12px;
+    border-radius: 5px;
+    
+}
+
+.ts-wrapper.multi .ts-control > div.active
+{
+    background-color: var(--tblr-primary);
+    color: white;
+}

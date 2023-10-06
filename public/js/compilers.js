@@ -206,9 +206,13 @@ up.compiler('.js-loader', function (element) {
 - add a tags class to select to enable selectize on it
 - add data-allow-new-tags to allow the creation of new tags
 */
-up.$compiler('.js-tags', function ($element, data) {
-	$element.select2({
-	});
+up.compiler('.js-tags', function (element, data) {
+	console.log()
+	var settings = {}
+	if (data.tags) {
+		var settings = { create: true }
+	}
+	new TomSelect(element, settings);
 });
 
 /*
