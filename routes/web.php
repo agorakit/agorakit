@@ -94,7 +94,7 @@ Route::group(['middleware' => ['web']], function () {
     });
 
 
-    Route::get('autologin/{username}', 'Auth\AutoLoginController@login')->name('autologin');
+    Route::get('autologin', 'Auth\AutoLoginController@login')->name('autologin');
 
 
 

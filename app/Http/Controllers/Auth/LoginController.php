@@ -51,7 +51,7 @@ class LoginController extends Controller
         $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
         // find user
-        $user = User::where($field, $login)->first();
+        $user = User::where($field, trim($login))->first();
 
         // check if password is not filled
         if (empty($request->input('password'))) {

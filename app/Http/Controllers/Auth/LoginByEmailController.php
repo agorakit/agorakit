@@ -13,7 +13,7 @@ use Mail;
 class LoginByEmailController extends Controller
 {
     /**
-    * Show a login by mail form
+    * Show a login by mail form, might be unnecessary now
     */
     public function showLoginByEmailForm(Request $request)
     {
@@ -24,7 +24,7 @@ class LoginByEmailController extends Controller
 
     public function sendLoginByEmail(Request $request)
     {
-        $user = \App\User::where('email', $request->get('email'))->first();
+        $user = User::where('email', trim($request->get('email')))->first();
 
         if ($user) {
             // send invitation email
