@@ -114,8 +114,10 @@ class ActionController extends Controller
                 ->whereIn('group_id', $groups);
         }
 
-        if (Auth::user()->getPreference('show', 'my') == 'all') {
-            $actions->orWhere('visibility', 10);
+        if (Auth::check()) {
+            if (Auth::user()->getPreference('show', 'my') == 'all') {
+                $actions->orWhere('visibility', 10);
+            }
         }
 
         $actions = $actions->get();
