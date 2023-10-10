@@ -16,13 +16,13 @@
 
     <div class="row mb-4">
 
-        <div class="col-12 col-md-6 mb-2 order-md-2">
-            @if ($action->hasCover())
+
+        @if ($action->hasCover())
+            <div class="col-12 col-md-6 mb-2 order-md-2">
                 <img class="rounded" src="{{ route('actions.cover.large', $action) }}" />
-            @else
-                <img class="rounded" src="/images/group.svg" />
-            @endif
-        </div>
+            </div>
+        @endif
+
 
         <div class="col-12 col-md-6">
             <div class="meta mb-3">

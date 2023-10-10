@@ -1,15 +1,16 @@
 {{-- this dropdown is shown on discussion show pages and on discussion summary pages --}}
 @auth
     <div class="ms-2 dropdown">
-        <a class="btn btn-pills" id="dropdownMenuButton" data-bs-toggle="dropdown" type="button" aria-haspopup="true"
-            aria-expanded="false">
+        <a aria-expanded="false" aria-haspopup="true" class="btn btn-pills" data-bs-toggle="dropdown" id="dropdownMenuButton"
+            type="button">
             <i class="fas fa-ellipsis-h"></i>
         </a>
 
-        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+        <div aria-labelledby="dropdownMenuButton" class="dropdown-menu dropdown-menu-end">
 
             @can('update', $discussion)
-                <a class="dropdown-item" href="{{ route('groups.discussions.edit', [$discussion->group, $discussion]) }}">
+                <a class="dropdown-item" href="{{ route('groups.discussions.edit', [$discussion->group, $discussion]) }}"
+                    up-layer="root">
                     <i class="fa fa-pencil me-2"></i>
                     {{ trans('messages.edit') }}
                 </a>
@@ -25,7 +26,7 @@
 
             @can('pin', $discussion)
                 <a class="dropdown-item" href="{{ route('groups.discussions.pin', [$discussion->group, $discussion]) }}"
-                    up-target="#discussion-{{ $discussion->id }}" up-scroll="false">
+                    up-scroll="false" up-target="#discussion-{{ $discussion->id }}">
                     <i class="fa fa-thumbtack me-2"></i>
                     @if ($discussion->isPinned())
                         {{ trans('messages.unpin') }}
@@ -37,7 +38,7 @@
 
             @can('archive', $discussion)
                 <a class="dropdown-item" href="{{ route('groups.discussions.archive', [$discussion->group, $discussion]) }}"
-                    up-target="#discussion-{{ $discussion->id }}" up-scroll="false">
+                    up-scroll="false" up-target="#discussion-{{ $discussion->id }}">
                     <i class="fa fa-archive me-2"></i>
                     @if ($discussion->isArchived())
                         {{ trans('messages.unarchive') }}
@@ -48,8 +49,8 @@
             @endcan
 
             @auth
-                <a class="dropdown-item" href="{{ route('groups.discussions.history', [$discussion->group, $discussion]) }}"><i
-                        class="fa fa-history me-2"></i>
+                <a class="dropdown-item" href="{{ route('groups.discussions.history', [$discussion->group, $discussion]) }}"
+                    up-layer="root"><i class="fa fa-history me-2"></i>
                     {{ trans('messages.show_history') }}</a>
             @endauth
         </div>

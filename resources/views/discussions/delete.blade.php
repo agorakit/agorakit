@@ -18,7 +18,7 @@
             {!! Form::submit(trans('messages.delete_confirm_button'), ['class' => 'btn btn-danger']) !!}
         </div>
         <div>
-            <a href="#" class="btn btn-link js-back">{{ __('messages.cancel') }}</a>
+            <a class="btn btn-link js-back" href="#" up-dismiss>{{ __('messages.cancel') }}</a>
         </div>
     </div>
 

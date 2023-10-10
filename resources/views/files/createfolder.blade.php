@@ -15,7 +15,7 @@
 
     <div class="d-flex justify-content-between">
         <input class="btn btn-primary" type="submit" value="{{ trans('messages.create') }}" />
-        <a href="#" class="js-back">{{ trans('messages.cancel') }}</a>
+        <a class="js-back" href="#" up-dismiss>{{ trans('messages.cancel') }}</a>
     </div>
 
     {!! Form::close() !!}
