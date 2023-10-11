@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name=viewport content="width=device-width, initial-scale=1">
+    <meta content="width=device-width, initial-scale=1" name=viewport>
 
     @include('partials.header')
 </head>
@@ -15,7 +15,9 @@
             @include('partials.nav')
         @endunless
 
-        @include('partials.errors')
+        <div class="sticky-messages">
+            @include('partials.errors')
+        </div>
 
         <div class="container mt-md-4 p-md-4 p-2" up-main="modal">
 

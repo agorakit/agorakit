@@ -215,11 +215,14 @@ h6 {
     display: none;
 }
 
-.sticky-messages .alert {
-    background-color: #034e80;
-    color: #e7edf8;
+.messages .alert {
+    background-color: #0054a6;
+    color: white;
     border-radius: 0;
 }
+
+
+
 
 /* tom select*/
 .ts-control
