@@ -27,7 +27,7 @@ class Action extends Model
 
 
     protected $rules = [
-        'name'     => 'required|min:5',
+        'name'     => 'required',
         'user_id'  => 'required|exists:users,id',
         'group_id' => 'required|exists:groups,id',
         'start'    => 'required',
