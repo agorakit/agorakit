@@ -15,7 +15,9 @@
             @include('partials.nav')
         @endunless
 
-        @include('partials.errors')
+        <div class="sticky-messages">
+            @include('partials.errors')
+        </div>
 
         <div class="container mt-md-4 p-md-4 p-2">
             @if ($group->exists)
