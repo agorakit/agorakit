@@ -21,18 +21,20 @@
 </div>
 
 <div class="form-group">
-    <label>{{trans('group.cover')}}</label><br/>
-    <input name="cover" id="file" type="file" class="form-control-file" title="{{trans('messages.select_one_file')}}">
+    <label>{{ trans('group.cover') }}</label><br />
+    <input class="form-control-file" id="file" name="cover" title="{{ trans('messages.select_one_file') }}"
+        type="file">
 </div>
 
 <div class="form-group">
     <label>{{ trans('messages.visibility') }}</label>
-      <div class="small-help">
+    <div class="small-help">
         <i class="fas fa-info-circle"></i>
         {{ trans('messages.visibility_help') }}
     </div>
     <label class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" @if (isset($action) && $action->isPublic()) checked=checked @endif name="visibility">
+        <input @if (isset($action) && $action->isPublic()) checked=checked @endif class="form-check-input" name="visibility"
+            type="checkbox">
         <span>{{ trans('messages.public') }}</span>
     </label>
 </div>
