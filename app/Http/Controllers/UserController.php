@@ -195,7 +195,7 @@ class UserController extends Controller
             if ($user->username != $request->input('username')) {
                 $existing_user = User::where('username', $request->input('username'))->first();
                 if ($existing_user) {
-                    error(trans('This username is taken, another one has been generated'));
+                    warning(trans('This username is taken, another one has been generated'));
                     $user->username = SlugService::createSlug(User::class, 'username', $request->input('username'));
                 } else {
                     $user->username = $request->input('username');

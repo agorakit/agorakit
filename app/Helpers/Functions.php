@@ -122,7 +122,7 @@ function flash($message)
 
 function error($message)
 {
-    session()->push('errors', $message);
+    session()->push('agorakit_errors', $message);
 }
 
 

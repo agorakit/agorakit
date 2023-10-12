@@ -71,7 +71,7 @@ class LoginController extends Controller
                     return redirect()->intended('/');
                 } else {
                     $this->incrementLoginAttempts($request);
-                    error(__('Incorrect password and/or username'));
+                    warning(__('Incorrect password and/or username'));
                     return redirect()->back();
                 }
             } else {
