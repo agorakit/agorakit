@@ -12,7 +12,7 @@ Keep reading for steps to install an Agorakit instance on your own server.
 
 You need a good web hosting provider that provides the following :
 
-- php >= 7.2 with the following extensions :
+- php >= 8 with the following extensions :
     - OpenSSL PHP Extension
     - PDO PHP Extension
     - Mbstring PHP Extension
@@ -26,7 +26,7 @@ You need a good web hosting provider that provides the following :
 - Git
 - the ability to run cron jobs
 
-!> All those features together are hard to find, so people are obliged to use a VPS and setup everything themselves. This is a riskier proposal if you don't know how it works. We have been very successful with [Alwaysdata](https://www.alwaysdata.com) shared hosting. By the way they host free of charge [the free instance of Agorakit](https://app.agorakit.org).
+!> All those features together are hard to find, so people are obliged to use a VPS and setup everything themselves. This is a riskier proposal if you don't know how it works. We have been very successful with [Alwaysdata](https://www.alwaysdata.com) shared hosting. By the way they host at a reduced fee [the free instance of Agorakit](https://app.agorakit.org).
 
 
 # Installation

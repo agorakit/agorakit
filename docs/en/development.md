@@ -1,13 +1,24 @@
 # Developing with Agorakit
 
+You want to contribute to the project? Great! Any idea is welcome. 
 
-You want to contribute to the project? Great!
+- Please discuss the bug or feature request in the issue queue first.
+- Check the licence (AGPL) to see if it fits your contribution model
+- Follow Laravel best practives
+- We use unpoly js for spa like functionality, read a bit about it since it's not as popular as other options (think of it as turbolinks on steroids)
+- We use Bootstrap 5 flavored by tabler.io
 
-First follow the installation instructions including the creation of sample content using :
 
-    $ php artisan db:seed
+# Developement server
+
+## Using Laravel Sail
+Sail is a docker wrapper to ease local development. It's a really cool and easy way to have a perfect local server for devs.
+Laravel sail works out of the box in this project. Read the Sail documentation for more informations. 
+
+This is what I use on my main workstation (linux based) since it's very reproductible.
 
 
+## Using artisan serve
 
 If you want to start a local server for development:
 
@@ -15,31 +26,22 @@ If you want to start a local server for development:
 
 The install will be available to 127.0.0.1:8000
 
-This is what I use on my main workstation (linux based) since it's very simple and very quick.
-
 There are a lot of other options, check the laravel doc and ecosystem to have an overview of the options for local developement.
 
+# Seed the DB 
+First follow the installation instructions including the creation of sample content using :
+
+    $ php artisan db:seed
 
 
 # Working on design and css
 
+I ditched all build steps, now everything happens in a flat custom.css file.
 
-Install nodejs and npm (current version of nodejs is 10)
+All external JS and CSS are served from various CDN's. At some point the files will be re-served from local, when everything will be stabilized, and if there are real benefits of doing so.
 
-Then in the root of the project run:
+No npm, no node, no tailwind, no purge, no minifier, no trouble :)
 
-    $ npm install
-
-You will be able to have auto updated browser when you change a file by running:
-
-    $ npm run watch
-
-
-When you are done, run:
-
-    $ npm run prod
-
-To generate production ready css and js files.
 
 # Testing your code
 
