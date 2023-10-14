@@ -24,6 +24,7 @@ services:
             - sail
         depends_on:
             - mysql
+            - mailpit
     mysql:
         image: 'mysql/mysql-server:8.0'
         ports:
@@ -53,6 +54,13 @@ services:
         restart: always
         ports:
             - '8080:8080'
+        networks:
+            - sail
+    mailpit:
+        image: 'axllent/mailpit:latest'
+        ports:
+            - '${FORWARD_MAILPIT_PORT:-1025}:1025'
+            - '${FORWARD_MAILPIT_DASHBOARD_PORT:-8025}:8025'
         networks:
             - sail
 networks:
