@@ -312,17 +312,21 @@ class CheckMailbox extends Command
         foreach ($message->getTo() as $to) {
             $recipients[] = $to->getAddress();
         }
-    
+
         foreach ($message->getCc() as $to) {
             $recipients[] = $to->getAddress();
         }
 
-        foreach ($message->getHeaders()->get('in-reply-to') as $to) {
-            $recipients[] = $to->getAddress();
+        if (is_array($message->getHeaders()->get('in-reply-to'))) {
+            foreach ($message->getHeaders()->get('in-reply-to') as $to) {
+                $recipients[] = $to->getAddress();
+            }
         }
 
-        foreach ($message->getHeaders()->get('references') as $to) {
-            $recipients[] = $to->getAddress();
+        if (is_array($message->getHeaders()->get('references'))) {
+            foreach ($message->getHeaders()->get('references') as $to) {
+                $recipients[] = $to->getAddress();
+            }
         }
 
 
