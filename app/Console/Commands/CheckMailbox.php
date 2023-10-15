@@ -27,8 +27,6 @@ A catch-all email is required, or an email server supporting "+" adressing.
 
 After that, the agorakit:processmessages command should be called, it's the second step of the process
 
-TODO : create a POP3 mail parser as well, would be very easy to do
-
 Emails are generated as follow :  
 
 [INBOX_PREFIX][group-slug][INBOX_SUFFIX]
@@ -117,57 +115,60 @@ class CheckMailbox extends Command
 
         $i = 0;
         foreach ($messages as $message) {
+            try {
 
-            $this->debug('-----------------------------------');
+                $this->debug('-----------------------------------');
 
-            // limit to 100 messages at a time (I did no find a better way to handle this iterator)
-            if ($i > 100) {
-                break;
-            }
-
-            $i++;
-
-
-            $this->debug('Processing email "' . $message->getSubject() . '"');
-            $this->debug('From ' . $message->getFrom()->getAddress());
-
-
-            // discard automated messages
-            if ($this->isMessageAutomated($message)) {
-                $this->moveMessage($message, 'automated');
-                $this->debug('Message discarded because automated');
-                continue;
-            }
-
-
-            // Try to find a $user, $group and $discussion from the $message
-            $user = $this->extractUserFromMessage($message);
-            $group = $this->extractGroupFromMessage($message);
-            $discussion = $this->extractDiscussionFromMessage($message);
-
-            // Decide what to do
-            if ($discussion && $user->exists && $user->isMemberOf($discussion->group)) {
-                $this->debug('Discussion exists and user is member of group, posting message');
-                $this->processDiscussionExistsAndUserIsMember($discussion, $user, $message);
-            } elseif ($group && $user->exists && $user->isMemberOf($group)) {
-                $this->debug('User exists and is member of group, posting message');
-                $this->processGroupExistsAndUserIsMember($group, $user, $message);
-            } elseif ($group && $user->exists && !$user->isMemberOf($group)) {
-                $this->debug('User exists BUT is not member of group, bouncing and inviting');
-                $this->processGroupExistsButUserIsNotMember($group, $user, $message);
-            } else {
-                if (!$user->exists) {
-                    $this->moveMessage($message, 'user_not_found');
-                } elseif (!$group) {
-                    $this->moveMessage($message, 'group_not_found');
-                } elseif (!$discussion) {
-                    $this->moveMessage($message, 'discussion_not_found');
+                // limit to 100 messages at a time (I did no find a better way to handle this iterator)
+                if ($i > 100) {
+                    break;
                 }
-            }
 
-            // TODO handle the case of user exists but group doesn't -> might be a good idea to bounce back to user
+                $i++;
+
+
+                $this->debug('Processing email "' . $message->getSubject() . '"');
+                $this->debug('From ' . $message->getFrom()->getAddress());
+
+
+                // discard automated messages
+                if ($this->isMessageAutomated($message)) {
+                    $this->moveMessage($message, 'automated');
+                    $this->debug('Message discarded because automated');
+                    continue;
+                }
+
+
+                // Try to find a $user, $group and $discussion from the $message
+                $user = $this->extractUserFromMessage($message);
+                $group = $this->extractGroupFromMessage($message);
+                $discussion = $this->extractDiscussionFromMessage($message);
+
+                // Decide what to do
+                // TODO handle the case of user exists but group doesn't -> might be a good idea to bounce back to user
+                if ($discussion && $user->exists && $user->isMemberOf($discussion->group)) {
+                    $this->debug('Discussion exists and user is member of group, posting new comment to discussion');
+                    $this->processDiscussionExistsAndUserIsMember($discussion, $user, $message);
+                } elseif ($group && $user->exists && $user->isMemberOf($group)) {
+                    $this->debug('User exists and is member of group, posting new discussion');
+                    $this->processGroupExistsAndUserIsMember($group, $user, $message);
+                } elseif ($group && $user->exists && !$user->isMemberOf($group)) {
+                    $this->debug('User exists BUT is not member of group, bouncing and inviting');
+                    $this->processGroupExistsButUserIsNotMember($group, $user, $message);
+                } else {
+                    if (!$user->exists) {
+                        $this->moveMessage($message, 'user_not_found');
+                    } elseif (!$group) {
+                        $this->moveMessage($message, 'group_not_found');
+                    } elseif (!$discussion) {
+                        $this->moveMessage($message, 'discussion_not_found');
+                    }
+                }
+            } catch (Exception $exception) {
+                $this->line('error processing message ');
+            }
+            $this->connection->expunge();
         }
-        $this->connection->expunge();
     }
 
 
