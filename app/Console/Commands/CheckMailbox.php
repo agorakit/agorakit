@@ -157,10 +157,13 @@ class CheckMailbox extends Command
                     $this->processGroupExistsButUserIsNotMember($group, $user, $message);
                 } else {
                     if (!$user->exists) {
+                        $this->debug('User does not exist, discarding email');
                         $this->moveMessage($message, 'user_not_found');
                     } elseif (!$group) {
+                        $this->debug('Group does not exist, discarding email');
                         $this->moveMessage($message, 'group_not_found');
                     } elseif (!$discussion) {
+                        $this->debug('Discussion does not exist, discarding email');
                         $this->moveMessage($message, 'discussion_not_found');
                     }
                 }
