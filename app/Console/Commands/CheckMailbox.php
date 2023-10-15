@@ -234,8 +234,11 @@ class CheckMailbox extends Command
             $this->debug('(group candidate) to: '  . $to_email);
         }
 
-        $group = Group::whereIn('slug', $to_emails)->first();
-
+        if (isset($to_emails)) {
+            $group = Group::whereIn('slug', $to_emails)->first();
+        } else {
+            return false;
+        }
 
         if ($group) {
             $this->debug('group found : ' . $group->name . ' (' . $group->id . ')');
