@@ -329,6 +329,9 @@ class CheckMailbox extends Command
             }
         }
 
+        foreach ($recipients as $recipient) {
+            $this->debug('potentia recipients for this mail ' . $recipient);
+        }
 
         return $recipients;
     }
