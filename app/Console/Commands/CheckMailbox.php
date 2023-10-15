@@ -304,7 +304,7 @@ class CheckMailbox extends Command
     }
 
     /** 
-     * Returns all recipients form the message, in the to: and cc: fields
+     * Returns all recipients form the message, in the to: cc: references: and in-reply-to: fields
      */
     function extractRecipientsFromMessage(ImapMessage $message)
     {
@@ -312,10 +312,20 @@ class CheckMailbox extends Command
         foreach ($message->getTo() as $to) {
             $recipients[] = $to->getAddress();
         }
-
+    
         foreach ($message->getCc() as $to) {
             $recipients[] = $to->getAddress();
         }
+
+        foreach ($message->getHeaders()->get('in-reply-to') as $to) {
+            $recipients[] = $to->getAddress();
+        }
+
+        foreach ($message->getHeaders()->get('references') as $to) {
+            $recipients[] = $to->getAddress();
+        }
+
+
         return $recipients;
     }
 
