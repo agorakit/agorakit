@@ -317,20 +317,17 @@ class CheckMailbox extends Command
             $recipients[] = $to->getAddress();
         }
 
-        if (is_array($message->getHeaders()->get('in-reply-to'))) {
-            foreach ($message->getHeaders()->get('in-reply-to') as $to) {
-                $recipients[] = $to->getAddress();
-            }
+        foreach ($message->getInReplyTo() as $to) {
+            $recipients[] = $to;
         }
 
-        if (is_array($message->getHeaders()->get('references'))) {
-            foreach ($message->getHeaders()->get('references') as $to) {
-                $recipients[] = $to->getAddress();
-            }
+        foreach ($message->getReferences() as $to) {
+            $recipients[] = $to;
         }
+
 
         foreach ($recipients as $recipient) {
-            $this->debug('potentia recipients for this mail ' . $recipient);
+            $this->debug('potential recipients for this mail ' . $recipient);
         }
 
         return $recipients;
