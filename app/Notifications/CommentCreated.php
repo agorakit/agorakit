@@ -14,6 +14,9 @@ class CommentCreated extends Notification
 {
     use Queueable;
 
+    public Comment $comment;
+    public User $user;
+
     /**
      * Create a new notification instance.
      *
@@ -59,7 +62,7 @@ class CommentCreated extends Notification
 
         // send notification directly from discussion inbox if there is one
         if ($this->comment->discussion->inbox()) {
-            $message->replyTo($this->comment->discussion->inbox(), $this->comment->discussion->group->name);
+            $message->replyTo($this->comment->discussion->inbox(), $this->comment->user->name);
         } else {
             $message->line(trans('messages.dont_reply_to_this_email'));
             $message->from(config('mail.noreply'), config('mail.from.name'));
