@@ -21,11 +21,13 @@ Inbound Email handler for Agorakit, allows user to post content by email
 
 Everytime it's run, emails found in the defined inbox are processed
 
-Read this issue for an overview : https://github.com/agorakit/agorakit/issues/371
+- find a sender in the existing users list or create a user 
+- find a recipient in the to and other mail header. It can a group or a discussion
+- check the the user can post to this recipient
+- process email content (filter) and create the appropriate content (discussion or commment)
+
 
 A catch-all email is required, or an email server supporting "+" adressing.
-
-After that, the agorakit:processmessages command should be called, it's the second step of the process
 
 Emails are generated as follow :  
 
@@ -33,7 +35,9 @@ Emails are generated as follow :
 
 [INBOX_PREFIX]reply-[discussion-id][INBOX_SUFFIX]
 
-Prefix and suffix is defined in the .env file
+Prefix and suffix is defined in the .env file as well as the server credentials
+
+Only imap is supported since it allows to store all processed and failed emails in separate folders on the mail server for further inspection
 
 */
 
