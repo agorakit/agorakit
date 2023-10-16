@@ -262,17 +262,27 @@ class CheckMailbox extends Command
         $recipients = $this->extractRecipientsFromMessage($message);
 
         foreach ($recipients as $to_email) {
+            // try to find a discussion with reply-[id] pattern
             $preg = "#" .  'reply-(\d+)' . config('agorakit.inbox_suffix') . "#";
             preg_match($preg, $to_email, $matches);
-            // $this->debug('preg run ' . $preg);
 
             if (isset($matches[1])) {
                 $discussion = Discussion::where('id', $matches[1])->first();
-
-
                 if ($discussion) {
                     $this->debug('discussion found with id ' . $discussion->id);
                     return $discussion;
+                }
+            }
+
+            // try to find a comment with comment-[id] pattern
+            $preg = "#" .  'comment-(\d+)' . config('agorakit.inbox_suffix') . "#";
+            preg_match($preg, $to_email, $matches);
+
+            if (isset($matches[1])) {
+                $comment = Comment::where('id', $matches[1])->first();
+                if ($comment) {
+                    $this->debug('comment found with id ' . $comment->id);
+                    return $comment->discussion;
                 }
             }
         }
