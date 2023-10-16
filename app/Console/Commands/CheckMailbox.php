@@ -337,6 +337,10 @@ class CheckMailbox extends Command
         return $recipients;
     }
 
+
+    /**
+     * Returns all headers of the email as key => value
+     */
     function parse_rfc822_headers(string $header_string): array
     {
         // Reference:
@@ -359,10 +363,6 @@ class CheckMailbox extends Command
      */
     public function isMessageAutomated(ImapMessage $message)
     {
-        /*
-        TODO Detect automatic messages and discard them, see here : https://www.arp242.net/autoreply.html
-        */
-
         $message_headers = $this->parse_rfc822_headers($message->getRawHeaders());
 
         if (array_key_exists('Auto-Submitted', $message_headers)) {
