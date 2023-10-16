@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Message;
 use App\Discussion;
+use App\Comment;
 use App\Group;
 use App\User;
 use Ddeboer\Imap\Server;
