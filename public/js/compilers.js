@@ -15,6 +15,10 @@ up.link.config.followSelectors.push('a[href]')
 up.network.config.badResponseTime = 200
 
 
+up.network.config.progressBar = true
+up.fragment.config.runScripts = true
+
+
 /**
  * Unpoly compilers
  * Here we put custom compilers for unpoly
@@ -226,12 +230,12 @@ up.$compiler('.data-table', function ($element) {
 			{
 				extend: 'excel',
 				text: 'Export excel',
-				className: 'btn btn-secondary'
+				className: 'btn btn-primary bg-secondary'
 			},
 			{
 				extend: 'csv',
 				text: 'Export csv',
-				className: 'btn btn-secondary'
+				className: 'btn btn-primary bg-secondary'
 			}
 		]
 	});
@@ -265,8 +269,8 @@ up.compiler('.js-back', function (element) {
 up.compiler('.js-network-error', function (element) {
 	function show() { element.style.display = 'block' }
 	function hide() { element.style.display = 'none' }
-	up.on('up:proxy:fatal', show)
-	up.on('up:proxy:recover', hide)
+	up.on('up:request:offline', show)
+	up.on('up:network:recover', hide)
 	hide()
 });
 

@@ -1,6 +1,6 @@
-<meta name="csrf-token" content="{{ csrf_token() }}">
+<meta content="{{ csrf_token() }}" name="csrf-token">
 @if (isset($group))
-    <meta name="group-id" content="{{ $group->id }}">
+    <meta content="{{ $group->id }}" name="group-id">
 @endif
 
 <title>{{ $title ?? setting('name') }}</title>
@@ -13,7 +13,7 @@
 <link href="{{ asset('/fonts/fontawesome/css/all.min.css') }}" rel="stylesheet">
 <link href="{{ asset('/fonts/fontawesome/css/v4-shims.min.css') }}" rel="stylesheet">
 
-
+{{-- Nunito webfont --}}
 <link href="{{ asset('/fonts/nunito/stylesheet.css') }}" rel="stylesheet">
 
 {{-- jquery --}}
@@ -31,8 +31,13 @@
 <link href="https://cdn.jsdelivr.net/npm/unpoly@3.3.0/unpoly-bootstrap5.min.css" rel="stylesheet">
 
 {{-- datatables --}}
-<script src="{{ asset('js/datatables.min.js') }}" defer></script>
-<link href="{{ asset('/css/datatables.min.css') }}" rel="stylesheet">
+<link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-1.13.6/b-2.4.2/b-html5-2.4.2/datatables.min.css"
+    rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js" defer></script>
+<script src="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-1.13.6/b-2.4.2/b-html5-2.4.2/datatables.min.js" defer>
+</script>
+
 
 {{-- Tom select --}}
 <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet">
