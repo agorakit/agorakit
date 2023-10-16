@@ -11,12 +11,20 @@ up.link.config.followSelectors.push('a[href]')
 // reveal content from the top of it
 //up.viewport.config.revealTop = true
 
-
+// bad response time is faster than default. Considered bad after 200 msecs
 up.network.config.badResponseTime = 200
 
 
-// Here we put custom compilers for unpoly
-// Check docs here : https://unpoly.com/up.compiler
+/**
+ * Unpoly compilers
+ * Here we put custom compilers for unpoly
+ * Check docs here : https://unpoly.com/up.compiler
+ * 
+ * Basically, just add a specific class to an element to add behavior.
+ * 
+ * Supported classes are defined below :
+ */
+
 
 
 /*
@@ -125,7 +133,7 @@ function sendFile($summernote, file, group_id) {
 
 
 /*
-Add a calendar to any div with the calendar class
+Add a calendar to any div with the .js-calendar class
 - data-locale to define the correct locale
 - data-json for the json url feed to use
 */
@@ -180,31 +188,12 @@ up.compiler('.js-calendar', function (element, data) {
 });
 
 
-// network errors show message
-up.compiler('.js-network-error', function (element) {
-	function show() { element.style.display = 'block' }
-	function hide() { element.style.display = 'none' }
-	up.on('up:proxy:fatal', show)
-	up.on('up:proxy:recover', hide)
-	hide()
-});
 
-
-// loading bar
-up.compiler('.js-loader', function (element) {
-	function show() { element.style.display = 'block' }
-	function hide() { element.style.display = 'none' }
-	up.on('up:network:late', show)
-	// could also be  up.on('up:network:loading', show),
-	up.on('up:request:loaded', hide)
-	// could also be  up.on('up:network:recover', hide)
-	hide()
-});
 
 
 /*
 - add a tags class to select to enable selectize on it
-- add data-allow-new-tags to allow the creation of new tags
+- add data-tags to allow the creation of new tags
 */
 up.compiler('.js-tags', function (element, data) {
 	console.log()
@@ -225,7 +214,7 @@ up.compiler('#unread', function (element) {
 
 
 /*
-Datatables
+Datatables using .data-table 
 */
 up.$compiler('.data-table', function ($element) {
 	$element.DataTable({
@@ -270,4 +259,25 @@ up.compiler('.js-back', function (element) {
 		return false;
 	};
 
+});
+
+// network errors show message
+up.compiler('.js-network-error', function (element) {
+	function show() { element.style.display = 'block' }
+	function hide() { element.style.display = 'none' }
+	up.on('up:proxy:fatal', show)
+	up.on('up:proxy:recover', hide)
+	hide()
+});
+
+
+// loading bar
+up.compiler('.js-loader', function (element) {
+	function show() { element.style.display = 'block' }
+	function hide() { element.style.display = 'none' }
+	up.on('up:network:late', show)
+	// could also be  up.on('up:network:loading', show),
+	up.on('up:request:loaded', hide)
+	// could also be  up.on('up:network:recover', hide)
+	hide()
 });
