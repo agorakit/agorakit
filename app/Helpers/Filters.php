@@ -62,14 +62,6 @@ function filter($content)
 
 
 /**
- * Keep only html tags considered "safe"
- */
-function safe_html($content)
-{
-    return strip_tags($content, '<span><br><p><a><li><img><hr><em><blockquote><strong><i><b><u><code><h1><h2><h3><h4><ul><ol><table><tr><td><th>');
-}
-
-/**
  * Highlight and link to @user profiles in the passed $content.
  */
 function highlightMentions($content)
