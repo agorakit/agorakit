@@ -62,52 +62,44 @@
                         <td data-order="{{ $membership->membership }}">
 
                             @if ($membership->membership == \App\Membership::ADMIN)
-                                <span class="rounded-full bg-green-600 text-green-100 px-2 py-1 text-xs capitalize"
-                                    title="@lang('This member is admin of the group and manages it')">
+                                <span class="tag text-bg-warning " title="@lang('This member is admin of the group and manages it')">
                                     {{ trans('membership.admin') }}
                                 </span>
                             @endif
                             @if ($membership->membership == \App\Membership::MEMBER)
-                                <span class="rounded-full bg-purple-600 text-purple-100 px-2 py-1 text-xs capitalize"
-                                    title="@lang('Regular member of the group')">
+                                <span class="tag text-bg-primary" title="@lang('Regular member of the group')">
                                     {{ trans('membership.member') }}
                                 </span>
                             @endif
                             @if ($membership->membership == \App\Membership::CANDIDATE)
-                                <span class="rounded-full bg-orange-600 text-orange-100 px-2 py-1 text-xs capitalize"
-                                    title="@lang('This user asked to be part of the group but has not yet been accepted')">
+                                <span class="tag text-bg-secondary" title="@lang('This user asked to be part of the group but has not yet been accepted')">
                                     {{ trans('membership.candidate') }}
                                 </span>
                             @endif
                             @if ($membership->membership == \App\Membership::INVITED)
-                                <span class="rounded-full bg-blue-600 text-blue-100 px-2 py-1 text-xs capitalize"
-                                    title="@lang('This user has been invited to the group but did not accept yet')">
+                                <span class="tag text-bg-success" title="@lang('This user has been invited to the group but did not accept yet')">
                                     {{ trans('membership.invited') }}
                                 </span>
                             @endif
 
                             @if ($membership->membership == \App\Membership::DECLINED)
-                                <span class="rounded-full bg-gray-800 text-gray-100 px-2 py-1 text-xs capitalize"
-                                    title="@lang('This member declined the invitagion the group')">
+                                <span class="tag text-bg-dark " title="@lang('This member declined the invitagion the group')">
                                     {{ trans('membership.declined') }}
                                 </span>
                             @endif
 
                             @if ($membership->membership == \App\Membership::UNREGISTERED)
-                                <span class="rounded-full bg-gray-800 text-gray-100 px-2 py-1 text-xs capitalize"
-                                    title="@lang('This member left the group')">
+                                <span class="tag text-bg-dark" title="@lang('This member left the group')">
                                     {{ trans('membership.unregistered') }}
                                 </span>
                             @endif
                             @if ($membership->membership == \App\Membership::REMOVED)
-                                <span class="rounded-full bg-gray-800 text-gray-100 px-2 py-1 text-xs capitalize"
-                                    title="@lang('This member has been removed from the group')">
+                                <span class="tag text-bg-dark" title="@lang('This member has been removed from the group')">
                                     {{ trans('membership.removed') }}
                                 </span>
                             @endif
                             @if ($membership->membership == \App\Membership::BLACKLISTED)
-                                <span class="rounded-full bg-red-800 text-red-100 px-2 py-1 text-xs capitalize"
-                                    title="@lang('This member has been blacklisted')">
+                                <span class="tag text-bg-dark" title="@lang('This member has been blacklisted')">
                                     {{ trans('membership.blacklisted') }}
                                 </span>
                             @endif
