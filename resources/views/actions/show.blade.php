@@ -18,13 +18,13 @@
 
 
         @if ($action->hasCover())
-            <div class="col-12 col-md-6 mb-2 order-md-2">
+            <div class="col-12 col-sm-5 col-md-4 mb-2 order-sm-2">
                 <img class="rounded" src="{{ route('actions.cover.large', $action) }}" />
             </div>
         @endif
 
 
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-sm-7 col-md-8">
             <div class="meta mb-3">
                 {{ trans('messages.started_by') }}
                 <span class="user">
@@ -67,7 +67,7 @@
                 </div>
 
                 @if ($action->attending->count() > 0)
-                    <h3 class="mt-3">{{ trans('messages.user_attending') }} ({{ $action->attending->count() }})</h3>
+                    <h3 class="mt-3 mb-1">{{ trans('messages.user_attending') }} ({{ $action->attending->count() }})</h3>
 
                     <div class="btn-list">
                         @foreach ($action->attending as $user)
@@ -77,7 +77,8 @@
                 @endif
 
                 @if ($action->notAttending->count() > 0)
-                    <h3 class="mt-3">{{ trans('messages.user_not_attending') }} ({{ $action->notAttending->count() }})
+                    <h3 class="mt-3 mb-1">{{ trans('messages.user_not_attending') }}
+                        ({{ $action->notAttending->count() }})
                     </h3>
 
                     <div class="btn-list">

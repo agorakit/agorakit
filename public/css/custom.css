@@ -7,7 +7,9 @@ body {
     font-family: 'nunito';
 }
 
+
 /* bigger font on larger screen*/
+/**
 @media (min-width: 992px) {
 
     body,
@@ -17,6 +19,7 @@ body {
         line-height: 1.15rem;
     }
 }
+**/
 
 a,
 p {

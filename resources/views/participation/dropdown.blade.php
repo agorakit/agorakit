@@ -1,6 +1,6 @@
 @auth
     <div class="participate-dropdown">
-        <button aria-expanded="false" aria-haspopup="true" class="btn btn-outline-primary btn-sm  dropdown-toggle"
+        <button aria-expanded="false" aria-haspopup="true" class="btn btn-outline-primary dropdown-toggle"
             data-bs-toggle="dropdown" id="dropdownMenuButton" type="button">
             @if (Auth::user()->isAttending($action))
                 <i class="fa fa-calendar-check-o me-2"></i> {{ __('I will participate') }}

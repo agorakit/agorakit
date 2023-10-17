@@ -1,7 +1,7 @@
 <div class="mb-md-4 pb-md-4 mb-3 pb-3 border-bottom flex-grow" id="action-{{ $action->id }}" up-expand>
 
     <div class="d-flex mb-2 align-items-center ">
-        <div class="me-md-3 me-1">
+        <div class="me-md-2 me-1">
             <div class="action-date">
                 <div class="fw-bold -mb-2">{{ $action->start->format('d') }}</div>
                 <div class="">{{ $action->start->isoFormat('MMM') }}</div>
@@ -9,13 +9,11 @@
         </div>
 
         <div class="flex-fill text-truncate">
-            <div class="mx-2">
-                <div class="text-truncate d-flex flex-wrap gap-1">
-                    <a class="text-truncate d-block fw-bold"
-                        href="{{ route('groups.actions.show', [$action->group, $action]) }}">
-                        {{ $action->name }}
-                    </a>
-                </div>
+            <div class="text-truncate d-flex flex-wrap gap-1">
+                <a class="text-truncate d-block fw-bold fs-3"
+                    href="{{ route('groups.actions.show', [$action->group, $action]) }}">
+                    {{ $action->name }}
+                </a>
             </div>
         </div>
         @include('actions.dropdown')
