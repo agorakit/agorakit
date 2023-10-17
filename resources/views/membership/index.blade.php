@@ -1,13 +1,11 @@
 @extends('group')
 
 @section('content')
-    <div class="d-flex mb-2">
+    <div class="d-flex gap-2 flex-wrap mb-2">
         @can('invite', $group)
-            <div class="me-2">
-                <a class="btn btn-primary mb-2 me-2" href="{{ action('InviteController@invite', $group) }}">
-                    {{ trans('membership.invite_by_email') }}
-                </a>
-            </div>
+            <a class="btn btn-primary" href="{{ action('InviteController@invite', $group) }}">
+                {{ trans('membership.invite_by_email') }}
+            </a>
         @endcan
 
         @can('manage-membership', $group)
@@ -20,8 +18,7 @@
     </div>
 
     <div class="table">
-        <table class="table responsive data-table table-striped" data-order='[[ 3, "desc" ], [ 0, "asc" ]]'
-            style="width: 100%">
+        <table class="table data-table table-striped" data-order='[[ 3, "desc" ], [ 0, "asc" ]]' style="width: 100%">
             <thead class="thead-dark" style="width: 100%">
                 <tr>
                     <th data-priority="1">{{ trans('messages.name') }}</th>
