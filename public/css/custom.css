@@ -74,6 +74,10 @@ p {
     margin-bottom: 24px;
 }
 
+.summary {
+    height: 1.5rem;
+    overflow: hidden;
+}
 
 
 .small-help,

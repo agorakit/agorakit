@@ -1,7 +1,7 @@
-<div class="d-flex justify-content-between align-items-start mb-md-4 pb-md-4 mb-3 pb-3 border-bottom" up-expand>
+<div class="d-flex justify-content-between align-items-start mb-3 pb-3 border-bottom" up-expand>
 
     <div class="flex-grow-1">
-        <div class="d-flex align-items-center mb-1">
+        <div class="d-flex align-items-center">
             @if ($discussion->user)
                 <div class="me-md-3 me-2">
                     @include('users.avatar', ['user' => $discussion->user])
@@ -10,14 +10,24 @@
 
             <div class="flex-grow-1">
                 <div>
-                    <a class="fw-bold" href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}#unread">
+                    <a class="fw-bold"
+                        href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}#unread">
                         @if ($discussion->isArchived())
-                            ([{{ __('Archived') }}])
+                            [{{ __('Archived') }}]
                         @endif
                         {{ $discussion->name }}
                     </a>
                 </div>
 
+                <div class="text-meta mb-1">
+                    @if ($discussion->user)
+                        {{ $discussion->user->name }}
+                    @endif
+                    <strong>
+                        {{ $discussion->group->name }}
+                    </strong>
+                    {{ dateForHumans($discussion->updated_at) }}
+                </div>
             </div>
             @if ($discussion->isPinned())
                 <div class="me-2">
@@ -34,16 +44,7 @@
             @include('discussions.dropdown')
         </div>
 
-        <div class="">
-            <div class="text-meta mb-1">
-                @if ($discussion->user)
-                    {{ trans('messages.started_by') }}
-                    {{ $discussion->user->name }}
-                @endif
-                {{ trans('messages.in') }}
-                {{ $discussion->group->name }},
-                {{ dateForHumans($discussion->updated_at) }}
-            </div>
+        <div class="summary">
             {{ summary($discussion->body, 150) }}
         </div>
 
