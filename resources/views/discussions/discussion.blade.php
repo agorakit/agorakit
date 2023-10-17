@@ -9,19 +9,21 @@
             @endif
 
             <div class="flex-grow-1">
-                <div>
+                <div class="summary">
                     <a class="fw-bold"
                         href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}#unread">
+                        {{ $discussion->name }}
                         @if ($discussion->isArchived())
                             [{{ __('Archived') }}]
                         @endif
-                        {{ $discussion->name }}
                     </a>
                 </div>
 
-                <div class="text-meta mb-1">
+                <div class="text-meta mb-1 summary">
                     @if ($discussion->user)
-                        {{ $discussion->user->name }}
+                        <span class="d-none d-md-inline">
+                            {{ $discussion->user->name }}
+                        </span>
                     @endif
                     <strong>
                         {{ $discussion->group->name }}
