@@ -40,11 +40,12 @@ class ImportGroup extends Command
      *
      * @var string
      */
-    protected $description = 'Import a group from an Agorakit export zip file';
+    protected $description = 'Import a group from an Agorakit export json file';
 
 
     protected $group;
     protected $zip;
+    protected $originalGroupId;
 
     /**
      * Create a new command instance.
@@ -64,33 +65,15 @@ class ImportGroup extends Command
     public function handle()
     {
 
-        // open the zip file
-
-        $zipfilename = storage_path('app/exports/' . $this->argument('group') . '/group.zip');
-
-        $this->zip = new ZipArchive;
-
-        if ($this->zip->open($zipfilename) === TRUE) {
-
-            $this->line('Extracting zip file : ' . $zipfilename);
-
-            // extract group content
-            $this->zip->extractTo(storage_path('app/imports/' . $this->argument('group')));
-            $this->zip->close();
-        } else {
-            $this->error('Could not open zip file or file not found at ' . $zipfilename);
-            die();
-        }
-
-        $this->newLine();
+        $group_id = $this->argument('group');
 
 
         // parse json
-        $data = json_decode(Storage::get('imports/' . $this->argument('group') . '/group.json'));
+        $data = json_decode(Storage::get('groups/' . $group_id . '/group.json'));
 
 
-        // create group
         $group = $this->createGroup($data);
+
 
         // any function called from now on, can (and will) use this group model for it's inner working
         $this->group = $group;
@@ -139,24 +122,54 @@ class ImportGroup extends Command
 
         $this->newLine();
 
-
-        // handle user's avatar
-
-        // handle group cover
-
-
-        // delete tmp files
-
-        /*
-        if (Storage::deleteDirectory('imports/' . $this->argument('group'))) {
-            $this->info('Temp files deleted');
-        } else {
-            $this->error('Could not delete temp files');
-        }
-        */
-
         $this->line('Group imported successfuly');
     }
+
+
+    /**
+     * Create a new group based on passed data
+     * Does not save the group yet
+     */
+    function createGroup($data)
+    {
+        $group = new Group;
+        $group->id = $data->id;
+        $group->name = $data->name;
+        $group->body = $data->body;
+        $group->cover = $data->cover;
+        $group->color = $data->color;
+        $group->group_type = $data->group_type;
+        $group->address = $data->address;
+        $group->latitude = $data->latitude;
+        $group->longitude = $data->longitude;
+        $group->settings = (array) $data->settings;
+
+
+        // regenerate a slug just in case it's already taken
+        $slug = SlugService::createSlug(Group::class, 'slug', $data->slug);
+
+        $group->slug = $slug;
+        $group->status = $data->status;
+
+        $user = $this->createUser($data->user);
+        $group->user()->associate($user);
+        $group->name = $group->name . ' (imported)';
+
+        if ($group->exists) {
+            $this->error('A group with the same id exist on this install this is not a good idea to import again. Yes we need UUIDs to solve this issue');
+            die();
+        }
+
+
+        if ($group->isValid()) {
+            $group->save();
+            return $group;
+        } else {
+            $this->error($group->getErrors());
+            return false;
+        }
+    }
+
 
     /**
      * Create a user based on data or load an existing user if already there
@@ -192,42 +205,7 @@ class ImportGroup extends Command
         }
     }
 
-    /**
-     * Create a new group based on passed data
-     * Does not save the group yet
-     */
-    function createGroup($data)
-    {
-        $group = new Group;
-        $group->name = $data->name;
-        $group->body = $data->body;
-        $group->cover = $data->cover;
-        $group->color = $data->color;
-        $group->group_type = $data->group_type;
-        $group->address = $data->address;
-        $group->latitude = $data->latitude;
-        $group->longitude = $data->longitude;
-        $group->settings = (array) $data->settings;
 
-
-        // regenerate a slug just in case it's already taken
-        $slug = SlugService::createSlug(Group::class, 'slug', $data->slug);
-
-        $group->slug = $slug;
-        $group->status = $data->status;
-
-        $user = $this->createUser($data->user);
-        $group->user()->associate($user);
-        $group->name = $group->name . ' (imported)';
-
-        if ($group->isValid()) {
-            $group->save();
-            return $group;
-        } else {
-            $this->error($group->getErrors());
-            return false;
-        }
-    }
 
 
     /**
@@ -285,8 +263,6 @@ class ImportGroup extends Command
         $action->location = $data->location;
         $action->latitude = $data->latitude;
         $action->longitude = $data->longitude;
-
-
 
 
         if ($action->isValid()) {
@@ -454,15 +430,9 @@ class ImportGroup extends Command
             $file->save();
 
             // now we have a file let's handle the content
-            // this part is tightly coupled to the way files are stored on disk, there is something wrong here but it does the job. 
-            // Should be a responsability of the file model... well it's an interim solution while importing content, it will be dirty
-            $original_path = ('imports/' . $this->argument('group') . '/files/' . $data->id . '/' . basename($file->path));
-            
-            // move the file to it's new location
 
-            // change the path
-            
-            // profit
+            // curently the files must be manually moved to the correct directory. 
+            // Which is /storage/app/groups/(group_id)/files
 
 
             return $file;
