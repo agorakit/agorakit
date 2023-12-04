@@ -17,5 +17,6 @@ return [
   'inbox_suffix' => env('INBOX_SUFFIX'),
   'onlyoffice_url' => env('ONLYOFFICE_URL'),
   'max_file_size' => env('MAX_FILE_SIZE', 10000),
-  'reactions' => ['plusone', 'minusone', 'laugh', 'confused', 'heart', 'hooray', 'rocket', 'eyes']
+  'reactions' => ['plusone', 'minusone', 'laugh', 'confused', 'heart', 'hooray', 'rocket', 'eyes'],
+  'data_retention' => env('DATA_RETENTION', 30)
 ];

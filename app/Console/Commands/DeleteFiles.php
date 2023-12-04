@@ -21,7 +21,7 @@ class DeleteFiles extends Command
      *
      * @var string
      */
-    protected $description = 'Delete files from storage after 30 days of deletion in database';
+    protected $description = 'Delete files from storage after the number of days of DATA_RETENTION defined in .env have passed';
 
     /**
      * Create a new command instance.
@@ -41,18 +41,18 @@ class DeleteFiles extends Command
     public function handle()
     {
         $files = File::onlyTrashed()
-    ->where('deleted_at', '<=', Carbon::now()->subDays(30)->toDateTimeString())
-    ->get();
+            ->where('deleted_at', '<=', Carbon::now()->subDays(config('agorakit.data_retention'))->toDateTimeString())
+            ->get();
 
         $filesize = File::onlyTrashed()
-    ->where('deleted_at', '<=', Carbon::now()->subDays(30)->toDateTimeString())
-    ->sum('filesize');
+            ->where('deleted_at', '<=', Carbon::now()->subDays(config('agorakit.data_retention'))->toDateTimeString())
+            ->sum('filesize');
 
         foreach ($files as $file) {
-            $this->line($file->name.' takes '.sizeForHumans($file->filesize));
+            $this->line($file->name . ' takes ' . sizeForHumans($file->filesize));
         }
 
-        $this->info('This would save '.sizeForHumans($filesize));
+        $this->info('This would save ' . sizeForHumans($filesize));
 
         $really_delete = false;
         if ($this->option('force')) {
@@ -67,9 +67,9 @@ class DeleteFiles extends Command
         if ($really_delete) {
             foreach ($files as $file) {
                 if ($file->deleteFromStorage()) {
-                    $this->line($file->name.' deleted from storage');
+                    $this->line($file->name . ' deleted from storage');
                 } else {
-                    $this->error($file->name.' NOT deleted from storage');
+                    $this->error($file->name . ' NOT deleted from storage');
                 }
 
                 // also delete the db entry
