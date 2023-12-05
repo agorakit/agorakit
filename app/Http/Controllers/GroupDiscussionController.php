@@ -170,6 +170,7 @@ class GroupDiscussionController extends Controller
         if (Auth::check()) {
             $unread_count = $discussion->unReadCount();
             $discussion->markAsRead();
+            Auth::user()->touch(); // update user last activity when reading
         } else {
             $unread_count = 0;
         }
@@ -256,7 +257,7 @@ class GroupDiscussionController extends Controller
     public function destroyConfirm(Request $request, Group $group, Discussion $discussion)
     {
         $this->authorize('delete', $discussion);
-    
+
         return view('discussions.delete')
             ->with('group', $group)
             ->with('discussion', $discussion)
@@ -306,7 +307,7 @@ class GroupDiscussionController extends Controller
     public function archive(Group $group, Discussion $discussion)
     {
         $this->authorize('archive', $discussion);
-        
+
         $discussion->toggleArchive();
         $discussion->timestamps = false;
         $discussion->save();
