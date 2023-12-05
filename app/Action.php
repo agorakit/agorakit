@@ -26,6 +26,8 @@ class Action extends Model
     use HasCover;
 
 
+    public $type = 'action';
+
     protected $rules = [
         'name'     => 'required',
         'user_id'  => 'required|exists:users,id',
