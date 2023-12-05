@@ -13,6 +13,7 @@
             'data-mention-discussions' => route('groups.discussions.mention', $group),
             'data-mention-users' => route('groups.users.mention', $group),
             'data-mention-users-list' => $group->users->pluck('username'),
+            'data-group-id' => $group->id,
         ]) !!}
     @else
         {!! Form::textarea('body', null, [
