@@ -5,7 +5,7 @@
     @auth
         <div class="row">
             <div class="col-12 col-md-6 mb-2 order-md-2">
-                <img class="rounded" src="{{ route('users.cover', [$user, 'medium']) }}" />
+                @include ('users.cover', ['user => $user'])
             </div>
 
             <div class="col-12 col-md-6">
