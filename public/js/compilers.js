@@ -19,6 +19,62 @@ up.network.config.progressBar = true
 up.fragment.config.runScripts = true
 
 
+
+
+// JS script loader, taken from : https://makandracards.com/makandra/52361-unpoly-loading-large-libraries-on-demand
+let jsLoaded = {};
+
+function loadJS(url) {
+
+	function createScriptTag(url) {
+		let scriptTag = document.createElement("script")
+		scriptTag.src = url
+		return scriptTag
+	}
+
+	let cachedPromise = jsLoaded[url]
+	if (cachedPromise) {
+		return cachedPromise
+	} else {
+		let promise = new Promise((resolve, reject) => {
+			let scriptTag = createScriptTag(url)
+			scriptTag.addEventListener('load', resolve)
+			scriptTag.addEventListener('error', reject)
+			document.body.appendChild(scriptTag)
+		})
+		jsLoaded[url] = promise
+		return promise
+	}
+}
+
+let cssLoaded = {};
+function loadCSS(url) {
+
+	function createScriptTag(url) {
+		let linkTag = document.createElement("link")
+		linkTag.setAttribute("rel", "stylesheet")
+		linkTag.setAttribute("type", "text/css")
+		linkTag.href = url
+		return linkTag
+	}
+
+	let cachedPromise = cssLoaded[url]
+	if (cachedPromise) {
+		return cachedPromise
+	} else {
+		let promise = new Promise((resolve, reject) => {
+			let linkTag = createScriptTag(url)
+			linkTag.addEventListener('load', resolve)
+			linkTag.addEventListener('error', reject)
+			document.body.appendChild(linkTag)
+		})
+		cssLoaded[url] = promise
+		return promise
+	}
+}
+
+
+
 /**
  * Unpoly compilers
  * Here we put custom compilers for unpoly
@@ -33,7 +89,7 @@ up.fragment.config.runScripts = true
 
 /*
 To enable a wysiwyg editor, add a .wysiwyg class to a textarea
-
+	
 - data-mention-users-list should contain a json encoded list of users
 - data-mention-discussions REDO TODO
 - data-mention-files	REDO TODO
@@ -107,7 +163,6 @@ function sendFile($summernote, file, group_id) {
 	formData.append("file", file);
 	formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
 	//group_id = $('meta[name="group-id"]').attr('content');
-
 
 	$.ajax({
 		url: '/groups/' + group_id + '/files/create',
@@ -220,7 +275,13 @@ up.compiler('#unread', function (element) {
 /*
 Datatables using .data-table 
 */
-up.$compiler('.data-table', function ($element) {
+up.$compiler('.data-table', async function ($element) {
+
+	await loadJS('https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js')
+	await loadJS('https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js')
+	await loadJS('https://cdn.datatables.net/v/bs5/dt-1.13.6/b-2.4.2/b-html5-2.4.2/r-2.5.0/sr-1.3.0/datatables.min.js')
+	await loadCSS('https://cdn.datatables.net/v/bs5/dt-1.13.6/b-2.4.2/b-html5-2.4.2/r-2.5.0/sr-1.3.0/datatables.min.css')
+
 	$element.DataTable({
 		"pageLength": 10,
 		stateSave: true,
