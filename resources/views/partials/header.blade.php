@@ -1,6 +1,6 @@
-<meta name="csrf-token" content="{{ csrf_token() }}">
+<meta content="{{ csrf_token() }}" name="csrf-token">
 @if (isset($group))
-    <meta name="group-id" content="{{ $group->id }}">
+    <meta content="{{ $group->id }}" name="group-id">
 @endif
 
 <title>{{ $title ?? setting('name') }}</title>
@@ -15,6 +15,10 @@
 
 {{-- Nunito webfont --}}
 <link href="{{ asset('/fonts/nunito/stylesheet.css') }}" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"
+    integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+
 
 {{-- unpoly --}}
 <script src="https://cdn.jsdelivr.net/npm/unpoly@3.3.0/unpoly.min.js" defer></script>
