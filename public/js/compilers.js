@@ -244,11 +244,14 @@ up.compiler('.js-calendar', async function (element, data) {
 			up.navigate({ url: info.event.url, layer: 'new' });
 		},
 
+
 		// add tooltip to all events
+		/*
 		eventDidMount: function (info) {
 			content = info.event.extendedProps.tooltip;
 			$(info.el).tooltip({ title: content, html: true });
 		},
+		*/
 
 		// store the current view type on each view change
 		viewDidMount: function (info) {
