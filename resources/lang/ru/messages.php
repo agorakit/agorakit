@@ -166,6 +166,7 @@ return array (
   'ressource_geocoded_successfully' => 'Геокодирование ресурсов успешно выполнено',
   'ressource_not_created_successfully' => 'Не удалось создать ресурс',
   'ressource_not_updated_successfully' => 'Не удалось обновить ресурс',
+  'ressource_restored_successfully' => 'Resource undeleted successfully', // TODO
   'ressource_updated_successfully' => 'Ресурс успешно обновлен',
   'save' => 'Сохранить',
   'search' => 'Поиск',
@@ -178,6 +179,7 @@ return array (
   'show_all' => 'Показать всё',
   'show_history' => 'Показать историю',
   'show_list' => 'Показать список фалов',
+  'soft_deleted' => 'Deleted', // TODO
   'something_wrong' => 'Что-то не так с вашей заявкой',
   'sort' => 'Сортировка',
   'sort_by_created_at_asc' => 'Сортировка по дате создания по возрастанию',
@@ -201,6 +203,7 @@ return array (
   'this_will_allow_you_to_be_informed' => 'это позволит вам быть в курсе и участвовать',
   'title' => 'Название',
   'unattend' => 'Не принимать участия',
+  'undelete' => 'Undelete', // TODO
   'unread_discussions' => 'Непрочитанные обсуждения',
   'upload' => 'Загрузка',
   'upload_files' => 'Загрузка фалов',

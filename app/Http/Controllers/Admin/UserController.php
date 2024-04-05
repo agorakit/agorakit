@@ -13,8 +13,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //$users = \App\User::where('verified', 1)->get();
-        $users = \App\User::get();
+        // We need to bypass the Illuminate\Database\Eloquent\SoftDeletingScope
+        $users = \App\User::withTrashed()->get();
 
         return view('admin.user.index')->with('users', $users);
     }

@@ -407,4 +407,30 @@ class UserController extends Controller
             return redirect()->route('index');
         }
     }
+
+    /**
+     * Undelete the specified resource from storage.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function undelete(int $id)
+    {
+        $user = User::onlyTrashed()->findOrFail($id);
+
+        // Until an undelete permission is added
+        // allow delete granted user to undelete as well.
+        if (Gate::allows('delete', $user)) {
+
+            $user->restore();
+
+            flash(trans('messages.ressource_restored_successfully'));
+
+            return redirect()->route('users.show', $user);
+        } else {
+            abort(403);
+        }
+    }
+
 }

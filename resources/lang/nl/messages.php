@@ -164,6 +164,7 @@ return array (
   'ressource_geocoded_successfully' => 'Ressource geocoded succes',
   'ressource_not_created_successfully' => 'Ressource niet succesvol aangemaakt',
   'ressource_not_updated_successfully' => 'Ressource niet succesvol bijgewerkt',
+  'ressource_restored_successfully' => 'Resource undeleted successfully', // TODO
   'ressource_updated_successfully' => 'Inhoud met succes bewerkt',
   'save' => 'Opslaan',
   'search' => 'Zoeken',
@@ -176,6 +177,7 @@ return array (
   'show_all' => 'Alles tonen',
   'show_history' => 'Geschiedenis van aanpassingen tonen',
   'show_list' => 'Tonen als lijst',
+  'soft_deleted' => 'Deleted', // TODO
   'something_wrong' => 'Er is iets mis met je inzending',
   'sort' => 'soort',
   'sort_by_created_at_asc' => 'Sorteer op aanmaakdatum oplopend',
@@ -199,6 +201,7 @@ return array (
   'this_will_allow_you_to_be_informed' => 'Op die manier blijft u op de hoogte van de activiteiten van deze groep, en kunt u deelnemen aan de discussies.',
   'title' => 'Titel',
   'unattend' => 'unattend',
+  'undelete' => 'Undelete', // TODO
   'unread_discussions' => 'Niet-gelezen discussies',
   'upload' => 'Uploaden',
   'upload_files' => 'Bestanden uploaden',
