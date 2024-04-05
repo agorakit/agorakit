@@ -176,6 +176,7 @@ return array (
   'thank_you' => 'Grazie per aver usato quest\'applicazione',
   'you_have_been_mentionned_by' => 'Sei stato menzionato da',
   'in_the_discussion' => 'nella discussione',
+  'ressource_restored_successfully' => 'Resource undeleted successfully', // TODO
   'ressource_updated_successfully' => 'Risorsa aggiornate con successo',
   'ressource_deleted_successfully' => 'Risorsa eliminate con successo',
   'ressource_created_successfully' => 'Risorsa creata con successo',
@@ -237,9 +238,11 @@ return array (
   'remove_user_admin' => 'Revoca diritti admin',
   'reset_password_email_subject' => 'Resetta la tua password',
   'send_my_recover_email' => 'Manda la mia e-mail di recupero',
+  'soft_deleted' => 'Deleted', // TODO
   'something_wrong' => 'Qualcosa è andato storto con la tua immissione',
   'start' => 'Start',
   'stop' => 'Stop',
+  'undelete' => 'Undelete', // TODO
   'upload' => 'Carica',
   'user_invited' => 'Utente invitato',
   'user_made_member_successfuly' => 'Utente nominato membro con successo',

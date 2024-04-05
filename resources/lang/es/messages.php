@@ -164,6 +164,7 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'ressource_geocoded_successfully' => 'Recursos geocodificados correctamente',
   'ressource_not_created_successfully' => 'Recursos no creados con éxito',
   'ressource_not_updated_successfully' => 'Recurso no actualizado correctamente',
+  'ressource_restored_successfully' => 'Resource undeleted successfully', // TODO
   'ressource_updated_successfully' => 'Recurso actualizado con éxito',
   'save' => 'Guardar',
   'search' => 'Buscar',
@@ -176,6 +177,7 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'show_all' => 'Mostrar todo',
   'show_history' => 'Mostrar historial',
   'show_list' => 'Mostrar la lista de archivos',
+  'soft_deleted' => 'Deleted', // TODO
   'something_wrong' => 'Algo no funciona con su envío',
   'sort' => 'clase',
   'sort_by_created_at_asc' => 'Ordenar por fecha de creación ascendente',
@@ -199,6 +201,7 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
   'this_will_allow_you_to_be_informed' => 'esto le permitirá estar informado y participar.',
   'title' => 'Título',
   'unattend' => 'Desatender',
+  'undelete' => 'Undelete', // TODO
   'unread_discussions' => 'Discusiones no leídas',
   'upload' => 'Subir',
   'upload_files' => 'Subir archivos',

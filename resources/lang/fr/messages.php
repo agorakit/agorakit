@@ -154,6 +154,7 @@ return array (
   'logout' => 'Déconnexion',
   'email_not_verified' => 'Votre adresse mail n\'est pas vérifiée, merci de la vérifier maintenant depuis votre boite email',
   'email_not_verified_send_again_verification' => 'Si vous n\'avez pas reçu le mail de confirmation cliquez ici pour en recevoir un autre',
+  'soft_deleted' => 'Supprimé', // TODO Check French
   'sort' => 'Trier',
   'sort_by_created_at_desc' => 'Le plus récent en premier',
   'sort_by_created_at_asc' => 'Le plus ancien en premier',
@@ -162,6 +163,7 @@ return array (
   'sort_by_filesize_asc' => 'Par taille croissante',
   'sort_by_filesize_desc' => 'Par taille décroissante',
   'notifications' => 'Notifications',
+  'undelete' => 'Restaurer', // TODO Check French
   'unattend' => 'Annuler ma participation',
   'visibility' => 'Visibilité
 ',
@@ -185,6 +187,7 @@ return array (
   'ressource_deleted_successfully' => 'Ce contenu a bien été supprimé',
   'you_have_verified_your_email' => 'Vous avez vérifié votre adresse email',
   'not_allowed' => 'Pas autorisé',
+  'ressource_restored_successfully' => 'Contenu restauré avec succès', // TODO Check French
   'ressource_updated_successfully' => 'Contenu mis à jour avec succès',
   'no_file_selected' => 'Aucun fichier sélectionné',
   'ressource_not_created_successfully' => 'La ressource n\'a pas été créée à cause d\'une erreur (vérififez votre formulaire)',

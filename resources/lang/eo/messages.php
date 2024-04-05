@@ -166,6 +166,7 @@ return array (
   'ressource_geocoded_successfully' => 'Resource geocoded successfully',
   'ressource_not_created_successfully' => 'Resource Not Created Successfully',
   'ressource_not_updated_successfully' => 'Resource Not Updated Successfully',
+  'ressource_restored_successfully' => 'Resource undeleted successfully', // TODO
   'ressource_updated_successfully' => 'Resource updated successfully',
   'save' => 'Save',
   'search' => 'Search',
@@ -178,6 +179,7 @@ return array (
   'show_all' => 'Show all',
   'show_history' => 'Show history',
   'show_list' => 'Show file list',
+  'soft_deleted' => 'Deleted', // TODO
   'something_wrong' => 'Something is wrong with your submission',
   'sort' => 'Sort',
   'sort_by_created_at_asc' => 'Sort by creation date ascending',
@@ -201,6 +203,7 @@ return array (
   'this_will_allow_you_to_be_informed' => 'this will allow you to be informed and to participate',
   'title' => 'Title',
   'unattend' => 'Unattend',
+  'undelete' => 'Undelete', // TODO
   'unread_discussions' => 'Unread discussions',
   'upload' => 'Upload',
   'upload_files' => 'Upload Files',

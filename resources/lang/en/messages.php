@@ -7,6 +7,7 @@ return array (
   'address_cannot_be_geocoded' => 'Your address cannot be geolocalized. Please use a simple format, like "number street, city"',
   'ressource_geocoded_successfully' => 'Resource geocoded successfully',
   'ressource_updated_successfully' => 'Resource updated successfully',
+  'ressource_restored_successfully' => 'Resource undeleted successfully', // TODO Check English
   'invitation_sent_again' => 'Invitation sent again',
   'discussions' => 'Discussions',
   'not_allowed' => 'Not allowed',
@@ -53,6 +54,8 @@ return array (
   'last_activity' => 'Last activity',
   'admin' => 'Administrator',
   'email_verified' => 'Email verified',
+  'soft_deleted' => 'Deleted', // TODO Check English
+  'undelete' => 'Undelete', // TODO Check English
   'yes' => 'yes',
   'no' => 'no',
   'edit' => 'Edit',
