@@ -44,7 +44,6 @@ Clone the repository:
 Create and edit the configuration file from the example provided:
 
         $ cp .env.example .env
-        
         $ nano .env
 
 
