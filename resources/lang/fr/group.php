@@ -20,6 +20,7 @@ return array (
   'type' => 'Type de groupe',
   'status' => 'Status',
   'pinned' => 'Épinglé',
+  'navbar' => 'Afficher ce groupe dans la barre de navigation. Il ne sera plus affiché dans l’onglet « :my_groups ».',
   'archived' => 'Archivé',
   'LLH:obsolete' => 
   array (

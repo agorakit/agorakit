@@ -10,6 +10,11 @@
             <span class="d-none d-md-inline">{{ setting('name') }}</span>
         </a>
 
+        @php
+            $groups = Auth::check() ? Auth::user()->groups()->orderBy('name')->get() : collect([]);
+            $pinned_groups = $groups->filter(fn($g) => $g->settings['pinned_navbar'] ?? false);
+            $overview_groups = $groups->filter(fn($g) => !in_array($g->id, $pinned_groups->pluck('id')->toArray()));
+        @endphp
 
         <!-- Single dropdown on mobile to browse groups -->
         @auth
@@ -20,7 +25,7 @@
                         {{ trans('messages.my_groups') }}
                     </a>
                     <div class="dropdown-menu">
-                        @foreach (Auth::user()->groups()->orderBy('name')->get() as $group)
+                        @foreach ($overview_groups as $group)
                             <a class="dropdown-item" href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
                         @endforeach
                     </div>
@@ -46,7 +51,7 @@
                                 {{ trans('messages.my_groups') }}
                             </a>
                             <div class="dropdown-menu">
-                                @foreach (Auth::user()->groups()->orderBy('name')->get() as $group)
+                                @foreach ($overview_groups as $group)
                                     <a class="dropdown-item"
                                         href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
                                 @endforeach
@@ -65,35 +70,62 @@
 
                     <ul class="dropdown-menu">
 
+                        @if (setting('show_overview_all_groups'))
                         <a class="dropdown-item" class="dropdown-item" href="{{ action('GroupController@index') }}">
                             {{ trans('messages.all_groups') }}
                         </a>
+                        @endif
 
+                        @if (setting('show_overview_discussions'))
                         <a class="dropdown-item " href="{{ action('DiscussionController@index') }}">
                             {{ trans('messages.discussions') }}
                         </a>
+                        @endif
 
+                        @if (setting('show_overview_agenda'))
                         <a class="dropdown-item" href="{{ action('ActionController@index') }}">
                             {{ trans('messages.agenda') }}
                         </a>
+                        @endif
+
                         @auth
+                            @if (setting('show_overview_tags'))
                             <a class="dropdown-item" href="{{ action('TagController@index') }}">
                                 @lang('Tags')
                             </a>
+                            @endif
 
+                            @if (setting('show_overview_map'))
                             <a class="dropdown-item" href="{{ action('MapController@index') }}">
                                 {{ trans('messages.map') }}
                             </a>
+                            @endif
+
+                            @if (setting('show_overview_files'))
                             <a class="dropdown-item" href="{{ action('FileController@index') }}">
                                 {{ trans('messages.files') }}
                             </a>
+                            @endif
 
+                            @if (setting('show_overview_users'))
                             <a class="dropdown-item" href="{{ action('UserController@index') }}">
                                 {{ trans('messages.users_list') }}
                             </a>
+                            @endif
                         @endauth
                     </ul>
                 </li>
+
+               <!-- pinned groups -->
+               @auth
+               @if(count($pinned_groups->toArray()))
+               @foreach($pinned_groups as $group)
+                   <li class="nav-item">
+                       <a href="{{ route('groups.show', $group) }}" class="nav-link">{{ $group->name }}</a>
+                   </li>
+               @endforeach
+               @endif
+                @endauth
 
                 <!-- help -->
                 @auth

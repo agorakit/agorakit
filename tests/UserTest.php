@@ -1,5 +1,8 @@
 <?php
 
+use App\Group;
+use App\Membership;
+
 class UserTest extends Tests\BrowserKitTestCase
 {
     /******************* Why is it done this way ? ***************/
@@ -336,7 +339,32 @@ class UserTest extends Tests\BrowserKitTestCase
         $group = $this->getTestGroup();
 
         $this->actingAs($this->newbie())
-        ->get('groups/'.$group->id.'/actions/create')
+        ->get('groups/' . $group->id . '/actions/create')
         ->assertResponseStatus(403);
+    }
+
+    public function testUserCantPinGroupIntoNavbar()
+    {
+        $newbie = $this->newbie();
+        $group = Group::where('name', 'Test group of newbie')->firstOrFail();
+        $membership = Membership::firstOrNew(['user_id' => $newbie->id, 'group_id' => $group->id]);
+
+        $this->assertEquals($membership->membership, Membership::ADMIN);
+
+        $this->actingAs($newbie)
+            ->get('groups/' . $group->id . '/edit')
+            ->dontSeeText(trans('group.navbar', ['my_groups' => trans('messages.my_groups')]));
+    }
+
+    public function testAdminCanPinGroupIntoNavbar()
+    {
+        $this->actingAs($this->admin())
+            ->visit('groups/' . $this->getTestGroup()->id . '/edit')
+            ->seeText(trans('group.navbar', ['my_groups' => trans('messages.my_groups')]))
+            ->check('pinned_navbar')
+            ->press(trans('messages.save'));
+
+        $group = $this->getTestGroup(); // after set settings because they're updated
+        $this->assertTrue($group->settings['pinned_navbar']);
     }
 }
