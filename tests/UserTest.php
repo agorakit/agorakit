@@ -28,6 +28,26 @@ class UserTest extends Tests\BrowserKitTestCase
 
     /* Some utility function*/
 
+    const SETTINGS_NAVBAR = [
+        'show_overview_inside_navbar',
+        'show_overview_all_groups',
+        'show_overview_discussions',
+        'show_overview_agenda',
+        'show_overview_tags',
+        'show_overview_map',
+        'show_overview_files',
+        'show_overview_users',
+        'show_locales_inside_navbar',
+        'show_locale_fr',
+        'show_locale_en',
+        'show_locale_nl',
+        'show_locale_de',
+        'show_locale_es',
+        'show_locale_it',
+        'show_locale_ru',
+        'show_locale_eo',
+    ];
+
     public function admin()
     {
         return App\User::where('email', 'admin@agorakit.org')->firstOrFail();
@@ -55,7 +75,7 @@ class UserTest extends Tests\BrowserKitTestCase
         Artisan::call('migrate:refresh');
 
         $this->visit('/')
-        ->see('Agorakit');
+            ->see('Agorakit');
     }
 
     /**
@@ -66,13 +86,13 @@ class UserTest extends Tests\BrowserKitTestCase
         Mail::fake();
 
         $this->visit('/register')
-        ->type('Admin', 'name')
-        ->type('admin@agorakit.org', 'email')
-        ->press('Register')
-        ->type('123456789', 'password')
-        ->type('123456789', 'password_confirmation')
-        ->press('Register')
-        ->see('Agorakit');
+            ->type('Admin', 'name')
+            ->type('admin@agorakit.org', 'email')
+            ->press('Register')
+            ->type('123456789', 'password')
+            ->type('123456789', 'password_confirmation')
+            ->press('Register')
+            ->see('Agorakit');
 
         $this->seeInDatabase('users', ['email' => 'admin@agorakit.org']);
     }
@@ -84,12 +104,12 @@ class UserTest extends Tests\BrowserKitTestCase
         $user->confirmEmail();
 
         $this->actingAs($user)
-        ->visit('groups/create')
-        ->see('Create a new group')
-        ->type('Test group', 'name')
-        ->type('this is a test group', 'body')
-        ->press('Create the group')
-        ->see('Test group');
+            ->visit('groups/create')
+            ->see('Create a new group')
+            ->type('Test group', 'name')
+            ->type('this is a test group', 'body')
+            ->press('Create the group')
+            ->see('Test group');
     }
 
     public function testDiscussionCreation()
@@ -99,12 +119,12 @@ class UserTest extends Tests\BrowserKitTestCase
         $group = App\Group::where('name', 'Test group')->first();
 
         $this->actingAs($user)
-        ->visit('/groups/'.$group->id.'/discussions/create')
-        ->see('Create')
-        ->type('Test discussion', 'name')
-        ->type('this is a test discussion', 'body')
-        ->press('Create')
-        ->see('Test discussion');
+            ->visit('/groups/' . $group->id . '/discussions/create')
+            ->see('Create')
+            ->type('Test discussion', 'name')
+            ->type('this is a test discussion', 'body')
+            ->press('Create')
+            ->see('Test discussion');
     }
 
     public function testActionCreation()
@@ -114,17 +134,17 @@ class UserTest extends Tests\BrowserKitTestCase
         $group = App\Group::where('name', 'Test group')->first();
 
         $this->actingAs($user)
-        ->visit('/groups/'.$group->id.'/actions/create')
-        ->see('Add an event')
-        ->type('Test action', 'name')
-        ->type('this is a test action in the agenda', 'body')
-        ->type('Bruxelles', 'location')
-        ->type('2016-01-01', 'start_date')
-        ->type('12:00', 'start_time')
-        ->type('13:00', 'stop_time')
-        ->press('Create')
-        ->seeInDatabase('actions', ['name' => 'Test action'])
-        ->see(trans('action.create_one_button'));
+            ->visit('/groups/' . $group->id . '/actions/create')
+            ->see('Add an event')
+            ->type('Test action', 'name')
+            ->type('this is a test action in the agenda', 'body')
+            ->type('Bruxelles', 'location')
+            ->type('2016-01-01', 'start_date')
+            ->type('12:00', 'start_time')
+            ->type('13:00', 'stop_time')
+            ->press('Create')
+            ->seeInDatabase('actions', ['name' => 'Test action'])
+            ->see(trans('action.create_one_button'));
     }
 
     public function testPrivateGroupCreation()
@@ -132,14 +152,14 @@ class UserTest extends Tests\BrowserKitTestCase
         $user = App\User::where('email', 'admin@agorakit.org')->first();
 
         $this->actingAs($user)
-        ->visit('groups/create')
-        ->see('Create a new group')
-        ->type('Private test group', 'name')
-        ->type('this is a test group', 'body')
-        ->select('1', 'group_type')
-        ->press('Create the group')
-        ->see('Private test group')
-        ->see('Closed group');
+            ->visit('groups/create')
+            ->see('Create a new group')
+            ->type('Private test group', 'name')
+            ->type('this is a test group', 'body')
+            ->select('1', 'group_type')
+            ->press('Create the group')
+            ->see('Private test group')
+            ->see('Closed group');
     }
 
     public function testASecondUserIsRegistering()
@@ -147,13 +167,13 @@ class UserTest extends Tests\BrowserKitTestCase
         Mail::fake();
 
         $this->visit('/register')
-        ->type('Newbie', 'name')
-        ->type('newbie@agorakit.org', 'email')
-        ->press('Register')
-        ->type('123456789', 'password')
-        ->type('123456789', 'password_confirmation')
-        ->press('Register')
-        ->see('Agorakit');
+            ->type('Newbie', 'name')
+            ->type('newbie@agorakit.org', 'email')
+            ->press('Register')
+            ->type('123456789', 'password')
+            ->type('123456789', 'password_confirmation')
+            ->press('Register')
+            ->see('Agorakit');
 
         $this->seeInDatabase('users', ['email' => 'newbie@agorakit.org']);
     }
@@ -167,10 +187,10 @@ class UserTest extends Tests\BrowserKitTestCase
         $user->confirmEmail();
 
         $this->actingAs($user)
-        ->visit('/groups/'.$group->id.'/join')
-        ->see('Join the group')
-        ->press('Join')
-        ->see('Welcome');
+            ->visit('/groups/' . $group->id . '/join')
+            ->see('Join the group')
+            ->press('Join')
+            ->see('Welcome');
     }
 
     public function testNewbieCantJoinPrivateGroup()
@@ -180,8 +200,8 @@ class UserTest extends Tests\BrowserKitTestCase
         $user = App\User::where('email', 'newbie@agorakit.org')->first();
 
         $this->actingAs($user)
-        ->visit('/groups/'.$group->id.'/join')
-        ->see(trans('membership.apply_for_group'));
+            ->visit('/groups/' . $group->id . '/join')
+            ->see(trans('membership.apply_for_group'));
     }
 
     public function testNewbieCanApplyToPrivateGroup()
@@ -191,9 +211,9 @@ class UserTest extends Tests\BrowserKitTestCase
         $user = App\User::where('email', 'newbie@agorakit.org')->first();
 
         $this->actingAs($user)
-        ->visit('/groups/'.$group->id.'/join')
-        ->press(trans('membership.apply'))
-        ->see(trans('membership.application_stored'));
+            ->visit('/groups/' . $group->id . '/join')
+            ->press(trans('membership.apply'))
+            ->see(trans('membership.application_stored'));
     }
 
     public function testAdminCanConfirmCandidateToPrivateGroup()
@@ -205,17 +225,17 @@ class UserTest extends Tests\BrowserKitTestCase
         $newbie = App\User::where('email', 'newbie@agorakit.org')->first();
 
         $this->actingAs($user)
-        ->visit('groups/'.$group->id.'/users')
-        //->click(trans('messages.confirm_user'))
-        ->see(trans('membership.candidate'));
+            ->visit('groups/' . $group->id . '/users')
+            //->click(trans('messages.confirm_user'))
+            ->see(trans('membership.candidate'));
 
         $membership = \App\Membership::where('user_id', $newbie->id)->where('group_id', $group->id)->first();
 
         $this->actingAs($user)
-        ->visit(route('groups.membership.edit', [$group, $membership]))
-        ->select(\App\Membership::MEMBER, 'membership_level')
-        ->press(trans('messages.save'))
-        ->see(trans('membership.settings_updated'));
+            ->visit(route('groups.membership.edit', [$group, $membership]))
+            ->select(\App\Membership::MEMBER, 'membership_level')
+            ->press(trans('messages.save'))
+            ->see(trans('membership.settings_updated'));
 
         $this->seeInDatabase('membership', ['user_id' => $newbie->id, 'membership' => '20']);
     }
@@ -225,12 +245,12 @@ class UserTest extends Tests\BrowserKitTestCase
         $user = App\User::where('email', 'newbie@agorakit.org')->first();
 
         $this->actingAs($user)
-        ->visit('groups/create')
-        ->see('Create a new group')
-        ->type('Test group of newbie', 'name')
-        ->type('this is a test group', 'body')
-        ->press('Create the group')
-        ->see('Test group of newbie');
+            ->visit('groups/create')
+            ->see('Create a new group')
+            ->type('Test group of newbie', 'name')
+            ->type('this is a test group', 'body')
+            ->press('Create the group')
+            ->see('Test group of newbie');
     }
 
     public function testRobertoIsAdminOfTestGroup()
@@ -298,8 +318,8 @@ class UserTest extends Tests\BrowserKitTestCase
         $group = $this->getTestGroup();
 
         $this->actingAs($this->newbie())
-        ->get('groups/'.$group->id.'/permissions')
-        ->assertResponseStatus(403);
+            ->get('groups/' . $group->id . '/permissions')
+            ->assertResponseStatus(403);
 
         // using get instead of visit to test responses is documented here : https://laracasts.com/discuss/channels/testing/testing-a-403-response-status-after-submiting-a-form-in-laravel-51?page=1#reply=188868
     }
@@ -312,14 +332,14 @@ class UserTest extends Tests\BrowserKitTestCase
         $group = $this->getTestGroup();
 
         $this->actingAs($this->admin())
-        ->visit('groups/'.$group->id.'/permissions')
-        ->see('Permissions')
-        ->check('custom_permissions')
-        ->uncheck('member-create-discussion')
-        ->uncheck('member-create-file')
-        ->uncheck('member-create-action')
-        ->press(trans('messages.save'))
-        ->see(trans('messages.ressource_updated_successfully'));
+            ->visit('groups/' . $group->id . '/permissions')
+            ->see('Permissions')
+            ->check('custom_permissions')
+            ->uncheck('member-create-discussion')
+            ->uncheck('member-create-file')
+            ->uncheck('member-create-action')
+            ->press(trans('messages.save'))
+            ->see(trans('messages.ressource_updated_successfully'));
     }
 
     public function testNewbieCantCreateDiscussionAnymore()
@@ -327,8 +347,8 @@ class UserTest extends Tests\BrowserKitTestCase
         $group = $this->getTestGroup();
 
         $this->actingAs($this->newbie())
-        ->get('groups/'.$group->id.'/discussions/create')
-        ->assertResponseStatus(403);
+            ->get('groups/' . $group->id . '/discussions/create')
+            ->assertResponseStatus(403);
     }
 
     public function testNewbieCantCreateActionAnymore()
@@ -338,5 +358,68 @@ class UserTest extends Tests\BrowserKitTestCase
         $this->actingAs($this->newbie())
         ->get('groups/'.$group->id.'/actions/create')
         ->assertResponseStatus(403);
+    }
+
+    public function testNavbarShouldIncludesEverything()
+    {
+        \App\Setting::query()->delete();
+
+        $this->actingAs($this->newbie())
+            ->visit('/')
+            ->seeText(__('messages.my_groups'))
+            ->seeText(__('messages.overview'))
+            ->seeText(__('messages.help'))
+            ->seeText('Locale');
+    }
+
+
+    /**
+     * @dataProvider dataNavigationBar
+     */
+    public function testNavbarShouldNotIncludeElement(string $key, string $text)
+    {
+
+        \App\Setting::query()->delete();
+
+        $this->actingAs($this->admin())
+            ->visit('admin/settings')
+            ->click(__('Navigation bar'))
+            ->uncheck($key)
+            ->press(__('messages.save'));
+
+        $this->assertEquals(0, (new \App\Setting())->get($key));
+
+        $dom = $this->actingAs($this->newbie())
+            ->get('/discussions')
+            ->dontSee($text);
+
+        collect($this->dataNavigationBar())
+            ->values()
+            ->where('text', '!=', $text)
+            ->pluck('text')
+            ->each(fn ($t) => $dom->see($t));
+    }
+
+    private function dataNavigationBar(): array
+    {
+        return [
+            'overview' => ['key' => 'show_overview_inside_navbar', 'text' => 'messages.overview',],
+            'all groups' => ['key' => 'show_overview_all_groups', 'text' => 'messages.all_groups'],
+            'discussions' => ['key' => 'show_overview_discussions', 'text' =>'messages.discussions'],
+            'agenda' => ['key' => 'show_overview_agenda', 'text' => 'messages.agenda'],
+            'tags' => ['key' => 'show_overview_tags', 'text' => 'messages.tags'],
+            'map' => ['key' => 'show_overview_map', 'text' => 'messages.map'],
+            'files' => ['key' => 'show_overview_files', 'text' => 'messages.files'],
+            'users' => ['key' => 'show_overview_users', 'text' => 'messages.users_list'],
+            'locales' => ['key' => 'show_locales_inside_navbar', 'text' => '<!-- locales -->',],
+            'locale fr' => ['key' => 'show_locale_fr', 'text' => 'locale-fr',],
+            'locale en' => ['key' => 'show_locale_en', 'text' => 'locale-en'],
+            'locale nl' => ['key' => 'show_locale_nl', 'text' => 'locale-nl'],
+            'locale de' => ['key' => 'show_locale_de', 'text' => 'locale-de'],
+            'locale es' => ['key' => 'show_locale_es', 'text' => 'locale-es'],
+            'locale it' => ['key' => 'show_locale_it', 'text' => 'locale-it'],
+            'locale ru' => ['key' => 'show_locale_ru', 'text' => 'locale-ru'],
+            'locale eo' => ['key' => 'show_locale_eo', 'text' => 'locale-eo'],
+        ];
     }
 }
