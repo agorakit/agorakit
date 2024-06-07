@@ -57,10 +57,12 @@
 
                 <!-- Overview -->
                 <li class="nav-item dropdown">
+                    @if (setting('show_overview_inside_navbar', true))
                     <a aria-expanded="false" class="nav-link dropdown-toggle show_overview_inside_navbar" data-bs-toggle="dropdown"
                        data-bs-toggle="dropdown" href="#" role="button">
                         @lang('Overview')
                     </a>
+                    @endif
                     <ul class="dropdown-menu">
                         @if (setting('show_overview_all_groups', true))
                         <a class="dropdown-item messages.all_groups" href="{{ action('GroupController@index') }}">
