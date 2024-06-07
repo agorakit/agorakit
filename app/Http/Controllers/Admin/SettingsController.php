@@ -77,6 +77,7 @@ class SettingsController extends Controller
 
 
         setting()->set('show_overview_inside_navbar', $request->has('show_overview_inside_navbar') ? 1 : 0);
+        setting()->set('show_help_inside_navbar', $request->has('show_help_inside_navbar') ? 1 : 0);
 
         $overviewItems = [
             "show_overview_all_groups" => trans('messages.all_groups'),

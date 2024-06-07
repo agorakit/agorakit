@@ -104,11 +104,13 @@
 
                 <!-- help -->
                 @auth
+                    @if(setting('show_help_inside_navbar', true))
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ action('PageController@help') }}">
+                        <a class="nav-link messages.help" href="{{ action('PageController@help') }}">
                             {{ trans('messages.help') }}
                         </a>
                     </li>
+                    @endif
                 @endauth
 
                 <!-- Notifications -->

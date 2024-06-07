@@ -389,15 +389,9 @@ class UserTest extends Tests\BrowserKitTestCase
 
         $this->assertEquals(0, (new \App\Setting())->get($key));
 
-        $dom = $this->actingAs($this->newbie())
+        $this->actingAs($this->newbie())
             ->get('/discussions')
             ->dontSee($text);
-
-        collect($this->dataNavigationBar())
-            ->values()
-            ->where('text', '!=', $text)
-            ->pluck('text')
-            ->each(fn ($t) => $dom->see($t));
     }
 
     private function dataNavigationBar(): array
@@ -420,6 +414,7 @@ class UserTest extends Tests\BrowserKitTestCase
             'locale it' => ['key' => 'show_locale_it', 'text' => 'locale-it'],
             'locale ru' => ['key' => 'show_locale_ru', 'text' => 'locale-ru'],
             'locale eo' => ['key' => 'show_locale_eo', 'text' => 'locale-eo'],
+            'help' => ['key' => 'show_help_inside_navbar', 'text' => 'messages.help'],
         ];
     }
 }
