@@ -236,6 +236,10 @@ class GroupController extends Controller
         });
         $group->setSetting('allowed_tags', $allowed_tags);
 
+        if ($request->user()->isAdmin()) {
+            $group->setSetting('pinned_navbar', $request->has('pinned_navbar'));
+        }
+
         // handle cover
         if ($request->hasFile('cover')) {
             Storage::disk('local')->makeDirectory('groups/' . $group->id);
