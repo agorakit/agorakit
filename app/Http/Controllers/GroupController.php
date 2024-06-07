@@ -236,6 +236,10 @@ class GroupController extends Controller
         });
         $group->setSetting('allowed_tags', $allowed_tags);
 
+        if ($request->user()->isAdmin()) {
+            $group->setSetting('pinned_navbar', $request->has('pinned_navbar'));
+        }
+
         // handle cover
         if ($request->hasFile('cover')) {
             Storage::disk('local')->makeDirectory('groups/' . $group->id);
@@ -336,6 +340,17 @@ class GroupController extends Controller
             return $value !== '';
         });
         $group->setSetting('allowed_tags', $allowed_tags);
+
+        // handle navbar pinning
+        if (Auth::user()->isAdmin()) {
+            if ($request->has('pinned_navbar')) {
+                $group->setSetting('pinned_navbar', true);
+            } else {
+                if ($group->getSetting('pinned_navbar')) {
+                    $group->setSetting('pinned_navbar', false);
+                }
+            }
+        }
 
         // validation
         if ($group->isInvalid()) {

@@ -20,6 +20,7 @@ return array (
   'type' => 'Group type',
   'status' => 'Status',
   'pinned' => 'Pinned',
+  'navbar' => 'Display this group into the navigation bar. It won\'t be displayed into ":my_groups" anymore.',
   'archived' => 'Archived',
   'allowed_tags_title' => 'Manage tags on the content of this group',
   'allowed_tags_help' => 'If you want to limit the available tags to classify content in this group, enter the tags in the box below. If you want to allow any tag, leave the box empty.',
