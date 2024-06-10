@@ -11,6 +11,11 @@ Manage communication, decision making, membership, files and events. Flexible em
 In other words: an organized Facebook for the paranoid inside all of us.
 
 Check https://www.agorakit.org for a more colorful overview.
+
+## Test it online
+Test Agorakit here : https://app.agorakit.org
+
+## Documentation
 Read the docs here : https://docs.agorakit.org
 
 ## Features
@@ -106,6 +111,3 @@ Idea & development : Philippe Jadin
 Contributors : https://github.com/philippejadin/agorakit/graphs/contributors
 Logo : Patrick Iacono
 Illustrations : Raphaëlle Goffaux
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NDcxNjg1MjZdfQ==
--->
