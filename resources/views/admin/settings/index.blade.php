@@ -41,6 +41,11 @@
                     role="tab" aria-controls="profile" aria-selected="false">Tags</a>
             </li>
 
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#navbar-settings" type="button"
+                   role="tab" aria-controls="profile" aria-selected="false">Navigation bar</a>
+            </li>
+        </ul>
     </div>
 
     <div class="tab-content">
@@ -180,6 +185,40 @@
 
             </div>
 
+        </div>
+
+        <div class="tab-pane" id="navbar-settings" role="tabpanel" aria-labelledby="navbar-tab" tabindex="0">
+            <h2>{{ __('Navigation bar') }}</h2>
+            <div class="form-group">
+                {!! Form::checkbox('show_overview_inside_navbar', 'yes', setting('show_overview_inside_navbar', true)) !!}
+                {{ __('Show overview button inside the navigation bar') }}
+            </div>
+            <div id="overview-settings-visibility" style="margin-left: 1em">
+                <h3>{{ __('Overview') }}</h3>
+                @foreach($overviewItems as $key => $value)
+                    <div class="form-group">
+                        {!! Form::checkbox($key, 'yes', setting($key, true)) !!}
+                        {{ __('Show :name button into overview', ['name' => $value]) }}
+                    </div>
+                @endforeach
+            </div>
+            <div class="form-group">
+                {!! Form::checkbox('show_help_inside_navbar', 'yes', setting('show_help_inside_navbar', true)) !!}
+                {{ __('Show Help button inside the navigation bar') }}
+            </div>
+            <div class="form-group">
+                {!! Form::checkbox('show_locales_inside_navbar', 'yes', setting('show_locales_inside_navbar', true)) !!}
+                {{ __('Show Locales button inside the navigation bar') }}
+            </div>
+            <div class="locale-configuration" style="margin-left: 1em">
+                <h3>{{ __('Locales') }}</h3>
+                @foreach(config('app.locales') as $locale)
+                    <div class="form-group">
+                        {!! Form::checkbox("show_locale_{$locale}", 'yes', setting("show_locale_{$locale}", true)) !!}
+                        {{ __("Show :locale button into locales", ['locale' => $locale]) }}
+                    </div>
+                @endforeach
+            </div>
         </div>
 
         <div class="mt-3">
