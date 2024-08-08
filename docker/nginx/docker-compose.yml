@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
     image: agorakit
-    container_name: agorakit
+    container_name: agorakit_app
     volumes:
       - ../../:/var/www/html
     environment:
@@ -24,6 +24,7 @@ services:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
     ports:
       - "80:80"
+      - "80:8000"
     depends_on:
       - app
     networks:
@@ -31,7 +32,7 @@ services:
 
   mysql:
     image: mysql:8.0
-    container_name: agorakit_mysql
+    container_name: agorakit_db
     environment:
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_DATABASE: laravel

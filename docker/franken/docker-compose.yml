@@ -18,8 +18,11 @@ services:
       - caddy_config:/config
     # comment the following line in production, it allows to have nice human-readable logs in dev
     tty: true
+    networks:
+      - laravel
   db:
     image: mariadb:latest
+    container_name: agorakit_database
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: agorakit
@@ -29,6 +32,9 @@ services:
       - database:/var/lib/mysql
     ports:
       - 3306:3306
+    networks:
+      - laravel
+
 
 # Volumes needed for Caddy certificates and configuration
 volumes:
