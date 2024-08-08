@@ -1,8 +1,5 @@
 # Agorakit documentation
-This is the documentation of Agorakit.
-Documentation is written in markdown and the website is statically built using [Mkdocs material](https://squidfunk.github.io/mkdocs-material/)
+The documentation of Agorakit now lives in a [separate repository](https://github.com/agorakit/documentation) to ease collaboration.
 
-
-# How to contribute ?
-Read the documentation on documenting (!) [here](./docs/documentation.md)
+Just go to https://docs.agorakit.org/ if you want to read the latest documentation.
 
