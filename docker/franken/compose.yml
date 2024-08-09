@@ -19,7 +19,7 @@ services:
     # comment the following line in production, it allows to have nice human-readable logs in dev
     tty: true
     networks:
-      - laravel
+      - agorakit
   db:
     image: mariadb:latest
     container_name: agorakit_database
@@ -33,8 +33,26 @@ services:
     ports:
       - 3306:3306
     networks:
-      - laravel
+      - agorakit
 
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+    networks:
+          - agorakit
+  
+  
+  mailpit:
+      image: 'axllent/mailpit:latest'
+      ports:
+          - '${FORWARD_MAILPIT_PORT:-1025}:1025'
+          - '${FORWARD_MAILPIT_DASHBOARD_PORT:-8025}:8025'
+      networks:
+          - agorakit
 
 # Volumes needed for Caddy certificates and configuration
 volumes:
@@ -44,5 +62,5 @@ volumes:
 
 
 networks:
-  laravel:
+  agorakit:
     driver: bridge
