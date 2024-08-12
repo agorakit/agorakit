@@ -2,11 +2,7 @@
     <div class="container-fluid">
         <!-- logo -->
         <a class="navbar-brand me-4" href="{{ route('index') }}">
-            @if (Storage::exists('public/logo/favicon.png'))
-                <img height="40" src="{{ asset('storage/logo/favicon.png') }}" width="40" />
-            @else
-                <img height="40" src="/images/logo-white.svg" width="40" />
-            @endif
+            <img class="rounded" height="40" src="/icon/40" width="40" />
             <span class="d-none d-md-inline">{{ setting('name') }}</span>
         </a>
 

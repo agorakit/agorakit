@@ -2,28 +2,22 @@
 
 @section('content')
     <h1 class="d-flex mb-4">
-
-        @if (Storage::exists('public/logo/favicon.png'))
-            <img class="rounded" src="{{{ asset('storage/logo/favicon.png') }}}" width="40" height="40" />
-        @else
-            <img class="rounded" src="/images/logo.svg" width="40" height="40" />
-        @endif
-
+        <img class="rounded" height="40" src="/icon/40" width="40" />
         <div class="ms-2">
             {{ setting('name') }} : {{ strtolower(trans('messages.login')) }}
         </div>
 
     </h1>
 
-    <form class="mb-5" method="POST" action="{{ url('/login') }}">
+    <form action="{{ url('/login') }}" class="mb-5" method="POST">
 
         @csrf
         @honeypot
 
         <div class="form-group mb-3">
             <label class="form-label">{{ __('Username or Email') }}</label>
-            <input class="form-control" name="login" type="text" value="{{ old('username') ?: old('email') }}"
-                required="required">
+            <input class="form-control" name="login" required="required" type="text"
+                value="{{ old('username') ?: old('email') }}">
         </div>
 
         <div class="form-group mb-3">
@@ -35,7 +29,7 @@
         </div>
 
         <div class="form-check mb-3">
-            <input class="form-check-input" id="remember_me" name="remember" type="checkbox" value="1" checked>
+            <input checked class="form-check-input" id="remember_me" name="remember" type="checkbox" value="1">
             <label class="form-check-label" for="remember_me">
                 {{ trans('messages.remember_me') }}
             </label>
@@ -50,7 +44,7 @@
     </form>
 
     <div class="alert alert-primary" role="alert">
-        <i class="fa fa-info-circle" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fa fa-info-circle"></i>
         <a href="{{ route('register') }}">@lang('Click here to register a new account')</a>
     </div>
 @endsection

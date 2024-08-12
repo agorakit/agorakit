@@ -71,9 +71,9 @@ class SettingsController extends Controller
             if ($request->hasFile('logo')) {
                 Storage::makeDirectory('public/logo');
 
-                Image::make($request->file('logo'))->fit(128, 128)->save(storage_path() . '/app/public/logo/favicon.png');
+                Image::make($request->file('logo'))->fit(128, 128)->save(storage_path() . '/app/public/images/favicon.png');
 
-                Image::make($request->file('logo'))->fit(640, 640)->save(storage_path() . '/app/public/logo/logo.jpg');
+                Image::make($request->file('logo'))->fit(640, 640)->save(storage_path() . '/app/public/images/logo.jpg');
 
                 Image::make($request->file('logo'))->widen(1024)->save(storage_path() . '/app/logo.png');
             }
