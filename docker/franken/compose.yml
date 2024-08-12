@@ -1,5 +1,3 @@
-# compose.yaml
-
 services:
   php:
     container_name: agorakit_php
@@ -36,6 +34,7 @@ services:
       - agorakit
 
   phpmyadmin:
+    container_name: agorakit_phpmyadmin
     image: phpmyadmin
     restart: always
     ports:
@@ -47,6 +46,7 @@ services:
   
   
   mailpit:
+      container_name: agorakit_mailpit
       image: 'axllent/mailpit:latest'
       ports:
           - '${FORWARD_MAILPIT_PORT:-1025}:1025'
