@@ -5,7 +5,7 @@
 
 <title>{{ $title ?? setting('name') }}</title>
 
-<link href="{{ route('icon', 192) }}" rel="shortcut icon">
+<link href="{{ route('icon', 192) }}" rel="icon">
 
 <link href="{{ route('pwa.index') }}" rel="manifest">
 
