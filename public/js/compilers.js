@@ -1,6 +1,9 @@
 /**
- * Unpoly global config 
- */
+* We use unpoly compilers for most of the javascript work.
+* Check docs here : https://unpoly.com/up.compiler
+*/
+
+// Unpoly global config :
 
 // set cache expiration to 5 seconds (instead of the default 15)
 up.network.config.cacheExpireAge = 5_000
@@ -14,11 +17,8 @@ up.link.config.followSelectors.push('a[href]')
 // bad response time is faster than default. Considered bad after 200 msecs
 up.network.config.badResponseTime = 200
 
-
 up.network.config.progressBar = true
 up.fragment.config.runScripts = true
-
-
 
 
 // JS script loader, taken from : https://makandracards.com/makandra/52361-unpoly-loading-large-libraries-on-demand
@@ -47,6 +47,7 @@ function loadJS(url) {
 	}
 }
 
+// CSS loader. This one is refreshed on each request, maybe there is a better way.
 let cssLoaded = {};
 function loadCSS(url) {
 
@@ -57,20 +58,22 @@ function loadCSS(url) {
 		linkTag.href = url
 		return linkTag
 	}
-
-	let cachedPromise = cssLoaded[url]
-	if (cachedPromise) {
-		return cachedPromise
-	} else {
-		let promise = new Promise((resolve, reject) => {
-			let linkTag = createScriptTag(url)
-			linkTag.addEventListener('load', resolve)
-			linkTag.addEventListener('error', reject)
-			document.body.appendChild(linkTag)
-		})
-		cssLoaded[url] = promise
-		return promise
-	}
+	//
+	//	let cachedPromise = cssLoaded[url]
+	//	if (cachedPromise) {
+	//		console.log('css already loaded : ' + url)
+	//		return cachedPromise
+	//	} else {
+	let promise = new Promise((resolve, reject) => {
+		let linkTag = createScriptTag(url)
+		linkTag.addEventListener('load', resolve)
+		linkTag.addEventListener('error', reject)
+		document.body.appendChild(linkTag)
+	})
+	//console.log('css loaded : ' + promise)
+	cssLoaded[url] = promise
+	return promise
+	//	}
 }
 
 function loadJquery() {
@@ -80,30 +83,22 @@ function loadJquery() {
 
 
 
-/**
- * Unpoly compilers
- * Here we put custom compilers for unpoly
- * Check docs here : https://unpoly.com/up.compiler
- * 
- * Basically, just add a specific class to an element to add behavior.
- * 
- * Supported classes are defined below :
- */
+/***************  Unpoly Compilers ****************/
 
 
 
 /*
 To enable a wysiwyg editor, add a .wysiwyg class to a textarea
-	
+
 - data-mention-users-list should contain a json encoded list of users
 - data-mention-discussions REDO TODO
 - data-mention-files	REDO TODO
 */
 
 up.compiler('.wysiwyg', async function (element, data) {
+	await loadCSS('https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css')
 	await loadJquery();
 	await loadJS('https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js')
-	await loadCSS('https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css')
 
 
 	// load mentions
@@ -155,18 +150,18 @@ up.compiler('.wysiwyg', async function (element, data) {
 /*
 // fix summernote dropdown for bootstrap
 up.compiler('.note-toolbar', function (element) {
-	var noteBar = $(element)
-	noteBar.find('[data-toggle]').each(function () {
-		$(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-toggle');
-	});
+var noteBar = $(element)
+noteBar.find('[data-toggle]').each(function () {
+$(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-toggle');
+});
 });
 */
 
 
 /**
- * This function upload a file to the server and in return it will get a file id, to add f:xxx to the thextarea 
- * to be later rendered as a nice embeded file.
- */
+* This function upload a file to the server and in return it will get a file id, to add f:xxx to the thextarea 
+* to be later rendered as a nice embeded file.
+*/
 function sendFile($summernote, file, group_id) {
 	var formData = new FormData();
 	formData.append("file", file);
@@ -248,8 +243,8 @@ up.compiler('.js-calendar', async function (element, data) {
 		// add tooltip to all events
 		/*
 		eventDidMount: function (info) {
-			content = info.event.extendedProps.tooltip;
-			$(info.el).tooltip({ title: content, html: true });
+		content = info.event.extendedProps.tooltip;
+		$(info.el).tooltip({ title: content, html: true });
 		},
 		*/
 
@@ -274,7 +269,6 @@ up.compiler('.js-calendar', async function (element, data) {
 up.compiler('.js-tags', async function (element, data) {
 	await loadCSS('https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css')
 	await loadJS('https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js')
-	console.log()
 	var settings = {}
 	if (data.tags) {
 		var settings = { create: true }
@@ -294,7 +288,7 @@ up.compiler('#unread', function (element) {
 /*
 Datatables using .data-table 
 */
-up.$compiler('.data-table', async function ($element) {
+up.compiler('.data-table', async function (element) {
 
 	await loadJquery();
 	await loadJS('https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js')
@@ -302,7 +296,7 @@ up.$compiler('.data-table', async function ($element) {
 	await loadJS('https://cdn.datatables.net/v/bs5/dt-1.13.6/b-2.4.2/b-html5-2.4.2/r-2.5.0/sr-1.3.0/datatables.min.js')
 	await loadCSS('https://cdn.datatables.net/v/bs5/dt-1.13.6/b-2.4.2/b-html5-2.4.2/r-2.5.0/sr-1.3.0/datatables.min.css')
 
-	$element.DataTable({
+	$(element).DataTable({
 		"pageLength": 10,
 		stateSave: true,
 		responsive: true,
@@ -335,8 +329,8 @@ up.compiler('a', function (element) {
 
 
 /**
- * Add simple history.back behaviour onclick on element 
- */
+* Add simple history.back behaviour onclick on element 
+*/
 up.compiler('.js-back', function (element) {
 
 	element.onclick = function () {
