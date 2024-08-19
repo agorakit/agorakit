@@ -10,8 +10,7 @@
 
             <div class="flex-grow-1">
                 <div class="summary">
-                    <a class="fw-bold"
-                        href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}#unread">
+                    <a class="fw-bold" href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}">
                         {{ $discussion->name }}
                         @if ($discussion->isArchived())
                             [{{ __('Archived') }}]
