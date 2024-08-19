@@ -1,13 +1,11 @@
 @extends('group')
 
 @section('content')
-    <div class="d-flex mb-2">
+    <div class="d-flex gap-2 flex-wrap mb-2">
         @can('invite', $group)
-            <div class="me-2">
-                <a class="btn btn-primary mb-2 me-2" href="{{ action('InviteController@invite', $group) }}">
-                    {{ trans('membership.invite_by_email') }}
-                </a>
-            </div>
+            <a class="btn btn-primary" href="{{ action('InviteController@invite', $group) }}">
+                {{ trans('membership.invite_by_email') }}
+            </a>
         @endcan
 
         @can('manage-membership', $group)
@@ -20,7 +18,7 @@
     </div>
 
     <div class="table">
-        <table class="table responsive data-table table-striped" data-order='[[ 3, "desc" ], [ 0, "asc" ]]' style="width: 100%">
+        <table class="table data-table table-striped" data-order='[[ 3, "desc" ], [ 0, "asc" ]]' style="width: 100%">
             <thead class="thead-dark" style="width: 100%">
                 <tr>
                     <th data-priority="1">{{ trans('messages.name') }}</th>
@@ -41,7 +39,7 @@
                 @foreach ($memberships as $membership)
                     <tr>
                         <td>
-                            <a class="d-flex align-items-center" href="{{ route('users.show', $membership->user) }}" >
+                            <a class="d-flex align-items-center" href="{{ route('users.show', $membership->user) }}">
 
                                 <img class="avatar me-2" src="{{ route('users.cover', [$membership->user, 'small']) }}" />
                                 <span>{{ $membership->user->name }}</span>
@@ -49,54 +47,56 @@
                         </td>
 
                         <td data-order="{{ $membership->created_at }}">
-                            <a href="{{ route('users.show', $membership->user) }}" >{{ dateForHumans($membership->created_at) }}</a>
+                            <a
+                                href="{{ route('users.show', $membership->user) }}">{{ dateForHumans($membership->created_at) }}</a>
                         </td>
 
                         <td data-order="{{ $membership->user->updated_at }}">
-                            <a href="{{ route('users.show', $membership->user) }}" >{{ dateForHumans($membership->user->updated_at) }}</a>
+                            <a
+                                href="{{ route('users.show', $membership->user) }}">{{ dateForHumans($membership->user->updated_at) }}</a>
                         </td>
 
                         <td data-order="{{ $membership->membership }}">
 
                             @if ($membership->membership == \App\Membership::ADMIN)
-                                <span class="rounded-full bg-green-600 text-green-100 px-2 py-1 text-xs capitalize" up-tooltip="@lang('This member is admin of the group and manages it')">
+                                <span class="tag text-bg-warning " title="@lang('This member is admin of the group and manages it')">
                                     {{ trans('membership.admin') }}
                                 </span>
                             @endif
                             @if ($membership->membership == \App\Membership::MEMBER)
-                                <span class="rounded-full bg-purple-600 text-purple-100 px-2 py-1 text-xs capitalize" up-tooltip="@lang('Regular member of the group')">
+                                <span class="tag text-bg-primary" title="@lang('Regular member of the group')">
                                     {{ trans('membership.member') }}
                                 </span>
                             @endif
                             @if ($membership->membership == \App\Membership::CANDIDATE)
-                                <span class="rounded-full bg-orange-600 text-orange-100 px-2 py-1 text-xs capitalize" up-tooltip="@lang('This user asked to be part of the group but has not yet been accepted')">
+                                <span class="tag text-bg-secondary" title="@lang('This user asked to be part of the group but has not yet been accepted')">
                                     {{ trans('membership.candidate') }}
                                 </span>
                             @endif
                             @if ($membership->membership == \App\Membership::INVITED)
-                                <span class="rounded-full bg-blue-600 text-blue-100 px-2 py-1 text-xs capitalize" up-tooltip="@lang('This user has been invited to the group but did not accept yet')">
+                                <span class="tag text-bg-success" title="@lang('This user has been invited to the group but did not accept yet')">
                                     {{ trans('membership.invited') }}
                                 </span>
                             @endif
 
                             @if ($membership->membership == \App\Membership::DECLINED)
-                                <span class="rounded-full bg-gray-800 text-gray-100 px-2 py-1 text-xs capitalize" up-tooltip="@lang('This member declined the invitagion the group')">
+                                <span class="tag text-bg-dark " title="@lang('This member declined the invitagion the group')">
                                     {{ trans('membership.declined') }}
                                 </span>
                             @endif
 
                             @if ($membership->membership == \App\Membership::UNREGISTERED)
-                                <span class="rounded-full bg-gray-800 text-gray-100 px-2 py-1 text-xs capitalize" up-tooltip="@lang('This member left the group')">
+                                <span class="tag text-bg-dark" title="@lang('This member left the group')">
                                     {{ trans('membership.unregistered') }}
                                 </span>
                             @endif
                             @if ($membership->membership == \App\Membership::REMOVED)
-                                <span class="rounded-full bg-gray-800 text-gray-100 px-2 py-1 text-xs capitalize" up-tooltip="@lang('This member has been removed from the group')">
+                                <span class="tag text-bg-dark" title="@lang('This member has been removed from the group')">
                                     {{ trans('membership.removed') }}
                                 </span>
                             @endif
                             @if ($membership->membership == \App\Membership::BLACKLISTED)
-                                <span class="rounded-full bg-red-800 text-red-100 px-2 py-1 text-xs capitalize" up-tooltip="@lang('This member has been blacklisted')">
+                                <span class="tag text-bg-dark" title="@lang('This member has been blacklisted')">
                                     {{ trans('membership.blacklisted') }}
                                 </span>
                             @endif

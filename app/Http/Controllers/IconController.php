@@ -7,8 +7,8 @@ use File;
 use Image;
 
 /**
-* This controller takes care of returning the correct favicon / icon wathever for the app
-*/
+ * This controller takes care of returning the correct favicon / icon wathever for the app
+ */
 class IconController extends Controller
 {
     public function index(Request $request, $size = 128)
@@ -19,7 +19,7 @@ class IconController extends Controller
             $size = 128;
         }
 
-        $path = storage_path().'/app/logo.png';
+        $path = storage_path() . '/app/logo.png';
 
         if (File::exists($path)) {
             $cachedImage = Image::cache(function ($img) use ($path, $size) {
@@ -28,8 +28,7 @@ class IconController extends Controller
 
             return $cachedImage->response();
         } else {
-            $path = public_path().'/logo/agorakit-icon-512.png';
-            //dd($path);
+            $path = public_path() . '/images/agorakit-icon-512.png';
             $cachedImage = Image::cache(function ($img) use ($path, $size) {
                 return $img->make($path)->fit($size, $size);
             }, 5, true);

@@ -1,0 +1,66 @@
+services:
+  php:
+    container_name: agorakit_php
+    #image: dunglas/frankenphp
+    # uncomment the following line if you want to use a custom Dockerfile
+    build: .
+    # uncomment the following line if you want to run this in a production environment
+    # restart: always
+    ports:
+      - "80:80" # HTTP
+      - "443:443" # HTTPS
+      - "443:443/udp" # HTTP/3
+    volumes:
+      - ../../:/app
+      - caddy_data:/data
+      - caddy_config:/config
+    # comment the following line in production, it allows to have nice human-readable logs in dev
+    tty: true
+    networks:
+      - agorakit
+  db:
+    image: mariadb:latest
+    container_name: agorakit_database
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: agorakit
+      MYSQL_USER: agorakit
+      MYSQL_PASSWORD: password
+    volumes:
+      - database:/var/lib/mysql
+    ports:
+      - 3306:3306
+    networks:
+      - agorakit
+
+  phpmyadmin:
+    container_name: agorakit_phpmyadmin
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+    networks:
+          - agorakit
+  
+  
+  mailpit:
+      container_name: agorakit_mailpit
+      image: 'axllent/mailpit:latest'
+      ports:
+          - '${FORWARD_MAILPIT_PORT:-1025}:1025'
+          - '${FORWARD_MAILPIT_DASHBOARD_PORT:-8025}:8025'
+      networks:
+          - agorakit
+
+# Volumes needed for Caddy certificates and configuration
+volumes:
+  caddy_data:
+  caddy_config:
+  database:
+
+
+networks:
+  agorakit:
+    driver: bridge

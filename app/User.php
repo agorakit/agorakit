@@ -15,6 +15,7 @@ use \Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Contracts\Translation\HasLocalePreference;
+use Storage;
 
 
 
@@ -98,7 +99,7 @@ class User extends Authenticatable
      *
      * @return array
      */
-    public function sluggable() :array
+    public function sluggable(): array
     {
         return [
             'username' => [
@@ -446,5 +447,20 @@ class User extends Authenticatable
         $this->preferences = $preferences;
 
         return $this->save();
+    }
+
+
+    /** returns true if the user has a cover defined (file cover.jpg present or not) */
+    public function hasCover()
+    {
+        return Storage::has('users/' . $this->id . '/cover.jpg');
+    }
+
+    /**
+     * Return a file object reprensenting cover
+     */
+    public function getCover()
+    {
+        return Storage::get('users/' . $this->id . '/cover.jpg');
     }
 }

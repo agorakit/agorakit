@@ -1,5 +1,0 @@
-Quick notes for wip
-
-- use spatie google font package
-- finish notification mentionned user independant of model type (should work for comments and discussions at least)
-- find a way to add custom code on events like drupal hooks

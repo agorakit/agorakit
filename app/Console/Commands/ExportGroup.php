@@ -75,51 +75,14 @@ class ExportGroup extends Command
             $this->info('No user passwords have been added to the json file. Users will have to reset their password on the target instance');
         }
 
+        // group storage root path
+        $root = 'groups/' . $group->id . '/';
 
         // save group json to storage
-        Storage::disk('local')->makeDirectory('exports/' . $group->id);
-        Storage::put('exports/' . $group->id . '/group.json', $group->toJson());
+        Storage::put($root . 'group.json', $group->toJson());
 
-        $this->info('Json export has been put into ' . 'exports/' . $group->id . '/group.json');
+        $this->info('Json export has been put into ' . $root . 'group.json');
 
-        // make a zip file of everything
-        $zip = new ZipArchive;
-
-        if ($zip->open(storage_path('app/exports/' . $group->id . '/group.zip'), ZipArchive::CREATE) === TRUE) {
-            // add json
-            if ($zip->addFile(storage_path('app/exports/' . $group->id . '/group.json'), 'group.json')) {
-                $this->line('Added group.json dump to archive');
-            } else {
-                $this->error('Json dump could not be added to archive');
-            }
-
-            // handle groups files
-            foreach ($group->files as $file) {
-                if ($zip->addFile($file->storagePath(), '/files/' . $file->id . '/' . basename($file->path))) {
-                    $this->line('Added ' . $file->path . ' to group files export');
-                } else {
-                    $this->error('Failed to add ' . $file->path . ' to group files export');
-                }
-            }
-
-            // handle groups cover
-            $files = File::files(storage_path('app/groups/' . $group->id));
-
-            foreach ($files as $file) {
-                $zip->addFile($file, basename($file));
-            }
-
-            // handle groups users covers
-            foreach ($group->users as $user) {
-                $zip->addFile(storage_path('app/users/' . $user->id . '/cover.jpg'), 'users/' . $user->id . '/cover.jpg');
-                $zip->addFile(storage_path('app/users/' . $user->id . '/thumbnail.jpg'), 'users/' . $user->id . '/thumbnail.jpg');
-            }
-
-            $zip->close();
-
-            $this->info('Group exported successfuly to ' . storage_path('app/exports/' . $group->id . '/group.zip'));
-        } else {
-            $this->error('Could not create zip file');
-        }
+        // a zip file could be created with the whole group folder TODO
     }
 }

@@ -1,7 +1,7 @@
-<div class="d-flex justify-content-between align-items-start mb-md-4 pb-md-4 mb-3 pb-3 border-bottom" up-expand>
+<div class="d-flex justify-content-between align-items-start mb-3 pb-3 border-bottom" up-expand>
 
     <div class="flex-grow-1">
-        <div class="d-flex align-items-center mb-1">
+        <div class="d-flex align-items-center">
             @if ($discussion->user)
                 <div class="me-md-3 me-2">
                     @include('users.avatar', ['user' => $discussion->user])
@@ -9,15 +9,27 @@
             @endif
 
             <div class="flex-grow-1">
-                <div>
-                    <a class="fw-bold" href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}#unread">
-                        @if ($discussion->isArchived())
-                            ([{{ __('Archived') }}])
-                        @endif
+                <div class="summary">
+                    <a class="fw-bold"
+                        href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}#unread">
                         {{ $discussion->name }}
+                        @if ($discussion->isArchived())
+                            [{{ __('Archived') }}]
+                        @endif
                     </a>
                 </div>
 
+                <div class="text-meta mb-1 summary">
+                    @if ($discussion->user)
+                        <span class="d-none d-md-inline">
+                            {{ $discussion->user->name }}
+                        </span>
+                    @endif
+                    <strong>
+                        {{ $discussion->group->name }}
+                    </strong>
+                    {{ dateForHumans($discussion->updated_at) }}
+                </div>
             </div>
             @if ($discussion->isPinned())
                 <div class="me-2">
@@ -34,16 +46,7 @@
             @include('discussions.dropdown')
         </div>
 
-        <div class="">
-            <div class="text-meta mb-1">
-                @if ($discussion->user)
-                    {{ trans('messages.started_by') }}
-                    {{ $discussion->user->name }}
-                @endif
-                {{ trans('messages.in') }}
-                {{ $discussion->group->name }},
-                {{ dateForHumans($discussion->updated_at) }}
-            </div>
+        <div class="summary">
             {{ summary($discussion->body, 150) }}
         </div>
 

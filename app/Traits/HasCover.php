@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 /** 
  * This trait allows any model to have an image cover 
  * - stored in [model type]/[model id]/cover.jpg 
+ * TODO refactor this to store covers in the proper group, if item belongs to a group
+ * TODO use proper storage abstraction instead of using storage_path()
  */
 trait HasCover
 {

@@ -1,28 +1,5 @@
 The JS used by Agorakit is mainly instantiated by unpoly JS
 
-Thus almost everything happens  in compilers.js
-
-
-
-CKeditor build note.
-- Go here : https://ckeditor.com/ckeditor-5/online-builder/
-- Choose classic editor
-- Remove ckfinder
-- Add image resize, mention
-
-Un zip resulting file and update ckeditor.js and ckeditor.js.map in this directory
-
-
-Fullcalendar build note
-- https://www.jsdelivr.com/package/npm/fullcalendar?tab=collection
-- download the JS file and move it to public/js/fullcalendar.js
-- download CSS and move it to public/css/fullcalendar.css
-
-
-Select2 build note
-- https://select2.org/getting-started/installation
-- Download the latest release from the CDN example and move it to public/css public/js
-
-
+Thus almost everything happens in compilers.js
 
 No build, no pain

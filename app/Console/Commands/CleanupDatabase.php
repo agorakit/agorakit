@@ -22,14 +22,14 @@ class CleanupDatabase extends Command
      *
      * @var string
      */
-    protected $signature = 'agorakit:cleanupdatabase {--days=30}';
+    protected $signature = 'agorakit:cleanupdatabase';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Cleanup the database, delete forever soft deleted models and unverified users older than 30 days';
+    protected $description = 'Cleanup the database, delete forever soft deleted models and unverified users according to data_retention in .env';
 
     /**
      * Create a new command instance.
@@ -49,7 +49,7 @@ class CleanupDatabase extends Command
     public function handle()
     {
         // just in case
-        if ($this->option('days') < 1) {
+        if (config('agorakit.data_retention') < 1) {
             return false;
         }
 
@@ -57,7 +57,7 @@ class CleanupDatabase extends Command
 
         // get a list of groups
         $groups = Group::onlyTrashed()
-            ->where('deleted_at', '<', Carbon::today()->subDays($this->option('days')))
+            ->where('deleted_at', '<', Carbon::today()->subDays(config('agorakit.data_retention')))
             ->get();
 
         foreach ($groups as $group) {
@@ -85,7 +85,7 @@ class CleanupDatabase extends Command
         // Handle discussions and their related comments :
 
         $discussions = Discussion::onlyTrashed()
-            ->where('deleted_at', '<', Carbon::today()->subDays($this->option('days')))
+            ->where('deleted_at', '<', Carbon::today()->subDays(config('agorakit.data_retention')))
             ->get();
 
         foreach ($discussions as $discussion) {
@@ -99,7 +99,7 @@ class CleanupDatabase extends Command
 
         // Handle actions
         $count = Action::onlyTrashed()
-            ->where('deleted_at', '<', Carbon::today()->subDays($this->option('days')))
+            ->where('deleted_at', '<', Carbon::today()->subDays(config('agorakit.data_retention')))
             ->forceDelete();
 
 
@@ -108,7 +108,7 @@ class CleanupDatabase extends Command
 
         // Handle files
         $files = File::onlyTrashed()
-            ->where('deleted_at', '<', Carbon::today()->subDays($this->option('days')))
+            ->where('deleted_at', '<', Carbon::today()->subDays(config('agorakit.data_retention')))
             ->get();
 
 
@@ -125,11 +125,11 @@ class CleanupDatabase extends Command
 
         // delete soft deleted and unverified users + their content and their memberships
         $users = User::onlyTrashed()
-            ->where('deleted_at', '<', Carbon::today()->subDays($this->option('days')))
+            ->where('deleted_at', '<', Carbon::today()->subDays(config('agorakit.data_retention')))
             ->get();
 
         $users = $users->merge(User::where('verified', 0)
-            ->where('created_at', '<', Carbon::today()->subDays($this->option('days')))
+            ->where('created_at', '<', Carbon::today()->subDays(config('agorakit.data_retention')))
             ->get());
 
         foreach ($users as $user) {
@@ -157,16 +157,15 @@ class CleanupDatabase extends Command
         }
 
         // delete all old revisions, older than double amount of days of retention, just in case
-        $count = Revision::where('created_at', '<', Carbon::today()->subDays($this->option('days') * 2 ))->forceDelete();
+        $count = Revision::where('created_at', '<', Carbon::today()->subDays(config('agorakit.data_retention') * 2))->forceDelete();
         if ($count) $this->info($count . ' revisions deleted');
-        
+
         // delete all old imported messages
-        $count = Message::where('created_at', '<', Carbon::today()->subDays(7))->forceDelete();
+        $count = Message::where('created_at', '<', Carbon::today()->subDays(config('agorakit.data_retention')))->forceDelete();
         if ($count) $this->info($count . ' inbound mail messages deleted');
 
         // delete all old notifications
-        $count = DatabaseNotification::where('created_at', '<', Carbon::today()->subDays($this->option('days')))->forceDelete();
+        $count = DatabaseNotification::where('created_at', '<', Carbon::today()->subDays(config('agorakit.data_retention')))->forceDelete();
         if ($count) $this->info($count . ' database notifications deleted');
-
     }
 }

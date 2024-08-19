@@ -115,8 +115,9 @@
         @can('administer', $group)
             <li class="nav-item dropdown">
 
-                <a class=" nav-link dropdown-toggle  @if (isset($tab) && $tab == 'admin') active @endif" id="admin"
-                    data-bs-toggle="dropdown" href="#" aria-controls="admin-contents" aria-expanded="false">
+                <a aria-controls="admin-contents" aria-expanded="false"
+                    class=" nav-link dropdown-toggle  @if (isset($tab) && $tab == 'admin') active @endif"
+                    data-bs-toggle="dropdown" href="#" id="admin">
                     <i class="fa fa-wrench me-2"></i> @lang('Administer')
                 </a>
                 <div class="dropdown-menu">
@@ -136,11 +137,12 @@
                         <i class="fa fa-crown me-2"></i> {{ trans('Permissions') }}
                     </a>
 
-                    <a class="dropdown-item" href="{{ action('GroupInsightsController@index', $group) }}">
+                    <a class="dropdown-item" href="{{ action('GroupInsightsController@index', $group) }}"
+                        up-follow="false">
                         <i class="fa fa-line-chart me-2"></i> {{ trans('messages.insights') }}
                     </a>
-
-                    <a class="dropdown-item" href="{{ route('groups.deleteconfirm', [$group]) }}">
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item text-danger" href="{{ route('groups.deleteconfirm', [$group]) }}">
                         <i class="fa fa-trash me-2"></i> @lang('Delete group')
                     </a>
                 </div>
@@ -216,8 +218,9 @@
         @endif
 
         <li class="nav-item">
-            <a class="nav-link dropdown-toggle  @if (isset($tab) && $tab == 'admin') active @endif" id="admin"
-                data-bs-toggle="dropdown" href="#" aria-controls="admin-contents" aria-expanded="false">
+            <a aria-controls="admin-contents" aria-expanded="false"
+                class="nav-link dropdown-toggle  @if (isset($tab) && $tab == 'admin') active @endif"
+                data-bs-toggle="dropdown" href="#" id="admin">
                 <i class="fas fa-bars"></i>
             </a>
 

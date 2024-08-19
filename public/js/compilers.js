@@ -11,23 +11,100 @@ up.link.config.followSelectors.push('a[href]')
 // reveal content from the top of it
 //up.viewport.config.revealTop = true
 
-
+// bad response time is faster than default. Considered bad after 200 msecs
 up.network.config.badResponseTime = 200
 
 
-// Here we put custom compilers for unpoly
-// Check docs here : https://unpoly.com/up.compiler
+up.network.config.progressBar = true
+up.fragment.config.runScripts = true
+
+
+
+
+// JS script loader, taken from : https://makandracards.com/makandra/52361-unpoly-loading-large-libraries-on-demand
+let jsLoaded = {};
+
+function loadJS(url) {
+
+	function createScriptTag(url) {
+		let scriptTag = document.createElement("script")
+		scriptTag.src = url
+		return scriptTag
+	}
+
+	let cachedPromise = jsLoaded[url]
+	if (cachedPromise) {
+		return cachedPromise
+	} else {
+		let promise = new Promise((resolve, reject) => {
+			let scriptTag = createScriptTag(url)
+			scriptTag.addEventListener('load', resolve)
+			scriptTag.addEventListener('error', reject)
+			document.body.appendChild(scriptTag)
+		})
+		jsLoaded[url] = promise
+		return promise
+	}
+}
+
+let cssLoaded = {};
+function loadCSS(url) {
+
+	function createScriptTag(url) {
+		let linkTag = document.createElement("link")
+		linkTag.setAttribute("rel", "stylesheet")
+		linkTag.setAttribute("type", "text/css")
+		linkTag.href = url
+		return linkTag
+	}
+
+	let cachedPromise = cssLoaded[url]
+	if (cachedPromise) {
+		return cachedPromise
+	} else {
+		let promise = new Promise((resolve, reject) => {
+			let linkTag = createScriptTag(url)
+			linkTag.addEventListener('load', resolve)
+			linkTag.addEventListener('error', reject)
+			document.body.appendChild(linkTag)
+		})
+		cssLoaded[url] = promise
+		return promise
+	}
+}
+
+function loadJquery() {
+	return loadJS('https://code.jquery.com/jquery-3.7.0.min.js')
+}
+
+
+
+
+/**
+ * Unpoly compilers
+ * Here we put custom compilers for unpoly
+ * Check docs here : https://unpoly.com/up.compiler
+ * 
+ * Basically, just add a specific class to an element to add behavior.
+ * 
+ * Supported classes are defined below :
+ */
+
 
 
 /*
 To enable a wysiwyg editor, add a .wysiwyg class to a textarea
-
+	
 - data-mention-users-list should contain a json encoded list of users
 - data-mention-discussions REDO TODO
 - data-mention-files	REDO TODO
 */
 
-up.compiler('.wysiwyg', function (element, data) {
+up.compiler('.wysiwyg', async function (element, data) {
+	await loadJquery();
+	await loadJS('https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js')
+	await loadCSS('https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css')
+
 
 	// load mentions
 	var mentions = JSON.parse(element.getAttribute("data-mention-users-list"))
@@ -96,7 +173,6 @@ function sendFile($summernote, file, group_id) {
 	formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
 	//group_id = $('meta[name="group-id"]').attr('content');
 
-
 	$.ajax({
 		url: '/groups/' + group_id + '/files/create',
 		data: formData,
@@ -125,12 +201,17 @@ function sendFile($summernote, file, group_id) {
 
 
 /*
-Add a calendar to any div with the calendar class
+Add a calendar to any div with the .js-calendar class
 - data-locale to define the correct locale
 - data-json for the json url feed to use
 */
 
-up.compiler('.js-calendar', function (element, data) {
+up.compiler('.js-calendar', async function (element, data) {
+
+	await loadJquery();
+	await loadJS('https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js')
+	await loadJS('https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.9/locales-all.global.min.js')
+
 	var initialView = (localStorage.getItem("fcDefaultView") !== null ? localStorage.getItem("fcDefaultView") : "dayGridMonth");
 	var json = element.getAttribute("data-json")
 	var locale = element.getAttribute("data-locale")
@@ -163,11 +244,14 @@ up.compiler('.js-calendar', function (element, data) {
 			up.navigate({ url: info.event.url, layer: 'new' });
 		},
 
+
 		// add tooltip to all events
+		/*
 		eventDidMount: function (info) {
 			content = info.event.extendedProps.tooltip;
 			$(info.el).tooltip({ title: content, html: true });
 		},
+		*/
 
 		// store the current view type on each view change
 		viewDidMount: function (info) {
@@ -180,33 +264,16 @@ up.compiler('.js-calendar', function (element, data) {
 });
 
 
-// network errors show message
-up.compiler('.js-network-error', function (element) {
-	function show() { element.style.display = 'block' }
-	function hide() { element.style.display = 'none' }
-	up.on('up:proxy:fatal', show)
-	up.on('up:proxy:recover', hide)
-	hide()
-});
 
-
-// loading bar
-up.compiler('.js-loader', function (element) {
-	function show() { element.style.display = 'block' }
-	function hide() { element.style.display = 'none' }
-	up.on('up:network:late', show)
-	// could also be  up.on('up:network:loading', show),
-	up.on('up:request:loaded', hide)
-	// could also be  up.on('up:network:recover', hide)
-	hide()
-});
 
 
 /*
 - add a tags class to select to enable selectize on it
-- add data-allow-new-tags to allow the creation of new tags
+- add data-tags to allow the creation of new tags
 */
-up.compiler('.js-tags', function (element, data) {
+up.compiler('.js-tags', async function (element, data) {
+	await loadCSS('https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css')
+	await loadJS('https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js')
 	console.log()
 	var settings = {}
 	if (data.tags) {
@@ -225,9 +292,16 @@ up.compiler('#unread', function (element) {
 
 
 /*
-Datatables
+Datatables using .data-table 
 */
-up.$compiler('.data-table', function ($element) {
+up.$compiler('.data-table', async function ($element) {
+
+	await loadJquery();
+	await loadJS('https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js')
+	await loadJS('https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js')
+	await loadJS('https://cdn.datatables.net/v/bs5/dt-1.13.6/b-2.4.2/b-html5-2.4.2/r-2.5.0/sr-1.3.0/datatables.min.js')
+	await loadCSS('https://cdn.datatables.net/v/bs5/dt-1.13.6/b-2.4.2/b-html5-2.4.2/r-2.5.0/sr-1.3.0/datatables.min.css')
+
 	$element.DataTable({
 		"pageLength": 10,
 		stateSave: true,
@@ -237,12 +311,12 @@ up.$compiler('.data-table', function ($element) {
 			{
 				extend: 'excel',
 				text: 'Export excel',
-				className: 'btn btn-secondary'
+				className: 'btn btn-primary bg-secondary'
 			},
 			{
 				extend: 'csv',
 				text: 'Export csv',
-				className: 'btn btn-secondary'
+				className: 'btn btn-primary bg-secondary'
 			}
 		]
 	});
@@ -270,4 +344,25 @@ up.compiler('.js-back', function (element) {
 		return false;
 	};
 
+});
+
+// network errors show message
+up.compiler('.js-network-error', function (element) {
+	function show() { element.style.display = 'block' }
+	function hide() { element.style.display = 'none' }
+	up.on('up:request:offline', show)
+	up.on('up:network:recover', hide)
+	hide()
+});
+
+
+// loading bar
+up.compiler('.js-loader', function (element) {
+	function show() { element.style.display = 'block' }
+	function hide() { element.style.display = 'none' }
+	up.on('up:network:late', show)
+	// could also be  up.on('up:network:loading', show),
+	up.on('up:request:loaded', hide)
+	// could also be  up.on('up:network:recover', hide)
+	hide()
 });

@@ -7,15 +7,19 @@ body {
     font-family: 'nunito';
 }
 
+
 /* bigger font on larger screen*/
+/**
 @media (min-width: 992px) {
 
     body,
     .dropdown-item,
     .btn {
         font-size: 1rem;
+        line-height: 1.15rem;
     }
 }
+**/
 
 a,
 p {
@@ -23,7 +27,7 @@ p {
 }
 
 :root {
-    --tblr-border-radius: 5px;
+    --tblr-border-radius: 8px;
     --tblr-body-bg: #f5f4e9;
     --tblr-list-group-item-padding-x: 0;
     /*--tblr-border-color: #aaa;*/
@@ -74,6 +78,10 @@ p {
     margin-bottom: 24px;
 }
 
+.summary {
+    height: 1.2rem;
+    overflow: hidden;
+}
 
 
 .small-help,
@@ -115,8 +123,8 @@ p {
 
 
 .action-date {
-    width: 50px;
-    height: 50px;
+    width: 36px;
+    height: 36px;
     border: 2px solid #aaa;
     text-align: center;
     margin-top: auto;
@@ -141,12 +149,13 @@ p {
 }
 
 .tag {
-    background-color: #dbd7d1;
-    padding: 1px 7px 1px 7px;
-    border-radius: 8px;
-    color: #63615b;
+    background-color: #eeebe8;
+    padding: 3px 8px 3px 8px;
+    border-radius: 30px;
+    color: #555147;
     text-decoration: none;
-    font-size: 0.9em;
+    font-size: 12px;
+    display: inline-block;
 }
 
 .tag:hover {
@@ -225,25 +234,21 @@ h6 {
 
 
 /* tom select*/
-.ts-control
-{
+.ts-control {
     border: 0;
 }
 
-.ts-wrapper
-{
+.ts-wrapper {
     padding: 0;
 }
 
-.ts-wrapper.multi .ts-control > div
-{
+.ts-wrapper.multi .ts-control>div {
     padding: 4px 12px;
     border-radius: 5px;
-    
+
 }
 
-.ts-wrapper.multi .ts-control > div.active
-{
+.ts-wrapper.multi .ts-control>div.active {
     background-color: var(--tblr-primary);
     color: white;
 }

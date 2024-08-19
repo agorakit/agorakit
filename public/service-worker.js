@@ -16,7 +16,7 @@ const {ExpirationPlugin} = workbox.expiration;
 // Handle images:
 const imageRoute = new Route(({ request }) => {
     return request.destination === 'image'
-}, new CacheFirst({
+}, new StaleWhileRevalidate({
     cacheName: 'images'
 }));
 
