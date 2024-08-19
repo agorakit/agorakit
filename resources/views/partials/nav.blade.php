@@ -10,6 +10,11 @@
             <span class="d-none d-md-inline">{{ setting('name') }}</span>
         </a>
 
+        @php
+            $groups = Auth::check() ? Auth::user()->groups()->orderBy('name')->get() : collect([]);
+            $pinned_groups = $groups->filter(fn($g) => $g->settings['pinned_navbar'] ?? false);
+            $overview_groups = $groups->filter(fn($g) => !in_array($g->id, $pinned_groups->pluck('id')->toArray()));
+        @endphp
 
         <!-- Single dropdown on mobile to browse groups -->
         @auth
@@ -20,7 +25,7 @@
                         {{ trans('messages.my_groups') }}
                     </a>
                     <div class="dropdown-menu">
-                        @foreach (Auth::user()->groups()->orderBy('name')->get() as $group)
+                        @foreach ($overview_groups as $group)
                             <a class="dropdown-item" href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
                         @endforeach
                     </div>
@@ -46,7 +51,7 @@
                                 {{ trans('messages.my_groups') }}
                             </a>
                             <div class="dropdown-menu">
-                                @foreach (Auth::user()->groups()->orderBy('name')->get() as $group)
+                                @foreach ($overview_groups as $group)
                                     <a class="dropdown-item"
                                         href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
                                 @endforeach
@@ -65,44 +70,71 @@
                     @endif
                     <ul class="dropdown-menu">
                         @if (setting('show_overview_all_groups', true))
+                        @if (setting('show_overview_all_groups'))
                         <a class="dropdown-item messages.all_groups" href="{{ action('GroupController@index') }}">
                             {{ trans('messages.all_groups') }}
                         </a>
                         @endif
+                        @endif
                         @if (setting('show_overview_discussions', true))
+                        @if (setting('show_overview_discussions'))
                         <a class="dropdown-item messages.discussions " href="{{ action('DiscussionController@index') }}">
                             {{ trans('messages.discussions') }}
                         </a>
                         @endif
+                        @endif
                         @if (setting('show_overview_agenda', true))
+                        @if (setting('show_overview_agenda'))
                         <a class="dropdown-item messages.agenda" href="{{ action('ActionController@index') }}">
                             {{ trans('messages.agenda') }}
                         </a>
                         @endif
+
+                        @endif
                         @auth
+                            @if (setting('show_overview_tags'))
                         @if (setting('show_overview_tags', true))
                         <a class="dropdown-item messages.tags" href="{{ action('TagController@index') }}">
                             @lang('Tags')
                         </a>
+                            @endif
                         @endif
+                            @if (setting('show_overview_map'))
                         @if (setting('show_overview_map', true))
                         <a class="dropdown-item messages.map" href="{{ action('MapController@index') }}">
                             {{ trans('messages.map') }}
                         </a>
+                            @endif
+
+                            @if (setting('show_overview_files'))
                         @endif
                         @if (setting('show_overview_files', true))
                         <a class="dropdown-item messages.files" href="{{ action('FileController@index') }}">
                             {{ trans('messages.files') }}
                         </a>
+                            @endif
                         @endif
+                            @if (setting('show_overview_users'))
                         @if (setting('show_overview_users', true))
                         <a class="dropdown-item messages.users_list" href="{{ action('UserController@index') }}">
                             {{ trans('messages.users_list') }}
                         </a>
+                            @endif
                         @endif
                         @endauth
                     </ul>
                 </li>
+
+               <!-- pinned groups -->
+               @auth
+               @if(count($pinned_groups->toArray()))
+               @foreach($pinned_groups as $group)
+                   <li class="nav-item">
+                       <a href="{{ route('groups.show', $group) }}" class="nav-link">{{ $group->name }}</a>
+                   </li>
+               @endforeach
+               @endif
+                @endauth
 
                 <!-- help -->
                 @auth
