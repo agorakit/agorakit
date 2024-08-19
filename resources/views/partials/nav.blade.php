@@ -2,10 +2,19 @@
     <div class="container-fluid">
         <!-- logo -->
         <a class="navbar-brand me-4" href="{{ route('index') }}">
-            <img class="rounded" height="40" src="{{ route('icon', 40) }}" width="40" />
+            @if (Storage::exists('public/logo/favicon.png'))
+                <img height="40" src="{{ asset('storage/logo/favicon.png') }}" width="40" />
+            @else
+                <img height="40" src="/images/logo-white.svg" width="40" />
+            @endif
             <span class="d-none d-md-inline">{{ setting('name') }}</span>
         </a>
 
+        @php
+            $groups = Auth::check() ? Auth::user()->groups()->orderBy('name')->get() : collect([]);
+            $pinned_groups = $groups->filter(fn($g) => $g->settings['pinned_navbar'] ?? false);
+            $overview_groups = $groups->filter(fn($g) => !in_array($g->id, $pinned_groups->pluck('id')->toArray()));
+        @endphp
 
         <!-- Single dropdown on mobile to browse groups -->
         @auth
@@ -16,7 +25,7 @@
                         {{ trans('messages.my_groups') }}
                     </a>
                     <div class="dropdown-menu">
-                        @foreach (Auth::user()->groups()->orderBy('name')->get() as $group)
+                        @foreach ($overview_groups as $group)
                             <a class="dropdown-item" href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
                         @endforeach
                     </div>
@@ -42,7 +51,7 @@
                                 {{ trans('messages.my_groups') }}
                             </a>
                             <div class="dropdown-menu">
-                                @foreach (Auth::user()->groups()->orderBy('name')->get() as $group)
+                                @foreach ($overview_groups as $group)
                                     <a class="dropdown-item"
                                         href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
                                 @endforeach
@@ -99,6 +108,17 @@
                         @endauth
                     </ul>
                 </li>
+
+               <!-- pinned groups -->
+               @auth
+               @if(count($pinned_groups->toArray()))
+               @foreach($pinned_groups as $group)
+                   <li class="nav-item">
+                       <a href="{{ route('groups.show', $group) }}" class="nav-link">{{ $group->name }}</a>
+                   </li>
+               @endforeach
+               @endif
+                @endauth
 
                 <!-- help -->
                 @auth
