@@ -1,28 +1,21 @@
-![AgoraKit, groupware for citizens](https://www.agorakit.org/images/agorakit-banner.png)
+[![Build Status](https://travis-ci.org/philippejadin/agorakit.svg?branch=master)](https://travis-ci.org/philippejadin/agorakit)
 
-## AgoraKit, groupware for citizens
+![Agorakit, groupware for citizens](https://www.agorakit.org/images/agorakit-banner.png)
 
-AgoraKit is web-based, open source groupware for citizens' initiatives. By creating collaborative groups, people can discuss topics, organize events, store files and keep everyone updated as needed. AgoraKit is a forum, calendar, file manager and email notifier.
+## Agorakit, groupware for citizens
+
+AgoraKit is web-based, open-source groupware for citizens' initiatives. By creating collaborative groups, people can discuss topics, organize events, store files and keep everyone updated as needed. AgoraKit is a forum, calendar, file manager and email notifier.
 
 Manage communication, decision making, membership, files and events. Flexible email notifications per group, per user preferences. Most of the time, no admin is involved in the process as we try to keep it as horizontal as possible.
 
 In other words: an organized Facebook for the paranoid inside all of us.
 
-Check the [website](https://www.agorakit.org) for a more colorful overview or review the [docs](https://docs.agorakit.org).
-
-
-## Getting Started
-
-* [Requirements & installation](https://docs.agorakit.org/install.html)
-* [Contributing](https://docs.agorakit.org/contribute.html)
-* [Feedback & Ideas](https://feedback.agorakit.org/)
-* [Roadmap Overview](https://github.com/agorakit/agorakit/blob/master/ROADMAP.md)
-* Developer groups: [FR](https://app.agorakit.org/groups/39), [EN](https://app.agorakit.org/groups/2014)
-
+Check https://www.agorakit.org for a more colorful overview.
+Read the docs here : https://docs.agorakit.org
 
 ## Features
 
-### Groups
+### Create groups
 - Create an unlimited amount of groups
 - The group can be open (anyone can join) or private (invite only)
 - The group can have one or more admins
@@ -85,15 +78,34 @@ Check the [website](https://www.agorakit.org) for a more colorful overview or re
 - Open source you can study and trust
 
 
+
+## Requirements & installation
+Check the documentation for more information : https://agorakit.readthedocs.io/en/latest/index.html
+
+
+## Contributing
+It's all explained here :  https://github.com/philippejadin/agorakit/wiki/How-can-I-contribute-to-agorakit-%3F
+
+> You are really welcome to help on this project !
+
+
 ## Security Vulnerabilities
-Security issues will be dealt with care and speed. Please drop a line to info (at) agorakit.org
+Please drop a line to info (at) agorakit.org . Security issues will be dealt with care and speed.
 
 
 ## Contact
 Please drop a line to info (at) agorakit.org to keep in touch.
 
 
+## License
+This tool is released under the GPL 3 licence
+
+
 ## Credits
-* Founder: Philippe Jadin
-* Logo: Patrick Iacono
-* Illustrations: Raphaëlle Goffaux
+Idea & development : Philippe Jadin
+Contributors : https://github.com/philippejadin/agorakit/graphs/contributors
+Logo : Patrick Iacono
+Illustrations : Raphaëlle Goffaux
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE5NDcxNjg1MjZdfQ==
+-->

@@ -165,30 +165,6 @@ class UserController extends Controller
     }
 
     /**
-     * Undelete user.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
-    public function undelete(int $id)
-    {
-        $user = User::onlyTrashed()->findOrFail($id);
-
-        if (Gate::allows('delete', $user)) {
-
-            // restore user account
-            $user->restore();
-
-            flash(trans('messages.ressource_restored_successfully'));
-
-            return redirect()->route('users.show', $user);
-        } else {
-            abort(403);
-        }
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param int $id
