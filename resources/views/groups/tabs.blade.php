@@ -77,7 +77,7 @@
             @can('viewMembers', $group)
                 <li class="nav-item">
                     <a class="nav-link @if (isset($tab) && $tab == 'map') active @endif"
-                        href="{{ action('GroupMapController@index', $group) }}" up-follow="false">
+                        href="{{ action('GroupMapController@index', $group) }}">
                         <i class="fa fa-map-marker me-2"></i> {{ trans('messages.map') }}
                     </a>
                 </li>
@@ -137,8 +137,7 @@
                         <i class="fa fa-crown me-2"></i> {{ trans('Permissions') }}
                     </a>
 
-                    <a class="dropdown-item" href="{{ action('GroupInsightsController@index', $group) }}"
-                        up-follow="false">
+                    <a class="dropdown-item" href="{{ action('GroupInsightsController@index', $group) }}">
                         <i class="fa fa-line-chart me-2"></i> {{ trans('messages.insights') }}
                     </a>
                     <div class="dropdown-divider"></div>
@@ -238,7 +237,7 @@
                 @if ($group->getSetting('module_map', true) == true)
                     @can('viewMembers', $group)
                         <a class="dropdown-item @if (isset($tab) && $tab == 'map') active @endif"
-                            href="{{ action('GroupMapController@index', $group) }}" up-follow="false">
+                            href="{{ action('GroupMapController@index', $group) }}">
                             <i class="fa fa-map-marker me-2"></i> {{ trans('messages.map') }}
                         </a>
                     @endcan

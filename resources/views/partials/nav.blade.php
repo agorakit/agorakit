@@ -63,71 +63,72 @@
                 <!-- Overview -->
                 <li class="nav-item dropdown">
                     @if (setting('show_overview_inside_navbar', true))
-                    <a aria-expanded="false" class="nav-link dropdown-toggle show_overview_inside_navbar" data-bs-toggle="dropdown"
-                       data-bs-toggle="dropdown" href="#" role="button">
-                        @lang('Overview')
-                    </a>
+                        <a aria-expanded="false" class="nav-link dropdown-toggle show_overview_inside_navbar"
+                            data-bs-toggle="dropdown" data-bs-toggle="dropdown" href="#" role="button">
+                            @lang('Overview')
+                        </a>
                     @endif
                     <ul class="dropdown-menu">
                         @if (setting('show_overview_all_groups', true))
-                        <a class="dropdown-item messages.all_groups" href="{{ action('GroupController@index') }}">
-                            {{ trans('messages.all_groups') }}
-                        </a>
+                            <a class="dropdown-item messages.all_groups" href="{{ action('GroupController@index') }}">
+                                {{ trans('messages.all_groups') }}
+                            </a>
                         @endif
                         @if (setting('show_overview_discussions', true))
-                        <a class="dropdown-item messages.discussions " href="{{ action('DiscussionController@index') }}">
-                            {{ trans('messages.discussions') }}
-                        </a>
+                            <a class="dropdown-item messages.discussions "
+                                href="{{ action('DiscussionController@index') }}">
+                                {{ trans('messages.discussions') }}
+                            </a>
                         @endif
                         @if (setting('show_overview_agenda', true))
-                        <a class="dropdown-item messages.agenda" href="{{ action('ActionController@index') }}">
-                            {{ trans('messages.agenda') }}
-                        </a>
+                            <a class="dropdown-item messages.agenda" href="{{ action('ActionController@index') }}">
+                                {{ trans('messages.agenda') }}
+                            </a>
                         @endif
                         @auth
-                        @if (setting('show_overview_tags', true))
-                        <a class="dropdown-item messages.tags" href="{{ action('TagController@index') }}">
-                            @lang('Tags')
-                        </a>
-                        @endif
-                        @if (setting('show_overview_map', true))
-                        <a class="dropdown-item messages.map" href="{{ action('MapController@index') }}">
-                            {{ trans('messages.map') }}
-                        </a>
-                        @endif
-                        @if (setting('show_overview_files', true))
-                        <a class="dropdown-item messages.files" href="{{ action('FileController@index') }}">
-                            {{ trans('messages.files') }}
-                        </a>
-                        @endif
-                        @if (setting('show_overview_users', true))
-                        <a class="dropdown-item messages.users_list" href="{{ action('UserController@index') }}">
-                            {{ trans('messages.users_list') }}
-                        </a>
-                        @endif
+                            @if (setting('show_overview_tags', true))
+                                <a class="dropdown-item messages.tags" href="{{ action('TagController@index') }}">
+                                    @lang('Tags')
+                                </a>
+                            @endif
+                            @if (setting('show_overview_map', true))
+                                <a class="dropdown-item messages.map" href="{{ action('MapController@index') }}">
+                                    {{ trans('messages.map') }}
+                                </a>
+                            @endif
+                            @if (setting('show_overview_files', true))
+                                <a class="dropdown-item messages.files" href="{{ action('FileController@index') }}">
+                                    {{ trans('messages.files') }}
+                                </a>
+                            @endif
+                            @if (setting('show_overview_users', true))
+                                <a class="dropdown-item messages.users_list" href="{{ action('UserController@index') }}">
+                                    {{ trans('messages.users_list') }}
+                                </a>
+                            @endif
                         @endauth
                     </ul>
                 </li>
 
-               <!-- pinned groups -->
-               @auth
-               @if(count($pinned_groups->toArray()))
-               @foreach($pinned_groups as $group)
-                   <li class="nav-item">
-                       <a href="{{ route('groups.show', $group) }}" class="nav-link">{{ $group->name }}</a>
-                   </li>
-               @endforeach
-               @endif
+                <!-- pinned groups -->
+                @auth
+                    @if (count($pinned_groups->toArray()))
+                        @foreach ($pinned_groups as $group)
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
+                            </li>
+                        @endforeach
+                    @endif
                 @endauth
 
                 <!-- help -->
                 @auth
-                    @if(setting('show_help_inside_navbar', true))
-                    <li class="nav-item">
-                        <a class="nav-link messages.help" href="{{ action('PageController@help') }}">
-                            {{ trans('messages.help') }}
-                        </a>
-                    </li>
+                    @if (setting('show_help_inside_navbar', true))
+                        <li class="nav-item">
+                            <a class="nav-link messages.help" href="{{ action('PageController@help') }}">
+                                {{ trans('messages.help') }}
+                            </a>
+                        </li>
                     @endif
                 @endauth
 
@@ -161,7 +162,7 @@
                     <!-- locales -->
                     <li class="nav-item dropdown">
                         <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
-                           href="#" role="button">
+                            href="#" role="button">
                             Locale ({{ strtoupper(app()->getLocale()) }})
                         </a>
 
@@ -170,7 +171,7 @@
                                 @if ($locale !== app()->getLocale() and setting("show_locale_{$locale}", true))
                                     <li>
                                         <a class="dropdown-item locale-{{ $locale }}"
-                                           href="{{ Request::url() }}?force_locale={{ $locale }}">
+                                            href="{{ Request::url() }}?force_locale={{ $locale }}">
                                             {{ strtoupper($locale) }}
                                         </a>
                                     </li>
