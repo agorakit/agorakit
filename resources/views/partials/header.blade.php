@@ -16,16 +16,11 @@
 {{-- Nunito webfont --}}
 <link href="{{ asset('/fonts/nunito/stylesheet.css') }}" rel="stylesheet">
 
-{{--
-<script src="https://code.jquery.com/jquery-3.7.0.min.js"
-    integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
---}}
-
 {{-- unpoly --}}
-<script src="https://cdn.jsdelivr.net/npm/unpoly@3.3.0/unpoly.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/unpoly@3.3.0/unpoly-migrate.min.js" defer></script>
-<link href="https://cdn.jsdelivr.net/npm/unpoly@3.3.0/unpoly.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/unpoly@3.3.0/unpoly-bootstrap5.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/unpoly@3.8.0/unpoly.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/unpoly@3.8.0/unpoly-migrate.min.js" defer></script>
+<link href="https://cdn.jsdelivr.net/npm/unpoly@3.8.0/unpoly.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/unpoly@3.8.0/unpoly-bootstrap5.min.css" rel="stylesheet">
 
 {{-- tabler.io --}}
 <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta19/dist/js/tabler.min.js" defer></script>
