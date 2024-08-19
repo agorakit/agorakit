@@ -15,6 +15,7 @@ return array (
   'latest_discussions' => 'Discussions récentes',
   'latest_files' => 'Fichiers récents',
   'name' => 'Nom du groupe',
+  'navbar' => 'Afficher ce groupe dans la barre de navigation. Il ne sera plus affiché dans l’onglet « :my_groups ».',
   'open' => 'Groupe public',
   'secret' => 'Groupe secret',
   'type' => 'Type de groupe',

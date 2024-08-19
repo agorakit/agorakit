@@ -15,6 +15,7 @@ return array (
   'latest_discussions' => 'Latest discussions',
   'latest_files' => 'Latest files',
   'name' => 'Group name',
+  'navbar' => 'Display this group into the navigation bar. It won\'t be displayed into ":my_groups" anymore.',
   'open' => 'Public group',
   'secret' => 'Secret group',
   'type' => 'Group type',

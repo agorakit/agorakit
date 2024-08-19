@@ -48,3 +48,11 @@
         {!! Form::select('status', ['0' => trans('group.normal'), '10' => trans('group.pinned'), '-10' => trans('group.archived')], null, ['class' => 'form-control']) !!}
     </div>
 @endcan
+
+
+@if(Auth::user()->isAdmin())
+    <div class="form-group">
+        {!! Form::checkbox('pinned_navbar', 'yes', $group->getSetting('pinned_navbar', false)) !!}
+        {!! trans('group.navbar', ['my_groups' => trans('messages.my_groups')]) !!}
+    </div>
+@endif
