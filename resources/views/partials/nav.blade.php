@@ -53,51 +53,62 @@
 
                 <!-- Overview -->
                 <li class="nav-item dropdown">
-
-                    <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
-                        data-bs-toggle="dropdown" href="#" role="button">
+                    @if (setting('show_overview_inside_navbar', true))
+                    <a aria-expanded="false" class="nav-link dropdown-toggle show_overview_inside_navbar" data-bs-toggle="dropdown"
+                       data-bs-toggle="dropdown" href="#" role="button">
                         @lang('Overview')
                     </a>
-
+                    @endif
                     <ul class="dropdown-menu">
-
-                        <a class="dropdown-item" class="dropdown-item" href="{{ action('GroupController@index') }}">
+                        @if (setting('show_overview_all_groups', true))
+                        <a class="dropdown-item messages.all_groups" href="{{ action('GroupController@index') }}">
                             {{ trans('messages.all_groups') }}
                         </a>
-
-                        <a class="dropdown-item " href="{{ action('DiscussionController@index') }}">
+                        @endif
+                        @if (setting('show_overview_discussions', true))
+                        <a class="dropdown-item messages.discussions " href="{{ action('DiscussionController@index') }}">
                             {{ trans('messages.discussions') }}
                         </a>
-
-                        <a class="dropdown-item" href="{{ action('ActionController@index') }}">
+                        @endif
+                        @if (setting('show_overview_agenda', true))
+                        <a class="dropdown-item messages.agenda" href="{{ action('ActionController@index') }}">
                             {{ trans('messages.agenda') }}
                         </a>
+                        @endif
                         @auth
-                            <a class="dropdown-item" href="{{ action('TagController@index') }}">
-                                @lang('Tags')
-                            </a>
-
-                            <a class="dropdown-item" href="{{ action('MapController@index') }}">
-                                {{ trans('messages.map') }}
-                            </a>
-                            <a class="dropdown-item" href="{{ action('FileController@index') }}">
-                                {{ trans('messages.files') }}
-                            </a>
-
-                            <a class="dropdown-item" href="{{ action('UserController@index') }}">
-                                {{ trans('messages.users_list') }}
-                            </a>
+                        @if (setting('show_overview_tags', true))
+                        <a class="dropdown-item messages.tags" href="{{ action('TagController@index') }}">
+                            @lang('Tags')
+                        </a>
+                        @endif
+                        @if (setting('show_overview_map', true))
+                        <a class="dropdown-item messages.map" href="{{ action('MapController@index') }}">
+                            {{ trans('messages.map') }}
+                        </a>
+                        @endif
+                        @if (setting('show_overview_files', true))
+                        <a class="dropdown-item messages.files" href="{{ action('FileController@index') }}">
+                            {{ trans('messages.files') }}
+                        </a>
+                        @endif
+                        @if (setting('show_overview_users', true))
+                        <a class="dropdown-item messages.users_list" href="{{ action('UserController@index') }}">
+                            {{ trans('messages.users_list') }}
+                        </a>
+                        @endif
                         @endauth
                     </ul>
                 </li>
 
                 <!-- help -->
                 @auth
+                    @if(setting('show_help_inside_navbar', true))
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ action('PageController@help') }}">
+                        <a class="nav-link messages.help" href="{{ action('PageController@help') }}">
                             {{ trans('messages.help') }}
                         </a>
                     </li>
+                    @endif
                 @endauth
 
                 <!-- Notifications -->
@@ -126,20 +137,20 @@
                     @endif
                 @endauth
 
-                <!-- locales -->
-                @if (\Config::has('app.locales'))
+                @if (\Config::has('app.locales') and setting('show_locales_inside_navbar', true))
+                    <!-- locales -->
                     <li class="nav-item dropdown">
                         <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
-                            href="#" role="button">
+                           href="#" role="button">
                             Locale ({{ strtoupper(app()->getLocale()) }})
                         </a>
 
                         <ul class="dropdown-menu">
                             @foreach (\Config::get('app.locales') as $locale)
-                                @if ($locale !== app()->getLocale())
+                                @if ($locale !== app()->getLocale() and setting("show_locale_{$locale}", true))
                                     <li>
-                                        <a class="dropdown-item"
-                                            href="{{ Request::url() }}?force_locale={{ $locale }}">
+                                        <a class="dropdown-item locale-{{ $locale }}"
+                                           href="{{ Request::url() }}?force_locale={{ $locale }}">
                                             {{ strtoupper($locale) }}
                                         </a>
                                     </li>
