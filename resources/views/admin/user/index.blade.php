@@ -20,6 +20,7 @@
                     <th>{{ trans('messages.last_activity') }}</th>
                     <th data-priority="1" style="max-width: 50px; overflow: hidden;text-overflow: ellipsis;">{{ trans('messages.admin') }}</th>
                     <th data-priority="1" style="max-width: 50px; overflow: hidden;text-overflow: ellipsis;">{{ trans('messages.email_verified') }}</th>
+                    <th data-priority="1" style="max-width: 50px; overflow: hidden;text-overflow: ellipsis;">{{ trans('messages.deleted') }}</th>
                     <th data-priority="1"></th>
                 </tr>
             </thead>
@@ -59,8 +60,20 @@
                             @endif
                         </td>
 
+                        <td style="max-width: 50px; overflow: hidden;text-overflow: ellipsis;">
+                            @if ($user->trashed() )
+                                {{trans('messages.yes')}}
+                            @else
+                                {{trans('messages.no')}}
+                            @endif
+                        </td>
+
                         <td>
-                            <a class="btn btn-secondary" href="{{ route('users.edit', $user) }}">{{trans('messages.edit')}}</a>
+                            @if ($user->trashed() )
+                                <a class="btn btn-primary" href="{{ route('users.undelete', $user->id) }}">{{trans('messages.undelete')}}</a>
+                            @else
+                                <a class="btn btn-secondary" href="{{ route('users.edit', $user) }}">{{trans('messages.edit')}}</a>
+                            @endif
                         </td>
 
                     </tr>
