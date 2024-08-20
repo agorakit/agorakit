@@ -16,7 +16,7 @@ Check the [website](https://www.agorakit.org) for a more colorful overview or re
 * [Requirements & installation](https://docs.agorakit.org/install.html)
 * [Contributing](https://docs.agorakit.org/contribute.html)
 * [Feedback & Ideas](https://feedback.agorakit.org/)
-* [Roadmap Overview](https://github.com/agorakit/agorakit/blob/master/ROADMAP.md)
+* [Roadmap Overview](https://github.com/agorakit/agorakit/blob/main/ROADMAP.md)
 * Developer groups: [FR](https://app.agorakit.org/groups/39), [EN](https://app.agorakit.org/groups/2014)
 
 
