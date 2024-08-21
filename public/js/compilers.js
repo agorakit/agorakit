@@ -6,7 +6,7 @@
 // Unpoly global config :
 
 // set cache expiration to 5 seconds (instead of the default 15)
-up.network.config.cacheExpireAge = 5_000
+//up.network.config.cacheExpireAge = 5_000
 
 // use unpoly on all links by default
 up.link.config.followSelectors.push('a[href]')
@@ -19,7 +19,7 @@ up.network.config.badResponseTime = 200
 
 up.network.config.progressBar = true
 up.fragment.config.runScripts = true
-
+up.history.config.updateMetaTags = true
 
 // JS script loader, taken from : https://makandracards.com/makandra/52361-unpoly-loading-large-libraries-on-demand
 let jsLoaded = {};
@@ -47,34 +47,96 @@ function loadJS(url) {
 	}
 }
 
-// CSS loader. This one is refreshed on each request, maybe there is a better way.
-let cssLoaded = {};
-function loadCSS(url) {
+// Css loader taken from https://github.com/filamentgroup/loadCSS
+/*! loadCSS. [c]2020 Filament Group, Inc. MIT License */
+(function (w) {
+	"use strict";
+	/* exported loadCSS */
+	var loadCSS = function (href, before, media, attributes) {
+		// Arguments explained:
+		// `href` [REQUIRED] is the URL for your CSS file.
+		// `before` [OPTIONAL] is the element the script should use as a reference for injecting our stylesheet <link> before
+		// By default, loadCSS attempts to inject the link after the last stylesheet or script in the DOM. However, you might desire a more specific location in your document.
+		// `media` [OPTIONAL] is the media type or query of the stylesheet. By default it will be 'all'
+		// `attributes` [OPTIONAL] is the Object of attribute name/attribute value pairs to set on the stylesheet's DOM Element.
+		var doc = w.document;
+		var ss = doc.createElement("link");
+		var ref;
+		if (before) {
+			ref = before;
+		}
+		else {
+			var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+			ref = refs[refs.length - 1];
+		}
 
-	function createScriptTag(url) {
-		let linkTag = document.createElement("link")
-		linkTag.setAttribute("rel", "stylesheet")
-		linkTag.setAttribute("type", "text/css")
-		linkTag.href = url
-		return linkTag
+		var sheets = doc.styleSheets;
+		// Set any of the provided attributes to the stylesheet DOM Element.
+		if (attributes) {
+			for (var attributeName in attributes) {
+				if (attributes.hasOwnProperty(attributeName)) {
+					ss.setAttribute(attributeName, attributes[attributeName]);
+				}
+			}
+		}
+		ss.rel = "stylesheet";
+		ss.href = href;
+		// temporarily set media to something inapplicable to ensure it'll fetch without blocking render
+		ss.media = "only x";
+
+		// wait until body is defined before injecting link. This ensures a non-blocking load in IE11.
+		function ready(cb) {
+			if (doc.body) {
+				return cb();
+			}
+			setTimeout(function () {
+				ready(cb);
+			});
+		}
+		// Inject link
+		// Note: the ternary preserves the existing behavior of "before" argument, but we could choose to change the argument to "after" in a later release and standardize on ref.nextSibling for all refs
+		// Note: `insertBefore` is used instead of `appendChild`, for safety re: http://www.paulirish.com/2011/surefire-dom-element-insertion/
+		ready(function () {
+			ref.parentNode.insertBefore(ss, (before ? ref : ref.nextSibling));
+		});
+		// A method (exposed on return object for external use) that mimics onload by polling document.styleSheets until it includes the new sheet.
+		var onloadcssdefined = function (cb) {
+			var resolvedHref = ss.href;
+			var i = sheets.length;
+			while (i--) {
+				if (sheets[i].href === resolvedHref) {
+					return cb();
+				}
+			}
+			setTimeout(function () {
+				onloadcssdefined(cb);
+			});
+		};
+
+		function loadCB() {
+			if (ss.addEventListener) {
+				ss.removeEventListener("load", loadCB);
+			}
+			ss.media = media || "all";
+		}
+
+		// once loaded, set link's media back to `all` so that the stylesheet applies once it loads
+		if (ss.addEventListener) {
+			ss.addEventListener("load", loadCB);
+		}
+		ss.onloadcssdefined = onloadcssdefined;
+		onloadcssdefined(loadCB);
+		return ss;
+	};
+	// commonjs
+	if (typeof exports !== "undefined") {
+		exports.loadCSS = loadCSS;
 	}
-	//
-	//	let cachedPromise = cssLoaded[url]
-	//	if (cachedPromise) {
-	//		console.log('css already loaded : ' + url)
-	//		return cachedPromise
-	//	} else {
-	let promise = new Promise((resolve, reject) => {
-		let linkTag = createScriptTag(url)
-		linkTag.addEventListener('load', resolve)
-		linkTag.addEventListener('error', reject)
-		document.body.appendChild(linkTag)
-	})
-	//console.log('css loaded : ' + promise)
-	cssLoaded[url] = promise
-	return promise
-	//	}
-}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}(typeof global !== "undefined" ? global : this));
+
 
 function loadJquery() {
 	return loadJS('https://code.jquery.com/jquery-3.7.0.min.js')
@@ -360,3 +422,106 @@ up.compiler('.js-loader', function (element) {
 	// could also be  up.on('up:network:recover', hide)
 	hide()
 });
+
+
+// leaflet map
+up.compiler('.js-map', async function (element, data) {
+	await loadJquery();
+	await loadJS('https://unpkg.com/leaflet@1.9.4/dist/leaflet.js')
+	await loadCSS('https://unpkg.com/leaflet@1.9.4/dist/leaflet.css')
+
+	$(document).ready(function () {
+		// load all our points using geojson
+		// taken from https://medium.com/@maptastik/loading-external-geojson-a-nother-way-to-do-it-with-jquery-c72ae3b41c01
+		var points = $.ajax({
+			url: data.jsonUrl,
+			dataType: "json",
+			success: console.log("points data successfully loaded."),
+			error: function (xhr) {
+				alert(xhr.statusText)
+			}
+		})
+
+
+		// When loading is complete :
+		$.when(points).done(function () {
+			var map = L.map('mapid').setView([51.505, -0.09], 13);
+
+			L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+				attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+			}).addTo(map);
+
+
+
+
+
+			// from https://stackoverflow.com/questions/23567203/leaflet-changing-marker-color
+
+			const userIcon = L.divIcon({
+				className: "my-custom-pin",
+				iconAnchor: [0, 24],
+				labelAnchor: [-6, 0],
+				popupAnchor: [0, -36],
+				html: `<span style="background-color: #1e60c9" class="marker"></span>`
+			})
+
+			const actionIcon = L.divIcon({
+				className: "my-custom-pin",
+				iconAnchor: [0, 24],
+				labelAnchor: [-6, 0],
+				popupAnchor: [0, -36],
+				html: `<span style="background-color: #871ec9" class="marker"></span>`
+			})
+
+			const groupIcon = L.divIcon({
+				className: "my-custom-pin",
+				iconAnchor: [0, 24],
+				labelAnchor: [-6, 0],
+				popupAnchor: [0, -36],
+				html: `<span style="background-color: #8dc91e" class="marker"></span>`
+			})
+
+			// from https://gist.github.com/geog4046instructor/80ee78db60862ede74eacba220809b64
+			// replace Leaflet's default blue marker with a custom icon
+			function createCustomIcon(feature, latlng) {
+				if (feature.properties.type == 'user') {
+					return L.marker(latlng, {
+						icon: userIcon
+					})
+				}
+
+				if (feature.properties.type == 'action') {
+					return L.marker(latlng, {
+						icon: actionIcon
+					})
+				}
+
+				if (feature.properties.type == 'group') {
+					return L.marker(latlng, {
+						icon: groupIcon
+					})
+				}
+
+				return L.marker(latlng, {
+					icon: userIcon
+				})
+			}
+
+			// Add requested external GeoJSON to map
+			var allPoints = L.geoJSON(points.responseJSON, {
+				pointToLayer: createCustomIcon
+			})
+				.bindPopup(function (layer) {
+					return "<strong>" + layer.feature.properties.title + '</strong><br/>' + layer
+						.feature
+						.properties.description;
+				}).addTo(map);
+
+
+
+			map.fitBounds(allPoints.getBounds());
+
+		});
+
+	});
+})

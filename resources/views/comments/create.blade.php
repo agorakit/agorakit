@@ -2,7 +2,7 @@
     'action' => ['CommentController@store', $group, $discussion],
     'files' => true,
     'up-target' => '.comments',
-    'up-reveal' => '#unread',
+    'up-scroll' => '#unread',
 ]) !!}
 
 <div class="form-group">
@@ -12,7 +12,7 @@
         'data-mention-discussions' => route('groups.discussions.mention', $group),
         'data-mention-users' => route('groups.users.mention', $group),
         'data-mention-users-list' => $group->users->pluck('username'),
-        'data-group-id' => $group->id
+        'data-group-id' => $group->id,
     ]) !!}
     <div class="small-help mt-2">
         <i class="fa fa-info-circle"></i> {{ trans('messages.attach_file_help') }}.

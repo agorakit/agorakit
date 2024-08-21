@@ -7,11 +7,11 @@
     </div>
 
     <div class="d-flex flex-wrap justify-content-between mb-3">
-        <form class="form-inline" role="search" method="GET" action="{{ route('users') }}" up-autosubmit up-delay="500"
-            up-target=".users">
+        <form action="{{ route('users') }}" class="form-inline" method="GET" role="search" up-autosubmit up-target=".users"
+            up-watch-delay="500">
             <div class="input-group">
-                <input class="form-control" name="search" type="text" value="{{ Request::get('search') }}"
-                    aria-label="Search" placeholder="{{ __('Filter') }}...">
+                <input aria-label="Search" class="form-control" name="search" placeholder="{{ __('Filter') }}..."
+                    type="text" value="{{ Request::get('search') }}">
 
                 <button class="btn btn-secondary" type="submit"><span class="fa fa-search"></span></button>
 
