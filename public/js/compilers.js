@@ -6,7 +6,7 @@
 // Unpoly global config :
 
 // set cache expiration to 5 seconds (instead of the default 15)
-up.network.config.cacheExpireAge = 5_000
+//up.network.config.cacheExpireAge = 5_000
 
 // use unpoly on all links by default
 up.link.config.followSelectors.push('a[href]')
@@ -20,7 +20,6 @@ up.network.config.badResponseTime = 200
 up.network.config.progressBar = true
 up.fragment.config.runScripts = true
 up.history.config.updateMetaTags = true
-up.fragment.config.runScripts = true
 
 // JS script loader, taken from : https://makandracards.com/makandra/52361-unpoly-loading-large-libraries-on-demand
 let jsLoaded = {};
@@ -48,7 +47,7 @@ function loadJS(url) {
 	}
 }
 
-
+// Css loader taken from https://github.com/filamentgroup/loadCSS
 /*! loadCSS. [c]2020 Filament Group, Inc. MIT License */
 (function (w) {
 	"use strict";
