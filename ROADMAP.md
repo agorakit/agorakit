@@ -19,6 +19,45 @@
 - Allow groups to federate cross servers cross applications
 - Your idea could be here :)
 
+
+# Planed work
+The following items have been proposed for NGI funding : 
+
+## Documentation
+- Provide more complete end user documentation including visuals if needed.
+- Provide better group admin documentation.
+- The goal is to cover at least all the user facing features of Agorakit in the docs.
+
+## Simplify hosting
+Attracting new developers and server administrators requires a simple, standardized installation workflow.
+- Docker/OCI containers and (docker-)compose are a suitable approach for that:
+    - provide a production compose setup
+    - provide a development compose setup if needed (currently using laravel sail which works fine but seems overkill)
+
+- document the process & alternatives (for example, I’d like to test if sqlite is an alternative for small instances, if it works, I’d provide a separate docker compose setup for this use case)
+
+## External members
+Allow people outside a closed group to contact the group. Either by web form, email or using a fediverse account (real inbox for groups).
+- Allow a group to publish public content (currently ical and rss are supported), provide a fediverse outbox at least for public content (public events including those in private groups
+are a good candidate)
+- This means extending users model & database to allow external users to be stored using their fediverse handle instead of email. This also means adding a new “external” role to
+group members. Finally it would be nice to have users authenticate using their fediverse account to reduce friction shall they want to join a group.
+- The way an external request (from someone outside a group) would be handled could be inspired by Basecamp external client feature. Basically, when an “external” person contacts a group, a new discussion is created, labeled as “from an external person”, the group can discuss as usual, and the whole discussion is sent to the external person as well.
+
+## Federation
+Allow groups to communicate with the Fediverse. Paves the way for a more complete Fediverse integration.
+- Search, test, choose, add an activitypub library
+- Outbox for groups containing public events
+- Auth & external contact from activitypub
+
+## Mobile
+Agorakit is already a progressive web app that can be “installed” on mobile and desktop. Roughly 40% of users are on small screen, the UI need to be enhanced. Users expect to receive
+notifications in real-time with a mobile application like Agorakit.
+- Native mobile notifications using web push notifications + user interface to configure those
+(same way as emails notification preference UI).
+- Check all pages on mobile and fix readability / layout
+
+
 # Additional ideas 
 Those would be good to implement at some point but are not yet prioritized. Let's collect here all the (wild or not) ideas.
 
