@@ -46,7 +46,6 @@
     "fakerphp/faker": "^1.19",
     "laravel/browser-kit-testing": "^6",
     "laravel/sail": "^1.23",
-    "laravel/tinker": "^2",
     "mmo/faker-images": "^0.6",
     "mockery/mockery": "^1",
     "nunomaduro/collision": "^5",
