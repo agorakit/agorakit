@@ -30,7 +30,7 @@
     "misd/linkify": "^1.1",
     "mpratt/embera": "~2.0",
     "nicolaslopezj/searchable": "^1",
-    "rap2hpoutre/laravel-log-viewer": "1.7",
+    "rap2hpoutre/laravel-log-viewer": "^1.7",
     "spatie/icalendar-generator": "^2.1",
     "spatie/laravel-honeypot": "^3",
     "suin/php-rss-writer": "^1.6",
