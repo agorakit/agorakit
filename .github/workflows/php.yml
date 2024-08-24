@@ -11,8 +11,17 @@ permissions:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+    services:
+        mysql:
+            image: mysql:8.0
+            env:
+                MYSQL_DATABASE: agorakit
+                MYSQL_ROOT_PASSWORD: testrootpass
+            ports:
+                - 3306:3306
+            # Verify MySQL is reachable.
+            options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
     - uses: actions/checkout@v4
@@ -29,11 +38,17 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-php-
 
+    - name: Copy .env
+      run: php -r "file_exists('.env') || copy('.env.ci', '.env');"
+
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
 
-    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-    # Docs: https://getcomposer.org/doc/articles/scripts.md
+    - name: Generate key
+      run: php artisan key:generate
 
-    # - name: Run test suite
-    #   run: composer run-script test
+    - name: Directory permissions
+      run: chmod -R 777 storage bootstrap/cache
+
+    - name: Run test suite
+      run: composer run-script test
