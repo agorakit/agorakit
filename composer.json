@@ -4,10 +4,8 @@
   "keywords": ["groupware", "laravel"],
   "license": "AGPL",
   "type": "project",
-
-
   "require": {
-    "php": "^8",
+    "php": "^8.1",
     "barryvdh/laravel-translation-manager": "^0.5",
     "consoletvs/charts": "6.*",
     "cviebrock/eloquent-sluggable": "^8",
@@ -52,15 +50,15 @@
     "nunomaduro/collision": "^5",
     "phpunit/phpunit": "^9.0"
   },
-
-
-
   "config": {
     "optimize-autoloader": true,
     "preferred-install": "dist",
     "sort-packages": true,
     "allow-plugins": {
       "php-http/discovery": true
+    },
+    "platform": {
+      "php": "8.1"
     }
   },
   "extra": {
