@@ -11,6 +11,7 @@
     "cviebrock/eloquent-sluggable": "^8",
     "cviebrock/eloquent-taggable": "^8",
     "ddeboer/imap": "^1.13.1",
+    "doctrine/dbal": "^3",
     "fideloper/proxy": "^4.4",
     "geocoder-php/nominatim-provider": "^5",
     "guzzlehttp/guzzle": "^7.0.1",
