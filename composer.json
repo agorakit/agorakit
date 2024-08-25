@@ -2,7 +2,7 @@
   "name": "agorakit/agorakit",
   "description": "Agorakit, groupware for citizen.",
   "keywords": ["groupware", "laravel"],
-  "license": "AGPL",
+  "license": "AGPL-3.0-only",
   "type": "project",
   "require": {
     "php": "^8.1",
