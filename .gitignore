@@ -1,17 +1,29 @@
-/node_modules
-/public/hot
-/public/storage
-/storage/*.key
-/vendor
-/.idea
-/.vagrant
-/.vscode
+# System
+.idea
+.vscode
+.project
+.buildpath
+.settings
+.DS_Store
+Thumbs.db
+~*
+
+# Project
+.env
+node_modules
+public/hot
+public/storage
+storage/*.key
+vendor
+.vagrant
 Homestead.json
 Homestead.yaml
-npm-debug.log
-yarn-error.log
-.env
-.phpunit.result.cache
-# Do not include backup lang files
+
+# Logs & Cache
+*.log
+*.cache
+tests/cache
+public/mix-manifest.json
+
+# Backup lang files
 resources/lang/*/[a-zA-Z]*20[0-9][0-9][0-1][0-9][0-3][0-9]_[0-2][0-9][0-5][0-9][0-5][0-9].php
-/public/mix-manifest.json
