@@ -41,6 +41,7 @@
   },
   "require-dev": {
     "barryvdh/laravel-debugbar": "^3",
+    "bestmomo/laravel5-artisan-language": "^0.3.4",
     "facade/ignition": "^2",
     "fakerphp/faker": "^1.19",
     "laravel/browser-kit-testing": "^6",

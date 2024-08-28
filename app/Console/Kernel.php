@@ -8,10 +8,10 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 class Kernel extends ConsoleKernel
 {
     /**
-    * The Artisan commands provided by your application.
-    *
-    * @var array
-    */
+     * The Artisan commands provided by your application.
+     *
+     * @var array
+     */
     protected $commands = [
         \App\Console\Commands\SendNotifications::class,
         \App\Console\Commands\CheckMailbox::class,
@@ -20,28 +20,29 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\SendReminders::class,
         \App\Console\Commands\ExportGroup::class,
         \App\Console\Commands\ImportGroup::class,
+        \App\Console\Commands\LangFilesToJson::class,
 
     ];
 
     /**
-    * Define the application's command schedule.
-    *
-    * @param \Illuminate\Console\Scheduling\Schedule $schedule
-    *
-    * @return void
-    */
+     * Define the application's command schedule.
+     *
+     * @param \Illuminate\Console\Scheduling\Schedule $schedule
+     *
+     * @return void
+     */
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('agorakit:sendnotifications')
-        ->everyMinute();
+            ->everyMinute();
 
         $schedule->command('agorakit:checkmailbox')
-        ->everyMinute();
+            ->everyMinute();
 
         $schedule->command('agorakit:sendreminders')
-        ->everyFiveMinutes();
+            ->everyFiveMinutes();
 
         $schedule->command('agorakit:cleanupdatabase')
-        ->daily();
+            ->daily();
     }
 }
