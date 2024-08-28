@@ -1,0 +1,54 @@
+name: PHP Composer
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+        mysql:
+            image: mysql:8.0
+            env:
+                MYSQL_DATABASE: agorakit
+                MYSQL_ROOT_PASSWORD: testrootpass
+            ports:
+                - 3306:3306
+            # Verify MySQL is reachable.
+            options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Validate composer.json and composer.lock
+      run: composer validate --strict
+
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v3
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-
+
+    - name: Copy .env
+      run: php -r "file_exists('.env') || copy('.env.ci', '.env');"
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress
+
+    - name: Generate key
+      run: php artisan key:generate
+
+    - name: Directory permissions
+      run: chmod -R 777 storage bootstrap/cache
+
+    - name: Run test suite
+      run: composer run-script test
