@@ -92,6 +92,20 @@ _Not yet prioritized. Order doesn't matter. Let's collect all the ideas (wild or
 - Allow notifications to be grouped in the summary email
 - Add notification types for group admins
 
+### Calendar
+- Provide caldav access
+- Reccurent event support
+
+### Documents
+_Users asked the ability to create and edit documents (if possible collaboratively). Two options :_
+- Use existing onlyoffice / collabora / office tools
+    - Allow to edit files (see WOPI/Webdav support idea for files)
+- Create a new document content type
+    - Allow users to create and edit documents inside the files tab.
+    - Search and implement a lightweight online editor (https://www.blocknotejs.org/ & https://milkdown.dev/ looks both interesting, based on prosemirror and using the collaboration engine (websocket server needed))
+
 ### Simple install
 - Use Phing-based build to provide a file archive users can upload directly to install AgoraKit on shared hosting
+
+
 
