@@ -98,7 +98,7 @@ _Not yet prioritized. Order doesn't matter. Let's collect all the ideas (wild or
 
 ### Documents
 _Users asked the ability to create and edit documents (if possible collaboratively). Two options :_
-- Use existing onlyoffice / collabora / office tools
+- Use existing Onlyoffice / Collabora / office tools (see #161)
     - Allow to edit files (see WOPI/Webdav support idea for files)
 - Create a new document content type
     - Allow users to create and edit documents inside the files tab.
