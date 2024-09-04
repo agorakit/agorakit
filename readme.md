@@ -1,12 +1,10 @@
-![AgoraKit, groupware for citizens](https://www.agorakit.org/images/agorakit-banner.png)
+![Agorakit, groupware for citizens](https://www.agorakit.org/images/agorakit-banner.png)
 
-## AgoraKit, groupware for citizens
+## Agorakit, groupware for citizens
 
-AgoraKit is web-based, open source groupware for citizens' initiatives. By creating collaborative groups, people can discuss topics, organize events, store files and keep everyone updated as needed. AgoraKit is a forum, calendar, file manager and email notifier.
+Agorakit is web-based, open source groupware for citizens' initiatives. By creating collaborative groups, people can discuss topics, organize events, store files and keep everyone updated as needed. AgoraKit is a forum, calendar, file manager and email notifier.
 
-Manage communication, decision making, membership, files and events. Flexible email notifications per group, per user preferences. Most of the time, no admin is involved in the process as we try to keep it as horizontal as possible.
-
-In other words: an organized Facebook for the paranoid inside all of us.
+Manage communication, decision making, membership, files and events. Flexible email notifications per group, per user preferences. Most of the time, no admin is involved in the process as we try to keep it as horizontal as possible. And all the information stays on your own server!
 
 Check the [website](https://www.agorakit.org) for a more colorful overview or review the [docs](https://docs.agorakit.org).
 
@@ -24,33 +22,25 @@ Check the [website](https://www.agorakit.org) for a more colorful overview or re
 
 ### Groups
 - Create an unlimited amount of groups
-- The group can be open (anyone can join) or private (invite only)
-- The group can have one or more admins
-- Each group has a discussion area, a calendar, a file repository, a member list & map.
-- Only members can use the discussion area, calendar and files
-- Content is public in public groups, and private in private groups (simple security model everyone understands)
+- Each group can be open (anyone can join) or private (invite-only)
+- Each group has a discussion list, calendar, map, file repository, and member list
+- Content is public in public groups and private in private groups
 
 ### Discussions
-- Create discussion topics
-- Reply to topics with comments
+- Create discussion topics & reply with comments
 - Mention others in comments using @name (they get notified)
 - Mention files using f: (autocomplete opens)
 - Mention other discussions using d: (autocomplete opens)
 
 ### Calendar
-- Create events
+- Global and per group calendars with RSS & iCal feeds
 - List upcoming events as a list or as a dynamic calendar
 - Show geolocalized events on a map
-- Global and per group calendar
-- iCal feed for each calendar
-- RSS
 - Embed elsewhere using iframes
 
 ### Files
-- Upload & tag several files at once
-- Quick search among files by author, filename and tags
-- Preview images / download
-- re-tag files
+- Upload & tag many files at once
+- Quick search among files by author, filename, and tags
 - Mention files in comments
 
 ### Members
@@ -60,33 +50,29 @@ Check the [website](https://www.agorakit.org) for a more colorful overview or re
 - Fill your profile with portrait, bio, address (if you want)
 
 ### Notifications / emails
-- For each group, choose how often you want to be notified (every hour for the hardcore, everyday to keep your mailbox cool, every week or every month)
-- Auto login to your account from "Reply" links inside the notification emails you receive (great time saving)
-- Get instant notifications when someone mentions you (for urgent matters)
+- Choose how often you want to be notified per group (from hourly for the hardcore up to monthly to keep your mailbox cool)
+- Auto-login from "Reply" links (great time saving)
+- Instant notifications when someone mentions you (for urgent matters)
 
 ### Admin
 - Get stats on everything
-- Mass invite members using their email
-- Mass add existing members to groups
-- Settings control panel (in progress)
+- Mass-invite new members via email
+- Mass-add existing members to groups
 
 ### Architecture
-- Standard Laravel structured application. If you know Laravel, you can work with Agorakit easily
-- Simple structure, no single page app complexities
-- Bootstrap based UI
-- Simple DB schema
-- Simple file storage scheme (per group, per file id)
+- Standard Laravel application - anyone who knows Laravel can work with Agorakit easily
+- Simple hypermedia page loading, not single page app complexities
+- Bootstrap-based UI
+- Simple security model, database schema, & file storage scheme
 
 ### Privacy
-- Host it where you want
-- Your data is yours
-- No leakage of emails
-- Geolocalization of users (on a voluntary basis) is randomized by ~100 meters
+- Your data is yours, host it where you want
+- Geolocalization is opt-in and obscured by ~100 meters
 - Open source you can study and trust
 
 
 ## Security Vulnerabilities
-Security issues will be dealt with care and speed. Please drop a line to info (at) agorakit.org
+Security issues will be dealt with care and speed. Please use the "Security" tab on GitHub or drop a line to info (at) agorakit.org
 
 
 ## Contact
