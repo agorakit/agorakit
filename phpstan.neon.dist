@@ -1,0 +1,18 @@
+# How to ignore errors:  https://github.com/larastan/larastan/tree/1.x?tab=readme-ov-file#ignoring-errors
+# Laravel-specific rules: https://github.com/larastan/larastan/blob/1.x/docs/rules.md
+
+includes:
+    - ./vendor/larastan/larastan/extension.neon
+
+parameters:
+
+    paths:
+        - app
+
+    # Options are 0 (lax) to 9 (strict).
+    level: 0
+
+    ignoreErrors:
+        - '#Unsafe usage of new static#'
+
+    checkMissingIterableValueType: false
