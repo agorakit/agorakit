@@ -10,6 +10,7 @@ Thumbs.db
 
 # Project
 .env
+phpstan.neon
 node_modules
 public/hot
 public/storage
