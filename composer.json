@@ -48,6 +48,7 @@
         "mmo/faker-images": "^0.6",
         "mockery/mockery": "^1",
         "nunomaduro/collision": "^5",
+        "larastan/larastan": "^1.0",
         "phpunit/phpunit": "^9.0"
     },
     "config": {
@@ -92,6 +93,7 @@
     "prefer-stable": true,
     "scripts": {
         "test": "vendor/bin/phpunit",
+        "scan": "vendor/bin/phpstan analyse app tests --level 0 --memory-limit 1G",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
