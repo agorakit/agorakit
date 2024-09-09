@@ -14,6 +14,7 @@ It provides an as small as possible image that reflects a potential production e
 The container will take a while to build and if all goes well, you can access the app on localhost (either on http or https)
 - Connect to the shell inside the container using ./bash.sh
 - cp .env.dev .env
+- composer install
 - php artisan key:generate
 - php artisan migrate
 
