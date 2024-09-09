@@ -1,5 +1,5 @@
 services:
-  php:
+  agorakit_php:
     container_name: agorakit_php
     #image: dunglas/frankenphp
     # uncomment the following line if you want to use a custom Dockerfile
@@ -18,7 +18,7 @@ services:
     tty: true
     networks:
       - agorakit
-  db:
+  agorakit_database:
     image: mariadb:latest
     container_name: agorakit_database
     environment:
@@ -33,21 +33,24 @@ services:
     networks:
       - agorakit
 
-  phpmyadmin:
+  agorakit_phpmyadmin:
     container_name: agorakit_phpmyadmin
     image: phpmyadmin
     restart: always
     ports:
       - 8080:80
     environment:
-      - PMA_ARBITRARY=1
-      - PMA_HOST='agorakit_database'
+      - PMA_HOST=agorakit_database
+      - PMA_USER=root
+      - PMA_PASSWORD=password
       - UPLOAD_LIMIT=1G
     networks:
           - agorakit
+    depends_on:
+      - agorakit_database
   
   
-  mailpit:
+  agorakit_mailpit:
       container_name: agorakit_mailpit
       image: 'axllent/mailpit:latest'
       ports:
