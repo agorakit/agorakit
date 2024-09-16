@@ -29,26 +29,9 @@ class ActionController extends Controller
 
         if ($view == 'list') {
             if (Auth::check()) {
-                if (Auth::user()->getPreference('show', 'my') == 'admin') {
-                    // build a list of groups the user has access to
-                    if (Auth::user()->isAdmin()) { // super admin sees everything
-                        $groups = Group::get()
-                            ->pluck('id');
-                    }
-                }
-
-                if (Auth::user()->getPreference('show', 'my') == 'all') {
-                    $groups = Group::public()
-                        ->get()
-                        ->pluck('id')
-                        ->merge(Auth::user()->groups()->pluck('groups.id'));
-                }
-
-                if (Auth::user()->getPreference('show', 'my') == 'my') {
-                    $groups = Auth::user()->groups()->pluck('groups.id');
-                }
+                $groups = Auth::user()->getVisibleGroups();
             } else {
-                $groups = \App\Group::public()->get()->pluck('id');
+                $groups = \App\Group::public()->pluck('id');
             }
 
             $actions = \App\Action::with('group')
@@ -78,25 +61,9 @@ class ActionController extends Controller
     public function indexJson(Request $request)
     {
         if (Auth::check()) {
-            if (Auth::user()->getPreference('show', 'my') == 'admin') {
-                if (Auth::user()->isAdmin()) { // super admin sees everything
-                    $groups = Group::get()
-                        ->pluck('id');
-                }
-            }
-
-            if (Auth::user()->getPreference('show', 'my') == 'all') {
-                $groups = Group::public()
-                    ->get()
-                    ->pluck('id')
-                    ->merge(Auth::user()->groups()->pluck('groups.id'));
-            }
-
-            if (Auth::user()->getPreference('show', 'my') == 'my') {
-                $groups = Auth::user()->groups()->pluck('groups.id');
-            }
+            $groups = Auth::user()->getVisibleGroups();
         } else {
-            $groups = \App\Group::public()->get()->pluck('id');
+            $groups = Group::public()->pluck('id');
         }
 
         // load of actions between start and stop provided by calendar js

@@ -12,6 +12,9 @@ class MentionedUser extends Notification
 {
     use Queueable;
 
+    public Comment $comment;
+    public User $user;
+
     /**
     * Create a new notification instance.
     *

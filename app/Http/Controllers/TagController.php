@@ -37,8 +37,6 @@ class TagController extends Controller
             }
         }
 
-
-
         // Add all tags used on users
         $tags = $tags->merge(User::allTagModels());
 
@@ -53,23 +51,10 @@ class TagController extends Controller
 
     public function show(Request $request, Tag $tag)
     {
-        if (Auth::user()->getPreference('show', 'my') == 'admin') {
-            // build a list of groups the user has access to
-            if (Auth::user()->isAdmin()) { // super admin sees everything
-                $groups = Group::get()
-                    ->pluck('id');
-            }
-        }
-
-        if (Auth::user()->getPreference('show', 'my') == 'all') {
-            $groups = Group::public()
-                ->get()
-                ->pluck('id')
-                ->merge(Auth::user()->groups()->pluck('groups.id'));
-        }
-
-        if (Auth::user()->getPreference('show', 'my') == 'my') {
-            $groups = Auth::user()->groups()->pluck('groups.id');
+        if (Auth::check()) {
+            $groups = Auth::user()->getVisibleGroups();
+        } else {
+            $groups = \App\Group::public()->pluck('id');
         }
 
         $discussions = Discussion::whereHas('group', function ($q) use ($groups) {

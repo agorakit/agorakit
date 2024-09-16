@@ -130,13 +130,13 @@ trait HasControlledTags
     /** 
      * Returns a collection of tags used by the content of the same type, 
      * in the same group, or the allowed tags if the tags are limited in this context.
-     * 
-     * @return collection of App\Tag
-     * 
      */
     public function getTagsInUse()
     {
         if ($this instanceof Discussion || $this instanceof File || $this instanceof Action) {
+
+            $models = collect();
+            $tags = collect();
 
             if ($this->areNewTagsAllowed()) {
                 if ($this instanceof Discussion) {
@@ -159,8 +159,6 @@ trait HasControlledTags
                         ->with('tags')
                         ->get();
                 }
-
-                $tags = collect();
 
                 foreach ($models as $model) {
                     $tags = $tags->merge($model->tags);
@@ -200,6 +198,8 @@ trait HasControlledTags
 
             return $tags->unique('normalized')->sortBy('normalized');
         }
+
+        return false;
     }
 
 

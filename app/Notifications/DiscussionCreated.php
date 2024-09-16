@@ -14,6 +14,9 @@ class DiscussionCreated extends Notification
 {
     use Queueable;
 
+    public Discussion $discussion;
+    public User $user;
+
     /**
      * Create a new notification instance.
      *

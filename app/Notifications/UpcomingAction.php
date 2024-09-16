@@ -11,6 +11,8 @@ class UpcomingAction extends Notification
 {
     use Queueable;
 
+    public Action $action;
+
     /**
      * Create a new notification instance.
      *

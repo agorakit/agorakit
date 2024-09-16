@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Group;
 use App\Mail\ContactUser;
 use App\Mail\UserConfirmation;
 use App\User;
+use App\Group;
 use Auth;
 use Gate;
 use Illuminate\Http\Request;
@@ -32,11 +32,9 @@ class UserController extends Controller
             if (Auth::user()->getPreference('show') == 'all') {
                 // build a list of groups the user has access to
                 if (Auth::user()->isAdmin()) { // super admin sees everything
-                    $groups = \App\Group::get()
-                        ->pluck('id');
+                    $groups = Group::pluck('id');
                 } else { // normal user get public groups + groups he is member of
-                    $groups = \App\Group::public()
-                        ->get()
+                    $groups = Group::public()
                         ->pluck('id')
                         ->merge(Auth::user()->groups()->pluck('groups.id'));
                 }
@@ -121,18 +119,14 @@ class UserController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param int $id
-     *
-     * @return Response
      */
     public function show(User $user)
     {
-        if ($user->isVerified() || auth()->user()->isAdmin()) {
+        if ($user->isVerified() || Auth::user()->isAdmin()) {
             $title = $user->username . ' ' . trans('messages.user_profile');
 
             return view('users.show')
-                ->with('activities', $user->activities()->whereIn('group_id', \App\Group::public()->get()->pluck('id'))->paginate(10))
+                ->with('activities', $user->activities()->whereIn('group_id', Group::public()->pluck('id'))->paginate(10))
                 ->with('user', $user)
                 ->with('tab', 'profile')
                 ->with('title', $title);
@@ -145,10 +139,6 @@ class UserController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     *
-     * @return Response
      */
     public function edit(User $user)
     {
@@ -166,10 +156,6 @@ class UserController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param int $id
-     *
-     * @return Response
      */
     public function update(Request $request, User $user)
     {
@@ -275,11 +261,6 @@ class UserController extends Controller
 
     /**
      * Send verification token to a user, again, for example if it's stuck in spam or wathever else event.
-     *
-     * @param Request $request
-     * @param int     $id      User id
-     *
-     * @return Flash message and returns to homepage
      */
     public function sendVerificationAgain(Request $request, User $user)
     {
@@ -295,10 +276,6 @@ class UserController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param int $id
-     *
-     * @return Response
      */
     public function destroy(User $user, Request $request)
     {
