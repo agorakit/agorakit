@@ -11,6 +11,9 @@ use Illuminate\Notifications\Notification;
 class AppliedToGroup extends Notification
 {
     use Queueable;
+    
+    public Group $group;
+    public User $user;
 
     /**
      * Create a new notification instance.

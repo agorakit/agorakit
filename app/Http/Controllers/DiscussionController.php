@@ -20,57 +20,39 @@ class DiscussionController extends Controller
     {
         $tag = $request->get('tag');
 
-        // define a list fo groups the user has access to // TODO generalize this somewhere else
         if (Auth::check()) {
-            if (Auth::user()->getPreference('show', 'my') == 'admin') {
-                // build a list of groups the user has access to
-                if (Auth::user()->isAdmin()) { // super admin sees everything
-                    $groups = Group::get()
-                    ->pluck('id');
-                } 
-            } 
-
-            if (Auth::user()->getPreference('show', 'my') == 'all') {
-                    $groups = Group::public()
-                    ->get()
-                    ->pluck('id')
-                    ->merge(Auth::user()->groups()->pluck('groups.id'));
-            } 
-            
-            if (Auth::user()->getPreference('show', 'my') == 'my') {
-                $groups = Auth::user()->groups()->pluck('groups.id');
-            }
+            $groups = Auth::user()->getVisibleGroups();
 
             $discussions = \App\Discussion::with('userReadDiscussion', 'group', 'user', 'tags', 'comments')
-            ->withCount('comments')
-            ->whereIn('group_id', $groups)
-            ->when($tag, function ($query) use ($tag) {
-                return $query->withAnyTags($tag);
-            })
-            // ->orderBy('status', 'desc') // don't show pinned discussions first in overview imvho
-            ->orderBy('updated_at', 'desc')
-            ->paginate(25);
+                ->withCount('comments')
+                ->whereIn('group_id', $groups)
+                ->when($tag, function ($query) use ($tag) {
+                    return $query->withAnyTags($tag);
+                })
+                // ->orderBy('status', 'desc') // don't show pinned discussions first in overview imvho
+                ->orderBy('updated_at', 'desc')
+                ->paginate(25);
         } else { // anon get public groups
 
-            $groups = \App\Group::public()->get()->pluck('id');
+            $groups = Group::public()->pluck('id');
 
             $discussions = \App\Discussion::with('group', 'user', 'tags')
-            ->withCount('comments')
-            ->whereIn('group_id', \App\Group::public()->get()->pluck('id'))
-            ->when($tag, function ($query) use ($tag) {
-                return $query->withAnyTags($tag);
-            })
-            ->orderBy('updated_at', 'desc')
-            ->paginate(25);
+                ->withCount('comments')
+                ->whereIn('group_id', Group::public()->pluck('id'))
+                ->when($tag, function ($query) use ($tag) {
+                    return $query->withAnyTags($tag);
+                })
+                ->orderBy('updated_at', 'desc')
+                ->paginate(25);
         }
 
         $tags = \App\Discussion::allTags();
         natcasesort($tags);
 
         return view('dashboard.discussions')
-        ->with('title', trans('messages.discussions'))
-        ->with('tab', 'discussions')
-        ->with('discussions', $discussions)
-        ->with('tags', $tags);
+            ->with('title', trans('messages.discussions'))
+            ->with('tab', 'discussions')
+            ->with('discussions', $discussions)
+            ->with('tags', $tags);
     }
 }

@@ -11,6 +11,8 @@ class AddedToGroup extends Notification
 {
     use Queueable;
 
+    public Group $group;
+
     /**
      * Create a new notification instance.
      *

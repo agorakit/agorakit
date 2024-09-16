@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Group;
+use App\Discussion;
+use App\User;
+use App\Action;
+use App\File;
+use App\Comment;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -50,14 +55,12 @@ class SearchController extends Controller
         if ($scope == 'admin') {
             // build a list of groups the user has access to
             if (Auth::user()->isAdmin()) { // super admin sees everything
-                $allowed_groups = Group::get()
-                    ->pluck('id');
+                $allowed_groups = Group::pluck('id');
             }
         }
 
         if ($scope == 'all') {
             $allowed_groups = Group::public()
-                ->get()
                 ->pluck('id')
                 ->merge(Auth::user()->groups()->pluck('groups.id'));
         }
@@ -66,7 +69,7 @@ class SearchController extends Controller
             $allowed_groups = Auth::user()->groups()->pluck('groups.id');
         }
 
-    
+
 
         // perform search
         if (isset($query)) {
@@ -80,14 +83,14 @@ class SearchController extends Controller
 
 
             if ($type == 'users') {
-                $results = \App\User::with('groups')
+                $results = User::with('groups')
                     ->search($query)
                     ->orderBy('updated_at', 'desc')
                     ->paginate(20);
             }
 
             if ($type == 'discussions') {
-                $results = \App\Discussion::whereIn('group_id', $allowed_groups)
+                $results = Discussion::whereIn('group_id', $allowed_groups)
                     ->with('group')
                     ->search($query)
                     ->orderBy('updated_at', 'desc')
@@ -96,7 +99,7 @@ class SearchController extends Controller
 
 
             if ($type == 'actions') {
-                $results = \App\Action::whereIn('group_id', $allowed_groups)
+                $results = Action::whereIn('group_id', $allowed_groups)
                     ->with('group')
                     ->search($query)
                     ->orderBy('updated_at', 'desc')
@@ -104,7 +107,7 @@ class SearchController extends Controller
             }
 
             if ($type == 'files') {
-                $results = \App\File::whereIn('group_id', $allowed_groups)
+                $results = File::whereIn('group_id', $allowed_groups)
                     ->with('group')
                     ->search($query)
                     ->orderBy('updated_at', 'desc')
@@ -112,7 +115,7 @@ class SearchController extends Controller
             }
 
             if ($type == 'comments') {
-                $results = \App\Comment::with('discussion', 'discussion.group')
+                $results = Comment::with('discussion', 'discussion.group')
                     ->whereHas('discussion', function ($q) use ($allowed_groups) {
                         $q->whereIn('group_id', $allowed_groups);
                     })

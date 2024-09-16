@@ -15,6 +15,7 @@ class ContactUser extends Mailable
 
     public $to_user;
     public $from_user;
+    public $reveal_email;
 
     /**
     * Create a new message instance.

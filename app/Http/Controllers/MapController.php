@@ -32,32 +32,13 @@ class MapController extends Controller
    */
   public function geoJson()
   {
-
     if (Auth::check()) {
-
-      if (Auth::user()->getPreference('show', 'my') == 'admin') {
-        // build a list of groups the user has access to
-        if (Auth::user()->isAdmin()) { // super admin sees everything
-          $groups_id = Group::get()
-            ->pluck('id');
-        }
-      }
-
-      if (Auth::user()->getPreference('show', 'my') == 'all') {
-        $groups_id = Group::public()
-          ->get()
-          ->pluck('id')
-          ->merge(Auth::user()->groups()->pluck('groups.id'));
-      }
-
-      if (Auth::user()->getPreference('show', 'my') == 'my') {
-        $groups_id = Auth::user()->groups()->pluck('groups.id');
-      }
+      $groups = Auth::user()->getVisibleGroups();
     } else {
-      $groups_id = Group::public()
-        ->get()
-        ->pluck('id');
+      $groups = \App\Group::public()->pluck('id');
     }
+
+    $groups_id = $groups->pluck('id');
 
 
     // Magic query to get all the users who have one of the groups defined above in their membership table

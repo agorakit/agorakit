@@ -27,32 +27,14 @@ class FileController extends Controller
 
         $tag = $request->get('tag');
 
-        // generate a list of groups
         if (Auth::check()) {
-            if (Auth::user()->getPreference('show', 'my') == 'admin') {
-                // build a list of groups the user has access to
-                if (Auth::user()->isAdmin()) { // super admin sees everything
-                    $groups = Group::get()
-                        ->pluck('id');
-                }
-            }
-
-            if (Auth::user()->getPreference('show', 'my') == 'all') {
-                $groups = Group::public()
-                    ->get()
-                    ->pluck('id')
-                    ->merge(Auth::user()->groups()->pluck('groups.id'));
-            }
-
-            if (Auth::user()->getPreference('show', 'my') == 'my') {
-                $groups = Auth::user()->groups()->pluck('groups.id');
-            }
+            $groups = Auth::user()->getVisibleGroups();
         } else {
-            $groups = \App\Group::public()->get()->pluck('id');
+            $groups = Group::public()->pluck('id');
         }
 
 
-        $files = \App\File::with('group', 'user', 'tags')
+        $files = File::with('group', 'user', 'tags')
             ->when($tag, function ($query) use ($tag) {
                 return $query->withAnyTags($tag);
             })
