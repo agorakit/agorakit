@@ -1,6 +1,5 @@
 <?php
-
-return array (
-  'next' => 'Volgende &raquo;',
-  'previous' => '&laquo; Vorige',
-);
+return [
+    'next'     => 'Volgende &raquo;',
+    'previous' => '&laquo; Vorige',
+];
