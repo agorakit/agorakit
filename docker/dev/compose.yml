@@ -1,5 +1,10 @@
 services:
   agorakit_php:
+    #user: $UID:$GID
+    user: 1000:1000
+    environment:
+      - PUID=1000
+      - PGID=1000
     container_name: agorakit_php
     #image: dunglas/frankenphp
     # uncomment the following line if you want to use a custom Dockerfile
