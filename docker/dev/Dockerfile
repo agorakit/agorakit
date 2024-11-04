@@ -1,5 +1,16 @@
 FROM docker.io/dunglas/frankenphp
 
-RUN install-php-extensions pdo_mysql mbstring zip exif pcntl gd opcache imap
+RUN install-php-extensions pdo_mysql zip exif pcntl gd opcache imap
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
+
+RUN \
+	# create group and user with correct ID
+	groupadd -g 1000 www \
+	useradd -D www \
+	# Add capacity to bind to the privilegied ports 80 and 443
+	setcap CAP_NET_BIND_SERVICE=+eip /usr/local/bin/frankenphp; \
+	# Give write access to /data/caddy and /config/caddy
+	chown -R www:www /data/caddy && chown -R www:www /config/caddy
+
+USER www
