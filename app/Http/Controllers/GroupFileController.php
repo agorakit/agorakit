@@ -7,8 +7,7 @@ use App\Group;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Image;
-use Storage;
+use Exception;
 use Validator;
 
 class GroupFileController extends Controller

@@ -6,6 +6,7 @@ use App\Discussion;
 use App\Comment;
 use App\Group;
 use App\User;
+use Exception;
 use Ddeboer\Imap\Server;
 use Ddeboer\Imap\Message as ImapMessage;
 use Illuminate\Console\Command;
