@@ -26,7 +26,11 @@ class Setting extends Model
     ];
 
     public $timestamps = true;
-    protected $dates = ['deleted_at'];
+
+
+    protected $casts = [
+        'deleted_at' => 'datetime'
+    ];
 
     protected $keepRevisionOf = ['name', 'locale', 'value'];
 
@@ -101,8 +105,7 @@ class Setting extends Model
     {
         $setting  = $this->get($key);
 
-        if (is_array($setting)) 
-        {
+        if (is_array($setting)) {
             return $setting;
         }
 

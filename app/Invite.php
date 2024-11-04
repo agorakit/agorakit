@@ -10,7 +10,10 @@ class Invite extends Model
     use ValidatingTrait;
 
     public $timestamps = true;
-    protected $dates = ['deleted_at'];
+
+    protected $casts = [
+        'deleted_at' => 'datetime'
+    ];
 
     protected $rules = [
         'token'    => 'required',

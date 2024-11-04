@@ -31,8 +31,10 @@ class File extends Model
 
     protected $table = 'files';
     public $timestamps = true;
-    protected $dates = ['deleted_at'];
-    protected $casts = ['user_id' => 'integer'];
+    protected $casts = [
+        'user_id' => 'integer',
+        'deleted_at' => 'datetime'
+    ];
 
     protected $keepRevisionOf = ['name', 'path', 'filesize', 'status'];
 

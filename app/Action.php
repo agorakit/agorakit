@@ -40,8 +40,12 @@ class Action extends Model
 
     protected $table = 'actions';
     public $timestamps = true;
-    protected $dates = ['deleted_at', 'start', 'stop'];
-    protected $casts = ['user_id' => 'integer'];
+    protected $casts = [
+        'user_id' => 'integer',
+        'deleted_at' => 'datetime',
+        'start' => 'datetime',
+        'stop' => 'datetime'
+    ];
 
     protected $keepRevisionOf = ['name', 'start', 'stop', 'body', 'location'];
 

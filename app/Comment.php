@@ -22,7 +22,10 @@ class Comment extends Model
 
     protected $fillable = ['body'];
     public $timestamps = true;
-    protected $dates = ['deleted_at'];
+    protected $casts = [
+        'deleted_at' => 'datetime',
+    ];
+
     protected $with = ['user']; // always load users with comments
     protected $keepRevisionOf = ['body'];
     public $modelName = 'comment';
@@ -32,18 +35,18 @@ class Comment extends Model
     *
     * @var array
     */
-   protected $searchable = [
-       /*
+    protected $searchable = [
+        /*
        * Columns and their priority in search results.
        * Columns with higher values are more important.
        * Columns with equal values have equal importance.
        *
        * @var array
        */
-       'columns' => [
-           'comments.body'    => 10,
-       ],
-   ];
+        'columns' => [
+            'comments.body'    => 10,
+        ],
+    ];
 
     public function user()
     {
@@ -67,7 +70,6 @@ class Comment extends Model
 
     public function link()
     {
-        return route('groups.discussions.show', [$this->discussion->group, $this->discussion]).'#comment_'.$this->id;
+        return route('groups.discussions.show', [$this->discussion->group, $this->discussion]) . '#comment_' . $this->id;
     }
-
 }

@@ -27,10 +27,10 @@ class Discussion extends Model
     use HasControlledTags;
 
     protected $rules = [
-    'name'     => 'required',
-    'body'     => 'required',
-    'user_id'  => 'required|exists:users,id',
-    'group_id' => 'required|exists:groups,id',
+        'name'     => 'required',
+        'body'     => 'required',
+        'user_id'  => 'required|exists:users,id',
+        'group_id' => 'required|exists:groups,id',
     ];
 
     protected $keepRevisionOf = ['name', 'body', 'status'];
@@ -39,8 +39,12 @@ class Discussion extends Model
     public $timestamps = true;
     public $unreadcounter;
     public $read_comments;
-    protected $dates = ['deleted_at'];
-    protected $casts = ['user_id' => 'integer'];
+
+    protected $casts = [
+        'user_id' => 'integer',
+        'deleted_at' => 'datetime'
+    ];
+
     public $modelName = 'discussion';
 
     /**
@@ -74,10 +78,10 @@ class Discussion extends Model
         $userReadDiscussion = $this->userReadDiscussion->first();
 
         if ($userReadDiscussion) {
-            return $this->comments->count() - $userReadDiscussion->read_comments +1;
+            return $this->comments->count() - $userReadDiscussion->read_comments + 1;
         }
 
-        return $this->comments->count() +1;
+        return $this->comments->count() + 1;
     }
 
     /**
@@ -85,7 +89,7 @@ class Discussion extends Model
      */
     public function markAsRead()
     {
-        $userReadDiscussion = UserReadDiscussion::firstOrNew(['user_id' => Auth::user()->id, 'discussion_id'=> $this->id]);
+        $userReadDiscussion = UserReadDiscussion::firstOrNew(['user_id' => Auth::user()->id, 'discussion_id' => $this->id]);
         $userReadDiscussion->read_comments = $this->comments->count() + 1;
         $userReadDiscussion->read_at = Carbon::now();
         return $userReadDiscussion->save();
@@ -127,15 +131,14 @@ class Discussion extends Model
 
 
     /**
-    * Returns the inbox email of this discussion (if it has one).
-    * A discussion has an inbox if INBOX_DRIVER is not null in .env
-    */
+     * Returns the inbox email of this discussion (if it has one).
+     * A discussion has an inbox if INBOX_DRIVER is not null in .env
+     */
     public function inbox()
     {
         if (config('agorakit.inbox_driver')) {
             return config('agorakit.inbox_prefix') . 'reply-' . $this->id . config('agorakit.inbox_suffix');
-        }
-        else {
+        } else {
             return false;
         }
     }
