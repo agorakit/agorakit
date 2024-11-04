@@ -1,5 +1,4 @@
 <?php
-
-return array (
-  'download' => 'Скачать',
-);
+return [
+    'download' => 'Скачать',
+];
