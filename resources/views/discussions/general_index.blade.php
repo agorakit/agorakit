@@ -15,7 +15,7 @@
   @if ($discussion->unReadCount() > 0)
   <tr>
     <td>
-      <a  href="{{ route('groups.discussions.show', [$group, $discussion]) }}">{{ $discussion->name }}</a>
+      <a  href="{{ route('groups.discussions.show', [$group, $discussion]) }}#unread">{{ $discussion->name }}</a>
     </td>
 
     <td>

@@ -11,10 +11,10 @@
 <h1>{{trans('messages.latest_discussions')}}</h1>
 @foreach($discussions as $discussion)
 <div class="discussion" style="margin-bottom: 30px; border-bottom: 1px solid #aaa">
-<h3><a  href="{{route('groups.discussions.show', [$group, $discussion])}}">{{$discussion->name}} </a></h3>
+<h3><a  href="{{route('groups.discussions.show', [$group, $discussion])}}#unread">{{$discussion->name}} </a></h3>
 <p>
 @if ($discussion->comments->count() == 0)
-<a href="{{ route('groups.discussions.show', [$group, $discussion]) }}">{{$discussion->user->name}}</a> ({{$discussion->created_at->diffForHumans()}}):
+<a href="{{ route('groups.discussions.show', [$group, $discussion]) }}#unread">{{$discussion->user->name}}</a> ({{$discussion->created_at->diffForHumans()}}):
 {!! filter($discussion->body) !!}
 @endif
 </p>
@@ -30,7 +30,7 @@
 @endif
 @endforeach
 
-@component('mail::button', ['url' => route('groups.discussions.show', [$group, $discussion])])
+@component('mail::button', ['url' => route('groups.discussions.show', [$group, $discussion]) . "#unread"])
 {{trans('messages.reply')}}
 @endcomponent
 
