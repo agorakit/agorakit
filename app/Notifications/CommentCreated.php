@@ -68,9 +68,9 @@ class CommentCreated extends Notification
             $message->from(config('mail.noreply'), config('mail.from.name'));
         }
 
-        $message->withSwiftMessage(function ($message) {
-            $message->getHeaders()->addTextHeader('References',  'discussion-'. $this->comment->discussion->id . '@' . Request::getHost());
-            $message->setId('comment-'. $this->comment->id . '@' . Request::getHost());
+        $message->withSymfonyMessage(function ($message) {
+            $message->getHeaders()->addTextHeader('References',  'discussion-' . $this->comment->discussion->id . '@' . Request::getHost());
+            $message->setId('comment-' . $this->comment->id . '@' . Request::getHost());
         });
 
         return $message;

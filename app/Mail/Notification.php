@@ -51,7 +51,7 @@ class Notification extends Mailable
             // experimental : let's send from the first discussion in most cases
             if ($this->discussions->count() > 0) {
                 $message->replyTo($this->discussions->first()->inbox(), $this->group->name);
-                $message->withSwiftMessage(function ($message) {
+                $message->withSymfonyMessage(function ($message) {
                     $message->getHeaders()->addTextHeader(
                         'References',
                         $this->discussions->first()->inbox()

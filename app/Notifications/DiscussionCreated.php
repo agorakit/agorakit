@@ -68,8 +68,8 @@ class DiscussionCreated extends Notification
             $message->from(config('mail.noreply'), config('mail.from.name'));
         }
 
-        $message->withSwiftMessage(function ($message) {
-            $message->setId('discussion-'. $this->discussion->id . '@' . Request::getHost());
+        $message->withSymfonyMessage(function ($message) {
+            $message->setId('discussion-' . $this->discussion->id . '@' . Request::getHost());
         });
 
         return $message;
