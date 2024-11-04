@@ -19,6 +19,7 @@ vendor
 .vagrant
 Homestead.json
 Homestead.yaml
+.translation_io
 
 # Logs & Cache
 *.log
