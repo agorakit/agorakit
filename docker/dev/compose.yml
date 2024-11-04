@@ -1,11 +1,13 @@
 services:
+
+
   agorakit_php:
     container_name: agorakit_php
-    #image: dunglas/frankenphp
-    # uncomment the following line if you want to use a custom Dockerfile
-    build: .
-    # uncomment the following line if you want to run this in a production environment
-    # restart: always
+    build:
+      context: .
+      args:
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
     ports:
       - "80:80" # HTTP
       - "443:443" # HTTPS
@@ -14,10 +16,11 @@ services:
       - ../../:/app
       - caddy_data:/data
       - caddy_config:/config
-    # comment the following line in production, it allows to have nice human-readable logs in dev
     tty: true
     networks:
       - agorakit
+
+
   agorakit_database:
     image: mariadb:latest
     container_name: agorakit_database

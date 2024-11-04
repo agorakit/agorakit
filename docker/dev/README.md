@@ -10,7 +10,10 @@ It provides an as small as possible image that reflects a potential production e
 
 ## Setup dev environment
 - Install docker and docker compose
-- Run `docker compose up` in the current directory (docker/dev) to start the container
+
+- In order to avoid permission issues, you can define GID and UID environment variables via the `setuid.sh` script. This scripts simply set UID and GID to your current user id (UID) and group id (GID). This will be the user owning the files written by the application. This is to avoid having files owned by root. More explanations can be found here : https://aschmelyun.com/blog/fixing-permissions-issues-with-docker-compose-and-php/
+
+- Run `up.sh` or `docker compose up` in the current directory (docker/dev) to start the container.
 
 The container will take a while to build and if all goes well, you can access the app on localhost (either on http or https)
 
@@ -20,7 +23,13 @@ The container will take a while to build and if all goes well, you can access th
 - `php artisan key:generate`
 - `php artisan migrate`
 
-With this you have a working dev setup. You can now access your installation with the following : 
+With this you have a working dev setup!
+
+!! Don't use this for production, there are probably security issues that need to be adressed/hardened for production.
+
+
+
+You can now access your installation with the following : 
 
 
 ## Shell access
