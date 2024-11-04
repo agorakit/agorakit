@@ -3,7 +3,7 @@
 return [
     'key'            => env('TRANSLATIONIO_KEY'),
     'source_locale'  => 'en',
-    'target_locales' => ['nl', 'fr', 'de', 'es'],
+    'target_locales' => ['nl', 'eo', 'fr', 'de', 'it', 'ru', 'es'],
 
     /* Directories to scan for Gettext strings */
     'gettext_parse_paths' => ['app', 'resources'],
