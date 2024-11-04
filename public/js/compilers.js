@@ -339,11 +339,14 @@ up.compiler('.js-tags', async function (element, data) {
 });
 
 /*
-- scroll to first unread item
+- scroll to first unread item 
 */
+/*
 up.compiler('#unread', function (element) {
 	up.reveal(element, { behavior: "instant" })
+	element.scrollIntoView();
 });
+*/
 
 
 

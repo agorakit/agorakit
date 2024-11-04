@@ -15,7 +15,7 @@
 </p>
   @endforeach
 
-<a  href="{{route('groups.discussions.show', [$group, $comment->discussion])}}" class="btn btn-primary">{{trans('messages.back_to')}} "{{$comment->discussion->name}}"</a>
+<a  href="{{route('groups.discussions.show', [$group, $comment->discussion])}}#unread" class="btn btn-primary">{{trans('messages.back_to')}} "{{$comment->discussion->name}}"</a>
 
 </div>
 
