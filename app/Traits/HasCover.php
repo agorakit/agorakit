@@ -53,14 +53,21 @@ trait HasCover
         return Storage::exists($this->getCoverPath('original'));
     }
 
-    // size can be small medium large square
     public function getCover($size = 'medium')
     {
-        if (in_array($size, $this->sizes) && Storage::exists($this->getCoverPath($size))) {
-            return response()->file(Storage::path($this->getCoverPath($size)));
+        if (in_array($size, $this->sizes)) {
+
+            if (Storage::exists($this->getCoverPath($size))) {
+                return response()->file(Storage::path($this->getCoverPath($size)));
+            } else {
+                $this->generateThumbnails();
+                return response()->file(Storage::path($this->getCoverPath($size)));
+            }
         }
         return abort(404);
     }
+
+
 
     public function setCoverFromRequest(Request $request)
     {
@@ -68,17 +75,23 @@ trait HasCover
             Storage::makeDirectory($this->getCoverPath());
             $image = Image::read($request->file('cover'));
 
-            $image->save(Storage::path($this->getCoverPath()));
-
-            $image->scaleDown(width: 1024);
-            $image->save(Storage::path($this->getCoverPath('large')));
-
-            $image->scaleDown(width: 512);
-            $image->save(Storage::path($this->getCoverPath('medium')));
-
-            $image->scaleDown(width: 256);
-            $image->save(Storage::path($this->getCoverPath('small')));
+            $image->save(Storage::path($this->getCoverPath('original')));
+            $this->generateThumbnails();
         }
         return false;
+    }
+
+    public function generateThumbnails()
+    {
+        $image = Image::read(Storage::path($this->getCoverPath('original')));
+
+        $image->scaleDown(width: 1024);
+        $image->save(Storage::path($this->getCoverPath('large')));
+
+        $image->scaleDown(width: 512);
+        $image->save(Storage::path($this->getCoverPath('medium')));
+
+        $image->scaleDown(width: 64);
+        $image->save(Storage::path($this->getCoverPath('small')));
     }
 }

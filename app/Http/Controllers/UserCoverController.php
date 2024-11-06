@@ -14,11 +14,9 @@ class UserCoverController extends Controller
 
     public function show(User $user, $size = 'original')
     {
-
         if ($user->hasCover()) {
             return $user->getCover($size);
         } else {
-
             // serve alternative using initials
             $avatar = Avatar::create($user->name)->setBorder(0, '#aaa')
                 ->setShape('square');
@@ -33,7 +31,7 @@ class UserCoverController extends Controller
             if ($size == 'large') {
                 $avatar->setDimension(800)->setFontSize(400);
             }
-            return response((string) $avatar->getImageObject());
+            return response($avatar->getImageObject()->toPng())->header('Content-Type', 'image/png');
         }
     }
 }
