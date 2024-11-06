@@ -1,9 +1,9 @@
-<div up-expand up-scroll="false" class="d-flex items-start pb-3 mb-3 border-bottom">
+<div class="d-flex items-start pb-3 mb-3 border-bottom" up-expand up-scroll="false">
 
     @if ($group->hasCover())
-        <img class="rounded" width="150" src="{{ route('groups.cover.medium', $group) }}" />
+        <img class="rounded" src="{{ route('groups.cover', [$group, 'medium']) }}" width="150" />
     @else
-        <img class="rounded" width="150" src="/images/group.svg" />
+        <img class="rounded" src="/images/group.svg" width="150" />
     @endif
 
     <div class="mx-2 flex-grow ">

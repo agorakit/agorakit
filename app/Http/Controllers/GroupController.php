@@ -238,9 +238,9 @@ class GroupController extends Controller
 
         // handle cover
         if ($request->hasFile('cover')) {
-            Storage::disk('local')->makeDirectory('groups/' . $group->id);
-            Image::make($request->file('cover'))->widen(1600)->save(storage_path() . '/app/groups/' . $group->id . '/cover.jpg');
+            $group->setCoverFromRequest($request);
         }
+
 
         // make the current user an admin of the group
         $membership = \App\Membership::firstOrNew(['user_id' => Auth::user()->id, 'group_id' => $group->id]);
@@ -293,7 +293,7 @@ class GroupController extends Controller
 
         $group->name = $request->input('name');
         $group->body = $request->input('body');
-        
+
         if (Gate::allows('changeGroupStatus', $group)) {
             $group->status = $request->input('status');
         }
@@ -337,8 +337,8 @@ class GroupController extends Controller
         });
         $group->setSetting('allowed_tags', $allowed_tags);
 
-         // handle navbar pinning
-         if (Auth::user()->isAdmin()) {
+        // handle navbar pinning
+        if (Auth::user()->isAdmin()) {
             if ($request->has('pinned_navbar')) {
                 $group->setSetting('pinned_navbar', true);
             } else {
@@ -347,7 +347,7 @@ class GroupController extends Controller
                 }
             }
         }
-        
+
 
         // validation
         if ($group->isInvalid()) {
@@ -359,8 +359,7 @@ class GroupController extends Controller
 
         // handle cover
         if ($request->hasFile('cover')) {
-            Storage::disk('local')->makeDirectory('groups/' . $group->id);
-            Image::make($request->file('cover'))->widen(1600)->save(storage_path() . '/app/groups/' . $group->id . '/cover.jpg');
+            $group->setCoverFromRequest($request);
         }
 
         $group->save();

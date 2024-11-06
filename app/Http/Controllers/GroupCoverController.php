@@ -9,19 +9,29 @@ use Image;
 /*
 Handle group cover image
 */
+
 class GroupCoverController extends Controller
 {
 
     public function __construct()
     {
-         $this->middleware('cache.headers:private,max-age=300;etag');
+        $this->middleware('cache.headers:private,max-age=300;etag');
+    }
+
+    public function show(Group $group, $size = 'original')
+    {
+        if ($group->hasCover()) {
+            return $group->getCover($size);
+        } else {
+            abort(404);
+        }
     }
 
     public function small(Group $group)
     {
         $this->authorize('view', $group);
 
-        $path = storage_path().'/app/groups/'.$group->id.'/cover.jpg';
+        $path = storage_path() . '/app/groups/' . $group->id . '/cover.jpg';
 
         if (File::exists($path)) {
             $cachedImage = Image::cache(function ($img) use ($path) {
@@ -38,7 +48,7 @@ class GroupCoverController extends Controller
     {
         $this->authorize('view', $group);
 
-        $path = storage_path().'/app/groups/'.$group->id.'/cover.jpg';
+        $path = storage_path() . '/app/groups/' . $group->id . '/cover.jpg';
 
         if (File::exists($path)) {
             $cachedImage = Image::cache(function ($img) use ($path) {
@@ -55,7 +65,7 @@ class GroupCoverController extends Controller
     {
         $this->authorize('view', $group);
 
-        $path = storage_path().'/app/groups/'.$group->id.'/cover.jpg';
+        $path = storage_path() . '/app/groups/' . $group->id . '/cover.jpg';
 
         if (File::exists($path)) {
             $cachedImage = Image::cache(function ($img) use ($path) {

@@ -66,6 +66,12 @@ class File extends Model
         ],
     ];
 
+
+    public function getType()
+    {
+        return 'file';
+    }
+
     public function user()
     {
         return $this->belongsTo(\App\User::class)->withTrashed();
