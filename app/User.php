@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Traits\HasControlledTags;
+use App\Traits\HasCover;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -34,6 +35,7 @@ class User extends Authenticatable
     use Taggable;
     use SearchableTrait;
     use HasControlledTags;
+    use HasCover;
 
 
     protected $fillable = [
@@ -454,21 +456,6 @@ class User extends Authenticatable
         $this->preferences = $preferences;
 
         return $this->save();
-    }
-
-
-    /** returns true if the user has a cover defined (file cover.jpg present or not) */
-    public function hasCover()
-    {
-        return Storage::has('users/' . $this->id . '/cover.jpg');
-    }
-
-    /**
-     * Return a file object reprensenting cover
-     */
-    public function getCover()
-    {
-        return Storage::get('users/' . $this->id . '/cover.jpg');
     }
 
 

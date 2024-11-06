@@ -227,8 +227,7 @@ class UserController extends Controller
 
             // handle cover
             if ($request->hasFile('cover')) {
-                Storage::disk('local')->makeDirectory('users/' . $user->id);
-                Image::make($request->file('cover'))->widen(800)->save(storage_path() . '/app/users/' . $user->id . '/cover.jpg');
+                $user->setCoverFromRequest($request);
             }
 
             // handle email change : if a user changes his email, we set him/her to unverified, and send a new verification email
