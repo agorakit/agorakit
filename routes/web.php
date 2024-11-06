@@ -162,9 +162,8 @@ Route::group(['middleware' => ['web']], function () {
 
     // Groups : what everyone can see, homepage and covers
     Route::get('groups/{group}', 'GroupController@show')->name('groups.show');
-    Route::get('groups/{group}/cover/small', 'GroupCoverController@small')->name('groups.cover.small');
-    Route::get('groups/{group}/cover/medium', 'GroupCoverController@medium')->name('groups.cover.medium');
-    Route::get('groups/{group}/cover/large', 'GroupCoverController@large')->name('groups.cover.large');
+    Route::get('groups/{group}/cover/{size}', 'GroupCoverController@show')->name('groups.cover');
+
 
     // Invite system for groups
 
@@ -184,7 +183,7 @@ Route::group(['middleware' => ['web']], function () {
     // General action create & cover route
     Route::get('actions/create', 'GroupActionController@create')->name('actions.create');
     Route::post('actions/create', 'GroupActionController@store')->name('actions.store');
-  
+
     Route::get('actions/{action}/cover/small', 'ActionCoverController@small')->name('actions.cover.small');
     Route::get('actions/{action}/cover/medium', 'ActionCoverController@medium')->name('actions.cover.medium');
     Route::get('actions/{action}/cover/large', 'ActionCoverController@large')->name('actions.cover.large');
@@ -416,10 +415,10 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::get('admin/group', 'Admin\GroupController@index');
 
-        
+
         Route::get('admin/messages', 'Admin\MessageController@index')->name('admin.messages.index');
         Route::get('admin/messages/{message}', 'Admin\MessageController@show')->name('admin.messages.show');
-        
+
 
 
         // mailable preview, for devs mainly
@@ -434,7 +433,5 @@ Route::group(['middleware' => ['web']], function () {
 
             return $notif;
         });
-
-        
     });
 });

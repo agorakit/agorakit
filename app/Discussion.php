@@ -66,6 +66,11 @@ class Discussion extends Model
         ],
     ];
 
+    public function getType()
+    {
+        return 'discussion';
+    }
+
     /**
      * Unread count of comments for the current user
      */

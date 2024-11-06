@@ -31,11 +31,7 @@ trait HasCover
 
     public function getCoverPath($size = null)
     {
-        if (get_class($this) == 'App\User') $type = 'user';
-        elseif (get_class($this) == 'App\File') $type = 'file';
-        else $type = 'unknown';
-
-        $path =  'covers/' . $type . '/' . $this->id . '/';
+        $path =  'covers/' . $this->getType() . '/' . $this->id . '/';
 
         if ($size == 'original') {
             return $path . 'cover.jpg';
@@ -88,7 +84,7 @@ trait HasCover
         $image->scaleDown(width: 1024);
         $image->save(Storage::path($this->getCoverPath('large')));
 
-        $image->scaleDown(width: 512);
+        $image->cover(400, 300);
         $image->save(Storage::path($this->getCoverPath('medium')));
 
         $image->scaleDown(width: 64);

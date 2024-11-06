@@ -48,6 +48,11 @@ class Comment extends Model
         ],
     ];
 
+    public function getType()
+    {
+        return 'comment';
+    }
+
     public function user()
     {
         return $this->belongsTo(\App\User::class)->withTrashed();

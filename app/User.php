@@ -103,6 +103,11 @@ class User extends Authenticatable
         return 'username';
     }
 
+    public function getType()
+    {
+        return 'user';
+    }
+
     /**
      * Return the sluggable configuration array for this model.
      *

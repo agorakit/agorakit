@@ -15,19 +15,22 @@
 
         <a class="position-relative" href="{{ action('GroupController@show', $group) }}">
             @if ($group->hasCover())
-                <img class="card-img-top" src="{{ route('groups.cover.medium', $group) }}" />
+                <img class="card-img-top" src="{{ route('groups.cover', [$group, 'medium']) }}" />
             @else
                 <img class="card-img-top" src="/images/group.svg" />
             @endif
 
             @auth
                 @if (Auth::user()->isAdminOf($group))
-                    <div class="mb-2 me-2 position-absolute bottom-0 end-0  badge bg-pink">{{ __('membership.admin') }}</div>
+                    <div class="mb-2 me-2 position-absolute bottom-0 end-0  badge bg-pink">{{ __('membership.admin') }}
+                    </div>
                 @elseif(Auth::user()->isMemberOf($group))
-                    <div class="mb-2 me-2 position-absolute bottom-0 end-0  badge bg-azure">{{ __('membership.member') }}</div>
+                    <div class="mb-2 me-2 position-absolute bottom-0 end-0  badge bg-azure">{{ __('membership.member') }}
+                    </div>
                 @endif
                 @if (Auth::user()->isCandidateOf($group))
-                    <div class="mb-2 me-2 position-absolute bottom-0 end-0  badge bg-lime">{{ __('membership.candidate') }}</div>
+                    <div class="mb-2 me-2 position-absolute bottom-0 end-0  badge bg-lime">{{ __('membership.candidate') }}
+                    </div>
                 @endif
             @endauth
 
