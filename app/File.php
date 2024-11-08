@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Traits\HasStatus;
+use App\Traits\HasCover;
 use App\Traits\HasControlledTags;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
@@ -22,6 +23,7 @@ class File extends Model
     use SearchableTrait;
     use HasStatus;
     use HasControlledTags;
+    use HasCover;
 
     protected $rules = [
         'name'     => 'required',
@@ -194,13 +196,15 @@ class File extends Model
 
     public function isImage()
     {
-        if (in_array($this->mime, ['image/jpeg', 'image/png', 'image/gif'])) {
+        if (in_array($this->mime, ['image/jpeg', 'image/png', 'image/gif', 'image/webp'])) {
             return true;
         }
-
         return false;
     }
 
+    /**
+     * Returns the correct icon name depending on mimetype
+     */
     public function icon()
     {
         if ($this->isImage()) {
@@ -239,7 +243,6 @@ class File extends Model
             }
 
             // delete version directory
-
             $storage_path = 'groups/' . $this->group->id . '/files/' . $this->id;
             if (Storage::exists($storage_path)) {
                 Storage::deleteDirectory($storage_path);
