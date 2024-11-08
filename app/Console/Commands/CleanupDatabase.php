@@ -80,6 +80,7 @@ class CleanupDatabase extends Command
             $count = $group->invites()->delete();
             if ($count) $this->info($count . ' invites hard deleted in group ' . $group->name);
 
+            $group->deleteCover();
             $group->forceDelete();
             if ($count) $this->info('Group ' . $group->name . ' hard deleted');
         }
@@ -103,15 +104,26 @@ class CleanupDatabase extends Command
         }
 
         // Handle actions
-        $count = Action::onlyTrashed()
+        $actions = Action::onlyTrashed()
             ->where('deleted_at', '<', Carbon::today()->subDays(config('agorakit.data_retention')))
             ->limit($this->option('batch'))
-            ->forceDelete();
+            ->get();
+
+        foreach ($actions as $action) {
+            // definitely delete files on storage
+            $action->deleteFromStorage();
+
+            // delete cover files from storage
+            $action->deleteCover();
+            
+            // ...and from DB
+            $action->forceDelete();
+
+            $this->info($action->name . ' deleted from db & storage');
+        }
 
 
-        if ($count) $this->info($count . ' actions hard deleted');
-
-
+    
         // Handle files
         $files = File::onlyTrashed()
             ->where('deleted_at', '<', Carbon::today()->subDays(config('agorakit.data_retention')))
@@ -122,11 +134,14 @@ class CleanupDatabase extends Command
         foreach ($files as $file) {
             // definitely delete files on storage
             $file->deleteFromStorage();
-            if ($count) $this->info($file->name . ' deleted from storage at ' . $file->path);
+
+            // delete cover files from storage
+            $file->deleteCover();
 
             // ...and from DB
             $file->forceDelete();
-            if ($count) $this->info($file->name . ' hard deleted');
+
+            $this->info($file->name . ' deleted from db & storage');
         }
 
 
@@ -143,7 +158,7 @@ class CleanupDatabase extends Command
 
         foreach ($users as $user) {
             if ($user->verified == 0) {
-                $this->info('Unverfied user ' . $user->name . '(' . $user->email . ')');
+                $this->info('Unverified user ' . $user->name . '(' . $user->email . ')');
             }
 
             $count = $user->discussions()->delete();
@@ -161,7 +176,12 @@ class CleanupDatabase extends Command
             $count = $user->memberships()->delete();
             if ($count) $this->info($count . ' memberships hard deleted from ' . $user->name);
 
+            // delete cover files from storage
+            $user->deleteCover();
+
+            // final deletion
             $user->forceDelete();
+
             $this->info('User ' . $user->name . '(' . $user->email . ')' . ' hard deleted');
         }
 
