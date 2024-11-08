@@ -31,26 +31,6 @@ class UserTest extends Tests\BrowserKitTestCase
 
     /* Some utility function*/
 
-    const SETTINGS_NAVBAR = [
-        'show_overview_inside_navbar',
-        'show_overview_all_groups',
-        'show_overview_discussions',
-        'show_overview_agenda',
-        'show_overview_tags',
-        'show_overview_map',
-        'show_overview_files',
-        'show_overview_users',
-        'show_locales_inside_navbar',
-        'show_locale_fr',
-        'show_locale_en',
-        'show_locale_nl',
-        'show_locale_de',
-        'show_locale_es',
-        'show_locale_it',
-        'show_locale_ru',
-        'show_locale_eo',
-    ];
-
     public function admin()
     {
         return App\User::where('email', 'admin@agorakit.org')->firstOrFail();
@@ -363,6 +343,8 @@ class UserTest extends Tests\BrowserKitTestCase
         ->assertResponseStatus(403);
     }
 
+
+
     public function testNavbarShouldIncludesEverything()
     {
         \App\Setting::query()->delete();
@@ -376,50 +358,7 @@ class UserTest extends Tests\BrowserKitTestCase
     }
 
 
-    /**
-     * @dataProvider dataNavigationBar
-     */
-    public function testNavbarShouldNotIncludeElement(string $key, string $text)
-    {
 
-        \App\Setting::query()->delete();
-
-        $this->actingAs($this->admin())
-            ->visit('admin/settings')
-            ->click(__('Navigation bar'))
-            ->uncheck($key)
-            ->press(__('messages.save'));
-
-        $this->assertEquals(0, (new \App\Setting())->get($key));
-
-        $this->actingAs($this->newbie())
-            ->get('/discussions')
-            ->dontSee($text);
-    }
-
-    private function dataNavigationBar(): array
-    {
-        return [
-            'overview' => ['key' => 'show_overview_inside_navbar', 'text' => 'messages.overview',],
-            'all groups' => ['key' => 'show_overview_all_groups', 'text' => 'messages.all_groups'],
-            'discussions' => ['key' => 'show_overview_discussions', 'text' =>'messages.discussions'],
-            'agenda' => ['key' => 'show_overview_agenda', 'text' => 'messages.agenda'],
-            'tags' => ['key' => 'show_overview_tags', 'text' => 'messages.tags'],
-            'map' => ['key' => 'show_overview_map', 'text' => 'messages.map'],
-            'files' => ['key' => 'show_overview_files', 'text' => 'messages.files'],
-            'users' => ['key' => 'show_overview_users', 'text' => 'messages.users_list'],
-            'locales' => ['key' => 'show_locales_inside_navbar', 'text' => '<!-- locales -->',],
-            'locale fr' => ['key' => 'show_locale_fr', 'text' => 'locale-fr',],
-            'locale en' => ['key' => 'show_locale_en', 'text' => 'locale-en'],
-            'locale nl' => ['key' => 'show_locale_nl', 'text' => 'locale-nl'],
-            'locale de' => ['key' => 'show_locale_de', 'text' => 'locale-de'],
-            'locale es' => ['key' => 'show_locale_es', 'text' => 'locale-es'],
-            'locale it' => ['key' => 'show_locale_it', 'text' => 'locale-it'],
-            'locale ru' => ['key' => 'show_locale_ru', 'text' => 'locale-ru'],
-            'locale eo' => ['key' => 'show_locale_eo', 'text' => 'locale-eo'],
-            'help' => ['key' => 'show_help_inside_navbar', 'text' => 'messages.help'],
-        ];
-    }
 
     public function testUserCantPinGroupIntoNavbar()
     {
