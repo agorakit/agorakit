@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use File;
+use Storage;
 use Image;
 
 /**
@@ -11,29 +11,24 @@ use Image;
  */
 class IconController extends Controller
 {
-    public function index(Request $request, $size = 128)
+    public function index(Request $request, $size = 192)
     {
-
         // validate allowed sizes
         if (!in_array($size, [40, 128, 192, 512])) {
-            $size = 128;
+            $size = 192;
         }
 
-        $path = storage_path() . '/app/logo.png';
-
-        if (File::exists($path)) {
-            $cachedImage = Image::cache(function ($img) use ($path, $size) {
-                return $img->make($path)->fit($size, $size);
-            }, 5, true);
-
-            return $cachedImage->response();
+        if (Storage::exists('logo.png')) {
+            if (Storage::exists('logo-' . $size . '.png')) {
+                return response()->file(Storage::path('logo-' . $size . '.png'));
+            } else {
+                $image = Image::read(Storage::path('logo.png'));
+                $image->cover($size, $size);
+                $image->save(Storage::path('logo-' . $size . '.png'));
+                return response()->file(Storage::path('logo-' . $size . '.png'));
+            }
         } else {
-            $path = public_path() . '/images/agorakit-icon-512.png';
-            $cachedImage = Image::cache(function ($img) use ($path, $size) {
-                return $img->make($path)->fit($size, $size);
-            }, 5, true);
-
-            return $cachedImage->response();
+            return response()->file(public_path() . '/images/agorakit-icon-' . $size . '.png');
         }
     }
 }
