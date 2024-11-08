@@ -18,27 +18,12 @@ class ActionCoverController extends Controller
         $this->middleware('cache.headers:private,max-age=300;etag');
     }
 
-    public function small(Action $action)
+    public function show(Action $action, $size = 'medium')
     {
-        $this->authorize('view', $action);
-        return $action->getCover('small');
-    }
-
-    public function medium(Action $action)
-    {
-        $this->authorize('view', $action);
-        return $action->getCover('medium');
-    }
-
-    public function large(Action $action)
-    {
-        $this->authorize('view', $action);
-        return $action->getCover('large');
-    }
-
-    public function square(Action $action)
-    {
-        $this->authorize('view', $action);
-        return $action->getCover('square');
+        if ($action->hasCover()) {
+            return $action->getCover($size);
+        } else {
+            abort(404);
+        }
     }
 }
