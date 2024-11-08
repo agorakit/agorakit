@@ -100,11 +100,15 @@ class SettingsController extends Controller
 
         setting()->set('custom_footer', $request->get('custom_footer'));
 
-            // handle app logo
-            if ($request->hasFile('logo')) {
-                Storage::makeDirectory('public/logo');
-                Image::make($request->file('logo'))->widen(1024)->save(storage_path() . '/app/logo.png');
+        // handle app logo
+        if ($request->hasFile('logo')) {
+            Image::read($request->file('logo'))->save(storage_path() . '/app/logo.png');
+
+            $sizes = [40, 128, 192, 512];
+            foreach ($sizes as $size) {
+                Storage::delete('logo-' . $size . '.png');
             }
+        }
 
         flash('Settings saved');
 
