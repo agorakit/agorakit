@@ -99,6 +99,9 @@ trait HasCover
             $image = Image::read(Storage::path($this->getCoverPath() . 'cover.jpg'));
         }
 
+        // make cover path if needed
+        Storage::makeDirectory($this->getCoverPath());
+
         $image->scaleDown(width: 1024);
         $image->save(Storage::path($this->getCoverPath() . 'large.jpg'));
 
