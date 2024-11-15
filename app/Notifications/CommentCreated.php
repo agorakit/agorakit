@@ -70,7 +70,7 @@ class CommentCreated extends Notification
 
         $message->withSymfonyMessage(function ($message) {
             $message->getHeaders()->addTextHeader('References',  'discussion-' . $this->comment->discussion->id . '@' . Request::getHost());
-            $message->setId('comment-' . $this->comment->id . '@' . Request::getHost());
+            $message->getHeaders()->addIdHeader('agorakit', 'comment-' . $this->comment->id . '@' . Request::getHost());
         });
 
         return $message;
