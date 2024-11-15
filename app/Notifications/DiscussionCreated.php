@@ -69,6 +69,7 @@ class DiscussionCreated extends Notification
         }
 
         $message->withSymfonyMessage(function ($message) {
+            $message->getHeaders()->addTextHeader('References',  'discussion-' . $this->discussion->id . '@' . Request::getHost());
             $message->getHeaders()->addIdHeader('agorakit', 'discussion-' . $this->discussion->id . '@' . Request::getHost());
         });
 
