@@ -85,8 +85,6 @@ class CleanupDatabase extends Command
             if ($count) $this->info('Group ' . $group->name . ' hard deleted');
         }
 
-
-
         // Handle discussions and their related comments :
 
         $discussions = Discussion::onlyTrashed()
@@ -110,20 +108,15 @@ class CleanupDatabase extends Command
             ->get();
 
         foreach ($actions as $action) {
-            // definitely delete files on storage
-            $action->deleteFromStorage();
-
             // delete cover files from storage
             $action->deleteCover();
-            
+
             // ...and from DB
             $action->forceDelete();
 
             $this->info($action->name . ' deleted from db & storage');
         }
 
-
-    
         // Handle files
         $files = File::onlyTrashed()
             ->where('deleted_at', '<', Carbon::today()->subDays(config('agorakit.data_retention')))
