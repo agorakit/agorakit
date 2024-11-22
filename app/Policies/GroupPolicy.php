@@ -56,11 +56,12 @@ class GroupPolicy extends BasePolicy
     public function view(?User $user, Group $group)
     {
         if ($group->isSecret()) {
-            if ($user->isMemberOf($group)) {
-                return true;
-            } else {
-                return false;
+            if ($user) {
+                if ($user->isMemberOf($group)) {
+                    return true;
+                }
             }
+            return false;
         }
 
         return true;
