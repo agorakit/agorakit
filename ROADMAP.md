@@ -61,6 +61,7 @@ real-time notifications._
 
 ### Enhance calendar
 - Public calendar of events
+- Enhance event form: some fields (location) exist in db but not in form
 
 -----
 
