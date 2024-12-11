@@ -18,7 +18,7 @@ It provides an as small as possible image that reflects a potential production e
 The container will take a while to build and if all goes well, you can access the app on localhost (either on http or https)
 
 - Connect to the shell inside the container using `./bash.sh`
-- `cp .env.dev .env`
+- `cp .env.dev .env` _(Hint: before you rebuild, make sure to push this .env out of the way)_
 - `composer install`
 - `php artisan key:generate`
 - `php artisan migrate`
@@ -43,3 +43,5 @@ Can be accessed on port 8080 : http://localhost:8080
 
 ## Read emails
 Mailpit can be accessed on port 8025 : http://localhost:8025
+
+(Mailpit API documentation is available here : http://localhost:8025/api/v1)
