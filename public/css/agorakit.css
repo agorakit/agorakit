@@ -1,0 +1,86 @@
+:root {
+    --border-radius: 5px;
+    --primary: #a1a;
+    --secondary: gray;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: #ccc;
+}
+
+
+.page {
+    background-color: #fff;
+    padding: 2rem;
+    margin: 2rem;
+    border-radius: var(--border-radius);
+}
+    
+
+/*
+.nav {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+    */
+
+
+nav .logo
+{
+    display: flex;
+}
+
+
+
+.toolbar
+{
+    display: flex;
+    gap: 1rem;
+    padding-block: 1rem;
+}
+
+.groups {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 300px);
+    grid-auto-rows: auto;
+    grid-gap: 1rem;
+}
+
+.groups .card {
+    border: 1px solid black;
+    border-radius: var(--border-radius);
+}
+
+.groups .card img {
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+    width: 100%;
+}
+
+.groups .card .body {
+    padding: 1rem;
+}
+
+.groups .card .footer {
+    padding: 1rem;
+    font-size: small;
+    display: flex;
+    color: var(--secondary);
+}
+
+.groups .card .footer div {
+    margin-right: 1rem;
+}
+
+/*
+.btn {
+    background-color: var(--primary);
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
+    display: inline-block;
+    border-radius: var(--border-radius);
+}
+    */

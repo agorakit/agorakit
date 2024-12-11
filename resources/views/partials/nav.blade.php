@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-lg bg-dark sticky-top" data-bs-theme="dark" up-fixed="top">
     <div class="container-fluid">
         <!-- logo -->
-        <a class="navbar-brand me-4" href="{{ route('index') }}">
-            <img src="{{ route('icon', 40) }}" height="40" width="40" />
+        <a class="navbar-brand" href="{{ route('index') }}">
+            <img src="{{ route('icon', 40) }}" height="40" width="40" class="d-inline-block align-text-top"/>
             <span class="d-none d-md-inline">{{ setting('name') }}</span>
         </a>
 

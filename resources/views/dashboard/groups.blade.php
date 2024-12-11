@@ -2,16 +2,14 @@
 
 @section('content')
 
-    <div class="mb-2">
-        @include('dashboard.tabs')
-    </div>
+    @include('dashboard.tabs')
 
-    <div class="d-flex justify-content-between mb-4 gap-2 flex-wrap">
-        <form action="{{ route('groups.index') }}" class="form-inline" method="GET" role="search" up-autosubmit
-            up-scroll="false" up-target=".groups" up-watch-delay="500">
+    <div class="toolbar">
+        <form action="{{ route('groups.index') }}" class="form-inline" method="GET" role="search" up-autosubmit up-scroll="false"
+            up-target=".groups" up-watch-delay="500">
             <div class="input-group">
-                <input aria-label="Search" class="form-control" name="search" placeholder="{{ __('Filter') }}..."
-                    type="text" value="{{ Request::get('search') }}">
+                <input aria-label="Search" class="form-control" name="search" placeholder="{{ __('Filter') }}..." type="text"
+                    value="{{ Request::get('search') }}">
 
                 <button class="btn btn-secondary" type="submit"><span class="fa fa-search"></span></button>
 
@@ -31,15 +29,13 @@
     <div class="groups">
         @if ($groups)
             {!! $groups->links() !!}
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4">
-                @foreach ($groups as $group)
-                    @include('groups.group')
-                @endforeach
-            </div>
+            @foreach ($groups as $group)
+                @include('groups.group')
+            @endforeach
             {!! $groups->links() !!}
         @else
             <div class="alert alert-info" role="alert">
-                {{ trans('messages.nothing_yet') }}
+                {{ trans('There are no groups yet, create one') }}
             </div>
         @endif
     </div>

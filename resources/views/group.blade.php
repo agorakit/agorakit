@@ -10,7 +10,8 @@
 
 <body>
 
-    <div up-main>
+    <main up-main>
+
         @unless (request()->get('embed'))
             @include('partials.nav')
         @endunless
@@ -19,17 +20,17 @@
             @include('partials.errors')
         </div>
 
-        <div class="container mt-md-4 p-md-4 p-2">
+        <div class="page">
             @if ($group->exists)
                 @include('groups.tabs')
             @endif
 
-            <div class="mt-md-4 mt-2 content" up-main="modal">
+            <div up-main="modal">
                 @yield('content')
             </div>
         </div>
 
-    </div>
+    </main>
 
     @include('partials.footer')
 

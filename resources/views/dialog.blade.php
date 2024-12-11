@@ -8,15 +8,15 @@
 </head>
 
 <body>
-    <div class="page page-center" up-main>
-        <div class="container container-tight p-4">
+    <main up-main>
+        
             <div up-main="modal">
                 @include('partials.errors')
                 @yield('content')
             </div>
-        </div>
+        
         @include('partials.footer')
-    </div>
+    </main>
 
 </body>
 

@@ -35,13 +35,13 @@
         @endauth
     </div>
 
-     @if ($groups)
+    @if ($groups)
         <div class="groups">
-             <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4">
-                @foreach ($groups as $group)
-                    @include('groups.group')
-                @endforeach
-            </div>
+
+            @foreach ($groups as $group)
+                @include('groups.group')
+            @endforeach
+
             {!! $groups->links() !!}
 
         </div>
