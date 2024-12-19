@@ -214,16 +214,13 @@ class GroupActionController extends Controller
             if ($request->get('stop_date')) {
                 if ($request->get('stop_time')) {
                     $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('stop_time'));
-                } else { // asssume action will have a one hour duration
-                    $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('start_time'))->addHour();
-                }
-            } else { // assume it will be same day
-                if ($request->get('stop_time')) {
-                    $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
-                } else { // asssume action will have a one hour duration
-                    $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('start_time'))->addHour();
+                } else { // asssume action will stop on stop_date and start_time
+                    $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('start_time'));
                 }
             }
+	    else { // asssume action will stop on start_date and start_time
+                $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('start_time'));
+	    }
         } catch (\Exception $e) {
             return redirect()->route('groups.actions.create', $group)
                 ->withErrors($e->getMessage() . '. Incorrect format in the stop date, use yyyy-mm-dd hh:mm')

@@ -41,8 +41,9 @@
                     @endif
                 </div>
                 <div>
-                    <i class="fa fa-clock-o me-1"></i> {{ $action->start->format('H:i') }} -
-                    {{ $action->stop->format('H:i') }}
+                    <i class="fa fa-clock-o me-1"></i> {{ $action->start->format('H:i') }}
+                    @if ($action->stop > $action->start) - {{ $action->stop->format('H:i') }}
+		    @endif
                 </div>
 
                 @if ($action->location)
