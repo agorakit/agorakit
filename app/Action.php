@@ -31,6 +31,7 @@ class Action extends Model
         'user_id'  => 'required|exists:users,id',
         'group_id' => 'required|exists:groups,id',
         'start'    => 'required',
+        'stop'     => 'required',
     ];
 
     protected $with = ['attending', 'notAttending']; // always load participants with actions
