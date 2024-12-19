@@ -81,10 +81,10 @@ class Action extends Model
         return $this->belongsTo(User::class)->withTrashed();
     }
 
-    public function votes()
+    /* public function votes()
     {
         return $this->morphMany('Vote', 'votable');
-    }
+    } */
 
     public function link()
     {
