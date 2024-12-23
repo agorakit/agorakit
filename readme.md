@@ -2,9 +2,9 @@
 
 ## Agorakit, groupware for citizens
 
-Agorakit is web-based, open source groupware for citizens' initiatives. By creating collaborative groups, people can discuss topics, organize events, store files and keep everyone updated as needed. AgoraKit is a forum, calendar, file manager and email notifier.
+Agorakit is open source Web-based groupware. Create collaborative groups where you can organize, discuss, schedule, store & update everyone about what's important. 
 
-Manage communication, decision making, membership, files and events. Flexible email notifications per group, per user preferences. Most of the time, no admin is involved in the process as we try to keep it as horizontal as possible. And all the information stays on your own server!
+Agorakit contains a forum, calendar, file manager and email notifier to help you manage membership, communication, and decision-making as simply as possible. Most of the time, no admin is required in the process as we try to keep it as flat as possible. All the information stays on your own server!
 
 Check the [website](https://www.agorakit.org) for a more colorful overview or review the [docs](https://docs.agorakit.org).
 
