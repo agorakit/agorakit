@@ -47,11 +47,6 @@ class Membership extends Model
         return $this->membership == \App\Membership::ADMIN;
     }
 
-    public function votes()
-    {
-        return $this->morphedByMany('Vote', 'votable');
-    }
-
     public function user()
     {
         return $this->belongsTo(\App\User::class)->withTrashed();

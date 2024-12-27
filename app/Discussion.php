@@ -110,11 +110,6 @@ class Discussion extends Model
         return $this->belongsTo(\App\User::class)->withTrashed();
     }
 
-    public function votes()
-    {
-        return $this->hasMany('App\Vote');
-    }
-
     public function comments()
     {
         return $this->hasMany(\App\Comment::class);

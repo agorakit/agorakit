@@ -58,11 +58,6 @@ class Comment extends Model
         return $this->belongsTo(\App\User::class)->withTrashed();
     }
 
-    public function votes()
-    {
-        return $this->hasMany('App\Vote');
-    }
-
     public function reactions()
     {
         return $this->morphMany(Reaction::class, 'reactable');
