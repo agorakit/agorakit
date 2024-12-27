@@ -110,10 +110,10 @@ class Discussion extends Model
         return $this->belongsTo(\App\User::class)->withTrashed();
     }
 
-    public function votes()
+    /* public function votes()
     {
         return $this->hasMany('App\Vote');
-    }
+    } */
 
     public function comments()
     {
@@ -124,7 +124,7 @@ class Discussion extends Model
     {
         if (\Auth::check()) {
             return $this->hasMany(\App\UserReadDiscussion::class)->where('user_id', '=', \Auth::user()->id);
-        } else {
+        } elseif (!app()->runningInConsole()) {
             abort(500, 'Need to be logged in to access this userReadDiscussion relation');
         }
     }
