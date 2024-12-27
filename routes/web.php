@@ -133,13 +133,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('tags/{tag}', 'TagController@show')->name('tags.show');
 
 
-
-    /* Drawer navigation */
-    Route::get('navigation', 'NavigationController@show')->name('navigation.main');
-
-
-
-
     /* Pages */
     Route::get('pages/help', 'PageController@help')->name('pages.help');
 
