@@ -204,12 +204,6 @@ class GroupActionController extends Controller
                 ->withInput();
         }
 
-        if ($request->get('stop_time')) {
-            $stop_time = $request->get('stop_time');
-        } else {
-            $stop_time = $request->input('start_time');
-        }
-
         try {
             if ($request->get('stop_date')) {
 	        if ($request->get('stop_time')) {
