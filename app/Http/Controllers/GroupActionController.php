@@ -212,14 +212,18 @@ class GroupActionController extends Controller
 
         try {
             if ($request->get('stop_date')) {
-                if ($request->get('stop_time')) {
-                    $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('stop_time'));
-                } else { // asssume action will stop on stop_date and start_time
-                    $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('start_time'));
+	        if ($request->get('stop_time')) {
+		  $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('stop_time'));
+	      } else { // asssume action will stop on stop_date and start_time
+		  $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('start_time'));
                 }
             }
-	    else { // asssume action will stop on start_date and start_time
+	    else {
+	        if ($request->get('stop_time')) { // asssume action will stop on start_date and stop_time
+		  $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
+	      } else { // asssume action has unknown duration and store start_date and start_time
                 $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('start_time'));
+                }
 	    }
         } catch (\Exception $e) {
             return redirect()->route('groups.actions.create', $group)
