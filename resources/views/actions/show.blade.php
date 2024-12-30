@@ -53,7 +53,7 @@
             <h3>{{ trans('messages.begins') }} : {{ $action->start->isoFormat('LLLL') }}</h3>
 
             @if ($action->stop > $action->start) <h3>{{ trans('messages.ends') }} : {{ $action->stop->isoFormat('LLLL') }}</h3>
-	    @endif
+            @endif
 
             @if (!empty($action->location))
                 <h3>{{ trans('messages.location') }} : {{ $action->location }}</h3>
