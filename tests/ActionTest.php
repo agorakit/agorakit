@@ -56,17 +56,17 @@ class ActionTest extends Tests\BrowserKitTestCase
         $this->actingAs($user)
             ->visit('groups/create')
             ->see('Create a new group')
-            ->type('Test group for action test', 'name')
+            ->type('Action test group', 'name')
             ->type('this is a test group for action test', 'body')
             ->press('Create the group')
-            ->see('Test group for action test');
+            ->see('Action test group');
     }
 
     public function testActionWithDefiniteEndCreation()
     {
         $user = App\User::where('email', 'admin@agorakit.org')->first();
 
-        $group = App\Group::where('name', 'Test group for action test')->first();
+        $group = App\Group::where('name', 'Action test group')->first();
 
         $this->actingAs($user)
             ->visit('/groups/' . $group->id . '/actions/create')
@@ -79,7 +79,11 @@ class ActionTest extends Tests\BrowserKitTestCase
             ->type('2026-01-03', 'stop_date')
             ->type('9:00', 'stop_time')
             ->press('Create')
-            ->seeInDatabase('actions', ['name' => 'Test action with definite end', 'start' => '2026-01-01 12:00:00', 'stop' => '2026-01-03 09:00:00'])
+            ->seeInDatabase('actions', [
+            'name' => 'Test action with definite end',
+            'start' => '2026-01-01 12:00:00',
+            'stop' => '2026-01-03 09:00:00'
+            ])
             ->see(trans('action.create_one_button'));
     }
 
@@ -87,7 +91,7 @@ class ActionTest extends Tests\BrowserKitTestCase
     {
         $user = App\User::where('email', 'admin@agorakit.org')->first();
 
-        $group = App\Group::where('name', 'Test group for action test')->first();
+        $group = App\Group::where('name', 'Action test group')->first();
 
         $this->actingAs($user)
             ->visit('/groups/' . $group->id . '/actions/create')
@@ -99,14 +103,16 @@ class ActionTest extends Tests\BrowserKitTestCase
             ->type('12:00', 'start_time')
             ->type('9:00', 'stop_time')
             ->press('Create')
-            ->dontSeeInDatabase('actions', ['name' => 'Test action with wrong stop time']);
+            ->dontSeeInDatabase('actions', [
+            'name' => 'Test action with wrong stop time'
+            ]);
     }
 
     public function testActionWithoutStopDateCreation()
     {
         $user = App\User::where('email', 'admin@agorakit.org')->first();
 
-        $group = App\Group::where('name', 'Test group for action test')->first();
+        $group = App\Group::where('name', 'Action test group')->first();
 
         $this->actingAs($user)
             ->visit('/groups/' . $group->id . '/actions/create')
@@ -118,7 +124,11 @@ class ActionTest extends Tests\BrowserKitTestCase
             ->type('12:00', 'start_time')
             ->type('17:00', 'stop_time')
             ->press('Create')
-            ->seeInDatabase('actions', ['name' => 'Test action without stop date', 'start' => '2026-01-01 12:00:00', 'stop' => '2026-01-01 17:00:00'])
+            ->seeInDatabase('actions', [
+            'name' => 'Test action without stop date',
+            'start' => '2026-01-01 12:00:00',
+            'stop' => '2026-01-01 17:00:00'
+            ])
             ->see(trans('action.create_one_button'));
     }
 
@@ -126,7 +136,7 @@ class ActionTest extends Tests\BrowserKitTestCase
     {
         $user = App\User::where('email', 'admin@agorakit.org')->first();
 
-        $group = App\Group::where('name', 'Test group for action test')->first();
+        $group = App\Group::where('name', 'Action test group')->first();
 
         $this->actingAs($user)
             ->visit('/groups/' . $group->id . '/actions/create')
@@ -138,7 +148,10 @@ class ActionTest extends Tests\BrowserKitTestCase
             ->type('12:00', 'start_time')
             ->type('2026-01-03', 'stop_date')
             ->press('Create')
-            ->seeInDatabase('actions', ['name' => 'Test action without stop time', 'start' => '2026-01-01 12:00:00', 'stop' => '2026-01-03 12:00:00'])
+            ->seeInDatabase('actions', [
+            'name' => 'Test action without stop time',
+            'start' => '2026-01-01 12:00:00',
+            'stop' => '2026-01-03 12:00:00'])
             ->see(trans('action.create_one_button'));
     }
 
@@ -146,7 +159,7 @@ class ActionTest extends Tests\BrowserKitTestCase
     {
         $user = App\User::where('email', 'admin@agorakit.org')->first();
 
-        $group = App\Group::where('name', 'Test group for action test')->first();
+        $group = App\Group::where('name', 'Action test group')->first();
 
         $this->actingAs($user)
             ->visit('/groups/' . $group->id . '/actions/create')
@@ -157,7 +170,9 @@ class ActionTest extends Tests\BrowserKitTestCase
             ->type('2026-01-01', 'start_date')
             ->type('12:00', 'start_time')
             ->press('Create')
-            ->seeInDatabase('actions', ['name' => 'Test action with unknown end'])
+            ->seeInDatabase('actions', [
+            'name' => 'Test action with unknown end'
+            ])
             ->see(trans('action.create_one_button'));
     }
 }
