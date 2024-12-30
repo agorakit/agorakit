@@ -165,7 +165,7 @@ class ActionTest extends Tests\BrowserKitTestCase
             ->visit('/groups/' . $group->id . '/actions/create')
             ->see('Add an event')
             ->type('Test action with unknown end', 'name')
-            ->type('this is a test action in the agende', 'body')
+            ->type('this is a test action in the agenda', 'body')
             ->type('Bruxelles', 'location')
             ->type('2026-01-01', 'start_date')
             ->type('12:00', 'start_time')
