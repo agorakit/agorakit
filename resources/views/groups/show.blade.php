@@ -5,9 +5,9 @@
 
         <div class="col-12 col-md-6 mb-2 order-md-2">
             @if ($group->hasCover())
-                <img class="rounded" src="{{ route('groups.cover', [$group, 'large']) }}" />
+                <img alt="" class="rounded" src="{{ route('groups.cover', [$group, 'large']) }}" />
             @else
-                <img class="rounded" src="/images/group.svg" />
+                <img alt="" class="rounded" src="/images/group.svg" />
             @endif
         </div>
 

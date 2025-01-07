@@ -1,7 +1,7 @@
 <div class="mb-3 p-2 file-embed d-inline-block" up-expand>
 <div class="d-flex gap-2">
 <div>
-<img src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" alt="file cover"
+<img alt="" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}"
 style="width: 3rem; height: 3rem" class="rounded">
 </div>
 <div>

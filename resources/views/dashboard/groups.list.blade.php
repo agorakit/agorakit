@@ -55,7 +55,7 @@
                     <tbody>
                         @forelse($groups as $group)
                             <tr class="tag-group @foreach ($group->tags as $tag)tag-{{ $tag->tag_id }} @endforeach">
-                                <td class="avatar"><span class="avatar"><img class="rounded"
+                                <td class="avatar"><span class="avatar"><img alt="" class="rounded"
                                             src="{{ route('groups.cover', [$group, 'small']) }}" /></span></td>
                                 <td class="content">
                                     <a href="{{ route('groups.show', $group) }}">

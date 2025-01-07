@@ -21,7 +21,7 @@
 </div>
 
 <div class="form-group">
-    <label>{{ trans('group.cover') }}</label><br />
+    <label for="file">{{ trans('group.cover') }}</label><br />
     <input class="form-control-file" id="file" name="cover" title="{{ trans('messages.select_one_file') }}"
         type="file">
 </div>
@@ -32,8 +32,8 @@
         <i class="fas fa-info-circle"></i>
         {{ trans('messages.visibility_help') }}
     </div>
-    <label class="form-check form-switch">
-        <input @if (isset($action) && $action->isPublic()) checked=checked @endif class="form-check-input" name="visibility"
+    <label class="form-check form-switch" for="is-public">
+        <input @if (isset($action) && $action->isPublic()) checked=checked @endif class="form-check-input" id="is-public" name="visibility"
             type="checkbox">
         <span>{{ trans('messages.public') }}</span>
     </label>
@@ -47,17 +47,17 @@
 </div>
 
 <div class="form-group">
-    {{ trans('messages.start_date') }}
+    {!! Form::label('start_date', trans('messages.start_date')) !!}
     {!! Form::date('start_date', $action->start->format('Y-m-d'), ['class' => 'form-control']) !!}
 </div>
 
 <div class="form-group">
-    {{ trans('messages.start_time') }}
+    {!! Form::label('start_time', trans('messages.start_time')) !!}
     {!! Form::time('start_time', $action->start->format('H:i'), ['class' => 'form-control', 'required']) !!}
 </div>
 
 <div class="form-group">
-    {{ trans('messages.stop_time') }}
+    {!! Form::label('stop_time', trans('messages.stop_time')) !!}
     @if (isset($action->stop))
         {!! Form::time('stop_time', $action->stop->format('H:i'), ['class' => 'form-control', 'required']) !!}
     @else
@@ -66,7 +66,7 @@
 </div>
 
 <div class="form-group">
-    {{ trans('messages.stop_date') }}
+    {!! Form::label('stop_date', trans('messages.stop_date')) !!}
     @if (isset($action->stop) && $action->stop->format('Y-m-d') != $action->start->format('Y-m-d'))
         {!! Form::date('stop_date', $action->stop->format('Y-m-d'), ['class' => 'form-control']) !!}
     @else
