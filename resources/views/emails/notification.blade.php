@@ -70,7 +70,7 @@
 @if ($files->count() > 0)
 <h1>{{trans('messages.latest_files')}}</h1>
 @foreach($files as $file)
-<a  href="{{route('groups.files.show', [$group, $file])}}"><img src="{{route('groups.files.thumbnail', [$group, $file])}}" style="width: 24px; height:24px"/>{{$file->name}}</a>
+<a  href="{{route('groups.files.show', [$group, $file])}}"><img alt="" src="{{route('groups.files.thumbnail', [$group, $file])}}" style="width: 24px; height:24px"/>{{$file->name}}</a>
 <br/>
 @endforeach
 <br/>
@@ -78,7 +78,7 @@
 
 
 <div style="margin-top: 20px; text-align: center">
-<img src="{{route('icon', 128)}}" width="128" height="128"/>
+<img alt="" src="{{route('icon', 128)}}" width="128" height="128"/>
 </div>
 
 

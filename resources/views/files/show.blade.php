@@ -31,16 +31,16 @@
 
             @if ($file->isImage())
                 <a href="{{ route('groups.files.download', [$group, $file]) }}" target="_blank">
-                    <img src="{{ route('groups.files.preview', [$group, $file]) }}" class="responsive rounded" />
+                    <img alt="{{ $file->name }}" src="{{ route('groups.files.preview', [$group, $file]) }}" class="responsive rounded" />
                 </a>
             @elseif ($file->isLink())
                 <a href="{{ $file->path }}" target="_blank">
-                    <img src="{{ route('groups.files.thumbnail', [$group, $file]) }}" class="rounded"
+                    <img alt="{{ $file->name }}" src="{{ route('groups.files.thumbnail', [$group, $file]) }}" class="rounded"
                         style="width: 100px; height: 100px" />
                 </a>
             @else
                 <a href="{{ route('groups.files.download', [$group, $file]) }}" target="_blank">
-                    <img src="{{ route('groups.files.thumbnail', [$group, $file]) }}" class="rounded"
+                    <img alt="{{ $file->name }}" src="{{ route('groups.files.thumbnail', [$group, $file]) }}" class="rounded"
                         style="width: 100px; height: 100px" />
                 </a>
             @endif

@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <!-- logo -->
         <a class="navbar-brand me-4" href="{{ route('index') }}">
-            <img src="{{ route('icon', 40) }}" height="40" width="40" />
+            <img alt="" src="{{ route('icon', 40) }}" height="40" width="40" />
             <span class="d-none d-md-inline">{{ setting('name') }}</span>
         </a>
 
