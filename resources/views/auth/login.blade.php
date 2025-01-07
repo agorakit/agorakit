@@ -2,7 +2,7 @@
 
 @section('content')
     <h1 class="d-flex mb-4">
-        <img class="rounded" height="40" src="{{ route('icon', 40) }}" width="40" />
+        <img alt="" class="rounded" height="40" src="{{ route('icon', 40) }}" width="40" />
         <div class="ms-2">
             {{ setting('name') }} : {{ strtolower(trans('messages.login')) }}
         </div>
