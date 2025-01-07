@@ -68,7 +68,7 @@
                     <div class="setting-help">
                         {{ __('This logo will be used in the top left area and as a favicon') }}
                     </div>
-                    <input name="logo" id="logo" type="file" title="{{ trans('messages.select_one_file') }}">
+                    <input aria-label="{{ trans('messages.select_one_file') }}" name="logo" id="logo" type="file" title="{{ trans('messages.select_one_file') }}">
                 </div>
             </div>
 
