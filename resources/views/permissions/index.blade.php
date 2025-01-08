@@ -31,7 +31,7 @@
 
     <div class="form-check mb-3">
         {!!Form::checkbox('custom_permissions', 'yes', $custom_permissions, ['id' => 'custom_permissions'])!!}
-        {!!Form::label('custom_permissions', trans('Enable custom permissions for this group'), ['class'] => ['humble']) !!}
+        {!!Form::label('custom_permissions', trans('Enable custom permissions for this group'), ['class' => 'humble']) !!}
     </div>
 
     <div class="permissions" @unless ($custom_permissions) style="display: none" @endunless>
