@@ -11,8 +11,8 @@
 @include('partials.tags_input')
 
 <div class="form-group">
-    <label>{{trans('group.cover')}}</label><br/>
-    <input name="cover" id="file" type="file" class="form-control-file" title="{{trans('messages.select_one_file')}}">
+    {!! Form::label('cover', trans('group.cover')) !!}
+    <input name="cover" id="cover" type="file" class="form-control-file" title="{{trans('messages.select_one_file')}}">
 </div>
 
 <div class="form-group">
@@ -53,8 +53,8 @@
 @if(Auth::user()->isAdmin())
     <div class="form-group">
         {!! Form::checkbox('pinned_navbar', 'yes', $group->getSetting('pinned_navbar', false)) !!}
-        <label class="humble" for="pinned_navbar">
-          {!! trans('group.navbar', ['my_groups' => trans('messages.my_groups')]) !!}
+        {!! Form::label('pinned_navbar', trans('group.navbar', ['my_groups' => trans('messages.my_groups')]),
+          ['class' => 'humble']) !!}
         </label>
     </div>
 @endif

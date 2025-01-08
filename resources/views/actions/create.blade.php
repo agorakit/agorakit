@@ -8,7 +8,7 @@
 
         <div class="form-group">
             {!! Form::label('group', trans('messages.group')) !!}
-            <select class="form-control" name="group" required="required">
+            <select class="form-control" id="group" name="group" required="required">
                 <option value="" disabled selected>{{ trans('messages.choose_a_group') }}</option>
                 @foreach (Auth::user()->groups as $user_group)
                     <option value="{{ $user_group->id }}">{{ $user_group->name }}</option>

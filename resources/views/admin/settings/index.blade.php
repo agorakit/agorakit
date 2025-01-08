@@ -113,19 +113,23 @@
                     <div class="space-y-4">
                         <div>
                             {!! Form::checkbox('user_can_create_groups', 'yes', setting('user_can_create_groups', true)) !!}
-                            {{ __('Allow regular users to create groups (if you uncheck this box, only admins will be able to create groups)') }}
+                            {!! Form::label('user_can_create_groups',
+                              trans('Allow regular users to create groups (if you uncheck this box, only admins will be able to create groups)'),
+                              ['class' => 'humble']) !!}
                         </div>
                         <div>
 
                             {!! Form::checkbox('user_can_create_secret_groups', 'yes', setting('user_can_create_secret_groups')) !!}
-                            {!! __(
-                                'Allow regular users to create <strong>secret</strong> groups (if you uncheck this box, only admins will be able to create secret groups)',
-                            ) !!}
+                            {!! Form::label('user_can_create_secret_groups',
+                              trans('Allow regular users to create <strong>secret</strong> groups (if you uncheck this box, only admins will be able to create secret groups)'),
+                              ['class' => 'humble']) !!}
                         </div>
                         <div>
 
                             {!! Form::checkbox('user_can_register', 'yes', setting('user_can_register', true)) !!}
-                            {!! __('Allow anyone to create a new user account on this server (unchecking this box will disable registration)') !!}
+                            {!! Form::label('user_can_register',
+                              trans('Allow anyone to create a new user account on this server (unchecking this box will disable registration))',
+                              ['class' => 'humble']) !!}
                         </div>
                     </div>
                 </div>
@@ -135,7 +139,8 @@
         <div class="tab-pane" id="notifications" role="tabpanel" aria-labelledby="messages-tab" tabindex="0">
             <div class="form-group">
                 {!! Form::checkbox('notify_admins_on_group_create', 'yes', setting('notify_admins_on_group_create')) !!}
-                {{ __('Notify administrators when a new group is created') }}
+                {!! Form::label('notify_admins_on_group_create', trans('Notify administrators when a new group is created'),
+                  ['class' => 'humble']) !!}
             </div>
         </div>
 
@@ -191,31 +196,36 @@
             <h2>{{ __('Navigation bar') }}</h2>
             <div class="form-group">
                 {!! Form::checkbox('show_overview_inside_navbar', 'yes', setting('show_overview_inside_navbar', true)) !!}
-                {{ __('Show overview button inside the navigation bar') }}
+                {!! Form::label('show_overview_inside_navbar', trans('Show overview button inside the navigation bar'),
+                  ['class' => 'humble']) !!}
             </div>
             <div id="overview-settings-visibility" style="margin-left: 1em">
                 <h3>{{ __('Overview') }}</h3>
                 @foreach($overviewItems as $key => $value)
                     <div class="form-group">
                         {!! Form::checkbox($key, 'yes', setting($key, true)) !!}
-                        {{ __('Show :name button into overview', ['name' => $value]) }}
+                        {!! Form::label($key, trans('Show :key button into overview', ['key' => $key]),
+                          ['class' => 'humble']) !!}
                     </div>
                 @endforeach
             </div>
             <div class="form-group">
                 {!! Form::checkbox('show_help_inside_navbar', 'yes', setting('show_help_inside_navbar', true)) !!}
-                {{ __('Show Help button inside the navigation bar') }}
+                {!! Form::label('show_help_inside_navbar', trans('Show Help button inside the navigation bar'),
+                  ['class' => 'humble']) !!}
             </div>
             <div class="form-group">
                 {!! Form::checkbox('show_locales_inside_navbar', 'yes', setting('show_locales_inside_navbar', true)) !!}
-                {{ __('Show Locales button inside the navigation bar') }}
+                {!! Form::label('show_locales_inside_navbar', trans('Show Locales button inside the navigation bar'),
+                  ['class' => 'humble']) !!}
             </div>
             <div class="locale-configuration" style="margin-left: 1em">
                 <h3>{{ __('Locales') }}</h3>
                 @foreach(config('app.locales') as $locale)
                     <div class="form-group">
                         {!! Form::checkbox("show_locale_{$locale}", 'yes', setting("show_locale_{$locale}", true)) !!}
-                        {{ __("Show :locale button into locales", ['locale' => $locale]) }}
+                        {!! Form::label("show_locale_{$locale}", trans('Show :locale button into locales', ['locale' => $locale]),
+                          ['class' => 'humble']) !!}
                     </div>
                 @endforeach
             </div>

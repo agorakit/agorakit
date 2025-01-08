@@ -1,4 +1,5 @@
 <div class="form-group">
+    {!! Form::label('body', trans('comment.body')) !!}
     {!! Form::textarea('body', null, [
     'class' => 'form-control wysiwyg' ,
     'data-mention-files' => route('groups.files.mention', $group),
@@ -15,7 +16,6 @@
 
 
 <div class="form-group">
-    <label for="attachment">{{trans('Attach a file')}}</label>
-    <br />
+    {!! Form::label('attachment', trans('Attach a file')) !!}
     <input type="file" name="files[]" id="attachment" multiple="multiple">
 </div>

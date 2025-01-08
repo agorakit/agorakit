@@ -8,8 +8,8 @@
     {!! Form::open(['url' => route('groups.files.createfolder', ['group' => $group, 'parent' => $parent])]) !!}
 
     <div class="form-group">
-        <label for="name">{{ trans('messages.name') }}</label>
-        <input class="form-control" name="name" type="text" value="{{ old('name') }}" />
+        {!! Form::label('name', trans('messages.name')) !!}
+        {!! Form::text('name', old('name'), ['class' => 'form-control', 'required']) !!}
 
     </div>
 
