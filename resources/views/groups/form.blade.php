@@ -52,7 +52,7 @@
 
 @if(Auth::user()->isAdmin())
     <div class="form-group">
-        {!! Form::checkbox('pinned_navbar', 'yes', $group->getSetting('pinned_navbar', false)) !!}
+        {!! Form::checkbox('pinned_navbar', 'yes', $group->getSetting('pinned_navbar', false), ['id' => 'pinned_navbar']) !!}
         {!! Form::label('pinned_navbar', trans('group.navbar', ['my_groups' => trans('messages.my_groups')]),
           ['class' => 'humble']) !!}
         </label>
