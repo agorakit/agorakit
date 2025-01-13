@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-class Undocontroller extends Controller
+class UndoController extends Controller
 {
     public function __construct()
     {
