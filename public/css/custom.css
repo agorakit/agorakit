@@ -74,6 +74,10 @@ p {
     color: #444;
 }
 
+.humble {
+    font-weight: normal;
+}
+
 .form-group {
     margin-bottom: 24px;
 }
