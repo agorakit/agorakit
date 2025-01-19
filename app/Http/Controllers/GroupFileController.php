@@ -242,7 +242,7 @@ class GroupFileController extends Controller
                 }
 
                 // Add file to disk
-                $file->addToStorage($uploaded_file);
+                $file->addToStorage($request->file('file'));
 
                 // update activity timestamp on parent items
                 $group->touch();
