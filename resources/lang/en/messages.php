@@ -110,6 +110,7 @@ return array (
   'delete' => 'Delete',
   'show_history' => 'Show history',
   'unattend' => 'Unattend',
+  'upload_file' => 'Upload File',
   'upload_files' => 'Upload Files',
   'select_one_or_more_files' => 'Select one or more files',
   'max_file_size' => 'Maximum file size',
@@ -121,7 +122,8 @@ return array (
   'create_link_help' => 'Here you can add a link (URL). For example link to videos, shared documents, etc...
   Enter a correct URL starting with http:// and set a title for this link. You can also add tags.',
   'link' => 'Link',
-  'create_file_button' => 'Upload file(s)',
+  'create_file_button' => 'Upload file',
+  'create_files_button' => 'Upload file(s)',
   'create_link_button' => 'Create Link',
   'create_folder_button' => 'Create a folder',
   'tags' => 'Tags',
