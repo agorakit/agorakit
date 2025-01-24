@@ -43,7 +43,7 @@ class CommentController extends Controller
             $file->user()->associate(Auth::user());
 
             // store the file itself on disk
-            $file->addToStorage($uploaded_file);
+            $file->addToStorage($request->file('file'));
 
             // add an f:xx to the comment so it is shown on display
             $comment->body = $comment->body . '<p>f:' . $file->id . '</p>';
@@ -105,7 +105,7 @@ class CommentController extends Controller
             $file->user()->associate(Auth::user());
 
             // store the file itself on disk
-            $file->addToStorage($uploaded_file);
+            $file->addToStorage($request->file('file'));
 
             // add an f:xx to the comment so it is shown on display
             $comment->body = $comment->body . '<p>f:' . $file->id . '</p>';
