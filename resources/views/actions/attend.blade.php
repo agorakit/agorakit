@@ -14,10 +14,10 @@
         'participation',
         [10 => __('I will participate'), -10 => __('I will not participate'), 0 => __('I don\'t know yet')],
         null,
-        ['class' => 'form-control mb-4'],
+        ['aria-label': trans('action.participation'), >'class' => 'form-control mb-4'],
     ) !!}
 
-    <label>{{ __('Send me a reminder') }} :</label>
+    {!! Form::label('notification', trans('Send me a reminder')) !!}
     {!! Form::select(
         'notification',
         [60 => __('One hour before the event'), 60 * 24 => __('One day before the event'), 0 => __('No reminder please')],

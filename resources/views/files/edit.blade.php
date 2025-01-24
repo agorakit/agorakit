@@ -19,7 +19,7 @@
     @if ($folders->count() > 0)
         <div class="form-group">
             {!! Form::label('parent', trans('messages.folder')) !!}
-            <select class="form-control" name="parent">
+            <select class="form-control" id="parent" name="parent">
                 <option value="root" @if ($file->parent_id == null) selected="selected" @endif>{{ trans('messages.root') }}</option>
                 @foreach ($folders as $folder)
                     <option value="{{ $folder->id }}" @if ($file->parent_id == $folder->id) selected="selected" @endif>{{ $folder->name }}</option>

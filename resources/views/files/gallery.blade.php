@@ -27,7 +27,7 @@
             <div id="gallery">
                 @forelse( $files as $file )
                     <a  href="{{ route('groups.files.download', [$group, $file]) }}">
-                        <img src="{{ route('groups.files.preview', [$group, $file]) }}"/>
+                        <img alt="{{ $file->name }}" src="{{ route('groups.files.preview', [$group, $file]) }}"/>
                     </a>
                 @empty
                     {{trans('messages.nothing_yet')}}

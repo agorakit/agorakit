@@ -15,9 +15,9 @@
 
         <a class="position-relative" href="{{ action('GroupController@show', $group) }}">
             @if ($group->hasCover())
-                <img class="card-img-top" src="{{ route('groups.cover', [$group, 'medium']) }}" />
+                <img alt="" class="card-img-top" src="{{ route('groups.cover', [$group, 'medium']) }}" />
             @else
-                <img class="card-img-top" src="/images/group.svg" />
+                <img alt="" class="card-img-top" src="/images/group.svg" />
             @endif
 
             @auth

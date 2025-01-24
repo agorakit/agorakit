@@ -9,11 +9,11 @@
 
     <div class="form-group">
 
-        <label for="link">{{ trans('messages.link') }}</label>
-        <input class="form-control" name="link" placeholder="https://..." type="text" value="{{ old('link') }}" />
+        {!! Form::label('link', trans('messages.link')) !!}
+        <input class="form-control" id="link" name="link" placeholder="https://..." type="text" value="{{ old('link') }}" />
 
-        <label for="title">{{ trans('messages.title') }}</label>
-        <input class="form-control" name="title" type="text" value="{{ old('title') }}" />
+        {!! Form::label('title', trans('messages.title')) !!}
+        <input class="form-control" id="title" name="title" type="text" value="{{ old('title') }}" />
 
         @include('partials.tags_input')
 

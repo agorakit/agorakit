@@ -25,7 +25,7 @@
 </div>
 
 <div class="form-group">
-    <label for="file">{{ trans('Attach a file') }}</label>
+    {!! Form::label('file', trans('Attach a file')) !!}
     {!! Form::file('file', ['class' => 'form-control-file', 'id' => 'file']) !!}
 </div>
 

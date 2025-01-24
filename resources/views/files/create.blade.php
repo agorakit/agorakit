@@ -9,7 +9,7 @@
         'files' => true,
     ]) !!}
     <div class="form-group mt-4 mb-4">
-        <input id="file" name="file" title="{{ trans('messages.select_one_file') }}"
+        <input aria-label="File"  id="file" name="file" title="{{ trans('messages.select_one_file') }}"
             type="file">
         <div class="small-help">
             <i class="fas fa-info-circle"></i>

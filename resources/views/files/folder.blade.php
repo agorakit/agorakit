@@ -28,7 +28,7 @@
                 <tbody>
                     @forelse( $files as $file )
                         <td>
-                            <a  href="{{ route('groups.files.show', [$group, $file]) }}"><img src="{{ route('groups.files.thumbnail', [$group, $file]) }}"/></a>
+                            <a  href="{{ route('groups.files.show', [$group, $file]) }}"><img alt="" src="{{ route('groups.files.thumbnail', [$group, $file]) }}"/></a>
                         </td>
 
                         <td>

@@ -23,7 +23,7 @@
 
         @if ($action->hasCover())
             <div class="col-12 col-sm-5 col-md-4 mb-2 order-sm-2">
-                <img class="rounded" src="{{ route('actions.cover', [$action, 'large']) }}" />
+                <img alt="action cover" class="rounded" src="{{ route('actions.cover', [$action, 'large']) }}" />
             </div>
         @endif
 

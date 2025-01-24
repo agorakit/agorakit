@@ -41,7 +41,7 @@
                         <td>
                             <a class="d-flex align-items-center" href="{{ route('users.show', $membership->user) }}">
 
-                                <img class="avatar me-2" src="{{ route('users.cover', [$membership->user, 'small']) }}" />
+                                <img alt="" class="avatar me-2" src="{{ route('users.cover', [$membership->user, 'small']) }}" />
                                 <span>{{ $membership->user->name }}</span>
                             </a>
                         </td>

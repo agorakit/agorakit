@@ -3,17 +3,17 @@
     <div class="me-3">
         @if ($file->isLink())
             <a class="" href="{{ route('groups.files.show', [$file->group, $file]) }}">
-                <img class="avatar" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" />
+                <img alt="{{ $file->name }}" class="avatar" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" />
             </a>
         @elseif ($file->isFolder())
             <a class="" href="{{ route('groups.files.index', ['group' => $file->group, 'parent' => $file]) }}"
                 up-target=".files" up-history=true>
-                <img class="avatar" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" />
+                <img alt="{{ $file->name }}" class="avatar" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" />
             </a>
         @else
             <a class="mr-4 flex-shrink-0" href="{{ route('groups.files.show', [$file->group, $file]) }}"
                 up-target=".files">
-                <img class="avatar" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" />
+                <img alt="{{ $file->name }}" class="avatar" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" />
             </a>
         @endif
     </div>
