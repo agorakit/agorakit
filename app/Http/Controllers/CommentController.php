@@ -110,7 +110,7 @@ class CommentController extends Controller
             // add an f:xx to the comment so it is shown on display
             $comment->body = $comment->body . '<p>f:' . $file->id . '</p>';
             }
-        }
+        
 
         if ($comment->isInvalid()) {
             return redirect()->back()
