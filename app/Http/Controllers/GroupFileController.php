@@ -215,40 +215,38 @@ class GroupFileController extends Controller
         }
 
         try {
-            if ($request->file('files')) {
+            if ($request->file('file')) {
 
                 // validate file size
                 $validated = $request->validate([
-                    'files.*' => 'required|max:' . config('agorakit.max_file_size'),
+                    'file.*' => 'required|max:' . config('agorakit.max_file_size'),
                 ]);
 
 
-                foreach ($request->file('files') as $uploaded_file) {
-                    $file = new File();
+                $file = new File();
 
-                    // we save it first to get an ID from the database, it will later be used to generate a unique filename.
-                    $file->forceSave(); // we bypass autovalidation, since we don't have a complete model yet, but we *need* an id
+                // we save it first to get an ID from the database, it will later be used to generate a unique filename.
+                $file->forceSave(); // we bypass autovalidation, since we don't have a complete model yet, but we *need* an id
 
-                    // add group, user and tags
-                    $file->group()->associate($group);
-                    $file->user()->associate(Auth::user());
+                // add group, user and tags
+                $file->group()->associate($group);
+                $file->user()->associate(Auth::user());
 
-                    if ($request->get('tags')) {
-                        $file->tag($request->get('tags'));
-                    }
-
-
-                    if ($parent) {
-                        $file->setParent($parent);
-                    }
-
-                    // Add file to disk
-                    $file->addToStorage($uploaded_file);
-
-                    // update activity timestamp on parent items
-                    $group->touch();
-                    \Auth::user()->touch();
+                if ($request->get('tags')) {
+                    $file->tag($request->get('tags'));
                 }
+
+
+                if ($parent) {
+                    $file->setParent($parent);
+                }
+
+                // Add file to disk
+                $file->addToStorage($request->file('file'));
+
+                // update activity timestamp on parent items
+                $group->touch();
+                \Auth::user()->touch();
 
                 flash(trans('messages.ressource_created_successfully'));
 

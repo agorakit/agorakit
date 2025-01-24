@@ -16,6 +16,6 @@
 
 
 <div class="form-group">
-    {!! Form::label('attachment', trans('Attach a file')) !!}
-    <input type="file" name="files[]" id="attachment" multiple="multiple">
+     {!! Form::label('attachment', trans('Attach a file')) !!}
+    <input type="file" name="file" id="attachment">
 </div>
