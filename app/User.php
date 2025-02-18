@@ -4,6 +4,7 @@ namespace App;
 
 use App\Traits\HasControlledTags;
 use App\Traits\HasCover;
+use App\Traits\HasLocation;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -34,6 +35,7 @@ class User extends Authenticatable
     use Sluggable;
     use Taggable;
     use SearchableTrait;
+    use hasLocation;
     use HasControlledTags;
     use HasCover;
 

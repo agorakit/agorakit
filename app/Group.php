@@ -5,6 +5,7 @@ namespace App;
 use App\Traits\HasStatus;
 use App\Traits\HasControlledTags;
 use App\Traits\HasCover;
+use App\Traits\HasLocation;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
@@ -29,6 +30,7 @@ class Group extends Model
     use SearchableTrait;
     use HasStatus;
     use hasCover;
+    use hasLocation;
     use HasControlledTags;
 
     protected $rules = [
