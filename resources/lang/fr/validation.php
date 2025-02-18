@@ -8,7 +8,6 @@ return [
     'alpha_num'            => 'Le :attribute ne peut contenir que des lettres et des chiffres.',
     'array'                => 'Le :attribute doit être un tableau.',
     'attributes'           => [
-        'address'               => 'Adresse',
         'age'                   => 'Age',
         'available'             => 'Disponible',
         'body'                  => 'Corps du texte',
@@ -25,6 +24,7 @@ return [
         'group_id'              => 'Numéro de groupe',
         'hour'                  => 'Heure',
         'last_name'             => 'Nom',
+        'location'              => 'Adresse',
         'minute'                => 'Minute',
         'mobile'                => 'Portable',
         'month'                 => 'Mois',

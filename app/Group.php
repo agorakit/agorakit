@@ -39,7 +39,7 @@ class Group extends Model
     protected $fillable = ['id', 'name', 'body', 'cover'];
     protected $casts = ['user_id' => 'integer', 'settings' => 'array'];
 
-    protected $keepRevisionOf = ['name', 'body', 'cover', 'color', 'group_type', 'address', 'settings', 'status'];
+    protected $keepRevisionOf = ['name', 'body', 'cover', 'color', 'group_type', 'location', 'settings', 'status'];
 
     /**** various group types ****/
     // open group, default
@@ -64,7 +64,7 @@ class Group extends Model
         'columns' => [
             'groups.name'    => 10,
             'groups.body'    => 10,
-            'groups.address' => 2,
+            'groups.location' => 2,
         ],
     ];
 
@@ -339,14 +339,14 @@ class Group extends Model
      */
     public function geocode()
     {
-        if ($this->address == '') {
+        if ($this->location == '') {
             $this->latitude = 0;
             $this->longitude = 0;
 
             return true;
         }
 
-        $geocode = geocode($this->address);
+        $geocode = geocode($this->location);
 
         if ($geocode) {
             $this->latitude = $geocode['latitude'];

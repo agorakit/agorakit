@@ -75,12 +75,12 @@
 
 
 <div class="form-group">
-    {!! Form::label('address', trans('messages.address') . ':') !!}
+    {!! Form::label('location', trans('messages.location') . ':') !!}
     <div class="small-help">
         <i class="fas fa-info-circle"></i>
-        {{trans('messages.address_privacy_and_help')}}
+        {{trans('messages.location_privacy_and_help')}}
     </div>
-    {!! Form::text('address', null, ['class' => 'form-control']) !!}
+    {!! Form::text('location', null, ['class' => 'form-control']) !!}
 
 
 </div>

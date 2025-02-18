@@ -62,7 +62,7 @@ class User extends Authenticatable
         'username'    => 'unique:users|alpha_dash',
     ];
 
-    protected $keepRevisionOf = ['name', 'body', 'email', 'admin', 'address'];
+    protected $keepRevisionOf = ['name', 'body', 'email', 'admin', 'location'];
 
     protected $with = ['memberships'];
 
@@ -418,14 +418,14 @@ class User extends Authenticatable
      */
     public function geocode()
     {
-        if ($this->address == '') {
+        if ($this->location == '') {
             $this->latitude = 0;
             $this->longitude = 0;
 
             return true;
         }
 
-        $geocode = geocode($this->address);
+        $geocode = geocode($this->location);
 
         if ($geocode) {
             $this->latitude = $geocode['latitude'];

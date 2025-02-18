@@ -133,9 +133,9 @@ function warning($message)
 
 // Geocode function - even more abstracted than geocoder php.
 // Pass it a string and it will return an array with longitude and latitude or false in case of problem
-function geocode($address)
+function geocode($location)
 {
-    $geocode = app('geocoder')->geocode($address)->get()->first();
+    $geocode = app('geocoder')->geocode($location)->get()->first();
 
     if ($geocode) {
         $result['latitude'] = $geocode->getCoordinates()->getLatitude();
