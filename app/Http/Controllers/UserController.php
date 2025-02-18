@@ -167,11 +167,11 @@ class UserController extends Controller
             $user->body = $request->input('body');
 
 
-            if ($user->address != $request->input('address')) {
-                // we need to update user address and geocode it
-                $user->address = $request->input('address');
+            if ($user->location != $request->input('location')) {
+                // we need to update user location and geocode it
+                $user->location = $request->input('location');
                 if (!$user->geocode()) {
-                    warning(trans('messages.address_cannot_be_geocoded'));
+                    warning(trans('messages.location_cannot_be_geocoded'));
                 } else {
                     flash(trans('messages.ressource_geocoded_successfully'));
                 }

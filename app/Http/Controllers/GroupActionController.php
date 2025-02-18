@@ -233,7 +233,7 @@ class GroupActionController extends Controller
         if ($request->get('location')) {
             $action->location = $request->input('location');
             if (!$action->geocode()) {
-                warning(trans('messages.address_cannot_be_geocoded'));
+                warning(trans('messages.location_cannot_be_geocoded'));
             } else {
                 flash(trans('messages.ressource_geocoded_successfully'));
             }
@@ -336,10 +336,10 @@ class GroupActionController extends Controller
         }
 
         if ($action->location != $request->input('location')) {
-            // we need to update user address and geocode it
+            // we need to update user location and geocode it
             $action->location = $request->input('location');
             if (!$action->geocode()) {
-                flash(trans('messages.address_cannot_be_geocoded'));
+                flash(trans('messages.location_cannot_be_geocoded'));
             } else {
                 flash(trans('messages.ressource_geocoded_successfully'));
             }

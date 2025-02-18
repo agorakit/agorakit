@@ -8,7 +8,6 @@ return [
     'alpha_num'            => ':attribute mag alleen letters en nummers bevatten.',
     'array'                => ':attribute moet geselecteerde elementen bevatten.',
     'attributes'           => [
-        'address'               => 'Adres',
         'age'                   => 'Leeftijd',
         'available'             => 'Beschikbaar',
         'body'                  => 'Tekst',
@@ -25,6 +24,7 @@ return [
         'group_id'              => 'Groep aantal',
         'hour'                  => 'Tijd',
         'last_name'             => 'Naam',
+        'location'               => 'Adres',
         'minute'                => 'Minuut',
         'mobile'                => 'Draagbare',
         'month'                 => 'Maanden',

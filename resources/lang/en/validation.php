@@ -101,7 +101,6 @@ return array (
   ),
   'attributes' => 
   array (
-    'address' => 'Address',
     'age' => 'Age',
     'available' => 'Available',
     'body' => 'Body',
@@ -118,6 +117,7 @@ return array (
     'group_id' => 'Group number',
     'hour' => 'Hour',
     'last_name' => 'Last Name',
+    'location' => 'Location',
     'minute' => 'Minute',
     'mobile' => 'Mobile',
     'month' => 'Month',

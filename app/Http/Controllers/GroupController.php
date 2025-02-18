@@ -203,10 +203,10 @@ class GroupController extends Controller
             $group->group_type = $request->input('group_type');
         }
 
-        if ($request->get('address')) {
-            $group->address = $request->input('address');
+        if ($request->get('location')) {
+            $group->location = $request->input('location');
             if (!$group->geocode()) {
-                flash(trans('messages.address_cannot_be_geocoded'));
+                flash(trans('messages.location_cannot_be_geocoded'));
             } else {
                 flash(trans('messages.ressource_geocoded_successfully'));
             }
@@ -311,11 +311,11 @@ class GroupController extends Controller
             }
         }
 
-        if ($group->address != $request->input('address')) {
-            // we need to update user address and geocode it
-            $group->address = $request->input('address');
+        if ($group->location != $request->input('location')) {
+            // we need to update user location and geocode it
+            $group->location = $request->input('location');
             if (!$group->geocode()) {
-                flash(trans('messages.address_cannot_be_geocoded'));
+                flash(trans('messages.location_cannot_be_geocoded'));
             } else {
                 flash(trans('messages.ressource_geocoded_successfully'));
             }

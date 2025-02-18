@@ -8,7 +8,6 @@ return [
     'alpha_num'            => 'El :attribute sólo puede contener letras y números.',
     'array'                => 'El :attribute debe ser una matriz.',
     'attributes'           => [
-        'address'               => 'Dirección',
         'age'                   => 'Edad',
         'available'             => 'Disponible',
         'body'                  => 'Cuerpo',
@@ -25,6 +24,7 @@ return [
         'group_id'              => 'Número de grupo',
         'hour'                  => 'Hora',
         'last_name'             => 'Apellido',
+        'location'              => 'Dirección',
         'minute'                => 'Minuto',
         'mobile'                => 'Móvil',
         'month'                 => 'Mes',
