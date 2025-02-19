@@ -54,9 +54,9 @@ trait HasLocation
     public function getGeolocation(): string
     {
         if (!$this->hasGeolocation()) {
-	  return null;
-	}
-	return ['latitude' => $this->{'latitude'}, 'longitude' => $this->{'longitude'}];
+          return null;
+        }
+        return ['latitude' => $this->{'latitude'}, 'longitude' => $this->{'longitude'}];
     }
 
     /**
@@ -65,27 +65,29 @@ trait HasLocation
     public function setLocationFromRequest(Request $request)
     {
         $location = [];
-	$geoline = [];
+        $geoline = [];
         foreach ($location_attributes as $attr) {
           if ($request->has($attr)) {
-	    $value = $request->string($attr)->trim(); // FIXME validation ?
+            $value = $request->string($attr)->trim(); // FIXME validation ?
             $location[$attr] = $value;
-	    if ($attr == 'location_name') {}
-	    else if ($attr == 'county') {
-	      $geoline[] = parse_county($value, $country);
-	    }
-	    else {
-	      $geoline[] = $value;
-	    }
+            if ($attr == 'location_name') {}
+            else if ($attr == 'county') {
+              $geoline[] = parse_county($value, $country);
+            }
+            else {
+              $geoline[] = $value;
+            }
           }
-	}
-	$this->{'location'} = $location->toJson();
-	$geocode = app('geocoder')->geocode(implode(",", $geoline))->get()->first();
-	if ($geocode) {
-	  $this->{'latitude'} = $geocode->getCoordinates()->getLatitude();
-	  $this->{'longitude'} = $geocode->getCoordinates()->getLongitude();
-	}
-	return $this;
+        }
+        $this->{'location'} = $location->toJson();
+        // Calling geocode function - even more abstracted than geocoder php.
+        // Pass it a string and it will return an array with longitude and latitude or false in case of problem
+        $geocode = app('geocoder')->geocode(implode(",", $geoline))->get()->first();
+        if ($geocode) {
+          $this->{'latitude'} = $geocode->getCoordinates()->getLatitude();
+          $this->{'longitude'} = $geocode->getCoordinates()->getLongitude();
+        }
+        return $this;
     }
 
   /**
