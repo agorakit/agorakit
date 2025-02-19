@@ -12,8 +12,8 @@ use Illuminate\Http\Request;
  * - actions in groups/[id]/actions/[id]/location
  *
  * Attributes from the web form:
- * - name
- * - street
+ * - location_name
+ * - location
  * - city
  * - county
  * - country
@@ -21,7 +21,7 @@ use Illuminate\Http\Request;
 trait HasLocation
 {
     // list of attribute names (for validation ?? FIXME)
-    private $location_attributes = ['name', 'street', 'city', 'county', 'country'];
+    private $location_attributes = ['location_name', 'location', 'city', 'county', 'country'];
 
     /**
      * Return the path where the location is stored for this model
@@ -70,9 +70,9 @@ trait HasLocation
           if ($request->has($attr)) {
 	    $value = $request->string($attr)->trim(); // FIXME validation ?
             $location[$attr] = $value;
-	    if ($attr == 'name') {}
+	    if ($attr == 'location_name') {}
 	    else if ($attr == 'county') {
-	      $geoline[] = parse_county($value);
+	      $geoline[] = parse_county($value, $country);
 	    }
 	    else {
 	      $geoline[] = $value;

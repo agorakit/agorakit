@@ -81,8 +81,10 @@
         {{trans('messages.location_privacy_and_help')}}
     </div>
     {!! Form::text('location', null, ['class' => 'form-control']) !!}
-
-
+    {!! Form::text('city', null, ['class' => 'form-control']) !!}
+    {!! Form::text('county', null, ['class' => 'form-control']) !!}
+    {!! Form::text('country', null, ['class' => 'form-control']) !!}
+    {!! Form::text('location_name', null, ['class' => 'form-control']) !!}
 </div>
 
 @if (Auth::user()->isAdmin())
