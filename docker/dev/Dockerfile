@@ -1,5 +1,7 @@
 FROM docker.io/dunglas/frankenphp:php8.2
 
+# development php ini:
+RUN cp $PHP_INI_DIR/php.ini-development $PHP_INI_DIR/php.ini
 
 RUN install-php-extensions pdo_mysql zip exif pcntl gd opcache imap
 
