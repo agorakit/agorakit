@@ -348,7 +348,8 @@ class Group extends Model
             return true;
         }
 
-        $geocode = geocode($this->location);
+        //$geocode = geocode($this->location);
+        $geocode = null;
 
         if ($geocode) {
             $this->latitude = $geocode['latitude'];
