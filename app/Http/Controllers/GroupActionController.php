@@ -262,7 +262,13 @@ class GroupActionController extends Controller
 
 
         // handle cover
-        $action->setCoverFromRequest($request);
+        if ($request->hasFile('cover')) {
+            if ($action->setCoverFromRequest($request)) {
+                flash(trans('messages.cover_added_successfully'));
+            } else {
+                flash(trans('messages.cover_added_error'));
+            }
+        }
 
 
 
@@ -359,8 +365,17 @@ class GroupActionController extends Controller
             $action->makePrivate();
         }
 
-        // handle cover
-        $action->setCoverFromRequest($request);
+         // handle cover
+         if ($request->hasFile('cover')) {
+            if ($action->setCoverFromRequest($request)) {
+                flash(trans('Cover image has been updated, please reload to see the new cover'));
+            } else {
+                flash(trans('Error adding a new cover'));
+            }
+        }
+        else{
+            flash('no cover');
+        }
 
         if ($action->isInvalid()) {
             // Oops.
