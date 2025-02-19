@@ -1,4 +1,5 @@
-FROM docker.io/dunglas/frankenphp
+FROM docker.io/dunglas/frankenphp:php8.2
+
 
 RUN install-php-extensions pdo_mysql zip exif pcntl gd opcache imap
 
