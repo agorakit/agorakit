@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
  *
  * Attributes from the web form:
  * - location_name
- * - location
+ * - street_address
  * - city
  * - county
  * - country
@@ -21,27 +21,7 @@ use Illuminate\Http\Request;
 trait HasLocation
 {
     // list of attribute names (for validation ?? FIXME)
-    private $location_attributes = ['location_name', 'location', 'city', 'county', 'country'];
-
-    /**
-     * Return the path where the location is stored for this model
-     */
-    public function getLocationPath()
-    {
-        if ($this->getType() == "group") $path =  'groups/' . $this->id . '/location';
-        if ($this->getType() == "user") $path =  'users/' . $this->id  . '/location';
-        if ($this->getType() == "action") $path =  'groups/' . $this->group->id . '/actions/' . $this->id . '/location';
-
-        return $path;
-    }
-
-    /**
-     * Returns whether a location has been stored for this model
-     */
-    public function hasLocation()
-    {
-        return Storage::exists($this->getLocationPath()); // FIXME
-    }
+    private $location_attributes = ['location_name', 'street_address', 'city', 'county', 'country'];
 
     /**
      * Returns whether a geocode has been stored for this model
