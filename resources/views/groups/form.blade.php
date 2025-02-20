@@ -21,7 +21,7 @@
         <i class="fas fa-info-circle"></i>
         {{trans('messages.location_privacy_and_help')}}
     </div>
-    {!! Form::text('location', null, ['class' => 'form-control']) !!}
+    {!! Form::text('street_address', null, ['class' => 'form-control']) !!}
     {!! Form::label('city', trans('messages.city') . ':') !!}
     {!! Form::text('city', null, ['class' => 'form-control']) !!}
     {!! Form::label('county', trans('messages.county') . ':') !!}
