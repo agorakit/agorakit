@@ -264,9 +264,9 @@ class GroupActionController extends Controller
         // handle cover
         if ($request->hasFile('cover')) {
             if ($action->setCoverFromRequest($request)) {
-                flash(trans('messages.cover_added_successfully'));
+                flash(trans('Cover added successfully'));
             } else {
-                flash(trans('messages.cover_added_error'));
+                warning(trans('Could not handle cover image. Is it an image file (png, jpeg,...  ?)'));
             }
         }
 
