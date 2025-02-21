@@ -167,11 +167,16 @@ class GroupController extends Controller
         $this->authorize('create', Group::class);
         $group = new Group;
 
+        $options = $group->getCountryMenuOptions();
+        $default_country = config('agorakit.default_country');
+
         return view('groups.create')
             ->with('group', $group)
             ->with('allowedTags', $group->getAllowedTags())
             ->with('newTagsAllowed', $group->areNewTagsAllowed())
-            ->with('title', trans('group.create_group_title'));
+            ->with('title', trans('group.create_group_title'))
+            ->with('country_menu_options', $options)
+            ->with('default_country', $default_country);
     }
 
     /**
@@ -270,7 +275,6 @@ class GroupController extends Controller
     public function edit(Request $request, Group $group)
     {
         $this->authorize('update', $group);
-
 
         return view('groups.edit')
             ->with('group', $group)
