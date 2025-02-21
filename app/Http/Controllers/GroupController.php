@@ -318,10 +318,15 @@ class GroupController extends Controller
             }
         }
 
-        if ($group->location != $request->input('location')) {
+        $location_data = $request->input('location');
+        // FIXME validation ?
+        $new_location = $location_data->toJson();
+
+        if ($group->location != $new_location) {
             // we need to update user location and geocode it
-            $group->location = $request->input('location');
-            if (!$group->geocode()) {
+            $group->location = $new_location;
+            $group->
+            if (!$group->geocode($location_data)) {
                 flash(trans('messages.location_cannot_be_geocoded'));
             } else {
                 flash(trans('messages.ressource_geocoded_successfully'));
