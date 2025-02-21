@@ -168,15 +168,14 @@ class GroupController extends Controller
         $group = new Group;
 
         $options = $group->getCountryMenuOptions();
-        $default_country = config('agorakit.default_country');
 
         return view('groups.create')
             ->with('group', $group)
             ->with('allowedTags', $group->getAllowedTags())
             ->with('newTagsAllowed', $group->areNewTagsAllowed())
             ->with('title', trans('group.create_group_title'))
-            ->with('country_menu_options', $options)
-            ->with('default_country', $default_country);
+            ->with('country_menu_options', $options[0])
+            ->with('default_country', $options[1]);
     }
 
     /**
@@ -277,7 +276,6 @@ class GroupController extends Controller
         $this->authorize('update', $group);
 
         $options = $group->getCountryMenuOptions();
-        $default_country = config('agorakit.default_country');
 
         return view('groups.edit')
             ->with('group', $group)
@@ -285,8 +283,8 @@ class GroupController extends Controller
             ->with('newTagsAllowed', $group->areNewTagsAllowed())
             ->with('selectedTags', $group->getSelectedTags())
             ->with('tab', 'admin')
-            ->with('country_menu_options', $options)
-            ->with('default_country', $default_country);
+            ->with('country_menu_options', $options[0])
+            ->with('default_country', $options[1]);
     }
 
     /**

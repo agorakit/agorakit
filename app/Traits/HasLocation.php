@@ -28,8 +28,21 @@ trait HasLocation
     {
         $path = config('translation.country_menu_options_path') . "/" . config('app.locale');
         $file = $path . "/" . "countries.json";
-        $options = File::json(base_path($file));
-        return $options;
+        $countries = File::json(base_path($file));
+        $displayed_countries = config('agorakit.displayed_countries');
+        if ($displayed_countries) {
+            $options = [];
+            foreach (array_keys($countries) as $k) {
+                 if (in_array($k, $displayed_countries)) {
+                    $options[$k] = $countries[$k];
+                 }
+            }
+        }
+        else {
+            $options = $countries;
+        }
+        $default_country = config('agorakit.default_country');
+        return [$options, default_country];
     }
 
     /**
