@@ -19,5 +19,6 @@ return [
   'max_file_size' => env('MAX_FILE_SIZE', 10000),
   'reactions' => ['plusone', 'minusone', 'laugh', 'confused', 'heart', 'hooray', 'rocket', 'eyes'],
   'default_country' => "BE",
+  'displayed_countries' => null,
   'data_retention' => env('DATA_RETENTION', 30)
 ];
