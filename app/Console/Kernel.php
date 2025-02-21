@@ -20,6 +20,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\SendReminders::class,
         \App\Console\Commands\ExportGroup::class,
         \App\Console\Commands\ImportGroup::class,
+        \App\Console\Commands\LangFilesToJson::class,
 
     ];
 
