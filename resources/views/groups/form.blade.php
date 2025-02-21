@@ -16,7 +16,7 @@
 </div>
 
 <div class="form-group">
-@include('traits.location_input')
+@include('partials.location_input')
 </div>
 
 <div class="form-group">
