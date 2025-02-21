@@ -1,24 +1,24 @@
 <div class="form-group">
-    {!! Form::label('location', trans('messages.location') . ':') !!}
+    {!! Form::label('location[street]', _('Location') . ':') !!}
     <div class="small-help">
         <i class="fas fa-info-circle"></i>
         {{trans('messages.location_privacy_and_help')}}
     </div>
-    {!! Form::text('street_address', null, ['class' => 'form-control']) !!}
-    {!! Form::label('city', trans('messages.city') . ':') !!}
-    {!! Form::text('city', null, ['class' => 'form-control']) !!}
-    {!! Form::label('county', trans('messages.county') . ':') !!}
+    {!! Form::text('location[street]', null, ['class' => 'form-control']) !!}
+    {!! Form::label('location[city]', _('City') . ':') !!}
+    {!! Form::text('location[city]', null, ['class' => 'form-control']) !!}
+    {!! Form::label('location[county]', _('County') . ':') !!}
     <div class="small-help">
         <i class="fas fa-info-circle"></i>
         {{trans('messages.county_help')}}
     </div>
-    {!! Form::text('county', null, ['class' => 'form-control']) !!}
-    {!! Form::label('country', trans('messages.country') . ':') !!}
-    {!! Form::select('country', $country_menu_options, $default_country, ['class' => 'form-control']) !!}
-    {!! Form::label('location_name', trans('messages.location_name') . ':') !!}
+    {!! Form::text('location[county]', null, ['class' => 'form-control']) !!}
+    {!! Form::label('location[country]', _('Country') . ':') !!}
+    {!! Form::text('location[country]', null, ['class' => 'form-control']) !!}
+    {!! Form::label('location[name]', _('Location Name') . ':') !!}
     <div class="small-help">
         <i class="fas fa-info-circle"></i>
         {{trans('messages.location_name_help')}}
-    {!! Form::text('location_name', null, ['class' => 'form-control']) !!}
+    {!! Form::text('location[name]', null, ['class' => 'form-control']) !!}
     </div>
 </div>

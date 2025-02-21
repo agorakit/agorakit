@@ -20,9 +20,6 @@ use Illuminate\Http\Request;
  */
 trait HasLocation
 {
-    // list of attribute names (for validation ?? FIXME)
-    private $location_attributes = ['location_name', 'street_address', 'city', 'county', 'country'];
-
     /**
      * Returns whether a geocode has been stored for this model
      */
@@ -39,43 +36,40 @@ trait HasLocation
         return ['latitude' => $this->{'latitude'}, 'longitude' => $this->{'longitude'}];
     }
 
-    /**
-     * Save the location for this model from the request.
-     */
-    public function setLocationFromRequest(Request $request)
+    function geocode($location_data)
     {
-        $location = [];
+        if (!$location_data) {
+            $this->latitude = 0;
+            $this->longitude = 0;
+            return true;
+        }
         $geoline = [];
-        foreach ($location_attributes as $attr) {
-          if ($request->has($attr)) {
-            $value = $request->string($attr)->trim(); // FIXME validation ?
-            $location[$attr] = $value;
-            if ($attr == 'location_name') {}
-            else if ($attr == 'county') {
-              $geoline[] = parse_county($value, $country);
+        foreach ($this->location_data as $key => $val) {
+            if ($key == 'name') {}
+            else if ($key == 'county' && array_key_exists('country', $location)) {
+              $geoline[] = parse_county($val, $location['country']);
             }
             else {
-              $geoline[] = $value;
+              $geoline[] = $val;
             }
-          }
         }
-        $this->{'location'} = $location->toJson();
         // Calling geocode function - even more abstracted than geocoder php.
         // Pass it a string and it will return an array with longitude and latitude or false in case of problem
-        $geocode = app('geocoder')->geocode(implode(",", $geoline))->get()->first();
-        if ($geocode) {
-          $this->{'latitude'} = $geocode->getCoordinates()->getLatitude();
-          $this->{'longitude'} = $geocode->getCoordinates()->getLongitude();
+        $result = app('geocoder')->geocode(implode(",", $geoline))->get()->first();
+        if ($result) {
+            $this->{'latitude'} = $result->getCoordinates()->getLatitude();
+            $this->{'longitude'} = $result->getCoordinates()->getLongitude();
+            return true;
         }
-        return $this;
+        return false;
     }
 
-  /**
-   * Parse `county` input from the request, for some specific cases.
-   * At the moment: French departement codes only.
-   */
-  function parse_county($county, $country_code)
-  {
+    /**
+     * Parse `county` input from the request, for some specific cases.
+     * At the moment: French departement codes only.
+     */
+    function parse_county($county, $country_code)
+    {
      if (!is_numeric($county)) {
        return $county;
      }

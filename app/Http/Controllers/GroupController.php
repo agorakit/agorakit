@@ -167,16 +167,11 @@ class GroupController extends Controller
         $this->authorize('create', Group::class);
         $group = new Group;
 
-        $options = $group->getCountryMenuOptions();
-        $default_country = config('agorakit.default_country');
-
         return view('groups.create')
             ->with('group', $group)
             ->with('allowedTags', $group->getAllowedTags())
             ->with('newTagsAllowed', $group->areNewTagsAllowed())
-            ->with('title', trans('group.create_group_title'))
-            ->with('country_menu_options', $options)
-            ->with('default_country', $default_country);
+            ->with('title', trans('group.create_group_title'));
     }
 
     /**
@@ -209,8 +204,11 @@ class GroupController extends Controller
         }
 
         if ($request->get('location')) {
-            $group->location = $request->input('location');
-            if (!$group->geocode()) {
+            $location_data = $request->input('location');
+            // FIXME validation ?
+            $new_location = $location_data->toJson();
+
+            if (!$group->geocode($new_location)) {
                 flash(trans('messages.location_cannot_be_geocoded'));
             } else {
                 flash(trans('messages.ressource_geocoded_successfully'));
@@ -315,10 +313,14 @@ class GroupController extends Controller
             }
         }
 
-        if ($group->location != $request->input('location')) {
+        $location_data = $request->input('location');
+        // FIXME validation ?
+        $new_location = $location_data->toJson();
+
+        if ($group->location != $new_location) {
             // we need to update user location and geocode it
-            $group->location = $request->input('location');
-            if (!$group->geocode()) {
+            $group->location = $new_location;
+            if (!$group->geocode($location_data)) {
                 flash(trans('messages.location_cannot_be_geocoded'));
             } else {
                 flash(trans('messages.ressource_geocoded_successfully'));
