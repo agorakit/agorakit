@@ -5,6 +5,7 @@ namespace App\Traits;
 use Intervention\Image\Laravel\Facades\Image;
 use Storage;
 use Illuminate\Http\Request;
+use Throwable;
 
 /**  
  * This trait allows any model to have an image cover 
@@ -72,7 +73,6 @@ trait HasCover
             try {
                 Storage::makeDirectory($this->getCoverPath());
                 $image = Image::read($request->file('cover'));
-
                 $image->save(Storage::path($this->getCoverPath() . 'cover.jpg'));
                 $this->generateThumbnails();
             } catch (Throwable $e) {
