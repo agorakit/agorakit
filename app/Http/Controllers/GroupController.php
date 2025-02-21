@@ -167,15 +167,11 @@ class GroupController extends Controller
         $this->authorize('create', Group::class);
         $group = new Group;
 
-        $options = $group->getCountryMenuOptions();
-
         return view('groups.create')
             ->with('group', $group)
             ->with('allowedTags', $group->getAllowedTags())
             ->with('newTagsAllowed', $group->areNewTagsAllowed())
-            ->with('title', trans('group.create_group_title'))
-            ->with('country_menu_options', $options[0])
-            ->with('default_country', $options[1]);
+            ->with('title', trans('group.create_group_title'));
     }
 
     /**
@@ -275,16 +271,12 @@ class GroupController extends Controller
     {
         $this->authorize('update', $group);
 
-        $options = $group->getCountryMenuOptions();
-
         return view('groups.edit')
             ->with('group', $group)
             ->with('allowedTags', $group->getAllowedTags())
             ->with('newTagsAllowed', $group->areNewTagsAllowed())
             ->with('selectedTags', $group->getSelectedTags())
-            ->with('tab', 'admin')
-            ->with('country_menu_options', $options[0])
-            ->with('default_country', $options[1]);
+            ->with('tab', 'admin');
     }
 
     /**
@@ -325,7 +317,6 @@ class GroupController extends Controller
         if ($group->location != $new_location) {
             // we need to update user location and geocode it
             $group->location = $new_location;
-            $group->
             if (!$group->geocode($location_data)) {
                 flash(trans('messages.location_cannot_be_geocoded'));
             } else {
