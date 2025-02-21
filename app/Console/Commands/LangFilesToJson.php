@@ -98,8 +98,15 @@ class LangFilesToJson extEnds Command
 
                 foreach ($finder as $file) {
 
-                    $Newcontent = str_replace($group . '.' . $key, $translation, $file->getContents());
-                    $file->openFile('w')->fwrite($Newcontent);
+                    $source = "trans('" . $group . '.' . $key;
+                    $target = "trans('" . $translation;
+                    $newcontent = str_replace($source, $target, $file->getContents());
+
+                    $source = "__('" . $group . '.' . $key;
+                    $target = "__('" . $translation;
+                    $newcontent = str_replace($source, $target, $newcontent);
+
+                    $file->openFile('w')->fwrite($newcontent);
                 }
             }
         }
