@@ -12,20 +12,22 @@ use Illuminate\Http\Request;
  * - actions in groups/[id]/actions/[id]/location
  *
  * Attributes from the web form:
- * - location_name
- * - street_address
- * - city
- * - county
- * - country
+ * - location[name]
+ * - location[street]
+ * - location[city]
+ * - location[county]
+ * - location[country]
  */
 trait HasLocation
 {
+    private $location_specs = ["name", "street", "city", "county", "country"];
+
     /**
      * Returns whether a geocode has been stored for this model
      */
     public function hasGeolocation()
     {
-        return Storage::exists($this->getLocationPath()); // FIXME
+        return ($this->longitude <> 0 && $this->latitude <> 0);
     }
 
     public function getGeolocation(): string
@@ -38,16 +40,19 @@ trait HasLocation
 
     function geocode($location_data)
     {
+        if (is_string($location_data)) {
+	    $location_data = json_decode($location_data, true);
+	}
         if (!$location_data) {
             $this->latitude = 0;
             $this->longitude = 0;
             return true;
         }
         $geoline = [];
-        foreach ($this->location_data as $key => $val) {
+        foreach ($location_data as $key => $val) {
             if ($key == 'name') {}
-            else if ($key == 'county' && array_key_exists('country', $location)) {
-              $geoline[] = parse_county($val, $location['country']);
+            else if ($key == 'county' && array_key_exists('country', $location_data)) {
+              $geoline[] = $this->parse_county($val, $location_data['country']);
             }
             else {
               $geoline[] = $val;
@@ -81,5 +86,45 @@ trait HasLocation
      }
      return $county;
   }
+
+    /**
+     * We need a function to display a location as a string.
+     * Knowing that it is stored as a JSON structure in the database,
+     * with keys: name, street, city, county, country.
+     */
+    public function location_display($format="short")
+    {
+        $location_data = json_decode($this->location, true);
+        $parts = [];
+        $found = [];
+        foreach($this->location_specs as $key) {
+          if (array_key_exists($key, $location_data) && $location_data[$key]) {
+            if ($format == "long") {
+              $parts[] = $location_data[$key];
+              }
+            else {
+              $found[$key] = true;
+            }
+          }
+        }
+        if ($format == 'short') {
+          if ($found['name']) {
+            $parts[] = $location_data['name'];
+          }
+          else if ($found['street']) {
+            $parts[] = substr($location_data['street'], 0, 30);
+          }
+          if ($found['city']) {
+            $parts[] = $location_data['city'];
+          }
+          else if ($found['county']) {
+            $parts[] = $location_data['county'];
+          }
+          else if ($found['country']) {
+            $parts[] = $location_data['country'];
+          }
+        }
+        return implode(", ", $parts);
+    }
 
 }
