@@ -42,7 +42,7 @@ trait HasLocation
             $options = $countries;
         }
         $default_country = config('agorakit.default_country');
-        return [$options, default_country];
+        return [$options, $default_country];
     }
 
     /**
