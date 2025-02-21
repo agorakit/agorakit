@@ -10,4 +10,7 @@ return [
 
     /* Where the Gettext translations are stored */
     'gettext_locales_path' => 'resources/lang/gettext',
+
+    /* Where to find country menu options */
+    'country_menu_options_path' => 'resources/lang',
 ];

@@ -271,13 +271,17 @@ class GroupController extends Controller
     {
         $this->authorize('update', $group);
 
+	$options = $group->getCountryMenuOptions();
+	$default_country = config('agorakit.default_country');
 
         return view('groups.edit')
             ->with('group', $group)
             ->with('allowedTags', $group->getAllowedTags())
             ->with('newTagsAllowed', $group->areNewTagsAllowed())
             ->with('selectedTags', $group->getSelectedTags())
-            ->with('tab', 'admin');
+            ->with('tab', 'admin')
+            ->with('country_menu_options', $options)
+            ->with('default_country', $default_country);
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 /**
  * This trait allows any model to have a location (ie geographical address)
@@ -22,6 +23,14 @@ trait HasLocation
 {
     // list of attribute names (for validation ?? FIXME)
     private $location_attributes = ['location_name', 'street_address', 'city', 'county', 'country'];
+
+    public function getCountryMenuOptions()
+    {
+        $path = config('translation.country_menu_options_path') . "/" . config('app.locale');
+        $file = $path . "/" . "countries.json";
+        $options = File::json(base_path($file));
+        return $options;
+    }
 
     /**
      * Returns whether a geocode has been stored for this model

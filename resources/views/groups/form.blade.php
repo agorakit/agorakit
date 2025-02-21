@@ -31,7 +31,7 @@
     </div>
     {!! Form::text('county', null, ['class' => 'form-control']) !!}
     {!! Form::label('country', trans('messages.country') . ':') !!}
-    {!! Form::text('country', null, ['class' => 'form-control']) !!}
+    {!! Form::select('country', $country_menu_options, $default_country, ['class' => 'form-control']) !!}
     {!! Form::label('location_name', trans('messages.location_name') . ':') !!}
     <div class="small-help">
         <i class="fas fa-info-circle"></i>
