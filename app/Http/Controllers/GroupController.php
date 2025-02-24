@@ -276,6 +276,8 @@ class GroupController extends Controller
     {
         $this->authorize('update', $group);
 
+        $group->location_data = json_decode($group->location, true);
+
         return view('groups.edit')
             ->with('group', $group)
             ->with('allowedTags', $group->getAllowedTags())
