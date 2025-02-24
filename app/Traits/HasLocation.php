@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\File;
  */
 trait HasLocation
 {
-    private $location_data_keys = ["name", "street", "city", "county", "country"];
+    private $location_specs = ["name", "street", "city", "county", "country"];
 
     /**
      * Returns whether a geocode has been stored for this model
@@ -41,6 +41,9 @@ trait HasLocation
 
     function geocode($location_data)
     {
+        if (is_string($location_data)) {
+	    $location_data = json_decode($location_data, true);
+	}
         if (!$location_data) {
             $this->latitude = 0;
             $this->longitude = 0;
@@ -49,8 +52,8 @@ trait HasLocation
         $geoline = [];
         foreach ($location_data as $key => $val) {
             if ($key == 'name') {}
-            else if ($key == 'county' && array_key_exists('country', $location)) {
-              $geoline[] = parse_county($val, $location['country']);
+            else if ($key == 'county' && array_key_exists('country', $location_data)) {
+              $geoline[] = $this->parse_county($val, $location_data['country']);
             }
             else {
               $geoline[] = $val;
@@ -95,7 +98,7 @@ trait HasLocation
         $location_data = json_decode($this->location, true);
         $parts = [];
         $found = [];
-        foreach($location_data_keys as $key) {
+        foreach($this->location_specs as $key) {
           if (array_key_exists($key, $location_data) && $location_data[$key]) {
             if ($format == "long") {
               $parts[] = $location_data[$key];
