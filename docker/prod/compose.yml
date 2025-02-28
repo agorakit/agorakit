@@ -1,7 +1,7 @@
 services:
   agorakit_php:
     restart: always
-    container_name: agorakit_php
+    container_name: agorakit_prod
     build:
       context: .
       args:
@@ -20,27 +20,10 @@ services:
       - agorakit
 
 
-  agorakit_database:
-    image: mariadb:latest
-    restart: always
-    container_name: agorakit_database
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: agorakit
-      MYSQL_USER: agorakit
-      MYSQL_PASSWORD: password
-    volumes:
-      - database:/var/lib/mysql
-    ports:
-      - 3306:3306
-    networks:
-      - agorakit
-
 # Volumes needed for Caddy certificates and configuration
 volumes:
   caddy_data:
   caddy_config:
-  database:
 
 
 networks:
