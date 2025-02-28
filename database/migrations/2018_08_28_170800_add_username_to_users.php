@@ -25,6 +25,7 @@ class AddUsernameToUsers extends Migration
     public function down()
     {
         Schema::table('users', function ($table) {
+            $table->dropIndex('users_username_unique');
             $table->dropColumn('username');
         });
     }
