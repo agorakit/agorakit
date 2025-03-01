@@ -10,7 +10,7 @@ class FileUploadTest extends Tests\BrowserKitTestCase
     */
     public function testSetupItAll()
     {
-        Artisan::call('migrate:refresh');
+        Artisan::call('migrate:fresh');
 
         $this->visit('/')
             ->see('Agorakit');
@@ -56,11 +56,11 @@ class FileUploadTest extends Tests\BrowserKitTestCase
         $group = App\Group::where('name', 'File upload test group')->firstOrFail();
 
         $this->actingAs($user)
-          ->visit('/groups/' . $group->id . '/files/createfolder')
-          ->see('Create a folder')
-          ->type('Test folder', 'name')
-          ->press('Create')
-          ->see('Test folder');
+            ->visit('/groups/' . $group->id . '/files/createfolder')
+            ->see('Create a folder')
+            ->type('Test folder', 'name')
+            ->press('Create')
+            ->see('Test folder');
     }
 
     public function testFileUpload()
@@ -72,11 +72,11 @@ class FileUploadTest extends Tests\BrowserKitTestCase
         $pathname = stream_get_meta_data($file->tempFile)['uri'];
 
         $this->actingAs($user)
-          ->visit('/groups/' . $group->id . '/files/create')
-          ->see('Upload file')
-          ->attach($pathname, 'file')
-          ->press('Create')
-          ->see('Resource created successfully')
-          ->see('Upload File');
+            ->visit('/groups/' . $group->id . '/files/create')
+            ->see('Upload file')
+            ->attach($pathname, 'file')
+            ->press('Create')
+            ->see('Resource created successfully')
+            ->see('Upload File');
     }
 }

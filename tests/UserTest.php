@@ -55,7 +55,7 @@ class UserTest extends Tests\BrowserKitTestCase
     */
     public function testSetupItAll()
     {
-        Artisan::call('migrate:refresh');
+        Artisan::call('migrate:fresh');
 
         $this->visit('/')
             ->see('Agorakit');
@@ -339,8 +339,8 @@ class UserTest extends Tests\BrowserKitTestCase
         $group = $this->getTestGroup();
 
         $this->actingAs($this->newbie())
-        ->get('groups/' . $group->id . '/actions/create')
-        ->assertResponseStatus(403);
+            ->get('groups/' . $group->id . '/actions/create')
+            ->assertResponseStatus(403);
     }
 
 

@@ -212,15 +212,16 @@ class GroupController extends Controller
             }
         }
 
+        $group->user()->associate(Auth::user());
         if ($group->isInvalid()) {
             // Oops.
             return redirect()->route('groups.create')
                 ->withErrors($group->getErrors())
                 ->withInput();
         }
-        $group->save();
 
-        $group->user()->associate(Auth::user());
+
+        $group->save();
 
         if ($request->get('tags')) {
             $group->tag($request->get('tags'));
