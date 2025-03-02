@@ -139,7 +139,7 @@ class ImportGroup extends Command
         $group->cover = $data->cover;
         $group->color = $data->color;
         $group->group_type = $data->group_type;
-        $group->address = $data->address;
+        $group->location = $data->location;
         $group->latitude = $data->latitude;
         $group->longitude = $data->longitude;
         $group->settings = (array) $data->settings;
@@ -191,7 +191,7 @@ class ImportGroup extends Command
         $user->body = $data->body;
         $user->preferences = (array) $data->preferences;
         $user->admin = $data->admin;
-        $user->address = $data->address;
+        $user->location = $data->location;
         $user->latitude = $data->latitude;
         $user->longitude = $data->longitude;
         $user->username = $data->username;

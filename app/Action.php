@@ -7,6 +7,7 @@ use App\Group;
 use App\Traits\HasControlledTags;
 use App\Traits\HasVisibility;
 use App\Traits\HasCover;
+use App\Traits\HasLocation;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -21,6 +22,7 @@ class Action extends Model
     use SoftDeletes;
     use Taggable;
     use SearchableTrait;
+    use hasLocation;
     use HasControlledTags;
     use HasVisibility;
     use HasCover;
@@ -133,7 +135,8 @@ class Action extends Model
             return true;
         }
 
-        $geocode = geocode($this->location);
+        //$geocode = geocode($this->location);
+        $geocode = null;
 
         if ($geocode) {
             $this->latitude = $geocode['latitude'];

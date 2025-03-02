@@ -203,10 +203,15 @@ class GroupController extends Controller
             $group->group_type = $request->input('group_type');
         }
 
-        if ($request->get('address')) {
-            $group->address = $request->input('address');
-            if (!$group->geocode()) {
-                flash(trans('messages.address_cannot_be_geocoded'));
+        if ($request->get('location')) {
+            $location_data = $request->input('location');
+            // FIXME validation
+            if (!$new_location = json_encode($location_data, JSON_UNESCAPED_UNICODE)) {
+                flash(trans('Invalid location'));
+            }
+
+            if (!$group->geocode($new_location)) {
+                flash(trans('messages.location_cannot_be_geocoded'));
             } else {
                 flash(trans('messages.ressource_geocoded_successfully'));
             }
@@ -271,6 +276,7 @@ class GroupController extends Controller
     {
         $this->authorize('update', $group);
 
+        $group->location_data = json_decode($group->location, true);
 
         return view('groups.edit')
             ->with('group', $group)
@@ -311,11 +317,17 @@ class GroupController extends Controller
             }
         }
 
-        if ($group->address != $request->input('address')) {
-            // we need to update user address and geocode it
-            $group->address = $request->input('address');
-            if (!$group->geocode()) {
-                flash(trans('messages.address_cannot_be_geocoded'));
+        $location_data = $request->input('location');
+        // FIXME validation : for security + for charset + for a valid JSON
+        if (!$new_location = json_encode($location_data, JSON_UNESCAPED_UNICODE)) {
+            flash(trans('Invalid location'));
+        }
+
+        if ($group->location != $new_location) {
+            // we need to update user location and geocode it
+            $group->location = $new_location;
+            if (!$group->geocode($location_data)) {
+                flash(trans('messages.location_cannot_be_geocoded'));
             } else {
                 flash(trans('messages.ressource_geocoded_successfully'));
             }

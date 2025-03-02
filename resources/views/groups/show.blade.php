@@ -75,6 +75,10 @@
                 </div>
             </div>
 
+            <div class="mb-3">
+                <div class="fw-bold">{{ __('Location') }}</div>
+                {{ $group->location_display("long") }}
+            </div>
         </div>
 
     </div>
