@@ -46,7 +46,7 @@
 <strong><a  href="{{route('groups.actions.show', [$group, $action])}}">{{$action->name}}</a></strong>
 <p>{!!filter($action->body) !!}</p>
 {{$action->start->format('d/m/Y H:i')}} - {{$action->stop->format('H:i')}}
-@if ($action->location) , {{$action->location}}@endif
+@if ($action->location) , {{$action->location_display('long')}}@endif
 </div>
 @endforeach
 <br/>

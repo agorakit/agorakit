@@ -56,7 +56,7 @@
             @endif
 
             @if (!empty($action->location))
-                <h3>{{ trans('messages.location') }} : {{ $action->location }}</h3>
+                <h3>{{ trans('messages.location') }} : {{ $action->location_display() }}</h3>
             @endif
 
             <div>
