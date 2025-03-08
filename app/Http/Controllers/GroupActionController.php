@@ -323,6 +323,7 @@ class GroupActionController extends Controller
     public function edit(Request $request, Group $group, Action $action)
     {
         $this->authorize('update', $action);
+	$action->getLocationData();
 
         return view('actions.edit')
             ->with('action', $action)
@@ -356,10 +357,16 @@ class GroupActionController extends Controller
             $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
         }
 
-        if ($action->location != $request->input('location')) {
+        $location_data = $request->input('location');
+        // FIXME validation : for security + for charset + for a valid JSON
+        if (!$new_location = json_encode($location_data, JSON_UNESCAPED_UNICODE)) {
+            flash(trans('Invalid location'));
+        }
+
+        if ($group->location != $new_location) {
             // we need to update user location and geocode it
-            $action->location = $request->input('location');
-            if (!$action->geocode()) {
+            $group->location = $new_location;
+            if (!$group->geocode($location_data)) {
                 flash(trans('messages.location_cannot_be_geocoded'));
             } else {
                 flash(trans('messages.ressource_geocoded_successfully'));
