@@ -113,13 +113,14 @@ trait HasLocation
      */
     public function location_display($format="short")
     {
-        $location_data = $this->getLocationData();
+        $this->getLocationData();
         $parts = [];
         $found = [];
         foreach($this->location_specs as $key) {
-          if (array_key_exists($key, $location_data) && $location_data[$key]) {
+           $found[$key] = false;
+           if (array_key_exists($key, $this->location_data) && $this->location_data[$key]) {
             if ($format == "long") {
-              $parts[] = $location_data[$key];
+              $parts[] = $this->location_data[$key];
               }
             else {
               $found[$key] = true;
@@ -129,19 +130,19 @@ trait HasLocation
 
         if ($format == 'short') {
           if ($found['name']) {
-            $parts[] = $location_data['name'];
+            $parts[] = $this->location_data['name'];
           }
           else if ($found['street']) {
-            $parts[] = substr($location_data['street'], 0, 30);
+            $parts[] = substr($this->location_data['street'], 0, 30);
           }
           if ($found['city']) {
-            $parts[] = $location_data['city'];
+            $parts[] = $this->location_data['city'];
           }
           else if ($found['county']) {
-            $parts[] = $location_data['county'];
+            $parts[] = $this->location_data['county'];
           }
           else if ($found['country']) {
-            $parts[] = $location_data['country'];
+            $parts[] = $this->location_data['country'];
           }
         }
         return implode(", ", $parts);
