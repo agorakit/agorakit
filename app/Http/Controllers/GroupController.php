@@ -332,7 +332,7 @@ class GroupController extends Controller
         }
 
         if ($group->location != $new_location) {
-            // we need to update user location and geocode it
+            // we need to update group location and geocode it
             $group->location = $new_location;
             if (!$group->geocode($location_data)) {
                 flash(trans('messages.location_cannot_be_geocoded'));
