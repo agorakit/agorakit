@@ -128,6 +128,7 @@ class UserController extends Controller
             return view('users.show')
                 ->with('activities', $user->activities()->whereIn('group_id', Group::public()->pluck('id'))->paginate(10))
                 ->with('user', $user)
+                ->with('model', $user)
                 ->with('tab', 'profile')
                 ->with('title', $title);
         }
@@ -143,11 +144,14 @@ class UserController extends Controller
     public function edit(User $user)
     {
         if (Gate::allows('update', $user)) {
+            $user->getLocationData();
+
             return view('users.edit')
                 ->with('allowedTags', $user->getAllowedTags())
                 ->with('newTagsAllowed', $user->areNewTagsAllowed())
                 ->with('selectedTags', $user->getSelectedTags())
                 ->with('user', $user)
+                ->with('model', $user)
                 ->with('tab', 'edit');
         } else {
             abort(403);

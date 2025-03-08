@@ -169,6 +169,7 @@ class GroupController extends Controller
 
         return view('groups.create')
             ->with('group', $group)
+            ->with('model', $group)
             ->with('allowedTags', $group->getAllowedTags())
             ->with('newTagsAllowed', $group->areNewTagsAllowed())
             ->with('title', trans('group.create_group_title'));
@@ -276,10 +277,11 @@ class GroupController extends Controller
     {
         $this->authorize('update', $group);
 
-        $group->location_data = json_decode($group->location, true);
+        $group->getLocationData();
 
         return view('groups.edit')
             ->with('group', $group)
+            ->with('model', $group)
             ->with('allowedTags', $group->getAllowedTags())
             ->with('newTagsAllowed', $group->areNewTagsAllowed())
             ->with('selectedTags', $group->getSelectedTags())
