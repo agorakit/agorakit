@@ -115,34 +115,14 @@ trait HasLocation
     {
         $this->getLocationData();
         $parts = [];
-        $found = [];
         foreach($this->location_specs as $key) {
-           $found[$key] = false;
            if (array_key_exists($key, $this->location_data) && $this->location_data[$key]) {
-            if ($format == "long") {
-              $parts[] = $this->location_data[$key];
+            if ($format == "short" && $key == 'street') {
+              $parts[] = substr($this->location_data[$key], 0, 30);
               }
             else {
-              $found[$key] = true;
+              $parts[] = $this->location_data[$key];
             }
-          }
-        }
-
-        if ($format == 'short') {
-          if ($found['name']) {
-            $parts[] = $this->location_data['name'];
-          }
-          else if ($found['street']) {
-            $parts[] = substr($this->location_data['street'], 0, 30);
-          }
-          if ($found['city']) {
-            $parts[] = $this->location_data['city'];
-          }
-          else if ($found['county']) {
-            $parts[] = $this->location_data['county'];
-          }
-          else if ($found['country']) {
-            $parts[] = $this->location_data['country'];
           }
         }
         return implode(", ", $parts);
