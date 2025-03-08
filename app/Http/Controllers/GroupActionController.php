@@ -167,6 +167,7 @@ class GroupActionController extends Controller
             $action->name = $request->get('title');
         }
 
+        $action->getLocationData();
         $action->group()->associate($group);
 
         return view('actions.create')
