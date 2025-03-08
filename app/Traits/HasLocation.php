@@ -24,6 +24,24 @@ trait HasLocation
     private $location_specs = ["name", "street", "city", "county", "country"];
 
     /**
+     * Get location data from database `location` field
+     */
+    public function getLocationData()
+    {
+        if(!$this->location) $this->location = "";
+        $location_data = json_decode($this->location, true);
+        if (!$location_data) {
+          $location_data = [];
+        }
+        foreach($this->location_specs as $key) {
+          if (!array_key_exists($key, $location_data)) {
+            $location_data[$key] = null;
+            }
+        }
+        $this->location_data = $location_data;
+    }
+
+    /**
      * Returns whether a geocode has been stored for this model
      */
     public function hasGeolocation()
@@ -95,7 +113,7 @@ trait HasLocation
      */
     public function location_display($format="short")
     {
-        $location_data = json_decode($this->location, true);
+        $location_data = $this->getLocationData();
         $parts = [];
         $found = [];
         foreach($this->location_specs as $key) {
@@ -108,6 +126,7 @@ trait HasLocation
             }
           }
         }
+
         if ($format == 'short') {
           if ($found['name']) {
             $parts[] = $location_data['name'];
