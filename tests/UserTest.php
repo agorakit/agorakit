@@ -121,7 +121,7 @@ class UserTest extends Tests\BrowserKitTestCase
             ->see('Add an event')
             ->type('Test action', 'name')
             ->type('this is a test action in the agenda', 'body')
-            ->type('Bruxelles', 'location')
+            ->type('Bruxelles', 'location[city]')
             ->type('2016-01-01', 'start_date')
             ->type('12:00', 'start_time')
             ->type('13:00', 'stop_time')
@@ -232,6 +232,7 @@ class UserTest extends Tests\BrowserKitTestCase
             ->see('Create a new group')
             ->type('Test group of newbie', 'name')
             ->type('this is a test group', 'body')
+            ->type('Belgique', 'location[country]')
             ->press('Create the group')
             ->see('Test group of newbie');
     }
