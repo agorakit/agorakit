@@ -128,6 +128,7 @@ class UserController extends Controller
             return view('users.show')
                 ->with('activities', $user->activities()->whereIn('group_id', Group::public()->pluck('id'))->paginate(10))
                 ->with('user', $user)
+                ->with('model', $user)
                 ->with('tab', 'profile')
                 ->with('title', $title);
         }
@@ -143,11 +144,14 @@ class UserController extends Controller
     public function edit(User $user)
     {
         if (Gate::allows('update', $user)) {
+            $user->getLocationData();
+
             return view('users.edit')
                 ->with('allowedTags', $user->getAllowedTags())
                 ->with('newTagsAllowed', $user->areNewTagsAllowed())
                 ->with('selectedTags', $user->getSelectedTags())
                 ->with('user', $user)
+                ->with('model', $user)
                 ->with('tab', 'edit');
         } else {
             abort(403);
@@ -166,16 +170,22 @@ class UserController extends Controller
             $user->email = $request->input('email');
             $user->body = $request->input('body');
 
+            $location_data = $request->input('location');
+            // FIXME validation : for security + for charset + for a valid JSON
+            if (!$new_location = json_encode($location_data, JSON_UNESCAPED_UNICODE)) {
+                flash(trans('Invalid location'));
+            }
 
-            if ($user->address != $request->input('address')) {
-                // we need to update user address and geocode it
-                $user->address = $request->input('address');
-                if (!$user->geocode()) {
-                    warning(trans('messages.address_cannot_be_geocoded'));
+            if ($user->location != $new_location) {
+                // we need to update user location and geocode it
+                $user->location = $new_location;
+                if (!$user->geocode($location_data)) {
+                    flash(trans('messages.location_cannot_be_geocoded'));
                 } else {
                     flash(trans('messages.ressource_geocoded_successfully'));
                 }
             }
+
 
             // handle username change
             if ($user->username != $request->input('username')) {

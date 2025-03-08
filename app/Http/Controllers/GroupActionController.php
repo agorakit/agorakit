@@ -167,10 +167,12 @@ class GroupActionController extends Controller
             $action->name = $request->get('title');
         }
 
+        $action->getLocationData();
         $action->group()->associate($group);
 
         return view('actions.create')
             ->with('action', $action)
+            ->with('model', $action)
             ->with('group', $group)
             ->with('allowedTags', $action->getTagsInUse())
             ->with('newTagsAllowed', $action->areNewTagsAllowed())
@@ -231,13 +233,24 @@ class GroupActionController extends Controller
         }
 
         if ($request->get('location')) {
-            $action->location = $request->input('location');
-            if (!$action->geocode()) {
-                warning(trans('messages.address_cannot_be_geocoded'));
-            } else {
-                flash(trans('messages.ressource_geocoded_successfully'));
+	  // FIXME push this code to Traits/HasLocation.php
+          $location_data = $request->input('location');
+
+	    // Try to JSON encode
+            if (!$new_location = json_encode($location_data, JSON_UNESCAPED_UNICODE)) {
+                flash(trans('Invalid location'));
             }
-        }
+	    else if ($new_location <> $action->location) {
+              $action->location = $new_location;
+
+              // Try to geocode
+              if (!$action->geocode($location_data)) {
+                  flash(trans('messages.location_cannot_be_geocoded'));
+              } else {
+                  flash(trans('messages.ressource_geocoded_successfully'));
+              }
+	    }
+          }
 
         $action->user()->associate($request->user());
 
@@ -295,6 +308,7 @@ class GroupActionController extends Controller
         return view('actions.show')
             ->with('title', $group->name . ' - ' . $action->name)
             ->with('action', $action)
+            ->with('model', $action)
             ->with('group', $group)
             ->with('tab', 'action');
     }
@@ -309,9 +323,11 @@ class GroupActionController extends Controller
     public function edit(Request $request, Group $group, Action $action)
     {
         $this->authorize('update', $action);
+	$action->getLocationData();
 
         return view('actions.edit')
             ->with('action', $action)
+            ->with('model', $action)
             ->with('group', $group)
             ->with('allowedTags', $action->getAllowedTags())
             ->with('newTagsAllowed', $action->areNewTagsAllowed())
@@ -341,11 +357,17 @@ class GroupActionController extends Controller
             $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
         }
 
-        if ($action->location != $request->input('location')) {
-            // we need to update user address and geocode it
-            $action->location = $request->input('location');
-            if (!$action->geocode()) {
-                flash(trans('messages.address_cannot_be_geocoded'));
+        $location_data = $request->input('location');
+        // FIXME validation : for security + for charset + for a valid JSON
+        if (!$new_location = json_encode($location_data, JSON_UNESCAPED_UNICODE)) {
+            flash(trans('Invalid location'));
+        }
+
+        if ($action->location != $new_location) {
+            // we need to update action location and geocode it
+            $action->location = $new_location;
+            if (!$action->geocode($location_data)) {
+                flash(trans('messages.location_cannot_be_geocoded'));
             } else {
                 flash(trans('messages.ressource_geocoded_successfully'));
             }

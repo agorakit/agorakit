@@ -166,9 +166,11 @@ class GroupController extends Controller
     {
         $this->authorize('create', Group::class);
         $group = new Group;
+        $group->getLocationData();
 
         return view('groups.create')
             ->with('group', $group)
+            ->with('model', $group)
             ->with('allowedTags', $group->getAllowedTags())
             ->with('newTagsAllowed', $group->areNewTagsAllowed())
             ->with('title', trans('group.create_group_title'));
@@ -203,14 +205,24 @@ class GroupController extends Controller
             $group->group_type = $request->input('group_type');
         }
 
-        if ($request->get('address')) {
-            $group->address = $request->input('address');
-            if (!$group->geocode()) {
-                flash(trans('messages.address_cannot_be_geocoded'));
-            } else {
-                flash(trans('messages.ressource_geocoded_successfully'));
+        if ($request->get('location')) {
+          $location_data = $request->input('location');
+
+	    // Try to JSON encode
+            if (!$new_location = json_encode($location_data, JSON_UNESCAPED_UNICODE)) {
+                flash(trans('Invalid location'));
             }
-        }
+	    else if ($new_location <> $group->location) {
+              $group->location = $new_location;
+
+              // Try to geocode
+              if (!$group->geocode($location_data)) {
+                  flash(trans('messages.location_cannot_be_geocoded'));
+              } else {
+                  flash(trans('messages.ressource_geocoded_successfully'));
+              }
+	    }
+          }
 
         if ($group->isInvalid()) {
             // Oops.
@@ -271,9 +283,11 @@ class GroupController extends Controller
     {
         $this->authorize('update', $group);
 
+        $group->getLocationData();
 
         return view('groups.edit')
             ->with('group', $group)
+            ->with('model', $group)
             ->with('allowedTags', $group->getAllowedTags())
             ->with('newTagsAllowed', $group->areNewTagsAllowed())
             ->with('selectedTags', $group->getSelectedTags())
@@ -311,11 +325,17 @@ class GroupController extends Controller
             }
         }
 
-        if ($group->address != $request->input('address')) {
-            // we need to update user address and geocode it
-            $group->address = $request->input('address');
-            if (!$group->geocode()) {
-                flash(trans('messages.address_cannot_be_geocoded'));
+        $location_data = $request->input('location');
+        // FIXME validation : for security + for charset + for a valid JSON
+        if (!$new_location = json_encode($location_data, JSON_UNESCAPED_UNICODE)) {
+            flash(trans('Invalid location'));
+        }
+
+        if ($group->location != $new_location) {
+            // we need to update group location and geocode it
+            $group->location = $new_location;
+            if (!$group->geocode($location_data)) {
+                flash(trans('messages.location_cannot_be_geocoded'));
             } else {
                 flash(trans('messages.ressource_geocoded_successfully'));
             }
