@@ -363,10 +363,10 @@ class GroupActionController extends Controller
             flash(trans('Invalid location'));
         }
 
-        if ($group->location != $new_location) {
-            // we need to update user location and geocode it
-            $group->location = $new_location;
-            if (!$group->geocode($location_data)) {
+        if ($action->location != $new_location) {
+            // we need to update action location and geocode it
+            $action->location = $new_location;
+            if (!$action->geocode($location_data)) {
                 flash(trans('messages.location_cannot_be_geocoded'));
             } else {
                 flash(trans('messages.ressource_geocoded_successfully'));
