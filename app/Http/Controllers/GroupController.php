@@ -206,18 +206,23 @@ class GroupController extends Controller
         }
 
         if ($request->get('location')) {
-            $location_data = $request->input('location');
-            // FIXME validation
+          $location_data = $request->input('location');
+
+	    // Try to JSON encode
             if (!$new_location = json_encode($location_data, JSON_UNESCAPED_UNICODE)) {
                 flash(trans('Invalid location'));
             }
+	    else if ($new_location <> $group->location) {
+              $group->location = $new_location;
 
-            if (!$group->geocode($new_location)) {
-                flash(trans('messages.location_cannot_be_geocoded'));
-            } else {
-                flash(trans('messages.ressource_geocoded_successfully'));
-            }
-        }
+              // Try to geocode
+              if (!$group->geocode($location_data)) {
+                  flash(trans('messages.location_cannot_be_geocoded'));
+              } else {
+                  flash(trans('messages.ressource_geocoded_successfully'));
+              }
+	    }
+          }
 
         if ($group->isInvalid()) {
             // Oops.

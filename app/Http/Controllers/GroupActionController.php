@@ -167,6 +167,7 @@ class GroupActionController extends Controller
             $action->name = $request->get('title');
         }
 
+        $action->getLocationData();
         $action->group()->associate($group);
 
         return view('actions.create')
@@ -232,13 +233,24 @@ class GroupActionController extends Controller
         }
 
         if ($request->get('location')) {
-            $action->location = $request->input('location');
-            if (!$action->geocode()) {
-                warning(trans('messages.location_cannot_be_geocoded'));
-            } else {
-                flash(trans('messages.ressource_geocoded_successfully'));
+	  // FIXME push this code to Traits/HasLocation.php
+          $location_data = $request->input('location');
+
+	    // Try to JSON encode
+            if (!$new_location = json_encode($location_data, JSON_UNESCAPED_UNICODE)) {
+                flash(trans('Invalid location'));
             }
-        }
+	    else if ($new_location <> $action->location) {
+              $action->location = $new_location;
+
+              // Try to geocode
+              if (!$action->geocode($location_data)) {
+                  flash(trans('messages.location_cannot_be_geocoded'));
+              } else {
+                  flash(trans('messages.ressource_geocoded_successfully'));
+              }
+	    }
+          }
 
         $action->user()->associate($request->user());
 

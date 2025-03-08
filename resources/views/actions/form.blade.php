@@ -42,8 +42,7 @@
 @include('partials.tags_input')
 
 <div class="form-group">
-    {!! Form::label('location', trans('messages.location')) !!}
-    {!! Form::text('location', null, ['class' => 'form-control', 'rows' => 4]) !!}
+@include('partials.location_input')
 </div>
 
 <div class="form-group">
