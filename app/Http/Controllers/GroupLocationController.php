@@ -24,28 +24,9 @@ class GroupLocationController extends Controller
     {
         $this->authorize('manage-locations', $group);
 
-        // generate a complete list of locations, [with names], used in this group
-        $locations = collect();
-
-        $locations->push($group->location);
-
-        $actions = $group->actions()
-            ->with('location')
-            ->get();
-
-        foreach ($actions as $action) {
-            $locations->push($location);
-        }
-
-        // FIXME unique sort by name
-        //$locations = $locations->unique('normalized')->sortBy('normalized');
-
-
-        return view('groups.allowed_locations')
+        return view('groups.listed_locations')
             ->with('group', $group)
-            ->with('locations', $locations)
-            ->with('newLocationsAllowed', true)
-            ->with('selectedLocations', $discussion->getAllowedLocations());
+            ->with('listed_locations', $group->getNamedLocations());
     }
 
     /**

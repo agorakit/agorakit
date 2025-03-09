@@ -360,4 +360,25 @@ class Group extends Model
 
         return $this->save();
     }
+
+    /**
+     * Get listed locations in the group
+     */
+    public function getNamedLocations()
+    {
+        $named_locations = [];
+        $this->getLocationData();
+        if ($this->location_data['name']) {
+         $named_locations[] = $this->location_data;
+        }
+        foreach ($this->actions()->get() as $action) {
+          $action->getLocationData();
+          if ($action->location_data['name']) {
+            $named_locations[] = $action->location_data;
+          }
+        }
+        // FIXME unique sort by name
+
+        return $named_locations;
+    }
 }
