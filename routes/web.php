@@ -132,6 +132,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('tags', 'TagController@index')->name('tags.index');
     Route::get('tags/{tag}', 'TagController@show')->name('tags.show');
 
+    Route::get('locations', 'LocationController@index')->name('locations.index');
+    Route::get('locations/{location}', 'TagController@show')->name('locations.show');
+
 
     /* Pages */
     Route::get('pages/help', 'PageController@help')->name('pages.help');
@@ -372,6 +375,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('tags', 'GroupTagController@edit')->name('.tags.edit');
         Route::post('tags', 'GroupTagController@update')->name('.tags.update');
 
+        // Listed Locations
+        Route::get('locations', 'GroupLocationController@edit')->name('.locations.edit');
+        Route::post('locations', 'GroupLocationController@update')->name('.locations.update');
 
         // Permissions
         Route::get('permissions', 'GroupPermissionController@index')->name('.permissions.index');
