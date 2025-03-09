@@ -27,10 +27,10 @@ trait HasLocation
      */
     public function getLocationData()
     {
-        if(!$this->location) {
-          $this->location = [];
-        }
-        else if (!$location_data = json_decode($this->location, true)) {
+        // Default value
+        $location_data = [];
+        // Decoding the JSON field
+        if (!$location_data = json_decode($this->location, true)) {
           // This is probably an old `location` field, so we convert
           $location_data = ["street" => $this->location];
         }
