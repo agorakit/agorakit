@@ -169,6 +169,10 @@ class GroupActionController extends Controller
 
         $action->getLocationData();
         $action->group()->associate($group);
+        $listed_locations = [];
+        foreach ($group->getNamedLocations() as $location) {
+          $listed_locations[] = $location['name'];
+        }
 
         return view('actions.create')
             ->with('action', $action)
@@ -176,6 +180,7 @@ class GroupActionController extends Controller
             ->with('group', $group)
             ->with('allowedTags', $action->getTagsInUse())
             ->with('newTagsAllowed', $action->areNewTagsAllowed())
+            ->with('listedLocationOptions', $listed_locations)
             ->with('tab', 'action');
     }
 
