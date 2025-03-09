@@ -22,7 +22,7 @@ class ActionTest extends Tests\BrowserKitTestCase
     */
     public function testSetupItAll()
     {
-        Artisan::call('migrate:refresh');
+        Artisan::call('migrate:fresh');
 
         $this->visit('/')
             ->see('Agorakit');
@@ -58,6 +58,7 @@ class ActionTest extends Tests\BrowserKitTestCase
             ->see('Create a new group')
             ->type('Action test group', 'name')
             ->type('this is a test group for action test', 'body')
+            ->type('France', 'location[country]')
             ->press('Create the group')
             ->see('Action test group');
     }
