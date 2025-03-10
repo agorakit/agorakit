@@ -17,37 +17,20 @@ trait HasLocation
 {
     private $allowed_location_keys = ["name", "street", "city", "county", "country"];
 
-    /**
-     * Get location data from database `location` field
-     */
-    public function getLocationData()
-    {
-        return $this->location;
-
-        // Default value
-        $location_data = [];
-        // Decoding the JSON field
-        if (!$location_data = json_decode($this->location, true)) {
-            // This is probably an old `location` field, so we convert and put everything in street
-            $location_data['street'] = $this->location;
-        }
-        array_intersect_key($this->allowed_location_keys, $location_data); // first time I use that one :)
-        return $location_data;
-    }
-
 
 
     public function getLocationAttribute($value)
     {
         if (!$location_data = json_decode($value, true)) {
-            // This is probably an old `location` field, so we convert and put everything in street
+            // This is probably an old `location` field, 
+            // so we convert to a default array and put everything in street
             $location_data['street'] = $value;
             $location_data['name'] = '';
             $location_data['city'] = '';
             $location_data['county'] = '';
             $location_data['country'] = '';
         }
-        // keep only accepted keys
+        // In all cases, keep only accepted keys
         array_intersect_key($this->allowed_location_keys, $location_data); // first time I use that one :)
         return $location_data;
     }
