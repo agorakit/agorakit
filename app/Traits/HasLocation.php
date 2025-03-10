@@ -22,6 +22,8 @@ trait HasLocation
      */
     public function getLocationData()
     {
+        return $this->location;
+
         // Default value
         $location_data = [];
         // Decoding the JSON field
@@ -32,6 +34,24 @@ trait HasLocation
         array_intersect_key($this->allowed_location_keys, $location_data); // first time I use that one :)
         return $location_data;
     }
+
+
+
+    public function getLocationAttribute($value)
+    {
+        if (!$location_data = json_decode($value, true)) {
+            // This is probably an old `location` field, so we convert and put everything in street
+            $location_data['street'] = $value;
+            $location_data['name'] = '';
+            $location_data['city'] = '';
+            $location_data['county'] = '';
+            $location_data['country'] = '';
+        }
+        // keep only accepted keys
+        array_intersect_key($this->allowed_location_keys, $location_data); // first time I use that one :)
+        return $location_data;
+    }
+
 
 
     /**
@@ -70,7 +90,7 @@ trait HasLocation
     function geocode()
     {
         $geolines = [];
-        $location_data = $this->getLocationData();
+        $location_data = $this->location;
         foreach ($location_data as $key => $val) {
             if ($key == 'name') {
             } else if ($key == 'county' && array_key_exists('country', $location_data)) {
@@ -115,7 +135,7 @@ trait HasLocation
      */
     public function location_display($format = "short")
     {
-        $location_data = $this->getLocationData();
+        $location_data = $this->location;
         $parts = [];
         foreach ($this->allowed_location_keys as $key) {
             if (array_key_exists($key, $location_data) && $location_data[$key]) {

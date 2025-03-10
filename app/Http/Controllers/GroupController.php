@@ -166,7 +166,6 @@ class GroupController extends Controller
     {
         $this->authorize('create', Group::class);
         $group = new Group;
-        $group->getLocationData();
 
         return view('groups.create')
             ->with('group', $group)
@@ -206,23 +205,22 @@ class GroupController extends Controller
         }
 
         if ($request->get('location')) {
-          $location_data = $request->input('location');
+            $location_data = $request->input('location');
 
-	    // Try to JSON encode
+            // Try to JSON encode
             if (!$new_location = json_encode($location_data, JSON_UNESCAPED_UNICODE)) {
                 flash(trans('Invalid location'));
-            }
-	    else if ($new_location <> $group->location) {
-              $group->location = $new_location;
+            } else if ($new_location <> $group->location) {
+                $group->location = $new_location;
 
-              // Try to geocode
-              if (!$group->geocode($location_data)) {
-                  flash(trans('messages.location_cannot_be_geocoded'));
-              } else {
-                  flash(trans('messages.ressource_geocoded_successfully'));
-              }
-	    }
-          }
+                // Try to geocode
+                if (!$group->geocode($location_data)) {
+                    flash(trans('messages.location_cannot_be_geocoded'));
+                } else {
+                    flash(trans('messages.ressource_geocoded_successfully'));
+                }
+            }
+        }
 
         if ($group->isInvalid()) {
             // Oops.
@@ -282,8 +280,6 @@ class GroupController extends Controller
     public function edit(Request $request, Group $group)
     {
         $this->authorize('update', $group);
-
-        $group->getLocationData();
 
         return view('groups.edit')
             ->with('group', $group)

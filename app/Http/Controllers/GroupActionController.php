@@ -100,7 +100,7 @@ class GroupActionController extends Controller
         foreach ($actions as $action) {
             $event['id'] = $action->id;
             $event['title'] = $action->name . ' (' . $action->group->name . ')';
-            $event['description'] = strip_tags(summary($action->body)) . ' <br/> ' . $action->location;
+            $event['description'] = strip_tags(summary($action->body)) . ' <br/> ' . $action->location_display();
             $event['body'] = strip_tags(summary($action->body));
             $event['summary'] = strip_tags(summary($action->body));
 
@@ -113,7 +113,7 @@ class GroupActionController extends Controller
             }
 
 
-            $event['location'] = $action->location;
+            $event['location'] = $action->location_display();
             $event['start'] = $action->start->toIso8601String();
             $event['end'] = $action->stop->toIso8601String();
             $event['url'] = route('groups.actions.show', [$action->group, $action]);
@@ -167,7 +167,6 @@ class GroupActionController extends Controller
             $action->name = $request->get('title');
         }
 
-        $action->getLocationData();
         $action->group()->associate($group);
 
         return view('actions.create')
@@ -236,7 +235,7 @@ class GroupActionController extends Controller
         if ($request->has('location')) {
             $action->setLocationFromRequest($request);
             // Try to geocode
-            if ($action->geocode($location_data)) {
+            if ($action->geocode()) {
                 flash(trans('messages.ressource_geocoded_successfully'));
             } else {
                 flash(trans('messages.location_cannot_be_geocoded'));
@@ -314,7 +313,6 @@ class GroupActionController extends Controller
     public function edit(Request $request, Group $group, Action $action)
     {
         $this->authorize('update', $action);
-        $action->getLocationData();
 
         return view('actions.edit')
             ->with('action', $action)

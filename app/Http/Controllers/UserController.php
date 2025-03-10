@@ -144,8 +144,6 @@ class UserController extends Controller
     public function edit(User $user)
     {
         if (Gate::allows('update', $user)) {
-            $user->getLocationData();
-
             return view('users.edit')
                 ->with('allowedTags', $user->getAllowedTags())
                 ->with('newTagsAllowed', $user->areNewTagsAllowed())
