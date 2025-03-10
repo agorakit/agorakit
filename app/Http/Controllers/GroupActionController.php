@@ -100,7 +100,7 @@ class GroupActionController extends Controller
         foreach ($actions as $action) {
             $event['id'] = $action->id;
             $event['title'] = $action->name . ' (' . $action->group->name . ')';
-            $event['description'] = strip_tags(summary($action->body)) . ' <br/> ' . $action->location;
+            $event['description'] = strip_tags(summary($action->body)) . ' <br/> ' . $action->location_display();
             $event['body'] = strip_tags(summary($action->body));
             $event['summary'] = strip_tags(summary($action->body));
 
@@ -113,7 +113,7 @@ class GroupActionController extends Controller
             }
 
 
-            $event['location'] = $action->location;
+            $event['location'] = $action->location_display();
             $event['start'] = $action->start->toIso8601String();
             $event['end'] = $action->stop->toIso8601String();
             $event['url'] = route('groups.actions.show', [$action->group, $action]);
@@ -171,6 +171,7 @@ class GroupActionController extends Controller
 
         return view('actions.create')
             ->with('action', $action)
+            ->with('model', $action)
             ->with('group', $group)
             ->with('allowedTags', $action->getTagsInUse())
             ->with('newTagsAllowed', $action->areNewTagsAllowed())
@@ -230,12 +231,14 @@ class GroupActionController extends Controller
                 ->withInput();
         }
 
-        if ($request->get('location')) {
-            $action->location = $request->input('location');
-            if (!$action->geocode()) {
-                warning(trans('messages.address_cannot_be_geocoded'));
-            } else {
+        // handle location
+        if ($request->has('location')) {
+            $action->setLocationFromRequest($request);
+            // Try to geocode
+            if ($action->geocode()) {
                 flash(trans('messages.ressource_geocoded_successfully'));
+            } else {
+                flash(trans('messages.location_cannot_be_geocoded'));
             }
         }
 
@@ -295,6 +298,7 @@ class GroupActionController extends Controller
         return view('actions.show')
             ->with('title', $group->name . ' - ' . $action->name)
             ->with('action', $action)
+            ->with('model', $action)
             ->with('group', $group)
             ->with('tab', 'action');
     }
@@ -312,6 +316,7 @@ class GroupActionController extends Controller
 
         return view('actions.edit')
             ->with('action', $action)
+            ->with('model', $action)
             ->with('group', $group)
             ->with('allowedTags', $action->getAllowedTags())
             ->with('newTagsAllowed', $action->areNewTagsAllowed())
@@ -341,13 +346,17 @@ class GroupActionController extends Controller
             $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
         }
 
-        if ($action->location != $request->input('location')) {
-            // we need to update user address and geocode it
-            $action->location = $request->input('location');
-            if (!$action->geocode()) {
-                flash(trans('messages.address_cannot_be_geocoded'));
-            } else {
-                flash(trans('messages.ressource_geocoded_successfully'));
+
+        // handle location
+        if ($request->has('location')) {
+            $action->setLocationFromRequest($request);
+            // Try to geocode only if location changed (= attribute is dirty)
+            if ($action->isDirty('location')) {
+                if ($action->geocode()) {
+                    flash(trans('messages.ressource_geocoded_successfully'));
+                } else {
+                    flash(trans('messages.location_cannot_be_geocoded'));
+                }
             }
         }
 
@@ -365,15 +374,14 @@ class GroupActionController extends Controller
             $action->makePrivate();
         }
 
-         // handle cover
-         if ($request->hasFile('cover')) {
+        // handle cover
+        if ($request->hasFile('cover')) {
             if ($action->setCoverFromRequest($request)) {
                 flash(trans('Cover image has been updated, please reload to see the new cover'));
             } else {
                 flash(trans('Error adding a new cover'));
             }
-        }
-        else{
+        } else {
             flash('no cover');
         }
 

@@ -8,7 +8,6 @@ return [
     'alpha_num'            => 'Das :attribute darf nur Buchstaben und Ziffern enthalten.',
     'array'                => 'Die :attribute muss eine Array sein.',
     'attributes'           => [
-        'address'               => 'Adresse',
         'age'                   => 'Alter',
         'available'             => 'Zugänglich',
         'body'                  => 'Hauptteil',
@@ -25,6 +24,7 @@ return [
         'group_id'              => 'Gruppennummer',
         'hour'                  => 'Stunde',
         'last_name'             => 'Nachname',
+        'location'              => 'Adresse',
         'minute'                => 'Minute',
         'mobile'                => 'Handynummer',
         'month'                 => 'Monat',

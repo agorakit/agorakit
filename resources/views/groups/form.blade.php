@@ -16,14 +16,8 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('address', trans('messages.address') . ':') !!}
-    <div class="small-help">
-        <i class="fas fa-info-circle"></i>
-        {{trans('messages.address_privacy_and_help')}}
-    </div>
-    {!! Form::text('address', null, ['class' => 'form-control']) !!}
+@include('partials.location_input')
 </div>
-
 
 <div class="form-group">
     {!! Form::label('group_type', trans('group.type')) !!}

@@ -75,6 +75,12 @@
                 </div>
             </div>
 
+            <div class="mb-3">
+            @if ($group->location_display("long"))
+                <div class="fw-bold">{{ trans('messages.location') }}</div>
+                {{ $group->location_display("long") }}
+            @endif
+            </div>
         </div>
 
     </div>
