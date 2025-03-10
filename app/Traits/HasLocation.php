@@ -117,7 +117,7 @@ trait HasLocation
     {
         $location_data = $this->getLocationData();
         $parts = [];
-        foreach ($this->location_specs as $key) {
+        foreach ($this->allowed_location_keys as $key) {
             if (array_key_exists($key, $location_data) && $location_data[$key]) {
                 if ($format == "short" && $key == 'street') {
                     $parts[] = substr($location_data[$key], 0, 30);
