@@ -232,25 +232,16 @@ class GroupActionController extends Controller
                 ->withInput();
         }
 
-        if ($request->get('location')) {
-	  // FIXME push this code to Traits/HasLocation.php
-          $location_data = $request->input('location');
-
-	    // Try to JSON encode
-            if (!$new_location = json_encode($location_data, JSON_UNESCAPED_UNICODE)) {
-                flash(trans('Invalid location'));
+        // handle location
+        if ($request->has('location')) {
+            $action->setLocationFromRequest($request);
+            // Try to geocode
+            if ($action->geocode($location_data)) {
+                flash(trans('messages.ressource_geocoded_successfully'));
+            } else {
+                flash(trans('messages.location_cannot_be_geocoded'));
             }
-	    else if ($new_location <> $action->location) {
-              $action->location = $new_location;
-
-              // Try to geocode
-              if (!$action->geocode($location_data)) {
-                  flash(trans('messages.location_cannot_be_geocoded'));
-              } else {
-                  flash(trans('messages.ressource_geocoded_successfully'));
-              }
-	    }
-          }
+        }
 
         $action->user()->associate($request->user());
 
@@ -323,7 +314,7 @@ class GroupActionController extends Controller
     public function edit(Request $request, Group $group, Action $action)
     {
         $this->authorize('update', $action);
-	$action->getLocationData();
+        $action->getLocationData();
 
         return view('actions.edit')
             ->with('action', $action)
@@ -357,19 +348,17 @@ class GroupActionController extends Controller
             $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
         }
 
-        $location_data = $request->input('location');
-        // FIXME validation : for security + for charset + for a valid JSON
-        if (!$new_location = json_encode($location_data, JSON_UNESCAPED_UNICODE)) {
-            flash(trans('Invalid location'));
-        }
 
-        if ($action->location != $new_location) {
-            // we need to update action location and geocode it
-            $action->location = $new_location;
-            if (!$action->geocode($location_data)) {
-                flash(trans('messages.location_cannot_be_geocoded'));
-            } else {
-                flash(trans('messages.ressource_geocoded_successfully'));
+        // handle location
+        if ($request->has('location')) {
+            $action->setLocationFromRequest($request);
+            // Try to geocode only if location changed (= attribute is dirty)
+            if ($action->isDirty('location')) {
+                if ($action->geocode()) {
+                    flash(trans('messages.ressource_geocoded_successfully'));
+                } else {
+                    flash(trans('messages.location_cannot_be_geocoded'));
+                }
             }
         }
 
@@ -387,15 +376,14 @@ class GroupActionController extends Controller
             $action->makePrivate();
         }
 
-         // handle cover
-         if ($request->hasFile('cover')) {
+        // handle cover
+        if ($request->hasFile('cover')) {
             if ($action->setCoverFromRequest($request)) {
                 flash(trans('Cover image has been updated, please reload to see the new cover'));
             } else {
                 flash(trans('Error adding a new cover'));
             }
-        }
-        else{
+        } else {
             flash('no cover');
         }
 
