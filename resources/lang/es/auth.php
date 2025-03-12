@@ -1,5 +1,6 @@
 <?php
 return [
     'failed'   => 'Estas credenciales no coinciden con nuestros registros.',
-    'throttle' => 'Demasiados intentos de inicio de sesión. Inténtalo de nuevo en segundos segundos.',
+    'password' => 'La contraseña proporcionada es incorrecta.',
+    'throttle' => 'Demasiados intentos de inicio de sesión. Por favor, inténtelo de nuevo en :seconds segundos.',
 ];

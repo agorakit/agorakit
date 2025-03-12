@@ -43,7 +43,7 @@ return [
     'contact_this_user'                              => 'Deze persoon contacteren',
     'create'                                         => 'Aanmaken',
     'create_file_button'                             => 'Bestand toevoegen',
-    'create_files_button'                            => 'Bestanden toevoegen',
+    'create_files_button'                            => 'Bestand toevoegen',
     'create_folder'                                  => 'Een map maken',
     'create_folder_button'                           => 'Een map maken',
     'create_folder_help'                             => 'Voer de naam van de map in',

@@ -42,7 +42,7 @@ return [
     'contact'                                        => 'Kontakt',
     'contact_this_user'                              => 'Diesen Teilnehmer kontaktieren',
     'create'                                         => 'Erstellen',
-    'create_file_button'                             => 'Datei hochladen',
+    'create_file_button'                             => 'Datei(en) hochladen',
     'create_files_button'                            => 'Datei(en) hochladen',
     'create_folder'                                  => 'Erstellen eines Ordners',
     'create_folder_button'                           => 'Erstellen eines Ordners',
