@@ -12,7 +12,7 @@ https://github.com/magarrent/laravel-find-missing-translations/blob/main/src/Com
 
 
 
-Namespace App\Console\Commands;
+namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Lang;
 use Symfony\Component\Finder\Finder;
 
 
-class LangFilesToJson extEnds Command
+class LangFilesToJson extends Command
 {
     /**
      * The Name and signature of the console command.
@@ -36,19 +36,19 @@ class LangFilesToJson extEnds Command
      */
     protected $Description = 'Convert Laravel language Files from PHP to JSON';
 
-    Public $groups = ['message', 'messages'];
+    public $groups = ['action', 'auth', 'discussion', 'documentation', 'file', 'group', 'message', 'messages', 'notifications', 'notification', 'pagination', 'passwords', 'validation'];
 
     /**
      * Create a New command instance.
      *
      * @return void
      */
-    Public function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
 
-    Public function convert($data)
+    public function convert($data)
     {
         $result = [];
 
@@ -72,7 +72,7 @@ class LangFilesToJson extEnds Command
      * Execute the console command.
      *
      */
-    Public function handle()
+    public function handle()
     {
         $path = base_path();
 
@@ -87,7 +87,7 @@ class LangFilesToJson extEnds Command
                 $this->info($group . '.' . $key . ' : ' . $translation);
 
 
-                $finder = New Finder;
+                $finder = new Finder;
                 $finder->in($path)
                     ->exclude('storage')
                     ->exclude('vendor')
@@ -98,12 +98,12 @@ class LangFilesToJson extEnds Command
 
                 foreach ($finder as $file) {
 
-                    $source = "trans('" . $group . '.' . $key;
-                    $target = "trans('" . $translation;
+                    $source = "trans('" . $group . '.' . $key . "')";
+                    $target = "trans('" . $translation . "')";
                     $newcontent = str_replace($source, $target, $file->getContents());
 
-                    $source = "__('" . $group . '.' . $key;
-                    $target = "__('" . $translation;
+                    $source = "__('" . $group . '.' . $key . "')";
+                    $target = "__('" . $translation . "')";
                     $newcontent = str_replace($source, $target, $newcontent);
 
                     $file->openFile('w')->fwrite($newcontent);
