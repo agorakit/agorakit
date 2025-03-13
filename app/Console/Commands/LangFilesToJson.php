@@ -36,7 +36,7 @@ class LangFilesToJson extends Command
      */
     protected $Description = 'Convert Laravel language Files from PHP to JSON';
 
-    public $groups = ['action', 'auth', 'discussion', 'documentation', 'file', 'group', 'message', 'messages', 'notifications', 'notification', 'pagination', 'passwords', 'validation'];
+    public $groups = ['action', 'auth', 'discussion', 'documentation', 'file', 'group', 'message', 'messages', 'notifications', 'notification', 'pagination', 'passwords'];
 
     /**
      * Create a New command instance.
@@ -99,11 +99,11 @@ class LangFilesToJson extends Command
                 foreach ($finder as $file) {
 
                     $source = "trans('" . $group . '.' . $key . "')";
-                    $target = "trans('" . $translation . "')";
+                    $target = "t('" . $translation . "')";
                     $newcontent = str_replace($source, $target, $file->getContents());
 
                     $source = "__('" . $group . '.' . $key . "')";
-                    $target = "__('" . $translation . "')";
+                    $target = "t('" . $translation . "')";
                     $newcontent = str_replace($source, $target, $newcontent);
 
                     $file->openFile('w')->fwrite($newcontent);
