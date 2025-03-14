@@ -15,6 +15,8 @@ return [
     'group_type_help'         => 'Elige el tipo de grupo que quieras. En un grupo abierto, el contenido es público y cualquiera puede unirse a él. En un grupo cerrado, solo se puede acceder a él por invitación y el contenido solo lo pueden ver sus miembros. En un grupo secreto, ni siquiera los que no son miembros pueden descubrirlo.',
     'history_of_this_group'   => 'Editar historial de este grupo',
     'join'                    => 'Unirse',
+    'latest_discussions'      => 'Últimas discusiones',
+    'latest_files'            => 'Últimos archivos',
     'name'                    => 'Nombre del grupo',
     'navbar'                  => 'Muestra este grupo en la barra de navegación. Ya no aparecerá en ":my_groups".',
     'normal'                  => 'Grupo normal',

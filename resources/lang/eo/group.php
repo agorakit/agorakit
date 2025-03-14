@@ -15,6 +15,8 @@ return [
     'group_type_help'         => 'Choose the group type you want. An open group has the content public and anyone can join it. A closed group is invite only and the content is only visible to it\'s members. A secret group is not even discoverable by non members.',
     'history_of_this_group'   => 'Edit history of this group',
     'join'                    => 'Join',
+    'latest_discussions'      => 'Latest discussions',
+    'latest_files'            => 'Latest files',
     'name'                    => 'Group name',
     'navbar'                  => 'Montru ĉi tiun grupon en la navigadbreton. Ĝi ne estos montrata en ":my_groups" plu.',
     'normal'                  => 'Normal group',

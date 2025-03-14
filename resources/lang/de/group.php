@@ -15,6 +15,8 @@ return [
     'group_type_help'         => 'Wählen Sie den gewünschten Gruppentyp. Bei einer offenen Gruppe ist der Inhalt öffentlich und jeder kann ihr beitreten. Bei einer geschlossenen Gruppe ist der Zugang nur auf Einladung möglich und der Inhalt ist nur für die Mitglieder sichtbar. Eine geheime Gruppe ist für Nichtmitglieder nicht einmal auffindbar.',
     'history_of_this_group'   => 'Geschichte dieser Gruppe bearbeiten',
     'join'                    => 'Beitreten',
+    'latest_discussions'      => 'Neueste Diskussionen',
+    'latest_files'            => 'Neueste Dateien',
     'name'                    => 'Gruppenname',
     'navbar'                  => 'Zeigen Sie diese Gruppe in der Navigationsleiste an. Sie wird nicht mehr in ":my_groups" angezeigt.',
     'normal'                  => 'Normale Gruppe',

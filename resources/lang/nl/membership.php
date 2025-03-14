@@ -46,8 +46,10 @@ return [
     'status'                          => 'Toestand',
     'unregistered'                    => 'niet ingeschreven',
     'user_already_invited'            => 'Gebruiker reeds uitgenodigd',
+    'users_has_been_added'            => 'Gebruikers zijn toegevoegd',
     'users_has_been_invited'          => 'Gebruiker uitgenodigd',
     'users_to_add'                    => 'Gebruikers toevoegen (bestaande gebruikers alleen gebruik maken van de uitnodiging functie voor nieuwe gebruikers)',
     'welcome'                         => 'Welkom in deze groep',
     'when_to_receive_notifications'   => 'When to receive notifications?',
+    'your_preferences_for'            => 'Uw voorkeuren voor deze groep',
 ];

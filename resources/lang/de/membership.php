@@ -46,8 +46,10 @@ return [
     'status'                          => 'Status',
     'unregistered'                    => 'nicht registriert',
     'user_already_invited'            => 'Nutzer bereits eingeladen',
+    'users_has_been_added'            => 'Benutzer wurde hinzugefügt',
     'users_has_been_invited'          => 'Nutzer wurden bereits zu der Gruppe eingeladen',
     'users_to_add'                    => 'Benutzer hinzufügen (vorhandene Benutzer nur, verwenden Sie die einladen-Funktion für neue Benutzer)',
     'welcome'                         => 'Wilkommen',
     'when_to_receive_notifications'   => 'Wann möchten Sie Neuigkeiten per E-Mail von dieser Gruppe erhalten?',
+    'your_preferences_for'            => 'Ihre Präferenzen für die Gruppe',
 ];

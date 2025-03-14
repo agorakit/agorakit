@@ -46,9 +46,11 @@ return [
     'settings_updated' => 'Settings updated',
     'status' => 'Status',
     'unregistered' => 'unregistered',
+    'users_has_been_added' => 'Users Have Been Added',
     'users_has_been_invited' => 'Users have been invited',
     'users_to_add' => 'Users to add (existing users only, use the invite feature for new users)',
     'user_already_invited' => 'User already invited',
     'welcome' => 'Welcome',
     'when_to_receive_notifications' => 'How often do you want to receive notifications by email?',
+    'your_preferences_for' => 'Your preferences for',
 ];

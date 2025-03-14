@@ -15,6 +15,8 @@ return [
     'group_type_help'         => 'Scegli il tipo di gruppo desiderato. Un gruppo pubblico ha il contenuto aperto a tutti. Un gruppo privato è solo su invito e il suo contenuto è visibile solo ai suoi membri. Un gruppo segreto non è individuabile da coloro che non ne fanno parte.',
     'history_of_this_group'   => 'Modifica la cronologia di questo gruppo',
     'join'                    => 'Unisciti',
+    'latest_discussions'      => 'Discussioni recenti',
+    'latest_files'            => 'File recenti',
     'name'                    => 'Nome gruppo',
     'navbar'                  => 'Visualizzare questo gruppo nella barra di navigazione. Non verrà più visualizzato in ":my_groups".',
     'normal'                  => 'Gruppo normale',

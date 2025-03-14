@@ -46,8 +46,10 @@ return [
     'status'                          => 'Status',
     'unregistered'                    => 'désenregistré',
     'user_already_invited'            => 'Utilisateur déjà invité',
+    'users_has_been_added'            => 'Les utilisateurs ont été ajoutés',
     'users_has_been_invited'          => 'Utilisateur invité',
     'users_to_add'                    => 'Les utilisateurs à ajouter (les utilisateurs existants uniquement, utilisez la caractéristique d\'invitation pour les nouveaux utilisateurs)',
     'welcome'                         => 'Bienvenue dans ce groupe',
     'when_to_receive_notifications'   => 'Quand recevoir des nouvelles par mail de ce groupe?',
+    'your_preferences_for'            => 'Vos préférences pour le groupe',
 ];

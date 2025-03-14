@@ -46,8 +46,10 @@ return [
     'status'                          => 'Estado',
     'unregistered'                    => 'no registrado',
     'user_already_invited'            => 'Usuario ya invitado',
+    'users_has_been_added'            => 'Se han agregado los usuarios',
     'users_has_been_invited'          => 'Los usuarios han sido invitados',
     'users_to_add'                    => 'Usuarios a añadir (sólo usuarios existentes, utilice la función de invitación para nuevos usuarios)',
     'welcome'                         => 'Bienvenido',
     'when_to_receive_notifications'   => '¿Con qué frecuencia desea recibir notificaciones por correo electrónico?',
+    'your_preferences_for'            => 'Sus preferencias para',
 ];

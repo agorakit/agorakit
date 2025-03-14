@@ -15,6 +15,8 @@ return [
     'group_type_help'         => 'Kies het gewenste groepstype. Een open groep heeft de inhoud openbaar en iedereen kan eraan deelnemen. Een gesloten groep is alleen op uitnodiging en de inhoud is alleen zichtbaar voor de leden. Een geheime groep is zelfs niet te vinden door niet-leden.',
     'history_of_this_group'   => 'Geschiedenis van deze groep',
     'join'                    => 'Toetreden',
+    'latest_discussions'      => 'Recente discussies',
+    'latest_files'            => 'Recente bestanden',
     'name'                    => 'Naam van de groep',
     'navbar'                  => 'Geef deze groep weer in de navigatiebalk. Deze wordt niet meer weergegeven in ":my_groups".',
     'normal'                  => 'Normale groep',
