@@ -1,1 +1,1 @@
-php artisan localize en,eo,es,de,fr,it,nl,ru --remove-missing
+php artisan localize en,eo,es,de,fr,it,nl,ru
