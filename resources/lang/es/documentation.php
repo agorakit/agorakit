@@ -1,5 +1,4 @@
 <?php
-
 return [
     'intro' => 'Introducción',
 ];

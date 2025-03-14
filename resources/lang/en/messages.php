@@ -157,6 +157,7 @@ return [
     'status' => 'Status',
     'stop_date' => 'Stop date',
     'stop_time' => 'Stop time',
+    'success' => 'Operation completed successfully',
     'tags' => 'Tags',
     'tags_help' => 'Choose or type one or more tag (keywords if you prefer). This will help others to find your contribution. In the list you will see the tags already used elsewhere. Try to follow the existing tags.',
     'thank_you_for_joining' => 'Thank you for joining',
