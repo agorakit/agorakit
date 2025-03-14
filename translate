@@ -1,2 +1,1 @@
-php artisan translations:import
-php artisan translations:find
+php artisan localize en,eo,es,de,fr,it,nl,ru --remove-missing
