@@ -1,8 +1,5 @@
 <?php
 return [
-    'LLH:obsolete'                    => [
-        'your_preferences_for' => 'Le tue preferenze per',
-    ],
     'accept'                          => 'Accetta l\'invito',
     'add_button'                      => 'Aggiungi utente(i)',
     'add_users'                       => 'Aggiungi utenti',
@@ -49,9 +46,10 @@ return [
     'status'                          => 'Status',
     'unregistered'                    => 'non registrato',
     'user_already_invited'            => 'Utente già invitato',
-    'users_has_been_added'            => 'Gli utenti sono stati aggiunti',
+    'users_has_been_added'            => 'Sono stati aggiunti utenti',
     'users_has_been_invited'          => 'Gli utenti sono stati invitati',
     'users_to_add'                    => 'Utenti da aggiungere (solo per utenti già esistenti, usa la funzione di invito per nuovi utenti)',
     'welcome'                         => 'Benvenuto',
     'when_to_receive_notifications'   => 'Quanto frequentemente vuoi ricevere notizie tramite e-mail?',
+    'your_preferences_for'            => 'Le vostre preferenze per',
 ];

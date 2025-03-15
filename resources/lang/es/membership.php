@@ -1,8 +1,5 @@
 <?php
 return [
-    'LLH:obsolete'                    => [
-        'your_preferences_for' => 'Sus preferencias para',
-    ],
     'accept'                          => 'Acepta la invitación',
     'add_button'                      => 'Agregar usuario(s)',
     'add_users'                       => 'Agregar usuarios',
@@ -54,4 +51,5 @@ return [
     'users_to_add'                    => 'Usuarios a añadir (sólo usuarios existentes, utilice la función de invitación para nuevos usuarios)',
     'welcome'                         => 'Bienvenido',
     'when_to_receive_notifications'   => '¿Con qué frecuencia desea recibir notificaciones por correo electrónico?',
+    'your_preferences_for'            => 'Sus preferencias para',
 ];

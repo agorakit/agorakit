@@ -1,8 +1,5 @@
 <?php
 return [
-    'LLH:obsolete'                    => [
-        'your_preferences_for' => 'Ihre Präferenzen für die Gruppe',
-    ],
     'accept'                          => 'Die Einladung akzeptieren',
     'add_button'                      => 'Add user(s)',
     'add_users'                       => 'Benutzer hinzufügen',
@@ -54,4 +51,5 @@ return [
     'users_to_add'                    => 'Benutzer hinzufügen (vorhandene Benutzer nur, verwenden Sie die einladen-Funktion für neue Benutzer)',
     'welcome'                         => 'Wilkommen',
     'when_to_receive_notifications'   => 'Wann möchten Sie Neuigkeiten per E-Mail von dieser Gruppe erhalten?',
+    'your_preferences_for'            => 'Ihre Präferenzen für die Gruppe',
 ];

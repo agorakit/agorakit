@@ -44,10 +44,12 @@
         "zbateson/mail-mime-parser": "^3.0"
     },
     "require-dev": {
+        "amirami/localizator": "^0.14.0@alpha",
         "barryvdh/laravel-debugbar": "^3.14",
         "fakerphp/faker": "^1.23",
         "larastan/larastan": "^2.9",
         "laravel/browser-kit-testing": "^7.2",
+        "laravel-lang/common": "^6.7",
         "mmo/faker-images": "^0.9.0",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.5",

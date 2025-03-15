@@ -1,8 +1,5 @@
 <?php
 return [
-    'LLH:obsolete'                    => [
-        'your_preferences_for' => 'Uw voorkeuren voor deze groep',
-    ],
     'accept'                          => 'De uitnodiging accepteren',
     'add_button'                      => 'Voeg gebruiker(s)',
     'add_users'                       => 'Het toevoegen van gebruikers',
@@ -54,4 +51,5 @@ return [
     'users_to_add'                    => 'Gebruikers toevoegen (bestaande gebruikers alleen gebruik maken van de uitnodiging functie voor nieuwe gebruikers)',
     'welcome'                         => 'Welkom in deze groep',
     'when_to_receive_notifications'   => 'When to receive notifications?',
+    'your_preferences_for'            => 'Uw voorkeuren voor deze groep',
 ];
