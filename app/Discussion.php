@@ -120,7 +120,7 @@ class Discussion extends Model
         if (\Auth::check()) {
             return $this->hasMany(\App\UserReadDiscussion::class)->where('user_id', '=', \Auth::user()->id);
         } else {
-            abort(500, 'Need to be logged in to access this userReadDiscussion relation');
+            return false;
         }
     }
 

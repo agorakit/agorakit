@@ -1,8 +1,8 @@
-<nav class="navbar navbar-expand-lg bg-dark sticky-top" data-bs-theme="dark" up-fixed="top">
+<nav class="navbar navbar-expand-lg bg-body-tertiary" up-fixed="top">
     <div class="container-fluid">
         <!-- logo -->
         <a class="navbar-brand me-4" href="{{ route('index') }}">
-            <img alt="" src="{{ route('icon', 40) }}" height="40" width="40" />
+            <img alt="" height="40" src="{{ route('icon', 40) }}" width="40" />
             <span class="d-none d-md-inline">{{ setting('name') }}</span>
         </a>
 
@@ -16,7 +16,8 @@
         @auth
             @if (Auth::user()->groups()->count() > 0)
                 <div class="dropdown d-lg-none">
-                    <a class="dropdown-toggle nav-link fs-2" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" aria-haspopup="true">
+                    <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle nav-link fs-2"
+                        data-bs-toggle="dropdown" href="#" role="button">
                         {{ trans('messages.my_groups') }}
                     </a>
                     <div class="dropdown-menu">
@@ -29,8 +30,8 @@
         @endauth
 
         <!-- navbar toggler hamburger -->
-        <button class="navbar-toggler" data-bs-target="#navbar" data-bs-toggle="collapse" type="button" aria-controls="navbar" aria-expanded="false"
-            aria-label="Toggle navigation">
+        <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+            data-bs-target="#navbar" data-bs-toggle="collapse" type="button">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -41,12 +42,14 @@
                 @auth
                     @if (Auth::user()->groups()->count() > 0)
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" aria-haspopup="true">
+                            <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle"
+                                data-bs-toggle="dropdown" href="#" role="button">
                                 {{ trans('messages.my_groups') }}
                             </a>
                             <div class="dropdown-menu">
                                 @foreach ($overview_groups as $group)
-                                    <a class="dropdown-item" href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
+                                    <a class="dropdown-item"
+                                        href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
                                 @endforeach
                             </div>
                         </li>
@@ -56,8 +59,8 @@
                 <!-- Overview -->
                 <li class="nav-item dropdown">
                     @if (setting('show_overview_inside_navbar', true))
-                        <a class="nav-link dropdown-toggle show_overview_inside_navbar" data-bs-toggle="dropdown" data-bs-toggle="dropdown" href="#" role="button"
-                            aria-expanded="false">
+                        <a aria-expanded="false" class="nav-link dropdown-toggle show_overview_inside_navbar"
+                            data-bs-toggle="dropdown" data-bs-toggle="dropdown" href="#" role="button">
                             @lang('Overview')
                         </a>
                     @endif
@@ -68,7 +71,8 @@
                             </a>
                         @endif
                         @if (setting('show_overview_discussions', true))
-                            <a class="dropdown-item messages.discussions " href="{{ action('DiscussionController@index') }}">
+                            <a class="dropdown-item messages.discussions "
+                                href="{{ action('DiscussionController@index') }}">
                                 {{ trans('messages.discussions') }}
                             </a>
                         @endif
@@ -128,8 +132,9 @@
                 @auth
                     @if (isset($notifications))
                         <div class="dropdown hidden lg:block sm:px-4">
-                            <a class="text-gray-200 px-1 d-flex flex-col justify-center align-items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:me-2 sm:px-4 sm:bg-transparent sm:rounded"
-                                data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" aria-haspopup="true">
+                            <a aria-expanded="false" aria-haspopup="true"
+                                class="text-gray-200 px-1 d-flex flex-col justify-center align-items-center rounded-full  hover:bg-gray-600 bg-gray-700 h-12 w-12 sm:me-2 sm:px-4 sm:bg-transparent sm:rounded"
+                                data-bs-toggle="dropdown" href="#" role="button">
                                 <i class="fas fa-bell"></i>
                             </a>
                             <div class="dropdown-menu-end rounded shadow">
@@ -152,7 +157,8 @@
                 @if (\Config::has('app.locales') and setting('show_locales_inside_navbar', true))
                     <!-- locales -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                        <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+                            href="#" role="button">
                             Locale ({{ strtoupper(app()->getLocale()) }})
                         </a>
 
@@ -160,7 +166,8 @@
                             @foreach (\Config::get('app.locales') as $locale)
                                 @if ($locale !== app()->getLocale() and setting("show_locale_{$locale}", true))
                                     <li>
-                                        <a class="dropdown-item locale-{{ $locale }}" href="{{ Request::url() }}?force_locale={{ $locale }}">
+                                        <a class="dropdown-item locale-{{ $locale }}"
+                                            href="{{ Request::url() }}?force_locale={{ $locale }}">
                                             {{ strtoupper($locale) }}
                                         </a>
                                     </li>
@@ -174,7 +181,8 @@
                     <!-- Admin -->
                     @if (Auth::user()->isAdmin())
                         <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                            <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+                                href="#" role="button">
                                 Admin & settings
                             </a>
 
@@ -196,7 +204,8 @@
                                     <i class="fa fa-trash me-2"></i> Recover content
                                 </a>
 
-                                <a class="dropdown-item" href="{{ action('Admin\InsightsController@index') }}" up-follow="false">
+                                <a class="dropdown-item" href="{{ action('Admin\InsightsController@index') }}"
+                                    up-follow="false">
                                     <i class="fa fa-line-chart me-2"></i> {{ trans('messages.insights') }}
                                 </a>
 
@@ -229,9 +238,10 @@
                 <!-- search-->
                 @auth
                     <li class="nav-item d-lg-none d-xl-inline mt-2">
-                        <form class="d-flex" role="search" action="{{ url('search') }}" method="get">
-                            <input class="form-control me-2 bg-light text-dark" name="query" type="search" value="{{ request()->get('query') }}" aria-label="Search"
-                                placeholder="{{ trans('messages.search') }}" />
+                        <form action="{{ url('search') }}" class="d-flex" method="get" role="search">
+                            <input aria-label="Search" class="form-control me-2 bg-light text-dark" name="query"
+                                placeholder="{{ trans('messages.search') }}" type="search"
+                                value="{{ request()->get('query') }}" />
                         </form>
                     </li>
                 @endauth
@@ -239,21 +249,25 @@
                 <!-- User profile -->
                 @auth
                     <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                        <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+                            href="#" role="button">
                             {{ trans('messages.profile') }} ({{ Auth::user()->name }})
                         </a>
 
                         <div class="dropdown-menu" role="menu">
-                            <a class="dropdown-item" href="{{ route('users.show', Auth::user()) }}"><i class="fa fa-btn fa-user me-2"></i>
+                            <a class="dropdown-item" href="{{ route('users.show', Auth::user()) }}"><i
+                                    class="fa fa-btn fa-user me-2"></i>
                                 {{ trans('messages.profile') }}</a>
-                            <a class="dropdown-item" href="{{ route('users.edit', Auth::user()) }}"><i class="fa fa-btn fa-user-edit me-2"></i>
+                            <a class="dropdown-item" href="{{ route('users.edit', Auth::user()) }}"><i
+                                    class="fa fa-btn fa-user-edit me-2"></i>
                                 {{ trans('messages.edit_my_profile') }}</a>
 
-                            <a class="dropdown-item" href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                            <a class="dropdown-item" href="{{ url('/logout') }}"
+                                onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                 <i class="fa fa-btn fa-sign-out  me-2"></i> {{ trans('messages.logout') }}
                             </a>
 
-                            <form id="logout-form" style="display: none;" action="{{ url('/logout') }}" method="POST">
+                            <form action="{{ url('/logout') }}" id="logout-form" method="POST" style="display: none;">
                                 @csrf
                                 @honeypot
                             </form>

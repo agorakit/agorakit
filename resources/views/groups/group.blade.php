@@ -22,14 +22,15 @@
 
             @auth
                 @if (Auth::user()->isAdminOf($group))
-                    <div class="mb-2 me-2 position-absolute bottom-0 end-0  badge bg-pink">{{ __('membership.admin') }}
+                    <div class="mb-2 me-2 position-absolute bottom-0 end-0  badge bg-pink-lt">{{ __('membership.admin') }}
                     </div>
                 @elseif(Auth::user()->isMemberOf($group))
-                    <div class="mb-2 me-2 position-absolute bottom-0 end-0  badge bg-azure">{{ __('membership.member') }}
+                    <div class="mb-2 me-2 position-absolute bottom-0 end-0  badge bg-azure-lt">{{ __('membership.member') }}
                     </div>
                 @endif
                 @if (Auth::user()->isCandidateOf($group))
-                    <div class="mb-2 me-2 position-absolute bottom-0 end-0  badge bg-lime">{{ __('membership.candidate') }}
+                    <div class="mb-2 me-2 position-absolute bottom-0 end-0  badge bg-lime-lt">
+                        {{ __('membership.candidate') }}
                     </div>
                 @endif
             @endauth

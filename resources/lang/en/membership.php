@@ -1,5 +1,6 @@
 <?php
 
+
 return [
     'accept' => 'Accept the invitation',
     'add_button' => 'Add user(s)',

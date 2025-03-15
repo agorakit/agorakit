@@ -23,8 +23,8 @@
 <link href="https://cdn.jsdelivr.net/npm/unpoly@3.8.0/unpoly-bootstrap5.min.css" rel="stylesheet">
 
 {{-- tabler.io --}}
-<script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta19/dist/js/tabler.min.js" defer></script>
-<link href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta19/dist/css/tabler.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@tabler/core@1.1.1/dist/css/tabler.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.1.1/dist/js/tabler.min.js"></script>
 
 {{-- unpoly compilers --}}
 <script src="{{ asset('js/compilers.js?v=' . filemtime(public_path('js/compilers.js'))) }}" defer></script>
