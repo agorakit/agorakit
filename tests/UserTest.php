@@ -127,7 +127,7 @@ class UserTest extends Tests\BrowserKitTestCase
             ->type('13:00', 'stop_time')
             ->press('Create')
             ->seeInDatabase('actions', ['name' => 'Test action'])
-            ->see(trans('action.create_one_button'));
+            ->see(trans('messages.create_action'));
     }
 
     public function testPrivateGroupCreation()
@@ -339,8 +339,8 @@ class UserTest extends Tests\BrowserKitTestCase
         $group = $this->getTestGroup();
 
         $this->actingAs($this->newbie())
-        ->get('groups/' . $group->id . '/actions/create')
-        ->assertResponseStatus(403);
+            ->get('groups/' . $group->id . '/actions/create')
+            ->assertResponseStatus(403);
     }
 
 

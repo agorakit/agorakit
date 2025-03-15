@@ -11,7 +11,7 @@ use Illuminate\Notifications\Notification;
 class AppliedToGroup extends Notification
 {
     use Queueable;
-    
+
     public Group $group;
     public User $user;
 
@@ -48,10 +48,10 @@ class AppliedToGroup extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage())
-                    ->subject(trans('notification.user_applied_to_the_group', ['user' => $this->user->name, 'group' => $this->group->name]))
-                    ->line(trans('notification.user_applied_to_the_group', ['user' => $this->user->name, 'group' => $this->group->name]))
-                    ->action(trans('messages.visit_link'), route('groups.users.index', $this->group))
-                    ->line(trans('messages.thank_you'));
+            ->subject(trans('messages.user_applied_to_the_group', ['user' => $this->user->name, 'group' => $this->group->name]))
+            ->line(trans('messages.user_applied_to_the_group', ['user' => $this->user->name, 'group' => $this->group->name]))
+            ->action(trans('messages.visit_link'), route('groups.users.index', $this->group))
+            ->line(trans('messages.thank_you'));
     }
 
     /**
@@ -64,8 +64,8 @@ class AppliedToGroup extends Notification
     public function toArray($notifiable)
     {
         return [
-          'group' => $this->group->toArray(),
-          'user'  => $this->user->toArray(),
+            'group' => $this->group->toArray(),
+            'user'  => $this->user->toArray(),
         ];
     }
 }
