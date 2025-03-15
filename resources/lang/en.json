@@ -62,6 +62,8 @@
     "Connection Timed Out": "Connection Timed Out",
     "Contact": "Contact",
     "Continue": "Continue",
+    "Could not handle cover image. Is it an image file (png, jpeg,...  ?)": "Could not handle cover image. Is it an image file (png, jpeg,...  ?)",
+    "Cover added successfully": "Cover added successfully",
     "Cover image has been updated, please reload to see the new cover": "Cover image has been updated, please reload to see the new cover",
     "Create": "Create",
     "Create :name": "Create :name",

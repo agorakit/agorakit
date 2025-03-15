@@ -1,6 +1,5 @@
 <?php
 
-
 return [
     'accept' => 'Accept the invitation',
     'add_button' => 'Add user(s)',
@@ -54,4 +53,5 @@ return [
     'welcome' => 'Welcome',
     'when_to_receive_notifications' => 'How often do you want to receive notifications by email?',
     'your_preferences_for' => 'Your preferences for',
+    'you_cannot_leave_groups_since_you_are_only_admin' => 'You cannot leave this group since you are the only admin currently. Promote someone else as admin first before leaving the group.',
 ];
