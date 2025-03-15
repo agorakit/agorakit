@@ -20,7 +20,7 @@
 
     @include('partials.invite')
 
-    <ul class="nav nav-tabs mt-md-5 mt-3">
+    <ul class="nav nav-pills">
 
         <li class="nav-item">
             <a class="nav-link @if (isset($tab) && $tab == 'home') active @endif"

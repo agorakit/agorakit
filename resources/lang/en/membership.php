@@ -1,6 +1,6 @@
 <?php
 
-return array (
+return array(
   'admin' => 'administrator',
   'blacklisted' => 'blacklisted',
   'candidate' => 'candidate',
@@ -26,7 +26,7 @@ return array (
   'everyweek' => 'Every week',
   'howtojoin' => 'How to reach this group?',
   'howtojointext' => 'This group is a closed group. To join, please contact one of these members so that it prompts you.',
-  'if_you_want_to_leave_this_group' => 'If you want to leave this group',
+  'if_you_want_to_leave_this_group' => 'Click here if you want to leave this group',
   'invite_button' => 'Invite',
   'invite_by_email' => 'Invite people by email',
   'invite_intro' => 'Invite people who might be interested in this group. Please don\'t spam people\'s emails',
@@ -47,8 +47,8 @@ return array (
   'when_to_receive_notifications' => 'How often do you want to receive notifications by email?',
   'accept' => 'Accept the invitation',
   'deny' => 'Refuse the invitation',
-  'LLH:obsolete' => 
-  array (
+  'LLH:obsolete' =>
+  array(
     'your_preferences_for' => 'Your preferences for',
   ),
   'refusal_recorded' => 'Your refusal has been recorded. You won\'t be contacted again about this group.',
