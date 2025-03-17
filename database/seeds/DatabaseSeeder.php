@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
         // add avatar to admin user
         Storage::disk('local')->makeDirectory('users/' . $admin->id);
         try {
-            Image::make($faker->picsumUrl(500, 400))->widen(500)->save(storage_path() . '/app/users/' . $admin->id . '/cover.jpg')->fit(128, 128)->save(storage_path() . '/app/users/' . $admin->id . '/thumbnail.jpg');
+            Image::read($faker->picsumUrl(500, 400))->widen(500)->save(storage_path() . '/app/users/' . $admin->id . '/cover.jpg')->fit(128, 128)->save(storage_path() . '/app/users/' . $admin->id . '/thumbnail.jpg');
         } catch (Exception $e) {
         }
 
@@ -64,10 +64,7 @@ class DatabaseSeeder extends Seeder
             // add avatar to every user
 
             Storage::disk('local')->makeDirectory('users/' . $user->id);
-            try {
-                Image::make($faker->picsumUrl(500, 400))->widen(500)->save(storage_path() . '/app/users/' . $user->id . '/cover.jpg')->fit(128, 128)->save(storage_path() . '/app/users/' . $user->id . '/thumbnail.jpg');
-            } catch (Exception $e) {
-            }
+                Image::read(file_get_contents('https://picsum.photos/500/400'))->save(storage_path() . '/app/users/' . $user->id . '/cover.jpg')->cover(128, 128)->save(storage_path() . '/app/users/' . $user->id . '/thumbnail.jpg');
         }
 
         // create 10 groups
@@ -77,17 +74,14 @@ class DatabaseSeeder extends Seeder
                 'body' => $faker->text,
             ]);
 
-            $group->group_type = rand(0,2);
+            $group->group_type = rand(0, 2);
             $group->save();
 
             $group->tag($this->tags());
 
             // add cover image to groups
             Storage::disk('local')->makeDirectory('groups/' . $group->id);
-            try {
-                Image::make($faker->picsumUrl())->widen(800)->save(storage_path() . '/app/groups/' . $group->id . '/cover.jpg')->fit(300, 200)->save(storage_path() . '/app/groups/' . $group->id . '/thumbnail.jpg');
-            } catch (Exception $e) {
-            }
+            Image::read(file_get_contents('https://picsum.photos/800/600'))->save(storage_path() . '/app/groups/' . $group->id . '/cover.jpg')->cover(300, 200)->save(storage_path() . '/app/groups/' . $group->id . '/thumbnail.jpg');
 
             // add members to the group
             for ($j = 1; $j <= $faker->numberBetween(5, 20); $j++) {
@@ -140,6 +134,10 @@ class DatabaseSeeder extends Seeder
                     dd($action->getErrors());
                 }
                 $action->save();
+
+                // add a cover image to action
+                Storage::disk('local')->makeDirectory('groups/' . $action->group->id . '/actions/' . $action->id);
+                Image::read(file_get_contents('https://picsum.photos/800/600'))->save(storage_path() . '/app/groups/' . $action->group->id . '/actions/' . $action->id . '/cover.jpg');
 
                 $action->tag($this->tags());
 

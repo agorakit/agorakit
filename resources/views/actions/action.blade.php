@@ -6,6 +6,7 @@
         <img alt="" class="card-img-top" src="/images/group.svg" />
     @endif
 
+
     <div class="card-body">
         <h5 class="card-title d-flex justify-content-between align-items-center">
             <a href="{{ route('groups.actions.show', [$action->group, $action]) }}">
