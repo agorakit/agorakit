@@ -2,6 +2,8 @@
 
     @if ($action->hasCover())
         <img alt="action cover" class="card-img-top" src="{{ route('actions.cover', [$action, 'medium']) }}" />
+    @else
+        <img alt="" class="card-img-top" src="/images/group.svg" />
     @endif
 
     <div class="card-body">
@@ -74,5 +76,3 @@
     </div>
 
 </div>
-
-
