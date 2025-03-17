@@ -8,7 +8,7 @@
     <div class="d-flex flex-wrap gap-2 justify-content-between">
         <div>
             <a class="btn btn-primary" href="{{ route('discussions.create') }}">
-                {{ trans('discussion.create_one_button') }}
+                {{ trans('messages.create_discussion') }}
             </a>
         </div>
 

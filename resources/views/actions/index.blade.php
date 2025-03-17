@@ -25,12 +25,13 @@
         @can('create-action', $group)
             <div class="mb-4">
                 <a class="btn btn-primary" href="{{ route('groups.actions.create', $group) }}">
-                    {{ trans('action.create_one_button') }}
+                    {{ trans('messages.create_action') }}
                 </a>
             </div>
         @endcan
-        <div class="js-calendar" id="calendar" data-json="{{ route('groups.actions.index.json', $group) }}"
-            data-locale="{{ App::getLocale() }}" data-create-url="{{ route('groups.actions.create', $group) }}"></div>
+        <div class="js-calendar" data-create-url="{{ route('groups.actions.create', $group) }}"
+            data-json="{{ route('groups.actions.index.json', $group) }}" data-locale="{{ App::getLocale() }}"
+            id="calendar"></div>
     @endif
 
     @if ($type == 'list')

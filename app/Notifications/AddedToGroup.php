@@ -45,10 +45,10 @@ class AddedToGroup extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage())
-                    ->subject(trans('notification.you_have_been_added_to_the_group').' : "'.$this->group->name.'"')
-                    ->line(trans('notification.you_have_been_added_to_the_group').' : "'.$this->group->name.'"')
-                    ->action(trans('messages.visit_link'), route('groups.show', $this->group))
-                    ->line(trans('messages.thank_you'));
+            ->subject(trans('messages.you_have_been_added_to_the_group') . ' : "' . $this->group->name . '"')
+            ->line(trans('messages.you_have_been_added_to_the_group') . ' : "' . $this->group->name . '"')
+            ->action(trans('messages.visit_link'), route('groups.show', $this->group))
+            ->line(trans('messages.thank_you'));
     }
 
     /**
@@ -61,7 +61,7 @@ class AddedToGroup extends Notification
     public function toArray($notifiable)
     {
         return [
-          'group' => $this->group->toArray(),
+            'group' => $this->group->toArray(),
         ];
     }
 }

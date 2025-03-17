@@ -85,7 +85,7 @@ return [
     'select'          => 'Sélectionner',
     'select_all'      => 'Sélectionner tout',
     'send'            => 'Envoyer',
-    'settings'        => 'Préférences',
+    'settings'        => 'Paramètres',
     'show'            => 'Montrer',
     'show_all'        => 'Tout afficher',
     'sign_in'         => 'S\'inscrire',

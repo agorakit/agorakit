@@ -3,13 +3,15 @@
         @if (isset($group))
             <div class="d-flex justify-content-between mb-2">
                 @can('create-action', $group)
-                    <a class="btn btn-primary" href="{{ route('groups.actions.create', $group) }}" >
-                        {{ trans('action.create_one_button') }}
+                    <a class="btn btn-primary" href="{{ route('groups.actions.create', $group) }}">
+                        {{ trans('messages.create_action') }}
                     </a>
                 @endcan
 
-                <form role="search" method="GET" action="{{ route('groups.actions.index', $group) }}" up-autosubmit up-watch-delay="500" up-target=".actions">
-                    <input class="form-control" name="search" type="text" value="{{ Request::get('search') }}" aria-label="Search" placeholder="{{ __('messages.search') }}...">
+                <form action="{{ route('groups.actions.index', $group) }}" method="GET" role="search" up-autosubmit
+                    up-target=".actions" up-watch-delay="500">
+                    <input aria-label="Search" class="form-control" name="search"
+                        placeholder="{{ __('messages.search') }}..." type="text" value="{{ Request::get('search') }}">
                 </form>
 
             </div>

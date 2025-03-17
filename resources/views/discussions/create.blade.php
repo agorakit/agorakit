@@ -8,7 +8,7 @@
 
     <div class="tab_content">
 
-        <h1>{{ trans('discussion.create_one_button') }}</h1>
+        <h1>{{ trans('messages.create_discussion') }}</h1>
 
         @if (!$group->exists)
             {!! Form::open(['route' => 'discussions.store', 'files' => true]) !!}

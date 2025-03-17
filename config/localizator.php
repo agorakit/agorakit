@@ -27,7 +27,7 @@ return [
         /**
          * Directories which should be looked inside.
          */
-        'dirs'      => ['resources/views', 'app/Http/Controllers'],
+        'dirs'      => ['resources/views', 'app'],
 
         /**
          * Subdirectories which will be excluded.
