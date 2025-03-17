@@ -196,6 +196,7 @@ return [
     'ressource_not_updated_successfully'             => 'Ressource niet succesvol bijgewerkt',
     'ressource_updated_successfully'                 => 'Inhoud met succes bewerkt',
     'root'                                           => 'Wortel',
+    'rss'                                            => 'RSS-feed',
     'save'                                           => 'Opslaan',
     'search'                                         => 'Zoeken',
     'select_one_file'                                => 'Selecteer een bestand',

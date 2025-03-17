@@ -196,6 +196,7 @@ return [
     'ressource_not_updated_successfully'             => 'Не удалось обновить ресурс',
     'ressource_updated_successfully'                 => 'Ресурс успешно обновлен',
     'root'                                           => 'Корень',
+    'rss'                                            => 'RSS-канал',
     'save'                                           => 'Сохранить',
     'search'                                         => 'Поиск',
     'select_one_file'                                => 'Выбрать один файл',

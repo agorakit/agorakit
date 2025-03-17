@@ -197,6 +197,7 @@ return [
     'ressource_not_updated_successfully'             => 'La ressource n\'a pas été mise à jour suite à une erreur. Vérifiez votre formulaire',
     'ressource_updated_successfully'                 => 'Contenu mis à jour avec succès',
     'root'                                           => 'Racine',
+    'rss'                                            => 'Flux RSS',
     'save'                                           => 'Enregistrer',
     'search'                                         => 'Rechercher',
     'select_one_file'                                => 'Sélectionnez un fichier',

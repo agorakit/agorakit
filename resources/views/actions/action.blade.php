@@ -7,23 +7,25 @@
     @endif
 
     <div class="card-body">
-        <div class="d-flex mb-2 align-items-center ">
-            <div class="me-md-2 me-1">
-                <div class="action-date">
-                    <div class="fw-bold -mb-2">{{ $action->start->format('d') }}</div>
-                    <div class="">{{ $action->start->isoFormat('MMM') }}</div>
-                </div>
-            </div>
-
-            <div class="flex-fill text-truncate">
-                <div class="text-truncate d-flex flex-wrap gap-1">
-                    <a class="text-truncate d-block fw-bold fs-3" href="{{ route('groups.actions.show', [$action->group, $action]) }}">
-                        {{ $action->name }}
-                    </a>
-                </div>
-            </div>
+        <h5 class="card-title d-flex justify-content-between align-items-center">
+            <a href="{{ route('groups.actions.show', [$action->group, $action]) }}">
+                {{ $action->name }}
+            </a>
             @include('actions.dropdown')
-        </div>
+
+        </h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">
+            {{ $action->start->format('d') }}
+            {{ $action->start->isoFormat('MMM') }}
+
+            @if ($action->start->format('d') != $action->stop->format('d'))
+                -
+                {{ $action->stop->format('d') }}
+                {{ $action->stop->isoFormat('MMM') }}
+            @endif
+        </h6>
+
+
 
         <div class="mb-2">
             {{ summary($action->body) }}
