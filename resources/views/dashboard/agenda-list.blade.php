@@ -17,7 +17,7 @@
 
 
     @if ($actions->count() > 0)
-        <div class="actions mt-4">
+        <div class="actions mb-4">
             @include('actions.list', ['actions' => $actions])
         </div>
         {{ $actions->render() }}

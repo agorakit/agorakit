@@ -38,9 +38,10 @@
                 @endif
             </div>
             <div>
-                <i class="fa fa-clock-o me-1"></i> {{ $action->start->format('H:i') }}
+                <i class="fa fa-clock-o me-1"></i>
+                {{ $action->start->isoFormat('LT') }}
                 @if ($action->stop > $action->start)
-                    - {{ $action->stop->format('H:i') }}
+                    - {{ $action->stop->isoFormat('LT') }}
                 @endif
             </div>
 
@@ -58,7 +59,16 @@
             @endif
         </div>
 
+
         <div id="participate-{{ $action->id }}">
+
+            @can('participate', $action)
+                <div class="mb-2">
+                    @include('participation.dropdown')
+                </div>
+            @endcan
+
+
             @if ($action->attending->count() > 0)
                 <div class="avatar-list avatar-list-stacked">
                     @foreach ($action->attending as $user)
@@ -67,11 +77,7 @@
                 </div>
             @endif
 
-            @can('participate', $action)
-                <div class="mt-2">
-                    @include('participation.dropdown')
-                </div>
-            @endcan
+
         </div>
     </div>
 
