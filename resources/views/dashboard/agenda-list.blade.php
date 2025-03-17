@@ -5,15 +5,16 @@
         @include('dashboard.tabs')
     </div>
 
-    <div class="d-flex flex-wrap gap-2 justify-content-between mb-2">
+    <div class="d-md-flex gap-2 align-items-center justify-content-between mb-2">
+        <div class="mb-2">
+            @include('partials.preferences-calendar')
+        </div>
         <a class="btn btn-primary" href="{{ route('actions.create') }}">
-            <span class="hidden md:inline ml-2">
-                {{ trans('messages.create_action') }}
-            </span>
+            {{ trans('messages.create_action') }}
         </a>
     </div>
 
-    @include('partials.preferences-calendar')
+
 
     @if ($actions->count() > 0)
         <div class="actions mt-4">
