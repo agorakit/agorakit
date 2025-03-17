@@ -16,8 +16,8 @@
 
 <div class="mb-4 js-map" data-json-url="{{ $json }}" id="mapid"></div>
 
-<span class="badge" style="background-color: #8dc91e;">Group</span>
+<span class="badge" style="color: white; background-color: #8dc91e;">{{trans('messages.groups')}}</span>
 
-<span class="badge" style="background-color: #1e60c9">User</span>
+<span class="badge" style="color: white; background-color: #1e60c9">{{trans('messages.users')}}</span>
 
-<span class="badge" style="background-color: #871ec9">Action</span>
+<span class="badge" style="color: white; background-color: #871ec9">{{trans('messages.actions')}}</span>
