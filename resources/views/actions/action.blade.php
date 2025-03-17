@@ -1,4 +1,4 @@
-<div class="card card-sm" id="action-{{ $action->id }}" up-expand>
+<div class="card card-sm h-100" id="action-{{ $action->id }}" up-expand>
 
     @if ($action->hasCover())
         <img alt="action cover" class="card-img-top" src="{{ route('actions.cover', [$action, 'medium']) }}" />
@@ -16,13 +16,10 @@
 
         </h5>
         <h6 class="card-subtitle mb-2 text-body-secondary">
-            {{ $action->start->format('d') }}
-            {{ $action->start->isoFormat('MMM') }}
-
+            {{ $action->start->isoFormat('ll') }}
             @if ($action->start->format('d') != $action->stop->format('d'))
                 -
-                {{ $action->stop->format('d') }}
-                {{ $action->stop->isoFormat('MMM') }}
+                {{ $action->stop->isoFormat('ll') }}
             @endif
         </h6>
 
