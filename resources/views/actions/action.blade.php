@@ -7,8 +7,8 @@
     @endif
 
 
-    <div class="card-body">
-        <h5 class="card-title d-flex justify-content-between align-items-center">
+    <div class="card-body d-flex flex-column">
+        <h5 class="card-title d-flex justify-content-between">
             <a href="{{ route('groups.actions.show', [$action->group, $action]) }}">
                 {{ $action->name }}
             </a>
@@ -60,15 +60,7 @@
         </div>
 
 
-        <div id="participate-{{ $action->id }}">
-
-            @can('participate', $action)
-                <div class="mb-2">
-                    @include('participation.dropdown')
-                </div>
-            @endcan
-
-
+        <div class="mt-auto" id="participate-{{ $action->id }}">
             @if ($action->attending->count() > 0)
                 <div class="avatar-list avatar-list-stacked">
                     @foreach ($action->attending as $user)
@@ -76,8 +68,11 @@
                     @endforeach
                 </div>
             @endif
-
-
+            @can('participate', $action)
+                <div class="mt-3">
+                    @include('participation.dropdown')
+                </div>
+            @endcan
         </div>
     </div>
 
