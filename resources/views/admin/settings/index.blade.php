@@ -5,7 +5,7 @@
     {!! Form::open(['action' => 'Admin\SettingsController@update', 'files' => true]) !!}
 
     <div class="">
-        <h1>{{ __('Settings') }}</h1>
+        <h1>{{trans('messages.settings')}}</h1>
 
         <div class="mb-3">
             {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-primary']) !!}
@@ -18,32 +18,32 @@
         <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
                 <a class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#presentation" type="button"
-                    role="tab" aria-controls="home" aria-selected="true">Presentation & logo</a>
+                    role="tab" aria-controls="home" aria-selected="true">{{trans('messages.appearance')}}</a>
             </li>
 
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#permissions" type="button"
-                    role="tab" aria-controls="profile" aria-selected="false">Permissions</a>
+                    role="tab" aria-controls="profile" aria-selected="false">{{trans('messages.permissions')}}</a>
             </li>
 
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#notifications" type="button"
-                    role="tab" aria-controls="profile" aria-selected="false">Notifications</a>
+                    role="tab" aria-controls="profile" aria-selected="false">{{trans('messages.notifications')}}</a>
             </li>
 
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#custom" type="button"
-                    role="tab" aria-controls="profile" aria-selected="false">Custom content</a>
+                    role="tab" aria-controls="profile" aria-selected="false">{{trans('messages.custom_content')}}</a>
             </li>
 
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#tags" type="button"
-                    role="tab" aria-controls="profile" aria-selected="false">Tags</a>
+                    role="tab" aria-controls="profile" aria-selected="false">{{trans('messages.tags')}}</a>
             </li>
 
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#navbar-settings" type="button"
-                   role="tab" aria-controls="profile" aria-selected="false">Navigation bar</a>
+                   role="tab" aria-controls="profile" aria-selected="false">{{trans('messages.navigation')}}</a>
             </li>
         </ul>
     </div>

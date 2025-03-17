@@ -183,25 +183,25 @@
                         <div class="nav-item dropdown">
                             <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
                                 href="#" role="button">
-                                Admin & settings
+                                {{trans('messages.server_administration')}}
                             </a>
 
                             <div class="dropdown-menu" role="menu">
 
                                 <a class="dropdown-item" href="{{ url('/admin/settings') }}">
-                                    <i class="fa fa-cog me-2"></i> Settings
+                                    <i class="fa fa-cog me-2"></i> {{trans('messages.settings')}}
                                 </a>
 
                                 <a class="dropdown-item" href="{{ url('/admin/user') }}">
-                                    <i class="fa fa-users me-2"></i> Users
+                                    <i class="fa fa-users me-2"></i> {{trans('messages.users')}}
                                 </a>
 
                                 <a class="dropdown-item" href="{{ url('/admin/groupadmins') }}">
-                                    <i class="fa fa-users me-2"></i> Group admins
+                                    <i class="fa fa-users me-2"></i> {{trans('messages.group_admins')}}
                                 </a>
 
                                 <a class="dropdown-item" href="{{ url('/admin/undo') }}">
-                                    <i class="fa fa-trash me-2"></i> Recover content
+                                    <i class="fa fa-trash me-2"></i> {{trans('messages.recover_content')}}
                                 </a>
 
                                 <a class="dropdown-item" href="{{ action('Admin\InsightsController@index') }}"
@@ -210,7 +210,7 @@
                                 </a>
 
                                 <a class="dropdown-item" href="{{ url('/admin/logs') }}" up-follow="false">
-                                    <i class="fa fa-keyboard-o me-2"></i> Logs
+                                    <i class="fa fa-keyboard-o me-2"></i> {{trans('messages.logs')}}
                                 </a>
                             </div>
                         </div>
