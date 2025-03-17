@@ -196,6 +196,7 @@ return [
     'ressource_not_updated_successfully'             => 'Resource non aggiornata',
     'ressource_updated_successfully'                 => 'Risorsa aggiornate con successo',
     'root'                                           => 'Root',
+    'rss'                                            => 'Feed RSS',
     'save'                                           => 'Salva',
     'search'                                         => 'Cerca',
     'select_one_file'                                => 'Seleziona un file',

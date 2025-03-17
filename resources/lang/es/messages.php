@@ -196,6 +196,7 @@ Introduzca una URL correcta comenzando por http:// y establezca un título para 
     'ressource_not_updated_successfully'             => 'Recurso no actualizado correctamente',
     'ressource_updated_successfully'                 => 'Recurso actualizado con éxito',
     'root'                                           => 'Raíz',
+    'rss'                                            => 'Canal RSS',
     'save'                                           => 'Guardar',
     'search'                                         => 'Buscar',
     'select_one_file'                                => 'Seleccione un archivo',
