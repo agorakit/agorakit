@@ -20,7 +20,7 @@
 
     </div>
 
-    <div class="users">
+    <div class="mt-4 row row-cards gap-3">
         @if ($users)
             @foreach ($users as $user)
                 @include('users.user')
