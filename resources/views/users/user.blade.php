@@ -1,4 +1,4 @@
- <div class="col-sm-6 col-lg-4">
+ <div class="col-sm-4 col-lg-3">
      <div class="card h-100" up-expand>
          <div class="card-body p-4 text-center">
              <div class="">
