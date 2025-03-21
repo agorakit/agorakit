@@ -254,7 +254,7 @@
                             {{ trans('messages.profile') }} ({{ Auth::user()->name }})
                         </a>
 
-                        <div class="dropdown-menu" role="menu">
+                        <div class="dropdown-menu dropdown-menu-end" role="menu">
                             <a class="dropdown-item" href="{{ route('users.show', Auth::user()) }}"><i
                                     class="fa fa-btn fa-user me-2"></i>
                                 {{ trans('messages.profile') }}</a>
