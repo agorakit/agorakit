@@ -366,19 +366,17 @@ class Group extends Model
      */
     public function getNamedLocations()
     {
-        $named_locations = [];
-        $this->getLocationData();
-        if ($this->location_data['name']) {
-         $named_locations[] = $this->location_data;
+        $arr = [];
+        if ($this->location->name) {
+         $arr[$this->location->name] = $this->location;
         }
         foreach ($this->actions()->get() as $action) {
-          $action->getLocationData();
-          if ($action->location_data['name']) {
-            $named_locations[] = $action->location_data;
+          if ($action->location->name) {
+            $arr[$action->location->name] = $action->location;
           }
         }
-        // FIXME unique sort by name
+        ksort($arr);
 
-        return $named_locations;
+        return array_values($arr);
     }
 }

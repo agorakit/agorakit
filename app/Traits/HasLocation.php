@@ -2,7 +2,9 @@
 
 namespace App\Traits;
 
+use App\Casts\LocationFromJson;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 
 /**
  * This trait allows any model to have a location (ie geographical address)
@@ -20,26 +22,14 @@ use Illuminate\Http\Request;
  */
 trait HasLocation
 {
-    private $location_specs = ["name", "street", "city", "county", "country"];
+    private $location_keys = ["name", "street", "city", "county", "country"];
 
     /**
-     * Get location data from database `location` field
+     * Cast location from database JSON field
      */
-    public function getLocationData()
+    protected function casts(): array
     {
-        // Default value
-        $location_data = [];
-        // Decoding the JSON field
-        if (!$location_data = json_decode($this->location, true)) {
-          // This is probably an old `location` field, so we convert
-          $location_data = ["street" => $this->location];
-        }
-        foreach($this->location_specs as $key) {
-          if (!array_key_exists($key, $location_data)) {
-            $location_data[$key] = null;
-            }
-        }
-        $this->location_data = $location_data;
+        return ['location' => LocationFromJson::class];
     }
 
     /**
@@ -58,21 +48,18 @@ trait HasLocation
         return ['latitude' => $this->{'latitude'}, 'longitude' => $this->{'longitude'}];
     }
 
-    function geocode($location_data)
+    function geocode()
     {
-        if (is_string($location_data)) {
-            $location_data = json_decode($location_data, true);
-        }
-        if (!$location_data) {
+        if (!$this->location) {
             $this->latitude = 0;
             $this->longitude = 0;
             return true;
         }
         $geoline = [];
-        foreach ($location_data as $key => $val) {
+        foreach (get_object_vars($this->location) as $key => $val) {
             if ($key == 'name') {}
-            else if ($key == 'county' && array_key_exists('country', $location_data)) {
-              $geoline[] = $this->parse_county($val, $location_data['country']);
+            else if ($key == 'county' && $this->location->country) {
+              $geoline[] = $this->parse_county($val, $this->location->country);
             }
             else {
               $geoline[] = $val;
@@ -93,12 +80,12 @@ trait HasLocation
      * Parse `county` input from the request, for some specific cases.
      * At the moment: French departement codes only.
      */
-    function parse_county($county, $country_code)
+    function parse_county($county, $country)
     {
      if (!is_numeric($county)) {
        return $county;
      }
-     if ($country_code <> 'FR') {
+     if (strtolower($country) <> 'fr' && strtolower($country) <> "france") {
        return $county;
      }
      if (str_len($county) < 4) { // French departement 2 or 3-digits code
@@ -114,15 +101,14 @@ trait HasLocation
      */
     public function location_display($format="short")
     {
-        $this->getLocationData();
         $parts = [];
-        foreach($this->location_specs as $key) {
-           if (array_key_exists($key, $this->location_data) && $this->location_data[$key]) {
+        foreach($this->location_specs as $attr) {
+           if ($this->location->$attr) {
             if ($format == "short" && $key == 'street') {
-              $parts[] = substr($this->location_data[$key], 0, 30);
+              $parts[] = substr($this->location->$attr, 0, 30);
               }
             else {
-              $parts[] = $this->location_data[$key];
+              $parts[] = $this->location->$attr;
             }
           }
         }

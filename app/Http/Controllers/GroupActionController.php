@@ -100,7 +100,7 @@ class GroupActionController extends Controller
         foreach ($actions as $action) {
             $event['id'] = $action->id;
             $event['title'] = $action->name . ' (' . $action->group->name . ')';
-            $event['description'] = strip_tags(summary($action->body)) . ' <br/> ' . $action->location;
+            $event['description'] = strip_tags(summary($action->body)) . ' <br/> ' . $action->display_location();
             $event['body'] = strip_tags(summary($action->body));
             $event['summary'] = strip_tags(summary($action->body));
 
@@ -113,7 +113,7 @@ class GroupActionController extends Controller
             }
 
 
-            $event['location'] = $action->location;
+            $event['location'] = $action->display_location();
             $event['start'] = $action->start->toIso8601String();
             $event['end'] = $action->stop->toIso8601String();
             $event['url'] = route('groups.actions.show', [$action->group, $action]);
@@ -162,16 +162,27 @@ class GroupActionController extends Controller
             }
         }
 
-
         if ($request->get('title')) {
             $action->name = $request->get('title');
         }
 
-        $action->getLocationData();
+        if ($request->get('location')) {
+            $action->location = $request->get('location');
+        }
+        else {
+            $action->location = new \stdClass();
+            $location_keys = ["name", "street", "city", "county", "country"];
+            foreach($location_keys as $key) {
+              if (!property_exists($action->location, $key)) {
+                $action->location->$key = "";
+            }
+          }
+        }
+
         $action->group()->associate($group);
         $listed_locations = [];
         foreach ($group->getNamedLocations() as $location) {
-          $listed_locations[] = $location['name'];
+          $listed_locations[$location->id] = $location->name;
         }
 
         return view('actions.create')
@@ -238,24 +249,22 @@ class GroupActionController extends Controller
         }
 
         if ($request->get('location')) {
-	  // FIXME push this code to Traits/HasLocation.php
-          $location_data = $request->input('location');
-
-	    // Try to JSON encode
-            if (!$new_location = json_encode($location_data, JSON_UNESCAPED_UNICODE)) {
-                flash(trans('Invalid location'));
+            // Validate input
+            try {
+                $action->location = $request->input('location');
+            } catch (\Exception $e) {
+            return redirect()->route('groups.actions.create', $group)
+              ->withErrors($e->getMessage() . '. Incorrect location')
+              ->withInput();
             }
-	    else if ($new_location <> $action->location) {
-              $action->location = $new_location;
 
-              // Try to geocode
-              if (!$action->geocode($location_data)) {
-                  flash(trans('messages.location_cannot_be_geocoded'));
-              } else {
-                  flash(trans('messages.ressource_geocoded_successfully'));
-              }
-	    }
-          }
+            // Geocode
+            if (!$action->geocode()) {
+                flash(trans('messages.location_cannot_be_geocoded'));
+            } else {
+                flash(trans('messages.ressource_geocoded_successfully'));
+            }
+        }
 
         $action->user()->associate($request->user());
 
@@ -328,7 +337,6 @@ class GroupActionController extends Controller
     public function edit(Request $request, Group $group, Action $action)
     {
         $this->authorize('update', $action);
-	$action->getLocationData();
 
         return view('actions.edit')
             ->with('action', $action)
@@ -362,19 +370,24 @@ class GroupActionController extends Controller
             $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
         }
 
-        $location_data = $request->input('location');
-        // FIXME validation : for security + for charset + for a valid JSON
-        if (!$new_location = json_encode($location_data, JSON_UNESCAPED_UNICODE)) {
-            flash(trans('Invalid location'));
-        }
+        if ($request->get('location')) {
+            $old_location = $action->location;
+            // Validate input
+            try {
+                $action->location = $request->input('location');
+            } catch (\Exception $e) {
+            return redirect()->route('groups.actions.create', $action)
+              ->withErrors($e->getMessage() . '. Incorrect location')
+              ->withInput();
+            }
 
-        if ($action->location != $new_location) {
-            // we need to update action location and geocode it
-            $action->location = $new_location;
-            if (!$action->geocode($location_data)) {
-                flash(trans('messages.location_cannot_be_geocoded'));
-            } else {
-                flash(trans('messages.ressource_geocoded_successfully'));
+            // Geocode
+            if ($action->location <> $old_location) {
+              if (!$action->geocode()) {
+                  flash(trans('messages.location_cannot_be_geocoded'));
+              } else {
+                  flash(trans('messages.ressource_geocoded_successfully'));
+              }
             }
         }
 
