@@ -182,7 +182,7 @@ class GroupActionController extends Controller
         $action->group()->associate($group);
         $listed_locations = [];
         foreach ($group->getNamedLocations() as $location) {
-          $listed_locations[$location->id] = $location->name;
+          $listed_locations[$location->name] = $location->name . " (" . $location->city . ")";
         }
 
         return view('actions.create')
