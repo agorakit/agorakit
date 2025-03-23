@@ -102,7 +102,7 @@ trait HasLocation
     public function location_display($format="short")
     {
         $parts = [];
-        foreach($this->location_specs as $attr) {
+        foreach($this->location_keys as $attr) {
            if ($this->location->$attr) {
             if ($format == "short" && $key == 'street') {
               $parts[] = substr($this->location->$attr, 0, 30);

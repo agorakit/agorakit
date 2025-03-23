@@ -328,18 +328,18 @@ class GroupController extends Controller
         }
 
         if ($request->get('location')) {
-            $old_location = $action->location;
+            $old_location = $group->location;
             // Validate input
             try {
-                $action->location = $request->input('location');
+                $group->location = $request->input('location');
                 } catch (\Exception $e) {
-                return redirect()->route('groups.actions.create', $group)
+                return redirect()->route('groups.create', $group)
                  ->withErrors($e->getMessage() . '. Invalid location')
                  ->withInput();
             }
             if ($group->location <> $old_location) {
               // Try to geocode
-              if (!$action->geocode()) {
+              if (!$group->geocode()) {
                   flash(trans('messages.location_cannot_be_geocoded'));
               } else {
                   flash(trans('messages.ressource_geocoded_successfully'));
