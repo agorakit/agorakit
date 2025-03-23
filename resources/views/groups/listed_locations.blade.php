@@ -13,11 +13,12 @@
         <div class="small-help">
             <i class="fas fa-info-circle"></i>
             {{ trans('messages.group_locations_help') }} :
-	    <li>
             @foreach ($listed_locations as $location)
-                <ul>{{ $location['name'] }}</ul>
+                <label class="form-check form-switch" for="{{ $location->name }}">
+                  <input checked=checked class="form-check-input" id="" name="{{ $location->name }}" type="checkbox">
+             <span>{{ $location->name }} ( {{ $location->city }})</span>
+    </label>
             @endforeach
-	    </li>
         </div>
     @endif
 

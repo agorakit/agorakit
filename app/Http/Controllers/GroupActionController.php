@@ -191,7 +191,7 @@ class GroupActionController extends Controller
             ->with('group', $group)
             ->with('allowedTags', $action->getTagsInUse())
             ->with('newTagsAllowed', $action->areNewTagsAllowed())
-            ->with('listedLocationOptions', $listed_locations)
+            ->with('listedLocations', $listed_locations)
             ->with('tab', 'action');
     }
 
@@ -337,6 +337,10 @@ class GroupActionController extends Controller
     public function edit(Request $request, Group $group, Action $action)
     {
         $this->authorize('update', $action);
+        $listed_locations = [];
+        foreach ($group->getNamedLocations() as $location) {
+          $listed_locations[$location->name] = $location->name . " (" . $location->city . ")";
+        }
 
         return view('actions.edit')
             ->with('action', $action)
@@ -345,6 +349,7 @@ class GroupActionController extends Controller
             ->with('allowedTags', $action->getAllowedTags())
             ->with('newTagsAllowed', $action->areNewTagsAllowed())
             ->with('selectedTags', $action->getSelectedTags())
+            ->with('listedLocations', $listed_locations)
             ->with('tab', 'action');
     }
 
