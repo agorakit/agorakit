@@ -41,14 +41,6 @@
 
 @include('partials.tags_input')
 
-<div class="small-help">
-    <i class="fas fa-info-circle"></i>
-    {{trans('messages.listed_location')}}
-</div>
-{!! Form::label('listed_location', trans('Will this event take place in one of these locations?') . ':') !!}
-{!! Form::select('listed_location', $listedLocationOptions, null, ['class' => 'form-control mb-4']) !!}
-
-
 <div class="form-group">
 @include('partials.location_input')
 </div>

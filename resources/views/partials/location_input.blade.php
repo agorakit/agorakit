@@ -1,3 +1,13 @@
+@if (is_a($model, "App\Action"))
+    <div class="small-help">
+        <i class="fas fa-info-circle"></i>
+        {{trans('messages.listed_location')}}
+    </div>
+    {!! Form::label('listed_location', trans('Will this event take place in one of these locations?') . ':') !!}
+    {!! Form::select('listed_location', $listedLocationOptions, null, ['class' => 'form-control mb-4']) !!}
+    <p><strong>{{ trans('Otherwise please enter the venue here:') }}</strong></p>
+@endif
+
     <div class="small-help">
         <i class="fas fa-info-circle"></i>
         {{trans('messages.location_privacy_and_help')}}
