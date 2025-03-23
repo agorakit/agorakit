@@ -112,7 +112,7 @@ class SettingsController extends Controller
             }
         }
 
-        flash('Settings saved');
+        flash(__('messages.success'));
 
         return view('admin.settings.index', compact('overviewItems'));
     }

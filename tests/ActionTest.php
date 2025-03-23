@@ -81,11 +81,11 @@ class ActionTest extends Tests\BrowserKitTestCase
             ->type('9:00', 'stop_time')
             ->press('Create')
             ->seeInDatabase('actions', [
-            'name' => 'Test action with definite end',
-            'start' => '2026-01-01 12:00:00',
-            'stop' => '2026-01-03 09:00:00'
+                'name' => 'Test action with definite end',
+                'start' => '2026-01-01 12:00:00',
+                'stop' => '2026-01-03 09:00:00'
             ])
-            ->see(trans('action.create_one_button'));
+            ->see(trans('messages.create_action'));
     }
 
     public function testActionWithWrongStopTimeCreation()
@@ -105,7 +105,7 @@ class ActionTest extends Tests\BrowserKitTestCase
             ->type('9:00', 'stop_time')
             ->press('Create')
             ->dontSeeInDatabase('actions', [
-            'name' => 'Test action with wrong stop time'
+                'name' => 'Test action with wrong stop time'
             ]);
     }
 
@@ -126,11 +126,11 @@ class ActionTest extends Tests\BrowserKitTestCase
             ->type('17:00', 'stop_time')
             ->press('Create')
             ->seeInDatabase('actions', [
-            'name' => 'Test action without stop date',
-            'start' => '2026-01-01 12:00:00',
-            'stop' => '2026-01-01 17:00:00'
+                'name' => 'Test action without stop date',
+                'start' => '2026-01-01 12:00:00',
+                'stop' => '2026-01-01 17:00:00'
             ])
-            ->see(trans('action.create_one_button'));
+            ->see(trans('messages.create_action'));
     }
 
     public function testActionWithoutStopTimeCreation()
@@ -150,10 +150,11 @@ class ActionTest extends Tests\BrowserKitTestCase
             ->type('2026-01-03', 'stop_date')
             ->press('Create')
             ->seeInDatabase('actions', [
-            'name' => 'Test action without stop time',
-            'start' => '2026-01-01 12:00:00',
-            'stop' => '2026-01-03 12:00:00'])
-            ->see(trans('action.create_one_button'));
+                'name' => 'Test action without stop time',
+                'start' => '2026-01-01 12:00:00',
+                'stop' => '2026-01-03 12:00:00'
+            ])
+            ->see(trans('messages.create_action'));
     }
 
     public function testActionWithUnknownEnd()
@@ -172,8 +173,8 @@ class ActionTest extends Tests\BrowserKitTestCase
             ->type('12:00', 'start_time')
             ->press('Create')
             ->seeInDatabase('actions', [
-            'name' => 'Test action with unknown end'
+                'name' => 'Test action with unknown end'
             ])
-            ->see(trans('action.create_one_button'));
+            ->see(trans('messages.create_action'));
     }
 }

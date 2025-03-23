@@ -1,7 +1,7 @@
 @extends('group')
 @section('content')
 
-    <h1>{{ trans('action.create_one_button') }}</h1>
+    <h1>{{ trans('messages.create_action') }}</h1>
 
     @if (!$group->exists)
         {!! Form::open(['route' => 'actions.store', 'files' => true]) !!}
@@ -9,7 +9,7 @@
         <div class="form-group">
             {!! Form::label('group', trans('messages.group')) !!}
             <select class="form-control" name="group" required="required">
-                <option value="" disabled selected>{{ trans('messages.choose_a_group') }}</option>
+                <option disabled selected value="">{{ trans('messages.choose_a_group') }}</option>
                 @foreach (Auth::user()->groups as $user_group)
                     <option value="{{ $user_group->id }}">{{ $user_group->name }}</option>
                 @endforeach

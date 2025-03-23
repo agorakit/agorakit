@@ -1,84 +1,79 @@
-<div class="mb-md-4 pb-md-4 mb-3 pb-3 border-bottom flex-grow" id="action-{{ $action->id }}" up-expand>
+<div class="card card-sm h-100" id="action-{{ $action->id }}" up-expand>
 
-    <div class="d-flex mb-2 align-items-center ">
-        <div class="me-md-2 me-1">
-            <div class="action-date">
-                <div class="fw-bold -mb-2">{{ $action->start->format('d') }}</div>
-                <div class="">{{ $action->start->isoFormat('MMM') }}</div>
-            </div>
+    @if ($action->hasCover())
+        <img alt="action cover" class="card-img-top" src="{{ route('actions.cover', [$action, 'medium']) }}" />
+    @else
+        <img alt="" class="card-img-top" src="/images/group.svg" />
+    @endif
+
+
+    <div class="card-body d-flex flex-column">
+        <h5 class="card-title d-flex justify-content-between">
+            <a href="{{ route('groups.actions.show', [$action->group, $action]) }}">
+                {{ $action->name }}
+            </a>
+            @include('actions.dropdown')
+
+        </h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">
+            {{ $action->start->isoFormat('ll') }}
+            @if ($action->start->format('d') != $action->stop->format('d'))
+                -
+                {{ $action->stop->isoFormat('ll') }}
+            @endif
+        </h6>
+
+
+
+        <div class="mb-2">
+            {{ summary($action->body) }}
         </div>
 
-        <div class="flex-fill text-truncate">
-            <div class="text-truncate d-flex flex-wrap gap-1">
-                <a class="text-truncate d-block fw-bold fs-3"
-                    href="{{ route('groups.actions.show', [$action->group, $action]) }}">
-                    {{ $action->name }}
-                </a>
+        <div class="text-meta text-truncate mb-2">
+            <div>
+                @if ($action->isPublic())
+                    <i class="fa fa-eye me-1"></i>{{ trans('messages.public') }}
+                @elseif ($action->isPrivate())
+                    <i class="fa fa-eye me-1"></i>{{ trans('messages.private') }}
+                @endif
             </div>
-        </div>
-        @include('actions.dropdown')
-    </div>
-
-    <div class="row">
-
-        @if ($action->hasCover())
-            <div class="col-12 col-sm-5 col-md-4 mb-2 order-sm-2">
-                <img alt="action cover" class="rounded" src="{{ route('actions.cover', [$action, 'large']) }}" />
-            </div>
-        @endif
-
-        <div class="col-12 col-sm-7 col-md-8">
-            <div class="mb-2">
-                {{ summary($action->body) }}
+            <div>
+                <i class="fa fa-clock-o me-1"></i>
+                {{ $action->start->isoFormat('LT') }}
+                @if ($action->stop > $action->start)
+                    - {{ $action->stop->isoFormat('LT') }}
+                @endif
             </div>
 
-            <div class="text-meta text-truncate mb-2">
+            @if ($action->location)
                 <div>
-                    @if ($action->isPublic())
-                        <i class="fa fa-eye me-1"></i>{{ trans('messages.public') }}
-                    @elseif ($action->isPrivate())
-                        <i class="fa fa-eye me-1"></i>{{ trans('messages.private') }}
-                    @endif
+                    <i class="fa fa-map-marker me-1"></i> {{ $action->location }}
                 </div>
+            @endif
+
+            @if ($action->attending->count() > 0)
                 <div>
-                    <i class="fa fa-clock-o me-1"></i> {{ $action->start->format('H:i') }}
-                    @if ($action->stop > $action->start) - {{ $action->stop->format('H:i') }}
-                    @endif
+                    <i class="fa fa-users me-1"></i> {{ $action->attending->count() }}
+                    {{ trans('participants') }}
                 </div>
-
-                @if ($action->location)
-                    <div>
-                        <i class="fa fa-map-marker me-1"></i> {{ $action->location_display() }}
-                    </div>
-                @endif
-
-                @if ($action->attending->count() > 0)
-                    <div>
-                        <i class="fa fa-users me-1"></i> {{ $action->attending->count() }}
-                        {{ trans('participants') }}
-                    </div>
-                @endif
-            </div>
-
-
-
-            <div id="participate-{{ $action->id }}">
-                @if ($action->attending->count() > 0)
-                    <div class="avatar-list avatar-list-stacked">
-                        @foreach ($action->attending as $user)
-                            @include('users.avatar')
-                        @endforeach
-                    </div>
-                @endif
-
-                @can('participate', $action)
-                    <div class="mt-2">
-                        @include('participation.dropdown')
-                    </div>
-                @endcan
-            </div>
+            @endif
         </div>
 
+
+        <div class="mt-auto" id="participate-{{ $action->id }}">
+            @if ($action->attending->count() > 0)
+                <div class="avatar-list avatar-list-stacked">
+                    @foreach ($action->attending as $user)
+                        @include('users.avatar')
+                    @endforeach
+                </div>
+            @endif
+            @can('participate', $action)
+                <div class="mt-3">
+                    @include('participation.dropdown')
+                </div>
+            @endcan
+        </div>
     </div>
 
 </div>

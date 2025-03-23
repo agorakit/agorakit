@@ -5,18 +5,17 @@
         @include('dashboard.tabs')
     </div>
 
-    <div class="d-flex flex-wrap gap-2 justify-content-between mb-2">
+    <div class="d-md-flex gap-2 align-items-center justify-content-between mb-2">
+        <div class="mb-2">
+            @include('partials.preferences-calendar')
+        </div>
         <a class="btn btn-primary" href="{{ route('actions.create') }}">
-            <span class="hidden md:inline ml-2">
-                {{ trans('action.create_one_button') }}
-            </span>
+            {{ trans('messages.create_action') }}
         </a>
     </div>
 
-    @include('partials.preferences-calendar')
-
-    <div class="mt-5 js-calendar" id="calendar" data-json="{{ action('ActionController@indexJson') }}"
-        data-locale="{{ App::getLocale() }}" data-create-url="/actions/create"></div>
+    <div class="mt-5 js-calendar" data-create-url="/actions/create" data-json="{{ action('ActionController@indexJson') }}"
+        data-locale="{{ App::getLocale() }}" id="calendar"></div>
 
     @include('dashboard.ical')
 @endsection

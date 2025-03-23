@@ -10,7 +10,8 @@
 
             <div class="flex-grow-1">
                 <div class="summary">
-                    <a class="fw-bold" href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}#unread">
+                    <a class="fw-bold"
+                        href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}#unread">
                         {{ $discussion->name }}
                         @if ($discussion->isArchived())
                             [{{ __('Archived') }}]
@@ -37,7 +38,7 @@
             @endif
             <div>
                 @if ($discussion->unReadCount() > 0)
-                    <span class="badge bg-primary rounded-pill">
+                    <span class="badge badge-pill bg-blue-lt">
                         {{ $discussion->unReadCount() }}
                     </span>
                 @endif
