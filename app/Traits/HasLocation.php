@@ -88,7 +88,7 @@ trait HasLocation
      if (strtolower($country) <> 'fr' && strtolower($country) <> "france") {
        return $county;
      }
-     if (str_len($county) < 4) { // French departement 2 or 3-digits code
+     if (strlen($county) < 4) { // French departement 2 or 3-digits code
        return "FR-" . $county;  // ISO 3166-2
      }
      return $county;
