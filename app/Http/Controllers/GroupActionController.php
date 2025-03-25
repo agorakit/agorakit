@@ -167,6 +167,19 @@ class GroupActionController extends Controller
             $action->name = $request->get('title');
         }
 
+        if ($request->has('location')) {
+            $action->location = $request->input('location');
+        }
+        else {
+            $action->location = new \stdClass();
+            $location_keys = ["name", "street", "city", "county", "country"];
+            foreach($location_keys as $key) {
+              if (!property_exists($action->location, $key)) {
+                $action->location->$key = "";
+            }
+          }
+        }
+
         $action->group()->associate($group);
 
         return view('actions.create')
@@ -231,14 +244,21 @@ class GroupActionController extends Controller
                 ->withInput();
         }
 
-        // handle location
         if ($request->has('location')) {
-            $action->setLocationFromRequest($request);
-            // Try to geocode
-            if ($action->geocode()) {
-                flash(trans('messages.ressource_geocoded_successfully'));
-            } else {
+            // Validate input
+            try {
+                $action->location = $request->input('location');
+            } catch (\Exception $e) {
+            return redirect()->route('groups.actions.create', $group)
+              ->withErrors($e->getMessage() . '. Incorrect location')
+              ->withInput();
+            }
+
+            // Geocode
+            if (!$action->geocode()) {
                 flash(trans('messages.location_cannot_be_geocoded'));
+            } else {
+                flash(trans('messages.ressource_geocoded_successfully'));
             }
         }
 
@@ -349,14 +369,23 @@ class GroupActionController extends Controller
 
         // handle location
         if ($request->has('location')) {
-            $action->setLocationFromRequest($request);
-            // Try to geocode only if location changed (= attribute is dirty)
-            if ($action->isDirty('location')) {
-                if ($action->geocode()) {
-                    flash(trans('messages.ressource_geocoded_successfully'));
-                } else {
-                    flash(trans('messages.location_cannot_be_geocoded'));
-                }
+            $old_location = $action->location;
+            // Validate input
+            try {
+                $action->location = $request->input('location');
+            } catch (\Exception $e) {
+            return redirect()->route('groups.actions.create', $action)
+              ->withErrors($e->getMessage() . '. Incorrect location')
+              ->withInput();
+            }
+
+            // Geocode
+            if ($action->location <> $old_location) {
+              if (!$action->geocode()) {
+                  flash(trans('messages.location_cannot_be_geocoded'));
+              } else {
+                  flash(trans('messages.ressource_geocoded_successfully'));
+              }
             }
         }
 

@@ -166,6 +166,13 @@ class GroupController extends Controller
     {
         $this->authorize('create', Group::class);
         $group = new Group;
+        $group->location = new \stdClass();
+        $location_keys = ["name", "street", "city", "county", "country"];
+        foreach($location_keys as $key) {
+          if (!property_exists($group->location, $key)) {
+            $group->location->$key = "";
+          }
+        }
 
         return view('groups.create')
             ->with('group', $group)
@@ -204,21 +211,20 @@ class GroupController extends Controller
             $group->group_type = $request->input('group_type');
         }
 
-        if ($request->get('location')) {
-            $location_data = $request->input('location');
-
-            // Try to JSON encode
-            if (!$new_location = json_encode($location_data, JSON_UNESCAPED_UNICODE)) {
-                flash(trans('Invalid location'));
-            } else if ($new_location <> $group->location) {
-                $group->location = $new_location;
-
-                // Try to geocode
-                if (!$group->geocode($location_data)) {
-                    flash(trans('messages.location_cannot_be_geocoded'));
-                } else {
-                    flash(trans('messages.ressource_geocoded_successfully'));
-                }
+        if ($request->has('location')) {
+            // Validate input
+            try {
+                $group->location = $request->input('location');
+                } catch (\Exception $e) {
+                return redirect()->route('groups.create', $group)
+                 ->withErrors($e->getMessage() . '. Invalid location')
+                 ->withInput();
+            }
+            // Geocode
+            if (!$group->geocode()) {
+                flash(trans('messages.location_cannot_be_geocoded'));
+            } else {
+                flash(trans('messages.ressource_geocoded_successfully'));
             }
         }
 
@@ -321,20 +327,24 @@ class GroupController extends Controller
             }
         }
 
-        $location_data = $request->input('location');
-        // FIXME validation : for security + for charset + for a valid JSON
-        if (!$new_location = json_encode($location_data, JSON_UNESCAPED_UNICODE)) {
-            flash(trans('Invalid location'));
-        }
-
-        if ($group->location != $new_location) {
-            // we need to update group location and geocode it
-            $group->location = $new_location;
-            if (!$group->geocode($location_data)) {
-                flash(trans('messages.location_cannot_be_geocoded'));
-            } else {
-                flash(trans('messages.ressource_geocoded_successfully'));
+        if ($request->has('location')) {
+            $old_location = $group->location;
+            // Validate input
+            try {
+                $group->location = $request->input('location');
+                } catch (\Exception $e) {
+                return redirect()->route('groups.create', $group)
+                 ->withErrors($e->getMessage() . '. Invalid location')
+                 ->withInput();
             }
+            if ($group->location <> $old_location) {
+              // Try to geocode
+              if (!$group->geocode()) {
+                  flash(trans('messages.location_cannot_be_geocoded'));
+              } else {
+                  flash(trans('messages.ressource_geocoded_successfully'));
+              }
+           }
         }
 
         $group->user()->associate(Auth::user());

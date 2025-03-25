@@ -168,22 +168,26 @@ class UserController extends Controller
             $user->email = $request->input('email');
             $user->body = $request->input('body');
 
-            $location_data = $request->input('location');
-            // FIXME validation : for security + for charset + for a valid JSON
-            if (!$new_location = json_encode($location_data, JSON_UNESCAPED_UNICODE)) {
-                flash(trans('Invalid location'));
-            }
+            if ($request->has('location')) {
+                $old_location = $user->location;
+                // Validate input
+                try {
+                    $user->location = $request->input('location');
+                } catch (\Exception $e) {
+                return redirect()->route('users.create', $user)
+                  ->withErrors($e->getMessage() . '. Incorrect location')
+                  ->withInput();
+                }
 
-            if ($user->location != $new_location) {
-                // we need to update user location and geocode it
-                $user->location = $new_location;
-                if (!$user->geocode($location_data)) {
-                    flash(trans('messages.location_cannot_be_geocoded'));
-                } else {
-                    flash(trans('messages.ressource_geocoded_successfully'));
+                // Geocode
+                if ($user->location <> $old_location) {
+                  if (!$user->geocode()) {
+                      flash(trans('messages.location_cannot_be_geocoded'));
+                  } else {
+                      flash(trans('messages.ressource_geocoded_successfully'));
+                  }
                 }
             }
-
 
             // handle username change
             if ($user->username != $request->input('username')) {

@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Casts\LocationFromJson;
 use Illuminate\Http\Request;
 
 /**
@@ -15,53 +16,30 @@ use Illuminate\Http\Request;
  */
 trait HasLocation
 {
-    private $allowed_location_keys = ["name", "street", "city", "county", "country"];
-
-
-
-    public function getLocationAttribute($value)
-    {
-        if (!$location_data = json_decode($value, true)) {
-            // This is probably an old `location` field, 
-            // so we convert to a default array and put everything in street
-            $location_data['street'] = $value;
-            $location_data['name'] = '';
-            $location_data['city'] = '';
-            $location_data['county'] = '';
-            $location_data['country'] = '';
-        }
-        // In all cases, keep only accepted keys
-        array_intersect_key($this->allowed_location_keys, $location_data); // first time I use that one :)
-        return $location_data;
-    }
-
-
+    private $location_keys = ["name", "street", "city", "county", "country"];
 
     /**
-     * Sets the model location from the location found in request
-     * Does not save the model to DB
+     * Cast location from database JSON field
      */
-    public function setLocationFromRequest(Request $request): bool
+    protected function casts(): array
     {
-        if ($request->has('location')) {
-            $location = $request->get('location');
-            array_intersect_key($this->allowed_location_keys, $location);
-            return $this->location = json_encode($location, JSON_UNESCAPED_UNICODE);
-        }
-
-        return false;
+        return ['location' => LocationFromJson::class];
     }
 
-
     /**
-     * Returns an array of latitude longitude if one is found, null otherwise
+     * Returns whether a geocode has been stored for this model
      */
+    public function hasGeolocation()
+    {
+        return ($this->longitude <> 0 && $this->latitude <> 0);
+    }
+
     public function getGeolocation(): array|bool
     {
         if ($this->longitude <> 0 && $this->latitude <> 0) {
             $geolocation['latitude'] = $this->latitude;
             $geolocation['longitude'] = $this->longitude;
-            return $location;
+            return $geolocation;
         }
         return false;
     }
@@ -72,19 +50,24 @@ trait HasLocation
      */
     function geocode()
     {
-        $geolines = [];
-        $location_data = $this->location;
-        foreach ($location_data as $key => $val) {
-            if ($key == 'name') {
-            } else if ($key == 'county' && array_key_exists('country', $location_data)) {
-                $geolines[] = $this->parse_county($val, $location_data['country']);
-            } else {
-                $geolines[] = $val;
+        if (!$this->location) {
+            $this->latitude = 0;
+            $this->longitude = 0;
+            return true;
+        }
+        $geoline = [];
+        foreach (get_object_vars($this->location) as $key => $val) {
+            if ($key == 'name') {}
+            else if ($key == 'county' && $this->location->country) {
+              $geoline[] = $this->parse_county($val, $this->location->country);
+            }
+            else {
+              $geoline[] = $val;
             }
         }
         // Calling geocode function - even more abstracted than geocoder php.
         // Pass it a string and it will return an array with longitude and latitude or false in case of problem
-        $result = app('geocoder')->geocode(implode(",", $geolines))->get()->first();
+        $result = app('geocoder')->geocode(implode(",", $geoline))->get()->first();
         if ($result) {
             $this->latitude = $result->getCoordinates()->getLatitude();
             $this->longitude = $result->getCoordinates()->getLongitude();
@@ -97,37 +80,37 @@ trait HasLocation
      * Parse `county` input from the request, for some specific cases.
      * At the moment: French departement codes only.
      */
-    function parse_county($county, $country_code)
+    function parse_county($county, $country)
     {
-        if (!is_numeric($county)) {
-            return $county;
-        }
-        if ($country_code <> 'FR') {
-            return $county;
-        }
-        if (str_len($county) < 4) { // French departement 2 or 3-digits code
-            return "FR-" . $county;  // ISO 3166-2
-        }
-        return $county;
-    }
+     if (!is_numeric($county)) {
+       return $county;
+     }
+     if (strtolower($country) <> 'fr' && strtolower($country) <> "france") {
+       return $county;
+     }
+     if (strlen($county) < 4) { // French departement 2 or 3-digits code
+       return "FR-" . $county;  // ISO 3166-2
+     }
+     return $county;
+  }
 
     /**
      * We need a function to display a location as a string.
      * Knowing that it is stored as a JSON structure in the database,
      * with keys: name, street, city, county, country.
      */
-    public function location_display($format = "short")
+    public function location_display($format="short")
     {
-        $location_data = $this->location;
         $parts = [];
-        foreach ($this->allowed_location_keys as $key) {
-            if (array_key_exists($key, $location_data) && $location_data[$key]) {
-                if ($format == "short" && $key == 'street') {
-                    $parts[] = substr($location_data[$key], 0, 30);
-                } else {
-                    $parts[] = $location_data[$key];
-                }
+        foreach($this->location_keys as $attr) {
+           if ($this->location->$attr) {
+            if ($format == "short" && $key == 'street') {
+              $parts[] = substr($this->location->$attr, 0, 30);
+              }
+            else {
+              $parts[] = $this->location->$attr;
             }
+          }
         }
         return implode(", ", $parts);
     }
