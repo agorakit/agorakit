@@ -23,9 +23,9 @@ class LocationFromJson implements CastsAttributes
           $decoded = new \stdClass();
           $decoded->street = $value;
         }
-        foreach($model->location_keys as $key) {
-          if (!property_exists($decoded, $key)) {
-            $decoded->key = "";
+        foreach($model->location_keys as $k) {
+          if (!property_exists($decoded, $k)) {
+            $decoded->$k = "";
           }
         }
         return $decoded;

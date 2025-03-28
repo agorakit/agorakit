@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
  */
 trait HasLocation
 {
-    private $location_keys = ["name", "street", "city", "county", "country"];
+    public $location_keys = ["name", "street", "city", "county", "country"];
 
     /**
      * Cast location from database JSON field
