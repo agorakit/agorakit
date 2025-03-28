@@ -166,12 +166,7 @@ class GroupController extends Controller
     {
         $this->authorize('create', Group::class);
         $group = new Group;
-        $group->location = new \stdClass();
-        foreach($group->location_keys as $key) {
-          if (!property_exists($group->location, $key)) {
-            $group->location->$key = "";
-          }
-        }
+        $location_init = $group->location; // Just to initialize
 
         return view('groups.create')
             ->with('group', $group)

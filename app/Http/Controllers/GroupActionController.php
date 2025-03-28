@@ -167,16 +167,9 @@ class GroupActionController extends Controller
             $action->name = $request->get('title');
         }
 
+        $location_init = $action->location; // Just to initialize
         if ($request->has('location')) {
             $action->location = $request->input('location');
-        }
-        else {
-            $action->location = new \stdClass();
-            foreach($action->location_keys as $key) {
-              if (!property_exists($action->location, $key)) {
-                $action->location->$key = "";
-            }
-          }
         }
 
         $action->group()->associate($group);
