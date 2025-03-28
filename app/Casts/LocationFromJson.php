@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class LocationFromJson implements CastsAttributes
 {
-    private $location_keys = ["name", "street", "city", "county", "country"];
-
     /**
      * Cast the given value.
      *
@@ -25,7 +23,7 @@ class LocationFromJson implements CastsAttributes
           $decoded = new \stdClass();
           $decoded->street = $value;
         }
-        foreach($this->location_keys as $key) {
+        foreach($model->location_keys as $key) {
           if (!property_exists($decoded, $key)) {
             $decoded->key = "";
           }

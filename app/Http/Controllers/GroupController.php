@@ -167,8 +167,7 @@ class GroupController extends Controller
         $this->authorize('create', Group::class);
         $group = new Group;
         $group->location = new \stdClass();
-        $location_keys = ["name", "street", "city", "county", "country"];
-        foreach($location_keys as $key) {
+        foreach($group->location_keys as $key) {
           if (!property_exists($group->location, $key)) {
             $group->location->$key = "";
           }

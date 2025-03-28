@@ -172,8 +172,7 @@ class GroupActionController extends Controller
         }
         else {
             $action->location = new \stdClass();
-            $location_keys = ["name", "street", "city", "county", "country"];
-            foreach($location_keys as $key) {
+            foreach($action->location_keys as $key) {
               if (!property_exists($action->location, $key)) {
                 $action->location->$key = "";
             }
