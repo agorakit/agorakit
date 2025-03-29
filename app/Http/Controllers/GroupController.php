@@ -166,7 +166,6 @@ class GroupController extends Controller
     {
         $this->authorize('create', Group::class);
         $group = new Group;
-        $location_init = $group->location; // Just to initialize
 
         return view('groups.create')
             ->with('group', $group)

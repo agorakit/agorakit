@@ -167,7 +167,6 @@ class GroupActionController extends Controller
             $action->name = $request->get('title');
         }
 
-        $location_init = $action->location; // Just to initialize
         if ($request->has('location')) {
             $action->location = $request->input('location');
         }
