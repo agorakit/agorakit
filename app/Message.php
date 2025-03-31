@@ -19,9 +19,9 @@ use App\User;
 use Auth;
 
 /**
- * A message is basically an email received in the application. 
+ * A message is basically an email received in the application.
  * It might at some point also be created by external contact forms for instance (or an api ?)
- * 
+ *
  * It is short lived in the DB (a few days). It's purpose is to be converted to a discussion or a comment or... tbd
  */
 class Message extends Model
@@ -111,16 +111,16 @@ class Message extends Model
 
     /**
      * Returns a parsed representation of this message
-     * So you can : 
-     * $message->parse()->getTextContent(); 
-     * $message->parse()->getHtmlContent(); 
-     * 
+     * So you can :
+     * $message->parse()->getTextContent();
+     * $message->parse()->getHtmlContent();
+     *
      * Under the hood, uses https://github.com/zbateson/mail-mime-parser
-     * 
+     *
      */
     function parse()
     {
-        return MailMessage::from($this->raw);
+        return MailMessage::from($this->raw, true);
     }
 
     /**
@@ -137,9 +137,9 @@ class Message extends Model
 
         // count the number of caracters in plain text :
         // if we really have less than 5 chars in there using plain text,
-        // let's post the whole html mess, 
-        // converted to markdown, 
-        // then stripped with the same EmailReplyParser, 
+        // let's post the whole html mess,
+        // converted to markdown,
+        // then stripped with the same EmailReplyParser,
         // then converted from markdown back to html, pfeeew what could go wrong ?
         if (strlen($body_text) < 5) {
             if ($body_html) {
