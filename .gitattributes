@@ -1,4 +1,4 @@
-# Use Linux LFs for all text files.
+# Use Linux EOLs for all text files.
 *.css   text eol=lf diff=css
 *.dist  text eol=lf
 *.js    text eol=lf
