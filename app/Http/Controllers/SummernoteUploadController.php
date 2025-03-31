@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-use Intervention\Image\Facades\Image;
+use Intervention\Image\Laravel\ImageResponseFactory as Image;
 
 class SummernoteUploadController extends Controller
 {
