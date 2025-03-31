@@ -6,7 +6,7 @@
 *.lock  text eol=lf
 *.md    text eol=lf
 *.php   text eol=lf diff=php
-*.sh		text eol=lf
+*.sh    text eol=lf
 *.xml   text eol=lf diff=xml
 *.yml   text eol=lf
 
