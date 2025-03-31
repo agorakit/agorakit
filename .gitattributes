@@ -1,5 +1,22 @@
-* text=auto
-*.css linguist-vendored
-*.scss linguist-vendored
-*.js linguist-vendored
-CHANGELOG.md export-ignore
+# Use Linux LFs for all text files.
+*.css   text eol=lf diff=css
+*.dist  text eol=lf
+*.js    text eol=lf
+*.json  text eol=lf
+*.lock  text eol=lf
+*.md    text eol=lf
+*.php   text eol=lf diff=php
+*.sh		text eol=lf
+*.xml   text eol=lf diff=xml
+*.yml   text eol=lf
+
+# Exclude non-production files from archives.
+.github export-ignore
+docker  export-ignore
+tests   export-ignore
+.env.ci export-ignore
+*.dev   export-ignore
+*.xml   export-ignore
+*.yml   export-ignore
+*.dist  export-ignore
+.md     export-ignore
