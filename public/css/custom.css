@@ -252,3 +252,19 @@ h6 {
     background-color: var(--tblr-primary);
     color: white;
 }
+
+
+.up-active:is(a, [up-follow], input[type=submit], button[type=submit], button:not([type])) {
+    outline: 2px solid rgb(113, 113, 146);
+}
+
+.up-loading {
+    animation: blink 2s infinite;
+}
+
+
+@keyframes blink {
+    50% {
+        opacity: .5;
+    }
+}
