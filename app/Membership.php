@@ -36,7 +36,7 @@ class Membership extends Model
     const ADMIN = 100; // group admin
     const MEMBER = 20; // active member
     const CANDIDATE = 10; // member asked to be part of the group, but it has not been confirmed yet
-    const INVITED = 0;  // member invited by a group admin    
+    const INVITED = 0;  // member invited by a group admin
     const UNREGISTERED = -10; // user left the group
     const DECLINED = -15;  // user did not accept an invitation
     const REMOVED = -20; // removed by admin for another reason
@@ -47,12 +47,12 @@ class Membership extends Model
         return $this->membership == \App\Membership::ADMIN;
     }
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(\App\User::class)->withTrashed();
     }
 
-    public function group()
+    public function group(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(\App\Group::class);
     }

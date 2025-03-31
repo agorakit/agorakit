@@ -74,12 +74,12 @@ class File extends Model
         return 'file';
     }
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(\App\User::class)->withTrashed();
     }
 
-    public function group()
+    public function group(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(\App\Group::class)->withTrashed();
     }
@@ -92,7 +92,7 @@ class File extends Model
     /**
      * Returns the parent if it exists
      */
-    public function parent()
+    public function parent(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(File::class, 'parent_id');
     }
@@ -261,9 +261,9 @@ class File extends Model
      * Set file content from a file request -> to storage
      * You need to pass an uploaded file from a $request as $uploaded_file
      * The file you are attaching to must already exist in the DB.
-     * 
+     *
      * Can be called multiple times, a new timestamped filename is generated each time.
-     * 
+     *
      * Files are stored in groups/[group-id]/files/[file-id]/[timestamp]-[filename]
      */
     public function addToStorage($uploaded_file)
