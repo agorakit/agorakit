@@ -89,7 +89,6 @@
             "Tests\\": "tests/"
         },
         "classmap": [
-            "tests/TestCase.php",
             "tests/BrowserKitTestCase.php"
         ]
     },
