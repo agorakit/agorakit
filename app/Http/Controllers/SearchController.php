@@ -31,7 +31,7 @@ class SearchController extends Controller
         // validate user input
 
         if ($request->get('query')) {
-            $query = $request->get('query');
+            $query = mb_strimwidth($request->get('query'), 0, 32);
         }
 
         $type = '';
