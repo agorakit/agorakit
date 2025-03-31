@@ -11,6 +11,3 @@ parameters:
 
     # Options are 0 (lax) to 9 (strict).
     level: 0
-
-    ignoreErrors:
-        - '#Unsafe usage of new static#'
