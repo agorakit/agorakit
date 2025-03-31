@@ -53,7 +53,7 @@ class Comment extends Model
         return 'comment';
     }
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(\App\User::class)->withTrashed();
     }
@@ -63,7 +63,7 @@ class Comment extends Model
         return $this->morphMany(Reaction::class, 'reactable');
     }
 
-    public function discussion()
+    public function discussion(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(\App\Discussion::class);
     }

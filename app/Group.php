@@ -110,7 +110,7 @@ class Group extends Model
     /**
      * Returns all the users of this group.
      */
-    public function users()
+    public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(\App\User::class, 'membership')->where('membership', '>=', \App\Membership::MEMBER)->withTimestamps()->withPivot('membership');
     }
@@ -118,7 +118,7 @@ class Group extends Model
     /**
      * Returns all the admins of this group.
      */
-    public function admins()
+    public function admins(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(\App\User::class, 'membership')->where('membership', \App\Membership::ADMIN)->withTimestamps()->withPivot('membership');
     }
@@ -126,7 +126,7 @@ class Group extends Model
     /**
      * Returns all the candidates of this group.
      */
-    public function candidates()
+    public function candidates(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(\App\Membership::class)->where('membership', \App\Membership::CANDIDATE);
     }
@@ -134,7 +134,7 @@ class Group extends Model
     /**
      * The user who created or updated this group title and description.
      */
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(\App\User::class)->withTrashed();
     }
@@ -142,7 +142,7 @@ class Group extends Model
     /**
      * return membership for the current user.
      */
-    public function membership()
+    public function membership(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         if (\Auth::check()) {
             return $this->belongsToMany(\App\User::class, 'membership')
@@ -154,7 +154,7 @@ class Group extends Model
         }
     }
 
-    public function memberships()
+    public function memberships(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(\App\Membership::class);
     }
@@ -162,7 +162,7 @@ class Group extends Model
     /**
      * Returns all the discussions belonging to this group.
      */
-    public function discussions()
+    public function discussions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(\App\Discussion::class);
     }
@@ -170,27 +170,27 @@ class Group extends Model
     /**
      * Returns all the actions belonging to this group.
      */
-    public function actions()
+    public function actions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Action::class);
     }
 
-    public function files()
+    public function files(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(File::class);
     }
 
-    public function folders()
+    public function folders(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(File::class)->where('item_type', File::FOLDER);
     }
 
-    public function invites()
+    public function invites(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Invite::class);
     }
 
-    public function activities()
+    public function activities(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Activity::class)->orderBy('created_at', 'desc');
     }
