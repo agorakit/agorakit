@@ -4,7 +4,6 @@ namespace App\Traits;
 
 use App\Casts\LocationFromJson;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 
 /**
  * This trait allows any model to have a location (ie geographical address)
