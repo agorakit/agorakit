@@ -47,7 +47,7 @@
         "amirami/localizator": "^0.14.0@alpha",
         "barryvdh/laravel-debugbar": "^3.14",
         "fakerphp/faker": "^1.23",
-        "larastan/larastan": "^2.9",
+        "larastan/larastan": "^3.2",
         "laravel/browser-kit-testing": "^7.2",
         "laravel-lang/common": "^6.7",
         "mmo/faker-images": "^0.9.0",
@@ -89,7 +89,6 @@
             "Tests\\": "tests/"
         },
         "classmap": [
-            "tests/TestCase.php",
             "tests/BrowserKitTestCase.php"
         ]
     },

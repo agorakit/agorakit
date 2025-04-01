@@ -169,8 +169,7 @@ class UserController extends Controller
             $user->email = $request->input('email');
             $user->body = $request->input('body');
 
-
-            if ($request->get('location')) {
+            if ($request->has('location')) {
                 $old_location = $user->location;
                 // Validate input
                 try {

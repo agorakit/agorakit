@@ -166,13 +166,6 @@ class GroupController extends Controller
     {
         $this->authorize('create', Group::class);
         $group = new Group;
-        $group->location = new \stdClass();
-        $location_keys = ["name", "street", "city", "county", "country"];
-        foreach($location_keys as $key) {
-          if (!property_exists($group->location, $key)) {
-            $group->location->$key = "";
-          }
-        }
 
         return view('groups.create')
             ->with('group', $group)
@@ -211,7 +204,7 @@ class GroupController extends Controller
             $group->group_type = $request->input('group_type');
         }
 
-        if ($request->get('location')) {
+        if ($request->has('location')) {
             // Validate input
             try {
                 $group->location = $request->input('location');
@@ -327,7 +320,7 @@ class GroupController extends Controller
             }
         }
 
-        if ($request->get('location')) {
+        if ($request->has('location')) {
             $old_location = $group->location;
             // Validate input
             try {
@@ -344,7 +337,7 @@ class GroupController extends Controller
               } else {
                   flash(trans('messages.ressource_geocoded_successfully'));
               }
-            }
+           }
         }
 
         $group->user()->associate(Auth::user());

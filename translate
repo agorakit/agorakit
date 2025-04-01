@@ -1,4 +1,0 @@
-echo Step 1 : find new strings in code
-php artisan localize
-echo Step 2 : sync translations with translation.io
-php artisan translation:sync

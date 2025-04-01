@@ -38,12 +38,11 @@ class MapController extends Controller
       $groups = \App\Group::public()->pluck('id');
     }
 
-    $groups_id = $groups->pluck('id');
 
 
     // Magic query to get all the users who have one of the groups defined above in their membership table
-    $users = User::whereHas('groups', function ($q) use ($groups_id) {
-      $q->whereIn('group_id', $groups_id);
+    $users = User::whereHas('groups', function ($q) use ($groups) {
+      $q->whereIn('group_id', $groups);
     })
       ->where('verified', 1)
       ->where('latitude', '<>', 0)
@@ -51,9 +50,9 @@ class MapController extends Controller
 
 
 
-    $actions = \App\Action::where('start', '>=', Carbon::now())
+    $actions = \App\Action::where('stop', '>=', Carbon::now()->subDays(1))
       ->where('latitude', '<>', 0)
-      ->whereIn('group_id', $groups_id)
+      ->whereIn('group_id', $groups)
       ->get();
 
 
@@ -105,7 +104,7 @@ class MapController extends Controller
       array_push($geojson['features'], $marker);
     }
 
-    $groups = Group::find($groups_id);
+    $groups = Group::find($groups);
 
     foreach ($groups as $group) {
       if ($group->latitude <> 0) {

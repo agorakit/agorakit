@@ -100,7 +100,7 @@ class GroupActionController extends Controller
         foreach ($actions as $action) {
             $event['id'] = $action->id;
             $event['title'] = $action->name . ' (' . $action->group->name . ')';
-            $event['description'] = strip_tags(summary($action->body)) . ' <br/> ' . $action->display_location();
+            $event['description'] = strip_tags(summary($action->body)) . ' <br/> ' . $action->location_display();
             $event['body'] = strip_tags(summary($action->body));
             $event['summary'] = strip_tags(summary($action->body));
 
@@ -113,7 +113,7 @@ class GroupActionController extends Controller
             }
 
 
-            $event['location'] = $action->display_location();
+            $event['location'] = $action->location_display();
             $event['start'] = $action->start->toIso8601String();
             $event['end'] = $action->stop->toIso8601String();
             $event['url'] = route('groups.actions.show', [$action->group, $action]);
@@ -166,17 +166,8 @@ class GroupActionController extends Controller
             $action->name = $request->get('title');
         }
 
-        if ($request->get('location')) {
-            $action->location = $request->get('location');
-        }
-        else {
-            $action->location = new \stdClass();
-            $location_keys = ["name", "street", "city", "county", "country"];
-            foreach($location_keys as $key) {
-              if (!property_exists($action->location, $key)) {
-                $action->location->$key = "";
-            }
-          }
+        if ($request->has('location')) {
+            $action->location = $request->input('location');
         }
 
         $action->group()->associate($group);
@@ -248,7 +239,7 @@ class GroupActionController extends Controller
                 ->withInput();
         }
 
-        if ($request->get('location')) {
+        if ($request->has('location')) {
             // Validate input
             try {
                 $action->location = $request->input('location');
@@ -375,7 +366,8 @@ class GroupActionController extends Controller
             $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
         }
 
-        if ($request->get('location')) {
+        // handle location
+        if ($request->has('location')) {
             $old_location = $action->location;
             // Validate input
             try {
@@ -410,15 +402,14 @@ class GroupActionController extends Controller
             $action->makePrivate();
         }
 
-         // handle cover
-         if ($request->hasFile('cover')) {
+        // handle cover
+        if ($request->hasFile('cover')) {
             if ($action->setCoverFromRequest($request)) {
                 flash(trans('Cover image has been updated, please reload to see the new cover'));
             } else {
                 flash(trans('Error adding a new cover'));
             }
-        }
-        else{
+        } else {
             flash('no cover');
         }
 

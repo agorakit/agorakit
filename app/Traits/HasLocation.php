@@ -8,11 +8,6 @@ use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 
 /**
  * This trait allows any model to have a location (ie geographical address)
- * Storage :
- * - users in users/[id]/location
- * - groups is groups/[id]/location
- * - actions in groups/[id]/actions/[id]/location
- *
  * Attributes from the web form:
  * - location[name]
  * - location[street]
@@ -22,7 +17,7 @@ use Illuminate\Database\Eloquent\Casts\AsArrayObject;
  */
 trait HasLocation
 {
-    private $location_keys = ["name", "street", "city", "county", "country"];
+    public $location_keys = ["name", "street", "city", "county", "country"];
 
     /**
      * Cast location from database JSON field
@@ -40,14 +35,19 @@ trait HasLocation
         return ($this->longitude <> 0 && $this->latitude <> 0);
     }
 
-    public function getGeolocation(): string
+    public function getGeolocation(): array|bool
     {
-        if (!$this->hasGeolocation()) {
-          return null;
+        if ($this->longitude <> 0 && $this->latitude <> 0) {
+            $geolocation['latitude'] = $this->latitude;
+            $geolocation['longitude'] = $this->longitude;
+            return $geolocation;
         }
-        return ['latitude' => $this->{'latitude'}, 'longitude' => $this->{'longitude'}];
+        return false;
     }
 
+    /**
+     * Geocode the model using $this->getLocationData() data and sets $this->latitude and $this->longitude
+     */
     function geocode()
     {
         if (!$this->location) {
@@ -69,8 +69,8 @@ trait HasLocation
         // Pass it a string and it will return an array with longitude and latitude or false in case of problem
         $result = app('geocoder')->geocode(implode(",", $geoline))->get()->first();
         if ($result) {
-            $this->{'latitude'} = $result->getCoordinates()->getLatitude();
-            $this->{'longitude'} = $result->getCoordinates()->getLongitude();
+            $this->latitude = $result->getCoordinates()->getLatitude();
+            $this->longitude = $result->getCoordinates()->getLongitude();
             return true;
         }
         return false;
@@ -114,5 +114,4 @@ trait HasLocation
         }
         return implode(", ", $parts);
     }
-
 }

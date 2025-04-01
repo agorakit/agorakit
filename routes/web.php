@@ -313,7 +313,6 @@ Route::group(['middleware' => ['web']], function () {
         // Discussion history
         Route::get('discussions/{discussion}/history', 'GroupDiscussionController@history')->name('.discussions.history');
 
-
         // Comments
         Route::post('discussions/{discussion}/reply', 'CommentController@store')->name('.discussions.reply');
         Route::get('discussions/{discussion}/comments/{comment}/edit', 'CommentController@edit')->name('.discussions.comments.edit');
@@ -341,8 +340,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('actions/{action}/participation', 'ParticipationController@edit')->name('.actions.participation');
         Route::post('actions/{action}/participation', 'ParticipationController@update')->name('.actions.participation.update');
 
-
-
         // Files
         Route::get('files', 'GroupFileController@index')->name('.files.index');
         Route::get('files/create/{parent?}', 'GroupFileController@create')->name('.files.create');
@@ -365,11 +362,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('files/{file}/thumbnail', 'FileDownloadController@thumbnail')->name('.files.thumbnail');
         Route::get('files/{file}/preview', 'FileDownloadController@preview')->name('.files.preview');
         Route::get('files/{file}/icon', 'FileDownloadController@icon')->name('.files.icon');
-
-
-        // Collaboration
-        Route::get('files/{file}/collaboration', 'CollaborationController@edit')->name('.files.collaboration');
-        Route::get('files/{file}/collaboration/download', 'CollaborationController@show')->name('.files.collaboration.download');
 
         // Allowed Tags
         Route::get('tags', 'GroupTagController@edit')->name('.tags.edit');

@@ -171,7 +171,7 @@ class User extends Authenticatable
         });
     }
 
-    /** 
+    /**
      * Re-generates token if none is set
      */
     public function getToken()
@@ -281,7 +281,7 @@ class User extends Authenticatable
     /**
      * The groups this user is part of.
      */
-    public function groups()
+    public function groups(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(\App\Group::class, 'membership')
             ->where('membership.membership', '>=', Membership::MEMBER)
@@ -293,7 +293,7 @@ class User extends Authenticatable
     /**
      * The actions this user attends to.
      */
-    public function actions()
+    public function actions(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(\App\Action::class);
     }
@@ -443,11 +443,11 @@ class User extends Authenticatable
 
     /**
      * Return a list of groups this user wants to see (and is allowed to see)
-     * It can be : 
+     * It can be :
      * - 'admin' : I want to see everything
      * - 'all' : show me all my groups and all public groups
      * - 'my' show me my groups's content
-     * 
+     *
      * This is stored in the 'show' preference, per user.
      */
     public function getVisibleGroups()
@@ -470,7 +470,7 @@ class User extends Authenticatable
                 ->merge($this->groups()->pluck('groups.id'));
         }
 
-        // A user can decide to see only his/her groups : 
+        // A user can decide to see only his/her groups :
         if ($this->getPreference('show', 'my') == 'my') {
             $groups = $this->groups()->pluck('groups.id');
         }
