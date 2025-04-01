@@ -129,6 +129,10 @@
                         <i class="fa fa-tags me-2"></i> {{ trans('Tags') }}
                     </a>
 
+                    <a class="dropdown-item" href="{{ route('groups.locations.edit', $group) }}">
+                        <i class="fa fa-tags me-2"></i> {{ trans('Locations') }}
+                    </a>
+
                     <a class="dropdown-item" href="{{ action('ModuleController@update', $group) }}">
                         <i class="fa fa-toggle-on me-2"></i> {{ trans('messages.features') }}
                     </a>

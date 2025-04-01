@@ -3,10 +3,6 @@ return [
     'a_message_for_you'                              => 'Un message pour vous',
     'accept_invitation'                              => 'Accepter l\'invitation',
     'actions'                                        => 'Actions',
-    'address'                                        => 'Adresse',
-    'address_cannot_be_geocoded'                     => 'Votre adresse ne peut pas être géolocalisées. Veuillez utiliser un format simple, comme "numéro de rue, ville"',
-    'address_privacy_and_help'                       => 'Comment remplir le champ adresse ? Ne remplissez que les informations que vous acceptez de mettre en ligne. L\'information d\'adresse même partielle, nous permet d\'afficher une carte avec la localisation des personnes, des groupes et des actions. Si vous ne souhaitez pas être mentionné⋅e sur cette carte ne mettez rien ici. Vous pouvez également simplement mettre votre commune (ou votre rue sans le numéro de maison) afin d\'apparaître sur le carte mais pas de manière précise.
-    Utilisez le format numéro, rue, localité',
     'admin'                                          => 'Administrateur/trice',
     'admin_of'                                       => 'Administrateur/trice de',
     'administration'                                 => 'Administration',
@@ -132,7 +128,10 @@ return [
     'leaving_the_group_called'                       => 'Quitter le groupe',
     'link'                                           => 'Lien',
     'list'                                           => 'Liste',
-    'location'                                       => 'Localisation',
+    'location'                                       => 'Lieu',
+    'location_cannot_be_geocoded'                    => 'Cette adresse ne peut pas être géolocalisée. Veuillez utiliser un format simple, comme "numéro de rue, ville"',
+    'location_privacy_and_help'                      => 'Comment remplir le champ adresse ? Ne remplissez que les informations que vous acceptez de mettre en ligne. L\'information d\'adresse même partielle, nous permet d\'afficher une carte avec la localisation des personnes, des groupes et des actions. Si vous ne souhaitez pas être mentionné⋅e sur cette carte ne mettez rien ici. Vous pouvez également simplement mettre votre commune (ou votre rue sans le numéro de maison) afin d\'apparaître sur le carte mais pas de manière précise.
+    Utilisez le format numéro, rue, localité',
     'login'                                          => 'Connexion',
     'logout'                                         => 'Déconnexion',
     'logs'                                           => 'Journaux',

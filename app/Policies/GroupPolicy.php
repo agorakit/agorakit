@@ -203,6 +203,15 @@ class GroupPolicy extends BasePolicy
         return $group->isOpen();
     }
 
+    public function viewLocations(?User $user, Group $group)
+    {
+        if ($user) {
+            return $group->isOpen() || $user->isMemberOf($group);
+        }
+
+        return $group->isOpen();
+    }
+
 
 
 
@@ -211,6 +220,18 @@ class GroupPolicy extends BasePolicy
      * Group admins can manage tags
      */
     public function manageTags(?User $user, Group $group)
+    {
+        if ($user) {
+            return $user->isAdminOf($group);
+        }
+
+        return false;
+    }
+
+    /**
+     * Group admins can manage locations
+     */
+    public function manageLocations(?User $user, Group $group)
     {
         if ($user) {
             return $user->isAdminOf($group);

@@ -47,7 +47,7 @@
 
             @if ($action->location)
                 <div>
-                    <i class="fa fa-map-marker me-1"></i> {{ $action->location }}
+                    <i class="fa fa-map-marker me-1"></i> {{ $action->location_display("long") }}
                 </div>
             @endif
 

@@ -100,7 +100,7 @@ class GroupActionController extends Controller
         foreach ($actions as $action) {
             $event['id'] = $action->id;
             $event['title'] = $action->name . ' (' . $action->group->name . ')';
-            $event['description'] = strip_tags(summary($action->body)) . ' <br/> ' . $action->location;
+            $event['description'] = strip_tags(summary($action->body)) . ' <br/> ' . $action->location_display();
             $event['body'] = strip_tags(summary($action->body));
             $event['summary'] = strip_tags(summary($action->body));
 
@@ -113,7 +113,7 @@ class GroupActionController extends Controller
             }
 
 
-            $event['location'] = $action->location;
+            $event['location'] = $action->location_display();
             $event['start'] = $action->start->toIso8601String();
             $event['end'] = $action->stop->toIso8601String();
             $event['url'] = route('groups.actions.show', [$action->group, $action]);
@@ -162,18 +162,27 @@ class GroupActionController extends Controller
             }
         }
 
-
         if ($request->get('title')) {
             $action->name = $request->get('title');
         }
 
+        if ($request->has('location')) {
+            $action->location = $request->input('location');
+        }
+
         $action->group()->associate($group);
+        $listed_locations = [];
+        foreach ($group->getNamedLocations() as $location) {
+          $listed_locations[$location->name] = $location->name . " (" . $location->city . ")";
+        }
 
         return view('actions.create')
             ->with('action', $action)
+            ->with('model', $action)
             ->with('group', $group)
             ->with('allowedTags', $action->getTagsInUse())
             ->with('newTagsAllowed', $action->areNewTagsAllowed())
+            ->with('listedLocations', $listed_locations)
             ->with('tab', 'action');
     }
 
@@ -230,10 +239,19 @@ class GroupActionController extends Controller
                 ->withInput();
         }
 
-        if ($request->get('location')) {
-            $action->location = $request->input('location');
+        if ($request->has('location')) {
+            // Validate input
+            try {
+                $action->location = $request->input('location');
+            } catch (\Exception $e) {
+            return redirect()->route('groups.actions.create', $group)
+              ->withErrors($e->getMessage() . '. Incorrect location')
+              ->withInput();
+            }
+
+            // Geocode
             if (!$action->geocode()) {
-                warning(trans('messages.address_cannot_be_geocoded'));
+                flash(trans('messages.location_cannot_be_geocoded'));
             } else {
                 flash(trans('messages.ressource_geocoded_successfully'));
             }
@@ -295,6 +313,7 @@ class GroupActionController extends Controller
         return view('actions.show')
             ->with('title', $group->name . ' - ' . $action->name)
             ->with('action', $action)
+            ->with('model', $action)
             ->with('group', $group)
             ->with('tab', 'action');
     }
@@ -309,13 +328,19 @@ class GroupActionController extends Controller
     public function edit(Request $request, Group $group, Action $action)
     {
         $this->authorize('update', $action);
+        $listed_locations = [];
+        foreach ($group->getNamedLocations() as $location) {
+          $listed_locations[$location->name] = $location->name . " (" . $location->city . ")";
+        }
 
         return view('actions.edit')
             ->with('action', $action)
+            ->with('model', $action)
             ->with('group', $group)
             ->with('allowedTags', $action->getAllowedTags())
             ->with('newTagsAllowed', $action->areNewTagsAllowed())
             ->with('selectedTags', $action->getSelectedTags())
+            ->with('listedLocations', $listed_locations)
             ->with('tab', 'action');
     }
 
@@ -341,13 +366,25 @@ class GroupActionController extends Controller
             $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
         }
 
-        if ($action->location != $request->input('location')) {
-            // we need to update user address and geocode it
-            $action->location = $request->input('location');
-            if (!$action->geocode()) {
-                flash(trans('messages.address_cannot_be_geocoded'));
-            } else {
-                flash(trans('messages.ressource_geocoded_successfully'));
+        // handle location
+        if ($request->has('location')) {
+            $old_location = $action->location;
+            // Validate input
+            try {
+                $action->location = $request->input('location');
+            } catch (\Exception $e) {
+            return redirect()->route('groups.actions.create', $action)
+              ->withErrors($e->getMessage() . '. Incorrect location')
+              ->withInput();
+            }
+
+            // Geocode
+            if ($action->location <> $old_location) {
+              if (!$action->geocode()) {
+                  flash(trans('messages.location_cannot_be_geocoded'));
+              } else {
+                  flash(trans('messages.ressource_geocoded_successfully'));
+              }
             }
         }
 
@@ -365,15 +402,14 @@ class GroupActionController extends Controller
             $action->makePrivate();
         }
 
-         // handle cover
-         if ($request->hasFile('cover')) {
+        // handle cover
+        if ($request->hasFile('cover')) {
             if ($action->setCoverFromRequest($request)) {
                 flash(trans('Cover image has been updated, please reload to see the new cover'));
             } else {
                 flash(trans('Error adding a new cover'));
             }
-        }
-        else{
+        } else {
             flash('no cover');
         }
 
