@@ -100,12 +100,12 @@ class Discussion extends Model
         return $userReadDiscussion->save();
     }
 
-    public function group()
+    public function group(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(\App\Group::class)->withTrashed();
     }
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(\App\User::class)->withTrashed();
     }
@@ -115,7 +115,7 @@ class Discussion extends Model
         return $this->hasMany(\App\Comment::class);
     }
 
-    public function userReadDiscussion()
+    public function userReadDiscussion(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         if (\Auth::check()) {
             return $this->hasMany(\App\UserReadDiscussion::class)->where('user_id', '=', \Auth::user()->id);
