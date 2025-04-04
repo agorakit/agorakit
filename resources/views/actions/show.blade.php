@@ -55,7 +55,7 @@
             @if ($action->stop > $action->start) <h3>{{ trans('messages.ends') }} : {{ $action->stop->isoFormat('LLLL') }}</h3>
             @endif
 
-            @if ($action->location_display("long"))
+            @if ($action->hasLocation())
                 <div class="fw-bold">{{ trans('messages.location') }}</div>
                 {{ $action->location_display("long") }}
             @endif
