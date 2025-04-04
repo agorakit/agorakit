@@ -46,6 +46,18 @@ trait HasLocation
 
 
     /**
+     * Return true if this model has at least one location field filled
+     */
+    public function hasLocation()
+    {
+        foreach ($this->location as $value) {
+            if (strlen($value) > 0) return true;
+        }
+        return false;
+    }
+
+
+    /**
      * Geocode the model using $this->getLocationData() data and sets $this->latitude and $this->longitude
      */
     function geocode()
@@ -57,12 +69,11 @@ trait HasLocation
         }
         $geoline = [];
         foreach (get_object_vars($this->location) as $key => $val) {
-            if ($key == 'name') {}
-            else if ($key == 'county' && $this->location->country) {
-              $geoline[] = $this->parse_county($val, $this->location->country);
-            }
-            else {
-              $geoline[] = $val;
+            if ($key == 'name') {
+            } else if ($key == 'county' && $this->location->country) {
+                $geoline[] = $this->parse_county($val, $this->location->country);
+            } else {
+                $geoline[] = $val;
             }
         }
         // Calling geocode function - even more abstracted than geocoder php.
@@ -82,35 +93,34 @@ trait HasLocation
      */
     function parse_county($county, $country)
     {
-     if (!is_numeric($county)) {
-       return $county;
-     }
-     if (strtolower($country) <> 'fr' && strtolower($country) <> "france") {
-       return $county;
-     }
-     if (strlen($county) < 4) { // French departement 2 or 3-digits code
-       return "FR-" . $county;  // ISO 3166-2
-     }
-     return $county;
-  }
+        if (!is_numeric($county)) {
+            return $county;
+        }
+        if (strtolower($country) <> 'fr' && strtolower($country) <> "france") {
+            return $county;
+        }
+        if (strlen($county) < 4) { // French departement 2 or 3-digits code
+            return "FR-" . $county;  // ISO 3166-2
+        }
+        return $county;
+    }
 
     /**
      * We need a function to display a location as a string.
      * Knowing that it is stored as a JSON structure in the database,
      * with keys: name, street, city, county, country.
      */
-    public function location_display($format="short")
+    public function location_display($format = "short")
     {
         $parts = [];
-        foreach($this->location_keys as $attr) {
-           if ($this->location->$attr) {
-            if ($format == "short" && $attr == 'street') {
-              $parts[] = substr($this->location->$attr, 0, 30);
-              }
-            else {
-              $parts[] = $this->location->$attr;
+        foreach ($this->location_keys as $attr) {
+            if ($this->location->$attr) {
+                if ($format == "short" && $attr == 'street') {
+                    $parts[] = substr($this->location->$attr, 0, 30);
+                } else {
+                    $parts[] = $this->location->$attr;
+                }
             }
-          }
         }
         return implode(", ", $parts);
     }
