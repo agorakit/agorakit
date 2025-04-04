@@ -30,7 +30,7 @@ return [
     'discard'         => 'Jeter',
     'done'            => 'Fait',
     'down'            => 'En bas',
-    'duplicate'       => 'Double',
+    'duplicate'       => 'Dupliquer',
     'edit'            => 'Modifier',
     'enable'          => 'Activer',
     'expand'          => 'Élargir',
