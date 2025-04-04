@@ -104,7 +104,7 @@ trait HasLocation
         $parts = [];
         foreach($this->location_keys as $attr) {
            if ($this->location->$attr) {
-            if ($format == "short" && $key == 'street') {
+            if ($format == "short" && $attr == 'street') {
               $parts[] = substr($this->location->$attr, 0, 30);
               }
             else {
