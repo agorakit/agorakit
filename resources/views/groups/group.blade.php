@@ -60,34 +60,40 @@
                     </div>
                 @endif
 
-                <p>Location: {{ $group->location_display() }}</p>
-
+                @auth
+                    @if (Auth::user()->isMemberOf($group))
+                        @if ($group->hasLocation())
+                            <div class="text-body-secondary mt-3"><i class="fa fa-map-marker"></i> {{ $group->location_display() }}</div>
+                        @endif
+                    @endif
+                @endauth
+                
             </div>
         </div>
 
-        <div class="card-footer text-body-secondary small">
+        @auth
+            <div class="card-footer text-body-secondary small">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <i class="far fa-comments me-1"></i>
+                        <span> {{ $group->discussions->count() }}</span>
+                    </div>
 
-            <div class="d-flex justify-content-between">
-                <div>
-                    <i class="far fa-comments me-1"></i>
-                    <span> {{ $group->discussions->count() }}</span>
-                </div>
+                    <div>
+                        <i class="far fa-calendar-alt me-1"></i>
+                        <span>{{ $group->actions->count() }}</span>
+                    </div>
+                    <div>
+                        <i class="fas fa-users me-1"></i>
+                        <span>{{ $group->users->count() }}</span>
+                    </div>
 
-                <div>
-                    <i class="far fa-calendar-alt me-1"></i>
-                    <span>{{ $group->actions->count() }}</span>
-                </div>
-                <div>
-                    <i class="fas fa-users me-1"></i>
-                    <span>{{ $group->users->count() }}</span>
-                </div>
-
-                <div>
-                    <i class="far fa-lightbulb me-1"></i>
-                    <span>{{ $group->updated_at->diffForHumans() }}</span>
+                    <div>
+                        <i class="far fa-lightbulb me-1"></i>
+                        <span>{{ $group->updated_at->diffForHumans() }}</span>
+                    </div>
                 </div>
             </div>
-
-        </div>
+        @endauth
     </div>
 </div>
