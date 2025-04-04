@@ -7,6 +7,7 @@ use App\Group;
 use App\Traits\HasControlledTags;
 use App\Traits\HasVisibility;
 use App\Traits\HasCover;
+use App\Traits\HasLocation;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -21,6 +22,7 @@ class Action extends Model
     use SoftDeletes;
     use Taggable;
     use SearchableTrait;
+    use hasLocation;
     use HasControlledTags;
     use HasVisibility;
     use HasCover;
@@ -120,28 +122,4 @@ class Action extends Model
         return $this->belongsToMany(User::class)->wherePivot('status', '0');
     }
 
-    /**
-     * Geocode the item
-     * Returns true if it worked, false if it didn't.
-     */
-    public function geocode()
-    {
-        if ($this->location == '') {
-            $this->latitude = 0;
-            $this->longitude = 0;
-
-            return true;
-        }
-
-        $geocode = geocode($this->location);
-
-        if ($geocode) {
-            $this->latitude = $geocode['latitude'];
-            $this->longitude = $geocode['longitude'];
-
-            return true;
-        }
-
-        return false;
-    }
 }

@@ -5,6 +5,7 @@ namespace App;
 use App\Traits\HasStatus;
 use App\Traits\HasControlledTags;
 use App\Traits\HasCover;
+use App\Traits\HasLocation;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
@@ -29,6 +30,7 @@ class Group extends Model
     use SearchableTrait;
     use HasStatus;
     use hasCover;
+    use hasLocation;
     use HasControlledTags;
 
     protected $rules = [
@@ -39,7 +41,7 @@ class Group extends Model
     protected $fillable = ['id', 'name', 'body', 'cover'];
     protected $casts = ['user_id' => 'integer', 'settings' => 'array'];
 
-    protected $keepRevisionOf = ['name', 'body', 'cover', 'color', 'group_type', 'address', 'settings', 'status'];
+    protected $keepRevisionOf = ['name', 'body', 'cover', 'color', 'group_type', 'location', 'settings', 'status'];
 
     /**** various group types ****/
     // open group, default
@@ -64,7 +66,7 @@ class Group extends Model
         'columns' => [
             'groups.name'    => 10,
             'groups.body'    => 10,
-            'groups.address' => 2,
+            'groups.location' => 2,
         ],
     ];
 
@@ -332,31 +334,6 @@ class Group extends Model
         return $query->where('updated_at', '>',  Carbon::now()->subMonths(3)->toDateTimeString());
     }
 
-
-    /**
-     * Geocode the item
-     * Returns true if it worked, false if it didn't.
-     */
-    public function geocode()
-    {
-        if ($this->address == '') {
-            $this->latitude = 0;
-            $this->longitude = 0;
-
-            return true;
-        }
-
-        $geocode = geocode($this->address);
-
-        if ($geocode) {
-            $this->latitude = $geocode['latitude'];
-            $this->longitude = $geocode['longitude'];
-
-            return true;
-        }
-
-        return false;
-    }
 
     /**
      * Returns the current setting $key for the group, $default if not set.

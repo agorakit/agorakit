@@ -4,6 +4,7 @@ namespace App;
 
 use App\Traits\HasControlledTags;
 use App\Traits\HasCover;
+use App\Traits\HasLocation;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -34,6 +35,7 @@ class User extends Authenticatable
     use Sluggable;
     use Taggable;
     use SearchableTrait;
+    use hasLocation;
     use HasControlledTags;
     use HasCover;
 
@@ -62,7 +64,7 @@ class User extends Authenticatable
         'username'    => 'unique:users|alpha_dash',
     ];
 
-    protected $keepRevisionOf = ['name', 'body', 'email', 'admin', 'address'];
+    protected $keepRevisionOf = ['name', 'body', 'email', 'admin', 'location'];
 
     protected $with = ['memberships'];
 
@@ -410,31 +412,6 @@ class User extends Authenticatable
         $anonymous->save();
 
         return $anonymous;
-    }
-
-    /**
-     * Geocode the user
-     * Returns true if it worked, false if it didn't.
-     */
-    public function geocode()
-    {
-        if ($this->address == '') {
-            $this->latitude = 0;
-            $this->longitude = 0;
-
-            return true;
-        }
-
-        $geocode = geocode($this->address);
-
-        if ($geocode) {
-            $this->latitude = $geocode['latitude'];
-            $this->longitude = $geocode['longitude'];
-
-            return true;
-        }
-
-        return false;
     }
 
     /**

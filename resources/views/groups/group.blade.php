@@ -60,6 +60,8 @@
                     </div>
                 @endif
 
+                <p>Location: {{ $group->location_display() }}</p>
+
             </div>
         </div>
 

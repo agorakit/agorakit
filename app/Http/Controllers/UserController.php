@@ -128,6 +128,7 @@ class UserController extends Controller
             return view('users.show')
                 ->with('activities', $user->activities()->whereIn('group_id', Group::public()->pluck('id'))->paginate(10))
                 ->with('user', $user)
+                ->with('model', $user)
                 ->with('tab', 'profile')
                 ->with('title', $title);
         }
@@ -148,6 +149,7 @@ class UserController extends Controller
                 ->with('newTagsAllowed', $user->areNewTagsAllowed())
                 ->with('selectedTags', $user->getSelectedTags())
                 ->with('user', $user)
+                ->with('model', $user)
                 ->with('tab', 'edit');
         } else {
             abort(403);
@@ -166,14 +168,24 @@ class UserController extends Controller
             $user->email = $request->input('email');
             $user->body = $request->input('body');
 
+            if ($request->has('location')) {
+                $old_location = $user->location;
+                // Validate input
+                try {
+                    $user->location = $request->input('location');
+                } catch (\Exception $e) {
+                return redirect()->route('users.create', $user)
+                  ->withErrors($e->getMessage() . '. Incorrect location')
+                  ->withInput();
+                }
 
-            if ($user->address != $request->input('address')) {
-                // we need to update user address and geocode it
-                $user->address = $request->input('address');
-                if (!$user->geocode()) {
-                    warning(trans('messages.address_cannot_be_geocoded'));
-                } else {
-                    flash(trans('messages.ressource_geocoded_successfully'));
+                // Geocode
+                if ($user->location <> $old_location) {
+                  if (!$user->geocode()) {
+                      flash(trans('messages.location_cannot_be_geocoded'));
+                  } else {
+                      flash(trans('messages.ressource_geocoded_successfully'));
+                  }
                 }
             }
 

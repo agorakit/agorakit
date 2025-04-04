@@ -169,6 +169,7 @@ class GroupController extends Controller
 
         return view('groups.create')
             ->with('group', $group)
+            ->with('model', $group)
             ->with('allowedTags', $group->getAllowedTags())
             ->with('newTagsAllowed', $group->areNewTagsAllowed())
             ->with('title', trans('group.create_group_title'));
@@ -203,10 +204,18 @@ class GroupController extends Controller
             $group->group_type = $request->input('group_type');
         }
 
-        if ($request->get('address')) {
-            $group->address = $request->input('address');
+        if ($request->has('location')) {
+            // Validate input
+            try {
+                $group->location = $request->input('location');
+                } catch (\Exception $e) {
+                return redirect()->route('groups.create', $group)
+                 ->withErrors($e->getMessage() . '. Invalid location')
+                 ->withInput();
+            }
+            // Geocode
             if (!$group->geocode()) {
-                flash(trans('messages.address_cannot_be_geocoded'));
+                flash(trans('messages.location_cannot_be_geocoded'));
             } else {
                 flash(trans('messages.ressource_geocoded_successfully'));
             }
@@ -271,9 +280,9 @@ class GroupController extends Controller
     {
         $this->authorize('update', $group);
 
-
         return view('groups.edit')
             ->with('group', $group)
+            ->with('model', $group)
             ->with('allowedTags', $group->getAllowedTags())
             ->with('newTagsAllowed', $group->areNewTagsAllowed())
             ->with('selectedTags', $group->getSelectedTags())
@@ -311,14 +320,24 @@ class GroupController extends Controller
             }
         }
 
-        if ($group->address != $request->input('address')) {
-            // we need to update user address and geocode it
-            $group->address = $request->input('address');
-            if (!$group->geocode()) {
-                flash(trans('messages.address_cannot_be_geocoded'));
-            } else {
-                flash(trans('messages.ressource_geocoded_successfully'));
+        if ($request->has('location')) {
+            $old_location = $group->location;
+            // Validate input
+            try {
+                $group->location = $request->input('location');
+                } catch (\Exception $e) {
+                return redirect()->route('groups.create', $group)
+                 ->withErrors($e->getMessage() . '. Invalid location')
+                 ->withInput();
             }
+            if ($group->location <> $old_location) {
+              // Try to geocode
+              if (!$group->geocode()) {
+                  flash(trans('messages.location_cannot_be_geocoded'));
+              } else {
+                  flash(trans('messages.ressource_geocoded_successfully'));
+              }
+           }
         }
 
         $group->user()->associate(Auth::user());
