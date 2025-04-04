@@ -95,7 +95,7 @@ class ActionController extends Controller
         foreach ($actions as $action) {
             $event['id'] = $action->id;
             $event['title'] = $action->name . ' (' . $action->group->name . ')';
-            $event['description'] = strip_tags(summary($action->body)) . ' <br/> ' . $action->location;
+            $event['description'] = strip_tags(summary($action->body)) . ' <br/> ' . $action->location_display();
             $event['body'] = strip_tags(summary($action->body));
             $event['summary'] = strip_tags(summary($action->body));
 
@@ -108,7 +108,7 @@ class ActionController extends Controller
             }
 
 
-            $event['location'] = $action->location;
+            $event['location'] = $action->location_display();
             $event['start'] = $action->start->toIso8601String();
             $event['end'] = $action->stop->toIso8601String();
             $event['url'] = route('groups.actions.show', [$action->group, $action]);
