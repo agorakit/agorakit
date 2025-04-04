@@ -28,6 +28,7 @@ class AddStatusToDiscussions extends Migration
     public function down()
     {
         Schema::table('discussions', function (Blueprint $table) {
+            $table->dropIndex(['status']);
             $table->dropColumn('status');
         });
     }
