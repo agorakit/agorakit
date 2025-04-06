@@ -17,11 +17,12 @@ class LocationFromJson implements CastsAttributes
         // Initialize $value to ""
         if (!$value) { $value = ""; }
         // Decoding the JSON field into an object
-        if (!$decoded = json_decode($value)) {
+        $decoded = json_decode($value, false);
+        if (!is_object($decoded)) {
           // This is probably an old `string` field, so we convert
           // putting all the string into `street` attribute
           $decoded = new \stdClass();
-          $decoded->street = $value;
+          $decoded->street = strval($value);
         }
         foreach($model->location_keys as $k) {
           if (!property_exists($decoded, $k)) {
