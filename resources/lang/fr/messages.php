@@ -135,7 +135,7 @@ return [
     'list'                                           => 'Liste',
     'location'                                       => 'Localisation',
     'location_cannot_be_geocoded'                    => 'L\'emplacement ne peut pas être géocodé',
-    'location_name_help'                             => 'Saisir un nom pour cet emplacement en vue d\'une réutilisation ultérieure',
+    'location_name_help'                             => 'Attribuer un nom à cet emplacement facilitera une réutilisation ultérieure',
     'location_privacy_and_help'                      => 'Ne remplissez que les informations que vous êtes prêt à mettre en ligne. L\'adresse, même partielle, nous permet d\'afficher une carte avec la localisation des personnes, des groupes et des actions. Si vous ne souhaitez pas figurer sur une carte, n\'indiquez rien ici. Vous pouvez également indiquer votre ville (ou le nom de votre rue sans le numéro) pour qu\'elle apparaisse sur la carte, mais pas de manière précise.',
     'login'                                          => 'Connexion',
     'logout'                                         => 'Déconnexion',
