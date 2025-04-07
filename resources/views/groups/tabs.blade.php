@@ -32,7 +32,7 @@
         @if ($group->getSetting('module_discussion', true) == true)
             @can('viewDiscussions', $group)
                 <li class="nav-item">
-                    <a class="nav-link @if (isset($tab) && $tab == 'discussion') active @endif"
+                    <a class="nav-link @if (isset($tab) && $tab == 'discussions') active @endif"
                         href="{{ route('groups.discussions.index', $group) }}">
                         <i class="fa fa-comments me-2"></i> {{ trans('messages.discussions') }}
                     </a>
@@ -185,7 +185,7 @@
         @if ($group->getSetting('module_discussion', true) == true)
             @can('viewDiscussions', $group)
                 <li class="nav-item">
-                    <a class="nav-link @if (isset($tab) && $tab == 'discussion') active @endif"
+                    <a class="nav-link @if (isset($tab) && $tab == 'discussions') active @endif"
                         href="{{ route('groups.discussions.index', $group) }}"
                         title="{{ trans('messages.discussions') }}">
                         <i class="fa fa-comments"></i>

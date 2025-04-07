@@ -27,6 +27,7 @@ class GroupDiscussionController extends Controller
         if ($group->exists) {
             $this->authorize('view-discussions', $group);
             $groups[] = $group->id;
+            $context = 'group';
         }
         // If not we need to show some kind of overview
         else {
@@ -37,6 +38,7 @@ class GroupDiscussionController extends Controller
                 // anonymous users get all public groups
                 $groups = Group::public()->pluck('id');
             }
+            $context = 'overview';
         }
 
         $tag = $request->get('tag');
@@ -68,8 +70,9 @@ class GroupDiscussionController extends Controller
         return view('discussions.index')
             ->with('title', $group->name . ' - ' . trans('messages.discussions'))
             ->with('discussions', $discussions)
+            ->with('context', $context)
             ->with('group', $group)
-            ->with('tab', 'discussion');
+            ->with('tab', 'discussions');
 
     }
 

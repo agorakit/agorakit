@@ -24,9 +24,9 @@
                 @include('groups.tabs')
             @endif
 
-            <div class="mt-md-4 mt-2 content" up-main="modal">
+            <main class="mt-md-4 mt-2 content" up-main="modal">
                 @yield('content')
-            </div>
+            </main>
         </div>
 
     </div>

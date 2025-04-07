@@ -20,8 +20,15 @@
         </div>
 
         <div class="container mt-md-4 p-md-4 p-2" up-main="modal">
-
-            @yield('content')
+            @if (isset($context) && $context == 'group')
+                @include('groups.tabs')
+            @endif
+            @if (isset($context) && $context == 'overview')
+                @include('dashboard.tabs')
+            @endif
+            <main>
+                @yield('content')
+            </main>
         </div>
     </div>
 
