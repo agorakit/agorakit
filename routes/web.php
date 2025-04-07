@@ -58,20 +58,6 @@ I will apply here the recomandation "routes as documentation" from https://phils
 
 
 Route::group(['middleware' => ['web']], function () {
-
-
-
-    /*
-    // Uncomment this to test mailable
-
-    Route::get('/mailable', function () {
-        $notification = new App\Mail\Notification();
-        $notification->user = \App\User::first();
-        $notification->group = \App\Group::first();
-        return $notification;
-    });
-    */
-
     /*
     Authentification routes
     =======================
@@ -93,17 +79,11 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('login/email', 'Auth\LoginByEmailController@sendLoginByEmail')->name('sendloginbyemail');
     });
 
-
     Route::get('autologin', 'Auth\AutoLoginController@login')->name('autologin');
 
 
 
-    // OAuth Routes
-    Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
-    Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
-
     // PWA manifest.json
-
     Route::get('manifest.webmanifest', 'PwaController@index')->name('pwa.index');
 
     // Icons
@@ -111,55 +91,45 @@ Route::group(['middleware' => ['web']], function () {
 
 
     /*
-    Dashboard
-    ========
+    Dashboard & common stuff
+    ========================
 
     Basic homepage for all users, either logged in or not.
     The idea is to provide a group listing (most active first) and a list of groups subscribed to by the current user.
     */
     Route::get('/', 'DashboardController@index')->name('index');
     Route::get('presentation', 'DashboardController@presentation')->name('presentation');
+
+    // Various content types index (discussion, files, users, etc...
     Route::get('discussions', 'DiscussionController@index')->name('discussions');
     Route::get('users', 'UserController@index')->name('users');
     Route::get('files', 'FileController@index')->name('files');
     Route::get('map', 'MapController@index')->name('map');
     Route::get('map.geojson', 'MapController@geoJson')->name('map.geojson');
-
     Route::get('agenda', 'ActionController@index')->name('agenda');
     Route::get('agenda/json', 'ActionController@indexJson')->name('agenda.json');
     Route::get('agenda/ical', 'IcalController@index')->name('agenda.ical');
-
     Route::get('tags', 'TagController@index')->name('tags.index');
     Route::get('tags/{tag}', 'TagController@show')->name('tags.show');
 
-
-    /* Pages */
+    // Pages
     Route::get('pages/help', 'PageController@help')->name('pages.help');
 
-    /*
-    Feeds (RSS ftw!)
-    ===========================================
-    */
+    // Feeds (RSS)
     Route::get('discussions/feed', 'FeedController@discussions')->name('discussions.feed');
     Route::get('actions/feed', 'FeedController@actions')->name('actions.feed');
 
-
-
-    /////////////////// COMMON STUFF (Dashboard & overview) /////////////////////
-
-    // application homepage, lists all groups on the server
+    // Group handling
     Route::get('groups', 'GroupController@index')->name('groups.index');
     Route::get('groups/my', 'GroupController@indexOfMyGroups')->name('groups.index.my');
     Route::get('groups/create', 'GroupController@create')->name('groups.create');
     Route::post('groups/create', 'GroupController@store')->name('groups.store');
 
-    // Groups : what everyone can see, homepage and covers
+    // Group homepage and covers
     Route::get('groups/{group}', 'GroupController@show')->name('groups.show');
     Route::get('groups/{group}/cover/{size}', 'GroupCoverController@show')->name('groups.cover');
 
-
     // Invite system for groups
-
     Route::get('invites', 'InviteController@index')->name('invites.index');
     Route::get('invites/{membership}/accept', 'InviteController@accept')->name('invites.accept');
     Route::get('invites/{membership}/deny', 'InviteController@deny')->name('invites.deny');
@@ -182,19 +152,13 @@ Route::group(['middleware' => ['web']], function () {
 
 
     // Users
-
     Route::get('users/{user}', 'UserController@show')->name('users.show');
-
     Route::get('users/{user}/cover/{size}', 'UserCoverController@show')->name('users.cover');
-
     Route::get('users/{user}/sendverification', 'UserController@sendVerificationAgain')->name('users.sendverification');
-
     Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit');
     Route::post('users/{user}', 'UserController@update')->name('users.update');
-
     Route::get('users/{user}/delete', 'UserController@destroy')->name('users.delete.confirm');
     Route::delete('users/{user}/delete', 'UserController@destroy')->name('users.delete');
-
     Route::get('users/{user}/contact', 'UserController@contactForm')->name('users.contactform');
     Route::post('users/{user}/contact', 'UserController@contact')->name('users.contact');
 
@@ -210,10 +174,11 @@ Route::group(['middleware' => ['web']], function () {
 
 
 
-    //////////////////////////// GROUPS /////////////////////////////////////////
+    /*
+    Groups
+    ======
+    */
 
-
-    // Groups : only members (or everyone if a group is public)
     Route::group(['as' => 'groups', 'prefix' => 'groups/{group}'], function () {
 
         // Crud stuff
@@ -234,8 +199,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('files/mention', 'MentionController@files')->name('.files.mention');
 
 
-        /***************** Memberships for users ***********/
-
         // Member's list
         Route::get('users', 'GroupMembershipController@index')->name('.users.index');
 
@@ -243,8 +206,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('join', 'GroupMembershipController@create')->name('groups.membership.create');
         Route::post('join', 'GroupMembershipController@store')->name('groups.membership.store');
 
-
-        // preferences and leave group
+        // Preferences and leave group
         Route::get('preferences', 'GroupMembershipController@edit')->name('.mymembership.edit');
         Route::post('preferences', 'GroupMembershipController@update')->name('.mymembership.update');
         Route::get('leave', 'GroupMembershipController@destroyConfirm')->name('.mymembership.deleteconfirm');
@@ -254,42 +216,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('howtojoin', 'GroupMembershipController@howToJoin')->name('.howtojoin');
 
 
-        /************** Memberships for group admins  ***********/
-
-        // mass invite
-        Route::get('membership/create', 'GroupMassMembershipController@create')->name('.membership.create');
-        Route::post('membership/store', 'GroupMassMembershipController@store')->name('.membership.store');
-
-        // edit existing memberships
-        Route::get('membership/{membership}', 'GroupMembershipAdminController@edit')->name('.membership.edit');
-        Route::post('membership/{membership}', 'GroupMembershipAdminController@update')->name('.membership.update');
-
-
-
-
-        // Stats
-        Route::get('insights', 'GroupInsightsController@index')->name('.insights');
-
-
-        // Invites
-        Route::get('invite', 'InviteController@invite')->name('.invite.form');
-        Route::post('invite', 'InviteController@sendInvites')->name('.invite');
-
-
-
-
-
-        // Stats
-        Route::get('insights', 'GroupInsightsController@index')->name('.insights');
-
-
-
 
         // Maps
         Route::get('map', 'GroupMapController@index')->name('.map');
         Route::get('map.geojson', 'GroupMapController@geoJson')->name('.map.geojson');
-
-
 
 
         // Discussions
@@ -360,6 +290,30 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('files/{file}/preview', 'FileDownloadController@preview')->name('.files.preview');
         Route::get('files/{file}/icon', 'FileDownloadController@icon')->name('.files.icon');
 
+
+        /*
+        Group admin
+        ===========
+        */
+
+        // Mass invite
+        Route::get('membership/create', 'GroupMassMembershipController@create')->name('.membership.create');
+        Route::post('membership/store', 'GroupMassMembershipController@store')->name('.membership.store');
+
+        // Edit existing memberships
+        Route::get('membership/{membership}', 'GroupMembershipAdminController@edit')->name('.membership.edit');
+        Route::post('membership/{membership}', 'GroupMembershipAdminController@update')->name('.membership.update');
+
+        // Stats
+        Route::get('insights', 'GroupInsightsController@index')->name('.insights');
+
+        // Invites
+        Route::get('invite', 'InviteController@invite')->name('.invite.form');
+        Route::post('invite', 'InviteController@sendInvites')->name('.invite');
+
+        // Stats
+        Route::get('insights', 'GroupInsightsController@index')->name('.insights');
+
         // Allowed Tags
         Route::get('tags', 'GroupTagController@edit')->name('.tags.edit');
         Route::post('tags', 'GroupTagController@update')->name('.tags.update');
@@ -374,45 +328,32 @@ Route::group(['middleware' => ['web']], function () {
 
 
 
-    /***************** ADMIN STUFF **************/
     /*
+    Server administration
+    =====================
+
     Altough we want as little admin so called "rights" or "power" some stuff must be handled by a small group of trusted people like:
     - group creation (that is even questionable, and not yet the case - we want self service)
     - homepage introduction text
+    - various global application settings
     */
 
     Route::group(['middleware' => ['admin']], function () {
+        // logs
         Route::get('admin/logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+        // settings
         Route::get('admin/settings', 'Admin\SettingsController@index');
         Route::post('admin/settings', 'Admin\SettingsController@update');
-
+        // users
         Route::resource('admin/user', 'Admin\UserController');
+        // stats
         Route::get('admin/insights', 'Admin\InsightsController@index')->name('admin.insights');
-
+        // undelete content
         Route::get('admin/undo', 'UndoController@index')->name('admin.undo');
         Route::get('admin/{type}/{id}/restore', 'UndoController@restore')->name('admin.restore');
-
+        // list of group admins
         Route::get('admin/groupadmins', 'Admin\GroupAdminsController@index');
-
+        // list of groups
         Route::get('admin/group', 'Admin\GroupController@index');
-
-
-        Route::get('admin/messages', 'Admin\MessageController@index')->name('admin.messages.index');
-        Route::get('admin/messages/{message}', 'Admin\MessageController@show')->name('admin.messages.show');
-
-
-
-        // mailable preview, for devs mainly
-        Route::get('admin/mailable', function () {
-            $notif = new App\Mail\Notification();
-            $notif->user = \App\User::first();
-            $notif->group = \App\Group::first();
-            $notif->discussions = \App\Discussion::take(5)->get();
-            $notif->actions = \App\Action::take(5)->get();
-            $notif->users = \App\User::take(5)->get();
-            $notif->files = \App\File::take(5)->get();
-
-            return $notif;
-        });
     });
 });
