@@ -72,7 +72,7 @@
                         @endif
                         @if (setting('show_overview_discussions', true))
                             <a class="dropdown-item messages.discussions "
-                                href="{{ action('DiscussionController@index') }}">
+                                href="{{ route('discussions') }}">
                                 {{ trans('messages.discussions') }}
                             </a>
                         @endif

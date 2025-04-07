@@ -1,6 +1,6 @@
 <div class="">
     @auth
-        @if (isset($group))
+        @if ($group->exists)
             <div class="d-flex justify-content-between mb-2">
                 @can('create-discussion', $group)
                     <a class="btn btn-primary me-2" href="{{ route('groups.discussions.create', $group) }}">
