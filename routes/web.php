@@ -199,23 +199,18 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('files/mention', 'MentionController@files')->name('.files.mention');
 
 
-        // Member's list
+        // Group users : list
         Route::get('users', 'GroupMembershipController@index')->name('.users.index');
-
-        // Join and apply for a group
-        Route::get('join', 'GroupMembershipController@create')->name('groups.membership.create');
-        Route::post('join', 'GroupMembershipController@store')->name('groups.membership.store');
-
-        // Preferences and leave group
-        Route::get('preferences', 'GroupMembershipController@edit')->name('.mymembership.edit');
-        Route::post('preferences', 'GroupMembershipController@update')->name('.mymembership.update');
-        Route::get('leave', 'GroupMembershipController@destroyConfirm')->name('.mymembership.deleteconfirm');
-        Route::post('leave', 'GroupMembershipController@destroy')->name('.mymembership.delete');
+        // Join, apply, preferences and leave a group
+        Route::get('join', 'GroupMembershipController@create')->name('.users.create');
+        Route::post('join', 'GroupMembershipController@store')->name('.users.store');
+        Route::get('preferences', 'GroupMembershipController@edit')->name('.users.edit');
+        Route::post('preferences', 'GroupMembershipController@update')->name('.users.update');
+        Route::get('leave', 'GroupMembershipController@destroyConfirm')->name('.users.deleteconfirm');
+        Route::post('leave', 'GroupMembershipController@destroy')->name('.users.delete');
 
         // In the case of closed group, we show an how to join message (not in use currently)
-        Route::get('howtojoin', 'GroupMembershipController@howToJoin')->name('.howtojoin');
-
-
+        Route::get('howtojoin', 'GroupMembershipController@howToJoin')->name('.users.howtojoin');
 
         // Maps
         Route::get('map', 'GroupMapController@index')->name('.map');
