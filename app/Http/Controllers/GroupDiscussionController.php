@@ -6,9 +6,6 @@ use App\Discussion;
 use App\File;
 use App\Group;
 use Auth;
-use URL;
-use Carbon\Carbon;
-use Gate;
 use Illuminate\Http\Request;
 
 class GroupDiscussionController extends Controller
@@ -25,42 +22,55 @@ class GroupDiscussionController extends Controller
      */
     public function index(Request $request, Group $group)
     {
-        $this->authorize('view-discussions', $group);
+        // First define the groups we want to show discussions for, groups id's will be stored in the $groups array
+        // If we have a group in the url, easy, show discussions belonging to this group
+        if ($group->exists) {
+            $this->authorize('view-discussions', $group);
+            $groups[] = $group->id;
+        }
+        // If not we need to show some kind of overview
+        else {
+            if (Auth::check()) {
+                // user is logged in, we show according to preferences
+                $groups = Auth::user()->getVisibleGroups();
+            } else {
+                // anonymous users get all public groups
+                $groups = Group::public()->pluck('id');
+            }
+        }
 
-        $discussion = new Discussion;
-        $discussion->group()->associate($group);
-
-        // for the tag filter frop down
-        $tags = $discussion->getTagsInUse();
         $tag = $request->get('tag');
 
+        // Build the query and filter based on groups and tags
+        $discussions = Discussion::with('group', 'user', 'tags', 'comments')
+            ->whereIn('group_id', $groups)
+            ->has('user')
+            ->withCount('comments')
+            ->orderBy('status', 'desc')
+            ->orderBy('updated_at', 'desc')
+            ->when($tag, function ($query) use ($tag) {
+                return $query->withAnyTags($tag);
+            });
+
+        // Load unread count if we have a user
         if (Auth::check()) {
-            $discussions =
-                $group->discussions()
-                ->has('user')
-                ->with('userReadDiscussion', 'group', 'user', 'tags', 'comments')
-                ->withCount('comments')
-                ->orderBy('status', 'desc')
-                ->orderBy('updated_at', 'desc')
-                ->when($tag, function ($query) use ($tag) {
-                    return $query->withAnyTags($tag);
-                });
-        } else { // don't load the unread relation, since we don't know who to look for.
-            $discussions = $group->discussions()->has('user')->with('user', 'group', 'tags')->withCount('comments')->orderBy('updated_at', 'desc');
+            $discussions->with('userReadDiscussion');
         }
 
+        // Handle search
         if ($request->has('search')) {
-            $discussions = $discussions->search($request->get('search'));
+            $discussions->search($request->get('search'));
         }
 
-        $discussions = $discussions->paginate(50);
+        // Paginate the beast
+        $discussions = $discussions->paginate(25);
 
         return view('discussions.index')
             ->with('title', $group->name . ' - ' . trans('messages.discussions'))
             ->with('discussions', $discussions)
-            ->with('tags', $tags)
             ->with('group', $group)
             ->with('tab', 'discussion');
+
     }
 
     /**

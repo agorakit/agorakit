@@ -101,7 +101,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('presentation', 'DashboardController@presentation')->name('presentation');
 
     // Various content types index (discussion, files, users, etc...
-    Route::get('discussions', 'DiscussionController@index')->name('discussions');
+    Route::get('discussions', 'GroupDiscussionController@index')->name('discussions');
     Route::get('users', 'UserController@index')->name('users');
     Route::get('files', 'FileController@index')->name('files');
     Route::get('map', 'MapController@index')->name('map');
