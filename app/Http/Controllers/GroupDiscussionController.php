@@ -6,6 +6,7 @@ use App\Discussion;
 use App\File;
 use App\Group;
 use Auth;
+use Context;
 use Illuminate\Http\Request;
 
 
@@ -23,27 +24,9 @@ class GroupDiscussionController extends BaseController
      */
     public function index(Request $request, Group $group)
     {
-        dd(Route::getCurrentRoute()->parameters());
-        // First define the groups we want to show discussions for, groups id's will be stored in the $groups array
-        // If we have a group in the url, easy, show discussions belonging to this group
-        if ($group->exists) {
-            $this->authorize('view-discussions', $group);
-            $groups[] = $group->id;
-            $context = 'group';
-        }
-        // If not we need to show some kind of overview
-        else {
-            if (Auth::check()) {
-                // user is logged in, we show according to preferences
-                $groups = Auth::user()->getVisibleGroups();
-            } else {
-                // anonymous users get all public groups
-                $groups = Group::public()->pluck('id');
-            }
-            $context = 'overview';
-        }
-
         $tag = $request->get('tag');
+
+        $groups = Context::getGroupIds();
 
         // Build the query and filter based on groups and tags
         $discussions = Discussion::with('group', 'user', 'tags', 'comments')
@@ -72,7 +55,6 @@ class GroupDiscussionController extends BaseController
         return view('discussions.index')
             ->with('title', $group->name . ' - ' . trans('messages.discussions'))
             ->with('discussions', $discussions)
-            ->with('context', $context)
             ->with('group', $group)
             ->with('tab', 'discussions');
     }
@@ -108,7 +90,6 @@ class GroupDiscussionController extends BaseController
      */
     public function store(Request $request, Group $group)
     {
-
         // if no group is in the route, it means user chose the group using the dropdown
         if (!$group->exists) {
             $group = \App\Group::find($request->get('group'));

@@ -20,17 +20,20 @@
         </div>
 
         <div class="container mt-md-4 p-md-4 p-2" up-main="modal">
-            @if (isset($context) && $context == 'group')
+            @if (Context::isGroup())
                 @include('groups.tabs')
             @endif
-            @if (isset($context) && $context == 'overview')
+            @if (Context::isOverview())
                 @include('dashboard.tabs')
             @endif
             <main>
                 @yield('content')
+                <div class="mt-5">Context : {{ Context::get() }} </div>
             </main>
         </div>
     </div>
+
+
 
     @include('partials.footer')
 

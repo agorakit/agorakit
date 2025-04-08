@@ -5,13 +5,13 @@ namespace App\Services;
 use App\Group;
 use Auth;
 use Route;
+use Illuminate\Support\Facades\Gate;
 
 /**
  * This service is responsible to return the correct context the user is currently in.
  */
 class ContextService
 {
-
     /**
      * Returns current context as a string, can be : 
      * - overview
@@ -23,19 +23,10 @@ class ContextService
         //$group_id = $request->route()->parameter('id');
         // if $request->routeIs('groups.*')
         if ($group && $group->exists) {
-            $this->authorize('view-discussions', $group);
-            $groups[] = $group->id;
             $context = 'group';
         }
         // If not we need to show some kind of overview
         else {
-            if (Auth::check()) {
-                // user is logged in, we show according to preferences
-                $groups = Auth::user()->getVisibleGroups();
-            } else {
-                // anonymous users get all public groups
-                $groups = Group::public()->pluck('id');
-            }
             $context = 'overview';
         }
         return $context;
@@ -76,7 +67,7 @@ class ContextService
 
         $group = Route::getCurrentRoute()->parameter('group');
         if ($group && $group->exists) {
-            $this->authorize('view-discussions', $group);
+            Gate::authorize('view-discussions', $group);
             $groups[] = $group->id;
         }
         // If not we need to show some kind of overview
