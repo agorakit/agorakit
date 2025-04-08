@@ -10,7 +10,7 @@ use Context;
 use Illuminate\Http\Request;
 
 
-class GroupDiscussionController extends BaseController
+class GroupDiscussionController extends Controller
 {
     public function __construct()
     {
