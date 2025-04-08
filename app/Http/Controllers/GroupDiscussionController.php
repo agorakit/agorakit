@@ -26,7 +26,7 @@ class GroupDiscussionController extends BaseController
     {
         $tag = $request->get('tag');
 
-        $groups = Context::getGroupIds();
+        $groups = Context::getVisibleGroups();
 
         // Build the query and filter based on groups and tags
         $discussions = Discussion::with('group', 'user', 'tags', 'comments')
