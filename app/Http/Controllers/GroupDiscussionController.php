@@ -8,6 +8,7 @@ use App\Group;
 use Auth;
 use Illuminate\Http\Request;
 
+
 class GroupDiscussionController extends BaseController
 {
     public function __construct()
@@ -22,6 +23,7 @@ class GroupDiscussionController extends BaseController
      */
     public function index(Request $request, Group $group)
     {
+        dd(Route::getCurrentRoute()->parameters());
         // First define the groups we want to show discussions for, groups id's will be stored in the $groups array
         // If we have a group in the url, easy, show discussions belonging to this group
         if ($group->exists) {
@@ -73,7 +75,6 @@ class GroupDiscussionController extends BaseController
             ->with('context', $context)
             ->with('group', $group)
             ->with('tab', 'discussions');
-
     }
 
     /**
