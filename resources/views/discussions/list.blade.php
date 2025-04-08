@@ -2,17 +2,31 @@
     @auth
 
         <div class="d-flex justify-content-between mb-2">
-            
-                <a class="btn btn-primary me-2" href="{{ route('discussions.create', $group) }}">
-                    {{ trans('messages.create_discussion') }}
-                </a>
-            
+            @if ($context == 'group')
+                @can('create-discussion', $group)
+                    <a class="btn btn-primary me-2" href="{{ route('groups.discussions.create', $group) }}">
+                        {{ trans('messages.create_discussion') }}
+                    </a>
+                @endcan
 
-            <form action="{{ route('discussions') }}" method="GET" role="search" up-autosubmit up-target=".discussions"
-                up-watch-delay="500">
-                <input aria-label="Search" class="form-control" name="search" placeholder="{{ __('messages.search') }}..." type="text"
-                    value="{{ Request::get('search') }}">
-            </form>
+                <form action="{{ route('groups.discussions.index', $group) }}" method="GET" role="search" up-autosubmit up-target=".discussions"
+                    up-watch-delay="500">
+                    <input aria-label="Search" class="form-control" name="search" placeholder="{{ __('messages.search') }}..." type="text"
+                        value="{{ Request::get('search') }}">
+                </form>
+            @endif
+
+            @if ($context == 'overview')
+                    <a class="btn btn-primary me-2" href="{{ route('discussions.create') }}">
+                        {{ trans('messages.create_discussion') }}
+                    </a>
+
+                <form action="{{ route('discussions') }}" method="GET" role="search" up-autosubmit up-target=".discussions"
+                    up-watch-delay="500">
+                    <input aria-label="Search" class="form-control" name="search" placeholder="{{ __('messages.search') }}..." type="text"
+                        value="{{ Request::get('search') }}">
+                </form>
+            @endif
 
         </div>
 

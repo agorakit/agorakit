@@ -8,7 +8,7 @@ use App\Group;
 use Auth;
 use Illuminate\Http\Request;
 
-class GroupDiscussionController extends Controller
+class GroupDiscussionController extends BaseController
 {
     public function __construct()
     {
