@@ -13,6 +13,7 @@
         </div>
 
     </div>
+    
 
     <div class="mt-4" up-poll>
         @forelse($discussions as $discussion)

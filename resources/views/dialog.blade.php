@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <div class="page page-center" up-main>
+    <main class="page page-center" up-main>
         <div class="container container-tight p-4">
             <div up-main="modal">
                 @include('partials.errors')
@@ -16,7 +16,7 @@
             </div>
         </div>
         @include('partials.footer')
-    </div>
+    </main>
 
 </body>
 
