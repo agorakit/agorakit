@@ -99,18 +99,19 @@ class ContextService
                         $groups = Group::pluck('id');
                     } else {
                         // return all groups the user is member of
-                        return $groups = Auth::user()->groups()->pluck('groups.id');
-                    }
-                    // a normal user can decide to see all his/her groups, including public groups
-                    if ($this->get() == 'public') {
-                        $groups = Group::public()
-                            ->pluck('id')
-                            ->merge(Auth::user()->groups()->pluck('groups.id'));
-                    }
-                    // A user can decide to see only his/her groups :
-                    if ($this->get() == 'my') {
                         $groups = Auth::user()->groups()->pluck('groups.id');
                     }
+                }
+
+                // a normal user can decide to see all his/her groups, including public groups
+                if ($this->get() == 'public') {
+                    $groups = Group::public()
+                        ->pluck('id')
+                        ->merge(Auth::user()->groups()->pluck('groups.id'));
+                }
+                // A user can decide to see only his/her groups :
+                if ($this->get() == 'my') {
+                    $groups = Auth::user()->groups()->pluck('groups.id');
                 }
             } else {
                 // anonymous users get all public groups

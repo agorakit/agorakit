@@ -28,7 +28,9 @@
             @endif
             <main>
                 @yield('content')
+
                 <div class="mt-5">Context : {{ Context::get() }} </div>
+                <div>Visible groups {{ Context::getVisibleGroups() }}</div>
             </main>
         </div>
     </div>
