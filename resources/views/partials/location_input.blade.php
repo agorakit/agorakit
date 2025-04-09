@@ -1,4 +1,19 @@
-    <fieldset class="form-fieldset">
+@if (is_a($model, "App\Action"))
+    <fieldset id="new" class="form-fieldset">
+        <div class="small-help">
+            <i class="fas fa-info-circle"></i>
+            {{trans('messages.listed_location')}}
+        </div>
+        {!! Form::label('listed_location', trans('Will this event take place in one of these locations?') . ':') !!}
+        {!! Form::select('listed_location', [''=> ' --- '] + $listedLocations + ['other' => trans('Other')]],
+	    null,
+	    ['class' => 'form-control mb-4'])
+	!!}
+    <p><strong>{{ trans('Otherwise please enter your venue here:') }}</strong></p>
+    </fieldset>
+@endif
+
+    <fieldset id="new" class="form-fieldset">
       <label class="form-label h3">{{trans('messages.location')}}</label>
         <div class="small-help mb-3">
             <i class="fas fa-info-circle"></i>
