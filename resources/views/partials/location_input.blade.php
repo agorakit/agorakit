@@ -1,5 +1,5 @@
 @if (is_a($model, "App\Action"))
-    <fieldset id="new" class="form-fieldset">
+    <fieldset id="menu" class="form-fieldset">
         <div class="small-help">
             <i class="fas fa-info-circle"></i>
             {{trans('messages.listed_location')}}
@@ -38,3 +38,19 @@
             {!! Form::text('location[name]', $model->location->name, ['class' => 'form-control']) !!}
         </div>
     </fieldset>
+
+@if (is_a($model, "App\Action"))
+<script lang="javascript">
+    let locationList = document.getElementById("menu");
+    let outputBox = document.getElementById("new");
+    outputBox.style.display = 'none';
+    function newLocation() {
+        if (locationList.selectedOptions[0].value == 'other') {
+            outputBox.style.display = 'table';
+        }
+        else {
+            outputBox.style.display = 'none';
+        }
+    }
+</script>
+@endif
