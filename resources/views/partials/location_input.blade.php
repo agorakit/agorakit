@@ -9,7 +9,7 @@
 	    null,
 	    ['class' => 'form-control mb-4'])
 	!!}
-    <p><strong>{{ trans('Otherwise please enter your venue here:') }}</strong></p>
+    <p id="otherwise"><strong>{{ trans('Otherwise please enter your venue here:') }}</strong></p>
     </fieldset>
 @endif
 
@@ -42,6 +42,8 @@
 @if (is_a($model, "App\Action"))
 <script lang="javascript">
     let locationList = document.getElementById("menu");
+    let messageLine = document.getElementById("otherwise");
+    messageLine.style.display = 'none';
     let outputBox = document.getElementById("new");
     outputBox.style.display = 'none';
     function newLocation() {
