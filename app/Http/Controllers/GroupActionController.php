@@ -127,6 +127,20 @@ class GroupActionController extends Controller
         return $events;
     }
 
+
+    /**
+     * Prepare locations list for web menu
+     */
+    public function getListedLocations(Group $group)
+    {
+        $listed_locations = [];
+        foreach ($group->getNamedLocations() as $location) {
+            $listed_locations[$location->name] = $location->name . " (" . $location->city . ")";
+        }
+        return $listed_locations;
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -171,10 +185,6 @@ class GroupActionController extends Controller
         }
 
         $action->group()->associate($group);
-        $listed_locations = [];
-        foreach ($group->getNamedLocations() as $location) {
-          $listed_locations[$location->name] = $location->name . " (" . $location->city . ")";
-        }
 
         return view('actions.create')
             ->with('action', $action)
@@ -182,7 +192,7 @@ class GroupActionController extends Controller
             ->with('group', $group)
             ->with('allowedTags', $action->getTagsInUse())
             ->with('newTagsAllowed', $action->areNewTagsAllowed())
-            ->with('listedLocations', $listed_locations)
+            ->with('listedLocations', $this->getListedLocations($action->group))
             ->with('tab', 'action');
     }
 
@@ -328,10 +338,6 @@ class GroupActionController extends Controller
     public function edit(Request $request, Group $group, Action $action)
     {
         $this->authorize('update', $action);
-        $listed_locations = [];
-        foreach ($group->getNamedLocations() as $location) {
-          $listed_locations[$location->name] = $location->name . " (" . $location->city . ")";
-        }
 
         return view('actions.edit')
             ->with('action', $action)
@@ -340,7 +346,7 @@ class GroupActionController extends Controller
             ->with('allowedTags', $action->getAllowedTags())
             ->with('newTagsAllowed', $action->areNewTagsAllowed())
             ->with('selectedTags', $action->getSelectedTags())
-            ->with('listedLocations', $listed_locations)
+            ->with('listedLocations', $this->getListedLocations($action->group))
             ->with('tab', 'action');
     }
 
