@@ -5,7 +5,7 @@
             {{trans('messages.listed_location')}}
         </div>
         {!! Form::label('listed_location', trans('Will this event take place in one of these locations?') . ':') !!}
-        {!! Form::select('listed_location', [''=> ' --- '] + $listedLocations + ['other' => trans('Other')]],
+        {!! Form::select('listed_location', [''=> ' --- '] + $listedLocations + ['other' => trans('Other')],
 	    null,
 	    ['class' => 'form-control mb-4'])
 	!!}
