@@ -133,6 +133,7 @@ return [
     'leaving_the_group_called' => 'Leaving the group called',
     'link' => 'Link',
     'list' => 'List',
+    'listed_location' => 'Location',
     'location' => 'Location',
     'location_cannot_be_geocoded' => 'Location cannot be geocoded',
     'location_name_help' => 'Enter a name for this location for future re-use.',
