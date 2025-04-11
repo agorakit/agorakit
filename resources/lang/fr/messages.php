@@ -133,6 +133,7 @@ return [
     'leaving_the_group_called'                       => 'Quitter le groupe',
     'link'                                           => 'Lien',
     'list'                                           => 'Liste',
+    'listed_location'                                => 'Lieu',
     'location'                                       => 'Localisation',
     'location_cannot_be_geocoded'                    => 'L\'emplacement ne peut pas être géocodé',
     'location_name_help'                             => 'Saisir un nom pour cet emplacement en vue d\'une réutilisation ultérieure',
