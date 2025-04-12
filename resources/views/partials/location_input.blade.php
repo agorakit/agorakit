@@ -1,15 +1,15 @@
 @if (is_a($model, "App\Action"))
     <fieldset class="form-fieldset">
+        {!! Form::label('listed_location', trans('messages.location')) !!}
         <div class="small-help">
             <i class="fas fa-info-circle"></i>
-            {{trans('messages.listed_location')}}
+            {{ trans('messages.listed_location_help') }}
         </div>
-        {!! Form::label('listed_location', trans('Will this event take place in one of these locations?') . ':') !!}
-        {!! Form::select('listed_location', [''=> ' --- '] + $listedLocations + ['other' => trans('Other')],
+        {!! Form::select('listed_location', [''=> ' --- '] + $listedLocations + ['other' => trans('messages.other')],
 	    null,
 	    ['id' => 'location_menu', 'class' => 'form-control mb-4', 'onChange' => 'openNewLocation()'])
 	!!}
-    <p id="otherwise"><strong>{{ trans('Otherwise please enter your venue here:') }}</strong></p>
+    <p id="otherwise"><strong>{{ trans('messages.location_other') }}</strong></p>
     </fieldset>
 @endif
 
@@ -49,9 +49,11 @@
     function openNewLocation() {
         if (locationList.selectedOptions[0].value == 'other') {
             outputBox.style.display = 'table';
+            messageLine.style.display = 'table';
         }
         else {
             outputBox.style.display = 'none';
+            messageLine.style.display = 'none';
         }
     }
 </script>
