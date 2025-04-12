@@ -7,6 +7,16 @@
     ],
     "license": "AGPL-3.0-only",
     "type": "project",
+    "authors": [
+        {
+            "name": "Philippe Jadin",
+            "email": "info@agorakit.com"
+        },
+        {
+            "name": "Lincoln Russell",
+            "email": "agorakit@lincolnwebs.com"
+        }
+    ],
     "require": {
         "php": "^8.2",
         "consoletvs/charts": "^6.7",
