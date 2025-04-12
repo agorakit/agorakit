@@ -2,7 +2,7 @@
 
 ## Agorakit, groupware for citizens
 
-Agorakit is open source Web-based groupware. Create collaborative groups where you can organize, discuss, schedule, store & update everyone about what's important. 
+Agorakit is open source Web-based groupware. Create collaborative groups where you can organize, discuss, schedule, store & update everyone about what's important.
 
 Agorakit contains a forum, calendar, file manager and email notifier to help you manage membership, communication, and decision-making as simply as possible. Most of the time, no admin is required in the process as we try to keep it as flat as possible. All the information stays on your own server!
 
@@ -81,5 +81,6 @@ Please drop a line to info (at) agorakit.org to keep in touch.
 
 ## Credits
 * Founder: Philippe Jadin
+* Co-lead: Lincoln Russell
 * Logo: Patrick Iacono
 * Illustrations: Raphaëlle Goffaux
