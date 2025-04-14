@@ -64,7 +64,7 @@ class Activity extends Model
         }
 
         if ($this->model instanceof File) {
-            return route('groups.files.show', [$this->group, $this->model]);
+            return route('files.show', [$this->group, $this->model]);
         }
 
         if ($this->model instanceof Action) {

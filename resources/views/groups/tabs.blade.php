@@ -55,7 +55,7 @@
             @can('viewFiles', $group)
                 <li class="nav-item">
                     <a class="nav-link @if (isset($tab) && $tab == 'files') active @endif"
-                        href="{{ route('groups.files.index', $group) }}">
+                        href="{{ route('files', $group) }}">
                         <i class="fa fa-files-o  me-2"></i> {{ trans('messages.files') }}
                     </a>
                 </li>
@@ -209,7 +209,7 @@
             @can('viewFiles', $group)
                 <li class="nav-item">
                     <a class="nav-link @if (isset($tab) && $tab == 'files') active @endif"
-                        href="{{ route('groups.files.index', $group) }}" title=" {{ trans('messages.files') }}">
+                        href="{{ route('files', $group) }}" title=" {{ trans('messages.files') }}">
                         <i class="fa fa-files-o"></i>
                     </a>
                 </li>

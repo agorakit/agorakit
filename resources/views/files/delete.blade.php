@@ -23,7 +23,7 @@
 
 @endif --}}
 
-    {!! Form::model($file, ['method' => 'DELETE', 'action' => ['GroupFileController@destroy', $group, $file]]) !!}
+    {!! Form::model($file, ['method' => 'DELETE', 'action' => ['FileController@destroy', $group, $file]]) !!}
 
 
     <div class="flex justify-content-between mt-5">

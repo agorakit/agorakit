@@ -2,7 +2,7 @@
 
 @section('content')
 
-    {!! Form::model($file, ['action' => ['GroupFileController@update', $file->group, $file], 'files' => true]) !!}
+    {!! Form::model($file, ['action' => ['FileController@update', $file->group, $file], 'files' => true]) !!}
 
     <div class="form-group">
         {!! Form::label('name', trans('messages.filename')) !!}

@@ -110,6 +110,38 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('icon/{size?}', 'IconController@index')->name('icon');
 
 
+
+    // Files
+    Route::resource('files', FileController::class);
+
+
+    Route::get('files', 'FileController@index')->name('files');
+    Route::get('files/create/{parent?}', 'FileController@create')->name('files.create');
+    Route::post('files/create/{parent?}', 'FileController@store')->name('files.store');
+    Route::get('files/createlink/{parent?}', 'FileController@createLink')->name('files.createlink');
+    Route::post('files/createlink/{parent?}', 'FileController@storeLink')->name('files.storelink');
+    Route::get('files/createfolder/{parent?}', 'FileController@createFolder')->name('files.createfolder');
+    Route::post('files/createfolder/{parent?}', 'FileController@storeFolder')->name('files.storefolder');
+
+    
+    Route::get('files/{file}/delete', 'FileController@destroyConfirm')->name('files.deleteconfirm');
+    Route::delete('files/{file}/delete', 'FileController@destroy')->name('files.delete');
+
+    Route::get('files/{file}/pin', 'FileController@pin')->name('files.pin');
+    Route::get('files/{file}/archive', 'FileController@archive')->name('files.archive');
+
+    Route::get('files/{file}/download', 'FileDownloadController@download')->name('files.download');
+    Route::get('files/{file}/thumbnail', 'FileDownloadController@thumbnail')->name('files.thumbnail');
+    Route::get('files/{file}/preview', 'FileDownloadController@preview')->name('files.preview');
+    Route::get('files/{file}/icon', 'FileDownloadController@icon')->name('files.icon');
+
+
+
+    // redirection 
+
+     Route::redirect('groups/{group}/files', '/files');
+     Route::redirect('groups/{group}/files/{file}', '/files/{file}');
+
     /*
     Dashboard
     ========
@@ -337,28 +369,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('actions/{action}/participation', 'ParticipationController@edit')->name('.actions.participation');
         Route::post('actions/{action}/participation', 'ParticipationController@update')->name('.actions.participation.update');
 
-        // Files
-        Route::get('files', 'GroupFileController@index')->name('.files.index');
-        Route::get('files/create/{parent?}', 'GroupFileController@create')->name('.files.create');
-        Route::post('files/create/{parent?}', 'GroupFileController@store')->name('.files.store');
-        Route::get('files/createlink/{parent?}', 'GroupFileController@createLink')->name('.files.createlink');
-        Route::post('files/createlink/{parent?}', 'GroupFileController@storeLink')->name('.files.storelink');
-        Route::get('files/createfolder/{parent?}', 'GroupFileController@createFolder')->name('.files.createfolder');
-        Route::post('files/createfolder/{parent?}', 'GroupFileController@storeFolder')->name('.files.storefolder');
-
-        Route::get('files/{file}', 'GroupFileController@show')->name('.files.show');
-        Route::get('files/{file}/edit', 'GroupFileController@edit')->name('.files.edit');
-        Route::post('files/{file}', 'GroupFileController@update')->name('.files.update');
-        Route::get('files/{file}/delete', 'GroupFileController@destroyConfirm')->name('.files.deleteconfirm');
-        Route::delete('files/{file}/delete', 'GroupFileController@destroy')->name('.files.delete');
-
-        Route::get('files/{file}/pin', 'GroupFileController@pin')->name('.files.pin');
-        Route::get('files/{file}/archive', 'GroupFileController@archive')->name('.files.archive');
-
-        Route::get('files/{file}/download', 'FileDownloadController@download')->name('.files.download');
-        Route::get('files/{file}/thumbnail', 'FileDownloadController@thumbnail')->name('.files.thumbnail');
-        Route::get('files/{file}/preview', 'FileDownloadController@preview')->name('.files.preview');
-        Route::get('files/{file}/icon', 'FileDownloadController@icon')->name('.files.icon');
+       
 
         // Allowed Tags
         Route::get('tags', 'GroupTagController@edit')->name('.tags.edit');

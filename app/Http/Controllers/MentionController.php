@@ -57,7 +57,7 @@ class MentionController extends Controller
         foreach ($files as $file) {
             $simple_file['id'] = $file->id;
             $simple_file['name'] = $file->name;
-            $simple_file['url'] = route('groups.files.show', [$group, $file]);
+            $simple_file['url'] = route('files.show', [$group, $file]);
             $simple_files[] = $simple_file;
         }
 

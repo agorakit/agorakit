@@ -99,7 +99,7 @@ class UndoController extends Controller
                 $file->timestamps = false;
                 $file->restore();
 
-                return redirect()->route('groups.files.show', [$file->group, $file]);
+                return redirect()->route('files.show', [$file->group, $file]);
             } else {
                 abort(404, 'file is not trashed, cannot restore');
             }

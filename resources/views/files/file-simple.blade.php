@@ -1,19 +1,19 @@
 <div class="file d-flex" up-expand style="overflow: hidden;">
     <div class="thumbnail">
         @if ($file->isLink())
-            <a class="mr-1" href="{{ route('groups.files.download', [$file->group, $file]) }}" target="_blank">
-                <img alt="{{ $file->name }}" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}"/>
+            <a class="mr-1" href="{{ route('files.download', [$file->group, $file]) }}" target="_blank">
+                <img alt="{{ $file->name }}" src="{{ route('files.thumbnail', [$file->group, $file]) }}"/>
             </a>
         @else
-            <a  href="{{ route('groups.files.show', [$file->group, $file]) }}">
-                <img alt="{{ $file->name }}" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}"/>
+            <a  href="{{ route('files.show', [$file->group, $file]) }}">
+                <img alt="{{ $file->name }}" src="{{ route('files.thumbnail', [$file->group, $file]) }}"/>
             </a>
         @endif
     </div>
 
     <div class="content">
         <div class="name">
-            <a href="{{ route('groups.files.download', [$file->group, $file]) }}" target="_blank">
+            <a href="{{ route('files.download', [$file->group, $file]) }}" target="_blank">
                 {{ $file->name }}
                 <i class="fa fa-external-link"></i>
             </a>

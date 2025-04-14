@@ -7,14 +7,14 @@
     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
 
         @can('update', $file)
-        <a class="dropdown-item" href="{{ route('groups.files.edit', [$file->group, $file]) }}">
+        <a class="dropdown-item" href="{{ route('files.edit', [$file->group, $file]) }}">
             <i class="fa fa-pencil me-2"></i>
             {{trans('messages.edit')}}
         </a>
         @endcan
 
         @can('delete', $file)
-        <a class="dropdown-item" href="{{ route('groups.files.deleteconfirm', [$file->group, $file]) }}">
+        <a class="dropdown-item" href="{{ route('files.deleteconfirm', [$file->group, $file]) }}">
             <i class="fa fa-trash me-2"></i>
             {{trans('messages.delete')}}
         </a>
@@ -22,7 +22,7 @@
 
         @can('pin', $file)
         <a  up-cache="false" up-restore-scroll="true" class="dropdown-item"
-            href="{{ route('groups.files.pin', [$file->group, $file]) }}">
+            href="{{ route('files.pin', [$file->group, $file]) }}">
             <i class="fa fa-thumbtack me-2"></i>
             @if($file->isPinned())
             {{trans('messages.unpin')}}
@@ -34,7 +34,7 @@
 
         @can('archive', $file)
         <a  up-cache="false" up-restore-scroll="true" class="dropdown-item"
-            href="{{ route('groups.files.archive', [$file->group, $file]) }}">
+            href="{{ route('files.archive', [$file->group, $file]) }}">
             <i class="fa fa-archive me-2"></i>
             @if($file->isArchived())
             {{trans('messages.unarchive')}}

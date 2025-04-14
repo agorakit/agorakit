@@ -84,7 +84,7 @@ function highlightFiles($content)
                         ->with('file', $file)
                         ->render();
                 } else {
-                    return route('groups.files.show', [$file->group, $file]);
+                    return route('files.show', [$file->group, $file]);
                 }
             } else {
                 return $matches[0];

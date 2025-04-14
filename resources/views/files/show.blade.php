@@ -7,7 +7,7 @@
 
             <h3>
                 <i class="fa fa-folder-open-o"></i>
-                <a up-target=".files" href="{{ route('groups.files.index', $group) }}">
+                <a up-target=".files" href="{{ route('files', $group) }}">
                     <span class="">{{ trans('messages.root') }}</span>
                 </a>
 
@@ -15,7 +15,7 @@
                     @foreach ($breadcrumb as $my_parent)
                         <i class="fa fa-angle-right"></i>
                         <a up-target=".files" class=""
-                            href="{{ route('groups.files.index', ['group' => $group, 'parent' => $my_parent->id]) }}">
+                            href="{{ route('files', ['group' => $group, 'parent' => $my_parent->id]) }}">
                             {{ $my_parent->name }}
                         </a>
                     @endforeach
@@ -30,17 +30,17 @@
         <div class="file">
 
             @if ($file->isImage())
-                <a href="{{ route('groups.files.download', [$group, $file]) }}" target="_blank">
-                    <img alt="{{ $file->name }}" src="{{ route('groups.files.preview', [$group, $file]) }}" class="responsive rounded" />
+                <a href="{{ route('files.download', [$group, $file]) }}" target="_blank">
+                    <img alt="{{ $file->name }}" src="{{ route('files.preview', [$group, $file]) }}" class="responsive rounded" />
                 </a>
             @elseif ($file->isLink())
                 <a href="{{ $file->path }}" target="_blank">
-                    <img alt="{{ $file->name }}" src="{{ route('groups.files.thumbnail', [$group, $file]) }}" class="rounded"
+                    <img alt="{{ $file->name }}" src="{{ route('files.thumbnail', [$group, $file]) }}" class="rounded"
                         style="width: 100px; height: 100px" />
                 </a>
             @else
-                <a href="{{ route('groups.files.download', [$group, $file]) }}" target="_blank">
-                    <img alt="{{ $file->name }}" src="{{ route('groups.files.thumbnail', [$group, $file]) }}" class="rounded"
+                <a href="{{ route('files.download', [$group, $file]) }}" target="_blank">
+                    <img alt="{{ $file->name }}" src="{{ route('files.thumbnail', [$group, $file]) }}" class="rounded"
                         style="width: 100px; height: 100px" />
                 </a>
             @endif
@@ -83,12 +83,12 @@
 
             <div>
                 @if ($file->isLink())
-                    <a class="btn btn-primary" href="{{ route('groups.files.download', [$group, $file]) }}"
+                    <a class="btn btn-primary" href="{{ route('files.download', [$group, $file]) }}"
                         target="_blank">
                         {{ trans('messages.visit') }}
                     </a>
                 @else
-                    <a class="btn btn-primary" href="{{ route('groups.files.download', [$group, $file]) }}"
+                    <a class="btn btn-primary" href="{{ route('files.download', [$group, $file]) }}"
                         target="_blank">
                         <i class="fa fa-download me-2"></i>
                         {{ trans('messages.download') }}
@@ -96,14 +96,14 @@
                 @endif
 
                 @can('update', $file)
-                    <a class="btn btn-secondary" href="{{ route('groups.files.edit', [$group, $file]) }}">
+                    <a class="btn btn-secondary" href="{{ route('files.edit', [$group, $file]) }}">
                         <i class="fa fa-pencil me-2"></i>
                         {{ trans('messages.edit') }}
                     </a>
                 @endcan
 
                 @can('delete', $file)
-                    <a class="btn btn-danger" href="{{ route('groups.files.deleteconfirm', [$group, $file]) }}">
+                    <a class="btn btn-danger" href="{{ route('files.deleteconfirm', [$group, $file]) }}">
                         <i class="fa fa-trash me-2"></i>
                         {{ trans('messages.delete') }}
                     </a>

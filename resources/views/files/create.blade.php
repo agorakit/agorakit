@@ -5,7 +5,7 @@
 
 
     {!! Form::open([
-        'url' => route('groups.files.create', ['group' => $group, 'parent' => $parent]),
+        'url' => route('files.create', ['group' => $group, 'parent' => $parent]),
         'files' => true,
     ]) !!}
     <div class="form-group mt-4 mb-4">

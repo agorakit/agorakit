@@ -5,7 +5,7 @@
 
     <p>{{ trans('messages.create_folder_help') }}</p>
 
-    {!! Form::open(['url' => route('groups.files.createfolder', ['group' => $group, 'parent' => $parent])]) !!}
+    {!! Form::open(['url' => route('files.createfolder', ['group' => $group, 'parent' => $parent])]) !!}
 
     <div class="form-group">
         <label for="name">{{ trans('messages.name') }}</label>

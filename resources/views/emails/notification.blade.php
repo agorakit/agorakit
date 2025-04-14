@@ -70,7 +70,7 @@
 @if ($files->count() > 0)
 <h1>{{trans('messages.latest_files')}}</h1>
 @foreach($files as $file)
-<a  href="{{route('groups.files.show', [$group, $file])}}"><img alt="" src="{{route('groups.files.thumbnail', [$group, $file])}}" style="width: 24px; height:24px"/>{{$file->name}}</a>
+<a  href="{{route('files.show', [$group, $file])}}"><img alt="" src="{{route('files.thumbnail', [$group, $file])}}" style="width: 24px; height:24px"/>{{$file->name}}</a>
 <br/>
 @endforeach
 <br/>

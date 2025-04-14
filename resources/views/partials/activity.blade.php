@@ -58,7 +58,7 @@
         </div>
 
         <div class="detail">
-            <img alt="" src="{{route('groups.files.preview', [$activity->group, $activity->model])}}"/>
+            <img alt="" src="{{route('files.preview', [$activity->group, $activity->model])}}"/>
         </div>
 
         <div class="action">

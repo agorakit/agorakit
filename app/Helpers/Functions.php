@@ -146,7 +146,7 @@ function linkTo($model)
     }
 
     if ($model instanceof App\File) {
-        return route('groups.files.show', [$model->group, $model]);
+        return route('files.show', [$model->group, $model]);
     }
 
     if ($model instanceof App\Action) {

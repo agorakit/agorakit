@@ -2,18 +2,18 @@
 
     <div class="me-3">
         @if ($file->isLink())
-            <a class="" href="{{ route('groups.files.show', [$file->group, $file]) }}">
-                <img alt="{{ $file->name }}" class="avatar" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" />
+            <a class="" href="{{ route('files.show', [$file->group, $file]) }}">
+                <img alt="{{ $file->name }}" class="avatar" src="{{ route('files.thumbnail', [$file->group, $file]) }}" />
             </a>
         @elseif ($file->isFolder())
-            <a class="" href="{{ route('groups.files.index', ['group' => $file->group, 'parent' => $file]) }}"
+            <a class="" href="{{ route('files', ['group' => $file->group, 'parent' => $file]) }}"
                 up-target=".files" up-history=true>
-                <img alt="{{ $file->name }}" class="avatar" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" />
+                <img alt="{{ $file->name }}" class="avatar" src="{{ route('files.thumbnail', [$file->group, $file]) }}" />
             </a>
         @else
-            <a class="mr-4 flex-shrink-0" href="{{ route('groups.files.show', [$file->group, $file]) }}"
+            <a class="mr-4 flex-shrink-0" href="{{ route('files.show', [$file->group, $file]) }}"
                 up-target=".files">
-                <img alt="{{ $file->name }}" class="avatar" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}" />
+                <img alt="{{ $file->name }}" class="avatar" src="{{ route('files.thumbnail', [$file->group, $file]) }}" />
             </a>
         @endif
     </div>
@@ -25,11 +25,11 @@
                     {{ $file->name }}
                 </a>
             @elseif ($file->isFolder())
-                <a href="{{ route('groups.files.index', ['group' => $file->group, 'parent' => $file]) }}">
+                <a href="{{ route('files', ['group' => $file->group, 'parent' => $file]) }}">
                     {{ $file->name }}
                 </a>
             @else
-                <a href="{{ route('groups.files.show', [$file->group, $file]) }}">
+                <a href="{{ route('files.show', [$file->group, $file]) }}">
                     {{ $file->name }}
                 </a>
             @endif

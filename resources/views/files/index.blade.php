@@ -10,7 +10,7 @@
          
 
             @can('create-file', $group)
-                <a class="btn btn-primary" href="{{ route('groups.files.create', ['group' => $group, 'parent' => $parent]) }}"
+                <a class="btn btn-primary" href="{{ route('files.create', ['group' => $group, 'parent' => $parent]) }}"
                     up-layer="new">
                     <i class="fa fa-file me-2"></i>
                     {{ trans('messages.create_file_button') }}
@@ -18,7 +18,7 @@
             @endcan
 
             @can('create-file', $group)
-                <a class="btn btn-primary" href="{{ route('groups.files.createlink', ['group' => $group, 'parent' => $parent]) }}"
+                <a class="btn btn-primary" href="{{ route('files.createlink', ['group' => $group, 'parent' => $parent]) }}"
                     up-layer="new">
                     <i class="fa fa-link me-2"></i>
                     {{ trans('messages.create_link_button') }}
@@ -26,7 +26,7 @@
             @endcan
 
             @can('create-folder', $group)
-                <a class="btn btn-primary" href="{{ route('groups.files.createfolder', ['group' => $group, 'parent' => $parent]) }}"
+                <a class="btn btn-primary" href="{{ route('files.createfolder', ['group' => $group, 'parent' => $parent]) }}"
                     up-layer="new">
                     <i class="fa fa-folder me-2"></i>
                     {{ trans('messages.create_folder_button') }}
@@ -40,7 +40,7 @@
 
         <h3 class="my-3 text-2xl text-gray-800">
 
-            <a href="{{ route('groups.files.index', $group) }}" up-target=".files" up-history=true>
+            <a href="{{ route('files', $group) }}" up-target=".files" up-history=true>
                 <i class="fa fa-folder-open-o"></i>
                 <span class="">{{ trans('messages.root') }}</span>
             </a>
@@ -49,7 +49,7 @@
                 @foreach ($breadcrumb as $my_parent)
                     <i class="fa fa-angle-right fill-current text-secondary"></i>
                     <a class=""
-                        href="{{ route('groups.files.index', ['group' => $group, 'parent' => $my_parent->id]) }}"
+                        href="{{ route('files', ['group' => $group, 'parent' => $my_parent->id]) }}"
                         up-target=".files" up-history=true>
                         {{ $my_parent->name }}
                     </a>

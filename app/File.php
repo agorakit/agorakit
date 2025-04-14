@@ -86,7 +86,7 @@ class File extends Model
 
     public function link()
     {
-        return route('groups.files.download', [$this->group, $this]);
+        return route('files.download', [$this->group, $this]);
     }
 
     /**

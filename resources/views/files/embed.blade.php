@@ -1,12 +1,12 @@
 <div class="mb-3 p-2 file-embed d-inline-block" up-expand>
 <div class="d-flex gap-2">
 <div>
-<img alt="" src="{{ route('groups.files.thumbnail', [$file->group, $file]) }}"
+<img alt="" src="{{ route('files.thumbnail', [$file->group, $file]) }}"
 style="width: 3rem; height: 3rem" class="rounded">
 </div>
 <div>
 <div>
-<a up-layer="new" up-history=false href="{{ route('groups.files.show', [$file->group, $file]) }}">
+<a up-layer="new" up-history=false href="{{ route('files.show', [$file->group, $file]) }}">
 {{ $file->name }}
 </a>
 </div>

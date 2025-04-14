@@ -21,7 +21,7 @@
             "fileType": "docx",
             "key": "{{$file->id}}",
             "title": "{{$file->name}}",
-            "url": "{!!URL::temporarySignedRoute('groups.files.collaboration.download', now()->addMinutes(30), [$group, $file]) !!}"            
+            "url": "{!!URL::temporarySignedRoute('files.collaboration.download', now()->addMinutes(30), [$group, $file]) !!}"            
         },
         "documentType": "word"
     });
