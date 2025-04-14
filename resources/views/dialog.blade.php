@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name=viewport content="width=device-width, initial-scale=1">
+    <meta content="width=device-width, initial-scale=1" name=viewport>
     @include('partials.header')
 </head>
 
@@ -15,6 +15,8 @@
                 @yield('content')
             </div>
         </div>
+        <div class="mt-5">Context : {{ Context::get() }} </div>
+        <div>Visible groups {{ Context::getVisibleGroups() }}</div>
         @include('partials.footer')
     </main>
 

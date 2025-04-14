@@ -3,23 +3,7 @@
 {{-- tabs for desktop size screens : --}}
 
 <div class="mb-4 d-none d-sm-none d-md-block">
-    <h1 class="text-truncate">
-        <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
-        @if (isset($tab) && $tab != 'home')
-            <a href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
-        @else
-            {{ $group->name }}
-        @endif
-
-        @if ($group->isOpen())
-            <i class="fa fa-globe" title="{{ trans('group.open') }}"></i>
-        @elseif ($group->isClosed())
-            <i class="fa fa-lock" title="{{ trans('group.closed') }}"></i>
-        @else
-            <i class="fa fa-eye-slash" title="{{ trans('group.secret') }}"></i>
-        @endif
-    </h1>
-
+    
     @include('partials.invite')
 
     <ul class="nav nav-pills">
@@ -150,23 +134,6 @@
 
 {{-- tabs for mobile size screens : --}}
 <div class="mb-4 mt-2 d-md-none ">
-
-    <h1 class="text-truncate">
-        <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
-        @if (isset($tab) && $tab != 'home')
-            <a href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
-        @else
-            {{ $group->name }}
-        @endif
-
-        @if ($group->isOpen())
-            <i class="fa fa-globe" title="{{ trans('group.open') }}"></i>
-        @elseif ($group->isClosed())
-            <i class="fa fa-lock" title="{{ trans('group.closed') }}"></i>
-        @else
-            <i class="fa fa-eye-slash" title="{{ trans('group.secret') }}"></i>
-        @endif
-    </h1>
 
     @include('partials.invite')
 
