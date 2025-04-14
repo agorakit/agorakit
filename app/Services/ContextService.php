@@ -107,7 +107,6 @@ class ContextService
 
         $group = Route::getCurrentRoute()->parameter('group');
         if ($group && $group->exists) {
-            Gate::authorize('view-discussions', $group);
             $groups[] = $group->id;
         }
         // If not we need to show some kind of overview
