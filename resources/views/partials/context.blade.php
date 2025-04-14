@@ -2,6 +2,15 @@
     <h1 aria-expanded="false" class="dropdown-toggle" data-bs-toggle="dropdown" type="button">
         @if (Context::isGroup())
             {{ $group->name }}
+            <small class="fs-4 text-secondary">
+                @if ($group->isOpen())
+                    <i class="fa fa-globe" title="{{ trans('group.open') }}"></i>
+                @elseif ($group->isClosed())
+                    <i class="fa fa-lock" title="{{ trans('group.closed') }}"></i>
+                @else
+                    <i class="fa fa-eye-slash" title="{{ trans('group.secret') }}"></i>
+                @endif
+            </small>
         @endif
 
         @if (Context::is('my'))
@@ -27,15 +36,14 @@
                 </li>
 
                 @foreach (Auth::user()->groups as $group)
-                    <a class="dropdown-item @if (Context::is($group)) active @endif" href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
+                    <a class="dropdown-item @if (Context::is($group)) active @endif"
+                        href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
                 @endforeach
 
                 <li>
                     <hr class="dropdown-divider">
                 </li>
             @endif
-
-            
 
             <li>
                 <h6 class="dropdown-header">Overview</h6>
