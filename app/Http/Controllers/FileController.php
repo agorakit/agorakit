@@ -24,15 +24,9 @@ class FileController extends Controller
     public function index(Request $request)
     {
         $tags = File::allTagModels()->sortBy('name');
-
         $tag = $request->get('tag');
 
-        if (Auth::check()) {
-            $groups = Auth::user()->getVisibleGroups();
-        } else {
-            $groups = Group::public()->pluck('id');
-        }
-
+        $groups = Context::getVisibleGroups();
 
         $files = File::with('group', 'user', 'tags')
             ->when($tag, function ($query) use ($tag) {

@@ -28,11 +28,7 @@ class ActionController extends Controller
         }
 
         if ($view == 'list') {
-            if (Auth::check()) {
-                $groups = Auth::user()->getVisibleGroups();
-            } else {
-                $groups = \App\Group::public()->pluck('id');
-            }
+            $groups = Context::getVisibleGroups();
 
             $actions = \App\Action::with('group')
                 ->where('start', '>=', Carbon::now()->subDay())
@@ -60,11 +56,7 @@ class ActionController extends Controller
 
     public function indexJson(Request $request)
     {
-        if (Auth::check()) {
-            $groups = Auth::user()->getVisibleGroups();
-        } else {
-            $groups = Group::public()->pluck('id');
-        }
+        $groups = Context::getVisibleGroups();
 
         // load of actions between start and stop provided by calendar js
         if ($request->has('start') && $request->has('end')) {
