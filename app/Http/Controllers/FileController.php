@@ -6,6 +6,7 @@ use Auth;
 use App\File;
 use App\Group;
 use Illuminate\Http\Request;
+use Context;
 
 /**
  * Global listing of files.

@@ -6,6 +6,7 @@ use App\User;
 use App\Group;
 use Auth;
 use Carbon\Carbon;
+use Context;
 
 class MapController extends Controller
 {

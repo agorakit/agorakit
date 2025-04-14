@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Group;
 use Illuminate\Http\Request;
+use Context;
 
 /**
  * This controller generates a global list of discussions with unread count (independant of groups).

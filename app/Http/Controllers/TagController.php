@@ -9,6 +9,7 @@ use App\Tag;
 use App\User;
 use App\Group;
 use Auth;
+use Context;
 use Illuminate\Http\Request;
 
 /**
