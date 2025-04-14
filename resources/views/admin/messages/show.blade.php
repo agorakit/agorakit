@@ -1,83 +1,71 @@
 @extends('app')
 
-
-
 @section('content')
-
-<div class="tab_content">
-
     <h2>
-        {{$message->subject}}
+        {{ $message->subject }}
     </h2>
 
-
-
-
     <div>
-        ID : {{$message->id}}
+        ID : {{ $message->id }}
     </div>
     <div>
-        Subject : {{$message->subject}}
+        Subject : {{ $message->subject }}
     </div>
     <div>
-        From : {{$message->from}}
+        From : {{ $message->from }}
     </div>
     <div>
-        Status : {{$message->status}}
+        Status : {{ $message->status }}
 
         (
         @if ($message->status == App\Message::POSTED)
-        Posted
+            Posted
         @endif
         @if ($message->status == App\Message::NEEDS_VALIDATION)
-        Needs validation
+            Needs validation
         @endif
 
         @if ($message->status == App\Message::CREATED)
-        Created
+            Created
         @endif
 
         @if ($message->status == App\Message::BOUNCED)
-        Bounced
+            Bounced
         @endif
 
         @if ($message->status == App\Message::INVALID)
-        Invalid
+            Invalid
         @endif
 
         @if ($message->status == App\Message::AUTOMATED)
-        Automated
+            Automated
         @endif
 
         @if ($message->status == App\Message::ERROR)
-        Error
+            Error
         @endif
 
         @if ($message->status == App\Message::SPAM)
-        Spam
+            Spam
         @endif
         )
     </div>
-
 
     <div>
         Recipients :
 
         @foreach ($message->extractRecipients() as $recipient)
-        {{$recipient}}
+            {{ $recipient }}
         @endforeach
     </div>
-
 
     <div>Extracted body :</div>
     <div class="border border-gray-700 p-2">
 
-        {!!$message->extractText()!!}
+        {!! $message->extractText() !!}
     </div>
 
-
     <div>Raw message :</div>
-    <pre>{{$message->raw}}
+    <pre>{{ $message->raw }}
     </pre>
-
-    @endsection
+@endsection

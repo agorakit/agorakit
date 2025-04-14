@@ -4,9 +4,6 @@
 
 @include('groups.tabs')
 
-<div class="tab_content">
-
-
   <h2>{{trans('messages.history')}}</h2>
 
   @foreach($comment->revisionHistory as $history )
@@ -16,9 +13,5 @@
   @endforeach
 
 <a  href="{{route('groups.discussions.show', [$group, $comment->discussion])}}#unread" class="btn btn-primary">{{trans('messages.back_to')}} "{{$comment->discussion->name}}"</a>
-
-</div>
-
-
 
 @endsection
