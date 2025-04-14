@@ -1,4 +1,3 @@
-@include('partials.context')
 <ul class="nav nav-underline mb-5 mt-2 gap-5">
     <li class="nav-item">
         <a class="nav-link @if (isset($tab) && $tab == 'homepage') active @endif" href="{{ route('presentation') }}">

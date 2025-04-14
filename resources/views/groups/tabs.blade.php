@@ -1,5 +1,3 @@
-@include('partials.context')
-
 <div class="mb-4">
 
     @include('partials.invite')
@@ -8,7 +6,7 @@
 
         <li class="nav-item">
             <a class="nav-link @if (isset($tab) && $tab == 'home') active @endif" href="{{ route('groups.show', $group) }}">
-                <i class="fa fa-info-circle me-2"></i> 
+                <i class="fa fa-info-circle me-2"></i>
                 <span class="d-none d-sm-inline">{{ trans('messages.group_home') }}</span>
             </a>
         </li>
@@ -17,7 +15,7 @@
             @can('viewDiscussions', $group)
                 <li class="nav-item">
                     <a class="nav-link @if (isset($tab) && $tab == 'discussions') active @endif" href="{{ route('groups.discussions.index', $group) }}">
-                        <i class="fa fa-comments me-2"></i> 
+                        <i class="fa fa-comments me-2"></i>
                         <span class="d-none d-sm-inline">{{ trans('messages.discussions') }}</span>
                     </a>
                 </li>
@@ -28,7 +26,7 @@
             @can('viewActions', $group)
                 <li class="nav-item">
                     <a class="nav-link @if (isset($tab) && $tab == 'action') active @endif" href="{{ route('groups.actions.index', $group) }}">
-                        <i class="fa fa-calendar me-2"></i> 
+                        <i class="fa fa-calendar me-2"></i>
                         <span class="d-none d-sm-inline">{{ trans('messages.agenda') }}</span>
                     </a>
                 </li>
@@ -39,7 +37,7 @@
             @can('viewFiles', $group)
                 <li class="nav-item">
                     <a class="nav-link @if (isset($tab) && $tab == 'files') active @endif" href="{{ route('groups.files.index', $group) }}">
-                        <i class="fa fa-files-o  me-2"></i> 
+                        <i class="fa fa-files-o  me-2"></i>
                         <span class="d-none d-sm-inline">{{ trans('messages.files') }}</span>
                     </a>
                 </li>
@@ -50,7 +48,7 @@
             @can('viewMembers', $group)
                 <li class="nav-item">
                     <a class="nav-link @if (isset($tab) && $tab == 'users') active @endif" href="{{ route('groups.users.index', $group) }}">
-                        <i class="fa fa-users me-2"></i> 
+                        <i class="fa fa-users me-2"></i>
                         <span class="d-none d-sm-inline">{{ trans('messages.members') }}</span>
                     </a>
                 </li>
@@ -62,7 +60,7 @@
                 <li class="nav-item">
                     <a class="nav-link @if (isset($tab) && $tab == 'map') active @endif"
                         href="{{ action('GroupMapController@index', $group) }}">
-                        <i class="fa fa-map-marker me-2"></i> 
+                        <i class="fa fa-map-marker me-2"></i>
                         <span class="d-none d-sm-inline">{{ trans('messages.map') }}</span>
                     </a>
                 </li>
@@ -74,9 +72,8 @@
                 <li class="nav-item">
                     <a class="nav-link @if (isset($tab) && $tab == 'custom') active @endif"
                         href="{{ action('ModuleController@show', $group) }}">
-                        <i class="fa {{ $group->getSetting('module_custom_icon') }} sm:hidden"></i
-                            class="hidden me-2">
-                            <span class="d-none d-sm-inline">{{ $group->getSetting('module_custom_name') }}</span>
+                        <i class="fa {{ $group->getSetting('module_custom_icon') }} sm:hidden"></i class="hidden me-2">
+                        <span class="d-none d-sm-inline">{{ $group->getSetting('module_custom_name') }}</span>
                     </a>
                 </li>
             @endif
@@ -86,7 +83,7 @@
             <li class="nav-item">
                 <a class="nav-link @if (isset($tab) && $tab == 'preferences') active @endif"
                     href="{{ action('GroupMembershipController@edit', $group) }}">
-                    <i class="fa fa-bell-o me-2"></i> 
+                    <i class="fa fa-bell-o me-2"></i>
                     <span class="d-none d-sm-inline">{{ trans('messages.preferences') }}</span>
                 </a>
             </li>
@@ -94,7 +91,7 @@
             <li class="nav-item">
                 <a class="nav-link @if (isset($tab) && $tab == 'settings') active @endif"
                     href="{{ action('GroupMembershipController@create', $group) }}" up-layer="new">
-                    <i class="fa fa-sign-in me-2"></i> 
+                    <i class="fa fa-sign-in me-2"></i>
                     <span class="d-none d-sm-inline">{{ trans('messages.join') }}</span>
                 </a>
             </li>

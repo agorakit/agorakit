@@ -4,7 +4,7 @@
             {{ $group->name }}
             <small class="fs-4 text-secondary">
                 @if ($group->isOpen())
-                    <i class="fa fa-globe" title="{{ trans('group.open') }}"></i>
+                    <i class="fa fa-lock-open" title="{{ trans('group.open') }}"></i>
                 @elseif ($group->isClosed())
                     <i class="fa fa-lock" title="{{ trans('group.closed') }}"></i>
                 @else

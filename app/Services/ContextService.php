@@ -25,6 +25,17 @@ class ContextService
      */
     public function get()
     {
+        if (Route::is('users.*'))
+        {
+            return 'user';
+        }
+
+        if (Route::is('admin.*'))
+        {
+            return 'admin';
+        }
+
+
         $group = Route::getCurrentRoute()->parameter('group');
 
         if ($group && $group->exists) {
