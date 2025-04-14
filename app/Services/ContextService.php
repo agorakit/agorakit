@@ -47,8 +47,17 @@ class ContextService
         return 'public';
     }
 
+    /**
+     * Return true if the passed $context is the current content.
+     * $context can be a Group model or 'my', 'public', 'admin'
+     */
     public function is($context)
-    {
+    {   
+        if ($context instanceof Group)
+        {
+            $group = Route::getCurrentRoute()->parameter('group');
+            return $group && $context->id == $group->id;
+        }
         return $this->get() == $context;
     }
 
