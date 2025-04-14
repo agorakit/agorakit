@@ -1,5 +1,5 @@
 <div class="dropdown">
-    <h1 aria-expanded="false" class="dropdown-toggle" data-bs-toggle="dropdown" type="button">
+    <div aria-expanded="false" class="dropdown-toggle" data-bs-toggle="dropdown" type="button">
         @if (Context::isGroup())
             {{ $group->name }}
             <small class="fs-4 text-secondary">
@@ -21,11 +21,11 @@
             {{ __('messages.overview_public_groups') }}
         @endif
 
-        @if (Context::is('admin'))
+        @if (Context::is('all'))
             {{ __('messages.overview_admin_groups') }}
         @endif
 
-    </h1>
+    </div>
 
     @auth
         <ul class="dropdown-menu">
@@ -61,8 +61,8 @@
             </a>
 
             @if (Auth::check() && Auth::user()->isAdmin())
-                <a class="dropdown-item @if (Context::is('admin')) active @endif"
-                    href="{{ route('index', ['set_preference' => 'show', 'value' => 'admin']) }}">
+                <a class="dropdown-item @if (Context::is('all')) active @endif"
+                    href="{{ route('index', ['set_preference' => 'show', 'value' => 'all']) }}">
                     {{ __('messages.overview_admin_groups') }}
                 </a>
             @endif

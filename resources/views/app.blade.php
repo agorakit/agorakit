@@ -12,7 +12,7 @@
 
     <div up-main>
         @unless (request()->get('embed'))
-            @include('partials.nav')
+            @include('partials.navigation.navbar')
         @endunless
 
         <div class="sticky-messages">
@@ -20,32 +20,8 @@
         </div>
 
         <div class="container mt-md-4 p-md-4 p-2" up-main="modal">
-            <div class="d-flex flex-column flex-sm-row">
-                @if (Context::isGroup() || Context::isOverview())
-                    <div class="flex-grow-1">
-                        @include('partials.context')
-                    </div>
-                @endif
+            @include('partials.navigation.main')
 
-                <div class="ms-auto d-flex">
-                    @auth
-                        <div class="me-3">
-                            <h3> @include('partials.user')</h3>
-                        </div>
-                    @endauth
-
-                    <div>
-                        <h3> @include('partials.locales')</h3>
-                    </div>
-                </div>
-            </div>
-
-            @if (Context::isGroup())
-                @include('groups.tabs')
-            @endif
-            @if (Context::isOverview())
-                @include('dashboard.tabs')
-            @endif
             <main>
                 @yield('content')
 

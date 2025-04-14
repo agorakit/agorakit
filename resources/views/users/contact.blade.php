@@ -1,8 +1,6 @@
 @extends('app')
 
 @section('content')
-    @include('users.tabs')
-
     <h1>{{ __('Contact') }} {{ $user->name }}</h1>
 
     <div class="help">
@@ -18,7 +16,8 @@
 
     <div class="form-check">
         <input checked="checked" class="form-check-input" id="reveal_email" name="reveal_email" type="checkbox">
-        <label class="form-check-label" for="reveal_email">{{ __('Reveal my email to this user so we can communicate by email') }}</label>
+        <label class="form-check-label"
+            for="reveal_email">{{ __('Reveal my email to this user so we can communicate by email') }}</label>
     </div>
 
     <div class="form-group mt-4">

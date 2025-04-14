@@ -7,8 +7,8 @@
         </a>
 
         <!-- navbar toggler hamburger -->
-        <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbar"
-            data-bs-toggle="collapse" type="button">
+        <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+            data-bs-target="#navbar" data-bs-toggle="collapse" type="button">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -56,7 +56,8 @@
                 @if (\Config::has('app.locales') and setting('show_locales_inside_navbar', true))
                     <!-- locales -->
                     <li class="nav-item dropdown">
-                        <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button">
+                        <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+                            href="#" role="button">
                             Locale ({{ strtoupper(app()->getLocale()) }})
                         </a>
 
@@ -79,7 +80,8 @@
                     <!-- Admin -->
                     @if (Auth::user()->isAdmin())
                         <div class="nav-item dropdown">
-                            <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button">
+                            <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+                                href="#" role="button">
                                 {{ trans('messages.server_administration') }}
                             </a>
 
@@ -101,7 +103,8 @@
                                     <i class="fa fa-trash me-2"></i> {{ trans('messages.recover_content') }}
                                 </a>
 
-                                <a class="dropdown-item" href="{{ action('Admin\InsightsController@index') }}" up-follow="false">
+                                <a class="dropdown-item" href="{{ action('Admin\InsightsController@index') }}"
+                                    up-follow="false">
                                     <i class="fa fa-line-chart me-2"></i> {{ trans('messages.insights') }}
                                 </a>
 
@@ -136,7 +139,8 @@
                     <li class="nav-item d-lg-none d-xl-inline mt-2">
                         <form action="{{ url('search') }}" class="d-flex" method="get" role="search">
                             <input aria-label="Search" class="form-control me-2 bg-light text-dark" name="query"
-                                placeholder="{{ trans('messages.search') }}" type="search" value="{{ request()->get('query') }}" />
+                                placeholder="{{ trans('messages.search') }}" type="search"
+                                value="{{ request()->get('query') }}" />
                         </form>
                     </li>
                 @endauth
@@ -144,12 +148,14 @@
                 <!-- User profile -->
                 @auth
                     <div class="nav-item dropdown">
-                        <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button">
+                        <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                            role="button">
                             {{ trans('messages.profile') }} ({{ Auth::user()->name }})
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" role="menu">
-                            <a class="dropdown-item" href="{{ route('users.show', Auth::user()) }}"><i class="fa fa-btn fa-user me-2"></i>
+                            <a class="dropdown-item" href="{{ route('users.show', Auth::user()) }}"><i
+                                    class="fa fa-btn fa-user me-2"></i>
                                 {{ trans('messages.profile') }}</a>
                             <a class="dropdown-item" href="{{ route('users.edit', Auth::user()) }}"><i
                                     class="fa fa-btn fa-user-edit me-2"></i>

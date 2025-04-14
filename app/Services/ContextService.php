@@ -25,13 +25,11 @@ class ContextService
      */
     public function get()
     {
-        if (Route::is('users.*'))
-        {
+        if (Route::is('users.*')) {
             return 'user';
         }
 
-        if (Route::is('admin.*'))
-        {
+        if (Route::is('admin.*')) {
             return 'admin';
         }
 
@@ -44,8 +42,8 @@ class ContextService
         // If not we need to show some kind of overview
         else {
             if (Auth::check()) {
-                if (Auth::user()->getPreference('show', 'my') == 'admin' && Auth::user()->isAdmin()) {
-                    return 'admin';
+                if (Auth::user()->getPreference('show', 'my') == 'all' && Auth::user()->isAdmin()) {
+                    return 'all';
                 }
                 if (Auth::user()->getPreference('show', 'my') == 'public') {
                     return 'public';
@@ -63,9 +61,8 @@ class ContextService
      * $context can be a Group model or 'my', 'public', 'admin'
      */
     public function is($context)
-    {   
-        if ($context instanceof Group)
-        {
+    {
+        if ($context instanceof Group) {
             $group = Route::getCurrentRoute()->parameter('group');
             return $group && $context->id == $group->id;
         }
@@ -81,7 +78,7 @@ class ContextService
      */
     public function set($context)
     {
-        if (in_array($context, ['my', 'public', 'admin'])) {
+        if (in_array($context, ['my', 'public', 'all'])) {
             session(['context' => $context]);
         } else {
             session(['context' => 'overview']);
@@ -93,7 +90,7 @@ class ContextService
      */
     public function isOverview()
     {
-        return $this->get() == 'my' || $this->get() == 'public' || $this->get() == 'admin';
+        return $this->get() == 'my' || $this->get() == 'public' || $this->get() == 'all';
     }
 
     /**
@@ -134,7 +131,7 @@ class ContextService
             if (Auth::check()) {
                 // user is logged in, we show according to preferences
                 // a super admin can decide to see all groups
-                if ($this->get() == 'admin') {
+                if ($this->get() == 'all') {
                     if (Auth::user()->isAdmin()) {
                         $groups = Group::pluck('id');
                     } else {
