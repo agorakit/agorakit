@@ -87,7 +87,7 @@
                 <a class="nav-link @if (isset($tab) && $tab == 'preferences') active @endif"
                     href="{{ action('GroupMembershipController@edit', $group) }}">
                     <i class="fa fa-bell-o me-2"></i> 
-                    <span class="d-none d-sm-inline">{{ trans('messages.settings') }}</span>
+                    <span class="d-none d-sm-inline">{{ trans('messages.preferences') }}</span>
                 </a>
             </li>
         @else
@@ -106,7 +106,7 @@
                 <a aria-controls="admin-contents" aria-expanded="false"
                     class=" nav-link dropdown-toggle  @if (isset($tab) && $tab == 'admin') active @endif" data-bs-toggle="dropdown" href="#"
                     id="admin">
-                    <i class="fa fa-wrench me-2"></i> <span class="d-none d-sm-inline">@lang('Administer')</span>
+                    <i class="fa fa-wrench me-2"></i> <span class="d-none d-sm-inline">{{ trans('messages.settings') }}</span>
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="{{ route('groups.edit', $group) }}">
