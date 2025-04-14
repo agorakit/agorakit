@@ -1,30 +1,15 @@
+
+@include('partials.context')
+
+@include('partials.invite')
+
 {{-- tabs for desktop size screens : --}}
 
 <div class="mb-4 d-none d-sm-none d-md-block">
-    <h1 class="text-truncate">
-        <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
-        @if (isset($tab) && $tab != 'home')
-            <a href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
-        @else
-            {{ $group->name }}
-        @endif
-
-        @if ($group->isOpen())
-            <i class="fa fa-globe" title="{{ trans('group.open') }}"></i>
-        @elseif ($group->isClosed())
-            <i class="fa fa-lock" title="{{ trans('group.closed') }}"></i>
-        @else
-            <i class="fa fa-eye-slash" title="{{ trans('group.secret') }}"></i>
-        @endif
-    </h1>
-
-    @include('partials.invite')
-
     <ul class="nav nav-pills">
 
         <li class="nav-item">
-            <a class="nav-link @if (isset($tab) && $tab == 'home') active @endif"
-                href="{{ route('groups.show', $group) }}">
+            <a class="nav-link @if (isset($tab) && $tab == 'home') active @endif" href="{{ route('groups.show', $group) }}">
                 <i class="fa fa-info-circle me-2"></i> {{ trans('messages.group_home') }}
             </a>
         </li>
@@ -43,8 +28,7 @@
         @if ($group->getSetting('module_action', true) == true)
             @can('viewActions', $group)
                 <li class="nav-item">
-                    <a class="nav-link @if (isset($tab) && $tab == 'action') active @endif"
-                        href="{{ route('groups.actions.index', $group) }}">
+                    <a class="nav-link @if (isset($tab) && $tab == 'action') active @endif" href="{{ route('groups.actions.index', $group) }}">
                         <i class="fa fa-calendar me-2"></i> {{ trans('messages.agenda') }}
                     </a>
                 </li>
@@ -54,8 +38,7 @@
         @if ($group->getSetting('module_file', true) == true)
             @can('viewFiles', $group)
                 <li class="nav-item">
-                    <a class="nav-link @if (isset($tab) && $tab == 'files') active @endif"
-                        href="{{ route('groups.files.index', $group) }}">
+                    <a class="nav-link @if (isset($tab) && $tab == 'files') active @endif" href="{{ route('groups.files.index', $group) }}">
                         <i class="fa fa-files-o  me-2"></i> {{ trans('messages.files') }}
                     </a>
                 </li>
@@ -65,8 +48,7 @@
         @if ($group->getSetting('module_member', true) == true)
             @can('viewMembers', $group)
                 <li class="nav-item">
-                    <a class="nav-link @if (isset($tab) && $tab == 'users') active @endif"
-                        href="{{ route('groups.users.index', $group) }}">
+                    <a class="nav-link @if (isset($tab) && $tab == 'users') active @endif" href="{{ route('groups.users.index', $group) }}">
                         <i class="fa fa-users me-2"></i> {{ trans('messages.members') }}
                     </a>
                 </li>
@@ -116,8 +98,8 @@
             <li class="nav-item dropdown">
 
                 <a aria-controls="admin-contents" aria-expanded="false"
-                    class=" nav-link dropdown-toggle  @if (isset($tab) && $tab == 'admin') active @endif"
-                    data-bs-toggle="dropdown" href="#" id="admin">
+                    class=" nav-link dropdown-toggle  @if (isset($tab) && $tab == 'admin') active @endif" data-bs-toggle="dropdown"
+                    href="#" id="admin">
                     <i class="fa fa-wrench me-2"></i> @lang('Administer')
                 </a>
                 <div class="dropdown-menu">
@@ -154,30 +136,11 @@
 {{-- tabs for mobile size screens : --}}
 <div class="mb-4 mt-2 d-md-none ">
 
-    <h1 class="text-truncate">
-        <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
-        @if (isset($tab) && $tab != 'home')
-            <a href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
-        @else
-            {{ $group->name }}
-        @endif
-
-        @if ($group->isOpen())
-            <i class="fa fa-globe" title="{{ trans('group.open') }}"></i>
-        @elseif ($group->isClosed())
-            <i class="fa fa-lock" title="{{ trans('group.closed') }}"></i>
-        @else
-            <i class="fa fa-eye-slash" title="{{ trans('group.secret') }}"></i>
-        @endif
-    </h1>
-
-    @include('partials.invite')
-
     <ul class="nav nav-pills nav-fill mt-md-5 mt-3 fs-2">
 
         <li class="nav-item">
-            <a class="nav-link @if (isset($tab) && $tab == 'home') active @endif"
-                href="{{ route('groups.show', $group) }}" title="{{ trans('messages.group_home') }}">
+            <a class="nav-link @if (isset($tab) && $tab == 'home') active @endif" href="{{ route('groups.show', $group) }}"
+                title="{{ trans('messages.group_home') }}">
                 <i class="fa fa-info-circle"></i>
             </a>
         </li>
@@ -186,8 +149,7 @@
             @can('viewDiscussions', $group)
                 <li class="nav-item">
                     <a class="nav-link @if (isset($tab) && $tab == 'discussion') active @endif"
-                        href="{{ route('groups.discussions.index', $group) }}"
-                        title="{{ trans('messages.discussions') }}">
+                        href="{{ route('groups.discussions.index', $group) }}" title="{{ trans('messages.discussions') }}">
                         <i class="fa fa-comments"></i>
                     </a>
                 </li>
@@ -197,8 +159,8 @@
         @if ($group->getSetting('module_action', true) == true)
             @can('viewActions', $group)
                 <li class="nav-item">
-                    <a class="nav-link @if (isset($tab) && $tab == 'action') active @endif"
-                        href="{{ route('groups.actions.index', $group) }}" title="{{ trans('messages.agenda') }}">
+                    <a class="nav-link @if (isset($tab) && $tab == 'action') active @endif" href="{{ route('groups.actions.index', $group) }}"
+                        title="{{ trans('messages.agenda') }}">
                         <i class="fa fa-calendar"></i>
                     </a>
                 </li>
@@ -208,8 +170,8 @@
         @if ($group->getSetting('module_file', true) == true)
             @can('viewFiles', $group)
                 <li class="nav-item">
-                    <a class="nav-link @if (isset($tab) && $tab == 'files') active @endif"
-                        href="{{ route('groups.files.index', $group) }}" title=" {{ trans('messages.files') }}">
+                    <a class="nav-link @if (isset($tab) && $tab == 'files') active @endif" href="{{ route('groups.files.index', $group) }}"
+                        title=" {{ trans('messages.files') }}">
                         <i class="fa fa-files-o"></i>
                     </a>
                 </li>
@@ -218,8 +180,8 @@
 
         <li class="nav-item">
             <a aria-controls="admin-contents" aria-expanded="false"
-                class="nav-link dropdown-toggle  @if (isset($tab) && $tab == 'admin') active @endif"
-                data-bs-toggle="dropdown" href="#" id="admin">
+                class="nav-link dropdown-toggle  @if (isset($tab) && $tab == 'admin') active @endif" data-bs-toggle="dropdown"
+                href="#" id="admin">
                 <i class="fas fa-bars"></i>
             </a>
 
