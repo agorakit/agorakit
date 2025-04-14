@@ -335,20 +335,20 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::group(['middleware' => ['admin']], function () {
         // logs
-        Route::get('admin/logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+        Route::get('admin/logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('admin.logs');
         // settings
-        Route::get('admin/settings', 'Admin\SettingsController@index');
-        Route::post('admin/settings', 'Admin\SettingsController@update');
+        Route::get('admin/settings', 'Admin\SettingsController@index')->name('admin.settings');
+        Route::post('admin/settings', 'Admin\SettingsController@update')->name('admin.settings.store');
         // users
-        Route::resource('admin/user', 'Admin\UserController');
+        Route::resource('admin/user', 'Admin\UserController')->name('*', 'admin.users');
         // stats
         Route::get('admin/insights', 'Admin\InsightsController@index')->name('admin.insights');
         // undelete content
-        Route::get('admin/undo', 'UndoController@index')->name('admin.undo');
+        Route::get('admin/undo', 'UndoController@index')->name('admin.undo')->name('admin.undo');
         Route::get('admin/{type}/{id}/restore', 'UndoController@restore')->name('admin.restore');
         // list of group admins
-        Route::get('admin/groupadmins', 'Admin\GroupAdminsController@index');
+        Route::get('admin/groupadmins', 'Admin\GroupAdminsController@index')->name('admin.adminusers');
         // list of groups
-        Route::get('admin/group', 'Admin\GroupController@index');
+        Route::get('admin/group', 'Admin\GroupController@index')->name('admin.groups');
     });
 });
