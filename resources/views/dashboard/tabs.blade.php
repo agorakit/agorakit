@@ -1,3 +1,6 @@
+
+@include('partials.context')
+
  <div class="d-flex gap-2 justify-content-between">
      <h1 class="text-truncate">
          <a href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>

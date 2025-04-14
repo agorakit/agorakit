@@ -32,17 +32,24 @@ class ContextService
         }
         // If not we need to show some kind of overview
         else {
-            if (Auth::user()->getPreference('show', 'my') == 'admin' && Auth::user()->isAdmin()) {
-                return 'admin';
-            }
-            if (Auth::user()->getPreference('show', 'my') == 'public') {
-                return 'public';
-            }
-            if (Auth::user()->getPreference('show', 'my') == 'my') {
-                return 'my';
+            if (Auth::check()) {
+                if (Auth::user()->getPreference('show', 'my') == 'admin' && Auth::user()->isAdmin()) {
+                    return 'admin';
+                }
+                if (Auth::user()->getPreference('show', 'my') == 'public') {
+                    return 'public';
+                }
+                if (Auth::user()->getPreference('show', 'my') == 'my') {
+                    return 'my';
+                }
             }
         }
         return 'public';
+    }
+
+    public function is($context)
+    {
+        return $this->get() == $context;
     }
 
     /**
@@ -75,6 +82,21 @@ class ContextService
     public function isGroup()
     {
         return $this->get() == 'group';
+    }
+
+    /**
+     * Return current group selected in context if there is one (and only one)
+     */
+    public function getGroup()
+    {
+        if ($this->is('group')) {
+            $group = Route::getCurrentRoute()->parameter('group');
+            if ($group && $group->exists) {
+                Gate::authorize('view-discussions', $group);
+                return $group;
+            }
+        }
+        return false;
     }
 
     /**
