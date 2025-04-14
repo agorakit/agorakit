@@ -6,7 +6,7 @@
     
     @include('partials.invite')
 
-    <ul class="nav nav-pills">
+    <ul class="nav nav-underline">
 
         <li class="nav-item">
             <a class="nav-link @if (isset($tab) && $tab == 'home') active @endif" href="{{ route('groups.show', $group) }}">
@@ -137,7 +137,7 @@
 
     @include('partials.invite')
 
-    <ul class="nav nav-pills nav-fill mt-md-5 mt-3 fs-2">
+    <ul class="nav nav-underline">
 
         <li class="nav-item">
             <a class="nav-link @if (isset($tab) && $tab == 'home') active @endif" href="{{ route('groups.show', $group) }}"
