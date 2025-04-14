@@ -18,49 +18,46 @@
 
     </h1>
 
-    <ul class="dropdown-menu">
-
-        @auth
-            <li>
-                <h6 class="dropdown-header">{{ trans('messages.my_groups') }}</h6>
-            </li>
+    @auth
+        <ul class="dropdown-menu">
 
             @if (Auth::user()->groups()->count() > 0)
+                <li>
+                    <h6 class="dropdown-header">{{ trans('messages.my_groups') }}</h6>
+                </li>
+
                 @foreach (Auth::user()->groups as $group)
-                    <a class="dropdown-item" href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
+                    <a class="dropdown-item @if (Context::is($group)) active @endif" href="{{ route('groups.show', $group) }}">{{ $group->name }}</a>
                 @endforeach
+
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
             @endif
+
+            
+
             <li>
-                <hr class="dropdown-divider">
+                <h6 class="dropdown-header">Overview</h6>
             </li>
-        @endauth
 
-        @if (Context::isGroup())
-            <a class="dropdown-item @if ($group->exists) active @endif" href="{{ $group->link() }}">
-                {{ $group->name }}
+            <a class="dropdown-item @if (Context::is('my')) active @endif"
+                href="{{ route('index', ['set_preference' => 'show', 'value' => 'my']) }}">
+                {{ __('messages.overview_my_groups') }}
             </a>
-        @endif
 
-        <li>
-            <h6 class="dropdown-header">Overview</h6>
-        </li>
-
-        <a class="dropdown-item @if (Context::is('my')) active @endif"
-            href="{{ route('index', ['set_preference' => 'show', 'value' => 'my']) }}">
-            {{ __('messages.overview_my_groups') }}
-        </a>
-
-        <a class="dropdown-item
+            <a class="dropdown-item
             @if (Context::is('public')) active @endif"
-            href="{{ route('index', ['set_preference' => 'show', 'value' => 'public']) }}">
-            {{ __('messages.overview_public_groups') }}
-        </a>
-
-        @if (Auth::check() && Auth::user()->isAdmin())
-            <a class="dropdown-item @if (Context::is('admin')) active @endif"
-                href="{{ route('index', ['set_preference' => 'show', 'value' => 'admin']) }}">
-                {{ __('messages.overview_admin_groups') }}
+                href="{{ route('index', ['set_preference' => 'show', 'value' => 'public']) }}">
+                {{ __('messages.overview_public_groups') }}
             </a>
-        @endif
-    </ul>
+
+            @if (Auth::check() && Auth::user()->isAdmin())
+                <a class="dropdown-item @if (Context::is('admin')) active @endif"
+                    href="{{ route('index', ['set_preference' => 'show', 'value' => 'admin']) }}">
+                    {{ __('messages.overview_admin_groups') }}
+                </a>
+            @endif
+        </ul>
+    @endauth
 </div>
