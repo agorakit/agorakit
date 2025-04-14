@@ -1,4 +1,4 @@
-@extends('group')
+@extends('app')
 
 @section('content')
     @include('partials.map')
