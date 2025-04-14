@@ -1,10 +1,6 @@
 @extends('app')
 
 @section('content')
-    <div class="mb-2">
-        @include('dashboard.tabs')
-    </div>
-
     @guest
         <div class="d-flex gap-2 flex-wrap justify-content-end mb-4">
             <a class="btn btn-primary" href="{{ url('login') }}" up-layer="new">
