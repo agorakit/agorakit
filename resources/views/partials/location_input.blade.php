@@ -7,13 +7,14 @@
         </div>
         {!! Form::select('listed_location', [''=> ' --- '] + $listedLocations + ['other' => trans('messages.other')],
 	    null,
-	    ['id' => 'location_menu', 'class' => 'form-control mb-4', 'onChange' => 'openNewLocation()'])
+	    ['id' => 'location_menu', 'class' => 'form-control mb-4', 'up-switch' => '.js-new-location'])
 	!!}
-    <p id="otherwise"><strong>{{ trans('messages.location_other') }}</strong></p>
+    <p class="js-new-location" up-show-for="other"><strong>{{ trans('messages.location_other') }}</strong></p>
     </fieldset>
 @endif
 
-    <fieldset id="new" class="form-fieldset">
+    @if (is_a($model, "App\Action"))<fieldset class="form-fieldset js-new-location" up-show-for="other">
+      @else <fieldset class="form-fieldset">@endif
       <label class="form-label h3">{{trans('messages.location')}}</label>
         <div class="small-help mb-3">
             <i class="fas fa-info-circle"></i>
@@ -38,23 +39,3 @@
             {!! Form::text('location[name]', $model->location->name, ['class' => 'form-control']) !!}
         </div>
     </fieldset>
-
-@if (is_a($model, "App\Action"))
-<script lang="javascript">
-    let locationList = document.getElementById("location_menu");
-    let messageLine = document.getElementById("otherwise");
-    messageLine.style.display = 'none';
-    let outputBox = document.getElementById("new");
-    outputBox.style.display = 'none';
-    function openNewLocation() {
-        if (locationList.selectedOptions[0].value == 'other') {
-            outputBox.style.display = 'table';
-            messageLine.style.display = 'table';
-        }
-        else {
-            outputBox.style.display = 'none';
-            messageLine.style.display = 'none';
-        }
-    }
-</script>
-@endif
