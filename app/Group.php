@@ -372,9 +372,9 @@ class Group extends Model
         }
         foreach ($this->actions()->get() as $action) {
             if ($action->location->name) {
-	        $key = $action->name + $action->city;
+                $key = $action->name + $action->city;
                 $arr[$key] = $action->location;
-          }
+            }
         }
         ksort($arr);
 
