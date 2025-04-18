@@ -1,30 +1,32 @@
-<nav class="nav d-flex flex-sm-row align-items-center align-self-center mb-4 fs-1">
+<nav class="nav d-flex flex-wrap-reverse align-items-center align-self-center mb-4 fs-1">
 
-    <div class="nav-item me-3">
-        <a href="{{ route('index') }}">
-            <img alt="" height="40" src="{{ route('icon', 40) }}" width="40" />
-        </a>
+    <div class="d-flex">
+        <div class="nav-item me-3 flex-shrink-0">
+            <a href="{{ route('index') }}">
+                <img alt="" height="40" src="{{ route('icon', 40) }}" width="40" />
+            </a>
+        </div>
+
+        @if (Context::isGroup() || Context::isOverview())
+            <div class="nav-item">
+                @include('partials.navigation.context')
+            </div>
+        @endif
+
+        @if (Context::is('user'))
+            <div class="nav-item">
+                {{ $user->name }} <em>({{ '@' . $user->username }})</em>
+            </div>
+        @endif
     </div>
 
-    @if (Context::isGroup() || Context::isOverview())
-        <div class="nav-item">
-            @include('partials.navigation.context')
-        </div>
-    @endif
-
-    @if (Context::is('user'))
-        <div class="nav-item">
-            {{ $user->name }} <em>({{ '@' . $user->username }})</em>
-        </div>
-    @endif
-
-    <div class="nav-item ms-auto d-flex fs-3 align-self-center align-items-center">
+    <div class="nav-item ms-auto d-flex fs-3 align-self-center align-items-center mb-3">
         @auth
             <!-- Admin -->
             @if (Auth::user()->isAdmin())
                 <div class="nav-item dropdown">
                     <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button">
-                        {{ trans('messages.server_administration') }}
+                        <i class="fas fa-server d-inline d-sm-none"></i> <span class="d-sm-inline d-none">{{ trans('messages.server_administration') }}</span>
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-end" role="menu">
