@@ -22,7 +22,7 @@ class ActionTest extends Tests\BrowserKitTestCase
     */
     public function testSetupItAll()
     {
-        Artisan::call('migrate:refresh');
+        Artisan::call('migrate:fresh');
 
         $this->visit('/')
             ->see('Agorakit');
@@ -174,6 +174,49 @@ class ActionTest extends Tests\BrowserKitTestCase
             ->press('Create')
             ->seeInDatabase('actions', [
                 'name' => 'Test action with unknown end'
+            ])
+            ->see(trans('messages.create_action'));
+    }
+
+    public function testActionWithLocationName()
+    {
+        $user = App\User::where('email', 'admin@agorakit.org')->first();
+
+        $group = App\Group::where('name', 'Action test group')->first();
+
+        $this->actingAs($user)
+            ->visit('/groups/' . $group->id . '/actions/create')
+            ->see('Add an event')
+            ->type('Test action with location name', 'name')
+            ->type('this is a test action in the agenda', 'body')
+            ->type('Bruxelles', 'location[city]')
+            ->type('My Place', 'location[name]')
+            ->type('2026-01-01', 'start_date')
+            ->type('12:00', 'start_time')
+            ->press('Create')
+            ->seeInDatabase('actions', [
+                'name' => 'Test action with location name'
+            ])
+            ->see(trans('messages.create_action'));
+    }
+
+    public function testActionUsingLocationName()
+    {
+        $user = App\User::where('email', 'admin@agorakit.org')->first();
+
+        $group = App\Group::where('name', 'Action test group')->first();
+
+        $this->actingAs($user)
+            ->visit('/groups/' . $group->id . '/actions/create')
+            ->see('Add an event')
+            ->type('Test action us-ing location name', 'name')
+            ->type('this is a test action in the agenda', 'body')
+	    ->select('My PlaceBruxelles', 'location')
+            ->type('2026-02-02', 'start_date')
+            ->type('12:00', 'start_time')
+            ->press('Create')
+            ->seeInDatabase('actions', [
+                'name' => 'Test action us-ing location name'
             ])
             ->see(trans('messages.create_action'));
     }
