@@ -127,6 +127,25 @@ class GroupActionController extends Controller
         return $events;
     }
 
+
+    /**
+     * Prepare locations list for web menu
+     */
+    public function getListedLocations(Group $group)
+    {
+        $listed_locations = [];
+        foreach ($group->getNamedLocations() as $key => $location) {
+            if($location->city) {
+                $listed_locations[$key] = $location->name . " (" . $location->city . ")";
+            }
+            else {
+                $listed_locations[$key] = $location->name;
+            }
+        }
+        return $listed_locations;
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -162,12 +181,18 @@ class GroupActionController extends Controller
             }
         }
 
-
         if ($request->get('title')) {
             $action->name = $request->get('title');
         }
 
-        if ($request->has('location')) {
+        if ($request->has('listed_location')) {
+            foreach($this->getListedLocations($group) as $key => $location) {
+                if ($key == $request->input('listed_location')) {
+		    $action->location = $location;
+                }
+            }
+        }
+        else if ($request->has('location')) {
             $action->location = $request->input('location');
         }
 
@@ -179,6 +204,7 @@ class GroupActionController extends Controller
             ->with('group', $group)
             ->with('allowedTags', $action->getTagsInUse())
             ->with('newTagsAllowed', $action->areNewTagsAllowed())
+            ->with('listedLocations', $this->getListedLocations($action->group))
             ->with('tab', 'action');
     }
 
@@ -332,6 +358,7 @@ class GroupActionController extends Controller
             ->with('allowedTags', $action->getAllowedTags())
             ->with('newTagsAllowed', $action->areNewTagsAllowed())
             ->with('selectedTags', $action->getSelectedTags())
+            ->with('listedLocations', $this->getListedLocations($group))
             ->with('tab', 'action');
     }
 
@@ -357,10 +384,16 @@ class GroupActionController extends Controller
             $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
         }
 
-
         // handle location
-        if ($request->has('location')) {
-            $old_location = $action->location;
+        $old_location = $action->location;
+        if ($request->has('listed_location')) {
+            foreach($this->getListedLocations($group) as $key => $location) {
+                if ($key == $request->input('listed_location')) {
+		    $action->location = $location;
+                }
+            }
+        }
+        else if ($request->has('location')) {
             // Validate input
             try {
                 $action->location = $request->input('location');
@@ -369,14 +402,14 @@ class GroupActionController extends Controller
               ->withErrors($e->getMessage() . '. Incorrect location')
               ->withInput();
             }
+	}
 
-            // Geocode
-            if ($action->location <> $old_location) {
-              if (!$action->geocode()) {
-                  flash(trans('messages.location_cannot_be_geocoded'));
-              } else {
-                  flash(trans('messages.ressource_geocoded_successfully'));
-              }
+        // Geocode
+        if ($action->location <> $old_location) {
+            if (!$action->geocode()) {
+                flash(trans('messages.location_cannot_be_geocoded'));
+            } else {
+                flash(trans('messages.ressource_geocoded_successfully'));
             }
         }
 
