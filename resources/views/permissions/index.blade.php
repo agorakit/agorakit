@@ -15,10 +15,6 @@
 @endsection
 
 @section('content')
-
-    @include('groups.tabs')
-
-
     <h1>
         @lang('Manage permissions for this group')
     </h1>

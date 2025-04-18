@@ -1,9 +1,6 @@
 @extends('app')
 
 @section('content')
-
-@include('groups.tabs')
-
   <h2>{{trans('messages.history')}}</h2>
 
   @foreach($comment->revisionHistory as $history )

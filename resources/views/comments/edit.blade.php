@@ -1,7 +1,6 @@
 @extends('app')
 
 @section('content')
-    @include('groups.tabs')
     <h1>{{ trans('Edit a comment') }}</h1>
 
     {!! Form::model($comment, ['action' => ['CommentController@update', $group, $discussion, $comment], 'files' => true]) !!}

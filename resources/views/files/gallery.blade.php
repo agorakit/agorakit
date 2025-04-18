@@ -1,8 +1,6 @@
 @extends('app')
 
 @section('content')
-
-    @include('groups.tabs')
     <h2>{{ trans('messages.files_in_this_group') }}
 
         @can('create-file', $group)

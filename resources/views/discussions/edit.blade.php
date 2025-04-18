@@ -1,9 +1,6 @@
 @extends('app')
 
 @section('content')
-
-@include('groups.tabs')
-
   <h1>{{trans('messages.modify')}} <strong>"{{$discussion->name}}"</strong></h1>
 
 
