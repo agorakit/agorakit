@@ -16,6 +16,8 @@ services:
       - ../../:/app
       - caddy_data:/data
       - caddy_config:/config
+    environment:
+      SERVER_NAME: :80
     tty: true
     networks:
       - agorakit
