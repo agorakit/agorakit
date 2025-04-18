@@ -1,4 +1,4 @@
-@extends('group')
+@extends('app')
 
 @section('content')
     <h2>{{ trans('membership.add_users') }}</h2>

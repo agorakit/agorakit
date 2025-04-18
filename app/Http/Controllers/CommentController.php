@@ -78,7 +78,7 @@ class CommentController extends Controller
             ->with('discussion', $discussion)
             ->with('group', $group)
             ->with('comment', $comment)
-            ->with('tab', 'discussion');
+            ->with('tab', 'discussions');
     }
 
     /**
@@ -138,7 +138,7 @@ class CommentController extends Controller
             ->with('discussion', $discussion)
             ->with('group', $group)
             ->with('comment', $comment)
-            ->with('tab', 'discussion');
+            ->with('tab', 'discussions');
     }
 
     /**
@@ -168,7 +168,7 @@ class CommentController extends Controller
             ->with('group', $group)
             ->with('discussion', $discussion)
             ->with('comment', $comment)
-            ->with('tab', 'discussion');
+            ->with('tab', 'discussions');
     }
 
 

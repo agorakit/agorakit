@@ -1,4 +1,4 @@
-@extends('group')
+@extends('app')
 
 @section('content')
     <h1 class="mb-3">{{ trans('Configuration') }}</h1>

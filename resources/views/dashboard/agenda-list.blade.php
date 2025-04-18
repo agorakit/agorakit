@@ -1,10 +1,6 @@
 @extends('app')
 
 @section('content')
-    <div class="mb-2">
-        @include('dashboard.tabs')
-    </div>
-
     <div class="d-md-flex gap-2 align-items-center justify-content-between mb-2">
         <div class="mb-2">
             @include('partials.preferences-calendar')

@@ -1,11 +1,6 @@
 @extends('app')
 
 @section('content')
-
-    <div class="mb-2">
-        @include('dashboard.tabs')
-    </div>
-
     <div class="d-flex justify-content-between mb-4 gap-2 flex-wrap">
         <form action="{{ route('groups.index') }}" class="form-inline" method="GET" role="search" up-autosubmit
             up-scroll="false" up-target=".groups" up-watch-delay="500">

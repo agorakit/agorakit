@@ -1,4 +1,4 @@
-@extends('group')
+@extends('app')
 
 @section('content')
     {!! Form::open(['action' => ['GroupMembershipController@update', $group, $membership]]) !!}

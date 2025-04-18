@@ -1,4 +1,4 @@
-@extends('group')
+@extends('app')
 
 @section('content')
     <div class="d-flex gap-2 flex-wrap mb-2">
