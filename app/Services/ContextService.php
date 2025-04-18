@@ -20,8 +20,11 @@ class ContextService
 {
     /**
      * Returns current context as a string, can be : 
-     * - overview
-     * - group
+     * - all : admin overview of all discussions for example
+     * - my : all discussions in my groups
+     * - group : a specific group is shown to the user
+     * - user : a user profile is shown
+     * - admin : server admin area
      */
     public function get()
     {
@@ -58,7 +61,7 @@ class ContextService
 
     /**
      * Return true if the passed $context is the current content.
-     * $context can be a Group model or 'my', 'public', 'admin'
+     * $context can be a Group model or 'my', 'public', 'all', 'group', 'user'
      */
     public function is($context)
     {
@@ -116,7 +119,7 @@ class ContextService
     }
 
     /**
-     * Return an array of group id's the current user wants to see
+     * Return an array of group id's the current user wants (and is allowed) to see
      */
     public function getVisibleGroups()
     {
