@@ -2,7 +2,7 @@
   @auth
       <div class="nav-item dropdown dropdown-menu-end">
           <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button">
-              {{ trans('messages.profile') }}
+              <i class="fas fa-user-circle d-inline d-sm-none"></i> <span class="d-sm-inline d-none">{{ trans('messages.profile') }}</span>
           </a>
 
           <div class="dropdown-menu dropdown-menu-end" role="menu">
