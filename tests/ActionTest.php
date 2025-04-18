@@ -211,7 +211,7 @@ class ActionTest extends Tests\BrowserKitTestCase
             ->see('Add an event')
             ->type('Test action us-ing location name', 'name')
             ->type('this is a test action in the agenda', 'body')
-	    ->select('My PlaceBruxelles', 'location')
+	    ->select('My PlaceBruxelles', 'listed_location')
             ->type('2026-02-02', 'start_date')
             ->type('12:00', 'start_time')
             ->press('Create')
