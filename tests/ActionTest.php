@@ -22,7 +22,7 @@ class ActionTest extends Tests\BrowserKitTestCase
     */
     public function testSetupItAll()
     {
-        Artisan::call('migrate:refresh');
+        Artisan::call('migrate:fresh');
 
         $this->visit('/')
             ->see('Agorakit');
