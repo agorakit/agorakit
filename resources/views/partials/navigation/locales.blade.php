@@ -1,6 +1,6 @@
 @if (\Config::has('app.locales') and setting('show_locales_inside_navbar', true))
     <!-- locales -->
-    <div class="nav-item dropdown">
+    <div class="nav-item dropdown dropdown-menu-end">
         <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button">
             <i class="fa fa-globe"></i>
         </a>

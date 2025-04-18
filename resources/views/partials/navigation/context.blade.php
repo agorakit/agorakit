@@ -1,4 +1,4 @@
-<div class="dropdown">
+<div class="dropdown nav-item">
     <div aria-expanded="false" class="dropdown-toggle" data-bs-toggle="dropdown" type="button">
         @if (Context::isGroup())
             {{ $group->name }}

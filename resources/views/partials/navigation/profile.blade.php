@@ -1,6 +1,6 @@
   <!-- User profile -->
   @auth
-      <div class="nav-item dropdown">
+      <div class="nav-item dropdown dropdown-menu-end">
           <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button">
               {{ trans('messages.profile') }}
           </a>

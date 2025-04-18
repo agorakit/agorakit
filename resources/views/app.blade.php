@@ -11,16 +11,15 @@
 <body>
 
     <div up-main>
-        @unless (request()->get('embed'))
-            @include('partials.navigation.navbar')
-        @endunless
 
         <div class="sticky-messages">
             @include('partials.errors')
         </div>
 
         <div class="container mt-md-4 p-md-4 p-2" up-main="modal">
-            @include('partials.navigation.main')
+            @unless (request()->get('embed'))
+                @include('partials.navigation.main')
+            @endunless
 
             <main>
                 @yield('content')
