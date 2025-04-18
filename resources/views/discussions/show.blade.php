@@ -64,7 +64,7 @@
                 {{-- this is the first new unread comment --}}
                 @if ($comment_key == $read_count)
                     <div class="d-flex justify-content-center pb-2" id="unread">
-                        <div class="badge badge-pill bg-blue p-2">
+                        <div class="badge badge-pill p-2">
                             <i class="far fa-arrow-alt-circle-down me-2"></i> {{ trans('messages.new') }}
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                 {{-- this is the latest comment, it is read, we scroll below after the comment post box --}}
                 @if ($comment_key + 1 == $read_count)
                     <div class="d-flex justify-content-center pb-2" id="unread">
-                        <div class="badge badge-pill bg-gray p-2">
+                        <div class="badge badge-pill p-2">
                             <i class="far fa-arrow-alt-circle-up me-2"></i> {{ trans('messages.all_is_read') }}
                         </div>
                     </div>
