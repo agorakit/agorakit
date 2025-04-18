@@ -181,7 +181,7 @@ class GroupDiscussionController extends Controller
             ->with('read_count', $read_count)
             ->with('total_count', $total_count)
             ->with('group', $group)
-            ->with('tab', 'discussion');
+            ->with('tab', 'discussions');
     }
 
     /**
@@ -201,7 +201,7 @@ class GroupDiscussionController extends Controller
             ->with('allowedTags', $discussion->getTagsInUse())
             ->with('newTagsAllowed', $discussion->areNewTagsAllowed())
             ->with('selectedTags', $discussion->getSelectedTags())
-            ->with('tab', 'discussion');
+            ->with('tab', 'discussions');
     }
 
     /**
@@ -256,7 +256,7 @@ class GroupDiscussionController extends Controller
         return view('discussions.delete')
             ->with('group', $group)
             ->with('discussion', $discussion)
-            ->with('tab', 'discussion');
+            ->with('tab', 'discussions');
     }
 
     /**
@@ -285,7 +285,7 @@ class GroupDiscussionController extends Controller
         return view('discussions.history')
             ->with('group', $group)
             ->with('discussion', $discussion)
-            ->with('tab', 'discussion');
+            ->with('tab', 'discussions');
     }
 
     public function pin(Group $group, Discussion $discussion)
