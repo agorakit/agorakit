@@ -30,7 +30,14 @@ p {
     --tblr-border-radius: 8px;
     --tblr-body-bg: #f5f4e9;
     --tblr-list-group-item-padding-x: 0;
+   
     /*--tblr-border-color: #aaa;*/
+}
+
+
+.alert
+{
+    --tblr-alert-margin-bottom: 0;
 }
 
 /*
