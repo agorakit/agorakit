@@ -6,7 +6,7 @@
             {{ trans('messages.listed_location_help') }}
         </div>
         {!! Form::select('listed_location', [''=> ' --- '] + $listedLocations + ['other' => trans('messages.other')],
-	    null,
+	    $listedLocation,
 	    ['id' => 'location_menu', 'class' => 'form-control mb-4', 'up-switch' => '.js-new-location'])
 	!!}
     <p class="js-new-location" up-show-for="other"><strong>{{ trans('messages.location_other') }}</strong></p>
