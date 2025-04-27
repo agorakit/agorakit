@@ -134,12 +134,16 @@ class GroupActionController extends Controller
     public function getListedLocations(Group $group)
     {
         $listed_locations = [];
-        foreach ($group->getNamedLocations() as $key => $location) {
-            if($location->city) {
-                $listed_locations[$key] = $location->name . " (" . $location->city . ")";
-            }
-            else {
-                $listed_locations[$key] = $location->name;
+        foreach (Auth::user()->groups as $user_group) {
+            foreach ($user_group->getNamedLocations() as $key => $location) {
+                if (!array_key_exists($key, $listed_locations)) {
+                    if($location->city) {
+                        $listed_locations[$key] = $location->name . " (" . $location->city . ")";
+                    }
+                    else {
+                        $listed_locations[$key] = $location->name;
+                    }
+                }
             }
         }
         return $listed_locations;
