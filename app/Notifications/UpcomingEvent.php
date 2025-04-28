@@ -2,25 +2,25 @@
 
 namespace App\Notifications;
 
-use App\Action;
+use App\Event;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class UpcomingAction extends Notification
+class UpcomingEvent extends Notification
 {
     use Queueable;
 
-    public Action $action;
+    public Event $event;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Action $action)
+    public function __construct(Event $event)
     {
-        $this->action = $action;
+        $this->event = $event;
     }
 
     /**
@@ -45,12 +45,12 @@ class UpcomingAction extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage())
-                    ->subject('[' . $this->action->group->name . '] ' . __('You have an upcoming action') .  ': ' . $this->action->name)
-                    ->line(__('You have an upcoming action') .  ': ' . $this->action->name)
-                    ->line(__('Starts on : ') . $this->action->start->format('d/m/Y H:i'))
-                    ->line(__('Ends on : ') . $this->action->stop->format('d/m/Y H:i'))
-                    ->line(__('Description : ') . strip_tags($this->action->body))
-                    ->action(__('Show'), route('groups.actions.show', [$this->action->group, $this->action]))
+                    ->subject('[' . $this->event->group->name . '] ' . __('You have an upcoming event') .  ': ' . $this->event->name)
+                    ->line(__('You have an upcoming event') .  ': ' . $this->event->name)
+                    ->line(__('Starts on : ') . $this->event->start->format('d/m/Y H:i'))
+                    ->line(__('Ends on : ') . $this->event->stop->format('d/m/Y H:i'))
+                    ->line(__('Description : ') . strip_tags($this->event->body))
+                    ->event(__('Show'), route('groups.events.show', [$this->event->group, $this->event]))
                     ->line(trans('messages.thank_you'));
     }
 
@@ -64,7 +64,7 @@ class UpcomingAction extends Notification
     public function toArray($notifiable)
     {
         return [
-          'action' => $this->action->toArray(),
+          'event' => $this->event->toArray(),
         ];
     }
 }

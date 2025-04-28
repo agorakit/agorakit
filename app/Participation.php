@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 
 /** 
- * Wether a user participates or not to a specific action (event)
+ * Wether a user participates or not to a specific event
  */
 class Participation extends Model
 {
@@ -25,19 +25,19 @@ class Participation extends Model
 
     protected $rules = [
         'user_id'   => 'required|exists:users,id',
-        'action_id' => 'required|exists:actions,id',
+        'event_id' => 'required|exists:events,id',
     ];
 
     protected $fillable = [
-        'user_id', 'action_id', 'notification', 'status'
+        'user_id', 'event_id', 'notification', 'status'
     ];
 
-    protected $table = 'action_user';
+    protected $table = 'event_user';
     public $timestamps = true;
 
-    public function action()
+    public function event()
     {
-        return $this->belongsTo(\App\Action::class);
+        return $this->belongsTo(\App\Event::class);
     }
 
     public function user()

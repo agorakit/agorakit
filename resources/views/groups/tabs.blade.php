@@ -41,10 +41,10 @@
         @endif
 
         @if ($group->getSetting('module_action', true) == true)
-            @can('viewActions', $group)
+            @can('viewEvents', $group)
                 <li class="nav-item">
-                    <a class="nav-link @if (isset($tab) && $tab == 'action') active @endif"
-                        href="{{ route('groups.actions.index', $group) }}">
+                    <a class="nav-link @if (isset($tab) && $tab == 'event') active @endif"
+                        href="{{ route('groups.events.index', $group) }}">
                         <i class="fa fa-calendar me-2"></i> {{ trans('messages.agenda') }}
                     </a>
                 </li>
@@ -195,10 +195,10 @@
         @endif
 
         @if ($group->getSetting('module_action', true) == true)
-            @can('viewActions', $group)
+            @can('viewEvents', $group)
                 <li class="nav-item">
-                    <a class="nav-link @if (isset($tab) && $tab == 'action') active @endif"
-                        href="{{ route('groups.actions.index', $group) }}" title="{{ trans('messages.agenda') }}">
+                    <a class="nav-link @if (isset($tab) && $tab == 'event') active @endif"
+                        href="{{ route('groups.events.index', $group) }}" title="{{ trans('messages.agenda') }}">
                         <i class="fa fa-calendar"></i>
                     </a>
                 </li>
