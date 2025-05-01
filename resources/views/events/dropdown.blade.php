@@ -5,24 +5,24 @@
      </a>
      <div aria-labelledby="dropdownMenuButton" class="dropdown-menu dropdown-menu-end">
 
-         @can('update', $action)
-             <a class="dropdown-item" href="{{ route('groups.actions.edit', [$action->group, $action]) }}" up-layer="root">
+         @can('update', $event)
+             <a class="dropdown-item" href="{{ route('groups.events.edit', [$event->group, $event]) }}" up-layer="root">
                  <i class="fa fa-pencil me-2"></i>
                  {{ trans('messages.edit') }}
              </a>
          @endcan
 
-         @can('create-action', $action->group)
+         @can('create-event', $event->group)
              <a class="dropdown-item"
-                 href="{{ route('groups.actions.create', [$action->group]) }}?duplicate={{ $action->id }}"
+                 href="{{ route('groups.events.create', [$event->group]) }}?duplicate={{ $event->id }}"
                  up-layer="root">
                  <i class="far fa-copy me-2"></i>
                  {{ trans('messages.duplicate') }}
              </a>
          @endcan
 
-         @can('delete', $action)
-             <a class="dropdown-item" href="{{ route('groups.actions.deleteconfirm', [$action->group, $action]) }}"
+         @can('delete', $event)
+             <a class="dropdown-item" href="{{ route('groups.events.deleteconfirm', [$event->group, $event]) }}"
                  up-layer="new">
                  <i class="fa fa-trash me-2"></i>
                  {{ trans('messages.delete') }}
@@ -30,7 +30,7 @@
          @endcan
 
          @auth
-             <a class="dropdown-item" href="{{ route('groups.actions.history', [$action->group, $action]) }}"
+             <a class="dropdown-item" href="{{ route('groups.events.history', [$event->group, $event]) }}"
                  up-layer="root"><i class="fa fa-history me-2"></i>
                  {{ trans('messages.show_history') }}</a>
          @endauth

@@ -81,7 +81,7 @@
 
                     <div>
                         <i class="far fa-calendar-alt me-1"></i>
-                        <span>{{ $group->actions->count() }}</span>
+                        <span>{{ $group->events->count() }}</span>
                     </div>
                     <div>
                         <i class="fas fa-users me-1"></i>

@@ -32,9 +32,9 @@
                     @endif
                 </div>
 
-                @if ($actions->count() > 0)
+                @if ($events->count() > 0)
                     <div class="col-lg-4 col-12">
-                        @include('actions.list', ['actions' => $actions])
+                        @include('events.list', ['events' => $events])
                     </div>
                 @endif
             </div>

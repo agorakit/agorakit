@@ -4,9 +4,9 @@
     <div>
         <h1>{{ trans('messages.delete_confirm_title') }}</h1>
 
-        <p>{{ $action->name }}</p>
+        <p>{{ $event->name }}</p>
 
-        {!! Form::model($action, ['method' => 'DELETE', 'action' => ['GroupActionController@destroy', $group, $action]]) !!}
+        {!! Form::model($event, ['method' => 'DELETE', 'action' => ['GroupEventController@destroy', $group, $event]]) !!}
 
         <div class="d-flex justify-content-between">
             <div class="form-group">

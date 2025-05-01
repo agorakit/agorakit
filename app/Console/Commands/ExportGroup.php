@@ -50,8 +50,8 @@ class ExportGroup extends Command
         $group->load([
             'user',
             'memberships.user',
-            'actions',
-            'actions.user',
+            'events',
+            'events.user',
             'discussions',
             'discussions.user',
             'discussions.comments',

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Action;
+use App\Event;
 use App\Discussion;
 use App\File;
 use App\Group;
@@ -65,7 +65,7 @@ class DashboardController extends Controller
                 ->take(20)
                 ->get();
 
-            $actions = Action::with('group', 'tags', 'attending', 'user')
+            $events = Event::with('group', 'tags', 'attending', 'user')
                 ->where('start', '>=', Carbon::now()->subDay())
                 ->whereIn('group_id', $groups)
                 ->orderBy('start')
@@ -83,7 +83,7 @@ class DashboardController extends Controller
             return view('dashboard.homepage')
                 ->with('tab', 'homepage')
                 ->with('discussions', $discussions)
-                ->with('actions', $actions)
+                ->with('events', $events)
                 ->with('files', $files);
         } else { // anonymous user
             */
@@ -91,7 +91,7 @@ class DashboardController extends Controller
 
         if (Auth::check()) {
             $groups = $request->user()->groups();
-            $groups = $groups->with('tags', 'users', 'actions', 'discussions')
+            $groups = $groups->with('tags', 'users', 'events', 'discussions')
             ->orderBy('status', 'desc')
             ->orderBy('updated_at', 'desc');
             $groups = $groups->simplePaginate(20)->appends(request()->query());
@@ -100,7 +100,7 @@ class DashboardController extends Controller
             $groups = new Group();
             $groups = $groups->notSecret();
 
-            $groups = $groups->with('tags', 'users', 'actions', 'discussions')
+            $groups = $groups->with('tags', 'users', 'events', 'discussions')
                 ->orderBy('status', 'desc')
                 ->orderBy('updated_at', 'desc');
 
