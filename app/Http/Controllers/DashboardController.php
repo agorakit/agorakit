@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Action;
+use App\Event;
 use App\Discussion;
 use App\File;
 use App\Group;
@@ -39,16 +39,16 @@ class DashboardController extends Controller
     {
         if (Auth::check()) {
             $groups = $request->user()->groups();
-            $groups = $groups->with('tags', 'users', 'actions', 'discussions')
-                ->orderBy('status', 'desc')
-                ->orderBy('updated_at', 'desc');
+            $groups = $groups->with('tags', 'users', 'events', 'discussions')
+            ->orderBy('status', 'desc')
+            ->orderBy('updated_at', 'desc');
             $groups = $groups->simplePaginate(20)->appends(request()->query());
         } else {
 
             $groups = new Group();
             $groups = $groups->notSecret();
 
-            $groups = $groups->with('tags', 'users', 'actions', 'discussions')
+            $groups = $groups->with('tags', 'users', 'events', 'discussions')
                 ->orderBy('status', 'desc')
                 ->orderBy('updated_at', 'desc');
 

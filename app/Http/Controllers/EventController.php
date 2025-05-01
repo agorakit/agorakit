@@ -10,9 +10,9 @@ use Context;
 
 /**
 
- * Global listing of actions.
+ * Global listing of events.
  */
-class ActionController extends Controller
+class EventController extends Controller
 {
     public function __construct()
     {
@@ -30,7 +30,7 @@ class ActionController extends Controller
         if ($view == 'list') {
             $groups = Context::getVisibleGroups();
 
-            $actions = \App\Action::with('group')
+            $events = \App\Event::with('group')
                 ->where('start', '>=', Carbon::now()->subDay())
                 ->whereIn('group_id', $groups)
                 ->orderBy('start');
@@ -38,35 +38,35 @@ class ActionController extends Controller
 
             if (Auth::user()->getPreference('show', 'my') == 'all') {
 
-                $actions->orWhere('visibility', 10);
+                $events->orWhere('visibility', 10);
             }
 
-            $actions = $actions->paginate(20);
+            $events = $events->paginate(20);
 
             return view('dashboard.agenda-list')
                 ->with('title', trans('messages.agenda'))
-                ->with('tab', 'actions')
-                ->with('actions', $actions);
+                ->with('tab', 'events')
+                ->with('events', $events);
         }
 
         return view('dashboard.agenda')
             ->with('title', trans('messages.agenda'))
-            ->with('tab', 'actions');
+            ->with('tab', 'events');
     }
 
     public function indexJson(Request $request)
     {
         $groups = Context::getVisibleGroups();
 
-        // load of actions between start and stop provided by calendar js
+        // load of events between start and stop provided by calendar js
         if ($request->has('start') && $request->has('end')) {
-            $actions = \App\Action::with('group', 'attending')
+            $events = \App\Event::with('group', 'attending')
                 ->where('start', '>', Carbon::parse($request->get('start')))
                 ->where('stop', '<', Carbon::parse($request->get('end')))
                 ->whereIn('group_id', $groups)
                 ->orderBy('start', 'asc');
         } else { // return current month
-            $actions = \App\Action::with('group', 'attending')
+            $events = \App\Event::with('group', 'attending')
                 ->orderBy('start', 'asc')
                 ->where('start', '>', Carbon::now()->subMonth())
                 ->where('stop', '<', Carbon::now()->addMonth())
@@ -75,38 +75,38 @@ class ActionController extends Controller
 
         if (Auth::check()) {
             if (Auth::user()->getPreference('show', 'my') == 'all') {
-                $actions->orWhere('visibility', 10);
+                $events->orWhere('visibility', 10);
             }
         }
 
-        $actions = $actions->get();
+        $events = $events->get();
 
         $event = [];
         $events = [];
 
-        foreach ($actions as $action) {
-            $event['id'] = $action->id;
-            $event['title'] = $action->name . ' (' . $action->group->name . ')';
-            $event['description'] = strip_tags(summary($action->body)) . ' <br/> ' . $action->location_display();
-            $event['body'] = strip_tags(summary($action->body));
-            $event['summary'] = strip_tags(summary($action->body));
+        foreach ($events as $event) {
+            $event['id'] = $event->id;
+            $event['title'] = $event->name . ' (' . $event->group->name . ')';
+            $event['description'] = strip_tags(summary($event->body)) . ' <br/> ' . $event->location_display();
+            $event['body'] = strip_tags(summary($event->body));
+            $event['summary'] = strip_tags(summary($event->body));
 
-            $event['tooltip'] =  '<strong>' . strip_tags(summary($action->name)) . '</strong>';
-            $event['tooltip'] .= '<div>' . strip_tags(summary($action->body)) . '</div>';
+            $event['tooltip'] =  '<strong>' . strip_tags(summary($event->name)) . '</strong>';
+            $event['tooltip'] .= '<div>' . strip_tags(summary($event->body)) . '</div>';
 
-            if ($action->attending->count() > 0) {
+            if ($event->attending->count() > 0) {
                 $event['tooltip'] .= '<strong class="mt-2">' . trans('messages.user_attending') . '</strong>';
-                $event['tooltip'] .= '<div>' . implode(', ', $action->attending->pluck('username')->toArray()) . '</div>';
+                $event['tooltip'] .= '<div>' . implode(', ', $event->attending->pluck('username')->toArray()) . '</div>';
             }
 
 
-            $event['location'] = $action->location_display();
-            $event['start'] = $action->start->toIso8601String();
-            $event['end'] = $action->stop->toIso8601String();
-            $event['url'] = route('groups.actions.show', [$action->group, $action]);
-            $event['group_url'] = route('groups.actions.index', [$action->group]);
-            $event['group_name'] = $action->group->name;
-            $event['color'] = $action->group->color();
+            $event['location'] = $event->location_display();
+            $event['start'] = $event->start->toIso8601String();
+            $event['end'] = $event->stop->toIso8601String();
+            $event['url'] = route('groups.events.show', [$event->group, $event]);
+            $event['group_url'] = route('groups.events.index', [$event->group]);
+            $event['group_name'] = $event->group->name;
+            $event['color'] = $event->group->color();
 
             $events[] = $event;
         }

@@ -1,0 +1,517 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Event;
+use App\Group;
+use Auth;
+use Carbon\Carbon;
+use Gate;
+use Illuminate\Http\Request;
+
+class GroupEventController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('verified', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index(Request $request, Group $group)
+    {
+        $this->authorize('view-events', $group);
+
+        $view = 'grid';
+
+        if (Auth::check()) {
+            if (Auth::user()->getPreference('calendar')) {
+                if (Auth::user()->getPreference('calendar') == 'list') {
+                    $view = 'list';
+                } else {
+                    $view = 'grid';
+                }
+            }
+
+            if ($request->get('type') == 'list') {
+                Auth::user()->setPreference('calendar', 'list');
+                $view = 'list';
+            }
+
+            if ($request->get('type') == 'grid') {
+                Auth::user()->setPreference('calendar', 'grid');
+                $view = 'grid';
+            }
+        } else {
+            if ($request->get('type') == 'list') {
+                $view = 'list';
+            }
+
+            if ($request->get('type') == 'grid') {
+                $view = 'grid';
+            }
+        }
+
+        if ($view == 'list') {
+            $events = $group->events()
+                ->with('user', 'group', 'tags')
+                ->orderBy('start', 'asc')
+                ->where(function ($query) {
+                    $query->where('start', '>', Carbon::now()->subDay())
+                        ->orWhere('stop', '>', Carbon::now()->addDay());
+                })
+                ->paginate(10);
+
+            return view('events.index')
+                ->with('type', 'list')
+                ->with('title', $group->name . ' - ' . trans('messages.agenda'))
+                ->with('events', $events)
+                ->with('group', $group)
+                ->with('tab', 'event');
+        }
+
+        return view('events.index')
+            ->with('type', 'grid')
+            ->with('group', $group)
+            ->with('tab', 'event');
+    }
+
+    public function indexJson(Request $request, Group $group)
+    {
+        $this->authorize('view-events', $group);
+
+        // load of events between start and stop provided by calendar js
+        if ($request->has('start') && $request->has('end')) {
+            $events = $group->events()
+                ->with('user', 'group', 'tags')
+                ->where('start', '>', Carbon::parse($request->get('start'))->subMonth())
+                ->where('stop', '<', Carbon::parse($request->get('end'))->addMonth())
+                ->orderBy('start', 'asc')->get();
+        } else {
+            $events = $group->events()->orderBy('start', 'asc')->get();
+        }
+
+        $event = [];
+        $events = [];
+
+        foreach ($events as $event) {
+            $event['id'] = $event->id;
+            $event['title'] = $event->name . ' (' . $event->group->name . ')';
+            $event['description'] = strip_tags(summary($event->body)) . ' <br/> ' . $event->location_display();
+            $event['body'] = strip_tags(summary($event->body));
+            $event['summary'] = strip_tags(summary($event->body));
+
+            $event['tooltip'] =  '<strong>' . strip_tags(summary($event->name)) . '</strong>';
+            $event['tooltip'] .= '<div>' . strip_tags(summary($event->body)) . '</div>';
+
+            if ($event->attending->count() > 0) {
+                $event['tooltip'] .= '<strong class="mt-2">' . trans('messages.user_attending') . '</strong>';
+                $event['tooltip'] .= '<div>' . implode(', ', $event->attending->pluck('username')->toArray()) . '</div>';
+            }
+
+
+            $event['location'] = $event->location_display();
+            $event['start'] = $event->start->toIso8601String();
+            $event['end'] = $event->stop->toIso8601String();
+            $event['url'] = route('groups.events.show', [$event->group, $event]);
+            $event['group_url'] = route('groups.events.index', [$event->group]);
+            $event['group_name'] = $event->group->name;
+            $event['color'] = $event->group->color();
+
+            $events[] = $event;
+        }
+
+        return $events;
+    }
+
+
+    /**
+     * Prepare locations list for web menu
+     */
+    public function getListedLocations(Group $group)
+    {
+        $listed_locations = [];
+        foreach (Auth::user()->groups as $user_group) {
+            foreach ($user_group->getNamedLocations() as $key => $location) {
+                if (!array_key_exists($key, $listed_locations)) {
+                    if($location->city) {
+                        $listed_locations[$key] = $location->name . " (" . $location->city . ")";
+                    }
+                    else {
+                        $listed_locations[$key] = $location->name;
+                    }
+                }
+            }
+        }
+        return $listed_locations;
+    }
+
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+    public function create(Request $request, Group $group)
+    {
+        if ($group->exists) {
+            $this->authorize('create-event', $group);
+        }
+
+        // preload the event to duplicate if present in url to allow easy duplication of an existing event
+        if ($request->has('duplicate')) {
+            $event = Event::findOrFail($request->get('duplicate'));
+            $this->authorize('view', $event);
+        } else {
+            $event = new Event();
+
+            if ($request->get('start')) {
+                $event->start = Carbon::parse($request->get('start'));
+            } else {
+                $event->start = Carbon::now();
+            }
+
+            if ($request->get('stop')) {
+                $event->stop = Carbon::parse($request->get('stop'));
+            }
+
+            // handle the case where the event is exactly one (ore more) day duration : it's a full day event, remove one second
+
+            if ($event->start->hour == 0 && $event->start->minute == 0 && $event->stop->hour == 0 && $event->stop->minute == 0) {
+                $event->stop = Carbon::parse($request->get('stop'))->subSecond();
+            }
+        }
+
+        if ($request->get('title')) {
+            $event->name = $request->get('title');
+        }
+
+        if ($request->has('location')) {
+            $event->location = $request->input('location');
+        }
+
+        $event->group()->associate($group);
+
+        return view('events.create')
+            ->with('event', $event)
+            ->with('model', $event)
+            ->with('group', $group)
+            ->with('allowedTags', $event->getTagsInUse())
+            ->with('newTagsAllowed', $event->areNewTagsAllowed())
+            ->with('listedLocation', null)
+            ->with('listedLocations', $this->getListedLocations($event->group))
+            ->with('tab', 'event');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function store(Request $request, Group $group)
+    {
+        // if no group is in the route, it means user choose the group using the dropdown
+        if (!$group->exists) {
+            $group = Group::findOrFail($request->get('group'));
+        }
+
+        $this->authorize('create-event', $group);
+
+        $event = new Event();
+
+        $event->name = $request->input('name');
+        $event->body = $request->input('body');
+
+        try {
+            $event->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('start_time'));
+        } catch (\Exception $e) {
+            return redirect()->route('groups.events.create', $group)
+                ->withErrors($e->getMessage() . '. Incorrect format in the start date, use yyyy-mm-dd hh:mm')
+                ->withInput();
+        }
+
+        try {
+            if ($request->get('stop_date')) {
+                if ($request->get('stop_time')) {
+                    $event->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('stop_time'));
+                } else { // asssume event will stop on stop_date and start_time
+                    $event->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('start_time'));
+                }
+            } else {
+                if ($request->get('stop_time')) { // asssume event will stop on start_date and stop_time
+                    $event->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
+                } else { // asssume event has unknown duration and store start_date and start_time
+                    $event->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('start_time'));
+                }
+            }
+        } catch (\Exception $e) {
+            return redirect()->route('groups.events.create', $group)
+                ->withErrors($e->getMessage() . '. Incorrect format in the stop date, use yyyy-mm-dd hh:mm')
+                ->withInput();
+        }
+
+        if ($event->start > $event->stop) {
+            return redirect()->route('groups.events.create', $group)
+                ->withErrors(__('Start date cannot be after end date'))
+                ->withInput();
+        }
+
+        if ($request->has('listed_location')) {
+            foreach($this->getListedLocations($group) as $key => $location) {
+                if ($key == $request->input('listed_location')) {
+                    $event->location = $group->getNamedLocations()[$key];
+                }
+            }
+        }
+        else if ($request->has('location')) {
+            // Validate input
+            try {
+                $event->location = $request->input('location');
+            } catch (\Exception $e) {
+            return redirect()->route('groups.events.create', $group)
+              ->withErrors($e->getMessage() . '. Incorrect location')
+              ->withInput();
+            }
+
+            // Geocode
+            if (!$event->geocode()) {
+                flash(trans('messages.location_cannot_be_geocoded'));
+            } else {
+                flash(trans('messages.ressource_geocoded_successfully'));
+            }
+        }
+
+        $event->user()->associate($request->user());
+
+        // handle visibility
+        if ($request->has('visibility')) {
+            $event->makePublic();
+        } else {
+            $event->makePrivate();
+        }
+
+        if (!$group->events()->save($event)) {
+            // Oops.
+            return redirect()->route('groups.events.create', $group)
+                ->withErrors($event->getErrors())
+                ->withInput();
+        }
+
+        // handle tags
+        if ($request->get('tags')) {
+            $event->tag($request->get('tags'));
+        }
+
+
+        // handle cover
+        if ($request->hasFile('cover')) {
+            if ($event->setCoverFromRequest($request)) {
+                flash(trans('Cover added successfully'));
+            } else {
+                warning(trans('Could not handle cover image. Is it an image file (png, jpeg,...  ?)'));
+            }
+        }
+
+
+
+        // update activity timestamp on parent items
+        $group->touch();
+        Auth::user()->touch();
+
+        flash(trans('messages.ressource_created_successfully'));
+
+        return redirect()->route('groups.events.index', $group);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function show(Group $group, Event $event)
+    {
+        $this->authorize('view', $event);
+
+        return view('events.show')
+            ->with('title', $group->name . ' - ' . $event->name)
+            ->with('event', $event)
+            ->with('model', $event)
+            ->with('group', $group)
+            ->with('tab', 'event');
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function edit(Request $request, Group $group, Event $event)
+    {
+        $this->authorize('update', $event);
+
+        $listed_location = "other";
+        foreach($group->getNamedLocations() as $key => $location) {
+            if ($event->location == $location) {
+                $listed_location = $key;
+            }
+        }
+
+        return view('events.edit')
+            ->with('event', $event)
+            ->with('model', $event)
+            ->with('group', $group)
+            ->with('allowedTags', $event->getAllowedTags())
+            ->with('newTagsAllowed', $event->areNewTagsAllowed())
+            ->with('selectedTags', $event->getSelectedTags())
+            ->with('listedLocation', $listed_location)
+            ->with('listedLocations', $this->getListedLocations($group))
+            ->with('tab', 'event');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function update(Request $request, Group $group, Event $event)
+    {
+        $this->authorize('update', $event);
+
+        $event->name = $request->input('name');
+        $event->body = $request->input('body');
+
+        $event->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('start_time'));
+
+        if ($request->has('stop_date') && $request->get('stop_date') != '') {
+            $event->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('stop_time'));
+        } else {
+            $event->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
+        }
+
+        // handle location
+        $old_location = $event->location;
+	$listed_location = $request->input('listed_location');
+	if ($listed_location == 'other') $listed_location = "";
+        if ($listed_location) {
+            foreach($this->getListedLocations($group) as $key => $location) {
+                if ($key == $listed_location) {
+		    $event->location = $group->getNamedLocations()[$key];
+                }
+            }
+        }
+        else if ($request->has('location')) {
+            // Validate input
+            try {
+                $event->location = $request->input('location');
+            } catch (\Exception $e) {
+            return redirect()->route('groups.events.create', $event)
+              ->withErrors($e->getMessage() . '. Incorrect location')
+              ->withInput();
+            }
+	}
+
+        // Geocode
+        if ($event->location <> $old_location) {
+            if (!$event->geocode()) {
+                flash(trans('messages.location_cannot_be_geocoded'));
+            } else {
+                flash(trans('messages.ressource_geocoded_successfully'));
+            }
+        }
+
+        // handle tags
+        if ($request->get('tags')) {
+            $event->tag($request->get('tags'));
+        } else {
+            $event->detag();
+        }
+
+        // handle visibility
+        if ($request->has('visibility')) {
+            $event->makePublic();
+        } else {
+            $event->makePrivate();
+        }
+
+        // handle cover
+        if ($request->hasFile('cover')) {
+            if ($event->setCoverFromRequest($request)) {
+                flash(trans('Cover image has been updated, please reload to see the new cover'));
+            } else {
+                flash(trans('Error adding a new cover'));
+            }
+        } else {
+            flash('no cover');
+        }
+
+        if ($event->isInvalid()) {
+            // Oops.
+            return redirect()->route('groups.events.create', $group)
+                ->withErrors($event->getErrors())
+                ->withInput();
+        }
+
+        $event->save();
+
+        return redirect()->route('groups.events.show', [$event->group, $event]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyConfirm(Request $request, Group $group, Event $event)
+    {
+        $this->authorize('delete', $event);
+
+        if (Gate::allows('delete', $event)) {
+            return view('events.delete')
+                ->with('event', $event)
+                ->with('group', $group)
+                ->with('tab', 'discussion');
+        } else {
+            abort(403);
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request, Group $group, Event $event)
+    {
+        $this->authorize('delete', $event);
+        $event->delete();
+        flash(trans('messages.ressource_deleted_successfully'));
+
+        return redirect()->route('groups.events.index', $group);
+    }
+
+    /**
+     * Show the revision history of the discussion.
+     */
+    public function history(Group $group, Event $event)
+    {
+        $this->authorize('history', $event);
+
+        return view('events.history')
+            ->with('group', $group)
+            ->with('event', $event)
+            ->with('tab', 'event');
+    }
+}
