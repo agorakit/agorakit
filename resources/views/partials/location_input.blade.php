@@ -1,4 +1,20 @@
+@if (is_a($model, "App\Action") && $listedLocations)
     <fieldset class="form-fieldset">
+        {!! Form::label('listed_location', trans('messages.location')) !!}
+        <div class="small-help">
+            <i class="fas fa-info-circle"></i>
+            {{ trans('messages.listed_location_help') }}
+        </div>
+        {!! Form::select('listed_location', [''=> ' --- '] + $listedLocations + ['other' => trans('messages.other')],
+	    $listedLocation,
+	    ['id' => 'location_menu', 'class' => 'form-control mb-4', 'up-switch' => '.js-new-location'])
+	!!}
+    <p class="js-new-location" up-show-for="other"><strong>{{ trans('messages.location_other') }}</strong></p>
+    </fieldset>
+@endif
+
+    @if (is_a($model, "App\Action") && $listedLocations)<fieldset class="form-fieldset js-new-location" up-show-for="other">
+      @else <fieldset class="form-fieldset">@endif
       <label class="form-label h3">{{trans('messages.location')}}</label>
         <div class="small-help mb-3">
             <i class="fas fa-info-circle"></i>

@@ -360,4 +360,24 @@ class Group extends Model
 
         return $this->save();
     }
+
+    /**
+     * Get named locations in the group
+     */
+    public function getNamedLocations()
+    {
+        $arr = [];
+        if ($this->location->name) {
+            $arr[$this->location->name] = $this->location;
+        }
+        foreach ($this->actions()->get() as $action) {
+            if ($action->location->name) {
+                $key = $action->location->name . $action->location->city;
+                $arr[$key] = $action->location;
+            }
+        }
+        ksort($arr);
+
+        return $arr;
+    }
 }

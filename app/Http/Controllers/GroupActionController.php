@@ -127,6 +127,29 @@ class GroupActionController extends Controller
         return $events;
     }
 
+
+    /**
+     * Prepare locations list for web menu
+     */
+    public function getListedLocations(Group $group)
+    {
+        $listed_locations = [];
+        foreach (Auth::user()->groups as $user_group) {
+            foreach ($user_group->getNamedLocations() as $key => $location) {
+                if (!array_key_exists($key, $listed_locations)) {
+                    if($location->city) {
+                        $listed_locations[$key] = $location->name . " (" . $location->city . ")";
+                    }
+                    else {
+                        $listed_locations[$key] = $location->name;
+                    }
+                }
+            }
+        }
+        return $listed_locations;
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -162,7 +185,6 @@ class GroupActionController extends Controller
             }
         }
 
-
         if ($request->get('title')) {
             $action->name = $request->get('title');
         }
@@ -179,6 +201,8 @@ class GroupActionController extends Controller
             ->with('group', $group)
             ->with('allowedTags', $action->getTagsInUse())
             ->with('newTagsAllowed', $action->areNewTagsAllowed())
+            ->with('listedLocation', null)
+            ->with('listedLocations', $this->getListedLocations($action->group))
             ->with('tab', 'action');
     }
 
@@ -235,7 +259,14 @@ class GroupActionController extends Controller
                 ->withInput();
         }
 
-        if ($request->has('location')) {
+        if ($request->has('listed_location')) {
+            foreach($this->getListedLocations($group) as $key => $location) {
+                if ($key == $request->input('listed_location')) {
+                    $action->location = $group->getNamedLocations()[$key];
+                }
+            }
+        }
+        else if ($request->has('location')) {
             // Validate input
             try {
                 $action->location = $request->input('location');
@@ -325,6 +356,13 @@ class GroupActionController extends Controller
     {
         $this->authorize('update', $action);
 
+        $listed_location = "other";
+        foreach($group->getNamedLocations() as $key => $location) {
+            if ($action->location == $location) {
+                $listed_location = $key;
+            }
+        }
+
         return view('actions.edit')
             ->with('action', $action)
             ->with('model', $action)
@@ -332,6 +370,8 @@ class GroupActionController extends Controller
             ->with('allowedTags', $action->getAllowedTags())
             ->with('newTagsAllowed', $action->areNewTagsAllowed())
             ->with('selectedTags', $action->getSelectedTags())
+            ->with('listedLocation', $listed_location)
+            ->with('listedLocations', $this->getListedLocations($group))
             ->with('tab', 'action');
     }
 
@@ -357,10 +397,18 @@ class GroupActionController extends Controller
             $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
         }
 
-
         // handle location
-        if ($request->has('location')) {
-            $old_location = $action->location;
+        $old_location = $action->location;
+	$listed_location = $request->input('listed_location');
+	if ($listed_location == 'other') $listed_location = "";
+        if ($listed_location) {
+            foreach($this->getListedLocations($group) as $key => $location) {
+                if ($key == $listed_location) {
+		    $action->location = $group->getNamedLocations()[$key];
+                }
+            }
+        }
+        else if ($request->has('location')) {
             // Validate input
             try {
                 $action->location = $request->input('location');
@@ -369,14 +417,14 @@ class GroupActionController extends Controller
               ->withErrors($e->getMessage() . '. Incorrect location')
               ->withInput();
             }
+	}
 
-            // Geocode
-            if ($action->location <> $old_location) {
-              if (!$action->geocode()) {
-                  flash(trans('messages.location_cannot_be_geocoded'));
-              } else {
-                  flash(trans('messages.ressource_geocoded_successfully'));
-              }
+        // Geocode
+        if ($action->location <> $old_location) {
+            if (!$action->geocode()) {
+                flash(trans('messages.location_cannot_be_geocoded'));
+            } else {
+                flash(trans('messages.ressource_geocoded_successfully'));
             }
         }
 
