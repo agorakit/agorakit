@@ -36,7 +36,7 @@ class ActionController extends Controller
                 ->orderBy('start');
 
 
-            if (Auth::user()->getPreference('show', 'my') == 'all') {
+            if (Auth::user()->getPreference('show', 'joined') == 'all') {
 
                 $actions->orWhere('visibility', 10);
             }
@@ -74,7 +74,7 @@ class ActionController extends Controller
         }
 
         if (Auth::check()) {
-            if (Auth::user()->getPreference('show', 'my') == 'all') {
+            if (Auth::user()->getPreference('show', 'joined') == 'all') {
                 $actions->orWhere('visibility', 10);
             }
         }

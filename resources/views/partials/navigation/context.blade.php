@@ -13,7 +13,7 @@
             </small>
         @endif
 
-        @if (Context::is('my'))
+        @if (Context::is('joined'))
             {{ __('messages.overview_my_groups') }}
         @endif
 
@@ -49,8 +49,8 @@
                 <h6 class="dropdown-header">Overview</h6>
             </li>
 
-            <a class="dropdown-item @if (Context::is('my')) active @endif"
-                href="{{ route('index', ['set_preference' => 'show', 'value' => 'my']) }}">
+            <a class="dropdown-item @if (Context::is('joined')) active @endif"
+                href="{{ route('index', ['set_preference' => 'show', 'value' => 'joined']) }}">
                 {{ __('messages.overview_my_groups') }}
             </a>
 

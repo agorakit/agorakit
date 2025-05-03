@@ -34,7 +34,7 @@
 
         <div class="form-group">
             <select class="form-control" name="scope">
-                <option @if ($scope == 'my') selected @endif value="my"> MY groups</option>
+                <option @if ($scope == 'joined') selected @endif value="my"> MY groups</option>
                 <option @if ($scope == 'all') selected @endif value="all"> All public groups</option>
                 @if (Auth::user()->isAdmin())
                     <option @if ($scope == 'admin') selected @endif value="admin"> All groups (admin overview)

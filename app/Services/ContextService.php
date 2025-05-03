@@ -18,10 +18,14 @@ use Illuminate\Support\Facades\Gate;
  */
 class ContextService
 {
+
+    public static $VALID_CONTEXTS = ['group', 'joined', 'public', 'all', 'admin'];
+
+
     /**
      * Returns current context as a string, can be : 
      * - all : admin overview of all discussions for example
-     * - my : all discussions in my groups
+     * - joined : all discussions in groups joined by the user
      * - group : a specific group is shown to the user
      * - user : a user profile is shown
      * - admin : server admin area
@@ -45,14 +49,14 @@ class ContextService
         // If not we need to show some kind of overview
         else {
             if (Auth::check()) {
-                if (Auth::user()->getPreference('show', 'my') == 'all' && Auth::user()->isAdmin()) {
+                if (Auth::user()->getPreference('show', 'joined') === 'all' && Auth::user()->isAdmin()) {
                     return 'all';
                 }
-                if (Auth::user()->getPreference('show', 'my') == 'public') {
+                if (Auth::user()->getPreference('show', 'joined') === 'public') {
                     return 'public';
                 }
-                if (Auth::user()->getPreference('show', 'my') == 'my') {
-                    return 'my';
+                if (Auth::user()->getPreference('show', 'joined') === 'joined') {
+                    return 'joined';
                 }
             }
         }
@@ -61,15 +65,15 @@ class ContextService
 
     /**
      * Return true if the passed $context is the current content.
-     * $context can be a Group model or 'my', 'public', 'all', 'group', 'user'
+     * $context can be a Group model or 'joined', 'public', 'all', 'group', 'user'
      */
     public function is($context)
     {
         if ($context instanceof Group) {
             $group = Route::getCurrentRoute()->parameter('group');
-            return $group && $context->id == $group->id;
+            return $group && $context->id === $group->id;
         }
-        return $this->get() == $context;
+        return $this->get() === $context;
     }
 
     /**
@@ -81,7 +85,7 @@ class ContextService
      */
     public function set($context)
     {
-        if (in_array($context, ['my', 'public', 'all'])) {
+        if (in_array($context, ['joined', 'public', 'all'])) {
             session(['context' => $context]);
         } else {
             session(['context' => 'overview']);
@@ -93,15 +97,15 @@ class ContextService
      */
     public function isOverview()
     {
-        return $this->get() == 'my' || $this->get() == 'public' || $this->get() == 'all';
+        return $this->get() === 'joined' || $this->get() === 'public' || $this->get() === 'all';
     }
 
     /**
      * Return true if current context is group
      */
-    public function isGroup()
+    public function isGroup(): bool
     {
-        return $this->get() == 'group';
+        return ($this->get() === 'group');
     }
 
     /**
@@ -134,7 +138,7 @@ class ContextService
             if (Auth::check()) {
                 // user is logged in, we show according to preferences
                 // a super admin can decide to see all groups
-                if ($this->get() == 'all') {
+                if ($this->get() === 'all') {
                     if (Auth::user()->isAdmin()) {
                         $groups = Group::pluck('id');
                     } else {
@@ -144,13 +148,13 @@ class ContextService
                 }
 
                 // a normal user can decide to see all his/her groups, including public groups
-                if ($this->get() == 'public') {
+                if ($this->get() === 'public') {
                     $groups = Group::public()
                         ->pluck('id')
                         ->merge(Auth::user()->groups()->pluck('groups.id'));
                 }
                 // A user can decide to see only his/her groups :
-                if ($this->get() == 'my') {
+                if ($this->get() === 'joined') {
                     $groups = Auth::user()->groups()->pluck('groups.id');
                 }
             } else {
