@@ -38,7 +38,7 @@
             @endif
             <div>
                 @if ($discussion->unReadCount() > 0)
-                    <span class="badge badge-pill bg-blue-lt">
+                    <span class="badge badge-pill">
                         {{ $discussion->unReadCount() }}
                     </span>
                 @endif

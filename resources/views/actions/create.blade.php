@@ -1,4 +1,4 @@
-@extends('group')
+@extends('app')
 @section('content')
 
     <h1>{{ trans('messages.create_action') }}</h1>

@@ -1,39 +1,28 @@
 @extends('app')
 
 @section('content')
+    <h1>{{ __('Contact') }} {{ $user->name }}</h1>
 
-@include('users.tabs')
+    <div class="help">
+        {{ __('Use the form below to send an email directly to this user.') }}
+    </div>
 
-<div class="tab_content">
+    {!! Form::open(['action' => ['UserController@contact', $user]]) !!}
 
-  <h1>{{__('Contact')}} {{ $user->name }}</h1>
+    <div class="form-group">
+        {!! Form::label('body', __('Your message :')) !!}
+        {!! Form::textarea('body', null, ['class' => 'form-control', 'required']) !!}
+    </div>
 
-  <div class="help">
-    {{__('Use the form below to send an email directly to this user.')}}
-  </div>
+    <div class="form-check">
+        <input checked="checked" class="form-check-input" id="reveal_email" name="reveal_email" type="checkbox">
+        <label class="form-check-label"
+            for="reveal_email">{{ __('Reveal my email to this user so we can communicate by email') }}</label>
+    </div>
 
-  {!! Form::open(['action' => ['UserController@contact', $user]]) !!}
+    <div class="form-group mt-4">
+        {!! Form::submit(trans('messages.send'), ['class' => 'btn btn-primary']) !!}
+    </div>
 
-
-
-  <div class="form-group">
-    {!! Form::label('body', __('Your message :')) !!}
-    {!! Form::textarea('body', null, ['class' => 'form-control', 'required']) !!}
-  </div>
-
-  <div class="form-check">
-   <input type="checkbox" class="form-check-input" name="reveal_email" id="reveal_email" checked="checked">
-   <label class="form-check-label" for="reveal_email">{{__('Reveal my email to this user so we can communicate by email')}}</label>
- </div>
-
-
-  <div class="form-group mt-4">
-    {!! Form::submit(trans('messages.send'), ['class' => 'btn btn-primary']) !!}
-  </div>
-
-
-  {!! Form::close() !!}
-
-</div>
-
+    {!! Form::close() !!}
 @endsection

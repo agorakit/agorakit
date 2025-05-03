@@ -30,7 +30,14 @@ p {
     --tblr-border-radius: 8px;
     --tblr-body-bg: #f5f4e9;
     --tblr-list-group-item-padding-x: 0;
+   
     /*--tblr-border-color: #aaa;*/
+}
+
+
+.alert
+{
+    --tblr-alert-margin-bottom: 0;
 }
 
 /*
@@ -196,8 +203,8 @@ h6 {
 
 .sticky-messages {
     position: sticky;
-    top: 64px;
-    z-index: 1;
+    top: 0;
+    z-index: 1000;
     width: 100%;
 }
 

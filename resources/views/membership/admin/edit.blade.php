@@ -1,4 +1,4 @@
-@extends('group')
+@extends('app')
 
 @section('content')
     <h1>{{ trans('messages.edit') }} {{ $membership->user->name }} in "{{ $group->name }}"</h1>
