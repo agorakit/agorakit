@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
 
 class AddSlugToGroups extends Migration
 {
@@ -12,7 +13,7 @@ class AddSlugToGroups extends Migration
      */
     public function up()
     {
-        Schema::table('groups', function ($table) {
+        Schema::table('groups', function (Blueprint $table) {
             $table->string('slug');
         });
     }
@@ -24,7 +25,8 @@ class AddSlugToGroups extends Migration
      */
     public function down()
     {
-        Schema::table('groups', function ($table) {
+        Schema::table('groups', function (Blueprint $table) {
+            $table->dropIndex('groups_slug_unique');
             $table->dropColumn('slug');
         });
     }

@@ -28,6 +28,7 @@ class AddVisibilityToActions extends Migration
     public function down()
     {
         Schema::table('actions', function (Blueprint $table) {
+            $table->dropIndex(['visibility']);
             $table->dropColumn('visibility');
         });
     }
