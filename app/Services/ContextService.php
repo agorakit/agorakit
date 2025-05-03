@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Group;
 use Auth;
 use Route;
-use Illuminate\Support\Facades\Gate;
 
 /**
  * This service is responsible to return the correct context the user is currently in.
@@ -19,7 +18,7 @@ use Illuminate\Support\Facades\Gate;
 class ContextService
 {
 
-    public static $VALID_CONTEXTS = ['group', 'joined', 'public', 'all', 'admin'];
+    public $valid_contexts = ['group', 'joined', 'public', 'all', 'admin'];
 
 
     /**
@@ -85,19 +84,18 @@ class ContextService
      */
     public function set($context)
     {
-        if (in_array($context, ['joined', 'public', 'all'])) {
-            session(['context' => $context]);
-        } else {
-            session(['context' => 'overview']);
+        if (!in_array($context, $this->valid_contexts)) {
+            throw new Exception('Invalid context type set');
         }
+        session(['context' => $context]);
     }
 
     /**
      * Return true if current context is some overview
      */
-    public function isOverview()
+    public function isOverview(): bool
     {
-        return $this->get() === 'joined' || $this->get() === 'public' || $this->get() === 'all';
+        return (in_array($this->get(), ['joined', 'public', 'all']));
     }
 
     /**
