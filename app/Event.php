@@ -122,4 +122,12 @@ class Event extends Model
         return $this->belongsToMany(User::class)->wherePivot('status', '0');
     }
 
+    /**
+     * Get linked dicussion, if any
+     */
+    public function linkedDiscussion(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Discussion::class);
+    }
+
 }

@@ -72,3 +72,16 @@
         {!! Form::date('stop_date', null, ['class' => 'form-control']) !!}
     @endif
 </div>
+
+<div class="form-group">
+    <label>{{ trans('messages.linked_discussion') }}</label>
+    <div class="small-help">
+        <i class="fas fa-info-circle"></i>
+        {{ trans('messages.link_discussion_help') }}
+    </div>
+    <label class="form-check form-switch" for="linked-discussion">
+        <input @if (isset($event) && $event->linkedDiscussion()->first()) checked=checked @endif class="form-check-input" id="linked-discussion" name="linked-discussion"
+            type="checkbox">
+        <span>{{ trans('messages.create_linked_discussion') }}</span>
+    </label>
+</div>
