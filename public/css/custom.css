@@ -122,7 +122,7 @@ p {
 }
 
 
-.action-date {
+.event-date {
     width: 36px;
     height: 36px;
     border: 2px solid #aaa;
@@ -196,8 +196,8 @@ h6 {
 
 .sticky-messages {
     position: sticky;
-    top: 64px;
-    z-index: 1;
+    top: 0;
+    z-index: 1000;
     width: 100%;
 }
 

@@ -12,11 +12,11 @@
 
 <h4>{{ trans('messages.overview') }}</h4>
 
-<a  href="{{ action('DiscussionController@index') }}">
+<a  href="{{ route('discussions') }}">
   {{trans('messages.discussions')}}
 </a>
 
-<a  href="{{ action('ActionController@index') }}">
+<a  href="{{ action('EventController@index') }}">
   {{trans('messages.agenda')}}
 </a>
 

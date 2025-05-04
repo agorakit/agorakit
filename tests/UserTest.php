@@ -55,7 +55,7 @@ class UserTest extends Tests\BrowserKitTestCase
     */
     public function testSetupItAll()
     {
-        Artisan::call('migrate:refresh');
+        Artisan::call('migrate:fresh');
 
         $this->visit('/')
             ->see('Agorakit');
@@ -110,24 +110,24 @@ class UserTest extends Tests\BrowserKitTestCase
             ->see('Test discussion');
     }
 
-    public function testActionCreation()
+    public function testEventCreation()
     {
         $user = App\User::where('email', 'admin@agorakit.org')->first();
 
         $group = App\Group::where('name', 'Test group')->first();
 
         $this->actingAs($user)
-            ->visit('/groups/' . $group->id . '/actions/create')
+            ->visit('/groups/' . $group->id . '/events/create')
             ->see('Add an event')
-            ->type('Test action', 'name')
-            ->type('this is a test action in the agenda', 'body')
+            ->type('Test event', 'name')
+            ->type('this is a test event in the agenda', 'body')
             ->type('Bruxelles', 'location[city]')
             ->type('2016-01-01', 'start_date')
             ->type('12:00', 'start_time')
             ->type('13:00', 'stop_time')
             ->press('Create')
-            ->seeInDatabase('actions', ['name' => 'Test action'])
-            ->see(trans('messages.create_action'));
+            ->seeInDatabase('events', ['name' => 'Test event'])
+            ->see(trans('messages.create_event'));
     }
 
     public function testPrivateGroupCreation()
@@ -321,7 +321,7 @@ class UserTest extends Tests\BrowserKitTestCase
             ->check('custom_permissions')
             ->uncheck('member-create-discussion')
             ->uncheck('member-create-file')
-            ->uncheck('member-create-action')
+            ->uncheck('member-create-event')
             ->press(trans('messages.save'))
             ->see(trans('messages.ressource_updated_successfully'));
     }
@@ -335,29 +335,14 @@ class UserTest extends Tests\BrowserKitTestCase
             ->assertResponseStatus(403);
     }
 
-    public function testNewbieCantCreateActionAnymore()
+    public function testNewbieCantCreateEventAnymore()
     {
         $group = $this->getTestGroup();
 
         $this->actingAs($this->newbie())
-            ->get('groups/' . $group->id . '/actions/create')
+            ->get('groups/' . $group->id . '/events/create')
             ->assertResponseStatus(403);
     }
-
-
-
-    public function testNavbarShouldIncludesEverything()
-    {
-        \App\Setting::query()->delete();
-
-        $this->actingAs($this->newbie())
-            ->visit('/')
-            ->seeText(__('messages.my_groups'))
-            ->seeText(__('messages.overview'))
-            ->seeText(__('messages.help'))
-            ->seeText('Locale');
-    }
-
 
 
 

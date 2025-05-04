@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Action;
+use App\Event;
 use App\Discussion;
 use App\File;
 use App\Group;
@@ -37,61 +37,9 @@ class DashboardController extends Controller
      */
     public function presentation(Request $request)
     {
-        /*if (Auth::check()) {
-
-            if (Auth::user()->getPreference('show', 'my') == 'admin') {
-                // build a list of groups the user has access to
-                if (Auth::user()->isAdmin()) { // super admin sees everything
-                    $groups = Group::get()
-                        ->pluck('id');
-                }
-            }
-
-            if (Auth::user()->getPreference('show', 'my') == 'all') {
-                $groups = Group::public()
-                    ->get()
-                    ->pluck('id')
-                    ->merge(Auth::user()->groups()->pluck('groups.id'));
-            }
-
-            if (Auth::user()->getPreference('show', 'my') == 'my') {
-                $groups = Auth::user()->groups()->pluck('groups.id');
-            }
-
-            $discussions = Discussion::with('userReadDiscussion', 'group', 'user', 'tags', 'comments')
-                ->whereIn('group_id', $groups)
-                ->where('status', '>=', ContentStatus::NORMAL)
-                ->orderBy('updated_at', 'desc')
-                ->take(20)
-                ->get();
-
-            $actions = Action::with('group', 'tags', 'attending', 'user')
-                ->where('start', '>=', Carbon::now()->subDay())
-                ->whereIn('group_id', $groups)
-                ->orderBy('start')
-                ->take(10)
-                ->get();
-
-            $files = File::with('group', 'user', 'tags')
-                ->has('group')
-                ->whereIn('group_id', $groups)
-                ->where('status', '>=', ContentStatus::NORMAL)
-                ->orderBy('updated_at', 'desc')
-                ->take(10)
-                ->get();
-
-            return view('dashboard.homepage')
-                ->with('tab', 'homepage')
-                ->with('discussions', $discussions)
-                ->with('actions', $actions)
-                ->with('files', $files);
-        } else { // anonymous user
-            */
-
-
         if (Auth::check()) {
             $groups = $request->user()->groups();
-            $groups = $groups->with('tags', 'users', 'actions', 'discussions')
+            $groups = $groups->with('tags', 'users', 'events', 'discussions')
             ->orderBy('status', 'desc')
             ->orderBy('updated_at', 'desc');
             $groups = $groups->simplePaginate(20)->appends(request()->query());
@@ -100,17 +48,15 @@ class DashboardController extends Controller
             $groups = new Group();
             $groups = $groups->notSecret();
 
-            $groups = $groups->with('tags', 'users', 'actions', 'discussions')
+            $groups = $groups->with('tags', 'users', 'events', 'discussions')
                 ->orderBy('status', 'desc')
                 ->orderBy('updated_at', 'desc');
 
             $groups = $groups->paginate(20)->appends(request()->query());
         }
 
-
         return view('dashboard.presentation')
             ->with('groups', $groups)
             ->with('tab', 'homepage');
-        //}
     }
 }

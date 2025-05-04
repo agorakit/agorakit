@@ -33,7 +33,7 @@ class InsightsController extends Controller
             \App\User::active()->verified()->count(),
             \App\Discussion::count(),
             \App\Comment::count(),
-            \App\Action::count(),
+            \App\Event::count(),
             \App\File::count()
         ]);
         $charts[] = $chart;
@@ -61,8 +61,8 @@ class InsightsController extends Controller
         $charts[] = $chart;
 
 
-        // Actions
-        $results = \App\Action::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
+        // Events
+        $results = \App\Event::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
             ->groupBy('yearmonth')
             ->orderBy('yearmonth', 'asc')
             ->get();
@@ -75,7 +75,7 @@ class InsightsController extends Controller
         }
 
         $chart = new AgorakitChart;
-        $chart->title('Actions per month');
+        $chart->title('Events per month');
         $chart->labels($labels);
         $chart->dataset('Amount', 'line', $dataset);
         $charts[] = $chart;

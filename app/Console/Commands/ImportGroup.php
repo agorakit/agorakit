@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use App\Group;
 use App\User;
 use App\Membership;
-use App\Action;
+use App\Event;
 use App\Discussion;
 use App\Comment;
 use App\Reaction;
@@ -92,10 +92,10 @@ class ImportGroup extends Command
         $this->newLine();
 
 
-        // handle actions & participations
-        foreach ($data->actions as $actionData) {
-            if ($this->createAction($actionData)) {
-                $this->info('Created action called ' . $actionData->name);
+        // handle events & participations
+        foreach ($data->events as $eventData) {
+            if ($this->createEvent($eventData)) {
+                $this->info('Created event called ' . $eventData->name);
             }
         }
 
@@ -240,53 +240,53 @@ class ImportGroup extends Command
     }
 
     /**
-     * Create a new action based on a json parsed array $data
+     * Create a new event based on a json parsed array $data
      */
-    function createAction($data)
+    function createEvent($data)
     {
-        $action = new Action;
+        $event = new Event;
 
         $user = $this->createUser($data->user);
 
 
-        $action->group_id = $this->group->id;
-        $action->user_id = $user->id;
+        $event->group_id = $this->group->id;
+        $event->user_id = $user->id;
 
-        $action->created_at = $data->created_at;
-        $action->updated_at = $data->updated_at;
-        $action->deleted_at = $data->deleted_at;
+        $event->created_at = $data->created_at;
+        $event->updated_at = $data->updated_at;
+        $event->deleted_at = $data->deleted_at;
 
-        $action->name = $data->name;
-        $action->body = $data->body;
-        $action->start = $data->start;
-        $action->stop = $data->stop;
-        $action->location = $data->location;
-        $action->latitude = $data->latitude;
-        $action->longitude = $data->longitude;
+        $event->name = $data->name;
+        $event->body = $data->body;
+        $event->start = $data->start;
+        $event->stop = $data->stop;
+        $event->location = $data->location;
+        $event->latitude = $data->latitude;
+        $event->longitude = $data->longitude;
 
 
-        if ($action->isValid()) {
-            $action->save();
+        if ($event->isValid()) {
+            $event->save();
 
-            // Now the action is saved, we can handle attending and not attending users
+            // Now the event is saved, we can handle attending and not attending users
 
             if (is_array($data->attending)) {
                 foreach ($data->attending as $userAttendingData) {
                     $userAttending = $this->createUser($userAttendingData);
-                    $action->attending()->save($userAttending);
+                    $event->attending()->save($userAttending);
                 }
             }
 
             if (is_array($data->not_attending)) {
                 foreach ($data->not_attending as $userNotAttendingData) {
                     $userNotAttending = $this->createUser($userNotAttendingData);
-                    $action->notAttending()->save($userNotAttending);
+                    $event->notAttending()->save($userNotAttending);
                 }
             }
 
-            return $action;
+            return $event;
         } else {
-            $this->error($action->getErrors());
+            $this->error($event->getErrors());
             return false;
         }
     }

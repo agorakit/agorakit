@@ -468,7 +468,7 @@ up.compiler('.js-map', async function (element, data) {
 				html: `<span style="background-color: #1e60c9" class="marker"></span>`
 			})
 
-			const actionIcon = L.divIcon({
+			const eventIcon = L.divIcon({
 				className: "my-custom-pin",
 				iconAnchor: [0, 24],
 				labelAnchor: [-6, 0],
@@ -493,9 +493,9 @@ up.compiler('.js-map', async function (element, data) {
 					})
 				}
 
-				if (feature.properties.type == 'action') {
+				if (feature.properties.type == 'event') {
 					return L.marker(latlng, {
-						icon: actionIcon
+						icon: eventIcon
 					})
 				}
 

@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Action;
+use App\Event;
 use App\Discussion;
 use App\File;
 use App\Tag;
 use App\User;
 use App\Group;
 use Auth;
+use Context;
 use Illuminate\Http\Request;
 
 /**
@@ -51,11 +52,7 @@ class TagController extends Controller
 
     public function show(Request $request, Tag $tag)
     {
-        if (Auth::check()) {
-            $groups = Auth::user()->getVisibleGroups();
-        } else {
-            $groups = \App\Group::public()->pluck('id');
-        }
+        $groups = Context::getVisibleGroups();
 
         $discussions = Discussion::whereHas('group', function ($q) use ($groups) {
             $q->whereIn('group_id', $groups);
@@ -73,7 +70,7 @@ class TagController extends Controller
             })
             ->get();
 
-        $actions = Action::whereHas('group', function ($q) use ($groups) {
+        $events = Event::whereHas('group', function ($q) use ($groups) {
             $q->whereIn('group_id', $groups);
         })
             ->whereHas('tags', function ($q) use ($tag) {
@@ -99,7 +96,7 @@ class TagController extends Controller
             ->with('discussions', $discussions)
             ->with('files', $files)
             ->with('users', $users)
-            ->with('actions', $actions)
+            ->with('events', $events)
             ->with('groups', $groups)
             ->with('tag', $tag)
             ->with('title', $tag->name);
