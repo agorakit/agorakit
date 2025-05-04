@@ -305,7 +305,6 @@ class GroupEventController extends Controller
             $event->tag($request->get('tags'));
         }
 
-
         // handle cover
         if ($request->hasFile('cover')) {
             if ($event->setCoverFromRequest($request)) {
@@ -315,6 +314,10 @@ class GroupEventController extends Controller
             }
         }
 
+        // handle linked discussion
+        if ($request->has('link_discussion')) {
+	    $event->linkDiscussion();
+        }
 
 
         // update activity timestamp on parent items
@@ -452,6 +455,12 @@ class GroupEventController extends Controller
         } else {
             flash('no cover');
         }
+
+        // handle linked discussion
+        if ($request->has('link_discussion')) {
+	    $event->linkDiscussion();
+        }
+
 
         if ($event->isInvalid()) {
             // Oops.

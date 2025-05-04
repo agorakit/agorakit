@@ -4,6 +4,7 @@ namespace App;
 
 use App\User;
 use App\Group;
+use App\Discussion;
 use App\Traits\HasControlledTags;
 use App\Traits\HasVisibility;
 use App\Traits\HasCover;
@@ -74,6 +75,11 @@ class Event extends Model
         return 'event';
     }
 
+    public function discussion(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(DIscussion::class)->withTrashed();
+    }
+
     public function group(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Group::class)->withTrashed();
@@ -123,11 +129,14 @@ class Event extends Model
     }
 
     /**
-     * Get linked dicussion, if any
+     * Create associated discussion
      */
-    public function linkedDiscussion(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function linkDiscussion()
     {
-        return $this->belongsTo(Discussion::class);
+        $discussion = new Discussion();
+        $discussion->save();
+        $this->discussion()->associate($discussion);
+        $this->save();
     }
 
 }

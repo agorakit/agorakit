@@ -73,15 +73,15 @@
     @endif
 </div>
 
+@if (!isset($event) || !$event->discussion()->first())
 <div class="form-group">
-    <label>{{ trans('messages.linked_discussion') }}</label>
+    <label>{{ trans('messages.create_linked_discussion') }}</label>
     <div class="small-help">
         <i class="fas fa-info-circle"></i>
         {{ trans('messages.link_discussion_help') }}
     </div>
-    <label class="form-check form-switch" for="linked-discussion">
-        <input @if (isset($event) && $event->linkedDiscussion()->first()) checked=checked @endif class="form-check-input" id="linked-discussion" name="linked-discussion"
-            type="checkbox">
-        <span>{{ trans('messages.create_linked_discussion') }}</span>
+    <label class="form-check form-switch" for="link_discussion">
+      <input class="form-check-input" id="link-discussion" name="link_discussion" type="checkbox">
+        <span>{{ trans('messages.link_discussion') }}</span>
     </label>
-</div>
+</div>@endif
