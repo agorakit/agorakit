@@ -50,7 +50,7 @@ class MapController extends Controller
 
 
 
-    $actions = \App\Action::where('stop', '>=', Carbon::now()->subDays(1))
+    $events = \App\Event::where('stop', '>=', Carbon::now()->subDays(1))
       ->where('latitude', '<>', 0)
       ->whereIn('group_id', $groups)
       ->get();
@@ -84,19 +84,19 @@ class MapController extends Controller
       array_push($geojson['features'], $marker);
     }
 
-    foreach ($actions as $action) {
+    foreach ($events as $event) {
       $marker = [
         'type'       => 'Feature',
         'properties' => [
-          'title'         => '<a href="' . route('groups.actions.show', [$action->group, $action]) . '">' . $action->name . '</a>',
-          'description'   => summary($action->body),
-          'type' => 'action',
+          'title'         => '<a href="' . route('groups.events.show', [$event->group, $event]) . '">' . $event->name . '</a>',
+          'description'   => summary($event->body),
+          'type' => 'event',
         ],
         'geometry' => [
           'type'        => 'Point',
           'coordinates' => [
-            $action->longitude,
-            $action->latitude,
+            $event->longitude,
+            $event->latitude,
 
           ],
         ],

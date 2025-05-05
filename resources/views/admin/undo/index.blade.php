@@ -112,7 +112,7 @@
     </table>
 
 
-    <h2>Actions</h2>
+    <h2>Events</h2>
     <table class="table">
         <thead>
             <tr>
@@ -122,23 +122,23 @@
                 <th>Deletion time</th>
             </tr>
         </thead>
-        @foreach ($actions as $action)
+        @foreach ($events as $event)
             <tr>
-                <td>{{$action->name}}</td>
+                <td>{{$event->name}}</td>
                 <td>
-                    @if ($action->group)
-                        {{$action->group->name}}
+                    @if ($event->group)
+                        {{$event->group->name}}
                     @else
                         <small>Group is probably deleted we will try to recover it</small>
                     @endif
                 </td>
                 <td>
-                    @if ($action->user)
-                        {{$action->user->name}}
+                    @if ($event->user)
+                        {{$event->user->name}}
                     @endif
                 </td>
-                <td>{{$action->deleted_at}}</td>
-                <td><a  href="{{route('admin.restore', ['action', $action] )}}">Recover</a></td>
+                <td>{{$event->deleted_at}}</td>
+                <td><a  href="{{route('admin.restore', ['event', $event] )}}">Recover</a></td>
             </tr>
         @endforeach
     </table>

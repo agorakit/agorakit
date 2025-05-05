@@ -33,7 +33,7 @@
         {{ trans('messages.visibility_help') }}
     </div>
     <label class="form-check form-switch" for="is-public">
-        <input @if (isset($action) && $action->isPublic()) checked=checked @endif class="form-check-input" id="is-public" name="visibility"
+        <input @if (isset($event) && $event->isPublic()) checked=checked @endif class="form-check-input" id="is-public" name="visibility"
             type="checkbox">
         <span>{{ trans('messages.public') }}</span>
     </label>
@@ -47,18 +47,18 @@
 
 <div class="form-group">
     {!! Form::label('start_date', trans('messages.start_date')) !!}
-    {!! Form::date('start_date', $action->start->format('Y-m-d'), ['class' => 'form-control']) !!}
+    {!! Form::date('start_date', $event->start->format('Y-m-d'), ['class' => 'form-control']) !!}
 </div>
 
 <div class="form-group">
     {!! Form::label('start_time', trans('messages.start_time')) !!}
-    {!! Form::time('start_time', $action->start->format('H:i'), ['class' => 'form-control', 'required']) !!}
+    {!! Form::time('start_time', $event->start->format('H:i'), ['class' => 'form-control', 'required']) !!}
 </div>
 
 <div class="form-group">
     {!! Form::label('stop_time', trans('messages.stop_time')) !!}
-    @if (isset($action->stop))
-        {!! Form::time('stop_time', $action->stop->format('H:i'), ['class' => 'form-control', 'required']) !!}
+    @if (isset($event->stop))
+        {!! Form::time('stop_time', $event->stop->format('H:i'), ['class' => 'form-control', 'required']) !!}
     @else
         {!! Form::time('stop_time', null, ['class' => 'form-control']) !!}
     @endif
@@ -66,9 +66,22 @@
 
 <div class="form-group">
     {!! Form::label('stop_date', trans('messages.stop_date')) !!}
-    @if (isset($action->stop) && $action->stop->format('Y-m-d') != $action->start->format('Y-m-d'))
-        {!! Form::date('stop_date', $action->stop->format('Y-m-d'), ['class' => 'form-control']) !!}
+    @if (isset($event->stop) && $event->stop->format('Y-m-d') != $event->start->format('Y-m-d'))
+        {!! Form::date('stop_date', $event->stop->format('Y-m-d'), ['class' => 'form-control']) !!}
     @else
         {!! Form::date('stop_date', null, ['class' => 'form-control']) !!}
     @endif
 </div>
+
+@if (!isset($event) || !$event->discussion()->first())
+<div class="form-group">
+    <label>{{ trans('messages.create_linked_discussion') }}</label>
+    <div class="small-help">
+        <i class="fas fa-info-circle"></i>
+        {{ trans('messages.link_discussion_help') }}
+    </div>
+    <label class="form-check form-switch" for="link_discussion">
+      <input class="form-check-input" id="link-discussion" name="link_discussion" type="checkbox">
+        <span>{{ trans('messages.link_discussion') }}</span>
+    </label>
+</div>@endif
