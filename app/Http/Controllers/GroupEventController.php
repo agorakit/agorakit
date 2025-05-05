@@ -315,7 +315,8 @@ class GroupEventController extends Controller
         }
 
         // handle linked discussion
-        if ($request->has('link_discussion')) {
+        if ($request->has('link_discussion') && $group->exists) {
+            $this->authorize('create-discussion', $group);
 	    $event->linkDiscussion();
         }
 
@@ -457,7 +458,8 @@ class GroupEventController extends Controller
         }
 
         // handle linked discussion
-        if ($request->has('link_discussion')) {
+        if ($request->has('link_discussion') && $group->exists) {
+            $this->authorize('create-discussion', $group);
 	    $event->linkDiscussion();
         }
 

@@ -16,6 +16,7 @@ use Nicolaslopezj\Searchable\SearchableTrait;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
 
+
 class Event extends Model
 {
     use ValidatingTrait;
@@ -134,7 +135,18 @@ class Event extends Model
     public function linkDiscussion()
     {
         $discussion = new Discussion();
-        $discussion->save();
+        $discussion->name = $this->name;
+        $discussion->body = $this->name;
+        $discussion->total_comments = 1; // the discussion itself is already a comment
+        $discussion->user()->associate($this->user);
+
+        if (!$this->group->discussions()->save($discussion)) {
+            // Oops.
+            return redirect()->route('groups.events.create', $this->group)
+                ->withErrors($discussion->getErrors())
+                ->withInput();
+        }
+
         $this->discussion()->associate($discussion);
         $this->save();
     }
