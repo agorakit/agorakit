@@ -341,6 +341,22 @@ class GroupEventController extends Controller
     {
         $this->authorize('view', $event);
 
+        if ($discussion = $event->discussion()->first())
+        {
+            $total_count = $discussion->comments->count();
+            $read_count = $discussion->comments->count();
+            return view('events.show')
+                ->with('title', $group->name . ' - ' . $event->name)
+                ->with('event', $event)
+                ->with('model', $event)
+                ->with('discussion', $discussion)
+                ->with('unread_count', 0)
+                ->with('read_count', $read_count)
+                ->with('total_count', $total_count)
+                ->with('group', $group)
+                ->with('tab', 'event');
+        }
+
         return view('events.show')
             ->with('title', $group->name . ' - ' . $event->name)
             ->with('event', $event)

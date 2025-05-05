@@ -93,4 +93,10 @@
             </div>
         </div>
     </div>
+
+
+@if ($event->discussion()->first())
+@include('partials.embedded_discussion')
+@endif
+
 @endsection
