@@ -4,7 +4,6 @@
 
     <div class="d-flex flex-wrap gap-2 justify-content-between">
         <h1><i class="fa fa-search"></i> {{ trans('messages.your_search_for') }} <strong>"{{ $query ?? '' }}"</strong></h1>
-        @include('partials.preferences-show')
     </div>
 
     <form action="{{ url('search') }}" method="get" role="search">
