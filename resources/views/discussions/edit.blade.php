@@ -1,9 +1,6 @@
 @extends('app')
 
 @section('content')
-
-@include('groups.tabs')
-<div class="tab_content">
   <h1>{{trans('messages.modify')}} <strong>"{{$discussion->name}}"</strong></h1>
 
 
@@ -17,8 +14,5 @@
 
 
   {!! Form::close() !!}
-
-
-</div>
 
 @endsection

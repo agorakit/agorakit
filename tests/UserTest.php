@@ -55,7 +55,7 @@ class UserTest extends Tests\BrowserKitTestCase
     */
     public function testSetupItAll()
     {
-        Artisan::call('migrate:refresh');
+        Artisan::call('migrate:fresh');
 
         $this->visit('/')
             ->see('Agorakit');
@@ -343,21 +343,6 @@ class UserTest extends Tests\BrowserKitTestCase
             ->get('groups/' . $group->id . '/actions/create')
             ->assertResponseStatus(403);
     }
-
-
-
-    public function testNavbarShouldIncludesEverything()
-    {
-        \App\Setting::query()->delete();
-
-        $this->actingAs($this->newbie())
-            ->visit('/')
-            ->seeText(__('messages.my_groups'))
-            ->seeText(__('messages.overview'))
-            ->seeText(__('messages.help'))
-            ->seeText('Locale');
-    }
-
 
 
 

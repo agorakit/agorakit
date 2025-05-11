@@ -48,8 +48,8 @@ class SearchController extends Controller
             $scope = $request->get('scope');
         }
 
-        if (!in_array($scope, ['my', 'all', 'admin'])) {
-            $scope = Auth::user()->getPreference('show', 'my');
+        if (!in_array($scope, ['joined', 'all', 'admin'])) {
+            $scope = Auth::user()->getPreference('show', 'joined');
         }
 
         if ($scope == 'admin') {
@@ -65,7 +65,7 @@ class SearchController extends Controller
                 ->merge(Auth::user()->groups()->pluck('groups.id'));
         }
 
-        if ($scope == 'my') {
+        if ($scope == 'joined') {
             $allowed_groups = Auth::user()->groups()->pluck('groups.id');
         }
 

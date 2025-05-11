@@ -4,7 +4,6 @@
 
     <div class="d-flex flex-wrap gap-2 justify-content-between">
         <h1><i class="fa fa-search"></i> {{ trans('messages.your_search_for') }} <strong>"{{ $query ?? '' }}"</strong></h1>
-        @include('partials.preferences-show')
     </div>
 
     <form action="{{ url('search') }}" method="get" role="search">
@@ -34,7 +33,7 @@
 
         <div class="form-group">
             <select class="form-control" name="scope">
-                <option @if ($scope == 'my') selected @endif value="my"> MY groups</option>
+                <option @if ($scope == 'joined') selected @endif value="my"> MY groups</option>
                 <option @if ($scope == 'all') selected @endif value="all"> All public groups</option>
                 @if (Auth::user()->isAdmin())
                     <option @if ($scope == 'admin') selected @endif value="admin"> All groups (admin overview)
