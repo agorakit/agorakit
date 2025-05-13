@@ -77,7 +77,7 @@
                             </a>
                         @endif
                         @if (setting('show_overview_agenda', true))
-                            <a class="dropdown-item messages.agenda" href="{{ action('ActionController@index') }}">
+                            <a class="dropdown-item messages.agenda" href="{{ action('EventController@index') }}">
                                 {{ trans('messages.agenda') }}
                             </a>
                         @endif
