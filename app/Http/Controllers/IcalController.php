@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Group;
+use Context;
 
 use Spatie\IcalendarGenerator\Components\Calendar;
 use Spatie\IcalendarGenerator\Components\Event;
@@ -24,12 +25,7 @@ class IcalController extends Controller
         // Create new calendar
         $calendar = Calendar::create(setting('name'));
 
-        // decide which groups to show
-        if (Auth::check()) {
-            $groups = Auth::user()->getVisibleGroups();
-        } else {
-            $groups = Group::public()->pluck('id');
-        }
+        $groups = Context::getVisibleGroups();
 
          // returns the 500 most recent actions
         $actions = \App\Action::with('group')

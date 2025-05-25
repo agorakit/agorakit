@@ -1,4 +1,4 @@
-@extends('group')
+@extends('app')
 
 @section('content')
     <div class="row mb-4">

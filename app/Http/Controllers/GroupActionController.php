@@ -480,7 +480,7 @@ class GroupActionController extends Controller
             return view('actions.delete')
                 ->with('action', $action)
                 ->with('group', $group)
-                ->with('tab', 'discussion');
+                ->with('tab', 'discussions');
         } else {
             abort(403);
         }

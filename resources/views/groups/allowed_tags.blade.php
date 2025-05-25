@@ -1,4 +1,4 @@
-@extends('group')
+@extends('app')
 
 @section('content')
     <h1 class="mb-3">{{ trans('group.allowed_tags_title') }}</h1>

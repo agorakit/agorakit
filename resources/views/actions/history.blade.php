@@ -1,4 +1,4 @@
-@extends('group')
+@extends('app')
 
 @section('content')
     <h2>{{ trans('messages.history') }}</h2>

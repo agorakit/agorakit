@@ -1,7 +1,6 @@
 @extends('app')
 
 @section('content')
-    @include('users.tabs')
     @auth
         <div class="row">
             <div class="col-12 col-md-6 mb-2 order-md-2">
@@ -57,13 +56,13 @@
                 </div>
 
                 <div class="mb-3">
-                @if ($user->location_display("long"))
-                    <div class="fw-bold">{{ trans('messages.location') }}</div>
-                    {{ $user->location_display("long") }}
-                @endif
+                    @if ($user->location_display('long'))
+                        <div class="fw-bold">{{ trans('messages.location') }}</div>
+                        {{ $user->location_display('long') }}
+                    @endif
                 </div>
 
-	    </div>
+            </div>
         </div>
 
     @endauth

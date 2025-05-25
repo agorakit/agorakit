@@ -12,7 +12,7 @@
 
 <h4>{{ trans('messages.overview') }}</h4>
 
-<a  href="{{ action('DiscussionController@index') }}">
+<a  href="{{ route('discussions') }}">
   {{trans('messages.discussions')}}
 </a>
 
