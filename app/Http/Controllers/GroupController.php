@@ -424,4 +424,17 @@ class GroupController extends Controller
             ->with('group', $group)
             ->with('tab', 'home');
     }
+
+    /**
+     * Export the group data.
+     */
+    public function export(Group $group)
+    {
+        $this->authorize('export', $group);
+	return;
+
+        //return view('groups.history')
+        //    ->with('group', $group)
+        //    ->with('tab', 'home');
+    }
 }
