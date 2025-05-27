@@ -88,6 +88,14 @@ class GroupPolicy extends BasePolicy
     }
 
     /**
+     * A group admin can export group data
+     */
+    public function export(User $user, Group $group)
+    {
+        return $user->isAdminOf($group);
+    }
+
+    /**
      * A group admin can edit a group
      */
     public function update(User $user, Group $group)
