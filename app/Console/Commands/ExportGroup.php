@@ -84,5 +84,23 @@ class ExportGroup extends Command
         $this->info('Json export has been put into ' . $root . 'group.json');
 
         // a zip file could be created with the whole group folder TODO
+        $zipfile = Storage::disk()->path('groupfiles.zip');
+        //$zipfile = $root . 'groupfiles.zip';
+        //$zipfile = tmpfile();
+        //echo($zipfile); die();
+        $zip = new ZipArchive();
+        if ($zip->open($zipfile, ZipArchive::CREATE)!==TRUE) {
+            exit("cannot open <$zipfile>\n");
+        }
+        $groupfiles = Storage::allFiles($root);
+        foreach ($groupfiles as $file) {
+            if (Storage::exists($file)) {
+                $zip->addFile(Storage::disk()->path($file), $file);
+            }
+        }
+        $zip->close();
+        //Storage::disk()->putFileAs(Storage::disk()->path($zipfile), $zip);
+        //return Storage::download($zipfile); //, $name, $headers);
+        //return response()->download(public_path($zipfile), '$name.zip');
     }
 }
