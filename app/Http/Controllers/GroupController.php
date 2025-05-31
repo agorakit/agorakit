@@ -431,10 +431,14 @@ class GroupController extends Controller
     public function export(Group $group)
     {
         $this->authorize('export', $group);
-	return;
+        $tempname = $group->export();
 
-        //return view('groups.history')
-        //    ->with('group', $group)
-        //    ->with('tab', 'home');
+        if ($tempname) {
+            $name = "archive-group" . $group->id . "-" . Carbon::now()->format('Y-m-d_H-i-s-v') . ".zip";
+            $headers = ['Content-Type' => 'application/zip', 'Content-Disposition' => 'inline; filename="' . $name . '"'];
+            return Storage::download($tempname, $name, $headers);
+        } else {
+            abort(404, 'Export failed!');
+        }
     }
 }

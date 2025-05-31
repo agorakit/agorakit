@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Nicolaslopezj\Searchable\SearchableTrait;
 use Storage;
+use ZipArchive;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
 use Carbon\Carbon;
@@ -379,5 +380,56 @@ class Group extends Model
         ksort($arr);
 
         return $arr;
+    }
+
+    /**
+     * Export group data
+     */
+    public function export()
+    {
+        // load related content. I know it cascades but this way I have a complete list of models I need to process
+        $this->load([
+            'user',
+            'memberships.user',
+            'actions',
+            'actions.user',
+            'discussions',
+            'discussions.user',
+            'discussions.comments',
+            'discussions.comments.user',
+            'discussions.comments.reactions',
+            'discussions.comments.reactions.user',
+            'discussions.reactions',
+            'discussions.reactions.user',
+            'files',
+            'files.user',
+            'tags'
+        ]);
+
+        // group storage root path
+        $root = 'groups/' . $this->id . '/';
+
+        // save group json to storage
+        Storage::put($root . 'group.json', $this->toJson());
+
+        flash('Json export has been put into ' . $root . 'group.json');
+
+        // create a zip file with the whole group folder
+        $zipfile = Storage::disk()->path('groupfiles.zip');
+        //$zipfile = $root . 'groupfiles.zip';
+        $zipfile = tempnam('/tmp', '');
+        //echo($zipfile); die();
+        $zip = new ZipArchive();
+        if ($zip->open($zipfile, ZipArchive::CREATE)!==TRUE) {
+            exit("cannot open <$zipfile>\n");
+        }
+        $groupfiles = Storage::allFiles($root);
+        foreach ($groupfiles as $file) {
+            if (Storage::exists($file)) {
+                $zip->addFile(Storage::disk()->path($file), $file);
+            }
+        }
+        $zip->close();
+        return $zipfile;
     }
 }
