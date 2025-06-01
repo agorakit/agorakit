@@ -415,10 +415,8 @@ class Group extends Model
         flash('Json export has been put into ' . $root . 'group.json');
 
         // create a zip file with the whole group folder
-        $zipfile = Storage::disk()->path('groupfiles.zip');
-        //$zipfile = $root . 'groupfiles.zip';
-        $zipfile = tempnam('/tmp', '');
-        //echo($zipfile); die();
+        $zipdir = Storage::disk('tmp')->url('');
+        $zipfile = tempnam($zipdir, '');
         $zip = new ZipArchive();
         if ($zip->open($zipfile, ZipArchive::CREATE)!==TRUE) {
             exit("cannot open <$zipfile>\n");
@@ -430,6 +428,6 @@ class Group extends Model
             }
         }
         $zip->close();
-        return $zipfile;
+        return basename($zipfile);
     }
 }
