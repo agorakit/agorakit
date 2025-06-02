@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Group;
 use App\Setting;
 use App\Traits\ContentStatus;
+use App\Services\ExportService;
 use Auth;
 use Carbon\Carbon;
 use Gate;
@@ -431,13 +432,14 @@ class GroupController extends Controller
     public function export(Group $group)
     {
         $this->authorize('export', $group);
-        $zipfile = $group->export();
+        $exportservice = new ExportService();
+        $zipfile = $exportservice->export($group);
 
         if ($zipfile) {
             //dd(Storage::disk('tmp')->exists($zipfile));
             $name = "archive-group" . $group->id . "-" . Carbon::now()->format('Y-m-d_H-i-s') . ".zip";
-            $headers = ['Content-Type' => 'application/zip', 'Content-Disposition' => 'attachment; filename="' . $name . '"'];
-            return Storage::disk('tmp')->download($zipfile, $name, $headers);
+            //$headers = ['Content-Type' => 'application/zip', 'Content-Disposition' => 'attachment; filename="' . $name . '"'];
+            return Storage::disk('tmp')->download($zipfile, $name); //, $headers);
         } else {
             abort(404, 'Export failed!');
         }
