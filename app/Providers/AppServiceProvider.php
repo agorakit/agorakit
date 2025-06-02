@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
         if (config('app.env') === 'production') {
             $this->app['request']->server->set('HTTPS', true);
         }
-        // add the context facade to all views
+        // add application facades to all views
         View::share('Context', Context::getFacadeRoot());
     }
 
