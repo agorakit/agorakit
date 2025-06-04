@@ -9,6 +9,7 @@ use App\Tag;
 use App\User;
 use App\Group;
 use Auth;
+use Context;
 use Illuminate\Http\Request;
 
 /**
@@ -51,11 +52,7 @@ class TagController extends Controller
 
     public function show(Request $request, Tag $tag)
     {
-        if (Auth::check()) {
-            $groups = Auth::user()->getVisibleGroups();
-        } else {
-            $groups = \App\Group::public()->pluck('id');
-        }
+        $groups = Context::getVisibleGroups();
 
         $discussions = Discussion::whereHas('group', function ($q) use ($groups) {
             $q->whereIn('group_id', $groups);

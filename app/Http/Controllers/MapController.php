@@ -6,6 +6,7 @@ use App\User;
 use App\Group;
 use Auth;
 use Carbon\Carbon;
+use Context;
 
 class MapController extends Controller
 {
@@ -32,13 +33,7 @@ class MapController extends Controller
    */
   public function geoJson()
   {
-    if (Auth::check()) {
-      $groups = Auth::user()->getVisibleGroups();
-    } else {
-      $groups = \App\Group::public()->pluck('id');
-    }
-
-
+    $groups = Context::getVisibleGroups();
 
     // Magic query to get all the users who have one of the groups defined above in their membership table
     $users = User::whereHas('groups', function ($q) use ($groups) {

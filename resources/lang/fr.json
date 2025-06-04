@@ -399,7 +399,7 @@
     "Your user account is marked for deletion, contact an admin if you want to re-activate your account": "Votre compte utilisateur est marqué pour suppression, contactez un administrateur si vous souhaitez réactiver votre compte",
     "City": "Ville",
     "Country": "Pays",
-    "County": "Code postal ou Département ou Comté",
+    "County": "Comté",
     "Location Name": "Nom du lieu",
     "Street Address": "Adresse (rue)"
 }
