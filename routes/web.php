@@ -184,6 +184,7 @@ Route::group(['middleware' => ['web']], function () {
         // Crud stuff
         Route::get('edit', 'GroupController@edit')->name('.edit');
         Route::post('edit', 'GroupController@update')->name('.update');
+        Route::get('export', 'GroupController@export')->name('.export');
         Route::get('history', 'GroupController@history')->name('.history');
         Route::get('delete', 'GroupController@destroyConfirm')->name('.deleteconfirm');
         Route::delete('delete', 'GroupController@destroy')->name('.delete');

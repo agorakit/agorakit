@@ -6,7 +6,6 @@ use Illuminate\Console\Command;
 use App\Group;
 use Storage;
 use ZipArchive;
-use File;
 
 class ExportGroup extends Command
 {
@@ -83,6 +82,21 @@ class ExportGroup extends Command
 
         $this->info('Json export has been put into ' . $root . 'group.json');
 
-        // a zip file could be created with the whole group folder TODO
+        // create a zip file with the whole group folder
+        $zipdir = Storage::disk('tmp')->url('');
+        $zipfile = $zipdir . 'group-' . $group->id . '-files.zip';
+        $zip = new ZipArchive();
+        if ($zip->open($zipfile, ZipArchive::CREATE)!==TRUE) {
+            exit("cannot open <$zipfile>\n");
+        }
+        $groupfiles = Storage::allFiles($root);
+        foreach ($groupfiles as $file) {
+            if (Storage::exists($file)) {
+                $zip->addFile(Storage::disk()->path($file), $file);
+            }
+        }
+        $zip->close();
+
+        $this->info('Group export has been put into ' . $zipfile);
     }
 }
