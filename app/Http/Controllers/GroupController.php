@@ -443,4 +443,23 @@ class GroupController extends Controller
             abort(404, 'Export failed!');
         }
     }
+    /**
+     * Import a group.
+     */
+    public function import(Request $request)
+    {
+        $this->authorize('create', Group::class);
+        $exportservice = new ExportService();
+
+        if ($request->file('import')) {
+            $file = $request->file('import');
+            $pathname = $file->getPathname();
+            $mimetype = $file->getClientMimeType();
+            if (!str_ends_with($mimetype, 'zip') && !str_ends_with($mimetype, 'json')) {
+                return redirect()->route('groups.index')
+                 ->withErrors(trans('group.import_error'));
+            }
+            dd($file);
+        }
+    }
 }

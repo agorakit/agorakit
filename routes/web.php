@@ -122,6 +122,7 @@ Route::group(['middleware' => ['web']], function () {
     // Group handling
     Route::get('groups', 'GroupController@index')->name('groups.index');
     Route::get('groups/my', 'GroupController@indexOfMyGroups')->name('groups.index.my');
+    Route::post('groups/import', 'GroupController@import')->name('groups.import');
     Route::get('groups/create', 'GroupController@create')->name('groups.create');
     Route::post('groups/create', 'GroupController@store')->name('groups.store');
 
