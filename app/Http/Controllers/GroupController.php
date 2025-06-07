@@ -6,6 +6,7 @@ use App\Group;
 use App\Setting;
 use App\Traits\ContentStatus;
 use App\Services\ExportService;
+use App\Services\ImportService;
 use Auth;
 use Carbon\Carbon;
 use Gate;
@@ -449,7 +450,7 @@ class GroupController extends Controller
     public function import(Request $request)
     {
         $this->authorize('create', Group::class);
-        $exportservice = new ExportService();
+        $importservice = new ImportService();
 
         if ($request->file('import')) {
             $file = $request->file('import');
@@ -459,7 +460,7 @@ class GroupController extends Controller
                 return redirect()->route('groups.index')
                  ->withErrors(trans('group.import_error'));
             }
-            dd($file);
+            $importservice->import($file);
         }
     }
 }
