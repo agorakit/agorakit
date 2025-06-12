@@ -28,6 +28,7 @@ class AddStatusToGroups extends Migration
     public function down()
     {
         Schema::table('groups', function (Blueprint $table) {
+            $table->dropIndex(['status']);
             $table->dropColumn('status');
         });
     }
