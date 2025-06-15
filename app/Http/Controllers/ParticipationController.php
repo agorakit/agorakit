@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Action;
+use App\Event;
 use App\Group;
 use App\Participation;
 use Illuminate\Http\Request;
@@ -15,38 +15,38 @@ class ParticipationController extends Controller
 {
 
 
-    public function edit(Request $request, Group $group, Action $action)
+    public function edit(Request $request, Group $group, Event $event)
     {
-        $this->authorize('participate', $action);
+        $this->authorize('participate', $event);
 
         session()->put('url.intended', URL::previous());
 
-        $participation = Participation::firstOrNew(['user_id' => $request->user()->id, 'action_id' => $action->id]);
+        $participation = Participation::firstOrNew(['user_id' => $request->user()->id, 'event_id' => $event->id]);
 
         return view('participation.edit')
             ->with('participation', $participation);
     }
 
-    public function update(Request $request, Group $group, Action $action)
+    public function update(Request $request, Group $group, Event $event)
     {
-        $this->authorize('participate', $action);
+        $this->authorize('participate', $event);
 
-        $rsvp = Participation::firstOrNew(['user_id' => $request->user()->id, 'action_id' => $action->id]);
+        $rsvp = Participation::firstOrNew(['user_id' => $request->user()->id, 'event_id' => $event->id]);
         $rsvp->notification = $request->get('notification');
         $rsvp->status = $request->get('participation');
         $rsvp->save();
         flash(trans('messages.ressource_updated_successfully'));
 
-        return redirect()->intended(route('groups.actions.show', [$group, $action]));
+        return redirect()->intended(route('groups.events.show', [$group, $event]));
     }
 
     /**
      * This one is called as get to quickly change partipation status
      */
-    public function set(Request $request, Group $group, Action $action, $status)
+    public function set(Request $request, Group $group, Event $event, $status)
     {
-        $this->authorize('participate', $action);
-        $rsvp = Participation::firstOrNew(['user_id' => $request->user()->id, 'action_id' => $action->id]);
+        $this->authorize('participate', $event);
+        $rsvp = Participation::firstOrNew(['user_id' => $request->user()->id, 'event_id' => $event->id]);
         //$rsvp->notification = $request->get('notification');
         
         if ($status == 'yes') {
