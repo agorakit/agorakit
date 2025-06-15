@@ -81,6 +81,7 @@ return [
     'email_verified' => 'Email verified',
     'embed' => 'Embed this page',
     'ends' => 'Ends',
+    'export_group' => 'Export Group Data',
     'features' => 'Features',
     'filename' => 'Filename',
     'files' => 'Files',
