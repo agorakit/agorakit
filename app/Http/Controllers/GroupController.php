@@ -25,7 +25,7 @@ class GroupController extends Controller
         $groups = new Group();
         $groups = $groups->notSecret();
 
-        $groups = $groups->with('tags', 'users', 'actions', 'discussions')
+        $groups = $groups->with('tags', 'users', 'events', 'discussions')
             ->orderBy('status', 'desc')
             ->orderBy('updated_at', 'desc');
 
@@ -77,7 +77,7 @@ class GroupController extends Controller
         $this->authorize('view', $group);
 
         $discussions = false;
-        $actions = false;
+        $events = false;
         $files = false;
         $activities = false;
         $group_inbox = false;
@@ -105,8 +105,8 @@ class GroupController extends Controller
                     ->get();
             }
 
-            if (Gate::allows('viewActions', $group)) {
-                $actions = $group->actions()
+            if (Gate::allows('viewEvents', $group)) {
+                $events = $group->events()
                     ->with('user', 'tags', 'group')
                     ->where('stop', '>=', Carbon::now()->subDay())
                     ->orderBy('start', 'asc')
@@ -137,7 +137,7 @@ class GroupController extends Controller
                     ->limit(5)
                     ->get();
 
-                $actions = $group->actions()
+                $events = $group->events()
                     ->with('user', 'tags', 'group')
                     ->where('start', '>=', Carbon::now())
                     ->orderBy('start', 'asc')
@@ -150,7 +150,7 @@ class GroupController extends Controller
             ->with('title', $group->name)
             ->with('group', $group)
             ->with('discussions', $discussions)
-            ->with('actions', $actions)
+            ->with('events', $events)
             ->with('files', $files)
             ->with('admins', $group->admins()->get())
             ->with('group_inbox', $group_inbox)

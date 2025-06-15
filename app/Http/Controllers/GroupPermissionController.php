@@ -23,11 +23,11 @@ class GroupPermissionController extends Controller
 
             $member = collect($permissions['member']);
         } else {
-            $member = collect(['create-discussion', 'create-action', 'create-file', 'invite']);
+            $member = collect(['create-discussion', 'create-event', 'create-file', 'invite']);
         }
 
         // curently admin can do it all
-        $admin = collect(['create-discussion', 'create-action', 'create-file', 'invite']);
+        $admin = collect(['create-discussion', 'create-event', 'create-file', 'invite']);
 
         return view('permissions.index')
         ->with('member', $member)
@@ -55,8 +55,8 @@ class GroupPermissionController extends Controller
                 $member->push('create-file');
             }
 
-            if ($request->has('member-create-action')) {
-                $member->push('create-action');
+            if ($request->has('member-create-event')) {
+                $member->push('create-event');
             }
 
             if ($request->has('member-invite')) {

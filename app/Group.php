@@ -16,7 +16,7 @@ use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
 use Carbon\Carbon;
 use App\File;
-use App\Action;
+use App\Event;
 use App\Invite;
 use App\Activity;
 
@@ -170,11 +170,11 @@ class Group extends Model
     }
 
     /**
-     * Returns all the actions belonging to this group.
+     * Returns all the events belonging to this group.
      */
-    public function actions(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function events(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Action::class);
+        return $this->hasMany(Event::class);
     }
 
     public function files(): \Illuminate\Database\Eloquent\Relations\HasMany
@@ -370,10 +370,10 @@ class Group extends Model
         if ($this->location->name) {
             $arr[$this->location->name] = $this->location;
         }
-        foreach ($this->actions()->get() as $action) {
-            if ($action->location->name) {
-                $key = $action->location->name . $action->location->city;
-                $arr[$key] = $action->location;
+        foreach ($this->events()->get() as $event) {
+            if ($event->location->name) {
+                $key = $event->location->name . $event->location->city;
+                $arr[$key] = $event->location;
             }
         }
         ksort($arr);

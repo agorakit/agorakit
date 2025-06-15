@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Suin\RSSWriter\Channel;
 use Suin\RSSWriter\Feed;
-use App\Action;
+use App\Event;
 use App\Group;
 use App\Discussion;
 
 /**
- * This controller generates global public rss feeds for discussions and actions.
+ * This controller generates global public rss feeds for discussions and events.
  */
 class FeedController extends Controller
 {
@@ -48,7 +48,7 @@ class FeedController extends Controller
         return response($feed, 200, ['Content-Type' => 'application/xml']);
     }
 
-    public function actions()
+    public function events()
     {
         $feed = new Feed();
 
@@ -59,21 +59,21 @@ class FeedController extends Controller
             ->ttl(60)
             ->appendTo($feed);
 
-        $actions = Action::with('group')
+        $events = Event::with('group')
             ->with('user')
             ->whereIn('group_id', Group::public()->pluck('id'))
             ->orderBy('start', 'desc')->take(50)->get();
 
-        foreach ($actions as $action) {
+        foreach ($events as $event) {
             $item = new \Suin\RSSWriter\Item();
             $item
-                ->title($action->name)
-                ->description($action->body)
-                ->contentEncoded($action->body)
-                ->url(route('groups.actions.show', [$action->group, $action]))
-                ->author($action->user->name)
-                ->pubDate($action->start->timestamp)
-                ->guid(route('groups.actions.show', [$action->group, $action]), true)
+                ->title($event->name)
+                ->description($event->body)
+                ->contentEncoded($event->body)
+                ->url(route('groups.events.show', [$event->group, $event]))
+                ->author($event->user->name)
+                ->pubDate($event->start->timestamp)
+                ->guid(route('groups.events.show', [$event->group, $event]), true)
                 ->preferCdata(true) // By this, title and description become CDATA wrapped HTML.
                 ->appendTo($channel);
         }

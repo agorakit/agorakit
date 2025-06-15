@@ -291,18 +291,18 @@ class User extends Authenticatable
     }
 
     /**
-     * The actions this user attends to.
+     * The events this user attends to.
      */
-    public function actions(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function events(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(\App\Action::class);
+        return $this->belongsToMany(\App\Event::class);
     }
 
 
 
-    public function isAttending(Action $action)
+    public function isAttending(Event $event)
     {
-        $participation = Participation::firstOrNew(['user_id' => $this->id, 'action_id' => $action->id]);
+        $participation = Participation::firstOrNew(['user_id' => $this->id, 'event_id' => $event->id]);
         if ($participation->status == Participation::PARTICIPATE && $participation->exists) {
             return true;
         } else {
@@ -311,9 +311,9 @@ class User extends Authenticatable
     }
 
 
-    public function isNotAttending(Action $action)
+    public function isNotAttending(Event $event)
     {
-        $participation = Participation::firstOrNew(['user_id' => $this->id, 'action_id' => $action->id]);
+        $participation = Participation::firstOrNew(['user_id' => $this->id, 'event_id' => $event->id]);
         if ($participation->status == Participation::WONT_PARTICIPATE) {
             return true;
         } else {
@@ -321,9 +321,9 @@ class User extends Authenticatable
         }
     }
 
-    public function isMaybeAttending(Action $action)
+    public function isMaybeAttending(Event $event)
     {
-        $participation = Participation::firstOrNew(['user_id' => $this->id, 'action_id' => $action->id]);
+        $participation = Participation::firstOrNew(['user_id' => $this->id, 'event_id' => $event->id]);
         if ($participation->status == Participation::UNDECIDED) {
             return true;
         } else {
@@ -332,9 +332,9 @@ class User extends Authenticatable
     }
 
 
-    public function participation(Action $action)
+    public function participation(Event $event)
     {
-        return Participation::firstOrNew(['user_id' => $this->id, 'action_id' => $action->id]);
+        return Participation::firstOrNew(['user_id' => $this->id, 'event_id' => $event->id]);
     }
 
     /**
