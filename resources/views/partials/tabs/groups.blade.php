@@ -126,7 +126,7 @@
                         <i class="fa fa-line-chart me-2"></i> {{ trans('messages.insights') }}
                     </a>
 
-                    <a class="dropdown-item" href="{{ action('GroupController@export', $group) }}">
+                    <a class="dropdown-item" href="{{ action('GroupController@export', $group) }}" up-follow="false">
                         <i class="fa fa-keyboard-o me-2"></i> {{ trans('messages.export_group') }}
                     </a>
                     <div class="dropdown-divider"></div>
