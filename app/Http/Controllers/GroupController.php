@@ -450,17 +450,29 @@ class GroupController extends Controller
     public function import(Request $request)
     {
         $this->authorize('create', Group::class);
-        $importservice = new ImportService();
-
-        if ($request->file('import')) {
-            $file = $request->file('import');
-            $pathname = $file->getPathname();
-            $mimetype = $file->getClientMimeType();
-            if (!str_ends_with($mimetype, 'zip') && !str_ends_with($mimetype, 'json')) {
-                return redirect()->route('groups.index')
-                 ->withErrors(trans('group.import_error'));
-            }
-            $importservice->import($file);
+        if (!Auth::check()) {
+            return redirect()->route('groups.index')
+              ->withErrors(trans('group.import_error'));
         }
+        $user_id = Auth::user()->id;
+
+        $importservice = new ImportService();
+        if (!$request->file('import')) {
+            return redirect()->route('groups.index')
+              ->withErrors(trans('group.import_error'));
+        }
+        $file = $request->file('import');
+        $mimetype = $file->getClientMimeType();
+        if (!str_ends_with($mimetype, 'zip') && !str_ends_with($mimetype, 'json')) {
+            return redirect()->route('groups.index')
+             ->withErrors(trans('group.import_error'));
+        }
+        if (str_ends_with($mimetype, 'json')) {
+            $path = $file->storeAs('groups/new', "groupimport-" . $user_id . "-" . Carbon::now()->format('Y-m-d_H-i-s') . ".json");
+        }
+        else {
+            $path = $file->storeAs('groups/new', "groupimport-" . $user_id . "-" . Carbon::now()->format('Y-m-d_H-i-s') . ".zip");
+        }
+        $importservice->import($path);
     }
 }

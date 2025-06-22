@@ -20,23 +20,17 @@ class ImportService
     /**
      * - all : admin overview of all discussions for example
      */
-    public function import($file)
+    public function import($path)
     {
-        // copy file to storage
-        //Storage::copy($root . 'group.json', $group->toJson());
-        dd($file);
         // unzip if relevant
-        $zip = new ZipArchive();
-        if ($zip->open($zipfile)!==TRUE) {
-            exit("cannot open <$zipfile>\n");
-        }
-        $groupfiles = Storage::allFiles($root);
-        foreach ($groupfiles as $file) {
-            if (Storage::exists($file)) {
-                $zip->addFile(Storage::disk()->path($file), $file);
+        if (str_ends_with($path, 'zip')) {
+            $zip = new ZipArchive();
+            if ($zip->open(Storage::path($path))!==TRUE) {
+                exit("Cannot open " . $path . "\n");
             }
+
         }
+        dd($path);
         $zip->close();
-        //return basename($zipfile);
     }
 }
