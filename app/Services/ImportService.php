@@ -21,9 +21,10 @@ class ImportService
     /**
      * - all : admin overview of all discussions for example
      */
-    public function import($path)
+    public function import($path, $data=null)
     {
         // unzip if relevant
+        // FIXME come here only if $data is null
         $unzip_path = substr($path, 0, -4);
         if (str_ends_with($path, 'zip')) {
             $zip = new ZipArchive();

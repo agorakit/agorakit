@@ -456,31 +456,47 @@ class GroupController extends Controller
         }
         $user_id = Auth::user()->id;
 
-        $importservice = new ImportService();
-        if (!$request->file('import')) {
+        if ($request->has('import')) { // Upload import data
+            $file = $request->file('import');
+            $mimetype = $file->getClientMimeType();
+            if (!str_ends_with($mimetype, 'zip') && !str_ends_with($mimetype, 'json')) {
+                return redirect()->route('groups.index')
+                 ->withErrors(trans('group.import_error'));
+            }
+            if (str_ends_with($mimetype, 'json')) {
+                $path = $file->storeAs('groups/new', "groupimport-" . $user_id . "-" . Carbon::now()->format('Y-m-d_H-i-s') . ".json");
+            }
+            else {
+                $path = $file->storeAs('groups/new', "groupimport-" . $user_id . "-" . Carbon::now()->format('Y-m-d_H-i-s') . ".zip");
+            }
+            $importservice = new ImportService();
+            $ret = $importservice->import($path);
+            // dd($ret);
+            list($import_basename, $existing_slug, $existing_usernames) = $ret;
+
+            return view('groups.import')
+                ->with('user_id', '$user_id')
+                ->with('import_basename', '$import_basename')
+                ->with('existing_slug', $existing_slug)
+                ->with('existing_usernames', $existing_usernames);
+        }
+
+        // Process the intermediate form
+        if (!$request->has('user_id') || !$request->has('import_basename')) {
             return redirect()->route('groups.index')
               ->withErrors(trans('group.import_error'));
         }
-        $file = $request->file('import');
-        $mimetype = $file->getClientMimeType();
-        if (!str_ends_with($mimetype, 'zip') && !str_ends_with($mimetype, 'json')) {
-            return redirect()->route('groups.index')
-             ->withErrors(trans('group.import_error'));
-        }
-        if (str_ends_with($mimetype, 'json')) {
-            $path = $file->storeAs('groups/new', "groupimport-" . $user_id . "-" . Carbon::now()->format('Y-m-d_H-i-s') . ".json");
-        }
-        else {
-            $path = $file->storeAs('groups/new', "groupimport-" . $user_id . "-" . Carbon::now()->format('Y-m-d_H-i-s') . ".zip");
-        }
-        $ret = $importservice->import($path);
-        // dd($ret);
-        list($import_basename, $existing_slug, $existing_usernames) = $ret;
 
-        return view('groups.import')
-            ->with('user_id', '$user_id')
-            ->with('import_basename', '$import_basename')
-            ->with('existing_slug', $existing_slug)
-            ->with('existing_usernames', $existing_usernames);
+        // A few checks
+        if ($request->get('user_id') <> $user_id) {
+            return redirect()->route('groups.index')
+                ->withErrors(trans('This action is unauthorized'));
+        }
+        $basename = $request->get('import_basename');
+        // FIXME compare the dates
+
+        $path = 'groups/new/' . $basename;
+        $importservice = new ImportService();
+        $ret = $importservice->import($path, [$new_slug, $usernames]);
     }
 }
