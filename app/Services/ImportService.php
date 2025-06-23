@@ -28,9 +28,11 @@ class ImportService
             if ($zip->open(Storage::path($path))!==TRUE) {
                 exit("Cannot open " . $path . "\n");
             }
-
+            $zip->extractTo(substr(Storage::path($path), 0, -4));
+            $zip->close();
         }
-        dd($path);
-        $zip->close();
+        else { // JSON format
+            Storage::copy($path, substr($path, 0, -4) . '/groups/1/' . basename($path));
+        }
     }
 }
