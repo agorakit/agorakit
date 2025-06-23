@@ -23,16 +23,24 @@ class ImportService
     public function import($path)
     {
         // unzip if relevant
+        $unzip_path = substr($path, 0, -4);
         if (str_ends_with($path, 'zip')) {
             $zip = new ZipArchive();
             if ($zip->open(Storage::path($path))!==TRUE) {
                 exit("Cannot open " . $path . "\n");
             }
-            $zip->extractTo(substr(Storage::path($path), 0, -4));
+            $zip->extractTo(Storage::path($unzip_path));
             $zip->close();
+            $groupfiles = Storage::allFiles($unzip_path);
+            foreach($groupfiles as $file) {
+                if (basename($file) == 'group.json') {
+                    $group = Storage::json($file);
+                }
+            }
         }
         else { // JSON format
-            Storage::copy($path, substr($path, 0, -4) . '/groups/1/' . basename($path));
+            $group = Storage::json($path);
         }
+        dd($group);
     }
 }
