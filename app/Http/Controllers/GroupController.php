@@ -473,6 +473,17 @@ class GroupController extends Controller
         else {
             $path = $file->storeAs('groups/new', "groupimport-" . $user_id . "-" . Carbon::now()->format('Y-m-d_H-i-s') . ".zip");
         }
-        $importservice->import($path);
+        $ret = $importservice->import($path);
+        //dd($ret);
+        $existing_usernames = $ret->pop();
+        $existing_slug = $ret->pop();
+        $import_basename = $ret->pop();
+        $user_id = $ret->pop();
+
+        return view('groups.import')
+            ->with('user_id', '$user_id')
+            ->with('import_basename', '$import_basename')
+            ->with('existing_slug', $existing_slug)
+            ->with('existing_usernames', $existing_usernames);
     }
 }
