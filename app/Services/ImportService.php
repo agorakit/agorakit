@@ -42,12 +42,18 @@ class ImportService
         else { // JSON format
             $group = new Group(Storage::json($path));
         }
-        // Compare with already existing usernames
+        // Compare with already existing group slugs
+        foreach(Group::all() as $existing_group) {
+            if($group->slug == $existing_group->slug) {
+                print($existing_group->slug);
+            }
+        }
+        // Compare with already existing user names
         $to_modify = collect();
-        foreach(User::all() as $existing) {
+        foreach(User::all() as $existing_user) {
             foreach($group->memberships as $mb) {
-                if($mb->user->name == $existing->name) {
-                    print($existing->name);
+                if($mb->user->name == $existing_user->name) {
+                    //print($existing_user->name);
                     $to_modify->push($mb->user);
                 }
             }
