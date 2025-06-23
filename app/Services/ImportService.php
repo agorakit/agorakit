@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Group;
+use App\User;
 use Auth;
 use Route;
 use Storage;
@@ -34,13 +35,23 @@ class ImportService
             $groupfiles = Storage::allFiles($unzip_path);
             foreach($groupfiles as $file) {
                 if (basename($file) == 'group.json') {
-                    $group = Storage::json($file);
+                    $group = new Group(Storage::json($file));
                 }
             }
         }
         else { // JSON format
-            $group = Storage::json($path);
+            $group = new Group(Storage::json($path));
         }
-        dd($group);
+        // Compare with already existing usernames
+        $to_modify = collect();
+        foreach(User::all() as $existing) {
+            foreach($group->memberships as $mb) {
+                if($mb->user->name == $existing->name) {
+                    print($existing->name);
+                    $to_modify->push($mb->user);
+                }
+            }
+        }
+        dd($to_modify);
     }
 }
