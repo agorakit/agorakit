@@ -79,8 +79,20 @@ class ImportService
      */
     public function import2($path, $edited_data)
     {
-        // Retrieve group data
-        $group = new Group(Storage::json($path));
+        // Retrieve group data (JSON file)
+        if (str_ends_with($path, 'zip')) {
+            $unzip_path = substr($path, 0, -4);
+            foreach(Storage::allFiles($unzip_path) as $file) {
+                if(str_ends_with($file, 'json')) {
+                    $json_file = $file;
+                    break;
+                }
+            }
+        }
+        else {
+            $json_file = $path;
+        }
+        $group = new Group(Storage::json($json_file));
         // Proceed to replacements if any
         if ($edited_data) {
             list($edited_slug, $edited_usernames) = $edited_data;
@@ -96,12 +108,14 @@ class ImportService
             }
         }
         // Once more, compare with existing slug/usernames in database
-        list($existing_slug, $existing_usernames) = compare_with_existing($group);
+        list($existing_slug, $existing_usernames) = $this->compare_with_existing($group);
         if ($existing_slug || $existing_usernames) {
             // Go back to intermediate form
             return array($existing_slug, $existing_usernames);
         }
         else {
+            // We cannot keep the original id
+            $group->id = null;
             // Finally, import the group and return null
             $group->save();
             $group->user()->associate(Auth::user());
