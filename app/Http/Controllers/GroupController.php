@@ -471,12 +471,11 @@ class GroupController extends Controller
             }
             $importservice = new ImportService();
             $ret = $importservice->import($path);
-            // dd($ret);
             list($import_basename, $existing_slug, $existing_usernames) = $ret;
 
             return view('groups.import')
-                ->with('user_id', '$user_id')
-                ->with('import_basename', '$import_basename')
+                ->with('user_id', $user_id)
+                ->with('import_basename', $import_basename)
                 ->with('existing_slug', $existing_slug)
                 ->with('existing_usernames', $existing_usernames);
         }
@@ -495,8 +494,23 @@ class GroupController extends Controller
         $basename = $request->get('import_basename');
         // FIXME compare the dates
 
+        $new_slug = null;
+        $new_usernames = array();
+        if ($request->has('new_slug')) {
+            $new_slug = $request->get('new_slug');
+        }
+        foreach($request->input() as $key=>$val) {
+            if (substr($key, 0, 12) == 'new_username_') {
+                $new_usernames[substr($key, 12)] = $val;
+            }
+        }
         $path = 'groups/new/' . $basename;
+        $new_data = null;
+        if ($new_slug || $new_usernames) {
+            $new_data = array($new_slug, $new_usernames);
+        }
+        dd($new_data);
         $importservice = new ImportService();
-        $ret = $importservice->import($path, [$new_slug, $usernames]);
+        $ret = $importservice->import($path, $new_data);
     }
 }

@@ -55,7 +55,7 @@ class ImportService
         foreach(User::all() as $existing_user) {
             foreach($group->memberships as $mb) {
                 if($mb->user->name == $existing_user->name) {
-                    array_push($existing_usernames, $mb->user->name);
+                    $existing_usernames[$mb->user->id] = $mb->user->name;
                 }
             }
         }

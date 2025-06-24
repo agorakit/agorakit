@@ -8,8 +8,8 @@
     {!! Form::open(['action' => ['GroupController@import', 'files' => false]], null) !!}
     @csrf
     @honeypot
-    <input type="hidden" name="user_id" value="$user_id">
-    <input type="hidden" name="import_basename" value="$import_basename">
+    <input type="hidden" name="user_id" value="{{ $user_id }}">
+    <input type="hidden" name="import_basename" value="{{ $import_basename }}">
 
     @if ($existing_slug)<p>{{ trans('group.existing_slug_help') }}</p>
     <div class="form-group">
@@ -18,9 +18,9 @@
     </div>@endif
 
     @if ($existing_usernames)<p>{{ trans('group.existing_usernames_help') }}</p>@endif
-    @foreach ($existing_usernames as $existing_username)<div class="form-group">
+    @foreach ($existing_usernames as $id => $existing_username)<div class="form-group">
         {!! Form::label('username_$existing_username', trans('new_username')) !!}
-        {!! Form::text('username_$existing_username', $existing_username, ['class' => 'form-control', 'required']) !!}
+        {!! Form::text('new_username_'.$id, $existing_username, ['class' => 'form-control', 'required']) !!}
     </div>@endforeach
 
     <div class="form-group">
