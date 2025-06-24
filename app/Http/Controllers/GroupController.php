@@ -493,6 +493,7 @@ class GroupController extends Controller
         }
         $basename = $request->get('import_basename');
         // FIXME compare the dates
+        $path = 'groups/new/' . $basename;
 
         $new_slug = null;
         $new_usernames = array();
@@ -509,8 +510,7 @@ class GroupController extends Controller
         if ($new_slug || $new_usernames) {
             $new_data = array($new_slug, $new_usernames);
         }
-        dd($new_data);
         $importservice = new ImportService();
-        $ret = $importservice->import($path, $new_data);
+        $ret = $importservice->import2($path, $new_data);
     }
 }
