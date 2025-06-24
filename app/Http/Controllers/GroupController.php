@@ -499,9 +499,9 @@ class GroupController extends Controller
         if ($request->has('new_slug')) {
             $new_slug = $request->get('new_slug');
         }
-        foreach($request->input() as $key=>$val) {
-            if (substr($key, 0, 12) == 'new_username_') {
-                $new_usernames[substr($key, 12)] = $val;
+        foreach($request->all() as $key=>$val) {
+            if (substr($key, 0, 13) == 'new_username_') {
+                $new_usernames[substr($key, 13)] = $val;
             }
         }
         $path = 'groups/new/' . $basename;
