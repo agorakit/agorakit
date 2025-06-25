@@ -31,12 +31,12 @@ class ImportService
                 $existing_slug = $existing_group->slug;
             }
         }
-        // Compare with already existing user names
+        // Compare with already existing usernames, yet email being different
         $existing_usernames = array();
         foreach(User::all() as $existing_user) {
             foreach($group->memberships as $mb) {
-                if($mb->user->name == $existing_user->name) {
-                    $existing_usernames[$mb->user->id] = $mb->user->name;
+                if($mb->user->username == $existing_user->username && $mb->user->email <> $existing_user->email) {
+                    $existing_usernames[$mb->user->id] = $mb->user->username;
                 }
             }
         }
@@ -69,7 +69,7 @@ class ImportService
             $group = new Group(Storage::json($path));
         }
         // Compare with existing data in database
-        list($existing_slug, $existing_usernames) = compare_with_existing($group);
+        list($existing_slug, $existing_usernames) = $this->compare_with_existing($group);
         return array(basename($path), $existing_slug, $existing_usernames);
     }
 
@@ -99,10 +99,10 @@ class ImportService
             if ($edited_slug) {
                 $group->slug = $edited_slug;
             }
-            foreach($edited_usernames as $id=>$name) {
+            foreach($edited_usernames as $id=>$username) {
                 foreach($group->memberships as $mb) {
                     if ($mb->user->id == $id) {
-                        $mb->user->name = $name;
+                        $mb->user->username = $username;
                     }
                 }
             }
@@ -116,9 +116,9 @@ class ImportService
         else {
             // We cannot keep the original id
             $group->id = null;
-            // Finally, import the group and return null
-            $group->save();
             $group->user()->associate(Auth::user());
-        }
+            //$group->save();
+            }
+	return $group;
     }
 }

@@ -511,6 +511,7 @@ class GroupController extends Controller
             $new_data = array($new_slug, $new_usernames);
         }
         $importservice = new ImportService();
-        $ret = $importservice->import2($path, $new_data);
+        $created_group = $importservice->import2($path, $user_id, $new_data);
+        //if ($created_group) return redirect()->route('groups.show', $created_group);
     }
 }

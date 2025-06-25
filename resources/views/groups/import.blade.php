@@ -19,7 +19,7 @@
 
     @if ($existing_usernames)<p>{{ trans('group.existing_usernames_help') }}</p>@endif
     @foreach ($existing_usernames as $id => $existing_username)<div class="form-group">
-        {!! Form::label('username_$existing_username', trans('new_username')) !!}
+        {!! Form::label('new_username_'.$id, trans('new username')) !!}
         {!! Form::text('new_username_'.$id, $existing_username, ['class' => 'form-control', 'required']) !!}
     </div>@endforeach
 
