@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Group;
+use App\Membership;
 use App\User;
 use Auth;
 use Route;
@@ -114,11 +115,28 @@ class ImportService
             return array($existing_slug, $existing_usernames);
         }
         else {
-            // We cannot keep the original id
+            // Insert objects in database
+            // Absolutely avoid crushing existing ones
             $group->id = null;
-            $group->user()->associate(Auth::user());
-            //$group->save();
+            $group_n = Group::create($group->getAttributes());
+            $group_n->user()->associate(Auth::user());
+            $group_n->save();
+            foreach($group->memberships as $mb) {
+                $mb = $mb;
+                $user = clone $mb->user;
+                $user->id = null;
+                $user->email = "ok@agorakit.org";
+                $user_n = User::create($user->getAttributes());
+                $user_n->verified = 1;
+                $user_n->save();
+                $mb->id = null;
+                $mb->group()->associate($group_n);
+                $mb->user()->associate($user_n);
+                $mb_n = Membership::create($mb->getAttributes());
+                $mb_n->save();
             }
+        }
+        dd("fin");
 	return $group;
     }
 }
