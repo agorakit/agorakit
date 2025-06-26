@@ -511,10 +511,10 @@ class GroupController extends Controller
             $new_data = array($new_slug, $new_usernames);
         }
         $importservice = new ImportService();
-        $ret = $importservice->import2($path, $user_id, $new_data);
-        if (is_a($ret, "Group")) {
+        $ret = $importservice->import2($path, $new_data);
+        if (is_a($ret, "App\Group")) {
             flash(trans('messages.ressource_created_successfully'));
-            return redirect()->route('groups.show', [$created_group]);
+            return redirect()->route('groups.show', [$ret]);
         }
         else if (is_array($ret)) { // Go back to intermediate forme
             list($import_basename, $edited_slug, $edited_usernames) = $ret;
