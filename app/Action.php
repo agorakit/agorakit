@@ -36,6 +36,7 @@ class Action extends Model
         'stop'     => 'required',
     ];
 
+    protected $fillable = ['id', 'name', 'body', 'start', 'stop', 'visibility'];
     protected $with = ['attending', 'notAttending']; // always load participants with actions
 
     protected $table = 'actions';

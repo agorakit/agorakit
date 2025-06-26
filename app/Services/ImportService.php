@@ -2,8 +2,14 @@
 
 namespace App\Services;
 
+use App\Action;
+use App\Comment;
+use App\Discussion;
+use App\File;
 use App\Group;
 use App\Membership;
+use App\Reaction;
+use App\Tag;
 use App\User;
 use Auth;
 use Route;
@@ -106,6 +112,42 @@ class ImportService
                         $mb->user->username = $username;
                     }
                 }
+                foreach($group->actions as $action) {
+                    if ($action->user->id == $id) {
+                        $action->user->username = $username;
+        		//dd($action);
+                    }
+                }
+                foreach($group->discussions as $discussion) {
+                    if ($discussion->user->id == $id) {
+                        $discussion->user->username = $username;
+        		//dd($discussion);
+                    }
+                    foreach($discussion->comments as $comment) {
+                        if ($comment->user->id == $id) {
+                            $comment->user->username = $username;
+        		    //dd($comment);
+                        }
+                        foreach($comment->reactions as $reaction) {
+                            if ($reaction->user->id == $id) {
+                            $reaction->user->username = $username;
+        		    //dd($reaction);
+                            }
+                        }
+                    }
+                    foreach($discussion->reactions as $reaction) {
+                        if ($reaction->user->id == $id) {
+                            $reaction->user->username = $username;
+        		    //dd($reaction);
+                        }
+                    }
+                }
+                foreach($group->files as $file) {
+                    if ($file->user->id == $id) {
+                        $file->user->username = $username;
+        		//dd($file);
+                    }
+                }
             }
         }
         // Once more, compare with existing slug/usernames in database
@@ -122,7 +164,6 @@ class ImportService
             $group_n->user()->associate(Auth::user());
             $group_n->save();
             foreach($group->memberships as $mb) {
-                $mb = $mb;
                 $user = clone $mb->user;
                 $user->id = null;
                 $user->email = "ok@agorakit.org";
@@ -135,8 +176,62 @@ class ImportService
                 $mb_n = Membership::create($mb->getAttributes());
                 $mb_n->save();
             }
+            foreach($group->actions as $action) {
+                $action->id = null;
+                $action->group()->associate($group_n);
+                $user_n = User::where('username', $action->user->username)->first();
+                $action->user()->associate($user_n);
+                $action_n = Action::create($action->getAttributes());
+                $action_n->save();
+            }
+            foreach($group->discussions as $discussion) {
+                $discussion->id = null;
+                $discussion->group()->associate($group_n);
+                $user_n = User::where('username', $discussion->user->username)->first();
+                $discussion->user()->associate($user_n);
+                $discussion_n = Discussion::create($discussion->getAttributes());
+                $discussion_n->save();
+                foreach($discussion->comments as $comment) {
+                    $comment->id = null;
+                    $comment->group()->associate($group_n);
+                    $user_n = User::where('username', $comment->user->username)->first();
+                    $comment->user()->associate($user_n);
+                    $comment_n = Comment::create($comment->getAttributes());
+                    $comment_n->save();
+                    foreach($comment->reactions as $reaction) {
+                        $reaction->id = null;
+                        $reaction->group()->associate($group_n);
+                        $user_n = User::where('username', $reaction->user->username)->first();
+                        $reaction->user()->associate($user_n);
+                        $reaction_n = Reaction::create($reaction->getAttributes());
+                        $reaction_n->save();
+                    }
+                }
+                foreach($discussion->reactions as $reaction) {
+                    $reaction->id = null;
+                    $reaction->group()->associate($group_n);
+                    $user_n = User::where('username', $reaction->user->username)->first();
+                    $reaction->user()->associate($user_n);
+                    $reaction_n = Reaction::create($reaction->getAttributes());
+                    $reaction_n->save();
+                }
+            }
+            foreach($group->files as $file) {
+                $file->id = null;
+                $file->group()->associate($group_n);
+                $user_n = User::where('username', $file->user->username)->first();
+                $file->user()->associate($user_n);
+                $file_n = File::create($file->getAttributes());
+                $file_n->save();
+            }
+            foreach($group->tags as $tag) {
+                $tag->id = null;
+                $tag->group()->associate($group_n);
+                $tag_n = Tag::create($tag->getAttributes());
+                $tag_n->save();
+            }
         }
-        dd("fin");
-	return $group;
+        //dd("fin");
+        return $group_n;
     }
 }

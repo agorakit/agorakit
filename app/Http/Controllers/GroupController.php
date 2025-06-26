@@ -512,6 +512,13 @@ class GroupController extends Controller
         }
         $importservice = new ImportService();
         $created_group = $importservice->import2($path, $user_id, $new_data);
-        //if ($created_group) return redirect()->route('groups.show', $created_group);
+        if ($created_group) {
+            flash(trans('messages.ressource_created_successfully'));
+            return redirect()->route('groups.show', [$created_group]);
+        }
+        else {
+            flash(trans('messages.ressource_created_successfully'));
+            return redirect()->route('groups.index')->withErrors("Import error");
+        }
     }
 }
