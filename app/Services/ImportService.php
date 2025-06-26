@@ -75,6 +75,7 @@ class ImportService
         else { // JSON format
             $group = new Group(Storage::json($path));
         }
+	$group->memberships[1]->user->email="ok@agorakit.org";
         // Compare with existing data in database
         list($existing_slug, $existing_usernames) = $this->compare_with_existing($group);
         return array(basename($path), $existing_slug, $existing_usernames);
@@ -154,7 +155,7 @@ class ImportService
         list($existing_slug, $existing_usernames) = $this->compare_with_existing($group);
         if ($existing_slug || $existing_usernames) {
             // Go back to intermediate form
-            return array($existing_slug, $existing_usernames);
+            return array(basename($path), $edited_slug, $edited_usernames);
         }
         else {
             // Insert objects in database
@@ -166,7 +167,7 @@ class ImportService
             foreach($group->memberships as $mb) {
                 $user = clone $mb->user;
                 $user->id = null;
-                $user->email = "ok@agorakit.org";
+                //$user->email = "ok@agorakit.org";
                 $user_n = User::create($user->getAttributes());
                 $user_n->verified = 1;
                 $user_n->save();

@@ -511,13 +511,21 @@ class GroupController extends Controller
             $new_data = array($new_slug, $new_usernames);
         }
         $importservice = new ImportService();
-        $created_group = $importservice->import2($path, $user_id, $new_data);
-        if ($created_group) {
+        $ret = $importservice->import2($path, $user_id, $new_data);
+        if (is_a($ret, "Group")) {
             flash(trans('messages.ressource_created_successfully'));
             return redirect()->route('groups.show', [$created_group]);
         }
+        else if (is_array($ret)) { // Go back to intermediate forme
+            list($import_basename, $edited_slug, $edited_usernames) = $ret;
+            return view('groups.import')
+                ->with('user_id', $user_id)
+                ->with('import_basename', $import_basename)
+                ->with('existing_slug', $edited_slug)
+                ->with('existing_usernames', $edited_usernames)
+                ->withErrors("We are sorry, but some of these need to be edited a second time because they exist already in database.");
+        }
         else {
-            flash(trans('messages.ressource_created_successfully'));
             return redirect()->route('groups.index')->withErrors("Import error");
         }
     }
