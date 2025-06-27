@@ -15,6 +15,7 @@ use Auth;
 use Route;
 use Storage;
 use ZipArchive;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 /**
  * This service imports a group from a file.
@@ -26,18 +27,10 @@ class ImportService
 
 
     /**
-     * - Does group slug already exist in database?
      * - Do some usernames already exist in database?
      */
-    private function compare_with_existing($group)
+    private function existing_usernames($group)
     {
-        // Compare with already existing group slugs
-        $existing_slug = false;
-        foreach(Group::all() as $existing_group) {
-            if($group->slug == $existing_group->slug) {
-                $existing_slug = $existing_group->slug;
-            }
-        }
         // Compare with already existing usernames, yet email being different
         $existing_usernames = array();
         foreach(User::all() as $existing_user) {
@@ -47,7 +40,7 @@ class ImportService
                 }
             }
         }
-        return array($existing_slug, $existing_usernames);
+        return $existing_usernames;
     }
 
 
@@ -75,17 +68,15 @@ class ImportService
         else { // JSON format
             $group = new Group(Storage::json($path));
         }
-	$group->memberships[1]->user->email="ok@agorakit.org";
         // Compare with existing data in database
-        list($existing_slug, $existing_usernames) = $this->compare_with_existing($group);
-        return array(basename($path), $existing_slug, $existing_usernames);
+        $existing_usernames = $this->existing_usernames($group);
+        return array(basename($path), $existing_usernames);
     }
 
     /**
      * - second step: check and import group data
-     * - parameter $new_data is a list of newly edited slug/usernames
      */
-    public function import2($path, $edited_data)
+    public function import2($path, $edited_usernames)
     {
         // Retrieve group data (JSON file)
         if (str_ends_with($path, 'zip')) {
@@ -102,78 +93,79 @@ class ImportService
         }
         $group = new Group(Storage::json($json_file));
         // Proceed to replacements if any
-        if ($edited_data) {
-            list($edited_slug, $edited_usernames) = $edited_data;
-            if ($edited_slug) {
-                $group->slug = $edited_slug;
-            }
+        if ($edited_usernames) {
             foreach($edited_usernames as $id=>$username) {
                 foreach($group->memberships as $mb) {
                     if ($mb->user->id == $id) {
                         $mb->user->username = $username;
                     }
                 }
+                // Here again, compare with existing usernames in database
+                $existing_usernames = $this->existing_usernames($group);
+                if ($existing_usernames) {
+                    // Go back to intermediate form
+                    return array(basename($path), $existing_usernames);
+                }
+            }
+            // Continue replacements
+            foreach($edited_usernames as $id=>$username) {
                 foreach($group->actions as $action) {
                     if ($action->user->id == $id) {
                         $action->user->username = $username;
-        		//dd($action);
                     }
                 }
                 foreach($group->discussions as $discussion) {
                     if ($discussion->user->id == $id) {
                         $discussion->user->username = $username;
-        		//dd($discussion);
                     }
                     foreach($discussion->comments as $comment) {
                         if ($comment->user->id == $id) {
                             $comment->user->username = $username;
-        		    //dd($comment);
                         }
                         foreach($comment->reactions as $reaction) {
                             if ($reaction->user->id == $id) {
                             $reaction->user->username = $username;
-        		    //dd($reaction);
                             }
                         }
                     }
                     foreach($discussion->reactions as $reaction) {
                         if ($reaction->user->id == $id) {
                             $reaction->user->username = $username;
-        		    //dd($reaction);
                         }
                     }
                 }
                 foreach($group->files as $file) {
                     if ($file->user->id == $id) {
                         $file->user->username = $username;
-        		//dd($file);
                     }
                 }
             }
         }
-        // Once more, compare with existing slug/usernames in database
-        list($existing_slug, $existing_usernames) = $this->compare_with_existing($group);
-        if ($existing_slug || $existing_usernames) {
-            // Go back to intermediate form
-            return array(basename($path), $edited_slug, $edited_usernames);
-        }
-        else {
+        //else { FIXME DB transaction
             // Insert objects in database
             // Absolutely avoid crushing existing ones
             $group->id = null;
+            $group->name = $group->name . ' (imported)';
+            $group->slug = SlugService::createSlug(Group::class, 'slug', $group->slug);
             $group_n = Group::create($group->getAttributes());
             $group_n->user()->associate(Auth::user());
             $group_n->save();
             foreach($group->memberships as $mb) {
-                $user = clone $mb->user;
-                $user->id = null;
-                //$user->email = "ok@agorakit.org";
-                $user_n = User::create($user->getAttributes());
-                $user_n->verified = 1;
-                $user_n->save();
                 $mb->id = null;
                 $mb->group()->associate($group_n);
-                $mb->user()->associate($user_n);
+                $user = clone $mb->user;
+                // Case user already in database
+                $found_user = User::where('username', $user->username)->where('email', $user->email)->first();
+                if ($found_user) {
+                    $mb->user()->associate($found_user);
+                }
+                else {
+                    $user->id = null;
+                    $user_n = User::create($user->getAttributes());
+                    $user_n->verified = 1;
+                    $user_n->save();
+                    $mb->user()->associate($user_n);
+                }
                 $mb_n = Membership::create($mb->getAttributes());
                 $mb_n->save();
             }
@@ -187,10 +179,10 @@ class ImportService
             }
             foreach($group->discussions as $discussion) {
                 $discussion->id = null;
-                $discussion->group()->associate($group_n);
-                $user_n = User::where('username', $discussion->user->username)->first();
-                $discussion->user()->associate($user_n);
                 $discussion_n = Discussion::create($discussion->getAttributes());
+                $discussion_n->group()->associate($group_n);
+                $user_n = User::where('username', $discussion->user->username)->first();
+                $discussion_n->user()->associate($user_n);
                 $discussion_n->save();
                 foreach($discussion->comments as $comment) {
                     $comment->id = null;
@@ -201,10 +193,10 @@ class ImportService
                     $comment_n->save();
                     foreach($comment->reactions as $reaction) {
                         $reaction->id = null;
-                        $reaction->group()->associate($group_n);
-                        $user_n = User::where('username', $reaction->user->username)->first();
-                        $reaction->user()->associate($user_n);
                         $reaction_n = Reaction::create($reaction->getAttributes());
+                        $reaction_n->group()->associate($group_n);
+                        $user_n = User::where('username', $reaction->user->username)->first();
+                        $reaction_n->user()->associate($user_n);
                         $reaction_n->save();
                     }
                 }
@@ -231,8 +223,9 @@ class ImportService
                 $tag_n = Tag::create($tag->getAttributes());
                 $tag_n->save();
             }
-        }
-        //dd("fin");
+        //}
+        //$this->make_passwords_and_notify($group_n);
+        //dd($group_n);
         return $group_n;
     }
 }

@@ -471,12 +471,11 @@ class GroupController extends Controller
             }
             $importservice = new ImportService();
             $ret = $importservice->import($path);
-            list($import_basename, $existing_slug, $existing_usernames) = $ret;
+            list($import_basename, $existing_usernames) = $ret;
 
             return view('groups.import')
                 ->with('user_id', $user_id)
                 ->with('import_basename', $import_basename)
-                ->with('existing_slug', $existing_slug)
                 ->with('existing_usernames', $existing_usernames);
         }
 
@@ -492,36 +491,26 @@ class GroupController extends Controller
                 ->withErrors(trans('This action is unauthorized'));
         }
         $basename = $request->get('import_basename');
-        // FIXME compare the dates
         $path = 'groups/new/' . $basename;
 
-        $new_slug = null;
         $new_usernames = array();
-        if ($request->has('new_slug')) {
-            $new_slug = $request->get('new_slug');
-        }
         foreach($request->all() as $key=>$val) {
             if (substr($key, 0, 13) == 'new_username_') {
                 $new_usernames[substr($key, 13)] = $val;
             }
         }
         $path = 'groups/new/' . $basename;
-        $new_data = null;
-        if ($new_slug || $new_usernames) {
-            $new_data = array($new_slug, $new_usernames);
-        }
         $importservice = new ImportService();
-        $ret = $importservice->import2($path, $new_data);
+        $ret = $importservice->import2($path, $new_usernames);
         if (is_a($ret, "App\Group")) {
             flash(trans('messages.ressource_created_successfully'));
             return redirect()->route('groups.show', [$ret]);
         }
         else if (is_array($ret)) { // Go back to intermediate forme
-            list($import_basename, $edited_slug, $edited_usernames) = $ret;
+            list($import_basename, $edited_usernames) = $ret;
             return view('groups.import')
                 ->with('user_id', $user_id)
                 ->with('import_basename', $import_basename)
-                ->with('existing_slug', $edited_slug)
                 ->with('existing_usernames', $edited_usernames)
                 ->withErrors("We are sorry, but some of these need to be edited a second time because they exist already in database.");
         }
