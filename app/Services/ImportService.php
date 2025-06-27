@@ -27,6 +27,24 @@ class ImportService
 
 
     /**
+     * - Do we find a similar group in database?
+     */
+    private function existing_group($group)
+    {
+        foreach(Group::all() as $existing_group) {
+            if ($existing_group->name == $group->name) {
+                return "A group already exists with the same name! id=" . $existing_group->id;
+            }
+            if (count($existing_group->discussions) == count($group->discussions)
+                && count($existing_group->actions) == count($group->actions)
+                && count($existing_group->files) == count($group->files)) {
+                return "A group already exists with same number of data! id=" . $existing_group->id;
+            }
+        }
+    }
+
+
+    /**
      * - Do some usernames already exist in database?
      */
     private function existing_usernames($group)
@@ -69,8 +87,9 @@ class ImportService
             $group = new Group(Storage::json($path));
         }
         // Compare with existing data in database
+        $existing_group = $this->existing_group($group);
         $existing_usernames = $this->existing_usernames($group);
-        return array(basename($path), $existing_usernames);
+        return array(basename($path), $existing_group, $existing_usernames);
     }
 
     /**
@@ -104,7 +123,7 @@ class ImportService
                 $existing_usernames = $this->existing_usernames($group);
                 if ($existing_usernames) {
                     // Go back to intermediate form
-                    return array(basename($path), $existing_usernames);
+                    return array(basename($path), null, $existing_usernames);
                 }
             }
             // Continue replacements

@@ -471,11 +471,12 @@ class GroupController extends Controller
             }
             $importservice = new ImportService();
             $ret = $importservice->import($path);
-            list($import_basename, $existing_usernames) = $ret;
+            list($import_basename, $existing_group, $existing_usernames) = $ret;
 
             return view('groups.import')
                 ->with('user_id', $user_id)
                 ->with('import_basename', $import_basename)
+                ->with('existing_group', $existing_group)
                 ->with('existing_usernames', $existing_usernames);
         }
 
@@ -519,6 +520,7 @@ class GroupController extends Controller
             return view('groups.import')
                 ->with('user_id', $user_id)
                 ->with('import_basename', $import_basename)
+                ->with('existing_group', '')
                 ->with('existing_usernames', $edited_usernames)
                 ->withErrors("We are sorry, but some of these need to be edited a second time because they exist already in database.");
         }

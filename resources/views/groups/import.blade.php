@@ -3,6 +3,8 @@
 @section('content')
     <h1>{{ trans('group.import_title') }}</h1>
 
+    @if ($existing_group)<div class="alert text-bg-danger"><p>Warning: {{ $existing_group }}</p></div>@endif
+
     <p>{{ trans('group.import_blob') }}</p>
 
     {!! Form::open(['action' => ['GroupController@import', 'files' => false]], null) !!}
