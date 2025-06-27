@@ -167,7 +167,10 @@ class ImportService
                     $mb->user()->associate($user_n);
                 }
                 $mb_n = Membership::create($mb->getAttributes());
-                $mb_n->save();
+                if ($mb_n->isValid()) {
+                    $mb_n->save();
+                }
+                else { dump("error with membership! " . $mb_n->getAttributes()); }
             }
             foreach($group->actions as $action) {
                 $action->id = null;
@@ -181,6 +184,7 @@ class ImportService
                 if ($action_n->isValid()) {
                     $action_n->save();
                 }
+                else { dump("error with action! " . $action_n->getAttributes()); }
             }
             foreach($group->discussions as $discussion) {
                 $discussion->id = null;
@@ -193,7 +197,8 @@ class ImportService
                 $discussion_n->deleted_at = $discussion->deleted_at;
                 if ($discussion_n->isValid()) {
                     $discussion_n->save();
-                    }
+                }
+                else { dump("error with discussion! " . $discussion_n->getAttributes()); }
                 foreach($discussion->comments as $comment) {
                     $comment->id = null;
                     $comment->group()->associate($group_n);
@@ -206,6 +211,7 @@ class ImportService
                     if ($comment_n->isValid()) {
                         $comment_n->save();
                     }
+                    else { dump("error with comment! " . $comment_n->getAttributes()); }
                     foreach($comment->reactions as $reaction) {
                         $reaction->id = null;
                         $reaction_n = Reaction::create($reaction->getAttributes());
@@ -217,6 +223,7 @@ class ImportService
                         if ($reaction_n->isValid()) {
                             $reaction_n->save();
                         }
+                        else { dump("error with reaction! " . $reaction_n->getAttributes()); }
                     }
                 }
                 foreach($discussion->reactions as $reaction) {
@@ -230,6 +237,7 @@ class ImportService
                     if ($reaction_n->isValid()) {
                         $reaction_n->save();
                     }
+                    else { dump("error with reaction! " . $reaction_n->getAttributes()); }
                 }
             }
             foreach($group->files as $file) {
@@ -244,6 +252,7 @@ class ImportService
                 if ($file_n->isValid()) {
                     $file_n->save();
                 }
+                else { dump("error with file! " . $file_n->getAttributes()); }
             }
             foreach($group->tags as $tag) {
                 $tag->id = null;
