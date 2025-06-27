@@ -491,6 +491,14 @@ class GroupController extends Controller
                 ->withErrors(trans('This action is unauthorized'));
         }
         $basename = $request->get('import_basename');
+        // For added security, we import only freshly uploaded data
+        $date_string = implode('-', array_slice(explode('-', substr($basename, 0, -4)), 2));
+        $dt = Carbon::createFromFormat('Y-m-d_H-i-s', $date_string);
+        $now = Carbon::now();
+        if ($dt->year <> $now->year || $dt->dayOfYear <> $now->dayOfYear) {
+            return redirect()->route('groups.index')
+              ->withErrors(trans('group.import_error'));
+        }
         $path = 'groups/new/' . $basename;
 
         $new_usernames = array();
