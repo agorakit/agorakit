@@ -175,6 +175,9 @@ class ImportService
                 $user_n = User::where('username', $action->user->username)->first();
                 $action->user()->associate($user_n);
                 $action_n = Action::create($action->getAttributes());
+                $action_n->created_at = $action->created_at;
+                $action_n->updated_at = $action->updated_at;
+                $action_n->deleted_at = $action->deleted_at;
                 $action_n->save();
             }
             foreach($group->discussions as $discussion) {
@@ -183,6 +186,9 @@ class ImportService
                 $discussion_n->group()->associate($group_n);
                 $user_n = User::where('username', $discussion->user->username)->first();
                 $discussion_n->user()->associate($user_n);
+                $discussion_n->created_at = $discussion->created_at;
+                $discussion_n->updated_at = $discussion->updated_at;
+                $discussion_n->deleted_at = $discussion->deleted_at;
                 $discussion_n->save();
                 foreach($discussion->comments as $comment) {
                     $comment->id = null;
@@ -190,6 +196,9 @@ class ImportService
                     $user_n = User::where('username', $comment->user->username)->first();
                     $comment->user()->associate($user_n);
                     $comment_n = Comment::create($comment->getAttributes());
+                    $comment_n->created_at = $comment->created_at;
+                    $comment_n->updated_at = $comment->updated_at;
+                    $comment_n->deleted_at = $comment->deleted_at;
                     $comment_n->save();
                     foreach($comment->reactions as $reaction) {
                         $reaction->id = null;
@@ -197,6 +206,8 @@ class ImportService
                         $reaction_n->group()->associate($group_n);
                         $user_n = User::where('username', $reaction->user->username)->first();
                         $reaction_n->user()->associate($user_n);
+                        $reaction_n->created_at = $reaction->created_at;
+                        $reaction_n->updated_at = $reaction->updated_at;
                         $reaction_n->save();
                     }
                 }
@@ -206,6 +217,8 @@ class ImportService
                     $user_n = User::where('username', $reaction->user->username)->first();
                     $reaction->user()->associate($user_n);
                     $reaction_n = Reaction::create($reaction->getAttributes());
+                    $reaction_n->created_at = $reaction->created_at;
+                    $reaction_n->updated_at = $reaction->updated_at;
                     $reaction_n->save();
                 }
             }
@@ -215,12 +228,17 @@ class ImportService
                 $user_n = User::where('username', $file->user->username)->first();
                 $file->user()->associate($user_n);
                 $file_n = File::create($file->getAttributes());
+                $file_n->created_at = $file->created_at;
+                $file_n->updated_at = $file->updated_at;
+                $file_n->deleted_at = $file->deleted_at;
                 $file_n->save();
             }
             foreach($group->tags as $tag) {
                 $tag->id = null;
                 $tag->group()->associate($group_n);
                 $tag_n = Tag::create($tag->getAttributes());
+                $tag_n->created_at = $tag->created_at;
+                $tag_n->updated_at = $tag->updated_at;
                 $tag_n->save();
             }
         //}
