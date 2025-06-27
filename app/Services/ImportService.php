@@ -178,7 +178,9 @@ class ImportService
                 $action_n->created_at = $action->created_at;
                 $action_n->updated_at = $action->updated_at;
                 $action_n->deleted_at = $action->deleted_at;
-                $action_n->save();
+                if ($action_n->isValid()) {
+                    $action_n->save();
+                }
             }
             foreach($group->discussions as $discussion) {
                 $discussion->id = null;
@@ -189,7 +191,9 @@ class ImportService
                 $discussion_n->created_at = $discussion->created_at;
                 $discussion_n->updated_at = $discussion->updated_at;
                 $discussion_n->deleted_at = $discussion->deleted_at;
-                $discussion_n->save();
+                if ($discussion_n->isValid()) {
+                    $discussion_n->save();
+                    }
                 foreach($discussion->comments as $comment) {
                     $comment->id = null;
                     $comment->group()->associate($group_n);
@@ -199,7 +203,9 @@ class ImportService
                     $comment_n->created_at = $comment->created_at;
                     $comment_n->updated_at = $comment->updated_at;
                     $comment_n->deleted_at = $comment->deleted_at;
-                    $comment_n->save();
+                    if ($comment_n->isValid()) {
+                        $comment_n->save();
+                    }
                     foreach($comment->reactions as $reaction) {
                         $reaction->id = null;
                         $reaction_n = Reaction::create($reaction->getAttributes());
@@ -208,7 +214,9 @@ class ImportService
                         $reaction_n->user()->associate($user_n);
                         $reaction_n->created_at = $reaction->created_at;
                         $reaction_n->updated_at = $reaction->updated_at;
-                        $reaction_n->save();
+                        if ($reaction_n->isValid()) {
+                            $reaction_n->save();
+                        }
                     }
                 }
                 foreach($discussion->reactions as $reaction) {
@@ -219,7 +227,9 @@ class ImportService
                     $reaction_n = Reaction::create($reaction->getAttributes());
                     $reaction_n->created_at = $reaction->created_at;
                     $reaction_n->updated_at = $reaction->updated_at;
-                    $reaction_n->save();
+                    if ($reaction_n->isValid()) {
+                        $reaction_n->save();
+                    }
                 }
             }
             foreach($group->files as $file) {
@@ -231,7 +241,9 @@ class ImportService
                 $file_n->created_at = $file->created_at;
                 $file_n->updated_at = $file->updated_at;
                 $file_n->deleted_at = $file->deleted_at;
-                $file_n->save();
+                if ($file_n->isValid()) {
+                    $file_n->save();
+                }
             }
             foreach($group->tags as $tag) {
                 $tag->id = null;
@@ -239,7 +251,9 @@ class ImportService
                 $tag_n = Tag::create($tag->getAttributes());
                 $tag_n->created_at = $tag->created_at;
                 $tag_n->updated_at = $tag->updated_at;
-                $tag_n->save();
+                if ($tag_n->isValid()) {
+                    $tag_n->save();
+                }
             }
         //}
         //$this->make_passwords_and_notify($group_n);
