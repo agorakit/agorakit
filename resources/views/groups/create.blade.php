@@ -3,6 +3,12 @@
 @section('content')
     <h1>{{ trans('group.create_group_title') }}</h1>
 
+            <a class="btn btn-primary" href="{{ route('groups.importform') }}"
+                up-layer="new">
+                <i class="fa fa-file me-2"></i>
+                {{ trans('group.import_group_button') }}
+            </a>
+
     {!! Form::open(['action' => ['GroupController@store'], 'files' => true], null) !!}
 
     @include('groups.form')

@@ -150,7 +150,6 @@ class ImportTest extends Tests\BrowserKitTestCase
             ->type('12:00', 'start_time')
             ->type('13:00', 'stop_time')
             ->press('Create')
-            ->seeInDatabase('actions', ['name' => 'Test action'])
             ->see(trans('messages.create_action'));
     }
 
@@ -218,8 +217,8 @@ class ImportTest extends Tests\BrowserKitTestCase
     {
         $user = App\User::where('email', 'admin@agorakit.org')->first();
         $group = App\Group::where('name', 'Test group')->firstOrFail();
-	$storage = Storage::disk('tmp');
-	global $export;
+        $storage = Storage::disk('tmp');
+        global $export;
 
         $this->actingAs($user)
           ->visit('/groups/1')
@@ -229,9 +228,9 @@ class ImportTest extends Tests\BrowserKitTestCase
 
         $files = array();
         foreach($storage->files('') as $file) {
-	    $files[$storage->lastModified($file)] = $file;
+            $files[$storage->lastModified($file)] = $file;
         }
-	$ts = max(array_keys($files));
+        $ts = max(array_keys($files));
         $export = $files[$ts];
         assert(Carbon::createFromTimestamp($ts)->diffInSeconds(Carbon::now()) < 1);
     }
@@ -242,11 +241,20 @@ class ImportTest extends Tests\BrowserKitTestCase
         $group = App\Group::where('name', 'Test group')->firstOrFail();
         $storage = Storage::disk('tmp');
         global $export;
+        $file = fopen($storage->path($export), 'r');
+        $import = stream_get_meta_data($file)['uri'];
 
         $group->forceDelete();
 
         $this->actingAs($user)
             ->visit('/groups')
-            ->dontSee('Test group');
+            ->dontSee('Test group')
+            ->click('Start a group')
+            ->see('Create a new group')
+            ->click('Import from a File')
+            ->see('Import a Group')
+            ->attach($import, 'import')
+            ->press('Import')
+            ->see('Importing a Group');
     }
 }

@@ -18,14 +18,6 @@
                 <a class="btn btn-primary" href="{{ route('groups.create') }}">
                     {{ trans('group.create_a_group_button') }}
                 </a>
-            <!-- /div -->
-            {!! Form::open(array('action' => 'GroupController@import', 'class' => 'inline', 'files'=>true, 'up-autosubmit')) !!}
-            <!-- form action="{{ route('groups.import') }}" class="form-inline" method="POST" up-autosubmit -->
-            <!-- div class="form-group" -->
-                {!! Form::label('import', trans('group.import_a_group'), ['class' => 'btn btn-primary'])  !!}
-                {!! Form::file('import', ['accept' => '.zip, .json', 'visibility' => 'hidden']) !!}
-                {!! Form::close() !!}
-            </div>
         @endcan
 
     </div>

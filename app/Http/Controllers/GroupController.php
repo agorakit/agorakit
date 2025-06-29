@@ -444,6 +444,16 @@ class GroupController extends Controller
             abort(404, 'Export failed!');
         }
     }
+
+    /**
+     * Import a group (modal form).
+     */
+    public function importform(Request $request)
+    {
+        $this->authorize('create', Group::class);
+        return view('groups.importform');
+    }
+
     /**
      * Import a group.
      */
@@ -452,13 +462,13 @@ class GroupController extends Controller
         $this->authorize('create', Group::class);
         if (!Auth::check()) {
             return redirect()->route('groups.index')
-              ->withErrors(trans('group.import_error'));
+              ->withErrors(trans('messages.authentication_error'));
         }
         $user_id = Auth::user()->id;
 
         if ($request->has('import')) { // Upload import data
             $file = $request->file('import');
-            $mimetype = $file->getClientMimeType();
+            $mimetype = $file->getMimeType();
             if (!str_ends_with($mimetype, 'zip') && !str_ends_with($mimetype, 'json')) {
                 return redirect()->route('groups.index')
                  ->withErrors(trans('group.import_error'));
