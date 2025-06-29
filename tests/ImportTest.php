@@ -255,6 +255,8 @@ class ImportTest extends Tests\BrowserKitTestCase
             ->see('Import a Group')
             ->attach($import, 'import')
             ->press('Import')
-            ->see('Importing a Group');
+            ->see('Importing a Group')
+            ->press('Create the group')
+            ->see('Test group (imported)');
     }
 }

@@ -163,13 +163,14 @@ class ImportService
         //else { FIXME DB transaction
             // Insert objects in database
             // Absolutely avoid crushing existing ones
+            $group_o = clone $group;
             $group->id = null;
             $group->name = $group->name . ' (imported)';
             $group->slug = SlugService::createSlug(Group::class, 'slug', $group->slug);
             $group_n = Group::create($group->getAttributes());
             $group_n->user()->associate(Auth::user());
             $group_n->save();
-            foreach($group->memberships as $mb) {
+            foreach($group_o->memberships as $mb) {
                 $mb->id = null;
                 $mb->group()->associate($group_n);
                 $user = clone $mb->user;
@@ -191,7 +192,7 @@ class ImportService
                 }
                 else { dump("error with membership! " . $mb_n->getAttributes()); }
             }
-            foreach($group->actions as $action) {
+            foreach($group_o->actions as $action) {
                 $action->id = null;
                 $action->group()->associate($group_n);
                 $user_n = User::where('username', $action->user->username)->first();
@@ -205,10 +206,10 @@ class ImportService
                 }
                 else { dump("error with action! " . $action_n->getAttributes()); }
             }
-            foreach($group->discussions as $discussion) {
+            foreach($group_o->discussions as $discussion) {
                 $discussion->id = null;
+                $discussion->group()->associate($group_n);
                 $discussion_n = Discussion::create($discussion->getAttributes());
-                $discussion_n->group()->associate($group_n);
                 $user_n = User::where('username', $discussion->user->username)->first();
                 $discussion_n->user()->associate($user_n);
                 $discussion_n->created_at = $discussion->created_at;
@@ -259,7 +260,7 @@ class ImportService
                     else { dump("error with reaction! " . $reaction_n->getAttributes()); }
                 }
             }
-            foreach($group->files as $file) {
+            foreach($group_o->files as $file) {
                 $file->id = null;
                 $file->group()->associate($group_n);
                 $user_n = User::where('username', $file->user->username)->first();
@@ -273,7 +274,7 @@ class ImportService
                 }
                 else { dump("error with file! " . $file_n->getAttributes()); }
             }
-            foreach($group->tags as $tag) {
+            foreach($group_o->tags as $tag) {
                 $tag->id = null;
                 $tag->group()->associate($group_n);
                 $tag_n = Tag::create($tag->getAttributes());
@@ -285,7 +286,6 @@ class ImportService
             }
         //}
         //$this->make_passwords_and_notify($group_n);
-        //dd($group_n);
         return $group_n;
     }
 }

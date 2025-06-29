@@ -31,6 +31,8 @@ class File extends Model
         'group_id' => 'required|exists:groups,id',
     ];
 
+    protected $fillable = ['id', 'path', 'name', 'filename', 'original_filename', 'original_extension', 'mime', 'filesize', 'user_id', 'group_id'];
+
     protected $table = 'files';
     public $timestamps = true;
     protected $casts = [
