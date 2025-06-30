@@ -161,6 +161,7 @@ class ImportService
             }
         }
         //else { FIXME DB transaction
+            $old_id = $group->id;
             // Insert objects in database
             // Absolutely avoid crushing existing ones
             $group_o = clone $group;
@@ -170,6 +171,7 @@ class ImportService
             $group_n = Group::create($group->getAttributes());
             $group_n->user()->associate(Auth::user());
             $group_n->save();
+            $new_id = $group_n->id;
             foreach($group_o->memberships as $mb) {
                 $mb->id = null;
                 $mb->group()->associate($group_n);
@@ -261,7 +263,9 @@ class ImportService
                     else { dump("error with reaction! " . $reaction_n->getAttributes()); }
                 }
             }
+            $files = array();
             foreach($group_o->files as $file) {
+                $old_file = $file->id;
                 $file->id = null;
                 $file->group()->associate($group_n);
                 $user_n = User::where('username', $file->user->username)->first();
@@ -272,6 +276,7 @@ class ImportService
                 $file_n->deleted_at = $file->deleted_at;
                 if ($file_n->isValid()) {
                     $file_n->save();
+                    $files[$old_file] = $file_n->id;
                 }
                 else { dump("error with file! " . $file_n->getAttributes()); }
             }
@@ -286,6 +291,13 @@ class ImportService
                 }
             }
         //}
+	if ($files) {
+            Storage::makeDirectory('groups/' . $new_id . '/files');
+            foreach(Storage::directories($unzip_path . '/groups/' . $old_id . '/files/') as $dir) {
+                $id = array_reverse(explode('/', $dir))[0];
+                Storage::move($dir, 'groups/' . $new_id . '/files/' . $files[$id]);
+            }
+        }
 //        $this->make_passwords_and_notify($group_n);
         return $group_n;
     }
