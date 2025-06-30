@@ -132,6 +132,13 @@ class ImportTest extends Tests\BrowserKitTestCase
 
         $group->discussions()->save($discussion);
 
+        $this->actingAs($newbie)
+            ->visit('/groups/' . $group->id . '/discussions')
+            ->click('Test discussion')
+            ->type('Test comment', 'body')
+            ->press('Reply')
+            ->see('Newbie')
+            ->see('Test comment');
     }
 
     public function testActionCreation()

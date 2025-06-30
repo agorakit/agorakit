@@ -20,7 +20,7 @@ class Comment extends Model
         'user_id' => 'required|exists:users,id',
     ];
 
-    protected $fillable = ['body'];
+    protected $fillable = ['body', 'discussion_id', 'user_id'];
     public $timestamps = true;
     protected $casts = [
         'deleted_at' => 'datetime',

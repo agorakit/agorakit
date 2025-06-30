@@ -207,11 +207,12 @@ class ImportService
                 else { dump("error with action! " . $action_n->getAttributes()); }
             }
             foreach($group_o->discussions as $discussion) {
+                $discussion_o = clone $discussion;
                 $discussion->id = null;
                 $discussion->group()->associate($group_n);
-                $discussion_n = Discussion::create($discussion->getAttributes());
                 $user_n = User::where('username', $discussion->user->username)->first();
-                $discussion_n->user()->associate($user_n);
+                $discussion->user()->associate($user_n);
+                $discussion_n = Discussion::create($discussion->getAttributes());
                 $discussion_n->created_at = $discussion->created_at;
                 $discussion_n->updated_at = $discussion->updated_at;
                 $discussion_n->deleted_at = $discussion->deleted_at;
@@ -219,9 +220,9 @@ class ImportService
                     $discussion_n->save();
                 }
                 else { dump("error with discussion! " . $discussion_n->getAttributes()); }
-                foreach($discussion->comments as $comment) {
+                foreach($discussion_o->comments as $comment) {
                     $comment->id = null;
-                    $comment->group()->associate($group_n);
+                    $comment->discussion()->associate($discussion_n);
                     $user_n = User::where('username', $comment->user->username)->first();
                     $comment->user()->associate($user_n);
                     $comment_n = Comment::create($comment->getAttributes());
@@ -285,7 +286,7 @@ class ImportService
                 }
             }
         //}
-        //$this->make_passwords_and_notify($group_n);
+//        $this->make_passwords_and_notify($group_n);
         return $group_n;
     }
 }
