@@ -235,10 +235,10 @@ class ImportService
                     else { dump("error with comment! " . $comment_n->getAttributes()); }
                     foreach($comment->reactions as $reaction) {
                         $reaction->id = null;
-                        $reaction_n = Reaction::create($reaction->getAttributes());
-                        $reaction_n->group()->associate($group_n);
                         $user_n = User::where('username', $reaction->user->username)->first();
-                        $reaction_n->user()->associate($user_n);
+                        $reaction->user()->associate($user_n);
+                        $reaction->reactable_id = $comment_n->id;
+                        $reaction_n = Reaction::create($reaction->getAttributes());
                         $reaction_n->created_at = $reaction->created_at;
                         $reaction_n->updated_at = $reaction->updated_at;
                         if ($reaction_n->isValid()) {
@@ -247,11 +247,11 @@ class ImportService
                         else { dump("error with reaction! " . $reaction_n->getAttributes()); }
                     }
                 }
-                foreach($discussion->reactions as $reaction) {
+                foreach($discussion_o->reactions as $reaction) {
                     $reaction->id = null;
-                    $reaction->group()->associate($group_n);
                     $user_n = User::where('username', $reaction->user->username)->first();
                     $reaction->user()->associate($user_n);
+                    $reaction->reactable_id = $discussion_n->id;
                     $reaction_n = Reaction::create($reaction->getAttributes());
                     $reaction_n->created_at = $reaction->created_at;
                     $reaction_n->updated_at = $reaction->updated_at;
