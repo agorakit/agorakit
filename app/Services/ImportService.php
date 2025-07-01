@@ -12,6 +12,7 @@ use App\Reaction;
 use App\Tag;
 use App\User;
 use Auth;
+use DB;
 use Route;
 use Storage;
 use ZipArchive;
@@ -160,147 +161,180 @@ class ImportService
                 }
             }
         }
-        //else { FIXME DB transaction
-            $old_id = $group->id;
-            // Insert objects in database
-            // Absolutely avoid crushing existing ones
-            $group_o = clone $group;
-            $group->id = null;
-            $group->name = $group->name . ' (imported)';
-            $group->slug = SlugService::createSlug(Group::class, 'slug', $group->slug);
-            $group_n = Group::create($group->getAttributes());
-            $group_n->user()->associate(Auth::user());
+
+        DB::beginTransaction();
+        $old_id = $group->id;
+        // Insert objects in database
+        // Absolutely avoid crushing existing ones
+        $group_o = clone $group;
+        $group->id = null;
+        $group->name = $group->name . ' (imported)';
+        $group->slug = SlugService::createSlug(Group::class, 'slug', $group->slug);
+        $group_n = Group::create($group->getAttributes());
+        $group_n->user()->associate(Auth::user());
+        if ($group_n->isValid()) {
             $group_n->save();
-            $new_id = $group_n->id;
-            foreach($group_o->memberships as $mb) {
-                $mb->id = null;
-                $mb->group()->associate($group_n);
-                $user = clone $mb->user;
-                // Case user already in database
-                $found_user = User::where('username', $user->username)->where('email', $user->email)->first();
-                if ($found_user) {
-                    $mb->user()->associate($found_user);
+        }
+        else {
+            dump("Error importing group");
+            dump($group_n->getAttributes());
+            DB::rollBack();
+        }
+        $new_id = $group_n->id;
+        foreach($group_o->memberships as $mb) {
+            $mb->id = null;
+            $mb->group()->associate($group_n);
+            $user = clone $mb->user;
+            // Case user already in database
+            $found_user = User::where('username', $user->username)->where('email', $user->email)->first();
+            if ($found_user) {
+                $mb->user()->associate($found_user);
+            }
+            else {
+                $user->id = null;
+                $user_n = User::create($user->getAttributes());
+                $user_n->verified = 1;
+                if($user_n->isValid()) {
+                    $user_n->save();
                 }
                 else {
-                    $user->id = null;
-                    $user_n = User::create($user->getAttributes());
-                    $user_n->verified = 1;
-                    $user_n->save();
-                    $mb->user()->associate($user_n);
+                    dump("Error importing user");
+                    dump($user_n->username);
+                    DB::rollBack();
                 }
-                $mb_n = Membership::create($mb->getAttributes());
-                if ($mb_n->isValid()) {
-                    $mb_n->save();
-                }
-                else { dump("error with membership! " . $mb_n->getAttributes()); }
+                $mb->user()->associate($user_n);
             }
-            foreach($group_o->actions as $action) {
-                $action->id = null;
-                $action->group()->associate($group_n);
-                $user_n = User::where('username', $action->user->username)->first();
-                $action->user()->associate($user_n);
-                $action_n = Action::create($action->getAttributes());
-                $action_n->created_at = $action->created_at;
-                $action_n->updated_at = $action->updated_at;
-                $action_n->deleted_at = $action->deleted_at;
-                if ($action_n->isValid()) {
-                    $action_n->save();
-                }
-                else { dump("error with action! " . $action_n->getAttributes()); }
-                foreach($action->tags as $tag) {
-                    $action_n->tag($tag);
-                }
+            $mb_n = Membership::create($mb->getAttributes());
+            if ($mb_n->isValid()) {
+                $mb_n->save();
             }
-            foreach($group_o->discussions as $discussion) {
-                $discussion_o = clone $discussion;
-                $discussion->id = null;
-                $discussion->group()->associate($group_n);
-                $user_n = User::where('username', $discussion->user->username)->first();
-                $discussion->user()->associate($user_n);
-                $discussion_n = Discussion::create($discussion->getAttributes());
-                $discussion_n->created_at = $discussion->created_at;
-                $discussion_n->updated_at = $discussion->updated_at;
-                $discussion_n->deleted_at = $discussion->deleted_at;
-                if ($discussion_n->isValid()) {
-                    $discussion_n->save();
+            else {
+                dump("Error importing membership");
+                dump($mb_n->getAttributes());
+                DB::rollBack();
+            }
+        }
+        foreach($group_o->actions as $action) {
+            $action->id = null;
+            $action->group()->associate($group_n);
+            $user_n = User::where('username', $action->user->username)->first();
+            $action->user()->associate($user_n);
+            $action_n = Action::create($action->getAttributes());
+            $action_n->created_at = $action->created_at;
+            $action_n->updated_at = $action->updated_at;
+            $action_n->deleted_at = $action->deleted_at;
+            if ($action_n->isValid()) {
+                $action_n->save();
+            }
+            else {
+                dump("Error importing action");
+                dump($action_n->getAttributes());
+                DB::rollBack();
+            }
+            foreach($action->tags as $tag) {
+                $action_n->tag($tag);
+            }
+        }
+        foreach($group_o->discussions as $discussion) {
+            $discussion_o = clone $discussion;
+            $discussion->id = null;
+            $discussion->group()->associate($group_n);
+            $user_n = User::where('username', $discussion->user->username)->first();
+            $discussion->user()->associate($user_n);
+            $discussion_n = Discussion::create($discussion->getAttributes());
+            $discussion_n->created_at = $discussion->created_at;
+            $discussion_n->updated_at = $discussion->updated_at;
+            $discussion_n->deleted_at = $discussion->deleted_at;
+            if ($discussion_n->isValid()) {
+                $discussion_n->save();
+            }
+            else {
+                dump("Error importing discussion");
+                dump($discussion_n->getAttributes());
+                DB::rollBack();
+            }
+            foreach($discussion_o->comments as $comment) {
+                $comment->id = null;
+                $comment->discussion()->associate($discussion_n);
+                $user_n = User::where('username', $comment->user->username)->first();
+                $comment->user()->associate($user_n);
+                $comment_n = Comment::create($comment->getAttributes());
+                $comment_n->created_at = $comment->created_at;
+                $comment_n->updated_at = $comment->updated_at;
+                $comment_n->deleted_at = $comment->deleted_at;
+                if ($comment_n->isValid()) {
+                    $comment_n->save();
                 }
-                else { dump("error with discussion! " . $discussion_n->getAttributes()); }
-                foreach($discussion_o->comments as $comment) {
-                    $comment->id = null;
-                    $comment->discussion()->associate($discussion_n);
-                    $user_n = User::where('username', $comment->user->username)->first();
-                    $comment->user()->associate($user_n);
-                    $comment_n = Comment::create($comment->getAttributes());
-                    $comment_n->created_at = $comment->created_at;
-                    $comment_n->updated_at = $comment->updated_at;
-                    $comment_n->deleted_at = $comment->deleted_at;
-                    if ($comment_n->isValid()) {
-                        $comment_n->save();
-                    }
-                    else { dump("error with comment! " . $comment_n->getAttributes()); }
-                    foreach($comment->reactions as $reaction) {
-                        $reaction->id = null;
-                        $user_n = User::where('username', $reaction->user->username)->first();
-                        $reaction->user()->associate($user_n);
-                        $reaction->reactable_id = $comment_n->id;
-                        $reaction_n = Reaction::create($reaction->getAttributes());
-                        $reaction_n->created_at = $reaction->created_at;
-                        $reaction_n->updated_at = $reaction->updated_at;
-                        if ($reaction_n->isValid()) {
-                            $reaction_n->save();
-                        }
-                        else { dump("error with reaction! " . $reaction_n->getAttributes()); }
-                    }
+                else {
+                    dump("Error importing comment");
+                    dump($comment_n->getAttributes());
+                    DB::rollBack();
                 }
-                foreach($discussion_o->reactions as $reaction) {
+                foreach($comment->reactions as $reaction) {
                     $reaction->id = null;
                     $user_n = User::where('username', $reaction->user->username)->first();
                     $reaction->user()->associate($user_n);
-                    $reaction->reactable_id = $discussion_n->id;
+                    $reaction->reactable_id = $comment_n->id;
                     $reaction_n = Reaction::create($reaction->getAttributes());
                     $reaction_n->created_at = $reaction->created_at;
                     $reaction_n->updated_at = $reaction->updated_at;
                     if ($reaction_n->isValid()) {
                         $reaction_n->save();
                     }
-                    else { dump("error with reaction! " . $reaction_n->getAttributes()); }
-                }
-                foreach($discussion_o->tags as $tag) {
-                    $discussion_n->tag($tag);
-                }
-            }
-            $files = array();
-            foreach($group_o->files as $file) {
-                $old_file = $file->id;
-                $file->id = null;
-                $file->group()->associate($group_n);
-                $user_n = User::where('username', $file->user->username)->first();
-                $file->user()->associate($user_n);
-                $file_n = File::create($file->getAttributes());
-                $file_n->created_at = $file->created_at;
-                $file_n->updated_at = $file->updated_at;
-                $file_n->deleted_at = $file->deleted_at;
-                if ($file_n->isValid()) {
-                    $file_n->save();
-                    $files[$old_file] = $file_n->id;
-                }
-                else { dump("error with file! " . $file_n->getAttributes()); }
-                foreach($file->tags as $tag) {
-                    $file_n->tag($tag);
+                    else {
+                        dump("Error importing reaction");
+                        dump($reaction_n->getAttributes());
+                        DB::rollBack();
+                    }
                 }
             }
-            foreach($group_o->tags as $tag) {
-                $tag->id = null;
-                $tag->group()->associate($group_n);
-                $tag_n = Tag::create($tag->getAttributes());
-                $tag_n->created_at = $tag->created_at;
-                $tag_n->updated_at = $tag->updated_at;
-                if ($tag_n->isValid()) {
-                    $tag_n->save();
+            foreach($discussion_o->reactions as $reaction) {
+                $reaction->id = null;
+                $user_n = User::where('username', $reaction->user->username)->first();
+                $reaction->user()->associate($user_n);
+                $reaction->reactable_id = $discussion_n->id;
+                $reaction_n = Reaction::create($reaction->getAttributes());
+                $reaction_n->created_at = $reaction->created_at;
+                $reaction_n->updated_at = $reaction->updated_at;
+                if ($reaction_n->isValid()) {
+                    $reaction_n->save();
+                }
+                else {
+                    dump("Error importing reaction");
+                    dump($reaction_n->getAttributes());
+                    DB::rollBack();
                 }
             }
-        //}
-	if ($files) {
+            foreach($discussion_o->tags as $tag) {
+                $discussion_n->tag($tag);
+            }
+        }
+        $files = array();
+        foreach($group_o->files as $file) {
+            $old_file = $file->id;
+            $file->id = null;
+            $file->group()->associate($group_n);
+            $user_n = User::where('username', $file->user->username)->first();
+            $file->user()->associate($user_n);
+            $file_n = File::create($file->getAttributes());
+            $file_n->created_at = $file->created_at;
+            $file_n->updated_at = $file->updated_at;
+            $file_n->deleted_at = $file->deleted_at;
+            if ($file_n->isValid()) {
+                $file_n->save();
+                $files[$old_file] = $file_n->id;
+            }
+            else {
+                dump("Error importing file");
+                dump($file_n->getAttributes());
+                DB::rollBack();
+            }
+            foreach($file->tags as $tag) {
+                $file_n->tag($tag);
+            }
+        }
+        DB::commit();
+        if ($files) {
             Storage::makeDirectory('groups/' . $new_id . '/files');
             foreach(Storage::directories($unzip_path . '/groups/' . $old_id . '/files/') as $dir) {
                 $id = array_reverse(explode('/', $dir))[0];
