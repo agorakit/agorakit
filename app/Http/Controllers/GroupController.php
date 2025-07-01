@@ -451,7 +451,7 @@ class GroupController extends Controller
     public function importform(Request $request)
     {
         $this->authorize('create', Group::class);
-        return view('groups.importform');
+        return view('groups.import');
     }
 
     /**
@@ -483,7 +483,7 @@ class GroupController extends Controller
             $ret = $importservice->import($path);
             list($import_basename, $existing_group, $existing_usernames) = $ret;
 
-            return view('groups.import')
+            return view('groups.importconfirm')
                 ->with('user_id', $user_id)
                 ->with('import_basename', $import_basename)
                 ->with('existing_group', $existing_group)
@@ -527,7 +527,7 @@ class GroupController extends Controller
         }
         else if (is_array($ret)) { // Go back to intermediate forme
             list($import_basename, $edited_usernames) = $ret;
-            return view('groups.import')
+            return view('groups.importconfirm')
                 ->with('user_id', $user_id)
                 ->with('import_basename', $import_basename)
                 ->with('existing_group', '')
