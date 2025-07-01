@@ -445,14 +445,6 @@ class GroupController extends Controller
         }
     }
 
-    /**
-     * Import a group (modal form).
-     */
-    public function importform(Request $request)
-    {
-        $this->authorize('create', Group::class);
-        return view('groups.import');
-    }
 
     /**
      * Import a group.
@@ -465,6 +457,10 @@ class GroupController extends Controller
               ->withErrors(trans('messages.authentication_error'));
         }
         $user_id = Auth::user()->id;
+
+        if ($request->method() == 'GET') { // Display form
+            return view('groups.import');
+        }
 
         if ($request->has('import')) { // Upload import data
             $file = $request->file('import');

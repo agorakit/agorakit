@@ -125,6 +125,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('groups/create', 'GroupController@create')->name('groups.create');
     Route::post('groups/create', 'GroupController@store')->name('groups.store');
     Route::get('groups/importform', 'GroupController@importform')->name('groups.importform');
+    Route::get('groups/import', 'GroupController@import')->name('groups.import');
     Route::post('groups/import', 'GroupController@import')->name('groups.import');
 
     // Group homepage and covers
