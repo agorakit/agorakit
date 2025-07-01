@@ -131,6 +131,7 @@ class ImportTest extends Tests\BrowserKitTestCase
         $discussion->total_comments = 1;
 
         $group->discussions()->save($discussion);
+        $discussion->tag('test');
 
         $this->actingAs($newbie)
             ->visit('/groups/' . $group->id . '/discussions')

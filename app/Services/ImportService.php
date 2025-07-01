@@ -207,6 +207,9 @@ class ImportService
                     $action_n->save();
                 }
                 else { dump("error with action! " . $action_n->getAttributes()); }
+                foreach($action->tags as $tag) {
+                    $action_n->tag($tag);
+                }
             }
             foreach($group_o->discussions as $discussion) {
                 $discussion_o = clone $discussion;
@@ -262,6 +265,9 @@ class ImportService
                     }
                     else { dump("error with reaction! " . $reaction_n->getAttributes()); }
                 }
+                foreach($discussion_o->tags as $tag) {
+                    $discussion_n->tag($tag);
+                }
             }
             $files = array();
             foreach($group_o->files as $file) {
@@ -279,6 +285,9 @@ class ImportService
                     $files[$old_file] = $file_n->id;
                 }
                 else { dump("error with file! " . $file_n->getAttributes()); }
+                foreach($file->tags as $tag) {
+                    $file_n->tag($tag);
+                }
             }
             foreach($group_o->tags as $tag) {
                 $tag->id = null;
