@@ -29,6 +29,7 @@ class ExportService
             'memberships.user',
             'actions',
             'actions.user',
+            'actions.tags',
             'discussions',
             'discussions.user',
             'discussions.comments',
@@ -37,8 +38,10 @@ class ExportService
             'discussions.comments.reactions.user',
             'discussions.reactions',
             'discussions.reactions.user',
+            'discussions.tags',
             'files',
             'files.user',
+            'files.tags',
             'tags'
         ]);
 
