@@ -13,10 +13,11 @@ use App\Tag;
 use App\User;
 use Auth;
 use DB;
-use Route;
+use Hash;
 use Storage;
 use ZipArchive;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
+
 
 /**
  * This service imports a group from a file.
@@ -60,6 +61,32 @@ class ImportService
             }
         }
         return $existing_usernames;
+    }
+
+
+    /**
+     * - Make password and notify users
+     */
+    private function make_passwords_and_notify($group)
+    {
+        $length = 8;
+        $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $max = mb_strlen($keyspace, '8bit') - 1;
+        foreach($group->memberships as $mb) {
+            $user = $mb->user;
+            if ($user == Auth::user()) {
+                continue;
+            }
+            $pieces = [];
+            for ($i = 0; $i < $length; ++$i) {
+                $pieces []= $keyspace[random_int(0, $max)];
+            }
+            $temporary_password = implode('', $pieces);
+            $user->password = Hash::make($temporary_password);
+            $user->save();
+            // FIXME add password reset link
+            $user->notify(new \App\Notifications\AddedToGroup($group));
+        }
     }
 
 
@@ -341,7 +368,7 @@ class ImportService
                 Storage::move($dir, 'groups/' . $new_id . '/files/' . $files[$id]);
             }
         }
-//        $this->make_passwords_and_notify($group_n);
+        $this->make_passwords_and_notify($group_n);
         return $group_n;
     }
 }
