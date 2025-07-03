@@ -21,6 +21,7 @@
 
     <div class="form-group">
         {!! Form::submit(trans('group.create_button'), ['class' => 'btn btn-primary']) !!}
+        <a class="js-back" href="#" up-dismiss>{{ trans('messages.cancel') }}</a>
     </div>
 
     {!! Form::close() !!}
