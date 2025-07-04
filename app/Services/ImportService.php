@@ -11,6 +11,7 @@ use App\Membership;
 use App\Reaction;
 use App\Tag;
 use App\User;
+use App\Notifications\AddedToGroup;
 use Auth;
 use DB;
 use Hash;
@@ -67,26 +68,18 @@ class ImportService
     /**
      * - Make password and notify users
      */
-    private function make_passwords_and_notify($group)
+    private function set_temporary_password($user)
     {
         $length = 8;
         $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $max = mb_strlen($keyspace, '8bit') - 1;
-        foreach($group->memberships as $mb) {
-            $user = $mb->user;
-            if ($user == Auth::user()) {
-                continue;
-            }
-            $pieces = [];
-            for ($i = 0; $i < $length; ++$i) {
-                $pieces []= $keyspace[random_int(0, $max)];
-            }
-            $temporary_password = implode('', $pieces);
-            $user->password = Hash::make($temporary_password);
-            $user->save();
-            // FIXME add password reset link
-            $user->notify(new \App\Notifications\AddedToGroup($group));
+        $pieces = [];
+        for ($i = 0; $i < $length; ++$i) {
+            $pieces []= $keyspace[random_int(0, $max)];
         }
+        $temporary_password = implode('', $pieces);
+        $user->password = Hash::make($temporary_password);
+        $user->save();
     }
 
 
@@ -191,6 +184,9 @@ class ImportService
 
         DB::beginTransaction();
         $old_id = $group->id;
+        $group_n = null;
+        $found_users = array();
+        $added_users = array();
         // Insert objects in database
         // Absolutely avoid crushing existing ones
         $group_o = clone $group;
@@ -216,6 +212,9 @@ class ImportService
             $found_user = User::where('username', $user->username)->where('email', $user->email)->first();
             if ($found_user) {
                 $mb->user()->associate($found_user);
+                if (!in_array($found_user->id, $found_users)) {
+                    $found_users[] = $found_user->id;
+                }
             }
             else {
                 $user->id = null;
@@ -223,6 +222,7 @@ class ImportService
                 $user_n->verified = 1;
                 if($user_n->isValid()) {
                     $user_n->save();
+                    $added_users[] = $user_n->id;
                 }
                 else {
                     dump("Error importing user");
@@ -361,14 +361,25 @@ class ImportService
             }
         }
         DB::commit();
-        if ($files) {
+        if ($group_n && $files) {
             Storage::makeDirectory('groups/' . $new_id . '/files');
             foreach(Storage::directories($unzip_path . '/groups/' . $old_id . '/files/') as $dir) {
                 $id = array_reverse(explode('/', $dir))[0];
                 Storage::move($dir, 'groups/' . $new_id . '/files/' . $files[$id]);
             }
         }
-        $this->make_passwords_and_notify($group_n);
+        if ($group_n) {
+            foreach($found_users as $id) {
+                if ($id<>Auth::user()->id) {
+                    $res = User::find($id)->notify(new AddedToGroup($group_n, false));
+                }
+            }
+            foreach($added_users as $id) {
+                $user = User::find($id);
+                $this->set_temporary_password($user);
+                $user->notify(new AddedToGroup($group_n, true));
+            }
+        }
         return $group_n;
     }
 }
