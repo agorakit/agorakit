@@ -195,6 +195,7 @@ class ImportService
         $group->slug = SlugService::createSlug(Group::class, 'slug', $group->slug);
         $group_n = Group::create($group->getAttributes());
         $group_n->user()->associate(Auth::user());
+        $group_n->location = $group->location;
         if ($group_n->isValid()) {
             $group_n->save();
         }
@@ -219,6 +220,7 @@ class ImportService
             else {
                 $user->id = null;
                 $user_n = User::create($user->getAttributes());
+                $user_n->location = $user->location;
                 $user_n->verified = 1;
                 if($user_n->isValid()) {
                     $user_n->save();
@@ -247,6 +249,7 @@ class ImportService
             $user_n = User::where('username', $action->user->username)->first();
             $action->user()->associate($user_n);
             $action_n = Action::create($action->getAttributes());
+            $action_n->location = $action->location;
             $action_n->created_at = $action->created_at;
             $action_n->updated_at = $action->updated_at;
             $action_n->deleted_at = $action->deleted_at;
