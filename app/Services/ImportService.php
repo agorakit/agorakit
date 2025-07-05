@@ -203,6 +203,7 @@ class ImportService
         $group_n = Group::create($group->getAttributes());
         $group_n->user()->associate(Auth::user());
         $group_n->location = $group->location;
+        $group_n->settings = $group->settings;
         $group_n->status = 0;       // do not pin/archive this new group
         if ($group_n->isValid()) {
             $group_n->save();
