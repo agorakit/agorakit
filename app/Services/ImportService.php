@@ -89,7 +89,7 @@ class ImportService
     public function import($path)
     {
         // unzip if relevant
-        if (str_ends_with($path, 'zip')) {
+        if (pathinfo($path)['extension'] == 'zip') {
             $unzip_path = substr($path, 0, -4);
             $zip = new ZipArchive();
             if ($zip->open(Storage::path($path))!==TRUE) {
@@ -126,7 +126,7 @@ class ImportService
     public function import2($path, $edited_usernames)
     {
         // Retrieve group data (JSON file)
-        if (str_ends_with($path, 'zip')) {
+        if (pathinfo($path)['extension'] == 'zip') {
             $unzip_path = substr($path, 0, -4);
             foreach(Storage::allFiles($unzip_path) as $file) {
                 if(str_ends_with($file, 'json')) {
@@ -372,7 +372,7 @@ class ImportService
             }
         }
         DB::commit();
-        if ($group_n && $files) {
+        if ($group_n && $files && pathinfo($path)['extension']=='zip') {
             Storage::makeDirectory('groups/' . $new_id . '/files');
             foreach(Storage::directories($unzip_path . '/groups/' . $old_id . '/files/') as $dir) {
                 $id = array_reverse(explode('/', $dir))[0];
