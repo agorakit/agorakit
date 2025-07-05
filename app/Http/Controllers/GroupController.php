@@ -477,10 +477,12 @@ class GroupController extends Controller
             }
             $importservice = new ImportService();
             $ret = $importservice->import($path);
-            list($import_basename, $existing_group, $existing_usernames) = $ret;
+            list($import_basename, $existing_group, $existing_usernames, $group_name, $group_type) = $ret;
 
             return view('groups.importconfirm')
                 ->with('user_id', $user_id)
+                ->with('group_name', $group_name)
+                ->with('group_type', $group_type)
                 ->with('import_basename', $import_basename)
                 ->with('existing_group', $existing_group)
                 ->with('existing_usernames', $existing_usernames);

@@ -5,7 +5,12 @@
 
     @if ($existing_group)<div class="alert text-bg-danger"><p>Warning: {{ $existing_group }}</p></div>@endif
 
-    <p>{{ trans('group.import_blob') }}</p>
+    <p>{{ trans('group.import_blob') }} :</p>
+
+    <ul>
+        <li>{{ trans('Name') }} : {{ $group_name }}</li>
+        <li>{{ trans('Type') }} : {{ $group_type }}</li>
+    </ul>
 
     {!! Form::open(['action' => ['GroupController@import', 'files' => false]], null) !!}
     @csrf

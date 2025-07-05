@@ -35,13 +35,13 @@ class ImportService
     private function existing_group($group)
     {
         foreach(Group::all() as $existing_group) {
-            if ($existing_group->name == $group->name) {
-                return "A group already exists with the same name! id=" . $existing_group->id;
+            if ($existing_group->name == $group->name || $existing_group->name == $group->name . ' (imported)') {
+                return "A group already exists with the same name:" . route('groups.show', $existing_group);
             }
             if (count($existing_group->discussions) == count($group->discussions)
                 && count($existing_group->actions) == count($group->actions)
                 && count($existing_group->files) == count($group->files)) {
-                return "A group already exists with same number of data! id=" . $existing_group->id;
+                return "A group already exists with same number of data:" . route('groups.show', $existing_group);
             }
         }
     }
@@ -110,7 +110,14 @@ class ImportService
         // Compare with existing data in database
         $existing_group = $this->existing_group($group);
         $existing_usernames = $this->existing_usernames($group);
-        return array(basename($path), $existing_group, $existing_usernames);
+        $group_type = trans('group.open');
+        if ($group->isClosed()) {
+             $group_type = trans('group.closed');
+        }
+        if ($group->isSecret()) {
+             $group_type = trans('group.secret');
+        }
+        return array(basename($path), $existing_group, $existing_usernames, $group->name, $group_type);
     }
 
     /**
@@ -196,6 +203,7 @@ class ImportService
         $group_n = Group::create($group->getAttributes());
         $group_n->user()->associate(Auth::user());
         $group_n->location = $group->location;
+        $group_n->status = 0;       // do not pin/archive this new group
         if ($group_n->isValid()) {
             $group_n->save();
         }
