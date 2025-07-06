@@ -12,6 +12,7 @@ use App\Reaction;
 use App\Tag;
 use App\User;
 use App\Notifications\AddedToGroup;
+use Illuminate\Database\Eloquent\Model;
 use Auth;
 use DB;
 use Hash;
@@ -190,6 +191,7 @@ class ImportService
         }
 
         DB::beginTransaction();
+        Model::unguard();
         $old_id = $group->id;
         $group_n = null;
         $found_users = array();
@@ -372,6 +374,7 @@ class ImportService
                 $file_n->tag($tag);
             }
         }
+        Model::reguard();
         DB::commit();
         if ($group_n && $files && pathinfo($path)['extension']=='zip') {
             Storage::makeDirectory('groups/' . $new_id . '/files');
