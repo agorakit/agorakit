@@ -101,24 +101,24 @@ class ImportService
             $groupfiles = Storage::allFiles($unzip_path);
             foreach($groupfiles as $file) {
                 if (basename($file) == 'group.json') {
-                    $group = new Group(Storage::json($file));
+                    $group_std = json_decode(Storage::get($file), false);
                 }
             }
         }
         else { // JSON format
-            $group = new Group(Storage::json($path));
+            $group_std = json_decode(Storage::get($path), false);
         }
         // Compare with existing data in database
-        $existing_group = $this->existing_group($group);
-        $existing_usernames = $this->existing_usernames($group);
+        $existing_group = $this->existing_group($group_std);
+        $existing_usernames = $this->existing_usernames($group_std);
         $group_type = trans('group.open');
-        if ($group->isClosed()) {
+        if ($group_std->group_type == Group::CLOSED) {
              $group_type = trans('group.closed');
         }
-        if ($group->isSecret()) {
+        if ($group_std->group_type == Group::SECRET) {
              $group_type = trans('group.secret');
         }
-        return array(basename($path), $existing_group, $existing_usernames, $group->name, $group_type);
+        return array(basename($path), $existing_group, $existing_usernames, $group_std->name, $group_type);
     }
 
     /**
