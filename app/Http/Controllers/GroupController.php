@@ -503,10 +503,9 @@ class GroupController extends Controller
         // For added security, we import only freshly uploaded data
         $date_string = implode('-', array_slice(explode('-', pathinfo($basename)['filename']), 2));
         $dt = Carbon::createFromFormat('Y-m-d_H-i-s', $date_string);
-        $now = Carbon::now();
-        if ($dt->year <> $now->year || $dt->dayOfYear <> $now->dayOfYear) {
+        if ($dt->diffInHours(Carbon::now()) > 1) {
             return redirect()->route('groups.index')
-              ->withErrors(trans('group.import_error'));
+              ->withErrors(trans('A Timeout Occurred'));
         }
         $path = 'groups/new/' . $basename;
 
