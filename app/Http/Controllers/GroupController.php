@@ -523,13 +523,15 @@ class GroupController extends Controller
             return redirect()->route('groups.show', [$ret]);
         }
         else if (is_array($ret)) { // Go back to intermediate forme
-            list($import_basename, $edited_usernames) = $ret;
+            list($import_basename, $existing_group, $edited_usernames, $group_name, $group_type) = $ret;
             return view('groups.importconfirm')
                 ->with('user_id', $user_id)
+                ->with('group_name', $group_name)
+                ->with('group_type', $group_type)
                 ->with('import_basename', $import_basename)
                 ->with('existing_group', '')
                 ->with('existing_usernames', $edited_usernames)
-                ->withErrors("We are sorry, but some of these need to be edited a second time because they exist already in database.");
+                ->withErrors(trans("Sorry! These need to be edited a second time because they also exist in database!"));
         }
         else {
             return redirect()->route('groups.index')->withErrors("Import error");
