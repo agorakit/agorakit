@@ -13,8 +13,6 @@ class Tag extends \Cviebrock\EloquentTaggable\Models\Tag
         'normalized'    => 'unique:taggable_tags',
     ];
 
-
-
     /**
     * Generates a random color if none is set, and saves the tag.
     */
@@ -29,8 +27,4 @@ class Tag extends \Cviebrock\EloquentTaggable\Models\Tag
             return $color;
         }
     }
-
-
-
-
 }

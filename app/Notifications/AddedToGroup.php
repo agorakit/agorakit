@@ -18,9 +18,10 @@ class AddedToGroup extends Notification
      *
      * @return void
      */
-    public function __construct(Group $group)
+    public function __construct(Group $group, $resetlink=false)
     {
         $this->group = $group;
+        $this->resetlink = $resetlink;
     }
 
     /**
@@ -44,6 +45,14 @@ class AddedToGroup extends Notification
      */
     public function toMail($notifiable)
     {
+        if ($this->resetlink) {
+            return (new MailMessage())
+                ->subject(trans('messages.you_have_been_added_to_the_group') . ' : "' . $this->group->name . '"')
+                ->line(trans('messages.you_have_been_added_to_the_group') . ' : "' . $this->group->name . '"')
+                ->action(trans('messages.visit_link'), route('forgotpassword'))
+                ->action(trans('messages.visit_link'), route('groups.show', $this->group))
+                ->line(trans('messages.thank_you'));
+        }
         return (new MailMessage())
             ->subject(trans('messages.you_have_been_added_to_the_group') . ' : "' . $this->group->name . '"')
             ->line(trans('messages.you_have_been_added_to_the_group') . ' : "' . $this->group->name . '"')
