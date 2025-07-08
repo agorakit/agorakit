@@ -378,7 +378,7 @@ class ImportService
                 }
             }
             foreach($discussion->tags as $tag) {
-                $discussion_n->tag($tag);
+                $discussion_n->tag($tag->name);
             }
         }
         $files = array(); // Keep track for later
@@ -412,7 +412,7 @@ class ImportService
                 DB::rollBack();
             }
             foreach($file->tags as $tag) {
-                $file_n->tag($tag);
+                $file_n->tag($tag->name);
             }
         }
         DB::commit();
