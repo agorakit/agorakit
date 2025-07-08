@@ -67,9 +67,23 @@ class ImportService
 
 
     /**
-     * - Make password and notify users
+     * - Search email in imported data
+     * - for a given $user_id
      */
-    private function set_temporary_password($user)
+    private function get_imported_email($user_id, $group)
+    {
+        foreach($group->memberships as $mb) {
+            if ($mb->user-id == $user_id) {
+                return $mb->user-email;
+            }
+        }
+    }
+
+    /**
+     * - Return a new user object, just like given $user
+     * - yet with a new id and a temporary password.
+     */
+    private function new_user($user)
     {
         $length = 8;
         $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -79,8 +93,16 @@ class ImportService
             $pieces []= $keyspace[random_int(0, $max)];
         }
         $temporary_password = implode('', $pieces);
-        $user->password = Hash::make($temporary_password);
-        $user->save();
+        return User::create([
+            'id' => null,
+            'username' => $user->username,
+            'email' => $user->email,
+            'name' => $user->name,
+            'password' => Hash::make($temporary_password),
+            'verified' => 1,
+            'preferences' => $user->preferences,
+            'location' => $user->location
+        ]);
     }
 
 
@@ -139,74 +161,64 @@ class ImportService
         else {
             $json_file = $path;
         }
-        $group = new Group(Storage::json($json_file));
-        // Proceed to replacements if any
+        $group = json_decode(Storage::get($json_file), false);
+        // Proceed to username replacements if any, create users in that case
+        Model::unguard();
+        DB::beginTransaction();
         if ($edited_usernames) {
+            $still_existing_usernames = array();
+            foreach(User::all() as $existing_user) {
+                foreach($edited_usernames as $id=>$username) {
+                    if ($existing_user->username == $username && $existing_user->email <> $this->get_imported_email($id)) {
+                        $still_existing_usernames[$id] = $username;
+                    }
+                }
+            }
+            if ($still_existing_usernames) {
+                // Go back to intermediate form
+                return array(basename($path), null, $still_existing_usernames, $group->name, $group->group_type);
+            }
             foreach($edited_usernames as $id=>$username) {
                 foreach($group->memberships as $mb) {
                     if ($mb->user->id == $id) {
+                        // create new user here, with edited username
                         $mb->user->username = $username;
+                        $user_n = $this->new_user($mb->user);
+                        if ($user_n->isValid()) {
+                            $user_n->save();
+                        }
+                        else {
+                            dump("Error importing user");
+                            dump($user_n);
+                            DB::rollBack();
+                        }
                     }
                 }
-                // Here again, compare with existing usernames in database
+                /* // Here again, compare with existing usernames in database
                 $existing_usernames = $this->existing_usernames($group);
                 if ($existing_usernames) {
-                    // Go back to intermediate form
                     return array(basename($path), null, $existing_usernames);
-                }
-            }
-            // Continue replacements
-            foreach($edited_usernames as $id=>$username) {
-                foreach($group->actions as $action) {
-                    if ($action->user->id == $id) {
-                        $action->user->username = $username;
-                    }
-                }
-                foreach($group->discussions as $discussion) {
-                    if ($discussion->user->id == $id) {
-                        $discussion->user->username = $username;
-                    }
-                    foreach($discussion->comments as $comment) {
-                        if ($comment->user->id == $id) {
-                            $comment->user->username = $username;
-                        }
-                        foreach($comment->reactions as $reaction) {
-                            if ($reaction->user->id == $id) {
-                            $reaction->user->username = $username;
-                            }
-                        }
-                    }
-                    foreach($discussion->reactions as $reaction) {
-                        if ($reaction->user->id == $id) {
-                            $reaction->user->username = $username;
-                        }
-                    }
-                }
-                foreach($group->files as $file) {
-                    if ($file->user->id == $id) {
-                        $file->user->username = $username;
-                    }
-                }
+                } */
             }
         }
 
-        DB::beginTransaction();
-        Model::unguard();
         $old_id = $group->id;
         $group_n = null;
         $found_users = array();
         $added_users = array();
         // Insert objects in database
         // Absolutely avoid crushing existing ones
-        $group_o = clone $group;
-        $group->id = null;
-        $group->name = $group->name . ' (imported)';
-        $group->slug = SlugService::createSlug(Group::class, 'slug', $group->slug);
-        $group_n = Group::create($group->getAttributes());
-        $group_n->user()->associate(Auth::user());
-        $group_n->location = $group->location;
-        $group_n->settings = $group->settings;
-        $group_n->status = 0;       // do not pin/archive this new group
+        $group_n = Group::create([
+            'id' => null,
+            'name' => $group->name . ' (imported)',
+            'body' => $group->body,
+            'slug' => SlugService::createSlug(Group::class, 'slug', $group->slug),
+            'user_id' => Auth::user()->id,
+            'color' => $group->color,
+            'location' => $group->location,
+            'settings' => $group->settings,
+            'status' => 0       // do not pin/archive this new group
+        ]);
         if ($group_n->isValid()) {
             $group_n->save();
         }
@@ -216,35 +228,35 @@ class ImportService
             DB::rollBack();
         }
         $new_id = $group_n->id;
-        foreach($group_o->memberships as $mb) {
+        foreach($group->memberships as $mb) {
             $mb->id = null;
-            $mb->group()->associate($group_n);
-            $user = clone $mb->user;
+            $mb->group_id = $group_n->id;
             // Case user already in database
-            $found_user = User::where('username', $user->username)->where('email', $user->email)->first();
+            $found_user = User::where('username', $mb->user->username)->where('email', $mb->user->email)->first();
             if ($found_user) {
-                $mb->user()->associate($found_user);
-                if (!in_array($found_user->id, $found_users)) {
-                    $found_users[] = $found_user->id;
-                }
+                $mb->user_id = $found_user->id;
             }
             else {
-                $user->id = null;
-                $user_n = User::create($user->getAttributes());
-                $user_n->location = $user->location;
-                $user_n->verified = 1;
+                $user_n = $this->new_user($mb->user);
                 if($user_n->isValid()) {
                     $user_n->save();
-                    $added_users[] = $user_n->id;
+                    $mb->user_id = $user_n->id;
                 }
                 else {
                     dump("Error importing user");
-                    dump($user_n->username);
+                    dump($user_n); //->username);
                     DB::rollBack();
                 }
-                $mb->user()->associate($user_n);
             }
-            $mb_n = Membership::create($mb->getAttributes());
+            $mb_n = Membership::create([
+                'id' => null,
+                'user_id' => $mb->user_id,
+                'group_id' => $group_n->id,
+                'membership' => $mb->membership,
+                'config' => $mb->config,
+                'notification_interval' => $mb->notification_interval,
+                'notified_at' => $mb->notified_at
+            ]);
             if ($mb_n->isValid()) {
                 $mb_n->save();
             }
@@ -254,17 +266,24 @@ class ImportService
                 DB::rollBack();
             }
         }
-        foreach($group_o->actions as $action) {
-            $action->id = null;
-            $action->group()->associate($group_n);
-            $user_n = User::where('username', $action->user->username)->first();
-            $action->user()->associate($user_n);
-            $action_n = Action::create($action->getAttributes());
-            $action_n->location = $action->location;
-            $action_n->created_at = $action->created_at;
-            $action_n->updated_at = $action->updated_at;
-            $action_n->deleted_at = $action->deleted_at;
-            if ($action_n->isValid()) {
+        foreach($group->actions as $action) {
+            $action_user = User::where('username', $action->user->username)->first();
+            $action_n = Action::create([
+                'id' => null,
+                'name' => $action->name,
+                'body' => $action->body,
+                'user_id' => $action_user->id,
+                'group_id' => $group_n->id,
+                'start' => $action->start,
+                'stop' => $action->stop,
+                'location' => $action->location,
+                'visibility' => $action->visibility,
+                'cover' => $action->cover,
+                'created_at' => $action->created_at,
+                'updated_at' => $action->updated_at,
+                'deleted_at' => $action->deleted_at
+            ]);
+             if ($action_n->isValid()) {
                 $action_n->save();
             }
             else {
@@ -276,16 +295,20 @@ class ImportService
                 $action_n->tag($tag);
             }
         }
-        foreach($group_o->discussions as $discussion) {
-            $discussion_o = clone $discussion;
-            $discussion->id = null;
-            $discussion->group()->associate($group_n);
-            $user_n = User::where('username', $discussion->user->username)->first();
-            $discussion->user()->associate($user_n);
-            $discussion_n = Discussion::create($discussion->getAttributes());
-            $discussion_n->created_at = $discussion->created_at;
-            $discussion_n->updated_at = $discussion->updated_at;
-            $discussion_n->deleted_at = $discussion->deleted_at;
+        foreach($group->discussions as $discussion) {
+            $discussion_user = User::where('username', $discussion->user->username)->first();
+            $discussion_n = Discussion::create([
+                'id' => null,
+                'name' => $discussion->name,
+                'body' => $discussion->body,
+                'user_id' => $discussion_user->id,
+                'group_id' => $group_n->id,
+                'total_comments' => $discussion->total_comments,
+                'status' => $discussion->status,
+                'created_at' => $discussion->created_at,
+                'updated_at' => $discussion->updated_at,
+                'deleted_at' => $discussion->deleted_at
+            ]);
             if ($discussion_n->isValid()) {
                 $discussion_n->save();
             }
@@ -294,15 +317,17 @@ class ImportService
                 dump($discussion_n->getAttributes());
                 DB::rollBack();
             }
-            foreach($discussion_o->comments as $comment) {
-                $comment->id = null;
-                $comment->discussion()->associate($discussion_n);
-                $user_n = User::where('username', $comment->user->username)->first();
-                $comment->user()->associate($user_n);
-                $comment_n = Comment::create($comment->getAttributes());
-                $comment_n->created_at = $comment->created_at;
-                $comment_n->updated_at = $comment->updated_at;
-                $comment_n->deleted_at = $comment->deleted_at;
+            foreach($discussion->comments as $comment) {
+                $comment_user = User::where('username', $comment->user->username)->first();
+                $comment_n = Comment::create([
+                    'id' => null,
+                    'body' => $discussion->body,
+                    'user_id' => $comment_user->id,
+                    'discussion_id' => $discussion_n->id,
+                    'created_at' => $comment->created_at,
+                    'updated_at' => $comment->updated_at,
+                    'deleted_at' => $comment->deleted_at
+                ]);
                 if ($comment_n->isValid()) {
                     $comment_n->save();
                 }
@@ -312,13 +337,16 @@ class ImportService
                     DB::rollBack();
                 }
                 foreach($comment->reactions as $reaction) {
-                    $reaction->id = null;
-                    $user_n = User::where('username', $reaction->user->username)->first();
-                    $reaction->user()->associate($user_n);
-                    $reaction->reactable_id = $comment_n->id;
-                    $reaction_n = Reaction::create($reaction->getAttributes());
-                    $reaction_n->created_at = $reaction->created_at;
-                    $reaction_n->updated_at = $reaction->updated_at;
+                    $reaction_user = User::where('username', $reaction->user->username)->first();
+                    $reaction_n = Reaction::create([
+                        'id' => null,
+                        'user_id' => $reaction_user->id,
+                        'reactable_type' => $reaction->reactable_type,
+                        'reactable_id' => $comment_n->id,
+                        'type' => $reaction->type,
+                        'created_at' => $reaction->created_at,
+                        'updated_at' => $reaction->updated_at
+                    ]);
                     if ($reaction_n->isValid()) {
                         $reaction_n->save();
                     }
@@ -329,14 +357,17 @@ class ImportService
                     }
                 }
             }
-            foreach($discussion_o->reactions as $reaction) {
-                $reaction->id = null;
-                $user_n = User::where('username', $reaction->user->username)->first();
-                $reaction->user()->associate($user_n);
-                $reaction->reactable_id = $discussion_n->id;
-                $reaction_n = Reaction::create($reaction->getAttributes());
-                $reaction_n->created_at = $reaction->created_at;
-                $reaction_n->updated_at = $reaction->updated_at;
+            foreach($discussion->reactions as $reaction) {
+                $reaction_user = User::where('username', $reaction->user->username)->first();
+                $reaction_n = Reaction::create([
+                    'id' => null,
+                    'user_id' => $reaction_user->id,
+                    'reactable_type' => $reaction->reactable_type,
+                    'reactable_id' => $discussion_n->id,
+                    'type' => $reaction->type,
+                    'created_at' => $reaction->created_at,
+                    'updated_at' => $reaction->updated_at
+                    ]);
                 if ($reaction_n->isValid()) {
                     $reaction_n->save();
                 }
@@ -346,21 +377,31 @@ class ImportService
                     DB::rollBack();
                 }
             }
-            foreach($discussion_o->tags as $tag) {
+            foreach($discussion->tags as $tag) {
                 $discussion_n->tag($tag);
             }
         }
-        $files = array();
-        foreach($group_o->files as $file) {
+        $files = array(); // Keep track for later
+        foreach($group->files as $file) {
             $old_file = $file->id;
-            $file->id = null;
-            $file->group()->associate($group_n);
-            $user_n = User::where('username', $file->user->username)->first();
-            $file->user()->associate($user_n);
-            $file_n = File::create($file->getAttributes());
-            $file_n->created_at = $file->created_at;
-            $file_n->updated_at = $file->updated_at;
-            $file_n->deleted_at = $file->deleted_at;
+            $file_user = User::where('username', $file->user->username)->first();
+            $file_n = File::create([
+                'id' => null,
+                'name' => $file->name,
+                'path' => $file->path,
+                'original_filename' => $file->original_filename,
+                'original_extension' => $file->original_extension,
+                'mime' => $file->mime,
+                'filesize' => $file->filesize,
+                'user_id' => $file_user->id,
+                'group_id' => $group_n->id,
+                'parent_id' => $file->parent_id,
+                'item_type' => $file->item_type,
+                'status' => $file->status,
+                'created_at' => $file->created_at,
+                'updated_at' => $file->updated_at,
+                'deleted_at' => $file->deleted_at
+            ]);
             if ($file_n->isValid()) {
                 $file_n->save();
                 $files[$old_file] = $file_n->id;
@@ -374,8 +415,8 @@ class ImportService
                 $file_n->tag($tag);
             }
         }
-        Model::reguard();
         DB::commit();
+        Model::reguard();
         if ($group_n && $files && pathinfo($path)['extension']=='zip') {
             Storage::makeDirectory('groups/' . $new_id . '/files');
             foreach(Storage::directories($unzip_path . '/groups/' . $old_id . '/files/') as $dir) {
