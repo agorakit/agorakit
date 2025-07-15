@@ -43,6 +43,10 @@
     </div>
 @endcan
 
+<div class="form-group">
+    {!! Form::checkbox('notifications', '1', $group->notifications_enabled) !!}
+    {!! Form::label('notifications', trans('group.enable_notifications')) !!}
+</div>
 
 @if(Auth::user()->isAdmin())
     <div class="form-group">
