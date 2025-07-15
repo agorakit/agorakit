@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\CheckMailbox::class,
         \App\Console\Commands\DeleteFiles::class,
         \App\Console\Commands\CleanupDatabase::class,
+        \App\Console\Commands\CleanupDisk::class,
         \App\Console\Commands\SendReminders::class,
         \App\Console\Commands\ExportGroup::class,
         \App\Console\Commands\ImportGroup::class,
@@ -46,5 +47,8 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('agorakit:enablenotificationsfornewgroups')
         ->daily();
+      
+        $schedule->command('agorakit:cleanupdisk')
+        ->hourly();
     }
 }
