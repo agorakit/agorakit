@@ -93,7 +93,7 @@ class ImportGroup extends Command
 
 
         // handle events & participations
-        foreach ($data->calendarEvents as $eventData) {
+        foreach ($data->calendarevents as $eventData) {
             if ($this->createCalendarEvent($eventData)) {
                 $this->info('Created event called ' . $eventData->name);
             }
