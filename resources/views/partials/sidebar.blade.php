@@ -16,7 +16,7 @@
   {{trans('messages.discussions')}}
 </a>
 
-<a  href="{{ action('EventController@index') }}">
+<a  href="{{ action('CalendarEventController@index') }}">
   {{trans('messages.agenda')}}
 </a>
 

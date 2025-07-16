@@ -13,7 +13,7 @@
         <div class="vr"></div>
     @endauth
 
-    <a href="{{ route('events.feed') }}">
+    <a href="{{ route('calendarevents.feed') }}">
         <i class="fas fa-rss me-2" target="_blank"></i>
         {{ trans('messages.rss') }}
     </a>

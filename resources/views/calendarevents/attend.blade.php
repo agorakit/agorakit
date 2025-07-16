@@ -7,7 +7,7 @@
     </div>
     <div class="summary mb-4">{{ summary($event->body) }}</div>
 
-    {!! Form::open(['route' => ['groups.events.attend', $group, $event], 'up-target' => '.main']) !!}
+    {!! Form::open(['route' => ['groups.calendarevents.attend', $group, $event], 'up-target' => '.main']) !!}
 
 
     {!! Form::select(

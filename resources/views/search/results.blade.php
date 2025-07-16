@@ -19,7 +19,7 @@
                     {{ trans('messages.discussions') }}</option>
                 <option @if ($type == 'comments') selected @endif value="comments">{{ trans('messages.comments') }}
                 </option>
-                <option @if ($type == 'events') selected @endif value="events">{{ trans('messages.events') }}
+                <option @if ($type == 'calendarevents') selected @endif value="calendarevents">{{ trans('messages.events') }}
                 </option>
                 <option @if ($type == 'users') selected @endif value="users">{{ trans('messages.users') }}
                 </option>
@@ -74,9 +74,9 @@
         @endif
     @endif
 
-    @if ($type == 'events')
+    @if ($type == 'calendarevents')
         @if ($results->count() > 0)
-            @include('events.list', ['events' => $results])
+            @include('calendarevents.list', ['events' => $results])
         @endif
     @endif
 

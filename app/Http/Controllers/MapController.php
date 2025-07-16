@@ -45,7 +45,7 @@ class MapController extends Controller
 
 
 
-    $events = \App\Event::where('stop', '>=', Carbon::now()->subDays(1))
+    $events = \App\CalendarEvent::where('stop', '>=', Carbon::now()->subDays(1))
       ->where('latitude', '<>', 0)
       ->whereIn('group_id', $groups)
       ->get();
@@ -83,9 +83,9 @@ class MapController extends Controller
       $marker = [
         'type'       => 'Feature',
         'properties' => [
-          'title'         => '<a href="' . route('groups.events.show', [$event->group, $event]) . '">' . $event->name . '</a>',
+          'title'         => '<a href="' . route('groups.calendarevents.show', [$event->group, $event]) . '">' . $event->name . '</a>',
           'description'   => summary($event->body),
-          'type' => 'event',
+          'type' => 'calendarevent',
         ],
         'geometry' => [
           'type'        => 'Point',

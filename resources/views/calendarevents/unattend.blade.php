@@ -8,7 +8,7 @@
     <div class="summary mb-4">{{ summary($event->body) }}</div>
 
     <div class="mt-5 d-flex justify-content-between align-items-center">
-        {!! Form::open(['route' => ['groups.events.unattend', $group, $event], 'up-target' => '.main']) !!}
+        {!! Form::open(['route' => ['groups.calendarevents.unattend', $group, $event], 'up-target' => '.main']) !!}
         {!! Form::submit(trans('messages.unattend'), ['class' => 'btn btn-primary']) !!}
         {!! Form::close() !!}
     </div>

@@ -5,7 +5,7 @@
         <div class="mb-2">
             @include('partials.preferences-calendar')
         </div>
-        <a class="btn btn-primary" href="{{ route('events.create') }}">
+        <a class="btn btn-primary" href="{{ route('calendarevents.create') }}">
             {{ trans('messages.create_event') }}
         </a>
     </div>
@@ -14,7 +14,7 @@
 
     @if ($events->count() > 0)
         <div class="actions mb-4">
-            @include('events.list', ['events' => $events])
+            @include('calendarevents.list', ['calendarevents' => $events])
         </div>
         {{ $events->render() }}
     @else

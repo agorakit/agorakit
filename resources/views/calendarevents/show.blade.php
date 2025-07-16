@@ -11,7 +11,7 @@
                 <span class="tag d-inline-block">{{ trans('messages.private') }}</span>
             @endif
         </h1>
-        @include('events.dropdown')
+        @include('calendarevents.dropdown')
     </div>
 
     <div class="row mb-4">
@@ -19,7 +19,7 @@
 
         @if ($event->hasCover())
             <div class="col-12 col-sm-5 col-md-4 mb-2 order-sm-2">
-                <img alt="event cover" class="rounded" src="{{ route('events.cover', [$event, 'large']) }}" />
+                <img alt="event cover" class="rounded" src="{{ route('calendarevents.cover', [$event, 'large']) }}" />
             </div>
         @endif
 

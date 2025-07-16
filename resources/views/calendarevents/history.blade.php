@@ -10,5 +10,5 @@
         </p>
     @endforeach
 
-    <a class="btn btn-primary" href="{{ route('groups.events.show', [$group, $event]) }}" >{{ trans('messages.back_to') }} "{{ $event->name }}"</a>
+    <a class="btn btn-primary" href="{{ route('groups.calendarevents.show', [$group, $event]) }}" >{{ trans('messages.back_to') }} "{{ $event->name }}"</a>
 @endsection

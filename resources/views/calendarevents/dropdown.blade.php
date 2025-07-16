@@ -6,15 +6,15 @@
      <div aria-labelledby="dropdownMenuButton" class="dropdown-menu dropdown-menu-end">
 
          @can('update', $event)
-             <a class="dropdown-item" href="{{ route('groups.events.edit', [$event->group, $event]) }}" up-layer="root">
+             <a class="dropdown-item" href="{{ route('groups.calendarevents.edit', [$event->group, $event]) }}" up-layer="root">
                  <i class="fa fa-pencil me-2"></i>
                  {{ trans('messages.edit') }}
              </a>
          @endcan
 
-         @can('create-event', $event->group)
+         @can('create-calendarevent', $event->group)
              <a class="dropdown-item"
-                 href="{{ route('groups.events.create', [$event->group]) }}?duplicate={{ $event->id }}"
+                 href="{{ route('groups.calendarevents.create', [$event->group]) }}?duplicate={{ $event->id }}"
                  up-layer="root">
                  <i class="far fa-copy me-2"></i>
                  {{ trans('messages.duplicate') }}
@@ -22,7 +22,7 @@
          @endcan
 
          @can('delete', $event)
-             <a class="dropdown-item" href="{{ route('groups.events.deleteconfirm', [$event->group, $event]) }}"
+             <a class="dropdown-item" href="{{ route('groups.calendarevents.deleteconfirm', [$event->group, $event]) }}"
                  up-layer="new">
                  <i class="fa fa-trash me-2"></i>
                  {{ trans('messages.delete') }}
@@ -30,7 +30,7 @@
          @endcan
 
          @auth
-             <a class="dropdown-item" href="{{ route('groups.events.history', [$event->group, $event]) }}"
+             <a class="dropdown-item" href="{{ route('groups.calendarevents.history', [$event->group, $event]) }}"
                  up-layer="root"><i class="fa fa-history me-2"></i>
                  {{ trans('messages.show_history') }}</a>
          @endauth

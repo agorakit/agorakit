@@ -6,7 +6,7 @@
 
         <p>{{ $event->name }}</p>
 
-        {!! Form::model($event, ['method' => 'DELETE', 'action' => ['GroupEventController@destroy', $group, $event]]) !!}
+        {!! Form::model($event, ['method' => 'DELETE', 'action' => ['GroupCalendarEventController@destroy', $group, $event]]) !!}
 
         <div class="d-flex justify-content-between">
             <div class="form-group">

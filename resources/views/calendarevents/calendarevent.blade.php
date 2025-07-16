@@ -1,7 +1,7 @@
 <div class="card card-sm h-100" id="event-{{ $event->id }}" up-expand>
 
     @if ($event->hasCover())
-        <img alt="event cover" class="card-img-top" src="{{ route('events.cover', [$event, 'medium']) }}" />
+        <img alt="event cover" class="card-img-top" src="{{ route('calendarevents.cover', [$event, 'medium']) }}" />
     @else
         <img alt="" class="card-img-top" src="/images/group.svg" />
     @endif
@@ -9,10 +9,10 @@
 
     <div class="card-body d-flex flex-column">
         <h5 class="card-title d-flex justify-content-between">
-            <a href="{{ route('groups.events.show', [$event->group, $event]) }}">
+            <a href="{{ route('groups.calendarevents.show', [$event->group, $event]) }}">
                 {{ $event->name }}
             </a>
-            @include('events.dropdown')
+            @include('calendarevents.dropdown')
 
         </h5>
         <h6 class="card-subtitle mb-2 text-body-secondary">

@@ -5,12 +5,12 @@
         <div class="mb-2">
             @include('partials.preferences-calendar')
         </div>
-        <a class="btn btn-primary" href="{{ route('events.create') }}">
+        <a class="btn btn-primary" href="{{ route('calendarevents.create') }}">
             {{ trans('messages.create_event') }}
         </a>
     </div>
 
-    <div class="mt-5 js-calendar" data-create-url="/events/create" data-json="{{ action('EventController@indexJson') }}"
+    <div class="mt-5 js-calendar" data-create-url="/calendarevents/create" data-json="{{ action('CalendarEventController@indexJson') }}"
         data-locale="{{ App::getLocale() }}" id="calendar"></div>
 
     @include('dashboard.ical')

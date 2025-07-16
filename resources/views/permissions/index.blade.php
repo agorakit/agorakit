@@ -85,12 +85,12 @@
 
                     <td>
                         <div class="form-check">
-                            {!!Form::checkbox('member-create-event', 'yes', $member->contains('create-event'))!!}
+                            {!!Form::checkbox('member-create-calendarevent', 'yes', $member->contains('create-calendarevent'))!!}
                         </div>
                     </td>
                     <td>
                         <div class="form-check">
-                            {!!Form::checkbox('admin-create-event', 'yes', $admin->contains('create-event'), ['disabled'])!!}
+                            {!!Form::checkbox('admin-create-calendarevent', 'yes', $admin->contains('create-calendarevent'), ['disabled'])!!}
                         </div>
                     </td>
                 </tr>

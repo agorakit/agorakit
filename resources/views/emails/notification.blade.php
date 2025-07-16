@@ -43,7 +43,7 @@
 <h1>{{trans('messages.next_events')}}</h1>
 @foreach($events as $event)
 <div style="border-bottom: 1px solid #aaa; margin-bottom: 20px; padding-bottom: 20px">
-<strong><a  href="{{route('groups.events.show', [$group, $event])}}">{{$event->name}}</a></strong>
+<strong><a  href="{{route('groups.calendarevents.show', [$group, $event])}}">{{$event->name}}</a></strong>
 <p>{!!filter($event->body) !!}</p>
 {{$event->start->format('d/m/Y H:i')}} - {{$event->stop->format('H:i')}}
 @if ($event->hasLocation()) , {{$event->location_display('long')}}@endif

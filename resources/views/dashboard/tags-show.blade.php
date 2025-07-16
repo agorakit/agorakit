@@ -28,7 +28,7 @@
         <div class="mb-5">
             <h2>@lang('Events')</h2>
             <div class="events items">
-                @include('events.list', ['events' => $events])
+                @include('calendarevents.list', ['events' => $events])
             </div>
         </div>
     @endif
