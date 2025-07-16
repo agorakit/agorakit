@@ -35,7 +35,7 @@ groups/{group}/discussions/{id}
 groups/{group}/discussions/{id}/create
 
 groups/{group}/files/{id}
-groups/{group}/events/{id}
+groups/{group}/calendarevents/{id}
 
 etc.
 
@@ -107,8 +107,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('map', 'MapController@index')->name('map');
     Route::get('map.geojson', 'MapController@geoJson')->name('map.geojson');
 
-    Route::get('agenda', 'EventController@index')->name('agenda');
-    Route::get('agenda/json', 'EventController@indexJson')->name('agenda.json');
+    Route::get('agenda', 'CalendarEventController@index')->name('agenda');
+    Route::get('agenda/json', 'CalendarEventController@indexJson')->name('agenda.json');
     Route::get('agenda/ical', 'IcalController@index')->name('agenda.ical');
     Route::get('tags', 'TagController@index')->name('tags.index');
     Route::get('tags/{tag}', 'TagController@show')->name('tags.show');
@@ -118,7 +118,7 @@ Route::group(['middleware' => ['web']], function () {
 
     // Feeds (RSS)
     Route::get('discussions/feed', 'FeedController@discussions')->name('discussions.feed');
-    Route::get('events/feed', 'FeedController@events')->name('events.feed');
+    Route::get('calendarevents/feed', 'FeedController@calendarevents')->name('calendarevents.feed');
 
     // Group handling
     Route::get('groups', 'GroupController@index')->name('groups.index');
@@ -145,10 +145,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('discussions/create', 'GroupDiscussionController@store')->name('discussions.store');
 
     // General event create & cover route
-    Route::get('events/create', 'GroupEventController@create')->name('events.create');
-    Route::post('events/create', 'GroupEventController@store')->name('events.store');
+    Route::get('calendarevents/create', 'GroupCalendarEventController@create')->name('calendarevents.create');
+    Route::post('calendarevents/create', 'GroupCalendarEventController@store')->name('calendarevents.store');
 
-    Route::get('events/{action}/cover/{size}', 'EventCoverController@show')->name('events.cover');
+    Route::get('calendarevents/{action}/cover/{size}', 'CalendarEventCoverController@show')->name('calendarevents.cover');
 
 
 
@@ -246,22 +246,22 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('discussions/{discussion}/live/{comment}', 'CommentController@live')->name('.discussions.live');
 
         // Events
-        Route::get('events', 'GroupEventController@index')->name('.events.index');
-        Route::get('events/create', 'GroupEventController@create')->name('.events.create');
-        Route::post('events/create', 'GroupEventController@store')->name('.events.store');
-        Route::get('events/json', 'GroupEventController@indexJson')->name('.events.index.json');
-        Route::get('events/ical', 'GroupIcalController@index')->name('.events.index.ical');
-        Route::get('events/{event}', 'GroupEventController@show')->name('.events.show');
-        Route::get('events/{event}/edit', 'GroupEventController@edit')->name('.events.edit');
-        Route::post('events/{event}', 'GroupEventController@update')->name('.events.update');
-        Route::get('events/{event}/delete', 'GroupEventController@destroyConfirm')->name('.events.deleteconfirm');
-        Route::delete('events/{event}/delete', 'GroupEventController@destroy')->name('.events.delete');
-        Route::get('events/{event}/history', 'GroupEventController@history')->name('.events.history');
+        Route::get('calendarevents', 'GroupCalendarEventController@index')->name('.calendarevents.index');
+        Route::get('calendarevents/create', 'GroupCalendarEventController@create')->name('.calendarevents.create');
+        Route::post('calendarevents/create', 'GroupCalendarEventController@store')->name('.calendarevents.store');
+        Route::get('calendarevents/json', 'GroupCalendarEventController@indexJson')->name('.calendarevents.index.json');
+        Route::get('calendarevents/ical', 'GroupIcalController@index')->name('.calendarevents.index.ical');
+        Route::get('calendarevents/{calendarevent}', 'GroupCalendarEventController@show')->name('.calendarevents.show');
+        Route::get('calendarevents/{calendarevent}/edit', 'GroupCalendarEventController@edit')->name('.calendarevents.edit');
+        Route::post('calendarevents/{calendarevent}', 'GroupCalendarEventController@update')->name('.calendarevents.update');
+        Route::get('calendarevents/{calendarevent}/delete', 'GroupCalendarEventController@destroyConfirm')->name('.calendarevents.deleteconfirm');
+        Route::delete('calendarevents/{calendarevent}/delete', 'GroupCalendarEventController@destroy')->name('.calendarevents.delete');
+        Route::get('calendarevents/{calendarevent}/history', 'GroupCalendarEventController@history')->name('.calendarevents.history');
 
         // Event participation
-        Route::get('events/{event}/participation/set/{status}', 'ParticipationController@set')->name('.events.participation.set');
-        Route::get('events/{event}/participation', 'ParticipationController@edit')->name('.events.participation');
-        Route::post('events/{event}/participation', 'ParticipationController@update')->name('.events.participation.update');
+        Route::get('calendarevents/{calendarevent}/participation/set/{status}', 'ParticipationController@set')->name('.calendarevents.participation.set');
+        Route::get('calendarevents/{calendarevent}/participation', 'ParticipationController@edit')->name('.calendarevents.participation');
+        Route::post('calendarevents/{calendarevent}/participation', 'ParticipationController@update')->name('.calendarevents.participation.update');
 
         // Files
         Route::get('files', 'GroupFileController@index')->name('.files.index');

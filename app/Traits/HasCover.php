@@ -12,7 +12,7 @@ use Throwable;
  * Storage : 
  * - users in users/[id]/cover|small|medium|large.jpg 
  * - groups is groups/[id]/cover|small|medium|large.jpg 
- * - events in groups/[id]/events/[id]/cover|small|medium|large.jpg
+ * - events in groups/[id]/calendarevents/[id]/cover|small|medium|large.jpg
  * - files in groups/[id]/files/[id]/small|medium|large.jpg 
  * 
  * Available sizes : 
@@ -34,7 +34,7 @@ trait HasCover
         if ($this->getType() == "group") $path =  'groups/' . $this->id . '/';
         if ($this->getType() == "user") $path =  'users/' . $this->id  . '/';
         if ($this->getType() == "file") $path =  'groups/' . $this->group->id . '/files/' . $this->id . '/';
-        if ($this->getType() == "event") $path =  'groups/' . $this->group->id . '/events/' . $this->id . '/';
+        if ($this->getType() == "calendarevent") $path =  'groups/' . $this->group->id . '/calendarevents/' . $this->id . '/';
 
         return $path;
     }

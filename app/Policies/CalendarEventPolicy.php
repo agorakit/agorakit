@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Event;
+use App\CalendarEvent;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class EventPolicy
+class CalendarEventPolicy
 {
     use HandlesAuthorization;
 
@@ -31,11 +31,11 @@ class EventPolicy
      * Determine whether the user can view the event.
      *
      * @param \App\User   $user
-     * @param \App\Event $event
+     * @param \App\CalendarEvent $event
      *
      * @return mixed
      */
-    public function view(?User $user, Event $event)
+    public function view(?User $user, CalendarEvent $event)
     {
         if ($event->group->isOpen()) {
             return true;
@@ -50,7 +50,7 @@ class EventPolicy
         }
     }
 
-    public function update(User $user, Event $event)
+    public function update(User $user, CalendarEvent $event)
     {
         if ($user->isAdminOf($event->group)) {
             return true;
@@ -59,7 +59,7 @@ class EventPolicy
         return $user->id === $event->user_id;
     }
 
-    public function delete(User $user, Event $event)
+    public function delete(User $user, CalendarEvent $event)
     {
         if ($user->isAdminOf($event->group)) {
             return true;
@@ -68,7 +68,7 @@ class EventPolicy
         return $user->id === $event->user_id;
     }
 
-    public function history(?User $user, Event $event)
+    public function history(?User $user, CalendarEvent $event)
     {
         if ($user) {
             return $user->isMemberOf($event->group);
@@ -80,7 +80,7 @@ class EventPolicy
     /** 
      * Defines if a user can participate or not or maybe to an event
      */
-    public function participate(User $user, Event $event)
+    public function participate(User $user, CalendarEvent $event)
     {
         return $user->isMemberOf($event->group);
     }

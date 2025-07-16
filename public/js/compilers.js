@@ -493,7 +493,7 @@ up.compiler('.js-map', async function (element, data) {
 					})
 				}
 
-				if (feature.properties.type == 'event') {
+				if (feature.properties.type == 'calendarevent') {
 					return L.marker(latlng, {
 						icon: eventIcon
 					})

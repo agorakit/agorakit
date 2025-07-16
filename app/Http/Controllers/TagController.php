@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Event;
+use App\CalendarEvent;
 use App\Discussion;
 use App\File;
 use App\Tag;
@@ -70,7 +70,7 @@ class TagController extends Controller
             })
             ->get();
 
-        $events = Event::whereHas('group', function ($q) use ($groups) {
+        $events = CalendarEvent::whereHas('group', function ($q) use ($groups) {
             $q->whereIn('group_id', $groups);
         })
             ->whereHas('tags', function ($q) use ($tag) {
@@ -96,7 +96,7 @@ class TagController extends Controller
             ->with('discussions', $discussions)
             ->with('files', $files)
             ->with('users', $users)
-            ->with('events', $events)
+            ->with('calendarevents', $events)
             ->with('groups', $groups)
             ->with('tag', $tag)
             ->with('title', $tag->name);

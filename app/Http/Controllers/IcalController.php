@@ -27,15 +27,15 @@ class IcalController extends Controller
 
         $groups = Context::getVisibleGroups();
 
-         // returns the 500 most recent events
-        $events = \App\Event::with('group')
+         // returns the 500 most recent Agorakit events
+        $events = \App\CalendarEvent::with('group')
             ->whereIn('group_id', $groups)
             ->orderBy('start','desc')
             ->take(500)
             ->get();
 
         foreach ($events as $event) {
-            // Create an event
+            // Create an Icalendar event
             $event = Event::create()
                 ->name($event->name)
                 ->description(summary($event->body), 1000)

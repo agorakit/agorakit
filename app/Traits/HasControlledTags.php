@@ -9,7 +9,7 @@ use App\User;
 use App\Group;
 use App\Discussion;
 use App\File;
-use App\Event;
+use App\CalendarEvent;
 use App\Tag;
 use Exception;
 
@@ -53,7 +53,7 @@ trait HasControlledTags
             }
         }
 
-        if ($this instanceof Discussion || $this instanceof File || $this instanceof Event) {
+        if ($this instanceof Discussion || $this instanceof File || $this instanceof CalendarEvent) {
             if ($this->getAllowedTags()->count() > 0) {
                 return false;
             } else {
@@ -92,7 +92,7 @@ trait HasControlledTags
             }
         }
 
-        if ($this instanceof Discussion || $this instanceof File || $this instanceof Event) {
+        if ($this instanceof Discussion || $this instanceof File || $this instanceof CalendarEvent) {
             return $this->arrayToTags($this->group->getSetting('allowed_tags'));
         }
 
@@ -133,7 +133,7 @@ trait HasControlledTags
      */
     public function getTagsInUse()
     {
-        if ($this instanceof Discussion || $this instanceof File || $this instanceof Event) {
+        if ($this instanceof Discussion || $this instanceof File || $this instanceof CalendarEvent) {
 
             $models = collect();
             $tags = collect();
@@ -153,9 +153,9 @@ trait HasControlledTags
                         ->get();
                 }
 
-                if ($this instanceof Event) {
+                if ($this instanceof CalendarEvent) {
                     $models = $this->group
-                        ->events()
+                        ->calendarevents()
                         ->with('tags')
                         ->get();
                 }

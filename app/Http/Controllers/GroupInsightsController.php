@@ -25,7 +25,7 @@ class GroupInsightsController extends Controller
             $group->users()->count(),
             $group->users()->active()->count(),
             $group->discussions()->count(),
-            $group->events()->count(),
+            $group->calendarevents()->count(),
             $group->files()->count()
         ]);
         $charts[] = $chart;
@@ -54,7 +54,7 @@ class GroupInsightsController extends Controller
 
 
         // Events
-        $results = \App\Event::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
+        $results = \App\CalendarEvent::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
             ->groupBy('yearmonth')
             ->orderBy('yearmonth', 'asc')
             ->where('group_id', $group->id)

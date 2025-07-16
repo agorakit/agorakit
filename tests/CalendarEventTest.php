@@ -2,7 +2,7 @@
 
 use App\Group;
 
-class EventTest extends Tests\BrowserKitTestCase
+class CalendarEventTest extends Tests\BrowserKitTestCase
 {
     /******************* Why is it done this way ? ***************/
 
@@ -70,7 +70,7 @@ class EventTest extends Tests\BrowserKitTestCase
         $group = App\Group::where('name', 'Event test group')->first();
 
         $this->actingAs($user)
-            ->visit('/groups/' . $group->id . '/events/create')
+            ->visit('/groups/' . $group->id . '/calendarevents/create')
             ->see('Add an event')
             ->type('Test event with definite end', 'name')
             ->type('this is a test event in the agenda', 'body')
@@ -80,7 +80,7 @@ class EventTest extends Tests\BrowserKitTestCase
             ->type('2026-01-03', 'stop_date')
             ->type('9:00', 'stop_time')
             ->press('Create')
-            ->seeInDatabase('events', [
+            ->seeInDatabase('calendarevents', [
                 'name' => 'Test event with definite end',
                 'start' => '2026-01-01 12:00:00',
                 'stop' => '2026-01-03 09:00:00'
@@ -95,7 +95,7 @@ class EventTest extends Tests\BrowserKitTestCase
         $group = App\Group::where('name', 'Event test group')->first();
 
         $this->actingAs($user)
-            ->visit('/groups/' . $group->id . '/events/create')
+            ->visit('/groups/' . $group->id . '/calendarevents/create')
             ->see('Add an event')
             ->type('Test event with wrong stop time', 'name')
             ->type('this is a test event in the agenda', 'body')
@@ -104,7 +104,7 @@ class EventTest extends Tests\BrowserKitTestCase
             ->type('12:00', 'start_time')
             ->type('9:00', 'stop_time')
             ->press('Create')
-            ->dontSeeInDatabase('events', [
+            ->dontSeeInDatabase('calendarevents', [
                 'name' => 'Test event with wrong stop time'
             ]);
     }
@@ -116,7 +116,7 @@ class EventTest extends Tests\BrowserKitTestCase
         $group = App\Group::where('name', 'Event test group')->first();
 
         $this->actingAs($user)
-            ->visit('/groups/' . $group->id . '/events/create')
+            ->visit('/groups/' . $group->id . '/calendarevents/create')
             ->see('Add an event')
             ->type('Test event without stop date', 'name')
             ->type('this is a test event in the agenda', 'body')
@@ -125,7 +125,7 @@ class EventTest extends Tests\BrowserKitTestCase
             ->type('12:00', 'start_time')
             ->type('17:00', 'stop_time')
             ->press('Create')
-            ->seeInDatabase('events', [
+            ->seeInDatabase('calendarevents', [
                 'name' => 'Test event without stop date',
                 'start' => '2026-01-01 12:00:00',
                 'stop' => '2026-01-01 17:00:00'
@@ -140,7 +140,7 @@ class EventTest extends Tests\BrowserKitTestCase
         $group = App\Group::where('name', 'Event test group')->first();
 
         $this->actingAs($user)
-            ->visit('/groups/' . $group->id . '/events/create')
+            ->visit('/groups/' . $group->id . '/calendarevents/create')
             ->see('Add an event')
             ->type('Test event without stop time', 'name')
             ->type('this is a test event in the agenda', 'body')
@@ -149,7 +149,7 @@ class EventTest extends Tests\BrowserKitTestCase
             ->type('12:00', 'start_time')
             ->type('2026-01-03', 'stop_date')
             ->press('Create')
-            ->seeInDatabase('events', [
+            ->seeInDatabase('calendarevents', [
                 'name' => 'Test event without stop time',
                 'start' => '2026-01-01 12:00:00',
                 'stop' => '2026-01-03 12:00:00'
@@ -164,7 +164,7 @@ class EventTest extends Tests\BrowserKitTestCase
         $group = App\Group::where('name', 'Event test group')->first();
 
         $this->actingAs($user)
-            ->visit('/groups/' . $group->id . '/events/create')
+            ->visit('/groups/' . $group->id . '/calendarevents/create')
             ->see('Add an event')
             ->type('Test event with unknown end', 'name')
             ->type('this is a test event in the agenda', 'body')
@@ -172,7 +172,7 @@ class EventTest extends Tests\BrowserKitTestCase
             ->type('2026-01-01', 'start_date')
             ->type('12:00', 'start_time')
             ->press('Create')
-            ->seeInDatabase('events', [
+            ->seeInDatabase('calendarevents', [
                 'name' => 'Test event with unknown end'
             ])
             ->see(trans('messages.create_event'));
@@ -185,7 +185,7 @@ class EventTest extends Tests\BrowserKitTestCase
         $group = App\Group::where('name', 'Event test group')->first();
 
         $this->actingAs($user)
-            ->visit('/groups/' . $group->id . '/events/create')
+            ->visit('/groups/' . $group->id . '/calendarevents/create')
             ->see('Add an event')
             ->type('Test event with location name', 'name')
             ->type('this is a test event in the agenda', 'body')
@@ -194,7 +194,7 @@ class EventTest extends Tests\BrowserKitTestCase
             ->type('2026-01-01', 'start_date')
             ->type('12:00', 'start_time')
             ->press('Create')
-            ->seeInDatabase('events', [
+            ->seeInDatabase('calendarevents', [
                 'name' => 'Test event with location name'
             ])
             ->see(trans('messages.create_event'));
@@ -207,7 +207,7 @@ class EventTest extends Tests\BrowserKitTestCase
         $group = App\Group::where('name', 'Event test group')->first();
 
         $this->actingAs($user)
-            ->visit('/groups/' . $group->id . '/events/create')
+            ->visit('/groups/' . $group->id . '/calendarevents/create')
             ->see('Add an event')
             ->type('Test event us-ing location name', 'name')
             ->type('this is a test event in the agenda', 'body')
@@ -215,7 +215,7 @@ class EventTest extends Tests\BrowserKitTestCase
             ->type('2026-02-02', 'start_date')
             ->type('12:00', 'start_time')
             ->press('Create')
-            ->seeInDatabase('events', [
+            ->seeInDatabase('calendarevents', [
                 'name' => 'Test event us-ing location name'
             ])
             ->see(trans('messages.create_event'));

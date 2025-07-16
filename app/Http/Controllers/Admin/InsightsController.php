@@ -33,7 +33,7 @@ class InsightsController extends Controller
             \App\User::active()->verified()->count(),
             \App\Discussion::count(),
             \App\Comment::count(),
-            \App\Event::count(),
+            \App\CalendarEvent::count(),
             \App\File::count()
         ]);
         $charts[] = $chart;
@@ -62,7 +62,7 @@ class InsightsController extends Controller
 
 
         // Events
-        $results = \App\Event::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
+        $results = \App\CalendarEvent::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
             ->groupBy('yearmonth')
             ->orderBy('yearmonth', 'asc')
             ->get();

@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Event;
+use App\CalendarEvent;
 use App\Group;
 use Auth;
 use Carbon\Carbon;
 use Gate;
 use Illuminate\Http\Request;
 
-class GroupEventController extends Controller
+class GroupCalendarEventController extends Controller
 {
     public function __construct()
     {
@@ -23,7 +23,7 @@ class GroupEventController extends Controller
      */
     public function index(Request $request, Group $group)
     {
-        $this->authorize('view-events', $group);
+        $this->authorize('view-calendarevents', $group);
 
         $view = 'grid';
 
@@ -56,7 +56,7 @@ class GroupEventController extends Controller
         }
 
         if ($view == 'list') {
-            $events = $group->events()
+            $events = $group->calendarevents()
                 ->with('user', 'group', 'tags')
                 ->orderBy('start', 'asc')
                 ->where(function ($query) {
@@ -65,33 +65,33 @@ class GroupEventController extends Controller
                 })
                 ->paginate(10);
 
-            return view('events.index')
+            return view('calendarevents.index')
                 ->with('type', 'list')
                 ->with('title', $group->name . ' - ' . trans('messages.agenda'))
-                ->with('events', $events)
+                ->with('calendarevents', $events)
                 ->with('group', $group)
-                ->with('tab', 'event');
+                ->with('tab', 'calendarevent');
         }
 
-        return view('events.index')
+        return view('calendarevents.index')
             ->with('type', 'grid')
             ->with('group', $group)
-            ->with('tab', 'event');
+            ->with('tab', 'calendarevent');
     }
 
     public function indexJson(Request $request, Group $group)
     {
-        $this->authorize('view-events', $group);
+        $this->authorize('view-calendarevents', $group);
 
         // load of events between start and stop provided by calendar js
         if ($request->has('start') && $request->has('end')) {
-            $events = $group->events()
+            $events = $group->calendarevents()
                 ->with('user', 'group', 'tags')
                 ->where('start', '>', Carbon::parse($request->get('start'))->subMonth())
                 ->where('stop', '<', Carbon::parse($request->get('end'))->addMonth())
                 ->orderBy('start', 'asc')->get();
         } else {
-            $events = $group->events()->orderBy('start', 'asc')->get();
+            $events = $group->calendarevents()->orderBy('start', 'asc')->get();
         }
 
         $event = [];
@@ -158,15 +158,15 @@ class GroupEventController extends Controller
     public function create(Request $request, Group $group)
     {
         if ($group->exists) {
-            $this->authorize('create-event', $group);
+            $this->authorize('create-calendarevent', $group);
         }
 
         // preload the event to duplicate if present in url to allow easy duplication of an existing event
         if ($request->has('duplicate')) {
-            $event = Event::findOrFail($request->get('duplicate'));
+            $event = CalendarEvent::findOrFail($request->get('duplicate'));
             $this->authorize('view', $event);
         } else {
-            $event = new Event();
+            $event = new CalendarEvent();
 
             if ($request->get('start')) {
                 $event->start = Carbon::parse($request->get('start'));
@@ -195,15 +195,15 @@ class GroupEventController extends Controller
 
         $event->group()->associate($group);
 
-        return view('events.create')
-            ->with('event', $event)
+        return view('calendarevents.create')
+            ->with('calendarevent', $event)
             ->with('model', $event)
             ->with('group', $group)
             ->with('allowedTags', $event->getTagsInUse())
             ->with('newTagsAllowed', $event->areNewTagsAllowed())
             ->with('listedLocation', null)
             ->with('listedLocations', $this->getListedLocations($event->group))
-            ->with('tab', 'event');
+            ->with('tab', 'calendarevent');
     }
 
     /**
@@ -218,9 +218,9 @@ class GroupEventController extends Controller
             $group = Group::findOrFail($request->get('group'));
         }
 
-        $this->authorize('create-event', $group);
+        $this->authorize('create-calendarevent', $group);
 
-        $event = new Event();
+        $event = new CalendarEvent();
 
         $event->name = $request->input('name');
         $event->body = $request->input('body');
@@ -228,7 +228,7 @@ class GroupEventController extends Controller
         try {
             $event->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('start_time'));
         } catch (\Exception $e) {
-            return redirect()->route('groups.events.create', $group)
+            return redirect()->route('groups.calendarevents.create', $group)
                 ->withErrors($e->getMessage() . '. Incorrect format in the start date, use yyyy-mm-dd hh:mm')
                 ->withInput();
         }
@@ -248,13 +248,13 @@ class GroupEventController extends Controller
                 }
             }
         } catch (\Exception $e) {
-            return redirect()->route('groups.events.create', $group)
+            return redirect()->route('groups.calendarevents.create', $group)
                 ->withErrors($e->getMessage() . '. Incorrect format in the stop date, use yyyy-mm-dd hh:mm')
                 ->withInput();
         }
 
         if ($event->start > $event->stop) {
-            return redirect()->route('groups.events.create', $group)
+            return redirect()->route('groups.calendarevents.create', $group)
                 ->withErrors(__('Start date cannot be after end date'))
                 ->withInput();
         }
@@ -271,7 +271,7 @@ class GroupEventController extends Controller
             try {
                 $event->location = $request->input('location');
             } catch (\Exception $e) {
-            return redirect()->route('groups.events.create', $group)
+            return redirect()->route('groups.calendarevents.create', $group)
               ->withErrors($e->getMessage() . '. Incorrect location')
               ->withInput();
             }
@@ -293,9 +293,9 @@ class GroupEventController extends Controller
             $event->makePrivate();
         }
 
-        if (!$group->events()->save($event)) {
+        if (!$group->calendarevents()->save($event)) {
             // Oops.
-            return redirect()->route('groups.events.create', $group)
+            return redirect()->route('groups.calendarevents.create', $group)
                 ->withErrors($event->getErrors())
                 ->withInput();
         }
@@ -323,7 +323,7 @@ class GroupEventController extends Controller
 
         flash(trans('messages.ressource_created_successfully'));
 
-        return redirect()->route('groups.events.index', $group);
+        return redirect()->route('groups.calendarevents.index', $group);
     }
 
     /**
@@ -333,16 +333,16 @@ class GroupEventController extends Controller
      *
      * @return Response
      */
-    public function show(Group $group, Event $event)
+    public function show(Group $group, CalendarEvent $event)
     {
         $this->authorize('view', $event);
 
-        return view('events.show')
+        return view('calendarevents.show')
             ->with('title', $group->name . ' - ' . $event->name)
-            ->with('event', $event)
+            ->with('calendarevent', $event)
             ->with('model', $event)
             ->with('group', $group)
-            ->with('tab', 'event');
+            ->with('tab', 'calendarevent');
     }
 
     /**
@@ -352,7 +352,7 @@ class GroupEventController extends Controller
      *
      * @return Response
      */
-    public function edit(Request $request, Group $group, Event $event)
+    public function edit(Request $request, Group $group, CalendarEvent $event)
     {
         $this->authorize('update', $event);
 
@@ -363,8 +363,8 @@ class GroupEventController extends Controller
             }
         }
 
-        return view('events.edit')
-            ->with('event', $event)
+        return view('calendarevents.edit')
+            ->with('calendarevent', $event)
             ->with('model', $event)
             ->with('group', $group)
             ->with('allowedTags', $event->getAllowedTags())
@@ -372,7 +372,7 @@ class GroupEventController extends Controller
             ->with('selectedTags', $event->getSelectedTags())
             ->with('listedLocation', $listed_location)
             ->with('listedLocations', $this->getListedLocations($group))
-            ->with('tab', 'event');
+            ->with('tab', 'calendarevent');
     }
 
     /**
@@ -382,7 +382,7 @@ class GroupEventController extends Controller
      *
      * @return Response
      */
-    public function update(Request $request, Group $group, Event $event)
+    public function update(Request $request, Group $group, CalendarEvent $event)
     {
         $this->authorize('update', $event);
 
@@ -413,7 +413,7 @@ class GroupEventController extends Controller
             try {
                 $event->location = $request->input('location');
             } catch (\Exception $e) {
-            return redirect()->route('groups.events.create', $event)
+            return redirect()->route('groups.calendarevents.create', $event)
               ->withErrors($e->getMessage() . '. Incorrect location')
               ->withInput();
             }
@@ -455,14 +455,14 @@ class GroupEventController extends Controller
 
         if ($event->isInvalid()) {
             // Oops.
-            return redirect()->route('groups.events.create', $group)
+            return redirect()->route('groups.calendarevents.create', $group)
                 ->withErrors($event->getErrors())
                 ->withInput();
         }
 
         $event->save();
 
-        return redirect()->route('groups.events.show', [$event->group, $event]);
+        return redirect()->route('groups.calendarevents.show', [$event->group, $event]);
     }
 
     /**
@@ -472,13 +472,13 @@ class GroupEventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroyConfirm(Request $request, Group $group, Event $event)
+    public function destroyConfirm(Request $request, Group $group, CalendarEvent $event)
     {
         $this->authorize('delete', $event);
 
         if (Gate::allows('delete', $event)) {
-            return view('events.delete')
-                ->with('event', $event)
+            return view('calendarevents.delete')
+                ->with('calendarevent', $event)
                 ->with('group', $group)
                 ->with('tab', 'discussions');
         } else {
@@ -493,25 +493,25 @@ class GroupEventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, Group $group, Event $event)
+    public function destroy(Request $request, Group $group, CalendarEvent $event)
     {
         $this->authorize('delete', $event);
         $event->delete();
         flash(trans('messages.ressource_deleted_successfully'));
 
-        return redirect()->route('groups.events.index', $group);
+        return redirect()->route('groups.calendarevents.index', $group);
     }
 
     /**
      * Show the revision history of the discussion.
      */
-    public function history(Group $group, Event $event)
+    public function history(Group $group, CalendarEvent $event)
     {
         $this->authorize('history', $event);
 
-        return view('events.history')
+        return view('calendarevents.history')
             ->with('group', $group)
-            ->with('event', $event)
+            ->with('calendarevent', $event)
             ->with('tab', 'event');
     }
 }

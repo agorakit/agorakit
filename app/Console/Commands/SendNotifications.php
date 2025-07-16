@@ -128,7 +128,7 @@ class SendNotifications extends Command
             $users = $this->getNewMembersSince($user->id, $group->id, $membership->notified_at);
 
             // find future events until next 2 weeks, this is curently hardcoded... TODO use the mail sending interval to determine stop date
-            $events = \App\Event::where('start', '>', Carbon::now()->toDateTimeString())
+            $events = \App\CalendarEvent::where('start', '>', Carbon::now()->toDateTimeString())
                 ->where('stop', '<', Carbon::now()->addWeek()->addWeek())
                 ->where('group_id', '=', $group->id)
                 ->orderBy('start')
@@ -136,7 +136,7 @@ class SendNotifications extends Command
 
             // we only trigger mail sending if a new event has been **created** since last notification email.
             // BUT we will send events for the next two weeks in all cases, IF a mail must be sent
-            $events_count = \App\Event::where('created_at', '>', $membership->notified_at)
+            $events_count = \App\CalendarEvent::where('created_at', '>', $membership->notified_at)
                 ->where('group_id', '=', $group->id)
                 ->count();
 
@@ -158,7 +158,7 @@ class SendNotifications extends Command
 
                 $notification->files = $files;
                 $notification->users = $users;
-                $notification->events = $events;
+                $notification->calendarevents = $events;
                 $notification->last_notification = $last_notification;
 
                 Mail::to($user)->send($notification);

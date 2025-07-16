@@ -15,7 +15,7 @@ use Nicolaslopezj\Searchable\SearchableTrait;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
 
-class Event extends Model
+class CalendarEvent extends Model
 {
     use ValidatingTrait;
     use RevisionableTrait;
@@ -38,7 +38,7 @@ class Event extends Model
 
     protected $with = ['attending', 'notAttending']; // always load participants with events
 
-    protected $table = 'events';
+    protected $table = 'calendarevents';
     public $timestamps = true;
     protected $casts = [
         'user_id' => 'integer',
@@ -63,15 +63,15 @@ class Event extends Model
         * @var array
         */
         'columns' => [
-            'events.name'    => 10,
-            'events.body'    => 10,
-            'events.location' => 2,
+            'calendarevents.name'    => 10,
+            'calendarevents.body'    => 10,
+            'calendarevents.location' => 2,
         ],
     ];
 
     public function getType()
     {
-        return 'event';
+        return 'calendarevent';
     }
 
     public function group(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -86,7 +86,7 @@ class Event extends Model
 
     public function link()
     {
-        return route('groups.events.show', [$this->group, $this]);
+        return route('groups.calendarevents.show', [$this->group, $this]);
     }
 
     /**

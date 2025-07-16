@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Suin\RSSWriter\Channel;
 use Suin\RSSWriter\Feed;
-use App\Event;
+use App\CalendarEvent;
 use App\Group;
 use App\Discussion;
 
@@ -48,7 +48,7 @@ class FeedController extends Controller
         return response($feed, 200, ['Content-Type' => 'application/xml']);
     }
 
-    public function events()
+    public function calendarevents()
     {
         $feed = new Feed();
 
@@ -59,7 +59,7 @@ class FeedController extends Controller
             ->ttl(60)
             ->appendTo($feed);
 
-        $events = Event::with('group')
+        $events = CalendarEvent::with('group')
             ->with('user')
             ->whereIn('group_id', Group::public()->pluck('id'))
             ->orderBy('start', 'desc')->take(50)->get();
@@ -70,7 +70,7 @@ class FeedController extends Controller
                 ->title($event->name)
                 ->description($event->body)
                 ->contentEncoded($event->body)
-                ->url(route('groups.events.show', [$event->group, $event]))
+                ->url(route('groups.calendarevents.show', [$event->group, $event]))
                 ->author($event->user->name)
                 ->pubDate($event->start->timestamp)
                 ->guid(route('groups.events.show', [$event->group, $event]), true)

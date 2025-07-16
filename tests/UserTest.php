@@ -117,7 +117,7 @@ class UserTest extends Tests\BrowserKitTestCase
         $group = App\Group::where('name', 'Test group')->first();
 
         $this->actingAs($user)
-            ->visit('/groups/' . $group->id . '/events/create')
+            ->visit('/groups/' . $group->id . '/calendarevents/create')
             ->see('Add an event')
             ->type('Test event', 'name')
             ->type('this is a test event in the agenda', 'body')
@@ -126,7 +126,7 @@ class UserTest extends Tests\BrowserKitTestCase
             ->type('12:00', 'start_time')
             ->type('13:00', 'stop_time')
             ->press('Create')
-            ->seeInDatabase('events', ['name' => 'Test event'])
+            ->seeInDatabase('calendarevents', ['name' => 'Test event'])
             ->see(trans('messages.create_event'));
     }
 
@@ -321,7 +321,7 @@ class UserTest extends Tests\BrowserKitTestCase
             ->check('custom_permissions')
             ->uncheck('member-create-discussion')
             ->uncheck('member-create-file')
-            ->uncheck('member-create-event')
+            ->uncheck('member-create-calendarevent')
             ->press(trans('messages.save'))
             ->see(trans('messages.ressource_updated_successfully'));
     }
@@ -340,7 +340,7 @@ class UserTest extends Tests\BrowserKitTestCase
         $group = $this->getTestGroup();
 
         $this->actingAs($this->newbie())
-            ->get('groups/' . $group->id . '/events/create')
+            ->get('groups/' . $group->id . '/calendarevents/create')
             ->assertResponseStatus(403);
     }
 

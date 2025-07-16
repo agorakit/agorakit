@@ -12,7 +12,7 @@ use Context;
 
  * Global listing of events.
  */
-class EventController extends Controller
+class CalendarEventController extends Controller
 {
     public function __construct()
     {
@@ -30,7 +30,7 @@ class EventController extends Controller
         if ($view == 'list') {
             $groups = Context::getVisibleGroups();
 
-            $events = \App\Event::with('group')
+            $events = \App\CalendarEvent::with('group')
                 ->where('start', '>=', Carbon::now()->subDay())
                 ->whereIn('group_id', $groups)
                 ->orderBy('start');
@@ -45,13 +45,13 @@ class EventController extends Controller
 
             return view('dashboard.agenda-list')
                 ->with('title', trans('messages.agenda'))
-                ->with('tab', 'events')
-                ->with('events', $events);
+                ->with('tab', 'calendarevents')
+                ->with('calendarevents', $events);
         }
 
         return view('dashboard.agenda')
             ->with('title', trans('messages.agenda'))
-            ->with('tab', 'events');
+            ->with('tab', 'calendarevents');
     }
 
     public function indexJson(Request $request)
@@ -60,13 +60,13 @@ class EventController extends Controller
 
         // load of events between start and stop provided by calendar js
         if ($request->has('start') && $request->has('end')) {
-            $events = \App\Event::with('group', 'attending')
+            $events = \App\CalendarEvent::with('group', 'attending')
                 ->where('start', '>', Carbon::parse($request->get('start')))
                 ->where('stop', '<', Carbon::parse($request->get('end')))
                 ->whereIn('group_id', $groups)
                 ->orderBy('start', 'asc');
         } else { // return current month
-            $events = \App\Event::with('group', 'attending')
+            $events = \App\CalendarEvent::with('group', 'attending')
                 ->orderBy('start', 'asc')
                 ->where('start', '>', Carbon::now()->subMonth())
                 ->where('stop', '<', Carbon::now()->addMonth())

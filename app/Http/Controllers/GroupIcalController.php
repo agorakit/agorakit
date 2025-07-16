@@ -19,7 +19,7 @@ class GroupIcalController extends Controller
      */
     public function index(Group $group)
     {
-        $this->authorize('view-events', $group);
+        $this->authorize('view-calendarevents', $group);
         
         // Create new calendar
         $calendar = Calendar::create(setting('name') . ' : ' . $group->name);
@@ -28,7 +28,7 @@ class GroupIcalController extends Controller
 
 
         // returns the 500 most recent events
-        $events = $group->events()->orderBy('start', 'desc')->take(500)->get();
+        $events = $group->calendarevents()->orderBy('start', 'desc')->take(500)->get();
 
         foreach ($events as $event) {
             // Create an event

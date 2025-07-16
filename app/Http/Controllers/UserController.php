@@ -334,8 +334,8 @@ class UserController extends Controller
                     $file->save();
                 }
 
-                $message[] = $user->events->count() . ' events anonymized';
-                foreach ($user->events as $event) {
+                $message[] = $user->calendarevents->count() . ' events anonymized';
+                foreach ($user->calendarevents as $event) {
                     $event->timestamps = false;
                     $event->user()->associate($anonymous);
                     $event->save();
@@ -371,8 +371,8 @@ class UserController extends Controller
                     $file->delete();
                 }
 
-                $message[] = $user->events->count() . ' events deleted';
-                foreach ($user->events as $event) {
+                $message[] = $user->calendarevents->count() . ' events deleted';
+                foreach ($user->calendarevents as $event) {
                     $event->timestamps = false;
                     $event->delete();
                 }

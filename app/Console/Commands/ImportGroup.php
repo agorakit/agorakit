@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use App\Group;
 use App\User;
 use App\Membership;
-use App\Event;
+use App\CalendarEvent;
 use App\Discussion;
 use App\Comment;
 use App\Reaction;
@@ -93,8 +93,8 @@ class ImportGroup extends Command
 
 
         // handle events & participations
-        foreach ($data->events as $eventData) {
-            if ($this->createEvent($eventData)) {
+        foreach ($data->calendarEvents as $eventData) {
+            if ($this->createCalendarEvent($eventData)) {
                 $this->info('Created event called ' . $eventData->name);
             }
         }
@@ -242,9 +242,9 @@ class ImportGroup extends Command
     /**
      * Create a new event based on a json parsed array $data
      */
-    function createEvent($data)
+    function createCalendarEvent($data)
     {
-        $event = new Event;
+        $event = new CalendarEvent;
 
         $user = $this->createUser($data->user);
 

@@ -25,7 +25,7 @@ class GroupController extends Controller
         $groups = new Group();
         $groups = $groups->notSecret();
 
-        $groups = $groups->with('tags', 'users', 'events', 'discussions')
+        $groups = $groups->with('tags', 'users', 'calendarevents', 'discussions')
             ->orderBy('status', 'desc')
             ->orderBy('updated_at', 'desc');
 
@@ -105,8 +105,8 @@ class GroupController extends Controller
                     ->get();
             }
 
-            if (Gate::allows('viewEvents', $group)) {
-                $events = $group->events()
+            if (Gate::allows('viewCalendarEvents', $group)) {
+                $events = $group->calendarevents()
                     ->with('user', 'tags', 'group')
                     ->where('stop', '>=', Carbon::now()->subDay())
                     ->orderBy('start', 'asc')
@@ -137,7 +137,7 @@ class GroupController extends Controller
                     ->limit(5)
                     ->get();
 
-                $events = $group->events()
+                $events = $group->calendarevents()
                     ->with('user', 'tags', 'group')
                     ->where('start', '>=', Carbon::now())
                     ->orderBy('start', 'asc')
@@ -150,7 +150,7 @@ class GroupController extends Controller
             ->with('title', $group->name)
             ->with('group', $group)
             ->with('discussions', $discussions)
-            ->with('events', $events)
+            ->with('calendarevents', $events)
             ->with('files', $files)
             ->with('admins', $group->admins()->get())
             ->with('group_inbox', $group_inbox)

@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use App\Group;
 use App\Discussion;
 use App\Comment;
-use App\Event;
+use App\CalendarEvent;
 use App\Message;
 use App\User;
 use App\File;
@@ -68,7 +68,7 @@ class CleanupDatabase extends Command
             $count = $group->discussions()->delete();
             if ($count) $this->info($count . ' discussions soft deleted in group ' . $group->name);
 
-            $count = $group->events()->delete();
+            $count = $group->calendarevents()->delete();
             if ($count) $this->info($count . ' events soft deleted in group ' . $group->name);
 
             $count = $group->files()->delete();
@@ -102,7 +102,7 @@ class CleanupDatabase extends Command
         }
 
         // Handle events
-        $events = Event::onlyTrashed()
+        $events = CalendarEvent::onlyTrashed()
             ->where('deleted_at', '<', Carbon::today()->subDays(config('agorakit.data_retention')))
             ->limit($this->option('batch'))
             ->get();
@@ -160,7 +160,7 @@ class CleanupDatabase extends Command
             $count = $user->comments()->delete();
             if ($count) $this->info($count . ' comments soft deleted from ' . $user->name);
 
-            $count = $user->events()->delete();
+            $count = $user->calendarevents()->delete();
             if ($count) $this->info($count . ' events soft deleted from ' . $user->name);
 
             $count = $user->files()->delete();

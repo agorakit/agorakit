@@ -293,16 +293,16 @@ class User extends Authenticatable
     /**
      * The events this user attends to.
      */
-    public function events(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function calendarevents(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(\App\Event::class);
+        return $this->belongsToMany(\App\CalendarEvent::class);
     }
 
 
 
-    public function isAttending(Event $event)
+    public function isAttending(CalendarEvent $event)
     {
-        $participation = Participation::firstOrNew(['user_id' => $this->id, 'event_id' => $event->id]);
+        $participation = Participation::firstOrNew(['user_id' => $this->id, 'calendarevent_id' => $event->id]);
         if ($participation->status == Participation::PARTICIPATE && $participation->exists) {
             return true;
         } else {
@@ -311,9 +311,9 @@ class User extends Authenticatable
     }
 
 
-    public function isNotAttending(Event $event)
+    public function isNotAttending(CalendarEvent $event)
     {
-        $participation = Participation::firstOrNew(['user_id' => $this->id, 'event_id' => $event->id]);
+        $participation = Participation::firstOrNew(['user_id' => $this->id, 'calendarevent_id' => $event->id]);
         if ($participation->status == Participation::WONT_PARTICIPATE) {
             return true;
         } else {
@@ -321,9 +321,9 @@ class User extends Authenticatable
         }
     }
 
-    public function isMaybeAttending(Event $event)
+    public function isMaybeAttending(CalendarEvent $event)
     {
-        $participation = Participation::firstOrNew(['user_id' => $this->id, 'event_id' => $event->id]);
+        $participation = Participation::firstOrNew(['user_id' => $this->id, 'calendarevent_id' => $event->id]);
         if ($participation->status == Participation::UNDECIDED) {
             return true;
         } else {
@@ -332,9 +332,9 @@ class User extends Authenticatable
     }
 
 
-    public function participation(Event $event)
+    public function participation(CalendarEvent $event)
     {
-        return Participation::firstOrNew(['user_id' => $this->id, 'event_id' => $event->id]);
+        return Participation::firstOrNew(['user_id' => $this->id, 'calendarevent_id' => $event->id]);
     }
 
     /**
