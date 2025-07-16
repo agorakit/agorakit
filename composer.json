@@ -22,7 +22,6 @@
         "consoletvs/charts": "^6.7",
         "cviebrock/eloquent-sluggable": "^11.0",
         "cviebrock/eloquent-taggable": "^11.0",
-        "ddeboer/imap": "^1.19",
         "doctrine/dbal": "^3.9",
         "geocoder-php/nominatim-provider": "^5.7",
         "guzzlehttp/guzzle": "^7.9",
@@ -53,6 +52,9 @@
         "willdurand/email-reply-parser": "^2.10",
         "zbateson/mail-mime-parser": "^3.0"
     },
+     "suggest": {
+        "ddeboer/imap": "^1.19"
+     },
     "require-dev": {
         "amirami/localizator": "^0.14.0@alpha",
         "barryvdh/laravel-debugbar": "^3.14",
