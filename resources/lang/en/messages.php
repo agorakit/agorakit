@@ -81,6 +81,7 @@ return [
     'embed' => 'Embed this page',
     'ends' => 'Ends',
     'events' => 'Events',
+    'export_group' => 'Export Group Data',
     'features' => 'Features',
     'filename' => 'Filename',
     'files' => 'Files',

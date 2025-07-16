@@ -125,6 +125,10 @@
                     <a class="dropdown-item" href="{{ action('GroupInsightsController@index', $group) }}">
                         <i class="fa fa-line-chart me-2"></i> {{ trans('messages.insights') }}
                     </a>
+
+                    <a class="dropdown-item" href="{{ action('GroupController@export', $group) }}" up-follow="false">
+                        <i class="fa fa-keyboard-o me-2"></i> {{ trans('messages.export_group') }}
+                    </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item text-danger" href="{{ route('groups.deleteconfirm', [$group]) }}">
                         <i class="fa fa-trash me-2"></i> @lang('Delete group')
