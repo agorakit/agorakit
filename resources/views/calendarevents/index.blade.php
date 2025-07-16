@@ -22,22 +22,22 @@
 
 
     @if ($type == 'grid')
-        @can('create-action', $group)
+        @can('create-calendarevent', $group)
             <div class="mb-4">
-                <a class="btn btn-primary" href="{{ route('groups.actions.create', $group) }}">
-                    {{ trans('messages.create_action') }}
+                <a class="btn btn-primary" href="{{ route('groups.calendarevents.create', $group) }}">
+                    {{ trans('messages.create_event') }}
                 </a>
             </div>
         @endcan
-        <div class="js-calendar" data-create-url="{{ route('groups.actions.create', $group) }}"
-            data-json="{{ route('groups.actions.index.json', $group) }}" data-locale="{{ App::getLocale() }}"
+        <div class="js-calendar" data-create-url="{{ route('groups.calendarevents.create', $group) }}"
+            data-json="{{ route('groups.calendarevents.index.json', $group) }}" data-locale="{{ App::getLocale() }}"
             id="calendar"></div>
     @endif
 
     @if ($type == 'list')
-        @include('actions.list', ['actions' => $actions])
-        {{ $actions->render() }}
+        @include('calendarevents.list', ['events' => $events])
+        {{ $events->render() }}
     @endif
 
-    @include('actions.ical')
+    @include('calendarevents.ical')
 @endsection

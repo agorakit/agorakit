@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use App\Group;
 use App\Discussion;
 use App\Comment;
-use App\Action;
+use App\CalendarEvent;
 use App\Message;
 use App\User;
 use App\File;
@@ -68,8 +68,8 @@ class CleanupDatabase extends Command
             $count = $group->discussions()->delete();
             if ($count) $this->info($count . ' discussions soft deleted in group ' . $group->name);
 
-            $count = $group->actions()->delete();
-            if ($count) $this->info($count . ' actions soft deleted in group ' . $group->name);
+            $count = $group->calendarevents()->delete();
+            if ($count) $this->info($count . ' events soft deleted in group ' . $group->name);
 
             $count = $group->files()->delete();
             if ($count) $this->info($count . ' files soft deleted in group ' . $group->name);
@@ -101,20 +101,20 @@ class CleanupDatabase extends Command
             if ($count) $this->info('Discussion ' . $discussion->name . ' hard deleted');
         }
 
-        // Handle actions
-        $actions = Action::onlyTrashed()
+        // Handle events
+        $events = CalendarEvent::onlyTrashed()
             ->where('deleted_at', '<', Carbon::today()->subDays(config('agorakit.data_retention')))
             ->limit($this->option('batch'))
             ->get();
 
-        foreach ($actions as $action) {
+        foreach ($events as $event) {
             // delete cover files from storage
-            $action->deleteCover();
+            $event->deleteCover();
 
             // ...and from DB
-            $action->forceDelete();
+            $event->forceDelete();
 
-            $this->info($action->name . ' deleted from db & storage');
+            $this->info($event->name . ' deleted from db & storage');
         }
 
         // Handle files
@@ -160,8 +160,8 @@ class CleanupDatabase extends Command
             $count = $user->comments()->delete();
             if ($count) $this->info($count . ' comments soft deleted from ' . $user->name);
 
-            $count = $user->actions()->delete();
-            if ($count) $this->info($count . ' actions soft deleted from ' . $user->name);
+            $count = $user->calendarevents()->delete();
+            if ($count) $this->info($count . ' events soft deleted from ' . $user->name);
 
             $count = $user->files()->delete();
             if ($count) $this->info($count . ' files soft deleted from ' . $user->name);

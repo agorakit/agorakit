@@ -334,11 +334,11 @@ class UserController extends Controller
                     $file->save();
                 }
 
-                $message[] = $user->actions->count() . ' actions anonymized';
-                foreach ($user->actions as $action) {
-                    $action->timestamps = false;
-                    $action->user()->associate($anonymous);
-                    $action->save();
+                $message[] = $user->calendarevents->count() . ' events anonymized';
+                foreach ($user->calendarevents as $event) {
+                    $event->timestamps = false;
+                    $event->user()->associate($anonymous);
+                    $event->save();
                 }
 
                 $message[] = $user->memberships->count() . ' memberships deleted';
@@ -371,10 +371,10 @@ class UserController extends Controller
                     $file->delete();
                 }
 
-                $message[] = $user->actions->count() . ' actions deleted';
-                foreach ($user->actions as $action) {
-                    $action->timestamps = false;
-                    $action->delete();
+                $message[] = $user->calendarevents->count() . ' events deleted';
+                foreach ($user->calendarevents as $event) {
+                    $event->timestamps = false;
+                    $event->delete();
                 }
 
                 $message[] = $user->memberships->count() . ' memberships deleted';

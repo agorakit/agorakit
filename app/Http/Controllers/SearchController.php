@@ -6,7 +6,7 @@ use Auth;
 use App\Group;
 use App\Discussion;
 use App\User;
-use App\Action;
+use App\CalendarEvent;
 use App\File;
 use App\Comment;
 use Illuminate\Http\Request;
@@ -21,7 +21,7 @@ class SearchController extends Controller
     /**
      * Parameters in the request : 
      * ?query : search terms
-     * ?type : discussions / groups / actions / files / users
+     * ?type : discussions / groups / calendarevents / files / users
      * ?scope : my / all / admin
      * ?order : recent / old / big / small
      * 
@@ -39,7 +39,7 @@ class SearchController extends Controller
             $type = $request->get('type');
         }
 
-        if (!in_array($type, ['discussions', 'files', 'actions', 'groups', 'users', 'comments'])) {
+        if (!in_array($type, ['discussions', 'files', 'calendarevents', 'groups', 'users', 'comments'])) {
             $type = 'discussions';
         }
 
@@ -98,12 +98,12 @@ class SearchController extends Controller
             }
 
 
-            if ($type == 'actions') {
-                $results = Action::whereIn('group_id', $allowed_groups)
+            if ($type == 'calendarevents') {
+                $results = CalendarEvent::whereIn('group_id', $allowed_groups)
                     ->with('group')
                     ->search($query)
                     ->orderBy('updated_at', 'desc')
-                    ->paginate(20, ['*'], 'actions');
+                    ->paginate(20, ['*'], 'calendarevents');
             }
 
             if ($type == 'files') {

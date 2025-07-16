@@ -33,7 +33,7 @@ class UndoController extends Controller
         ->with('group', 'user')
         ->get();
 
-        $actions = \App\Action::onlyTrashed()
+        $events = \App\CalendarEvent::onlyTrashed()
         ->orderBy('deleted_at', 'desc')
         ->with('group', 'user')
         ->get();
@@ -43,7 +43,7 @@ class UndoController extends Controller
         ->with('discussions', $discussions)
         ->with('comments', $comments)
         ->with('files', $files)
-        ->with('actions', $actions);
+        ->with('events', $events);
     }
 
     public function restore($type, $id)
@@ -105,21 +105,21 @@ class UndoController extends Controller
             }
         }
 
-        if ($type == 'action') {
-            $action = \App\Action::withTrashed()->find($id);
-            if ($action->trashed()) {
-                $group = $action->group()->withTrashed()->first();
+        if ($type == 'calendarevent') {
+            $event = \App\CalendarEvent::withTrashed()->find($id);
+            if ($event->trashed()) {
+                $group = $event->group()->withTrashed()->first();
                 // if the group the discussion belongs to is trashed, warn the user
                 if ($group->trashed()) {
                     $group->restore();
                 }
 
-                $action->timestamps = false;
-                $action->restore();
+                $event->timestamps = false;
+                $event->restore();
 
-                return redirect()->route('groups.actions.show', [$action->group, $action]);
+                return redirect()->route('groups.calendarevents.show', [$event->group, $event]);
             } else {
-                abort(404, 'action is not trashed, cannot restore');
+                abort(404, 'event is not trashed, cannot restore');
             }
         }
 

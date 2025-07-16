@@ -1,13 +1,13 @@
 @extends('dialog')
 
 @section('content')
-    <h1>{{ trans('messages.attend_to') }} "<em>{{ $action->name }}</em>"?</h1>
+    <h1>{{ trans('messages.attend_to') }} "<em>{{ $event->name }}</em>"?</h1>
     <div class="meta mb-2">
-        {{ $action->start->format('d/m/Y H:i') }} - {{ $action->location_display() }}
+        {{ $event->start->format('d/m/Y H:i') }} - {{ $event->location_display() }}
     </div>
-    <div class="summary mb-4">{{ summary($action->body) }}</div>
+    <div class="summary mb-4">{{ summary($event->body) }}</div>
 
-    {!! Form::open(['route' => ['groups.actions.attend', $group, $action], 'up-target' => '.main']) !!}
+    {!! Form::open(['route' => ['groups.calendarevents.attend', $group, $event], 'up-target' => '.main']) !!}
 
 
     {!! Form::select(

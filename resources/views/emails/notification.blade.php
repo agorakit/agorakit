@@ -39,14 +39,14 @@
 @endif
 
 
-@if ($actions->count() > 0)
-<h1>{{trans('messages.next_actions')}}</h1>
-@foreach($actions as $action)
+@if ($events->count() > 0)
+<h1>{{trans('messages.next_events')}}</h1>
+@foreach($events as $event)
 <div style="border-bottom: 1px solid #aaa; margin-bottom: 20px; padding-bottom: 20px">
-<strong><a  href="{{route('groups.actions.show', [$group, $action])}}">{{$action->name}}</a></strong>
-<p>{!!filter($action->body) !!}</p>
-{{$action->start->format('d/m/Y H:i')}} - {{$action->stop->format('H:i')}}
-@if ($action->hasLocation()) , {{$action->location_display('long')}}@endif
+<strong><a  href="{{route('groups.calendarevents.show', [$group, $event])}}">{{$event->name}}</a></strong>
+<p>{!!filter($event->body) !!}</p>
+{{$event->start->format('d/m/Y H:i')}} - {{$event->stop->format('H:i')}}
+@if ($event->hasLocation()) , {{$event->location_display('long')}}@endif
 </div>
 @endforeach
 <br/>

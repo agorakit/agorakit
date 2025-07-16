@@ -24,11 +24,11 @@
         </div>
     @endif
 
-    @if ($actions->count() > 0)
+    @if ($events->count() > 0)
         <div class="mb-5">
-            <h2>@lang('Actions')</h2>
-            <div class="actions items">
-                @include('actions.list', ['actions' => $actions])
+            <h2>@lang('Events')</h2>
+            <div class="events items">
+                @include('calendarevents.list', ['events' => $events])
             </div>
         </div>
     @endif

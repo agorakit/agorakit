@@ -30,7 +30,7 @@ class GroupMapController extends Controller
   {
     $this->authorize('view-members', $group);
     $users = $group->users()->where('latitude', '<>', 0)->get();
-    $actions = $group->actions()->where('stop', '>=', Carbon::now()->subDays(1))->where('latitude', '<>', 0)->get();
+    $events = $group->calendarevents()->where('stop', '>=', Carbon::now()->subDays(1))->where('latitude', '<>', 0)->get();
 
     // randomize users geolocation by a few meters
     foreach ($users as $user) {
@@ -61,19 +61,19 @@ class GroupMapController extends Controller
       array_push($geojson['features'], $marker);
     }
 
-    foreach ($actions as $action) {
+    foreach ($events as $event) {
       $marker = [
         'type'       => 'Feature',
         'properties' => [
-          'title'         => '<a href="' . route('groups.actions.show', [$action->group, $action]) . '">' . $action->name . '</a>',
-          'description'   => summary($action->body),
-          'type' => 'action'
+          'title'         => '<a href="' . route('groups.calendarevents.show', [$event->group, $event]) . '">' . $event->name . '</a>',
+          'description'   => summary($event->body),
+          'type' => 'calendarevent'
         ],
         'geometry' => [
           'type'        => 'Point',
           'coordinates' => [
-            $action->longitude,
-            $action->latitude,
+            $event->longitude,
+            $event->latitude,
 
           ],
         ],

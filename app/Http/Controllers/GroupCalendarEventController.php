@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Action;
+use App\CalendarEvent;
 use App\Group;
 use Auth;
 use Carbon\Carbon;
 use Gate;
 use Illuminate\Http\Request;
 
-class GroupActionController extends Controller
+class GroupCalendarEventController extends Controller
 {
     public function __construct()
     {
@@ -23,7 +23,7 @@ class GroupActionController extends Controller
      */
     public function index(Request $request, Group $group)
     {
-        $this->authorize('view-actions', $group);
+        $this->authorize('view-calendarevents', $group);
 
         $view = 'grid';
 
@@ -56,7 +56,7 @@ class GroupActionController extends Controller
         }
 
         if ($view == 'list') {
-            $actions = $group->actions()
+            $events = $group->calendarevents()
                 ->with('user', 'group', 'tags')
                 ->orderBy('start', 'asc')
                 ->where(function ($query) {
@@ -65,61 +65,61 @@ class GroupActionController extends Controller
                 })
                 ->paginate(10);
 
-            return view('actions.index')
+            return view('calendarevents.index')
                 ->with('type', 'list')
                 ->with('title', $group->name . ' - ' . trans('messages.agenda'))
-                ->with('actions', $actions)
+                ->with('events', $events)
                 ->with('group', $group)
-                ->with('tab', 'action');
+                ->with('tab', 'calendarevent');
         }
 
-        return view('actions.index')
+        return view('calendarevents.index')
             ->with('type', 'grid')
             ->with('group', $group)
-            ->with('tab', 'action');
+            ->with('tab', 'calendarevent');
     }
 
     public function indexJson(Request $request, Group $group)
     {
-        $this->authorize('view-actions', $group);
+        $this->authorize('view-calendarevents', $group);
 
-        // load of actions between start and stop provided by calendar js
+        // load of events between start and stop provided by calendar js
         if ($request->has('start') && $request->has('end')) {
-            $actions = $group->actions()
+            $events = $group->calendarevents()
                 ->with('user', 'group', 'tags')
                 ->where('start', '>', Carbon::parse($request->get('start'))->subMonth())
                 ->where('stop', '<', Carbon::parse($request->get('end'))->addMonth())
                 ->orderBy('start', 'asc')->get();
         } else {
-            $actions = $group->actions()->orderBy('start', 'asc')->get();
+            $events = $group->calendarevents()->orderBy('start', 'asc')->get();
         }
 
         $event = [];
         $events = [];
 
-        foreach ($actions as $action) {
-            $event['id'] = $action->id;
-            $event['title'] = $action->name . ' (' . $action->group->name . ')';
-            $event['description'] = strip_tags(summary($action->body)) . ' <br/> ' . $action->location_display();
-            $event['body'] = strip_tags(summary($action->body));
-            $event['summary'] = strip_tags(summary($action->body));
+        foreach ($events as $event) {
+            $event['id'] = $event->id;
+            $event['title'] = $event->name . ' (' . $event->group->name . ')';
+            $event['description'] = strip_tags(summary($event->body)) . ' <br/> ' . $event->location_display();
+            $event['body'] = strip_tags(summary($event->body));
+            $event['summary'] = strip_tags(summary($event->body));
 
-            $event['tooltip'] =  '<strong>' . strip_tags(summary($action->name)) . '</strong>';
-            $event['tooltip'] .= '<div>' . strip_tags(summary($action->body)) . '</div>';
+            $event['tooltip'] =  '<strong>' . strip_tags(summary($event->name)) . '</strong>';
+            $event['tooltip'] .= '<div>' . strip_tags(summary($event->body)) . '</div>';
 
-            if ($action->attending->count() > 0) {
+            if ($event->attending->count() > 0) {
                 $event['tooltip'] .= '<strong class="mt-2">' . trans('messages.user_attending') . '</strong>';
-                $event['tooltip'] .= '<div>' . implode(', ', $action->attending->pluck('username')->toArray()) . '</div>';
+                $event['tooltip'] .= '<div>' . implode(', ', $event->attending->pluck('username')->toArray()) . '</div>';
             }
 
 
-            $event['location'] = $action->location_display();
-            $event['start'] = $action->start->toIso8601String();
-            $event['end'] = $action->stop->toIso8601String();
-            $event['url'] = route('groups.actions.show', [$action->group, $action]);
-            $event['group_url'] = route('groups.actions.index', [$action->group]);
-            $event['group_name'] = $action->group->name;
-            $event['color'] = $action->group->color();
+            $event['location'] = $event->location_display();
+            $event['start'] = $event->start->toIso8601String();
+            $event['end'] = $event->stop->toIso8601String();
+            $event['url'] = route('groups.calendarevents.show', [$event->group, $event]);
+            $event['group_url'] = route('groups.calendarevents.index', [$event->group]);
+            $event['group_name'] = $event->group->name;
+            $event['color'] = $event->group->color();
 
             $events[] = $event;
         }
@@ -158,52 +158,52 @@ class GroupActionController extends Controller
     public function create(Request $request, Group $group)
     {
         if ($group->exists) {
-            $this->authorize('create-action', $group);
+            $this->authorize('create-calendarevent', $group);
         }
 
-        // preload the action to duplicate if present in url to allow easy duplication of an existing action
+        // preload the event to duplicate if present in url to allow easy duplication of an existing event
         if ($request->has('duplicate')) {
-            $action = Action::findOrFail($request->get('duplicate'));
-            $this->authorize('view', $action);
+            $event = CalendarEvent::findOrFail($request->get('duplicate'));
+            $this->authorize('view', $event);
         } else {
-            $action = new Action();
+            $event = new CalendarEvent();
 
             if ($request->get('start')) {
-                $action->start = Carbon::parse($request->get('start'));
+                $event->start = Carbon::parse($request->get('start'));
             } else {
-                $action->start = Carbon::now();
+                $event->start = Carbon::now();
             }
 
             if ($request->get('stop')) {
-                $action->stop = Carbon::parse($request->get('stop'));
+                $event->stop = Carbon::parse($request->get('stop'));
             }
 
             // handle the case where the event is exactly one (ore more) day duration : it's a full day event, remove one second
 
-            if ($action->start->hour == 0 && $action->start->minute == 0 && $action->stop->hour == 0 && $action->stop->minute == 0) {
-                $action->stop = Carbon::parse($request->get('stop'))->subSecond();
+            if ($event->start->hour == 0 && $event->start->minute == 0 && $event->stop->hour == 0 && $event->stop->minute == 0) {
+                $event->stop = Carbon::parse($request->get('stop'))->subSecond();
             }
         }
 
         if ($request->get('title')) {
-            $action->name = $request->get('title');
+            $event->name = $request->get('title');
         }
 
         if ($request->has('location')) {
-            $action->location = $request->input('location');
+            $event->location = $request->input('location');
         }
 
-        $action->group()->associate($group);
+        $event->group()->associate($group);
 
-        return view('actions.create')
-            ->with('action', $action)
-            ->with('model', $action)
+        return view('calendarevents.create')
+            ->with('event', $event)
+            ->with('model', $event)
             ->with('group', $group)
-            ->with('allowedTags', $action->getTagsInUse())
-            ->with('newTagsAllowed', $action->areNewTagsAllowed())
+            ->with('allowedTags', $event->getTagsInUse())
+            ->with('newTagsAllowed', $event->areNewTagsAllowed())
             ->with('listedLocation', null)
-            ->with('listedLocations', $this->getListedLocations($action->group))
-            ->with('tab', 'action');
+            ->with('listedLocations', $this->getListedLocations($event->group))
+            ->with('tab', 'calendarevent');
     }
 
     /**
@@ -218,17 +218,17 @@ class GroupActionController extends Controller
             $group = Group::findOrFail($request->get('group'));
         }
 
-        $this->authorize('create-action', $group);
+        $this->authorize('create-calendarevent', $group);
 
-        $action = new Action();
+        $event = new CalendarEvent();
 
-        $action->name = $request->input('name');
-        $action->body = $request->input('body');
+        $event->name = $request->input('name');
+        $event->body = $request->input('body');
 
         try {
-            $action->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('start_time'));
+            $event->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('start_time'));
         } catch (\Exception $e) {
-            return redirect()->route('groups.actions.create', $group)
+            return redirect()->route('groups.calendarevents.create', $group)
                 ->withErrors($e->getMessage() . '. Incorrect format in the start date, use yyyy-mm-dd hh:mm')
                 ->withInput();
         }
@@ -236,25 +236,25 @@ class GroupActionController extends Controller
         try {
             if ($request->get('stop_date')) {
                 if ($request->get('stop_time')) {
-                    $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('stop_time'));
-                } else { // asssume action will stop on stop_date and start_time
-                    $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('start_time'));
+                    $event->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('stop_time'));
+                } else { // asssume event will stop on stop_date and start_time
+                    $event->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('start_time'));
                 }
             } else {
-                if ($request->get('stop_time')) { // asssume action will stop on start_date and stop_time
-                    $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
-                } else { // asssume action has unknown duration and store start_date and start_time
-                    $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('start_time'));
+                if ($request->get('stop_time')) { // asssume event will stop on start_date and stop_time
+                    $event->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
+                } else { // asssume event has unknown duration and store start_date and start_time
+                    $event->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('start_time'));
                 }
             }
         } catch (\Exception $e) {
-            return redirect()->route('groups.actions.create', $group)
+            return redirect()->route('groups.calendarevents.create', $group)
                 ->withErrors($e->getMessage() . '. Incorrect format in the stop date, use yyyy-mm-dd hh:mm')
                 ->withInput();
         }
 
-        if ($action->start > $action->stop) {
-            return redirect()->route('groups.actions.create', $group)
+        if ($event->start > $event->stop) {
+            return redirect()->route('groups.calendarevents.create', $group)
                 ->withErrors(__('Start date cannot be after end date'))
                 ->withInput();
         }
@@ -262,53 +262,53 @@ class GroupActionController extends Controller
         if ($request->has('listed_location')) {
             foreach($this->getListedLocations($group) as $key => $location) {
                 if ($key == $request->input('listed_location')) {
-                    $action->location = $group->getNamedLocations()[$key];
+                    $event->location = $group->getNamedLocations()[$key];
                 }
             }
         }
         else if ($request->has('location')) {
             // Validate input
             try {
-                $action->location = $request->input('location');
+                $event->location = $request->input('location');
             } catch (\Exception $e) {
-            return redirect()->route('groups.actions.create', $group)
+            return redirect()->route('groups.calendarevents.create', $group)
               ->withErrors($e->getMessage() . '. Incorrect location')
               ->withInput();
             }
 
             // Geocode
-            if (!$action->geocode()) {
+            if (!$event->geocode()) {
                 flash(trans('messages.location_cannot_be_geocoded'));
             } else {
                 flash(trans('messages.ressource_geocoded_successfully'));
             }
         }
 
-        $action->user()->associate($request->user());
+        $event->user()->associate($request->user());
 
         // handle visibility
         if ($request->has('visibility')) {
-            $action->makePublic();
+            $event->makePublic();
         } else {
-            $action->makePrivate();
+            $event->makePrivate();
         }
 
-        if (!$group->actions()->save($action)) {
+        if (!$group->calendarevents()->save($event)) {
             // Oops.
-            return redirect()->route('groups.actions.create', $group)
-                ->withErrors($action->getErrors())
+            return redirect()->route('groups.calendarevents.create', $group)
+                ->withErrors($event->getErrors())
                 ->withInput();
         }
 
         // handle tags
         if ($request->get('tags')) {
-            $action->tag($request->get('tags'));
+            $event->tag($request->get('tags'));
         }
 
 
         // handle cover
         if ($request->hasFile('cover')) {
-            if ($action->setCoverFromRequest($request)) {
+            if ($event->setCoverFromRequest($request)) {
                 flash(trans('Cover added successfully'));
             } else {
                 warning(trans('Could not handle cover image. Is it an image file (png, jpeg,...  ?)'));
@@ -323,7 +323,7 @@ class GroupActionController extends Controller
 
         flash(trans('messages.ressource_created_successfully'));
 
-        return redirect()->route('groups.actions.index', $group);
+        return redirect()->route('groups.calendarevents.index', $group);
     }
 
     /**
@@ -333,16 +333,16 @@ class GroupActionController extends Controller
      *
      * @return Response
      */
-    public function show(Group $group, Action $action)
+    public function show(Group $group, CalendarEvent $event)
     {
-        $this->authorize('view', $action);
+        $this->authorize('view', $event);
 
-        return view('actions.show')
-            ->with('title', $group->name . ' - ' . $action->name)
-            ->with('action', $action)
-            ->with('model', $action)
+        return view('calendarevents.show')
+            ->with('title', $group->name . ' - ' . $event->name)
+            ->with('event', $event)
+            ->with('model', $event)
             ->with('group', $group)
-            ->with('tab', 'action');
+            ->with('tab', 'calendarevent');
     }
 
     /**
@@ -352,27 +352,27 @@ class GroupActionController extends Controller
      *
      * @return Response
      */
-    public function edit(Request $request, Group $group, Action $action)
+    public function edit(Request $request, Group $group, CalendarEvent $event)
     {
-        $this->authorize('update', $action);
+        $this->authorize('update', $event);
 
         $listed_location = "other";
         foreach($group->getNamedLocations() as $key => $location) {
-            if ($action->location == $location) {
+            if ($event->location == $location) {
                 $listed_location = $key;
             }
         }
 
-        return view('actions.edit')
-            ->with('action', $action)
-            ->with('model', $action)
+        return view('calendarevents.edit')
+            ->with('event', $event)
+            ->with('model', $event)
             ->with('group', $group)
-            ->with('allowedTags', $action->getAllowedTags())
-            ->with('newTagsAllowed', $action->areNewTagsAllowed())
-            ->with('selectedTags', $action->getSelectedTags())
+            ->with('allowedTags', $event->getAllowedTags())
+            ->with('newTagsAllowed', $event->areNewTagsAllowed())
+            ->with('selectedTags', $event->getSelectedTags())
             ->with('listedLocation', $listed_location)
             ->with('listedLocations', $this->getListedLocations($group))
-            ->with('tab', 'action');
+            ->with('tab', 'calendarevent');
     }
 
     /**
@@ -382,46 +382,46 @@ class GroupActionController extends Controller
      *
      * @return Response
      */
-    public function update(Request $request, Group $group, Action $action)
+    public function update(Request $request, Group $group, CalendarEvent $event)
     {
-        $this->authorize('update', $action);
+        $this->authorize('update', $event);
 
-        $action->name = $request->input('name');
-        $action->body = $request->input('body');
+        $event->name = $request->input('name');
+        $event->body = $request->input('body');
 
-        $action->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('start_time'));
+        $event->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('start_time'));
 
         if ($request->has('stop_date') && $request->get('stop_date') != '') {
-            $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('stop_time'));
+            $event->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('stop_time'));
         } else {
-            $action->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
+            $event->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
         }
 
         // handle location
-        $old_location = $action->location;
+        $old_location = $event->location;
 	$listed_location = $request->input('listed_location');
 	if ($listed_location == 'other') $listed_location = "";
         if ($listed_location) {
             foreach($this->getListedLocations($group) as $key => $location) {
                 if ($key == $listed_location) {
-		    $action->location = $group->getNamedLocations()[$key];
+		    $event->location = $group->getNamedLocations()[$key];
                 }
             }
         }
         else if ($request->has('location')) {
             // Validate input
             try {
-                $action->location = $request->input('location');
+                $event->location = $request->input('location');
             } catch (\Exception $e) {
-            return redirect()->route('groups.actions.create', $action)
+            return redirect()->route('groups.calendarevents.create', $event)
               ->withErrors($e->getMessage() . '. Incorrect location')
               ->withInput();
             }
 	}
 
         // Geocode
-        if ($action->location <> $old_location) {
-            if (!$action->geocode()) {
+        if ($event->location <> $old_location) {
+            if (!$event->geocode()) {
                 flash(trans('messages.location_cannot_be_geocoded'));
             } else {
                 flash(trans('messages.ressource_geocoded_successfully'));
@@ -430,21 +430,21 @@ class GroupActionController extends Controller
 
         // handle tags
         if ($request->get('tags')) {
-            $action->tag($request->get('tags'));
+            $event->tag($request->get('tags'));
         } else {
-            $action->detag();
+            $event->detag();
         }
 
         // handle visibility
         if ($request->has('visibility')) {
-            $action->makePublic();
+            $event->makePublic();
         } else {
-            $action->makePrivate();
+            $event->makePrivate();
         }
 
         // handle cover
         if ($request->hasFile('cover')) {
-            if ($action->setCoverFromRequest($request)) {
+            if ($event->setCoverFromRequest($request)) {
                 flash(trans('Cover image has been updated, please reload to see the new cover'));
             } else {
                 flash(trans('Error adding a new cover'));
@@ -453,16 +453,16 @@ class GroupActionController extends Controller
             flash('no cover');
         }
 
-        if ($action->isInvalid()) {
+        if ($event->isInvalid()) {
             // Oops.
-            return redirect()->route('groups.actions.create', $group)
-                ->withErrors($action->getErrors())
+            return redirect()->route('groups.calendarevents.create', $group)
+                ->withErrors($event->getErrors())
                 ->withInput();
         }
 
-        $action->save();
+        $event->save();
 
-        return redirect()->route('groups.actions.show', [$action->group, $action]);
+        return redirect()->route('groups.calendarevents.show', [$event->group, $event]);
     }
 
     /**
@@ -472,13 +472,13 @@ class GroupActionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroyConfirm(Request $request, Group $group, Action $action)
+    public function destroyConfirm(Request $request, Group $group, CalendarEvent $event)
     {
-        $this->authorize('delete', $action);
+        $this->authorize('delete', $event);
 
-        if (Gate::allows('delete', $action)) {
-            return view('actions.delete')
-                ->with('action', $action)
+        if (Gate::allows('delete', $event)) {
+            return view('calendarevents.delete')
+                ->with('event', $event)
                 ->with('group', $group)
                 ->with('tab', 'discussions');
         } else {
@@ -493,25 +493,25 @@ class GroupActionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, Group $group, Action $action)
+    public function destroy(Request $request, Group $group, CalendarEvent $event)
     {
-        $this->authorize('delete', $action);
-        $action->delete();
+        $this->authorize('delete', $event);
+        $event->delete();
         flash(trans('messages.ressource_deleted_successfully'));
 
-        return redirect()->route('groups.actions.index', $group);
+        return redirect()->route('groups.calendarevents.index', $group);
     }
 
     /**
      * Show the revision history of the discussion.
      */
-    public function history(Group $group, Action $action)
+    public function history(Group $group, CalendarEvent $event)
     {
-        $this->authorize('history', $action);
+        $this->authorize('history', $event);
 
-        return view('actions.history')
+        return view('calendarevents.history')
             ->with('group', $group)
-            ->with('action', $action)
-            ->with('tab', 'action');
+            ->with('event', $event)
+            ->with('tab', 'event');
     }
 }

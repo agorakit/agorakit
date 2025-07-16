@@ -149,8 +149,8 @@ function linkTo($model)
         return route('groups.files.show', [$model->group, $model]);
     }
 
-    if ($model instanceof App\Action) {
-        return route('groups.actions.show', [$model->group, $model]);
+    if ($model instanceof App\CalendarEvent) {
+        return route('groups.calendarevents.show', [$model->group, $model]);
     }
 
     if ($model instanceof App\Comment) {

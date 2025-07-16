@@ -1,10 +1,10 @@
 @extends('app')
 @section('content')
 
-    <h1>{{ trans('messages.create_action') }}</h1>
+    <h1>{{ trans('messages.create_event') }}</h1>
 
     @if (!$group->exists)
-        {!! Form::open(['route' => 'actions.store', 'files' => true]) !!}
+        {!! Form::open(['route' => 'calendarevents.store', 'files' => true]) !!}
 
         <div class="form-group">
             {!! Form::label('group', trans('messages.group')) !!}
@@ -16,7 +16,7 @@
             </select>
         </div>
 
-        @include('actions.form')
+        @include('calendarevents.form')
 
         <div class="form-group">
             {!! Form::submit(trans('messages.create'), ['class' => 'btn btn-primary']) !!}
@@ -24,9 +24,9 @@
 
         {!! Form::close() !!}
     @else
-        {!! Form::model($action, ['action' => ['GroupActionController@store', $group], 'files' => true]) !!}
+        {!! Form::model($event, ['action' => ['GroupCalendarEventController@store', $group], 'files' => true]) !!}
 
-        @include('actions.form')
+        @include('calendarevents.form')
 
         <div class="form-group">
             {!! Form::submit(trans('messages.create'), ['class' => 'btn btn-primary']) !!}

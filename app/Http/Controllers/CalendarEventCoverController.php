@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Action;
+use App\CalendarEvent;
 use File;
 use Image;
 
@@ -10,7 +10,7 @@ use Image;
 Handle group cover image
 */
 
-class ActionCoverController extends Controller
+class CalendarEventCoverController extends Controller
 {
 
     public function __construct()
@@ -18,10 +18,10 @@ class ActionCoverController extends Controller
         $this->middleware('cache.headers:private,max-age=300;etag');
     }
 
-    public function show(Action $action, $size = 'medium')
+    public function show(CalendarEvent $event, $size = 'medium')
     {
-        if ($action->hasCover()) {
-            return $action->getCover($size);
+        if ($event->hasCover()) {
+            return $event->getCover($size);
         } else {
             abort(404);
         }

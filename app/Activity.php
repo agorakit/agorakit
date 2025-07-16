@@ -45,8 +45,8 @@ class Activity extends Model
             return 'file';
         }
 
-        if ($this->model instanceof Action) {
-            return 'action';
+        if ($this->model instanceof CalendarEvent) {
+            return 'calendarevent';
         }
 
         if ($this->model instanceof Comment) {
@@ -67,8 +67,8 @@ class Activity extends Model
             return route('groups.files.show', [$this->group, $this->model]);
         }
 
-        if ($this->model instanceof Action) {
-            return route('groups.actions.show', [$this->group, $this->model]);
+        if ($this->model instanceof CalendarEvent) {
+            return route('groups.calendarevents.show', [$this->group, $this->model]);
         }
 
         if ($this->model instanceof Comment) {

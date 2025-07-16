@@ -9,7 +9,7 @@ use App\User;
 use App\Group;
 use App\Discussion;
 use App\File;
-use App\Action;
+use App\CalendarEvent;
 use App\Tag;
 use Exception;
 
@@ -19,7 +19,7 @@ use Exception;
  * It means :
  * 
  * - a super admin can decide which tags are allowed on groups and users
- * - a group admin can decide which tags are allowed on discussions, files and actions
+ * - a group admin can decide which tags are allowed on discussions, files and events
  * - if no controlled tags are defined, any tag can be added (aka free tagging)
  * 
  */
@@ -53,7 +53,7 @@ trait HasControlledTags
             }
         }
 
-        if ($this instanceof Discussion || $this instanceof File || $this instanceof Action) {
+        if ($this instanceof Discussion || $this instanceof File || $this instanceof CalendarEvent) {
             if ($this->getAllowedTags()->count() > 0) {
                 return false;
             } else {
@@ -92,7 +92,7 @@ trait HasControlledTags
             }
         }
 
-        if ($this instanceof Discussion || $this instanceof File || $this instanceof Action) {
+        if ($this instanceof Discussion || $this instanceof File || $this instanceof CalendarEvent) {
             return $this->arrayToTags($this->group->getSetting('allowed_tags'));
         }
 
@@ -133,7 +133,7 @@ trait HasControlledTags
      */
     public function getTagsInUse()
     {
-        if ($this instanceof Discussion || $this instanceof File || $this instanceof Action) {
+        if ($this instanceof Discussion || $this instanceof File || $this instanceof CalendarEvent) {
 
             $models = collect();
             $tags = collect();
@@ -153,9 +153,9 @@ trait HasControlledTags
                         ->get();
                 }
 
-                if ($this instanceof Action) {
+                if ($this instanceof CalendarEvent) {
                     $models = $this->group
-                        ->actions()
+                        ->calendarevents()
                         ->with('tags')
                         ->get();
                 }

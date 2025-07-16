@@ -80,17 +80,17 @@
 
                 <tr>
                     <td>
-                        Can create actions
+                        Can create events
                     </td>
 
                     <td>
                         <div class="form-check">
-                            {!!Form::checkbox('member-create-action', 'yes', $member->contains('create-action'))!!}
+                            {!!Form::checkbox('member-create-calendarevent', 'yes', $member->contains('create-calendarevent'))!!}
                         </div>
                     </td>
                     <td>
                         <div class="form-check">
-                            {!!Form::checkbox('admin-create-action', 'yes', $admin->contains('create-action'), ['disabled'])!!}
+                            {!!Form::checkbox('admin-create-calendarevent', 'yes', $admin->contains('create-calendarevent'), ['disabled'])!!}
                         </div>
                     </td>
                 </tr>

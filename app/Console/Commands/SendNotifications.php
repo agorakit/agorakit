@@ -127,16 +127,16 @@ class SendNotifications extends Command
             // find new members since timestamp
             $users = $this->getNewMembersSince($user->id, $group->id, $membership->notified_at);
 
-            // find future actions until next 2 weeks, this is curently hardcoded... TODO use the mail sending interval to determine stop date
-            $actions = \App\Action::where('start', '>', Carbon::now()->toDateTimeString())
+            // find future events until next 2 weeks, this is curently hardcoded... TODO use the mail sending interval to determine stop date
+            $events = \App\CalendarEvent::where('start', '>', Carbon::now()->toDateTimeString())
                 ->where('stop', '<', Carbon::now()->addWeek()->addWeek())
                 ->where('group_id', '=', $group->id)
                 ->orderBy('start')
                 ->get();
 
-            // we only trigger mail sending if a new action has been **created** since last notification email.
-            // BUT we will send actions for the next two weeks in all cases, IF a mail must be sent
-            $actions_count = \App\Action::where('created_at', '>', $membership->notified_at)
+            // we only trigger mail sending if a new event has been **created** since last notification email.
+            // BUT we will send events for the next two weeks in all cases, IF a mail must be sent
+            $events_count = \App\CalendarEvent::where('created_at', '>', $membership->notified_at)
                 ->where('group_id', '=', $group->id)
                 ->count();
 
@@ -148,7 +148,7 @@ class SendNotifications extends Command
             // removed that : or count($users) > 0
             // because we don't want to be notified just because there is a new member
 
-            if (count($discussions) > 0 or count($files) > 0 or ($actions_count > 0)) {
+            if (count($discussions) > 0 or count($files) > 0 or ($events_count > 0)) {
                 $notification = new Notification();
 
                 $notification->user = $user;
@@ -158,7 +158,7 @@ class SendNotifications extends Command
 
                 $notification->files = $files;
                 $notification->users = $users;
-                $notification->actions = $actions;
+                $notification->calendarevents = $events;
                 $notification->last_notification = $last_notification;
 
                 Mail::to($user)->send($notification);
