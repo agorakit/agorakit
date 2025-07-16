@@ -73,7 +73,7 @@ class FeedController extends Controller
                 ->url(route('groups.calendarevents.show', [$event->group, $event]))
                 ->author($event->user->name)
                 ->pubDate($event->start->timestamp)
-                ->guid(route('groups.events.show', [$event->group, $event]), true)
+                ->guid(route('groups.calendarevents.show', [$event->group, $event]), true)
                 ->preferCdata(true) // By this, title and description become CDATA wrapped HTML.
                 ->appendTo($channel);
         }

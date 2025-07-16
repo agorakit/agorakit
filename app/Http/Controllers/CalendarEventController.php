@@ -103,8 +103,8 @@ class CalendarEventController extends Controller
             $event['location'] = $event->location_display();
             $event['start'] = $event->start->toIso8601String();
             $event['end'] = $event->stop->toIso8601String();
-            $event['url'] = route('groups.events.show', [$event->group, $event]);
-            $event['group_url'] = route('groups.events.index', [$event->group]);
+            $event['url'] = route('groups.calendarevents.show', [$event->group, $event]);
+            $event['group_url'] = route('groups.calendarevents.index', [$event->group]);
             $event['group_name'] = $event->group->name;
             $event['color'] = $event->group->color();
 

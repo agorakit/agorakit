@@ -2,25 +2,25 @@
 
 namespace App\Notifications;
 
-use App\Event;
+use App\CalendarEvent;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class UpcomingEvent extends Notification
+class UpcomingCalendarEvent extends Notification
 {
     use Queueable;
 
-    public Event $event;
+    public CalendarEvent $event;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Event $event)
+    public function __construct(CalendarEvent $event)
     {
-        $this->event = $event;
+        $this->calendarevent = $event;
     }
 
     /**
@@ -45,12 +45,12 @@ class UpcomingEvent extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage())
-                    ->subject('[' . $this->event->group->name . '] ' . __('You have an upcoming event') .  ': ' . $this->event->name)
-                    ->line(__('You have an upcoming event') .  ': ' . $this->event->name)
-                    ->line(__('Starts on : ') . $this->event->start->format('d/m/Y H:i'))
-                    ->line(__('Ends on : ') . $this->event->stop->format('d/m/Y H:i'))
-                    ->line(__('Description : ') . strip_tags($this->event->body))
-                    ->event(__('Show'), route('groups.calendarevents.show', [$this->event->group, $this->event]))
+                    ->subject('[' . $this->calendarevent->group->name . '] ' . __('You have an upcoming event') .  ': ' . $this->calendarevent->name)
+                    ->line(__('You have an upcoming event') .  ': ' . $this->calendarevent->name)
+                    ->line(__('Starts on : ') . $this->calendarevent->start->format('d/m/Y H:i'))
+                    ->line(__('Ends on : ') . $this->calendarevent->stop->format('d/m/Y H:i'))
+                    ->line(__('Description : ') . strip_tags($this->calendarevent->body))
+                    ->calendarevent(__('Show'), route('groups.calendarevents.show', [$this->calendarevent->group, $this->calendarevent]))
                     ->line(trans('messages.thank_you'));
     }
 
@@ -64,7 +64,7 @@ class UpcomingEvent extends Notification
     public function toArray($notifiable)
     {
         return [
-          'event' => $this->event->toArray(),
+          'calendarevent' => $this->calendarevent->toArray(),
         ];
     }
 }

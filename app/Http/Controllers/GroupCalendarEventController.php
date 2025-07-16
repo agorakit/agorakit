@@ -68,7 +68,7 @@ class GroupCalendarEventController extends Controller
             return view('calendarevents.index')
                 ->with('type', 'list')
                 ->with('title', $group->name . ' - ' . trans('messages.agenda'))
-                ->with('calendarevents', $events)
+                ->with('events', $events)
                 ->with('group', $group)
                 ->with('tab', 'calendarevent');
         }
@@ -116,8 +116,8 @@ class GroupCalendarEventController extends Controller
             $event['location'] = $event->location_display();
             $event['start'] = $event->start->toIso8601String();
             $event['end'] = $event->stop->toIso8601String();
-            $event['url'] = route('groups.events.show', [$event->group, $event]);
-            $event['group_url'] = route('groups.events.index', [$event->group]);
+            $event['url'] = route('groups.calendarevents.show', [$event->group, $event]);
+            $event['group_url'] = route('groups.calendarevents.index', [$event->group]);
             $event['group_name'] = $event->group->name;
             $event['color'] = $event->group->color();
 
@@ -196,7 +196,7 @@ class GroupCalendarEventController extends Controller
         $event->group()->associate($group);
 
         return view('calendarevents.create')
-            ->with('calendarevent', $event)
+            ->with('event', $event)
             ->with('model', $event)
             ->with('group', $group)
             ->with('allowedTags', $event->getTagsInUse())
@@ -339,7 +339,7 @@ class GroupCalendarEventController extends Controller
 
         return view('calendarevents.show')
             ->with('title', $group->name . ' - ' . $event->name)
-            ->with('calendarevent', $event)
+            ->with('event', $event)
             ->with('model', $event)
             ->with('group', $group)
             ->with('tab', 'calendarevent');
@@ -364,7 +364,7 @@ class GroupCalendarEventController extends Controller
         }
 
         return view('calendarevents.edit')
-            ->with('calendarevent', $event)
+            ->with('event', $event)
             ->with('model', $event)
             ->with('group', $group)
             ->with('allowedTags', $event->getAllowedTags())
@@ -478,7 +478,7 @@ class GroupCalendarEventController extends Controller
 
         if (Gate::allows('delete', $event)) {
             return view('calendarevents.delete')
-                ->with('calendarevent', $event)
+                ->with('event', $event)
                 ->with('group', $group)
                 ->with('tab', 'discussions');
         } else {
@@ -511,7 +511,7 @@ class GroupCalendarEventController extends Controller
 
         return view('calendarevents.history')
             ->with('group', $group)
-            ->with('calendarevent', $event)
+            ->with('event', $event)
             ->with('tab', 'event');
     }
 }
