@@ -21,6 +21,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\SendReminders::class,
         \App\Console\Commands\ExportGroup::class,
         \App\Console\Commands\ImportGroup::class,
+        \App\Console\Commands\EnableNotificationsForNewGroups::class,
     ];
 
     /**
@@ -44,6 +45,9 @@ class Kernel extends ConsoleKernel
         $schedule->command('agorakit:cleanupdatabase')
         ->daily();
 
+        $schedule->command('agorakit:enablenotificationsfornewgroups')
+        ->daily();
+      
         $schedule->command('agorakit:cleanupdisk')
         ->hourly();
     }

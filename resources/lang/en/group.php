@@ -11,6 +11,7 @@ return [
     'create_group_discussion' => 'Create group discussion',
     'create_group_title' => 'Create a new group',
     'description' => 'Group description',
+    'enable_notifications' => 'Enable Notifications',
     'features' => 'Manage features',
     'features_help' => 'Enable or disable features of your group',
     'group_type_help' => 'Choose the group type you want. An open group has the content public and anyone can join it. A closed group is invite only and the content is only visible to it\'s members. A secret group is not even discoverable by non members.',

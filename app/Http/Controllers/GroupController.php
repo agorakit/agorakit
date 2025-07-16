@@ -167,6 +167,7 @@ class GroupController extends Controller
     {
         $this->authorize('create', Group::class);
         $group = new Group;
+        $group->notifications_enabled = true;
 
         return view('groups.create')
             ->with('group', $group)
@@ -189,6 +190,7 @@ class GroupController extends Controller
 
         $group->name = $request->input('name');
         $group->body = $request->input('body');
+        $group->notifications_enabled = $request->input('notifications');
 
         if ($request->user()->isAdmin()) {
             $group->status = $request->input('status');
@@ -303,6 +305,7 @@ class GroupController extends Controller
 
         $group->name = $request->input('name');
         $group->body = $request->input('body');
+        $group->notifications_enabled = $request->input('notifications');
 
         if (Gate::allows('changeGroupStatus', $group)) {
             $group->status = $request->input('status');
