@@ -96,7 +96,7 @@ class TagController extends Controller
             ->with('discussions', $discussions)
             ->with('files', $files)
             ->with('users', $users)
-            ->with('calendarevents', $events)
+            ->with('events', $events)
             ->with('groups', $groups)
             ->with('tag', $tag)
             ->with('title', $tag->name);

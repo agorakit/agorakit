@@ -43,7 +43,7 @@ class UndoController extends Controller
         ->with('discussions', $discussions)
         ->with('comments', $comments)
         ->with('files', $files)
-        ->with('calendarevents', $events);
+        ->with('events', $events);
     }
 
     public function restore($type, $id)

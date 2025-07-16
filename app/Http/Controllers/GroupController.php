@@ -151,7 +151,7 @@ class GroupController extends Controller
             ->with('title', $group->name)
             ->with('group', $group)
             ->with('discussions', $discussions)
-            ->with('calendarevents', $events)
+            ->with('events', $events)
             ->with('files', $files)
             ->with('admins', $group->admins()->get())
             ->with('group_inbox', $group_inbox)
