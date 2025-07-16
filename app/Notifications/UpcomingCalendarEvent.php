@@ -2,23 +2,23 @@
 
 namespace App\Notifications;
 
-use App\Event;
+use App\CalendarEvent;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class UpcomingEvent extends Notification
+class UpcomingCalendarEvent extends Notification
 {
     use Queueable;
 
-    public Event $event;
+    public CalendarEvent $event;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Event $event)
+    public function __construct(CalendarEvent $event)
     {
         $this->event = $event;
     }
@@ -50,7 +50,7 @@ class UpcomingEvent extends Notification
                     ->line(__('Starts on : ') . $this->event->start->format('d/m/Y H:i'))
                     ->line(__('Ends on : ') . $this->event->stop->format('d/m/Y H:i'))
                     ->line(__('Description : ') . strip_tags($this->event->body))
-                    ->event(__('Show'), route('groups.calendarevents.show', [$this->event->group, $this->event]))
+                    ->action(__('Show'), route('groups.calendarevents.show', [$this->event->group, $this->event]))
                     ->line(trans('messages.thank_you'));
     }
 
