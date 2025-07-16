@@ -252,17 +252,17 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('calendarevents/create', 'GroupCalendarEventController@store')->name('.calendarevents.store');
         Route::get('calendarevents/json', 'GroupCalendarEventController@indexJson')->name('.calendarevents.index.json');
         Route::get('calendarevents/ical', 'GroupIcalController@index')->name('.calendarevents.index.ical');
-        Route::get('calendarevents/{calendarevent}', 'GroupCalendarEventController@show')->name('.calendarevents.show');
-        Route::get('calendarevents/{calendarevent}/edit', 'GroupCalendarEventController@edit')->name('.calendarevents.edit');
-        Route::post('calendarevents/{calendarevent}', 'GroupCalendarEventController@update')->name('.calendarevents.update');
-        Route::get('calendarevents/{calendarevent}/delete', 'GroupCalendarEventController@destroyConfirm')->name('.calendarevents.deleteconfirm');
-        Route::delete('calendarevents/{calendarevent}/delete', 'GroupCalendarEventController@destroy')->name('.calendarevents.delete');
-        Route::get('calendarevents/{calendarevent}/history', 'GroupCalendarEventController@history')->name('.calendarevents.history');
+        Route::get('calendarevents/{event}', 'GroupCalendarEventController@show')->name('.calendarevents.show');
+        Route::get('calendarevents/{event}/edit', 'GroupCalendarEventController@edit')->name('.calendarevents.edit');
+        Route::post('calendarevents/{event}', 'GroupCalendarEventController@update')->name('.calendarevents.update');
+        Route::get('calendarevents/{event}/delete', 'GroupCalendarEventController@destroyConfirm')->name('.calendarevents.deleteconfirm');
+        Route::delete('calendarevents/{event}/delete', 'GroupCalendarEventController@destroy')->name('.calendarevents.delete');
+        Route::get('calendarevents/{event}/history', 'GroupCalendarEventController@history')->name('.calendarevents.history');
 
         // Event participation
-        Route::get('calendarevents/{calendarevent}/participation/set/{status}', 'ParticipationController@set')->name('.calendarevents.participation.set');
-        Route::get('calendarevents/{calendarevent}/participation', 'ParticipationController@edit')->name('.calendarevents.participation');
-        Route::post('calendarevents/{calendarevent}/participation', 'ParticipationController@update')->name('.calendarevents.participation.update');
+        Route::get('calendarevents/{event}/participation/set/{status}', 'ParticipationController@set')->name('.calendarevents.participation.set');
+        Route::get('calendarevents/{event}/participation', 'ParticipationController@edit')->name('.calendarevents.participation');
+        Route::post('calendarevents/{event}/participation', 'ParticipationController@update')->name('.calendarevents.participation.update');
 
         // Files
         Route::get('files', 'GroupFileController@index')->name('.files.index');
