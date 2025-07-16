@@ -14,7 +14,7 @@
 
     @if ($events->count() > 0)
         <div class="actions mb-4">
-            @include('calendarevents.list', ['calendarevents' => $events])
+            @include('calendarevents.list', ['events' => $events])
         </div>
         {{ $events->render() }}
     @else

@@ -38,7 +38,7 @@ class CalendarEvent extends Model
 
     protected $with = ['attending', 'notAttending']; // always load participants with events
 
-    protected $table = 'calendarevents';
+    protected $table = 'calendar_events';
     public $timestamps = true;
     protected $casts = [
         'user_id' => 'integer',

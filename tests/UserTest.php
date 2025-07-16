@@ -126,7 +126,7 @@ class UserTest extends Tests\BrowserKitTestCase
             ->type('12:00', 'start_time')
             ->type('13:00', 'stop_time')
             ->press('Create')
-            ->seeInDatabase('calendarevents', ['name' => 'Test event'])
+            ->seeInDatabase('calendar_events', ['name' => 'Test event'])
             ->see(trans('messages.create_event'));
     }
 

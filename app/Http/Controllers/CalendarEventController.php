@@ -46,7 +46,7 @@ class CalendarEventController extends Controller
             return view('dashboard.agenda-list')
                 ->with('title', trans('messages.agenda'))
                 ->with('tab', 'calendarevents')
-                ->with('calendarevents', $events);
+                ->with('events', $events);
         }
 
         return view('dashboard.agenda')

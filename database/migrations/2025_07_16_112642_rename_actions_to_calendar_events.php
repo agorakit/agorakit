@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('action_user', function (Blueprint $table) {
-          $table->renameColumn('action_id', 'calendarevent_id');
+          $table->renameColumn('action_id', 'calendar_event_id');
         });
-        Schema::rename('action_user', 'calendarevent_user');
-        Schema::rename('actions', 'calendarevents');
+        Schema::rename('action_user', 'calendar_event_user');
+        Schema::rename('actions', 'calendar_events');
     }
 
     /**
@@ -23,10 +23,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('calendarevent_user', function (Blueprint $table) {
-          $table->renameColumn('calendarevent_id', 'action_id');
+        Schema::table('calendar_event_user', function (Blueprint $table) {
+          $table->renameColumn('calendar_event_id', 'action_id');
         });
-        Schema::rename('calendarevent_user', 'action_user');
-        Schema::rename('calendarevents', 'actions');
+        Schema::rename('calendar_event_user', 'action_user');
+        Schema::rename('calendar_events', 'actions');
     }
 };
