@@ -21,7 +21,7 @@ class ParticipationController extends Controller
 
         session()->put('url.intended', URL::previous());
 
-        $participation = Participation::firstOrNew(['user_id' => $request->user()->id, 'calendarevent_id' => $event->id]);
+        $participation = Participation::firstOrNew(['user_id' => $request->user()->id, 'calendar_event_id' => $event->id]);
 
         return view('participation.edit')
             ->with('participation', $participation);
@@ -31,7 +31,7 @@ class ParticipationController extends Controller
     {
         $this->authorize('participate', $event);
 
-        $rsvp = Participation::firstOrNew(['user_id' => $request->user()->id, 'calendarevent_id' => $event->id]);
+        $rsvp = Participation::firstOrNew(['user_id' => $request->user()->id, 'calendar_event_id' => $event->id]);
         $rsvp->notification = $request->get('notification');
         $rsvp->status = $request->get('participation');
         $rsvp->save();
@@ -46,7 +46,7 @@ class ParticipationController extends Controller
     public function set(Request $request, Group $group, CalendarEvent $event, $status)
     {
         $this->authorize('participate', $event);
-        $rsvp = Participation::firstOrNew(['user_id' => $request->user()->id, 'calendarevent_id' => $event->id]);
+        $rsvp = Participation::firstOrNew(['user_id' => $request->user()->id, 'calendar_event_id' => $event->id]);
         //$rsvp->notification = $request->get('notification');
         
         if ($status == 'yes') {

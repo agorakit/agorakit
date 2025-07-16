@@ -302,7 +302,7 @@ class User extends Authenticatable
 
     public function isAttending(CalendarEvent $event)
     {
-        $participation = Participation::firstOrNew(['user_id' => $this->id, 'calendarevent_id' => $event->id]);
+        $participation = Participation::firstOrNew(['user_id' => $this->id, 'calendar_event_id' => $event->id]);
         if ($participation->status == Participation::PARTICIPATE && $participation->exists) {
             return true;
         } else {
@@ -313,7 +313,7 @@ class User extends Authenticatable
 
     public function isNotAttending(CalendarEvent $event)
     {
-        $participation = Participation::firstOrNew(['user_id' => $this->id, 'calendarevent_id' => $event->id]);
+        $participation = Participation::firstOrNew(['user_id' => $this->id, 'calendar_event_id' => $event->id]);
         if ($participation->status == Participation::WONT_PARTICIPATE) {
             return true;
         } else {
@@ -323,7 +323,7 @@ class User extends Authenticatable
 
     public function isMaybeAttending(CalendarEvent $event)
     {
-        $participation = Participation::firstOrNew(['user_id' => $this->id, 'calendarevent_id' => $event->id]);
+        $participation = Participation::firstOrNew(['user_id' => $this->id, 'calendar_event_id' => $event->id]);
         if ($participation->status == Participation::UNDECIDED) {
             return true;
         } else {
@@ -334,7 +334,7 @@ class User extends Authenticatable
 
     public function participation(CalendarEvent $event)
     {
-        return Participation::firstOrNew(['user_id' => $this->id, 'calendarevent_id' => $event->id]);
+        return Participation::firstOrNew(['user_id' => $this->id, 'calendar_event_id' => $event->id]);
     }
 
     /**

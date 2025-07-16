@@ -25,14 +25,14 @@ class Participation extends Model
 
     protected $rules = [
         'user_id'   => 'required|exists:users,id',
-        'calendarevent_id' => 'required|exists:calendarevents,id',
+        'calendar_event_id' => 'required|exists:calendar_events,id',
     ];
 
     protected $fillable = [
-        'user_id', 'calendarevent_id', 'notification', 'status'
+        'user_id', 'calendar_event_id', 'notification', 'status'
     ];
 
-    protected $table = 'calendarevent_user';
+    protected $table = 'calendar_event_user';
     public $timestamps = true;
 
     public function calendarevent()

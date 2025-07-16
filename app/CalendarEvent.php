@@ -63,9 +63,9 @@ class CalendarEvent extends Model
         * @var array
         */
         'columns' => [
-            'calendarevents.name'    => 10,
-            'calendarevents.body'    => 10,
-            'calendarevents.location' => 2,
+            'calendar_events.name'    => 10,
+            'calendar_events.body'    => 10,
+            'calendar_events.location' => 2,
         ],
     ];
 
