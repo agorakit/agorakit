@@ -37,9 +37,9 @@ class Notification extends Mailable
     public function build()
     {
         if ($this->user->getPreference('locale')) {
-            \Agorakit::setLocale($this->user->getPreference('locale'));
+            \App::setLocale($this->user->getPreference('locale'));
         } else {
-            \Agorakit::setLocale(config('app.locale'));
+            \App::setLocale(config('app.locale'));
         }
 
         $message = $this->markdown('emails.notification')

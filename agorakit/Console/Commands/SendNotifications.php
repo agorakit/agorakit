@@ -103,7 +103,7 @@ class SendNotifications extends Command
 
     public function sendNotificationEmail(Group $group, User $user)
     {
-        \Agorakit::setLocale($user->preferredLocale()); // use user's locale from preferences
+        \App::setLocale($user->preferredLocale()); // use user's locale from preferences
 
         // Establish timestamp for notifications from membership data (when was an email sent for the last time?)
         $membership = \Agorakit\Membership::where('user_id', '=', $user->id)
