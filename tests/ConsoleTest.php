@@ -3,10 +3,10 @@
 namespace Tests;
 
 
-use App\Group;
-use App\User;
-use App\File;
-use App\Console\Kernel;
+use Agorakit\Group;
+use Agorakit\User;
+use Agorakit\File;
+use Agorakit\Console\Kernel;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
 use Storage;

@@ -1,6 +1,6 @@
 <?php
 
-use App\Group;
+use Agorakit\Group;
 use Illuminate\Http\UploadedFile;
 
 class FileUploadTest extends Tests\BrowserKitTestCase
@@ -37,7 +37,7 @@ class FileUploadTest extends Tests\BrowserKitTestCase
 
     public function testGroupCreation()
     {
-        $user = App\User::where('email', 'admin@agorakit.org')->first();
+        $user = Agorakit\User::where('email', 'admin@agorakit.org')->first();
 
         $user->confirmEmail();
 
@@ -52,8 +52,8 @@ class FileUploadTest extends Tests\BrowserKitTestCase
 
     public function testFolderCreation()
     {
-        $user = App\User::where('email', 'admin@agorakit.org')->first();
-        $group = App\Group::where('name', 'File upload test group')->firstOrFail();
+        $user = Agorakit\User::where('email', 'admin@agorakit.org')->first();
+        $group = Agorakit\Group::where('name', 'File upload test group')->firstOrFail();
 
         $this->actingAs($user)
           ->visit('/groups/' . $group->id . '/files/createfolder')
@@ -65,8 +65,8 @@ class FileUploadTest extends Tests\BrowserKitTestCase
 
     public function testFileUpload()
     {
-        $user = App\User::where('email', 'admin@agorakit.org')->first();
-        $group = App\Group::where('name', 'File upload test group')->firstOrFail();
+        $user = Agorakit\User::where('email', 'admin@agorakit.org')->first();
+        $group = Agorakit\Group::where('name', 'File upload test group')->firstOrFail();
 
         $file = UploadedFile::fake()->image('avatar.jpg');
         $pathname = stream_get_meta_data($file->tempFile)['uri'];

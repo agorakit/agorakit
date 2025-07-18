@@ -1,6 +1,6 @@
 <?php
 
-use App\Group;
+use Agorakit\Group;
 
 class ActionTest extends Tests\BrowserKitTestCase
 {
@@ -49,7 +49,7 @@ class ActionTest extends Tests\BrowserKitTestCase
 
     public function testGroupCreation()
     {
-        $user = App\User::where('email', 'admin@agorakit.org')->first();
+        $user = Agorakit\User::where('email', 'admin@agorakit.org')->first();
 
         $user->confirmEmail();
 
@@ -65,9 +65,9 @@ class ActionTest extends Tests\BrowserKitTestCase
 
     public function testActionWithDefiniteEndCreation()
     {
-        $user = App\User::where('email', 'admin@agorakit.org')->first();
+        $user = Agorakit\User::where('email', 'admin@agorakit.org')->first();
 
-        $group = App\Group::where('name', 'Action test group')->first();
+        $group = Agorakit\Group::where('name', 'Action test group')->first();
 
         $this->actingAs($user)
             ->visit('/groups/' . $group->id . '/actions/create')
@@ -90,9 +90,9 @@ class ActionTest extends Tests\BrowserKitTestCase
 
     public function testActionWithWrongStopTimeCreation()
     {
-        $user = App\User::where('email', 'admin@agorakit.org')->first();
+        $user = Agorakit\User::where('email', 'admin@agorakit.org')->first();
 
-        $group = App\Group::where('name', 'Action test group')->first();
+        $group = Agorakit\Group::where('name', 'Action test group')->first();
 
         $this->actingAs($user)
             ->visit('/groups/' . $group->id . '/actions/create')
@@ -111,9 +111,9 @@ class ActionTest extends Tests\BrowserKitTestCase
 
     public function testActionWithoutStopDateCreation()
     {
-        $user = App\User::where('email', 'admin@agorakit.org')->first();
+        $user = Agorakit\User::where('email', 'admin@agorakit.org')->first();
 
-        $group = App\Group::where('name', 'Action test group')->first();
+        $group = Agorakit\Group::where('name', 'Action test group')->first();
 
         $this->actingAs($user)
             ->visit('/groups/' . $group->id . '/actions/create')
@@ -135,9 +135,9 @@ class ActionTest extends Tests\BrowserKitTestCase
 
     public function testActionWithoutStopTimeCreation()
     {
-        $user = App\User::where('email', 'admin@agorakit.org')->first();
+        $user = Agorakit\User::where('email', 'admin@agorakit.org')->first();
 
-        $group = App\Group::where('name', 'Action test group')->first();
+        $group = Agorakit\Group::where('name', 'Action test group')->first();
 
         $this->actingAs($user)
             ->visit('/groups/' . $group->id . '/actions/create')
@@ -159,9 +159,9 @@ class ActionTest extends Tests\BrowserKitTestCase
 
     public function testActionWithUnknownEnd()
     {
-        $user = App\User::where('email', 'admin@agorakit.org')->first();
+        $user = Agorakit\User::where('email', 'admin@agorakit.org')->first();
 
-        $group = App\Group::where('name', 'Action test group')->first();
+        $group = Agorakit\Group::where('name', 'Action test group')->first();
 
         $this->actingAs($user)
             ->visit('/groups/' . $group->id . '/actions/create')
@@ -180,9 +180,9 @@ class ActionTest extends Tests\BrowserKitTestCase
 
     public function testActionWithLocationName()
     {
-        $user = App\User::where('email', 'admin@agorakit.org')->first();
+        $user = Agorakit\User::where('email', 'admin@agorakit.org')->first();
 
-        $group = App\Group::where('name', 'Action test group')->first();
+        $group = Agorakit\Group::where('name', 'Action test group')->first();
 
         $this->actingAs($user)
             ->visit('/groups/' . $group->id . '/actions/create')
@@ -202,9 +202,9 @@ class ActionTest extends Tests\BrowserKitTestCase
 
     public function testActionUsingLocationName()
     {
-        $user = App\User::where('email', 'admin@agorakit.org')->first();
+        $user = Agorakit\User::where('email', 'admin@agorakit.org')->first();
 
-        $group = App\Group::where('name', 'Action test group')->first();
+        $group = Agorakit\Group::where('name', 'Action test group')->first();
 
         $this->actingAs($user)
             ->visit('/groups/' . $group->id . '/actions/create')

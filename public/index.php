@@ -63,7 +63,7 @@ $response = $kernel->handle(
 */
 
 $response = $kernel->handle(
-    $request = App\Http\Request::capture()
+    $request = Agorakit\Http\Request::capture()
 );
 
 $response->send();

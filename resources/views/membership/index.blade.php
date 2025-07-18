@@ -58,44 +58,44 @@
 
                         <td data-order="{{ $membership->membership }}">
 
-                            @if ($membership->membership == \App\Membership::ADMIN)
+                            @if ($membership->membership == \Agorakit\Membership::ADMIN)
                                 <span class="tag text-bg-warning " title="@lang('This member is admin of the group and manages it')">
                                     {{ trans('membership.admin') }}
                                 </span>
                             @endif
-                            @if ($membership->membership == \App\Membership::MEMBER)
+                            @if ($membership->membership == \Agorakit\Membership::MEMBER)
                                 <span class="tag text-bg-primary" title="@lang('Regular member of the group')">
                                     {{ trans('membership.member') }}
                                 </span>
                             @endif
-                            @if ($membership->membership == \App\Membership::CANDIDATE)
+                            @if ($membership->membership == \Agorakit\Membership::CANDIDATE)
                                 <span class="tag text-bg-secondary" title="@lang('This user asked to be part of the group but has not yet been accepted')">
                                     {{ trans('membership.candidate') }}
                                 </span>
                             @endif
-                            @if ($membership->membership == \App\Membership::INVITED)
+                            @if ($membership->membership == \Agorakit\Membership::INVITED)
                                 <span class="tag text-bg-success" title="@lang('This user has been invited to the group but did not accept yet')">
                                     {{ trans('membership.invited') }}
                                 </span>
                             @endif
 
-                            @if ($membership->membership == \App\Membership::DECLINED)
+                            @if ($membership->membership == \Agorakit\Membership::DECLINED)
                                 <span class="tag text-bg-dark " title="@lang('This member declined the invitagion the group')">
                                     {{ trans('membership.declined') }}
                                 </span>
                             @endif
 
-                            @if ($membership->membership == \App\Membership::UNREGISTERED)
+                            @if ($membership->membership == \Agorakit\Membership::UNREGISTERED)
                                 <span class="tag text-bg-dark" title="@lang('This member left the group')">
                                     {{ trans('membership.unregistered') }}
                                 </span>
                             @endif
-                            @if ($membership->membership == \App\Membership::REMOVED)
+                            @if ($membership->membership == \Agorakit\Membership::REMOVED)
                                 <span class="tag text-bg-dark" title="@lang('This member has been removed from the group')">
                                     {{ trans('membership.removed') }}
                                 </span>
                             @endif
-                            @if ($membership->membership == \App\Membership::BLACKLISTED)
+                            @if ($membership->membership == \Agorakit\Membership::BLACKLISTED)
                                 <span class="tag text-bg-dark" title="@lang('This member has been blacklisted')">
                                     {{ trans('membership.blacklisted') }}
                                 </span>

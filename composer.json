@@ -83,15 +83,15 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/"
+            "Agorakit\\": "agorakit/"
         },
         "classmap": [
             "database/seeds",
             "database/factories"
         ],
         "files": [
-            "app/Helpers/Functions.php",
-            "app/Helpers/Filters.php"
+            "agorakit/Helpers/Functions.php",
+            "agorakit/Helpers/Filters.php"
         ]
     },
     "autoload-dev": {

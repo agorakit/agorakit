@@ -80,7 +80,7 @@
                 </a>
             </li>
 
-            @can('create', App\User::class)
+            @can('create', Agorakit\User::class)
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('register') }}" up-layer="new">
                         {{ trans('messages.register') }}

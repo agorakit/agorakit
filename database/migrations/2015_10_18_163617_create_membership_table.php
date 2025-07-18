@@ -22,7 +22,7 @@ class CreateMembershipTable extends Migration
 
             /*
             Membership type
-            Look in  \App\Membership constants for help
+            Look in  \Agorakit\Membership constants for help
             */
             $table->tinyInteger('membership')->default(0);
 
