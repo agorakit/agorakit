@@ -166,10 +166,10 @@ return [
         /*
         * Application Service Providers...
         */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        Agorakit\Providers\AgorakitServiceProvider::class,
+        Agorakit\Providers\AuthServiceProvider::class,
+        Agorakit\Providers\EventServiceProvider::class,
+        Agorakit\Providers\RouteServiceProvider::class,
 
     ],
 
@@ -193,7 +193,7 @@ return [
         'Bus'          => Illuminate\Support\Facades\Bus::class,
         'Cache'        => Illuminate\Support\Facades\Cache::class,
         'Config'       => Illuminate\Support\Facades\Config::class,
-        'Context'      => App\Facades\Context::class,
+        'Context'      => Agorakit\Facades\Context::class,
         'Cookie'       => Illuminate\Support\Facades\Cookie::class,
         'Crypt'        => Illuminate\Support\Facades\Crypt::class,
         'DB'           => Illuminate\Support\Facades\DB::class,
