@@ -4,8 +4,8 @@ use Carbon\Carbon;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 
-use App\Setting;
-use App\Participation;
+use Agorakit\Setting;
+use Agorakit\Participation;
 
 class DatabaseSeeder extends Seeder
 {
@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->delete();
 
         // first created user is automagically admin
-        $admin = App\User::create([
+        $admin = Agorakit\User::create([
             'email'    => 'admin@agorakit.org',
             'password' => bcrypt('123456789'),
             'body'     => $faker->text,
@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
         }
 
         // a second normal user
-        $normal_user = App\User::create([
+        $normal_user = Agorakit\User::create([
             'email'    => 'newbie@agorakit.org',
             'password' => bcrypt('123456789'),
             'body'     => $faker->text,
@@ -54,7 +54,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         for ($i = 1; $i <= 50; $i++) {
-            $user = App\User::create([
+            $user = Agorakit\User::create([
                 'email'    => $faker->safeEmail,
                 'password' => bcrypt('secret'),
                 'name'     => $faker->name,
@@ -69,7 +69,7 @@ class DatabaseSeeder extends Seeder
 
         // create 10 groups
         for ($i = 1; $i <= 10; $i++) {
-            $group = App\Group::create([
+            $group = Agorakit\Group::create([
                 'name' => $faker->city . '\'s user group',
                 'body' => $faker->text,
             ]);
@@ -85,8 +85,8 @@ class DatabaseSeeder extends Seeder
 
             // add members to the group
             for ($j = 1; $j <= $faker->numberBetween(5, 20); $j++) {
-                $membership = \App\Membership::firstOrNew(['user_id' => App\User::orderByRaw('RAND()')->first()->id, 'group_id' => $group->id]);
-                $membership->membership = \App\Membership::MEMBER;
+                $membership = \Agorakit\Membership::firstOrNew(['user_id' => Agorakit\User::orderByRaw('RAND()')->first()->id, 'group_id' => $group->id]);
+                $membership->membership = \Agorakit\Membership::MEMBER;
                 $membership->notification_interval = 600;
 
                 // we prented the user has been already notified once, now. The first mail sent will be at the choosen interval from now on.
@@ -96,13 +96,13 @@ class DatabaseSeeder extends Seeder
 
             // add discussions to each group
             for ($k = 1; $k <= $faker->numberBetween(5, 20); $k++) {
-                $discussion = App\Discussion::create([
+                $discussion = Agorakit\Discussion::create([
                     'name' => $faker->city,
                     'body' => $faker->text,
                 ]);
                 // attach one random author & group to each discussion
-                $discussion->user_id = App\User::orderByRaw('RAND()')->first()->id;
-                $discussion->group_id = App\Group::orderByRaw('RAND()')->first()->id;
+                $discussion->user_id = Agorakit\User::orderByRaw('RAND()')->first()->id;
+                $discussion->group_id = Agorakit\Group::orderByRaw('RAND()')->first()->id;
                 $discussion->save();
 
                 $discussion->tag($this->tags());
@@ -110,9 +110,9 @@ class DatabaseSeeder extends Seeder
                 // Add comments to each discussion
 
                 for ($l = 1; $l <= $faker->numberBetween(5, 20); $l++) {
-                    $comment = new \App\Comment();
+                    $comment = new \Agorakit\Comment();
                     $comment->body = $faker->text;
-                    $comment->user_id = App\User::orderByRaw('RAND()')->first()->id;
+                    $comment->user_id = Agorakit\User::orderByRaw('RAND()')->first()->id;
                     $discussion->comments()->save($comment);
                 }
             }
@@ -120,7 +120,7 @@ class DatabaseSeeder extends Seeder
             // add actions to each group
             for ($m = 0; $m <= $faker->numberBetween(5, 20); $m++) {
                 $start = $faker->dateTimeThisMonth('+2 months');
-                $action = App\Action::create([
+                $action = Agorakit\Action::create([
                     'name' => $faker->sentence(5),
                     'body' => $faker->text,
                     'start'    => $start,
@@ -128,8 +128,8 @@ class DatabaseSeeder extends Seeder
                     'location' => $faker->city,
                 ]);
                 // attach one random author & group to each action
-                $action->user_id = App\User::orderByRaw('RAND()')->first()->id;
-                $action->group_id = App\Group::orderByRaw('RAND()')->first()->id;
+                $action->user_id = Agorakit\User::orderByRaw('RAND()')->first()->id;
+                $action->group_id = Agorakit\Group::orderByRaw('RAND()')->first()->id;
                 if ($action->isInvalid()) {
                     dd($action->getErrors());
                 }
@@ -144,7 +144,7 @@ class DatabaseSeeder extends Seeder
                 for ($pp = 1; $pp <= $faker->numberBetween(1, 20); $pp++) {
                     // add participants to each action
                     $rsvp = Participation::firstOrCreate([
-                        'user_id' => App\User::orderByRaw('RAND()')->first()->id,
+                        'user_id' => Agorakit\User::orderByRaw('RAND()')->first()->id,
                         'action_id' => $action->id
                     ]);
 
@@ -164,14 +164,14 @@ class DatabaseSeeder extends Seeder
             // add files to each group
             for ($n = 1; $n <= $faker->numberBetween(5, 20); $n++) {
                 $start = $faker->dateTimeThisMonth('+2 months');
-                $file = App\File::create([
+                $file = Agorakit\File::create([
                     'name' => $faker->sentence(5),
                     'path'    => $faker->url,
                     'item_type' => 2
                 ]);
                 // attach one random author & group to each action
-                $file->user_id = App\User::orderByRaw('RAND()')->first()->id;
-                $file->group_id = App\Group::orderByRaw('RAND()')->first()->id;
+                $file->user_id = Agorakit\User::orderByRaw('RAND()')->first()->id;
+                $file->group_id = Agorakit\Group::orderByRaw('RAND()')->first()->id;
                 if ($file->isInvalid()) {
                     dd($file->getErrors());
                 }
