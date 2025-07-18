@@ -4,8 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-use App\User;
-use App\Group;
+use Agorakit\User;
+use Agorakit\Group;
 
 class Convertinvitestomemberships extends Migration
 {
@@ -16,7 +16,7 @@ class Convertinvitestomemberships extends Migration
      */
     public function up()
     {
-        foreach (\App\Invite::whereNull('claimed_at')->get() as $invite) {
+        foreach (\Agorakit\Invite::whereNull('claimed_at')->get() as $invite) {
 
             //$this->info('converting invite to new membership');
 
@@ -31,8 +31,8 @@ class Convertinvitestomemberships extends Migration
                 }
                 else
                 {
-                    $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $group->id]);
-                    $membership->membership = \App\Membership::INVITED;
+                    $membership = \Agorakit\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $group->id]);
+                    $membership->membership = \Agorakit\Membership::INVITED;
                     $membership->save();
 
                     //$this->line('User added to membership invite : '.$invite->email);
