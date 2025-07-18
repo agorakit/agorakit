@@ -37,35 +37,35 @@
                     </td>
 
                     <td>
-                        @if ($message->status == App\Message::POSTED)
+                        @if ($message->status == Agorakit\Message::POSTED)
                             Posted
                         @endif
 
-                        @if ($message->status == App\Message::NEEDS_VALIDATION)
+                        @if ($message->status == Agorakit\Message::NEEDS_VALIDATION)
                             Needs validation
                         @endif
 
-                        @if ($message->status == App\Message::CREATED)
+                        @if ($message->status == Agorakit\Message::CREATED)
                             Created
                         @endif
 
-                        @if ($message->status == App\Message::BOUNCED)
+                        @if ($message->status == Agorakit\Message::BOUNCED)
                             Bounced
                         @endif
 
-                        @if ($message->status == App\Message::INVALID)
+                        @if ($message->status == Agorakit\Message::INVALID)
                             Invalid
                         @endif
 
-                        @if ($message->status == App\Message::AUTOMATED)
+                        @if ($message->status == Agorakit\Message::AUTOMATED)
                             Automated
                         @endif
 
-                        @if ($message->status == App\Message::ERROR)
+                        @if ($message->status == Agorakit\Message::ERROR)
                             Error
                         @endif
 
-                        @if ($message->status == App\Message::SPAM)
+                        @if ($message->status == Agorakit\Message::SPAM)
                             Spam
                         @endif
 

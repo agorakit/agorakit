@@ -28,11 +28,11 @@
             </td>
 
             <td>
-              @if ($notification->type == 'App\Notifications\GroupCreated')
+              @if ($notification->type == 'Agorakit\Notifications\GroupCreated')
                 @include('notifications.group_created')
               @endif
 
-              @if ($notification->type == 'App\Notifications\MentionedUser')
+              @if ($notification->type == 'Agorakit\Notifications\MentionedUser')
                 @include('notifications.mentioned_user')
               @endif
 

@@ -7,7 +7,7 @@
                 {{ trans('messages.login') }}
             </a>
 
-            @can('create', App\User::class)
+            @can('create', Agorakit\User::class)
                 <a class="btn btn-primary" href="{{ url('register') }}" up-layer="new">
                     {{ trans('messages.register') }}
                 </a>
