@@ -72,7 +72,7 @@ class Setting extends Model
         if ($locale) {
             $this->lang = $locale;
         } else {
-            $this->lang = \Agorakit::getLocale();
+            $this->lang = \App::getLocale();
         }
 
         return $this;
