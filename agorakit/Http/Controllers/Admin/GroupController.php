@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Agorakit\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Group;
+use Agorakit\Http\Controllers\Controller;
+use Agorakit\Group;
 
 
 class GroupController extends Controller

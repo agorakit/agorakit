@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Agorakit\Http\Controllers;
 
-use App\Action;
-use App\Discussion;
-use App\File;
-use App\Tag;
-use App\User;
-use App\Group;
+use Agorakit\Action;
+use Agorakit\Discussion;
+use Agorakit\File;
+use Agorakit\Tag;
+use Agorakit\User;
+use Agorakit\Group;
 use Auth;
 use Context;
 use Illuminate\Http\Request;

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Agorakit\Http\Controllers;
 
 use Auth;
-use App\Group;
-use App\Discussion;
-use App\User;
-use App\Action;
-use App\File;
-use App\Comment;
+use Agorakit\Group;
+use Agorakit\Discussion;
+use Agorakit\User;
+use Agorakit\Action;
+use Agorakit\File;
+use Agorakit\Comment;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller

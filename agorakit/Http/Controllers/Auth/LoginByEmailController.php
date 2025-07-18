@@ -1,12 +1,12 @@
 <?php
-namespace App\Http\Controllers\Auth;
+namespace Agorakit\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use Agorakit\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use \App\User;
+use \Agorakit\User;
 use Auth;
 use URL;
-use \App\Mail\LoginByEmail;
+use \Agorakit\Mail\LoginByEmail;
 use Mail;
 
 

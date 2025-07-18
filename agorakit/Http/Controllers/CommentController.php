@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Agorakit\Http\Controllers;
 
-use App\Comment;
-use App\Discussion;
-use App\File;
-use App\Group;
+use Agorakit\Comment;
+use Agorakit\Discussion;
+use Agorakit\File;
+use Agorakit\Group;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -21,7 +21,7 @@ class CommentController extends Controller
     public function store(Request $request, Group $group, Discussion $discussion)
     {
         $this->authorize('create-comment', $group);
-        $comment = new \App\Comment();
+        $comment = new \Agorakit\Comment();
         $comment->body = $request->input('body');
         $comment->user()->associate(\Auth::user());
 
@@ -58,7 +58,7 @@ class CommentController extends Controller
         $discussion->touch();
         Auth::user()->touch();
 
-        event(new \App\Events\ContentCreated($comment));
+        event(new \Agorakit\Events\ContentCreated($comment));
 
         return redirect()->route('groups.discussions.show', [$discussion->group, $discussion]);
     }

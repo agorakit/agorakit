@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Agorakit\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Storage;
-use App\File;
-use App\Group;
+use Agorakit\File;
+use Agorakit\Group;
 
 
 /**

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Agorakit\Http\Controllers;
 
-use App\Action;
-use App\Discussion;
-use App\File;
-use App\Group;
-use App\Traits\ContentStatus;
+use Agorakit\Action;
+use Agorakit\Discussion;
+use Agorakit\File;
+use Agorakit\Group;
+use Agorakit\Traits\ContentStatus;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;

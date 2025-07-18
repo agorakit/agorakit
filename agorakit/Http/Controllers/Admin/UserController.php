@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Agorakit\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use Agorakit\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
@@ -13,8 +13,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //$users = \App\User::where('verified', 1)->get();
-        $users = \App\User::get();
+        //$users = \Agorakit\User::where('verified', 1)->get();
+        $users = \Agorakit\User::get();
 
         return view('admin.user.index')->with('users', $users);
     }

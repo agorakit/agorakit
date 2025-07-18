@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Agorakit\Http\Controllers;
 
 class PageController extends Controller
 {

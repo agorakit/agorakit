@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Agorakit\Http\Controllers;
 
 use Auth;
-use App\Group;
+use Agorakit\Group;
 use Context;
 
 use Spatie\IcalendarGenerator\Components\Calendar;
@@ -28,7 +28,7 @@ class IcalController extends Controller
         $groups = Context::getVisibleGroups();
 
          // returns the 500 most recent actions
-        $actions = \App\Action::with('group')
+        $actions = \Agorakit\Action::with('group')
             ->whereIn('group_id', $groups)
             ->orderBy('start','desc')
             ->take(500)

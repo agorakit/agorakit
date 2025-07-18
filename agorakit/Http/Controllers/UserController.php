@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Agorakit\Http\Controllers;
 
-use App\Mail\ContactUser;
-use App\Mail\UserConfirmation;
-use App\User;
-use App\Group;
+use Agorakit\Mail\ContactUser;
+use Agorakit\Mail\UserConfirmation;
+use Agorakit\User;
+use Agorakit\Group;
 use Auth;
 use Gate;
 use Illuminate\Http\Request;
@@ -303,7 +303,7 @@ class UserController extends Controller
                 abort(500, 'Do not delete anonymous user, you fool :-)');
             }
 
-            $anonymous = \App\User::getAnonymousUser();
+            $anonymous = \Agorakit\User::getAnonymousUser();
 
             if (is_null($anonymous)) {
                 abort(500, 'Can\'t load the anonymous user model, please run all migrations to create the anynmous special system user');

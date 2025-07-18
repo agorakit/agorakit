@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Agorakit\Http\Controllers;
 
-use App\Group;
-use App\Setting;
-use App\Traits\ContentStatus;
-use App\Services\ExportService;
+use Agorakit\Group;
+use Agorakit\Setting;
+use Agorakit\Traits\ContentStatus;
+use Agorakit\Services\ExportService;
 use Auth;
 use Carbon\Carbon;
 use Gate;
@@ -121,7 +121,7 @@ class GroupController extends Controller
             }
         } else { // anonymous user
             if ($group->isSecret()) {
-                abort('404', 'No query results for model [App\Group].');
+                abort('404', 'No query results for model [Agorakit\Group].');
             }
             if ($group->isOpen()) {
                 $discussions = $group->discussions()
@@ -195,7 +195,7 @@ class GroupController extends Controller
         }
 
         // handle group type
-        if ($request->input('group_type') == \App\Group::SECRET) {
+        if ($request->input('group_type') == \Agorakit\Group::SECRET) {
             if (setting('users_can_create_secret_group') || $request->user()->isAdmin()) {
                 $group->group_type = $request->input('group_type');
             } else {
@@ -253,15 +253,15 @@ class GroupController extends Controller
 
 
         // make the current user an admin of the group
-        $membership = \App\Membership::firstOrNew(['user_id' => Auth::user()->id, 'group_id' => $group->id]);
+        $membership = \Agorakit\Membership::firstOrNew(['user_id' => Auth::user()->id, 'group_id' => $group->id]);
         $membership->notification_interval = 60 * 24; // default to daily interval
-        $membership->membership = \App\Membership::ADMIN;
+        $membership->membership = \Agorakit\Membership::ADMIN;
         $membership->save();
 
         // notify admins (if they want it)
         if (setting('notify_admins_on_group_create')) {
-            foreach (\App\User::admins()->get() as $admin) {
-                $admin->notify(new \App\Notifications\GroupCreated($group));
+            foreach (\Agorakit\User::admins()->get() as $admin) {
+                $admin->notify(new \Agorakit\Notifications\GroupCreated($group));
             }
         }
 
@@ -310,7 +310,7 @@ class GroupController extends Controller
 
         if (Gate::allows('changeGroupType', $group)) {
             // handle secret group type
-            if ($request->input('group_type') == \App\Group::SECRET) {
+            if ($request->input('group_type') == \Agorakit\Group::SECRET) {
                 if (setting('users_can_create_secret_group') || $request->user()->isAdmin()) {
                     $group->group_type = $request->input('group_type');
                 } else {

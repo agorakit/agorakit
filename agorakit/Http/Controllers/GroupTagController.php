@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Agorakit\Http\Controllers;
 
-use App\Group;
-use App\Tag;
-use App\Discussion;
+use Agorakit\Group;
+use Agorakit\Tag;
+use Agorakit\Discussion;
 use Illuminate\Http\Request;
 
 class GroupTagController extends Controller

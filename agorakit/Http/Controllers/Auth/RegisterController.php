@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Agorakit\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use Agorakit\Http\Controllers\Controller;
 
 
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
-use App\User;
+use Agorakit\User;
 use Auth;
 use Mail;
 use Gate;
-use App\Mail\UserConfirmation;
+use Agorakit\Mail\UserConfirmation;
 
 class RegisterController extends Controller
 {

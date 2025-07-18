@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Agorakit\Http\Controllers;
 
-use App\User;
+use Agorakit\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -41,7 +41,7 @@ class UserIcalController extends Controller
         $groups = $user->groups()->pluck('groups.id');
 
         //  // returns the 500 most recent actions
-        $actions = \App\Action::with('group')
+        $actions = \Agorakit\Action::with('group')
             ->whereIn('group_id', $groups)
             ->orderBy('start', 'desc')
             ->take(500)

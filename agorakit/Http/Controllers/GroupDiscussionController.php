@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Agorakit\Http\Controllers;
 
-use App\Discussion;
-use App\File;
-use App\Group;
+use Agorakit\Discussion;
+use Agorakit\File;
+use Agorakit\Group;
 use Auth;
 use Context;
 use Illuminate\Http\Request;
@@ -92,7 +92,7 @@ class GroupDiscussionController extends Controller
     {
         // if no group is in the route, it means user chose the group using the dropdown
         if (!$group->exists) {
-            $group = \App\Group::find($request->get('group'));
+            $group = \Agorakit\Group::find($request->get('group'));
             //if group is null, redirect to the discussion create page with error messages, saying
             //that you must select a group
             if (is_null($group)) {
@@ -143,7 +143,7 @@ class GroupDiscussionController extends Controller
 
         flash(trans('messages.ressource_created_successfully'));
 
-        event(new \App\Events\ContentCreated($discussion));
+        event(new \Agorakit\Events\ContentCreated($discussion));
 
         return redirect()->route('groups.discussions.show', [$group, $discussion]);
     }

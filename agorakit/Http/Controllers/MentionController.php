@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Agorakit\Http\Controllers;
 
-use App\Group;
+use Agorakit\Group;
 
 /**
  * Returns a json representation of models, for at.js mention system.

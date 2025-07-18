@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Agorakit\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
+use Agorakit\Http\Controllers\Controller;
+use Agorakit\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
-use App\User;
+use Agorakit\User;
 use Mail;
 use Auth;
-use App\Mail\LoginByEmail;
+use Agorakit\Mail\LoginByEmail;
 
 class LoginController extends Controller
 {

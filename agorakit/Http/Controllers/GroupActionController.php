@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Agorakit\Http\Controllers;
 
-use App\Action;
-use App\Group;
+use Agorakit\Action;
+use Agorakit\Group;
 use Auth;
 use Carbon\Carbon;
 use Gate;

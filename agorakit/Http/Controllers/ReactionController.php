@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Agorakit\Http\Controllers;
 
-use App\Comment;
-use App\Discussion;
-use App\Reaction;
+use Agorakit\Comment;
+use Agorakit\Discussion;
+use Agorakit\Reaction;
 use Auth;
 use Illuminate\Http\Request;
 

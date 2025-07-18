@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Agorakit\Http\Controllers;
 
-use App\Group;
-use App\User;
-use App\Membership;
-use App\Mail\InviteUser;
+use Agorakit\Group;
+use Agorakit\User;
+use Agorakit\Membership;
+use Agorakit\Mail\InviteUser;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -68,8 +68,8 @@ class InviteController extends Controller
             }
             else
             {
-                $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $group->id]);
-                $membership->membership = \App\Membership::INVITED;
+                $membership = \Agorakit\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $group->id]);
+                $membership->membership = \Agorakit\Membership::INVITED;
                 $membership->save();
 
                 // send invitation email

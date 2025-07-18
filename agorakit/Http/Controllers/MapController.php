@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Agorakit\Http\Controllers;
 
-use App\User;
-use App\Group;
+use Agorakit\User;
+use Agorakit\Group;
 use Auth;
 use Carbon\Carbon;
 use Context;
@@ -45,7 +45,7 @@ class MapController extends Controller
 
 
 
-    $actions = \App\Action::where('stop', '>=', Carbon::now()->subDays(1))
+    $actions = \Agorakit\Action::where('stop', '>=', Carbon::now()->subDays(1))
       ->where('latitude', '<>', 0)
       ->whereIn('group_id', $groups)
       ->get();

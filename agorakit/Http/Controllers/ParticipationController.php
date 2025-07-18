@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Agorakit\Http\Controllers;
 
-use App\Action;
-use App\Group;
-use App\Participation;
+use Agorakit\Action;
+use Agorakit\Group;
+use Agorakit\Participation;
 use Illuminate\Http\Request;
 use URL;
 

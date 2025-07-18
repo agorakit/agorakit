@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Agorakit\Http\Controllers;
 
 use Suin\RSSWriter\Channel;
 use Suin\RSSWriter\Feed;
-use App\Action;
-use App\Group;
-use App\Discussion;
+use Agorakit\Action;
+use Agorakit\Group;
+use Agorakit\Discussion;
 
 /**
  * This controller generates global public rss feeds for discussions and actions.

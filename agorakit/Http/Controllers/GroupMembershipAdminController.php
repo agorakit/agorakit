@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Agorakit\Http\Controllers;
 
-use App\Group;
-use App\Invite;
-use App\Membership;
-use App\User;
+use Agorakit\Group;
+use Agorakit\Invite;
+use Agorakit\Membership;
+use Agorakit\User;
 use Carbon\Carbon;
 use Gate;
 use Illuminate\Http\Request;
@@ -41,7 +41,7 @@ class GroupMembershipAdminController extends Controller
             $this->authorize('manage-membership', $group);
 
             // handle the case an admin change his own level and is the only one admin of the group... yes it hapened...
-            if ($membership->isAdmin() && $group->admins->count() == 1 && $request->get('membership_level') < \App\Membership::ADMIN) {
+            if ($membership->isAdmin() && $group->admins->count() == 1 && $request->get('membership_level') < \Agorakit\Membership::ADMIN) {
                 flash('You cannot remove you as admin since you are the unique admin. Promote someone else as admin first.');
 
                 return redirect()->back();

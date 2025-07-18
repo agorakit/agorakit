@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Agorakit\Http\Controllers;
 
-use App\Group;
+use Agorakit\Group;
 use Carbon\Carbon;
-use App\Charts\AgorakitChart;
+use Agorakit\Charts\AgorakitChart;
 use DB;
 
 class GroupInsightsController extends Controller
@@ -32,7 +32,7 @@ class GroupInsightsController extends Controller
 
 
         // Discussions
-        $results = \App\Discussion::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
+        $results = \Agorakit\Discussion::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
             ->groupBy('yearmonth')
             ->orderBy('yearmonth', 'asc')
             ->where('group_id', $group->id)
@@ -54,7 +54,7 @@ class GroupInsightsController extends Controller
 
 
         // Actions
-        $results = \App\Action::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
+        $results = \Agorakit\Action::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
             ->groupBy('yearmonth')
             ->orderBy('yearmonth', 'asc')
             ->where('group_id', $group->id)
@@ -75,7 +75,7 @@ class GroupInsightsController extends Controller
 
 
         // Members
-        $results = \App\Membership::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
+        $results = \Agorakit\Membership::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
             ->groupBy('yearmonth')
             ->orderBy('yearmonth', 'asc')
             ->where('group_id', $group->id)
@@ -97,7 +97,7 @@ class GroupInsightsController extends Controller
 
 
         // Files
-        $results = \App\File::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
+        $results = \Agorakit\File::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
             ->groupBy('yearmonth')
             ->orderBy('yearmonth', 'asc')
             ->where('group_id', $group->id)
@@ -120,7 +120,7 @@ class GroupInsightsController extends Controller
 
 
         // Evolution of storage use
-        $results = \App\File::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, sum(filesize) as data')
+        $results = \Agorakit\File::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, sum(filesize) as data')
             ->groupBy('yearmonth')
             ->orderBy('yearmonth', 'asc')
             ->where('group_id', $group->id)

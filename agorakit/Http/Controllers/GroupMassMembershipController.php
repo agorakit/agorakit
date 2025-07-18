@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Agorakit\Http\Controllers;
 
-use App\Group;
-use App\User;
+use Agorakit\Group;
+use Agorakit\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -22,7 +22,7 @@ class GroupMassMembershipController extends Controller
 
         // load a list of users not yet in this group
         $members = $group->users;
-        $notmembers = \App\User::whereNotIn('id', $members->pluck('id'))->orderBy('name')->pluck('name', 'id');
+        $notmembers = \Agorakit\User::whereNotIn('id', $members->pluck('id'))->orderBy('name')->pluck('name', 'id');
 
         return view('membership.add')
             ->with('group', $group)
@@ -41,10 +41,10 @@ class GroupMassMembershipController extends Controller
 
         if ($request->has('users')) {
             foreach ($request->get('users') as $user_id) {
-                $user = \App\User::findOrFail($user_id);
+                $user = \Agorakit\User::findOrFail($user_id);
                 // load or create membership for this group and user combination
-                $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $group->id]);
-                $membership->membership = \App\Membership::MEMBER;
+                $membership = \Agorakit\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $group->id]);
+                $membership->membership = \Agorakit\Membership::MEMBER;
 
                 // we prented the user has been already notified once, now. The first mail sent will be at the choosen interval from now on.
                 $membership->notified_at = Carbon::now();
@@ -52,7 +52,7 @@ class GroupMassMembershipController extends Controller
 
                 // notify the user if (s)he is verified
                 if ($user->isVerified()) {
-                    $user->notify(new \App\Notifications\AddedToGroup($group));
+                    $user->notify(new \Agorakit\Notifications\AddedToGroup($group));
                 }
 
                 flash(trans('messages.user_added_successfuly') . ' : ' . $user->name);

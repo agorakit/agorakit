@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Agorakit\Http\Controllers;
 
 use Auth;
-use App\Group;
+use Agorakit\Group;
 use Illuminate\Http\Request;
 use Context;
 
@@ -21,7 +21,7 @@ class DiscussionController extends Controller
     {
         $tag = $request->get('tag');
         $groups = Context::getVisibleGroups();
-        $discussions = \App\Discussion::with('userReadDiscussion', 'group', 'user', 'tags', 'comments')
+        $discussions = \Agorakit\Discussion::with('userReadDiscussion', 'group', 'user', 'tags', 'comments')
             ->withCount('comments')
             ->whereIn('group_id', $groups)
             ->when($tag, function ($query) use ($tag) {
@@ -32,7 +32,7 @@ class DiscussionController extends Controller
             ->paginate(25);
 
 
-        $tags = \App\Discussion::allTags();
+        $tags = \Agorakit\Discussion::allTags();
         natcasesort($tags);
 
         return view('dashboard.discussions')

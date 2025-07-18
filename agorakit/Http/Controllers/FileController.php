@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Agorakit\Http\Controllers;
 
 use Auth;
-use App\File;
-use App\Group;
+use Agorakit\File;
+use Agorakit\Group;
 use Illuminate\Http\Request;
 use Context;
 

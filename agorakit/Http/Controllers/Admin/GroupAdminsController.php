@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Agorakit\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Membership;
+use Agorakit\Http\Controllers\Controller;
+use Agorakit\Membership;
 
 
 class GroupAdminsController extends Controller

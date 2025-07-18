@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Agorakit\Http\Controllers;
 
-use App\Action;
+use Agorakit\Action;
 use File;
 use Image;
 

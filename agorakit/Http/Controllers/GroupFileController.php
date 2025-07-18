@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Agorakit\Http\Controllers;
 
-use App\File;
-use App\Group;
+use Agorakit\File;
+use Agorakit\Group;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;

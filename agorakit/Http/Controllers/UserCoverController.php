@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Agorakit\Http\Controllers;
 
-use App\User;
+use Agorakit\User;
 use Avatar;
 
 class UserCoverController extends Controller

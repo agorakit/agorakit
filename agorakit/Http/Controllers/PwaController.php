@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Agorakit\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Storage;

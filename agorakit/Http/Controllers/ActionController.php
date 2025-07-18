@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Agorakit\Http\Controllers;
 
 use Auth;
 use Carbon\Carbon;
@@ -30,7 +30,7 @@ class ActionController extends Controller
         if ($view == 'list') {
             $groups = Context::getVisibleGroups();
 
-            $actions = \App\Action::with('group')
+            $actions = \Agorakit\Action::with('group')
                 ->where('start', '>=', Carbon::now()->subDay())
                 ->whereIn('group_id', $groups)
                 ->orderBy('start');
@@ -60,13 +60,13 @@ class ActionController extends Controller
 
         // load of actions between start and stop provided by calendar js
         if ($request->has('start') && $request->has('end')) {
-            $actions = \App\Action::with('group', 'attending')
+            $actions = \Agorakit\Action::with('group', 'attending')
                 ->where('start', '>', Carbon::parse($request->get('start')))
                 ->where('stop', '<', Carbon::parse($request->get('end')))
                 ->whereIn('group_id', $groups)
                 ->orderBy('start', 'asc');
         } else { // return current month
-            $actions = \App\Action::with('group', 'attending')
+            $actions = \Agorakit\Action::with('group', 'attending')
                 ->orderBy('start', 'asc')
                 ->where('start', '>', Carbon::now()->subMonth())
                 ->where('stop', '<', Carbon::now()->addMonth())

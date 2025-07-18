@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Agorakit\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use Agorakit\Http\Controllers\Controller;
 use Auth;
 use Illuminate\Http\Request;
 use Image;
 use Storage;
 use Illuminate\Support\Str;
-use App\Setting;
+use Agorakit\Setting;
 
 class SettingsController extends Controller
 {
