@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace Agorakit\Http\Middleware;
 
 use Auth;
 use Closure;

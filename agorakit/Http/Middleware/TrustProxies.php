@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace Agorakit\Http\Middleware;
 
 use Illuminate\Http\Middleware\TrustProxies as Middleware;
 use Illuminate\Http\Request;

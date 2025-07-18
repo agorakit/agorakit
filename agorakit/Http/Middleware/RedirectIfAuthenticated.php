@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace Agorakit\Http\Middleware;
 
-use App\Providers\RouteServiceProvider;
+use Agorakit\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
