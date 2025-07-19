@@ -43,11 +43,23 @@ class ConsoleTest extends TestCase
         $user->password = Hash::make("123456789");
         $user->email = "admin@agorakit.org";
         $user->verified = 1;
-        $user->save();
+        if ($user->isValid()) {
+            $user->save();
+        }
+        else {
+            dd($user->getAttributes());
+        }
         $group = new Group;
+        $group->user()->associate($user);
         $group->name = "Test Export Group";
         $group->body = "This is a test for export";
         $group->save();
+        if ($group->isValid()) {
+            $group->save();
+        }
+        else {
+            dd($user->getAttributes());
+        }
         $this->assertEquals($group->id, '1');
         $file = new File();
         $file->name = 'avatar.svg';
@@ -70,7 +82,8 @@ class ConsoleTest extends TestCase
      */
     public function test_import_group(): void
     {
-        //$this->assertEquals(0, $this->artisan('agorakit:import 1'));
+        $this->testSetupItAll();
+        $this->assertEquals(0, $this->artisan('agorakit:import 1'));
         $this->assertTrue(true);
     }
 }
