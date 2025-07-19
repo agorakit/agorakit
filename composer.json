@@ -63,7 +63,8 @@
         "mmo/faker-images": "^0.9.0",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.5",
-        "phpunit/phpunit": "^11.4"
+        "phpunit/phpunit": "^11.4",
+        "squizlabs/php_codesniffer": "^3.13"
     },
     "config": {
         "optimize-autoloader": true,
@@ -105,6 +106,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
+        "lint": "vendor/bin/phpcs",
         "test": "vendor/bin/phpunit",
         "scan": "vendor/bin/phpstan analyse app tests --level 0 --memory-limit 1G",
         "post-autoload-dump": [
