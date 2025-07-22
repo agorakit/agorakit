@@ -22,7 +22,7 @@ class ImportTest extends Tests\BrowserKitTestCase
     Our scenario :
 
     - make 3 groups, like in  UserTest.php
-    - add a file and an action
+    - add a file and an event
     - export Test group to a zip file
     - forcibly delete Test group
     - import the zip file
@@ -142,23 +142,23 @@ class ImportTest extends Tests\BrowserKitTestCase
             ->see('Test comment');
     }
 
-    public function testActionCreation()
+    public function testEventCreation()
     {
         $user = App\User::where('email', 'admin@agorakit.org')->first();
 
         $group = App\Group::where('name', 'Test group')->first();
 
         $this->actingAs($user)
-            ->visit('/groups/' . $group->id . '/actions/create')
-            ->see('Add an event')
-            ->type('Test action', 'name')
-            ->type('this is a test action in the agenda', 'body')
+            ->visit('/groups/' . $group->id . '/calendarevents/create')
+            ->see('Add a calendar event')
+            ->type('Test event', 'name')
+            ->type('this is a test event in the agenda', 'body')
             ->type('Bruxelles', 'location[city]')
             ->type('2016-01-01', 'start_date')
             ->type('12:00', 'start_time')
             ->type('13:00', 'stop_time')
             ->press('Create')
-            ->see(trans('messages.create_action'));
+            ->see(trans('messages.create_event'));
     }
 
     public function testFolderCreation()
