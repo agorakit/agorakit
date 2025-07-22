@@ -82,15 +82,14 @@ class SendNotifications extends Command
         // we need to check here instead of later in the notification chain
         // if we really have a valid user and a valid group from the membership table
 
-
         // I use Carbon::now() instead of the now() provided by mysql to avoid different timezone settings in differents servers (php vs mysql config)
         $notifications = DB::select('
         select * from
         (select *, date_add(notified_at, interval notification_interval minute) as notify from membership
         where notification_interval > 1
         and membership >= :membership) as memberships
-        where notify < :now or notify is null 
-        order by rand() 
+        where notify < :now or notify is null
+        order by rand()
         limit :batch
         ', ['now' => Carbon::now(), 'membership' => \App\Membership::MEMBER, 'batch' => $this->option('batch')]);
 

@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Action;
+use App\CalendarEvent;
 use App\Comment;
 use App\Discussion;
 use App\File;
@@ -40,7 +40,7 @@ class ImportService
                 return "A group already exists with the same name:" . route('groups.show', $existing_group);
             }
             if (count($existing_group->discussions) == count($group->discussions)
-                && count($existing_group->actions) == count($group->actions)
+                && count($existing_group->calendarevents) == count($group->calendarevents)
                 && count($existing_group->files) == count($group->files)) {
                 return "A group already exists with same number of data:" . route('groups.show', $existing_group);
             }
@@ -163,8 +163,8 @@ class ImportService
         }
         $group = json_decode(Storage::get($json_file), false);
         // Proceed to username replacements if any, create users in that case
-        Model::unguard();
         DB::beginTransaction();
+        Model::unguard();
         if ($edited_usernames) {
             $still_existing_usernames = array();
             foreach(User::all() as $existing_user) {
@@ -190,6 +190,7 @@ class ImportService
                         else {
                             dump("Error importing user");
                             dump($user_n);
+                            Model::reguard();
                             DB::rollBack();
                         }
                     }
@@ -225,6 +226,7 @@ class ImportService
         else {
             dump("Error importing group");
             dump($group_n->getAttributes());
+            Model::reguard();
             DB::rollBack();
         }
         $new_id = $group_n->id;
@@ -245,6 +247,7 @@ class ImportService
                 else {
                     dump("Error importing user");
                     dump($user_n); //->username);
+                    Model::reguard();
                     DB::rollBack();
                 }
             }
@@ -263,36 +266,38 @@ class ImportService
             else {
                 dump("Error importing membership");
                 dump($mb_n->getAttributes());
+                Model::reguard();
                 DB::rollBack();
             }
         }
-        foreach($group->actions as $action) {
-            $action_user = User::where('username', $action->user->username)->first();
-            $action_n = Action::create([
+        foreach($group->calendarevents as $event) {
+            $event_user = User::where('username', $event->user->username)->first();
+            $event_n = CalendarEvent::create([
                 'id' => null,
-                'name' => $action->name,
-                'body' => $action->body,
-                'user_id' => $action_user->id,
+                'name' => $event->name,
+                'body' => $event->body,
+                'user_id' => $event_user->id,
                 'group_id' => $group_n->id,
-                'start' => $action->start,
-                'stop' => $action->stop,
-                'location' => $action->location,
-                'visibility' => $action->visibility,
-                'cover' => $action->cover,
-                'created_at' => $action->created_at,
-                'updated_at' => $action->updated_at,
-                'deleted_at' => $action->deleted_at
+                'start' => $event->start,
+                'stop' => $event->stop,
+                'location' => $event->location,
+                'visibility' => $event->visibility,
+                'cover' => $event->cover,
+                'created_at' => $event->created_at,
+                'updated_at' => $event->updated_at,
+                'deleted_at' => $event->deleted_at
             ]);
-             if ($action_n->isValid()) {
-                $action_n->save();
+             if ($event_n->isValid()) {
+                $event_n->save();
             }
             else {
-                dump("Error importing action");
-                dump($action_n->getAttributes());
+                dump("Error importing event");
+                dump($event_n->getAttributes());
+                Model::reguard();
                 DB::rollBack();
             }
-            foreach($action->tags as $tag) {
-                $action_n->tag($tag);
+            foreach($event->tags as $tag) {
+                $event_n->tag($tag);
             }
         }
         foreach($group->discussions as $discussion) {
@@ -315,6 +320,7 @@ class ImportService
             else {
                 dump("Error importing discussion");
                 dump($discussion_n->getAttributes());
+                Model::reguard();
                 DB::rollBack();
             }
             foreach($discussion->comments as $comment) {
@@ -334,6 +340,7 @@ class ImportService
                 else {
                     dump("Error importing comment");
                     dump($comment_n->getAttributes());
+                    Model::reguard();
                     DB::rollBack();
                 }
                 foreach($comment->reactions as $reaction) {
@@ -353,6 +360,7 @@ class ImportService
                     else {
                         dump("Error importing reaction");
                         dump($reaction_n->getAttributes());
+                        Model::reguard();
                         DB::rollBack();
                     }
                 }
@@ -374,6 +382,7 @@ class ImportService
                 else {
                     dump("Error importing reaction");
                     dump($reaction_n->getAttributes());
+                    Model::reguard();
                     DB::rollBack();
                 }
             }
@@ -409,14 +418,15 @@ class ImportService
             else {
                 dump("Error importing file");
                 dump($file_n->getAttributes());
+                Model::reguard();
                 DB::rollBack();
             }
             foreach($file->tags as $tag) {
                 $file_n->tag($tag->name);
             }
         }
-        DB::commit();
         Model::reguard();
+        DB::commit();
         if ($group_n && $files && pathinfo($path)['extension']=='zip') {
             Storage::makeDirectory('groups/' . $new_id . '/files');
             foreach(Storage::directories($unzip_path . '/groups/' . $old_id . '/files/') as $dir) {
