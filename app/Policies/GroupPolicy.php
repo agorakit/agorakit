@@ -80,6 +80,18 @@ class GroupPolicy extends BasePolicy
     }
 
     /**
+     * A user can import a group if it is allowed in the global settings (set by admin-wide accounts)
+     */
+    public function import(User $user)
+    {
+        if (setting('user_can_import_groups') == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * A group admin can delete a group
      */
     public function delete(User $user, Group $group)

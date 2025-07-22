@@ -451,7 +451,7 @@ class GroupController extends Controller
      */
     public function import(Request $request)
     {
-        $this->authorize('create', Group::class);
+        $this->authorize('import', Group::class);
         if (!Auth::check()) {
             return redirect()->route('groups.index')
               ->withErrors(trans('messages.authentication_error'));

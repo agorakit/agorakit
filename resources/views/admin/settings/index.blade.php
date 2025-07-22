@@ -123,6 +123,10 @@
                             ) !!}
                         </div>
                         <div>
+                            {!! Form::checkbox('user_can_import_groups', 'yes', setting('user_can_import_groups')) !!}
+                            {{ __('Allow regular users to import groups (if you uncheck this box, only admins will be able to import groups)') }}
+                        </div>
+                        <div>
 
                             {!! Form::checkbox('user_can_register', 'yes', setting('user_can_register', true)) !!}
                             {!! __('Allow anyone to create a new user account on this server (unchecking this box will disable registration)') !!}
