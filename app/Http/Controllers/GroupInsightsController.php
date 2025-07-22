@@ -25,7 +25,7 @@ class GroupInsightsController extends Controller
             $group->users()->count(),
             $group->users()->active()->count(),
             $group->discussions()->count(),
-            $group->actions()->count(),
+            $group->calendarevents()->count(),
             $group->files()->count()
         ]);
         $charts[] = $chart;
@@ -53,8 +53,8 @@ class GroupInsightsController extends Controller
 
 
 
-        // Actions
-        $results = \App\Action::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
+        // Events
+        $results = \App\CalendarEvent::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
             ->groupBy('yearmonth')
             ->orderBy('yearmonth', 'asc')
             ->where('group_id', $group->id)
@@ -68,7 +68,7 @@ class GroupInsightsController extends Controller
         }
 
         $chart = new AgorakitChart;
-        $chart->title('Actions per month');
+        $chart->title('Events per month');
         $chart->labels($labels);
         $chart->dataset('Amount', 'line', $dataset);
         $charts[] = $chart;

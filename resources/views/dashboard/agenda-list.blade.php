@@ -5,18 +5,18 @@
         <div class="mb-2">
             @include('partials.preferences-calendar')
         </div>
-        <a class="btn btn-primary" href="{{ route('actions.create') }}">
-            {{ trans('messages.create_action') }}
+        <a class="btn btn-primary" href="{{ route('calendarevents.create') }}">
+            {{ trans('messages.create_event') }}
         </a>
     </div>
 
 
 
-    @if ($actions->count() > 0)
+    @if ($events->count() > 0)
         <div class="actions mb-4">
-            @include('actions.list', ['actions' => $actions])
+            @include('calendarevents.list', ['events' => $events])
         </div>
-        {{ $actions->render() }}
+        {{ $events->render() }}
     @else
         <div class="alert mt-4">
             {{ trans('messages.nothing_yet') }}

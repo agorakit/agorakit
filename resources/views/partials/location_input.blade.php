@@ -1,4 +1,4 @@
-@if (is_a($model, "App\Action") && $listedLocations)
+@if (is_a($model, "App\CalendarEvent") && $listedLocations)
     <fieldset class="form-fieldset">
         {!! Form::label('listed_location', trans('messages.location')) !!}
         <div class="small-help">
@@ -13,7 +13,7 @@
     </fieldset>
 @endif
 
-    @if (is_a($model, "App\Action") && $listedLocations)<fieldset class="form-fieldset js-new-location" up-show-for="other">
+    @if (is_a($model, "App\CalendarEvent") && $listedLocations)<fieldset class="form-fieldset js-new-location" up-show-for="other">
       @else <fieldset class="form-fieldset">@endif
       <label class="form-label h3">{{trans('messages.location')}}</label>
         <div class="small-help mb-3">

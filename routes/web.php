@@ -35,7 +35,7 @@ groups/{group}/discussions/{id}
 groups/{group}/discussions/{id}/create
 
 groups/{group}/files/{id}
-groups/{group}/actions/{id}
+groups/{group}/calendarevents/{id}
 
 etc.
 
@@ -106,8 +106,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('files', 'FileController@index')->name('files');
     Route::get('map', 'MapController@index')->name('map');
     Route::get('map.geojson', 'MapController@geoJson')->name('map.geojson');
-    Route::get('agenda', 'ActionController@index')->name('agenda');
-    Route::get('agenda/json', 'ActionController@indexJson')->name('agenda.json');
+
+    Route::get('agenda', 'CalendarEventController@index')->name('agenda');
+    Route::get('agenda/json', 'CalendarEventController@indexJson')->name('agenda.json');
     Route::get('agenda/ical', 'IcalController@index')->name('agenda.ical');
     Route::get('tags', 'TagController@index')->name('tags.index');
     Route::get('tags/{tag}', 'TagController@show')->name('tags.show');
@@ -117,7 +118,7 @@ Route::group(['middleware' => ['web']], function () {
 
     // Feeds (RSS)
     Route::get('discussions/feed', 'FeedController@discussions')->name('discussions.feed');
-    Route::get('actions/feed', 'FeedController@actions')->name('actions.feed');
+    Route::get('calendarevents/feed', 'FeedController@calendarevents')->name('calendarevents.feed');
 
     // Group handling
     Route::get('groups', 'GroupController@index')->name('groups.index');
@@ -143,11 +144,11 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('discussions/create', 'GroupDiscussionController@create')->name('discussions.create');
     Route::post('discussions/create', 'GroupDiscussionController@store')->name('discussions.store');
 
-    // General action create & cover route
-    Route::get('actions/create', 'GroupActionController@create')->name('actions.create');
-    Route::post('actions/create', 'GroupActionController@store')->name('actions.store');
+    // General event create & cover route
+    Route::get('calendarevents/create', 'GroupCalendarEventController@create')->name('calendarevents.create');
+    Route::post('calendarevents/create', 'GroupCalendarEventController@store')->name('calendarevents.store');
 
-    Route::get('actions/{action}/cover/{size}', 'ActionCoverController@show')->name('actions.cover');
+    Route::get('calendarevents/{action}/cover/{size}', 'CalendarEventCoverController@show')->name('calendarevents.cover');
 
 
 
@@ -245,23 +246,23 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('discussions/{discussion}/comments/{comment}/history', 'CommentController@history')->name('.discussions.comments.history');
         Route::get('discussions/{discussion}/live/{comment}', 'CommentController@live')->name('.discussions.live');
 
-        // Actions
-        Route::get('actions', 'GroupActionController@index')->name('.actions.index');
-        Route::get('actions/create', 'GroupActionController@create')->name('.actions.create');
-        Route::post('actions/create', 'GroupActionController@store')->name('.actions.store');
-        Route::get('actions/json', 'GroupActionController@indexJson')->name('.actions.index.json');
-        Route::get('actions/ical', 'GroupIcalController@index')->name('.actions.index.ical');
-        Route::get('actions/{action}', 'GroupActionController@show')->name('.actions.show');
-        Route::get('actions/{action}/edit', 'GroupActionController@edit')->name('.actions.edit');
-        Route::post('actions/{action}', 'GroupActionController@update')->name('.actions.update');
-        Route::get('actions/{action}/delete', 'GroupActionController@destroyConfirm')->name('.actions.deleteconfirm');
-        Route::delete('actions/{action}/delete', 'GroupActionController@destroy')->name('.actions.delete');
-        Route::get('actions/{action}/history', 'GroupActionController@history')->name('.actions.history');
+        // Events
+        Route::get('calendarevents', 'GroupCalendarEventController@index')->name('.calendarevents.index');
+        Route::get('calendarevents/create', 'GroupCalendarEventController@create')->name('.calendarevents.create');
+        Route::post('calendarevents/create', 'GroupCalendarEventController@store')->name('.calendarevents.store');
+        Route::get('calendarevents/json', 'GroupCalendarEventController@indexJson')->name('.calendarevents.index.json');
+        Route::get('calendarevents/ical', 'GroupIcalController@index')->name('.calendarevents.index.ical');
+        Route::get('calendarevents/{event}', 'GroupCalendarEventController@show')->name('.calendarevents.show');
+        Route::get('calendarevents/{event}/edit', 'GroupCalendarEventController@edit')->name('.calendarevents.edit');
+        Route::post('calendarevents/{event}', 'GroupCalendarEventController@update')->name('.calendarevents.update');
+        Route::get('calendarevents/{event}/delete', 'GroupCalendarEventController@destroyConfirm')->name('.calendarevents.deleteconfirm');
+        Route::delete('calendarevents/{event}/delete', 'GroupCalendarEventController@destroy')->name('.calendarevents.delete');
+        Route::get('calendarevents/{event}/history', 'GroupCalendarEventController@history')->name('.calendarevents.history');
 
-        // Action participation
-        Route::get('actions/{action}/participation/set/{status}', 'ParticipationController@set')->name('.actions.participation.set');
-        Route::get('actions/{action}/participation', 'ParticipationController@edit')->name('.actions.participation');
-        Route::post('actions/{action}/participation', 'ParticipationController@update')->name('.actions.participation.update');
+        // Event participation
+        Route::get('calendarevents/{event}/participation/set/{status}', 'ParticipationController@set')->name('.calendarevents.participation.set');
+        Route::get('calendarevents/{event}/participation', 'ParticipationController@edit')->name('.calendarevents.participation');
+        Route::post('calendarevents/{event}/participation', 'ParticipationController@update')->name('.calendarevents.participation.update');
 
         // Files
         Route::get('files', 'GroupFileController@index')->name('.files.index');
