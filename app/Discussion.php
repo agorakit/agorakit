@@ -72,6 +72,14 @@ class Discussion extends Model
     }
 
     /**
+     * Return last comment
+     */
+    public function lastComment()
+    {
+        return $this->comments->sortByDesc('updated_at')->first();
+    }
+
+    /**
      * Unread count of comments for the current user
      */
     public function unReadCount()
