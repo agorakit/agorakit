@@ -26,9 +26,8 @@ class ExportService
         $group->load([
             'user',
             'memberships.user',
-            'actions',
-            'actions.user',
-            'actions.tags',
+            'calendarevents',
+            'calendarevents.user',
             'discussions',
             'discussions.user',
             'discussions.comments',

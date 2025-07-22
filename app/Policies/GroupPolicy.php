@@ -149,9 +149,9 @@ class GroupPolicy extends BasePolicy
         return $this->getPermissionsFor($user, $group)->contains('create-file');
     }
 
-    public function createAction(User $user, Group $group)
+    public function createCalendarEvent(User $user, Group $group)
     {
-        return $this->getPermissionsFor($user, $group)->contains('create-action');
+        return $this->getPermissionsFor($user, $group)->contains('create-calendarevent');
     }
 
     public function createComment(User $user, Group $group)
@@ -184,7 +184,7 @@ class GroupPolicy extends BasePolicy
         return $group->isOpen();
     }
 
-    public function viewActions(?User $user, Group $group)
+    public function viewCalendarEvents(?User $user, Group $group)
     {
         if ($user) {
             return $group->isOpen() || $user->isMemberOf($group);

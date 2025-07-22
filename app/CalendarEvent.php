@@ -15,7 +15,7 @@ use Nicolaslopezj\Searchable\SearchableTrait;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
 
-class Action extends Model
+class CalendarEvent extends Model
 {
     use ValidatingTrait;
     use RevisionableTrait;
@@ -37,9 +37,9 @@ class Action extends Model
     ];
 
     protected $fillable = ['id', 'name', 'body', 'start', 'stop', 'visibility', 'location'];
-    protected $with = ['attending', 'notAttending']; // always load participants with actions
+    protected $with = ['attending', 'notAttending']; // always load participants with events
 
-    protected $table = 'actions';
+    protected $table = 'calendar_events';
     public $timestamps = true;
     protected $casts = [
         'user_id' => 'integer',
@@ -64,15 +64,15 @@ class Action extends Model
         * @var array
         */
         'columns' => [
-            'actions.name'    => 10,
-            'actions.body'    => 10,
-            'actions.location' => 2,
+            'calendar_events.name'    => 10,
+            'calendar_events.body'    => 10,
+            'calendar_events.location' => 2,
         ],
     ];
 
     public function getType()
     {
-        return 'action';
+        return 'calendarevent';
     }
 
     public function group(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -87,11 +87,11 @@ class Action extends Model
 
     public function link()
     {
-        return route('groups.actions.show', [$this->group, $this]);
+        return route('groups.calendarevents.show', [$this->group, $this]);
     }
 
     /**
-     * The users attending (or not) this action.
+     * The users attending (or not) this event.
      */
     public function participation()
     {
@@ -100,7 +100,7 @@ class Action extends Model
 
 
     /**
-     * The users attending this action.
+     * The users attending this event.
      */
     public function attending()
     {
@@ -108,7 +108,7 @@ class Action extends Model
     }
 
     /**
-     * The users NOT attending this action.
+     * The users NOT attending this event.
      */
     public function notAttending()
     {
@@ -116,7 +116,7 @@ class Action extends Model
     }
 
     /**
-     * The users MAYBE attending this action.
+     * The users MAYBE attending this event.
      */
     public function maybeAttending()
     {

@@ -1,13 +1,13 @@
 @extends('dialog')
 
 @section('content')
-        <h1>{{trans('messages.attend_to')}} "<em>{{$participation->action->name}}</em>"?</h1>
+        <h1>{{trans('messages.attend_to')}} "<em>{{$participation->calendarevent->name}}</em>"?</h1>
         <div class="meta mb-2">
-             {{$participation->action->start->format('d/m/Y H:i')}} - {{$participation->action->location}}
+             {{$participation->calendarevent->start->format('d/m/Y H:i')}} - {{$participation->calendarevent->location}}
         </div>
-        <div class="summary mb-4">{{ summary($participation->action->body) }}</div>
+        <div class="summary mb-4">{{ summary($participation->calendarevent->body) }}</div>
 
-        {!! Form::open(['route' => ['groups.actions.participation', $participation->action->group, $participation->action], 'up-target' => '.main']) !!}
+        {!! Form::open(['route' => ['groups.calendarevents.participation', $participation->calendarevent->group, $participation->calendarevent], 'up-target' => '.main']) !!}
 
         
         {!! Form::select('participation', [10 => __('I will participate'), -10 => __('I will not participate'), 0 => __('I don\'t know yet')], $participation->status, ['class' => 'form-control mb-4']) !!}
