@@ -38,10 +38,10 @@ class Group extends Model
         'body' => 'required',
     ];
 
-    protected $fillable = ['id', 'name', 'body', 'cover'];
+    protected $fillable = ['id', 'name', 'body', 'cover', 'slug'];
     protected $casts = ['user_id' => 'integer', 'settings' => 'array'];
 
-    protected $keepRevisionOf = ['name', 'body', 'cover', 'color', 'group_type', 'location', 'settings', 'status'];
+    protected $keepRevisionOf = ['name', 'body', 'cover', 'color', 'group_type', 'location', 'settings', 'slug', 'status'];
 
     /**** various group types ****/
     // open group, default

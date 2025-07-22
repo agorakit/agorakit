@@ -33,9 +33,9 @@ class Discussion extends Model
         'group_id' => 'required|exists:groups,id',
     ];
 
+    protected $fillable = ['name', 'body', 'group_id'];
     protected $keepRevisionOf = ['name', 'body', 'status'];
     protected $table = 'discussions';
-    protected $fillable = ['name', 'body', 'group_id'];
     public $timestamps = true;
     public $unreadcounter;
     public $read_comments;

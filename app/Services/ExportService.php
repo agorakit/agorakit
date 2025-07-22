@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Group;
 use Auth;
-use Route;
 use Storage;
 use ZipArchive;
 
@@ -37,8 +36,10 @@ class ExportService
             'discussions.comments.reactions.user',
             'discussions.reactions',
             'discussions.reactions.user',
+            'discussions.tags',
             'files',
             'files.user',
+            'files.tags',
             'tags'
         ]);
 

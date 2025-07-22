@@ -36,6 +36,7 @@ class CalendarEvent extends Model
         'stop'     => 'required',
     ];
 
+    protected $fillable = ['id', 'name', 'body', 'start', 'stop', 'visibility', 'location'];
     protected $with = ['attending', 'notAttending']; // always load participants with events
 
     protected $table = 'calendar_events';
