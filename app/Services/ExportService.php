@@ -28,6 +28,7 @@ class ExportService
             'memberships.user',
             'calendarevents',
             'calendarevents.user',
+            'calendarevents.tags',
             'discussions',
             'discussions.user',
             'discussions.comments',
