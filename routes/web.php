@@ -107,9 +107,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('map', 'MapController@index')->name('map');
     Route::get('map.geojson', 'MapController@geoJson')->name('map.geojson');
 
-    Route::get('agenda', 'CalendarEventController@index')->name('agenda');
-    Route::get('agenda/json', 'CalendarEventController@indexJson')->name('agenda.json');
-    Route::get('agenda/ical', 'IcalController@index')->name('agenda.ical');
+    Route::get('calendar', 'CalendarEventController@index')->name('calendar');
+    Route::get('calendar/json', 'CalendarEventController@indexJson')->name('calendar.json');
+    Route::get('calendar/ical', 'IcalController@index')->name('calendar.ical');
     Route::get('tags', 'TagController@index')->name('tags.index');
     Route::get('tags/{tag}', 'TagController@show')->name('tags.show');
 

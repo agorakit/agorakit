@@ -67,7 +67,7 @@ class GroupCalendarEventController extends Controller
 
             return view('calendarevents.index')
                 ->with('type', 'list')
-                ->with('title', $group->name . ' - ' . trans('messages.agenda'))
+                ->with('title', $group->name . ' - ' . trans('messages.calendar'))
                 ->with('events', $events)
                 ->with('group', $group)
                 ->with('tab', 'calendarevent');

@@ -36,7 +36,7 @@
   @can ('viewCalendarEvents', $group)
     <li role="presentation" @if (isset($tab) && ($tab == 'calendarevent')) class="active" @endif>
       <a href="{{ action('CalendarEventController@index', $group->id) }}">
-        <i class="fa fa-calendar"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.agenda') }}</span>
+        <i class="fa fa-calendar"></i> <span class="hidden-xs hidden-sm">{{ trans('messages.calendar') }}</span>
       </a>
     </li>
   @endcan

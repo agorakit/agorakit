@@ -19,7 +19,7 @@
 
     <li class="nav-item">
         <a class="nav-link @if (isset($tab) && $tab == 'calendarevents') active @endif" href="{{ action('CalendarEventController@index') }}">
-            <i class="fa fa-calendar"></i> <span class="ms-2 d-none d-lg-inline ">{{ trans('messages.agenda') }}</span>
+            <i class="fa fa-calendar"></i> <span class="ms-2 d-none d-lg-inline ">{{ trans('messages.calendar') }}</span>
         </a>
     </li>
 
