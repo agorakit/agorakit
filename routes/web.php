@@ -73,7 +73,7 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::get('register/password', 'Auth\RegisterController@showPasswordForm');
         Route::post('register/password', 'Auth\RegisterController@handlePasswordForm');
-
+        Route::get('forgotpassword', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('passwordrequest');
 
         Route::get('login/email', 'Auth\LoginByEmailController@showLoginByEmailForm')->name('loginbyemail');
         Route::post('login/email', 'Auth\LoginByEmailController@sendLoginByEmail')->name('sendloginbyemail');
