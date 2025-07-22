@@ -82,7 +82,6 @@ class SendNotifications extends Command
         // we need to check here instead of later in the notification chain
         // if we really have a valid user and a valid group from the membership table
 
-
         // I use Carbon::now() instead of the now() provided by mysql to avoid different timezone settings in differents servers (php vs mysql config)
         $notifications = DB::select('
         select * from
