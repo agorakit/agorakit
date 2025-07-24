@@ -110,6 +110,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('calendar', 'CalendarEventController@index')->name('calendar');
     Route::get('calendar/json', 'CalendarEventController@indexJson')->name('calendar.json');
     Route::get('calendar/ical', 'IcalController@index')->name('calendar.ical');
+    Route::redirect('agenda', 'calendar');
+    Route::redirect('agenda/json', 'calendar/json');
+    Route::redirect('agenda/ical', 'calendar/ical');
+
     Route::get('tags', 'TagController@index')->name('tags.index');
     Route::get('tags/{tag}', 'TagController@show')->name('tags.show');
 
@@ -119,6 +123,7 @@ Route::group(['middleware' => ['web']], function () {
     // Feeds (RSS)
     Route::get('discussions/feed', 'FeedController@discussions')->name('discussions.feed');
     Route::get('calendarevents/feed', 'FeedController@calendarevents')->name('calendarevents.feed');
+    Route::redirect('actions/feed', 'calendarevents/feed');
 
     // Group handling
     Route::get('groups', 'GroupController@index')->name('groups.index');
@@ -260,6 +265,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('calendarevents/{event}/delete', 'GroupCalendarEventController@destroyConfirm')->name('.calendarevents.deleteconfirm');
         Route::delete('calendarevents/{event}/delete', 'GroupCalendarEventController@destroy')->name('.calendarevents.delete');
         Route::get('calendarevents/{event}/history', 'GroupCalendarEventController@history')->name('.calendarevents.history');
+        Route::redirect('actions', 'calendarevents');
+        Route::redirect('actions/{event}', 'calendarevents/{event}');
+        Route::redirect('actions/json', 'calendarevents/json');
+        Route::redirect('actions/ical', 'calendarevents/ical');
 
         // Event participation
         Route::get('calendarevents/{event}/participation/set/{status}', 'ParticipationController@set')->name('.calendarevents.participation.set');
