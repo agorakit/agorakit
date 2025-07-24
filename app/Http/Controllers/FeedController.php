@@ -54,7 +54,7 @@ class FeedController extends Controller
 
         $channel = new Channel();
         $channel
-            ->title(setting('name') . ' : ' . trans('messages.agenda'))
+            ->title(setting('name') . ' : ' . trans('messages.calendar'))
             ->description(setting('name'))
             ->ttl(60)
             ->appendTo($feed);

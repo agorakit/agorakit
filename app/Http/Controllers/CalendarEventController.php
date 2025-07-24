@@ -43,14 +43,14 @@ class CalendarEventController extends Controller
 
             $events = $events->paginate(20);
 
-            return view('dashboard.agenda-list')
-                ->with('title', trans('messages.agenda'))
+            return view('dashboard.calendar-list')
+                ->with('title', trans('messages.calendar'))
                 ->with('tab', 'calendarevents')
                 ->with('events', $events);
         }
 
-        return view('dashboard.agenda')
-            ->with('title', trans('messages.agenda'))
+        return view('dashboard.calendar')
+            ->with('title', trans('messages.calendar'))
             ->with('tab', 'calendarevents');
     }
 

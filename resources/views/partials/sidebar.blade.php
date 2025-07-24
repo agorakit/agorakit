@@ -17,7 +17,7 @@
 </a>
 
 <a  href="{{ action('CalendarEventController@index') }}">
-  {{trans('messages.agenda')}}
+  {{trans('messages.calendar')}}
 </a>
 
 <a  href="{{ action('UserController@index') }}">

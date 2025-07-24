@@ -27,7 +27,7 @@
                 <li class="nav-item">
                     <a class="nav-link @if (isset($tab) && $tab == 'calendarevents') active @endif" href="{{ route('groups.calendarevents.index', $group) }}">
                         <i class="fa fa-calendar me-2"></i>
-                        <span class="d-none d-sm-inline">{{ trans('messages.agenda') }}</span>
+                        <span class="d-none d-sm-inline">{{ trans('messages.calendar') }}</span>
                     </a>
                 </li>
             @endcan
