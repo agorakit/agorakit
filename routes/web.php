@@ -107,9 +107,13 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('map', 'MapController@index')->name('map');
     Route::get('map.geojson', 'MapController@geoJson')->name('map.geojson');
 
-    Route::get('agenda', 'CalendarEventController@index')->name('agenda');
-    Route::get('agenda/json', 'CalendarEventController@indexJson')->name('agenda.json');
-    Route::get('agenda/ical', 'IcalController@index')->name('agenda.ical');
+    Route::get('calendar', 'CalendarEventController@index')->name('calendar');
+    Route::get('calendar/json', 'CalendarEventController@indexJson')->name('calendar.json');
+    Route::get('calendar/ical', 'IcalController@index')->name('calendar.ical');
+    Route::permanentRedirect('agenda', 'calendar');
+    Route::permanentRedirect('agenda/json', '../calendar/json');
+    Route::permanentRedirect('agenda/ical', '../calendar/ical');
+
     Route::get('tags', 'TagController@index')->name('tags.index');
     Route::get('tags/{tag}', 'TagController@show')->name('tags.show');
 
@@ -119,6 +123,7 @@ Route::group(['middleware' => ['web']], function () {
     // Feeds (RSS)
     Route::get('discussions/feed', 'FeedController@discussions')->name('discussions.feed');
     Route::get('calendarevents/feed', 'FeedController@calendarevents')->name('calendarevents.feed');
+    Route::permanentRedirect('actions/feed', '../calendarevents/feed');
 
     // Group handling
     Route::get('groups', 'GroupController@index')->name('groups.index');
@@ -260,6 +265,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('calendarevents/{event}/delete', 'GroupCalendarEventController@destroyConfirm')->name('.calendarevents.deleteconfirm');
         Route::delete('calendarevents/{event}/delete', 'GroupCalendarEventController@destroy')->name('.calendarevents.delete');
         Route::get('calendarevents/{event}/history', 'GroupCalendarEventController@history')->name('.calendarevents.history');
+        Route::permanentRedirect('actions', 'calendarevents');
+        Route::permanentRedirect('actions/{event}', '../calendarevents/{event}');
+        Route::permanentRedirect('actions/json', '../calendarevents/json');
+        Route::permanentRedirect('actions/ical', '../calendarevents/ical');
 
         // Event participation
         Route::get('calendarevents/{event}/participation/set/{status}', 'ParticipationController@set')->name('.calendarevents.participation.set');
