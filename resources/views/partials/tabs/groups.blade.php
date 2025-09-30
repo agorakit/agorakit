@@ -22,12 +22,12 @@
             @endcan
         @endif
 
-        @if ($group->getSetting('module_action', true) == true)
-            @can('viewActions', $group)
+        @if ($group->getSetting('module_calendarevent', true) == true)
+            @can('viewCalendarEvents', $group)
                 <li class="nav-item">
-                    <a class="nav-link @if (isset($tab) && $tab == 'action') active @endif" href="{{ route('groups.actions.index', $group) }}">
+                    <a class="nav-link @if (isset($tab) && $tab == 'calendarevents') active @endif" href="{{ route('groups.calendarevents.index', $group) }}">
                         <i class="fa fa-calendar me-2"></i>
-                        <span class="d-none d-sm-inline">{{ trans('messages.agenda') }}</span>
+                        <span class="d-none d-sm-inline">{{ trans('messages.calendar') }}</span>
                     </a>
                 </li>
             @endcan

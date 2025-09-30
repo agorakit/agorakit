@@ -80,6 +80,18 @@ class GroupPolicy extends BasePolicy
     }
 
     /**
+     * A user can import a group if it is allowed in the global settings (set by admin-wide accounts)
+     */
+    public function import(User $user)
+    {
+        if (setting('user_can_import_groups') == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * A group admin can delete a group
      */
     public function delete(User $user, Group $group)
@@ -137,9 +149,9 @@ class GroupPolicy extends BasePolicy
         return $this->getPermissionsFor($user, $group)->contains('create-file');
     }
 
-    public function createAction(User $user, Group $group)
+    public function createCalendarEvent(User $user, Group $group)
     {
-        return $this->getPermissionsFor($user, $group)->contains('create-action');
+        return $this->getPermissionsFor($user, $group)->contains('create-calendarevent');
     }
 
     public function createComment(User $user, Group $group)
@@ -172,7 +184,7 @@ class GroupPolicy extends BasePolicy
         return $group->isOpen();
     }
 
-    public function viewActions(?User $user, Group $group)
+    public function viewCalendarEvents(?User $user, Group $group)
     {
         if ($user) {
             return $group->isOpen() || $user->isMemberOf($group);

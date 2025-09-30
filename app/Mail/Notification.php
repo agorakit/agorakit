@@ -16,7 +16,7 @@ class Notification extends Mailable
     public $discussions;
     public $files;
     public $users;
-    public $actions;
+    public $events;
     public $last_notification;
 
     /**

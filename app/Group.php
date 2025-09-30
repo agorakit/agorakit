@@ -16,7 +16,7 @@ use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
 use Carbon\Carbon;
 use App\File;
-use App\Action;
+use App\CalendarEvent;
 use App\Invite;
 use App\Activity;
 
@@ -38,10 +38,10 @@ class Group extends Model
         'body' => 'required',
     ];
 
-    protected $fillable = ['id', 'name', 'body', 'cover'];
+    protected $fillable = ['id', 'name', 'body', 'cover', 'slug'];
     protected $casts = ['user_id' => 'integer', 'settings' => 'array'];
 
-    protected $keepRevisionOf = ['name', 'body', 'cover', 'color', 'group_type', 'location', 'settings', 'status'];
+    protected $keepRevisionOf = ['name', 'body', 'cover', 'color', 'group_type', 'location', 'settings', 'slug', 'status'];
 
     /**** various group types ****/
     // open group, default
@@ -170,11 +170,11 @@ class Group extends Model
     }
 
     /**
-     * Returns all the actions belonging to this group.
+     * Returns all the events belonging to this group.
      */
-    public function actions(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function calendarevents(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Action::class);
+        return $this->hasMany(CalendarEvent::class);
     }
 
     public function files(): \Illuminate\Database\Eloquent\Relations\HasMany
@@ -370,10 +370,10 @@ class Group extends Model
         if ($this->location->name) {
             $arr[$this->location->name] = $this->location;
         }
-        foreach ($this->actions()->get() as $action) {
-            if ($action->location->name) {
-                $key = $action->location->name . $action->location->city;
-                $arr[$key] = $action->location;
+        foreach ($this->calendarevents()->get() as $event) {
+            if ($event->location->name) {
+                $key = $event->location->name . $event->location->city;
+                $arr[$key] = $event->location;
             }
         }
         ksort($arr);

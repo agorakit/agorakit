@@ -85,6 +85,11 @@ class CheckMailbox extends Command
      */
     public function handle()
     {
+        if (!function_exists('imap_open')) {
+                $this->info('IMAP extension must be enabled');
+            return false;
+        }
+
         if (!config('agorakit.inbox_host')) {
             $this->info('Email checking disabled in settings');
             return false;

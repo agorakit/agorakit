@@ -25,7 +25,7 @@ class SettingsController extends Controller
         $overviewItems = [
             "show_overview_all_groups" => trans('messages.all_groups'),
             "show_overview_discussions" => trans('messages.discussions'),
-            "show_overview_agenda" => trans('messages.agenda'),
+            "show_overview_calendar" => trans('messages.calendar'),
             "show_overview_tags" => trans('messages.tags'),
             "show_overview_map" => trans('messages.map'),
             "show_overview_files" => trans('messages.files'),
@@ -69,6 +69,7 @@ class SettingsController extends Controller
 
         setting()->set('user_can_create_groups', $request->has('user_can_create_groups') ? 1 : 0);
         setting()->set('user_can_create_secret_groups', $request->has('user_can_create_secret_groups') ? 1 : 0);
+        setting()->set('user_can_import_groups', $request->has('user_can_import_groups') ? 1 : 0);
         setting()->set('notify_admins_on_group_create', $request->has('notify_admins_on_group_create') ? 1 : 0);
         setting()->set('user_can_register', $request->has('user_can_register') ? 1 : 0);
 
@@ -82,7 +83,7 @@ class SettingsController extends Controller
         $overviewItems = [
             "show_overview_all_groups" => trans('messages.all_groups'),
             "show_overview_discussions" => trans('messages.discussions'),
-            "show_overview_agenda" => trans('messages.agenda'),
+            "show_overview_calendar" => trans('messages.calendar'),
             "show_overview_tags" => trans('messages.tags'),
             "show_overview_map" => trans('messages.map'),
             "show_overview_files" => trans('messages.files'),

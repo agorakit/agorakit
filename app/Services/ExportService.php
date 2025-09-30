@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Group;
 use Auth;
-use Route;
 use Storage;
 use ZipArchive;
 
@@ -27,8 +26,9 @@ class ExportService
         $group->load([
             'user',
             'memberships.user',
-            'actions',
-            'actions.user',
+            'calendarevents',
+            'calendarevents.user',
+            'calendarevents.tags',
             'discussions',
             'discussions.user',
             'discussions.comments',
@@ -37,8 +37,10 @@ class ExportService
             'discussions.comments.reactions.user',
             'discussions.reactions',
             'discussions.reactions.user',
+            'discussions.tags',
             'files',
             'files.user',
+            'files.tags',
             'tags'
         ]);
 

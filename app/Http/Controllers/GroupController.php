@@ -6,6 +6,7 @@ use App\Group;
 use App\Setting;
 use App\Traits\ContentStatus;
 use App\Services\ExportService;
+use App\Services\ImportService;
 use Auth;
 use Carbon\Carbon;
 use Gate;
@@ -26,7 +27,7 @@ class GroupController extends Controller
         $groups = new Group();
         $groups = $groups->notSecret();
 
-        $groups = $groups->with('tags', 'users', 'actions', 'discussions')
+        $groups = $groups->with('tags', 'users', 'calendarevents', 'discussions')
             ->orderBy('status', 'desc')
             ->orderBy('updated_at', 'desc');
 
@@ -78,7 +79,7 @@ class GroupController extends Controller
         $this->authorize('view', $group);
 
         $discussions = false;
-        $actions = false;
+        $events = false;
         $files = false;
         $activities = false;
         $group_inbox = false;
@@ -106,8 +107,8 @@ class GroupController extends Controller
                     ->get();
             }
 
-            if (Gate::allows('viewActions', $group)) {
-                $actions = $group->actions()
+            if (Gate::allows('viewCalendarEvents', $group)) {
+                $events = $group->calendarevents()
                     ->with('user', 'tags', 'group')
                     ->where('stop', '>=', Carbon::now()->subDay())
                     ->orderBy('start', 'asc')
@@ -138,7 +139,7 @@ class GroupController extends Controller
                     ->limit(5)
                     ->get();
 
-                $actions = $group->actions()
+                $events = $group->calendarevents()
                     ->with('user', 'tags', 'group')
                     ->where('start', '>=', Carbon::now())
                     ->orderBy('start', 'asc')
@@ -151,7 +152,7 @@ class GroupController extends Controller
             ->with('title', $group->name)
             ->with('group', $group)
             ->with('discussions', $discussions)
-            ->with('actions', $actions)
+            ->with('events', $events)
             ->with('files', $files)
             ->with('admins', $group->admins()->get())
             ->with('group_inbox', $group_inbox)
@@ -441,6 +442,99 @@ class GroupController extends Controller
             return Storage::disk('tmp')->download($zipfile, $name, $headers);
         } else {
             abort(404, 'Export failed!');
+        }
+    }
+
+
+    /**
+     * Import a group.
+     */
+    public function import(Request $request)
+    {
+        $this->authorize('import', Group::class);
+        if (!Auth::check()) {
+            return redirect()->route('groups.index')
+              ->withErrors(trans('messages.authentication_error'));
+        }
+        $user_id = Auth::user()->id;
+
+        if ($request->method() == 'GET') { // Display form
+            return view('groups.import');
+        }
+
+        if ($request->has('import')) { // Upload import data
+            $file = $request->file('import');
+            $mimetype = $file->getMimeType();
+            if (!str_ends_with($mimetype, 'zip') && !str_ends_with($mimetype, 'json')) {
+                return redirect()->route('groups.index')
+                 ->withErrors(trans('group.import_error'));
+            }
+            if (str_ends_with($mimetype, 'json')) {
+                $path = $file->storeAs('groups/new', "groupimport-" . $user_id . "-" . Carbon::now()->format('Y-m-d_H-i-s') . ".json");
+            }
+            else {
+                $path = $file->storeAs('groups/new', "groupimport-" . $user_id . "-" . Carbon::now()->format('Y-m-d_H-i-s') . ".zip");
+            }
+            $importservice = new ImportService();
+            $ret = $importservice->import($path);
+            list($import_basename, $existing_group, $existing_usernames, $group_name, $group_type) = $ret;
+
+            return view('groups.importconfirm')
+                ->with('user_id', $user_id)
+                ->with('group_name', $group_name)
+                ->with('group_type', $group_type)
+                ->with('import_basename', $import_basename)
+                ->with('existing_group', $existing_group)
+                ->with('existing_usernames', $existing_usernames);
+        }
+
+        // Process the intermediate form
+        if (!$request->has('user_id') || !$request->has('import_basename')) {
+            return redirect()->route('groups.index')
+              ->withErrors(trans('group.import_error'));
+        }
+
+        // A few checks
+        if ($request->get('user_id') <> $user_id) {
+            return redirect()->route('groups.index')
+                ->withErrors(trans('This action is unauthorized'));
+        }
+        $basename = $request->get('import_basename');
+        // For added security, we import only freshly uploaded data
+        $date_string = implode('-', array_slice(explode('-', pathinfo($basename)['filename']), 2));
+        $dt = Carbon::createFromFormat('Y-m-d_H-i-s', $date_string);
+        if ($dt->diffInHours(Carbon::now()) > 1) {
+            return redirect()->route('groups.index')
+              ->withErrors(trans('A Timeout Occurred'));
+        }
+        $path = 'groups/new/' . $basename;
+
+        $new_usernames = array();
+        foreach($request->all() as $key=>$val) {
+            if (substr($key, 0, 13) == 'new_username_') {
+                $new_usernames[substr($key, 13)] = $val;
+            }
+        }
+        $path = 'groups/new/' . $basename;
+        $importservice = new ImportService();
+        $ret = $importservice->import2($path, $new_usernames);
+        if (is_a($ret, "App\Group")) {
+            flash(trans('messages.ressource_created_successfully'));
+            return redirect()->route('groups.show', [$ret]);
+        }
+        else if (is_array($ret)) { // Go back to intermediate forme
+            list($import_basename, $existing_group, $edited_usernames, $group_name, $group_type) = $ret;
+            return view('groups.importconfirm')
+                ->with('user_id', $user_id)
+                ->with('group_name', $group_name)
+                ->with('group_type', $group_type)
+                ->with('import_basename', $import_basename)
+                ->with('existing_group', '')
+                ->with('existing_usernames', $edited_usernames)
+                ->withErrors(trans("Sorry! These need to be edited a second time because they also exist in database!"));
+        }
+        else {
+            return redirect()->route('groups.index')->withErrors("Import error");
         }
     }
 }

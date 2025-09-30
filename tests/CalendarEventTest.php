@@ -2,7 +2,7 @@
 
 use App\Group;
 
-class ActionTest extends Tests\BrowserKitTestCase
+class CalendarEventTest extends Tests\BrowserKitTestCase
 {
     /******************* Why is it done this way ? ***************/
 
@@ -56,168 +56,168 @@ class ActionTest extends Tests\BrowserKitTestCase
         $this->actingAs($user)
             ->visit('groups/create')
             ->see('Create a new group')
-            ->type('Action test group', 'name')
-            ->type('this is a test group for action test', 'body')
+            ->type('Event test group', 'name')
+            ->type('this is a test group for event test', 'body')
             ->type('France', 'location[country]')
             ->press('Create the group')
-            ->see('Action test group');
+            ->see('Event test group');
     }
 
-    public function testActionWithDefiniteEndCreation()
+    public function testEventWithDefiniteEndCreation()
     {
         $user = App\User::where('email', 'admin@agorakit.org')->first();
 
-        $group = App\Group::where('name', 'Action test group')->first();
+        $group = App\Group::where('name', 'Event test group')->first();
 
         $this->actingAs($user)
-            ->visit('/groups/' . $group->id . '/actions/create')
+            ->visit('/groups/' . $group->id . '/calendarevents/create')
             ->see('Add an event')
-            ->type('Test action with definite end', 'name')
-            ->type('this is a test action in the agenda', 'body')
+            ->type('Test event with definite end', 'name')
+            ->type('this is a test event in the calendar', 'body')
             ->type('Bruxelles', 'location[city]')
             ->type('2026-01-01', 'start_date')
             ->type('12:00', 'start_time')
             ->type('2026-01-03', 'stop_date')
             ->type('9:00', 'stop_time')
             ->press('Create')
-            ->seeInDatabase('actions', [
-                'name' => 'Test action with definite end',
+            ->seeInDatabase('calendar_events', [
+                'name' => 'Test event with definite end',
                 'start' => '2026-01-01 12:00:00',
                 'stop' => '2026-01-03 09:00:00'
             ])
-            ->see(trans('messages.create_action'));
+            ->see(trans('messages.create_event'));
     }
 
-    public function testActionWithWrongStopTimeCreation()
+    public function testEventWithWrongStopTimeCreation()
     {
         $user = App\User::where('email', 'admin@agorakit.org')->first();
 
-        $group = App\Group::where('name', 'Action test group')->first();
+        $group = App\Group::where('name', 'Event test group')->first();
 
         $this->actingAs($user)
-            ->visit('/groups/' . $group->id . '/actions/create')
+            ->visit('/groups/' . $group->id . '/calendarevents/create')
             ->see('Add an event')
-            ->type('Test action with wrong stop time', 'name')
-            ->type('this is a test action in the agenda', 'body')
+            ->type('Test event with wrong stop time', 'name')
+            ->type('this is a test event in the calendar', 'body')
             ->type('Bruxelles', 'location[city]')
             ->type('2026-01-01', 'start_date')
             ->type('12:00', 'start_time')
             ->type('9:00', 'stop_time')
             ->press('Create')
-            ->dontSeeInDatabase('actions', [
-                'name' => 'Test action with wrong stop time'
+            ->dontSeeInDatabase('calendar_events', [
+                'name' => 'Test event with wrong stop time'
             ]);
     }
 
-    public function testActionWithoutStopDateCreation()
+    public function testEventWithoutStopDateCreation()
     {
         $user = App\User::where('email', 'admin@agorakit.org')->first();
 
-        $group = App\Group::where('name', 'Action test group')->first();
+        $group = App\Group::where('name', 'Event test group')->first();
 
         $this->actingAs($user)
-            ->visit('/groups/' . $group->id . '/actions/create')
+            ->visit('/groups/' . $group->id . '/calendarevents/create')
             ->see('Add an event')
-            ->type('Test action without stop date', 'name')
-            ->type('this is a test action in the agenda', 'body')
+            ->type('Test event without stop date', 'name')
+            ->type('this is a test event in the calendar', 'body')
             ->type('Bruxelles', 'location[city]')
             ->type('2026-01-01', 'start_date')
             ->type('12:00', 'start_time')
             ->type('17:00', 'stop_time')
             ->press('Create')
-            ->seeInDatabase('actions', [
-                'name' => 'Test action without stop date',
+            ->seeInDatabase('calendar_events', [
+                'name' => 'Test event without stop date',
                 'start' => '2026-01-01 12:00:00',
                 'stop' => '2026-01-01 17:00:00'
             ])
-            ->see(trans('messages.create_action'));
+            ->see(trans('messages.create_event'));
     }
 
-    public function testActionWithoutStopTimeCreation()
+    public function testEventWithoutStopTimeCreation()
     {
         $user = App\User::where('email', 'admin@agorakit.org')->first();
 
-        $group = App\Group::where('name', 'Action test group')->first();
+        $group = App\Group::where('name', 'Event test group')->first();
 
         $this->actingAs($user)
-            ->visit('/groups/' . $group->id . '/actions/create')
+            ->visit('/groups/' . $group->id . '/calendarevents/create')
             ->see('Add an event')
-            ->type('Test action without stop time', 'name')
-            ->type('this is a test action in the agenda', 'body')
+            ->type('Test event without stop time', 'name')
+            ->type('this is a test event in the calendar', 'body')
             ->type('Bruxelles', 'location[city]')
             ->type('2026-01-01', 'start_date')
             ->type('12:00', 'start_time')
             ->type('2026-01-03', 'stop_date')
             ->press('Create')
-            ->seeInDatabase('actions', [
-                'name' => 'Test action without stop time',
+            ->seeInDatabase('calendar_events', [
+                'name' => 'Test event without stop time',
                 'start' => '2026-01-01 12:00:00',
                 'stop' => '2026-01-03 12:00:00'
             ])
-            ->see(trans('messages.create_action'));
+            ->see(trans('messages.create_event'));
     }
 
-    public function testActionWithUnknownEnd()
+    public function testEventWithUnknownEnd()
     {
         $user = App\User::where('email', 'admin@agorakit.org')->first();
 
-        $group = App\Group::where('name', 'Action test group')->first();
+        $group = App\Group::where('name', 'Event test group')->first();
 
         $this->actingAs($user)
-            ->visit('/groups/' . $group->id . '/actions/create')
+            ->visit('/groups/' . $group->id . '/calendarevents/create')
             ->see('Add an event')
-            ->type('Test action with unknown end', 'name')
-            ->type('this is a test action in the agenda', 'body')
+            ->type('Test event with unknown end', 'name')
+            ->type('this is a test event in the calendar', 'body')
             ->type('Bruxelles', 'location[city]')
             ->type('2026-01-01', 'start_date')
             ->type('12:00', 'start_time')
             ->press('Create')
-            ->seeInDatabase('actions', [
-                'name' => 'Test action with unknown end'
+            ->seeInDatabase('calendar_events', [
+                'name' => 'Test event with unknown end'
             ])
-            ->see(trans('messages.create_action'));
+            ->see(trans('messages.create_event'));
     }
 
-    public function testActionWithLocationName()
+    public function testEventWithLocationName()
     {
         $user = App\User::where('email', 'admin@agorakit.org')->first();
 
-        $group = App\Group::where('name', 'Action test group')->first();
+        $group = App\Group::where('name', 'Event test group')->first();
 
         $this->actingAs($user)
-            ->visit('/groups/' . $group->id . '/actions/create')
+            ->visit('/groups/' . $group->id . '/calendarevents/create')
             ->see('Add an event')
-            ->type('Test action with location name', 'name')
-            ->type('this is a test action in the agenda', 'body')
+            ->type('Test event with location name', 'name')
+            ->type('this is a test event in the calendar', 'body')
             ->type('Bruxelles', 'location[city]')
             ->type('My Place', 'location[name]')
             ->type('2026-01-01', 'start_date')
             ->type('12:00', 'start_time')
             ->press('Create')
-            ->seeInDatabase('actions', [
-                'name' => 'Test action with location name'
+            ->seeInDatabase('calendar_events', [
+                'name' => 'Test event with location name'
             ])
-            ->see(trans('messages.create_action'));
+            ->see(trans('messages.create_event'));
     }
 
-    public function testActionUsingLocationName()
+    public function testEventUsingLocationName()
     {
         $user = App\User::where('email', 'admin@agorakit.org')->first();
 
-        $group = App\Group::where('name', 'Action test group')->first();
+        $group = App\Group::where('name', 'Event test group')->first();
 
         $this->actingAs($user)
-            ->visit('/groups/' . $group->id . '/actions/create')
+            ->visit('/groups/' . $group->id . '/calendarevents/create')
             ->see('Add an event')
-            ->type('Test action us-ing location name', 'name')
-            ->type('this is a test action in the agenda', 'body')
+            ->type('Test event us-ing location name', 'name')
+            ->type('this is a test event in the calendar', 'body')
 	    ->select('My PlaceBruxelles', 'listed_location')
             ->type('2026-02-02', 'start_date')
             ->type('12:00', 'start_time')
             ->press('Create')
-            ->seeInDatabase('actions', [
-                'name' => 'Test action us-ing location name'
+            ->seeInDatabase('calendar_events', [
+                'name' => 'Test event us-ing location name'
             ])
-            ->see(trans('messages.create_action'));
+            ->see(trans('messages.create_event'));
     }
 }
