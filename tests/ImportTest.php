@@ -150,9 +150,9 @@ class ImportTest extends Tests\BrowserKitTestCase
 
         $this->actingAs($user)
             ->visit('/groups/' . $group->id . '/calendarevents/create')
-            ->see('Add a calendar event')
+            ->see('Add an event')
             ->type('Test event', 'name')
-            ->type('this is a test event in the agenda', 'body')
+            ->type('this is a test event in the calendar', 'body')
             ->type('Bruxelles', 'location[city]')
             ->type('2016-01-01', 'start_date')
             ->type('12:00', 'start_time')

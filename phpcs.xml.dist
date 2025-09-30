@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!-- @see https://pear.php.net/manual/en/package.php.php-codesniffer.annotated-ruleset.php -->
+<ruleset name= "Agorakit PHPCS Rules">
+    <file>tests</file>
+    <file>app</file>
+
+    <!-- Progress indicator -->
+    <arg value= "p"/>
+
+    <!-- Show codes -->
+    <arg value= "s"/>
+
+    <!-- Set to PSR-12 -->
+    <rule ref="PSR12">
+
+    </rule>
+</ruleset>
