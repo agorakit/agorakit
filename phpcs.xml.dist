@@ -12,6 +12,12 @@
 
     <!-- Set to PSR-12 -->
     <rule ref="PSR12">
-
+        <exclude name="Generic.Files.LineLength.TooLong" />
+    </rule>
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="120"/>
+            <property name="absoluteLineLimit" value="150"/>
+        </properties>
     </rule>
 </ruleset>
