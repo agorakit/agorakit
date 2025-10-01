@@ -49,8 +49,8 @@ class MentionedUser extends Notification
     {
 
         $message =  (new MailMessage())
-        ->subject('['.$this->comment->discussion->group->name.'] '.trans('messages.you_have_been_mentionned_by').' '.$this->user->name)
-        ->line(trans('messages.you_have_been_mentionned_by').' '.$this->user->name.' '.trans('messages.in_the_discussion').' '.$this->comment->discussion->name.' : ')
+        ->subject('[' . $this->comment->discussion->group->name . '] ' . trans('messages.you_have_been_mentionned_by') . ' ' . $this->user->name)
+        ->line(trans('messages.you_have_been_mentionned_by') . ' ' . $this->user->name . ' ' . trans('messages.in_the_discussion') . ' ' . $this->comment->discussion->name . ' : ')
         ->line(html_entity_decode(strip_tags(filter($this->comment->body))))
         ->action(trans('messages.reply'), route('groups.discussions.show', [$this->comment->discussion->group, $this->comment->discussion]))
         ->line(trans('messages.dont_reply_to_this_email'));
@@ -58,8 +58,7 @@ class MentionedUser extends Notification
         // send notification directly from discussion inbox if there is one
         if ($this->comment->discussion->inbox()) {
             $message->from($this->comment->discussion->inbox(), $this->comment->discussion->group->name);
-        }
-        else {
+        } else {
             $message->from(config('mail.noreply'), config('mail.from.name'));
         }
 

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Group;
 use Carbon\Carbon;
-
 use Spatie\IcalendarGenerator\Components\Calendar;
 use Spatie\IcalendarGenerator\Components\Event;
 
@@ -20,7 +19,7 @@ class GroupIcalController extends Controller
     public function index(Group $group)
     {
         $this->authorize('view-calendarevents', $group);
-        
+
         // Create new calendar
         $calendar = Calendar::create(setting('name') . ' : ' . $group->name);
         $calendar->description(summary($group->body, 500));
@@ -48,7 +47,7 @@ class GroupIcalController extends Controller
             ->header('Content-Type', 'text/calendar')
             ->header('charset', 'utf-8');
 
-        // or : 
+        // or :
         return response($calendar->get(), 200, [
             'Content-Type' => 'text/calendar',
             'Content-Disposition' => 'attachment; filename="my-awesome-calendar.ics"',

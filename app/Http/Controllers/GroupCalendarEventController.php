@@ -137,10 +137,9 @@ class GroupCalendarEventController extends Controller
         foreach (Auth::user()->groups as $user_group) {
             foreach ($user_group->getNamedLocations() as $key => $location) {
                 if (!array_key_exists($key, $listed_locations)) {
-                    if($location->city) {
+                    if ($location->city) {
                         $listed_locations[$key] = $location->name . " (" . $location->city . ")";
-                    }
-                    else {
+                    } else {
                         $listed_locations[$key] = $location->name;
                     }
                 }
@@ -260,20 +259,19 @@ class GroupCalendarEventController extends Controller
         }
 
         if ($request->has('listed_location')) {
-            foreach($this->getListedLocations($group) as $key => $location) {
+            foreach ($this->getListedLocations($group) as $key => $location) {
                 if ($key == $request->input('listed_location')) {
                     $event->location = $group->getNamedLocations()[$key];
                 }
             }
-        }
-        else if ($request->has('location')) {
+        } elseif ($request->has('location')) {
             // Validate input
             try {
                 $event->location = $request->input('location');
             } catch (\Exception $e) {
-            return redirect()->route('groups.calendarevents.create', $group)
-              ->withErrors($e->getMessage() . '. Incorrect location')
-              ->withInput();
+                return redirect()->route('groups.calendarevents.create', $group)
+                ->withErrors($e->getMessage() . '. Incorrect location')
+                ->withInput();
             }
 
             // Geocode
@@ -357,7 +355,7 @@ class GroupCalendarEventController extends Controller
         $this->authorize('update', $event);
 
         $listed_location = "other";
-        foreach($group->getNamedLocations() as $key => $location) {
+        foreach ($group->getNamedLocations() as $key => $location) {
             if ($event->location == $location) {
                 $listed_location = $key;
             }
@@ -399,25 +397,26 @@ class GroupCalendarEventController extends Controller
 
         // handle location
         $old_location = $event->location;
-	$listed_location = $request->input('listed_location');
-	if ($listed_location == 'other') $listed_location = "";
+        $listed_location = $request->input('listed_location');
+        if ($listed_location == 'other') {
+            $listed_location = "";
+        }
         if ($listed_location) {
-            foreach($this->getListedLocations($group) as $key => $location) {
+            foreach ($this->getListedLocations($group) as $key => $location) {
                 if ($key == $listed_location) {
-		    $event->location = $group->getNamedLocations()[$key];
+                    $event->location = $group->getNamedLocations()[$key];
                 }
             }
-        }
-        else if ($request->has('location')) {
+        } elseif ($request->has('location')) {
             // Validate input
             try {
                 $event->location = $request->input('location');
             } catch (\Exception $e) {
-            return redirect()->route('groups.calendarevents.create', $event)
-              ->withErrors($e->getMessage() . '. Incorrect location')
-              ->withInput();
+                return redirect()->route('groups.calendarevents.create', $event)
+                ->withErrors($e->getMessage() . '. Incorrect location')
+                ->withInput();
             }
-	}
+        }
 
         // Geocode
         if ($event->location <> $old_location) {

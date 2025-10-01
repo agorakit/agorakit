@@ -13,7 +13,6 @@ interface ContentVisibility
 
 trait HasVisibility
 {
-
     public function getVisibility()
     {
         return $this->{'visibility'};
@@ -30,7 +29,7 @@ trait HasVisibility
         if ($this->group->isOpen()) {
             return true;
         }
-        
+
         return $this->getVisibility() === ContentVisibility::PUBLIC;
     }
 

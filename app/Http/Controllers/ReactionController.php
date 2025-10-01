@@ -30,7 +30,7 @@ class ReactionController extends Controller
             $this->authorize('react', $model);
             Reaction::reactTo($model, $reaction);
         }
-        
+
         return redirect()->back();
     }
 

@@ -44,7 +44,6 @@ class DashboardController extends Controller
                 ->orderBy('updated_at', 'desc');
             $groups = $groups->simplePaginate(20)->appends(request()->query());
         } else {
-
             $groups = new Group();
             $groups = $groups->notSecret();
 

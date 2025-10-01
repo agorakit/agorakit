@@ -14,7 +14,6 @@ interface ContentStatus
 
 trait HasStatus
 {
-
     public function getStatus(): int
     {
         return $this->{'status'};
@@ -75,5 +74,4 @@ trait HasStatus
         }
         return $this;
     }
-
 }

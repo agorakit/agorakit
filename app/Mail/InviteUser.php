@@ -11,7 +11,8 @@ use Illuminate\Queue\SerializesModels;
 
 class InviteUser extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     public $membership;
     public $group_user;
@@ -35,18 +36,20 @@ class InviteUser extends Mailable
     public function build()
     {
         $accept_url = URL::temporarySignedRoute(
-            'invite.accept.signed', now()->addDays(30),
+            'invite.accept.signed',
+            now()->addDays(30),
             ['membership' => $this->membership->id]
         );
 
         $deny_url = URL::temporarySignedRoute(
-            'invite.deny.signed', now()->addDays(30),
+            'invite.deny.signed',
+            now()->addDays(30),
             ['membership' => $this->membership->id]
         );
 
         return $this->markdown('emails.invite')
         ->from(config('mail.noreply'), config('mail.from.name'))
-        ->subject('['.setting('name').'] '.trans('messages.invitation_to_join').' "'.$this->membership->group->name.'"')
+        ->subject('[' . setting('name') . '] ' . trans('messages.invitation_to_join') . ' "' . $this->membership->group->name . '"')
         ->with('accept_url', $accept_url)
         ->with('deny_url', $deny_url);
     }

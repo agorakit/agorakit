@@ -11,7 +11,7 @@ use Carbon\Carbon;
  */
 function setting($name = false, $default = false)
 {
-    $setting = new \App\Setting;
+    $setting = new \App\Setting();
     if ($name) {
         return $setting->get($name, $default);
     }
@@ -39,7 +39,7 @@ function sizeForHumans($bytes)
 }
 
 
-/** 
+/**
  * Format a date correctly, if less than 2 days, use carbon diffForhumans, else returns a formated date
  */
 function dateForHumans($date)

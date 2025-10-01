@@ -15,19 +15,21 @@ class LocationFromJson implements CastsAttributes
     public function get(Model $model, string $key, mixed $value, array $attributes): mixed
     {
         // Initialize $value to ""
-        if (!$value) { $value = ""; }
+        if (!$value) {
+            $value = "";
+        }
         // Decoding the JSON field into an object
         $decoded = json_decode($value, false);
         if (!is_object($decoded)) {
           // This is probably an old `string` field, so we convert
           // putting all the string into `street` attribute
-          $decoded = new \stdClass();
-          $decoded->street = strval($value);
+            $decoded = new \stdClass();
+            $decoded->street = strval($value);
         }
-        foreach($model->location_keys as $k) {
-          if (!property_exists($decoded, $k)) {
-            $decoded->$k = "";
-          }
+        foreach ($model->location_keys as $k) {
+            if (!property_exists($decoded, $k)) {
+                $decoded->$k = "";
+            }
         }
         return $decoded;
     }

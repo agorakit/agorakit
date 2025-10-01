@@ -7,15 +7,15 @@ use Storage;
 use Illuminate\Http\Request;
 use Throwable;
 
-/**  
- * This trait allows any model to have an image cover 
- * Storage : 
- * - users in users/[id]/cover|small|medium|large.jpg 
- * - groups is groups/[id]/cover|small|medium|large.jpg 
+/**
+ * This trait allows any model to have an image cover
+ * Storage :
+ * - users in users/[id]/cover|small|medium|large.jpg
+ * - groups is groups/[id]/cover|small|medium|large.jpg
  * - events in groups/[id]/calendarevents/[id]/cover|small|medium|large.jpg
- * - files in groups/[id]/files/[id]/small|medium|large.jpg 
- * 
- * Available sizes : 
+ * - files in groups/[id]/files/[id]/small|medium|large.jpg
+ *
+ * Available sizes :
  * - small
  * - medium
  * - large
@@ -31,10 +31,18 @@ trait HasCover
      */
     public function getCoverPath()
     {
-        if ($this->getType() == "group") $path =  'groups/' . $this->id . '/';
-        if ($this->getType() == "user") $path =  'users/' . $this->id  . '/';
-        if ($this->getType() == "file") $path =  'groups/' . $this->group->id . '/files/' . $this->id . '/';
-        if ($this->getType() == "calendarevent") $path =  'groups/' . $this->group->id . '/calendarevents/' . $this->id . '/';
+        if ($this->getType() == "group") {
+            $path =  'groups/' . $this->id . '/';
+        }
+        if ($this->getType() == "user") {
+            $path =  'users/' . $this->id  . '/';
+        }
+        if ($this->getType() == "file") {
+            $path =  'groups/' . $this->group->id . '/files/' . $this->id . '/';
+        }
+        if ($this->getType() == "calendarevent") {
+            $path =  'groups/' . $this->group->id . '/calendarevents/' . $this->id . '/';
+        }
 
         return $path;
     }
@@ -47,7 +55,7 @@ trait HasCover
         return Storage::exists($this->getCoverPath() . 'cover.jpg');
     }
 
-    /** 
+    /**
      * Returns the cover file response
      */
     public function getCover($size = 'medium')
@@ -64,7 +72,7 @@ trait HasCover
     }
 
 
-    /** 
+    /**
      * Save the cover for this model from the request. Request should contain a "cover" field
      */
     public function setCoverFromRequest(Request $request)

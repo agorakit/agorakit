@@ -8,7 +8,6 @@ use Watson\Validating\ValidatingTrait;
 
 class Reaction extends Model
 {
-
     use ValidatingTrait;
 
     protected $fillable = ['reactable_type', 'reactable_id', 'user_id', 'type'];

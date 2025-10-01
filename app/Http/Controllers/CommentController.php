@@ -33,7 +33,6 @@ class CommentController extends Controller
 
         // handle attached file to comment
         if ($request->hasFile('file')) {
-
             // create a file instance
             $file = new File();
             $file->forceSave(); // we bypass autovalidation, since we don't have a complete model yet, but we *need* an id
@@ -109,8 +108,8 @@ class CommentController extends Controller
 
             // add an f:xx to the comment so it is shown on display
             $comment->body = $comment->body . '<p>f:' . $file->id . '</p>';
-            }
-        
+        }
+
 
         if ($comment->isInvalid()) {
             return redirect()->back()

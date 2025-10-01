@@ -235,7 +235,7 @@ class ImportTest extends Tests\BrowserKitTestCase
           ->click('Export Group Data');
 
         $files = array();
-        foreach($storage->files('') as $file) {
+        foreach ($storage->files('') as $file) {
             $files[$storage->lastModified($file)] = $file;
         }
         $ts = max(array_keys($files));

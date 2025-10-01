@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Group;
 
-
 class GroupController extends Controller
 {
     /**

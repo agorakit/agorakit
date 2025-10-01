@@ -8,21 +8,20 @@ use Route;
 
 /**
  * This service is responsible to return the correct context the user is currently in.
- * It can be either 
- * - a group, 
+ * It can be either
+ * - a group,
  * - a custom list of groups,
  * - all groups a user is member of,
- * - all public groups, 
+ * - all public groups,
  * - all groups, even closed ones (admin feature).
  */
 class ContextService
 {
-
     public $valid_contexts = ['group', 'joined', 'public', 'all', 'admin'];
 
 
     /**
-     * Returns current context as a string, can be : 
+     * Returns current context as a string, can be :
      * - all : admin overview of all discussions for example
      * - joined : all discussions in groups joined by the user
      * - group : a specific group is shown to the user
@@ -77,7 +76,7 @@ class ContextService
 
     /**
      * Set the current context for the current user
-     * Contex can be : 
+     * Contex can be :
      * - my
      * - public
      * - admin

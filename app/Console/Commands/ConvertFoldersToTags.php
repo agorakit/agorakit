@@ -38,13 +38,13 @@ class ConvertFoldersToTags extends Command
     public function handle()
     {
         foreach (\App\File::all() as $file) {
-            $this->info('Checking if there is something to do for file '.$file->name.' ('.$file->id.')');
+            $this->info('Checking if there is something to do for file ' . $file->name . ' (' . $file->id . ')');
 
             if ($file->isFile()) {
                 foreach ($file->getAncestors() as $parent) {
                     $file->tag($parent->name);
                 }
-                $this->info('Tagged file '.$file->name);
+                $this->info('Tagged file ' . $file->name);
             }
         }
     }

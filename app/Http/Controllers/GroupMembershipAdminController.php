@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 
 class GroupMembershipAdminController extends Controller
 {
-   
     /**
     * Show admin a form to edit a membership
     */
@@ -21,7 +20,7 @@ class GroupMembershipAdminController extends Controller
         $this->authorize('edit', $membership);
 
         return view('membership.admin.edit')
-        ->with('title', $group->name.' - '.trans('messages.settings'))
+        ->with('title', $group->name . ' - ' . trans('messages.settings'))
         ->with('tab', 'users')
         ->with('group', $group)
         ->with('interval', minutesToInterval($membership->notification_interval))

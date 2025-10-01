@@ -8,10 +8,7 @@ use App\Notifications\UpcomingCalendarEvent;
 use App\User;
 use Carbon\Carbon;
 use Notification;
-
 use Illuminate\Console\Command;
-
-
 
 class SendReminders extends Command
 {
@@ -47,25 +44,25 @@ class SendReminders extends Command
     public function handle()
     {
       // get all events that starts exactly in one hour and notify users
-      $events = CalendarEvent::whereBetween('start', [Carbon::now()->addHour()->subMinutes(5), Carbon::now()->addHour()])->get();
+        $events = CalendarEvent::whereBetween('start', [Carbon::now()->addHour()->subMinutes(5), Carbon::now()->addHour()])->get();
 
-      foreach ($events as $event)
-      {
-        $users =  $event->attending()->where('notification', 60)->get();
-        Notification::send($users, new UpcomingCalendarEvent($event));
-        if ($users->count() > 0) $this->info($users->count() . ' users notified for ' . $event->name);
-      }
+        foreach ($events as $event) {
+            $users =  $event->attending()->where('notification', 60)->get();
+            Notification::send($users, new UpcomingCalendarEvent($event));
+            if ($users->count() > 0) {
+                $this->info($users->count() . ' users notified for ' . $event->name);
+            }
+        }
 
       // get all events that starts exactly in one day and notify users
-      $events = CalendarEvent::whereBetween('start', [Carbon::now()->addDay()->subMinutes(5), Carbon::now()->addDay()])->get();
+        $events = CalendarEvent::whereBetween('start', [Carbon::now()->addDay()->subMinutes(5), Carbon::now()->addDay()])->get();
 
-      foreach ($events as $event)
-      {
-        $users =  $event->attending()->where('notification', 60*24)->get();
-        Notification::send($users, new UpcomingCalendarEvent($event));
-        if ($users->count() > 0) $this->info($users->count() . ' users notified for ' . $event->name);
-      }
-
+        foreach ($events as $event) {
+            $users =  $event->attending()->where('notification', 60 * 24)->get();
+            Notification::send($users, new UpcomingCalendarEvent($event));
+            if ($users->count() > 0) {
+                $this->info($users->count() . ' users notified for ' . $event->name);
+            }
+        }
     }
-
 }

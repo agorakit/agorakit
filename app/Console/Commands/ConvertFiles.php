@@ -39,15 +39,15 @@ class ConvertFiles extends Command
     public function handle()
     {
         foreach (\App\Group::all() as $group) {
-            $this->info('Checking if there is something to convert for group '.$group->name.' ('.$group->id.')');
+            $this->info('Checking if there is something to convert for group ' . $group->name . ' (' . $group->id . ')');
             foreach ($group->files as $file) {
                 if ($file->isFile()) {
                     if (Storage::disk('local')->has($file->path)) {
                         $source = Storage::disk('local')->get($file->path);
-                        Storage::disk('public')->put('groups/'.$group->id.'/'.$file->name, $source);
-                        $this->info('Copied file '.$file->name);
+                        Storage::disk('public')->put('groups/' . $group->id . '/' . $file->name, $source);
+                        $this->info('Copied file ' . $file->name);
                     } else {
-                        $this->info('File not found '.$file->name);
+                        $this->info('File not found ' . $file->name);
                     }
                 }
             }

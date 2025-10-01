@@ -44,7 +44,7 @@ class NotifyInstantly
         }
 
          // Comments
-         if ($event->model instanceof Discussion) {
+        if ($event->model instanceof Discussion) {
             $discussion = $event->model;
 
             // get a list of users that must be notified instantly

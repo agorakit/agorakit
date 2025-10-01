@@ -7,7 +7,6 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Context;
 
-
 /**
 
  * Global listing of events.
@@ -37,7 +36,6 @@ class CalendarEventController extends Controller
 
 
             if (Auth::user()->getPreference('show', 'joined') == 'all') {
-
                 $events->orWhere('visibility', 10);
             }
 

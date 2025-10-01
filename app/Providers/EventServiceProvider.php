@@ -16,7 +16,7 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\ContentCreated' => [
             'App\Listeners\NotifyMentionedUsers', 'App\Listeners\NotifyInstantly'
         ],
-        
+
     ];
 
     /**

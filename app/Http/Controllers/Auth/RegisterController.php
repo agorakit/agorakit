@@ -3,12 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-
-
-
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-
 use App\User;
 use Auth;
 use Mail;
@@ -17,7 +13,6 @@ use App\Mail\UserConfirmation;
 
 class RegisterController extends Controller
 {
-
     /**
     * Create a new controller instance.
     *
@@ -35,8 +30,7 @@ class RegisterController extends Controller
     {
         if (Gate::allows('create', User::class)) {
             return view('auth.register');
-        }
-        else {
+        } else {
             abort(500, 'You cannot create an account on this server');
         }
     }
@@ -63,18 +57,18 @@ class RegisterController extends Controller
 
         // check if mail is taken, if taken, propose a login link instead
         $user = User::where('email', $request->input('email'))->first();
-        if($user) {
+        if ($user) {
             flash(trans('You already have an account, use this form to receive a login link by email'));
             return redirect()->route('loginbyemail');
         }
 
         // check if mail is taken and user account deleted
-        
+
          $user = User::withTrashed()->where('email', $request->input('email'))->first();
-         if($user) {
-             flash(trans('Your user account is marked for deletion, contact an admin if you want to re-activate your account'));
-             return redirect('/');
-            }
+        if ($user) {
+            flash(trans('Your user account is marked for deletion, contact an admin if you want to re-activate your account'));
+            return redirect('/');
+        }
 
         // else go to step 3 : we ask for the passwords
         return redirect('/register/password');
@@ -139,5 +133,4 @@ class RegisterController extends Controller
 
         return redirect('/');
     }
-
 }

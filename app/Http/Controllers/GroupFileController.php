@@ -37,7 +37,7 @@ class GroupFileController extends Controller
         }
 
 
-        $file = new File;
+        $file = new File();
         $file->group()->associate($group);
 
 
@@ -144,7 +144,7 @@ class GroupFileController extends Controller
     {
         $this->authorize('create-file', $group);
 
-        $file = new File;
+        $file = new File();
         $file->group()->associate($group);
 
 
@@ -161,7 +161,7 @@ class GroupFileController extends Controller
     {
         $this->authorize('create-link', $group);
 
-        $file = new File;
+        $file = new File();
         $file->group()->associate($group);
 
 
@@ -194,11 +194,10 @@ class GroupFileController extends Controller
 
         // handle the case of a summernote upaload (via ajax)
         if ($request->ajax()) {
-             
             // validate file size
              $validated = $request->validate([
                 'file' => 'required|max:' . config('agorakit.max_file_size'),
-            ]);
+             ]);
 
             if ($request->file('file')) {
                 $file = new File();
@@ -216,7 +215,6 @@ class GroupFileController extends Controller
 
         try {
             if ($request->file('file')) {
-
                 // validate file size
                 $validated = $request->validate([
                     'file.*' => 'required|max:' . config('agorakit.max_file_size'),
@@ -424,8 +422,7 @@ class GroupFileController extends Controller
             }
         }
 
-        if ($request->has('file')) 
-        {
+        if ($request->has('file')) {
             $file->addToStorage($request->file('file'));
         }
 
@@ -483,7 +480,7 @@ class GroupFileController extends Controller
     public function archive(Group $group, File $file)
     {
         $this->authorize('archive', $file);
-        
+
         $file->toggleArchive();
         $file->timestamps = false;
         $file->save();

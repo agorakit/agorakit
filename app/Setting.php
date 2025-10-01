@@ -7,11 +7,10 @@ use Config;
 use Illuminate\Database\Eloquent\Model;
 use Venturecraft\Revisionable\RevisionableTrait;
 
-
 /**
  * This model is used to store settings. Settings are stored in the settings table. This model support fluent use.
- * 
- * setting()->localized($locale)->get($name) will return the $name setting using the $locale 
+ *
+ * setting()->localized($locale)->get($name) will return the $name setting using the $locale
  * setting()->localized()->get($name) will return the $name setting using current app locale
  * setting()->get($name) will return the $name setting value without locale support
  * setting($name) will return the $name setting value directly
@@ -98,7 +97,7 @@ class Setting extends Model
     }
 
 
-    /** 
+    /**
      * Static method to get an array from the settings table.
      */
     public function getArray($key, $default = null)

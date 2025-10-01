@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-
 use DB;
 use App\User;
 
@@ -48,15 +47,11 @@ class EnforceUniqueUsernames extends Command
 
 
 
-        foreach ($duplicates as $duplicate)
-        {
-
+        foreach ($duplicates as $duplicate) {
             $user = User::withTrashed()->find($duplicate->id);
             $user->username = null;
             $user->save();
             $this->line($user->name . ' modified with username like : ' . $user->username);
-
         }
     }
-
 }

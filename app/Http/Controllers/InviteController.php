@@ -64,19 +64,15 @@ class InviteController extends Controller
             $user = User::firstOrCreate(['email' => $email]);
 
             if ($user->isMemberOf($group)) {
-                $status_message .= trans('membership.user_already_invited').' : '.$email.'<br/>';
-            }
-            else
-            {
+                $status_message .= trans('membership.user_already_invited') . ' : ' . $email . '<br/>';
+            } else {
                 $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $group->id]);
                 $membership->membership = \App\Membership::INVITED;
                 $membership->save();
 
                 // send invitation email
                 Mail::to($email)->send(new InviteUser($group_user, $membership));
-                $status_message .= trans('membership.users_has_been_invited').' : '.$email.'<br/>';
-
-
+                $status_message .= trans('membership.users_has_been_invited') . ' : ' . $email . '<br/>';
             }
         }
 
@@ -133,14 +129,13 @@ class InviteController extends Controller
 
         $user->verified = 1;
         $user->save();
-    
+
         $membership->membership = Membership::MEMBER;
         $membership->save();
 
         flash(trans('membership.welcome'));
 
         return redirect()->route('groups.show', $membership->group);
-        
     }
 
     /**
@@ -157,7 +152,7 @@ class InviteController extends Controller
 
         $user->verified = 1;
         $user->save();
-    
+
         $membership->membership = Membership::DECLINED;
         $membership->save();
 
@@ -165,7 +160,4 @@ class InviteController extends Controller
 
         return redirect()->route('groups.show', $membership->group);
     }
-
-
-    
 }
