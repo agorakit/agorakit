@@ -167,7 +167,7 @@ class ImportService
             $still_existing_usernames = array();
             foreach (User::all() as $existing_user) {
                 foreach ($edited_usernames as $id => $username) {
-                    if ($existing_user->username == $username && $existing_user->email <> $this->getImportedEmail($id)) {
+                    if ($existing_user->username == $username && $existing_user->email <> $this->getImportedEmail($id, $group)) {
                         $still_existing_usernames[$id] = $username;
                     }
                 }
@@ -429,7 +429,7 @@ class ImportService
             }
             foreach ($added_users as $id) {
                 $user = User::find($id);
-                $this->set_temporary_password($user);
+                //$this->set_temporary_password($user); // @todo (?) Method does not exist.
                 $user->notify(new AddedToGroup($group_n, true));
             }
         }

@@ -227,9 +227,7 @@ class ImportTest extends BrowserKitTestCase
     public function testGroupExport()
     {
         $user = App\User::where('email', 'admin@agorakit.org')->first();
-        $group = App\Group::where('name', 'Test group')->firstOrFail();
         $storage = Storage::disk('tmp');
-        global $export;
 
         $this->actingAs($user)
           ->visit('/groups/1')
@@ -237,12 +235,11 @@ class ImportTest extends BrowserKitTestCase
           ->see('Export Group Data')
           ->click('Export Group Data');
 
-        $files = array();
+        $files = [];
         foreach ($storage->files('') as $file) {
             $files[$storage->lastModified($file)] = $file;
         }
         $ts = max(array_keys($files));
-        $export = $files[$ts];
         assert(Carbon::createFromTimestamp($ts)->diffInSeconds(Carbon::now()) < 1);
     }
 
@@ -251,7 +248,14 @@ class ImportTest extends BrowserKitTestCase
         $user = App\User::where('email', 'admin@agorakit.org')->first();
         $group = App\Group::where('name', 'Test group')->firstOrFail();
         $storage = Storage::disk('tmp');
-        global $export;
+
+        $files = [];
+        foreach ($storage->files('') as $file) {
+            $files[$storage->lastModified($file)] = $file;
+        }
+        $ts = max(array_keys($files));
+        $export = $files[$ts];
+
         $file = fopen($storage->path($export), 'r');
         $import = stream_get_meta_data($file)['uri'];
 
