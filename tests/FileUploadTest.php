@@ -1,9 +1,11 @@
 <?php
 
+namespace Tests;
+
 use App\Group;
 use Illuminate\Http\UploadedFile;
 
-class FileUploadTest extends Tests\BrowserKitTestCase
+class FileUploadTest extends BrowserKitTestCase
 {
     /* tests starts here : let's setup the DB
     */

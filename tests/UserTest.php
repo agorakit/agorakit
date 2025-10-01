@@ -1,9 +1,11 @@
 <?php
 
+namespace Tests;
+
 use App\Group;
 use App\Membership;
 
-class UserTest extends Tests\BrowserKitTestCase
+class UserTest extends BrowserKitTestCase
 {
     /******************* Why is it done this way ? ***************/
 

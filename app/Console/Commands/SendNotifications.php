@@ -26,7 +26,8 @@ class SendNotifications extends Command
      *
      * @var string
      */
-    protected $description = 'Sends all the pending notifications to all users who requested it. This might take time. Call this frequently to avoid trouble';
+    protected $description = 'Sends all the pending notifications to all users who requested it.
+        This might take time. Call this frequently to avoid trouble';
 
     /**
      * Create a new command instance.
@@ -56,7 +57,9 @@ class SendNotifications extends Command
                     $group = \App\Group::find($notification->group_id);
 
                     if ($user && $group && $user->isVerified()) {
-                        $this->line('Checking if there is something to send to user:' . $user->id . ' (' . $user->email . ')' . ' for group:' . $group->id . ' (' . $group->name . ')');
+                        $this->line('Checking if there is something to send to user:' .
+                            $user->id . ' (' . $user->email . ')' . ' for group:' .
+                            $group->id . ' (' . $group->name . ')');
                         if ($this->sendNotificationEmail($group, $user)) {
                             $this->info('Message sent');
                         } else {

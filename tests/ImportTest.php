@@ -1,12 +1,14 @@
 <?php
 
+namespace Tests;
+
 use App\Group;
 use App\Membership;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
 
-class ImportTest extends Tests\BrowserKitTestCase
+class ImportTest extends BrowserKitTestCase
 {
     /******************* Why is it done this way ? ***************/
 

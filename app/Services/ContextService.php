@@ -43,9 +43,7 @@ class ContextService
 
         if ($group && $group->exists) {
             return 'group';
-        }
-        // If not we need to show some kind of overview
-        else {
+        } else { // If not we need to show some kind of overview
             if (Auth::check()) {
                 if (Auth::user()->getPreference('show', 'joined') === 'all' && Auth::user()->isAdmin()) {
                     return 'all';
@@ -129,9 +127,7 @@ class ContextService
         $group = Route::getCurrentRoute()->parameter('group');
         if ($group && $group->exists) {
             $groups[] = $group->id;
-        }
-        // If not we need to show some kind of overview
-        else {
+        } else { // If not we need to show some kind of overview
             if (Auth::check()) {
                 // user is logged in, we show according to preferences
                 // a super admin can decide to see all groups

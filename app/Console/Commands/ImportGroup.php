@@ -129,7 +129,7 @@ class ImportGroup extends Command
      * Create a new group based on passed data
      * Does not save the group yet
      */
-    function createGroup($data)
+    protected function createGroup($data)
     {
         $group = new Group();
         $group->id = $data->id;
@@ -155,7 +155,8 @@ class ImportGroup extends Command
         $group->name = $group->name . ' (imported)';
 
         if ($group->exists) {
-            $this->error('A group with the same id exist on this install this is not a good idea to import again. Yes we need UUIDs to solve this issue');
+            $this->error('A group with the same id exist on this install this is not a good idea to import again.
+                Yes we need UUIDs to solve this issue');
             die();
         }
 
@@ -210,7 +211,7 @@ class ImportGroup extends Command
     /**
      * Create a new membership based on a json parsed array $data
      */
-    function createMembership($data)
+    protected function createMembership($data)
     {
         $membership = new Membership();
         $membership->group()->associate($this->group);
@@ -241,7 +242,7 @@ class ImportGroup extends Command
     /**
      * Create a new event based on a json parsed array $data
      */
-    function createCalendarEvent($data)
+    protected function createCalendarEvent($data)
     {
         $event = new CalendarEvent();
 
@@ -294,7 +295,7 @@ class ImportGroup extends Command
     /**
      * Create a new discussion based on a json parsed array $data
      */
-    function createDiscussion($data)
+    protected function createDiscussion($data)
     {
         $discussion = new Discussion();
 
@@ -334,7 +335,7 @@ class ImportGroup extends Command
     /**
      * Create a new comment based on a json parsed array $data
      */
-    function createComment(Discussion $discussion, $data)
+    protected function createComment(Discussion $discussion, $data)
     {
         $comment = new Comment();
 
@@ -369,7 +370,7 @@ class ImportGroup extends Command
     /**
      * Create a new reaction based on a json parsed array $data
      */
-    function createReaction($model, $data)
+    protected function createReaction($model, $data)
     {
         $reaction = new Reaction();
 
@@ -399,7 +400,7 @@ class ImportGroup extends Command
     /**
      * Create a new file based on a json parsed array $data
      */
-    function createFile($data)
+    protected function createFile($data)
     {
         $file = new File();
 

@@ -35,14 +35,14 @@ class Message extends Model
     public $timestamps = true;
 
     // Messages status, they all start at 0
-    const POSTED = 100; // Message has been successfuly converted to discussion or wathever
-    const NEEDS_VALIDATION = 10; // message needs to be validated by poster or admin
-    const CREATED = 0; // message has just been imported from the mail server (default)
-    const BOUNCED = -10; // message bounced back to user
-    const INVALID = -20; // message cannot be posted to a group (group not found...)
-    const AUTOMATED = -30; // message is an autoreply or away message
-    const ERROR = -50; // message cound not be converted to content
-    const SPAM = -100; // message is spam
+    protected const POSTED = 100; // Message has been successfully converted to discussion or whatever
+    protected const NEEDS_VALIDATION = 10; // message needs to be validated by poster or admin
+    protected const CREATED = 0; // message has just been imported from the mail server (default)
+    protected const BOUNCED = -10; // message bounced back to user
+    protected const INVALID = -20; // message cannot be posted to a group (group not found...)
+    protected const AUTOMATED = -30; // message is an autoreply or away message
+    protected const ERROR = -50; // message cound not be converted to content
+    protected const SPAM = -100; // message is spam
 
     public function group()
     {
@@ -115,15 +115,15 @@ class Message extends Model
      * Under the hood, uses https://github.com/zbateson/mail-mime-parser
      *
      */
-    function parse()
+    protected function parse()
     {
         return MailMessage::from($this->raw, true);
     }
 
     /**
-     * Returns a rich text represenation of the email, stripping away all quoted text, signatures, etc...
+     * Returns a rich text representation of the email, stripping away all quoted text, signatures, etc...
      */
-    function extractText()
+    protected function extractText()
     {
         $body_text  = nl2br(EmailReplyParser::parseReply($this->parse()->getTextContent()));
         $body_html = $this->parse()->getHtmlContent();
@@ -156,7 +156,7 @@ class Message extends Model
     /**
      * Returns all recipients email of this message, using TO and CC fields. Parses the raw email content
      */
-    function extractRecipients()
+    protected function extractRecipients()
     {
         $recipients = [];
 

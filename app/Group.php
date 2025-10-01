@@ -45,9 +45,9 @@ class Group extends Model
 
     /**** various group types ****/
     // open group, default
-    const OPEN = 0;
-    const CLOSED = 1;
-    const SECRET = 2;
+    public const OPEN = 0;
+    public const CLOSED = 1;
+    public const SECRET = 2;
 
 
     /**
@@ -114,7 +114,10 @@ class Group extends Model
      */
     public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(\App\User::class, 'membership')->where('membership', '>=', \App\Membership::MEMBER)->withTimestamps()->withPivot('membership');
+        return $this->belongsToMany(\App\User::class, 'membership')
+            ->where('membership', '>=', \App\Membership::MEMBER)
+            ->withTimestamps()
+            ->withPivot('membership');
     }
 
     /**
@@ -122,7 +125,10 @@ class Group extends Model
      */
     public function admins(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(\App\User::class, 'membership')->where('membership', \App\Membership::ADMIN)->withTimestamps()->withPivot('membership');
+        return $this->belongsToMany(\App\User::class, 'membership')
+            ->where('membership', \App\Membership::ADMIN)
+            ->withTimestamps()
+            ->withPivot('membership');
     }
 
     /**
@@ -130,7 +136,8 @@ class Group extends Model
      */
     public function candidates(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(\App\Membership::class)->where('membership', \App\Membership::CANDIDATE);
+        return $this->hasMany(\App\Membership::class)
+            ->where('membership', \App\Membership::CANDIDATE);
     }
 
     /**

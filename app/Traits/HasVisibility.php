@@ -4,13 +4,6 @@ namespace App\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 
-interface ContentVisibility
-{
-    const INHERITED = 0;
-    const PUBLIC = 10;
-    const PRIVATE = -10;
-}
-
 trait HasVisibility
 {
     public function getVisibility()

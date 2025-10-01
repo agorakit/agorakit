@@ -42,7 +42,9 @@ class InsightsController extends Controller
 
 
         // Discussions
-        $results = \App\Discussion::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
+        $results = \App\Discussion::selectRaw('year(created_at) year,
+            extract(YEAR_MONTH FROM created_at) AS yearmonth,
+            monthname(created_at) month, count(*) data')
             ->groupBy('yearmonth')
             ->orderBy('yearmonth', 'asc')
             ->get();
@@ -62,7 +64,9 @@ class InsightsController extends Controller
 
 
         // Events
-        $results = \App\CalendarEvent::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
+        $results = \App\CalendarEvent::selectRaw('year(created_at) year,
+            extract(YEAR_MONTH FROM created_at) AS yearmonth,
+            monthname(created_at) month, count(*) data')
             ->groupBy('yearmonth')
             ->orderBy('yearmonth', 'asc')
             ->get();
@@ -82,7 +86,9 @@ class InsightsController extends Controller
 
 
         // Members
-        $results = \App\Membership::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
+        $results = \App\Membership::selectRaw('year(created_at) year,
+            extract(YEAR_MONTH FROM created_at) AS yearmonth,
+            monthname(created_at) month, count(*) data')
             ->groupBy('yearmonth')
             ->orderBy('yearmonth', 'asc')
             ->get();
@@ -103,7 +109,9 @@ class InsightsController extends Controller
 
 
         // Files
-        $results = \App\File::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, count(*) data')
+        $results = \App\File::selectRaw('year(created_at) year,
+            extract(YEAR_MONTH FROM created_at) AS yearmonth,
+            monthname(created_at) month, count(*) data')
             ->groupBy('yearmonth')
             ->orderBy('yearmonth', 'asc')
             ->get();
@@ -124,7 +132,9 @@ class InsightsController extends Controller
 
 
         // Evolution of storage use
-        $results = \App\File::selectRaw('year(created_at) year, extract(YEAR_MONTH FROM created_at) AS yearmonth, monthname(created_at) month, sum(filesize) as data')
+        $results = \App\File::selectRaw('year(created_at) year,
+            extract(YEAR_MONTH FROM created_at) AS yearmonth,
+            monthname(created_at) month, sum(filesize) as data')
             ->groupBy('yearmonth')
             ->orderBy('yearmonth', 'asc')
             ->get();

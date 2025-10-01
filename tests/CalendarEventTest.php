@@ -1,8 +1,10 @@
 <?php
 
+namespace Tests;
+
 use App\Group;
 
-class CalendarEventTest extends Tests\BrowserKitTestCase
+class CalendarEventTest extends BrowserKitTestCase
 {
     /******************* Why is it done this way ? ***************/
 

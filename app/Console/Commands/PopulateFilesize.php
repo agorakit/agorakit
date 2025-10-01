@@ -19,7 +19,8 @@ class PopulateFilesize extends Command
      *
      * @var string
      */
-    protected $description = 'Set filesize in the files table using real filesize from the filesystem. Use this if you installed agorakit before november 2017';
+    protected $description = 'Set filesize in the files table using real filesize from the filesystem.
+        Use this if you installed agorakit before november 2017';
 
     /**
      * Create a new command instance.

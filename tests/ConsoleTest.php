@@ -34,7 +34,7 @@ class ConsoleTest extends TestCase
     /**
      * Export group.
      */
-    public function test_export_group(): void
+    public function testExportGroup(): void
     {
         $user = new User();
         $user->username = "admin";
@@ -66,7 +66,7 @@ class ConsoleTest extends TestCase
     /**
      * Import group.
      */
-    public function test_import_group(): void
+    public function testImportGroup(): void
     {
         //$this->assertEquals(0, $this->artisan('agorakit:import 1'));
         $this->assertTrue(true);

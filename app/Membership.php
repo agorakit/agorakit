@@ -33,14 +33,14 @@ class Membership extends Model
     protected $keepRevisionOf = ['config', 'membership', 'notification_interval'];
 
     // Membership levels
-    const ADMIN = 100; // group admin
-    const MEMBER = 20; // active member
-    const CANDIDATE = 10; // member asked to be part of the group, but it has not been confirmed yet
-    const INVITED = 0;  // member invited by a group admin
-    const UNREGISTERED = -10; // user left the group
-    const DECLINED = -15;  // user did not accept an invitation
-    const REMOVED = -20; // removed by admin for another reason
-    const BLACKLISTED = -30; // member is blacklisted and cannot join the group again (not yet in use)
+    public const ADMIN = 100; // group admin
+    public const MEMBER = 20; // active member
+    public const CANDIDATE = 10; // member asked to be part of the group, but it has not been confirmed yet
+    public const INVITED = 0;  // member invited by a group admin
+    public const UNREGISTERED = -10; // user left the group
+    public const DECLINED = -15;  // user did not accept an invitation
+    public const REMOVED = -20; // removed by admin for another reason
+    public const BLACKLISTED = -30; // member is blacklisted and cannot join the group again (not yet in use)
 
     public function isAdmin()
     {

@@ -49,7 +49,7 @@ class NotifyMentionedUsers
     /**
      * Finds users to mention in a string, looks for @username style mentions in the string an returns users models
      */
-    function findUsers($body)
+    protected function findUsers($body)
     {
         preg_match_all("#(?<!\w)@([\w_\-\.]+)#", $body, $matches);
 
