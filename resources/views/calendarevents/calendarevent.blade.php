@@ -47,7 +47,7 @@
 
             @if ($event->hasLocation())
                 <div>
-                    <i class="fa fa-map-marker me-1"></i> {{ $event->location_display("long") }}
+                    <i class="fa fa-map-marker me-1"></i> {{ $event->locationDisplay("long") }}
                 </div>
             @endif
 

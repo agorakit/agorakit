@@ -57,7 +57,7 @@
 
             @if ($event->hasLocation())
                 <div class="fw-bold">{{ trans('messages.location') }}</div>
-                {{ $event->location_display("long") }}
+                {{ $event->locationDisplay("long") }}
             @endif
 
             <div>

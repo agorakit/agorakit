@@ -56,9 +56,9 @@
                 </div>
 
                 <div class="mb-3">
-                    @if ($user->location_display('long'))
+                    @if ($user->locationDisplay('long'))
                         <div class="fw-bold">{{ trans('messages.location') }}</div>
-                        {{ $user->location_display('long') }}
+                        {{ $user->locationDisplay('long') }}
                     @endif
                 </div>
 

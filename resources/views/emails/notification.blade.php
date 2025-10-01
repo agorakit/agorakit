@@ -46,7 +46,7 @@
 <strong><a  href="{{route('groups.calendarevents.show', [$group, $event])}}">{{$event->name}}</a></strong>
 <p>{!!filter($event->body) !!}</p>
 {{$event->start->format('d/m/Y H:i')}} - {{$event->stop->format('H:i')}}
-@if ($event->hasLocation()) , {{$event->location_display('long')}}@endif
+@if ($event->hasLocation()) , {{$event->locationDisplay('long')}}@endif
 </div>
 @endforeach
 <br/>
