@@ -29,12 +29,12 @@ class NotifyMentionedUsers
      */
     public function handle(ContentCreated $event)
     {
-        
+
 
         // Comments
         if ($event->model instanceof Comment) {
             $comment = $event->model;
-           
+
             $users = $this->findUsers($comment->body);
 
             foreach ($users as $user) {
@@ -65,7 +65,7 @@ class NotifyMentionedUsers
         }
         // find user
         $users = User::whereIn('username', $usernames)->get();
-        
+
 
         return $users;
     }

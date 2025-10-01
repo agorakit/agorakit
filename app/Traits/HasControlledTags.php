@@ -3,7 +3,6 @@
 namespace App\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
-
 use App\Setting;
 use App\User;
 use App\Group;
@@ -13,27 +12,25 @@ use App\CalendarEvent;
 use App\Tag;
 use Exception;
 
-/** 
+/**
  * This trait allows any model to have "controlled" tags
  *
  * It means :
- * 
+ *
  * - a super admin can decide which tags are allowed on groups and users
  * - a group admin can decide which tags are allowed on discussions, files and events
  * - if no controlled tags are defined, any tag can be added (aka free tagging)
- * 
+ *
  */
 trait HasControlledTags
 {
-
-
-    /** 
+    /**
      * Returns true if new tags are allowed for a model
-     * 
+     *
      * Depends on the global settings for groups and users
-     * 
+     *
      * Depends on the specific group settings for others
-     * 
+     *
      * @return boolean
      */
     public function areNewTagsAllowed()
@@ -66,12 +63,12 @@ trait HasControlledTags
 
 
 
-    /** 
+    /**
      * Returns the allowed tags for a model
-     * 
+     *
      * Depends on the global settings for groups and users
      * Depends on the group settings for others
-     * 
+     *
      * @return collection of App\Tag
      */
     public function getAllowedTags()
@@ -104,12 +101,12 @@ trait HasControlledTags
 
 
 
-    /** 
+    /**
      * Returns the current selected tags for a model
-     * 
-     * Enforce admin policies regarding tags : 
+     *
+     * Enforce admin policies regarding tags :
      * Will not return tags that are not allowed per admin settings even if they are attached to the model
-     * 
+     *
      * @return collection of App\Tag
      */
     public function getSelectedTags()
@@ -127,14 +124,13 @@ trait HasControlledTags
     }
 
 
-    /** 
-     * Returns a collection of tags used by the content of the same type, 
+    /**
+     * Returns a collection of tags used by the content of the same type,
      * in the same group, or the allowed tags if the tags are limited in this context.
      */
     public function getTagsInUse()
     {
         if ($this instanceof Discussion || $this instanceof File || $this instanceof CalendarEvent) {
-
             $models = collect();
             $tags = collect();
 
@@ -203,12 +199,12 @@ trait HasControlledTags
     }
 
 
-    /** 
+    /**
      * Utility class
-     * 
+     *
      * Convert an array of strings to a collection of tags
      * Tags are created in the DB if needed
-     * 
+     *
      * @return collection of App\Tag
      */
     private function arrayToTags($tagList)

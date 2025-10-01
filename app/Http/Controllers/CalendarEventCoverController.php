@@ -12,7 +12,6 @@ Handle group cover image
 
 class CalendarEventCoverController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('cache.headers:private,max-age=300;etag');

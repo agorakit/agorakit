@@ -5,7 +5,6 @@ use Illuminate\Http\UploadedFile;
 
 class FileUploadTest extends Tests\BrowserKitTestCase
 {
-
     /* tests starts here : let's setup the DB
     */
     public function testSetupItAll()

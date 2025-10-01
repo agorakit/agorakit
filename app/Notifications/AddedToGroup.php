@@ -18,7 +18,7 @@ class AddedToGroup extends Notification
      *
      * @return void
      */
-    public function __construct(Group $group, $resetlink=false)
+    public function __construct(Group $group, $resetlink = false)
     {
         $this->group = $group;
         $this->resetlink = $resetlink;

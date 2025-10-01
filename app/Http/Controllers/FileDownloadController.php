@@ -29,9 +29,9 @@ class FileDownloadController extends Controller
         if (Storage::exists($file->path)) {
             return (new Response(Storage::get($file->path), 200))
             ->header('Content-Type', $file->mime)
-            ->header('Content-Disposition', 'inline; filename="'.$file->original_filename.'"');
+            ->header('Content-Disposition', 'inline; filename="' . $file->original_filename . '"');
         } else {
-            abort(404, 'File not found in storage at '.$file->path);
+            abort(404, 'File not found in storage at ' . $file->path);
         }
     }
 
@@ -51,7 +51,7 @@ class FileDownloadController extends Controller
             return redirect('images/extensions/folder.svg');
         }
 
-        return redirect('images/extensions/'.$file->icon().'.svg');
+        return redirect('images/extensions/' . $file->icon() . '.svg');
     }
 
     /**
@@ -65,7 +65,7 @@ class FileDownloadController extends Controller
             return $file->getCover('medium');
         }
 
-        return redirect('images/extensions/'.$file->icon().'.svg');
+        return redirect('images/extensions/' . $file->icon() . '.svg');
     }
 
     /**
@@ -75,6 +75,6 @@ class FileDownloadController extends Controller
     {
         $this->authorize('view', $file);
 
-        return redirect('images/extensions/'.$file->icon().'.svg');
+        return redirect('images/extensions/' . $file->icon() . '.svg');
     }
 }

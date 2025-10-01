@@ -57,7 +57,7 @@ class CommentCreated extends Notification
             ->line(new HtmlString(filter($this->comment->body)))
             ->line($this->comment->user->name)
             ->action(trans('messages.reply'), route('groups.discussions.show', [$this->comment->discussion->group, $this->comment->discussion]));
-        $message->from(config('mail.noreply'),  $this->comment->user->name);
+        $message->from(config('mail.noreply'), $this->comment->user->name);
 
 
         // send notification directly from discussion inbox if there is one
@@ -69,7 +69,7 @@ class CommentCreated extends Notification
         }
 
         $message->withSymfonyMessage(function ($message) {
-            $message->getHeaders()->addTextHeader('References',  'discussion-' . $this->comment->discussion->id . '@' . Request::getHost());
+            $message->getHeaders()->addTextHeader('References', 'discussion-' . $this->comment->discussion->id . '@' . Request::getHost());
             $message->getHeaders()->addIdHeader('agorakit', 'comment-' . $this->comment->id . '@' . Request::getHost());
         });
 

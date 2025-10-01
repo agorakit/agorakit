@@ -77,7 +77,7 @@ class CalendarEventPolicy
         }
     }
 
-    /** 
+    /**
      * Defines if a user can participate or not or maybe to an event
      */
     public function participate(User $user, CalendarEvent $event)

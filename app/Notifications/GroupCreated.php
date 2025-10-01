@@ -46,7 +46,7 @@ class GroupCreated extends Notification
     {
         return (new MailMessage())
                     ->subject('A new group has been created')
-                    ->line('A new group has been created : "'.$this->group->name.'"')
+                    ->line('A new group has been created : "' . $this->group->name . '"')
                     ->line('Group description : ' . strip_tags($this->group->body))
                     ->line('User name : ' . $this->group->user->name)
                     ->line('User email : ' . $this->group->user->email)

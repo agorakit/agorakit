@@ -6,15 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
-
 use ZBateson\MailMimeParser\MailMimeParser;
 use ZBateson\MailMimeParser\Message as MailMessage;
 use ZBateson\MailMimeParser\Header\HeaderConsts;
-
 use EmailReplyParser\EmailReplyParser;
 use League\HTMLToMarkdown\HtmlConverter;
 use Michelf\Markdown;
-
 use App\User;
 use Auth;
 

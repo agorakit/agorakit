@@ -36,7 +36,7 @@ class FileController extends Controller
             ->whereIn('group_id', $groups)
             ->orderBy('created_at', 'desc')
             ->paginate(25);
-        
+
 
 
         return view('dashboard.files')

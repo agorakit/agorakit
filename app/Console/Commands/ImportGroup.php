@@ -13,18 +13,17 @@ use App\Reaction;
 use App\File;
 use Storage;
 use ZipArchive;
-use \Cviebrock\EloquentSluggable\Services\SlugService;
-
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Facades\Storage as FacadesStorage;
 use Illuminate\Support\Str;
 
 /**
  * Import content command
- * 
+ *
  * This might look a bit ugly and unoptimized but at least it's easy to understand what's going on.
- * 
+ *
  *  Import expects a zip file in [your app installation]/storage/app/exports/[group id]/group.zip
- * 
+ *
  */
 class ImportGroup extends Command
 {
@@ -132,7 +131,7 @@ class ImportGroup extends Command
      */
     function createGroup($data)
     {
-        $group = new Group;
+        $group = new Group();
         $group->id = $data->id;
         $group->name = $data->name;
         $group->body = $data->body;
@@ -213,10 +212,10 @@ class ImportGroup extends Command
      */
     function createMembership($data)
     {
-        $membership = new Membership;
+        $membership = new Membership();
         $membership->group()->associate($this->group);
 
-        // this is our group member : 
+        // this is our group member :
         $user = $this->createUser($data->user);
 
 
@@ -244,7 +243,7 @@ class ImportGroup extends Command
      */
     function createCalendarEvent($data)
     {
-        $event = new CalendarEvent;
+        $event = new CalendarEvent();
 
         $user = $this->createUser($data->user);
 
@@ -297,7 +296,7 @@ class ImportGroup extends Command
      */
     function createDiscussion($data)
     {
-        $discussion = new Discussion;
+        $discussion = new Discussion();
 
         $user = $this->createUser($data->user);
 
@@ -337,7 +336,7 @@ class ImportGroup extends Command
      */
     function createComment(Discussion $discussion, $data)
     {
-        $comment = new Comment;
+        $comment = new Comment();
 
         $user = $this->createUser($data->user);
 
@@ -372,7 +371,7 @@ class ImportGroup extends Command
      */
     function createReaction($model, $data)
     {
-        $reaction = new Reaction;
+        $reaction = new Reaction();
 
         $user = $this->createUser($data->user);
 
@@ -402,7 +401,7 @@ class ImportGroup extends Command
      */
     function createFile($data)
     {
-        $file = new File;
+        $file = new File();
 
         $user = $this->createUser($data->user);
 
@@ -431,7 +430,7 @@ class ImportGroup extends Command
 
             // now we have a file let's handle the content
 
-            // curently the files must be manually moved to the correct directory. 
+            // curently the files must be manually moved to the correct directory.
             // Which is /storage/app/groups/(group_id)/files
 
 

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 
-/** 
+/**
  * Wether a user participates or not to a specific event
  */
 class Participation extends Model

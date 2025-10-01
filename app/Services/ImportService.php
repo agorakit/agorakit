@@ -18,15 +18,13 @@ use DB;
 use Hash;
 use Storage;
 use ZipArchive;
-use \Cviebrock\EloquentSluggable\Services\SlugService;
-
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 /**
  * This service imports a group from a file.
  */
 class ImportService
 {
-
     public $valid_formats = ['json', 'zip'];
 
 
@@ -35,13 +33,15 @@ class ImportService
      */
     private function existing_group($group)
     {
-        foreach(Group::all() as $existing_group) {
+        foreach (Group::all() as $existing_group) {
             if ($existing_group->name == $group->name || $existing_group->name == $group->name . ' (imported)') {
                 return "A group already exists with the same name:" . route('groups.show', $existing_group);
             }
-            if (count($existing_group->discussions) == count($group->discussions)
+            if (
+                count($existing_group->discussions) == count($group->discussions)
                 && count($existing_group->calendarevents) == count($group->calendarevents)
-                && count($existing_group->files) == count($group->files)) {
+                && count($existing_group->files) == count($group->files)
+            ) {
                 return "A group already exists with same number of data:" . route('groups.show', $existing_group);
             }
         }
@@ -55,9 +55,9 @@ class ImportService
     {
         // Compare with already existing usernames, yet email being different
         $existing_usernames = array();
-        foreach(User::all() as $existing_user) {
-            foreach($group->memberships as $mb) {
-                if($mb->user->username == $existing_user->username && $mb->user->email <> $existing_user->email) {
+        foreach (User::all() as $existing_user) {
+            foreach ($group->memberships as $mb) {
+                if ($mb->user->username == $existing_user->username && $mb->user->email <> $existing_user->email) {
                     $existing_usernames[$mb->user->id] = $mb->user->username;
                 }
             }
@@ -72,9 +72,9 @@ class ImportService
      */
     private function get_imported_email($user_id, $group)
     {
-        foreach($group->memberships as $mb) {
-            if ($mb->user-id == $user_id) {
-                return $mb->user-email;
+        foreach ($group->memberships as $mb) {
+            if ($mb->user - id == $user_id) {
+                return $mb->user - email;
             }
         }
     }
@@ -90,7 +90,7 @@ class ImportService
         $max = mb_strlen($keyspace, '8bit') - 1;
         $pieces = [];
         for ($i = 0; $i < $length; ++$i) {
-            $pieces []= $keyspace[random_int(0, $max)];
+            $pieces [] = $keyspace[random_int(0, $max)];
         }
         $temporary_password = implode('', $pieces);
         return User::create([
@@ -115,19 +115,18 @@ class ImportService
         if (pathinfo($path)['extension'] == 'zip') {
             $unzip_path = substr($path, 0, -4);
             $zip = new ZipArchive();
-            if ($zip->open(Storage::path($path))!==TRUE) {
+            if ($zip->open(Storage::path($path)) !== true) {
                 exit("Cannot open " . $path . "\n");
             }
             $zip->extractTo(Storage::path($unzip_path));
             $zip->close();
             $groupfiles = Storage::allFiles($unzip_path);
-            foreach($groupfiles as $file) {
+            foreach ($groupfiles as $file) {
                 if (basename($file) == 'group.json') {
                     $group_std = json_decode(Storage::get($file), false);
                 }
             }
-        }
-        else { // JSON format
+        } else { // JSON format
             $group_std = json_decode(Storage::get($path), false);
         }
         // Compare with existing data in database
@@ -151,14 +150,13 @@ class ImportService
         // Retrieve group data (JSON file)
         if (pathinfo($path)['extension'] == 'zip') {
             $unzip_path = substr($path, 0, -4);
-            foreach(Storage::allFiles($unzip_path) as $file) {
-                if(str_ends_with($file, 'json')) {
+            foreach (Storage::allFiles($unzip_path) as $file) {
+                if (str_ends_with($file, 'json')) {
                     $json_file = $file;
                     break;
                 }
             }
-        }
-        else {
+        } else {
             $json_file = $path;
         }
         $group = json_decode(Storage::get($json_file), false);
@@ -167,8 +165,8 @@ class ImportService
         Model::unguard();
         if ($edited_usernames) {
             $still_existing_usernames = array();
-            foreach(User::all() as $existing_user) {
-                foreach($edited_usernames as $id=>$username) {
+            foreach (User::all() as $existing_user) {
+                foreach ($edited_usernames as $id => $username) {
                     if ($existing_user->username == $username && $existing_user->email <> $this->get_imported_email($id)) {
                         $still_existing_usernames[$id] = $username;
                     }
@@ -178,16 +176,15 @@ class ImportService
                 // Go back to intermediate form
                 return array(basename($path), null, $still_existing_usernames, $group->name, $group->group_type);
             }
-            foreach($edited_usernames as $id=>$username) {
-                foreach($group->memberships as $mb) {
+            foreach ($edited_usernames as $id => $username) {
+                foreach ($group->memberships as $mb) {
                     if ($mb->user->id == $id) {
                         // create new user here, with edited username
                         $mb->user->username = $username;
                         $user_n = $this->new_user($mb->user);
                         if ($user_n->isValid()) {
                             $user_n->save();
-                        }
-                        else {
+                        } else {
                             dump("Error importing user");
                             dump($user_n);
                             Model::reguard();
@@ -222,29 +219,26 @@ class ImportService
         ]);
         if ($group_n->isValid()) {
             $group_n->save();
-        }
-        else {
+        } else {
             dump("Error importing group");
             dump($group_n->getAttributes());
             Model::reguard();
             DB::rollBack();
         }
         $new_id = $group_n->id;
-        foreach($group->memberships as $mb) {
+        foreach ($group->memberships as $mb) {
             $mb->id = null;
             $mb->group_id = $group_n->id;
             // Case user already in database
             $found_user = User::where('username', $mb->user->username)->where('email', $mb->user->email)->first();
             if ($found_user) {
                 $mb->user_id = $found_user->id;
-            }
-            else {
+            } else {
                 $user_n = $this->new_user($mb->user);
-                if($user_n->isValid()) {
+                if ($user_n->isValid()) {
                     $user_n->save();
                     $mb->user_id = $user_n->id;
-                }
-                else {
+                } else {
                     dump("Error importing user");
                     dump($user_n); //->username);
                     Model::reguard();
@@ -262,15 +256,14 @@ class ImportService
             ]);
             if ($mb_n->isValid()) {
                 $mb_n->save();
-            }
-            else {
+            } else {
                 dump("Error importing membership");
                 dump($mb_n->getAttributes());
                 Model::reguard();
                 DB::rollBack();
             }
         }
-        foreach($group->calendarevents as $event) {
+        foreach ($group->calendarevents as $event) {
             $event_user = User::where('username', $event->user->username)->first();
             $event_n = CalendarEvent::create([
                 'id' => null,
@@ -287,20 +280,19 @@ class ImportService
                 'updated_at' => $event->updated_at,
                 'deleted_at' => $event->deleted_at
             ]);
-             if ($event_n->isValid()) {
+            if ($event_n->isValid()) {
                 $event_n->save();
-            }
-            else {
+            } else {
                 dump("Error importing event");
                 dump($event_n->getAttributes());
                 Model::reguard();
                 DB::rollBack();
             }
-            foreach($event->tags as $tag) {
+            foreach ($event->tags as $tag) {
                 $event_n->tag($tag);
             }
         }
-        foreach($group->discussions as $discussion) {
+        foreach ($group->discussions as $discussion) {
             $discussion_user = User::where('username', $discussion->user->username)->first();
             $discussion_n = Discussion::create([
                 'id' => null,
@@ -316,14 +308,13 @@ class ImportService
             ]);
             if ($discussion_n->isValid()) {
                 $discussion_n->save();
-            }
-            else {
+            } else {
                 dump("Error importing discussion");
                 dump($discussion_n->getAttributes());
                 Model::reguard();
                 DB::rollBack();
             }
-            foreach($discussion->comments as $comment) {
+            foreach ($discussion->comments as $comment) {
                 $comment_user = User::where('username', $comment->user->username)->first();
                 $comment_n = Comment::create([
                     'id' => null,
@@ -336,14 +327,13 @@ class ImportService
                 ]);
                 if ($comment_n->isValid()) {
                     $comment_n->save();
-                }
-                else {
+                } else {
                     dump("Error importing comment");
                     dump($comment_n->getAttributes());
                     Model::reguard();
                     DB::rollBack();
                 }
-                foreach($comment->reactions as $reaction) {
+                foreach ($comment->reactions as $reaction) {
                     $reaction_user = User::where('username', $reaction->user->username)->first();
                     $reaction_n = Reaction::create([
                         'id' => null,
@@ -356,8 +346,7 @@ class ImportService
                     ]);
                     if ($reaction_n->isValid()) {
                         $reaction_n->save();
-                    }
-                    else {
+                    } else {
                         dump("Error importing reaction");
                         dump($reaction_n->getAttributes());
                         Model::reguard();
@@ -365,7 +354,7 @@ class ImportService
                     }
                 }
             }
-            foreach($discussion->reactions as $reaction) {
+            foreach ($discussion->reactions as $reaction) {
                 $reaction_user = User::where('username', $reaction->user->username)->first();
                 $reaction_n = Reaction::create([
                     'id' => null,
@@ -378,20 +367,19 @@ class ImportService
                     ]);
                 if ($reaction_n->isValid()) {
                     $reaction_n->save();
-                }
-                else {
+                } else {
                     dump("Error importing reaction");
                     dump($reaction_n->getAttributes());
                     Model::reguard();
                     DB::rollBack();
                 }
             }
-            foreach($discussion->tags as $tag) {
+            foreach ($discussion->tags as $tag) {
                 $discussion_n->tag($tag->name);
             }
         }
         $files = array(); // Keep track for later
-        foreach($group->files as $file) {
+        foreach ($group->files as $file) {
             $old_file = $file->id;
             $file_user = User::where('username', $file->user->username)->first();
             $file_n = File::create([
@@ -414,33 +402,32 @@ class ImportService
             if ($file_n->isValid()) {
                 $file_n->save();
                 $files[$old_file] = $file_n->id;
-            }
-            else {
+            } else {
                 dump("Error importing file");
                 dump($file_n->getAttributes());
                 Model::reguard();
                 DB::rollBack();
             }
-            foreach($file->tags as $tag) {
+            foreach ($file->tags as $tag) {
                 $file_n->tag($tag->name);
             }
         }
         Model::reguard();
         DB::commit();
-        if ($group_n && $files && pathinfo($path)['extension']=='zip') {
+        if ($group_n && $files && pathinfo($path)['extension'] == 'zip') {
             Storage::makeDirectory('groups/' . $new_id . '/files');
-            foreach(Storage::directories($unzip_path . '/groups/' . $old_id . '/files/') as $dir) {
+            foreach (Storage::directories($unzip_path . '/groups/' . $old_id . '/files/') as $dir) {
                 $id = array_reverse(explode('/', $dir))[0];
                 Storage::move($dir, 'groups/' . $new_id . '/files/' . $files[$id]);
             }
         }
         if ($group_n) {
-            foreach($found_users as $id) {
-                if ($id<>Auth::user()->id) {
+            foreach ($found_users as $id) {
+                if ($id <> Auth::user()->id) {
                     $res = User::find($id)->notify(new AddedToGroup($group_n, false));
                 }
             }
-            foreach($added_users as $id) {
+            foreach ($added_users as $id) {
                 $user = User::find($id);
                 $this->set_temporary_password($user);
                 $user->notify(new AddedToGroup($group_n, true));

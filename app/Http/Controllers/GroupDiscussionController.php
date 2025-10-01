@@ -9,7 +9,6 @@ use Auth;
 use Context;
 use Illuminate\Http\Request;
 
-
 class GroupDiscussionController extends Controller
 {
     public function __construct()
@@ -70,7 +69,7 @@ class GroupDiscussionController extends Controller
             $this->authorize('create-discussion', $group);
         }
 
-        $discussion = new Discussion;
+        $discussion = new Discussion();
         $discussion->group()->associate($group);
 
         $title = trans('group.create_group_discussion');
@@ -160,7 +159,7 @@ class GroupDiscussionController extends Controller
         $this->authorize('view', $discussion);
 
         // if user is logged in, we update the read count for this discussion.
-        // just before that, we save the number of already read comments in $read_comments 
+        // just before that, we save the number of already read comments in $read_comments
         // to be used in the view to scroll to the first unread comments
         if (Auth::check()) {
             $unread_count = $discussion->unReadCount();

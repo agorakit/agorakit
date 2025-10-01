@@ -26,7 +26,7 @@ class UserPolicy
         }
     }
 
-    /** 
+    /**
      * Setting let us define if users can be created
      */
     public function create(?User $user)

@@ -22,7 +22,7 @@ Inbound Email handler for Agorakit, allows user to post content by email
 
 Everytime it's run, emails found in the defined inbox are processed
 
-- find a sender in the existing users list or create a user 
+- find a sender in the existing users list or create a user
 - find a recipient in the to and other mail header. It can a group or a discussion
 - check the the user can post to this recipient
 - process email content (filter) and create the appropriate content (discussion or commment)
@@ -30,7 +30,7 @@ Everytime it's run, emails found in the defined inbox are processed
 
 A catch-all email is required, or an email server supporting "+" adressing.
 
-Emails are generated as follow :  
+Emails are generated as follow :
 
 [INBOX_PREFIX][group-slug][INBOX_SUFFIX]
 
@@ -126,7 +126,6 @@ class CheckMailbox extends Command
         $i = 0;
         foreach ($messages as $message) {
             try {
-
                 $this->debug('-----------------------------------');
 
                 // limit to 100 messages at a time (I did no find a better way to handle this iterator)
@@ -231,7 +230,7 @@ class CheckMailbox extends Command
 
     /**
      * tries to find a valid group in the $message (using to: email header)
-     * 
+     *
      */
     public function extractGroupFromMessage(ImapMessage $message)
     {
@@ -308,9 +307,9 @@ class CheckMailbox extends Command
 
         // count the number of caracters in plain text :
         // if we really have less than 5 chars in there using plain text,
-        // let's post the whole html mess, 
-        // converted to markdown, 
-        // then stripped with the same EmailReplyParser, 
+        // let's post the whole html mess,
+        // converted to markdown,
+        // then stripped with the same EmailReplyParser,
         // then converted from markdown back to html, pfeeew
         if (strlen($body_text) < 5) {
             $converter = new HtmlConverter();
@@ -323,7 +322,7 @@ class CheckMailbox extends Command
         return $result;
     }
 
-    /** 
+    /**
      * Returns all recipients form the message, in the to: cc: references: and in-reply-to: fields
      */
     function extractRecipientsFromMessage(ImapMessage $message)

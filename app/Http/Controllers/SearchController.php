@@ -19,12 +19,12 @@ class SearchController extends Controller
     }
 
     /**
-     * Parameters in the request : 
+     * Parameters in the request :
      * ?query : search terms
      * ?type : discussions / groups / calendarevents / files / users
      * ?scope : my / all / admin
      * ?order : recent / old / big / small
-     * 
+     *
      */
     public function index(Request $request)
     {
@@ -73,7 +73,6 @@ class SearchController extends Controller
 
         // perform search
         if (isset($query)) {
-
             if ($type == 'groups') {
                 $results = Group::whereIn('id', $allowed_groups)
                     ->search($query)

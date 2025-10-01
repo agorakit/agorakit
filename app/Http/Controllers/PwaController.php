@@ -29,7 +29,7 @@ class PwaController extends Controller
         $manifest['icons'][] = $icon;
 
 
-        $manifest['start_url']= '/';
+        $manifest['start_url'] = '/';
 
         $manifest['background_color'] = '#343a40';
         $manifest['display'] = 'standalone';
@@ -38,6 +38,5 @@ class PwaController extends Controller
 
 
         return $manifest;
-
     }
 }

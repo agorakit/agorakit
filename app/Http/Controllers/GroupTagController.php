@@ -25,10 +25,10 @@ class GroupTagController extends Controller
     {
         $this->authorize('manage-tags', $group);
 
-        // this is a bit hackish : 
+        // this is a bit hackish :
         // we instantiate a discussion just to get the current allowed tags for discussions, files and events
         // this is just to access the getAllowedTags() function from the hasControlledTags trait
-        $discussion = new Discussion;
+        $discussion = new Discussion();
         $discussion->group()->associate($group);
 
         // generate a complete list of tags used in this group to help the admin set correct limitations

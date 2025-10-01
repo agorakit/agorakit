@@ -14,7 +14,6 @@ use Carbon\Carbon;
 use Venturecraft\Revisionable\Revision;
 use Illuminate\Notifications\DatabaseNotification;
 
-
 class CleanupDatabase extends Command
 {
     /**
@@ -66,23 +65,35 @@ class CleanupDatabase extends Command
 
         foreach ($groups as $group) {
             $count = $group->discussions()->delete();
-            if ($count) $this->info($count . ' discussions soft deleted in group ' . $group->name);
+            if ($count) {
+                $this->info($count . ' discussions soft deleted in group ' . $group->name);
+            }
 
             $count = $group->calendarevents()->delete();
-            if ($count) $this->info($count . ' events soft deleted in group ' . $group->name);
+            if ($count) {
+                $this->info($count . ' events soft deleted in group ' . $group->name);
+            }
 
             $count = $group->files()->delete();
-            if ($count) $this->info($count . ' files soft deleted in group ' . $group->name);
+            if ($count) {
+                $this->info($count . ' files soft deleted in group ' . $group->name);
+            }
 
             $count = $group->memberships()->delete();
-            if ($count) $this->info($count . ' memberships hard deleted in group ' . $group->name);
+            if ($count) {
+                $this->info($count . ' memberships hard deleted in group ' . $group->name);
+            }
 
             $count = $group->invites()->delete();
-            if ($count) $this->info($count . ' invites hard deleted in group ' . $group->name);
+            if ($count) {
+                $this->info($count . ' invites hard deleted in group ' . $group->name);
+            }
 
             $group->deleteCover();
             $group->forceDelete();
-            if ($count) $this->info('Group ' . $group->name . ' hard deleted');
+            if ($count) {
+                $this->info('Group ' . $group->name . ' hard deleted');
+            }
         }
 
         // Handle discussions and their related comments :
@@ -95,10 +106,14 @@ class CleanupDatabase extends Command
         foreach ($discussions as $discussion) {
             // definitely delete comments
             $count = $discussion->comments()->forceDelete();
-            if ($count) $this->info($count . ' comments hard deleted on ' . $discussion->name);
+            if ($count) {
+                $this->info($count . ' comments hard deleted on ' . $discussion->name);
+            }
 
             $count = $discussion->forceDelete();
-            if ($count) $this->info('Discussion ' . $discussion->name . ' hard deleted');
+            if ($count) {
+                $this->info('Discussion ' . $discussion->name . ' hard deleted');
+            }
         }
 
         // Handle events
@@ -155,19 +170,29 @@ class CleanupDatabase extends Command
             }
 
             $count = $user->discussions()->delete();
-            if ($count) $this->info($count . ' discussions soft deleted from ' . $user->name);
+            if ($count) {
+                $this->info($count . ' discussions soft deleted from ' . $user->name);
+            }
 
             $count = $user->comments()->delete();
-            if ($count) $this->info($count . ' comments soft deleted from ' . $user->name);
+            if ($count) {
+                $this->info($count . ' comments soft deleted from ' . $user->name);
+            }
 
             $count = $user->calendarevents()->delete();
-            if ($count) $this->info($count . ' events soft deleted from ' . $user->name);
+            if ($count) {
+                $this->info($count . ' events soft deleted from ' . $user->name);
+            }
 
             $count = $user->files()->delete();
-            if ($count) $this->info($count . ' files soft deleted from ' . $user->name);
+            if ($count) {
+                $this->info($count . ' files soft deleted from ' . $user->name);
+            }
 
             $count = $user->memberships()->delete();
-            if ($count) $this->info($count . ' memberships hard deleted from ' . $user->name);
+            if ($count) {
+                $this->info($count . ' memberships hard deleted from ' . $user->name);
+            }
 
             // delete cover files from storage
             $user->deleteCover();
@@ -182,18 +207,24 @@ class CleanupDatabase extends Command
         $count = Revision::where('created_at', '<', Carbon::today()->subDays(config('agorakit.data_retention') * 2))
             ->limit($this->option('batch'))
             ->forceDelete();
-        if ($count) $this->info($count . ' revisions deleted');
+        if ($count) {
+            $this->info($count . ' revisions deleted');
+        }
 
         // delete all old imported messages
         $count = Message::where('created_at', '<', Carbon::today()->subDays(config('agorakit.data_retention')))
             ->limit($this->option('batch'))
             ->forceDelete();
-        if ($count) $this->info($count . ' inbound mail messages deleted');
+        if ($count) {
+            $this->info($count . ' inbound mail messages deleted');
+        }
 
         // delete all old notifications
         $count = DatabaseNotification::where('created_at', '<', Carbon::today()->subDays(config('agorakit.data_retention')))
             ->limit($this->option('batch'))
             ->forceDelete();
-        if ($count) $this->info($count . ' database notifications deleted');
+        if ($count) {
+            $this->info($count . ' database notifications deleted');
+        }
     }
 }

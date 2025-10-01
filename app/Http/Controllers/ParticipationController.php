@@ -13,8 +13,6 @@ use URL;
  */
 class ParticipationController extends Controller
 {
-
-
     public function edit(Request $request, Group $group, CalendarEvent $event)
     {
         $this->authorize('participate', $event);
@@ -48,17 +46,15 @@ class ParticipationController extends Controller
         $this->authorize('participate', $event);
         $rsvp = Participation::firstOrNew(['user_id' => $request->user()->id, 'calendar_event_id' => $event->id]);
         //$rsvp->notification = $request->get('notification');
-        
+
         if ($status == 'yes') {
             $rsvp->status = Participation::PARTICIPATE;
-        }
-        elseif ($status == 'no') {
+        } elseif ($status == 'no') {
             $rsvp->status = Participation::WONT_PARTICIPATE;
-        }
-        elseif ($status == 'maybe') {
+        } elseif ($status == 'maybe') {
             $rsvp->status = Participation::UNDECIDED;
         }
-        
+
         $rsvp->save();
 
         return redirect()->back();

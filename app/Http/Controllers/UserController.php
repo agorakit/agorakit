@@ -14,7 +14,7 @@ use Mail;
 use Redirect;
 use Storage;
 use Illuminate\Support\Facades\Hash;
-use \Cviebrock\EloquentSluggable\Services\SlugService;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class UserController extends Controller
 {
@@ -174,18 +174,18 @@ class UserController extends Controller
                 try {
                     $user->location = $request->input('location');
                 } catch (\Exception $e) {
-                return redirect()->route('users.create', $user)
-                  ->withErrors($e->getMessage() . '. Incorrect location')
-                  ->withInput();
+                    return redirect()->route('users.create', $user)
+                    ->withErrors($e->getMessage() . '. Incorrect location')
+                    ->withInput();
                 }
 
                 // Geocode
                 if ($user->location <> $old_location) {
-                  if (!$user->geocode()) {
-                      flash(trans('messages.location_cannot_be_geocoded'));
-                  } else {
-                      flash(trans('messages.ressource_geocoded_successfully'));
-                  }
+                    if (!$user->geocode()) {
+                        flash(trans('messages.location_cannot_be_geocoded'));
+                    } else {
+                        flash(trans('messages.ressource_geocoded_successfully'));
+                    }
                 }
             }
 

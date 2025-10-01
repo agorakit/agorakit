@@ -109,8 +109,6 @@ class File extends Model
         }
 
         if ($this->parent) {
-
-
             $parent = $this->parent;
 
             // max parent depth is 10 // code is ugly but at least it's not recursive so it stops after 10 whatever happens // need to add error checking

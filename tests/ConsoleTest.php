@@ -2,7 +2,6 @@
 
 namespace Tests;
 
-
 use App\Group;
 use App\User;
 use App\File;
@@ -11,7 +10,6 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
 use Storage;
 use Avatar;
-
 //use RuntimeException;
 use Illuminate\Foundation\Testing\TestCase;
 use Laravel\BrowserKitTesting\Concerns\InteractsWithConsole;
@@ -26,7 +24,7 @@ class ConsoleTest extends TestCase
     {
         $this->assertEquals(0, $this->artisan('migrate:fresh'));
         $dir = Storage::disk()->path('groups/1/files');
-        foreach(Storage::allFiles($dir) as $filename) {
+        foreach (Storage::allFiles($dir) as $filename) {
             Storage::delete($filename);
         }
         Storage::delete('groups/1/files/1');
@@ -44,7 +42,7 @@ class ConsoleTest extends TestCase
         $user->email = "admin@agorakit.org";
         $user->verified = 1;
         $user->save();
-        $group = new Group;
+        $group = new Group();
         $group->name = "Test Export Group";
         $group->body = "This is a test for export";
         $group->save();

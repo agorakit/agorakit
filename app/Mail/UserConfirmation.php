@@ -9,7 +9,8 @@ use Illuminate\Queue\SerializesModels;
 
 class UserConfirmation extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     public $user;
 
@@ -31,7 +32,7 @@ class UserConfirmation extends Mailable
     public function build()
     {
         return $this->markdown('emails.confirm')
-        ->subject('['.setting('name').'] '.trans('messages.confirm_your_email'))
+        ->subject('[' . setting('name') . '] ' . trans('messages.confirm_your_email'))
         ->from(config('mail.noreply'));
     }
 }

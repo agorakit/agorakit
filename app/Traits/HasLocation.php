@@ -51,7 +51,9 @@ trait HasLocation
     public function hasLocation()
     {
         foreach ($this->location as $value) {
-            if (strlen($value) > 0) return true;
+            if (strlen($value) > 0) {
+                return true;
+            }
         }
         return false;
     }
@@ -70,7 +72,7 @@ trait HasLocation
         $geoline = [];
         foreach (get_object_vars($this->location) as $key => $val) {
             if ($key == 'name') {
-            } else if ($key == 'county' && $this->location->country) {
+            } elseif ($key == 'county' && $this->location->country) {
                 $geoline[] = $this->parse_county($val, $this->location->country);
             } else {
                 $geoline[] = $val;

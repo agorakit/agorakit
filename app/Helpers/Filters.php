@@ -1,6 +1,6 @@
 <?php
 
-use \Embera\Embera;
+use Embera\Embera;
 
 /**
  * Text/html processing and filters

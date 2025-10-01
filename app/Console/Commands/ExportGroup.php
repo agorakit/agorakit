@@ -86,7 +86,7 @@ class ExportGroup extends Command
         $zipdir = Storage::disk('tmp')->url('');
         $zipfile = $zipdir . 'group-' . $group->id . '-files.zip';
         $zip = new ZipArchive();
-        if ($zip->open($zipfile, ZipArchive::CREATE)!==TRUE) {
+        if ($zip->open($zipfile, ZipArchive::CREATE) !== true) {
             exit("cannot open <$zipfile>\n");
         }
         $groupfiles = Storage::allFiles($root);

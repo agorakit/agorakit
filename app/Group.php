@@ -331,7 +331,7 @@ class Group extends Model
 
     public function scopeActive($query)
     {
-        return $query->where('updated_at', '>',  Carbon::now()->subMonths(3)->toDateTimeString());
+        return $query->where('updated_at', '>', Carbon::now()->subMonths(3)->toDateTimeString());
     }
 
 

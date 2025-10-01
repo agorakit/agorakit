@@ -8,14 +8,12 @@ use Storage;
 use App\File;
 use App\Group;
 
-
 /**
  * This is the integration with onlyoffice (this can change later).
  * Provide users the ability to edit a file using onlyoffice (documents, spreadsheets, presentations)
  */
 class FileEditorController extends Controller
 {
-
     /**
      * Display the specified resource.
      *

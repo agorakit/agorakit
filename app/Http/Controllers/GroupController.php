@@ -167,7 +167,7 @@ class GroupController extends Controller
     public function create()
     {
         $this->authorize('create', Group::class);
-        $group = new Group;
+        $group = new Group();
 
         return view('groups.create')
             ->with('group', $group)
@@ -210,10 +210,10 @@ class GroupController extends Controller
             // Validate input
             try {
                 $group->location = $request->input('location');
-                } catch (\Exception $e) {
+            } catch (\Exception $e) {
                 return redirect()->route('groups.create', $group)
-                 ->withErrors($e->getMessage() . '. Invalid location')
-                 ->withInput();
+                ->withErrors($e->getMessage() . '. Invalid location')
+                ->withInput();
             }
             // Geocode
             if (!$group->geocode()) {
@@ -327,19 +327,19 @@ class GroupController extends Controller
             // Validate input
             try {
                 $group->location = $request->input('location');
-                } catch (\Exception $e) {
+            } catch (\Exception $e) {
                 return redirect()->route('groups.create', $group)
-                 ->withErrors($e->getMessage() . '. Invalid location')
-                 ->withInput();
+                ->withErrors($e->getMessage() . '. Invalid location')
+                ->withInput();
             }
             if ($group->location <> $old_location) {
               // Try to geocode
-              if (!$group->geocode()) {
-                  flash(trans('messages.location_cannot_be_geocoded'));
-              } else {
-                  flash(trans('messages.ressource_geocoded_successfully'));
-              }
-           }
+                if (!$group->geocode()) {
+                    flash(trans('messages.location_cannot_be_geocoded'));
+                } else {
+                    flash(trans('messages.ressource_geocoded_successfully'));
+                }
+            }
         }
 
         $group->user()->associate(Auth::user());
@@ -471,8 +471,7 @@ class GroupController extends Controller
             }
             if (str_ends_with($mimetype, 'json')) {
                 $path = $file->storeAs('groups/new', "groupimport-" . $user_id . "-" . Carbon::now()->format('Y-m-d_H-i-s') . ".json");
-            }
-            else {
+            } else {
                 $path = $file->storeAs('groups/new', "groupimport-" . $user_id . "-" . Carbon::now()->format('Y-m-d_H-i-s') . ".zip");
             }
             $importservice = new ImportService();
@@ -510,7 +509,7 @@ class GroupController extends Controller
         $path = 'groups/new/' . $basename;
 
         $new_usernames = array();
-        foreach($request->all() as $key=>$val) {
+        foreach ($request->all() as $key => $val) {
             if (substr($key, 0, 13) == 'new_username_') {
                 $new_usernames[substr($key, 13)] = $val;
             }
@@ -521,8 +520,7 @@ class GroupController extends Controller
         if (is_a($ret, "App\Group")) {
             flash(trans('messages.ressource_created_successfully'));
             return redirect()->route('groups.show', [$ret]);
-        }
-        else if (is_array($ret)) { // Go back to intermediate forme
+        } elseif (is_array($ret)) { // Go back to intermediate forme
             list($import_basename, $existing_group, $edited_usernames, $group_name, $group_type) = $ret;
             return view('groups.importconfirm')
                 ->with('user_id', $user_id)
@@ -532,8 +530,7 @@ class GroupController extends Controller
                 ->with('existing_group', '')
                 ->with('existing_usernames', $edited_usernames)
                 ->withErrors(trans("Sorry! These need to be edited a second time because they also exist in database!"));
-        }
-        else {
+        } else {
             return redirect()->route('groups.index')->withErrors("Import error");
         }
     }

@@ -13,14 +13,13 @@ use ZipArchive;
  */
 class ExportService
 {
-
     public $valid_formats = ['csv', 'json'];
 
 
     /**
      * - all : admin overview of all discussions for example
      */
-    public function export($group, $format='json')
+    public function export($group, $format = 'json')
     {
         // load related content. I know it cascades but this way I have a complete list of models I need to process
         $group->load([
@@ -56,7 +55,7 @@ class ExportService
         $zipdir = Storage::disk('tmp')->url('');
         $zipfile = tempnam($zipdir, '');
         $zip = new ZipArchive();
-        if ($zip->open($zipfile, ZipArchive::CREATE)!==TRUE) {
+        if ($zip->open($zipfile, ZipArchive::CREATE) !== true) {
             exit("cannot open <$zipfile>\n");
         }
         $groupfiles = Storage::allFiles($root);

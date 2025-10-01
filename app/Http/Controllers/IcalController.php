@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Group;
 use Context;
-
 use Spatie\IcalendarGenerator\Components\Calendar;
 use Spatie\IcalendarGenerator\Components\Event;
 
@@ -30,7 +29,7 @@ class IcalController extends Controller
          // returns the 500 most recent Agorakit events
         $events = \App\CalendarEvent::with('group')
             ->whereIn('group_id', $groups)
-            ->orderBy('start','desc')
+            ->orderBy('start', 'desc')
             ->take(500)
             ->get();
 
@@ -51,6 +50,5 @@ class IcalController extends Controller
         return response($calendar->get())
             ->header('Content-Type', 'text/calendar')
             ->header('charset', 'utf-8');
-
     }
 }

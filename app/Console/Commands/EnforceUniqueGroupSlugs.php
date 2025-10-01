@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-
 use DB;
 use App\Group;
 
@@ -48,15 +47,11 @@ class EnforceUniqueGroupSlugs extends Command
 
 
 
-        foreach ($duplicates as $duplicate)
-        {
-
+        foreach ($duplicates as $duplicate) {
             $group = Group::withTrashed()->find($duplicate->id);
             $group->slug = null;
             $group->save();
             $this->line($group->name . ' modified with slug like : ' . $group->slug);
-
         }
     }
-
 }

@@ -22,7 +22,7 @@ class InsightsController extends Controller
 
 
         // Global stats :
-        $chart = new AgorakitChart;
+        $chart = new AgorakitChart();
         $chart->title('General stats');
         $chart->labels(['Groups', 'Active groups', 'Users', 'Verified users', 'Active users', 'Discussions', 'Comments', 'Events', 'Files']);
         $chart->dataset('Amount', 'bar', [
@@ -54,7 +54,7 @@ class InsightsController extends Controller
             $labels[] = $result->year . ' / ' .  $result->month;
         }
 
-        $chart = new AgorakitChart;
+        $chart = new AgorakitChart();
         $chart->title('Discussions per month');
         $chart->labels($labels);
         $chart->dataset('Amount', 'line', $dataset);
@@ -74,7 +74,7 @@ class InsightsController extends Controller
             $labels[] = $result->year . ' / ' .  $result->month;
         }
 
-        $chart = new AgorakitChart;
+        $chart = new AgorakitChart();
         $chart->title('Events per month');
         $chart->labels($labels);
         $chart->dataset('Amount', 'line', $dataset);
@@ -94,7 +94,7 @@ class InsightsController extends Controller
             $labels[] = $result->year . ' / ' .  $result->month;
         }
 
-        $chart = new AgorakitChart;
+        $chart = new AgorakitChart();
         $chart->title('Memberships per month');
         $chart->labels($labels);
         $chart->dataset('Amount', 'line', $dataset);
@@ -115,7 +115,7 @@ class InsightsController extends Controller
             $labels[] = $result->year . ' / ' .  $result->month;
         }
 
-        $chart = new AgorakitChart;
+        $chart = new AgorakitChart();
         $chart->title('Files per month');
         $chart->labels($labels);
         $chart->dataset('Amount', 'line', $dataset);
@@ -138,7 +138,7 @@ class InsightsController extends Controller
             $labels[] = $result->year . ' / ' .  $result->month;
         }
 
-        $chart = new AgorakitChart;
+        $chart = new AgorakitChart();
         $chart->title('Evolution of storage use');
         $chart->labels($labels);
         $chart->dataset('Megabytes', 'line', $dataset);

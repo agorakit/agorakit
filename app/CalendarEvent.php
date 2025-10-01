@@ -122,5 +122,4 @@ class CalendarEvent extends Model
     {
         return $this->belongsToMany(User::class)->wherePivot('status', '0');
     }
-
 }

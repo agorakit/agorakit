@@ -13,18 +13,12 @@ use Illuminate\Notifications\Notifiable;
 use Nicolaslopezj\Searchable\SearchableTrait;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
-use \Cviebrock\EloquentSluggable\Services\SlugService;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Storage;
-
-
-
 use App\Membership;
-
-
-
 
 class User extends Authenticatable
 {
@@ -275,7 +269,7 @@ class User extends Authenticatable
 
     public function scopeActive($query)
     {
-        return $query->where('users.updated_at', '>',  Carbon::now()->subMonths(3)->toDateTimeString());
+        return $query->where('users.updated_at', '>', Carbon::now()->subMonths(3)->toDateTimeString());
     }
 
     /**
@@ -439,5 +433,4 @@ class User extends Authenticatable
 
         return $this->save();
     }
-
 }
