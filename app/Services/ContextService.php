@@ -74,7 +74,7 @@ class ContextService
 
     /**
      * Set the current context for the current user
-     * Contex can be :
+     * Context can be :
      * - my
      * - public
      * - admin
@@ -82,7 +82,7 @@ class ContextService
     public function set($context)
     {
         if (!in_array($context, $this->valid_contexts)) {
-            throw new Exception('Invalid context type set');
+            throw new \Exception('Invalid context type set');
         }
         session(['context' => $context]);
     }

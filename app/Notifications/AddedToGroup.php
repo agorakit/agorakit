@@ -13,6 +13,8 @@ class AddedToGroup extends Notification
 
     public Group $group;
 
+    protected bool $resetlink;
+
     /**
      * Create a new notification instance.
      *
