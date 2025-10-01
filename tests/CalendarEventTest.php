@@ -2,7 +2,9 @@
 
 namespace Tests;
 
-use App\Group;
+use App;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Mail;
 
 class CalendarEventTest extends BrowserKitTestCase
 {

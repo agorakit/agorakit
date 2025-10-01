@@ -2,8 +2,10 @@
 
 namespace Tests;
 
-use App\Group;
+use App;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Mail;
 
 class FileUploadTest extends BrowserKitTestCase
 {

@@ -5,12 +5,9 @@ namespace Tests;
 use App\Group;
 use App\User;
 use App\File;
-use App\Console\Kernel;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
-use Storage;
-use Avatar;
-//use RuntimeException;
+use Illuminate\Support\Facades\Storage;
+use Laravolt\Avatar\Avatar;
 use Illuminate\Foundation\Testing\TestCase;
 use Laravel\BrowserKitTesting\Concerns\InteractsWithConsole;
 
@@ -58,7 +55,7 @@ class ConsoleTest extends TestCase
         $this->assertEquals($file->id, '1');
         Storage::makeDirectory('groups/' . $group->id . '/files');
         Storage::makeDirectory('groups/' . $group->id . '/files/' . $file->id);
-        $avatar = Avatar::create("test")->toSvg();
+        $avatar = (new \Laravolt\Avatar\Avatar())->create("test")->toSvg();
         Storage::put($file->path, $avatar);
         $this->assertEquals(0, $this->artisan('agorakit:export 1'));
     }
