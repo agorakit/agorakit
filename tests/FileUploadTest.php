@@ -1,9 +1,13 @@
 <?php
 
-use App\Group;
-use Illuminate\Http\UploadedFile;
+namespace Tests;
 
-class FileUploadTest extends Tests\BrowserKitTestCase
+use App;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Mail;
+
+class FileUploadTest extends BrowserKitTestCase
 {
     /* tests starts here : let's setup the DB
     */

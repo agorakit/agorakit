@@ -1,12 +1,15 @@
 <?php
 
-use App\Group;
-use App\Membership;
+namespace Tests;
+
+use App;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
 
-class ImportTest extends Tests\BrowserKitTestCase
+class ImportTest extends BrowserKitTestCase
 {
     /******************* Why is it done this way ? ***************/
 
@@ -224,9 +227,7 @@ class ImportTest extends Tests\BrowserKitTestCase
     public function testGroupExport()
     {
         $user = App\User::where('email', 'admin@agorakit.org')->first();
-        $group = App\Group::where('name', 'Test group')->firstOrFail();
         $storage = Storage::disk('tmp');
-        global $export;
 
         $this->actingAs($user)
           ->visit('/groups/1')
@@ -234,12 +235,11 @@ class ImportTest extends Tests\BrowserKitTestCase
           ->see('Export Group Data')
           ->click('Export Group Data');
 
-        $files = array();
+        $files = [];
         foreach ($storage->files('') as $file) {
             $files[$storage->lastModified($file)] = $file;
         }
         $ts = max(array_keys($files));
-        $export = $files[$ts];
         assert(Carbon::createFromTimestamp($ts)->diffInSeconds(Carbon::now()) < 1);
     }
 
@@ -248,7 +248,14 @@ class ImportTest extends Tests\BrowserKitTestCase
         $user = App\User::where('email', 'admin@agorakit.org')->first();
         $group = App\Group::where('name', 'Test group')->firstOrFail();
         $storage = Storage::disk('tmp');
-        global $export;
+
+        $files = [];
+        foreach ($storage->files('') as $file) {
+            $files[$storage->lastModified($file)] = $file;
+        }
+        $ts = max(array_keys($files));
+        $export = $files[$ts];
+
         $file = fopen($storage->path($export), 'r');
         $import = stream_get_meta_data($file)['uri'];
 

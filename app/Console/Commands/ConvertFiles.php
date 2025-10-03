@@ -19,7 +19,9 @@ class ConvertFiles extends Command
      *
      * @var string
      */
-    protected $description = 'Convert the files from the old flat path based storage to the new storage, putting back their initila filename and moving the file to public directory. Use this **once** if you already have files on your install and if your install is older than november 2016.';
+    protected $description = 'Convert the files from the old flat path based storage to the new storage,
+        putting back their initial filename and moving the file to public directory.
+        Use this **once** if you already have files on your install and if your install is older than november 2016.';
 
     /**
      * Create a new command instance.

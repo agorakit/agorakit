@@ -31,7 +31,7 @@ class ImportService
     /**
      * - Do we find a similar group in database?
      */
-    private function existing_group($group)
+    private function existingGroup($group)
     {
         foreach (Group::all() as $existing_group) {
             if ($existing_group->name == $group->name || $existing_group->name == $group->name . ' (imported)') {
@@ -51,7 +51,7 @@ class ImportService
     /**
      * - Do some usernames already exist in database?
      */
-    private function existing_usernames($group)
+    private function existingUsernames($group)
     {
         // Compare with already existing usernames, yet email being different
         $existing_usernames = array();
@@ -70,11 +70,11 @@ class ImportService
      * - Search email in imported data
      * - for a given $user_id
      */
-    private function get_imported_email($user_id, $group)
+    private function getImportedEmail($user_id, $group)
     {
         foreach ($group->memberships as $mb) {
-            if ($mb->user - id == $user_id) {
-                return $mb->user - email;
+            if ($mb->user->id == $user_id) {
+                return $mb->user->email;
             }
         }
     }
@@ -83,7 +83,7 @@ class ImportService
      * - Return a new user object, just like given $user
      * - yet with a new id and a temporary password.
      */
-    private function new_user($user)
+    private function newUser($user)
     {
         $length = 8;
         $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -130,8 +130,8 @@ class ImportService
             $group_std = json_decode(Storage::get($path), false);
         }
         // Compare with existing data in database
-        $existing_group = $this->existing_group($group_std);
-        $existing_usernames = $this->existing_usernames($group_std);
+        $existing_group = $this->existingGroup($group_std);
+        $existing_usernames = $this->existingUsernames($group_std);
         $group_type = trans('group.open');
         if ($group_std->group_type == Group::CLOSED) {
              $group_type = trans('group.closed');
@@ -167,7 +167,7 @@ class ImportService
             $still_existing_usernames = array();
             foreach (User::all() as $existing_user) {
                 foreach ($edited_usernames as $id => $username) {
-                    if ($existing_user->username == $username && $existing_user->email <> $this->get_imported_email($id)) {
+                    if ($existing_user->username == $username && $existing_user->email <> $this->getImportedEmail($id, $group)) {
                         $still_existing_usernames[$id] = $username;
                     }
                 }
@@ -181,7 +181,7 @@ class ImportService
                     if ($mb->user->id == $id) {
                         // create new user here, with edited username
                         $mb->user->username = $username;
-                        $user_n = $this->new_user($mb->user);
+                        $user_n = $this->newUser($mb->user);
                         if ($user_n->isValid()) {
                             $user_n->save();
                         } else {
@@ -234,7 +234,7 @@ class ImportService
             if ($found_user) {
                 $mb->user_id = $found_user->id;
             } else {
-                $user_n = $this->new_user($mb->user);
+                $user_n = $this->newUser($mb->user);
                 if ($user_n->isValid()) {
                     $user_n->save();
                     $mb->user_id = $user_n->id;
@@ -429,7 +429,7 @@ class ImportService
             }
             foreach ($added_users as $id) {
                 $user = User::find($id);
-                $this->set_temporary_password($user);
+                //$this->set_temporary_password($user); // @todo (?) Method does not exist.
                 $user->notify(new AddedToGroup($group_n, true));
             }
         }

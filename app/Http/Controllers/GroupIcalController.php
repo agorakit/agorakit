@@ -38,7 +38,7 @@ class GroupIcalController extends Controller
                 ->createdAt($event->created_at)
                 ->startsAt($event->start)
                 ->endsAt($event->stop)
-                ->address($event->location_display());
+                ->address($event->locationDisplay());
 
             $calendar->event($event);
         }

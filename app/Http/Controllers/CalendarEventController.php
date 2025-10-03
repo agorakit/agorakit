@@ -85,7 +85,7 @@ class CalendarEventController extends Controller
         foreach ($events as $event) {
             $event['id'] = $event->id;
             $event['title'] = $event->name . ' (' . $event->group->name . ')';
-            $event['description'] = strip_tags(summary($event->body)) . ' <br/> ' . $event->location_display();
+            $event['description'] = strip_tags(summary($event->body)) . ' <br/> ' . $event->locationDisplay();
             $event['body'] = strip_tags(summary($event->body));
             $event['summary'] = strip_tags(summary($event->body));
 
@@ -98,7 +98,7 @@ class CalendarEventController extends Controller
             }
 
 
-            $event['location'] = $event->location_display();
+            $event['location'] = $event->locationDisplay();
             $event['start'] = $event->start->toIso8601String();
             $event['end'] = $event->stop->toIso8601String();
             $event['url'] = route('groups.calendarevents.show', [$event->group, $event]);

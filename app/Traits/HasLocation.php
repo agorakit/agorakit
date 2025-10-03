@@ -62,7 +62,7 @@ trait HasLocation
     /**
      * Geocode the model using $this->getLocationData() data and sets $this->latitude and $this->longitude
      */
-    function geocode()
+    public function geocode()
     {
         if (!$this->location) {
             $this->latitude = 0;
@@ -73,7 +73,7 @@ trait HasLocation
         foreach (get_object_vars($this->location) as $key => $val) {
             if ($key == 'name') {
             } elseif ($key == 'county' && $this->location->country) {
-                $geoline[] = $this->parse_county($val, $this->location->country);
+                $geoline[] = $this->parseCounty($val, $this->location->country);
             } else {
                 $geoline[] = $val;
             }
@@ -93,7 +93,7 @@ trait HasLocation
      * Parse `county` input from the request, for some specific cases.
      * At the moment: French departement codes only.
      */
-    function parse_county($county, $country)
+    protected function parseCounty($county, $country)
     {
         if (!is_numeric($county)) {
             return $county;
@@ -112,7 +112,7 @@ trait HasLocation
      * Knowing that it is stored as a JSON structure in the database,
      * with keys: name, street, city, county, country.
      */
-    public function location_display($format = "short")
+    public function locationDisplay($format = "short")
     {
         $parts = [];
         foreach ($this->location_keys as $attr) {

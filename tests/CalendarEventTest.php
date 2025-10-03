@@ -1,8 +1,12 @@
 <?php
 
-use App\Group;
+namespace Tests;
 
-class CalendarEventTest extends Tests\BrowserKitTestCase
+use App;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Mail;
+
+class CalendarEventTest extends BrowserKitTestCase
 {
     /******************* Why is it done this way ? ***************/
 

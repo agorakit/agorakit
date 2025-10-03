@@ -299,7 +299,7 @@ class CheckMailbox extends Command
     /**
      * Returns a rich text represenation of the email, stripping away all quoted text, signatures, etc...
      */
-    function extractTextFromMessage(ImapMessage $message)
+    protected function extractTextFromMessage(ImapMessage $message)
     {
         $body_html = $message->getBodyHtml(); // this is the raw html content
         $body_text = nl2br(EmailReplyParser::parseReply($message->getBodyText()));
@@ -325,7 +325,7 @@ class CheckMailbox extends Command
     /**
      * Returns all recipients form the message, in the to: cc: references: and in-reply-to: fields
      */
-    function extractRecipientsFromMessage(ImapMessage $message)
+    protected function extractRecipientsFromMessage(ImapMessage $message)
     {
         $recipients = [];
         foreach ($message->getTo() as $to) {
@@ -356,7 +356,7 @@ class CheckMailbox extends Command
     /**
      * Returns all headers of the email as key => value
      */
-    function parse_rfc822_headers(string $header_string): array
+    protected function parseRFC822Headers(string $header_string): array
     {
         // Reference:
         // * Base: https://stackoverflow.com/questions/5631086/getting-x-mailer-attribute-in-php-imap/5631445#5631445
@@ -378,7 +378,7 @@ class CheckMailbox extends Command
      */
     public function isMessageAutomated(ImapMessage $message)
     {
-        $message_headers = $this->parse_rfc822_headers($message->getRawHeaders());
+        $message_headers = $this->parseRFC822Headers($message->getRawHeaders());
 
         if (array_key_exists('Auto-Submitted', $message_headers)) {
             return true;

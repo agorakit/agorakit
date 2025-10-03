@@ -45,9 +45,9 @@ class File extends Model
     // 1 : folder (virtual folders)
     // 2 : link (to an etherpad or google doc for instance)
 
-    const FILE = 0;
-    const FOLDER = 1;
-    const LINK = 2;
+    public const FILE = 0;
+    public const FOLDER = 1;
+    public const LINK = 2;
 
 
     /**
@@ -111,7 +111,9 @@ class File extends Model
         if ($this->parent) {
             $parent = $this->parent;
 
-            // max parent depth is 10 // code is ugly but at least it's not recursive so it stops after 10 whatever happens // need to add error checking
+            // max parent depth is 10
+            // code is ugly but at least it's not recursive so it stops after 10 whatever happens
+            // need to add error checking
             for ($i = 0; $i < 10; $i++) {
                 $parents->push($parent);
                 if ($parent->parent) {

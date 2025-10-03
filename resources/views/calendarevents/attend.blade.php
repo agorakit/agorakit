@@ -3,7 +3,7 @@
 @section('content')
     <h1>{{ trans('messages.attend_to') }} "<em>{{ $event->name }}</em>"?</h1>
     <div class="meta mb-2">
-        {{ $event->start->format('d/m/Y H:i') }} - {{ $event->location_display() }}
+        {{ $event->start->format('d/m/Y H:i') }} - {{ $event->locationDisplay() }}
     </div>
     <div class="summary mb-4">{{ summary($event->body) }}</div>
 

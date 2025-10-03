@@ -1,16 +1,21 @@
 <?php
 
+namespace Tests;
+
+use App;
 use App\Group;
 use App\Membership;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Mail;
 
-class UserTest extends Tests\BrowserKitTestCase
+class UserTest extends BrowserKitTestCase
 {
     /******************* Why is it done this way ? ***************/
 
     /*
     I want my tests runs on a clean DB, and each test in the right order, like I would do by hand.
     The first tests migrates the testing DB
-    Sounds simplier like this for me, I don't want the database being remigrated after each test.
+    Sounds simpler like this for me, I don't want the database being remigrated after each test.
     Only after the whole suite has been run.
 
     You need a agorakit_testing DB available for those tests to run.

@@ -14,9 +14,9 @@ class Participation extends Model
     use ValidatingTrait;
     use SoftDeletes;
 
-    const UNDECIDED = 0;
-    const PARTICIPATE = 10;
-    const WONT_PARTICIPATE = -10;
+    public const UNDECIDED = 0;
+    public const PARTICIPATE = 10;
+    public const WONT_PARTICIPATE = -10;
 
     protected $attributes = [
         'status' => self::PARTICIPATE,

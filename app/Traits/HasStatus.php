@@ -5,13 +5,6 @@ namespace App\Traits;
 use App\Scopes\HasStatusScope;
 use Illuminate\Database\Eloquent\Builder;
 
-interface ContentStatus
-{
-    const NORMAL = 0;
-    const PINNED = 10;
-    const ARCHIVED = -10;
-}
-
 trait HasStatus
 {
     public function getStatus(): int

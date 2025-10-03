@@ -63,11 +63,11 @@
                 @auth
                     @if (Auth::user()->isMemberOf($group))
                         @if ($group->hasLocation())
-                            <div class="text-body-secondary mt-3"><i class="fa fa-map-marker"></i> {{ $group->location_display() }}</div>
+                            <div class="text-body-secondary mt-3"><i class="fa fa-map-marker"></i> {{ $group->locationDisplay() }}</div>
                         @endif
                     @endif
                 @endauth
-                
+
             </div>
         </div>
 
