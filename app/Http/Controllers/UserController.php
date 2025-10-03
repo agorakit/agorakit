@@ -299,7 +299,7 @@ class UserController extends Controller
 
         // Do the deletion:
         if ($request->isMethod('delete')) {
-            if ($user->email == 'anonymous@agorakit.org') {
+            if ($user->email == 'anonymous@localhost') {
                 abort(500, 'Do not delete anonymous user, you fool :-)');
             }
 
