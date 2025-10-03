@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
 
         // first created user is automagically admin
         $admin = App\User::create([
-            'email'    => 'admin@agorakit.org',
+            'email'    => 'admin@locahost',
             'password' => bcrypt('123456789'),
             'body'     => $faker->text,
             'name'     => 'admin',
@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
 
         // a second normal user
         $normal_user = App\User::create([
-            'email'    => 'newbie@agorakit.org',
+            'email'    => 'newbie@locahost',
             'password' => bcrypt('123456789'),
             'body'     => $faker->text,
             'name'     => 'newbie',

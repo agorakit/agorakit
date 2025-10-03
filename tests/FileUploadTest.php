@@ -28,19 +28,19 @@ class FileUploadTest extends BrowserKitTestCase
 
         $this->visit('/register')
             ->type('Admin', 'name')
-            ->type('admin@agorakit.org', 'email')
+            ->type('admin@locahost', 'email')
             ->press('Register')
             ->type('123456789', 'password')
             ->type('123456789', 'password_confirmation')
             ->press('Register')
             ->see('Agorakit');
 
-        $this->seeInDatabase('users', ['email' => 'admin@agorakit.org']);
+        $this->seeInDatabase('users', ['email' => 'admin@locahost']);
     }
 
     public function testGroupCreation()
     {
-        $user = App\User::where('email', 'admin@agorakit.org')->first();
+        $user = App\User::where('email', 'admin@locahost')->first();
 
         $user->confirmEmail();
 
@@ -55,7 +55,7 @@ class FileUploadTest extends BrowserKitTestCase
 
     public function testFolderCreation()
     {
-        $user = App\User::where('email', 'admin@agorakit.org')->first();
+        $user = App\User::where('email', 'admin@locahost')->first();
         $group = App\Group::where('name', 'File upload test group')->firstOrFail();
 
         $this->actingAs($user)
@@ -68,7 +68,7 @@ class FileUploadTest extends BrowserKitTestCase
 
     public function testFileUpload()
     {
-        $user = App\User::where('email', 'admin@agorakit.org')->first();
+        $user = App\User::where('email', 'admin@locahost')->first();
         $group = App\Group::where('name', 'File upload test group')->firstOrFail();
 
         $file = UploadedFile::fake()->image('avatar.jpg');

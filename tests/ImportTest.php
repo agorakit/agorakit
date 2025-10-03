@@ -53,19 +53,19 @@ class ImportTest extends BrowserKitTestCase
 
         $this->visit('/register')
             ->type('Admin', 'name')
-            ->type('admin@agorakit.org', 'email')
+            ->type('admin@locahost', 'email')
             ->press('Register')
             ->type('123456789', 'password')
             ->type('123456789', 'password_confirmation')
             ->press('Register')
             ->see('Agorakit');
 
-        $this->seeInDatabase('users', ['email' => 'admin@agorakit.org']);
+        $this->seeInDatabase('users', ['email' => 'admin@locahost']);
     }
 
     public function testGroupCreation()
     {
-        $user = App\User::where('email', 'admin@agorakit.org')->first();
+        $user = App\User::where('email', 'admin@locahost')->first();
 
         $user->confirmEmail();
 
@@ -84,21 +84,21 @@ class ImportTest extends BrowserKitTestCase
 
         $this->visit('/register')
             ->type('Newbie', 'name')
-            ->type('newbie@agorakit.org', 'email')
+            ->type('newbie@locahost', 'email')
             ->press('Register')
             ->type('123456789', 'password')
             ->type('123456789', 'password_confirmation')
             ->press('Register')
             ->see('Agorakit');
 
-        $this->seeInDatabase('users', ['email' => 'newbie@agorakit.org']);
+        $this->seeInDatabase('users', ['email' => 'newbie@locahost']);
     }
 
     public function testNewbieCanJoinOpenGroup()
     {
         $group = App\Group::where('name', 'Test group')->first();
 
-        $user = App\User::where('email', 'newbie@agorakit.org')->first();
+        $user = App\User::where('email', 'newbie@locahost')->first();
 
         $user->confirmEmail();
 
@@ -111,7 +111,7 @@ class ImportTest extends BrowserKitTestCase
 
     public function testDiscussionCreation()
     {
-        $user = App\User::where('email', 'admin@agorakit.org')->first();
+        $user = App\User::where('email', 'admin@locahost')->first();
 
         $group = App\Group::where('name', 'Test group')->first();
 
@@ -124,7 +124,7 @@ class ImportTest extends BrowserKitTestCase
             ->see('Test discussion');
 
         //let's create a second discussion in test group
-        $newbie = App\User::where('email', 'newbie@agorakit.org')->firstOrFail();
+        $newbie = App\User::where('email', 'newbie@locahost')->firstOrFail();
         $discussion = new \App\Discussion();
         $discussion->name = 'Notify me of this interesting discussion';
         $discussion->body = 'Such an interesting discussion blablbla';
@@ -147,7 +147,7 @@ class ImportTest extends BrowserKitTestCase
 
     public function testEventCreation()
     {
-        $user = App\User::where('email', 'admin@agorakit.org')->first();
+        $user = App\User::where('email', 'admin@locahost')->first();
 
         $group = App\Group::where('name', 'Test group')->first();
 
@@ -166,7 +166,7 @@ class ImportTest extends BrowserKitTestCase
 
     public function testFolderCreation()
     {
-        $user = App\User::where('email', 'admin@agorakit.org')->first();
+        $user = App\User::where('email', 'admin@locahost')->first();
         $group = App\Group::where('name', 'Test group')->firstOrFail();
 
         $this->actingAs($user)
@@ -179,7 +179,7 @@ class ImportTest extends BrowserKitTestCase
 
     public function testFileUpload()
     {
-        $user = App\User::where('email', 'admin@agorakit.org')->first();
+        $user = App\User::where('email', 'admin@locahost')->first();
         $group = App\Group::where('name', 'Test group')->firstOrFail();
 
         $file = UploadedFile::fake()->image('avatar.jpg');
@@ -196,7 +196,7 @@ class ImportTest extends BrowserKitTestCase
 
     public function testPrivateGroupCreation()
     {
-        $user = App\User::where('email', 'admin@agorakit.org')->first();
+        $user = App\User::where('email', 'admin@locahost')->first();
 
         $this->actingAs($user)
             ->visit('groups/create')
@@ -212,7 +212,7 @@ class ImportTest extends BrowserKitTestCase
 
     public function testNewbieCanCreateGroup()
     {
-        $user = App\User::where('email', 'newbie@agorakit.org')->first();
+        $user = App\User::where('email', 'newbie@locahost')->first();
 
         $this->actingAs($user)
             ->visit('groups/create')
@@ -226,7 +226,7 @@ class ImportTest extends BrowserKitTestCase
 
     public function testGroupExport()
     {
-        $user = App\User::where('email', 'admin@agorakit.org')->first();
+        $user = App\User::where('email', 'admin@locahost')->first();
         $storage = Storage::disk('tmp');
 
         $this->actingAs($user)
@@ -245,7 +245,7 @@ class ImportTest extends BrowserKitTestCase
 
     public function testGroupImport()
     {
-        $user = App\User::where('email', 'admin@agorakit.org')->first();
+        $user = App\User::where('email', 'admin@locahost')->firstOrFail();
         $group = App\Group::where('name', 'Test group')->firstOrFail();
         $storage = Storage::disk('tmp');
 
