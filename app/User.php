@@ -395,7 +395,7 @@ class User extends Authenticatable
     // TODO refactor this to use a user service layer or something
     public static function getAnonymousUser()
     {
-        $anonymous = \App\User::firstOrNew(['email' => 'anonymous@localhost']);
+        $anonymous = \App\User::firstOrNew(['email' => 'anonymous@agorakit.localhost']);
         if ($anonymous->exists()) {
             return $anonymous;
         }

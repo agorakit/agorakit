@@ -36,7 +36,7 @@ class ConsoleTest extends TestCase
         $user = new User();
         $user->username = "admin";
         $user->password = Hash::make("123456789");
-        $user->email = "admin@locahost";
+        $user->email = "admin@agorakit.local";
         $user->verified = 1;
         $user->save();
         $group = new Group();

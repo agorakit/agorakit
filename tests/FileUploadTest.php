@@ -28,19 +28,19 @@ class FileUploadTest extends BrowserKitTestCase
 
         $this->visit('/register')
             ->type('Admin', 'name')
-            ->type('admin@locahost', 'email')
+            ->type('admin@agorakit.local', 'email')
             ->press('Register')
             ->type('123456789', 'password')
             ->type('123456789', 'password_confirmation')
             ->press('Register')
             ->see('Agorakit');
 
-        $this->seeInDatabase('users', ['email' => 'admin@locahost']);
+        $this->seeInDatabase('users', ['email' => 'admin@agorakit.local']);
     }
 
     public function testGroupCreation()
     {
-        $user = App\User::where('email', 'admin@locahost')->first();
+        $user = App\User::where('email', 'admin@agorakit.local')->first();
 
         $user->confirmEmail();
 
@@ -55,31 +55,31 @@ class FileUploadTest extends BrowserKitTestCase
 
     public function testFolderCreation()
     {
-        $user = App\User::where('email', 'admin@locahost')->first();
+        $user = App\User::where('email', 'admin@agorakit.local')->first();
         $group = App\Group::where('name', 'File upload test group')->firstOrFail();
 
         $this->actingAs($user)
-          ->visit('/groups/' . $group->id . '/files/createfolder')
-          ->see('Create a folder')
-          ->type('Test folder', 'name')
-          ->press('Create')
-          ->see('Test folder');
+            ->visit('/groups/' . $group->id . '/files/createfolder')
+            ->see('Create a folder')
+            ->type('Test folder', 'name')
+            ->press('Create')
+            ->see('Test folder');
     }
 
     public function testFileUpload()
     {
-        $user = App\User::where('email', 'admin@locahost')->first();
+        $user = App\User::where('email', 'admin@agorakit.local')->first();
         $group = App\Group::where('name', 'File upload test group')->firstOrFail();
 
         $file = UploadedFile::fake()->image('avatar.jpg');
         $pathname = stream_get_meta_data($file->tempFile)['uri'];
 
         $this->actingAs($user)
-          ->visit('/groups/' . $group->id . '/files/create')
-          ->see('Upload file')
-          ->attach($pathname, 'file')
-          ->press('Create')
-          ->see('Resource created successfully')
-          ->see('Upload File');
+            ->visit('/groups/' . $group->id . '/files/create')
+            ->see('Upload file')
+            ->attach($pathname, 'file')
+            ->press('Create')
+            ->see('Resource created successfully')
+            ->see('Upload File');
     }
 }

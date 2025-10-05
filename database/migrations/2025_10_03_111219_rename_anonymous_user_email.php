@@ -11,7 +11,7 @@ return new class extends Migration
     public function up(): void
     {
         $anonymous = User::firstOrNew(['email' => 'anonymous@agorakit.org']);
-        $anonymous->email = 'anonymous@localhost';
+        $anonymous->email = 'anonymous@agorakit.localhost';
         $anonymous->name = 'Anonymous';
         $anonymous->body = 'Anonymous is a system user';
         $anonymous->verified = 1;

@@ -53,19 +53,19 @@ class ImportTest extends BrowserKitTestCase
 
         $this->visit('/register')
             ->type('Admin', 'name')
-            ->type('admin@locahost', 'email')
+            ->type('admin@agorakit.local', 'email')
             ->press('Register')
             ->type('123456789', 'password')
             ->type('123456789', 'password_confirmation')
             ->press('Register')
             ->see('Agorakit');
 
-        $this->seeInDatabase('users', ['email' => 'admin@locahost']);
+        $this->seeInDatabase('users', ['email' => 'admin@agorakit.local']);
     }
 
     public function testGroupCreation()
     {
-        $user = App\User::where('email', 'admin@locahost')->first();
+        $user = App\User::where('email', 'admin@agorakit.local')->first();
 
         $user->confirmEmail();
 
@@ -84,21 +84,21 @@ class ImportTest extends BrowserKitTestCase
 
         $this->visit('/register')
             ->type('Newbie', 'name')
-            ->type('newbie@locahost', 'email')
+            ->type('newbie@agorakit.local', 'email')
             ->press('Register')
             ->type('123456789', 'password')
             ->type('123456789', 'password_confirmation')
             ->press('Register')
             ->see('Agorakit');
 
-        $this->seeInDatabase('users', ['email' => 'newbie@locahost']);
+        $this->seeInDatabase('users', ['email' => 'newbie@agorakit.local']);
     }
 
     public function testNewbieCanJoinOpenGroup()
     {
         $group = App\Group::where('name', 'Test group')->first();
 
-        $user = App\User::where('email', 'newbie@locahost')->first();
+        $user = App\User::where('email', 'newbie@agorakit.local')->first();
 
         $user->confirmEmail();
 
@@ -111,7 +111,7 @@ class ImportTest extends BrowserKitTestCase
 
     public function testDiscussionCreation()
     {
-        $user = App\User::where('email', 'admin@locahost')->first();
+        $user = App\User::where('email', 'admin@agorakit.local')->first();
 
         $group = App\Group::where('name', 'Test group')->first();
 
@@ -124,7 +124,7 @@ class ImportTest extends BrowserKitTestCase
             ->see('Test discussion');
 
         //let's create a second discussion in test group
-        $newbie = App\User::where('email', 'newbie@locahost')->firstOrFail();
+        $newbie = App\User::where('email', 'newbie@agorakit.local')->firstOrFail();
         $discussion = new \App\Discussion();
         $discussion->name = 'Notify me of this interesting discussion';
         $discussion->body = 'Such an interesting discussion blablbla';
@@ -147,7 +147,7 @@ class ImportTest extends BrowserKitTestCase
 
     public function testEventCreation()
     {
-        $user = App\User::where('email', 'admin@locahost')->first();
+        $user = App\User::where('email', 'admin@agorakit.local')->first();
 
         $group = App\Group::where('name', 'Test group')->first();
 
@@ -166,37 +166,37 @@ class ImportTest extends BrowserKitTestCase
 
     public function testFolderCreation()
     {
-        $user = App\User::where('email', 'admin@locahost')->first();
+        $user = App\User::where('email', 'admin@agorakit.local')->first();
         $group = App\Group::where('name', 'Test group')->firstOrFail();
 
         $this->actingAs($user)
-          ->visit('/groups/' . $group->id . '/files/createfolder')
-          ->see('Create a folder')
-          ->type('Test folder', 'name')
-          ->press('Create')
-          ->see('Test folder');
+            ->visit('/groups/' . $group->id . '/files/createfolder')
+            ->see('Create a folder')
+            ->type('Test folder', 'name')
+            ->press('Create')
+            ->see('Test folder');
     }
 
     public function testFileUpload()
     {
-        $user = App\User::where('email', 'admin@locahost')->first();
+        $user = App\User::where('email', 'admin@agorakit.local')->first();
         $group = App\Group::where('name', 'Test group')->firstOrFail();
 
         $file = UploadedFile::fake()->image('avatar.jpg');
         $pathname = stream_get_meta_data($file->tempFile)['uri'];
 
         $this->actingAs($user)
-          ->visit('/groups/' . $group->id . '/files/create')
-          ->see('Upload file')
-          ->attach($pathname, 'file')
-          ->press('Create')
-          ->see('Resource created successfully')
-          ->see('Upload File');
+            ->visit('/groups/' . $group->id . '/files/create')
+            ->see('Upload file')
+            ->attach($pathname, 'file')
+            ->press('Create')
+            ->see('Resource created successfully')
+            ->see('Upload File');
     }
 
     public function testPrivateGroupCreation()
     {
-        $user = App\User::where('email', 'admin@locahost')->first();
+        $user = App\User::where('email', 'admin@agorakit.local')->first();
 
         $this->actingAs($user)
             ->visit('groups/create')
@@ -212,7 +212,7 @@ class ImportTest extends BrowserKitTestCase
 
     public function testNewbieCanCreateGroup()
     {
-        $user = App\User::where('email', 'newbie@locahost')->first();
+        $user = App\User::where('email', 'newbie@agorakit.local')->first();
 
         $this->actingAs($user)
             ->visit('groups/create')
@@ -226,14 +226,14 @@ class ImportTest extends BrowserKitTestCase
 
     public function testGroupExport()
     {
-        $user = App\User::where('email', 'admin@locahost')->first();
+        $user = App\User::where('email', 'admin@agorakit.local')->first();
         $storage = Storage::disk('tmp');
 
         $this->actingAs($user)
-          ->visit('/groups/1')
-          ->see('Settings')
-          ->see('Export Group Data')
-          ->click('Export Group Data');
+            ->visit('/groups/1')
+            ->see('Settings')
+            ->see('Export Group Data')
+            ->click('Export Group Data');
 
         $files = [];
         foreach ($storage->files('') as $file) {
@@ -245,7 +245,7 @@ class ImportTest extends BrowserKitTestCase
 
     public function testGroupImport()
     {
-        $user = App\User::where('email', 'admin@locahost')->firstOrFail();
+        $user = App\User::where('email', 'admin@agorakit.local')->firstOrFail();
         $group = App\Group::where('name', 'Test group')->firstOrFail();
         $storage = Storage::disk('tmp');
 

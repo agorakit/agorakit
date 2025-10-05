@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
 
         // first created user is automagically admin
         $admin = App\User::create([
-            'email'    => 'admin@locahost',
+            'email'    => 'admin@agorakit.local',
             'password' => bcrypt('123456789'),
             'body'     => $faker->text,
             'name'     => 'admin',
@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
 
         // a second normal user
         $normal_user = App\User::create([
-            'email'    => 'newbie@locahost',
+            'email'    => 'newbie@agorakit.local',
             'password' => bcrypt('123456789'),
             'body'     => $faker->text,
             'name'     => 'newbie',
@@ -64,7 +64,7 @@ class DatabaseSeeder extends Seeder
             // add avatar to every user
 
             Storage::disk('local')->makeDirectory('users/' . $user->id);
-                Image::read(file_get_contents('https://picsum.photos/500/400'))->save(storage_path() . '/app/users/' . $user->id . '/cover.jpg')->cover(128, 128)->save(storage_path() . '/app/users/' . $user->id . '/thumbnail.jpg');
+            Image::read(file_get_contents('https://picsum.photos/500/400'))->save(storage_path() . '/app/users/' . $user->id . '/cover.jpg')->cover(128, 128)->save(storage_path() . '/app/users/' . $user->id . '/thumbnail.jpg');
         }
 
         // create 10 groups
