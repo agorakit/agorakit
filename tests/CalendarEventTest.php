@@ -41,19 +41,19 @@ class CalendarEventTest extends BrowserKitTestCase
 
         $this->visit('/register')
             ->type('Admin', 'name')
-            ->type('admin@agorakit.org', 'email')
+            ->type('admin@agorakit.local', 'email')
             ->press('Register')
             ->type('123456789', 'password')
             ->type('123456789', 'password_confirmation')
             ->press('Register')
             ->see('Agorakit');
 
-        $this->seeInDatabase('users', ['email' => 'admin@agorakit.org']);
+        $this->seeInDatabase('users', ['email' => 'admin@agorakit.local']);
     }
 
     public function testGroupCreation()
     {
-        $user = App\User::where('email', 'admin@agorakit.org')->first();
+        $user = App\User::where('email', 'admin@agorakit.local')->first();
 
         $user->confirmEmail();
 
@@ -69,7 +69,7 @@ class CalendarEventTest extends BrowserKitTestCase
 
     public function testEventWithDefiniteEndCreation()
     {
-        $user = App\User::where('email', 'admin@agorakit.org')->first();
+        $user = App\User::where('email', 'admin@agorakit.local')->first();
 
         $group = App\Group::where('name', 'Event test group')->first();
 
@@ -94,7 +94,7 @@ class CalendarEventTest extends BrowserKitTestCase
 
     public function testEventWithWrongStopTimeCreation()
     {
-        $user = App\User::where('email', 'admin@agorakit.org')->first();
+        $user = App\User::where('email', 'admin@agorakit.local')->first();
 
         $group = App\Group::where('name', 'Event test group')->first();
 
@@ -115,7 +115,7 @@ class CalendarEventTest extends BrowserKitTestCase
 
     public function testEventWithoutStopDateCreation()
     {
-        $user = App\User::where('email', 'admin@agorakit.org')->first();
+        $user = App\User::where('email', 'admin@agorakit.local')->first();
 
         $group = App\Group::where('name', 'Event test group')->first();
 
@@ -139,7 +139,7 @@ class CalendarEventTest extends BrowserKitTestCase
 
     public function testEventWithoutStopTimeCreation()
     {
-        $user = App\User::where('email', 'admin@agorakit.org')->first();
+        $user = App\User::where('email', 'admin@agorakit.local')->first();
 
         $group = App\Group::where('name', 'Event test group')->first();
 
@@ -163,7 +163,7 @@ class CalendarEventTest extends BrowserKitTestCase
 
     public function testEventWithUnknownEnd()
     {
-        $user = App\User::where('email', 'admin@agorakit.org')->first();
+        $user = App\User::where('email', 'admin@agorakit.local')->first();
 
         $group = App\Group::where('name', 'Event test group')->first();
 
@@ -184,7 +184,7 @@ class CalendarEventTest extends BrowserKitTestCase
 
     public function testEventWithLocationName()
     {
-        $user = App\User::where('email', 'admin@agorakit.org')->first();
+        $user = App\User::where('email', 'admin@agorakit.local')->first();
 
         $group = App\Group::where('name', 'Event test group')->first();
 
@@ -206,7 +206,7 @@ class CalendarEventTest extends BrowserKitTestCase
 
     public function testEventUsingLocationName()
     {
-        $user = App\User::where('email', 'admin@agorakit.org')->first();
+        $user = App\User::where('email', 'admin@agorakit.local')->first();
 
         $group = App\Group::where('name', 'Event test group')->first();
 
@@ -215,7 +215,7 @@ class CalendarEventTest extends BrowserKitTestCase
             ->see('Add an event')
             ->type('Test event us-ing location name', 'name')
             ->type('this is a test event in the calendar', 'body')
-        ->select('My PlaceBruxelles', 'listed_location')
+            ->select('My PlaceBruxelles', 'listed_location')
             ->type('2026-02-02', 'start_date')
             ->type('12:00', 'start_time')
             ->press('Create')

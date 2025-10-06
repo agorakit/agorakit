@@ -175,8 +175,8 @@ class UserController extends Controller
                     $user->location = $request->input('location');
                 } catch (\Exception $e) {
                     return redirect()->route('users.create', $user)
-                    ->withErrors($e->getMessage() . '. Incorrect location')
-                    ->withInput();
+                        ->withErrors($e->getMessage() . '. Incorrect location')
+                        ->withInput();
                 }
 
                 // Geocode
@@ -299,7 +299,7 @@ class UserController extends Controller
 
         // Do the deletion:
         if ($request->isMethod('delete')) {
-            if ($user->email == 'anonymous@agorakit.org') {
+            if ($user->email == 'anonymous@agorakit.localhost') {
                 abort(500, 'Do not delete anonymous user, you fool :-)');
             }
 
