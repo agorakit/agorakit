@@ -7,7 +7,6 @@ use App\Group;
 use App\Discussion;
 use App\Comment;
 use App\CalendarEvent;
-use App\Message;
 use App\User;
 use App\File;
 use Carbon\Carbon;
@@ -209,14 +208,6 @@ class CleanupDatabase extends Command
             ->forceDelete();
         if ($count) {
             $this->info($count . ' revisions deleted');
-        }
-
-        // delete all old imported messages
-        $count = Message::where('created_at', '<', Carbon::today()->subDays(config('agorakit.data_retention')))
-            ->limit($this->option('batch'))
-            ->forceDelete();
-        if ($count) {
-            $this->info($count . ' inbound mail messages deleted');
         }
 
         // delete all old notifications
