@@ -174,12 +174,17 @@ up.compiler('.wysiwyg', async function (element, data) {
 
 		toolbar: [
 			['style', ['style']],
-			['font', ['bold', 'clear']],
-			['color', ['color']],
-			['para', ['ul', 'ol']],
-			['insert', ['link', 'picture']],
+			['font', ['bold', 'italic', 'strikethrough']],
+			['list', ['ul', 'ol']],
+			['insert', ['link', 'unlink', 'picture']],
 			['view', ['codeview', 'help']]
 		],
+
+        styleTags: [
+            'p',
+            { title: 'Blockquote', tag: 'blockquote', value: 'blockquote' },
+            'pre', 'h2', 'h3', 'h4'
+        ],
 
 		// this is the main call back to upload a file (image or anything else with summernote)
 		// multiple files can be uploaded at once
@@ -221,7 +226,7 @@ $(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-tog
 
 
 /**
-* This function upload a file to the server and in return it will get a file id, to add f:xxx to the thextarea 
+* This function upload a file to the server and in return it will get a file id, to add f:xxx to the thextarea
 * to be later rendered as a nice embeded file.
 */
 function sendFile($summernote, file, group_id) {
@@ -339,7 +344,7 @@ up.compiler('.js-tags', async function (element, data) {
 });
 
 /*
-- scroll to first unread item 
+- scroll to first unread item
 */
 /*
 up.compiler('#unread', function (element) {
@@ -351,7 +356,7 @@ up.compiler('#unread', function (element) {
 
 
 /*
-Datatables using .data-table 
+Datatables using .data-table
 */
 up.compiler('.data-table', async function (element) {
 
@@ -394,7 +399,7 @@ up.compiler('a', function (element) {
 
 
 /**
-* Add simple history.back behaviour onclick on element 
+* Add simple history.back behaviour onclick on element
 */
 up.compiler('.js-back', function (element) {
 
