@@ -158,9 +158,9 @@ To enable a wysiwyg editor, add a .wysiwyg class to a textarea
 */
 
 up.compiler('.wysiwyg', async function (element, data) {
-	await loadCSS('https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css')
+	await loadCSS('https://cdn.jsdelivr.net/npm/summernote@0.9.1/dist/summernote-lite.min.css')
 	await loadJquery();
-	await loadJS('https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js')
+	await loadJS('https://cdn.jsdelivr.net/npm/summernote@0.9.1/dist/summernote-lite.min.js')
 
 
 	// load mentions
