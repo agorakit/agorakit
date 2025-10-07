@@ -17,6 +17,11 @@
  * @link http://htmlpurifier.org/live/configdoc/plain.html
  */
 
+$allowedElements = 'h1,h2,h3,h4,h5,h6,b,strong,i,em,u,strike,s,a[href|title],span[style],small,big,sub,sup,' .
+    'ul,ol,li,p,br,img[width|height|alt|src],blockquote,q,pre,div,' .
+    'mark,var,ins,del,abbr,acronym,address,bdo[dir],' .
+    'table,th,td,tr,thead,tbody,tfoot,caption';
+
 return [
     'encoding'           => 'UTF-8',
     'finalize'           => true,
@@ -26,8 +31,8 @@ return [
     'settings'      => [
         'default' => [
             'HTML.Doctype'             => 'HTML 4.01 Transitional',
-            'HTML.Allowed'             => 'h1,h2,h3,h4,h5,h6,div,b,strong,i,em,u,a[href|title],ul,ol,li,p[style],br,span[style],img[width|height|alt|src],blockquote,pre',
-            'CSS.AllowedProperties'    => 'font,font-size,font-weight,font-style,font-family,text-decoration,padding-left,color,background-color,text-align',
+            'HTML.Allowed'             => $allowedElements,
+            'CSS.AllowedProperties'    => 'text-decoration',
             'AutoFormat.AutoParagraph' => true,
             'AutoFormat.RemoveEmpty'   => true,
         ],
@@ -44,12 +49,12 @@ return [
             'debug' => false,
             'elements' => [
                 // http://developers.whatwg.org/sections.html
-                ['section', 'Block', 'Flow', 'Common'],
-                ['nav',     'Block', 'Flow', 'Common'],
-                ['article', 'Block', 'Flow', 'Common'],
-                ['aside',   'Block', 'Flow', 'Common'],
-                ['header',  'Block', 'Flow', 'Common'],
-                ['footer',  'Block', 'Flow', 'Common'],
+                //['section', 'Block', 'Flow', 'Common'],
+                //['nav',     'Block', 'Flow', 'Common'],
+                //['article', 'Block', 'Flow', 'Common'],
+                //['aside',   'Block', 'Flow', 'Common'],
+                //['header',  'Block', 'Flow', 'Common'],
+                //['footer',  'Block', 'Flow', 'Common'],
 
                 // Content model actually excludes several tags, not modelled here
                 ['address', 'Block', 'Flow', 'Common'],
