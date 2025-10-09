@@ -157,3 +157,19 @@ function linkTo($model)
         return route('groups.discussions.show', [$model->group, $model->discussion]);
     }
 }
+
+/**
+ * Whether Unicode support was compiled into PHP's PCRE implementation.
+ *
+ * Unfortunately this isn't possible to detect as a flag inside PHP, so do a quick test.
+ *
+ * @return bool
+ */
+function hasUnicodeSupport(): bool
+{
+    static $unicodeSupport;
+    if (is_null($unicodeSupport)) {
+        $unicodeSupport = (preg_replace("#\pP#u", "", "P") != "");
+    }
+    return $unicodeSupport;
+}
