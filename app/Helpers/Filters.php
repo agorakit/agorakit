@@ -60,13 +60,30 @@ function filter($content)
     return $content;
 }
 
-
 /**
- * Highlight and link to @user profiles in the passed $content.
+ * Highlight and link to user profiles in the passed $content.
+ *
+ * Mentions may only include "word characters" (alphanumeric or underscore).
+ * Assertions: "Start of line OR character directly before @ must be non-word AND NOT in the [listed set]."
+ *   Because @ is a valid URL character, we must endeavor to not break links.
+ *   Non-word valid URL characters: /~!?#@$&+='[]()*.,;:
+ *   Skip '[]()*.,;: because they are more likely to directly precede @ in prose than a URL.
+ * @see https://www.php.net/manual/en/regexp.reference.assertions.php
+ *
+ * @param string $content
+ * @return ?string
  */
-function highlightMentions($content)
+function highlightMentions(string $content): ?string
 {
-    return preg_replace("/(?<!\w)@([\w_\-\.]+)/", '<a href="' . URL::to('/') . '/users/$1">@$1</a> ', $content);
+    $urlChars = '\/~!?#@$&+='; // Begins with escaped forward slash.
+    if (hasUnicodeSupport()) {
+        // Use unicode letters & numbers if it's supported (adding underscores and PCRE_UTF8 flag).
+        $pattern = "/(?<=^|[\PL\PN_])(?<![$urlChars])@([\pL\pN_\-]+)/u";
+    } else {
+        // Fallback to "word" characters, which depend on server's locale.
+        $pattern = "/(?<=^|\W)(?<![$urlChars])@([\w\-]+)/";
+    }
+    return preg_replace($pattern, '<a href="' . URL::to('/') . '/users/$1">@$1</a> ', $content);
 }
 
 /**
