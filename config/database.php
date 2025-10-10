@@ -27,7 +27,7 @@ return [
     */
 
     'default' => ('testing' === env('APP_ENV')) ?
-        env('TEST_DB_CONNECTION', 'mysql_testing') :
+        env('TESTING_DB_CONNECTION', 'mysql_testing') :
         env('DB_CONNECTION', 'mysql'),
 
     /*
