@@ -66,8 +66,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('confirm/{token}', 'Auth\RegisterController@confirmEmail');
 
     Route::middleware(ProtectAgainstSpam::class)->group(function () {
-        Auth::routes();
-
         Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
         Route::post('register', 'Auth\RegisterController@handleRegistrationForm');
 
