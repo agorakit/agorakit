@@ -31,7 +31,6 @@
         "laravel/framework": "^11.30",
         "laravel/helpers": "^1.7",
         "laravel/tinker": "^2.10",
-        "laravel/ui": "^4.5",
         "laravolt/avatar": "^6.0",
         "league/html-to-markdown": "^5.1",
         "mews/purifier": "^3.4",
