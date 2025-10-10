@@ -7,7 +7,6 @@ use App\User;
 use App\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-use Laravolt\Avatar\Avatar;
 use Illuminate\Foundation\Testing\TestCase;
 use Laravel\BrowserKitTesting\Concerns\InteractsWithConsole;
 
@@ -58,14 +57,5 @@ class ConsoleTest extends TestCase
         $avatar = (new \Laravolt\Avatar\Avatar())->create("test")->toSvg();
         Storage::put($file->path, $avatar);
         $this->assertEquals(0, $this->artisan('agorakit:export 1'));
-    }
-
-    /**
-     * Import group.
-     */
-    public function testImportGroup(): void
-    {
-        //$this->assertEquals(0, $this->artisan('agorakit:import 1'));
-        $this->assertTrue(true);
     }
 }

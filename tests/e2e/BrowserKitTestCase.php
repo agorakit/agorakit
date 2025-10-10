@@ -12,7 +12,7 @@ abstract class BrowserKitTestCase extends BaseTestCase
      *
      * @var string
      */
-    public $baseUrl = 'http://localhost';
+    public string $baseUrl;
 
     /**
      * Creates the application.
@@ -21,8 +21,9 @@ abstract class BrowserKitTestCase extends BaseTestCase
      */
     public function createApplication()
     {
-        $app = require __DIR__ . '/../bootstrap/app.php';
+        $this->baseUrl = getenv('TESTING_APP_URL', 'http://localhost');
 
+        $app = require __DIR__ . '/../../bootstrap/app.php';
         $app->make(Kernel::class)->bootstrap();
 
         // disable honeypot
