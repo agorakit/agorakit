@@ -110,6 +110,9 @@
     "scripts": {
         "lint": "vendor/bin/phpcs",
         "test": "vendor/bin/phpunit",
+        "test-unit": "vendor/bin/phpunit --testsuite Unit",
+        "test-int": "vendor/bin/phpunit --testsuite Integration",
+        "test-e2e": "vendor/bin/phpunit --testsuite E2E",
         "scan": "vendor/bin/phpstan analyse app tests --level 0 --memory-limit 1G",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
