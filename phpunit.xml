@@ -10,8 +10,14 @@
          displayDetailsOnTestsThatTriggerWarnings="true"
          displayDetailsOnPhpunitDeprecations="true">
     <testsuites>
-        <testsuite name="Application Test Suite">
-            <directory>./tests/</directory>
+        <testsuite name="E2E">
+            <directory>./tests/e2e</directory>
+        </testsuite>
+        <testsuite name="Integration">
+            <directory>./tests/integration</directory>
+        </testsuite>
+        <testsuite name="Unit">
+            <directory>./tests/unit</directory>
         </testsuite>
     </testsuites>
     <source>
@@ -25,10 +31,6 @@
         <env name="SESSION_DRIVER" value="array"/>
         <env name="QUEUE_DRIVER" value="sync"/>
         <env name="APP_DEFAULT_LOCALE" value="en"/>
-        <env name="TESTING_DB_HOST" value="localhost"/>
-        <env name="TESTING_DB_DATABASE" value="agorakit_testing"/>
-        <env name="TESTING_DB_USERNAME" value="root"/>
-        <env name="TESTING_DB_PASSWORD" value="root"/>
         <env name="MAIL_DRIVER" value="log"/>
     </php>
 </phpunit>
