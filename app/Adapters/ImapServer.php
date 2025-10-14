@@ -27,7 +27,7 @@ class ImapServer implements ImapServerInterface
     protected function createServer()
     {
         if (class_exists('Ddeboer\Imap\Server')) {
-            $this->ddeboer = (new Ddeboer\Imap\Server(
+            $this->ddeboer = (new Ddeboer\Imap\Server( // @phpstan-ignore class.notFound
                 config('agorakit.inbox_host'),
                 config('agorakit.inbox_port'),
                 config('agorakit.inbox_flags')
