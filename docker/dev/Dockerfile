@@ -3,7 +3,7 @@ FROM docker.io/dunglas/frankenphp:php8.2
 # development php ini:
 RUN cp $PHP_INI_DIR/php.ini-development $PHP_INI_DIR/php.ini
 
-RUN install-php-extensions pdo_mysql zip exif pcntl gd opcache imap bcmath
+RUN install-php-extensions pdo_mysql zip exif pcntl intl gd opcache imap bcmath
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
