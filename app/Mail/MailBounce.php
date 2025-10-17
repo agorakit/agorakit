@@ -2,11 +2,10 @@
 
 namespace App\Mail;
 
-use App\User;
+use App\Adapters\ImapMessage;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Ddeboer\Imap\Message;
 
 class MailBounce extends Mailable
 {
@@ -24,7 +23,7 @@ class MailBounce extends Mailable
      *
      * @return void
      */
-    public function __construct(Message $message, $reason = false)
+    public function __construct(ImapMessage $message, $reason = false)
     {
         $this->message = $message;
         $this->reason = $reason;
