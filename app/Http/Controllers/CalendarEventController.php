@@ -6,6 +6,7 @@ use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Context;
+use App\Services\CalendarEventService;
 
 /**
 
@@ -79,36 +80,6 @@ class CalendarEventController extends Controller
 
         $events = $events->get();
 
-        $event = [];
-        $events = [];
-
-        foreach ($events as $event) {
-            $event['id'] = $event->id;
-            $event['title'] = $event->name . ' (' . $event->group->name . ')';
-            $event['description'] = strip_tags(summary($event->body)) . ' <br/> ' . $event->locationDisplay();
-            $event['body'] = strip_tags(summary($event->body));
-            $event['summary'] = strip_tags(summary($event->body));
-
-            $event['tooltip'] =  '<strong>' . strip_tags(summary($event->name)) . '</strong>';
-            $event['tooltip'] .= '<div>' . strip_tags(summary($event->body)) . '</div>';
-
-            if ($event->attending->count() > 0) {
-                $event['tooltip'] .= '<strong class="mt-2">' . trans('messages.user_attending') . '</strong>';
-                $event['tooltip'] .= '<div>' . implode(', ', $event->attending->pluck('username')->toArray()) . '</div>';
-            }
-
-
-            $event['location'] = $event->locationDisplay();
-            $event['start'] = $event->start->toIso8601String();
-            $event['end'] = $event->stop->toIso8601String();
-            $event['url'] = route('groups.calendarevents.show', [$event->group, $event]);
-            $event['group_url'] = route('groups.calendarevents.index', [$event->group]);
-            $event['group_name'] = $event->group->name;
-            $event['color'] = $event->group->color();
-
-            $events[] = $event;
-        }
-
-        return $events;
+        return CalendarEventService::calendarEventsToFullCallendarJson($events);
     }
 }
