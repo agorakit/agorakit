@@ -18,7 +18,7 @@ class ConsoleTest extends TestCase
     */
     public function testSetupItAll()
     {
-        $this->assertEquals(0, $this->artisan('migrate:fresh'));
+        $this->assertEquals(0, $this->artisan('migrate:fresh --env=testing'));
         $dir = Storage::disk()->path('groups/1/files');
         foreach (Storage::allFiles($dir) as $filename) {
             Storage::delete($filename);
@@ -56,6 +56,6 @@ class ConsoleTest extends TestCase
         Storage::makeDirectory('groups/' . $group->id . '/files/' . $file->id);
         $avatar = (new \Laravolt\Avatar\Avatar())->create("test")->toSvg();
         Storage::put($file->path, $avatar);
-        $this->assertEquals(0, $this->artisan('agorakit:export 1'));
+        $this->assertEquals(0, $this->artisan('agorakit:export 1 --env=testing'));
     }
 }

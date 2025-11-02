@@ -29,6 +29,9 @@ abstract class BrowserKitTestCase extends BaseTestCase
         // disable honeypot
         config()->set('honeypot.enabled', false);
 
+        // change database
+        config()->set('database.default', 'mysql_testing');
+
         return $app;
     }
 }

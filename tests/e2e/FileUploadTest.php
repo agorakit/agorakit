@@ -13,7 +13,7 @@ class FileUploadTest extends BrowserKitTestCase
     */
     public function testSetupItAll()
     {
-        Artisan::call('migrate:fresh');
+        Artisan::call('migrate:fresh --env=testing');
 
         $this->visit('/')
             ->see('Agorakit');
