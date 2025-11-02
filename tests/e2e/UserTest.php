@@ -60,7 +60,7 @@ class UserTest extends BrowserKitTestCase
     */
     public function testSetupItAll()
     {
-        Artisan::call('migrate:fresh');
+        Artisan::call('migrate:fresh --env=testing');
 
         $this->visit('/')
             ->see('Agorakit');
@@ -291,7 +291,7 @@ class UserTest extends BrowserKitTestCase
         Mail::fake();
 
         // send notifications if any
-        Artisan::call('agorakit:sendnotifications');
+        Artisan::call('agorakit:sendnotifications --env=testing');
 
         // Assert a message was sent to the given users...
         Mail::assertSent(\App\Mail\Notification::class, function ($mail) use ($user) {
