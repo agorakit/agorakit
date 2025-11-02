@@ -26,9 +26,7 @@ return [
     |
     */
 
-    'default' => ('testing' === env('APP_ENV')) ?
-        env('TESTING_DB_CONNECTION', 'mysql_testing') :
-        env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -76,10 +74,11 @@ return [
 
         'mysql_testing' => [
             'driver'    => 'mysql',
-            'host'      => env('TESTING_DB_HOST', '127.0.0.1'),
+            'host'      => env('DB_HOST', '127.0.0.1'),
+            'port'      => env('DB_PORT', '3306'),
             'database'  => env('TESTING_DB_DATABASE', 'agorakit_testing'),
-            'username'  => env('TESTING_DB_USERNAME', 'root'),
-            'password'  => env('TESTING_DB_PASSWORD', ''),
+            'username'  => env('DB_USERNAME', 'root'),
+            'password'  => env('DB_PASSWORD', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix'    => '',
