@@ -1,0 +1,93 @@
+services:
+  frankenphp:
+    container_name: agorakit-dev
+    build:
+      context: .
+      dockerfile: .docker/dev/frankenphp/Dockerfile
+      args:
+        UID: ${UID:-1000}
+        GID: ${GID:-1000}
+        XDEBUG_ENABLED: ${XDEBUG_ENABLED:-true}
+        XDEBUG_MODE: develop,coverage,debug,profile
+        XDEBUG_HOST: ${XDEBUG_HOST:-host.docker.internal}
+        XDEBUG_IDE_KEY: ${XDEBUG_IDE_KEY:-DOCKER}
+        XDEBUG_LOG: /dev/stdout
+        XDEBUG_LOG_LEVEL: 0
+    environment:
+      CADDY_GLOBAL_OPTIONS: "debug"
+    ports:
+      - ${APP_PORT:-80}:80
+      - ${APP_PORT_HTTPS:-443}:443
+      - ${APP_PORT_HTTP3:-443}:443/udp
+    tty: true # Enables an interactive terminal & human-formatted logs
+    env_file:
+      - ".env.dev"
+    volumes:
+      - $PWD:${WORKDIR:-/app}
+      - caddy_data:/data
+      - caddy_config:/config
+    extra_hosts:
+      host.docker.internal: host-gateway
+    networks:
+      - agorakit-development
+    depends_on:
+      mariadb:
+        condition: service_healthy
+
+  mariadb:
+    image: mariadb:lts
+    container_name: agorakit-db
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: agorakit
+      MYSQL_USER: agorakit
+      MYSQL_PASSWORD: password
+    volumes:
+      - type: bind
+        source: ./.docker/dev/mariadb/create-test-db.sh
+        target: /docker-entrypoint-initdb.d/create-test-db.sh
+    ports:
+      - "3306:3306"
+    networks:
+      - agorakit-development
+    healthcheck:
+      test: [ "CMD", "healthcheck.sh", "--connect", "--innodb_initialized" ]
+      start_period: 10s
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: agorakit-pma
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: agorakit-db
+      PMA_USER: root
+      PMA_PASSWORD: password
+      UPLOAD_LIMIT: 1G
+    networks:
+      - agorakit-development
+    depends_on:
+      mariadb:
+        condition: service_healthy
+
+  mailpit:
+    image: 'axllent/mailpit:latest'
+    container_name: agorakit-mail
+    ports:
+      - '${FORWARD_MAILPIT_PORT:-1025}:1025'
+      - '${FORWARD_MAILPIT_DASHBOARD_PORT:-8025}:8025'
+    networks:
+      - agorakit-development
+
+# Volumes needed for Caddy certificates and configuration
+volumes:
+  caddy_data:
+  caddy_config:
+
+networks:
+  agorakit-development:
+    driver: bridge
