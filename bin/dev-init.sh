@@ -4,7 +4,6 @@
 export UID
 export GID="$(id -g)"
 docker compose -f compose.dev.yml up --build -d
-#docker logs -f agorakit-dev
 
 # Setup app.
 docker exec -it agorakit-dev sh -c "composer install"
