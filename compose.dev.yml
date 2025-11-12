@@ -7,14 +7,9 @@ services:
       args:
         UID: ${UID:-1000}
         GID: ${GID:-1000}
-        XDEBUG_ENABLED: ${XDEBUG_ENABLED:-true}
-        XDEBUG_MODE: develop,coverage,debug,profile
-        XDEBUG_HOST: ${XDEBUG_HOST:-host.docker.internal}
-        XDEBUG_IDE_KEY: ${XDEBUG_IDE_KEY:-DOCKER}
-        XDEBUG_LOG: /dev/stdout
-        XDEBUG_LOG_LEVEL: 0
     environment:
-      CADDY_GLOBAL_OPTIONS: "debug"
+      CADDY_GLOBAL_OPTIONS: "debug" # Increase logging level
+      XDG_CONFIG_HOME: "/app" # Allows `php artisan tinker` to run (default `/config/psych` = volume you cannot `chown`)
     ports:
       - ${APP_PORT:-80}:80
       - ${APP_PORT_HTTPS:-443}:443
@@ -26,16 +21,16 @@ services:
       - $PWD:${WORKDIR:-/app}
       - caddy_data:/data
       - caddy_config:/config
-    extra_hosts:
+    extra_hosts: # Enables Xdebug connection
       host.docker.internal: host-gateway
     networks:
       - agorakit-development
     depends_on:
-      mariadb:
+      mariadb: # Don't start container until DB is up.
         condition: service_healthy
 
   mariadb:
-    image: mariadb:lts
+    image: mariadb:lts # Avoid frequent DB upgrades.
     container_name: agorakit-db
     environment:
       MYSQL_ROOT_PASSWORD: password
@@ -43,18 +38,18 @@ services:
       MYSQL_USER: agorakit
       MYSQL_PASSWORD: password
     volumes:
-      - type: bind
+      - type: bind # Adds startup script to create second DB for E2E tests.
         source: ./.docker/dev/mariadb/create-test-db.sh
         target: /docker-entrypoint-initdb.d/create-test-db.sh
     ports:
       - "3306:3306"
     networks:
       - agorakit-development
-    healthcheck:
+    healthcheck: # Verifies DB is available to avoid silent failures.
       test: [ "CMD", "healthcheck.sh", "--connect", "--innodb_initialized" ]
-      start_period: 10s
+      start_period: 5s
       interval: 10s
-      timeout: 5s
+      timeout: 3s
       retries: 3
 
   phpmyadmin:
@@ -83,7 +78,7 @@ services:
     networks:
       - agorakit-development
 
-# Volumes needed for Caddy certificates and configuration
+# Volumes required for Caddy certificates and configuration
 volumes:
   caddy_data:
   caddy_config:
