@@ -11,6 +11,7 @@ Thumbs.db
 # Project
 .env
 .env.local
+.env.dev
 phpstan.neon
 node_modules
 public/hot
