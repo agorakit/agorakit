@@ -102,7 +102,7 @@
             "Tests\\": "tests/"
         },
         "classmap": [
-            "tests/BrowserKitTestCase.php"
+            "tests/e2e/BrowserKitTestCase.php"
         ]
     },
     "minimum-stability": "dev",
