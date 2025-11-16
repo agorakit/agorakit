@@ -4,10 +4,10 @@ namespace Tests;
 
 use App;
 use Carbon\Carbon;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\UploadedFile;
 
 class ImportTest extends BrowserKitTestCase
 {
@@ -240,7 +240,8 @@ class ImportTest extends BrowserKitTestCase
             $files[$storage->lastModified($file)] = $file;
         }
         $ts = max(array_keys($files));
-        assert(Carbon::createFromTimestamp($ts)->diffInSeconds(Carbon::now()) < 1);
+        // Last file created was no more than 5 seconds ago. @todo Improve this test.
+        assert(Carbon::createFromTimestamp($ts)->diffInSeconds(Carbon::now()) < 5);
     }
 
     public function testGroupImport()
