@@ -100,10 +100,7 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
-        },
-        "classmap": [
-            "tests/e2e/BrowserKitTestCase.php"
-        ]
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
