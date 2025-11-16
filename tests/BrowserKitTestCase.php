@@ -3,9 +3,9 @@
 namespace Tests;
 
 use Illuminate\Contracts\Console\Kernel;
-use Laravel\BrowserKitTesting\TestCase as BaseTestCase;
+use Laravel\BrowserKitTesting\TestCase;
 
-abstract class BrowserKitTestCase extends BaseTestCase
+abstract class BrowserKitTestCase extends TestCase
 {
     /**
      * The base URL of the application.
@@ -23,7 +23,7 @@ abstract class BrowserKitTestCase extends BaseTestCase
     {
         $this->baseUrl = getenv('TESTING_APP_URL', 'http://localhost');
 
-        $app = require __DIR__ . '/../../bootstrap/app.php';
+        $app = require __DIR__ . '/../bootstrap/app.php';
         $app->make(Kernel::class)->bootstrap();
 
         // disable honeypot
