@@ -1,5 +1,8 @@
 <?xml version="1.0"?>
 <!-- @see https://pear.php.net/manual/en/package.php.php-codesniffer.annotated-ruleset.php -->
+<php>
+    <env name="APP_ENV" value="testing" />
+</php>
 <ruleset name= "Agorakit PHPCS Rules">
     <file>tests</file>
     <file>app</file>
