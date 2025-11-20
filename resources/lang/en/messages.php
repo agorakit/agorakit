@@ -2,6 +2,7 @@
 
 return [
     'accept_invitation' => 'Accept the invitation',
+    'actions' => '',
     'address' => 'Address',
     'address_cannot_be_geocoded' => 'Your address cannot be geolocalized. Please use a simple format, like "number street, city"',
     'address_privacy_and_help' => 'How to fill out the address field? Only fill in the information that you are willing to put online. The address information, even partial, allows us to display a map with the location of people, groups and events. If you do not want to be shown on this map do not put anything here. You can also just put your town (or your street name without the house number) to appear on the map, but not in a precise manner.',
@@ -48,8 +49,8 @@ return [
     'cover_added_successfully' => 'Cover added successfully.',
     'create' => 'Create',
     'created' => 'Created',
-    'create_event' => 'Add an event',
     'create_discussion' => 'Start a new discussion',
+    'create_event' => 'Add an event',
     'create_files_button' => 'Upload file(s)',
     'create_file_button' => 'Upload file',
     'create_folder' => 'Create a folder',
@@ -121,6 +122,7 @@ return [
     'invite_already_used' => 'Invitation already used',
     'invite_not_found' => 'Invitation not found',
     'in_the_discussion' => 'in the discussion',
+    'is_banned' => 'Is this user banned?',
     'join' => 'Join',
     'join_a_group' => 'Please join a group or create a group',
     'join_the_group' => 'Join the group',
@@ -180,6 +182,7 @@ return [
     'overview_admin_groups' => 'All groups (admin)',
     'overview_my_groups' => 'My groups',
     'overview_public_groups' => 'Public groups',
+    'page_not_found_help' => '',
     'password' => 'Password',
     'password_reset' => 'Password reset',
     'permissions' => 'Permissions',
