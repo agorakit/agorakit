@@ -51,6 +51,7 @@ class User extends Authenticatable
 
     protected $casts = [
         'preferences' => 'array',
+        'is_banned' => 'boolean'
     ];
 
     protected $rules = [
@@ -58,7 +59,7 @@ class User extends Authenticatable
         'username'    => 'unique:users|alpha_dash',
     ];
 
-    protected $keepRevisionOf = ['name', 'body', 'email', 'admin', 'location'];
+    protected $keepRevisionOf = ['name', 'body', 'email', 'admin', 'location', 'is_banned'];
 
     protected $with = ['memberships'];
 
@@ -239,6 +240,18 @@ class User extends Authenticatable
     public function isAdmin()
     {
         if ($this->admin == 1) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Returns true if the user is banned.
+     */
+    public function isBanned()
+    {
+        if ($this->is_banned == 1) {
             return true;
         }
 
