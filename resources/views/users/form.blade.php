@@ -91,4 +91,10 @@
         {{Form::radio('is_verified', 'yes', $user->isVerified())}} {{trans('messages.yes')}} <br/>
         {{Form::radio('is_verified', 'no', !$user->isVerified())}} {{trans('messages.no')}} <br/>
     </div>
+
+     <div class="form-group">
+        <div>{{trans('messages.is_banned')}}</div>
+        {{Form::radio('is_user_banned', 'yes', $user->isBanned())}} {{trans('messages.yes')}} <br/>
+        {{Form::radio('is_user_banned', 'no', !$user->isBanned())}} {{trans('messages.no')}} <br/>
+    </div>
 @endif

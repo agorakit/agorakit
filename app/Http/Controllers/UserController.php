@@ -227,6 +227,14 @@ class UserController extends Controller
                 if ($request->get('is_verified') == 'no') {
                     $user->verified = 0;
                 }
+
+                if ($request->get('is_user_banned') == 'yes') {
+                    $user->is_banned = 1;
+                }
+
+                if ($request->get('is_user_banned') == 'no') {
+                    $user->is_banned = 0;
+                }
             }
 
             // validation
