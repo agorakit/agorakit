@@ -123,6 +123,11 @@ class RegisterController extends Controller
         // find user based on the verif token
         $user = User::whereToken($token)->firstOrFail();
 
+        // discard banned user
+        if ($user->isBanned()) {
+            return false;    
+        }
+
         // confirm and login if not logged already
         $user->confirmEmail();
         if (Auth::guest()) {
