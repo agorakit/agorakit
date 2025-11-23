@@ -49,8 +49,8 @@ class LoginController extends Controller
         $login = request()->input('login');
         $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
-        // find user
-        $user = User::where($field, trim($login))->first();
+        // find user, even if it was deleted
+        $user = User::where($field, trim($login))->withTrashed()->first();
 
         // check if password is not filled
         if (empty($request->input('password'))) {
@@ -65,6 +65,12 @@ class LoginController extends Controller
             }
         } else {
             if ($user) {
+                // restore user if it was deleted, even if password is not correct
+                if ($user->trashed())
+                {
+                    $user->restore();
+                }
+
                 // attempt to login
                 if (Auth::attempt(['email' => $user->email, 'password' => $request->input('password')], request()->input('remember'))) {
                     return redirect()->intended('/');
