@@ -45,6 +45,8 @@ class CalendarEventService
         foreach ($events as $event) {
             $json_events[] = self::calendarEventToFullCalendarJson($event);
         }
-        return $json_events;
+
+        // Properly encode non UTF-8 chars (see https://stackoverflow.com/questions/31115982/malformed-utf-8-characters-possibly-incorrectly-encoded-in-laravel)
+        return mb_convert_encoding($json_events, 'UTF-8', 'UTF-8');
     }
 }
