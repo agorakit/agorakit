@@ -16,6 +16,11 @@ docker compose -f compose.dev.yml up --build -d
 # Setup app.
 docker exec -it agorakit-dev sh -c "composer install"
 docker exec -it agorakit-dev sh -c "php artisan migrate --env=dev"
+if [ ! -f "./.docker/dev/root.crt" ]; then
+    # Copy CA-signed cert if one was created.
+    echo "Copying CA root cert to ./docker/dev/root.crt for convenience."
+    docker exec -it agorakit-dev sh -c "cp /data/caddy/pki/authorities/local/root.crt /app/.docker/dev/"
+fi
 if [ "$ENV_NEW" = true ]; then
     # Rebuild with new key in ENV (`restart` does not reload ENV).
     echo "Rebuilding container with Laravel key."
