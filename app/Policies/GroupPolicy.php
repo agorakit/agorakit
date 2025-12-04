@@ -30,26 +30,6 @@ class GroupPolicy extends BasePolicy
     use HandlesAuthorization;
 
     /**
-     * Create a new policy instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
-     * A super admin can do everything, this bypasses all the following code
-     */
-    public function before($user, $ability)
-    {
-        if ($user->isAdmin()) {
-            return true;
-        }
-    }
-
-    /**
      * Viewing a group means reading title and presentation (= group home page).
      * Only secret groups are hidden from non members.
      */

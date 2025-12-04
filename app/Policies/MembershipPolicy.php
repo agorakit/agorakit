@@ -7,27 +7,9 @@ use App\Membership;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class MembershipPolicy
+class MembershipPolicy extends BasePolicy
 {
     use HandlesAuthorization;
-
-    /**
-     * Create a new policy instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    // a super admin can do everything
-    public function before($user, $ability)
-    {
-        if ($user->isAdmin()) {
-            return true;
-        }
-    }
 
     // a group admin can edit user memberships
     // a user can edit his/her own membership
