@@ -401,5 +401,12 @@
     "Country": "País",
     "County": "Condado",
     "Location Name": "Ubicación Nombre",
-    "Street Address": "Dirección"
+    "Street Address": "Dirección",
+    "Allow regular users to import groups (if you uncheck this box, only admins will be able to import groups)": "Permitir a los usuarios normales importar grupos (si desmarca esta casilla, sólo los administradores podrán importar grupos)",
+    "Events": "Eventos",
+    "new username": "nuevo nombre de usuario",
+    "Sorry! These need to be edited a second time because they also exist in database!": "Lo siento Es necesario editarlos una segunda vez porque también existen en la base de datos",
+    "This action is unauthorized": "Esta acción no está autorizada",
+    "Type": "Tipo",
+    "You have an upcoming event": "Tiene un próximo evento"
 }

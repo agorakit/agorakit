@@ -401,5 +401,12 @@
     "Country": "Land",
     "County": "Landkreis",
     "Location Name": "Ort Name",
-    "Street Address": "Straße und Hausnummer"
+    "Street Address": "Straße und Hausnummer",
+    "Allow regular users to import groups (if you uncheck this box, only admins will be able to import groups)": "Gruppenimport für normale Benutzer zulassen (wenn Sie dieses Kontrollkästchen deaktivieren, können nur Administratoren Gruppen importieren)",
+    "Events": "Veranstaltungen",
+    "new username": "neuer Benutzername",
+    "Sorry! These need to be edited a second time because they also exist in database!": "Entschuldigung! Diese müssen ein zweites Mal bearbeitet werden, da sie auch in der Datenbank vorhanden sind!",
+    "This action is unauthorized": "Diese Aktion ist nicht autorisiert",
+    "Type": "Typ",
+    "You have an upcoming event": "Sie haben eine bevorstehende Veranstaltung"
 }

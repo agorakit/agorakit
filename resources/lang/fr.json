@@ -175,7 +175,7 @@
     "Locale": "Lieu",
     "Locales": "Localités",
     "Localize": "Localiser",
-    "Location": "Localisation",
+    "Location": "Lieu",
     "Locked": "Verrouillé",
     "Log In": "Se connecter",
     "Log Out": "Se déconnecter",
@@ -401,5 +401,12 @@
     "Country": "Pays",
     "County": "Comté",
     "Location Name": "Nom du lieu",
-    "Street Address": "Adresse (rue)"
+    "Street Address": "Adresse (rue)",
+    "Allow regular users to import groups (if you uncheck this box, only admins will be able to import groups)": "Autoriser les utilisateurs ordinaires à importer des groupes (si vous décochez cette case, seuls les administrateurs pourront importer des groupes)",
+    "Events": "Evénements",
+    "new username": "nouveau nom d'utilisateur",
+    "Sorry! These need to be edited a second time because they also exist in database!": "Désolé ! Ces données doivent être éditées une seconde fois car elles existent également dans la base de données !",
+    "This action is unauthorized": "Cette action n'est pas autorisée",
+    "Type": "Type",
+    "You have an upcoming event": "Vous avez un événement à venir"
 }
