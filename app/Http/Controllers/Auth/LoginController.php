@@ -52,11 +52,6 @@ class LoginController extends Controller
         // find user
         $user = User::where($field, trim($login))->first();
 
-        // discard banned user
-        if ($user->isBanned()) {
-            return false;    
-        }
-
         // check if password is not filled
         if (empty($request->input('password'))) {
             if ($user) {

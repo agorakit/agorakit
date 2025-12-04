@@ -26,11 +26,6 @@ class LoginByEmailController extends Controller
     {
         $user = User::where('email', trim($request->get('email')))->first();
 
-        // discard banned user
-        if ($user->isBanned()) {
-            return false;    
-        }
-
         if ($user) {
             // send invitation email
             Mail::to($request->get('email'))->send(new LoginByEmail($user));
