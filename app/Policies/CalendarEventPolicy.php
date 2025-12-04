@@ -6,27 +6,10 @@ use App\CalendarEvent;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class CalendarEventPolicy
+class CalendarEventPolicy extends BasePolicy
 {
     use HandlesAuthorization;
-
-    /**
-     * Create a new policy instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    public function before($user, $ability)
-    {
-        if ($user->isAdmin()) {
-            return true;
-        }
-    }
-
+    
     /**
      * Determine whether the user can view the event.
      *

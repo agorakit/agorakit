@@ -6,26 +6,9 @@ use App\Comment;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class CommentPolicy
+class CommentPolicy extends BasePolicy
 {
     use HandlesAuthorization;
-
-    /**
-     * Create a new policy instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    public function before($user, $ability)
-    {
-        if ($user->isAdmin()) {
-            return true;
-        }
-    }
 
     public function update(User $user, Comment $comment)
     {
