@@ -160,7 +160,7 @@ class SendNotifications extends Command
 
                 $notification->files = $files;
                 $notification->users = $users;
-                $notification->calendarevents = $events;
+                $notification->events = $events;
                 $notification->last_notification = $last_notification;
 
                 Mail::to($user)->send($notification);
