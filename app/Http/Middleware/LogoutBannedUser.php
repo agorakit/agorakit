@@ -3,27 +3,33 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Auth;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class LogoutBannedUser
 {
     /**
-     * Handle an incoming request.
+     * Filter and logout banned users
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
     {
+        // Guest : simply pass
         if (Auth::guest()) {
             return $next($request);
         }
 
-        if ($request->user->isBanned()) {
+        // User is banned : logout, invalidate session and redirect to homepage
+        if ($request->user()->isBanned()) {
             Auth::logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
             return redirect('/');
         }
+
+        // All other cases : pass
+        return $next($request);
     }
 }
