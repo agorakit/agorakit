@@ -350,6 +350,29 @@ class UserTest extends BrowserKitTestCase
     }
 
 
+    public function testNewbieCanBebanned()
+    {
+        $this->actingAs($this->admin())
+            ->visit('users/newbie/edit')
+            ->see('Modify')
+            ->select('yes', 'is_user_banned')
+            ->press(trans('messages.save'))
+            ->see(trans('messages.ressource_updated_successfully'));
+
+        $this->seeInDatabase('users', ['email' => 'newbie@agorakit.local', 'is_banned' => 1]);
+    }
+
+
+    public function testNewbieCantLoginAnymore()
+    {
+        $this->visit('/login')
+            ->type('newbie', 'login')
+            ->type('123456789', 'password')
+            ->press(trans('messages.login'))
+            ->see(trans('messages.you_are_banned'));
+    }
+
+
 
     public function testUserCantPinGroupIntoNavbar()
     {
