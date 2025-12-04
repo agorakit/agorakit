@@ -6,26 +6,9 @@ use App\File;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class FilePolicy
+class FilePolicy extends BasePolicy
 {
     use HandlesAuthorization;
-
-    /**
-     * Create a new policy instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    public function before($user, $ability)
-    {
-        if ($user->isAdmin()) {
-            return true;
-        }
-    }
 
     public function view(?User $user, File $file)
     {
