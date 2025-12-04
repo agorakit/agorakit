@@ -401,5 +401,12 @@
     "Country": "Paese",
     "County": "Contea",
     "Location Name": "Nome della località",
-    "Street Address": "Indirizzo stradale"
+    "Street Address": "Indirizzo stradale",
+    "Allow regular users to import groups (if you uncheck this box, only admins will be able to import groups)": "Consentire agli utenti normali di importare gruppi (se si deseleziona questa casella, solo gli amministratori potranno importare gruppi)",
+    "Events": "Eventi",
+    "new username": "nuovo nome utente",
+    "Sorry! These need to be edited a second time because they also exist in database!": "Mi dispiace! Questi devono essere modificati una seconda volta perché esistono anche nel database!",
+    "This action is unauthorized": "Questa azione non è autorizzata",
+    "Type": "Tipo",
+    "You have an upcoming event": "Avete un evento imminente"
 }

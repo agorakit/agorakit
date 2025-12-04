@@ -401,5 +401,12 @@
     "Country": "Land",
     "County": "Provincie",
     "Location Name": "Naam locatie",
-    "Street Address": "Straatnaam"
+    "Street Address": "Straatnaam",
+    "Allow regular users to import groups (if you uncheck this box, only admins will be able to import groups)": "Sta gewone gebruikers toe om groepen te importeren (als je dit vakje uitschakelt, kunnen alleen admins groepen importeren)",
+    "Events": "Evenementen",
+    "new username": "nieuwe gebruikersnaam",
+    "Sorry! These need to be edited a second time because they also exist in database!": "Sorry! Deze moeten een tweede keer bewerkt worden omdat ze ook in de database staan!",
+    "This action is unauthorized": "Deze actie is niet toegestaan",
+    "Type": "Type",
+    "You have an upcoming event": "Je hebt een aankomend evenement"
 }

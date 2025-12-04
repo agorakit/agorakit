@@ -401,5 +401,12 @@
     "Country": "Страна",
     "County": "Округ",
     "Location Name": "Название места",
-    "Street Address": "Адрес улицы"
+    "Street Address": "Адрес улицы",
+    "Allow regular users to import groups (if you uncheck this box, only admins will be able to import groups)": "Разрешить обычным пользователям импортировать группы (если вы снимите этот флажок, импортировать группы смогут только администраторы)",
+    "Events": "События",
+    "new username": "новое имя пользователя",
+    "Sorry! These need to be edited a second time because they also exist in database!": "Извините! Их нужно отредактировать второй раз, потому что они также существуют в базе данных!",
+    "This action is unauthorized": "Это действие является несанкционированным",
+    "Type": "Тип",
+    "You have an upcoming event": "У вас намечается мероприятие"
 }
