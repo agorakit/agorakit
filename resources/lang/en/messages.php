@@ -278,6 +278,7 @@ return [
     'yes' => 'yes',
     'your_groups' => 'Your groups',
     'your_search_for' => 'Your search for',
+    'you_are_banned' => 'Your user acount has been banned',
     'you_are_not_an_admin' => 'You are not an admin',
     'you_are_now_a_member_of_this_group' => 'You are now a member of this group',
     'you_asked_for_assword_change' => 'You asked for a password change',

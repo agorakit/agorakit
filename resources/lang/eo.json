@@ -401,5 +401,12 @@
     "Country": "Lando",
     "County": "Distrikto",
     "Location Name": "Loka Nomo",
-    "Street Address": "Strata Adreso"
+    "Street Address": "Strata Adreso",
+    "Allow regular users to import groups (if you uncheck this box, only admins will be able to import groups)": "Permesi al ordinaraj uzantoj importi grupojn (se vi malmarkas ĉi tiun skatolon, nur administrantoj povos importi grupojn)",
+    "Events": "Okazaĵoj",
+    "new username": "nova uzantnomo",
+    "Sorry! These need to be edited a second time because they also exist in database!": "Pardonu! Ĉi tiuj bezonas esti redaktitaj duan fojon ĉar ili ankaŭ ekzistas en la datumbazo!",
+    "This action is unauthorized": "Ĉi tiu ago estas neaŭtorizita",
+    "Type": "Tipo",
+    "You have an upcoming event": "Vi havas venontan eventon"
 }
