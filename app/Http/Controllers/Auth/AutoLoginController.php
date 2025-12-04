@@ -15,13 +15,8 @@ class AutoLoginController extends Controller
             abort(401, 'Invalid or expired signature');
         }
         $user = User::where('username', $request->get('username'))->firstOrFail();
-
-        // discard banned user
-        if ($user->isBanned()) {
-            return false;    
-        }
-
         Auth::login($user, true);
+
         $user->verified = 1;
         $user->save();
 
