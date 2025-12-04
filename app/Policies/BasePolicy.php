@@ -12,6 +12,20 @@ use App\User;
 class BasePolicy
 {
     /**
+     * This function is called before any check in any policies extending this BasePolicy
+     */
+    public function before($user, $ability)
+    {
+        if ($user->isAdmin()) {
+            return true;
+        }
+
+         if ($user->isBanned()) {
+            return false;
+        }
+    }
+
+    /**
      * Returns a collection of permissions for the $user in the $group.
      */
     public function getPermissionsFor(User $user, Group $group)
