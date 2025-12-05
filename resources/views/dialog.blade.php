@@ -15,8 +15,6 @@
                 @yield('content')
             </div>
         </div>
-        <div class="mt-5">Context : {{ Context::get() }} </div>
-        <div>Visible groups {{ Context::getVisibleGroups() }}</div>
         @include('partials.footer')
     </main>
 
