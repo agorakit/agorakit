@@ -104,6 +104,14 @@ class ContextService
     }
 
     /**
+     * Return true if current context is user profile
+     */
+    public function isUser(): bool
+    {
+        return ($this->get() === 'user');
+    }
+
+    /**
      * Return current group selected in context if there is one (and only one)
      */
     public function getGroup()

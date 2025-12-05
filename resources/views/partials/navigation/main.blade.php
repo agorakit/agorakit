@@ -13,7 +13,7 @@
             </div>
         @endif
 
-        @if (Context::is('user'))
+        @if (Context::isUser())
             <div class="nav-item">
                 {{ $user->name }} <em>({{ '@' . $user->username }})</em>
             </div>
@@ -102,7 +102,7 @@
     @if (Context::isOverview())
         @include('partials.tabs.overview')
     @endif
-    @if (Context::is('user'))
+    @if (Context::isUser())
         @include('partials.tabs.users')
     @endif
 </div>
