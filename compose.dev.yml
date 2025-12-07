@@ -42,7 +42,7 @@ services:
         source: ./.docker/dev/mariadb/create-test-db.sh
         target: /docker-entrypoint-initdb.d/create-test-db.sh
     ports:
-      - "3306:3306"
+      - "3307:3306"
     networks:
       - agorakit-development
     healthcheck: # Verifies DB is available to avoid silent failures.
