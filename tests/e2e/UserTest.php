@@ -7,8 +7,9 @@ use App\Group;
 use App\Membership;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Mail;
+use Tests\BaseTest;
 
-class UserTest extends BrowserKitTestCase
+class UserTest extends BaseTest
 {
     /******************* Why is it done this way ? ***************/
 
@@ -30,31 +31,9 @@ class UserTest extends BrowserKitTestCase
     - Newbie tries to join both
 
     What happens ?
-
-
     */
 
-    /* Some utility function*/
 
-    public function admin()
-    {
-        return App\User::where('email', 'admin@agorakit.local')->firstOrFail();
-    }
-
-    public function newbie()
-    {
-        return App\User::where('email', 'newbie@agorakit.local')->firstOrFail();
-    }
-
-    public function getTestGroup()
-    {
-        return App\Group::where('name', 'Test group')->firstOrFail();
-    }
-
-    public function getPrivateGroup()
-    {
-        return App\Group::where('name', 'Private test group')->firstOrFail();
-    }
 
     /* tests starts here : let's setup the DB
     */
