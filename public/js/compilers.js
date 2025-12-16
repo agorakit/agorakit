@@ -180,11 +180,11 @@ up.compiler('.wysiwyg', async function (element, data) {
 			['view', ['codeview', 'help']]
 		],
 
-        styleTags: [
-            'p',
-            { title: 'Blockquote', tag: 'blockquote', value: 'blockquote' },
-            'pre', 'h2', 'h3', 'h4'
-        ],
+		styleTags: [
+			'p',
+			{ title: 'Blockquote', tag: 'blockquote', value: 'blockquote' },
+			'pre', 'h2', 'h3', 'h4'
+		],
 
 		// this is the main call back to upload a file (image or anything else with summernote)
 		// multiple files can be uploaded at once
@@ -271,16 +271,45 @@ Add a calendar to any div with the .js-calendar class
 up.compiler('.js-calendar', async function (element, data) {
 
 	await loadJquery();
-	await loadJS('https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js')
-	await loadJS('https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.9/locales-all.global.min.js')
+	await loadJS('https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@6.1.19/index.global.min.js')
+	//await loadJS('https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.19/locales-all.global.min.js')
 
 	var initialView = (localStorage.getItem("fcDefaultView") !== null ? localStorage.getItem("fcDefaultView") : "dayGridMonth");
 	var json = element.getAttribute("data-json")
 	var locale = element.getAttribute("data-locale")
 	var create_url = element.getAttribute("data-create-url")
 	var calendar = new FullCalendar.Calendar(element, {
-		initialView: initialView,
-		locale: locale,
+		schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
+		initialView: resourceTimeline,
+		resources: [
+			{ id: 'a', title: 'Auditorium A', occupancy: 40 },
+			{ id: 'b', title: 'Auditorium B', occupancy: 60 },
+			{ id: 'c', title: 'Auditorium C', occupancy: 40 },
+			{ id: 'd', title: 'Auditorium D', occupancy: 40 },
+			{ id: 'e', title: 'Auditorium E', occupancy: 60 },
+			{ id: 'f', title: 'Auditorium F', occupancy: 60 },
+			{ id: 'g', title: 'Auditorium G', occupancy: 60 },
+			{ id: 'h', title: 'Auditorium H', occupancy: 40 },
+			{ id: 'i', title: 'Auditorium I', occupancy: 70 },
+			{ id: 'j', title: 'Auditorium J', occupancy: 70 },
+			{ id: 'k', title: 'Auditorium K', occupancy: 70 },
+			{ id: 'l', title: 'Auditorium L', occupancy: 75 },
+			{ id: 'm', title: 'Auditorium M', occupancy: 40 },
+			{ id: 'n', title: 'Auditorium N', occupancy: 40 },
+			{ id: 'o', title: 'Auditorium O', occupancy: 40 },
+			{ id: 'p', title: 'Auditorium P', occupancy: 40 },
+			{ id: 'q', title: 'Auditorium Q', occupancy: 40 },
+			{ id: 'r', title: 'Auditorium R', occupancy: 40 },
+			{ id: 's', title: 'Auditorium S', occupancy: 40 },
+			{ id: 't', title: 'Auditorium T', occupancy: 40 },
+			{ id: 'u', title: 'Auditorium U', occupancy: 40 },
+			{ id: 'v', title: 'Auditorium V', occupancy: 40 },
+			{ id: 'w', title: 'Auditorium W', occupancy: 40 },
+			{ id: 'x', title: 'Auditorium X', occupancy: 40 },
+			{ id: 'y', title: 'Auditorium Y', occupancy: 40 },
+			{ id: 'z', title: 'Auditorium Z', occupancy: 40 }
+		],
+		//locale: locale,
 		events: json,
 		selectable: true,
 		headerToolbar: {
