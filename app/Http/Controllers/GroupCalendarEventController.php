@@ -241,8 +241,8 @@ class GroupCalendarEventController extends Controller
                 $event->location = $request->input('location');
             } catch (\Exception $e) {
                 return redirect()->route('groups.calendarevents.create', $group)
-                ->withErrors($e->getMessage() . '. Incorrect location')
-                ->withInput();
+                    ->withErrors($e->getMessage() . '. Incorrect location')
+                    ->withInput();
             }
 
             // Geocode
@@ -292,7 +292,14 @@ class GroupCalendarEventController extends Controller
 
         flash(trans('messages.ressource_created_successfully'));
 
-        return redirect()->route('groups.calendarevents.index', $group);
+
+
+        // return to previous url if it is set in the create form
+        if (request()->input('previous_url')) {
+            return redirect()->to($request->input('previous_url'));
+        } else {
+            return redirect()->route('groups.calendarevents.index', $group);
+        }
     }
 
     /**
@@ -384,8 +391,8 @@ class GroupCalendarEventController extends Controller
                 $event->location = $request->input('location');
             } catch (\Exception $e) {
                 return redirect()->route('groups.calendarevents.create', $event)
-                ->withErrors($e->getMessage() . '. Incorrect location')
-                ->withInput();
+                    ->withErrors($e->getMessage() . '. Incorrect location')
+                    ->withInput();
             }
         }
 

@@ -17,24 +17,19 @@
         </div>
 
         @include('calendarevents.form')
-
-        <div class="form-group">
-            {!! Form::submit(trans('messages.create'), ['class' => 'btn btn-primary']) !!}
-        </div>
-
-        {!! Form::close() !!}
     @else
         {!! Form::model($event, ['action' => ['GroupCalendarEventController@store', $group], 'files' => true]) !!}
-
         @include('calendarevents.form')
-
-        <div class="form-group">
-            {!! Form::submit(trans('messages.create'), ['class' => 'btn btn-primary']) !!}
-        </div>
-
-        {!! Form::close() !!}
     @endif
 
+    <div class="form-group">
+        {!! Form::submit(trans('messages.create'), ['class' => 'btn btn-primary']) !!}
     </div>
+
+    @unless ($event->exists)
+        {{ Form::hidden('previous_url', URL::previous()) }}
+    @endunless
+
+    {!! Form::close() !!}
 
 @endsection
