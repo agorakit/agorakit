@@ -16,12 +16,11 @@
             @include('partials.errors')
         </div>
 
-        <div class="container mt-md-4 p-md-4 p-2" up-main="modal">
+        <div class="container mt-md-4 p-md-4 p-2">
             @unless (request()->get('embed'))
                 @include('partials.navigation.main')
             @endunless
-
-            <main>
+            <main up-main="overlay">
                 @yield('content')
             </main>
         </div>

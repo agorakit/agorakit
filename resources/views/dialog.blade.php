@@ -10,7 +10,7 @@
 <body>
     <main class="page page-center" up-main>
         <div class="container container-tight p-4">
-            <div up-main="modal">
+            <div up-main="overlay">
                 @include('partials.errors')
                 @yield('content')
             </div>
