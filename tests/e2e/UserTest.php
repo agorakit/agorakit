@@ -111,7 +111,7 @@ class UserTest extends BaseTest
             ->type('13:00', 'stop_time')
             ->press('Create')
             ->seeInDatabase('calendar_events', ['name' => 'Test event'])
-            ->see(trans('messages.create_event'));
+            ->see(trans('messages.ressource_created_successfully'));
     }
 
     public function testPrivateGroupCreation()
