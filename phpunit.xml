@@ -11,7 +11,10 @@
          displayDetailsOnPhpunitDeprecations="true">
     <testsuites>
         <testsuite name="E2E">
-            <directory>./tests/e2e</directory>
+            <file>./tests/e2e/UserTest.php</file>
+            <file>./tests/e2e/FileUploadTest.php</file>
+            <file>./tests/e2e/CalendarEventTest.php</file>
+            <file>./tests/e2e/ImportTest.php</file>
         </testsuite>
         <testsuite name="Integration">
             <directory>./tests/integration</directory>
