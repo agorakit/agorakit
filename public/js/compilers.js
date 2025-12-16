@@ -296,7 +296,7 @@ up.compiler('.js-calendar', async function (element, data) {
 				var start = new Date(info.start.getTime() - (info.start.getTimezoneOffset() * 60000)).toISOString();
 				var stop = new Date(info.end.getTime() - (info.end.getTimezoneOffset() * 60000)).toISOString();
 				url = create_url + '?start=' + start + '&stop=' + stop
-				up.navigate({ url: url, layer: 'new' });
+				up.navigate({ url: url, layer: 'new',  size: 'cover' });
 			}
 		},
 
