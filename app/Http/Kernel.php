@@ -33,7 +33,8 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\SetLocale::class,
             \App\Http\Middleware\HandleUserPreference::class,
-            \App\Http\Middleware\LogoutBannedUser::class
+            \App\Http\Middleware\LogoutBannedUser::class,
+            \App\Http\Middleware\AddContextToLogs::class
         ],
 
         'api' => [
