@@ -46,23 +46,23 @@
             @endif
 
             <li>
-                <h6 class="dropdown-header">Overview</h6>
+                <h6 class="dropdown-header">{{trans('messages.overview')}}</h6>
             </li>
 
             <a class="dropdown-item @if (Context::is('joined')) active @endif"
-                href="{{ route('index', ['set_preference' => 'show', 'value' => 'joined']) }}">
+                href="{{ url()->query(url()->current(), ['set_preference' => 'show', 'value' => 'joined']) }}">
                 {{ __('messages.overview_my_groups') }}
             </a>
 
             <a class="dropdown-item
             @if (Context::is('public')) active @endif"
-                href="{{ route('index', ['set_preference' => 'show', 'value' => 'public']) }}">
+                href="{{ url()->query(url()->current(), ['set_preference' => 'show', 'value' => 'public']) }}">
                 {{ __('messages.overview_public_groups') }}
             </a>
 
             @if (Auth::check() && Auth::user()->isAdmin())
                 <a class="dropdown-item @if (Context::is('all')) active @endif"
-                    href="{{ route('index', ['set_preference' => 'show', 'value' => 'all']) }}">
+                    href="{{ url()->query(url()->current(), ['set_preference' => 'show', 'value' => 'all']) }}">
                     {{ __('messages.overview_admin_groups') }}
                 </a>
             @endif
