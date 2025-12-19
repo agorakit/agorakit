@@ -7,17 +7,19 @@
             </a>
         </div>
 
-        @if (Context::isGroup() || Context::isOverview())
-            <div class="nav-item">
-                @include('partials.navigation.context')
-            </div>
-        @endif
+        <div class="nav-item mt-1">
+            @auth
+                @if (Context::isGroup() || Context::isOverview())
+                    @include('partials.navigation.context')
+                @endif
 
-        @if (Context::isUser())
-            <div class="nav-item">
-                {{ $user->name }} <em>({{ '@' . $user->username }})</em>
-            </div>
-        @endif
+                @if (Context::isUser())
+                    {{ $user->name }} <em>({{ '@' . $user->username }})</em>
+                @endif
+            @else
+                {{ setting('name') }}
+            @endauth
+        </div>
     </div>
 
     <div class="nav-item ms-auto d-flex fs-3 align-self-center align-items-center mb-3">
@@ -33,8 +35,7 @@
             <!-- Admin -->
             @if (Auth::user()->isAdmin())
                 <div class="nav-item dropdown">
-                    <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
-                        role="button">
+                    <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button">
                         <i class="fas fa-server d-inline d-sm-none"></i> <span
                             class="d-sm-inline d-none">{{ trans('messages.server_administration') }}</span>
                     </a>
