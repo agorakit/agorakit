@@ -164,8 +164,6 @@ class SendNotifications extends Command
                 $notification->last_notification = $last_notification;
 
                 Mail::to($user)->send($notification);
-                Log::info('User Notified', ['user' => $user]);
-
                 return true;
             }
         }

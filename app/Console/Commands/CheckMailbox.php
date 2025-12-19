@@ -444,8 +444,6 @@ class CheckMailbox extends Command
             $user->touch();
             $this->info('Discussion has been created with id : ' . $discussion->id);
             $this->info('Title : ' . $discussion->name);
-            Log::info('Discussion has been created from email', ['mail' => $message, 'discussion' => $discussion]);
-
             $this->moveMessage($message, 'processed');
             return true;
         } else {
