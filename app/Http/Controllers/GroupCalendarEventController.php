@@ -298,7 +298,7 @@ class GroupCalendarEventController extends Controller
         if (request()->input('context') === 'group') {
             return redirect()->route('groups.calendarevents.index', $group);
         } else {
-            return redirect()->route('calendar', $group);
+            return redirect()->route('calendar');
         }
     }
 
