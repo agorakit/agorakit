@@ -295,10 +295,10 @@ class GroupCalendarEventController extends Controller
 
 
         // return to previous url if it is set in the create form
-        if (request()->input('previous_url')) {
-            return redirect()->to($request->input('previous_url'));
-        } else {
+        if (request()->input('context') === 'group') {
             return redirect()->route('groups.calendarevents.index', $group);
+        } else {
+            return redirect()->route('calendar', $group);
         }
     }
 
