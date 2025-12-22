@@ -27,7 +27,7 @@
     </div>
 
     @unless ($event->exists)
-        {{ Form::hidden('previous_url', URL::previous()) }}
+        {{ Form::hidden('context', Context::get()) }}
     @endunless
 
     {!! Form::close() !!}
