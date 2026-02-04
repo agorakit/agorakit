@@ -120,32 +120,32 @@ class DatabaseSeeder extends Seeder
             // add actions to each group
             for ($m = 0; $m <= $faker->numberBetween(5, 20); $m++) {
                 $start = $faker->dateTimeThisMonth('+2 months');
-                $action = App\Action::create([
+                $calenderEvent = App\CalendarEvent::create([
                     'name' => $faker->sentence(5),
                     'body' => $faker->text,
                     'start'    => $start,
                     'stop'     => Carbon::instance($start)->addHour(),
                     'location' => $faker->city,
                 ]);
-                // attach one random author & group to each action
-                $action->user_id = App\User::orderByRaw('RAND()')->first()->id;
-                $action->group_id = App\Group::orderByRaw('RAND()')->first()->id;
-                if ($action->isInvalid()) {
-                    dd($action->getErrors());
+                // attach one random author & group to each calender event
+                $calenderEvent->user_id = App\User::orderByRaw('RAND()')->first()->id;
+                $calenderEvent->group_id = App\Group::orderByRaw('RAND()')->first()->id;
+                if ($calenderEvent->isInvalid()) {
+                    dd($calenderEvent->getErrors());
                 }
-                $action->save();
+                $calenderEvent->save();
 
                 // add a cover image to action
-                Storage::disk('local')->makeDirectory('groups/' . $action->group->id . '/actions/' . $action->id);
-                Image::read(file_get_contents('https://picsum.photos/800/600'))->save(storage_path() . '/app/groups/' . $action->group->id . '/actions/' . $action->id . '/cover.jpg');
+                Storage::disk('local')->makeDirectory('groups/' . $calenderEvent->group->id . '/actions/' . $calenderEvent->id);
+                Image::read(file_get_contents('https://picsum.photos/800/600'))->save(storage_path() . '/app/groups/' . $calenderEvent->group->id . '/actions/' . $calenderEvent->id . '/cover.jpg');
 
-                $action->tag($this->tags());
+                $calenderEvent->tag($this->tags());
 
                 for ($pp = 1; $pp <= $faker->numberBetween(1, 20); $pp++) {
                     // add participants to each action
                     $rsvp = Participation::firstOrCreate([
                         'user_id' => App\User::orderByRaw('RAND()')->first()->id,
-                        'action_id' => $action->id
+                        'calendar_event_id' => $calenderEvent->id
                     ]);
 
                     $status = $faker->numberBetween(1, 3);
