@@ -72,3 +72,8 @@
         {!! Form::date('stop_date', null, ['class' => 'form-control']) !!}
     @endif
 </div>
+
+<div class="form-group">
+    {!! Form::label('registration_open_until', trans('messages.registration_open_until')) !!}
+    {!! Form::date('registration_open_until', $event->hasRegistrationOpenUntil() ? $event->registration_open_until->format('Y-m-d') : null, ['class' => 'form-control']) !!}
+</div>
