@@ -223,6 +223,14 @@ class GroupCalendarEventController extends Controller
                 ->withInput();
         }
 
+        try {
+            $event->registration_closes_at = $request->date('registration_closes_at');
+        } catch (\Exception $e) {
+            return redirect()->route('groups.calendarevents.create', $group)
+                ->withErrors($e->getMessage() . '. Incorrect format in the registration closes at date, use date only')
+                ->withInput();
+        }
+
         if ($event->start > $event->stop) {
             return redirect()->route('groups.calendarevents.create', $group)
                 ->withErrors(__('Start date cannot be after end date'))
@@ -371,6 +379,15 @@ class GroupCalendarEventController extends Controller
             $event->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('stop_time'));
         } else {
             $event->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
+        }
+
+
+        try {
+            $event->registration_closes_at = $request->date('registration_closes_at');
+        } catch (\Exception $e) {
+            return redirect()->route('groups.calendarevents.create', $group)
+                ->withErrors($e->getMessage() . '. Incorrect format in the registration closes at date, use yyyy-mm-dd hh:mm')
+                ->withInput();
         }
 
         // handle location

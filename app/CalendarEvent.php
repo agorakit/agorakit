@@ -36,7 +36,7 @@ class CalendarEvent extends Model
         'stop'     => 'required',
     ];
 
-    protected $fillable = ['id', 'name', 'body', 'start', 'stop', 'visibility', 'location'];
+    protected $fillable = ['id', 'name', 'body', 'start', 'stop', 'visibility', 'location', 'registration_closes_at'];
     protected $with = ['attending', 'notAttending']; // always load participants with events
 
     protected $table = 'calendar_events';
@@ -45,7 +45,8 @@ class CalendarEvent extends Model
         'user_id' => 'integer',
         'deleted_at' => 'datetime',
         'start' => 'datetime',
-        'stop' => 'datetime'
+        'stop' => 'datetime',
+        'registration_closes_at' => 'datetime'
     ];
 
     protected $keepRevisionOf = ['name', 'start', 'stop', 'body', 'location'];
@@ -121,5 +122,10 @@ class CalendarEvent extends Model
     public function maybeAttending()
     {
         return $this->belongsToMany(User::class)->wherePivot('status', '0');
+    }
+
+    public function hasRegistrationClosesAt(): bool
+    {
+        return !is_null($this->registration_closes_at);
     }
 }

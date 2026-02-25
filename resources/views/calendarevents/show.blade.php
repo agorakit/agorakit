@@ -55,6 +55,12 @@
             @if ($event->stop > $event->start) <h3>{{ trans('messages.ends') }} : {{ $event->stop->isoFormat('LLLL') }}</h3>
             @endif
 
+            @if ($event->hasRegistrationClosesAt())
+                <div class="fw-bold">
+                    {{ trans('messages.registration_closes_at_inline', ['date' => $event->registration_closes_at->isoFormat('LLLL')]) }}
+                </div>
+            @endif
+
             @if ($event->hasLocation())
                 <div class="fw-bold">{{ trans('messages.location') }}</div>
                 {{ $event->locationDisplay("long") }}

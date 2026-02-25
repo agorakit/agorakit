@@ -201,6 +201,8 @@ return [
     'regard' => 'Regards',
     'register' => 'Register',
     'registered' => 'Registered',
+    'registration_closes_at_label' => 'Registration closes at',
+    'registration_closes_at_inline' => 'Registration closes at :date',
     'registration_time' => 'Registration time',
     'remember_me' => 'Remember me',
     'remove_user' => 'Remove User',

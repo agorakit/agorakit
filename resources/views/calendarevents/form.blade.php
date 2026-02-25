@@ -72,3 +72,8 @@
         {!! Form::date('stop_date', null, ['class' => 'form-control']) !!}
     @endif
 </div>
+
+<div class="form-group">
+    {!! Form::label('registration_closes_at', trans('messages.registration_closes_at_label')) !!}
+    {!! Form::date('registration_closes_at', $event->hasRegistrationClosesAt() ? $event->registration_closes_at->format('Y-m-d') : null, ['class' => 'form-control']) !!}
+</div>
