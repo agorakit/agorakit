@@ -201,6 +201,7 @@ return [
     'regard' => 'Regards',
     'register' => 'Register',
     'registered' => 'Registered',
+    'registration_already_closed' => 'Registration already closed',
     'registration_open_until' => 'Registration open until',
     'registration_time' => 'Registration time',
     'remember_me' => 'Remember me',

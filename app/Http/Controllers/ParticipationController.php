@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\CalendarEvent;
 use App\Group;
 use App\Participation;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use URL;
 
@@ -29,6 +30,10 @@ class ParticipationController extends Controller
     {
         $this->authorize('participate', $event);
 
+        if($event->isRegistrationClosed(Carbon::now())) {
+            abort(404, trans('messages.registration_already_closed'));
+        }
+
         $rsvp = Participation::firstOrNew(['user_id' => $request->user()->id, 'calendar_event_id' => $event->id]);
         $rsvp->notification = $request->get('notification');
         $rsvp->status = $request->get('participation');
@@ -44,6 +49,11 @@ class ParticipationController extends Controller
     public function set(Request $request, Group $group, CalendarEvent $event, $status)
     {
         $this->authorize('participate', $event);
+
+        if($event->isRegistrationClosed(Carbon::now())) {
+            abort(400, trans('messages.registration_already_closed'));
+        }
+
         $rsvp = Participation::firstOrNew(['user_id' => $request->user()->id, 'calendar_event_id' => $event->id]);
         //$rsvp->notification = $request->get('notification');
 
