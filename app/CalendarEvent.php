@@ -128,4 +128,14 @@ class CalendarEvent extends Model
     {
         return !is_null($this->registration_closes_at);
     }
+
+    public function isRegistrationClosed(\DateTime $now): bool
+    {
+        return !$this->isRegistrationOpen($now);
+    }
+
+    public function isRegistrationOpen(\DateTime $now): bool
+    {
+        return $this->hasRegistrationClosesAt() && $now <= $this->registration_closes_at;
+    }
 }
