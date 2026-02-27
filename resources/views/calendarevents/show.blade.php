@@ -55,6 +55,11 @@
             @if ($event->stop > $event->start) <h3>{{ trans('messages.ends') }} : {{ $event->stop->isoFormat('LLLL') }}</h3>
             @endif
 
+            @if ($event->hasRegistrationOpenUntil())
+                <div class="fw-bold">{{ trans('messages.registration_open_until') }}</div>
+                {{ $event->registration_open_until->isoFormat('LLLL') }}
+            @endif
+
             @if ($event->hasLocation())
                 <div class="fw-bold">{{ trans('messages.location') }}</div>
                 {{ $event->locationDisplay("long") }}

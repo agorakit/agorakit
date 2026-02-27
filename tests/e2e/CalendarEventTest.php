@@ -31,6 +31,27 @@ class CalendarEventTest extends BaseTest
             ->see(trans('messages.ressource_created_successfully'));
     }
 
+    public function testEventWithRegistrationOpenUntil()
+    {
+        $user = $this->admin();
+        $group = $this->getTestGroup();
+
+        $this->actingAs($user)
+            ->visit('/groups/' . $group->id . '/calendarevents/create')
+            ->see('Add an event')
+            ->type('Test event with registration open until', 'name')
+            ->type('this is a test event in the calendar', 'body')
+            ->type('2026-01-01', 'start_date')
+            ->type('12:00', 'start_time')
+            ->type('2025-12-25', 'registration_open_until')
+            ->press('Create')
+            ->seeInDatabase('calendar_events', [
+                'name' => 'Test event with registration open until',
+                'registration_open_until' => '2025-12-25'
+            ])
+            ->see(trans('messages.ressource_created_successfully'));
+    }
+
     public function testEventWithWrongStopTimeCreation()
     {
         $user = $this->admin();
