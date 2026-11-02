@@ -6,8 +6,8 @@ We currently only support the latest version of Agorakit with security fixes.
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 1.9.x   | :white_check_mark: |
-| < 1.9   | :x:                |
+| 1.11.x   | :white_check_mark: |
+| < 1.11   | :x:                |
 
 ## Reporting a Vulnerability
 
