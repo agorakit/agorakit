@@ -99,6 +99,11 @@ class InviteController extends Controller
 
     public function accept(Request $request, Membership $membership)
     {
+        // only a pending invitation can be accepted, never a candidate (self-requested) or removed membership
+        if ($membership->membership != Membership::INVITED) {
+            abort(403);
+        }
+
         if (Auth::user()->id == $membership->user_id) {
             $membership->membership = Membership::MEMBER;
             $membership->save();
@@ -108,6 +113,10 @@ class InviteController extends Controller
 
     public function deny(Request $request, Membership $membership)
     {
+        if ($membership->membership != Membership::INVITED) {
+            abort(403);
+        }
+
         if (Auth::user()->id == $membership->user_id) {
             $membership->membership = Membership::DECLINED;
             $membership->save();
@@ -122,6 +131,11 @@ class InviteController extends Controller
     {
         if (! $request->hasValidSignature()) {
             abort(401, 'Invalid or expired signature');
+        }
+
+        // an old invitation link must not bring back a removed member or upgrade a candidate
+        if ($membership->membership != Membership::INVITED) {
+            abort(403);
         }
 
         $user = $membership->user;
@@ -145,6 +159,11 @@ class InviteController extends Controller
     {
         if (! $request->hasValidSignature()) {
             abort(401, 'Invalid or expired signature');
+        }
+
+        // same for an old refusal link: it must not turn a removed or blacklisted membership into a declined one
+        if ($membership->membership != Membership::INVITED) {
+            abort(403);
         }
 
         $user = $membership->user;

@@ -82,6 +82,16 @@ class GroupMembershipController extends Controller
         // either the group is closed and we store a candidate and notify gruop admins
         // $this->authorize('join', $group);
 
+        // never let a join request overwrite an existing membership: removed or blacklisted users stay out,
+        // and existing members / admins must not be downgraded to candidate
+        $existing = Membership::where(['user_id' => $request->user()->id, 'group_id' => $group->id])->first();
+        if ($existing && in_array($existing->membership, [Membership::REMOVED, Membership::BLACKLISTED])) {
+            abort(403);
+        }
+        if ($existing && $existing->membership >= Membership::MEMBER) {
+            return redirect()->route('groups.show', [$group->id]);
+        }
+
         if ($group->isOpen()) {
             // load or create membership for this group and user combination
             $membership = Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
