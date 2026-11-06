@@ -74,11 +74,11 @@ return [
 
         'mysql_testing' => [
             'driver'    => 'mysql',
-            'host'      => env('DB_HOST', '127.0.0.1'),
+            'host'      => env('DB_HOST', 'db'),
             'port'      => env('DB_PORT', '3306'),
-            'database'  => env('TESTING_DB_DATABASE', 'agorakit_testing'),
-            'username'  => env('DB_USERNAME', 'root'),
-            'password'  => env('DB_PASSWORD', ''),
+            'database'  => env('TESTING_DB_DATABASE', 'db'),
+            'username'  => env('DB_USERNAME', 'db'),
+            'password'  => env('DB_PASSWORD', 'db'),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix'    => '',
