@@ -23,6 +23,12 @@ class GroupDiscussionController extends Controller
      */
     public function index(Request $request, Group $group)
     {
+        // Listing a group's discussions must honor the group's visibility,
+        // like every other content index (files/events/members). Without
+        // this, discussion titles/authors/excerpts of closed and secret
+        // groups leaked to non-members and anonymous visitors.
+        $this->authorize('view-discussions', $group);
+
         $tag = $request->get('tag');
 
         $groups = Context::getVisibleGroups();

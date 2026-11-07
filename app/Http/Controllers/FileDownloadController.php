@@ -27,9 +27,16 @@ class FileDownloadController extends Controller
         }
 
         if (Storage::exists($file->path)) {
+            // Only let safe, non-active types render inline; force download for
+            // everything else (e.g. HTML/SVG) and send nosniff, so a user-uploaded
+            // file cannot execute script in the application origin.
+            $inlineTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/bmp', 'application/pdf'];
+            $disposition = in_array(strtolower((string) $file->mime), $inlineTypes, true) ? 'inline' : 'attachment';
+
             return (new Response(Storage::get($file->path), 200))
             ->header('Content-Type', $file->mime)
-            ->header('Content-Disposition', 'inline; filename="' . $file->original_filename . '"');
+            ->header('X-Content-Type-Options', 'nosniff')
+            ->header('Content-Disposition', $disposition . '; filename="' . $file->original_filename . '"');
         } else {
             abort(404, 'File not found in storage at ' . $file->path);
         }
