@@ -140,7 +140,7 @@ class GroupFileController extends Controller
      *
      * @return Response
      */
-    public function create(Request $request, Group $group, File $parent = null)
+    public function create(Request $request, Group $group, ?File $parent = null)
     {
         $this->authorize('create-file', $group);
 
@@ -157,7 +157,7 @@ class GroupFileController extends Controller
             ->with('tab', 'files');
     }
 
-    public function createLink(Request $request, Group $group, File $parent = null)
+    public function createLink(Request $request, Group $group, ?File $parent = null)
     {
         $this->authorize('create-link', $group);
 
@@ -173,7 +173,7 @@ class GroupFileController extends Controller
             ->with('tab', 'files');
     }
 
-    public function createFolder(Request $request, Group $group, File $parent = null)
+    public function createFolder(Request $request, Group $group, ?File $parent = null)
     {
         $this->authorize('create-folder', $group);
 
@@ -188,16 +188,16 @@ class GroupFileController extends Controller
      *
      * @return Response
      */
-    public function store(Request $request, Group $group, File $parent = null)
+    public function store(Request $request, Group $group, ?File $parent = null)
     {
         $this->authorize('create-file', $group);
 
         // handle the case of a summernote upaload (via ajax)
         if ($request->ajax()) {
             // validate file size
-             $validated = $request->validate([
+            $validated = $request->validate([
                 'file' => 'required|max:' . config('agorakit.max_file_size'),
-             ]);
+            ]);
 
             if ($request->file('file')) {
                 $file = new File();
@@ -270,7 +270,7 @@ class GroupFileController extends Controller
      *
      * @return Response
      */
-    public function storeLink(Request $request, Group $group, File $parent = null)
+    public function storeLink(Request $request, Group $group, ?File $parent = null)
     {
         $this->authorize('create-file', $group);
 
@@ -325,7 +325,7 @@ class GroupFileController extends Controller
      *
      * @return Response
      */
-    public function storeFolder(Request $request, Group $group, File $parent = null)
+    public function storeFolder(Request $request, Group $group, ?File $parent = null)
     {
         $this->authorize('create-file', $group);
 
@@ -397,7 +397,7 @@ class GroupFileController extends Controller
      *
      * @return Response
      */
-    public function update(Request $request, Group $group, File $file, File $parent = null)
+    public function update(Request $request, Group $group, File $file, ?File $parent = null)
     {
         $this->authorize('update', $file);
 
