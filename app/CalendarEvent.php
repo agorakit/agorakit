@@ -8,6 +8,8 @@ use App\Traits\HasControlledTags;
 use App\Traits\HasVisibility;
 use App\Traits\HasCover;
 use App\Traits\HasLocation;
+use App\Casts\LocationFromJson;
+use App\Casts\PlainText;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -41,13 +43,21 @@ class CalendarEvent extends Model
 
     protected $table = 'calendar_events';
     public $timestamps = true;
-    protected $casts = [
-        'user_id' => 'integer',
-        'deleted_at' => 'datetime',
-        'start' => 'datetime',
-        'stop' => 'datetime',
-        'registration_closes_at' => 'datetime'
-    ];
+
+
+    protected function casts(): array
+    {
+        return [
+            'name' => PlainText::class,
+            'location' => LocationFromJson::class,
+            'user_id' => 'integer',
+            'deleted_at' => 'datetime',
+            'start' => 'datetime',
+            'stop' => 'datetime',
+            'registration_closes_at' => 'datetime'
+        ];
+    }
+
 
     protected $keepRevisionOf = ['name', 'start', 'stop', 'body', 'location'];
 
