@@ -5,6 +5,7 @@ namespace App;
 use App\Traits\HasControlledTags;
 use App\Traits\HasCover;
 use App\Traits\HasLocation;
+use App\Casts\PlainText;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,11 +14,8 @@ use Illuminate\Notifications\Notifiable;
 use Nicolaslopezj\Searchable\SearchableTrait;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
-use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
-use Illuminate\Contracts\Translation\HasLocalePreference;
-use Storage;
 use App\Membership;
 
 class User extends Authenticatable
@@ -50,6 +48,8 @@ class User extends Authenticatable
     ];
 
     protected $casts = [
+        'name' => PlainText::class,
+        'username' => PlainText::class,
         'preferences' => 'array',
         'is_banned' => 'boolean'
     ];
