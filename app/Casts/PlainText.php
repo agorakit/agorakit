@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * This cast keeps plain-text values safe for display in contexts where HTML
  * formatting should not be preserved.
  */
-class text implements CastsAttributes
+class PlainText implements CastsAttributes
 {
     /**
      * Cast the given value to plain text by removing any HTML markup.
