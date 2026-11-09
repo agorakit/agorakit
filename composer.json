@@ -37,7 +37,6 @@
         "mews/purifier": "^3.4",
         "michelf/php-markdown": "^2.0",
         "misd/linkify": "^1.1",
-        "mpratt/embera": "^2.0",
         "nesbot/carbon": "^3.8",
         "nicolaslopezj/searchable": "^1.13",
         "rap2hpoutre/laravel-log-viewer": "^3.1.0",
