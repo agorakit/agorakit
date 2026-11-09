@@ -6,12 +6,13 @@ use App\Traits\HasStatus;
 use App\Traits\HasControlledTags;
 use App\Traits\HasCover;
 use App\Traits\HasLocation;
+use App\Casts\PlainText;
+use App\Casts\LocationFromJson;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Nicolaslopezj\Searchable\SearchableTrait;
-use Storage;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Watson\Validating\ValidatingTrait;
 use Carbon\Carbon;
@@ -39,7 +40,18 @@ class Group extends Model
     ];
 
     protected $fillable = ['id', 'name', 'body', 'cover', 'slug'];
-    protected $casts = ['user_id' => 'integer', 'settings' => 'array'];
+
+
+    protected function casts(): array
+    {
+        return [
+            'name' => PlainText::class,
+            'location' => LocationFromJson::class,
+            'user_id' => 'integer',
+            'settings' => 'array'
+        ];
+    }
+
 
     protected $keepRevisionOf = ['name', 'body', 'cover', 'color', 'group_type', 'location', 'settings', 'slug', 'status'];
 
