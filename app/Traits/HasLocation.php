@@ -3,7 +3,7 @@
 namespace App\Traits;
 
 use App\Casts\LocationFromJson;
-use Illuminate\Http\Request;
+
 
 /**
  * This trait allows any model to have a location (ie geographical address)
