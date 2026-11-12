@@ -155,7 +155,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('calendarevents/create', 'GroupCalendarEventController@create')->name('calendarevents.create');
     Route::post('calendarevents/create', 'GroupCalendarEventController@store')->name('calendarevents.store');
 
-    Route::get('calendarevents/{action}/cover/{size}', 'CalendarEventCoverController@show')->name('calendarevents.cover');
+    Route::get('calendarevents/{event}/cover/{size}', 'CalendarEventCoverController@show')->name('calendarevents.cover');
 
 
 
