@@ -24,7 +24,7 @@ use Throwable;
 trait HasCover
 {
     // list of available sizes (for validation)
-    private $sizes = ['small', 'medium', 'large', 'square'];
+    private $sizes = ['small', 'medium', 'large'];
 
     /**
      * Return the path where the covers and thumbnails are stored for this model
