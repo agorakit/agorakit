@@ -48,21 +48,21 @@ class SettingsController extends Controller
             return redirect()->action('DashboardController@index');
         }
 
-        setting()->set('name', $request->get('name'));
+        setting()->set('name', $request->input('name'));
 
         if ($request->has('homepage_presentation')) {
-            foreach ($request->get('homepage_presentation') as $locale => $value) {
+            foreach ($request->input('homepage_presentation') as $locale => $value) {
                 setting()->localized($locale)->set('homepage_presentation', $value);
             }
         }
         if ($request->has('homepage_presentation_for_members')) {
-            foreach ($request->get('homepage_presentation_for_members') as $locale => $value) {
+            foreach ($request->input('homepage_presentation_for_members') as $locale => $value) {
                 setting()->localized($locale)->set('homepage_presentation_for_members', $value);
             }
         }
 
         if ($request->has('help_text')) {
-            foreach ($request->get('help_text') as $locale => $value) {
+            foreach ($request->input('help_text') as $locale => $value) {
                 setting()->localized($locale)->set('help_text', $value);
             }
         }
@@ -73,8 +73,8 @@ class SettingsController extends Controller
         setting()->set('notify_admins_on_group_create', $request->has('notify_admins_on_group_create') ? 1 : 0);
         setting()->set('user_can_register', $request->has('user_can_register') ? 1 : 0);
 
-        setting()->setArray('user_tags', $request->get('user_tags'));
-        setting()->setArray('group_tags', $request->get('group_tags'));
+        setting()->setArray('user_tags', $request->input('user_tags'));
+        setting()->setArray('group_tags', $request->input('group_tags'));
 
 
         setting()->set('show_overview_inside_navbar', $request->has('show_overview_inside_navbar') ? 1 : 0);
@@ -99,7 +99,7 @@ class SettingsController extends Controller
             setting()->set("show_locale_{$locale}", $request->has("show_locale_{$locale}") ? 1 : 0);
         }
 
-        setting()->set('custom_footer', $request->get('custom_footer'));
+        setting()->set('custom_footer', $request->input('custom_footer'));
 
         // handle app logo
         if ($request->hasFile('logo')) {

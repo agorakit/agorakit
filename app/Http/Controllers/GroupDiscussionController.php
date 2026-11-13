@@ -29,7 +29,7 @@ class GroupDiscussionController extends Controller
         // groups leaked to non-members and anonymous visitors.
         $this->authorize('view-discussions', $group);
 
-        $tag = $request->get('tag');
+        $tag = $request->input('tag');
 
         $groups = Context::getVisibleGroups();
 
@@ -51,7 +51,7 @@ class GroupDiscussionController extends Controller
 
         // Handle search
         if ($request->has('search')) {
-            $discussions->search($request->get('search'));
+            $discussions->search($request->input('search'));
         }
 
         // Paginate the beast
@@ -97,7 +97,7 @@ class GroupDiscussionController extends Controller
     {
         // if no group is in the route, it means user chose the group using the dropdown
         if (!$group->exists) {
-            $group = \App\Group::find($request->get('group'));
+            $group = \App\Group::find($request->input('group'));
             //if group is null, redirect to the discussion create page with error messages, saying
             //that you must select a group
             if (is_null($group)) {
@@ -142,8 +142,8 @@ class GroupDiscussionController extends Controller
         $group->touch();
         Auth::user()->touch();
 
-        if ($request->get('tags')) {
-            $discussion->tag($request->get('tags'));
+        if ($request->input('tags')) {
+            $discussion->tag($request->input('tags'));
         }
 
         flash(trans('messages.ressource_created_successfully'));
@@ -243,8 +243,8 @@ class GroupDiscussionController extends Controller
 
         $discussion->save();
 
-        if ($request->get('tags')) {
-            $discussion->retag($request->get('tags'));
+        if ($request->input('tags')) {
+            $discussion->retag($request->input('tags'));
         } else {
             $discussion->detag();
         }

@@ -30,13 +30,13 @@ class SearchController extends Controller
     {
         // validate user input
 
-        if ($request->get('query')) {
-            $query = mb_strimwidth($request->get('query'), 0, 32);
+        if ($request->input('query')) {
+            $query = mb_strimwidth($request->input('query'), 0, 32);
         }
 
         $type = '';
-        if ($request->get('type')) {
-            $type = $request->get('type');
+        if ($request->input('type')) {
+            $type = $request->input('type');
         }
 
         if (!in_array($type, ['discussions', 'files', 'calendarevents', 'groups', 'users', 'comments'])) {
@@ -44,8 +44,8 @@ class SearchController extends Controller
         }
 
         $scope = '';
-        if ($request->get('scope')) {
-            $scope = $request->get('scope');
+        if ($request->input('scope')) {
+            $scope = $request->input('scope');
         }
 
         if (!in_array($scope, ['joined', 'all', 'admin'])) {

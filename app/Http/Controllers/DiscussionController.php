@@ -19,7 +19,7 @@ class DiscussionController extends Controller
 
     public function index(Request $request)
     {
-        $tag = $request->get('tag');
+        $tag = $request->input('tag');
         $groups = Context::getVisibleGroups();
         $discussions = \App\Discussion::with('userReadDiscussion', 'group', 'user', 'tags', 'comments')
             ->withCount('comments')

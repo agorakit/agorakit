@@ -47,8 +47,8 @@ class SetLocale
 
 
         // 1- Parameter force_locale from request
-        if ($request->has('force_locale') && in_array($request->get('force_locale'), $this->locales)) {
-            $locale = $request->get('force_locale');
+        if ($request->has('force_locale') && in_array($request->input('force_locale'), $this->locales)) {
+            $locale = $request->input('force_locale');
             Session::put('locale', $locale);
 
 

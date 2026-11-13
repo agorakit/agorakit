@@ -14,7 +14,7 @@ class AutoLoginController extends Controller
         if (!$request->hasValidSignature()) {
             abort(401, 'Invalid or expired signature');
         }
-        $user = User::where('username', $request->get('username'))->firstOrFail();
+        $user = User::where('username', $request->input('username'))->firstOrFail();
         Auth::login($user, true);
 
         $user->verified = 1;
