@@ -33,14 +33,8 @@ class CalendarEventController extends Controller
             $events = \App\CalendarEvent::with('group')
                 ->where('start', '>=', Carbon::now()->subDay())
                 ->whereIn('group_id', $groups)
-                ->orderBy('start');
-
-
-            if (Auth::user()->getPreference('show', 'joined') == 'all') {
-                $events->orWhere('visibility', 10);
-            }
-
-            $events = $events->paginate(20);
+                ->orderBy('start')
+                ->paginate(20);
 
             return view('dashboard.calendar-list')
                 ->with('title', trans('messages.calendar'))
@@ -70,12 +64,6 @@ class CalendarEventController extends Controller
                 ->where('start', '>', Carbon::now()->subMonth())
                 ->where('stop', '<', Carbon::now()->addMonth())
                 ->whereIn('group_id', $groups);
-        }
-
-        if (Auth::check()) {
-            if (Auth::user()->getPreference('show', 'joined') == 'all') {
-                $events->orWhere('visibility', 10);
-            }
         }
 
         $events = $events->get();

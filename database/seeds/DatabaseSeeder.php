@@ -37,12 +37,6 @@ class DatabaseSeeder extends Seeder
             'verified' => 1,
         ]);
 
-        // add avatar to admin user
-        Storage::disk('local')->makeDirectory('users/' . $admin->id);
-        try {
-            Image::read($faker->picsumUrl(500, 400))->widen(500)->save(storage_path() . '/app/users/' . $admin->id . '/cover.jpg')->fit(128, 128)->save(storage_path() . '/app/users/' . $admin->id . '/thumbnail.jpg');
-        } catch (Exception $e) {
-        }
 
         // a second normal user
         $normal_user = App\User::create([
@@ -60,11 +54,6 @@ class DatabaseSeeder extends Seeder
                 'name'     => $faker->name,
                 'body'     => $faker->text(1000),
             ]);
-
-            // add avatar to every user
-
-            Storage::disk('local')->makeDirectory('users/' . $user->id);
-            Image::read(file_get_contents('https://picsum.photos/500/400'))->save(storage_path() . '/app/users/' . $user->id . '/cover.jpg')->cover(128, 128)->save(storage_path() . '/app/users/' . $user->id . '/thumbnail.jpg');
         }
 
         // create 10 groups
@@ -78,10 +67,6 @@ class DatabaseSeeder extends Seeder
             $group->save();
 
             $group->tag($this->tags());
-
-            // add cover image to groups
-            Storage::disk('local')->makeDirectory('groups/' . $group->id);
-            Image::read(file_get_contents('https://picsum.photos/800/600'))->save(storage_path() . '/app/groups/' . $group->id . '/cover.jpg')->cover(300, 200)->save(storage_path() . '/app/groups/' . $group->id . '/thumbnail.jpg');
 
             // add members to the group
             for ($j = 1; $j <= $faker->numberBetween(5, 20); $j++) {
@@ -134,10 +119,6 @@ class DatabaseSeeder extends Seeder
                     dd($calenderEvent->getErrors());
                 }
                 $calenderEvent->save();
-
-                // add a cover image to action
-                Storage::disk('local')->makeDirectory('groups/' . $calenderEvent->group->id . '/actions/' . $calenderEvent->id);
-                Image::read(file_get_contents('https://picsum.photos/800/600'))->save(storage_path() . '/app/groups/' . $calenderEvent->group->id . '/actions/' . $calenderEvent->id . '/cover.jpg');
 
                 $calenderEvent->tag($this->tags());
 
