@@ -52,9 +52,9 @@
         "willdurand/email-reply-parser": "^2.10",
         "zbateson/mail-mime-parser": "^3.0"
     },
-     "suggest": {
+    "suggest": {
         "ddeboer/imap": "^1.19"
-     },
+    },
     "require-dev": {
         "amirami/localizator": "^0.14.0@alpha",
         "barryvdh/laravel-debugbar": "^3.14",
@@ -62,7 +62,6 @@
         "larastan/larastan": "^3.2",
         "laravel/browser-kit-testing": "^7.2",
         "laravel-lang/common": "^6.7",
-        "mmo/faker-images": "^0.9.0",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.5",
         "phpunit/phpunit": "^11.4",
