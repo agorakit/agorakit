@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ce1b13147e22d4582202fc0d293cd6c2",
+    "content-hash": "7fbea4d86fbf9d2cfc0d54aeaa1a8547",
     "packages": [
         {
             "name": "balping/json-raw-encoder",
@@ -4152,78 +4152,6 @@
             ],
             "time": "2026-09-29T19:21:12+00:00",
             "published-time": "2026-09-29T19:21:44+00:00"
-        },
-        {
-            "name": "mpratt/embera",
-            "version": "2.0.42",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mpratt/Embera.git",
-                "reference": "afa728339c6f078c803c9277a5054ca241b3c469"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mpratt/Embera/zipball/afa728339c6f078c803c9277a5054ca241b3c469",
-                "reference": "afa728339c6f078c803c9277a5054ca241b3c469",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "php": ">=5.6"
-            },
-            "require-dev": {
-                "phpstan/phpstan": "^1.4",
-                "phpunit/phpunit": "^9.0||^10.0",
-                "symfony/yaml": "^2.1"
-            },
-            "suggest": {
-                "ext-curl": "Fetch data using curl instead of using file_get_contents"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Embera\\": "src/Embera"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michael Pratt",
-                    "email": "yo@michael-pratt.com",
-                    "homepage": "http://www.michael-pratt.com",
-                    "role": "Author/Developer"
-                }
-            ],
-            "description": "Oembed consumer library. Converts urls into their html embed code. Supports 150+ sites, such as Youtube, Twitter, vimeo, Instagram etc.",
-            "homepage": "https://github.com/mpratt/Embera",
-            "keywords": [
-                "Auto embed",
-                "Embed Text",
-                "Responsive Embeds",
-                "Url Embed",
-                "embed",
-                "instagram",
-                "oembed",
-                "twitter",
-                "vimeo",
-                "vine",
-                "youtube"
-            ],
-            "support": {
-                "issues": "https://github.com/mpratt/Embera/issues",
-                "source": "https://github.com/mpratt/Embera/tree/2.0.42"
-            },
-            "funding": [
-                {
-                    "url": "https://paypal.me/mtpratt",
-                    "type": "paypal"
-                }
-            ],
-            "time": "2025-01-04T06:07:59+00:00",
-            "published-time": "2025-01-04T06:08:22+00:00"
         },
         {
             "name": "nesbot/carbon",
