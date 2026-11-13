@@ -37,21 +37,21 @@ class GroupCalendarEventController extends Controller
                 }
             }
 
-            if ($request->get('type') == 'list') {
+            if ($request->input('type') == 'list') {
                 Auth::user()->setPreference('calendar', 'list');
                 $view = 'list';
             }
 
-            if ($request->get('type') == 'grid') {
+            if ($request->input('type') == 'grid') {
                 Auth::user()->setPreference('calendar', 'grid');
                 $view = 'grid';
             }
         } else {
-            if ($request->get('type') == 'list') {
+            if ($request->input('type') == 'list') {
                 $view = 'list';
             }
 
-            if ($request->get('type') == 'grid') {
+            if ($request->input('type') == 'grid') {
                 $view = 'grid';
             }
         }
@@ -88,8 +88,8 @@ class GroupCalendarEventController extends Controller
         if ($request->has('start') && $request->has('end')) {
             $events = $group->calendarevents()
                 ->with('user', 'group', 'tags')
-                ->where('start', '>', Carbon::parse($request->get('start'))->subMonth())
-                ->where('stop', '<', Carbon::parse($request->get('end'))->addMonth())
+                ->where('start', '>', Carbon::parse($request->input('start'))->subMonth())
+                ->where('stop', '<', Carbon::parse($request->input('end'))->addMonth())
                 ->orderBy('start', 'asc')->get();
         } else {
             $events = $group->calendarevents()->orderBy('start', 'asc')->get();
@@ -133,30 +133,30 @@ class GroupCalendarEventController extends Controller
 
         // preload the event to duplicate if present in url to allow easy duplication of an existing event
         if ($request->has('duplicate')) {
-            $event = CalendarEvent::findOrFail($request->get('duplicate'));
+            $event = CalendarEvent::findOrFail($request->input('duplicate'));
             $this->authorize('view', $event);
         } else {
             $event = new CalendarEvent();
 
-            if ($request->get('start')) {
-                $event->start = Carbon::parse($request->get('start'));
+            if ($request->input('start')) {
+                $event->start = Carbon::parse($request->input('start'));
             } else {
                 $event->start = Carbon::now();
             }
 
-            if ($request->get('stop')) {
-                $event->stop = Carbon::parse($request->get('stop'));
+            if ($request->input('stop')) {
+                $event->stop = Carbon::parse($request->input('stop'));
             }
 
             // handle the case where the event is exactly one (ore more) day duration : it's a full day event, remove one second
 
             if ($event->start->hour == 0 && $event->start->minute == 0 && $event->stop->hour == 0 && $event->stop->minute == 0) {
-                $event->stop = Carbon::parse($request->get('stop'))->subSecond();
+                $event->stop = Carbon::parse($request->input('stop'))->subSecond();
             }
         }
 
-        if ($request->get('title')) {
-            $event->name = $request->get('title');
+        if ($request->input('title')) {
+            $event->name = $request->input('title');
         }
 
         if ($request->has('location')) {
@@ -185,7 +185,7 @@ class GroupCalendarEventController extends Controller
     {
         // if no group is in the route, it means user choose the group using the dropdown
         if (!$group->exists) {
-            $group = Group::findOrFail($request->get('group'));
+            $group = Group::findOrFail($request->input('group'));
         }
 
         $this->authorize('create-calendarevent', $group);
@@ -204,14 +204,14 @@ class GroupCalendarEventController extends Controller
         }
 
         try {
-            if ($request->get('stop_date')) {
-                if ($request->get('stop_time')) {
+            if ($request->input('stop_date')) {
+                if ($request->input('stop_time')) {
                     $event->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('stop_time'));
                 } else { // asssume event will stop on stop_date and start_time
                     $event->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('start_time'));
                 }
             } else {
-                if ($request->get('stop_time')) { // asssume event will stop on start_date and stop_time
+                if ($request->input('stop_time')) { // asssume event will stop on start_date and stop_time
                     $event->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
                 } else { // asssume event has unknown duration and store start_date and start_time
                     $event->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('start_time'));
@@ -278,8 +278,8 @@ class GroupCalendarEventController extends Controller
         }
 
         // handle tags
-        if ($request->get('tags')) {
-            $event->tag($request->get('tags'));
+        if ($request->input('tags')) {
+            $event->tag($request->input('tags'));
         }
 
 
@@ -375,7 +375,7 @@ class GroupCalendarEventController extends Controller
 
         $event->start = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('start_time'));
 
-        if ($request->has('stop_date') && $request->get('stop_date') != '') {
+        if ($request->has('stop_date') && $request->input('stop_date') != '') {
             $event->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('stop_date') . ' ' . $request->input('stop_time'));
         } else {
             $event->stop = Carbon::createFromFormat('Y-m-d H:i', $request->input('start_date') . ' ' . $request->input('stop_time'));
@@ -423,8 +423,8 @@ class GroupCalendarEventController extends Controller
         }
 
         // handle tags
-        if ($request->get('tags')) {
-            $event->tag($request->get('tags'));
+        if ($request->input('tags')) {
+            $event->tag($request->input('tags'));
         } else {
             $event->detag();
         }

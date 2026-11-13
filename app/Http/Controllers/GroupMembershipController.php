@@ -96,7 +96,7 @@ class GroupMembershipController extends Controller
             // load or create membership for this group and user combination
             $membership = Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
             $membership->membership = Membership::MEMBER;
-            $membership->notification_interval = intervalToMinutes($request->get('notifications'));
+            $membership->notification_interval = intervalToMinutes($request->input('notifications'));
 
             // we prented the user has been already notified once, now. The first mail sent will be at the choosen interval from now on.
             $membership->notified_at = Carbon::now();
@@ -213,16 +213,16 @@ class GroupMembershipController extends Controller
             $this->authorize('manage-membership', $group);
 
             // handle the case an admin change his own level and is the only one admin of the group... yes it hapened...
-            if ($membership->isAdmin() && $group->admins->count() == 1 && $request->get('membership_level') < \App\Membership::ADMIN) {
+            if ($membership->isAdmin() && $group->admins->count() == 1 && $request->input('membership_level') < \App\Membership::ADMIN) {
                 flash('You cannot remove you as admin since you are the unique admin. Promote someone else as admin first.');
 
                 return redirect()->back();
             }
 
-            $membership->membership = $request->get('membership_level');
+            $membership->membership = $request->input('membership_level');
         }
 
-        $membership->notification_interval = intervalToMinutes($request->get('notifications'));
+        $membership->notification_interval = intervalToMinutes($request->input('notifications'));
         $membership->save();
 
         flash(trans('membership.settings_updated'));

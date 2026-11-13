@@ -28,11 +28,11 @@ class GroupFileController extends Controller
         $this->authorize('view-files', $group);
 
         // Validate query string, I feel it's better for sql injection prevention  :-)
-        if (!in_array($request->get('dir'), ['asc', 'desc', null])) {
+        if (!in_array($request->input('dir'), ['asc', 'desc', null])) {
             abort(404, 'invalid sort order');
         }
 
-        if (!in_array($request->get('sort'), ['created_at', 'name', 'filesize', null])) {
+        if (!in_array($request->input('sort'), ['created_at', 'name', 'filesize', null])) {
             abort(404, 'invalid sort type');
         }
 
@@ -43,9 +43,9 @@ class GroupFileController extends Controller
 
         // for the tag filter frop down
         $tags = $file->getTagsInUse();
-        $tag = $request->get('tag');
+        $tag = $request->input('tag');
 
-        $parent = $request->get('parent');
+        $parent = $request->input('parent');
 
 
 
@@ -77,7 +77,7 @@ class GroupFileController extends Controller
             ->with('user', 'group', 'tags')
             ->where('item_type', '<>', File::FOLDER)
             ->orderBy('status', 'desc')
-            ->orderBy($request->get('sort', 'created_at'), $request->get('dir', 'desc'))
+            ->orderBy($request->input('sort', 'created_at'), $request->input('dir', 'desc'))
             ->when($tag, function ($query) use ($tag) {
                 return $query->withAnyTags($tag);
             })
@@ -230,8 +230,8 @@ class GroupFileController extends Controller
                 $file->group()->associate($group);
                 $file->user()->associate(Auth::user());
 
-                if ($request->get('tags')) {
-                    $file->tag($request->get('tags'));
+                if ($request->input('tags')) {
+                    $file->tag($request->input('tags'));
                 }
 
 
@@ -287,8 +287,8 @@ class GroupFileController extends Controller
         }
 
         $file = new File();
-        $file->name = $request->get('title');
-        $file->path = $request->get('link');
+        $file->name = $request->input('title');
+        $file->path = $request->input('link');
         $file->item_type = File::LINK;
         // add group
         $file->group()->associate($group);
@@ -303,8 +303,8 @@ class GroupFileController extends Controller
 
         if ($file->save()) {
             // handle tags
-            if ($request->get('tags')) {
-                $file->tag($request->get('tags'));
+            if ($request->input('tags')) {
+                $file->tag($request->input('tags'));
             }
 
             // update activity timestamp on parent items
@@ -341,7 +341,7 @@ class GroupFileController extends Controller
         }
 
         $file = new File();
-        $file->name = $request->get('name');
+        $file->name = $request->input('name');
 
         $file->item_type = File::FOLDER;
         // add group
@@ -401,23 +401,23 @@ class GroupFileController extends Controller
     {
         $this->authorize('update', $file);
 
-        if ($request->get('tags')) {
-            $file->retag($request->get('tags'));
+        if ($request->input('tags')) {
+            $file->retag($request->input('tags'));
         } else {
             $file->detag();
         }
 
-        if ($request->get('name')) {
-            $file->name = $request->get('name');
+        if ($request->input('name')) {
+            $file->name = $request->input('name');
         }
 
         if ($request->has('parent')) {
             // handle null case (aka root)
-            if ($request->get('parent') == 'root') {
+            if ($request->input('parent') == 'root') {
                 $parent = null;
                 $file->setParent(null);
             } else {
-                $parent = File::find($request->get('parent'));
+                $parent = File::find($request->input('parent'));
                 $file->setParent($parent);
             }
         }

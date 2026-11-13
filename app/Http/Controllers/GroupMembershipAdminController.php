@@ -43,16 +43,16 @@ class GroupMembershipAdminController extends Controller
             $this->authorize('manage-membership', $membership->group);
 
             // handle the case an admin change his own level and is the only one admin of the group... yes it hapened...
-            if ($membership->isAdmin() && $membership->group->admins->count() == 1 && $request->get('membership_level') < \App\Membership::ADMIN) {
+            if ($membership->isAdmin() && $membership->group->admins->count() == 1 && $request->input('membership_level') < \App\Membership::ADMIN) {
                 flash('You cannot remove you as admin since you are the unique admin. Promote someone else as admin first.');
 
                 return redirect()->back();
             }
 
-            $membership->membership = $request->get('membership_level');
+            $membership->membership = $request->input('membership_level');
         }
 
-        $membership->notification_interval = intervalToMinutes($request->get('notifications'));
+        $membership->notification_interval = intervalToMinutes($request->input('notifications'));
         $membership->save();
 
         flash(trans('membership.settings_updated'));

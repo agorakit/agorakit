@@ -36,7 +36,7 @@ class GroupController extends Controller
         }
 
         if ($request->has('search')) {
-            $groups = $groups->search($request->get('search'));
+            $groups = $groups->search($request->input('search'));
         }
 
         $groups = $groups->paginate(20)->appends(request()->query());
@@ -57,7 +57,7 @@ class GroupController extends Controller
         }
 
         if ($request->has('search')) {
-            $groups = $groups->search($request->get('search'));
+            $groups = $groups->search($request->input('search'));
         }
 
         $groups = $groups->simplePaginate(20)->appends(request()->query());
@@ -212,8 +212,8 @@ class GroupController extends Controller
                 $group->location = $request->input('location');
             } catch (\Exception $e) {
                 return redirect()->route('groups.create', $group)
-                ->withErrors($e->getMessage() . '. Invalid location')
-                ->withInput();
+                    ->withErrors($e->getMessage() . '. Invalid location')
+                    ->withInput();
             }
             // Geocode
             if (!$group->geocode()) {
@@ -233,14 +233,14 @@ class GroupController extends Controller
 
         $group->user()->associate(Auth::user());
 
-        if ($request->get('tags')) {
-            $group->tag($request->get('tags'));
+        if ($request->input('tags')) {
+            $group->tag($request->input('tags'));
         } else {
             $group->detag();
         }
 
         // handle allowed tags
-        $allowed_tags = explode(',', $request->get('allowed_tags'));
+        $allowed_tags = explode(',', $request->input('allowed_tags'));
         $allowed_tags = array_map('trim', $allowed_tags);
         array_filter($allowed_tags, function ($value) {
             return $value !== '';
@@ -329,11 +329,11 @@ class GroupController extends Controller
                 $group->location = $request->input('location');
             } catch (\Exception $e) {
                 return redirect()->route('groups.create', $group)
-                ->withErrors($e->getMessage() . '. Invalid location')
-                ->withInput();
+                    ->withErrors($e->getMessage() . '. Invalid location')
+                    ->withInput();
             }
             if ($group->location <> $old_location) {
-              // Try to geocode
+                // Try to geocode
                 if (!$group->geocode()) {
                     flash(trans('messages.location_cannot_be_geocoded'));
                 } else {
@@ -344,14 +344,14 @@ class GroupController extends Controller
 
         $group->user()->associate(Auth::user());
 
-        if ($request->get('tags')) {
-            $group->retag($request->get('tags'));
+        if ($request->input('tags')) {
+            $group->retag($request->input('tags'));
         } else {
             $group->detag();
         }
 
         // handle allowed tags
-        $allowed_tags = explode(',', $request->get('allowed_tags'));
+        $allowed_tags = explode(',', $request->input('allowed_tags'));
         $allowed_tags = array_map('trim', $allowed_tags);
         array_filter($allowed_tags, function ($value) {
             return $value !== '';
@@ -454,7 +454,7 @@ class GroupController extends Controller
         $this->authorize('import', Group::class);
         if (!Auth::check()) {
             return redirect()->route('groups.index')
-              ->withErrors(trans('messages.authentication_error'));
+                ->withErrors(trans('messages.authentication_error'));
         }
         $user_id = Auth::user()->id;
 
@@ -467,7 +467,7 @@ class GroupController extends Controller
             $mimetype = $file->getMimeType();
             if (!str_ends_with($mimetype, 'zip') && !str_ends_with($mimetype, 'json')) {
                 return redirect()->route('groups.index')
-                 ->withErrors(trans('group.import_error'));
+                    ->withErrors(trans('group.import_error'));
             }
             if (str_ends_with($mimetype, 'json')) {
                 $path = $file->storeAs('groups/new', "groupimport-" . $user_id . "-" . Carbon::now()->format('Y-m-d_H-i-s') . ".json");
@@ -490,21 +490,21 @@ class GroupController extends Controller
         // Process the intermediate form
         if (!$request->has('user_id') || !$request->has('import_basename')) {
             return redirect()->route('groups.index')
-              ->withErrors(trans('group.import_error'));
+                ->withErrors(trans('group.import_error'));
         }
 
         // A few checks
-        if ($request->get('user_id') <> $user_id) {
+        if ($request->input('user_id') <> $user_id) {
             return redirect()->route('groups.index')
                 ->withErrors(trans('This action is unauthorized'));
         }
-        $basename = $request->get('import_basename');
+        $basename = $request->input('import_basename');
         // For added security, we import only freshly uploaded data
         $date_string = implode('-', array_slice(explode('-', pathinfo($basename)['filename']), 2));
         $dt = Carbon::createFromFormat('Y-m-d_H-i-s', $date_string);
         if ($dt->diffInHours(Carbon::now()) > 1) {
             return redirect()->route('groups.index')
-              ->withErrors(trans('A Timeout Occurred'));
+                ->withErrors(trans('A Timeout Occurred'));
         }
         $path = 'groups/new/' . $basename;
 

@@ -40,7 +40,7 @@ class GroupMassMembershipController extends Controller
         $this->authorize('manage-membership', $group);
 
         if ($request->has('users')) {
-            foreach ($request->get('users') as $user_id) {
+            foreach ($request->input('users') as $user_id) {
                 $user = \App\User::findOrFail($user_id);
                 // load or create membership for this group and user combination
                 $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $group->id]);

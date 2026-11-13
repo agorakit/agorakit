@@ -51,7 +51,7 @@ class UserController extends Controller
                 ->orderBy('created_at', 'desc');
 
             if ($request->has('search')) {
-                $users = $users->search($request->get('search'));
+                $users = $users->search($request->input('search'));
             }
 
 
@@ -204,35 +204,35 @@ class UserController extends Controller
 
 
             // handle tags
-            if ($request->get('tags')) {
-                $user->retag($request->get('tags'));
+            if ($request->input('tags')) {
+                $user->retag($request->input('tags'));
             } else {
                 $user->detag();
             }
 
             // handle the case the edit form is used to make a user an admin (or remove admin right)
             if (Auth::user()->isAdmin()) {
-                if ($request->get('is_admin') == 'yes') {
+                if ($request->input('is_admin') == 'yes') {
                     $user->admin = 1;
                 }
 
-                if ($request->get('is_admin') == 'no') {
+                if ($request->input('is_admin') == 'no') {
                     $user->admin = 0;
                 }
 
-                if ($request->get('is_verified') == 'yes') {
+                if ($request->input('is_verified') == 'yes') {
                     $user->verified = 1;
                 }
 
-                if ($request->get('is_verified') == 'no') {
+                if ($request->input('is_verified') == 'no') {
                     $user->verified = 0;
                 }
 
-                if ($request->get('is_user_banned') == 'yes') {
+                if ($request->input('is_user_banned') == 'yes') {
                     $user->is_banned = 1;
                 }
 
-                if ($request->get('is_user_banned') == 'no') {
+                if ($request->input('is_user_banned') == 'no') {
                     $user->is_banned = 0;
                 }
             }

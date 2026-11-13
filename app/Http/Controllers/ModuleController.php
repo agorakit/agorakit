@@ -12,17 +12,15 @@ use Illuminate\Http\Request;
  */
 class ModuleController extends Controller
 {
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     public function show(Request $request, Group $group)
     {
         $this->authorize('view', $group);
         if ($group->getSetting('module_custom_name')) {
             return view('groups.custom')
-            ->with('group', $group)
-            ->with('tab', 'custom');
+                ->with('group', $group)
+                ->with('tab', 'custom');
         } else {
             abort(404, 'No custom module for this group');
         }
@@ -33,8 +31,8 @@ class ModuleController extends Controller
         $this->authorize('administer', $group);
 
         return view('groups.modules')
-        ->with('group', $group)
-        ->with('tab', 'admin');
+            ->with('group', $group)
+            ->with('tab', 'admin');
     }
 
     public function update(Request $request, Group $group)
@@ -72,9 +70,9 @@ class ModuleController extends Controller
         }
 
         // handle custom module (iframe or similar system)
-        $group->setSetting('module_custom_icon', $request->get('module_custom_icon'));
-        $group->setSetting('module_custom_name', $request->get('module_custom_name'));
-        $group->setSetting('module_custom_html', $request->get('module_custom_html'));
+        $group->setSetting('module_custom_icon', $request->input('module_custom_icon'));
+        $group->setSetting('module_custom_name', $request->input('module_custom_name'));
+        $group->setSetting('module_custom_html', $request->input('module_custom_html'));
 
         flash(trans('messages.ressource_updated_successfully'));
 

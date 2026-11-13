@@ -54,8 +54,8 @@ class CalendarEventController extends Controller
         // load of events between start and stop provided by calendar js
         if ($request->has('start') && $request->has('end')) {
             $events = \App\CalendarEvent::with('group', 'attending')
-                ->where('start', '>', Carbon::parse($request->get('start')))
-                ->where('stop', '<', Carbon::parse($request->get('end')))
+                ->where('start', '>', Carbon::parse($request->input('start')))
+                ->where('stop', '<', Carbon::parse($request->input('end')))
                 ->whereIn('group_id', $groups)
                 ->orderBy('start', 'asc');
         } else { // return current month

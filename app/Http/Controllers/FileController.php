@@ -25,7 +25,7 @@ class FileController extends Controller
     public function index(Request $request)
     {
         $tags = File::allTagModels()->sortBy('name');
-        $tag = $request->get('tag');
+        $tag = $request->input('tag');
 
         $groups = Context::getVisibleGroups();
 

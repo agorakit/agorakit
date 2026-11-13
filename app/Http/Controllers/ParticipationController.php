@@ -30,13 +30,13 @@ class ParticipationController extends Controller
     {
         $this->authorize('participate', $event);
 
-        if($event->isRegistrationClosed(Carbon::now())) {
+        if ($event->isRegistrationClosed(Carbon::now())) {
             abort(404, trans('messages.registration_closed'));
         }
 
         $rsvp = Participation::firstOrNew(['user_id' => $request->user()->id, 'calendar_event_id' => $event->id]);
-        $rsvp->notification = $request->get('notification');
-        $rsvp->status = $request->get('participation');
+        $rsvp->notification = $request->input('notification');
+        $rsvp->status = $request->input('participation');
         $rsvp->save();
         flash(trans('messages.ressource_updated_successfully'));
 
@@ -50,12 +50,12 @@ class ParticipationController extends Controller
     {
         $this->authorize('participate', $event);
 
-        if($event->isRegistrationClosed(Carbon::now())) {
+        if ($event->isRegistrationClosed(Carbon::now())) {
             abort(400, trans('messages.registration_closed'));
         }
 
         $rsvp = Participation::firstOrNew(['user_id' => $request->user()->id, 'calendar_event_id' => $event->id]);
-        //$rsvp->notification = $request->get('notification');
+        //$rsvp->notification = $request->input('notification');
 
         if ($status == 'yes') {
             $rsvp->status = Participation::PARTICIPATE;
