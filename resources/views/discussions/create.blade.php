@@ -25,15 +25,16 @@
 
         {!! Form::close() !!}
     @else
-        {!! Form::open(['action' => ['GroupDiscussionController@store', $group], 'files' => true]) !!}
+        <form action="{{ route('groups.discussions.store', $group) }}" enctype="multipart/form-data" method="post">
+            @csrf
 
-        @include('discussions.form')
+            @include('discussions.form')
 
-        <div class="form-group">
-            {!! Form::submit(trans('messages.create'), ['class' => 'btn btn-primary']) !!}
-        </div>
+            <div class="form-group">
+                <input class="btn btn-primary" name="{{ trans('messages.create') }}" type="submit" />
+            </div>
 
-        {!! Form::close() !!}
+        </form>
     @endif
 
 @endsection
