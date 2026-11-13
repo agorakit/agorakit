@@ -4,7 +4,6 @@ use Carbon\Carbon;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 
-use App\Setting;
 use App\Participation;
 
 class DatabaseSeeder extends Seeder
@@ -15,8 +14,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-
-        $faker->addProvider(new \Mmo\Faker\PicsumProvider($faker));
 
         // set intro text
         setting()->set('homepage_presentation', $this->richtext());
