@@ -134,7 +134,7 @@ class File extends Model
      * Never set parent_id directly, use this function instead
      * Use setParent(null) to move to root
      */
-    public function setParent(File $parent = null)
+    public function setParent(?File $parent = null)
     {
         // handle case where parent is false : we move the file to root
         if (is_null($parent)) {

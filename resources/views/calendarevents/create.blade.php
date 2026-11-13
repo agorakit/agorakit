@@ -18,8 +18,8 @@
 
         @include('calendarevents.form')
     @else
-        {!! Form::model($event, ['action' => ['GroupCalendarEventController@store', $group], 'files' => true]) !!}
-        @include('calendarevents.form')
+        <form action="{{ route('groups.calendarevents.store', $group) }}" enctype="multipart/form-data" method="post">
+            @include('calendarevents.form')
     @endif
 
     <div class="form-group">
@@ -30,6 +30,6 @@
         {{ Form::hidden('context', Context::get()) }}
     @endunless
 
-    {!! Form::close() !!}
+    </form>
 
 @endsection

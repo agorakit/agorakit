@@ -1,7 +1,7 @@
 name: agorakit
 type: laravel
 docroot: public
-php_version: "8.4"
+php_version: "8.3"
 webserver_type: nginx-fpm
 xdebug_enabled: false
 additional_hostnames: []

@@ -170,7 +170,7 @@ class GroupMembershipController extends Controller
     /**
      * Show a settings screen for a specific group. Allows a user to join, leave, set subscribe settings.
      */
-    public function edit(Request $request, Group $group, Membership $membership = null)
+    public function edit(Request $request, Group $group, ?Membership $membership = null)
     {
         // We edit membership either for the current user or for another user if we are group admin
         // If no membership in the route, we load the membership for the current logged in user
@@ -194,7 +194,7 @@ class GroupMembershipController extends Controller
     /**
      * Store new settings from the preferencesForm.
      */
-    public function update(Request $request, Group $group, Membership $membership = null)
+    public function update(Request $request, Group $group, ?Membership $membership = null)
     {
 
         // load membership for this group and the current user combination

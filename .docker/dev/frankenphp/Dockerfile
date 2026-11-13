@@ -1,4 +1,4 @@
-FROM dunglas/frankenphp:php8.2 AS frankenphp
+FROM dunglas/frankenphp:php8.3 AS frankenphp
 
 # Configure PHP
 RUN cp $PHP_INI_DIR/php.ini-development $PHP_INI_DIR/php.ini
