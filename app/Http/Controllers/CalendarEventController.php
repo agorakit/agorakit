@@ -36,9 +36,6 @@ class CalendarEventController extends Controller
                 ->orderBy('start');
 
 
-            if (Auth::user()->getPreference('show', 'joined') == 'all') {
-                $events->orWhere('visibility', 10);
-            }
 
             $events = $events->paginate(20);
 
