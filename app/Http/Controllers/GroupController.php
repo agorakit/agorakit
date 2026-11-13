@@ -239,13 +239,6 @@ class GroupController extends Controller
             $group->detag();
         }
 
-        // handle allowed tags
-        $allowed_tags = explode(',', $request->input('allowed_tags'));
-        $allowed_tags = array_map('trim', $allowed_tags);
-        array_filter($allowed_tags, function ($value) {
-            return $value !== '';
-        });
-        $group->setSetting('allowed_tags', $allowed_tags);
 
         // handle cover
         if ($request->hasFile('cover')) {
@@ -350,13 +343,6 @@ class GroupController extends Controller
             $group->detag();
         }
 
-        // handle allowed tags
-        $allowed_tags = explode(',', $request->input('allowed_tags'));
-        $allowed_tags = array_map('trim', $allowed_tags);
-        array_filter($allowed_tags, function ($value) {
-            return $value !== '';
-        });
-        $group->setSetting('allowed_tags', $allowed_tags);
 
         // handle navbar pinning
         if (Auth::user()->isAdmin()) {
