@@ -111,7 +111,7 @@ class UserTest extends BaseTest
             ->type('13:00', 'stop_time')
             ->press('Create')
             ->seeInDatabase('calendar_events', ['name' => 'Test event'])
-            ->see(trans('messages.ressource_created_successfully'));
+            ->see(trans('Resource created successfully'));
     }
 
     public function testPrivateGroupCreation()
@@ -168,7 +168,7 @@ class UserTest extends BaseTest
 
         $this->actingAs($user)
             ->visit('/groups/' . $group->id . '/join')
-            ->see(trans('membership.apply_for_group'));
+            ->see(trans('Apply for the group'));
     }
 
     public function testNewbieCanApplyToPrivateGroup()
@@ -179,8 +179,8 @@ class UserTest extends BaseTest
 
         $this->actingAs($user)
             ->visit('/groups/' . $group->id . '/join')
-            ->press(trans('membership.apply'))
-            ->see(trans('membership.application_stored'));
+            ->press(trans('Apply'))
+            ->see(trans('Your application to this group has been stored'));
     }
 
     public function testAdminCanConfirmCandidateToPrivateGroup()
@@ -193,16 +193,16 @@ class UserTest extends BaseTest
 
         $this->actingAs($user)
             ->visit('groups/' . $group->id . '/users')
-            //->click(trans('messages.confirm_user'))
-            ->see(trans('membership.candidate'));
+            //->click(trans('Confirm user'))
+            ->see(trans('candidate'));
 
         $membership = \App\Membership::where('user_id', $newbie->id)->where('group_id', $group->id)->first();
 
         $this->actingAs($user)
             ->visit(route('groups.membership.edit', [$group, $membership]))
             ->select(\App\Membership::MEMBER, 'membership_level')
-            ->press(trans('messages.save'))
-            ->see(trans('membership.settings_updated'));
+            ->press(trans('Save'))
+            ->see(trans('Settings updated'));
 
         $this->seeInDatabase('membership', ['user_id' => $newbie->id, 'membership' => '20']);
     }
@@ -306,8 +306,8 @@ class UserTest extends BaseTest
             ->uncheck('member-create-discussion')
             ->uncheck('member-create-file')
             ->uncheck('member-create-calendarevent')
-            ->press(trans('messages.save'))
-            ->see(trans('messages.ressource_updated_successfully'));
+            ->press(trans('Save'))
+            ->see(trans('Resource updated successfully'));
     }
 
     public function testNewbieCantCreateDiscussionAnymore()
@@ -335,8 +335,8 @@ class UserTest extends BaseTest
             ->visit('users/newbie/edit')
             ->see('Modify')
             ->select('yes', 'is_user_banned')
-            ->press(trans('messages.save'))
-            ->see(trans('messages.ressource_updated_successfully'));
+            ->press(trans('Save'))
+            ->see(trans('Resource updated successfully'));
 
         $this->seeInDatabase('users', ['email' => 'newbie@agorakit.local', 'is_banned' => 1]);
     }
@@ -347,7 +347,7 @@ class UserTest extends BaseTest
         $this->visit('/login')
             ->type('newbie', 'login')
             ->type('123456789', 'password')
-            ->press(trans('messages.login'))
-            ->see(trans('messages.you_are_banned'));
+            ->press(trans('Login'))
+            ->see(trans('Your user acount has been banned'));
     }
 }
