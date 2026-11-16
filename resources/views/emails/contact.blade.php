@@ -1,9 +1,9 @@
 @component('mail::message')
 
-<strong>{{trans('messages.hello')}} {{$to_user->name}},</strong>
+<strong>{{trans('Hello')}} {{$to_user->name}},</strong>
 
 <p>
-<a  href="{{route('users.show', $from_user)}}">{{$from_user->name}}</a> {{trans('messages.sent_you_a_message')}} :
+<a  href="{{route('users.show', $from_user)}}">{{$from_user->name}}</a> {{trans('sent you a message')}} :
 </p>
 
 <p>
@@ -11,9 +11,9 @@
 </p>
 
 @component('mail::button', ['url' => route('users.contactform', $from_user)])
-{{trans('messages.reply')}}
+{{trans('Reply')}}
 @endcomponent
-<small>{{trans('messages.dont_reply_to_this_email')}}</small>
+<small>{{trans('Don\'t reply to this email, use the reply button(s) instead')}}</small>
 
 
 @endcomponent

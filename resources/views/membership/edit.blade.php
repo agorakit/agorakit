@@ -3,26 +3,26 @@
 @section('content')
     {!! Form::open(['action' => ['GroupMembershipController@update', $group, $membership]]) !!}
 
-    <h1>{{ trans('messages.notifications_interval') }}</h1>
+    <h1>{{ trans('Notifications') }}</h1>
     <div class="help">
-        <strong>{{ trans('membership.settings_how_does_it_works') }}</strong>
+        <strong>{{ trans('How does it work?') }}</strong>
         <p>
-            {{ trans('membership.settings_intro') }}
+            {{ trans('Here you can choose if you want to receive news from this group by email.') }}
         </p>
     </div>
 
     <div class="form-group">
-        {!! Form::label('notifications', trans('membership.when_to_receive_notifications')) !!}
+        {!! Form::label('notifications', trans('How often do you want to receive notifications by email?')) !!}
         {!! Form::select(
             'notifications',
             [
-                'instantly' => trans('membership.instantly'),
-                'hourly' => trans('membership.everyhour'),
-                'daily' => trans('membership.everyday'),
-                'weekly' => trans('membership.everyweek'),
-                'biweekly' => trans('membership.everytwoweek'),
-                'monthly' => trans('membership.everymonth'),
-                'never' => trans('membership.never'),
+                'instantly' => trans('As soon as possible'),
+                'hourly' => trans('Every hour'),
+                'daily' => trans('Every day'),
+                'weekly' => trans('Every week'),
+                'biweekly' => trans('Every two weeks'),
+                'monthly' => trans('Every month'),
+                'never' => trans('Never'),
             ],
             $interval,
             ['class' => 'form-control'],
@@ -32,12 +32,12 @@
     <div class="mt-5 d-flex justify-content-between align-items-center">
 
         <div class="form-group">
-            {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-primary']) !!}
+            {!! Form::submit(trans('Save'), ['class' => 'btn btn-primary']) !!}
         </div>
 
         <div>
             <a href="{{ action('GroupMembershipController@destroyConfirm', $group) }}">
-                {{ trans('membership.if_you_want_to_leave_this_group') }}
+                {{ trans('If you want to leave this group') }}
             </a>
         </div>
     </div>

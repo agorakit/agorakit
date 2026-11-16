@@ -5,14 +5,14 @@
     <div class="d-md-flex justify-content-between mb-3">
 
         <h1><a  href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i>
-            {{ trans('messages.my_groups') }}</h1>
+            {{ trans('My groups') }}</h1>
 
 
         <form class="form-inline" role="search" method="GET" action="{{ route('groups.index.my') }}" up-autosubmit
             up-watch-delay="500" up-target=".groups">
             <div class="input-group">
                 <input value="{{ Request::get('search') }}" class="form-control" type="text" name="search"
-                    placeholder="{{ __('Filter') }}..." aria-label="Search">
+                    placeholder="{{ trans('Filter') }}..." aria-label="Search">
 
                 <div class="input-group-append">
                     <button class="btn btn-secondary" type="submit"><span class="fa fa-search"></span></button>
@@ -33,7 +33,7 @@
         </div>
     @else
         <div class="alert alert-info" role="alert">
-            {{ trans('messages.nothing_yet') }}
+            {{ trans('There is nothing here...yet!') }}
         </div>
     @endif
 </div>

@@ -9,7 +9,7 @@
             <path d="M9.5 15.25a3.5 3.5 0 0 1 5 0" />
         </svg>
     </div>
-    <p class="empty-title">{{ trans('messages.nothing_yet') }}</p>
+    <p class="empty-title">{{ trans('There is nothing here...yet!') }}</p>
     <p class="empty-subtitle text-muted">
         
     </p>

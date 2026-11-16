@@ -16,7 +16,7 @@
       @forelse( $tags as $tag )
         @include('tags.tag')
       @empty
-        {{trans('messages.nothing_yet')}}
+        {{trans('There is nothing here...yet!')}}
       @endforelse
   </div>
 

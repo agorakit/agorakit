@@ -36,7 +36,7 @@
                                 <a class="dropdown-item"
                                     href="{{ action('CommentController@edit', [$comment->discussion->group, $comment->discussion, $comment]) }}">
                                     <i class="fa fa-pencil me-2"></i>
-                                    {{ trans('messages.edit') }}
+                                    {{ trans('Edit') }}
                                 </a>
                             @endcan
 
@@ -45,12 +45,12 @@
                                     href="{{ action('CommentController@destroyConfirm', [$comment->discussion->group, $comment->discussion, $comment]) }}"
                                     up-layer="new">
                                     <i class="fa fa-trash me-2"></i>
-                                    {{ trans('messages.delete') }}
+                                    {{ trans('Delete') }}
                                 </a>
                             @endcan
                             <a class="dropdown-item"
                                 href="{{ action('CommentController@history', [$comment->discussion->group, $comment->discussion, $comment]) }}">
-                                <i class="fa fa-history me-2"></i> {{ trans('messages.show_history') }}</a>
+                                <i class="fa fa-history me-2"></i> {{ trans('Show history') }}</a>
                         </div>
                     </div>
                 @endcan

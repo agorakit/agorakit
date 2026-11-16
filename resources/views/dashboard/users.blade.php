@@ -5,7 +5,7 @@
         <form action="{{ route('users') }}" class="form-inline" method="GET" role="search" up-autosubmit up-target=".users"
             up-watch-delay="500">
             <div class="input-group">
-                <input aria-label="Search" class="form-control" name="search" placeholder="{{ __('Filter') }}..."
+                <input aria-label="Search" class="form-control" name="search" placeholder="{{ trans('Filter') }}..."
                     type="text" value="{{ Request::get('search') }}">
 
                 <button class="btn btn-secondary" type="submit"><span class="fa fa-search"></span></button>
@@ -22,7 +22,7 @@
             @endforeach
             {!! $users->render() !!}
         @else
-            {{ trans('messages.nothing_yet') }}
+            {{ trans('There is nothing here...yet!') }}
         @endif
     </div>
 

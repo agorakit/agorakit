@@ -4,7 +4,7 @@
     <div class="d-flex flex-wrap gap-2 justify-content-between">
         <div>
             <a class="btn btn-primary" href="{{ route('discussions.create') }}">
-                {{ trans('messages.create_discussion') }}
+                {{ trans('Start a new discussion') }}
             </a>
         </div>
 
@@ -15,7 +15,7 @@
         @forelse($discussions as $discussion)
             @include('discussions.discussion')
         @empty
-            {{ trans('messages.nothing_yet') }}
+            {{ trans('There is nothing here...yet!') }}
         @endforelse
         {!! $discussions->render() !!}
     </div>

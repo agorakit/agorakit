@@ -9,14 +9,14 @@
         @can('update', $file)
         <a class="dropdown-item" href="{{ route('groups.files.edit', [$file->group, $file]) }}">
             <i class="fa fa-pencil me-2"></i>
-            {{trans('messages.edit')}}
+            {{trans('Edit')}}
         </a>
         @endcan
 
         @can('delete', $file)
         <a class="dropdown-item" href="{{ route('groups.files.deleteconfirm', [$file->group, $file]) }}">
             <i class="fa fa-trash me-2"></i>
-            {{trans('messages.delete')}}
+            {{trans('Delete')}}
         </a>
         @endcan
 
@@ -25,9 +25,9 @@
             href="{{ route('groups.files.pin', [$file->group, $file]) }}">
             <i class="fa fa-thumbtack me-2"></i>
             @if($file->isPinned())
-            {{trans('messages.unpin')}}
+            {{trans('Unpin')}}
             @else
-            {{trans('messages.pin')}}
+            {{trans('Pin')}}
             @endif
         </a>
         @endcan
@@ -37,9 +37,9 @@
             href="{{ route('groups.files.archive', [$file->group, $file]) }}">
             <i class="fa fa-archive me-2"></i>
             @if($file->isArchived())
-            {{trans('messages.unarchive')}}
+            {{trans('Unarchive')}}
             @else
-            {{trans('messages.archive')}}
+            {{trans('Archive')}}
             @endif
         </a>
         @endcan

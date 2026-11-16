@@ -4,14 +4,14 @@
     <div class="d-flex gap-2 flex-wrap mb-2">
         @can('invite', $group)
             <a class="btn btn-primary" href="{{ action('InviteController@invite', $group) }}">
-                {{ trans('membership.invite_by_email') }}
+                {{ trans('Invite people by email') }}
             </a>
         @endcan
 
         @can('manage-membership', $group)
             <div>
                 <a class="btn btn-secondary" href="{{ action('GroupMassMembershipController@create', $group) }}">
-                    {{ trans('membership.directly_add_users_button') }}
+                    {{ trans('Directly add users') }}
                 </a>
             </div>
         @endcan
@@ -21,14 +21,14 @@
         <table class="table data-table table-striped" data-order='[[ 3, "desc" ], [ 0, "asc" ]]' style="width: 100%">
             <thead class="thead-dark" style="width: 100%">
                 <tr>
-                    <th data-priority="1">{{ trans('messages.name') }}</th>
-                    <th class="min-desktop" data-priority="3">{{ trans('messages.member_since') }}</th>
-                    <th class="min-desktop" data-priority="4">{{ trans('messages.last_activity') }}</th>
-                    <th class="min-tablet" data-priority="2">{{ trans('messages.status') }}</th>
+                    <th data-priority="1">{{ trans('Name') }}</th>
+                    <th class="min-desktop" data-priority="3">{{ trans('Member since') }}</th>
+                    <th class="min-desktop" data-priority="4">{{ trans('Last activity') }}</th>
+                    <th class="min-tablet" data-priority="2">{{ trans('Status') }}</th>
 
                     @can('manage-membership', $group)
-                        <th class="min-tablet-l" data-priority="2">{{ trans('messages.email') }}</th>
-                        <th class="min-tablet-l" data-priority="2">{{ trans('messages.notifications_interval') }}</th>
+                        <th class="min-tablet-l" data-priority="2">{{ trans('Email') }}</th>
+                        <th class="min-tablet-l" data-priority="2">{{ trans('Notifications') }}</th>
                         <th data-priority="1" style="min-width: 2rem"></th>
                     @endcan
 
@@ -60,44 +60,44 @@
 
                             @if ($membership->membership == \App\Membership::ADMIN)
                                 <span class="tag text-bg-warning " title="@lang('This member is admin of the group and manages it')">
-                                    {{ trans('membership.admin') }}
+                                    {{ trans('administrator') }}
                                 </span>
                             @endif
                             @if ($membership->membership == \App\Membership::MEMBER)
                                 <span class="tag text-bg-primary" title="@lang('Regular member of the group')">
-                                    {{ trans('membership.member') }}
+                                    {{ trans('member') }}
                                 </span>
                             @endif
                             @if ($membership->membership == \App\Membership::CANDIDATE)
                                 <span class="tag text-bg-secondary" title="@lang('This user asked to be part of the group but has not yet been accepted')">
-                                    {{ trans('membership.candidate') }}
+                                    {{ trans('candidate') }}
                                 </span>
                             @endif
                             @if ($membership->membership == \App\Membership::INVITED)
                                 <span class="tag text-bg-success" title="@lang('This user has been invited to the group but did not accept yet')">
-                                    {{ trans('membership.invited') }}
+                                    {{ trans('invited') }}
                                 </span>
                             @endif
 
                             @if ($membership->membership == \App\Membership::DECLINED)
                                 <span class="tag text-bg-dark " title="@lang('This member declined the invitagion the group')">
-                                    {{ trans('membership.declined') }}
+                                    {{ trans('declined') }}
                                 </span>
                             @endif
 
                             @if ($membership->membership == \App\Membership::UNREGISTERED)
                                 <span class="tag text-bg-dark" title="@lang('This member left the group')">
-                                    {{ trans('membership.unregistered') }}
+                                    {{ trans('unregistered') }}
                                 </span>
                             @endif
                             @if ($membership->membership == \App\Membership::REMOVED)
                                 <span class="tag text-bg-dark" title="@lang('This member has been removed from the group')">
-                                    {{ trans('membership.removed') }}
+                                    {{ trans('removed') }}
                                 </span>
                             @endif
                             @if ($membership->membership == \App\Membership::BLACKLISTED)
                                 <span class="tag text-bg-dark" title="@lang('This member has been blacklisted')">
-                                    {{ trans('membership.blacklisted') }}
+                                    {{ trans('blacklisted') }}
                                 </span>
                             @endif
 

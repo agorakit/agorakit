@@ -8,7 +8,7 @@
     @include('comments.form')
 
     <div class="form-group mt-4">
-        {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-primary']) !!}
+        {!! Form::submit(trans('Save'), ['class' => 'btn btn-primary']) !!}
     </div>
 
     {!! Form::close() !!}

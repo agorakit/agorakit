@@ -4,12 +4,12 @@
     @guest
         <div class="d-flex gap-2 flex-wrap justify-content-end mb-4">
             <a class="btn btn-primary" href="{{ url('login') }}" up-layer="new">
-                {{ trans('messages.login') }}
+                {{ trans('Login') }}
             </a>
 
             @can('create', App\User::class)
                 <a class="btn btn-primary" href="{{ url('register') }}" up-layer="new">
-                    {{ trans('messages.register') }}
+                    {{ trans('Register') }}
                 </a>
             @endcan
         </div>

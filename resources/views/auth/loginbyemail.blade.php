@@ -12,7 +12,7 @@
 		@honeypot
 
 		<div class="form-group">
-			<label>{{ __('Just enter your email :') }}</label>
+			<label>{{ trans('Just enter your email :') }}</label>
 			<div>
 				<input type="email" name="email" required class="form-control" @if (isset($email)) value="{{$email}}"@endif>
 			</div>

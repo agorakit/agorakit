@@ -1,10 +1,10 @@
 @extends('app')
 
 @section('content')
-    <h1 class="mb-3">{{ trans('group.allowed_tags_title') }}</h1>
+    <h1 class="mb-3">{{ trans('Manage tags on the content of this group') }}</h1>
 
     <div class="alert alert-primary">
-        {{ trans('group.allowed_tags_help') }}
+        {{ trans('If you want to limit the available tags to classify content in this group, enter the tags in the box below. If you want to allow any tag, leave the box empty.') }}
     </div>
 
     {!! Form::open(['action' => ['GroupTagController@update', $group]]) !!}
@@ -14,7 +14,7 @@
     @if ($tags->count() > 0)
         <div class="small-help">
             <i class="fas fa-info-circle"></i>
-            {{ trans('messages.group_tags_help') }} :
+            {{ trans('For your information, here are all the tags in use in this group') }} :
             @foreach ($tags as $tag)
                 {{ $tag->name }},
             @endforeach
@@ -22,7 +22,7 @@
     @endif
 
     <div class="form-group mt-4">
-        {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-primary']) !!}
+        {!! Form::submit(trans('Save'), ['class' => 'btn btn-primary']) !!}
     </div>
 
     {!! Form::close() !!}

@@ -13,7 +13,7 @@
                 <a class="btn btn-primary" href="{{ route('groups.files.create', ['group' => $group, 'parent' => $parent]) }}"
                     up-layer="new">
                     <i class="fa fa-file me-2"></i>
-                    {{ trans('messages.create_file_button') }}
+                    {{ trans('Upload file') }}
                 </a>
             @endcan
 
@@ -21,7 +21,7 @@
                 <a class="btn btn-primary" href="{{ route('groups.files.createlink', ['group' => $group, 'parent' => $parent]) }}"
                     up-layer="new">
                     <i class="fa fa-link me-2"></i>
-                    {{ trans('messages.create_link_button') }}
+                    {{ trans('Create Link') }}
                 </a>
             @endcan
 
@@ -29,7 +29,7 @@
                 <a class="btn btn-primary" href="{{ route('groups.files.createfolder', ['group' => $group, 'parent' => $parent]) }}"
                     up-layer="new">
                     <i class="fa fa-folder me-2"></i>
-                    {{ trans('messages.create_folder_button') }}
+                    {{ trans('Create a folder') }}
                 </a>
             @endcan
 
@@ -42,7 +42,7 @@
 
             <a href="{{ route('groups.files.index', $group) }}" up-target=".files" up-history=true>
                 <i class="fa fa-folder-open-o"></i>
-                <span class="">{{ trans('messages.root') }}</span>
+                <span class="">{{ trans('Root') }}</span>
             </a>
 
             @if ($breadcrumb)

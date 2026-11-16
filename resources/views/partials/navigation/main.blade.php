@@ -28,7 +28,7 @@
             <li class="nav-item d-lg-none d-xl-inline">
                 <form action="{{ url('search') }}" class="d-flex" method="get" role="search">
                     <input aria-label="Search" class="form-control me-2 bg-light text-dark" name="query"
-                        placeholder="{{ trans('messages.search') }}" type="search" value="{{ request()->get('query') }}" />
+                        placeholder="{{ trans('Search') }}" type="search" value="{{ request()->get('query') }}" />
                 </form>
             </li>
 
@@ -37,33 +37,33 @@
                 <div class="nav-item dropdown">
                     <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button">
                         <i class="fas fa-server d-inline d-sm-none"></i> <span
-                            class="d-sm-inline d-none">{{ trans('messages.server_administration') }}</span>
+                            class="d-sm-inline d-none">{{ trans('Server administration') }}</span>
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-end" role="menu">
 
                         <a class="dropdown-item" href="{{ url('/admin/settings') }}">
-                            <i class="fa fa-cog me-2"></i> {{ trans('messages.settings') }}
+                            <i class="fa fa-cog me-2"></i> {{ trans('Settings') }}
                         </a>
 
                         <a class="dropdown-item" href="{{ url('/admin/user') }}">
-                            <i class="fa fa-users me-2"></i> {{ trans('messages.users') }}
+                            <i class="fa fa-users me-2"></i> {{ trans('Users') }}
                         </a>
 
                         <a class="dropdown-item" href="{{ url('/admin/groupadmins') }}">
-                            <i class="fa fa-users me-2"></i> {{ trans('messages.group_admins') }}
+                            <i class="fa fa-users me-2"></i> {{ trans('Group admins') }}
                         </a>
 
                         <a class="dropdown-item" href="{{ url('/admin/undo') }}">
-                            <i class="fa fa-trash me-2"></i> {{ trans('messages.recover_content') }}
+                            <i class="fa fa-trash me-2"></i> {{ trans('Recover deleted content') }}
                         </a>
 
                         <a class="dropdown-item" href="{{ action('Admin\InsightsController@index') }}" up-follow="false">
-                            <i class="fa fa-line-chart me-2"></i> {{ trans('messages.insights') }}
+                            <i class="fa fa-line-chart me-2"></i> {{ trans('Insights') }}
                         </a>
 
                         <a class="dropdown-item" href="{{ url('/admin/logs') }}" up-follow="false">
-                            <i class="fa fa-keyboard-o me-2"></i> {{ trans('messages.logs') }}
+                            <i class="fa fa-keyboard-o me-2"></i> {{ trans('Logs') }}
                         </a>
                     </div>
                 </div>
@@ -77,14 +77,14 @@
         @guest
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('login') }}" up-layer="new">
-                    {{ trans('messages.login') }}
+                    {{ trans('Login') }}
                 </a>
             </li>
 
             @can('create', App\User::class)
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('register') }}" up-layer="new">
-                        {{ trans('messages.register') }}
+                        {{ trans('Register') }}
                     </a>
                 </li>
             @endcan

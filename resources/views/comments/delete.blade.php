@@ -1,7 +1,7 @@
 @extends('dialog')
 @section('content')
 
-  <h1>{{trans('messages.delete_confirm_title')}}</h1>
+  <h1>{{trans('Are you sure you want to delete?')}}</h1>
 
   <p>{{strip_tags($comment->body)}}</p>
 
@@ -9,7 +9,7 @@
 
 
   <div class="mt-5 d-flex justify-content-between align-items-center">
-    {!! Form::submit(trans('messages.delete_confirm_button'), ['class' => 'btn btn-danger']) !!}
+    {!! Form::submit(trans('Delete'), ['class' => 'btn btn-danger']) !!}
   </div>
 
   {!! Form::close() !!}

@@ -1,12 +1,12 @@
 @extends('app')
 
 @section('content')
-    <h2>{{ trans('messages.files_in_this_group') }}
+    <h2>{{ trans('Files in this group') }}
 
         @can('create-file', $group)
             <a class="btn btn-primary btn-xs" href="{{ route('groups.files.create', $group) }}">
                 <i class="fa fa-plus"></i>
-                {{ trans('messages.create_file_button') }}
+                {{ trans('Upload file') }}
             </a>
         @endcan
 
@@ -15,7 +15,7 @@
     <p>
         <a class="btn btn-primary btn-xs" href="{{ route('groups.files.index', $group) }}">
             <i class="fa fa-list "></i>
-            {{ trans('messages.show_list') }}</a>
+            {{ trans('Show file list') }}</a>
     </p>
 
     <div id="gallery">
@@ -24,7 +24,7 @@
                 <img alt="{{ $file->name }}" src="{{ route('groups.files.preview', [$group, $file]) }}" />
             </a>
         @empty
-            {{ trans('messages.nothing_yet') }}
+            {{ trans('There is nothing here...yet!') }}
         @endforelse
     </div>
 

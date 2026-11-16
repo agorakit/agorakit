@@ -8,7 +8,7 @@
          @can('update', $event)
              <a class="dropdown-item" href="{{ route('groups.calendarevents.edit', [$event->group, $event]) }}" up-layer="root">
                  <i class="fa fa-pencil me-2"></i>
-                 {{ trans('messages.edit') }}
+                 {{ trans('Edit') }}
              </a>
          @endcan
 
@@ -17,7 +17,7 @@
                  href="{{ route('groups.calendarevents.create', [$event->group]) }}?duplicate={{ $event->id }}"
                  up-layer="root">
                  <i class="far fa-copy me-2"></i>
-                 {{ trans('messages.duplicate') }}
+                 {{ trans('Duplicate') }}
              </a>
          @endcan
 
@@ -25,14 +25,14 @@
              <a class="dropdown-item" href="{{ route('groups.calendarevents.deleteconfirm', [$event->group, $event]) }}"
                  up-layer="new">
                  <i class="fa fa-trash me-2"></i>
-                 {{ trans('messages.delete') }}
+                 {{ trans('Delete') }}
              </a>
          @endcan
 
          @auth
              <a class="dropdown-item" href="{{ route('groups.calendarevents.history', [$event->group, $event]) }}"
                  up-layer="root"><i class="fa fa-history me-2"></i>
-                 {{ trans('messages.show_history') }}</a>
+                 {{ trans('Show history') }}</a>
          @endauth
 
      </div>
