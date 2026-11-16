@@ -68,7 +68,7 @@ class GroupCalendarEventController extends Controller
 
             return view('calendarevents.index')
                 ->with('type', 'list')
-                ->with('title', $group->name . ' - ' . trans('messages.calendar'))
+                ->with('title', $group->name . ' - ' . trans('Calendar'))
                 ->with('events', $events)
                 ->with('group', $group)
                 ->with('tab', 'calendarevent');
@@ -233,7 +233,7 @@ class GroupCalendarEventController extends Controller
 
         if ($event->start > $event->stop) {
             return redirect()->route('groups.calendarevents.create', $group)
-                ->withErrors(__('Start date cannot be after end date'))
+                ->withErrors(trans('Start date cannot be after end date'))
                 ->withInput();
         }
 
@@ -255,9 +255,9 @@ class GroupCalendarEventController extends Controller
 
             // Geocode
             if (!$event->geocode()) {
-                flash(trans('messages.location_cannot_be_geocoded'));
+                flash(trans('Location cannot be geocoded'));
             } else {
-                flash(trans('messages.ressource_geocoded_successfully'));
+                flash(trans('Resource geocoded successfully'));
             }
         }
 
@@ -298,7 +298,7 @@ class GroupCalendarEventController extends Controller
         $group->touch();
         Auth::user()->touch();
 
-        flash(trans('messages.ressource_created_successfully'));
+        flash(trans('Resource created successfully'));
 
 
 
@@ -416,9 +416,9 @@ class GroupCalendarEventController extends Controller
         // Geocode
         if ($event->location <> $old_location) {
             if (!$event->geocode()) {
-                flash(trans('messages.location_cannot_be_geocoded'));
+                flash(trans('Location cannot be geocoded'));
             } else {
-                flash(trans('messages.ressource_geocoded_successfully'));
+                flash(trans('Resource geocoded successfully'));
             }
         }
 
@@ -491,7 +491,7 @@ class GroupCalendarEventController extends Controller
     {
         $this->authorize('delete', $event);
         $event->delete();
-        flash(trans('messages.ressource_deleted_successfully'));
+        flash(trans('Resource deleted successfully'));
 
         return redirect()->route('groups.calendarevents.index', $group);
     }

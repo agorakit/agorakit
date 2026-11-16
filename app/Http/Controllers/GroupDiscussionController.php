@@ -58,7 +58,7 @@ class GroupDiscussionController extends Controller
         $discussions = $discussions->paginate(25);
 
         return view('discussions.index')
-            ->with('title', $group->name . ' - ' . trans('messages.discussions'))
+            ->with('title', $group->name . ' - ' . trans('Discussions'))
             ->with('discussions', $discussions)
             ->with('group', $group)
             ->with('tab', 'discussions');
@@ -78,7 +78,7 @@ class GroupDiscussionController extends Controller
         $discussion = new Discussion();
         $discussion->group()->associate($group);
 
-        $title = trans('group.create_group_discussion');
+        $title = trans('Create group discussion');
 
         return view('discussions.create')
             ->with('group', $group)
@@ -146,7 +146,7 @@ class GroupDiscussionController extends Controller
             $discussion->tag($request->input('tags'));
         }
 
-        flash(trans('messages.ressource_created_successfully'));
+        flash(trans('Resource created successfully'));
 
         event(new \App\Events\ContentCreated($discussion));
 
@@ -249,7 +249,7 @@ class GroupDiscussionController extends Controller
             $discussion->detag();
         }
 
-        flash(trans('messages.ressource_updated_successfully'));
+        flash(trans('Resource updated successfully'));
 
         return redirect()->route('groups.discussions.show', [$discussion->group, $discussion]);
     }
@@ -275,7 +275,7 @@ class GroupDiscussionController extends Controller
     {
         $this->authorize('delete', $discussion);
         $discussion->delete();
-        flash(trans('messages.ressource_deleted_successfully'));
+        flash(trans('Resource deleted successfully'));
 
         return redirect()->route('groups.discussions.index', [$discussion->group]);
     }
@@ -300,7 +300,7 @@ class GroupDiscussionController extends Controller
         $discussion->togglePin();
         $discussion->timestamps = false;
         $discussion->save();
-        //flash(trans('messages.ressource_updated_successfully'));
+        //flash(trans('Resource updated successfully'));
         return redirect()->back();
     }
 
@@ -311,7 +311,7 @@ class GroupDiscussionController extends Controller
         $discussion->toggleArchive();
         $discussion->timestamps = false;
         $discussion->save();
-        //flash(trans('messages.ressource_updated_successfully'));
+        //flash(trans('Resource updated successfully'));
         return redirect()->back();
     }
 }

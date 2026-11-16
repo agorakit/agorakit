@@ -45,13 +45,13 @@ class UpcomingCalendarEvent extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage())
-                    ->subject('[' . $this->event->group->name . '] ' . __('You have an upcoming event') .  ': ' . $this->event->name)
-                    ->line(__('You have an upcoming event') .  ': ' . $this->event->name)
-                    ->line(__('Starts on : ') . $this->event->start->format('d/m/Y H:i'))
-                    ->line(__('Ends on : ') . $this->event->stop->format('d/m/Y H:i'))
-                    ->line(__('Description : ') . strip_tags($this->event->body))
-                    ->action(__('Show'), route('groups.calendarevents.show', [$this->event->group, $this->event]))
-                    ->line(trans('messages.thank_you'));
+                    ->subject('[' . $this->event->group->name . '] ' . trans('You have an upcoming event') .  ': ' . $this->event->name)
+                    ->line(trans('You have an upcoming event') .  ': ' . $this->event->name)
+                    ->line(trans('Starts on : ') . $this->event->start->format('d/m/Y H:i'))
+                    ->line(trans('Ends on : ') . $this->event->stop->format('d/m/Y H:i'))
+                    ->line(trans('Description : ') . strip_tags($this->event->body))
+                    ->action(trans('Show'), route('groups.calendarevents.show', [$this->event->group, $this->event]))
+                    ->line(trans('Thank you for using this application'));
     }
 
     /**

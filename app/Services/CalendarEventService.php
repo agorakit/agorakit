@@ -29,7 +29,7 @@ class CalendarEventService
         $json_event['color'] = $event->group->color();
 
         if ($event->attending->count() > 0) {
-            $json_event['tooltip'] .= '<strong class="mt-2">' . trans('messages.user_attending') . '</strong>';
+            $json_event['tooltip'] .= '<strong class="mt-2">' . trans('Users attending') . '</strong>';
             $json_event['tooltip'] .= '<div>' . implode(', ', $event->attending->pluck('username')->toArray()) . '</div>';
         }
 

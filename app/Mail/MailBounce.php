@@ -38,7 +38,7 @@ class MailBounce extends Mailable
     public function build()
     {
         return $this->markdown('emails.bounce')
-        ->subject('[' . setting('name') . '] ' . __('Mail not delivered'))
+        ->subject('[' . setting('name') . '] ' . trans('Mail not delivered'))
         ->with('reason', $this->reason)
         ->with('subject', $this->message->getSubject())
         ->with('body', $this->message->getBodyHtml())

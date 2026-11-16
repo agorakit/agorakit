@@ -19,7 +19,7 @@ class FeedController extends Controller
 
         $channel = new Channel();
         $channel
-            ->title(setting('name') . ' : ' . trans('messages.latest_discussions'))
+            ->title(setting('name') . ' : ' . trans('Latest discussions'))
             ->description(setting('name'))
             ->ttl(60)
             ->appendTo($feed);
@@ -54,7 +54,7 @@ class FeedController extends Controller
 
         $channel = new Channel();
         $channel
-            ->title(setting('name') . ' : ' . trans('messages.calendar'))
+            ->title(setting('name') . ' : ' . trans('Calendar'))
             ->description(setting('name'))
             ->ttl(60)
             ->appendTo($feed);

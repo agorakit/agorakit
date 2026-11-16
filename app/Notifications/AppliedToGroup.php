@@ -48,10 +48,10 @@ class AppliedToGroup extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage())
-            ->subject(trans('messages.user_applied_to_the_group', ['user' => $this->user->name, 'group' => $this->group->name]))
-            ->line(trans('messages.user_applied_to_the_group', ['user' => $this->user->name, 'group' => $this->group->name]))
-            ->action(trans('messages.visit_link'), route('groups.users.index', $this->group))
-            ->line(trans('messages.thank_you'));
+            ->subject(trans('User :user applied to the group :group'))
+            ->line(trans('User :user applied to the group :group'))
+            ->action(trans('Visit Link'), route('groups.users.index', $this->group))
+            ->line(trans('Thank you for using this application'));
     }
 
     /**

@@ -40,7 +40,7 @@ class NotifyMentionedUsers
             foreach ($users as $user) {
                 if ($user->isMemberOf($comment->discussion->group)) {
                     Notification::send($user, new \App\Notifications\MentionedUser($comment, \Auth::user()));
-                    flash($user->name . ' ' . trans('messages.notified'));
+                    flash($user->name . ' ' . trans('Notified'));
                 }
             }
         }
