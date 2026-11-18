@@ -15,6 +15,7 @@
             <file>./tests/e2e/FileUploadTest.php</file>
             <file>./tests/e2e/CalendarEventTest.php</file>
             <file>./tests/e2e/ImportTest.php</file>
+            <file>./tests/e2e/SearchTest.php</file>
         </testsuite>
         <testsuite name="Integration">
             <directory>./tests/integration</directory>
