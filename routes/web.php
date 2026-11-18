@@ -187,116 +187,116 @@ Route::group(['middleware' => ['web']], function () {
     ======
     */
 
-    Route::group(['as' => 'groups', 'prefix' => 'groups/{group}'], function () {
+    Route::scopeBindings()->prefix('groups/{group}')->name('groups.')->group(function () {
 
         // Crud stuff
-        Route::get('edit', 'GroupController@edit')->name('.edit');
-        Route::post('edit', 'GroupController@update')->name('.update');
-        Route::get('export', 'GroupController@export')->name('.export');
-        Route::get('history', 'GroupController@history')->name('.history');
-        Route::get('delete', 'GroupController@destroyConfirm')->name('.deleteconfirm');
-        Route::delete('delete', 'GroupController@destroy')->name('.delete');
+        Route::get('edit', 'GroupController@edit')->name('edit');
+        Route::post('edit', 'GroupController@update')->name('update');
+        Route::get('export', 'GroupController@export')->name('export');
+        Route::get('history', 'GroupController@history')->name('history');
+        Route::get('delete', 'GroupController@destroyConfirm')->name('deleteconfirm');
+        Route::delete('delete', 'GroupController@destroy')->name('delete');
 
         // Modules (tabs enable disable on each group
-        Route::get('custom', 'ModuleController@show')->name('.modules.show');
-        Route::get('modules', 'ModuleController@edit')->name('.modules.edit');
-        Route::post('modules', 'ModuleController@update')->name('.modules.update');
+        Route::get('custom', 'ModuleController@show')->name('modules.show');
+        Route::get('modules', 'ModuleController@edit')->name('modules.edit');
+        Route::post('modules', 'ModuleController@update')->name('modules.update');
 
         // Mention at.js json routes
-        Route::get('users/mention', 'MentionController@users')->name('.users.mention');
-        Route::get('discussions/mention', 'MentionController@discussions')->name('.discussions.mention');
-        Route::get('files/mention', 'MentionController@files')->name('.files.mention');
+        Route::get('users/mention', 'MentionController@users')->name('users.mention');
+        Route::get('discussions/mention', 'MentionController@discussions')->name('discussions.mention');
+        Route::get('files/mention', 'MentionController@files')->name('files.mention');
 
 
         // Group users : list
-        Route::get('users', 'GroupMembershipController@index')->name('.users.index');
+        Route::get('users', 'GroupMembershipController@index')->name('users.index');
         // Join, apply, preferences and leave a group
-        Route::get('join', 'GroupMembershipController@create')->name('.users.create');
-        Route::post('join', 'GroupMembershipController@store')->name('.users.store');
-        Route::get('preferences', 'GroupMembershipController@edit')->name('.users.edit');
-        Route::post('preferences', 'GroupMembershipController@update')->name('.users.update');
-        Route::get('leave', 'GroupMembershipController@destroyConfirm')->name('.users.deleteconfirm');
-        Route::post('leave', 'GroupMembershipController@destroy')->name('.users.delete');
+        Route::get('join', 'GroupMembershipController@create')->name('users.create');
+        Route::post('join', 'GroupMembershipController@store')->name('users.store');
+        Route::get('preferences', 'GroupMembershipController@edit')->name('users.edit');
+        Route::post('preferences', 'GroupMembershipController@update')->name('users.update');
+        Route::get('leave', 'GroupMembershipController@destroyConfirm')->name('users.deleteconfirm');
+        Route::post('leave', 'GroupMembershipController@destroy')->name('users.delete');
 
         // In the case of closed group, we show an how to join message (not in use currently)
-        Route::get('howtojoin', 'GroupMembershipController@howToJoin')->name('.users.howtojoin');
+        Route::get('howtojoin', 'GroupMembershipController@howToJoin')->name('users.howtojoin');
 
         // Maps
-        Route::get('map', 'GroupMapController@index')->name('.map');
-        Route::get('map.geojson', 'GroupMapController@geoJson')->name('.map.geojson');
+        Route::get('map', 'GroupMapController@index')->name('map');
+        Route::get('map.geojson', 'GroupMapController@geoJson')->name('map.geojson');
 
 
         // Discussions
-        Route::get('discussions', 'GroupDiscussionController@index')->name('.discussions.index');
-        Route::get('discussions/create', 'GroupDiscussionController@create')->name('.discussions.create');
-        Route::post('discussions/create', 'GroupDiscussionController@store')->name('.discussions.store');
+        Route::get('discussions', 'GroupDiscussionController@index')->name('discussions.index');
+        Route::get('discussions/create', 'GroupDiscussionController@create')->name('discussions.create');
+        Route::post('discussions/create', 'GroupDiscussionController@store')->name('discussions.store');
 
-        Route::get('discussions/{discussion}', 'GroupDiscussionController@show')->name('.discussions.show');
-        Route::get('discussions/{discussion}/edit', 'GroupDiscussionController@edit')->name('.discussions.edit');
-        Route::post('discussions/{discussion}', 'GroupDiscussionController@update')->name('.discussions.update');
+        Route::get('discussions/{discussion}', 'GroupDiscussionController@show')->name('discussions.show');
+        Route::get('discussions/{discussion}/edit', 'GroupDiscussionController@edit')->name('discussions.edit');
+        Route::post('discussions/{discussion}', 'GroupDiscussionController@update')->name('discussions.update');
 
-        Route::get('discussions/{discussion}/pin', 'GroupDiscussionController@pin')->name('.discussions.pin');
-        Route::get('discussions/{discussion}/archive', 'GroupDiscussionController@archive')->name('.discussions.archive');
+        Route::get('discussions/{discussion}/pin', 'GroupDiscussionController@pin')->name('discussions.pin');
+        Route::get('discussions/{discussion}/archive', 'GroupDiscussionController@archive')->name('discussions.archive');
 
-        Route::get('discussions/{discussion}/delete', 'GroupDiscussionController@destroyConfirm')->name('.discussions.deleteconfirm');
-        Route::delete('discussions/{discussion}/delete', 'GroupDiscussionController@destroy')->name('.discussions.delete');
+        Route::get('discussions/{discussion}/delete', 'GroupDiscussionController@destroyConfirm')->name('discussions.deleteconfirm');
+        Route::delete('discussions/{discussion}/delete', 'GroupDiscussionController@destroy')->name('discussions.delete');
 
         // Discussion history
-        Route::get('discussions/{discussion}/history', 'GroupDiscussionController@history')->name('.discussions.history');
+        Route::get('discussions/{discussion}/history', 'GroupDiscussionController@history')->name('discussions.history');
 
         // Comments
-        Route::post('discussions/{discussion}/reply', 'CommentController@store')->name('.discussions.reply');
-        Route::get('discussions/{discussion}/comments/{comment}/edit', 'CommentController@edit')->name('.discussions.comments.edit');
-        Route::post('discussions/{discussion}/comments/{comment}', 'CommentController@update')->name('.discussions.comments.update');
-        Route::get('discussions/{discussion}/comments/{comment}/delete', 'CommentController@destroyConfirm')->name('.discussions.comments.deleteconfirm');
-        Route::delete('discussions/{discussion}/comments/{comment}/delete', 'CommentController@destroy')->name('.discussions.comments.delete');
-        Route::get('discussions/{discussion}/comments/{comment}/history', 'CommentController@history')->name('.discussions.comments.history');
-        Route::get('discussions/{discussion}/live/{comment}', 'CommentController@live')->name('.discussions.live');
+        Route::post('discussions/{discussion}/reply', 'CommentController@store')->name('discussions.reply');
+        Route::get('discussions/{discussion}/comments/{comment}/edit', 'CommentController@edit')->name('discussions.comments.edit');
+        Route::post('discussions/{discussion}/comments/{comment}', 'CommentController@update')->name('discussions.comments.update');
+        Route::get('discussions/{discussion}/comments/{comment}/delete', 'CommentController@destroyConfirm')->name('discussions.comments.deleteconfirm');
+        Route::delete('discussions/{discussion}/comments/{comment}/delete', 'CommentController@destroy')->name('discussions.comments.delete');
+        Route::get('discussions/{discussion}/comments/{comment}/history', 'CommentController@history')->name('discussions.comments.history');
+        Route::get('discussions/{discussion}/live/{comment}', 'CommentController@live')->name('discussions.live');
 
         // Events
-        Route::get('calendarevents', 'GroupCalendarEventController@index')->name('.calendarevents.index');
-        Route::get('calendarevents/create', 'GroupCalendarEventController@create')->name('.calendarevents.create');
-        Route::post('calendarevents/create', 'GroupCalendarEventController@store')->name('.calendarevents.store');
-        Route::get('calendarevents/json', 'GroupCalendarEventController@indexJson')->name('.calendarevents.index.json');
-        Route::get('calendarevents/ical', 'GroupIcalController@index')->name('.calendarevents.index.ical');
-        Route::get('calendarevents/{event}', 'GroupCalendarEventController@show')->name('.calendarevents.show');
-        Route::get('calendarevents/{event}/edit', 'GroupCalendarEventController@edit')->name('.calendarevents.edit');
-        Route::post('calendarevents/{event}', 'GroupCalendarEventController@update')->name('.calendarevents.update');
-        Route::get('calendarevents/{event}/delete', 'GroupCalendarEventController@destroyConfirm')->name('.calendarevents.deleteconfirm');
-        Route::delete('calendarevents/{event}/delete', 'GroupCalendarEventController@destroy')->name('.calendarevents.delete');
-        Route::get('calendarevents/{event}/history', 'GroupCalendarEventController@history')->name('.calendarevents.history');
+        Route::get('calendarevents', 'GroupCalendarEventController@index')->name('calendarevents.index');
+        Route::get('calendarevents/create', 'GroupCalendarEventController@create')->name('calendarevents.create');
+        Route::post('calendarevents/create', 'GroupCalendarEventController@store')->name('calendarevents.store');
+        Route::get('calendarevents/json', 'GroupCalendarEventController@indexJson')->name('calendarevents.index.json');
+        Route::get('calendarevents/ical', 'GroupIcalController@index')->name('calendarevents.index.ical');
+        Route::get('calendarevents/{event}', 'GroupCalendarEventController@show')->name('calendarevents.show');
+        Route::get('calendarevents/{event}/edit', 'GroupCalendarEventController@edit')->name('calendarevents.edit');
+        Route::post('calendarevents/{event}', 'GroupCalendarEventController@update')->name('calendarevents.update');
+        Route::get('calendarevents/{event}/delete', 'GroupCalendarEventController@destroyConfirm')->name('calendarevents.deleteconfirm');
+        Route::delete('calendarevents/{event}/delete', 'GroupCalendarEventController@destroy')->name('calendarevents.delete');
+        Route::get('calendarevents/{event}/history', 'GroupCalendarEventController@history')->name('calendarevents.history');
         Route::permanentRedirect('actions', 'calendarevents');
         Route::permanentRedirect('actions/{event}', '../calendarevents/{event}');
         Route::permanentRedirect('actions/json', '../calendarevents/json');
         Route::permanentRedirect('actions/ical', '../calendarevents/ical');
 
         // Event participation
-        Route::get('calendarevents/{event}/participation/set/{status}', 'ParticipationController@set')->name('.calendarevents.participation.set');
-        Route::get('calendarevents/{event}/participation', 'ParticipationController@edit')->name('.calendarevents.participation');
-        Route::post('calendarevents/{event}/participation', 'ParticipationController@update')->name('.calendarevents.participation.update');
+        Route::get('calendarevents/{event}/participation/set/{status}', 'ParticipationController@set')->name('calendarevents.participation.set');
+        Route::get('calendarevents/{event}/participation', 'ParticipationController@edit')->name('calendarevents.participation');
+        Route::post('calendarevents/{event}/participation', 'ParticipationController@update')->name('calendarevents.participation.update');
 
         // Files
-        Route::get('files', 'GroupFileController@index')->name('.files.index');
-        Route::get('files/create/{parent?}', 'GroupFileController@create')->name('.files.create');
-        Route::post('files/create/{parent?}', 'GroupFileController@store')->name('.files.store');
-        Route::get('files/createlink/{parent?}', 'GroupFileController@createLink')->name('.files.createlink');
-        Route::post('files/createlink/{parent?}', 'GroupFileController@storeLink')->name('.files.storelink');
-        Route::get('files/createfolder/{parent?}', 'GroupFileController@createFolder')->name('.files.createfolder');
-        Route::post('files/createfolder/{parent?}', 'GroupFileController@storeFolder')->name('.files.storefolder');
+        Route::get('files', 'GroupFileController@index')->name('files.index');
+        Route::get('files/create/{parent?}', 'GroupFileController@create')->name('files.create');
+        Route::post('files/create/{parent?}', 'GroupFileController@store')->name('files.store');
+        Route::get('files/createlink/{parent?}', 'GroupFileController@createLink')->name('files.createlink');
+        Route::post('files/createlink/{parent?}', 'GroupFileController@storeLink')->name('files.storelink');
+        Route::get('files/createfolder/{parent?}', 'GroupFileController@createFolder')->name('files.createfolder');
+        Route::post('files/createfolder/{parent?}', 'GroupFileController@storeFolder')->name('files.storefolder');
 
-        Route::get('files/{file}', 'GroupFileController@show')->name('.files.show');
-        Route::get('files/{file}/edit', 'GroupFileController@edit')->name('.files.edit');
-        Route::post('files/{file}', 'GroupFileController@update')->name('.files.update');
-        Route::get('files/{file}/delete', 'GroupFileController@destroyConfirm')->name('.files.deleteconfirm');
-        Route::delete('files/{file}/delete', 'GroupFileController@destroy')->name('.files.delete');
+        Route::get('files/{file}', 'GroupFileController@show')->name('files.show');
+        Route::get('files/{file}/edit', 'GroupFileController@edit')->name('files.edit');
+        Route::post('files/{file}', 'GroupFileController@update')->name('files.update');
+        Route::get('files/{file}/delete', 'GroupFileController@destroyConfirm')->name('files.deleteconfirm');
+        Route::delete('files/{file}/delete', 'GroupFileController@destroy')->name('files.delete');
 
-        Route::get('files/{file}/pin', 'GroupFileController@pin')->name('.files.pin');
-        Route::get('files/{file}/archive', 'GroupFileController@archive')->name('.files.archive');
+        Route::get('files/{file}/pin', 'GroupFileController@pin')->name('files.pin');
+        Route::get('files/{file}/archive', 'GroupFileController@archive')->name('files.archive');
 
-        Route::get('files/{file}/download', 'FileDownloadController@download')->name('.files.download');
-        Route::get('files/{file}/thumbnail', 'FileDownloadController@thumbnail')->name('.files.thumbnail');
-        Route::get('files/{file}/preview', 'FileDownloadController@preview')->name('.files.preview');
-        Route::get('files/{file}/icon', 'FileDownloadController@icon')->name('.files.icon');
+        Route::get('files/{file}/download', 'FileDownloadController@download')->name('files.download');
+        Route::get('files/{file}/thumbnail', 'FileDownloadController@thumbnail')->name('files.thumbnail');
+        Route::get('files/{file}/preview', 'FileDownloadController@preview')->name('files.preview');
+        Route::get('files/{file}/icon', 'FileDownloadController@icon')->name('files.icon');
 
 
         /*
@@ -305,30 +305,30 @@ Route::group(['middleware' => ['web']], function () {
         */
 
         // Mass invite
-        Route::get('membership/create', 'GroupMassMembershipController@create')->name('.membership.create');
-        Route::post('membership/store', 'GroupMassMembershipController@store')->name('.membership.store');
+        Route::get('membership/create', 'GroupMassMembershipController@create')->name('membership.create');
+        Route::post('membership/store', 'GroupMassMembershipController@store')->name('membership.store');
 
         // Edit existing memberships
-        Route::get('membership/{membership}', 'GroupMembershipAdminController@edit')->name('.membership.edit');
-        Route::post('membership/{membership}', 'GroupMembershipAdminController@update')->name('.membership.update');
+        Route::get('membership/{membership}', 'GroupMembershipAdminController@edit')->name('membership.edit');
+        Route::post('membership/{membership}', 'GroupMembershipAdminController@update')->name('membership.update');
 
         // Stats
-        Route::get('insights', 'GroupInsightsController@index')->name('.insights');
+        Route::get('insights', 'GroupInsightsController@index')->name('insights');
 
         // Invites
-        Route::get('invite', 'InviteController@invite')->name('.invite.form');
-        Route::post('invite', 'InviteController@sendInvites')->name('.invite');
+        Route::get('invite', 'InviteController@invite')->name('invite.form');
+        Route::post('invite', 'InviteController@sendInvites')->name('invite');
 
         // Stats
-        Route::get('insights', 'GroupInsightsController@index')->name('.insights');
+        Route::get('insights', 'GroupInsightsController@index')->name('insights');
 
         // Allowed Tags
-        Route::get('tags', 'GroupTagController@edit')->name('.tags.edit');
-        Route::post('tags', 'GroupTagController@update')->name('.tags.update');
+        Route::get('tags', 'GroupTagController@edit')->name('tags.edit');
+        Route::post('tags', 'GroupTagController@update')->name('tags.update');
 
         // Permissions
-        Route::get('permissions', 'GroupPermissionController@index')->name('.permissions.index');
-        Route::post('permissions', 'GroupPermissionController@update')->name('.permissions.update');
+        Route::get('permissions', 'GroupPermissionController@index')->name('permissions.index');
+        Route::post('permissions', 'GroupPermissionController@update')->name('permissions.update');
     });
 
     // Search
