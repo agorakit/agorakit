@@ -133,10 +133,10 @@ class User extends Authenticatable
     public function getNameAttribute($value)
     {
         if ($value) {
-            return $value;
+            return strip_tags($value);
         }
         $name = explode("@", $this->email);
-        return $name[0];
+        return strip_tags($name[0]);
     }
 
 
