@@ -45,18 +45,21 @@ class GroupFileController extends Controller
         $tags = $file->getTagsInUse();
         $tag = $request->input('tag');
 
-        $parent = $request->input('parent');
+        $parent_id = $request->input('parent');
 
 
 
-        if ($parent) {
+        if ($parent_id) {
             // load the current parent and it's parents in a single "parents" collection
-            $file = File::findOrFail($parent);
+            $parent = $group->files->findOrFail($parent_id);
             $parents = $file->parents(true);
             $breadcrumb = $parents->reverse();
+            $parent_id = $parent->id;
         } else {
+            $parent = false;
             $parents = false;
             $breadcrumb = false;
+            $parent_id = false;
         }
 
 
@@ -66,7 +69,7 @@ class GroupFileController extends Controller
             ->orderBy('status', 'desc')
             ->orderBy('name', 'asc')
             ->when($parent, function ($query) use ($parent) {
-                return $query->where('parent_id', $parent);
+                return $query->where('parent_id', $parent->id);
             })
             ->when(!$parent, function ($query) {
                 return $query->whereNull('parent_id');
@@ -82,7 +85,7 @@ class GroupFileController extends Controller
                 return $query->withAnyTags($tag);
             })
             ->when($parent, function ($query) use ($parent) {
-                return $query->where('parent_id', $parent);
+                return $query->where('parent_id', $parent->id);
             })
             ->when(!$parent, function ($query) {
                 return $query->whereNull('parent_id');
@@ -94,7 +97,7 @@ class GroupFileController extends Controller
             ->with('title', $group->name . ' - ' . trans('messages.files'))
             ->with('folders', $folders)
             ->with('files', $files)
-            ->with('parent', $parent)
+            ->with('parent_id', $parent_id)
             ->with('parents', $parents)
             ->with('breadcrumb', $breadcrumb)
             ->with('group', $group)
