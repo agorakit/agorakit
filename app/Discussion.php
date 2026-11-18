@@ -116,11 +116,8 @@ class Discussion extends Model
 
     public function userReadDiscussion(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        if (\Auth::check()) {
-            return $this->hasMany(\App\UserReadDiscussion::class)->where('user_id', '=', \Auth::user()->id);
-        } else {
-            return false;
-        }
+        // guests have no read status, the relation stays empty for them
+        return $this->hasMany(\App\UserReadDiscussion::class)->where('user_id', '=', \Auth::id() ?? 0);
     }
 
     public function link()
