@@ -174,7 +174,7 @@ class GroupController extends Controller
             ->with('model', $group)
             ->with('allowedTags', $group->getAllowedTags())
             ->with('newTagsAllowed', $group->areNewTagsAllowed())
-            ->with('title', trans('group.create_group_title'));
+            ->with('title', trans('Create a new group'));
     }
 
     /**
@@ -217,9 +217,9 @@ class GroupController extends Controller
             }
             // Geocode
             if (!$group->geocode()) {
-                flash(trans('messages.location_cannot_be_geocoded'));
+                flash(trans('Location cannot be geocoded'));
             } else {
-                flash(trans('messages.ressource_geocoded_successfully'));
+                flash(trans('Resource geocoded successfully'));
             }
         }
 
@@ -259,7 +259,7 @@ class GroupController extends Controller
             }
         }
 
-        flash(trans('messages.ressource_created_successfully'));
+        flash(trans('Resource created successfully'));
 
         return redirect()->action('GroupMembershipController@update', [$group]);
     }
@@ -328,9 +328,9 @@ class GroupController extends Controller
             if ($group->location <> $old_location) {
                 // Try to geocode
                 if (!$group->geocode()) {
-                    flash(trans('messages.location_cannot_be_geocoded'));
+                    flash(trans('Location cannot be geocoded'));
                 } else {
-                    flash(trans('messages.ressource_geocoded_successfully'));
+                    flash(trans('Resource geocoded successfully'));
                 }
             }
         }
@@ -371,7 +371,7 @@ class GroupController extends Controller
 
         $group->save();
 
-        flash(trans('messages.ressource_updated_successfully'));
+        flash(trans('Resource updated successfully'));
 
         return redirect()->route('groups.show', [$group]);
     }
@@ -396,7 +396,7 @@ class GroupController extends Controller
     {
         $this->authorize('delete', $group);
         $group->delete();
-        flash(trans('messages.ressource_deleted_successfully'));
+        flash(trans('Resource deleted successfully'));
 
         return redirect()->action('DashboardController@index');
     }
@@ -440,7 +440,7 @@ class GroupController extends Controller
         $this->authorize('import', Group::class);
         if (!Auth::check()) {
             return redirect()->route('groups.index')
-                ->withErrors(trans('messages.authentication_error'));
+                ->withErrors(trans('You must be logged in to perform this action.'));
         }
         $user_id = Auth::user()->id;
 
@@ -453,7 +453,7 @@ class GroupController extends Controller
             $mimetype = $file->getMimeType();
             if (!str_ends_with($mimetype, 'zip') && !str_ends_with($mimetype, 'json')) {
                 return redirect()->route('groups.index')
-                    ->withErrors(trans('group.import_error'));
+                    ->withErrors(trans('Error importing, please check file type (zip or json).'));
             }
             if (str_ends_with($mimetype, 'json')) {
                 $path = $file->storeAs('groups/new', "groupimport-" . $user_id . "-" . Carbon::now()->format('Y-m-d_H-i-s') . ".json");
@@ -476,7 +476,7 @@ class GroupController extends Controller
         // Process the intermediate form
         if (!$request->has('user_id') || !$request->has('import_basename')) {
             return redirect()->route('groups.index')
-                ->withErrors(trans('group.import_error'));
+                ->withErrors(trans('Error importing, please check file type (zip or json).'));
         }
 
         // A few checks
@@ -504,7 +504,7 @@ class GroupController extends Controller
         $importservice = new ImportService();
         $ret = $importservice->import2($path, $new_usernames);
         if (is_a($ret, "App\Group")) {
-            flash(trans('messages.ressource_created_successfully'));
+            flash(trans('Resource created successfully'));
             return redirect()->route('groups.show', [$ret]);
         } elseif (is_array($ret)) { // Go back to intermediate forme
             list($import_basename, $existing_group, $edited_usernames, $group_name, $group_type) = $ret;
@@ -515,7 +515,7 @@ class GroupController extends Controller
                 ->with('import_basename', $import_basename)
                 ->with('existing_group', '')
                 ->with('existing_usernames', $edited_usernames)
-                ->withErrors(trans("Sorry! These need to be edited a second time because they also exist in database!"));
+                ->withErrors(trans('Sorry! These need to be edited a second time because they also exist in database!'));
         } else {
             return redirect()->route('groups.index')->withErrors("Import error");
         }

@@ -32,9 +32,9 @@
         <div class="text-meta text-truncate mb-2">
             <div>
                 @if ($event->isPublic())
-                    <i class="fa fa-eye me-1"></i>{{ trans('messages.public') }}
+                    <i class="fa fa-eye me-1"></i>{{ trans('Public') }}
                 @elseif ($event->isPrivate())
-                    <i class="fa fa-eye me-1"></i>{{ trans('messages.private') }}
+                    <i class="fa fa-eye me-1"></i>{{ trans('Private') }}
                 @endif
             </div>
             <div>

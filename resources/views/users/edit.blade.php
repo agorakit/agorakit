@@ -1,14 +1,14 @@
 @extends('app')
 
 @section('content')
-    <h1>{{ trans('messages.modify') }} "{{ $user->name }}"</h1>
+    <h1>{{ trans('Modify') }} "{{ $user->name }}"</h1>
 
     {!! Form::model($user, ['action' => ['UserController@update', $user], 'files' => true]) !!}
 
     @include('users.form')
 
     <div class="form-group mb-5">
-        {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-primary']) !!}
+        {!! Form::submit(trans('Save'), ['class' => 'btn btn-primary']) !!}
     </div>
 
     {!! Form::close() !!}

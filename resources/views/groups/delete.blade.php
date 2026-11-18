@@ -9,7 +9,7 @@
         {!! Form::model($group, ['method' => 'DELETE', 'action' => ['GroupController@destroy', $group]]) !!}
 
     <div class="form-group">
-        <a class="btn btn-secondary" href="{{ route('groups.show', $group) }}">{{ trans('messages.cancel') }}</a>
+        <a class="btn btn-secondary" href="{{ route('groups.show', $group) }}">{{ trans('Cancel') }}</a>
         {!! Form::submit(trans('Click here to confirm'), ['class' => 'btn btn-danger']) !!}
     </div>
 

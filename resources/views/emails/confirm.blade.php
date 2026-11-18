@@ -1,16 +1,16 @@
 @component('mail::message')
 
-<h1>{{trans('messages.thank_you_for_joining')}} "{{setting('name')}}"</h1>
+<h1>{{trans('Thank you for joining')}} "{{setting('name')}}"</h1>
 
 <p>
-{{trans('messages.we_need_to_confirm')}}
+{{trans('We need to confirm your account')}}
 </p>
 
 @component('mail::button', ['url' => action('Auth\RegisterController@confirmEmail', [$user->getToken()])])
-{{trans('messages.click_to_confirm')}}
+{{trans('Click to confirm')}}
 @endcomponent
 
-<small>{{trans('messages.if_you_didnt_ask')}} "{{setting('name')}}", {{trans('messages.do_nothing')}}.</small>
+<small>{{trans('If you didn\'t ask to join')}} "{{setting('name')}}", {{trans('Do nothing')}}.</small>
 
 
 @endcomponent

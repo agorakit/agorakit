@@ -64,7 +64,7 @@ class InviteController extends Controller
             $user = User::firstOrCreate(['email' => $email]);
 
             if ($user->isMemberOf($group)) {
-                $status_message .= trans('membership.user_already_invited') . ' : ' . $email . '<br/>';
+                $status_message .= trans('User already invited') . ' : ' . $email . '<br/>';
             } else {
                 $membership = \App\Membership::firstOrNew(['user_id' => $user->id, 'group_id' => $group->id]);
                 $membership->membership = \App\Membership::INVITED;
@@ -72,7 +72,7 @@ class InviteController extends Controller
 
                 // send invitation email
                 Mail::to($email)->send(new InviteUser($group_user, $membership));
-                $status_message .= trans('membership.users_has_been_invited') . ' : ' . $email . '<br/>';
+                $status_message .= trans('Users have been invited') . ' : ' . $email . '<br/>';
             }
         }
 
@@ -147,7 +147,7 @@ class InviteController extends Controller
         $membership->membership = Membership::MEMBER;
         $membership->save();
 
-        flash(trans('membership.welcome'));
+        flash(trans('Welcome'));
 
         return redirect()->route('groups.show', $membership->group);
     }
@@ -175,7 +175,7 @@ class InviteController extends Controller
         $membership->membership = Membership::DECLINED;
         $membership->save();
 
-        flash(trans('membership.refusal_recorded'));
+        flash(trans('Your refusal has been recorded. You won\'t be contacted again about this group.'));
 
         return redirect()->route('groups.show', $membership->group);
     }

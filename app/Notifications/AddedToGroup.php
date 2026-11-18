@@ -49,17 +49,17 @@ class AddedToGroup extends Notification
     {
         if ($this->resetlink) {
             return (new MailMessage())
-                ->subject(trans('messages.you_have_been_added_to_the_group') . ' : "' . $this->group->name . '"')
-                ->line(trans('messages.you_have_been_added_to_the_group') . ' : "' . $this->group->name . '"')
-                ->action(trans('messages.visit_link'), route('forgotpassword'))
-                ->action(trans('messages.visit_link'), route('groups.show', $this->group))
-                ->line(trans('messages.thank_you'));
+                ->subject(trans('You have been added to the group') . ' : "' . $this->group->name . '"')
+                ->line(trans('You have been added to the group') . ' : "' . $this->group->name . '"')
+                ->action(trans('Visit Link'), route('forgotpassword'))
+                ->action(trans('Visit Link'), route('groups.show', $this->group))
+                ->line(trans('Thank you for using this application'));
         }
         return (new MailMessage())
-            ->subject(trans('messages.you_have_been_added_to_the_group') . ' : "' . $this->group->name . '"')
-            ->line(trans('messages.you_have_been_added_to_the_group') . ' : "' . $this->group->name . '"')
-            ->action(trans('messages.visit_link'), route('groups.show', $this->group))
-            ->line(trans('messages.thank_you'));
+            ->subject(trans('You have been added to the group') . ' : "' . $this->group->name . '"')
+            ->line(trans('You have been added to the group') . ' : "' . $this->group->name . '"')
+            ->action(trans('Visit Link'), route('groups.show', $this->group))
+            ->line(trans('Thank you for using this application'));
     }
 
     /**

@@ -72,7 +72,7 @@ class GroupPermissionController extends Controller
 
         $group->save();
 
-        flash(trans('messages.ressource_updated_successfully'));
+        flash(trans('Resource updated successfully'));
 
         return redirect()->route('groups.permissions.index', $group);
     }

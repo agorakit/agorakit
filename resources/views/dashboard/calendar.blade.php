@@ -6,7 +6,7 @@
             @include('partials.preferences-calendar')
         </div>
         <a class="btn btn-primary" href="{{ route('calendarevents.create') }}">
-            {{ trans('messages.create_event') }}
+            {{ trans('Add an event') }}
         </a>
     </div>
 

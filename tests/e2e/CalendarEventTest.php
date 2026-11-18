@@ -28,7 +28,7 @@ class CalendarEventTest extends BaseTest
                 'start' => '2026-01-01 12:00:00',
                 'stop' => '2026-01-03 09:00:00'
             ])
-            ->see(trans('messages.ressource_created_successfully'));
+            ->see(trans('Resource created successfully'));
     }
 
     public function testEventWithRegistrationClosesAt()
@@ -49,7 +49,7 @@ class CalendarEventTest extends BaseTest
                 'name' => 'Test event with registration closes at',
                 'registration_closes_at' => '2025-12-25'
             ])
-            ->see(trans('messages.ressource_created_successfully'));
+            ->see(trans('Resource created successfully'));
     }
 
     public function testEventWithWrongStopTimeCreation()
@@ -92,7 +92,7 @@ class CalendarEventTest extends BaseTest
                 'start' => '2026-01-01 12:00:00',
                 'stop' => '2026-01-01 17:00:00'
             ])
-            ->see(trans('messages.ressource_created_successfully'));
+            ->see(trans('Resource created successfully'));
     }
 
     public function testEventWithoutStopTimeCreation()
@@ -115,7 +115,7 @@ class CalendarEventTest extends BaseTest
                 'start' => '2026-01-01 12:00:00',
                 'stop' => '2026-01-03 12:00:00'
             ])
-            ->see(trans('messages.ressource_created_successfully'));
+            ->see(trans('Resource created successfully'));
     }
 
     public function testEventWithUnknownEnd()
@@ -135,7 +135,7 @@ class CalendarEventTest extends BaseTest
             ->seeInDatabase('calendar_events', [
                 'name' => 'Test event with unknown end'
             ])
-            ->see(trans('messages.ressource_created_successfully'));
+            ->see(trans('Resource created successfully'));
     }
 
     public function testEventWithLocationName()
@@ -156,7 +156,7 @@ class CalendarEventTest extends BaseTest
             ->seeInDatabase('calendar_events', [
                 'name' => 'Test event with location name'
             ])
-            ->see(trans('messages.ressource_created_successfully'));
+            ->see(trans('Resource created successfully'));
     }
 
     public function testEventUsingLocationName()
@@ -176,6 +176,6 @@ class CalendarEventTest extends BaseTest
             ->seeInDatabase('calendar_events', [
                 'name' => 'Test event using location name'
             ])
-            ->see(trans('messages.ressource_created_successfully'));
+            ->see(trans('Resource created successfully'));
     }
 }

@@ -32,13 +32,13 @@ class Verified
     public function handle($request, Closure $next)
     {
         if ($this->auth->guest()) {
-            return redirect()->guest('login')->with('message', trans('messages.not_logged_in'));
+            return redirect()->guest('login')->with('message', trans('You are not logged in'));
         }
 
         if ($request->user()->isVerified()) {
             return $next($request);
         } else {
-            return redirect('/')->with('message', trans('messages.email_not_verified'));
+            return redirect('/')->with('message', trans('Email not verified'));
         }
     }
 }

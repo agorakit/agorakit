@@ -44,7 +44,7 @@ class Notification extends Mailable
         }
 
         $message = $this->markdown('emails.notification')
-            ->subject('[' . setting('name') . '] ' . trans('messages.news_from_group_email_subject') . ' "' . $this->group->name . '"');
+            ->subject('[' . setting('name') . '] ' . trans('News from the group') . ' "' . $this->group->name . '"');
 
         if ($this->group->inbox()) {
             $message->from($this->group->inbox(), $this->group->name);

@@ -31,14 +31,14 @@ class ParticipationController extends Controller
         $this->authorize('participate', $event);
 
         if ($event->isRegistrationClosed(Carbon::now())) {
-            abort(404, trans('messages.registration_closed'));
+            abort(404, trans('Registration closed'));
         }
 
         $rsvp = Participation::firstOrNew(['user_id' => $request->user()->id, 'calendar_event_id' => $event->id]);
         $rsvp->notification = $request->input('notification');
         $rsvp->status = $request->input('participation');
         $rsvp->save();
-        flash(trans('messages.ressource_updated_successfully'));
+        flash(trans('Resource updated successfully'));
 
         return redirect()->intended(route('groups.calendarevents.show', [$group, $event]));
     }
@@ -51,7 +51,7 @@ class ParticipationController extends Controller
         $this->authorize('participate', $event);
 
         if ($event->isRegistrationClosed(Carbon::now())) {
-            abort(400, trans('messages.registration_closed'));
+            abort(400, trans('Registration closed'));
         }
 
         $rsvp = Participation::firstOrNew(['user_id' => $request->user()->id, 'calendar_event_id' => $event->id]);

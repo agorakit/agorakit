@@ -27,7 +27,7 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        $title = trans('messages.users');
+        $title = trans('Users');
         if (Auth::check()) {
             if (Auth::user()->getPreference('show') == 'all') {
                 // build a list of groups the user has access to
@@ -83,7 +83,7 @@ class UserController extends Controller
                 ->with('tab', 'contact')
                 ->with('user', $user);
         } else {
-            flash(__('This user did not verify his/her email so you cannot contact him/her'));
+            flash(trans('This user did not verify his/her email so you cannot contact him/her'));
 
             return redirect()->back();
         }
@@ -102,16 +102,16 @@ class UserController extends Controller
                 $body = $request->input('body');
                 Mail::to($to_user)->send(new ContactUser($from_user, $to_user, $body, $request->has('reveal_email')));
 
-                flash(trans('messages.message_sent'));
+                flash(trans('Message sent'));
 
                 return redirect()->route('users.contactform', $to_user);
             } else {
-                flash(__('Please type a message'));
+                flash(trans('Please type a message'));
 
                 return redirect()->back();
             }
         } else {
-            flash(__('The user you are trying to contact did not verify his/her email'));
+            flash(trans('The user you are trying to contact did not verify his/her email'));
 
             return redirect()->back();
         }
@@ -123,7 +123,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         if ($user->isVerified() || Auth::user()->isAdmin()) {
-            $title = $user->username . ' ' . trans('messages.user_profile');
+            $title = $user->username . ' ' . trans('User profile');
 
             return view('users.show')
                 ->with('activities', $user->activities()->whereIn('group_id', Group::public()->pluck('id'))->paginate(10))
@@ -133,7 +133,7 @@ class UserController extends Controller
                 ->with('title', $title);
         }
 
-        flash(__('This user is unverified'));
+        flash(trans('This user is unverified'));
 
         return redirect()->back();
     }
@@ -182,9 +182,9 @@ class UserController extends Controller
                 // Geocode
                 if ($user->location <> $old_location) {
                     if (!$user->geocode()) {
-                        flash(trans('messages.location_cannot_be_geocoded'));
+                        flash(trans('Location cannot be geocoded'));
                     } else {
-                        flash(trans('messages.ressource_geocoded_successfully'));
+                        flash(trans('Resource geocoded successfully'));
                     }
                 }
             }
@@ -270,7 +270,7 @@ class UserController extends Controller
 
             $user->save();
 
-            flash(trans('messages.ressource_updated_successfully'));
+            flash(trans('Resource updated successfully'));
 
             return redirect()->route('users.show', $user);
         } else {
@@ -285,7 +285,7 @@ class UserController extends Controller
     {
         if ($user->verified == 0) {
             Mail::to($user)->send(new UserConfirmation($user));
-            flash(trans('messages.invitation_sent_again'));
+            flash(trans('Invitation sent again'));
 
             return redirect()->route('users.show', $user);
         } else {

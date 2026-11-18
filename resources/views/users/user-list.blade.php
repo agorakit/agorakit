@@ -11,7 +11,7 @@
         <div class="">{{ summary($user->body) }}</div>
 
         <div class="text-meta">
-            {{ trans('messages.last_activity') }} : {{ $user->updated_at->diffForHumans() }}
+            {{ trans('Last activity') }} : {{ $user->updated_at->diffForHumans() }}
         </div>
     </div>
 </div>

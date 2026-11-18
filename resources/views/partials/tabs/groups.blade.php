@@ -7,7 +7,7 @@
         <li class="nav-item">
             <a class="nav-link @if (isset($tab) && $tab == 'home') active @endif" href="{{ route('groups.show', $group) }}">
                 <i class="fa fa-info-circle me-2"></i>
-                <span class="d-none d-sm-inline">{{ trans('messages.group_home') }}</span>
+                <span class="d-none d-sm-inline">{{ trans('Home') }}</span>
             </a>
         </li>
 
@@ -16,7 +16,7 @@
                 <li class="nav-item">
                     <a class="nav-link @if (isset($tab) && $tab == 'discussions') active @endif" href="{{ route('groups.discussions.index', $group) }}">
                         <i class="fa fa-comments me-2"></i>
-                        <span class="d-none d-sm-inline">{{ trans('messages.discussions') }}</span>
+                        <span class="d-none d-sm-inline">{{ trans('Discussions') }}</span>
                     </a>
                 </li>
             @endcan
@@ -27,7 +27,7 @@
                 <li class="nav-item">
                     <a class="nav-link @if (isset($tab) && $tab == 'calendarevents') active @endif" href="{{ route('groups.calendarevents.index', $group) }}">
                         <i class="fa fa-calendar me-2"></i>
-                        <span class="d-none d-sm-inline">{{ trans('messages.calendar') }}</span>
+                        <span class="d-none d-sm-inline">{{ trans('Calendar') }}</span>
                     </a>
                 </li>
             @endcan
@@ -38,7 +38,7 @@
                 <li class="nav-item">
                     <a class="nav-link @if (isset($tab) && $tab == 'files') active @endif" href="{{ route('groups.files.index', $group) }}">
                         <i class="fa fa-files-o  me-2"></i>
-                        <span class="d-none d-sm-inline">{{ trans('messages.files') }}</span>
+                        <span class="d-none d-sm-inline">{{ trans('Files') }}</span>
                     </a>
                 </li>
             @endcan
@@ -49,7 +49,7 @@
                 <li class="nav-item">
                     <a class="nav-link @if (isset($tab) && $tab == 'users') active @endif" href="{{ route('groups.users.index', $group) }}">
                         <i class="fa fa-users me-2"></i>
-                        <span class="d-none d-sm-inline">{{ trans('messages.members') }}</span>
+                        <span class="d-none d-sm-inline">{{ trans('Members') }}</span>
                     </a>
                 </li>
             @endcan
@@ -61,7 +61,7 @@
                     <a class="nav-link @if (isset($tab) && $tab == 'map') active @endif"
                         href="{{ action('GroupMapController@index', $group) }}">
                         <i class="fa fa-map-marker me-2"></i>
-                        <span class="d-none d-sm-inline">{{ trans('messages.map') }}</span>
+                        <span class="d-none d-sm-inline">{{ trans('Map') }}</span>
                     </a>
                 </li>
             @endcan
@@ -84,7 +84,7 @@
                 <a class="nav-link @if (isset($tab) && $tab == 'preferences') active @endif"
                     href="{{ action('GroupMembershipController@edit', $group) }}">
                     <i class="fa fa-bell-o me-2"></i>
-                    <span class="d-none d-sm-inline">{{ trans('messages.preferences') }}</span>
+                    <span class="d-none d-sm-inline">{{ trans('Preferences') }}</span>
                 </a>
             </li>
         @else
@@ -92,7 +92,7 @@
                 <a class="nav-link @if (isset($tab) && $tab == 'settings') active @endif"
                     href="{{ action('GroupMembershipController@create', $group) }}" up-layer="new">
                     <i class="fa fa-sign-in me-2"></i>
-                    <span class="d-none d-sm-inline">{{ trans('messages.join') }}</span>
+                    <span class="d-none d-sm-inline">{{ trans('Join') }}</span>
                 </a>
             </li>
         @endif
@@ -103,7 +103,7 @@
                 <a aria-controls="admin-contents" aria-expanded="false"
                     class=" nav-link dropdown-toggle  @if (isset($tab) && $tab == 'admin') active @endif" data-bs-toggle="dropdown" href="#"
                     id="admin">
-                    <i class="fa fa-wrench me-2"></i> <span class="d-none d-sm-inline">{{ trans('messages.settings') }}</span>
+                    <i class="fa fa-wrench me-2"></i> <span class="d-none d-sm-inline">{{ trans('Settings') }}</span>
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="{{ route('groups.edit', $group) }}">
@@ -115,7 +115,7 @@
                     </a>
 
                     <a class="dropdown-item" href="{{ action('ModuleController@update', $group) }}">
-                        <i class="fa fa-toggle-on me-2"></i> {{ trans('messages.features') }}
+                        <i class="fa fa-toggle-on me-2"></i> {{ trans('Features') }}
                     </a>
 
                     <a class="dropdown-item" href="{{ action('GroupPermissionController@index', $group) }}">
@@ -123,11 +123,11 @@
                     </a>
 
                     <a class="dropdown-item" href="{{ action('GroupInsightsController@index', $group) }}">
-                        <i class="fa fa-line-chart me-2"></i> {{ trans('messages.insights') }}
+                        <i class="fa fa-line-chart me-2"></i> {{ trans('Insights') }}
                     </a>
 
                     <a class="dropdown-item" href="{{ action('GroupController@export', $group) }}" up-follow="false">
-                        <i class="fa fa-keyboard-o me-2"></i> {{ trans('messages.export_group') }}
+                        <i class="fa fa-keyboard-o me-2"></i> {{ trans('Export Group Data') }}
                     </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item text-danger" href="{{ route('groups.deleteconfirm', [$group]) }}">

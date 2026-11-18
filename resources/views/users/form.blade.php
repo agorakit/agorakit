@@ -1,5 +1,5 @@
 <div class="form-group">
-    {!! Form::label('name', trans('messages.name')) !!}
+    {!! Form::label('name', trans('Name')) !!}
     <div class="small-help">
         <i class="fas fa-info-circle"></i>
         @lang('Will be shown on your public profile')
@@ -9,7 +9,7 @@
 
 
 <div class="form-group">
-    {!! Form::label('username', trans('messages.username')) !!}
+    {!! Form::label('username', trans('username')) !!}
     <div class="small-help">
         <i class="fas fa-info-circle"></i>
         @lang('User name is used to @mention you')
@@ -25,7 +25,7 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('email', trans('messages.email')) !!}
+    {!! Form::label('email', trans('Email')) !!}
     <div class="small-help">
         <i class="fas fa-info-circle"></i>
         @lang('You can change your email at any time, but you will need to verify it')
@@ -35,7 +35,7 @@
 
 <div class="form-group">
     <div>
-        {!! Form::label('password', trans('messages.password')) !!}
+        {!! Form::label('password', trans('Password')) !!}
         <div class="small-help">
             <i class="fas fa-info-circle"></i>
             @lang('Use this to set your password or to change it. Minimum 8 characters.')
@@ -57,7 +57,7 @@
 
 
 <div class="form-group">
-    {!! Form::label('body', trans('messages.description')) !!}
+    {!! Form::label('body', trans('Description')) !!}
     <div class="small-help">
         <i class="fas fa-info-circle"></i>
         @lang('Will be shown on your public profile')
@@ -69,8 +69,8 @@
 
 
 <div class="form-group">
-    <label>{{trans('messages.photo')}}</label><br/>
-    <input name="cover" id="file" type="file" title="{{trans('messages.select_one_file')}}">
+    <label>{{trans('Photo')}}</label><br/>
+    <input name="cover" id="file" type="file" title="{{trans('Select one file')}}">
 </div>
 
 
@@ -82,19 +82,19 @@
     <h1>@lang('User administration')</h1>
     <div class="form-group">
         <div>@lang('Is this user super admin ? (use with care)')</div>
-        {{Form::radio('is_admin', 'yes', $user->isAdmin())}} {{trans('messages.yes')}} <br/>
-        {{Form::radio('is_admin', 'no', !$user->isAdmin())}} {{trans('messages.no')}} <br/>
+        {{Form::radio('is_admin', 'yes', $user->isAdmin())}} {{trans('yes')}} <br/>
+        {{Form::radio('is_admin', 'no', !$user->isAdmin())}} {{trans('no')}} <br/>
     </div>
 
     <div class="form-group">
-        <div>{{trans('messages.email_verified')}}</div>
-        {{Form::radio('is_verified', 'yes', $user->isVerified())}} {{trans('messages.yes')}} <br/>
-        {{Form::radio('is_verified', 'no', !$user->isVerified())}} {{trans('messages.no')}} <br/>
+        <div>{{trans('Email verified')}}</div>
+        {{Form::radio('is_verified', 'yes', $user->isVerified())}} {{trans('yes')}} <br/>
+        {{Form::radio('is_verified', 'no', !$user->isVerified())}} {{trans('no')}} <br/>
     </div>
 
      <div class="form-group">
-        <div>{{trans('messages.is_banned')}}</div>
-        {{Form::radio('is_user_banned', 'yes', $user->isBanned())}} {{trans('messages.yes')}} <br/>
-        {{Form::radio('is_user_banned', 'no', !$user->isBanned())}} {{trans('messages.no')}} <br/>
+        <div>{{trans('Is this user banned?')}}</div>
+        {{Form::radio('is_user_banned', 'yes', $user->isBanned())}} {{trans('yes')}} <br/>
+        {{Form::radio('is_user_banned', 'no', !$user->isBanned())}} {{trans('no')}} <br/>
     </div>
 @endif

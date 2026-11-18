@@ -2,9 +2,9 @@
     <div class="container-tight py-4">
         <div class="empty">
             <div class="empty-header">404</div>
-            <p class="empty-title"> {{ trans('messages.nothing_yet') }}</p>
+            <p class="empty-title"> {{ trans('There is nothing here...yet!') }}</p>
             <p class="empty-subtitle text-secondary">
-                {{ trans('messages.page_not_found_help') }}
+                {{ trans('') }}
             </p>
             <div class="empty-action">
                 <a class="btn btn-primary" href="/">

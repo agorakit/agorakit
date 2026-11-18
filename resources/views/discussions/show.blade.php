@@ -29,12 +29,12 @@
 
                     <div class="text-meta mb-1">
                         @if (isset($discussion->user))
-                            {{ trans('messages.started_by') }}
+                            {{ trans('Started by') }}
                             <span class="user">
                                 <a href="{{ route('users.show', [$discussion->user]) }}">{{ $discussion->user->name }}</a>
                             </span>
                         @endif
-                        {{ trans('messages.in') }} {{ $discussion->group->name }}
+                        {{ trans('in') }} {{ $discussion->group->name }}
                         {{ dateForHumans($discussion->created_at) }}
                     </div>
 
@@ -65,7 +65,7 @@
                 @if ($comment_key == $read_count)
                     <div class="d-flex justify-content-center pb-2" id="unread">
                         <div class="badge badge-pill p-2">
-                            <i class="far fa-arrow-alt-circle-down me-2"></i> {{ trans('messages.new') }}
+                            <i class="far fa-arrow-alt-circle-down me-2"></i> {{ trans('New') }}
                         </div>
                     </div>
                 @endif
@@ -76,7 +76,7 @@
                 @if ($comment_key + 1 == $read_count)
                     <div class="d-flex justify-content-center pb-2" id="unread">
                         <div class="badge badge-pill p-2">
-                            <i class="far fa-arrow-alt-circle-up me-2"></i> {{ trans('messages.all_is_read') }}
+                            <i class="far fa-arrow-alt-circle-up me-2"></i> {{ trans('You\'ve read everything in this discussion') }}
                         </div>
                     </div>
                 @endif

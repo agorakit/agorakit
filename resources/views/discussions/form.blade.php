@@ -1,10 +1,10 @@
 <div class="form-group">
-    {!! Form::label('name', trans('messages.title')) !!}
+    {!! Form::label('name', trans('Title')) !!}
     {!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <div class="form-group">
-    {!! Form::label('body', trans('messages.body')) !!}
+    {!! Form::label('body', trans('Body')) !!}
 
     @if ($group->exists)
         {!! Form::textarea('body', null, [

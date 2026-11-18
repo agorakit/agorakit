@@ -50,15 +50,15 @@ class MentionedUser extends Notification
 
         $message =  (new MailMessage())
         ->subject('[' . $this->comment->discussion->group->name . '] ' .
-            trans('messages.you_have_been_mentionned_by') . ' ' . $this->user->name)
-        ->line(trans('messages.you_have_been_mentionned_by') . ' ' . $this->user->name . ' ' .
-            trans('messages.in_the_discussion') . ' ' . $this->comment->discussion->name . ' : ')
+            trans('You have been mentioned by') . ' ' . $this->user->name)
+        ->line(trans('You have been mentioned by') . ' ' . $this->user->name . ' ' .
+            trans('in the discussion') . ' ' . $this->comment->discussion->name . ' : ')
         ->line(html_entity_decode(strip_tags(filter($this->comment->body))))
-        ->action(trans('messages.reply'), route(
+        ->action(trans('Reply'), route(
             'groups.discussions.show',
             [$this->comment->discussion->group, $this->comment->discussion]
         ))
-        ->line(trans('messages.dont_reply_to_this_email'));
+        ->line(trans('Don\'t reply to this email, use the reply button(s) instead'));
 
         // send notification directly from discussion inbox if there is one
         if ($this->comment->discussion->inbox()) {

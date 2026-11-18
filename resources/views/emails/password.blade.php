@@ -3,13 +3,13 @@
 @section('content')
 
 
-<p>{{trans('messages.you_asked_for_assword_change')}}}}</p>
+<p>{{trans('You asked for a password change')}}}}</p>
 
 
-@include('emails.button', ['url' => url('password/reset/'.$token), 'label' => trans('messages.click_here_to_change_your_password')])
+@include('emails.button', ['url' => url('password/reset/'.$token), 'label' => trans('Click here to change your password')])
 
 
-<p style="font-size: 0.8em">{{trans('messages.if_you_dont_want_to_change_password_do_nothing')}}</p>
+<p style="font-size: 0.8em">{{trans('If you don\'t want to change your password, do nothing')}}</p>
 
 
 @endsection

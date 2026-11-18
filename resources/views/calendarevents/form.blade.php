@@ -1,11 +1,11 @@
 <div class="form-group">
-    {!! Form::label('name', trans('messages.title')) !!}
+    {!! Form::label('name', trans('Title')) !!}
     {!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <div class="form-group">
     @if (isset($group) && $group->exists)
-        {!! Form::label('body', trans('messages.description')) !!}
+        {!! Form::label('body', trans('Description')) !!}
         {!! Form::textarea('body', null, [
             'class' => 'form-control wysiwyg',
             'data-mention-files' => route('groups.files.mention', $group),
@@ -13,7 +13,7 @@
             'data-mention-users' => route('groups.users.mention', $group),
         ]) !!}
     @else
-        {!! Form::label('body', trans('messages.description')) !!}
+        {!! Form::label('body', trans('Description')) !!}
         {!! Form::textarea('body', null, [
             'class' => 'form-control wysiwyg',
         ]) !!}
@@ -21,21 +21,21 @@
 </div>
 
 <div class="form-group">
-    <label for="file">{{ trans('group.cover') }}</label><br />
-    <input class="form-control-file" id="file" name="cover" title="{{ trans('messages.select_one_file') }}"
+    <label for="file">{{ trans('Cover picture') }}</label><br />
+    <input class="form-control-file" id="file" name="cover" title="{{ trans('Select one file') }}"
         type="file">
 </div>
 
 <div class="form-group">
-    <label>{{ trans('messages.visibility') }}</label>
+    <label>{{ trans('Visibility') }}</label>
     <div class="small-help">
         <i class="fas fa-info-circle"></i>
-        {{ trans('messages.visibility_help') }}
+        {{ trans('You can make this element public even if your group is private. In this case everyone will be able to see this element without being member.') }}
     </div>
     <label class="form-check form-switch" for="is-public">
         <input @if (isset($event) && $event->isPublic()) checked=checked @endif class="form-check-input" id="is-public" name="visibility"
             type="checkbox">
-        <span>{{ trans('messages.public') }}</span>
+        <span>{{ trans('Public') }}</span>
     </label>
 </div>
 
@@ -46,17 +46,17 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('start_date', trans('messages.start_date')) !!}
+    {!! Form::label('start_date', trans('Start date')) !!}
     {!! Form::date('start_date', $event->start->format('Y-m-d'), ['class' => 'form-control']) !!}
 </div>
 
 <div class="form-group">
-    {!! Form::label('start_time', trans('messages.start_time')) !!}
+    {!! Form::label('start_time', trans('Start time')) !!}
     {!! Form::time('start_time', $event->start->format('H:i'), ['class' => 'form-control', 'required']) !!}
 </div>
 
 <div class="form-group">
-    {!! Form::label('stop_time', trans('messages.stop_time')) !!}
+    {!! Form::label('stop_time', trans('Stop time')) !!}
     @if (isset($event->stop))
         {!! Form::time('stop_time', $event->stop->format('H:i'), ['class' => 'form-control', 'required']) !!}
     @else
@@ -65,7 +65,7 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('stop_date', trans('messages.stop_date')) !!}
+    {!! Form::label('stop_date', trans('Stop date')) !!}
     @if (isset($event->stop) && $event->stop->format('Y-m-d') != $event->start->format('Y-m-d'))
         {!! Form::date('stop_date', $event->stop->format('Y-m-d'), ['class' => 'form-control']) !!}
     @else
@@ -74,6 +74,6 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('registration_closes_at', trans('messages.registration_closes_at_label')) !!}
+    {!! Form::label('registration_closes_at', trans('Registration closes at')) !!}
     {!! Form::date('registration_closes_at', $event->hasRegistrationClosesAt() ? $event->registration_closes_at->format('Y-m-d') : null, ['class' => 'form-control']) !!}
 </div>

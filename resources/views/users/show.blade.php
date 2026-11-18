@@ -26,11 +26,11 @@
 
                 <div class="text-meta mb-2">
                     <div>
-                        {{ trans('messages.registered') }} : {{ dateForHumans($user->created_at) }}
+                        {{ trans('Registered') }} : {{ dateForHumans($user->created_at) }}
                     </div>
 
                     <div>
-                        {{ trans('messages.last_activity') }} : {{ $user->updated_at->diffForHumans() }}
+                        {{ trans('Last activity') }} : {{ $user->updated_at->diffForHumans() }}
                     </div>
                 </div>
 
@@ -44,9 +44,9 @@
                             <a class="tag" href="{{ route('groups.show', [$group]) }}">
 
                                 @if ($group->isOpen())
-                                    <i class="fa fa-globe" title="{{ trans('group.open') }}"></i>
+                                    <i class="fa fa-globe" title="{{ trans('Public group') }}"></i>
                                 @elseif ($group->isClosed())
-                                    <i class="fa fa-lock" title="{{ trans('group.closed') }}"></i>
+                                    <i class="fa fa-lock" title="{{ trans('Closed group') }}"></i>
                                 @endif
                                 {{ $group->name }}
 
@@ -57,7 +57,7 @@
 
                 <div class="mb-3">
                     @if ($user->locationDisplay('long'))
-                        <div class="fw-bold">{{ trans('messages.location') }}</div>
+                        <div class="fw-bold">{{ trans('Location') }}</div>
                         {{ $user->locationDisplay('long') }}
                     @endif
                 </div>

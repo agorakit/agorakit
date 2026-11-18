@@ -5,7 +5,7 @@
         <form action="{{ route('groups.index') }}" class="form-inline" method="GET" role="search" up-autosubmit
             up-scroll="false" up-target=".groups" up-watch-delay="500">
             <div class="input-group">
-                <input aria-label="Search" class="form-control" name="search" placeholder="{{ __('Filter') }}..."
+                <input aria-label="Search" class="form-control" name="search" placeholder="{{ trans('Filter') }}..."
                     type="text" value="{{ Request::get('search') }}">
 
                 <button class="btn btn-secondary" type="submit"><span class="fa fa-search"></span></button>
@@ -16,7 +16,7 @@
         @can('create', \App\Group::class)
             <div>
                 <a class="btn btn-primary" href="{{ route('groups.create') }}">
-                    {{ trans('group.create_a_group_button') }}
+                    {{ trans('Start a group') }}
                 </a>
             </div>
         @endcan
@@ -34,7 +34,7 @@
             {!! $groups->links() !!}
         @else
             <div class="alert alert-info" role="alert">
-                {{ trans('messages.nothing_yet') }}
+                {{ trans('There is nothing here...yet!') }}
             </div>
         @endif
     </div>

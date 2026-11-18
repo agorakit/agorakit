@@ -1,7 +1,7 @@
 @extends('dialog')
 
 @section('content')
-    <h1>{{ trans('messages.delete_confirm_title') }} : <strong>{{ $file->name }}</strong>
+    <h1>{{ trans('Are you sure you want to delete?') }} : <strong>{{ $file->name }}</strong>
 
 
 
@@ -28,10 +28,10 @@
 
     <div class="flex justify-content-between mt-5">
         <div class="form-group">
-            {!! Form::submit(trans('messages.delete_confirm_button'), ['class' => 'btn btn-danger']) !!}
+            {!! Form::submit(trans('Delete'), ['class' => 'btn btn-danger']) !!}
         </div>
         <div>
-            <a class="btn btn-link js-back" up-dismiss up-dismiss>{{ __('messages.cancel') }}</a>
+            <a class="btn btn-link js-back" up-dismiss up-dismiss>{{ trans('Cancel') }}</a>
         </div>
     </div>
 

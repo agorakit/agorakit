@@ -20,7 +20,7 @@
             @if (isset($admins) && $admins->count() > 0)
                 <div class="mb-3">
                     <div class="font-bold">
-                        {{ trans('messages.group_admin_users') }}
+                        {{ trans('Contact person(s)') }}
                     </div>
 
                     @foreach ($admins as $admin)
@@ -31,36 +31,36 @@
 
             @if ($group_inbox)
                 <div class="mb-3">
-                    <div class="font-bold">{{ __('Inbox for this group') }}</div>
+                    <div class="font-bold">{{ trans('Inbox for this group') }}</div>
                     <a href="mailto:{{ $group_inbox }}">{{ $group_inbox }}</a>
-                    <div class="small-help">{{ trans('messages.inbox_help') }}</div>
+                    <div class="small-help">{{ trans('The group email can only be used by group members') }}</div>
                 </div>
             @endif
 
             <div class="mb-3">
-                <div class="fw-bold">{{ __('Creation date') }}</div>
+                <div class="fw-bold">{{ trans('Creation date') }}</div>
                 {{ $group->created_at->diffForHumans() }}
             </div>
 
             <div class="mb-3">
-                <div class="fw-bold">{{ __('Group type') }}</div>
+                <div class="fw-bold">{{ trans('Group type') }}</div>
                 @if ($group->isOpen())
-                    <i class="fa fa-globe" title="{{ trans('group.open') }}">
+                    <i class="fa fa-globe" title="{{ trans('Public group') }}">
                     </i>
                     @lang('This group is public and open to members')
                 @elseif ($group->isClosed())
-                    <i class="fa fa-lock" title="{{ trans('group.closed') }}">
+                    <i class="fa fa-lock" title="{{ trans('Closed group') }}">
                     </i>
                     @lang('This group is private. Users must apply to join')
                 @else
-                    <i class="fa fa-eye-slash" title="{{ trans('group.secret') }}"></i>
+                    <i class="fa fa-eye-slash" title="{{ trans('Secret group') }}"></i>
                     @lang('This group is secret and only visible to it\'s members')
                 @endif
 
             </div>
 
             <div class="mb-3">
-                <div class="fw-bold">{{ __('Stats & keywords') }}</div>
+                <div class="fw-bold">{{ trans('Stats & keywords') }}</div>
                 <div class="mb-2">
                     <span class="badge badge-secondary"><i class="fa fa-users"></i> {{ $group->users()->count() }}</span>
                     <span class="badge badge-secondary"><i class="fa fa-comments"></i>
@@ -77,7 +77,7 @@
 
             <div class="mb-3">
             @if ($group->locationDisplay("long"))
-                <div class="fw-bold">{{ trans('messages.location') }}</div>
+                <div class="fw-bold">{{ trans('Location') }}</div>
                 {{ $group->locationDisplay("long") }}
             @endif
             </div>
