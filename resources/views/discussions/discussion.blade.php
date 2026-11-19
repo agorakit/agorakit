@@ -29,6 +29,7 @@
                         {{ $discussion->group->name }}
                     </strong>
                     {{ dateForHumans($discussion->updated_at) }}
+                    ({{ $discussion->lastComment()->user->name }})
                 </div>
             </div>
             @if ($discussion->isPinned())
@@ -47,7 +48,7 @@
         </div>
 
         <div class="summary">
-            {{ summary($discussion->body, 150) }}
+            {{ summary($discussion->lastComment()->body, 150) }}
         </div>
 
         @if ($discussion->getSelectedTags()->count() > 0)
