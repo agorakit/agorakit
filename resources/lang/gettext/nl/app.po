@@ -1,0 +1,2025 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: AgoraKit\n"
+"Report-Msgid-Bugs-To: contact@translation.io\n"
+"Last-Translator: \n"
+"Language-Team: Dutch\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-11-20T10:46:25+01:00\n"
+"PO-Revision-Date: 2026-11-20 09:46+0000\n"
+"Language: nl\n"
+"Plural-Forms: nplurals=2; plural=n!=1;\n"
+
+#: app/Http/Controllers/CalendarEventController.php:40
+#: app/Http/Controllers/CalendarEventController.php:46
+#: app/Http/Controllers/GroupCalendarEventController.php:71
+#: app/Http/Controllers/Admin/SettingsController.php:28
+#: app/Http/Controllers/Admin/SettingsController.php:86
+#: app/Http/Controllers/FeedController.php:57
+#: resources/views/partials/sidebar.blade.php:21
+#: resources/views/partials/tabs/groups.blade.php:30
+#: resources/views/partials/tabs/overview.blade.php:22
+#: resources/views/partials/grouptab.blade.php:40
+msgid "Calendar"
+msgstr "Agenda"
+
+#: app/Http/Controllers/CommentController.php:120
+#: app/Http/Controllers/GroupFileController.php:430
+#: app/Http/Controllers/GroupFileController.php:476
+#: app/Http/Controllers/GroupFileController.php:487
+#: app/Http/Controllers/GroupDiscussionController.php:252
+#: app/Http/Controllers/ModuleController.php:77
+#: app/Http/Controllers/GroupController.php:374
+#: app/Http/Controllers/ParticipationController.php:41
+#: app/Http/Controllers/GroupTagController.php:80
+#: app/Http/Controllers/UserController.php:273
+#: app/Http/Controllers/GroupPermissionController.php:75
+msgid "Resource updated successfully"
+msgstr "Inhoud met succes bewerkt"
+
+#: app/Http/Controllers/CommentController.php:154
+#: app/Http/Controllers/GroupFileController.php:462
+#: app/Http/Controllers/GroupCalendarEventController.php:494
+#: app/Http/Controllers/GroupDiscussionController.php:278
+#: app/Http/Controllers/GroupController.php:399
+msgid "Resource deleted successfully"
+msgstr "Deze inhoud is met succes verwijderd"
+
+#: app/Http/Controllers/MapController.php:23
+#: app/Http/Controllers/Admin/SettingsController.php:30
+#: app/Http/Controllers/Admin/SettingsController.php:88
+#: resources/views/partials/sidebar.blade.php:31
+#: resources/views/partials/tabs/groups.blade.php:64
+#: resources/views/partials/tabs/overview.blade.php:41
+msgid "Map"
+msgstr "Kaart"
+
+#: app/Http/Controllers/DiscussionController.php:39
+#: app/Http/Controllers/GroupDiscussionController.php:61
+#: app/Http/Controllers/Admin/SettingsController.php:27
+#: app/Http/Controllers/Admin/SettingsController.php:85
+#: resources/views/partials/sidebar.blade.php:16
+#: resources/views/partials/tabs/groups.blade.php:19
+#: resources/views/partials/grouptab.blade.php:32
+#: resources/views/search/results.blade.php:17
+msgid "Discussions"
+msgstr "Discussies"
+
+#: app/Http/Controllers/GroupFileController.php:94
+#: app/Http/Controllers/Admin/SettingsController.php:31
+#: app/Http/Controllers/Admin/SettingsController.php:89
+#: resources/views/partials/tabs/groups.blade.php:41
+#: resources/views/partials/tabs/overview.blade.php:29
+#: resources/views/partials/grouptab.blade.php:48
+#: resources/views/search/results.blade.php:27
+msgid "Files"
+msgstr "Bestanden"
+
+#: app/Http/Controllers/GroupFileController.php:249
+#: app/Http/Controllers/GroupFileController.php:314
+#: app/Http/Controllers/GroupFileController.php:362
+#: app/Http/Controllers/GroupCalendarEventController.php:301
+#: app/Http/Controllers/GroupDiscussionController.php:149
+#: app/Http/Controllers/GroupController.php:262
+#: app/Http/Controllers/GroupController.php:507
+msgid "Resource created successfully"
+msgstr "Inhoud met succes aangemaakt"
+
+#: app/Http/Controllers/GroupFileController.php:255
+msgid "No file selected"
+msgstr "Geen bestand geselecteerd"
+
+#: app/Http/Controllers/GroupFileController.php:317
+#: app/Http/Controllers/GroupFileController.php:365
+msgid "Resource Not Created Successfully"
+msgstr "Ressource niet succesvol aangemaakt"
+
+#: app/Http/Controllers/GroupFileController.php:434
+msgid "Resource Not Updated Successfully"
+msgstr "Ressource niet succesvol bijgewerkt"
+
+#: app/Http/Controllers/InviteController.php:67
+msgid "User already invited"
+msgstr "Gebruiker reeds uitgenodigd"
+
+#: app/Http/Controllers/InviteController.php:75
+msgid "Users have been invited"
+msgstr "Gebruiker uitgenodigd"
+
+#: app/Http/Controllers/InviteController.php:150
+#: app/Http/Controllers/GroupMembershipController.php:105
+msgid "Welcome"
+msgstr "Welkom in deze groep"
+
+#: app/Http/Controllers/InviteController.php:178
+msgid "Your refusal has been recorded. You won't be contacted again about this group."
+msgstr "Uw weigering is geregistreerd. U wordt niet meer benaderd over deze groep."
+
+#: app/Http/Controllers/GroupCalendarEventController.php:236
+msgid "Start date cannot be after end date"
+msgstr "Startdatum kan niet na einddatum liggen"
+
+#: app/Http/Controllers/GroupCalendarEventController.php:258
+#: app/Http/Controllers/GroupCalendarEventController.php:419
+#: app/Http/Controllers/GroupController.php:220
+#: app/Http/Controllers/GroupController.php:331
+#: app/Http/Controllers/UserController.php:185
+msgid "Location cannot be geocoded"
+msgstr "Locatie kan niet worden gecodeerd"
+
+#: app/Http/Controllers/GroupCalendarEventController.php:260
+#: app/Http/Controllers/GroupCalendarEventController.php:421
+#: app/Http/Controllers/GroupController.php:222
+#: app/Http/Controllers/GroupController.php:333
+#: app/Http/Controllers/UserController.php:187
+msgid "Resource geocoded successfully"
+msgstr "Ressource geocoded succes"
+
+#: app/Http/Controllers/GroupCalendarEventController.php:289
+msgid "Cover added successfully"
+msgstr "Omslag succesvol toegevoegd"
+
+#: app/Http/Controllers/GroupCalendarEventController.php:291
+msgid "Could not handle cover image. Is it an image file (png, jpeg,...  ?)"
+msgstr "Kan coverafbeelding niet verwerken. Is het een afbeeldingsbestand (png, jpeg,... ?)"
+
+#: app/Http/Controllers/GroupCalendarEventController.php:442
+msgid "Cover image has been updated, please reload to see the new cover"
+msgstr "De omslagafbeelding is bijgewerkt, laad opnieuw om de nieuwe omslag te zien"
+
+#: app/Http/Controllers/GroupCalendarEventController.php:444
+msgid "Error adding a new cover"
+msgstr "Fout bij het toevoegen van een nieuwe cover"
+
+#: app/Http/Controllers/GroupDiscussionController.php:81
+msgid "Create group discussion"
+msgstr "Groepsdiscussie starten"
+
+#: app/Http/Controllers/GroupDiscussionController.php:104
+msgid "You must select a group"
+msgstr "U moet een groep selecteren"
+
+#: app/Http/Controllers/GroupController.php:177
+#: resources/views/groups/create.blade.php:2
+msgid "Create a new group"
+msgstr "Maak een titel aan"
+
+#: app/Http/Controllers/GroupController.php:443
+msgid "You must be logged in to perform this action."
+msgstr "Je moet ingelogd zijn om deze actie uit te voeren."
+
+#: app/Http/Controllers/GroupController.php:456
+#: app/Http/Controllers/GroupController.php:479
+msgid "Error importing, please check file type (zip or json)."
+msgstr "Fout bij het importeren, controleer bestandstype (zip of json)."
+
+#: app/Http/Controllers/GroupController.php:485
+msgid "This action is unauthorized"
+msgstr "Deze actie is niet toegestaan"
+
+#: app/Http/Controllers/GroupController.php:493
+msgid "A Timeout Occurred"
+msgstr "Er is een time-out opgetreden"
+
+#: app/Http/Controllers/GroupController.php:518
+msgid "Sorry! These need to be edited a second time because they also exist in database!"
+msgstr "Sorry! Deze moeten een tweede keer bewerkt worden omdat ze ook in de database staan!"
+
+#: app/Http/Controllers/GroupMembershipAdminController.php:23
+#: app/Http/Controllers/GroupMembershipController.php:187
+#: resources/views/partials/tabs/groups.blade.php:106
+#: resources/views/partials/grouptab.blade.php:64
+#: resources/views/partials/navigation/main.blade.php:47
+#: resources/views/pages/help.blade.php:6
+#: resources/views/admin/settings/index.blade.php:7
+msgid "Settings"
+msgstr "Voorkeuren"
+
+#: app/Http/Controllers/GroupMembershipAdminController.php:58
+#: app/Http/Controllers/GroupMembershipController.php:228
+msgid "Settings updated"
+msgstr "Settings updated"
+
+#: app/Http/Controllers/Auth/RegisterController.php:61
+msgid "You already have an account, use this form to receive a login link by email"
+msgstr "U heeft al een account, gebruik dit formulier om een login-link per e-mail te ontvangen"
+
+#: app/Http/Controllers/Auth/RegisterController.php:69
+msgid "Your user account is marked for deletion, contact an admin if you want to re-activate your account"
+msgstr "Uw gebruikersaccount is gemarkeerd voor verwijdering. Neem contact op met een beheerder als u uw account opnieuw wilt activeren."
+
+#: app/Http/Controllers/Auth/RegisterController.php:131
+msgid "You have verified your email address"
+msgstr "U hebt geverifieerd dat uw e-mail adres"
+
+#: app/Http/Controllers/Auth/LoginController.php:60
+msgid "Check your mailbox, we sent you a login link. It will expires in 30 minutes"
+msgstr "Controleer uw mailbox, we hebben u een loginlink gestuurd. Deze verloopt over 30 minuten"
+
+#: app/Http/Controllers/Auth/LoginController.php:63
+#: app/Http/Controllers/Auth/LoginController.php:83
+msgid "No user found, please create an account instead"
+msgstr "Geen gebruiker gevonden, maak in plaats daarvan een account aan"
+
+#: app/Http/Controllers/Auth/LoginController.php:79
+msgid "Incorrect password and/or username"
+msgstr "Onjuist wachtwoord en/of gebruikersnaam"
+
+#: app/Http/Controllers/Admin/SettingsController.php:26
+#: app/Http/Controllers/Admin/SettingsController.php:84
+msgid "All groups"
+msgstr "Alle groepen"
+
+#: app/Http/Controllers/Admin/SettingsController.php:29
+#: app/Http/Controllers/Admin/SettingsController.php:87
+#: resources/views/partials/tags_input.blade.php:2
+#: resources/views/partials/tags_select.blade.php:2
+#: resources/views/partials/tabs/groups.blade.php:115
+#: resources/views/files/show.blade.php:79
+#: resources/views/admin/settings/index.blade.php:41
+#: resources/views/admin/settings/index.blade.php:175
+msgid "Tags"
+msgstr "Tags"
+
+#: app/Http/Controllers/Admin/SettingsController.php:32
+#: app/Http/Controllers/Admin/SettingsController.php:90
+#: app/Http/Controllers/UserController.php:30
+#: resources/views/partials/sidebar.blade.php:26
+#: resources/views/partials/map.blade.php:21
+#: resources/views/partials/navigation/main.blade.php:52
+#: resources/views/search/results.blade.php:24
+#: resources/views/admin/groupadmins/index.blade.php:3
+#: resources/views/admin/user/index.blade.php:3
+msgid "Users"
+msgstr "Gebruikers"
+
+#: app/Http/Controllers/Admin/SettingsController.php:47
+msgid "Not allowed"
+msgstr "Niet toegestaan"
+
+#: app/Http/Controllers/Admin/SettingsController.php:114
+msgid "Success"
+msgstr "Succes"
+
+#: app/Http/Controllers/ParticipationController.php:34
+#: app/Http/Controllers/ParticipationController.php:54
+#: resources/views/participation/dropdown.blade.php:43
+msgid "Registration closed"
+msgstr "De inschrijving is gesloten"
+
+#: app/Http/Controllers/GroupMembershipController.php:41
+#: resources/views/partials/tabs/groups.blade.php:52
+#: resources/views/partials/tabs/overview.blade.php:35
+#: resources/views/partials/grouptab.blade.php:56
+msgid "Members"
+msgstr "Leden"
+
+#: app/Http/Controllers/GroupMembershipController.php:122
+msgid "Your application to this group has been stored"
+msgstr "Uw aanvraag voor deze groep is opgeslagen"
+
+#: app/Http/Controllers/GroupMembershipController.php:139
+msgid "You cannot leave this group since you are the only admin currently. Promote someone else as admin first before leaving the group."
+msgstr "Je kunt deze groep niet verlaten omdat je momenteel de enige beheerder bent. Bevorder eerst iemand anders tot beheerder voordat je de groep verlaat."
+
+#: app/Http/Controllers/FeedController.php:22
+#: resources/views/partials/tabs/overview.blade.php:16
+#: resources/views/emails/notification.blade.php:11
+msgid "Latest discussions"
+msgstr "Recente discussies"
+
+#: app/Http/Controllers/UserController.php:86
+msgid "This user did not verify his/her email so you cannot contact him/her"
+msgstr "Deze gebruiker heeft zijn/haar e-mailadres niet geverifieerd, dus u kunt geen contact met hem/haar opnemen"
+
+#: app/Http/Controllers/UserController.php:105
+msgid "Message sent"
+msgstr "Bericht verstuurd"
+
+#: app/Http/Controllers/UserController.php:109
+msgid "Please type a message"
+msgstr "Typ een bericht"
+
+#: app/Http/Controllers/UserController.php:114
+msgid "The user you are trying to contact did not verify his/her email"
+msgstr "De gebruiker die u probeert te contacteren heeft zijn/haar e-mailadres niet geverifieerd"
+
+#: app/Http/Controllers/UserController.php:126
+#: resources/views/partials/tabs/users.blade.php:5
+msgid "User profile"
+msgstr "Gebruikersprofiel"
+
+#: app/Http/Controllers/UserController.php:136
+msgid "This user is unverified"
+msgstr "Deze gebruiker is niet geverifieerd"
+
+#: app/Http/Controllers/UserController.php:196
+msgid "This username is taken, another one has been generated"
+msgstr "Deze gebruikersnaam is in gebruik, er is een andere gegenereerd"
+
+#: app/Http/Controllers/UserController.php:288
+msgid "Invitation sent again"
+msgstr "'Een nieuwe bevestigingsmail is verstuurd. Controleer zowel uw mailbox als uw spam om uw e-mailadres te kunnen bevestigen. Dit zorgt ervoor dat we spam op deze site kunnen vermijden. Bedankt voor uw begrip."
+
+#: app/Http/Controllers/GroupMassMembershipController.php:58
+msgid "User added successfully"
+msgstr "Gebruiker toegevoegd"
+
+#: app/Http/Middleware/Verified.php:35
+#: app/Http/Middleware/Admin.php:35
+msgid "You are not logged in"
+msgstr "je bent niet ingelogd"
+
+#: app/Http/Middleware/Verified.php:41
+#: resources/views/partials/errors.blade.php:29
+msgid "Email not verified"
+msgstr "Uw e-mailadres is nog niet bevestigd, bevestig dit via je mailbox"
+
+#: app/Http/Middleware/Admin.php:41
+#: app/Http/Middleware/Admin.php:43
+msgid "You are not an admin"
+msgstr "U bent geen beheerder"
+
+#: app/Http/Middleware/LogoutBannedUser.php:29
+msgid "Your user acount has been banned"
+msgstr "Uw gebruikersaccount is verbannen"
+
+#: resources/views/partials/tags_input.blade.php:6
+#: resources/views/partials/tags_select.blade.php:6
+msgid "Choose or type one or more tag (keywords if you prefer). This will help others to find your contribution. In the list you will see the tags already used elsewhere. Try to follow the existing tags."
+msgstr "Kies of typ een of meer tags (trefwoorden als u dat liever hebt). Dit zal anderen helpen om uw bijdrage te vinden. In de lijst ziet u de tags die al elders zijn gebruikt. Probeer de bestaande tags te volgen. Scheid elke tag van elkaar met een komma."
+
+#: resources/views/partials/location_input.blade.php:3
+#: resources/views/partials/location_input.blade.php:20
+#: resources/views/users/show.blade.php:64
+#: resources/views/groups/show.blade.php:81
+#: resources/views/calendarevents/show.blade.php:67
+msgid "Location"
+msgstr "Locatie"
+
+#: resources/views/partials/location_input.blade.php:7
+msgid "Will this event take place in one of these locations?"
+msgstr "Vindt dit evenement plaats op een van deze locaties?"
+
+#: resources/views/partials/location_input.blade.php:10
+msgid "Other"
+msgstr "Andere"
+
+#: resources/views/partials/location_input.blade.php:14
+msgid "Otherwise please enter your venue here:"
+msgstr "Voer anders hier je locatie in:"
+
+#: resources/views/partials/location_input.blade.php:23
+msgid "Only fill in the information that you are willing to put online. The address information, even partial, allows us to display a map with the location of people, groups and events. If you do not want to be shown on a map do not put anything here. You can also just put your town (or your street name without the house number) to appear on the map, but not in a precise manner."
+msgstr "Vul alleen de informatie in die je online wilt zetten. Met de adresinformatie, zelfs gedeeltelijk, kunnen we een kaart weergeven met de locatie van mensen, groepen en acties. Als je niet op een kaart getoond wilt worden, vul dan niets in. Je kunt ook alleen je woonplaats (of je straatnaam zonder huisnummer) invoeren om op de kaart te verschijnen, maar niet op een precieze manier."
+
+#: resources/views/partials/location_input.blade.php:26
+msgid "Street Address"
+msgstr "Straatnaam"
+
+#: resources/views/partials/location_input.blade.php:30
+msgid "City"
+msgstr "Stad"
+
+#: resources/views/partials/location_input.blade.php:34
+msgid "County"
+msgstr "Provincie"
+
+#: resources/views/partials/location_input.blade.php:38
+msgid "Filling this field might help the geocoder to find the correct location."
+msgstr "Het invullen van dit veld kan de geocoder helpen om de juiste locatie te vinden."
+
+#: resources/views/partials/location_input.blade.php:43
+msgid "Country"
+msgstr "Land"
+
+#: resources/views/partials/location_input.blade.php:47
+msgid "Location Name"
+msgstr "Naam locatie"
+
+#: resources/views/partials/location_input.blade.php:51
+msgid "Enter a name for this location for future re-use."
+msgstr "Voer een naam in voor deze locatie voor toekomstig hergebruik"
+
+#: resources/views/partials/sidebar.blade.php:3
+msgid "Your groups"
+msgstr "Mijn groepen"
+
+#: resources/views/partials/sidebar.blade.php:8
+msgid "You are not subscribed to this group yet"
+msgstr "U bent nog geen lid van deze groep'"
+
+#: resources/views/partials/sidebar.blade.php:13
+#: resources/views/partials/navigation/context.blade.php:53
+#: resources/views/admin/settings/index.blade.php:222
+msgid "Overview"
+msgstr "Overzicht"
+
+#: resources/views/partials/activity-small.blade.php:5
+#: resources/views/partials/activity-small.blade.php:21
+#: resources/views/partials/activity-small.blade.php:36
+#: resources/views/partials/activity-small.blade.php:52
+#: resources/views/partials/activity.blade.php:6
+#: resources/views/partials/activity.blade.php:34
+#: resources/views/partials/activity.blade.php:61
+#: resources/views/partials/activity.blade.php:88
+msgid "messages.activity_"
+msgstr "berichten.activiteit_"
+
+#: resources/views/partials/activity-small.blade.php:10
+#: resources/views/partials/activity-small.blade.php:26
+#: resources/views/partials/activity-small.blade.php:41
+#: resources/views/partials/activity-small.blade.php:57
+#: resources/views/partials/activity.blade.php:11
+#: resources/views/partials/activity.blade.php:39
+#: resources/views/partials/activity.blade.php:66
+#: resources/views/partials/activity.blade.php:93
+msgid "messages.in"
+msgstr "berichten.in"
+
+#: resources/views/partials/empty.blade.php:12
+#: resources/views/partials/404.blade.php:5
+#: resources/views/discussions/general_index.blade.php:44
+#: resources/views/files/gallery.blade.php:27
+#: resources/views/files/folder.blade.php:68
+#: resources/views/dashboard/files.blade.php:15
+#: resources/views/dashboard/users.blade.php:24
+#: resources/views/dashboard/groups.blade.php:38
+#: resources/views/dashboard/tags-index.blade.php:17
+#: resources/views/dashboard/calendar-list.blade.php:22
+#: resources/views/dashboard/mygroups.blade.php:35
+#: resources/views/dashboard/discussions.blade.php:17
+#: resources/views/notifications/index.blade.php:46
+msgid "There is nothing here...yet!"
+msgstr "Er staat hier nog niets"
+
+#: resources/views/partials/tabs/users.blade.php:11
+msgid "Contact this user"
+msgstr "Deze persoon contacteren"
+
+#: resources/views/partials/tabs/users.blade.php:20
+#: resources/views/membership/admin/edit.blade.php:2
+#: resources/views/discussions/dropdown.blade.php:15
+#: resources/views/files/dropdown.blade.php:12
+#: resources/views/files/folder.blade.php:45
+#: resources/views/files/show.blade.php:107
+#: resources/views/comments/comment.blade.php:40
+#: resources/views/calendarevents/dropdown.blade.php:11
+#: resources/views/admin/groupadmins/index.blade.php:66
+#: resources/views/admin/user/index.blade.php:62
+msgid "Edit"
+msgstr "Bewerken"
+
+#: resources/views/partials/tabs/groups.blade.php:10
+#: resources/views/partials/grouptab.blade.php:24
+msgid "Home"
+msgstr "Over deze groep"
+
+#: resources/views/partials/tabs/groups.blade.php:87
+msgid "Preferences"
+msgstr "Voorkeuren"
+
+#: resources/views/partials/tabs/groups.blade.php:95
+#: resources/views/partials/grouptab.blade.php:71
+#: resources/views/partials/grouptab.blade.php:77
+#: resources/views/membership/join.blade.php:21
+msgid "Join"
+msgstr "Toetreden"
+
+#: resources/views/partials/tabs/groups.blade.php:110
+#: resources/views/groups/edit.blade.php:2
+msgid "Configuration"
+msgstr "Configuratie"
+
+#: resources/views/partials/tabs/groups.blade.php:120
+msgid "Features"
+msgstr "Kenmerken"
+
+#: resources/views/partials/tabs/groups.blade.php:125
+#: resources/views/admin/settings/index.blade.php:26
+msgid "Permissions"
+msgstr "Rechten"
+
+#: resources/views/partials/tabs/groups.blade.php:130
+#: resources/views/partials/navigation/main.blade.php:67
+#: resources/views/groups/insights.blade.php:5
+#: resources/views/admin/insights.blade.php:6
+msgid "Insights"
+msgstr "inzichten"
+
+#: resources/views/partials/tabs/groups.blade.php:135
+msgid "Export Group Data"
+msgstr "Groepsgegevens exporteren"
+
+#: resources/views/partials/tabs/overview.blade.php:4
+msgid "Presentation"
+msgstr "Presentatie"
+
+#: resources/views/partials/tabs/overview.blade.php:10
+#: resources/views/partials/map.blade.php:19
+#: resources/views/search/results.blade.php:30
+msgid "Groups"
+msgstr "Groepen"
+
+#: resources/views/partials/invite.blade.php:4
+#: resources/views/partials/invite.blade.php:22
+msgid "If you want to participate in this group"
+msgstr "Als u wil deelnemen aan deze groep"
+
+#: resources/views/partials/invite.blade.php:6
+msgid "login here"
+msgstr "log in"
+
+#: resources/views/partials/invite.blade.php:7
+msgid "or"
+msgstr "of"
+
+#: resources/views/partials/invite.blade.php:9
+msgid "register here"
+msgstr "registreer"
+
+#: resources/views/partials/invite.blade.php:16
+#: resources/views/membership/apply.blade.php:6
+msgid "You have asked to join this group. You must now wait for an admin's response."
+msgstr "Je hebt gevraagd om lid te worden van deze groep. Je moet nu wachten op een antwoord van een beheerder."
+
+#: resources/views/partials/invite.blade.php:25
+msgid "Join this group"
+msgstr "Neem deel aan deze groep"
+
+#: resources/views/partials/preferences-calendar.blade.php:4
+#: resources/views/partials/preferences-calendar.blade.php:9
+#: resources/views/calendarevents/index.blade.php:10
+msgid "Grid"
+msgstr "rooster"
+
+#: resources/views/partials/preferences-calendar.blade.php:5
+#: resources/views/partials/preferences-calendar.blade.php:10
+#: resources/views/calendarevents/index.blade.php:13
+msgid "List"
+msgstr "lijst"
+
+#: resources/views/partials/footer.blade.php:2
+msgid "Made with"
+msgstr "Met"
+
+#: resources/views/partials/footer.blade.php:5
+msgid "Embed this page"
+msgstr "Sluit deze pagina in"
+
+#: resources/views/partials/sort_dropdown.blade.php:4
+msgid "Sort"
+msgstr "soort"
+
+#: resources/views/partials/sort_dropdown.blade.php:10
+#: resources/views/partials/sort_dropdown.blade.php:19
+msgid "Sort by creation date descending"
+msgstr "Sorteer op aanmaakdatum aflopend"
+
+#: resources/views/partials/sort_dropdown.blade.php:26
+msgid "Sort by creation date ascending"
+msgstr "Sorteer op aanmaakdatum oplopend"
+
+#: resources/views/partials/sort_dropdown.blade.php:33
+msgid "Sort by name ascending"
+msgstr "Sorteer op naam oplopend"
+
+#: resources/views/partials/sort_dropdown.blade.php:40
+msgid "Sort by name descending"
+msgstr "Sorteer op naam aflopend"
+
+#: resources/views/partials/sort_dropdown.blade.php:47
+msgid "Sort by filesize ascending"
+msgstr "Sorteer op bestandsgrootte oplopend"
+
+#: resources/views/partials/sort_dropdown.blade.php:54
+msgid "Sort by filesize descending"
+msgstr "Sorteer op bestandsgrootte aflopend"
+
+#: resources/views/partials/grouptab.blade.php:13
+#: resources/views/partials/navigation/context.blade.php:8
+#: resources/views/users/user.blade.php:43
+#: resources/views/users/show.blade.php:50
+#: resources/views/groups/show.blade.php:49
+#: resources/views/groups/form.blade.php:37
+#: resources/views/groups/form.blade.php:43
+#: resources/views/groups/group.blade.php:48
+#: resources/views/files/file.blade.php:54
+#: resources/views/files/file-simple.blade.php:35
+msgid "Public group"
+msgstr "Openbare groep"
+
+#: resources/views/partials/grouptab.blade.php:15
+#: resources/views/partials/navigation/context.blade.php:10
+#: resources/views/users/user.blade.php:45
+#: resources/views/users/show.blade.php:52
+#: resources/views/groups/show.blade.php:53
+#: resources/views/groups/form.blade.php:37
+#: resources/views/groups/form.blade.php:43
+#: resources/views/groups/group.blade.php:50
+#: resources/views/files/file.blade.php:56
+#: resources/views/files/file-simple.blade.php:37
+msgid "Closed group"
+msgstr "Gesloten groep"
+
+#: resources/views/partials/navigation/profile.blade.php:5
+#: resources/views/partials/navigation/profile.blade.php:10
+msgid "Profile"
+msgstr "Mijn profiel"
+
+#: resources/views/partials/navigation/profile.blade.php:12
+msgid "Edit my profile"
+msgstr "Bewerk mijn profiel"
+
+#: resources/views/partials/navigation/profile.blade.php:16
+msgid "Logout"
+msgstr "Log out"
+
+#: resources/views/partials/navigation/main.blade.php:32
+#: resources/views/discussions/list.blade.php:16
+#: resources/views/discussions/list.blade.php:29
+#: resources/views/search/results.blade.php:10
+#: resources/views/search/results.blade.php:56
+#: resources/views/calendarevents/list.blade.php:14
+msgid "Search"
+msgstr "Zoeken"
+
+#: resources/views/partials/navigation/main.blade.php:41
+msgid "Server administration"
+msgstr "Serverbeheer"
+
+#: resources/views/partials/navigation/main.blade.php:57
+msgid "Group admins"
+msgstr "Groepsbeheerders"
+
+#: resources/views/partials/navigation/main.blade.php:62
+msgid "Recover deleted content"
+msgstr "Verwijderde inhoud herstellen"
+
+#: resources/views/partials/navigation/main.blade.php:72
+msgid "Logs"
+msgstr "Logboeken"
+
+#: resources/views/partials/navigation/main.blade.php:87
+#: resources/views/auth/login.blade.php:5
+#: resources/views/auth/login.blade.php:40
+#: resources/views/dashboard/presentation.blade.php:5
+msgid "Login"
+msgstr "Log in"
+
+#: resources/views/partials/navigation/main.blade.php:95
+#: resources/views/auth/register.laravel.blade.php:6
+#: resources/views/auth/register.laravel.blade.php:108
+#: resources/views/auth/register.blade.php:7
+#: resources/views/auth/register.blade.php:38
+#: resources/views/auth/register_password.blade.php:29
+#: resources/views/dashboard/presentation.blade.php:11
+msgid "Register"
+msgstr "Registreren"
+
+#: resources/views/partials/navigation/context.blade.php:12
+#: resources/views/groups/show.blade.php:57
+#: resources/views/groups/form.blade.php:37
+#: resources/views/groups/group.blade.php:52
+#: resources/views/files/file.blade.php:58
+#: resources/views/files/file-simple.blade.php:39
+msgid "Secret group"
+msgstr "Geheime groep"
+
+#: resources/views/partials/navigation/context.blade.php:18
+#: resources/views/partials/navigation/context.blade.php:39
+#: resources/views/partials/navigation/context.blade.php:58
+#: resources/views/dashboard/mygroups.blade.php:6
+msgid "My groups"
+msgstr "Mijn groepen"
+
+#: resources/views/partials/navigation/context.blade.php:23
+#: resources/views/partials/navigation/context.blade.php:65
+msgid "Public groups"
+msgstr "Publieke groepen"
+
+#: resources/views/partials/navigation/context.blade.php:28
+#: resources/views/partials/navigation/context.blade.php:72
+msgid "All groups (admin)"
+msgstr "Alle groepen (admin)"
+
+#: resources/views/partials/activity.blade.php:22
+#: resources/views/partials/activity.blade.php:50
+#: resources/views/partials/activity.blade.php:76
+#: resources/views/discussions/embed.blade.php:6
+#: resources/views/files/show.blade.php:92
+msgid "Visit"
+msgstr "Bezoek"
+
+#: resources/views/partials/activity.blade.php:104
+#: resources/views/comments/create.blade.php:27
+#: resources/views/emails/contact_direct.blade.php:15
+#: resources/views/emails/notification.blade.php:36
+#: resources/views/emails/contact.blade.php:15
+msgid "Reply"
+msgstr "Antwoorden"
+
+#: resources/views/partials/tags_filter.blade.php:5
+#: resources/views/dashboard/users.blade.php:6
+#: resources/views/dashboard/groups.blade.php:6
+#: resources/views/dashboard/mygroups.blade.php:13
+msgid "Filter"
+msgstr "Filter"
+
+#: resources/views/partials/tags_filter.blade.php:14
+msgid "Show all"
+msgstr "Alles tonen"
+
+#: resources/views/partials/errors.blade.php:6
+msgid "Loading"
+msgstr "Laden"
+
+#: resources/views/partials/errors.blade.php:14
+msgid "Network error"
+msgstr "Netwerkfout"
+
+#: resources/views/partials/errors.blade.php:25
+msgid "Please verify your email address"
+msgstr "Verifieer uw e-mailadres"
+
+#: resources/views/partials/errors.blade.php:33
+msgid "Click here to send your verification email again"
+msgstr "'Indien u geen bevestigingsmail hebt ontvangen, klik dan hier voor een nieuwe"
+
+#: resources/views/partials/errors.blade.php:44
+msgid "You have pending group invites"
+msgstr "Er zijn nog groepsuitnodigingen in behandeling"
+
+#: resources/views/partials/errors.blade.php:49
+msgid "Click here to accept or deny the invitation(s)"
+msgstr "Klik hier om de uitnodiging(en) te accepteren of te weigeren"
+
+#: resources/views/participation/dropdown.blade.php:7
+#: resources/views/participation/dropdown.blade.php:21
+#: resources/views/participation/edit.blade.php:13
+#: resources/views/calendarevents/attend.blade.php:15
+msgid "I will participate"
+msgstr "Ik zal deelnemen"
+
+#: resources/views/participation/dropdown.blade.php:10
+#: resources/views/participation/dropdown.blade.php:28
+#: resources/views/participation/edit.blade.php:13
+#: resources/views/calendarevents/attend.blade.php:15
+msgid "I will not participate"
+msgstr "Ik zal niet deelnemen"
+
+#: resources/views/participation/edit.blade.php:2
+#: resources/views/calendarevents/attend.blade.php:2
+msgid "Attend to"
+msgstr "Woon bij"
+
+#: resources/views/participation/edit.blade.php:16
+#: resources/views/calendarevents/attend.blade.php:21
+msgid "Send me a reminder"
+msgstr "Stuur mij een herinnering"
+
+#: resources/views/participation/edit.blade.php:17
+#: resources/views/calendarevents/attend.blade.php:24
+msgid "One hour before the event"
+msgstr "Eén uur voor het evenement"
+
+#: resources/views/participation/edit.blade.php:17
+#: resources/views/calendarevents/attend.blade.php:24
+msgid "One day before the event"
+msgstr "Eén dag voor het evenement"
+
+#: resources/views/participation/edit.blade.php:17
+#: resources/views/calendarevents/attend.blade.php:24
+msgid "No reminder please"
+msgstr "Geen herinnering aub"
+
+#: resources/views/participation/edit.blade.php:21
+#: resources/views/membership/edit.blade.php:37
+#: resources/views/membership/admin/edit.blade.php:50
+#: resources/views/discussions/edit.blade.php:11
+#: resources/views/discussions/tags.blade.php:36
+#: resources/views/users/edit.blade.php:10
+#: resources/views/groups/allowed_tags.blade.php:25
+#: resources/views/groups/edit.blade.php:10
+#: resources/views/groups/modules.blade.php:80
+#: resources/views/files/edit.blade.php:37
+#: resources/views/comments/edit.blade.php:10
+#: resources/views/permissions/index.blade.php:130
+#: resources/views/calendarevents/attend.blade.php:31
+#: resources/views/calendarevents/edit.blade.php:10
+#: resources/views/admin/settings/index.blade.php:10
+#: resources/views/admin/settings/index.blade.php:258
+msgid "Save"
+msgstr "Opslaan"
+
+#: resources/views/membership/leave.blade.php:4
+msgid "Leaving the group called"
+msgstr "Deze groep verlaten"
+
+#: resources/views/membership/leave.blade.php:8
+msgid "We are sad to see you go... confirm that you want to leave this group. You won't receive notifications anymore."
+msgstr "Jammergenoeg wilt u deze groep verlaten. Gelieve te bevestigen dat dit echt uw bedoeling is. U zal geen meldingen van deze groep meer ontvangen via mail en u zal niet meer op de ledenlijst staan."
+
+#: resources/views/membership/leave.blade.php:18
+#: resources/views/membership/apply.blade.php:27
+#: resources/views/membership/join.blade.php:23
+#: resources/views/membership/add.blade.php:22
+#: resources/views/discussions/delete.blade.php:21
+#: resources/views/users/delete.blade.php:40
+#: resources/views/groups/import.blade.php:21
+#: resources/views/groups/importconfirm.blade.php:31
+#: resources/views/groups/delete.blade.php:11
+#: resources/views/files/createfolder.blade.php:17
+#: resources/views/files/createlink.blade.php:24
+#: resources/views/files/delete.blade.php:20
+#: resources/views/files/create.blade.php:28
+#: resources/views/calendarevents/delete.blade.php:16
+#: resources/views/invites/form.blade.php:23
+msgid "Cancel"
+msgstr "Ik heb me bedacht, annuleren"
+
+#: resources/views/membership/leave.blade.php:19
+msgid "Leave this group"
+msgstr "Deze groep verlaten"
+
+#: resources/views/membership/edit.blade.php:5
+#: resources/views/membership/index.blade.php:31
+#: resources/views/membership/admin/edit.blade.php:7
+#: resources/views/notifications/index.blade.php:7
+#: resources/views/admin/settings/index.blade.php:31
+msgid "Notifications"
+msgstr "Bekendmakingen"
+
+#: resources/views/membership/edit.blade.php:7
+#: resources/views/membership/apply.blade.php:13
+#: resources/views/membership/join.blade.php:5
+msgid "How does it work?"
+msgstr "Hoe werkt dit?"
+
+#: resources/views/membership/edit.blade.php:9
+#: resources/views/membership/join.blade.php:7
+msgid "Here you can choose if you want to receive news from this group by email."
+msgstr "Treed toe tot deze groep en geef aan of u de updates van deze groep via mail wilt ontvangen. Deze optie is heel nuttig en we raden u aan om deze te activeren. U zal niet meer mails ontvangen dan gevraagd"
+
+#: resources/views/membership/edit.blade.php:15
+#: resources/views/membership/form.blade.php:2
+msgid "How often do you want to receive notifications by email?"
+msgstr "When to receive notifications?"
+
+#: resources/views/membership/edit.blade.php:20
+#: resources/views/membership/form.blade.php:4
+#: resources/views/membership/admin/edit.blade.php:13
+msgid "As soon as possible"
+msgstr "Zo spoedig mogelijk"
+
+#: resources/views/membership/edit.blade.php:21
+#: resources/views/membership/form.blade.php:4
+#: resources/views/membership/admin/edit.blade.php:14
+msgid "Every hour"
+msgstr "Elk uur"
+
+#: resources/views/membership/edit.blade.php:22
+#: resources/views/membership/form.blade.php:4
+#: resources/views/membership/admin/edit.blade.php:15
+msgid "Every day"
+msgstr "Elke dag"
+
+#: resources/views/membership/edit.blade.php:23
+#: resources/views/membership/form.blade.php:4
+#: resources/views/membership/admin/edit.blade.php:16
+msgid "Every week"
+msgstr "Elke week"
+
+#: resources/views/membership/edit.blade.php:24
+#: resources/views/membership/form.blade.php:4
+#: resources/views/membership/admin/edit.blade.php:17
+msgid "Every two weeks"
+msgstr "Om de 15 dagen"
+
+#: resources/views/membership/edit.blade.php:25
+#: resources/views/membership/form.blade.php:4
+#: resources/views/membership/admin/edit.blade.php:18
+msgid "Every month"
+msgstr "Elke maand"
+
+#: resources/views/membership/edit.blade.php:26
+#: resources/views/membership/form.blade.php:4
+#: resources/views/membership/admin/edit.blade.php:19
+msgid "Never"
+msgstr "Zend me geen e-mails"
+
+#: resources/views/membership/edit.blade.php:43
+msgid "If you want to leave this group"
+msgstr "Indien u deze groep wil verlaten"
+
+#: resources/views/membership/apply.blade.php:2
+msgid "Apply for the group"
+msgstr "Vraag de groep aan"
+
+#: resources/views/membership/apply.blade.php:15
+msgid "This group is closed so you need to apply using the button below. An admin will be notified and will act accordingly."
+msgstr "Deze groep is gesloten, dus je moet je aanmelden met de knop hieronder. Een beheerder wordt op de hoogte gebracht en zal dienovereenkomstig handelen."
+
+#: resources/views/membership/apply.blade.php:25
+msgid "Apply"
+msgstr "Van toepassing zijn"
+
+#: resources/views/membership/index.blade.php:5
+msgid "Invite people by email"
+msgstr "Nodig deelnemers uit"
+
+#: resources/views/membership/index.blade.php:13
+msgid "Directly add users"
+msgstr "De gebruikers meteen toevoegen"
+
+#: resources/views/membership/index.blade.php:24
+#: resources/views/users/form.blade.php:2
+#: resources/views/groups/importconfirm.blade.php:9
+#: resources/views/files/createfolder.blade.php:10
+#: resources/views/files/folder.blade.php:22
+#: resources/views/auth/register.laravel.blade.php:14
+#: resources/views/auth/register.blade.php:22
+#: resources/views/admin/groupadmins/index.blade.php:10
+#: resources/views/admin/user/index.blade.php:10
+msgid "Name"
+msgstr "Naam"
+
+#: resources/views/membership/index.blade.php:25
+msgid "Member since"
+msgstr "lid sinds"
+
+#: resources/views/membership/index.blade.php:26
+#: resources/views/users/user.blade.php:23
+#: resources/views/users/show.blade.php:34
+#: resources/views/users/user-list.blade.php:14
+#: resources/views/admin/groupadmins/index.blade.php:13
+#: resources/views/admin/user/index.blade.php:13
+msgid "Last activity"
+msgstr "Laatste Activiteit"
+
+#: resources/views/membership/index.blade.php:27
+#: resources/views/membership/admin/edit.blade.php:28
+#: resources/views/groups/form.blade.php:52
+msgid "Status"
+msgstr "Toestand"
+
+#: resources/views/membership/index.blade.php:30
+#: resources/views/users/form.blade.php:32
+#: resources/views/auth/register.blade.php:29
+#: resources/views/admin/groupadmins/index.blade.php:11
+#: resources/views/admin/user/index.blade.php:11
+msgid "Email"
+msgstr "E-mail"
+
+#: resources/views/membership/index.blade.php:63
+#: resources/views/membership/admin/edit.blade.php:34
+#: resources/views/groups/group.blade.php:25
+msgid "administrator"
+msgstr "beheerder"
+
+#: resources/views/membership/index.blade.php:69
+#: resources/views/membership/admin/edit.blade.php:35
+#: resources/views/groups/group.blade.php:29
+msgid "member"
+msgstr "lid"
+
+#: resources/views/membership/index.blade.php:75
+#: resources/views/membership/admin/edit.blade.php:37
+#: resources/views/groups/group.blade.php:35
+msgid "candidate"
+msgstr "Kandidaat"
+
+#: resources/views/membership/index.blade.php:81
+#: resources/views/membership/admin/edit.blade.php:36
+msgid "invited"
+msgstr "Uitgenodigd"
+
+#: resources/views/membership/index.blade.php:88
+#: resources/views/membership/admin/edit.blade.php:39
+msgid "declined"
+msgstr "afgewezen"
+
+#: resources/views/membership/index.blade.php:95
+msgid "unregistered"
+msgstr "niet ingeschreven"
+
+#: resources/views/membership/index.blade.php:101
+#: resources/views/membership/admin/edit.blade.php:38
+msgid "removed"
+msgstr "verwijderd"
+
+#: resources/views/membership/index.blade.php:107
+#: resources/views/membership/admin/edit.blade.php:40
+msgid "blacklisted"
+msgstr "Blacklisted"
+
+#: resources/views/membership/join.blade.php:2
+msgid "Join the group"
+msgstr "Neem deel aan deze groep"
+
+#: resources/views/membership/howtojoin.blade.php:3
+msgid "How to reach this group?"
+msgstr "Hoe bereik je dit groue?"
+
+#: resources/views/membership/howtojoin.blade.php:5
+msgid "This group is a closed group. To join, please contact one of these members so that it prompts you."
+msgstr "Deze groep is een gesloten groep. Om lid te worden, neem dan contact op met één van de leden, zodat deze er om vraagt."
+
+#: resources/views/membership/add.blade.php:2
+msgid "Add users"
+msgstr "Het toevoegen van gebruikers"
+
+#: resources/views/membership/add.blade.php:5
+msgid "Use this to directly add existing users to the group without invitation. Admin only"
+msgstr "Gebruik deze optie om rechtstreeks bestaande gebruikers toevoegen aan de groep zonder uitnodiging. Alleen Admin"
+
+#: resources/views/membership/add.blade.php:13
+msgid "Users to add (existing users only, use the invite feature for new users)"
+msgstr "Gebruikers toevoegen (bestaande gebruikers alleen gebruik maken van de uitnodiging functie voor nieuwe gebruikers)"
+
+#: resources/views/membership/add.blade.php:20
+msgid "Add user(s)"
+msgstr "Voeg gebruiker(s)"
+
+#: resources/views/discussions/dropdown.blade.php:24
+#: resources/views/discussions/delete.blade.php:17
+#: resources/views/files/dropdown.blade.php:20
+#: resources/views/files/folder.blade.php:50
+#: resources/views/files/show.blade.php:115
+#: resources/views/files/delete.blade.php:16
+#: resources/views/comments/comment.blade.php:50
+#: resources/views/comments/delete.blade.php:12
+#: resources/views/calendarevents/dropdown.blade.php:30
+#: resources/views/calendarevents/delete.blade.php:12
+msgid "Delete"
+msgstr "Verwijderen ?"
+
+#: resources/views/discussions/dropdown.blade.php:34
+#: resources/views/files/dropdown.blade.php:30
+msgid "Unpin"
+msgstr "Losmaken"
+
+#: resources/views/discussions/dropdown.blade.php:37
+#: resources/views/files/dropdown.blade.php:33
+msgid "Pin"
+msgstr "Pin"
+
+#: resources/views/discussions/dropdown.blade.php:48
+#: resources/views/files/dropdown.blade.php:44
+msgid "Unarchive"
+msgstr "Uit het archief halen"
+
+#: resources/views/discussions/dropdown.blade.php:51
+#: resources/views/files/dropdown.blade.php:47
+msgid "Archive"
+msgstr "Archief"
+
+#: resources/views/discussions/dropdown.blade.php:60
+#: resources/views/comments/comment.blade.php:56
+#: resources/views/calendarevents/dropdown.blade.php:38
+msgid "Show history"
+msgstr "Geschiedenis van aanpassingen tonen"
+
+#: resources/views/discussions/list.blade.php:8
+#: resources/views/discussions/list.blade.php:22
+#: resources/views/discussions/create.blade.php:3
+#: resources/views/dashboard/discussions.blade.php:5
+msgid "Start a new discussion"
+msgstr "Een discussie aanmaken"
+
+#: resources/views/discussions/history.blade.php:2
+#: resources/views/comments/history.blade.php:2
+#: resources/views/calendarevents/history.blade.php:2
+msgid "history"
+msgstr "Geschiedenis van de wijzigingen"
+
+#: resources/views/discussions/history.blade.php:6
+#: resources/views/groups/history.blade.php:6
+#: resources/views/comments/history.blade.php:6
+#: resources/views/calendarevents/history.blade.php:6
+msgid "Changed"
+msgstr "veranderd"
+
+#: resources/views/discussions/history.blade.php:6
+#: resources/views/groups/history.blade.php:7
+#: resources/views/comments/history.blade.php:6
+#: resources/views/calendarevents/history.blade.php:7
+msgid "Changed from"
+msgstr "veranderd van"
+
+#: resources/views/discussions/history.blade.php:6
+#: resources/views/groups/history.blade.php:7
+#: resources/views/comments/history.blade.php:6
+#: resources/views/calendarevents/history.blade.php:7
+msgid "Changed to"
+msgstr "veranderd naar"
+
+#: resources/views/discussions/history.blade.php:10
+#: resources/views/comments/history.blade.php:10
+#: resources/views/calendarevents/history.blade.php:11
+msgid "Back to"
+msgstr "Terugkeren naar"
+
+#: resources/views/discussions/edit.blade.php:2
+#: resources/views/users/edit.blade.php:2
+#: resources/views/calendarevents/edit.blade.php:2
+msgid "Modify"
+msgstr "Bewerken"
+
+#: resources/views/discussions/show.blade.php:31
+#: resources/views/calendarevents/show.blade.php:27
+msgid "Started by"
+msgstr "Begonnen door"
+
+#: resources/views/discussions/show.blade.php:37
+#: resources/views/calendarevents/show.blade.php:34
+msgid "in"
+msgstr "in"
+
+#: resources/views/discussions/show.blade.php:71
+msgid "New"
+msgstr "Nieuw"
+
+#: resources/views/discussions/show.blade.php:83
+msgid "You've read everything in this discussion"
+msgstr "Je hebt alles in deze discussie gelezen"
+
+#: resources/views/discussions/discussion.blade.php:18
+#: resources/views/groups/form.blade.php:61
+#: resources/views/groups/group.blade.php:11
+#: resources/views/files/file.blade.php:47
+msgid "Archived"
+msgstr "Gearchiveerd"
+
+#: resources/views/discussions/discussion.blade.php:40
+#: resources/views/groups/form.blade.php:61
+#: resources/views/groups/group.blade.php:5
+#: resources/views/files/file.blade.php:103
+msgid "Pinned"
+msgstr "Vastgepind"
+
+#: resources/views/discussions/delete.blade.php:2
+#: resources/views/files/delete.blade.php:2
+#: resources/views/comments/delete.blade.php:3
+#: resources/views/calendarevents/delete.blade.php:3
+msgid "Are you sure you want to delete?"
+msgstr "Bent u zeker dat u dit wilt verwijderen?"
+
+#: resources/views/discussions/form.blade.php:2
+#: resources/views/files/createlink.blade.php:15
+#: resources/views/calendarevents/form.blade.php:2
+msgid "Title"
+msgstr "Titel"
+
+#: resources/views/discussions/form.blade.php:9
+msgid "Body"
+msgstr "Tekst"
+
+#: resources/views/discussions/form.blade.php:33
+#: resources/views/comments/form.blade.php:19
+msgid "Attach a file"
+msgstr "Voeg een bestand toe"
+
+#: resources/views/discussions/create.blade.php:10
+#: resources/views/calendarevents/create.blade.php:10
+msgid "Group"
+msgstr "Groep"
+
+#: resources/views/discussions/create.blade.php:13
+#: resources/views/calendarevents/create.blade.php:13
+msgid "Choose a group"
+msgstr "Kies een groep"
+
+#: resources/views/discussions/create.blade.php:23
+#: resources/views/discussions/create.blade.php:36
+#: resources/views/discussions/tags.blade.php:11
+#: resources/views/files/createfolder.blade.php:16
+#: resources/views/files/createlink.blade.php:23
+#: resources/views/files/create.blade.php:27
+#: resources/views/calendarevents/create.blade.php:27
+msgid "Create"
+msgstr "Aanmaken"
+
+#: resources/views/discussions/general_index.blade.php:4
+msgid "Unread discussions"
+msgstr "Niet-gelezen discussies"
+
+#: resources/views/users/show.blade.php:29
+msgid "Registered"
+msgstr "Geregistreerd"
+
+#: resources/views/users/form.blade.php:14
+msgid "username"
+msgstr "Gebruikersnaam"
+
+#: resources/views/users/form.blade.php:44
+#: resources/views/auth/register.laravel.blade.php:70
+#: resources/views/auth/login.blade.php:23
+#: resources/views/auth/passwords/confirm.blade.php:17
+#: resources/views/auth/passwords/reset.blade.php:41
+#: resources/views/auth/register_password.blade.php:12
+msgid "Password"
+msgstr "Wachtwoord"
+
+#: resources/views/users/form.blade.php:55
+msgid "Confirm your password"
+msgstr "Bevestig uw wachtwoord"
+
+#: resources/views/users/form.blade.php:70
+#: resources/views/calendarevents/form.blade.php:10
+#: resources/views/calendarevents/form.blade.php:20
+msgid "Description"
+msgstr "Beschrijving"
+
+#: resources/views/users/form.blade.php:84
+msgid "Photo"
+msgstr "Foto"
+
+#: resources/views/users/form.blade.php:85
+#: resources/views/groups/import.blade.php:10
+#: resources/views/groups/form.blade.php:19
+#: resources/views/files/create.blade.php:11
+#: resources/views/calendarevents/form.blade.php:31
+#: resources/views/admin/settings/index.blade.php:74
+msgid "Select one file"
+msgstr "Selecteer een bestand"
+
+#: resources/views/users/form.blade.php:97
+#: resources/views/users/form.blade.php:103
+#: resources/views/users/form.blade.php:109
+#: resources/views/admin/groupadmins/index.blade.php:42
+#: resources/views/admin/groupadmins/index.blade.php:52
+#: resources/views/admin/user/index.blade.php:43
+#: resources/views/admin/user/index.blade.php:53
+msgid "yes"
+msgstr "JA"
+
+#: resources/views/users/form.blade.php:98
+#: resources/views/users/form.blade.php:104
+#: resources/views/users/form.blade.php:110
+#: resources/views/admin/groupadmins/index.blade.php:45
+#: resources/views/admin/groupadmins/index.blade.php:55
+#: resources/views/admin/user/index.blade.php:46
+#: resources/views/admin/user/index.blade.php:56
+msgid "no"
+msgstr "NO"
+
+#: resources/views/users/form.blade.php:102
+#: resources/views/admin/groupadmins/index.blade.php:15
+#: resources/views/admin/user/index.blade.php:15
+msgid "Email verified"
+msgstr "Email geverifieerd"
+
+#: resources/views/users/form.blade.php:108
+msgid "Is this user banned?"
+msgstr "Is deze gebruiker verbannen?"
+
+#: resources/views/users/contact.blade.php:2
+msgid "Contact"
+msgstr "Contact"
+
+#: resources/views/users/contact.blade.php:5
+msgid "Use the form below to send an email directly to this user."
+msgstr "Gebruik onderstaand formulier om rechtstreeks een e-mail naar deze gebruiker te sturen."
+
+#: resources/views/users/contact.blade.php:13
+msgid "Your message :"
+msgstr "Jouw bericht:"
+
+#: resources/views/users/contact.blade.php:22
+msgid "Reveal my email to this user so we can communicate by email"
+msgstr "Geef mijn e-mailadres door aan deze gebruiker, zodat we via e-mail kunnen communiceren"
+
+#: resources/views/users/contact.blade.php:26
+msgid "send"
+msgstr "Verzenden"
+
+#: resources/views/search/results.blade.php:4
+msgid "Your search for"
+msgstr "Zoeken"
+
+#: resources/views/search/results.blade.php:18
+msgid "Comments"
+msgstr "Commentaar"
+
+#: resources/views/search/results.blade.php:21
+msgid "Events"
+msgstr "Evenementen"
+
+#: resources/views/groups/allowed_tags.blade.php:2
+msgid "Manage tags on the content of this group"
+msgstr "Beheer tags op de inhoud van deze groep"
+
+#: resources/views/groups/allowed_tags.blade.php:5
+msgid "If you want to limit the available tags to classify content in this group, enter the tags in the box below. If you want to allow any tag, leave the box empty."
+msgstr "Als u de beschikbare tags wilt beperken om inhoud in deze groep te classificeren, voert u de tags in het onderstaande vak in. Als u een tag wilt toestaan, laat u het vak leeg."
+
+#: resources/views/groups/allowed_tags.blade.php:17
+msgid "For your information, here are all the tags in use in this group"
+msgstr "Ter informatie, hier zijn alle tags die in deze groep worden gebruikt"
+
+#: resources/views/groups/history.blade.php:2
+msgid "Edit history of this group"
+msgstr "Geschiedenis van deze groep"
+
+#: resources/views/groups/group-list.blade.php:32
+msgid "created at"
+msgstr "gemaakt op"
+
+#: resources/views/groups/group-list.blade.php:35
+msgid "updated at"
+msgstr "bijgewerkt op"
+
+#: resources/views/groups/show.blade.php:22
+msgid "Contact person(s)"
+msgstr "Contact personen"
+
+#: resources/views/groups/show.blade.php:34
+msgid "Inbox for this group"
+msgstr "Postvak IN voor deze groep"
+
+#: resources/views/groups/show.blade.php:36
+msgid "The group email can only be used by group members"
+msgstr "Het groeps-e-mailadres kan alleen door groepsleden worden gebruikt"
+
+#: resources/views/groups/show.blade.php:41
+msgid "Creation date"
+msgstr "Aanmaakdatum"
+
+#: resources/views/groups/show.blade.php:47
+#: resources/views/groups/form.blade.php:27
+msgid "Group type"
+msgstr "Type groep"
+
+#: resources/views/groups/show.blade.php:64
+msgid "Stats & keywords"
+msgstr "Statistieken en trefwoorden"
+
+#: resources/views/groups/import.blade.php:2
+msgid "Import a Group"
+msgstr "Een groep importeren"
+
+#: resources/views/groups/import.blade.php:14
+#: resources/views/files/create.blade.php:15
+#: resources/views/comments/create.blade.php:21
+msgid "Maximum file size"
+msgstr "Maximale bestandsgrootte"
+
+#: resources/views/groups/import.blade.php:20
+msgid "Import"
+msgstr "Importeren"
+
+#: resources/views/groups/importconfirm.blade.php:2
+msgid "Importing a Group"
+msgstr "Een groep importeren"
+
+#: resources/views/groups/importconfirm.blade.php:6
+msgid "You are about to create this group:"
+msgstr "Je staat op het punt deze groep aan te maken:"
+
+#: resources/views/groups/importconfirm.blade.php:10
+msgid "Type"
+msgstr "Type"
+
+#: resources/views/groups/importconfirm.blade.php:20
+msgid "The following usernames need to be renamed to avoid conflict with existing usernames"
+msgstr "De volgende gebruikersnamen moeten hernoemd worden om conflicten met bestaande gebruikersnamen te vermijden"
+
+#: resources/views/groups/importconfirm.blade.php:22
+msgid "new username"
+msgstr "nieuwe gebruikersnaam"
+
+#: resources/views/groups/importconfirm.blade.php:29
+#: resources/views/groups/create.blade.php:19
+msgid "Create the group"
+msgstr "Maak de groep aan"
+
+#: resources/views/groups/modules.blade.php:3
+msgid "Manage features"
+msgstr "Beheer functies"
+
+#: resources/views/groups/modules.blade.php:5
+msgid "Enable or disable features of your group"
+msgstr "Schakel de functies van uw groep in of uit"
+
+#: resources/views/groups/delete.blade.php:12
+msgid "Click here to confirm"
+msgstr "Klik hier om te bevestigen"
+
+#: resources/views/groups/form.blade.php:2
+#: resources/views/admin/group/index.blade.php:9
+msgid "Group name"
+msgstr "Naam van de groep"
+
+#: resources/views/groups/form.blade.php:9
+msgid "Group description"
+msgstr "Beschrijving van de groep"
+
+#: resources/views/groups/form.blade.php:18
+#: resources/views/calendarevents/form.blade.php:30
+msgid "Cover picture"
+msgstr "Cover"
+
+#: resources/views/groups/form.blade.php:31
+msgid "Choose the group type you want. An open group has the content public and anyone can join it. A closed group is invite only and the content is only visible to it's members. A secret group is not even discoverable by non members."
+msgstr "Kies het gewenste groepstype. Een open groep heeft de inhoud openbaar en iedereen kan eraan deelnemen. Een gesloten groep is alleen op uitnodiging en de inhoud is alleen zichtbaar voor de leden. Een geheime groep is zelfs niet te vinden door niet-leden."
+
+#: resources/views/groups/form.blade.php:56
+msgid "Choose a status for this group. This allows you to archive an inactive group or on the contrary pin an important group on top of lists"
+msgstr "Kies een status voor deze groep. Hiermee kunt u een inactieve groep archiveren of juist een belangrijke groep bovenaan lijsten vastpinnen"
+
+#: resources/views/groups/form.blade.php:61
+msgid "Normal group"
+msgstr "Normale groep"
+
+#: resources/views/groups/form.blade.php:75
+msgid "Display this group into the navigation bar. It won't be displayed into my groups anymore."
+msgstr "Geef deze groep weer in de navigatiebalk. Hij wordt niet meer weergegeven onder ‘Mijn groepen’."
+
+#: resources/views/groups/create.blade.php:8
+msgid "Import from a File"
+msgstr "Importeren vanuit een bestand"
+
+#: resources/views/files/gallery.blade.php:2
+#: resources/views/files/folder.blade.php:4
+msgid "Files in this group"
+msgstr "Bestanden in deze groep"
+
+#: resources/views/files/gallery.blade.php:8
+#: resources/views/files/folder.blade.php:10
+#: resources/views/files/index.blade.php:14
+msgid "Upload file"
+msgstr "Bestand toevoegen"
+
+#: resources/views/files/gallery.blade.php:18
+msgid "Show file list"
+msgstr "Tonen als lijst"
+
+#: resources/views/files/createfolder.blade.php:2
+#: resources/views/files/index.blade.php:32
+msgid "Create a folder"
+msgstr "Een map maken"
+
+#: resources/views/files/createfolder.blade.php:4
+msgid "Enter the name of the folder"
+msgstr "Voer de naam van de map in"
+
+#: resources/views/files/edit.blade.php:7
+msgid "Filename"
+msgstr "Bestandsnaam"
+
+#: resources/views/files/edit.blade.php:15
+#: resources/views/files/edit.blade.php:17
+msgid "Upload a new version of this file"
+msgstr "Upload een nieuwe versie van dit bestand"
+
+#: resources/views/files/edit.blade.php:23
+msgid "Folder"
+msgstr "Map"
+
+#: resources/views/files/edit.blade.php:26
+#: resources/views/files/show.blade.php:9
+#: resources/views/files/index.blade.php:46
+msgid "Root"
+msgstr "Wortel"
+
+#: resources/views/files/show.blade.php:99
+msgid "Download"
+msgstr "Downloaden"
+
+#: resources/views/files/createlink.blade.php:2
+msgid "Create a link"
+msgstr "Nieuwe link"
+
+#: resources/views/files/createlink.blade.php:4
+msgid ""
+"Here you can add a link (URL). For example link to videos, shared documents, etc...\n"
+"  Enter a correct URL starting with http:// and set a title for this link. You can also add tags."
+msgstr ""
+"Hier kunt u een link (URL) toevoegen. Bijvoorbeeld een link naar video's, gedeelde documenten, enz ...\n"
+"  Voer een correcte URL in die begint met http: // en stel een titel in voor deze link. U kunt ook tags toevoegen."
+
+#: resources/views/files/createlink.blade.php:12
+msgid "Link"
+msgstr "Link"
+
+#: resources/views/files/index.blade.php:23
+msgid "Create Link"
+msgstr "Nieuwe link"
+
+#: resources/views/files/create.blade.php:2
+msgid "Upload File"
+msgstr "Bestand uploaden"
+
+#: resources/views/comments/edit.blade.php:2
+msgid "Edit a comment"
+msgstr "Een opmerking bewerken"
+
+#: resources/views/comments/create.blade.php:20
+msgid "Simply drop a file on the editor to add it or use the image button in the toolbar"
+msgstr "Sleep eenvoudig een bestand naar de editor om het toe te voegen of gebruik de afbeeldingsknop in de werkbalk"
+
+#: resources/views/pages/help.blade.php:18
+msgid "Intro"
+msgstr "Intro"
+
+#: resources/views/vendor/pagination/tailwind.blade.php:6
+#: resources/views/vendor/pagination/tailwind.blade.php:11
+#: resources/views/vendor/pagination/tailwind.blade.php:50
+#: resources/views/vendor/pagination/tailwind.blade.php:58
+#: resources/views/vendor/pagination/simple-tailwind.blade.php:6
+#: resources/views/vendor/pagination/simple-tailwind.blade.php:11
+msgid "&laquo; Previous"
+msgstr "&laquo; Vorige"
+
+#: resources/views/vendor/pagination/tailwind.blade.php:18
+#: resources/views/vendor/pagination/tailwind.blade.php:23
+#: resources/views/vendor/pagination/tailwind.blade.php:93
+#: resources/views/vendor/pagination/tailwind.blade.php:99
+#: resources/views/vendor/pagination/simple-tailwind.blade.php:19
+#: resources/views/vendor/pagination/simple-tailwind.blade.php:24
+msgid "Next &raquo;"
+msgstr "Volgende &raquo;"
+
+#: resources/views/vendor/pagination/tailwind.blade.php:32
+msgid "Showing"
+msgstr "Weergave"
+
+#: resources/views/vendor/pagination/tailwind.blade.php:35
+msgid "to"
+msgstr "naar"
+
+#: resources/views/vendor/pagination/tailwind.blade.php:38
+msgid "of"
+msgstr "van"
+
+#: resources/views/vendor/pagination/tailwind.blade.php:41
+msgid "results"
+msgstr "resultaten"
+
+#: resources/views/vendor/pagination/tailwind.blade.php:82
+msgid "Go to page :page"
+msgstr "Ga naar pagina :page"
+
+#: resources/views/emails/confirm.blade.php:3
+msgid "Thank you for joining"
+msgstr "Bedankt voor uw registratie"
+
+#: resources/views/emails/confirm.blade.php:6
+msgid "We need to confirm your account"
+msgstr "Uw mailadres moet nog bevestigd worden"
+
+#: resources/views/emails/confirm.blade.php:11
+msgid "Click to confirm"
+msgstr "Klik om uw mailadres te bevestigen"
+
+#: resources/views/emails/confirm.blade.php:15
+msgid "If you didn't ask to join"
+msgstr "Als u geen registratie gevraagd hebt"
+
+#: resources/views/emails/confirm.blade.php:15
+msgid "Do nothing"
+msgstr "dan hoeft u niets te doen"
+
+#: resources/views/emails/loginbyemail.blade.php:3
+#: resources/views/emails/contact_direct.blade.php:3
+#: resources/views/emails/notification.blade.php:4
+#: resources/views/emails/invite.blade.php:3
+#: resources/views/emails/contact.blade.php:3
+msgid "Hello"
+msgstr "Beste"
+
+#: resources/views/emails/contact_direct.blade.php:6
+#: resources/views/emails/contact.blade.php:6
+msgid "sent you a message"
+msgstr "u een bericht gestuurd"
+
+#: resources/views/emails/notification.blade.php:6
+msgid "Here is the latest news from"
+msgstr "Hier is het laatste nieuws"
+
+#: resources/views/emails/notification.blade.php:46
+msgid "Next events"
+msgstr "Volgende evenementen"
+
+#: resources/views/emails/notification.blade.php:63
+msgid "Latest users"
+msgstr "Nieuwe deelnemers"
+
+#: resources/views/emails/notification.blade.php:75
+msgid "Latest files"
+msgstr "Recente bestanden"
+
+#: resources/views/emails/notification.blade.php:90
+msgid "You receive this email from the group"
+msgstr "U ontvangt deze e-mail groep"
+
+#: resources/views/emails/notification.blade.php:90
+msgid "Because you asked for it"
+msgstr "omdat u het heeft aangevraagd op de hoogte gehouden worden"
+
+#: resources/views/emails/notification.blade.php:93
+msgid "Click here to change your notification preferences or to unsubscribe completely"
+msgstr "Klik hier om uw meldingsvoorkeuren te wijzigen of om u volledig af te melden"
+
+#: resources/views/emails/invite.blade.php:7
+msgid "thinks that you might want to join"
+msgstr "denkt dat u misschien geïnteresseerd bent om aan te sluiten bij de groep"
+
+#: resources/views/emails/invite.blade.php:9
+msgid "inside"
+msgstr "van"
+
+#: resources/views/emails/invite.blade.php:13
+msgid "this will allow you to be informed and to participate"
+msgstr "Op die manier blijft u op de hoogte van de activiteiten van deze groep, en kunt u deelnemen aan de discussies."
+
+#: resources/views/emails/invite.blade.php:17
+msgid "Here is the description of the group"
+msgstr "Dit is de beschrijving van de groep"
+
+#: resources/views/emails/invite.blade.php:23
+msgid "Accept the invitation"
+msgstr "De uitnodiging accepteren"
+
+#: resources/views/emails/invite.blade.php:29
+msgid "Refuse the invitation"
+msgstr "De uitnodiging afwijzen"
+
+#: resources/views/emails/password.blade.php:4
+msgid "You asked for a password change"
+msgstr "U hebt gevraagd uw wachtwoord te wijzigen"
+
+#: resources/views/emails/password.blade.php:7
+msgid "Click here to change your password"
+msgstr "Klik hier om uw wachtwoord te wijzigen"
+
+#: resources/views/emails/password.blade.php:10
+msgid "If you don't want to change your password, do nothing"
+msgstr "Wil u uw wachtwoord niet wijzigen, doe dan niets."
+
+#: resources/views/emails/contact.blade.php:18
+msgid "Don't reply to this email, use the reply button(s) instead"
+msgstr "Beantwoord deze e-mail niet, maar gebruik in plaats daarvan de antwoordknop (pen)"
+
+#: resources/views/emails/bounce.blade.php:3
+msgid "You sent an email that was not delivered"
+msgstr "U heeft een e-mail verzonden die niet is afgeleverd"
+
+#: resources/views/auth/register.laravel.blade.php:42
+#: resources/views/auth/passwords/email.blade.php:17
+#: resources/views/auth/passwords/reset.blade.php:13
+msgid "E-Mail Address"
+msgstr "E-mailadres"
+
+#: resources/views/auth/register.laravel.blade.php:98
+#: resources/views/auth/passwords/confirm.blade.php:6
+#: resources/views/auth/passwords/confirm.blade.php:47
+#: resources/views/auth/passwords/reset.blade.php:69
+msgid "Confirm Password"
+msgstr "Bevestig wachtwoord"
+
+#: resources/views/auth/login.blade.php:17
+msgid "Username or Email"
+msgstr "Gebruikersnaam of e-mail"
+
+#: resources/views/auth/login.blade.php:33
+msgid "Remember me"
+msgstr "Herinner me"
+
+#: resources/views/auth/login.blade.php:41
+msgid "Password reset"
+msgstr "Wachtwoord resetten"
+
+#: resources/views/auth/register.blade.php:52
+msgid "If you already have an account"
+msgstr "Als u al geregistreerd bent"
+
+#: resources/views/auth/register.blade.php:53
+msgid "You can login here"
+msgstr "kan u hier inloggen"
+
+#: resources/views/auth/verify.blade.php:6
+msgid "Verify Your Email Address"
+msgstr "Verifieer uw e-mailadres"
+
+#: resources/views/auth/verify.blade.php:11
+msgid "A fresh verification link has been sent to your email address."
+msgstr "Er is een nieuwe verificatielink naar uw e-mailadres verzonden."
+
+#: resources/views/auth/verify.blade.php:16
+msgid "Before proceeding, please check your email for a verification link."
+msgstr "Controleer uw e-mail voor een verificatielink voordat u verdergaat."
+
+#: resources/views/auth/verify.blade.php:18
+msgid "If you did not receive the email"
+msgstr "Als u de e-mail niet hebt ontvangen"
+
+#: resources/views/auth/verify.blade.php:21
+msgid "click here to request another"
+msgstr "Klik hier om een andere aan te vragen"
+
+#: resources/views/auth/loginbyemail.blade.php:11
+msgid "Just enter your email :"
+msgstr "Voer uw e-mailadres in:"
+
+#: resources/views/auth/passwords/confirm.blade.php:9
+msgid "Please confirm your password before continuing."
+msgstr "Bevestig uw wachtwoord voordat u verdergaat."
+
+#: resources/views/auth/passwords/confirm.blade.php:53
+msgid "Forgot Your Password?"
+msgstr "Wachtwoord vergeten?"
+
+#: resources/views/auth/passwords/email.blade.php:3
+#: resources/views/auth/passwords/reset.blade.php:3
+#: resources/views/auth/passwords/reset.blade.php:76
+msgid "Reset Password"
+msgstr "Wachtwoord opnieuw instellen"
+
+#: resources/views/auth/passwords/email.blade.php:46
+msgid "Send Password Reset Link"
+msgstr "Stuur wachtwoordherstellink"
+
+#: resources/views/auth/register_password.blade.php:19
+msgid "Confirm password"
+msgstr "Wachtwoord bevestigen"
+
+#: resources/views/errors/419.blade.php:1
+#: resources/views/errors/419.blade.php:3
+msgid "Page Expired"
+msgstr "Pagina verlopen"
+
+#: resources/views/errors/503.blade.php:1
+#: resources/views/errors/503.blade.php:3
+msgid "Service Unavailable"
+msgstr "Service niet beschikbaar"
+
+#: resources/views/errors/429.blade.php:1
+#: resources/views/errors/429.blade.php:3
+msgid "Too Many Requests"
+msgstr "Te veel verzoeken"
+
+#: resources/views/errors/401.blade.php:1
+#: resources/views/errors/401.blade.php:3
+msgid "Unauthorized"
+msgstr "Ongeautoriseerd"
+
+#: resources/views/errors/illustrated-layout.blade.php:464
+msgid "Oh no"
+msgstr "Oh nee"
+
+#: resources/views/errors/illustrated-layout.blade.php:475
+msgid "Go Home"
+msgstr "Ga naar huis"
+
+#: resources/views/calendarevents/unattend.blade.php:2
+#: resources/views/calendarevents/unattend.blade.php:12
+msgid "Unattend"
+msgstr "unattend"
+
+#: resources/views/calendarevents/dropdown.blade.php:21
+msgid "Duplicate"
+msgstr "Duplicaat"
+
+#: resources/views/calendarevents/calendarevent.blade.php:39
+#: resources/views/calendarevents/show.blade.php:7
+#: resources/views/calendarevents/form.blade.php:45
+msgid "Public"
+msgstr "Openbaar"
+
+#: resources/views/calendarevents/calendarevent.blade.php:42
+#: resources/views/calendarevents/show.blade.php:9
+msgid "Private"
+msgstr "Privaat"
+
+#: resources/views/calendarevents/calendarevent.blade.php:67
+msgid "participants"
+msgstr "deelnemers"
+
+#: resources/views/calendarevents/list.blade.php:7
+#: resources/views/calendarevents/index.blade.php:26
+#: resources/views/calendarevents/create.blade.php:3
+#: resources/views/dashboard/calendar.blade.php:7
+#: resources/views/dashboard/calendar-list.blade.php:7
+msgid "Add an event"
+msgstr "Voeg een evenement toe"
+
+#: resources/views/calendarevents/show.blade.php:54
+msgid "Begins"
+msgstr "Start"
+
+#: resources/views/calendarevents/show.blade.php:56
+msgid "Ends"
+msgstr "Einde"
+
+#: resources/views/calendarevents/show.blade.php:61
+msgid "Registration closes at :date"
+msgstr "De inschrijving sluit om :date"
+
+#: resources/views/calendarevents/show.blade.php:82
+msgid "Users attending"
+msgstr "Gebruikers aanwezig"
+
+#: resources/views/calendarevents/show.blade.php:92
+msgid "Users not attending"
+msgstr "Gebruikers die niet aanwezig zijn"
+
+#: resources/views/calendarevents/form.blade.php:36
+msgid "Visibility"
+msgstr "Zichtbaarheid"
+
+#: resources/views/calendarevents/form.blade.php:39
+msgid "You can make this element public even if your group is private. In this case everyone will be able to see this element without being member."
+msgstr "U kunt dit element openbaar maken, zelfs als uw groep privé is. In dit geval kan iedereen dit element zien zonder lid te zijn."
+
+#: resources/views/calendarevents/form.blade.php:56
+msgid "Start date"
+msgstr "Startdatum"
+
+#: resources/views/calendarevents/form.blade.php:63
+msgid "Start time"
+msgstr "Starttijd"
+
+#: resources/views/calendarevents/form.blade.php:70
+msgid "Stop time"
+msgstr "Stoptijd"
+
+#: resources/views/calendarevents/form.blade.php:82
+msgid "Stop date"
+msgstr "Stop datum"
+
+#: resources/views/calendarevents/form.blade.php:94
+msgid "Registration closes at"
+msgstr "De inschrijving sluit om"
+
+#: resources/views/calendarevents/ical.blade.php:4
+#: resources/views/dashboard/ical.blade.php:4
+msgid "Public iCal link"
+msgstr "Openbare iCal-link"
+
+#: resources/views/calendarevents/ical.blade.php:12
+#: resources/views/dashboard/ical.blade.php:12
+msgid "Private iCal link (do not share)"
+msgstr "Privé iCal-link (niet delen)"
+
+#: resources/views/dashboard/groups.blade.php:17
+msgid "Start a group"
+msgstr "Een groep aanmaken"
+
+#: resources/views/dashboard/ical.blade.php:20
+msgid "RSS Feed"
+msgstr "RSS-feed"
+
+#: resources/views/invites/form.blade.php:2
+msgid "Invite people to this group"
+msgstr "Nodig mensen uit om tot deze groep toe te treden"
+
+#: resources/views/invites/form.blade.php:5
+msgid "Invite people who might be interested in this group. Please don't spam people's emails"
+msgstr "Geef nieuwe impulsen door personen uit te nodigen die mogelijks geïnteresseerd zijn in deze groep. Geef de e-mailadressen in van de personen die u zou willen uitnodigen. U kan deze ingeven zoals u wil: één per lijn of gescheiden door een spatie of een komma. Geef momenteel niet meer dan 50 personen tegelijk in, omdat de site anders dreigt te blokkeren. Maak geen misbruik van dit systeem om geen mensen te storen. De uitnodigingen worden slechts éénmaal naar elke persoon verstuurd."
+
+#: resources/views/invites/form.blade.php:14
+msgid "People to invite"
+msgstr "E-mails"
+
+#: resources/views/invites/form.blade.php:21
+msgid "Invite"
+msgstr "Nodig deze perso(o)n(en) uit"
+
+#: resources/views/admin/groupadmins/index.blade.php:12
+#: resources/views/admin/user/index.blade.php:12
+msgid "Registration time"
+msgstr "Datum van registratie"
+
+#: resources/views/admin/groupadmins/index.blade.php:14
+#: resources/views/admin/user/index.blade.php:14
+msgid "Administrator"
+msgstr "Beheerder"
+
+#: resources/views/admin/settings/index.blade.php:21
+msgid "Appearance"
+msgstr "Uiterlijk"
+
+#: resources/views/admin/settings/index.blade.php:36
+msgid "Custom content"
+msgstr "Aangepaste inhoud"
+
+#: resources/views/admin/settings/index.blade.php:46
+msgid "Navigation"
+msgstr "Navigatie"
+
+#: resources/views/admin/settings/index.blade.php:56
+msgid "Application name"
+msgstr "Toepassingsnaam"
+
+#: resources/views/admin/settings/index.blade.php:59
+msgid "The name of your application. Used everywhere, in titles, in emails, etc... Choose a short and catchy name"
+msgstr "De naam van uw applicatie. Wordt overal gebruikt, in titels, in e-mails, etc. Kies een korte en pakkende naam"
+
+#: resources/views/admin/settings/index.blade.php:68
+msgid "Application logo"
+msgstr "Toepassingslogo"
+
+#: resources/views/admin/settings/index.blade.php:71
+msgid "This logo will be used in the top left area and as a favicon"
+msgstr "Dit logo wordt gebruikt in het linkerbovengedeelte en als favicon"
+
+#: resources/views/admin/settings/index.blade.php:79
+msgid "Home page presentation text : for anonymous users"
+msgstr "Presentatietekst op de startpagina: voor anonieme gebruikers"
+
+#: resources/views/admin/settings/index.blade.php:84
+msgid "This is shown on the homepage for non connected user. Make it attractive :-)"
+msgstr "Dit wordt getoond op de homepage voor niet-verbonden gebruikers. Maak het aantrekkelijk :-)"
+
+#: resources/views/admin/settings/index.blade.php:93
+msgid "Home page presentation text <em>for logged-in users</em>"
+msgstr "Presentatietekst op de startpagina <em>voor ingelogde gebruikers</em>"
+
+#: resources/views/admin/settings/index.blade.php:97
+msgid "You can use it for announcements for example"
+msgstr "U kunt het bijvoorbeeld gebruiken voor aankondigingen"
+
+#: resources/views/admin/settings/index.blade.php:105
+msgid "Help page"
+msgstr "Helppagina"
+
+#: resources/views/admin/settings/index.blade.php:107
+msgid "A single help page you can customize, available on the user menu, for logged in user"
+msgstr "Eén enkele helppagina die u kunt aanpassen, beschikbaar in het gebruikersmenu, voor ingelogde gebruikers"
+
+#: resources/views/admin/settings/index.blade.php:119
+msgid "Group creation"
+msgstr "Groepscreatie"
+
+#: resources/views/admin/settings/index.blade.php:125
+msgid "Allow regular users to create groups (if you uncheck this box, only admins will be able to create groups)"
+msgstr "Sta gewone gebruikers toe om groepen te maken (als u dit vakje uitvinkt, kunnen alleen beheerders groepen maken)"
+
+#: resources/views/admin/settings/index.blade.php:132
+msgid "Allow regular users to create <strong>secret</strong> groups (if you uncheck this box, only admins will be able to create secret groups)"
+msgstr "Sta gewone gebruikers toe om <strong>geheime</strong> groepen te maken (als u dit vakje uitvinkt, kunnen alleen beheerders geheime groepen maken)"
+
+#: resources/views/admin/settings/index.blade.php:138
+msgid "Allow regular users to import groups (if you uncheck this box, only admins will be able to import groups)"
+msgstr "Sta gewone gebruikers toe om groepen te importeren (als je dit vakje uitschakelt, kunnen alleen admins groepen importeren)"
+
+#: resources/views/admin/settings/index.blade.php:145
+msgid "Allow anyone to create a new user account on this server (unchecking this box will disable registration)"
+msgstr "Sta iedereen toe om een nieuwe gebruikersaccount aan te maken op deze server (door dit vakje uit te vinken wordt registratie uitgeschakeld)"
+
+#: resources/views/admin/settings/index.blade.php:157
+msgid "Notify administrators when a new group is created"
+msgstr "Beheerders op de hoogte stellen wanneer er een nieuwe groep wordt aangemaakt"
+
+#: resources/views/admin/settings/index.blade.php:163
+msgid "Custom footer code"
+msgstr "Aangepaste voettekstcode"
+
+#: resources/views/admin/settings/index.blade.php:166
+msgid "You can add html / css / js at the footer of each page here"
+msgstr "U kunt hier html / css / js toevoegen aan de voettekst van elke pagina"
+
+#: resources/views/admin/settings/index.blade.php:177
+msgid "Limit the allowed tags for tagging users"
+msgstr "Beperk de toegestane tags voor het taggen van gebruikers"
+
+#: resources/views/admin/settings/index.blade.php:179
+#: resources/views/admin/settings/index.blade.php:196
+msgid "Enter a coma separated list of allowed tags or leave blank to allow free tagging"
+msgstr "Voer een door komma's gescheiden lijst met toegestane tags in of laat het leeg om gratis taggen toe te staan"
+
+#: resources/views/admin/settings/index.blade.php:194
+msgid "Limit the allowed tags for tagging groups"
+msgstr "Beperk de toegestane tags voor taggroepen"
+
+#: resources/views/admin/settings/index.blade.php:214
+msgid "Navigation bar"
+msgstr "Navigatiebalk"
+
+#: resources/views/admin/settings/index.blade.php:218
+msgid "Show overview button inside the navigation bar"
+msgstr "Toon overzichtsknop in de navigatiebalk"
+
+#: resources/views/admin/settings/index.blade.php:227
+msgid "Show :name button into overview"
+msgstr "Toon :name-knop in overzicht"
+
+#: resources/views/admin/settings/index.blade.php:235
+msgid "Show Help button inside the navigation bar"
+msgstr "Helpknop in de navigatiebalk tonen"
+
+#: resources/views/admin/settings/index.blade.php:241
+msgid "Show Locales button inside the navigation bar"
+msgstr "Toon Locales knop in de navigatiebalk"
+
+#: resources/views/admin/settings/index.blade.php:245
+msgid "Locales"
+msgstr "Locaties"
+
+#: resources/views/admin/settings/index.blade.php:250
+msgid "Show :locale button into locales"
+msgstr "Toon :locale knop in locales"
