@@ -29,6 +29,9 @@ class SearchController extends Controller
     public function index(Request $request)
     {
         // validate user input
+        $query = null;
+        $results = collect();
+        $allowed_groups = collect();
 
         if ($request->input('query')) {
             $query = mb_strimwidth($request->input('query'), 0, 32);
@@ -52,11 +55,19 @@ class SearchController extends Controller
             $scope = Auth::user()->getPreference('show', 'joined');
         }
 
+        // the "public" context preference matches the "all public groups" search scope
+        if ($scope == 'public') {
+            $scope = 'all';
+        }
+
+        // only super admins can search all groups, anything else falls back to joined groups
+        if (!in_array($scope, ['joined', 'all', 'admin']) || ($scope == 'admin' && !Auth::user()->isAdmin())) {
+            $scope = 'joined';
+        }
+
         if ($scope == 'admin') {
-            // build a list of groups the user has access to
-            if (Auth::user()->isAdmin()) { // super admin sees everything
-                $allowed_groups = Group::pluck('id');
-            }
+            // super admin sees everything
+            $allowed_groups = Group::pluck('id');
         }
 
         if ($scope == 'all') {
