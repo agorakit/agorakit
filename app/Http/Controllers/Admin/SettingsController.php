@@ -23,13 +23,13 @@ class SettingsController extends Controller
     public function index()
     {
         $overviewItems = [
-            "show_overview_all_groups" => trans('All groups'),
-            "show_overview_discussions" => trans('Discussions'),
-            "show_overview_calendar" => trans('Calendar'),
-            "show_overview_tags" => trans('Tags'),
-            "show_overview_map" => trans('Map'),
-            "show_overview_files" => trans('Files'),
-            "show_overview_users" => trans('Users'),
+            "show_overview_all_groups" => t('All groups'),
+            "show_overview_discussions" => t('Discussions'),
+            "show_overview_calendar" => t('Calendar'),
+            "show_overview_tags" => t('Tags'),
+            "show_overview_map" => t('Map'),
+            "show_overview_files" => t('Files'),
+            "show_overview_users" => t('Users'),
         ];
 
         return view(
@@ -44,7 +44,7 @@ class SettingsController extends Controller
     public function update(Request $request)
     {
         if (!Auth::user()->isAdmin()) {
-            flash(trans('Not allowed'));
+            flash(t('Not allowed'));
             return redirect()->action('DashboardController@index');
         }
 
@@ -81,13 +81,13 @@ class SettingsController extends Controller
         setting()->set('show_help_inside_navbar', $request->has('show_help_inside_navbar') ? 1 : 0);
 
         $overviewItems = [
-            "show_overview_all_groups" => trans('All groups'),
-            "show_overview_discussions" => trans('Discussions'),
-            "show_overview_calendar" => trans('Calendar'),
-            "show_overview_tags" => trans('Tags'),
-            "show_overview_map" => trans('Map'),
-            "show_overview_files" => trans('Files'),
-            "show_overview_users" => trans('Users'),
+            "show_overview_all_groups" => t('All groups'),
+            "show_overview_discussions" => t('Discussions'),
+            "show_overview_calendar" => t('Calendar'),
+            "show_overview_tags" => t('Tags'),
+            "show_overview_map" => t('Map'),
+            "show_overview_files" => t('Files'),
+            "show_overview_users" => t('Users'),
         ];
 
         foreach (array_keys($overviewItems) as $item) {
@@ -111,7 +111,7 @@ class SettingsController extends Controller
             }
         }
 
-        flash(trans('Success'));
+        flash(t('Success'));
 
         return view('admin.settings.index', compact('overviewItems'));
     }

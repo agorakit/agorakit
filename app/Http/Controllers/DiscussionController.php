@@ -36,7 +36,7 @@ class DiscussionController extends Controller
         natcasesort($tags);
 
         return view('dashboard.discussions')
-            ->with('title', trans('Discussions'))
+            ->with('title', t('Discussions'))
             ->with('tab', 'discussions')
             ->with('discussions', $discussions)
             ->with('tags', $tags);

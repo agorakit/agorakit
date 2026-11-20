@@ -117,7 +117,7 @@ class CommentController extends Controller
                 ->withInput();
         }
         $comment->save();
-        flash(trans('Resource updated successfully'));
+        flash(t('Resource updated successfully'));
 
         return redirect()->route('groups.discussions.show', [$discussion->group, $discussion]);
     }
@@ -151,7 +151,7 @@ class CommentController extends Controller
     {
         $this->authorize('update', $comment);
         $comment->delete();
-        flash(trans('Resource deleted successfully'));
+        flash(t('Resource deleted successfully'));
 
         return redirect()->route('groups.discussions.show', [$group, $discussion]);
     }

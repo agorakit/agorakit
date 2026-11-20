@@ -32,15 +32,15 @@ class Admin
     public function handle($request, Closure $next)
     {
         if ($this->auth->guest()) {
-            return redirect()->guest('login')->with('message', trans('You are not logged in'));
+            return redirect()->guest('login')->with('message', t('You are not logged in'));
         }
 
         if ($request->user()->isAdmin()) {
             return $next($request);
         } else {
-            flash(trans('You are not an admin'));
+            flash(t('You are not an admin'));
 
-            return response(trans('You are not an admin'), 401);
+            return response(t('You are not an admin'), 401);
         }
     }
 }

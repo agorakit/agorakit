@@ -20,7 +20,7 @@ class MapController extends Controller
    */
     public function index()
     {
-        $title = trans('Map');
+        $title = t('Map');
 
         return view('dashboard.map')
         ->with('json', route('map.geojson'))

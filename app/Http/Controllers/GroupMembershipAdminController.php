@@ -20,7 +20,7 @@ class GroupMembershipAdminController extends Controller
         $this->authorize('edit', $membership);
 
         return view('membership.admin.edit')
-            ->with('title', $group->name . ' - ' . trans('Settings'))
+            ->with('title', $group->name . ' - ' . t('Settings'))
             ->with('tab', 'users')
             ->with('group', $group)
             ->with('interval', minutesToInterval($membership->notification_interval))
@@ -55,7 +55,7 @@ class GroupMembershipAdminController extends Controller
         $membership->notification_interval = intervalToMinutes($request->input('notifications'));
         $membership->save();
 
-        flash(trans('Settings updated'));
+        flash(t('Settings updated'));
         return redirect()->route('groups.users.index', $membership->group);
     }
 }

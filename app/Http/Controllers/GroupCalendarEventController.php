@@ -68,7 +68,7 @@ class GroupCalendarEventController extends Controller
 
             return view('calendarevents.index')
                 ->with('type', 'list')
-                ->with('title', $group->name . ' - ' . trans('Calendar'))
+                ->with('title', $group->name . ' - ' . t('Calendar'))
                 ->with('events', $events)
                 ->with('group', $group)
                 ->with('tab', 'calendarevent');
@@ -233,7 +233,7 @@ class GroupCalendarEventController extends Controller
 
         if ($event->start > $event->stop) {
             return redirect()->route('groups.calendarevents.create', $group)
-                ->withErrors(trans('Start date cannot be after end date'))
+                ->withErrors(t('Start date cannot be after end date'))
                 ->withInput();
         }
 
@@ -255,9 +255,9 @@ class GroupCalendarEventController extends Controller
 
             // Geocode
             if (!$event->geocode()) {
-                flash(trans('Location cannot be geocoded'));
+                flash(t('Location cannot be geocoded'));
             } else {
-                flash(trans('Resource geocoded successfully'));
+                flash(t('Resource geocoded successfully'));
             }
         }
 
@@ -286,9 +286,9 @@ class GroupCalendarEventController extends Controller
         // handle cover
         if ($request->hasFile('cover')) {
             if ($event->setCoverFromRequest($request)) {
-                flash(trans('Cover added successfully'));
+                flash(t('Cover added successfully'));
             } else {
-                warning(trans('Could not handle cover image. Is it an image file (png, jpeg,...  ?)'));
+                warning(t('Could not handle cover image. Is it an image file (png, jpeg,...  ?)'));
             }
         }
 
@@ -298,7 +298,7 @@ class GroupCalendarEventController extends Controller
         $group->touch();
         Auth::user()->touch();
 
-        flash(trans('Resource created successfully'));
+        flash(t('Resource created successfully'));
 
 
 
@@ -416,9 +416,9 @@ class GroupCalendarEventController extends Controller
         // Geocode
         if ($event->location <> $old_location) {
             if (!$event->geocode()) {
-                flash(trans('Location cannot be geocoded'));
+                flash(t('Location cannot be geocoded'));
             } else {
-                flash(trans('Resource geocoded successfully'));
+                flash(t('Resource geocoded successfully'));
             }
         }
 
@@ -439,9 +439,9 @@ class GroupCalendarEventController extends Controller
         // handle cover
         if ($request->hasFile('cover')) {
             if ($event->setCoverFromRequest($request)) {
-                flash(trans('Cover image has been updated, please reload to see the new cover'));
+                flash(t('Cover image has been updated, please reload to see the new cover'));
             } else {
-                flash(trans('Error adding a new cover'));
+                flash(t('Error adding a new cover'));
             }
         } else {
             flash('no cover');
@@ -491,7 +491,7 @@ class GroupCalendarEventController extends Controller
     {
         $this->authorize('delete', $event);
         $event->delete();
-        flash(trans('Resource deleted successfully'));
+        flash(t('Resource deleted successfully'));
 
         return redirect()->route('groups.calendarevents.index', $group);
     }

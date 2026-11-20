@@ -74,7 +74,7 @@ class ModuleController extends Controller
         $group->setSetting('module_custom_name', $request->input('module_custom_name'));
         $group->setSetting('module_custom_html', $request->input('module_custom_html'));
 
-        flash(trans('Resource updated successfully'));
+        flash(t('Resource updated successfully'));
 
         return redirect()->route('groups.show', $group);
     }

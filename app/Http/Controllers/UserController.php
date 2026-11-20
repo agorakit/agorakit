@@ -27,7 +27,7 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        $title = trans('Users');
+        $title = t('Users');
         if (Auth::check()) {
             if (Auth::user()->getPreference('show') == 'all') {
                 // build a list of groups the user has access to
@@ -83,7 +83,7 @@ class UserController extends Controller
                 ->with('tab', 'contact')
                 ->with('user', $user);
         } else {
-            flash(trans('This user did not verify his/her email so you cannot contact him/her'));
+            flash(t('This user did not verify his/her email so you cannot contact him/her'));
 
             return redirect()->back();
         }
@@ -102,16 +102,16 @@ class UserController extends Controller
                 $body = $request->input('body');
                 Mail::to($to_user)->send(new ContactUser($from_user, $to_user, $body, $request->has('reveal_email')));
 
-                flash(trans('Message sent'));
+                flash(t('Message sent'));
 
                 return redirect()->route('users.contactform', $to_user);
             } else {
-                flash(trans('Please type a message'));
+                flash(t('Please type a message'));
 
                 return redirect()->back();
             }
         } else {
-            flash(trans('The user you are trying to contact did not verify his/her email'));
+            flash(t('The user you are trying to contact did not verify his/her email'));
 
             return redirect()->back();
         }
@@ -123,7 +123,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         if ($user->isVerified() || Auth::user()->isAdmin()) {
-            $title = $user->username . ' ' . trans('User profile');
+            $title = $user->username . ' ' . t('User profile');
 
             return view('users.show')
                 ->with('activities', $user->activities()->whereIn('group_id', Group::public()->pluck('id'))->paginate(10))
@@ -133,7 +133,7 @@ class UserController extends Controller
                 ->with('title', $title);
         }
 
-        flash(trans('This user is unverified'));
+        flash(t('This user is unverified'));
 
         return redirect()->back();
     }
@@ -182,9 +182,9 @@ class UserController extends Controller
                 // Geocode
                 if ($user->location <> $old_location) {
                     if (!$user->geocode()) {
-                        flash(trans('Location cannot be geocoded'));
+                        flash(t('Location cannot be geocoded'));
                     } else {
-                        flash(trans('Resource geocoded successfully'));
+                        flash(t('Resource geocoded successfully'));
                     }
                 }
             }
@@ -193,7 +193,7 @@ class UserController extends Controller
             if ($user->username != $request->input('username')) {
                 $existing_user = User::where('username', $request->input('username'))->first();
                 if ($existing_user) {
-                    warning(trans('This username is taken, another one has been generated'));
+                    warning(t('This username is taken, another one has been generated'));
                     $user->username = SlugService::createSlug(User::class, 'username', $request->input('username'));
                 } else {
                     $user->username = $request->input('username');
@@ -270,7 +270,7 @@ class UserController extends Controller
 
             $user->save();
 
-            flash(trans('Resource updated successfully'));
+            flash(t('Resource updated successfully'));
 
             return redirect()->route('users.show', $user);
         } else {
@@ -285,7 +285,7 @@ class UserController extends Controller
     {
         if ($user->verified == 0) {
             Mail::to($user)->send(new UserConfirmation($user));
-            flash(trans('Invitation sent again'));
+            flash(t('Invitation sent again'));
 
             return redirect()->route('users.show', $user);
         } else {

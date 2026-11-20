@@ -57,10 +57,10 @@ class LoginController extends Controller
             if ($user) {
                 // send login link by email
                 Mail::to($user->email)->send(new LoginByEmail($user));
-                flash(trans('Check your mailbox, we sent you a login link. It will expires in 30 minutes'));
+                flash(t('Check your mailbox, we sent you a login link. It will expires in 30 minutes'));
                 return redirect('/');
             } else {
-                warning(trans('No user found, please create an account instead'));
+                warning(t('No user found, please create an account instead'));
                 return redirect()->back();
             }
         } else {
@@ -76,11 +76,11 @@ class LoginController extends Controller
                     return redirect()->intended('/');
                 } else {
                     $this->incrementLoginAttempts($request);
-                    warning(trans('Incorrect password and/or username'));
+                    warning(t('Incorrect password and/or username'));
                     return redirect()->back();
                 }
             } else {
-                warning(trans('No user found, please create an account instead'));
+                warning(t('No user found, please create an account instead'));
                 return redirect()->back();
             }
         }
