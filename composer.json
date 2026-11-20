@@ -44,7 +44,7 @@
         "spatie/laravel-honeypot": "^4.5",
         "spatie/laravel-ignition": "^2.8",
         "suin/php-rss-writer": "^1.6",
-        "tio/laravel": "^1.23",
+        "tio/laravel": "^1.25",
         "toin0u/geocoder-laravel": "^13.2",
         "venturecraft/revisionable": "^1.41",
         "watson/validating": "^8.2",
