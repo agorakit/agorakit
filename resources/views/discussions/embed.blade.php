@@ -3,7 +3,7 @@
     <h5 class="card-title"><i class="far fa-comment"></i> {{ $discussion->name }}</h5>
     <p class="card-text">{{ summary($discussion->body) }}</p>
     <a  href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}#unread" class="btn btn-primary btn-sm">
-      {{trans('Visit')}}
+      {{t('Visit')}}
     </a>
   </div>
 </div>

@@ -3,12 +3,12 @@
 @section('content')
 @include('partials.datatables')
 
-        <h2>{{trans('Files in this group')}}
+        <h2>{{t('Files in this group')}}
 
             @can('create-file', $group)
                 <a class="btn btn-primary btn-xs" href="{{ route('groups.files.create', $group ) }}">
                     <i class="fa fa-plus"></i>
-                    {{trans('Upload file')}}
+                    {{t('Upload file')}}
                 </a>
             @endcan
 
@@ -19,7 +19,7 @@
                 <thead>
                     <tr>
                         <th></th>
-                        <th>{{trans('Name')}}</th>
+                        <th>{{t('Name')}}</th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -42,12 +42,12 @@
                         <td>
                             @can('edit', $file)
                                 <a class="btn btn-primary btn-xs" href="{{ route('groups.files.edit', [$group, $file]) }}"><i class="fa fa-edit"></i>
-                                    {{trans('Edit')}}</a>
+                                    {{t('Edit')}}</a>
                                 @endcan
 
                                 @can('delete', $file)
                                     <a class="btn btn-warning btn-xs" href="{{ route('groups.files.deleteconfirm', [$group, $file]) }}"><i class="fa fa-trash"></i>
-                                        {{trans('Delete')}}</a>
+                                        {{t('Delete')}}</a>
                                     @endcan
 
                                 </td>
@@ -64,7 +64,7 @@
                             </tr>
 
                         @empty
-                            {{trans('There is nothing here...yet!')}}
+                            {{t('There is nothing here...yet!')}}
                         @endforelse
 
                     </tbody>

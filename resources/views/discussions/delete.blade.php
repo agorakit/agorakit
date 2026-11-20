@@ -1,7 +1,7 @@
 @extends('dialog')
 
 @section('content')
-    <h1>{{ trans('Are you sure you want to delete?') }}</h1>
+    <h1>{{ t('Are you sure you want to delete?') }}</h1>
 
     <em>
         <strong>{{ $discussion->name }}</strong>
@@ -15,10 +15,10 @@
 
     <div class="d-flex justify-content-between">
         <div class="form-group">
-            {!! Form::submit(trans('Delete'), ['class' => 'btn btn-danger']) !!}
+            {!! Form::submit(t('Delete'), ['class' => 'btn btn-danger']) !!}
         </div>
         <div>
-            <a class="btn btn-link js-back" href="#" up-dismiss>{{ trans('Cancel') }}</a>
+            <a class="btn btn-link js-back" href="#" up-dismiss>{{ t('Cancel') }}</a>
         </div>
     </div>
 

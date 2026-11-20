@@ -13,7 +13,7 @@
 
             {{ $files->render() }}
         @else
-            {{ trans('There is nothing here...yet!') }}
+            {{ t('There is nothing here...yet!') }}
         @endif
 
     </div>

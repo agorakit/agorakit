@@ -27,9 +27,9 @@
         </div>
 
         <div class="text-meta">
-            {{ trans('created at') }}
+            {{ t('created at') }}
             {{ $group->created_at->diffForHumans() }} -
-            {{ trans('updated at') }}
+            {{ t('updated at') }}
             {{ $group->updated_at->diffForHumans() }}
         </div>
     </div>

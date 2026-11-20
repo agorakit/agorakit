@@ -8,7 +8,7 @@
     <table class="table data-table table-striped">
         <thead class="thead-dark">
             <tr>
-                <th>Group name</th>
+                <th>{{t('Group name')}}</th>
                 <th>Last updated</th>
                 <th>Users</th>
                 <th>Discussions</th>

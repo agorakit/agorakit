@@ -28,7 +28,7 @@
             <li class="nav-item d-lg-none d-xl-inline">
                 <form action="{{ url('search') }}" class="d-flex" method="get" role="search">
                     <input aria-label="Search" class="form-control me-2 bg-light text-dark" name="query"
-                        placeholder="{{ trans('Search') }}" type="search" value="{{ request()->get('query') }}" />
+                        placeholder="{{ t('Search') }}" type="search" value="{{ request()->get('query') }}" />
                 </form>
             </li>
 
@@ -37,33 +37,33 @@
                 <div class="nav-item dropdown">
                     <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button">
                         <i class="fas fa-server d-inline d-sm-none"></i> <span
-                            class="d-sm-inline d-none">{{ trans('Server administration') }}</span>
+                            class="d-sm-inline d-none">{{ t('Server administration') }}</span>
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-end" role="menu">
 
                         <a class="dropdown-item" href="{{ url('/admin/settings') }}">
-                            <i class="fa fa-cog me-2"></i> {{ trans('Settings') }}
+                            <i class="fa fa-cog me-2"></i> {{ t('Settings') }}
                         </a>
 
                         <a class="dropdown-item" href="{{ url('/admin/user') }}">
-                            <i class="fa fa-users me-2"></i> {{ trans('Users') }}
+                            <i class="fa fa-users me-2"></i> {{ t('Users') }}
                         </a>
 
                         <a class="dropdown-item" href="{{ url('/admin/groupadmins') }}">
-                            <i class="fa fa-users me-2"></i> {{ trans('Group admins') }}
+                            <i class="fa fa-users me-2"></i> {{ t('Group admins') }}
                         </a>
 
                         <a class="dropdown-item" href="{{ url('/admin/undo') }}">
-                            <i class="fa fa-trash me-2"></i> {{ trans('Recover deleted content') }}
+                            <i class="fa fa-trash me-2"></i> {{ t('Recover deleted content') }}
                         </a>
 
                         <a class="dropdown-item" href="{{ action('Admin\InsightsController@index') }}" up-follow="false">
-                            <i class="fa fa-line-chart me-2"></i> {{ trans('Insights') }}
+                            <i class="fa fa-line-chart me-2"></i> {{ t('Insights') }}
                         </a>
 
                         <a class="dropdown-item" href="{{ url('/admin/logs') }}" up-follow="false">
-                            <i class="fa fa-keyboard-o me-2"></i> {{ trans('Logs') }}
+                            <i class="fa fa-keyboard-o me-2"></i> {{ t('Logs') }}
                         </a>
                     </div>
                 </div>
@@ -77,14 +77,14 @@
         @guest
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('login') }}" up-layer="new">
-                    {{ trans('Login') }}
+                    {{ t('Login') }}
                 </a>
             </li>
 
             @can('create', App\User::class)
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('register') }}" up-layer="new">
-                        {{ trans('Register') }}
+                        {{ t('Register') }}
                     </a>
                 </li>
             @endcan

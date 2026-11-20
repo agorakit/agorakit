@@ -1,14 +1,14 @@
 @component('mail::message')
 
 
-<strong>{{trans('Hello')}} {{$user->name}},</strong>
+<strong>{{t('Hello')}} {{$user->name}},</strong>
 <p>
-{{trans('Here is the latest news from')}} "<a  href="{{route('groups.show', $group)}}">{{$group->name}}</a>"
+{{t('Here is the latest news from')}} "<a  href="{{route('groups.show', $group)}}">{{$group->name}}</a>"
 </p>
 
 
 @if ($discussions->count() > 0)
-<h1>{{trans('Latest discussions')}}</h1>
+<h1>{{t('Latest discussions')}}</h1>
 @foreach($discussions as $discussion)
 <div class="discussion" style="margin-bottom: 30px; border-bottom: 1px solid #aaa">
 <h3><a  href="{{route('groups.discussions.show', [$group, $discussion])}}#unread">{{$discussion->name}} </a></h3>
@@ -31,7 +31,7 @@
 @endforeach
 
 @component('mail::button', ['url' => route('groups.discussions.show', [$group, $discussion]) . "#unread"])
-{{trans('Reply')}}
+{{t('Reply')}}
 @endcomponent
 
 </div>
@@ -40,7 +40,7 @@
 
 
 @if ($events->count() > 0)
-<h1>{{trans('Next events')}}</h1>
+<h1>{{t('Next events')}}</h1>
 @foreach($events as $event)
 <div style="border-bottom: 1px solid #aaa; margin-bottom: 20px; padding-bottom: 20px">
 <strong><a  href="{{route('groups.calendarevents.show', [$group, $event])}}">{{$event->name}}</a></strong>
@@ -56,7 +56,7 @@
 
 
 @if ($users->count() > 0)
-<h1>{{trans('Latest users')}}</h1>
+<h1>{{t('Latest users')}}</h1>
 @foreach($users as $new_user)
 <a  href="{{route('users.show', $new_user)}}">{{$new_user->name}}</a>
 <br/>
@@ -68,7 +68,7 @@
 
 
 @if ($files->count() > 0)
-<h1>{{trans('Latest files')}}</h1>
+<h1>{{t('Latest files')}}</h1>
 @foreach($files as $file)
 <a  href="{{route('groups.files.show', [$group, $file])}}"><img alt="" src="{{route('groups.files.thumbnail', [$group, $file])}}" style="width: 24px; height:24px"/>{{$file->name}}</a>
 <br/>
@@ -83,10 +83,10 @@
 
 
 <p style="margin-top: 20px; font-size: 0.8em">
-{{trans('You receive this email from the group')}} "{{$group->name}}", {{trans('Because you asked for it')}}.
+{{t('You receive this email from the group')}} "{{$group->name}}", {{t('Because you asked for it')}}.
 <br/>
 <a  href="{{action('GroupMembershipController@edit', $group)}}">
-{{trans('Click here to change your notification preferences or to unsubscribe completely')}}</a>.
+{{t('Click here to change your notification preferences or to unsubscribe completely')}}</a>.
 </p>
 
 

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>{{ trans('Reset Password') }}</h1>
+        <h1>{{ t('Reset Password') }}</h1>
 
         @if (session('status'))
             <div class="alert alert-success" role="alert">
@@ -15,7 +15,7 @@
             @honeypot
 
             <div class="form-group">
-                <label for="email">{{ trans('E-Mail Address') }}</label>
+                <label for="email">{{ t('E-Mail Address') }}</label>
 
                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
@@ -30,7 +30,7 @@
                 <div class="form-group mt-4">
 
                     <button type="submit" class="btn btn-primary">
-                        {{ trans('Send Password Reset Link') }}
+                        {{ t('Send Password Reset Link') }}
                     </button>
 
                 </div>

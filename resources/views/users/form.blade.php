@@ -1,5 +1,5 @@
 <div class="form-group">
-    {!! Form::label('name', trans('Name')) !!}
+    {!! Form::label('name', t('Name')) !!}
     <div class="small-help">
         <i class="fas fa-info-circle"></i>
         @lang('Will be shown on your public profile')
@@ -9,7 +9,7 @@
 
 
 <div class="form-group">
-    {!! Form::label('username', trans('username')) !!}
+    {!! Form::label('username', t('username')) !!}
     <div class="small-help">
         <i class="fas fa-info-circle"></i>
         @lang('User name is used to @mention you')
@@ -25,7 +25,7 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('email', trans('Email')) !!}
+    {!! Form::label('email', t('Email')) !!}
     <div class="small-help">
         <i class="fas fa-info-circle"></i>
         @lang('You can change your email at any time, but you will need to verify it')
@@ -35,7 +35,7 @@
 
 <div class="form-group">
     <div>
-        {!! Form::label('password', trans('Password')) !!}
+        {!! Form::label('password', t('Password')) !!}
         <div class="small-help">
             <i class="fas fa-info-circle"></i>
             @lang('Use this to set your password or to change it. Minimum 8 characters.')
@@ -44,7 +44,7 @@
     </div>
 
     <div class="mt-2">
-        {!! Form::label('password_confirmation', trans('Confirm your password')) !!}
+        {!! Form::label('password_confirmation', t('Confirm your password')) !!}
         <div class="small-help">
             <i class="fas fa-info-circle"></i>
             @lang('Re-type your password')
@@ -57,7 +57,7 @@
 
 
 <div class="form-group">
-    {!! Form::label('body', trans('Description')) !!}
+    {!! Form::label('body', t('Description')) !!}
     <div class="small-help">
         <i class="fas fa-info-circle"></i>
         @lang('Will be shown on your public profile')
@@ -69,8 +69,8 @@
 
 
 <div class="form-group">
-    <label>{{trans('Photo')}}</label><br/>
-    <input name="cover" id="file" type="file" title="{{trans('Select one file')}}">
+    <label>{{t('Photo')}}</label><br/>
+    <input name="cover" id="file" type="file" title="{{t('Select one file')}}">
 </div>
 
 
@@ -82,19 +82,19 @@
     <h1>@lang('User administration')</h1>
     <div class="form-group">
         <div>@lang('Is this user super admin ? (use with care)')</div>
-        {{Form::radio('is_admin', 'yes', $user->isAdmin())}} {{trans('yes')}} <br/>
-        {{Form::radio('is_admin', 'no', !$user->isAdmin())}} {{trans('no')}} <br/>
+        {{Form::radio('is_admin', 'yes', $user->isAdmin())}} {{t('yes')}} <br/>
+        {{Form::radio('is_admin', 'no', !$user->isAdmin())}} {{t('no')}} <br/>
     </div>
 
     <div class="form-group">
-        <div>{{trans('Email verified')}}</div>
-        {{Form::radio('is_verified', 'yes', $user->isVerified())}} {{trans('yes')}} <br/>
-        {{Form::radio('is_verified', 'no', !$user->isVerified())}} {{trans('no')}} <br/>
+        <div>{{t('Email verified')}}</div>
+        {{Form::radio('is_verified', 'yes', $user->isVerified())}} {{t('yes')}} <br/>
+        {{Form::radio('is_verified', 'no', !$user->isVerified())}} {{t('no')}} <br/>
     </div>
 
      <div class="form-group">
-        <div>{{trans('Is this user banned?')}}</div>
-        {{Form::radio('is_user_banned', 'yes', $user->isBanned())}} {{trans('yes')}} <br/>
-        {{Form::radio('is_user_banned', 'no', !$user->isBanned())}} {{trans('no')}} <br/>
+        <div>{{t('Is this user banned?')}}</div>
+        {{Form::radio('is_user_banned', 'yes', $user->isBanned())}} {{t('yes')}} <br/>
+        {{Form::radio('is_user_banned', 'no', !$user->isBanned())}} {{t('no')}} <br/>
     </div>
 @endif

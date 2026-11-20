@@ -6,7 +6,7 @@
             @include('partials.preferences-calendar')
         </div>
         <a class="btn btn-primary" href="{{ route('calendarevents.create') }}">
-            {{ trans('Add an event') }}
+            {{ t('Add an event') }}
         </a>
     </div>
 
@@ -19,7 +19,7 @@
         {{ $events->render() }}
     @else
         <div class="alert mt-4">
-            {{ trans('There is nothing here...yet!') }}
+            {{ t('There is nothing here...yet!') }}
         </div>
     @endif
 

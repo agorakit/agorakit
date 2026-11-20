@@ -1,6 +1,6 @@
 @component('mail::message')
 
-# {{trans('You sent an email that was not delivered')}}
+# {{t('You sent an email that was not delivered')}}
 
 ## Reason : {{$reason}}
 

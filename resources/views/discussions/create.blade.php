@@ -2,15 +2,15 @@
 
 @section('content')
 
-    <h1>{{ trans('Start a new discussion') }}</h1>
+    <h1>{{ t('Start a new discussion') }}</h1>
 
     @if (!$group->exists)
         {!! Form::open(['route' => 'discussions.store', 'files' => true]) !!}
 
         <div class="form-group">
-            {!! Form::label('group', trans('Group')) !!}
+            {!! Form::label('group', t('Group')) !!}
             <select class="form-control" name="group" required="required">
-                <option disabled selected value="">{{ trans('Choose a group') }}</option>
+                <option disabled selected value="">{{ t('Choose a group') }}</option>
                 @foreach (Auth::user()->groups as $user_group)
                     <option value="{{ $user_group->id }}">{{ $user_group->name }}</option>
                 @endforeach
@@ -20,7 +20,7 @@
         @include('discussions.form')
 
         <div class="form-group">
-            {!! Form::submit(trans('Create'), ['class' => 'btn btn-primary']) !!}
+            {!! Form::submit(t('Create'), ['class' => 'btn btn-primary']) !!}
         </div>
 
         {!! Form::close() !!}
@@ -31,7 +31,7 @@
             @include('discussions.form')
 
             <div class="form-group">
-                <input class="btn btn-primary" name="{{ trans('Create') }}" type="submit" />
+                <input class="btn btn-primary" name="{{ t('Create') }}" type="submit" />
             </div>
 
         </form>

@@ -119,7 +119,7 @@
     </div>
 
     <div class="form-group">
-        {!! Form::submit(trans('Save'), ['class' => 'btn btn-primary']) !!}
+        {!! Form::submit(t('Save'), ['class' => 'btn btn-primary']) !!}
     </div>
 
 

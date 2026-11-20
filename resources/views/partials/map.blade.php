@@ -16,8 +16,8 @@
 
 <div class="mb-4 js-map" data-json-url="{{ $json }}" id="mapid"></div>
 
-<span class="badge" style="color: white; background-color: #8dc91e;">{{trans('Groups')}}</span>
+<span class="badge" style="color: white; background-color: #8dc91e;">{{t('Groups')}}</span>
 
-<span class="badge" style="color: white; background-color: #1e60c9">{{trans('Users')}}</span>
+<span class="badge" style="color: white; background-color: #1e60c9">{{t('Users')}}</span>
 
-<span class="badge" style="color: white; background-color: #871ec9">{{trans('')}}</span>
+<span class="badge" style="color: white; background-color: #871ec9">{{t('')}}</span>

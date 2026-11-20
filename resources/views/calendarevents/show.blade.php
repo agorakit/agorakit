@@ -6,9 +6,9 @@
         <h1>
             <span class="me-2">{{ $event->name }}</span>
             @if ($event->isPublic())
-                <span class="tag d-inline-block">{{ trans('Public') }}</span>
+                <span class="tag d-inline-block">{{ t('Public') }}</span>
             @elseif ($event->isPrivate())
-                <span class="tag d-inline-block">{{ trans('Private') }}</span>
+                <span class="tag d-inline-block">{{ t('Private') }}</span>
             @endif
         </h1>
         @include('calendarevents.dropdown')
@@ -26,13 +26,13 @@
 
         <div class="col-12 col-sm-7 col-md-8">
             <div class="meta mb-3">
-                {{ trans('Started by') }}
+                {{ t('Started by') }}
                 <span class="user">
                     @if ($event->user)
                         <a href="{{ route('users.show', [$event->user]) }}">{{ $event->user->name }}</a>
                     @endif
                 </span>
-                {{ trans('in') }}
+                {{ t('in') }}
                 <strong>
                     <a href="{{ route('groups.show', [$event->group]) }}">{{ $event->group->name }}</a>
                 </strong>
@@ -50,19 +50,19 @@
                 @endif
             </div>
 
-            <h3>{{ trans('Begins') }} : {{ $event->start->isoFormat('LLLL') }}</h3>
+            <h3>{{ t('Begins') }} : {{ $event->start->isoFormat('LLLL') }}</h3>
 
-            @if ($event->stop > $event->start) <h3>{{ trans('Ends') }} : {{ $event->stop->isoFormat('LLLL') }}</h3>
+            @if ($event->stop > $event->start) <h3>{{ t('Ends') }} : {{ $event->stop->isoFormat('LLLL') }}</h3>
             @endif
 
             @if ($event->hasRegistrationClosesAt())
                 <div class="fw-bold">
-                    {{ trans('Registration closes at :date')]) }}
+                    {{ t('Registration closes at :date')]) }}
                 </div>
             @endif
 
             @if ($event->hasLocation())
-                <div class="fw-bold">{{ trans('Location') }}</div>
+                <div class="fw-bold">{{ t('Location') }}</div>
                 {{ $event->locationDisplay("long") }}
             @endif
 
@@ -75,7 +75,7 @@
                 </div>
 
                 @if ($event->attending->count() > 0)
-                    <h3 class="mt-3 mb-1">{{ trans('Users attending') }} ({{ $event->attending->count() }})</h3>
+                    <h3 class="mt-3 mb-1">{{ t('Users attending') }} ({{ $event->attending->count() }})</h3>
 
                     <div class="btn-list">
                         @foreach ($event->attending as $user)
@@ -85,7 +85,7 @@
                 @endif
 
                 @if ($event->notAttending->count() > 0)
-                    <h3 class="mt-3 mb-1">{{ trans('Users not attending') }}
+                    <h3 class="mt-3 mb-1">{{ t('Users not attending') }}
                         ({{ $event->notAttending->count() }})
                     </h3>
 

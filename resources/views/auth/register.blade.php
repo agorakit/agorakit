@@ -6,7 +6,7 @@
         <img alt="" class="rounded" height="40" src="{{ route('icon', 40) }}" width="40" />
 
         <div class="ms-2">
-            {{ setting('name') }} : {{ strtolower(trans('Register')) }}
+            {{ setting('name') }} : {{ strtolower(t('Register')) }}
         </div>
 
     </h1>
@@ -20,14 +20,14 @@
 
 
         <div class="form-group">
-            <label>{{ trans('Name') }}</label>
+            <label>{{ t('Name') }}</label>
             <div>
                 <input class="form-control" name="name" required="required" type="text" value="{{ old('name') }}">
             </div>
         </div>
 
         <div class="form-group">
-            <label>{{ trans('Email') }}</label>
+            <label>{{ t('Email') }}</label>
 
             <input class="form-control" name="email" required="required" type="email"
                 value="@if (isset($email)) {{ $email }}@else{{ old('email') }} @endif">
@@ -36,7 +36,7 @@
 
         <div class="d-flex justify-content-end mt-2">
             <button class="btn btn-primary" type="submit">
-                {{ trans('Register') }}
+                {{ t('Register') }}
             </button>
 
         </div>
@@ -49,7 +49,7 @@
 
     <div class="alert alert-primary mt-4" role="alert">
         <i aria-hidden="true" class="fa fa-info-circle"></i>
-        {{ trans('If you already have an account') }}, <a href="{{ url('login') }}"
-            up-target=".dialog">{{ trans('You can login here') }}</a>
+        {{ t('If you already have an account') }}, <a href="{{ url('login') }}"
+            up-target=".dialog">{{ t('You can login here') }}</a>
     </div>
 @endsection

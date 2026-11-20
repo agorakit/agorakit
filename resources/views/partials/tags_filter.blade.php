@@ -2,14 +2,14 @@
     <div class="dropdown block">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            {{ trans('Filter') }}
+            {{ t('Filter') }}
             @if (request()->get('tag'))
                 : {{ request()->get('tag') }}
             @endif
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a up-target=".items" class="dropdown-item"
-                href="{{ request()->fullUrlWithQuery(['tag' => null, 'page' => null]) }}">{{ trans('Show all') }}</a>
+                href="{{ request()->fullUrlWithQuery(['tag' => null, 'page' => null]) }}">{{ t('Show all') }}</a>
             <div class="dropdown-divider"></div>
 
             @foreach ($tags as $tag)

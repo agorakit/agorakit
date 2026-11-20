@@ -41,17 +41,17 @@
             @if ($file->isArchived())
                 <div class="">
                     <i class="fa fa-archive"></i>
-                    {{ trans('Archived') }}
+                    {{ t('Archived') }}
                 </div>
             @endif
 
             <div class="me-2">
                 @if ($file->group->isOpen())
-                    <i class="fa fa-globe" title="{{ trans('Public group') }}"></i>
+                    <i class="fa fa-globe" title="{{ t('Public group') }}"></i>
                 @elseif ($file->group->isClosed())
-                    <i class="fa fa-lock" title="{{ trans('Closed group') }}"></i>
+                    <i class="fa fa-lock" title="{{ t('Closed group') }}"></i>
                 @else
-                    <i class="fa fa-eye-slash" title="{{ trans('Secret group') }}"></i>
+                    <i class="fa fa-eye-slash" title="{{ t('Secret group') }}"></i>
                 @endif
                 {{ $file->group->name }}
             </div>
@@ -92,7 +92,7 @@
     </div>
 
     @if ($file->isPinned())
-        <i class="fas fa-thumbtack me-2" title="{{ trans('Pinned') }}"></i>
+        <i class="fas fa-thumbtack me-2" title="{{ t('Pinned') }}"></i>
     @endif
 
     @include('files.dropdown')

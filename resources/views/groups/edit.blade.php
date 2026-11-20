@@ -1,14 +1,14 @@
 @extends('app')
 
 @section('content')
-    <h1 class="mb-3">{{ trans('Configuration') }}</h1>
+    <h1 class="mb-3">{{ t('Configuration') }}</h1>
 
     {!! Form::model($group, ['action' => ['GroupController@update', $group], 'files' => true]) !!}
 
     @include('groups.form')
 
     <div class="form-group">
-        {!! Form::submit(trans('Save'), ['class' => 'btn btn-primary']) !!}
+        {!! Form::submit(t('Save'), ['class' => 'btn btn-primary']) !!}
     </div>
 
     {!! Form::close() !!}

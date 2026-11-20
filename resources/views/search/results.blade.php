@@ -3,29 +3,29 @@
 @section('content')
 
     <div class="d-flex flex-wrap gap-2 justify-content-between">
-        <h1><i class="fa fa-search"></i> {{ trans('Your search for') }} <strong>"{{ $query ?? '' }}"</strong></h1>
+        <h1><i class="fa fa-search"></i> {{ t('Your search for') }} <strong>"{{ $query ?? '' }}"</strong></h1>
     </div>
 
     <form action="{{ url('search') }}" method="get" role="search">
 
         <div class="form-group">
-            <input aria-label="Search" class="form-control" name="query" placeholder="{{ trans('Search') }}"
+            <input aria-label="Search" class="form-control" name="query" placeholder="{{ t('Search') }}"
                 type="search" value="{{ request()->get('query') }}" />
         </div>
 
         <div class="form-group">
             <select class="form-control" name="type" required="required">
                 <option @if ($type == 'discussions') selected @endif value="discussions">
-                    {{ trans('Discussions') }}</option>
-                <option @if ($type == 'comments') selected @endif value="comments">{{ trans('Comments') }}
+                    {{ t('Discussions') }}</option>
+                <option @if ($type == 'comments') selected @endif value="comments">{{ t('Comments') }}
                 </option>
-                <option @if ($type == 'calendarevents') selected @endif value="calendarevents">{{ trans('Events') }}
+                <option @if ($type == 'calendarevents') selected @endif value="calendarevents">{{ t('Events') }}
                 </option>
-                <option @if ($type == 'users') selected @endif value="users">{{ trans('Users') }}
+                <option @if ($type == 'users') selected @endif value="users">{{ t('Users') }}
                 </option>
-                <option @if ($type == 'files') selected @endif value="files">{{ trans('Files') }}
+                <option @if ($type == 'files') selected @endif value="files">{{ t('Files') }}
                 </option>
-                <option @if ($type == 'groups') selected @endif value="groups">{{ trans('Groups') }}
+                <option @if ($type == 'groups') selected @endif value="groups">{{ t('Groups') }}
                 </option>
 
             </select>
@@ -50,7 +50,7 @@
 
 
         <div class="form-group">
-            <button class="form-control btn btn-primary" type="submit">{{ trans('Search') }}</button>
+            <button class="form-control btn btn-primary" type="submit">{{ t('Search') }}</button>
         </div>
 
     </form>

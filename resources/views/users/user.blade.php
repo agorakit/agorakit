@@ -19,7 +19,7 @@
 
              @auth
                  <div class="text-meta mb-2">
-                     {{ trans('Last activity') }} : {{ $user->updated_at->diffForHumans() }}
+                     {{ t('Last activity') }} : {{ $user->updated_at->diffForHumans() }}
                  </div>
 
                  <div class="mb-2">{{ summary($user->body) }}</div>
@@ -38,9 +38,9 @@
                              <a class="tag" href="{{ route('groups.show', [$group]) }}">
 
                                  @if ($group->isOpen())
-                                     <i class="fa fa-globe" title="{{ trans('Public group') }}"></i>
+                                     <i class="fa fa-globe" title="{{ t('Public group') }}"></i>
                                  @elseif ($group->isClosed())
-                                     <i class="fa fa-lock" title="{{ trans('Closed group') }}"></i>
+                                     <i class="fa fa-lock" title="{{ t('Closed group') }}"></i>
                                  @endif
                                  {{ $group->name }}
 

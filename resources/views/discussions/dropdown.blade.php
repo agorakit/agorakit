@@ -12,7 +12,7 @@
                 <a class="dropdown-item" href="{{ route('groups.discussions.edit', [$discussion->group, $discussion]) }}"
                     up-layer="root">
                     <i class="fa fa-pencil me-2"></i>
-                    {{ trans('Edit') }}
+                    {{ t('Edit') }}
                 </a>
             @endcan
 
@@ -20,7 +20,7 @@
                 <a class="dropdown-item"
                     href="{{ route('groups.discussions.deleteconfirm', [$discussion->group, $discussion]) }}" up-layer="new">
                     <i class="fa fa-trash me-2"></i>
-                    {{ trans('Delete') }}
+                    {{ t('Delete') }}
                 </a>
             @endcan
 
@@ -29,9 +29,9 @@
                     up-scroll="false" up-target="#discussion-{{ $discussion->id }}">
                     <i class="fa fa-thumbtack me-2"></i>
                     @if ($discussion->isPinned())
-                        {{ trans('Unpin') }}
+                        {{ t('Unpin') }}
                     @else
-                        {{ trans('Pin') }}
+                        {{ t('Pin') }}
                     @endif
                 </a>
             @endcan
@@ -41,9 +41,9 @@
                     up-scroll="false" up-target="#discussion-{{ $discussion->id }}">
                     <i class="fa fa-archive me-2"></i>
                     @if ($discussion->isArchived())
-                        {{ trans('Unarchive') }}
+                        {{ t('Unarchive') }}
                     @else
-                        {{ trans('Archive') }}
+                        {{ t('Archive') }}
                     @endif
                 </a>
             @endcan
@@ -51,7 +51,7 @@
             @auth
                 <a class="dropdown-item" href="{{ route('groups.discussions.history', [$discussion->group, $discussion]) }}"
                     up-layer="root"><i class="fa fa-history me-2"></i>
-                    {{ trans('Show history') }}</a>
+                    {{ t('Show history') }}</a>
             @endauth
         </div>
     </div>

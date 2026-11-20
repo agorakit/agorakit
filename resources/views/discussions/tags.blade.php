@@ -9,7 +9,7 @@
       <div class="input-group mb-3">
         <input type="text" class="form-control" placeholder="New tag" name="tag" required>
         <div class="input-group-append">
-          <input type="submit" class="btn btn-secondary" value="{{trans('Create')}}">
+          <input type="submit" class="btn btn-secondary" value="{{t('Create')}}">
         </div>
       </div>
       {!! Form::close() !!}
@@ -31,7 +31,7 @@
       @endforeach
       <div class="mt-3">
         <div>
-          {!! Form::submit(trans('Save'), ['class' => 'btn btn-primary']) !!}
+          {!! Form::submit(t('Save'), ['class' => 'btn btn-primary']) !!}
         </div>
       </div>
 

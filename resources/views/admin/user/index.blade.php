@@ -2,18 +2,18 @@
 
 @section('content')
     <h2>
-        {{ trans('Users') }}
+        {{ t('Users') }}
     </h2>
 
     <table class="table data-table table-striped">
         <thead class="thead-dark">
             <tr>
-                <th data-priority="1">{{ trans('Name') }}</th>
-                <th data-priority="1" style="max-width: 150px; overflow: hidden;text-overflow: ellipsis;">{{ trans('Email') }}</th>
-                <th>{{ trans('Registration time') }}</th>
-                <th>{{ trans('Last activity') }}</th>
-                <th data-priority="1" style="max-width: 50px; overflow: hidden;text-overflow: ellipsis;">{{ trans('Administrator') }}</th>
-                <th data-priority="1" style="max-width: 50px; overflow: hidden;text-overflow: ellipsis;">{{ trans('Email verified') }}
+                <th data-priority="1">{{ t('Name') }}</th>
+                <th data-priority="1" style="max-width: 150px; overflow: hidden;text-overflow: ellipsis;">{{ t('Email') }}</th>
+                <th>{{ t('Registration time') }}</th>
+                <th>{{ t('Last activity') }}</th>
+                <th data-priority="1" style="max-width: 50px; overflow: hidden;text-overflow: ellipsis;">{{ t('Administrator') }}</th>
+                <th data-priority="1" style="max-width: 50px; overflow: hidden;text-overflow: ellipsis;">{{ t('Email verified') }}
                 </th>
                 <th data-priority="1"></th>
             </tr>
@@ -40,22 +40,22 @@
 
                     <td style="max-width: 50px; overflow: hidden;text-overflow: ellipsis;">
                         @if ($user->isAdmin())
-                            {{ trans('yes') }}
+                            {{ t('yes') }}
                         @else
-                            {{ trans('no') }}
+                            {{ t('no') }}
                         @endif
                     </td>
 
                     <td style="max-width: 50px; overflow: hidden;text-overflow: ellipsis;">
                         @if ($user->verified == 1)
-                            {{ trans('yes') }}
+                            {{ t('yes') }}
                         @else
-                            {{ trans('no') }}
+                            {{ t('no') }}
                         @endif
                     </td>
 
                     <td>
-                        <a class="btn btn-secondary" href="{{ route('users.edit', $user) }}">{{ trans('Edit') }}</a>
+                        <a class="btn btn-secondary" href="{{ route('users.edit', $user) }}">{{ t('Edit') }}</a>
                     </td>
 
                 </tr>

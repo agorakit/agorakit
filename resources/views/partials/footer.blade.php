@@ -1,7 +1,7 @@
  <footer class="text-center my-6 text-secondary">
-     {{ trans('Made with') }}
+     {{ t('Made with') }}
      <a href="https://www.agorakit.org">Agorakit ({{ config('agorakit.version') }})</a>
-     - <a href="{{ request()->fullUrlWithQuery(['embed' => 1]) }}">{{ trans('Embed this page') }}</a>
+     - <a href="{{ request()->fullUrlWithQuery(['embed' => 1]) }}">{{ t('Embed this page') }}</a>
  </footer>
 
  <!-- footer -->

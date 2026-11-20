@@ -3,26 +3,26 @@
 @section('content')
     {!! Form::open(['action' => ['GroupMembershipController@update', $group, $membership]]) !!}
 
-    <h1>{{ trans('Notifications') }}</h1>
+    <h1>{{ t('Notifications') }}</h1>
     <div class="help">
-        <strong>{{ trans('How does it work?') }}</strong>
+        <strong>{{ t('How does it work?') }}</strong>
         <p>
-            {{ trans('Here you can choose if you want to receive news from this group by email.') }}
+            {{ t('Here you can choose if you want to receive news from this group by email.') }}
         </p>
     </div>
 
     <div class="form-group">
-        {!! Form::label('notifications', trans('How often do you want to receive notifications by email?')) !!}
+        {!! Form::label('notifications', t('How often do you want to receive notifications by email?')) !!}
         {!! Form::select(
             'notifications',
             [
-                'instantly' => trans('As soon as possible'),
-                'hourly' => trans('Every hour'),
-                'daily' => trans('Every day'),
-                'weekly' => trans('Every week'),
-                'biweekly' => trans('Every two weeks'),
-                'monthly' => trans('Every month'),
-                'never' => trans('Never'),
+                'instantly' => t('As soon as possible'),
+                'hourly' => t('Every hour'),
+                'daily' => t('Every day'),
+                'weekly' => t('Every week'),
+                'biweekly' => t('Every two weeks'),
+                'monthly' => t('Every month'),
+                'never' => t('Never'),
             ],
             $interval,
             ['class' => 'form-control'],
@@ -32,12 +32,12 @@
     <div class="mt-5 d-flex justify-content-between align-items-center">
 
         <div class="form-group">
-            {!! Form::submit(trans('Save'), ['class' => 'btn btn-primary']) !!}
+            {!! Form::submit(t('Save'), ['class' => 'btn btn-primary']) !!}
         </div>
 
         <div>
             <a href="{{ action('GroupMembershipController@destroyConfirm', $group) }}">
-                {{ trans('If you want to leave this group') }}
+                {{ t('If you want to leave this group') }}
             </a>
         </div>
     </div>

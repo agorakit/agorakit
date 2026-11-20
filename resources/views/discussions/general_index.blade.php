@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="page-header">
-  <h1>{{ trans('Unread discussions') }}</a></h1>
+  <h1>{{ t('Unread discussions') }}</a></h1>
 </div>
 
 @foreach ($groups as $group)
@@ -42,7 +42,7 @@
 
   </tr>
   @empty
-  {{trans('There is nothing here...yet!')}}
+  {{t('There is nothing here...yet!')}}
   @endforelse
 </table>
 

@@ -15,7 +15,7 @@
 
 
 <div class="form-group">
-    <label for="attachment">{{trans('Attach a file')}}</label>
+    <label for="attachment">{{t('Attach a file')}}</label>
     <br />
     <input type="file" name="file" id="attachment">
 </div>

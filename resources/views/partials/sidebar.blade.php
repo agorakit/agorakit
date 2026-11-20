@@ -1,31 +1,31 @@
 <div class="sidebar visible-lg-block">
 
-  <h4>{{ trans('Your groups') }}</h4>
+  <h4>{{ t('Your groups') }}</h4>
 
   @forelse (Auth::user()->groups as $group)
     <a  href="{{ route('groups.show', $group)}}">{{$group->name}}</a>
   @empty
-    <a  href="{{ route('index')}}">{{ trans('You are not subscribed to this group yet') }}</a>
+    <a  href="{{ route('index')}}">{{ t('You are not subscribed to this group yet') }}</a>
   @endforelse
 </ul>
 
 
-<h4>{{ trans('Overview') }}</h4>
+<h4>{{ t('Overview') }}</h4>
 
 <a  href="{{ route('discussions') }}">
-  {{trans('Discussions')}}
+  {{t('Discussions')}}
 </a>
 
 <a  href="{{ action('CalendarEventController@index') }}">
-  {{trans('Calendar')}}
+  {{t('Calendar')}}
 </a>
 
 <a  href="{{ action('UserController@index') }}">
-  {{trans('Users')}}
+  {{t('Users')}}
 </a>
 
 <a  href="{{ action('MapController@index') }}">
-  {{trans('Map')}}
+  {{t('Map')}}
 </a>
 
 

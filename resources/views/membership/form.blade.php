@@ -1,4 +1,4 @@
 <div class="form-group">
-	{!! Form::label('notifications', trans('How often do you want to receive notifications by email?') ) !!}
-	{!! Form::select('notifications', ['instantly' => trans('As soon as possible'), 'hourly' => trans('Every hour'), 'daily' => trans('Every day'), 'weekly' => trans('Every week'), 'biweekly' => trans('Every two weeks'), 'monthly' => trans('Every month'), 'never' => trans('Never')], $interval, ['class' => 'form-control']) !!}
+	{!! Form::label('notifications', t('How often do you want to receive notifications by email?') ) !!}
+	{!! Form::select('notifications', ['instantly' => t('As soon as possible'), 'hourly' => t('Every hour'), 'daily' => t('Every day'), 'weekly' => t('Every week'), 'biweekly' => t('Every two weeks'), 'monthly' => t('Every month'), 'never' => t('Never')], $interval, ['class' => 'form-control']) !!}
 </div>

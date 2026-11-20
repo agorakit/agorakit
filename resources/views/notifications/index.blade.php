@@ -6,7 +6,7 @@
   <div class="toolbox d-md-flex">
     <div class="d-flex mb-2">
       <h1>
-        <a  href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ trans('Notifications') }}
+        <a  href="{{ route('index') }}"><i class="fa fa-home"></i></a> <i class="fa fa-angle-right"></i> {{ t('Notifications') }}
       </h1>
     </div>
   </div>
@@ -42,7 +42,7 @@
       </table>
       {!! $notifications->render() !!}
     @else
-      {{trans('There is nothing here...yet!')}}
+      {{t('There is nothing here...yet!')}}
     @endif
   </div>
 

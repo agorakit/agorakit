@@ -1,6 +1,6 @@
 @component('mail::message')
 
-  <strong>{{trans('Hello')}} {{$user->name}},</strong>
+  <strong>{{t('Hello')}} {{$user->name}},</strong>
 
   <p>
     @lang('You asked for a login link, click on the button below to login')

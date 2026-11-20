@@ -2,9 +2,9 @@
 
 @section('content')
 
-  <h1>{{ trans('Manage features') }}</h1>
+  <h1>{{ t('Manage features') }}</h1>
 
-  <p>{{ trans('Enable or disable features of your group') }}</p>
+  <p>{{ t('Enable or disable features of your group') }}</p>
 
 
   {!! Form::open(array('action' => ['ModuleController@update', $group])) !!}
@@ -78,7 +78,7 @@
 
 
 <div class="form-group mt-8">
-  {!! Form::submit(trans('Save'), ['class' => 'btn btn-primary']) !!}
+  {!! Form::submit(t('Save'), ['class' => 'btn btn-primary']) !!}
 </div>
 
 

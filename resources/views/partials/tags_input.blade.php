@@ -1,9 +1,9 @@
 <div class="form-group">
-    <label for="tags">{{ trans('Tags') }}</label>
+    <label for="tags">{{ t('Tags') }}</label>
 
     <div class="small-help">
         <i class="fas fa-info-circle"></i>
-        {{ trans('Choose or type one or more tag (keywords if you prefer). This will help others to find your contribution. In the list you will see the tags already used elsewhere. Try to follow the existing tags.') }}
+        {{ t('Choose or type one or more tag (keywords if you prefer). This will help others to find your contribution. In the list you will see the tags already used elsewhere. Try to follow the existing tags.') }}
     </div>
 
     <select class="form-control js-tags" name="tags[]" multiple="multiple"

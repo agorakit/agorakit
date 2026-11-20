@@ -32,9 +32,9 @@
         <div class="text-meta text-truncate mb-2">
             <div>
                 @if ($event->isPublic())
-                    <i class="fa fa-eye me-1"></i>{{ trans('Public') }}
+                    <i class="fa fa-eye me-1"></i>{{ t('Public') }}
                 @elseif ($event->isPrivate())
-                    <i class="fa fa-eye me-1"></i>{{ trans('Private') }}
+                    <i class="fa fa-eye me-1"></i>{{ t('Private') }}
                 @endif
             </div>
             <div>
@@ -54,7 +54,7 @@
             @if ($event->attending->count() > 0)
                 <div>
                     <i class="fa fa-users me-1"></i> {{ $event->attending->count() }}
-                    {{ trans('participants') }}
+                    {{ t('participants') }}
                 </div>
             @endif
         </div>

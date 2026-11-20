@@ -1,10 +1,10 @@
 <div class="form-group">
-    {!! Form::label('name', trans('Title')) !!}
+    {!! Form::label('name', t('Title')) !!}
     {!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <div class="form-group">
-    {!! Form::label('body', trans('Body')) !!}
+    {!! Form::label('body', t('Body')) !!}
 
     @if ($group->exists)
         {!! Form::textarea('body', null, [
@@ -25,7 +25,7 @@
 </div>
 
 <div class="form-group">
-    <label for="file">{{ trans('Attach a file') }}</label>
+    <label for="file">{{ t('Attach a file') }}</label>
     {!! Form::file('file', ['class' => 'form-control-file', 'id' => 'file']) !!}
 </div>
 
