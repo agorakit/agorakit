@@ -55,7 +55,6 @@
         "ddeboer/imap": "^1.19"
     },
     "require-dev": {
-        "amirami/localizator": "^0.14.0@alpha",
         "barryvdh/laravel-debugbar": "^3.14",
         "fakerphp/faker": "^1.23",
         "larastan/larastan": "^3.2",
