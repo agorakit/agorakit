@@ -7,6 +7,7 @@ use Auth;
 use Closure;
 use Config;
 use Session;
+use Tio\Laravel\Facade as Translation;
 
 class SetLocale
 {
@@ -51,17 +52,16 @@ class SetLocale
             $locale = $request->input('force_locale');
             Session::put('locale', $locale);
 
-
             // store locale in user preferences
             if (Auth::check()) {
                 $user = Auth::user();
                 $user->setPreference('locale', $locale);
             }
-
             App::setLocale($locale);
+            Translation::setLocale($locale);
             return $next($request);
-            //return $next($request)->withCookie(cookie()->forever('locale', $locale));
         }
+
 
 
         // 2- Locale from user settings
@@ -69,8 +69,8 @@ class SetLocale
             $locale = Auth::user()->getPreference('locale');
             Session::put('locale', $locale);
             App::setLocale($locale);
+            Translation::setLocale($locale);
             return $next($request);
-            //return $next($request)->withCookie(cookie()->forever('locale', $locale));
         }
 
         // 3- Locale from session
@@ -83,8 +83,8 @@ class SetLocale
                 $user->setPreference('locale', $locale);
             }
             App::setLocale($locale);
+            Translation::setLocale($locale);
             return $next($request);
-            //return $next($request)->withCookie(cookie()->forever('locale', $locale));
         }
 
         // 4- autodetect from browser
@@ -96,12 +96,13 @@ class SetLocale
                 $user->setPreference('locale', $locale);
             }
             App::setLocale($locale);
+            Translation::setLocale($locale);
             return $next($request);
-            //return $next($request)->withCookie(cookie()->forever('locale', $locale));
         }
 
         // 5- default application locale
         App::setLocale(config('app.locale'));
+        Translation::setLocale(config('app.locale'));
         return $next($request);
     }
 }
