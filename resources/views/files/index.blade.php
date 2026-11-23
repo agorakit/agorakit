@@ -9,7 +9,7 @@
                 @include('partials.sort_dropdown')
 
             @can('create-file', $group)
-                <a class="btn btn-primary" href="{{ route('groups.files.create', ['group' => $group, 'parent' => $parent]) }}"
+                <a class="btn btn-primary" href="{{ route('groups.files.create', ['group' => $group, 'parent' => $parent_id]) }}"
                     up-layer="new">
                     <i class="fa fa-file me-2"></i>
                     {{ trans('Upload file') }}
@@ -17,7 +17,7 @@
             @endcan
 
             @can('create-file', $group)
-                <a class="btn btn-primary" href="{{ route('groups.files.createlink', ['group' => $group, 'parent' => $parent]) }}"
+                <a class="btn btn-primary" href="{{ route('groups.files.createlink', ['group' => $group, 'parent' => $parent_id]) }}"
                     up-layer="new">
                     <i class="fa fa-link me-2"></i>
                     {{ trans('Create Link') }}
@@ -25,7 +25,7 @@
             @endcan
 
             @can('create-folder', $group)
-                <a class="btn btn-primary" href="{{ route('groups.files.createfolder', ['group' => $group, 'parent' => $parent]) }}"
+                <a class="btn btn-primary" href="{{ route('groups.files.createfolder', ['group' => $group, 'parent' => $parent_id]) }}"
                     up-layer="new">
                     <i class="fa fa-folder me-2"></i>
                     {{ trans('Create a folder') }}
