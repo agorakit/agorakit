@@ -19,6 +19,7 @@ class CalendarEventCoverController extends Controller
 
     public function show(CalendarEvent $event, $size = 'medium')
     {
+        $this->authorize('view', $event);
         if ($event->hasCover()) {
             return $event->getCover($size);
         } else {

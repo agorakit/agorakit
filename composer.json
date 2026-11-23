@@ -64,6 +64,7 @@
         "phpunit/phpunit": "^11.0",
         "squizlabs/php_codesniffer": "^3.13",
         "vemcogroup/laravel-translation": "^3.1"
+
     },
     "config": {
         "optimize-autoloader": true,

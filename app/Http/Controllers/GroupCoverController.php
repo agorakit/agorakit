@@ -19,6 +19,7 @@ class GroupCoverController extends Controller
 
     public function show(Group $group, $size = 'medium')
     {
+        $this->authorize('view', $group);
         if ($group->hasCover()) {
             return $group->getCover($size);
         } else {

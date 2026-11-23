@@ -48,7 +48,7 @@
      @if (Session::has('messages'))
          <div class="alert text-bg-info">
              @foreach (session('messages') as $message)
-                 <div>{!! $message !!}</div>
+                 <div>{{ $message }}</div>
                  <?php session()->pull('messages'); ?>
              @endforeach
          </div>
@@ -57,7 +57,7 @@
      @if (Session::has('warnings'))
          <div class="alert text-bg-warning">
              @foreach (session('warnings') as $message)
-                 <div>{!! $message !!}</div>
+                 <div>{{ $message }}</div>
                  <?php session()->pull('warnings'); ?>
              @endforeach
          </div>
@@ -66,7 +66,7 @@
      @if (Session::has('agorakit_errors'))
          <div class="alert alert-danger">
              @foreach (session('agorakit_errors') as $message)
-                 <div>{!! $message !!}</div>
+                 <div>{{ $message }}</div>
                  <?php session()->pull('agorakit_errors'); ?>
              @endforeach
          </div>
