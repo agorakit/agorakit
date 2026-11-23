@@ -44,7 +44,6 @@
         "spatie/laravel-honeypot": "^4.5",
         "spatie/laravel-ignition": "^2.8",
         "suin/php-rss-writer": "^1.6",
-        "tio/laravel": "^1.25",
         "toin0u/geocoder-laravel": "^13.2",
         "venturecraft/revisionable": "^1.41",
         "watson/validating": "^8.2",
@@ -55,7 +54,6 @@
         "ddeboer/imap": "^1.19"
     },
     "require-dev": {
-        "amirami/localizator": "^0.14.0@alpha",
         "barryvdh/laravel-debugbar": "^3.14",
         "fakerphp/faker": "^1.23",
         "larastan/larastan": "^3.2",
@@ -64,7 +62,8 @@
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.5",
         "phpunit/phpunit": "^11.0",
-        "squizlabs/php_codesniffer": "^3.13"
+        "squizlabs/php_codesniffer": "^3.13",
+        "vemcogroup/laravel-translation": "^3.1"
     },
     "config": {
         "optimize-autoloader": true,
