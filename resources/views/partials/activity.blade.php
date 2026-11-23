@@ -3,7 +3,7 @@
         <div class="header">
             <span class="avatar"><img alt="" src="{{{{route('users.cover', [$activity->user, 'small'])}}}}" class="rounded-full"/></span>
             <a  href="{{route('users.show', $activity->user)}}">{{$activity->user->name}}</a>
-            {{trans('messages.activity_' . $activity->action)}}
+            {{trans('messages.activity')}}
             <a  href="{{$activity->linkToModel()}}">{{$activity->model->name}}</a>
             {{$activity->created_at->diffForHumans()}}
             {{trans('messages.in')}}
@@ -27,7 +27,7 @@
         <div class="header">
             <span class="avatar"><img alt="" src="{{{{route('users.cover', [$activity->user, 'small'])}}}}" class="rounded-full"/></span>
             <a  href="{{route('users.show', $activity->user)}}">{{$activity->user->name}}</a>
-            {{trans('messages.activity_' . $activity->action)}}
+            {{trans('messages.activity')}}
             <a  href="{{$activity->linkToModel()}}">{{$activity->model->name}}</a>
             {{$activity->created_at->diffForHumans()}}
             {{trans('messages.in')}}
@@ -50,7 +50,7 @@
         <div class="header">
             <span class="avatar"><img alt="" src="{{{{route('users.cover', [$activity->user, 'small'])}}}}" class="rounded-full"/></span>
             <a  href="{{route('users.show', $activity->user)}}">{{$activity->user->name}}</a>
-            {{trans('messages.activity_' . $activity->action)}}
+            {{trans('messages.activity')}}
             <a  href="{{$activity->linkToModel()}}">{{$activity->model->name}}</a>
             {{$activity->created_at->diffForHumans()}}
             {{trans('messages.in')}}
@@ -74,7 +74,7 @@
         <div class="header">
             <span class="avatar"><img alt="" src="{{{{route('users.cover', [$activity->user, 'small'])}}}}" class="rounded-full"/></span>
             <a  href="{{route('users.show', $activity->user)}}">{{$activity->user->name}}</a>
-            {{trans('messages.activity_' . $activity->action)}}
+            {{trans('messages.activity')}}
             <a  href="{{$activity->linkToModel()}}">{{$activity->model->discussion->name}}</a>
             {{$activity->created_at->diffForHumans()}}
             {{trans('messages.in')}}
