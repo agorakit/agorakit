@@ -128,7 +128,7 @@ class RegisterController extends Controller
         if (Auth::guest()) {
             Auth::login($user); //TODO security implication of this
         }
-        flash(trans('messages.you_have_verified_your_email'));
+        flash(trans('You have verified your email address'));
 
 
         return redirect('/');

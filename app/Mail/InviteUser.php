@@ -49,7 +49,7 @@ class InviteUser extends Mailable
 
         return $this->markdown('emails.invite')
         ->from(config('mail.noreply'), config('mail.from.name'))
-        ->subject('[' . setting('name') . '] ' . trans('messages.invitation_to_join') . ' "' . $this->membership->group->name . '"')
+        ->subject('[' . setting('name') . '] ' . trans('Invitation to join') . ' "' . $this->membership->group->name . '"')
         ->with('accept_url', $accept_url)
         ->with('deny_url', $deny_url);
     }

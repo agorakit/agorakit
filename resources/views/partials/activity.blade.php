@@ -3,7 +3,7 @@
         <div class="header">
             <span class="avatar"><img alt="" src="{{{{route('users.cover', [$activity->user, 'small'])}}}}" class="rounded-full"/></span>
             <a  href="{{route('users.show', $activity->user)}}">{{$activity->user->name}}</a>
-            {{trans('messages.activity_' . $activity->action)}}
+            {{trans('messages.activity')}}
             <a  href="{{$activity->linkToModel()}}">{{$activity->model->name}}</a>
             {{$activity->created_at->diffForHumans()}}
             {{trans('messages.in')}}
@@ -15,7 +15,7 @@
         </div>
 
         <div class="action">
-            <a  href="{{$activity->linkToModel()}}" class="btn btn-primary btn-sm">{{trans('messages.visit')}}</a>
+            <a  href="{{$activity->linkToModel()}}" class="btn btn-primary btn-sm">{{trans('Visit')}}</a>
         </div>
 
     </div>
@@ -27,7 +27,7 @@
         <div class="header">
             <span class="avatar"><img alt="" src="{{{{route('users.cover', [$activity->user, 'small'])}}}}" class="rounded-full"/></span>
             <a  href="{{route('users.show', $activity->user)}}">{{$activity->user->name}}</a>
-            {{trans('messages.activity_' . $activity->action)}}
+            {{trans('messages.activity')}}
             <a  href="{{$activity->linkToModel()}}">{{$activity->model->name}}</a>
             {{$activity->created_at->diffForHumans()}}
             {{trans('messages.in')}}
@@ -39,7 +39,7 @@
         </div>
 
         <div class="action">
-            <a  href="{{$activity->linkToModel()}}" class="btn btn-primary btn-sm">{{trans('messages.visit')}}</a>
+            <a  href="{{$activity->linkToModel()}}" class="btn btn-primary btn-sm">{{trans('Visit')}}</a>
         </div>
 
     </div>
@@ -50,7 +50,7 @@
         <div class="header">
             <span class="avatar"><img alt="" src="{{{{route('users.cover', [$activity->user, 'small'])}}}}" class="rounded-full"/></span>
             <a  href="{{route('users.show', $activity->user)}}">{{$activity->user->name}}</a>
-            {{trans('messages.activity_' . $activity->action)}}
+            {{trans('messages.activity')}}
             <a  href="{{$activity->linkToModel()}}">{{$activity->model->name}}</a>
             {{$activity->created_at->diffForHumans()}}
             {{trans('messages.in')}}
@@ -62,7 +62,7 @@
         </div>
 
         <div class="action">
-            <a  href="{{$activity->linkToModel()}}" class="btn btn-primary btn-sm">{{trans('messages.visit')}}</a>
+            <a  href="{{$activity->linkToModel()}}" class="btn btn-primary btn-sm">{{trans('Visit')}}</a>
         </div>
 
     </div>
@@ -74,7 +74,7 @@
         <div class="header">
             <span class="avatar"><img alt="" src="{{{{route('users.cover', [$activity->user, 'small'])}}}}" class="rounded-full"/></span>
             <a  href="{{route('users.show', $activity->user)}}">{{$activity->user->name}}</a>
-            {{trans('messages.activity_' . $activity->action)}}
+            {{trans('messages.activity')}}
             <a  href="{{$activity->linkToModel()}}">{{$activity->model->discussion->name}}</a>
             {{$activity->created_at->diffForHumans()}}
             {{trans('messages.in')}}
@@ -86,7 +86,7 @@
         </div>
 
         <div class="action">
-            <a  href="{{$activity->linkToModel()}}" class="btn btn-primary btn-sm">{{trans('messages.reply')}}</a>
+            <a  href="{{$activity->linkToModel()}}" class="btn btn-primary btn-sm">{{trans('Reply')}}</a>
         </div>
     </div>
 @endif

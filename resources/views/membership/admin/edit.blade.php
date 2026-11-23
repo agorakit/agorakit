@@ -1,23 +1,23 @@
 @extends('app')
 
 @section('content')
-    <h1>{{ trans('messages.edit') }} {{ $membership->user->name }} in "{{ $group->name }}"</h1>
+    <h1>{{ trans('Edit') }} {{ $membership->user->name }} in "{{ $group->name }}"</h1>
 
     {!! Form::open(['action' => ['GroupMembershipAdminController@update', $group, $membership]]) !!}
 
-    <strong>{{ trans('messages.notifications_interval') }}</strong>
+    <strong>{{ trans('Notifications') }}</strong>
 
     <div class="form-group">
         {!! Form::select(
             'notifications',
             [
-                'instantly' => trans('membership.instantly'),
-                'hourly' => trans('membership.everyhour'),
-                'daily' => trans('membership.everyday'),
-                'weekly' => trans('membership.everyweek'),
-                'biweekly' => trans('membership.everytwoweek'),
-                'monthly' => trans('membership.everymonth'),
-                'never' => trans('membership.never'),
+                'instantly' => trans('As soon as possible'),
+                'hourly' => trans('Every hour'),
+                'daily' => trans('Every day'),
+                'weekly' => trans('Every week'),
+                'biweekly' => trans('Every two weeks'),
+                'monthly' => trans('Every month'),
+                'never' => trans('Never'),
             ],
             $interval,
             ['class' => 'form-control'],
@@ -25,19 +25,19 @@
     </div>
 
     @can('manage-membership', $group)
-        <strong>{{ trans('membership.status') }}</strong>
+        <strong>{{ trans('Status') }}</strong>
         <div class="form-group">
 
             {!! Form::select(
                 'membership_level',
                 [
-                    \App\Membership::ADMIN => trans('membership.admin'),
-                    \App\Membership::MEMBER => trans('membership.member'),
-                    \App\Membership::INVITED => trans('membership.invited'),
-                    \App\Membership::CANDIDATE => trans('membership.candidate'),
-                    \App\Membership::REMOVED => trans('membership.removed'),
-                    \App\Membership::DECLINED => trans('membership.declined'),
-                    \App\Membership::BLACKLISTED => trans('membership.blacklisted'),
+                    \App\Membership::ADMIN => trans('administrator'),
+                    \App\Membership::MEMBER => trans('member'),
+                    \App\Membership::INVITED => trans('invited'),
+                    \App\Membership::CANDIDATE => trans('candidate'),
+                    \App\Membership::REMOVED => trans('removed'),
+                    \App\Membership::DECLINED => trans('declined'),
+                    \App\Membership::BLACKLISTED => trans('blacklisted'),
                 ],
                 $membership->membership,
                 ['class' => 'form-control'],
@@ -46,7 +46,7 @@
     @endcan
 
     <div class="form-group">
-        {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-primary']) !!}
+        {!! Form::submit(trans('Save'), ['class' => 'btn btn-primary']) !!}
     </div>
 
     {!! Form::close() !!}

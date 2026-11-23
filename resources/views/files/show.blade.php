@@ -8,7 +8,7 @@
             <h3>
                 <i class="fa fa-folder-open-o"></i>
                 <a up-target=".files" href="{{ route('groups.files.index', $group) }}">
-                    <span class="">{{ trans('messages.root') }}</span>
+                    <span class="">{{ trans('Root') }}</span>
                 </a>
 
                 @if (isset($breadcrumb))
@@ -72,7 +72,7 @@
                 </div>
 
                 @if ($file->tags->count() > 0)
-                    {{ trans('messages.tags') }} :
+                    {{ trans('Tags') }} :
                     @foreach ($file->tags as $tag)
                         @include('tags.tag')
                     @endforeach
@@ -85,27 +85,27 @@
                 @if ($file->isLink())
                     <a class="btn btn-primary" href="{{ route('groups.files.download', [$group, $file]) }}"
                         target="_blank">
-                        {{ trans('messages.visit') }}
+                        {{ trans('Visit') }}
                     </a>
                 @else
                     <a class="btn btn-primary" href="{{ route('groups.files.download', [$group, $file]) }}"
                         target="_blank">
                         <i class="fa fa-download me-2"></i>
-                        {{ trans('messages.download') }}
+                        {{ trans('Download') }}
                     </a>
                 @endif
 
                 @can('update', $file)
                     <a class="btn btn-secondary" href="{{ route('groups.files.edit', [$group, $file]) }}">
                         <i class="fa fa-pencil me-2"></i>
-                        {{ trans('messages.edit') }}
+                        {{ trans('Edit') }}
                     </a>
                 @endcan
 
                 @can('delete', $file)
                     <a class="btn btn-danger" href="{{ route('groups.files.deleteconfirm', [$group, $file]) }}">
                         <i class="fa fa-trash me-2"></i>
-                        {{ trans('messages.delete') }}
+                        {{ trans('Delete') }}
                     </a>
                 @endcan
 

@@ -94,7 +94,7 @@ class GroupFileController extends Controller
 
 
         return view('files.index')
-            ->with('title', $group->name . ' - ' . trans('messages.files'))
+            ->with('title', $group->name . ' - ' . trans('Files'))
             ->with('folders', $folders)
             ->with('files', $files)
             ->with('parent_id', $parent_id)
@@ -249,13 +249,13 @@ class GroupFileController extends Controller
                 $group->touch();
                 \Auth::user()->touch();
 
-                flash(trans('messages.ressource_created_successfully'));
+                flash(trans('Resource created successfully'));
 
 
 
                 return redirect()->route('groups.files.index', ['group' => $group, 'parent' => $parent]);
             } else {
-                abort(400, trans('messages.no_file_selected'));
+                abort(400, trans('No file selected'));
             }
         } catch (Exception $e) {
             if ($request->ajax()) {
@@ -314,10 +314,10 @@ class GroupFileController extends Controller
             $group->touch();
             \Auth::user()->touch();
 
-            flash(trans('messages.ressource_created_successfully'));
+            flash(trans('Resource created successfully'));
             return redirect()->route('groups.files.index', ['group' => $group, 'parent' => $parent]);
         } else {
-            flash(trans('messages.ressource_not_created_successfully'));
+            flash(trans('Resource Not Created Successfully'));
 
             return redirect()->back()->withInput();
         }
@@ -362,10 +362,10 @@ class GroupFileController extends Controller
             // update activity timestamp on parent items
             $group->touch();
             \Auth::user()->touch();
-            flash(trans('messages.ressource_created_successfully'));
+            flash(trans('Resource created successfully'));
             return redirect()->route('groups.files.index', ['group' => $group, 'parent' => $parent]);
         } else {
-            flash(trans('messages.ressource_not_created_successfully'));
+            flash(trans('Resource Not Created Successfully'));
 
             return redirect()->back()->withInput();
         }
@@ -430,11 +430,11 @@ class GroupFileController extends Controller
         }
 
         if ($file->save()) {
-            flash(trans('messages.ressource_updated_successfully'));
+            flash(trans('Resource updated successfully'));
 
             return redirect()->route('groups.files.index', ['group' => $group, 'parent' => $parent]);
         } else {
-            flash(trans('messages.ressource_not_updated_successfully'));
+            flash(trans('Resource Not Updated Successfully'));
 
             return redirect()->back();
         }
@@ -462,7 +462,7 @@ class GroupFileController extends Controller
         $this->authorize('delete', $file);
 
         $file->delete();
-        flash(trans('messages.ressource_deleted_successfully'));
+        flash(trans('Resource deleted successfully'));
 
         return redirect()->route('groups.files.index', [$group]);
     }
@@ -476,7 +476,7 @@ class GroupFileController extends Controller
         $file->togglePin();
         $file->timestamps = false;
         $file->save();
-        flash(trans('messages.ressource_updated_successfully'));
+        flash(trans('Resource updated successfully'));
         return redirect()->back();
     }
 
@@ -487,7 +487,7 @@ class GroupFileController extends Controller
         $file->toggleArchive();
         $file->timestamps = false;
         $file->save();
-        flash(trans('messages.ressource_updated_successfully'));
+        flash(trans('Resource updated successfully'));
         return redirect()->back();
     }
 }

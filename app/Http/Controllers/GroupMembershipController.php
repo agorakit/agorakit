@@ -38,7 +38,7 @@ class GroupMembershipController extends Controller
         $invites = Invite::where('group_id', $group->id)->whereNull('claimed_at')->get();
 
         return view('membership.index')
-            ->with('title', $group->name . ' - ' . trans('messages.members'))
+            ->with('title', $group->name . ' - ' . trans('Members'))
             ->with('memberships', $memberships)
             ->with('admins', $admins)
             ->with('candidates', $candidates)
@@ -102,7 +102,7 @@ class GroupMembershipController extends Controller
             $membership->notified_at = Carbon::now();
             $membership->save();
 
-            flash(trans('membership.welcome'));
+            flash(trans('Welcome'));
             return redirect()->route('groups.show', [$group->id]);
         } else {
             // load or create membership for this group and user combination
@@ -119,7 +119,7 @@ class GroupMembershipController extends Controller
                 $admin->notify(new \App\Notifications\AppliedToGroup($group, $request->user()));
             }
 
-            flash(trans('membership.application_stored'));
+            flash(trans('Your application to this group has been stored'));
             return redirect()->route('groups.show', $group);
         }
     }
@@ -136,7 +136,7 @@ class GroupMembershipController extends Controller
         $this->authorize('delete', $membership);
 
         if ($membership->isAdmin() && $group->admins->count() == 1) {
-            flash(trans('membership.you_cannot_leave_groups_since_you_are_only_admin'));
+            flash(trans('You cannot leave this group since you are the only admin currently. Promote someone else as admin first before leaving the group.'));
             return redirect()->back();
         }
 
@@ -184,7 +184,7 @@ class GroupMembershipController extends Controller
         $this->authorize('edit', $membership);
 
         return view('membership.edit')
-            ->with('title', $group->name . ' - ' . trans('messages.settings'))
+            ->with('title', $group->name . ' - ' . trans('Settings'))
             ->with('tab', 'preferences')
             ->with('group', $group)
             ->with('interval', minutesToInterval($membership->notification_interval))
@@ -225,7 +225,7 @@ class GroupMembershipController extends Controller
         $membership->notification_interval = intervalToMinutes($request->input('notifications'));
         $membership->save();
 
-        flash(trans('membership.settings_updated'));
+        flash(trans('Settings updated'));
         return redirect()->route('groups.users.index', $group);
     }
 

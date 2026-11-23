@@ -37,13 +37,13 @@ class CalendarEventController extends Controller
                 ->paginate(20);
 
             return view('dashboard.calendar-list')
-                ->with('title', trans('messages.calendar'))
+                ->with('title', trans('Calendar'))
                 ->with('tab', 'calendarevents')
                 ->with('events', $events);
         }
 
         return view('dashboard.calendar')
-            ->with('title', trans('messages.calendar'))
+            ->with('title', trans('Calendar'))
             ->with('tab', 'calendarevents');
     }
 

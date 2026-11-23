@@ -2,13 +2,13 @@
     <div class="card h-100 @if ($group->isArchived()) status-archived @endif" up-expand>
 
         @if ($group->isPinned())
-            <div class="ribbon ribbon-top bg-yellow" title="{{ trans('group.pinned') }}">
+            <div class="ribbon ribbon-top bg-yellow" title="{{ trans('Pinned') }}">
                 <i class="far fa-star"></i>
             </div>
         @endif
 
         @if ($group->isArchived())
-            <div class="ribbon ribbon-top bg-yellow" title="{{ trans('group.archived') }}">
+            <div class="ribbon ribbon-top bg-yellow" title="{{ trans('Archived') }}">
                 <i class="fas fa-archive"></i>
             </div>
         @endif
@@ -22,15 +22,15 @@
 
             @auth
                 @if (Auth::user()->isAdminOf($group))
-                    <div class="mb-2 me-2 position-absolute bottom-0 end-0  badge bg-pink-lt">{{ __('membership.admin') }}
+                    <div class="mb-2 me-2 position-absolute bottom-0 end-0  badge bg-pink-lt">{{ trans('administrator') }}
                     </div>
                 @elseif(Auth::user()->isMemberOf($group))
-                    <div class="mb-2 me-2 position-absolute bottom-0 end-0  badge bg-azure-lt">{{ __('membership.member') }}
+                    <div class="mb-2 me-2 position-absolute bottom-0 end-0  badge bg-azure-lt">{{ trans('member') }}
                     </div>
                 @endif
                 @if (Auth::user()->isCandidateOf($group))
                     <div class="mb-2 me-2 position-absolute bottom-0 end-0  badge bg-lime-lt">
-                        {{ __('membership.candidate') }}
+                        {{ trans('candidate') }}
                     </div>
                 @endif
             @endauth
@@ -41,11 +41,11 @@
             <h2 class="text-xl text-gray-800">
                 {{ $group->name }}
                 @if ($group->isOpen())
-                    <i class="text-xs text-gray-500 fa fa-globe" title="{{ trans('group.open') }}"></i>
+                    <i class="text-xs text-gray-500 fa fa-globe" title="{{ trans('Public group') }}"></i>
                 @elseif($group->isClosed())
-                    <i class="text-xs text-gray-500 fa fa-lock" title="{{ trans('group.closed') }}"></i>
+                    <i class="text-xs text-gray-500 fa fa-lock" title="{{ trans('Closed group') }}"></i>
                 @else
-                    <i class="text-xs text-gray-500 fa fa-eye-slash" title="{{ trans('group.secret') }}"></i>
+                    <i class="text-xs text-gray-500 fa fa-eye-slash" title="{{ trans('Secret group') }}"></i>
                 @endif
             </h2>
 

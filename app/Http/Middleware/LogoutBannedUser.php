@@ -26,7 +26,7 @@ class LogoutBannedUser
             Auth::logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
-            flash(trans('messages.you_are_banned'));
+            flash(trans('Your user acount has been banned'));
             return redirect('/');
         }
 

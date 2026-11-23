@@ -132,12 +132,12 @@ class ImportService
         // Compare with existing data in database
         $existing_group = $this->existingGroup($group_std);
         $existing_usernames = $this->existingUsernames($group_std);
-        $group_type = trans('group.open');
+        $group_type = trans('Public group');
         if ($group_std->group_type == Group::CLOSED) {
-             $group_type = trans('group.closed');
+             $group_type = trans('Closed group');
         }
         if ($group_std->group_type == Group::SECRET) {
-             $group_type = trans('group.secret');
+             $group_type = trans('Secret group');
         }
         return array(basename($path), $existing_group, $existing_usernames, $group_std->name, $group_type);
     }

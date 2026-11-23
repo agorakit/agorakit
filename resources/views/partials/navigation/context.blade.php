@@ -4,25 +4,25 @@
             {{ $group->name }}
             <small class="fs-4 text-secondary">
                 @if ($group->isOpen())
-                    <i class="fa fa-lock-open" title="{{ trans('group.open') }}"></i>
+                    <i class="fa fa-lock-open" title="{{ trans('Public group') }}"></i>
                 @elseif ($group->isClosed())
-                    <i class="fa fa-lock" title="{{ trans('group.closed') }}"></i>
+                    <i class="fa fa-lock" title="{{ trans('Closed group') }}"></i>
                 @else
-                    <i class="fa fa-eye-slash" title="{{ trans('group.secret') }}"></i>
+                    <i class="fa fa-eye-slash" title="{{ trans('Secret group') }}"></i>
                 @endif
             </small>
         @endif
 
         @if (Context::is('joined'))
-            {{ __('messages.overview_my_groups') }}
+            {{ trans('My groups') }}
         @endif
 
         @if (Context::is('public'))
-            {{ __('messages.overview_public_groups') }}
+            {{ trans('Public groups') }}
         @endif
 
         @if (Context::is('all'))
-            {{ __('messages.overview_admin_groups') }}
+            {{ trans('All groups (admin)') }}
         @endif
 
     </div>
@@ -32,7 +32,7 @@
 
             @if (Auth::user()->groups()->count() > 0)
                 <li>
-                    <h6 class="dropdown-header">{{ trans('messages.my_groups') }}</h6>
+                    <h6 class="dropdown-header">{{ trans('My groups') }}</h6>
                 </li>
 
                 @foreach (Auth::user()->groups as $group)
@@ -46,24 +46,24 @@
             @endif
 
             <li>
-                <h6 class="dropdown-header">{{trans('messages.overview')}}</h6>
+                <h6 class="dropdown-header">{{trans('Overview')}}</h6>
             </li>
 
             <a class="dropdown-item @if (Context::is('joined')) active @endif"
                 href="{{ url()->query(url()->current(), ['set_preference' => 'show', 'value' => 'joined']) }}">
-                {{ __('messages.overview_my_groups') }}
+                {{ trans('My groups') }}
             </a>
 
             <a class="dropdown-item
             @if (Context::is('public')) active @endif"
                 href="{{ url()->query(url()->current(), ['set_preference' => 'show', 'value' => 'public']) }}">
-                {{ __('messages.overview_public_groups') }}
+                {{ trans('Public groups') }}
             </a>
 
             @if (Auth::check() && Auth::user()->isAdmin())
                 <a class="dropdown-item @if (Context::is('all')) active @endif"
                     href="{{ url()->query(url()->current(), ['set_preference' => 'show', 'value' => 'all']) }}">
-                    {{ __('messages.overview_admin_groups') }}
+                    {{ trans('All groups (admin)') }}
                 </a>
             @endif
         </ul>

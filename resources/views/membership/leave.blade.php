@@ -3,11 +3,11 @@
 @section('content')
 
 
-  <h1>{{ trans('messages.leaving_the_group_called') }} <em>{{$group->name}}</em> ?</h1>
+  <h1>{{ trans('Leaving the group called') }} <em>{{$group->name}}</em> ?</h1>
 
 
   <p>
-    {{ trans('messages.leaving_help_message') }}
+    {{ trans('We are sad to see you go... confirm that you want to leave this group. You won\'t receive notifications anymore.') }}
   </p>
 
 
@@ -15,8 +15,8 @@
   {!! Form::open(array('action' => ['GroupMembershipController@destroy', $group])) !!}
 
   <div class="d-flex justify-content-end">
-    <a class="btn btn-link mr-4" href="{{route('groups.show', $group)}}">{{ trans('messages.cancel') }}</a>
-    {!! Form::submit(trans('messages.leave_this_group'), ['class' => 'btn btn-primary']) !!}
+    <a class="btn btn-link mr-4" href="{{route('groups.show', $group)}}">{{ trans('Cancel') }}</a>
+    {!! Form::submit(trans('Leave this group'), ['class' => 'btn btn-primary']) !!}
   </div>
 
 

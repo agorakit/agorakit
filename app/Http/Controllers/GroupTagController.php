@@ -77,7 +77,7 @@ class GroupTagController extends Controller
         $this->authorize('manage-tags', $group);
         $group->setSetting('allowed_tags', $request->input('tags'));
 
-        flash(trans('messages.ressource_updated_successfully'));
+        flash(trans('Resource updated successfully'));
         return redirect()->route('groups.tags.edit', [$group]);
     }
 }

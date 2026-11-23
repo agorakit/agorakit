@@ -56,7 +56,7 @@ class CommentCreated extends Notification
             ->subject('[' . $this->comment->discussion->group->name . '] ' . $this->comment->discussion->name)
             ->line(new HtmlString(filter($this->comment->body)))
             ->line($this->comment->user->name)
-            ->action(trans('messages.reply'), route('groups.discussions.show', [$this->comment->discussion->group, $this->comment->discussion]));
+            ->action(trans('Reply'), route('groups.discussions.show', [$this->comment->discussion->group, $this->comment->discussion]));
         $message->from(config('mail.noreply'), $this->comment->user->name);
 
 
@@ -64,7 +64,7 @@ class CommentCreated extends Notification
         if ($this->comment->discussion->inbox()) {
             $message->replyTo($this->comment->discussion->inbox(), $this->comment->user->name);
         } else {
-            $message->line(trans('messages.dont_reply_to_this_email'));
+            $message->line(trans('Don\'t reply to this email, use the reply button(s) instead'));
             $message->from(config('mail.noreply'), config('mail.from.name'));
         }
 

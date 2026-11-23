@@ -43,6 +43,6 @@ class ContactUser extends Mailable
     {
             return $this->markdown('emails.contact')
             ->from(config('mail.noreply'), config('mail.from.name'))
-            ->subject('[' . setting('name') . '] ' . trans('messages.a_message_for_you'));
+            ->subject('[' . setting('name') . '] ' . trans('A message for you'));
     }
 }

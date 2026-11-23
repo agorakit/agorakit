@@ -9,10 +9,10 @@
 
                     <a class="btn @if ($type == 'list') btn-outline-primary @else btn-primary @endif"
                         href="?type=grid"><i class="fa fa-calendar me-2"></i>
-                        {{ trans('messages.grid') }}</a>
+                        {{ trans('Grid') }}</a>
                     <a class="btn @if ($type == 'grid') btn-outline-primary @else btn-primary @endif"
                         href="?type=list"><i class="fa fa-list me-2"></i>
-                        {{ trans('messages.list') }}</a>
+                        {{ trans('List') }}</a>
                 </div>
             </div>
 
@@ -25,7 +25,7 @@
         @can('create-calendarevent', $group)
             <div class="mb-4">
                 <a class="btn btn-primary" href="{{ route('groups.calendarevents.create', $group) }}">
-                    {{ trans('messages.create_event') }}
+                    {{ trans('Add an event') }}
                 </a>
             </div>
         @endcan

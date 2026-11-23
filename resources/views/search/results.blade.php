@@ -3,29 +3,29 @@
 @section('content')
 
     <div class="d-flex flex-wrap gap-2 justify-content-between">
-        <h1><i class="fa fa-search"></i> {{ trans('messages.your_search_for') }} <strong>"{{ $query ?? '' }}"</strong></h1>
+        <h1><i class="fa fa-search"></i> {{ trans('Your search for') }} <strong>"{{ $query ?? '' }}"</strong></h1>
     </div>
 
     <form action="{{ url('search') }}" method="get" role="search">
 
         <div class="form-group">
-            <input aria-label="Search" class="form-control" name="query" placeholder="{{ trans('messages.search') }}"
+            <input aria-label="Search" class="form-control" name="query" placeholder="{{ trans('Search') }}"
                 type="search" value="{{ request()->get('query') }}" />
         </div>
 
         <div class="form-group">
             <select class="form-control" name="type" required="required">
                 <option @if ($type == 'discussions') selected @endif value="discussions">
-                    {{ trans('messages.discussions') }}</option>
-                <option @if ($type == 'comments') selected @endif value="comments">{{ trans('messages.comments') }}
+                    {{ trans('Discussions') }}</option>
+                <option @if ($type == 'comments') selected @endif value="comments">{{ trans('Comments') }}
                 </option>
-                <option @if ($type == 'calendarevents') selected @endif value="calendarevents">{{ trans('messages.events') }}
+                <option @if ($type == 'calendarevents') selected @endif value="calendarevents">{{ trans('Events') }}
                 </option>
-                <option @if ($type == 'users') selected @endif value="users">{{ trans('messages.users') }}
+                <option @if ($type == 'users') selected @endif value="users">{{ trans('Users') }}
                 </option>
-                <option @if ($type == 'files') selected @endif value="files">{{ trans('messages.files') }}
+                <option @if ($type == 'files') selected @endif value="files">{{ trans('Files') }}
                 </option>
-                <option @if ($type == 'groups') selected @endif value="groups">{{ trans('messages.groups') }}
+                <option @if ($type == 'groups') selected @endif value="groups">{{ trans('Groups') }}
                 </option>
 
             </select>
@@ -50,7 +50,7 @@
 
 
         <div class="form-group">
-            <button class="form-control btn btn-primary" type="submit">{{ trans('messages.search') }}</button>
+            <button class="form-control btn btn-primary" type="submit">{{ trans('Search') }}</button>
         </div>
 
     </form>

@@ -8,22 +8,29 @@
                 @include('partials.tags_filter')
                 @include('partials.sort_dropdown')
 
+            @can('create-file', $group)
+                <a class="btn btn-primary" href="{{ route('groups.files.create', ['group' => $group, 'parent' => $parent]) }}"
+                    up-layer="new">
+                    <i class="fa fa-file me-2"></i>
+                    {{ trans('Upload file') }}
+                </a>
+            @endcan
 
-                @can('create-file', $group)
-                    <a class="btn btn-primary" href="{{ route('groups.files.create', ['group' => $group, 'parent' => $parent_id]) }}"
-                        up-layer="new">
-                        <i class="fa fa-file me-2"></i>
-                        {{ trans('messages.create_file_button') }}
-                    </a>
-                @endcan
+            @can('create-file', $group)
+                <a class="btn btn-primary" href="{{ route('groups.files.createlink', ['group' => $group, 'parent' => $parent]) }}"
+                    up-layer="new">
+                    <i class="fa fa-link me-2"></i>
+                    {{ trans('Create Link') }}
+                </a>
+            @endcan
 
-                @can('create-file', $group)
-                    <a class="btn btn-primary"
-                        href="{{ route('groups.files.createlink', ['group' => $group, 'parent' => $parent_id]) }}" up-layer="new">
-                        <i class="fa fa-link me-2"></i>
-                        {{ trans('messages.create_link_button') }}
-                    </a>
-                @endcan
+            @can('create-folder', $group)
+                <a class="btn btn-primary" href="{{ route('groups.files.createfolder', ['group' => $group, 'parent' => $parent]) }}"
+                    up-layer="new">
+                    <i class="fa fa-folder me-2"></i>
+                    {{ trans('Create a folder') }}
+                </a>
+            @endcan
 
                 @can('create-folder', $group)
                     <a class="btn btn-primary"
@@ -38,7 +45,10 @@
 
         <div class="files">
 
-            <h3 class="my-3 text-2xl text-gray-800">
+            <a href="{{ route('groups.files.index', $group) }}" up-target=".files" up-history=true>
+                <i class="fa fa-folder-open-o"></i>
+                <span class="">{{ trans('Root') }}</span>
+            </a>
 
                 <a href="{{ route('groups.files.index', $group) }}" up-history=true up-target=".files">
                     <i class="fa fa-folder-open-o"></i>

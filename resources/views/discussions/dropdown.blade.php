@@ -12,7 +12,7 @@
                 <a class="dropdown-item" href="{{ route('groups.discussions.edit', [$discussion->group, $discussion]) }}"
                     up-layer="root">
                     <i class="fa fa-pencil me-2"></i>
-                    {{ trans('messages.edit') }}
+                    {{ trans('Edit') }}
                 </a>
             @endcan
 
@@ -20,7 +20,7 @@
                 <a class="dropdown-item"
                     href="{{ route('groups.discussions.deleteconfirm', [$discussion->group, $discussion]) }}" up-layer="new">
                     <i class="fa fa-trash me-2"></i>
-                    {{ trans('messages.delete') }}
+                    {{ trans('Delete') }}
                 </a>
             @endcan
 
@@ -29,9 +29,9 @@
                     up-scroll="false" up-target="#discussion-{{ $discussion->id }}">
                     <i class="fa fa-thumbtack me-2"></i>
                     @if ($discussion->isPinned())
-                        {{ trans('messages.unpin') }}
+                        {{ trans('Unpin') }}
                     @else
-                        {{ trans('messages.pin') }}
+                        {{ trans('Pin') }}
                     @endif
                 </a>
             @endcan
@@ -41,9 +41,9 @@
                     up-scroll="false" up-target="#discussion-{{ $discussion->id }}">
                     <i class="fa fa-archive me-2"></i>
                     @if ($discussion->isArchived())
-                        {{ trans('messages.unarchive') }}
+                        {{ trans('Unarchive') }}
                     @else
-                        {{ trans('messages.archive') }}
+                        {{ trans('Archive') }}
                     @endif
                 </a>
             @endcan
@@ -51,7 +51,7 @@
             @auth
                 <a class="dropdown-item" href="{{ route('groups.discussions.history', [$discussion->group, $discussion]) }}"
                     up-layer="root"><i class="fa fa-history me-2"></i>
-                    {{ trans('messages.show_history') }}</a>
+                    {{ trans('Show history') }}</a>
             @endauth
         </div>
     </div>

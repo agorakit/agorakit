@@ -14,7 +14,7 @@
                         href="{{ route('groups.discussions.show', [$discussion->group, $discussion]) }}#unread">
                         {{ $discussion->name }}
                         @if ($discussion->isArchived())
-                            [{{ __('Archived') }}]
+                            [{{ trans('Archived') }}]
                         @endif
                     </a>
                 </div>
@@ -33,7 +33,7 @@
             </div>
             @if ($discussion->isPinned())
                 <div class="me-2">
-                    <i class="fas fa-thumbtack" title="{{ __('Pinned') }}"></i>
+                    <i class="fas fa-thumbtack" title="{{ trans('Pinned') }}"></i>
                 </div>
             @endif
             <div>

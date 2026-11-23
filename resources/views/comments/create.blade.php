@@ -15,13 +15,13 @@
         'data-group-id' => $group->id,
     ]) !!}
     <div class="small-help mt-2">
-        <i class="fa fa-info-circle"></i> {{ trans('messages.attach_file_help') }}.
-        {{ trans('messages.max_file_size') }} : {{ sizeForHumans(config('agorakit.max_file_size') * 1000) }}
+        <i class="fa fa-info-circle"></i> {{ trans('Simply drop a file on the editor to add it or use the image button in the toolbar') }}.
+        {{ trans('Maximum file size') }} : {{ sizeForHumans(config('agorakit.max_file_size') * 1000) }}
     </div>
 </div>
 
 <div class="form-group">
-    {!! Form::submit(trans('messages.reply'), ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit(trans('Reply'), ['class' => 'btn btn-primary']) !!}
 </div>
 
 {!! Form::close() !!}

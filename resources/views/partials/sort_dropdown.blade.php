@@ -1,37 +1,49 @@
-
 <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        {{trans('messages.sort')}}
+    <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+        id="dropdownMenuButton" type="button">
+        {{ trans('Sort') }}
         @if (request()->get('sort'))
-            : {{ trans('messages.sort_by_' . request()->get('sort').'_'.request()->get('dir')) }}
+            : {{ trans(request()->get('sort')) }} {{ trans(request()->get('dir')) }}
         @else
-            : {{trans('messages.sort_by_created_at_desc') }}
+            : {{ trans('Sort by creation date descending') }}
         @endif
     </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a up-target="files" class="dropdown-item" href="{{request()->fullUrlWithQuery(['sort' => 'created_at', 'dir' => 'desc', 'page' => null])}}">
+    <div aria-labelledby="dropdownMenuButton" class="dropdown-menu">
+        <a class="dropdown-item"
+            href="{{ request()->fullUrlWithQuery(['sort' => 'created_at', 'dir' => 'desc', 'page' => null]) }}"
+            up-target="files">
             <i class="fa fa-sort-amount-desc"></i>
-            {{trans('messages.sort_by_created_at_desc')}}
+            {{ trans('Sort by creation date descending') }}
         </a>
-        <a up-target="files" class="dropdown-item" href="{{request()->fullUrlWithQuery(['sort' => 'created_at', 'dir' => 'asc', 'page' => null])}}">
+        <a class="dropdown-item"
+            href="{{ request()->fullUrlWithQuery(['sort' => 'created_at', 'dir' => 'asc', 'page' => null]) }}"
+            up-target="files">
             <i class="fa fa-sort-amount-asc"></i>
-            {{trans('messages.sort_by_created_at_asc')}}
+            {{ trans('Sort by creation date ascending') }}
         </a>
-        <a up-target="files" class="dropdown-item" href="{{request()->fullUrlWithQuery(['sort' => 'name', 'dir' => 'asc', 'page' => null])}}">
+        <a class="dropdown-item"
+            href="{{ request()->fullUrlWithQuery(['sort' => 'name', 'dir' => 'asc', 'page' => null]) }}"
+            up-target="files">
             <i class="fa fa-sort-alpha-asc"></i>
-            {{trans('messages.sort_by_name_asc')}}
+            {{ trans('Sort by name ascending') }}
         </a>
-        <a up-target="files" class="dropdown-item" href="{{request()->fullUrlWithQuery(['sort' => 'name', 'dir' => 'desc', 'page' => null])}}">
+        <a class="dropdown-item"
+            href="{{ request()->fullUrlWithQuery(['sort' => 'name', 'dir' => 'desc', 'page' => null]) }}"
+            up-target="files">
             <i class="fa fa-sort-alpha-desc"></i>
-            {{trans('messages.sort_by_name_desc')}}
+            {{ trans('Sort by name descending') }}
         </a>
-        <a up-target="files" class="dropdown-item" href="{{request()->fullUrlWithQuery(['sort' => 'filesize', 'dir' => 'asc', 'page' => null])}}">
+        <a class="dropdown-item"
+            href="{{ request()->fullUrlWithQuery(['sort' => 'filesize', 'dir' => 'asc', 'page' => null]) }}"
+            up-target="files">
             <i class="fa fa-sort-numeric-asc"></i>
-            {{trans('messages.sort_by_filesize_asc')}}
+            {{ trans('Sort by filesize ascending') }}
         </a>
-        <a up-target="files" class="dropdown-item" href="{{request()->fullUrlWithQuery(['sort' => 'filesize', 'dir' => 'desc', 'page' => null])}}">
+        <a class="dropdown-item"
+            href="{{ request()->fullUrlWithQuery(['sort' => 'filesize', 'dir' => 'desc', 'page' => null]) }}"
+            up-target="files">
             <i class="fa fa-sort-numeric-desc"></i>
-            {{trans('messages.sort_by_filesize_desc')}}
+            {{ trans('Sort by filesize descending') }}
         </a>
 
     </div>
