@@ -104,6 +104,10 @@ class InviteController extends Controller
             abort(403);
         }
 
+        if (!$membership->user->isVerified()) {
+            abort(403, 'Your user account must be verified first');
+        }
+
         if (Auth::user()->id == $membership->user_id) {
             $membership->membership = Membership::MEMBER;
             $membership->save();
