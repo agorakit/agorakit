@@ -52,6 +52,8 @@ class GroupMembershipController extends Controller
      */
     public function create(Request $request, Group $group)
     {
+        $this->authorize('view', $group);
+
         if (Gate::allows('join', $group)) {
             // load or create membership for this group and user combination
             $membership = Membership::firstOrNew(['user_id' => $request->user()->id, 'group_id' => $group->id]);
@@ -78,6 +80,8 @@ class GroupMembershipController extends Controller
      */
     public function store(Request $request, Group $group)
     {
+        $this->authorize('view', $group);
+
         // we don't authorize here, because either the group is open and we allow the user to join directly,
         // either the group is closed and we store a candidate and notify gruop admins
         // $this->authorize('join', $group);
@@ -234,6 +238,8 @@ class GroupMembershipController extends Controller
      */
     public function howToJoin(Request $request, Group $group)
     {
+        $this->authorize('view', $group);
+        
         return view('membership.howtojoin')
             ->with('tab', 'preferences')
             ->with('group', $group);
