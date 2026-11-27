@@ -218,7 +218,7 @@ class GroupMembershipController extends Controller
 
             // handle the case an admin change his own level and is the only one admin of the group... yes it hapened...
             if ($membership->isAdmin() && $group->admins->count() == 1 && $request->input('membership_level') < \App\Membership::ADMIN) {
-                flash('You cannot remove you as admin since you are the unique admin. Promote someone else as admin first.');
+                flash(trans('You cannot remove you as admin since you are the unique admin. Promote someone else as admin first.'));
 
                 return redirect()->back();
             }
