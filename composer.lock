@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d021a64275119aa69084daf779314346",
+    "content-hash": "f6c7a514a9119d0aa57c6c4a4718cde8",
     "packages": [
         {
             "name": "balping/json-raw-encoder",
@@ -3712,6 +3712,54 @@
             ],
             "time": "2026-11-04T12:45:07+00:00",
             "published-time": "2026-11-04T13:02:27+00:00"
+        },
+        {
+            "name": "mehrab-wj/tiktoken-php",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mehrab-wj/tiktoken-php.git",
+                "reference": "f894247f05bb3494a9cb4bcad5d588e87ff50e73"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mehrab-wj/tiktoken-php/zipball/f894247f05bb3494a9cb4bcad5d588e87ff50e73",
+                "reference": "f894247f05bb3494a9cb4bcad5d588e87ff50e73",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.14",
+                "phpstan/phpstan": "^1.9",
+                "phpunit/phpunit": "^9.5",
+                "rector/rector": "^0.15.12",
+                "symfony/var-dumper": "^6.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "TikToken\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mehrab Hojjati Pour",
+                    "email": "thisismehrab@gmail.com"
+                }
+            ],
+            "description": "a clone of python tiktoken but for PHP! fast BPE tokeniser for use with OpenAI's models.",
+            "support": {
+                "source": "https://github.com/mehrab-wj/tiktoken-php/tree/v1.0.0"
+            },
+            "time": "2023-04-19T18:36:48+00:00",
+            "published-time": "2023-04-19T18:42:34+00:00"
         },
         {
             "name": "mews/purifier",
@@ -9202,6 +9250,80 @@
             },
             "time": "2026-02-23T01:23:24+00:00",
             "published-time": "2026-02-25T09:14:39+00:00"
+        },
+        {
+            "name": "vildanbina/laravel-auto-translation",
+            "version": "2.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vildanbina/laravel-auto-translation.git",
+                "reference": "66e7173cf4a804d2915de6161c57a205fa13340b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vildanbina/laravel-auto-translation/zipball/66e7173cf4a804d2915de6161c57a205fa13340b",
+                "reference": "66e7173cf4a804d2915de6161c57a205fa13340b",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^9.0|^10.0|^11.0|^12.0|^13.0",
+                "laravel/framework": "^9.0|^10.0|^11.0|^12.0|^13.0",
+                "mehrab-wj/tiktoken-php": "^1.0",
+                "php": ">=8.0"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "^7.10",
+                "orchestra/testbench": "^7.0|^8.0|^9.0|^10.0|^11.0",
+                "phpunit/phpunit": "^9.5|^10.5|^11.5|^12.5|^13.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "LaravelAutoTranslation": "VildanBina\\LaravelAutoTranslation\\Facades\\LaravelAutoTranslation"
+                    },
+                    "providers": [
+                        "VildanBina\\LaravelAutoTranslation\\AutoTranslationsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "VildanBina\\LaravelAutoTranslation\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vildan Bina",
+                    "email": "vildanbina@gmail.com",
+                    "homepage": "https://www.vildanbina.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A Laravel package for automating the translation of language files.",
+            "keywords": [
+                "automation",
+                "language files",
+                "laravel",
+                "localization",
+                "translations"
+            ],
+            "support": {
+                "issues": "https://github.com/vildanbina/laravel-auto-translation/issues",
+                "source": "https://github.com/vildanbina/laravel-auto-translation/tree/2.2.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/vildanbina",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-05-14T11:15:29+00:00",
+            "published-time": "2026-05-14T11:22:24+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
